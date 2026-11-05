@@ -3897,6 +3897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いますぐ	지금 곧	E300			GN				jisjk:148993		
 いまだ	아직도	E301			GN				jisjk:97		
 いまだ	지금 &A6@	M443			GN				jisjk:144819		
+いまだから	지금이니까	E311			GN			いまだから는 いまだ(아직)와 から가 아니라 `지금이니까`다(LEX-3840).	lex:3840:いまだから-1		
 いまだし	미숙$AB@	H7U0			GN				jisjk:4871		
 いまだに	아직껏	E311			GN				jisjk:98		
 いまでき	지금 할 수 &HN@	M427			GN				jisjk:144822		
@@ -7004,6 +7005,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おやすみ	잘자요	I110			GN	3463	||1 G+0== "Td"	おやすみ가 문장에 홀로 있거나 Td 코드가 있으면 잘자요를 고른다. (미발동: rare-context)	jisjk:343540		
 おやすみなさい	안녕히 주무십시오	I110			GN				jisjk:150768		
 おやだま	우두 머리	I110	VHn		GN				jisjk:40530		
+おやっさん	아저씨	N110	VHn		GN			おやっさん은 親父さん의 구어, `아저씨`다(LEX-3840).	lex:3840:おやっさん-1		
 おやつ	간식	I110	VFdVFd		GN				jisjk:40531		
 おやのすねをかじ	부모의 등골을 빼&HU@	M428			GN				jisjk:117223		
 おやばか	자식을 자랑하는 것	N110	SFlVHn		GN				jisjk:166145		-1
@@ -7242,6 +7244,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おんみょうじ	점장이	N110			GN				jisjk:99036		
 おんめい	음명	N110	USoQMU		GN				jisjk:166440		-1
 おんめい	고마우신 분부	N110			GN				jisjk:166442		-1
+おんや	어라	N321			GN			おんや는 おや를 늘인 감탄사, `어라`다(LEX-3839).	lex:3839:おんや-1		
 おんやく	음역	N110	UTs	Hd	GN				jisjk:166448		-1
 おんよう	온화한 모습	N110	VBp		GN				jisjk:166451		-1
 おんよう	음양	N110			GN				jisjk:166452		-1
@@ -8626,6 +8629,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かか	&L4@	M418	VMo		GN	1806	||2 &&2 ||2 S+1== "R金" S+1== "R税" P+1== "1**" &&2 P-1== "2**" ||2 S-2== "R金" S-2== "R税"	かか는 金·税로 끝나는 명사 앞이나 해당 명사와 조사 뒤에서 비용이 ‘들다’로 고른다.	jisjk:257362		
 かか	걸&AA@	M418		Dx	GN	2692	||4 &&4 S-1== "に" S-2== "病院" D-1= "에서" D+0= "진료&FD@" &&3 S-1== "に" ||2 S-2== "仕事" S-2== "作業" D+0= "착수&AV@" S-1== "に" &&2 ||2 S+1== "い" S+1== "あ" P+1== "4**"	に 뒤의 かか는 병원 문맥이면 에서를 써서 진료받다, 仕事·作業 문맥이면 착수하다로 바꾼다. 그 밖의 に 뒤나 いる·ある 동사 앞에서는 걸리다를 고른다.	jisjk:267312		
 かか	걸&AA@	M418	XXXUMe		GN	3542	||1 &&2 S-1== "くらい" S-2== "どの"	かか를 どのくらい 뒤에서 걸리다로 고른다. (미발동: rare-context)	jisjk:344210		
+かくかくと	후들후들	E311			GN			かくかくと는 무릎 따위가 떨리는 모양, `후들후들`이다(LEX-3839).	lex:3839:かくかくと-1		
 待ったがかか	제동이 걸&AA@	M418			GN			待ったがかかる는 `제동이 걸리다`다(LEX-3834).	lex:3834:待ったがかか-1		
 かか	&Mc@	M443			GN				jisjk:344261		
 かか	나&AH@	M428			GN	4122	||4 &&2 M+0== "57*" S-2== "R曲" &&2 M+0== "57*" S-1== "R曲" &&4 M+0== "57*" S-1== "で" S+1== "R曲" D-1= "에서" &&2 M+0== "57*" S+1== "R曲"	かか가 연결형이고 앞뒤 지정 위치에 曲로 끝나는 말이 있으면 나오다를 고르고 일부 で를 에서로 바꾼다. (미발동: rare-context)	jisjk:359105		
@@ -17553,6 +17557,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こつまく	골막	N110	VBpQHP		GN				jisjk:182586		-1
 こつまくえん	골막염	N110	QHP		GN				jisjk:182587		-1
 こつを飲み込	요령을 파악&AV@	M425		Pn	GN				jisjk:266392		
+こつん	콩	E311			GN			こつん은 가볍게 부딪는 소리, `콩`이다(LEX-3839).	lex:3839:こつん-1		
 こづ	쿡 &E9@	M431			GN				jisjk:90778		
 こづ	&E9@	M441			GN				jisjk:120040		
 こづかい	용돈	I110			GN				jisjk:111812		
@@ -18714,6 +18719,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ごますり	아첨	I110	UTs		GN				jisjk:41013		
 ごまめ	마른 멸치 새끼	I110	VFdQAAQACQAC		GN				jisjk:41014		
 ごまをす	아부를 &AV@	M428			GN				jisjk:117425		
+ごまんと	수두룩하게	E311			GN			ごまんと는 아주 많이, `수두룩하게`다(LEX-3840).	lex:3840:ごまんと-1		
 ごま塩	깨소금	I110	VFd		GN				jisjk:41015		
 ごま油	참기름	N110	VFd		GN				jisjk:184011		
 ごみ	쓰레기	N110			GN				jisjk:13894		
@@ -35853,7 +35859,7 @@ ttt	ttt	K110			GN				jisjk:201744
 なさそう	않을 것 %B3@	G8U0		Xn	GN	3614	||1 &&3 P-1== "8**" U-1== "では" Y-1= "1지"	なさそう 앞의 형용동사가 では형이면 그 어미를 지로 바꾼다. (미발동: rare-context)	jisjk:344642		
 なさってい	하고 계&AE@	M427			GN				jisjk:144338		
 なさってみられ	해 보&AE@	M427			GN				jisjk:267708		
-なされ	&C6@	H417			GN				jisjk:5232		
+なされ	하&AE@	H417			GN				jisjk:5232		
 なされ	이루어&AL@	H427			GN	1507	||1 &&3 P-1== "2**" P-2== "1**" G-2== "Hd"	なされ는 する형 명사와 조사 뒤에서 ‘이루어지다’로 고른다.	jisjk:144344		
 なされう	이루어질 수 &HN@	M428			GN				jisjk:148072		
 なされてきてい	이루어지고 &HN@	M427			GN				jisjk:144340		
@@ -58759,6 +58765,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コツ	요령	N110	XXX		GN				jisjk:266470		
 コツコツ	부지런히	E300			GN				jisjk:375321		
 コツタロ	코츠타로	I130	QCTVPl	Qq	GN				jisjk:293552		
+コツン	콩	E311			GN			コツン은 가볍게 부딪는 소리, `콩`이다(LEX-3839).	lex:3839:コツン-1		
 コテ	인두	N110			GN				jisjk:105245		
 コティー	코티	N110	VAc		GN				jisjk:128530		
 コテージ	오두막 집	N110	VBl		GN				jisjk:128528		
@@ -60084,6 +60091,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ゴラム	고람	N130	QPN		GN				jisjk:371162		
 ゴラン	고란	N130	QPN		GN				jisjk:370062		
 ゴラン高原	골란고원	N110			GN				jisjk:112946		
+ゴリゴリと	박박	E311			GN			ゴリゴリと는 세게 문지르거나 휘젓는 모양, `박박`이다(LEX-3839).	lex:3839:ゴリゴリと-1		
 ゴリゴンシティ	고리곤시	N130	QCT	Qq	GN				jisjk:100420		
 ゴリラ	고릴라	N110	VAm		GN				jisjk:47443		
 ゴルカル	골카르	N110	VBl		GN				jisjk:128802		
@@ -132286,6 +132294,7 @@ ttt	ttt	K110			GN				jisjk:201744
 兵隊	군인	N110	VHnVGt		GN				jisjk:23633		
 兵馬	병마	N110	VTp		GN				jisjk:23639		
 兵馬節度使	병마절도사	N110	UAq		GN				jisjk:204937		
+其の	그	N0H1			GN			其の는 その와 같은 `그`다(LEX-3842).	lex:3842:其の-1		
 其の	다른	P251			GN				jisjk:6358		
 其の上	그 당시	N110			GN				jisjk:240508		
 其の他	그 외	I110			GN				jisjk:63652		
@@ -136996,6 +137005,7 @@ ttt	ttt	K110			GN				jisjk:201744
 利高	높은 이자	N110			GN				jisjk:20976		
 利高工業	리코 공업	I130	QIDVGt		GN				jisjk:68099		
 刪定	글을 다듬음	N110			GN				jisjk:233134		
+刮	&F3@	M422			GN			刮ぐ는 긁어 `깎다`다(LEX-3842).	lex:3842:刮-1		
 刮げ	긁어&A6@	M447			GN				jisjk:119980		
 刮目	괄목	N110		Hd	GN				jisjk:16421		
 到	도달&AV@	M428			GN				jisjk:142742		
@@ -139773,6 +139783,7 @@ ttt	ttt	K110			GN				jisjk:201744
 勁	츠요시	N130	VHnQPN	Wb	GN				jisjk:339796		
 勁一郎	케이이치로우	N130	QPN	Wb	GN				jisjk:356776		
 勁文社	케이분사	I130			GN				jisjk:96594		
+勃	&AD@	M424			GN			勃つ는 `서다`다(LEX-3842).	lex:3842:勃-1		
 勃勃たる	용솟음치는	E0H0			GN				jisjk:123657		
 勃発	발발	N110		Hd	GN				jisjk:22863		
 勃興	발흥	N110		Hd	GN				jisjk:22864		
@@ -167959,6 +167970,7 @@ ttt	ttt	K110			GN				jisjk:201744
 夢殿	몽전	N110	VBl		GN				jisjk:254923		
 夢物語	꿈같은 이야기	N110			GN				jisjk:156083		
 夢現	비몽사몽간	N110			GN				jisjk:156079		
+夢空間	꿈의 공간	N110			GN			夢空間은 `꿈의 공간`이다(LEX-3839).	lex:3839:夢空間-1		
 夢窓疎石	무소 소세키	N130	VHn		GN				jisjk:222404		
 夢精	몽정	N110	QHPVBp	Hd	GN				jisjk:155444		
 夢精	몽정	N110	VHn		GN				jisjk:159048		
@@ -205825,6 +205837,8 @@ ttt	ttt	K110			GN				jisjk:201744
 微力	미력	N110			GN				jisjk:22378		
 微力ながら	변변치 않은 힘이나마	E300			GN				jisjk:266933		
 微動	미동	N110		Hd	GN				jisjk:22375		
+微動だに	미동도	E311			GN			微動だに는 뒤의 せず, せん, しない와 함께 `미동도`다(LEX-3840).	lex:3840:微動だに-1		
+微動だにも	미동도	E311			GN			微動だにも는 뒤의 する와 함께 `미동도`다(LEX-3840).	lex:3840:微動だにも-1		
 微動だにしな	끄떡도 $DH@	H7N0			GN				jisjk:137785		
 微吟	미음	N110		Hd	GN				jisjk:154508		
 微圧計	미압계	I110	VPe		GN				jisjk:69395		
@@ -213544,6 +213558,7 @@ ttt	ttt	K110			GN				jisjk:201744
 扞格	서로 상대를 받아들이지 않음	N110		Hd	GN				jisjk:229755		
 扨借	제쳐&F6@	M441			GN				jisjk:121442		
 扨置	접어&C7@	M441			GN				jisjk:121439		
+扮	분장&AV@	M439			GN			扮する는 `분장하다`다(LEX-3842).	lex:3842:扮-1		
 扮争	분쟁	N110			GN				jisjk:24527		
 扮装	분장	N110		Hd	GN				jisjk:24526		
 扱	취급&AV@	M430			GN				jisjk:92179		
@@ -213975,6 +213990,7 @@ ttt	ttt	K110			GN				jisjk:201744
 投銭	던져 주는 돈	N110			GN				jisjk:247175		
 投降	투항	N110		Hd	GN				jisjk:37174		
 抗	저항&AV@	M419			GN				jisjk:95875		
+抗	저항&AV@	M410			GN			抗う는 `저항하다`다(LEX-3842).	lex:3842:抗-1		
 抗い	논쟁	N110			GN				jisjk:227686		
 抗うつ剤	항우울제	N110	QHPQHP		GN				jisjk:179700		
 抗かいよう剤	항궤양제	N110	QHPQHP		GN				jisjk:179819		
@@ -232080,6 +232096,7 @@ ttt	ttt	K110			GN				jisjk:201744
 朦朧と	몽롱해&AL@	M429			GN				jisjk:342893		
 朦朧状態	몽롱 상태	N110			GN				jisjk:253626		
 朧	희미%A1@	G8U0			GN				jisjk:2749		
+朧月	으스름달	N110			GN			朧月은 `으스름달`이다(LEX-3839).	lex:3839:朧月-1		
 朧気	어렴풋%A1@	G8U0			GN				jisjk:2750		
 朧気	오보로케	N130	QCTVPl		GN				jisjk:280755		
 木	나무	N110	XXX		GN				jisjk:116294		
@@ -245505,7 +245522,7 @@ ttt	ttt	K110			GN				jisjk:201744
 棒針編	대바늘뜨기	N110		Hd	GN				jisjk:251352		
 棒青海苔	보아오노리	N110			GN				jisjk:251229		
 棒高跳	장대높이뛰기	N110	VRw		GN				jisjk:155071		
-棒高跳び	봉고도	I110			GN				jisjk:70576		
+棒高跳び	장대높이뛰기	I110			GN			棒高跳び는 `장대높이뛰기`다(LEX-3839).	jisjk:70576		
 棒鱈	대구포	N110	VFd		GN				jisjk:251336		
 棕櫚	종려나무	N110	QAN		GN				jisjk:203618		
 棕櫚竹	종란죽	I110			GN				jisjk:102342		
@@ -261546,6 +261563,7 @@ ttt	ttt	K110			GN				jisjk:201744
 海神	해신	N110			GN				jisjk:38703		
 海神	카이진	N130	QCTVPl		GN				jisjk:281152		
 海神町	카이진쵸	N130	QCTVPl		GN				jisjk:281153		
+海竜	해룡	N110			GN			海竜은 바다의 용, `해룡`이다(LEX-3839).	lex:3839:海竜-1		
 海竜	하이룽	N110	QCT		GN				jisjk:38711		
 海竜町	카이류우마치	N130	QCTVPl		GN				jisjk:281301		
 海綿	해면	N110	VPe		GN				jisjk:116616		
@@ -287658,6 +287676,7 @@ ttt	ttt	K110			GN				jisjk:201744
 神前町	신젠쵸	N130	QCTVPl		GN				jisjk:301803		
 神前皇女	간사키노 히메미코	N110	VHn		GN				jisjk:213736		
 神剣	신검	N110			GN				jisjk:236015		
+神力	신력	N110			GN			神力은 신의 힘, `신력`이다(LEX-3839).	lex:3839:神力-1		
 神力	진리키	N130	QPN	Wa	GN				jisjk:10261		
 神功	징구	N130	QCTVPl		GN				jisjk:302847		
 神功皇后	진구 고고	N130	VHn		GN				jisjk:216523		
@@ -290365,6 +290384,7 @@ ttt	ttt	K110			GN				jisjk:201744
 秕	벼쭉정이	N110			GN				jisjk:186647		
 秘	감&CL@	M439			GN				jisjk:93198		
 秘	은밀%A1@	G8U0			GN				jisjk:143657		
+秘	숨&A2@	M433			GN			秘す는 `숨기다`다(秘された 숨겨진)(LEX-3842).	lex:3842:秘-1		
 秘けつ	비결	I110			GN				jisjk:71580		
 秘し隠	감&CL@	M433			GN				jisjk:93199		
 秘し隠し	비밀	N110			GN				jisjk:71581		
@@ -296169,6 +296189,7 @@ ttt	ttt	K110			GN				jisjk:201744
 米	요네	N130	QPN	Wa	GN				jisjk:118399		
 米	쌀	N110	QAOVFd		GN	1927	||4 &&2 ||2 S+2== "買" S+2== "売" P+2== "4**" &&2 S-1== "の" P-1== "2**" S+1== "を" S+1== "の"	米는 앞이 조사 の이거나 뒤가 を, の이거나 두 단어 뒤에 買나 売 동사가 있으면 쌀로 고른다.	jisjk:259217		
 米	미	N110	XXX	MoOn	GN				jisjk:340897		
+糎	센티	N110			GN			糎는 길이 단위 `센티`다(LEX-3842).	lex:3842:糎-1		
 米I. B. M	미국I B M	I110	VGt		GN				jisjk:69447		
 米々沢	메메자와	N130	QCTVPl		GN				jisjk:334304		
 米がよく出来	쌀 농사가 잘 &C6@	M427			GN				jisjk:119623		
@@ -303737,6 +303758,7 @@ ttt	ttt	K110			GN				jisjk:201744
 翰長	내각 관방 장관	N110	VHn		GN				jisjk:230119		
 翳目	침침한 눈	N110	VBp		GN				jisjk:228683		
 翻	바&C3@	M443			GN				jisjk:364617		
+翻	나부&A4@	M418			GN			翻る는 깃발 따위가 `나부끼다`다(LEX-3842).	lex:3842:翻-1		
 翻字	음역	N110		Hd	GN				jisjk:251158		
 翻波式衣文	혼파식 의복문양	N110			GN				jisjk:251200		
 翻訳	번역	N110	UTsUTh	Hd	GN				jisjk:114547		
@@ -310942,7 +310964,7 @@ ttt	ttt	K110			GN				jisjk:201744
 苦情処理委員会	불평 처리 위원회	N110	VGt		BZ				jisjk:353196		
 苦情処理機関	불평 처리 기관	N110	VGt		BZ				jisjk:353195		
 苦慮	고심	N110	SFl	Hd	GN				jisjk:176610		
-苦戦	고전	N110		Hd	GN				jisjk:15789		
+苦戦	고전	N110		HdHi	GN				jisjk:15789		
 苦手	서%C2@	G8U0			GN				jisjk:2502		
 苦手	골칫거리	N110			GN				jisjk:2503		
 苦手なんですよ	서툴러요	A9H1			GN				jisjk:104199		
@@ -327328,6 +327350,7 @@ ttt	ttt	K110			GN				jisjk:201744
 謁見	알현	N110		Hi	GN				jisjk:28489		
 謂	이유	N110			GN				jisjk:126397		
 謂	위	N110		On	GN				jisjk:259487		
+謂え	말할 수 &HN@	M437			GN			謂える는 言える와 같은 `말할 수 있다`다(LEX-3842).	lex:3842:謂え-1		
 謂れ	까닭	N110			GN				jisjk:104374		
 謂れ因縁	사물의 유래	I110			GN				jisjk:79424		
 謂われ因縁	사물의 유래	I110			GN				jisjk:79425		
@@ -332885,6 +332908,7 @@ ttt	ttt	K110			GN				jisjk:201744
 身口意	신구의	N110	UCl		GN				jisjk:235980		
 身命	신명	N110			GN				jisjk:28071		
 身命を睹	목숨을 &L1@	M429			GN				jisjk:136293		
+身嗜み	몸가짐	N110			GN			身嗜み는 `몸가짐`이다(LEX-3842).	lex:3842:身嗜み-1		
 身回品	소지품	N110			GN				jisjk:160313		
 身売り	양도	I110			GN				jisjk:76972		
 身寄り	친척	I110	VHn		GN				jisjk:76966		
@@ -333415,7 +333439,7 @@ ttt	ttt	K110			GN				jisjk:201744
 転流	전류	N110	VEl		GN				jisjk:244919		
 転炉	전로	N110	VPe		GN				jisjk:244930		
 転炉スラグ	전로 슬러그	N110			BZ				jisjk:361604		
-転生	전생	N110	UMv	Hd	GN				jisjk:32882		
+転生	전생	N110	UMv	HdHi	GN				jisjk:32882		
 転生霊童	전생영동	N110	UCl		BZ				jisjk:359928		
 転用	전용	N110		Hd	GN				jisjk:32887		
 転用大衆薬	전용 대중약	N110	VMd		BZ				jisjk:359596		
@@ -336174,7 +336198,7 @@ ttt	ttt	K110			GN				jisjk:201744
 通風機	통풍기	N110	VPe		GN				jisjk:243744		
 通風計	통풍계	I110			GN				jisjk:87405		
 逝	돌아가&AE@	M411			GN				jisjk:93487		
-逝	&HT@	M451			GN				jisjk:121675		
+逝	&HT@	M45?			GN			逝く는 行く처럼 逝った, 逝って로 활용한다(LEX-3842).	jisjk:121675		
 逝く年	가는 해	I110	UMe		GN				jisjk:74094		
 逝く春	가는 봄	I110	UMe		GN				jisjk:74095		
 逝去	서거	N110		HdHi	GN				jisjk:100867		
@@ -344998,6 +345022,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鍛冶免分	카지멤분	I130	QCTVPl		GN				jisjk:282029		
 鍛冶屋	대장간	I110	VBl		GN				jisjk:64761		
 鍛冶屋	카지야	N130	QCTVPl		GN				jisjk:282033		
+鍛冶屋さん	대장장이 아저씨	N110			GN			鍛冶屋さん은 이름이 아니라 `대장장이 아저씨`다(LEX-3839).	lex:3839:鍛冶屋さん-1		
 鍛冶屋原	카지야바라	I130	QCTVPl		GN				jisjk:282047		
 鍛冶屋川	카지야가와	I130	QCTVPl		GN				jisjk:282034		
 鍛冶屋敷	카지야시키	I130	QCTVPl		GN				jisjk:282040		
@@ -353588,6 +353613,7 @@ ttt	ttt	K110			GN				jisjk:201744
 静脈血	정맥혈	I110	VBp		GN				jisjk:83318		
 静脈血栓症	정맥혈전증	N110	QHP		GN				jisjk:237395		
 静脈麻酔薬	정맥마취제	N110	QHP		GN				jisjk:237397		
+静観	관망	N110		Hd	GN			静観은 지켜보는 것, `관망`이다(LEX-3839).	lex:3839:静観-1		
 静観	세이칸	N130	QPN	Wb	GN				jisjk:11300		
 静観してしま	정관하게 &C6@	M420			GN				jisjk:137814		
 静観主義	정관 주의	I110			GN				jisjk:83316		
@@ -357384,6 +357410,7 @@ ttt	ttt	K110			GN				jisjk:201744
 饅頭蟹	게	N110	VAm		GN				jisjk:252085		
 饅頭貝	만두 조개	N110	VAm		GN				jisjk:252083		
 饅頭長根	만쥬우나가네	I130	QCTVPl		GN				jisjk:330091		
+饑	굶주림	N110			GN			饑는 飢え와 같은 `굶주림`이다(LEX-3842).	lex:3842:饑-1		
 饑餓	기아	N110			GN				jisjk:17895		
 饑餓死	기아사	N110			GN				jisjk:230522		
 饑餓輪出	기아 수출	N110	VMo		GN				jisjk:230523		
@@ -364632,6 +364659,7 @@ ttt	ttt	K110			GN				jisjk:201744
 龍飛	닷피	N130	VPl		GN				jisjk:217657		
 龍飛	닷피	N130	VPl		GN				jisjk:217658		
 龍飛	탓피	N130	QCTVPl		GN				jisjk:306791		
+龍騎士	용기사	N110			GN			龍騎士는 竜騎士와 같은 `용기사`다(LEX-3839).	lex:3839:龍騎士-1		
 龕像	감실 불상	N110	UArUCl		GN				jisjk:230410		
 龕灯	불단의 등불	N110	UClVPe		GN				jisjk:230420		
 ！	!	N600		Mk	GN				jisjk:268281		

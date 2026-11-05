@@ -39,7 +39,7 @@ sound:stutter-kanji	「お……来たか」	「오……왔나」	fix	sound
 sound:stutter-kanji	「ね……先輩」	「저기……선배」	fix	sound
 sound:stutter-kanji	「ちょ……待って」	「잠깐……기다려」	fix	sound
 sound:stutter-kanji	「あ、悪い」	「아, 미안하다」	keep	sound
-sound:stutter-kanji	「あ、明日行くよ」	「아, 내일 가」	keep	sound
+sound:stutter-kanji	「あ、明日行くよ」	「아, 내일 갈게」	keep	sound
 sound:stutter-kanji	「え、笑える」	「어, 웃을 수 있어」	keep	sound
 sound:stutter-kanji	「ま、仕方ない」	「뭐, 어쩔 수 없어」	keep	sound
 sound:stutter-kanji	「ま、正直に言うと」	「뭐, 솔직히 말하면」	keep	sound

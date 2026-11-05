@@ -2143,6 +2143,21 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     // and kanji before it read further, two or more characters past it; the hiragana on a tie. Not where
     // a key already reads past it as written, nor in a line that writes the kana after kanji in katakana
     // (痛イ……引ッ張ッテ), which the katakana speech pass reads.
+    // A stutter written without a separator at the start of a phrase: a kana, っ and a word that starts
+    // with that kana (そっそこまで, かっかわいい, おっ俺は with sound.stutter-head) is the first sound said
+    // and the word, そ、そこまで, which SND-1 reads (거, 거기까지; spec SND-1). Not where a key read
+    // from the kana goes past the っ (さっさと, ちっちゃい, たった), nor a laugh or cry said again or drawn
+    // out (はっはっ, ほっほーい), nor い, whose いや and いいえ SND-1 does not stutter well (いっいや).
+    for (size_t k = 0; k + 3 < rs.size(); k++) {
+        if (rs[k + 1] != U'っ' || rs[k + 2] != rs[k] || !IsHiraganaRune(rs[k]) || In(rs[k], U"いぁぃぅぇぉっゃゅょゎん")) continue;
+        if (k > 0 && !In(rs[k - 1], U"「『（(、。，！？!?…‥・ 　―─") ) continue;
+        if (In(rs[k + 3], U"っーぁぃぅぇぉ")) continue;
+        if (rs[k] == U'と' && In(rs[k + 3], U"いかきくけこ")) continue;  // とっとく, 取っておく (とっといて)
+        if (e.LongestKey(std::u32string_view(rs).substr(k + 2)) < 2 || e.LongestKey(std::u32string_view(rs).substr(k)) > 2) continue;
+        rs[k + 1] = U'、';
+        changed = true;
+        k += 1;
+    }
     bool katakanaAfterKanji = false;
     for (size_t i = 0; i + 1 < rs.size() && !katakanaAfterKanji; i++) {
         katakanaAfterKanji = IsKanjiRune(rs[i]) && IsKatakanaRune(rs[i + 1]) && !In(rs[i + 1], U"ッンー");
@@ -2152,6 +2167,13 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         if (!(IsHiraganaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1])) || !(IsHiraganaRune(rs[i + 1]) || IsKanjiRune(rs[i + 1]))) continue;
         size_t from = i - 1;
         while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+        // The ッ of a godan verb's past or て form right after its kanji stem (拭き取ッた, 言ッて, 待ッちゃう) is
+        // its っ: the stem is a key and the form is no key, so no key reads past it (spec SND-7).
+        if (rs[i] == U'ッ' && IsKanjiRune(rs[i - 1]) && In(rs[i + 1], U"たてち") && e.StemTagged(rs, from, i, "M")) {
+            rs[i] = U'っ';
+            changed = true;
+            continue;
+        }
         if (e.Reach(rs, from, i) > i) continue;
         const std::u32string hiragana = Spliced(rs, i, std::u32string(1, rs[i] - 0x60), i + 1);
         const std::u32string dropped = Spliced(rs, i, U"", i + 1);
@@ -2159,6 +2181,27 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         const size_t gone = e.Reach(dropped, from, i) + 1;  // in the characters of rs
         if (kept < i + 2 && gone < i + 3) continue;
         rs = kept >= gone ? hiragana : dropped;
+        changed = true;
+    }
+    // The old attributive き of an adjective right before the noun it describes (深き家, 強き者, 深きものども) is
+    // its い (spec LEX-4355): the stem is an adjective key, the き form is no key of its own (美しき, 好き, 亡き have
+    // rows), and a word in kanji or もの, こと or ところ follows; before a particle it is the noun (弱きを助け).
+    for (size_t k = 1; k + 1 < rs.size(); k++) {
+        if (rs[k] != U'き' || !(IsKanjiRune(rs[k - 1]) || IsHiraganaRune(rs[k - 1]))) continue;
+        const std::u32string_view next = std::u32string_view(rs).substr(k + 1);
+        if (!IsKanjiRune(rs[k + 1]) && !next.starts_with(U"もの") && !next.starts_with(U"こと") && !next.starts_with(U"ところ")) continue;
+        size_t from = k - 1;
+        while (from > 0 && k - from < 4 && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1])) && !IsKanjiRune(rs[from])) from--;
+        if (!HasKanji(std::u32string_view(rs).substr(from, k - from))) continue;
+        // The stem starts the run of kanji (古き, not the 深き of 欲深き), and no key read from it reaches the き
+        // (憂き目, 憂き世 have rows) nor a word after it that is another old attributive (古き良き).
+        // One kanji and its kana (古き, 美しき, 親しき); two kanji are a compound the dictionary reads (恋多き, 欲深き).
+        if ((k - from > 1 && IsKanjiRune(rs[from + 1])) || (from > 0 && IsKanjiRune(rs[from - 1]))) continue;
+        const std::u32string_view head = std::u32string_view(rs).substr(from);
+        if (e.Tags(head.substr(0, k - from)).find('H') == std::string::npos) continue;
+        if (e.LongestKey(head) > k - from) continue;
+        if (k + 2 < rs.size() && rs[k + 2] == U'き') continue;
+        rs[k] = U'い';
         changed = true;
     }
     // The tic っぽい drawn out after a word (行くっぽーい, 寝ちゃったっぽ～い) is っぽい with the

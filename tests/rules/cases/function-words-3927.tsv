@@ -85,7 +85,7 @@ cx:function-words:40	でもね ある時 カラクリが親父にばれた	그�
 cx:function-words:40	しかし ある時 ふと就職を考える｡	하지만 어느 날 문득 취직을 생각한다.	fix	rewrites
 cx:function-words:10	早めに夕食を終えた エアズが言うには―	빨리 저녁식사를 끝낸 에아즈가 말하기로는 -	fix	rewrites
 cx:function-words:10	殺人課の刑事が言うには 今はciaの管轄だと	살인과의 형사가 말하기로는 지금은 cia 관할이라고	fix	rewrites
-cx:function-words:10	そうだ カイが言うには シフは 人工的な翼手とのことだ	그렇다 조개가 말하기로는 시프는 인공적인 익수라는 것이다	fix	rewrites
+cx:function-words:10	そうだ カイが言うには シフは 人工的な翼手とのことだ	그렇다 카이가 말하기로는 시프는 인공적인 익수라는 것이다	fix	rewrites
 cx:function-words:30	だからって好きか嫌いかは、またちょっと違うと思うんだけどね？	그렇다고 해서 좋아하는가 싫은가는, 또 조금 다르다고 생각하는데?	fix	rewrites
 cx:function-words:10	多くの言語学者が言うには 恐らく	많은 언어학자가 말하기로는 아마	fix	rewrites
 cx:function-words:10	お姉ちゃんが言うにはいつか付くって言うけど	언니가 말하기로는 언젠가 붙는다고 하는데	fix	rewrites
@@ -177,3 +177,5 @@ cx:function-words:28	ね、千ちゃん、いくら私たちが家来だから�
 cx:function-words:28	そうだからって、気にするな。	그렇다고 해서, 신경 쓰지 마.	keep	rewrites
 cx:function-words:29	いくら子供だからって許さない	아무리 아이라고 해도 용서하지 않는다	fix	rewrites
 cx:function-words:29	子供だからって許さない	아이라고 해서 용서하지 않는다	keep	rewrites
+cx:function-words:61	ホレおばあさんはこういうと、門をしめてしまいました。	홀레 할머니는 이렇게 말하자, 문을 차지해버렸습니다.	fix	rewrites
+cx:function-words:61	こういうときは黙ってろ。	이런 때는 입을 다물어라.	keep	rewrites

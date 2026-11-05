@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <array>
 #include <initializer_list>
+#include <optional>
 #include <set>
 #include <utility>
 #include <string>
@@ -151,6 +152,24 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 // dictionary at all and the base is only a word, or a word that also names a place
 // (用途（ようと）, 飯（めし）); and so does one that is also a name, unless a word of it has the
 // base's Korean (秋刀魚（さんま）: 꽁치). A reading over a name, or one that is only a name, is none.
+// Whether a gloss reading of a common word is the sound of its place row and not of any name-layer row:
+// the word read aloud, the way the place took its name (大力（だいりき）: 큰힘, the place 다이리키, not the
+// surname 오오리키); one that is a layer name's sound names a person (千鳥（ちどり）さん).
+bool Registry::WordAloud(std::string_view base, std::string_view reading) {
+    if (snap_ == nullptr) return false;
+    const DictFlags b = Flags(base);
+    if (!b.common || !b.word || b.person || !b.city || !(b.layerSurname || b.layerGiven)) return false;
+    for (const dict::Record& rec : snap_->NameRecords(base)) {
+        if (text::SpellsSound(reading, rec.target, false)) return false;
+    }
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
+        if (rec.codes != nullptr && rec.source == base && rec.codes->sem.HasCode("QCT") && text::SpellsSound(reading, rec.target, false)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
     // A reading over a name of no common sense names it when the reading is a name too or no
@@ -425,6 +444,57 @@ std::string Registry::CaptionNameReading(std::string_view base, std::string_view
     return out;
 }
 
+namespace {
+
+// Whether the kana gloss reading can be the reading of the kanji or katakana base: over two kanji or
+// more at most three morae each, as the kanji of a word read
+// (有仁（ありひと）, 小鳥遊（たかなし）); a longer one is a remark (同系統（ということにしている）).
+bool GlossFits(std::string_view base, std::string_view reading) {
+    if (!AllRunes(base, IsKanji)) return true;
+    const std::size_t kanji = RuneCount(base), morae = ReadingMorae(reading);
+    return kanji < 2 || morae <= 3 * kanji;
+}
+
+// The run before the gloss m of line and the two parts of its reading, when a kanji run and one space
+// or ・ stand right before the base and the reading is two runs of kana with one space between, each that
+// fits its run (双寺　有仁（そうじ　ありひと）).
+std::optional<std::pair<std::pair<std::string, std::string>, std::string>> SpacedPair(std::string_view line, const RubyMatch& m) {
+    std::size_t gap = std::string_view::npos, gapSize = 0;
+    for (const std::string_view sp : {"　", " "}) {
+        if (const std::size_t at = m.reading.find(sp); at != std::string_view::npos) {
+            gap = at;
+            gapSize = sp.size();
+            break;
+        }
+    }
+    if (gap == std::string_view::npos || gap == 0) return std::nullopt;
+    const std::string_view left = m.reading.substr(0, gap), right = m.reading.substr(gap + gapSize);
+    if (right.empty() || right.find(' ') != std::string_view::npos || right.find("　") != std::string_view::npos) return std::nullopt;
+    const std::string_view before = line.substr(0, m.begin);
+    std::size_t end = before.size();
+    if (before.ends_with("　")) {
+        end -= std::string_view("　").size();
+    } else if (before.ends_with(" ")) {
+        end -= 1;
+    } else if (before.ends_with("・") || before.ends_with("･")) {
+        end -= before.ends_with("・") ? std::string_view("・").size() : std::string_view("･").size();
+    } else {
+        return std::nullopt;
+    }
+    std::size_t start = end;
+    while (start > 0 && IsKanji(RuneBefore(line, start).cp)) start -= RuneBefore(line, start).size;
+    if (start == end) return std::nullopt;
+    const std::string_view run = line.substr(start, end - start);
+    // Each part needs a mora for each kanji of its run (14番 御影玲王(みかげ れお) is one name over the base).
+    const auto holds = [](std::string_view kanji, std::string_view kana) {
+        return GlossFits(kanji, kana) && ReadingMorae(kana) >= RuneCount(kanji);
+    };
+    if (!holds(run, left) || !holds(m.base, right)) return std::nullopt;
+    return std::make_pair(std::make_pair(std::string(run), std::string(left)), std::string(right));
+}
+
+}  // namespace
+
 std::string Registry::DropReadings(std::string_view line, std::string* cueText, std::vector<std::string>* captionNames) {
     if (cueText != nullptr) cueText->clear();
     if (captionNames != nullptr) captionNames->clear();
@@ -469,6 +539,16 @@ std::string Registry::DropReadings(std::string_view line, std::string* cueText, 
         if (!caption) {
             const DictFlags f = Flags(x.hiragana);
             if (IsKatakana(FirstRune(x.m.reading).cp) && (!f.common || f.person)) continue;
+            // A reading of two spaced runs (双寺　有仁（そうじ　ありひと）) is one; a remark too long to be the
+            // reading stays (同系統（ということにしている）).
+            const bool pair = SpacedPair(line, x.m).has_value();
+            if (!pair && !GlossFits(x.m.base, x.m.reading)) continue;
+            if (pair) {
+                out.append(line.substr(at, x.m.begin - at));
+                out.append(x.m.base);
+                at = x.m.end;
+                continue;
+            }
             if (f.pronoun && b.human) continue;
             // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
             // not 条件 (つよい) or 選択肢 (はい・いいえ)).
@@ -659,7 +739,22 @@ void Registry::Add(std::string_view rawLine) {
         RubyMatch m;
         if (!FindGloss(line, from, m)) break;
         const std::string base(m.base);
-        if (Gikun(base, m.reading)) {
+        // A word read aloud is no name unless an honorific follows (陸(くが)さん).
+        if (Gikun(base, m.reading) || (WordAloud(base, m.reading) && KanaHonorificAt(std::string_view(line).substr(m.end)).empty())) {
+            from = m.end;
+            continue;
+        }
+        // A reading in two parts over a base after a kanji run and a space reads the two runs, a part
+        // each (双寺　有仁（そうじ　ありひと）: 双寺 そうじ, 有仁 ありひと).
+        if (const auto split = SpacedPair(line, m); split.has_value()) {
+            count(gloss_, split->first.first);
+            count(gloss_, base);
+            SetReading(split->first.first, split->first.second);
+            SetReading(base, split->second);
+            from = m.end;
+            continue;
+        }
+        if (!GlossFits(base, m.reading)) {
             from = m.end;
             continue;
         }
@@ -810,7 +905,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2 && inflectedOk(t, l.bare)) free.insert(t);
     }
     for (const std::string& t : free) {
-        if (Flags(t).records > 0) continue;
+        if (Flags(t).records > 0 || WordThenParticle(t)) continue;
         Name& n = all[t];
         n.score += kThreshold;
         n.person = true;

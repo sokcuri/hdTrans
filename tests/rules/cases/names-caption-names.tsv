@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 names:guessed-kanji-names	七海頑張ってね〜！	나나미 힘내~!	fix	names
 names:guessed-kanji-names	やめなさい 三世子 いろいろ可哀相な子なんだから	그만두어 미요코 여러 가지 불쌍한 아이니까	fix	names
 names:guessed-kanji-names	すみません 夢結様	죄송합니다 유유님	fix	names
-names:guessed-kanji-names	竜崎 大変なことに ライト お父さんが	류자키 대단한 일로 라이트 아버지가	fix	names
+names:guessed-kanji-names	竜崎 大変なことに ライト お父さんが	류자키 큰일로 라이트 아버지가	fix	names
 names:guessed-kanji-names	うん ｴﾐも ｢あのときは楽しかった｡	응 에미도 ｢그 때는 즐거웠다.	fix	names
 names:guessed-kanji-names	わかってるよ ハルジオンに着いたら小銭を稼ぐさ	알고 있어 하루지온에게 도착하면 잔돈을 벌지	fix	names
 names:guessed-kanji-names	≪ 甲児君 甲児君 応答してくれ 甲児君	≪ 코지 군 코지 군 응답해 줘 코지 군	fix	names

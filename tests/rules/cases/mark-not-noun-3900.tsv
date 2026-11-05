@@ -6,7 +6,7 @@ analysis:mark-not-noun	こんなところで何してるの？ 寒いのに。	�
 analysis:mark-not-noun	高嶺君って…コスプレ好きな上に、熟女好き？	타카네 군은…코스프레를 좋아하는 위에, 숙녀 좋아해?	fix	analysis
 analysis:mark-not-noun	うち？ 帰ってきたら うまいもの たらふく食べたいって言ってて。	집? 돌아오면 맛있는 것 배불리 먹고 싶다고 말해.	fix	analysis
 analysis:mark-not-noun	どっちに進撃するの？西？南？	어느 쪽으로 진격하는 거야? 서쪽? 남쪽?	fix	analysis
-analysis:mark-not-noun	大変な一日だった	대단한 하루였다	keep	analysis
+analysis:mark-not-noun	大変な一日だった	힘든 하루였다	keep	analysis
 analysis:mark-not-noun	身長は190㎝以上でしょうか	키는 190㎝ 이상입니까	keep	analysis
 analysis:mark-not-noun	特改Ⅰ型駆逐艦	특개Ⅰ형 구축함	keep	analysis
 analysis:mark-not-noun	投票率は９８．４％で、平均を０．１％下回った	투표율은 98.4%로, 평균을 0.1% 밑돌았다	keep	analysis

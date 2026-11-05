@@ -1,0 +1,41 @@
+# 규칙: GRM-3873
+rule	input	expected	kind	layer
+cx:honorific-sareru:10	何年おつきあいされたんですか？	몇 년 교제 하셨습니까?	fix	rewrites
+cx:honorific-sareru:10	10年間も おつきあい されてるんですか？	10년간이나 교제 하십니까?	fix	rewrites
+cx:honorific-sareru:10	王子様が召使さんたちによって庭にご案内されてきた。	왕자님이 하인 씨들에 의해 뜰에 안내되어 왔다.	keep	rewrites
+cx:honorific-nasareru:10	帝に献上なされた	황제에게 헌상하셨다	fix	rewrites
+cx:honorific-nasareru:10	社長が ご逝去なされた後	사장이 서거하신 후	fix	rewrites
+cx:honorific-nasareru:10	連絡がなされた。	연락이 이루어졌다.	keep	rewrites
+cx:honorific-nasareru:20	準備が少しもなされていない事実	준비가 조금도 되지 않은 사실	fix	rewrites
+cx:honorific-nasareru:20	いかがなされました｡	어떻게 하셨습니다.	keep	rewrites
+voice:respectful	じき戻られますので 奥の方でお待ちください。	곧 돌아오시기 때문에 안쪽의 쪽에서 기다려 주세요.	fix	voice
+voice:respectful	茶室に移られたことは 知っておいでですな？	다실로 옮기셨던 것은 알고 계십니까?	fix	voice
+voice:respectful	サッサと離家の方へ行かれました。	냉큼 이가쪽으로 가셨습니다.	fix	voice
+voice:respectful	下村さんは 事件前に あの商店街から 引っ越されてきたんですよね？	시모무라 씨는 사건 전에 그 상가에서 이사하셔 온 거죠?	fix	voice
+voice:respectful	今までは イタリアへ 留学されていたのですよね	지금까지는 이탈리아에 유학하고 계셨습니다지	fix	voice
+voice:respectful	この間の戦でも 最前線で 活躍されていたそうだ	이전의 싸움으로도 최전선에서 활약하고 계셨다고 한다	fix	voice
+voice:respectful	先生が苦戦されている	선생님이 고전하고 계신다	fix	voice
+voice:respectful	月城家に戻られたら いかがですか？	츠키시로가로 돌아오시면 어떻습니까?	fix	voice
+voice:respectful	行かれたら困る。	갈 수 있으면 곤란하다.	keep	voice
+voice:respectful	川に入られると手が出ない。	강에 들어가지면 엄두를 낼 수 없다.	keep	voice
+voice:respectful	また置いて行かれるんじゃないかって心配になって	또 두고 갈 수 있지 않겠는가는 걱정이 되어	keep	voice
+voice:respectful	私でも極楽へ行かれますわ	저라도 극락에 갈 수 있어요	keep	voice
+voice:respectful	教室に一人だけ残された。	교실에 한 사람만 남겨졌다.	keep	voice
+voice:respectful	絢香さんがそんなこと言われるの 嫌なんですもん	아야카 씨가 그런 말 듣는 것 싫습니다 것	keep	voice
+voice:respectful	御園さんは、両脇をがっちり確保されていた。	미소노 씨는, 양쪽 겨드랑이를 단단히 확보되어 있었다.	keep	voice
+cx:honorific-nasareru:25	村民はこの凍結が力によってなされていると信じた	촌민은 이 동결이 힘에 의해 되고 있다고 믿었다	fix	rewrites
+cx:honorific-nasareru:25	「………では、あなたは先生と生活なされていたのですか」	「………그럼, 당신은 선생님과 생활 하고 계셨습니까」	keep	rewrites
+cx:honorific-nasareru:20	議論も活発になされ、意見交換会としては十分な内容だった	논의도 활발하게 되어, 의견교환회로서는 충분한 내용이었다	fix	rewrites
+cx:honorific-sareru:10	あッ ダメです 私が お願いされたんですから	앗 안됩니다 제가 부탁되었으니까요	keep	rewrites
+cx:honorific-sareru:10	「お仕置きされている側が要求するなんて……」	「벌되고 있는 측이 요구하다니……」	keep	rewrites
+voice:respectful	大好きな人に失望されたくない	정말 좋아하는 사람에 실망되고 싶지 않다	keep	voice
+voice:respectful	超事務的に挨拶されて追い出された。	매우 사무적으로 인사되어 쫓겨났다.	keep	voice
+voice:respectful	金庫は今夜 移動される	금고는 오늘 밤 이동된다	keep	voice
+voice:respectful	…だが…聞かずに入られなかった。	…하지만…듣지 않고 들어가지지 않았다.	keep	voice
+cx:honorific-nasareru:30	起こるがまま なされるがまま	일어나는 대로 되는 대로	fix	rewrites
+cx:honorific-nasareru:30	どうなされた？	어떻게 하셨어?	keep	rewrites
+voice:respectful	あそこの鍵を付け替えたから賊に入られたんだって	저기의 열쇠를 새로 붙였으니까 도적에 들어와졌다고	keep	voice
+cx:honorific-sareru:10	お尻ペンペンされながら	엉덩이 때리기 되면서	keep	rewrites
+voice:respectful	誰かに入られた。	누군가에게 들어가졌다.	keep	voice
+voice:respectful	何者かに入られたらしい。	누군가에게 들어와진 것 같다.	keep	voice
+voice:respectful	先生は誰にも頼らず行かれた。	선생님은 누구에게도 의지하지 않고 가셨다.	fix	voice

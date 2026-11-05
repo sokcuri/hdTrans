@@ -1,7 +1,7 @@
 # 규칙: GRM-3720, GRM-3726, GRM-3727, GRM-3728, LEX-4603, LEX-4604
 rule	input	expected	kind	layer
-dict:jisjk:264511	静かにしないと、本気で怒るよ？	조용하게 하지 않으면, 정말로 화내?	fix	local-ending
-dict:jisjk:264511	静かにしないと、怒るよ	조용하게 하지 않으면, 화내	fix	local-ending
+dict:jisjk:264511	静かにしないと、本気で怒るよ？	조용하게 하지 않으면, 정말로 화낸다?	fix	local-ending
+dict:jisjk:264511	静かにしないと、怒るよ	조용하게 하지 않으면, 화낼 거야	fix	local-ending
 dict:jisjk:264511	きれいにしないと、母に叱られる	예쁘게 하지 않으면, 어머니에게 야단맞는다	keep	local-ending
 dict:jisjk:264511	高いと、本気で怒る	높다고, 정말로 화낸다	keep	local-ending
 cx:benefactive-provider:10	私は母に本を読んでもらえた。	나는 어머니가 책을 읽어 주었다.	fix	rewrites

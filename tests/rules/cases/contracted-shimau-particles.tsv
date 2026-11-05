@@ -72,10 +72,10 @@ ending:chau-particles	「もう、ドキドキしちゃったよ」	「이제, �
 ending:chau-particles	「驚かせちゃったね」	「놀라게 해버렸네」	fix	builtin-ending
 # 맞는 출력: 먹어 버렸어, 전부
 ending:chau-particles	食べちゃったよ、全部	먹어버렸다, 전부	current	builtin-ending
-ending:chau-particles	行っちまうよ	가버려	keep	builtin-ending
-ending:chau-particles	行っちゃうよ	가버려	keep	builtin-ending
-ending:chau-particles	先に行っちまうよ。	먼저 가버려.	keep	builtin-ending
-ending:chau-particles	行っちまうよぉ	가버려	keep	builtin-ending
+ending:chau-particles	行っちまうよ	가버릴게	keep	builtin-ending
+ending:chau-particles	行っちゃうよ	가버릴게	keep	builtin-ending
+ending:chau-particles	先に行っちまうよ。	먼저 가버릴게.	keep	builtin-ending
+ending:chau-particles	行っちまうよぉ	가버릴게	keep	builtin-ending
 ending:chau-particles	死んじまうよぉ	죽어버릴 거야	keep	builtin-ending
 ending:chau-particles	食べてしまうよぉ	먹어버려	keep	builtin-ending
 ending:chau-particles	歌うよぉ	노래해	keep	builtin-ending

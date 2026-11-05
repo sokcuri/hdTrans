@@ -1,0 +1,13 @@
+# 규칙: GRM-3916
+rule	input	expected	kind	layer
+cx:fic-particles-1:10	「今回の件は御園との約束でもあるし、普通に考えたら守るんじゃないか？」	has:미소노와의 약속	fix	rewrites
+cx:fic-particles-1:10	小太刀とのエピソードを忘れているのか	has:작은 칼과의 에피소드	fix	rewrites
+cx:fic-particles-1:10	彼との約束	has:그와의 약속	keep	rewrites
+cx:fic-particles-1:10	落とし前をつけさせろ、との遺言がございましたの	has:라는 유언	keep	rewrites
+cx:fic-particles-1:10	会うとの連絡	has:만난다는 연락	keep	rewrites
+cx:fic-particles-1:11	夢の中では「たかし」との出会いを思い出していた	has:와의 만남	fix	rewrites
+cx:fic-particles-1:11	「よろしく」との返事	lacks:와의	keep	rewrites
+cx:fic-particles-1:20	だが、立て続けに五人ものバトラーが殺されたのだ！	has:다섯 명이나 되는 버틀러	fix	rewrites
+cx:fic-particles-1:20	五人のバトラー	lacks:되는	keep	rewrites
+cx:fic-particles-1:30	『最初からそう言えば良いのに』	has:그렇게 말하면	fix	rewrites
+cx:fic-particles-1:30	そう言えば、昨日のことだけど	has:그러고 보니	keep	rewrites

@@ -41,7 +41,7 @@ cx:datte-listing:10	えっ？ えっ！？ ケーキだ ケーキだって！	�
 cx:datte-listing:10	妖怪だ 妖怪だって？	요괴다 요괴라고?	keep	rewrites
 cx:datte-listing:10	死んだ人間だって生きてる時はそうだったのだ。	죽은 인간도 살아 있을 때는 그랬던 것이다.	keep	rewrites
 cx:datte-listing:10	まだ 未鑑定だってのに…。	아직 미감정이라는데….	keep	rewrites
-cx:datte-listing:10	大変だ ホテルだって｡ なんとかならない？	대단하다 호텔이래. 어떻게든 안돼?	keep	rewrites
+cx:datte-listing:10	大変だ ホテルだって｡ なんとかならない？	큰일이다 호텔이래. 어떻게든 안돼?	keep	rewrites
 cx:datte-listing:30	あんた 家事も育児もしないし たまに休みでも ゴルフだ何だって 遊んでばっかりで｡	너 가사도 육아도 하지 않고 이따금 휴일이라도 골프니 뭐니 놀아뿐으로.	fix	rewrites
 cx:datte-listing:30	神だ何だって胡散臭いけど	신이니 뭐니 어쩐지 수상한데	fix	rewrites
 cx:datte-listing:30	それに 毎日 残業だ何だって 言って 夜中まで帰ってこない。	게다가 매일 잔업이니 뭐니 말해 한밤중까지 돌아오지 않는다.	fix	rewrites
@@ -71,7 +71,7 @@ lookup:verb-before-te-form	面倒見てくださいよ人事部長の時は	돌�
 lookup:verb-before-te-form	面倒見てくださることになりましたし	돌봐 주시게 되었고	fix	lookup
 lookup:verb-before-te-form	私が面倒見てあげなきゃって勝手に思ってた｡	내가 돌봐 주어야 한다고 마음대로 생각했다.	fix	lookup
 lookup:verb-before-te-form	試しに　アメリカ人留学生１０人この家で面倒見るとしたら…。	시험삼아 미국인 유학생 10명 이 집에서 돌본다고 하면….	fix	lookup
-lookup:verb-before-te-form	家族のことはわたしに任せなさい。しっかり面倒見るから	가족은 내에게 맡겨. 제대로 돌보니까	fix	lookup
+lookup:verb-before-te-form	家族のことはわたしに任せなさい。しっかり面倒見るから	가족은 내에게 맡겨. 제대로 돌볼 테니까	fix	lookup
 lookup:verb-before-te-form	でも、そうさせたのはワタシですからね。最後まで面倒見てあげますよ	하지만, 그렇게 시킨 것은 저니까요. 끝까지 돌봐 줘요	fix	lookup
 lookup:verb-before-te-form	い、いえ…面倒見ないとって	아, 아뇨…돌보지 않으면은	fix	lookup
 lookup:verb-before-te-form	蕩すのも良いけど、ちゃんと面倒見なさいよ？	구슬리는 것도 좋지만, 제대로 돌봐?	fix	lookup

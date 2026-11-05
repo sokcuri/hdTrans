@@ -680,16 +680,53 @@ constexpr NamedFeature kFeatures[] = {
      [](Flusher& f, const Item* it) {
          // From at on in t: 1 for a closing bracket after final particles and sentence marks, -1
          // for another rune, 0 for only those up to the end (MarksEnd: a long run asks once).
+         // A full stop or an exclamation mark among the marks ends the sentence of the word even where another
+         // sentence of the same speech follows (気にしてないし。全然…, spec GRM-3770).
+         bool stopped = false;
          const auto trailing = [&](std::string_view t, std::size_t at) {
              // A trailing ellipsis leaves the list open (待ってられないし……」), so it goes on.
              const std::size_t end = MarksEnd(f.w, t, at, "。．！!.ーねさなよっ〜~ 　");
+             const std::string_view run = t.substr(std::min(at, t.size()), std::min(end, t.size()) - std::min(at, std::min(end, t.size())));
+             // (the token text writes 。 as .)
+             for (const std::string_view stop : {"。", "．", "！", "!", "."}) {
+                 if (run.find(stop) != std::string_view::npos) stopped = true;
+             }
              if (end >= t.size()) return 0;
-             return RuneIn(text::DecodeRune(t.substr(end)).cp, "」』）)") ? 1 : -1;
+             if (RuneIn(text::DecodeRune(t.substr(end)).cp, "」』）)")) return 1;
+             if (!stopped) return -1;
+             // The next sentence that adds to it (それに, それから, あと, しかも) goes on with the list.
+             const std::string_view next = t.substr(end);
+             for (const std::string_view more : {"それに", "それから", "それと", "あと", "しかも", "おまけに", "さらに", "加えて", "それで", "だから"}) {
+                 if (next.starts_with(more)) return -1;
+             }
+             return 2;
          };
          // The chain ends at the sentence; the tokens after it go on to the end of the line.
          int state = trailing(it->text, static_cast<std::size_t>(it->start + it->length));
-         for (int t = it->tokenIndex + 1; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text, 0);
-         return state >= 0;
+         int t = it->tokenIndex + 1;
+         for (; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text, 0);
+         if (state != 2) return state >= 0;
+         // Only a verb ends its sentence there (気にしてないし。); a noun or an adjective with し before another
+         // sentence of the same speech still lists (茶髪だし。, 子供っぽいし。; spec GRM-3770).
+         // The ない or たい of a verb counts with it (怒ってないし。, いないし。).
+         const bool verbal = it->detail->cls == kDetailVerb || it->group->surface == "いな" ||
+                             (it->prev != nullptr && it->prev->detail->cls == kDetailVerb &&
+                              (it->group->surface == "な" || it->group->surface == "た"));
+         if (!verbal) return false;
+         // After the full stop the speech goes on with more of a list: a later し that goes on (高いし、, 大変だし……)
+         // or a speech that trails off in an ellipsis (分からないが……」) keeps the し a link.
+         std::string rest;
+         for (int u = std::max(t - 1, it->tokenIndex + 1); u < f.w.TokenCount(); u++) {
+             const std::string_view x = f.w.Tok(u).text;
+             const std::size_t close = std::min(x.find("」"), x.find("』"));
+             rest += std::string(x.substr(0, close));
+             if (close != std::string_view::npos) break;
+         }
+         for (const std::string_view more : {"し、", "し,", "し…", "し‥"}) {
+             if (rest.find(more) != std::string::npos) return false;
+         }
+         while (!rest.empty() && (rest.back() == ' ')) rest.pop_back();
+         return !(rest.ends_with("…") || rest.ends_with("‥") || rest.ends_with("...") || rest.ends_with("、"));
      }},
     // An earlier predicate in the same quotation already lists a reason in し (痛いし眠いし,
     // わかりやすいし間違えないし, めがねだし、陰キャだし).
@@ -698,6 +735,8 @@ constexpr NamedFeature kFeatures[] = {
          for (const Item* x = it->prev; x != nullptr; x = x->prev) {
              std::string_view s = x->group->surface;
              if (s == "「" || s == "『" || s.ends_with("「") || s.ends_with("『")) return false;
+             // A full stop or an exclamation mark closes the earlier sentence: its し lists nothing with this one.
+             if (s.ends_with("。") || s.ends_with("！") || s.ends_with("!") || s == ".") return false;
              if (s.ends_with("、")) s.remove_suffix(std::string_view("、").size());
              std::string_view d = x->DirectIndex() >= 0 ? x->DirectSurface() : std::string_view();
              if (d.ends_with("、")) d.remove_suffix(std::string_view("、").size());

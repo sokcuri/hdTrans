@@ -19,12 +19,12 @@ cx:meaning-flips-1:80	車の修理を頼む。	!rule:cx:meaning-flips-1:80	keep	
 cx:meaning-flips-1:80	基地の警備を担当する。	!rule:cx:meaning-flips-1:80	keep	rewrites
 cx:meaning-flips-1:80	写真付きの手紙だ。	!rule:cx:meaning-flips-1:80	keep	rewrites
 cx:meaning-flips-1:80	店の評判がいい。	!rule:cx:meaning-flips-1:80	keep	rewrites
-dict:jisjk:264511	いい加減にしないと、本気で怒るよ？	적당히 하지 않으면, 정말로 화내?	fix	local-ending
-dict:jisjk:264511	ちゃんとしないと、怒るよ？	제대로 하지 않으면, 화내?	fix	local-ending
+dict:jisjk:264511	いい加減にしないと、本気で怒るよ？	적당히 하지 않으면, 정말로 화낸다?	fix	local-ending
+dict:jisjk:264511	ちゃんとしないと、怒るよ？	제대로 하지 않으면, 화낸다?	fix	local-ending
 dict:jisjk:264511	行かないと、見捨てられる	가지 않으면, 버림받는다	keep	local-ending
 dict:jisjk:264511	高いと、本気で怒る	높다고, 정말로 화낸다	keep	local-ending
 dict:jisjk:264511	早くしないと、遅刻するよ	빨리 하지 않으면, 지각해	keep	local-ending
-dict:jisjk:264511	静かにしないと、先生に怒られるよ。	조용하게 하지 않으면, 선생님에게 혼나.	keep	local-ending
+dict:jisjk:264511	静かにしないと、先生に怒られるよ。	조용하게 하지 않으면, 선생님에게 혼날 거야.	keep	local-ending
 dict:jisjk:264511	金がないと、本気で困る	돈이 없으면, 진심으로 곤란하다	keep	local-ending
 dict:jisjk:342197	食べてないと困る	먹지 않으면 곤란하다	fix	local-ending
 dict:jisjk:342197	寝てないと死ぬぞ	자지 않으면 죽겠어	fix	local-ending

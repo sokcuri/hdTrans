@@ -28,6 +28,9 @@
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
 //= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
+//= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
+//= verb.announce-move	Stems of the speaker's own move announced to the listener before a line-final よ (帰る, 戻る, 寝る, 行く): -ㄹ게 (先に帰るよ 먼저 돌아갈게, もう寝るよ 이제 잘게; spec GRM-3940).
+//= ending.voice-shimau	What follows the られ of an ichidan verb when しまう comes next (てしまう, ちゃう, ちまった): the passive of what befell someone, not the potential (食べられちゃった 먹혀 버렸다; spec GRM-3939).
 //= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
 //= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
@@ -255,6 +258,7 @@
 //= noun.count-tofu	Nouns counted in blocks by 丁, 모 (豆腐が一丁 두부 한 모).
 //= noun.count-gun	Nouns of guns and long tools, matched at the end of a word, counted by 丁, 자루 (拳銃が一丁 권총 한 자루).
 //= noun.count-blade	Nouns of swords and blades, matched at the end of a word, that 一振りの before them counts, 자루 (一振りの剣 한 자루의 검; spec LEX-3836).
+//= noun.seasoning	Seasonings and powders, matched at the end of a word, that 一振り and ひと振り sprinkle, 한 번 뿌림 (塩を一振り 소금을 한 번 뿌림; spec LEX-3836).
 //= noun.count-rice	Nouns of a bowl of rice, matched at the end of a word, counted by 膳, 공기 (ご飯を一膳 밥 한 공기).
 //= noun.count-chopsticks	Nouns of chopsticks, counted in pairs by 膳, 벌 (箸が一膳 젓가락 한 벌).
 //= noun.count-tent	Nouns of tents, counted by 張, 동 (テントが一張 텐트 한 동).
@@ -323,6 +327,8 @@
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.container	Ends of the nouns of pockets, bags, boxes and other things one keeps things in (ポケット, 鞄, 袋, 箱, 引き出し): a 出す after one in から takes something out of it, 꺼내다 (ポケットから財布を出した).
 //= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
+//= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
+//= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
@@ -335,6 +341,7 @@
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
 //= noun.quote-request	Verbal nouns of asking, wishing, answering and ordering whose する takes what is asked or wished with って (静かにってお願いした 조용히라고 부탁했다, 場所って希望した 장소라고 희망했다).
+//= noun.ready-dekiru	Nouns of getting ready, after which できている read as the potential is the readiness that is there, 다 되다 (準備できてる 준비 다 됐어; spec GRM-21).
 //= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
 //= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
@@ -374,6 +381,7 @@
 //= particle.voice-subject	Particles of a subject, a topic, an experiencer or a source before a (ら)れ verb, after which a polite question asks about that one, not the listener.
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pause.copy	The marks that may stand between two copies of a word said again (待って、待って).
+//= pronoun.self-reference	Words besides pronoun.speaker that a speaker says for themself: rough and old first persons (わし, オイラ, 拙者), the speaker's side (こっち) and the kin a parent or an elder sibling calls themself (パパ, お兄ちゃん), unlike the humble kin said of one's family (母, 兄; spec GRM-3940).
 //= pronoun.first-person	The first-person pronouns 私, わたくし, あたし, 僕 and 俺 in kanji, hiragana and katakana; a katakana one beside one in another spelling in its sentence is a second self (ワタシと私).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
@@ -388,6 +396,12 @@
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
+//= script.chinese-particle	Sentence particles of Chinese that Japanese text never writes (嗎, 呢, 啊): a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 意思是, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-word-weak	Words of Chinese prose that Japanese also spells inside its own words (中登場 of 途中登場, 的意思 of 政治的意思決定, 自己的 of 自己的な, 源自 of 資源自給): a Han run holding one is Chinese only with a second sign (spec LAY-17).
+//= script.chinese-mark	Function characters of Chinese prose that Japanese words also hold (的, 是, 在, 這, 說): two of them in a Han run of four characters or more that no okurigana follows, one of script.chinese-mark-core and one of script.chinese-mark-strict, make it Chinese (spec LAY-17).
+//= script.chinese-mark-core	The marks of script.chinese-mark that Chinese grammar most needs (的, 了, 是).
+//= script.chinese-mark-strict	The marks of script.chinese-mark that Japanese compounds and old-style text rarely hold (這, 很, 們).
 //= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
@@ -499,6 +513,7 @@
 //= verb.write-say	Starts of verbs of writing, telling and promising that quote a と a few words before them, with no predicate between (弟にすると書状に書き残していた 한다고, 提供するとお話しさせて頂きました 제공한다고; spec GRM-40).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+//= verb.intransitive-godan	The (ら)れ stems of godan verbs of going, staying and living that take no object and have no passive without an agent (戻られます 돌아오십니다, 行かれた 가셨다, 茶室に移られた 옮기셨다): with no subject in the clause, or one called with さん, GRM-3873 reads them as respectful.
 //= verb.object-passive	Ichidan verbs whose られ form with an object を stays the passive, what is done to one (傷をつけられる, ソファを勧められる, 空き缶を投げつけられる, 声を誉められる): GRM-3871 does not read their dictionary passive rows as the potential.
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
@@ -2142,6 +2157,7 @@ name.person-speak	言わ
 name.person-speak	思っ
 name.person-speak	思う
 name.person-speak	話し
+name.person-speak	唱え
 name.person-transitive	見つめ
 name.person-transitive	睨
 name.person-transitive	にらん
@@ -2479,6 +2495,8 @@ kana.native-katakana	ドコ=どこ
 kana.native-katakana	ナンデ=なんで
 kana.native-katakana	ドウシテ=どうして
 kana.native-katakana	ドーシテ=どうして
+kana.native-katakana	ソコ=そこ
+kana.native-katakana	ニオイ=匂い
 kana.spelled-ending	です
 kana.spelled-ending	でした
 kana.spelled-ending	でしょう
@@ -4424,6 +4442,58 @@ noun.bracket-note	号
 noun.bracket-note	副
 noun.bracket-note	特
 noun.bracket-note	独
+noun.attitude-sareru	失望
+noun.attitude-sareru	感動
+noun.attitude-sareru	安心
+noun.attitude-sareru	納得
+noun.attitude-sareru	同情
+noun.attitude-sareru	心配
+noun.attitude-sareru	遠慮
+noun.attitude-sareru	感謝
+noun.attitude-sareru	尊敬
+noun.attitude-sareru	軽蔑
+noun.attitude-sareru	期待
+noun.attitude-sareru	歓迎
+noun.attitude-sareru	応援
+noun.attitude-sareru	信頼
+noun.attitude-sareru	誤解
+noun.attitude-sareru	注目
+noun.attitude-sareru	警戒
+noun.attitude-sareru	挨拶
+noun.attitude-sareru	返事
+noun.attitude-sareru	連絡
+noun.attitude-sareru	相談
+noun.attitude-sareru	電話
+noun.attitude-sareru	協力
+noun.attitude-sareru	質問
+noun.attitude-sareru	依頼
+noun.attitude-sareru	注意
+noun.attitude-sareru	感心
+noun.attitude-sareru	勘違い
+noun.attitude-sareru	落胆
+noun.received-o-act	お願い
+noun.received-o-act	お仕置き
+noun.received-o-act	お返し
+noun.received-o-act	お供え
+noun.received-o-act	お祓い
+noun.received-o-act	お叱り
+noun.received-o-act	お誘い
+noun.received-o-act	お呼び
+noun.received-o-act	お世話
+noun.received-o-act	お預け
+noun.received-o-act	お招き
+noun.received-o-act	お邪魔
+noun.received-o-act	おじゃま
+noun.received-o-act	お見舞い
+noun.received-o-act	ご招待
+noun.received-o-act	ご指名
+noun.received-o-act	ご案内
+noun.received-o-act	ごめんなさい
+noun.received-o-act	ご褒美
+noun.received-o-act	ご指導
+noun.received-o-act	ご迷惑
+noun.received-o-act	お尻ペンペン
+noun.received-o-act	お尻叩き
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同
@@ -4693,6 +4763,12 @@ noun.quoted-clause	証拠	GRM-80
 noun.quoted-clause	主張	GRM-80
 noun.quoted-clause	説明	GRM-80
 noun.quoted-clause	報告	GRM-80
+
+noun.ready-dekiru	準備
+noun.ready-dekiru	用意
+noun.ready-dekiru	支度
+noun.ready-dekiru	仕度
+noun.ready-dekiru	覚悟
 
 noun.realm-compound	国境
 noun.realm-compound	国内
@@ -5225,6 +5301,41 @@ particle.wonder	ぐらい
 pause.copy	、
 pause.copy	，
 
+pronoun.self-reference	わし
+pronoun.self-reference	ワシ
+pronoun.self-reference	あたい
+pronoun.self-reference	アタイ
+pronoun.self-reference	オイラ
+pronoun.self-reference	おいら
+pronoun.self-reference	おら
+pronoun.self-reference	オラ
+pronoun.self-reference	あっし
+pronoun.self-reference	拙者
+pronoun.self-reference	わらわ
+pronoun.self-reference	我
+pronoun.self-reference	われ
+pronoun.self-reference	こっち
+pronoun.self-reference	こちら
+pronoun.self-reference	お兄ちゃん
+pronoun.self-reference	お姉ちゃん
+pronoun.self-reference	兄ちゃん
+pronoun.self-reference	姉ちゃん
+pronoun.self-reference	にいちゃん
+pronoun.self-reference	ねえちゃん
+pronoun.self-reference	お兄さん
+pronoun.self-reference	お姉さん
+pronoun.self-reference	パパ
+pronoun.self-reference	ママ
+pronoun.self-reference	お母さん
+pronoun.self-reference	お父さん
+pronoun.self-reference	母さん
+pronoun.self-reference	姉さん
+pronoun.self-reference	兄さん
+pronoun.self-reference	父さん
+pronoun.self-reference	おじさん
+pronoun.self-reference	おばさん
+pronoun.self-reference	おじいちゃん
+pronoun.self-reference	おばあちゃん
 pronoun.first-person	私
 pronoun.first-person	わたし
 pronoun.first-person	わたくし
@@ -7170,6 +7281,29 @@ verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
 verb.receiver-passive	秘
+verb.intransitive-godan	戻られ
+verb.intransitive-godan	帰られ
+verb.intransitive-godan	行かれ
+verb.intransitive-godan	入られ
+verb.intransitive-godan	移られ
+verb.intransitive-godan	残られ
+verb.intransitive-godan	座られ
+verb.intransitive-godan	休まれ
+verb.intransitive-godan	歩かれ
+verb.intransitive-godan	通われ
+verb.intransitive-godan	引っ越され
+verb.intransitive-godan	住まれ
+verb.intransitive-godan	参られ
+verb.intransitive-godan	寄られ
+verb.intransitive-godan	向かわれ
+verb.intransitive-godan	泊まられ
+verb.intransitive-godan	急がれ
+verb.intransitive-godan	働かれ
+verb.intransitive-godan	暮らされ
+verb.intransitive-godan	頑張られ
+verb.intransitive-godan	亡くなられ
+verb.intransitive-godan	引きこもられ
+verb.intransitive-godan	上がられ
 verb.object-passive	つけ
 verb.object-passive	付け
 verb.object-passive	着け
@@ -7255,6 +7389,7 @@ verb.result-passive	取り巻
 
 verb.result-state	濡れ
 verb.result-state	座
+verb.result-state	勃
 verb.result-state	立
 verb.result-state	残
 verb.result-state	入
@@ -7399,6 +7534,8 @@ verb.arrival-te	引っ越
 verb.arrival-te	連れ
 
 verb.result-state-past	亡くな
+verb.result-state-past	でき
+verb.result-state-past	出来
 verb.result-state-past	生き残
 verb.result-state-past	古び
 verb.result-state-past	身罷
@@ -9400,6 +9537,124 @@ wrap.sentence-start	うわ
 wrap.sentence-start	よし
 wrap.sentence-start	じゃあ
 wrap.sentence-start	ところが
+script.chinese-particle	嗎
+script.chinese-particle	呢
+script.chinese-particle	咱
+script.chinese-particle	啊
+script.chinese-particle	啦
+script.chinese-particle	喔
+script.chinese-particle	嗯
+script.chinese-word-weak	中登場
+script.chinese-word-weak	系列中
+script.chinese-word-weak	的是
+script.chinese-word-weak	不是
+script.chinese-word-weak	就是
+script.chinese-word-weak	的意思
+script.chinese-word-weak	源自
+script.chinese-word-weak	音同
+script.chinese-word-weak	是在
+script.chinese-word-weak	自己的
+script.chinese-word	什麼
+script.chinese-word	這個
+script.chinese-word	這裡
+script.chinese-word	這樣
+script.chinese-word	這是
+script.chinese-word	這次
+script.chinese-word	那個
+script.chinese-word	那裡
+script.chinese-word	那麼
+script.chinese-word	沒有
+script.chinese-word	但是
+script.chinese-word	因為
+script.chinese-word	還是
+script.chinese-word	已經
+script.chinese-word	聽到
+script.chinese-word	為什麼
+script.chinese-word	怎麼
+script.chinese-word	我們
+script.chinese-word	你們
+script.chinese-word	他們
+script.chinese-word	她們
+script.chinese-word	人們
+script.chinese-word	它們
+script.chinese-word	是指
+script.chinese-word	也就是
+script.chinese-word	就像
+script.chinese-word	應該
+script.chinese-word	這種
+script.chinese-word	哪裡
+script.chinese-word	所著
+script.chinese-word	位於
+script.chinese-word	意為
+script.chinese-word	指的是
+script.chinese-word	來自
+script.chinese-word	意思是
+script.chinese-word	讀音
+script.chinese-word	讀作
+script.chinese-word	唸作
+script.chinese-word	直譯
+script.chinese-word	捏自
+script.chinese-word	惡搞
+script.chinese-word	原文為
+script.chinese-word	原文是
+script.chinese-word	原型是
+script.chinese-word	的簡稱
+script.chinese-word	讀為
+script.chinese-word	讀成
+script.chinese-word	寫成
+script.chinese-word	的時候
+script.chinese-word	日語中
+script.chinese-word	在日語
+script.chinese-word	日語的
+script.chinese-word	日語裡
+script.chinese-word	的日語
+script.chinese-word	的諧音
+script.chinese-word	發音為
+script.chinese-word	發音同
+script.chinese-word	音相近
+script.chinese-word	真是的
+script.chinese-word	不對
+script.chinese-word	并且
+script.chinese-mark	的
+script.chinese-mark	是
+script.chinese-mark	了
+script.chinese-mark	在
+script.chinese-mark	和
+script.chinese-mark	與
+script.chinese-mark	為
+script.chinese-mark	也
+script.chinese-mark	就
+script.chinese-mark	都
+script.chinese-mark	被
+script.chinese-mark	把
+script.chinese-mark	從
+script.chinese-mark	對
+script.chinese-mark	還
+script.chinese-mark	過
+script.chinese-mark	說
+script.chinese-mark	讀
+script.chinese-mark	這
+script.chinese-mark	著
+script.chinese-mark	裡
+script.chinese-mark	給
+script.chinese-mark	讓
+script.chinese-mark	很
+script.chinese-mark	跟
+script.chinese-mark	們
+script.chinese-mark-core	的
+script.chinese-mark-core	了
+script.chinese-mark-core	是
+script.chinese-mark-strict	這
+script.chinese-mark-strict	說
+script.chinese-mark-strict	讀
+script.chinese-mark-strict	很
+script.chinese-mark-strict	讓
+script.chinese-mark-strict	跟
+script.chinese-mark-strict	裡
+script.chinese-mark-strict	還
+script.chinese-mark-strict	從
+script.chinese-mark-strict	對
+script.chinese-mark-strict	們
 script.chinese-han	你
 script.chinese-han	您
 script.chinese-han	么
@@ -9938,6 +10193,35 @@ noun.count-blade	短刀
 noun.count-blade	大刀
 noun.count-blade	薙刀
 noun.count-blade	剣刀
+
+noun.seasoning	塩
+noun.seasoning	胡椒
+noun.seasoning	コショウ
+noun.seasoning	こしょう
+noun.seasoning	塩胡椒
+noun.seasoning	塩コショウ
+noun.seasoning	タバスコ
+noun.seasoning	ソース
+noun.seasoning	醤油
+noun.seasoning	しょうゆ
+noun.seasoning	粉
+noun.seasoning	スパイス
+noun.seasoning	砂糖
+noun.seasoning	七味
+noun.seasoning	一味
+noun.seasoning	山椒
+noun.seasoning	パセリ
+noun.seasoning	調味料
+noun.seasoning	ふりかけ
+noun.seasoning	胡麻
+noun.seasoning	ごま
+noun.seasoning	ゴマ
+noun.seasoning	チーズ
+noun.seasoning	ハーブ
+noun.seasoning	シナモン
+noun.seasoning	ナツメグ
+noun.seasoning	香辛料
+noun.seasoning	味の素
 
 noun.count-gun	銃
 noun.count-gun	拳銃
@@ -11244,6 +11528,65 @@ noun.time-ni	土曜日
 noun.time-ni	雨の日
 noun.time-ni	嵐の夜
 noun.time-ni	誕生日
+verb.warning-act	怒
+verb.warning-act	おこ
+verb.warning-act	殴
+verb.warning-act	なぐ
+verb.warning-act	撃
+verb.warning-act	斬
+verb.warning-act	殺
+verb.warning-act	ころ
+verb.warning-act	叩
+verb.warning-act	たた
+verb.warning-act	蹴
+verb.warning-act	刺
+verb.warning-act	呼
+verb.warning-act	泣
+verb.warning-act	噛
+verb.warning-act	壊
+verb.warning-act	こわ
+verb.warning-act	捨て
+verb.warning-act	すて
+verb.warning-act	燃や
+verb.warning-act	もや
+verb.warning-act	バラ
+verb.warning-act	ばら
+verb.warning-act	言いつけ
+verb.warning-act	言い付け
+verb.warning-act	いいつけ
+verb.warning-act	通報
+verb.warning-act	訴え
+verb.warning-act	うった
+verb.warning-act	追い出
+verb.warning-act	おいだ
+verb.warning-act	ぶっ飛ば
+verb.warning-act	ぶっとば
+verb.warning-act	ぶん殴
+verb.warning-act	ぶんなぐ
+verb.announce-move	帰
+verb.announce-move	かえ
+verb.announce-move	戻
+verb.announce-move	もど
+verb.announce-move	寝
+verb.announce-move	出かけ
+verb.announce-move	でかけ
+verb.announce-move	行
+ending.voice-shimau	てしま
+ending.voice-shimau	でしま
+ending.voice-shimau	ちゃった
+ending.voice-shimau	ちゃって
+ending.voice-shimau	ちまった
+ending.voice-shimau	ちまって
+ending.voice-shimau	じゃった
+ending.voice-shimau	じまった
+ending.voice-shimau	ちゃう
+ending.voice-shimau	ちゃい
+ending.voice-shimau	ちゃわ
+ending.voice-shimau	ちまう
+ending.voice-shimau	ちまい
+ending.voice-shimau	ちまわ
+ending.voice-shimau	じゃう
+ending.voice-shimau	じまう
 noun.least-able	子供
 noun.least-able	子ども
 noun.least-able	こども
