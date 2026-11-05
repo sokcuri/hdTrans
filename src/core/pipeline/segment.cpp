@@ -92,6 +92,26 @@ bool PersonOpens(std::string_view s) {
     return !rest.starts_with("の") && !IsKanjiRune(text::DecodeRune(rest).cp);
 }
 
+// Whether s ends with a whole personal pronoun word, after a space, a mark or the start (ぼく, おれ たち).
+bool PronounEnds(std::string_view s) {
+    std::size_t start = s.size();
+    while (start > 0) {
+        const text::Rune r = LastRune(s.substr(0, start));
+        const char32_t cp = r.cp;
+        const std::size_t before = start - r.size;
+        if (r.size == 0 || !IsJapaneseRune(cp) || cp == U'、' || cp == U'。' || cp == U'「' || cp == U'」' || cp == U'…') break;
+        start = before;
+    }
+    const std::string_view word = s.substr(start);
+    std::size_t n = Person(word);
+    if (n == 0) return false;
+    std::string_view rest = word.substr(n);
+    for (const std::string_view plural : {"たち", "達", "ら", "等", "ども"}) {
+        if (rest == plural) return true;
+    }
+    return rest.empty();
+}
+
 // Whether a form before a pronoun goes on into it: the quoting という and the よう of a purpose,
 // which describe or lead to it (きさまという やつ, 助かるよう 俺が), the なく of "not this but"
 // (父さんじゃなく 俺を), and the explanatory んだ, after which the pronoun is the subject said last
@@ -116,10 +136,11 @@ bool KanaSpace(std::string_view s, size_t i) {
 // のだって of a nominalized verb, 何だって (뭐라고) and the て form of 当たる (に当たって) keep the space as it
 // was.
     // A だって standing between spaces opens a clause (じゃなくて だって 頭に 아니고 그치만 머리에): the space
-    // before it parts it from what it follows.
+    // before it parts it from what it follows. After a pronoun spelled in kana it is that pronoun's
+    // "even" (ぼく だって がんばる 나도), so the space goes on.
     if (rest.starts_with("だって") && (rest.substr(std::string_view("だって").size()).starts_with(" ") ||
                                      rest.substr(std::string_view("だって").size()).starts_with("、"))) {
-        return true;
+        return !PronounEnds(s.substr(0, i));
     }
     // A hearsay asked about stays apart (帰ってきたって 本当か？ 돌아왔대 진짜야?).
     if (const std::string_view head = s.substr(0, i); (head.ends_with("だって") || head.ends_with("たって")) &&
