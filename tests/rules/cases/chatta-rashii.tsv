@@ -1,0 +1,28 @@
+# 규칙: SPC-38
+rule	input	expected	kind	layer
+normalize:chatta-rashii	泳いじまったらしい	헤엄쳐버린 것 같다	fix	normalize
+normalize:chatta-rashii	通報されちゃったらしいですよ？	신고되어버린 것 같아요?	fix	normalize
+normalize:chatta-rashii	いなくなっちゃったらしいよ！　やっぱりあの噂って……	없어져버린 것 같아! 역시 그 소문은……	fix	normalize
+normalize:chatta-rashii	逃げられちまったらしいな	도망가버린 것 같네	fix	normalize
+normalize:chatta-rashii	壊しちまったらしくてな。	부수어버린 것 같고.	fix	normalize
+normalize:chatta-rashii	初日に　失敗しちゃったらしくて	첫날에 실패해버린 것 같아서	fix	normalize
+normalize:chatta-rashii	何かね　面接ん時に言っちゃったらしいの。	뭔가 면접시에 말해버린 것 같아.	fix	normalize
+normalize:chatta-rashii	連れてきちゃったらしい	데려와버린 것 같다	fix	normalize
+normalize:chatta-rashii	知っちゃったらしいよ	알아버린 것 같아	fix	normalize
+normalize:chatta-rashii	異臭騒ぎになっちゃったらしくて	이취 소동이 되어버린 것 같아서	fix	normalize
+normalize:chatta-rashii	いや　迷っちゃったらしいんだ	아니 헤매어버린 것 같다	fix	normalize
+normalize:chatta-rashii	ついてきちまったらしい	따라 와버린 것 같다	fix	normalize
+normalize:chatta-rashii	デビューしちゃったらしいわよ｡	데뷔해버린 것 같아.	fix	normalize
+normalize:chatta-rashii	しちゃったらしい｡	해버린 것 같다.	fix	normalize
+normalize:chatta-rashii	爪印を押しちまったらしい｡➡	손도장을 눌러버린 것 같다. ➡	fix	normalize
+normalize:chatta-rashii	落としちゃったらしいんだ	떨어뜨려버린 것 같다	fix	normalize
+normalize:chatta-rashii	気に入っちゃったらしいのよ	마음에 들어버린 것 같아	fix	normalize
+normalize:chatta-rashii	なんか間違えて注文しちゃったらしくて	뭔가 잘못해 주문해버린 것 같아서	fix	normalize
+normalize:chatta-rashii	入院しちゃったらしくて。	입원해버린 것 같아서.	fix	normalize
+normalize:chatta-rashii	親近感を覚えちまったらしい	친근감을 느껴버린 것 같다	fix	normalize
+normalize:chatta-rashii	熱出しちゃったらしくて…	열 내버린 것 같아서…	fix	normalize
+normalize:chatta-rashii	持ってっちゃったらしい	가져가버린 것 같다	fix	normalize
+normalize:chatta-rashii	出てっちまったらしいんだよ｡・	나가버린 것 같아. ·	fix	normalize
+normalize:chatta-rashii	また出てっちゃったらしくてさ	또 나가버린 것 같아서	fix	normalize
+normalize:chatta-rashii	やっちゃったらしい｡	저지른 것 같다.	keep	normalize
+normalize:chatta-rashii	腰やっちゃったらしいよ。	허리 저지른 것 같아.	keep	normalize
