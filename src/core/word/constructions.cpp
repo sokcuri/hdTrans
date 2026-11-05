@@ -415,22 +415,23 @@ constexpr NamedFeature kFeatures[] = {
      }},
     // A question mark follows the word, with only other marks between (ないの!? ないの？).
     {"question-after",
-     [](Flusher&, const Item* it) {
-         const auto asks = [](std::string_view rest) {
-             while (!rest.empty()) {
-                 const text::Rune r = text::DecodeRune(rest);
-                 if (r.cp == U'?' || r.cp == U'？') return 1;
-                 if (r.size == 0 || !RuneIn(r.cp, "!！…‥〜～~ーっッ")) return 0;
-                 rest.remove_prefix(r.size);
-             }
-             return -1;  // only marks that draw out or pause, up to the end
+     [](Flusher& f, const Item* it) {
+         // From at on in text: 1 for a question mark after marks that draw out or pause, 0 for
+         // another rune, -1 for only such marks up to the end (MarksEnd: a long run asks once).
+         const auto asks = [&](std::string_view text, std::size_t at) {
+             const std::size_t end = MarksEnd(f.w, text, at, "!！…‥〜～~ーっッ");
+             if (end >= text.size()) return -1;
+             const char32_t r = text::DecodeRune(text.substr(end)).cp;
+             return r == U'?' || r == U'？' ? 1 : 0;
          };
          const Item* cur = it;
          for (int n = 0; n < 4 && cur != nullptr; n++) {
-             if (const int a = asks(TextAfter(cur)); a >= 0) return a == 1;
+             const auto at = static_cast<std::size_t>(cur->start + cur->length);
+             const int after = at < cur->text.size() ? asks(cur->text, at) : asks(cur->detail->nextText, 0);
+             if (after >= 0) return after == 1;
              cur = cur->After();
              if (cur == nullptr) return false;
-             if (const int a = asks(cur->group->surface); a >= 0) return a == 1;
+             if (const int a = asks(cur->group->surface, 0); a >= 0) return a == 1;
          }
          return false;
      }},
@@ -672,19 +673,17 @@ constexpr NamedFeature kFeatures[] = {
     // end of the line (行くし」, 行くしね」, 行くし。」), no further sentence and no trailing ellipsis.
     {"speech-ends",
      [](Flusher& f, const Item* it) {
-         const auto trailing = [](std::string_view t) {
-             for (std::size_t k = 0; k < t.size();) {
-                 const text::Rune r = text::DecodeRune(t.substr(k));
-                 if (RuneIn(r.cp, "」』）)")) return 1;
-                 // A trailing ellipsis leaves the list open (待ってられないし……」), so it goes on.
-                 if (!RuneIn(r.cp, "。．！!.ーねさなよっ〜~ 　")) return -1;
-                 k += std::max<std::size_t>(r.size, 1);
-             }
-             return 0;
+         // From at on in t: 1 for a closing bracket after final particles and sentence marks, -1
+         // for another rune, 0 for only those up to the end (MarksEnd: a long run asks once).
+         const auto trailing = [&](std::string_view t, std::size_t at) {
+             // A trailing ellipsis leaves the list open (待ってられないし……」), so it goes on.
+             const std::size_t end = MarksEnd(f.w, t, at, "。．！!.ーねさなよっ〜~ 　");
+             if (end >= t.size()) return 0;
+             return RuneIn(text::DecodeRune(t.substr(end)).cp, "」』）)") ? 1 : -1;
          };
          // The chain ends at the sentence; the tokens after it go on to the end of the line.
-         int state = trailing(From(it->text, it->start + it->length));
-         for (int t = it->tokenIndex + 1; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text);
+         int state = trailing(it->text, static_cast<std::size_t>(it->start + it->length));
+         for (int t = it->tokenIndex + 1; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text, 0);
          return state >= 0;
      }},
     // An earlier predicate in the same quotation already lists a reason in し (痛いし眠いし,
@@ -1052,13 +1051,16 @@ void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
 
 namespace {
 
-// About how many atoms the condition at node i tries, an unbounded scan counted as 16 words.
+// About how many atoms the condition at node i tries. An unbounded scan is counted as kUnbounded
+// words: it reads to the end of the chain, which a run of thousands of marks makes thousands of
+// words long, so it goes after any operand that tries a bounded number of atoms.
+constexpr uint64_t kUnbounded = 1024;
 uint64_t Cost(const ConstructionTable& t, uint32_t i) {
     const CxNode& n = t.nodes[i];
     if (n.atom) return 1;
     if (n.kind == rules::BodyKind::Not) return Cost(t, i + 1);
     if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
-        return (n.count == 0 ? 16 : n.count) * (Cost(t, i + 1) + Cost(t, t.nodes[i + 1].end));
+        return (n.count == 0 ? kUnbounded : n.count) * (Cost(t, i + 1) + Cost(t, t.nodes[i + 1].end));
     }
     uint64_t cost = 0;
     for (uint32_t k = 0, child = i + 1; k < n.count; k++, child = t.nodes[child].end) cost += Cost(t, child);
