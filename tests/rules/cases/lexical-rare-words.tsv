@@ -48,7 +48,7 @@ dict:rare-words	姉は頑張り屋だ。	언니는 노력가다.	fix	lookup
 dict:rare-words	お茶目な姉。	장난스러운 언니.	fix	lookup
 dict:rare-words	赤ん坊を揺すり上げる。	갓난아기를 추스른다.	fix	lookup
 dict:rare-words	机が揺れる。	책상이 흔들린다.	keep	lookup
-dict:rare-words	鼻の下を伸ばす。	인중을 편다.	keep	lookup
+dict:rare-words	鼻の下を伸ばす。	헤벌쭉해진다.	keep	lookup
 dict:rare-words	茶目っ気がある。	장난기가 있다.	keep	lookup
 dict:jisjk:363278	兄は強い決意を見せた。	형은 강한 결의를 보였다.	fix	local-ending
 dict:jisjk:363278	明日は楽しい予定がある。	내일은 즐거운 예정이 있다.	fix	local-ending
