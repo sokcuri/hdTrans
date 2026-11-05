@@ -919,7 +919,10 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // 伯爵家継ぐ): the idiom's noun stands bare.
         const char pc = ClassOf(items[i - 1]);
         const Entry* pe = items[i - 1]->group->At(items[i - 1]->selected);
-        if (together && (pc == '0' || pc == '1' || pc == '4' || pc == '7' || pc == '8' || (pe != nullptr && pe->cls == 'N'))) return false;
+        // An idiom whose noun takes a describing word takes an adjective, a verb or an adnominal before it
+        // (悲しい目に 遭う, 重い腰を 上げる); a noun before it still makes a compound.
+        const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
+        if (together && ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) return false;
     }
     // A noun said again right after the verb restates it with its particle (足 出せ 足を): the words are
     // taken literally.

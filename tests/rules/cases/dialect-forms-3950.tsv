@@ -144,7 +144,7 @@ normalize:dialect-word	華も無ければ芸もねえし おらがいなけり�
 normalize:dialect-word	ええパンチ 入っとんのやで 倒れへんわ	좋은 펀치 들어와나로 쓰러지지 않아	fix	normalize
 normalize:dialect-word	何を隠そう クラスで いちばん早く 九九を習得した神童が この わいや！	솔직히 말하자면 반에서 가장 빨리 99를 습득한 신동이 이 나야!	fix	normalize
 normalize:dialect-word	わいの芝居 そんなに下手か？	나의 연극 그렇게 서투른가?	fix	normalize
-normalize:dialect-word	そげん でかい声出さんでも聞こえとる！	그렇게 큰 소리 내지 않아도 들려!	fix	normalize
+normalize:dialect-word	そげん でかい声出さんでも聞こえとる！	그렇게 큰 소리를 내지 않아도 들려!	fix	normalize
 normalize:dialect-word	さあ おらに付いて来るだ	자 나를 따라 오는이다	fix	normalize
 normalize:dialect-word	そこは わいの机やで	거기는 나의 책상이야	fix	normalize
 normalize:dialect-word	そんな ええ犬なら おれのところへも一日 貸せ！	그렇게 좋은 개라면 나 에도 하루 빌려 주어라!	fix	normalize
