@@ -1,0 +1,23 @@
+# 규칙: LEX-3848
+rule	input	expected	kind	layer
+dict:lex:3848:wake-eimon	訳分かんない子だね	영문 모르는 아이구나	fix	local
+dict:lex:3848:wake-eimon	僕 今来たばっかりで 訳わかんないんだけど｡	나 지금 온지 얼마 안됨으로 영문 모르는데.	fix	local
+dict:lex:3848:wake-eimon	もう訳わかんねー	이제 영문 모른다	fix	local
+dict:lex:3848:wake-eimon	言ってることは訳わかんないし	말하는 것은 영문 모르고	fix	local
+dict:lex:3848:wake-eimon	訳の分からん連載も終わりになるし	영문 모르겠어 연재도 끝나게 되고	fix	local
+dict:lex:3848:wake-eimon	オイラは訳が分からなかった。	나는 영문을 몰랐다.	keep	local
+dict:lex:3848:wake-eimon	訳のわからない裸踊りが再開される。	영문 모를 알몸 춤이 재개된다.	keep	local
+dict:jisjk:325242	どうして こんなことをしたのか その訳を教えてくれ	왜 이런 일을 했는지 그 이유를 가르쳐 줘	fix	local
+dict:jisjk:325242	訳は 何も聞かないで。	이유는 아무것도 묻지 마.	fix	local
+dict:jisjk:325242	あっ いや… これには 訳が…	앗 아니… 이것에는 이유가…	fix	local
+dict:jisjk:325242	アンタにやれって言ってる訳じゃ．．．	너에 하라는 거야. . .	keep	local
+dict:jisjk:325242	そういう訳ではない	그런 것은 아니다	keep	local
+dict:lex:3848:wake-nai-mu	そんな訳無い クラウリーは嘘をついてる	그렇게 리가 없는 크라울리는 거짓말하고 있다	fix	local
+dict:lex:3848:wake-nai-mu	これでfinish！？な訳無いデショ！	이것으로 finish!? 리가 없지!	fix	local
+dict:lex:3848:wake-ga-nai	彼らは、考え無にキミを送り込んだ訳がない。	그들은, 생각무에 너를 보낸 리가 없다.	fix	local
+dict:lex:3848:wake-ga-nai	心の声 当然だ。 只者な訳ねぇ。	마음의 소리 당연하다. 보통 사람인 리가 없다.	fix	local
+dict:lex:3848:wake-ga-nai	どうだっていい訳がないんだけど…	어때라고 해 리가 없는데…	fix	local
+dict:lex:3848:wake-easy-na	院長室に忍び込むくらい 訳ないよ	원장실에 잠입할 정도로 쉬워	fix	local
+dict:lex:3848:wake-easy-na	そんな訳ない	그렇게 리가 없다	keep	local
+dict:lex:3848:wake-easy-mu	それくらい訳無いさ	그 정도 쉬워	keep	local
+dict:lex:3848:わけにもいかな	信用する訳にもいかない	신용할 수도 없다	keep	local
