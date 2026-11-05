@@ -381,6 +381,7 @@
 //= particle.voice-subject	Particles of a subject, a topic, an experiencer or a source before a (ら)れ verb, after which a polite question asks about that one, not the listener.
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pause.copy	The marks that may stand between two copies of a word said again (待って、待って).
+//= pronoun.self-reference	Words besides pronoun.speaker that a speaker says for themself: rough and old first persons (わし, オイラ, 拙者), the speaker's side (こっち) and the kin a parent or an elder sibling calls themself (パパ, お兄ちゃん), unlike the humble kin said of one's family (母, 兄; spec GRM-3940).
 //= pronoun.first-person	The first-person pronouns 私, わたくし, あたし, 僕 and 俺 in kanji, hiragana and katakana; a katakana one beside one in another spelling in its sentence is a second self (ワタシと私).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
@@ -396,7 +397,8 @@
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= script.chinese-particle	Sentence particles of Chinese that Japanese text never writes (嗎, 呢, 啊): a Han run holding one is Chinese (spec LAY-17).
-//= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 的意思, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 意思是, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-word-weak	Words of Chinese prose that Japanese also spells inside its own words (中登場 of 途中登場, 的意思 of 政治的意思決定, 自己的 of 自己的な, 源自 of 資源自給): a Han run holding one is Chinese only with a second sign (spec LAY-17).
 //= script.chinese-mark	Function characters of Chinese prose that Japanese words also hold (的, 是, 在, 這, 說): two of them in a Han run of four characters or more that no okurigana follows, one of script.chinese-mark-core and one of script.chinese-mark-strict, make it Chinese (spec LAY-17).
 //= script.chinese-mark-core	The marks of script.chinese-mark that Chinese grammar most needs (的, 了, 是).
 //= script.chinese-mark-strict	The marks of script.chinese-mark that Japanese compounds and old-style text rarely hold (這, 很, 們).
@@ -5299,6 +5301,41 @@ particle.wonder	ぐらい
 pause.copy	、
 pause.copy	，
 
+pronoun.self-reference	わし
+pronoun.self-reference	ワシ
+pronoun.self-reference	あたい
+pronoun.self-reference	アタイ
+pronoun.self-reference	オイラ
+pronoun.self-reference	おいら
+pronoun.self-reference	おら
+pronoun.self-reference	オラ
+pronoun.self-reference	あっし
+pronoun.self-reference	拙者
+pronoun.self-reference	わらわ
+pronoun.self-reference	我
+pronoun.self-reference	われ
+pronoun.self-reference	こっち
+pronoun.self-reference	こちら
+pronoun.self-reference	お兄ちゃん
+pronoun.self-reference	お姉ちゃん
+pronoun.self-reference	兄ちゃん
+pronoun.self-reference	姉ちゃん
+pronoun.self-reference	にいちゃん
+pronoun.self-reference	ねえちゃん
+pronoun.self-reference	お兄さん
+pronoun.self-reference	お姉さん
+pronoun.self-reference	パパ
+pronoun.self-reference	ママ
+pronoun.self-reference	お母さん
+pronoun.self-reference	お父さん
+pronoun.self-reference	母さん
+pronoun.self-reference	姉さん
+pronoun.self-reference	兄さん
+pronoun.self-reference	父さん
+pronoun.self-reference	おじさん
+pronoun.self-reference	おばさん
+pronoun.self-reference	おじいちゃん
+pronoun.self-reference	おばあちゃん
 pronoun.first-person	私
 pronoun.first-person	わたし
 pronoun.first-person	わたくし
@@ -9507,6 +9544,16 @@ script.chinese-particle	啊
 script.chinese-particle	啦
 script.chinese-particle	喔
 script.chinese-particle	嗯
+script.chinese-word-weak	中登場
+script.chinese-word-weak	系列中
+script.chinese-word-weak	的是
+script.chinese-word-weak	不是
+script.chinese-word-weak	就是
+script.chinese-word-weak	的意思
+script.chinese-word-weak	源自
+script.chinese-word-weak	音同
+script.chinese-word-weak	是在
+script.chinese-word-weak	自己的
 script.chinese-word	什麼
 script.chinese-word	這個
 script.chinese-word	這裡
@@ -9517,8 +9564,6 @@ script.chinese-word	那個
 script.chinese-word	那裡
 script.chinese-word	那麼
 script.chinese-word	沒有
-script.chinese-word	不是
-script.chinese-word	就是
 script.chinese-word	但是
 script.chinese-word	因為
 script.chinese-word	還是
@@ -9526,7 +9571,6 @@ script.chinese-word	已經
 script.chinese-word	聽到
 script.chinese-word	為什麼
 script.chinese-word	怎麼
-script.chinese-word	自己的
 script.chinese-word	我們
 script.chinese-word	你們
 script.chinese-word	他們
@@ -9535,8 +9579,6 @@ script.chinese-word	人們
 script.chinese-word	它們
 script.chinese-word	是指
 script.chinese-word	也就是
-script.chinese-word	的是
-script.chinese-word	是在
 script.chinese-word	就像
 script.chinese-word	應該
 script.chinese-word	這種
@@ -9545,12 +9587,9 @@ script.chinese-word	所著
 script.chinese-word	位於
 script.chinese-word	意為
 script.chinese-word	指的是
-script.chinese-word	源自
 script.chinese-word	來自
-script.chinese-word	的意思
 script.chinese-word	意思是
 script.chinese-word	讀音
-script.chinese-word	音同
 script.chinese-word	讀作
 script.chinese-word	唸作
 script.chinese-word	直譯
@@ -9560,8 +9599,6 @@ script.chinese-word	原文為
 script.chinese-word	原文是
 script.chinese-word	原型是
 script.chinese-word	的簡稱
-script.chinese-word	系列中
-script.chinese-word	中登場
 script.chinese-word	讀為
 script.chinese-word	讀成
 script.chinese-word	寫成
