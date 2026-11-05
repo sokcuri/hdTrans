@@ -1,7 +1,7 @@
 # 규칙: LEX-65
 rule	input	expected	kind	layer
 dict:missing-compounds	大間違いをした	큰 착각을 했다	fix	lookup
-dict:missing-compounds	こんなので丸く収まると思ったら大間違いだぞー！	이런 것으로 둥글게 들어간다고 생각하면 큰 착각이야~!	fix	lookup
+dict:missing-compounds	こんなので丸く収まると思ったら大間違いだぞー！	이런 것으로 원만하게 해결된다고 생각하면 큰 착각이야~!	fix	lookup
 dict:missing-compounds	とんだ大間違いだった	터무니 없는 큰 착각이었다	fix	lookup
 lookup:prefix-word	大間抜けだ	대얼간이다	fix	lookup
 lookup:prefix-word	この大間抜けめ	이 대얼간이 녀석	fix	lookup
