@@ -642,9 +642,11 @@ bool Mashou(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([てで])く([。！？…‥、!?よねぞわかの」]|$)
+// ([てで])く([。！？…‥、!?よねぞわかの」]|$); the で of a て form follows ん or い (読んでく, 泳いでく), so
+// a で after anything else starts another word (でくわす, にでくわした)
 bool Teku(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
+    if (s.substr(pos).starts_with("で") && Before(s, pos) != U'ん' && Before(s, pos) != U'い') return false;
     if (!OneOf(s, p, U"てで")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "く")) return false;

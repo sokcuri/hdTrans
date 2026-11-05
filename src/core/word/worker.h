@@ -181,6 +181,7 @@ private:
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
+    const Record* ReadingLead(std::string_view full, int cursor, int token, Record* records);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
     // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana
