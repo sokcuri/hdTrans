@@ -21,3 +21,8 @@ dict:lex:3848:wake-easy-na	院長室に忍び込むくらい 訳ないよ	원장
 dict:lex:3848:wake-easy-na	そんな訳ない	그렇게 리가 없다	keep	local
 dict:lex:3848:wake-easy-mu	それくらい訳無いさ	그 정도 쉬워	keep	local
 dict:lex:3848:わけにもいかな	信用する訳にもいかない	신용할 수도 없다	keep	local
+dict:lex:3848:wake-easy-mu	こんなの訳無いさ	이런 건 쉬워	fix	local
+dict:lex:3848:wake-easy-mu	そんなの訳無いよ	그런 것 쉬워	fix	local
+dict:lex:3848:wake-easy-na	あんなの訳ないって	has:쉽다고	fix	local
+dict:lex:3848:wake-easy-na	空き家の訳ないだろ。	has:리가 없	keep	local
+dict:lex:3848:wake-nai-mu	そんな訳無い クラウリーは嘘をついてる	has:리가 없	keep	local
