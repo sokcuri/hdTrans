@@ -14,7 +14,7 @@ normalize:prohibition-janai	来るんじゃねえか	오지 않겠는가	keep	no
 normalize:toku	新しいマネージャー呼んどいたから	새로운 매니저 불러 두었으니까	fix	normalize
 normalize:toku	請求書　送っときましたから	청구서 보내 두었으니까요	fix	normalize
 normalize:toku	エレベーターぐらい造っときゃよかったのに	엘리베이터 정도 만들어 두었더라면 좋았을텐데	fix	normalize
-normalize:toku	住所は　あとでメール送っとくから	주소는 나중에 메일 보내 두니까	fix	normalize
+normalize:toku	住所は　あとでメール送っとくから	주소는 나중에 메일 보내 둘 테니까	fix	normalize
 normalize:toku	こうしといたら	이렇게 해 두면	fix	normalize
 normalize:toku	ずっといたでしょ？	계속 있었잖아?	keep	normalize
 normalize:toku	彼といた	그와 있었다	keep	normalize
