@@ -42,7 +42,7 @@ dict:jisjk:93094	幼い頃、こっそり出かける親の後に付いていっ
 dict:jisjk:93094	もつれそうな足を引きずって、ジークさんに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	ブレトはカブリの様子を不思議がりながらも、彼の後に付いて行く。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	『意識』は、その『誰か』の後ろに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
-dict:jisjk:93288	どうなったか、コンラートさんに聞こうと思っていたんだ。	has:들으려고 하고 있었다	fix	local
+dict:jisjk:93288	どうなったか、コンラートさんに聞こうと思っていたんだ。	has:물으려고 하고 있었다	fix	local
 dict:jisjk:93288	「前から言おうと思っていたんだけどねぇ森……」	has:말하려고 하고 있었다	fix	local
 dict:jisjk:93288	「行こうと思っていたんだけど、急に怖くなって」	has:가려고 하고 있었다	fix	local
 dict:jisjk:93288	本当はもう少し溜まってから一気にやろうと思っていたんだが、どうせ暇ならやってもいいだろう。	has:하려고 하고 있었는데	fix	local

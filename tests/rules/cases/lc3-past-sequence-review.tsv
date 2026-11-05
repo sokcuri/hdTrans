@@ -39,7 +39,7 @@ rewrite:past-sequence	そしてレイチェルが勘違いをしていると察�
 rewrite:past-sequence	お互いがそう感じていると気付いたことがあった。	has:있다는 걸	keep	rewrites
 rewrite:past-sequence	からかわれていると気付いたのは後々になってからだ。	has:있다는 걸	keep	rewrites
 rewrite:past-sequence	信じられないけれど、眠ると必ず見る嫌な夢は見なかった。	has:자면	keep	rewrites
-rewrite:past-sequence	微妙に最初の間が気になるけど、つっこんだら話が長引くのでやめた。	has:찔러 넣으면	keep	rewrites
+rewrite:past-sequence	微妙に最初の間が気になるけど、つっこんだら話が長引くのでやめた。	has:태클을 걸면	keep	rewrites
 rewrite:past-sequence	一度、口頭で北が一回、西が四回と教えたら、しっかりと覚えてくれた。	has:가르쳤더니	keep	rewrites
 rewrite:past-sequence	子供の頃は雨が降ると外で遊んだ。	has:오면	keep	rewrites
 rewrite:past-sequence	道を歩いていたら声をかけられた。	has:있었더니	keep	rewrites
