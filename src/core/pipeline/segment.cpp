@@ -152,6 +152,40 @@ bool KanaSpace(std::string_view s, size_t i) {
         }
         return false;
     }
+    // な after a verb's dictionary form ends a prohibition before a space when what follows backs the order:
+    // a reason, a warning or reassurance, the speaker, or the one told (言うな だから 말하지 마 그러니까, 心配するな 俺がいる
+    // 걱정하지 마 내가 있다, 泣くな お前). Without such a cue the な may be the speaker's remark about someone
+    // and the space stays as it was; with a person spoken of after it (むちゃくちゃ言うな この人 말하는구나 이 사람)
+    // cx:na-observed:35 reads the remark. The な of manner and look never ends
+    // (ような, そうな, ふうな).
+    if (last == U'な') {
+        const std::string_view head = s.substr(0, i);
+        const std::string_view before = head.substr(0, head.size() - std::string_view("な").size());
+        bool cue = false;
+        for (const std::string_view c : {"だから", "俺", "おれ", "オレ", "私", "わたし", "あたし", "僕", "ぼく", "大丈夫", "いいな", "いいか",
+                                         "いいね", "分かった", "わかった", "お前", "おまえ", "あんた", "君", "きみ", "貴様", "てめえ",
+                                         "さもないと", "さもなきゃ", "でないと", "じゃないと", "頼む", "お願い", "落ち着", "安心", "心配"}) {
+            cue = cue || rest.starts_with(c);
+        }
+        // So does the な of a state the speaker observes, which forbids nothing: a verb of verb.observed-state (気になるな
+        // 신경 쓰이네), a て-form with いる (知っているな, ツイてるな) or ござる, おる; and よろしく頼むな, a request.
+        cue = cue || head.ends_with("てるな") ||
+              head.ends_with("ているな") || head.ends_with("でるな") || head.ends_with("でいるな") || head.ends_with("ござるな") ||
+              head.ends_with("おるな") || head.ends_with("よろしく頼むな");
+        // 言ってくれるな and やってくれるな, the speaker's remark on what was said or done (cx:na-observed:30), end before
+        // a conjunction (やってくれるな だが 해 주는구나 하지만).
+        if (head.ends_with("ってくれるな")) {
+            for (const std::string_view c : {"だが", "でも", "しかし", "けど", "だけど", "けれど"}) cue = cue || rest.starts_with(c);
+        }
+        if (!cue && before.size() > LastRune(before).size) {
+            const std::string_view stem = before.substr(0, before.size() - LastRune(before).size);
+            cue = dict::EndsWithMember(HDTRANS_CLASS("verb.observed-state"), stem) > 0;
+        }
+        if (cue && RuneIn(LastRune(before).cp, U"うくすつぬむぶぐる") && !head.ends_with("ような") && !head.ends_with("そうな") &&
+            !head.ends_with("ふうな") && !head.ends_with("こうな") && !head.ends_with("どうな")) {
+            return true;
+        }
+    }
     return RuneIn(last, U"ねよさわぞぜ") ||
            (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか")) ||
            (RuneIn(last, U"いただるうくすつぬむぶぐ") && PersonOpens(rest) && !ClauseRunsOn(s.substr(0, i)));
