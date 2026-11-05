@@ -706,6 +706,13 @@ constexpr NamedFeature kFeatures[] = {
          int t = it->tokenIndex + 1;
          for (; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text, 0);
          if (state != 2) return state >= 0;
+         // Only a verb ends its sentence there (気にしてないし。); a noun or an adjective with し before another
+         // sentence of the same speech still lists (茶髪だし。, 子供っぽいし。; spec GRM-3770).
+         // The ない or たい of a verb counts with it (怒ってないし。, いないし。).
+         const bool verbal = it->detail->cls == kDetailVerb || it->group->surface == "いな" ||
+                             (it->prev != nullptr && it->prev->detail->cls == kDetailVerb &&
+                              (it->group->surface == "な" || it->group->surface == "た"));
+         if (!verbal) return false;
          // After the full stop the speech goes on with more of a list: a later し that goes on (高いし、, 大変だし……)
          // or a speech that trails off in an ellipsis (分からないが……」) keeps the し a link.
          std::string rest;

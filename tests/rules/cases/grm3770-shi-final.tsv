@@ -101,3 +101,4 @@ cx:narration-style-1:10	「ほら、星も綺麗だし」	has:예쁘잖아	fix	r
 cx:narration-style-1:10	「少し歩こうよ、星も綺麗だし」	has:예쁘잖아	keep	rewrites
 cx:narration-style-1:26	「事故だろうし」	!rule:cx:narration-style-1:26	keep	rewrites
 cx:narration-style-1:27	「隣駅だし」	!rule:cx:narration-style-1:27	keep	rewrites
+cx:narration-style-1:20	「いつも馬鹿話で盛り上がってて子供っぽいし。マサキの方が全然大人びてると思う」	has:같고.	keep	rewrites
