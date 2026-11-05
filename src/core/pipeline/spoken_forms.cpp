@@ -1547,6 +1547,31 @@ bool RoughKudasai(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ちゃった, ちまった (じゃった, じまった after the ん or い of a て form) before らしい: てしまった, so that
+// らしい reads as the guess it is and not as たら + しい (食べちゃったらしい 먹어버린 것 같다,
+// 死んじまったらしくて 죽어버린 것 같아서, 持ってっちゃったらしい 가져가버린 것 같다). The copula じゃった
+// (老婆じゃったらしい) and やっちゃった stay.
+bool ChattaRashii(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const std::string_view head = s.substr(0, pos);
+    if ((head.ends_with("て") || head.ends_with("で")) && (Lit(s, p, "っちゃった") || Lit(s, p, "っちまった"))) {
+        // ていく said てっ (持ってっちゃった 持っていってしまった).
+        m.group[1] = "いってしまった";
+    } else if (Lit(s, p, "ちゃった") || Lit(s, p, "ちまった")) {
+        // やっちゃった, the slip of 저지르다, has its own reading.
+        if (head.ends_with("やっ")) return false;
+        m.group[1] = "てしまった";
+    } else if (Lit(s, p, "じゃった") || Lit(s, p, "じまった")) {
+        if (pos == 0 || !In(LastRune(head).cp, U"んい")) return false;
+        m.group[1] = "でしまった";
+    } else {
+        return false;
+    }
+    if (!s.substr(p).starts_with("らし")) return false;
+    m.end = p;
+    return true;
+}
+
 // 判 or 解 for わか in わかる: after no kanji (評判らしい, 了解っす stay) and before ら, り, る,
 // った, って or, for 判, れ (判らない, 解った, 判れば).
 bool KanjiWakaru(std::string_view s, size_t pos, Match& m) {
@@ -1571,6 +1596,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     std::string text(in);
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
     if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
+    if (Contains(text, "ったらし")) text = ReplaceAll(text, ChattaRashii, [](const Match& m) { return std::string(m.group[1]); });
     if (Contains(text, "ホレ")) text = ReplaceAll(text, KataHore, [](const Match& m) { return std::string(m.group[1]); });
     if (Contains(text, "ハズ")) text = ReplaceAll(text, KataHazu, [](const Match&) { return std::string("はず"); });
     if (Contains(text, "せぇ") || Contains(text, "せえ")) text = ReplaceAll(text, RoughKudasai, [](const Match&) { return std::string("ください"); });
