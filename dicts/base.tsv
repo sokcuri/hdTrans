@@ -4859,6 +4859,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うつくし	아름$G4@	H7M0			GN				jisjk:4901		
 うつくしくな	아름다워&AL@	M428			GN				jisjk:145773		
 うつくしくぼか	아름답게 선염&AV@	M443			GN				jisjk:145775		
+うつけ	얼간이	N110	XXXVHn		GN			가나로 쓴 うつけ는 사람을 낮추는 `얼간이`다(LEX-3832).	lex:3832:utsuke		
 うつけ	속이 비어 있음	N110			GN				jisjk:126933		
 うつけもの	멍청이	N110	VHnSFl		GN				jisjk:126935		
 うつされ	옮겨&AL@	M427			GN				jisjk:145781		
@@ -6642,6 +6643,11 @@ ttt	ttt	K110			GN				jisjk:201744
 おに	도깨비	N110			GN				jisjk:165795		
 おにいさん	형님	I110	VHn		GN				jisjk:40508		
 おにいちゃん	오빠	N110	VHn		GN				jisjk:165799		
+おにい	오빠	N110	VHn		GN			おにい는 お兄의 가나 표기 `오빠`다(LEX-3832).	lex:3832:おにい		
+おにい様	오라버니	N110	VHn		GN			おにい는 お兄의 가나 표기 `오빠`다(LEX-3832).	lex:3832:おにい様		
+おにいさま	오라버니	N110	VHn		GN			おにい는 お兄의 가나 표기 `오빠`다(LEX-3832).	lex:3832:おにいさま		
+おにいひゃん	오빠	N110	VHn		GN			혀가 풀린 おにいひゃん도 `오빠`다(LEX-3832).	lex:3832:おにいひゃん		
+おにいひゃ	오빠	N110	VHn		GN			혀가 풀린 おにいひゃん도 `오빠`다(LEX-3832).	lex:3832:おにいひゃ		
 おにがでるかじゃがでるか	어떻게 될지	N110			GN				jisjk:150732		
 おにがみ	귀신	N110	VHn		GN				jisjk:165800		-1
 おにがわら	도깨비 얼굴 모양의 기와	N110	VBl		GN				jisjk:165802		-1
@@ -41552,6 +41558,7 @@ ttt	ttt	K110			GN				jisjk:201744
 まゆみ	마유미	K130			GN				jisjk:115042		
 まゆ毛	눈썹	I110	VBp		GN				jisjk:41659		
 まりつき	공치기	N110	VRw		GN				jisjk:155185		
+まるっと	통째로	C0H1			GN			まるっと는 `통째로`다(LEX-3832).	lex:3832:まるっと		
 まる	만	N110			GN				jisjk:365006		
 まる	만	N110		Z6	GN				jisjk:365007		
 まるあんき	통째로 암기	N110		Hd	GN				jisjk:155188		
@@ -44777,6 +44784,7 @@ ttt	ttt	K110			GN				jisjk:201744
 われら	우리들	I110			GN				jisjk:106801		
 われわれ	우리	I120	VHn		GN				jisjk:41897		
 われを忘れ	자신을 &HL@	M427		Pn	GN				jisjk:268211		
+わんさか	잔뜩	C0H1			GN			わんさか는 많이 몰려 있는 `잔뜩`이다(LEX-3832).	lex:3832:わんさか		
 わん	왕	N130	QPN	Wb	GN				jisjk:341767		
 わんがんせん	만안선	N110	VPl		GN				jisjk:156932		
 わんきょく	만곡	N110	VPl	Hd	GN				jisjk:156934		
@@ -155740,6 +155748,7 @@ ttt	ttt	K110			GN				jisjk:201744
 呑口	마개	N110			GN				jisjk:36795		
 呑吐	탄토	N110		Hd	GN				jisjk:246794		
 呑気	태평%A1@	G8L0			GN				jisjk:3817		
+のん気	태평%A1@	G8L0			GN			のん気는 呑気와 같이 `태평하다`다(LEX-3832).	lex:3832:nonki		
 呑物	음료	N110	VFdVFd		GN				jisjk:36796		
 呑竜	돈류	N110	VHn		GN				jisjk:246799		
 呑舟の魚	거물	N110	VHn		GN				jisjk:246786		
@@ -202673,6 +202682,8 @@ ttt	ttt	K110			GN				jisjk:201744
 張り紙	벽보	I110	VSwVSp		GN				jisjk:82266		
 張り裂け	부풀어 터&AL@	M417			GN				jisjk:94615		
 張り裂ける	한껏 부풀어 터지다	I110			GN				jisjk:111392		
+はちきれんばかりに	터질 듯이	C0H1			GN			はちきれんばかり는 `터질 듯`이다(LEX-3832).	lex:3832:はちきれんばかりに		
+はちきれんばかりの	터질 듯한	E0H0			GN			はちきれんばかり는 `터질 듯`이다(LEX-3832).	lex:3832:はちきれんばかりの		
 張り詰め	긴장&C6@	M417	UFl	Dx	GN				jisjk:94625		
 張り詰め	덮&AJ@	M417			GN				jisjk:94626		
 張り詰め	붙&AJ@	M437			GN				jisjk:94627		

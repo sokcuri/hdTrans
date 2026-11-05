@@ -7706,6 +7706,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 雲をつ	하늘을 &E9@	M421		Pn	GN				llm			i:7701
 雲を衝	하늘을 &E9@	M421		Pn	GN				llm			i:7702
 言葉を詰まらせ	말을 잇지 못&AV@	M427		Pn	GN				llm			i:7703
+言葉をつまらせ	말을 잇지 못&AV@	M427		Pn	GN			言葉をつまらせ는 言葉を詰まらせ와 같다(LEX-3832).	llm			lex:3832:kotoba-tsumarase
 蝶のように舞	나비처럼 &K2@	M420			GN				llm			i:7704
 あらん事を	함께하기를	A9D0			GN				llm			i:7705
 お粗末様	변변찮았습니다	A9D0			GN				llm			i:7706
