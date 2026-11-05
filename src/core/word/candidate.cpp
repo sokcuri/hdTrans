@@ -2423,6 +2423,53 @@ const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// LEX-4984: at the end of the retry budget, where a word starts at cursor (no reading from before it runs past it) and
+// the reading that failed is no verb, the longest reading among the records left at cursor after c's group that is
+// longer than c and ends at the end of the token or where a word of two or more characters, or one that starts with
+// kanji or katakana, starts; null for none.
+Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c) {
+    // A verb that failed keeps its place: its longer forms are its own endings (なくなって, not なくなってしまうで).
+    if (c.detail == nullptr || c.detail->cls == kDetailVerb) return nullptr;
+    // Only where a word starts: no reading from up to four characters back runs past cursor (the て of 知って, the
+    // かった of 良かった stay the ending of the word before).
+    int back = cursor;
+    for (int k = 0; k < 4 && back > 0; k++) {
+        back -= static_cast<int>(DecodeLastRune(full.substr(0, static_cast<std::size_t>(back))).size);
+        const Lookup l = DoLookup(From(full, back), kModeGeneral);
+        Record* rec = l.count == 0 ? nullptr : l.records;
+        for (int tries = 0; rec != nullptr && tries < 64; tries++) {
+            while (rec != nullptr && rec->source.empty()) rec = rec->child;
+            if (rec == nullptr) break;
+            const Item* it = InsertLateCandidate(full, back, token, rec);
+            if (it == nullptr || it->group == nullptr) break;
+            if (back + it->length > cursor) return nullptr;
+            rec = it->group->records;
+        }
+    }
+    Item* best = nullptr;
+    Record* rec = c.group == nullptr ? nullptr : c.group->records;
+    for (int tries = 0; rec != nullptr && tries < 64; tries++) {
+        while (rec != nullptr && rec->source.empty()) rec = rec->child;
+        if (rec == nullptr) break;
+        Item* it = InsertLateCandidate(full, cursor, token, rec);
+        if (it == nullptr || it->group == nullptr) break;
+        if (it->length > c.length && (best == nullptr || it->length > best->length)) {
+            const int end = cursor + it->length;
+            bool boundary = end >= static_cast<int>(full.size());
+            if (!boundary) {
+                const Lookup l = DoLookup(From(full, end), kModeGeneral);
+                const Item* next = l.count == 0 ? nullptr : InsertLateCandidate(full, end, token, l.records);
+                const char32_t lead = text::DecodeRune(From(full, end)).cp;
+                boundary = next != nullptr && (text::RuneCount(From(full, end).substr(0, static_cast<std::size_t>(next->length))) >= 2 ||
+                                               text::IsKanji(lead) || (lead >= U'ァ' && lead <= U'ヺ'));
+            }
+            if (boundary) best = it;
+        }
+        rec = it->group->records;
+    }
+    return best;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -2533,7 +2580,18 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     const int typ = Classify(source);
     const char part = At(candidate->Code(0), 0);
     if (part == '6' || ((typ == 24 || typ == 14) && part != '4' && part != '7' && part != '8') ||
-        IsDigit(At(source, 0)) || IsAlpha(At(source, 0)) || StartsWithSymbol(source) || candidateRetryCount >= 3) {
+        IsDigit(At(source, 0)) || IsAlpha(At(source, 0)) || StartsWithSymbol(source)) {
+        Insert(candidate);
+        return true;
+    }
+    if (candidateRetryCount >= 3) {
+        // The retries of the token are spent, so the reading that failed stands. A longer reading still left at the
+        // same point that reaches the end of the token, or a point where a word of two or more characters or one not
+        // in hiragana starts, takes its place (ためらう: ためら + う, not た + め + ら + う after ため and た failed).
+        if (Item* longer = settings.text ? LongerAtExhaustion(full, cursor, token, *candidate) : nullptr) {
+            Insert(longer);
+            return true;
+        }
         Insert(candidate);
         return true;
     }
