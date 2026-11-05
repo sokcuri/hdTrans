@@ -161,6 +161,7 @@
 //= name.body-part	Parts of the body that, before を in the clause after Xが, Xは or Xも, or before が after Xは or Xも, make X a person doing something with its own body (玉藻が身をよじる 타마모가 몸을 비튼다, 小太刀が眉を上げた; spec LEX-4820).
 //= name.person-act	Starts of verbs and phrases of what only a person does, matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end: they make X a person (玉藻がはにかむ 타마모가 수줍어한다, 小太刀が黙然と腕を組んだ; spec LEX-4820).
 //= name.person-say	Starts of verbs of saying, knowing and asking, matched in the clause after Xが, or after Xは where an object in を comes first: they make X a person (小太刀が知っている 코다치가 알고 있다; not 泉は知らない; spec LEX-4820).
+//= name.person-speak	Starts of verbs of saying and thinking, matched in the clause after Xは or Xも on a kanji word with a person's name row of no time, statement, name, thought or money sense: they make X a person (梨花は言った 리카는 말했다; not 昼間も言った, 言葉は聞いた; spec LEX-4830).
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
 //= name.person-clause-stop	What ends the clause of a subject for the person cues of spec LEX-4820: a condition, a cause, a quotation or a clause made a noun (菓子が出れば, 心が若いと言って, 世界が無数にあることを知ってた).
 //= name.personified-word	Common words of nature, the sky, the seasons and ideas that writers make laugh, speak or look like a person (未来が微笑む, 向日葵が笑う, 運命が囁く): a person cue of spec LEX-4820 does not make them names; an honorific or a name the document carries still does.
@@ -2108,6 +2109,13 @@ name.person-say	尋ね
 name.person-say	訊い
 name.person-say	訊く
 name.person-say	話し
+name.person-speak	言っ
+name.person-speak	言う
+name.person-speak	言い出
+name.person-speak	言わ
+name.person-speak	思っ
+name.person-speak	思う
+name.person-speak	話し
 name.person-transitive	見つめ
 name.person-transitive	睨
 name.person-transitive	にらん
