@@ -1,6 +1,6 @@
 # 규칙: GRM-3920
 rule	input	expected	kind	layer
-segment:datte-space	そんな仲間を 俺は ただの１人だって 見捨てることはできねえ！	그런 동료를 나는 그냥 1명이라도 버릴 수 없어!	fix	segment
+segment:datte-space	そんな仲間を 俺は ただの１人だって 見捨てることはできねえ！	그런 동료를 나는 그냥 1명도 버릴 수 없어!	fix	segment
 segment:datte-space	え… だ… だってロボットじゃん 本気なの!?	어… 그… 그치만 로봇이잖아 진심이야!?	fix	segment
 segment:datte-space	学校がこんなこと考えてたって 分かったら 大人を信じることが できなくなりますよ｡	학교가 이런 것 생각하고 있었다는 걸 알면 어른을 믿을 수가 없게 돼요.	fix	segment
 segment:datte-space	私だって 我慢できることなら我慢します	저도 참을 수 있는 것이라면 참습니다	fix	segment
@@ -11,10 +11,10 @@ segment:datte-space	よかっただと⁉ ひぃ～！ だ だ だ… だって 
 segment:datte-space	だ… だって—	그… 그치만—	fix	segment
 segment:datte-space	あたいだって 頑張って パートしてんだよ	나도 열심히 파트하는 거야	fix	segment
 segment:datte-space	船長が行方不明になったって ホント？	선장이 행방불명이 되었대 진짜?	fix	segment
-segment:datte-space	今朝だって 無垢(むく)な赤子のように 甘える私を―	오늘 아침이라도 순수한 갓난아이처럼 응석부리는 나를-	fix	segment
+segment:datte-space	今朝だって 無垢(むく)な赤子のように 甘える私を―	오늘 아침도 순수한 갓난아이처럼 응석부리는 나를-	fix	segment
 segment:datte-space	だから 今日だって 勝ちにいくさ	그러니까 오늘도 승리에 전쟁	fix	segment
 segment:datte-space	それで受けたの？ えっ だって そんなこと書いてあったら 受けたくなるでしょ 普通。	그래서 받았어? 어 그치만 그런 일 써 있으면 받고 싶어지겠지 보통.	fix	segment
-segment:datte-space	あの人が気にするのは 人の目だけ｡ 僕の事だって 恥だから 人に言わなかったのよ｡ おたくの事だって… 信じちゃいないよ あの人は｡	그 사람이 신경 쓰는 것은 사람의 눈만. 내 일도 수치니까 사람에게 말하지 않았어. 댁의 일이라도… 믿지는 않는다 그 사람은.	fix	segment
+segment:datte-space	あの人が気にするのは 人の目だけ｡ 僕の事だって 恥だから 人に言わなかったのよ｡ おたくの事だって… 信じちゃいないよ あの人は｡	그 사람이 신경 쓰는 것은 사람의 눈만. 내 일도 수치니까 사람에게 말하지 않았어. 댁의 일도… 믿지는 않는다 그 사람은.	fix	segment
 segment:datte-space	人類誕生の歴史とか 分かっちゃうし あ～ 未来には こんな すごい文明 生まれてたんだって 分かっちゃうし！	인류 탄생의 역사라든지 알아버리고 아~ 미래에는 이런 대단한 문명 태어나고 있었다는 걸 알아버리고!	fix	segment
 segment:datte-space	なんか ふられたって 噂だよ｡ 小高先生｡	뭔가 차였다는 소문이야. 코다카 선생님.	fix	segment
 segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	이 사람들을 화내도 수는 돌아오지 않아 >> 리에	fix	segment
@@ -69,7 +69,7 @@ segment:datte-space	仕事だってさ。	일이래.	keep	segment
 segment:datte-space	瑠奈が また胃痛だって～？	루나가 또 위통이래~?	keep	segment
 segment:datte-space	私だって そう思う	나도 그렇게 생각한다	keep	segment
 segment:datte-space	子供だって分かる	아이라도 안다	keep	segment
-segment:datte-space	今朝だって無垢な赤子のように甘える	오늘 아침이라도 순수한 갓난아이처럼 응석부린다	keep	segment
+segment:datte-space	今朝だって無垢な赤子のように甘える	오늘 아침도 순수한 갓난아이처럼 응석부린다	keep	segment
 segment:datte-space	つくったって言ってみればレヴィの護衛でしょ	만들어도 말하자면 레비의 호위지	keep	segment
 segment:datte-space	頑張りましょうって言った。	힘냅시다라고 말했다.	keep	segment
 segment:datte-space	私だって言うよ	나도 말해	keep	segment
@@ -112,7 +112,7 @@ segment:datte-space	あたし だって ちゃんと しゃべれてないし	�
 segment:datte-space	大体 あなた だって あれだもんね	대개 당신도 저것이군	fix	segment
 segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	가게 가만히 두어도 되는 건가? 너. 너도 지금… 손님 적지 지금.	fix	segment
 segment:datte-space	《これは あなた だって そりゃ もう この香りだよ》	《이것은 당신도 그야 이제 이 향기야》	fix	segment
-segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너라도 어쩔 수 없을 거예요	fix	segment
+segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너도 어쩔 수 없을 거예요	fix	segment
 segment:datte-space	えっ？あんた だって さっき 裏千家とか何か言ってたじゃん。	어? 너도 조금 전 우라센케라든가 뭔가 말했잖아.	fix	segment
 segment:datte-space	あなた だって エールワン？	당신도 에일 원?	fix	segment
 segment:datte-space	お茶 買ったの？ あんた だって 佐藤さん 来たから	차 샀어? 너도 사토 씨 왔으니까	fix	segment

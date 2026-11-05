@@ -1,0 +1,94 @@
+# 규칙: GRM-3923
+rule	input	expected	kind	layer
+cx:datte-noun:20	マルヒトマルマルさ。ほーら、時報だってバッチリだって。へへっ	0100이야. 자아, 시보도 완벽하다고. 헤헷	fix	rewrites
+cx:datte-noun:20	人間の一念というものはいつか成就するものだから、あの人だってそうだ。	인간의 일념이라는 것은 언젠가 성취하는 것이니까, 그 사람도 그렇다.	fix	rewrites
+cx:datte-noun:5	私ってほんとに幸せな人だって思うわ オンマ	나는 정말 행복한 사람이라고 생각해 온마	fix	rewrites
+cx:datte-noun:10	夢の世界だってばれたら そうなると、こっちは動きにくくなる	꿈의 세계라고 발각되면 그렇게 되면, 여기는 움직이기 어려워진다	fix	rewrites
+cx:datte-noun:20	「うちの赤坊なんかまだこんなで　赤だって黒だっていいよ、こういうのは托児所へあずけて居ない」	「우리 아기는 아직 이런으로 빨강도 흑도 좋아, 이런 건 탁아소에 맡겨 없어」	fix	rewrites
+cx:datte-noun:20	……それにさ、アナタが口開けだってことになればアルプス倶楽部だって黙っていませんヨ。	……게다가, 당신이 입 열고라도 것이 되면 알프스 클럽도 입을 다물고 있지 않아요.	fix	rewrites
+cx:datte-noun:20	まだまだ夜だって若いのに負けるかってのー！	아직도 밤도 젊은데 지겠냐고~!	fix	rewrites
+cx:datte-noun:20	チャンスと教育 必要なら罰だって与えます	찬스와 교육 필요하면 벌도 줍니다	fix	rewrites
+cx:datte-noun:10	大きな前進だって思ってる｡はぁ～！	큰 전진이라고 생각한다. 하아~!	fix	rewrites
+cx:datte-noun:20	どことなく、創眞に似た雰囲気だった。前に見た子とは明らかに別人だと思う。それに、見た目だって違ったわ	어딘지 모르게, 창진을 닮은 분위기였다. 전에 본 아이와는 분명하게 딴사람이라고 생각한다. 게다가, 외형도 달랐어	fix	rewrites
+cx:datte-noun:20	弥十だって馬鹿じゃねえんだ ええ？	미10도 바보같지 않다 네?	fix	rewrites
+cx:datte-noun:20	囚人だって居ただろ	죄수도 있었지	fix	rewrites
+cx:datte-noun:20	デザインも...それに失礼ですが 芸術だって忘れてください	디자인도...게다가 실례하지만 예술도 잊어 주세요	fix	rewrites
+cx:datte-noun:10	"It doesn't go"という 意味だって知ってたか?	"It doesn't go"라는 의미라고 알고 있었나?	fix	rewrites
+cx:datte-noun:20	メインがどれだけ美味しくても、最後の一品がいまいちなせいで全てをぶち壊しにする可能性だってある	메인이 얼마나 맛있어도, 마지막 일품이 별로 이룰 수 있는 있고로 모든 것을 엉망으로 할 가능성도 있다	fix	rewrites
+cx:datte-noun:10	どうせ... 先生も 俺のこと 変態だって思ってんでしょ。	어차피... 선생님도 나변태라고 생각해 지.	fix	rewrites
+cx:datte-noun:5	みんなのこと 大切な友達だって思ってたんだよ。	모두의 일 소중한 친구라고 생각했어.	fix	rewrites
+cx:datte-noun:20	補助装置の発明だってできるでしょう	보조 장치 발명도 할 수 있겠지요	fix	rewrites
+cx:datte-noun:10	自分への罰だって考えてたんだよな	자신에 대한 벌이라고 생각하고 있었지	fix	rewrites
+cx:datte-noun:10	湖だって知ってるかしら?	호수라고 알고 있을까?	fix	rewrites
+cx:datte-noun:20	そう お金だってそうだ	그렇게 돈도 그렇다	fix	rewrites
+cx:datte-noun:5	酷い親だって思うでしょ？	심한 부모라고 생각하겠지?	fix	rewrites
+cx:datte-noun:10	ターゲットに夢だって気づかれて 全てだいなしだ	타겟으로 꿈이라고 들켜 모두야 없음이다	fix	rewrites
+cx:datte-noun:20	やめたり 結婚だってすんだろ?	그만두거나 결혼도 살았잖아?	fix	rewrites
+cx:datte-noun:10	まあその、台詞とかはそんなに凝らなくていいからさ。話の流れで、いい話だって思ってもらおうよ	뭐 그, 대사라든지는 그렇게 열중하지 않아도 되니까. 이야기가 흘러 나와도, 좋은 이야기라고 생각해 달라고 하자	fix	rewrites
+cx:datte-noun:20	剣丞だってやることあって城まで来たんだろ？いいのかよ、こんなところで立ち止まってても	검승도 할 것 있어 성까지 온 거지? 괜찮냐, 이런 곳에서 멈춰 서도	fix	rewrites
+cx:datte-noun:20	中国とアメリカだってそうです	중국과 미국도 그렇습니다	fix	rewrites
+cx:datte-noun:20	FDAの許可が下りれば フランスチーズだって作れるでしょう	FDA 허가가 내려가면 프랑스 치즈도 만들 수 있겠지요	fix	rewrites
+cx:datte-noun:20	その知識が引き出せるなら、知恵だって見いだせるかもしれません。	그 지식을 끌어 낼 수 있다면, 지혜도 발견할 수 있을지도 모릅니다.	fix	rewrites
+cx:datte-noun:20	こういうのは結婚生活に付き物よ。 修復だってできる。	이런 것은 결혼 생활에 으레 따르는 거야. 수복도 할 수 있다.	fix	rewrites
+cx:datte-noun:20	言うと思った絶対言うと思った。高嶺君だって譲らなかったくせに	말한다고 생각한 절대 말한다고 생각했다. 타카네 군도 양보하지 않았으면서	fix	rewrites
+cx:datte-noun:20	私はいやよ クラスの準備だってあるのに	나는 싫어 반 준비도 있는데	fix	rewrites
+cx:datte-noun:10	あの2人n同期入社だって知ってた?	그 2명 n동기 입사라고 알았어?	fix	rewrites
+cx:datte-noun:20	「わけもなく攻撃されちゃうし……負の感情だって{rb}湧{/rb}{rt}わ{/rt}くよね」	「까닭없이 공격받아버리고……부정적인 감정도 {rb}솟아나지{/rb}{rt}끓지{/rt}」	fix	rewrites
+cx:datte-noun:20	人間だって変わるんじゃないかしら じゃ お前 種馬なの?	인간도 바뀌지 않을까는 너 종마야?	fix	rewrites
+cx:datte-noun:20	『じゃなくても、婚約者はあの腹黒王子だし、主人公と結ばれるために、邪魔になった私を貶める可能性だってあるわよ』	『가 아니어도, 약혼자는 그 복흑왕자이고, 주인공과 맺어지기 위해, 방해가 된 나를 깎아내릴 가능성도 있어』	fix	rewrites
+cx:datte-noun:20	石川五右衛門だって知るめえからな」	이시카와 고에몬도 아는 네로부터」	fix	rewrites
+cx:datte-noun:10	そうかもしれないですけど私は　前向きな曲だって思いたいんです！	그럴지도 모르지만 나는 적극적인 곡이라고 생각하고 싶습니다!	fix	rewrites
+cx:datte-noun:10	みんなのこと ただの不良だって決めつけて。	모두의 일 그냥 불량이라고 단정해.	fix	rewrites
+cx:datte-noun:10	(銀平)あっ 痛い｡んなことしたらすぐに 俺達の仕業だってばれちまうわ｡	(긴페이) 앗 아프다. 그런 일 하자마자 우리의 소행이라고 탄로나.	fix	rewrites
+cx:datte-noun:10	こんな所だって知ってたら...	이런 곳이라고 알고 있으면...	fix	rewrites
+cx:datte-noun:10	そっ、そうかしら？イッた後の顔だってバレないかしら？	그, 그럴까? 간 후의 얼굴이라고 들키지 않을까?	fix	rewrites
+cx:datte-noun:10	ハーレムだって考えてるのね? ハーレムだわね ええそういうこと	하렘이라고 생각하고 있구나? 하렘이네 네그런 것	fix	rewrites
+cx:datte-noun:10	20ポイントだって知ってた?」 なんてあり得ないでしょう	20포인트라고 알았다?」 같은 건 있을 수 없을 거예요	fix	rewrites
+cx:datte-noun:5	ヘンな男だって思うだろ	이상한 남자라고 생각하지	fix	rewrites
+cx:datte-noun:10	だから、ちょっぴりいい気味だって思っちゃった	그러니까, 조금 좋은 기색이라고 생각해버렸다	fix	rewrites
+cx:datte-noun:10	(純加)もめ事だって思ってるんだ？ 寧々さんは｡	(스미카) 다툼이라고 생각해? 네네 씨는.	fix	rewrites
+cx:datte-noun:10	妄想だって思ってるんだろ? でも そうじゃないんだ。	망상이라고 생각하는 거지? 하지만 그렇지 않다.	fix	rewrites
+cx:datte-noun:10	特別な関係だって思いたいんじゃないの	특별한 관계라고 생각하고 싶은 거 아니야	fix	rewrites
+cx:datte-noun:5	≪きっとみんな私のことを使えないヤツだって思ってる≫	≪분명 모두 나를 쓸 수 없는 녀석이라고 생각한다≫	fix	rewrites
+cx:datte-noun:10	今回、やけにマジだって思ってたけど	이번, 유난히 진짜라고 생각했지만	fix	rewrites
+cx:datte-noun:10	《言えない...。 生理だってバレたくない》	《말할 수 없다.... 생리라고 들키고 싶지 않다》	fix	rewrites
+cx:datte-noun:10	天罰だって思わないの?	천벌이라고 생각하지 않는 거야?	fix	rewrites
+cx:datte-noun:5	それで あの純君のこと 息子だって思い込んでた。	그래서 그 순 군아들이라고 믿어버렸다.	fix	rewrites
+cx:datte-noun:5	あんたのこと犯人だって思ったりして	너범인이라고 생각하거나 해	fix	rewrites
+cx:datte-noun:10	試練だって思う?	시련이라고 생각해?	fix	rewrites
+cx:datte-noun:10	太陽は惑星じゃなくて星だって知ってた?	태양은 행성이 아니라 별이라고 알았어?	fix	rewrites
+cx:datte-noun:5	ムチャクチャな女だ 信じられない女だ サメみたいな女だって思ってた	엉망진창인 여자다 믿을 수 없는 여자다 상어 같은 여자라고 생각했다	fix	rewrites
+cx:datte-noun:5	現実じゃない 幽霊だって知ってる	현실이 아닌 유령이라고 알고 있다	fix	rewrites
+cx:datte-noun:5	私への関心ゼロで 退屈な女だって思ってる	나에 대한 관심 제로로 지루한 여자라고 생각한다	fix	rewrites
+cx:datte-noun:5	お兄ちゃんが本当に遠い親戚だって思ったら、なんだか嬉しくなっちゃって	오빠가 정말 먼 친척이라고 생각하면, 왠지 기뻐져서	fix	rewrites
+cx:datte-noun:5	軽い女だって思って欲しくないの だって違うから	가벼운 여자라고 생각하기를 원하지 않은 것이라도 다르니까	fix	rewrites
+cx:datte-noun:5	あんたが必要な人間だって信じているよ	네가 필요한 인간이라고 믿고 있어	fix	rewrites
+cx:datte-noun:20	いや 何度だって始めればいい	아니 몇 번이라도 시작하면 된다	keep	rewrites
+cx:datte-noun:20	何度だって誓ってやらあ。	몇 번이라도 맹세해든지.	keep	rewrites
+cx:datte-noun:20	どんな夢だって叶えられる	어떤 꿈이라도 이룰 수 있다	keep	rewrites
+cx:datte-noun:20	誰かが息子に危害を 加えようとするなら それを食い止める為に どんな事だってします	누군가가 아들에게 위해를 가하려고 한다면 그것을 막기 위해 어떤 일이라도 합니다	keep	rewrites
+cx:datte-noun:20	鉄の鎧を着ていればいくら鉄砲だってこわいことはない。	철의 갑옷을 입고 있으면 아무리 총이라도 무서운 것은 없다.	keep	rewrites
+cx:datte-noun:20	そのくらい 子供だって知ってるだろう。	그 정도 아이라도 알고 있을 것이다.	keep	rewrites
+cx:datte-noun:20	……ま、何だっていいじゃねぇか。	……뭐, 뭐든지 좋잖아.	keep	rewrites
+cx:datte-noun:20	何だっていいわ	뭐든지 좋아	keep	rewrites
+cx:datte-noun:20	私は気が短いの 誰だって知ってるわ	나는 성미가 급한 것 누구라도 알고 있어	keep	rewrites
+cx:datte-noun:20	着飾れば誰だってあんなものよ	몸치장하면 누구라도 저런 것이야	keep	rewrites
+cx:datte-noun:20	誰だって大きな変化は受け入れ難い 正常な反応よ	누구라도 큰 변화는 받아들이기 어려운 정상적인 반응이야	keep	rewrites
+cx:datte-noun:20	ナンドダッテ…ヨミガエッテヤルサッ！	몇 번이라도…소생해 준다!	keep	rewrites
+cx:datte-noun:20	彼みたいな頑固者から 20ドルだって取れたら ラッキーだよ	그 같은 완고자에게서 20달러라도 잡히면 럭키야	keep	rewrites
+cx:datte-noun:10	大野先生だって言ってたじゃない	오노 선생님이라고 말했잖아	keep	rewrites
+cx:datte-noun:10	ウンソンはパパだって言ってました	운손은 아빠라고 말했습니다	keep	rewrites
+cx:datte-noun:10	オレだって知ってるぞ	나도 알고 있어	keep	rewrites
+cx:datte-noun:10	そよ風だって感じるだろ	미풍도 느끼지	keep	rewrites
+cx:datte-noun:10	ああいうのが居るなら、きっと作戦だって考えられると思うの	저런의가 있다면, 분명 작전도 생각된다고 생각해	keep	rewrites
+cx:datte-noun:5	俺にはな どうしてもお前が そんなに悪い人間だって思えないんだよ	나에게는아무래도 네가 그렇게 나쁜 인간이라고 생각되지 않아	fix	rewrites
+cx:datte-noun:5	(春斗) 何か変えなきゃダメだって潤平だって思ってんだろ？	(춘두) 뭔가 바꾸지 않으면 안된다고 준페이도 생각하는 거지?	keep	rewrites
+cx:datte-noun:20	戦争だってなくなるの	전쟁도 없어져	fix	rewrites
+cx:datte-noun:20	声色だって違ってる	음색도 다르다	fix	rewrites
+cx:datte-noun:10	もう限界だって思うことがあるだろう	이제 한계라고 생각하는 일이 있을 것이다	fix	rewrites
+cx:datte-noun:10	友達だって思ってた	친구라고 생각했다	fix	rewrites
+cx:datte-noun:5	兄さんだって知ってるよね？	형님도 알고 있지?	keep	rewrites
+cx:datte-noun:10	もう友達だって思ってるんだよね	이제 친구라고 생각해지	fix	rewrites
+cx:datte-noun:10	友達だって思ってた！ 黙れ 女！	친구라고 생각했다! 입을 다물어라 여자!	fix	rewrites
+cx:datte-noun:5	パパのこと 友達だって 思ってる?	아빠친구라고 생각해?	fix	rewrites
+cx:datte-noun:5	先生だって知ってるでしょ!?	선생님도 알고 있지!?	keep	rewrites
