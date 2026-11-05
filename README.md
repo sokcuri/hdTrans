@@ -138,6 +138,14 @@ translator.close();
 
 ## 라이선스
 
-[MPL-2.0](LICENSE). 외부 라이브러리의 라이선스는 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)에 있습니다.
+hdTrans 프로그램은 개인과 회사 모두 무료로 사용할 수 있습니다. 번역 결과물에도 제한이 없습니다.
 
-Copyright (c) Sokcuri (소쿠릿, https://github.com/sokcuri)
+소스 코드와 배포 파일은 [AGPL-3.0-only](LICENSE)입니다. hdTrans를 다른 프로그램에 묶어 배포하거나, 봇이나 웹처럼 네트워크 서비스로 운영하거나, 수정하는 경우에는 AGPL에 따라 소스를 공개해야 합니다. 프로그램의 라이선스는 AGPLv3, GPLv3, LGPLv3, MPL 2.0, MIT 등 GPLv3와 호환되는 것이면 됩니다.
+
+소스 공개가 어렵거나 다른 조건이 필요한 경우에는 상용 라이선스 등 협의에 따른 조건으로 허락할 수 있습니다. sokcuri@gmail.com 으로 연락해 주세요.
+
+## hdTrans를 사용한 프로젝트
+
+목록에 추가하고 싶으면 이슈로 알려 주세요.
+
+- [hdTrans 일본어 번역](https://chromewebstore.google.com/detail/hdtrans-%EC%9D%BC%EB%B3%B8%EC%96%B4-%EB%B2%88%EC%97%AD/bcdkkloifhaoahiekaahepkmkhfaafcd) (Chrome 확장, [laskaflask](https://github.com/laskaflask/hdtrans-browser-extension)): 일본어 웹 페이지를 브라우저 안에서 한국어로 번역합니다.
