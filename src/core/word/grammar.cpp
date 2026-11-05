@@ -4316,6 +4316,12 @@ bool StativeNegative(std::string_view lemma) {
     return stem.ends_with("있") || stem.ends_with("그렇") || stem.ends_with("얼마 되");
 }
 
+// Whether the stem's negative lemma is that of a Korean verb glossing a Japanese adjective (verbNegative).
+bool VerbGlossNegative(std::string_view lemma) {
+    const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지 않다").size());
+    return dict::EndsWithMember(HDTRANS_CLASS("ko-verb.negated-stem-end"), stem) > 0;
+}
+
 bool AdjectiveNegative(std::string_view lemma) {
     const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지 않다").size());
     return dict::EndsWithMember(HDTRANS_CLASS("ko-adjective.stem-end"), stem) > 0;
@@ -4359,7 +4365,9 @@ void VerbNegative(Flusher& f) {
         if (stem.empty() || stem.ends_with("じゃ") || stem.ends_with("では")) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
-        if (stem.ends_with("く") || AdjectiveNegative(lemma)) {
+        // The く of a Japanese adjective (美しくない) takes the adjective attributive 않은 unless the Korean stem is a verb
+        // that glosses it (似つかわしくない 어울리지 않는, spec GRM-3963).
+        if ((stem.ends_with("く") && !VerbGlossNegative(lemma)) || AdjectiveNegative(lemma)) {
             if (e->dst == "4") it->AssignDirectSlot(it->DirectIndex(), "1은");
         } else if (e->dst == "1다") {
             it->AssignDirectSlot(it->DirectIndex(), "1는다");

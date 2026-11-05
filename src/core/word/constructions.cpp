@@ -445,6 +445,7 @@ constexpr NamedFeature kFeatures[] = {
     // threat or command (speech.threat-cue: 貴様, せよ, 斬る).
     {"humble-line", [](Flusher& f, const Item*) { return f.w.settings.humbleLine; }},
     {"threat-line", [](Flusher& f, const Item*) { return f.w.settings.threatLine; }},
+    {"formal-line", [](Flusher& f, const Item*) { return f.w.settings.formalLine; }},
     // The line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue).
     {"old-self-line", [](Flusher& f, const Item*) { return f.w.settings.oldSelfLine; }},
     // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.

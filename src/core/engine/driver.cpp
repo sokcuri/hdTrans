@@ -844,6 +844,7 @@ struct LineSpeech {
     bool asked = false;
     bool poiTic = false;
     bool humble = false;
+    bool formal = false;
     bool threat = false;
     bool oldSelf = false;
     output::QuoteState quotes;
@@ -1124,6 +1125,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     }
     settings.poiTic = speech.poiTic;
     settings.humbleLine = speech.humble;
+    settings.formalLine = speech.formal;
     settings.threatLine = speech.threat;
     settings.oldSelfLine = speech.oldSelf;
     settings.narrated = speech.narrated;
@@ -1264,6 +1266,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.asked = true;
         speech.poiTic = word::PoiTicLine(facts.text);
         speech.humble = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.humble-cue")),
+                                        dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
+        speech.formal = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.formal-cue")),
                                         dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
         speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
         speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
