@@ -1,0 +1,19 @@
+# 규칙: LEX-4840
+rule	input	expected	kind	layer
+names:row-reading	翌朝早く、ノラは目を覚ました。	이튿날 아침 빨리, 노라는 눈을 떴다.	fix	names
+names:row-reading	よし アルス！	좋아 아르스!	fix	names
+names:row-reading	アルス・・・ほう。	아르스···호오.	fix	names
+names:row-reading	どうか アルスさまのために 賢明な判断をお願いします	제발 아르스님을 위해서 현명한 판단을 부탁드립니다	fix	names
+names:row-reading	太郎のところへと思ってアルスにサンドの『白象物語』を注文しておいたのが来た。	타로의 곳으로 생각해 아르스에게 샌드의 『흰 코끼리 이야기』를 주문해 두었던 것이 왔다.	fix	names
+names:row-reading	女王メランは、ニコッと微笑むと家臣から手渡された	여왕 메란은, 방긋 미소 지으니 가신에게서 건네졌다	fix	names
+normalize:kata-stem-honorific	ホームズさん 逮捕するのは僕じゃない	홈스 씨 체포하는 것은 내가 아니다	fix	normalize
+normalize:kata-stem-honorific	ホームズさん、私の今日まではこんな風な生涯だったのです。	홈스 씨, 제 오늘까지는 이런 식생애였던 것입니다.	fix	normalize
+normalize:kata-stem-honorific	「わぁ、見事なウザさですね」	「와아, 훌륭한 짜증스러움이군요」	keep	normalize
+normalize:kata-stem-honorific	「うっ……それはマズい……」	「윽……그건 큰일이야……」	keep	normalize
+normalize:kata-stem-honorific	提督……お前ちょっと、ウザい！	제독……너 조금, 짜증스러워!	keep	normalize
+names:katakana-animal-sayer	アリが長い呪文を唱えると、其処彼処にいた盗賊達から悲鳴が飛び交う	아리가 긴 주문을 외우면, 거기 저기에 있던 도적들에게서 비명이 난무한다	fix	names
+names:katakana-animal-sayer	アリが言った。	아리가 말했다.	fix	names
+names:katakana-animal-sayer	≪ごめんなさい、ネズミはすごい苦手で……≫	≪미안해요, 쥐는 엄청 서툴러……≫	keep	names
+names:katakana-animal-sayer	「ネズミは対処できたのか？」	「쥐는 대처할 수 있던 거야?」	keep	names
+names:katakana-animal-sayer	ウサギが減ってる	토끼가 줄어들어 있다	keep	names
+names:katakana-animal-sayer	アリが巣に戻る	개미가 둥지로 돌아간다	keep	names
