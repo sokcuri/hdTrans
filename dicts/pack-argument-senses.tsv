@@ -108,3 +108,18 @@ argument-senses:128	落とす	v5	sense	obj=敵機|飛行機|戦闘機|艦載機|
 argument-senses:129	入れる	v1:규칙	sense	obj=一発|蹴り|拳|パンチ|膝蹴り|肘打ち|ボディブロー	먹이다	LEX-4912		一発を入れる 한 방 먹이다			
 argument-senses:130	入れる	v1	sense	obj=一票|票	던지다	LEX-4912		一票を入れる 한 표를 던지다			
 argument-senses:131	入れる	v1	sense	obj=予定|仕事|お仕事|バイト|シフト|アポ|アポイント	잡다	LEX-4912		バイトを入れる 아르바이트를 잡다			
+argument-senses:101	出る	v1	sense	obj=国|故郷|村|町|都|王都|街|島|里|郷|領地|王国|この国	떠나다	LEX-4911		この国を出ることにした 이 나라를 떠나기로 했다			
+argument-senses:102	出る	v1	sense	subj=被害|熱|咳|くしゃみ|元気|やる気|勇気|損害|赤字|利益	나다	LEX-4911		被害が出る 피해가 나다			
+argument-senses:103	出る	v1	sense	subj=支障|差|違い|ズレ|ずれ|乱れ|余裕|隙|迷い	생기다	LEX-4911		支障が出る 지장이 생기다			
+argument-senses:104	出る	v1	sense	subj=影響|効果|変化|兆候|症状|成果|傾向	나타나다	LEX-4911		影響が出る 영향이 나타나다			
+argument-senses:105	出る	v1	sense	subj=ボロ|ぼろ|本性|本音|地金|素	드러나다	LEX-4911		ボロが出る 본색이 드러나다			
+argument-senses:106	持つ	v5	sense	dat=手|両手|片手|右手|左手|手の平|手のひら	들다	LEX-4911		封筒を手に持ち 봉투를 손에 들고			
+argument-senses:107	持つ	v5	sense	after=しっかり	잡다	LEX-4911		しっかり持ってろよ 꽉 잡고 있어			
+argument-senses:108	持つ	v5	sense	after=しっかり obj=気|気持ち|心|意識|自信|希望|気力|覚悟	-	LEX-4911		気をしっかり持って(그대로)			
+argument-senses:109	持つ	v5	sense	form=neg after=長くは|長く	버티다	LEX-4911		長くは持たない 오래는 버티지 못한다			
+argument-senses:110	持つ	v5	sense	form=neg subj=体|身体|身|心|精神|体力|気力|命|神経|胃|喉	버티다	LEX-4911		身が持たない 몸이 버티지 못한다			
+argument-senses:111	できる|出来る	v1	sense	subj=子|子供|子ども|赤ちゃん|赤ん坊|友達|友人|仲間|家族|弟|妹|孫|店|カフェ|建物|ビル|道|穴|傷|痣|あざ|ニキビ|たんこぶ|こぶ|隙|余裕|時間|暇|用事|予定|借金|溝|輪|列|行列|人だかり|クレーター|水たまり|水溜り|しわ|シワ|クマ|隈	생기다	LEX-4911		彼女ができた 여자친구가 생겼다			
+argument-senses:112	できる|出来る	v1	sense	subj=子|子供|子ども|赤ちゃん|赤ん坊|友達|友人|仲間|家族|弟|妹|孫|店|カフェ|建物|ビル|道|穴|傷|痣|あざ|ニキビ|たんこぶ|こぶ|隙|余裕|時間|暇|用事|予定|借金|溝|輪|列|行列|人だかり|クレーター|水たまり|水溜り|しわ|シワ|クマ|隈 head=*	-	LEX-4911		やればできる子 하면 할 수 있는 아이(그대로)			
+argument-senses:113	できる|出来る	v1	sense	subj=彼女|彼氏|恋人 form=ta	생기다	LEX-4911		彼女ができた 여자친구가 생겼다			
+argument-senses:114	できる|出来る	v1	sense	subj=料理|ご飯|飯|夕飯|夕食|朝食|朝ご飯|昼食|晩ご飯|カレー|ケーキ|宿題|作品|小説|原稿|絵|模型|お茶|コーヒー|弁当|お弁当 form=ta	다 되다	LEX-4911		料理ができた 요리가 다 됐다			
+argument-senses:115	できる|出来る	v1	sense	after=よく|良く head=-	되다	LEX-4911		この模型、よくできてる 이 모형, 잘 되어 있다			
