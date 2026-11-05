@@ -1,0 +1,13 @@
+# 규칙: LEX-4830
+rule	input	expected	kind	layer
+names:speaking-topic	しかし白木は思う。	하지만 시라키는 생각한다.	fix	names
+names:speaking-topic	たぶん、千里は本気でそう思ってるんだろう。	아마, 치사토는 진심으로 그렇게 생각하는 걸까.	fix	names
+names:speaking-topic	「高峰も言っていた通り、外を歩くと目に付く」	「타카미네도 말해 있었던 대로, 밖을 걸으면 눈에 띄어」	fix	names
+names:speaking-topic	「宇川もこう言っている。	「우카와도 이렇게 말한다.	fix	names
+names:speaking-topic	羽入ははっきり言った。	하뉴는 분명히 말했다.	fix	names
+names:speaking-topic	昼間も言われたことだけど、改めてメールをくれるとちょっと嬉しい。	lacks:히루마	keep	names
+names:speaking-topic	「昼間も言ったけど、俺、青海さんのこと、そういう目で見てないから」	lacks:히루마	keep	names
+names:speaking-topic	まるで、その言葉は俺に対して言われたかのようだった。	lacks:코토노하	keep	names
+names:speaking-topic	本名は知らない。	lacks:혼나	keep	names
+names:speaking-topic	「ボケがぁ！！　利子は付いとるんか聞いとるんね！！」	lacks:토시코	keep	names
+names:speaking-topic	未来は言った。	lacks:미라이	keep	names

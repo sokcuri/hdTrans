@@ -634,8 +634,8 @@ std::vector<std::string> Registry::Names() {
 std::vector<std::string> Registry::FullNameParts() {
     std::set<std::string> out;
     for (const auto& [t, c] : runs_) {
-        // Written twice or more: a run written once may be two words (砂糖菓子).
-        if (c < 2 || !AllRunes(t, IsKanji) || RuneCount(t) < 4) continue;
+        (void)c;
+        if (!AllRunes(t, IsKanji) || RuneCount(t) < 3 || RuneCount(t) > 6) continue;
         const DictFlags ft = Flags(t);
         // A common word or a place (竜宮城) is no full name.
         if (ft.common || ft.place || ft.city) continue;
@@ -645,14 +645,17 @@ std::vector<std::string> Registry::FullNameParts() {
         }
         for (std::size_t at = RuneAt(t, 0).size; at < t.size(); at += RuneAt(t, at).size) {
             const std::string x = t.substr(0, at), y = t.substr(at);
-            if (RuneCount(x) < 2 || RuneCount(y) < 2) continue;
+            if (RuneCount(x) > 3 || RuneCount(y) > 3) continue;
             const DictFlags fx = Flags(x), fy = Flags(y);
             if (!fx.layerSurname || !fy.layerGiven || fy.role) continue;
             // The name layer writes the whole run as a person (古手梨花 후루데 리카), or the given name is no
             // common word (竜宮礼奈: 礼奈); not two common words (砂糖菓子: 菓子).
             if (!whole && fy.common) continue;
-            out.insert(x);
-            out.insert(y);
+            // A part of one kanji needs the whole run written as a person (見目麗しい: 見目 and 麗 are no name).
+            if (!whole && (RuneCount(x) == 1 || RuneCount(y) == 1)) continue;
+            // A part of one kanji names the person alone only when it is no common word (林 숲, 誠 진심).
+            if (RuneCount(x) >= 2 || !fx.common) out.insert(x);
+            if (RuneCount(y) >= 2 || !fy.common) out.insert(y);
         }
     }
     return {out.begin(), out.end()};

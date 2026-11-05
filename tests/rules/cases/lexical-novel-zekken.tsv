@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:130421	ゼッケン３番の岩下　徹	번호표 3번의 이와시타 토오루	fix	defaults
 dict:jisjk:130421	優勝　ゼッケン３番　岩下　徹	우승 번호표 3번 이와시타 토오루	fix	defaults
-dict:jisjk:130421	トップは　ゼッケン２０番の立木良介	톱은 번호표 20번의 입목 료스케	fix	defaults
+dict:jisjk:130421	トップは　ゼッケン２０番の立木良介	톱은 번호표 20번의 타치키 료스케	fix	defaults
 dict:jisjk:130421	トップ争いはゼッケン３番の岩下　徹…	톱 분쟁은 번호표 3번의 이와시타 토오루…	fix	defaults
 dict:jisjk:130421	更に　その後ろにはゼッケン５番の村上か	더욱 그 뒤에는 번호표 5번의 무라카미인가	fix	defaults
 dict:jisjk:130421	《続いてはゼッケン3番……》	《이어서 번호표 3번……》	fix	defaults

@@ -47833,7 +47833,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 竜子・スカイウォーカー	류코 스카이워커	N130	QPNVHn		GN						りゅうこ すかいうぉーかー	names.674978
 竜子湖区	룽쯔후구	N130	QCTVPl		GN							names.674979
 竜安区	룽안구	N130	QCTVPl		GN							names.674980
-竜宮	류구	N110			GN						りゅうぐう	names.674981
+竜宮	류구	N130	QPNVHn	Wa	GN						りゅうぐう	names.674981
 竜宮 トレモロ	류구 트레모로	N130	QPNVHn		GN						りゅうぐう とれもろ	names.674982
 竜宮 トレモロ	류구 트레몰로	N130	QPNVHn		GN						りゅうぐう トレモロ	names.674983
 竜宮 昂螺司	류구 코러스 & 퍼즈	N130	QPNVHn		GN						りゅうぐう こうらす	names.674984

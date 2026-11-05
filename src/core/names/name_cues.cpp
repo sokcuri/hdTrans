@@ -446,6 +446,10 @@ constexpr std::string_view kStemEnds = "きしちひみりぎびいけせめれ�
 enum class Role {
     Subject,  // with が
     Topic,    // with は or も
+    // With は or も on a kanji word that has a person's name row and no common sense of time, a
+    // statement, a name, a thought or money (梨花は言った; not 昼間も言った, 言葉は聞いた, 本名は知らない):
+    // a verb of saying or thinking makes it a person too (name.person-speak; spec LEX-4830).
+    NamedTopic,
     Other,    // called with 、, or a sentence end after the clause
 };
 
@@ -464,13 +468,14 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
         const char32_t prev = i == 0 ? 0 : RuneBefore(s, i).cp;
         if (const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.body-part"), rest);
             n > 0 && !IsKanji(prev) && prev != U'の' && !(text::RuneCount(rest.substr(0, n)) == 1 && InRunes(prev, kStemEnds)) &&
-            (rest.substr(n).starts_with("を") || (role == Role::Topic && rest.substr(n).starts_with("が")))) {
+            (rest.substr(n).starts_with("を") || ((role == Role::Topic || role == Role::NamedTopic) && rest.substr(n).starts_with("が")))) {
             return true;
         }
         // A verb starts a word: not after a kanji (世話して is no 話し).
         const bool wordStart = !IsKanji(prev) || !IsKanji(FirstRune(rest).cp);
         if (wordStart && dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest) > 0) return true;
         object = object || (i > 0 && rest.starts_with("を"));
+        if (wordStart && role == Role::NamedTopic && dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), rest) > 0) return true;
         for (const bool say : {true, false}) {
             if (!wordStart) break;
             const std::size_t n = dict::StartsWithMember(say ? HDTRANS_CLASS("name.person-say") : HDTRANS_CLASS("name.person-transitive"), rest);
@@ -542,6 +547,23 @@ bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
     return false;
 }
 
+// Whether a verb of saying or thinking after Xは makes the kanji word X a person (Role::NamedTopic): X has a
+// person's name row and no common sense of time, a statement, a name, a thought or money, which is what
+// is said or when (昼間も言った, 言葉は聞いた, 本名は, 利子は).
+bool SpeakingTopic(const dict::Snapshot& snap, std::string_view key) {
+    if (!internal::AllRunes(key, IsKanji)) return false;
+    bool row = false;
+    for (const dict::Record& r : snap.NameRecords(key)) row = row || (r.codes != nullptr && r.codes->sem.HasPrefix("QPN"));
+    if (!row) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN")) continue;
+        for (const std::string_view code : {"UMe", "UTs", "UQf", "UTh", "VMo"}) {
+            if (c.codes->sem.HasCode(code)) return false;
+        }
+    }
+    return true;
+}
+
 // A predicate of a person (spec LEX-4820): the word with の before a part of the body or the face
 // (皐月の顔), as the subject of が, は or も, or set off by 、 before a clause, of what only a person
 // does (玉藻がはにかむ, 小太刀が黙然と腕を組んだ, 弥生、怒ってない), called with a request (ゴーヤー、教えて)
@@ -553,7 +575,9 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
-    if (after.starts_with("は") || after.starts_with("も")) return PersonActIn(after.substr(FirstRune(after).size), Role::Topic, true);
+    if (after.starts_with("は") || after.starts_with("も")) {
+        return PersonActIn(after.substr(FirstRune(after).size), SpeakingTopic(snap, key) ? Role::NamedTopic : Role::Topic, true);
+    }
     if (after.starts_with("、") && (UtteranceStart(before) || TrimEndSpaces(before).ends_with("、"))) {
         const std::string_view rest = after.substr(std::string_view("、").size());
         return RequestAt(rest) || PersonActIn(rest, Role::Other, true);
