@@ -631,6 +631,33 @@ std::vector<std::string> Registry::Names() {
     return out;
 }
 
+std::vector<std::string> Registry::FullNameParts() {
+    std::set<std::string> out;
+    for (const auto& [t, c] : runs_) {
+        // Written twice or more: a run written once may be two words (砂糖菓子).
+        if (c < 2 || !AllRunes(t, IsKanji) || RuneCount(t) < 4) continue;
+        const DictFlags ft = Flags(t);
+        // A common word or a place (竜宮城) is no full name.
+        if (ft.common || ft.place || ft.city) continue;
+        bool whole = false;
+        if (snap_ != nullptr) {
+            for (const dict::Record& rec : snap_->NameRecords(t)) whole = whole || (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN"));
+        }
+        for (std::size_t at = RuneAt(t, 0).size; at < t.size(); at += RuneAt(t, at).size) {
+            const std::string x = t.substr(0, at), y = t.substr(at);
+            if (RuneCount(x) < 2 || RuneCount(y) < 2) continue;
+            const DictFlags fx = Flags(x), fy = Flags(y);
+            if (!fx.layerSurname || !fy.layerGiven || fy.role) continue;
+            // The name layer writes the whole run as a person (古手梨花 후루데 리카), or the given name is no
+            // common word (竜宮礼奈: 礼奈); not two common words (砂糖菓子: 菓子).
+            if (!whole && fy.common) continue;
+            out.insert(x);
+            out.insert(y);
+        }
+    }
+    return {out.begin(), out.end()};
+}
+
 std::vector<std::string> Registry::HonorificOnlyNames() {
     std::vector<std::string> out;
     for (const auto& [t, n] : Accepted()) {

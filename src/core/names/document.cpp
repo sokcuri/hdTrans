@@ -281,6 +281,11 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     for (const auto& [key, count] : recurring) {
         if (count >= 2) doc->cued.insert(key);
     }
+    // The parts of a full name the document writes (古手梨花) name the person alone too (梨花は; spec
+    // LEX-4829).
+    for (const std::string& key : r.FullNameParts()) {
+        if (!snap.NameRecords(key).empty()) doc->cued.insert(key);
+    }
     doc->female = female && !maleKin;
     doc->key = doc->registryKey;
     if (doc->female) doc->key += std::string("\0female", 7);
