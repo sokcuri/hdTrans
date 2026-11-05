@@ -339,6 +339,7 @@
 //= stem.te-coming-humble	Ends of the て form stems of verbs of coming near (寄っ, 迫っ, やっ), whose humble まいる is the coming of くる (寄ってまいります 다가옵니다).
 //= stem.te-mairu-own	Ends of the て form stems before まいる that make a word of their own (行ってまいります 다녀오겠습니다, 推して参る 나간다).
 //= stem.te-favour-read	Ends of the て form stems whose てもらえない the dictionary reads (理解してもらえない 이해받지 못하다, 認めて 인정받다, わかって 알아주다, 聞いて of listening).
+//= stem.te-saying	Ends of the て form stems of 言う (言っ, いっ, 云っ), before which an old おくれでない chides as much as forbids.
 //= noun.o-stem	Nouns made of a verb stem after お (お願い, お返し, お待ち, お休み), which お + stem + です does not read as an honoured act (spec LEX-4765).
 //= stem.o-past	Verb stems whose お + stem + ですか asks what has happened (お呼びですか 부르셨습니까, お見えですか 오셨습니까).
 //= stem.o-arrived	Verb stems whose お + stem + です says someone has arrived (お見えです 오셨습니다).
@@ -537,6 +538,9 @@
 //= verb.arrival-te	Stems of the verbs of moving to a place whose て form before 来る says the arrival, so that its ている is the state of having come (帰ってきている 돌아와 있다, 入ってきている 들어와 있다).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
+//= noun.result-suru-past	Verbal nouns of a change done once whose しているs and してる is the state it left, read as the Korean past (もう結婚してる 벌써 결혼했어, 卒業している 졸업했다; spec LEX-4766).
+//= verb.promise-act	Stems of verbs of an act one promises to do for the listener (戻る, 返す, 払う, 待つ, 作る), whose から before a request is the promise the request leans on, -ㄹ 테니까 (すぐ戻るから待ってて 바로 돌아올 테니까; spec LEX-4766).
+//= noun.promise-act	Verbal nouns of an act one promises with する (連絡, 説明, 用意), as verb.promise-act.
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.involuntary	Verbs of what happens to one rather than what one does (出る, 死ぬ, 遅れる, 負ける, 忘れる): their ちゃう that ends a line is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아), not a resolve.
@@ -11907,3 +11911,119 @@ noun.o-stem	帰り
 stem.o-past	呼び
 stem.o-past	見え
 stem.o-arrived	見え
+noun.result-suru-past	結婚
+noun.result-suru-past	離婚
+noun.result-suru-past	卒業
+noun.result-suru-past	引退
+noun.result-suru-past	退職
+noun.result-suru-past	就職
+noun.result-suru-past	入学
+noun.result-suru-past	入社
+noun.result-suru-past	退社
+noun.result-suru-past	死亡
+noun.result-suru-past	婚約
+noun.result-suru-past	出発
+noun.result-suru-past	到着
+noun.result-suru-past	完成
+noun.result-suru-past	成功
+noun.result-suru-past	失敗
+noun.result-suru-past	決定
+noun.result-suru-past	完了
+noun.result-suru-past	終了
+noun.result-suru-past	合格
+noun.result-suru-past	退院
+noun.result-suru-past	帰国
+noun.result-suru-past	帰宅
+noun.result-suru-past	来日
+noun.result-suru-past	移住
+noun.result-suru-past	転校
+noun.result-suru-past	転職
+noun.result-suru-past	結成
+noun.result-suru-past	解散
+noun.result-suru-past	引っ越し
+noun.result-suru-past	優勝
+noun.result-suru-past	決着
+noun.result-suru-past	成立
+noun.result-suru-past	誕生
+noun.result-suru-past	他界
+noun.result-suru-past	消滅
+noun.result-suru-past	絶滅
+noun.result-suru-past	破産
+noun.result-suru-past	倒産
+verb.promise-act	戻
+verb.promise-act	返
+verb.promise-act	払
+verb.promise-act	待
+verb.promise-act	作
+verb.promise-act	謝
+verb.promise-act	直
+verb.promise-act	片付
+verb.promise-act	片づ
+verb.promise-act	調べ
+verb.promise-act	探
+verb.promise-act	迎え
+verb.promise-act	送
+verb.promise-act	届け
+verb.promise-act	買
+verb.promise-act	貸
+verb.promise-act	教え
+verb.promise-act	手伝
+verb.promise-act	守
+verb.promise-act	助け
+verb.promise-act	頑張
+verb.promise-act	渡
+verb.promise-act	運
+verb.promise-act	置
+verb.promise-act	入れ
+verb.promise-act	取って
+verb.promise-act	持って
+verb.promise-act	見て
+verb.promise-act	行って
+verb.promise-act	呼んで
+verb.promise-act	書
+verb.promise-act	掃除
+verb.promise-act	洗
+verb.promise-act	着替え
+verb.promise-act	帰
+verb.promise-act	行
+verb.promise-act	来
+verb.promise-act	やる
+verb.promise-act	叩
+verb.promise-act	殴
+verb.promise-act	撃
+verb.promise-act	殺
+verb.promise-act	倒
+verb.promise-act	止め
+verb.promise-act	連れ
+noun.promise-act	連絡
+noun.promise-act	説明
+noun.promise-act	用意
+noun.promise-act	準備
+noun.promise-act	支度
+noun.promise-act	電話
+noun.promise-act	確認
+noun.promise-act	案内
+noun.promise-act	紹介
+noun.promise-act	協力
+noun.promise-act	応援
+noun.promise-act	努力
+noun.promise-act	報告
+noun.promise-act	返事
+noun.promise-act	相談
+noun.promise-act	手配
+noun.promise-act	調整
+noun.promise-act	処理
+noun.promise-act	対応
+noun.promise-act	説得
+noun.promise-act	修理
+noun.promise-act	掃除
+noun.promise-act	料理
+noun.promise-act	謝罪
+noun.promise-act	弁償
+noun.promise-act	返済
+noun.promise-act	解決
+noun.promise-act	保証
+noun.promise-act	約束
+stem.te-saying	言っ
+stem.te-saying	いっ
+stem.te-saying	云っ

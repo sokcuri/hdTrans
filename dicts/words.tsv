@@ -28324,3 +28324,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お義母さん	어머님	N110	VHn		GN			LEX-4762: お義母さん 어머님 (새어머니 씨 아님)		1	おかあさん	w:34530
 やかまし	시끄$G7@	H7U0			GN			LEX-4762: やかましい 시끄럽다 (까다롭다는 口やかましい 쪽)		1	やかまし	w:34531
 一刻も早く	한시라도 빨리	E300			GN			LEX-4762: 一刻も早く 한시라도 빨리	replace	1	いっこくもはやく	w:34532
+取っておくれ	집어 다오	A9D0			GN			LEX-4766: それを取っておくれ 그걸 집어 다오		1		w:34534

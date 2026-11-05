@@ -1,7 +1,7 @@
 # 규칙: SPC-1
 rule	input	expected	kind	layer
 compose:speech-strict	「それは本当に違う」	「그건 정말 달라」	keep	compose
-compose:speech-strict	「明日、海に行く」	「내일, 바다에 가」	keep	compose
+compose:speech-strict	「明日、海に行く」	「내일, 바다에 갈 거야」	keep	compose
 compose:speech-strict	「今日は朝から雨だ」	「오늘은 아침부터 비야」	keep	compose
 compose:speech-strict	「窓を開けておいてよ」	「창을 열어 둬」	keep	compose
 compose:speech-strict	「何だ？」	「뭐야?」	keep	compose

@@ -2050,7 +2050,12 @@ void ResultState(Flusher& f) {
         const bool already = (verb == "来" || verb == "来る" || verb == "帰") && alreadyWord != nullptr;
         // What a thing is made of in で (愛情でできている) is no change that came to pass.
         const bool madeOf = (verb == "でき" || verb == "出来") && v->prev != nullptr && v->prev->group->surface.ends_with("で");
-        const bool past = already || (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
+        // The する of a verbal noun of a change done once (noun.result-suru-past) is the state it left, the
+        // past (もう結婚してる 벌써 결혼했어; spec LEX-4766), not the act going on.
+        const bool nounPast = (verb == "する" || verb == "し") && v->detail->record == 0 && v->prev != nullptr && v->prev->group != nullptr &&
+                              dict::InClass(HDTRANS_CLASS("noun.result-suru-past"), v->prev->group->surface);
+        const bool past = already || nounPast ||
+                          (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
         const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass(HDTRANS_CLASS("verb.result-passive"), stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
@@ -2065,6 +2070,8 @@ void ResultState(Flusher& f) {
         const std::string lemma = output::Lemma(e->dst, f.families);
         if (!lemma.starts_with("1고")) continue;
         const std::string_view rest = std::string_view(lemma).substr(std::string_view("1고").size());
+        // the honoured ている of a finished change (結婚してはる 결혼하고 계시다) keeps its 계시다
+        if (nounPast && !already && rest.find("계시") != std::string_view::npos) continue;
         // できる read as the potential (할 수 있다) after a noun of getting ready (noun.ready-dekiru) is the
         // readiness that is there, 다 되다 (準備できてる 준비 다 됐어; spec GRM-21); after another noun or verb it
         // stays the ability (集中できてる 집중할 수 있다).
