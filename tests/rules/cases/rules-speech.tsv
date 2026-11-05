@@ -24,7 +24,7 @@ compose:polite-agreement	「目を覚ますでしょ？」	「눈을 뜨겠지?�
 compose:polite-agreement	「もう済ませたでしょ？」	「벌써 끝마쳤잖아?」	keep	compose
 compose:polite-agreement	「ますます高いでしょ？」	「더욱 더 높지?」	keep	compose
 compose:polite-agreement	「休ませてよ。疲れたでしょ？」	「쉬게 해. 지쳤잖아?」	keep	compose
-compose:polite-agreement	「行くよ。そうなんです、高いでしょ？」	「가. 그렇습니다, 높지?」	keep	compose
+compose:polite-agreement	「行くよ。そうなんです、高いでしょ？」	「갈게. 그렇습니다, 높지?」	keep	compose
 compose:polite-agreement	「『はい、行きます』って言ったでしょ？」	「『네, 갑니다』라고 말했잖아?」	keep	compose
 ending:だったっす	「学生だったっすね」	「학생이었네요」	fix	builtin-ending
 ending:だったっす	「学生だったっすか？」	「학생이었나요?」	fix	builtin-ending
