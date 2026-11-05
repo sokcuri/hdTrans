@@ -187,6 +187,9 @@ private:
     // that a shorter reading lets the next word take; null when c stands.
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
+    // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends
+    // where that noun starts; null when c stands.
+    Record* OverCutWord(std::string_view full, int cursor, int token, const Item& c);
     // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
     // same where the text ends after it.
     bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);

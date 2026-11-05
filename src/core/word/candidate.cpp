@@ -2315,6 +2315,84 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// LEX-4981: a phrase reading that cuts a common noun. Where the longest reading at a point is a phrase X の Y that
+// starts with kanji or katakana and whose Y is a noun of its own (次の日 of 次の日曜日, バッグの中 of バッグの中身, 家の後
+// of 家の後ろ盾), and a noun that ends in kanji or katakana and holds no particle starts at its Y and runs past its end,
+// reaching at least as far as the reading and the word after it, the shorter reading that ends where that noun starts
+// (or whose next word does) wins. A noun whose part past the phrase is a suffix (日の出 + 前, 男の子 + 達) keeps it.
+Record* Worker::OverCutWord(std::string_view full, int cursor, int token, const Item& c) {
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    if (c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb || source.empty()) return nullptr;
+    auto letter = [](char32_t r) { return text::IsKanji(r) || (r >= U'ァ' && r <= U'ヺ'); };
+    const std::size_t no = source.find("の");
+    const std::size_t tail = no == std::string_view::npos ? 0 : no + std::string_view("の").size();
+    if (no == std::string_view::npos || no == 0 || tail >= source.size() || !letter(text::DecodeRune(source).cp)) return nullptr;
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // The longest reading at at, 0 for none; noun only counts common nouns (N, I; no N13x name) that end in kanji or
+    // katakana and hold no particle (中身, 日曜日, 後ろ盾; not 中で, 前の席, the name reading of 人魚姫).
+    auto reach = [&](int at, bool noun) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w == nullptr || w->length <= longest) continue;
+            if (noun) {
+                const std::string_view ws = From(full, at).substr(0, static_cast<std::size_t>(w->length));
+                const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+                if (e == nullptr || (e->cls != 'N' && e->cls != 'I') || e->code.starts_with("13") || w->detail == nullptr || w->detail->cls != kDetailInfo ||
+                    !letter(text::DecodeRune(LastChar(ws)).cp) || ws.find("の") != std::string_view::npos ||
+                    ws.find("に") != std::string_view::npos || ws.find("が") != std::string_view::npos) {
+                    continue;
+                }
+            }
+            longest = w->length;
+        }
+        return longest;
+    };
+    // The Y of a phrase is a noun of its own (中, 日, 後; not the 出 of 日の出, a verb first).
+    {
+        const int at = cursor + static_cast<int>(tail);
+        const int y = c.length - static_cast<int>(tail);
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        bool noun = false;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64 && !noun; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w == nullptr || w->length != y) continue;
+            const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+            if (e == nullptr) continue;
+            if (e->cls != 'N' && e->cls != 'I') return nullptr;
+            noun = true;
+        }
+        if (!noun) return nullptr;
+    }
+    const int end = cursor + c.length;
+    const int longCover = end + reach(end, false);
+    for (std::size_t off = tail; off < source.size(); off += text::DecodeRune(source.substr(off)).size) {
+        const int k = cursor + static_cast<int>(off);
+        const int w = reach(k, true);
+        // The reading keeps a noun whose part past it is one kanji of a suffix (日の出 + 前, 男の子 + 達, 海の神 + 様; not the
+        // 身 of 中身).
+        const std::string_view past = k + w > end ? From(full, end).substr(0, static_cast<std::size_t>(k + w - end)) : std::string_view();
+        const bool suffix = text::DecodeRune(past).size == past.size() && !past.empty() &&
+                            RuneIn(text::DecodeRune(past).cp, "前後中達様君殿氏家内外上下用的性者人等方側々");
+        if (k + w <= end || k + w < longCover || suffix) return nullptr;
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head == nullptr || head->length >= c.length || cursor + head->length > k) continue;
+            const int stop = cursor + head->length;
+            if (stop == k || stop + reach(stop, false) == k) return shorter;
+        }
+        return nullptr;
+    }
+    return nullptr;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -2348,6 +2426,10 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
         if (Record* shorter = OverFusedParticle(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverCutWord(full, cursor, token, *candidate)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
