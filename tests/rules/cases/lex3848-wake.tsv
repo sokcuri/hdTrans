@@ -12,13 +12,13 @@ dict:jisjk:325242	訳は 何も聞かないで。	이유는 아무것도 묻지 
 dict:jisjk:325242	あっ いや… これには 訳が…	앗 아니… 이것에는 이유가…	fix	local
 dict:jisjk:325242	アンタにやれって言ってる訳じゃ．．．	너에 하라는 거야. . .	keep	local
 dict:jisjk:325242	そういう訳ではない	그런 것은 아니다	keep	local
-dict:lex:3848:wake-nai-mu	そんな訳無い クラウリーは嘘をついてる	그렇게 리가 없는 크라울리는 거짓말하고 있다	fix	local
+dict:lex:3848:wake-nai-mu	そんな訳無い クラウリーは嘘をついてる	그럴 리가 없는 크라울리는 거짓말하고 있다	fix	local
 dict:lex:3848:wake-nai-mu	これでfinish！？な訳無いデショ！	이것으로 finish!? 리가 없지!	fix	local
 dict:lex:3848:wake-ga-nai	彼らは、考え無にキミを送り込んだ訳がない。	그들은, 생각무에 너를 보낸 리가 없다.	fix	local
 dict:lex:3848:wake-ga-nai	心の声 当然だ。 只者な訳ねぇ。	마음의 소리 당연하다. 보통 사람인 리가 없다.	fix	local
 dict:lex:3848:wake-ga-nai	どうだっていい訳がないんだけど…	어때라고 해 리가 없는데…	fix	local
 dict:lex:3848:wake-easy-na	院長室に忍び込むくらい 訳ないよ	원장실에 잠입할 정도로 쉬워	fix	local
-dict:lex:3848:wake-easy-na	そんな訳ない	그렇게 리가 없다	keep	local
+dict:lex:3848:wake-easy-na	そんな訳ない	그럴 리가 없다	keep	local
 dict:lex:3848:wake-easy-mu	それくらい訳無いさ	그 정도 쉬워	keep	local
 dict:lex:3848:わけにもいかな	信用する訳にもいかない	신용할 수도 없다	keep	local
 dict:lex:3848:wake-easy-mu	こんなの訳無いさ	이런 건 쉬워	fix	local
@@ -26,3 +26,7 @@ dict:lex:3848:wake-easy-mu	そんなの訳無いよ	그런 것 쉬워	fix	local
 dict:lex:3848:wake-easy-na	あんなの訳ないって	has:쉽다고	fix	local
 dict:lex:3848:wake-easy-na	空き家の訳ないだろ。	has:리가 없	keep	local
 dict:lex:3848:wake-nai-mu	そんな訳無い クラウリーは嘘をついてる	has:리가 없	keep	local
+lexical:sonna-wake	んもー、そんな訳ないでしょ。ちゃんとゆっくり噛んで食べなさい	has:그럴 리가 없지	fix	lookup
+lexical:sonna-wake	まさか そんな訳ないだろう	has:그럴 리가 없을	fix	lookup
+lexical:sonna-wake	こんな訳がない	이럴 리가 없다	fix	lookup
+lexical:sonna-wake	あんなわけないだろ	저럴 리 없지	fix	lookup

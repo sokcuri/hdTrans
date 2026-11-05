@@ -322,6 +322,8 @@ cx:mimetic-senses:10	LEX-3839	&&2 D+0== "썩둑" ||6 S+1== "L説明" S+1== "L言
 //= know-that	after QuoteTo 40	A clause quoted with と before 分かる, 気づく or 知る is what is found out, -다는 걸 and (이)라는 걸 (来ると分かった 온다는 걸 알았다, 犯人だと気づいた 범인이라는 걸 눈치챘다), not -다고.
 cx:know-that:10	GRM-3450	&&4 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" F-1== "conjugating" Y-1== "R다고" !1 S-1== "Rって"	replace-ending-tail@-1 "다고" "다는 걸"	来ると分かった 온다는 걸 알았다
 cx:know-that:20	GRM-3450	&&3 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" S-1== "だと" D-1== "(이)라고"	set-target@-1 "(이)라는 걸"	犯人だと気づいた 범인이라는 걸 눈치챘다
+//= stem-suffix	after Select 144	An adjective said with its appearance suffix that the dictionary splits (spec LEX-3843): 良さ or よさ, read as the noun 좋은 점, before a そう that ends the sentence or stands before a mark is 良さそう, 좋을 것 같다 (これで良さそう 이것으로 좋을 것 같다), not 좋은 점 그렇게.
+cx:stem-suffix:10	LEX-3843	&&3 ||2 S+0== "良さ" S+0== "よさ" S+1== "そう" ||2 F+1== "last" S+2== "00。、！？!?」』）)…"	set-target "좋을 것 같다    " set-target@+1 ""	これで良さそう 이것으로 좋을 것 같다
 //= level-of	after Select 151	並 right after a noun and before の is the level of that noun, 급 (エース並の活躍 에이스급 활약), not 보통.
 cx:level-of:10	LEX-4005	&&5 S+0== "並" D+0== "보통" P-1== "1**" S+1== "の" !1 ||8 S-1== "Rなら" S-1== "Rは" S-1== "Rも" S-1== "Rが" S-1== "Rを" S-1== "Rに" S-1== "Rで" S-1== "Rと"	set-target "급" set-target@+1 " "	エース並の活躍 에이스급 활약
 //= not-even	after Select 152	でもなさそう after a noun, 訳 or わけ is the copula denied, 도 아닌 것 같다 (待っている訳でもなさそう 기다리고 있는 것도 아닌 것 같아), not (이)라도 없을 것 같다.

@@ -1309,6 +1309,8 @@ constexpr Respelling kRespellings[] = {
     {"ましぇ", "ませ", U"", U""},                // お答えできましぇん ません
     {"どぉーせ", "どうせ", U"", U""},            // どぉーせラブラブ どうせ
     {"どぉせ", "どうせ", U"", U""},
+    {"良さげ", "良さそう", U"", U""},            // 心地良さげに 기분 좋은 듯이: the げ of appearance is そう (spec LEX-3843)
+    {"有りそう", "ありそう", U"", U""},          // 何か有りそうだし 뭔가 있을 것 같고, not 有り 괜찮다
 };
 
 bool SpokenSpelling(std::string_view s, size_t pos, Match& m) {
@@ -1325,6 +1327,29 @@ bool SpokenSpelling(std::string_view s, size_t pos, Match& m) {
         return true;
     }
     return false;
+}
+
+// 仕切れ after a verbal noun in kanji (処理仕切れない, 説明仕切れず): the しきれ of a task one cannot finish, 다 V하지
+// 못하다 (spec LEX-3843), not 仕切る, to partition, which takes its object with を (部屋を仕切れない).
+// なさげ after a noun in kanji or katakana (興味なさげに, 自信なさげ): なさそう, its appearance (spec LEX-3843); not after
+// kana (なにもなさげ), where it is not split the same way.
+bool KanjiNasage(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0 || !(IsKanjiClass(Before(s, pos)) || IsKatakanaRune(Before(s, pos)))) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "なさげ")) return false;
+    m.group[1] = "なさそう";
+    m.end = p;
+    return true;
+}
+
+bool KanjiShikire(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0 || !IsKanjiClass(Before(s, pos))) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "仕切れ")) return false;
+    if (p >= s.size() || !In(At(s, p).cp, U"なずませ")) return false;
+    m.group[1] = "しきれ";
+    m.end = p;
+    return true;
 }
 
 // なきゃ said with a copula for "must" (行かなきゃだし, しなきゃだよ): なきゃいけない, the obligation; not
@@ -1388,6 +1413,8 @@ bool RuContraction(std::string_view s, size_t pos, Match& m) {
 std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
     std::string text = ReplaceAll(in, SpokenSpelling, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, NakyaDa, [](const Match&) { return std::string("なきゃいけない"); });
+    text = ReplaceAll(text, KanjiShikire, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, KanjiNasage, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, TeKoNee, [](const Match& m) { return Cat({m.group[1], "こない"}); });
     // Set for this scan only and put back after it, also when the scan throws.
     struct Scope {
