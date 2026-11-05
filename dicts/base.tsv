@@ -4400,6 +4400,9 @@ ttt	ttt	K110			GN				jisjk:201744
 うか	합격&AV@	M428			GN				jisjk:342584		
 うか	6버릴까	S5A0			GN				jisjk:364354		
 うかも	6버릴지도	S5A0			GN				chimau:1		
+ったんだもん	6버렸는걸	S5A0			GN				chimau:4		
+うわよね	6버리지	S5A0			GN				chimau:5		
+うわね	6버리네	S5A0			GN				chimau:6		
 ったかも	6버렸을지도	S5A0			GN				chimau:2		
 うか	떠&E6@	M426			GN				jisjk:364400		
 うかうか	헛되이	E301			GN				jisjk:117		
@@ -33479,6 +33482,7 @@ ttt	ttt	K110			GN				jisjk:201744
 でしかな	에 지나지 $DH@	H7U0		TuPjAvJs	GN				jisjk:262230		
 でした	(이었)였습니다	P200			GN				jisjk:6187		
 でした	5습니다	U500			GN				jisjk:258453		
+でしたっけ	5던가요	U500			GN				kke:1		
 でした	했습니다	P200			GN	4967	||1 &&3 S-1== "ばかり" P-2== "4**" U-2== "ん"	でした가 ばかり 뒤에 오고 그 앞 동사의 어미가 ん이면 했습니다를 고른다. (미발동: rare-context)	jisjk:374857		
 でしたか	(이었)였습니까	P200			GN				jisjk:6188		
 でしたか	5습니까	U500			GN				jisjk:258443		
