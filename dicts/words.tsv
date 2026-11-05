@@ -28203,3 +28203,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 次第次第に	점점	E300			GN			LEX-4724: 次第次第に 점점				w:34101
 愚図愚図	꾸물꾸물	E300			GN			LEX-4724: 愚図愚図 꾸물꾸물				w:34102
 滅茶滅茶に	엉망으로	E300			GN			LEX-4724: 滅茶滅茶に 엉망으로				w:34103
+面倒見	돌&AY@	M447			GN			GRM-3921: 面倒見る 돌보다				w:34160

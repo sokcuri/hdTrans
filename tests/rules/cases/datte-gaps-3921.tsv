@@ -1,0 +1,96 @@
+# 규칙: GRM-3921
+rule	input	expected	kind	layer
+cx:datte-quote:45	このユニットで良かったって 思えるように	이 유닛이라서 다행이었다고 생각되도록	fix	rewrites
+cx:datte-quote:47	生まれて初めて 生きててよかったって思えた	태어나서 처음으로 살아서 좋았다고 생각되었다	fix	rewrites
+cx:datte-quote:47	いや、いいんだ。こうして告白を聞いてくれただけでも、君を好きになってよかったって思えたから	아니, 좋다. 이렇게 해 고백을 들어 준 것만으로도, 너를 좋아하게 되어서 좋았다고 생각되었으니까	fix	rewrites
+cx:datte-quote:47	「あたし？　あたしは逆。すっごく楽しいし、やってよかったって思ってる」	「나? 나는 반대. 엄청 즐겁고, 해서 좋았다고 생각해」	fix	rewrites
+cx:datte-quote:47	俺も あのとき真琴がいてくれてよかったって思ってるよ	나도 그 때 마코토가 있어 주어서 좋았다고 생각해	fix	rewrites
+cx:datte-quote:47	勇太　生きててよかったって思う日は	유타 살아서 좋았다고 생각하는 날은	fix	rewrites
+cx:datte-quote:20	その会社社長ずっと好きだった人と　キスしたって自分から奥さんに話したの。	그 회사 사장 계속 좋아했던 사람과 키스했다고 스스로 부인에게 이야기했어.	fix	rewrites
+cx:datte-quote:20	なんか この辺で 道場破りが出たって ＳＮＳで 今 話題になってるみたいです。	뭔가 이 근처에 무예 겨루기가 나왔다고 SNS에서 지금 화제가 되고 있는 것 같습니다.	fix	rewrites
+cx:datte-quote:45	後で母親が、ミドリさんとお話したら体が軽くなったってぼそっと言ってた	나중에 어머니가, 미도리 씨와 이야기 하면 몸이 가벼워졌다고 툭 말했다	keep	rewrites
+cx:datte-quote:45	まだ八月だっていうのにね	아직 팔월이라고 말하는데	keep	rewrites
+cx:datte-quote:45	ダメだダメだって、まるで自分に言い聞かせるみたいに	안된다 안된다고, 마치 자신에게 타이르는 것 같이	keep	rewrites
+cx:datte-quote:47	新しい醫者が来たっておまえ言ってたけど……誰もいないじゃないか。	새로운 의사가 왔다고 너 말했지만……아무도 없잖아.	keep	rewrites
+cx:datte-quote:47	（昌子）いじめられたって娘が言ってるんですよ。	(마사코) 괴롭힘을 당했다고 딸이 말하는 거예요.	keep	rewrites
+cx:datte-quote:47	私と友達になったって美雪から聞いた？	나와 친구가 되었다고 미유키에게서 들었어?	keep	rewrites
+cx:datte-quote:20	でも　どんなにつらくたってやることがいっぱいあるのよ。	하지만 아무리 괴로워도 하는 것이 많이 있는 거야.	keep	rewrites
+cx:datte-quote:20	今から そんな心配しなくったってやってみりゃ分かるよ	지금부터 그런 걱정하지 않아도 해 보면 알게	keep	rewrites
+cx:datte-quote:20	そんなこと… いくらやったっておりないっての	그런 일… 아무리 해도 내리지 않는다니까	keep	rewrites
+cx:datte-quote:20	俺 詳しいこと知りませんけど何かあったって 親子じゃないっすか	나 자세한 일 모르지만 무슨 일 있어도 부모와 자식이 아닌가요	keep	rewrites
+cx:datte-quote:20	お会いになったってしょうがないわよ	만나셔도 어쩔 수 없어	keep	rewrites
+cx:datte-listing:10	死神と滅却師が ギスギスして 最終決戦だ 訣別だって 堅苦しいんだよ！	사신과 퀸시가 삐걱삐걱해 최종 결전이니 결별이니 딱딱해!	fix	rewrites
+cx:datte-listing:10	近頃は、京都へ行ったって、祇園だ先斗町だって、遊び廻ったことはないんだ、高いからね。	최근은, 교토에 가도, 기온이니 폰토쵸니, 놀아 돌았던 적은 없다, 높으니까.	fix	rewrites
+cx:datte-listing:10	その間に　風呂だ散歩だって➡	그 사이에 목욕이니 산책이니 ➡	fix	rewrites
+cx:datte-listing:10	男だ女だってこだわってないで	남자니 여자니 구애되지 말고	fix	rewrites
+cx:datte-listing:10	浮気だ 誤解だってうるせえの	바람기니 오해니 시끄러워	fix	rewrites
+cx:datte-listing:10	エラルドさまにも いつも グズだノロマだって言われてて…	에라루도님에게도 언제나 구즈니 노로마니 하고 있어…	fix	rewrites
+cx:datte-listing:10	保護だ 確保だって 勝手に決めないで！	보호니 확보니 마음대로 결정하지 마!	fix	rewrites
+cx:datte-listing:10	合宿だ 練習試合だって 夏まで全部つぶれちゃいますよ	합숙이니 연습 경기니 여름까지 전부 부서져버립니다	fix	rewrites
+cx:datte-listing:10	就職だ結婚だって いろいろあるでしょ	취직이니 결혼이니 여러 가지 있겠지	fix	rewrites
+cx:datte-listing:10	悪魔だ 人間だって 分けて考えるから	악마니 인간이니 나누고 생각하니까	fix	rewrites
+cx:datte-listing:10	勉強会だ ミーティングだって 毎日どっか行ってる	스터디 그룹이니 회의니 매일 어딘가 가고 있다	fix	rewrites
+cx:datte-listing:10	宴会だ部会だって 吐くほど飲まされた挙句 ふざけて ﾌﾞﾗｼﾞｬｰの中に 手つっこまれたこともあったよ｡	연회니 부회니 토하는 만큼 마시게 된 끝에 장난쳐 브래지어 안에 손 찔러 넣어진 적도 있었어.	fix	rewrites
+cx:datte-listing:10	年末だ 正月だって お客は 浮かれるのが商売だけど—	연말이니 설날이니 손님은 들뜨는 것이 장사이지만—	fix	rewrites
+cx:datte-listing:10	ただでさえ 東だ西だって やりづらいですから｡	그렇지 않아도 동쪽이니 서쪽이니 하기 힘드니까요.	fix	rewrites
+cx:datte-listing:10	これは じっちゃんの形見だ女だって触っちゃダメだ	이것은 할아버지의 유품이다 여자라도 만지면 안된다	keep	rewrites
+cx:datte-listing:10	イヤだ 俺だって いろいろ忙しいんだ	싫다 나도 여러 가지 바쁘다	keep	rewrites
+cx:datte-listing:10	愚問だ 君だって作るだろ？	우문이다 너도 만들지?	keep	rewrites
+cx:datte-listing:10	いや 悪魔だ 一度だって 愛に全てをかけたことがあるのか	아니 악마다 한 번도 사랑에 모든 것을 걸었던 적이 있는 건가	keep	rewrites
+cx:datte-listing:10	えっ？ えっ！？ ケーキだ ケーキだって！	어? 어!? 케이크다 케이크래!	keep	rewrites
+cx:datte-listing:10	妖怪だ 妖怪だって？	요괴다 요괴라고?	keep	rewrites
+cx:datte-listing:10	死んだ人間だって生きてる時はそうだったのだ。	죽은 인간이라도 살아 있을 때는 그랬던 것이다.	keep	rewrites
+cx:datte-listing:10	まだ 未鑑定だってのに…。	아직 미감정이라는데….	keep	rewrites
+cx:datte-listing:10	大変だ ホテルだって｡ なんとかならない？	대단하다 호텔이래. 어떻게든 안돼?	keep	rewrites
+cx:datte-listing:30	あんた 家事も育児もしないし たまに休みでも ゴルフだ何だって 遊んでばっかりで｡	너 가사도 육아도 하지 않고 이따금 휴일이라도 골프니 뭐니 놀아뿐으로.	fix	rewrites
+cx:datte-listing:30	神だ何だって胡散臭いけど	신이니 뭐니 어쩐지 수상한데	fix	rewrites
+cx:datte-listing:30	それに 毎日 残業だ何だって 言って 夜中まで帰ってこない。	게다가 매일 잔업이니 뭐니 말해 한밤중까지 돌아오지 않는다.	fix	rewrites
+cx:datte-listing:30	少子化だ何だっていわれてるけど	소자녀화니 뭐니 말해지고 있는데	fix	rewrites
+cx:datte-listing:30	社長だ何だって いい気になってるらしいがな	사장이니 뭐니 혼자 좋아하게 되어 있는 모양이	fix	rewrites
+cx:datte-listing:30	セクハラだ何だって 大騒ぎしますからね	성희롱이니 뭐니 소란을 피우니까요	fix	rewrites
+cx:datte-listing:30	会長だ何だって いつまでも会社に居座る｡	회장이니 뭐니 언제까지나 회사에 눌러 앉는다.	fix	rewrites
+cx:datte-listing:30	マドンナだ何だって いつまでも チヤホヤされるわけじゃないんだよ	마돈나니 뭐니 언제까지나 오냐오냐되는 것이 아니야	fix	rewrites
+cx:datte-listing:30	バカだ何だって 言ってんのも→	바보니 뭐니 말해도→	fix	rewrites
+cx:datte-listing:30	イップス病だ 何だって？	입스병이다 뭐라고?	keep	rewrites
+cx:datte-listing:30	海賊船だ 何だって？	해적선이다 뭐라고?	keep	rewrites
+cx:datte-listing:30	何だ　何だって？	뭐냐 뭐라고?	keep	rewrites
+cx:datte-listing:30	近頃は何だってそうだ。	최근은 뭐든지 그렇다.	keep	rewrites
+cx:datte-listing-head:10	やれ地震だ 大水だ 崩落だって 大崩壊だっけ？	할 수 있는 지진이니 홍수니 폭락이니 대붕괴였나?	fix	rewrites
+cx:datte-listing-head:10	あら 私たちなんて 秋田だ 富山だ 東京だって 振り回されてきたのよ｡	어머나 우리는 아키타니 도야마니 도쿄니 좌지우지되어 왔어.	fix	rewrites
+cx:datte-listing-head:10	アフリカじゃ ジオンだ 連邦だ ティターンズだって	아프리카는 지온이니 연방이니 티탄즈니	fix	rewrites
+cx:datte-listing-head:10	同級生が みんな 洋服だ 合コンだって楽しんでるときに	동급생이 모두 옷이다 미팅이라도 즐기고 있을 때	keep	rewrites
+cx:datte-listing:10	>> はい。 秋田だ 長崎だって言って。	>> 네. 아키타니 나가사키니 말해.	fix	rewrites
+lookup:verb-before-te-form	提督さん！新年ね、今年もリベがしっかり面倒見てあげるから大丈夫よ、ねっ！	제독님! 신년이네, 올해도 리베가 제대로 돌봐 주니까 괜찮아, 네!	fix	lookup
+lookup:verb-before-te-form	今日は、私がバッチリ面倒見てあげる。まかせといて、よろしくね。	오늘은, 내가 딱 돌봐 준다. 맡기고 물어라고, 잘 부탁해.	fix	lookup
+lookup:verb-before-te-form	「できれば、わたしもついて行って毎日面倒見たいくらいだよ」	「가능하면, 나도 따라 가 매일 돌보고 싶을 정도야」	fix	lookup
+lookup:verb-before-te-form	いいのよ私が死ぬまで面倒見るんだから	좋아 내가 죽을 때까지 돌보니까	fix	lookup
+lookup:verb-before-te-form	おふくろのことは　俺たちが面倒見るよ。	어머니는 우리가 돌봐.	fix	lookup
+lookup:verb-before-te-form	俺が面倒見る。	내가 돌본다.	fix	lookup
+lookup:verb-before-te-form	卒業するまで面倒見てもらいたいしな	졸업할 때까지 돌봐 주었으면 하고	fix	lookup
+lookup:verb-before-te-form	面倒見てくださいよ人事部長の時は	돌봐 주세요 인사부장 때는	fix	lookup
+lookup:verb-before-te-form	面倒見てくださることになりましたし	돌봐 주시게 되었고	fix	lookup
+lookup:verb-before-te-form	私が面倒見てあげなきゃって勝手に思ってた｡	내가 돌봐 주어야 한다고 마음대로 생각했다.	fix	lookup
+lookup:verb-before-te-form	試しに　アメリカ人留学生１０人この家で面倒見るとしたら…。	시험삼아 미국인 유학생 10명 이 집에서 돌본다고 하면….	fix	lookup
+lookup:verb-before-te-form	家族のことはわたしに任せなさい。しっかり面倒見るから	가족은 내에게 맡겨. 제대로 돌보니까	fix	lookup
+lookup:verb-before-te-form	でも、そうさせたのはワタシですからね。最後まで面倒見てあげますよ	하지만, 그렇게 시킨 것은 저니까요. 끝까지 돌봐 줘요	fix	lookup
+lookup:verb-before-te-form	い、いえ…面倒見ないとって	아, 아뇨…돌보지 않으면은	fix	lookup
+lookup:verb-before-te-form	蕩すのも良いけど、ちゃんと面倒見なさいよ？	구슬리는 것도 좋지만, 제대로 돌봐?	fix	lookup
+lookup:verb-before-te-form	長谷岡さん 梨花さんの事 学生時代から面倒見てたって 言ってなかった？ ええ｡	하세 오카 씨 리카 씨의 일 학생시절부터 돌보고 있었다고 하지 않았어? 네.	fix	lookup
+lookup:verb-before-te-form	ええ、面倒見もいいから人気の先生になれるんじゃないかしら	네, 돌보기도 좋으니까 인기의 선생님이 될 수 있지 않을까	keep	lookup
+lookup:verb-before-te-form	午後2時。さっき夕雲が来た。差し入れだって、やつは相変わらず面倒見がいいなぁ	오후 2시. 조금 전 유구모가 왔다. 간식도, 녀석은 변함없이 잘 돌봐 주는	keep	lookup
+lookup:verb-before-te-form	ヒトサンマルマル。握り飯美味かったろ？谷風はああ見えて面倒見のいい良い奴なんだ。	1300. 주먹밥 맛있었잖아? 골짜기 바람은 아 보여 잘 돌봐주는 좋은 놈이야.	keep	lookup
+lookup:verb-before-te-form	あの人、クールでぶっきらぼうを装ってるが、実は気配りができて面倒見もいい。	그 사람, 쿨해 무뚝뚝함을 가장하고 있지만, 실은 배려를 할 수 있어 돌보기도 좋다.	keep	lookup
+cx:stem-noun-object:10	「それはお互い様よ。イスカの面倒見てくれてありがとう。助かったわ、色々とね」	「그건 피차일반이야. 이스카를 돌봐 줘서 고마워. 살았어, 여러모로」	fix	rewrites
+cx:stem-noun-object:10	夕飯作ってる時くらい子どもの面倒見ててよ…	저녁 만들고 있을 때 정도 아이를 돌보고 있어…	fix	rewrites
+cx:stem-noun-object:10	だから 捜してください 兄はずっと僕の面倒見てくれて...	그러니까 찾아 주세요 형은 계속 나를 돌봐 줘...	fix	rewrites
+cx:stem-noun-object:10	母親が子供の面倒見るのは 当然じゃないか。	어머니가 아이를 돌보는 것은 당연하잖아.	fix	rewrites
+cx:stem-noun-object:10	でも 何万って靴の面倒見てきた人 そうは いないと思いますよ。	하지만 몇만은 구두를 돌봐 온 사람 그렇게는 없다고 생각해요.	fix	rewrites
+cx:stem-noun-object:10	物心ついた頃から ずっと 肇の面倒見てきて 仕送りもして	철이 들었을 무렵부터 계속 조를 돌봐 와 송금도 해	fix	rewrites
+cx:stem-noun-object:10	あいつの面倒見てあげられるのも 俺ぐらいしか いないからさ。	저 녀석을 돌봐 줄 수 있는 것도 나 정도밖에 없으니까.	fix	rewrites
+cx:stem-noun-object:10	相葉君は　あれでなかなか人望が厚いのですよ。スタッフにも愛されていますし後輩への面倒見もいいです	아이바 군은 저것으로 꽤 덕망이 두터운 것이에요. 스태프에게도 사랑받고 있고 후배에 대한 돌보기도 좋습니다	keep	rewrites
+cx:datte-listing:10	俺のこと バカだバカだって言うけど 俺だって考えてんだぞ ちゃんと	나바보다 바보라고 말하는데 나도 생각이라고 다 제대로	keep	rewrites
+cx:datte-listing:10	ワルだ ワルだって聞いてたけど・	악당이다 악당이라고 들었지만·	keep	rewrites
+cx:datte-listing:10	父親だ父親だっていう前に やることあるだろう。	아버지다 아버지라고 말하기 전에 할 것 있을 것이다.	keep	rewrites
+cx:datte-listing:10	ちょいと 壺だ壺だって言ってっけど この壺のことじゃないのか？	조금 항아리다 항아리라고 말해 지만 이 항아리가 아닌 건가?	keep	rewrites
+cx:datte-listing:10	何だ 自分だって結構 やきもち焼きじゃん	무엇이다 자신도 상당히 질투해잖아	keep	rewrites
+lookup:verb-before-te-form	俺は俺の周圍に、俺よりも遙に劣等な生活内容を持ちながら、その劣等な生活内容を裏付けるに稀世の天才にのみ許される自信を以つてするチグハグな「自己肯定者」を見た。	나는 내 주위에, 나보다 요에 열등한 생활 내용을 가지면서, 그 열등한 생활 내용을 뒷받침에 희세의 천재에게만 허락되는 자신감을 이연줄 하는 뒤죽박죽인 「자기 긍정자」를 보았다.	keep	lookup
