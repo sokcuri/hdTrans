@@ -1,0 +1,50 @@
+# 규칙: LEX-3845
+rule	input	expected	kind	layer
+dict:lex:3845:daiji-important	大事なことを教えてくれ。	중요한 일을 가르쳐 줘.	fix	local
+dict:lex:3845:daiji-important	だが、大事な資料は 一つもない	하지만, 중요한 자료는 하나도 없다	fix	local
+dict:lex:3845:daiji-important	休むのも大事だぜ	쉬는 것도 중요해	fix	defaults
+dict:lex:3845:daiji-important	今大事な会議中だ 出て行かないとクビだぞ	지금 중요한 회의 중이다 나가지 않으면 해고다	fix	local
+dict:lex:3845:daiji-important	「いいえ、仕事じゃないわ。ただ……すごく大事な用件よ」	「아니요, 일이 아니야. 다만……정말 중요한 용건이야」	fix	local
+dict:lex:3845:daiji-important	いえいえ、大事なことですから	아니오, 중요한 일이니까	fix	local
+dict:lex:3845:daiji-important	服は大事ですよね	옷은 중요하네요	fix	defaults
+dict:lex:3845:daiji-important	来週 大事な テストがあるから	다음주 중요한 테스트가 있으니까	fix	local
+dict:lex:3845:daiji-important	防衛が大事だな	방위가 중요하네	fix	defaults
+dict:lex:3845:daiji-important	俺も大事な用事が	나도 중요한 용무가	fix	local
+dict:lex:3845:daiji-important	大事なのは リュウゼツランの質のよさ	중요한 것은 용설란의 질이 좋음	fix	defaults
+dict:lex:3845:daiji-important	それがお館様の大事なお役目であるからな	그것이 관님의 중요한 역할이니까	fix	local
+dict:lex:3845:daiji-important	そんなに大事な事だったら 緑色で書いてあるはずでしょ？	그렇게 중요한 일이라면 녹색으로 써 있을 것이지?	fix	local
+dict:lex:3845:daiji-important	この次が大事だ……	이 다음이 중요해……	fix	defaults
+dict:lex:3845:daiji-important	電話するのは大事なときだけ	전화하는 것은 중요한 때만	fix	local
+dict:lex:3845:daiji-important	お父様たちは 大事なお話があるの。	아버님들은 중요한 이야기가 있어.	fix	local
+dict:lex:3845:daiji-important	そう思うことが大事だって、その人が言ってたから！	그렇게 생각하는 것이 중요하다고, 그 사람이 말했으니까!	fix	defaults
+dict:lex:3845:daiji-important	なんか大事な気がする。	왠지 중요한 생각이 든다.	fix	local
+dict:jisjk:2674	大事な人が危ないからさ 協力してくれよな。	소중한 사람이 위험하니까 협력해 줘.	keep	local
+dict:jisjk:2674	警部が私の大事な私物を盗った	경감이 내 소중한 개인 물건을 훔쳤다	keep	local
+dict:jisjk:2674	護符は大事に扱え。粗末に扱うと効力が早く落ちるぞ	부적은 소중하게 취급해라. 허술하게 취급하면 효력이 빨리 떨어지겠어	keep	local
+dict:jisjk:2674	患者は私の大事な親友ですし→	환자는 제 소중한 절친이고→	keep	local
+dict:jisjk:2674	大事にしますね」	소중히 할게요」	keep	local
+dict:jisjk:2674	自分の命よりも大事なもの	자신의 생명보다 소중한 것	keep	local
+dict:jisjk:2674	俺は大事にされてるんだ	나는 소중하게 되고 있어	keep	local
+dict:jisjk:2674	俺達には大事な物なんだよ	우리에게는 소중한 것이야	keep	local
+dict:jisjk:2674	ありがとう ジェシカ！ 大事に使うよ。	고마워 제시카! 소중하게 써.	keep	local
+dict:jisjk:2674	私の大事なクッキー！ 見つかったのね	내 소중한 쿠키! 발견되었구나	keep	local
+dict:jisjk:2674	大事なものなんだ やめてくれ！	소중한 것이구나 그만해 줘!	keep	local
+dict:jisjk:2674	"子供が大事なら指示に従え"	"아이가 소중하면 지시에 따라라"	keep	local
+dict:jisjk:2674	とても大事で大好きな友達だって	무척 소중하고 정말 좋아하는 친구래	keep	local
+dict:jisjk:2674	何度でも言う｡ 狼星 私は お前が一番大事なんだ｡	몇 번이라도 말한다. 낭성 나는 네가 제일 소중하다.	keep	local
+dict:jisjk:2674	お兄ちゃんは お前のことが 大事で大事で たまらないんだ	오빠는 너가 소중하고 또 소중해서 견딜 수 없다	keep	local
+dict:jisjk:2674	それ以外は汚れないよう 大事にしまってあるんだ	그 이외는 더러워지지 않게 소중하게 보관해 두는 거야	keep	local
+dict:jisjk:2674	命が一番大事だ。	생명이 제일 소중하다.	keep	local
+dict:jisjk:2674	｢1,000のﾅｲﾌより 君の方が ずっと大事だよ｣	｢1,000의 나이프보다 네가 훨씬 소중해｣	keep	local
+dict:jisjk:2674	「俺たちと鍋、どっちが大事だ？」	「우리와 냄비, 어느 쪽이 소중해?」	keep	local
+dict:jisjk:2674	提督、今日はとっても大事な日じゃない？	제독, 오늘은 매우 소중한 날이 아니야?	keep	local
+dict:jisjk:2674	大事なところを隠しながらやれば大丈夫だと思っていたが。	소중한 곳을 숨기면서 하면 괜찮다고 생각했지만.	keep	local
+dict:jisjk:2674	ボクより あいつのほうが 大事なんだ…	나보다 저 녀석 쪽이 소중해…	keep	local
+dict:jisjk:263827	〇〇の洞窟とか、そんな感じで名称と説明がわかれば、大分気持ちが楽になるし。	○○의 동굴이라든지, 그런 느낌으로 명칭과 설명을 알면, 상당히 기분이 편해지고.	fix	local
+dict:jisjk:263827	大分ニッポンにも慣れてきたね～ぇ！	상당히 일본에도 익숙해져 왔네~!	fix	local
+dict:jisjk:263827	この景色 大分に移動したみたいｽﾞﾗ｡	이 경치 오이타로 이동한 것 같은 즈라.	fix	local
+dict:jisjk:263827	頭を大分	머리를 상당히	fix	local
+dict:jisjk:263827	１００％大分県産ケールを使った野菜ジュースだ。飲むといい	100% 오이타현산 케일을 쓴 채소 주스다. 마시면 좋다	keep	local
+dict:jisjk:263827	大分痛みが緩和されてきたようだ。	상당히 아픔이 완화되어 온 것 같다.	keep	local
+dict:jisjk:263827	門まで大分近づいたね	문까지 상당히 가까워졌네	keep	local
+dict:jisjk:263827	大分へ行く	오이타에 간다	keep	local

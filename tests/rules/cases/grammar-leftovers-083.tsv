@@ -15,7 +15,7 @@ cx:copula-quote:20	それが真実なのだと知った。	그것이 진실이�
 cx:copula-quote:20	でも、大人になるといじめは命に係わる問題なのだと知った。	하지만, 어른이 되면 괴롭힘은 생명과 관계되는 문제라고 알았다.	fix	rewrites
 cx:copula-quote:20	可愛いなと思った	귀엽다고 생각했다	keep	rewrites
 cx:copula-quote:30	彼女は本気なのだと分かった。	그녀는 진심이라고 알았다.	fix	rewrites
-cx:copula-quote:30	大事なことなのだと思う。	소중한 일이라고 생각한다.	fix	rewrites
+cx:copula-quote:30	大事なことなのだと思う。	중요한 일이라고 생각한다.	fix	rewrites
 cx:copula-quote:30	彼は天才なのだと思った。	그는 천재라고 생각했다.	fix	rewrites
 cx:copula-quote:30	そうだろうと思った	그럴 것이라고 생각했다	keep	rewrites
 builtin-pattern:toitta-na	平々凡々といったところだ。	아주 평범한 수준이다.	fix	builtin-pattern

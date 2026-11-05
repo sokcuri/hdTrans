@@ -16,7 +16,7 @@ dict:jisjk:3994	石から火線が飛んだ。	rule:dict:jisjk:3994=에서	keep	
 dict:jisjk:3994	傷から血が溢れた。	rule:dict:jisjk:3994=에서	keep	local
 dict:jisjk:3994	友達から手紙が来た。	친구에게서 편지가 왔다.	fix	local
 dict:jisjk:365922	彼女はそういうのを買った。	그녀는 그러한 것을 샀다.	fix	local
-dict:jisjk:365922	そういうのは大事だ。	그러한 것은 소중하다.	fix	local
+dict:jisjk:365922	そういうのは大事だ。	그러한 것은 중요하다.	fix	local
 dict:jisjk:4904	料理をうまい方法で作る。	요리를 능숙한 방법으로 만든다.	fix	local
 dict:jisjk:4904	うまい料理を食べる。	맛있는 요리를 먹는다.	fix	local
 dict:jisjk:120856	勉強はもうきつい。	공부는 이제 힘들다.	fix	local
