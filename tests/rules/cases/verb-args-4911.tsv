@@ -1,0 +1,24 @@
+# 규칙: LEX-4911
+rule	input	expected	kind	layer
+cx:verb-args-3:10	「まぁ、実習とかで海に出る授業はあるかもしれないのよさ」	has:바다에 나가는 수업	fix	rewrites
+cx:verb-args-3:10	可能な艦隊はすべて遠征に出ました。残りはどうしますか？	has:원정하러 나갔습니다	fix	rewrites
+cx:verb-args-3:10	この程度、反応できないような人間が戦場に出れば、一晩と待たずに死ぬ。	has:전장에 나가면	fix	rewrites
+cx:verb-args-3:10	外に出ると、冷たい風が吹いている	has:밖에 나오면	keep	rewrites
+cx:verb-args-3:10	宿泊客を外に出している	has:밖에 내고 있다	keep	rewrites
+pack:argument-senses:101	国境封鎖される前に、とにかくこの国を出るのが先決だ。	has:이 나라를 떠나는	fix	packs
+pack:argument-senses:101	そっと部屋を出た。	has:방을 나왔다	keep	packs
+pack:argument-senses:102	オレ以外に被害が出ても寝覚めが悪いからな	has:피해가 나도	fix	packs
+pack:argument-senses:102	苦渋の決断になるが、怪我人が出てからでは遅い。	has:부상자가 나오고	keep	packs
+pack:argument-senses:103	あまり艦を揺らされますと、発着艦訓練に支障が出るから……。	has:지장이 생기니까	fix	packs
+pack:argument-senses:104	今後の方針に重大な影響が出るからである。	has:영향이 나타나기	fix	packs
+pack:argument-senses:106	俺は通知表の入った封筒を手に持ち、職員室をあとにした。	has:손에 들어	fix	packs
+pack:argument-senses:107	「しっかり持ってろよ」	has:잡아라	fix	packs
+pack:argument-senses:108	ああ、気をしっかり持って！	lacks:잡아	keep	packs
+pack:argument-senses:109	だが、長くは持たないだろう。	has:버티지 않을	fix	packs
+pack:argument-senses:110	効率だけを追求してちゃ、身が持たない。	has:몸이 버티지	fix	packs
+pack:argument-senses:111	この調子でいけば、来年には子供が３人できるでしょう	has:3명 생기겠지요	fix	packs
+pack:argument-senses:112	お兄ちゃんはやればできる子だから	has:할 수 있는 아이	keep	packs
+pack:argument-senses:113	彼女ができたって本当？	has:여자친구가 생	fix	packs
+pack:argument-senses:114	さぁ、お夕飯が出来ました。召し上がれ♪	has:저녁이 다 되었습니다	fix	packs
+pack:argument-senses:114	料理ができる男はモテる	has:요리를 할 수 있는	keep	packs
+pack:argument-senses:115	「よくできました」	has:잘 됐습니다	fix	packs
