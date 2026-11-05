@@ -257,6 +257,7 @@
 //= noun.count-tofu	Nouns counted in blocks by 丁, 모 (豆腐が一丁 두부 한 모).
 //= noun.count-gun	Nouns of guns and long tools, matched at the end of a word, counted by 丁, 자루 (拳銃が一丁 권총 한 자루).
 //= noun.count-blade	Nouns of swords and blades, matched at the end of a word, that 一振りの before them counts, 자루 (一振りの剣 한 자루의 검; spec LEX-3836).
+//= noun.seasoning	Seasonings and powders, matched at the end of a word, that 一振り and ひと振り sprinkle, 한 번 뿌림 (塩を一振り 소금을 한 번 뿌림; spec LEX-3836).
 //= noun.count-rice	Nouns of a bowl of rice, matched at the end of a word, counted by 膳, 공기 (ご飯を一膳 밥 한 공기).
 //= noun.count-chopsticks	Nouns of chopsticks, counted in pairs by 膳, 벌 (箸が一膳 젓가락 한 벌).
 //= noun.count-tent	Nouns of tents, counted by 張, 동 (テントが一張 텐트 한 동).
@@ -10153,6 +10154,35 @@ noun.count-blade	短刀
 noun.count-blade	大刀
 noun.count-blade	薙刀
 noun.count-blade	剣刀
+
+noun.seasoning	塩
+noun.seasoning	胡椒
+noun.seasoning	コショウ
+noun.seasoning	こしょう
+noun.seasoning	塩胡椒
+noun.seasoning	塩コショウ
+noun.seasoning	タバスコ
+noun.seasoning	ソース
+noun.seasoning	醤油
+noun.seasoning	しょうゆ
+noun.seasoning	粉
+noun.seasoning	スパイス
+noun.seasoning	砂糖
+noun.seasoning	七味
+noun.seasoning	一味
+noun.seasoning	山椒
+noun.seasoning	パセリ
+noun.seasoning	調味料
+noun.seasoning	ふりかけ
+noun.seasoning	胡麻
+noun.seasoning	ごま
+noun.seasoning	ゴマ
+noun.seasoning	チーズ
+noun.seasoning	ハーブ
+noun.seasoning	シナモン
+noun.seasoning	ナツメグ
+noun.seasoning	香辛料
+noun.seasoning	味の素
 
 noun.count-gun	銃
 noun.count-gun	拳銃

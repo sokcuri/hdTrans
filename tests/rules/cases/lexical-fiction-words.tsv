@@ -1,0 +1,23 @@
+# 규칙: LEX-3836, LEX-3839
+rule	input	expected	kind	layer
+dict:lex:3839:神力-1	おぬしの神力は日々増しておる。実感はあるか？	has:너의 신력은	fix	lookup
+dict:lex:3839:神力-1	魔力と神力そのどちらも暴走すれば大惨事を引き起こす	has:신력	fix	lookup
+dict:lex:3839:静観-1	このまま静観するしかないでしょうか	has:관망할 수밖에	fix	lookup
+dict:lex:3839:静観-1	静観を決めた直後、後ろの卓から怒鳴り声が飛んでくる	has:관망을	fix	lookup
+dict:jisjk:70576	−棒高跳びって知ってる？	has:장대높이뛰기	fix	lookup
+dict:lex:3839:海竜-1	水創成魔法“海竜の揺り篭”！	has:해룡의 요람	fix	lookup
+dict:lex:3839:龍騎士-1	いや、龍騎士でもいりゃあ別だけど	has:용기사	fix	lookup
+dict:lex:3839:夢空間-1	少しばかりの夢空間から	has:꿈의 공간	fix	lookup
+dict:lex:3839:朧月-1	私は月を隠す朧月の様になりたい	has:으스름달	fix	lookup
+dict:lex:3839:こつん-1	一発こつん、と私の頭を殴り	has:콩	fix	lookup
+dict:lex:3839:おんや-1	おんや お前 まだここに いたのかい？	has:어라	fix	lookup
+dict:lex:3839:かくかくと-1	思わず膝がかくかくと揺れて。	has:후들후들	fix	lookup
+dict:lex:3839:ゴリゴリと-1	砂糖の溶けきっていないコーヒーをゴリゴリとかき混ぜながら	has:박박 휘저으면서	fix	lookup
+dict:lex:3839:鍛冶屋さん-1	鍛冶屋さんの紹介で「合成屋」という	has:대장장이	fix	lookup
+cx:mimetic-senses:10	「ざっくり説明したが、ここまでいいか？」	has:대충 설명했지만	fix	rewrites
+cx:mimetic-senses:10	ざっくり言えば、そうなりますね	has:대충 말하면	fix	rewrites
+cx:mimetic-senses:10	髪をざっくり切った	!rule:cx:mimetic-senses:10	keep	rewrites
+cx:split-compounds:44	そこにタバスコを ひと振り	has:타바스코를 한 번 뿌림	fix	rewrites
+cx:split-compounds:44	剣の一振りで	!rule:cx:split-compounds:44	keep	rewrites
+cx:split-compounds:46	塩を一振りする	has:한 번 뿌린다	fix	rewrites
+cx:split-compounds:46	剣を一振りした	!rule:cx:split-compounds:46	keep	rewrites
