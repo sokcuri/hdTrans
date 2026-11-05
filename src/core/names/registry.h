@@ -149,16 +149,17 @@ private:
     // a whole run of hiragana after no kana, kanji or katakana, before が, は, も, の, を, に, と or へ and
     // then no hiragana (みいは自分の); not with a long mark, a small vowel or tsu, or one kana said over
     // (spec LEX-4826).
-    std::vector<std::string> FreeKanaNames(std::string_view line);
-    // The uses in line of three or four kana that no dictionary has, before a particle, where the
-    // sub-word check of FreeKanaNames does not hold: the run of kana of a name whose halves are words
-    // (spec LEX-4828). A use that starts a run and whose particle closes it is closed; one after a case
-    // particle inside a run, or one with hiragana after its particle, is open.
+    // A use of kana where a name stands, and the particle after it.
     struct LooseUse {
         std::string t;
         bool closed = false;
         char32_t particle = 0;
     };
+    std::vector<LooseUse> FreeKanaNames(std::string_view line);
+    // The uses in line of three or four kana that no dictionary has, before a particle, where the
+    // sub-word check of FreeKanaNames does not hold: the run of kana of a name whose halves are words
+    // (spec LEX-4828). A use that starts a run and whose particle closes it is closed; one after a case
+    // particle inside a run, or one with hiragana after its particle, is open.
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
@@ -217,9 +218,11 @@ private:
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
+    std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ
     struct Loose {
         int closed = 0;
         int open = 0;
+        int bare = 0;  // closed uses before は, を or へ
         std::set<char32_t> particles;
     };
     std::map<std::string, Loose> kanaLoose_;            // LooseKanaUses
