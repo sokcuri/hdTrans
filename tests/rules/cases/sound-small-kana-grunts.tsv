@@ -1,6 +1,6 @@
 # 규칙: SND-1, SND-4
 rule	input	expected	kind	layer
-sound:grunt	っん…これ以上はやらせねーよ。	읏…더 이상 유행하게 한-.	fix	sound
+sound:grunt	っん…これ以上はやらせねーよ。	읏…더 이상 유행하게 하지 않아.	fix	sound
 sound:grunt	っん、かすり傷だ！全く問題ない。	읏, 찰상이야! 전혀 문제없다.	fix	sound
 sound:grunt	Thanks a lot. っん、いける！	Thanks a lot. 읏, 갈 수 있어!	fix	sound
 sound:stutter-small-wa	…ゎ、わたしもっ…	…나, 나도…	fix	sound

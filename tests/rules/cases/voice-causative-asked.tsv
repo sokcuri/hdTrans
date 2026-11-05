@@ -1,0 +1,29 @@
+# 규칙: GRM-3874, LEX-4951, GRM-3845
+rule	input	expected	kind	layer
+cx:speaker-asked:10	そんなの 僕に聞かれても！	그런 것 나한테 물어도!	fix	rewrites
+cx:speaker-asked:10	いや でも それは僕に聞かれても…｡	아니 하지만 그것은 나한테 물어도….	fix	rewrites
+cx:speaker-asked:10	彼は僕に聞かれて答えた。	그는 내가 물어 대답했다.	keep	rewrites
+cx:speaker-asked:10	先生に聞かれても答えられない。	선생님이 물어도 대답할 수 없다.	keep	rewrites
+cx:speaker-asked:20	ボクに言われても…｡	나한테 말해도….	fix	rewrites
+cx:speaker-asked:20	私に言われても困ります。	저한테 말해도 곤란합니다.	fix	rewrites
+cx:speaker-asked:20	母に早く寝ろと言われた。	어머니에게 빨리 자라고 들었다.	keep	rewrites
+cx:mimetic-causative:10	俺たちが どれくらい強くなったか びっくりさせてやる。	우리가 어느 정도 강해졌는지 깜짝 놀라게 해 준다.	fix	rewrites
+cx:mimetic-causative:10	もっと勉強させる。	좀 더 공부시킨다.	keep	rewrites
+cx:mimetic-causative:20	彼女をドキドキさせる言葉	그녀를 두근두근하게 하는 말	fix	rewrites
+cx:mimetic-causative:20	胸をキュンとさせる	가슴을 찡하게 한다	fix	rewrites
+cx:mimetic-causative:20	身支度はちゃんとさせて頂戴。	몸치장은 제대로 시켜 줘.	keep	rewrites
+cx:mimetic-causative:20	肩をプルプルさせていた	어깨를 부들부들시키고 있었다	keep	rewrites
+normalize:verb-nee	言ったぜ 何もさせねえ！	말했다 아무것도 시키지 않아!	fix	normalize
+normalize:verb-nee	お前には行かせねえ。	너에게는 가게 하지 않는다.	fix	normalize
+normalize:verb-nee	いらっしゃいませねえ	어서 오세요 응	keep	normalize
+dict:w:34300	帝は 御心を悩ませておられる｡	황제는 심을 괴롭히고 계신다.	fix	lookup
+dict:w:34303	見ている人をハラハラさせる	보고 있는 사람을 조마조마하게 한다	fix	lookup
+dict:w:34305	仲間ケガさせてまで 実験してる	동료 다치게 해서까지 실험하고 있다	fix	lookup
+dict:w:34308	ﾄﾎﾎな気持にさせる妖怪｡	트호호인 기분이 들게 하는 요괴.	fix	lookup
+dict:w:34309	しかも彼女として 連れ回された	게다가 그녀로서 끌려다녔다	fix	lookup
+dict:w:34310	まるで犯人扱いされてね｡	마치 범인 취급받아.	fix	lookup
+dict:w:34313	また置いて行かれるんじゃないかって心配になって	또 남겨지지 않은가는 걱정이 되어	fix	lookup
+dict:w:34311	俺だけ置いてかれて…	나만 남겨져…	fix	lookup
+dict:w:34314	まるで吸い寄せられるかのように	마치 빨려 들어가는 것처럼	fix	lookup
+dict:w:34315	あの女にここへ連れ込まれて｡	그 여자에게 여기에 끌려 들어가.	fix	lookup
+dict:w:34317	ケガさせられちまって⸺	부상당해서 ⸺	fix	lookup

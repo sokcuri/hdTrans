@@ -1243,6 +1243,10 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
         // お or ご before the kanji makes it a noun (お疲れねえ, お別れねぇ, お任せねえ: the particle ねえ).
         ichidan = !In(c, U"いなのておご");
     }
+    // The せ of a causative after the a-row kana of its verb (させねえ, 行かせねえ, 知らせねえ), not the ませ of
+    // the polite.
+    const bool causative = !ichidan && k.cp == U'せ' && pos > 0 && In(Before(s, pos), U"かがさたなばらわ");
+    ichidan = ichidan || causative;
     if (a == std::u32string_view::npos && !ichidan) return false;
     p += k.size;
     m.group[1] = Span(s, pos, p);
@@ -1263,6 +1267,7 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
         if (lead.ends_with("なに") || lead.ends_with("どう") || (!lead.empty() && IsKanjiClass(Before(lead, lead.size())))) return false;
     }
     // An ichidan stem after its kanji (kKanjiStemRow): the kanji, the stem and る must spell a verb whole.
+    if (causative) return true;
     if (a == std::u32string_view::npos && kStemRow.find(k.cp) == std::u32string_view::npos) {
         if (runs.verbForm == nullptr) return false;
         // Before a space the casual negative may end a caption phrase that another starts after (許せねぇ 美人なだけに),
