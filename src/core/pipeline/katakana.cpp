@@ -758,7 +758,7 @@ bool ConjugatesWith(int kind, std::string_view text) {
 // Whether ending, the hiragana of a katakana run right after prev, is a polite ending or the copula
 // written in katakana (kana.spelled-ending): ます and its forms after a verb stem in い or え or a kanji
 // (伝えマシタ, 思いマス; not the マス of 堅実なマス), です and its forms after a kana or a kanji (悪いデスよ),
-// and っす after a kanji noun (校舎内ッスよ; after a verb form it is the dialect ending, not です).
+// and っす after a kanji or a kana (校舎内ッスよ, 行きましたッスよ).
 bool SpelledEnding(std::string_view ending, char32_t prev) {
     if (!dict::InClass(HDTRANS_CLASS("kana.spelled-ending"), ending)) return false;
     // A numeral before マス counts squares (一マス), and ends nothing.
@@ -767,7 +767,7 @@ bool SpelledEnding(std::string_view ending, char32_t prev) {
                RuneIn(prev, U"いきしちにひみりぎじびぴえけせてねへめれげぜでべぺ");
     }
     if (ending.starts_with("で")) return IsKanjiRune(prev) || IsHiraganaRune(prev);
-    return IsKanjiRune(prev);
+    return IsKanjiRune(prev) || (IsHiraganaRune(prev) && !RuneIn(prev, U"ぁぃぅぇぉっゃゅょゎえけげせぜてでねへべぺめれ"));
 }
 
 // Whether ending, the kana of a katakana run after an i-adjective stem, is a whole ending of it:
