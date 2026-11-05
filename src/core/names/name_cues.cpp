@@ -132,7 +132,9 @@ bool HonorificAfter(const dict::Snapshot& snap, std::string_view after, std::str
 // to the document (spec LEX-4826).
 bool TitleAfter(const dict::Snapshot& snap, std::string_view after, std::string_view key) {
     return (after.starts_with("先生") || after.starts_with("先輩") ||
-            (IsKanji(FirstRune(key).cp) && text::RuneCount(key) >= 2 && dict::StartsWithMember(HDTRANS_CLASS("name.family-after"), after) > 0)) &&
+            (IsKanji(FirstRune(key).cp) && text::RuneCount(key) >= 2 &&
+             (dict::StartsWithMember(HDTRANS_CLASS("name.family-after"), after) > 0 ||
+              dict::StartsWithMember(HDTRANS_CLASS("name.rank-after"), after) > 0))) &&
            HonorableKey(snap, key);
 }
 

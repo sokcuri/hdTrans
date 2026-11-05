@@ -44,6 +44,8 @@ bool Titled(std::string_view text, std::string_view key) {
         const std::string_view after = text.substr(at + key.size());
         if (before.ends_with("艦")) return true;
         if (dict::StartsWithMember(HDTRANS_CLASS("honorific.person-title"), after) > 0) return true;
+        // A rank after a surname (滝本警部; spec LEX-4831).
+        if (text::RuneCount(key) >= 2 && dict::StartsWithMember(HDTRANS_CLASS("name.rank-after"), after) > 0) return true;
         i = at + key.size();
     }
 }
