@@ -93,3 +93,11 @@ cx:narration-style-1:20	「年齢や言語の壁があると面倒だし。そ�
 cx:narration-style-1:20	「色の薄い茶髪って感じだし。料理上手で、大和撫子かは分からないが……」	has:느낌이고.	keep	rewrites
 cx:narration-style-1:20	「契約も切れるしね。税金も高いし、銀行から金借りるのも大変だし……」	lacks:거든	keep	rewrites
 cx:narration-style-1:20	彼は怒ってないし。全然気にしてない。	has:않고.	keep	rewrites
+cx:narration-style-1:26	「そうなったら騒ぎになるはずだし」	has:될 테니까	fix	rewrites
+cx:narration-style-1:27	「そうなったら騒ぎになるはずだし……ん？」	has:될 테고	fix	rewrites
+cx:narration-style-1:10	「あたしもクッキーのお礼を言いたいし。青海さんのレシピのおかげで」	has:하고 싶거든	keep	rewrites
+cx:narration-style-1:10	「餅は餅屋って言うし。いや、少し違うかな」	has:말하잖아	fix	rewrites
+cx:narration-style-1:10	「ほら、星も綺麗だし」	has:예쁘잖아	fix	rewrites
+cx:narration-style-1:10	「少し歩こうよ、星も綺麗だし」	has:예쁘잖아	keep	rewrites
+cx:narration-style-1:26	「事故だろうし」	!rule:cx:narration-style-1:26	keep	rewrites
+cx:narration-style-1:27	「隣駅だし」	!rule:cx:narration-style-1:27	keep	rewrites
