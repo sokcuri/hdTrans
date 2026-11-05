@@ -197,6 +197,7 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
     void ReadGivenNames(dict::Candidates& found, std::string_view query);
