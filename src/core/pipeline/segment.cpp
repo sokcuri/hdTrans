@@ -110,6 +110,27 @@ bool KanaSpace(std::string_view s, size_t i) {
     while (!rest.empty() && rest[0] == ' ') rest.remove_prefix(1);
     const char32_t first = text::DecodeRune(rest).cp;
     if (!IsJapaneseRune(first)) return false;
+    // だって and たって before a space go on into what follows: the "even" of a noun and the
+    // concession of a past (花奈だって 先輩の 카나도, どう考えたって 彼女を 어떻게 생각해도); only at the
+    // end of the sentence, or before what asks about it, are they the hearsay (帰ってきたって 돌아왔대). The
+// のだって of a nominalized verb, 何だって (뭐라고) and the て form of 当たる (に当たって) keep the space as it
+// was.
+    // A だって standing between spaces opens a clause (じゃなくて だって 頭に 아니고 그치만 머리에): the space
+    // before it parts it from what it follows.
+    if (rest.starts_with("だって") && (rest.substr(std::string_view("だって").size()).starts_with(" ") ||
+                                     rest.substr(std::string_view("だって").size()).starts_with("、"))) {
+        return true;
+    }
+    // A hearsay asked about stays apart (帰ってきたって 本当か？ 돌아왔대 진짜야?).
+    if (const std::string_view head = s.substr(0, i); (head.ends_with("だって") || head.ends_with("たって")) &&
+                                                       !head.ends_with("のだって") && !head.ends_with("何だって") &&
+                                                       !head.ends_with("なんだって") && !head.ends_with("当たって") &&
+                                                       !head.ends_with("あたって")) {
+        for (const std::string_view q : {"本当", "ほんと", "ホント", "マジ", "嘘", "うそ"}) {
+            if (rest.starts_with(q)) return true;
+        }
+        return false;
+    }
     return RuneIn(last, U"ねよさわぞぜ") ||
            (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか")) ||
            (RuneIn(last, U"いただるうくすつぬむぶぐ") && PersonOpens(rest) && !ClauseRunsOn(s.substr(0, i)));
