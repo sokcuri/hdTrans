@@ -41,3 +41,8 @@ cx:genki-greeting:50	元気でなくてもいい	건강하지 않아도 괜찮�
 cx:genki-greeting:52	お元気でいらっしゃる	건강하시다	keep	rewrites
 cx:genki-greeting:54	じゃあね、元気で！	그럼 안녕, 잘 지내!	fix	rewrites
 cx:genki-greeting:38	メカニズムはよくわからぬが、他人を元気にするだけでなく、呪うこともできるということだ	메카니즘은 잘 알지 않는이, 타인을 건강하게 지낼 뿐만 아니라, 저주할 수도 있다는 것이다	keep	rewrites
+cx:genki-greeting:20	元気かどうか分からない	건강한가 어떤가 모른다	keep	rewrites
+cx:genki-greeting:20	みんなが元気かどうか心配だ	모두가 건강한가 어떤가 걱정이다	keep	rewrites
+cx:genki-greeting:20	元気か確かめる	건강한가 확인한다	keep	rewrites
+cx:genki-greeting:30	元気だったかどうか	건강했던인가 어떤가	keep	rewrites
+cx:genki-greeting:40	元気ですかどうか	건강합니까 제발	keep	rewrites
