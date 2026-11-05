@@ -469,10 +469,25 @@ bool Item::AcceptVerbContinuation(Record* following) {
     auto after = [&]() { return tail.substr(static_cast<std::size_t>(pattern())); };
     // A bare ichidan stem ends no utterance where its last kana also makes the imperative
     // of a godan verb: before a closing bracket or a full-width sentence mark that is the
-    // reading (「立て」 서라, not 세우고). The mark may start the next token.
+    // reading (「立て」 서라, not 세우고), or before a small っ that closes it, as a stem does not
+    // (行けっ 가라, 腰を振れっ 흔들어라). The mark may start the next token.
     if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
-        const std::string_view ahead = tail.empty() ? base.nextText : tail;
-        if ((Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
+        std::string_view ahead = tail.empty() ? base.nextText : tail;
+        // The っ ends the word: no letter goes on after it (行けっ！, 行けっ キリト; not 行けったら,
+        // 明けっ放し), the stem has a kanji (not a clipped やめっ), and the stem read alone is the
+        // potential of that godan verb (行け 갈 수 있다 of 行く), not a verb of its own whose order is
+        // clipped (構えっ, 伏せっ).
+        bool tsu = false;
+        while (Starts(ahead, "っ")) {
+            ahead.remove_prefix(std::string_view("っ").size());
+            tsu = true;
+        }
+        if (const char32_t c = text::DecodeRune(ahead).cp;
+            tsu && ((!ahead.empty() && (text::IsLetter(c) || text::IsDigit(c))) || !HasKanji(surface) ||
+                    EntryText(0).find(" 수 ") == std::string_view::npos)) {
+            tsu = false;
+        }
+        if ((tsu || Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
              Starts(ahead, "？")) &&
             w->GodanImperative(surface)) {
             return false;
