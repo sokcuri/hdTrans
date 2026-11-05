@@ -109,3 +109,15 @@ cx:na-observed:35	しかし 内容はともかく なかなか流暢に喋るな
 cx:na-observed:35	息でしょ? 今の。 何か腹立つな あいつ...。	숨이지? 지금의. 뭔가 화가 나는구나 저 녀석....	fix	rewrites
 cx:na-observed:30	それを言ってくれるな…｡	그것을 말해 주지 마….	keep	rewrites
 cx:na-observed:30	“苦しい” なんて 簡単に言ってくれるな―	“괴롭다”는 간단하게 말해 주지 마-	keep	rewrites
+cx:na-observed:33	よく食べるな 君は	잘 먹는구나 너는	fix	rewrites
+cx:na-observed:33	よく喋るな 大丈夫か	잘 말하는구나 괜찮은가	fix	rewrites
+cx:na-observed:33	よく頑張るな お前	잘 노력하는구나 너	fix	rewrites
+cx:na-observed:33	ずいぶん遠くまで来るな 私たち	꽤 먼 곳까지 오는구나 우리	fix	rewrites
+cx:na-observed:33	「おいおい、今日はずいぶん持ち上げるな」	「이봐 이봐, 오늘은 꽤 들어 올리는구나」	fix	rewrites
+cx:na-observed:33	「おっと……。ずいぶん揺れるな。アラタ、すまない。ぶつかってしまった」	「어이쿠……. 꽤 흔들리는구나. 아라타, 미안하다. 부딪쳐버렸다」	fix	rewrites
+cx:na-observed:33	ああ！ちぇ、なかなかにやるな。面白い！	아! 쳇, 꽤에 하는구나. 재미있어!	fix	rewrites
+cx:na-observed:33	「ず、ずいぶん趣味の悪いもん頼むな……つーか、晩飯が別にあるのに、全部食えるのか？」	「꽤, 꽤 취향이 나쁜 걸 부탁하는구나……그보다, 저녁 밥이 따로 있는데, 전부 먹을 수 있는 거야?」	fix	rewrites
+cx:na-observed:33	「確実に潰したいであろう相手を俺たちの採用試験にするとは、なかなかひねくれた性格をしているな」	「확실히 부수고 싶을 상대를 우리의 채용시험으로 한다는 것은, 꽤 비뚤어진 성격을 하고 있는구나」	fix	rewrites
+cx:na-observed:33	「しかしクイーンはよく食べるな……」	「하지만 여왕은 잘 먹는구나……」	keep	rewrites
+cx:na-observed:33	「都合よく記憶を書き換えるな」	「때마침 기억을 고쳐 쓰지 마」	keep	rewrites
+cx:na-observed:33	よく見ろ。泣くな	잘 봐라. 울지 마	keep	rewrites

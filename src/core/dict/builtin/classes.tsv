@@ -26,6 +26,8 @@
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
+//= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
+//= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
 //= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
 //= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
@@ -11193,6 +11195,47 @@ noun.edible	パン
 noun.edible	おにぎり
 noun.edible	団子
 noun.edible	饅頭
+noun.weather-come	雨
+noun.weather-come	大雨
+noun.weather-come	小雨
+noun.weather-come	雪
+noun.weather-come	大雪
+noun.weather-come	嵐
+noun.weather-come	台風
+noun.weather-come	吹雪
+noun.weather-come	豪雨
+noun.weather-come	雷雨
+noun.weather-come	暴風雨
+noun.time-ni	夜
+noun.time-ni	朝
+noun.time-ni	昼
+noun.time-ni	夕方
+noun.time-ni	晩
+noun.time-ni	夜中
+noun.time-ni	真夜中
+noun.time-ni	深夜
+noun.time-ni	夜明け
+noun.time-ni	明け方
+noun.time-ni	早朝
+noun.time-ni	休日
+noun.time-ni	祝日
+noun.time-ni	週末
+noun.time-ni	土日
+noun.time-ni	正月
+noun.time-ni	夏
+noun.time-ni	冬
+noun.time-ni	春
+noun.time-ni	秋
+noun.time-ni	夏休み
+noun.time-ni	冬休み
+noun.time-ni	昼休み
+noun.time-ni	日曜
+noun.time-ni	日曜日
+noun.time-ni	土曜
+noun.time-ni	土曜日
+noun.time-ni	雨の日
+noun.time-ni	嵐の夜
+noun.time-ni	誕生日
 noun.least-able	子供
 noun.least-able	子ども
 noun.least-able	こども

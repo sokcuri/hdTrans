@@ -92,3 +92,21 @@ cx:datte-noun:10	もう友達だって思ってるんだよね	이제 친구라�
 cx:datte-noun:10	友達だって思ってた！ 黙れ 女！	친구라고 생각했다! 입을 다물어라 여자!	fix	rewrites
 cx:datte-noun:5	パパのこと 友達だって 思ってる?	아빠친구라고 생각해?	fix	rewrites
 cx:datte-noun:5	先生だって知ってるでしょ!?	선생님도 알고 있지!?	keep	rewrites
+cx:datte-noun:15	雨だって行くよ。	비가 와도 가.	fix	rewrites
+cx:datte-noun:15	雨だって行く。	비가 와도 간다.	fix	rewrites
+cx:datte-noun:15	雨だって降るさ。	비도 내리고 말이야.	keep	rewrites
+cx:datte-noun:15	嵐だって平気だ。	폭풍우도 괜찮다.	keep	rewrites
+cx:datte-noun:16	夜だって働く。	밤에도 일한다.	fix	rewrites
+cx:datte-noun:16	夜だって装備や艦載機体によってはいけちゃうから。まあ、太陽が出てる時間のほうが好きだけどね！	밤에도 장비나 함재기체에 따라서는 갈 수 있어버리니까. 뭐, 태양이 나오고 있는 시간 쪽을 좋아하지만!	fix	rewrites
+cx:datte-noun:16	レーダー射撃用意！夜だって私ぜんぜんへっちゃら！むしろ経験豊富よ？んっ安心して。	레이더 사격 준비! 밤에도 나 전혀 줄으면들! 오히려 경험 풍부해? 읏 안심해.	fix	rewrites
+cx:datte-noun:16	「昨日の夜だって、興奮しながら話してたよね？　最近仲良くなった先輩の手伝いができて、すごくうれしかったって」	「어제 밤에도, 흥분하면서 이야기했지? 최근 사이가 좋아진 선배의 도움이 생겨서, 정말 기뻤다고」	fix	rewrites
+cx:datte-noun:16	お母さんだって未来といる時間は許容してくれるし、そうすれば夏休みだってもっと会える。	엄마도 미래와 있는 시간은 허용해 주고, 그러면 여름 방학에도 좀 더 만날 수 있다.	fix	rewrites
+cx:datte-noun:16	この改装、いけてるよ！夜だって、もうあんな連中には負けるかってんの。	이 개장, 갈 수 있어! 밤에도, 이제 저런 무리에게는 질까라는 의.	fix	rewrites
+cx:datte-noun:16	まだまだ夜だって、あんたたちには負けるかって。	아직도 밤에도, 너희에게는 질까는.	fix	rewrites
+cx:datte-noun:16	まだまだ夜だって若いのに負けるかってのー！	아직도 밤도 젊은데 지겠냐고~!	keep	rewrites
+cx:datte-noun:16	明日だって来るよ。	내일도 와.	keep	rewrites
+cx:datte-noun:16	提督提督、春だって。この季節ろーちゃん好きかもって。	제독 제독, 봄이래. 이 계절-짱을 좋아할지도는.	keep	rewrites
+cx:datte-noun:17	（前、私が滝園学園マイクロバス転落事故の生き残りだって明かしたとき、ユージに同じようなこと言われたな……）	(전, 내가 농원학원 마이크로버스 추락 사고의 생존이라고 밝혔을 때, 유지에게 같은 일 들었군……)	fix	rewrites
+cx:datte-noun:17	彼が犯人だって知ってたの？	그가 범인이라고 알았어?	keep	rewrites
+cx:datte-noun:18	ミドリさんは何となくすごい人だって分かるんじゃない？	미도리 씨는 왠지 대단한 사람이라는 걸 알지 않아?	fix	rewrites
+cx:datte-noun:18	子供だって分かる	아이라도 안다	keep	rewrites

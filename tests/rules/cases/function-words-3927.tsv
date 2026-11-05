@@ -17,7 +17,7 @@ cx:function-words:20	名前が長いだと！ふん。	이름이 길다고! 흥.
 cx:function-words:22	いいのか、司令？こんな所で油を売ってて。まあ、売るほど油なぞ残ってないか。何？今は備蓄はしっかりあるだと？	괜찮아, 사령관? 이런 곳에서 농땡이 부리고 있어. 뭐, 파는 만큼 기름 수수께끼 남지 않은가. 뭐? 지금은 비축은 확실히 있다고?	fix	rewrites
 cx:function-words:30	だからってお前、何もしないでいていいのか？たしかに直接的にはお前がギアに乗ったことでの出来事かもしれない。	그렇다고 해서 너, 아무것도 하지 않고 있어도 되는 건가? 확실히 직접적으로는 네가 기어를 탄 것에서의 사건일지도 모른다.	fix	rewrites
 cx:function-words:40	ある時を境にふっつりと姿を隱してしまわれたのだが、うわさではその直後にお子を持たれたとか持たれないとか……。	어느 날을 경계로 뚝 모습을 감추어버려졌는데, 소문에서는 그 직후에 자를 갖게했다든가 갖게하지 않는다든가…….	fix	rewrites
-cx:function-words:30	「いくら“野生児”だからって、ああ、もぉ～」	「아무리 “야생아” 그렇다고 해서, 아, 도~」	fix	rewrites
+cx:function-words:28	「いくら“野生児”だからって、ああ、もぉ～」	「아무리 “야생아”라고 해도, 아, 도~」	fix	rewrites
 cx:function-words:30	「だからって――」	「그렇다고 해서――」	fix	rewrites
 cx:function-words:30	だからって すり抜けるやつに	그렇다고 해서 빠져나가는 녀석에게	fix	rewrites
 cx:function-words:50	――実在の個別性は、経験科学にとって異質性なるものとして残っている。	――실재의 개별성은, 경험 과학에 있어 이질성이라는 것으로서 남아 있다.	fix	rewrites
@@ -173,3 +173,7 @@ cx:function-words:21	ぼくはいきなりその大きな男は人さらいだ�
 cx:function-words:24	と、友達の一人は忠告した、俺もそうだと思った。	라고, 친구의 한 사람은 충고한, 나도 그렇다고 생각했다.	keep	rewrites
 cx:function-words:22	お前は私を何だと思っているのだえ。	너는 나를 무엇이라고 생각한다.	keep	rewrites
 cx:function-words:25	あっしは下手人は内の者だと思うが――」	저는 하수인은 가족이라고 생각하지만――」	keep	rewrites
+cx:function-words:28	ね、千ちゃん、いくら私たちが家来だからって、ものの理は理さ	저기, 센짱, 아무리 우리가 하인이라고 해도, 것의 이는 이야	fix	rewrites
+cx:function-words:28	そうだからって、気にするな。	그렇다고 해서, 신경 쓰지 마.	keep	rewrites
+cx:function-words:29	いくら子供だからって許さない	아무리 아이라고 해도 용서하지 않는다	fix	rewrites
+cx:function-words:29	子供だからって許さない	아이라고 해서 용서하지 않는다	keep	rewrites
