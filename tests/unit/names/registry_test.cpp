@@ -538,7 +538,7 @@ HD_TEST(names_honorifics) {
     const std::vector<std::pair<std::string, std::vector<std::string>>> cases = {
         {Repeat("桃花ちゃん、おはよう。", 4), {"桃花"}},
         {Repeat("桃花ちゃん、おはよう。", 3), {}},  // a common word scores 0.5 per honorific
-        {"柚葉さん", {}},
+        {"柚葉さん", {"柚葉"}},  // a kanji name no dictionary has needs one honorific (LEX-4827)
         {"柚葉さん\n柚葉さん", {"柚葉"}},
         {"光さんが来た。\n光さんが言った。", {}},  // a single kanji needs 3
         {"光さんが来た。\n光さんが言った。\n光さん、", {"光"}},
