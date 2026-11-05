@@ -1,7 +1,7 @@
 # 규칙: NUM-15
 rule	input	expected	kind	layer
 sense:時	この後１１時３０分からのｄａｙｓでも	이 후 11시 30분부터의 days라도	fix	senses
-sense:時	だってあの８時	왜냐하면 그 8시	fix	senses
+sense:時	だってあの８時	그치만 그 8시	fix	senses
 sense:時	そんな１６時過ぎ。	그런 16시 지나고.	fix	senses
 sense:時	「この７時４７分の新快速敦賀行き。」	「이 7시 47분의 신쾌속 츠루가행.」	fix	senses
 sense:時	その時は私の学友だったはずだ！！	그 때는 내 학우였을 것이다!!	keep	senses

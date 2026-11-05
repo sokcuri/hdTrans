@@ -212,7 +212,7 @@ struct InitialConjunction {
 };
 
 constexpr InitialConjunction kInitialConjunctions[] = {
-    {"でも", "하지만"}, {"では", "그럼"}, {"なんで", "왜"}, {"だって", "왜냐하면"},
+    {"でも", "하지만"}, {"では", "그럼"}, {"なんで", "왜"}, {"だって", "그치만"},
 };
 
 // Whether the text ends in a dash, or with ellipsis also in an ellipsis, after trailing

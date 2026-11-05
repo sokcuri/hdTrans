@@ -7,9 +7,9 @@ cx:mono-ne:40	「そんな簡単に回復したら苦労しませんもんね」
 cx:mono-ne:20	以前は子供だったもんな……。	이전에는 아이였잖아…….	fix	rewrites
 lookup:monne	「けっこうキツかったもんなあ」	「꽤 힘들었잖아」	fix	lookup
 lookup:monne	楽しかったもんね	즐거웠잖아	fix	lookup
-lookup:monne	だってお兄ちゃんが悪いんだもんね	왜냐하면 오빠가 나쁘잖아	fix	lookup
+lookup:monne	だってお兄ちゃんが悪いんだもんね	그치만 오빠가 나쁘잖아	fix	lookup
 lookup:monne	子供だもんね	아이이군	keep	lookup
 lookup:monne	わたしもそのつもりで頭を下げたもの	나도 그럴 생각으로 고개를 숙인 것	keep	lookup
 lookup:monne	油で揚げたもの	기름에 튀긴 것	keep	lookup
-lookup:monne	だって好きなんだもん	왜냐하면 좋아하는걸	keep	lookup
+lookup:monne	だって好きなんだもん	그치만 좋아하는걸	keep	lookup
 cx:mono-ne:40	毎日お忙しいですもの	매일바쁜걸요	keep	rewrites
