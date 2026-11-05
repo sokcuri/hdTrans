@@ -10809,6 +10809,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一人占め	독차지	N110		Hd	GN				llm		ひとりじめ	w:10801
 一人子	외동	N110	VHn		GN				llm		ひとりご	w:10802
 一人暮らし	자취	I110			GN				xxx llm	1		w:10803
+一人頭	1인당	N110			GN			사람 수로 나눈 몫의 一人頭는 `1인당`이다(LEX-3849).			ひとりあたま	lex:3849:hitori-atama
 一人歩き	독자 행보	N110		Hd	GN				xxx llm		ひとりあるき	w:10804
 一人歩き	혼자 걷기	N110		Hd	GN				llm		ひとりあるき	w:10805
 一人歩き	자립	N110	UYi	Hd	GN				llm		ひとりあるき	w:10806
