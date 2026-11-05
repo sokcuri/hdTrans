@@ -1058,6 +1058,28 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
+    // An ending that ends in a kanji (度, 際, 他, 暇, 訳 after a verb) gives that kanji to a common noun of the dictionary
+    // that starts with it and reaches at least as far as the kanji and the word after it (辞める度胸 그만둘 배짱, 戦う際限,
+    // 見る他人; spec LEX-4982).
+    // Not 時, which also stands for the とき of an adverb (あるとき人の 어느 날 사람의, not 時人).
+    if (!ending.empty() && !after.empty() && text::IsKanji(DecodeLastRune(ending).cp) && DecodeLastRune(ending).cp != U'時') {
+        const text::Rune kanji = DecodeLastRune(ending);
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query(ending.substr(ending.size() - kanji.size));
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const std::size_t n = text::RuneCount(c.source);
+            if ((c.user == nullptr || !c.user->nameLayer) && part.starts_with("N1") && part.substr(2, 1) != "3" && n >= 2 &&
+                n >= 1 + word) {
+                return true;
+            }
+        }
+    }
     if (ending.ends_with("か") && after.starts_with("ら")) return true;
     if (CopulaAfterNominal(ending, after)) return true;
     // An ending in けども or とも gives its も, and one in と its と, to an adverb that starts with it and
