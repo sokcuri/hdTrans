@@ -1518,6 +1518,35 @@ bool KataHore(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// Katakana ハズ outside a katakana run before の, だ, で, が, も, は, な, じゃ, ない, ねえ, a mark or the end is
+// the はず of expectation (やったハズの宿題 했을 터인 숙제, そんなハズない); ハズレ and ハズした (外す) stay.
+bool KataHazu(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && IsKatakanaRune(LastRune(s.substr(0, pos)).cp)) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ハズ")) return false;
+    if (p < s.size()) {
+        const char32_t after = At(s, p).cp;
+        if (IsKatakanaRune(after) || IsKanjiRune(after)) return false;
+        if (IsHiraganaRune(after)) {
+            const auto rest = s.substr(p);
+            bool ok = false;
+            for (const std::string_view w : {"の", "だ", "で", "が", "も", "は", "な", "じゃ", "ねえ", "ねぇ"}) ok = ok || rest.starts_with(w);
+            if (!ok) return false;
+        }
+    }
+    m.end = p;
+    return true;
+}
+
+// The old and rough ください said くだせぇ or くだせえ (任せてくだせぇ 맡겨 주세요).
+bool RoughKudasai(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "くだせ") && !Lit(s, p, "下せ")) return false;
+    if (!Lit(s, p, "ぇ") && !Lit(s, p, "え")) return false;
+    m.end = p;
+    return true;
+}
+
 // 判 or 解 for わか in わかる: after no kanji (評判らしい, 了解っす stay) and before ら, り, る,
 // った, って or, for 判, れ (判らない, 解った, 判れば).
 bool KanjiWakaru(std::string_view s, size_t pos, Match& m) {
@@ -1543,6 +1572,8 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
     if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
     if (Contains(text, "ホレ")) text = ReplaceAll(text, KataHore, [](const Match& m) { return std::string(m.group[1]); });
+    if (Contains(text, "ハズ")) text = ReplaceAll(text, KataHazu, [](const Match&) { return std::string("はず"); });
+    if (Contains(text, "せぇ") || Contains(text, "せえ")) text = ReplaceAll(text, RoughKudasai, [](const Match&) { return std::string("ください"); });
     if (Contains(text, "判") || Contains(text, "解")) {
         text = ReplaceAll(text, KanjiWakaru, [](const Match&) { return std::string("わか"); });
     }
