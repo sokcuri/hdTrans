@@ -531,19 +531,40 @@ bool FinalCallAt(std::string_view key, std::string_view before, std::string_view
            after.starts_with("」") || after.starts_with("…");
 }
 
+// Whether key is a single kanji that the name layer reads as a person (南 미나미, 栞 시오리, 司 츠카사), whose
+// person cues hold in their line (spec LEX-4832); a single character is else no name a cue shows.
+bool SingleNameKey(const dict::Snapshot& snap, std::string_view key) {
+    if (text::RuneCount(key) != 1 || !internal::AllRunes(key, IsKanji)) return false;
+    for (const dict::Record& r : snap.NameRecords(key)) {
+        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) return true;
+    }
+    return false;
+}
+
 // Whether a person cue of key may be a figure of speech (瞳が見つめる, 心が泣く, 花が笑う, 夢が叫ぶ,
-// 未来が微笑む): key is a single character, a member of name.personified-word, or a word the dictionary
+// 未来が微笑む): key is a single character that is no SingleNameKey, a member of name.personified-word, or a word the dictionary
 // reads as a part of the body, a colour, a feeling, weather, the sky or a place.
 bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
-    if (text::RuneCount(key) < 2 || dict::InClass(HDTRANS_CLASS("name.personified-word"), key)) return true;
+    const bool single = text::RuneCount(key) < 2;
+    if ((single && !SingleNameKey(snap, key)) || dict::InClass(HDTRANS_CLASS("name.personified-word"), key)) return true;
     for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
         // The senses of a proper noun, a person or a place (千里 치사토, 高峰 타카미네), are no common word.
         if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasCode("QCT") ||
             c.codes->sem.HasCode("QNN")) {
             continue;
         }
-        for (const std::string_view code : {"VBp", "UCl", "UFl", "VFr", "VSs", "VPl"}) {
+        for (const std::string_view code : {"VBp", "UCl", "UFl", "VFr", "VSs"}) {
             if (c.codes->sem.HasCode(code)) return true;
+        }
+        // A single kanji is a figure as a plant, an animal or a time too (花が笑う, 雀が鳴く), but not as a
+        // direction (南が言った), which a place sense of it does not undo.
+        if (single) {
+            for (const std::string_view code : {"QAL", "VPt", "QAA", "QAB", "UMe"}) {
+                if (c.codes->sem.HasCode(code)) return true;
+            }
+            if (c.codes->sem.HasCode("VPl") && !c.codes->sem.HasCode("UDr")) return true;
+        } else if (c.codes->sem.HasCode("VPl")) {
+            return true;
         }
     }
     return false;
@@ -573,8 +594,26 @@ bool SpeakingTopic(const dict::Snapshot& snap, std::string_view key) {
 // closing a sentence after a clause of what a person does (口をパクパクさせる玉藻。). The key has two
 // characters or more, its common word names no person or animal and is no word a figure of speech
 // makes a person (FigureKey), and no verb starts with it (HonorableKey).
+// Whether the clause at the start of s ends in a verb of saying or thinking (name.person-speak) that no
+// causative follows (言わせ).
+bool SingleSayer(std::string_view s) {
+    std::size_t runes = 0;
+    for (std::size_t i = 0; i < s.size() && runes < kClauseReach; runes++) {
+        const std::string_view rest = s.substr(i);
+        const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), rest);
+        if (n > 0) return !rest.substr(n).starts_with("せ") && !rest.substr(n).starts_with("さ");
+        const text::Rune r = text::DecodeRune(rest);
+        if (InRunes(r.cp, kClauseEnds) || dict::StartsWithMember(HDTRANS_CLASS("name.person-clause-stop"), rest) > 0) return false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
+    // A single kanji names a person only as the subject of a verb of saying or thinking in its clause
+    // (南が言った; not 左の頬, 車が音を言わせて): its other cues are too often its common word.
+    if (text::RuneCount(key) < 2) return after.starts_with("が") && SingleSayer(after.substr(std::string_view("が").size()));
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
     if (after.starts_with("は") || after.starts_with("も")) {
@@ -650,7 +689,8 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         const bool recurring = strong && text::RuneCount(key) >= 2 && !Memorable(snap, key);
         strong = strong && !recurring && Memorable(snap, key);
         person = person && Carried(snap, key);
-        acted = acted && Carried(snap, key) && !FigureKey(snap, key);
+        // A single kanji's cue holds in its line only (SingleNameKey).
+        acted = acted && Carried(snap, key) && !FigureKey(snap, key) && text::RuneCount(key) >= 2;
         const auto found = std::find_if(out.begin(), out.end(), [&](const NameCue& c) { return c.key == key; });
         if (found == out.end()) {
             out.push_back({std::string(key), strong, recurring, person, acted});
@@ -738,7 +778,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         if ((TitleBefore(before, katakana) && NameEnd(after) && CallableKey(snap, key, false) && (!single || alone)) ||
             (runStart && SuffixAfter(snap, after, key) && CallableKey(snap, key, false)) || ClassAfter(after, key, kanji) ||
             (LabelAt(snap, before, after) &&
-             (!single || (bracketLabel && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)) || LabelNoun(snap, key))) || (!single && ActionAt(snap, key, before, after))) {
+             (!single || (bracketLabel && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)) || LabelNoun(snap, key) || (SingleNameKey(snap, key) && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)))) || (!single && ActionAt(snap, key, before, after))) {
             add(key, true);
         } else if (runStart && !hiragana && HonorificAfter(snap, after, key)) {
             add(key, false, true);
