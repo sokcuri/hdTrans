@@ -1,0 +1,21 @@
+# 규칙: LEX-4908
+rule	input	expected	kind	layer
+cx:verb-args-2:10	「あたし、九原さんに聞きたいことがあって」	has:씨에게 묻고 싶은	fix	rewrites
+cx:verb-args-2:10	後でセリカに聞いてくれ。今夜はゆっくり休んで	has:에게 물어	fix	rewrites
+cx:verb-args-2:10	先生に聞いたんだよ	has:들었어	keep	rewrites
+cx:verb-args-2:15	「あの……念のため聞きますけど、聞かないっていう選択肢もあるんですか？」	has:만약을 위해 묻는데요	fix	rewrites
+cx:verb-args-2:15	もう一つだけ 念のために聞いておきたいんだけど	has:물어 두고 싶은데	fix	rewrites
+cx:verb-args-2:20	「ちょっと聞きたいことがあるんだけど」	has:묻고 싶은 게	fix	rewrites
+cx:verb-args-2:20	その話は聞きたくない	has:듣고 싶지 않다	keep	rewrites
+cx:verb-args-2:30	「おいおいおい」と兄に突っ込んだ。	has:형에게 태클을 걸었다	fix	rewrites
+cx:verb-args-2:30	やっとボールを取ったと思ったら俺に突っ込んでくる人影がある。	lacks:태클	keep	rewrites
+cx:verb-args-2:30	敵陣に突っ込んだ	has:적진에 돌진했다	keep	rewrites
+cx:verb-args-2:35	ついついいつものノリで、つっこんでしまった。	has:태클을 걸어버렸다	fix	rewrites
+cx:verb-args-2:35	ポケットに手をつっこんだ	lacks:태클	keep	rewrites
+cx:verb-args-2:50	あぁ……先任殿、この清酒、いけますなぁ。	has:청주, 맛이 있습니다	fix	rewrites
+cx:verb-args-2:50	提督、こっちの肉、いけるぜ。	has:고기, 맛이 있다	fix	rewrites
+cx:verb-args-2:50	明日なら学校にいける	has:학교에 갈 수 있다	keep	rewrites
+cx:verb-args-2:52	私「こんびに」とやらのサンドイッチを初めていただきましたわ。意外といけるんですのね。	has:의외로 쓸 만합니다	fix	rewrites
+cx:verb-args-2:52	絵描きとして食べていける	lacks:쓸 만	keep	rewrites
+cx:verb-args-1:10	数時間前、手洗い場で倒れているのを発見し、起こそうとしたところ急に叫んだ。	has:일으키려고	keep	rewrites
+cx:verb-args-2:15	念のため、彼の話も聞いておこう	has:이야기도 들어	keep	rewrites
