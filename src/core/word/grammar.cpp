@@ -1259,6 +1259,40 @@ bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem,
 // verb of feeling the spontaneous form; the form of an ichidan or くる verb and its clause the rest
 // (PassiveReading). The potential of a verb in ーaる that spells a shorter verb's passive reads only
 // its own signals. A dictionary word no signal decides keeps its candidates (None).
+// Whether a word read with 에게 (誰かに 누군가에게, 彼女に) stands before the item in its clause: someone the act
+// is done by or to, which makes a られ the passive.
+bool PersonRecipientBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view ps = p->group->surface;
+        if ((ps.starts_with("誰") || ps.starts_with("だれ")) && Has(ps, "に")) return true;
+        if (ps.ends_with("に") || ps.ends_with("にも") || ps.ends_with("には")) {
+            for (int slot = 0; slot < static_cast<int>(p->group->entries.size()); slot++) {
+                if (Has(p->EntryText(slot), "에게")) return true;
+            }
+        }
+        if (ClauseBreak(p)) break;
+    }
+    return false;
+}
+
+// Whether the dictionary word it, the られ form of the verb of stem, may read as that verb's potential
+// with an object (spec GRM-3871): its verb is an ichidan verb (止められ: 止める; not 知られ of 知る), and no
+// verb of giving, telling, taking or doing to someone whose passive keeps its object (与えられる, 認められる,
+// 取り上げられる, verb.object-passive: 傷をつけられる).
+bool IchidanObjectPotential(Flusher& f, const Item* it, std::string_view stem) {
+    std::string_view base;
+    if (BaseVerbRecords(f, it->group->surface, base).empty() || base.empty()) return false;
+    const char32_t last = DecodeLastRune(base).cp;
+    if (std::u32string_view(U"いきぎしじちぢにひびぴみりえけげせぜてでねへべぺめれ").find(last) == std::u32string_view::npos &&
+        base != "見" && base != "着" && base != "出" && base != "寝") {
+        return false;
+    }
+    return !dict::InClass(HDTRANS_CLASS("verb.object-passive"), base) &&
+           !dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), base) && !dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), base) &&
+           !dict::InClass(HDTRANS_CLASS("verb.receiver-passive"), base) && !dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem) &&
+           !dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), stem);
+}
+
 Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem, std::string_view rest, bool passive,
               bool ichidan, const Item* agent) {
     // The shorter verb's passive (腕を掴まれた), with its object or after an agent in a narrative form;
@@ -1317,6 +1351,16 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
     if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
+    // A dictionary word that is the られ form of an ichidan verb with an object を in its clause and no
+    // agent is the potential, as an analysed られ is (PassiveReading: 魔力を止められる 마력을 멈출 수 있다,
+    // 感想を伝えられます 감상을 전할 수 있습니다) (spec GRM-3871).
+    // Only a form that is no narrative past or て (取り上げられた, 縛られた stay passive), and no causative
+    // passive (させられます).
+    if (form == VoiceForm::Lexical && ichidan && agent == nullptr && !rest.starts_with("た") && !rest.starts_with("て") &&
+        !rest.starts_with("ちゃ") && !rest.starts_with("ちま") && !surface.ends_with("せられ") && ActedObjectBefore(it) && ObjectWithoutRecipient(it) && !PersonRecipientBefore(it) &&
+        IchidanObjectPotential(f, it, stem) && !PassiveReading(f.w, it, rest)) {
+        return Voice::Potential;
+    }
     return Voice::None;
 }
 

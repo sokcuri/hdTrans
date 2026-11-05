@@ -1,0 +1,22 @@
+# 규칙: GRM-3871
+rule	input	expected	kind	layer
+voice:lexical-object-potential	魔力を止められるんだな！	마력을 멈출 수 있는구나!	fix	voice
+voice:lexical-object-potential	やっと感想を伝えられます	드디어 감상을 전할 수 있습니다	fix	voice
+voice:lexical-object-potential	彼を止められるのは 伝説のヒーローしかいないのだ	그를 막을 수 있는 것은 전설의 히어로밖에 없는 것이다	fix	voice
+voice:lexical-object-potential	あっ… 榊山官房長の暴走を 止められれば 一発逆転できるかもしれません｡	앗… 사카키야마 관방장의 폭주를 멈출 수 있으면 한 방 역전할 수 있을지도 모릅니다.	fix	voice
+voice:lexical-object-potential	夏樹ちゃんを 受け入れられるくらいには 成長してたんだ	나츠키짱을 받아들일 수 있을 정도로는 성장하고 있었어	fix	voice
+voice:lexical-object-potential	「牢獄でもいいですよ、研究を続けられるなら」	「감옥에서도 좋아요, 연구를 계속할 수 있다면」	fix	voice
+voice:lexical-object-potential	「白崎、もう少し声を抑えられるか」	「시라사키, 좀 더 목소리를 억제할 수 있을까」	fix	voice
+voice:lexical-object-potential	「だからこそ、お前を支えられると思ってる」	「그렇기에, 너를 지탱할 수 있다고 생각해」	fix	voice
+voice:lexical-object-potential	とりあえず、私に危害が及ばないことを確かめられる。	우선, 나에게 위해가 미치지 않는 것을 확인할 수 있다.	fix	voice
+voice:lexical-object-potential	神は美と力と真実を 言葉で伝えられる者を選ぶ	신은 미와 힘과 진실을 말로 전할 수 있는 사람을 선택한다	fix	voice
+voice:lexical-object-potential	お前が仲間のために命を捨てられる本当に強いやつだってことを知ってる！	네가 동료를 위해 목숨을 버릴 수 있는 정말 강한 녀석도 일을 알고 있어!	fix	voice
+voice:lexical-object-potential	「学園の知名度を上げられればと思っただけです」	「학원의 지명도를 올릴 수 있으면 하고 생각했을 뿐입니다」	fix	voice
+voice:lexical-object-potential	きっかけは傷をつけられることだ	lacks:붙일 수	keep	voice
+voice:lexical-object-potential	後日 応接ソファーを勧められる。	후일 응접 소파를 권유받는다.	keep	voice
+voice:lexical-object-potential	…返答代わりに、空き缶を投げつけられる。	…대답 대신에, 빈 깡통을 던져진다.	keep	voice
+voice:lexical-object-potential	ここを誰かに見られるかもしれない。	여기를 누군가에게 보일지도 모른다.	keep	voice
+voice:lexical-object-potential	賞を与えられた。	상이 주어졌다.	keep	voice
+voice:lexical-object-potential	父に止められた。	아버지에게 제지당했다.	keep	voice
+voice:lexical-object-potential	まさに大好物を取り上げられた赤子のように	그야말로 좋아하는 음식을 빼앗긴 갓난아이처럼	keep	voice
+voice:lexical-object-potential	断ることもできず、私は毎朝、教室の掃除をさせられます。	거절할 수도 없어, 저는 매일 아침, 교실 청소를 하도록 강요받습니다.	keep	voice
