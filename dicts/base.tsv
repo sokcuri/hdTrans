@@ -273537,6 +273537,7 @@ ttt	ttt	K110			GN				jisjk:201744
 現払い	현금 지불	I110			GN				jisjk:88882		
 現時	지금	N110	UMe		GN				jisjk:179342		
 現時代	현시대	I110	UMe		GN				jisjk:88886		
+現時刻	현시각	N110			GN			現時刻는 `현시각`이다(GRM-3852).	grm:3852:現時刻-1		
 現時点	현시점	I110	VPl		GN				jisjk:88887		
 現有	현유	N110			GN				jisjk:38985		
 現有勢力	현유세력	I110			GN				jisjk:88889		

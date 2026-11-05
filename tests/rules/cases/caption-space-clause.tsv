@@ -1,0 +1,13 @@
+# 규칙: GRM-3851, GRM-3852
+rule	input	expected	kind	layer
+cx:caption-space-clause:10	海が見たい 人を愛したい	바다를 보고 싶다 사람을 사랑하고 싶다	fix	rewrites
+cx:caption-space-clause:10	あなたを守りたい 運命に触りたい	has:지키고 싶다 운명에	fix	rewrites
+cx:caption-space-clause:10	あいつをよく知りたい あいつに触れたい	has:알고 싶다 저 녀석에게	fix	rewrites
+cx:caption-space-clause:10	もっと近づきたい その手に触れたい。	has:가까워지고 싶다 그 손에	fix	rewrites
+cx:caption-space-clause:10	会いたい 人がいる	has:만나고 싶은 사람이 있다	keep	rewrites
+cx:caption-space-clause:10	何もやっていないと信じたい 気持ちは わかるけどね	has:믿고 싶은 마음은	keep	rewrites
+cx:caption-space-clause:10	叶えたい 願いは 色々あるけど	has:이루고 싶은 소원은	keep	rewrites
+cx:yori:12	現時刻より作戦を開始する	has:현시각부터 작전을	fix	rewrites
+cx:yori:12	この瞬間より戦闘を開始する	has:이 순간부터	fix	rewrites
+cx:yori:12	この瞬間より美しい	has:이 순간보다	keep	rewrites
+cx:yori:12	現時点より前	has:보다	keep	rewrites
