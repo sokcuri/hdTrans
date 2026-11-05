@@ -5468,6 +5468,7 @@ ttt	ttt	K110			GN				jisjk:201744
 えぞ松	가문비나무	N110			GN				jisjk:163600		
 えぞ花	에조바나	N130	QCTVPl		GN				jisjk:276556		
 えた	천민	K110	VHnUQfUAq		GN				jisjk:348955		
+えたいの知れな	정체를 알 수 $FA@	H7U0			GN			えたいの知れない는 `정체를 알 수 없다`다(LEX-4985).	lex:4985:えたいの知れな-1		
 えだがわ	지류	N110	VPl		GN				jisjk:127555		
 えだは	지엽	N110	VPt		GN				jisjk:127560		
 えだまめ	풋콩	N110	VPt		GN				jisjk:127562		
@@ -9146,6 +9147,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かしこ	영리$AB@	H7U0			GN				jisjk:4962		
 かしこし	대월	N110			GN				jisjk:168161		-1
 かしこし	대월	N110			GN				jisjk:168162		-1
+かしこま	어려워&AV@	M418			GN			かしこまる는 어려워하다(격식을 차리다)다(LEX-4985).	lex:4985:かしこま-1		
 かしこまりました	알겠습니다	I110			GN				jisjk:112301		
 かしざしき	빌려 주는 방	N110	VBlVMo		GN				jisjk:168167		-1
 かししつ	셋방	N110	VBlVMo		GN				jisjk:168168		-1
@@ -33993,6 +33995,8 @@ ttt	ttt	K110			GN				jisjk:201744
 という事で	그래서	P200			GN	4667	||1 G+0== "Hz"	문장 처음의 という事で를 연결 표현 '그래서'로 고른다. (미발동: rare-context)	jisjk:369685		
 ということで、	(이)라는 것으로,	P200	XXX		GN				kotode:quote		
 ということで、	그래서,	P200			GN	4667	||1 G+0== "Hz"	문장 처음의 ということで、를 연결 표현 그래서로 고른다.	kotode:so		
+とめどな	끝$FA@	H7U0			GN			とめどない는 止め処ない, `끝없다`다(LEX-4985).	lex:4985:とめどな-1		
+とめどなく	끝없이	E300			GN			とめどなく는 `끝없이`다(LEX-4985).	lex:4985:とめどなく-1		
 と言うことで、	(이)라는 것으로,	P200	XXX		GN				kotode:say-quote		
 と言うことで、	그래서,	P200			GN	4667	||1 G+0== "Hz"	문장 처음의 と言うことで、를 연결 표현 그래서로 고른다.	kotode:say-so		
 という名前	(이)라는 이름	P220			GN				jisjk:6267		
@@ -38842,6 +38846,7 @@ ttt	ttt	K110			GN				jisjk:201744
 はなをつま	코를 &FA@	M425	UYh		GN				jisjk:258844		
 はな垂らし	코흘리개	I110	VHn		GN				jisjk:41487		
 はな垂れ	코흘리개	N110	VHn		GN				jisjk:154078		
+はにか	수줍어&AV@	M415			GN			はにかむ는 `수줍어하다`다(LEX-4985).	lex:4985:はにか-1		
 はにかみ屋	부끄럼쟁이	N110			GN				jisjk:201592		
 はね	(은)는 말이야	P211			GN				jisjk:201703		
 はねのけ	제거&AV@	M447			GN				jisjk:361675		
@@ -39547,6 +39552,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ひな	병아리	N110	VAm		GN				jisjk:154399		
 ひなた	양지	I110			GN				jisjk:106500		
 ひなたくさ	촌스$G7@	H7N0			GN				jisjk:122587		
+ひなたぼっこ	볕쬐기	N110			GN			ひなたぼっこ는 日向ぼっこ, `볕쬐기`다(LEX-4985).	lex:4985:ひなたぼっこ-1		
 ひなた臭	촌스$G7@	H7N0			GN				jisjk:122585		
 ひなどり	새끼 새	N110	VAm		GN				jisjk:154401		
 ひなの	히나노	I130			GN				jisjk:117821		
@@ -42589,6 +42595,7 @@ ttt	ttt	K110			GN				jisjk:201744
 もつ鍋	곱창전골	N110	VFd		GN				jisjk:364324		
 もて	가질 수 &HN@	M427		MaKe	GN	1854	||3 &&3 U+0== "Lません" S-1== "を" D+0= "가질 수 &M9@" &&2 M+0== "590" D+0= "가&AL@" S-1== "を"	もて가 ません형이며 앞에 を가 있으면 가질 수 없다로 바꾸고 부정 연결형은 가지다로 바꾸며 그 밖의 を 뒤에서는 원래 후보를 고른다. (미발동: rare-word)	jisjk:257743		
 もて	인기&HN@	M427	UYh	Ma	GN	3277	||4 &&5 U+0== "Lません" P-1== "2**" P-2== "12*13*" A-2== "VHn" D+0= "인기&M9@" &&3 U+0== "Lません" S-1== "そこそこ" D+0= "인기&M9@" &&3 P-1== "2**" P-2== "12*13*" A-2== "VHn" S-1== "そこそこ"	사람을 뜻하는 대명사·고유 명사와 조사 뒤나 そこそこ 뒤에서 もて를 인기있다로 고르고 ません형은 인기없다로 바꾼다. (미발동: rare-word)	jisjk:342540		
+もてあそ	가지고 &K3@	M426			GN			もてあそぶ는 弄ぶ, `가지고 놀다`다(LEX-4985).	lex:4985:もてあそ-1		
 もてあま	주체 못&AV@	M433			GN				jisjk:91519		
 もててい	인기&HN@	M427		Ma	GN	3307	||1 &&2 U+0== "Lません" D+0= "인기&M9@"	어미가 ません으로 시작하면 もててい를 인기없다로 바꾼다. (미발동: rare-word)	jisjk:342643		
 もてな	대접&AV@	M433			GN				jisjk:91520		
@@ -204766,6 +204773,7 @@ ttt	ttt	K110			GN				jisjk:201744
 得を	이득을 &AY@	M429			GN				jisjk:142992		
 得一郎	토쿠이치로우	N130	QPN	Wb	GN				jisjk:356557		
 得体	정체	N110			GN				jisjk:19813		
+得体の知れな	정체를 알 수 $FA@	H7U0			GN			得体の知れない는 `정체를 알 수 없다`다(LEX-4985).	lex:4985:得体の知れな-1		
 得体を知れな	정체를 알 수 $FA@	H7N0			GN				jisjk:121969		
 得分	몫	N110			GN				jisjk:19807		
 得勢	득세	N110			GN				jisjk:19808		
@@ -231410,6 +231418,8 @@ ttt	ttt	K110			GN				jisjk:201744
 服務	복무	N110		Hd	GN				jisjk:23867		
 服喪	상복	N110	VCpVAc		GN				jisjk:23869		
 服地	복지	N110	VCp		GN				jisjk:23878		
+服屋	옷가게	N110	VBlVPl		GN			服屋는 `옷가게`다(LEX-4985).	lex:4985:服屋-1		
+服屋さん	옷가게	K110	VPlVGtVMo		GN			服屋さん은 本屋さん처럼 가게 `옷가게`다(LEX-4985).	lex:4985:服屋さん-1		
 服属	복속	N110		Hd	GN				jisjk:23870		
 服岡	후쿠오카	N130	QCTVPl		GN				jisjk:325895		
 服巻	하라마키	N130	QCTVPl		GN				jisjk:321498		
@@ -306349,6 +306359,7 @@ ttt	ttt	K110			GN				jisjk:201744
 腑	내장	N110	VBp		GN				jisjk:369767		
 腑	부	N110		On	GN				jisjk:369768		
 腑に落ち	납득이 &A1@	M427		Pn	GN				jisjk:369773		
+腑抜け	얼간이	N110			GN			腑抜け는 `얼간이`다(LEX-4985).	lex:4985:腑抜け-1		
 腓	장딴지	N110	VBp		GN				jisjk:182900		
 腓返し	장딴지 경련	N110	QHP		GN				jisjk:182987		
 腓骨	종아리뼈	N110	VBp		GN				jisjk:154310		
@@ -332943,6 +332954,7 @@ ttt	ttt	K110			GN				jisjk:201744
 身神	미카미	N130	QCTVPl		GN				jisjk:330278		
 身禄	미로쿠	N130	VHn		GN				jisjk:222357		
 身篭	임신&AV@	M438			GN				jisjk:93894		
+身籠	임신&AV@	M418			GN			身籠る는 `임신하다`다(LEX-4985).	lex:4985:身籠-1		
 身繕い	몸치장	I110			GN				jisjk:105966		
 身肉	신체	N110	VBp		GN				jisjk:252242		
 身蝉	수리부엉이	N110	VAm		GN				jisjk:252655		
