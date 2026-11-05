@@ -69,7 +69,7 @@ register:REG-21	「お前に教えてやるっ！」	「너에게 가르쳐 줄�
 register:REG-21	「殺してやるっ！」	「죽여 버릴 거야!」	keep	register
 register:REG-21	「ぶっ飛ばしてやるっ！」	「날려 버릴 거야!」	keep	register
 register:REG-21	「わかった、やってみる」	「알았다, 해 볼게」	fix	register
-register:REG-22	「私はもう帰る」	「나는 이제 돌아가」	fix	register
+register:REG-22	「私はもう帰る」	「나는 이제 돌아갈 거야」	fix	register
 register:REG-22	「明日は雨が降りそうだ」	「내일은 비가 올 것 같아」	fix	register
 register:REG-22	「痛かった痛かった」	「아팠어 아팠어」	fix	register
 register:REG-22	「しかし、概要くらいは話してほしいものだ」	「하지만, 개요 정도는 이야기해 줬으면 하는 것이다」	keep	register

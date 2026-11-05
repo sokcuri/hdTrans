@@ -7,10 +7,10 @@ dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	
 dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
 dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local
 dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 마」	fix	local
-dict:variant:atashi:2	「アタシが行く」	「내가 가」	fix	local
+dict:variant:atashi:2	「アタシが行く」	「내가 갈게」	fix	local
 dict:jisjk:1204	「あたしを見て」	「나를 봐」	fix	local
 dict:jisjk:1204	「あたしに任せて」	「나에게 맡겨」	fix	local
-dict:jisjk:1204	「あたしが行く」	「내가 가」	keep	local
+dict:jisjk:1204	「あたしが行く」	「내가 갈게」	keep	local
 dict:variant:atashitachi:1	「あたしたちの家だよ」	「우리의 집이야」	fix	lookup
 dict:jisjk:144074	敵を撃った。	적을 쏘았다.	fix	lookup
 dict:jisjk:144074	「撃って」	「쏘아」	fix	lookup

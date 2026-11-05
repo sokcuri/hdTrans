@@ -71,7 +71,7 @@ dict:dialogue-senses:12	↑オイオイｗほんの少し上に382とミドリ�
 dict:dialogue-senses:12	書き込みが途絶えて結構時間が経ってますが	has:글이 끊어져	fix	lookup
 dict:dialogue-senses:12	ミドリさんの書き込みから、丸2日以上経ってますが	has:미도리 씨의 글로부터	fix	lookup
 dict:dialogue-senses:12	展開予想などの書き込みは、	has:등의 글은	fix	lookup
-dict:jisjk:142896	ちょっと詳しく書き込むから待っててー	has:자세하게 적으니까	fix	lookup
+dict:jisjk:142896	ちょっと詳しく書き込むから待っててー	has:자세하게 적을 테니까	fix	lookup
 dict:jisjk:142896	電話番号を書き込め	전화번호를 적어라	fix	lookup
 dict:jisjk:142896	俺は目を閉じて、頭の中の工程表に最初の一行を書き込んだ。	has:한 줄을 적었다	fix	lookup
 dict:jisjk:142896	うん、また進展があったら書き込むよ	has:있으면 적어	fix	lookup

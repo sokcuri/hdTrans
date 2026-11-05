@@ -27,7 +27,7 @@ normalize:spelling-variant	近々 この地を去る事に	has:떠나는 것에	
 normalize:spelling-variant	調べりゃ　分かる事だ。	has:아는 것이다	fix	normalize
 normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
 normalize:spelling-variant	「……アールの事を思っていたんです」	「……아르를 생각했습니다」	keep	normalize
-normalize:spelling-variant	こないだの事は謝るから出してくれ！」	지난번의 일은 사과하니까 내 줘!」	keep	normalize
+normalize:spelling-variant	こないだの事は謝るから出してくれ！」	지난번의 일은 사과할 테니까 내 줘!」	keep	normalize
 normalize:spelling-variant	しかも、こんな事態になるなんて……。	게다가, 이런 사태가 되다니…….	keep	normalize
 normalize:spelling-variant	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	normalize
 normalize:spelling-variant	そんな事を何故考えていたかというと、	그런 일을 왜 생각하고 있었는가라고 하면,	keep	normalize

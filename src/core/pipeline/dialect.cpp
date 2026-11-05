@@ -694,6 +694,22 @@ bool RegionalWord(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The Kansai ええ of いい before the ん or の of an explanation or a question and before やん, やろ
+// (ほんまにええんか 정말 괜찮아?, ええのに, ええやん): いい. Not a drawn-out ええ (ねええ, ええええ).
+bool GoodBeforeNoda(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "ええ")) return false;
+    if (pos > 0 && In(LastRune(s.substr(0, pos)).cp, U"えぇーね")) return false;
+    bool follows = false;
+    for (const std::string_view f : {"んか", "んや", "んやろ", "んだ", "んです", "のか", "のに", "やん", "やろ", "ねん"}) {
+        follows = follows || s.substr(p).starts_with(f);
+    }
+    if (!follows) return false;
+    m.group[1] = "いい";
+    m.end = p;
+    return true;
+}
+
 // でがんす, がんす after a noun and ざます, ざんす of old polite speech: です.
 bool OldPolite(std::string_view s, size_t pos, Match& m) {
     for (const std::string_view w : {"でがんす", "ざます", "ざんす"}) {
@@ -733,6 +749,17 @@ bool TeBefore(std::string_view s, size_t pos, std::string_view& head) {
     return IsKanjiClass(last) || In(last, U"っいしえけげせぜてねべぺめれきぎじちひびみり");
 }
 
+// The 言っておくれでない that forbids a saying (つまらない事を言っておくれでない): 言わないでくれ, whose
+// 말하지 말아 줘 the dictionary reads; the て form of 言う (stem.te-saying) has its negative in わ.
+bool SayingForbidden(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "っておくれでない") || s.substr(p).starts_with("か")) return false;
+    if (dict::EndsWithMember(HDTRANS_CLASS("stem.te-saying"), Cat({s.substr(0, pos), "っ"})) == 0) return false;
+    m.group[1] = "わないでくれ";
+    m.end = p;
+    return true;
+}
+
 // The おくれ of an old request after a て form (待っておくれ, 貸しておくれでないか): くれ. Not おくれる (be late).
 bool OldRequest(std::string_view s, size_t pos, Match& m) {
     std::string_view head;
@@ -740,7 +767,12 @@ bool OldRequest(std::string_view s, size_t pos, Match& m) {
     if (!Lit(s, p, "おくれ") || !TeBefore(s, pos, head)) return false;
     size_t q = p;
     if (Lit(s, q, "でない")) {
-        m.group[1] = "くれない";
+        // おくれでないか asks for it (貸しておくれでないか 빌려 주지 않겠는가); おくれでない alone forbids it,
+        // the くれるな of an old request (泣いておくれでない 울지 말아 다오)
+        const bool asks = s.substr(q).starts_with("か");
+        // 言っておくれでない is read by SayingForbidden
+        if (!asks && dict::EndsWithMember(HDTRANS_CLASS("stem.te-saying"), head) > 0) return false;
+        m.group[1] = asks ? "くれない" : "くれるな";
         m.end = q;
         return true;
     }
@@ -1010,6 +1042,8 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     text = ReplaceAll(text, SenbaPolite, group1);
     text = ReplaceAll(text, NominalEnd, group1);
     text = ReplaceAll(text, RegionalWord, group1);
+    if (text.find("ええ") != std::string::npos) text = ReplaceAll(text, GoodBeforeNoda, group1);
+    if (text.find("おくれでない") != std::string::npos) text = ReplaceAll(text, SayingForbidden, group1);
     if (text.find("おくれ") != std::string::npos) text = ReplaceAll(text, OldRequest, group1);
     if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredState, group1);
     if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredComing, group1);
