@@ -1,0 +1,41 @@
+# 규칙: GRM-3849, LEX-3835, LEX-3836, LEX-3837, LEX-3838
+rule	input	expected	kind	layer
+cx:split-compounds:10	２日目にして早くも勝負どころか	has:2일째에 벌써	fix	rewrites
+cx:split-compounds:10	"奥地への行程14日目にして"	has:14일째에	fix	rewrites
+cx:split-compounds:10	その１１回目にして、皆さんが待ちに待ったニュースを	has:11번째에	fix	rewrites
+cx:split-compounds:10	三人目にして やっと 適合できるとわかったのじゃ	has:번째에 드디어	fix	rewrites
+cx:split-compounds:10	じゃあ 私たちが ２番目にしとこっかな	!rule:cx:split-compounds:10	keep	rewrites
+cx:split-compounds:10	コンピュータを最後の２番目にし 可能な限り動かすよう	!rule:cx:split-compounds:10	keep	rewrites
+cx:split-compounds:20	社会人三年目にして、今さらながら初体験だ。	has:사회인 3년째에,	fix	rewrites
+cx:split-compounds:20	これは君が７年目にして やっと 手がける作品だって？	has:7년째에 드디어	fix	rewrites
+cx:split-compounds:20	あれを一度目にした者は死ぬと言われている	!rule:cx:split-compounds:20	keep	rewrites
+cx:split-compounds:30	少々 形がいびつになる程度で 済んでいます	has:찌그러지게 될 정도로	fix	rewrites
+cx:split-compounds:30	あちらこちらのお家から内々に呼ばれるほどになる程度には有名になった	has:될 정도에는	fix	rewrites
+cx:split-compounds:30	なる程、そういうことか	!rule:cx:split-compounds:30	keep	rewrites
+cx:split-compounds:30	せいぜい５年くらい気になる程度でしょうか	!rule:cx:split-compounds:30	keep	rewrites
+cx:split-compounds:40	この一振りの剣	has:한 자루의 검	fix	rewrites
+cx:split-compounds:40	我は刀 名もなき一振りの刀。	has:한 자루의 칼	fix	rewrites
+cx:split-compounds:40	たった一振りの 刃で	has:한 자루의 칼날	fix	rewrites
+cx:split-compounds:40	剣の一振りで	!rule:cx:split-compounds:40	keep	rewrites
+cx:split-compounds:40	この一振りに全てを賭ける！	!rule:cx:split-compounds:40	keep	rewrites
+cx:split-compounds:42	霧隠れ七刀のうちの一振り	has:가운데 한 자루	fix	rewrites
+cx:split-compounds:42	一振りの間に総括と食事が 終わってるの	!rule:cx:split-compounds:42	keep	rewrites
+dict:lex:3835:な程度-1	焦って勉強しなくても平気な程度には	has:괜찮은 정도에는	fix	lookup
+dict:lex:3835:な程度-1	強力な程度には魔法力を押さえるのに成功している	has:강력한 정도에는	fix	lookup
+dict:lex:3835:な程度-1	こんな程度で終われないんだっ！	이런 정도로 끝날 수 없어!	keep	lookup
+dict:lex:3836:一振り-1	そなたの剣の一振りで この戦は終わる	has:한 번 휘두름으로	fix	lookup
+dict:lex:3836:一振り-1	樫の木を斧一振りで 切り倒すって	has:도끼 한 번 휘두름으로	fix	lookup
+dict:lex:3836:一振り-2	剣を一振りした	has:한 번 휘둘렀다	fix	lookup
+dict:lex:3837:一生徒-1	校を出てしまった以上、二人は一生徒ではない。	has:일개 학생이 아니다	fix	lookup
+dict:lex:3837:一生徒-1	たとえ一生徒として文化祭に参加するとしても	has:일개 학생으로서	fix	lookup
+dict:lex:3837:一指導者-1	一指導者として。	일개 지도자로서.	fix	lookup
+dict:lex:3837:一教師-1	この映画は 一教師が執筆した	has:일개 교사가	fix	lookup
+dict:lex:3837:一兵士-1	ヘクトルも一兵士です	has:일개 병사입니다	fix	lookup
+dict:lex:3837:一兵卒-1	アキレスなど 一兵卒にすぎん！	has:일개 병졸에	fix	lookup
+dict:lex:3837:一刑事-1	私は田舎の 一刑事にすぎない	has:일개 형사에	fix	lookup
+dict:lex:3837:一騎士-1	爵位もない一騎士が結婚など、身分差がありすぎる。	has:일개 기사가	fix	lookup
+dict:lex:3837:一自衛官-1	一自衛官として、その問いには答えられない。	has:일개 자위관으로서	fix	lookup
+dict:lex:3837:一女性-1	それに一女性として男勝りの	has:한 여성으로서	fix	lookup
+dict:lex:3837:一生徒-1	第一生徒会室	제1학생회실	keep	lookup
+dict:lex:3837:一兵士-1	万一兵士が	has:만일 병사가	keep	lookup
+dict:lex:3838:涙滴-1	涙滴型のぽちゃっとしたシルエットの体型	has:눈물방울형	fix	lookup
