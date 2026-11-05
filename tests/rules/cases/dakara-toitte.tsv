@@ -9,7 +9,7 @@ pattern:静かだからといって	静かだからといって安心はでき�
 pattern:学生だからといって	だからといって、手抜き飯で済ませるわけにはいかない	has:그렇다고 해서,	keep	lookup
 pattern:学生だからといって	それはそうだけど、だからといって私達にそれを止める権利はない	has:그렇다고 해서 저희들에게	keep	lookup
 pattern:学生だからといって	人質だからって何もされないとは限らない	has:인질이라고 해서	keep	lookup
-pattern:学生だからといって	いくら飲み屋街だからって、今何時だと思ってんのよ。	has:술집거리라고 해서,	keep	lookup
+pattern:学生だからといって	いくら飲み屋街だからって、今何時だと思ってんのよ。	has:술집거리라고 해도,	keep	lookup
 pattern:学生だからといって	子供だからといって、甘やかすな。	has:아이라고 해서,	fix	lookup
 pattern:学生だからといって	女だからといって、手加減はしない。	has:여자라고 해서,	fix	lookup
 pattern:静かだからといって	簡単だからといって、油断するな。	has:간단하다고 해서,	fix	lookup
