@@ -179,3 +179,20 @@ normalize:dialect-keep	フル～ツや きのみの はいったパンは みん
 normalize:dialect-keep	激しく締めつけられて、病みつきになりそうな刺激がこみあげてきた。	격렬하게 조여져, 푹 빠질 것 같은 자극이 울컥거려 왔다.	keep	normalize
 normalize:dialect-keep	約束の時間は疾うに過ぎた。	약속의 시간은 벌써 지났다.	keep	normalize
 normalize:dialect-keep	あいつ、マジでうるせえよ。	저 녀석, 진짜로 시끄러워.	keep	normalize
+normalize:dialect-word	ええ確かに	네, 확실히	fix	normalize
+normalize:dialect-word	ええ大丈夫よ。	네, 괜찮아.	fix	normalize
+normalize:dialect-word	「ええ勿論少しはしましたわ。	「네, 물론 조금은 했어요.	fix	normalize
+normalize:dialect-word	ええ本当よ。	네, 사실이야.	fix	normalize
+normalize:dialect-word	ええ使いましたよ	네, 썼어요	fix	normalize
+normalize:dialect-word	「ええ云ってごらん。	「네, 말해 봐.	fix	normalize
+normalize:dialect-word	「ええ差上げるわ。	「네, 드릴게.	fix	normalize
+normalize:dialect-word	ええ塩梅じゃのう。	좋은 간이로구먼.	keep	normalize
+normalize:dialect-word	ええ装備じゃねぇ、皆も喜ぶけぇ。	좋은 장비가 아닌, 모두도 기뻐할 테니까.	keep	normalize
+normalize:dialect-word	ええ旦那さんだなあ。	좋은 남편이구나.	keep	normalize
+normalize:dialect-word	ええ子やから封筒出し	좋은 아이니까 봉투 방편	keep	normalize
+normalize:dialect-word	ええ店ないな ほんまに	좋은 가게 없다 진짜로	keep	normalize
+normalize:dialect-word	ええ肉やな	좋은 고기네	keep	normalize
+normalize:dialect-adj	赤かと思ったら青だった。	빨강인가 했더니 파랑이었다.	keep	normalize
+normalize:dialect-adj	白かよ！	흰색인가!	keep	normalize
+normalize:dialect-adj	黒かね、それとも白かね。	흑인가, 아니면 흰색인가.	keep	normalize
+normalize:dialect-adj	白か黒かの二択だ。	흰색이나 흑인가의 2택이다.	keep	normalize

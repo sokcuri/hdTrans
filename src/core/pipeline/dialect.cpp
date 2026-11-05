@@ -372,16 +372,15 @@ bool KyushuAdjective(std::string_view s, size_t pos, Match& m) {
     }
     // Not the volitional of an ichidan verb said short (見よか 見ようか).
     if (stem.ends_with("よ") && VerbIs(std::string(stem.substr(0, stem.size() - std::string_view("よ").size())) + "る")) return false;
-    // A stem of kanji alone before a noun is the noun and the か of a choice (赤か青 赤 or 青).
-    const bool bare = !IsHiraganaClass(LastRune(stem).cp) && stem != "よ";
+    // A stem of kanji alone is the noun and the か of a question or a choice (赤か青, 赤かと思ったら, 白かよ！).
+    if (!IsHiraganaClass(LastRune(stem).cp) && stem != "よ") return false;
     // Not the か of くは before a negative (痛かねえ 痛くはない, 悪かねえ).
     for (const std::string_view w : {"ねえ", "ねぇ", "ねー", "ない", "ねェ", "ねエ"}) {
         if (s.substr(p).starts_with(w)) return false;
     }
-    // What follows: a noun (kanji, katakana), the copula, a particle of the end or the end. A stem of
-    // kanji alone is the noun and the か of a question or a choice before the end (悪か それとも, 青か……).
+    // What follows: a noun (kanji, katakana), the copula, a particle of the end or the end.
     const char32_t next = p < s.size() ? At(s, p).cp : 0;
-    const bool ok = (EndAt(s, p) && !bare) || (!bare && (IsKanjiClass(next) || IsKatakanaRune(next))) || s.substr(p).starts_with("でしょ") ||
+    const bool ok = EndAt(s, p) || IsKanjiClass(next) || IsKatakanaRune(next) || s.substr(p).starts_with("でしょ") ||
                     s.substr(p).starts_with("です") || s.substr(p).starts_with("ね") || s.substr(p).starts_with("よ") ||
                     s.substr(p).starts_with("ばい") || s.substr(p).starts_with("と") || s.substr(p).starts_with("の");
     if (!ok) return false;
@@ -663,6 +662,24 @@ bool RegionalWord(std::string_view s, size_t pos, Match& m) {
         if (w.where == 4 && !(p < s.size() && (IsKanjiClass(At(s, p).cp) ||
                                                (IsKatakanaRune(At(s, p).cp) && !In(At(s, p).cp, U"ーッァィゥェォャュョ"))))) {
             continue;
+        }
+        // Opening the line, a sentence or a quote, ええ before an adverb, a word of manner, a verb or a person
+        // is the yes of an answer, written with its comma (ええ確かに, ええ大丈夫よ, ええ勿論, ええ使いましたよ), not the good one
+        // of western speech before a noun (ええ子, ええ塩梅じゃのう, ええ旦那さんだなあ).
+        if (w.where == 4 && (head.empty() || In(b, U"。！？!?「『（(…‥"))) {
+            bool yes = false;
+            for (const std::string_view n :
+                 {"確", "勿論", "無論", "本当", "本気", "然", "全く", "全然", "実は", "少し", "多分", "一応", "大丈夫", "結構", "変", "平気",
+                  "分か", "判", "解", "知", "存じ", "承知", "了解", "構", "喜ん", "是非", "今", "必ず", "絶対", "当然", "云", "言", "使", "差上", "差し",
+                  "吃驚", "行", "来", "待", "見", "聞", "思", "私", "僕", "俺", "彼", "何", "誰", "マジ", "ホント"}) {
+                yes = yes || s.substr(p).starts_with(n);
+            }
+            if (yes) {
+                // the yes is written apart from what it answers (ええ、確かに 네, 확실히)
+                m.group[1] = "ええ、";
+                m.end = p;
+                return true;
+            }
         }
         if (w.where == 1 && p < s.size() && IsHiraganaClass(At(s, p).cp) && !s.substr(p).starts_with("ど")) continue;
         m.group[1] = w.plain;

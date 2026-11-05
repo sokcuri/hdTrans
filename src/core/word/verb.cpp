@@ -485,8 +485,10 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // that undergoes the godan verb (ありがたく思え 고맙게 생각해라, ベストを脱げ 벗어라, コインを取れ 받아라; spec
     // GRM-3944): a kana stem does not show where its word ends, and a stem that acts on an object
     // goes on to the next line (会話を続け, ドアを開け, 砂糖を入れ), as does a causative or passive in せ or れ after
-    // an a-row kana (足を滑らせ, 目を塞がれ).
+    // an a-row kana (足を滑らせ, 目を塞がれ), and so does a stem after が.
     auto undergoes = [&]() {
+        // after が the stem is the subject's own verb (ボタンが取れ 떨어지다), not an order
+        if (std::string_view(text).substr(0, static_cast<std::size_t>(std::max(start, 0))).ends_with("が")) return false;
         const std::string_view stem = std::string_view(surface).substr(0, surface.size() - LastChar(surface).size());
         for (const std::string_view a : {"か", "が", "さ", "ざ", "た", "だ", "な", "ば", "ま", "ら", "わ"}) {
             if (stem.ends_with(a)) return false;
