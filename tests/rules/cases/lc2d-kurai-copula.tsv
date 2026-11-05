@@ -17,7 +17,7 @@ cx:lc2d-kurai-copula:10	「よくってほどではないのよ？　たまに�
 cx:lc2d-kurai-copula:10	「うん。実際に結婚式を挙げちゃう人もいるくらいなんだから」	has:정도니까	fix	rewrites
 cx:lc2d-kurai-copula:10	こんな、苦しくて情けないだけの日々を過ごすくらいだったら。	has:정도라면	fix	rewrites
 cx:lc2d-kurai-copula:10	待ち合わせに指定するくらいですから、目立つものがありまして。	has:정도니까	fix	rewrites
-cx:lc2d-kurai-copula:10	それに騎士団長っていうくらいだから給料だって悪くないだろう。	has:정도니까 급료라도	fix	rewrites
+cx:lc2d-kurai-copula:10	それに騎士団長っていうくらいだから給料だって悪くないだろう。	has:정도니까 급료도	fix	rewrites
 cx:lc2d-kurai-copula:10	くらいでした。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
 cx:lc2d-kurai-copula:10	ぐらいでしょうか」	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
 cx:lc2d-kurai-copula:10	いいよこれくらい！	!rule:cx:lc2d-kurai-copula:10	keep	rewrites

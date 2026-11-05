@@ -39,7 +39,7 @@ cx:datte-listing:10	愚問だ 君だって作るだろ？	우문이다 너도 �
 cx:datte-listing:10	いや 悪魔だ 一度だって 愛に全てをかけたことがあるのか	아니 악마다 한 번도 사랑에 모든 것을 걸었던 적이 있는 건가	keep	rewrites
 cx:datte-listing:10	えっ？ えっ！？ ケーキだ ケーキだって！	어? 어!? 케이크다 케이크래!	keep	rewrites
 cx:datte-listing:10	妖怪だ 妖怪だって？	요괴다 요괴라고?	keep	rewrites
-cx:datte-listing:10	死んだ人間だって生きてる時はそうだったのだ。	죽은 인간이라도 살아 있을 때는 그랬던 것이다.	keep	rewrites
+cx:datte-listing:10	死んだ人間だって生きてる時はそうだったのだ。	죽은 인간도 살아 있을 때는 그랬던 것이다.	keep	rewrites
 cx:datte-listing:10	まだ 未鑑定だってのに…。	아직 미감정이라는데….	keep	rewrites
 cx:datte-listing:10	大変だ ホテルだって｡ なんとかならない？	대단하다 호텔이래. 어떻게든 안돼?	keep	rewrites
 cx:datte-listing:30	あんた 家事も育児もしないし たまに休みでも ゴルフだ何だって 遊んでばっかりで｡	너 가사도 육아도 하지 않고 이따금 휴일이라도 골프니 뭐니 놀아뿐으로.	fix	rewrites
@@ -58,7 +58,7 @@ cx:datte-listing:30	近頃は何だってそうだ。	최근은 뭐든지 그렇
 cx:datte-listing-head:10	やれ地震だ 大水だ 崩落だって 大崩壊だっけ？	할 수 있는 지진이니 홍수니 폭락이니 대붕괴였나?	fix	rewrites
 cx:datte-listing-head:10	あら 私たちなんて 秋田だ 富山だ 東京だって 振り回されてきたのよ｡	어머나 우리는 아키타니 도야마니 도쿄니 좌지우지되어 왔어.	fix	rewrites
 cx:datte-listing-head:10	アフリカじゃ ジオンだ 連邦だ ティターンズだって	아프리카는 지온이니 연방이니 티탄즈니	fix	rewrites
-cx:datte-listing-head:10	同級生が みんな 洋服だ 合コンだって楽しんでるときに	동급생이 모두 옷이다 미팅이라도 즐기고 있을 때	keep	rewrites
+cx:datte-listing-head:10	同級生が みんな 洋服だ 合コンだって楽しんでるときに	동급생이 모두 옷이다 미팅도 즐기고 있을 때	keep	rewrites
 cx:datte-listing:10	>> はい。 秋田だ 長崎だって言って。	>> 네. 아키타니 나가사키니 말해.	fix	rewrites
 lookup:verb-before-te-form	提督さん！新年ね、今年もリベがしっかり面倒見てあげるから大丈夫よ、ねっ！	제독님! 신년이네, 올해도 리베가 제대로 돌봐 주니까 괜찮아, 네!	fix	lookup
 lookup:verb-before-te-form	今日は、私がバッチリ面倒見てあげる。まかせといて、よろしくね。	오늘은, 내가 딱 돌봐 준다. 맡기고 물어라고, 잘 부탁해.	fix	lookup

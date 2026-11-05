@@ -26,6 +26,8 @@
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
+//= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
+//= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
 //= noun.invite-place	Places and gatherings one is invited to with に (うち, 家, パーティー): いらっしゃいませんか after one is 오시지 않겠습니까 (spec LEX-4600).
 //= verb.keep-doing	Stems of verbs one keeps doing (見, 見張, 寝, 待): a ていないと of one that ends the sentence is what one must keep doing, -아야 한다 (spec GRM-3725).
@@ -11166,3 +11168,43 @@ noun.edible	パン
 noun.edible	おにぎり
 noun.edible	団子
 noun.edible	饅頭
+noun.least-able	子供
+noun.least-able	子ども
+noun.least-able	こども
+noun.least-able	ガキ
+noun.least-able	がき
+noun.least-able	赤ん坊
+noun.least-able	赤ちゃん
+noun.least-able	幼児
+noun.least-able	小学生
+noun.least-able	幼稚園児
+noun.least-able	素人
+noun.least-able	シロウト
+noun.least-able	猿
+noun.least-able	サル
+noun.least-able	バカ
+noun.least-able	馬鹿
+noun.least-able	ばか
+noun.least-able	アホ
+noun.least-able	あほ
+noun.least-able	初心者
+noun.least-able	新人
+noun.least-able	犬
+noun.relation-person	友達
+noun.relation-person	友だち
+noun.relation-person	ともだち
+noun.relation-person	トモダチ
+noun.relation-person	仲間
+noun.relation-person	親友
+noun.relation-person	家族
+noun.relation-person	恋人
+noun.relation-person	味方
+noun.relation-person	敵
+noun.relation-person	他人
+noun.relation-person	彼氏
+noun.relation-person	相棒
+noun.relation-person	仲良し
+noun.relation-person	ライバル
+noun.relation-person	同類
+noun.relation-person	兄弟
+noun.relation-person	姉妹
