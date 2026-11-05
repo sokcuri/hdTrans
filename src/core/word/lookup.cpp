@@ -546,11 +546,40 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassHiragana:
         // な and がら after it are the ながら of a verb stem (みながら 보면서).
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
-        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query);
+        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
     case kClassKanji:
         return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
     return text::RuneCount(u.key) >= 3;
+}
+
+// Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name layer
+// does not hold as a person, is followed by the particle で (このへんで, ぶんざいで; LEX-4721): not where the
+// key without a last い or ん is the stem of a godan verb whose て form that で ends (およいで, ならんで), as
+// for the copula だ (KanaBeforeCopula), nor after a last ま or の, whose まで or ので it is (こうまで), nor where
+// the end of the key and で are a word of their own (みたところで).
+bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const {
+    const std::string_view pc = u.codes->partText;
+    if (!rest.starts_with("で") || text::RuneCount(u.key) < 3 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
+        snapshot.NamePerson(u.key)) {
+        return false;
+    }
+    const std::string_view last = LastChar(u.key);
+    // The まで and ので its last kana starts with that で ends (こうまで, not 仔馬 + で), and a word of the
+    // dictionary that the end of the key and で spell (みたところで, ところで).
+    if (last == "ま" || last == "の") return false;
+    for (std::size_t at = 0; at < u.key.size(); at += text::DecodeRune(std::string_view(u.key).substr(at)).size) {
+        const std::string tail = std::string(u.key.substr(at)) + "で";
+        if (text::RuneCount(tail) >= 3 && !snapshot.RetrieveRecords(tail, dict::LookupMode::General).empty()) return false;
+    }
+    const std::string_view rows = last == "い" ? "2" : last == "ん" ? "56<" : "";
+    if (rows.empty()) return true;
+    const std::string_view stem = std::string_view(u.key).substr(0, u.key.size() - last.size());
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view vp = c.codes->partText;
+        if (vp.size() == 4 && vp[1] == '4' && Has(rows, vp.substr(3, 1))) return false;
+    }
+    return true;
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name

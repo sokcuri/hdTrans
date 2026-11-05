@@ -1,0 +1,20 @@
+# 규칙: LEX-4721
+rule	input	expected	kind	layer
+lookup:kana-before-de	いや～ ちょっとした てちがいで…	이야~ 약간의 착오로…	fix	lookup
+lookup:kana-before-de	クソガキのぶんざいで	망할 꼬마의 분수로	fix	lookup
+lookup:kana-spelling	先日は貞宗の守護任命を 記したものでしたが こたびはおそらく…。	요전날은 사다무네의 수호 임명을 적은 것이었지만 이번은 아마….	fix	lookup
+lookup:kana-spelling	親にないしょで 小学生の女の子に 会うような不審者を 信じられるわけがないよ！	부모에게 비밀로 초등학생의 여자아이를 만나는 것 같은 수상한 사람을 믿을 수 있을 리가 없어!	fix	lookup
+lookup:kana-before-de	イシシが どうくつで 1000円もうけてたっけ	이시시가 동굴에서 1000엔 벌고 있었더라	fix	lookup
+lookup:kana-spelling	フッ マルヤクデ かえんほうしゃ	훗 다태우지네 화염방사	fix	lookup
+lookup:kana-spelling	お父さんが来てたことは 叔母ちゃまにも もう１人のパパにも ないしょだよ｡	아버지가 오고 있었던 것은 이모님에게도 또 1명의 아빠에게도 비밀이야.	fix	lookup
+lookup:kana-spelling	それだけ夢中だったんだわ。ふふ、あつあつじゃない、あたしたち	그것만 열중했었어. 후후, 따끈따끈이 아닌, 우리	fix	lookup
+lookup:kana-spelling	シャンデラ ヤナップに おにび！	샹델라 야나프에게 도깨비불!	fix	lookup
+lookup:kana-spelling	てめえら なにもんだ！	네 녀석들 누구야!	fix	lookup
+lookup:kana-spelling	道具は とうぶん 預かります｡	도구는 당분간 맡습니다.	fix	lookup
+lookup:kana-spelling	こういうピンチに さっそうと現れてこそ 一流のアウトローというもの。	이런 핀치에 씩씩하게 나타나야만 일류의 아웃로우라는 것.	fix	lookup
+lookup:kana-spelling	この会場の みんなが どぎもを抜かれるから よく見てなさい。	이 회장의 모두가 간을 뽑히니까 잘 보고 있어.	fix	lookup
+lookup:kana-before-de	『うちゅうでしゃぼんだまをつくったら、どうなりますか？』	『우주에서 비눗방울을 만들면, 어떻게 됩니까?』	fix	lookup
+lookup:kana-before-de	利益がないと こうまで無関心になれるものなのか	이익이 없으면 이렇게까지 무관심하게 될 수 있는 건가	keep	lookup
+lookup:kana-before-de	ならんで歩く	줄서 걷는다	keep	lookup
+lookup:kana-before-de	およいで渡る	헤엄쳐 건넌다	keep	lookup
+lookup:kana-before-de	今日のところはこのへんで	오늘은 이 쯤에서	keep	lookup
