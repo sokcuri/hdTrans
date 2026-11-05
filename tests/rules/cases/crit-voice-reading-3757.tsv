@@ -45,3 +45,9 @@ lexical:reading	要素の一つ	요소의 하나	keep	lookup
 lexical:reading	新しい時代も来そうだし……。	새로운 시대도 올 것 같고…….	fix	lookup
 cx:notice-words-1:141	「エルはもう連れ去られてしまった。今更どうやって？」	「엘은 벌써 끌려가버렸다. 이제 와서 어떻게?」	keep	rewrites
 cx:notice-words-1:141	≪彼女を連れ去られてしまっては、何百万の命が失われる≫	≪그녀가 끌려가버려서는, 몇백만의 생명이 없어진다≫	fix	rewrites
+lexical:humble-causative	御社へ伺わせていただきます。	귀사에 방문하겠습니다.	fix	lookup
+lexical:humble-causative	明日伺わせていただきます。	내일 방문하겠습니다.	fix	lookup
+lexical:humble-causative	お話を伺わせてください	이야기를 듣게 해 주세요	fix	lookup
+cx:notice-words-1:148	人質になっていただきます。	인질이 되어 주셔야겠습니다.	keep	rewrites
+lexical:reading	「お母さん、ルーっていつ入れるの？」	「엄마, 루는 언제 넣는 거야?」	fix	lookup
+lexical:reading	もう入れるよ	이제 들어갈 수 있어	keep	lookup
