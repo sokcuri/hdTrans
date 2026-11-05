@@ -706,6 +706,20 @@ bool JanKa(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// A casual negative ねえ, ねぇ or ねー with a final よ that opens its clause, at the start of the line or after
+// 「, 『, a comma or a space (ねえよ, いや、ねえよ, ねーよそんなもん): there is none, ないよ. The calling ねえ
+// takes no よ (ねえ、聞いてる？).
+bool LoneNee(std::string_view s, size_t pos, Match& m) {
+    const char32_t b = Before(s, pos);
+    if (b != 0 && !In(b, U"「『、，, 　")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー")) return false;
+    if (!Lit(s, p, "よ")) return false;
+    if (p < s.size() && In(At(s, p).cp, U"ねなぉおー")) return false;
+    m.end = p;
+    return true;
+}
+
 // The casual negative ねえ, ねー after a word that takes ない: after わけ or 訳 (わけがない), しか or たくも
 // (わけねーだろ, しかねーし, したくもねーわ), and after a noun in kanji or katakana before よ, だろ, じゃ, し, けど or ぞ,
 // which follow no particle ね (需要ねーよ, 関係ねーじゃん, 魚雷ねえけど; not 綺麗ねー。, 長波ねぇ！).
@@ -713,7 +727,9 @@ bool NounNee(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     bool noun = false;
     bool word = false;
-    for (const std::string_view w : {"わけ", "訳", "しか", "たくも"}) {
+    for (const std::string_view w : {"わけが", "訳が", "わけ", "訳", "しか", "たくも", "らしく", "こと"}) {
+        // ことねえ is ことない only after a past (食べたことねえ, 聞いたことねえ; not 大変なことねえ).
+        if (w == "こと" && Before(s, pos) != U'た' && Before(s, pos) != U'だ') continue;
         if (s.substr(p).starts_with(w)) {
             p += w.size();
             word = true;
@@ -1188,11 +1204,20 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     static constexpr std::u32string_view kARow = U"かがさたなばまら";
     static constexpr std::u32string_view kURow = U"くぐすつぬぶむる";
     static constexpr std::u32string_view kStemRow = U"え";
+    // An ichidan stem in i or e right after the kanji of its verb (通じねえ, 起きねえ, 忘れねえ), where Nee
+    // wants a following kana; not after an adnominal い, な, の or the quoting って, where the kanji and kana are
+    // a noun (いい感じねえ, って感じねぇ).
+    static constexpr std::u32string_view kKanjiStemRow = U"きぎじちびみりけげせぜべめれ";
     size_t p = pos;
     const text::Rune k = text::DecodeRune(s.substr(p));
     if (k.size == 0 || !IsHiraganaRune(k.cp)) return false;
     const size_t a = kARow.find(k.cp);
-    const bool ichidan = kStemRow.find(k.cp) != std::u32string_view::npos;
+    bool ichidan = kStemRow.find(k.cp) != std::u32string_view::npos;
+    if (!ichidan && kKanjiStemRow.find(k.cp) != std::u32string_view::npos && pos > 0 && IsKanjiClass(Before(s, pos))) {
+        const std::string_view head = s.substr(0, pos);
+        const char32_t c = Before(head, head.size() - LastRune(head).size);
+        ichidan = !In(c, U"いなのて");
+    }
     if (a == std::u32string_view::npos && !ichidan) return false;
     p += k.size;
     m.group[1] = Span(s, pos, p);
@@ -1211,6 +1236,23 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     if (k.cp == U'ら' && head.ends_with("や")) {
         const std::string_view lead = head.substr(0, head.size() - std::string_view("や").size());
         if (lead.ends_with("なに") || lead.ends_with("どう") || (!lead.empty() && IsKanjiClass(Before(lead, lead.size())))) return false;
+    }
+    // An ichidan stem after its kanji (kKanjiStemRow): the kanji, the stem and る must spell a verb whole.
+    if (a == std::u32string_view::npos && kStemRow.find(k.cp) == std::u32string_view::npos) {
+        if (runs.verbForm == nullptr) return false;
+        // Before a space the casual negative may end a caption phrase that another starts after (許せねぇ 美人なだけに),
+        // which a rewritten ない would join as a modifier; Nee keeps that case.
+        if (m.group[2] == " " || m.group[2] == "　") return false;
+        const std::string_view kanji = head.substr(head.size() - LastRune(head).size);
+        const std::string stem = std::string(s.substr(pos, k.size)) + "る";
+        // 好き before ねえ is the adjectival noun with the particle (好きねえ), which 着る would read as a verb.
+        if (kanji == "好" && k.cp == U'き') return false;
+        // A verb whole (通じる), or a potential or a longer verb the dictionary has (許せねえ 許せる).
+        if (runs.verbForm(runs.context, std::string(kanji) + stem)) return true;
+        // A potential in e (許せねえ, 動けねえ) the dictionary has as a longer form; not a stem in i, which may be
+        // the old imperative of a godan verb (飲みねえ 飲みなさい) that 見る would read as ichidan.
+        return std::u32string_view(U"けげせぜべめれ").find(k.cp) != std::u32string_view::npos &&
+               runs.dictionaryVerb(runs.context, std::string(head) + stem);
     }
     std::string form(head);
     if (a != std::u32string_view::npos) {
@@ -1363,6 +1405,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         return Cat({m.group[1], wake ? "がない" : "ない"});
     });
     text = ReplaceAll(text, GaNee, [](const Match& m) { return Cat({m.group[1], "ない"}); });
+    text = ReplaceAll(text, LoneNee, [](const Match&) { return std::string("ないよ"); });
     text = ReplaceAll(text, Chimau, [](const Match& m) {
         const Match g = Rematch(m, Chimau);
         if (!g.group[1].empty()) return Cat({g.group[1], "ちゃ", g.group[2]});

@@ -1,0 +1,28 @@
+# 규칙: GRM-3845
+rule	input	expected	kind	layer
+normalize:verb-nee	あれ？ 通じねえ！	어라? 통하지 않아!	fix	normalize
+normalize:verb-nee	《全然 通じねえ！》	《전혀 통하지 않아!》	fix	normalize
+normalize:verb-nee	なんにも起きねえ！	아무것도 일어나지 않아!	fix	normalize
+normalize:verb-nee	俺達は諦めねえ	우리는 포기하지 않는다	fix	normalize
+normalize:verb-nee	とどめが刺せねえ！	결정타를 찌를 수 없어!	fix	normalize
+normalize:verb-nee	何も感じねえ…｡	아무것도 느끼지 않아….	fix	normalize
+normalize:verb-nee	相変わらず好きねえ	변함없이 좋아하는구나	keep	normalize
+normalize:verb-nee	おっ、ついに…って感じねぇ	오, 마침내…라는 느낌	keep	normalize
+normalize:verb-nee	いい感じねえ	좋은 느낌 응	keep	normalize
+normalize:verb-nee	許せねぇ 美人なだけに なおさら怒りが込み上げるぜ	용서할 수 없다 미인인 만큼 더욱더 분노가 복받친다	keep	normalize
+normalize:noun-nee	あんな速攻見たことねぇ	저런 속공 본 적 없다	fix	normalize
+normalize:noun-nee	おおっ こんなきれいな花 見たことねえぞ	오옷 이런 예쁜 꽃 본 적 없어	fix	normalize
+normalize:noun-nee	なんだよ らしくねえな	뭐야 답지 않네	fix	normalize
+normalize:noun-nee	どうしたんだよ？ らしくねえぞ	무슨 일이야? 답지 않아	fix	normalize
+normalize:noun-nee	来るわけがねえ	올 리가 없다	fix	normalize
+normalize:noun-nee	認められるわけがねえだろ！	인정될 리가 없잖아!	fix	normalize
+normalize:noun-nee	大変なことねえ	대단한 일 응	keep	normalize
+normalize:lone-nee	ねえよ 明日だぞ ！	없어 내일이야 !	fix	normalize
+normalize:lone-nee	いや、ねえよ	아니, 없어	fix	normalize
+normalize:lone-nee	ねえ、聞いてる？	있잖아, 듣고 있어?	keep	normalize
+normalize:lone-nee	ねえねえ	있잖아	keep	normalize
+dict:grm:3845:masen-no	安い女ではありませんのよ	싼 여자가 아니에요	fix	local
+dict:grm:3845:masen-no	わたくしの物ではありませんのよ？	제 물건이 아니에요?	fix	local
+dict:grm:3845:masen-no	時間がありませんの	시간이 없어요	keep	local
+dict:grm:3845:masen-no	やるじゃありませんの｡	하는이 아니지 않아요.	keep	local
+dict:grm:3845:masen-no	よいではありませんの よいではありませんの	좋지 않지 않아요 좋지 않지 않아요	keep	local
