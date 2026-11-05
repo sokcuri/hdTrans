@@ -1,0 +1,19 @@
+# 규칙: LEX-4832
+rule	input	expected	kind	layer
+names:single-kanji-name	壁に寄り掛かりながら、腕を組む南が言った	벽에 기대면서, 팔짱을 끼는 미나미가 말했다	fix	names
+names:single-kanji-name	南「や、伊鈴。元気かい」	미나미 「야, 이령. 잘 지내」	fix	names
+names:single-kanji-name	愛「…そうかな。」	아이 「…그럴까.」	fix	names
+names:single-kanji-name	光「ハイブリッドはスゲーな……」	미츠루 「하이브리드는 스게이인……」	fix	names
+names:single-kanji-name	零「流石レイン！我オリキャラ１号！」	레이 「역시 레인! 나 오리지널 캐릭터 1호!」	fix	names
+names:single-kanji-name	ぼんやりと凪が言う。	멍하니 나기가 말한다.	fix	names
+names:single-kanji-name	潮「どうぞ。」	우시오 「어서.」	fix	names
+names:single-kanji-name	「筧が言うなら、試してみるか」	「카케이가 말한다면, 시험해 볼까」	fix	names
+names:single-kanji-name	沙都子は左の頬を押さえながら泣いていた。	사토코는 왼쪽의 뺨을 누르면서 울고 있었다.	keep	names
+names:single-kanji-name	車はじゃり道の上をがりがり言わせてＵターンすると	차는 자갈도 위를 으드득으드득 말하게 해 U턴한다고	keep	names
+names:single-kanji-name	花が笑う	꽃이 웃는다	keep	names
+names:single-kanji-name	雀が鳴いた	참새가 울었다	keep	names
+names:single-kanji-name	海の声が聞こえる	바다의 목소리가 들린다	keep	names
+names:single-kanji-name	(続)運用を強化せよ！	(속) 운용을 강화하라!	keep	names
+names:single-kanji-name	南に行く。	남쪽으로 간다.	keep	names
+names:single-kanji-name	左が言った。	왼쪽이 말했다.	keep	names
+names:single-kanji-name	右が言った。	오른쪽이 말했다.	keep	names

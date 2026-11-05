@@ -7,7 +7,7 @@ cx:name-recipient:10	美咲に話した	미사키에게 이야기했다	fix	rewr
 cx:name-recipient:10	美咲に頼んだ	미사키에게 부탁했다	fix	rewrites
 cx:name-recipient:10	健太にあげる	켄타에게 준다	fix	rewrites
 cx:name-recipient:10	美咲に手紙を見せた	미사키에게 편지를 보였다	fix	rewrites
-cx:name-recipient:10	七海に教えた	rule:cx:name-recipient:10=에게	fix	rewrites
+cx:name-recipient:10	七海に教えた	나나미에게 가르쳤다	fix	rewrites
 cx:name-recipient:10	美浜に預けた	미하마에게 맡겼다	fix	rewrites
 cx:name-recipient:10	美浜に任せておけ	미하마에게 맡겨 두어라	fix	rewrites
 cx:name-recipient:10	健太に謝るために	켄타에게 사과하기 위해	fix	rewrites

@@ -1,0 +1,51 @@
+# 규칙: GRM-3847, GRM-3848
+rule	input	expected	kind	layer
+analysis:continuative-link	美女が現れ異世界を救うため	has:나타나	fix	analysis
+analysis:continuative-link	星を求め星となった人々は	has:별을 구하고	fix	analysis
+analysis:continuative-link	そこへ男が現れ話をした	has:나타나고 이야기를	fix	analysis
+analysis:continuative-link	救助を求め船をおりると	has:구조를 구하고 배를	fix	analysis
+analysis:continuative-link	俺は、ベッドの傍を離れ氷枕の準備を始めた。	has:떠나고 빙침	fix	analysis
+analysis:continuative-link	地上の争いを恐れ空へと逃れた	has:무서워하고 하늘로	fix	analysis
+analysis:continuative-link	腰を曲げ蛇のように唸った	has:굽히고 뱀처럼	fix	analysis
+analysis:continuative-link	降下を止め水平飛行にし	has:멈추고 수평비행	fix	analysis
+analysis:continuative-link	タースを抜け北へ向かった	has:빠지고 북쪽	fix	analysis
+analysis:continuative-link	我々の目的を受け入れ承諾しました	has:받아들이고 승낙	fix	analysis
+analysis:continuative-link	航海を助け木々を揺らすために	has:돕고 나무들을	fix	analysis
+analysis:continuative-link	川を超え荒野を過ぎれば	has:넘고 황야를	fix	analysis
+analysis:continuative-link	家族を捨て宮庭で	has:버리고	fix	analysis
+analysis:continuative-link	6名を乗せ火星に行く	has:싣고 화성에	fix	analysis
+analysis:continuative-link	神社を建て怒りを鎮めた	has:세우고 분노를	fix	analysis
+analysis:continuative-link	性格が荒れ自分たちを捨てた父親を	has:거칠어지고 자신들을	fix	analysis
+analysis:continuative-link	ぶれない盾を構え君を守ろう	has:방패를 들고	fix	analysis
+analysis:continuative-link	お前達を含め兵士達は	has:포함하고 병사들은	fix	analysis
+analysis:continuative-link	大金をかけ修理され	has:들이고 수리	fix	analysis
+analysis:continuative-link	結婚をかけ私と勝負してください	has:결혼을 걸고	fix	analysis
+analysis:continuative-link	動脈が切れ大出血してる	has:끊어지고	fix	analysis
+analysis:continuative-link	心の現れだ	마음의 표현이다	keep	analysis
+analysis:continuative-link	彼の求めに応じて	has:요청에	keep	analysis
+analysis:continuative-link	対策を考え中	has:생각 중	keep	analysis
+analysis:continuative-link	髪の毛が伸び放題になってしまう	lacks:늘어나고	keep	analysis
+analysis:continuative-link	妖気が途切れ途切れだ	요기가 띄엄띄엄이다	keep	analysis
+analysis:continuative-link	ここからがおれ達の本当の旅の始まりだった	has:우리의 진정한 여행	keep	analysis
+analysis:continuative-link	何人かが掛け率を	lacks:걸고	keep	analysis
+analysis:sae-suru	魔力を身体に纏いさえすれば造作もないわ	has:두르기만 하면	fix	analysis
+analysis:sae-suru	魔人ブウを倒しさえすればな	has:쓰러뜨리기만 하면	fix	analysis
+analysis:sae-suru	体が動きさえすれば…。	has:움직이기만 하면	fix	analysis
+analysis:sae-suru	あの場所へ行きさえすれば…。	has:가기만 하면	fix	analysis
+analysis:sae-suru	あと２台売りさえすれば	has:팔기만 하면	fix	analysis
+analysis:sae-suru	私が死にさえすれば	has:죽기만 하면	fix	analysis
+analysis:sae-suru	炎を消しさえすれば	has:끄기만 하면	fix	analysis
+analysis:sae-suru	術者を斬りさえすれば	has:베기만 하면	fix	analysis
+analysis:sae-suru	内野に転がしさえすればええ	has:굴리기만 하면	fix	analysis
+analysis:sae-suru	気づきさえすれば間違いを正すことは難しくはない	has:눈치채기만 하면	fix	analysis
+analysis:sae-suru	お前が大人しく捕まりさえすればな	has:잡히기만 하면	fix	analysis
+analysis:sae-suru	互いに子の印を結びさえすれば	has:맺기만 하면	fix	analysis
+analysis:sae-suru	スイッチに「オフ」もあるって気付きさえすりゃあ	has:깨닫기만 하면	fix	analysis
+analysis:sae-suru	大事にしてくれさえしたら・・・	has:주기만 하면	fix	analysis
+analysis:sae-suru	時々それを盗みさえする	lacks:훔치기만	keep	analysis
+analysis:sae-suru	それのために殺しさえする...	lacks:죽이기만	keep	analysis
+analysis:sae-suru	体が動きさえしない	lacks:움직이기만	keep	analysis
+analysis:sae-suru	何かノスタルジックな感じさえする。	has:느낌	keep	analysis
+analysis:sae-suru	戦いさえしなければ	lacks:싸우기만	keep	analysis
+dict:grm:3847:抜け忍-1	お前らが抜け忍を野放しにしておくから	has:탈주 닌자를	fix	lookup
+dict:grm:3847:抜け忍-1	お前みたいなガキが抜け忍だと？	has:탈주 닌자	fix	lookup

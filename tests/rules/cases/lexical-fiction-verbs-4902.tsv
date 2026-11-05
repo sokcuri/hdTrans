@@ -1,0 +1,14 @@
+# 규칙: LEX-4902
+rule	input	expected	kind	layer
+cx:fic-polysemy-2:10	各自食堂から出て散っていく。	has:흩어져 간다	fix	rewrites
+cx:fic-polysemy-2:10	…気まずくなったのか、ギャラリーたちも俺の卓から散っていく…。	has:흩어져 간다	fix	rewrites
+cx:fic-polysemy-2:10	それぞれ自分の依頼を確認し、学園に散っていく。	has:흩어져 간다	fix	rewrites
+cx:fic-polysemy-2:10	役割分担の後、メンバーは調整のために散っていった。	has:흩어져 갔다	fix	rewrites
+cx:fic-polysemy-2:10	桜が散っていく	lacks:흩어	keep	rewrites
+cx:fic-polysemy-2:10	受け流し、交差し、あまりの速度に散っていく火花。	lacks:흩어	keep	rewrites
+cx:fic-polysemy-2:20	と頬を染めて聞いてきた。	has:물어 왔다	fix	rewrites
+cx:fic-polysemy-2:20	単語帳をいじりながら投げやりに聞いてきた。	has:물어 왔다	fix	rewrites
+cx:fic-polysemy-2:20	白崎が心配そうに聞いてきた。	has:물어 왔다	fix	rewrites
+cx:fic-polysemy-2:20	あなたが聞いてきたら言ってやろうと思って	has:물어 오면	fix	rewrites
+cx:fic-polysemy-2:20	「今日はね、お医者様からいい話を聞いてきたんだ」	has:들어 온	keep	rewrites
+sense:kiku-listen	噂を聞いてきた	has:들어 왔다	keep	senses

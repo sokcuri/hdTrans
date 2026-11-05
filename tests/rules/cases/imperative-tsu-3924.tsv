@@ -1,0 +1,43 @@
+# 규칙: GRM-3924
+rule	input	expected	kind	layer
+lookup:imperative-before-tsu	お前ならやれる 行けっ！ ホシガリスー！	너라면 할 수 있다 가라! 호시가리스!	fix	lookup
+lookup:imperative-before-tsu	行けっ！風影として命令する	가라! 풍영으로서 명령한다	fix	lookup
+lookup:imperative-before-tsu	騒ぎを大きくするなよ 行けっ！	소란을 크게 하지 마 가라!	fix	lookup
+lookup:imperative-before-tsu	しんちゃん！ （ひろし）行けっ！	신짱! (히로시) 가라!	fix	lookup
+lookup:imperative-before-tsu	言えっ！ 誰に もらっただい!?	말해라! 누구에게 받은 매우!?	fix	lookup
+lookup:imperative-before-tsu	シャア 今だ 行けっ	샤아 지금이다 가라	fix	lookup
+lookup:imperative-before-tsu	《私も 流れに身を任せるだけだ…》 《行けっ！》	《나도 흐름에 몸을 맡길 뿐이다…》 《가라!》	fix	lookup
+lookup:imperative-before-tsu	あたしはダイエット中なんだっ。つべこべ言わずに食えっ	나는 다이어트 중이야. 이러쿵저러쿵 말하지 않고 먹어라	fix	lookup
+lookup:imperative-before-tsu	フシギダネ 行けっ！	이상하네 가라!	fix	lookup
+lookup:imperative-before-tsu	時間だっ！ 行けっ！	시간이야! 가라!	fix	lookup
+lookup:imperative-before-tsu	目障りだからさっさと行けっ	눈에 거슬리니까 빨리 가라	fix	lookup
+lookup:imperative-before-tsu	両舷いっぱい、行けっ！	양현 많이, 가라!	fix	lookup
+lookup:imperative-before-tsu	さっさと行けっ！ ああっ	빨리 가라! 아앗	fix	lookup
+lookup:imperative-before-tsu	電話だ！ 電話を持てっ！	전화야! 전화를 가져라!	fix	lookup
+lookup:imperative-before-tsu	良し、行けっ!	좋다, 가라!	fix	lookup
+lookup:imperative-before-tsu	ピカチュウ 行けっ！ 10万ボルトだ‼	피카츄 가라! 10만 볼트야!!	fix	lookup
+lookup:imperative-before-tsu	ダイエットしたい奴 宇宙へ行けっ！	다이어트하고 싶은 놈 우주에 가라!	fix	lookup
+lookup:imperative-before-tsu	すっかりその気だ 行けっ!	완전히 그 기분이다 가라!	fix	lookup
+lookup:imperative-before-tsu	泣いてねえよ！ 早く言えっ｡	울지 않아! 빨리 말해라.	fix	lookup
+lookup:imperative-before-tsu	白猫… 行けっ！	흰고양이… 가라!	fix	lookup
+lookup:imperative-before-tsu	〝なんとか言えっ！〞	“뭐라고 말해라! 〞	fix	lookup
+dict:jisjk:114704	イイぞ イイぞ 行けっ 行けっ！	좋아 좋아 가라 가라!	fix	local-ending
+dict:jisjk:114704	行けっ 冥界へ 死神鬼の冥道は強力だが小さい	가라 명계에 사신귀의 명도는 강력하지만 작다	fix	local-ending
+dict:jisjk:114704	危ない！ 行けっ 行け行け！	위험해! 가라 가라 가라!	fix	local-ending
+dict:jisjk:114704	いーから食えっ 伸び盛りっ	됐으니까 먹어라 성장기	fix	local-ending
+dict:jisjk:114704	行けっ！ 何っ 伸びた！？	가라! 뭐 자랐어!?	fix	local-ending
+dict:jisjk:114704	行けっ 掴め－	가라 잡아라－	fix	local-ending
+dict:jisjk:114704	早く言えっ 待って！	빨리 말해라 기다려!	fix	local-ending
+dict:jisjk:114704	それっ 景気良く行けっ‼	에잇 시원시원하게 가라!!	fix	local-ending
+dict:jisjk:114704	行けっ 岬！ （あづみ）岬く～ん！	가라 미사키! (아즈보고) 미사키 군~!	fix	local-ending
+dict:jisjk:114704	ならば！ 行けっ 猟犬。	그러면! 가라 사냥개.	fix	local-ending
+lookup:imperative-before-tsu	「出て行け、ここから出て行け、早く行けったら！	「나와 갈 수 있어, 여기에서 나와 갈 수 있어, 빨리 갈 수 있고도 참!	keep	lookup
+lookup:imperative-before-tsu	うっ、あぁぁっ。やめっ、急に動いちゃ…はぅんっ	윽, 아아앗. 그만두고, 갑자기 움직이면…하우읏	keep	lookup
+lookup:imperative-before-tsu	ペリエライ 構えっ！	페리에라이 자세!	keep	lookup
+lookup:imperative-before-tsu	「伏せっ、伏せっ、伏せっ」	「엎드리고, 엎드리고, 엎드리고」	keep	lookup
+lookup:imperative-before-tsu	首輪よ 着けっ！！	목걸이야 착용하고!!	keep	lookup
+lookup:imperative-before-tsu	よし さあ やろう 気をつけっ！ 番号っ！	좋아 자 하자 차렷! 번호!	keep	lookup
+lookup:imperative-before-tsu	辞めっ…	그만두고…	keep	lookup
+lookup:imperative-before-tsu	早く行け。	빨리 가라.	keep	lookup
+lookup:imperative-before-tsu	いいから入れ。寒いだろう	됐으니까 들어가라. 추울 것이다	keep	lookup
+dict:jisjk:114704	早く行け。	빨리 가라.	keep	local-ending

@@ -220,6 +220,35 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
             return false;
         }
     }
+    // The rebuke quoted with と or って, at the end or before a verb of saying (泣くんじゃないと 울지
+    // 말라고, 泣くんじゃないと言われた 울지 말라고 들었다): the quoted prohibition. Not after a てる (言ってるんじゃないと),
+    // nor before 思う, where んじゃない is a guess (行くんじゃないと思う).
+    if (!teru && !nee) {
+        size_t r = p;
+        std::string_view quote;
+        if (Lit(s, r, "って")) quote = "って";
+        else if (Lit(s, r, "と")) quote = "と";
+        if (!quote.empty()) {
+            const std::string_view rest = s.substr(r);
+            bool verb = false;
+            for (const std::string_view v : {"言", "いう", "いっ", "いわ", "いえ", "教え", "叱", "怒"}) verb = verb || rest.starts_with(v);
+            // と closes the quote at the end or before a mark; って, which also explains what is not so (そんな
+            // つもりで来るんじゃないって 오는 게 아니라고), only before ！ or a verb of saying.
+            Match e;
+            const bool adnominal = m.group[1] == "う" && (before.ends_with("そうい") || before.ends_with("こうい") ||
+                                                          before.ends_with("ああい") || before.ends_with("どうい"));
+            const bool closes = quote == "と" ? EndGroup(s, r, U"！!」』", e) : EndGroup(s, r, U"！!", e) && r < s.size();
+            // ということ, というの name a fact, not a saying (書くんじゃないということだ 쓰는 게 아니라는 것이다).
+            const bool fact = quote == "と" && (rest.starts_with("いうこと") || rest.starts_with("いう事") || rest.starts_with("いうの") ||
+                                                rest.starts_with("いうわけ"));
+            if (!adnominal && !fact && (verb || closes)) {
+                m.group[3] = quote;
+                m.group[2] = verb ? std::string_view() : e.group[2];
+                m.end = verb ? r : e.end;
+                return true;
+            }
+        }
+    }
     size_t q = p;
     std::string_view particle;
     for (std::string_view w : dict::ClassMembers(HDTRANS_CLASS("follower.prohibition-janai"))) {
@@ -1395,6 +1424,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
                                                          stem.ends_with("てい") || stem.ends_with("でい"));
                 if (!teru && !runs.verb(runs.context, verb)) return std::string(m.group[0]);
             }
+            if (!m.group[3].empty()) return Cat({m.group[1], "な", m.group[3], m.group[2]});
             return Group1Plus(m, "なよ");
         });
         text = ReplaceAll(text, AppealJanai, [](const Match& m) {

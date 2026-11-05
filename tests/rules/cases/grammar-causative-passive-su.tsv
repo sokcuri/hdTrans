@@ -13,7 +13,7 @@ analysis:causative-passive-of-su-causative	言わされている……だけ	has
 analysis:causative-passive-of-su-causative	・・・・・まさか、大河選手に毎日、言わされているのでしょうか？	has:말하게 되고 있는 걸까요	fix	analysis
 analysis:causative-passive-of-su-causative	これではＹＥＳと言っているのと同じだった。	이것으로는 YES라고 말하는 것과 같았다.	keep	analysis
 analysis:causative-passive-of-su-causative	「な、何を言っているんだ、お前は」	「무, 무슨 소리야, 너는」	keep	analysis
-analysis:causative-passive-of-su-causative	踏み込むなと言われた。	발을 들이지 말라고 했다.	keep	analysis
+analysis:causative-passive-of-su-causative	踏み込むなと言われた。	발을 들이지 말라는 말을 들었다.	keep	analysis
 analysis:causative-passive-of-su-causative	真帆を迷わせているのは、俺だ。	마호를 헤매게 하고 있는 것은, 나다.	keep	analysis
 dict:jisjk:147927	先輩に無理やり飲まされて	선배 때문에 억지로 마셔서	fix	rewrites
 dict:jisjk:147927	「そうか、俺……ワイン飲まされて、酔っちゃったんだ」	has:와인 마시게 돼,	fix	defaults

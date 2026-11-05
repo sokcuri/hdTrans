@@ -1,0 +1,22 @@
+# 규칙: LEX-4827
+rule	input	expected	kind	layer
+names:guessed-kanji-names	七海頑張ってね〜！	나나미 힘내~!	fix	names
+names:guessed-kanji-names	やめなさい 三世子 いろいろ可哀相な子なんだから	그만두어 미요코 여러 가지 불쌍한 아이니까	fix	names
+names:guessed-kanji-names	すみません 夢結様	죄송합니다 유유님	fix	names
+names:guessed-kanji-names	竜崎 大変なことに ライト お父さんが	류자키 대단한 일로 라이트 아버지가	fix	names
+names:guessed-kanji-names	うん ｴﾐも ｢あのときは楽しかった｡	응 에미도 ｢그 때는 즐거웠다.	fix	names
+names:guessed-kanji-names	わかってるよ ハルジオンに着いたら小銭を稼ぐさ	알고 있어 하루지온에게 도착하면 잔돈을 벌지	fix	names
+names:guessed-kanji-names	≪ 甲児君 甲児君 応答してくれ 甲児君	≪ 코지 군 코지 군 응답해 줘 코지 군	fix	names
+names:guessed-kanji-names	いえ 自分に用とは何でありましょう 及川大尉殿	아뇨 자신에게 용무란 왜 있읍시다 오이카와 대위님	fix	names
+names:guessed-kanji-names	雛河君 データを分析室に	히나카와 군 데이터를 분석실에	fix	names
+names:guessed-kanji-names	でも変だわ どうして甲児さんは口を利かないのかしら	하지만 이상하구나 왜 코지 씨는 말을 하지 않는 걸까	fix	names
+names:guessed-kanji-names	了解しました 蒼太君	알겠습니다 소타 군	fix	names
+names:guessed-kanji-names	大変ですね 夏村先生｡	큰일이네요 나츠무라 선생님.	fix	names
+names:guessed-kanji-names	岸森さんが トカゲを潜入させた目的は これだったんだな	키시모리 씨가 도마뱀을 잠입시킨 목적은 이것이었구나	fix	names
+names:guessed-kanji-names	嶋倉さん これは どういうこと？	시마쿠라 씨 이것은 어떻게 된 일?	fix	names
+names:guessed-kanji-names	いえ 岸村さんは 間違いなく お客様ですから｡	아뇨 키시무라 씨는 틀림없이 손님이니까요.	fix	names
+names:guessed-kanji-names	あれが バグラ軍の本拠地 大魔殿か。	저것이 바그라군의 본거지 대마전인가.	keep	names
+names:guessed-kanji-names	だからこそ、我らは水虎様の力を欲した	그렇기에, 우리들은 수호님 힘을 바랐다	keep	names
+names:guessed-kanji-names	節分ですね。……え、龍鳳さん、鬼役を？	세츠분이군요. ……어, 류호 씨, 오니역을?	keep	names
+names:guessed-kanji-names	よーし！改装強化済みの隼鷹さん出撃しちゃうよー！	좋아~! 개장 강화 끝난 준요 씨 출격해버릴 거야~!	keep	names
+names:guessed-kanji-names	七つの海を越えて	7대양을 넘어	keep	names

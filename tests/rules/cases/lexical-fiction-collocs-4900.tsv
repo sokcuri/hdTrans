@@ -1,0 +1,32 @@
+# 규칙: LEX-4900
+rule	input	expected	kind	layer
+cx:fic-collocs-1:10	ポン、と彼女が手を打った。	has:손뼉을	fix	rewrites
+cx:fic-collocs-1:10	思い出したように彼が手を打つ。	has:손뼉을	fix	rewrites
+cx:fic-collocs-1:10	彼女がはっとしてぽんと手を打つ。	has:손뼉을	fix	rewrites
+cx:fic-collocs-1:10	彼はなるほどと手を打ったが、またすぐに首を傾げた。	has:손뼉을	fix	rewrites
+cx:fic-collocs-1:10	お母さんは思い出したように手を打って、カバンに手をつっこんだ。	has:손뼉을	fix	rewrites
+cx:fic-collocs-1:10	しかし総裁は、とりあえずの手を打った。	has:손을 썼다	keep	rewrites
+cx:fic-collocs-1:10	「何事も先手を打って損することはない」	has:선수를	keep	rewrites
+cx:fic-collocs-1:10	先に手を打っておいた	먼저 손을 써 두었다	keep	rewrites
+dict:i:5400	途中で言葉を切った、というより切れたのは、顔を見てからだ。	has:말을 끊었다기보다	fix	lookup
+dict:i:5400	一度、言葉を切り、深々と頭をさげた。	has:말을 끊어	fix	lookup
+dict:i:5400	深刻な顔で言葉を切った。	has:말을 끊었다	fix	lookup
+dict:w:32675	彼が言葉をきる。	그가 말을 끊는다.	fix	lookup
+dict:i:786	音を出すとしたら奴らしかいない。	has:소리를 낸다고	fix	lookup
+dict:i:786	バタついた嫌な音を出している。	has:소리를 내고	fix	lookup
+dict:w:32670	水筒からお茶をもらい、軽く一息をつく。	has:한숨 돌린다	fix	lookup
+dict:w:32671	わたくしはここで生きて、いずれは子を成し、そして死んでいくでしょう。	has:아이를 낳아	fix	lookup
+dict:w:32673	「さて、父上が来るまでに私達でカタを付けようか」	has:결판을	fix	lookup
+dict:w:32677	肩が落ちている。	어깨가 처져 있다.	fix	lookup
+dict:w:32676	『詳しく述べよ』と睨みを効かすと	has:눈을 부라린다고	fix	lookup
+dict:w:32679	彼女に場所を空けると、俺はさっさと背を向ける。	has:자리를 비켜	fix	lookup
+dict:w:32680	場所を開けると、背を向けて横に	has:자리를 비켜	fix	lookup
+dict:w:32678	膣内に精を放つ。	질내에 정액을 쏟아 낸다.	fix	lookup
+sense:ageru-shout	魔物は最期の叫びをあげながら燃え尽きていった。	has:비명을	fix	senses
+sense:ageru-shout	赤組、勝利の雄叫びを上げるんだぜーっ！	has:함성을	fix	senses
+sense:ageru-shout	横一列に並んだ鹿たちが「応！」と一斉に雄叫びをあげると土埃を巻き散らし迫ってくる。	has:함성을	fix	senses
+sense:ageru-shout	子供の叫びが聞こえた	아이의 절규가 들렸다	keep	senses
+sense:otosu-light	明かりを落としてから、３０分くらい経っただろうか	has:불을 끄고	fix	senses
+sense:otosu-light	電気落とされると冷蔵庫も機能しない	has:전기 꺼지면	fix	senses
+sense:otosu-light	ＰＣの電源を落としてから、彼女は深々とため息をついた。	PC의 전원을 끄고 나서, 그녀는 깊이 한숨을 쉬었다.	keep	senses
+sense:otosu-light	明かりが見えた	빛이 보였다	keep	senses

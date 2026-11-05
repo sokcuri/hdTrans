@@ -26,6 +26,10 @@ struct RunLookup {
     // Whether text ends with the dictionary form of a verb of the dictionary, with no guess for kana
     // the dictionary lacks (RewriteCasual: the stem before a casual negative ねえ); null for none.
     bool (*dictionaryVerb)(const void* context, std::string_view text) = nullptr;
+    // Whether form, whole, is the dictionary form of a verb of the dictionary (RewriteCasual: a kanji and its
+    // ichidan stem before ねえ, 通じねえ, where a kana verb that ends the form, きる of 好きる, does not count);
+    // null for none.
+    bool (*verbForm)(const void* context, std::string_view form) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
@@ -192,6 +196,10 @@ std::string RewriteEmphaticSpellings(std::string_view text);
 // a contracted ておく that a dictionary word holds stays as written (言っとくけど). With contracted
 // (the dialect and contracted forms of the line), てんす is てるんです and ないんす after a noun
 // ないんです, and まへんな keeps its な.
+// Slurred and colloquial spellings read as the standard ones before the spoken forms and casual
+// contractions (どぉーせ どうせ, ましぇん ません, ちったぁ ちっとは, 行かなきゃだし 行かなきゃいけないし,
+// かかってこねー かかってこない, 喋んじゃねえ 喋るんじゃねえ).
+std::string RewriteSlurred(std::string_view text, const RunLookup& runs = {});
 std::string RewriteCasual(std::string_view text, const RunLookup& runs = {}, bool contracted = true);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル

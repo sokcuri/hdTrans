@@ -1,0 +1,24 @@
+# 규칙: GRM-3846
+rule	input	expected	kind	layer
+normalize:slurred	お答えできましぇん。	대답할 수 없습니다.	fix	normalize
+normalize:slurred	バカが ちったぁ覚えろよ	바보가 조금은 기억해라	fix	normalize
+normalize:slurred	まぁ 少しぐれぇは 何とかなるさ。	뭐 조금은 어떻게든 되고 말이야.	fix	normalize
+normalize:slurred	昨日きれいに磨いたばっかだから	어제 깨끗하게 닦은지 얼마 되지 않았으니까	fix	normalize
+normalize:slurred	せっかくあんたが起きてくれたのに あたしが寝てばっかで	모처럼 네가 일어나 주었는데 내가 자고만 있어	fix	normalize
+normalize:slurred	ばっかじゃないの	바보가 아니야	keep	normalize
+normalize:slurred	つうか 地平線 そもそも見えないし	그보다 지평선 애초에 안 보이고	fix	normalize
+normalize:slurred	通過する	통과한다	keep	normalize
+normalize:slurred	どぉーせラブラブ	어차피 알콩달콩	fix	normalize
+normalize:slurred	でもまあ これで いよいよ優勝しなきゃだね	하지만 뭐 이것으로 드디어 우승해야 하네	fix	normalize
+normalize:slurred	しなきゃだめ	하지 않으면 안돼	keep	normalize
+normalize:slurred	岩崎の命は もう帰ってこねえ ！	이와사키의 목숨은 이제 돌아오지 않아 !	fix	normalize
+normalize:slurred	あーゆーいい子ちゃんって	저런 좋은 아이는	fix	normalize
+normalize:ru-contraction	汚ぇ真似はすんじゃねぇぞ	더러운 짓은 하지 마	fix	normalize
+normalize:ru-contraction	てめえが そうすんのは 初めから分かってたんだよ	네가 그렇게 하는 것은 처음부터 알고 있었어	fix	normalize
+normalize:ru-contraction	喋んのやめろ	말하는 것 그만두어라	fix	normalize
+normalize:ru-contraction	落ちずにすんだのにな	떨어지지 않고 끝났는데	keep	normalize
+normalize:ru-contraction	いくぞ こいつを あの船首に落とすんだ	가겠어 이 녀석을 그 뱃머리에 떨어뜨리는 거야	keep	normalize
+normalize:ru-contraction	下着を褒めてくれた割にはすぐに脱がすんだぜ？	속옷을 칭찬해 준 것치고는 곧바로 벗긴다?	keep	normalize
+normalize:ru-contraction	確信が持てんのだ	확신을 가질 수 없는 것이다	keep	normalize
+normalize:ru-contraction	イヌの役すら満足に出来んのか！	개의 역조차 제대로 할 수 없는가!	keep	normalize
+normalize:ru-contraction	言うんだ	말하는 거야	keep	normalize

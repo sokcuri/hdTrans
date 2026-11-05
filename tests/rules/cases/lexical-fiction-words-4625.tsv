@@ -1,0 +1,41 @@
+# 규칙: LEX-4625
+rule	input	expected	kind	layer
+cx:sense-cues-1:360	「承りました。」	「알았습니다.」	fix	rewrites
+cx:sense-cues-1:360	「承りましたわ！」	「알았어요!」	fix	rewrites
+cx:sense-cues-1:360	オーダー…承りました	오더…받았습니다	keep	rewrites
+cx:sense-cues-1:360	承りましてよ。	lacks:알았	keep	rewrites
+cx:sense-cues-1:362	「抜かせ。悪魔ごときがこの俺に敵うとでも思っているのか。」	has:웃기지 말아라	fix	rewrites
+cx:sense-cues-1:362	力を抜かせる	힘을 빼게 한다	keep	rewrites
+cx:sense-cues-1:364	「くそが……！」	「젠장……!」	fix	rewrites
+cx:sense-cues-1:364	クソがっ！	젠장!	fix	rewrites
+cx:sense-cues-1:364	こんなになるまでこき使いやがって、クソが！	has:젠장	fix	rewrites
+cx:sense-cues-1:364	クソが！やらせるかよ！	젠장! 시킬까 보냐!	fix	rewrites
+cx:sense-cues-1:364	古いンだよ……クソがッ！	낡아……젠장!	fix	rewrites
+cx:sense-cues-1:364	「超巨大なお節介だっつうの……クソが」	has:젠장	fix	rewrites
+cx:sense-cues-1:364	クソが付くほど真面目だということだ。	lacks:젠장	keep	rewrites
+cx:sense-cues-1:364	クソが勘違いなんかじゃねえんだよ	lacks:젠장	keep	rewrites
+cx:sense-cues-1:366	本人いわく、霊感がないからだって言うんだけど	has:왈	fix	rewrites
+cx:sense-cues-1:366	刑事さんいわく、そこは雑貨や衣類、100均などが入っている大きいスーパーだそう	has:왈	fix	rewrites
+cx:sense-cues-1:366	観光地である奈良をぶらつくことが多いからかもしれないが、友人や妹いわく、	has:왈	fix	rewrites
+cx:sense-cues-1:366	いわく付きの品	사연 있는 물건	keep	rewrites
+cx:sense-cues-1:368	同行するようになって早２年、	동행하게 되어 벌써 2년,	fix	rewrites
+cx:sense-cues-1:368	修行修行と、早二週間が経過した。	has:벌써	fix	rewrites
+cx:sense-cues-1:368	早くしろ	빨리 해라	keep	rewrites
+sense:osameru-govern	彼らが再び地上を治める時に必要な兵士として訓練しているんだよ。	has:다스릴	fix	senses
+sense:osameru-govern	領地を治める形となったのじゃ。	has:다스리는	fix	senses
+sense:osameru-govern	騒ぎを治めた	소란을 가라앉혔다	fix	senses
+sense:osameru-govern	息がかかった場所とはすなわち、彼の勢力の貴族達が治める、国内７割以上の都市である。	has:다스리는	keep	senses
+dict:w:24652	ボクも冥界に還るとしよう。	has:돌아간다고	fix	lookup
+dict:w:24652	死んであの世に還った霊魂（魂）が、この世に何度も生まれ変わってくる、という考え方。	has:돌아간	fix	lookup
+dict:w:32660	でも、キングが戦いを挑んでくるなんて……。あなたよく無事で還って来られたわね……	has:돌아올	fix	lookup
+dict:w:32646	気付いて枕もとの携帯を取ると、声が聞こえた。	has:머리맡	fix	lookup
+dict:w:32648	雪白なうなじに戻しながら	새하얀 목덜미에 되돌리면서	fix	lookup
+dict:w:32649	そしてその、舌足らずな声に、もう一つの声が応えた。	has:혀 짧은	fix	lookup
+dict:w:32647	起きた事を、舌足らずな口で、精一杯伝えた。	has:혀 짧은	fix	lookup
+dict:w:32652	最近めっきり足腰が弱くなっちまって……。まいったぜ、ほんとに。	has:다리와 허리가	fix	lookup
+dict:w:32652	この足腰じゃとても	이 다리와 허리는 무척	fix	lookup
+dict:w:32653	にしても武器が小振りのナイフとかね	has:작은 크기의	fix	lookup
+dict:w:32654	出来上がりましたので、お届けに参りました」	has:배달하러	fix	lookup
+dict:w:32655	えっと、印鑑かサイン貰わないと困るんですけど…お届け物の、えっと…液タブ？	has:배달물의	fix	lookup
+dict:w:32656	ちゃまから御届け物ですエリ	has:배달물입니다	fix	lookup
+dict:w:32654	今週中に 見積もりをお届けします｡	has:전달해 드리겠습니다	keep	lookup

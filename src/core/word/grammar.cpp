@@ -572,6 +572,41 @@ bool SelfBy(const Item* p) {
     return false;
 }
 
+// Whether verb item it describes the noun right after it that names a person the speaker honours
+// (結婚式を挙げられるお客様, 数々の物語を生み出された方々, 来日された先生): that person does the act,
+// which no subject or agent before it has to name (spec GRM-3871). The verb needs an object in its
+// clause (ActedObjectBefore): without one the person is what the act is done to (追い込まれた会長, 呼ばれる王女), as with
+// an object of a verb of taking away (verb.receiver-passive: 名前を秘された姫様). The noun follows with
+// no space between (召されたか 父上 is a call), is a person (not 模様, 神殿, 神さま, a 様 alone), no 俺様
+// or 貴様, and 方 is the person but not ほう before が and a judgment (見られる方がいい).
+bool DescribesHonoured(const Item* it) {
+    if (!ActedObjectBefore(it) || dict::StartsWithMember(HDTRANS_CLASS("verb.receiver-passive"), it->group->surface) > 0) return false;
+    const Item* n = it->next;
+    if (n == nullptr || n->group == nullptr || n->detail->Yougo() || n->group->entries.empty() || n->start != it->start + it->length) {
+        return false;
+    }
+    const std::string_view s = n->group->surface;
+    if (s == "様" || s == "さま" || s == "殿") return false;
+    if (s == "方" || s == "方々" || s == "かた") {
+        const Item* m = n->next;
+        if (m == nullptr || m->group == nullptr || s != "方") return true;
+        const std::string_view ms = m->group->surface;
+        if (ms != "が" && !ms.starts_with("が")) return true;
+        const Item* j = ms == "が" ? m->next : m;
+        if (j == nullptr || j->group == nullptr) return true;
+        const std::string_view js = ms == "が" ? j->group->surface : ms.substr(std::string_view("が").size());
+        for (const std::string_view judged : {"いい", "良", "よ", "まし", "楽", "多", "少な", "上", "早", "先", "大"}) {
+            if (js.starts_with(judged)) return false;
+        }
+        return true;
+    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("pronoun.first-person"), s) > 0 ||
+        dict::StartsWithMember(HDTRANS_CLASS("pronoun.rough-second-person"), s) > 0) {
+        return false;
+    }
+    return HonouredPerson(n) && Animate(n->Attr(std::max(n->selected, 0)));
+}
+
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
@@ -580,6 +615,7 @@ bool SelfBy(const Item* p) {
 // a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
+// With no subject or agent, a noun after it that names someone honoured decides (DescribesHonoured).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
     bool predicate = false;  // a predicate stands between: ご自身 is of another clause
@@ -605,7 +641,7 @@ bool RespectfulReading(const Item* it, bool transitive) {
             break;
         }
     }
-    return false;
+    return DescribesHonoured(it);
 }
 
 // Whether item n is a noun whose する takes an object: any noun but one tagged Hi (気絶, 崩御,
@@ -1259,6 +1295,40 @@ bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem,
 // verb of feeling the spontaneous form; the form of an ichidan or くる verb and its clause the rest
 // (PassiveReading). The potential of a verb in ーaる that spells a shorter verb's passive reads only
 // its own signals. A dictionary word no signal decides keeps its candidates (None).
+// Whether a word read with 에게 (誰かに 누군가에게, 彼女に) stands before the item in its clause: someone the act
+// is done by or to, which makes a られ the passive.
+bool PersonRecipientBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view ps = p->group->surface;
+        if ((ps.starts_with("誰") || ps.starts_with("だれ")) && Has(ps, "に")) return true;
+        if (ps.ends_with("に") || ps.ends_with("にも") || ps.ends_with("には")) {
+            for (int slot = 0; slot < static_cast<int>(p->group->entries.size()); slot++) {
+                if (Has(p->EntryText(slot), "에게")) return true;
+            }
+        }
+        if (ClauseBreak(p)) break;
+    }
+    return false;
+}
+
+// Whether the dictionary word it, the られ form of the verb of stem, may read as that verb's potential
+// with an object (spec GRM-3871): its verb is an ichidan verb (止められ: 止める; not 知られ of 知る), and no
+// verb of giving, telling, taking or doing to someone whose passive keeps its object (与えられる, 認められる,
+// 取り上げられる, verb.object-passive: 傷をつけられる).
+bool IchidanObjectPotential(Flusher& f, const Item* it, std::string_view stem) {
+    std::string_view base;
+    if (BaseVerbRecords(f, it->group->surface, base).empty() || base.empty()) return false;
+    const char32_t last = DecodeLastRune(base).cp;
+    if (std::u32string_view(U"いきぎしじちぢにひびぴみりえけげせぜてでねへべぺめれ").find(last) == std::u32string_view::npos &&
+        base != "見" && base != "着" && base != "出" && base != "寝") {
+        return false;
+    }
+    return !dict::InClass(HDTRANS_CLASS("verb.object-passive"), base) &&
+           !dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), base) && !dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), base) &&
+           !dict::InClass(HDTRANS_CLASS("verb.receiver-passive"), base) && !dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem) &&
+           !dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), stem);
+}
+
 Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem, std::string_view rest, bool passive,
               bool ichidan, const Item* agent) {
     // The shorter verb's passive (腕を掴まれた), with its object or after an agent in a narrative form;
@@ -1317,6 +1387,16 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
     if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
+    // A dictionary word that is the られ form of an ichidan verb with an object を in its clause and no
+    // agent is the potential, as an analysed られ is (PassiveReading: 魔力を止められる 마력을 멈출 수 있다,
+    // 感想を伝えられます 감상을 전할 수 있습니다) (spec GRM-3871).
+    // Only a form that is no narrative past or て (取り上げられた, 縛られた stay passive), and no causative
+    // passive (させられます).
+    if (form == VoiceForm::Lexical && ichidan && agent == nullptr && !rest.starts_with("た") && !rest.starts_with("て") &&
+        !rest.starts_with("ちゃ") && !rest.starts_with("ちま") && !surface.ends_with("せられ") && ActedObjectBefore(it) && ObjectWithoutRecipient(it) && !PersonRecipientBefore(it) &&
+        IchidanObjectPotential(f, it, stem) && !PassiveReading(f.w, it, rest)) {
+        return Voice::Potential;
+    }
     return Voice::None;
 }
 

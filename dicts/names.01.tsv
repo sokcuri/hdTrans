@@ -129038,7 +129038,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三不粘	산부잔	N110			GN						さんぷーちゃん	names.428537
 三世一身法	삼세일신법	N110			GN							names.428538
 三世代編	3세대편	N130	QPNVHn	Wb	GN						さんせだいへん	names.428539
-三世子	사요코	N130	QPNVHn	Wb	GN						さよこ	names.428540
+三世子	미요코	N130	QPNVHn	Wb	GN						みよこ	names.428540
 三世院やよい	산세인 야요이	N130	QPNVHn		GN						さんぜいんやよい	names.428541
 三丘村	미츠오촌	N130	QCTVPl		GN							names.428542
 三个和尚	세 명의 승려	N130	QWK		GN							names.428543
@@ -203751,7 +203751,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 夢精愛	몽정애	N130	QWK		GN							names.504387
 夢精期	몽정기	N130	QWK		GN							names.504388
 夢紬そいね	유메츠무기 소이네	N130	QPNVHn		GN						ゆめつむぎそいね	names.504389
-夢結	무유	N130	QPNVHn	Wb	GN						むゆう	names.504390
+夢結	유유	N130	QPNVHn	Wb	GN						ゆゆ	names.504390
 夢絵	유메카	N130	QPNVHn	Wb	GN						ゆめか	names.504391
 夢羅	유메라	N130	QPNVHn	Wb	GN						ゆめら	names.504392
 夢美	유메미	N130	QPNVHn	Wb	GN						ゆめみ	names.504393
@@ -284215,7 +284215,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 朧村正	오보로 무라마사	N130	QWK		GN							names.586654
 朧車	오보로구루마	N110			GN						おぼろぐるま	names.586655
 木	나무	N110			GN						き	names.586656
-木々	키기	N130	QPNVHn	Wb	GN						きぎ	names.586657
+木々	키키	N130	QPNVHn	Wb	GN						きき	names.586657
 木々なえ	키키 나에	N130	QPNVHn		GN						きぎ なえ	names.586658
 木々・セイラン	기기 세이란	N130	QPNVHn		GN						きぎ せいらん	names.586659
 木々康子	기기 야스코	N130	QPNVHn		GN							names.586660

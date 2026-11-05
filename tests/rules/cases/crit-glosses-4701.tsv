@@ -46,7 +46,7 @@ dict:w:33114	がっつり食い込んじゃってますよ。	제대로 파고�
 dict:w:33115	ばかすか食うじゃん	마구 먹잖아	fix	lookup
 normalize:chitta	みんな、行っちった	모두, 가버렸다	fix	normalize
 normalize:chitta	「えへへ、師匠に褒められちった」	「에헤헤, 스승에게 칭찬받아버렸다」	fix	normalize
-normalize:chitta	戦争が終わってちったぁ暇になるかと思った	전쟁이 끝나 흩어졌다한가해 질 줄 알았다	fix	normalize
+normalize:chitta	戦争が終わってちったぁ暇になるかと思った	전쟁이 끝나 조금은 한가해 질 줄 알았다	fix	normalize
 normalize:moota	先越されてもうたし	앞 넘어져버렸고	fix	normalize
 normalize:moota	やってもうた！	해버렸다!	fix	normalize
 normalize:moota	真っ赤にしてもうて…	새빨갛게 해버려…	fix	normalize

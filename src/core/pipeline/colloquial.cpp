@@ -1554,7 +1554,37 @@ std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot
         }
         insert(i);
     }
-    // An ichidan stem before よ (寝よか, もう起きよ): only where it is plainly said, before か, or after もう,
+    // The auxiliaries ちゃう, じゃう and ていく, でいく after a verb said without the う of their volitional
+    // (変えちゃお 바꿔 버리자, 食べていこ 먹고 가자): ちゃお and じゃお after a kana other than お or a kanji
+    // (not ちゃおちゃお), ていこ and でいこ after a kana or a kanji.
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        const std::u32string_view at = std::u32string_view(rs).substr(i);
+        size_t last = 0;
+        const bool katakanaBefore = i >= 2 && rs[i - 1] == U'っ' && rs[i - 2] >= U'ァ' && rs[i - 2] <= U'ヺ';  // not チアっちゃお
+        if ((at.starts_with(U"ちゃお") || at.starts_with(U"じゃお")) && rs[i - 1] != U'お' && !katakanaBefore &&
+            !std::u32string_view(rs).substr(0, i).ends_with(U"ただ")) {  // not ただじゃおかない
+            last = i + 2;
+        }
+        if (at.starts_with(U"ていこ") || at.starts_with(U"でいこ")) last = i + 2;
+        if (last == 0 || last >= rs.size() || (!IsHiraganaRune(rs[i - 1]) && !IsKanjiRune(rs[i - 1])) ||
+            (last + 1 < rs.size() && In(rs[last + 1], U"うぅ")) || drawn(last + 1) ||
+            !(ends(last + 1) || (last + 1 < rs.size() && In(rs[last + 1], U" 　")))) {
+            continue;
+        }
+        // おかない said after ちゃ or じゃ is 置かない (生かしちゃおかねえ, ただじゃおかない), not the volitional.
+        const std::u32string_view on = std::u32string_view(rs).substr(last + 1);
+        if (on.starts_with(U"かー")) continue;
+        if (on.starts_with(U"かな") || on.starts_with(U"かね") || on.starts_with(U"かぬ") || on.starts_with(U"かん")) {
+            const std::u32string_view next = on.substr(2);
+            if (on.starts_with(U"かぬ") || on.starts_with(U"かん") || next.starts_with(U"い") || next.starts_with(U"く") ||
+                next.starts_with(U"え") || next.starts_with(U"ぇ") || next.starts_with(U"ー")) {
+                continue;
+            }
+        }
+        insert(last);
+    }
+    // An ichidan stem before よ (寝よか, もう起きよ, 成功させよな): only where it is plainly said, before か or a
+    // closing な or ね, or after もう,
     // そろそろ, 早く or さあ, since 見よ, 考えよ alone are also the old imperative and 過ぎよ the noun 過ぎ.
     for (size_t i = 1; i < rs.size(); i++) {
         if (rs[i] != U'よ' || (i + 1 < rs.size() && In(rs[i + 1], U"うぅ")) || drawn(i + 1) || !ends(i + 1)) continue;
@@ -1562,7 +1592,9 @@ std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot
         while (start > 0 && i - start < 2 && IsHiraganaRune(rs[start - 1]) && !In(rs[start - 1], U"よ")) start--;
         if (start == 0 || !IsKanjiRune(rs[start - 1])) continue;
         while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
-        const bool said = i + 1 < rs.size() && rs[i + 1] == U'か';
+        // か, or な and ね that close the line (成功させよな 성공시키자, 寝よね), say the volitional plainly.
+        const bool said = i + 1 < rs.size() &&
+                          (rs[i + 1] == U'か' || (In(rs[i + 1], U"なね") && (i + 2 >= rs.size() || In(rs[i + 2], kMarks))));
         if (i >= 2 && (std::u32string_view(rs).substr(i - 2, 2) == U"過ぎ" || std::u32string_view(rs).substr(i - 2, 2) == U"すぎ")) continue;  // 落ち込み過ぎよ
         const std::u32string_view before = std::u32string_view(rs).substr(0, start);
         const bool cue = before.ends_with(U"もう") || before.ends_with(U"そろそろ") || before.ends_with(U"早く") ||
@@ -1581,11 +1613,16 @@ std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot
             if (imperative) continue;
         }
         const std::string key = EncodeText(rs.substr(start, i - start));
-        bool verb = false;
+        bool verb = false, noun = false;
         for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
             verb = verb || (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
                             word::Conjugation(c.codes->partText[3] - '0', 5) == "よう");
+            noun = noun || (c.codes != nullptr && !c.codes->partText.empty() && c.codes->partText[0] == 'N');
         }
+        // Before a closing な or ね a stem that is also a noun keeps the particle よね (そんな感じよね 그런 느낌이지).
+        if (noun && !(i + 1 < rs.size() && rs[i + 1] == U'か') && !cue) verb = false;
+        // A causative in させ of a word the dictionary has is an ichidan verb too (成功させよな 성공시키자).
+        if (!verb && i >= start + 3 && std::u32string_view(rs).substr(i - 2, 2) == U"させ") verb = isKey(std::u32string_view(rs).substr(start, i - 2 - start));
         if (!verb) continue;
         insert(i);
     }

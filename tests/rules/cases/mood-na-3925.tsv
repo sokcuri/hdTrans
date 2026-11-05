@@ -1,0 +1,123 @@
+# 규칙: GRM-3925
+rule	input	expected	kind	layer
+segment:na-space	だが 心配するな 俺が ぬぐいとってやろう。	하지만 걱정하지 마 내가 닦아내 주마.	fix	segment
+segment:na-space	聞き込みでござるな 拙者も行くでござる｡	탐문이구려 나도 가오.	fix	segment
+segment:na-space	おお～ 涼 よく知っているな 確かに そういう機能を持ったダンジョンも 西方諸国にはあるらしい	오오~ 양 잘 알고 있구나 확실히 그런 기능을 가진 던전도 서방 여러 나라에는 있는 것 같다	fix	segment
+segment:na-space	これ そこの御仁 心配するな お前は生きておる。	이것 거기의 그분 걱정하지 마 너는 살아 있다.	fix	segment
+segment:na-space	やはり おるな 見張りの連中が	역시 있네 파수의 무리가	fix	segment
+segment:na-space	何か たくらんでるな 部長	뭔가 꾀하고 있구나 부장	fix	segment
+segment:na-space	今夜 カルロッタの指揮をするな さもないと恐ろしいことになる	오늘 밤 카를로타의 지휘를 하지 마 그렇지 않으면 무섭게 된다	fix	segment
+segment:na-space	ちょっと 反省はしてるな まだ	조금 반성은 하고 있구나 아직	fix	segment
+segment:na-space	遠回しに わしを ばかだと言っているな お前｡	완곡에 내를 어리석다고 말하는구나 너.	fix	segment
+segment:na-space	Siriに聞くな お前は ヘーイ おしり	Siri에게 듣지 마 너는 헤이 엉덩이	fix	segment
+sound:clipped-volitional-aux	昨日のと一緒に廊下に出しちゃお	어제의 것과 함께 복도에 내버리자	fix	sound
+sound:clipped-volitional-aux	私 先輩を応援しちゃお	나 선배를 응원해버리자	fix	sound
+sound:clipped-volitional-aux	入っちゃお。	들어가버리자.	fix	sound
+sound:clipped-volitional-aux	桃になっちゃお	복숭아가 되어버리자	fix	sound
+sound:clipped-volitional-aux	よし、どんどん強くしちゃお！	좋아, 점점 강하게 해버리자!	fix	sound
+sound:clipped-volitional-aux	｢任せちゃお！｣じゃねえよ！	｢맡겨버리자!｣가 아니야!	fix	sound
+sound:clipped-volitional-aux	はい 今日は奢りね。 私も飲んじゃお。	네 오늘은 한턱이네. 나도 마셔버리자.	fix	sound
+sound:clipped-volitional-aux	ねっ 話しちゃお？	그런데 이야기해버리자?	fix	sound
+sound:clipped-volitional-aux	早く天下取っちゃお？	빨리 강림나고 취해버리자?	fix	sound
+sound:clipped-volitional-aux	よーし じゃあ皆で行っちゃお！	좋아~ 그럼 모두가 가버리자!	fix	sound
+sound:clipped-volitional-aux	全部 モヤモヤ吐き出しちゃお。 それがいい。	전부 찜찜 토해내버리자. 그것이 좋다.	fix	sound
+sound:clipped-volitional-aux	だが しかし ここに私は 宣言しちゃお	하지만 여기에 나는 선언해버리자	fix	sound
+sound:clipped-volitional-aux	５歳児攻撃 いいかも！ こっちも同じようにやっちゃお！	5세아 공격 좋을지도! 여기도 똑같이 해 치우자!	fix	sound
+sound:clipped-volitional-aux	さあ！ 早く降りて食べちゃお	자! 빨리 내려 먹어버리자	fix	sound
+sound:clipped-volitional-aux	みんなにシェアしちゃお！	모두에게 쉐어해버리자!	fix	sound
+sound:clipped-volitional-aux	ウケる。 ねっ。 撮っちゃお。私も撮ろう。	웃겨. 저기. 찍어버리자. 나도 찍자.	fix	sound
+sound:clipped-volitional-aux	ま いいか 裏門から入っちゃお	좋은가 뒷문에서 들어가버리자	fix	sound
+sound:clipped-volitional-aux	《あっ 最後に もう一度 着ていく服 お店で探しちゃお…》	《앗 마지막으로 한번 더 입고 가는 옷 가게에서 찾아버리자…》	fix	sound
+sound:clipped-volitional-aux	｢初雪記念日のKISSしちゃお！ なんてねっ｣	｢첫눈 기념일의 KISS 해버리자! 농담이얏｣	fix	sound
+sound:clipped-volitional-aux	俺もドレッド全開でいこっ！	나도 드레드 전개로 가자!	fix	sound
+sound:clipped-volitional-aux	） どれから処理していこかな みたいな…	) 어떤 것으로부터 처리해 나갈까같은…	fix	sound
+sound:clipped-volitional-aux	わしら 仲間や｡ 時代 相手に どこまでも 闘うていこよ！	우리들 동료야. 시대 상대에게 한없이 싸워 가자!	fix	sound
+sound:clipped-volitional-aux	年明けから そうゆう事で やっていこか？	연초부터 그런 것으로 해 나갈까?	fix	sound
+sound:clipped-volitional-aux	あるよ 持ってきたさけ…｡ 少し置いていこか？	있어 가져 북 찢어라…. 조금 두고 갈까?	fix	sound
+sound:clipped-volitional-aux	わしら 仲間や 時代相手に どこまでも 闘(たたこ)うていこよ！	우리들 동료나 시대상손에 한없이 싸워 가자!	fix	sound
+sound:clipped-volitional-aux	笑顔でいこか	웃는 얼굴로 갈까	fix	sound
+sound:clipped-volitional-aux	そうだな。 気を引き締めていこ…。	그래. 마음을 단단히 먹어 가자….	fix	sound
+sound:clipped-volitional-aux	価値観認め合っていこ	가치관 서로 인정해 가자	fix	sound
+sound:clipped-volitional-aux	いいから。 ほら ア行から一緒に探していこ。	좋으니까. 자 아행에서 함께 찾아 가자.	fix	sound
+sound:clipped-volitional-aux	ですね。 回っていこ。 大体 北西なら もう良くない？	그렇죠. 돌아 가자. 대개 북서라면 이제 좋지 않아?	fix	sound
+sound:clipped-volitional-aux	次の学祭 それでいこ	다음 학 제 그렇게 하자	fix	sound
+sound:clipped-volitional-aux	大体 北西なら もうよくない？ 回っていこ	대개 북서라면 이제 좋지 않아? 돌아 가자	fix	sound
+sound:clipped-volitional-aux	血でいこ！ 血 出しときゃオッケーや！ ちゃう？	피로 가자! 피 내 두면 오케이야! 아니야?	fix	sound
+sound:clipped-volitional-aux	教科書だけに そろそろ“本”気でいこか	교과서인 만큼 슬슬 “책”기분으로 갈까	fix	sound
+sound:clipped-volitional-aux	しかたない 走っていこ	어쩔 수 없다 달려 가자	fix	sound
+sound:clipped-volitional-aux	これから少しずつ、ふたりで慣れていこ？	지금부터 조금씩, 둘이서 익숙해져 가자?	fix	sound
+sound:clipped-volitional-aux	先生のところに ﾎﾟﾆ大根 持っていこっと！	선생님에게 포니무 가져가야지!	fix	sound
+sound:clipped-volitional-aux	そんとき顔見ていこか	라고 하고 얼굴 봐 갈까	fix	sound
+sound:clipped-volitional-aux	あっ 待てよ しずかちゃん所に 来たんだから遊んでいこっと	앗 기다려 시즈카짱소에 왔으니까 놀아 가야지	fix	sound
+segment:na-space	同じような 気がする	같은 생각이 든다	keep	segment
+segment:na-space	全力を出すな って 言っているんじゃない	전력을 내지 말라고 말하는 거 아니야	keep	segment
+segment:na-space	そんな 馬鹿な	말도 안돼	keep	segment
+sound:clipped-volitional-aux	ただじゃおかねーからな！！	그냥 두지 않으니까!!	keep	sound
+sound:clipped-volitional-aux	もう生かしちゃおかねえぞ！ 裏切り？	이제 살리면 두지 않아! 배반?	keep	sound
+sound:clipped-volitional-aux	どんなやつだろうと 絶対に生かしちゃおかーん	어떤 녀석일 거라고 절대로 살리면 두지 않아~	keep	sound
+sound:clipped-volitional-aux	鰍沢先生の「チアっちゃお！」 あい読者としては―	카지카자와 선생님의 「치어챠오!」아이 독자로서는-	keep	sound
+sound:clipped-volitional-aux	ちゃおちゃお	챠오 챠오	keep	sound
+sound:clipped-volitional-aux	やっちゃおかな	해 치울까	keep	sound
+sound:clipped-volitional-aux	寝ちゃおか	자버릴까	keep	sound
+cx:na-observed:10	しかし 気になるな あの男｡	하지만 신경 쓰이네 그 남자.	fix	rewrites
+cx:na-observed:10	“今日はツイてるな 俺って” …とかって思ってる？	“오늘은 운이 좋네 나는” …이라든지라고 생각해?	fix	rewrites
+cx:na-observed:10	ツイてるな アジア系は最高だ	운이 좋네 아시아계는 최고다	fix	rewrites
+cx:na-observed:10	《いよいよ始まるな 円堂君。	《드디어 시작되네 엔도 군.	fix	rewrites
+cx:na-observed:20	よろしく頼むな 文句言ったら 鮫島さんに	잘 부탁해 불평 말하면 사메지마 씨에게	fix	rewrites
+cx:na-observed:20	何もするな	아무것도 하지 마	keep	rewrites
+segment:na-space	心配するな 俺がいる	걱정하지 마 내가 있다	fix	segment
+sound:clipped-volitional-aux	燃やしちゃお	태워버리자	fix	sound
+sound:clipped-volitional-aux	新しいパジャマ 持っていこ	새로운 파자마 가져가자	fix	sound
+cx:na-observed:30	うれしいこと言ってくれるな かんぱーい	기쁜 말 해 주는구나 건배~	fix	rewrites
+cx:na-observed:30	私のことを可愛いとかやんちゃとか、好きなように言ってくれるな	나를 귀엽다든가 응석이라든지, 좋아하는 대로 말해 주는구나	fix	rewrites
+cx:na-observed:30	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 늦어, 이제 울어 주지 마.	keep	rewrites
+cx:na-observed:30	水野家のためと思ってくれるな	미즈노가 때문에라고 생각해 주지 마	keep	rewrites
+cx:na-observed:35	むちゃくちゃ言うな この人	지독하게 말하는구나 이 사람	fix	rewrites
+cx:na-observed:35	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	fix	rewrites
+cx:na-observed:35	心配するな 俺がいる	걱정하지 마 내가 있다	keep	rewrites
+segment:na-space	あっ 電話 借りるな ア… どうぞ	앗 전화 빌린데 아… 받아 주세요	keep	segment
+cx:na-observed:30	やってくれるな　牧！お待ちください。	해 주는구나 목! 기다려 주세요.	fix	rewrites
+cx:na-observed:30	言ってくれるな｡ 何… 単純な話よ｡	말해 주는구나. 무엇… 단순한 이야기야.	fix	rewrites
+cx:na-observed:35	やっぱヤバい球 投げるな あいつ。	역시 위험한 공 던지는구나 저 녀석.	fix	rewrites
+cx:na-observed:30	なかなか言ってくれるな	꽤 말해 주는구나	fix	rewrites
+cx:na-observed:35	ほんと…エッチ中はおかしくなるな、この人	정말…섹스 중은 이상해지는구나, 이 사람	fix	rewrites
+cx:na-observed:35	簡単に引き受けるな こいつ！	간단하게 맡는구나 이 녀석!	fix	rewrites
+cx:na-observed:30	なかなか やってくれるな	꽤 해 주는구나	fix	rewrites
+cx:na-observed:30	言ってくれるな 魔導国宰相 アルベド	말해 주는구나 마도국 재상 알베도	fix	rewrites
+cx:na-observed:30	やってくれるな！ 我がライフは残り１つ	해 주는구나! 우리 라이프는 남아 1개	fix	rewrites
+cx:na-observed:30	派手に やってくれるな。 これで 何回目だ？	화려하게 해 주는구나. 이것으로 몇 번째야?	fix	rewrites
+cx:na-observed:35	まだまだ成長するな あの人	아직도 성장하는구나 그 사람	fix	rewrites
+cx:na-observed:30	うれしいこと言ってくれるな｡ ああ｡	기쁜 말 해 주는구나. 아.	fix	rewrites
+cx:na-observed:35	けど スゲえ跳ぶな あいつ	지만 대박 뛰는구나 저 녀석	fix	rewrites
+cx:na-observed:30	できるならばな。 フンッ 言ってくれるな。	할 수 있다면. 흥 말해 주는구나.	fix	rewrites
+cx:na-observed:35	《吐くな あいつ》 《増子：絶対 吐く》	《토하는구나 저 녀석》 《미시코：절대 토한다》	fix	rewrites
+cx:na-observed:35	来るな あいつ…	오는구나 저 녀석…	fix	rewrites
+cx:na-observed:30	言ってくれるな 羨まし一	말해 주는구나 선해 1	fix	rewrites
+cx:na-observed:30	嬉しいこと言ってくれるな え？ 拓兄さん｡	기쁜 말 해 주는구나? 히로시 형님.	fix	rewrites
+cx:na-observed:30	よくも まあ ぬけぬけと言ってくれるな。	잘도 뭐 태연히 말해 주는구나.	fix	rewrites
+cx:na-observed:35	《ずいぶん引きつけて打つな この人。	《꽤 끌어당겨 치는구나 이 사람.	fix	rewrites
+cx:na-observed:30	色々やってくれるな	여러 가지 해 주는구나	fix	rewrites
+cx:na-observed:30	マスコミにリークとは やってくれるな	매스컴에 유출이란 해 주는구나	fix	rewrites
+cx:na-observed:35	腹立つな こいつ	화가 나는구나 이 녀석	fix	rewrites
+cx:na-observed:35	なんか ちょいちょい ジョアンナの所に行くな この人	뭔가 까딱까딱 죠안나에게 가는구나 이 사람	fix	rewrites
+cx:na-observed:30	やっぱ やってくれるな アスタ こらぁ！	역시 해 주는구나 아스타 이봐~!	fix	rewrites
+cx:na-observed:35	ものすげえこと言うな あの人	것 굉장히 불공평이라고 말하는구나 그 사람	fix	rewrites
+cx:na-observed:35	確かに 迫力あるな あの人。	확실히 박력 있는구나 그 사람.	fix	rewrites
+cx:na-observed:35	腹立つな あいつ	화가 나는구나 저 녀석	fix	rewrites
+cx:na-observed:35	めっちゃ笑うな あの人	엄청 웃는구나 그 사람	fix	rewrites
+cx:na-observed:35	しかし 内容はともかく なかなか流暢に喋るなこいつ	하지만 내용은 차치하고 꽤 유창하게 말하는구나 이 녀석	fix	rewrites
+cx:na-observed:35	息でしょ? 今の。 何か腹立つな あいつ...。	숨이지? 지금의. 뭔가 화가 나는구나 저 녀석....	fix	rewrites
+cx:na-observed:30	それを言ってくれるな…｡	그것을 말해 주지 마….	keep	rewrites
+cx:na-observed:30	“苦しい” なんて 簡単に言ってくれるな―	“괴롭다”는 간단하게 말해 주지 마-	keep	rewrites
+cx:na-observed:33	よく食べるな 君は	잘 먹는구나 너는	fix	rewrites
+cx:na-observed:33	よく喋るな 大丈夫か	잘 말하는구나 괜찮은가	fix	rewrites
+cx:na-observed:33	よく頑張るな お前	잘 노력하는구나 너	fix	rewrites
+cx:na-observed:33	ずいぶん遠くまで来るな 私たち	꽤 먼 곳까지 오는구나 우리	fix	rewrites
+cx:na-observed:33	「おいおい、今日はずいぶん持ち上げるな」	「이봐 이봐, 오늘은 꽤 들어 올리는구나」	fix	rewrites
+cx:na-observed:33	「おっと……。ずいぶん揺れるな。アラタ、すまない。ぶつかってしまった」	「어이쿠……. 꽤 흔들리는구나. 아라타, 미안하다. 부딪쳐버렸다」	fix	rewrites
+cx:na-observed:33	ああ！ちぇ、なかなかにやるな。面白い！	아! 쳇, 꽤에 하는구나. 재미있어!	fix	rewrites
+cx:na-observed:33	「ず、ずいぶん趣味の悪いもん頼むな……つーか、晩飯が別にあるのに、全部食えるのか？」	「꽤, 꽤 취향이 나쁜 걸 부탁하는구나……그보다, 저녁 밥이 따로 있는데, 전부 먹을 수 있는 거야?」	fix	rewrites
+cx:na-observed:33	「確実に潰したいであろう相手を俺たちの採用試験にするとは、なかなかひねくれた性格をしているな」	「확실히 부수고 싶을 상대를 우리의 채용시험으로 한다는 것은, 꽤 비뚤어진 성격을 하고 있는구나」	fix	rewrites
+cx:na-observed:33	「しかしクイーンはよく食べるな……」	「하지만 여왕은 잘 먹는구나……」	keep	rewrites
+cx:na-observed:33	「都合よく記憶を書き換えるな」	「때마침 기억을 고쳐 쓰지 마」	keep	rewrites
+cx:na-observed:33	よく見ろ。泣くな	잘 봐라. 울지 마	keep	rewrites

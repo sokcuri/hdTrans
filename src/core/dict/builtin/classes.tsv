@@ -26,6 +26,10 @@
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
+//= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
+//= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
+//= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
+//= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
 //= noun.invite-place	Places and gatherings one is invited to with に (うち, 家, パーティー): いらっしゃいませんか after one is 오시지 않겠습니까 (spec LEX-4600).
 //= verb.keep-doing	Stems of verbs one keeps doing (見, 見張, 寝, 待): a ていないと of one that ends the sentence is what one must keep doing, -아야 한다 (spec GRM-3725).
@@ -166,6 +170,7 @@
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
 //= name.person-clause-stop	What ends the clause of a subject for the person cues of spec LEX-4820: a condition, a cause, a quotation or a clause made a noun (菓子が出れば, 心が若いと言って, 世界が無数にあることを知ってた).
 //= name.personified-word	Common words of nature, the sky, the seasons and ideas that writers make laugh, speak or look like a person (未来が微笑む, 向日葵が笑う, 運命が囁く): a person cue of spec LEX-4820 does not make them names; an honorific or a name the document carries still does.
+//= name.side-word	Single kanji of a side or a position (左, 右, 上, 下, 前, 後) that no person cue makes a name, though the name layer has a person row of them (左が言った 왼쪽이 말했다; spec LEX-4832).
 //= char.ascii-alnum	ASCII digits and letters: a kanji right after one in its token follows a number or a unit (10cm砲).
 //= sign.final-vowel	Signs read as a word whose Korean reading ends in a vowel: units and currencies (° 도, ℃ 도, ㎝ 센티미터, € 유로, $ 달러) and letters and numbers written as one symbol (② 이, α 알파); Roman numerals, read either way (Ⅲ 삼, 쓰리), are left out. A particle after one takes its vowel form (100℃였다).
 //= sign.final-consonant	Signs of the same kinds whose reading ends in a consonant other than ㄹ (㎏ 킬로그램, ₩ 원, ③ 삼, ε 엡실론).
@@ -249,6 +254,7 @@
 //= noun.count-medicine	Nouns of medicine, matched at the end of a word, counted by 服, 첩 (薬が一服 약 한 첩).
 //= noun.count-tofu	Nouns counted in blocks by 丁, 모 (豆腐が一丁 두부 한 모).
 //= noun.count-gun	Nouns of guns and long tools, matched at the end of a word, counted by 丁, 자루 (拳銃が一丁 권총 한 자루).
+//= noun.count-blade	Nouns of swords and blades, matched at the end of a word, that 一振りの before them counts, 자루 (一振りの剣 한 자루의 검; spec LEX-3836).
 //= noun.count-rice	Nouns of a bowl of rice, matched at the end of a word, counted by 膳, 공기 (ご飯を一膳 밥 한 공기).
 //= noun.count-chopsticks	Nouns of chopsticks, counted in pairs by 膳, 벌 (箸が一膳 젓가락 한 벌).
 //= noun.count-tent	Nouns of tents, counted by 張, 동 (テントが一張 텐트 한 동).
@@ -435,6 +441,7 @@
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
 //= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
+//= suffix.stem-noun	Nouns a verb's continuative runs into as one noun (考え中, 取調べ側, 伸び放題, 助け甲斐, 掛け率, 出来次第): an ichidan stem before one stays the noun, even after を or が (spec GRM-3847).
 //= suffix.title-in-name	Title words that may follow a name inside its run (茜たち, 水無月家).
 //= suru.predicate-noun	Starts of the する after a verbal noun that make the noun the predicate (回復した, 回復できる).
 //= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
@@ -492,6 +499,7 @@
 //= verb.write-say	Starts of verbs of writing, telling and promising that quote a と a few words before them, with no predicate between (弟にすると書状に書き残していた 한다고, 提供するとお話しさせて頂きました 제공한다고; spec GRM-40).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+//= verb.object-passive	Ichidan verbs whose られ form with an object を stays the passive, what is done to one (傷をつけられる, ソファを勧められる, 空き缶を投げつけられる, 声を誉められる): GRM-3871 does not read their dictionary passive rows as the potential.
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
 //= verb.arrival-te	Stems of the verbs of moving to a place whose て form before 来る says the arrival, so that its ている is the state of having come (帰ってきている 돌아와 있다, 入ってきている 들어와 있다).
@@ -2224,6 +2232,12 @@ name.personified-word	朝焼け
 name.personified-word	満月
 name.personified-word	黄昏
 name.personified-word	夕暮れ
+name.side-word	左
+name.side-word	右
+name.side-word	上
+name.side-word	下
+name.side-word	前
+name.side-word	後
 char.ascii-alnum	0
 char.ascii-alnum	1
 char.ascii-alnum	2
@@ -6290,6 +6304,13 @@ suffix.plural-pronoun	達
 suffix.plural-pronoun	ら
 suffix.plural-pronoun	ども
 
+suffix.stem-noun	中
+suffix.stem-noun	側
+suffix.stem-noun	放題
+suffix.stem-noun	甲斐
+suffix.stem-noun	率
+suffix.stem-noun	次第
+
 suffix.title-in-name	先生
 suffix.title-in-name	先輩
 suffix.title-in-name	選手
@@ -6433,6 +6454,10 @@ verb.observed-state	あり得
 verb.observed-state	間に合
 verb.observed-state	でき
 verb.observed-state	出来
+verb.observed-state	気にな
+verb.observed-state	始ま
+verb.observed-state	ツイて
+verb.observed-state	ついて
 verb.adnominal-state	優れる
 verb.adnominal-state	すぐれる
 verb.adnominal-state	秀でる
@@ -7144,6 +7169,22 @@ verb.receiver-passive	託
 verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
+verb.receiver-passive	秘
+verb.object-passive	つけ
+verb.object-passive	付け
+verb.object-passive	着け
+verb.object-passive	勧め
+verb.object-passive	薦め
+verb.object-passive	投げつけ
+verb.object-passive	投げ付け
+verb.object-passive	攻め
+verb.object-passive	見せつけ
+verb.object-passive	見せ付け
+verb.object-passive	誉め
+verb.object-passive	褒め
+verb.object-passive	比べ
+verb.object-passive	かけ
+verb.object-passive	掛け
 
 verb.respectful	仰
 verb.respectful	おっしゃ
@@ -9886,6 +9927,18 @@ noun.count-tofu	豆腐
 noun.count-tofu	こんにゃく
 noun.count-tofu	蒟蒻
 
+noun.count-blade	剣
+noun.count-blade	刀
+noun.count-blade	太刀
+noun.count-blade	刃
+noun.count-blade	槍
+noun.count-blade	脇差
+noun.count-blade	小刀
+noun.count-blade	短刀
+noun.count-blade	大刀
+noun.count-blade	薙刀
+noun.count-blade	剣刀
+
 noun.count-gun	銃
 noun.count-gun	拳銃
 noun.count-gun	ピストル
@@ -11150,3 +11203,84 @@ noun.edible	パン
 noun.edible	おにぎり
 noun.edible	団子
 noun.edible	饅頭
+noun.weather-come	雨
+noun.weather-come	大雨
+noun.weather-come	小雨
+noun.weather-come	雪
+noun.weather-come	大雪
+noun.weather-come	嵐
+noun.weather-come	台風
+noun.weather-come	吹雪
+noun.weather-come	豪雨
+noun.weather-come	雷雨
+noun.weather-come	暴風雨
+noun.time-ni	夜
+noun.time-ni	朝
+noun.time-ni	昼
+noun.time-ni	夕方
+noun.time-ni	晩
+noun.time-ni	夜中
+noun.time-ni	真夜中
+noun.time-ni	深夜
+noun.time-ni	夜明け
+noun.time-ni	明け方
+noun.time-ni	早朝
+noun.time-ni	休日
+noun.time-ni	祝日
+noun.time-ni	週末
+noun.time-ni	土日
+noun.time-ni	正月
+noun.time-ni	夏
+noun.time-ni	冬
+noun.time-ni	春
+noun.time-ni	秋
+noun.time-ni	夏休み
+noun.time-ni	冬休み
+noun.time-ni	昼休み
+noun.time-ni	日曜
+noun.time-ni	日曜日
+noun.time-ni	土曜
+noun.time-ni	土曜日
+noun.time-ni	雨の日
+noun.time-ni	嵐の夜
+noun.time-ni	誕生日
+noun.least-able	子供
+noun.least-able	子ども
+noun.least-able	こども
+noun.least-able	ガキ
+noun.least-able	がき
+noun.least-able	赤ん坊
+noun.least-able	赤ちゃん
+noun.least-able	幼児
+noun.least-able	小学生
+noun.least-able	幼稚園児
+noun.least-able	素人
+noun.least-able	シロウト
+noun.least-able	猿
+noun.least-able	サル
+noun.least-able	バカ
+noun.least-able	馬鹿
+noun.least-able	ばか
+noun.least-able	アホ
+noun.least-able	あほ
+noun.least-able	初心者
+noun.least-able	新人
+noun.least-able	犬
+noun.relation-person	友達
+noun.relation-person	友だち
+noun.relation-person	ともだち
+noun.relation-person	トモダチ
+noun.relation-person	仲間
+noun.relation-person	親友
+noun.relation-person	家族
+noun.relation-person	恋人
+noun.relation-person	味方
+noun.relation-person	敵
+noun.relation-person	他人
+noun.relation-person	彼氏
+noun.relation-person	相棒
+noun.relation-person	仲良し
+noun.relation-person	ライバル
+noun.relation-person	同類
+noun.relation-person	兄弟
+noun.relation-person	姉妹

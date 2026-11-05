@@ -220,16 +220,38 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     }
     // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
     if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t)) {
-        if (std::string kr = internal::GuessedName(t); IsHangulText(kr)) return kr;
+        if (std::string kr = internal::GuessedName(t); IsHangulText(kr)) {
+            // The name layer's own reading comes first (龍鳳 류호, 日村 히무라, 日代 히시로).
+            if (std::string own = NonPlaceLayerReading(t); IsHangulText(own)) return own;
+            return kr;
+        }
+    }
+    return "";
+}
+
+// The reading the name layer gives t (龍鳳 류호, 隼鷹 준요: a ship read on its Chinese readings; 日代
+// 히시로, a place a surname is named after), which a reading guessed from given names would replace; not
+// a place reading that ends in the Korean word of a kind of place (岸村 기시촌). "" for none.
+std::string Registry::NonPlaceLayerReading(std::string_view t) {
+    if (snap_ == nullptr) return "";
+    for (const dict::Record& r : snap_->NameRecords(t)) {
+        if (r.codes == nullptr || !IsHangulText(r.target)) continue;
+        if (r.codes->sem.HasPrefix("QCT")) {
+            const text::Rune last = RuneBefore(r.target, r.target.size());
+            if (InRunes(last.cp, "촌시군역강산섬읍면동리구현도정사궁성교")) continue;
+        }
+        return std::string(r.target);
     }
     return "";
 }
 
 bool Registry::GuessedNameBlocked(std::string_view t) {
-    // The document writes the run twice or more: a run said once may be a name read on its kanji's
-    // Chinese readings (龍鳳さん 류호 씨), which no guess from given names catches.
+    // The document writes the run twice or more, or once before an honorific: a run said once may
+    // be a word read on its kanji's readings, which no guess from given names catches.
     const auto seen = runs_.find(std::string(t));
-    if (seen == runs_.end() || seen->second < 2) return true;
+    // Before an honorific once is enough (宿海君, 日々間氏).
+    const bool honoured = honGuess_.count(std::string(t)) != 0;
+    if (!honoured && (seen == runs_.end() || seen->second < 2)) return true;
     // A shop (氷屋さん) is no name.
     if (t.ends_with("屋")) return true;
     // The last kanji and 様 make a word, which the 様 seen after the run belongs to (皆一様に: 一様).

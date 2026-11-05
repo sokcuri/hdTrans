@@ -200,6 +200,7 @@ private:
     std::string PersonName(std::string_view t);
     // Whether a guessed reading of the kanji run t is kept out: the document writes it once only, it
     // names a shop, or its last kanji and 様 are a word (皆一様).
+    std::string NonPlaceLayerReading(std::string_view t);
     bool GuessedNameBlocked(std::string_view t);
     // The word of x in the name-layer person reading of an accepted chain name
     // (ミレイユ・ベルクロア 미레유 베르크로아) that has x as a part and a word per part,
@@ -221,6 +222,8 @@ private:
     std::string nameLine_;                              // the last line when it is a name alone
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
+    std::set<std::string> honGuess_;                    // those before an honorific other than 殿
+    std::map<std::string, int> framed_;                 // kanji runs in a person frame (PersonFrame)
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
     std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ

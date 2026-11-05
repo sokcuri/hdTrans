@@ -1,0 +1,19 @@
+# 규칙: LEX-4623
+rule	input	expected	kind	layer
+cx:sense-cues-1:370	「今度、一緒に料理しようよ。私が一から教えるよ？」	「다음에, 함께 요리하자. 내가 처음부터 가르쳐?」	fix	rewrites
+cx:sense-cues-1:370	それは残念だね。私はケーキの事は詳しくないが今度探して持ってこよう。	그것은 유감이네. 나는 케이크의 일은 자세하지 않지만 다음에 찾아 가져오자.	fix	rewrites
+cx:sense-cues-1:370	「また、今度誘ってください。もう少し、将棋の勉強しておきますんで」	「또, 다음에 불러 주세요. 좀 더, 쇼기가 공부해 두기 때문에」	fix	rewrites
+cx:sense-cues-1:370	今度こそ完璧だ	이번이야말로 완벽하다	keep	rewrites
+cx:sense-cues-1:370	今度は座れず、出口際に並んで立つ。	이번에는 앉지 못하고, 출구때에 나란히 선다.	keep	rewrites
+cx:sense-cues-1:380	並んで歩きだす。	나란히 걷기 시작한다.	fix	rewrites
+cx:sense-cues-1:380	二人は並んで立っていた	has:나란히 서 있었다	fix	rewrites
+cx:sense-cues-1:380	並んで寝た	has:나란히 잤다	fix	rewrites
+cx:sense-cues-1:380	並んで腰掛けた	has:나란히 앉았다	fix	rewrites
+cx:sense-cues-1:380	二人ベランダに並び、ぼんやりと街を眺める。	두 사람 베란다에 늘어서, 멍하니 거리를 바라본다.	keep	rewrites
+cx:sense-cues-1:382	「タオルの方はこちらに並んでくださーい！」	「수건은 이쪽에 줄을 서 주세요~!」	fix	rewrites
+cx:sense-cues-1:382	「あーもー、湿っぽいのはいいから。ほら、早く並んでっ」	「아-도―, 눅눅한 건 좋으니까. 자, 빨리 줄을 서」	fix	rewrites
+cx:sense-cues-1:382	棚に並んでるのがその収穫？	선반에 늘어서 있는 것이 그 수확?	keep	rewrites
+cx:sense-cues-1:382	屋台が並ぶのは知ってるでしょ	포장마차가 늘어서는 것은 알고 있지	keep	rewrites
+cx:sense-cues-1:390	倒れそうになる佳奈を、危うく支える。	쓰러질 것 같아지는 카나를, 하마터면 부축한다.	fix	rewrites
+cx:sense-cues-1:390	泣きながら早足で歩いていたシンシア様は、勢い余って転びかけ、それをわたしがとっさに支えたというわけ。	울면서 빠른 걸음으로 걷던 신시아님은, 기세가 지나쳐서 넘어져 걸어, 그것을 내가와 에 부축했다고 하는 것.	fix	rewrites
+cx:sense-cues-1:390	そんな目立ちませんが、立派な仕事をする方々が国や組織を支えています	그렇게 눈에 띄지 않습니다만, 훌륭한 일을 하는 분들이 나라나 조직을 지탱하고 있습니다	keep	rewrites
