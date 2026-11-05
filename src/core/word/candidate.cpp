@@ -978,6 +978,60 @@ Record* KanaVerbAfterParticle(const Item& parent, Record* records, std::string_v
 // spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
 // 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
 // Plain-dictionary records stay in front.
+// An ichidan verb whose stem a noun spells (面倒見 돌보기, 面倒見る 돌보다) is the verb before an
+// ending a noun does not take: る, た, て, ない, なさい, よう, ろ, ます, られ (面倒見てた 돌보고 있었다,
+// 面倒見る 돌본다, 面倒見なさい 돌봐), while 面倒見が, 面倒見も, 面倒見だ stay with the noun. Only a kanji key of two characters or more, which the
+// noun leads (spec GRM-3921).
+Record* VerbBeforeTeForm(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    // The noun of the longest key: no record spells more of the text (改めて stays the adverb).
+    const Record* noun = nullptr;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (noun == nullptr || r->source.size() > noun->source.size()) noun = r;
+    }
+    if (noun == nullptr || At(noun->partCode, 1) != '1' || !text.starts_with(noun->source)) return records;
+    const std::string_view key = noun->source;
+    if (text::RuneCount(key) < 2 || !HasKanji(key)) return records;
+    const std::string_view after = text.substr(key.size());
+    bool form = false;
+    for (const std::string_view f : {"る", "た", "て", "ない", "なか", "なき", "なく", "なけ", "なさ", "よう", "ろ", "ます", "られ"}) {
+        form = form || after.starts_with(f);
+    }
+    // Before るに the plain verb has no reading of its own yet (裏付けるに 증명하는에), so the noun stays.
+    if (!form || after.starts_with("るに")) return records;
+    bool verb = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        verb = verb || (r->source == key && r->partCode.size() == 4 && At(r->partCode, 1) == '4' && r->partCode[3] == '7');
+    }
+    if (!verb) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == key && r->partCode.size() == 4 && At(r->partCode, 1) == '4' && r->partCode[3] == '7') {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
+    return records;
+}
+
 Record* VerbBeforePolite(Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -2268,6 +2322,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
+    if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
     if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (parent != nullptr) {

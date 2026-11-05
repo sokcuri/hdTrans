@@ -474,6 +474,11 @@ constexpr NamedFeature kFeatures[] = {
     // The word repeats the word before it (CopyBefore), or the word after it repeats it.
     {"copy", [](Flusher&, const Item* it) { return CopyBefore(it) != nullptr; }},
     {"copied", [](Flusher&, const Item* it) { return CopyAfter(it) != nullptr; }},
+    // The word two before it has its text: the A of Aだ Aだって said again (バカだバカだって).
+    {"said-again", [](Flusher&, const Item* it) {
+         const Item* p = it->prev != nullptr ? it->prev->prev : nullptr;
+         return p != nullptr && Slice(p->text, p->start, p->length) == Slice(it->text, it->start, it->length);
+     }},
     // The copy after it follows with no pause (CopiedStraight); the copies are the last
     // predicate of their sentence (CopiesEnd); they end in the connective form 6 (ConnectiveCopies).
     {"copied-straight", [](Flusher&, const Item* it) { return CopiedStraight(it); }},
