@@ -43,6 +43,8 @@ bool KataStemPattern(std::string_view s, size_t pos, Match& m) {
     for (const KataStem& k : kKataStems) {
         size_t p = pos;
         if (!Lit(s, p, k.kata)) continue;
+        // Before an honorific the run is a name (エラさん 엘라 씨), not a stem and its さ.
+        if (dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), s.substr(p)) > 0) continue;
         for (std::string_view e : kKataEndings) {
             size_t q = p;
             if (!Lit(s, q, e)) continue;

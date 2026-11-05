@@ -772,11 +772,13 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
     records = snapshot.NameRecords(source);
     // A kana word the dictionary already reads as a person, as one of the name's own spellings
     // or by its sound (エル 엘, フラン 프랑), is read that way, also where another meaning comes
-    // first (さくら 벚꽃, 사쿠라); the cue replaces only words of another meaning (アヤメ 붓꽃).
+    // first (さくら 벚꽃, 사쿠라); the cue replaces only words of another meaning (アヤメ 붓꽃, アリ 개미).
     if (kana) {
         if (same.empty()) return {};
         const auto own = std::find_if(same.begin(), same.end(), [&](std::size_t k) {
-            return (PersonSense(*list[k].codes) && list[k].user == nullptr) || text::SameSound(list[k].target, reading) ||
+            // An animal is no person here: アリ 개미 is the word the cue replaces, not the name.
+            return (PersonSense(*list[k].codes) && !list[k].codes->sem.HasCodeIn("QAA", "QAH") && list[k].user == nullptr) ||
+                   text::SameSound(list[k].target, reading) ||
                    std::any_of(records.begin(), records.end(), [&](const dict::Record& r) {
                        return r.codes != nullptr && r.codes->sem.HasPrefix("QPN") && r.target == list[k].target;
                    });

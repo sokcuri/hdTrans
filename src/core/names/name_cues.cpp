@@ -610,7 +610,28 @@ bool SingleSayer(std::string_view s) {
     return false;
 }
 
+// Whether katakana key's common word is an animal and no person (アリ 개미, サイ 코뿔소), which a person
+// name of the name layer also spells.
+bool KatakanaAnimalKey(const dict::Snapshot& snap, std::string_view key) {
+    if (text::RuneCount(key) < 2 || !internal::AllRunes(key, IsKatakana)) return false;
+    bool animal = false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN")) continue;
+        if (c.codes->sem.HasCode("VHn") || c.codes->sem.HasCode("QNP")) return false;
+        for (const std::string_view code : {"QAA", "QAB", "QAC", "QAD", "QAE", "QAF", "QAG", "QAH"}) animal = animal || c.codes->sem.HasCode(code);
+    }
+    return animal;
+}
+
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    // A katakana name that also spells an animal (アリ, サイ) names a person as the subject of a verb of
+    // saying or thinking in its clause, as a single kanji does (アリが言った 아리가 말했다; spec LEX-4840).
+    if (KatakanaAnimalKey(snap, key) && !FigureKey(snap, key)) {
+        for (const std::string_view p : {"が", "は"}) {
+            if (after.starts_with(p)) return SingleSayer(after.substr(p.size()));
+        }
+        return false;
+    }
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
     // A single kanji names a person only as the subject of a verb of saying or thinking in its clause
     // (南が言った; not 左の頬, 車が音を言わせて): its other cues are too often its common word.
