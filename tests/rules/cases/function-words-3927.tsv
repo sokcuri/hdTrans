@@ -1,0 +1,175 @@
+# 규칙: GRM-3927
+rule	input	expected	kind	layer
+cx:function-words:10	ある出来事について、 彼が言うにはとか彼女が言うにはとか	어느 사건에 대해, 그가 말하기로는이라든지 그녀가 말하기로는이라든지	fix	rewrites
+cx:function-words:30	だからって 奴が見たと言ってた話が	그렇다고 해서 놈이 보았다고 했던 이야기가	fix	rewrites
+cx:function-words:22	不幸を吸うだと？ どういう意味だ？	불행을 들이마신다고? 무슨 뜻이야?	fix	rewrites
+cx:function-words:30	だからって関係ない人間が 死に過ぎだろう！	그렇다고 해서 관계없는 인간이 너무 죽을 것이다!	fix	rewrites
+cx:function-words:30	だからって じゃあ どうするんだよ？ 僕らには もう関係ないだろ	그렇다고 해서 그럼 어떻게 하지? 우리에게는 이제 관계없지	fix	rewrites
+cx:function-words:20	小僧の兵力の補充のために 駐屯するだと？	애송이 병력 보충을 위해 주둔하다고?	fix	rewrites
+cx:function-words:30	だからって 別に あんたじゃなくてもいいでしょ！	그렇다고 해서 딱히 네가 아니어도 괜찮지!	fix	rewrites
+cx:function-words:10	ここの常連の爺さんが言うには何でも時空を捻じ曲げ、異世界にいくつも『扉』を生み出してるって話です。	여기의 단골의 할아버지가 말하기로는 뭐든 시공을 염굽혀, 이세계에 여러 『문』을 만들어 내고 있다는 이야기입니다.	fix	rewrites
+cx:function-words:20	「…バカな！？店が無いだと！？」	「…바보 같은!? 가게가 없다고!?」	fix	rewrites
+cx:function-words:40	そしてある時、母と散歩に出た彼は、第二の人生の全てを賭すことになる衝撃の出会いを果たしたのであった。	그리고 어느 날, 어머니와 산책하러 간 그는, 제2의 인생의 모든 것을 걸게 되는 충격의 만남을 완수했다.	fix	rewrites
+cx:function-words:60	そういうと、「立派立派！」という声があがる。	그렇게 말하자, 「훌륭함 훌륭함!」이라는 소리가 높아진다.	fix	rewrites
+cx:function-words:23	くっ、やられただと！？	큭, 당했다고!?	fix	rewrites
+cx:function-words:22	私が、艦隊戦で沈む…だと？ …ハ…ハハッ…いいだろう！何だろうな、この気持ちは…ハ…ハハ…	내가, 함대전에서 가라앉는다고…? …하…하핫…좋아! 무엇일까, 이 기분은…하…하하…	fix	rewrites
+cx:function-words:20	名前が長いだと！ふん。	이름이 길다고! 흥.	fix	rewrites
+cx:function-words:22	いいのか、司令？こんな所で油を売ってて。まあ、売るほど油なぞ残ってないか。何？今は備蓄はしっかりあるだと？	괜찮아, 사령관? 이런 곳에서 농땡이 부리고 있어. 뭐, 파는 만큼 기름 수수께끼 남지 않은가. 뭐? 지금은 비축은 확실히 있다고?	fix	rewrites
+cx:function-words:30	だからってお前、何もしないでいていいのか？たしかに直接的にはお前がギアに乗ったことでの出来事かもしれない。	그렇다고 해서 너, 아무것도 하지 않고 있어도 되는 건가? 확실히 직접적으로는 네가 기어를 탄 것에서의 사건일지도 모른다.	fix	rewrites
+cx:function-words:40	ある時を境にふっつりと姿を隱してしまわれたのだが、うわさではその直後にお子を持たれたとか持たれないとか……。	어느 날을 경계로 뚝 모습을 감추어버려졌는데, 소문에서는 그 직후에 자를 갖게했다든가 갖게하지 않는다든가…….	fix	rewrites
+cx:function-words:30	「いくら“野生児”だからって、ああ、もぉ～」	「아무리 “야생아” 그렇다고 해서, 아, 도~」	fix	rewrites
+cx:function-words:30	「だからって――」	「그렇다고 해서――」	fix	rewrites
+cx:function-words:30	だからって すり抜けるやつに	그렇다고 해서 빠져나가는 녀석에게	fix	rewrites
+cx:function-words:50	――実在の個別性は、経験科学にとって異質性なるものとして残っている。	――실재의 개별성은, 경험 과학에 있어 이질성이라는 것으로서 남아 있다.	fix	rewrites
+cx:function-words:50	歌想に主観的なるものと客観的なるものとあり。	가상에 주관적이라는 것과 객관적이라는 것과 있어.	fix	rewrites
+cx:function-words:50	恐らく今後と雖も斯く迄圖版の多數なるものは容易に得難いことであらう。	아마 향후 수도 이렇게까지 도판의 다수라는 것은 용이하게 얻기 어려운 일로 씻는다.	fix	rewrites
+cx:function-words:40	また何に感じたか、ある時女史はスクリアビンのゾナーテ（多分第四番）を弾こうかと言った事もあった。	또 무엇에 느꼈는지, 어느 날 여사는 스크리아빈의 조나테(아마 제4번)를 연주할까 하고 한 적도 있었다.	fix	rewrites
+cx:function-words:40	あるとき茂緒は、二階の窓べ近くで解きものをしていた。	어느 날 무서는, 2층의 창가 근처에서 해 오고 것을 하고 있었다.	fix	rewrites
+cx:function-words:10	でもちはちはが言うにはこれを忘れてまた飲むらしいわよ	그리고 떡벌은이 말하기로는 이것을 잊어 또 마시는 것 같아	fix	rewrites
+cx:function-words:50	ところで、この計算なるものの本質は、純粋に数学的なものである。	그런데, 이 계산이라는 것의 본질은, 순수하게 수학적인 것이다.	fix	rewrites
+cx:function-words:40	ある時山奥のまた山奥から出て来た病人でどの医者にも診断のつかない不思議な難病の携帯者があった。	어느 날 산속의 또 산속에서 나온 환자로 어느 의사에게도 진단이 붙지 않는 이상한 난치병 휴대폰자가 있었다.	fix	rewrites
+cx:function-words:50	○三絃堀なるものなり。	○삼현굴이라는 것 돼.	fix	rewrites
+cx:function-words:40	ある時、私は兵さんに従いて、龍田山に登った。	어느 날, 나는 군사 씨에 따라라고, 타츠타 산에게 올랐다.	fix	rewrites
+cx:function-words:22	剥がすだと？勝手なことすんじゃねぇぞ！	벗긴다고? 제멋대로인 일 하지 마!	fix	rewrites
+cx:function-words:50	しかしながら、倭奴国なるものは、本来どこにも存在したものではなかった。	그렇지만, 야마토 나노쿠니라는 것은, 본래 어디에도 존재한 것은 아니었다.	fix	rewrites
+cx:function-words:10	それにかまわずかの水兵の言うには、この仲間で近ごろ本国から来た手紙を読み合うと言うのです。	게다가 상관하지 않고인가의 수병이 말하기로는, 이 동료로 요즈음 본국에서 온 편지를 서로 읽는다고 합니다.	fix	rewrites
+cx:function-words:23	なっ！？刀が喋っただとっ！？	뭣!? 칼이 말했다고!?	fix	rewrites
+cx:function-words:40	第二は、あるとき人の機を織りてありしに、なにごともなくしてその機糸が一時に断ちきられしことこれなり。	제2는, 어느 날 사람의 베를 짜라고 있어 해에, 무슨 일도 없애 그 기실이 한꺼번에 끊기고 해 일이것이다.	fix	rewrites
+cx:function-words:50	元來この士官室なるものへは、副長以下大尉以上の將校が皆な來て、飯を食ふ。	원래 이 사관실이라는 것에는, 부장 이하 대위 이상의 장교가 모두인 와, 밥을 밥.	fix	rewrites
+cx:function-words:50	ただ第一に問題となるのは、いかなる標準によってそのいわゆる同系要素なるものを識別しうるかという事である。	다만 제일에 문제가 되는 것은, 어떠한 표준에 의해 그 이른바 동계 요소라는 것을 식별할 수 있는일까 하고 말하는 것이다.	fix	rewrites
+cx:function-words:30	だからって…アタシは、アンタを物扱いして売ろうとした	그렇다고 해서…나는, 너를 물건 취급해 팔려고 했다	fix	rewrites
+cx:function-words:30	だからって ほっとけるわけないだろう！	그렇다고 해서 가만히 둘 리가 없잖아!	fix	rewrites
+cx:function-words:30	もう！ だからって “はい そうですか”って―	정말! 그렇다고 해서 “네 그렇습니까”라고-	fix	rewrites
+cx:function-words:23	ぐっ… また よけただと！	윽… 또 피했다고!	fix	rewrites
+cx:function-words:22	ヘヘヘヘヘッ 許さねえだと？ 海賊風情が 野郎ども！ ぶっ殺しちまえ！	헤헤헤헤헷 용서하지 않는다고? 해적 따위가 놈들! 확 죽여버려!	fix	rewrites
+cx:function-words:40	だけど あるとき 地球に来たときに こう バレエのチュチュを見て あっ 自分の…	하지만 어느 날 지구에 왔을 때 이렇게 발레의 츄츄를 보고 앗 자신의…	fix	rewrites
+cx:function-words:30	だからって 何でも全部 言わなきゃいけないんですか？	그렇다고 해서 뭐든 전부 말해야 합니까?	fix	rewrites
+cx:function-words:30	いや だからって何も受験生の今 行かなくたっていいでしょ	아니 그렇다고 해서 아무것도 수험생의 지금 가지 않아도 되지	fix	rewrites
+cx:function-words:30	だからって 不倫が 許されることにはならないけど	그렇다고 해서 불륜이 허락되는 것으로는 되지 않는데	fix	rewrites
+cx:function-words:40	ある時 再会したんです。	어느 날 재회했습니다.	fix	rewrites
+cx:function-words:20	見逃せないだと？	놓칠 수 없다고?	fix	rewrites
+cx:function-words:40	ある時、彼は言いました・・・	어느 날, 그는 말했습니다···	fix	rewrites
+cx:function-words:10	彼女が言うには、 君はこういうのが好きで、楽しんでるんだと。	그녀가 말하기로는, 너는 이런 것을 좋아해, 즐기고 있다고.	fix	rewrites
+cx:function-words:20	ｱｸｾｽできないだと!? はい｡	액세스할 수 없다고!? 네.	fix	rewrites
+cx:function-words:25	私の切り札が… 珍しくないだと！？	내 비장의 카드가… 드물지 않았다고!?	fix	rewrites
+cx:function-words:50	殤様は 人を善なるものと 信じておられないのですか？	상님은 사람을 선이라는 것과 믿고 계시고 않습니까?	fix	rewrites
+cx:function-words:20	お前より暗いだと?	너보다 어둡다고?	fix	rewrites
+cx:function-words:30	眉毛は薄いけど だからってこんなに可愛い子を	눈썹은 얇지만 그렇다고 해서 이렇게 귀여운 아이를	fix	rewrites
+cx:function-words:22	連れて行くだと?	데려간다고?	fix	rewrites
+cx:function-words:30	だからって　刃物なんか…。	그렇다고 해서 칼은….	fix	rewrites
+cx:function-words:40	だが ある時 ふと	하지만 어느 날 문득	fix	rewrites
+cx:function-words:30	だからって➡	그렇다고 해서 ➡	fix	rewrites
+cx:function-words:30	だからって あれじゃ裕希君n傷つきますよ	그렇다고 해서 저것은 히로키 군n 상처받아요	fix	rewrites
+cx:function-words:50	彼は之によって初めて聖書なるものを手にしたという話しである。	그는 지에 의하고 처음으로 성서라는 것을 손에 넣었다는 이야기이다.	fix	rewrites
+cx:function-words:20	クソッタレの犬を殺して100万ドル欲しいだと?	쿠솟 소스의 개를 죽여 100만 달러 갖고 싶다고?	fix	rewrites
+cx:function-words:60	夫がそういうと、娘の正子までがのり気になって、本気な顔でいった。	남편이 그렇게 말하자, 딸 마사코까지가 내켜하는 마음이 되어, 진심인 얼굴로 말했다.	fix	rewrites
+cx:function-words:40	ある時、松石君、大枚三円なにがしを収穫したので、帰り途のウドン屋に寄って大いに飲んだ。	어느 날, 마츠이시 군, 대금3엔인에가 해를 수확했으므로, 돌아오는 길도의 우동가게에 들러 크게 마셨다.	fix	rewrites
+cx:function-words:10	ドナ・モリッシーが 言うには―	도나 모릿시가 말하기로는 -	fix	rewrites
+cx:function-words:22	何っ！ 爆砕点穴が通用しないだと！	뭐! 폭쇄점혈이 통용되지 않는다고!	fix	rewrites
+cx:function-words:10	マイケルが言うには・・・ - マイケルは嘘をついている!	마이클이 말하기로는 ··· - 마이클은 거짓말을 하고 있어!	fix	rewrites
+cx:function-words:40	しかし ある時 不慮の事故を起こした	하지만 어느 날 뜻하지 않은 사고를 냈다	fix	rewrites
+cx:function-words:40	ある時 ヤツらを 牢獄に送るために—	어느 날 녀석들을 감옥에 보내기 위해—	fix	rewrites
+cx:function-words:23	廃品の山で見つけただと?	폐품의 산에서 찾아냈다고?	fix	rewrites
+cx:function-words:50	こうして種々な条件を附けて来ると、創作人物の名前なるものは、いい加減、神経衰弱のタネになるものである。	이렇게 해 다양한 조건을 붙을 수 있어 오면, 창작 인물의 이름이라는 것은, 이제 좀, 신경쇠약의 씨가 되는 것이다.	fix	rewrites
+cx:function-words:25	酔ってたから覚えてないだと？	취하고 있었으니까 기억하지 않았다고?	fix	rewrites
+cx:function-words:40	そして ある時 俺は やつと戦うことになったのさ	그리고 어느 날 나는 녀석과 싸우게 됐어	fix	rewrites
+cx:function-words:10	あの女が言うには...	그 여자가 말하기로는...	fix	rewrites
+cx:function-words:10	先生が言うには、ほとんどの怪我が完治してるらしいんですよね	선생님이 말하기로는, 대부분의 상처가 완치하고 있는 모양 이군요	fix	rewrites
+cx:function-words:10	それで彼が言うには「アリソン、これは手術ですね	그래서 그가 말하기로는 「앨리슨, 이건 수술이군요	fix	rewrites
+cx:function-words:40	ある時 逃げ出した私たちに 転機が訪れて―	어느 날 도망간 우리에게 전기가 찾아와-	fix	rewrites
+cx:function-words:10	わかんない。でも、リリが言うには熱が出てて苦しそうだったって	모르다. 하지만, 리리가 말하기로는 열이 나고 있어 괴로운 듯했던은	fix	rewrites
+cx:function-words:30	ま 待ってよ だからってどうしてあたしが犯人になっちゃうの	마 기다려 그렇다고 해서 왜 내가 범인이 되어버려	fix	rewrites
+cx:function-words:40	ある時 ミアで	어느 날 미아로	fix	rewrites
+cx:function-words:10	私の頭の中は陰謀でいっぱいよ。 ある出来事について、 彼が言うにはとか彼女が言うにはとか	내 머릿속은 음모로 가득해. 어느 사건에 대해, 그가 말하기로는이라든지 그녀가 말하기로는이라든지	fix	rewrites
+cx:function-words:40	でもね ある時 カラクリが親父にばれた	그런데 어느 날 카라쿠리 인형이 아버지에게 발각되었다	fix	rewrites
+cx:function-words:40	しかし ある時 ふと就職を考える｡	하지만 어느 날 문득 취직을 생각한다.	fix	rewrites
+cx:function-words:10	早めに夕食を終えた エアズが言うには―	빨리 저녁식사를 끝낸 에아즈가 말하기로는 -	fix	rewrites
+cx:function-words:10	殺人課の刑事が言うには 今はciaの管轄だと	살인과의 형사가 말하기로는 지금은 cia 관할이라고	fix	rewrites
+cx:function-words:10	そうだ カイが言うには シフは 人工的な翼手とのことだ	그렇다 조개가 말하기로는 시프는 인공적인 익수라는 것이다	fix	rewrites
+cx:function-words:30	だからって好きか嫌いかは、またちょっと違うと思うんだけどね？	그렇다고 해서 좋아하는가 싫은가는, 또 조금 다르다고 생각하는데?	fix	rewrites
+cx:function-words:10	多くの言語学者が言うには 恐らく	많은 언어학자가 말하기로는 아마	fix	rewrites
+cx:function-words:10	お姉ちゃんが言うにはいつか付くって言うけど	언니가 말하기로는 언젠가 붙는다고 하는데	fix	rewrites
+cx:function-words:10	だが 彼らが言うには 完全に精神破壊を 起こしてると...	하지만 그들이 말하기로는 완전히 정신 파괴를 일으키고 있다고...	fix	rewrites
+cx:function-words:10	フカサク様が言うには	후카사쿠님이 말하기로는	fix	rewrites
+cx:function-words:10	陛下、彼らが言うには 第4大隊長のソティリスが戻ったと	폐하, 그들이 말하기로는 제4대대장의 소티리스가 돌아왔다고	fix	rewrites
+cx:function-words:50	なぜなら、このような淡泊な沈着だけが、精神的なるものへの熱中であるから。	왜냐하면, 이러한 담백한 침착하다 부상, 정신적이라는 것에 대한 열중이니까.	fix	rewrites
+cx:function-words:60	そういうと、...	그렇게 말하자,...	fix	rewrites
+cx:function-words:50	現にあの甚伍な、あれがその雄なるものだ。	실제로 그 심오인, 저것이 그 수컷이라는 것이다.	fix	rewrites
+cx:function-words:50	それは勉強なるものが決してスクール・ライフの中の主なる出来事ではなかったからだ。	그것은 공부라는 것이 결코 스쿨·라이프 안의 주된 사건은 아니었기 때문이다.	fix	rewrites
+cx:function-words:50	「ことに新兵器なるものは、敵がまったく思いもかけなかったような性能と怪奇な外観をもつのを佳とする。	「일로 신병기라는 건, 적이 완전히 예상도 하지 못했던 것 같은 성능과 괴기인 외관을 가지는 걸 가로 한다.	fix	rewrites
+cx:function-words:50	しかしながら、政治の性格なるものは一朝一夕に改変し得るものでない。	그렇지만, 정치의 성격이라는 것은 일조일석에 개변할 수 있는 것이 아니다.	fix	rewrites
+cx:function-words:50	立喰師なるものは、その詐偽によって自己実現を為すところにその本質を見出すべき存在である	입 식사라는 것은, 그 사위에 의해 자기 실현을 하는 곳에 그 본질을 찾아내야 할 존재이다	fix	rewrites
+cx:function-words:60	そういうと、硯箱を出させ、番頭、目付衆、親類中に宛てて、さらさらと手紙を書きだした。	그렇게 말하자, 벼룻집을 내게 해, 점장, 위법감찰무사사람들, 친척 중 앞으로 보내, 찰랑찰랑 편지를 써서냈다.	fix	rewrites
+cx:function-words:60	自分がそういうと、母はいろいろ頼むと云う様な事を云って立ちかける。	자신이 그렇게 말하자, 어머니는 여러 가지 부탁하면 말하는 것 같은 일을 말해 서려고 한다.	fix	rewrites
+cx:function-words:60	そういうと、吉見はもと来た森の中に帰りはじめた。	그렇게 말하자, 요시미는 아래 온 숲속에 돌아가기 시작했다.	fix	rewrites
+cx:function-words:60	姉がそういうと、父と兄は大きな声で笑った。	언니가 그렇게 말하자, 아버지와 형은 큰 목소리로 웃었다.	fix	rewrites
+cx:function-words:60	それで兎に角やって見ようと思ってそういうと、外山さんは私を嘉納さんのところへやった。	그래서 토끼에 모퉁이 해보려고 그렇게 말하자, 소토야마 씨는 나를 카노 씨에게 했다.	fix	rewrites
+cx:function-words:60	キャラコさんがそういうと、佐伯氏は、低い声で笑いだした。	칼리코 씨가 그렇게 말하자, 사에키씨는, 낮은 목소리로 웃기 시작했다.	fix	rewrites
+cx:function-words:60	若奴がそういうと、女主人は、	약노가 그렇게 말하자, 여주인은,	fix	rewrites
+cx:function-words:60	阿曽がそういうと、ハナは、	아소가 그렇게 말하자, 하나는,	fix	rewrites
+cx:function-words:60	柏木は店長にそういうと、「何にする」と、注文用タッチパネルモニターを見て注文をとる。	카시와기는 점장에 그렇게 말하면, 「무엇으로 한다」라고, 주문용 터치스크린 모니터를 보고 주문을 취한다.	fix	rewrites
+cx:function-words:60	そういうと、 下手な兵士を雇わなかっただろうね?	그렇게 말하자, 서투른 병사를 고용하지 않았을 것이다?	fix	rewrites
+cx:function-words:60	そういうと、200まで上がってきた。	그렇게 말하자, 200까지 올라 왔다.	fix	rewrites
+cx:function-words:60	そういうと、... 白人を殺した男にも正義があるんだろ?	그렇게 말하자,... 백인을 죽인 남자에게도 정의가 있는 거지?	fix	rewrites
+cx:function-words:60	そういうと、．．．	그렇게 말하자,. . .	fix	rewrites
+cx:function-words:10	そう言うには 早すぎるが	그렇게 말하기에는 너무 빠르지만	keep	rewrites
+cx:function-words:40	暇がある時、遊びに来て	시간이 있을 때, 놀러 와	keep	rewrites
+cx:function-words:40	ワタシに何かあった時には ティティに それを渡してほしいのだ｡	나에게 무슨 일 있었을 때는 티티에게 그것을 건네주었으면 하는 것이다.	keep	rewrites
+cx:function-words:50	子供達の顔に神聖なるものを見てきました	아이들의 얼굴에 신성한 것을 봐 왔습니다	keep	rewrites
+cx:function-words:50	それからは彼等だとて全然の空言は吐かぬやうになるものだ。	그리고는 그들이라도 전혀의 헛소리는 토하지 않는이나 게 되는 것이다.	keep	rewrites
+cx:function-words:30	美女だからって手加減してもらうと思うなよ	미녀라고 해서 힘 조절 받는다고 생각하지 마	keep	rewrites
+cx:function-words:30	だからってことですか？ それで？	그러니까라는 것입니까? 그래서?	keep	rewrites
+cx:function-words:20	コンドームで固定するだけだと?	콘돔으로 고정할 뿐이라면?	keep	rewrites
+cx:function-words:60	そういうと 聞こえはいいですが	그런과 듣기는 좋습니다만	keep	rewrites
+cx:function-words:30	じゃあ明日の釣りのことだからってそれだけ言っといて	그럼 내일의 낚시니까는 그것만 말해 두어	keep	rewrites
+cx:function-words:10	医者が言うには ストレスだと	의사가 말하기로는 스트레스라고	fix	rewrites
+cx:function-words:22	何？ 避難しないだと？	뭐? 피난하지 않는다고?	fix	rewrites
+cx:function-words:30	だからって 心配性だなぁ	그렇다고 해서 걱정이 많은 성격이구나	fix	rewrites
+cx:function-words:27	んだと！？どうしてそれを言わなかった！	뭐라고!? 왜 그것을 말하지 않았다!	fix	rewrites
+cx:function-words:27	何だと？ よし 相手になってやるぜ	뭐라고? 좋아 상대가 되어 줄게	fix	rewrites
+cx:function-words:27	はい。 なっ 何だと⁉ 地上人が脱走した？	네. 뭣 뭐라고!? 지상인이 탈주했어?	fix	rewrites
+cx:function-words:27	何だと？ 何を言ってるんだ	뭐라고? 무슨 소리야	fix	rewrites
+cx:function-words:26	「別の縁だと……？」	「다른 인연이라고……?」	fix	rewrites
+cx:function-words:26	「メニューだと…？何を言っているのだ…」	「메뉴라고…? 무슨 말을 하고 있어…」	fix	rewrites
+cx:function-words:27	「何だと？」	「뭐라고?」	fix	rewrites
+cx:function-words:26	い、いい匂い…だと…？	조, 좋은 냄새…라고…?	fix	rewrites
+cx:function-words:26	カレルレン……？相殺存在だと……？	카레르렌……? 상쇄 존재라고……?	fix	rewrites
+cx:function-words:27	「何だと？	「뭐라고?	fix	rewrites
+cx:function-words:27	はいー 何だと？	네― 뭐라고?	fix	rewrites
+cx:function-words:20	分からないだと!? 自分の家ではないか｡	모른다고!? 자신의 집이 아닌가.	fix	rewrites
+cx:function-words:20	《こいつ 激辛番長と呼ばれた 俺様に向かって 自信がないだと？》	《이 녀석 극강 매운맛 두목으로 불린 이 몸을 향해 자신이 없다고?》	fix	rewrites
+cx:function-words:22	なっ！ 全く動揺しないだと？	뭣! 전혀 동요하지 않는다고?	fix	rewrites
+cx:function-words:22	どうなってる？ プリキュアにも ぬけないだと？	어떻게 되어 있어? 프리큐어에도 빠지지 않는다고?	fix	rewrites
+cx:function-words:20	俺の目的が しょうもないだと？	내 목적이 시시하다고?	fix	rewrites
+cx:function-words:20	木札がないだと!?	목찰이 없다고!?	fix	rewrites
+cx:function-words:22	何ぃ！？キッドが来ないだと！？	무엇!? 키드가 오지 않는다고!?	fix	rewrites
+cx:function-words:20	こ… こいつ… 線を越えると命がないだと？	이… 이 녀석… 선을 넘으면 생명이 없다고?	fix	rewrites
+cx:function-words:20	ドゴス･ギアは普通ではないだと？	도고스 기아는 보통이 아니라고?	fix	rewrites
+cx:function-words:20	何の執着もないだと？	아무 집착도 없다고?	fix	rewrites
+cx:function-words:22	今日は帰らないだと？どういうことだ 伊丹	오늘은 돌아가지 않는다고? 무슨 뜻이다 이타미	fix	rewrites
+cx:function-words:20	もう この町には いないだと？	이제 이 마을에는 없다고?	fix	rewrites
+cx:function-words:22	馬の番組なのに 馬が出ないだと？	말의 프로그램인데 말이 나오지 않는다고?	fix	rewrites
+cx:function-words:22	化け物？化け物だから 俺には撮れないだと？	괴물? 괴물이니까 나에게는 찍히지 않는다고?	fix	rewrites
+cx:function-words:22	抜かないだと？ うまい。	뽑지 않는다고? 맛있다.	fix	rewrites
+cx:function-words:22	殺すか? 人を救うだと?	죽일까? 사람을 구한다고?	fix	rewrites
+cx:function-words:27	何すんだよ 何だと?	뭐해 뭐라고?	fix	rewrites
+cx:function-words:27	何だと！ 獣人が偉そうに！	뭐라고! 수인이 거만하게!	fix	rewrites
+cx:function-words:27	《なっ 何だと？ あのガキが そんな力を…》	《뭣 뭐라고? 그 녀석이 그런 힘을…》	fix	rewrites
+cx:function-words:26	こ 侯爵家だとっ!?	와 후작가라고!?	fix	rewrites
+cx:function-words:26	ろっ 老害だとっ！	롯 노해라고!	fix	rewrites
+cx:function-words:26	ただの人だとっ！？人の身である者が、なぜ鬼となった我をこうも圧倒するのだっ！？	그냥 사람이라고!? 사람의 몸인 사람이, 왜 귀신이 된 나를 이렇게도 압도해!?	fix	rewrites
+cx:function-words:26	三盛木瓜の家紋だとっ！？	3성모과의 문장이라고!?	fix	rewrites
+cx:function-words:26	敗因？ 敗因だとっ！	패인? 패인이라고!	fix	rewrites
+cx:function-words:26	アーマードリザードを 貫通だとっ!?	아마드리자드를 관통이라고!?	fix	rewrites
+cx:function-words:26	バリスタだとっ!?	배리스터라고!?	fix	rewrites
+cx:function-words:26	なにっ！ 五分だとっ！	뭣! 5분이라고!	fix	rewrites
+cx:function-words:21	くだらないだとっ！！	시시하다고!!	fix	rewrites
+cx:function-words:24	丘を捨てるだとっ!?	언덕을 버린다고!?	fix	rewrites
+cx:function-words:24	何が終わるだとっ!? ウッ！	뭐가 끝난다고!? 윽!	fix	rewrites
+cx:function-words:23	あの時タチアナさんは 試していただと思う	그 때 타티아나 씨는 시험하고 있었다라고 생각한다	keep	rewrites
+cx:function-words:26	私はそれを、意志だと思う。	나는 그것을, 의지라고 생각한다.	keep	rewrites
+cx:function-words:27	お前は私を何だと思っているのだえ。	너는 나를 무엇이라고 생각한다.	keep	rewrites
+cx:function-words:21	ぼくはいきなりその大きな男は人さらいだと思った。	나는 갑자기 그 큰 남자는 유괴범이라고 생각했다.	keep	rewrites
+cx:function-words:24	と、友達の一人は忠告した、俺もそうだと思った。	라고, 친구의 한 사람은 충고한, 나도 그렇다고 생각했다.	keep	rewrites
+cx:function-words:22	お前は私を何だと思っているのだえ。	너는 나를 무엇이라고 생각한다.	keep	rewrites
+cx:function-words:25	あっしは下手人は内の者だと思うが――」	저는 하수인은 가족이라고 생각하지만――」	keep	rewrites
