@@ -22,7 +22,7 @@ grammar:karakoso	だからこそ、最期は妾の手で	그렇기에, 최후는
 grammar:karakoso	だからこそ、妾は迷い、苦しんで	그렇기에, 첩은 헤매어, 괴로워해	keep	rewrites
 grammar:karakoso	だからこそ贔屓にしてるんだけどね	그렇기에 총애로 하고 있는데	keep	rewrites
 grammar:karakoso	まあ、そうなったからこそ、公方さまと手を組んであんな事になったんですけど	뭐, 그렇게 되었기에 더욱, 구보님과 손을 잡아 저런 일이 되었는데요	keep	rewrites
-cx:karakoso-adnominal:10	魔法を使えないからこそ〝魔学〟を編み出した第一人者であった	마법을 쓸 수 없기에 “마학”을 고안해 낸 제일인자였다	fix	rewrites
+cx:karakoso-adnominal:10	魔法を使えないからこそ〝魔学〟を編み出した第一人者であった	마법을 쓸 수 없기에 “마학”을 고안해 낸 일인자였다	fix	rewrites
 cx:karakoso-adnominal:10	セタ自身の最高到達点が高いからこそできるコンビネションだな	세타 자신의 최고 도달점이 높기에 할 수 있는 콘비네션이네	fix	rewrites
 cx:karakoso-adnominal:10	佳樹が姿を見せないからこそ お兄さまの自然な表情が撮れるのです	요시키가 모습을 보이지 않기에 더욱 오라버니의 자연스러운 표정이 찍힙니다	keep	rewrites
 cx:karakoso-adnominal:20	そうさ！ この地だからこそ生まれた魔法だ	그래! 이 땅이기에 태어난 마법이다	fix	rewrites

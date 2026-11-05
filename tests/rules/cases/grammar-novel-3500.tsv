@@ -1,8 +1,8 @@
 # 규칙: GRM-3500 ~ GRM-3513, GRM-3515
 rule	input	expected	kind	layer
-cx:novel-fixes-3:20	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:다 죽어가는 뇌세포가	fix	rewrites
+cx:novel-fixes-3:20	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:다 죽어 가는 뇌세포가	fix	rewrites
 cx:novel-fixes-3:20	彼は死にかけた。	!rule:cx:novel-fixes-3:20	keep	rewrites
-cx:novel-fixes-3:25	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:그 때, 내 다 죽어가는	fix	rewrites
+cx:novel-fixes-3:25	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:그 때, 내 다 죽어 가는	fix	rewrites
 cx:novel-fixes-3:25	俺の大事な脳細胞が	!rule:cx:novel-fixes-3:25	keep	rewrites
 cx:novel-fixes-3:30	苦笑いでも、泣き顔よかマシだ。	has:우는 얼굴보다는 낫다	fix	rewrites
 cx:novel-fixes-3:30	泣き顔よ、かわいいね。	!rule:cx:novel-fixes-3:30	keep	rewrites

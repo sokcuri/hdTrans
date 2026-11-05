@@ -1,0 +1,29 @@
+# 규칙: GRM-201, GRM-3918
+rule	input	expected	kind	layer
+cx:shikake-about:10	計画が頓挫しかけてる	has:좌절되려 하고 있다	fix	rewrites
+cx:shikake-about:10	計画が頓挫しかけている	has:좌절되려 하고 있다	fix	rewrites
+cx:shikake-about:15	逆に男のほうが恐怖しかけていた。	has:공포하려 하고 있었다	fix	rewrites
+cx:shikake-about:15	建物が崩壊しかけている	has:붕괴하려 하고 있다	fix	rewrites
+cx:shikake-about:15	説明しかけて、やめた	lacks:하려 하고	keep	rewrites
+cx:shikake-about:15	彼女に話しかけている	has:말을 걸고 있다	keep	rewrites
+cx:shikake-about:20	計画が頓挫しかけた	has:좌절될 뻔했다	fix	rewrites
+cx:shikake-about:20	気絶しかけた	has:기절할 뻔했다	keep	rewrites
+cx:shikake-about:30	計画が頓挫した	has:좌절되었다	fix	rewrites
+cx:shikake-about:30	計画が失敗した	has:실패했다	keep	rewrites
+cx:shikake-about:35	計画が頓挫している	has:좌절되어 있다	fix	rewrites
+cx:shikake-about:35	彼は勉強している	has:공부하고 있다	keep	rewrites
+cx:shikake-about:10	建物が崩壊しかけてる	lacks:되려	keep	rewrites
+cx:usual-act:20	「じゃあ、いつもの田中様の悪口でいいですから」	has:늘 하던 타나카 님 욕	fix	rewrites
+cx:usual-act:20	いつもの冗談だ	has:늘 하던 농담이다	fix	rewrites
+cx:usual-act:20	いつもの店で会おう	has:평소의 가게에서	keep	rewrites
+cx:usual-act:30	「私が軽々しく、田中様の噂をしてしまったのがいけなかったわ。」	has:타나카 님 소문을	fix	rewrites
+cx:usual-act:30	彼の噂を聞いた	has:그의 소문을	keep	rewrites
+cx:usual-act:20	またいつもの説教が始まった	has:늘 하던 설교가	fix	rewrites
+cx:usual-act:20	いつもの癖で、頭をかいた	has:늘 하던 버릇으로	fix	rewrites
+cx:usual-act:20	いつもの愚痴を聞いてやる	has:늘 하던 푸념을	fix	rewrites
+cx:usual-act:20	いつもの口癖だ	has:늘 하던 말버릇이다	fix	rewrites
+cx:usual-act:20	いつもの道を通って帰る	has:평소의 길을	keep	rewrites
+cx:usual-act:20	いつもの席に座った	has:평소의 자리에	keep	rewrites
+cx:usual-act:20	いつものように笑った	has:여느 때처럼	keep	rewrites
+cx:usual-act:30	彼女の噂を聞いた	has:그녀의 소문을	keep	rewrites
+cx:usual-act:30	先生の話を聞く	has:선생님의 이야기를	keep	rewrites

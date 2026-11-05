@@ -18714,7 +18714,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 段段	점점	E300			GN				xxx	1	だんだん	w:18628
 段物	피륙	N110			GN				xxx		たんもの	w:18629
 段物	한 필	N110			GN				llm		たんもの	w:18630
-殺しかけ	죽일 뻔&AV@	M427			GN				llm			w:18631
 殺し合	서로 죽&AJ@	M420			GN				llm		ころしあう	w:18632
 殺し合い	서로 죽이기	N110			GN				xxx llm	1		w:18633
 殺め	죽&AJ@	M427			GN				xxx llm	1		w:18634
@@ -23545,7 +23544,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 触れ合い	교감	N110			GN				llm		ふれあい	w:23458
 触れ込み	선전	N110	UTs		GN				llm		ふれこみ	w:23459
 触合い	교감	N110			GN				llm		ふれあい	w:23460
-言いかけ	말을 꺼&A6@	M427			GN				xxx llm	1		w:23461
 言いきか	&MI@	M423			GN				llm			w:23462
 言いたげ	말하고 싶은 듯%A1@	G8U0			GN				llm			w:23463
 言いだしっぺ	말을 꺼낸 사람	N110	VHn		GN				llm		いいだしっぺ	w:23464
@@ -25742,7 +25740,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 食っ付	사&C1@	M421			GN				llm		くっつく	w:25658
 食べあるき	맛집 탐방	N110		Hd	GN				xxx llm		たべあるき	w:25659
 食べあるき	걸으면서 먹기	N110		Hd	GN				llm		たべあるき	w:25660
-食べかけ	먹다 &Mh@	M427			GN				xxx llm	1		w:25661
 食べざかり	한창 먹을 나이	N110			GN				llm		たべざかり	w:25662
 食べ歩	먹으러 다&A7@	M421			GN				llm		たべあるく	w:25663
 食べ残	남&A2@	M423			GN				llm		たべのこす	w:25664
@@ -28325,3 +28322,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 やかまし	시끄$G7@	H7U0			GN			LEX-4762: やかましい 시끄럽다 (까다롭다는 口やかましい 쪽)		1	やかまし	w:34531
 一刻も早く	한시라도 빨리	E300			GN			LEX-4762: 一刻も早く 한시라도 빨리	replace	1	いっこくもはやく	w:34532
 取っておくれ	집어 다오	A9D0			GN			LEX-4766: それを取っておくれ 그걸 집어 다오		1		w:34534
+第二人者	이인자	I110	VHn		GN			LEX-4914: 業界の第二人者 업계의 이인자			だいににんしゃ	w:34434
+殺しかけ	죽일 뻔&AV@	M427			GN			LEX-4914: 自分を殺しかけたモンスター 자신을 죽일 뻔한 몬스터				w:34441
