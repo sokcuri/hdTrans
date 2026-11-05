@@ -24,3 +24,5 @@ lexical:missing-word	庭の手入れをする	뜰의 손질을 한다	keep	looku
 lexical:missing-word	神妙な面持ちで	진지한 표정으로	keep	lookup
 lexical:missing-word	ワイトマンの注文どおり皮袋のなかへ	와이트만 주문대로 가죽 자루 속에	keep	lookup
 lexical:missing-word	しかし道元にとっては乳の中に酪性が、すなわち衆生の中に仏性が、あるのではない。	하지만 도우겐에게는 젖 안에 낙성이, 즉 중생 중에 불성이, 있는 것은 아니다.	keep	lookup
+lexical:missing-word	諸方面に連絡した	여러 방면에 연락했다	fix	lookup
+lexical:missing-word	政府は諸方面から批判を受けた	정부는 여러 방면으로부터 비판을 받았다	fix	lookup
