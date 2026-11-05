@@ -715,7 +715,22 @@ bool LoneNee(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー")) return false;
     if (!Lit(s, p, "よ")) return false;
-    if (p < s.size() && In(At(s, p).cp, U"ねなぉおー")) return false;
+    // A drawn-out よ (ねえよう、 ねぇよぉ) is the call ねえ said long, not a negative.
+    if (p < s.size() && In(At(s, p).cp, U"ねなぉおーう")) return false;
+    m.end = p;
+    return true;
+}
+
+// The call ねえ drawn out with よう or よぉ before a comma or an ellipsis at the start of the line or after 「 or 『
+// (ねえよう、待ってよ, ねぇよぉ…): the call ねえ, not the negative ないよ (spec GRM-3845). ねーよー！ stays a negative.
+bool DrawnCallNee(std::string_view s, size_t pos, Match& m) {
+    const char32_t b = Before(s, pos);
+    if (b != 0 && !In(b, U"「『")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー") || !Lit(s, p, "よ")) return false;
+    if (!OneOf(s, p, U"うぉお")) return false;
+    while (p < s.size() && In(At(s, p).cp, U"うぉおー〜～")) p += At(s, p).size;
+    if (p >= s.size() || !In(At(s, p).cp, U"、，,…")) return false;
     m.end = p;
     return true;
 }
@@ -1205,8 +1220,8 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     static constexpr std::u32string_view kURow = U"くぐすつぬぶむる";
     static constexpr std::u32string_view kStemRow = U"え";
     // An ichidan stem in i or e right after the kanji of its verb (通じねえ, 起きねえ, 忘れねえ), where Nee
-    // wants a following kana; not after an adnominal い, な, の or the quoting って, where the kanji and kana are
-    // a noun (いい感じねえ, って感じねぇ).
+    // wants a following kana; not after an adnominal い, な, の, the quoting って or the honorific お or ご, where
+    // the kanji and kana are a noun (いい感じねえ, って感じねぇ, お疲れねえ).
     static constexpr std::u32string_view kKanjiStemRow = U"きぎじちびみりけげせぜべめれ";
     size_t p = pos;
     const text::Rune k = text::DecodeRune(s.substr(p));
@@ -1216,7 +1231,8 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     if (!ichidan && kKanjiStemRow.find(k.cp) != std::u32string_view::npos && pos > 0 && IsKanjiClass(Before(s, pos))) {
         const std::string_view head = s.substr(0, pos);
         const char32_t c = Before(head, head.size() - LastRune(head).size);
-        ichidan = !In(c, U"いなのて");
+        // お or ご before the kanji makes it a noun (お疲れねえ, お別れねぇ, お任せねえ: the particle ねえ).
+        ichidan = !In(c, U"いなのておご");
     }
     if (a == std::u32string_view::npos && !ichidan) return false;
     p += k.size;
@@ -1405,6 +1421,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         return Cat({m.group[1], wake ? "がない" : "ない"});
     });
     text = ReplaceAll(text, GaNee, [](const Match& m) { return Cat({m.group[1], "ない"}); });
+    text = ReplaceAll(text, DrawnCallNee, [](const Match&) { return std::string("ねえ"); });
     text = ReplaceAll(text, LoneNee, [](const Match&) { return std::string("ないよ"); });
     text = ReplaceAll(text, Chimau, [](const Match& m) {
         const Match g = Rematch(m, Chimau);
