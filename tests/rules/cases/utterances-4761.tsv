@@ -1,0 +1,47 @@
+# 규칙: LEX-4761, LEX-4762
+rule	input	expected	kind	layer
+pack:utterance	そのとおり 君が悪いんじゃあない	맞아 네가 나쁘지 구멍 있고	fix	packs
+pack:utterance	「そのとおり。向こうだって、落選したら必死に調べるだろうから、バレる可能性は少なくないと思うのよ」	「맞아. 저편도, 낙선하면 필사적으로 조사할 테니까, 들킬 가능성은 적지 않다고 생각해」	fix	packs
+pack:utterance	だからね、と。アニスフィアは笑う。無邪気に、ただ未来を語るかのように。	그러니까 말이야, 라고. 아니스피아는 웃는다. 천진난만하게, 다만 미래를 말하는 것처럼.	fix	packs
+pack:utterance	そのとおり！ だから 私は日本人に叫ぶ！	맞아! 그러니까 나는 일본인에 외친다!	fix	packs
+pack:utterance	ｸﾞｱ～！ ﾆｬﾆｬ！ うぃす！	크아~! 냐냐! 네!	fix	packs
+pack:utterance	「さてと」	「자, 그럼」	fix	packs
+pack:utterance	すごい 何でだよ	엄청 왜 그래	fix	packs
+pack:utterance	） おっと すんません	) 어이쿠 죄송합니다	fix	packs
+pack:utterance	すご。広く深い堀に高い壁。噂には聞いていましたが、まるで砦のようですね～	대박. 넓고 깊은 해자에 높은 벽. 소문에는 듣고 있었습니다만, 마치 요새 같네요~	fix	packs
+pack:utterance	愛理、どうよ？	아이리, 어때?	fix	packs
+pack:utterance	「そうです、経済特待生への差別問題です！　これ以上の放置は、許されません！　一刻も早く、抜本的な対策を施すべきです！」	「그렇습니다, 경제 특대생에 대한 차별 문제입니다! 더 이상의 방치는, 허락되지 않습니다! 한시라도 빨리, 발본적인 대책을 베풀어야 합니다!」	fix	packs
+pack:utterance	あっ お義母さん あの ルー お代わりもらっていいですか｡	앗 어머님 그 루 한 그릇 더 받아도 됩니까.	fix	packs
+pack:utterance	いくぞ ﾜﾀﾙ！ おっしゃ！	가겠어 와타루! 좋았어!	fix	packs
+pack:utterance	何って 別に 俺たち 何も リトのために 料理を作ってるの	뭐냐니 별로 우리 아무것도 리토를 위해 요리를 만들어	fix	packs
+pack:utterance	　……これじゃあ、付き合ってる以上のなにかみたいだ。	 ……이래서야, 사귀는 이상의 뭔가 같다.	fix	packs
+pack:utterance	「{k=-5.0}―――{/k} 今ね、蒼くんが来てるのよ」	「{k=-5.0}―――{/k} 지금 말이야, 아오이 군이 와」	fix	packs
+pack:utterance	ち、ちょっと！何すんだよー…！	자, 잠깐! 무슨 짓이야~…!	fix	packs
+pack:utterance	「おーこわ。なんなのあれ」	「-무서워. 뭐인 거 어」	fix	packs
+pack:utterance	ようし、まだまだこれから。バリバリ行こうぜ！？	좋아, 아직도 지금부터. 열심히 가자구!?	fix	packs
+pack:utterance	……よお。	……여어.	fix	packs
+pack:utterance	ウッ… 痛(いて)え！ 何すんだよ いきなり！	윽… 아프다! 무슨 짓이야 갑자기!	fix	packs
+pack:utterance	「よし、頼んだぞ」	「좋아, 부탁한다」	fix	packs
+pack:utterance	沙羅さん これさ 二桁は犯してるよね？ 法…。	사라 씨 이거 말이야 2자리수는 범하고 있지? 법….	fix	packs
+pack:utterance	こんなんで、どうよ！	이런 것으로, 어때!	fix	packs
+pack:utterance	かーっ！ったく、どいつもこいつも！知らねぇぞ、どうなっても！9	화악! 참나, 하나같이! 몰라, 어떻게 되어도! 9	fix	packs
+pack:utterance	どうしたテートク？疲れたのかい。ンだよ、だらしねえな。仕方ない、江風に寄っかかっていいぜ。ん？ほら、どうよ。	무슨 일이야 제독? 지친 거야. 야, 야무지지 못하네. 어쩔 수 없다, 카제에게 기 걸려도 돼. 응? 자, 어때.	fix	packs
+pack:utterance	一刻も早く 都会にたどり着き 車を捨て...	한시라도 빨리 도시에 도착해 차를 버리기...	fix	packs
+pack:utterance	さてと……。ギアはどこだ？	자, 그럼……. 기어는 어디야?	fix	packs
+pack:utterance	よお、オレたちこんなところで何を見張ってるんだろうな？	여어, 우리들 이런 곳에서 뭘 감시하는 걸까?	fix	packs
+pack:utterance	「だからね……」	「그러니까 말이야……」	fix	packs
+pack:utterance	「……待った？」	「……기다렸어?」	keep	packs
+pack:utterance	いいよ、あたしがやったげる。 仕方ないでしょう？これ、もらったし♪ まあ、それだけ…だからね。	좋아, 내가 해 줄게. 어쩔 수 없을 거예요? 이것, 받았고♪ 뭐, 그것뿐…이니까.	keep	packs
+pack:utterance	うん……だからこその『忘れ物』なんだって	응……그렇기에의 『두고 온 물건』라고	keep	packs
+pack:utterance	フフン、そりゃそうさ。愛情という名の調味料１００％だからね	흐흥, 그야 그래. 애정이라는 이름의 조미료 100%니까	keep	packs
+pack:utterance	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	packs
+pack:utterance	よおっし！ 直衛をかわした！	요옷해! 나오에를 주고 받았다!	keep	packs
+pack:utterance	姉貴、いいかい？一斉射撃だ。	누님, 좋아? 일제 사격이다.	keep	packs
+pack:utterance	「……これでも、やっぱりダメですか？」	「……이것이라도, 역시 안됩니까?」	keep	packs
+pack:utterance	格納庫も大掃除しなきゃ…って、コラ！	격납고도 대청소해야 한다…라니, 코라!	keep	packs
+pack:utterance	口やかましい母親	잔소리가 심한 어머니	keep	packs
+dict:lex4762	助けて	도와줘	fix	lookup
+dict:lex4762	お前ら何やってんだよ	너희들 뭐 하는 거야	fix	lookup
+dict:lex4762	お義母さんが来た	어머님이 왔다	fix	lookup
+dict:lex4762	一刻も早く逃げろ	한시라도 빨리 도망쳐라	fix	lookup
+dict:lex4762	やかましい！	시끄러워!	fix	lookup

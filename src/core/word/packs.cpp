@@ -610,13 +610,103 @@ bool SlotSuffix(const Item* x) {
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
 }
 
+// Whether x ends an utterance on its side: no word (the start or end of the text), a mark, or a word
+// of another token (a space between).
+bool UtteranceEdge(const Item* x, const Item* inside) {
+    if (x == nullptr || x->group == nullptr) return true;
+    if (x->tokenIndex != inside->tokenIndex) return true;
+    const std::string_view s = x->group->surface;
+    if (TrimSpace(s).empty()) return true;
+    for (const std::string_view mark : {"。", "、", "！", "？", "!", "?", "…", "‥", "「", "」", "『", "』", "（", "）", "～", "ー", "，", ","}) {
+        if (s == mark) return true;
+    }
+    return false;
+}
+
+// Whether the words from items[i] write text exactly and make the whole utterance (^text$): [i, end).
+bool Utterance(const Worker& w, const std::vector<Item*>& items, std::size_t i, std::string_view text, std::size_t& end) {
+    std::size_t k = i;
+    std::string_view rest = text;
+    while (!rest.empty()) {
+        if (k >= items.size() || items[k]->group == nullptr || items[k]->selected < 0) return false;
+        if (k > i && items[k]->tokenIndex != items[i]->tokenIndex) return false;
+        const std::string_view seg = Segment(items[k]);
+        if (seg.empty() || !rest.starts_with(seg)) return false;
+        rest.remove_prefix(seg.size());
+        k++;
+    }
+    if (k == i) return false;
+    if (!UtteranceEdge(i > 0 ? items[i - 1] : nullptr, items[i])) return false;
+    // a closing bracket before is the end of a quote the utterance goes on from (『物』なんだって, 」だからね)
+    if (i > 0 && items[i - 1]->group != nullptr) {
+        const std::string_view ps = items[i - 1]->group->surface;
+        if (ps == "」" || ps == "』" || ps == "）" || ps == ")") return false;
+        // an ellipsis after a word of the sentence is a pause inside it (それだけ…だからね)
+        if ((ps == "…" || ps == "‥") && i > 1 && items[i - 2]->group != nullptr && items[i - 2]->tokenIndex == items[i - 1]->tokenIndex &&
+            !UtteranceEdge(items[i - 2], items[i - 2])) {
+            return false;
+        }
+    }
+    // nor right after a number or a symbol (100%だからね)
+    if (i > 0 && items[i - 1]->group != nullptr && !TrimSpace(items[i - 1]->group->surface).empty() &&
+        !UtteranceEdge(items[i - 1], items[i - 1])) {
+        const char32_t last = DecodeLastRune(items[i - 1]->group->surface).cp;
+        const bool symbol = ClassOf(items[i - 1]) == '6' || (last >= U'0' && last <= U'9') || (last >= U'０' && last <= U'９') ||
+                            last == U'％' || last == U'%' || (last >= U'A' && last <= U'z') || (last >= U'Ａ' && last <= U'ｚ');
+        if (symbol) return false;
+    }
+    if (!UtteranceEdge(k < items.size() ? items[k] : nullptr, items[k - 1])) return false;
+    // After it the text ends or a mark follows; a space may only begin the next clause of a sentence
+    // (こっちだって もう１人), so the utterance must close there.
+    if (k < items.size() && items[k]->group != nullptr && items[k]->tokenIndex != items[k - 1]->tokenIndex &&
+        !UtteranceEdge(items[k], items[k])) {
+        return false;
+    }
+    // nothing else of the token before or after the span: a word the chain does not hold (an unknown run)
+    // would stand beside it
+    const Item* first = items[i];
+    const Item* last = items[k - 1];
+    const std::string_view before = std::string_view(first->text).substr(0, static_cast<std::size_t>(std::max(first->start, 0)));
+    const std::size_t stop = static_cast<std::size_t>(std::max(last->start, 0) + std::max(last->length, 0));
+    const std::string_view after = stop < last->text.size() ? std::string_view(last->text).substr(stop) : std::string_view();
+    auto marks = [](std::string_view t) {
+        static constexpr std::u32string_view kMarks = U"。、！？!?…‥「」『』（）()～ー　 ,.・，";
+        for (std::size_t q = 0; q < t.size();) {
+            const text::Rune r = text::DecodeRune(t.substr(q));
+            if (kMarks.find(r.cp) == std::u32string_view::npos) return false;
+            q += std::max<std::size_t>(r.size, 1);
+        }
+        return true;
+    };
+    const std::size_t from = static_cast<std::size_t>(std::max(first->start, 0));
+    if (i > 0 && items[i - 1]->tokenIndex == first->tokenIndex) {
+        const Item* p = items[i - 1];
+        if (static_cast<std::size_t>(std::max(p->start, 0) + std::max(p->length, 0)) != from) return false;
+    } else if (!marks(before)) {
+        return false;
+    }
+    if (k < items.size() && items[k]->tokenIndex == last->tokenIndex && !TrimSpace(items[k]->group->surface).empty()) {
+        if (static_cast<std::size_t>(std::max(items[k]->start, 0)) != stop) return false;
+    } else if (!marks(after)) {
+        return false;
+    }
+    // an ellipsis token after a word of the sentence is a pause inside it (それだけ…だからね)
+    if (const int t = first->tokenIndex - 1; t >= 1 && t < w.TokenCount() && (w.Tok(t).text.starts_with("…") || w.Tok(t).text.starts_with("‥"))) {
+        const tokenizer::TokenView prev = w.Tok(t - 1);
+        if (prev.type == tokenizer::kTypeJapanese && !prev.text.ends_with("、") && !prev.text.ends_with("。")) return false;
+    }
+    end = k;
+    return true;
+}
+
 // The span of colloc c that starts at items[i]: [i, end), the slot's words [slot, slotEnd) (none
 // without a slot); absorbed: the slot's last word holds the start of the text after the slot.
-bool MatchColloc(const dict::PackTable& t, const dict::Colloc& c, std::string_view before,
+bool MatchColloc(const Worker& w, const dict::PackTable& t, const dict::Colloc& c, std::string_view before,
                  const std::vector<Item*>& items, std::size_t i, std::size_t& end, std::size_t& slot,
                  std::size_t& slotEnd, bool& absorbed) {
     slot = slotEnd = static_cast<std::size_t>(-1);
     absorbed = false;
+    if (!c.slot && c.anchored) return Utterance(w, items, i, before, end);
     if (!c.slot) return ReadsText(items, i, before, end) && end > i;
     std::size_t at = i;
     if (!before.empty() && !ReadsText(items, i, before, at)) return false;
@@ -851,11 +941,18 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     }
     for (std::size_t k = i; k < m.end; k++) {
         const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
-        if (!inSlot && (items[k]->Fixed() || taken.contains(items[k]))) return false;
+        // an utterance row reads a fixed word too (何で of 何でだよ): the whole utterance is its reading
+        if (!inSlot && ((items[k]->Fixed() && !c.anchored) || taken.contains(items[k]))) return false;
     }
     if (c.slot && m.end == m.slotEnd) return false;
     const char cls = ClassOf(items[m.end - 1]);
     const std::string& compiled = cls == '4' ? c.headVerb : cls == '7' ? c.headAdjective : cls == '8' ? c.headNa : c.headRaw;
+    // an utterance is written as it is, its last word's ending dropped
+    if (c.anchored) {
+        m.conjugates = false;
+        m.head = c.headRaw;
+        return true;
+    }
     m.conjugates = !compiled.empty() && Predicate(cls);
     m.head = compiled.empty() ? std::string_view(c.headRaw) : std::string_view(compiled);
     return m.conjugates || !Predicate(cls);
@@ -894,7 +991,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
             const std::string& before = c.befores[static_cast<std::size_t>(b)];
             CollocMatch m;
             m.c = &c;
-            if (c.loose ? !MatchIdiom(f.w, c, items, i, m) : !MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
+            if (c.loose ? !MatchIdiom(f.w, c, items, i, m) : !MatchColloc(f.w, t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
             if (!Applicable(f, t, items, i, taken, m)) continue;
             m.length = before.size() + c.after.size();
             const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
@@ -910,6 +1007,29 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
         // the particle after the slot is left out when the slot's word already reads it (俺の 내)
         const bool particleLeft = c.slot && !c.particle.empty() && !best.absorbed && best.slotEnd < best.end &&
                                   items[best.slotEnd]->EntryText(items[best.slotEnd]->selected).empty();
+        if (c.anchored) {
+            // an utterance: its first word that conjugates nothing takes the target and the others write
+            // nothing; with none, the target follows the last word
+            std::size_t carrier = best.end;
+            for (std::size_t k = i; k < best.end && carrier == best.end; k++)
+                if (!Predicate(ClassOf(items[k]))) carrier = k;
+            const bool spaced = i > 0 && items[i - 1]->tokenIndex != items[i]->tokenIndex &&
+                                !UtteranceEdge(items[i - 1], items[i - 1]);
+            const std::string carried = spaced ? " " + c.headRaw : c.headRaw;
+            for (std::size_t k = i; k < best.end; k++) {
+                Write(items[k], k == carrier ? std::string_view(carried) : std::string_view(), source);
+                if (items[k]->DirectIndex() >= 0) items[k]->AssignDirectSlot(items[k]->DirectIndex(), "", source);
+                taken.insert(items[k]);
+            }
+            if (carrier == best.end) {
+                // written after its emptied words, the target takes the space a comma before it leaves
+                const bool comma = i > 0 && (items[i - 1]->group->surface == "、" || items[i - 1]->group->surface == "，");
+                head->appended += comma ? " " + c.headRaw : c.headRaw;
+            }
+            head->packRows.push_back(r.global);
+            i = best.end - 1;
+            continue;
+        }
         for (std::size_t k = i; k < best.end; k++) {
             Item* x = items[k];
             if (c.slot && k >= best.slot && k < best.slotEnd) continue;

@@ -83,6 +83,9 @@ struct Colloc {
     // An idiom row (kind idiom): a noun, its particle and a verb in its dictionary form, matched
     // loosely (another particle or none, a space or adverbs before the verb).
     bool loose = false;
+    // An utterance row (pattern ^…$): the span is the whole utterance, from a start of the text, a mark
+    // or a space to an end, a mark or a space, and its target is written as it is.
+    bool anchored = false;
     std::string noun, idiomParticle, verb;
 };
 
