@@ -14265,7 +14265,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 坐禪和讃	좌선화찬	N110			GN				xxx llm	1		w:14229
 坩堝	도가니	N110			GN						るつぼ	w:14230
 垂らし込	흘려 &H5@	M425			GN				llm		たらしこむ	w:14231
-垂れ	누구	N110			GN				xxx	1	たれ	w:14232
 垂涎モノ	군침 도는 것	N110			GN				llm			w:14233
 埋め込まれ	박&AW@	M427			GN				xxx llm	1		w:14234
 埋没毛	매몰모	N110			GN						まいぼつもう	w:14235
@@ -20069,7 +20068,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 班田収授の法	반전수수법	N110			GN						はんでんしゅうじゅのほう	w:20025
 班田収授法	반전수수법	N110			GN						はんでんしゅうじゅのほう	w:20026
 現の証拠	이질풀	N110			GN						げんのしょうこ	w:20027
-現れ	표현	N110			GN				xxx llm	1		w:20028
 現代化	현대화	N110		Hd	GN						げんだいか	w:20029
 現代化	현대화&AV@	M429			GN						げんだいか	w:20030
 現代文学	현대문학	N110			GN						げんだいぶんがく	w:20031
