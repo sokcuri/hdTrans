@@ -1,0 +1,151 @@
+# 규칙: LEX-4764
+rule	input	expected	kind	layer
+lookup:iku-ccha	俺が起しに行っちゃ工合が悪い。	내가 일으키러 가면 상태가 나쁘다.	fix	lookup
+lookup:iku-ccha	はわわっ、照ちゃん、行っちゃダメだよぉ！二人に気づかれちゃうってばぁ！	하와왓, 테루짱, 가면 안돼! 두 사람에게 들켜버린다는 정말!	fix	lookup
+lookup:iku-ccha	おに…待って…行っちゃや	도깨비…기다려…가면이야	fix	lookup
+lookup:iku-ccha	ダメなんだよ、神域に行っちゃ！	안되어, 신사의 경내에 가면!	fix	lookup
+lookup:iku-ccha	みんな海岸に戻ってていい ジャック だめよ! 一人で行っちゃ!	모두 바닷가로 돌아가 있어 좋은 잭 안돼! 혼자서 가면!	fix	lookup
+lookup:iku-ccha	「行っちゃやだ～！」	「가면이나다~!」	fix	lookup
+lookup:iku-ccha	帰りに１人で 赤城なんかに 走りに行っちゃ駄目だよ	오는 길에 혼자서 아카기같은 것에 달리러 가면 안돼	fix	lookup
+lookup:iku-ccha	だから 行っちゃダメなんだって！	그러니까 가면 안된다고!	fix	lookup
+lookup:iku-ccha	いや ちょちょ 行っちゃ駄目だって！	아니 잠깐잠깐 가면 안된다고!	fix	lookup
+lookup:iku-ccha	ロニーが言ってたよ行っちゃダメだって	로니가 말했어 가면 안된다고	fix	lookup
+lookup:iku-ccha	今日も一緒に行っちゃおー！	오늘도 함께 가면―！	fix	lookup
+lookup:iku-ccha	「行っちゃだめって言ったでしょ！	「가면 안된다고 말했잖아!	fix	lookup
+lookup:iku-ccha	Lv.62 ミク氏「行っちゃう」HP:6990/9999 MP:989	Lv.62 미쿠 씨 「가버린다」HP:6990/9999 MP:989	keep	lookup
+lookup:iku-ccha	あれ、行っちゃった……えっと……	어라, 가버린……음……	keep	lookup
+lookup:iku-ccha	ありゃりゃ、行っちゃったや。しずるんってば、ホント気むずかしいねー	아랴레바, 가버렸다야. 해 질질 끄는 은 정말, 진짜 까다롭네~	keep	lookup
+lookup:iku-ccha	（小声）行っちゃうですわ	(작은 목소리) 가버려요	keep	lookup
+lookup:iku-ccha	「きゃー♪蒼、ラノベに行っちゃうじゃん！	「꺄아♪창, 라노벨에 가버리잖아!	keep	lookup
+lookup:iku-ccha	行っちゃいけないって、お父様が	가면 안된다고, 아버님이	keep	lookup
+lookup:iku-ccha	「むー\n行っちゃうでしょ」	「무우\n가버리겠지」	keep	lookup
+lookup:iku-ccha	「べ、別にお姉ちゃん氏、夢に行っちゃうですわ～」	「벼, 별로 언니 씨, 꿈에 가버려요~」	keep	lookup
+cx:homograph-kara:10	私のグラスが空だろう。	내 잔이 비어 있을 것이다.	fix	rewrites
+cx:homograph-kara:10	「おい、ロザリア。先刻から何をぼさっとしている。私のグラスが空だろう。気が利かないな」	「어이, 로살리아. 잠시 전부터 뭘 멍하고 있다. 내 잔이 비어 있을 것이다. 눈치가 없네」	fix	rewrites
+cx:homograph-kara:15	箱が空だったのを 誰も確認しなかったのか？	상자가 비어 있었던 것을 아무도 확인하지 않았던 건가?	fix	rewrites
+cx:homograph-kara:15	箱が空だったのを 誰も確認しなかったのか？	상자가 비어 있었던 것을 아무도 확인하지 않았던 건가?	fix	rewrites
+cx:homograph-kara:20	中は空で、栓がしてある。	안은 비어 있고, 마개가 되어 있다.	fix	rewrites
+cx:homograph-kara:20	既に胃の中は空だ。	이미 위 안은 비어 있다.	fix	rewrites
+cx:homograph-kara:20	メクリジンの容器が空だ	메크리진의 용기가 비어 있다	fix	rewrites
+cx:homograph-kara:20	取り出してみると、親指ほどの小さなガラス瓶だった。中は空で、栓がしてある。	꺼내 보니, 엄지 정도의 작은 유리병이었다. 안은 비어 있고, 마개가 되어 있다.	fix	rewrites
+cx:homograph-kara:20	空はどんよりとした曇り空で心なしか湿っぽい。	!rule:cx:homograph-kara:20	keep	rewrites
+cx:homograph-kara:20	そのとき、正吉のからだも、いっしょに木からはなれて、空でもんどり打ち、地上へと落ちました。	!rule:cx:homograph-kara:20	keep	rewrites
+cx:homograph-kara:20	僕はそこへ行くとさっき空で遭った鷹がすきだねえ。	!rule:cx:homograph-kara:20	keep	rewrites
+cx:homograph-kara:20	ごめん｡ 俺たちも もう空だ｡ はい…｡	!rule:cx:homograph-kara:20	keep	rewrites
+cx:homograph-kara:20	その時、一筋の閃光が夜空で弾けた。	!rule:cx:homograph-kara:20	keep	rewrites
+cx:homograph-kara:30	俺とお前の空の財布が叫び声を立てたと言うことだ。	나와 네 빈 지갑이 비명을 세웠다고 하는 것이다.	fix	rewrites
+cx:homograph-kara:30	それから彼は足許に落ちた空の財布を踏んで、つかつかと賭博台の前に進んで行きました。	그리고 그는 발 밑에 떨어진 빈 지갑을 밟고, 성큼성큼 도박대가 앞으로 나아갔습니다.	fix	rewrites
+cx:homograph-kara:30	年寄り臭いことを言って、佳奈すけが、空のペットボトルをゴミ箱めがけて投げた。	늙어 구린 말을 하고, 카나스케가, 빈 페트병을 쓰레기통 노려 던졌다.	fix	rewrites
+cx:homograph-kara:30	突然、森下さんが空の食器を手にして立ち上がった。	갑자기, 모리시타 씨가 빈 식기를 손에 들어 일어섰다.	fix	rewrites
+cx:homograph-kara:30	み空の彼方、かしこには、	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	「アニメとか……架空のキャラクターにだよ」	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	ＪＡＸＡは宇宙航空の さらなる可能性を追求し 豊かな社会へ貢献します｡	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	雲がのんびりと浮かぶ 青い空の下で—	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	こんな時、ふしぎに、空の星が見えないものだ。	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	風がないので、火はまっすぐに上の方に燃えて、火の子が空の方に高く上がって行った。	!rule:cx:homograph-kara:30	keep	rewrites
+cx:homograph-kara:30	≪朧にしては、 喋りすぎな このセリフは 前後の文脈を鑑みて 明らかに空のことを指してる≫	!rule:cx:homograph-kara:30	keep	rewrites
+pattern:yue	釋迦は曾て印度より起れるが故に、佛教を亞細亞文明と稱する乎。	석가는 증이라고 인도보다 일어날 수 있기 때문에, 불교를 아세아 문명이라고 칭하는 호.	fix	builtin-pattern
+pattern:yue	北海道なるが故にである。	홋카이도 되기 때문에이다.	fix	builtin-pattern
+pattern:yue	これ故に特に和術、和算の名称が用いられ、漢算と区別しようと企てたのも、当然のことであろう。	이것이기에 특히 화술, 일본 재래 수학의 명칭이 이용되어, 한산과 구별하려고 기획했던 것도, 당연한 일일 것이다.	fix	builtin-pattern
+pattern:yue	常人以上の人間的魅力――叡智と感受性の豊富さ――によつて民衆の心を捉へ得る人物なるが故に、一段高き舞台に立ち得るのでなければならぬ。	보통 사람 이상의 인간적 매력――예지와 감수성의 풍부함――에연줄 민중의 마음을 착에 얻는 인물 되기 때문에, 일단상승 오고 무대에 설 수 있으므로 않으면 되지 않는다.	fix	builtin-pattern
+pattern:yue	緑青は元來金、銀、銅の氣結でなり、辰砂は朱砂、錫、水銀の氣有るが故に産するなり。	녹청은 원래 금, 은, 동의 기결로 견딜 수 있어, 진사는 주사, 주석, 수은의 기분 있기 때문에 산출하든지.	fix	builtin-pattern
+pattern:yue	芸術家の心は老を知らぬ常若のものなるが故に、といふのが普通の解釈である。	예술가의 마음은 노를 모르는 상약의 것 되기 때문에, 토이후의 것이 보통 해석이다.	fix	builtin-pattern
+pattern:yue	私は公平無偏見なる坪内君であるが故に少しも憚からずに直言する。	나는 공평무편견 되는 츠보우치 군이기 때문에 조금도 탄으로부터 하지않고서 직언한다.	fix	builtin-pattern
+pattern:yue	然るに幸に自己は一應の心的經驗を有するが故に、之に準じて他人の場合を類推する便宜もあれば、巨視的に理解することの出來る場合は少くない。	그런데 행에 자기는 일응의 심리적 경험을 가지기 때문에, 지에 준해 타인의 경우를 유추하는 편의도 있으면, 거시적으로 이해하는 것이 있는 경우는 적지 않다.	fix	builtin-pattern
+pattern:yue	自分に依るのでなくどこまでも他から與へられるものである故に私はそれを失ふことができないのである。	자신에게 의의 것 나오지 않고 한없이 외에서 여 줄어지는 것이기에 나는 그것을 실수 있지 않은 것이다.	fix	builtin-pattern
+pattern:yue	二、図書の選択管理を専問家の手に委するが故に安全なり。	2, 도서 선택 관리를 전문가의 손에 맡기기 때문에 안전하다.	fix	builtin-pattern
+pattern:yue	十銭白銅貨は物体であるが故に重量をもつ。	10전 백동화는 물체이기 때문에 중량을 가진다.	fix	builtin-pattern
+pattern:yue	しかるに自分が部落出身であるが故に、多少世間にも名声を博し、活動する事も出来るのであると。	그런데 자신이 부락 출신이기 때문에, 다소 세상에도 명성을 얻고, 활동할 수도 있는 것이라고.	fix	builtin-pattern
+pattern:yue	かの最明寺時頼の著と俗称する人国記に、「陸奥は日の本故に、色白うして眼青みあり」とあるのはこれである。	인가의 최명사시 뢰의 저와 속칭하는 인국기에, 「무츠는 일본이기에, 흰 피부 소라고 눈 서로 파래져」라고 있는 것은 이것이다.	fix	builtin-pattern
+pattern:yue	治者の言、明察にして断なるが故に、その政が紊れないからである。	통치자의 말, 명찰로 해 단 되기 때문에, 그 정이 문없기 때문이다.	fix	builtin-pattern
+pattern:yue	しかし孤独であるが故に家庭的ではない。	하지만 고독하기 때문에 가정적이 아니다.	fix	builtin-pattern
+pattern:yue	俳優であるが故に、民衆の偶像であつてはならないのだ。	배우이기 때문에, 민중의 우상에서 연줄은 안되는 것이다.	fix	builtin-pattern
+pattern:yue	けれども、感情に於て圧える事の出来ない哀愁、それは感情的であるが故に、一層まとまりのないものであり、且つ、深いものである。	그러나, 감정에서 억누를 수 없는 애수, 그것은 감정적이기 때문에, 한층 정리가 없는 것이며, 또한, 깊은 것이다.	fix	builtin-pattern
+pattern:yue	あなたに与えられた唯一の弁解はその際「弁護人なるが故に」という一語だけです。	당신에게 줄 수 있던 유일한 변명은 그 때 「변호인 되기 때문에」라는 한마디만입니다.	fix	builtin-pattern
+pattern:yue	ユフィリアに対して厳しい親ではあるが、それも我が子を思う故だ。	유필리아에 대해서 엄한 부모이지만, 그것도 우리 아이를 생각하기 때문이다.	fix	builtin-pattern
+pattern:yue	この季節になってくると、何故か、少し寂しい気分になるな。	이 계절이 되어 지면, 어째서인지, 조금 외로운 기분이 되지 마.	keep	builtin-pattern
+pattern:yue	ではＥＬＦは ここに挙がっている者を 事故死でいいな？	그럼 ELF는 여기에 오르고 있는 사람을 사고사면 돼?	keep	builtin-pattern
+pattern:yue	何故そっとしておいてくれない！	왜 살며시 해 두어 주지 않아!	keep	builtin-pattern
+pattern:yue	礼号作戦…私が旗艦を務めた…何故…鮮明に覚えている…なんで？	레호 작전…내가 기함을 맡았다…왜…선명히 기억하고 있다…왜?	keep	builtin-pattern
+pattern:yue	彼が故郷の為に死ぬことがないよう 彼に厳命して下さいませんでしょうか、	그가 고향을 위해 죽는 것이 없게 그에게 엄명해 주십시오 입니까,	keep	builtin-pattern
+pattern:yue	糞野郎、ここは私の家よ 何故、戻らないといけないのよ	개새끼, 여기는 내 집이야 왜, 돌아가야 해	keep	builtin-pattern
+pattern:yue	……や、奴だ……何故奴が……？	……노, 놈이다……왜 놈이……?	keep	builtin-pattern
+pattern:yue	何故皆でナベを囲む？	왜 모두가 냄비를 둘러싸?	keep	builtin-pattern
+dict:lex:4764:osoba-side	ああいうお方のおそばに付いていられるのは、お前のお仕合せでござりますな。	저런 분의 곁에 붙어 있을 수 있는 것은, 네 운수입니다.	fix	local
+dict:lex:4764:osoba-side	お兄さまのおそばにいて、浮かれないはずありません！	오라버니의 곁에 있어, 들뜨지 않을 것 없습니다!	fix	local
+dict:lex:4764:osoba-side	おそばで見守ってくださっていたのに…私がひとりで達するまで、触れて下さらないんですね？	곁에서 지켜봐 주고 계셨는데…제가 혼자서 달할 때까지, 접해 주시지 않네요?	fix	local
+dict:lex:4764:osoba-side	あなたのおそばで一生を送るために、このことだけは守つてほしいとお思ひになること、なんか、ございません、それを、おつしやつて……。	당신의 곁에서 일생을 보내기 위해, 이 일만은 수연줄 가지고 싶다고 사히가 되는 것, 왠지, 없습니다, 그것을, 개 해 녀석이라고…….	fix	local
+dict:lex:4764:osoba-side	それはそれで、本望です！あなたのおそばにいつでもアンジェ	그건 그것대로, 숙원입니다! 당신의 곁에 언제라도 앙제	fix	local
+dict:lex:4764:osoba-side	気が動転して しまったんです｡ こんな私じゃ 坂崎さんのおそばになんか いられっこないって…｡	당황 해버렸습니다. 이런 나야 사카자키 씨의 곁 따위에 있을 수 있고 오지 않는다고….	fix	local
+dict:lex:4764:osoba-side	山城、ずっとおそばにいます。	산성, 계속 곁에 있습니다.	fix	local
+dict:lex:4764:osoba-side	あなたのおそばにいつでもアンジェ	당신의 곁에 언제라도 앙제	fix	local
+dict:lex:4764:osoba-side	提督、本日は、この初霜がおそばでお役に立ちたいと思います。	제독, 오늘은, 이 첫서리가 곁에서 도움이 되고 싶다고 생각합니다.	fix	local
+dict:lex:4764:osoba-side	おそばに置いてくださいね。	곁에 두어 주세요.	fix	local
+dict:lex:4764:osoba-side	《恐らく 私がおそばに付いても 王は うるさがられるだけでしょうが》	《아마 내가 곁에 붙어도 왕은 메 내려가지는 것만으로 짊어지지만》	fix	local
+dict:lex:4764:osoba-side	私が しっかり おそばに付いていれば―	내가 확실히 곁에 붙어 있으면-	fix	local
+dict:lex:4764:osoba-side	私は今夜、陛下から正式に命じられて、殿下のおそばに通訳として控えている。	나는 오늘 밤, 폐하에게서 정식으로 명령받아, 전하의 곁으로 통역으로서 삼가고 있다.	fix	local
+dict:lex:4764:osoba-side	あーでも…遠洋練習航海に出てしまうと…提督のおそばに…そっ、そうですね、それは別の機会にしましょう。	아-라도…원양 연습 항해하러 나와버리면…제독의 곁에…그, 그렇네요, 그것은 다른 기회로 합시다.	fix	local
+dict:lex:4764:osoba-side	比企(ひき)の館だ せつが おそばにいてやれる	히키의 관이다 설이 곁에 있어 줄 수 있다	fix	local
+dict:lex:4764:osoba-side	コンは今日１日 おそばで見ておりましたから	안녕은 오늘 1일 곁에서 보고 있었으니까요	fix	local
+dict:lex:4764:osoba-side	ご主人様が望む限り、アナベルはおそばを離れません	주인님이 바라는 한, 애나벨은 곁을 떠나지 않습니다	fix	local
+dict:lex:4764:osoba-side	皆様のおそばに置いてほしいんです。	여러분의 곁에 두어 줬으면 하겠습니다.	fix	local
+dict:lex:4764:osoba-side	本日は私花月がおそばでお手伝いさせていただきますね。	오늘은 저 풍류가 곁에서 도와 드릴게요.	fix	local
+dict:lex:4764:osoba-side	俺 ダミアン様のおそばにいられて 幸せでした	나 다미안님의 곁에 있을 수 있어 행복했습니다	fix	local
+dict:lex:4764:osoba-side	ああ… でも グレイ様のおそばにいたい…。	아… 하지만 그레이님의 곁에 있고 싶어….	fix	local
+dict:lex:4764:osoba-side	わかりません ですが私は おそばにいたいと思っています	모릅니다입니다만 저는 곁에 있고 싶다고 생각합니다	fix	local
+dict:lex:4764:osoba-side	おそば おいしかったね。 ああ あったまったのう。	!rule:dict:lex:4764:osoba-side	keep	local
+dict:lex:4764:osoba-side	やっと買えた おそばだったのに こぼれちゃって 悲しかった	!rule:dict:lex:4764:osoba-side	keep	local
+dict:lex:4764:osoba-side	おそば おいしかったね。	!rule:dict:lex:4764:osoba-side	keep	local
+dict:w:34533	熊の穴は、もっと他にも数多くあるのでしょうが、人間に発見されるのはそのうちの少部分であると思います。	곰의 구멍은, 좀 더 그 밖에도 많이 있겠지만, 인간에게 발견되는 것은 그중 소부분이라고 생각합니다.	fix	local
+dict:w:34533	そのうちの十本を、私はおかみさんに差し出しました。	그중 열 개를, 저는 마누라에 내밀었습니다.	fix	local
+dict:w:34533	ところが、一昨日までは五万円の贋金を一度も使用しませんでしたが、一昨日の朝、社長はわたしにそのうち二千円を出してくれと申しました。	그런데, 그저께까지는 5만엔의 가짜 돈을 한 번도 사용하지 않았습니다만, 그저께 아침, 사장은 저에게 그중 2000엔을 내 달라고 말씀드렸습니다.	fix	local
+dict:w:34533	グリーンランドには、飛行場が二つあって、そのうちの一つチューレには、まだ軍用機しか行っていない。	그린란드에는, 비행장이 두 개 있어, 그중 하나 추레에는, 아직 군용기밖에 가지 않았다.	fix	local
+dict:w:34533	そのうちの二人だけは入口に向かつて坐り、そばに馬の鞍やら、馬具の類やら、宝石をちりばめた短剣やら、美しい手箱などが置いてありました。	그중 두 사람만은 입구에 향 일찍이 앉아, 곁에 말의 말안장이든지, 마구의 종류든지, 보석을 아로 새긴 단검이든지, 아름다운 손궤 등이 놓여 있었습니다.	fix	local
+dict:w:34533	私もそのうちの数冊を、わけてもらって読んだことがある。	나도 그중 몇 권을, 나누어 주어 읽었던 적이 있다.	fix	local
+dict:w:34533	ですから、そのうちのいくつかは、しぜんと皇帝の手にもはいりました。	그러니까, 그중 몇 개는, 자연과 황제의 손에도 들어갔습니다.	fix	local
+dict:w:34533	そのうちの一つとして、精神の枯れ果てた凍原に吹きすさぶ残酷な北風の寒さに耐えたものはなかった。	그중 하나로서, 정신이 완전히 시든 툰드라에 불어 거칠어지는 잔혹한 북풍의 추위를 견딘 것은 없었다.	fix	local
+dict:w:34533	あるお金持ちのうちで、そのうちのおくさんが病気になりました。	어느 부자 가운데로, 그중 부인이 병이 들었습니다.	fix	local
+dict:w:34533	そのうちの極めて少数なものが選ばれて私共大衆の気に入って流行する。	그중 지극히 소수인 것이 선택되어 우리들 대중의 마음에 들어 유행한다.	fix	local
+dict:w:34533	自分はそのうちのほんの自分の名前の出る前後のあたりを評釈するつもりである。	자신은 그중 그저 자신의 이름이 나오는 전후 근처를 평석할 생각이다.	fix	local
+dict:w:34533	がまた三人が三人共一様に、そのうちの半数が、在郷軍人だと付け加えていうのだった。	하지만 또 세 명이 세 명모두 한결같게, 그중 반수가, 재향군인이라고 덧붙여 말했다.	fix	local
+dict:w:34533	まあ、そのうちのおもしろいのを一つ二つお話しいたしましょう。	뭐, 그중 재미있는 것을 하나 두 개 이야기 합시다.	fix	local
+dict:w:34533	外国を旅行すると、私などもいろいろな国の人間にまちがえられるが、そのうちの傑作は、エスキモーにまちがえられた話である。	외국을 여행하면, 나 등도 여러 가지 나라의 인간에게 오인되지만, 그중 걸작은, 에스키모에게 오인된 이야기이다.	fix	local
+dict:w:34533	そのうちのひとつが、たまたま大当たりしたんだろうよ。触れ込み通りの効果はなかったわけだがな	그중 하나가, 우연히 적중했을 것이다. 선전 그대로의 효과는 없었던 것이지만	fix	local
+dict:w:34533	そのうちのひとりははたらきもので、美しい子でしたが、もうひとりはみにくいうえに、たいへんななまけものでした。	그중 한 명은 기능의 것으로, 아름다운 아이였지만, 다른 한 명은 보기 어려운 데다가, 대단한 게으름뱅이였습니다.	fix	local
+dict:w:34533	そのうちの67%が 最も寂しい時期は	그중 67%가 가장 외로운 시기는	fix	local
+dict:w:34533	そのうちの一つは、まだ口が少し開いており、中から見覚えのあるひよこ柄のガーゼや、私の小さな肌着、そして白い布おむつの束が覗いている。	그중 하나는, 아직 입이 조금 열고 있어, 안에서 낯익은 병아리격의 거즈나, 내 작은 속옷, 그리고 흰 천기저귀의 다발이 들여다 보고 있다.	fix	local
+dict:w:34533	そのうち二つは、去年の夏にガストンが言っていたことと、ほとんど同じだった。	그중 두 개는, 지난여름에 가스통이 말한 것과, 거의 같았다.	fix	local
+dict:w:34533	そのうちのひとつを俺の前に置く。	그중 하나를 내 앞에 둔다.	fix	local
+dict:w:34533	そのうち３つだけが駐屯している	그중 3개만이 주둔하고 있다	fix	local
+dict:w:34533	夢島くんもそのうち起きるでしょうし……」	!rule:dict:w:34533	keep	local
+dict:w:34533	あなたがもし生きていれば、きっとそのうち、どこかで善良な市民が沢山死ぬわ」	!rule:dict:w:34533	keep	local
+dict:w:34533	こんなかすり傷、唾でもつけときゃそのうち治るってのに	!rule:dict:w:34533	keep	local
+dict:w:34533	そのうちに、彼はうとうとしだした。	!rule:dict:w:34533	keep	local
+dict:w:34533	「大丈夫大丈夫、そのうちわかるって」	!rule:dict:w:34533	keep	local
+dict:w:34533	ガーネット公爵家のノエルもそのうちの一人だった。	!rule:dict:w:34533	keep	local
+dict:w:34533	あの子冬が苦手だから…暖かくなったらそのうち出てくるわよ。	!rule:dict:w:34533	keep	local
+dict:w:34533	そのうち、サイズ設定と射出速度設定を術者がいじることで、魔術が完成する。	!rule:dict:w:34533	keep	local
+dict:word:ichigyou:line	（一行抹消）	(한 줄 말소)	fix	local
+dict:word:ichigyou:line	手紙の最後には、ヨンナ様の字で一行、書き足してあった。	편지의 마지막에는, 욘나님의 글자로 한 줄, 덧붙여 써 두었다.	fix	local
+dict:word:ichigyou:line	今日の頁の終わりに、少し迷ってから一行を書き足した。	오늘의 페이지의 끝에, 조금 망설이고 나서 한 줄을 덧붙여 썼다.	fix	local
+dict:word:ichigyou:line	俺は目を閉じて、頭の中の工程表に最初の一行を書き込んだ。	나는 눈을 감아, 머릿속의 공정표에 처음의 한 줄을 적었다.	fix	local
+dict:word:ichigyou:line	最後の一行がまことに正直ｗ	!rule:dict:word:ichigyou:line	keep	local
+dict:word:ichigyou:line	既に喜捨をした一行とみて今度は近よりかけてやめてしまつた。	!rule:dict:word:ichigyou:line	keep	local
+dict:word:ichigyou:line	米沢藩の御典医の一行が、薬草採りに参ったのじゃ」	!rule:dict:word:ichigyou:line	keep	local
+dict:word:ichigyou:line	その外、諏訪明神を信仰し、「諏訪南宮上下大明神」と一行に大書した旗も用いていた。	!rule:dict:word:ichigyou:line	keep	local
+dict:word:ichigyou:line	とう〳〵みつ子は一行も書けなかつた。	!rule:dict:word:ichigyou:line	keep	local
+dict:jisjk:202061	椿の木、桜、杉、そんな植え込みを通して青い瓦斯の下を行ったり来たり、笑ったりするお娘さんの姿が見えた、ひるま見る時よりも美しかった、	츠바키의 목, 앵, 삼, 그런 수풀을 통해 푸른 가스 아래를 가거나 오거나, 웃거나 하는 따님의 모습이 보인, 낮 볼 때보다 아름다웠다,	fix	local
+dict:jisjk:202061	男の方が千鳥足で川の近くを行ったり来たり。危なかっしいです	남자가 갈짓자 걸음으로 강의 근처를 가거나 오거나. 위험한 빌려주어 있고입니다	fix	local
+dict:jisjk:202061	佳奈は本のページを行ったり来たりさせながらもじもじする。	카나는 책의 페이지를 가거나 오거나 찌를 수 있는이면서 머뭇머뭇한다.	fix	local
+dict:jisjk:202061	今日、どうして私が来栖くんに校長室と倉庫を行ったり来たりさせ続けたと思ってるの？	오늘, 왜 내가 쿠루스 군에게 교장실과 창고를 가거나 오거나 계속 시켰다고 생각해?	fix	local
+dict:jisjk:202061	クロエは授業とデイリープラネットを行ったりきたりさ ロイスは...	클로이는 수업과 데일리 플라넷을 가거나 상처 로이스는...	fix	local
+dict:jisjk:202061	男の方が千鳥足で川の近くを行ったり来たり。	남자가 갈짓자 걸음으로 강의 근처를 가거나 오거나.	fix	local
+dict:jisjk:202061	シンクロ率は５％前後を行ったりきたり≫	싱크로율은 5% 전후를 가거나 상처≫	fix	local
+dict:jisjk:202061	小太刀が含み笑いを洩らしながら、部室を行ったり来たりする。	코다치가 킥킥 웃음을 누설하면서, 동아리방을 왔다 갔다한다.	keep	local
+dict:jisjk:202061	創眞、こちらとそちらを行ったり来たりすることになると思うわ。よろしくね	창진, 이쪽과 그쪽을 왔다 갔다하게 된다고 생각해. 잘 부탁해	keep	local
+dict:jisjk:202061	リズムが動物園の檻の中で同じ場所を行ったり来たりする白熊を思い出させます。	리듬이 동물원의 우리 안에서 같은 장소를 왔다 갔다하는 백곰을 생각나게 합니다.	keep	local
+dict:jisjk:202061	創眞、こちらとそちらを行ったり来たりすることになると思うわ。	창진, 이쪽과 그쪽을 왔다 갔다하게 된다고 생각해.	keep	local
+dict:jisjk:202061	事実、はしゃいで橋を行ったり来たりする千里には付いていかず、俺の隣でじっとしている。	사실, 까불며 떠들어 다리를 왔다 갔다하는 천리에는 붙어 가지 않고, 내 옆에서 가만히 있다.	keep	local
+cx:homograph-kara:10	返答しているが、明らかに桜庭は上の空だった。	!rule:cx:homograph-kara:10	keep	rewrites
+cx:homograph-kara:10	空はどんよりとした曇り空で心なしか湿っぽい。	!rule:cx:homograph-kara:10	keep	rewrites
+cx:homograph-kara:15	返答しているが、明らかに桜庭は上の空だった。	!rule:cx:homograph-kara:15	keep	rewrites

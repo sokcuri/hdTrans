@@ -326,6 +326,7 @@
 //= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.container	Ends of the nouns of pockets, bags, boxes and other things one keeps things in (ポケット, 鞄, 袋, 箱, 引き出し): a 出す after one in から takes something out of it, 꺼내다 (ポケットから財布を出した).
+//= noun.empty-vessel	Things that hold something and may stand empty (瓶, グラス, 箱, 財布, 部屋, 席): a 空 of them before の is から, 빈 (空の瓶 빈 병), not the sky.
 //= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
 //= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
 //= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
@@ -9418,6 +9419,71 @@ noun.container	収納
 noun.container	アイテムボックス
 noun.container	インベントリ
 noun.container	ストレージ
+noun.empty-vessel	瓶
+noun.empty-vessel	ビン
+noun.empty-vessel	びん
+noun.empty-vessel	小瓶
+noun.empty-vessel	酒瓶
+noun.empty-vessel	ボトル
+noun.empty-vessel	ペットボトル
+noun.empty-vessel	缶
+noun.empty-vessel	空き缶
+noun.empty-vessel	グラス
+noun.empty-vessel	コップ
+noun.empty-vessel	カップ
+noun.empty-vessel	マグカップ
+noun.empty-vessel	ジョッキ
+noun.empty-vessel	杯
+noun.empty-vessel	盃
+noun.empty-vessel	湯呑み
+noun.empty-vessel	湯飲み
+noun.empty-vessel	皿
+noun.empty-vessel	お皿
+noun.empty-vessel	器
+noun.empty-vessel	茶碗
+noun.empty-vessel	お椀
+noun.empty-vessel	鍋
+noun.empty-vessel	樽
+noun.empty-vessel	バケツ
+noun.empty-vessel	桶
+noun.empty-vessel	水筒
+noun.empty-vessel	壺
+noun.empty-vessel	壷
+noun.empty-vessel	箱
+noun.empty-vessel	宝箱
+noun.empty-vessel	木箱
+noun.empty-vessel	段ボール
+noun.empty-vessel	袋
+noun.empty-vessel	紙袋
+noun.empty-vessel	財布
+noun.empty-vessel	棺
+noun.empty-vessel	棺桶
+noun.empty-vessel	鞘
+noun.empty-vessel	部屋
+noun.empty-vessel	席
+noun.empty-vessel	椅子
+noun.empty-vessel	ベッド
+noun.empty-vessel	檻
+noun.empty-vessel	籠
+noun.empty-vessel	かご
+noun.empty-vessel	カゴ
+noun.empty-vessel	弁当箱
+noun.empty-vessel	薬莢
+noun.empty-vessel	弾倉
+noun.empty-vessel	マガジン
+noun.empty-vessel	鳥かご
+noun.empty-vessel	鳥籠
+noun.empty-vessel	水槽
+noun.empty-vessel	ケース
+noun.empty-vessel	容器
+noun.empty-vessel	タンク
+noun.empty-vessel	金庫
+noun.empty-vessel	引き出し
+noun.empty-vessel	封筒
+noun.empty-vessel	ポケット
+noun.empty-vessel	鞄
+noun.empty-vessel	カバン
+noun.empty-vessel	バッグ
 
 word.mou-scold	ばか
 word.mou-scold	バカ

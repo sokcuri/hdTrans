@@ -701,6 +701,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 そなた	그대	N110			GN				llm			w:696
 そのあたり	그 부분	I110			GN				xxx llm	1		w:697
 そのうち	머지않아	E300			GN				xxx llm	1		w:698
+そのうち	그중	E300			GN	13762	||4 &&4 S+1== "の" ||2 S+2== "ひとり" S+2== "一人" D+1= "" D+2= "한 명" &&2 S+1== "の" D+1= "" &&2 S+1== "の一つ" D+1= " 하나" G+1== "NjNd"	LEX-4764: そのうちの一つ, そのうち二つ 그중 (머지않아는 홀로 쓴 そのうち)		1	そのうち	w:34533
 そのうちの一人	그 중 한 명	A9D0			GN				llm			w:699
 そのように	그렇게	E300			GN				xxx llm	1		w:700
 その儘	그대로	N110			GN						そのまま	w:701
@@ -26791,7 +26792,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 でしょ	그렇지	P200			GN	3173	||1 G+0== "Hz"	문장 첫머리에서 「でしょう」, 「でしょ」를 ‘그렇지’로 고른다.				word:desho:opening
 以来	만	N110			GN	5101	||1 &&2 S-1== "いつ" D-1= "얼마"	いつ 뒤의 以来를 만으로 고르고 いつ를 얼마로 바꾼다.				word:irai:itsu
 助か	&K5@	M418			GN	5102	||1 &&4 G+0== "Hz" U+0== "った" ||2 G+0== "Ow" S+1== "、" Y+0= "5다"	문장 첫머리에서 홀로 끝나는 助かった를 살았다로 고른다.				word:tasukaru:relief
-一行	한 줄	N110			GN	5103	||2 S-1== "あと" S-1== "もう"	あと·もう 뒤의 一行을 한 줄로 고른다.				word:ichigyou:line
+一行	한 줄	N110			GN	5103	||5 S-1== "あと" S-1== "もう" ||4 S+1== "L書" S+1== "L読" S+1== "L抹消" S+1== "ずつ" &&2 ||3 S+1== "を" S+1== "、" S+1== "だけ" ||5 S+2== "L書" S+2== "L読" S+2== "L記" S+2== "L消" S+2== "L抜" &&2 S-1== "で" S-2== "R字"	あと·もう 뒤, 書く·読む 같은 쓰기·읽기 동사 앞이나 字で 뒤의 一行을 한 줄로 고른다(LEX-4764).				word:ichigyou:line
 完全に	완전히	E300			GN							w:26715
 ちゃん	짱	N110	VHn	Tu	GN			가타카나 명사 바로 뒤의 빈 ちゃん을 바꿀 때 쓰는 짱.				word:chan:name
 危うく	위태롭게	E300			GN							word:ayauku:adverb
