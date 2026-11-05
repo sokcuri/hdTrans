@@ -177,6 +177,14 @@ std::span<const std::string_view> TextPassNames() { return kTextPassNames; }
 
 // The sentence passes in order. The text-path passes run only when settings.text is set.
 void Flush(Flusher& f) {
+    // MarksEnd keeps its memo only for the passes of this chain.
+    struct MarkRunScope {
+        Worker& w;
+        explicit MarkRunScope(Worker& worker) : w(worker) { w.markRuns.on = true; }
+        ~MarkRunScope() { w.markRuns = {}; }
+        MarkRunScope(const MarkRunScope&) = delete;
+        MarkRunScope& operator=(const MarkRunScope&) = delete;
+    } scope(f.w);
     Run(f, {"DrainNmTail", DrainNmTail});
     if (f.w.settings.text) Run(f, {"ReadUnplacedHeads", ReadUnplacedHeads});
     if (f.w.settings.text) Run(f, {"ReadUnplacedParticles", ReadUnplacedParticles});

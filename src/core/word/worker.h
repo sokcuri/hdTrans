@@ -56,6 +56,22 @@ public:
     Journal journal;       // the writes of the rule running now
     const void* ruleItem = nullptr;  // the item whose rule is running
     int current = -1;  // the token being processed
+    // The memo of MarksEnd while Flush runs (the texts of the chain's words stay put then): for a
+    // few texts and mark sets, where the run of marks from each offset ends, so that each word of a
+    // long run of marks (ー, ～, 、 by the thousand) costs no scan of the rest. A text is known by
+    // where it ends, so the rest of a line after each of its words shares one entry.
+    struct MarkRuns {
+        const char* end = nullptr;
+        std::size_t size = 0;
+        const char* set = nullptr;
+        std::vector<uint32_t> stops;  // by distance from the end: the distance where the run stops
+    };
+    struct MarkRunMemo {
+        bool on = false;
+        std::size_t next = 0;
+        MarkRuns runs[4];
+    };
+    mutable MarkRunMemo markRuns;
     int insertedLength = 0;
     int candidateRetryCount = 0;
     // While set, a verb takes only an ending shorter than this one, which left text that no

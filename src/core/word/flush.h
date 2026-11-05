@@ -186,6 +186,10 @@ void OfferPromise(Flusher& f);
 void ExclaimedAdjective(Flusher& f);
 void VerbNegative(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
+// The offset in text, from at on, of the first rune that is not one of set (text.size() when the
+// rest is all marks of set). While Flush runs it is memoized for the text and the set, which must
+// be a literal: the words of one long run of marks ask about the same text.
+std::size_t MarksEnd(const Worker& w, std::string_view text, std::size_t at, std::string_view set);
 
 // Whether the item's surface is one of set.
 template <std::size_t N>
