@@ -496,6 +496,39 @@ std::string Registry::DropReadings(std::string_view line, std::string* cueText, 
     return out;
 }
 
+namespace {
+
+// Whether text before and after a word frame it as a person's name: a self-introduction (私は_です,
+// 俺は_だ, _と申します, _っていいます), a greeting or a call before the name at the end of an utterance
+// (ただいま、_, おはよう、_！), or a speaker label at the line start (_「).
+bool PersonFrame(std::string_view before, std::string_view after) {
+    std::string_view b = before;
+    while (b.ends_with(" ") || b.ends_with("　")) b.remove_suffix(b.ends_with(" ") ? 1 : std::string_view("　").size());
+    for (const std::string_view a : {"と申します", "と申す", "っていいます", "って言います", "といいます", "と言います", "っていうの", "って言うの"}) {
+        if (after.starts_with(a)) return true;
+    }
+    bool self = false;
+    for (const std::string_view p : {"私は", "俺は", "僕は", "わたしは", "あたしは", "ぼくは", "おれは", "わたくしは", "私の名前は", "名前は"}) {
+        self = self || b.ends_with(p);
+    }
+    if (self) {
+        for (const std::string_view a : {"です", "だ", "。", "！", "」"}) {
+            if (after.starts_with(a)) return true;
+        }
+    }
+    const bool ends = after.empty() || after.starts_with("！") || after.starts_with("？") || after.starts_with("」") || after.starts_with("。") ||
+                      after.starts_with("…") || after.starts_with("!") || after.starts_with("?") || after.starts_with("、") || after.starts_with("っ");
+    if (ends) {
+        for (const std::string_view g : {"ただいま、", "おはよう、", "おかえり、", "こんにちは、", "こんばんは、", "ありがとう、", "ごめんね、", "ごめん、", "おやすみ、", "さようなら、", "じゃあね、", "またね、"}) {
+            if (b.ends_with(g)) return true;
+        }
+    }
+    const std::string_view t = TrimSpace(b);
+    return t.empty() && after.starts_with("「");
+}
+
+}  // namespace
+
 void Registry::Add(std::string_view rawLine) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;
@@ -565,6 +598,15 @@ void Registry::Add(std::string_view rawLine) {
         const Run& run = runs[i];
         if (run.kanji) {
             count(runs_, std::string(run.text));
+            // A kanji run in a frame that only a person's name takes: a self-introduction, a call or a
+            // greeting with the name, or a speaker label (spec LEX-4833).
+            // Not a run that ends in a kanji honorific (姫氏「: 姫 and 氏).
+            const bool honorificEnd = run.text.ends_with("氏") || run.text.ends_with("君") || run.text.ends_with("様") ||
+                                      run.text.ends_with("殿") || run.text.ends_with("嬢");
+            if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
+                count(framed_, std::string(run.text));
+                honGuess_.insert(std::string(run.text));
+            }
             // A name written with a kanji honorific in the same run (甲児君, 夢結様) is written there
             // too (spec LEX-4827). Not 殿, 嬢 or the titles, which also end words (大魔殿, 令嬢).
             for (const std::string_view h : {std::string_view("君"), std::string_view("様"), std::string_view("氏")}) {
@@ -732,6 +774,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         // A kanji name no dictionary has stands for the person after one honorific, as it is no
         // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
         if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !internal::GuessedName(t).empty()) n.score += 1;
+        n.person = true;
+    }
+    // A kanji name no dictionary has, in a person frame, is a name its kanji's readings give (LEX-4833).
+    for (const auto& [t, c] : framed_) {
+        (void)c;
+        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || internal::GuessedName(t).empty()) continue;
+        Name& n = all[t];
+        n.score = std::max(n.score, kThreshold);
         n.person = true;
     }
     for (const auto& [t, c] : kanaHon_) {

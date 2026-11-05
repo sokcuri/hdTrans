@@ -1,0 +1,13 @@
+# 규칙: LEX-4833
+rule	input	expected	kind	layer
+names:guessed-name-frames	「ただいま、澄乃」	「다녀왔어, 스미노」	fix	names
+names:guessed-name-frames	ら僕の名前は庄太だけど、子供の間は美月って名前なんだ」	들 나의 이름은 쇼타이지만, 아이 사이는 미즈키라는 이름이야」	fix	names
+names:guessed-name-frames	あっ… すみません。 地元の関東日報で 記者をしています池園といいます。	앗… 죄송합니다. 동네의 관동 일보로 기자를 하고 있는 이케조노라고 합니다.	fix	names
+names:guessed-name-frames	「うう、ごめんね、千莉……」	「으으, 미안해, 치리……」	fix	names
+names:guessed-name-frames	私は柚葉です。	저는 유즈하입니다.	fix	names
+names:guessed-name-frames	そんなやり取りがあったけど、春香と一緒に飯を食えば、自然となつな	그런 주고받음이 있었지만, 하루카와 함께 밥을 먹으면, 자연스럽게 여름인	fix	names
+names:guessed-name-frames	姫氏「リア充！放課後って助けてね」	희 씨 「리얼충! 방과 후는 도와」	keep	names
+names:guessed-name-frames	蒼氏「それな！」	아오이 씨 「그러니까!」	keep	names
+names:guessed-name-frames	節分ですね。……え、龍鳳さん、鬼役を？	세츠분이군요. ……어, 류호 씨, 오니역을?	keep	names
+names:guessed-name-frames	明日は晴天です。	내일은 맑은 하늘입니다.	keep	names
+names:guessed-name-frames	今日は日曜日です。	오늘은 일요일입니다.	keep	names
