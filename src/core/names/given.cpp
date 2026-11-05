@@ -116,6 +116,37 @@ std::string_view HeadReading(char32_t kanji) {
     return Lookup(table, kanji);
 }
 
+std::string_view NameKana(char32_t kanji, bool tail) {
+    static const std::map<char32_t, std::pair<std::string, std::string>> table = [] {
+        std::map<char32_t, std::pair<std::string, std::string>> out;
+        const std::string text = dict::ExtraBuiltinText("name_kana.tsv");
+        for (std::size_t at = 0; at < text.size();) {
+            std::size_t end = text.find('\n', at);
+            if (end == std::string::npos) end = text.size();
+            const std::string_view line = std::string_view(text).substr(at, end - at);
+            at = end + 1;
+            const std::size_t a = line.find('\t');
+            if (line.empty() || line.starts_with("#") || a == std::string_view::npos) continue;
+            const std::size_t b = line.find('\t', a + 1);
+            if (b == std::string_view::npos) continue;
+            out[text::DecodeRune(line).cp] = {std::string(line.substr(a + 1, b - a - 1)), std::string(line.substr(b + 1))};
+        }
+        return out;
+    }();
+    const auto it = table.find(kanji);
+    if (it == table.end()) return {};
+    return tail ? std::string_view(it->second.second) : std::string_view(it->second.first);
+}
+
+std::string GuessedName(std::string_view kanji) {
+    if (text::RuneCount(kanji) != 2) return {};
+    const text::Rune a = text::DecodeRune(kanji);
+    const text::Rune b = text::DecodeRune(kanji.substr(a.size));
+    const std::string_view head = NameKana(a.cp, false), tail = NameKana(b.cp, true);
+    if (head.empty() || tail.empty()) return {};
+    return text::FromKana(std::string(head) + std::string(tail), text::Preset::FanShort, true);
+}
+
 std::string_view OnReading(char32_t kanji) {
     static const std::map<char32_t, std::string> table = KanjiTable("kanji_on.tsv");
     return Lookup(table, kanji);

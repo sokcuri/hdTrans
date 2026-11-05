@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/names/given.h"
 #include "core/names/labels.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
@@ -1634,7 +1635,51 @@ void KanjiNamesIn(std::string_view text, output::Pieces& out) {
             const std::size_t eq = pair.find('=');
             if (eq != std::string_view::npos && text.substr(i, step) == pair.substr(0, eq)) korean = pair.substr(eq + 1);
         }
-        const std::string_view rest = text.substr(i + step);
+        std::string_view rest = text.substr(i + step);
+        // A one-kanji nickname drawn out, as the kanji's name reading and the vowel (魅ぃちゃん 미이짱,
+        // 梨ぃちゃん; spec LEX-4827): the head reading names give the kanji, then the small vowel or long
+        // mark said in full.
+        std::string drawnKorean;
+        size_t drawn = 0;
+        // Not a title drawn out before the honorific (姉ぇさん).
+        std::string kanji;
+        text::AppendRune(kanji, r.cp);
+        if (korean.empty() && !dict::InClass(HDTRANS_CLASS("honorific.person-title"), kanji)) {
+            std::string vowels;
+            while (drawn < rest.size()) {
+                const text::Rune v = text::DecodeRune(rest.substr(drawn));
+                const std::u32string_view small = U"ぁぃぅぇぉ", full = U"あいうえお";
+                const size_t k = small.find(v.cp);
+                if (k != std::u32string_view::npos) {
+                    text::AppendRune(vowels, full[k]);
+                } else if (v.cp == U'ー' || v.cp == U'～' || v.cp == U'〜') {
+                    vowels += "ー";
+                } else {
+                    break;
+                }
+                drawn += std::max<size_t>(1, v.size);
+            }
+            std::string_view head = names::internal::HeadReading(r.cp);
+            if (head.empty()) head = names::internal::NameKana(r.cp, false);
+            if (drawn > 0 && !head.empty()) {
+                std::string kana(head);
+                for (size_t p = 0; p < vowels.size();) {
+                    const text::Rune v = text::DecodeRune(std::string_view(vowels).substr(p));
+                    // A long mark draws out the vowel of the kana before it.
+                    if (v.cp == U'ー') {
+                        const char32_t last = LastRune(kana).cp;
+                        const int row = VowelOf(last + 0x60);
+                        if (row >= 0) text::AppendRune(kana, U"あいうえお"[row]);
+                    } else {
+                        text::AppendRune(kana, v.cp);
+                    }
+                    p += std::max<size_t>(1, v.size);
+                }
+                drawnKorean = text::FromKana(kana, text::Preset::Fan);
+                korean = drawnKorean;
+                rest = rest.substr(drawn);
+            }
+        }
         std::string_view honorific;
         for (const std::string_view h : {std::string_view("さん"), std::string_view("くん"), std::string_view("ちゃん"), std::string_view("様")}) {
             if (rest.starts_with(h)) honorific = h;
@@ -1649,7 +1694,7 @@ void KanjiNamesIn(std::string_view text, output::Pieces& out) {
         }
         if (i > at) output::Add(out, text.substr(at, i - at));
         out.push_back({std::string(korean), output::SpanWord});
-        at = i + step;
+        at = i + step + (drawnKorean.empty() ? 0 : drawn);
         i = at;
     }
     if (at < text.size()) output::Add(out, text.substr(at));
