@@ -537,10 +537,15 @@ void Registry::Add(std::string_view rawLine) {
         }
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
-    for (const std::string& t : FreeKanaNames(line)) count(kanaFree_, t);
+    const auto bare = [](char32_t p) { return p == U'は' || p == U'を' || p == U'へ'; };
+    for (const LooseUse& u : FreeKanaNames(line)) {
+        count(kanaFree_, u.t);
+        if (bare(u.particle)) count(kanaBare_, u.t);
+    }
     for (const LooseUse& u : LooseKanaUses(line)) {
         Loose& l = kanaLoose_[u.t];
         (u.closed ? l.closed : l.open)++;
+        if (u.closed && bare(u.particle)) l.bare++;
         l.particles.insert(u.particle);
     }
     // A line that is a name alone, a speaker line before a quote, names the speaker of the
@@ -696,12 +701,17 @@ const std::map<std::string, Name>& Registry::Accepted() {
     // Kana whose halves are words (あい, いか) need more: five uses or more before two particles or more,
     // three of them a whole run closed by its particle; the uses after a particle inside a run and those
     // with kana after the particle count once those three are there (spec LEX-4828).
+    // A run that is also a verb or adjective form of the dictionary (しのぶ: 忍ぶ) may be one before の, が, と
+    // or に (a nominaliser, but, if, to): it needs two closed uses before は, を or へ, which no plain predicate
+    // form takes, before the counts apply. Not も, which also ends names (やくも: やく and も).
+    const auto inflectedOk = [&](const std::string& t, int bare) { return bare >= 2 || !InflectedRun(t); };
     std::set<std::string> free;
     for (const auto& [t, c] : kanaFree_) {
-        if (c >= 3) free.insert(t);
+        const auto b = kanaBare_.find(t);
+        if (c >= 3 && inflectedOk(t, b == kanaBare_.end() ? 0 : b->second)) free.insert(t);
     }
     for (const auto& [t, l] : kanaLoose_) {
-        if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2) free.insert(t);
+        if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2 && inflectedOk(t, l.bare)) free.insert(t);
     }
     for (const std::string& t : free) {
         if (Flags(t).records > 0) continue;

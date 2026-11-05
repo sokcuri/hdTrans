@@ -870,8 +870,8 @@ bool Registry::InflectedRun(std::string_view t) {
     return false;
 }
 
-std::vector<std::string> Registry::FreeKanaNames(std::string_view line) {
-    std::vector<std::string> out;
+std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
+    std::vector<LooseUse> out;
     for (std::size_t start = 0; start < line.size();) {
         const text::Rune r = RuneAt(line, start);
         if (!IsHiragana(r.cp) || (start > 0 && (IsHiragana(RuneBefore(line, start).cp) || IsKanji(RuneBefore(line, start).cp) ||
@@ -900,12 +900,12 @@ std::vector<std::string> Registry::FreeKanaNames(std::string_view line) {
             for (std::size_t i = 0; ok && i < t.size(); i += RuneAt(t, i).size) {
                 ok = !InRunes(RuneAt(t, i).cp, "ぁぃぅぇぉっゎー");
             }
-            if (ok && Flags(t).records == 0 && Flags(whole).records == 0 && !InflectedRun(t)) {
+            if (ok && Flags(t).records == 0 && Flags(whole).records == 0) {
                 for (std::size_t e = RuneAt(t, 0).size; ok && e < t.size(); e += RuneAt(t, e).size) {
                     if (RuneCount(t.substr(0, e)) >= 2 && Flags(t.substr(0, e)).records > 0) ok = false;
                     if (RuneCount(t.substr(e)) >= 2 && Flags(t.substr(e)).records > 0) ok = false;
                 }
-                if (ok) out.emplace_back(t);
+                if (ok) out.push_back({std::string(t), true, last.cp});
             }
         }
         start = end;
@@ -933,7 +933,7 @@ std::vector<Registry::LooseUse> Registry::LooseKanaUses(std::string_view line) {
         }
         if (!InRunes(runes[from + n].cp, "がはものをにとへ") || InRunes(runes[from].cp, "おご")) return std::string();
         const std::string t(line.substr(at[from], at[from + n] - at[from]));
-        if (Flags(t).records > 0 || RoleLike(t) || InflectedRun(t) || dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), t)) {
+        if (Flags(t).records > 0 || RoleLike(t) || dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), t)) {
             return std::string();
         }
         // Not a name and its honorific (ゆうくん).
