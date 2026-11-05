@@ -17,7 +17,7 @@ dict:ordinal-first:1	作戦準備(第一段階任務)	작전 준비(제1단계 �
 dict:ordinal-first:2	第一、俺はこんなに巧くはないよ。	애초에, 나는 이렇게 능숙하지는 않아.	fix	local
 dict:ordinal-first:2	第一お前、俺より上級生だろ？！	애초에 너, 나보다 상급생이지?!	fix	local
 dict:ordinal-first:2	第一それ、賛辞じゃねえし！！！	애초에 그것, 찬사가 아니고!!!	fix	local
-dict:ordinal-first:2	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	이제……도련님이면 돼. 애초에 그런 격이 아니고.	fix	local
+dict:ordinal-first:2	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	이제……도련님이면 돼. 애초에 그런 성격이 아니고.	fix	local
 dict:ordinal-first:2	（……第一、俺みたいなガキを騙して何の意味があるんだ？）	(……애초에, 나 같은 녀석을 속여 무슨 의미가 있는 거야?)	fix	local
 dict:ordinal-first:1	第一、第二主砲！いい……撃て！	제1, 제2주포! 좋다……쏘아라!	fix	local
 dict:ordinal-first:1	第一人者だ。	제일인자다.	keep	defaults

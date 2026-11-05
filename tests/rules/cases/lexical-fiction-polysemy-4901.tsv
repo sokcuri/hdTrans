@@ -1,0 +1,57 @@
+# 규칙: LEX-4901
+rule	input	expected	kind	layer
+sense:tsuka-handle	ハンマーの柄をギュッと握ると、それを次々に向かって振り下ろし！	has:해머의 자루를	fix	senses
+sense:tsuka-handle	握られてたら流石に柄が燃えちゃうし頭身も溶けかねないから	has:역시 자루가	fix	senses
+sense:tsuka-handle	太刀の刀身に柄から切っ先にかけて入ったギザギザの模様	has:도신에 자루에서	fix	senses
+sense:tsuka-handle	掛け布団の柄が気に入らないのね？他のが無いのよ、我慢して	has:이불의 무늬가	fix	senses
+sense:tsuka-handle	細かい花柄の刺繍が入ったハンカチを渡される。	has:꽃무늬	keep	senses
+cx:fic-polysemy-1:10	とりあえずカボチャ柄の服を作るから買いに来てね！	has:호박무늬의	fix	rewrites
+cx:fic-polysemy-1:10	ネクタイはペーズリー柄で	넥타이는 페이즐리직무늬로	fix	rewrites
+cx:fic-polysemy-1:10	「もしイチゴ柄だったら？」	「만약 딸기무늬라면?」	keep	rewrites
+cx:fic-polysemy-1:12	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	has:그런 성격이	fix	rewrites
+cx:fic-polysemy-1:12	「どう見たって、ポーカーフェイスって柄じゃないだろ」	has:포커페이스는 성격이	fix	rewrites
+cx:fic-polysemy-1:12	それらを思い出した彼は、柄にもなく笑ってしまう。	그것들을 떠올린 그는, 어울리지 않게 웃어버린다.	keep	rewrites
+dict:w:32691	国内ではまだ冷えるところがあるそうだが、地域柄暖かくなるのは早い。	has:지역 특성상	fix	lookup
+dict:w:32690	王家に嫁いでも問題ないお家柄なのだ。	has:문제없는 집안이다.	fix	lookup
+cx:fic-polysemy-1:20	一部の国の部族では、神の使いと崇めるものまで出てくる始末である。	has:나오는 지경이다.	fix	rewrites
+cx:fic-polysemy-1:20	記入済みの離婚届まで渡してきてる始末だ。	has:있는 지경이다.	fix	rewrites
+cx:fic-polysemy-1:20	お相手ができるか、と狼狽しだす始末。	has:시작하는 지경.	fix	rewrites
+cx:fic-polysemy-1:20	「後始末が面倒だから、あんま遊ぶなよ？」	has:「뒤처리가	keep	rewrites
+cx:fic-polysemy-1:20	口封じのため 彼を始末したんだ	입막음 때문에 그를 처리한 거야	keep	rewrites
+cx:fic-polysemy-1:22	さっきから怯えているし、動きものろく簡単に始末出来そうだった。	has:간단하게 처리	fix	rewrites
+cx:fic-polysemy-1:22	ここで始末させてもらいます	여기서 처리 하겠습니다	fix	rewrites
+cx:fic-polysemy-1:22	このばけものを始末するぞ！	이 괴물을 처리하겠어!	keep	rewrites
+dict:w:32696	…もっと始末が悪い！！	…좀 더 골치 아파!!	fix	lookup
+cx:fic-polysemy-1:30	「知らんが、今のうちにハンスの元まで行っておけ」	has:한스의 곁까지	fix	rewrites
+cx:fic-polysemy-1:30	罪人であるABCの元へ行く	죄인인 ABC의 곁으로 간다	keep	rewrites
+cx:fic-polysemy-1:32	「俺はハンスの元で何度も何度も手を汚した。」	has:한스의 곁에서	fix	rewrites
+cx:fic-polysemy-1:32	お姉様には、あの方の元で私が何をするのかをきちんと伝えた。	has:분 곁에서	keep	rewrites
+cx:fic-polysemy-1:40	「舐めるなよ！」	「얕보지 마!」	fix	rewrites
+cx:fic-polysemy-1:40	私だって戦えるわ、舐めるなっ！	나도 싸울 수 있어, 얕보지 마!	fix	rewrites
+cx:fic-polysemy-1:40	『な、舐めんな！！人間のブンザイでええええええ！！』	has:『야, 얕보지	fix	rewrites
+cx:fic-polysemy-1:40	くそっ！小さいからって舐めやがって！	젠장! 작다고 해서 얕보다니!	fix	rewrites
+cx:fic-polysemy-1:40	乳首を舐めて、吸い上げて、唇で挟んで	has:유두를 핥고,	keep	rewrites
+cx:fic-polysemy-1:40	舌で歯の裏側を舐める。	혀로 이빨의 뒤편을 핥는다.	keep	rewrites
+cx:fic-polysemy-1:42	気弱そうなわりに容赦のない子だ。……あまり舐めてかからない方がいいな。	has:……그다지 얕봐	fix	rewrites
+sense:nameru-belittle	「世の中を舐めていると思われたって不思議じゃない」	has:「세상을 얕보고	fix	senses
+sense:nameru-belittle	もちろんあるわ、海軍を舐めないで。	물론 있어, 해군을 얕보지 마.	fix	senses
+cx:fic-polysemy-1:50	放った弾丸を、彼は防弾素材のグローブで弾く。	has:글로브로 튕긴다.	fix	rewrites
+cx:fic-polysemy-1:50	（この攻撃を弾いて、がら空きになった顔面にパンチ喰らわせてオシマイ♪）	has:공격을 튕기고,	fix	rewrites
+cx:fic-polysemy-1:50	舌先でクリトリスを弾きながら、膣口に吸い付く。	has:클리토리스를 튕기면서,	fix	rewrites
+cx:fic-polysemy-1:50	ぴちゃ、ぴちゃ、と唾液を弾かせて、淫らに舌をくねらせている。	has:타액을 튕기게	fix	rewrites
+cx:fic-polysemy-1:50	相変わらず、器用にギターを弾いていた。	has:기타를 연주하고	keep	rewrites
+cx:fic-polysemy-1:50	先生、ピアノ並に敏感ですよ？先生を弾いてみてもいいんですよ？	has:선생님을 연주해	keep	rewrites
+cx:fic-polysemy-1:52	弾き飛ばされたサムライは身を翻して何とか着地すると刀を鞘に納めた。	has:튕겨	fix	rewrites
+cx:fic-polysemy-1:52	弾き出されたペニスが、次々に精子を放出する。	has:튕겨	fix	rewrites
+cx:fic-polysemy-1:52	もしもピアノが弾けたなら	만약 피아노를 칠 수 있다면	keep	rewrites
+cx:fic-polysemy-1:54	空き缶は、物体に接触する直前でパンっと弾かれどこかにすっとんでいく。	has:팡 튕겨지고	fix	rewrites
+cx:fic-polysemy-1:54	「まあ、そのせいで入り婿の旦那と愛人親子は、社交界から弾かれそうだけどな。」	has:사교계로부터 튕겨질	fix	rewrites
+cx:fic-polysemy-1:54	ピアノの音に弾かれたように顔を上げた。	has:소리에 튕기듯이	keep	rewrites
+sense:kiku-work	材料は保存が利く	재료는 보존이 된다	fix	senses
+sense:kiku-work	「何だか抑制が利かなくなった。悪いな」	has:「왠지 억제가 되지	fix	senses
+sense:kiku-work	塩と胡椒が利いた、けれど決して利き過ぎていない絶妙な加減の肉。	has:후추가 배었다,	fix	senses
+sense:kiku-work	噛み締めると広がる、塩の利いた肉汁。	깨물면 퍼지는, 소금이 밴 육즙.	fix	senses
+sense:kiku-work	歯止めも利かずまくし立てて	브레이크도 듣지 않고 쏘아붙여	keep	senses
+dict:w:32697	お前とは 口も利きたくねえんだからな！	너와는 말도 하고 싶지 않으니까!	fix	lookup
+dict:w:32698	殿下に対してその口の利き方は何かね！	전하에 대해서 그 말버릇은 뭔가!	fix	lookup
+cx:fic-polysemy-1:42	飴を舐めてから寝た	엿을 핥고 나서 잤다	keep	rewrites
