@@ -540,6 +540,18 @@ bool AdjectiveSu(std::string_view s, size_t pos, Match& m) {
     return CharOrEnd(s, p, U"かねよ。！？!?…‥」』、", m, 1);
 }
 
+// ッス in katakana after a kana or a kanji: the っす of です (受けるッスから, 行きましたッスよ); not after a
+// small kana or an imperative in e (くたばれぇッス).
+bool SsuKatakanaAfterWord(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0) return false;
+    const char32_t c = Before(s, pos);
+    if (!(IsHiraganaClass(c) || IsKanjiClass(c)) || In(c, U"ぁぃぅぇぉっゃゅょゎえけげせぜてでねへべぺめれ")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ッス")) return false;
+    m.end = p;
+    return true;
+}
+
 // A literal pattern.
 template <const char* kText>
 bool Literal(std::string_view s, size_t pos, Match& m) {
@@ -1237,6 +1249,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, Teeka, [](const Match& m) { return Cat({m.group[1], "たいか"}); });
     text = ReplaceAll(text, Literal<kUssai>, [](const Match&) { return std::string("うるさい"); });
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
+    text = ReplaceAll(text, SsuKatakanaAfterWord, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
     text = ReplaceAll(text, AdjectiveSu, [](const Match& m) { return Cat({"いっす", m.group[1]}); });
     text = ReplaceAll(text, SsuMidSentence, [](const Match& m) { return std::string(m.group[1]); });

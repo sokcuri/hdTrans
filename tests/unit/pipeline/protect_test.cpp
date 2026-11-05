@@ -439,7 +439,8 @@ HD_TEST(pipeline_kata_whole_predicates) {
         {"一マス進む", "一マス進む"},     // a numeral counts squares
         {"堅実なマスに", "堅実なマスに"},
         {"内ッスよ", "内っすよ"},
-        {"来るッスよ", "来るッスよ"},     // っす only after a kanji noun
+        {"来るッスよ", "来るっすよ"},     // っす after a verb as well
+        {"くたばれッス", "くたばれッス"},  // not after an imperative in e
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));

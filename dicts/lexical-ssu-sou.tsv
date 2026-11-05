@@ -5,3 +5,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 そうっすけど	그렇긴 한데요	C0H0			GN							ssu-sou:2
 そーっすね	그렇네요	C0H0			GN							ssu-sou:3
 そーっすか	그래요	C0H0			GN							ssu-sou:4
+そっすね	그렇네요	C0H0			GN							ssu-sou:5
+そっすか	그래요	C0H0			GN							ssu-sou:6
+おつかれっす	수고했어요	E320			GN							ssu-sou:7
+お疲れっす	수고했어요	E320			GN							ssu-sou:8
+おつかれッス	수고했어요	E320			GN							ssu-sou:11
+お疲れッス	수고했어요	E320			GN							ssu-sou:12
+どうっすか	어때요	C0H0			GN							ssu-sou:9
