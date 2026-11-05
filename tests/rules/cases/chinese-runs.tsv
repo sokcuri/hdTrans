@@ -19,3 +19,30 @@ protect:chinese-run	山﨑さんの家だ。	야마자키 씨의 집이다.	keep
 protect:chinese-run	是 那天傍晚是《败犬们的挽歌2》的台词训练	是 那天傍晚是《败犬们的挽歌2》的台词训练	fix	normalize
 protect:chinese-run	魔法《マジック》を使う。	마법을 쓴다.	keep	normalize
 protect:chinese-run	但是 这力量可不同于远程操作型	但是 这力量可不同于远程操作型	fix	normalize
+protect:chinese-grammar	我很丑可是我很温柔	我很丑可是我很温柔	fix	protect
+protect:chinese-grammar	*大王（ぬし）與壽司（すし）讀音略像	*大王與壽司讀音略像	fix	protect
+protect:chinese-grammar	*鍋奉行（なべぶぎょう）：是揶揄在吃火鍋的時候， 這裡夏海借詞以「お好み焼き奉行」開玩笑	*鍋奉行：是揶揄在吃火鍋的時候, 這裡夏海借詞以 「오코노미야키 부교」開玩笑	fix	protect
+protect:chinese-grammar	NETA東川篤哉所著的推理小說《謎解きはディナーのあとで》	NETA東川篤哉所著的推理小說《수수께끼 풀이는 저녁식사 후에》	fix	protect
+protect:chinese-grammar	[NETA自影集雙面嬌娃(Moonlighting，日版(こちらブルームーン探偵社)裡面的偵探社]	[NETA自影集雙面嬌娃(Moonlighting, 日版(이쪽 블루문 탐정사) 裡面的偵探社]	fix	protect
+protect:chinese-grammar	[ガンガンいこうぜ] [いのちだいじ] 『勇者鬥惡龍』系列中的自動作戰指令。	[마구 가자구] [생명이다 유지] 『勇者鬥惡龍』系列中的自動作戰指令.	fix	protect
+protect:chinese-grammar	[ゼットンバリア] 奧特曼系列中出現的怪獸Z-TON所使用的防護罩技能。	[젯톤바리아] 奧特曼系列中出現的怪獸Z-TON所使用的防護罩技能.	fix	protect
+protect:chinese-grammar	[ゼロゼロマシン] 1968年美國賽車動畫『Wacky Races』中登場的00號機，裝有巨型鑽頭。	[제로제로 머신] 1968年美國賽車動畫 『Wacky Races』中登場的00號機, 裝有巨型鑽頭.	fix	protect
+protect:chinese-grammar	[加齢臭(かれいしゅう):中老年特有的體臭，在此為NETA咖哩臭的諧音 ]	[加齢臭:中老年特有的體臭, 在此為NETA咖哩臭的諧音 ]	fix	protect
+protect:chinese-grammar	※在關東地區，狐狸烏龍麵（きつねうどん）是指有加豆皮的烏龍麵，狸貓烏龍麵（ためきうどん）是有加酥炸天婦羅麵衣的烏龍麵。	※在關東地區, 狐狸烏龍麵是指有加豆皮的烏龍麵, 狸貓烏龍麵是有加酥炸天婦羅麵衣的烏龍麵.	fix	protect
+protect:chinese-grammar	※捏自安部譲二的「塀の中の懲りない面々」	※捏自安部譲二的 「담 안이 질리지 않는 면면」	fix	protect
+protect:chinese-grammar	※日語中姑姑 阿姨 大媽都唸作おばさん	※日語中姑姑 阿姨 大媽都唸作아줌마	fix	protect
+protect:chinese-grammar	※腐る(くさる)和寝腐る(ねくさる)發音相近	※썩는(썩는다) 화침 썩는(네 썩는다) 發音相近	fix	protect
+protect:chinese-grammar	「そこへなおれ」意味著讓犯錯的人老實坐好，等待受刑	「거기에 나아라」意味著讓犯錯的人老實坐好, 等待受刑	fix	protect
+protect:chinese-grammar	「それそれ」是「看招看招」的意思	「그것 그것」是 「看招看招」的意思	fix	protect
+protect:chinese-grammar	「そんなバカな! 」的諧音	「말도 안돼!」的諧音	fix	protect
+protect:chinese-grammar	「たけゆきて」的「たけ」也就是「升起向上」的意思	「사나워지고 유키라고」的 「사나워지고」也就是 「升起向上」的意思	fix	protect
+protect:chinese-grammar	「牛(うし)」發音為usi	「牛」發音為usi	fix	protect
+protect:chinese-grammar	「阿樂（ぐらさん）」與「墨鏡 」音同。	「阿樂」與 「墨鏡 」音同.	fix	protect
+protect:chinese-grammar	『鬆弛角色』是照字面直譯，原文為『ゆるキャラ』，	『鬆弛角色』是照字面直譯, 原文為 『유루캬라』,	fix	protect
+protect:chinese-grammar	精神的存在	정신적 존재	keep	protect
+protect:chinese-grammar	補給完了～！	보급 완료~!	keep	protect
+protect:chinese-grammar	是非御入湯被下候様御願申上候	부디입탕피하 문안 드림님 원신상 문안 드림	keep	protect
+protect:chinese-grammar	傲骨從來與俗違。	오골종래여속위.	keep	protect
+protect:chinese-grammar	実存在的事物存在	실존 재적 사물 존재	keep	protect
+protect:chinese-grammar	合目的的、峻厳、構造的である。	합목적적, 준엄, 구조적이다.	keep	protect
+protect:chinese-grammar	今日は学校に行った。	오늘은 학교에 갔다.	keep	protect
