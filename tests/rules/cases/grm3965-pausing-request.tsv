@@ -1,7 +1,7 @@
 # 규칙: GRM-3965
 rule	input	expected	kind	layer
-cx:pausing-request:10	どうか アルスさまのために 賢明な判断をお願いします	부디 아르스님을 위해서 현명한 판단을 부탁드립니다	fix	rewrites
-cx:pausing-request:10	アルス様 どうか ロセルのことを よろしくお願いします	아르스님 부디 로셀을 잘 부탁드립니다	fix	rewrites
+cx:pausing-request:10	どうか アルスさまのために 賢明な判断をお願いします	부디 아르스 님을 위해서 현명한 판단을 부탁드립니다	fix	rewrites
+cx:pausing-request:10	アルス様 どうか ロセルのことを よろしくお願いします	아르스 님 부디 로셀을 잘 부탁드립니다	fix	rewrites
 cx:pausing-request:10	申し訳ございません どうか お許しくださいませ	죄송합니다 부디 용서주십시오	fix	rewrites
 cx:pausing-request:10	どうか、何も言わずにこの手をお取りください	부디, 아무것도 말하지 않고 이 손을 취해 주세요	keep	rewrites
 cx:pausing-request:10	どうか私に、性の手ほどきをしてください！！	제발 저에게, 성의 초보를 해 주세요!!	keep	rewrites
