@@ -1,0 +1,16 @@
+# 규칙: LEX-85
+rule	input	expected	kind	layer
+normalize:kanji-pair-iteration	私はおとなしく、一枚々々丁寧に拭いていた。	나는 점잖고, 한 장 한 장 정중하게 닦고 있었다.	fix	normalize
+normalize:kanji-pair-iteration	雨は毎日々々降り続いた。	비는 매일매일 계속 내렸다.	fix	normalize
+normalize:kanji-pair-iteration	胸の中で次第々々に恋慕の情が募ってきた。	가슴속에서 점점 연모의 정이 커져 왔다.	fix	normalize
+normalize:kanji-pair-iteration	何を愚図々々しているのだ。	무엇을 꾸물꾸물하고 있나.	fix	normalize
+normalize:kanji-pair-iteration	そんな馬鹿々々しいことがあるか。	그렇게 어처구니없는 일이 있을까.	fix	normalize
+normalize:kanji-pair-iteration	一歩々々足を運ぶ。	한걸음 한걸음 발길을 옮긴다.	fix	normalize
+normalize:kanji-pair-iteration	時代々々の比較に移る。	시대 시대 비교로 옮긴다.	fix	normalize
+normalize:kanji-pair-iteration	腹を滅茶々々に突いた。	배를 엉망으로 찔렀다.	fix	normalize
+normalize:kanji-pair-iteration	毎年々々新しい花が咲く。	매년 매년 새로운 꽃이 핀다.	fix	normalize
+normalize:kanji-pair-iteration	一人々々に声をかけた。	한 사람 한 사람에 말을 걸었다.	fix	normalize
+normalize:kanji-pair-iteration	時々来る	가끔 온다	keep	normalize
+normalize:kanji-pair-iteration	日々の暮らし	나날의 생활	keep	normalize
+normalize:kanji-pair-iteration	佐々木さんに会った	사사키 씨를 만났다	keep	normalize
+normalize:kanji-pair-iteration	素麪鉢、盆釜、肴鉢、捏鉢等々々	소면 하치, 쟁반솥, 술안주하치, 날 하치 등등들	keep	normalize
