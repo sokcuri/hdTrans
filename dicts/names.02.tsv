@@ -2412,7 +2412,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 泡田薫子	아와타 카오루코	N130	QPNVHn		GN						あわたかおるこ	names.628742
 泡盛	아와모리	N130	QPNVHn	Wb	GN						あわもり	names.628743
 泡音マリィ	아와네 마리	N130	QPNVHn		GN						あわねまりぃ	names.628744
-波	파도	N130	QPNVHn	Wb	GN						なみ	names.628745
 波のプール	파도풀	N110			GN							names.628746
 波の中の女	파도 속의 여인	N130	QWK		GN							names.628748
 波の国	파도의 나라	N130	QPNVHn		GN							names.628749
@@ -2680,7 +2679,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 泥海男	데카오	N130	QPNVHn	Wb	GN							names.629021
 泥田耕太郎	도로타 고타로	N130	QPNVHn		GN						どろた こうたろう	names.629022
 泥窪駅	니와역	N130	QCTVPl		GN							names.629023
-泥舟	데이슈	N130	QPNVHn	Wb	GN						でいしゅう	names.629024
 泥門デビルバッツ	데이몬 데빌 배츠	N130	QPNVHn		GN						でいもん でびるばっつ	names.629025
 泥靡	광왕	N130	QPNVHn	Wb	GN							names.629026
 泥駒政次	도로코마 마사지	N130	QPNVHn		GN						どろこままさじ	names.629027
@@ -15100,7 +15098,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 点滅	점멸	N110			GN						てんめつ	names.641594
 点火	점화	N110			GN							names.641595
 点灯音ヨシヤ	텐토네 요시야	N130	QPNVHn		GN						てんとね よしや	names.641596
-点目	점눈	N110			GN						てんめ	names.641597
 点眼	점안	N110			GN							names.641598
 点線	점선	N110			GN							names.641599
 点線に沿って切り取る	점선을 따라 찢어라	N130	QWK		GN							names.641600
@@ -16228,7 +16225,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 煮ル果実	니루 카지츠	N110			GN						にるかじつ	names.642748
 煮物	니모노	N110			GN							names.642749
 熈	히로시	N130	QPNVHn	Wb	GN						ひろし	names.642750
-熊	슝	N110			GN							names.642751
 熊 吟司	큐마 긴지	N130	QPNVHn		GN							names.642752
 熊が火を発見する	곰이 불을 발견하다	N130	QWK		GN							names.642753
 熊さん	쿠마	N110			GN						くまさん	names.642754
@@ -18305,7 +18301,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 牧野梨恵	마키노 리에	N130	QPNVHn		GN						まきの りえ	names.644882
 牧野森男	마키노 모리오	N130	QPNVHn		GN						まきの もりお	names.644883
 牧野正蔵	마키노 쇼조	N130	QPNVHn		GN							names.644884
-牧野氏	마키노씨	N110			GN						まきのし	names.644885
 牧野江里	마키노 에리	N130	QPNVHn		GN							names.644886
 牧野洋	마키노 요	N130	QPNVHn		GN							names.644887
 牧野洋輔	마키노 요스케	N130	QPNVHn		GN						まきの ようすけ	names.644888
@@ -18678,7 +18673,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 特殊部隊	특수부대	N110			GN							names.645266
 特殊部隊ジャッカル	특수부대 자칼	N130	QWK		GN							names.645267
 特殊部隊連隊	특전연대	N130	VGt		GN							names.645268
-特注品	특주품	N110			GN							names.645269
 特派員	특파원	N110			GN							names.645270
 特派員001	특파원 001	N130	QWK		GN							names.645271
 特状課	특상과	N130	VGt		GN							names.645272
@@ -19784,7 +19778,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猩影	쇼에이	N130	QPNVHn	Wb	GN						しょうえい	names.646421
 猩猩	성성이	N110			GN							names.646422
 猩紅熱	성홍열	N110			GN							names.646423
-猪	멧돼지	N130	QPNVHn	Wb	GN						いのしし	names.646424
 猪三次	이산지	N130	QPNVHn	Wb	GN							names.646425
 猪上	이노우에	N130	QPNVHn	Wa	GN						いのうえ	names.646426
 猪上さとり	이노우에 사토리	N130	QPNVHn		GN							names.646427
@@ -20757,7 +20750,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 玄楯	현순	N130	QPNVHn	Wb	GN							names.647412
 玄樹	겐키	N130	QPNVHn	Wb	GN						げんき	names.647413
 玄正柱	현정주	N130	QPNVHn	Wb	GN							names.647414
-玄武	현무	N130	QPNVHn	Wb	GN						げんぶ	names.647415
 玄武のコロク	현무의 코로쿠	N130	QPNVHn		GN						げんぶのころく	names.647416
 玄武の化身・メイメイ	현무의 화신 메이메이	N110			GN						げんぶのけしんめいめい	names.647417
 玄武の沢	겐부의 계곡	N130	QCTVPl		GN							names.647418
@@ -22579,7 +22571,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 現住建造物等放火罪	현주건조물등방화죄	N110			GN							names.649255
 現像	현상	N110			GN							names.649256
 現原村	아라하라촌	N130	QCTVPl		GN							names.649257
-現国	겐코쿠	N130	QPNVHn	Wb	GN						げんこく	names.649258
 現在	현재	N110			GN							names.649259
 現在公開可能な情報	현재 공개 가능한 정보	N130	QPNVHn		GN							names.649260
 現在進行形	현재 진행형	N110			GN							names.649261
@@ -28633,7 +28624,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 病田色	야마다 시키	N130	QPNVHn		GN						やまだしき	names.655404
 病的	병적	N110			GN							names.655405
 病草紙	병초지	N130	QWK		GN							names.655406
-病葉	와쿠라바	N130	QPNVHn	Wb	GN						わくらば	names.655407
 病身舞	병신춤	N110			GN							names.655408
 病院	병원	N110			GN							names.655409
 病院坂の首縊りの家	병원 언덕의 목매단 집	N130	QWK		GN							names.655411
@@ -28718,7 +28708,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 癸巳年	계사년	N110			GN							names.655494
 癸生川凌介	키부카와 료스케	N130	QPNVHn		GN						きぶかわ りょうすけ	names.655495
 癸魯	키로	N130	QPNVHn	Wb	GN						きろ	names.655496
-発	발	N130	QPNVHn	Wb	GN						はつ	names.655497
 発作	발작	N110			GN							names.655498
 発信	발신	N110			GN							names.655499
 発光	발광	N110			GN							names.655500
@@ -31596,7 +31585,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 皆森	미나모리	N130	QPNVHn	Wa	GN							names.658425
 皆森水希	미나모리 미즈키	N130	QPNVHn		GN							names.658426
 皆殺しの天使	학살의 천사	N130	QWK		GN							names.658427
-皆殺し編	미나고로시 편	N130	VGt		GN						みなごろしへん	names.658428
 皆水いずみ	미나미즈 이즈미	N130	QPNVHn		GN						みなみず いずみ	names.658429
 皆水の巫女	미나미즈의 무녀	N130	QPNVHn		GN						みなみずのみこ	names.658430
 皆河	미나가와	N130	QPNVHn	Wa	GN						みながわ	names.658431
@@ -34302,7 +34290,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真宗大谷派名古屋別院	마무네 오타니파 나고야 별원	N130	VGt		GN							names.661179
 真宙	마히로	N130	QPNVHn	Wb	GN							names.661180
 真定国	진정국	N130	QCTVPl		GN							names.661181
-真実	마미	N130	QPNVHn	Wb	GN							names.661182
 真実	마미	N110			GN						まみ	names.661183
 真実と幻想の夜想曲	진실과 환상의 야상곡	N130	QWK		GN							names.661184
 真実と正義	진리공정당	N130	VGt		GN							names.661185
@@ -39007,7 +38994,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 破壊龍・アポカリプス	파괴룡 아포칼립스	N110			GN						はかいりゅうあぽかりぷす	names.665938
 破壞王	라마다트 칼리	N130	QPNVHn		GN							names.665939
 破天の槍	파천의 창	N110			GN							names.665940
-破天荒	파천황	N130	QPNVHn	Wb	GN						はてんこう	names.665941
 破天荒遊戯	파천황 유희	N130	QWK		GN						はてんこうゆうぎ	names.665942
 破天血神	설극	N130	QPNVHn	Wb	GN							names.665943
 破妖の剣	파요의 검	N130	QWK		GN							names.665944
@@ -40223,7 +40209,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神と神	신들의 전쟁	N130	QPNVHn		GN							names.667185
 神に近づく蝶の妖精	신에게 다가가는 나비 요정	N110			GN							names.667186
 神のお告げ	신의 계시	N110			GN							names.667187
-神のみ	신만이 아는 세계	N130	QWK		GN							names.667188
 神のみぞ知るセカイ	신만이 아는 세계	N130	QWK		GN							names.667189
 神のみぞ知るセカイ 女神篇	신만이 아는 세계 여신편	N130	QWK		GN							names.667190
 神のアグネス	신의 아그네스	N130	QWK		GN							names.667191
@@ -40329,7 +40314,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神中村	간나카촌	N130	QCTVPl		GN							names.667304
 神丸	가미마루	N130	QPNVHn	Wa	GN							names.667305
 神丸洋一	가미마루 요이치	N130	QPNVHn		GN							names.667306
-神主	신쇼쿠	N110			GN							names.667307
 神主打法	신주 타법	N110			GN							names.667308
 神乃	칸노	N110			GN						じんの	names.667309
 神乃木 荘龍	카미노기 소류	N130	QPNVHn		GN						かみのぎ そうりゅう	names.667310
@@ -44049,7 +44033,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 私たちを幸せにするいくつかの質問	우리를 행복하게 하는 몇 가지 질문	N130	QWK		GN							names.671081
 私たち結婚しました	우리 결혼했어요	N130	QWK		GN							names.671082
 私たち結婚できるかな?	우리가 결혼할 수 있을까	N130	QWK		GN							names.671083
-私たち自身	우리 자신	N130	QWK		GN							names.671084
 私だけのあなた	나만의 당신	N130	QWK		GN							names.671085
 私だけ信じてついてこい、都市漁師	나만 믿고 따라와, 도시어부	N130	QWK		GN							names.671087
 私だって女の子	나도 여자애야	N130	QWK		GN						わたしだっておんなのこ	names.671088
@@ -44089,7 +44072,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 私の友達カイチくん	내 친구 해치	N130	QWK		GN							names.671138
 私の名は紅	내 이름은 빨강	N130	QWK		GN							names.671139
 私の名前	나의 이름	N130	QWK		GN							names.671140
-私の名前は	내 이름은	N130	QWK		GN							names.671141
 私の名前はキム・サムスン	내 이름은 김삼순	N130	QWK		GN							names.671142
 私の名前はコンジュ	내 이름은 공주	N130	QWK		GN							names.671143
 私の名前を聞かないでください	내 이름 묻지마세요	N130	QWK		GN							names.671144
@@ -47175,7 +47157,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 立仙 愛理	릿센 아이리	N130	QPNVHn		GN						りっせん あいり	names.674317
 立仙百佳	릿센 모모카	N130	QPNVHn		GN							names.674318
 立件	입건	N110			GN							names.674319
-立会人	입회인	N130	QPNVHn	Wb	GN						たちあいにん	names.674320
 立伝都々	타치츠테 토토	N130	QPNVHn		GN							names.674321
 立位	입위	N110			GN							names.674322
 立体	입체	N110			GN							names.674323
@@ -55378,7 +55359,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 紳士靴	신사화	N110			GN							names.682617
 紳太郎	신타로	N130	QPNVHn	Wb	GN							names.682618
 紳路	신지	N130	QPNVHn	Wb	GN							names.682619
-紹	소	N130	QPNVHn	Wb	GN						みつぐ	names.682620
 紹介	소개	N110			GN							names.682621
 紹修書院	소수서원	N130	QCTVPl		GN							names.682622
 紹子	쇼코	N130	QPNVHn	Wb	GN						しょうこ	names.682623
@@ -56302,7 +56282,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 絵文字	에모지	N110			GN							names.683570
 絵文字の国のジーン	에모지 무비	N130	QWK		GN							names.683571
 絵月ルナ	에즈키 루나	N130	QPNVHn		GN						えづき るな	names.683572
-絵本	에모토	N130	QPNVHn	Wa	GN							names.683573
 絵本園樹	에모토 소노키	N130	QPNVHn		GN						えもと そのき	names.683574
 絵本太閤記	에혼 태합기	N130	QWK		GN							names.683575
 絵本百物語	에혼 햐쿠모노가타리	N110			GN							names.683576
@@ -56564,7 +56543,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 絶頂管理	절정 관리	N110			GN						ぜっちょうかんり	names.683840
 絶食系	절식계	N130	QPNVHn	Wb	GN							names.683841
 絶鬼	제츠키	N130	QPNVHn	Wb	GN						ぜっき	names.683842
-絹	명주	N130	QPNVHn	Wb	GN						しるく	names.683843
 絹と明察	비단과 명찰	N130	QWK		GN							names.683844
 絹井カオリ	기누이 카오리	N130	QPNVHn		GN						きぬいかおり	names.683846
 絹代	기누요	N130	QPNVHn	Wb	GN						きぬよ	names.683847
@@ -58019,7 +57997,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 總一郎	소이치로	N130	QPNVHn	Wb	GN							names.685345
 總持寺	소지지	N130	VGt		GN							names.685346
 總明	후사아키	N130	QPNVHn	Wb	GN							names.685347
-績	지	N130	QPNVHn	Wb	GN						せき	names.685348
 績介	세키스케	N130	QPNVHn	Wb	GN							names.685349
 績子	이사코	N130	QPNVHn	Wb	GN						いさこ	names.685350
 績渓県	지시현	N130	QCTVPl		GN							names.685351
@@ -58380,7 +58357,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 罪の都	죄의 도시	N130	QCTVPl		GN							names.685713
 罪ノ月	죄의 달	N130	QWK		GN							names.685714
 罪人	죄인	N110			GN							names.685715
-罪人たち	씨너스: 죄인들	N130	QWK		GN							names.685716
 罪人の円舞曲	죄인의 원무곡	N110			GN							names.685717
 罪人の嘘	죄인의 거짓말	N130	QWK		GN							names.685718
 罪人の塔	죄인의 탑	N130	QCTVPl		GN							names.685719
@@ -58398,7 +58374,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 罪木蜜柑	츠미키 미캉	N130	QPNVHn		GN						つみきみかん	names.685731
 罪歌	자이카	N130	QPNVHn	Wb	GN						ざいか	names.685732
 罪深き少年たち	소년들	N130	QWK		GN							names.685733
-罪滅し編	츠미호로보시 편	N130	VGt		GN						つみほろぼしへん	names.685734
 罪火	죄화	N130	QWK		GN							names.685735
 罪状	죄상	N110			GN							names.685736
 罪獣	죄수	N110			GN						ざいじゅう	names.685737
@@ -63411,7 +63386,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自己紹介	자기소개	N110			GN							names.690847
 自己肥育	자기 비육	N110			GN							names.690848
 自己表現	자기주장훈련	N110			GN							names.690849
-自己評価	자기평가	N110			GN							names.690850
 自己責任	자기 책임	N110			GN						じこせきにん	names.690851
 自己顕示	자기 현시	N110			GN							names.690852
 自己顕示欲	자기현시욕	N110			GN							names.690853
@@ -63967,7 +63941,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 興安省	싱안성	N130	QCTVPl		GN							names.691419
 興安県	싱안현	N130	QCTVPl		GN							names.691420
 興安総省	싱안총성	N130	QCTVPl		GN							names.691421
-興宗	요 흥종	N130	QPNVHn		GN						こうしゅう	names.691422
 興宣	오키노리	N130	QPNVHn	Wb	GN							names.691423
 興宣大院君	흥선대원군	N110			GN							names.691424
 興宣駅	흥선역	N130	QCTVPl		GN							names.691425
@@ -69880,7 +69853,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 莞島邑	완도읍	N130	QCTVPl		GN							names.697409
 莞島郡	완도군	N130	QCTVPl		GN							names.697410
 莞爾	칸지	N130	QPNVHn	Wb	GN							names.697411
-莫	모	N130	QPNVHn	Wb	GN						ばく	names.697412
 莫代宗	막경공	N130	QPNVHn	Wb	GN							names.697413
 莫光祖	막경관	N130	QPNVHn	Wb	GN							names.697414
 莫古	막고	N130	QPNVHn	Wb	GN							names.697415
@@ -71215,7 +71187,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 華西駅	화서역	N130	QCTVPl		GN							names.698755
 華誼兄弟傳媒	화이브라더스	N130	VGt		GN							names.698756
 華道らん	하나미치 란	N130	QPNVHn		GN							names.698757
-華道部	화도부	N110			GN							names.698758
 華道面	화도면	N130	QCTVPl		GN							names.698759
 華那	카나	N130	QPNVHn	Wb	GN						かな	names.698760
 華野	카노	N130	QPNVHn	Wa	GN						かの	names.698761
@@ -79328,7 +79299,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 裏陶	귀녀 우라스에	N130	QPNVHn		GN						うらすえ	names.706953
 裏雪姫	우라유키히메	N130	QPNVHn	Wb	GN						うらゆきひめ	names.706954
 裏館村	우라다테촌	N130	QCTVPl		GN							names.706955
-裕	위	N130	QPNVHn	Wb	GN						ひろし	names.706956
 裕一	유이치	N130	QPNVHn	Wb	GN							names.706957
 裕一朗	유이치로	N130	QPNVHn	Wb	GN							names.706958
 裕一郎	유이치로	N130	QPNVHn	Wb	GN							names.706959
@@ -83490,7 +83460,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 言祝	코토호	N130	QPNVHn	Wb	GN						ことほ	names.711174
 言笑	언소	N110			GN						げんしょう	names.711175
 言聖軍	언성군	N110			GN						げんせいぐん	names.711176
-言葉	코토노하	N130	QPNVHn	Wb	GN							names.711177
 言葉にならない、笑顔を見せてくれよ	말로는 다 할 수 없어, 미소를 보여줘	N130	QWK		GN							names.711178
 言葉のいらない約束	말이 필요 없는 약속	N130	QWK		GN							names.711179
 言葉の花	말의 꽃	N130	QWK		GN							names.711180
@@ -86828,7 +86797,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 貝賀友信	카이가 토모노부	N130	QPNVHn		GN							names.714574
 貝野村	가이노촌	N130	QCTVPl		GN							names.714575
 貝類	패류	N110			GN							names.714576
-貞	정	N130	QPNVHn	Wa	GN						さだ	names.714577
 貞こなた	사다 코나타	N130	QPNVHn		GN						さだこなた	names.714578
 貞ちゃん	사다짱	N110			GN						さだちゃん	names.714579
 貞一	테이이치	N130	QPNVHn	Wb	GN						ていいち	names.714580
@@ -87212,7 +87180,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 責任政党	책임 정당	N110			GN							names.714967
 責任政府	책임정부	N130	VGt		GN							names.714968
 責任転嫁	책임 전가	N110			GN						せきにんてんか	names.714969
-責任重大	책임중대	N110			GN							names.714970
 責稽王	책계왕	N130	QPNVHn	Wb	GN							names.714971
 貯水タンク	저수 탱크	N110			GN							names.714972
 貯水槽	저수조	N110			GN							names.714973
@@ -87911,7 +87878,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 赤い殺意	붉은 살의	N130	QWK		GN							names.715686
 赤い河	붉은 강	N130	QWK		GN							names.715687
 赤い激流	붉은 격류	N130	QWK		GN							names.715688
-赤い目	아카메	N130	QPNVHn	Wb	GN							names.715690
 赤い砂漠	붉은 사막	N130	QWK		GN							names.715691
 赤い稲妻	레드 선더	N130	QPNVHn		GN						れっど さんだー	names.715693
 赤い竜	웨일스의 붉은 용	N130	QPNVHn		GN							names.715694
@@ -90974,7 +90940,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 転換クロスシート	전환 크로스시트	N110			GN							names.718799
 転校	전학	N110			GN							names.718800
 転校先の清楚可憐な美少女が、昔男子と思って一緒に遊んだ幼馴染だった件	전학 간 학교의 청순가련한 미소녀가 옛날에 남자라고 생각해서 같이 놀던 소꿉친구였던 일	N130	QWK		GN							names.718801
-転校生	전학생	N130	QPNVHn	Wb	GN						てんこうせい	names.718802
 転校生 さよならあなた	전학생: 안녕 당신	N130	QWK		GN							names.718803
 転校生 アーディン	전학생 아딘	N110			GN							names.718804
 転機	전기	N110			GN						てんき	names.718806
@@ -92970,7 +92935,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 逃亡怪獣ヘルツ	도망 괴수 헤르츠	N110			GN							names.720839
 逃亡日記	도망일기	N130	QPNVHn	Wb	GN						とうぼうにっき	names.720840
 逃亡犯	도주범	N110			GN							names.720842
-逃亡生活	도피 생활	N110			GN							names.720843
 逃亡系ラスボス	도망계 라스트 보스	N130	QPNVHn		GN							names.720844
 逃亡者	도망자	N110			GN							names.720845
 逃亡者イ・ドゥヨン	도망자 이두용	N130	QWK		GN							names.720847
@@ -93233,7 +93197,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 透龍	토오루	N130	QPNVHn	Wb	GN						とおる	names.721113
 逐鹿者	절제	N130	QPNVHn	Wb	GN							names.721114
 逓信省	체신성	N130	VGt		GN							names.721115
-途中	미치나카	N130	QPNVHn	Wa	GN							names.721116
 途中下車	도중하차	N110			GN							names.721117
 途中慎吾	미치나카 신고	N130	QPNVHn		GN							names.721118
 途来あるは	토라이 아루하	N130	QPNVHn		GN						とらいある は	names.721119
@@ -100014,7 +99977,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 野槌	노즈치	N110			GN						のづち	names.727980
 野橋太郎	노하시 타로	N110			GN						のばしたろう	names.727981
 野次	야유	N110			GN							names.727982
-野次馬根性	야지우마 콘조	N130	QPNVHn		GN							names.727983
 野正	노마사	N130	QPNVHn	Wa	GN						のまさ	names.727984
 野正レイ	노마사 레이	N130	QPNVHn		GN						のまさ れい	names.727985
 野武士	노부시	N110			GN						のぶし	names.727986
@@ -107552,7 +107514,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鋼	강철	N110			GN						はがね	names.735562
 鋼	코우	N130	QPNVHn	Wb	GN							names.735563
 鋼-HAGANE-	강-HAGANE-	N130	QWK		GN							names.735564
-鋼の	강철의	N130	QPNVHn	Wb	GN						はがねの	names.735565
 鋼のピアノ	강철피아노	N130	QWK		GN							names.735566
 鋼のメンタル	강철 멘탈	N130	QPNVHn		GN							names.735567
 鋼のレジスタンス	강철의 레지스탕스	N130	QWK		GN							names.735568
@@ -107966,7 +107927,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鍬田 憲伸	쿠와다 켄신	N130	QPNVHn		GN						くわだ けんしん	names.735985
 鍬田一雅	구와타 가즈마	N130	QPNVHn		GN							names.735986
 鍬田王我	쿠와타 오우가	N130	QPNVHn		GN						くわた おうが	names.735987
-鍵	열쇠	N130	QPNVHn	Wb	GN						かぎ	names.735988
 鍵のかかった部屋	자물쇠가 잠긴 방	N130	QWK		GN							names.735989
 鍵のない夢を見る	열쇠 없는 꿈을 꾸다	N130	QWK		GN							names.735990
 鍵は鍵穴へ	열쇠는 열쇠 구멍으로	N130	QWK		GN							names.735991
@@ -108600,7 +108560,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長いタイトル	긴 제목	N130	QWK		GN							names.736625
 長い一日	긴 하루	N130	QWK		GN							names.736626
 長い家の殺人	긴 집의 살인	N130	QWK		GN							names.736627
-長い道	긴 길	N130	QPNVHn		GN						ながいみち	names.736630
 長い間	오랫동안	N130	QWK		GN							names.736631
 長き秋	기나긴 가을	N130	QWK		GN							names.736633
 長くつ下ピッピの冒険物語	말괄량이 삐삐	N130	QWK		GN							names.736634
@@ -109246,7 +109205,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長幡村	나가하타촌	N130	QCTVPl		GN							names.737276
 長平	초헤이	N130	QPNVHn	Wb	GN							names.737277
 長平の戦い	장평 대전	N110			GN							names.737278
-長年	나가토시	N130	QPNVHn	Wb	GN						ながとし	names.737279
 長幸	나가유키	N130	QPNVHn	Wb	GN						ながゆき	names.737280
 長幸男	조 유키오	N130	QPNVHn		GN							names.737281
 長広	나가히로	N130	QPNVHn	Wb	GN						ながひろ	names.737282
@@ -111687,7 +111645,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 関英雄	세키 히데오	N130	QPNVHn		GN							names.739733
 関荘駅	관좡역	N130	QCTVPl		GN							names.739734
 関裕二	세키 유지	N130	QPNVHn		GN							names.739735
-関西	긴키 지방	N130	QPNVHn		GN						かんさい	names.739736
 関西しのび	간사이 시노비	N130	QPNVHn		GN						かんさいしのび	names.739737
 関西みらい銀行	간사이 미라이 은행	N110			GN							names.739738
 関西クラシック	간사이 클래식	N110			GN						かんさいクラシック	names.739739
@@ -112446,7 +112403,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 防犯	방범	N110			GN							names.740505
 防犯の日	방범의 날	N110			GN							names.740506
 防犯カメラ	방범 카메라	N110			GN							names.740507
-防犯ブザー	방범 부저	N110			GN							names.740508
 防犯探偵・榎本シリーズ	방범 탐정·에노모토 시리즈	N130	QWK		GN							names.740509
 防疫給水部	방역급수부	N130	VGt		GN							names.740510
 防禦山	방어산	N130	QCTVPl		GN							names.740511
@@ -119757,7 +119713,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 非常線の女	비상선의 여자	N130	QWK		GN							names.747945
 非常識	비상식	N110			GN							names.747946
 非常識の裏側	비상식의 이면	N110			GN							names.747947
-非常階段	비상 탈출구	N110			GN							names.747948
+非常階段	비상계단	N110			GN							names.747948
 非常階段	히조카이단	N110			GN							names.747949
 非常電話	비상전화	N110			GN						ひじょうでんわ	names.747950
 非常食	페이몬	N130	QPNVHn	Wb	GN							names.747951
@@ -119960,7 +119916,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鞨騏山	갈기산	N130	QCTVPl		GN							names.748152
 鞭	채찍	N110			GN							names.748153
 鞭の悪魔	채찍의 악마	N130	QPNVHn		GN							names.748154
-鞭打	편타	N130	QPNVHn	Wb	GN							names.748155
 韈	양말	N110			GN							names.748156
 韋一博	웨이이보	N130	QPNVHn	Wb	GN							names.748157
 韋一笑	위일소	N130	QPNVHn	Wb	GN						いいっしょう	names.748158
@@ -122786,7 +122741,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 風野太郎	카자노 타로	N130	QPNVHn		GN						かぜの たろう	names.751027
 風野灯織	카자노 히오리	N130	QPNVHn		GN						かざの ひおり	names.751028
 風野舞子	카자노 마이코	N130	QPNVHn		GN							names.751029
-風鈴	풍경	N130	QPNVHn	Wb	GN						ふうりん	names.751030
 風鈴あすみ	후린 아스미	N110			GN						ふうりんあすみ	names.751031
 風鈴アスミ	후우린 아스미	N130	QPNVHn		GN							names.751032
 風鈴高校	후린 고등학교	N110			GN						ふうりんこうこう	names.751033
@@ -123475,7 +123429,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 飯伏 銀	이부시 긴	N130	QPNVHn		GN						いぶし ぎん	names.751730
 飯伏将人	이부시 마사토	N130	QPNVHn		GN							names.751731
 飯伏幸太	이부시 코타	N110			GN						いぶしこうた	names.751732
-飯作	이이사쿠	N130	QPNVHn	Wa	GN						いいさく	names.751733
 飯作あゆり	이사쿠 아유리	N130	QPNVHn		GN							names.751734
 飯倉	이이쿠라	N130	QPNVHn	Wa	GN							names.751735
 飯倉 大樹	이이쿠라 다이키	N130	QPNVHn		GN						いいくらだいき	names.751736
@@ -124016,7 +123969,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 養母	양어머니	N110			GN							names.752272
 養洞駅	양동역	N130	QCTVPl		GN							names.752273
 養源駅	양원역	N130	QCTVPl		GN							names.752274
-養父	야부	N130	QPNVHn	Wa	GN							names.752275
 養父	양아버지	N110			GN							names.752276
 養父志乃夫	야부 시노부	N130	QPNVHn		GN							names.752277
 養父村	야부촌	N130	QCTVPl		GN							names.752278
@@ -134236,7 +134188,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鷲野圭子	와시노 케이코	N130	QPNVHn		GN							names.762586
 鷲野米太郎	와시노 요네타로	N130	QPNVHn		GN							names.762587
 鷲雄浩太	와시오 고타	N130	QPNVHn		GN						わしお こうた	names.762588
-鷹	매	N130	QPNVHn	Wb	GN						たか	names.762589
 鷹の団	매의 단	N130	QPNVHn		GN							names.762590
 鷹の爪団	매의 발톱단	N130	QPNVHn		GN						たかのつめだん	names.762591
 鷹の目のミホーク	쥬라큘 미호크	N130	QPNVHn		GN							names.762592
@@ -136939,7 +136890,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 黒月の神帝	흑월의 신제	N110			GN						こくげつのしんてい	names.765328
 黒月夜桜	쿠로츠키 요자쿠라	N130	QPNVHn		GN						くろつきよざくら	names.765329
 黒月大	쿠로즈키 다이	N110			GN						くろづきだい	names.765330
-黒服	검은 양복	N130	QPNVHn		GN						くろふく	names.765331
 黒服の男	맨 인 블랙	N130	QPNVHn		GN							names.765332
 黒服の男A	검은 옷의 남자 A	N130	QPNVHn		GN							names.765333
 黒服星人	검은 옷 성인	N130	QPNVHn		GN							names.765334
