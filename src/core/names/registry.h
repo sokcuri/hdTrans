@@ -89,6 +89,10 @@ public:
 
     // The accepted surfaces, in byte order.
     std::vector<std::string> Names();
+    // The surname and given name of each full name the document writes twice or more as one kanji run,
+    // each of two kanji or more with a person row of the name layer (古手梨花: 古手, 梨花; spec LEX-4829):
+    // the document means the person where it writes either alone.
+    std::vector<std::string> FullNameParts();
     // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
     std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
