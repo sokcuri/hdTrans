@@ -2,8 +2,8 @@
 rule	input	expected	kind	layer
 dict:jisjk:48526	「しっかりしてくれ、ジョージ！	has:조지	fix	lookup
 dict:jisjk:48526	レイチェル夫人は、ジョージの妻。	has:조지	fix	lookup
-dict:jisjk:366833	あら、あなたもジョー様の応援？	has:조님	fix	lookup
-dict:jisjk:366833	ジョー様のファンクラブに入らない？	has:조님	fix	lookup
+dict:jisjk:366833	あら、あなたもジョー様の応援？	has:조 님	fix	lookup
+dict:jisjk:366833	ジョー様のファンクラブに入らない？	has:조 님	fix	lookup
 dict:jisjk:48591	USSジョンストン、出撃！	has:존스턴	fix	lookup
 dict:jisjk:48591	USSジョンストン、出るわ！	has:존스턴	fix	lookup
 dict:jisjk:366553	「ジュリアン様……」	has:줄리안	fix	lookup

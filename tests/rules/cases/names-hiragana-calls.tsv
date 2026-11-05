@@ -7,8 +7,8 @@ constraint:cued-name	……つぐみ、悪い。	……츠구미, 미안하다.	
 constraint:cued-name	「く……つぐみ、そろそろ……っ」	「크……츠구미, 슬슬……」	fix	lookup
 constraint:cued-name	「みちる、待って」	「미치루, 기다려」	fix	lookup
 constraint:cued-name	「わたし、みちるです」	「저, 미치루입니다」	fix	lookup
-constraint:cued-name	「みちる様……」	「미치루님……」	fix	lookup
-constraint:cued-name	「ここをタップするんですよ、みちる様」	「여기를 탭하는 거예요, 미치루님」	fix	lookup
+constraint:cued-name	「みちる様……」	「미치루 님……」	fix	lookup
+constraint:cued-name	「ここをタップするんですよ、みちる様」	「여기를 탭하는 거예요, 미치루 님」	fix	lookup
 constraint:cued-name	「周防天音さんに松嶋みちるさん。それと入巣蒔菜さんと小嶺幸さんですよね？」	「스오 아마네 씨에게 마츠시마 미치루 씨. 그것과 이리스 마키나 씨와 고미네 사치 씨군요?」	fix	lookup
 constraint:cued-name	「さより、学校はもう慣れた？」	「사요리, 학교는 벌써 익숙해졌어?」	fix	lookup
 constraint:cued-name	ん？しおん、行けます、よ？	응? 시온, 갈 수 있어요?	fix	lookup

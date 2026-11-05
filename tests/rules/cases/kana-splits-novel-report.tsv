@@ -21,7 +21,7 @@ constraint:kakedashi-before-ta	ティラノサウルスが駆けだした。	티
 constraint:kakedashi-before-ta	修一はそう言って、音楽室の方向に駆けだした。	슈우이치는 그렇게 말해, 음악실의 방향으로 달리기 시작했다.	fix	lookup
 constraint:kakedashi-before-ta	駆けだしの冒険者	신출내기의 모험가	keep	lookup
 dict:lex:towaie-na	巨大とはいえ人間とほぼ同じ	거대하다고는 해도 인간과 거의 같다	fix	lookup
-dict:lex:towaie-na	ザイダイバの公爵家のリュカ様も変わり者とはいえ公爵家だ。	자이다이바의 공작가의 류카님도 괴짜라고는 해도 공작가다.	keep	lookup
+dict:lex:towaie-na	ザイダイバの公爵家のリュカ様も変わり者とはいえ公爵家だ。	자이다이바의 공작가의 류카 님도 괴짜라고는 해도 공작가다.	keep	lookup
 dict:lex:towaie-na	夏とはいえ寒い。	여름이라고는 해도 춥다.	keep	lookup
 constraint:verb-before-kurai	三つぐらい違った。	세 개 정도 달랐다.	fix	lookup
 constraint:verb-before-kurai	五歩くらいの距離	5보만한 거리	fix	lookup

@@ -40,7 +40,7 @@ dict:jisjk:342588	まるでシンシア様に見せ付けるような	has:신시
 dict:jisjk:342588	司令官様にご報告ですっ！	has:사령관님에게	fix	local
 dict:jisjk:342588	たびたびマリアローゼ様に苦言を呈されてもいる。	has:로제님에게	fix	local
 dict:jisjk:342433	提督様になられた	제독님이 되셨다	keep	local
-dict:jisjk:342588	準備ができたのならルア様に言うのだ。	has:루아님에게	keep	local
+dict:jisjk:342588	準備ができたのならルア様に言うのだ。	has:루아 님에게	keep	local
 dict:dialogue-senses:1	やめて！	그만해!	fix	local
 dict:dialogue-senses:1	……冷やかしはやめてくれ。	has:그만해 줘	fix	local
 dict:dialogue-senses:1	や、やめてよぉ！	has:그만해!	fix	local

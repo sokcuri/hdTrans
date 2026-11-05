@@ -976,8 +976,19 @@ bool ClippedCopy(const std::vector<ResolvedItem>& items, int i) {
 
 // Whether item i ends a node of items before end: it is the last, or a ClippedCopy whose っ ends
 // the node (だめ|っ 안돼 안돼).
+// Whether items[i] is a polite お or ご the rules emptied between a word and a kanji word that writes
+// something (田中さん お一人で: お before 一人で 혼자서); after a symbol the symbol's spacing holds
+// (“元”ご婚約者 “전”약혼자).
+bool EmptiedPrefix(const std::vector<ResolvedItem>& items, int i) {
+    return i > 0 && i + 1 < static_cast<int>(items.size()) && (items[i].surface == "お" || items[i].surface == "ご") &&
+           EntryText(items[i]).empty() && !EntryText(items[i + 1]).empty() && First(Code(items[i - 1])) != '6' &&
+           !items[i + 1].surface.empty() && IsKanji(FirstRune(items[i + 1].surface));
+}
+
+// Whether items[i] ends the word that ends before items[end]: the last item, or the one before a
+// clipping っ of a copy or before an emptied お or ご the word took on (田中さん|お 一人で).
 bool ClipsEnd(const std::vector<ResolvedItem>& items, int i, int end) {
-    return i + 1 == end || (i + 2 == end && ClippedCopy(items, i));
+    return i + 1 == end || (i + 2 == end && (ClippedCopy(items, i) || EmptiedPrefix(items, i + 1)));
 }
 
 }  // namespace
@@ -1447,9 +1458,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
         // the word after it.
         // So does a verb whose stem and ending the rules emptied (行こうと思って 가려고), and the
-        // clipping っ of a copy (ClippedCopy: 痛い|っ|…… 아팟……).
+        // clipping っ of a copy (ClippedCopy: 痛い|っ|…… 아팟……), and a polite お or ご the rules
+        // emptied before a word (田中さん お一人で 타나카 씨 혼자서).
         while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
                (dict::InClass(HDTRANS_CLASS("honorific.prepass"), items[nextIndex].surface) ||
+                (nextIndex == i + 1 && EmptiedPrefix(items, nextIndex)) ||
                 (nextIndex == i + 1 && ClippedCopy(items, i)) ||
                 (items[nextIndex].detailClass == DetailClass::Yougo && items[nextIndex].directIndex >= 0 &&
                  items[nextIndex].ending.text.empty()))) {
@@ -1585,6 +1598,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     if ((kind == '1' || mask) && (nextEntry == "씨" || nextEntry == "군" || nextEntry == "양")) {
         if (dict::InClass(HDTRANS_CLASS("honorific.prepass-spaced"), next.surface)) return Result(std::move(t), true);
+    }
+    // 님 after a person's name is written apart as 씨 is (오시즈 님, 타나카 님); after a common noun it
+    // makes one word (왕자님, 손님).
+    if (kind == '1' && Code(item).starts_with("13") && nextEntry == "님" &&
+        dict::InClass(HDTRANS_CLASS("honorific.prepass-spaced"), next.surface)) {
+        return Result(std::move(t), true);
     }
     // A noun of degree, time, listing, span or side read as a free noun after a word stands apart
     // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등, 회의 중, 왕가 측); 等 after a number is a rank (1등).

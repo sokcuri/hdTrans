@@ -90,8 +90,8 @@ dict:lex:4764:osoba-side	コンは今日１日 おそばで見ておりました
 dict:lex:4764:osoba-side	ご主人様が望む限り、アナベルはおそばを離れません	주인님이 바라는 한, 애나벨은 곁을 떠나지 않습니다	fix	local
 dict:lex:4764:osoba-side	皆様のおそばに置いてほしいんです。	여러분의 곁에 두어 줬으면 하겠습니다.	fix	local
 dict:lex:4764:osoba-side	本日は私花月がおそばでお手伝いさせていただきますね。	오늘은 저 풍류가 곁에서 도와 드릴게요.	fix	local
-dict:lex:4764:osoba-side	俺 ダミアン様のおそばにいられて 幸せでした	나 다미안님의 곁에 있을 수 있어 행복했습니다	fix	local
-dict:lex:4764:osoba-side	ああ… でも グレイ様のおそばにいたい…。	아… 하지만 그레이님의 곁에 있고 싶어….	fix	local
+dict:lex:4764:osoba-side	俺 ダミアン様のおそばにいられて 幸せでした	나 다미안 님의 곁에 있을 수 있어 행복했습니다	fix	local
+dict:lex:4764:osoba-side	ああ… でも グレイ様のおそばにいたい…。	아… 하지만 그레이 님의 곁에 있고 싶어….	fix	local
 dict:lex:4764:osoba-side	わかりません ですが私は おそばにいたいと思っています	모릅니다입니다만 저는 곁에 있고 싶다고 생각합니다	fix	local
 dict:lex:4764:osoba-side	おそば おいしかったね。 ああ あったまったのう。	!rule:dict:lex:4764:osoba-side	keep	local
 dict:lex:4764:osoba-side	やっと買えた おそばだったのに こぼれちゃって 悲しかった	!rule:dict:lex:4764:osoba-side	keep	local

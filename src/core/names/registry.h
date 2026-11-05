@@ -175,6 +175,10 @@ private:
     bool AdjectiveKanji(std::string_view k);
     bool GuessFallback(std::string_view t);
     bool OldFormWord(std::string_view t);
+    bool CoveredByWords(std::string_view s);
+    bool GarbledByWord(std::string_view s);
+    bool LayerFullName(std::string_view s);
+    bool HiraganaWord(std::string_view s);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
@@ -249,6 +253,9 @@ private:
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
     std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
+    std::map<std::string, int> kataUse_;                // whole katakana runs before a particle (spec LEX-4953)
+    std::map<std::string, int> kataSubject_;            // the uses of those runs before は or が
+    std::map<std::string, int> kataPlace_;              // and before に, へ or から
     std::map<std::string, int> agents_;                 // katakana runs that do a favour (AgentCue)
     std::map<std::string, DictFlags> flags_;
     std::map<std::string, Name> scores_;                // accepted names, valid while scoresValid_

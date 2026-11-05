@@ -313,7 +313,20 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     doc->verse.assign(doc->verseLines.begin(), doc->verseLines.end());
     for (const std::string& line : doc->verse) doc->key += std::string("\0verse\0", 7) + line;
 
-    doc->historical = names::HistoricalRows(snap, historical);
+    {
+        // A name the registry writes a row for keeps that reading over a list line's (宗哲 소테츠, not
+        // 소 테츠); a list line still reads a name the registry leaves to the words (浜姫 하마 히메).
+        std::set<std::string> written;
+        const std::string rows = r.Dict();
+        for (std::size_t at = 0; at < rows.size();) {
+            std::size_t end = rows.find('\n', at);
+            if (end == std::string::npos) end = rows.size();
+            const std::string_view row = std::string_view(rows).substr(at, end - at);
+            if (const std::size_t tab = row.find('\t'); tab != std::string_view::npos) written.emplace(row.substr(0, tab));
+            at = end + 1;
+        }
+        doc->historical = names::HistoricalRows(snap, historical, written);
+    }
     if (!doc->historical.empty()) doc->key += std::string("\0historical\0", 12) + doc->historical;
 
     if (names != nullptr && !names->packs.Empty()) {

@@ -154,7 +154,7 @@
 //= name.nickname-suffix	Endings of a nickname that follow a name of the name layer in the same run of kana, written as one name with it (ひよりん 히요린, かのちん 카노친, あゆやん 아유얀, トモすけ 토모스케; spec LEX-4821).
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
-//= honorific.prepass-spaced	Honorifics read 씨, 군 or 양 that are written apart from the noun before them (田中さん 다나카 씨, レイニ嬢 레이니 양).
+//= honorific.prepass-spaced	Honorifics read 씨, 군 or 양 that are written apart from the noun before them (田中さん 다나카 씨, レイニ嬢 레이니 양), and those read 님 written apart after a person's name (おしづ様 오시즈 님).
 //= name.title-ship	Ship types and ranks a ship's name follows (駆逐艦時雨, 軽巡「川内」, 戦艦、大和): the word after one is the ship's name (names::NameCues).
 //= name.title-person	Titles that a katakana name follows written right after them (聖女アヤメ, 勇者アレン).
 //= name.suffix-after	Words after a name that make it a name: a sister's title, a remodel number (時雨姉さん, 霞改二).
@@ -173,6 +173,11 @@
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
 //= name.person-clause-stop	What ends the clause of a subject for the person cues of spec LEX-4820: a condition, a cause, a quotation or a clause made a noun (菓子が出れば, 心が若いと言って, 世界が無数にあることを知ってた).
 //= name.personified-word	Common words of nature, the sky, the seasons and ideas that writers make laugh, speak or look like a person (未来が微笑む, 向日葵が笑う, 運命が囁く): a person cue of spec LEX-4820 does not make them names; an honorific or a name the document carries still does.
+//= name.call-word	Words that call someone, said before a space and a name called alone (おい 航太…, じゃあな 匡｡; spec LEX-4953).
+//= name.o-word	Words said with お that start no old woman's name before an honorific: kin, role and plain words (おとうさま, おにいちゃん, おひめさま, おちびちゃん; spec LEX-4953).
+//= name.katakana-use-after	Particles after a whole katakana run that count a use of it as a word of the document (オレーリアは, ヤーナも; spec LEX-4953).
+//= name.katakana-subject-after	Particles after a katakana run that make it a subject or a topic, a use as a person (オレーリアは; spec LEX-4953).
+//= name.katakana-place-after	Particles after a katakana run that make it a place or a thing one goes to or acts on (フラーゼルに行く, トリマキを; spec LEX-4953).
 //= name.side-word	Single kanji of a side or a position (左, 右, 上, 下, 前, 後) that no person cue makes a name, though the name layer has a person row of them (左が言った 왼쪽이 말했다; spec LEX-4832).
 //= char.ascii-alnum	ASCII digits and letters: a kanji right after one in its token follows a number or a unit (10cm砲).
 //= sign.final-vowel	Signs read as a word whose Korean reading ends in a vowel: units and currencies (° 도, ℃ 도, ㎝ 센티미터, € 유로, $ 달러) and letters and numbers written as one symbol (② 이, α 알파); Roman numerals, read either way (Ⅲ 삼, 쓰리), are left out. A particle after one takes its vowel form (100℃였다).
@@ -2249,6 +2254,49 @@ name.personified-word	朝焼け
 name.personified-word	満月
 name.personified-word	黄昏
 name.personified-word	夕暮れ
+name.call-word	おい
+name.call-word	おーい
+name.call-word	ねえ
+name.call-word	ねぇ
+name.call-word	なあ
+name.call-word	じゃあな
+name.call-word	じゃあね
+name.call-word	またな
+name.call-word	またね
+name.call-word	じゃな
+name.o-word	おとう
+name.o-word	おかあ
+name.o-word	おばあ
+name.o-word	おじい
+name.o-word	おにい
+name.o-word	おねえ
+name.o-word	おひめ
+name.o-word	おうじ
+name.o-word	おかみ
+name.o-word	おくさ
+name.o-word	おまわ
+name.o-word	おしょ
+name.o-word	おてつ
+name.o-word	おとな
+name.o-word	おばか
+name.o-word	おおか
+name.o-word	おちび
+name.o-word	おじじ
+name.o-word	おばば
+name.katakana-use-after	は
+name.katakana-use-after	が
+name.katakana-use-after	の
+name.katakana-use-after	を
+name.katakana-use-after	に
+name.katakana-use-after	へ
+name.katakana-use-after	と
+name.katakana-use-after	も
+name.katakana-use-after	や
+name.katakana-subject-after	は
+name.katakana-subject-after	が
+name.katakana-place-after	に
+name.katakana-place-after	へ
+name.katakana-place-after	を
 name.side-word	左
 name.side-word	右
 name.side-word	上
@@ -2446,6 +2494,8 @@ honorific.prepass-spaced	くん
 honorific.prepass-spaced	君
 honorific.prepass-spaced	氏
 honorific.prepass-spaced	嬢
+honorific.prepass-spaced	様
+honorific.prepass-spaced	さま
 
 kana.drawn-out	ぁ
 kana.drawn-out	ぃ

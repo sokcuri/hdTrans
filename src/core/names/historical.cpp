@@ -676,7 +676,8 @@ HistoricalLine ReadHistoricalLine(const dict::Snapshot& snap, std::string_view l
     return out;
 }
 
-std::string HistoricalRows(const dict::Snapshot& snap, std::span<const HistoricalLine* const> lines) {
+std::string HistoricalRows(const dict::Snapshot& snap, std::span<const HistoricalLine* const> lines,
+                           const std::set<std::string>& readElsewhere) {
     std::map<std::string, HistoricalReading> found;
     std::set<std::string> surnames, strong;
     for (const HistoricalLine* line : lines) {
@@ -689,6 +690,7 @@ std::string HistoricalRows(const dict::Snapshot& snap, std::span<const Historica
     for (const HistoricalLine* line : lines) {
         for (const Runes& run : line->listed) {
             for (const auto& [key, value] : ListedName(snap, run, surnames)) {
+                if (readElsewhere.contains(key)) continue;
                 if (run.size() > found[key].run) found[key] = {value, run.size()};
             }
         }
@@ -709,7 +711,7 @@ std::string HistoricalNames(const dict::Snapshot& snap, std::span<const std::str
     for (const std::string& line : lines) facts.push_back(ReadHistoricalLine(snap, line));
     std::vector<const HistoricalLine*> views;
     for (const HistoricalLine& line : facts) views.push_back(&line);
-    return HistoricalRows(snap, views);
+    return HistoricalRows(snap, views, {});
 }
 
 std::string_view CommonNamePrefix(std::string_view prefix) {
