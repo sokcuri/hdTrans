@@ -96,7 +96,7 @@ segment:datte-space	今日 協力するのだって 自分のためよ。	오늘
 segment:datte-space	おまけに せんじ薬だと！？ 何だって 素人が 勝手に診断して 勝手に投薬するんだ！！	게다가 달인 약이라고!? 뭐라고 아마추어가 마음대로 진단해 마음대로 투약하는 거야!!	keep	segment
 cx:datte-quote:5	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	rewrites
 cx:datte-quote:5	それだって君が言う 人の命を弄んだ結果だろ？	그것도 네가 말하는 사람의 생명을 희롱한 결과지?	keep	rewrites
-cx:datte-quote:5	先生 こっちだって	선생님 여기래	keep	rewrites
+cx:datte-quote:5	先生 こっちだって	선생님 나도 마찬가지야	keep	rewrites
 cx:datte-quote:5	蒔奈が帰り道はこっちだって言うから信用したのに	시내가 돌아가는 길은 여기라고 말하니까 신용했는데	keep	rewrites
 cx:datte-quote:5	それだって思い出に変わりはないでしょう	그것도 추억에 변함은 없을 거예요	keep	rewrites
 cx:datte-quote:5	こっちだってな 毎日 我慢してんだ お前に！	여기도매일 참는 거야 너에게!	keep	rewrites

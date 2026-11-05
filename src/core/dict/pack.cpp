@@ -131,6 +131,12 @@ std::string CompileColloc(std::string_view pattern, std::string_view target, std
                userdict::internal::Quote(pattern.substr(brace, close == std::string_view::npos ? close : close - brace + 1));
     }
     c.slot = open != std::string_view::npos;
+    // ^…$ around the pattern: an utterance of its own (^待った$)
+    if (pattern.starts_with('^') && pattern.ends_with('$')) {
+        if (c.slot) return "an utterance pattern (^…$) has no slot";
+        c.anchored = true;
+        pattern = pattern.substr(1, pattern.size() - 2);
+    }
     if (!c.slot) {
         for (const std::string_view one : Split(pattern, '|'))
             if (!one.empty()) c.befores.emplace_back(one);

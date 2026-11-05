@@ -21,7 +21,7 @@ normalize:dialect-copula	これは 壊れ物やけん 後でよかね。	이것�
 normalize:dialect-copula	それが おかしいやないか ウッ…	그것이 이상하지 않은가 윽…	fix	normalize
 normalize:dialect-copula	これ お父様に買ってもろた 洋服やね｡ そう｡	이것아버님이 사준 옷이구나. 그래.	fix	normalize
 normalize:dialect-cause	この際やき聞きますけんど 嵩さんは どういて いっぺんも お姉ちゃんに気持ちをぶつけんがですか？	이참에 태워 듣는데요 타케루 씨는 어떻게 있어 한번도 언니에게 기분을 부딪치지 않아가 말입니까?	fix	normalize
-normalize:dialect-cause	やかましいわ コラ はよ開けんかい コラ！	까다로워 코라 빨리 열어라 코라!	fix	normalize
+normalize:dialect-cause	やかましいわ コラ はよ開けんかい コラ！	시끄러워 코라 빨리 열어라 이놈!	fix	normalize
 normalize:dialect-cause	私は あの子を 信じてるだけですさかい｡	저는 그 아이를 믿고 있을 뿐이니까.	fix	normalize
 normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	안심해라 틴타에는 입다물고 둘 테니까	fix	normalize
 normalize:dialect-cause	ゆうべ 夜中に大きな声がするさかい	어젯밤 한밤중에 큰 목소리가 들리니까	fix	normalize
@@ -58,7 +58,7 @@ normalize:dialect-adj	茨田さんに言われたこと やはり 気になり�
 normalize:dialect-adj	絶対行くか！ わいは 絶対行かんからな！	절대 갈까! 나는 절대 가지 않으니까!	fix	normalize
 normalize:dialect-adj	“男ん子やなかね もう みっともなか！”って—	“남자자이네 돈 이제 보기 흉해!”라고—	fix	normalize
 normalize:dialect-adj	そげんしよかね	그렇게 해돈	fix	normalize
-normalize:dialect-adj	やかましか！ 日の本一の嫁の自慢をして ないが悪か！	까다로워! 일본1의 아내의 자랑을 하지 않지만 악인가!	fix	normalize
+normalize:dialect-adj	やかましか！ 日の本一の嫁の自慢をして ないが悪か！	시끄러워! 일본1의 아내의 자랑을 하지 않지만 악인가!	fix	normalize
 normalize:dialect-adj	まんまとしおりちゃんと入れ替わったっちゅうわけかよ	감쪽같이 서표 제대로 바뀌었다고 하는 건가	fix	normalize
 normalize:dialect-adj	《よかよ》	《좋아》	fix	normalize
 normalize:dialect-adj	美しかもんは 分解しても美しか	미 게다가 는 분해해도 아름답다	fix	normalize
@@ -84,7 +84,7 @@ normalize:dialect-order	頑張れ タカシ 抵抗せえよ	힘내라 타카시 
 normalize:dialect-order	ようし よくやった ２人とも斬り捨てい！	도록 해 잘 한 2명 모두 버림!	fix	normalize
 normalize:dialect-order	ママ 良子の家に電話せえ	엄마 료우코의 집에 전화해라	fix	normalize
 normalize:dialect-order	起きんかい この死に損ない！	일어나라 이 죽다 만 놈!	fix	normalize
-normalize:dialect-order	じゃかあしい！ お前 この子供服 何が気に入って着てんだよ！	까다로워! 너 이 아동복 무엇이 마음에 들어 입는 거야!	fix	normalize
+normalize:dialect-order	じゃかあしい！ お前 この子供服 何が気に入って着てんだよ！	시끄러워! 너 이 아동복 무엇이 마음에 들어 입는 거야!	fix	normalize
 normalize:dialect-order	もう なんでもええから はよ準備せえ！	이제 뭐든 좋으니까 빨리 준비해라!	fix	normalize
 normalize:dialect-order	前進っ、始めい！	전진, 시작해라!	fix	normalize
 normalize:dialect-order	攻めは任せい！ えっ…。	공격은 맡겨라! 어….	fix	normalize

@@ -1,6 +1,6 @@
 # 규칙: LEX-3847
 rule	input	expected	kind	layer
-cx:genki-greeting:10	よお！元気か？	요오! 잘 지내?	fix	rewrites
+cx:genki-greeting:10	よお！元気か？	여어! 잘 지내?	fix	rewrites
 cx:genki-greeting:10	パパとママは元気？	아빠와 엄마는 잘 지내?	fix	rewrites
 cx:genki-greeting:10	ねえねえねえ、提督、今日も元気？	있잖아 있잖아 있잖아, 제독, 오늘도 잘 지내?	fix	rewrites
 cx:genki-greeting:20	よう 四宮 元気か？	요우 시노미야잘 지내?	fix	rewrites

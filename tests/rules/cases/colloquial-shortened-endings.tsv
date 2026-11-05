@@ -13,7 +13,7 @@ normalize:question-kai	後ろの方々はお仲間ですかい？	뒤의 분들�
 normalize:question-kai	ちゃんとやってるかい？	제대로 하고 있어?	keep	normalize
 normalize:question-kai	強さの秘密を知ってるかい？	강함의 비밀을 알고 있어?	keep	normalize
 normalize:question-kai	ウィスキーで一杯やるかい？	위스키로 한잔 할까?	keep	normalize
-normalize:question-kai	よお！ 元気してるかい、先生？	요오! 잘 지내고 있어, 선생님?	fix	normalize
+normalize:question-kai	よお！ 元気してるかい、先生？	여어! 잘 지내고 있어, 선생님?	fix	normalize
 normalize:question-kai	お元気でやってますかい？	건강해 합니까?	fix	normalize
 normalize:question-kai	先生も食べるかい？	선생님도 먹을까?	keep	normalize
 normalize:question-kai	「佐藤くんかい？」	「사토 군이야?」	keep	normalize
