@@ -47,3 +47,8 @@ normalize:old-form	蟲の知らせだ	has:불길한 예감	fix	normalize
 normalize:old-form	この兎澤家に 代々絶えず続いてきたが	lacks:토끼	keep	normalize
 normalize:old-form	蟲を殺す話は もうたくさんだ	has:벌레를 죽이는	keep	normalize
 normalize:old-form	ま この家に 蟲がいないわけがないか	has:벌레가 없을	keep	normalize
+normalize:old-form	キラキラ光る 空には未來	has:하늘에는 미래	fix	normalize
+normalize:old-form	未來ちゃん	미라이짱	keep	normalize
+normalize:old-form	雲龍型航空母艦、雲龍、推参しました。	has:운류급	keep	normalize
+normalize:old-form	ここの書物が ただの蟲封じ 指南書ではないこと	has:벌레 봉인	fix	normalize
+normalize:old-form	おおお、虫封じ？だっけ？	has:경기를 막는 부적	keep	normalize

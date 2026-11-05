@@ -391,8 +391,30 @@ bool OldFormHeld(const void* context, std::string_view line, size_t at, size_t e
     for (int back = 0;; back++) {
         for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
             if (start + c.source.size() < end) continue;
-            // A name holds it as written (創眞, 両國, 未來 of a person).
-            if (name(c)) return true;
+            // A name holds it as written (創眞, 両國). A person's name that is a common word in the new form (未來
+            // 未来) holds it only with a cue of a person: an honorific or a speaker's bracket after it, or a name the
+            // document has learned (未來ちゃん 미라이짱; 輝く未來へ 미래로).
+            if (name(c)) {
+                const bool person = c.codes->sem.Text().starts_with("QPN");
+                if (!person || spelling.empty()) return true;
+                const std::string respelled = std::string(line.substr(start, at - start)) + std::string(spelling) +
+                                              std::string(line.substr(end, start + c.source.size() - end));
+                bool word = false;
+                for (const dict::Candidate& n : Find(d, respelled).list) {
+                    if (n.source == respelled && !nameRow(n) && !Grammar(n)) word = true;
+                }
+                const std::string_view after = line.substr(start + c.source.size());
+                const bool cue = dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), after) > 0 || after.starts_with("「") ||
+                                 after.starts_with("『") || after.starts_with("：") || after.starts_with(":") ||
+                                 (d.line != nullptr && d.line->named != nullptr && d.line->named->contains(std::string(c.source)));
+                // A common word spelled the same old way (雲龍 운룡) keeps the old form as well.
+                bool common = false;
+                for (const dict::Candidate& o : Find(d, line.substr(start)).list) {
+                    if (o.source == c.source && !nameRow(o) && !Grammar(o)) common = true;
+                }
+                if (!word || cue || common) return true;
+                continue;
+            }
             // A word that the new form makes reach further, from this start or an earlier one (有效 of 有效期限 as
             // 有効期限, 未來 as 未来).
             if (!spelling.empty()) {
