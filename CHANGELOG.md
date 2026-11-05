@@ -2,6 +2,10 @@
 
 ## [0.9.0](https://github.com/sokcuri/hdTrans/compare/v0.8.4...v0.9.0) (2026-11-05)
 
+### 라이선스 변경
+
+라이선스를 MPL-2.0에서 AGPL-3.0-only로 바꿨습니다. 자세한 내용은 README의 라이선스 절을 참고하세요.
+
 
 ### Features
 
