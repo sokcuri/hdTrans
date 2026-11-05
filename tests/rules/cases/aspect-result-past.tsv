@@ -8,11 +8,12 @@ analysis:result-past	司令官、私を呼んだ？ 準備はできてるわ。	
 analysis:result-past	ポケットに穴が できてるんだ	has:구멍이 생겼어	fix	analysis
 analysis:result-past	「ああ、絵本研究会の話だっけ。準備できてるよ」	has:준비 다 됐어	fix	analysis
 analysis:result-past	お風呂の用意できてるから、入れるなら先にお風呂に入ってて	has:준비 다 되었으니	fix	analysis
-analysis:result-past	「あれ、もうみんな来てる」	has:모두 왔어	fix	analysis
+analysis:result-past	「あれ、もうみんな来てる」	has:벌써 모두 왔어	fix	analysis
 analysis:result-past	ああ、三人ともとっくに来てるよ。	has:진작 왔어	fix	analysis
-analysis:result-past	彼はもう帰ってる	has:돌아갔다	fix	analysis
+analysis:result-past	彼はもう帰ってる	has:벌써 돌아갔다	fix	analysis
 analysis:result-past	もう 来てるかもしれないわ	has:와 있을지도	keep	analysis
 analysis:result-past	横から来てるよ	has:오고 있어	keep	analysis
 analysis:result-past	「必死にやれるってことが、集中できてるってことじゃないよ」	has:집중할 수 있다는	keep	analysis
 analysis:result-past	ワタシの心と体は、毎日ヒカルの愛情でできてる	lacks:되었다	keep	analysis
 analysis:result-past	うん。もう死んでる	has:죽어 있다	keep	analysis
+analysis:result-past	もう行こう	has:이제 가자	keep	analysis

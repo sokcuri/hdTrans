@@ -1900,16 +1900,16 @@ bool HonorificAspect(Flusher& f, const Item* it) {
     return it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
-// Whether もう, 既に, すでに or とっくに stands before verb item v in its clause.
-bool AlreadyBefore(const Item* v) {
+// The もう, 既に, すでに, とっくに or もはや that stands before verb item v in its clause, or null.
+Item* AlreadyBefore(Item* v) {
     static constexpr std::string_view kAlready[] = {"もう", "既に", "すでに", "とっくに", "もはや"};
-    for (const Item* p = v->prev; p != nullptr; p = p->prev) {
+    for (Item* p = v->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
-        if (s.empty() || s == "、" || s == "。" || s == "「" || s == "」" || s == "！" || s == "？" || s == ",") return false;
-        if (InSet(kAlready, s)) return true;
-        if (p->detail->Yougo()) return false;  // another predicate begins a clause of its own
+        if (s.empty() || s == "、" || s == "。" || s == "「" || s == "」" || s == "！" || s == "？" || s == ",") return nullptr;
+        if (InSet(kAlready, s)) return p;
+        if (p->detail->Yougo()) return nullptr;  // another predicate begins a clause of its own
     }
-    return false;
+    return nullptr;
 }
 
 }  // namespace
@@ -1957,7 +1957,8 @@ void ResultState(Flusher& f) {
         if (verb == "来" && FlowBefore(v)) continue;
         // 来る and 帰る after もう, 既に or とっくに in their clause have come or gone already: the past (もう来てる
         // もう 왔어, 彼はもう帰ってる 벌써 돌아갔어; spec GRM-21), not the act going on.
-        const bool already = (verb == "来" || verb == "来る" || verb == "帰") && v->detail->record == 0 && AlreadyBefore(v);
+        Item* alreadyWord = v->detail->record == 0 ? AlreadyBefore(const_cast<Item*>(v)) : nullptr;
+        const bool already = (verb == "来" || verb == "来る" || verb == "帰") && alreadyWord != nullptr;
         // What a thing is made of in で (愛情でできている) is no change that came to pass.
         const bool madeOf = (verb == "でき" || verb == "出来") && v->prev != nullptr && v->prev->group->surface.ends_with("で");
         const bool past = already || (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
@@ -1994,6 +1995,11 @@ void ResultState(Flusher& f) {
         if (past && rest.starts_with(" 있") && !(already && guess)) {
             if (const std::string ending = PastOfVerbEnding(ExistentialToVerb(f, rest.substr(1))); !ending.empty()) {
                 it->AssignDirectSlot(it->DirectIndex(), ending);
+                // もう before the past result is already, 벌써 (もうみんな来てる 벌써 다 왔어), not 이제.
+                if (alreadyWord != nullptr && alreadyWord->group->surface == "もう" && alreadyWord->selected >= 0 &&
+                    alreadyWord->EntryText(alreadyWord->selected) == "이제") {
+                    alreadyWord->AssignEntrySurface(alreadyWord->selected, "벌써");
+                }
                 continue;
             }
         }
