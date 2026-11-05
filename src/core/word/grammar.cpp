@@ -627,9 +627,16 @@ bool RespectfulReading(const Item* it, bool transitive, bool intransitive = fals
         const std::string_view s = p->group->surface;
         if (s.starts_with("によ")) {
             return false;
+        } else if ((s.starts_with("誰") || s.starts_with("だれ") || s.starts_with("何者")) && (s.ends_with("に") || s.ends_with("には") || s.ends_with("から"))) {
+            return false;
         } else if (s == "に" || s == "には" || s == "から") {
             const Item* a = p->prev;
             if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
+            // Someone (誰かに入られた, 何者かに) is a doer too.
+            if (a != nullptr && (a->group->surface.starts_with("誰") || a->group->surface.starts_with("だれ") ||
+                                 a->group->surface.starts_with("何者"))) {
+                return false;
+            }
             // An intransitive verb's agent may be any doer, a thief too (賊に入られた).
             if (intransitive && a != nullptr && !a->group->entries.empty()) {
                 const std::string_view attr = a->Attr(std::max(a->selected, 0));
