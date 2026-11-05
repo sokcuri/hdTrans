@@ -1,9 +1,11 @@
 // Table tests of the normalising rewrites, one table per rewrite, and of the whole
 // sequence of Normalize.
+#include <atomic>
 #include <cstdlib>
 #include <set>
 #include <string>
 #include <string_view>
+#include <thread>
 #include <vector>
 
 #include "core/dict/classes.h"
@@ -195,6 +197,28 @@ HD_TEST(pipeline_normalize_canonical_kana_before_ruby_bounds) {
         HD_CHECK_EQ(normalized, Normalize(canonical[i], ctx));
         HD_CHECK_EQ(Normalize(normalized, ctx), normalized);
     }
+}
+
+// RewriteSlurred reads the lookups of its own call in RuContraction, also while other threads rewrite with other
+// lookups on their stacks: one that knows the verb 喋る reads 喋んの as 喋るの, one that knows no verb keeps it.
+HD_TEST(pipeline_rewrite_slurred_threads) {
+    std::atomic<int> wrong{0};
+    std::vector<std::thread> threads;
+    for (int t = 0; t < 8; t++) {
+        threads.emplace_back([t, &wrong] {
+            const bool knows = t % 2 == 0;
+            RunLookup runs;
+            runs.verbForm = knows ? +[](const void*, std::string_view) { return true; }
+                                  : +[](const void*, std::string_view) { return false; };
+            runs.dictionaryVerb = runs.verbForm;
+            const std::string want = knows ? "喋るの" : "喋んの";
+            for (int i = 0; i < 2000; i++) {
+                if (RewriteSlurred("喋んの"sv, runs) != want) wrong++;
+            }
+        });
+    }
+    for (std::thread& th : threads) th.join();
+    HD_CHECK_EQ(wrong.load(), 0);
 }
 
 HD_TEST(pipeline_join_nasai) {

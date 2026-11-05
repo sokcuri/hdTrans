@@ -1351,7 +1351,9 @@ bool TeKoNee(std::string_view s, size_t pos, Match& m) {
 // the verb in its dictionary form. Only where the ん can be no other: a godan verb in る of one kanji before の
 // (喋んの; not 死んだ, 飲んじゃ, the past and the て form of godan verbs in む, ぶ, ぬ), and する said す. The ん after an
 // ichidan stem (疲れんだろ, 出来んのか) is as often the old or western negative, so it stays.
-const RunLookup* ruContractionRuns = nullptr;
+// The lookups of the RewriteSlurred call that RuContraction reads, set around its scan. Each thread sets its own:
+// a shared pointer would let one thread read the lookups of another call after it has returned.
+thread_local const RunLookup* ruContractionRuns = nullptr;
 bool RuContraction(std::string_view s, size_t pos, Match& m) {
     const RunLookup* runs = ruContractionRuns;
     if (runs == nullptr || runs->verbForm == nullptr || runs->dictionaryVerb == nullptr || pos == 0) return false;
@@ -1387,10 +1389,15 @@ std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
     std::string text = ReplaceAll(in, SpokenSpelling, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, NakyaDa, [](const Match&) { return std::string("なきゃいけない"); });
     text = ReplaceAll(text, TeKoNee, [](const Match& m) { return Cat({m.group[1], "こない"}); });
-    ruContractionRuns = &runs;
-    text = ReplaceAll(text, RuContraction, [](const Match& m) { return std::string(m.group[1]); });
-    ruContractionRuns = nullptr;
-    return text;
+    // Set for this scan only and put back after it, also when the scan throws.
+    struct Scope {
+        const RunLookup* saved;
+        explicit Scope(const RunLookup* r) : saved(ruContractionRuns) { ruContractionRuns = r; }
+        ~Scope() { ruContractionRuns = saved; }
+        Scope(const Scope&) = delete;
+        Scope& operator=(const Scope&) = delete;
+    } scope(&runs);
+    return ReplaceAll(text, RuContraction, [](const Match& m) { return std::string(m.group[1]); });
 }
 
 std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contracted) {
