@@ -941,7 +941,7 @@ HD_TEST(pipeline_respell_old_forms) {
 HD_TEST(pipeline_respell_iteration_marks) {
     // Stand-ins for the dictionary: 時々 is a word, 星 a noun of its own.
     const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
-        return line.substr(at).starts_with("時々");
+        return line.substr(at).starts_with("時々") || line.substr(at).starts_with("等々");
     };
     const WordHoldsRun nouns = [](const void*, std::string_view line, size_t at, size_t end) {
         return line.substr(at, end - at) == "星";
@@ -959,6 +959,11 @@ HD_TEST(pipeline_respell_iteration_marks) {
         {"「ゝ」"sv, "「ゝ」"sv},
         {"ゝ"sv, "ゝ"sv},
         {"これは々です"sv, "これは々です"sv},
+        {"毎日々々"sv, "毎日毎日"sv},
+        {"一枚々々丁寧に"sv, "一枚一枚丁寧に"sv},
+        {"馬鹿々々しい"sv, "馬鹿馬鹿しい"sv},
+        {"人々々"sv, "人人人"sv},
+        {"鉢等々々"sv, "鉢等々々"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(RespellIterationMarks(c.in, words, nouns, nullptr), std::string(c.want));
 }
