@@ -184,8 +184,10 @@ std::string WriteKinTerms(std::string_view line, bool female, WordHoldsRun holds
     // お兄 alone is a sister's word: お兄ちゃん, 오빠, unless the line is a man's speech.
     if (!male) out = ReplaceBare(out, "お兄", "お兄ちゃん");
     // The words the dictionary reads for the other sex switch only on a clear cue (spec LEX-4619):
-    // a woman's speech with no man's or rough speech, or 俺 or ぜ with no woman's speech.
-    if ((female || womanCue) && !male && !rough) {
+    // a woman's speech on the line itself (never the document's female flag, so narration and
+    // neutral lines keep the dictionary reading) with no man's or rough speech, or 俺 or ぜ with no
+    // woman's speech.
+    if (womanCue && !male && !rough) {
         for (const KinTerm& k : kSisterKinTerms) out = ReplaceWord(out, k.ja, k.ko, holds, context);
         out = ReplaceBare(out, "兄", "お兄ちゃん");
     } else if (HasAny(line, kPlainMaleSpeech) && !woman) {

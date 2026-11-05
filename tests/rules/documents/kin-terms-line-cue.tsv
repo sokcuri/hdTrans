@@ -1,0 +1,27 @@
+# 규칙: LEX-4619
+rule	input	expected	kind	layer
+normalize:kin-terms	「あたしも行くわよ」\n……あ、兄貴ぃー。	「나도 갈 거야」\n……아, 형~.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nあ、あのぅ……、兄貴……そいつはちょっと無理なんじゃ……	「나도 갈 거야」\n그, 그……, 형……그 녀석은 조금 무리라면……	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nあっ、兄貴！やめましょうよー。いくら何でもそればっかりは。	「나도 갈 거야」\n앗, 형! 그만둡시다~. 아무리 그래도 그것뿐은.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nようやく兄を引き離して一人になれた時間。	「나도 갈 거야」\n드디어 형을 갈라 놓아 혼자가 될 수 있었던 시간.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nイカれた兄貴を 鎖でつないでろ	「나도 갈 거야」\n고장 난 형을 쇠사슬로 이어라	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n両親と兄が明確な毒。兄は気持ち悪い。これを抑えておいてください。	「나도 갈 거야」\n부모님과 형이 명확한 독. 형은 기분 나쁘다. 이것을 억제해 둬 주세요.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄さん、お茶こぼしてる	「나도 갈 거야」\n형님, 차 흘리고 있다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄さんとは関係ない	「나도 갈 거야」\n형님과는 관계없다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄なんて特徴のない顔のくせに人のことを言えたものではないのに。	「나도 갈 거야」\n형 같은 건 특징이 없는 얼굴 주제에 남 말 할 수 있는 것은 아닌데.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄は気持ち悪い。	「나도 갈 거야」\n형은 기분 나쁘다.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄貴、ニュースっすよ。ニュース！	「나도 갈 거야」\n형, 뉴스예요. 뉴스!	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄貴と結婚したら 悲惨な数ヶ月か数年か	「나도 갈 거야」\n형과 결혼하면 비참한 수개월인가 수년인가	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄貴は気にしないと思った	「나도 갈 거야」\n형은 신경 쓰지 않는다고 생각했다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n半狂乱で暴れてみたものの、兄は空手の有段者で、逆にぼっこぼこにされた。	「나도 갈 거야」\n반쯤 미친 상태로 날뛰어 보았지만, 형은 가라테의 유단자로, 반대로 흠씬 두들겨 맞았다.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n双子だが兄とは外見は似ていない。銀髪碧眼の野性的な風貌の美形。	「나도 갈 거야」\n쌍둥이이지만 형과는 외모는 비슷하지 않다. 은발벽안의 야성적인 풍모의 미형.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n最近の兄は スマホばっか気にして ニヤニヤしながらメッセージ送ってます	「나도 갈 거야」\n최근의 형은 스마트폰뿐 신경 써 히죽히죽하면서 메시지 보내고 있습니다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n馬鹿な！それは酷い、酷すぎる。兄として失格と言っていい	「나도 갈 거야」\n말도 안돼! 그것은 심한, 너무 가혹하다. 형으로서 실격이라고 해도 된다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄３人が戦死しー ４人目が助け出される	「나도 갈 거야」\n형 3명이 전사해~ 4번째가 구해 내진다	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n「やめろって言ってるのよ──そんなことしても、兄は帰ってこない！」	「나도 갈 거야」\n「그만두라고 해──그런 일 해도, 오빠는 돌아오지 않아!」	keep	normalize
+normalize:kin-terms	「やめろって言ってるのよ──そんなことしても、兄は帰ってこない！」\n兄は気持ち悪い。	「그만두라고 해──그런 일 해도, 오빠는 돌아오지 않아!」\n형은 기분 나쁘다.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nだがよ、兄さん、世の中そんな甘くねぇ、わかるよな。タダで通す訳にはいかねえのよ。	「나도 갈 거야」\n하지만, 형님, 세상 그렇게 만만하지 않다, 알지. 공짜로 통할 수는 없어.	keep	normalize
+normalize:kin-terms	「あたしも行くわよ」\nお兄はできる子！やればできる！	「나도 갈 거야」\n오빠는 할 수 있는 아이! 하면 할 수 있다!	keep	normalize
+normalize:kin-terms	「あたしも行くわよ」\nお姉ちゃん、宿題手伝ってくれよ。俺、数学が苦手なんだ。	「나도 갈 거야」\n누나, 숙제 도와 줘. 나, 수학에 약하다.	keep	normalize
+normalize:kin-terms	「あたしも行くわよ」\n姉さん、俺が駅まで送るよ。	「나도 갈 거야」\n누나, 내가 역까지 배웅할게.	keep	normalize
+normalize:kin-terms	「あたしも行くわよ」\n兄弟の会話だが、あたしは知らない	「나도 갈 거야」\n형제의 대화이지만, 나는 모른다	keep	normalize
