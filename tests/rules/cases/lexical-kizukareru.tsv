@@ -23,7 +23,7 @@ dict:passive:6	敵に気付かれることのないように、他の隊員に�
 dict:passive:6	魔法を使うとお父さまに気付かれるから、	has:아버님에게 들키니까	fix	defaults
 dict:passive:3	気づかれたくない。	들키고 싶지 않다.	keep	defaults
 dict:passive:3	彼は異変に気づいた。	has:눈치챘다	keep	defaults
-dict:passive:4	まだ誰も気付いていない。	아직 아무도 깨닫지 못했다.	keep	defaults
+dict:passive:4	まだ誰も気付いていない。	아직 아무도 알아차리지 못했다.	keep	defaults
 dict:passive:5	彼女の変化に気づいた。	has:눈치챘다	keep	defaults
 pack:clause-patterns:3	先生は気づかれましたか。	선생님은 눈치채셨습니까.	fix	voice
 pack:clause-patterns:4	気付かれましたか？	깨달으셨습니까?	keep	voice
