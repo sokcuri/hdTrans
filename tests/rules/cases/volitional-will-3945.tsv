@@ -1,0 +1,61 @@
+# 규칙: GRM-3945
+rule	input	expected	kind	layer
+cx:volitional-will:20	ハァ… どこ行こう	하아… 어디 가지	fix	rewrites
+cx:volitional-will:20	綾乃ちゃん先からどうしたんやろう	아야노짱처에서 어떻게 한 하지	fix	rewrites
+cx:volitional-will:10	東京からどこへ行こう？	도쿄에서 어디에 갈까?	fix	rewrites
+cx:volitional-will:20	なにを恐れる必要がござろう	무엇을 무서워할 필요가 있지	fix	rewrites
+cx:volitional-will:10	どういう比率で始めよう？	어떤 비율로 시작할까?	fix	rewrites
+cx:volitional-will:20	う～ 何て言おう…	으으~ 뭐라고 말하지…	fix	rewrites
+cx:volitional-will:20	何て返信しよう…	뭐라고 답장하지…	fix	rewrites
+cx:volitional-will:20	え どこやろう	네 어디 하지	fix	rewrites
+cx:volitional-will:20	貴様がトーナメントの1回戦誰に当たろう	네놈이 토너먼트의 1회전수에 해당되지	fix	rewrites
+cx:volitional-will:10	ど… どこ行こう？	어… 어디 갈까?	fix	rewrites
+cx:volitional-will:20	その反逆を誰が認めてくれずとも 我が認めよう	그 반역을 누가 인정해 주지 않아도 우리 인정하지	fix	rewrites
+cx:volitional-will:30	こちらは僕が なんとかしよう	이쪽은 내가 어떻게든 할게	fix	rewrites
+cx:volitional-will:30	俺が相手しよう	내가 상대할게	fix	rewrites
+cx:volitional-will:30	[ｽﾋﾟｰｶ]夏祭りのほうは 俺が何とかしよう	[스피커]여름축제 쪽은 내가 어떻게든 할게	fix	rewrites
+cx:volitional-will:30	人質なら 僕がなろう！	인질이라면 내가 될게!	fix	rewrites
+cx:volitional-will:30	俺が警官と話そう	내가 경관과 이야기할게	fix	rewrites
+cx:volitional-will:30	アフマドさんの店だね？ 私が行こう。	아흐마드 씨의 가게구나? 내가 갈게.	fix	rewrites
+cx:volitional-will:30	分かった 俺が ひと肌脱ごう	알았다 내가 발 벗고 나설게	fix	rewrites
+cx:volitional-will:30	安い言葉ではあるが 警察署長である この私が保証しよう。	싼 말이지만 경찰서장인 이 내가 보증할게.	fix	rewrites
+cx:volitional-will:30	私が消そう	내가 지울게	fix	rewrites
+cx:volitional-will:30	私が処罰しよう	내가 처벌할게	fix	rewrites
+cx:volitional-will:30	彼女らは俺が守ろう。	그녀들은 내가 지킬게.	fix	rewrites
+cx:volitional-will:30	俺がサポートしよう	내가 서포트할게	fix	rewrites
+cx:volitional-will:30	お前を糾弾する者がいるのなら 俺がその盾となろう。	너를 규탄하는 사람이 있다면 내가 그 방패가 될게.	fix	rewrites
+cx:volitional-will:30	ここは私が払おう	여기는 내가 지불할게	fix	rewrites
+cx:volitional-will:30	私が露払いのために 前に出よう	내가 선도를 위해서 앞에 나올게	fix	rewrites
+cx:volitional-will:30	僕が いただこう。	내가 받을게.	fix	rewrites
+cx:volitional-will:30	それについては 私が説明しよう！	그것에 대해서는 내가 설명할게!	fix	rewrites
+cx:volitional-will:30	はい それは僕が説明しよう	네 그것은 내가 설명할게	fix	rewrites
+cx:volitional-will:30	では 私が暖めよう	그럼 내가 따뜻하게 할게	fix	rewrites
+cx:volitional-will:30	私が 自ら話を聞こう。	내가 스스로 이야기를 들을게.	fix	rewrites
+cx:volitional-will:30	私が じきじきに調べよう。	내가 직접에 조사할게.	fix	rewrites
+cx:volitional-will:30	ハハハ なら 俺が行こう	하하하라면 내가 갈게	fix	rewrites
+cx:volitional-will:40	私が友達になろう	내가 친구가 될게	fix	rewrites
+cx:volitional-will:40	国立さん 俺と恋人になろう！	국립 씨 나와 애인이 되자!	fix	rewrites
+cx:volitional-will:40	これからは親友になろう	지금부터는 절친이 되자	fix	rewrites
+cx:volitional-will:40	これ あげるから 私と お友達になろうよ。	이것 주니까 나와 친구가 되자.	fix	rewrites
+cx:volitional-will:40	フッ じゃあ友達になろう	훗 그럼 친구가 되자	fix	rewrites
+cx:volitional-will:40	そして また友達になろう。	그리고 또 친구가 되자.	fix	rewrites
+cx:volitional-will:40	怒るほどのことじゃない 友達になろう	화낼 정도의 일이 아닌 친구가 되자	fix	rewrites
+cx:volitional-will:40	いいよ じゃあ友達になろう	좋아 그럼 친구가 되자	fix	rewrites
+cx:volitional-will:40	わ、わたしは…大和綾音っていうんだ！お友達になろうよ！	나, 나는…야마토 아야네라는 거야! 친구가 되자!	fix	rewrites
+cx:volitional-will:40	ねえ… 友達になろうよ	저기… 친구가 되자	fix	rewrites
+cx:volitional-will:35	私が友達になろう	내가 친구가 될게	fix	rewrites
+cx:volitional-will:30	みんなで一緒に行こう	모두 함께 가자	keep	rewrites
+cx:volitional-will:30	さあ、行こう	자, 가자	keep	rewrites
+cx:volitional-will:40	それは大きな問題になろう	그것은 큰 문제가 될 것이다	keep	rewrites
+cx:volitional-will:20	誰の知らない話をしよう。	누가 모르는 이야기를 하자.	keep	rewrites
+cx:volitional-will:30	俺が鬼だ 早速 手分けをしよう	내가 귀신이다 곧바로 분담을 하자	keep	rewrites
+cx:volitional-will:30	一緒に帰ろう	함께 돌아가자	keep	rewrites
+cx:na-observed:10	何か ホッとするな	뭔가 마음이 놓이네	fix	rewrites
+cx:na-observed:10	艦隊が無事戻ったぜ！ ホッとすんな♪	함대가 무사히 돌아왔다! 마음이 놓이네♪	fix	rewrites
+cx:na-observed:10	なんかホッとするな	뭔가 마음이 놓이네	fix	rewrites
+cx:na-observed:10	ほっとするな	안심하지 마	keep	rewrites
+cx:na-observed:10	安心するな	안심하지 마	keep	rewrites
+cx:na-observed:10	ホッとするのはまだ早い	마음이 놓이는 것은 아직 이르다	keep	rewrites
+cx:volitional-will:10	誰もいない所へ行こう？	아무도 없는 곳에 가자?	keep	rewrites
+cx:volitional-will:20	どうしても行こう	아무래도 가자	keep	rewrites
+cx:volitional-will:35	君が友達になろう	네가 친구가 되자	keep	rewrites
