@@ -1,0 +1,41 @@
+# 규칙: LEX-4625
+rule	input	expected	kind	layer
+cx:sense-cues-1:360	「承りました。」	「알았습니다.」	fix	rewrites
+cx:sense-cues-1:360	「承りましたわ！」	「알았어요!」	fix	rewrites
+cx:sense-cues-1:360	オーダー…承りました	오더…받았습니다	keep	rewrites
+cx:sense-cues-1:360	承りましてよ。	lacks:알았	keep	rewrites
+cx:sense-cues-1:362	「抜かせ。悪魔ごときがこの俺に敵うとでも思っているのか。」	「웃기지 말아라. 악마 따위가 이 나에게 당해 낸다고 생각하는 건가.」	fix	rewrites
+cx:sense-cues-1:362	力を抜かせる	힘을 빼게 한다	keep	rewrites
+cx:sense-cues-1:364	「くそが……！」	「젠장……!」	fix	rewrites
+cx:sense-cues-1:364	クソがっ！	젠장!	fix	rewrites
+cx:sense-cues-1:364	こんなになるまでこき使いやがって、クソが！	이렇게 될 때까지 혹사해 가지고, 젠장!	fix	rewrites
+cx:sense-cues-1:364	クソが！やらせるかよ！	젠장! 시킬까 보냐!	fix	rewrites
+cx:sense-cues-1:364	古いンだよ……クソがッ！	낡아……젠장!	fix	rewrites
+cx:sense-cues-1:364	「超巨大なお節介だっつうの……クソが」	「매우 거대한 공연한 참견이라는 거……젠장」	fix	rewrites
+cx:sense-cues-1:364	クソが付くほど真面目だということだ。	lacks:젠장	keep	rewrites
+cx:sense-cues-1:364	クソが勘違いなんかじゃねえんだよ	lacks:젠장	keep	rewrites
+cx:sense-cues-1:366	本人いわく、霊感がないからだって言うんだけど	본인 왈, 영감이 없기 때문이다라고 말하는데	fix	rewrites
+cx:sense-cues-1:366	刑事さんいわく、そこは雑貨や衣類、100均などが入っている大きいスーパーだそう	형사 왈, 거기는 잡화나 의류, 100균 등이 들어가 있는 큰 슈퍼라고 한다	fix	rewrites
+cx:sense-cues-1:366	観光地である奈良をぶらつくことが多いからかもしれないが、友人や妹いわく、	관광지인 나라를 흔들거리는 것이 많기 때문인지도 모르지만, 친구나 여동생 왈,	fix	rewrites
+cx:sense-cues-1:366	いわく付きの品	사연 있는 물건	keep	rewrites
+cx:sense-cues-1:368	同行するようになって早２年、	동행하게 되어 벌써 2년,	fix	rewrites
+cx:sense-cues-1:368	修行修行と、早二週間が経過した。	수행 수행과, 벌써 2주간이 경과했다.	fix	rewrites
+cx:sense-cues-1:368	早くしろ	빨리 해라	keep	rewrites
+sense:osameru-govern	彼らが再び地上を治める時に必要な兵士として訓練しているんだよ。	그들이 다시 지상을 다스릴 때 필요한 병사로서 훈련하고 있어.	fix	senses
+sense:osameru-govern	領地を治める形となったのじゃ。	영지를 다스리는 형태가 된 게야.	fix	senses
+sense:osameru-govern	騒ぎを治めた	소란을 가라앉혔다	fix	senses
+sense:osameru-govern	息がかかった場所とはすなわち、彼の勢力の貴族達が治める、国内７割以上の都市である。	후원을 받은 장소란 즉, 그의 세력의 귀족들이 다스리는, 국내 7할 이상의 도시이다.	keep	senses
+dict:w:24652	ボクも冥界に還るとしよう。	나도 명계에 돌아간다고 하자.	fix	lookup
+dict:w:24652	死んであの世に還った霊魂（魂）が、この世に何度も生まれ変わってくる、という考え方。	죽어 저세상에 돌아간 영혼이, 이 세상에 몇 번이나 다시 태어나 온다, 라는 생각.	fix	lookup
+dict:w:32660	でも、キングが戦いを挑んでくるなんて……。あなたよく無事で還って来られたわね……	하지만, 킹이 싸움을 걸어 오다니……. 당신 잘 무사해 돌아올 수 있었네……	fix	lookup
+dict:w:32646	気付いて枕もとの携帯を取ると、声が聞こえた。	깨달아 머리맡 휴대폰을 취하니, 목소리가 들렸다.	fix	lookup
+dict:w:32648	雪白なうなじに戻しながら	새하얀 목덜미에 되돌리면서	fix	lookup
+dict:w:32649	そしてその、舌足らずな声に、もう一つの声が応えた。	그리고 그, 혀 짧은 목소리에, 또 하나의 목소리가 응했다.	fix	lookup
+dict:w:32647	起きた事を、舌足らずな口で、精一杯伝えた。	일어난 것을, 혀 짧은 입으로, 힘껏 전했다.	fix	lookup
+dict:w:32652	最近めっきり足腰が弱くなっちまって……。まいったぜ、ほんとに。	최근 제법 다리와 허리가 약해져서……. 왔다구, 정말.	fix	lookup
+dict:w:32652	この足腰じゃとても	이 다리와 허리는 무척	fix	lookup
+dict:w:32653	にしても武器が小振りのナイフとかね	그나저나 무기가 작은 크기의 나이프라든지	fix	lookup
+dict:w:32654	出来上がりましたので、お届けに参りました」	완성되었으므로, 배달하러 왔습니다」	fix	lookup
+dict:w:32655	えっと、印鑑かサイン貰わないと困るんですけど…お届け物の、えっと…液タブ？	음, 인감이나 사인 받지 않으면 곤란한데요…배달물의, 음…액정 태블릿?	fix	lookup
+dict:w:32656	ちゃまから御届け物ですエリ	챠마로부터 배달물입니다 에리	fix	lookup
+dict:w:32654	今週中に 見積もりをお届けします｡	has:전달해 드리겠습니다	keep	lookup
