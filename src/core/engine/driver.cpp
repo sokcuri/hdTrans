@@ -373,6 +373,96 @@ bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t 
     return false;
 }
 
+// Whether a word of the dictionary holds the old form of kanji line[at, end) (pipeline::RespellOldForms), so it
+// stays: as WordHoldsRun, but a common word holds it only if the new form makes no word reach further from its
+// start or an earlier one (效 of 有效期限 is 効 of 有効期限; spec LEX-38). A name always holds it (創眞, 両國).
+bool OldFormHeld(const void* context, std::string_view line, size_t at, size_t end) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    // A name or a place (QPN, QCT).
+    const auto name = [](const dict::Candidate& c) { return c.codes != nullptr && c.codes->sem.Text().starts_with("Q"); };
+    // A row of the name layer (沢家 사와가) makes no common word longer.
+    const auto nameRow = [&](const dict::Candidate& c) { return name(c) || (c.user != nullptr && c.user->nameLayer); };
+    std::string_view spelling;
+    const char32_t old = text::DecodeRune(line.substr(at)).cp;
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
+        if (text::DecodeRune(pair).cp == old) spelling = pair.substr(pair.find('=') + 1);
+    }
+    size_t start = at;
+    for (int back = 0;; back++) {
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            if (start + c.source.size() < end) continue;
+            // A name holds it as written (創眞, 両國). A person's name that is a common word in the new form (未來
+            // 未来) holds it only with a cue of a person: an honorific or a speaker's bracket after it, or a name the
+            // document has learned (未來ちゃん 미라이짱; 輝く未來へ 미래로).
+            if (name(c)) {
+                const bool person = c.codes->sem.Text().starts_with("QPN");
+                if (!person || spelling.empty()) return true;
+                const std::string respelled = std::string(line.substr(start, at - start)) + std::string(spelling) +
+                                              std::string(line.substr(end, start + c.source.size() - end));
+                bool word = false;
+                for (const dict::Candidate& n : Find(d, respelled).list) {
+                    if (n.source == respelled && !nameRow(n) && !Grammar(n)) word = true;
+                }
+                const std::string_view after = line.substr(start + c.source.size());
+                const bool cue = dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), after) > 0 || after.starts_with("「") ||
+                                 after.starts_with("『") || after.starts_with("：") || after.starts_with(":") ||
+                                 (d.line != nullptr && d.line->named != nullptr && d.line->named->contains(std::string(c.source)));
+                // A common word spelled the same old way (雲龍 운룡) keeps the old form as well.
+                bool common = false;
+                for (const dict::Candidate& o : Find(d, line.substr(start)).list) {
+                    if (o.source == c.source && !nameRow(o) && !Grammar(o)) common = true;
+                }
+                if (!word || cue || common) return true;
+                continue;
+            }
+            // A word that the new form makes reach further, from this start or an earlier one (有效 of 有效期限 as
+            // 有効期限, 未來 as 未来).
+            if (!spelling.empty()) {
+                const size_t held = start + c.source.size();
+                bool longer = false;
+                size_t from = at;
+                for (int b = 0; b <= 4 && !longer; b++) {
+                    const std::string respelled = std::string(line.substr(from, at - from)) + std::string(spelling) + std::string(line.substr(end));
+                    for (const dict::Candidate& n : Find(d, respelled).list) {
+                        if (n.source.size() < at - from + spelling.size() || nameRow(n) || Grammar(n)) continue;
+                        // The longer word holds another kanji (有効期限, 未来, 虫使い), not kana alone after the new form
+                        // (虫がいい of 蟲がいない, 灯をつける).
+                        int kanji = 0;
+                        for (std::string_view k = n.source; !k.empty();) {
+                            const text::Rune r = text::DecodeRune(k);
+                            if (text::IsKanji(r.cp)) kanji++;
+                            k.remove_prefix(std::max<size_t>(1, r.size));
+                        }
+                        // and joins the new form to a kanji right before or after it, as one compound (有効期限), or is a
+                        // noun (髪の毛, 虫の知らせ); not a phrase across a particle (虫を殺す).
+                        const size_t pos = at - from;
+                        const bool before = pos > 0 && text::IsKanji(pipeline::internal::LastRune(n.source.substr(0, pos)).cp);
+                        const bool after = pos + spelling.size() < n.source.size() &&
+                                           text::IsKanji(text::DecodeRune(n.source.substr(pos + spelling.size())).cp);
+                        const bool noun = n.codes != nullptr && n.codes->part.TagIn("NI");  // 髪の毛, 虫の知らせ
+                        // It starts where the held word starts or before (not 桜の花 inside あだ櫻の花).
+                        const size_t reach = from + n.source.size() - spelling.size() + (end - at);
+                        if (kanji >= 2 && (before || after || noun) && from <= start && reach > held) {
+                            longer = true;
+                        }
+                    }
+                    if (from == 0) break;
+                    const text::Rune last = pipeline::internal::LastRune(line.substr(0, from));
+                    if (!pipeline::internal::IsJapaneseRune(last.cp)) break;
+                    from -= last.size;
+                }
+                if (longer) continue;
+            }
+            return true;
+        }
+        if (back == kRunLookBackRunes || start == 0) break;
+        const text::Rune last = pipeline::internal::LastRune(line.substr(0, start));
+        if (!pipeline::internal::IsJapaneseRune(last.cp) && last.cp != U'・') break;
+        start -= last.size;
+    }
+    return false;
+}
+
 // Whether line[at, end) is a kanji that the dictionary holds as a common noun read other than
 // by its Hangul reading (星 별, not 易 역), which 々 makes plural (pipeline::RespellIterationMarks).
 bool KanjiNoun(const void* context, std::string_view line, size_t at, size_t end) {
@@ -1111,7 +1201,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
             normalized = pipeline::RespellKatakanaEndings(normalized);
             normalized = pipeline::RespellKanjiCries(normalized);
-            normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
+            normalized = pipeline::RespellOldForms(normalized, OldFormHeld, &respell);
             normalized = pipeline::RespellIterationMarks(normalized, WordHoldsRun, KanjiNoun, &respell);
         }
         return normalized;
