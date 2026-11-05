@@ -46,3 +46,26 @@ protect:chinese-grammar	傲骨從來與俗違。	오골종래여속위.	keep	pro
 protect:chinese-grammar	実存在的事物存在	실존 재적 사물 존재	keep	protect
 protect:chinese-grammar	合目的的、峻厳、構造的である。	합목적적, 준엄, 구조적이다.	keep	protect
 protect:chinese-grammar	今日は学校に行った。	오늘은 학교에 갔다.	keep	protect
+protect:chinese-run	本作品中登場する団体名は架空のものです。	본작품 중 등장하는 단체명은 가공의 것입니다.	keep	protect
+protect:chinese-run	アニメ中登場したメカ。	애니메이션 중 등장한 메카.	keep	protect
+protect:chinese-run	ゲーム中登場するアイテム一覧。	게임 중 등장하는 아이템 일람.	keep	protect
+protect:chinese-run	自己的な人間にはなりたくない。	자기적인 인간은 되고 싶지 않다.	keep	protect
+protect:chinese-run	系列中最大の店舗。	계열 중 최대의 점포.	keep	protect
+protect:chinese-run	目的是正のため。	목적 시정을 위해.	keep	protect
+protect:chinese-run	彼は最終的是認を得た。	그는 최종적 시인을 얻었다.	keep	protect
+protect:chinese-run	就職して三年。	취직해 3년.	keep	protect
+protect:chinese-run	是非是非お越しください。	꼭 와 주세요.	keep	protect
+protect:chinese-run	対処法は是正勧告。	대처법은 시정 권고.	keep	protect
+protect:chinese-run	また実現を目指して政治的意思決定のために 奮闘しているところもあります	또 실현을 목표로 해 정치적 의사결정을 위해 분투하고 있는 곳도 있습니다	keep	protect
+protect:chinese-run	敵に積極的意思があれば	적에게 적극적 의사가 있으면	keep	protect
+protect:chinese-run	政治的意思があれば 解決できる	정치적 의사가 있으면 해결할 수 있다	keep	protect
+protect:chinese-run	あんな途中登場して 何もせんて珍しいよ	저런 도중 등장해 아무것도 라고 드물어	keep	protect
+protect:chinese-run	羽香里と唐音同士もキスすることになっちゃうんだよ	날개 고리와 당음끼리도 키스하게 되어버리는 이야	keep	protect
+protect:chinese-run	しかし 雑音同様です 聞いた事が有りますか?	하지만 잡음 같이입니다 들었던 것이 있습니까?	keep	protect
+protect:chinese-run	彼らは自己的な情報で 出来るだけコピーされます	그들은 자기적인 정보로 가능한 한 복사 됩니다	keep	protect
+protect:chinese-run	全て 音同士の数学的比率で表される	모두 소리끼리의 수학적 비율로 나타내진다	keep	protect
+protect:chinese-run	コード871を 自発的意思で解除したのかしら	코드 871을 자발적 의사로 해제한 걸까	keep	protect
+protect:chinese-run	我不是ちぃ	我不是치이	fix	protect
+protect:chinese-run	不是的 いえ	不是的 아뇨	fix	protect
+protect:chinese-run	ちぃ就是ちぃ	치이就是치이	fix	protect
+protect:chinese-run	是在下 私です	是在下 저입니다	fix	protect

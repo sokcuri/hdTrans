@@ -41,3 +41,36 @@ cx:yo-intent:20	僕もそう思うよ。	나도 그렇게 생각해.	keep	rewrit
 cx:yo-intent:15	もう寝るよ	이제 잘게	fix	rewrites
 cx:yo-intent:15	多分その頃にはシスター達も戻ってくるよ。	아마 그 무렵에는 시스터들도 돌아와.	keep	rewrites
 cx:yo-intent:15	もいっぱい？よーし！じゃあ皆、行くよ！三水戦、全艦抜錨！	도 가득? 좋아~! 그럼 모두, 가! 3수전, 전 함선 출항!	keep	rewrites
+cx:yo-intent:15	彼女は月曜日に戻るよ	그녀는 월요일에 돌아와	keep	rewrites
+cx:yo-intent:15	あの人は もう決勝まで行くよ	그 사람은 이제 결승까지 가	keep	rewrites
+cx:yo-intent:15	魚たちも海に帰るよ。	물고기들도 바다에 돌아가.	keep	rewrites
+cx:yo-intent:15	連絡が行くよ	연락이 가	keep	rewrites
+cx:yo-intent:15	じきに記憶が戻るよ	곧 기억이 돌아와	keep	rewrites
+cx:yo-intent:15	そろそろ 時間が戻るよ	슬슬 시간이 돌아와	keep	rewrites
+cx:yo-intent:15	お茶を飲みなさい 体力が戻るよ	차를 마셔 체력이 돌아와	keep	rewrites
+cx:yo-intent:15	はあ？ そのうち 呼び出しが行くよ	하아? 머지않아 호출이 가	keep	rewrites
+cx:yo-intent:15	彼は行くよ	그는 가	keep	rewrites
+cx:yo-intent:15	洋子さんも行くよ。	요코 씨도 가.	keep	rewrites
+cx:yo-intent:15	あなたは地獄に行くよ!	당신은 지옥에 가!	keep	rewrites
+cx:yo-intent:15	つばめ達も行くよ	제비들도 가	keep	rewrites
+cx:yo-intent:15	ここにも 活気が戻るよ	여기에도 활기가 돌아와	keep	rewrites
+cx:yo-intent:15	五話では咲さん達が キャンプに行くよ	5화에서는 사키 씨들이 캠프에 가	keep	rewrites
+cx:yo-intent:15	猫はよく寝るよ。	고양이는 잘 자.	keep	rewrites
+cx:yo-intent:15	彼はもう帰るよ。	그는 이제 돌아가.	keep	rewrites
+cx:yo-intent:15	先生も行くよ。	선생님도 가.	keep	rewrites
+cx:yo-intent:15	妹は八時に寝るよ。	여동생은 8시에 자.	keep	rewrites
+cx:yo-intent:15	姉はいつも早く帰るよ。	언니는 언제나 빨리 돌아가.	keep	rewrites
+cx:yo-intent:15	赤ちゃんはよく寝るよ。	아기는 잘 자.	keep	rewrites
+cx:yo-intent:15	俺自身がそちらに行くよ	나 자신이 그쪽으로 갈게	fix	rewrites
+cx:yo-intent:15	パパたちは 早速 パイプを修理に行くよ	아빠들은 곧바로 파이프를 수리하러 갈게	fix	rewrites
+cx:yo-intent:15	いや 心配だろ 普通は 私は一人でも行くよ	아니 걱정이지 보통은 나는 혼자라도 갈게	fix	rewrites
+cx:yo-intent:15	もちろん お迎えは俺が行くよ。	물론 마중은 내가 갈게.	fix	rewrites
+cx:yo-intent:15	迎えは僕が行くよ	마중은 내가 갈게	fix	rewrites
+cx:yo-intent:15	わしは年寄りだ もう寝るよ	나는 노인이다 이제 잘게	fix	rewrites
+cx:yo-intent:15	十景！ 悪いけど あたいは帰るよ。	10경! 미안하지만 나는 돌아갈게.	fix	rewrites
+cx:yo-intent:15	お兄ちゃんは 今日は帰るよ	오빠는 오늘은 돌아갈게	fix	rewrites
+cx:yo-intent:15	ベイビー パパは仕事に行くよ	베이비 아빠는 일하러 갈게	fix	rewrites
+cx:yo-intent:15	それじゃ、ボク達は職員室に行くよ	그럼, 우리는 교무실에 갈게	fix	rewrites
+cx:yo-intent:15	1時だよ。鬼怒もそろそろ寝るよ。	1시야. 키누도 슬슬 잘게.	fix	rewrites
+cx:yo-intent:15	俺はもう寝るよ。	나는 이제 잘게.	fix	rewrites
+cx:yo-intent:15	今日は早く寝るよ。	오늘은 빨리 잘게.	fix	rewrites
