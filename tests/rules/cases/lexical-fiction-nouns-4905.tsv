@@ -1,0 +1,9 @@
+# 규칙: LEX-4905
+rule	input	expected	kind	layer
+sense:soul-compound	「ジャパニーズソウルが微塵もないの？」	has:재패니스 소울	fix	senses
+sense:soul-compound	もしかして、アンタがあのソウルスピードのマキか？	has:소울 스피드	fix	senses
+sense:soul-compound	三色で１０コストの大型ソウル。	has:대형 소울	fix	senses
+sense:soul-compound	ソウルの市場で、キンパを三つ買った。	has:서울의 시장	keep	senses
+dict:w:34400	神社は坊さんではなく神主ですがそれは‥	has:신관입니다만	fix	lookup
+dict:w:34400	神主さんに紹介してもらったらしい。	has:신관	fix	lookup
+dict:lex:3839:鍛冶屋さん-1	それから、鍛冶屋さんの紹介で	has:대장장이	fix	lookup
