@@ -531,10 +531,11 @@ bool FinalCallAt(std::string_view key, std::string_view before, std::string_view
            after.starts_with("」") || after.starts_with("…");
 }
 
-// Whether key is a single kanji that the name layer reads as a person (南 미나미, 栞 시오리, 司 츠카사), whose
+// Whether key is a single kanji that the name layer reads as a person (南 미나미, 栞 시오리, 司 츠카사) and no side
+// or position of name.side-word (左, 前), whose
 // person cues hold in their line (spec LEX-4832); a single character is else no name a cue shows.
 bool SingleNameKey(const dict::Snapshot& snap, std::string_view key) {
-    if (text::RuneCount(key) != 1 || !internal::AllRunes(key, IsKanji)) return false;
+    if (text::RuneCount(key) != 1 || !internal::AllRunes(key, IsKanji) || dict::InClass(HDTRANS_CLASS("name.side-word"), key)) return false;
     for (const dict::Record& r : snap.NameRecords(key)) {
         if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) return true;
     }

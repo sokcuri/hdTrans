@@ -572,6 +572,41 @@ bool SelfBy(const Item* p) {
     return false;
 }
 
+// Whether verb item it describes the noun right after it that names a person the speaker honours
+// (結婚式を挙げられるお客様, 数々の物語を生み出された方々, 来日された先生): that person does the act,
+// which no subject or agent before it has to name (spec GRM-3871). The verb needs an object in its
+// clause (ActedObjectBefore): without one the person is what the act is done to (追い込まれた会長, 呼ばれる王女), as with
+// an object of a verb of taking away (verb.receiver-passive: 名前を秘された姫様). The noun follows with
+// no space between (召されたか 父上 is a call), is a person (not 模様, 神殿, 神さま, a 様 alone), no 俺様
+// or 貴様, and 方 is the person but not ほう before が and a judgment (見られる方がいい).
+bool DescribesHonoured(const Item* it) {
+    if (!ActedObjectBefore(it) || dict::StartsWithMember(HDTRANS_CLASS("verb.receiver-passive"), it->group->surface) > 0) return false;
+    const Item* n = it->next;
+    if (n == nullptr || n->group == nullptr || n->detail->Yougo() || n->group->entries.empty() || n->start != it->start + it->length) {
+        return false;
+    }
+    const std::string_view s = n->group->surface;
+    if (s == "様" || s == "さま" || s == "殿") return false;
+    if (s == "方" || s == "方々" || s == "かた") {
+        const Item* m = n->next;
+        if (m == nullptr || m->group == nullptr || s != "方") return true;
+        const std::string_view ms = m->group->surface;
+        if (ms != "が" && !ms.starts_with("が")) return true;
+        const Item* j = ms == "が" ? m->next : m;
+        if (j == nullptr || j->group == nullptr) return true;
+        const std::string_view js = ms == "が" ? j->group->surface : ms.substr(std::string_view("が").size());
+        for (const std::string_view judged : {"いい", "良", "よ", "まし", "楽", "多", "少な", "上", "早", "先", "大"}) {
+            if (js.starts_with(judged)) return false;
+        }
+        return true;
+    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("pronoun.first-person"), s) > 0 ||
+        dict::StartsWithMember(HDTRANS_CLASS("pronoun.rough-second-person"), s) > 0) {
+        return false;
+    }
+    return HonouredPerson(n) && Animate(n->Attr(std::max(n->selected, 0)));
+}
+
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
@@ -580,6 +615,7 @@ bool SelfBy(const Item* p) {
 // a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
+// With no subject or agent, a noun after it that names someone honoured decides (DescribesHonoured).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
     bool predicate = false;  // a predicate stands between: ご自身 is of another clause
@@ -605,7 +641,7 @@ bool RespectfulReading(const Item* it, bool transitive) {
             break;
         }
     }
-    return false;
+    return DescribesHonoured(it);
 }
 
 // Whether item n is a noun whose する takes an object: any noun but one tagged Hi (気絶, 崩御,

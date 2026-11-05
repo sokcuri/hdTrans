@@ -20,3 +20,14 @@ voice:lexical-object-potential	賞を与えられた。	상이 주어졌다.	kee
 voice:lexical-object-potential	父に止められた。	아버지에게 제지당했다.	keep	voice
 voice:lexical-object-potential	まさに大好物を取り上げられた赤子のように	그야말로 좋아하는 음식을 빼앗긴 갓난아이처럼	keep	voice
 voice:lexical-object-potential	断ることもできず、私は毎朝、教室の掃除をさせられます。	거절할 수도 없어, 저는 매일 아침, 교실 청소를 하도록 강요받습니다.	keep	voice
+L1213	戦果を挙げられて良かったです！	전과를 올릴 수 있어 좋았습니다!	fix	local
+L1213	大きな成果を挙げた。	큰 성과를 올렸다.	fix	local
+L1213	手を挙げた。	손을 들었다.	keep	local
+L1213	例を挙げる。	예를 든다.	keep	local
+rewrite:respectful-passive	これから結婚式を挙げられるお客様に	지금부터 결혼식을 올리시는 손님에게	fix	rewrites
+rewrite:respectful-passive	数々の物語を生み出された方々もそれに気付いています。	수많은 이야기를 만들어 내신 분들도 그것을 알아차리고 있습니다.	fix	rewrites
+rewrite:respectful-passive	ここで結婚式を挙げられる。	여기서 결혼식을 올릴 수 있다.	keep	rewrites
+rewrite:respectful-passive	事件を起こして退学に追い込まれた会長の次の治安部長	사건을 일으켜 퇴학에 몰린 회장 다음 치안 부장	keep	rewrites
+rewrite:respectful-passive	そんな様々な称号で呼ばれる王女。	그런 여러 가지 칭호로 불리는 왕녀.	keep	rewrites
+rewrite:respectful-passive	機体から発射された模様です	기체에서 발사된 모양입니다	keep	rewrites
+rewrite:respectful-passive	乱心召されたか 父上！	난심 부름을 받았는지 아버님!	keep	rewrites
