@@ -24,3 +24,6 @@ dict:w:32606	今まで、本当に長いこと考えました	지금까지, 정�
 dict:w:32606	長い時間考えた	긴 시간 생각했다	keep	lookup
 dict:w:32608	「フランさえその気なら、オレから先生にかけあってみるぜ」	「프랑만 그럴 생각이라면, 나로부터 선생님에게 흥정해 본다」	fix	lookup
 dict:w:32608	その気になれば何でもできる	마음만 먹으면 뭐든 할 수 있다	keep	lookup
+cx:sense-cues-1:148	嘘だったってことか。	거짓말이었다는 건가.	fix	rewrites
+cx:sense-cues-1:148	本当だったって事？	사실이었다는 것?	fix	rewrites
+cx:sense-cues-1:148	来たってことか	왔다는 건가	keep	rewrites

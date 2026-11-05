@@ -1,5 +1,5 @@
 #! layer=base
-# 과거 계사·형용사 뒤 끝 조사 わよ, わね, わよね, ぞ, のね (GRM-3837)
+# 과거 계사와 형용사 뒤 끝 조사 わよ, わね, わよね, ぞ, のね (GRM-3837)
 key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
 だったわね	(이었)였네	P200			GN				past-final:2
 だったわよね	(이었)였지	P200			GN				past-final:3
