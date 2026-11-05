@@ -999,6 +999,15 @@ HD_TEST(pipeline_write_kin_terms) {
         {"お兄様、俺はもう子供じゃないんだぜ"sv, "兄さん、俺はもう子供じゃないんだぜ"sv},
     };
     for (const Case& c : other) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
+    // In a document that shows a woman's speech elsewhere, a line with no cue of its own keeps the
+    // dictionary reading of 兄, 兄さん and 兄貴 (spec LEX-4619).
+    const Case neutral[] = {
+        {"兄が朝食を作っていた"sv, "兄が朝食を作っていた"sv},
+        {"「兄貴はもう出かけたよ」"sv, "「兄貴はもう出かけたよ」"sv},
+        {"兄さんは笑って答えた"sv, "兄さんは笑って答えた"sv},
+        {"兄さん、あたしも行くわよ"sv, "お兄ちゃん、あたしも行くわよ"sv},
+    };
+    for (const Case& c : neutral) HD_CHECK_EQ(WriteKinTerms(c.in, true), std::string(c.want));
     // A word that holds the kanji before the term and its first character (義姉) is left as written.
     const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
         const std::string_view word = line.substr(at, end - at);

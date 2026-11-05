@@ -1,9 +1,43 @@
 # 규칙: LEX-4622
 rule	input	expected	kind	layer
-cx:sense-cues-1:300	ナンパ下手すぎよぉ。 強引なのはスキだけどぉ ねちっこいのは キライなのよねぇ	헌팅 너무 서툴러. 강행인 것은 좋아하지만 끈질긴 것은 싫어	fix	rewrites
-cx:sense-cues-1:300	スキを見せた	빈틈을 보였다	keep	rewrites
+dict:w:32609	ナンパ下手すぎよぉ。 強引なのはスキだけどぉ ねちっこいのは キライなのよねぇ	헌팅 너무 서툴러. 강행인 것은 좋아하지만 끈질긴 것은 싫어	fix	rewrites
+cx:sense-cues-1:299	スキを見せた	빈틈을 보였다	keep	rewrites
 cx:sense-cues-1:299	キミがスキ	네가 좋아	fix	rewrites
-cx:sense-cues-1:299	提督！ あんた何やってんの！？ ……はぁ、油断もスキもない	제독! 너 뭐 하고 있어!? ……하아, 방심도 빈틈도 없다	keep	rewrites
+cx:sense-cues-1:299	……はぁ、油断もスキもない	……하아, 방심도 빈틈도 없다	keep	rewrites
+dict:w:32618	このスキに にげろ	이 빈틈에 도망쳐	fix	lookup
+dict:w:32618	そのスキに ２人とも撃て	그 빈틈에 2명 모두 쏘아라	fix	lookup
+dict:w:32618	ちょっと目を離したスキに―	조금 눈을 뗀 빈틈에-	fix	lookup
+dict:w:32618	寝てるスキに出るのがベストなのよ！	자고 있는 빈틈에 나오는 것이 베스트야!	fix	lookup
+dict:w:32618	眠らされたスキに奪われたり	자게 된 빈틈에 빼앗기거나	fix	lookup
+dict:w:32618	そのスキに弾を盗んでください	그 빈틈에 총알을 훔쳐 주세요	fix	lookup
+dict:w:32618	金曜の夜に外出したスキに侵入する	금요일 밤에 외출한 빈틈에 침입한다	fix	lookup
+dict:w:32618	バナナを与えているスキに 逃げよう！	바나나를 주고 있는 빈틈에 도망치자!	fix	lookup
+dict:w:32618	そのスキに みんなを連れて逃げるんだ	그 빈틈에 모두를 데리고 도망치는 거야	fix	lookup
+dict:w:32618	ああ 私が離れたスキに…	아 내가 떨어진 빈틈에…	fix	lookup
+dict:w:32618	まさかと驚いた そのスキに	설마 하고 놀란 그 빈틈에	fix	lookup
+dict:w:32618	スキに飛びついたね。	빈틈에 달려들었네.	fix	lookup
+cx:sense-cues-1:294	スキにして	마음대로 해	fix	rewrites
+cx:sense-cues-1:294	スキにすりゃいいだろ。 ほ ほんとかっ⁉	마음대로 하면 되지. 정말인가!?	fix	rewrites
+cx:sense-cues-1:297	これまで紹介したラクダがスキで	지금까지 소개한 낙타가 좋아서	fix	rewrites
+cx:sense-cues-1:297	速いやつと競うことがスキで	빠른 녀석과 경쟁하는 것이 좋아서	fix	rewrites
+cx:sense-cues-1:297	じつはな ワシも おそうじが だいスキで	실은 나도 청소가 매우 좋아서	fix	rewrites
+cx:sense-cues-1:298	あっ お前も雪のことスキで…	앗 너도 눈좋아해서…	fix	rewrites
+dict:w:32622	ほんのわずかなスキで負けた	그저 약간의 빈틈으로 졌다	fix	lookup
+dict:w:32643	フル～ツや きのみの はいったパンは みんな だいスキですものね。	풀~츠나 열매가 들어간 빵은 모두 매우 좋아하잖아요.	keep	lookup
+cx:sense-cues-1:295	はいはい おスキに どうぞ。	네네 좋을 대로 어서.	fix	rewrites
+cx:sense-cues-1:299	お母さん大スキ！	엄마 정말 좋아!	keep	rewrites
+cx:sense-cues-1:299	スキを逃さないで	빈틈을 놓치지 마	keep	rewrites
+cx:sense-cues-1:296	オレはスキになっていたはずだ	나는 좋아하게 되어 있었을 것이다	fix	rewrites
+cx:sense-cues-1:299	スキが見つけられない	빈틈을 찾아낼 수 없다	keep	rewrites
+cx:sense-cues-1:299	右肩にスキがある	오른쪽 어깨에 빈틈이 있다	keep	rewrites
+cx:sense-cues-1:299	スキだらけだぜ 今だ!	빈틈투성이야 지금이야!	keep	rewrites
+cx:sense-cues-1:299	《スキのない 手強い相手だった。	《빈틈이 없는 만만치 않은 상대였다.	keep	rewrites
+cx:sense-cues-1:299	人にはスキを見せるな	사람에게는 빈틈을 보이지 마	keep	rewrites
+cx:sense-cues-1:294	スキに 隠し部屋から出て こっそり	빈틈에 숨겨진 방에서 나와 몰래	keep	rewrites
+cx:sense-cues-1:295	このスキに！	이 빈틈에!	keep	rewrites
+cx:sense-cues-1:297	ほんのわずかなスキで負けた	그저 약간의 빈틈으로 졌다	keep	rewrites
+cx:sense-cues-1:298	これまで紹介したラクダがスキで	지금까지 소개한 낙타가 좋아서	keep	rewrites
+cx:sense-cues-1:296	そのスキに弾を盗んでください	그 빈틈에 총알을 훔쳐 주세요	keep	rewrites
 cx:sense-cues-1:310	全てはこの手の中に	모든 것은 이 손 안에	fix	rewrites
 cx:sense-cues-1:310	この手の手口には乗らない	이런 종류의 수법에는 타지 않는다	keep	rewrites
 cx:sense-cues-1:330	　《全く、連絡くらいしなさいよ》	 《정말이지, 연락 정도 해》	fix	rewrites
