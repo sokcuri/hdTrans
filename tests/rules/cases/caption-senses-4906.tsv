@@ -1,0 +1,21 @@
+# 규칙: LEX-4906
+rule	input	expected	kind	layer
+cx:caption-senses-1:10	そっちは大変だったんだから肉体的にも精神的にも	has:힘들었으니까	fix	rewrites
+cx:caption-senses-1:10	皆一緒じゃ、移動も大変だろうねぇ。	has:힘들겠지	fix	rewrites
+cx:caption-senses-1:10	実際、すっげー大変なんだぜえ	has:힘든	fix	rewrites
+cx:caption-senses-1:10	大変申し訳ありません。	has:대단히 죄송합니다	keep	rewrites
+cx:caption-senses-1:10	伝説の武人が来てくれることは大変な栄誉だ	has:대단한 영예	keep	rewrites
+cx:caption-senses-1:20	大変な一日だったわね。	has:힘든 하루	fix	rewrites
+cx:caption-senses-1:30	もしそれが本当なら 大変なことです...	has:큰일입니다	fix	rewrites
+cx:caption-senses-1:30	「大変なこともあったが、それさえも今ではいい思い出だ」	has:큰일도 있었지만	fix	rewrites
+cx:caption-senses-1:30	大変なことになった	has:큰일이 났다	keep	rewrites
+dict:w:34407	いいえ それには及びません マスター	has:그럴 필요 없습니다	fix	lookup
+dict:w:34402	ちゃんと納得してくれていますから、私の方はご心配には及びません	has:걱정하실 필요 없습니다	fix	lookup
+dict:w:34409	私なんか足元にも及びません	has:발밑에도 못 미칩니다	fix	lookup
+dict:w:34414	お帰り頂けませんでしょうか	has:돌아가 주실 수 없겠습니까	fix	lookup
+dict:w:34412	「早くお帰りください。お母様も心配しています」	has:돌아가 주세요	fix	lookup
+dict:w:34416	それを差し出してお帰り願いなさい」とかさ	has:돌아가 달라고 하세요	fix	lookup
+dict:w:34418	どんな相談ものるよ	has:상담도 들어 줄게	fix	lookup
+cx:caption-senses-1:20	大変な栄誉です	has:대단한 영예	keep	rewrites
+cx:caption-senses-1:5	大変だ ホテルだって｡ なんとかならない？	has:큰일이다	fix	rewrites
+cx:caption-senses-1:5	大変だったね	has:힘들었	keep	rewrites
