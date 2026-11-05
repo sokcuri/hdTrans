@@ -12,6 +12,7 @@
 #include "core/names/readings.h"
 #include "core/names/given.h"
 #include "core/names/registry.h"
+#include "core/dict/classes.h"
 #include "core/text/hangul.h"
 #include "core/word/kana.h"
 
@@ -219,8 +220,8 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         if (std::string kr = text::FromKana(t, text::Preset::Fan); IsHangulText(kr)) return kr;
     }
     // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
-    if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t)) {
-        if (std::string kr = internal::GuessedName(t); IsHangulText(kr)) {
+    if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t) && !OldFormWord(t)) {
+        if (std::string kr = internal::GuessedName(t, GuessFallback(t)); IsHangulText(kr)) {
             // The name layer's own reading comes first (龍鳳 류호, 日村 히무라, 日代 히시로).
             if (std::string own = NonPlaceLayerReading(t); IsHangulText(own)) return own;
             return kr;
@@ -243,6 +244,31 @@ std::string Registry::NonPlaceLayerReading(std::string_view t) {
         return std::string(r.target);
     }
     return "";
+}
+
+// Whether a guessed reading of t may fall back to the readings names start with (spec LEX-4952): t is
+// shown to be a name by an honorific or a person frame, and is no surname and given name of the name
+// layer written together (堤司: 堤 and 司).
+bool Registry::GuessFallback(std::string_view t) {
+    if (honGuess_.count(std::string(t)) == 0 || RuneCount(t) != 2) return false;
+    const text::Rune a = text::DecodeRune(t);
+    const DictFlags fa = Flags(t.substr(0, a.size)), fb = Flags(t.substr(a.size));
+    return !(fa.layerSurname && (fb.layerGiven || fb.person));
+}
+
+// Whether t holds an old form of a kanji whose modern spelling the dictionaries know (萬平: 万平), which
+// is read as that spelling rather than guessed (瀧昌 has none: 타키마사), unless the name layer reads t
+// (飛龍 히류).
+bool Registry::OldFormWord(std::string_view t) {
+    std::string modern(t);
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
+        const std::size_t eq = pair.find('=');
+        if (eq == std::string_view::npos || eq == 0) continue;
+        for (std::size_t at = modern.find(pair.substr(0, eq)); at != std::string::npos; at = modern.find(pair.substr(0, eq), at)) {
+            modern.replace(at, eq, pair.substr(eq + 1));
+        }
+    }
+    return modern != t && Flags(modern).records > 0 && !IsHangulText(NonPlaceLayerReading(t));
 }
 
 bool Registry::GuessedNameBlocked(std::string_view t) {

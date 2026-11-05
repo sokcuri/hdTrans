@@ -578,10 +578,36 @@ std::string Registry::DropReadings(std::string_view line, std::string* cueText, 
 
 namespace {
 
+// Whether the rest of a caption line after a word at its start and a space calls the one the word names:
+// it asks, exclaims or ends in a particle of address (甲児 どうした？, 夢葉 だめだよ, 舞 覚えてるか？),
+// not a statement (外中 ２枚看板のチームだった).
+bool CaptionCall(std::string_view after) {
+    // The first phrase of the rest, up to the next space (甲児 どうした？ あっ; not 船影 急速に接近中 … 速い！).
+    std::string_view a = TrimSpace(after);
+    for (std::size_t i = 0; i < a.size();) {
+        const text::Rune r = RuneAt(a, i);
+        if (r.cp == U' ' || r.cp == U'　') {
+            a = a.substr(0, i);
+            break;
+        }
+        i += std::max<std::size_t>(1, r.size);
+    }
+    while (!a.empty()) {
+        const text::Rune r = RuneBefore(a, a.size());
+        if (!InRunes(r.cp, "。…‥～〜ー・、")) break;
+        a.remove_suffix(r.size);
+    }
+    if (a.empty()) return false;
+    for (const std::string_view end : {"？", "?", "！", "!", "よ", "ぞ", "ぜ", "ね", "か", "って", "ろ"}) {
+        if (a.ends_with(end)) return true;
+    }
+    return false;
+}
+
 // Whether text before and after a word frame it as a person's name: a self-introduction (私は_です,
 // 俺は_だ, _と申します, _っていいます), a greeting or a call before the name at the end of an utterance
-// (ただいま、_, おはよう、_！), or a speaker label at the line start (_「).
-bool PersonFrame(std::string_view before, std::string_view after) {
+// (ただいま、_, おはよう、_！), a speaker label at the line start (_「), or a caption call.
+bool PersonFrame(std::string_view run, std::string_view before, std::string_view after) {
     std::string_view b = before;
     while (b.ends_with(" ") || b.ends_with("　")) b.remove_suffix(b.ends_with(" ") ? 1 : std::string_view("　").size());
     for (const std::string_view a : {"と申します", "と申す", "っていいます", "って言います", "といいます", "と言います", "っていうの", "って言うの"}) {
@@ -604,6 +630,18 @@ bool PersonFrame(std::string_view before, std::string_view after) {
         }
     }
     const std::string_view t = TrimSpace(b);
+    // A caption call: the name alone at the line start before a space (凶真 これからも…, 甲児 どうした？),
+    // or after a calling interjection and a space (おい 鯨木 どうした).
+    const bool spaceAfter = after.starts_with(" ") || after.starts_with("　");
+    // Not a run that starts with a numeral or a prefix of kind or count (百倍, 一域, 各団: words).
+    const bool prefixed = InRunes(RuneAt(run, 0).cp, "一二三四五六七八九十百千万億零各毎全諸両本当同某此其半第");
+    if (t.empty() && spaceAfter && before.empty() && !prefixed && CaptionCall(after)) return true;
+    const bool spaced = before.ends_with(" ") || before.ends_with("　");
+    if (spaced && (spaceAfter || ends)) {
+        for (const std::string_view call : {"おい", "ねえ", "なあ", "おーい", "ねぇ"}) {
+            if (t == call) return true;
+        }
+    }
     return t.empty() && after.starts_with("「");
 }
 
@@ -683,7 +721,7 @@ void Registry::Add(std::string_view rawLine) {
             // Not a run that ends in a kanji honorific (姫氏「: 姫 and 氏).
             const bool honorificEnd = run.text.ends_with("氏") || run.text.ends_with("君") || run.text.ends_with("様") ||
                                       run.text.ends_with("殿") || run.text.ends_with("嬢");
-            if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
+            if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(run.text, std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
                 count(framed_, std::string(run.text));
                 honGuess_.insert(std::string(run.text));
             }
@@ -725,7 +763,15 @@ void Registry::Add(std::string_view rawLine) {
             const std::string_view after = run.text.size() > t.size() && run.text.starts_with(t)
                                                ? run.text.substr(t.size())
                                                : std::string_view(line).substr(run.end);
-            if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま")) honGuess_.insert(t);
+            // The く of a verb before んだ is no くん (鍵開くんだよ: 開く).
+            const text::Rune last = RuneBefore(t, t.size());
+            const bool verbKu = after.starts_with("くん") && !after.starts_with("くん、") &&
+                                (after.substr(std::string_view("くん").size()).starts_with("だ") ||
+                                 after.substr(std::string_view("くん").size()).starts_with("で") ||
+                                 after.substr(std::string_view("くん").size()).starts_with("じゃ")) &&
+                                InflectedRun(std::string(t.substr(t.size() - last.size)) + "く") &&
+                                !AdjectiveKanji(t.substr(t.size() - last.size));  // 咲太くん: 太く is an adjective's
+            if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま") && !verbKu) honGuess_.insert(t);
         }
         if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
             count(agents_, std::string(run.text));
@@ -733,6 +779,20 @@ void Registry::Add(std::string_view rawLine) {
         if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
             !RoleLike(run.text) && !Flags(run.text).role) {
             count(gloss_, std::string(run.text));
+        }
+    }
+    // A two-part reading after a space and a spaced base (双寺 有仁 (そうじ ありひと)), which FindGloss,
+    // reading no space before the parenthesis, does not see: each run takes its part (spec LEX-4950).
+    for (std::size_t from = 0; from <= line.size();) {
+        RubyMatch m;
+        if (!FindReading(line, from, m)) break;
+        from = m.end;
+        if (!m.spaced) continue;
+        if (const auto split = SpacedPair(line, m); split.has_value()) {
+            count(gloss_, split->first.first);
+            count(gloss_, std::string(m.base));
+            SetReading(split->first.first, split->first.second);
+            SetReading(std::string(m.base), split->second);
         }
     }
     for (std::size_t from = 0; from <= line.size();) {
@@ -868,13 +928,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
         // A kanji name no dictionary has stands for the person after one honorific, as it is no
         // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
-        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !internal::GuessedName(t).empty()) n.score += 1;
+        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !OldFormWord(t) && !internal::GuessedName(t, GuessFallback(t)).empty()) n.score += 1;
         n.person = true;
     }
     // A kanji name no dictionary has, in a person frame, is a name its kanji's readings give (LEX-4833).
     for (const auto& [t, c] : framed_) {
         (void)c;
-        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || internal::GuessedName(t).empty()) continue;
+        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || OldFormWord(t) || internal::GuessedName(t, GuessFallback(t)).empty()) continue;
         Name& n = all[t];
         n.score = std::max(n.score, kThreshold);
         n.person = true;
