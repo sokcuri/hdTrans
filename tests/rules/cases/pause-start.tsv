@@ -8,7 +8,7 @@ cx:pause-start:10	おい、ちょっと……って！？	어이, 조금……�
 cx:pause-start:10	ハワイ……って、ごめんなさい！	하와이……라니, 미안해요!	fix	rewrites
 cx:pause-start:10	作戦完了…って、あの、報告が…	작전 완료…라니, 저, 보고가…	fix	rewrites
 cx:pause-start:10	クリスマスケーキ持ってきた…って、私そんなに甘いものは…。	크리스마스 케이크 가져왔다…라니, 나 그렇게 단 것은….	fix	rewrites
-cx:pause-start:10	「お、俺に聞かれても……って、ほら、あれじゃないか？」	「내, 내가 물어도……라니, 자, 저게 아니야?」	fix	rewrites
+cx:pause-start:10	「お、俺に聞かれても……って、ほら、あれじゃないか？」	「나, 나한테 물어도……라니, 자, 저게 아니야?」	fix	rewrites
 cx:pause-start:10	「ユウぃーっ、調子はどう……って、あら？」	「유우-, 상태는 어떻게……라니, 어머나?」	fix	rewrites
 cx:pause-start:10	へっ？ああっ、あの会場内からの……って、兄貴、まさか！？	헷? 아앗, 그 회장내에서의……라니, 형, 설마!?	fix	rewrites
 cx:pause-start:10	ハーモニカ……って何?	!rule:cx:pause-start:10	keep	rewrites
