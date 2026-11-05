@@ -12,3 +12,13 @@ cx:told-quote:10	先生は来週テストだと言われた	선생님은 다음�
 cx:told-quote:20	「だから、休めと言われても休めなかったんだ」	「그러니까, 쉬라고 해도 쉴 수 없었어」	keep	rewrites
 cx:told-quote:20	天才と言われた	천재라는 말을 들었다	keep	rewrites
 cx:told-quote:10	と 言われていたそうだ	라고 하고 있었다고 한다	keep	rewrites
+cx:told-quote:30	先生は「静かに」と言われた。	선생님은 「조용하게」라고 하셨다.	fix	rewrites
+cx:told-quote:30	部長が「帰っていい」と言われた。	부장이 「돌아가도 된다」라고 하셨다.	fix	rewrites
+cx:told-quote:30	先生は、「静かに」と言われた。	선생님은, 「조용하게」라고 하셨다.	fix	rewrites
+cx:told-quote:30	先生は「頑張ってください」と言われました。	선생님은 「힘내 주세요」라고 하셨습니다.	fix	rewrites
+cx:told-quote:30	先生に「静かに」と言われた。	선생님에게 「조용하게」라는 말을 들었다.	keep	rewrites
+cx:told-quote:30	彼は「行け」と言われた。	그는 「가라」라는 말을 들었다.	keep	rewrites
+cx:told-quote:10	昔から、この森には神がいると言われてきた。	옛날부터, 이 숲에는 신이 있다고 해 왔다.	keep	rewrites
+cx:told-quote:10	彼は天才だと言われてきた。	그는 천재라는 말을 들어 왔다.	fix	rewrites
+cx:told-quote:10	この薬は万病に効くと言われてきた。	이 약은 만병에 효과가 있다고 해 왔다.	keep	rewrites
+cx:told-quote:10	母にずっとバカだと言われてきた。	어머니에게 계속 바보라는 말을 들어 왔다.	fix	rewrites

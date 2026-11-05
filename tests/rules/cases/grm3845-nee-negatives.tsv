@@ -26,3 +26,11 @@ dict:grm:3845:masen-no	わたくしの物ではありませんのよ？	제 물�
 dict:grm:3845:masen-no	時間がありませんの	시간이 없어요	keep	local
 dict:grm:3845:masen-no	やるじゃありませんの｡	하는이 아니지 않아요.	keep	local
 dict:grm:3845:masen-no	よいではありませんの よいではありませんの	좋지 않지 않아요 좋지 않지 않아요	keep	local
+normalize:verb-nee	お疲れねえ。	피곤하구나.	keep	normalize
+normalize:verb-nee	今日もお疲れねえ。	오늘도 피곤하구나.	keep	normalize
+normalize:verb-nee	これでお別れねぇ。	이것으로 작별이네.	keep	normalize
+normalize:verb-nee	お休みねぇ	lacks:않	keep	normalize
+normalize:verb-nee	お任せねえ	lacks:없다	keep	normalize
+normalize:lone-nee	ねえよう、待ってよ。	있잖아, 기다려.	keep	normalize
+normalize:lone-nee	ねぇよぉ、待ってよ	has:있잖아	keep	normalize
+normalize:lone-nee	ねえよ、そんなの。	없어, 그런 것.	fix	normalize
