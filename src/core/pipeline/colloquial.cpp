@@ -791,12 +791,13 @@ constexpr std::u32string_view kFusedTail = U"なよぞしかぜわっんのさ";
 
 // Whether a fused ending that ends at q of rs ends a word there: at the end, before a character
 // other than hiragana, ー and ～ (a mark, a kanji, the noun it describes), before a kana of
-// kFusedTail, けど, だろ, でしょ or じゃ (痛えだろ); in katakana not before more katakana but ッ.
+// kFusedTail, けど, だろ, でしょ or じゃ (痛えだろ), or a noun in kana that it describes (固えこと, でけえもん);
+// in katakana not before more katakana but ッ.
 bool FusedTailAt(std::u32string_view rs, size_t q, bool katakana) {
     if (q >= rs.size()) return true;
     const char32_t c = rs[q];
     if (IsHiraganaRune(c)) {
-        for (const std::u32string_view w : {U"けど", U"だろ", U"でしょ", U"じゃ"}) {
+        for (const std::u32string_view w : {U"けど", U"だろ", U"でしょ", U"じゃ", U"こと", U"もん", U"もの", U"やつ"}) {
             if (rs.substr(q).starts_with(w)) return true;
         }
         return In(c, kFusedTail);
