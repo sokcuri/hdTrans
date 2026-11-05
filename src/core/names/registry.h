@@ -171,6 +171,7 @@ private:
     // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
     // それから), which is no name however often the document writes it (spec LEX-4828).
     bool WordThenParticle(std::string_view t);
+    bool WordAloud(std::string_view base, std::string_view reading);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
