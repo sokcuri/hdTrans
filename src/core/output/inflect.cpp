@@ -18,12 +18,15 @@ constexpr int kNieun = 4, kRieul = 8, kRieulMieum = 10, kMieum = 16, kBieup = 17
 
 bool Bright(int vowel) { return vowel == kA || vowel == kO || vowel == kYa || vowel == kWa; }
 
+// Both helpers take a whole stem; an empty one comes back unchanged.
 Stem WithFinal(Stem stem, int final) {
+    if (stem.empty()) return stem;
     stem.back() = text::SetFinal(stem.back(), final);
     return stem;
 }
 
 Stem WithVowel(Stem stem, int vowel) {
+    if (stem.empty()) return stem;
     const auto syllable = *text::Split(stem.back());
     stem.back() = text::Join(syllable.initial, vowel, 0);
     return stem;
