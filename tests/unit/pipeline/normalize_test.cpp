@@ -966,7 +966,7 @@ HD_TEST(pipeline_respell_iteration_marks) {
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},
-        {"お兄様、俺は"sv, "お兄様、俺は"sv},
+        {"お兄様、俺は"sv, "兄さん、俺は"sv},  // a man's お兄様, read 형님 (spec LEX-4619)
         {"お姉ちゃんとお兄さま"sv, "언니と오빠"sv},
     };
     for (const Case& c : female) HD_CHECK_EQ(WriteKinTerms(c.in, true), std::string(c.want));
@@ -977,6 +977,23 @@ HD_TEST(pipeline_write_kin_terms) {
         {"お兄ちゃん、早く"sv, "お兄ちゃん、早く"sv},   // no cue: the dictionary's 오빠
     };
     for (const Case& c : male) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
+    // The words the dictionary reads for the other sex switch on a clear cue only (spec LEX-4619).
+    const Case other[] = {
+        {"兄さん、あたしも行くわよ"sv, "お兄ちゃん、あたしも行くわよ"sv},
+        {"兄は来ないわよ"sv, "お兄ちゃんは来ないわよ"sv},
+        {"お兄さんに会いに来たのかしら"sv, "お兄ちゃんに会いに来たのかしら"sv},
+        {"兄弟なのよ"sv, "兄弟なのよ"sv},                          // 兄 in a compound
+        {"兄さん、甘くねぇのよ"sv, "兄さん、甘くねぇのよ"sv},          // rough speech
+        {"兄の手、光の滴のような涙"sv, "兄の手、光の滴のような涙"sv},  // のよう is no cue
+        {"お姉ちゃん、俺も行くぜ"sv, "누나、俺も行くぜ"sv},
+        {"姉は俺の自慢だ"sv, "누나は俺の自慢だ"sv},
+        {"姉さん、僕も行く"sv, "姉さん、僕も行く"sv},                // 僕 is also a girl's
+        {"お兄、早く"sv, "お兄ちゃん、早く"sv},                      // お兄 alone is a sister's word
+        {"お兄様、早く"sv, "お兄様、早く"sv},
+        {"お兄、俺だ"sv, "お兄、俺だ"sv},
+        {"お兄様、俺はもう子供じゃないんだぜ"sv, "兄さん、俺はもう子供じゃないんだぜ"sv},
+    };
+    for (const Case& c : other) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
     // A word that holds the kanji before the term and its first character (義姉) is left as written.
     const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
         const std::string_view word = line.substr(at, end - at);
