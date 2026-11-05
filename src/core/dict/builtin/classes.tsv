@@ -28,6 +28,8 @@
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
 //= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
+//= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
+//= verb.announce-move	Stems of the speaker's own move announced to the listener before a line-final よ (帰る, 戻る, 寝る, 行く): -ㄹ게 (先に帰るよ 먼저 돌아갈게, もう寝るよ 이제 잘게; spec GRM-3940).
 //= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
 //= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
@@ -11379,6 +11381,49 @@ noun.time-ni	土曜日
 noun.time-ni	雨の日
 noun.time-ni	嵐の夜
 noun.time-ni	誕生日
+verb.warning-act	怒
+verb.warning-act	おこ
+verb.warning-act	殴
+verb.warning-act	なぐ
+verb.warning-act	撃
+verb.warning-act	斬
+verb.warning-act	殺
+verb.warning-act	ころ
+verb.warning-act	叩
+verb.warning-act	たた
+verb.warning-act	蹴
+verb.warning-act	刺
+verb.warning-act	呼
+verb.warning-act	泣
+verb.warning-act	噛
+verb.warning-act	壊
+verb.warning-act	こわ
+verb.warning-act	捨て
+verb.warning-act	すて
+verb.warning-act	燃や
+verb.warning-act	もや
+verb.warning-act	バラ
+verb.warning-act	ばら
+verb.warning-act	言いつけ
+verb.warning-act	言い付け
+verb.warning-act	いいつけ
+verb.warning-act	通報
+verb.warning-act	訴え
+verb.warning-act	うった
+verb.warning-act	追い出
+verb.warning-act	おいだ
+verb.warning-act	ぶっ飛ば
+verb.warning-act	ぶっとば
+verb.warning-act	ぶん殴
+verb.warning-act	ぶんなぐ
+verb.announce-move	帰
+verb.announce-move	かえ
+verb.announce-move	戻
+verb.announce-move	もど
+verb.announce-move	寝
+verb.announce-move	出かけ
+verb.announce-move	でかけ
+verb.announce-move	行
 noun.least-able	子供
 noun.least-able	子ども
 noun.least-able	こども

@@ -92,7 +92,7 @@ cx:datte-noun:10	もう友達だって思ってるんだよね	이제 친구라�
 cx:datte-noun:10	友達だって思ってた！ 黙れ 女！	친구라고 생각했다! 입을 다물어라 여자!	fix	rewrites
 cx:datte-noun:5	パパのこと 友達だって 思ってる?	아빠친구라고 생각해?	fix	rewrites
 cx:datte-noun:5	先生だって知ってるでしょ!?	선생님도 알고 있지!?	keep	rewrites
-cx:datte-noun:15	雨だって行くよ。	비가 와도 가.	fix	rewrites
+cx:datte-noun:15	雨だって行くよ。	비가 와도 갈게.	fix	rewrites
 cx:datte-noun:15	雨だって行く。	비가 와도 간다.	fix	rewrites
 cx:datte-noun:15	雨だって降るさ。	비도 내리고 말이야.	keep	rewrites
 cx:datte-noun:15	嵐だって平気だ。	폭풍우도 괜찮다.	keep	rewrites
