@@ -1253,14 +1253,14 @@ cx:koshita-noun:10	LEX-70	&&3 S+1== "越したことはない" I+0== "Rに" ||2 
 //= genki-greeting	after Select 97	元気 asked of someone as a greeting, or wished at parting, is how they get on, 잘 지내다, not 건강하다 (元気？ 잘 지내?, 元気だった？ 잘 지냈어?, 元気でな 잘 지내).
 cx:genki-greeting:10	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" P+0== "1" ||2 S+1== "?" S+1== "？"	set-target "잘 지내    "	元気？ 잘 지내?
 cx:genki-greeting:15	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "か" ||2 S+1== "な" S+1== "なあ"	set-target "잘 지낼까    " set-ending "" set-target@+1 "" set-ending@+1 ""	元気かな 잘 지낼까
-cx:genki-greeting:20	LEX-3847	&&2 ||2 S+0== "元気" S+0== "お元気" ||2 U+0== "か" U+0== "かい"	set-target "잘 지내    " set-ending ""	よう、元気か 잘 지내?
+cx:genki-greeting:20	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" ||2 U+0== "か" U+0== "かい" !1 ||3 S+1== "Lどう" P+1== "4" P+1== "7"	set-target "잘 지내    " set-ending ""	よう、元気か 잘 지내?
 cx:genki-greeting:29	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "だった" S+1== "かな"	set-target "잘 지냈을까    " set-ending "" set-target@+1 "" set-ending@+1 ""	元気だったかな 잘 지냈을까
-cx:genki-greeting:30	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "だった" S+1== "か"	set-target "잘 지냈    " set-ending "" set-target@+1 "어" set-ending@+1 ""	元気だったか 잘 지냈어
+cx:genki-greeting:30	LEX-3847	&&4 ||2 S+0== "元気" S+0== "お元気" U+0== "だった" S+1== "か" !1 ||3 S+2== "Lどう" P+2== "4" P+2== "7"	set-target "잘 지냈    " set-ending "" set-target@+1 "어" set-ending@+1 ""	元気だったか 잘 지냈어
 cx:genki-greeting:31	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "だった" ||2 S+1== "?" S+1== "？"	set-target "잘 지냈어    " set-ending ""	元気だった？ 잘 지냈어?
 cx:genki-greeting:35	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" P+0== "1" S+1== "する"	set-target "" set-target@+1 "잘 지&A6@"	元気してる？ 잘 지내고 있어?
 cx:genki-greeting:38	LEX-3847	&&3 S+0== "元気に" D+0== "건강하게 지&A6@" !1 S-1== "を"	set-target "잘 지&A6@"	元気にしてる？ 잘 지내고 있어?
-cx:genki-greeting:40	LEX-3847	&&2 ||2 S+0== "元気" S+0== "お元気" U+0== "ですか"	set-target "잘 지냅니까    " set-ending ""	元気ですか 잘 지냅니까?
-cx:genki-greeting:41	LEX-3847	&&2 ||2 S+0== "元気" S+0== "お元気" U+0== "でしたか"	set-target "잘 지냈습니까    " set-ending ""	元気でしたか 잘 지냈습니까?
+cx:genki-greeting:40	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "ですか" !1 ||3 S+1== "Lどう" P+1== "4" P+1== "7"	set-target "잘 지냅니까    " set-ending ""	元気ですか 잘 지냅니까?
+cx:genki-greeting:41	LEX-3847	&&3 ||2 S+0== "元気" S+0== "お元気" U+0== "でしたか" !1 ||3 S+1== "Lどう" P+1== "4" P+1== "7"	set-target "잘 지냈습니까    " set-ending ""	元気でしたか 잘 지냈습니까?
 cx:genki-greeting:50	LEX-3847	&&4 ||2 S+0== "元気" S+0== "お元気" U+0== "で" ||4 S+1== "な" S+1== "ね" S+1== "なー" S+1== "ねー" ||4 F+1== "sentence-end" F+1== "exclaim-after" F+1== "last" F+1== "utterance-end"	set-target "잘 지내    " set-ending "" set-target@+1 "" set-ending@+1 ""	元気でな 잘 지내
 cx:genki-greeting:52	LEX-3847	&&3 S+0== "お元気" ||4 U+0== "で" U+0== "で～" U+0== "で〜" U+0== "でー" ||2 F+0== "sentence-end" F+0== "exclaim-after"	set-target "잘 지내요    " set-ending ""	お元気で 잘 지내요
 cx:genki-greeting:54	LEX-3847	&&3 S+0== "元気" ||4 U+0== "で" U+0== "で～" U+0== "で〜" U+0== "でー" ||2 F+0== "sentence-end" F+0== "exclaim-after"	set-target "잘 지내    " set-ending ""	元気で！ 잘 지내!
