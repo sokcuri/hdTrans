@@ -65,3 +65,12 @@ cx:fic-polysemy-1:62	今日は彼女の傍についていたい。	has:붙어 �
 cx:fic-polysemy-1:62	駅についていた	lacks:붙어	keep	rewrites
 cx:fic-polysemy-1:64	私が おそばについていながら！	has:곁에 붙어	fix	rewrites
 cx:fic-polysemy-1:64	おそばを食べた	has:국수	keep	rewrites
+cx:fic-polysemy-1:70	小柄の男が一歩前に出て言う	has:앞으로 나와	fix	rewrites
+cx:fic-polysemy-1:70	人を引っ張れば、反作用で自分が前に出る。	has:앞에 나온다	keep	rewrites
+cx:fic-polysemy-1:70	もう一歩前に踏み出すと	has:앞으로 내디디	fix	rewrites
+cx:fic-polysemy-1:70	前かがみで前にこぼれた黒髪を	has:앞으로 흘러넘친	fix	rewrites
+cx:fic-polysemy-1:70	屋敷の改築？そんな話、前に出ていたかしら	has:전에 나와	keep	rewrites
+cx:fic-polysemy-1:70	基本は、前に出されたカードより強いカードを出して行く。	has:전에 나온	keep	rewrites
+cx:fic-polysemy-1:70	部屋の前に出た	has:방 앞에	keep	rewrites
+sense:class-rank	階級としては室長クラスの実力者に限られる。	has:실장 급	fix	senses
+sense:class-rank	下級貴族クラスの男子が一人	has:반의	keep	senses
