@@ -1361,6 +1361,23 @@ bool KanjiShikire(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The いく of a て form said く before a noun or a demonstrative (染まってく坂道, まきこまれてくその): ていく, going on
+// (spec GRM-3850). Not てくれ, てくる, てくだ, nor before ん (てくんない てくれない).
+bool TeKuNoun(std::string_view s, size_t pos, Match& m) {
+    const char32_t b = Before(s, pos);
+    if (b == 0 || !(b == U'っ' || b == U'ん' || In(b, U"いきぎしちにびみりえけげせてねべめれじ"))) return false;
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "く") || p >= s.size()) return false;
+    const char32_t n = At(s, p).cp;
+    const std::string_view rest = s.substr(p);
+    const bool noun = IsKanjiClass(n) || IsKatakanaRune(n) || rest.starts_with("その") || rest.starts_with("この") || rest.starts_with("あの");
+    if (!noun || rest.starts_with("下さ")) return false;  // 聞いてく下さい: the ください of a request, misspelled
+    m.end = p;
+    return true;
+}
+
 // なきゃ said with a copula for "must" (行かなきゃだし, しなきゃだよ): なきゃいけない, the obligation; not
 // なきゃだめ, which reads whole.
 bool NakyaDa(std::string_view s, size_t pos, Match& m) {
@@ -1584,6 +1601,7 @@ std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
     text = ReplaceAll(text, NakyaDa, [](const Match&) { return std::string("なきゃいけない"); });
     text = ReplaceAll(text, KanjiShikire, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, KanjiNasage, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, TeKuNoun, [](const Match& m) { return Cat({m.group[1], "いく"}); });
     text = ReplaceAll(text, TeKoNee, [](const Match& m) { return Cat({m.group[1], "こない"}); });
     // Set for this scan only and put back after it, also when the scan throws.
     struct Scope {

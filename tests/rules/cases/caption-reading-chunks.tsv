@@ -1,0 +1,22 @@
+# 규칙: GRM-3850, LEX-3844, LEX-4355
+rule	input	expected	kind	layer
+normalize:te-ku-noun	消えてく伝統もあるのよ	has:사라져 가는 전통	fix	normalize
+normalize:te-ku-noun	頭も視界も真っ白になってく気がする。	has:새하얗게 되어 가는 것 같다	fix	normalize
+normalize:te-ku-noun	ソりを引く馬は知って 雪を抜けてく道を	has:빠져 가는 길	fix	normalize
+normalize:te-ku-noun	人が生活してくステップ=	has:생활해 나가는 스텝	fix	normalize
+normalize:te-ku-noun	来てくれ	와 줘	keep	normalize
+normalize:te-ku-noun	やってくんない	lacks:가	keep	normalize
+cx:iru-tai:10	今は兄さんと二人きりでいたいです	has:있고 싶습니다	fix	rewrites
+cx:iru-tai:10	隼斗が人間のままでいたいなら、妾はそれでもかまわぬぞ	has:인간인 채로 있고 싶으면	fix	rewrites
+cx:iru-tai:10	使命なんて思い出したくなかった。ただの彼女でいたかった！	has:그녀로 있고 싶었다	fix	rewrites
+cx:iru-tai:10	筋を通したんだな。ダチのままでいたかったんだろうよ	has:친구인 채로 있고 싶었을	fix	rewrites
+cx:iru-tai:10	頭がいたい	머리가 아프다	keep	rewrites
+cx:iru-tai:10	転んだのでいたい	has:아프다	keep	rewrites
+normalize:old-final-shi	五月雨を、あつめて早し…って芭蕉だっけ？	has:빠르다	fix	normalize
+normalize:old-final-shi	注意・転落多し！	has:추락 많아	fix	normalize
+normalize:old-final-shi	うぅ～、マジ暑し。	has:덥다	fix	normalize
+normalize:old-final-shi	時すでに遅し。	has:이미 때는 늦었다	keep	normalize
+normalize:old-final-shi	ヴォード家の面汚し！	has:수치	keep	normalize
+normalize:old-final-shi	ところで "使い古し」は 愛称です	has:오래 써서 낡아	keep	normalize
+cx:caption-set-words:20	きりがありません	끝이 없습니다	fix	rewrites
+cx:caption-set-words:20	きりが深い	!rule:cx:caption-set-words:20	keep	rewrites

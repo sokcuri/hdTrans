@@ -2205,6 +2205,24 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         rs[k] = U'い';
         changed = true;
     }
+    // The old final し of an adjective of one kanji that ends its phrase (秋深し, 尊し) is its い (spec LEX-4355):
+    // the kanji is an adjective stem, no key reads the kanji and し (良し, 無し, 出し), and a kanji before it is a
+    // separate word.
+    for (size_t k = 1; k < rs.size(); k++) {
+        if (rs[k] != U'し' || !IsKanjiRune(rs[k - 1])) continue;
+        // A noun before the stem is the subject (秋深し) unless the two kanji are one word (欲深し).
+        if (k >= 2 && IsKanjiRune(rs[k - 2]) && !e.Tags(std::u32string_view(rs).substr(k - 2, 2)).empty()) continue;
+        if (k + 1 < rs.size() && !In(rs[k + 1], U"。！？!?」』）)…")) continue;
+        const std::u32string_view head = std::u32string_view(rs).substr(k - 1);
+        if (e.Tags(head.substr(0, 1)).find('H') == std::string::npos || e.LongestKey(head) > 1) continue;
+        // No longer word reads through the し (お人好し, 面汚し, 灯台下暗し, 時すでに遅し),
+        bool through = false;
+        // nor one that ends at the stem kanji, whose し is its own (使い古し).
+        for (size_t j = k > 8 ? k - 8 : 0; j + 1 < k && !through; j++) through = e.LongestKey(std::u32string_view(rs).substr(j)) >= k - j;
+        if (through) continue;
+        rs[k] = U'い';
+        changed = true;
+    }
     // The tic っぽい drawn out after a word (行くっぽーい, 寝ちゃったっぽ～い) is っぽい with the
     // lengthening mark.
     for (size_t i = 1; i + 2 < rs.size(); i++) {
