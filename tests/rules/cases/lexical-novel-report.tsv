@@ -9,7 +9,7 @@ dict:w:29902	男が火に薪をくべながらぽつりと、	남자가 불에 �
 dict:w:29901	炉にくべれば、少しは足しになるだろう』	로에 넣으면, 조금은 더하가 될 것이다』	fix	lookup
 dict:jisjk:29720	岩にくぼみのある場所へ移動する。	바위에 움푹 팬 곳이 있는 장소에 이동한다.	fix	lookup
 dict:jisjk:29720	城壁の僅かな窪みを利用し登る。	성벽의 얼마 안되는 움푹 팬 곳을 이용해 오른다.	fix	lookup
-dict:jisjk:29720	僅かな窪みに足をかけ崖を降りた。	얼마 안되는 움푹 팬 곳에 다리를 내기벼랑을 내렸다.	fix	lookup
+dict:jisjk:29720	僅かな窪みに足をかけ崖を降りた。	얼마 안되는 움푹 팬 곳에 다리를 걸고 벼랑을 내렸다.	fix	lookup
 pack:novel-report-senses:1	惨めさや寂しさばかりが募ってきそうだったので、	비참함이나 외로움만이 커져 올 것 같았기 때문에,	fix	packs
 pack:novel-report-senses:1	オレじゃダメだったか、という無念さが募る。	나는 안되었던인가, 라는 원통함이 커진다.	fix	packs
 pack:novel-report-senses:1	ラハッドの中で否応なく危機感が募っていく。	라핫드 중에서 억지로 위기감이 커져 간다.	fix	packs
