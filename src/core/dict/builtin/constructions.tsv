@@ -923,6 +923,9 @@ cx:sense-cues-1:410	LEX-4624	&&3 S+0== "扱" D+0== "취급&AV@" ||14 &&2 S-1== "
 cx:fic-collocs-1:10	LEX-4900	&&2 S+0== "手を打" <6 ||11 S+0== "Lポン" S+0== "Lぽん" S+0== "Lパン" S+0== "Lぱん" S+0== "Lパチン" S+0== "퐁" S+0== "탁" S+0== "팡" S+0== "L짝" S+0== "なるほど" S+0== "思い出" S+0== "00。！？!?「」『』"	select-target "손뼉을 &AO@"	なるほどと手を打った 그렇구나 하고 손뼉을 쳤다
 //= quote-answer	after Select 154	A 返す right after a closing quote with と, or that と and だけ, answers what is quoted, 대답하다 (「そうか」とだけ返す 「그런가」라고만 대답한다), not 돌려주다.
 cx:quote-answer:10	LEX-4001	&&2 S+0== "返" ||4 S-1== "R」と" S-1== "R』と" &&2 S-1== "だけ" S-2== "R」と" &&2 S-1== "だけ" S-2== "R』と"	set-target "대답&AV@"	「そうか」と返す 「그런가」라고 대답한다
+//= fic-polysemy-2	after Select 167	Verbs whose sense the words around them show. 散って before いく or いった, with no flower, leaf, spark, snow, light or life in the sentence, is people scattering, 흩어지다 (みんなが散っていく 모두가 흩어져 간다), not falling, 지다. 聞いて before き or 来, with no object marked を before it in its clause (back to a comma or a verb) and not before もらう, is asking, 묻다 (投げやりに聞いてきた 무책임하게 물어 왔다; spec LEX-4902).
+cx:fic-polysemy-2:10	LEX-4902	&&6 S+0== "散" I+0== "散って" !1 D+0== "흩어&AL@" ||2 S+1== "Lい" S+1== "L行" !1 <0 ||7 S+0== "~花" S+0== "~桜" S+0== "~葉" S+0== "~火花" S+0== "~命" S+0== "~雪" S+0== "~光" S+0== "00。！？!?「」『』" !1 >0 ||7 S+0== "~花" S+0== "~桜" S+0== "~葉" S+0== "~火花" S+0== "~命" S+0== "~雪" S+0== "~光" S+0== "00。！？!?「」『』"	select-target "흩어&AL@"	みんなが散っていく 모두가 흩어져 간다
+cx:fic-polysemy-2:20	LEX-4902	&&6 S+0== "聞" I+0== "R聞いて" D+0== "&J6@" ||2 S+1== "き" S+1== "L来" !1 S+2== "Lもら" !1 <0 S+0== "を" ||2 S+0== "00。！？!?「」『』、" F+0== "verb"	select-target "&J7@"	と頬を染めて聞いてきた 라고 뺨을 붉혀 물어 왔다
 //= only-that	after Select 155	それだけ and これだけ right before the copula say that is all, 그것뿐 and 이것뿐 (それだけだ 그것뿐이다), not 그것만이다 or 이만큼이다.
 cx:only-that:10	LEX-4002	&&2 S+0== "それだけ" ||2 S+1== "Lだ" S+1== "でした"	set-target "그것뿐"	それだけだ 그것뿐이다
 cx:only-that:20	LEX-4002	&&2 S+0== "これだけ" ||2 S+1== "Lだ" S+1== "でした"	set-target "이것뿐"	これだけだ 이것뿐이다
