@@ -85193,7 +85193,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 警視監	경시감	N110			GN						けいしかん	names.712988
 警視総監	경시총감	N110			GN							names.712989
 警視長	경시장	N110			GN							names.712990
-警部	경부	N130	QPNVHn	Wb	GN						けいぶ	names.712991
 警部補	경위	N110			GN							names.712992
 警部補 矢部謙三	경부보 야베 켄조	N130	QWK		GN							names.712993
 警部補_佃次郎	경부보 츠쿠다 지로	N130	QWK		GN							names.712994
@@ -122554,7 +122553,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 風符「風神一扇」	풍부「풍신일선」	N110			GN							names.750868
 風精の迷宮	실프 라비린스	N130	QPNVHn		GN							names.750869
 風紀	풍기	N110			GN						ふうき	names.750870
-風紀委員	저지먼트	N130	VGt		GN							names.750871
+風紀委員	풍기위원	N130	VGt		GN							names.750871
 風紀委員 アリア	풍기위원 아리아	N110			GN							names.750872
 風紀委員会	풍기위원회	N110			GN							names.750873
 風紀委員長	풍기위원장	N130	QPNVHn	Wb	GN							names.750874
