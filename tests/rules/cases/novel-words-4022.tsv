@@ -15,7 +15,7 @@ cx:de-arou-noun:10	専門家が聞けば驚愕するであろう貴重な知識�
 cx:de-arou-noun:10	王子は思いもしないであろうジオルドの姿	has:않을 지오르드	fix	rewrites
 cx:de-arou-noun:10	「余の申したことを覚えておるであろう？」	「짐이 말씀드린 것을 기억하고 있겠지?」	keep	rewrites
 cx:de-arou-noun:10	それは困難であろう。	그것은 곤란할 것이다.	keep	rewrites
-cx:noun-denai-if:10	私と会話が出来る人でないと、話すら聞いてもらえないからね。	has:사람이 아니면, 이야기조차 들어 줄 수 없으니까	fix	rewrites
+cx:noun-denai-if:10	私と会話が出来る人でないと、話すら聞いてもらえないからね。	has:사람이 아니면, 이야기조차 들어 주지 않으니까	fix	rewrites
 cx:noun-denai-if:10	会話が出来る人でないと、話を聞いてもらえない。	has:사람이 아니면, 이야기를	fix	rewrites
 cx:noun-denai-if:10	学生でないと言った。	학생이 아니라고 말했다.	keep	rewrites
 cx:noun-denai-if:10	彼は学生でないと、言った。	!rule:cx:noun-denai-if:10	keep	rewrites
@@ -38,8 +38,8 @@ cx:novel-fixes-2:60	勿論ね。	물론.	fix	rewrites
 cx:novel-fixes-2:60	学生ね。	학생이네.	keep	rewrites
 cx:novel-fixes-2:70	今日、ハンターに成りました。	오늘, 헌터가 되었습니다.	fix	rewrites
 cx:novel-fixes-2:70	彼は医者になりました。	그는 의사가 되었습니다.	keep	rewrites
-cx:novel-fixes-2:80	私と会話が出来る人でないと、話すら聞いてもらえない	has:들어 줄 수 없	fix	rewrites
-cx:novel-fixes-2:80	週末しかお外に出してもらえないの	has:내 줄 수 없어	fix	rewrites
+cx:novel-fixes-2:80	私と会話が出来る人でないと、話すら聞いてもらえない	has:들어 주지 않	fix	rewrites
+cx:novel-fixes-2:80	週末しかお外に出してもらえないの	has:내 주지 않아	fix	rewrites
 cx:novel-fixes-2:80	褒めてもらえない。	칭찬해 주지 않는다.	keep	rewrites
 cx:novel-fixes-2:90	彼女はそれに気付くと、アキラに改めて微笑んだ。	has:아키라에게 다시 미소 지었다	fix	rewrites
 cx:novel-fixes-2:90	名前を田中に改めて届け出た。	has:타나카로 고쳐	keep	rewrites
