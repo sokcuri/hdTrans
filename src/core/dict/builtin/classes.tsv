@@ -388,6 +388,11 @@
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
+//= script.chinese-particle	Sentence particles of Chinese that Japanese text never writes (嗎, 呢, 啊): a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 的意思, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
+//= script.chinese-mark	Function characters of Chinese prose that Japanese words also hold (的, 是, 在, 這, 說): two of them in a Han run of four characters or more that no okurigana follows, one of script.chinese-mark-core and one of script.chinese-mark-strict, make it Chinese (spec LAY-17).
+//= script.chinese-mark-core	The marks of script.chinese-mark that Chinese grammar most needs (的, 了, 是).
+//= script.chinese-mark-strict	The marks of script.chinese-mark that Japanese compounds and old-style text rarely hold (這, 很, 們).
 //= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
@@ -9400,6 +9405,124 @@ wrap.sentence-start	うわ
 wrap.sentence-start	よし
 wrap.sentence-start	じゃあ
 wrap.sentence-start	ところが
+script.chinese-particle	嗎
+script.chinese-particle	呢
+script.chinese-particle	咱
+script.chinese-particle	啊
+script.chinese-particle	啦
+script.chinese-particle	喔
+script.chinese-particle	嗯
+script.chinese-word	什麼
+script.chinese-word	這個
+script.chinese-word	這裡
+script.chinese-word	這樣
+script.chinese-word	這是
+script.chinese-word	這次
+script.chinese-word	那個
+script.chinese-word	那裡
+script.chinese-word	那麼
+script.chinese-word	沒有
+script.chinese-word	不是
+script.chinese-word	就是
+script.chinese-word	但是
+script.chinese-word	因為
+script.chinese-word	還是
+script.chinese-word	已經
+script.chinese-word	聽到
+script.chinese-word	為什麼
+script.chinese-word	怎麼
+script.chinese-word	自己的
+script.chinese-word	我們
+script.chinese-word	你們
+script.chinese-word	他們
+script.chinese-word	她們
+script.chinese-word	人們
+script.chinese-word	它們
+script.chinese-word	是指
+script.chinese-word	也就是
+script.chinese-word	的是
+script.chinese-word	是在
+script.chinese-word	就像
+script.chinese-word	應該
+script.chinese-word	這種
+script.chinese-word	哪裡
+script.chinese-word	所著
+script.chinese-word	位於
+script.chinese-word	意為
+script.chinese-word	指的是
+script.chinese-word	源自
+script.chinese-word	來自
+script.chinese-word	的意思
+script.chinese-word	意思是
+script.chinese-word	讀音
+script.chinese-word	音同
+script.chinese-word	讀作
+script.chinese-word	唸作
+script.chinese-word	直譯
+script.chinese-word	捏自
+script.chinese-word	惡搞
+script.chinese-word	原文為
+script.chinese-word	原文是
+script.chinese-word	原型是
+script.chinese-word	的簡稱
+script.chinese-word	系列中
+script.chinese-word	中登場
+script.chinese-word	讀為
+script.chinese-word	讀成
+script.chinese-word	寫成
+script.chinese-word	的時候
+script.chinese-word	日語中
+script.chinese-word	在日語
+script.chinese-word	日語的
+script.chinese-word	日語裡
+script.chinese-word	的日語
+script.chinese-word	的諧音
+script.chinese-word	發音為
+script.chinese-word	發音同
+script.chinese-word	音相近
+script.chinese-word	真是的
+script.chinese-word	不對
+script.chinese-word	并且
+script.chinese-mark	的
+script.chinese-mark	是
+script.chinese-mark	了
+script.chinese-mark	在
+script.chinese-mark	和
+script.chinese-mark	與
+script.chinese-mark	為
+script.chinese-mark	也
+script.chinese-mark	就
+script.chinese-mark	都
+script.chinese-mark	被
+script.chinese-mark	把
+script.chinese-mark	從
+script.chinese-mark	對
+script.chinese-mark	還
+script.chinese-mark	過
+script.chinese-mark	說
+script.chinese-mark	讀
+script.chinese-mark	這
+script.chinese-mark	著
+script.chinese-mark	裡
+script.chinese-mark	給
+script.chinese-mark	讓
+script.chinese-mark	很
+script.chinese-mark	跟
+script.chinese-mark	們
+script.chinese-mark-core	的
+script.chinese-mark-core	了
+script.chinese-mark-core	是
+script.chinese-mark-strict	這
+script.chinese-mark-strict	說
+script.chinese-mark-strict	讀
+script.chinese-mark-strict	很
+script.chinese-mark-strict	讓
+script.chinese-mark-strict	跟
+script.chinese-mark-strict	裡
+script.chinese-mark-strict	還
+script.chinese-mark-strict	從
+script.chinese-mark-strict	對
+script.chinese-mark-strict	們
 script.chinese-han	你
 script.chinese-han	您
 script.chinese-han	么

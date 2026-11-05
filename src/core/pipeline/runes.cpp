@@ -5,6 +5,7 @@
 
 #include "core/dict/classes.h"
 #include "core/text/unicode.h"
+#include "core/text/utf8.h"
 #include "core/tokenizer/charsets.h"
 
 namespace hdTrans::pipeline::internal {
@@ -75,26 +76,37 @@ bool ChineseRune(char32_t r) {
     return text::IsKanji(r) && ComputeChineseRune(r);
 }
 
-// Whether text holds a character of ChineseRune; most lines hold none.
-bool HoldsChineseRune(std::string_view text) {
-    for (size_t i = 0; i < text.size();) {
-        const auto lead = static_cast<unsigned char>(text[i]);
-        if (lead < 0xE3) {  // below U+3000: ASCII, Latin, symbols
-            i++;
-            continue;
+
+// Whether the Han run reads as Chinese by its grammar though every character of it is Japanese: it
+// holds a sentence particle of Chinese (script.chinese-particle: 嗎, 呢) or a word of Chinese prose
+// (script.chinese-word: 這個, 的意思, 讀作), or it has four characters or more, no okurigana after it
+// (hiragana), and two marks of script.chinese-mark, one of script.chinese-mark-core (的, 了, 是) and
+// one of script.chinese-mark-strict (這, 很): 是揶揄在吃火鍋的時候, 日語中 (not 精神的存在, 現存在的把握性,
+// 補給完了, 是非御入湯被下候 or 傲骨從來與俗違, which old-style Japanese and kanbun write).
+bool ChineseGrammarRun(std::string_view run, bool okurigana) {
+    size_t marks = 0;
+    bool core = false, strict = false;
+    char32_t seen[8] = {};
+    for (size_t i = 0; i < run.size();) {
+        const std::string_view rest = run.substr(i);
+        if (dict::StartsWithMember(HDTRANS_CLASS("script.chinese-word"), rest) > 0) return true;
+        const text::Rune r = text::DecodeRune(rest);
+        if (dict::InClassRune(HDTRANS_CLASS("script.chinese-particle"), r.cp)) return true;
+        if (dict::InClassRune(HDTRANS_CLASS("script.chinese-mark"), r.cp) && std::find(seen, seen + marks, r.cp) == seen + marks &&
+            marks < std::size(seen)) {
+            seen[marks++] = r.cp;
+            core = core || dict::InClassRune(HDTRANS_CLASS("script.chinese-mark-core"), r.cp);
+            strict = strict || dict::InClassRune(HDTRANS_CLASS("script.chinese-mark-strict"), r.cp);
         }
-        const text::Rune r = text::DecodeRune(text.substr(i));
-        if (ChineseRune(r.cp)) return true;
         i += std::max<size_t>(1, r.size);
     }
-    return false;
+    return !okurigana && text::RuneCount(run) >= 4 && marks >= 2 && core && strict;
 }
 
 }  // namespace
 
 std::vector<std::pair<size_t, size_t>> ChineseRuns(std::string_view text) {
     std::vector<std::pair<size_t, size_t>> runs, loose;
-    if (!HoldsChineseRune(text)) return runs;
     for (size_t i = 0; i < text.size();) {
         const size_t n = RunOf(text.substr(i), text::IsKanji);
         if (n == 0) {
@@ -107,6 +119,7 @@ std::vector<std::pair<size_t, size_t>> ChineseRuns(std::string_view text) {
             chinese = ChineseRune(r.cp);
             k += r.size;
         }
+        if (!chinese) chinese = ChineseGrammarRun(text.substr(i, n), IsHiraganaRune(text::DecodeRune(text.substr(i + n)).cp));
         if (chinese) {
             runs.push_back({i, i + n});
         } else if (!IsKanaRune(LastRune(text.substr(0, i)).cp) && !IsKanaRune(text::DecodeRune(text.substr(i + n)).cp)) {
