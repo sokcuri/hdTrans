@@ -749,6 +749,36 @@ bool TeBefore(std::string_view s, size_t pos, std::string_view& head) {
     return IsKanjiClass(last) || In(last, U"っいしえけげせぜてねべぺめれきぎじちひびみり");
 }
 
+// The contracted てる of a て form before the んだし or のだし of a reason (寝てるんだし, 断ってるんだし):
+// ている, whose 있으니까 the dictionary reads there, where the contracted form split into 자고 있어 해.
+bool ContractedTeiru(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0) return false;
+    size_t p = pos;
+    std::string_view to;
+    if (Lit(s, p, "てる")) {
+        to = "ている";
+    } else if (Lit(s, p = pos, "でる")) {
+        to = "でいる";
+    } else {
+        return false;
+    }
+    const std::string_view head = s.substr(0, pos);
+    const char32_t last = LastRune(head).cp;
+    const bool de = to.starts_with("で");
+    if (de ? !(last == U'ん' || last == U'い') : !(IsKanjiClass(last) || In(last, U"っいしえけげせぜてねべぺめれきぎじちひびみり"))) return false;
+    // an ichidan verb whose stem ends in て or で (捨てる, 育てる, 茹でる) is no contraction
+    if (VerbIs(s.substr(0, p))) return false;
+    bool follows = false;
+    for (const std::string_view f : {"んだし", "のだし"}) {
+        // not the ですから of a reason (ついてるんですから)
+        follows = follows || (s.substr(p).starts_with(f) && !s.substr(p + f.size()).starts_with("ら"));
+    }
+    if (!follows) return false;
+    m.group[1] = to;
+    m.end = p;
+    return true;
+}
+
 // The 言っておくれでない that forbids a saying (つまらない事を言っておくれでない): 言わないでくれ, whose
 // 말하지 말아 줘 the dictionary reads; the て form of 言う (stem.te-saying) has its negative in わ.
 bool SayingForbidden(std::string_view s, size_t pos, Match& m) {
@@ -1044,6 +1074,7 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     text = ReplaceAll(text, RegionalWord, group1);
     if (text.find("ええ") != std::string::npos) text = ReplaceAll(text, GoodBeforeNoda, group1);
     if (text.find("おくれでない") != std::string::npos) text = ReplaceAll(text, SayingForbidden, group1);
+    if (text.find("る") != std::string::npos || text.find("た") != std::string::npos) text = ReplaceAll(text, ContractedTeiru, group1);
     if (text.find("おくれ") != std::string::npos) text = ReplaceAll(text, OldRequest, group1);
     if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredState, group1);
     if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredComing, group1);

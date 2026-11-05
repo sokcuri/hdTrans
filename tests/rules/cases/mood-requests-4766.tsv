@@ -32,18 +32,11 @@ normalize:kansai-ee	「お、アラタ、ええやんアンタんとこの新人
 normalize:kansai-ee	おねえちゃん その時計 ええやろ？	언니 그 시계 좋지?	keep	normalize
 normalize:kansai-ee	ゆうくんも我慢するより、ずっと気持ちええ方がええやろ？	유 군도 참는 것보다, 훨씬 기분 좋은 것이 좋지?	keep	normalize
 normalize:kansai-ee	その調子で ココーンと 点も 取ってくれて ええんやで。	그 상태로 코콘과 점도 집어 주어도 되는 이야.	keep	normalize
-cx:late-quoted:10	「かといって、汐美祭が終わってから選挙の下地を作り初めても間に合わないだろう」	「그렇다고 해서, 시오미제가 끝나고 나서 선거의 기초를 만들어 처음도 늦을 거야」	fix	rewrites
-cx:late-quoted:10	「少しでもトラブルがあったら間に合わないですよね？	「조금이라도 트러블이 있으면 늦죠?	fix	rewrites
-cx:late-quoted:10	「数が多くて対応が間に合わない。	「수가 많아서 대응이 늦다.	fix	rewrites
-cx:late-quoted:10	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4한으로 늦네」	fix	rewrites
-cx:late-quoted:10	「専門家じゃなくても、今のまま練習もしないんじゃ汐美祭に間に合わないのはわかります」	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	「もう間に合わないと思ってたんですが、仲間たちに助けてもらって、なんとかここに立つことできました」	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	もう普通の早割は間に合わないよー！	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	「間に合わないか」	「늦은가」	fix	rewrites
-cx:late-quoted:10	間に合わないわ」	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	もうそれじゃ間に合わない。	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	今からじゃ 絶対 間に合わない。	!rule:cx:late-quoted:10	keep	rewrites
-cx:late-quoted:10	もういそがないと間に合わない。	!rule:cx:late-quoted:10	keep	rewrites
+output:late-casual	「かといって、汐美祭が終わってから選挙の下地を作り初めても間に合わないだろう」	「그렇다고 해서, 시오미제가 끝나고 나서 선거의 기초를 만들어 처음도 늦을 거야」	fix	rewrites
+output:late-casual	「少しでもトラブルがあったら間に合わないですよね？	「조금이라도 트러블이 있으면 늦죠?	fix	rewrites
+output:late-casual	「数が多くて対応が間に合わない。	「수가 많아서 대응이 늦다.	fix	rewrites
+output:late-casual	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4한으로 늦네」	fix	rewrites
+output:late-casual	「間に合わないか」	「늦는가」	fix	rewrites
 grammar:result-suru-past	失敗してるんだから 学習しなきゃね｡	실패했으니까 학습해야지.	fix	conjugation
 grammar:result-suru-past	私…何度も同じような失敗してるのに	나…몇 번이나 같은 실패했는데	fix	conjugation
 grammar:result-suru-past	寝てるだけで全てが完了してるんだもん。	자고 있을 뿐으로 모두가 완료했는걸.	fix	conjugation
@@ -113,7 +106,7 @@ cx:kure-request:20	「約束してくれるなら、めちゃくちゃにさせ�
 cx:kure-request:20	「でも……今さら何か証言してくれるなんてことあるはずが……」	!rule:cx:kure-request:20	keep	rewrites
 cx:kure-request:20	構ってくれるなんて優しいのね	!rule:cx:kure-request:20	keep	rewrites
 cx:kure-request:20	リコの言うことを聞いてくれるなら、延長してもいいよ？	!rule:cx:kure-request:20	keep	rewrites
-normalize:old-request-forbid	銀流しのお六は、虫を殺すのさえ嫌いな仏性だよ、つまらない事を言っておくれでない」	은흘려 보내기의 6은, 화를 참는 것조차 싫어하는 불성이야, 시시한 말을 말하지 말아줘」	fix	normalize
+normalize:old-request-forbid	銀流しのお六は、虫を殺すのさえ嫌いな仏性だよ、つまらない事を言っておくれでない」	은흘려 보내기의 6은, 화를 참는 것조차 싫어하는 불성이야, 시시한 말을 말하지 말아 줘」	fix	normalize
 normalize:old-request-forbid	お米を少し貸しておくれでないか。	쌀을 조금 빌려 주지 않겠는가.	keep	normalize
 cx:yo-intent:17	「これから大きな仕事をしにポートアイランド・中央都市部へ行く」	「지금부터 큰 일을 해 포트아일랜드·중앙 도시지역에 갈 거야」	fix	rewrites
 cx:promise-kara:10	「うん、台所にいる。片付けてから行くから、先にお昼、食べていて」	「응, 부엌에 있다. 정리하고 나서 갈 테니까, 먼저 점심, 먹고 있어」	fix	rewrites

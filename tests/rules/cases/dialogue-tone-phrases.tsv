@@ -57,9 +57,9 @@ cx:prohibit-particle:20	勘違いしないでね。	착각하지 마.	fix	rewrit
 dict:jisjk:264789	勘違いしないで聞いて。	착각하지 않고 들어.	keep	local-ending
 ending:naide	食べないで寝る。	먹지 않고 잔다.	keep	local-ending
 cx:prohibit-request:20	心配しないでくれ	걱정하지 말아 줘	keep	rewrites
-cx:prohibit-request:10	気を使わないでくれ	신경을 쓰지 말아줘	keep	rewrites
-cx:prohibit-request:10	何度も言わせないでくれ	몇 번이나 말하게 하지 말아줘	keep	rewrites
-cx:prohibit-request:10	今は話しかけないでくれ	지금은 말을 걸지 말아줘	keep	rewrites
+cx:prohibit-request:10	気を使わないでくれ	신경을 쓰지 말아 줘	keep	rewrites
+cx:prohibit-request:10	何度も言わせないでくれ	몇 번이나 말하게 하지 말아 줘	keep	rewrites
+cx:prohibit-request:10	今は話しかけないでくれ	지금은 말을 걸지 말아 줘	keep	rewrites
 cx:prohibit-request:10	行かないでほしい。	가지 말았으면 좋겠다.	keep	rewrites
 cx:prohibit-request:10	食べてくださいね	먹어 주세요	keep	rewrites
 dict:jisjk:264789	才能があるとか勘違いしないで、ひたすら練習に励むべきだ。	!rule:dict:jisjk:264789	keep	local-ending
@@ -87,7 +87,7 @@ cx:prohibit-particle:10	みんな、油断しないで行こう。	모두, 방�
 cx:prohibit-request:20	その間の費用を心配しないでいいし	그 사이의 비용을 걱정하지 않아도 되고	keep	rewrites
 cx:prohibit-particle:10	あんまり危険なことはしないで欲しいです…	!rule:cx:prohibit-particle:10	keep	rewrites
 cx:prohibit-particle:10	あまり無理はしないで欲しいデース！	!rule:cx:prohibit-particle:10	keep	rewrites
-cx:prohibit-request:20	あ、気を使わないでくれ	아, 신경을 쓰지 말아줘	keep	rewrites
+cx:prohibit-request:20	あ、気を使わないでくれ	아, 신경을 쓰지 말아 줘	keep	rewrites
 cx:prohibit-particle:10	勘違いしないでよ…と言った。	!rule:cx:prohibit-particle:10	keep	rewrites
 cx:prohibit-request:20	勘違いしないでください…と言った。	!rule:cx:prohibit-request:20	keep	rewrites
 cx:prohibit-particle:20	心配しないでね、と言った。	!rule:cx:prohibit-particle:20	keep	rewrites
