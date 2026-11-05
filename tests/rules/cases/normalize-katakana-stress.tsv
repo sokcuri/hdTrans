@@ -4,7 +4,7 @@ normalize:katakana-stress	すンばらしい！	훌륭해!	fix	normalize
 normalize:katakana-stress	大ッ嫌い。	너무 싫다.	fix	normalize
 normalize:katakana-stress	「さわらないで！子爵なんて、大ッ嫌い！」	「손대지 마! 자작 같은 건, 너무 싫어!」	fix	normalize
 normalize:katakana-stress	「あンたほんとうに貴族のお嬢様？」	「너 정말로 귀족의 아가씨?」	fix	normalize
-normalize:katakana-stress	「片付けただと？ショウ、あンたがか？」	「정리했다라면? 쇼, 네가인가?」	fix	normalize
+normalize:katakana-stress	「片付けただと？ショウ、あンたがか？」	「정리했다고? 쇼, 네가인가?」	fix	normalize
 normalize:katakana-stress	「やッぱりか？」	「역시인가?」	fix	normalize
 normalize:katakana-stress	「やッぱ、対人で使うべきだッたか。」	「역시, 대인으로 써야 했나.」	fix	normalize
 normalize:katakana-stress	ちょッと遅かッたネ。	조금 늦었네.	fix	normalize
