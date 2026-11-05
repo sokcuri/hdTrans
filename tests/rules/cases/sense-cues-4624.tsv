@@ -1,0 +1,10 @@
+# 규칙: LEX-4624
+rule	input	expected	kind	layer
+cx:sense-cues-1:400	「わかってたよ、最後はこうなるってな」	「알았어, 마지막에는 이렇게 된다고」	fix	rewrites
+cx:sense-cues-1:400	こっちの体力は早々に尽き、最後は周回遅れの憂き目を見ることになった。	여기의 체력은 일찌감치 다해, 마지막에는 주회 지연의 쓰라림을 보게 되었다.	fix	rewrites
+cx:sense-cues-1:400	最後はフリー枠となります！	마지막은 프리범위가 됩니다!	keep	rewrites
+cx:sense-cues-1:400	それで、最後は中距離走の測定ですね	그래서, 마지막은 중거리 달리기의 측정이군요	keep	rewrites
+cx:sense-cues-1:410	あんなふうに乱暴に扱うなんて	그런 식으로 난폭하게 다루다니	fix	rewrites
+cx:sense-cues-1:410	「そうなんや。スナイパーライフルを扱えるなんてすごいんやねぇ」	「그런 이야. 저격총을 다룰 수 있다니 대단한 이나」	fix	rewrites
+cx:sense-cues-1:410	うん…ウチの新商品、大切に扱ってね	응…우리의 신상품, 소중히 다뤄	fix	rewrites
+cx:sense-cues-1:410	テロとして扱わないと約束しろ	테러로서 취급하지 않는다고 약속해라	keep	rewrites
