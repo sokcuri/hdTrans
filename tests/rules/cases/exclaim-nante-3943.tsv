@@ -1,0 +1,38 @@
+# 규칙: GRM-3943
+rule	input	expected	kind	layer
+cx:exclaim-nante:21	あぁ、なんて可愛らしいお顔なのでしょう.	아아, 정말 사랑스러운 얼굴이군요.	fix	rewrites
+cx:exclaim-nante:20	…しかし…親父の言うとおり…なんて凄い制服だろう…。	…하지만…아버지가 말하는 대로…는 굉장한 제복이구나….	fix	rewrites
+cx:exclaim-nante:21	これは…なんて素敵な兵装でしょう！ 春風、嬉しく思います。	이것은…은 멋진 무장이군요! 봄바람, 기쁘게 생각합니다.	fix	rewrites
+cx:exclaim-nante:21	何という悪い口でしょう。	뭐라는 나쁜 입이군요.	fix	rewrites
+cx:exclaim-nante:20	「私を愛してるわ。……嬉しいこと！愛してくれるなんて、なんとやさしい人だろう！……私、ほんとに好きだわ！」	「나를 사랑하고 있어. ……기쁜 일! 사랑해 주다니, 너무나 상냥한 사람이구나! ……나, 정말 좋아하는구나!」	fix	rewrites
+cx:exclaim-nante:21	――ああ、なんてかわいそうな、みにくいアヒルの子でしょう！	――아, 정말 불쌍한, 미운 오리새끼군요!	fix	rewrites
+cx:exclaim-nante:20	……　まあ、なんと云う因業な事だろう』	…… 뭐, 무려 말하는 업보인 일이구나』	fix	rewrites
+cx:exclaim-nante:21	「ああ……ああ、何という面白いお話でしょう。	「아……아, 뭐라는 재미있는 이야기군요.	fix	rewrites
+cx:exclaim-nante:10	「おやおやおやおや、なんて、この子は、きれいなんだろう。	「어이쿠 어이쿠, 뭐라고 하는, 이 아이는, 예쁘구나.	fix	rewrites
+cx:exclaim-nante:10	「これを売らなければならぬとは、なんと悲しいことだろう。	「이걸 팔지 않으면 되지 않는이란, 너무나 슬프구나.	fix	rewrites
+cx:exclaim-nante:20	「なんて軽はずみな子だろう。	「정말 경망스러운 아이구나.	fix	rewrites
+cx:exclaim-nante:20	「まあ、お前は何ておしゃべりなのだろう」	「뭐, 너는 무슨 수다구나」	fix	rewrites
+cx:exclaim-nante:21	「まあ、なんて元気のいい、強い赤ちゃんでしょう。	「뭐, 뭐라는 건강이 좋은, 강한 아기군요.	fix	rewrites
+cx:exclaim-nante:21	「まあ、何という美しい花でしょう。	「뭐, 뭐라는 아름다운 꽃이군요.	fix	rewrites
+cx:exclaim-nante:20	「むむ…………これ美味しい。なんてお菓子だろう」	「음음…………이거 맛있다. 정말 과자구나」	fix	rewrites
+cx:exclaim-nante:21	「何というえい景色でしょう。	「뭐라는 있고 경치군요.	fix	rewrites
+cx:exclaim-nante:21	「何という可愛想なことでしょう」	「뭐라는 카이구상인 일이군요」	fix	rewrites
+cx:exclaim-nante:20	『うへッ、何とまがいいんだろう。	『우헷, 뭐라고 가짜 있지 않아구나.	fix	rewrites
+cx:exclaim-nante:21	ああ…なんて逞しいお姿なんでしょう	아…는 다부진 모습이군요	fix	rewrites
+cx:exclaim-nante:20	あたしは何て仕合わせなんだろう」	나는 무슨 행복이구나」	fix	rewrites
+cx:exclaim-nante:20	あたら若い生命を飢ですり減らすなど、何という哀しさだろう。	아타등 젊은 생명을 기로 닳게 하는 등, 뭐라는 슬픔이구나.	fix	rewrites
+cx:exclaim-nante:20	けれども何というこの立派さだろう。	그러나 뭐라는 이 훌륭함이구나.	fix	rewrites
+cx:exclaim-nante:20	そして何と莫大な脳力の徒らな消費だろう。	그리고 뭐라고 막대한 뇌의 힘의 헛된 소비구나.	fix	rewrites
+cx:exclaim-nante:20	そして何と面白いものだろう。	그리고 뭐라고 재미있는 것이구나.	fix	rewrites
+cx:exclaim-nante:21	それにしても、なんと、あなたは、やさしく、美しい姿でしょう。	그나저나, 무려, 당신은, 다정하고, 아름다운 모습이군요.	fix	rewrites
+cx:exclaim-nante:10	それにしても、私たちの休養日のなんと貧しいことだろう。	그나저나, 우리의 휴양일의 너무나 궁핍하구나.	fix	rewrites
+cx:exclaim-nante:20	それにしても夕暮の湖の紅鶴のような、何と寂しい女だろう。	그나저나 저녁의 호수의 홍학과 같은, 뭐라고 외로운 여자구나.	fix	rewrites
+cx:exclaim-nante:10	……あれ、なんて打てばいいんだろう。	……어라, 정말 치면 되겠지.	keep	rewrites
+cx:exclaim-nante:20	なら、詠唱なんて必要ないだろう。	그렇다면, 영창 같은 건 필요 없을 것이다.	keep	rewrites
+cx:exclaim-nante:10	「超能力はない」なんて言う私とは 会わせたくないんでしょう。	「초능력은 없다」 같은 건 말하는 내와는 대면시치고 싶지 않겠죠.	keep	rewrites
+cx:exclaim-nante:21	「超能力はない」なんて言う私とは 会わせたくないんでしょう。	「초능력은 없다」 같은 건 말하는 내와는 대면시치고 싶지 않겠죠.	keep	rewrites
+cx:exclaim-nante:12	何てよかったのでしょう。	정말 좋았군요.	fix	rewrites
+cx:exclaim-nante:11	なんて素敵なんでしょう	정말 멋지군요	fix	rewrites
+cx:exclaim-nante:10	それにしても、なんて考え深いんだろう！	그나저나, 정말 생각이 깊구나!	fix	rewrites
+cx:exclaim-nante:12	何と答えたらいいのだろう。	뭐라고 대답하면 좋을까.	keep	rewrites
+cx:exclaim-nante:11	「いや。まあ……なんとかなるだろう」	「아니. 뭐……어떻게든 될 거야」	keep	rewrites

@@ -18,7 +18,7 @@ cx:nanto-say:10	なんと書いてあるの？	뭐라고 써 있는 거야?	fix	
 cx:nanto-say:10	彼をなんと呼ぶべきか。	그를 뭐라고 불러야 할까.	fix	rewrites
 cx:nanto-say:10	こういう時、何と言えば良いのだろう。	이런 때, 뭐라고 말하면 좋을까.	keep	rewrites
 cx:nanto-say:10	なんと、彼は王子だった。	무려, 그는 왕자였다.	keep	rewrites
-cx:nanto-say:10	なんと美しい花だろう。	너무나 아름다운 꽃일 것이다.	keep	rewrites
+cx:nanto-say:10	なんと美しい花だろう。	너무나 아름다운 꽃이구나.	keep	rewrites
 cx:nanto-say:10	なんと言っても	뭐라 해도	keep	rewrites
 cx:kiwa-suru:10	雪崩に巻き込まれはしたが、	눈사태에 말려 들어가기는 했지만,	fix	rewrites
 cx:kiwa-suru:10	一応見はしたけど	일단 보기는 했지만	fix	rewrites
