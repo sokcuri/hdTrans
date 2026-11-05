@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 names:nickname-prefix	エミリア様とエミリア様。「あれ、エミちゃん！　お邪魔しちゃった？」	에밀리아 님과 에밀리아 님. 「어라, 에미짱! 실례해버렸어?」	fix	lookup
 names:nickname-prefix	エミリア様とエミリア様。改めて会場を見てみると、妹のエミちゃんがいた。	에밀리아 님과 에밀리아 님. 다시 회장을 보니, 여동생 에미짱이 있었다.	fix	lookup
-names:nickname-prefix	エミリア様とエミリア様。結局エミちゃんが暴走したせいで計画が頓挫しかけてる。	에밀리아 님과 에밀리아 님. 결국 에미짱이 폭주한 탓으로 계획이 좌절하기 시작하고 있다.	fix	lookup
+names:nickname-prefix	エミリア様とエミリア様。結局エミちゃんが暴走したせいで計画が頓挫しかけてる。	에밀리아 님과 에밀리아 님. 결국 에미짱이 폭주한 탓으로 계획이 좌절되려 하고 있다.	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。「私もレオ君って呼んでも良い？」	레온하르트 님과 레온하르트 님. 「나도 레오 군이라고 불러도 좋아?」	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。私はレオくんに疎まれてますから。	레온하르트 님과 레온하르트 님. 저는 레오 군에게 소외당하고 있으니까요.	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。「どうしよう、レオくん。このままじゃ俺達」	레온하르트 님과 레온하르트 님. 「어떻게 하지, 레오 군. 이대로는 우리」	fix	lookup

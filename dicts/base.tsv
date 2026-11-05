@@ -739,7 +739,6 @@ ttt	ttt	K110			GN				jisjk:201744
 あきらめ	포기&AV@	M437			GN				jisjk:90344		
 あきらめ	체념	N110	SFl		GN				jisjk:124096		
 あきらめ	단념&AV@	M437			GN				jisjk:373544		
-あきらめかけ	체념하려고 &AV@	M427			GN				jisjk:139848		
 あきらめのい	깨끗이 단념$AB@	H7N0			GN				jisjk:121338		
 あきる野	아키루노	N130	QCT	Qq	GN				jisjk:374572		
 あきる野市	아키루노시	I130	QCTVPl	Qq	GN				jisjk:269349		
@@ -2376,7 +2375,6 @@ ttt	ttt	K110			GN				jisjk:201744
 いいおよ	언급&C6@	M426			GN				jisjk:139011		
 いいかえ	바꿔 말&AV@	M437	UTs		GN				jisjk:90409		
 いいかえがきかな	바꿔 말할 수가 $FA@	H7N0			GN				jisjk:121541		
-いいかけ	이야기를 시작&AV@	M437	UTs		GN				jisjk:90410		
 いいかげん	적당%A1@	G8U0			GN				jisjk:119350		
 いいかげんそう	적당%A1@	G8U0			GN				jisjk:119351		
 いいかげんなことをい	무책임한 말을 &AV@	M420			GN				jisjk:143407		
@@ -4560,7 +4558,6 @@ ttt	ttt	K110			GN				jisjk:201744
 うし	6버리고	S5A0			GN				jisjk:343143		
 うしな	&HL@	M430			GN				jisjk:90466		
 うしな	잃어버&AA@	M440			GN				jisjk:141319		
-うしないかけ	잃을 뻔&AV@	M447			GN				jisjk:141316		
 うしなわれ	잃게 &C6@	M427			GN				jisjk:145528		
 うしろ	뒤	I110	VPl		GN				jisjk:40416		
 うしろだて	후원자	N110	VHn		GN				jisjk:126699		
@@ -6787,7 +6784,6 @@ ttt	ttt	K110			GN				jisjk:201744
 おぼつかな	확실치 $D7@	H7N0			GN				jisjk:120007		
 おぼれ	빠&AL@	M427			GN				jisjk:114955		
 おぼれかか	마침 물에 빠지려 &AV@	M428			GN				jisjk:146641		
-おぼれかけ	익사할 뻔&AV@	M427			GN				jisjk:146642		
 おぼれじに	익사	N110		Hd	GN				jisjk:165959		-1
 おぼれだに	익곡	N110	VPl		GN				jisjk:165961		-1
 おぼれ死に	익사	I110		Hd	GN				jisjk:40518		
@@ -20263,7 +20259,6 @@ ttt	ttt	K110			GN				jisjk:201744
 さめ	바&Ai@	M427	VCp		GN				jisjk:121602		
 さめ	&Hn@	M427			GN				jisjk:121605		
 さめ	깨어&A5@	M427			GN				jisjk:121613		
-さめかけ	식어&A1@	M427			GN				jisjk:121592		
 さめがわ	상어 가죽	N110			GN				jisjk:185445		-1
 さめざめ	하염없이	E300			GN				jisjk:123149		
 さめじま	사메지마	N130	QPN		GN				jisjk:103587		
@@ -20399,7 +20394,6 @@ ttt	ttt	K110			GN				jisjk:201744
 され	&C6@	M447			GN	3657	||2 P-1== "2**" P-1== "7**8**"	조사나 형용사 뒤의 され를 '되다'로 고른다.	jisjk:345158		
 され	&C6@	M447	XXX		GN				jisjk:363818		
 されえ	될 수 &HN@	M427		Ma	GN	1586	||1 &&2 U+0== "Lません" D+0= "될 수 &M9@"	されえ가 ません으로 활용되면 번역을 될 수 없다로 바꾼다. (미발동: rare-word)	jisjk:148244		
-されかけ	될 뻔&AV@	M427			GN				jisjk:120749		
 されかねな	될지도 $C4@	H7N0		Av	GN				jisjk:136363		
 されこうべ	촉루	N110	VBp		GN				jisjk:185548		
 されたり	되거나 &AV@	M429			GN				jisjk:120753		
@@ -21926,7 +21920,6 @@ ttt	ttt	K110			GN				jisjk:201744
 しなんしゃ	지남차	N110	VTp		GN				jisjk:188067		-1
 しにおくれ	살아 &F4@	M427			GN				jisjk:122512		
 しにかか	죽어&A1@	M428	QHPUCl		GN				jisjk:122517		
-しにかけ	죽을 뻔&AV@	M427			GN				jisjk:122526		
 しにがお	죽은 사람의 얼굴	N110	QHPUCl		GN				jisjk:188068		-1
 しにがくもん	쓸모없는 학문	N110			GN				jisjk:188070		-1
 しにがみ	죽음의 신	N110	VHnUCl		GN				jisjk:188071		-1
@@ -43689,7 +43682,7 @@ ttt	ttt	K110			GN				jisjk:201744
 よく出され	자주 나&AH@	M447			GN				jisjk:147447		
 よく分か	잘 &K6@	C448		MaPeKe	GN	1314	||2 &&2 U+0== "Lません" D+0= "잘 &LS@" &&3 M+0== "59*" D+0= "잘 &LS@" Y+0= "1고"	よく分か의 어미가 ません으로 시작하거나 59 계열이면 잘 모르다로 바꾸고 59 계열 어미는 고로 바꾼다. (미발동: rare-context)	jisjk:117157		
 よく分からな	잘 $C4@	H7M0		Av	GN				jisjk:117160		
-よく効	효과가 &HN@	E421		Ma	GN	1308	||1 &&2 U+0== "Lません" D+0= "효과가 &M9@"	よく効가 ません 계열 어미를 가지면 번역을 효과가 없다로 바꾼다. (미발동: rare-word)	jisjk:117066		
+よく効	잘 &J6@	E421		Ma	GN	1308	||1 &&2 U+0== "Lません" D+0= "효과가 &M9@"	よく効는 `잘 듣다`이고 ません 계열 어미에서는 `효과가 없다`다(LEX-4914).	jisjk:117066		
 よく合	자주 만&A5@	M420			GN	2318	||1 &&2 P-1== "2**" A-2== "QPNVHnVPl"	よく合가 사람·인명·장소 의미 명사와 조사 뒤에 오면 자주 만나다를 고른다. (미발동: rare-word) [의심] 合う의 사람·장소 보어만으로 자주 만나다를 고르므로 잘 맞다·어울리다 의미의 彼とよく合う까지 만남으로 오독할 수 있다.	jisjk:265410		
 よく合	잘 어울&AA@	M420	XXX		GN				jisjk:265411		
 よく尋ねられる質問	자주 받는 질문	N110			GN				jisjk:151904		
@@ -95621,7 +95614,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一番堰	이치반제키	N130	QCTVPl		GN				jisjk:273024		
 一番奥	가장 안쪽	N110	VPl		GN				jisjk:161445		
 一番奥	가장 안쪽	N110	VPl		GN				jisjk:161446		
-一番手	일번수	I110			GN				jisjk:80340		
+一番手	첫 번째	I110			GN				jisjk:80340		
 一番抵当	최초의 저당권	N110	ULwVMo		GN				jisjk:125714		
 一番星	첫 별	N110	VSsUMe		GN				jisjk:125717		
 一番槍	선봉	N110			GN				jisjk:125719		
@@ -134055,7 +134048,6 @@ ttt	ttt	K110			GN				jisjk:201744
 冷っと	섬뜩	E311			GN				jisjk:1585		
 冷ま	식&AW@	M433			GN				jisjk:92528		
 冷め	&Hn@	M417			GN				jisjk:92529		
-冷めかけ	식어&A1@	M427			GN				jisjk:121589		
 冷めたくな	차가워&AL@	M418			GN				jisjk:92530		
 冷めやらぬ	완전히 식지 않은	C0D1			GN				jisjk:4670		
 冷や	찬 것	N110			GN				jisjk:7428		
@@ -135649,7 +135641,6 @@ ttt	ttt	K110			GN				jisjk:201744
 切りかえ	바&C3@	M447			GN				jisjk:359280		
 切りかえ	바&C3@	M447			GN	4134	||1 &&2 S-1== "に" D-1= "(으)로"	切りかえ는 앞말이 に이면 바꾸다로 고르면서 に를 (으)로로 바꾼다. (미발동: rare-word)	jisjk:359281		
 切りかか	달려&L4@	M418			GN				jisjk:94723		
-切りかけ	내리치려 &AV@	M437			GN				jisjk:94724		
 切りがつ	일단락 &C6@	M421			GN				jisjk:266090		
 切りがな	끝이 $FA@	H7N0			GN				jisjk:120343		
 切りがよ	매듭짓기 $DE@	H7N0			GN				jisjk:122552		
@@ -138073,7 +138064,6 @@ ttt	ttt	K110			GN				jisjk:201744
 剥がされ	벗겨&AL@	M427			GN				jisjk:148248		
 剥がし暦	일력	N110	UMe		GN				jisjk:249328		
 剥がれ	벗겨&AL@	M417			GN				jisjk:92930		
-剥がれかけ	떨어져 나&A1@	M427			GN				jisjk:262003		
 剥き出し	노출	I110			GN				jisjk:69558		
 剥き身	얇게 저민 고기	N110			GN				jisjk:237976		
 剥ぎと	떼어&A6@	M448			GN				jisjk:142865		
@@ -165545,7 +165535,6 @@ ttt	ttt	K110			GN				jisjk:201744
 壊れ	깨&AL@	M427		Dx	GN	650	||1 ||2 S-2== "コップ" S-2== "Rガラス"	壊れ를 두 단어 앞이 コップ이거나 ガラス로 끝날 때 깨지다로 고른다. (미발동: rare-context)	jisjk:92012		
 壊れ	고장&A5@	M427	VEl	Dx	GN	1189	||3 &&2 P-1== "2**" A-2== "VElVPe" A+1== "VElVPe" A-2== "VEl"	壊れ는 두 단어 앞의 기계·차량 의미 명사와 조사 뒤, 다음 말이 기계·차량 의미인 경우 또는 두 단어 앞이 VEl 의미이면 ‘고장나다’를 고른다.	jisjk:116648		
 壊れ	망가&AL@	M427	XXX	Dx	GN				jisjk:120416		
-壊れかけ	무너지기 시작&AV@	M427			GN				jisjk:119652		
 壊れ物	파손물	I110			GN				jisjk:62518		
 壊死	괴사	N110		Hd	GN				jisjk:97011		
 壊死域	괴사지역	I110			GN				jisjk:97012		
@@ -175086,7 +175075,6 @@ ttt	ttt	K110			GN				jisjk:201744
 失	&HL@	M449			GN				jisjk:122382		
 失	잃어버&AA@	M430			GN				jisjk:141317		
 失	지나&AO@	M429		Va	GN	4665	||1 &&2 S-1== "に" D-1= "(이)가"	앞에 に가 오면 失를 지나치다로 고르고 に를 주격으로 바꾼다. (미발동: rare-word)	jisjk:369612		
-失いかけ	잃을 뻔&AV@	M447			GN				jisjk:141315		
 失いつつあ	잃어버리고 &HN@	M428			GN				jisjk:145523		
 失く	&HL@	M433			GN				jisjk:93898		
 失することのないよう	잃는 일이 없도록	E300			GN				jisjk:149672		
@@ -193903,7 +193891,6 @@ ttt	ttt	K110			GN				jisjk:201744
 崩れ	무너&AL@	M417	XXX	Dx	GN				jisjk:7666		
 崩れ	나빠&AL@	M417	VFr		GN				jisjk:264485		
 崩れ	허물&M9@	M427			GN	4031	||1 &&2 P+1== "1**" A+1-= "QLG"	뒤에 언어를 뜻하는 명사가 오면 崩れ를 허물없다로 고른다. (미발동: rare-context) [의심] 언어 명사만으로 崩れた의 흐트러짐·비표준성을 허물없다로 고정하며 崩れた日本語가 허물없는 일본어로 번역된다.	jisjk:355861		
-崩れかけ	무너져 &A1@	M427			GN				jisjk:261829		
 崩れかねな	무너질지도 $C4@	H7N0			GN				jisjk:122683		
 崩れ落ち	붕괴&C6@	M417			GN				jisjk:93181		
 崩れ足	시세 하락	N110	VMo		GN				jisjk:175987		
@@ -219085,7 +219072,6 @@ ttt	ttt	K110			GN				jisjk:201744
 散らし書き	흘려쓰기	N110		Hd	GN				jisjk:243574		
 散らば	흩어&AL@	M418		Dx	GN				jisjk:93367		
 散りうせ	사라져버&AA@	M427			GN				jisjk:141913		
-散りかけ	지기 시작&AV@	M417			GN				jisjk:93368		
 散りばめられ	아로새겨&AL@	M427			GN				jisjk:148852		
 散りまが	어지러이 흩어&AL@	M420	VPt		GN				jisjk:141934		
 散り交	어지러이 떨어&AL@	M420	VPt		GN				jisjk:141916		
@@ -251516,8 +251502,6 @@ ttt	ttt	K110			GN				jisjk:201744
 死なせ	죽게&AV@	M447			GN				jisjk:119005		
 死なせていただ	&HT@	M421			GN				jisjk:262853		
 死ななきゃいけな	죽지 않으면 안 $AF@	H7N0		Av	GN				jisjk:136469		
-死にかけ	다 죽어&A1@	M417			GN				jisjk:93334		
-死にかけ	죽을 뻔&AV@	M427			GN				jisjk:122523		
 死にたが	죽고 싶어&AV@	M428			GN				jisjk:122537		
 死になど	&HT@	M429			GN				jisjk:356167		
 死にはしな	죽지는 $D7@	H7U0			GN				jisjk:342948		
@@ -294413,7 +294397,7 @@ ttt	ttt	K110			GN				jisjk:201744
 第一交通産業	다이이치 교통산업	I130	VGt		PN				jisjk:83425		
 第一京浜道路	다이이치케이힌 도로	N130	VPl		GN				jisjk:217816		
 第一京浜道路	다이이치케이힌 도로	N130	VPl		GN				jisjk:217817		
-第一人者	제일인자	I110	VHn		GN				jisjk:83471		
+第一人者	일인자	I110	VHn		GN				jisjk:83471		
 第一企画	다이이치 기획	I130	VGt		PN				jisjk:83432		
 第一住宅	다이이치 주택	I130	VGt		PN				jisjk:83481		
 第一住宅設備	다이이치 주택설비	I130	VGt		PN				jisjk:83483		
@@ -324480,8 +324464,6 @@ ttt	ttt	K110			GN				jisjk:201744
 言いあやま	잘못 말&AV@	M438	UTs		GN				jisjk:94048		
 言いう	할 수 &HN@	M428			GN				jisjk:142256		
 言いおおせ	다 말&AV@	M427			GN				jisjk:138979		
-言いかけ	이야기를 시작&AV@	M437	UTs		GN				jisjk:94049		
-言いかけ	말을 꺼&A6@	M447			GN				jisjk:139036		
 言いかた	어투	I110	UTs		GN				jisjk:78098		
 言いかぶせ	덮어 씌&AI@	M437			GN				jisjk:94050		
 言いがい	말할 가치	I110			GN				jisjk:78099		
@@ -326453,7 +326435,6 @@ ttt	ttt	K110			GN				jisjk:201744
 読みあげさん	호산	I110			GN				jisjk:66230		
 読みあさ	닥치는 대로 &HK@	M448			GN				jisjk:264137		
 読みあやま	잘못 &HK@	M438			GN				jisjk:92420		
-読みかけ	읽기 시작&AV@	M427			GN				jisjk:201773		
 読みかた	읽는 법	I110			GN				jisjk:66231		
 読みきれな	다 읽을 수 $FA@	H7U0		Xn	GN				jisjk:341367		
 読みこ	읽어들&AJ@	M435			GN				jisjk:92421		
@@ -347089,7 +347070,6 @@ ttt	ttt	K110			GN				jisjk:201744
 閉て込め	꼭 &FQ@	M447	VBl		GN				jisjk:140562		
 閉ま	닫&AW@	M418		Dx	GN				jisjk:95759		
 閉まり	닫힘	N110			GN				jisjk:13282		
-閉まりかけ	닫힐 뻔&AV@	M427			GN				jisjk:148452		
 閉め	&FQ@	M437			GN				jisjk:95760		
 閉めき	꼭 &FQ@	M438			GN				jisjk:95761		
 閉めき	완전히 닫&AW@	M428			GN				jisjk:121694		
@@ -356396,7 +356376,6 @@ ttt	ttt	K110			GN				jisjk:201744
 食えな	방심할 수 $FA@	H7U0			GN				jisjk:5717		
 食こ	파&HU@	M435	VFdVFd		GN				jisjk:93836		
 食べ	&HU@	M437	VFd	DuKj	GN				jisjk:93837		
-食べかけ	먹다 &C7@	M447			GN				jisjk:201778		
 食べかす	먹은 찌꺼기	I110			GN				jisjk:76420		
 食べきれな	다 먹을 수 $FA@	H7U0			GN				jisjk:341366		
 食べごろ	제철	I110	UMe		GN				jisjk:76421		

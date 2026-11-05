@@ -305,6 +305,10 @@
 //= noun.act-head	Formal nouns and nouns of time, chance or result after which a した or している of a mimetic word or an adverb is the act (ちゃんとしたことがない 제대로 한 적이 없다, のんびりしている暇はない), not a quality of the noun.
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.cp-change	Verbal nouns of a change that befalls someone or something (中断, 孤立, 停止), whose causative-passive is that change done to one, 되다 (思考を中断させられた 사고가 중단되었다), not an act one is made to do.
+//= noun.befalls-plan	Verbal nouns of a plan or an undertaking that breaks down by itself, whose する is 되다, not 하다 (計画が頓挫した 계획이 좌절되었다; spec GRM-201).
+//= noun.departing-vehicle	Nouns of a train, bus, ship or plane that runs on a timetable, which as the subject of 出る with a time in its clause leaves, 출발하다 (電車は八時に出るよ 전철은 8시에 출발해; spec LEX-4914).
+//= noun.usual-act	Nouns of an act or a way of talking that いつもの before them makes the one someone always does, 늘 하던 (いつもの冗談 늘 하던 농담), not the usual object 평소의 (spec GRM-3918).
+//= noun.talk-about	Nouns of talk about someone that a name with an honorific and の before them joins with no 의 (エマ様の悪口 에마 님 욕; spec GRM-3918).
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.dim-sight	Nouns of a light, a sight, a shape or a memory that ぼんやりした before them makes dim, 흐릿한 (ぼんやりした光 흐릿한 빛), not dazed.
 //= noun.vague-thought	Nouns of a thought, a feeling or a story that ぼんやりした before them makes vague, 막연한 (ぼんやりした不安 막연한 불안), not dazed.
@@ -508,6 +512,7 @@
 //= verb.passive-end	Ends of passive stems (言われ, 書かれ, 愛され, 頼まれ, 打たれ, 呼ばれ, 塞がれ, 叱られ), whose ね is what happens to someone, not a promise (また叱られますね 또 꾸중듣네요).
 //= verb.kakeru-directed	Continuatives of verbs that aim an act at someone or something before かける (話しかける, 微笑みかける, 呼びかける, 追いかける, 振りかける): that かける is part of the verb, not a half-done act.
 //= verb.kakeru-unwilled	Continuatives of verbs of a change that befalls the subject rather than an act it does on purpose (なり, 忘れ, 落ち, 転び): with かける after them the change nearly happened or is going on (なりかけた 될 뻔했다, 忘れかけている 잊어 가고 있다).
+//= verb.kakeru-nearly	Ends of the continuatives of the verbs of verb.kakeru-unwilled whose going on before かける Korean says with 다 (死にかけている 다 죽어 가고 있다, 死にかけの 다 죽어 가는; spec GRM-27).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
 //= verb.framing	Verb stems whose と or たら frames what follows, a comparison or a rewording, and is never a step of a story (去年に比べると 비하면, 言い換えると, 例えると).
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
@@ -1171,6 +1176,59 @@ noun.cp-change	異動
 noun.cp-change	左遷
 noun.cp-change	転属
 noun.cp-change	転勤
+noun.befalls-plan	頓挫
+noun.departing-vehicle	電車
+noun.departing-vehicle	バス
+noun.departing-vehicle	船
+noun.departing-vehicle	飛行機
+noun.departing-vehicle	列車
+noun.departing-vehicle	汽車
+noun.departing-vehicle	新幹線
+noun.departing-vehicle	特急
+noun.departing-vehicle	急行
+noun.departing-vehicle	便
+noun.departing-vehicle	フェリー
+noun.departing-vehicle	夜行バス
+noun.departing-vehicle	終電
+noun.departing-vehicle	始発
+noun.departing-vehicle	最終便
+noun.departing-vehicle	連絡船
+noun.departing-vehicle	定期便
+noun.departing-vehicle	高速バス
+noun.departing-vehicle	船便
+noun.departing-vehicle	路線バス
+noun.departing-vehicle	臨時便
+noun.departing-vehicle	最終電車
+noun.departing-vehicle	汽船
+noun.departing-vehicle	客船
+noun.departing-vehicle	旅客機
+noun.usual-act	悪口
+noun.usual-act	冗談
+noun.usual-act	挨拶
+noun.usual-act	説教
+noun.usual-act	癖
+noun.usual-act	口癖
+noun.usual-act	文句
+noun.usual-act	愚痴
+noun.usual-act	嫌味
+noun.usual-act	皮肉
+noun.usual-act	自慢
+noun.usual-act	小言
+noun.usual-act	軽口
+noun.usual-act	悪ふざけ
+noun.usual-act	いたずら
+noun.usual-act	悪戯
+noun.usual-act	日課
+noun.usual-act	手口
+noun.usual-act	言い訳
+noun.usual-act	お説教
+noun.usual-act	わがまま
+noun.usual-act	我儘
+noun.usual-act	ワガママ
+noun.talk-about	悪口
+noun.talk-about	陰口
+noun.talk-about	噂
+noun.talk-about	うわさ
 verb.cp-experience	待つ
 verb.cp-experience	聞く
 verb.cp-experience	知る
@@ -7067,6 +7125,7 @@ verb.kakeru-unwilled	こわれ
 verb.kakeru-unwilled	くずれ
 verb.kakeru-unwilled	たおれ
 verb.kakeru-unwilled	ころび
+verb.kakeru-nearly	死に
 
 verb.means	使
 verb.means	用い

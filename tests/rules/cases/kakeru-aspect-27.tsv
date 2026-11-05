@@ -1,0 +1,46 @@
+# 규칙: GRM-27
+rule	input	expected	kind	layer
+cx:kakeru-aspect:10	「死にかけた」	has:죽을 뻔했다	fix	rewrites
+cx:kakeru-aspect:10	火が消えかけた	has:꺼질 뻔했다	fix	rewrites
+cx:kakeru-aspect:32	「名前を忘れかけていた」	has:잊을 뻔했어	fix	rewrites
+cx:kakeru-aspect:32	彼のことを忘れかけていました	has:잊을 뻔했습니다	fix	rewrites
+cx:kakeru-aspect:32	時に、忘れかけていた、さまざまな想いをよびさます。	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:34	手紙を書きかけている	has:쓰려 하고 있다	fix	rewrites
+cx:kakeru-aspect:38	俺は寝てごまかす事にした。実際、死にかけている。	has:다 죽어 가고 있다	fix	rewrites
+cx:kakeru-aspect:40	火が消えかけている	has:꺼져 가고 있다	keep	rewrites
+cx:kakeru-aspect:40	理解する前に、彼女は力が抜けかけている体を支えた。	has:빠져 가고 있는	keep	rewrites
+cx:kakeru-aspect:44	「言いかけてやめた」	has:말하려 하다가 그만뒀어	fix	rewrites
+cx:kakeru-aspect:45	本を読みかけてやめた	has:읽으려다 그만두었다	fix	rewrites
+cx:kakeru-aspect:47	「パンを食べかけたところで、電話が鳴った」	has:먹으려던 참에	fix	rewrites
+cx:kakeru-aspect:47	と、部室に戻りかけたところで、図書館入口の自動扉が開いた。	has:돌아가려던 참에	fix	rewrites
+cx:kakeru-aspect:47	俺がジッパーに手をかけたところで、彼女が慌てた。	lacks:려던 참에	keep	rewrites
+cx:kakeru-aspect:48	俺は仲間を失った。俺自身も死にかけ、身体の自由を失った。	has:죽을 뻔해,	fix	rewrites
+cx:kakeru-aspect:50	本を読みかけて、やめた	has:읽다 말고,	keep	rewrites
+cx:kakeru-aspect:79	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:다 죽어 가는 뇌세포	fix	rewrites
+cx:kakeru-aspect:80	食べかけのパン	has:먹다 만 빵	fix	rewrites
+cx:kakeru-aspect:80	自らの手で、書きかけのテキストをゴミ箱に捨てた。	has:쓰다 만 텍스트	fix	rewrites
+cx:kakeru-aspect:83	でも奥の方に虫歯になりかけのがあるから	has:걸려 가는 것이	fix	rewrites
+cx:kakeru-aspect:87	そう？ おっけー、あたしの食べかけでもいいよね？	has:먹다 만 것이라도	fix	rewrites
+cx:kakeru-aspect:88	古くて、壊れかけなんだよ。あんまりいじらないでおくれ。	has:망가져 가는 거야	fix	rewrites
+cx:kakeru-aspect:60	また 何かを言いかけたような気が…	has:말하려	keep	rewrites
+cx:kakeru-aspect:3	電話をかける	has:전화를 건다	keep	rewrites
+cx:kakeru-aspect:3	鍵をかけた	has:잠갔다	keep	rewrites
+cx:kakeru-aspect:3	義父が、困惑しつつもたしなめるように声をかけた。	has:말을 걸었다	keep	rewrites
+cx:kakeru-aspect:3	グランツが微笑みかけた。	has:미소 지어 보였다	keep	rewrites
+cx:kakeru-aspect:5	昨日から今日にかけて、いろいろあった。	has:어제부터 오늘에 걸쳐	keep	rewrites
+cx:kakeru-aspect:3	だが あまり時間を かけている暇はないしな	has:시간을 들이고 있을	keep	rewrites
+cx:kakeru-aspect:3	毎日、放課後に話しかけていたのさ	has:말을 걸고 있었어	keep	rewrites
+cx:kakeru-aspect:34	火が消えかけている	lacks:꺼지려	keep	rewrites
+cx:kakeru-aspect:38	火が消えかけている	lacks:다 꺼져	keep	rewrites
+cx:kakeru-aspect:44	言いかけた言葉を飲み込んだ	lacks:하다가	keep	rewrites
+cx:kakeru-aspect:45	言いかけて、彼は言葉を飲み込んだ。	lacks:려다	keep	rewrites
+cx:kakeru-aspect:48	火が消えかけて、また燃え上がった	lacks:꺼질 뻔해,	keep	rewrites
+cx:kakeru-aspect:79	食べかけのパン	lacks:다 먹	keep	rewrites
+cx:kakeru-aspect:80	その時、俺の死にかけの脳細胞が	lacks:다 만	keep	rewrites
+cx:kakeru-aspect:81	崩れかけの壁	has:무너져 가는 벽	fix	rewrites
+cx:kakeru-aspect:81	食べかけのパン	lacks:가는	keep	rewrites
+cx:kakeru-aspect:82	食べかけのがある	has:먹다 만 것이 있다	fix	rewrites
+cx:kakeru-aspect:82	でも奥の方に虫歯になりかけのがあるから	lacks:다 만	keep	rewrites
+cx:kakeru-aspect:83	食べかけのがある	lacks:가는	keep	rewrites
+cx:kakeru-aspect:87	古くて、壊れかけなんだよ。	lacks:다 만	keep	rewrites
+cx:kakeru-aspect:88	そう？ おっけー、あたしの食べかけでもいいよね？	lacks:가는	keep	rewrites

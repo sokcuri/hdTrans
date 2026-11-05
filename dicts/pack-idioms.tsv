@@ -192,7 +192,6 @@ idiom:削がれる	れる	v1:규칙	sense	idiom	削 が れる	꺾이다	50	LEX-
 idiom:前屈になる	なる	v5:규칙	sense	idiom	前屈 に なる	몸을 앞으로 구부리다	50	LEX-4760	dict	base.tsv
 idiom:剥がされる	される	v1:규칙	sense	idiom	剥 が される	벗겨지다	50	LEX-4760	dict	base.tsv
 idiom:剥がれる	れる	v1:규칙	sense	idiom	剥 が れる	벗겨지다	50	LEX-4760	dict	base.tsv
-idiom:剥がれかける	れかける	v1:규칙	sense	idiom	剥 が れかける	떨어져 나가다	50	LEX-4760	dict	base.tsv
 idiom:力を盡くく	盡くく	v5:하다	sense	idiom	力 を 盡くく	진력하다	50	LEX-4760	dict	base.tsv
 idiom:力を立てる	立てる	v1:하다	sense	idiom	力 を 立てる	노력하다	50	LEX-4760	dict	base.tsv
 idiom:力を落とす	落とす	v5:하다	sense	idiom	力 を 落とす	낙담하다	50	LEX-4760	dict	base.tsv
@@ -224,7 +223,6 @@ idiom:口を挟む	挟む	v5:하다	sense	idiom	口 を 挟む	말참견하다	5
 idiom:口を消す	消す	v5:규칙	sense	idiom	口 を 消す	다짐을 주다	50	LEX-4760	dict	base.tsv
 idiom:口を濡らす	濡らす	v5:규칙	sense	idiom	口 を 濡らす	겨우 살아가다	50	LEX-4760	dict	base.tsv
 idiom:口を糊する	糊する	v:규칙	sense	idiom	口 を 糊する	겨우 살아가다	50	LEX-4760	dict	base.tsv
-idiom:口を開きかける	開きかける	v1:하다	sense	idiom	口 を 開きかける	말을 꺼내기 시작하다	50	LEX-4760	dict	base.tsv
 idiom:口紅をつける	つける	v1:하다	sense	idiom	口紅 を つける	루즈를 칠하다	50	LEX-4760	dict	base.tsv
 idiom:口裏を合わせる	合わせる	v1:규칙	sense	idiom	口裏 を 合わせる	말을 맞추다	50	LEX-4760	dict	base.tsv
 idiom:右に述べる	述べる	v1:하다	sense	idiom	右 に 述べる	위에서 말하다	50	LEX-4760	dict	base.tsv
@@ -684,7 +682,6 @@ idiom:機嫌を取る	取る	v5:규칙	sense	idiom	機嫌 を 取る	비위를 �
 idiom:正気に返る	返る	v5:규칙	sense	idiom	正気 に 返る	제정신으로 돌아오다	50	LEX-4760	dict	base.tsv
 idiom:歯を出す	出す	v5:규칙	sense	idiom	歯 を 出す	화를 내다	50	LEX-4760	dict	base.tsv
 idiom:歯を食いしばる	食いしばる	v5:ㄹ	sense	idiom	歯 を 食いしばる	이를 악물다	50	LEX-4760	dict	base.tsv
-idiom:死にかける	かける	v1:규칙	sense	idiom	死 に かける	다 죽어가다	50	LEX-4760	dict	base.tsv
 idiom:死にたがる	たがる	v5:하다	sense	idiom	死 に たがる	죽고 싶어하다	50	LEX-4760	dict	base.tsv
 idiom:死になどする	などする	v:규칙	sense	idiom	死 に などする	죽다	50	LEX-4760	dict	base.tsv
 idiom:死に別れる	別れる	v1:하다	sense	idiom	死 に 別れる	사별하다	50	LEX-4760	dict	base.tsv
