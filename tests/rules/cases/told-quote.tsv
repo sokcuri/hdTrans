@@ -8,7 +8,7 @@ cx:told-quote:10	刺激物はダメだって言われてたけど	자극물은 �
 cx:told-quote:20	“しっかり復習を”と 言われたので—	“확실히 복습을”이라는 말을 들었으므로—	fix	rewrites
 cx:told-quote:20	忘れてくださいって言われて	잊어달라는 말을 들어	fix	rewrites
 cx:told-quote:10	男が可愛いって言われても嬉しくない	남자가 귀엽다고 해도 기쁘지 않다	keep	rewrites
-cx:told-quote:10	先生は来週テストだと言われた	선생님은 다음주 테스트라고 했다	keep	rewrites
+cx:told-quote:30	先生は来週テストだと言われた	선생님은 다음주 테스트라고 하셨다	fix	rewrites
 cx:told-quote:20	「だから、休めと言われても休めなかったんだ」	「그러니까, 쉬라고 해도 쉴 수 없었어」	keep	rewrites
 cx:told-quote:20	天才と言われた	천재라는 말을 들었다	keep	rewrites
 cx:told-quote:10	と 言われていたそうだ	라고 하고 있었다고 한다	keep	rewrites
@@ -22,3 +22,12 @@ cx:told-quote:10	昔から、この森には神がいると言われてきた。
 cx:told-quote:10	彼は天才だと言われてきた。	그는 천재라는 말을 들어 왔다.	fix	rewrites
 cx:told-quote:10	この薬は万病に効くと言われてきた。	이 약은 만병에 효과가 있다고 해 왔다.	keep	rewrites
 cx:told-quote:10	母にずっとバカだと言われてきた。	어머니에게 계속 바보라는 말을 들어 왔다.	fix	rewrites
+cx:told-quote:30	社長は明日休みだと言われました。	사장은 내일 휴일이라고 하셨습니다.	fix	rewrites
+cx:told-quote:30	部長が帰っていいって言われた。	부장이 돌아가도 된다고 하셨다.	fix	rewrites
+cx:told-quote:30	ゆくゆくは部活の部長も…なんて言われて大慌てで固辞したという。	장래는 동아리의 부장도…라고 해 몹시 당황하며 사양했다고 한다.	keep	rewrites
+cx:told-quote:30	先生に来週テストだと言われた。	선생님에게 다음주 테스트라는 말을 들었다.	keep	rewrites
+cx:honoured-sou-iware:10	先生はそう言われた。	선생님은 그렇게 말씀하셨다.	fix	rewrites
+cx:honoured-sou-iware:10	陛下がそう言われるなら、従います。	폐하가 그렇게 말씀하신다면, 따릅니다.	fix	rewrites
+cx:honoured-sou-iware:10	彼はそう言われた。	그는 그런 말을 들었다.	keep	rewrites
+cx:honoured-sou-iware:10	母にそう言われた。	어머니가 그렇게 말했다.	keep	rewrites
+cx:honoured-sou-iware:10	そう言われてみれば、そうかも。	그런 말을 들어 보면, 그럴지도.	keep	rewrites
