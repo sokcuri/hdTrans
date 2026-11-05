@@ -1900,6 +1900,18 @@ bool HonorificAspect(Flusher& f, const Item* it) {
     return it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
+// The もう, 既に, すでに, とっくに or もはや that stands before verb item v in its clause, or null.
+Item* AlreadyBefore(Item* v) {
+    static constexpr std::string_view kAlready[] = {"もう", "既に", "すでに", "とっくに", "もはや"};
+    for (Item* p = v->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || s == "、" || s == "。" || s == "「" || s == "」" || s == "！" || s == "？" || s == ",") return nullptr;
+        if (InSet(kAlready, s)) return p;
+        if (p->detail->Yougo()) return nullptr;  // another predicate begins a clause of its own
+    }
+    return nullptr;
+}
+
 }  // namespace
 
 void ResultState(Flusher& f) {
@@ -1943,7 +1955,13 @@ void ResultState(Flusher& f) {
         }
         // What keeps coming, as wind or waves, comes on (いい風きてる 좋은 바람 오고 있어).
         if (verb == "来" && FlowBefore(v)) continue;
-        const bool past = v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb);
+        // 来る and 帰る after もう, 既に or とっくに in their clause have come or gone already: the past (もう来てる
+        // もう 왔어, 彼はもう帰ってる 벌써 돌아갔어; spec GRM-21), not the act going on.
+        Item* alreadyWord = v->detail->record == 0 ? AlreadyBefore(const_cast<Item*>(v)) : nullptr;
+        const bool already = (verb == "来" || verb == "来る" || verb == "帰") && alreadyWord != nullptr;
+        // What a thing is made of in で (愛情でできている) is no change that came to pass.
+        const bool madeOf = (verb == "でき" || verb == "出来") && v->prev != nullptr && v->prev->group->surface.ends_with("で");
+        const bool past = already || (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
         const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass(HDTRANS_CLASS("verb.result-passive"), stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
@@ -1958,9 +1976,30 @@ void ResultState(Flusher& f) {
         const std::string lemma = output::Lemma(e->dst, f.families);
         if (!lemma.starts_with("1고")) continue;
         const std::string_view rest = std::string_view(lemma).substr(std::string_view("1고").size());
-        if (past && rest.starts_with(" 있")) {
+        // できる read as the potential (할 수 있다) after a noun of getting ready (noun.ready-dekiru) is the
+        // readiness that is there, 다 되다 (準備できてる 준비 다 됐어; spec GRM-21); after another noun or verb it
+        // stays the ability (集中できてる 집중할 수 있다).
+        const bool potential = (verb == "でき" || verb == "出来") && it->selected >= 0 && it->EntryText(it->selected).ends_with("&HN@");
+        if (potential) {
+            if (v != it || v->prev == nullptr || !dict::InClass(HDTRANS_CLASS("noun.ready-dekiru"), v->prev->group->surface) ||
+                !rest.starts_with(" 있")) {
+                continue;
+            }
+            it->AssignEntrySurface(it->selected, " 다 &C6@");
+        }
+        // A guess after it (来てるかもしれない 와 있을지도) keeps the state rather than the past.
+        const Item* n1 = it->After();
+        const Item* n2 = n1 != nullptr ? n1->After() : nullptr;
+        const bool guess = n1 != nullptr && n2 != nullptr && (n1->group->surface == "も" || n1->group->surface == "かも") &&
+                           (n2->group->surface.starts_with("しれ") || n2->group->surface.starts_with("知れ"));
+        if (past && rest.starts_with(" 있") && !(already && guess)) {
             if (const std::string ending = PastOfVerbEnding(ExistentialToVerb(f, rest.substr(1))); !ending.empty()) {
                 it->AssignDirectSlot(it->DirectIndex(), ending);
+                // もう before the past result is already, 벌써 (もうみんな来てる 벌써 다 왔어), not 이제.
+                if (alreadyWord != nullptr && alreadyWord->group->surface == "もう" && alreadyWord->selected >= 0 &&
+                    alreadyWord->EntryText(alreadyWord->selected) == "이제") {
+                    alreadyWord->AssignEntrySurface(alreadyWord->selected, "벌써");
+                }
                 continue;
             }
         }
