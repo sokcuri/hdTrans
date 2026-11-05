@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 lexical:missing-word	理窟はわしよりはえらいに違いない。	이치는 나보다 파리등 있어가 틀림없다.	fix	lookup
 lexical:missing-word	驚いたように云った対手の温な呼吸が頬にかかるように思った。	놀란 것처럼 말한 상대의 미지근한 호흡이 뺨에 걸리도록 생각했다.	fix	lookup
-lexical:missing-word	ニューヨークの少し凝った料理店で、メインのロブスターを註文すると	뉴욕의 조금 엉긴 요리점에서, 메인의 로브스타를 주문한다고	fix	lookup
+lexical:missing-word	ニューヨークの少し凝った料理店で、メインのロブスターを註文すると	뉴욕의 조금 엉긴 요리점에서, 메인의 로브스타를 주문하면	fix	lookup
 lexical:missing-word	」女は「だって……」と了解しかねていうと良人は昂奮し、	」여자는 「그치만……」이라고 이해하기 어려워 말하면 남편은 흥분해,	fix	lookup
 lexical:missing-word	美事な腕前でしたよ。	훌륭한 솜씨였어요.	fix	lookup
 lexical:missing-word	まだ此辺までは耕地は無い。	아직 이 근처까지는 경지는 없다.	fix	lookup
