@@ -1,0 +1,9 @@
+# 규칙: LEX-4984
+rule	input	expected	kind	layer
+segment:retry-budget	だったら ためらうな	그렇다면 망설이지 마	fix	segment
+segment:retry-budget	だが マスタードラゴンが 民の災いとなるならば 私は ためらうことなく エクスカリバーを振るう！	하지만 마스터 드래곤이 백성의 재앙이 된다면 나는 망설이는 일 없이 엑스칼리버를 휘두른다!	fix	segment
+segment:retry-budget	２年間かくれんぼして 遊んでたって	2년간 숨바꼭질 해 놀고 있었대	fix	segment
+segment:retry-budget	「かえって邪魔んなるから下がってろって！ ぃよいしょぉおおッ！！」	「오히려 방해되니까 내려가라고! 영차아아앗!!」	fix	segment
+segment:retry-budget	ぼうや、出場するのかい？やめときな、やめときな。ジョー様にかなうわけないんだからさ。	보우나, 출전하는 거야? 그만두어, 그만둬. 조님에게 이루어질 리가 없으니까.	fix	segment
+segment:retry-budget	俺がいなけりゃ とっくに敗者になってるとこだぜ	내가 없으면 진작 패자가 되어 있는 곳이야	keep	segment
+segment:retry-budget	「人の色恋沙汰に踏み込むつもりはあんまりないけど……今は、立場を考えた方がいいわ」	「사람의 연애 사건에 발을 들일 생각은 별로 없지만……지금은, 입장을 생각하는 게 좋아」	keep	segment
