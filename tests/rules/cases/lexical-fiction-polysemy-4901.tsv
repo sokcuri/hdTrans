@@ -55,3 +55,4 @@ sense:kiku-work	歯止めも利かずまくし立てて	브레이크도 듣지 �
 dict:w:32697	お前とは 口も利きたくねえんだからな！	너와는 말도 하고 싶지 않으니까!	fix	lookup
 dict:w:32698	殿下に対してその口の利き方は何かね！	전하에 대해서 그 말버릇은 뭔가!	fix	lookup
 cx:fic-polysemy-1:42	飴を舐めてから寝た	엿을 핥고 나서 잤다	keep	rewrites
+cx:fic-polysemy-1:50	ある時女史はスクリアビンのゾナーテ（多分第四番）を弾こうかと言った	has:연주할까	keep	rewrites
