@@ -284,9 +284,10 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             return fail("row id " + userdict::internal::Quote(r.id) + " is also at " + at->second);
         if (const std::string_view slot = col(f, "slot"); !slot.empty() && !ParseSlot(slot, r.slot))
             return fail("slot " + userdict::internal::Quote(slot) + ", want sense, name, voice, polarity or tense");
-        if (const std::string_view kind = col(f, "kind"); !kind.empty() && kind != "frame" && kind != "colloc")
-            return fail("kind " + userdict::internal::Quote(kind) + ", want frame or colloc");
-        r.colloc = col(f, "kind") == "colloc";
+        if (const std::string_view kind = col(f, "kind"); !kind.empty() && kind != "frame" && kind != "colloc" && kind != "idiom")
+            return fail("kind " + userdict::internal::Quote(kind) + ", want frame, colloc or idiom");
+        const bool idiom = col(f, "kind") == "idiom";
+        r.colloc = col(f, "kind") == "colloc" || idiom;
         if (pos != "n" && pos != "v" && pos != "v1" && pos != "v5" && pos != "adj" && pos != "na" && pos != "p" &&
             pos != "adv" && pos != "intj")
             return fail("pos " + userdict::internal::Quote(pos) +
@@ -372,7 +373,19 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         }
         if (r.colloc) {
             Colloc c;
-            if (std::string err = CompileColloc(cond, target, kclass, base, families, c); !err.empty()) return fail(err);
+            // An idiom pattern is its noun, particle and verb apart by spaces (気 を 遣う).
+            std::string joined(cond);
+            if (idiom) {
+                const std::vector<std::string_view> parts = Split(cond, ' ');
+                if (parts.size() != 3 || parts[0].empty() || parts[1].empty() || parts[2].empty())
+                    return fail("an idiom pattern is a noun, a particle and a verb apart by spaces, not " + userdict::internal::Quote(cond));
+                c.loose = true;
+                c.noun = parts[0];
+                c.idiomParticle = parts[1];
+                c.verb = parts[2];
+                joined = c.noun + c.idiomParticle + c.verb;
+            }
+            if (std::string err = CompileColloc(joined, target, kclass, base, families, c); !err.empty()) return fail(err);
             c.row = static_cast<int>(table.rows.size());
             r.target = target;
             r.global = Register(r);
