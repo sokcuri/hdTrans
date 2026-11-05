@@ -1,0 +1,25 @@
+# 규칙: SND-1, SND-7, LEX-4823
+rule	input	expected	kind	layer
+normalize:unseparated-stutter	「っ！！そっそこまで！」	has:거, 거기까지	fix	normalize
+normalize:unseparated-stutter	だっだから待てってヘキルーー！！	has:그, 그러니까	fix	normalize
+normalize:unseparated-stutter	とっともあれ、ご報告しなくてはですよねっ	has:여, 여하튼	fix	normalize
+normalize:unseparated-stutter	ごっごめん！本当あたし軽はずみだったっ	has:미, 미안!	fix	normalize
+normalize:unseparated-stutter	そっそんなことありません！	has:그, 그런 일	fix	normalize
+normalize:unseparated-stutter	でっでも、学園長っ	has:하, 하지만	fix	normalize
+normalize:unseparated-stutter	なっなんだ?	has:뭐, 뭐야	fix	normalize
+normalize:unseparated-stutter	すっすごい	has:대, 대단해	fix	normalize
+normalize:unseparated-stutter	やっやめて	has:그, 그만해	fix	normalize
+normalize:unseparated-stutter	なら とっとと死ねー！	has:냉큼	keep	normalize
+normalize:unseparated-stutter	さっさと立場を選べ！	has:빨리	keep	normalize
+normalize:unseparated-stutter	たったの １時間経っただけです	has:겨우	keep	normalize
+normalize:unseparated-stutter	はっはっは～！ 宣戦布告かい？	has:하하하	keep	normalize
+normalize:unseparated-stutter	くっくっ…。	lacks:,	keep	normalize
+normalize:unseparated-stutter	ちっちゃくて可愛い	lacks:,	keep	normalize
+normalize:unseparated-stutter	いっいやっ、なんでもないわよ！	lacks:싫어	keep	normalize
+normalize:katakana-stress	油を拭き取ッた。	기름을 닦아냈다.	fix	normalize
+normalize:katakana-stress	彼は言ッた	그는 말했다	fix	normalize
+normalize:katakana-stress	あッたり前だろ	has:당연	keep	normalize
+lex:native-katakana	酒とタバコのニオイだ 嘘つきめ	has:술과 담배의 냄새다	fix	protect
+lex:native-katakana	変なニオイや 奇妙な音は？	has:이상한 냄새	fix	protect
+lex:native-katakana	記憶が戻ったの？私のチカラがソコまで弱まっている？	has:거기까지	fix	protect
+lex:native-katakana	あっ、旦那…んんっ。ソコ、弄っちゃダメです…はぅんっ	has:거기,	fix	protect
