@@ -1,0 +1,118 @@
+# 규칙: SPC-37
+rule	input	expected	kind	layer
+normalize:kansai-tochau	原始人とちゃうやろ	원시인이 아니지	fix	normalize
+normalize:kansai-tochau	パン屋とちゃうわ！	빵가게가 아니야!	fix	normalize
+normalize:kansai-tochau	僕は両替屋とちゃうで！	나는 환전상이 아니고!	fix	normalize
+normalize:kansai-tochau	ここ 東京とちゃうん？	여기 도쿄가 아닌 거야?	fix	normalize
+normalize:kansai-tochau	あれもスキルとちゃうの？	저것도 스킬이 아닌 거야?	fix	normalize
+normalize:kansai-tochau	そんな場合とちゃうやろ！	그런 경우가 아니지!	fix	normalize
+normalize:kansai-tochau	御堂筋は女の子とちゃうよ	미도우스지는 여자아이가 아니야	fix	normalize
+normalize:kansai-tochau	そういう問題とちゃうねん！	그런 문제가 아니거든!	fix	normalize
+normalize:kansai-tochau	まだ教室におるんとちゃう？	아직 교실에 있는 거 아니야?	fix	normalize
+normalize:kansai-tochau	これって やばいんとちゃう？	이것은 위험하지 않아?	fix	normalize
+normalize:kansai-tochau	関係ないんとちゃうか？	관계없지 않을까?	fix	normalize
+normalize:kansai-tochau	ホンマに死ぬんとちゃうか？	진짜로 죽지 않은가?	fix	normalize
+normalize:kansai-tochau	これは 殴られて出たんとちゃう	이것은 맞아 나온 거 아니야	fix	normalize
+normalize:kansai-tochau	聞かんほうがええんとちゃう？	묻지 않는 편이 좋지 않아?	fix	normalize
+normalize:kansai-ntotte	怒らんとってくれ！	화내지 말아줘!	fix	normalize
+normalize:kansai-ntotte	行かんとってください！	가지 마세요!	fix	normalize
+normalize:kansai-ntotte	お母さん 泣かんとって	엄마 울지 마	fix	normalize
+normalize:kansai-ntotte	そんなん言わんとってよ	그런 말하지 마	fix	normalize
+normalize:kansai-ntotte	行かんとって欲しかったわ	가지 말았으면 좋았어	fix	normalize
+normalize:kansai-ntotte	や…やめて 消さんとって	그…그만해 지우지 마	fix	normalize
+normalize:kansai-ntotte	バカにせんとって下さい｡	바보 취급하지 마세요.	fix	normalize
+normalize:kansai-ntotte	モテようとせんとってよ｡	인기를 끌려고 하지 마.	fix	normalize
+normalize:kansai-ntotte	そんな怒らんとってください	그렇게 화내지 마세요	fix	normalize
+normalize:kansai-ntotte	理由は聞かんとって下さい｡	이유는 묻지 마세요.	fix	normalize
+normalize:kansai-ntotte	名前は気にせんとって	이름은 신경 쓰지 마	fix	normalize
+normalize:kansai-ntotte	人聞き悪い事 言わんとって｡	외문 나쁜 말 하지 마.	fix	normalize
+normalize:kansai-ntotte	ビタミンをたくさんとって 早く風邪を治すぞよ	비타민을 많이 취해 빨리 감기를 고치노라	keep	normalize
+normalize:kansai-ntotte	皆さんとってもお似合いです	여러분 매우 어울립니다	keep	normalize
+normalize:kansai-ntotte	女優さんとっていう 下心はあったけど	여배우와라는 속셈은 있었지만	keep	normalize
+normalize:kansai-ton	大喜びしとんねん	매우 기뻐하고 있거든	fix	normalize
+normalize:kansai-ton	何を作っとんねん！	무엇을 만들고 있어!	fix	normalize
+normalize:kansai-ton	なんで知っとんねん！	왜 알고 있어!	fix	normalize
+normalize:kansai-ton	何をテンパっとんねん！	무엇을 당황하고 있어!	fix	normalize
+normalize:kansai-ton	何しとんねん お前ら！	뭐하고 있어 너희들!	fix	normalize
+normalize:kansai-ton	うん？ 何しとんねん？	응? 뭐하고 있어?	fix	normalize
+normalize:kansai-ton	いや どこでしとんねん！	아니 어디서 하고 있어!	fix	normalize
+normalize:kansai-ton	お前 なんで理解しとんねん	너 왜 이해하고 있어	fix	normalize
+normalize:kansai-ton	縄張り争いでもしとんのか！	영역 분쟁이라도 하고 있는 거야!	fix	normalize
+normalize:kansai-ton	何をしとんのじゃ 己は~!	무엇을 하고 있는 게야 자신은~!	fix	normalize
+normalize:kansai-ton	何を フワフワした格好しとんねん！ こいつらもう！	무엇을 푹신푹신한 차림을 하고 있어! 이 녀석들 이제!	fix	normalize
+normalize:kansai-ton	とんだ尾ヒレがついていたようだな。	터무니 없는 꼬리와 지느러미가 붙어 있던 것 같네.	keep	normalize
+normalize:kansai-ton	それと とんがり三角(さんかく)のヒレ	그것과 뾰족해져 삼각의 필레	keep	normalize
+normalize:kansai-yanen	比重って何やねん	비중이라니 뭐야	fix	normalize
+normalize:kansai-yanen	誰やねん？ぬまんづ	누구야? 누만즈	fix	normalize
+normalize:kansai-yanen	長ズボンってなんやねん！	긴 바지라니 뭐야!	fix	normalize
+normalize:kansai-yanen	何山脈の どこやねん！	무엇 산맥의 어디야!	fix	normalize
+normalize:kansai-yanen	横のお前 誰やねん お前！	옆의 너 누구야 너!	fix	normalize
+normalize:kansai-yanen	（礼二）誰やねん お前は！	(레이지) 누구야 너는!	fix	normalize
+normalize:kansai-yanen	いや ピンってなんやねん	아니 핀이라니 뭐야	fix	normalize
+normalize:kansai-yanen	（田村）なんやねん その動き？	(타무라) 뭐야 그 움직임?	fix	normalize
+normalize:kansai-yanen	（武智）なんやねん こいつ	(타케치) 뭐야 이 녀석	fix	normalize
+normalize:kansai-yanen	なんでやねん アホちゃうか	왜 그래 바보아니야	keep	normalize
+normalize:kansai-yanen	何やねん？あんさんいや 脅かしてすんまへん	뭐야? 아씨 아니 위협해서 미안합니다	keep	normalize
+normalize:old-copula-jato	影分身じゃと？	그림자 분신이라고?	fix	normalize
+normalize:old-copula-jato	新選組じゃと？	신센구미라고?	fix	normalize
+normalize:old-copula-jato	な… 何じゃと！	… 뭐라고!	fix	normalize
+normalize:old-copula-jato	嘘じゃと申すか」	거짓말이라고 말하느냐」	fix	normalize
+normalize:old-copula-jato	三途の川じゃと？	삼도내라고?	fix	normalize
+normalize:old-copula-jato	情けないじゃと？	한심하다고?	fix	normalize
+normalize:old-copula-jato	あなたは誰じゃと?	당신은 누구라고?	fix	normalize
+normalize:old-copula-jato	ドラゴンボールじゃと！	드래곤볼이라고!	fix	normalize
+normalize:old-copula-jato	あ! 拡大したじゃと!?	아! 확대했다고!?	fix	normalize
+normalize:old-copula-jato	ディナータイムじゃと?	디너 타임이라고?	fix	normalize
+normalize:old-copula-jato	何じゃと？ コラッ	뭐라고? 코랏	fix	normalize
+normalize:old-copula-jato	じゃとりあえずこれに 集中しよう	그러면 우선 이것에 집중하자	keep	normalize
+normalize:old-copula-jato	じゃとっておきの作戦を出すしかないな	그러면 소중한 작전을 낼 수밖에 없네	keep	normalize
+normalize:old-copula-jato	うじゃうじゃと沸きおるわ	우글우글 끓어 있어	keep	normalize
+normalize:old-copula-jato	俺１人じゃとうてい	나 1명은 도저히	keep	normalize
+normalize:kansai-soya	んん… そやな	으응… 그래	fix	normalize
+normalize:kansai-soya	そう。 そやな。	그래. 그래.	fix	normalize
+normalize:kansai-soya	なるほど そやな	그렇구나 그래	fix	normalize
+normalize:kansai-soya	そやな 一緒に行こ	그래 함께 가자	fix	normalize
+normalize:kansai-soya	そやな… 意外なやつ	그래… 뜻밖의 녀석	fix	normalize
+normalize:kansai-soya	そやから なんで？	그러니까 왜?	fix	normalize
+normalize:kansai-soya	そやな 方程式って何？	그래 방정식은 뭐?	fix	normalize
+normalize:kansai-soya	そやけど 大変ですよ。	그렇지만 힘들어요.	keep	normalize
+normalize:kansai-soya	まあ そやけどな	뭐 그렇지만	keep	normalize
+normalize:kansai-soya	そやけど もうすぐクリスマスやな	그렇지만 이제 곧 크리스마스네	keep	normalize
+normalize:kansai-ee	いや もうええ	아니 이제 되었다	fix	normalize
+normalize:kansai-ee	聞かんほうがええ	묻지 않는 편이 좋다	fix	normalize
+normalize:kansai-ee	知らんほうがええ	모르는 편이 좋다	fix	normalize
+normalize:kansai-ee	ああ それでええ	아 그거면 된다	fix	normalize
+normalize:kansai-ee	うむ これでええ	음 이거면 된다	fix	normalize
+normalize:kansai-ee	もうええ やめろ	이제 되었다 그만두어라	fix	normalize
+normalize:kansai-ee	今日は もうええ	오늘은 이제 되었다	fix	normalize
+normalize:kansai-ee	ここでええ？うん！	여기면 돼? 응!	fix	normalize
+normalize:kansai-ee	サイコロも１個でええ	주사위도 1개면 된다	fix	normalize
+normalize:kansai-ee	よし！　これでええ！	좋아! 이거면 돼!	fix	normalize
+normalize:kansai-ee	「ちょっと遠いんやけど、それでもええ？」	「조금 먼 이나하지만, 그래도 좋아?」	fix	normalize
+normalize:kansai-ee	先っぽだけやのうて、こっちの裏側も舐めた方がええ？	끝이다 케야노우라고, 여기의 뒤편도 핥는 것이 좋아?	fix	normalize
+normalize:kansai-ee	……え、毎年練度を上げて、うええ！？	……어, 매년 숙련도를 올리고, 위네!?	keep	normalize
+normalize:kansai-ee	もうええで 楠川さん	이제 됐어 구스카와 씨	keep	normalize
+normalize:kansai-ee	新しい服も 贅沢も何もせんでええ	새로운 옷도 사치이고 뭐고 하지 않아도 된다	keep	normalize
+normalize:kansai-ntotte	怒らせんとって	화나게 하지 마	fix	normalize
+normalize:kansai-ntotte	うそや〜ん これ以上 喜ばせんとって〜	거짓말이잖아~ 더 이상 기쁘게 하지 마~	fix	normalize
+normalize:kansai-ee	でええ やっ！	데에에 얏!	keep	normalize
+normalize:kansai-tochau	仲ええんとちゃう？	사이 좋지 않아?	fix	normalize
+normalize:kansai-tochau	なっ お前とちゃうねん	뭣 네가 아니거든	fix	normalize
+normalize:kansai-tochau	た… ただの猫とちゃう…	그… 그냥 고양이가 아니야…	fix	normalize
+normalize:kansai-tochau	“タマ”て ウチは猫とちゃうぞ	“타마”라고 우리는 고양이가 아니야	fix	normalize
+normalize:kansai-tochau	絶対ちゃうやろ！ もうええわ｡(笑い)	절대 아니잖아! 이제 돼. (웃음)	keep	normalize
+normalize:kansai-tochau	なんでやねん アホちゃうか	왜 그래 바보아니야	keep	normalize
+normalize:kansai-tochau	ヒレはもちろんスープにしちゃうわ	필레는 물론 스프로 해버려	keep	normalize
+normalize:kansai-ton	何言っとんねん！	무슨 소리야!	fix	normalize
+normalize:kansai-ton	何止まっとんねん！	무엇 멈추어 있어!	fix	normalize
+normalize:kansai-ton	なに遅刻しとんねん	뭐 지각하고 있어	fix	normalize
+normalize:kansai-ton	何を開き直っとんねん！	무엇을 뻔뻔하게 나오고 있어!	fix	normalize
+normalize:kansai-yanen	ぬまんづ誰やねん！	누만즈 누구야!	fix	normalize
+normalize:kansai-yanen	（川島）なんやねん	(카와시마) 뭐야	fix	normalize
+normalize:kansai-yanen	(宮川)何がやねん！	(미야가와) 뭐야!	fix	normalize
+normalize:kansai-yanen	（西野）何やねん これ	(니시노) 무엇이야 이것	fix	normalize
+normalize:kansai-soya	プププ… そやな	푸푸푸… 그래	fix	normalize
+normalize:kansai-soya	はぁ~ そやな。	하아~ 그래.	fix	normalize
+normalize:kansai-soya	そやな 青春やな。	그래 청춘이네.	fix	normalize
+normalize:kansai-soya	フッ そっか そやな	훗 그렇구나 그래	fix	normalize
+normalize:kansai-soya	ん… まあ そやなあ	응… 뭐 그래~	fix	normalize
