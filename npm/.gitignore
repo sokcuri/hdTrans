@@ -1,5 +1,6 @@
 dist/
 .stage-*/
 LICENSE
+NOTICE
 THIRD-PARTY-NOTICES.txt
 *.tgz
