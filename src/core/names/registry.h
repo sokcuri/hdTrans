@@ -192,6 +192,9 @@ private:
     // reading before its transliteration.
     std::string RenderPart(std::string_view t, bool whole = false);
     std::string PersonName(std::string_view t);
+    // Whether a guessed reading of the kanji run t is kept out: the document writes it once only, it
+    // names a shop, or its last kanji and 様 are a word (皆一様).
+    bool GuessedNameBlocked(std::string_view t);
     // The word of x in the name-layer person reading of an accepted chain name
     // (ミレイユ・ベルクロア 미레유 베르크로아) that has x as a part and a word per part,
     // so that x reads alike in the chain and alone; "" for none.

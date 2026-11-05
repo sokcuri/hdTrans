@@ -1,4 +1,5 @@
 #include "core/names/registry.h"
+#include "core/names/given.h"
 
 #include <algorithm>
 #include <array>
@@ -677,6 +678,9 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
+        // A kanji name no dictionary has stands for the person after one honorific, as it is no
+        // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
+        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !internal::GuessedName(t).empty()) n.score += 1;
         n.person = true;
     }
     for (const auto& [t, c] : kanaHon_) {
