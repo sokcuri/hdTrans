@@ -1,0 +1,43 @@
+# 규칙: GRM-3926
+rule	input	expected	kind	layer
+normalize:prohibition-janai	つらく悲しい時にも ラララ 泣くんじゃないと	괴롭고 슬플 때도 라라라 울지 말라고	fix	normalize
+normalize:prohibition-janai	つらく悲しいときにも ラララ 泣くんじゃないと	괴롭고 슬플 때도 라라라 울지 말라고	fix	normalize
+normalize:prohibition-janai	監視するだけだ 我々が行くまで誰も動くんじゃないと	감시할 뿐이다 우리가 갈 때까지 아무도 움직이지 말라고	fix	normalize
+normalize:prohibition-janai	乱馬 妙に張り切るんじゃないって！	란마 묘하게 의욕에 넘치지 말라고!	fix	normalize
+sound:clipped-volitional	絶対に覗くんじゃないって言ったわよね	절대로 들여다 보지 말라고 말했지	fix	sound
+normalize:prohibition-janai	[無線] 風呂場に置きっぱなしに するんじゃないって言ってるの！	[무선] 욕실에 둔 채로 하지 말라고 말해!	fix	normalize
+normalize:prohibition-janai	うっ！ 押すんじゃないと言うに｡ うん？	윽! 누르지 말라고 하는에. 응?	fix	normalize
+normalize:prohibition-janai	おお… 押すんじゃないと言うに！	오오… 누르지 말라고 하는에!	fix	normalize
+normalize:prohibition-janai	あれほど パワーを 使うんじゃないって言ったろう！	그토록 파워를 쓰지 말라고 말했지!	fix	normalize
+normalize:prohibition-janai	子供がこんな所に来るんじゃないと言っているだろ	아이가 이런 곳에 오지 말라고 하지	fix	normalize
+normalize:prohibition-janai	子供が こんな所に 来るんじゃないと言っているだろう	아이가 이런 곳에 오지 말라고 할 것이다	fix	normalize
+normalize:prohibition-janai	シーブック！俺の前に出るんじゃないって言ったろ！	시브크! 내 앞에 나오지 말라고 말했잖아!	fix	normalize
+normalize:prohibition-janai	自分の欲しい物買いなさいよ 自分の貴重な時間を削って バイトしたお金 使うんじゃないっていってるの!!	자신의 갖고 싶은 것 사 자신의 귀중한 시간을 깎아 아르바이트한 돈 쓰지 말라고 말해!!	fix	normalize
+normalize:prohibition-janai	バイトした お金 使うんじゃないっていってるの！	아르바이트한 돈 쓰지 말라고 말해!	fix	normalize
+normalize:prohibition-janai	バカなこと 考えるんじゃないって！	바보 같은 일 생각하지 말라고!	fix	normalize
+normalize:prohibition-janai	どっちがいいかなんて 人に聞くんじゃないと	어느 쪽이 좋을까 라고 사람에게 묻지 말라고	fix	normalize
+normalize:prohibition-janai	騒ぐんじゃないと言っただろ！	떠들지 말라고 했지!	fix	normalize
+normalize:prohibition-janai	つまらんことで がたがた するんじゃないって言ってるんだ	츠마등일로 덜컹덜컹 하지 말라고 말하는 거야	fix	normalize
+normalize:prohibition-janai	触るんじゃないって言ってるのに。	만지지 말라고 말하는데.	fix	normalize
+normalize:prohibition-janai	臆測だけで動くんじゃないって！	억측만으로 움직이지 말라고!	fix	normalize
+normalize:prohibition-janai	絶対に離れるんじゃないって言われてました。	절대로 떨어지지 말라고 하고 있었습니다.	fix	normalize
+normalize:prohibition-janai	聞くんじゃないと	듣지 말라고	fix	normalize
+normalize:prohibition-janai	嫌がってるのに しつこくするんじゃないって！	싫어하고 있는데 끈질기게 하지 말라고!	fix	normalize
+normalize:prohibition-janai	まったく 母ちゃん恋しさに 呼ぶんじゃないって言ったのに しかたない子だねえ	전혀 어머니 그리움에 부르지 말라고 말했는데 어쩔 수 없는 아이구나	fix	normalize
+normalize:prohibition-janai	｢切るんじゃないって！｣	｢자르지 말라고!｣	fix	normalize
+sound:clipped-volitional	絶対ライブは成功させよな	절대 라이브는 성공시키자	fix	sound
+normalize:prohibition-janai	いや 別に そういうんじゃないっていうか	아니 딱히 그런 것이 아니라고 말할까	keep	normalize
+normalize:prohibition-janai	ギクリ。 いずれにせよ 大切なのは 願いごとを 誰かに叶えてもらうために 書くんじゃないということだ。 ごまかした。	뜨끔. 어쨌든 중요한 것은 바랄 것을 누군가에게 이루어 주기 위해 쓰지 않는다는 것이다. 속였다.	keep	normalize
+normalize:prohibition-janai	で 別スタジオで 石黒さんとか マンモスさんに こう 小さいワイプでね 中継するんじゃないと。	그리고 별스튜디오에서 이시구로 씨라든지 맘모스 씨에게 이렇게 작은 와이프로 중계하지 않으면.	keep	normalize
+normalize:prohibition-janai	今日は そんなつもりで 会いに来るんじゃないって	오늘은 그런 작정으로 만나러 오지 않는다고	keep	normalize
+normalize:prohibition-janai	お姉ちゃんたちはいなくなるんじゃないって。	언니들은 없어지지 않는다고.	keep	normalize
+normalize:prohibition-janai	双葉なら行けるんじゃないって	떡잎이라면 갈 수 있지 않다고	keep	normalize
+sound:clipped-volitional	こういう時は聞き込み調査からよね	이런 때는 탐문해 조사로부터지	keep	sound
+sound:clipped-volitional	私って物凄く面倒な女だと思うのよね	나는 엄청나게 귀찮은 여자라고 생각해	keep	sound
+sound:clipped-volitional	やっぱ、気持ちが大切だよね！キスしたいとか、エッチしたいとか思う、この気持ち！	역시, 기분이 중요하지! 키스하고 싶다든가, 섹스하고 싶다고 생각하는, 이 기분!	keep	sound
+sound:clipped-volitional	越後屋の件はどうとでもなると思うけどよ。タマの件が、一つ問題だよな	에치고야의 건은 꽈당이라도 된다고 생각하지만. 타마의 건이, 하나 문제지	keep	sound
+sound:clipped-volitional	ずっとお酒が必要ってそれは病気だよね？	계속 술이 필요하다는 것은 그것은 병이지?	keep	sound
+sound:clipped-volitional	もう寝よね	이제 자자	fix	sound
+sound:clipped-volitional	早く食べよね！	빨리 먹자!	fix	sound
+sound:clipped-volitional	言えよな	말해	keep	sound
+sound:clipped-volitional	これを見よ	이것을 봐라	keep	sound
