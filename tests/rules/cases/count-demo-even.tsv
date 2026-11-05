@@ -20,7 +20,7 @@ dict:jisjk:4344	100円でも高い。	rule:dict:jisjk:4344=(이)라도	fix	local
 dict:jisjk:344600	1回でも会いたい。	1번이라도 만나고 싶다.	fix	local
 phrase:一瞬でも	「一瞬でも勝ったなんて思った自分が恥ずかしいです……」	「한순간이라도 이겼다라고 생각한 자신이 부끄럽습니다……」	fix	fixed
 phrase:一瞬でも	「一瞬でも迷えば狙いがずれて相手を殺してしまうかもしれないし」	「한순간이라도 헤매면 목적이 어긋나 상대를 죽여버릴지도 모르고」	fix	fixed
-dict:jisjk:4344	大事なことなので何度でも言おう。	소중한 일이므로 몇 번이라도 말하자.	keep	local
+dict:jisjk:4344	大事なことなので何度でも言おう。	중요한 일이므로 몇 번이라도 말하자.	keep	local
 dict:jisjk:4344	１秒でも早く	1초라도 빨리	keep	local
 dict:jisjk:4344	一度でも夜伽を命じられれば	한 번이라도 밤시중을 명령받으면	keep	local
 dict:jisjk:4344	１日でも早く縁を切りたくて、リハビリに励んでいる	1일이라도 빨리 인연을 끊고 싶어서, 재활에 힘쓰고 있다	keep	local

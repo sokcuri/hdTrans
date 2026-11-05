@@ -48,7 +48,7 @@ HD_TEST(engine_document_names) {
         {"若葉は来た。", "와카바는 왔다."},
         {"暁", "아카츠키"},                       // alone on its line
         {"若葉マークだ。", "초보운전자 마크다."},  // a longer word
-        {"恋は大事だ。", "사랑은 소중하다."},     // hon: the word where no honorific follows
+        {"恋は大事だ。", "사랑은 중요하다."},     // hon: the word where no honorific follows
         {"恋さんに渡した。", "렌 씨에게 건네주었다."},
         {"黒沢の代わりに行く。", "쿠로사와 대신에 간다."},
         {"黒沢さんに渡した。", "쿠로사와 씨에게 건네주었다."},

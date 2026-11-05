@@ -18,7 +18,7 @@ cx:exclaim-quote-to:10	来るかなと待っていた。	올까 하고 기다리
 cx:exclaim-quote-to:10	そうだろうと思った。	그럴 것이라고 생각했다.	keep	rewrites
 cx:exclaim-quote-to:12	「ああ、なんか改めて人間じゃないんだなと思ったわ」	「아, 왠지 다시 인간이 아니라고 생각했어」	fix	rewrites
 cx:exclaim-quote-to:12	私服はスカートじゃないんだなと思った。	사복은 스커트가 아니라고 생각했다.	fix	rewrites
-cx:exclaim-quote-to:12	大事な話という割には大したことじゃないんだなと思った。	소중한 이야기라는 것에 비해서는 별일 아니라고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:12	大事な話という割には大したことじゃないんだなと思った。	중요한 이야기라는 것에 비해서는 별일 아니라고 생각했다.	fix	rewrites
 cx:exclaim-quote-to:12	そうか、無理じゃないんだなと思ったら自然と口が開く。	그런가, 무리가 아니라고 생각하면 자연스럽게 입이 열린다.	fix	rewrites
 cx:exclaim-quote-to:12	彼が犯人だと思う。	그가 범인이라고 생각한다.	keep	rewrites
 cx:exclaim-quote-to:13	「いや…ミオが可愛いのはカルが可愛いからだなと思って。」	「아니…미오가 귀여운 건 칼이 귀엽기 때문이라고 생각해.」	fix	rewrites
