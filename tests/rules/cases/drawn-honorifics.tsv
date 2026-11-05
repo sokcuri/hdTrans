@@ -99,7 +99,7 @@ sound:drawn-honorific	「太郎くぅぅん～」	「타로 군~~」	fix	sound
 sound:drawn-honorific	「貴様ぁ！」	「네놈!」	keep	sound
 sound:drawn-honorific	「俺様ぁ」	「이 몸」	keep	sound
 sound:drawn-honorific	「姫様ぁ」	「공주님~」	fix	sound
-sound:drawn-honorific	「田中様ぁぁぁ」	「타나카님~~」	fix	sound
+sound:drawn-honorific	「田中様ぁぁぁ」	「타나카 님~~」	fix	sound
 sound:drawn-honorific	「お疲れさまぁ！」	「수고하셨어요~!」	keep	sound
 sound:drawn-honorific	おつかれさまー。	수고했어~.	keep	sound
 sound:drawn-honorific	「お疲れさまーぁ！」	「수고하셨어요~!」	keep	sound

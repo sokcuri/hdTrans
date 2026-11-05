@@ -531,6 +531,37 @@ bool FinalCallAt(std::string_view key, std::string_view before, std::string_view
            after.starts_with("」") || after.starts_with("…");
 }
 
+// Whether the name layer reads key as a person (善也, 清香).
+bool LayerPersonKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Record& r : snap.NameRecords(key)) {
+        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) return true;
+    }
+    return false;
+}
+
+// Whether key is called alone: the whole of an utterance, at its start or after a call word and a space
+// (おい, ねえ, なあ, じゃあな, またな, じゃあね: じゃあな 匡｡, おい 航太…), and before a question or
+// exclamation mark, an ellipsis or the end (航太？); not before more words (隆 この間の…).
+bool AloneCallAt(std::string_view before, std::string_view after, bool common) {
+    std::string_view b = TrimEndSpaces(before);
+    const bool spaced = b.size() < before.size();
+    // A word the dictionary also reads as a common word, alone at the start, may be said back as a
+    // question (「対立？) or mused on (夢…): only a call word before it calls it.
+    bool start = !common && (b.empty() || InRunes(RuneBefore(b, b.size()).cp, "「『（(【\n"));
+    if (!start && spaced) {
+        std::size_t k = b.size();
+        while (k > 0 && !InRunes(RuneBefore(b, k).cp, "「『（(【 　。！？!?…\n")) k -= RuneBefore(b, k).size;
+        const std::string_view word = b.substr(k);
+        start = dict::InClass(HDTRANS_CLASS("name.call-word"), word);
+    }
+    if (!start) return false;
+    while (after.starts_with("っ") || after.starts_with("ー") || after.starts_with("～") || after.starts_with("〜")) {
+        after.remove_prefix(FirstRune(after).size);
+    }
+    return after.empty() || after.starts_with("！") || after.starts_with("？") || after.starts_with("!") || after.starts_with("?") ||
+           after.starts_with("…") || after.starts_with("‥") || after.starts_with("｡") || after.starts_with("。");
+}
+
 // Whether key is a single kanji that the name layer reads as a person (南 미나미, 栞 시오리, 司 츠카사) and no side
 // or position of name.side-word (左, 前), whose
 // person cues hold in their line (spec LEX-4832); a single character is else no name a cue shows.
@@ -804,6 +835,10 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             add(key, true);
         } else if (runStart && !hiragana && HonorificAfter(snap, after, key)) {
             add(key, false, true);
+        } else if (kanji && runStart && AloneCallAt(before, after, !OnlyNames(snap, key) || !single) &&
+                   (SingleNameKey(snap, key) || (text::RuneCount(key) >= 2 && LayerPersonKey(snap, key) && CallableKey(snap, key, true) && !PlaceKey(snap, key)))) {
+            // A name called alone (航太？, じゃあな 匡｡; spec LEX-4953).
+            add(key, false, false, true);
         } else if (runStart && WeakKey(snap, key) && PersonActAt(snap, key, before, after)) {
             add(key, false, false, true);
         } else if (runStart && !hiragana && TitleAfter(snap, after, key)) {

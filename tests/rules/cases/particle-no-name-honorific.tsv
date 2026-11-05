@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:jisjk:358006	田中さんの翔太が来た。	타나카 씨의 쇼타가 왔다.	fix	defaults
 dict:jisjk:358006	翔太くんの由美が来た。	쇼타 군의 유미가 왔다.	fix	defaults
 dict:jisjk:358006	由美ちゃんの健太が来た。	유미짱의 켄타가 왔다.	fix	defaults
-dict:jisjk:358006	田中様の由美が来た。	타나카님의 유미가 왔다.	fix	defaults
+dict:jisjk:358006	田中様の由美が来た。	타나카 님의 유미가 왔다.	fix	defaults
 dict:jisjk:358006	佐藤先生の由美が来た。	사토 선생님의 유미가 왔다.	fix	defaults
 dict:jisjk:358006	田中先輩の翔太が来た。	타나카 선배의 쇼타가 왔다.	fix	defaults
 dict:jisjk:358006	「田中さんの翔太を見た」	「타나카 씨의 쇼타를 보았다」	fix	defaults

@@ -1049,6 +1049,21 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             return true;
         };
         bool found = false;
+        // An old woman's name: お and two kana before the honorific, the run starting at no kana, which no
+        // dictionary has with or without the honorific (おふくさん 오후쿠 씨, おふみちゃん; not おばさん,
+        // おかあさん; spec LEX-4953).
+        // Not a kin or role word said with お (name.o-word: おとうさま, おにいちゃん, おひめさま).
+        const bool oWord = dict::InClass(HDTRANS_CLASS("name.o-word"), run);
+        if (!afterWord && !oWord && RuneCount(run) == 3 && run.starts_with("お") && Flags(run).records == 0 &&
+            Flags(std::string(run) + std::string(h)).records == 0 && !dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), run) &&
+            !RoleLike(run)) {
+            bool plain = true;
+            for (std::size_t b = 0; b < run.size(); b += RuneAt(run, b).size) plain = plain && !InRunes(RuneAt(run, b).cp, "ぁぃぅぇぉゃゅょっゎー");
+            if (plain && (start == 0 || !IsHiragana(RuneBefore(line, start).cp))) {
+                out.emplace_back(run);
+                continue;
+            }
+        }
         // The whole run, two to four kana after no kana, kanji or katakana, when no dictionary has it.
         if (!afterWord) {
             const std::size_t n = RuneCount(run);

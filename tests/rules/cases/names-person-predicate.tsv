@@ -23,7 +23,7 @@ names:person-predicate	嬉しそうに笑う玉藻。	기쁜 듯이 웃는 타�
 names:person-predicate	皐月は可愛く笑った。	사츠키는 귀엽게 웃었다.	fix	lookup
 names:person-predicate	皐月の手が止まる。	사츠키의 손이 멈춘다.	fix	lookup
 names:person-predicate	玉藻も小さくうなずいた。	타마모도 작게 끄덕였다.	fix	lookup
-names:person-predicate	これも、あいかが毎日お世話してくれたからだね	이것도, 아이카가 매일돌봐 주었기 때문이구나	fix	lookup
+names:person-predicate	これも、あいかが毎日お世話してくれたからだね	이것도, 아이카가 매일 돌봐 주었기 때문이구나	fix	lookup
 names:person-predicate	この花は虫除けとしての効き目があり、広く使われていた。	이 꽃은 방충으로서의 효력이 있어, 넓게 사용되고 있었다.	keep	lookup
 names:person-predicate	「夢だよ、夢」	「꿈이야, 꿈」	keep	lookup
 names:person-predicate	剣の腕を磨くのです。	검의 솜씨를 연마합니다.	keep	lookup
