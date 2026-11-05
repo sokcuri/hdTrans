@@ -1,0 +1,26 @@
+# 규칙: LEX-4722
+rule	input	expected	kind	layer
+lexical:missing-word	理窟はわしよりはえらいに違いない。	이치는 나보다 파리등 있어가 틀림없다.	fix	lookup
+lexical:missing-word	驚いたように云った対手の温な呼吸が頬にかかるように思った。	놀란 것처럼 말한 상대의 미지근한 호흡이 뺨에 걸리도록 생각했다.	fix	lookup
+lexical:missing-word	ニューヨークの少し凝った料理店で、メインのロブスターを註文すると	뉴욕의 조금 엉긴 요리점에서, 메인의 로브스타를 주문한다고	fix	lookup
+lexical:missing-word	」女は「だって……」と了解しかねていうと良人は昂奮し、	」여자는 「왜냐하면……」이라고 이해하기 어려워 말하면 남편은 흥분해,	fix	lookup
+lexical:missing-word	美事な腕前でしたよ。	훌륭한 솜씨였어요.	fix	lookup
+lexical:missing-word	まだ此辺までは耕地は無い。	아직 이 근처까지는 경지는 없다.	fix	lookup
+lexical:missing-word	私はかれの事業を援ける気持はあっても、これを妨げる気は毛頭無いのである。	나는 그의 사업을 원 차는 기분은 있어도, 이것을 방해할 생각은 조금도 없는 것이다.	fix	lookup
+lexical:missing-word	綽名というか通り名かな	별명이라고 할까 통칭일까	fix	lookup
+lexical:missing-word	今まで積もりに積もってきた鬱屈を一気に洗い流すような、清々しいスピーチだった。	지금까지 예정에 쌓여 온 울적을 단번에 씻어 내는 것 같은, 상쾌한 스피치였다.	fix	lookup
+lexical:missing-word	航空母艦、鳳翔です。不束者ですが、よろしくお願い致します。	항공모함, 호우쇼우입니다. 부족한 사람입니다만, 잘 부탁드립니다.	fix	lookup
+lexical:missing-word	敵艦の跳梁を阻止せよ！	적함의 발호를 저지하라!	fix	lookup
+lexical:missing-word	我知らず座席から腰が浮く。	저도 모르게 좌석에서 허리가 뜬다.	fix	lookup
+lexical:missing-word	うっとりつぶやきながら、未散は顔中に飛び散った精液を舐め取った。	넋을 잃고 중얼거리면서, 미치루는 온 얼굴에 사방으로 튄 정액을 핥고 취했다.	fix	lookup
+lexical:missing-word	「登は立停った。	「등은 멈춰 섰다.	fix	lookup
+lexical:missing-word	何時も冷然と微笑していた	언제나 냉담하게 미소 짓고 있었다	fix	lookup
+lexical:missing-word	細引きで縛る	노끈으로 묶는다	fix	lookup
+lexical:missing-word	紙入れを出した	지갑을 냈다	fix	lookup
+lexical:missing-word	人死にが出た	인명 피해가 나왔다	fix	lookup
+lexical:missing-word	≪なら、滅多矢鱈に噛みつかないの≫	≪그렇다면, 마구잡이로 물지 않아≫	fix	lookup
+lexical:missing-word	「ねえ、やっぱりこの人死んでるんですけどー！」	「있잖아, 역시 이 사람 죽어 있는데요~!」	keep	lookup
+lexical:missing-word	庭の手入れをする	뜰의 손질을 한다	keep	lookup
+lexical:missing-word	神妙な面持ちで	진지한 표정으로	keep	lookup
+lexical:missing-word	ワイトマンの注文どおり皮袋のなかへ	와이트만 주문대로 가죽 자루 속에	keep	lookup
+lexical:missing-word	しかし道元にとっては乳の中に酪性が、すなわち衆生の中に仏性が、あるのではない。	하지만 도우겐에게는 젖 안에 낙성이, 즉 중생 중에 불성이, 있는 것은 아니다.	keep	lookup
