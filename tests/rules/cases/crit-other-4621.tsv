@@ -1,0 +1,28 @@
+# 규칙: GRM-3914, LEX-4621
+rule	input	expected	kind	layer
+builtin-pattern:ませぬか	終わらせると言ってもどうやって？一対一では時間が掛かるのではありませぬか？	끝낸다고 해도 어떻게? 일대일에서는 시간이 걸리는 것은 아니옵니까?	fix	builtin-pattern
+builtin-pattern:ませぬか	それは学生ではありませぬか	그것은 학생이 아니옵니까	fix	builtin-pattern
+builtin-pattern:ませぬか	時間が掛かるのではありませんか？	시간이 걸리는 것은 아닙니까?	keep	builtin-pattern
+cx:sense-cues-1:264	へい、お待ち！ざるそばと天麩羅の盛り合わせ、四人前だよ	헤이, 대기! 메밀국수와 튀김의 모둠, 4인분이야	fix	rewrites
+cx:sense-cues-1:262	二人前のラーメン	2인분의 라면	fix	rewrites
+cx:sense-cues-1:262	二人前に出た	두 사람 앞에 나왔다	keep	rewrites
+cx:sense-cues-1:263	三人前お願いします	3인분 부탁드립니다	fix	rewrites
+cx:sense-cues-1:263	三人前で歌う	세 명 앞에서 노래한다	keep	rewrites
+cx:sense-cues-1:264	四人前に並んだ	네 명 전에 늘어섰다	keep	rewrites
+cx:sense-cues-1:280	彼を味方にできれば	그를 아군으로 할 수 있으면	fix	rewrites
+cx:sense-cues-1:280	文字の読み書きもできないものを部屋持ちの妃にできるわけがない。	문자 읽고 쓰기도 할 수 없는 것을 방을 가진 신분의 비로 할 수 있을 리가 없다.	fix	rewrites
+cx:sense-cues-1:280	彼にできたことは我が身を守るように腕を交差させるだけ。	그가 할 수 있었던 것은 자기 자신을 지키듯이 팔을 교차시킬 뿐.	keep	rewrites
+cx:sense-cues-1:282	君の愛妾となって同盟そのものを後ろ盾に出来れば、今よりも時間が稼げる	네 애첩이 되어 동맹 그 자체를 후원자로 할 수 있으면, 지금보다 시간을 벌 수 있다	fix	rewrites
+cx:sense-cues-1:282	明日に出来れば嬉しい	내일에 가능하면 기쁘다	keep	rewrites
+cx:sense-cues-1:265	五人前のピザを頼んだ	5인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:265	五人前に立った	다섯 명 전에 섰다	keep	rewrites
+cx:sense-cues-1:266	六人前のピザを頼んだ	6인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:266	六人前に立った	여섯 명 전에 섰다	keep	rewrites
+cx:sense-cues-1:267	七人前のピザを頼んだ	7인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:267	七人前に立った	일곱 명 전에 섰다	keep	rewrites
+cx:sense-cues-1:268	八人前のピザを頼んだ	8인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:268	八人前に立った	여덟 명 전에 섰다	keep	rewrites
+cx:sense-cues-1:269	九人前のピザを頼んだ	9인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:269	九人前に立った	아홉 명 전에 섰다	keep	rewrites
+cx:sense-cues-1:270	十人前のピザを頼んだ	10인분의 피자를 부탁했다	fix	rewrites
+cx:sense-cues-1:270	十人前に立った	열 명 앞에 섰다	keep	rewrites
