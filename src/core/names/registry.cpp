@@ -699,6 +699,10 @@ void Registry::Add(std::string_view rawLine) {
         count(kanaFree_, u.t);
         if (bare(u.particle)) count(kanaBare_, u.t);
     }
+    for (const Coordination& c : CoordinatedKana(line)) {
+        const auto [it, added] = coordinated_[c.word].emplace(c.name, c.weak);
+        if (!added) it->second = it->second && c.weak;
+    }
     for (const LooseUse& u : LooseKanaUses(line)) {
         Loose& l = kanaLoose_[u.t];
         (u.closed ? l.closed : l.open)++;
@@ -717,6 +721,9 @@ void Registry::Add(std::string_view rawLine) {
     }
     const std::vector<Run> runs = RunsOf(line);
     for (const std::string& t : ProseRuns(line)) count(prose_, t);
+    for (const Run& r : runs) {
+        if (!r.kanji && AllRunes(r.text, IsKatakana)) kataRuns_.emplace(r.text);
+    }
     // A whole katakana run of three kana or more before a case particle or も (オレーリアは, ヤーナも).
     for (const Run& r : RunsOf(line)) {
         if (r.kanji || !AllRunes(r.text, IsKatakana) || RuneCount(r.text) < 3 || r.text.ends_with("ッ")) continue;
@@ -1227,6 +1234,24 @@ const std::map<std::string, Name>& Registry::Accepted() {
             n.person = true;
         }
     }
+    // A kana noun of the dictionary joined by と or や to a name the document reads (そらとみゆきは, みゆきと
+    // そらは) is a name too: the pair names two people (spec LEX-4954).
+    kanaJoined_.clear();
+    for (const auto& [x, ns] : coordinated_) {
+        // Only a noun of the dictionary (そら 空, ひかり 光), no determiner, particle or verb (その, だけ, した).
+        if ((WordClasses(x) & kNounClass) == 0) continue;
+        for (const auto& [n, weak] : ns) {
+            const auto it = all.find(n);
+            const DictFlags f = Flags(n);
+            const bool shown = it != all.end() && it->second.person && it->second.score >= kThreshold;
+            const bool named = shown || (!weak && (f.layerGiven || f.layerSurname || f.person) && !f.common && !f.pronoun && !f.role);
+            if (!named || n == x) continue;
+            Name& name = all[x];
+            name.score = std::max(name.score, kThreshold);
+            name.person = true;
+            kanaJoined_[x].insert(n);
+        }
+    }
     scores_.clear();
     FindSiblingNames();
     for (const auto& [t, n] : all) {
@@ -1238,7 +1263,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
             // but あおい空).
             const auto k = kanaHon_.find(t);
-            if (k == kanaHon_.end() && free.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
+            if (k == kanaHon_.end() && ((free.count(t) != 0 && Flags(t).records == 0) || kanaJoined_.count(t) != 0) && n.score >= need) {
                 scores_[t] = n;
                 continue;
             }
@@ -1658,6 +1683,22 @@ std::string Registry::Key() {
     return out;
 }
 
+bool Registry::JoinedAt(std::string_view line, std::size_t a, std::size_t b, const std::string& t) {
+    Accepted();
+    const auto it = kanaJoined_.find(t);
+    if (it == kanaJoined_.end()) return false;
+    const auto joins = [](char32_t c) { return dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), c); };
+    const std::string_view before = line.substr(0, a), after = line.substr(b);
+    for (const std::string& n : it->second) {
+        if (!after.empty() && joins(FirstRune(after).cp) && after.substr(FirstRune(after).size).starts_with(n)) return true;
+        if (!before.empty() && joins(internal::RuneBefore(before, before.size()).cp) &&
+            before.substr(0, before.size() - internal::RuneBefore(before, before.size()).size).ends_with(n)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
     const std::map<std::string, Name>& acc = Accepted();
     std::vector<Occurrence> out;
@@ -1710,12 +1751,14 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         const bool honorific = !KanaHonorificAt(line.substr(b)).empty();
         // A hiragana name starts the line, follows other than hiragana or stands before an
         // honorific (妹のさよりちゃん, ねえあおいさん), but not a creature, food or adverb there.
+        // So does a kana word the document joins to a name, there (みゆきとそらは; spec LEX-4954).
+        const bool joined = AllRunes(found, IsHiragana) && JoinedAt(line, a, b, found);
         if (AllRunes(found, IsHiragana)) {
-            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing);
+            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing) || joined;
         }
         const bool bare = acc.at(found).honorificOnly && !honorific;
         if (ok) {
-            out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
+            out.push_back(Occurrence{a, b, found, bare || (!joined && Guarded(line, a, b))});
         } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {
             // A common word that only honorifics name stays the word inside a hiragana run
             // (最後のひかり).

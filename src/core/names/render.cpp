@@ -95,6 +95,7 @@ std::string SyllableHead(const std::string& kr, std::string_view x, std::string_
     return "";
 }
 
+
 }  // namespace
 
 std::string Registry::Dict() {
@@ -171,6 +172,30 @@ std::string Registry::Written(std::string_view kana) const {
     return text::FromKana(kana, preset, preset == text::Preset::FanShort);
 }
 
+std::string Registry::CompoundSpelling(std::string_view t) {
+    std::vector<std::string> spellings;
+    for (const dict::Record& rec : snap_->NameRecords(t)) {
+        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN") && IsHangulText(rec.target)) {
+            spellings.emplace_back(rec.target);
+        }
+    }
+    if (spellings.empty()) return "";
+    for (auto it = kataRuns_.lower_bound(std::string(t)); it != kataRuns_.end() && it->starts_with(t); ++it) {
+        if (it->size() == t.size()) continue;
+        std::vector<std::string_view> targets;
+        for (const dict::Record& rec : snap_->NameRecords(*it)) targets.push_back(rec.target);
+        for (const dict::Candidate& rec : snap_->RetrieveRecords(*it, dict::LookupMode::General)) {
+            if (rec.source == *it) targets.push_back(rec.target);
+        }
+        for (const std::string_view target : targets) {
+            for (const std::string& sp : spellings) {
+                if (target.starts_with(sp) && (target.size() == sp.size() || target.substr(sp.size()).starts_with(" "))) return sp;
+            }
+        }
+    }
+    return "";
+}
+
 std::string Registry::RenderPart(std::string_view t, bool whole) {
     const std::string key(t);
     if (const auto l = listed_.find(key); l != listed_.end()) return l->second.ko;
@@ -207,6 +232,12 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     const bool called = acc != Accepted().end() && hon_.count(key) > 0 && AllRunes(t, IsKanji) && Flags(t).common &&
                         LayerReading(t);
     if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given || called)) return layer;
+    // A katakana name that starts a longer katakana word of the document reads as the dictionary reads it
+    // there, by a spelling of the name layer that word's Korean starts with (グリッドマン 그리드맨 beside
+    // グリッドマンユニバース 그리드맨 유니버스), not by a fresh reading of its kana (그릿드만).
+    if (katakana && snap_ != nullptr) {
+        if (std::string kr = CompoundSpelling(t); !kr.empty()) return kr;
+    }
     if (std::string kr = whole && katakana && snap_ != nullptr ? snap_->NameReading(t) : PersonName(t);
         IsHangulText(kr)) {
         return kr;

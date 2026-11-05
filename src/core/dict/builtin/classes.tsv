@@ -20,6 +20,7 @@
 //= particle.after-quote-to	Particles right after a と that make it a quotation, not a condition or a step (病気になるとさえされていた, 行くとも言った).
 //= particle.final-after-past	Final particles that may stand alone in the ending of a past whose た is in the conjugation (立っていたよ, ぼやいてたぞ).
 //= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
+//= verb.perception	Verbs of seeing and the passive words of them the dictionary has (見る, 覗く, 見つめる, 見られる; not 聞く, which also asks): with a person before に their passive is that person's act, with no object needed (誰かに見られている 누군가가 보고 있다; spec GRM-2).
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
@@ -178,6 +179,9 @@
 //= name.katakana-use-after	Particles after a whole katakana run that count a use of it as a word of the document (オレーリアは, ヤーナも; spec LEX-4953).
 //= name.katakana-subject-after	Particles after a katakana run that make it a subject or a topic, a use as a person (オレーリアは; spec LEX-4953).
 //= name.katakana-place-after	Particles after a katakana run that make it a place or a thing one goes to or acts on (フラーゼルに行く, トリマキを; spec LEX-4953).
+//= name.kana-coordinator	Particles that join two names as a pair (そらとみゆき, そらやみゆき): a kana word of the dictionary joined by one to a name is a name too (spec LEX-4954).
+//= name.kana-coordinated-after	Particles that end a kana word joined to a name (みゆきとそらは, みゆきとそらが; spec LEX-4954); not の or で, which also end a copula (あやとりなの).
+//= name.kana-coordinated-after-weak	Particles that end a kana word joined to a name only where the name is one the document shows (なごみとうららの), as they also end a copula (あやとりなの; spec LEX-4954).
 //= name.side-word	Single kanji of a side or a position (左, 右, 上, 下, 前, 後) that no person cue makes a name, though the name layer has a person row of them (左が言った 왼쪽이 말했다; spec LEX-4832).
 //= char.ascii-alnum	ASCII digits and letters: a kanji right after one in its token follows a number or a unit (10cm砲).
 //= sign.final-vowel	Signs read as a word whose Korean reading ends in a vowel: units and currencies (° 도, ℃ 도, ㎝ 센티미터, € 유로, $ 달러) and letters and numbers written as one symbol (② 이, α 알파); Roman numerals, read either way (Ⅲ 삼, 쓰리), are left out. A particle after one takes its vowel form (100℃였다).
@@ -303,7 +307,7 @@
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.act-head	Formal nouns and nouns of time, chance or result after which a した or している of a mimetic word or an adverb is the act (ちゃんとしたことがない 제대로 한 적이 없다, のんびりしている暇はない), not a quality of the noun.
-//= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
+//= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと, 見られている気がする).
 //= noun.cp-change	Verbal nouns of a change that befalls someone or something (中断, 孤立, 停止), whose causative-passive is that change done to one, 되다 (思考を中断させられた 사고가 중단되었다), not an act one is made to do.
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.dim-sight	Nouns of a light, a sight, a shape or a memory that ぼんやりした before them makes dim, 흐릿한 (ぼんやりした光 흐릿한 빛), not dazed.
@@ -2312,6 +2316,17 @@ name.katakana-subject-after	が
 name.katakana-place-after	に
 name.katakana-place-after	へ
 name.katakana-place-after	を
+name.kana-coordinator	と
+name.kana-coordinator	や
+name.kana-coordinated-after	は
+name.kana-coordinated-after	が
+name.kana-coordinated-after	も
+name.kana-coordinated-after	を
+name.kana-coordinated-after	に
+name.kana-coordinated-after	と
+name.kana-coordinated-after	や
+name.kana-coordinated-after-weak	の
+name.kana-coordinated-after-weak	で
 name.side-word	左
 name.side-word	右
 name.side-word	上
@@ -3352,6 +3367,15 @@ adverb.habit-clause	度々
 adverb.habit-clause	たびたび
 adverb.habit-clause	普段
 adverb.habit-clause	ふだん
+verb.perception	見る
+verb.perception	見られる
+verb.perception	覗く
+verb.perception	覗かれる
+verb.perception	見つめる
+verb.perception	眺める
+verb.perception	見張る
+verb.perception	盗み見る
+verb.perception	睨む
 verb.quote-stem	気付
 verb.quote-stem	気づ
 verb.quote-stem	気が付
@@ -3816,6 +3840,7 @@ noun.clause	みたい
 noun.clause	はず
 noun.clause	わけ
 noun.clause	訳
+noun.clause	気が
 
 noun.dependent-ellipsis	こと
 noun.dependent-ellipsis	事

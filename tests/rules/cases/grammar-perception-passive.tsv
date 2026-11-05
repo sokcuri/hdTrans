@@ -1,0 +1,22 @@
+# 규칙: GRM-2
+rule	input	expected	kind	layer
+cx:voice-agent:14	誰かに見られている気がする	누군가가 보고 있는 것 같다	fix	rewrites
+cx:voice-agent:27	誰かに見られている気がして、振り向いた。	누군가가 보고 있는 것 같아, 뒤돌아 보았다.	fix	rewrites
+cx:voice-agent:14	誰かに見られていたって事？	has:누군가가 보고 있었다는 것	fix	rewrites
+cx:voice-agent:14	ずっと 誰かに見張られているような そんな感覚に付きまとわれていました	계속 누군가가 감시하고 있는 것 같은 그런 감각이 따라다니고 있었습니다	fix	rewrites
+cx:voice-agent:12	執行官に見張られている方が より安全だ	집행관이 감시하고 있는 편이 보다 안전하다	fix	rewrites
+cx:voice-agent:22	執行官に見張られている方が より安全だ	has:집행관이 감시하고 있는	fix	rewrites
+cx:voice-agent:27	誰かに見られている気がする	has:보고 있는 것 같다	fix	rewrites
+cx:voice-agent:12	早く帰ってよ！ 誰かに見られたら…｡	빨리 돌아가! 누군가에게 보이면….	keep	rewrites
+cx:voice-agent:12	こんなとこ 純奈に見られたら…	이런 곳 준나에게 보이면…	keep	rewrites
+cx:voice-agent:12	人に見られたら また 余計な噂になる｡	사람에게 보이면 또 쓸데없는 소문이 된다.	keep	rewrites
+cx:voice-agent:12	敵に見られていないことを確認し、頷く。	적에게 보이지 않은 것을 확인해, 끄덕인다.	keep	rewrites
+cx:voice-agent:12	父さんに見られた！？ は～じゃあ もう母さんにも 報告されてんのか。	has:아버지에게 보였어!?	keep	rewrites
+cx:voice-agent:14	日本人 子供に見られるらしいですからね 海外行くと	일본인 아이로 보이는 것 같으니까 해외 가면	keep	rewrites
+cx:voice-agent:22	一緒に見られてうれしい	함께 볼 수 있어서 기쁘다	keep	rewrites
+cx:voice-agent:27	いっしょに見られたらいいね。	함께 볼 수 있으면 좋겠네.	keep	rewrites
+cx:voice-agent:27	〈彼の目を 真っすぐに見られる日は 来るのだろうか〉	〈그의 눈을 곧게 볼 수 있는 날은 오는 걸까〉	keep	rewrites
+cx:voice-agent:27	この映画は家で見られる	이 영화는 집에서 볼 수 있다	keep	rewrites
+cx:voice-agent:12	私に聞かれた。	내가 물었다.	keep	rewrites
+cx:voice-agent:27	「……絶賛凹み中。獅子ヶ谷さんに……どヘタなとこ見られた……」	has:보여졌어	keep	rewrites
+cx:voice-agent:22	「誰かに見張られた……」	「누군가에게 감시됐어……」	keep	rewrites
