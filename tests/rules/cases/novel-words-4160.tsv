@@ -40,5 +40,5 @@ rewrite:novel-words	はい。お肉を食べると元気になるのよ。	네. 
 rewrite:novel-words	それで十分 世の中の流れは分かるから	그래서 충분히 세상의 흐름은 아니까	keep	rewrites
 rewrite:novel-words	目には目をってことは十分 考えられる	눈에는 눈 라는 것은 충분히 생각된다	keep	rewrites
 rewrite:novel-words	あっ どうも！相変わらず 元気だね｡	앗 아무래도! 변함없이 건강하네.	keep	rewrites
-rewrite:novel-words	あぁ～ うんめ～お母さん元気かな～？	아아~ 응 ~엄마 건강한가~?	keep	rewrites
+rewrite:novel-words	あぁ～ うんめ～お母さん元気かな～？	아아~ 응 ~엄마 잘 지낼까~?	keep	rewrites
 rewrite:novel-words	久遠≫十分に相手が酔ったらんんっ…。	쿠도≫충분히 상대가 취하면….	keep	rewrites

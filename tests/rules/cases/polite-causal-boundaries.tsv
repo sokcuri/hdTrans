@@ -6,7 +6,7 @@ dict:polite-causal	面白くありませんから、帰ります。	재미있지
 dict:polite-causal	高くありませんから、買います。	비싸지 않으니까, 삽니다.	fix	lookup
 dict:polite-causal	長くありませんから、読みます。	길지 않으니까, 읽습니다.	fix	lookup
 dict:polite-causal	静かでしたか？	조용했습니까?	keep	lookup
-dict:polite-causal	元気でしたか？	건강했습니까?	keep	lookup
+dict:polite-causal	元気でしたか？	잘 지냈습니까?	keep	lookup
 dict:polite-causal	学生でしたか？	학생이었습니까?	keep	lookup
 dict:polite-causal	面白くありませんか？	재미있지 않습니까?	keep	lookup
 dict:polite-causal	静かですから、眠れます。	조용하니까, 잘 수 있습니다.	keep	lookup

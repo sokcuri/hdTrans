@@ -6,7 +6,7 @@ normalize:lone-so	提督、ガムいる？ そ？	제독, 껌 있어? 그래?	fi
 normalize:lone-so	基本だよ。そ。卵は2つね。	has:기본이야. 그래.	fix	normalize
 normalize:lone-so	「そ……」	「그래……」	fix	normalize
 normalize:lone-so	「そ！ 圭ちゃんにカタログを持ってきてもらいたかったんだけどねぇ。」	has:「그래!	fix	normalize
-normalize:lone-so	元気？ そ、ならよかった！	건강? 그래, 그럼 다행이네!	fix	normalize
+normalize:lone-so	元気？ そ、ならよかった！	잘 지내? 그래, 그럼 다행이네!	fix	normalize
 normalize:lone-so	Enough? そ。	Enough? 그래.	fix	normalize
 normalize:lone-so	……あっ、そ。んじゃ初詣行こう？	lacks:소	fix	normalize
 normalize:lone-so	「そ、それは」	「그, 그건」	keep	normalize

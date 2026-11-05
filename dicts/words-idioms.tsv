@@ -2497,6 +2497,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 騙し騙し	어떻게든 달래가며	E300			GN				llm			i:2491
 さらに悪いことに	설상가상으로	A9D0			GN				llm			i:2492
 元気出せよ	힘내라고	A9D0			GN				llm			i:2493
+元気だせ	힘내	A9D0			GN			かなで 쓴 元気だす는 `힘내`다(LEX-3847).				lex:3847:genki-dase-1
+元気だせよ	힘내	A9D0			GN			かなで 쓴 元気だす는 `힘내`다(LEX-3847).				lex:3847:genki-dase-2
+元気だして	힘내	A9D0			GN			かなで 쓴 元気だす는 `힘내`다(LEX-3847).				lex:3847:genki-dase-3
+元気だしな	힘내	A9D0			GN			かなで 쓴 元気だす는 `힘내`다(LEX-3847).				lex:3847:genki-dase-4
+元気だしなよ	힘내	A9D0			GN			かなで 쓴 元気だす는 `힘내`다(LEX-3847).				lex:3847:genki-dase-5
 言っとくけど	말해두는데	A9D0			GN				llm			i:2494
 衆参各院	중의원과 참의원 각각	A9D0			GN				llm			i:2495
 帰りしな	돌아가는 길에	A9D0			GN				llm			i:2496
