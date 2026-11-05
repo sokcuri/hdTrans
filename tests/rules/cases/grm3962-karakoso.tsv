@@ -1,0 +1,31 @@
+# 규칙: GRM-3962
+rule	input	expected	kind	layer
+grammar:karakoso	魔法を使えないからこそ〝魔法科学〟を編み出した	마법을 쓸 수 없기에 더욱 “마법 과학”을 고안해 냈다	fix	rewrites
+grammar:karakoso	反対されるのがわかっておるからこそ、説得して許しを請う必要がある	반대되는 것을 알 수 있기에 더욱, 설득해 용서를 빌 필요가 있다	fix	rewrites
+grammar:karakoso	みんなで手を取り合ったからこそ、今日までやって来られたのよ	모두 손을 마주 잡았기에 더욱, 오늘까지 올 수 있었어	fix	rewrites
+grammar:karakoso	夢は追い続けるからこそ意味がある！青春は冒険するからこそ意味がある！	꿈은 계속 쫓기에 더욱 의미가 있어! 청춘은 모험하기에 더욱 의미가 있어!	fix	rewrites
+grammar:karakoso	はい。ダメだとわかってるからこそ興奮しちゃって	네. 안된다고 알고 있기에 더욱 흥분해서	fix	rewrites
+grammar:karakoso	近しいからこそ惹かれ合う。そういった気持ちはよくわかる	가깝기에 더욱 서로 끌린다. 그런 마음은 잘 안다	fix	rewrites
+grammar:karakoso	曲への思い入れが強いからこそ喧嘩になるのだ。	곡에 대한 애착이 강하기에 더욱 싸움이 된다.	fix	rewrites
+grammar:karakoso	強いからこそ怖がらなくてもいいんだよ	강하기에 더욱 무서워하지 않아도 괜찮아	fix	rewrites
+grammar:karakoso	生真面目で融通が利かないからこそ、真剣に悩んでいたのだろう	고지식하고 융통성이 없기에 더욱, 진지하게 고민하고 있었을 것이다	fix	rewrites
+grammar:karakoso	本人に悪気がないからこそ、これは厄介な問題だわ	본인에게 악의가 없기에 더욱, 이것은 귀찮은 문제야	fix	rewrites
+grammar:karakoso	好きだからこそ 手放すなんてこと 選ぶなんて思わなかった	좋아하기에 더욱 손에서 놓는 것 선택한다고 생각하지 않았다	fix	rewrites
+grammar:karakoso	俺はカフが好きで 大切だからこそ 離れることに決めたんだ	나는 카프를 좋아하고 중요하기에 더욱 떨어지기로 결정한 거야	fix	rewrites
+grammar:karakoso	本気だからこそ 分かったふりなんて できねえんだよ！	진심이기에 더욱 안 체는 할 수 없어!	fix	rewrites
+grammar:karakoso	真剣だからこそ、考えて、考えて、考えぬいてきたんだろ？	진지하기에 더욱, 생각해, 생각해, 생각하지 않는 있던 거지?	fix	rewrites
+grammar:karakoso	いいえ。将軍だからこそ、軽はずみな行動は謹まねば	아니요. 장군이기에 더욱, 경망스러운 행동은 황공해하지 않으면	fix	rewrites
+grammar:karakoso	隼斗が隼斗だからこそ、何でもしてあげたいと思うのじゃ	하야토가 하야토이기에 더욱, 뭐든 해 주고 싶다고 생각하는 게야	fix	rewrites
+grammar:karakoso	証拠はわたし自身です。紫苑さんに育てられたわたし達だからこそ、わかるんです	증거는 저 자신입니다. 시온 씨에게 자란 우리이기에 더욱, 압니다	fix	rewrites
+grammar:karakoso	いいえ。奉行所が足踏みを続けている今だからこそ、私が動かねばならないのです	아니요. 부교소가 제자리 걸음을 계속하고 있는 지금이기에 더욱, 제가 움직이지 않으면 안됩니다	fix	rewrites
+grammar:karakoso	だからこそ、最期は妾の手で	그렇기에, 최후는 첩의 손으로	keep	rewrites
+grammar:karakoso	だからこそ、妾は迷い、苦しんで	그렇기에, 첩은 헤매어, 괴로워해	keep	rewrites
+grammar:karakoso	だからこそ贔屓にしてるんだけどね	그렇기에 총애로 하고 있는데	keep	rewrites
+grammar:karakoso	まあ、そうなったからこそ、公方さまと手を組んであんな事になったんですけど	뭐, 그렇게 되었기에 더욱, 구보님과 손을 잡아 저런 일이 되었는데요	keep	rewrites
+cx:karakoso-adnominal:10	魔法を使えないからこそ〝魔学〟を編み出した第一人者であった	마법을 쓸 수 없기에 “마학”을 고안해 낸 제일인자였다	fix	rewrites
+cx:karakoso-adnominal:10	セタ自身の最高到達点が高いからこそできるコンビネションだな	세타 자신의 최고 도달점이 높기에 할 수 있는 콘비네션이네	fix	rewrites
+cx:karakoso-adnominal:10	佳樹が姿を見せないからこそ お兄さまの自然な表情が撮れるのです	요시키가 모습을 보이지 않기에 더욱 오라버니의 자연스러운 표정이 찍힙니다	keep	rewrites
+cx:karakoso-adnominal:20	そうさ！ この地だからこそ生まれた魔法だ	그래! 이 땅이기에 태어난 마법이다	fix	rewrites
+cx:karakoso-adnominal:20	でもだからこそ、昂晴だからこそ積み上げられる幸せがあるはずだ	하지만 그렇기에, 앙청이기에 쌓아올릴 수 있는 행복이 있을 것이다	fix	rewrites
+cx:karakoso-adnominal:20	こんな時だからこそ いい警察官が 必要だ	이런 때이기에 더욱 좋은 경찰관이 필요하다	keep	rewrites
+cx:karakoso-adnominal:20	政略結婚だからこそこうした形式は必要です。	정략결혼이기에 더욱 이러한 형식은 필요합니다.	keep	rewrites

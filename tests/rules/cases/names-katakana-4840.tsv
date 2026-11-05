@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 names:row-reading	翌朝早く、ノラは目を覚ました。	이튿날 아침 빨리, 노라는 눈을 떴다.	fix	names
 names:row-reading	よし アルス！	좋아 아르스!	fix	names
 names:row-reading	アルス・・・ほう。	아르스···호오.	fix	names
-names:row-reading	どうか アルスさまのために 賢明な判断をお願いします	제발 아르스 님을 위해서 현명한 판단을 부탁드립니다	fix	names
+names:row-reading	どうか アルスさまのために 賢明な判断をお願いします	부디 아르스 님을 위해서 현명한 판단을 부탁드립니다	fix	names
 names:row-reading	太郎のところへと思ってアルスにサンドの『白象物語』を注文しておいたのが来た。	타로의 곳으로 생각해 아르스에게 샌드의 『흰 코끼리 이야기』를 주문해 두었던 것이 왔다.	fix	names
 names:row-reading	女王メランは、ニコッと微笑むと家臣から手渡された	여왕 메란은, 방긋 미소 지으니 가신에게서 건네졌다	fix	names
 normalize:kata-stem-honorific	ホームズさん 逮捕するのは僕じゃない	홈스 씨 체포하는 것은 내가 아니다	fix	normalize

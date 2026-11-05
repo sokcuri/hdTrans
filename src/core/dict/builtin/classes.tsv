@@ -200,6 +200,7 @@
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
 //= ko-sound.laugh	Korean laughs the sound stage writes (아하하, 후후), after which おかしい is funny, not strange (あはは、おかしい 아하하, 웃겨).
+//= ko-verb.negated-stem-end	Final syllables of Korean verb stems that gloss a Japanese adjective: their 지 않다 is the negative of a verb, 않는, even after the く of the adjective (似つかわしくない 어울리지 않는; spec GRM-3963).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.voice-end	Ends of Korean lemmas that read a passive or potential (쓰여지다, 결정되다, 읽히다, 올 수 있다), which the respectful form replaces; a verb of its own (生まれ 태어나다) keeps its Korean.
 //= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
@@ -427,6 +428,7 @@
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
 //= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
 //= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
+//= speech.formal-cue	Text of a line that speaks in the formal ます style or a set phrase of formality (ます, ませ, ございま, 申し上げ, 申し訳); ください alone is no cue. Read by the construction feature formal-line (どうか before a parting space 부디, spec GRM-3965).
 //= speech.humble-cue	Text of a line that speaks humbly to or of a superior (申す, 申し上げ, 存じ, くだされ, 候, べし, a lord in 殿 or 様, an apology such as 面目ない or 不覚): its 拙者 is 소인 (spec LEX-23). ござる alone is the plain ending of the role, no cue; ます and です speak politely to the listener.
 //= speech.humble-lookalike	Text that holds a member of speech.humble-cue and is no humble speech (貴様, 貴殿, 候補, 同様, この様, 申せ).
 //= speech.male	Speech markers inside an utterance that show the speaker to be a man (俺, だぜ, 兄上).
@@ -2708,6 +2710,8 @@ ko-adjective.stem-end	점잖
 ko-adjective.stem-end	고프
 ko-adjective.stem-end	뻔하
 ko-adjective.stem-end	필요하
+
+ko-verb.negated-stem-end	어울리
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -11465,6 +11469,13 @@ speech.humble-cue	まし
 speech.humble-cue	ございま
 speech.humble-cue	ござりま
 speech.humble-cue	まする
+
+speech.formal-cue	ます
+speech.formal-cue	ませ
+speech.formal-cue	まし
+speech.formal-cue	ございま
+speech.formal-cue	申し上げ
+speech.formal-cue	申し訳
 //= noun.thick-thing	Nouns of things that have a thickness: the kana あつい before or about them is 두껍다, not 뜨겁다 (あつい本 두꺼운 책).
 noun.thick-thing	本
 noun.thick-thing	辞書
