@@ -28254,7 +28254,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ジャジャ馬	말괄량이	N110			GN			LEX-4731: ジャジャ馬 말괄량이				w:34213
 ハズレ	꽝	N110			GN			LEX-4731: ハズレ 꽝				w:34215
 翻	나부&A4@	M428			GN			LEX-4731: 翻る 나부끼다			ひるがえ	w:34216
-勃	발기&AV@	M424			GN			LEX-4731: 勃つ 발기하다			た	w:34217
 殺	죽&AJ@	M428			GN			LEX-4731: 殺る 죽이다			や	w:34218
 締めつけ	조&AJ@	M437			GN			LEX-4731: 締めつける 조이다			しめつけ	w:34219
 シュール	기묘함	N110			GN			LEX-4731: シュールを突き抜けて 기묘함을 넘어서		1		w:34220
