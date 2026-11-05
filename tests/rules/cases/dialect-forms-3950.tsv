@@ -164,7 +164,7 @@ normalize:dialect-keep	ぼうけんⅡ	모험Ⅱ	keep	normalize
 normalize:dialect-keep	ん？出たか？ 駄目	응? 나왔나? 안된다	keep	normalize
 normalize:dialect-keep	待ちかねたぞ 伊豆守 苦しゅうない 面を上げい	기다림에 지친 이즈 마모루 괜찮다 고개를 들라	keep	normalize
 normalize:dialect-keep	皆も喜ぶけぇ。	모두도 기뻐할 테니까.	keep	normalize
-normalize:dialect-keep	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 늦어, 이제 울어 주지 마.	keep	normalize
+normalize:dialect-keep	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 주어, 이제 울어 주지 마.	keep	normalize
 normalize:dialect-keep	声を、聞くや否や	목소리를, 듣자마자	keep	normalize
 normalize:dialect-keep	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니야! 별로 그런 작정은……」	keep	normalize
 normalize:dialect-keep	「戦うたびに強くなる」	「싸울 때마다 강해져」	keep	normalize

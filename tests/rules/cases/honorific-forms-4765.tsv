@@ -1,0 +1,157 @@
+# 규칙: LEX-4765
+rule	input	expected	kind	layer
+normalize:honorific-okure	あまり パパを 悲しませないでおくれよ うん？	그다지 아빠를 슬퍼하게 하지 않고 줘 응?	fix	normalize
+normalize:honorific-okure	お米を少し貸しておくれでないか。	쌀을 조금 빌려 주지 않겠는가.	fix	normalize
+normalize:honorific-okure	良人が、いいねと手にとって眺めていたが、僕にかしておくれなと云った。	남편이, 좋다고 집어 바라보고 있었지만, 나에게 빌려주어 줘인과 말했다.	fix	normalize
+normalize:honorific-okure	「放しておくれよ、クロック先生。	「놓아 줘라, 클락 선생님.	fix	normalize
+normalize:honorific-okure	――だから……いい子だから、暫く我慢して働いていておくれ、私が家へ帰るまで……」	――그러니까……좋은 아이니까, 잠시 참고 일하고 있어 주어, 내가 집으로 돌아갈 때까지……」	fix	normalize
+normalize:honorific-okure	「どうかわたしの庭を守っておくれ、フローレンス」	「제발 내 뜰을 지켜 줘, 플로렌스」	fix	normalize
+normalize:honorific-okure	ところで、D区画で働いてる娘には会ってくれたかい、まだなら是非会って行っておくれね。	그런데, D구획으로 일하고 있는 딸에게는 만나 주었니, 아직이라면 부디 만나 가 줘네.	fix	normalize
+normalize:honorific-okure	トそう思うほど、お顔が見たくッて、堪らないから、どうしましょうどうしましょう、どうかしておくれな。	트 그렇게 생각하는 만큼, 얼굴을 보고 싶어서, 견딜 수 없으니까, 어떻게 하죠 어떻게 하죠, 아무쪼록 해 줘.	fix	normalize
+normalize:honorific-okure	助けておくれよ、我が親友ぅ～！	도와 주어라, 우리 절친!	fix	normalize
+normalize:honorific-okure	「そいぢや、お豆をやるから、鳩を出しておくれ、ねえ、ばあや。	「소이지나, 콩을 주니까, 비둘기를 내 줘, 응, 무늬.	fix	normalize
+normalize:honorific-okure	リキ　　戯談にも薪割りなんぞ手伝はせないでおくれよ、シゲさん。	리키　　농담에도 장작패기 따위 수전은 등 있고로 주어라, 시게 씨.	fix	normalize
+normalize:honorific-okure	さぁ、見ておくれ、この防弾インナーを…キミに似合うと思って買っておいたんだ！	자, 봐 주어, 이 방탄 이너를…너에 어울린다고 생각해 사 둔 거야!	fix	normalize
+normalize:honorific-okure	「親方、早く私に背の刺青を見せておくれ、お前さんの命を貰った代りに、私は嘸美しくなったろうねえ」	「우두머리, 빨리 나에게 등 문신을 보여 줘, 당신의 생명을 받은 대신에, 나는 틀림없이 아름다워졌지 응」	fix	normalize
+normalize:honorific-okure	また裸にしておくれねえ	또 알몸으로 해 주고 응	fix	normalize
+normalize:honorific-okure	あまり パパを 悲しませないでおくれよ うん？	그다지 아빠를 슬퍼하게 하지 않고 줘 응?	fix	normalize
+normalize:honorific-okure	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 주어, 이제 울어 주지 마.	fix	normalize
+normalize:honorific-okure	「私は、お高ですよ、気を沈めておくれ、」	「나는, 고예요, 기분을 가라앉혀 줘,」	fix	normalize
+normalize:honorific-okure	「さうだよ、早く持つて来ておくれよ、旦那が、今晩は外へ出るのもおつくうだから、家であがるつて待つてるからね、」	「사우야, 빨리 가지는이라고 와 줘라, 남편이, 오늘 밤은 밖에 나오는 것도 개 먹는이니까, 집에서 오르는 연줄 기다리는 비치니까,」	fix	normalize
+normalize:honorific-okure	「あれ、止しておくれ、そんなもの」	「어라, 중지해 줘, 그런 거」	fix	normalize
+normalize:honorific-okure	人とさ、ものをいってるのがうるさいから、それだから、こうしてるんだから、どうでも可いから、もう帰っておくれな。	사람과, 것을 말하고 있는 것이 시끄러우니까, 그러니까, 이렇게 하고 있으니까, 꼭 가능 있고로부터, 이제 돌아가 주는 거야.	fix	normalize
+normalize:honorific-okure	沢子　（強いて）ほつといておくれ、お前さん、そんな金がよくまああるね。	사와코 (굳이) 개 물어라고 주어, 당신, 그런 돈이 잘 뭐 있네.	fix	normalize
+normalize:honorific-okure	「魚のフライと、他に二つばかり、何でも好いから見つくろっておくれよ、家の旦那は時どきこちらへ来るそうだ」	「생선의 플라이와, 그 밖에 두 개만, 뭐든 좋으니까 골라 줘라, 집의 남편은 가끔 이쪽으로 온다고 해」	fix	normalize
+normalize:honorific-okure	「一験どうすれば宜いんで、早く言っておくれ」	「일험 어떻게 하면 승낙해 로, 빨리 말해 다오」	keep	normalize
+normalize:honorific-okure	おじさんも混ぜておくれ	아저씨도 섞어 다오	keep	normalize
+normalize:honorific-okure	――さあ、手品師、手際の鮮やかなところを見せておくれよ。	――자, 마술사, 솜씨가 선명한 곳을 보여 다오.	keep	normalize
+normalize:honorific-okure	「雪や、こんこん、あられや、こんこん、降っておくれ。	「눈이나, 똑똑, 뻥튀기나, 똑똑, 내려 다오.	keep	normalize
+normalize:honorific-okure	どうぞ待っておくれ」	어서 기다려 다오」	keep	normalize
+normalize:honorific-okure	せめて 夢をかなえて 絶望しておくれ…。	적어도 꿈을 이루어 절망해 다오….	keep	normalize
+normalize:honorific-okure	「誰か来ておくれ！	「누군가 와 다오!	keep	normalize
+normalize:honorific-okure	「どうしたていうの話しておくれ。	「어떻게 한 지 얼마 안되는 말하는 거 이야기해 다오.	keep	normalize
+normalize:honorific-oide	三月の末日に乳母は家を出るはずであったから、その日に宇治から恋人を移そうと計画をしておいでになるのであった。	삼월의 말일에 유모는 집을 나갈 것이었으니까, 그날에 우지에서 애인을 옮기려고 계획을 하고 계시는 것이었다.	fix	normalize
+normalize:honorific-oide	武も知も持ち合わせておいでなのに、ひけらかすところは微塵もなく、むしろいつも謙遜ばかりして	무도 지도 가지고 계시는데, 끌 수 있는들 빌려주는 곳은 조금도 없고, 오히려 언제나 겸손만 해	fix	normalize
+normalize:honorific-oide	何事にも天才を持っておいでになる方であったが、よこしまな恋に心を打ち込んでおいでになるだけは罪の深いことである。	무슨 일에도 천재를 가지고 계시는 분이었지만, 간악한 사랑에 가슴에 와 닿고 계실 뿐은 죄의 깊은 것이다.	fix	normalize
+normalize:honorific-oide	剣丞どのは、この日の本から鬼を無くしたい、と考えておいでなのですよ	검승님은, 이 일본으로부터 귀신을 없게 하고 싶다, 라고 생각하고 계시는 거예요	fix	normalize
+normalize:honorific-oide	しかし貴女はこれが確かに真実だと思つておいでなのですか？	하지만 당신은 이것이 확실히 진실이라고 사연줄 계십니까?	fix	normalize
+normalize:honorific-oide	マスターは 今がどんな事態か 分かっておいでですか	마스터는 지금이 어떤 사태인가 알고 계십니까	fix	normalize
+normalize:honorific-oide	[なぎささんは今も] [米花町に住んでおいでですか？	[나기사 씨는 지금도] [베이카 정에 살고 계십니까?	fix	normalize
+normalize:honorific-oide	一徳斎様もそれを警戒しておいででしたが、善光寺平の北側にもそれらしい気配はないと	1도쿠사이 님도 그것을 경계하고 계셨습니다만, 젠코지평의 북쪽에도 그런 것같은 기색은 없다고	fix	normalize
+normalize:honorific-oide	その声をジッと聞いておいでになったらしいお父様は、やがて武士らしい威厳のある声でこう云われました。	그 목소리를 가만히 듣고 계신 것 같은 아버님은, 이윽고 무사다운 위엄 있는 목소리로 이렇게 말씀하셨습니다.	fix	normalize
+normalize:honorific-oide	又はその黒いキーの光りを見る時、お母様がつけておいでになったオハグロの美しさをいつもいつも思い出しました。	또는 그 검은 키의 빛을 볼 때, 어머님이 붙이고 계신 오하그로의 아름다움을 언제나 언제나 생각해 냈습니다.	fix	normalize
+normalize:honorific-oide	宮の御風采の艶な所が源氏によく似ておいでになると言って女房たちは賞めていた。	궁의 풍채의 윤기인 곳이 겐지에 잘 닮아 계신다고 해 부인들은 상이라고 있었다.	fix	normalize
+normalize:honorific-oide	僕がいつぞや申し上げたことは、覚えておいででしょう。	내가 언젠가 말씀드렸던 것은, 기억하고 계시겠죠.	fix	normalize
+normalize:honorific-oide	「じゃあ、話しますがね、実はこの間から竜王のお后さまが御病気で、死にかけておいでになるのです。	「그럼, 이야기합니다만, 실은 이전으로부터 용왕의 황후님이 병으로, 다 죽어가고 계십니다.	fix	normalize
+normalize:honorific-oide	月夜の美と恋人の艶な容姿が添って、宇治川にこんな趣があったかと宮は恍惚としておいでになった。	달밤의 미와 애인의 윤기인 용모가 더해져, 우지가와에게 이런 정취가 있었는지 하고 궁은 황홀로 하고 있어졌다.	fix	normalize
+normalize:honorific-oide	「そんなにわたしの身体ばかりを見ておいでになっては、溶けてしまいますよ」	「그렇게 제 신체만을 보고 계셔서는, 녹아버려요」	fix	normalize
+normalize:honorific-oide	馬上の宮は少し遠くへ立っておいでになるのであったが、田舎風な犬が集まって来て吠え散らす。	마상의 궁은 조금 멀리 서 계시는 것이었지만, 시골풍인 개가 모여 와 마구 짖는다.	fix	normalize
+normalize:honorific-oide	「モーニング・コートを着ておいでになりました」	「모닝 코트를 입고 계셨습니다」	fix	normalize
+normalize:honorific-oide	とお書きになったものを、院はお悲しみの中でも繰り返しお読みになって、いつまでもながめておいでになった。	라고 쓰신 것을, 원은 슬픔 속에서도 반복해 읽으셔, 언제까지나 바라보고 계셨다.	fix	normalize
+normalize:honorific-oide	弱い女や貧乏人の味方ばっかりしておいでになる福の神様なんだよ。	약한 여자나 가난한 사람의 아군뿐 하고 계시는 복신 같아.	fix	normalize
+normalize:honorific-oide	それをあなたは傑作だと云って感心してお出でなさる。	그것을 당신은 걸작이라고 말해 감탄하고 계신다.	fix	normalize
+normalize:honorific-oide	「ねえ、猿さん、猿さん、お前さんは生き肝というものを持っておいでですか。	「있잖아, 원숭이 씨, 원숭이 씨, 당신은 생간이라는 걸 가지고 계십니까.	fix	normalize
+normalize:honorific-oide	気がついたときは、二位殿が、先帝をお抱き申して船べりに立ってお出ででした。	깨달았을 때는, 2위님이, 선제를 안아 말씀드려 뱃전에 서 계셨습니다.	fix	normalize
+normalize:honorific-oide	それまでお前は東京に待っておいで。	그때까지 너는 도쿄에 기다리고 있어.	keep	normalize
+normalize:honorific-oide	「お雪ちゃん――草履をはいておいでなさい」	「오유키짱――짚신을 신고 와 해」	keep	normalize
+normalize:honorific-oide	「明日、町の広場までお出で下されば、何事もよくおわかりになります。	「내일, 마을의 광장까지 출로 아래 사라지면, 아무 일도 잘 이해가 됩니다.	keep	normalize
+normalize:honorific-oide	三日の間に、よく考へてお出でなさい。	3일간에, 잘 고에라고 오세요.	keep	normalize
+normalize:honorific-oide	「みみずを取りにゆくのだから、これを持っておいで。	「지렁이를 취하러 가니까, 이걸 가지고 와.	keep	normalize
+normalize:honorific-oide	あとで見ておいで。	나중에 보고 와.	keep	normalize
+normalize:honorific-oide	いゝかい、兄さんが吐くから見ておいで。	좋겠어, 형님이 토하니까 보고 와.	keep	normalize
+normalize:honorific-oide	ぜいたくいわないで裸足になってお出で。	사치 말하지 말고 맨발이 되어 출로.	keep	normalize
+normalize:honorific-oide-alone	こちらの旦那様も毎年おいでですよ。	이쪽의 주인님도 매년 계십니다.	fix	normalize
+normalize:honorific-oide-alone	こちらの旦那様も毎年おいでですよ。	이쪽의 주인님도 매년 계십니다.	fix	normalize
+normalize:honorific-rashi	伯爵家のご令嬢は寄宿学校に入ってらしてマーリブル伯爵家が落ち着くまではそちらで保護してもらっているから安心してね、と。	백작가의 영애는 기숙 학교에 들어가 계셔 마리블 백작가가 침착할 때까지는 그쪽에서 보호받고 있으니까 안심해, 라고.	fix	normalize
+normalize:honorific-rashi	お嬢さん さっき あそこで何してらしたんですか？	아가씨 조금 전 저기에서 뭐하고 계셨습니까?	fix	normalize
+normalize:honorific-rashi	あ お母さんが小さい頃 習ってらしたのね	아 엄마가 어렸을 적 배우고 계셨구나	fix	normalize
+normalize:honorific-rashi	「松本氏の年や地位にてらして何という今の世に珍しい純情であろう！	「마츠모토 씨의 해나 지위에 비추어 뭐라는 지금의 세상에 드문 순진하구나!	keep	normalize
+normalize:honorific-rashi	勇気を出せば 何でも できるっ て 言ってらしたよ	용기를 내면 뭐든 할 수 있는 이라고 말하고 계셨어	fix	normalize
+normalize:honorific-rashi	「峯子さんみたいにいい方がちゃんとついてらして、自分の才能に自信もあれば、誰だってわりきれた心持でいられるわけだわねえ」	「미네코 씨같이 좋은 게 제대로 붙어 계셔, 자신의 재능에 자신도 있으면, 누구라도 다 깰 수 있던 마음으로 있을 수 있는 것이네」	fix	normalize
+normalize:honorific-rashi	周囲に目を配って、すごく自分をコントロールしてらして、その上で、穏やかな生活を演出してらっしゃいます	주위에 고루 주시해, 정말 자신을 컨트롤하고 계셔, 그 위에, 온화한 생활을 연출하고 계십니다	fix	normalize
+normalize:honorific-rashi	けい　それじゃ、あなたが向うでなすってらしたことは、私達に知られてはまずいことだと思っていいのですね。	있고 그럼, 당신이 향하는 것으로 이룬다고 계셨던 것은, 저희들에게 알려져서는 곤란한 일이라고 생각해도 되는군요.	fix	normalize
+normalize:honorific-rashi	何の工場を やってらしたんですか？	무슨 공장을 하고 계셨습니까?	fix	normalize
+normalize:honorific-rashi	伯爵家のご令嬢は寄宿学校に入ってらしてマーリブル伯爵家が落ち着くまではそちらで保護してもらっているから安心してね、と。	백작가의 영애는 기숙 학교에 들어가 계셔 마리블 백작가가 침착할 때까지는 그쪽에서 보호받고 있으니까 안심해, 라고.	fix	normalize
+normalize:honorific-rashi	桜乃さんとご一緒に、お買い物はしてらしたんですよね？	사쿠라노 씨와 함께, 쇼핑은 하고 계신 거죠?	fix	normalize
+normalize:honorific-rashi	はい、随分長い間、１人でこの神社に引きこもってらしたようですので	네, 상당히 오랫동안, 혼자서 이 신사에 틀어박혀 계신 것 같므로	fix	normalize
+normalize:honorific-rashi	それが…嫌ってらしたんですか？	그것이…싫어하고 계셨습니까?	fix	normalize
+normalize:honorific-rashi	真剣なお顔で こう ﾒﾆｭｰを 隅々まで見てらしたので てっきり ｸﾞﾙﾒ雑誌の調査員かと…｡	진지한 표정으로 이렇게 메뉴를 구석구석까지 보고 계셨으므로 틀림없이 미식 잡지의 조사원일까 하고….	fix	normalize
+normalize:honorific-rashi	で ホッとしてらした。	그리고 마음이 놓이고 계셨다.	fix	normalize
+normalize:honorific-rashi	わざわざミズの者を連れていらしたのも、このためでありましたか	일부러 미즈의 사람을 데려 오셨던 것도, 이 때문에였습니까	keep	normalize
+normalize:honorific-rashi	久遠さまは気付いていらしたようですが	쿠온 님은 깨달아 오신 것 같습니다만	keep	normalize
+normalize:honorific-rashi	そ…それは、剣丞さまがずっと見ていらしたからで	그…그것은, 검죠 님이 계속 보고 오셨기 때문으로	keep	normalize
+normalize:honorific-rashi	「ずっと仲良くしていらしたでしょう？	「계속 사이좋게 지내 오셨겠죠?	keep	normalize
+normalize:honorific-rashi	おまえさんは、どこから乗っていらしたの。	너 씨는, 어디에서 타 오셨어.	keep	normalize
+normalize:honorific-rashi	まだ起きていらしたのですか？	아직 깨어 오셨습니까?	keep	normalize
+normalize:honorific-rashi	「いいえ、そうそう、こちらからは見えなかった方、棕梠の蔭に坐っていらした方ですわ」	「아니요, 맞아 맞아, 이쪽에서는 안 보였던 편, 종려의 음에 앉아 오신 분이에요」	keep	normalize
+normalize:honorific-rashi	のびのびとした、ねぼけたような春の日光は縫目にしらみの行列の有りそうな袷の背中をてらして居る。	느긋하게 한, 이네 노망난 것 같은 봄의 일광은 솔기로 해들 보고의 행렬이 있을 것 같은 겹옷의 등을 비추어 있다.	keep	normalize
+normalize:humble-mairu	悪魔は急いでひなげしの所へやって参りました。	악마는 서둘러 히 던지고 해의 곳에 왔습니다.	fix	normalize
+normalize:humble-mairu	松永弾正少弼は、坂本城に進駐しておりました我らのところへ、手勢五十ほどと共にやって参りました	마츠나가 단죠쇼히츠는, 사카모토성에 진주하고 있었던 우리들에게, 수하 병력 50 정도와 함께 왔습니다	fix	normalize
+normalize:humble-mairu	恥ずかしながら モモちゃん帰って参りましたー！	부끄럽지만 모모짱 돌아왔습니다~!	fix	normalize
+normalize:humble-mairu	「大谷が帰ってまいりました。	「오오타니가 돌아왔습니다.	fix	normalize
+normalize:humble-mairu	） ご来場の皆様 秋の選抜決勝戦 開始時間が迫ってまいりました	) 입장하신 여러분 가을 선발 결승전 개시 시간이 다가왔습니다	fix	normalize
+normalize:humble-mairu	おととい 上方から戻ってまいりまして 浅草の火事のことを知りました。	그저께 위쪽으로부터 돌아와서 아사쿠사의 화재를 알았습니다.	fix	normalize
+normalize:humble-mairu	ようやく今 こちらの車内に アクションカメラマン 嬉野さんが 戻ってまいりました	드디어 지금 이쪽의 차내에 액션 카메라맨 우레시노 씨가 돌아왔습니다	fix	normalize
+normalize:humble-mairu	「すぐ戻って参ります」	「바로 돌아옵니다」	fix	normalize
+normalize:humble-mairu	けれども、たいていのねずみはなかなかこわがって、そばへやって参りません。	그러나, 대부분의 쥐는 꽤 두려워해, 곁에 오지 않습니다.	fix	normalize
+normalize:humble-mairu	それから幾年か経た今夜、半ば老いた私の眼の前にジョージ・佐野は帰って参りました。	그리고 몇 년인가 경과한 오늘 밤, 반쯤 늙은 제 눈 앞에 조지·사노는 돌아왔습니다.	fix	normalize
+normalize:humble-mairu	(宇陀)うん紫色は しくじりましたので水色を持ってまいりました	(우다) 응 보라색은 실패했으므로 하늘색을 가져왔습니다	keep	normalize
+normalize:humble-mairu	推して参ります！	나가겠습니다!	keep	normalize
+normalize:humble-mairu	雛子　　行つて参ります。	히나코　　행 연줄 가겠습니다.	keep	normalize
+normalize:humble-mairu	「頼みたい事があってまいったから、どうかそんな物を引っこめてもらいたい。	「부탁하고 싶은 게 있어 갔으니까, 아무쪼록 그런 물건을 움츠려 줬으면 한다.	keep	normalize
+normalize:humble-mairu	「事情を説明してもわかってくれなくて参るわ」	「사정을 설명해도 알고 주지 않아서 갈게」	keep	normalize
+normalize:humble-mairu	明日お墓へ行って参りましょう。	내일 묘에 가 옵시다.	keep	normalize
+normalize:humble-mairu	何ならちょいと私が御加減を見て参りましょうか。	무엇이라면 조금 제가 정도를 보고 올까요.	keep	normalize
+normalize:humble-mairu	前に向かって 進んでまいりましょう	전으로 향해 나아갑시다	keep	normalize
+normalize:honorific-ikare	車で20分…まぁ置いていかれても帰れない距離じゃないよな…？	차로 20분…뭐 남겨져도 돌아갈 수 없는 거리가 아니지…?	keep	normalize
+normalize:honorific-ikare	「特に今は対テロ法案をまとめようとしている議員たちの護衛に人員を持っていかれている」	「특히 지금은 대테러 법안을 정리하려 하고 있는 의원들의 호위에 인원이 가져가지고 있어」	keep	normalize
+normalize:honorific-ikare	意識が もっていかれそうだ》	의식이 가져가질 것 같다》	keep	normalize
+normalize:honorific-ikare	山田さん１枚持ってって｡ >>また持っていかれちゃう｡	야마다 씨 1장 가져가. >>또 가져가져버린다.	keep	normalize
+normalize:honorific-ikare	シキ君と和服の子 労働区へ連れていかれちゃったのね	시키 군과 일본식 옷의 아이 노동구에 끌려가버렸어	keep	normalize
+normalize:honorific-ikare	置いていかれなかった。	남겨지지 않았다.	keep	normalize
+normalize:honorific-ikare	お父が… 連れていかれた。	아버지가… 끌려갔다.	keep	normalize
+normalize:favour-moraenai	「一度も見せてもらえませんでした。ユリアン様は、ターニャ様を疑うこと自体が残酷だと」	「한 번도 보여 주지 않았습니다. 유리안 님은, 타냐 님을 의심하는 거 자체가 잔혹하다고」	fix	normalize
+normalize:favour-moraenai	それを憎まれ口をたたくなんて、あなたみたいな非常識な人はどこも雇ってもらえないわよ！	그것을 욕설을 치다니, 당신 같은 비상식적인 사람은 어디도 고용해 주지 않아!	fix	normalize
+normalize:favour-moraenai	マイクロフトはあなたがつけたはず なのに一生 呼んでもらえないのかな ホームズさん	마이크로후트는 당신이 붙였을 텐데 일생 불러 주지 않는 건지 홈스 씨	fix	normalize
+normalize:favour-moraenai	「どうでもいいものじゃ、いくらタダでも受け取ってもらえないだろうし……」	「아무래도 좋은 것은, 아무리 공짜라도 받아 주지 않을 테고……」	fix	normalize
+normalize:favour-moraenai	森下さんは、全然受け取ってもらえない。	모리시타 씨는, 전혀 받아 주지 않는다.	fix	normalize
+normalize:favour-moraenai	「自分たちでビラを配っても、なかなか受け取ってもらえないらしい」	「자신들로 전단을 나눠줘도, 좀처럼 받아 주지 않는 것 같아」	fix	normalize
+normalize:favour-moraenai	「母が過保護で、包丁持たせてもらえませんでした……」	「어머니가 과보호로, 부엌칼 갖게해 주지 않았습니다……」	fix	normalize
+normalize:favour-moraenai	お母様は、お父様に相談しても「大げさだ」と取り合ってもらえない日々の中で、ただ泣き寝入りしていたわけではなかった。	어머님은, 아버님에게 상담해도 「과장되다」라고 서로 빼앗아 주지 않는 나날의 안에서, 다만 단념하고 있던 것은 아니었다.	fix	normalize
+normalize:favour-moraenai	「一度も見せてもらえませんでした。	「한 번도 보여 주지 않았습니다.	fix	normalize
+normalize:favour-moraenai	見てもらえない可能性も高い｡	봐 주지 않을 가능성도 높다.	fix	normalize
+normalize:favour-moraenai	か、構ってもらえなくて、寂しかったの？	사, 상관하고 주지 않아, 외로웠어?	fix	normalize
+normalize:favour-moraenai	引き受けてもらえませんか」	맡겨 줄 수 없겠습니까」	keep	normalize
+normalize:favour-moraenai	「明日、練習に付き合ってもらえませんか？	「내일, 연습에 어울려주실 수 있겠습니까?	keep	normalize
+normalize:favour-moraenai	「みなさん、桜庭さんが戻ってくるまで、ちょっとこれを読んでもらえませんか？	「여러분, 사쿠라바 씨가 돌아올 때까지, 조금 이것을 읽어주실 수 있겠습니까?	keep	normalize
+normalize:favour-moraenai	これ やめてもらえません？	이것 그만두어 줄 수 없습니까?	keep	normalize
+normalize:favour-moraenai	私が特殊性癖持ちの変態みたいに言わないでもらえませんか！	제가 특수 성벽 보유자의 변태같이 말함정 있고에서 받을 수 없습니까!	keep	normalize
+normalize:favour-moraenai	上手くできないと、もう二度としてもらえなくなっちゃうんじゃないかって	잘 할 수 없으면, 이제 두 번 다시 해 줄 수 있지 않게 되어버리는 것이 아니냐고	keep	normalize
+normalize:favour-moraenai	こんなこと、誰かに話しても信じてもらえないだろうから、あんたにしか言わないけど	이런 일, 누군가에게 이야기해도 믿어 주지 않을 테니까, 너밖에 말하지 않는데	keep	normalize
+normalize:favour-moraenai	常磐さんかアメリさんにヘルプ入ってもらえないかなって	토키와 씨나 아메리 씨에게 헬프 들어가 줄 수 없을까 하고	keep	normalize
+normalize:honorific-stem	お呼びですか？	부르셨습니까?	fix	normalize
+normalize:honorific-stem	あ…あぁ、提督さんお目覚めですね？	아…아아, 제독님 눈을 뜨시네요?	fix	normalize
+normalize:honorific-stem	提督はどんな本をお読みですか？	제독은 어떤 책을 읽으십니까?	fix	normalize
+normalize:honorific-stem	典厩さまがお呼びなんだぜ。	전 마구간님이 부르신다.	fix	normalize
+normalize:honorific-stem	あなたはほんとによくお働きでした。	당신은 정말 잘 일하셨습니다.	fix	normalize
+normalize:honorific-stem	「ひいっ、まだお怒りだった～っ」	「히익, 아직 화내신~」	fix	normalize
+normalize:honorific-stem	「何をお打ちですの？	「뭘 치셔요?	fix	normalize
+normalize:honorific-stem	提督、お呼びですね！	제독, 부르시네요!	fix	normalize
+normalize:honorific-stem	そんな猪武者のような真似、このわたくしがするとお思いですの？	그런 저돌적인 사람과 같은 짓, 이 제가 하면 생각하셔요?	fix	normalize
+normalize:honorific-stem	文子　　おや、もうお目覚めですか。	문자　　어라, 이제 눈을 뜨십니까.	fix	normalize
+normalize:honorific-stem	お探しなのでしょう？	찾으시겠죠?	fix	normalize
+normalize:honorific-stem	「貴方は何処にお泊りですか。	「당신은 어디에 묵으십니까.	fix	normalize
+normalize:honorific-stem	司令、野分に何かお求めですか？	사령관, 노와키에게 뭔가 구하십니까?	fix	normalize
+normalize:honorific-stem	「……なにか、お悩みですか？	「……뭔가, 고민하십니까?	fix	normalize
+normalize:honorific-stem	「王妃様がお探しです。	「왕비님이 찾으십니다.	fix	normalize
+normalize:honorific-stem	あたしが軽はずみの好色の念からあなたに言い寄ったとでもお思いなの？	내가 경솔의 호색 생각에서 당신에게 구애했다고라도 생각하시는 거야?	fix	normalize
+normalize:honorific-stem	「お揃いです」	「세트입니다」	keep	normalize
+normalize:honorific-stem	「将棋、お好きなんですか？	「쇼기, 좋아합니까?	keep	normalize
+normalize:honorific-stem	このくらい、綾那にお任せなのですっ！	이 정도, 아야나에게 맡겨라인 것입니다!	keep	normalize
+normalize:honorific-stem	お似合いですね?	어울리네요?	keep	normalize
+normalize:honorific-stem	「先生はあんな田舎の方がお好きですか」	「선생님은 저런 시골이 좋아합니까」	keep	normalize
+normalize:honorific-stem	「お仕置きです」	「벌입니다」	keep	normalize
+normalize:honorific-stem	お疲れだったようですね	피곤했던 것 같네요	keep	normalize
+normalize:honorific-stem	「叔母さんのお使いで、どうもすみません。	「숙모의 심부름 있고로, 정말 죄송합니다.	keep	normalize
+normalize:honorific-ikare	先生が帰っていかれる。	선생님이 돌아가신다.	fix	normalize
+normalize:honorific-ikare	殿下はもう帰っていかれました。	전하는 벌써 돌아가셨습니다.	fix	normalize

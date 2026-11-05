@@ -70,7 +70,7 @@ sound:clipped-volitional-aux	燃やしちゃお	태워버리자	fix	sound
 sound:clipped-volitional-aux	新しいパジャマ 持っていこ	새로운 파자마 가져가자	fix	sound
 cx:na-observed:30	うれしいこと言ってくれるな かんぱーい	기쁜 말 해 주는구나 건배~	fix	rewrites
 cx:na-observed:30	私のことを可愛いとかやんちゃとか、好きなように言ってくれるな	나를 귀엽다든가 응석이라든지, 좋아하는 대로 말해 주는구나	fix	rewrites
-cx:na-observed:30	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 늦어, 이제 울어 주지 마.	keep	rewrites
+cx:na-observed:30	民や、だまっておくれ、もう泣いてくれるな。	백성이나, 가만히 있어 주어, 이제 울어 주지 마.	keep	rewrites
 cx:na-observed:30	水野家のためと思ってくれるな	미즈노가 때문에라고 생각해 주지 마	keep	rewrites
 cx:na-observed:35	むちゃくちゃ言うな この人	지독하게 말하는구나 이 사람	fix	rewrites
 cx:na-observed:35	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	fix	rewrites

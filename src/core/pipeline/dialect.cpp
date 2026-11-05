@@ -16,11 +16,16 @@
 //   order      the imperative in い of an ichidan verb (降りい 降りろ), せえ (しろ) and the
 //              negative question んかい that orders (連れてこんかい 連れてこい, 引かんかい 引け);
 //   nen        the Kansai ねん and ねや of an explanation (してはんねやろ, 減っとんねや);
-//   polite     でがんす and ざます of old polite speech (です).
+//   polite     でがんす and ざます of old polite speech (です);
+//   honorific  the honorific and humble forms the dictionary does not read (spec LEX-4765): ておくれ inside a
+//              sentence (くれ), ておいで before a copula (ておられる), てらした (ておられた), the まいる of coming
+//              (くる), ていかれ after an honoured subject (て行かれ), the statement てもらえない (てくれない) and
+//              お + a verb stem + です (お読みです お読みになります).
 #include <span>
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -703,6 +708,265 @@ bool OldPolite(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+
+// Honorific and humble forms read as the forms the dictionary reads (spec LEX-4765).
+
+// Whether the verb in its て form before pos (the て or で at pos - 1 not counted) moves somewhere: its
+// ておいで and ていらした are the coming of 来る (帰っておいで, 戻っていらした), not the ている they honour.
+bool MotionBefore(std::string_view head, bool entering) {
+    return dict::EndsWithMember(HDTRANS_CLASS("stem.te-moving"), head) > 0 ||
+           (entering && dict::EndsWithMember(HDTRANS_CLASS("stem.te-entering"), head) > 0);
+}
+
+// The て or で right before pos and the text before it.
+bool TeBefore(std::string_view s, size_t pos, std::string_view& head) {
+    const std::string_view before = s.substr(0, pos);
+    if (!before.ends_with("て") && !before.ends_with("で")) return false;
+    const bool de = before.ends_with("で");
+    head = before.substr(0, before.size() - std::string_view("て").size());
+    if (head.empty() || EndAt(head, head.size() - LastRune(head).size)) return false;
+    // で is a て form after ん or い only (読んで, 泳いで; not the copula of 上手でいらした or 全力で参ります);
+    // て follows a kanji or a kana a verb stem ends in (待っ, 書い, 話し, 見せ, 待って), not a particle or another
+    // kana (それをてらして 照らして).
+    const char32_t last = LastRune(head).cp;
+    if (de) return last == U'ん' || last == U'い';
+    return IsKanjiClass(last) || In(last, U"っいしえけげせぜてねべぺめれきぎじちひびみり");
+}
+
+// The おくれ of an old request after a て form (待っておくれ, 貸しておくれでないか): くれ. Not おくれる (be late).
+bool OldRequest(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    size_t p = pos;
+    if (!Lit(s, p, "おくれ") || !TeBefore(s, pos, head)) return false;
+    size_t q = p;
+    if (Lit(s, q, "でない")) {
+        m.group[1] = "くれない";
+        m.end = q;
+        return true;
+    }
+    // At the end of a sentence or a quote the ending table reads it (待っておくれ。 기다려 다오); inside one,
+    // before a comma, a space or な, ね, さ (not the おくれなさい of the ending table), it is read here.
+    size_t r = p;
+    if (s.substr(r).starts_with("よ")) r += std::string_view("よ").size();
+    const char32_t next = r < s.size() ? At(s, r).cp : 0;
+    if (!In(next, U"、，, 　なねさ") || s.substr(r).starts_with("なさ")) return false;
+    m.group[1] = "くれ";
+    m.end = p;
+    return true;
+}
+
+// The ておいで of a state the speaker honours (持っておいでです, 覚えておいでですか, 陣取っておいでで、, 考えておいでになる)
+// before a copula or になる: ておられる. Not after a verb that moves (帰っておいでです is coming back), nor the
+// order to come (出ておいで, 見ておいでなさい).
+bool HonouredState(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    size_t p = pos;
+    if ((!Lit(s, p, "おいで") && !Lit(s, p, "お出で")) || !TeBefore(s, pos, head) || MotionBefore(head, true)) return false;
+    // ておいで after a verb of fetching is going and coming back (買っておいでになった 사 오셨다), and 喜んで is
+    // the adverb (喜んでおいででしょう).
+    if (dict::EndsWithMember(HDTRANS_CLASS("stem.te-fetching"), head) > 0) return false;
+    static constexpr std::string_view kForms[][2] = {
+        {"ですか", "おられますか"},   {"でした", "おられました"}, {"です", "おられます"},     {"でしょう", "おられるでしょう"},
+        {"だった", "おられた"},       {"なの", "おられるの"},     {"なん", "おられるん"},     {"なさいます", "おられます"},
+        {"なさった", "おられた"},     {"なさる", "おられる"},     {"になります", "おられます"}, {"になりました", "おられました"},
+        {"になった", "おられた"},     {"になって", "おられて"},   {"になる", "おられる"},     {"で、", "おられて、"},
+        {"だ", "おられる"},           {"で", "おられて"},
+    };
+    for (const auto& f : kForms) {
+        size_t q = p;
+        if (!Lit(s, q, f[0])) continue;
+        if (f[0] == "だ" && !EndAt(s, q) && FinalParticleEnd(s, q) == std::string_view::npos) continue;
+        if (f[0] == "で" && !EndAt(s, q)) continue;
+        m.group[1] = f[1];
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// おいで and お出で of いらっしゃる standing alone before a copula (毎年おいでですよ, ここにお出でです): いらっしゃる.
+bool HonouredComing(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    if (TeBefore(s, pos, head)) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "おいで") && !Lit(s, p, "お出で")) return false;
+    static constexpr std::string_view kForms[][2] = {{"ですか", "いらっしゃいますか"}, {"でした", "いらっしゃいました"}, {"です", "いらっしゃいます"},
+                                                       {"でしょう", "いらっしゃるでしょう"}, {"だった", "いらっしゃった"}, {"なの", "いらっしゃるの"}};
+    for (const auto& f : kForms) {
+        size_t q = p;
+        if (!Lit(s, q, f[0])) continue;
+        m.group[1] = f[1];
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// The (い)らして and (い)らした of いらっしゃる after a て form of a state (見ていらした, 入ってらして): ておられ.
+bool HonouredStay(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    size_t p = pos;
+    // only the contracted らし (見てらした); the full ていらした is also the てきた of an honoured doer (仲良くして
+    // いらした 지내 오셨다), which the dictionary reads
+    if (!Lit(s, p, "らし")) return false;
+    if (!TeBefore(s, pos, head) || MotionBefore(head, false)) return false;
+    if (p >= s.size() || !In(At(s, p).cp, U"てた")) return false;
+    // the old spelling ぢや after it does not read after ておられた
+    if (s.substr(p + At(s, p).size).starts_with("ぢ")) return false;
+    // いらしてください and いらしてね ask someone to come or to stay (後でいらしてください).
+    for (const std::string_view ask : {"てください", "て下さい", "てくださ", "て下さ", "てね", "てちょうだい"}) {
+        if (s.substr(p).starts_with(ask)) return false;
+    }
+    m.group[1] = "おられ";
+    m.end = p;
+    return true;
+}
+
+// The まいる of humble speech after a て form (寄ってまいります, なってまいりました): くる. 行ってまいります
+// is its own greeting.
+bool HumbleCome(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    if (!TeBefore(s, pos, head) || dict::EndsWithMember(HDTRANS_CLASS("stem.te-mairu-own"), head) > 0) return false;
+    // A coming to the speaker's side said humbly (寄ってまいります 다가옵니다, 迫ってまいりました); in the rest,
+    // where the dictionary reads てまいります as the going on of ていく (頑張って参りましょう 힘내 갑시다), it stays.
+    if (dict::EndsWithMember(HDTRANS_CLASS("stem.te-coming-humble"), head) == 0) return false;
+    static constexpr std::string_view kForms[][2] = {{"まいり", "き"}, {"まいる", "くる"}, {"まいっ", "き"}, {"参り", "き"}, {"参る", "くる"}, {"参っ", "き"}};
+    for (const auto& f : kForms) {
+        size_t p = pos;
+        if (!Lit(s, p, f[0])) continue;
+        if (s.substr(p).starts_with("ましょ") || s.substr(p).starts_with("ませう")) return false;
+        m.group[1] = f[1];
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
+// The ていかれ in kana of the respectful (ら)れ of 行く (帰っていかれる): て行かれ, which the voice of the word
+// stage reads (先生が帰って行かれた 돌아가셨다) where the kana word いかれ reads 갈 수 있다.
+bool HonouredGoing(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    size_t p = pos;
+    if (!Lit(s, p, "いかれ") || !TeBefore(s, pos, head)) return false;
+    if (p < s.size() && In(At(s, p).cp, U"なずぬん")) return false;
+    // only with an honoured subject before it in the sentence (先生が帰っていかれる); without one the kana
+    // いかれ is as likely the passive (連れていかれる) or the potential
+    std::string_view sentence = head;
+    for (const std::string_view stop : {"。", "！", "？", "「", "」"}) {
+        const size_t at = sentence.rfind(stop);
+        if (at != std::string_view::npos) sentence = sentence.substr(at + stop.size());
+    }
+    bool honoured = false;
+    for (const std::string_view particle : {"が", "は", "も"}) {
+        for (size_t at = sentence.find(particle); !honoured && at != std::string_view::npos; at = sentence.find(particle, at + particle.size())) {
+            honoured = dict::EndsWithMember(HDTRANS_CLASS("honorific.honoured-person"), sentence.substr(0, at)) > 0;
+        }
+    }
+    if (!honoured) return false;
+    m.group[1] = "行かれ";
+    m.end = p;
+    return true;
+}
+
+// The てもらえない of a statement (見せてもらえなかった, 愛してもらえない): てくれない, what the other did not do
+// for one (보여 주지 않았다). A question or a request keeps it (待ってもらえないか, 席を外してもらえませんか).
+bool UngivenFavour(std::string_view s, size_t pos, Match& m) {
+    std::string_view head;
+    size_t p = pos;
+    if (!Lit(s, p, "もらえ") || !TeBefore(s, pos, head)) return false;
+    // 聞いてくれない reads its 聞く as asking (물어 주다), not the listening that 聞いてもらえない is; the verbs
+    // whose Korean takes 받다 (理解してもらえない 이해받지 못하다, 認めて 인정받다, 許して 허락받다) and わかって
+    // (알아주다) are read by the dictionary.
+    if (dict::EndsWithMember(HDTRANS_CLASS("stem.te-favour-read"), head) > 0) return false;
+    // the て form of する (理解して, お供えして, して): a godan verb in す (貸して, 返して) is no する
+    if (head.ends_with("し")) {
+        const std::string_view stem = head.substr(0, head.size() - std::string_view("し").size());
+        std::string_view word = stem;
+        while (!word.empty() && !EndAt(word, word.size() - LastRune(word).size) && !In(LastRune(word).cp, U"をがはにもとへのや")) {
+            word.remove_suffix(LastRune(word).size);
+        }
+        const std::string_view verbStem = stem.substr(word.size());
+        if (verbStem.empty() || !VerbIs(Cat({verbStem, "す"}))) return false;
+    }
+    static constexpr std::string_view kForms[][2] = {{"ませんでした", "くれませんでした"}, {"ません", "くれません"}, {"なかった", "くれなかった"},
+                                                       {"なくて", "くれなくて"}, {"なく", "くれなく"}, {"ない", "くれない"}, {"ず", "くれず"}};
+    for (const auto& f : kForms) {
+        size_t q = p;
+        if (!Lit(s, q, f[0])) continue;
+        const std::string_view rest = s.substr(q);
+        for (const std::string_view ask : {"か", "？", "?", "だろうか", "でしょうか", "かな", "かしら", "かね", "の？", "の?"}) {
+            if (rest.starts_with(ask)) return false;
+        }
+        if (f[0] == "ません" && !EndAt(s, q) && FinalParticleEnd(s, q) == std::string_view::npos) return false;
+        // with the giver in に in its clause (親に構ってもらえない) the に would need to become the subject
+        std::string_view clause = head;
+        for (const std::string_view stop : {"、", "。", "！", "？", " ", "　", "「"}) {
+            const size_t at = clause.rfind(stop);
+            if (at != std::string_view::npos) clause = clause.substr(at + stop.size());
+        }
+        if (clause.find("に") != std::string_view::npos) return false;
+        // ない right before a closing bracket may be a request said without か (置いてもらえない」)
+        if (f[0] == "ない" && (rest.starts_with("」") || rest.starts_with("』"))) return false;
+        m.group[1] = f[1];
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// お and the stem of a dictionary verb before a copula, the state the speaker honours (お帰りですか, お立ちです,
+// お過ごしで、): お and the stem before になる (お帰りになりますか 돌아오십니까). Not the nouns made of a
+// stem (お願いです, お返しです, お疲れですか), nor お持ち, which reads as written.
+bool HonouredStemCopula(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "お")) return false;
+    const size_t stemStart = p;
+    while (p < s.size() && IsKanjiClass(At(s, p).cp)) p += At(s, p).size;
+    if (p == stemStart || p >= s.size()) return false;
+    const char32_t k = At(s, p).cp;
+    const std::u32string_view iRow = U"いきぎしちにびみり", uRow = U"うくぐすつぬぶむる";
+    const std::size_t row = iRow.find(k);
+    if (row == std::u32string_view::npos && std::u32string_view(U"えけげせてねべめれ").find(k) == std::u32string_view::npos) return false;
+    const std::string_view kanji = s.substr(stemStart, p - stemStart);
+    p += At(s, p).size;
+    const std::string_view stem = s.substr(stemStart, p - stemStart);
+    if (dict::InClass(HDTRANS_CLASS("noun.o-stem"), stem)) return false;
+    bool verb = false;
+    if (row != std::u32string_view::npos) {
+        std::string godan(kanji);
+        text::AppendRune(godan, uRow[row]);
+        verb = VerbIs(godan) || VerbIs(Cat({stem, "る"}));
+    } else {
+        verb = VerbIs(Cat({stem, "る"}));
+    }
+    // an adjective in い (お強いですね) is no stem
+    if (k == U'い' && AdjectiveIs(kanji)) return false;
+    if (!verb) return false;
+    // お呼びですか asks whether one has called (부르셨습니까) and お見えです says someone has come (오셨습니다);
+    // the でしょうか of such a stem stays.
+    const bool past = dict::InClass(HDTRANS_CLASS("stem.o-past"), stem);
+    if (past && s.substr(p).starts_with("でしょう")) return false;
+    static constexpr std::string_view kForms[][2] = {
+        {"でしたか", "になりましたか"}, {"でした", "になりました"}, {"ですか", "になりますか"}, {"です", "になります"},
+        {"でしょう", "になるでしょう"}, {"だった", "になった"},     {"なの", "になるの"},       {"なん", "になるん"},
+        {"で、", "になって、"},         {"で…", "になって…"},       {"だ", "になる"},
+    };
+    for (const auto& f : kForms) {
+        size_t q = p;
+        if (!Lit(s, q, f[0])) continue;
+        if (f[0] == "だ" && !EndAt(s, q) && FinalParticleEnd(s, q) == std::string_view::npos && !s.substr(q).starts_with("から") &&
+            !s.substr(q).starts_with("が") && !s.substr(q).starts_with("けど")) {
+            continue;
+        }
+        m.group[1] = stem;
+        m.group[2] = past && f[0] == "ですか"                                                        ? std::string_view("になりましたか")
+                     : f[0] == "です" && dict::InClass(HDTRANS_CLASS("stem.o-arrived"), stem) ? std::string_view("になりました")
+                                                                                              : f[1];
+        m.end = q;
+        return true;
+    }
+    return false;
+}
 }  // namespace
 
 std::string DialectForms(std::string_view in, const RunLookup& runs) {
@@ -746,6 +1010,14 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     text = ReplaceAll(text, SenbaPolite, group1);
     text = ReplaceAll(text, NominalEnd, group1);
     text = ReplaceAll(text, RegionalWord, group1);
+    if (text.find("おくれ") != std::string::npos) text = ReplaceAll(text, OldRequest, group1);
+    if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredState, group1);
+    if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredComing, group1);
+    if (text.find("らし") != std::string::npos) text = ReplaceAll(text, HonouredStay, group1);
+    if (text.find("まい") != std::string::npos || text.find("参") != std::string::npos) text = ReplaceAll(text, HumbleCome, group1);
+    if (text.find("いかれ") != std::string::npos) text = ReplaceAll(text, HonouredGoing, group1);
+    if (text.find("もらえ") != std::string::npos) text = ReplaceAll(text, UngivenFavour, group1);
+    if (text.find("お") != std::string::npos) text = ReplaceAll(text, HonouredStemCopula, [](const Match& m) { return Cat({"お", m.group[1], m.group[2]}); });
     gRuns = nullptr;
     return text;
 }
