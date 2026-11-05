@@ -80,6 +80,10 @@ struct Colloc {
     std::string slotClass;           // @class of the slot, "" for any noun
     std::string lead, particle;      // Korean before the slot's, and the particle after it (0.7.x notation)
     std::string headRaw, headVerb, headAdjective, headNa;  // the rest, raw and compiled per class
+    // An idiom row (kind idiom): a noun, its particle and a verb in its dictionary form, matched
+    // loosely (another particle or none, a space or adverbs before the verb).
+    bool loose = false;
+    std::string noun, idiomParticle, verb;
 };
 
 struct PackTable {
