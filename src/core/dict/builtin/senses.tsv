@@ -1673,3 +1673,17 @@
 利く	배다	塩,胡椒,コショウ,わさび,ワサビ,スパイス,香辛料,辛子,カラシ,出汁,だし	before	v5
 利く	듣다	歯止め,ブレーキ,薬,麻酔	before	v5
 利く	되다
+// 流す: 틀다 for a film, a show or music, 씻다 for a face or a body washed, 넘기다 for food washed down or a remark laughed off (spec LEX-4904).
+流す	틀다	映画,テレビ,番組,音楽,曲,BGM,映像,動画,CM,ニュース,放送,ラジオ,音声,レコード,DVD	before	v5
+流す	씻다	顔,体,身体,手足	before	v5
+流す	넘기다	笑う,鷹揚,さらっと,さらりと,適当,スープ,お茶,茶,ジュース,牛乳,ワイン	before	v5
+// 取れる, とれる: 벗겨지다 for gear or a mask, 떨어지다 for a part, 풀리다 for strain or a curse, 빠지다 for a stain or a smell, 나다 for a crop where it grows (spec LEX-4904).
+取れる	벗겨지다	装備,鎧,仮面,兜,マスク,手錠,枷,足枷	before	v1
+取れる	풀리다	力み,呪い,痛み,こり,肩こり,眠気,強張り,わだかまり	before	v1
+取れる	빠지다	汚れ,染み,シミ,臭い,臭み	before	v1
+取れる	나다	島,畑,産地,地元,農園,果樹園,田んぼ	before	v1
+とれる	벗겨지다	装備,鎧,仮面,兜,マスク,手錠,枷,足枷	before	v1
+とれる	떨어지다	指,瓶,ボタン,蓋,首,腕,角,ネジ,キャップ,頭	before	v1
+とれる	풀리다	疲れ,疲労,緊張,凝り,首輪,力み,呪い,痛み,こり,眠気	before	v1
+とれる	빠지다	汚れ,染み,シミ,臭い,臭み	before	v1
+とれる	나다	島,畑,産地,地元,農園,果樹園,田んぼ	before	v1
