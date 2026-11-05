@@ -24,3 +24,10 @@ sense:verb-kind	首をひねった。	고개를 갸웃했다.	keep	senses
 sense:verb-kind	多量に血が噴き出していた。	다량으로 피가 뿜어져 나오고 있었다.	keep	senses
 sense:verb-kind	縁を結いて	인연을 맺어	keep	senses
 sense:verb-kind	主君と仰ぐ	주군과 우러러본다	keep	senses
+senses:korogasu	石を転がした。	돌을 굴렸다.	fix	senses
+senses:korogasu	彼は床に転がされた	그는 바닥에 굴려졌다	fix	senses
+senses:korogasu	大勢の人の前で床に転がされて、しかも数人の男に取り押さえられている	많은 사람 앞에서 바닥에 굴려져, 게다가 몇 사람의 남자에게 붙잡혀 있다	fix	senses
+senses:korogasu	土地を転がして儲けた	토지를 전매해 벌었다	keep	senses
+senses:korogasu	ボールを転がす	공을 굴린다	keep	senses
+senses:korogasu	石が転がった	돌이 굴렀다	keep	senses
+senses:korogasu	車を転がして帰る	차를 몰아 돌아간다	keep	senses

@@ -211,7 +211,8 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
 // The potential of an ichidan verb said without its ら (逃げれる 逃げられる, 起きれない 起きられない) written in
 // full: a れ before a form of the potential stem, after the stem of an ichidan verb of the dictionary,
 // when no word of the dictionary from where that stem starts goes on over the れ (入れる, 切れない,
-// 呆れない; the rows of 見れ, 食べれ and 来れ).
+// 呆れない; the rows of 見れ, 食べれ and 来れ). After an honoured subject, where the word stage reads られる as
+// respect, a form that is not negative takes ることができ instead (社長は起きれる 일어날 수가 있다).
 std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The Kansai negative へん after a kana stem that the spoken forms leave (足りへん 足りない, ならへん,
