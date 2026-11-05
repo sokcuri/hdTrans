@@ -23,6 +23,9 @@ struct RunLookup {
     // Whether text ends with the dictionary form of a dictionary verb that starts at a word boundary
     // (SpokenForms: the verb of a rebuke in んじゃない); null to take every such form as a verb.
     bool (*verb)(const void* context, std::string_view text) = nullptr;
+    // Whether text ends with the dictionary form of a verb of the dictionary, with no guess for kana
+    // the dictionary lacks (RewriteCasual: the stem before a casual negative ねえ); null for none.
+    bool (*dictionaryVerb)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

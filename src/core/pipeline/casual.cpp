@@ -1179,6 +1179,54 @@ bool EmphaticAt(std::string_view s, size_t pos, Match& m) {
 
 }  // namespace
 
+// The kana before a casual negative ねぇ, ねえ or ねー that a verb of the dictionary reads as its negative stem
+// (VerbNee in RewriteCasual): group 1 the stem kana, group 2 the follower.
+bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
+    // わ and the ichidan stems in い or e are left to Nee, which reads them after a kanji: in kana they are
+    // mostly the particles わ and ね or a て form (いいわねぇ, 怖いねぇ, 聞かせてねぇ, それねー); え stays, the
+    // potential of a verb in う (もらえねぇか).
+    static constexpr std::u32string_view kARow = U"かがさたなばまら";
+    static constexpr std::u32string_view kURow = U"くぐすつぬぶむる";
+    static constexpr std::u32string_view kStemRow = U"え";
+    size_t p = pos;
+    const text::Rune k = text::DecodeRune(s.substr(p));
+    if (k.size == 0 || !IsHiraganaRune(k.cp)) return false;
+    const size_t a = kARow.find(k.cp);
+    const bool ichidan = kStemRow.find(k.cp) != std::u32string_view::npos;
+    if (a == std::u32string_view::npos && !ichidan) return false;
+    p += k.size;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ね")) return false;
+    const bool bar = OneOf(s, p, U"ー");
+    if (!bar && !OneOf(s, p, U"ぇえ")) return false;
+    if (s.substr(p).starts_with("も")) return false;
+    if (!CharOrEnd(s, p, bar ? U"なよぜぞしかけだっわの" : U"なよぜぞしかけだっわの。、！？!?…‥」』）) 　", m, 2)) return false;
+    // The particle ね after から, なら, で or the question か (ですからねえ, 君ならねぇ, 東京でねえ, ですかねぇ).
+    const std::string_view head = s.substr(0, pos);
+    if (k.cp == U'で' || (k.cp == U'ら' && (head.ends_with("か") || head.ends_with("な"))) ||
+        (k.cp == U'か' && (head.ends_with("す") || head.ends_with("ま") || head.ends_with("の")))) {
+        return false;
+    }
+    // The particle やら after a kanji, なに or どう (何やらねぇ、, どうやらねえ), as in Nee.
+    if (k.cp == U'ら' && head.ends_with("や")) {
+        const std::string_view lead = head.substr(0, head.size() - std::string_view("や").size());
+        if (lead.ends_with("なに") || lead.ends_with("どう") || (!lead.empty() && IsKanjiClass(Before(lead, lead.size())))) return false;
+    }
+    std::string form(head);
+    if (a != std::u32string_view::npos) {
+        text::AppendRune(form, kURow[a]);
+    } else {
+        form += std::string(s.substr(pos, k.size));
+        form += "る";
+    }
+    return runs.dictionaryVerb(runs.context, form);
+}
+
+// The lookups of the RewriteCasual call that VerbNeeAt reads, set around its scan.
+thread_local const RunLookup* verbNeeRuns = nullptr;
+
+bool VerbNeeAt(std::string_view s, size_t pos, Match& m) { return verbNeeRuns != nullptr && VerbNee(s, pos, m, *verbNeeRuns); }
+
 std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
@@ -1198,6 +1246,14 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         }
         return Cat({stem, "ない", g.group[2]});
     });
+    // A negative stem in ra, ka, ma... after more kana than Nee takes, or an ichidan or potential stem, before
+    // ねぇ, ねえ or ねー: a verb of the dictionary in its dictionary form (見当たらねぇ 見当たらない,
+    // 止まらねえ, 放っておかねぇ, もらえねぇか). Not the particle after から or なら (ですからねえ).
+    if (runs.dictionaryVerb != nullptr) {
+        verbNeeRuns = &runs;
+        text = ReplaceAll(text, VerbNeeAt, [](const Match& m) { return Cat({m.group[1], "ない", m.group[2]}); });
+        verbNeeRuns = nullptr;
+    }
     text = ReplaceAll(text, NounNee, [](const Match& m) {
         const bool wake = m.group[1] == "わけ" || m.group[1] == "訳";  // わけがない, not 訳ない (easy)
         return Cat({m.group[1], wake ? "がない" : "ない"});

@@ -397,6 +397,12 @@ bool EndsInVerb(const void* context, std::string_view text) {
     return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap);
 }
 
+// Whether text ends with a verb of the dictionary, no guess (pipeline::RunLookup::dictionaryVerb).
+bool EndsInDictionaryVerb(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap, true);
+}
+
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
 // past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
 // to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
@@ -1092,7 +1098,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string normalized = pipeline::JoinBraceRuby(
             pipeline::Normalize(text, ctx,
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
-                                 options.reference ? nullptr : EndsInVerb}),
+                                 options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
