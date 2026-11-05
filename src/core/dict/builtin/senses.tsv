@@ -1040,8 +1040,9 @@
 クラス	클래스	チェンジ	after	n
 クラス	급	艦隊,海軍,艦娘,鎮守府,駆逐艦,戦艦,空母,巡洋艦	sentence	n
 
-// 聞く: 묻다 after a question (か) or a thing asked for, before てみる and in 聞きたい of the speaker; 듣다 otherwise.
+// 聞く: 묻다 after a question (か) or a thing asked for, before てみる or てくる (聞いてきた too, construction fic-polysemy-2) and in 聞きたい of the speaker; 듣다 after a talk, a rumor or a sound and otherwise.
 聞く	묻다	か,かって,かと,のか,」と,なんでも,何でも,道,名前,お名前,事情,誰か,理由,意見,都合,年齢,住所,連絡先,電話番号,番号,感想,行き先,予定,好み,用件,真意,意図,質問,こっち,こちら,違い,差,値段,わけ,訳	before	v:ㄷ
+聞く	듣다	話,噂,うわさ,声,音,音楽,歌,説明,報告,ニュース,知らせ,ラジオ,講義,授業,演説	before	v:ㄷ
 聞く	묻다	みる,込む,直す,くる,来る,いい	after	v:ㄷ
 聞く	묻다	gram:Oq@を	before	v:ㄷ
 聞く	듣다	sem:UHr@を,sem:USo@を	before	v:ㄷ
