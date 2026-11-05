@@ -1,0 +1,22 @@
+# 규칙: LEX-3840, LEX-3841
+rule	input	expected	kind	layer
+cx:reading-chunks:10	そりゃ もう イヤになるほど たっぷりある	has:싫게 될 만큼	fix	rewrites
+cx:reading-chunks:10	視認が可能になるほど澱んでいく	has:가능하게 될 만큼	fix	rewrites
+cx:reading-chunks:10	確かになるほど	!rule:cx:reading-chunks:10	keep	rewrites
+cx:reading-chunks:20	安心せい。越前に向かうのはまだまだ先の話だ	has:안심해라.	fix	rewrites
+cx:reading-chunks:20	カゴを用意せい！	has:준비해라!	fix	rewrites
+cx:reading-chunks:20	では、これより軍議を始める！兎々。報告せい	has:보고해라	fix	rewrites
+cx:reading-chunks:20	全部お前のせいだ	!rule:cx:reading-chunks:20	keep	rewrites
+cx:reading-chunks:30	『放浪の貴公子』様ですね。	has:』님이네요.	fix	rewrites
+cx:reading-chunks:30	夢の様だ	!rule:cx:reading-chunks:30	keep	rewrites
+cx:reading-chunks:40	地位でもって礼を強要し―	has:지위로 예를	fix	rewrites
+cx:reading-chunks:40	その力でもって鬼を破ると？	has:그 힘으로	fix	rewrites
+cx:reading-chunks:40	特訓のお礼にケーキでもって思ったけど	!rule:cx:reading-chunks:40	keep	rewrites
+cx:reading-chunks:45	んでもって久々の再会って感じで… ねっ？	has:그리고 오래간만	fix	rewrites
+cx:reading-chunks:45	そんでもって帝都公認のアマゾネスってんだからよー。	!rule:cx:reading-chunks:45	keep	rewrites
+dict:lex:3840:微動だに-1	だが俺はまだ砂の上に立ったままで、微動だにしていなかった。	has:미동도 하고 있지 않았다	fix	lookup
+dict:lex:3840:微動だにも-1	微動だにもしてはいけん！	has:미동도 해선	fix	lookup
+dict:lex:3840:ごまんと-1	この世には 世界に絶望した若者が ごまんと居る。	has:얼마든지 있다	fix	lookup
+dict:lex:3840:ごまんと-1	そんなことを言ってる奴らをごまんと見て来たんだ	has:얼마든지	fix	lookup
+dict:lex:3840:おやっさん-1	おやっさんが言ってたんだけどよ。	has:아저씨가 말했는데	fix	lookup
+dict:lex:3840:いまだから-1	こういうのは、いまだからこそ楽しめるの	has:지금이니까	fix	lookup
