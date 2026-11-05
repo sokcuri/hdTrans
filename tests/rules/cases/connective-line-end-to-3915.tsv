@@ -1,0 +1,16 @@
+# 규칙: GRM-3915
+rule	input	expected	kind	layer
+cx:fic-connectives-1:10	学園長がユウに謹慎を伝えると	has:전하면	fix	rewrites
+cx:fic-connectives-1:10	データを１カ所に集めると	has:모으면	fix	rewrites
+cx:fic-connectives-1:10	一応 趣旨を説明すると	has:설명하면	fix	rewrites
+cx:fic-connectives-1:10	ラップトップのログによると	has:의하면	fix	rewrites
+cx:fic-connectives-1:10	明日死んでしまうと	has:죽어버리면	fix	rewrites
+cx:fic-connectives-1:10	なんか そこまで否定されると	has:부정되면	fix	rewrites
+cx:fic-connectives-1:10	やがて遠く 街をたどると	has:더듬으면	fix	rewrites
+cx:fic-connectives-1:10	「その上、子爵は爵位を返上すると」	has:반납한다고	keep	rewrites
+cx:fic-connectives-1:10	絶対に現代へ帰るんだと。	has:돌아간다고	keep	rewrites
+cx:fic-connectives-1:10	来るなら来ると	has:온다고	keep	rewrites
+cx:fic-connectives-1:10	終われば開放されると	has:개방된다고	keep	rewrites
+cx:fic-connectives-1:10	そこに存在すると」	has:존재한다고	keep	rewrites
+cx:fic-connectives-1:10	言ったろう？俺は自由に形を変えることができると	has:있다고	keep	rewrites
+cx:fic-connectives-1:10	顔を見ると、彼は笑った	has:보니	keep	rewrites
