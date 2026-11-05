@@ -1,0 +1,19 @@
+# 규칙: LEX-4619
+rule	input	expected	kind	layer
+normalize:kin-bare-oni	じゃあ甘えるね。お兄、今晩いっしょに寝てくれる？	그럼 응석부릴게. 오빠, 오늘 밤 함께 자 줄래?	fix	normalize
+normalize:kin-bare-oni	お兄、それ名誉毀損レベルでめっちゃ失礼！	오빠, 그것 명예 훼손 레벨로 엄청 실례!	fix	normalize
+normalize:kin-bare-oni	お兄はできる子！やればできる！	오빠는 할 수 있는 아이! 하면 할 수 있어!	fix	normalize
+normalize:kin-bare-oni	お兄様！私の話を聞いているのですか？	오라버니! 제 이야기를 듣고 있습니까?	keep	normalize
+normalize:kin-bare-oni	お兄さんに会いに来たのかしら？	오빠를 만나러 온 걸까?	keep	normalize
+normalize:kin-woman	「やめろって言ってるのよ──そんなことしても、兄は帰ってこない！」	「그만두라고 해──그런 일 해도, 오빠는 돌아오지 않아!」	fix	normalize
+normalize:kin-woman	でも アラリックが兄を 殺したからなのよ	하지만 알라리크가 오빠를 죽였으니까야	fix	normalize
+normalize:kin-woman	朝食はアタシが用意したげる。姉貴流、まっ、任せて！	아침 식사는 내가 준비해 줄게. 언니유, 뭐, 맡겨!	fix	normalize
+normalize:kin-woman	だがよ、兄さん、世の中そんな甘くねぇ、わかるよな。タダで通す訳にはいかねえのよ。	하지만, 형님, 세상 그렇게 만만하지 않다, 알지. 공짜로 통할 수는 없어.	keep	normalize
+normalize:kin-woman	少年はルヴィオンの兄の手にしがみついた。光の滴のような涙だった。	소년은 르비온의 형의 손에 매달렸다. 빛의 물방울과 같은 눈물이었다.	keep	normalize
+normalize:kin-woman	兄弟の会話だが、あたしは知らない	형제의 대화이지만, 나는 모른다	keep	normalize
+normalize:kin-man	じゃ… じゃあ インカㇻマッが俺のお姉ちゃん	그… 그럼 잉카 ㇻ맛이 내 누나	fix	normalize
+normalize:kin-man	お姉ちゃん、宿題手伝ってくれよ。俺、数学が苦手なんだ。	누나, 숙제 도와 줘. 나, 수학에 약하다.	fix	normalize
+normalize:kin-man	姉さん、俺が駅まで送るよ。	누나, 내가 역까지 배웅할게.	fix	normalize
+normalize:kin-man	お兄様、俺はもう子供じゃないんだぜ。	형님, 나는 이제 아이가 아니다.	fix	normalize
+normalize:kin-man	よし、僕が行く。初月出るぞ！姉さん、ここは任せて。	좋아, 내가 간다. 처음달 나오겠어! 언니, 여기는 맡겨.	keep	normalize
+normalize:kin-man	姉妹で俺を挟むなよ	자매로 나를 사이에 두지 마	keep	normalize
