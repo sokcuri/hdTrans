@@ -47,7 +47,7 @@ normalize:prohibition-janai	「あら、橘くんじゃない。」	has:타치�
 normalize:prohibition-janai	あらっ、豊くんじゃないっ。	has:유타카 군이잖아	fix	normalize
 normalize:prohibition-janai	あら、たくみくんじゃない！	has:타쿠미 군이잖아!	fix	normalize
 normalize:prohibition-janai	翔くんじゃない！	has:군이 아니야!	fix	normalize
-normalize:prohibition-janai	「キモオタ。近づくんじゃない！」	has:가까워지지 마!	keep	normalize
+normalize:prohibition-janai	「キモオタ。近づくんじゃない！」	has:다가가지 마!	keep	normalize
 normalize:prohibition-janai	「お前、嘘をつくんじゃない。」	has:하지 마.	keep	normalize
 normalize:prohibition-janai	「くっ、こっこらっ、くっつくんじゃない！」	has:붙지 마!	keep	normalize
 normalize:prohibition-janai	「うるさい！召使いのくせに偉そうな口をきくんじゃないっ！」	has:지 마!	keep	normalize

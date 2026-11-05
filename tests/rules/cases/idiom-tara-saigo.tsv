@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:novel-idioms:12	良いですか、一度手を握ったら最後、魂まで引き摺られて戻れなくなりますよ？	좋습니까, 한 번 손을 잡으면 그걸로 끝, 영혼까지 끌려가 돌아올 수 없게 돼요?	fix	local
-dict:novel-idioms:12	この先に足を踏みいれたら最後だ。死にたくなければ近づくな！	이 앞에 발을 디디면 그걸로 끝이다. 죽고 싶지 않으면 가까워지지 마!	fix	local
+dict:novel-idioms:12	この先に足を踏みいれたら最後だ。死にたくなければ近づくな！	이 앞에 발을 디디면 그걸로 끝이다. 죽고 싶지 않으면 다가가지 마!	fix	local
 dict:novel-idioms:12	大奥に入ったら最後死ぬまで戻ってなんて来られないっていうじゃない！	오오쿠에 들어가면 그걸로 끝 죽을 때까지 돌아와는 올 수 없다고 말하잖아!	fix	local
 dict:novel-idioms:12	見つかったら最後・	발견되면 그걸로 끝·	fix	local
 dict:novel-idioms:12	さあ、出かけたら最後、何しろ鉄砲玉みたいな人ですからね	자, 나가면 그걸로 끝, 어쨌든 총알 같은 사람이니까요	fix	local

@@ -190,7 +190,7 @@ cx:mimetic-adnominal:370	頭がぼんやりしている。	!rule:cx:mimetic-adno
 cx:mimetic-adnominal:380	がらんとした家は	텅 빈 집은	fix	rewrites
 cx:mimetic-adnominal:380	がらんとした広場に	텅 빈 광장에	fix	rewrites
 cx:mimetic-adnominal:380	がらんとした部室の中に入って来る女性を見る。	텅 빈 동아리방 안에 들어오는 여성을 본다.	fix	rewrites
-cx:mimetic-adnominal:380	がらんとした馬車の中で	텅 빈 마차 중에서	fix	rewrites
+cx:mimetic-adnominal:380	がらんとした馬車の中で	텅 빈 마차 안에서	fix	rewrites
 cx:mimetic-adnominal:380	中に入るとがらんとした部屋しかない。	안에 들어오면 텅 빈 방밖에 없다.	fix	rewrites
 cx:mimetic-adnominal:380	廊下は誰もおらずがらんとしている。	!rule:cx:mimetic-adnominal:380	keep	rewrites
 cx:mimetic-adnominal:390	ならふんわりした服を選ぶとしようか	그렇다면 부드러운 옷을 선택한다고 할까	fix	rewrites
