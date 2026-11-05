@@ -357,6 +357,11 @@ Record* HonorificAfterNoun(const Item& parent, Record* records, const dict::Snap
 bool NounEnd(std::string_view text) {
     if (text.empty()) return true;
     const std::string_view c = FirstChar(text);
+    // や that lists nouns, before a mark, a space or a word not in hiragana (おもてなしや サービス; not やはり).
+    if (c == "や") {
+        const text::Rune next = text::DecodeRune(text.substr(c.size()));
+        return next.size == 0 || !(next.cp >= U'ぁ' && next.cp <= U'ゖ');
+    }
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
@@ -490,7 +495,8 @@ bool ReadsWhole(const dict::Snapshot& snapshot, const Record& r, std::string_vie
 //   punctuation or the end of the text follows it (大の字, 大粒の雨). Demonstratives
 //   (あの人, この世) and adverbs keep their order: their compound rows read worse than
 //   the parts.
-// Plain-dictionary records stay in front.
+// The shorter record is the first one that reads at the text (lead), not a record before it that
+// does not (おも of 思う before おもて + なし at おもてなし). Plain-dictionary records stay in front.
 // Whether s starts with a form of the copula (not the で of できる), the な of an adnominal or
 // of なの, なんだ (not しっかりなさい), or a question か that ends a clause or goes on to a final
 // particle (アリか？, ばっちりかな; not しっかりかけて).
@@ -675,7 +681,7 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     return front;
 }
 
-Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
+Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text, const Record* lead) {
     Record* owned = nullptr;
     Record* first = records;
     while (first != nullptr && first->user != nullptr) {
@@ -683,15 +689,16 @@ Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::st
         first = first->child;
     }
     if (first == nullptr) return records;
-    const bool afterNoun = NounRow(*first);
-    if (!afterNoun && (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
-                       !text::IsKanji(text::DecodeRune(first->source).cp))) {
+    if (lead == nullptr) lead = first;
+    const bool afterNoun = NounRow(*lead);
+    if (!afterNoun && (At(lead->partCode, 1) != '0' || !lead->source.ends_with("の") ||
+                       !text::IsKanji(text::DecodeRune(lead->source).cp))) {
         return records;
     }
     std::string_view noun;
     for (const Record* r = first; r != nullptr; r = r->child) {
-        if (r->user == nullptr && r->source.size() > first->source.size() && r->source.size() > noun.size() &&
-            r->source.starts_with(first->source) && text.starts_with(r->source) &&
+        if (r->user == nullptr && r->source.size() > lead->source.size() && r->source.size() > noun.size() &&
+            r->source.starts_with(lead->source) && text.starts_with(r->source) &&
             (afterNoun ? ReadsWhole(snapshot, *r, text)
                        : At(r->partCode, 1) == '1' && NounEnd(text.substr(r->source.size())))) {
             noun = r->source;
@@ -2393,10 +2400,33 @@ Record* Worker::OverCutWord(std::string_view full, int cursor, int token, const 
     return nullptr;
 }
 
+// The first base record of records that reads at full[cursor:] when a record ahead of it does
+// not and a longer noun row that it starts follows it; null otherwise (the first base record leads).
+const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, Record* records) {
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) first = first->child;
+    if (first == nullptr || NounRow(*first)) return nullptr;
+    const std::string_view text = From(full, cursor);
+    bool longerNoun = false;
+    for (const Record* r = first->child; r != nullptr && !longerNoun; r = r->child) {
+        longerNoun = r->user == nullptr && NounRow(*r) && r->source.size() > first->source.size() && text.starts_with(r->source);
+    }
+    if (!longerNoun) return nullptr;
+    const Item* read = InsertLateCandidate(full, cursor, token, first);
+    if (read == nullptr || read->group == nullptr) return nullptr;
+    const Entry* e = read->group->At(0);
+    for (const Record* r = first; r != nullptr && r != read->group->records; r = r->child) {
+        if (r->source == read->group->surface && e != nullptr && At(r->partCode, 0) == e->cls && From(r->partCode, 1) == e->code) {
+            return r == first ? nullptr : r;
+        }
+    }
+    return nullptr;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
-    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
+    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));

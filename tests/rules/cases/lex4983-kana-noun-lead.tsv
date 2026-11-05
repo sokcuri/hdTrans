@@ -1,0 +1,13 @@
+# 규칙: LEX-4983
+rule	input	expected	kind	layer
+segment:noun-lead	快適なおもてなしや ｻｰﾋﾞｽの向上に取り組んでいます｣	쾌적한 대접이나 서비스 향상에 임하고 있습니다｣	fix	segment
+normalize:teku	ダニエルはフレドリカと待ち合わせをしていた。その通り道で困っていたご令嬢にでくわしたのだ。	다니엘은 프레드리카와 약속을 하고 있었다. 그 가는 길로 곤란해한 영애에게 만났다.	fix	normalize
+segment:noun-lead	「いざって時のために体力は取っておけって」	「여차할 때를 위해 체력은 취해 두라고」	fix	segment
+segment:noun-lead	きつねそば 一丁！	유부소바 일인분!	fix	segment
+segment:noun-lead	ただし下町で色々聞かされていらんことまで詳しくなりました。	다만 서민 동네에서 여러 가지 들어 쓸데없는 것까지 자세해졌습니다.	fix	segment
+segment:noun-lead	「（短距離走のつもりですか！？）」	「(단거리달리기로 한 것입니까!?)」	fix	segment
+segment:noun-lead	―はずだ。おそらく。きっと。その可能性が、なきにしもあらず？的な？	―그럴 것이다. 아마. 분명. 그 가능성이, 전혀 없는 것도 아니다? 적인?	fix	segment
+segment:noun-lead	ふ～ん。そうなんだ。なら、手を出しても構わないわよね	흐응~. 그렇구나. 그렇다면, 손을 대어도 상관없어	keep	segment
+segment:noun-lead	ですけど、そんなのまったく想像できなくて。むしろ嫌で	이지만, 그런 것 전혀 상상할 수 없어서. 오히려 싫어	keep	segment
+segment:noun-lead	トップを取ると、何かいいことがあるんですか？	톱을 차지하면, 뭔가 좋은 일이 있습니까?	keep	segment
+normalize:teku	足払いが飛んでくるとは考えなかったのか？	다리후리기가 날아 온다고는 생각하지 않은 건가?	keep	normalize
