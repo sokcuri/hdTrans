@@ -144,6 +144,10 @@ hdTrans 프로그램은 개인과 회사 모두 무료로 사용할 수 있습�
 
 소스 공개가 어렵거나 다른 조건이 필요한 경우에는 상용 라이선스 등 협의에 따른 조건으로 허락할 수 있습니다. sokcuri@gmail.com 으로 연락해 주세요.
 
+외부 라이브러리의 라이선스는 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)에 있습니다.
+
+Copyright (c) Sokcuri (소쿠릿, https://github.com/sokcuri)
+
 ## hdTrans를 사용한 프로젝트
 
 목록에 추가하고 싶으면 이슈로 알려 주세요.
