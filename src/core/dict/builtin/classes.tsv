@@ -325,6 +325,8 @@
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.container	Ends of the nouns of pockets, bags, boxes and other things one keeps things in (ポケット, 鞄, 袋, 箱, 引き出し): a 出す after one in から takes something out of it, 꺼내다 (ポケットから財布を出した).
 //= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
+//= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
+//= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
@@ -507,6 +509,7 @@
 //= verb.write-say	Starts of verbs of writing, telling and promising that quote a と a few words before them, with no predicate between (弟にすると書状に書き残していた 한다고, 提供するとお話しさせて頂きました 제공한다고; spec GRM-40).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+//= verb.intransitive-godan	The (ら)れ stems of godan verbs of going, staying and living that take no object and have no passive without an agent (戻られます 돌아오십니다, 行かれた 가셨다, 茶室に移られた 옮기셨다): with no subject in the clause, or one called with さん, GRM-3873 reads them as respectful.
 //= verb.object-passive	Ichidan verbs whose られ form with an object を stays the passive, what is done to one (傷をつけられる, ソファを勧められる, 空き缶を投げつけられる, 声を誉められる): GRM-3871 does not read their dictionary passive rows as the potential.
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
@@ -4435,6 +4438,58 @@ noun.bracket-note	号
 noun.bracket-note	副
 noun.bracket-note	特
 noun.bracket-note	独
+noun.attitude-sareru	失望
+noun.attitude-sareru	感動
+noun.attitude-sareru	安心
+noun.attitude-sareru	納得
+noun.attitude-sareru	同情
+noun.attitude-sareru	心配
+noun.attitude-sareru	遠慮
+noun.attitude-sareru	感謝
+noun.attitude-sareru	尊敬
+noun.attitude-sareru	軽蔑
+noun.attitude-sareru	期待
+noun.attitude-sareru	歓迎
+noun.attitude-sareru	応援
+noun.attitude-sareru	信頼
+noun.attitude-sareru	誤解
+noun.attitude-sareru	注目
+noun.attitude-sareru	警戒
+noun.attitude-sareru	挨拶
+noun.attitude-sareru	返事
+noun.attitude-sareru	連絡
+noun.attitude-sareru	相談
+noun.attitude-sareru	電話
+noun.attitude-sareru	協力
+noun.attitude-sareru	質問
+noun.attitude-sareru	依頼
+noun.attitude-sareru	注意
+noun.attitude-sareru	感心
+noun.attitude-sareru	勘違い
+noun.attitude-sareru	落胆
+noun.received-o-act	お願い
+noun.received-o-act	お仕置き
+noun.received-o-act	お返し
+noun.received-o-act	お供え
+noun.received-o-act	お祓い
+noun.received-o-act	お叱り
+noun.received-o-act	お誘い
+noun.received-o-act	お呼び
+noun.received-o-act	お世話
+noun.received-o-act	お預け
+noun.received-o-act	お招き
+noun.received-o-act	お邪魔
+noun.received-o-act	おじゃま
+noun.received-o-act	お見舞い
+noun.received-o-act	ご招待
+noun.received-o-act	ご指名
+noun.received-o-act	ご案内
+noun.received-o-act	ごめんなさい
+noun.received-o-act	ご褒美
+noun.received-o-act	ご指導
+noun.received-o-act	ご迷惑
+noun.received-o-act	お尻ペンペン
+noun.received-o-act	お尻叩き
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同
@@ -7187,6 +7242,29 @@ verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
 verb.receiver-passive	秘
+verb.intransitive-godan	戻られ
+verb.intransitive-godan	帰られ
+verb.intransitive-godan	行かれ
+verb.intransitive-godan	入られ
+verb.intransitive-godan	移られ
+verb.intransitive-godan	残られ
+verb.intransitive-godan	座られ
+verb.intransitive-godan	休まれ
+verb.intransitive-godan	歩かれ
+verb.intransitive-godan	通われ
+verb.intransitive-godan	引っ越され
+verb.intransitive-godan	住まれ
+verb.intransitive-godan	参られ
+verb.intransitive-godan	寄られ
+verb.intransitive-godan	向かわれ
+verb.intransitive-godan	泊まられ
+verb.intransitive-godan	急がれ
+verb.intransitive-godan	働かれ
+verb.intransitive-godan	暮らされ
+verb.intransitive-godan	頑張られ
+verb.intransitive-godan	亡くなられ
+verb.intransitive-godan	引きこもられ
+verb.intransitive-godan	上がられ
 verb.object-passive	つけ
 verb.object-passive	付け
 verb.object-passive	着け
