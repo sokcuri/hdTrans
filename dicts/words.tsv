@@ -28057,7 +28057,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 取落	빠&AA@	M443			GN			LEX-4723: 取落 떨어뜨리다				w:33907
 夏中	여름 내내	N110			GN			LEX-4723: 夏中 여름 내내				w:33908
 掻消	지&AI@	M423			GN			LEX-4723: 掻消 지워 없애다				w:33909
-胸高	가슴 높이	N110			GN			LEX-4723: 胸高 가슴 높이				w:33910
+胸高に	가슴 높이로	E300			GN			LEX-4723: 胸高に 가슴 높이로 (not 胸 高鳴る)				w:33910
 手並	솜씨	N110			GN			LEX-4723: 手並 솜씨				w:33911
 小商人	소상인	N110			GN			LEX-4723: 小商人 소상인				w:33912
 躍如	생생%A1@	G8U0			GN			LEX-4723: 躍如 생생하다				w:33913
