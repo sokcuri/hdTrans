@@ -498,6 +498,7 @@ private:
     bool PredicateStartsAt(size_t start, size_t p) const;
     bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
     bool StemAt(size_t p, size_t n) const;
+    bool GodanRuStemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
     // The length of a final particle at character i (よ, ね, な, わ, ぞ, ぜ, さ) drawn out or not,
@@ -629,6 +630,25 @@ bool SoundText::WordAt(size_t p, size_t n) const {
     return false;
 }
 
+// Whether the n characters at p are the stem of a godan verb in る of the dictionary
+// (パク of パクる, チク of チクる), whose て or past form the っ before て or た makes.
+bool SoundText::GodanRuStemAt(size_t p, size_t n) const {
+    std::u32string hira(rs_.substr(p, n));
+    for (char32_t& c : hira) {
+        if (c >= U'ァ' && c <= U'ヶ') c -= 0x60;
+    }
+    const std::string hiraText = EncodeText(hira);
+    for (const std::string_view key : {Bytes(p, p + n), std::string_view(hiraText)}) {
+        const dict::Candidates rd = snap_.GetWordInfo(key, dict::LookupMode::General, ctx_.lookup);
+        for (const dict::Candidate& c : rd.list) {
+            if (text::RuneCount(c.source) != n || c.codes == nullptr || (c.user != nullptr && c.user->nameLayer)) continue;
+            const std::string_view pc = c.codes->partText;
+            if (pc.size() == 4 && pc[0] == 'M' && pc[1] == '4' && pc[3] == '8') return true;
+        }
+    }
+    return false;
+}
+
 // Whether the n characters at p are in the dictionary only as the stem of a verb or
 // adjective, which its ending goes on from (しつこ of しつこく; not ただ, also an adverb).
 bool SoundText::StemAt(size_t p, size_t n) const {
@@ -695,6 +715,23 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         }
         size_t end = 0;
         bool ok = MatchSound(s, f_, p, end, units);
+        // A sound in ッ before て or た of a godan verb in る that its kana spell is that verb's
+        // form (パクって 훔쳐, チクってやる 고자질해 줄게; not パクッと). A one-kana stem is a cry (あったたた).
+        if (ok && s.key.size() >= 3 && s.key.back() == U'ッ' && end == p + s.key.size() && end < f_.size() &&
+            In(f_[end], U"テタ") && GodanRuStemAt(p, s.key.size() - 1)) {
+            // た is the past; て goes on as the verb's only before an auxiliary or a negative (パクってない,
+            // パクってる, パクってくる, チクってやる), not before する, なる or another verb (パクってした,
+            // ブチってなってた, パクって食いつく), where the sound is said with its て.
+            bool verb = f_[end] == U'タ';
+            if (!verb) {
+                const std::u32string_view next = std::u32string_view(f_).substr(end + 1);
+                for (const std::u32string_view w : {U"ル", U"ナイ", U"ナカ", U"ナク", U"ネ", U"マス", U"クレ", U"クル", U"キタ", U"キテ", U"モラ", U"アゲ", U"イル", U"イタ",
+                                                    U"イテ", U"イマ", U"シマ", U"チャ", U"ヤル", U"ヤッ", U"ヤラ", U"オク", U"オイ", U"ン", U"タ"}) {
+                    verb = verb || next.starts_with(w);
+                }
+            }
+            if (verb) ok = false;
+        }
         if (ok && s.open) {
             end = p + s.key.size();  // not lengthened: ていうかあたし, つーかあの
             units.clear();
