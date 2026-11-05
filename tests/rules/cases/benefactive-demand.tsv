@@ -1,0 +1,22 @@
+# 규칙: GRM-3
+rule	input	expected	kind	layer
+cx:benefactive-demand:10	てめらには 喉を賭けてもらう	라고 등에는 목을 걸어 주어야겠다	fix	rewrites
+cx:benefactive-demand:10	そろそろ 借りを返してもらう	슬슬 빚을 갚아 주어야겠다	fix	rewrites
+cx:benefactive-demand:10	諸君には気の毒だが人質になってもらう	제군에게는 안되지만 인질이 되어 주어야겠다	fix	rewrites
+cx:benefactive-demand:10	一つ 貴様には この研究所のラボメンになって貰う	하나 네놈에게는 이 연구소의 라보멘이 되어 주어야겠다	fix	rewrites
+cx:benefactive-demand:20	たとえ 嫌だと言っても やってもらうわ	비록 싫다고 말해도 해 주어야겠어	fix	rewrites
+cx:benefactive-demand:20	本当に責任は取ってもらうぞ	정말 책임을 져 주어야겠어	fix	rewrites
+cx:benefactive-demand:20	こないだの言葉 取り消してもらうぜ｡	지난번의 말 취소해 주어야겠어.	fix	rewrites
+cx:benefactive-demand:20	この男は返して貰うぞ。	이 남자는 돌려주어야겠어.	fix	rewrites
+cx:benefactive-demand:40	なんの話か知りませんが そこを どいてもらいます！	무슨 이야기인가 모릅니다만 거기를 비켜 주어야겠습니다!	fix	rewrites
+cx:benefactive-demand:40	１人 １文字ずつ 書いてもらいます｡	1명 1문자씩 써 주어야겠습니다.	fix	rewrites
+cx:benefactive-demand:40	クラス全体の連帯責任として みんなで罰を受けてもらいます	반 전체의 연대책임으로서 모두 벌을 받아 주어야겠습니다	fix	rewrites
+cx:benefactive-demand:50	あなたの背後にいる 人間の名を吐いてもらいますよ。	당신의 뒤에 있는 인간의 이름을 토해 주어야겠어요.	fix	rewrites
+cx:benefactive-demand:50	わしは不愉快だ この話は なかったことにしてもらいますよ	나는 불쾌하다 이 이야기는 없었던 것으로 해 주어야겠어요	fix	rewrites
+cx:benefactive-demand:10	ぽんぽんと頭を撫で、機嫌を直してもらう。	통통 머리를 쓰다듬어, 기분을 풀어 준다.	keep	rewrites
+cx:benefactive-demand:10	先輩に宿題を手伝ってもらう	선배에게 숙제를 도움을 받는다	keep	rewrites
+cx:benefactive-demand:10	だれに読んでもらう。	누가 읽어 주나.	keep	rewrites
+cx:benefactive-demand:20	ﾊﾟｰｯて覚えてもらおうよ｡	화악 기억해 달라고 하자.	keep	rewrites
+cx:benefactive-demand:10	手伝ってもらう？	도움을 받아?	keep	rewrites
+cx:benefactive-demand:40	やらせてもらいます	하겠습니다	keep	rewrites
+cx:benefactive-demand:50	じゃあ その話 聞かせてもらいますよ	그럼 그 이야기 들어요	keep	rewrites
