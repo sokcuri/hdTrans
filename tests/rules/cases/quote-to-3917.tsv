@@ -1,0 +1,49 @@
+# 규칙: GRM-3917
+rule	input	expected	kind	layer
+cx:quote-to-1:20	外交問題としてそれは困ると姉が言っても聞かなかった。	has:곤란하다고 언니가 말해도	fix	rewrites
+cx:quote-to-1:25	普段から自分は頭の回転が速いと自負している男が、話を進める。	has:빠르다고 자부하고	fix	rewrites
+cx:quote-to-1:20	歴代でも特に強い聖女の力を持つと判明し、婚約が決まったのだ。	has:가진다고 판명되어	fix	rewrites
+cx:quote-to-1:20	白い花が開くと本で読みました	has:벌어진다고 책에서 읽었습니다	fix	rewrites
+cx:quote-to-1:25	仕事中で申し訳ないと詫びながら呼び出した父は驚いていた。	has:미안하다고 사과하면서	fix	rewrites
+cx:quote-to-1:20	最近は本ばかり読んでいると姉から聞いているぞ。	has:읽고 있다고 언니에게서 듣고	fix	rewrites
+cx:quote-to-1:20	もっとも適性があるとお見受け致しました	has:있다고 보았습니다	fix	rewrites
+cx:quote-to-1:20	王家の人間が公衆の面前で穢れていると罵ったのだ。	has:더럽혀지고 있다고 매도했다	fix	rewrites
+cx:quote-to-1:20	私好みの素晴らしい方がいると教えていただいたのです	has:있다고 가르쳐 주셨습니다	fix	rewrites
+cx:quote-to-1:20	みいちゃんに惚れていると噂される男が、数人いる。	has:반해 있다고 소문이	fix	rewrites
+cx:quote-to-1:20	全てが 凶じゃないと教えた	has:아니라고 가르쳤다	fix	rewrites
+cx:quote-to-1:20	今後の動きについて話し合う必要があると殿下が申しております。	has:필요가 있다고	fix	rewrites
+cx:quote-to-1:35	お礼が言いたいと、彼は言っていた。	has:말하고 싶다고, 그는	fix	rewrites
+cx:quote-to-1:10	「私との逢瀬は重要ではないと？」	has:중요하지 않다고?	fix	rewrites
+cx:quote-to-1:15	友達すら信用できないと？	has:신용할 수 없다고?	fix	rewrites
+cx:quote-to-1:10	単に家来にすぎないと？	has:지나지 않는다고?	fix	rewrites
+cx:quote-to-1:40	描いてると心が落ち着くの	has:그리고 있으면 마음이	fix	rewrites
+cx:quote-to-1:40	うまくいってるといいですね	has:잘되고 있으면 좋네요	fix	rewrites
+cx:quote-to-1:40	そんな風に時間をつぶしてると睡魔が襲ってくる。	has:때우고 있으면 수마가	fix	rewrites
+cx:quote-to-1:40	「おっと……突っ立ってると危ないですよ」	has:서 있으면 위험해요	fix	rewrites
+cx:quote-to-1:40	ずっと待ってると言った	has:기다리고 있다고 했다	keep	rewrites
+cx:quote-to-1:40	嫌ってるとは思わない	has:싫어하고 있다고는	keep	rewrites
+cx:quote-to-1:40	落ち込んでるという意味	has:낙담해 있다고	keep	rewrites
+cx:quote-to-1:40	浮気してるとか	has:바람피고 있다든가	keep	rewrites
+cx:quote-to-1:25	履歴書というものは住所が無いと書けない、と聞いたことがある。	has:주소가 없으면 쓸 수 없다	keep	rewrites
+cx:quote-to-1:20	人は寝ないと記憶が定着しないから	has:자지 않으면 기억이	keep	rewrites
+cx:quote-to-1:20	ほら、この数式、整理するとさっき教えた公式が使えるだろ？	has:정리하면	keep	rewrites
+cx:quote-to-1:20	親父は、新しい絵のアイデアが行き詰まるといつもこんな感じなのだ。	has:막히면 언제나	keep	rewrites
+cx:quote-to-1:20	夜になると時々思うんです	has:밤이 되면	keep	rewrites
+cx:quote-to-1:20	でも、地質年代を調べてみるとどーもそうは思えないんだよなぁ。	has:조사해 보면	keep	rewrites
+cx:quote-to-1:20	ふふ…大切な人ができてからじゃないとダメって言われてたの	has:아니면 안된다고	keep	rewrites
+cx:quote-to-1:20	とはいえ、これを指摘するとストーカー扱いされても文句は言えない。	has:지적하면	keep	rewrites
+cx:quote-to-1:20	「突然予定が変更されるかもしれないから、いくつかプランを立てておくと安心だと思う」	has:세워 두면 안심이라고	keep	rewrites
+cx:quote-to-1:20	あんたを行かせないと 息子を傷つけると言った	has:가게 하지 않으면 아들을	keep	rewrites
+cx:quote-to-1:20	メモには一見すると何も書かれていないが	has:언뜻 보면	keep	rewrites
+cx:quote-to-1:10	はあ… と言いますと？	has:라고 하면?	keep	rewrites
+cx:quote-to-1:10	姉さんのように、強く強くならないと！	has:강해지지 않으면!	keep	rewrites
+cx:quote-to-1:10	こんな真似でもしないと?	has:하지 않으면?	keep	rewrites
+cx:quote-to-1:20	家に帰ると、母が言った。	has:돌아가자, 어머니가 말했다	keep	rewrites
+cx:quote-to-1:20	本を読むと眠くなる	has:읽으면 졸려진다	keep	rewrites
+cx:quote-to-1:15	見てないと？	has:보지 않으면?	keep	rewrites
+cx:quote-to-1:30	あいつのことを考えなければならないと、彼は言った	has:생각해야 한다고, 그는 말했다	fix	rewrites
+cx:quote-to-1:30	そうしたことを私に伝えた意図を考えなければならないと、こちらは頭に刻んだ。	lacks:생각해야 한다고	keep	rewrites
+cx:quote-to-1:35	眠たいと、集中できない	has:졸리면, 집중할 수 없다	keep	rewrites
+cx:quote-to-1:45	ずっと座ってると腰が痛くなる	has:앉아 있으면 허리가	fix	rewrites
+cx:quote-to-1:45	座ってると言った	has:앉아 있다고 했다	keep	rewrites
+cx:quote-to-1:20	部屋に入ると決め台詞を言った。	lacks:들어간다고	keep	rewrites
