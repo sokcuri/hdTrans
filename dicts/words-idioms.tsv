@@ -788,7 +788,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 恐れ多くも	황송하옵게도	A9D0			GN				llm			i:783
 畏れ多くも	황송하옵게도	A9D0			GN				llm			i:784
 乙に澄ま	새침을 &LG@	M423			GN				llm			i:785
-音を出	&LC@	M423		Pn	GN							i:786
+音を出	소리를 &A6@	M423		Pn	GN							i:786
 表で遊	밖에서 &K3@	M426			GN				llm			i:787
 趣のある	운치 있는	A9D0			GN				llm			i:788
 親に叛	부모를 거역&AV@	M421			GN				llm			i:789
@@ -5405,7 +5405,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 旧情を温め	옛정을 되살&AA@	M427		Pn	GN				llm			i:5397
 公知の事実	공지의 사실	N110			GN				llm			i:5398
 ヘブル人への手紙	히브리서	N110			GN				llm			i:5399
-言葉を切	말을 &EG@	M428		Pn	GN							i:5400
+言葉を切	말을 &Hk@	M428		Pn	GN							i:5400
 抜くべからざる	뿌리 깊은	E0H0			GN				llm			i:5401
 月日が経	세월이 &EA@	M424			GN				llm			i:5402
 月日がた	세월이 &EA@	M424			GN				llm			i:5403

@@ -27,7 +27,7 @@ cx:lc2b-toiuyori:30	口で言うより口で伝えた方が早い。	!rule:cx:lc
 cx:lc2b-toiuyori:30	剣よりも強い短銃って一体何？	!rule:cx:lc2b-toiuyori:30	keep	rewrites
 cx:lc2b-toiuyori:30	さっきよりも強い声。	!rule:cx:lc2b-toiuyori:30	keep	rewrites
 cx:lc2b-toiuyori:30	「――今の俺は、それよりも強い」	!rule:cx:lc2b-toiuyori:30	keep	rewrites
-cx:lc2b-toiuyori:40	途中で言葉を切った、というより切れたのは、周の顔を見てからだ。	has:잘랐다기보다	fix	rewrites
+cx:lc2b-toiuyori:40	途中で言葉を切った、というより切れたのは、周の顔を見てからだ。	has:끊었다기보다	fix	rewrites
 cx:lc2b-toiuyori:41	最後の最後に裏切られた、というよりも俺が油断していただけだったんだろうな。	has:배신당했다기보다도	fix	rewrites
 cx:lc2b-toiuyori:10	口で言うより見た方が早い。	!rule:cx:lc2b-toiuyori:10	keep	rewrites
 cx:lc2b-toiuyori:10	さっきよりも強い声。	!rule:cx:lc2b-toiuyori:10	keep	rewrites
