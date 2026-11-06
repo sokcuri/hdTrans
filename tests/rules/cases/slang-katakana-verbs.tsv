@@ -77,7 +77,7 @@ normalize:kata-hore	ガチでホレてる！	진짜로 반해 있어!	fix	normal
 normalize:kata-hore	お前のホレた男は	네가 반한 남자는	fix	normalize
 normalize:kata-hore	俺はホレたけどな	나는 반했지만	fix	normalize
 normalize:kata-hore	お前だからホレた	너니까 반했다	fix	normalize
-dict:w:34168	どや、どーなんやー、ほれほれ	나, 어때야~, 자 자	fix	lookup
+dict:w:34168	どや、どーなんやー、ほれほれ	어때, 어때야~, 자 자	fix	lookup
 dict:w:34168	提督！ 謹賀新年だよ！ 今年も江風さんと姉貴たちをよろしくな！ …さぁ、お年玉ちょーだい♪ ほれほれぇ♪	제독! 근하신년이야! 올해도 카제 씨와 누님들을 잘 부탁해! …자, 세뱃돈 줘♪ 자 자♪	fix	lookup
 dict:w:34168	誰のか わからんけど これでええわ。 ほれ！	누구의 건지 모르지만 이거면 돼. 자!	keep	lookup
 dict:w:34162	子牛のヒレ肉は…	송아지의 안심은…	fix	lookup

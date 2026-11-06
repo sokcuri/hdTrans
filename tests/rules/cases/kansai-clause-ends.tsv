@@ -14,7 +14,7 @@ normalize:kansai-tochau	関係ないんとちゃうか？	관계없지 않을까
 normalize:kansai-tochau	ホンマに死ぬんとちゃうか？	진짜로 죽지 않은가?	fix	normalize
 normalize:kansai-tochau	これは 殴られて出たんとちゃう	이것은 맞아 나온 거 아니야	fix	normalize
 normalize:kansai-tochau	聞かんほうがええんとちゃう？	묻지 않는 편이 좋지 않아?	fix	normalize
-normalize:kansai-ntotte	怒らんとってくれ！	화내지 말아줘!	fix	normalize
+normalize:kansai-ntotte	怒らんとってくれ！	화내지 말아 줘!	fix	normalize
 normalize:kansai-ntotte	行かんとってください！	가지 마세요!	fix	normalize
 normalize:kansai-ntotte	お母さん 泣かんとって	엄마 울지 마	fix	normalize
 normalize:kansai-ntotte	そんなん言わんとってよ	그런 말하지 마	fix	normalize
@@ -52,7 +52,7 @@ normalize:kansai-yanen	いや ピンってなんやねん	아니 핀이라니 �
 normalize:kansai-yanen	（田村）なんやねん その動き？	(타무라) 뭐야 그 움직임?	fix	normalize
 normalize:kansai-yanen	（武智）なんやねん こいつ	(타케치) 뭐야 이 녀석	fix	normalize
 normalize:kansai-yanen	なんでやねん アホちゃうか	왜 그래 바보아니야	keep	normalize
-normalize:kansai-yanen	何やねん？あんさんいや 脅かしてすんまへん	뭐야? 아씨 아니 위협해서 미안합니다	keep	normalize
+normalize:kansai-yanen	何やねん？あんさんいや 脅かしてすんまへん	뭐야? 당신 아니 위협해서 미안합니다	keep	normalize
 normalize:old-copula-jato	影分身じゃと？	그림자 분신이라고?	fix	normalize
 normalize:old-copula-jato	新選組じゃと？	신센구미라고?	fix	normalize
 normalize:old-copula-jato	な… 何じゃと！	… 뭐라고!	fix	normalize

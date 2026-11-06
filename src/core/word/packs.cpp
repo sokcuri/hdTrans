@@ -610,13 +610,123 @@ bool SlotSuffix(const Item* x) {
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
 }
 
+// Whether x ends an utterance on its side: no word (the start or end of the text), a mark, or a word
+// of another token (a space between).
+bool UtteranceEdge(const Item* x, const Item* inside) {
+    if (x == nullptr || x->group == nullptr) return true;
+    if (x->tokenIndex != inside->tokenIndex) return true;
+    const std::string_view s = x->group->surface;
+    if (TrimSpace(s).empty()) return true;
+    for (const std::string_view mark : {"。", "、", "！", "？", "!", "?", "…", "‥", "「", "」", "『", "』", "（", "）", "～", "ー", "，", ","}) {
+        if (s == mark) return true;
+    }
+    return false;
+}
+
+// The last rune of t that is no space, or 0.
+char32_t LastVisibleRune(std::string_view t) {
+    char32_t found = 0;
+    for (std::size_t q = 0; q < t.size();) {
+        const text::Rune r = text::DecodeRune(t.substr(q));
+        q += std::max<std::size_t>(r.size, 1);
+        if (r.cp != U' ' && r.cp != U'\t' && r.cp != U'\u3000') found = r.cp;
+    }
+    return found;
+}
+
+// Whether the words from items[i] write text exactly and make the whole utterance (^text$): [i, end).
+bool Utterance(const Worker& w, const std::vector<Item*>& items, std::size_t i, std::string_view text, std::size_t& end) {
+    std::size_t k = i;
+    std::string_view rest = text;
+    while (!rest.empty()) {
+        if (k >= items.size() || items[k]->group == nullptr || items[k]->selected < 0) return false;
+        if (k > i && items[k]->tokenIndex != items[i]->tokenIndex) return false;
+        const std::string_view seg = Segment(items[k]);
+        if (seg.empty() || !rest.starts_with(seg)) return false;
+        rest.remove_prefix(seg.size());
+        k++;
+    }
+    if (k == i) return false;
+    if (!UtteranceEdge(i > 0 ? items[i - 1] : nullptr, items[i])) return false;
+    // a closing bracket before is the end of a quote the utterance goes on from (『物』なんだって, 」だからね)
+    if (i > 0 && items[i - 1]->group != nullptr) {
+        const std::string_view ps = items[i - 1]->group->surface;
+        if (ps == "」" || ps == "』" || ps == "）" || ps == ")") return false;
+        // an ellipsis after a word of the sentence is a pause inside it (それだけ…だからね)
+        if ((ps == "…" || ps == "‥") && i > 1 && items[i - 2]->group != nullptr && items[i - 2]->tokenIndex == items[i - 1]->tokenIndex &&
+            !UtteranceEdge(items[i - 2], items[i - 2])) {
+            return false;
+        }
+    }
+    // nor right after a number or a symbol (100%だからね)
+    if (i > 0 && items[i - 1]->group != nullptr && !TrimSpace(items[i - 1]->group->surface).empty() &&
+        !UtteranceEdge(items[i - 1], items[i - 1])) {
+        const char32_t last = DecodeLastRune(items[i - 1]->group->surface).cp;
+        const bool symbol = ClassOf(items[i - 1]) == '6' || (last >= U'0' && last <= U'9') || (last >= U'０' && last <= U'９') ||
+                            last == U'％' || last == U'%' || (last >= U'A' && last <= U'z') || (last >= U'Ａ' && last <= U'ｚ');
+        if (symbol) return false;
+    }
+    if (!UtteranceEdge(k < items.size() ? items[k] : nullptr, items[k - 1])) return false;
+    // After it the text ends or a mark follows; a space may only begin the next clause of a sentence
+    // (こっちだって もう１人), so the utterance must close there.
+    if (k < items.size() && items[k]->group != nullptr && items[k]->tokenIndex != items[k - 1]->tokenIndex &&
+        !UtteranceEdge(items[k], items[k])) {
+        return false;
+    }
+    // nothing else of the token before or after the span: a word the chain does not hold (an unknown run)
+    // would stand beside it
+    const Item* first = items[i];
+    const Item* last = items[k - 1];
+    const std::string_view before = std::string_view(first->text).substr(0, static_cast<std::size_t>(std::max(first->start, 0)));
+    const std::size_t stop = static_cast<std::size_t>(std::max(last->start, 0) + std::max(last->length, 0));
+    const std::string_view after = stop < last->text.size() ? std::string_view(last->text).substr(stop) : std::string_view();
+    auto marks = [](std::string_view t) {
+        static constexpr std::u32string_view kMarks = U"。、！？!?…‥「」『』（）()～ー　 ,.・，";
+        for (std::size_t q = 0; q < t.size();) {
+            const text::Rune r = text::DecodeRune(t.substr(q));
+            if (kMarks.find(r.cp) == std::u32string_view::npos) return false;
+            q += std::max<std::size_t>(r.size, 1);
+        }
+        return true;
+    };
+    const std::size_t from = static_cast<std::size_t>(std::max(first->start, 0));
+    if (i > 0 && items[i - 1]->tokenIndex == first->tokenIndex) {
+        const Item* p = items[i - 1];
+        if (static_cast<std::size_t>(std::max(p->start, 0) + std::max(p->length, 0)) != from) return false;
+    } else if (!marks(before)) {
+        return false;
+    }
+    if (k < items.size() && items[k]->tokenIndex == last->tokenIndex && !TrimSpace(items[k]->group->surface).empty()) {
+        if (static_cast<std::size_t>(std::max(items[k]->start, 0)) != stop) return false;
+    } else if (!marks(after)) {
+        return false;
+    }
+    // an ellipsis token after a word of the sentence is a pause inside it (それだけ…だからね)
+    if (const int t = first->tokenIndex - 1; t >= 1 && t < w.TokenCount() && (w.Tok(t).text.starts_with("…") || w.Tok(t).text.starts_with("‥"))) {
+        const tokenizer::TokenView prev = w.Tok(t - 1);
+        if (prev.type == tokenizer::kTypeJapanese && !prev.text.ends_with("、") && !prev.text.ends_with("。")) return false;
+    }
+    // a row that may go on from the word before it (the copula of だからね, the じゃん of ジャン, the って of
+    // てことで, なんだって) does not start after a word, with or without a space (卒業 だからね, 卒業だからね)
+    bool attaches = false;
+    for (const std::string_view a : {"だ", "で", "じゃ", "ジャ", "て", "な"}) attaches = attaches || text.starts_with(a);
+    if (attaches) {
+        char32_t open = LastVisibleRune(before);
+        for (int t = first->tokenIndex - 1; open == 0 && t >= 0; t--) open = LastVisibleRune(w.Tok(t).text);
+        if (open != 0 && std::u32string_view(U"。．.！？!?…‥「『（(“《≪【［[、，,").find(open) == std::u32string_view::npos) return false;
+    }
+    end = k;
+    return true;
+}
+
 // The span of colloc c that starts at items[i]: [i, end), the slot's words [slot, slotEnd) (none
 // without a slot); absorbed: the slot's last word holds the start of the text after the slot.
-bool MatchColloc(const dict::PackTable& t, const dict::Colloc& c, std::string_view before,
+bool MatchColloc(const Worker& w, const dict::PackTable& t, const dict::Colloc& c, std::string_view before,
                  const std::vector<Item*>& items, std::size_t i, std::size_t& end, std::size_t& slot,
                  std::size_t& slotEnd, bool& absorbed) {
     slot = slotEnd = static_cast<std::size_t>(-1);
     absorbed = false;
+    if (!c.slot && c.anchored) return Utterance(w, items, i, before, end);
     if (!c.slot) return ReadsText(items, i, before, end) && end > i;
     std::size_t at = i;
     if (!before.empty() && !ReadsText(items, i, before, at)) return false;
@@ -688,6 +798,32 @@ std::string ResolvedParticle(std::string_view text, std::string_view notation) {
     return std::string(withFinal);
 }
 
+// The Korean of an idiom with the particle of its first word said as the topic or the focus: 은/는
+// for は, 도 for も, after the syllable before it (꽃이 피다 꽃은 피다, 신경을 쓰다 신경도 쓰다).
+std::string IdiomTopic(std::string_view text, std::string_view seen, std::string_view own) {
+    std::size_t lead = 0;
+    while (lead < text.size() && text[lead] == ' ') lead++;
+    if (lead > 0) return std::string(text.substr(0, lead)) + IdiomTopic(text.substr(lead), seen, own);
+    const std::size_t space = text.find(' ');
+    if (space == std::string_view::npos) return std::string(text);
+    const std::string_view word = text.substr(0, space);
+    if (own == "に") {
+        if (!word.ends_with("에") || word.size() == std::string_view("에").size()) return std::string(text);
+        return std::string(word) + (seen == "も" ? "도" : "는") + std::string(text.substr(space));
+    }
+    if (own != "を" && own != "が") return std::string(text);
+    for (const std::string_view p : {"을", "를", "이", "가"}) {
+        if (!word.ends_with(p) || word.size() == p.size()) continue;
+        const std::string_view stem = word.substr(0, word.size() - p.size());
+        std::string out(stem);
+        if (seen == "も") out += "도";
+        else out += ResolvedParticle(stem, "(은)는");
+        out += text.substr(space);
+        return out;
+    }
+    return std::string(text);
+}
+
 // One match of a colloc row: its span [begin, end), the slot's words [slot, slotEnd), and the
 // Korean its head takes.
 struct CollocMatch {
@@ -696,7 +832,125 @@ struct CollocMatch {
     bool absorbed = false;
     std::string_view head;  // compiled for the head's class, or raw
     bool conjugates = false;
+    std::vector<std::size_t> kept;  // words inside the span that keep their own Korean (an idiom's adverbs)
+    std::string_view seen;          // the particle an idiom's noun took in the text, when not its own
 };
+
+// Whether the particle seen after an idiom's noun is the idiom's own.
+bool IdiomParticle(std::string_view written, std::string_view seen) {
+    // は and も said in place of the particle often make another phrase or another idiom (虫も殺さない,
+    // 足はついてる, 人は選ばない): only the particle itself counts.
+    return seen == written;
+}
+
+// Whether x writes nothing of its own in the source: a space.
+bool BlankItem(const Item* x) {
+    const std::string_view s = TrimSpace(x->group->surface);
+    return s.empty() || s == "　";
+}
+
+// The span of idiom c from items[i]: its noun, then its particle, one that stands for it or none (を,
+// が, は only), then up to two spaces or adverbs, which keep their Korean, then its verb in any form
+// (気は遣ってくれる, 気 使わなくていい, 手挙げて, 鼻を 明かして).
+bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>& items, std::size_t i, CollocMatch& m) {
+    const Item* noun = items[i];
+    if (noun->group == nullptr || noun->selected < 0 || ClassOf(noun) != '1' || Segment(noun) != c.noun) return false;
+    std::size_t j = i + 1;
+    if (j >= items.size()) return false;
+    bool omitted = false;
+    m.seen = {};
+    if (ClassOf(items[j]) == '2' && IdiomParticle(c.idiomParticle, items[j]->group->surface)) {
+        if (items[j]->group->surface != c.idiomParticle) {
+            m.seen = items[j]->group->surface;
+            // the Korean must say the topic or the focus on its own noun (기분은, 비도); else the idiom
+            // reads past what the particle adds (気にもなる, 話はなんとなくわかった)
+            if (IdiomTopic(c.headRaw, m.seen.substr(m.seen.size() - std::string_view("は").size()), c.idiomParticle) == c.headRaw) return false;
+        }
+        j++;
+    } else if (c.idiomParticle == "を" || c.idiomParticle == "が") {
+        omitted = true;
+    } else {
+        return false;
+    }
+    m.kept.clear();
+    bool spaced = false;
+    for (int skipped = 0; j < items.size() && skipped < 2; skipped++) {
+        const Item* x = items[j];
+        if (x->group == nullptr || x->selected < 0) return false;
+        if (BlankItem(x)) {
+            spaced = true;
+            j++;
+            continue;
+        }
+        // an adverb in letters (すごく, とても); not a mark (…) or a word of another class
+        const char32_t first = text::DecodeRune(x->group->surface).cp;
+        const bool letters = (first >= 0x3041 && first <= 0x30FF) || (first >= 0x4E00 && first <= 0x9FFF);
+        if (omitted || ClassOf(x) != '3' || !letters || c.idiomParticle == "に" || (c.idiomParticle == "を" && !m.seen.empty())) break;
+        m.kept.push_back(j);
+        j++;
+    }
+    if (j >= items.size()) return false;
+    const Item* verb = items[j];
+    if (verb->group == nullptr || verb->selected < 0 || ClassOf(verb) != '4' || !IsWord(verb, c.verb)) return false;
+    // The verb itself, not another of its stem (元気を出す, not 出る) nor its passive or causative (先越され).
+    {
+        const char kind = At(verb->Code(verb->selected), 2);
+        const std::string_view verbText = c.verb;
+        const std::string_view end = verbText.substr(verbText.size() - DecodeLastRune(verbText).size);
+        static constexpr std::pair<std::string_view, std::string_view> kKinds[] = {
+            {"う", "0"}, {"く", "1"}, {"ぐ", "2"}, {"す", "3"}, {"つ", "4"}, {"む", "5"}, {"ぶ", "6"}, {"る", "78"}, {"ぬ", "<"}};
+        for (const auto& [e, k] : kKinds) {
+            if (end == e && k.find(kind) == std::string_view::npos && !c.verb.ends_with("する")) return false;
+        }
+        if (verb->detail != nullptr && (verb->detail->record != 0 || verb->detail->voice != Voice::None)) return false;
+    }
+    // Between the words only spaces: a mark (…, 、) or other text in a token of its own breaks the idiom.
+    for (int t = noun->tokenIndex + 1; t < verb->tokenIndex; t++) {
+        if (t < 0 || t >= w.TokenCount()) return false;
+        const int type = w.Tok(t).type;
+        if (type != tokenizer::kTypeAsciiSpace && type != tokenizer::kTypeWideSpace && type != tokenizer::kTypeJapanese) return false;
+        if (type == tokenizer::kTypeAsciiSpace || type == tokenizer::kTypeWideSpace) spaced = true;
+        if (type == tokenizer::kTypeJapanese) {
+            bool has = false;
+            for (std::size_t k = i; k <= j; k++) has = has || items[k]->tokenIndex == t;
+            if (!has) return false;
+        }
+    }
+    // Words in tokens of their own stand apart by a space the tokenizer drops (目に 遭わない).
+    if (verb->tokenIndex != items[j - 1]->tokenIndex) spaced = true;
+    // A particle left out only before a verb in kanji, right after the noun or after a space (手挙げて, 気 使わ;
+    // not the compound 手こぎ).
+    if (omitted) {
+        const char32_t v = text::DecodeRune(verb->group->surface).cp;
+        if (!(v >= 0x4E00 && v <= 0x9FFF)) return false;
+        if (!spaced && verb->tokenIndex == noun->tokenIndex && j != i + 1) return false;
+    }
+    // The words as the dictionary writes them, side by side, are the word stage's to read (蓋を開ける
+    // 뚜껑을 열다 where it chose so); the idiom row reads only what that stage could not see as one.
+    if (m.seen.empty() && !omitted && !spaced && m.kept.empty()) return false;
+    // A noun pointed at or owned (そんな手に, 女房の鼻を) belongs to the phrase before it, not to the idiom.
+    if (i > 0) {
+        const std::string_view prev = items[i - 1]->group->surface;
+        const bool together = items[i - 1]->tokenIndex == noun->tokenIndex;
+        for (const std::string_view mod : {"の", "そんな", "こんな", "あんな", "その", "この", "あの", "どんな"}) {
+            if (prev == mod && together) return false;
+        }
+        // Nor a noun with a word that describes it or a noun it ends (大いなる力を 借りる, 欲しい物 言う,
+        // 伯爵家継ぐ): the idiom's noun stands bare.
+        const char pc = ClassOf(items[i - 1]);
+        const Entry* pe = items[i - 1]->group->At(items[i - 1]->selected);
+        // An idiom whose noun takes a describing word takes an adjective, a verb or an adnominal before it
+        // (悲しい目に 遭う, 重い腰を 上げる); a noun before it still makes a compound.
+        const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
+        if (together && ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) return false;
+    }
+    // A noun said again right after the verb restates it with its particle (足 出せ 足を): the words are
+    // taken literally.
+    // An order with the particle left out is said of the thing itself (足 出せ, 手 挙げろ), not the idiom.
+    if (omitted && verb->detail != nullptr && (verb->detail->kind == 11 || verb->detail->kind == 12)) return false;
+    m.end = j + 1;
+    return true;
+}
 
 // Whether the match can be written: no user word in it but in the slot, no word another span took,
 // a head outside the slot, and a predicate head only with a phrase of its class.
@@ -710,11 +964,18 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     }
     for (std::size_t k = i; k < m.end; k++) {
         const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
-        if (!inSlot && (items[k]->Fixed() || taken.contains(items[k]))) return false;
+        // an utterance row reads a fixed word too (何で of 何でだよ): the whole utterance is its reading
+        if (!inSlot && ((items[k]->Fixed() && !c.anchored) || taken.contains(items[k]))) return false;
     }
     if (c.slot && m.end == m.slotEnd) return false;
     const char cls = ClassOf(items[m.end - 1]);
     const std::string& compiled = cls == '4' ? c.headVerb : cls == '7' ? c.headAdjective : cls == '8' ? c.headNa : c.headRaw;
+    // an utterance is written as it is, its last word's ending dropped
+    if (c.anchored) {
+        m.conjugates = false;
+        m.head = c.headRaw;
+        return true;
+    }
     m.conjugates = !compiled.empty() && Predicate(cls);
     m.head = compiled.empty() ? std::string_view(c.headRaw) : std::string_view(compiled);
     return m.conjugates || !Predicate(cls);
@@ -753,7 +1014,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
             const std::string& before = c.befores[static_cast<std::size_t>(b)];
             CollocMatch m;
             m.c = &c;
-            if (!MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
+            if (c.loose ? !MatchIdiom(f.w, c, items, i, m) : !MatchColloc(f.w, t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
             if (!Applicable(f, t, items, i, taken, m)) continue;
             m.length = before.size() + c.after.size();
             const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
@@ -769,9 +1030,33 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
         // the particle after the slot is left out when the slot's word already reads it (俺の 내)
         const bool particleLeft = c.slot && !c.particle.empty() && !best.absorbed && best.slotEnd < best.end &&
                                   items[best.slotEnd]->EntryText(items[best.slotEnd]->selected).empty();
+        if (c.anchored) {
+            // an utterance: its first word that conjugates nothing takes the target and the others write
+            // nothing; with none, the target follows the last word
+            std::size_t carrier = best.end;
+            for (std::size_t k = i; k < best.end && carrier == best.end; k++)
+                if (!Predicate(ClassOf(items[k]))) carrier = k;
+            const bool spaced = i > 0 && items[i - 1]->tokenIndex != items[i]->tokenIndex &&
+                                !UtteranceEdge(items[i - 1], items[i - 1]);
+            const std::string carried = spaced ? " " + c.headRaw : c.headRaw;
+            for (std::size_t k = i; k < best.end; k++) {
+                Write(items[k], k == carrier ? std::string_view(carried) : std::string_view(), source);
+                if (items[k]->DirectIndex() >= 0) items[k]->AssignDirectSlot(items[k]->DirectIndex(), "", source);
+                taken.insert(items[k]);
+            }
+            if (carrier == best.end) {
+                // written after its emptied words, the target takes the space a comma before it leaves
+                const bool comma = i > 0 && (items[i - 1]->group->surface == "、" || items[i - 1]->group->surface == "，");
+                head->appended += comma ? " " + c.headRaw : carried;
+            }
+            head->packRows.push_back(r.global);
+            i = best.end - 1;
+            continue;
+        }
         for (std::size_t k = i; k < best.end; k++) {
             Item* x = items[k];
             if (c.slot && k >= best.slot && k < best.slotEnd) continue;
+            if (std::find(best.kept.begin(), best.kept.end(), k) != best.kept.end()) continue;
             const bool afterSlot = c.slot && k == best.slotEnd && !best.absorbed;
             if (x == head) {
                 std::string text(best.head);
@@ -785,6 +1070,27 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                 }
                 // the space before the span, when its first words are left empty and the head is written joined
                 if (!c.slot && k > i && i > 0 && c.lead.empty() && SpacedAfter(items[i - 1], items[i])) text.insert(0, " ");
+                // an idiom whose noun took は or も in the text keeps it on the Korean noun (花は咲く 꽃은 피다)
+                // an idiom whose noun starts a token of its own keeps the space before it (카케루 힘내)
+                if (c.loose && k > i && i > 0 && items[i - 1]->tokenIndex != items[i]->tokenIndex && !text.starts_with(" ")) text.insert(0, " ");
+                if (c.loose && !best.seen.empty()) text = IdiomTopic(text, best.seen.substr(best.seen.size() - std::string_view("は").size()), c.idiomParticle);
+                // the adverbs inside an idiom go after its first word (写真をいっぱい撮った 사진을 많이 찍었다)
+                if (c.loose && !best.kept.empty()) {
+                    std::string adverbs;
+                    for (const std::size_t a : best.kept) {
+                        const std::string_view ko = TrimSpace(items[a]->EntryText(items[a]->selected));
+                        if (ko.empty() || ko.find('@') != std::string_view::npos) continue;
+                        adverbs += " ";
+                        adverbs += ko;
+                    }
+                    std::size_t at = 0;
+                    while (at < text.size() && text[at] == ' ') at++;
+                    const std::size_t space = text.find(' ', at);
+                    if (!adverbs.empty() && space != std::string::npos) {
+                        text.insert(space, adverbs);
+                        for (const std::size_t a : best.kept) Write(items[a], "", source);
+                    }
+                }
                 Write(x, text, source);
                 // a phrase that does not conjugate keeps none of the word's ending
                 if (!best.conjugates && x->DirectIndex() >= 0) x->AssignDirectSlot(x->DirectIndex(), "", source);

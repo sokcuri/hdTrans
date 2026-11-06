@@ -171,7 +171,23 @@ private:
     // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
     // それから), which is no name however often the document writes it (spec LEX-4828).
     bool WordThenParticle(std::string_view t);
+    // The kana words of the dictionary in line that stand joined by と or や to a run that may be a name
+    // (そらとみゆきは: そら with みゆき, みゆきとそらは), as pairs of the word and that run (spec LEX-4954).
+    // weak: the word or the run ends in の or で, which also end a copula (あやとりなの), so the run must be a
+    // name the document itself shows.
+    struct Coordination {
+        std::string word, name;
+        bool weak = false;
+    };
+    std::vector<Coordination> CoordinatedKana(std::string_view line);
     bool WordAloud(std::string_view base, std::string_view reading);
+    bool AdjectiveKanji(std::string_view k);
+    bool GuessFallback(std::string_view t);
+    bool OldFormWord(std::string_view t);
+    bool CoveredByWords(std::string_view s);
+    bool GarbledByWord(std::string_view s);
+    bool LayerFullName(std::string_view s);
+    bool HiraganaWord(std::string_view s);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
@@ -238,6 +254,13 @@ private:
         std::set<char32_t> particles;
     };
     std::map<std::string, Loose> kanaLoose_;            // LooseKanaUses
+    std::map<std::string, std::map<std::string, bool>> coordinated_;  // CoordinatedKana: word -> run -> only weak
+    std::map<std::string, std::set<std::string>> kanaJoined_;   // kana words accepted as names -> the names joined to them
+    // Whether the kana name t at line[a, b) stands joined to one of its names there (みゆきとそら, そらとみゆき).
+    bool JoinedAt(std::string_view line, std::size_t a, std::size_t b, const std::string& t);
+    // The name layer's spelling of the katakana name t that the Korean of a longer katakana word of the
+    // document starting with t starts with (グリッドマン in グリッドマンユニバース 그리드맨 유니버스), or "".
+    std::string CompoundSpelling(std::string_view t);
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby
     std::map<std::string, std::string> reading_;        // first gloss or ruby reading
     std::map<std::string, int> runs_;                   // kanji runs
@@ -246,6 +269,10 @@ private:
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
     std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
+    std::set<std::string> kataRuns_;                    // the katakana runs of the document (CompoundSpelling)
+    std::map<std::string, int> kataUse_;                // whole katakana runs before a particle (spec LEX-4953)
+    std::map<std::string, int> kataSubject_;            // the uses of those runs before は or が
+    std::map<std::string, int> kataPlace_;              // and before に, へ or から
     std::map<std::string, int> agents_;                 // katakana runs that do a favour (AgentCue)
     std::map<std::string, DictFlags> flags_;
     std::map<std::string, Name> scores_;                // accepted names, valid while scoresValid_

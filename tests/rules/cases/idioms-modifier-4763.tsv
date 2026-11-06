@@ -1,0 +1,20 @@
+# 규칙: LEX-4763
+rule	input	expected	kind	layer
+pack:idiom	ま、街中で、大きな声出してコミまどって言わないで	뭐, 거리에서, 큰 소리를 내 코미 창문이라고 말하지 마	fix	packs
+pack:idiom	わかったから でかい声出すなよ！	알았기 때문 큰 소리를 내지 마!	fix	packs
+pack:idiom	「……変な声出さないでくれ」	「……이상한 소리를 내지 말아 줘」	fix	packs
+pack:idiom	「おわっ！　びっくりした、急に大きな声出すなや……」	「와! 놀란, 갑자기 큰 소리를 낸데나……」	fix	packs
+pack:idiom	大きい声出すの好きじゃないし、分るだろ俺今...	큰 소리를 내는 것 좋아하지 않고, 알겠지 나 지금...	fix	packs
+pack:idiom	やっぱり お産のときって 大きな声 出したらダメなのか？	역시 출산 때는 큰 소리를 내면 안되나?	fix	packs
+pack:idiom	とんだ目に 遭うところでございました》	터무니 없는 변을 당하는 것이 마땅했습니다》	fix	packs
+pack:idiom	あなたの帰りが遅いから 何か大変な目に 遭ってるのかもしれないって 心配してたのかもしれないわね｡	당신의 돌아오는 길이 늦으니까 뭔가 힘든 변을 당하고 있는지도 모른다고 걱정하고 있었을지도 모르네.	fix	packs
+pack:idiom	何だす？ 大きい声出して。	뭐 내? 큰 소리를 내.	fix	packs
+pack:idiom	でっかい声出せば 済むって問題じゃございませんよ！	아주 큰 소리를 내면 끝난다는 문제는 없어요!	fix	packs
+pack:idiom	手を少し貸して	조금 도와줘	fix	packs
+pack:idiom	ちょっと手 貸して	조금 도와줘	fix	packs
+pack:idiom	悲しい目に 遭わないように	슬픈 변을 당하지 않도록	fix	packs
+pack:idiom	重い腰を やっと上げた	무거운 몸을 드디어 일으켰다	fix	packs
+pack:idiom	だから 彼女も 私と同じ目に 遭わされてるんじゃないかって	그러니까 그녀도 나와 같은 눈에 당하게 되고 있는 것이 아니냐고	keep	packs
+pack:idiom	俺は海に宿る大いなる力を 借りることができるのさ	나는 바다에 머무르는 커다란 힘을 빌릴 수가 있는 것	keep	packs
+pack:idiom	お父さんに 本当に欲しい物 言ったら…	아버지에게 정말 갖고 싶은 것 말하면…	keep	packs
+pack:idiom	女房の鼻を 明かしてやりたいんだよ｡	부인의 코를 밝혀 주고 싶어.	keep	packs

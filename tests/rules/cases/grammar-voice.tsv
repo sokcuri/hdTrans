@@ -16,7 +16,7 @@ voice:agent	巨大なトカゲ風の生き物に引かれた馬車	거대한 도
 voice:agent	陸路は敵に破壊され、	육로는 적에게 파괴돼,	keep	voice
 voice:agent	仲間は敵にやられ、	동료는 적에게 당해,	keep	voice
 voice:agent	猫に引っかかれた。	고양이에게 긁어졌다.	fix	voice
-voice:agent	お母さんにこんなのを見られたら……！	엄마에게 이런 걸 보여지면……!	fix	voice
+voice:agent	お母さんにこんなのを見られたら……！	엄마가 이런 걸 보면……!	fix	voice
 voice:agent	国王に問われた少女は臆することなく答えた。	국왕에게 질문받은 소녀는 겁먹는 일 없이 대답했다.	keep	voice
 voice:agent	私に弟を任せられたから、	나에게 남동생을 맡길 수 있었으니까,	keep	voice
 voice:agent	父に車を借りられた。	아버지에게 차를 빌릴 수 있었다.	keep	voice

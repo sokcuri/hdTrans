@@ -1,0 +1,212 @@
+# 규칙: LEX-4766
+rule	input	expected	kind	layer
+cx:promise-kara:10	持っていくから、待ってて。	가져갈 테니까, 기다리고 있어.	fix	rewrites
+cx:promise-kara:10	片付けてから行くから、先にお昼、食べていて」	정리하고 나서 갈 테니까, 먼저 점심, 먹고 있어」	fix	rewrites
+cx:promise-kara:10	「薬探すから、とりあえずソファーにでも座ってて」	「약 찾을 테니까, 우선 소파에라도 앉아 있어」	fix	rewrites
+cx:promise-kara:10	すぐ支度するから、待ってて。	바로 준비할 테니까, 기다리고 있어.	fix	rewrites
+cx:promise-kara:10	教える以上はビシバシ行くから覚悟しておきなさい？	가르치는 이상은 사정없이 갈 테니까 각오해 둬?	fix	rewrites
+cx:promise-kara:10	これ 経理に置いてくるから ちょっと 待ってて！	이것 경리에 두고 올 테니까 잠깐 기다리고 있어!	fix	rewrites
+cx:promise-kara:10	「これからも応援するから、頑張って」	「앞으로도 응원할 테니까, 힘내」	fix	rewrites
+cx:promise-kara:10	田舎ではみんな十五歳とかで結婚してるから、完全に行き遅れの部類なんだよね、私……。	시골에서는 모두 15살등으로 결혼했으니, 완전히 노처녀의 부류야, 나…….	fix	rewrites
+cx:promise-kara:10	すぐ戻るから、ここで待ってて	바로 돌아올 테니까, 여기서 기다리고 있어	fix	rewrites
+cx:promise-kara:10	お金は返すから、少しだけ貸して	돈은 갚을 테니까, 약간 빌려 줘	fix	rewrites
+cx:promise-kara:10	わたしが良い感じの場所を探しますから、玖星さんは機材を手渡して下さい	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	本気で宣戦布告してるんですから、覚悟を決めてください！	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	頼むから歸つてくれ。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「美冬の家が留守だったら、病院にはあたしがひとりで行くから、裕樹はそのまま学校に行きなさい。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「あ、場所は知ってるから、部屋の鍵だけ貸してくれれば」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「彼らのことですから、何か面白いものを見せてくれるのではないでしょうか」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	夕御飯 冷蔵庫の中あるから チンして食べてね。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	綾那ちゃんと歌夜ちゃんに一隊預けるから、以降は遊撃で動いて下さいって！	!rule:cx:promise-kara:10	keep	rewrites
+cx:yo-intent:17	「……そうだな、俺も行く」	「……그래, 나도 갈 거야」	fix	rewrites
+cx:yo-intent:17	「俺も行く」	「나도 갈 거야」	fix	rewrites
+cx:yo-intent:17	「……私も、帰る」	「……나도, 돌아갈 거야」	fix	rewrites
+cx:yo-intent:17	「では、悪いが私は戻る」	「그럼, 미안하지만 나는 돌아올 거야」	fix	rewrites
+cx:yo-intent:17	「疲れたから、今日はもう寝る」	「지쳤으니까, 오늘은 이제 잘 거야」	fix	rewrites
+normalize:kansai-ee	ほんまにええんか？	진짜로 좋은 건가?	fix	normalize
+normalize:kansai-ee	こうしてワイらしかおらん時くらい、堂々とラブラブしてええんやで	이렇게 해 우리밖에 있지 않는 때 정도, 당당히 알콩달콩해도 되는 이야	keep	normalize
+normalize:kansai-ee	真理紗は悪うない 謝らなくてええんや	진리사는 나쁘지 않다 사과하지 않아도 되는 거야	keep	normalize
+normalize:kansai-ee	めっちゃおもろい 仲ええやん	엄청 재미있는 사이 좋잖아	keep	normalize
+normalize:kansai-ee	１つはテツ用にしたらええんや	1개는 테츠용으로 하면 되는 거야	keep	normalize
+normalize:kansai-ee	「お、アラタ、ええやんアンタんとこの新人。	「오, 아라타, 좋아 너의 곳의 신인.	keep	normalize
+normalize:kansai-ee	おねえちゃん その時計 ええやろ？	언니 그 시계 좋지?	keep	normalize
+normalize:kansai-ee	ゆうくんも我慢するより、ずっと気持ちええ方がええやろ？	유 군도 참는 것보다, 훨씬 기분 좋은 것이 좋지?	keep	normalize
+normalize:kansai-ee	その調子で ココーンと 点も 取ってくれて ええんやで。	그 상태로 코콘과 점도 집어 주어도 되는 이야.	keep	normalize
+output:late-casual	「かといって、汐美祭が終わってから選挙の下地を作り初めても間に合わないだろう」	「그렇다고 해서, 시오미제가 끝나고 나서 선거의 기초를 만들어 처음도 늦을 거야」	fix	rewrites
+output:late-casual	「少しでもトラブルがあったら間に合わないですよね？	「조금이라도 트러블이 있으면 늦죠?	fix	rewrites
+output:late-casual	「数が多くて対応が間に合わない。	has:대응이 늦는다.	fix	rewrites
+output:late-casual	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4한으로 늦네」	fix	rewrites
+output:late-casual	「間に合わないか」	「늦는가」	fix	rewrites
+grammar:result-suru-past	失敗してるんだから 学習しなきゃね｡	실패했으니까 학습해야지.	fix	conjugation
+grammar:result-suru-past	私…何度も同じような失敗してるのに	나…몇 번이나 같은 실패했는데	fix	conjugation
+grammar:result-suru-past	寝てるだけで全てが完了してるんだもん。	has:완료했	fix	conjugation
+grammar:result-suru-past	「仕方ないさ、今日は祐介の初恋相手の白瀬舞が帰国してるんだから」	「어쩔 수 없어, 오늘은 유스케의 첫사랑 상대 시라세 마이가 귀국했으니까」	fix	conjugation
+grammar:result-suru-past	解散してたのか！	has:해산했	fix	conjugation
+grammar:result-suru-past	「よく見ると、ところどころ失敗してる部分があるわね」	「자세히 보면, 군데군데 실패한 부분이 있어」	fix	conjugation
+grammar:result-suru-past	「へぇ～、古賀さん結婚してるんだぁ～。	「헤에~, 코가 씨 결혼했어~.	fix	conjugation
+grammar:result-suru-past	10年も婚約してたセルフィア様と解消するって噂は本当だったのね！	10년이나 약혼했던 세르피아님과 해소한다는 소문은 사실이었구나!	fix	conjugation
+grammar:result-suru-past	完成してます。	완성했습니다.	fix	conjugation
+grammar:result-suru-past	結婚してるんですよね？	결혼한 거예요?	fix	conjugation
+grammar:result-suru-past	１９歳でミシガンのクラスを トップで卒業してる	19세에 미시간의 반을 톱으로 졸업했다	fix	conjugation
+grammar:result-suru-past	おかゆ失敗してたよな	죽실패했지	fix	conjugation
+grammar:result-suru-past	ホントに失敗してたら、慰めるどころか、全力で叩いてくるような連中だし……	정말로 실패했으면, 위로하기는 커녕, 전력으로 두드려 오는 것 같은 무리이고……	fix	conjugation
+grammar:result-suru-past	覚悟は完了してる。	각오는 완료했다.	fix	conjugation
+grammar:result-suru-past	長柄組は準備完了してます。	나가라조는 준비 완료했습니다.	fix	conjugation
+grammar:result-suru-past	半年だけ結婚してるが 移民を合法化するためか？	반년만 결혼했지만 이민을 합법화하기 위해인가?	fix	conjugation
+grammar:result-suru-past	Jean Bart、完成してるわ。	Jean Bart, 완성했어.	fix	conjugation
+grammar:result-suru-past	あの子 優勝してる。	그 아이 우승했다.	fix	conjugation
+grammar:result-suru-past	そ、そうだね…結婚してたくさん、経ってるのに	그, 그러게…결혼 했던 씨, 지나 있는데	keep	conjugation
+grammar:result-suru-past	ただ、部屋中が破損してるから、怪我に気をつけてね」	다만, 방 전체가 파손하고 있으니, 상처를 조심해」	keep	conjugation
+grammar:result-suru-past	｢結婚してますか｣だって	｢결혼합니까｣래	keep	conjugation
+grammar:result-suru-past	準備してた頃は、香々祭をしてくれるなんて思ってもいませんでしたから	준비하고 있었을 무렵은, 야채 절임제를 해 준다고 생각해도 있지 않았으니까	keep	conjugation
+grammar:result-suru-past	筧がいなかったら失敗してた」	견이 없었으면 실패했다」	keep	conjugation
+grammar:result-suru-past	俺は結婚してた ３年間	나는 결혼 했던 3년간	keep	conjugation
+grammar:result-suru-past	警察は到着してるけど、避難誘導で手いっぱいみたい。	경찰은 도착하고 있지만, 피난 유도로 힘껏 같다.	keep	conjugation
+cx:vocative-ya:10	「政夫や、聞いてくれ。	「마사오야, 들어 줘.	fix	rewrites
+cx:vocative-ya:10	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	fix	rewrites
+cx:vocative-ya:10	「いや、聞いてくれるな筧。	「아니, 듣지 말아 줘 견.	fix	rewrites
+cx:vocative-ya:10	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	fix	rewrites
+cx:vocative-ya:10	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	fix	rewrites
+cx:vocative-ya:10	「これ、お前や、早くしておくれ」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「いや、気になるじゃない？	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「いや、もう遅いし」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「よしよし坊や、我慢せずにネンネしちゃいましょうね～～～」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	妙源　や、女の姿が上って来る――	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「いや、だって山本さんっておじさんだと思ったから」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「あーいや、千莉はかわいいから、色々やってもらいたくなるんだ」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	いや、うつむいて小さな嗚咽を漏らす、皐月のそばにいてやりたくなった。	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	「ぢや、もう死なないの」	!rule:cx:vocative-ya:10	keep	rewrites
+cx:kure-request:15	「明日な、映畫でも見て夕方喜右衞門橋の下で待つてゐてくれ、おら、迎へに行く。	「내일인, 영화라도 봐 저녁 키에몬 다리 아래 나오고 기다리는이라고 라고 줘, 등, 영에에 갈 거야.	keep	rewrites
+cx:kure-request:15	我慢してくれ、な、我慢してくれ。	has:참아 줘,	fix	rewrites
+cx:kure-request:15	帰ってcoffeeでもいれてくれ、なっ？	돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
+cx:kure-request:15	「歌をうたってくれ、トオカル・ダル」みんなが叫んだ。	「노래를 노래해 줘, 트오칼 달」모두가 외쳤다.	fix	rewrites
+cx:kure-request:15	『リック、とにかくこの事を早く大統領に報告してくれ、それと世界各国にもだ。	『릭, 어쨌든 이 일을 빨리 대통령에게 보고해 줘, 그것과 세계 각국에도다.	fix	rewrites
+cx:kure-request:15	だからもっと私から前のように良い所を探してくれ、そうでない限り自分にはもう幸福がないとまでいう。	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:15	チャーミング、離してくれ、男対オーガーで解決しろ	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:15	聞いてくれ、犯人はこっちの壁に 描くべきだったんだ	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:15	「見てくれ、チョコレートのしっとりとした艶」	「봐 줘, 초콜릿의 촉촉한 윤기」	fix	rewrites
+cx:kure-request:15	「兄さんちょっと来てくれ、お使いに行ってもらいたいから」	「형님 잠깐 와 줘, 심부름 하러 가 줬으면 하니까」	fix	rewrites
+cx:kure-request:15	僕の足を見てくれ、血だらけだ。	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:15	気にしないでくれ、寂しくなぞ……	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:15	それを貸してくれ、彼と話をさせろ	!rule:cx:kure-request:15	keep	rewrites
+cx:kure-request:20	また婆さんとも思ってくれるな。	또 할머니와도 생각하지 말아 줘.	fix	rewrites
+cx:kure-request:20	水野家のためと思ってくれるな	미즈노가 때문에라고 생각하지 말아 줘	fix	rewrites
+cx:kure-request:20	私を捕まえてくれるな！	나를 잡지 말아 줘!	fix	rewrites
+cx:kure-request:20	あんまりジロジロ見てくれるな。	너무 빤히 보지 말아 줘.	fix	rewrites
+cx:kure-request:20	あまり、心配を掛けてくれるな。	너무, 걱정을 끼치지 말아 줘.	fix	rewrites
+cx:kure-request:20	あまり匂いを嗅いでくれるな」	너무 냄새를 맡지 말아 줘」	fix	rewrites
+cx:kure-request:20	翁　ええ、もう泣いてくれるな。	노인 네, 이제 울지 말아 줘.	fix	rewrites
+cx:kure-request:20	「もう泣いてくれるな」	「이제 울지 말아 줘」	fix	rewrites
+cx:kure-request:20	「そんなことを言ってくれるな」	「그런 말을 하지 말아 줘」	fix	rewrites
+cx:kure-request:20	よかった…まさか、本当に来てくれるなんて	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	誰かがおごってくれるなら別だけどね～。	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	会長がブレーンについてくれるなんて、誰も予想できなかっただろう。	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	瑠美のこと そんなふうに 言ってくれるなんて｡	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	「約束してくれるなら、めちゃくちゃにさせてあげる」	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	「でも……今さら何か証言してくれるなんてことあるはずが……」	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	構ってくれるなんて優しいのね	!rule:cx:kure-request:20	keep	rewrites
+cx:kure-request:20	リコの言うことを聞いてくれるなら、延長してもいいよ？	!rule:cx:kure-request:20	keep	rewrites
+normalize:old-request-forbid	銀流しのお六は、虫を殺すのさえ嫌いな仏性だよ、つまらない事を言っておくれでない」	은흘려 보내기의 6은, 화를 참는 것조차 싫어하는 불성이야, 시시한 말을 말하지 말아 줘」	fix	normalize
+normalize:old-request-forbid	お米を少し貸しておくれでないか。	쌀을 조금 빌려 주지 않겠는가.	keep	normalize
+cx:yo-intent:17	「これから大きな仕事をしにポートアイランド・中央都市部へ行く」	「지금부터 큰 일을 해 포트아일랜드·중앙 도시지역에 갈 거야」	fix	rewrites
+cx:promise-kara:10	「うん、台所にいる。片付けてから行くから、先にお昼、食べていて」	「응, 부엌에 있다. 정리하고 나서 갈 테니까, 먼저 점심, 먹고 있어」	fix	rewrites
+cx:promise-kara:10	当たり。次のときは頑張るから期待しててね…おやすみ	정답. 다음 때는 노력할 테니까 기대하고 있어…잘 자	fix	rewrites
+cx:promise-kara:10	「おい！　俺が悪かったよ！　こないだの事は謝るから出してくれ！」	「어이! 내가 나빴어! 지난번의 일은 사과할 테니까 내 줘!」	fix	rewrites
+cx:promise-kara:10	「俺が何かしたなら謝るから、ここから出してくれ！　頼むよ！」	「내가 뭔가 했다면 사과할 테니까, 여기에서 내 줘! 부탁해!」	fix	rewrites
+cx:promise-kara:10	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 선술집, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	rewrites
+cx:yo-intent:17	「そのカメラ全部使ってとにかくあのデカブツを撮影しろ、全部動画でな。俺は地上に状況を報告に行く」	「그 카메라 전부 써 어쨌든 그 덩치를 촬영해라, 전부 동영상 나오는 거야. 나는 지상에 상황을 보고하러 갈 거야」	fix	rewrites
+cx:kure-request:10	『リック、とにかくこの事を早く大統領に報告してくれ、それと世界各国にもだ。ほっておいても世界に知れ渡るだろうが、とにかく早いほうがいい』	『릭, 어쨌든 이 일을 빨리 대통령에게 보고해 줘, 그것과 세계 각국에도다. 그냥 두어도 세계에 널리 알려지겠지만, 어쨌든 빠른 편이 좋아』	fix	rewrites
+cx:promise-kara:10	ちょっと詳しく書き込むから待っててー	조금 자세하게 적을 테니까 기다리고 있어~	fix	rewrites
+cx:promise-kara:10	こればっかりはあたしがきっちり払わせるから心配しないで！	이것뿐은 내가 빈틈없이 지불하게 할 테니까 걱정하지 마!	fix	rewrites
+cx:promise-kara:10	「圭一〜！！ 車で行くから早くしなさーい。」	「케이이치~!! 차로 갈 테니까 빨리 해~.」	fix	rewrites
+cx:kure-request:10	しれーかん、クッキーくれくれ、それ全部くれ！ …え？ バレンタ…ぁ？ 聞こえんなぁ～？	사령관, 쿠키 줘, 그것 전부 줘! …어? 바렌타…아? 들리지 않지?	fix	rewrites
+cx:promise-kara:10	私、頑張るから、見捨てないでぇー！	나, 노력할 테니까, 버리지 마~!	fix	rewrites
+cx:promise-kara:10	午前九時。Richelieuは、午前中はゆっくり行きたいわ。用意するから、待っていなさい。	오전 9시. Richelieu는, 오전 중은 천천히 가고 싶어. 준비할 테니까, 기다리고 있어.	fix	rewrites
+cx:promise-kara:10	Admiral、疲れているのか？ 私が紅茶をいれよう。待っていて。薫り高いアールグレイにしよう。ほら、休んでいて。持っていくから、待ってて。	Admiral, 피곤한 건가? 내가 홍차를 탈게. 기다리고 있어. 향기나 높은 얼 그레이로 하자. 자, 쉬고 있어. 가져갈 테니까, 기다리고 있어.	fix	rewrites
+cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
+cx:kure-request:10	It's ten now. ふー食った食った。食いすぎたな。帰ってcoffeeでもいれてくれ、なっ？	It's ten now. 후 먹었다 먹었다. 너무 먹었군. 돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
+cx:kure-request:10	待ってくれ、この俺も……この俺も一緒に行かせてくれ。自分の無実は自分で証明してみせる！	기다려 줘, 이 나도……이 나도 함께 가게 해 줘. 자신의 결백은 스스로 증명해 내겠다!	fix	rewrites
+cx:kure-request:10	「たのむ空気を読んでくれ、今じゃないぞ今じゃ」	has:분위기를 읽어 줘,	fix	rewrites
+cx:yo-intent:17	「なぜそこに行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.84 アリスさん「行く」HP:3155/9999 MP:302	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「こいつを、下に連れて行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「狩りに行く」とか言って 本当は 昼寝でも してたんじゃないの？	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.26 先生先輩「行く」HP:7456/9999 MP:696	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.77 蒼くん「行く」HP:276/9999 MP:125	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.16 ユウキ「行く」HP:5111/9999 MP:140	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「じゃあ、あたしも一緒に行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「ああ、最初はゆっくりで行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「疲れたから寝る」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.83 部長様「行く」HP:6876/9999 MP:108	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「いや、御園は本選に行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「どこへ行く」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.45 さくらくん「行く」HP:9025/9999 MP:680	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.90 美咲様「行く」HP:1749/9999 MP:352	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「私もアイスティー飲み終わったら帰る」	「나도 아이스 티 다 마셨으면 돌아갈 거야」	fix	rewrites
+cx:yo-intent:17	「帰る」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.44 お兄ちゃん様「行く」HP:1566/9999 MP:339	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「大晦日には帰る」という言葉と、小隊長をオトラ婆さんに残して、炭坑へ働きに行ったのである。	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	Lv.94 先生さん「行く」HP:7805/9999 MP:539	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「剣を抱いて寝る」	!rule:cx:yo-intent:17	keep	rewrites
+cx:yo-intent:17	「父帰る」の幕が開いた。	!rule:cx:yo-intent:17	keep	rewrites
+cx:kure-request:10	「信じてくれ、白崎」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「んんっ、や、やめてくれ、これ以上こすられたら、我慢できないっ……」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「死刑にしてくれ、死刑にしてくれ」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「これからも白崎の力になってやってくれ、というだけのことだ」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	安心させてくれ、この愛が本物だって	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「一寸電話をかけてくれ、あそこに男の子が倒れている……」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	おい教えてくれ、そもそも事の起こりは何だ。	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	待ってくれ、この俺も……この俺も一緒に行かせてくれ。	기다려 줘, 이 나도……이 나도 함께 가게 해 줘.	fix	rewrites
+cx:kure-request:10	母は自分に化粧をしてくれ、着飾らせて、芝居や寄席や、遊山や見物には伴れていってくれた。	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	だが、最悪の場合、覚悟だけはしておいてくれ、栞那	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	キミと一緒にしないでくれ、ボクは彼女の愛する妹だよ	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「待っててくれ、今メールする」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「猿や、どうか鳴いてくれ、私が困るから」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	何も言わないでくれ、ロベルタ	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「待ってくれ、ここに居るなら、お政の弟子達に一と通り会って行きたい」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「許してくれ、もう酒は飲まない。	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「主人の源左衞門を呼んでくれ、此處で訊き度いことがある」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「八、お前は役者衆の落つく先を突き留めてくれ、ことに二枚目の小磯扇次に目を離すな」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	自分を信じてくれ、という言葉は、相手に対して誠実であろうとしなければ口にしてはいけない言葉だ。	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「続けてくれ、千莉」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	何でも言ってくれ、船長	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	「やめてくれ、白崎や高峰の支えあっての私だ」	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:10	気にしないでくれ、先生。	!rule:cx:kure-request:10	keep	rewrites
+cx:kure-request:22	私のことを可愛いとかやんちゃとか、好きなように言ってくれるな	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	ここまで来て つれないことを言ってくれるなよ	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	良い良い、左様に言ってくれるなら、いつかまた睦み合おうではないか…のう？	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	むしろ…兄さんがそう言ってくれるなら、こんなに嬉しいことはありません	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	お礼を言ってくれるなら、お願いがあるんだけど」	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	それでもあなたがしたいって言ってくれるなら	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	うれしいこと言ってくれるな かんぱーい	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	それでも 俺みたいなハンターに なりたいって言ってくれるなら 俺にできる限りなんでも教える。	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	「京太郎くんから、家族が欲しいって言ってくれるなんて、今までなかったから、嬉しくてっ」	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	七瀬ママが直接言ってくれるなら大丈夫かな……。	!rule:cx:kure-request:22	keep	rewrites
+cx:kure-request:22	創君がそう言ってくれるなら、留年してでも残りたくなっちゃうなぁ。	!rule:cx:kure-request:22	keep	rewrites
+cx:promise-kara:10	「今から読んじゃいますから、ちょこっとだけ時間をくださいね」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	いつもギリギリで慌てちゃうから、今日はゆっくりしてください！	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「事情をご存じなかったのですから、お気になさらないでください」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「お天気になりしだい、私が催促にいってきますから、明日、もう一日だけ我慢をしてくださいね。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	パンにも合うから、食べてみて。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	あたしが工場の車出すから、乗って。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	ちゃんと改良されてるから、見てて。	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	すぐに膳の準備を致しますから、今しばしお待ちくださいね	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「自主練するから、食事はいいって」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「大丈夫ですから、先輩はゆっくりしててください」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	「ペコジマでもなければ、ポコジマでもないんです、『おおじま』ですから、覚えておいてください！	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	情報を元に作戦を立てますから、きっと参加してくださいね？	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	待ってますから、早く取ってきてください」	!rule:cx:promise-kara:10	keep	rewrites
+cx:promise-kara:10	すみません…あ、はぁ…ですから、乳首を、いじめるのはおよしください、奉仕に集中できません…あっ！	!rule:cx:promise-kara:10	keep	rewrites
+cx:kure-request:22	「そんなことを言ってくれるな」	「그런 말을 하지 말아 줘」	fix	rewrites
+cx:kure-request:22	“苦しい” なんて 簡単に言ってくれるな―	“괴롭다”는 간단하게 말하지 말아 줘-	fix	rewrites
+cx:yo-intent:16	「アタシが行く」	「내가 갈게」	fix	rewrites
+cx:yo-intent:16	「あたしが行く」	「내가 갈게」	fix	rewrites
+cx:yo-intent:16	「俺が行く」	「내가 갈게」	fix	rewrites
+cx:yo-intent:16	私が行く」	!rule:cx:yo-intent:16	keep	rewrites
+cx:yo-intent:16	「彼はもう帰る」	!rule:cx:yo-intent:16	keep	rewrites
+cx:vocative-ya:10	先生や、親に相談しなさい	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	兄や、姉と遊んでくれ	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	友達や、家族に話してください	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	彼や、彼女を呼んでくれ	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	母や、姉に聞いてください	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	太郎や、早く寝なさい	타로야, 빨리 자	fix	rewrites

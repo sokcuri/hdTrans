@@ -138,11 +138,20 @@ std::string_view NameKana(char32_t kanji, bool tail) {
     return tail ? std::string_view(it->second.second) : std::string_view(it->second.first);
 }
 
-std::string GuessedName(std::string_view kanji) {
+std::string_view OnReading(char32_t kanji);
+
+std::string GuessedName(std::string_view kanji, bool fallback) {
     if (text::RuneCount(kanji) != 2) return {};
     const text::Rune a = text::DecodeRune(kanji);
     const text::Rune b = text::DecodeRune(kanji.substr(a.size));
-    const std::string_view head = NameKana(a.cp, false), tail = NameKana(b.cp, true);
+    // With fallback (a run an honorific or a person frame shows to be a name), a first kanji no two-kanji
+    // name of the dictionaries starts with takes the reading names start with (鯨 くじら: 鯨木 쿠지라키),
+    // and then its first on reading (凶 きょう: 凶真 쿄마), not the Korean sound of the hanja, which a
+    // Japanese name is not read with. The last kanji needs a name's reading (太尉, 老害 are words).
+    std::string_view head = NameKana(a.cp, false), tail = NameKana(b.cp, true);
+    // A head reading of one kana says little (兎 う); the on reading comes before it.
+    if (fallback && head.empty() && text::RuneCount(HeadReading(a.cp)) >= 2) head = HeadReading(a.cp);
+    if (fallback && head.empty()) head = OnReading(a.cp);
     if (head.empty() || tail.empty()) return {};
     return text::FromKana(std::string(head) + std::string(tail), text::Preset::FanShort, true);
 }

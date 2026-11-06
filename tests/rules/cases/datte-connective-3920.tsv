@@ -96,7 +96,7 @@ segment:datte-space	今日 協力するのだって 自分のためよ。	오늘
 segment:datte-space	おまけに せんじ薬だと！？ 何だって 素人が 勝手に診断して 勝手に投薬するんだ！！	게다가 달인 약이라고!? 뭐라고 아마추어가 마음대로 진단해 마음대로 투약하는 거야!!	keep	segment
 cx:datte-quote:5	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	rewrites
 cx:datte-quote:5	それだって君が言う 人の命を弄んだ結果だろ？	그것도 네가 말하는 사람의 생명을 희롱한 결과지?	keep	rewrites
-cx:datte-quote:5	先生 こっちだって	선생님 여기래	keep	rewrites
+cx:datte-quote:5	先生 こっちだって	선생님 나도 마찬가지야	keep	rewrites
 cx:datte-quote:5	蒔奈が帰り道はこっちだって言うから信用したのに	시내가 돌아가는 길은 여기라고 말하니까 신용했는데	keep	rewrites
 cx:datte-quote:5	それだって思い出に変わりはないでしょう	그것도 추억에 변함은 없을 거예요	keep	rewrites
 cx:datte-quote:5	こっちだってな 毎日 我慢してんだ お前に！	여기도매일 참는 거야 너에게!	keep	rewrites
@@ -157,7 +157,7 @@ cx:datte-quote:20	わかったって答えると思う?	알았다고 대답한�
 cx:datte-quote:20	一緒に「仮面ヤイバー」を 見てたって答えたの	함께 「가면 야이버」를 보고 있었다고 대답했어	keep	rewrites
 cx:datte-quote:20	知ってたって答えるわけないんだ	알고 있었다고 대답할 리가 없다	keep	rewrites
 cx:datte-quote:20	どうしてようが 税金BOXに入れたって答えますよ	어떻게 하고 있든 세금 BOX에 넣었다고 대답해요	keep	rewrites
-dict:jisjk:260890	一条君も誤解だって言ってるんだし	이치조 군도 오해라고 말해	keep	local
+dict:jisjk:260890	一条君も誤解だって言ってるんだし	이치조 군도 오해라고 말하니까	keep	local
 dict:jisjk:260890	俺が犯人だって言うなら 根拠を示せよ	내가 범인이라고 말한다면 근거를 나타내	keep	local
 dict:jisjk:260890	吾妻さん お願い 嘘だって言って。	아즈마 씨 부탁 거짓말이라고 말해.	keep	local
 dict:jisjk:260890	本当だって言っただろ	사실이라고 말했지	keep	local

@@ -71,3 +71,6 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 内#3	sense	内/うち/n	n	colloc	そのうちでも		그중에서도	70	LEX-200	review	そのうちでも → 그중에서도
 肉じゃが/にくじゃが/n#1	sense	肉じゃが/にくじゃが/n	n	colloc	肉じゃが		고기감자조림	70	LEX-200	fault	肉じゃが → 고기감자조림
 各部屋/かくへや/n#1	sense	各部屋/かくへや/n	n	colloc	各部屋		각 방	70	LEX-200	fault	各部屋 → 각 방
+伸ばす/のばす/v5#1	sense	伸ばす/のばす/v5	v5	colloc	鼻の下を伸ばす		헤벌쭉해지다	70	LEX-4907	corpus	鼻の下を伸ばす → 헤벌쭉해지다
+伸ばす/のばす/v5#2	sense	伸ばす/のばす/v5	v5	colloc	羽を伸ばす		마음껏 쉬다	70	LEX-4907	corpus	羽を伸ばす → 마음껏 쉬다
+通す/とおす/v5#1	sense	通す/とおす/v5	v5	colloc	目を通す|目は通す		훑어보다	70	LEX-4907	corpus	目を通す → 훑어보다

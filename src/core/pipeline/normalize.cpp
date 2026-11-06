@@ -8,7 +8,8 @@
 //   4. an apology or greeting cut before なさい joined (JoinNasai);
 //   5. words said with an emphatic っ or ん written plain (RewriteEmphaticSpellings);
 //   6. a polite ending cut off or inside joined (JoinMasu);
-//   7. slurred spellings (RewriteSlurred), then spoken and old-fashioned spellings (SpokenForms);
+//   7. slurred spellings (RewriteSlurred), the forms of regional and old speech (DialectForms), then
+//      spoken and old-fashioned spellings (SpokenForms);
 //   8. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
 //   9. casual contractions (RewriteCasual);
 //  10. the military time in digits (RewriteMilitaryTime);
@@ -86,7 +87,9 @@ std::string Normalize(std::string_view line, const LineContext& ctx, const RunLo
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female, runs.holds, runs.context));
     text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
-    text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(RewriteSlurred(text, runs)), ctx.exclamationNa, ctx.dialectForms, runs)), runs, ctx.dialectForms);
+    text = JoinMasu(RewriteSlurred(text, runs));
+    if (ctx.dialectForms) text = DialectForms(text, runs);
+    text = RewriteCasual(RewriteInterjections(SpokenForms(text, ctx.exclamationNa, ctx.dialectForms, runs)), runs, ctx.dialectForms);
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
 

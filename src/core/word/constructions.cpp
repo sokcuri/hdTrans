@@ -445,6 +445,7 @@ constexpr NamedFeature kFeatures[] = {
     // threat or command (speech.threat-cue: 貴様, せよ, 斬る).
     {"humble-line", [](Flusher& f, const Item*) { return f.w.settings.humbleLine; }},
     {"threat-line", [](Flusher& f, const Item*) { return f.w.settings.threatLine; }},
+    {"formal-line", [](Flusher& f, const Item*) { return f.w.settings.formalLine; }},
     // The line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue).
     {"old-self-line", [](Flusher& f, const Item*) { return f.w.settings.oldSelfLine; }},
     // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.
@@ -890,6 +891,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"prepend-target", CxVerb::PrependTarget},
         {"set-ending", CxVerb::SetEnding},
         {"replace-head", CxVerb::ReplaceHead},
+        {"replace-ending-head", CxVerb::ReplaceEndingHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
         {"map-ending-tail", CxVerb::MapEndingTail},
         {"map-target-tail", CxVerb::MapTargetTail},
@@ -962,7 +964,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
         }
-        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail || a.verb == CxVerb::SetVerbFrom) &&
+        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingHead || a.verb == CxVerb::ReplaceEndingTail ||
+             a.verb == CxVerb::SetVerbFrom) &&
             (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
             tokens.Fail(bad != nullptr ? bad : "a replace action takes the old and the new text");
             break;
@@ -1682,6 +1685,13 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, 
             const std::string_view target = it->EntryText(it->selected);
             if (target.starts_with(a.value)) {
                 it->AssignEntrySurface(it->selected, a.with + std::string(target.substr(a.value.size())), source);
+            }
+            break;
+        }
+        case internal::CxVerb::ReplaceEndingHead: {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e != nullptr && e->dst.starts_with(a.value)) {
+                it->AssignDirectSlot(it->DirectIndex(), a.with + e->dst.substr(a.value.size()), source);
             }
             break;
         }

@@ -104,6 +104,9 @@ struct Settings {
     // humble-line and threat-line.
     bool humbleLine = false;
     bool threatLine = false;
+    // Text path: the line speaks in the formal ます style or a set phrase of formality (speech.formal-cue), read by the
+    // construction feature formal-line.
+    bool formalLine = false;
     // Text path: the line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue: わらわ,
     // じゃ, ておる, おぬし, そなた), read by the construction feature old-self-line.
     bool oldSelfLine = false;

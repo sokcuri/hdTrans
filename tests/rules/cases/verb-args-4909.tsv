@@ -1,0 +1,30 @@
+# 규칙: LEX-4909
+rule	input	expected	kind	layer
+pack:argument-senses:74	慎重な態度を取った	has:태도를 취했다	keep	packs
+pack:argument-senses:75	責任を取るのは俺だ	has:책임을 지는	fix	packs
+pack:argument-senses:76	ゲームみたいに星を取って無敵になってる気分です	has:별을 따	fix	packs
+pack:argument-senses:76	ランキングで1位を取ってみろって？	lacks:1위를 따	keep	packs
+pack:argument-senses:77	記憶の中に、三角巾を取った母親の姿もあった	has:삼각건을 벗은	fix	packs
+pack:argument-senses:78	今日は一年の汚れを取りましょう。大掃除、ですね。	has:더러움을 없앱시다	fix	packs
+pack:argument-senses:79	彼のジャケットの糸くずを 取りもしない	has:떼지도	fix	packs
+pack:argument-senses:80	疲れを取るために風呂に入った	has:피로를 풀기	fix	packs
+pack:argument-senses:81	子爵の娘は、婿を取る予定だったな？	has:사위를 들일	fix	packs
+pack:argument-senses:83	極東マネージャーの承諾を取ってから来いと言う	has:승낙을 받고	fix	packs
+pack:argument-senses:84	これ以上の税を取れば彼らの生活を壊す	has:세를 걷으면	fix	packs
+pack:argument-senses:85	お金を貸すなら担保を取るのが鉄則です。	has:담보를 잡는	fix	packs
+pack:argument-senses:86	俺も、折った筆を再び取りましょう！	has:붓을 다시 듭	fix	packs
+pack:argument-senses:87	ここから後退して陣を取るから	has:진을 치니까	fix	packs
+pack:argument-senses:88	後ろに下がって間合いを取る。	has:간격을 둔다	fix	packs
+pack:argument-senses:89	いかん、昼餉を取らねば。	has:점심을 먹지 않으면	fix	packs
+pack:argument-senses:89	朝食を取った後に学校へ登校する	has:아침 식사를 한	keep	packs
+pack:argument-senses:97	高いところの本を取ろうとする。	has:책을 집으려고	fix	packs
+pack:argument-senses:97	慌ててスマホを取る。	has:스마트폰을 집는다	fix	packs
+pack:argument-senses:100	汗をかいたから、タオルを取りに来ただけだよ	has:가지러 왔을	keep	packs
+pack:argument-senses:99	彼女も銃を取る。	has:총을 든다	fix	packs
+pack:argument-senses:93	最後までタルタルソースをかけて食べきった	has:소스를 뿌려	fix	packs
+pack:argument-senses:94	お茶を…そう、ドバーってかけて。どう？	has:끼얹어	fix	packs
+pack:argument-senses:94	そこに彼女が、カレーをかけてくれる。	has:카레를 끼얹어	fix	packs
+pack:argument-senses:95	すごく手間暇をかけて育てる必要があるの	has:품과 시간을 들여	fix	packs
+pack:argument-senses:95	秘密な上に準備にかける時間がなかった	has:들일 시간이	fix	packs
+pack:argument-senses:96	ご迷惑をおかけしました	has:폐를 끼쳤습니다	fix	packs
+pack:argument-senses:96	声をかけてくれ	has:말을 걸어	keep	packs

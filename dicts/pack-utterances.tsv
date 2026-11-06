@@ -1,0 +1,68 @@
+#! layer=pack
+# 홀로 서는 말(인사, 감탄, 굳은 말)을 그 말 전체로 옮기는 행(LEX-4761)
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+utt:くそ	くそ	intj	sense	colloc	^くそ$	젠장	80	LEX-4761	pool	くそ → 젠장
+utt:チクショ	チクショ	intj	sense	colloc	^チクショ$	젠장	80	LEX-4761	pool	チクショ → 젠장
+utt:よお	よお	intj	sense	colloc	^よお$	여어	80	LEX-4761	pool	よお → 여어
+utt:コラ	コラ	intj	sense	colloc	^コラ$	이놈	80	LEX-4761	pool	コラ → 이놈
+utt:ちょちょ	ちょちょ	intj	sense	colloc	^ちょちょ$	잠깐잠깐	80	LEX-4761	pool	ちょちょ → 잠깐잠깐
+utt:ちょちょちょ	ちょちょちょ	intj	sense	colloc	^ちょちょちょ$	잠깐잠깐잠깐	80	LEX-4761	pool	ちょちょちょ → 잠깐잠깐잠깐
+utt:おれ	おれ	intj	sense	colloc	^おれ$	나	80	LEX-4761	pool	おれ → 나
+utt:つか	つか	intj	sense	colloc	^つか$	근데	80	LEX-4761	pool	つか → 근데
+utt:そんで	そんで	intj	sense	colloc	^そんで$	그래서	80	LEX-4761	pool	そんで → 그래서
+utt:んで	んで	intj	sense	colloc	^んで$	그래서	80	LEX-4761	pool	んで → 그래서
+utt:さてと	さてと	intj	sense	colloc	^さてと$	자, 그럼	80	LEX-4761	pool	さてと → 자, 그럼
+utt:すんません	すんません	intj	sense	colloc	^すんません$	죄송합니다	80	LEX-4761	pool	すんません → 죄송합니다
+utt:なんだって	なんだって	intj	sense	colloc	^なんだって$	뭐라고	80	LEX-4761	pool	なんだって → 뭐라고
+utt:せや	せや	intj	sense	colloc	^せや$	그래	80	LEX-4761	pool	せや → 그래
+utt:ひい	ひい	intj	sense	colloc	^ひい$	히익	80	LEX-4761	pool	ひい → 히익
+utt:わり	わり	intj	sense	colloc	^わり$	미안	80	LEX-4761	pool	わり → 미안
+utt:イテ	イテ	intj	sense	colloc	^イテ$	아야	80	LEX-4761	pool	イテ → 아야
+utt:あ痛	あ痛	intj	sense	colloc	^あ痛$	아야	80	LEX-4761	pool	あ痛 → 아야
+utt:だからね	だからね	intj	sense	colloc	^だからね$	그러니까 말이야	80	LEX-4761	pool	だからね → 그러니까 말이야
+utt:これじゃあ	これじゃあ	intj	sense	colloc	^これじゃあ$	이래서야	80	LEX-4761	pool	これじゃあ → 이래서야
+utt:頼んだぞ	頼んだぞ	intj	sense	colloc	^頼んだぞ$	부탁한다	80	LEX-4761	pool	頼んだぞ → 부탁한다
+utt:ボケ	ボケ	intj	sense	colloc	^ボケ$	멍청아	80	LEX-4761	pool	ボケ → 멍청아
+utt:何すか	何すか	intj	sense	colloc	^何すか$	뭐예요	80	LEX-4761	pool	何すか → 뭐예요
+utt:オイ	オイ	intj	sense	colloc	^オイ$	어이	80	LEX-4761	pool	オイ → 어이
+utt:こりゃあ	こりゃあ	intj	sense	colloc	^こりゃあ$	이거 참	80	LEX-4761	pool	こりゃあ → 이거 참
+utt:今ね	今ね	intj	sense	colloc	^今ね$	지금 말이야	80	LEX-4761	pool	今ね → 지금 말이야
+utt:今日ね	今日ね	intj	sense	colloc	^今日ね$	오늘 말이야	80	LEX-4761	pool	今日ね → 오늘 말이야
+utt:すご	すご	intj	sense	colloc	^すご$	대박	80	LEX-4761	pool	すご → 대박
+utt:おりゃ	おりゃ	intj	sense	colloc	^おりゃ$	이얍	80	LEX-4761	pool	おりゃ → 이얍
+utt:またまた	またまた	intj	sense	colloc	^またまた$	에이, 또	80	LEX-4761	pool	またまた → 에이, 또
+utt:お前な	お前な	intj	sense	colloc	^お前な$	너 말이야	80	LEX-4761	pool	お前な → 너 말이야
+utt:あんたさ	あんたさ	intj	sense	colloc	^あんたさ$	너 말이야	80	LEX-4761	pool	あんたさ → 너 말이야
+utt:これさ	これさ	intj	sense	colloc	^これさ$	이거 말이야	80	LEX-4761	pool	これさ → 이거 말이야
+utt:何すんだよ	何すんだよ	intj	sense	colloc	^何すんだよ|何するんだよ$	무슨 짓이야	80	LEX-4761	pool	何すんだよ → 무슨 짓이야
+utt:やい	やい	intj	sense	colloc	^やい$	이봐	80	LEX-4761	pool	やい → 이봐
+utt:何って	何って	intj	sense	colloc	^何って$	뭐냐니	80	LEX-4761	pool	何って → 뭐냐니
+utt:喜んで	喜んで	intj	sense	colloc	^喜んで$	기꺼이	80	LEX-4761	pool	喜んで → 기꺼이
+utt:何なら	何なら	intj	sense	colloc	^何なら$	뭣하면	80	LEX-4761	pool	何なら → 뭣하면
+utt:ちが	ちが	intj	sense	colloc	^ちが$	아니	80	LEX-4761	pool	ちが → 아니
+utt:ご心配なく	ご心配なく	intj	sense	colloc	^ご心配なく$	걱정 마세요	80	LEX-4761	pool	ご心配なく → 걱정 마세요
+utt:ささ	ささ	intj	sense	colloc	^ささ$	자자	80	LEX-4761	pool	ささ → 자자
+utt:うぃす	うぃす	intj	sense	colloc	^うぃす$	네	80	LEX-4761	pool	うぃす → 네
+utt:ジャン	ジャン	intj	sense	colloc	^ジャン$	짠	80	LEX-4761	pool	ジャン → 짠
+utt:何でだよ	何でだよ	intj	sense	colloc	^何でだよ$	왜 그래	80	LEX-4761	pool	何でだよ → 왜 그래
+utt:どうよ	どうよ	intj	sense	colloc	^どうよ$	어때	80	LEX-4761	pool	どうよ → 어때
+utt:ちょっといい	ちょっといい	intj	sense	colloc	^ちょっといい$	잠깐 괜찮아	80	LEX-4761	pool	ちょっといい → 잠깐 괜찮아
+utt:ようし	ようし	intj	sense	colloc	^ようし$	좋아	80	LEX-4761	pool	ようし → 좋아
+utt:食らえ	食らえ	intj	sense	colloc	^食らえ$	받아라	80	LEX-4761	pool	食らえ → 받아라
+utt:てことで	てことで	intj	sense	colloc	^てことで$	그렇게 됐으니	80	LEX-4761	pool	てことで → 그렇게 됐으니
+utt:知るか	知るか	intj	sense	colloc	^知るか$	알 게 뭐야	80	LEX-4761	pool	知るか → 알 게 뭐야
+utt:よこせ	よこせ	intj	sense	colloc	^よこせ$	내놔	80	LEX-4761	pool	よこせ → 내놔
+utt:こわ	こわ	intj	sense	colloc	^こわ$	무서워	80	LEX-4761	pool	こわ → 무서워
+utt:おっしゃ	おっしゃ	intj	sense	colloc	^おっしゃ$	좋았어	80	LEX-4761	pool	おっしゃ → 좋았어
+utt:何やってんのよ	何やってんのよ	intj	sense	colloc	^何やってんのよ$	뭐 하는 거야	80	LEX-4761	pool	何やってんのよ → 뭐 하는 거야
+utt:何やってんだよ	何やってんだよ	intj	sense	colloc	^何やってんだよ$	뭐 하는 거야	80	LEX-4761	pool	何やってんだよ → 뭐 하는 거야
+utt:ホラ	ホラ	intj	sense	colloc	^ホラ$	자	80	LEX-4761	pool	ホラ → 자
+utt:どや	どや	intj	sense	colloc	^どや$	어때	80	LEX-4761	pool	どや → 어때
+utt:来ないで	来ないで	intj	sense	colloc	^来ないで$	오지 마	80	LEX-4761	pool	来ないで → 오지 마
+utt:こっちだって	こっちだって	intj	sense	colloc	^こっちだって$	나도 마찬가지야	80	LEX-4761	pool	こっちだって → 나도 마찬가지야
+utt:おもしれ	おもしれ	intj	sense	colloc	^おもしれ$	재밌네	80	LEX-4761	pool	おもしれ → 재밌네
+utt:どうしちゃったの	どうしちゃったの	intj	sense	colloc	^どうしちゃったの$	왜 그래	80	LEX-4761	pool	どうしちゃったの → 왜 그래
+utt:入れ	入れ	intj	sense	colloc	^入れ$	들어와	80	LEX-4761	pool	入れ → 들어와
+utt:あち	あち	intj	sense	colloc	^あち$	앗 뜨거	80	LEX-4761	pool	あち → 앗 뜨거
+utt:そのとおり	そのとおり	intj	sense	colloc	^そのとおり$	맞아	80	LEX-4761	pool	そのとおり → 맞아
+utt:どいつもこいつも	どいつもこいつも	intj	sense	colloc	^どいつもこいつも$	하나같이	80	LEX-4761	pool	どいつもこいつも → 하나같이

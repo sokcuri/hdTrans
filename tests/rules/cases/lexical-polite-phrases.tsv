@@ -21,7 +21,7 @@ phrase:お任せを	私にお任せを！	나에게 맡겨 주세요!	fix	lookup
 phrase:お任せ	お任せ！	맡겨라!	keep	lookup
 phrase:お持ちでいらっしゃる	相当なコネをお持ちでいらっしゃる。	상당한 커넥션을 가지고 계신다.	fix	lookup
 phrase:お待ちでいらっしゃる	お客様がお待ちでいらっしゃいます。	손님이 기다리고 계십니다.	fix	lookup
-pattern:学生でいらっしゃいますか	田中様でいらっしゃいますか？	타나카님이십니까?	fix	builtin-pattern
+pattern:学生でいらっしゃいますか	田中様でいらっしゃいますか？	타나카 님이십니까?	fix	builtin-pattern
 pattern:学生でいらっしゃいますね	奥様でいらっしゃいますね。	사모님이시군요.	fix	builtin-pattern
 pattern:静かでいらっしゃいますか	先生はお元気でいらっしゃいますか？	선생님은 건강하십니까?	fix	builtin-pattern
 pattern:静かでいらっしゃる	ご立派でいらっしゃる。	훌륭하시다.	fix	builtin-pattern

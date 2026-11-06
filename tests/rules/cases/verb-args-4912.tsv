@@ -1,0 +1,24 @@
+# 규칙: LEX-4912
+rule	input	expected	kind	layer
+pack:argument-senses:116	「借りは、返します」	has:빚은, 갚습니다	fix	packs
+pack:argument-senses:116	本を返した	has:책을 돌려주었다	keep	packs
+pack:argument-senses:117	二人の肩に両腕を回してどこかへ行こうとしている	has:양팔을 둘러	fix	packs
+pack:argument-senses:117	少し、僕は手を後ろに回して、捕まらない瓶を探す	lacks:둘러	keep	packs
+pack:argument-senses:118	スマホを見るなり、通知音を切って画面を消す。	has:통지음을 꺼	fix	packs
+pack:argument-senses:118	紙を切る	has:종이를 자른다	keep	packs
+pack:argument-senses:119	わかった。もう通信を切るぞ」	has:통신을 끊겠어	keep	packs
+pack:argument-senses:120	手のひらを切ったナイフに宿した魔法で	has:손바닥을 벤	fix	packs
+pack:argument-senses:120	「そうなら、指を切るしかないね」	has:손가락을 자를	keep	packs
+pack:argument-senses:121	軽トラックに突っ込んで、急ハンドルを切った。	has:핸들을 꺾었다	fix	packs
+pack:argument-senses:122	あなたが引いたカードはスペードのエースです	has:뽑은 카드는	fix	packs
+pack:argument-senses:122	線を引く	has:선을 긋는다	keep	packs
+pack:argument-senses:123	本気ならちょっと引く	has:조금 질린다	fix	packs
+pack:argument-senses:125	リアは表情に陰を落とした。	has:그늘을 드리웠다	fix	packs
+pack:argument-senses:126	汗と火薬の匂いをしっかりと落とす	has:냄새를 제대로 씻어낸다	fix	packs
+pack:argument-senses:127	ボストンバッグに視線を落とした。	has:시선을 떨궜다	fix	packs
+pack:argument-senses:128	迎撃班、今すぐドローンを落とせ！」	has:드론을 격추해라	fix	packs
+pack:argument-senses:128	財布を落とした	has:지갑을 잃어버렸다	keep	packs
+pack:argument-senses:129	お腹にパンチを一発入れて	has:한 방 먹여	fix	packs
+pack:argument-senses:130	まあ、今のは彼女が入れた票だろう。	has:던진 표	fix	packs
+pack:argument-senses:131	もう予定を入れている人間もいるだろ？	has:예정을 잡고	fix	packs
+pack:argument-senses:131	鞄に本を入れる	has:책을 넣는다	keep	packs

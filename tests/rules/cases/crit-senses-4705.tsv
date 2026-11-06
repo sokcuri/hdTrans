@@ -32,7 +32,7 @@ sense:uchiage	任務の打ち上げとエルの歓迎会を兼ねたすき焼き
 sense:uchiage	サバイバルゲーム後の打ち上げ居酒屋飲み会で	서바이벌 게임 후 뒤풀이 선술집 회식에서	fix	senses
 sense:uchiage	ロケットの打ち上げを見た	로켓 발사를 보았다	keep	senses
 sense:copy	ポスターの横に乗せる、大文字のコピーを考えればいいわけだな？	포스터 옆에 싣는, 대문자 카피를 생각하면 변명이네?	fix	senses
-sense:copy	資料のコピーを取る	자료 복사를 취한다	keep	senses
+sense:copy	資料のコピーを取る	자료 복사를 한다	keep	senses
 sense:kannen	いい加減観念なさいませ。	이제 좀 체념하십시오.	fix	senses
 sense:kannen	固定観念を捨てろ	고정 관념을 버려라	keep	senses
 sense:toritsuke	もう一回 決闘を取り付けておいて	다시 한번 결투를 잡아 두어	fix	senses

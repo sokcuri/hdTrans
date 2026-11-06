@@ -1,0 +1,10 @@
+# 규칙: GRM-3963
+rule	input	expected	kind	layer
+conjugation:verb-gloss-negative	どこまでも場に似付かわしくない、パレッティア王国きっての〝問題児〟の称号を欲しいままにする	한없이 자리에 어울리지 않는, 파렛티아 왕국 제일의 “문제아”의 칭호를 독차지한다	fix	conjugation
+conjugation:verb-gloss-negative	薄汚れた廃工場に似つかわしくない、真新しく頑丈そうな扉。	더러워진 폐공장에 어울리지 않는, 아주 새롭고 튼튼한 듯한 문.	fix	conjugation
+conjugation:verb-gloss-negative	だが室内は荒れていて、高級ホテルに似つかわしくない生活感がある。	하지만 실내는 거칠어지고 있어, 고급 호텔에 어울리지 않는 생활감이 있다.	fix	conjugation
+conjugation:verb-gloss-negative	森下さんに似つかわしくないセリフに、正直戸惑う。	모리시타 씨에 어울리지 않는 대사에, 솔직히 당황한다.	fix	conjugation
+conjugation:verb-gloss-negative	そんな、私には似つかわしくない自問自答を繰り返してしまう。	그런, 나에게는 어울리지 않는 자문 자답을 반복해버린다.	fix	conjugation
+conjugation:verb-gloss-negative	あんな薄汚れたタップなんてお兄様に似つかわしくありません	저런 더러워진 탭 같은 건 형님에 걸맞지는 않습니다	fix	conjugation
+conjugation:verb-gloss-negative	チーム全体が弱いから 自由じゃなくて 楽しくない	팀 전체가 약하니까 자유롭지 않아서 즐겁지 않다	keep	conjugation
+conjugation:verb-gloss-negative	「でも、安全でなきゃ、そもそも楽しくない。まずは安全確保が大前提じゃないか？」	「하지만, 안전하지 않으면, 애초에 즐겁지 않다. 우선은 안전 확보가 대전제가 아니야?」	keep	conjugation

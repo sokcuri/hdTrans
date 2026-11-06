@@ -1,8 +1,8 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
 sound:contracted-n	おい！ 待たんか！	어이! 기다리지 못해!	fix	sound
-sound:contracted-n	こら！　待たんかい！	이봐! 기다리지 않을래!	fix	sound
-sound:contracted-n	ほらほら 立たんかい！	자 자 서지 않을래!	fix	sound
+sound:contracted-n	こら！　待たんかい！	이봐! 기다려!	fix	sound
+sound:contracted-n	ほらほら 立たんかい！	자 자 서라!	fix	sound
 sound:contracted-n	(ﾁﾝﾋﾟﾗ)オラァ！ 立たんか！	(똘마니) 오라! 서지 못해!	fix	sound
 sound:contracted-n	あんま変わらんか。	별로 변함없는가.	fix	sound
 sound:contracted-n	機会があるかは分からんけどｗ	기회가 있을까는 모르는데 ㅋ	fix	sound
@@ -13,8 +13,8 @@ sound:contracted-n	まだ分からんか お前は！	아직 모를까 너는!	f
 sound:contracted-n	(盤嶽)元気を出さんか！	(반악) 힘내지 못해!	fix	sound
 sound:contracted-n	(女性)あぶり餅 要らんか～？	(여성) 구워 떡 필요하지 않은가~?	fix	sound
 sound:contracted-n	伏見の酒 要らんか～い	후시미의 술 필요 없나~	keep	sound
-sound:contracted-n	(警官)入らんかい！	(경관) 들어가지 않을래!	fix	sound
-sound:contracted-n	おい　こら！　返さんかい！　おい…。	이봐 이봐! 돌려주지 않을래! 이봐….	fix	sound
+sound:contracted-n	(警官)入らんかい！	(경관) 들어와!	fix	sound
+sound:contracted-n	おい　こら！　返さんかい！　おい…。	이봐 이봐! 돌려주어라! 이봐….	fix	sound
 sound:contracted-n	いや でも このまま待っててもいつ来るか分からんし 行ってくる｡	아니 하지만 이대로 기다려도 언제 오는지 모르고 다녀올게.	fix	sound
 sound:contracted-n	ええあんばいに発作も起こらんし	네적당히 처리함에 발작도 일어나지 않고	fix	sound
 sound:contracted-n	君たちが動かんからだ	자네들이 움직이지 않기 때문이다	fix	sound

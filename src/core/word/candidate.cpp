@@ -357,6 +357,11 @@ Record* HonorificAfterNoun(const Item& parent, Record* records, const dict::Snap
 bool NounEnd(std::string_view text) {
     if (text.empty()) return true;
     const std::string_view c = FirstChar(text);
+    // や that lists nouns, before a mark, a space or a word not in hiragana (おもてなしや サービス; not やはり).
+    if (c == "や") {
+        const text::Rune next = text::DecodeRune(text.substr(c.size()));
+        return next.size == 0 || !(next.cp >= U'ぁ' && next.cp <= U'ゖ');
+    }
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
@@ -490,7 +495,8 @@ bool ReadsWhole(const dict::Snapshot& snapshot, const Record& r, std::string_vie
 //   punctuation or the end of the text follows it (大の字, 大粒の雨). Demonstratives
 //   (あの人, この世) and adverbs keep their order: their compound rows read worse than
 //   the parts.
-// Plain-dictionary records stay in front.
+// The shorter record is the first one that reads at the text (lead), not a record before it that
+// does not (おも of 思う before おもて + なし at おもてなし). Plain-dictionary records stay in front.
 // Whether s starts with a form of the copula (not the で of できる), the な of an adnominal or
 // of なの, なんだ (not しっかりなさい), or a question か that ends a clause or goes on to a final
 // particle (アリか？, ばっちりかな; not しっかりかけて).
@@ -675,7 +681,7 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     return front;
 }
 
-Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
+Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text, const Record* lead) {
     Record* owned = nullptr;
     Record* first = records;
     while (first != nullptr && first->user != nullptr) {
@@ -683,15 +689,16 @@ Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::st
         first = first->child;
     }
     if (first == nullptr) return records;
-    const bool afterNoun = NounRow(*first);
-    if (!afterNoun && (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
-                       !text::IsKanji(text::DecodeRune(first->source).cp))) {
+    if (lead == nullptr) lead = first;
+    const bool afterNoun = NounRow(*lead);
+    if (!afterNoun && (At(lead->partCode, 1) != '0' || !lead->source.ends_with("の") ||
+                       !text::IsKanji(text::DecodeRune(lead->source).cp))) {
         return records;
     }
     std::string_view noun;
     for (const Record* r = first; r != nullptr; r = r->child) {
-        if (r->user == nullptr && r->source.size() > first->source.size() && r->source.size() > noun.size() &&
-            r->source.starts_with(first->source) && text.starts_with(r->source) &&
+        if (r->user == nullptr && r->source.size() > lead->source.size() && r->source.size() > noun.size() &&
+            r->source.starts_with(lead->source) && text.starts_with(r->source) &&
             (afterNoun ? ReadsWhole(snapshot, *r, text)
                        : At(r->partCode, 1) == '1' && NounEnd(text.substr(r->source.size())))) {
             noun = r->source;
@@ -2315,10 +2322,158 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// LEX-4981: a phrase reading that cuts a common noun. Where the longest reading at a point is a phrase X の Y that
+// starts with kanji or katakana and whose Y is a noun of its own (次の日 of 次の日曜日, バッグの中 of バッグの中身, 家の後
+// of 家の後ろ盾), and a noun that ends in kanji or katakana and holds no particle starts at its Y and runs past its end,
+// reaching at least as far as the reading and the word after it, the shorter reading that ends where that noun starts
+// (or whose next word does) wins. A noun whose part past the phrase is a suffix (日の出 + 前, 男の子 + 達) keeps it.
+Record* Worker::OverCutWord(std::string_view full, int cursor, int token, const Item& c) {
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    if (c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb || source.empty()) return nullptr;
+    auto letter = [](char32_t r) { return text::IsKanji(r) || (r >= U'ァ' && r <= U'ヺ'); };
+    const std::size_t no = source.find("の");
+    const std::size_t tail = no == std::string_view::npos ? 0 : no + std::string_view("の").size();
+    if (no == std::string_view::npos || no == 0 || tail >= source.size() || !letter(text::DecodeRune(source).cp)) return nullptr;
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // The longest reading at at, 0 for none; noun only counts common nouns (N, I; no N13x name) that end in kanji or
+    // katakana and hold no particle (中身, 日曜日, 後ろ盾; not 中で, 前の席, the name reading of 人魚姫).
+    auto reach = [&](int at, bool noun) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w == nullptr || w->length <= longest) continue;
+            if (noun) {
+                const std::string_view ws = From(full, at).substr(0, static_cast<std::size_t>(w->length));
+                const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+                if (e == nullptr || (e->cls != 'N' && e->cls != 'I') || e->code.starts_with("13") || w->detail == nullptr || w->detail->cls != kDetailInfo ||
+                    !letter(text::DecodeRune(LastChar(ws)).cp) || ws.find("の") != std::string_view::npos ||
+                    ws.find("に") != std::string_view::npos || ws.find("が") != std::string_view::npos) {
+                    continue;
+                }
+            }
+            longest = w->length;
+        }
+        return longest;
+    };
+    // The Y of a phrase is a noun of its own (中, 日, 後; not the 出 of 日の出, a verb first).
+    {
+        const int at = cursor + static_cast<int>(tail);
+        const int y = c.length - static_cast<int>(tail);
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        bool noun = false;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64 && !noun; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w == nullptr || w->length != y) continue;
+            const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+            if (e == nullptr) continue;
+            if (e->cls != 'N' && e->cls != 'I') return nullptr;
+            noun = true;
+        }
+        if (!noun) return nullptr;
+    }
+    const int end = cursor + c.length;
+    const int longCover = end + reach(end, false);
+    for (std::size_t off = tail; off < source.size(); off += text::DecodeRune(source.substr(off)).size) {
+        const int k = cursor + static_cast<int>(off);
+        const int w = reach(k, true);
+        // The reading keeps a noun whose part past it is one kanji of a suffix (日の出 + 前, 男の子 + 達, 海の神 + 様; not the
+        // 身 of 中身).
+        const std::string_view past = k + w > end ? From(full, end).substr(0, static_cast<std::size_t>(k + w - end)) : std::string_view();
+        const bool suffix = text::DecodeRune(past).size == past.size() && !past.empty() &&
+                            RuneIn(text::DecodeRune(past).cp, "前後中達様君殿氏家内外上下用的性者人等方側々");
+        if (k + w <= end || k + w < longCover || suffix) return nullptr;
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head == nullptr || head->length >= c.length || cursor + head->length > k) continue;
+            const int stop = cursor + head->length;
+            if (stop == k || stop + reach(stop, false) == k) return shorter;
+        }
+        return nullptr;
+    }
+    return nullptr;
+}
+
+// The first base record of records that reads at full[cursor:] when a record ahead of it does
+// not and a longer noun row that it starts follows it; null otherwise (the first base record leads).
+const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, Record* records) {
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) first = first->child;
+    if (first == nullptr || NounRow(*first)) return nullptr;
+    const std::string_view text = From(full, cursor);
+    bool longerNoun = false;
+    for (const Record* r = first->child; r != nullptr && !longerNoun; r = r->child) {
+        longerNoun = r->user == nullptr && NounRow(*r) && r->source.size() > first->source.size() && text.starts_with(r->source);
+    }
+    if (!longerNoun) return nullptr;
+    const Item* read = InsertLateCandidate(full, cursor, token, first);
+    if (read == nullptr || read->group == nullptr) return nullptr;
+    const Entry* e = read->group->At(0);
+    for (const Record* r = first; r != nullptr && r != read->group->records; r = r->child) {
+        if (r->source == read->group->surface && e != nullptr && At(r->partCode, 0) == e->cls && From(r->partCode, 1) == e->code) {
+            return r == first ? nullptr : r;
+        }
+    }
+    return nullptr;
+}
+
+// LEX-4984: at the end of the retry budget, where a word starts at cursor (no reading from before it runs past it) and
+// the reading that failed is no verb, the longest reading among the records left at cursor after c's group that is
+// longer than c and ends at the end of the token or where a word of two or more characters, or one that starts with
+// kanji or katakana, starts; null for none.
+Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c) {
+    // A verb that failed keeps its place: its longer forms are its own endings (なくなって, not なくなってしまうで).
+    if (c.detail == nullptr || c.detail->cls == kDetailVerb) return nullptr;
+    // Only where a word starts: no reading from up to four characters back runs past cursor (the て of 知って, the
+    // かった of 良かった stay the ending of the word before).
+    int back = cursor;
+    for (int k = 0; k < 4 && back > 0; k++) {
+        back -= static_cast<int>(DecodeLastRune(full.substr(0, static_cast<std::size_t>(back))).size);
+        const Lookup l = DoLookup(From(full, back), kModeGeneral);
+        Record* rec = l.count == 0 ? nullptr : l.records;
+        for (int tries = 0; rec != nullptr && tries < 64; tries++) {
+            while (rec != nullptr && rec->source.empty()) rec = rec->child;
+            if (rec == nullptr) break;
+            const Item* it = InsertLateCandidate(full, back, token, rec);
+            if (it == nullptr || it->group == nullptr) break;
+            if (back + it->length > cursor) return nullptr;
+            rec = it->group->records;
+        }
+    }
+    Item* best = nullptr;
+    Record* rec = c.group == nullptr ? nullptr : c.group->records;
+    for (int tries = 0; rec != nullptr && tries < 64; tries++) {
+        while (rec != nullptr && rec->source.empty()) rec = rec->child;
+        if (rec == nullptr) break;
+        Item* it = InsertLateCandidate(full, cursor, token, rec);
+        if (it == nullptr || it->group == nullptr) break;
+        if (it->length > c.length && (best == nullptr || it->length > best->length)) {
+            const int end = cursor + it->length;
+            bool boundary = end >= static_cast<int>(full.size());
+            if (!boundary) {
+                const Lookup l = DoLookup(From(full, end), kModeGeneral);
+                const Item* next = l.count == 0 ? nullptr : InsertLateCandidate(full, end, token, l.records);
+                const char32_t lead = text::DecodeRune(From(full, end)).cp;
+                boundary = next != nullptr && (text::RuneCount(From(full, end).substr(0, static_cast<std::size_t>(next->length))) >= 2 ||
+                                               text::IsKanji(lead) || (lead >= U'ァ' && lead <= U'ヺ'));
+            }
+            if (boundary) best = it;
+        }
+        rec = it->group->records;
+    }
+    return best;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
-    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
+    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
@@ -2348,6 +2503,10 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
         if (Record* shorter = OverFusedParticle(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverCutWord(full, cursor, token, *candidate)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
@@ -2421,7 +2580,18 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     const int typ = Classify(source);
     const char part = At(candidate->Code(0), 0);
     if (part == '6' || ((typ == 24 || typ == 14) && part != '4' && part != '7' && part != '8') ||
-        IsDigit(At(source, 0)) || IsAlpha(At(source, 0)) || StartsWithSymbol(source) || candidateRetryCount >= 3) {
+        IsDigit(At(source, 0)) || IsAlpha(At(source, 0)) || StartsWithSymbol(source)) {
+        Insert(candidate);
+        return true;
+    }
+    if (candidateRetryCount >= 3) {
+        // The retries of the token are spent, so the reading that failed stands. A longer reading still left at the
+        // same point that reaches the end of the token, or a point where a word of two or more characters or one not
+        // in hiragana starts, takes its place (ためらう: ためら + う, not た + め + ら + う after ため and た failed).
+        if (Item* longer = settings.text ? LongerAtExhaustion(full, cursor, token, *candidate) : nullptr) {
+            Insert(longer);
+            return true;
+        }
         Insert(candidate);
         return true;
     }

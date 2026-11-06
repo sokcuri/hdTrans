@@ -20,7 +20,7 @@ dict:ordinal-first:2	第一それ、賛辞じゃねえし！！！	애초에 그
 dict:ordinal-first:2	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	이제……도련님이면 돼. 애초에 그런 성격이 아니고.	fix	local
 dict:ordinal-first:2	（……第一、俺みたいなガキを騙して何の意味があるんだ？）	(……애초에, 나 같은 녀석을 속여 무슨 의미가 있는 거야?)	fix	local
 dict:ordinal-first:1	第一、第二主砲！いい……撃て！	제1, 제2주포! 좋다……쏘아라!	fix	local
-dict:ordinal-first:1	第一人者だ。	제일인자다.	keep	defaults
+dict:ordinal-first:1	第一人者だ。	일인자다.	keep	defaults
 dict:ordinal-first:1	第一線で戦う	제일선에서 싸운다	keep	defaults
 dict:ordinal-first:1	第一印象は大事	첫인상은 중요	keep	defaults
 dict:ordinal-first:1	まず第一に、教えやすい。	가장 먼저, 가르치기 쉽다.	keep	defaults

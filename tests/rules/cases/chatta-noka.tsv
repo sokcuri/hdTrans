@@ -1,6 +1,6 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
-dict:novel-chatta-noka:4	ビックリさせちゃったかな	깜짝 시켜버렸을까	fix	defaults
+dict:novel-chatta-noka:4	ビックリさせちゃったかな	깜짝 놀라게 해버렸을까	fix	defaults
 dict:novel-chatta-noka:4	「うぅ…寝ちゃったかな」	has:자버렸을까	fix	defaults
 dict:novel-chatta-noka:5	じゃあ なんだ？ 言っちまいな	has:말해버려	fix	defaults
 dict:novel-chatta-noka:6	ほら 早く食べちゃいなさい。	has:먹어버려라.	fix	defaults

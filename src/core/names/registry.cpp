@@ -578,10 +578,36 @@ std::string Registry::DropReadings(std::string_view line, std::string* cueText, 
 
 namespace {
 
+// Whether the rest of a caption line after a word at its start and a space calls the one the word names:
+// it asks, exclaims or ends in a particle of address (甲児 どうした？, 夢葉 だめだよ, 舞 覚えてるか？),
+// not a statement (外中 ２枚看板のチームだった).
+bool CaptionCall(std::string_view after) {
+    // The first phrase of the rest, up to the next space (甲児 どうした？ あっ; not 船影 急速に接近中 … 速い！).
+    std::string_view a = TrimSpace(after);
+    for (std::size_t i = 0; i < a.size();) {
+        const text::Rune r = RuneAt(a, i);
+        if (r.cp == U' ' || r.cp == U'　') {
+            a = a.substr(0, i);
+            break;
+        }
+        i += std::max<std::size_t>(1, r.size);
+    }
+    while (!a.empty()) {
+        const text::Rune r = RuneBefore(a, a.size());
+        if (!InRunes(r.cp, "。…‥～〜ー・、")) break;
+        a.remove_suffix(r.size);
+    }
+    if (a.empty()) return false;
+    for (const std::string_view end : {"？", "?", "！", "!", "よ", "ぞ", "ぜ", "ね", "か", "って", "ろ"}) {
+        if (a.ends_with(end)) return true;
+    }
+    return false;
+}
+
 // Whether text before and after a word frame it as a person's name: a self-introduction (私は_です,
 // 俺は_だ, _と申します, _っていいます), a greeting or a call before the name at the end of an utterance
-// (ただいま、_, おはよう、_！), or a speaker label at the line start (_「).
-bool PersonFrame(std::string_view before, std::string_view after) {
+// (ただいま、_, おはよう、_！), a speaker label at the line start (_「), or a caption call.
+bool PersonFrame(std::string_view run, std::string_view before, std::string_view after) {
     std::string_view b = before;
     while (b.ends_with(" ") || b.ends_with("　")) b.remove_suffix(b.ends_with(" ") ? 1 : std::string_view("　").size());
     for (const std::string_view a : {"と申します", "と申す", "っていいます", "って言います", "といいます", "と言います", "っていうの", "って言うの"}) {
@@ -604,6 +630,24 @@ bool PersonFrame(std::string_view before, std::string_view after) {
         }
     }
     const std::string_view t = TrimSpace(b);
+    // A caption call: the name alone at the line start before a space (凶真 これからも…, 甲児 どうした？),
+    // or after a calling interjection and a space (おい 鯨木 どうした).
+    const bool spaceAfter = after.starts_with(" ") || after.starts_with("　");
+    // Not a run that starts with a numeral or a prefix of kind or count (百倍, 一域, 各団: words).
+    const bool prefixed = InRunes(RuneAt(run, 0).cp, "一二三四五六七八九十百千万億零各毎全諸両本当同某此其半第");
+    if (t.empty() && spaceAfter && before.empty() && !prefixed && CaptionCall(after)) return true;
+    const bool spaced = before.ends_with(" ") || before.ends_with("　");
+    // Not before って or と, which quote the word (なあ 百鬼って何なんだ？).
+    const bool callEnd = after.empty() || after.starts_with("！") || after.starts_with("？") || after.starts_with("!") ||
+                         after.starts_with("?") || after.starts_with("…") || after.starts_with("。") || after.starts_with("｡") ||
+                         after.starts_with("、");
+    if (spaced && (spaceAfter || callEnd)) {
+        // The word before the space, after the last space or mark (航太？ おい 航太…).
+        std::size_t k = b.size();
+        while (k > 0 && !InRunes(RuneBefore(b, k).cp, "「『（(【 　。！？!?…")) k -= RuneBefore(b, k).size;
+        const std::string_view word = b.substr(k);
+        if (dict::InClass(HDTRANS_CLASS("name.call-word"), word)) return true;
+    }
     return t.empty() && after.starts_with("「");
 }
 
@@ -655,6 +699,10 @@ void Registry::Add(std::string_view rawLine) {
         count(kanaFree_, u.t);
         if (bare(u.particle)) count(kanaBare_, u.t);
     }
+    for (const Coordination& c : CoordinatedKana(line)) {
+        const auto [it, added] = coordinated_[c.word].emplace(c.name, c.weak);
+        if (!added) it->second = it->second && c.weak;
+    }
     for (const LooseUse& u : LooseKanaUses(line)) {
         Loose& l = kanaLoose_[u.t];
         (u.closed ? l.closed : l.open)++;
@@ -673,6 +721,19 @@ void Registry::Add(std::string_view rawLine) {
     }
     const std::vector<Run> runs = RunsOf(line);
     for (const std::string& t : ProseRuns(line)) count(prose_, t);
+    for (const Run& r : runs) {
+        if (!r.kanji && AllRunes(r.text, IsKatakana)) kataRuns_.emplace(r.text);
+    }
+    // A whole katakana run of three kana or more before a case particle or も (オレーリアは, ヤーナも).
+    for (const Run& r : RunsOf(line)) {
+        if (r.kanji || !AllRunes(r.text, IsKatakana) || RuneCount(r.text) < 3 || r.text.ends_with("ッ")) continue;
+        if (r.start > 0 && (IsKatakana(RuneBefore(line, r.start).cp) || RuneBefore(line, r.start).cp == U'・' || RuneBefore(line, r.start).cp == U'＝')) continue;
+        const std::string_view after = std::string_view(line).substr(r.end);
+        if (dict::StartsWithMember(HDTRANS_CLASS("name.katakana-use-after"), after) == 0) continue;
+        count(kataUse_, std::string(r.text));
+        if (dict::StartsWithMember(HDTRANS_CLASS("name.katakana-subject-after"), after) > 0) count(kataSubject_, std::string(r.text));
+        if (dict::StartsWithMember(HDTRANS_CLASS("name.katakana-place-after"), after) > 0) count(kataPlace_, std::string(r.text));
+    }
     std::size_t chain = 0;  // first run of the current katakana chain
     for (std::size_t i = 0; i < runs.size(); i++) {
         const Run& run = runs[i];
@@ -683,7 +744,7 @@ void Registry::Add(std::string_view rawLine) {
             // Not a run that ends in a kanji honorific (姫氏「: 姫 and 氏).
             const bool honorificEnd = run.text.ends_with("氏") || run.text.ends_with("君") || run.text.ends_with("様") ||
                                       run.text.ends_with("殿") || run.text.ends_with("嬢");
-            if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
+            if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(run.text, std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
                 count(framed_, std::string(run.text));
                 honGuess_.insert(std::string(run.text));
             }
@@ -725,7 +786,15 @@ void Registry::Add(std::string_view rawLine) {
             const std::string_view after = run.text.size() > t.size() && run.text.starts_with(t)
                                                ? run.text.substr(t.size())
                                                : std::string_view(line).substr(run.end);
-            if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま")) honGuess_.insert(t);
+            // The く of a verb before んだ is no くん (鍵開くんだよ: 開く).
+            const text::Rune last = RuneBefore(t, t.size());
+            const bool verbKu = after.starts_with("くん") && !after.starts_with("くん、") &&
+                                (after.substr(std::string_view("くん").size()).starts_with("だ") ||
+                                 after.substr(std::string_view("くん").size()).starts_with("で") ||
+                                 after.substr(std::string_view("くん").size()).starts_with("じゃ")) &&
+                                InflectedRun(std::string(t.substr(t.size() - last.size)) + "く") &&
+                                !AdjectiveKanji(t.substr(t.size() - last.size));  // 咲太くん: 太く is an adjective's
+            if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま") && !verbKu) honGuess_.insert(t);
         }
         if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
             count(agents_, std::string(run.text));
@@ -733,6 +802,20 @@ void Registry::Add(std::string_view rawLine) {
         if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
             !RoleLike(run.text) && !Flags(run.text).role) {
             count(gloss_, std::string(run.text));
+        }
+    }
+    // A two-part reading after a space and a spaced base (双寺 有仁 (そうじ ありひと)), which FindGloss,
+    // reading no space before the parenthesis, does not see: each run takes its part (spec LEX-4950).
+    for (std::size_t from = 0; from <= line.size();) {
+        RubyMatch m;
+        if (!FindReading(line, from, m)) break;
+        from = m.end;
+        if (!m.spaced) continue;
+        if (const auto split = SpacedPair(line, m); split.has_value()) {
+            count(gloss_, split->first.first);
+            count(gloss_, std::string(m.base));
+            SetReading(split->first.first, split->first.second);
+            SetReading(std::string(m.base), split->second);
         }
     }
     for (std::size_t from = 0; from <= line.size();) {
@@ -868,13 +951,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
         // A kanji name no dictionary has stands for the person after one honorific, as it is no
         // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
-        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !internal::GuessedName(t).empty()) n.score += 1;
+        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !OldFormWord(t) && !internal::GuessedName(t, GuessFallback(t)).empty()) n.score += 1;
         n.person = true;
     }
     // A kanji name no dictionary has, in a person frame, is a name its kanji's readings give (LEX-4833).
     for (const auto& [t, c] : framed_) {
         (void)c;
-        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || internal::GuessedName(t).empty()) continue;
+        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || OldFormWord(t) || internal::GuessedName(t, GuessFallback(t)).empty()) continue;
         Name& n = all[t];
         n.score = std::max(n.score, kThreshold);
         n.person = true;
@@ -903,6 +986,26 @@ const std::map<std::string, Name>& Registry::Accepted() {
     }
     for (const auto& [t, l] : kanaLoose_) {
         if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2 && inflectedOk(t, l.bare)) free.insert(t);
+    }
+    // A katakana run no dictionary or name layer has that the document writes three times or more before
+    // a particle (オレーリアは, オレーリアの, オレーリアが) is a name, read whole by its sound, when a Japanese
+    // word written in katakana inside it would garble it (オレ 나: 나리어), unless common katakana words
+    // cover it (プリンセスドレス: プリンセス, ドレス; spec LEX-4953).
+    for (const auto& [t, c] : kataUse_) {
+        if (c < 3 || Flags(t).records > 0 || (snap_ != nullptr && !snap_->NameRecords(t).empty()) || CommonWords(t) ||
+            CoveredByWords(t) || TranslatedWord(t) || HiraganaWord(t) || !GarbledByWord(t) || LayerFullName(t)) {
+            continue;
+        }
+        // Only a person: the document makes it a subject or a topic twice or more (オレーリアは) and more often
+        // than it puts it before に, へ, で, を or から, as a place or a thing (フラーゼルに行く, ノストラに潜入,
+        // トリマキを), which keeps the reading of its words.
+        const auto sub = kataSubject_.find(t);
+        const auto place = kataPlace_.find(t);
+        const int subjects = sub == kataSubject_.end() ? 0 : sub->second, places = place == kataPlace_.end() ? 0 : place->second;
+        if (subjects < 2 || subjects <= places) continue;
+        Name& n = all[t];
+        n.score = std::max(n.score, kThreshold);
+        n.person = true;
     }
     for (const std::string& t : free) {
         if (Flags(t).records > 0 || WordThenParticle(t)) continue;
@@ -1131,6 +1234,24 @@ const std::map<std::string, Name>& Registry::Accepted() {
             n.person = true;
         }
     }
+    // A kana noun of the dictionary joined by と or や to a name the document reads (そらとみゆきは, みゆきと
+    // そらは) is a name too: the pair names two people (spec LEX-4954).
+    kanaJoined_.clear();
+    for (const auto& [x, ns] : coordinated_) {
+        // Only a noun of the dictionary (そら 空, ひかり 光), no determiner, particle or verb (その, だけ, した).
+        if ((WordClasses(x) & kNounClass) == 0) continue;
+        for (const auto& [n, weak] : ns) {
+            const auto it = all.find(n);
+            const DictFlags f = Flags(n);
+            const bool shown = it != all.end() && it->second.person && it->second.score >= kThreshold;
+            const bool named = shown || (!weak && (f.layerGiven || f.layerSurname || f.person) && !f.common && !f.pronoun && !f.role);
+            if (!named || n == x) continue;
+            Name& name = all[x];
+            name.score = std::max(name.score, kThreshold);
+            name.person = true;
+            kanaJoined_[x].insert(n);
+        }
+    }
     scores_.clear();
     FindSiblingNames();
     for (const auto& [t, n] : all) {
@@ -1142,7 +1263,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
             // but あおい空).
             const auto k = kanaHon_.find(t);
-            if (k == kanaHon_.end() && free.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
+            if (k == kanaHon_.end() && ((free.count(t) != 0 && Flags(t).records == 0) || kanaJoined_.count(t) != 0) && n.score >= need) {
                 scores_[t] = n;
                 continue;
             }
@@ -1343,6 +1464,91 @@ bool Registry::NicknameCompound(std::string_view t) {
     return false;
 }
 
+// Whether words of two kana or more with a common sense in the dictionaries, names of the layer too,
+// cover the katakana run s (ラッキーアイテム: ラッキー, アイテム; not オレーリア, whose ーリア is none).
+// Whether the katakana run s spells in hiragana a word of the dictionaries (トリマキ: とりまき 取り巻き),
+// a Japanese word written in katakana.
+bool Registry::HiraganaWord(std::string_view s) {
+    std::string hiragana;
+    for (std::size_t i = 0; i < s.size(); i += RuneAt(s, i).size) {
+        const char32_t c = RuneAt(s, i).cp;
+        if (c < U'ァ' || c > U'ヶ') return false;
+        text::AppendRune(hiragana, c - 0x60);
+    }
+    return Flags(hiragana).records > 0;
+}
+
+// Whether the katakana run s is a surname and a given name of the name layer written together (カワムラユキエ:
+// カワムラ, ユキエ), which reads as the two.
+bool Registry::LayerFullName(std::string_view s) {
+    const std::vector<std::size_t> starts = RuneStarts(s);
+    // Either half of three kana or more a person of the name layer or the dictionaries (ユキエ).
+    for (std::size_t k = 3; k + 3 <= starts.size(); k++) {
+        const DictFlags a = Flags(s.substr(0, starts[k])), b = Flags(s.substr(starts[k]));
+        if (a.layerSurname || a.surname || a.person || b.layerGiven || b.given || b.person) return true;
+        // Or a proper noun of the dictionaries (カワムラ 카와무라).
+        if (snap_ != nullptr) {
+            for (const std::string_view half : {s.substr(0, starts[k]), s.substr(starts[k])}) {
+                for (const dict::Candidate& c : snap_->RetrieveRecords(half, dict::LookupMode::General)) {
+                    if (c.codes != nullptr && c.source == half && c.codes->part.ProperNoun()) return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// Whether a Japanese word written in katakana that the dictionary translates (TranslatedWord: オレ 나,
+// トロ 다랑어) stands inside the katakana run s, which a reading by its words would garble.
+bool Registry::GarbledByWord(std::string_view s) {
+    const std::vector<std::size_t> starts = [&] {
+        std::vector<std::size_t> v = RuneStarts(s);
+        v.push_back(s.size());
+        return v;
+    }();
+    if (snap_ == nullptr) return false;
+    // A piece whose hiragana spelling is a word and whose Korean is no sound of it (オレ おれ 나).
+    auto japanese = [&](std::string_view w) {
+        std::string hiragana;
+        for (std::size_t i = 0; i < w.size(); i += RuneAt(w, i).size) {
+            const char32_t c = RuneAt(w, i).cp;
+            if (c < U'ァ' || c > U'ヶ') return false;
+            text::AppendRune(hiragana, c - 0x60);
+        }
+        if (Flags(hiragana).records == 0) return false;
+        const std::string sound = text::FromKana(w, text::Preset::Fan);
+        bool any = false;
+        for (const dict::Candidate& c : snap_->RetrieveRecords(w, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.source != w || c.codes->sem.HasPrefix("QPN") || !IsHangulText(c.target)) continue;
+            if (text::SameSound(c.target, sound)) return false;
+            any = true;
+        }
+        return any;
+    };
+    for (std::size_t i = 0; i + 2 < starts.size(); i++) {
+        for (std::size_t j = i + 2; j < starts.size() && j <= i + 4; j++) {
+            // At the start or the end of the run (オレ|ーリア, デル|トロ; not ス|トック|バーン).
+            if ((i == 0 || j + 1 == starts.size()) && japanese(s.substr(starts[i], starts[j] - starts[i]))) return true;
+        }
+    }
+    return false;
+}
+
+bool Registry::CoveredByWords(std::string_view s) {
+    if (!AllRunes(s, IsKatakana)) return false;
+    std::vector<std::size_t> starts = RuneStarts(s);
+    starts.push_back(s.size());
+    std::vector<bool> split(starts.size(), false);
+    split[0] = true;
+    for (std::size_t i = 0; i + 2 < starts.size(); i++) {
+        if (!split[i]) continue;
+        for (std::size_t j = i + 2; j < starts.size(); j++) {
+            if (!split[j] && Flags(s.substr(starts[i], starts[j] - starts[i])).common) split[j] = true;
+        }
+    }
+    return split.back();
+}
+
 bool Registry::CommonWords(std::string_view s) {
     if (!AllRunes(s, IsKatakana)) return false;
     auto word = [&](std::string_view w) {
@@ -1477,6 +1683,22 @@ std::string Registry::Key() {
     return out;
 }
 
+bool Registry::JoinedAt(std::string_view line, std::size_t a, std::size_t b, const std::string& t) {
+    Accepted();
+    const auto it = kanaJoined_.find(t);
+    if (it == kanaJoined_.end()) return false;
+    const auto joins = [](char32_t c) { return dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), c); };
+    const std::string_view before = line.substr(0, a), after = line.substr(b);
+    for (const std::string& n : it->second) {
+        if (!after.empty() && joins(FirstRune(after).cp) && after.substr(FirstRune(after).size).starts_with(n)) return true;
+        if (!before.empty() && joins(internal::RuneBefore(before, before.size()).cp) &&
+            before.substr(0, before.size() - internal::RuneBefore(before, before.size()).size).ends_with(n)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
     const std::map<std::string, Name>& acc = Accepted();
     std::vector<Occurrence> out;
@@ -1529,12 +1751,14 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         const bool honorific = !KanaHonorificAt(line.substr(b)).empty();
         // A hiragana name starts the line, follows other than hiragana or stands before an
         // honorific (妹のさよりちゃん, ねえあおいさん), but not a creature, food or adverb there.
+        // So does a kana word the document joins to a name, there (みゆきとそらは; spec LEX-4954).
+        const bool joined = AllRunes(found, IsHiragana) && JoinedAt(line, a, b, found);
         if (AllRunes(found, IsHiragana)) {
-            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing);
+            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing) || joined;
         }
         const bool bare = acc.at(found).honorificOnly && !honorific;
         if (ok) {
-            out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
+            out.push_back(Occurrence{a, b, found, bare || (!joined && Guarded(line, a, b))});
         } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {
             // A common word that only honorifics name stays the word inside a hiragana run
             // (最後のひかり).

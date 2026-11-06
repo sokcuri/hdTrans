@@ -166,7 +166,8 @@ Group* Worker::NewGroup(Record* records, char mode) {
         bool accept = true;
         if (kind == '4' && !g->entries.empty()) {
             const bool special = (rec->source == kJaGyou || rec->source == kJaI) && (At(code, 3) == '0' || At(code, 3) == '1');
-            if (!special || (mode != '6' && mode != '7')) accept = VerbClassJoins(mode, firstSubtype, At(code, 3));
+            // 行う and 行く (行, い) share the た, the て and the ちゃ of て+しまう: 行っちゃ is either (行っちゃダメ 가면 안 돼).
+            if (!special || (mode != '6' && mode != '7' && mode != '0' + 17)) accept = VerbClassJoins(mode, firstSubtype, At(code, 3));
         }
         if (accept) g->entries.push_back(NewEntry(*rec));
         rec = rec->child;

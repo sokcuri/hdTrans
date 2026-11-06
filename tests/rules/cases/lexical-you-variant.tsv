@@ -101,9 +101,9 @@ normalize:predicate-variant	半分はふざけている様にも聞こえるフ�
 normalize:predicate-variant	黒田官兵衛はまだ、何か隠している様に感じた。	has:숨기고 있는 것처럼 느꼈다	keep	normalize
 normalize:predicate-variant	ご覧の様に、柵は大きく形を歪めています。	has:보시는 것처럼,	keep	normalize
 normalize:predicate-variant	今ご覧の様に、大変良い物が揃っています」	has:보시는 것처럼,	keep	normalize
-normalize:predicate-variant	「私はカレー屋で食い逃げしている所をみなみ様に助けてもらいました。	has:미나미님	keep	normalize
-normalize:predicate-variant	「な、何を仰ってるんですか？ひなた様は正真正銘僕達の子供ですよ？」	has:히나타님은	keep	normalize
-normalize:predicate-variant	「は、はい！もちろんであります！あかり様は我等が第２の主として	has:아카리님은	keep	normalize
+normalize:predicate-variant	「私はカレー屋で食い逃げしている所をみなみ様に助けてもらいました。	has:미나미 님	keep	normalize
+normalize:predicate-variant	「な、何を仰ってるんですか？ひなた様は正真正銘僕達の子供ですよ？」	has:히나타 님은	keep	normalize
+normalize:predicate-variant	「は、はい！もちろんであります！あかり様は我等が第２の主として	has:아카리 님은	keep	normalize
 normalize:predicate-variant	俺は王様について、部屋に入った。	has:임금님	keep	normalize
 normalize:predicate-variant	「私は、皆様に愛される王妃になります！	has:여러분	keep	normalize
 normalize:predicate-variant	今も奥様の部屋に飾られている。	has:사모님의 방	keep	normalize

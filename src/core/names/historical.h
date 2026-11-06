@@ -29,7 +29,10 @@ struct HistoricalLine {
 };
 
 HistoricalLine ReadHistoricalLine(const dict::Snapshot& snap, std::string_view line);
-std::string HistoricalRows(const dict::Snapshot& snap, std::span<const HistoricalLine* const> lines);
+// The rows of lines; a listed entry (ListedName) of a key in readElsewhere, a name the document's
+// registry reads on its own evidence, gives no row (宗哲 呼んで！ leaves 宗哲 to the registry).
+std::string HistoricalRows(const dict::Snapshot& snap, std::span<const HistoricalLine* const> lines,
+                           const std::set<std::string>& readElsewhere);
 
 // The rows JP TAB KR TAB name, one per line and sorted by JP, of the premodern names
 // in lines. Among the readings of a surface found in several runs, the longest run wins.

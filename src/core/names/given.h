@@ -41,7 +41,7 @@ std::string_view OnReading(char32_t kanji);
 std::string_view NameKana(char32_t kanji, bool tail);
 // The Korean guessed for a two-kanji name no dictionary reads, from NameKana (千莉 치리); "" when
 // either kanji has no reading there (spec LEX-4827).
-std::string GuessedName(std::string_view kanji);
+std::string GuessedName(std::string_view kanji, bool fallback = false);
 
 }  // namespace internal
 

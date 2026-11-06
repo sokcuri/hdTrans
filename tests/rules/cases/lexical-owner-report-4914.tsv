@@ -1,0 +1,37 @@
+# 규칙: LEX-4914
+rule	input	expected	kind	layer
+dict:jisjk:83471	けれど、彼女が注目を浴びるのは〝魔学〟の第一人者だからだ。	has:일인자이기 때문이다	fix	defaults
+dict:jisjk:83471	これが、王国一の奇人。魔学の第一人者、世界を変革せし人。	has:마학의 일인자	fix	defaults
+dict:jisjk:83471	彼はＰｅＴＳ研究の第一人者であり、おそらく世界で唯一の研究者。	has:연구의 일인자이며	fix	defaults
+dict:jisjk:83471	D区画で働いてるエーテル料理第一人者の、姉さんのような料理人になるのが俺の夢なんだ。	has:요리 일인자의	fix	defaults
+dict:jisjk:83471	魔法を使えないからこそ〝魔学〟を編み出した第一人者であった。	has:고안해 낸 일인자였다	fix	defaults
+dict:jisjk:83471	第一印象が大事だ	has:첫인상이	keep	defaults
+dict:jisjk:83471	第一艦隊、出撃せよ	has:제1함대	keep	defaults
+dict:w:34434	業界の第二人者だ	has:업계의 이인자다	fix	words
+dict:w:34434	第三者の意見を聞こう	has:제삼자의 의견	keep	words
+cx:rank-banme:5	三番手の候補	has:3번째 후보	fix	rewrites
+cx:rank-banme:5	第三者の意見を聞こう	lacks:번째	keep	rewrites
+cx:rank-banme:10	彼は二番手に甘んじた	has:2번째에 만족했다	fix	rewrites
+cx:rank-banme:10	四番手だった	has:4번째였다	fix	rewrites
+cx:rank-banme:10	先発の二番手	has:2번째	fix	rewrites
+cx:rank-banme:10	それでも、依然３番手にはかわりありません。	has:3번째에는	fix	rewrites
+cx:rank-banme:10	「ううん……色仕掛けが一番手っ取り早いんですけどね」	lacks:번째	keep	rewrites
+cx:rank-banme:10	二番目の席に座った	lacks:번수	keep	rewrites
+dict:jisjk:117066	「この薬、よく効くよ」	has:잘 들어	fix	defaults
+dict:jisjk:117066	この薬はよく効きます	has:잘 듣습니다	fix	defaults
+dict:jisjk:117066	この薬はよく効きません	has:효과가 없습니다	fix	defaults
+dict:jisjk:117066	この湿布、よく効く	has:잘 듣는다	fix	defaults
+dict:jisjk:117066	「それで毒の効くビッグノームかー。」	has:효과가 있는	keep	defaults
+dict:jisjk:117066	まるで万病に効く即効薬みたいだ	has:효과가 있는	keep	defaults
+cx:vehicle-depart:10	「電車は八時に出るよ」	has:전철은 8시에 출발해	fix	rewrites
+cx:vehicle-depart:10	バスは何時に出ますか	has:출발합니까	fix	rewrites
+cx:vehicle-depart:10	船は明日の朝出る	has:출발한다	fix	rewrites
+cx:vehicle-depart:10	終電は零時に出ます	has:출발합니다	fix	rewrites
+cx:vehicle-depart:10	家を八時に出る	has:집을 8시에 나온다	keep	rewrites
+cx:vehicle-depart:10	電車が出てきた	lacks:출발	keep	rewrites
+cx:vehicle-depart:10	電車から人が出る	lacks:출발	keep	rewrites
+cx:vehicle-depart:10	《船は港を出てすぐに深い霧の中に入り込み》	lacks:출발	keep	rewrites
+cx:ne-promise:20	よく効くね	has:잘 듣네	fix	rewrites
+cx:ne-promise:20	この薬、よく効くね	has:이 약, 잘 듣네	fix	rewrites
+cx:ne-promise:40	よく効くね	lacks:들을게	keep	rewrites
+cx:ne-promise:40	先に行くね	has:먼저 갈게	keep	rewrites

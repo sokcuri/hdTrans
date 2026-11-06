@@ -1,0 +1,27 @@
+# 규칙: GRM-3944
+rule	input	expected	kind	layer
+conjugation:line-end-imperative	さあ 取れ	자 취해라	fix	conjugation
+conjugation:line-end-imperative	そう言うな これも鍛練のうちだと思え	그렇게 말한데 이것도 단련 가운데라고 생각해라	fix	conjugation
+conjugation:line-end-imperative	シャツを脱げ	셔츠를 벗어라	fix	conjugation
+conjugation:line-end-imperative	すれば ろくなことにならぬと思え	하면 좋게 되지 않는이라고 생각해라	fix	conjugation
+conjugation:line-end-imperative	今は 命があっただけ よかったと思え	지금은 생명이 있었을 뿐 좋았다고 생각해라	fix	conjugation
+conjugation:line-end-imperative	ぶっ飛ばさねえだけマシだと思え	날려 버리지 않는 것뿐 낫다고 생각해라	fix	conjugation
+conjugation:line-end-imperative	自分で取れ	스스로 취해라	fix	conjugation
+conjugation:line-end-imperative	地上で死ねるのを 幸せだと思え	지상에서 죽을 수 있는 것을 행복하다고 생각해라	fix	conjugation
+conjugation:line-end-imperative	これは取れ	이것은 취해라	fix	conjugation
+conjugation:line-end-imperative	さあ 早く その“と金”を取れ	자 빨리 그 “와 돈”을 취해라	fix	conjugation
+conjugation:line-end-imperative	じゃんじゃんと全部脱げ	척척 전부 벗어라	fix	conjugation
+conjugation:line-end-imperative	３度目はないと思え	3번째는 없다고 생각해라	fix	conjugation
+conjugation:line-end-imperative	生きている者は銃を 剣を取れ	살아 있는 사람은 총을 검을 들어라	fix	conjugation
+conjugation:line-end-imperative	女王の御前だ サングラスを取れ	여왕의 어전이다 선글라스를 벗어라	fix	conjugation
+conjugation:line-end-imperative	ビンを取れ	빈을 취해라	fix	conjugation
+conjugation:line-end-imperative	そして 服の耐久値が減ってくのを確認しながら 会話を続け	그리고 옷 내구치가 줄어들어 가는 것을 확인하면서 대화를 계속하고	keep	conjugation
+conjugation:line-end-imperative	砂糖を入れ	설탕을 넣고	keep	conjugation
+conjugation:line-end-imperative	ドアを開け 俺の子犬を逃がした	문을 열고 내 강아지를 놓쳤다	keep	conjugation
+conjugation:line-end-imperative	足を滑らせ 死ぬんじゃないかと	발이 미끄러지고 죽을 것 같습니다	keep	conjugation
+conjugation:line-end-imperative	今度 誕生するアテナは 神々との戦いに敗れ	이번에 탄생하는 아테나는 신들과의 싸움에 지고	keep	conjugation
+conjugation:line-end-imperative	ほっそりした指を絡め	가느다란 손가락을 걸고	keep	conjugation
+conjugation:line-end-imperative	涙をこらえ	눈물을 참고	keep	conjugation
+conjugation:line-end-imperative	立ちはだかる強敵を退け	가로막는 강적을 물리치고	keep	conjugation
+conjugation:line-end-imperative	こいつの為に４つの大陸 12の国を追い続け	이 녀석을 위해 4개의 대륙 12의 나라를 계속 쫓고	keep	conjugation
+conjugation:line-end-imperative	ボタンが取れ	버튼이 떨어지고	keep	conjugation

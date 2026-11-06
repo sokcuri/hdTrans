@@ -1,0 +1,52 @@
+# 규칙: GRM-3960
+rule	input	expected	kind	layer
+normalize:ru-contraction	「え、じゃあなんでメヴィオンの中いんの俺」	「어, 자 왜 메비온 안 있는 거 나」	fix	normalize
+normalize:ru-contraction	昂晴はどうすんの？希望業種とかあんの？	앙청은 어떻게 하는 거야? 희망 업종이라든지 있는 거야?	fix	normalize
+normalize:ru-contraction	何か やってみたいこととかあんの？	뭔가 해 보고 싶은 것이라든지 있는 거야?	fix	normalize
+normalize:ru-contraction	分かんねえもんだね こんな面で モテんのか？	모르는 걸이구나 이런 면에서 인기를 끄는 건가?	fix	normalize
+normalize:ru-contraction	清めんのよ 全てを これで… 嫌い！	정화해 모든 것을 이것으로… 싫어!	fix	normalize
+normalize:ru-contraction	あんたなんかに 何が分かんのよ｡	너같은 것에 무엇을 알 수 있는 거야.	fix	normalize
+normalize:ru-contraction	寅さん 帰ってくんの？	토라 씨 돌아오는 거야?	fix	normalize
+normalize:ru-contraction	「ギャル系で攻めんならよ、高雄妹は超えてこいや！」	「갸루계로 공격한다면, 다카오여동생은 넘고 와야!」	fix	normalize
+normalize:spoken-verb	親方 お帰んなさい	우두머리 어서 오세요	fix	normalize
+normalize:spoken-verb	だめだこいつ話になんねぇ。	안된다 이 녀석 이야기가 되지 않는다.	fix	normalize
+normalize:spoken-verb	だから うまくなんないんじゃないの？	그러니까 능숙해지지 않는 거 아니야?	fix	normalize
+normalize:spoken-verb	殺しちまったらシャレになんねえぞ	죽여버리면 장난이 아니야	fix	normalize
+normalize:spoken-verb	「心配すんな、デスソース持ち歩いてっから。自前でなんでも辛くできる！」	「걱정하지 마, 데스 소스 가지고 다니고 있으니까. 자기 부담으로 뭐든 괴롭게 할 수 있어!」	fix	normalize
+normalize:spoken-verb	泣かせとけばよかった、とクノンは思った。	울려 둘 걸 그랬다, 라고 쿠논은 생각했다.	fix	normalize
+normalize:spoken-verb	任しとけって！ヒヒ…｡	맡겨 두라고! 히히….	fix	normalize
+normalize:spoken-verb	お母さんやっとくから。 あっ 本当？	엄마 해 둘 테니까. 앗 정말?	fix	normalize
+normalize:spoken-verb	わしらは黙って 見とくしかないねん	우리들은 입을 다물어 봐 둘 수밖에 없거든	fix	normalize
+normalize:spoken-verb	へっ、良く分かってんじゃん	헷, 잘 알고 있잖아	fix	normalize
+normalize:spoken-verb	「それと同時に、異世界を歩かないのも勿体無いとも思ってるんだよ。どうすっかねぇ……」	「그것과 동시에, 이세계를 걷지 않는 것도 아깝다고 생각해. 어떻게 하는 거야……」	fix	normalize
+normalize:spoken-verb	「まさか…本当に魔女だってのか？」	「설마…정말 마녀라는 거야?」	fix	normalize
+normalize:spoken-verb	ええ？ てめえら 何しやがんだ	어? 네 녀석들 뭐하는 거야	fix	normalize
+normalize:spoken-verb	俺様を誰だと思ってやがんだい？ え？	이 몸을 누구라고 생각하는 거야? 어?	fix	normalize
+normalize:ru-contraction	足跡にはレベル３のハンターなんて腐るほどいんだよッ！	발자국에는 레벨 3의 헌터 같은 건 썩는 만큼 있어!	fix	normalize
+dict:grm:3960:弱っち-1	弱っちいなあ、私	약하다, 나	fix	lookup
+dict:grm:3960:弱っち-1	どいつも こいつも弱っちくて つまんねえなあ！	어느 놈도 이 녀석도 약하고 재미없구나!	fix	lookup
+normalize:fused-adjective	おいおい おいおい そう固えこと言うなよ なっ	이봐 이봐 이봐 이봐 그렇게 단단한 소리 하지 마 그치	fix	normalize
+normalize:ru-contraction	お前は、姿勢を維持するための筋肉が足りんのだ	너는, 자세를 유지하기 위한 근육이 충분하지 않는 것이다	keep	normalize
+normalize:ru-contraction	そうとも言えんのだ	그렇다고도 말할 수 없는 것이다	keep	normalize
+normalize:ru-contraction	確信が持てんのだ	확신을 가질 수 없는 것이다	keep	normalize
+normalize:ru-contraction	意外と、人多いんだね	의외로, 사람 많다	keep	normalize
+normalize:ru-contraction	わたしはいいんだよ。人生ごと、この人に賭けてるから	나는 좋아. 인생째, 이 사람에게 걸고 있으니까	keep	normalize
+normalize:spoken-verb	言っとくけど、お茶請けはないからね	말해두는데, 다과는 없으니까	keep	normalize
+normalize:spoken-verb	むぅ～！ズルっこなのじゃ！好きとか言うな	무우~! 속임수오고인 거야! 좋아라든가 말하지 마	keep	normalize
+normalize:spoken-verb	そう言われても、わたしが小さいときはそれが普通だったから	그런 말을 들어도, 내가 작을 때는 그것이 보통이었으니까	keep	normalize
+normalize:spoken-verb	まったく。相変わらずめんどくさいわねぇ、久遠	정말이지. 변함없이 귀찮네, 영원	keep	normalize
+normalize:ru-contraction	兄さんのことを考えると、お胸がちくちくするです	형님을 생각하면, 가슴이 따끔따끔합니다	keep	normalize
+normalize:spoken-verb	隼斗もすっかり逞しくなったな。胸板もこんなに厚くなって	하야토도 완전히 다부져졌군. 가슴팍도 이렇게 두꺼워져	keep	normalize
+normalize:spoken-verb	「あ、謝んないでよ……筧は悪くない」	「아, 사과하지 마……견은 나쁘지 않아」	keep	normalize
+normalize:spoken-verb	ならほっとけば良いじゃない。相手にするだけ時間の無駄よね	그렇다면 가만히 두면 되잖아. 상대로 할 뿐 시간 낭비지	keep	normalize
+normalize:ru-contraction	おい何でお前も手伝わんのだ？	어이 왜 너도 돕지 않는 거야?	keep	normalize
+normalize:ru-contraction	ふん、器になる適正がある以外で、この女になんの価値があるというのよ	흥, 그릇이 되는 적성이 있는 이외로, 이 여자에게 무슨 가치가 있다는 것	keep	normalize
+normalize:ru-contraction	か、可愛いんならよかったんですけど	귀, 귀여운다면 좋았는데요	keep	normalize
+normalize:ru-contraction	「これは……本当に俺の人生なのか？　こんな人生になんの意味がある？」	「이건……정말 내 인생이야? 이런 인생에 무슨 의미가 있어?」	keep	normalize
+normalize:toku	幼いときから わたしは人が地獄へ流される印として	어릴 때로부터 나는 사람이 지옥에 떠밀리는 표로서	keep	normalize
+normalize:ru-contraction	「昨夜から今朝まであのテンションらしいよ？！ 責任取れんの？！」	「어젯밤부터 오늘 아침까지 그 텐션인 것 같아?! 책임 잡히는 거야?!」	fix	normalize
+normalize:ru-contraction	何でみんな鬼怒に豆投げんのよ！？	왜 모두 키누에 콩 던지는 거야!?	fix	normalize
+normalize:toku	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 선술집, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	normalize
+normalize:toku	フタサンマルマル。提督、お疲れだな。明日も忙しいだろ？ ちと寝とけって。ああ、お疲れ。	2300. 제독, 피곤하네. 내일도 바쁘지? 좀 자 두라고. 아, 수고했어.	fix	normalize
+normalize:fused-adjective	いいじゃん細けえことはよ！	좋잖아 사소한 일은!	fix	normalize
+normalize:spoken-verb	何か もう分かっちゃってんじゃん この２人は	뭔가 벌써 알아 버렸지 이 2명은	keep	normalize

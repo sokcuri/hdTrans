@@ -24,7 +24,7 @@ cx:datte-listing:10	近頃は、京都へ行ったって、祇園だ先斗町だ
 cx:datte-listing:10	その間に　風呂だ散歩だって➡	그 사이에 목욕이니 산책이니 ➡	fix	rewrites
 cx:datte-listing:10	男だ女だってこだわってないで	남자니 여자니 구애되지 말고	fix	rewrites
 cx:datte-listing:10	浮気だ 誤解だってうるせえの	바람기니 오해니 시끄러워	fix	rewrites
-cx:datte-listing:10	エラルドさまにも いつも グズだノロマだって言われてて…	에라루도님에게도 언제나 구즈니 노로마니 하고 있어…	fix	rewrites
+cx:datte-listing:10	エラルドさまにも いつも グズだノロマだって言われてて…	에라루도 님에게도 언제나 구즈니 노로마니 하고 있어…	fix	rewrites
 cx:datte-listing:10	保護だ 確保だって 勝手に決めないで！	보호니 확보니 마음대로 결정하지 마!	fix	rewrites
 cx:datte-listing:10	合宿だ 練習試合だって 夏まで全部つぶれちゃいますよ	합숙이니 연습 경기니 여름까지 전부 부서져버립니다	fix	rewrites
 cx:datte-listing:10	就職だ結婚だって いろいろあるでしょ	취직이니 결혼이니 여러 가지 있겠지	fix	rewrites
@@ -91,6 +91,6 @@ cx:stem-noun-object:10	相葉君は　あれでなかなか人望が厚いので
 cx:datte-listing:10	俺のこと バカだバカだって言うけど 俺だって考えてんだぞ ちゃんと	나바보다 바보라고 말하는데 나도 생각이라고 다 제대로	keep	rewrites
 cx:datte-listing:10	ワルだ ワルだって聞いてたけど・	악당이다 악당이라고 들었지만·	keep	rewrites
 cx:datte-listing:10	父親だ父親だっていう前に やることあるだろう。	아버지다 아버지라고 말하기 전에 할 것 있을 것이다.	keep	rewrites
-cx:datte-listing:10	ちょいと 壺だ壺だって言ってっけど この壺のことじゃないのか？	조금 항아리다 항아리라고 말해 지만 이 항아리가 아닌 건가?	keep	rewrites
+cx:datte-listing:10	ちょいと 壺だ壺だって言ってっけど この壺のことじゃないのか？	조금 항아리다 항아리라고 말하고 있지만 이 항아리가 아닌 건가?	keep	rewrites
 cx:datte-listing:10	何だ 自分だって結構 やきもち焼きじゃん	무엇이다 자신도 상당히 질투해잖아	keep	rewrites
 lookup:verb-before-te-form	俺は俺の周圍に、俺よりも遙に劣等な生活内容を持ちながら、その劣等な生活内容を裏付けるに稀世の天才にのみ許される自信を以つてするチグハグな「自己肯定者」を見た。	나는 내 주위에, 나보다 요에 열등한 생활 내용을 가지면서, 그 열등한 생활 내용을 뒷받침에 희세의 천재에게만 허락되는 자신감을 이연줄 하는 뒤죽박죽인 「자기 긍정자」를 보았다.	keep	lookup

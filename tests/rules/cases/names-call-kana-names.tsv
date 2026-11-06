@@ -1,0 +1,16 @@
+# 규칙: LEX-4953
+rule	input	expected	kind	layer
+names:call-kana-names	じゃあな 匡｡	그럼 이만 타스쿠.	fix	names
+names:call-kana-names	航太？ おい 航太…	코타? 이봐 코타…	fix	names
+names:call-kana-names	「対立？いや、たしかに」	「대립? 아니, 확실히」	keep	names
+names:call-kana-names	旦那様！ これを おふくさんに。	주인님! 이것을 오후쿠 씨에게.	fix	names
+names:call-kana-names	な… 何だい おふみちゃん 来てたのか	… 뭐야 오후미짱 오고 있었는지	fix	names
+names:call-kana-names	おばさん、こんにちは。	아줌마, 안녕하세요.	keep	names
+names:call-kana-names	おにいちゃん！	오빠!	keep	names
+names:call-kana-names	おじじさまや父上が 築き上げてきたもの	할아버지님이나 아버님이 구축해 온 것	keep	names
+names:call-kana-names	＜ちなみに まる子が 今から説明する字は「呉」である＞	<참고로 마루코가 지금부터 설명하는 글자는 「오」이다>	keep	names
+names:call-kana-names	おしづ様も 御一緒に	오시즈 님도 어 함께	fix	names
+names:call-kana-names	田中様が来た。	타나카 님이 왔다.	fix	names
+names:call-kana-names	王子様が来た。	왕자님이 왔다.	keep	names
+names:call-kana-names	おしづ様 お一人で	오시즈 님 혼자서	fix	names
+names:call-kana-names	田中さん お茶です	타나카 씨 차입니다	keep	names

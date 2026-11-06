@@ -791,12 +791,13 @@ constexpr std::u32string_view kFusedTail = U"なよぞしかぜわっんのさ";
 
 // Whether a fused ending that ends at q of rs ends a word there: at the end, before a character
 // other than hiragana, ー and ～ (a mark, a kanji, the noun it describes), before a kana of
-// kFusedTail, けど, だろ, でしょ or じゃ (痛えだろ); in katakana not before more katakana but ッ.
+// kFusedTail, けど, だろ, でしょ or じゃ (痛えだろ), or a noun in kana that it describes (固えこと, でけえもん);
+// in katakana not before more katakana but ッ.
 bool FusedTailAt(std::u32string_view rs, size_t q, bool katakana) {
     if (q >= rs.size()) return true;
     const char32_t c = rs[q];
     if (IsHiraganaRune(c)) {
-        for (const std::u32string_view w : {U"けど", U"だろ", U"でしょ", U"じゃ"}) {
+        for (const std::u32string_view w : {U"けど", U"だろ", U"でしょ", U"じゃ", U"こと", U"もん", U"もの", U"やつ"}) {
             if (rs.substr(q).starts_with(w)) return true;
         }
         return In(c, kFusedTail);
@@ -2201,6 +2202,24 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         if (e.Tags(head.substr(0, k - from)).find('H') == std::string::npos) continue;
         if (e.LongestKey(head) > k - from) continue;
         if (k + 2 < rs.size() && rs[k + 2] == U'き') continue;
+        rs[k] = U'い';
+        changed = true;
+    }
+    // The old final し of an adjective of one kanji that ends its phrase (秋深し, 尊し) is its い (spec LEX-4355):
+    // the kanji is an adjective stem, no key reads the kanji and し (良し, 無し, 出し), and a kanji before it is a
+    // separate word.
+    for (size_t k = 1; k < rs.size(); k++) {
+        if (rs[k] != U'し' || !IsKanjiRune(rs[k - 1])) continue;
+        // A noun before the stem is the subject (秋深し) unless the two kanji are one word (欲深し).
+        if (k >= 2 && IsKanjiRune(rs[k - 2]) && !e.Tags(std::u32string_view(rs).substr(k - 2, 2)).empty()) continue;
+        if (k + 1 < rs.size() && !In(rs[k + 1], U"。！？!?」』）)…")) continue;
+        const std::u32string_view head = std::u32string_view(rs).substr(k - 1);
+        if (e.Tags(head.substr(0, 1)).find('H') == std::string::npos || e.LongestKey(head) > 1) continue;
+        // No longer word reads through the し (お人好し, 面汚し, 灯台下暗し, 時すでに遅し),
+        bool through = false;
+        // nor one that ends at the stem kanji, whose し is its own (使い古し).
+        for (size_t j = k > 8 ? k - 8 : 0; j + 1 < k && !through; j++) through = e.LongestKey(std::u32string_view(rs).substr(j)) >= k - j;
+        if (through) continue;
         rs[k] = U'い';
         changed = true;
     }

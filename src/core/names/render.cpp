@@ -12,6 +12,7 @@
 #include "core/names/readings.h"
 #include "core/names/given.h"
 #include "core/names/registry.h"
+#include "core/dict/classes.h"
 #include "core/text/hangul.h"
 #include "core/word/kana.h"
 
@@ -94,6 +95,7 @@ std::string SyllableHead(const std::string& kr, std::string_view x, std::string_
     return "";
 }
 
+
 }  // namespace
 
 std::string Registry::Dict() {
@@ -170,6 +172,30 @@ std::string Registry::Written(std::string_view kana) const {
     return text::FromKana(kana, preset, preset == text::Preset::FanShort);
 }
 
+std::string Registry::CompoundSpelling(std::string_view t) {
+    std::vector<std::string> spellings;
+    for (const dict::Record& rec : snap_->NameRecords(t)) {
+        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN") && IsHangulText(rec.target)) {
+            spellings.emplace_back(rec.target);
+        }
+    }
+    if (spellings.empty()) return "";
+    for (auto it = kataRuns_.lower_bound(std::string(t)); it != kataRuns_.end() && it->starts_with(t); ++it) {
+        if (it->size() == t.size()) continue;
+        std::vector<std::string_view> targets;
+        for (const dict::Record& rec : snap_->NameRecords(*it)) targets.push_back(rec.target);
+        for (const dict::Candidate& rec : snap_->RetrieveRecords(*it, dict::LookupMode::General)) {
+            if (rec.source == *it) targets.push_back(rec.target);
+        }
+        for (const std::string_view target : targets) {
+            for (const std::string& sp : spellings) {
+                if (target.starts_with(sp) && (target.size() == sp.size() || target.substr(sp.size()).starts_with(" "))) return sp;
+            }
+        }
+    }
+    return "";
+}
+
 std::string Registry::RenderPart(std::string_view t, bool whole) {
     const std::string key(t);
     if (const auto l = listed_.find(key); l != listed_.end()) return l->second.ko;
@@ -206,6 +232,12 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     const bool called = acc != Accepted().end() && hon_.count(key) > 0 && AllRunes(t, IsKanji) && Flags(t).common &&
                         LayerReading(t);
     if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given || called)) return layer;
+    // A katakana name that starts a longer katakana word of the document reads as the dictionary reads it
+    // there, by a spelling of the name layer that word's Korean starts with (グリッドマン 그리드맨 beside
+    // グリッドマンユニバース 그리드맨 유니버스), not by a fresh reading of its kana (그릿드만).
+    if (katakana && snap_ != nullptr) {
+        if (std::string kr = CompoundSpelling(t); !kr.empty()) return kr;
+    }
     if (std::string kr = whole && katakana && snap_ != nullptr ? snap_->NameReading(t) : PersonName(t);
         IsHangulText(kr)) {
         return kr;
@@ -219,8 +251,8 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         if (std::string kr = text::FromKana(t, text::Preset::Fan); IsHangulText(kr)) return kr;
     }
     // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
-    if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t)) {
-        if (std::string kr = internal::GuessedName(t); IsHangulText(kr)) {
+    if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t) && !OldFormWord(t)) {
+        if (std::string kr = internal::GuessedName(t, GuessFallback(t)); IsHangulText(kr)) {
             // The name layer's own reading comes first (龍鳳 류호, 日村 히무라, 日代 히시로).
             if (std::string own = NonPlaceLayerReading(t); IsHangulText(own)) return own;
             return kr;
@@ -243,6 +275,31 @@ std::string Registry::NonPlaceLayerReading(std::string_view t) {
         return std::string(r.target);
     }
     return "";
+}
+
+// Whether a guessed reading of t may fall back to the readings names start with (spec LEX-4952): t is
+// shown to be a name by an honorific or a person frame, and is no surname and given name of the name
+// layer written together (堤司: 堤 and 司).
+bool Registry::GuessFallback(std::string_view t) {
+    if (honGuess_.count(std::string(t)) == 0 || RuneCount(t) != 2) return false;
+    const text::Rune a = text::DecodeRune(t);
+    const DictFlags fa = Flags(t.substr(0, a.size)), fb = Flags(t.substr(a.size));
+    return !(fa.layerSurname && (fb.layerGiven || fb.person));
+}
+
+// Whether t holds an old form of a kanji whose modern spelling the dictionaries know (萬平: 万平), which
+// is read as that spelling rather than guessed (瀧昌 has none: 타키마사), unless the name layer reads t
+// (飛龍 히류).
+bool Registry::OldFormWord(std::string_view t) {
+    std::string modern(t);
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
+        const std::size_t eq = pair.find('=');
+        if (eq == std::string_view::npos || eq == 0) continue;
+        for (std::size_t at = modern.find(pair.substr(0, eq)); at != std::string::npos; at = modern.find(pair.substr(0, eq), at)) {
+            modern.replace(at, eq, pair.substr(eq + 1));
+        }
+    }
+    return modern != t && Flags(modern).records > 0 && !IsHangulText(NonPlaceLayerReading(t));
 }
 
 bool Registry::GuessedNameBlocked(std::string_view t) {

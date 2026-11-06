@@ -334,7 +334,11 @@ void FoldNegation(const Tables& t, std::vector<Node>& nodes) {
         v.aux = vaux;
         v.glue = vglue;
         v.neg = neg;
-        if (neg == Neg::jiMa) {
+        // -지 말아 before the 주다 of a request (말하지 말아 줘, 말아 줘요, 말아 주세요) joins it as the 말다 does;
+        // the 말다 that ends its clause (말하지 마) or comes before another word is the prohibitive order itself
+        const bool request = x.ctype == CType::conn && k + 2 < nodes.size() && nodes[k + 2].kind == Kind::V &&
+                             nodes[k + 2].lemma == t.G("aux.give");
+        if (neg == Neg::jiMa && !request) {
             v.mood = Mood::imp;
             v.ctype = CType::final_;
             v.eomi.clear();

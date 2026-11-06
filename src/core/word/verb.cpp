@@ -6,6 +6,7 @@
 #include "core/output/markers.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/token.h"
 #include "core/word/conjugation.h"
 #include "core/word/strings.h"
 #include "core/word/worker.h"
@@ -479,7 +480,30 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // A bare ichidan stem ends no utterance where its last kana also makes the imperative
     // of a godan verb: before a closing bracket or a full-width sentence mark that is the
     // reading (「立て」 서라, not 세우고), or before a small っ that closes it, as a stem does not
-    // (行けっ 가라, 腰を振れっ 흔들어라). The mark may start the next token.
+    // (行けっ 가라, 腰を振れっ 흔들어라). The mark may start the next token. The end of the line
+    // closes it as well where the stem has a kanji and its first reading is the -지다, -되다 or -히다
+    // that undergoes the godan verb (ありがたく思え 고맙게 생각해라, ベストを脱げ 벗어라, コインを取れ 받아라; spec
+    // GRM-3944): a kana stem does not show where its word ends, and a stem that acts on an object
+    // goes on to the next line (会話を続け, ドアを開け, 砂糖を入れ), as does a causative or passive in せ or れ after
+    // an a-row kana (足を滑らせ, 目を塞がれ), and so does a stem after が.
+    auto undergoes = [&]() {
+        // after が the stem is the subject's own verb (ボタンが取れ 떨어지다), not an order
+        if (std::string_view(text).substr(0, static_cast<std::size_t>(std::max(start, 0))).ends_with("が")) return false;
+        const std::string_view stem = std::string_view(surface).substr(0, surface.size() - LastChar(surface).size());
+        for (const std::string_view a : {"か", "が", "さ", "ざ", "た", "だ", "な", "ば", "ま", "ら", "わ"}) {
+            if (stem.ends_with(a)) return false;
+        }
+        const std::string_view first = EntryText(0);
+        // 지다 alone (敗れ 지다) is a verb of its own, not the -지다 of another.
+        if ((first.ends_with("&AL@") && first != "&AL@") || first.ends_with("&C6@")) return true;
+        // A first reading in -히다 counts where the stem also reads as the -지다 of the godan verb (取れ 잡히다,
+        // 떨어지다); not 絡め 묻히다 of the transitive 絡める.
+        if (!first.ends_with("&AW@")) return false;
+        for (const Entry* e : group->entries) {
+            if (e->dst.ends_with("&AL@") && e->dst != "&AL@") return true;
+        }
+        return false;
+    };
     if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
         std::string_view ahead = tail.empty() ? base.nextText : tail;
         // The っ ends the word: no letter goes on after it (行けっ！, 行けっ キリト; not 行けったら,
@@ -497,7 +521,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
             tsu = false;
         }
         if ((tsu || Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
-             Starts(ahead, "？")) &&
+             Starts(ahead, "？") || (ahead.empty() && base.nextType == tokenizer::kTypeEnd && HasKanji(surface) && undergoes())) &&
             w->GodanImperative(surface)) {
             return false;
         }
