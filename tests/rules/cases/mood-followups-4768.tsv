@@ -11,21 +11,21 @@ normalize:contracted-teiru	もう結婚してるんだし	벌써 결혼했으니
 normalize:contracted-teiru	肉体関係まで進んでるんだし	육체관계까지 나아가고 있으니까	fix	normalize
 normalize:contracted-teiru	勉強してるんだし	공부하고 있으니까	fix	normalize
 normalize:contracted-teiru	寝てるんだし、静かにして	자고 있으니까, 조용하게 해	fix	normalize
-dict:jisjk:116569	「チィヒーロを見捨てないでくれて」	「치히로를 버리지 말아 줘라고」	fix	local
+dict:w:34535	「チィヒーロを見捨てないでくれて」	「치히로를 버리지 않아 줘서」	fix	local
 dict:jisjk:116569	これ以上 罪を重ねないでくれ 。	더 이상 죄를 거듭하지 말아 줘 .	fix	local
 dict:jisjk:116569	お願いだから そんな目で見ないでくれよ	제발 부탁이니까 그런 눈으로 보지 말아 줘	fix	local
 dict:jisjk:116569	ああ…そんな、見ないでくれ。妾の変顔なんて	아…그런, 보지 말아 줘. 첩의 웃긴 표정 같은 건	fix	local
 dict:jisjk:116569	何も言わないでくれ、ロベルタ	아무것도 말하지 말아 줘, 로베르타	fix	local
 dict:jisjk:116569	今 話しかけないでくれ	지금 말을 걸지 말아 줘	fix	local
-dict:jisjk:116569	来るな 近づかないでくれ	온데 가까워지지 말아 줘	fix	local
-dict:jisjk:116569	や～、アンジェメイドやめないでくれてよかった～っ。昨日あんなこと言ってたけど、撤回なんだよね？	나~, 안 제이 메이드 그만두지 말아 줘라고 좋았다~. 어제 저런 말 했지만, 철회야?	fix	local
+dict:jisjk:116569	来るな 近づかないでくれ	has:가까워지지 말아 줘	fix	local
+dict:w:34535	や～、アンジェメイドやめないでくれてよかった～っ。昨日あんなこと言ってたけど、撤回なんだよね？	has:그만두지 않아 줘서 좋았다	fix	local
 dict:jisjk:116569	や、やめろ〜…！ そんなヘンなことを耳元で言わないでくれ〜！！	그, 그만두어라~…! 그렇게 이상한 일을 귓가로 말하지 말아 줘~!!	fix	local
-dict:jisjk:116569	初めまして、弥生、着任…。あ、気を使わないでくれていい…です。	처음 뵙겠습니다, 3월, 부임…. 아, 신경을 쓰지 말아 줘라고 좋…습니다.	fix	local
+dict:w:34535	初めまして、弥生、着任…。あ、気を使わないでくれていい…です。	lacks:줘라고	fix	local
 dict:jisjk:116569	マルキュウマルマル！あ、吹雪！この深雪さまを置いてかないでくれよ！十一駆の深雪さまを！な！	0900! 아, 눈보라! 이 미유키 님을 두고 가지 말아 줘! 11구의 미유키 님을! !	fix	local
 dict:jisjk:116569	……そうだな、置き去られるのは慣れている。気にしないでくれ、寂しくなぞ……	……그래, 버려지는 것은 익숙해져 있다. 신경 쓰지 말아 줘, 외롭고 수수께끼……	fix	local
 dict:jisjk:116569	あたし…白露型駆逐艦……その八番艦。山風。手を離さないでね、帰ってくるから…！	나…시라츠유급 구축함……그 8번함. 산바람. 손을 놓지 말아 줘, 돌아오니까…!	fix	local
 dict:jisjk:116569	少しだけ、少しだけ休むんだから。覗かないでね、すぐ終わるから。	약간, 약간 쉬니까. 들여다 보지 말아 줘, 바로 끝날 테니까.	fix	local
-dict:jisjk:116569	……すまん、今はちょっと話し掛けないでくれないか。	……미안, 지금은 조금 말을 걸지 말아 줘 않는가.	fix	local
+dict:jisjk:116569	……すまん、今はちょっと話し掛けないでくれないか。	……미안, 지금은 조금 말을 걸지 말아 줘 않는가.	keep	local
 dict:jisjk:116569	気にしないでくれよ。	신경 쓰지 말아 줘.	fix	local
 dict:jisjk:116569	これからこうぎが始まるんだ。すぐ済むんだが、邪魔なんでね。今は話しかけないでくれ。	지금부터 공공이 시작되는 거야. 바로 끝나는데, 방해이니까. 지금은 말을 걸지 말아 줘.	fix	local
 dict:jisjk:116569	……いや、いいんだ。気にしないでくれ、先生。	……아니, 좋다. 신경 쓰지 말아 줘, 선생님.	fix	local
@@ -56,20 +56,20 @@ cx:late-present:10	もういそがないと間に合わない。	이제 서두�
 cx:late-present:10	もう竹の杖では間に合わない。	이제 대나무 지팡이에서는 늦는다.	fix	rewrites
 cx:late-present:10	持合せの宝丹を塗ったぐらいでは間に合わない。	균형의 보단을 바른 정도로는 늦는다.	fix	rewrites
 cx:late-present:10	もうそれじゃ間に合わない。	이제 그럼 늦는다.	fix	rewrites
-cx:late-present:10	今からじゃ 絶対 間に合わない。	지금부터야 절대 늦는다.	fix	rewrites
-cx:late-present:20	「もう間に合わないと思ってたんですが、仲間たちに助けてもらって、なんとかここに立つことできました」	「이제 늦는다고 생각했습니다만, 동료들이 도와 줘, 어떻게든 여기에 섬으로써 왔습니다」	fix	rewrites
-cx:late-present:20	「商店街のチラシの搬入が間に合わないとか言ってきた、たるんでるぞ」	「상가의 광고지 반입이 늦는다고 말해 왔어, 느슨해지고 있어」	fix	rewrites
-cx:late-present:20	「最終的な判断は御園に任せるが、土壇場で間に合わないとかは勘弁してくれよ」	「최종적인 판단은 미소노에 맡기지만, 마지막 순간에 늦는다든가는 봐줘」	fix	rewrites
+cx:late-present:10	今からじゃ 絶対 間に合わない。	has:절대 늦는다.	fix	rewrites
+cx:late-present:10	「もう間に合わないと思ってたんですが、仲間たちに助けてもらって、なんとかここに立つことできました」	「이제 늦는다고 생각했습니다만, 동료들이 도와 줘, 어떻게든 여기에 섬으로써 왔습니다」	fix	rewrites
+cx:late-present:10	「商店街のチラシの搬入が間に合わないとか言ってきた、たるんでるぞ」	「상가의 광고지 반입이 늦는다고 말해 왔어, 느슨해지고 있어」	fix	rewrites
+cx:late-present:10	「最終的な判断は御園に任せるが、土壇場で間に合わないとかは勘弁してくれよ」	「최종적인 판단은 미소노에 맡기지만, 마지막 순간에 늦는다든가는 봐줘」	fix	rewrites
 output:late-casual	ん、れりょっ…ちゅうぅっ、ちゅじゅ…じゅるるるるっ！舐めても舐めても間に合わないね	응, 레룟…쪼오옥, 츄쥬…후르르릅룻! 핥아도 핥아도 늦네	fix	output
 output:late-casual	舐めても舐めても間に合わないね	핥아도 핥아도 늦네	fix	output
 output:late-casual	急いで準備をしないと間に合わないな。	서둘러 준비를 하지 않으면 늦네.	fix	output
-cx:late-present:20	それに間に合わなかったのを、僕は却って幸だと思った。	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:20	干支の動物を選ぶ日に 間に合わなかったって	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:20	「間に合わなかったのね……しかも、今までで一番最悪のタイミングだわ。	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:20	ミドリさんはあと10秒が間に合わなかったと悔やんでおられました	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:20	締め切りに間に合わなかったら元も子もないじゃないか」	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:20	「でも、時間が迫ってきてるし、もし、間に合わなかったら」	!rule:cx:late-present:20	keep	rewrites
-cx:late-present:10	「もう間に合わない」	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	それに間に合わなかったのを、僕は却って幸だと思った。	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	干支の動物を選ぶ日に 間に合わなかったって	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	「間に合わなかったのね……しかも、今までで一番最悪のタイミングだわ。	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	ミドリさんはあと10秒が間に合わなかったと悔やんでおられました	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	締め切りに間に合わなかったら元も子もないじゃないか」	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	「でも、時間が迫ってきてるし、もし、間に合わなかったら」	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	「もう間に合わない」	「이제 늦어」	fix	rewrites
 output:late-casual	「もう間に合わない」	「이제 늦어」	fix	output
 output:late-casual	「もう間に合わなかった」	「이제 늦었어」	fix	output
 normalize:contracted-teiru	勉強してるんだから	공부하고 있으니까	keep	normalize
@@ -79,6 +79,18 @@ normalize:contracted-teiru	勉強してるのですか？	공부합니까?	keep	
 cx:kure-request:15	黙ってくれ、頼む。	입을 다물어 줘, 부탁한다.	fix	rewrites
 dict:jisjk:9283	黙ってくれ。	입을 다물어 줘.	fix	local
 dict:jisjk:9283	黙って聞いていた。	입다물고 듣고 있었다.	keep	local
-cx:late-present:21	「最終的な判断は御園に任せるが、土壇場で間に合わないとかは勘弁してくれよ」	「최종적인 판단은 미소노에 맡기지만, 마지막 순간에 늦는다든가는 봐줘」	fix	rewrites
-cx:late-present:21	「もう間に合わない」	!rule:cx:late-present:21	keep	rewrites
 dict:jisjk:116569	「お前らは喋らないでくれ、頭が痛くなる」	「너희들은 말하지 말아 줘, 머리가 아파져」	fix	local
+normalize:contracted-teiru	これなら勝てるんだし	이것이라면 이길 수 있으니까	keep	normalize
+normalize:contracted-teiru	まだ待てるんだし	아직 기다릴 수 있으니까	keep	normalize
+normalize:contracted-teiru	どうせ捨てるんだし	어차피 버리니까	keep	normalize
+normalize:contracted-teiru	子供は自分で育てるんだし	아이는 스스로 기르니까	keep	normalize
+normalize:contracted-teiru	そんなに慌てるんだし	그렇게 당황하니까	keep	normalize
+normalize:contracted-teiru	家を建てるんだし	집을 지으니까	keep	normalize
+normalize:contracted-teiru	本島から来てるんだし	모토지마에서 와 있으니까	fix	normalize
+cx:late-present:10	間に合わないという話だ	늦는다는 이야기다	fix	rewrites
+cx:late-present:10	間に合わないなんて嘘だ	늦는다니 거짓말이다	fix	rewrites
+dict:w:34535	私を見捨てないでくれて」	나를 버리지 않아 줘서」	fix	local
+dict:w:34535	行かないでくれて、嬉しかった	가지 않아 줘서, 기뻤다	fix	local
+dict:w:34535	泣かないでくれ	울지 말아 줘	keep	local
+cx:late-present:10	「ダメ、ここからじゃ間に合わないっ！	!rule:cx:late-present:10	keep	rewrites
+cx:late-present:10	「もう間に合わない。急いで」	has:이제 늦는다.	fix	rewrites
