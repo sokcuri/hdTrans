@@ -1,5 +1,55 @@
 # Changelog
 
+## [0.9.3](https://github.com/sokcuri/hdTrans/compare/v0.9.2...v0.9.3) (2026-11-06)
+
+
+### Features
+
+* **packs:** read a dictionary idiom whose words a space, an adverb or a dropped particle split ([#691](https://github.com/sokcuri/hdTrans/issues/691)) ([7ab713b](https://github.com/sokcuri/hdTrans/commit/7ab713b28f3e7b34980ce01adee7bd1964cd9f67))
+* **packs:** read a greeting, a cry or a set phrase that stands alone as one utterance ([#694](https://github.com/sokcuri/hdTrans/issues/694)) ([71313ab](https://github.com/sokcuri/hdTrans/commit/71313ab9112c9848695fded062886242a89e8d19))
+* **packs:** read an idiom whose noun takes a word that describes it, and 手を貸す as 돕다 ([#696](https://github.com/sokcuri/hdTrans/issues/696)) ([60948e0](https://github.com/sokcuri/hdTrans/commit/60948e021c88cda1798bb61578a8c006a5312281))
+* **text:** read the endings and copulas of regional and old speech as standard Japanese ([#683](https://github.com/sokcuri/hdTrans/issues/683)) ([0cea5a7](https://github.com/sokcuri/hdTrans/commit/0cea5a74b3f699c04a795c2a2b9b5403098fd58c))
+
+
+### Bug Fixes
+
+* **dict:** pick the sense of 出る, 持つ and できる from their arguments ([#697](https://github.com/sokcuri/hdTrans/issues/697)) ([d4fea56](https://github.com/sokcuri/hdTrans/commit/d4fea5627371ae6b11494933634f10ddc87e66fe))
+* **dict:** pick the sense of 取る and かける from their object ([#692](https://github.com/sokcuri/hdTrans/issues/692)) ([14175b1](https://github.com/sokcuri/hdTrans/commit/14175b1c12c600ed5c3d6284c448377a5b9abee4))
+* **dict:** pick the sense of 起こす, 断る, 通る, 通す, 伸ばす and 覚える from their arguments ([#685](https://github.com/sokcuri/hdTrans/issues/685)) ([48c9b30](https://github.com/sokcuri/hdTrans/commit/48c9b3059989b211bd30e494b971efd340224206))
+* **dict:** pick the sense of 返す, 回す, 切る, 引く, 落とす and 入れる from their object ([#698](https://github.com/sokcuri/hdTrans/issues/698)) ([85aa532](https://github.com/sokcuri/hdTrans/commit/85aa5327fc4679cbf9c8c8c665fd4a0fc6b3275e))
+* **dict:** read kana-written and missing words by their sense ([#695](https://github.com/sokcuri/hdTrans/issues/695)) ([0d4ab64](https://github.com/sokcuri/hdTrans/commit/0d4ab6478b0b01b3eb051a05c3c064ec3634f129))
+* **dict:** read アク as 거품, からこそ as -기에, 似つかわしくない as 어울리지 않는, and どうか before a space in a formal line as 부디 ([#704](https://github.com/sokcuri/hdTrans/issues/704)) ([5539eac](https://github.com/sokcuri/hdTrans/commit/5539eac1e5f8fe84891d5e129bfed32db3f279cb))
+* **dict:** read 中腹 as 중턱 and 山の中腹 as 산 중턱, and check only the アク piece in the katakana-fragment cases ([#711](https://github.com/sokcuri/hdTrans/issues/711)) ([5111845](https://github.com/sokcuri/hdTrans/commit/5111845e915a2d9bcfefe49d05e95faeca326693))
+* **dict:** read 聞く as 묻다 after a person or 念のため, a retorting 突っ込む as 태클을 걸다, and an evaluating いける ([#689](https://github.com/sokcuri/hdTrans/issues/689)) ([c8e4d15](https://github.com/sokcuri/hdTrans/commit/c8e4d1563728a4374356745813fa6686db364941))
+* **dict:** read 行っちゃ as 行く, 空 as から, 故 as ゆえ, おそば as 곁, そのうちの as 그중 and 一行 as 한 줄 by the words around them ([#701](https://github.com/sokcuri/hdTrans/issues/701)) ([5424711](https://github.com/sokcuri/hdTrans/commit/54247110c12a3836eef0376d75a27261924f2c2e))
+* **dict:** read 邪な, そこらへん, 恰も, ゴチャゴチャ, しみったれた and 逃げおおせる by their sense ([#669](https://github.com/sokcuri/hdTrans/issues/669)) ([94f8862](https://github.com/sokcuri/hdTrans/commit/94f8862b565d6c3ed4a1395875455a769d2289a3))
+* **dict:** translate caption words that stayed as sounds: テメエ, キモイ, めんどい, むしる, 憑りつく, とかなんとか and others ([#668](https://github.com/sokcuri/hdTrans/issues/668)) ([e1ebbbb](https://github.com/sokcuri/hdTrans/commit/e1ebbbb9f9580e974da0b8d511afd204e888d72e))
+* **grammar:** end a wish in たい before a space when the line ends in another, and read より after a point of time as 부터 ([#671](https://github.com/sokcuri/hdTrans/issues/671)) ([08c87f2](https://github.com/sokcuri/hdTrans/commit/08c87f2ede72bc702f241e9c8c3bec8d048f5685))
+* **grammar:** keep V+かけていた a change in progress, read よく効くね as 잘 듣네, and stop いつもの at a particle ([#710](https://github.com/sokcuri/hdTrans/issues/710)) ([b17c1cd](https://github.com/sokcuri/hdTrans/commit/b17c1cd2c6da4ee796f102e4a93fc6745c9416e9))
+* **grammar:** let the からこそ look-ahead pass a comma between nouns in the object ([#709](https://github.com/sokcuri/hdTrans/issues/709)) ([cc82dd5](https://github.com/sokcuri/hdTrans/commit/cc82dd581d42b28e35b1bab348c98c20b1bb1357))
+* **grammar:** read a bare stem that ends a line as the godan imperative, and a volitional with a question word or the speaker as subject ([#686](https://github.com/sokcuri/hdTrans/issues/686)) ([391a782](https://github.com/sokcuri/hdTrans/commit/391a7826c7cbf1eef719ba847fd8c2a2ef47c817))
+* **grammar:** read a contracted てく before a noun, いたい after で or に, and an old final し by the words they are ([#667](https://github.com/sokcuri/hdTrans/issues/667)) ([33560cb](https://github.com/sokcuri/hdTrans/commit/33560cbcdf197d4005fd607d5e18eaeedd528847))
+* **grammar:** read a verb's てもらえない as 주지 않다, not 줄 수 없다 ([#700](https://github.com/sokcuri/hdTrans/issues/700)) ([ccb9afa](https://github.com/sokcuri/hdTrans/commit/ccb9afa96cc3a481efa3b58ca7b7e76245424b50))
+* **grammar:** read V+かける by its form, rank words, よく効く and a leaving train ([#705](https://github.com/sokcuri/hdTrans/issues/705)) ([bede75b](https://github.com/sokcuri/hdTrans/commit/bede75b2a48d7b39c9bd695eb5ff090c423574f6))
+* **grammar:** read と before a verb of saying as the quote -다고, and a bare てると as -고 있으면 ([#681](https://github.com/sokcuri/hdTrans/issues/681)) ([ff00874](https://github.com/sokcuri/hdTrans/commit/ff00874777dca89cd0d5d1fd88ed46e6d40a956e))
+* **grammar:** read なんて/何と … だろう/でしょう ending in an adjective or a noun as an exclamation, -구나/-군요 ([#672](https://github.com/sokcuri/hdTrans/issues/672)) ([58129c1](https://github.com/sokcuri/hdTrans/commit/58129c1d3e8d0d888f281f227e4552409dfe3532))
+* **mood:** conjugate 間に合わない's 늦다 as a verb, read てるんだし as ている, space 말아 줘, and keep 黙って before くれ a request ([#708](https://github.com/sokcuri/hdTrans/issues/708)) ([0766a25](https://github.com/sokcuri/hdTrans/commit/0766a25c8d21cc5fb96368a8d49e27581917b19f))
+* **mood:** read a promise before a request, a bare intent in a quote, a vocative や, くれ requests and くれるな, Kansai ええん and a finished change in してる ([#706](https://github.com/sokcuri/hdTrans/issues/706)) ([5684f0b](https://github.com/sokcuri/hdTrans/commit/5684f0b3b00983cc25e0835bbc2d32fbd2b296bc))
+* **mood:** test only the verb before てる, give 間に合わない's 1다 endings 1는다, keep a listed や a list, ask お急ぎですか in the present and read ないでくれて as 않아 줘서 ([#712](https://github.com/sokcuri/hdTrans/issues/712)) ([755580f](https://github.com/sokcuri/hdTrans/commit/755580fe58a967c772ccd048752d2a3a869abc59))
+* **names, voice:** learn a kana name joined to a name, keep a compound's spelling, and read a seen-by passive as the watcher's act ([#707](https://github.com/sokcuri/hdTrans/issues/707)) ([6f600b8](https://github.com/sokcuri/hdTrans/commit/6f600b8c7223bed7e59a9fb40b520915351ca087))
+* **names:** guess caption calls and honoured kanji names whose first kanji starts no name, and split a spaced reading before a spaced bracket ([#676](https://github.com/sokcuri/hdTrans/issues/676)) ([c1d9eff](https://github.com/sokcuri/hdTrans/commit/c1d9effb0af458f9266fa56e4588e658ff2ff761))
+* **names:** read a name called alone, an old お name before an honorific, and a katakana name a Japanese word would garble ([#684](https://github.com/sokcuri/hdTrans/issues/684)) ([a4e0f65](https://github.com/sokcuri/hdTrans/commit/a4e0f65c2057a90161c2c8aee8b29b2b7b46ba14))
+* **normalize:** read an old-form kanji in its new form where the new form makes a longer common word ([#673](https://github.com/sokcuri/hdTrans/issues/673)) ([84ebd76](https://github.com/sokcuri/hdTrans/commit/84ebd76fd2a81bb8528009380e64f2abc5233381))
+* **normalize:** read honorific and humble forms (ておいで, てらした, お読みです, てまいる, ていかれ, ておくれ) and a stated てもらえない as the forms the dictionary reads ([#703](https://github.com/sokcuri/hdTrans/issues/703)) ([d2fca59](https://github.com/sokcuri/hdTrans/commit/d2fca59c1de134cc498b3e43d85653dec3b76edf))
+* **normalize:** read spoken verb contractions as their full forms ([#682](https://github.com/sokcuri/hdTrans/issues/682)) ([8441638](https://github.com/sokcuri/hdTrans/commit/8441638e023b43a0e5e64fe618792c90ce02e3a6))
+* **packs:** keep the space before a predicate utterance and the yes of ええ, and read kanji か, が and バランスがとれる right ([#699](https://github.com/sokcuri/hdTrans/issues/699)) ([18b8727](https://github.com/sokcuri/hdTrans/commit/18b87278fa2a1465c164857a79f5ddf1ec75c379))
+* **release:** read dialect, request moods, verb aspect, honorifics and names by layer ([fd37a8f](https://github.com/sokcuri/hdTrans/commit/fd37a8f3321764f86fad462df6c940425f21b246))
+* **segment:** compare a longer kana noun with the reading that fits there ([#690](https://github.com/sokcuri/hdTrans/issues/690)) ([74cfbc8](https://github.com/sokcuri/hdTrans/commit/74cfbc8c8884e56c40f4d304fc31af149068e86e))
+* **segment:** give a verb's one-kanji ending to the noun it starts ([#688](https://github.com/sokcuri/hdTrans/issues/688)) ([a14366f](https://github.com/sokcuri/hdTrans/commit/a14366fcee0ef0bdc27f38597a24c175c5e170b0))
+* **segment:** let a phrase X の Y yield to a longer noun that starts at Y ([#687](https://github.com/sokcuri/hdTrans/issues/687)) ([4f40187](https://github.com/sokcuri/hdTrans/commit/4f40187c47c3965aab61b14d8c2e586670b1dbcd))
+* **segment:** take a longer reading that ends at a word when the retries run out ([#693](https://github.com/sokcuri/hdTrans/issues/693)) ([2d3cb75](https://github.com/sokcuri/hdTrans/commit/2d3cb75aa13f095b85bec53577a8876559eaa1a7))
+* **voice:** read causatives of feelings as -게 하다, causative せ before ねえ as the negative, and 僕に聞かれても as 나한테 물어도 ([#670](https://github.com/sokcuri/hdTrans/issues/670)) ([89b94e3](https://github.com/sokcuri/hdTrans/commit/89b94e3ae37a85e7ecb7e425230952e3e22791a3))
+
 ## [0.9.2](https://github.com/sokcuri/hdTrans/compare/v0.9.1...v0.9.2) (2026-11-06)
 
 
