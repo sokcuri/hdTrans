@@ -2,9 +2,9 @@
 rule	input	expected	kind	layer
 cx:kakeru-aspect:10	「死にかけた」	has:죽을 뻔했다	fix	rewrites
 cx:kakeru-aspect:10	火が消えかけた	has:꺼질 뻔했다	fix	rewrites
-cx:kakeru-aspect:32	「名前を忘れかけていた」	has:잊을 뻔했어	fix	rewrites
-cx:kakeru-aspect:32	彼のことを忘れかけていました	has:잊을 뻔했습니다	fix	rewrites
-cx:kakeru-aspect:32	時に、忘れかけていた、さまざまな想いをよびさます。	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	「名前を忘れかけていた」	has:잊어 가고 있었어	keep	rewrites
+cx:kakeru-aspect:40	彼のことを忘れかけていました	has:잊어 가고 있었습니다	keep	rewrites
+cx:kakeru-aspect:40	時に、忘れかけていた、さまざまな想いをよびさます。	lacks:뻔	keep	rewrites
 cx:kakeru-aspect:34	手紙を書きかけている	has:쓰려 하고 있다	fix	rewrites
 cx:kakeru-aspect:38	俺は寝てごまかす事にした。実際、死にかけている。	has:다 죽어 가고 있다	fix	rewrites
 cx:kakeru-aspect:40	火が消えかけている	has:꺼져 가고 있다	keep	rewrites
@@ -44,3 +44,12 @@ cx:kakeru-aspect:82	でも奥の方に虫歯になりかけのがあるから	la
 cx:kakeru-aspect:83	食べかけのがある	lacks:가는	keep	rewrites
 cx:kakeru-aspect:87	古くて、壊れかけなんだよ。	lacks:다 만	keep	rewrites
 cx:kakeru-aspect:88	そう？ おっけー、あたしの食べかけでもいいよね？	lacks:가는	keep	rewrites
+cx:kakeru-aspect:40	夕日が沈みかけていた	has:져 가고 있었다	keep	rewrites
+cx:kakeru-aspect:40	壁が崩れかけていた	has:무너져 가고 있었다	keep	rewrites
+cx:kakeru-aspect:40	日が暮れかけていた頃	has:져 가고 있었을	keep	rewrites
+cx:kakeru-aspect:40	氷が溶けかけていた	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	傷が治りかけていた	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	花が枯れかけていた	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	夜が明けかけていた	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	この生活にも慣れかけていた	lacks:뻔	keep	rewrites
+cx:kakeru-aspect:40	試合に負けかけていた	lacks:뻔	keep	rewrites

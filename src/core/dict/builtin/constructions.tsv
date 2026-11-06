@@ -1007,7 +1007,6 @@ cx:kakeru-aspect:5	GRM-27	&&4 ||2 S+0== "かけ" S+0== "掛け" S-1== "に" Y+0=
 cx:kakeru-aspect:10	GRM-27	&&3 :kakeru-aux :kakeru-unwilled ||4 Y+0== "L5" Y+0== "L8 것" Y+0== "L8 거" Y+0== "L8 적"	set-ending@-1 "3" set-verb "뻔하다"	流されかけた 떠밀릴 뻔했다
 cx:kakeru-aspect:20	GRM-27	&&4 :kakeru-aux :kakeru-unwilled Y+0== "8" ||7 S+1== "こと" S+1== "事" S+1== "ところ" S+1== "所" S+1== "の" S+1== "ん" S+1== "せい"	set-ending@-1 "3" set-verb "뻔하다"	ぶつかりかけたこと 부딪칠 뻔한 것
 cx:kakeru-aspect:30	GRM-27	&&3 :kakeru-aux :kakeru-unwilled Y+0== "8"	set-ending@-1 "6" set-verb "가다" set-ending "1던"	沈みかけた夕日 가라앉아 가던 석양
-cx:kakeru-aspect:32	GRM-27	&&7 :kakeru-aux :kakeru-unwilled Y+0== "1고" ||2 S+1== "い" S+1== "居" I+1== "~た" !1 I+1== "~たら" !1 Y+1== "L8"	set-ending@-1 "3" set-target "" set-ending "" set-target@+1 "뻔&AV@"	名前を忘れかけていた 이름을 잊을 뻔했다
 cx:kakeru-aspect:34	GRM-27	&&5 :kakeru-aux !1 :kakeru-unwilled Y+0== "1고" ||2 S+1== "い" S+1== "居" !1 I+1== "~た"	set-ending@-1 "2려" set-verb "하다"	火が消えかけている 불이 꺼지려 하고 있다
 cx:kakeru-aspect:38	GRM-27	&&3 :kakeru-aux I-1== @Rverb.kakeru-nearly !1 Y+0== "6"	set-ending@-1 "6" set-verb "가다" prepend-target@-1 "다 "	死にかけている 다 죽어 가고 있다
 cx:kakeru-aspect:40	GRM-27	&&3 :kakeru-aux :kakeru-unwilled !1 Y+0== "6"	set-ending@-1 "6" set-verb "가다"	忘れかけている 잊어 가고 있다
@@ -3304,8 +3303,8 @@ cx:shikake-about:15	GRM-201	&&5 S+0== "しかけ" F+0== "touches-prev" P-1== "1"
 cx:shikake-about:20	GRM-201	&&3 S+0== "しかけ" S-1== @noun.befalls-plan D+0== "할 뻔&AV@"	set-target "될 뻔&AV@"	計画が頓挫しかけた 계획이 좌절될 뻔했다
 cx:shikake-about:30	GRM-201	&&3 S-1== @noun.befalls-plan F+0== "touches-prev" D+0== "&AV@"	set-target "&C6@"	計画が頓挫した 계획이 좌절되었다
 cx:shikake-about:35	GRM-201	&&3 S-1== @noun.befalls-plan F+0== "touches-prev" D+0== "하고 &HN@"	set-target "되어 &HN@"	計画が頓挫している 계획이 좌절되어 있다
-//= usual-act	after Select 210	いつもの with an act or a way of talking (noun.usual-act) within the next four words is what someone always does, 늘 하던 (いつもの冗談 늘 하던 농담), not 평소의, which objects and places keep (いつもの店 평소의 가게); a name with an honorific and の before a noun of talk about someone (noun.talk-about) takes no 의 (クラリス様の悪口 클라리스 님 욕) (spec GRM-3918).
-cx:usual-act:20	GRM-3918	&&2 S+0== "いつもの" >4 S+0== @noun.usual-act ||2 S+0== "00。！？!?、「」『』" F+0== "conjugating"	set-target "늘 하던"	いつもの冗談だ 늘 하던 농담이다
+//= usual-act	after Select 210	いつもの with an act or a way of talking (noun.usual-act) within the next four words and before any case particle (いつもの店で冗談 stays 평소의 가게) is what someone always does, 늘 하던 (いつもの冗談 늘 하던 농담), not 평소의, which objects and places keep (いつもの店 평소의 가게); a name with an honorific and の before a noun of talk about someone (noun.talk-about) takes no 의 (クラリス様の悪口 클라리스 님 욕) (spec GRM-3918).
+cx:usual-act:20	GRM-3918	&&2 S+0== "いつもの" >4 S+0== @noun.usual-act ||4 S+0== "00。！？!?、「」『』" F+0== "conjugating" S+0== "00がをにでとへはも" S+0== "から"	set-target "늘 하던"	いつもの冗談だ 늘 하던 농담이다
 cx:usual-act:30	GRM-3918	&&3 S+0== "の" S+1== @noun.talk-about ||6 S-1== "様" S-1== "さま" S-1== "さん" S-1== "くん" S-1== "ちゃん" S-1== "殿"	set-target " "	エマ様の悪口 에마 님 욕
 //= rank-banme	after Select 211	A number with 番 read N번 and the counter 手 after it is the place in an order, N번째 (三番手の候補 3번째 후보, 依然３番手 여전히 3번째), not 번수; 一番手っ取り早い, where 手 starts another word, is left alone (spec LEX-4914).
 cx:rank-banme:5	LEX-4914	&&5 S+0== "手" I-1== "R番" D-1== "R번" P-1== "1**" S+1== "の"	take-prev-target append-target "째" set-target@+1 " "	三番手の候補 3번째 후보
