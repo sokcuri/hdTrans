@@ -110453,7 +110453,7 @@ ttt	ttt	K110			GN				jisjk:201744
 中腰の姿勢	엉거주춤한 자세	N110			GN				jisjk:160171		
 中腸	중장	N110	VBp		GN				jisjk:243049		
 中腸腺	중장선	N110	VBpVAm		GN				jisjk:243052		
-中腹	산 중턱	N110	VPl		GN				jisjk:34292		
+中腹	중턱	N110	VPl	Ha	GN			中腹은 산이 아닌 것의 중턱도 되므로 `중턱`이고, 山の中腹이 `산 중턱`이다(LEX-4987).	jisjk:34292		
 中腹付近	중턱 부근	N110	VPl		GN				jisjk:160795		
 中膨らみ	중간 볼록	N110			GN				jisjk:163401		
 中膨らみ部	중간 볼록 부분	N110			GN				jisjk:163407		
@@ -190180,6 +190180,7 @@ ttt	ttt	K110			GN				jisjk:201744
 山なみ	산줄기	I110	VPl		GN				jisjk:72091		
 山の上町	야마노우에마치	I130	QCTVPl		GN				jisjk:336452		
 山の下町	야마노시타마치	I130	QCTVPl		GN				jisjk:336497		
+山の中腹	산 중턱	N110	VPl		GN			山の中腹는 `산 중턱`이다(산의 산 중턱이 아님, LEX-4987).	lex:4987:山の中腹-1		
 山の内	야마노우치	N130	QCTVPl		GN				jisjk:336455		
 山の口	야마노쿠치	N130	QCTVPl		GN				jisjk:336486		
 山の口町	야마노쿠치쵸	I130	QCTVPl		GN				jisjk:336490		
