@@ -254,7 +254,7 @@ bool LoadKo(Tables& t, std::string& err) {
             return false;
         for (const auto& r : tsv.rows) t.grammar[r[c[0]]] = r[c[1]];
         for (const char* need :
-             {"conn.aux", "aux.neg", "aux.neg-mot", "aux.prohib", "conn.neg", "family.jima", "nom.geot", "conn.default",
+             {"conn.aux", "aux.neg", "aux.neg-mot", "aux.prohib", "aux.give", "conn.neg", "family.jima", "nom.geot", "conn.default",
               "final.fallback", "pre.hon", "pre.past", "pre.gess", "lemma.cop", "lemma.negcop", "voice.aux", "lit.ends",
               "mixed.hapsyo", "mixed.haeyo", "mixed.word"})
             if (!t.grammar.contains(need)) {

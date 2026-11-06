@@ -35,7 +35,7 @@ uint64_t StrHash(std::string_view s) {
 // for every key it holds; keys outside the tables have no row.
 HD_TEST(markers_fingerprints) {
     HD_CHECK_EQ(Fingerprint(internal::SourceMarkerTable(), SourceMarkerRow), uint64_t{0x24978128f5e49f58ull});
-    HD_CHECK_EQ(Fingerprint(internal::DollarMarkerTable(), DollarMarkerRow), uint64_t{0x0f7cdedf8cc426f9ull});
+    HD_CHECK_EQ(Fingerprint(internal::DollarMarkerTable(), DollarMarkerRow), uint64_t{0x1b28270b401bf5fbull});
     HD_CHECK_EQ(Fingerprint(internal::PercentMarkerTable(), PercentMarkerRow), uint64_t{0x5a78e3d23a397086ull});
     HD_CHECK_EQ(internal::SourceMarkerTable().size(), size_t{3720});
     HD_CHECK_EQ(internal::DollarMarkerTable().size(), size_t{1145});

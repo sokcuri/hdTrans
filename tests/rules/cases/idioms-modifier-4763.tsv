@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 pack:idiom	ま、街中で、大きな声出してコミまどって言わないで	뭐, 거리에서, 큰 소리를 내 코미 창문이라고 말하지 마	fix	packs
 pack:idiom	わかったから でかい声出すなよ！	알았기 때문 큰 소리를 내지 마!	fix	packs
-pack:idiom	「……変な声出さないでくれ」	「……이상한 소리를 내지 말아줘」	fix	packs
+pack:idiom	「……変な声出さないでくれ」	「……이상한 소리를 내지 말아 줘」	fix	packs
 pack:idiom	「おわっ！　びっくりした、急に大きな声出すなや……」	「와! 놀란, 갑자기 큰 소리를 낸데나……」	fix	packs
 pack:idiom	大きい声出すの好きじゃないし、分るだろ俺今...	큰 소리를 내는 것 좋아하지 않고, 알겠지 나 지금...	fix	packs
 pack:idiom	やっぱり お産のときって 大きな声 出したらダメなのか？	역시 출산 때는 큰 소리를 내면 안되나?	fix	packs

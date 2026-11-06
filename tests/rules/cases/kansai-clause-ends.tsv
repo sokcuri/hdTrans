@@ -14,7 +14,7 @@ normalize:kansai-tochau	関係ないんとちゃうか？	관계없지 않을까
 normalize:kansai-tochau	ホンマに死ぬんとちゃうか？	진짜로 죽지 않은가?	fix	normalize
 normalize:kansai-tochau	これは 殴られて出たんとちゃう	이것은 맞아 나온 거 아니야	fix	normalize
 normalize:kansai-tochau	聞かんほうがええんとちゃう？	묻지 않는 편이 좋지 않아?	fix	normalize
-normalize:kansai-ntotte	怒らんとってくれ！	화내지 말아줘!	fix	normalize
+normalize:kansai-ntotte	怒らんとってくれ！	화내지 말아 줘!	fix	normalize
 normalize:kansai-ntotte	行かんとってください！	가지 마세요!	fix	normalize
 normalize:kansai-ntotte	お母さん 泣かんとって	엄마 울지 마	fix	normalize
 normalize:kansai-ntotte	そんなん言わんとってよ	그런 말하지 마	fix	normalize
