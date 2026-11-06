@@ -31,3 +31,7 @@ cx:vehicle-depart:10	家を八時に出る	has:집을 8시에 나온다	keep	rew
 cx:vehicle-depart:10	電車が出てきた	lacks:출발	keep	rewrites
 cx:vehicle-depart:10	電車から人が出る	lacks:출발	keep	rewrites
 cx:vehicle-depart:10	《船は港を出てすぐに深い霧の中に入り込み》	lacks:출발	keep	rewrites
+cx:ne-promise:20	よく効くね	has:잘 듣네	fix	rewrites
+cx:ne-promise:20	この薬、よく効くね	has:이 약, 잘 듣네	fix	rewrites
+cx:ne-promise:40	よく効くね	lacks:들을게	keep	rewrites
+cx:ne-promise:40	先に行くね	has:먼저 갈게	keep	rewrites

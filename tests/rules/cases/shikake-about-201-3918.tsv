@@ -27,3 +27,7 @@ cx:usual-act:20	いつもの席に座った	has:평소의 자리에	keep	rewrite
 cx:usual-act:20	いつものように笑った	has:여느 때처럼	keep	rewrites
 cx:usual-act:30	彼女の噂を聞いた	has:그녀의 소문을	keep	rewrites
 cx:usual-act:30	先生の話を聞く	has:선생님의 이야기를	keep	rewrites
+cx:usual-act:20	いつもの店で冗談を言う	has:평소의 가게에서	keep	rewrites
+cx:usual-act:20	いつもの場所で挨拶した	has:평소의 장소에서	keep	rewrites
+cx:usual-act:20	いつもの時間に日課をこなす	has:평소의 시간에	keep	rewrites
+cx:usual-act:20	いつもの席で説教された	lacks:늘 하던	keep	rewrites
