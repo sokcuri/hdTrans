@@ -1,0 +1,11 @@
+# 규칙: LEX-4987
+rule	input	expected	kind	layer
+lexical:chuufuku	祖母の家は山の中腹にあって	할머니의 집은 산 중턱에 있어	fix	lookup
+lexical:chuufuku	カザリは 山の中腹にある村で―	카자리는 산 중턱에 있는 마을에서-	fix	lookup
+lexical:chuufuku	東京からはるばる 山の中腹まではタクシーで...	도쿄에서 멀리 산 중턱까지는 택시로...	fix	lookup
+lexical:chuufuku	華林山(かりんさん)の中腹に ひっそりとたたずむ大仙寺	카린산의 중턱에 조용히 우두커니 서는 다이센절	fix	lookup
+lexical:chuufuku	目標は 塔の中腹	목표는 탑의 중턱	fix	lookup
+lexical:chuufuku	よーし 中腹まで坂道ダッシュ10本	좋아~ 중턱까지 비탈길 대시 10개	fix	lookup
+lexical:chuufuku	北丘岳中腹から東へ…。	북구악 중턱에서 동쪽에….	fix	lookup
+lexical:chuufuku	これから、付属の一年生から順番に学園を出発し、羽休山の頂上を目指してもらいます	지금부터, 부속의 1학년으로부터 차례로 학원을 출발해, 날개 야스미산 정상을 목표로 해 주어야겠습니다	keep	lookup
+lexical:chuufuku	そういう時はまず、あったかいメシだ！腹が減ってるとロクな考えが浮かばねーぞ！	그런 때는 우선, 따뜻한 밥이야! 배가 고프다고 충분한 생각이 떠오르지 않아!	keep	lookup

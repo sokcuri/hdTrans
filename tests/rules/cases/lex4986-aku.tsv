@@ -12,9 +12,9 @@ lexical:aku	あくが強いというか なんというか ハハッ…。	개�
 lexical:aku	なんだよもう、サイアク！	뭐야 이제, 최악!	fix	lookup
 lexical:aku	こうやってアクを取り除き 完璧なすまし汁を作ったのか！	이렇게 거품을 걷어내 제외해 완벽한 맑은 장국을 만든 건가!	keep	lookup
 lexical:aku	シャトルバスを使えば、近隣のモールにもアクセスできますよ	셔틀버스를 쓰면, 인근의 몰에도 액세스할 수 있어요	keep	lookup
-cx:katakana-fragment:10	パワーはアクリス クリティカルはユグドラシル！	파워는 아쿠 다람쥐 크리티컬은 유그드라실!	fix	rewrites
-cx:katakana-fragment:10	かなちゃんが アクたんに 入れ込み過ぎなんじゃなく…。	카나짱이 아쿠 너무 단순히 넣는 것이 아니고….	fix	rewrites
-cx:katakana-fragment:10	トップアクドルたちは 皆 ここで名をあげた！	톱 아쿠 달러들은 모두 여기서 이름을 떨쳤다!	fix	rewrites
+cx:katakana-fragment:10	パワーはアクリス クリティカルはユグドラシル！	has:아쿠	fix	rewrites
+cx:katakana-fragment:10	かなちゃんが アクたんに 入れ込み過ぎなんじゃなく…。	has:아쿠	fix	rewrites
+cx:katakana-fragment:10	トップアクドルたちは 皆 ここで名をあげた！	has:아쿠	fix	rewrites
 cx:katakana-fragment:10	際限なく大量のアクが 吹き出してくる	끝 없이 대량의 거품이 터트려 온다	keep	rewrites
 cx:katakana-fragment:10	紙の壁が アクを どんどん吸い取ってゆく	종이의 벽이 거품을 점점 빨아 들여 간다	keep	rewrites
 cx:katakana-fragment:20	アク・・・アクチニウム	악···악티늄	fix	rewrites
