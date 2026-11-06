@@ -766,8 +766,17 @@ bool ContractedTeiru(std::string_view s, size_t pos, Match& m) {
     const char32_t last = LastRune(head).cp;
     const bool de = to.starts_with("で");
     if (de ? !(last == U'ん' || last == U'い') : !(IsKanjiClass(last) || In(last, U"っいしえけげせぜてねべぺめれきぎじちひびみり"))) return false;
-    // an ichidan verb whose stem ends in て or で (捨てる, 育てる, 茹でる) is no contraction
-    if (VerbIs(s.substr(0, p))) return false;
+    // an ichidan verb whose stem ends in て or で (捨てる, 勝てる, 育てる, 茹でる) is no contraction: the verb's
+    // own stem before the て (its kanji and the kana after them, or its kana alone) and the てる make a verb
+    std::string_view stem = StemBefore(s, pos);
+    if (stem.empty()) {
+        size_t start = pos;
+        while (start > 0 && IsHiraganaClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
+        stem = s.substr(start, pos - start);
+    }
+    if (!stem.empty() && VerbIs(Cat({stem, s.substr(pos, p - pos)}))) return false;
+    // nor the potential in てる of a godan verb in つ right after its kanji (勝てる of 勝つ, 待てる of 待つ)
+    if (!stem.empty() && IsKanjiClass(LastRune(stem).cp) && !de && VerbIs(Cat({stem, "つ"}))) return false;
     bool follows = false;
     for (const std::string_view f : {"んだし", "のだし"}) {
         // not the ですから of a reason (ついてるんですから)
@@ -977,8 +986,9 @@ bool UngivenFavour(std::string_view s, size_t pos, Match& m) {
 }
 
 // お and the stem of a dictionary verb before a copula, the state the speaker honours (お帰りですか, お立ちです,
-// お過ごしで、): お and the stem before になる (お帰りになりますか 돌아오십니까). Not the nouns made of a
-// stem (お願いです, お返しです, お疲れですか), nor お持ち, which reads as written.
+// お過ごしで、): お and the stem before になる, a question in ですか the present のですか (お急ぎですか
+// お急ぎになるのですか 서두르십니까, not the future 서두르시겠습니까). Not the nouns made of a stem (お願いです, お返しです,
+// お疲れですか), nor お持ち, which reads as written.
 bool HonouredStemCopula(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!Lit(s, p, "お")) return false;
@@ -1009,7 +1019,7 @@ bool HonouredStemCopula(std::string_view s, size_t pos, Match& m) {
     const bool past = dict::InClass(HDTRANS_CLASS("stem.o-past"), stem);
     if (past && s.substr(p).starts_with("でしょう")) return false;
     static constexpr std::string_view kForms[][2] = {
-        {"でしたか", "になりましたか"}, {"でした", "になりました"}, {"ですか", "になりますか"}, {"です", "になります"},
+        {"でしたか", "になりましたか"}, {"でした", "になりました"}, {"ですか", "になるのですか"}, {"です", "になります"},
         {"でしょう", "になるでしょう"}, {"だった", "になった"},     {"なの", "になるの"},       {"なん", "になるん"},
         {"で、", "になって、"},         {"で…", "になって…"},       {"だ", "になる"},
     };

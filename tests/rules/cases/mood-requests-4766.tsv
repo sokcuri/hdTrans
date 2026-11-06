@@ -34,14 +34,14 @@ normalize:kansai-ee	ゆうくんも我慢するより、ずっと気持ちええ
 normalize:kansai-ee	その調子で ココーンと 点も 取ってくれて ええんやで。	그 상태로 코콘과 점도 집어 주어도 되는 이야.	keep	normalize
 output:late-casual	「かといって、汐美祭が終わってから選挙の下地を作り初めても間に合わないだろう」	「그렇다고 해서, 시오미제가 끝나고 나서 선거의 기초를 만들어 처음도 늦을 거야」	fix	rewrites
 output:late-casual	「少しでもトラブルがあったら間に合わないですよね？	「조금이라도 트러블이 있으면 늦죠?	fix	rewrites
-output:late-casual	「数が多くて対応が間に合わない。	「수가 많아서 대응이 늦다.	fix	rewrites
+output:late-casual	「数が多くて対応が間に合わない。	has:대응이 늦는다.	fix	rewrites
 output:late-casual	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4한으로 늦네」	fix	rewrites
 output:late-casual	「間に合わないか」	「늦는가」	fix	rewrites
 grammar:result-suru-past	失敗してるんだから 学習しなきゃね｡	실패했으니까 학습해야지.	fix	conjugation
 grammar:result-suru-past	私…何度も同じような失敗してるのに	나…몇 번이나 같은 실패했는데	fix	conjugation
-grammar:result-suru-past	寝てるだけで全てが完了してるんだもん。	자고 있을 뿐으로 모두가 완료했는걸.	fix	conjugation
+grammar:result-suru-past	寝てるだけで全てが完了してるんだもん。	has:완료했	fix	conjugation
 grammar:result-suru-past	「仕方ないさ、今日は祐介の初恋相手の白瀬舞が帰国してるんだから」	「어쩔 수 없어, 오늘은 유스케의 첫사랑 상대 시라세 마이가 귀국했으니까」	fix	conjugation
-grammar:result-suru-past	解散してたのか！	해산했는지!	fix	conjugation
+grammar:result-suru-past	解散してたのか！	has:해산했	fix	conjugation
 grammar:result-suru-past	「よく見ると、ところどころ失敗してる部分があるわね」	「자세히 보면, 군데군데 실패한 부분이 있어」	fix	conjugation
 grammar:result-suru-past	「へぇ～、古賀さん結婚してるんだぁ～。	「헤에~, 코가 씨 결혼했어~.	fix	conjugation
 grammar:result-suru-past	10年も婚約してたセルフィア様と解消するって噂は本当だったのね！	10년이나 약혼했던 세르피아님과 해소한다는 소문은 사실이었구나!	fix	conjugation
@@ -76,8 +76,8 @@ cx:vocative-ya:10	「いや、だって山本さんっておじさんだと思�
 cx:vocative-ya:10	「あーいや、千莉はかわいいから、色々やってもらいたくなるんだ」	!rule:cx:vocative-ya:10	keep	rewrites
 cx:vocative-ya:10	いや、うつむいて小さな嗚咽を漏らす、皐月のそばにいてやりたくなった。	!rule:cx:vocative-ya:10	keep	rewrites
 cx:vocative-ya:10	「ぢや、もう死なないの」	!rule:cx:vocative-ya:10	keep	rewrites
-cx:kure-request:15	「明日な、映畫でも見て夕方喜右衞門橋の下で待つてゐてくれ、おら、迎へに行く。	「내일인, 영화라도 봐 저녁 키에몬 다리 아래 나오고 기다리는이라고 라고 줘, 등, 영에에 갈 거야.	fix	rewrites
-cx:kure-request:15	我慢してくれ、な、我慢してくれ。	참아 줘, 차, 참아 줘.	fix	rewrites
+cx:kure-request:15	「明日な、映畫でも見て夕方喜右衞門橋の下で待つてゐてくれ、おら、迎へに行く。	「내일인, 영화라도 봐 저녁 키에몬 다리 아래 나오고 기다리는이라고 라고 줘, 등, 영에에 갈 거야.	keep	rewrites
+cx:kure-request:15	我慢してくれ、な、我慢してくれ。	has:참아 줘,	fix	rewrites
 cx:kure-request:15	帰ってcoffeeでもいれてくれ、なっ？	돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
 cx:kure-request:15	「歌をうたってくれ、トオカル・ダル」みんなが叫んだ。	「노래를 노래해 줘, 트오칼 달」모두가 외쳤다.	fix	rewrites
 cx:kure-request:15	『リック、とにかくこの事を早く大統領に報告してくれ、それと世界各国にもだ。	『릭, 어쨌든 이 일을 빨리 대통령에게 보고해 줘, 그것과 세계 각국에도다.	fix	rewrites
@@ -126,7 +126,7 @@ cx:promise-kara:10	Admiral、疲れているのか？ 私が紅茶をいれよ�
 cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
 cx:kure-request:10	It's ten now. ふー食った食った。食いすぎたな。帰ってcoffeeでもいれてくれ、なっ？	It's ten now. 후 먹었다 먹었다. 너무 먹었군. 돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
 cx:kure-request:10	待ってくれ、この俺も……この俺も一緒に行かせてくれ。自分の無実は自分で証明してみせる！	기다려 줘, 이 나도……이 나도 함께 가게 해 줘. 자신의 결백은 스스로 증명해 내겠다!	fix	rewrites
-cx:kure-request:10	「たのむ空気を読んでくれ、今じゃないぞ今じゃ」	「부탁하는 분위기를 읽어 줘, 지금이 아니어 지금이야」	fix	rewrites
+cx:kure-request:10	「たのむ空気を読んでくれ、今じゃないぞ今じゃ」	has:분위기를 읽어 줘,	fix	rewrites
 cx:yo-intent:17	「なぜそこに行く」	!rule:cx:yo-intent:17	keep	rewrites
 cx:yo-intent:17	Lv.84 アリスさん「行く」HP:3155/9999 MP:302	!rule:cx:yo-intent:17	keep	rewrites
 cx:yo-intent:17	「こいつを、下に連れて行く」	!rule:cx:yo-intent:17	keep	rewrites
@@ -204,3 +204,9 @@ cx:yo-intent:16	「あたしが行く」	「내가 갈게」	fix	rewrites
 cx:yo-intent:16	「俺が行く」	「내가 갈게」	fix	rewrites
 cx:yo-intent:16	私が行く」	!rule:cx:yo-intent:16	keep	rewrites
 cx:yo-intent:16	「彼はもう帰る」	!rule:cx:yo-intent:16	keep	rewrites
+cx:vocative-ya:10	先生や、親に相談しなさい	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	兄や、姉と遊んでくれ	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	友達や、家族に話してください	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	彼や、彼女を呼んでくれ	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	母や、姉に聞いてください	!rule:cx:vocative-ya:10	keep	rewrites
+cx:vocative-ya:10	太郎や、早く寝なさい	타로야, 빨리 자	fix	rewrites
