@@ -395,7 +395,7 @@ HD_TEST(pipeline_sound) {
         // A と that starts a stutter after the pause is no quote (と、とと、溶ける).
         {"ひいい！？　と、とと、溶ける", "히이이！？　\xEE\x80\x80" "、\xEE\x80\x80" "、溶ける"},
         // Before a katakana word the と stays adverbial, but not between two sounds.
-        {"スタスタとベッド", "척척 ベッド"},
+        {"スタスタとベッド", "성큼성큼 ベッド"},
         {"ドキドキとワクワク", "두근두근と두근두근"},
         // A doubled hiragana unit no word reads is a sound before と (とてとてと 토테토테).
         {"とてとてと歩く", "토테토테 歩く"},

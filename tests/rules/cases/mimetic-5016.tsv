@@ -1,0 +1,37 @@
+# 규칙: LEX-5016
+rule	input	expected	kind	layer
+sound:mimetic-gloss	「女の子にそれ聞く～？　ピッチピチのギャルだよ♥」	has:탱탱한 갸루	fix	sound
+sound:mimetic-gloss	はっと気づいた。	has:퍼뜩 눈치챘다	fix	sound
+sound:mimetic-gloss	ぶつぶつとひとりごとをつぶやきながら、猫猫は騒動の場を後にした。	lacks:투덜투덜	fix	sound
+sound:mimetic-gloss	しみじみと感じた。	lacks:절절	fix	sound
+dict:w:35200	おっとりとした声は、義母であるエマ。	has:느긋하고 온화한 목소리	fix	lookup
+dict:w:35201	興奮に任せて胸に触れたところで唇がほどかれて、手もぐいっと押し返された。	has:손도 꾹 밀어	fix	lookup
+cx:mimetic-cues:10	そして、私の胸の上に乗ると、ごろり、ごろりと喉を鳴らし始めた。	has:그르렁, 그르렁	fix	rewrites
+cx:mimetic-cues:10	ボールがごろりと転がった。	!rule:cx:mimetic-cues:10	keep	rewrites
+cx:mimetic-cues:20	我ながらなぜここまでギュンギュンに予定を詰め込むのかわからない。	has:빡빡하게	fix	rewrites
+cx:mimetic-cues:20	車がギュンギュン走る	!rule:cx:mimetic-cues:20	keep	rewrites
+cx:mimetic-cues:30	じわっとまた真帆の奥から、愛液が染み出してくる。	has:찔끔 또	fix	rewrites
+cx:mimetic-cues:30	じんと染み入るっていうか。	!rule:cx:mimetic-cues:30	keep	rewrites
+cx:mimetic-cues:40	「ほら、それがダメなんでしょ。ぴっと胸を張り、笑顔で『頑張ります』！」	has:쫙 가슴을	fix	rewrites
+cx:mimetic-cues:40	ピッと音が鳴った。	!rule:cx:mimetic-cues:40	keep	rewrites
+cx:mimetic-cues:50	サクサク進む	has:순조롭게 나아간다	fix	rewrites
+cx:mimetic-cues:50	クッキーをサクサク食べる	has:바삭바삭 먹는다	keep	rewrites
+cx:mimetic-cues:60	心臓がバクバク言い、汗が噴き出した。	has:두근두근 뛰어	fix	rewrites
+cx:mimetic-cues:62	ご飯をばくばく食べる	has:우걱우걱 먹는다	fix	rewrites
+cx:mimetic-cues:62	心臓がばくばくしている	!rule:cx:mimetic-cues:62	keep	rewrites
+cx:mimetic-cues:70	でも、こっちの世界じゃどーも魔力の回復が遅いみたいで、そうぽんぽん使うわけにもいかないの。	has:펑펑 쓸 수도	fix	rewrites
+cx:mimetic-cues:70	頭をぽんぽんと撫でる	!rule:cx:mimetic-cues:70	keep	rewrites
+cx:mimetic-cues:80	呑気な声に彼女は頭を抱え、彼の前に立つように剣をすらりと抜いた。	has:검을 스르릉 뽑았다	fix	rewrites
+cx:mimetic-cues:80	すらりと答えた	!rule:cx:mimetic-cues:80	keep	rewrites
+cx:mimetic-cues:90	一匹食われるたびに焦りで股間がキュッとなってしまい、呼吸を忘れて剣を振りまくった。	has:움찔 오그라들어	fix	rewrites
+cx:mimetic-cues:90	すぐさま、きゅっとこちらに身体を寄せてくる未散。	!rule:cx:mimetic-cues:90	keep	rewrites
+cx:mimetic-cues:100	レナが俺だけの瞳をじっと見つめながら、じゃり、じゃり、とガラスの破片を踏みしめながら近づいてくる。	has:자박, 자박	fix	rewrites
+cx:mimetic-cues:100	じゃりを敷いた道	!rule:cx:mimetic-cues:100	keep	rewrites
+cx:mimetic-cues:110	３人ともぶつぶつと不満を口にしながら、エレベーターをあきらめて階段を下りていく。	has:투덜투덜 불만을	fix	rewrites
+cx:mimetic-cues:110	いつもブツブツ言ってた 生活が苦しいと	has:투덜투덜	fix	rewrites
+cx:mimetic-cues:120	はっと胸をつかれて源吉がおもわず息をのむと、山本はハハハと大声を立てて笑った。	has:흠칫 가슴을	fix	rewrites
+cx:mimetic-cues:120	はっと気づいた。	!rule:cx:mimetic-cues:120	keep	rewrites
+cx:mimetic-cues:130	通り過ぎる瞬間、さらっと、長い黒髪が風に揺れる。	has:찰랑, 긴 흑발	fix	rewrites
+cx:mimetic-cues:130	「さらっと言うなよっ！	!rule:cx:mimetic-cues:130	keep	rewrites
+cx:mimetic-cues:60	心臓がドキドキしている	!rule:cx:mimetic-cues:60	keep	rewrites
+cx:mimetic-cues:110	ぶつぶつとひとりごとをつぶやきながら、猫猫は騒動の場を後にした。	!rule:cx:mimetic-cues:110	keep	rewrites
