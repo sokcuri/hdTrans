@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>일한 기계번역 hdTrans</title>
 <meta name="description" content="규칙 기반 일본어→한국어 번역 엔진 hdtrans. 번역은 브라우저 안에서 실행됩니다.">
+<script>
+// The saved 라이트 or 다크 theme, set before the first paint (app.ts keeps it).
+try {
+  const t = localStorage.getItem('hdtrans.theme');
+  if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+} catch {}
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -44,6 +51,10 @@
       </select></label>
       <div class="field dictfield"><span>사전</span> <span id="applied" title=""></span>
         <button type="button" id="dict-edit" title="사전 탭에서 이 사전 편집">사전 편집</button></div>
+      <div class="seg theme" role="radiogroup" aria-labelledby="theme-name"><span id="theme-name">테마</span>
+        <span class="opts"><label title="기기 설정을 따릅니다."><input type="radio" name="theme" value="system" checked><span>시스템</span></label><label><input
+          type="radio" name="theme" value="light"><span>라이트</span></label><label><input type="radio" name="theme" value="dark"><span>다크</span></label></span>
+      </div>
     </div>
     </div></dialog>
   </div>

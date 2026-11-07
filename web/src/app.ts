@@ -94,6 +94,18 @@ outMode.addEventListener('change', () => {
   summed();
   showOutput();
 });
+// 테마: 시스템 follows the device; 라이트 and 다크 set data-theme on the root,
+// which the inline script in index.html also does before the first paint.
+const savedTheme = localStorage.getItem('hdtrans.theme');
+const theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'system';
+(document.querySelector(`input[name=theme][value=${theme}]`) as HTMLInputElement).checked = true;
+document.querySelectorAll<HTMLInputElement>('input[name=theme]').forEach((el) =>
+  el.addEventListener('change', () => {
+    localStorage.setItem('hdtrans.theme', el.value);
+    if (el.value === 'system') delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = el.value;
+  }),
+);
 
 // The settings open as a layer from the 설정 button: a popover under it, or
 // on narrow screens a sheet at the bottom. Choices apply at once; the button
