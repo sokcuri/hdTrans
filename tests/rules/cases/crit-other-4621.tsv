@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 builtin-pattern:ませぬか	終わらせると言ってもどうやって？一対一では時間が掛かるのではありませぬか？	끝낸다고 해도 어떻게? 일대일에서는 시간이 걸리는 것은 아니옵니까?	fix	builtin-pattern
 builtin-pattern:ませぬか	それは学生ではありませぬか	그것은 학생이 아니옵니까	fix	builtin-pattern
 builtin-pattern:ませぬか	時間が掛かるのではありませんか？	시간이 걸리는 것은 아닙니까?	keep	builtin-pattern
-cx:sense-cues-1:264	へい、お待ち！ざるそばと天麩羅の盛り合わせ、四人前だよ	헤이, 대기! 메밀국수와 튀김의 모둠, 4인분이야	fix	rewrites
+cx:sense-cues-1:264	へい、お待ち！ざるそばと天麩羅の盛り合わせ、四人前だよ	헤이, 대기! 메밀국수와 튀김 모둠, 4인분이야	fix	rewrites
 cx:sense-cues-1:262	二人前のラーメン	2인분의 라면	fix	rewrites
 cx:sense-cues-1:262	二人前に出た	두 사람 앞에 나왔다	keep	rewrites
 cx:sense-cues-1:263	三人前お願いします	3인분 부탁드립니다	fix	rewrites

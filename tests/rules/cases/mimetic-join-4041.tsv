@@ -1,0 +1,26 @@
+# 규칙: GRM-4041
+rule	input	expected	kind	layer
+sound:mimetic-join	ふんわりと香ばしい焼きたてパン	폭신하고 고소한 갓 구운 빵	fix	sound
+sound:mimetic-join	御園の手は、しっとりと柔らかかった。	has:촉촉하고 부드러웠다	fix	sound
+sound:mimetic-join	緑の芝生がつやつやと滑らかで	has:반들반들하고 매끄러워	fix	sound
+sound:mimetic-join	奥の方から、とろりと熱い粘液があふれてくる。	has:걸쭉하고 뜨거운	fix	sound
+sound:mimetic-join	中は桜庭の愛液でぬるぬると熱い。	has:미끌미끌하고 뜨겁다	fix	sound
+sound:mimetic-join	ふんわりと膨らむ	has:폭신하게 부풀	fix	sound
+sound:mimetic-join	ぷっくりと膨らんだ股間の中心を、指で触る。	has:통통하게 부풀	fix	sound
+sound:mimetic-join	しっとりと汗ばみ、かすかに震えていた。	has:촉촉하게 땀이	fix	sound
+sound:mimetic-join	嬉野さんが、椅子の上にちょこんと座る。	has:다소곳하게 앉는다	fix	sound
+sound:mimetic-join	皮をカリッと焼くためには いくつかコツがある	has:바삭하게 굽기	fix	sound
+sound:mimetic-join	そうつぶやく千里の瞳は、とろんと潤んでいた。	has:몽롱하게	fix	sound
+sound:mimetic-join	いい字を スカッと書けた時は 気分いいもんなぁ。	has:후련하게	fix	sound
+sound:mimetic-join	髪の毛がふんわりと頬に当たった。	has:폭신 뺨에	keep	sound
+sound:mimetic-join	彼女は自分の腿をぽんぽんと叩いた。	has:통통 두드렸다	keep	sound
+sound:mimetic-join	温かくて小さなモノがぬるぬると這い回る。	has:미끌미끌 기어다닌다	keep	sound
+sound:mimetic-join	わたしのお腹の辺りをぽんぽんと優しく叩いて	has:통통 다정하게	keep	sound
+sound:mimetic-join	ほっこりとした卵	훈훈한 알	keep	sound
+sound:mimetic-join	ふふっ、お顔べとべとです	후훗, 얼굴 끈적끈적입니다	keep	sound
+sound:mimetic-join	先端に感じる、ぬめりと熱。	끝에 느끼는, 미끈 열.	keep	sound
+sound:mimetic-join	ふふっ、不思議と今はこの辺りがぽかぽかと幸せで	has:따끈따끈하고 행복해	fix	sound
+cx:mimetic-join:10	ひんやりと冷たい	서늘하고 차갑다	fix	rewrites
+cx:mimetic-join:20	ひんやりと冷えた空気	has:서늘하게	fix	rewrites
+cx:mimetic-join:10	ひんやりとした空気	서늘한 공기	keep	rewrites
+cx:mimetic-join:20	ひんやりと冷たく光る	서늘과 차갑게 빛난다	keep	rewrites

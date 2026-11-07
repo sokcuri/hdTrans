@@ -1,0 +1,28 @@
+# 규칙: GRM-4042
+rule	input	expected	kind	layer
+cx:adverb-ku:10	あっけなく、三上悟は死んだ。	has:허무하게,	fix	rewrites
+cx:adverb-ku:10	激しく、彼は叫んだ。	has:격렬하게,	fix	rewrites
+cx:adverb-ku:10	珍しく、桜庭が場を盛り上げる役に回った。	has:드물게,	fix	rewrites
+cx:adverb-ku:10	めずらしく、白崎が口ごもった。	has:드물게,	fix	rewrites
+cx:adverb-ku:20	だから……優しく、してください……」	has:다정하게,	fix	rewrites
+cx:adverb-ku:20	そこから…柔らかく、揉み込んでみてくれるかな？	has:부드럽게,	fix	rewrites
+cx:adverb-ku:20	小さく、頷き返す。	has:작게,	fix	rewrites
+cx:adverb-ku:20	強く、祈る。	has:강하게,	fix	rewrites
+cx:adverb-ku:20	滞りなく、捕まえることが出来ました	has:순조롭게,	fix	rewrites
+cx:adverb-ku:20	この痛みも…はぁ…嬉しく、感じます	has:기쁘게,	fix	rewrites
+cx:adverb-ku:20	その…長く、歩きたいんだけど	has:길게,	fix	rewrites
+cx:adverb-ku:20	と整備を…しないと……速く、走れない	has:빠르게,	fix	rewrites
+cx:adverb-ku:20	深く、深く……頭をさげた。	has:깊게, 깊게	fix	rewrites
+cx:adverb-ku:10	暗く、寒い夜	어둡고, 추운 밤	keep	rewrites
+cx:adverb-ku:10	空は青く、雲は白い	하늘은 푸르고, 구름은 희다	keep	rewrites
+cx:adverb-ku:10	明るく、よく気がつく性格も、仕事に向いていると思う。	has:밝고,	keep	rewrites
+cx:adverb-ku:10	柔らかく、瑞々しい感触が唇に触れた。	has:부드럽고,	keep	rewrites
+cx:adverb-ku:20	甘く、蕩けてしまいそうなキスだった。	has:달고,	keep	rewrites
+cx:adverb-ku:20	怖く、なったよね…ぐすっ	has:무섭고,	keep	rewrites
+cx:adverb-ku:20	痛く、ない！	has:아프고,	keep	rewrites
+cx:adverb-ku:20	優しく、熱く、いやらしくな	has:다정하고, 뜨겁고	keep	rewrites
+cx:adverb-ku:20	ある夜、頭の上が、いつになく、明るく、青白く見られたのでした。	has:밝고,	keep	rewrites
+cx:adverb-ku:10	いえ、もう分かってるんです。拉致では無く、私は男に売られたのだと。	has:아니고,	keep	rewrites
+cx:adverb-ku:20	といっても対案があるわけではなく、諦めるよりほかない。	has:아니고,	keep	rewrites
+cx:adverb-ku:20	若く、見るからに健康で腕の立つクロード	has:젊고,	keep	rewrites
+cx:adverb-ku:10	レナの拳銃射撃は、速く、そして正確だった。	has:빠르고,	keep	rewrites

@@ -267,6 +267,22 @@ struct SoundMatch {
     bool adj = false;   // SoundRow::adj
 };
 
+// Whether the ono sound m, the last of its chain, writes the root of a Korean 하다 adjective
+// (ko-root.mimetic-adjective: ふんわり 폭신) as an adverb, with or without its と: a と that ends it is
+// its key's or one it took, not the last kana of a doubled key (べとべと).
+bool MimeticAdjectiveAdverb(const SoundMatch& m, char32_t last) {
+    if (m.intj || !dict::InClass(HDTRANS_CLASS("ko-root.mimetic-adjective"), m.korean)) return false;
+    const std::u32string_view k = m.key;
+    return last != U'と' || !(k.ends_with(U'ト') && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2));
+}
+
+// Whether the key of the ono sound m, without a final ト, is one unit said twice (ポンポン, ヌルヌル).
+bool DoubledKey(const SoundMatch& m) {
+    std::u32string_view k = m.key;
+    if (k.ends_with(U'ト')) k.remove_suffix(1);
+    return k.size() >= 2 && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
+}
+
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
 // out the vowel before it (히이, 아우; not 아앗).
 bool EndsDrawn(std::string_view s) {
@@ -509,6 +525,8 @@ private:
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     bool Adnominal(const SoundMatch& m, size_t i) const;
+    bool StartsAdjective(size_t i) const;
+    bool StartsConjugatedVerb(size_t i) const;
     size_t QuotingAt(size_t i) const;
     size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
@@ -1508,6 +1526,54 @@ bool SoundText::StartsVerb(size_t i) const {
     return verb && longest > offsets_[i + 1] - offsets_[i];
 }
 
+// Whether an adjective that is no adverb starts at character i: a dictionary stem of an i-adjective
+// before い, か, け or the negative くない, or of an adjectival noun before な, だ, で or no kana (甘い,
+// 柔らかかった, 甘くない, 滑らかな; not 優しく or 甘くなる).
+bool SoundText::StartsAdjective(size_t i) const {
+    const dict::Candidates rd =
+        snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if ((c.user != nullptr && c.user->kana) || c.codes == nullptr || c.codes->part.Empty()) continue;
+        const size_t after = i + text::RuneCount(c.source);
+        const char digit = c.codes->part.ClassDigit();
+        if (after >= rs_.size() || !IsKana(rs_[after])) {
+            if (digit == '8') return true;
+            continue;
+        }
+        if ((digit == '7' && In(rs_[after], U"いかけ")) || (digit == '8' && In(rs_[after], U"なだで"))) return true;
+        // The negative くない, くなかった of an i-adjective, not the くなる of a change.
+        if (digit == '7' && rs_[after] == U'く' && after + 2 < rs_.size() && rs_[after + 1] == U'な' &&
+            In(rs_[after + 2], U"いかく")) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Whether a verb conjugates at character i: the text there starts with no particle, and the longest
+// dictionary key there is a verb stem, of one character or more, with kana that are no particle after
+// it (膨らむ, 焼く, 笑って; not 光が, 締め付けに, 熱。).
+bool SoundText::StartsConjugatedVerb(size_t i) const {
+    if (i >= rs_.size() || In(rs_[i], kParticles) || In(rs_[i], U"だじ")) return false;
+    const dict::Candidates rd =
+        snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
+    size_t longest = 0;
+    bool verb = false;
+    for (const dict::Candidate& c : rd.list) {
+        if (c.user != nullptr && c.user->kana) continue;
+        const bool isVerb = c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'M';
+        const size_t n = text::RuneCount(c.source);
+        if (n > longest) {
+            longest = n;
+            verb = isVerb;
+        } else if (n == longest && isVerb) {
+            verb = true;
+        }
+    }
+    const size_t after = i + longest;
+    return verb && after < rs_.size() && IsHiraganaRune(rs_[after]) && !In(rs_[after], kParticles);
+}
+
 // The length in characters of the longest dictionary key at character p, at least 1.
 size_t SoundText::WordLen(size_t p) const {
     size_t base = 0, user = 0, name = 0;
@@ -2209,6 +2275,17 @@ std::string SoundText::Write() {
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
             if (quoted == 0 && !chain.back().intj && Quoting(next - 1) > 0) next--;
             const bool doing = quoted > 0 || (next < rs.size() && In(rs[next], kSuruKana));
+            // A lone mimetic with the root of a Korean 하다 adjective, with its と or not, joins an adjective
+            // right after it with 하고 (ふんわりと甘い 폭신하고 달다). One said once, not a doubled sound that
+            // stands as an adverb by itself (ポンポンと叩く 통통 두드리다), is the manner of a verb right after it, 하게
+            // (ふんわりと膨らむ 폭신하게 부풀다; spec GRM-4041).
+            std::string_view joined;
+            // Without its と only a word in kanji starts there (すべすべそうだ: そう is no adjective of its own).
+            if (!doing && quoted == 0 && chain.size() == 1 && next < rs.size() && MimeticAdjectiveAdverb(chain.back(), rs[next - 1]) &&
+                (rs[next - 1] == U'と' || IsKanjiRune(rs[next]))) {
+                if (StartsAdjective(next)) joined = "하고 ";
+                else if (!DoubledKey(chain.back()) && StartsConjugatedVerb(next)) joined = "하게 ";
+            }
             for (size_t k = 0; k < chain.size(); k++) {
                 SoundMatch& m = chain[k];
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
@@ -2253,6 +2330,8 @@ std::string SoundText::Write() {
             } else if (Adnominal(chain.back(), next)) {
                 b += "한 ";
                 next++;
+            } else if (!joined.empty()) {
+                b += joined;
             } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
                        !Sounds(next + 1, false, false).empty()) {
                 // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
