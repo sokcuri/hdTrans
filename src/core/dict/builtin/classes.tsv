@@ -12503,13 +12503,14 @@ noun.colored-part	短髪
 noun.colored-part	眉
 noun.colored-part	鬣
 noun.colored-part	尻尾
-//= noun.hair-color	Words of a hair color, before an eye color of noun.eye-color in one compound (銀髪赤眼 은발에 붉은 눈; spec LEX-5202).
+//= noun.hair-color	Words of a hair color, before an eye color of noun.eye-color in one compound (金髪紫眼 금발에 보라색 눈; spec LEX-5202).
 noun.hair-color	金髪
 noun.hair-color	銀髪
 noun.hair-color	黒髪
 noun.hair-color	白髪
 noun.hair-color	茶髪
 noun.hair-color	赤髪
+noun.hair-color	紅髪
 noun.hair-color	青髪
 noun.hair-color	緑髪
 noun.hair-color	紫髪
@@ -12531,6 +12532,9 @@ noun.eye-color	赤目
 noun.eye-color	金瞳
 noun.eye-color	紫瞳
 noun.eye-color	赤瞳
+noun.eye-color	青眼
+noun.eye-color	朱眼
+noun.eye-color	黒眼
 //= verb.color-take	Dictionary forms of verbs of taking on, giving or shining a color, after which the に of a color is (으)로 (赤に染まる 빨간색으로 물들다, 金色に輝く 금빛으로 빛나다; spec LEX-5204).
 verb.color-take	染まる
 verb.color-take	染める
@@ -12544,3 +12548,23 @@ verb.color-take	塗る
 verb.color-take	燃える
 verb.color-take	彩る
 verb.color-take	灯る
+//= noun.hair-sino	Hair colors read as a Sino word (金髪 금발, 白髪 백발, 赤髪 적발), which make one Sino compound with an eye color of noun.eye-common right after them (銀髪碧眼 은발벽안; spec LEX-5202).
+noun.hair-sino	金髪
+noun.hair-sino	銀髪
+noun.hair-sino	黒髪
+noun.hair-sino	白髪
+noun.hair-sino	赤髪
+noun.hair-sino	紅髪
+noun.hair-sino	青髪
+noun.hair-sino	緑髪
+//= noun.eye-common	Common eye colors that stay Sino after a hair color of noun.hair-sino: 벽안, 적안, 흑안, 금안 (金髪碧眼 금발벽안, 黒髪黒目 흑발흑안; spec LEX-5202).
+noun.eye-common	碧眼
+noun.eye-common	青眼
+noun.eye-common	蒼眼
+noun.eye-common	赤眼
+noun.eye-common	紅眼
+noun.eye-common	朱眼
+noun.eye-common	黒眼
+noun.eye-common	黒目
+noun.eye-common	金眼
+noun.eye-common	金瞳

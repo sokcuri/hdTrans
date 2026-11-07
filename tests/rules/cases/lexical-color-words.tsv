@@ -48,12 +48,6 @@ cx:color-no:30	金の髪	has:금빛 머리카락	fix	rewrites
 cx:color-no:32	銀の髪	has:은빛 머리카락	fix	rewrites
 cx:color-no:32	銀のスプーン	!rule:cx:color-no:32	keep	rewrites
 cx:color-no:30	金のために	!rule:cx:color-no:30	keep	rewrites
-cx:color-no:40	銀髪赤眼の少女	has:은발에 붉은 눈의 소녀	fix	rewrites
-cx:color-no:40	絵にかいたような金髪碧眼の爽やかな外見で、	has:금발에 푸른 눈의	fix	rewrites
-cx:color-no:40	「うーん、金髪碧眼とか？	has:금발에 푸른 눈이라든지	fix	rewrites
-cx:color-no:40	ツンデレ？黒髪黒目	has:흑발에 검은 눈	fix	rewrites
-cx:color-no:40	短い黒髪に、高くも低くもない平均的な身長。	has:짧은 흑발에,	keep	rewrites
-cx:color-no:40	焦げ茶色のコートを身に着けた金髪の男	has:금발의 남자	keep	rewrites
 cx:color-no:80	果物の汁と何かをあわせた、茶色い汁。	has:갈색 국물	fix	rewrites
 dict:w:35028	茶色く透き通ったテリヤキソース	has:갈색으로 투명한	fix	defaults
 cx:color-no:80	色素の薄い金髪と茶色い瞳を持つ	has:갈색 눈동자	fix	rewrites
@@ -93,3 +87,26 @@ cx:color-no:15	白の髪	has:흰 머리카락	fix	rewrites
 cx:color-no:15	白のドレス	!rule:cx:color-no:15	keep	rewrites
 cx:color-no:20	愛らしいピンクのアルベルティーヌ。	has:핑크의	keep	rewrites
 cx:color-no:30	金の巻き毛	has:금빛 곱슬머리	fix	rewrites
+cx:color-no:36	赤髪碧眼	has:적발벽안	fix	rewrites
+cx:color-no:36	赤髪の少女	!rule:cx:color-no:36	keep	rewrites
+cx:color-no:37	青髪赤眼	has:청발적안	fix	rewrites
+cx:color-no:37	青髪の少年	!rule:cx:color-no:37	keep	rewrites
+cx:color-no:38	緑髪碧眼	has:녹발벽안	fix	rewrites
+cx:color-no:38	緑髪翠眼	!rule:cx:color-no:38	keep	rewrites
+cx:color-no:40	絵にかいたような金髪碧眼の爽やかな外見で、	has:금발벽안의	keep	rewrites
+cx:color-no:40	「うーん、金髪碧眼とか？	has:금발벽안이라든지	keep	rewrites
+cx:color-no:40	銀髪蒼眼の美女	has:은발벽안의 미녀	fix	rewrites
+cx:color-no:40	茶髪碧眼の少女	!rule:cx:color-no:40	keep	rewrites
+cx:color-no:42	銀髪赤眼の少女	has:은발적안의 소녀	keep	rewrites
+cx:color-no:42	赤眼の男	!rule:cx:color-no:42	keep	rewrites
+cx:color-no:44	ツンデレ？黒髪黒目	has:흑발흑안	fix	rewrites
+cx:color-no:44	黒眼鏡の男	!rule:cx:color-no:44	keep	rewrites
+cx:color-no:46	白髪金眼の老人	has:백발금안의 노인	fix	rewrites
+cx:color-no:46	金眼の竜	!rule:cx:color-no:46	keep	rewrites
+cx:color-no:48	金髪紫眼の少女	has:금발에 보라색 눈의 소녀	fix	rewrites
+cx:color-no:48	銀髪翠眼	has:은발에 초록 눈	fix	rewrites
+cx:color-no:48	茶髪碧眼の少女	has:갈색 머리에 푸른 눈의 소녀	fix	rewrites
+cx:color-no:48	赤毛碧眼	has:붉은 머리에 푸른 눈	fix	rewrites
+cx:color-no:48	短い黒髪に、高くも低くもない平均的な身長。	has:짧은 흑발에,	keep	rewrites
+cx:color-no:48	金髪碧眼の少年	!rule:cx:color-no:48	keep	rewrites
+cx:color-no:42	黒髪赤眼の男	has:흑발적안의 남자	fix	rewrites
