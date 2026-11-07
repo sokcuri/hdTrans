@@ -1,0 +1,66 @@
+# 규칙: LEX-5007, LEX-5008
+rule	input	expected	kind	layer
+pack:argument-senses:5030	婚姻届はまだ出してない	has:혼인신고는 아직 하지	fix	packs
+pack:argument-senses:5030	婚姻届を出しに行こう	has:혼인신고를 하러 가자	fix	packs
+pack:argument-senses:5030	出生届を出す	has:출생신고를 한다	fix	packs
+pack:argument-senses:5030	被害届を出したほうがいい	has:피해신고를 하는	fix	packs
+pack:argument-senses:5031	書類を出す	has:서류를 낸다	fix	packs
+pack:argument-senses:5031	辞表を出した	has:사표를 냈다	fix	packs
+pack:argument-senses:5031	レポート、もう出した？	lacks:보냈	keep	packs
+pack:argument-senses:5031	レポートを出した	has:리포트를 냈다	fix	packs
+pack:argument-senses:5031	退学届を出した	has:자퇴서를 냈다	fix	packs
+pack:argument-senses:5032	願書を出しました	has:원서를 제출했습니다	fix	packs
+pack:argument-senses:5031	手紙を出した	has:편지를 보냈다	keep	packs
+pack:argument-senses:5031	メールを出した	has:메일을 보냈다	keep	packs
+pack:argument-senses:5031	招待状を出した	has:초대장을 보냈다	keep	packs
+pack:argument-senses:5031	宿題を出した	has:숙제를 냈다	keep	packs
+sense:つきあう	まだ娘とつきあってるのか?	has:딸과 사귀고 있는	fix	senses
+sense:つきあう	今 つきあってる男がいるの	has:사귀고 있는 남자	fix	senses
+sense:つきあう	５年以上つきあった女に そのウソは通じないから	has:5년 이상 사귄 여자	fix	senses
+sense:つきあう	付きあってないでしょ。	has:사귀지 않지	fix	senses
+cx:notice-words-1:110	のりかかった船だ。最後までつきあうよ。	has:끝까지 함께해	fix	rewrites
+cx:notice-words-1:110	朝までつきあってよね	has:아침까지 함께해	fix	rewrites
+pack:argument-senses:5042	危険な任務に付き合ってもらって、すまない。	has:임무에 함께해 주어	keep	packs
+sense:付き合う	「好きです！付き合ってください！」	has:사귀어 주세요	keep	senses
+sense:付き合う	「紀伊国屋くんと付き合ってるって……本当？」	has:군과 사귀고 있다니	keep	senses
+dict:jisjk:267680	警戒しなくても済むのは有り難い	has:경계하지 않아도 되는 것은	fix	local
+dict:jisjk:267680	「好きだと言えば済むと思ってるだろう」	has:말하면 된다고	fix	local
+dict:jisjk:267680	謝れば済む問題じゃない	has:사과하면 되는 문제가	fix	local
+dict:jisjk:267680	眉をひそめる程度で済むのだけど	has:정도로 끝나는데	keep	local
+dict:jisjk:267680	「もう済んだ。来るがいい」	has:벌써 끝났어	keep	local
+dict:jisjk:267680	食事が済んだら行こう	has:식사가 끝나면	keep	local
+pack:argument-senses:5033	耳が捉えているのは真帆の立てる物音。	has:마호가 내는 소리	fix	packs
+pack:argument-senses:5033	湯気を立てるご飯	has:김을 내는 밥	keep	packs
+pack:argument-senses:5035	交渉事で生計を立ててる人間でもある	has:생계를 꾸리고 있는	fix	packs
+pack:argument-senses:5037	疲れたならば茶を立ててやろう。	has:차를 타 주마	fix	packs
+pack:argument-senses:5033	計画を立てる	has:계획을 세운다	keep	packs
+pack:argument-senses:5033	襟を立てて	has:깃을 세워	keep	packs
+pack:collocs	店のマスターにお伺いを立てることにする。	has:의향을 묻기로	fix	packs
+pack:argument-senses:5041	侑李は結婚指輪を指から抜き、シンクに放り込んだ。	has:결혼반지를 손가락에서 빼	fix	packs
+pack:argument-senses:5041	銃を抜く	has:총을 뽑는다	keep	packs
+pack:argument-senses:5039	請求は全部あいつに回しておけ	has:저 녀석에게 떠넘겨	fix	packs
+pack:argument-senses:5040	この仕事をあいつに回そう	has:넘기자	fix	packs
+pack:argument-senses:5040	　信頼していた右腕が、いつの間にか敵に寝返っていた。妻が敵に回ってしまっては	lacks:넘겨	keep	packs
+pack:argument-senses:5040	腕を彼女の肩に回した	has:어깨에 둘렀다	keep	packs
+pack:argument-senses:5040	ハンドルを回す	has:핸들을 돌린다	keep	packs
+cx:sense-cues-1:420	二人はそろって首を横に振った。	has:두 사람은 나란히	fix	rewrites
+cx:sense-cues-1:420	…の目が、そろって心配そうにこちらを見ている	has:나란히 걱정스러운 듯이	fix	rewrites
+cx:sense-cues-1:420	我々 生徒会は 全員そろって出場するぞ	!rule:cx:sense-cues-1:420	keep	rewrites
+cx:sense-cues-1:420	みんな揃って遠征行かない？	!rule:cx:sense-cues-1:420	keep	rewrites
+cx:sense-cues-1:420	全員そろったな。	!rule:cx:sense-cues-1:420	keep	rewrites
+cx:sense-cues-1:420	材料が揃って、ようやく作れる	!rule:cx:sense-cues-1:420	keep	rewrites
+cx:sense-cues-1:420	道具が揃ってから始めよう	!rule:cx:sense-cues-1:420	keep	rewrites
+dict:compound-v2	生クリームまみれのふとももを舐め回していく。	has:핥아 대어	fix	lookup
+dict:compound-v2	私は彼を信じ切っていた。	has:굳게 믿고 있었다	fix	lookup
+dict:compound-v2	お母様は私を抱く腕にそっと力を込め、お父様をまっすぐに見つめ返した。	has:마주 바라보았다	fix	lookup
+dict:compound-v2	私ははっきりと逆に睨み返してやった。	has:마주 노려봐	fix	lookup
+dict:compound-v2	』私は不服で、訊ね返しました。	has:되물었습니다	fix	lookup
+dict:compound-v2	ジ、ジ、と異様な音を立てて、最後の蝋燭が燃え切ろうとした。	has:다 타려고	fix	lookup
+dict:compound-v2	どれだけ私の胸を弄くり回したのか忘れたのか？	has:주물러 대었는지	fix	lookup
+dict:compound-v2	彼は私の手を握り返した。	has:내 손을 마주 잡았다	fix	lookup
+dict:compound-v2	「だって、囃し立てられるの、あおくん嫌でしょ？」	lacks:세울	fix	lookup
+dict:compound-v2	言い訳を並べ立てる	has:변명을 늘어놓는다	fix	lookup
+dict:compound-v2	せいぜい嗅ぎ回らないようにすることですね。	has:냄새 맡아 다니지	keep	lookup
+dict:compound-v2	手を握った。	has:손을 잡았다	keep	lookup
+pack:argument-senses:5030	被害届けを出せば陰陽師たちが勝手にどうにでもしてくれるだろう	has:피해신고를 하면	fix	packs
+pack:argument-senses:5040	俺をあんたに反対に回らせるんためじゃないという	lacks:넘기	keep	packs
