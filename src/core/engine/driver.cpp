@@ -847,6 +847,7 @@ struct LineSpeech {
     bool formal = false;
     bool threat = false;
     bool oldSelf = false;
+    bool taste = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -1128,6 +1129,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     settings.formalLine = speech.formal;
     settings.threatLine = speech.threat;
     settings.oldSelfLine = speech.oldSelf;
+    settings.tasteLine = speech.taste;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
@@ -1270,6 +1272,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.formal = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.formal-cue")),
                                         dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
         speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.taste = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("word.taste-cue")), {});
         speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
                                          dict::ClassMembers(HDTRANS_CLASS("speech.old-self-lookalike")));
         speech.narrated = ctx.narrated;

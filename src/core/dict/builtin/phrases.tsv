@@ -1276,7 +1276,20 @@
 もーいいよ	이제 됐어	phrase
 いーよ	좋아	intj
 ねーねー	있잖아	intj
-お試しになる	시험해 보시다	v5
+お試しになる	해 보시다	v5
+お試しになってください	해 보세요	phrase
+お試しになって下さい	해 보세요	phrase
+お試しくださいませ	해 보십시오	phrase
+お試し下さいませ	해 보십시오	phrase
+お試しいただければ	해 보시면	phrase
+お試しいただけましたら	해 보시면	phrase
+お試しいただきたい	해 보시길 바라다	phrase
+お試しを	해 보세요	intj	final
+お試しで	시험 삼아	phrase
+お試し版	체험판	n
+お試し期間	체험 기간	n
+お試しキャンペーン	체험 캠페인	n
+お試しセット	체험 세트	n
 
 // Internet slang said as an utterance of its own.
 それな	그러니까	intj
