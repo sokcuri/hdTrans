@@ -220,6 +220,7 @@
 //= noun.habit-time	Nouns of a time of one's life (子供の頃, 小さい頃) that, before a と or たら in their clause, make it a habit, -면 (子供の頃は雨が降ると外で遊んだ 비가 오면; spec GRM-177).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
+//= ko-verb.move-toward	Korean verbs of moving toward a place, matched at the end of the lemma (걷다, 달리다, 나아가다, 떠나다): a 目指して of a place before one is 향해 (頂上を目指して歩く 정상을 향해 걷는다).
 //= ko-verb.answer-move	Korean verbs of a body or a person moving in answer (튀다, 움찔하다, 돌아오다, 달려가다), whose subject after a と answers the act, -자 (触れると、お尻が跳ねた 닿자; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
 //= ko-verb.perceive	Korean verbs of seeing, hearing and noticing (a word matches the end of the last word of a lemma, a phrase such as 정신을 차리다 the end of the lemma), whose と before a state in ている is what one found, -니 (気づくと朝になっていた 눈치채니, 見ると彼女が走ってきた 보니; spec GRM-40).
@@ -3117,6 +3118,34 @@ verb.come-upon	出会
 verb.come-upon	出逢
 verb.come-upon	鉢合わせ
 verb.come-upon	触れ
+ko-verb.move-toward	걷다
+ko-verb.move-toward	달리다
+ko-verb.move-toward	뛰다
+ko-verb.move-toward	나아가다
+ko-verb.move-toward	가다
+ko-verb.move-toward	오다
+ko-verb.move-toward	떠나다
+ko-verb.move-toward	출발하다
+ko-verb.move-toward	날다
+ko-verb.move-toward	날아가다
+ko-verb.move-toward	헤엄치다
+ko-verb.move-toward	오르다
+ko-verb.move-toward	올라가다
+ko-verb.move-toward	내려가다
+ko-verb.move-toward	이동하다
+ko-verb.move-toward	진군하다
+ko-verb.move-toward	행군하다
+ko-verb.move-toward	항해하다
+ko-verb.move-toward	달려가다
+ko-verb.move-toward	향하다
+ko-verb.move-toward	전진하다
+ko-verb.move-toward	나서다
+ko-verb.move-toward	다가가다
+ko-verb.move-toward	건너다
+ko-verb.move-toward	달려 나가다
+ko-verb.move-toward	걸어가다
+ko-verb.move-toward	도망치다
+ko-verb.move-toward	항행하다
 ko-verb.answer-move	튀다
 ko-verb.answer-move	돌아오다
 ko-verb.answer-move	돌아가다
