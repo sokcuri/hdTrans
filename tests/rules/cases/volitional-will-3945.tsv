@@ -8,7 +8,7 @@ cx:volitional-will:10	どういう比率で始めよう？	어떤 비율로 시�
 cx:volitional-will:20	う～ 何て言おう…	으으~ 뭐라고 말하지…	fix	rewrites
 cx:volitional-will:20	何て返信しよう…	뭐라고 답장하지…	fix	rewrites
 cx:volitional-will:20	え どこやろう	네 어디 하지	fix	rewrites
-cx:volitional-will:20	貴様がトーナメントの1回戦誰に当たろう	네놈이 토너먼트의 1회전수에 해당되지	fix	rewrites
+cx:volitional-will:20	貴様がトーナメントの1回戦誰に当たろう	has:해당되지	fix	rewrites
 cx:volitional-will:10	ど… どこ行こう？	어… 어디 갈까?	fix	rewrites
 cx:volitional-will:20	その反逆を誰が認めてくれずとも 我が認めよう	그 반역을 누가 인정해 주지 않아도 우리 인정하지	fix	rewrites
 cx:volitional-will:30	こちらは僕が なんとかしよう	이쪽은 내가 어떻게든 할게	fix	rewrites

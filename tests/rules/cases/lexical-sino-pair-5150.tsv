@@ -1,0 +1,28 @@
+# 규칙: LEX-5150
+rule	input	expected	kind	layer
+G160	　その夜私は、安楽椅子で経済学の本を読んでいた。	has:그 밤 나는	fix	global-stem
+G160	言っておきますけど この後私ちょっと予定が入ってて	has:이 후 나	fix	global-stem
+G160	というか、そうでなきゃ、この先私が生きていけない。	has:이 앞 내가	fix	global-stem
+G160	咬みつきがホンモノとか思ってる奴頭腐ってんじゃねーの？	has:놈 머리	fix	global-stem
+G160	今私は忙しい	has:지금 나는	keep	global-stem
+G160	公私混同はやめて	has:공사혼동	keep	global-stem
+G160	私服で来た	has:사복	keep	global-stem
+G160	両舷全速、突入！	has:양현전속	keep	global-stem
+G160	艦隊、増速！	has:증속	keep	global-stem
+G160	「私は魔学の研究がしたかったんですよ。」	has:마학	keep	global-stem
+G160	これなら……敵機や敵潜から、みんなを守れます！	has:적기나	keep	global-stem
+dict:w:34901	左目が薄茶、右目が綺麗な緑色のオッドアイです	has:왼쪽 눈이	fix	words
+dict:w:34900	白髪、右目が緑色、イケメンのラノベ主人公ポジ	has:오른쪽 눈이	fix	words
+dict:w:34902	「ご飯とラブは別腹です！」	has:딴 배	fix	words
+dict:w:34903	農民出身のものもいれば、町娘もおり	has:마을 처녀	fix	words
+dict:w:34904	入っていた大量の紙束を見て、全員が無言になった。	has:종이 다발	fix	words
+dict:w:34905	やがて、耐えきれなくなったのか、後ろの長机に両手をつく。	has:긴 책상	fix	words
+dict:w:34906	2時よ。秋雲も夜型だからぁ、いいよぉ？	has:야행성	fix	words
+dict:w:34908	そう言って肩紐に手をかけた	has:어깨끈	fix	words
+dict:w:34909	それは、紙紐で縛られた新聞や週刊誌で積み上げられたゴミ山だった。	has:종이끈	fix	words
+dict:w:34910	彼女の美脚が―	has:각선미	fix	words
+dict:w:34911	偽金のために	has:가짜 돈	fix	words
+dict:w:34912	彼は鳥皮をモグモグさせながら聞く。	has:닭 껍질	fix	words
+dict:w:34913	食卓には、ノリに漬物に生卵に焼鮭。	has:연어구이	fix	words
+dict:w:34915	その物体から、扇状のレーザーのような物が浴びせかけられていた。	has:부채꼴의	fix	words
+dict:w:34900	両目を閉じた	has:두 눈	keep	words
