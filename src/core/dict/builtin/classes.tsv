@@ -54,6 +54,7 @@
 //= word.invite-not	Stems of predicates of a feeling or a happening that no one invites to (気にしない？ 신경 쓰이지 않아?, 生まれない？): a negative question after one asks, it invites to nothing (spec MNG-7).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+//= aux.give-after-neg	Giving and request auxiliaries after a negative ないで (くれる, くださる, ちょうだい, いただける, もらえる, もらいたい): the ないで is a request not to act or what one does not do for someone (spec LEX-5050).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
@@ -788,6 +789,21 @@ aux.te-start	頂
 aux.te-start	差し
 aux.te-start	行
 aux.te-start	ちょうだい
+aux.give-after-neg	くれ
+aux.give-after-neg	くれな
+aux.give-after-neg	呉れ
+aux.give-after-neg	くださ
+aux.give-after-neg	下さ
+aux.give-after-neg	くださいませ
+aux.give-after-neg	下さいませ
+aux.give-after-neg	ちょうだい
+aux.give-after-neg	頂戴
+aux.give-after-neg	いただけ
+aux.give-after-neg	頂け
+aux.give-after-neg	もらえ
+aux.give-after-neg	貰え
+aux.give-after-neg	もらいた
+aux.give-after-neg	貰いた
 
 casual.ikanai-after	には
 casual.ikanai-after	にも

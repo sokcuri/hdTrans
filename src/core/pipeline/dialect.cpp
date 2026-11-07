@@ -815,6 +815,13 @@ bool OldRequest(std::string_view s, size_t pos, Match& m) {
         m.end = q;
         return true;
     }
+    // After a negative ないで it is the くれ of a request not to act, wherever it stands (言わないでおくれ 말하지 말아 줘;
+    // spec LEX-5050), but for the おくれなさい of the ending table and the 遅れ of a verb that goes on (寝ないでおくれた).
+    if (head.ends_with("ない") && !s.substr(p).starts_with("なさ") && !In(p < s.size() ? At(s, p).cp : 0, U"たてそるま")) {
+        m.group[1] = "くれ";
+        m.end = p;
+        return true;
+    }
     // At the end of a sentence or a quote the ending table reads it (待っておくれ。 기다려 다오); inside one,
     // before a comma, a space or な, ね, さ (not the おくれなさい of the ending table), it is read here.
     size_t r = p;

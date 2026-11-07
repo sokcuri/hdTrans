@@ -455,7 +455,6 @@ bool AlignPredicate(Words& r, Aligner& a, const PreItem& it, Want want, Mood moo
             }
             a.c = qe;
         }
-        FoldNegation(t, a.nodes);
         return true;
     }
     return false;
@@ -547,6 +546,8 @@ bool BuildAligned(Words& r, const PreLine& line, std::vector<Node>& nodes) {
         // marks come from the translation's own text (gaps)
     }
     a.Gap(o.size());
+    // after every item: the 주다 of a request may be an item of its own after -지 말아 (말하지 말아 + 줘)
+    FoldNegation(t, nodes);
     return a.aligned > 0;
 }
 

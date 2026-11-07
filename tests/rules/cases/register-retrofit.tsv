@@ -79,3 +79,4 @@ register:REG-2	「次はＭだ」	「다음은 M이야」	fix	register
 register:REG-2	「答えは1だ」	「대답은 1이야」	fix	register
 register:REG-2	「答えは10だ」	「대답은 10이야」	fix	register
 register:REG-2	「彼の名前はミクだ」	「그의 이름은 미쿠야」	fix	register
+register:REG-2	「人をツンデレみたいに言わないでくれる？　それでいい」	has:그거면 돼	fix	register
