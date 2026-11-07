@@ -143,3 +143,7 @@ argument-senses:5039	回す	v5	sense	arg=@bill dat=@person|あいつ|こいつ|�
 argument-senses:5040	回す	v5	sense	obj=@task|@document|@message|@info|@thing dat=@person|あいつ|こいつ|そいつ|あの人|あなた|あんた|貴様|おまえ|きみ	넘기다	LEX-5007		運び賃、全部あいつに回してやる 운송비, 전부 저 녀석에게 넘겨 준다			
 argument-senses:5041	抜く	v5	sense	obj=指輪|リング|指環|結婚指輪|婚約指輪|ピアス|イヤリング|手袋	빼다	LEX-5007		指輪を指から抜き 반지를 손가락에서 빼			
 argument-senses:5042	付き合う|つきあう|付きあう|つき合う	v5	sense	dat=@task	함께하다	LEX-5007		危険な任務に付き合ってもらって 위험한 임무에 함께해 주어			
+argument-senses:5140	見込む	v5	sense	after=と|とも	예상하다	LEX-5015		上回ると見込んでいる 웃돌 것으로 예상하고 있다			
+argument-senses:5141	あおり|煽り	n	sense	pred=受ける|食う|食らう	여파	LEX-5015		円安のあおりを受けて 엔저의 여파를 받아			
+argument-senses:5143	制する	vs	sense	obj=@competition|@sport|@game|大会|選挙|試合|リーグ|決勝|レース|争い|戦い|覇権|市場|激戦|接戦	제패하다	LEX-5015		大会を制した 대회를 제패했다			
+argument-senses:5145	あおり|煽り	n	sense	after=の next=で	여파	LEX-5015		不況のあおりで 불황의 여파로			
