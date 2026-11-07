@@ -14,9 +14,9 @@ cx:sense-cues-1:364	古いンだよ……クソがッ！	낡아……젠장!	fix
 cx:sense-cues-1:364	「超巨大なお節介だっつうの……クソが」	has:젠장	fix	rewrites
 cx:sense-cues-1:364	クソが付くほど真面目だということだ。	lacks:젠장	keep	rewrites
 cx:sense-cues-1:364	クソが勘違いなんかじゃねえんだよ	lacks:젠장	keep	rewrites
-cx:sense-cues-1:366	本人いわく、霊感がないからだって言うんだけど	has:왈	fix	rewrites
-cx:sense-cues-1:366	刑事さんいわく、そこは雑貨や衣類、100均などが入っている大きいスーパーだそう	has:왈	fix	rewrites
-cx:sense-cues-1:366	観光地である奈良をぶらつくことが多いからかもしれないが、友人や妹いわく、	has:왈	fix	rewrites
+cx:sense-cues-1:366	本人いわく、霊感がないからだって言うんだけど	lacks:사정	fix	rewrites
+cx:sense-cues-1:366	刑事さんいわく、そこは雑貨や衣類、100均などが入っている大きいスーパーだそう	lacks:사정	fix	rewrites
+cx:sense-cues-1:366	観光地である奈良をぶらつくことが多いからかもしれないが、友人や妹いわく、	lacks:사정	fix	rewrites
 cx:sense-cues-1:366	いわく付きの品	사연 있는 물건	keep	rewrites
 cx:sense-cues-1:368	同行するようになって早２年、	동행하게 되어 벌써 2년,	fix	rewrites
 cx:sense-cues-1:368	修行修行と、早二週間が経過した。	has:벌써	fix	rewrites

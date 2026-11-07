@@ -1616,7 +1616,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         {"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"}, {"ほど", "정도"},
         {"程", "정도"},   {"等", "등"},     {"など", "등"},   {"前", "전"},   {"後", "후"},
         {"前", "앞"},     {"後", "뒤"},     {"中", "중"},     {"くらい", "정도", true}, {"ぐらい", "정도", true},
-        {"など", "같은", true}, {"側", "측"},
+        {"など", "같은", true}, {"側", "측"},     {"曰く", "왈"},   {"いわく", "왈"},
     };
     if (settings_.literal && kind == '1' && AttachesToNoun(next.surface, nextEntry)) return Result(std::move(t), false);
     // A direction noun and 쪽 make one word (위쪽, 앞쪽, 오른쪽); 쪽 after other nouns stands

@@ -440,6 +440,7 @@
 //= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
 //= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
+//= speech.classical-cue	Words of classical Japanese (之, 也, なり, あり, 勿れ, べし) after which a person's 曰く keeps the classical 왈 (孔子曰く、人の性は善なり 공자 왈).
 //= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
 //= speech.formal-cue	Text of a line that speaks in the formal ます style or a set phrase of formality (ます, ませ, ございま, 申し上げ, 申し訳); ください alone is no cue. Read by the construction feature formal-line (どうか before a parting space 부디, spec GRM-3965).
 //= speech.humble-cue	Text of a line that speaks humbly to or of a superior (申す, 申し上げ, 存じ, くだされ, 候, べし, a lord in 殿 or 様, an apology such as 面目ない or 不覚): its 拙者 is 소인 (spec LEX-23). ござる alone is the plain ending of the role, no cue; ます and です speak politely to the listener.
@@ -5808,6 +5809,20 @@ question.indefinite-after	でも
 question.indefinite-after	にでも
 question.indefinite-after	であれ
 
+speech.classical-cue	之
+speech.classical-cue	也
+speech.classical-cue	矣
+speech.classical-cue	乎
+speech.classical-cue	哉
+speech.classical-cue	なり
+speech.classical-cue	あり
+speech.classical-cue	勿れ
+speech.classical-cue	勿
+speech.classical-cue	ざる
+speech.classical-cue	べし
+speech.classical-cue	べからず
+speech.classical-cue	けり
+speech.classical-cue	云々
 speech.female	わたくし
 speech.female	ですわ
 speech.female	ますわ
