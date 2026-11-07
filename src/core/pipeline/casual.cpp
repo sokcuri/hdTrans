@@ -1310,6 +1310,77 @@ thread_local const RunLookup* verbNeeRuns = nullptr;
 
 bool VerbNeeAt(std::string_view s, size_t pos, Match& m) { return verbNeeRuns != nullptr && VerbNee(s, pos, m, *verbNeeRuns); }
 
+// The old imperative い after a verb stem in e at the end of an utterance (やめい, どけい, 黙れい, 待てい): the
+// imperative of that verb, ろ after an ichidan stem the dictionary has whole (やめろ), and the bare imperative
+// of a godan verb (黙れ). The stem has a kanji or starts the utterance (not 私のせい). Group 1 the new ending.
+bool ImperativeI(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
+    if (runs.verbForm == nullptr || pos == 0) return false;
+    auto closes = [&](size_t at) { return at >= s.size() || In(text::DecodeRune(s.substr(at)).cp, U"。！？!?、…‥」』）) 　ー〜～"); };
+    // せい alone is the imperative of する after に, と, く, う, は or a kanji (静かにせい, 勉強せい, 早うせい).
+    if (s.substr(pos).starts_with("せい") && closes(pos + std::string_view("せい").size())) {
+        const char32_t before = LastRune(s.substr(0, pos)).cp;
+        if (!IsKanjiClass(before) && !In(before, U"にとくうは")) return false;
+        m.group[1] = "しろ";
+        m.end = pos + std::string_view("せい").size();
+        return true;
+    }
+    if (!s.substr(pos).starts_with("い")) return false;
+    const size_t end = pos + std::string_view("い").size();
+    if (!closes(end)) return false;
+    static constexpr std::u32string_view kERow = U"えけげせぜてでねへべぺめれ";
+    static constexpr std::u32string_view kURow = U"うくぐすずつづぬふぶぷむる";
+    const text::Rune last = LastRune(s.substr(0, pos));
+    const size_t e = kERow.find(last.cp);
+    if (e == std::u32string_view::npos) return false;
+    // The stem: a kanji run and its kana (止めい, 黙れい), or two or three kana after the start of the utterance or
+    // a particle or clause end (やめい, だからやめい; not どうせい, 私のせい).
+    auto verbEnding = [&](std::string_view stem) -> int {
+        if (stem.size() <= last.size) return -1;
+        if (runs.verbForm(runs.context, std::string(stem) + "る")) return 1;
+        std::string godan(stem.substr(0, stem.size() - last.size));
+        text::AppendRune(godan, kURow[e]);
+        return runs.verbForm(runs.context, godan) ? 0 : -1;
+    };
+    size_t kana = pos;
+    int count = 0;
+    while (kana > 0 && IsHiraganaRune(LastRune(s.substr(0, kana)).cp) && count < 4) {
+        kana -= LastRune(s.substr(0, kana)).size;
+        count++;
+    }
+    int found = -1;
+    if (count <= 3 && kana > 0 && IsKanjiClass(LastRune(s.substr(0, kana)).cp)) {
+        size_t start = kana;
+        while (start > 0 && IsKanjiClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
+        found = verbEnding(s.substr(start, pos - start));
+    }
+    for (size_t tail = LastRune(s.substr(0, pos)).size; found < 0 && tail <= pos;) {
+        const size_t start = pos - tail;
+        const text::Rune lead = LastRune(s.substr(0, start + text::DecodeRune(s.substr(start)).size));
+        if (!IsHiraganaRune(lead.cp) || text::RuneCount(s.substr(start, tail)) > 3) break;
+        const char32_t before = start == 0 ? 0 : LastRune(s.substr(0, start)).cp;
+        if (text::RuneCount(s.substr(start, tail)) >= 2 && (before == 0 || In(before, U"。！？!?、…‥「『（( 　らでにはもがよねぞさ"))) {
+            found = verbEnding(s.substr(start, tail));
+        }
+        tail += start > 0 ? LastRune(s.substr(0, start)).size : 0;
+        if (start == 0) break;
+    }
+    if (found < 0) return false;
+    // A word of the dictionary that ends in い is no imperative (きれい, よけい, 家計 かけい).
+    if (runs.word != nullptr) {
+        for (size_t start = 0; start < pos; start += text::DecodeRune(s.substr(start)).size) {
+            const std::string_view word = s.substr(start, end - start);
+            if (pos - start <= 12 && text::RuneCount(word) >= 3 && runs.word(runs.context, word)) return false;
+        }
+    }
+    m.group[1] = found == 1 ? "ろ" : "";
+    m.end = end;
+    return true;
+}
+
+thread_local const RunLookup* imperativeRuns = nullptr;
+
+bool ImperativeIAt(std::string_view s, size_t pos, Match& m) { return imperativeRuns != nullptr && ImperativeI(s, pos, m, *imperativeRuns); }
+
 std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
@@ -1649,6 +1720,11 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     // A negative stem in ra, ka, ma... after more kana than Nee takes, or an ichidan or potential stem, before
     // ねぇ, ねえ or ねー: a verb of the dictionary in its dictionary form (見当たらねぇ 見当たらない,
     // 止まらねえ, 放っておかねぇ, もらえねぇか). Not the particle after から or なら (ですからねえ).
+    if (runs.verbForm != nullptr) {
+        imperativeRuns = &runs;
+        text = ReplaceAll(text, ImperativeIAt, [](const Match& m) { return std::string(m.group[1]); });
+        imperativeRuns = nullptr;
+    }
     if (runs.dictionaryVerb != nullptr) {
         verbNeeRuns = &runs;
         text = ReplaceAll(text, VerbNeeAt, [](const Match& m) { return Cat({m.group[1], "ない", m.group[2]}); });

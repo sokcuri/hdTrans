@@ -576,6 +576,21 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
 
     if (!matched && base.kind == 10 && base.patternKind == 0 && w->TeAfterWaStem(surface, after())) return false;
+    // A bare ichidan stem before a form of する is the godan verb in す of the same key where the dictionary has
+    // one: 出した, 染み出して, 進み出した are 出す, not the stem of 出る and した (나오고 했다; spec GRM-4009). A stem
+    // without such a verb is a noun before する (お伝えします, 色づけします).
+    if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
+        const std::string_view rest = after();
+        bool suru = false;
+        for (const std::string_view f : {"した", "して", "します", "しま", "しちゃ", "しなかっ", "しない", "しよう", "しろ"}) {
+            suru = suru || rest.starts_with(f);
+        }
+        if (suru) {
+            for (const Record* r = w->DoLookup(surface, kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source == surface && At(r->partCode, 1) == '4' && At(r->partCode, 3) == '3') return false;
+            }
+        }
+    }
     // A bare stem in kanji that the dictionary also has as a noun, right after an adjective in
     // its attributive い or な and before a comma, is the noun the adjective describes (いい感じ、
     // 좋은 느낌), not a verb's continuative; a phrase verb stays (長い列ができ、).

@@ -1,0 +1,39 @@
+# 규칙: GRM-4009
+rule	input	expected	kind	layer
+lexical:te-i-rows	頭を撫でてやると、森下さんは心地よさそうに目を細めた。	has:쓰다듬어 주니	fix	lookup
+lexical:te-i-rows	このままずっと、頭を撫でていたい気分になる。	has:쓰다듬고 싶은 기분	fix	lookup
+lexical:te-i-rows	梨花ちゃんは黙って俺の頭を撫でてくれた…。	has:쓰다듬어 주었다	fix	lookup
+lexical:te-i-rows	　後頭部を撫でてみると違和感があった。	has:쓰다듬어 보니	fix	lookup
+lexical:te-i-rows	頬を撫でていた手がユフィリアの涙を拭うように触れる。	has:쓰다듬던 손	keep	lookup
+lexical:te-i-rows	かなり場慣れしているようだ。	꽤 익숙해져 있는 것 같다.	fix	phrases
+lexical:te-i-rows	場慣れした	익숙해졌다	fix	phrases
+lexical:te-i-rows	高度成長で少し余裕ができ始めた庶民に	has:여유가 생기기 시작한	fix	lookup
+lexical:te-i-rows	余裕が出てきた	has:여유가	keep	lookup
+analysis:ichidan-before-suru	じわっとまた真帆の奥から、愛液が染み出してくる。	has:배어 나온다	fix	analysis
+analysis:ichidan-before-suru	女性器から染み出した愛液が俺の指を濡らす。	has:배어 나온 애액	fix	analysis
+analysis:ichidan-before-suru	魅音の足元の影から…まるで冷気が吹き上げるかのように…殺気が滲み出してるのだ！	has:배어 나와	fix	analysis
+analysis:ichidan-before-suru	結論は出した	결론은 냈다	fix	analysis
+analysis:ichidan-before-suru	「父上、先にお伝えしますが、今回は私だけが悪い訳ではありません！」	has:전합니다만	keep	analysis
+analysis:ichidan-before-suru	提督、美味しいお茶をお淹れしますね。熱いですから、気を付けて！	has:끓여 드릴게요	keep	analysis
+analysis:ichidan-before-suru	カラー化の作業は膨大な画像データを学習したＡＩが人物　建物　乗り物などを認識して判断し自動で色づけします。	has:채색합니다	keep	analysis
+analysis:ichidan-before-suru	滲み出る	배어 나온다	keep	analysis
+normalize:old-imperative	その仕草は誤解されそうだからやめい。	has:그만두어라	fix	normalize
+normalize:old-imperative	「どけい、すでに貴様らの喧嘩殺法の通じる相手ではないわ！」	has:치워라	fix	normalize
+normalize:old-imperative	黙れい！	입을 다물어라!	fix	normalize
+normalize:old-imperative	下がれい！	내려가라!	fix	normalize
+normalize:old-imperative	待てい！	기다려!	fix	normalize
+normalize:old-imperative	静かにせい！	조용하게 해라!	fix	normalize
+normalize:old-imperative	早うせい	빨리 해라	fix	normalize
+normalize:old-imperative	控えい！	삼가라!	keep	normalize
+normalize:old-imperative	本物の宝石を使って作られているから、キラキラと輝いてとってもきれい。	has:예쁘다	keep	normalize
+normalize:old-imperative	私のせい。	내 탓.	keep	normalize
+normalize:old-imperative	誰のせい？	누구의 탓?	keep	normalize
+constraint:ita-before-ndesu	「あ、筧さんいたんですね」	has:있었군요	fix	lookup
+constraint:ita-before-ndesu	司令官、まだここにいたんですね。	has:여기에 있었군요	fix	lookup
+constraint:ita-before-ndesu	駅にいたんじゃね？	has:있던 거 아니야	fix	lookup
+constraint:ita-before-ndesu	どうして被害者は 夜の9時すぎに現場にいたんでしょうか。	has:있었을까요	fix	lookup
+constraint:ita-before-ndesu	肉がいたんでいる	has:손상되고 있다	keep	lookup
+constraint:doushite-before-iku	「自分にとって柔道はどういうものなのか。どうしていきたいのか、考える時間が欲しかった」。	has:어떻게 해 가고 싶은	fix	lookup
+constraint:doushitei-before-iku	だから、どうしていきなりそんな事を思ったのかがユフィリアには理解が出来ない。	has:왜 갑자기	fix	lookup
+constraint:doushite-before-iku	どうしていいか分からない	어찌해야 할지 모른다	keep	lookup
+constraint:doushitei-before-iku	今どうしてる？	지금 어떻게 하고 있어?	keep	lookup

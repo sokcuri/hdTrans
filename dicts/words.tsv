@@ -28463,3 +28463,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 焼きリンゴ	구운 사과	N110			GN			LEX-5230: 焼きリンゴ 구운 사과	replace xxx		やきりんご	w:35241
 副首相	부총리	N110	VHn		GN			LEX-5230: 副首相が訪問した 부총리가 방문했다	replace xxx		ふくしゅしょう	w:35242
 日系人	일본계 사람	N110	VHn		GN			LEX-5230: 日系人の多い町 일본계 사람이 많은 마을	replace xxx		にっけいじん	w:35243
+染み出	배어 나&AH@	M433			GN			GRM-4009: 染み出してくる 배어 나온다				w:34803
+滲み出	배어 나&AH@	M433			GN			GRM-4009				w:34805
+にじみ出	스며 나&AH@	M433			GN			GRM-4009				w:34806
+余裕ができ	여유가 생&A2@	M427			GN			GRM-4009: 余裕ができ始めた 여유가 생기기 시작한				w:34807
+よゆうができ	여유가 생&A2@	M427			GN			GRM-4009: 余裕ができ始めた 여유가 생기기 시작한				w:34808
