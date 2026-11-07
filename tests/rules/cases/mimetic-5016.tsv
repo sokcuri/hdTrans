@@ -14,7 +14,7 @@ cx:mimetic-cues:30	じわっとまた真帆の奥から、愛液が染み出し�
 cx:mimetic-cues:30	じんと染み入るっていうか。	!rule:cx:mimetic-cues:30	keep	rewrites
 cx:mimetic-cues:40	「ほら、それがダメなんでしょ。ぴっと胸を張り、笑顔で『頑張ります』！」	has:쫙 가슴을	fix	rewrites
 cx:mimetic-cues:40	ピッと音が鳴った。	!rule:cx:mimetic-cues:40	keep	rewrites
-cx:mimetic-cues:50	サクサク進む	has:순조롭게 나아간다	fix	rewrites
+cx:mimetic-cues:50	サクサク進む	has:척척 나아간다	fix	rewrites
 cx:mimetic-cues:50	クッキーをサクサク食べる	has:바삭바삭 먹는다	keep	rewrites
 cx:mimetic-cues:60	心臓がバクバク言い、汗が噴き出した。	has:두근두근 뛰어	fix	rewrites
 cx:mimetic-cues:62	ご飯をばくばく食べる	has:우걱우걱 먹는다	fix	rewrites
@@ -35,3 +35,4 @@ cx:mimetic-cues:130	通り過ぎる瞬間、さらっと、長い黒髪が風に
 cx:mimetic-cues:130	「さらっと言うなよっ！	!rule:cx:mimetic-cues:130	keep	rewrites
 cx:mimetic-cues:60	心臓がドキドキしている	!rule:cx:mimetic-cues:60	keep	rewrites
 cx:mimetic-cues:110	ぶつぶつとひとりごとをつぶやきながら、猫猫は騒動の場を後にした。	!rule:cx:mimetic-cues:110	keep	rewrites
+cx:mimetic-cues:50	息を切らせて必死な横でゆとり伐採荷物持ちでさくさくいくおにいちゃんの姿がなんていうか、恨めしい。	lacks:척척바삭	fix	rewrites
