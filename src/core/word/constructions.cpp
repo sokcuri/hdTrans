@@ -470,6 +470,14 @@ constexpr NamedFeature kFeatures[] = {
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
     {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
+    // Some candidate of the word, chosen or not, is a noun that takes する (gram Hd): 休憩, whose chosen row may lack the code.
+    {"suru-noun",
+     [](Flusher&, const Item* it) {
+         for (int i = 0; it->group != nullptr && i < static_cast<int>(it->group->entries.size()); i++) {
+             if (it->GAttr(i).find("Hd") != std::string_view::npos) return true;
+         }
+         return false;
+     }},
     // The sense table read the word as an adjectival noun (senses.tsv, adjective).
     {"adjectival", [](Flusher&, const Item* it) { return it->adjectival; }},
     // The word repeats the word before it (CopyBefore), or the word after it repeats it.
