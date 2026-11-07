@@ -179,7 +179,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おじろヌー	흰꼬리누	N110			GN						おじろヌー	w:175
 おずおずと	쭈뼛쭈뼛	E300			GN				xxx llm	1		w:176
 おせち料理	오세치 요리	N110	VFd		GN				llm		おせちりょうり	w:177
-おそうじ	청소	N110			GN				llm			w:178
+おそうじ	청소	N110		Hd	GN				llm			w:178
 おそらくは	아마	E300			GN				xxx llm	1		w:179
 おためし	체험	N110			GN				llm			w:180
 おっとり刀	허겁지겁	N110			GN				xxx llm		おっとりがたな	w:181
@@ -296,11 +296,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お葬式	장례식	N110			GN				llm		おそうしき	w:292
 お裾分け	나눔	N110		Hd	GN				llm		おすそわけ	w:293
 お見合いデート	소개팅	N110			GN						おみあいデート	w:294
-お見積	견적	N110			GN				llm		おみつもり	w:295
-お見積もり	견적	N110			GN				llm		おみつもり	w:296
-お見積り	견적	N110			GN				llm		おみつもり	w:297
+お見積	견적	N110		Hd	GN				llm		おみつもり	w:295
+お見積もり	견적	N110		Hd	GN				llm		おみつもり	w:296
+お見積り	견적	N110		Hd	GN				llm		おみつもり	w:297
 お見舞	한 방 먹&AJ@	M429			GN				llm		おみまい	w:298
-お許し	용서	I110			GN				xxx llm	1		w:299
+お許し	용서	I110		Hd	GN				xxx llm	1		w:299
 お話し中	통화 중	N110			GN				llm		おはなしちゅう	w:300
 お誕生日おめでとうございます	생일 축하합니다	A9D0			GN				llm		おたんじょうびおめでとうございます	w:301
 お買い得	특가	N110			GN				llm		おかいどく	w:302
@@ -17140,7 +17140,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 挫骨	골절	N110			GN				xxx llm	1		w:17058
 振りほど	뿌리&AO@	M421			GN				xxx llm	1		w:17059
 振り撒	뿌&AA@	M421			GN						ふりまく	w:17060
-振り込み	입금	I110			GN				xxx	1	ふりこみ	w:17061
+振り込み	입금	I110		Hd	GN				xxx	1	ふりこみ	w:17061
 振り返	돌아&AY@	M428			GN				xxx llm	1		w:17062
 振るまい	행태	N110			GN				xxx		ふるまい	w:17063
 振るまい	대접	N110			GN				llm		ふるまい	w:17064
@@ -28432,3 +28432,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 茶色	갈색$AH@	H7U0			GN			LEX-5200			ちゃいろ	w:35028
 青色発光ダイオード	청색 발광 다이오드	N110			GN			LEX-5200			あおいろはっこうダイオード	w:35029
 赤茶色	적갈색	N110	UCr		GN			LEX-5200			あかちゃいろ	w:35030
+お決まりですか	정하셨습니까	A9D0			GN			LEX-5051: ご注文はお決まりですか 주문은 정하셨습니까 (상투입니까 아님)				w:34700
+お決まりでしょうか	정하셨습니까	A9D0			GN			LEX-5051: お決まりでしょうか 정하셨습니까				w:34701
+ご覧くださいませ	봐 주십시오	A9D0			GN			LEX-5051: ご覧くださいませ 봐 주십시오 (보심주십시오 아님)				w:34702
+お通りください	지나가세요	A9H1			GN			LEX-5051: どうぞ、お通りください 어서, 지나가세요 (대로 주세요 아님)				w:34703
+お通り下さい	지나가세요	A9H1			GN			LEX-5051: お通り下さい 지나가세요				w:34704
+お通りくださいませ	지나가 주십시오	A9H1			GN			LEX-5051: どうぞお通りくださいませ 어서 지나가 주십시오				w:34705
+お通り下さいませ	지나가 주십시오	A9H1			GN			LEX-5051: お通り下さいませ 지나가 주십시오				w:34706
+お下がりください	물러나 주세요	A9H1			GN			LEX-5051: 後ろにお下がりください 뒤로 물러나 주세요 (내려가 아님)				w:34707
+お下がり下さい	물러나 주세요	A9H1			GN			LEX-5051: お下がり下さい 물러나 주세요				w:34708
+お下がりくださいませ	물러나 주십시오	A9H1			GN			LEX-5051: お下がりくださいませ 물러나 주십시오				w:34709
+ドック入り	도크 입거	N110			GN			LEX-5051: ドック入り 도크 입거				w:34710
