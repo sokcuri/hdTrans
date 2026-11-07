@@ -39,9 +39,9 @@ sound:clipped-volitional-aux	笑顔でいこか	웃는 얼굴로 갈까	fix	soun
 sound:clipped-volitional-aux	そうだな。 気を引き締めていこ…。	그래. 마음을 단단히 먹어 가자….	fix	sound
 sound:clipped-volitional-aux	価値観認め合っていこ	가치관 서로 인정해 가자	fix	sound
 sound:clipped-volitional-aux	いいから。 ほら ア行から一緒に探していこ。	좋으니까. 자 아행에서 함께 찾아 가자.	fix	sound
-sound:clipped-volitional-aux	ですね。 回っていこ。 大体 北西なら もう良くない？	그렇죠. 돌아 가자. 대개 북서라면 이제 좋지 않아?	fix	sound
+sound:clipped-volitional-aux	ですね。 回っていこ。 大体 北西なら もう良くない？	has:돌아 가자.	fix	sound
 sound:clipped-volitional-aux	次の学祭 それでいこ	다음 학 제 그렇게 하자	fix	sound
-sound:clipped-volitional-aux	大体 北西なら もうよくない？ 回っていこ	대개 북서라면 이제 좋지 않아? 돌아 가자	fix	sound
+sound:clipped-volitional-aux	大体 北西なら もうよくない？ 回っていこ	has:돌아 가자	fix	sound
 sound:clipped-volitional-aux	血でいこ！ 血 出しときゃオッケーや！ ちゃう？	피로 가자! 피 내 두면 오케이야! 아니야?	fix	sound
 sound:clipped-volitional-aux	教科書だけに そろそろ“本”気でいこか	교과서인 만큼 슬슬 “책”기분으로 갈까	fix	sound
 sound:clipped-volitional-aux	しかたない 走っていこ	어쩔 수 없다 달려 가자	fix	sound

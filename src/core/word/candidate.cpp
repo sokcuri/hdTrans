@@ -541,6 +541,51 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
     return front != nullptr ? front : back;
 }
 
+// LEX-5000: a kana noun of word.adjective-noun-lead spells an adjective and a formal noun (いいわけ: いい + わけ).
+// Before a predicate ending (じゃ, では, で, だ, です, ない, ある, ね, よ, か, が or も before ない or ある, a stop or
+// the end) and not after a modifier (の, な, という), the noun records of the key go behind the others, so the
+// adjective and its pattern read there (すればいいわけ？ 하면 되는 거?, いいわけがない 좋을 리가 없다); 男のいいわけ,
+// いいわけを keep the noun.
+Record* AdjectiveOverKanaNoun(Record* records, std::string_view before, std::string_view text) {
+    if (records == nullptr || records->user != nullptr ||
+        !dict::InClass(HDTRANS_CLASS("word.adjective-noun-lead"), records->source) || !text.starts_with(records->source)) {
+        return records;
+    }
+    while (!before.empty() && text::IsSpace(DecodeLastRune(before).cp)) before.remove_suffix(DecodeLastRune(before).size);
+    if (before.ends_with("の") || before.ends_with("な") || before.ends_with("という") || before.ends_with("っていう")) {
+        return records;
+    }
+    const std::string_view key = records->source;
+    std::string_view after = text.substr(key.size());
+    if (after.starts_with("が") || after.starts_with("も")) {
+        after.remove_prefix(text::DecodeRune(after).size);
+        if (!after.starts_with("な") && !after.starts_with("あ")) return records;
+    }
+    bool predicate = after.empty() || RuneIn(text::DecodeRune(after).cp, "。、！？!?…‥―ー～」』）) 　");
+    for (const std::string_view c : {"じゃ", "では", "で", "だ", "です", "でし", "な", "あ", "ね", "よ", "か"}) {
+        predicate = predicate || after.starts_with(c);
+    }
+    if (!predicate) return records;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == key && At(r->partCode, 1) == '1') {
+            *backTail = r;
+            backTail = &r->child;
+        } else {
+            *frontTail = r;
+            frontTail = &r->child;
+        }
+        r = next;
+    }
+    *frontTail = back;
+    return front != nullptr ? front : back;
+}
+
 bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
 
 // LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
@@ -2475,6 +2520,7 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
+    if (settings.text) records = AdjectiveOverKanaNoun(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));

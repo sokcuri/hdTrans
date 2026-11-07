@@ -123,3 +123,4 @@ argument-senses:112	できる|出来る	v1	sense	subj=子|子供|子ども|赤�
 argument-senses:113	できる|出来る	v1	sense	subj=彼女|彼氏|恋人 form=ta	생기다	LEX-4911		彼女ができた 여자친구가 생겼다			
 argument-senses:114	できる|出来る	v1	sense	subj=料理|ご飯|飯|夕飯|夕食|朝食|朝ご飯|昼食|晩ご飯|カレー|ケーキ|宿題|作品|小説|原稿|絵|模型|お茶|コーヒー|弁当|お弁当 form=ta	다 되다	LEX-4911		料理ができた 요리가 다 됐다			
 argument-senses:115	できる|出来る	v1	sense	after=よく|良く head=-	되다	LEX-4911		この模型、よくできてる 이 모형, 잘 되어 있다			
+argument-senses:5000	見逃す	v5	sense	next=あげる|やる|くれる|ください|下さい|もらう|いただく|頂く|くださる|下さる|やれる	봐주다	LEX-5000		見逃してあげる 봐줄게			

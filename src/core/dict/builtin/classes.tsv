@@ -584,6 +584,7 @@
 //= word.closing-greeting	Greetings that end in a closing particle, kept like word.closing-utterance only where the sentence or a clause ends after them, also after a particle (これからもよろしくな 앞으로도 잘 부탁해, not よろしくない).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
+//= word.adjective-noun-lead	Kana nouns that spell an adjective and a formal noun (いいわけ 변명: いい + わけ). Before a predicate ending and not after a modifier the adjective reads (すればいいわけ？ 하면 되는 거?), after の, な or という and before a case particle the noun (男のいいわけ 남자의 변명).
 //= word.copula-predicate	Adverbs and nouns that a copula, an adnominal な or a question か after them makes the adjectival noun of the same key (ばっちりです 완벽해요, しっかりですね 확실하네요, アリなのか 괜찮은 건가), not an adverb or a noun before a copula.
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
@@ -9124,6 +9125,7 @@ word.confirm-action	やめ
 word.confirm-action	続け
 word.confirm-action	み
 word.confirm-action	修理
+word.adjective-noun-lead	いいわけ
 word.copula-predicate	ばっちり
 word.copula-predicate	バッチリ
 word.copula-predicate	しっかり

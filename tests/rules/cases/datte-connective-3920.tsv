@@ -49,7 +49,7 @@ segment:datte-space	都が 俺の親父が来てたって 言うんだけど 見
 segment:datte-space	でも いろいろあって強くなるんだって 本人も分かったみたいです。	하지만 여러 가지 있어 강해진다고 본인도 안 것 같습니다.	fix	segment
 segment:datte-space	私たちが 何回インタビューを受けたら どうだって 言うんだ?	우리가 몇 번 인터뷰를 받으면 어때라고 말하는 거야?	fix	segment
 segment:datte-space	タイリースが死んだって 思ってるのかい?	타이 리스가 죽었다고 생각하는 거야?	fix	segment
-segment:datte-space	大体 食べたら食べたって 言えばいいんだ	대개 먹었더니 먹었다고 하면 된다	fix	segment
+segment:datte-space	大体 食べたら食べたって 言えばいいんだ	has:먹었다고 하면 된다	fix	segment
 segment:datte-space	ぬれぎぬだって 言ってるだろ。	누명이라고 말하잖아.	fix	segment
 segment:datte-space	この名刺があったって 言ったんじゃないですか?	이 명함이 있었다고 한 거 아니에요?	fix	segment
 sense:initial-datte	「だって、それは自分のことを守るためで{k=-5.0}―――{/k} 」	「그치만, 그건 자신을 지키기 때문에{k=-5.0}―――{/k} 」	fix	senses
@@ -109,7 +109,7 @@ segment:datte-space	わたしたち だって こんな コソコソ したく �
 segment:datte-space	あんた だって 昨日は 自分の机もロッカーも 忘れたっていって	너도 어제는 자신의 책상도 로커도 잊었다고 해	fix	segment
 segment:datte-space	バカだよ あんた だって こうなるじゃん...	바보야 너도 이렇게 되잖아...	fix	segment
 segment:datte-space	あたし だって ちゃんと しゃべれてないし	나도 제대로 말하지 못하고	fix	segment
-segment:datte-space	大体 あなた だって あれだもんね	대개 당신도 저것이군	fix	segment
+segment:datte-space	大体 あなた だって あれだもんね	애초에 당신도 저것이군	fix	segment
 segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	가게 가만히 두어도 되는 건가? 너. 너도 지금… 손님 적지 지금.	fix	segment
 segment:datte-space	《これは あなた だって そりゃ もう この香りだよ》	《이것은 당신도 그야 이제 이 향기야》	fix	segment
 segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너도 어쩔 수 없을 거예요	fix	segment
