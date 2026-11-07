@@ -56,6 +56,7 @@
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
+//= aux.te-through	Surfaces of the auxiliaries after a て form through which the predicate still modifies the noun after them (伸びてくる指先 뻗어 오는 손끝, 伸びている指).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= casual.ikanai-after	The particles, phrases and adverbs of going well after which a kana いか with the casual negative ねえ or ん is the negative of いく, it won't do (そうはいかねえ, わけにはいかん, うまくいかねえ), not the かねる of いいかねえ nor the ダメ of それはいかん.
@@ -254,6 +255,7 @@
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
+//= noun.manner-shape	Nouns of a shape, a pattern or an arrangement that a thing takes, after which に before a verb is the manner (으)로 (放射状に広がる 방사상으로 퍼지다, 一列に並ぶ 일렬로 늘어서다, 木っ端微塵に砕ける 산산조각으로 부서지다).
 //= noun.change-result	Ends of the nouns of a form or a being that a thing turns into, before which に with 進化 or 変化 is (으)로 (次の段階に進化 다음 단계로 진화, 液体に変化 액체로 변화, 魔王に変化 마왕으로 변화); a bare 体 or 形 is no such end (全体, 地形).
 //= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
 //= noun.count-ship	Nouns of ships, matched as a whole word in the sentence of the counter 体, which then counts them as 척 (艦を二体 함을 2척).
@@ -760,6 +762,17 @@ aux.bound-pause	かも
 aux.bound-pause	だろう
 aux.bound-pause	でしょう
 
+aux.te-through	くる
+aux.te-through	き
+aux.te-through	来
+aux.te-through	来る
+aux.te-through	い
+aux.te-through	いく
+aux.te-through	行
+aux.te-through	行く
+aux.te-through	お
+aux.te-through	おり
+aux.te-through	居
 aux.te-kana-stem	い
 aux.te-kana-stem	み
 aux.te-kana-stem	き
@@ -10196,6 +10209,39 @@ noun.count-corpse	白骨
 noun.count-corpse	ミイラ
 noun.count-corpse	骨
 noun.count-corpse	ゾンビ
+noun.manner-shape	放射状
+noun.manner-shape	筋状
+noun.manner-shape	渦状
+noun.manner-shape	渦巻き状
+noun.manner-shape	網状
+noun.manner-shape	粒状
+noun.manner-shape	棒状
+noun.manner-shape	帯状
+noun.manner-shape	螺旋状
+noun.manner-shape	らせん状
+noun.manner-shape	球状
+noun.manner-shape	線状
+noun.manner-shape	板状
+noun.manner-shape	霧状
+noun.manner-shape	液状
+noun.manner-shape	粉状
+noun.manner-shape	円状
+noun.manner-shape	層状
+noun.manner-shape	格子状
+noun.manner-shape	波状
+noun.manner-shape	扇状
+noun.manner-shape	ゼリー状
+noun.manner-shape	一列
+noun.manner-shape	横一列
+noun.manner-shape	縦一列
+noun.manner-shape	一直線
+noun.manner-shape	等間隔
+noun.manner-shape	木っ端微塵
+noun.manner-shape	こっぱみじん
+noun.manner-shape	粉微塵
+noun.manner-shape	縞
+noun.manner-shape	縞模様
+noun.manner-shape	一文字
 noun.change-result	姿
 noun.change-result	形態
 noun.change-result	段階
