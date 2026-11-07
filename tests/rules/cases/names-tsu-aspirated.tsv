@@ -18,7 +18,7 @@ dict:jisjk:86590	【桃の節句】春の雛祭り艦隊決戦！2026	【삼짇�
 dict:names.599054	松型駆逐艦、松、出撃！皆、続いて！	has:마츠형 구축함, 마츠, 출격!	fix	fixed
 dict:w:5832	高峰→おろしチキンカツ弁当・缶コーヒー２本	has:치킨카츠 도시락	fix	defaults
 dict:jisjk:13985	「ゴミですね」	「쓰레기군요」	keep	defaults
-dict:w:4271	「ゴミ袋、取ってくるね」	「쓰레기봉투, 가져 올게」	keep	defaults
+dict:w:4271	「ゴミ袋、取ってくるね」	「쓰레기봉투, 가져올게」	keep	defaults
 dict:jisjk:15735	香ばしい風味を持つ最後の尻尾まで、一気に。	고소한 풍미를 가지는 마지막 꼬리까지, 단번에.	keep	defaults
 dict:jisjk:3829	手紙を書いた。	편지를 썼다.	keep	local
 names:kana-target-keep	バスツアー	버스 투어	keep	lookup

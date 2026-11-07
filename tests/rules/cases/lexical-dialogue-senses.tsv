@@ -58,13 +58,13 @@ dict:dialogue-senses:1	仕事をやめていた	일을 그만두고 있었다	ke
 dict:dialogue-senses:1	タバコをやめてよかった	has:그만두어서	keep	local
 dict:dialogue-senses:1	学校をやめて働く	has:그만두어 일한다	keep	local
 dict:dialogue-senses:1	やめてしまった	has:그만두어	keep	local
-dict:variant:tsuitekuru:3	こっちだ、付いて来て。	여기다, 따라 와.	fix	lookup
-dict:variant:tsuitekuru:3	貴様らは邪魔だ、付いて来るな。	has:따라 오지 마	fix	lookup
-dict:variant:tsuitekuru:3	みんな、付いて来て！	모두, 따라 와!	fix	lookup
-dict:variant:tsuitekuru:3	突撃します、付いてきてください。	has:따라 와 주세요	fix	lookup
-dict:variant:tsuitekuru:3	付いてこい！	따라 와라!	fix	lookup
-dict:variant:tsuitekuru:3	しっかり付いてくるっす。	has:따라 와요	fix	lookup
-dict:variant:tsuitekuru:3	Richelieuに付いてきなさい。	Richelieu를 따라 와.	fix	lookup
+dict:variant:tsuitekuru:3	こっちだ、付いて来て。	여기다, 따라와.	fix	lookup
+dict:variant:tsuitekuru:3	貴様らは邪魔だ、付いて来るな。	has:따라오지 마	fix	lookup
+dict:variant:tsuitekuru:3	みんな、付いて来て！	모두, 따라와!	fix	lookup
+dict:variant:tsuitekuru:3	突撃します、付いてきてください。	has:따라와 주세요	fix	lookup
+dict:variant:tsuitekuru:3	付いてこい！	따라와라!	fix	lookup
+dict:variant:tsuitekuru:3	しっかり付いてくるっす。	has:따라와요	fix	lookup
+dict:variant:tsuitekuru:3	Richelieuに付いてきなさい。	Richelieu를 따라와.	fix	lookup
 dict:variant:tsuitekuru:3	ほな、黒潮に付いてきてぇ～。	has:구로시오를	keep	lookup
 dict:variant:tsuitekuru:3	微笑みながら近付いてくる彼女	has:다가오는	keep	lookup
 dict:dialogue-senses:12	↑オイオイｗほんの少し上に382とミドリさんの書き込みがあるぞｗ	has:미도리 씨의 글이	fix	lookup

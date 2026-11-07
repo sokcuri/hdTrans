@@ -641,6 +641,15 @@ constexpr NamedFeature kFeatures[] = {
     {"plain-voice", [](Flusher&, const Item* it) { return it->detail->record == 0; }},
     // A noun that the word describes follows it in its token (DescribedNoun).
     {"described-noun", [](Flusher& f, const Item* it) { return DescribedNoun(f.w, it); }},
+    // The Korean lemmas of the word and the word after it make a compound verb of
+    // ko-verb.compound-motion (流れていく 흐르다 + 가다 흘러가다).
+    {"motion-compound",
+     [](Flusher& f, const Item* it) {
+         const Item* n = it->After();
+         return it->selected >= 0 && n != nullptr && n->selected >= 0 &&
+                output::CompoundMotion(ItemLemma(f, it, it->selected), ItemLemma(f, n, n->selected),
+                                       At(it->Code(it->selected), 1) < '3' || At(it->Code(it->selected), 1) > '6');
+     }},
     // The Korean lemma is one of ko-verb.holding or a phrase that ends in one (이를 악물다).
     {"holding-verb",
      [](Flusher& f, const Item* it) {

@@ -4344,9 +4344,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 駆け廻	이리저리 다&A7@	M418			GN							jisjk:92084
 かけ廻	이리저리 다&A7@	M418			GN							jisjk:92084
 駆回	이리저리 다&A7@	M418			GN							jisjk:92084
-駆寄	달려 &AH@	M428			GN							jisjk:263535
+駆寄	달려&AH@	M428			GN							jisjk:263535
 駆寄	달려&A1@	M428			GN				xxx llm	1		w:25957
-かけ寄	달려 &AH@	M428			GN							jisjk:263535
+かけ寄	달려&AH@	M428			GN							jisjk:263535
 かけ寄	달려&A1@	M428			GN				xxx llm	1		w:25957
 かけ込み	뛰어들기	N110			GN							jisjk:341945
 かけ込	뛰어&L4@	M415			GN							jisjk:115068
@@ -20602,9 +20602,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ワタシたち	우리	I120	VHn		GN						わたしたち	variant:watashitachi:1
 ワタシタチ	우리	I120	VHn		GN						わたしたち	variant:watashitachi:2
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
-ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
-付いて	따라 &AH@	M41;			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:2
-付いて	따라 &AH@	M41=			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:3
+ついて	따라&AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
+付いて	따라&AH@	M41;			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:2
+付いて	따라&AH@	M41=			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:3
 ヒゲ	수염	N110	VBp		GN							variant:katakana:1
 バッチリ	딱	E300			GN							variant:katakana:2
 ダチ	친구	N110	VHn		GN							variant:katakana:3

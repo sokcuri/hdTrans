@@ -162,7 +162,7 @@ cx:mimetic-adnominal:310	ぐったりとしたまま動かない。	축 늘어�
 cx:mimetic-adnominal:310	ぐったりとした少女の顔	축 늘어진 소녀의 얼굴	fix	rewrites
 cx:mimetic-adnominal:310	ぐったりとした状態になっている。	축 늘어진 상태가 되어 있다.	fix	rewrites
 cx:mimetic-adnominal:310	ぐったりとした。	!rule:cx:mimetic-adnominal:310	keep	rewrites
-cx:mimetic-adnominal:320	あっさりした返事が返ってきた。	간단한 대답이 되돌아 왔다.	fix	rewrites
+cx:mimetic-adnominal:320	あっさりした返事が返ってきた。	간단한 대답이 되돌아왔다.	fix	rewrites
 cx:mimetic-adnominal:320	あっさりした。	!rule:cx:mimetic-adnominal:320	keep	rewrites
 cx:mimetic-adnominal:330	あっさりしたスープも悪くない	담백한 스프도 나쁘지 않다	fix	rewrites
 cx:mimetic-adnominal:330	あっさりした口調で言っているが	담백한 어조로 말하지만	fix	rewrites

@@ -1,0 +1,31 @@
+# 규칙: GRM-4031
+rule	input	expected	kind	layer
+compose:compound-motion	私の一日はこうしてポーション作りで過ぎていった。	has:지나갔다	fix	compose
+compose:compound-motion	時が流れていった	때가 흘러갔다	fix	compose
+compose:compound-motion	続いて聞こえてきた甘い声に	has:들려온	fix	compose
+compose:compound-motion	じゃがな 皆 去っていってしまった｡	has:떠나가버렸다	fix	compose
+compose:compound-motion	24年間 生きてきました	has:살아왔습니다	fix	compose
+compose:compound-motion	右から レベルが1～4まで上がっていきます。	has:올라갑니다	fix	compose
+compose:compound-motion	南方の山嶽を越えて吹いてくる	has:불어온다	fix	compose
+compose:compound-motion	君が越えてきた境界線	has:넘어온	fix	compose
+compose:compound-motion	この山の 半分まで登ってくるなんて。	has:올라오다니	fix	compose
+compose:compound-motion	さっきの1.5倍くらいの台詞が返ってきた。	has:되돌아왔다	fix	compose
+compose:compound-motion	パソコンから流れてくる声だけ。	has:흘러오는	fix	compose
+compose:compound-motion	「TALKの画像が回ってきたんだよ！	has:돌아왔어	fix	compose
+compose:compound-motion	飛んでくるブツをけり落とす	has:날아오는	fix	compose
+compose:compound-motion	佐藤さんだけが追っていったのか？	has:쫓아간	fix	compose
+compose:compound-motion	彼が走ってきた。	has:달려왔다	fix	compose
+compose:compound-motion	道を歩いてきた。	has:걸어왔다	fix	compose
+compose:compound-motion	そうして夜が更けていった	has:깊어져 갔다	keep	compose
+compose:compound-motion	夜になると、町の明かりが一つずつ消えていった。	has:사라져 갔다	keep	compose
+compose:compound-motion	だけど全ては 消えてゆくのね	has:사라져 가는	keep	compose
+compose:compound-motion	それも だんだん薄らいでいった>	has:줄어들어 갔다	keep	compose
+compose:compound-motion	何とか50年 夫婦を続けてきました	has:계속해 왔습니다	keep	compose
+compose:compound-motion	40年間しこしこ働いてきたわけだ	has:일해 온	keep	compose
+compose:compound-motion	{意識が遠のいていったんだよ！	has:멀어져 갔어	keep	compose
+compose:compound-motion	突進してくるライオンを 撃った事あるかね?	has:돌진해 오는	keep	compose
+compose:compound-motion	電話をかけていく	has:걸어 간다	keep	compose
+compose:compound-motion	大丈夫な気がしてきたｗｗｗ	lacks:들어왔다	keep	compose
+compose:compound-motion	熱が出てきたみてえだな	lacks:나온	keep	compose
+compose:compound-motion	布地を掴んで、ずり下げていく。	has:질질 내려 간다	keep	compose
+compose:compound-motion	富竹さんの姿がないことを知った俺は、斜面を降りていった。	has:경사면을 내려갔다	fix	compose

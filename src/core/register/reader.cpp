@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "core/output/families.h"
 #include "core/output/inflect.h"
 #include "core/register/hangul.h"
 #include "core/word/item.h"
@@ -207,6 +208,28 @@ struct Row {
     std::u32string surf, target, ending;
 };
 
+// A verb in its 아/어 form (row prev) and a 가다 or 오다 after it (read as its) that the output
+// writes as one compound of ko-verb.compound-motion (달려 + 오는 달려오는; not the pairs that need an
+// intransitive verb, whose code the capture lacks) are one verb: the verb item of prev, the last of out,
+// takes the compound's lemma and the ending of the 가다 or 오다.
+bool MergeCompoundMotion(const Row* prev, const std::vector<PreItem>& its, std::vector<PreItem>& out) {
+    if (prev == nullptr || prev->ending != U"6" || its.size() != 1 || its[0].kind != K::V || out.empty() ||
+        out.back().kind != K::V || prev->target.size() < 4 ||
+        !output::CompoundMotion(out.back().lemma, its[0].lemma, false)) {
+        return false;
+    }
+    const KoreanFamily* f = FindKoreanFamily(ToU8(prev->target.substr(prev->target.size() - 4)));
+    if (f == nullptr) return false;
+    const std::u32string form = ToU32(output::internal::Inflect(*f, '6'));
+    std::u32string head = prev->target.substr(0, prev->target.size() - 4);
+    if (const std::size_t sp = head.rfind(U' '); sp != std::u32string::npos) head = head.substr(sp + 1);
+    if (form.empty() || !AllHangul(head + form)) return false;
+    PreItem v = its[0];
+    v.lemma = ToU8(head + form) + v.lemma;
+    out.back() = v;
+    return true;
+}
+
 std::vector<PreItem> ConvertLine(const Reader& d, const std::u32string& ja, const std::vector<Row>& rows) {
     // the source positions of the items whose surface is in the line
     std::size_t cursor = 0;
@@ -276,7 +299,7 @@ std::vector<PreItem> ConvertLine(const Reader& d, const std::u32string& ja, cons
                 }
             }
         }
-        out.insert(out.end(), its.begin(), its.end());
+        if (!MergeCompoundMotion(prev, its, out)) out.insert(out.end(), its.begin(), its.end());
         prev = &r;
     }
     while (ri < runs.size()) out.push_back(runs[ri++].second);

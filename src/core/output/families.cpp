@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <atomic>
 
+#include "core/dict/classes.h"
 #include "core/output/markers.h"
 
 namespace hdTrans::output {
@@ -157,6 +158,15 @@ std::string Lemma(std::string_view target, const Families& generated) {
     out += LookupByMarker(key, generated);
     out += "다";
     return out;
+}
+
+bool CompoundMotion(std::string_view first, std::string_view second, bool intransitive) {
+    const std::size_t space = first.rfind(' ');
+    std::string pair(space == std::string_view::npos ? first : first.substr(space + 1));
+    pair += ' ';
+    pair += second;
+    return dict::InClass(HDTRANS_CLASS("ko-verb.compound-motion"), pair) ||
+           (intransitive && dict::InClass(HDTRANS_CLASS("ko-verb.compound-motion-intransitive"), pair));
 }
 
 }  // namespace hdTrans::output

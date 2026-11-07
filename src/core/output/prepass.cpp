@@ -1491,6 +1491,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     using Result = std::pair<std::string, bool>;
     JoinBeforeDoe(t);
+    // The 아/어 form of a verb and a 가다 or 오다 after it that make a Korean compound verb are
+    // one word (過ぎていった 지나갔다); an auxiliary of aspect stays apart (更けていった 깊어져
+    // 갔다), as does a verb that only sounds like the first one (話しかけていく 말을 걸어 가다; GRM-4031).
+    if (nextIndex == i + 1 && item.ending.text == "6" &&
+        CompoundMotion(Lemma(EntryText(item), *generated_), Lemma(EntryText(items[nextIndex]), *generated_),
+                       At(Code(item), 1) < '3' || At(Code(item), 1) > '6')) {
+        return Result(std::move(t), false);
+    }
     // An auxiliary verb (gram Ds) read as a word of ko-aux.joined after the 아/어 form is
     // written joined to it (食べてしまった 먹어버렸다); the main verb stays apart (拾って捨てた
     // 주워 버렸다; LAY-11).

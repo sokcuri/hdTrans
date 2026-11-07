@@ -57,7 +57,7 @@ normalize:spelling-variant	私の置かれている状況についてなどを�
 normalize:spelling-variant	バスの遅れ等による運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	keep	lookup
 normalize:spelling-variant	バスの遅れなどによる運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	fix	lookup
 dict:jisjk:118867	この時の為、今、ここにいます。	rule:dict:jisjk:118867=(을)를 위해	fix	local
-dict:jisjk:118867	その日のために生きてきた。	그날을 위해 살아 왔다.	fix	local
+dict:jisjk:118867	その日のために生きてきた。	그날을 위해 살아왔다.	fix	local
 dict:jisjk:118867	君のため、頑張る。	너를 위해, 노력한다.	keep	local
 dict:jisjk:118867	雨のため、中止した。	!rule:dict:jisjk:118867	keep	local
 dict:jisjk:92631	離れる時に見せた、あの瞳	!rule:dict:jisjk:92631	fix	local
