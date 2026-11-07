@@ -3511,7 +3511,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いつぞや	언젠가	E311			GN				jisjk:79		
 いつつ	다섯개	N110		Ct	GN				jisjk:6451		
 いつですか	언제입니까	N110			GN				jisjk:359063		
-いつでも	언제라도	E300			GN				jisjk:148987		
+いつでも	언제든	E300			GN				jisjk:148987		
 いつでもどうぞ	언제라도	E300			GN				jisjk:341320		
 いつでもどこでも	언제 어디서나	A9H1			GN				jisjk:103895		
 いつとはなく	어느 사이에	E311			GN				jisjk:80		
@@ -35298,7 +35298,7 @@ ttt	ttt	K110			GN				jisjk:201744
 どこそこ	어디어디	I120	VPl		GN				jisjk:41362		
 どこで	어디서	E300			GN				jisjk:265339		
 どこでとれ	어디에서 잡&AW@	M427			GN				jisjk:143897		
-どこでも	어디에서라도	E311			GN				jisjk:866		
+どこでも	어디서든	E311			GN				jisjk:866		
 どこで生れ	어디에서 태어&A5@	A427			GN				jisjk:201568		
 どことでも	어디에든지	I110			GN				jisjk:260149		
 どことなく	어딘지 모르게	E311			GN				jisjk:867		

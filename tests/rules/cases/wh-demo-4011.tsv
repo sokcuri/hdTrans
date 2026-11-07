@@ -1,0 +1,24 @@
+# 규칙: GRM-4011
+rule	input	expected	kind	layer
+cx:novel-fixes:29	何色の髪でもあり得る	has:머리카락이든 있을 수 있다	fix	rewrites
+cx:wh-any:10	何色でもいい	무슨 색이든 좋다	fix	rewrites
+cx:wh-any:10	「どっちでもいいよね。これからマインとして生きていかなきゃいけないのは変わらないんだし……」	has:어느 쪽이든 좋지	fix	rewrites
+cx:wh-any:10	さあ どっちでもいい	자 어느 쪽이든 좋다	fix	rewrites
+cx:wh-any:10	どれでもいい	어떤 것이든 좋다	fix	rewrites
+cx:wh-any:10	どんな服でも構わない	어떤 옷이든 상관없다	fix	rewrites
+cx:wh-any:5	誰でもいい	누구든 좋다	fix	rewrites
+cx:wh-any:5	だれでもいいから	누구든 좋으니까	fix	rewrites
+lexical:wh-demo	「返すのはいつでもいいから」	has:언제든 좋으니까	fix	lookup
+lexical:wh-demo	リカちゃんも何かあったらいつでも言って	has:언제든 말해	fix	lookup
+lexical:wh-demo	「フライドポテトも美味しいけど、あれはどこでも食べられるじゃんか」	has:어디서든 먹을 수 있	fix	lookup
+lexical:wh-demo	仕方ない。とても―ああ、とても恥ずかしいが、誰でもない君のためだ。	has:아무도 아닌 너를	fix	lookup
+lexical:wh-demo	どこでもない	어디도 아니다	fix	lookup
+cx:wh-any:10	いくら俺でも照れるって	has:아무리 나라도	keep	rewrites
+cx:wh-any:10	It's 2 o'clock now. ……だーから、どんな時でも油断は駄目よ？	has:어떤 때라도	keep	rewrites
+cx:wh-any:10	あぁ 確かに時械神は いかなる手段でも倒せない 無敵のモンスター。	has:수단이라도	keep	rewrites
+cx:wh-any:10	何回でも挑戦する	몇 번이라도 도전한다	keep	rewrites
+cx:wh-any:10	子供でもわかる	아이라도 안다	keep	rewrites
+cx:wh-any:10	少しでもいい	조금이라도 좋다	keep	rewrites
+cx:wh-any:5	今なら、普段は文句を言ってやりたがらない、誰でもできるような下準備を振ってもきっとこなしてくれるだろう。	has:누구라도 할 수 있는	keep	rewrites
+lexical:wh-demo	何でもない	아무것도 아니다	keep	lookup
+cx:novel-fixes:29	犯人でもあり得る	has:범인이라도	keep	rewrites
