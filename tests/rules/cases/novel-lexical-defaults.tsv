@@ -26,7 +26,7 @@ defaults:novel-lexical	背中を押していなかったら。	has:등을 밀지
 defaults:novel-lexical	ほかに 何か 心当たりは？	has:짐작 가는 데는	fix	defaults
 defaults:novel-lexical	後輩いじめじゃないっすか！	has:괴롭힘이	fix	defaults
 defaults:novel-lexical	……そして何も言わずに背中を向ける。	……그리고 아무것도 말하지 않고 등을 돌린다.	keep	defaults
-defaults:novel-lexical	「何とか期限前に企画がまとまったね」	「어떻게든 기한 전에 기획이 결정됐네」	keep	defaults
+defaults:novel-lexical	「何とか期限前に企画がまとまったね」	「어떻게든 기한 전에 기획이 정리됐네」	keep	defaults
 defaults:novel-lexical	魅音と勘違いしていじめて悪かったな。	미온과 착각해 괴롭혀 미안했네.	keep	defaults
 defaults:novel-lexical	あくまでも目安としてご利用ください。	어디까지나 기준으로서 이용하십시오.	keep	defaults
 defaults:novel-lexical	それはごろんと、俺の足元に転がった。	그것은 데굴, 내 발밑에 굴렀다.	keep	defaults

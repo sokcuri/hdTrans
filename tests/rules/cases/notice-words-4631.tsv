@@ -99,7 +99,7 @@ dict:jisjk:138807	誰にも必要とされていない。	누구도 필요로 �
 cx:notice-words-1:63	お医者様方が集まった。	의사 선생님들이 모였다.	fix	rewrites
 cx:notice-words-1:63	お客様方にお知らせします。	손님들에게 알려 드리겠습니다.	fix	rewrites
 cx:notice-words-1:63	奥様方が来た。	사모님들이 왔다.	fix	rewrites
-cx:notice-words-1:63	るのは大体奥様方だもの	has:대개 사모님들인걸	fix	rewrites
+cx:notice-words-1:63	るのは大体奥様方だもの	has:대체로 사모님들인걸	fix	rewrites
 cx:notice-words-1:63	羅漢様方は山神様のお使いだ。	has:라칸 님들은	fix	rewrites
 cx:notice-words-1:63	お客様の方へどうぞ。	!rule:cx:notice-words-1:63	keep	rewrites
 cx:notice-words-1:63	皆様方のご協力をお願いします。	여러분 협력을 부탁드립니다.	keep	rewrites

@@ -9,7 +9,7 @@ builtin-ending:あるまい	入間め 何か ちょっかいを 出している�
 builtin-ending:あるまい	学生でもあるまいし	학생도 아니고	keep	builtin-ending
 builtin-ending:だとよ	「……ＳＯＲＤだとよ。お上の犬が何しに来た」	「……SORD라는군. 관청의 개가 뭐하러 왔어」	fix	builtin-ending
 builtin-ending:んだろうが	お前の弟のことを 皆好きだったんだろうが	네 남동생을 모두를 좋아했겠지만	fix	builtin-ending
-builtin-pattern:なかろうが	大体あがなもんに ぶっつけ本番で 勝てるわけがなかろうが。	대개 아가것에 갑자기 실전으로 이길 수 있을 리가 없잖아.	fix	builtin-pattern
+builtin-pattern:なかろうが	大体あがなもんに ぶっつけ本番で 勝てるわけがなかろうが。	has:이길 수 있을 리가 없잖아.	fix	builtin-pattern
 builtin-pattern:かもしれぬ	余は足利の当主である。そして公方である。やはり公方として生きねばならんのかもしれぬ	짐은 아시카가의 당주이다. 그리고 구보이다. 역시 구보로서 살아야 하는 건지도 모른다	fix	builtin-pattern
 builtin-pattern:かもしれぬ	来るかもしれぬ	올지도 모른다	fix	builtin-pattern
 builtin-pattern:ねばならぬ	生きねばならない	살아야 한다	keep	builtin-pattern
