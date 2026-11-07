@@ -6,7 +6,7 @@ cx:speaker-asked:10	彼は僕に聞かれて答えた。	그는 내가 물어 �
 cx:speaker-asked:10	先生に聞かれても答えられない。	선생님이 물어도 대답할 수 없다.	keep	rewrites
 cx:speaker-asked:20	ボクに言われても…｡	나한테 말해도….	fix	rewrites
 cx:speaker-asked:20	私に言われても困ります。	저한테 말해도 곤란합니다.	fix	rewrites
-cx:speaker-asked:20	母に早く寝ろと言われた。	어머니에게 빨리 자라고 들었다.	keep	rewrites
+cx:speaker-asked:20	母に早く寝ろと言われた。	has:어머니에게 빨리 자라는 말을 들었다	keep	rewrites
 cx:mimetic-causative:10	俺たちが どれくらい強くなったか びっくりさせてやる。	우리가 어느 정도 강해졌는지 깜짝 놀라게 해 준다.	fix	rewrites
 cx:mimetic-causative:10	もっと勉強させる。	좀 더 공부시킨다.	keep	rewrites
 cx:mimetic-causative:20	彼女をドキドキさせる言葉	그녀를 두근두근하게 하는 말	fix	rewrites
