@@ -93,6 +93,7 @@ struct Arg {
 struct Context {
     std::vector<Arg> args;       // the arguments of the predicate
     const Item* head = nullptr;  // the noun a predicate stands right before (its adnominal head)
+    bool headThroughAux = false;  // the head follows a て form auxiliary: it fills the subject only
     const Item* mod = nullptr;   // the word right before a noun that modifies it
     const Item* pred = nullptr;  // the word the word's phrase depends on
     const Item* next = nullptr;
@@ -183,10 +184,29 @@ Context ContextOf(Flusher& f, const Item* it) {
                 q = q->prev;
             }
         }
-        if (c.next != nullptr && ClassOf(c.next) == '1' && !Faint(c.next->group->surface) &&
-            it->DirectSurface().find("て") == std::string_view::npos) {
-            c.head = c.next;
-            c.pred = c.next;
+        // through the auxiliaries of a て form (伸びてくる指先, 伸びている指) the predicate still modifies the noun; a
+        // quoting って after a dictionary or past form (引くっていうか, 見たって) is no て form
+        const auto teForm = [](const Item* v) {
+            const std::string_view ending = v->DirectSurface();
+            if (!ending.ends_with("て") && !ending.ends_with("で")) return false;
+            const std::string_view text = v->text;
+            const auto from = static_cast<std::size_t>(std::max(v->start, 0));
+            const std::string_view covered = from < text.size() ? text.substr(from, static_cast<std::size_t>(std::max(v->length, 0))) : std::string_view();
+            return !covered.starts_with(v->group->surface) || covered.substr(v->group->surface.size()) == ending;
+        };
+        const Item* last = it;
+        const Item* next = c.next;
+        for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && ClassOf(next) == '4' && teForm(last) &&
+                        dict::InClass(HDTRANS_CLASS("aux.te-through"), next->group->surface);
+             k++) {
+            last = next;
+            next = next->After();
+        }
+        if (next != nullptr && ClassOf(next) == '1' && !Faint(next->group->surface) &&
+            last->DirectSurface().find("て") == std::string_view::npos) {
+            c.head = next;
+            c.pred = next;
+            c.headThroughAux = last != it;
         }
     } else if (cls == '1') {
         if (it->prev != nullptr && (Predicate(ClassOf(it->prev)) || ClassOf(it->prev) == '1')) c.mod = it->prev;
@@ -401,7 +421,7 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
                 if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
             // (an attachment says itself which argument the head is)
-            if (pool.empty() && !c.attached && (a.slot == "subj" || a.slot == "obj") && c.head != nullptr)
+            if (pool.empty() && !c.attached && (a.slot == "subj" || (a.slot == "obj" && !c.headThroughAux)) && c.head != nullptr)
                 pool.push_back({a.slot, c.head, {}, {}, {}});
         } else if (a.slot == "head") {
             if (c.head != nullptr) pool.push_back({a.slot, c.head, {}, {}, {}});

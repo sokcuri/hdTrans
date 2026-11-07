@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:lex:ittai-counter	その周りに伏兵らしきものはいないけれど、機械の陰には一人……いや、一体だけ。	그 주위에 복병 같은 것은 없지만, 기계의 그늘에는 한 사람……아니, 한 체만.	fix	local
 dict:lex:ittai-counter	手負いの中鬼が一体だけとはいえ、	상처 입은 중귀가 한 마리만이라고 해도,	fix	local
 dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨 이야기다.	keep	local
-compose:native-count	その言葉と共に、二体の水人形の腕がゆっくりとシュレムへと伸び、	그 말과 함께, 두 개의 물인형의 팔이 천천히 슈렘으로 자라,	fix	compose
+compose:native-count	その言葉と共に、二体の水人形の腕がゆっくりとシュレムへと伸び、	그 말과 함께, 두 개의 물인형의 팔이 천천히 슈렘으로 뻗어,	fix	compose
 compose:native-count	二体のモンスターが閃光と共にリングに出現する。	두 마리의 몬스터가 섬광과 함께 링에 출현한다.	fix	compose
 compose:native-count	二体のエルフは、対照的な格好だった。	두 명의 엘프는, 대조적인 모습이었다.	fix	compose
 compose:native-count	５体の魔物を倒した	5마리의 마물을 쓰러뜨렸다	keep	compose

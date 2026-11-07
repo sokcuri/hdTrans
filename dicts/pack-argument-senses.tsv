@@ -124,3 +124,10 @@ argument-senses:113	できる|出来る	v1	sense	subj=彼女|彼氏|恋人 form=
 argument-senses:114	できる|出来る	v1	sense	subj=料理|ご飯|飯|夕飯|夕食|朝食|朝ご飯|昼食|晩ご飯|カレー|ケーキ|宿題|作品|小説|原稿|絵|模型|お茶|コーヒー|弁当|お弁当 form=ta	다 되다	LEX-4911		料理ができた 요리가 다 됐다			
 argument-senses:115	できる|出来る	v1	sense	after=よく|良く head=-	되다	LEX-4911		この模型、よくできてる 이 모형, 잘 되어 있다			
 argument-senses:5000	見逃す	v5	sense	next=あげる|やる|くれる|ください|下さい|もらう|いただく|頂く|くださる|下さる|やれる	봐주다	LEX-5000		見逃してあげる 봐줄게			
+argument-senses:5010	伸びる|のびる	v1	sense	subj=@hand|腕|両腕|片腕|右腕|左腕|両手|片手|右手|左手|触手|魔の手	뻗다	LEX-5005		伸びてくる指先 뻗어 오는 손끝			
+argument-senses:5011	伸びる|のびる	v1	sense	after=に向か|に向け|向かって|向けて	뻗다	LEX-5005		額に向かって伸びる 이마를 향해 뻗다			
+argument-senses:5012	伸びる|のびる	v1:ㄹ	sense	subj=記録|売上|売り上げ|成績|視聴率|人気|業績|点数|飛距離|学力|実力|数字|再生数|閲覧数|フォロワー|収益|スコア	늘다	LEX-5005		記録が伸びる 기록이 늘다			
+argument-senses:5013	伸びる|のびる	v1	sense	subj=日|昼|日脚|日足|寿命	길어지다	LEX-5005		日が伸びてきた 해가 길어져 왔다			
+argument-senses:5014	伸びる|のびる	v1	sense	subj=@hair|爪|ひげ|ヒゲ|草|雑草|芽|苗|蔓|つる	자라다	LEX-5005		髪がのびてきた 머리카락이 자라 왔다			
+argument-senses:5015	伸びる|のびる	v1	sense	subj=背|身長|背丈|上背	자라다	LEX-5005		背がのびた 키가 자랐다			
+argument-senses:5016	伸びる|のびる	v1	sense	subj=@clothing|服|セーター|シャツ|Tシャツ|靴下|ゴム|ゴム紐|バネ|生地|布|餅|チーズ	늘어나다	LEX-5005		ゴムが伸びた 고무가 늘어났다			
