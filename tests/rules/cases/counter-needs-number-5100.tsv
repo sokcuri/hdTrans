@@ -1,0 +1,29 @@
+# 규칙: LEX-5100, LEX-5101
+rule	input	expected	kind	layer
+G90	姿を目で捉えると、	모습을 눈으로 포착하면,	fix	global-stem
+G90	金に余裕がなかったり 自分の目が 下がっていると思ったら	has:자신의 눈이	fix	global-stem
+G90	その姿をしっかりと目で捉えた	has:제대로 눈으로 포착했다	fix	global-stem
+G90	獲物を目で捉えて離さない	has:사냥감을 눈으로 포착해	fix	global-stem
+G90	その目で捉えたものを信じろ	has:그 눈으로 포착한	fix	global-stem
+G90	彼の目が下がる	has:그의 눈이	fix	global-stem
+G90	その頃を越える	has:그 무렵을	fix	global-stem
+G90	その戦で取る	has:그 싸움에서	fix	global-stem
+G90	その軒を取る	has:그 처마를	fix	global-stem
+G90	自分たちの目で確認してください	자신들의 눈으로 확인해 주세요	keep	global-stem
+G90	その背を目で追いながら、小太刀が口を開く。	has:그 등을 눈으로 쫓으면서	keep	global-stem
+G90	そんな目で見るな。	그런 눈으로 보지 마.	keep	global-stem
+G90	兄３人が戦死しー ４人目が助け出される	has:4번째가	keep	global-stem
+G90	そういえば三人は倒したな。四人目で力尽きちまったが……	has:네 번째에	keep	global-stem
+G90	５つ目で疲れを感じた。	5번째로 피로를 느꼈다.	keep	global-stem
+G90	「五十六回目に言った」	「56번째에 말했어」	keep	global-stem
+G90	俺らこの5人で遊ぶこと多いから	has:5명이서	keep	global-stem
+G90	アシュレイと別れたあと、俺は一人で人気のない廊下を歩いた。	has:혼자서	keep	global-stem
+G90	他のカップルが何十年もかかることを	has:십년이나 걸리는	keep	global-stem
+G90	それぞれ好きな奴を一人ずつ挙げて	has:한 사람씩	keep	global-stem
+G90	あらゆる面で彼を上回る	모든 면에서 그를 웃돈다	keep	global-stem
+phrase:toshi-hanare	かなり年は離れているが。	꽤 나이 차이는 나지만.	fix	phrases
+phrase:toshi-hanare	自分と五つも年の離れていない男に	has:나이 차이가 나지 않는	fix	phrases
+phrase:toshi-hanare	年の離れた兄が両親を養っており、	has:나이 차이가 나는 형이	keep	phrases
+phrase:toshi-hanare	俺とはだいぶ年も離れてるのに	has:나이 차이도 나는데	keep	phrases
+phrase:toshi-hanare	十も年が離れている	has:나이 차이가 난다	keep	phrases
+phrase:toshi-hanare	家から離れる	집에서 멀어진다	keep	phrases

@@ -67,9 +67,10 @@ bool RuleG80([[maybe_unused]] Item* p) {
 }
 
 // global 1010 stem pos 1 prio 90
-//     pos is not 13* and sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4** and sem lacks QPN and (gram has Hz or gram[-1] lacks Nj|Nd)
+//     pos is not 13* and sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4** and sem lacks QPN and (gram lacks Ct or gram has Nq) and (gram has Hz or gram[-1] lacks Nj|Nd)
 bool RuleG90([[maybe_unused]] Item* p) {
-    return (PumsaNe(p, 0, "13*"sv) && AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv) && AttrNe(p, 0, "QPN"sv) && (GramEq(p, 0, "Hz"sv) ||
+    return (PumsaNe(p, 0, "13*"sv) && AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv) && AttrNe(p, 0, "QPN"sv) && (GramNe(p, 0, "Ct"sv) ||
+           GramEq(p, 0, "Nq"sv)) && (GramEq(p, 0, "Hz"sv) ||
            GramNe(p, -1, "NjNd"sv)));
 }
 
@@ -273,7 +274,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
-    {RuleG90, 0xd168e3592ff5cec5ull},
+    {RuleG90, 0x646c0109f2a51c5cull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},
     {RuleG130, 0x60209eb785257c06ull},
