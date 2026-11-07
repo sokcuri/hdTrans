@@ -3702,7 +3702,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いどけな	순진$AB@	H7U0			GN				jisjk:4867		
 いどころか	1기는 커녕	T500			GN				jisjk:264435		
 いどばた会議室	잡담실	N110	VBl		GN				jisjk:126033		
-いな	$FA@	H7N0		Xn	GN	1445	||2 &&2 P-1== "4**" G-1== "Ke" &&3 P-1== "4*9" U-1== "て" M-1== "57*"	가능 동사나 특정 일단동사의 て형 뒤에서 いな를 없다로 고른다.	jisjk:138602		
+いな	$FA@	H7N0		Xn	GN	1445	||3 &&2 P-1== "4**" G-1== "Ke" &&3 P-1== "4*9" U-1== "て" M-1== "57*" &&3 S-1== "い" P-1== "4**" U+0== "くても"	가능 동사나 특정 일단동사의 て형 뒤, いても 뒤의 いなくても에서 いな를 없다로 고른다.	jisjk:138602		
 いな	돌려보&A6@	M443			GN				jisjk:140965		
 いな	있지 $D7@	H7U0		Xn	GN	2005	||2 &&3 P-1== "4**" U-1== "ばかり" M-1== "57*" &&2 S-1== "しかして" D-1== "밖에 하고"	57 계열 ばかり 어미를 가진 동사나 밖에 하고로 번역된 しかして 뒤에서 いな를 있지 않다로 고른다. (미발동: rare-context)	jisjk:261841		
 いな	거절&AV@	M445			GN				jisjk:265240		
@@ -7124,7 +7124,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おろおろ	허둥지둥	E301			GN				jisjk:178		
 おろおろ	엉엉	E301			GN				jisjk:117173		
 おろか	바보%B3@	G8L0			GN				jisjk:2142		
-おろか	커녕	P200		Ha	GN				jisjk:344947		
+おろか	커녕	P200			GN				jisjk:344947		
 おろかし	어리$F8@	H7N0	SFl		GN				jisjk:120064		
 おろかもの	바보	N110	VHn		GN				jisjk:166238		-1
 おろし	퇴각	N110			GN	4274	||1 &&3 P-1== "1**" A-1== "UAqUQf" D+0= " 끌어내리기"	직업·직위 명사 뒤의 おろし를 끌어내리기로 옮긴다.	jisjk:362895		
@@ -253182,9 +253182,8 @@ ttt	ttt	K110			GN				jisjk:201744
 気合が入ってい	기합이 들어가서 $DE@	H7N0			GN				jisjk:122228		
 気合が合	서로 호흡이 &FB@	M410			GN				jisjk:92240		
 気合入	기합이 들어&A1@	M428			GN				jisjk:264546		
-気味	기색	N110	UFl		GN				jisjk:17798		
 気味	기미	N110	VBp		GN				jisjk:17799		
-気味な	기미의	E0H0			GN				jisjk:149823		
+気味	기색	N110	UFl		GN				jisjk:17798		
 気味よ	기분 $DE@	H7N0	SFl		GN				jisjk:120315		
 気味合い	기분	N110	SFl		GN				jisjk:172772		
 気味悪	기분 나$A5@	H7N0	SFl		GN				jisjk:120318		
@@ -356014,7 +356013,7 @@ ttt	ttt	K110			GN				jisjk:201744
 風邪声	감기 든 목소리	I110	UHrVBp		GN				jisjk:88162		
 風邪心地	감기 기운	N110	QHP		GN				jisjk:168468		
 風邪気	감기 기운	I110	UFlUTi		GN				jisjk:88160		
-風邪気味	감기기운	I110			GN				jisjk:88161		
+風邪気味	감기 기운	I110			GN				jisjk:88161		
 風邪汽味	감기 기운	N110			GN				jisjk:228743		
 風邪薬	감기약	I110	VFdVMd		GN				jisjk:88163		
 風配高原	후하이고원	I110	QCT		GN				jisjk:88159		

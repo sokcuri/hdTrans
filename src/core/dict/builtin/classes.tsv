@@ -337,6 +337,7 @@
 //= noun.topic-about	Verbal nouns of speaking, asking, thinking, looking into and writing, matched whole, that make a について before them a topic as verb.topic-about does (運行区間について表示します).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
+//= noun.kimi-mood	Verbal nouns of a mood that shows on one (興奮, 緊張, 困惑): with 気味 they are read -한 듯하다 (興奮気味の声 흥분한 듯한 목소리, 緊張気味だけど 긴장한 듯하지만), not 기미가 있다.
 //= noun.he-sent	Nouns of something sent or said to someone (手紙, 報告, 電話): the への before them is 에게 보내는 after a person (彼への手紙 그에게 보내는 편지), (으)로 보내는 after anything else.
 //= noun.he-gift	Nouns of something given to someone (贈り物, ご褒美): the への before them is 에게 주는 after a person (自分へのご褒美 자신에게 주는 상), 에 주는 after anything else.
 //= noun.he-path	Ends of nouns of a way, a move or a change toward a place or a state (道, 入学, 輸送, 変化): the への before them is (으)로의 (王都への道 왕도로의 길, 大学への進学 대학으로의 진학).
@@ -567,6 +568,7 @@
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
+//= verb.foresee-start	Starts of the verbs of thinking, knowing, imagining or expecting that a non-past verb with とは before them makes an outcome one did not foresee, -(으)ㄹ 줄은 (こんなことになるとは思わなかった 이렇게 될 줄은 생각하지 못했다).
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.youni-seem	Verbs of seeming after ように, with or without は, も or しか between, before which ように is a likeness, 것처럼 (泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えない 속이려 하고 있는 것처럼은 보이지 않는다).
@@ -4388,6 +4390,21 @@ noun.feeling	気後れ
 noun.feeling	尊敬
 noun.feeling	同意
 noun.feeling	賛成
+
+noun.kimi-mood	興奮
+noun.kimi-mood	緊張
+noun.kimi-mood	困惑
+noun.kimi-mood	混乱
+noun.kimi-mood	動揺
+noun.kimi-mood	当惑
+noun.kimi-mood	自嘲
+noun.kimi-mood	嘆息
+noun.kimi-mood	安堵
+noun.kimi-mood	落胆
+noun.kimi-mood	失望
+noun.kimi-mood	憤慨
+noun.kimi-mood	狼狽
+noun.kimi-mood	焦燥
 noun.he-sent	手紙
 noun.he-sent	お手紙
 noun.he-sent	便り
@@ -7906,6 +7923,17 @@ verb.thinking-start	感じ
 verb.thinking-start	考え
 verb.thinking-start	信じ
 verb.thinking-start	確信
+
+verb.foresee-start	思
+verb.foresee-start	おも
+verb.foresee-start	考え
+verb.foresee-start	知
+verb.foresee-start	想像
+verb.foresee-start	予想
+verb.foresee-start	予測
+verb.foresee-start	想定
+verb.foresee-start	予期
+verb.foresee-start	夢にも
 
 verb.way-of-doing	ようが
 verb.way-of-doing	ようも

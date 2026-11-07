@@ -82,7 +82,7 @@ cx:web-fixes-k:320	でもね、断りもなく人を呼び付けておいて存�
 cx:web-fixes-k:320	召喚しておいて無目的で放置されたとあっては	has:소환해 놓고	fix	rewrites
 cx:web-fixes-k:320	『家にかけて美里に俺のこと話しておいてくれないか？』	!rule:cx:web-fixes-k:320	keep	rewrites
 cx:web-fixes-k:320	任せておいて！	!rule:cx:web-fixes-k:320	keep	rewrites
-cx:web-fixes-k:325	あっさりと放っておいて帰るという事を決断できた。	has:내버려 두고 돌아간다	fix	rewrites
+cx:web-fixes-k:325	あっさりと放っておいて帰るという事を決断できた。	has:내버려 두고 돌아가	fix	rewrites
 cx:web-fixes-k:325	放っておいて…放って…。	!rule:cx:web-fixes-k:325	keep	rewrites
 cx:web-fixes-k:330	賛成する者もいれば、反対する者もいる。	찬성하는 사람도 있고, 반대하는 사람도 있다.	fix	rewrites
 cx:web-fixes-k:330	勇者が魔王を討ち滅ぼすこともあれば、魔王が勇者を退けることもあった。	has:멸하는 일도 있고, 마왕이	fix	rewrites

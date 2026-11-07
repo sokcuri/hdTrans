@@ -13,8 +13,8 @@ lookup:kana-spelling	みなは知らない。	모두는 모른다.	fix	lookup
 lookup:kana-spelling	みなを守る。	모두를 지킨다.	fix	lookup
 lookup:kana-spelling	テレビをみながら食べた。	텔레비전을 보면서 먹었다.	keep	lookup
 lookup:kana-spelling	「少し……前に進んでみない……？」	「조금……앞으로 나아가 보지 않을래……?」	keep	lookup
-lookup:kana-spelling	思ってもみない申し出だっただけに	has:보지 않는	keep	lookup
-lookup:kana-spelling	考えてもみなかったことだ	has:보지 않았던	keep	lookup
+lookup:kana-spelling	思ってもみない申し出だっただけに	lacks:모두	keep	lookup
+lookup:kana-spelling	考えてもみなかったことだ	has:보지도 않았던	keep	lookup
 lookup:kana-spelling	そんなの産んでみなきゃ分かんないよ	has:낳아 보지 않으면	keep	lookup
 lookup:kana-spelling	うん これ 読んでみな	lacks:모두	keep	lookup
 lookup:kana-spelling	よくみなさい。	잘 봐.	keep	lookup
