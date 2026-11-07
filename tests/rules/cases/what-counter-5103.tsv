@@ -1,0 +1,22 @@
+# 규칙: LEX-5103
+rule	input	expected	kind	layer
+lexical:counter-class	(瑞枝)Ｂ-２９が 何機かずつ分かれて攻撃してるんだわ	has:몇 기인가씩	fix	lookup
+lexical:counter-class	CAPには、何機あがってる！	has:몇 기 오르고	fix	lookup
+lexical:counter-class	それがあの夜、何機ものギアが突然降りてきて戦闘を始めたんだ。	has:몇 기	fix	lookup
+lexical:counter-class	その物体は、まるで何層にも金属板が重ねられたような構造で	has:몇 층	fix	lookup
+lexical:counter-class	どうやら額を切って何針かぬったそうで	has:몇 바늘	fix	lookup
+lexical:counter-class	「『ゴールデンハンター』ってさ、今何巻まで出てるの？」	has:몇 권까지	fix	lookup
+lexical:counter-class	何羽いる？	몇 마리 있어?	fix	lookup
+lexical:counter-class	《たった13機で数万のBETAを相手にするなんて…》	has:13기로	keep	lookup
+lexical:counter-class	戦闘機が三機ある	전투기가 3기 있다	keep	lookup
+lexical:counter-class	自衛隊機の飛行音	자위대기 비행음	keep	lookup
+lexical:counter-class	機を見る	기를 본다	keep	lookup
+lexical:counter-class	針で刺す	바늘로 찌른다	keep	lookup
+lexical:counter-class	層が厚い	층이 두껍다	keep	lookup
+lexical:counter-class	鳥が三羽いる	새가 세 마리 있다	keep	lookup
+lexical:counter-class	羽が生えた	날개가 났다	keep	lookup
+lexical:counter-class	何台ある？	몇 대 있어?	keep	lookup
+lexical:counter-class	何匹いる？	몇 마리 있어?	keep	lookup
+lexical:counter-class	何度も言ったでしょ	has:몇 번이나	keep	lookup
+lexical:counter-class	何色が好き？	has:무슨 색	keep	lookup
+lexical:counter-class	周りを見る	주위를 본다	keep	lookup

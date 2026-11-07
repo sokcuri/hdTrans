@@ -190078,7 +190078,7 @@ ttt	ttt	K110			GN				jisjk:201744
 屡説	누누이 말함	N110			GN				jisjk:256279		
 屡述	누차 말함	N110			GN				jisjk:256276		
 層	0 층	S500	VPl		GN				jisjk:4521		
-層	층	N110	VPl	Z7	GN				jisjk:115966		
+層	층	N110	VPl	Z7Ct	GN				jisjk:115966		
 層	층	N110		On	GN				jisjk:259000		
 層一層	더욱더	E311			GN				jisjk:2018		
 層位学	층위학	N110	UTh		GN				jisjk:239922		
@@ -196032,7 +196032,7 @@ ttt	ttt	K110			GN				jisjk:201744
 巷談	항설	N110			GN				jisjk:38596		
 巷間	항간	N110	VPl		GN				jisjk:38595		
 巻	&F1@	M451	VCp		GN				jisjk:92107		
-巻	권	N110	VBkVSwUTh		GN				jisjk:169987		
+巻	권	N110	VBkVSwUTh	Ct	GN				jisjk:169987		
 巻	권	N110		On	GN				jisjk:259625		
 巻	올&AA@	M461			GN	2844	||1 &&5 U+0== "方" Y+0== "0 방법" M+0== "5:*" P-1== "2**" P-2== "1**"	巻가 명사와 조사 뒤에서 方 어미로 활용되면 올리는 방법에 해당하는 후보를 고른다. (미발동: rare-context)	jisjk:268305		
 巻かなくな	감지 않게 &C6@	M448			GN				jisjk:148462		
@@ -249063,7 +249063,7 @@ ttt	ttt	K110			GN				jisjk:201744
 橙皮	등피	N110	VPt		GN				jisjk:245553		
 橙皮油	등피유	N110	VPt		GN				jisjk:245562		
 橙酢	등자나무 즙	N110			GN				jisjk:242143		
-機	기	N110		Z7	GN	1665	||1 G-1== "NjNd"	機는 앞 단어가 한자 또는 아라비아 숫자이면 조수사 '기'를 고른다.	jisjk:171626		
+機	기	N110		Z7	GN				jisjk:171626		
 機	기회	N110			GN				jisjk:257857		
 機	기	N110		On	GN				jisjk:259637		
 機げん	기분	I110	UFl		GN				jisjk:63758		
@@ -303331,7 +303331,7 @@ ttt	ttt	K110			GN				jisjk:201744
 羸痩	이수	N110			GN				jisjk:256266		
 羹	국	N110	VFd		GN				jisjk:124567		
 羽	날개	N110	XXXVBp		GN				jisjk:115461		
-羽	마리	N110			GN	1853	||2 &&2 P-1== "1**" G-1== "NjNd" &&3 S+1== "の" P+2== "1**" A+2== "QAB"	羽는 앞이 수사 명사이거나 뒤에 の와 새 의미 명사가 오면 마리로 고른다. (미발동: rare-context)	jisjk:257738		
+羽	마리	N110		Ct	GN	1853	||2 &&2 P-1== "1**" G-1== "NjNd" &&3 S+1== "の" P+2== "1**" A+2== "QAB"	羽는 앞이 수사 명사이거나 뒤에 の와 새 의미 명사가 오면 마리로 고른다. (미발동: rare-context)	jisjk:257738		
 羽	하네	N130	QCTVPl		GN				jisjk:258354		
 羽	우	N110		On	GN				jisjk:321035		
 羽づるをお	마리 학을 &HS@	M428		Pn	GN				jisjk:342405		
@@ -343436,7 +343436,7 @@ ttt	ttt	K110			GN				jisjk:201744
 釜野沢	카마노사와	N130	QCTVPl		GN				jisjk:283340		
 釜額	카마히타이	N130	QCTVPl		GN				jisjk:283348		
 釜飯	솥밥	N110	VFd		GN				jisjk:229263		
-針	바늘	N110	XXXVTw		GN				jisjk:115899		
+針	바늘	N110	XXXVTw	Ct	GN				jisjk:115899		
 針	하리	N130	QCTVPl		GN				jisjk:258950		
 針	침	N110		On	GN				jisjk:321525		
 針えんじゅ	아카시아	I110	QAL		GN				jisjk:87024		
