@@ -131,3 +131,15 @@ argument-senses:5013	伸びる|のびる	v1	sense	subj=日|昼|日脚|日足|寿
 argument-senses:5014	伸びる|のびる	v1	sense	subj=@hair|爪|ひげ|ヒゲ|草|雑草|芽|苗|蔓|つる	자라다	LEX-5005		髪がのびてきた 머리카락이 자라 왔다			
 argument-senses:5015	伸びる|のびる	v1	sense	subj=背|身長|背丈|上背	자라다	LEX-5005		背がのびた 키가 자랐다			
 argument-senses:5016	伸びる|のびる	v1	sense	subj=@clothing|服|セーター|シャツ|Tシャツ|靴下|ゴム|ゴム紐|バネ|生地|布|餅|チーズ	늘어나다	LEX-5005		ゴムが伸びた 고무가 늘어났다			
+argument-senses:5030	出す	v5	sense	arg=@filing	하다	LEX-5007		婚姻届を出す 혼인신고를 하다			
+argument-senses:5031	出す	v5	sense	arg=@submission	내다	LEX-5007		辞表を出した 사표를 냈다			
+argument-senses:5032	出す	v5	sense	arg=@submission register=polite	제출하다	LEX-5007		申請書を出してください 신청서를 제출해 주세요			
+argument-senses:5033	立てる	v1	sense	obj=@sound|湯気|煙	내다	LEX-5007		真帆の立てる物音 마호가 내는 소리			
+argument-senses:5034	立てる	v1	sense	obj=土煙|砂煙|砂埃|しぶき|水しぶき|波	일으키다	LEX-5007		土煙を立てて 흙먼지를 일으키며			
+argument-senses:5035	立てる	v1	sense	obj=生計|暮らし|生活	꾸리다	LEX-5007		生計を立てる 생계를 꾸리다			
+argument-senses:5036	立てる	v1	sense	obj=売り上げ|売上|売上げ|利益|収益	올리다	LEX-5007		売り上げを立てる 매상을 올리다			
+argument-senses:5037	立てる	v1	sense	obj=茶|お茶|抹茶|薄茶|濃茶	타다	LEX-5007		茶を立ててやろう 차를 타 주마			
+argument-senses:5039	回す	v5	sense	arg=@bill dat=@person|あいつ|こいつ|そいつ|あの人|あなた|あんた|貴様|おまえ|きみ	떠넘기다	LEX-5007		請求は全部あいつに回しておけ 청구는 전부 저 녀석한테 떠넘겨 둬			
+argument-senses:5040	回す	v5	sense	obj=@task|@document|@message|@info|@thing dat=@person|あいつ|こいつ|そいつ|あの人|あなた|あんた|貴様|おまえ|きみ	넘기다	LEX-5007		運び賃、全部あいつに回してやる 운송비, 전부 저 녀석에게 넘겨 준다			
+argument-senses:5041	抜く	v5	sense	obj=指輪|リング|指環|結婚指輪|婚約指輪|ピアス|イヤリング|手袋	빼다	LEX-5007		指輪を指から抜き 반지를 손가락에서 빼			
+argument-senses:5042	付き合う|つきあう|付きあう|つき合う	v5	sense	dat=@task	함께하다	LEX-5007		危険な任務に付き合ってもらって 위험한 임무에 함께해 주어			

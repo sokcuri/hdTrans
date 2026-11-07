@@ -107,3 +107,6 @@ class	parent
 @weapon	@thing
 @writing	@document
 @writing.tool	@tool
+@filing	@document
+@submission	@document
+@bill	@money
