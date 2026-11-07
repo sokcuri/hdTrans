@@ -1,0 +1,39 @@
+# 규칙: LEX-5010
+rule	input	expected	kind	layer
+pack:argument-senses:5065	大して時間がたたないうちに、ミーアの目の前に料理が並んで行く。	has:요리가 놓여 간다	fix	packs
+pack:argument-senses:5065	あらかた料理が並んだところで、俺は元いた席に戻った。	lacks:놓	keep	packs
+pack:argument-senses:5065	ずらっと並んだケーキやらなんやらに、思わず声を漏らした。	lacks:놓	keep	packs
+pack:argument-senses:5065	店の前に行列が並ぶ。	lacks:놓	keep	packs
+pack:argument-senses:5066	鈴木が出来たての料理を並べる。	has:요리를 차린다	fix	packs
+pack:argument-senses:5066	俺は、目の前に並べられた料理に手を付ける・・・	has:차려진 요리에	fix	packs
+pack:argument-senses:5066	机の上に本を並べた。	lacks:차렸	keep	packs
+dict:w:34691	それから子牛の胸腺肉と季節の野菜です	has:제철 채소입니다	fix	lookup
+dict:w:34692	地元のｻﾂﾏｲﾓをたっぷり使ったカステラサンドの他にも季節の果物を盛り付けたカステラも人気です	has:제철 과일을	fix	lookup
+dict:w:34693	季節の魚を使った料理	has:제철 생선을	fix	lookup
+dict:w:34691	季節の変わり目	has:환절기	keep	lookup
+dict:w:34690	しかも、夕食に近海で取れた魚介類をふんだんに使った寿司が出る。	has:어패류를 듬뿍 쓴	fix	lookup
+dict:w:34690	ふわふわ、フリルがふんだんに使われている、さわり心地のいいやつだ。	has:프릴이 듬뿍	fix	lookup
+dict:jisjk:2259	ふんだんな資金	has:풍부한 자금	fix	lookup
+dict:w:34696	ふんわりと香ばしい焼きたてパン、季節の野菜がふんだんに入ったシチュー、紅魚のマリネ、それに、フルーツの盛り合わせだった。	has:붉은 생선의 마리네	fix	lookup
+cx:humble-give:60	「いえ、なんでもありません。それでは、ただいまお持ちいたします」	has:곧 가져다 드리겠습니다	fix	rewrites
+cx:humble-give:60	ただいまご用意します	has:곧 준비해 드리겠습니다	fix	rewrites
+cx:humble-give:60	ただいま準備中です。	!rule:cx:humble-give:60	keep	rewrites
+cx:humble-give:60	ただいま戻りました。	!rule:cx:humble-give:60	keep	rewrites
+dict:jisjk:341121	ヒトゴーマルマル。司令官。あ、あの…おやつお持ちいたしましょうか？	has:간식 가져다 드릴까요	fix	lookup
+dict:jisjk:341121	お水をすぐにお持ちいたしますから｡	has:가져올 테니까요	fix	lookup
+dict:jisjk:341121	剣丞どの。お持ちいたしましたぞ	has:가져왔습니다	fix	lookup
+pack:argument-senses:5069	皿が次々と並べられていく。	has:차려져 간다	fix	packs
+pack:argument-senses:5069	本が並べられている。	lacks:차려	keep	packs
+dict:w:35164	金剛お姉さま、サンマ漁です！ 秋刀魚です！ 旬の秋刀魚は脂がのっていて美味しいですよねぇ。	has:제철 꽁치는	fix	lookup
+dict:w:35164	旬の食材を使ってるからです	has:제철 식재료를	fix	lookup
+dict:w:35164	五月初旬の夜です。	has:5월 초순	keep	lookup
+dict:w:35161	季節のお野菜	has:제철 채소	fix	lookup
+cx:try-on:10	試着してみて	has:입어 봐	fix	rewrites
+cx:try-on:10	服を試着した	!rule:cx:try-on:10	keep	rewrites
+cx:try-on:20	30着くらい試着したから	has:30벌 정도 입어 보았으니까	fix	rewrites
+cx:try-on:20	試着室はどこですか	has:탈의실은	keep	rewrites
+cx:humble-give:60	ただいまお持ちしますので少々お待ちください。	has:곧 가져오겠으니	fix	rewrites
+dict:w:35164	ええと 1月初旬よ	lacks:제철	keep	lookup
+pack:argument-senses:5065	それには見たことも聞いたことも無い料理がずらりと並んでいた。	lacks:놓	keep	packs
+dict:jisjk:28758	「もっと、野菜を食べなさい」	has:채소를	fix	lookup
+dict:jisjk:28758	野菜炒めを作った	lacks:채소볶음	keep	lookup

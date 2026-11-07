@@ -15,7 +15,7 @@ dict:idiom:1	いえ、なんでもありませんわ。	아뇨, 아무것도 아
 dict:idiom:1	ははは、別になんでもありませんよ。	하하하, 딱히 아무것도 아니에요.	fix	local
 dict:idiom:1	ここにはなんでもある。	여기에는 뭐든 있다.	keep	local
 dict:idiom-verbs	食事ものどを通らなくって、ランチを食べることができなかった。	식사도 목구멍으로 넘어가지 않아서, 런치를 먹을 수가 없었다.	fix	lookup
-dict:idiom-verbs	野菜たっぷりのシチューを見て、頬をゆるめた。	야채 듬뿍의 스튜를 보고, 미소 지었다.	fix	lookup
+dict:idiom-verbs	野菜たっぷりのシチューを見て、頬をゆるめた。	채소 듬뿍의 스튜를 보고, 미소 지었다.	fix	lookup
 dict:idiom-verbs	窓から見える春の空は、目にしみるほど青かった。	창에서 보이는 봄의 하늘은, 눈을 찌를 만큼 푸르렀다.	fix	lookup
 dict:idiom-verbs	食指を動かされることなく適齢を過ぎた妃	관심이 생기는 일 없이 적령을 지난 비	fix	lookup
 dict:idiom-verbs	むせ返る化粧と香	숨이 막히는 화장과 향기	fix	lookup

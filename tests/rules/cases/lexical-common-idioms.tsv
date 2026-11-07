@@ -37,7 +37,7 @@ lexical:common-idioms	油を差す	기름을 친다	keep	lookup
 dict:nigate:2	猫舌なので熱いものは苦手だ	뜨거운 것을 먹지 못하는 사람이므로 뜨거운 것은 질색이다	fix	local
 dict:nigate:2	熱いものは苦手です	뜨거운 것은 질색입니다	fix	local
 dict:nigate:2	虫は苦手だ	벌레는 질색이다	fix	local
-dict:nigate:2	野菜は苦手だった	야채는 질색이었다	fix	local
+dict:nigate:2	野菜は苦手だった	채소는 질색이었다	fix	local
 dict:nigate:2	私はピーマンも苦手だ	나는 피망도 질색이다	fix	local
 dict:nigate:2	甘いものは苦手なんだ	단 것은 질색이다	fix	local
 dict:nigate:2	数学は苦手だ	수학은 서투르다	keep	local

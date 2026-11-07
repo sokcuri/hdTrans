@@ -7698,7 +7698,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お招きいただ	불러 주&AE@	M461			GN	3051	||1 &&3 M+0== "5:0" S+1== "ありがとうございます" Y+0= "6서"	お招きいただ의 어미가 5:0이고 뒤에 ありがとうございます가 오면 불러 주시다를 고르고 어미를 아·어서로 바꾼다. (미발동: rare-word)	jisjk:341278		
 お持ち	가지고 %B7@	G8U0			GN				jisjk:373350		
 お持ち	가져&AH@	M449			GN				jisjk:373965		
-お持ちいた	가져 &AH@	M443			GN				jisjk:341121		
+お持ちいた	가져&AH@	M443			GN				jisjk:341121		
 お持ちください	가져가세요	A9D0			GN				jisjk:202282		
 お持ちでござ	소유&AV@	M468			GN				jisjk:268201		
 お持ちでな	갖고 계시지 $DH@	H7N0			GN				jisjk:122029		
@@ -40161,7 +40161,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ふんぞり返	뽐&A6@	M418			GN				jisjk:91432		
 ふんぞり返	뽐내며 &FI@	M418	VPl		GN				jisjk:91433		
 ふんだく	탈취&AV@	M438			GN				jisjk:91434		
-ふんだん	충분%A1@	G8U0			GN				jisjk:2259		
+ふんだん	풍부%A1@	G8U0			GN				jisjk:2259		
 ふんだん	푸짐%A1@	G8U0			GN				jisjk:2260		
 ふんどし	들보	I110			GN				jisjk:112548		
 ふんばり	버티기	N110			GN				jisjk:342796		
@@ -341746,7 +341746,7 @@ ttt	ttt	K110			GN				jisjk:201744
 野菊	들국화	N110	VPt		GN				jisjk:154015		
 野菊の墓	들국화 무덤	N110	VBkVSw		GN				jisjk:248949		
 野菊野	노기쿠노	N130	QCTVPl		GN				jisjk:319223		
-野菜	야채	N110	VFd		GN				jisjk:28758		
+野菜	채소	N110	VFd		GN				jisjk:28758		
 野菜類	야채류	N110			GN				jisjk:164329		
 野萩町	야하기쵸	N130	QCTVPl		GN				jisjk:335994		
 野萱	노가야	N130	QCTVPl		GN				jisjk:319217		

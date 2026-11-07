@@ -81,10 +81,10 @@ dict:jisjk:151032	ほんのり紅潮した健康的な頬。	살짝 홍조한 �
 dict:jisjk:151032	健康的な食事。	건강한 식사.	keep	lookup
 dict:jisjk:344978	無理やり口に押し込まれた時の、あの何とも言えない青臭さ。	억지로 입에 밀어넣어졌을 때의, 그 뭐라고 말할 수 없는 풋내.	fix	lookup
 dict:jisjk:344978	無理やり連れて行かれた。	억지로 끌려갔다.	keep	lookup
-dict:jisjk:358465	嫌いな野菜である黄月トマトの入った料理を作ったコックを、その場でクビにしたからか？	싫어하는 야채인 황월 토마토가 들어간 요리를 만든 요리사를, 그 자리에서 해고했으니까인가?	fix	lookup
+dict:jisjk:358465	嫌いな野菜である黄月トマトの入った料理を作ったコックを、その場でクビにしたからか？	싫어하는 채소인 황월 토마토가 들어간 요리를 만든 요리사를, 그 자리에서 해고했으니까인가?	fix	lookup
 dict:jisjk:358465	コックをひねって水を止めた。	콕을 비틀어 물을 멈추었다.	keep	lookup
 dict:w:31009	その場でクビにした。	그 자리에서 해고했다.	fix	lookup
-dict:w:31010	フリルがふんだんに使われている、さわり心地のいいやつだ。	프릴이 충분하게 사용되고 있는, 감촉이 좋은 녀석이다.	fix	lookup
+dict:w:31010	フリルがふんだんに使われている、さわり心地のいいやつだ。	프릴이 듬뿍 사용되고 있는, 감촉이 좋은 녀석이다.	fix	lookup
 dict:w:31012	こうして血染めの日記帳を見てしまった後となっては。	이렇게 해 피로 물든 일기장을 봐버린 후가 돼.	fix	lookup
 phrase:酸っぱさ	あの何とも言えない青臭さと酸っぱさとえぐみ……。	그 뭐라고 말할 수 없는 풋내와 신맛과 아린 맛…….	fix	phrases
 cx:fresh-made:10	ふんわりと香ばしい焼きたてパン。	폭신하고 고소한 갓 구운 빵.	fix	rewrites
@@ -97,7 +97,7 @@ cx:most-of:10	聞いているだけで耳をふさぎたくなるような罵声
 cx:most-of:40	その多くの人。	그 대부분의 사람.	fix	rewrites
 cx:most-of:10	多くは語らない。	!rule:cx:most-of:10	keep	rewrites
 cx:dislike-of:10	ミーアの嫌いなもの。	미아가 싫어하는 것.	fix	rewrites
-cx:dislike-of:10	野菜は嫌いだ。	야채는 싫다.	keep	rewrites
+cx:dislike-of:10	野菜は嫌いだ。	채소는 싫다.	keep	rewrites
 cx:line-toiu:10	という夢を見た。	라는 꿈을 꾸었다.	fix	rewrites
 cx:line-toiu:10	彼という人。	그라는 사람.	keep	rewrites
 senses	赤い、燃えるように赤い夕日が視界を焼く。	붉다, 불타도록 붉은 석양이 시야를 태운다.	fix	senses
