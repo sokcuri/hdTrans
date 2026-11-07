@@ -1,0 +1,66 @@
+# 규칙: LEX-5050
+rule	input	expected	kind	layer
+cx:neg-give:5	「気にしないでくれ」	「신경 쓰지 말아 줘」	keep	rewrites
+cx:neg-give:5	「それは言わないでくれ」	has:말하지 말아 줘	fix	rewrites
+cx:neg-give:5	「いたた、動かないでくれ」	has:움직이지 말아 줘	fix	rewrites
+cx:neg-give:10	「人の心を読まないでくれる！？」	has:읽지 말아 줄래	fix	rewrites
+cx:neg-give:10	「人をツンデレみたいに言わないでくれる？」	has:말하지 말아 줄래?	fix	rewrites
+cx:neg-give:10	「あんまり、そっち方向に目覚めないでくれよ」	「너무, 그쪽 방향으로 눈을 뜨지 말아 줘」	keep	rewrites
+cx:neg-give:10	……すまん、今はちょっと話し掛けないでくれないか。	has:걸지 말아 주지	fix	rewrites
+cx:neg-give:20	みんなに言わないでくれたのね	has:말하지 않아 주었구나	fix	rewrites
+cx:neg-give:20	「[デッドストック,3]不良在庫って呼ばれてたボクたちを見捨てないでくれた」	has:버리지 않아 줬어	fix	rewrites
+cx:neg-give:20	青羽くんさえ、余計な言葉を吐かないでくれるなら、それ以外はぜーんぶ与えてあげられる	has:내뱉지 않아 준다면	fix	rewrites
+cx:neg-give:25	「そう邪険にしないでくれ」	「그렇게 몰인정하게 하지 말아 줘」	keep	rewrites
+cx:neg-give:25	お願いだから無視しないでくれ	has:무시하지 말아 줘	fix	rewrites
+cx:neg-give:30	納得しないでくれない？	has:납득하지 말아 주지	fix	rewrites
+cx:neg-give:30	そうよ！だから、私の計量を邪魔しないでくれる？	has:방해하지 말아 줄래?	fix	rewrites
+cx:neg-give:30	「そこだけ中抜きしないでくれ、なんか別の意味に聞こえる……」	has:솎아내기하지 말아 줘,	fix	rewrites
+cx:neg-give:40	彼は邪魔しないでくれた	has:방해하지 않아 주었다	fix	rewrites
+cx:neg-give-close:20	何も言わないでくれ、ロベルタ	아무것도 말하지 말아 줘, 로베르타	keep	rewrites
+cx:neg-give-close:20	……いや、いいんだ。気にしないでくれ、先生。	has:신경 쓰지 말아 줘, 선생님	fix	rewrites
+cx:neg-give-close:10	もうっ。せっかく決めたのに茶化さないでくれる	has:놀리지 말아 줄래	fix	rewrites
+cx:neg-give-close:10	うるさいよ、こうぎの邪魔だから今は話しかけないでくれる。	has:말을 걸지 말아 줄래.	fix	rewrites
+cx:prohibit-degree:10	「あまりいじめないでくれ」	has:너무 괴롭히지 말아 줘	fix	rewrites
+cx:prohibit-degree:10	何？あまり触らないで。	has:너무 만지지 마	fix	rewrites
+cx:prohibit-degree:10	提督、あんまり無理はしないでくださいね？	has:너무 무리는 하지 마세요	fix	rewrites
+cx:prohibit-degree:10	っ…あんまり見ないでほしい	has:너무 보지 말았으면	fix	rewrites
+cx:prohibit-degree:20	ええそうよ。何度も言わせないで。恥ずかしいじゃない	has:몇 번이나 말하게 하지 마	fix	rewrites
+cx:prohibit-degree:20	何度も言わせないでください。私は昔からこうでしたし、今後も変わるつもりはありません	has:몇 번이나 말하게 하지 마세요	fix	rewrites
+cx:neg-give:20	初めまして、弥生、着任…。あ、気を使わないでくれていい…です。	처음 뵙겠습니다, 3월, 부임…. 아, 신경을 쓰지 않아 줘서 좋…습니다.	keep	rewrites
+cx:neg-give:5	含めないでください	포함하지 마세요	keep	rewrites
+cx:prohibit-degree:10	あまり大丈夫には見えない。	그다지 괜찮게는 안 보인다.	keep	rewrites
+cx:prohibit-degree:20	彼は何度も私の手を握った。	그는 몇 번이나 내 손을 잡았다.	keep	rewrites
+cx:prohibit-degree:10	その日は一日、釣りにも行かず物もあまり食べないで母親を困らせた。	그날은 하루, 낚시에도 가지 않고 것도 그다지 먹지 말고 어머니를 곤란하게 했다.	keep	rewrites
+cx:neg-give:5	気にしないで 元気？	신경 쓰지 말고 잘 지내?	keep	rewrites
+cx:neg-give:30	心配しないでください	걱정하지 마세요	keep	rewrites
+cx:neg-give:40	心配しないでくれてありがとう	has:걱정하지 않아 주어서	fix	rewrites
+cx:neg-give-close:10	手伝ってくれる？	도와 줄래?	keep	rewrites
+cx:neg-give:40	何も心配しないで帰った	아무것도 걱정하지 않고 돌아갔다	keep	rewrites
+cx:neg-give-close:15	う、後ろの高射装置？ そこはガワだけなので…提督、あんまり触らないでくれます？	has:만지지 말아 주시겠습니까?	fix	rewrites
+cx:neg-give-close:15	提督、見てくれますか？	제독, 봐 주겠습니까?	keep	rewrites
+cx:neg-give-close:30	尊い犠牲の上に あなた方は存在していることを 忘れないでもらいたい	has:잊지 말아 주었으면 한다	fix	rewrites
+cx:neg-give-close:30	まぁ、その時は私に教えを請わないでもらいたいがね	has:청하지 말아 주었으면 하지만	fix	rewrites
+cx:neg-give-close:30	忘れてもらいたい	잊어 주었으면 한다	keep	rewrites
+cx:neg-give-close:35	私が特殊性癖持ちの変態みたいに言わないでもらえませんか！？失礼ですよ	has:말하지 말아 줄 수 없습니까	fix	rewrites
+cx:neg-give-close:35	書いてもらえませんか	써주실 수 있겠습니까	keep	rewrites
+cx:neg-give-close:40	「急にわたしに振らないでもらえる？」	has:말아 줄 수 있어?	fix	rewrites
+cx:neg-give-close:40	待ってもらえる？	기다려 줄 수 있어?	keep	rewrites
+cx:neg-give-close:50	心配しないでくれて	has:걱정하지 않아 주어서	fix	rewrites
+cx:neg-give-close:50	言わないでくれて	말하지 않아 줘서	keep	rewrites
+cx:neg-give:50	せめて 我らの邪魔だけは しないでもらいたい	has:하지 말아 주었으면 한다	fix	rewrites
+cx:neg-give:50	邪魔は しないで帰った	방해는 하지 않고 돌아갔다	keep	rewrites
+cx:neg-give:60	邪魔は しないでくれた	has:하지 않아 주었다	fix	rewrites
+cx:neg-give:60	邪魔は しないでくれ	방해는 하지 말아 줘	keep	rewrites
+cx:neg-give:10	≪わかったわ。何があるかわからないから、油断だけはしないでちょうだい≫	has:방심만은 하지 말아 줘	fix	rewrites
+cx:neg-give:10	――もうお餅なんか焼かないで頂戴。	has:굽지 말아 줘	fix	rewrites
+cx:neg-give:20	言わないでくださった	has:말하지 않아 주셨다	fix	rewrites
+normalize:honorific-okure	ちょっとちょっと。騒がないでおくれよ。他の人に迷惑だよ	has:떠들지 말아 줘	fix	normalize
+normalize:honorific-okure	ふざけないでおくれ！繁盛なんてするわけがない。	has:장난치지 말아 줘!	fix	normalize
+normalize:honorific-okure	待っておくれ	기다려 다오	keep	normalize
+segment:naidemo-morau	「今年のウチの演奏を聴いたこともないくせに、こんな軽薄な曲を押し付けないでもらいたいな！」	has:강요하지 말아 줬으면	fix	segment
+segment:naidemo-morau	気にしないでもいい	신경 쓰지 않아도 좋다	keep	segment
+cx:neg-give:10	あぁっ！ 直撃ー‥‥？ 提督、あの、見ないでくれますー‥‥？	has:보지 말아 주시겠습니까	fix	rewrites
+cx:neg-give:20	言わないでくれないと困る	has:말하지 않아 주지 않으면	fix	rewrites
+cx:neg-give:20	言わないでくれるし	has:말하지 않아 주고	fix	rewrites
+cx:neg-give:30	そんなことしないでくれと言った	has:하지 말아 줘	keep	rewrites
+normalize:honorific-okure	寝ないでおくれた	잠을 자지 않고 늦었다	keep	normalize
