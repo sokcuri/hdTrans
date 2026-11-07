@@ -42,7 +42,7 @@ dict:word-senses	札を掛けた。	패를 걸었다.	fix	lookup
 dict:word-senses	千ウォン札を財布に入れた。	천 원 지폐를 지갑에 넣었다.	keep	lookup
 dict:word-senses	考える時には甘い物がいい。	생각할 때는 단 것이 좋다.	fix	lookup
 dict:word-senses	考えが甘い。	생각이 안이하다.	keep	lookup
-dict:word-senses	暗い茶の髪をまとめた。	어두운 갈색 머리카락을 정리했다.	fix	lookup
+dict:word-senses	暗い茶の髪をまとめた。	어두운 갈색 머리카락을 묶었다.	fix	lookup
 dict:word-senses	茶を飲む。	차를 마신다.	keep	lookup
 dict:word-senses	そんな恰好で恥ずかしい。	그런 차림으로 부끄럽다.	fix	lookup
 dict:word-senses	凛と立つ姿。	늠름하게 서는 모습.	fix	lookup

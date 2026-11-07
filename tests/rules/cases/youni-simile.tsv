@@ -27,7 +27,7 @@ cx:youni-simile:40	まるで夢のように美しい。	마치 꿈처럼 아름�
 cx:youni-simile:45	夢かのような光景だった。	꿈인 것 같은 광경이었다.	fix	rewrites
 cx:youni-simile:45	夢のような光景だった。	꿈과 같은 광경이었다.	keep	rewrites
 cx:youni-simile:35	自分に言いきかすように青年は呟く。	has:타이르듯이	fix	rewrites
-cx:youni-simile:35	子爵は国王を見定めるように見上げた。	has:확정하듯이	fix	rewrites
+cx:youni-simile:35	子爵は国王を見定めるように見上げた。	has:가늠하듯이	fix	rewrites
 cx:youni-simile:35	樹はからかうように笑った。	has:놀리듯이	fix	rewrites
 cx:youni-simile:35	そして嘆くように言い切ったイリアは続ける。	has:한탄하듯이	fix	rewrites
 cx:youni-simile:35	大森は感心するように唸る。	has:감탄하듯이	fix	rewrites
