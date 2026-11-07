@@ -1708,3 +1708,7 @@
 沸く	끓어오르다	怒り,憎しみ,殺意,怒気,憤り,闘志,闘争心,敵意	before	v5
 // 出所 in a line about a sentence or a prison is release, 출소 (spec LEX-5015).
 出所	출소	刑,刑期,刑務所,服役,受刑,懲役,仮出所,満期,釈放,収監,仮釈放	sentence	n
+落とす	내쉬다	ため息,溜息,溜め息	before	v5
+関わる	연루되다	犯罪,犯行,汚職,横領,密輸,詐欺	before	v5
+かかわる	연루되다	犯罪,犯行,汚職,横領,密輸,詐欺	before	v5
+落とす	흘리다	言葉,一言,ひと言,呟き,つぶやき	before	v5

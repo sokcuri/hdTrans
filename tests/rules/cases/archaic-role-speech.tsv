@@ -254,7 +254,7 @@ cx:archaic-speech:5	「しからば、拙者は貴様を斬るぞ」	「해인�
 cx:archaic-speech:5	「拙者が参る」	「내가 간다」	keep	rewrites
 cx:archaic-speech:5	「お綱ッ、拙者につかまれ！」	「밧줄, 나에게 잡혀라!」	keep	rewrites
 cx:archaic-speech:5	「拙者の友でござる」	「나의 친구이오」	keep	rewrites
-cx:archaic-speech:5	「拙者に何の用」	「나에게 무슨 용무」	keep	rewrites
+cx:archaic-speech:5	「拙者に何の用」	has:무슨 볼일	keep	rewrites
 cx:archaic-speech:26	いかがいたす？	어찌하겠느냐?	fix	rewrites
 cx:archaic-speech:26	何といたす	어찌하겠느냐	fix	rewrites
 cx:archaic-speech:26	何をいたす!?	!rule:cx:archaic-speech:26	keep	rewrites

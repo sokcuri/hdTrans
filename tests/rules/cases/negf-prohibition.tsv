@@ -28,7 +28,7 @@ normalize:prohibition-janai	「なんだ、やっぱり気になるんじゃな�
 normalize:prohibition-janai	こっちは遊びでやってるんじゃないんだから。	lacks:지 마	keep	normalize
 normalize:prohibition-janai	「いいか、父さんは決して不埒なつもりで来ているんじゃないんだぞ。	lacks:지 마	keep	normalize
 normalize:prohibition-janai	「……１番強い馬が勝つんじゃないんですか？」	lacks:지 마	keep	normalize
-ending:negf-nja-question	「オマエに用があるんじゃない。おい、そこの犬」	has:용무가 있는 거 아니야.	fix	builtin-ending
+ending:negf-nja-question	「オマエに用があるんじゃない。おい、そこの犬」	has:볼일이 있는 거 아니야.	fix	builtin-ending
 ending:negf-nja-question	「あ、田中なら署名してくれるんじゃない？」	has:서명해 주지 않아?	fix	builtin-ending
 ending:negf-nja-question	「この人数なら、作戦が実行できるんじゃない？」	has:실행할 수 있는 거 아니야?	fix	builtin-ending
 ending:negf-nja-question	「それなら、いい練習台になるんじゃない？」	has:되지 않아?	fix	builtin-ending

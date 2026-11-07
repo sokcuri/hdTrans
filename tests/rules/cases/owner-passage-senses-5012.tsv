@@ -1,0 +1,60 @@
+# 규칙: LEX-5012
+rule	input	expected	kind	layer
+cx:web-fixes-j:253	「別に、用はない。ただこの雨の中一人でこんなところに居たら気になるだろう」	has:볼일은 없어	fix	rewrites
+cx:web-fixes-j:253	「用事があるのに寄り道したら悪いじゃない」	has:볼일이 있는데	fix	rewrites
+cx:web-fixes-j:253	「あっ、やべ、俺これから用事あるんだった！」	has:볼일 있었어	fix	rewrites
+cx:web-fixes-j:253	「もう用は済んだ」	has:볼일은 끝났어	fix	rewrites
+cx:web-fixes-j:253	「ＣＩＲＳが欲しいのはレイの母親の遺品で、レイ自身に用はないのよ」	has:볼일은 없어	fix	rewrites
+cx:web-fixes-j:253	「……なにか、俺たちに用があって、待ってたんじゃないのか？」	has:볼일이 있어	fix	rewrites
+cx:web-fixes-j:253	「……なんの用でしょうか？」	!rule:cx:web-fixes-j:253	keep	rewrites
+cx:web-fixes-j:253	彼女に用を命じるだろう。	!rule:cx:web-fixes-j:253	keep	rewrites
+cx:web-fixes-j:253	このヤヨイ号には、ある特別な用事をおびて、ヨーロッパへわたる特使団の一行がのっていた。	has:용무를	keep	rewrites
+cx:web-fixes-j:253	本日はどのようなご用でしょうか	has:용건	keep	rewrites
+dict:jisjk:36725	他意はない	has:다른 뜻은 없다	fix	lookup
+dict:jisjk:36725	ち、違います。勉強をサボるのではないかと思っただけです。他意はありません	has:다른 뜻은 없습니다	fix	lookup
+dict:jisjk:36725	また、やあ君か、おまわりさんかと思った、と他意なく驚く友人もありました。	has:다른 뜻 없이	fix	lookup
+dict:jisjk:954	「乗りかかった船だし……それに、なるべく頑張ってみるって森下さんと約束したからな」	has:되도록 노력해 본다	fix	defaults
+dict:jisjk:954	「私が手伝うからなるべく銃弾をばらまいて牽制しつつ、倒すのはサチちゃんに任せましょう」	has:되도록 총탄을	fix	defaults
+dict:jisjk:954	　他意はない、という意味を込めてなるべく素っ気なく声をかけると	has:되도록 쌀쌀맞게	fix	defaults
+pack:argument-senses:5077	ぎろりと、こちらを向く。	has:이쪽을 돌아본다	fix	packs
+pack:argument-senses:5077	　他意はない、という意味を込めてなるべく素っ気なく声をかけると、水分でずっしりと重くなっていそうな長い髪を揺らして、こちらを向く。	has:이쪽을 돌아본다	fix	packs
+pack:argument-senses:5081	博士は、ぎょっとしてこちらを向いた。	has:이쪽을 돌아보았다	fix	packs
+pack:argument-senses:5082	俺の弱音を背中で聞いた千里は、数歩進んだ後、くるっとこちらを向いた。	has:이쪽을 돌아보았다	fix	packs
+pack:argument-senses:5081	一斉に銃口がこっちを向いた。	lacks:돌아	keep	packs
+pack:argument-senses:5081	と、客が途切れた直後、青海さんの視線がこちらを向いた。	lacks:돌아	keep	packs
+pack:argument-senses:5081	後ろを向いたまま答える。	lacks:돌아	keep	packs
+pack:argument-senses:5081	とき子は、薄茶色のスウェーターの片肱を机にかけ、勤勉な手をおとなしくスカートの上に休ませてこちらを向いている。	lacks:돌아	keep	packs
+pack:argument-senses:5078	　なので、最後にお節介を一つだけ落としていく。	has:참견을 하나만 남기고 간다	fix	packs
+pack:argument-senses:5078	副部長が隣の男子を見ずに、言葉を落とす。	has:말을 흘린다	fix	packs
+cx:web-fixes-j:252	　なので、最後にお節介を一つだけ落としていく。	has:남기고 간다	fix	rewrites
+cx:web-fixes-j:252	一言落としていけ	has:한마디 남기고 가라	fix	rewrites
+cx:web-fixes-j:252	財布を落としていった	!rule:cx:web-fixes-j:252	keep	rewrites
+sense:落とす	ひとつため息を落とす。	has:한숨을 내쉰다	fix	senses
+sense:落とす	時々、ヤツらが爆弾を落とした 理由が分かる気がする	has:폭탄을 떨어뜨린	keep	senses
+lexical:segmentation-b	準備が追い付いてないんじゃないかと思って、お節介焼いちゃった	has:오지랖을 부려버렸다	fix	lookup
+lexical:segmentation-b	「いつもお節介を焼いて、上から目線で許せません」	has:오지랖을 부려	fix	lookup
+pack:idiom	｢固パン 余計なおせっかい焼くと化けて出るぞ｣って・	has:오지랖을 부리면	fix	packs
+dict:w:34619	「お人好しで、お節介焼きだとは思うけど」	has:참견쟁이라고는	fix	lookup
+dict:w:34619	「余計なお節介だから」	has:쓸데없는 참견이니까	keep	lookup
+dict:jisjk:118331	オレ以外に被害が出ても寝覚めが悪いからな	has:마음이 찜찜하니까	fix	lookup
+dict:jisjk:118331	「あのまま連れて行かれたら、寝覚めが悪いですから」	has:마음이 찜찜하니까요	fix	lookup
+dict:w:34617	その代り、寝覚めの悪い気持がしたので、戒名を聞いたりして棚に祭った。	has:마음이 찜찜한 기분	fix	lookup
+dict:w:34618	寝覚め悪い。	has:마음이 찜찜하다	fix	lookup
+sense:関わる	彼は犯罪に関わっていた	has:범죄에 연루되	fix	senses
+cx:web-fixes-j:258	「あいつとは関わるな」	has:저 녀석과는 엮이지 마	fix	rewrites
+cx:web-fixes-j:258	やばい人と関わっちゃったかな	has:엮여버렸을까	fix	rewrites
+cx:web-fixes-j:258	あまり異性と関わりたくないのかもしれない	has:이성과 엮이고 싶지 않은	fix	rewrites
+cx:web-fixes-j:258	他人と関わるのを諦めてる｡	!rule:cx:web-fixes-j:258	keep	rewrites
+cx:web-fixes-j:259	「もう俺に関わるなよ！」	has:나와 엮이지 마	fix	rewrites
+cx:web-fixes-j:259	遠まわしに、自分に関わるなと牽制してるのか。	has:자신과 엮이지 말라고	fix	rewrites
+cx:web-fixes-j:259	〈この時は 自分が この事件に関わる事になるとは 思ってもみなかった〉	!rule:cx:web-fixes-j:259	keep	rewrites
+cx:web-fixes-j:260	私には関わらないで	has:나와는 엮이지 마	fix	rewrites
+cx:web-fixes-j:260	事件には関わらないで	!rule:cx:web-fixes-j:260	keep	rewrites
+cx:web-fixes-j:261	多くの人と関わる仕事がしたい	has:많은 사람과 관계를 맺는 일	fix	rewrites
+cx:web-fixes-j:261	「学園を楽しくする活動で人と関わっていけば、性格が変わるんじゃないかって話だったが」	has:사람과 관계를 맺어 가면	fix	rewrites
+cx:web-fixes-j:261	あの時 彼女が関わっていたなら	!rule:cx:web-fixes-j:261	keep	rewrites
+cx:web-fixes-j:262	裏を返せば、人間をやめることでしか家族に関われなかった男でもあったのだ。	has:가족과 관계를 맺을 수 없었던	fix	rewrites
+cx:web-fixes-j:262	製造コストも保険の審査に関わりますか やっぱり。	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:257	なるべく まっすぐになるように 気をつけましょう	has:가능한 한 똑바로	fix	rewrites
+cx:web-fixes-j:257	次の世代のためにも なるべく平和な里を残したいよね	!rule:cx:web-fixes-j:257	keep	rewrites
+cx:web-fixes-j:262	魔法に関わることだし、エレナも興味があったのかも。	!rule:cx:web-fixes-j:262	keep	rewrites

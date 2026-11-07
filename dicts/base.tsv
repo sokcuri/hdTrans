@@ -36283,7 +36283,7 @@ ttt	ttt	K110			GN				jisjk:201744
 なり物	수확	I110			GN				jisjk:41411		
 なる	4	U500			GN				jisjk:267124		
 なるたけ	되도록	E311			GN				jisjk:953		
-なるべく	가능한 한	E311	XXX		GN				jisjk:954		
+なるべく	되도록	E311	XXX		GN				jisjk:954		
 なるべく	되어야 할	E311			GN	1283	||1 &&2 S-1== "と" P-1== "2**"	なるべく가 조사 と 뒤에 오면 되어야 할을 고른다. (미발동: rare-context)	jisjk:116902		
 なるほど	그렇구나	E311			GN				jisjk:955		
 なるようにな	될 대로 &C6@	M428		Dx	GN				jisjk:341210		
@@ -118983,7 +118983,7 @@ ttt	ttt	K110			GN				jisjk:201744
 他律	타율	N110			GN				jisjk:36724		
 他心	딴 마음	N110			GN				jisjk:36720		
 他念	여념	N110			GN				jisjk:36710		
-他意	딴뜻	N110			GN				jisjk:36725		
+他意	다른 뜻	N110			GN				jisjk:36725		
 他愛	타애	N110	UFl		GN				jisjk:36721		
 他愛な	철$FA@	H7N0	SFl		GN				jisjk:121317		
 他愛な	정신이 $FA@	H7N0	SFlQHP		GN				jisjk:121527		
@@ -183997,7 +183997,7 @@ ttt	ttt	K110			GN				jisjk:201744
 寝袋	침낭	N110	VRw		GN				jisjk:153990		
 寝装品	침장품	N110			GN				jisjk:236183		
 寝装店	침구점	N110	VBl		GN				jisjk:192802		
-寝覚めが悪	뒤가 개운치 $D7@	H7U0			GN				jisjk:118331		
+寝覚めが悪	마음이 찜찜$AB@	H7U0			GN				jisjk:118331		
 寝覚ノ床	네자메노토코	N130	VPl		GN				jisjk:219394		
 寝覚ノ床	네자메노토코	N130	VPl		GN				jisjk:219395		
 寝言	잠꼬대	N110	UTs		GN				jisjk:36649		

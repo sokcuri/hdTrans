@@ -44,7 +44,8 @@ std::string_view ArgSlot(std::string_view particle) {
         std::string_view particle, slot;
     };
     static constexpr Mark kMarks[] = {{"が", "subj"}, {"は", "subj"},  {"を", "obj"}, {"に", "dat"},  {"で", "loc"},
-                                      {"と", "with"}, {"から", "from"}, {"へ", "to"},  {"まで", "to"}};
+                                      {"と", "with"}, {"から", "from"}, {"へ", "to"},  {"まで", "to"},
+                                      {"とは", "with"}, {"とも", "with"}};
     for (const Mark& m : kMarks)
         if (particle == m.particle) return m.slot;
     return {};

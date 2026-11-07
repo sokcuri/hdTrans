@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:sense-cues-1:130	はい、特に報告事項ありません。	네, 특별히 보고사항 없습니다.	fix	rewrites
 cx:sense-cues-1:130	そっと振り返ってみるが、特にかわったことはない。	살며시 되돌아 보지만, 특별히 색다른 것은 없다.	fix	rewrites
 cx:sense-cues-1:130	「デスク周りを一通り確認しましたけど、特にはありませんでした」	「책상 주위를 대충 확인했는데요, 특별히는 없었습니다」	fix	rewrites
-cx:sense-cues-1:130	帰りは暗くなってしまうから特に用がなければ行きたくはない。	돌아오는 길은 어두워져버리니까 특별히 용무가 없으면 가고 싶지는 않다.	fix	rewrites
+cx:sense-cues-1:130	帰りは暗くなってしまうから特に用がなければ行きたくはない。	has:용무가 없으면	fix	rewrites
 cx:sense-cues-1:130	特に芸術学部は倍率が高く、余程の才能が無い限り合格は出来ない。	특히 예술 학부는 배율이 높고, 상당한 재능이 없는 한 합격은 할 수 없다.	keep	rewrites
 cx:sense-cues-1:130	ああ、なるべく早くお願いする。特に人夫は家族のいない奴を頼むぞ。	아, 되도록 빨리 부탁한다. 특히 인부는 가족이 없는 놈을 부탁하겠어.	keep	rewrites
 cx:sense-cues-1:130	特に味に関しては負けない	특히 맛에 관해서는 지지 않는다	keep	rewrites

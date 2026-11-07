@@ -8,7 +8,7 @@ normalize:ikanai	「それはいかん！」	「그건 안돼!」	keep	normalize
 dict:ikanai	そういうわけにはいかない。	그럴 수는 없다.	fix	lookup
 dict:ikanai	そういうわけにはいきません。	그런 수는 없어요.	fix	lookup
 cx:betsuni-not:10	「べ、別にあんたのためじゃないんだからね！」	「따, 딱히 너를 위해서가 아니니까!」	fix	rewrites
-cx:betsuni-not:10	別に用事があるわけじゃない。	딱히 용무가 있는 건 아니다.	fix	rewrites
+cx:betsuni-not:10	別に用事があるわけじゃない。	has:용무가 있는 건 아니다	fix	rewrites
 cx:betsuni-not:10	別に怒ってない。	별로 화내지 않다.	keep	rewrites
 cx:prohibit-particle:10	「勘違いしないでよね！」	「착각하지 마!」	fix	rewrites
 cx:prohibit-particle:20	「勘違いしないでね」	「착각하지 마」	fix	rewrites
