@@ -1,0 +1,42 @@
+# 규칙: LEX-5052
+rule	input	expected	kind	layer
+word:result-teru-no	「えっ、もう敵が来てるの！？」	has:벌써 적이 왔어	fix	word
+word:result-teru-no	結婚してるの？	has:결혼했어?	fix	word
+word:result-teru-no	キミの方こそ。準備はできてるの？	has:준비는 됐어?	fix	word
+word:result-teru-no	「え？　なんで落ち込んでるの？」	「어? 왜 낙담해?」	keep	word
+word:result-teru-no	はいはい、わかりました。それ気に入ってるの？	네네, 알겠습니다. 그것 마음에 들어?	keep	word
+word:result-teru-no	何してるの？	뭐해?	keep	word
+cx:neg-result:10	まだ結婚していないよ	has:결혼하지 않았어	fix	rewrites
+cx:neg-result:10	今は勉強していないよ	지금은 공부하지 않아	keep	rewrites
+cx:neg-result:12	一度も恋愛していないのに	has:연애하지 않았는데	fix	rewrites
+cx:neg-result:12	連携訓練をしていないのに	연계 훈련을 하고 있지 않는데	keep	rewrites
+cx:neg-result:15	結婚していない人	has:결혼하지 않은 사람	fix	rewrites
+cx:neg-result:15	勉強していない人	공부하지 않은 사람	keep	rewrites
+cx:neg-result:20	確かに結婚はしていない。	has:결혼은 하지 않았다	fix	rewrites
+cx:neg-result:20	再来年には もう卒業していないけどな。	후년에는 이제 졸업하고 있지 않지만.	keep	rewrites
+cx:neg-result:20	「……成立していない？」	「……성립하고 있지 않아?」	keep	rewrites
+cx:neg-result:30	前世では結婚はおろか、恋愛もしていない。	has:연애도 하지 않았다	fix	rewrites
+cx:neg-result:30	勉強もしていない	공부도 하고 있지 않다	keep	rewrites
+cx:neg-done:10	「……まさか忘れてないわよね？」	has:잊지 않았지?	fix	rewrites
+cx:neg-done:10	婚姻届はまだ出してないわよね？	has:않았지?	fix	rewrites
+cx:neg-done:10	「Ｓ特の救済は決まってるけど、治安部の処分はまだ決まってないのよね？」	has:정해지지 않았지?	fix	rewrites
+cx:neg-done:10	覚えてないよね？	기억하지 못하지?	keep	rewrites
+cx:neg-done:20	「よかった、みんなケガしてないのよさ」	has:입지 않았어	fix	rewrites
+cx:neg-done:20	まだ食べてないよ	has:먹지 않았어	fix	rewrites
+cx:neg-done:20	今は見てないの	지금은 보지 않아	keep	rewrites
+word:verb-negative-da	似つかわしくないと思います。	has:어울리지 않는다고	fix	word
+word:verb-negative-da	誰も納得しなかったのよ。もう願い事は叶えてもらえないって言ってもね	has:이루어 주지 않는다고	fix	word
+word:verb-negative-da	「……も、もしかして、立てないとか？」	has:않는다든가	fix	word
+word:verb-negative-da	美しくないと思う	아름답지 않다고 생각한다	keep	word
+cx:neg-result:11	恋愛をしていないです	has:하지 않았습니다	fix	rewrites
+cx:neg-result:11	勉強していないです	공부하지 않습니다	keep	rewrites
+cx:neg-result:20	経験をしていない	has:경험을 하지 않았다	fix	rewrites
+cx:neg-result:20	もう、結婚していない	이제, 결혼하고 있지 않다	keep	rewrites
+cx:neg-done:10	「でも、今のおおしまくんたち……うまくいってないわよね？」	「하지만, 지금의 오시마 군들……잘되지 않아?」	keep	rewrites
+cx:neg-done:10	似てないよね	닮지 않지	keep	rewrites
+word:result-teru-no	もう結婚してんの？	has:벌써 결혼했어?	fix	word
+cx:neg-done:10	持ってないよね？	가지지 않지?	keep	rewrites
+cx:neg-done:10	知ってないよね	알지 않지	keep	rewrites
+cx:neg-done:10	分かってないよね？	모르지?	keep	rewrites
+cx:neg-done:10	信じてないよね	믿지 않지	keep	rewrites
+cx:neg-done:10	住んでないよね	살지 않지	keep	rewrites

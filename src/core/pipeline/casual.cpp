@@ -938,6 +938,20 @@ bool Shaanai(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// なぁ at the start of a clause before a mark, an ellipsis, a name in kanji or katakana or the end: the call なあ
+// (なぁ、架子 저기, 가자; spec LEX-5053). Not なぁんだ, なぁ～んて, なぁ～んか, drawn-out words in ん, nor before hiragana
+// (なぁお前), where a kana word may go on.
+bool CallNaa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "なぁ")) return false;
+    size_t q = p;
+    while (q < s.size() && In(At(s, q).cp, U"～ー")) q += At(s, q).size;
+    if (q < s.size() && In(At(s, q).cp, U"んン")) return false;  // なぁ～んて, なぁーんか
+    if (p < s.size() && !OneOf(s, p, U"、，？?！!…‥」。～ー") && !IsKanjiClass(At(s, p).cp) && !IsKatakanaRune(At(s, p).cp)) return false;
+    m.end = pos + std::string_view("なぁ").size();
+    return true;
+}
+
 // さーて at the start of a clause before と or a mark: さて (さーて、行くか).
 bool Saate(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -1808,6 +1822,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, SoCopulaStart, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, LoneSo, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
+    if (text.find("なぁ") != std::string::npos) text = ReplaceAll(text, CallNaa, [](const Match&) { return std::string("なあ"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
     text = ReplaceAll(text, OiTsu, [](const Match&) { return std::string("おい"); });

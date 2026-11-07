@@ -2080,6 +2080,13 @@ void ResultState(Flusher& f) {
         if (dict::InClass(HDTRANS_CLASS("aux.te-start"), verb) && AfterTeForm(v) && !ArrivalBefore(v)) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
+        // The contracted てるの of a question, read 6 for an act going on (何してるの？ 뭐해?), is the past of a change
+        // done as its てる is (結婚してるの？ 결혼했어?, もう来てんの？ 벌써 왔어?; spec LEX-5052).
+        if (past && e->dst == "6" && (it->DirectSurface().ends_with("るの") || it->DirectSurface().ends_with("んの"))) {
+            it->AssignDirectSlot(it->DirectIndex(), "1고 있어");
+            e = it->DirectEntry(it->DirectIndex());
+            if (e == nullptr) continue;
+        }
         const std::string lemma = output::Lemma(e->dst, f.families);
         if (!lemma.starts_with("1고")) continue;
         const std::string_view rest = std::string_view(lemma).substr(std::string_view("1고").size());
@@ -4389,8 +4396,10 @@ void VerbNegative(Flusher& f) {
         // that glosses it (似つかわしくない 어울리지 않는, spec GRM-3963).
         if ((stem.ends_with("く") && !VerbGlossNegative(lemma)) || AdjectiveNegative(lemma)) {
             if (e->dst == "4") it->AssignDirectSlot(it->DirectIndex(), "1은");
-        } else if (e->dst == "1다") {
-            it->AssignDirectSlot(it->DirectIndex(), "1는다");
+        } else if (e->dst.starts_with("1다") && !e->dst.starts_with("1다가")) {
+            // every ending that starts with the plain 다 (1다, 1다고, 1다면, 1다는), not the 다가 of a switch: 어울리지 않는다고
+            // (spec LEX-5052)
+            it->AssignDirectSlot(it->DirectIndex(), "1는다" + e->dst.substr(std::string_view("1다").size()));
         } else if (e->dst == "4") {
             it->AssignDirectSlot(it->DirectIndex(), "1는");
         }

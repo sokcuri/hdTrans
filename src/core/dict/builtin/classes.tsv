@@ -562,6 +562,7 @@
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
 //= noun.result-suru-past	Verbal nouns of a change done once whose しているs and してる is the state it left, read as the Korean past (もう結婚してる 벌써 결혼했어, 卒業している 졸업했다; spec LEX-4766).
+//= noun.experience-suru	Verbal nouns of an experience or a life event one has had or not (恋愛, 経験, 結婚, 卒業): in していない it is what never happened, the Korean past negative (恋愛もしていない 연애도 하지 않았다, 結婚はしていない 결혼은 하지 않았다; spec LEX-5052).
 //= verb.promise-act	Stems of verbs of an act one promises to do for the listener (戻る, 返す, 払う, 待つ, 作る), whose から before a request is the promise the request leans on, -ㄹ 테니까 (すぐ戻るから待ってて 바로 돌아올 테니까; spec LEX-4766).
 //= noun.promise-act	Verbal nouns of an act one promises with する (連絡, 説明, 用意), as verb.promise-act.
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
@@ -572,6 +573,7 @@
 //= noun.spared-event	Verbal nouns of what befalls one (怪我, 負傷, 犠牲), whose する in ずに済む is the same as verb.spared-event.
 //= verb.spontaneous	Ichidan stems whose られ is a feeling or a sight that comes by itself, never the potential (将来が案じられる, 気配が感じられる, 迷いは見受けられない 망설임은 보이지 않는다).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
+//= verb.state-tenai	Stems of the verbs of holding, knowing or being like whose てない before a final particle is the present state, not what has not happened yet (覚えてないよ 기억 안 나, 持ってないよ; spec LEX-5052).
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
@@ -7980,6 +7982,22 @@ verb.spontaneous	見受け
 verb.state-teiru	見え
 verb.state-teiru	聞こえ
 verb.state-teiru	想
+verb.state-tenai	覚え
+verb.state-tenai	憶え
+verb.state-tenai	持
+verb.state-tenai	住
+verb.state-tenai	知
+verb.state-tenai	分か
+verb.state-tenai	わか
+verb.state-tenai	判
+verb.state-tenai	似
+verb.state-tenai	信じ
+verb.state-tenai	愛
+verb.state-tenai	見え
+verb.state-tenai	聞こえ
+verb.state-tenai	思
+verb.state-tenai	考え
+verb.state-tenai	着
 
 verb.to-person	渡す
 verb.to-person	手渡す
@@ -12442,6 +12460,27 @@ noun.result-suru-past	消滅
 noun.result-suru-past	絶滅
 noun.result-suru-past	破産
 noun.result-suru-past	倒産
+noun.experience-suru	恋愛
+noun.experience-suru	経験
+noun.experience-suru	体験
+noun.experience-suru	失恋
+noun.experience-suru	告白
+noun.experience-suru	交際
+noun.experience-suru	浮気
+noun.experience-suru	留学
+noun.experience-suru	初体験
+noun.experience-suru	結婚
+noun.experience-suru	離婚
+noun.experience-suru	婚約
+noun.experience-suru	卒業
+noun.experience-suru	入学
+noun.experience-suru	入社
+noun.experience-suru	就職
+noun.experience-suru	転職
+noun.experience-suru	転校
+noun.experience-suru	退職
+noun.experience-suru	引退
+noun.experience-suru	合格
 verb.promise-act	戻
 verb.promise-act	返
 verb.promise-act	払

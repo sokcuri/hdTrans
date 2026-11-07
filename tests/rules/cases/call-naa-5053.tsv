@@ -1,0 +1,14 @@
+# 규칙: LEX-5053
+rule	input	expected	kind	layer
+sound:call-naa	「なあ筧よ」	has:저기 견	fix	sound
+sound:call-naa	「なあ……」	has:저기……	fix	sound
+sound:call-naa	――はははは、なあンだ、松の枝を吹く風の声だったか。	――하하하하, 머야, 송의 가지를 부는 바람의 소리였구나.	keep	sound
+normalize:call-naa	「なぁ、架子」	has:저기, 가자	fix	normalize
+normalize:call-naa	なぁ！爆発！？なに！？…潜水艦？	has:저기!	fix	normalize
+normalize:call-naa	なぁんだ、良かったぁ。	뭐야, 좋았어.	keep	normalize
+lookup:naa-exclaim	すごいなあ 私も頑張らないと	has:대단하구나	fix	lookup
+lookup:naa-exclaim	「や、やだなぁ……そろそろニヤってするんでしょ？」	has:싫네	fix	lookup
+lookup:naa-exclaim	「やだな」	「싫네」	keep	lookup
+normalize:call-naa	なぁ～んか、変な感じ	왠지, 이상한 느낌	keep	normalize
+sound:call-naa	「なあ鈴木」	has:저기 스즈키	fix	sound
+lookup:naa-exclaim	「……すごいな」	「……대단해」	keep	lookup
