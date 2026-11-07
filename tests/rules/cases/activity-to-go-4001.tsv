@@ -2,22 +2,48 @@
 rule	input	expected	kind	layer
 cx:activity-go:10	このまま父上のところに訪問と行きましょうか！	has:방문할까요	fix	rewrites
 cx:activity-go:10	早速実験と行こう	곧바로 실험하자	fix	rewrites
+cx:activity-go:10	早速実験といくか	곧바로 실험할까	fix	rewrites
 cx:activity-go:10	ここは様子見といこうか	여기는 관망할까	fix	rewrites
 cx:activity-go:10	次は買い物と行きましょう	다음은 쇼핑합시다	fix	rewrites
 cx:activity-go:10	艦隊運用といきましょう。	has:운용합시다	fix	rewrites
+cx:activity-go:10	いけない……提督、そろそろ艦隊運用と参りましょう。	has:운용합시다	fix	rewrites
+cx:activity-go:10	早速実験とまいりましょう	곧바로 실험합시다	fix	rewrites
+cx:activity-go:10	ではこれより反撃と参ろうか！皆の衆！	has:반격할까	fix	rewrites
 cx:activity-go:10	「えー、じゃあ改めて自己紹介と行こうか」	has:소개할까	fix	rewrites
 cx:activity-go:10	……でだ、取り引きといこうじゃないか。	has:거래하지 않겠	fix	rewrites
-cx:activity-go:10	散歩と行こうぜ	has:산책하자	fix	rewrites
+cx:activity-go:10	家を出るまでにはまだ時間があるし、早朝読書といくか。	has:독서할까	fix	rewrites
+cx:activity-go:10	ふむふむ、そろそろ真打ち登場といくか	has:등장할까	fix	rewrites
+cx:activity-go:5	休憩といきますか	휴식할까요	fix	rewrites
+cx:activity-go:10	少し休憩といこう	조금 휴식하자	fix	rewrites
+cx:activity-go:10	掃除と行きましょう	청소합시다	fix	rewrites
+cx:activity-go:5	さっ、そろそろ午後の活動と行きますかっ！	has:활동할까요	fix	rewrites
+cx:activity-go:5	さぁ、朝食も済んだし、朝のお勤めと行きますかー。	has:근무할까요	fix	rewrites
+cx:activity-go:7	早速実験と行きたい	곧바로 실험하고 싶다	fix	rewrites
+cx:activity-go:20	次は雪辱戦と行こうか	다음은 설욕전으로 갈까	fix	rewrites
+cx:activity-go:20	夜戦と参りましょう。	야전으로 갑시다.	fix	rewrites
+cx:activity-go:20	では、次は礼法と参りましょうか	has:예법으로 갈까요	fix	rewrites
+cx:activity-go:20	４回戦といこうか	4회전으로 갈까	fix	rewrites
+cx:activity-go:15	次はデートといきますか	다음은 데이트로 갈까요	fix	rewrites
+cx:activity-go:30	ラバウルで朝食と洒落込みますか！	has:아침 식사를 즐	fix	rewrites
+cx:activity-go:30	春だねぇ、えへっ♪ 提督、みんなとお花見と洒落込もうよ！	has:꽃놀이를 즐기자	fix	rewrites
+cx:activity-go:30	温泉と洒落込んだ	온천을 즐겼다	fix	rewrites
+cx:activity-go:10	早速実験と行った	has:실험과 갔다	keep	rewrites
 cx:activity-go:10	彼と行きましょう	그와 갑시다	keep	rewrites
 cx:activity-go:10	友達と行こう	친구와 가자	keep	rewrites
-cx:activity-go:10	Helenaと行きましょう？	Helena와 갈까요?	keep	rewrites
-cx:activity-go:10	みんな、ガツンと行こうぜ。	has:가자	keep	rewrites
-cx:activity-go:10	どーんと行こう。	has:가자	keep	rewrites
+cx:activity-go:20	Helenaと行きましょう？	Helena와 갈까요?	keep	rewrites
+cx:activity-go:15	彼と行きますか	그와 갑니까	keep	rewrites
+cx:activity-go:5	友達と行きますか	has:친구와	keep	rewrites
+cx:activity-go:7	提督と行きたいなって思ってて…だめ、かな？	has:제독과 가고 싶다	keep	rewrites
+cx:activity-go:30	野兎からの合法的な脱獄だとしゃれこんだ	lacks:즐기	keep	rewrites
+cx:activity-go:20	トモすけどっちと行くか選べし	has:어느 쪽과 갈까	keep	rewrites
+cx:activity-go:20	みんな、ガツンと行こうぜ。	has:가자	keep	rewrites
+cx:activity-go:20	ゆっくり、たっぷり、じわじわと行こうじゃないか、……なぁ？	has:서서히 가지 않겠	keep	rewrites
 cx:activity-go:10	彼と一緒に訪問に行った	has:방문하러 갔다	keep	rewrites
 constraint:toi-before-iku	友達といこうか	친구와 갈까	fix	lookup
 constraint:toi-before-iku	丁度良い。雪辱戦といこうじゃないか。	lacks:물어	fix	lookup
 constraint:toi-before-iku	「ＯＫ、頂上決戦といきましょう」	lacks:물읍	fix	lookup
 constraint:toi-before-iku	それじゃ スネ夫のために アンコールといこう！	lacks:물어	fix	lookup
+constraint:toi-before-iku	さあ、続きといこうか。勝負はこれからだぞ	lacks:물어	fix	lookup
 constraint:toi-before-iku	「なら、お手並み拝見といこうか。私の分も頼むぞ」	has:솜씨 좀 볼까	keep	lookup
 constraint:toi-before-iku	一緒にいこう	함께 가자	keep	lookup
 constraint:toi-before-iku	問いかけるように見た	묻듯이 보았다	keep	lookup

@@ -411,7 +411,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   부호, 닫는 따옴표나 괄호, `。`), `lemma-starts-next`(다음 단어의 사전형 한국어가 이 단어의 사전형과 공백으로 시작함),
   `opens-line`(줄에서 단어 앞에 공백뿐이거나 문장 끝 부호가 있음), `after-pause`(단어 바로 앞에 말줄임표나 줄표가 있음), `after-space`(일본어 낱말을 나눈 원문 공백 바로 뒤), `after-blank`(단어 바로 앞 토큰이 공백임: ちょ　うるさい의 うるさい), `filler`(감탄사 품사이거나 `word.pause-filler`의 독립한 필러), `after-restart`(단어 바로 앞에 `mark.restart`의 부호가 있고 그 앞에 다른 글이 있음: 私が…私が), `after-leave-taking`(줄에서 단어 앞의 글에 `word.leave-taking`의 작별하는 말이 있음: ありがとうございました。御機嫌よう), `humble-line`(줄의 글에 `speech.humble-cue`의 윗사람에게 낮추는 말이 있음, `speech.humble-lookalike`의 글은 빼고: ます, 申し上げ, 殿), `threat-line`(줄의 글에 `speech.threat-cue`의 위협, 하대하는 말이 있음: 貴様, せよ, 斬る), `formal-line`(줄의 글에 `speech.formal-cue`의 ます 문체나 격식 차린 말이 있음: ます, ませ, 申し上げ; ください만으로는 아님), `number`(숫자와 한자 수사로만 된 단어),
   `quote-verb`(말하기, 생각하기 동사로 시작하거나 聞), `word-span`(앞 단계가 이미 읽은 고정 단어 구간),
-  `adjectival`(의미 표가 그 단어를 하다 형용사의 어근으로 읽음), `person`(고른 후보의 의미 코드가 사람, 동물이나
+  `adjectival`(의미 표가 그 단어를 하다 형용사의 어근으로 읽음), `suru-noun`(고르지 않은 후보까지 보아 그 단어에 する가 붙는 명사(`Hd`) 후보가 있음: 休憩), `person`(고른 후보의 의미 코드가 사람, 동물이나
   신), `person-name`(표기에 한자가 있고 이름 층에 사람 이름으로 있음: 기본 사전이 지명으로 읽는 美咲), `causative`(사역으로 분석된 동사), `passive`(수동으로 분석되었고 아직 한국어 수동 낱말로 바뀌지 않은 동사: 撫でられ), `causative-passive`(사역 수동으로 분석된 동사: 読まされ), `respectful`(그 (ら)れ를 높임으로 읽은 동사, spec GRM-10: 確認されますか), `lexical-passive`(사전 동사의 수동형을 한 낱말로 읽은 사전 행: 書かれ, 使われ, 見られ. 목적어가 있어도 수동인 동사의 부류는 빼고), `touches-prev`(앞 단어가 끝난 자리에서 시작함: 같은 토큰이거나, 앞 단어가
   토큰 끝이고 이 단어가 다음 토큰의 처음), `alnum-start`(표기가 글자나 숫자로 시작함), `hiragana`(표기에 히라가나가
   있음), `katakana`(표기가 가타카나 ァ..ヶ와 ー뿐임), `blank`(고른 후보의 번역이 비었거나 공백뿐임),
