@@ -72,6 +72,10 @@ constexpr ConstraintRule kRules[] = {
      "らい 앞에서 く로 끝나는 단어는 くらい를 끊음: 짧은 단어와 くらい로 (したくらい 준비등 → 한 정도, きたくらい 귀가등 → 온 정도)", {}},
     {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
+    {"tai-stem-before-me", ConstraintWord::Source, "た", ConstraintContext::BeforeListed, ConstraintReject::Target,
+     "め 앞의 た는 たい의 어간 싶다가 아님: たい에는 高め 같은 め 꼴이 없음 (ためらって 싶은라는 → 망설여, ためらわれた)", "$F9@", "め"},
+    {"tetai-stem-before-me", ConstraintWord::Source, "た", ConstraintContext::BeforeListed, ConstraintReject::Target,
+     "め 앞의 た는 ていたい의 준말 있고 싶다도 아님 (ためらって 있고 싶은라는 → 망설여)", "있고 $F9@", "め"},
     {"me-yatsu-detached", ConstraintWord::Source, "め", ConstraintContext::Detached, ConstraintReject::Target,
      "띄어 쓰였거나 문장 부호 뒤에 홀로 선 め는 녀석이 아님 (名前: め 녀석 → 메)", "녀석"},
     {"wa-won-without-number", ConstraintWord::Source, "わ", ConstraintContext::NotAfterQuantity,
@@ -118,6 +122,8 @@ constexpr ConstraintRule kRules[] = {
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 でい로 끝나는 말도 같다 (読んでいらっしゃる)", {}},
+    {"tarou-after-tsu", ConstraintWord::Source, "たろう", ConstraintContext::AfterSmallTsu, ConstraintReject::Word,
+     "っ 바로 뒤의 たろう는 이름 타로가 아니라 과거와 추측 (そうだったろう 조타타로 → 그랬겠지)", {}},
     {"tanto-after-tsu", ConstraintWord::Source, "たんと", ConstraintContext::AfterSmallTsu, ConstraintReject::Word,
      "っ 바로 뒤의 たんと는 부사 듬뿍이 아니라 과거 た + んと (行ったんと違う 간 듬뿍 다르다)", {}},
     {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
@@ -188,6 +194,21 @@ constexpr ConstraintRule kRules[] = {
     {"toi-before-iku", ConstraintWord::Source, "とい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "こう, きま, きた, く 앞의 とい는 問い가 아니라 と와 いく (彼といこう 그 물어 이렇게 → 그와 가자, 様子見といきたい). といかける는 그대로", {},
      "こう|きま|きた|く"},
+    {"shikamo-before-motanai", ConstraintWord::Source, "しかも", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "부정 たない, たなかっ, たず, ちません 앞의 しかも는 접속사 게다가가 아니라 しか와 持つ (一分ほどしかもたなかった 게다가 선반 샀다 → 1분 정도밖에 버티지 못했다)", {},
+     "たない|たなく|たなかっ|たず|たねえ|ちません|ちませ"},
+    {"hai-before-ttai", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "ったい 앞의 はい는 入る가 아니라 は와 いったい (俺はいったい 나 들어간 우물 → 나는 도대체)", {}, "ったい"},
+    {"jinchi-before-ri", ConstraintWord::Source, "人知", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "り合, りあ 앞의 人知는 人知(사람의 지혜)가 아니라 人과 知り合い (あの人知り合い 그 사람의 지혜서로 → 그 사람 지인)", {}, "り合|りあ"},
+    {"nitsuke-before-ending", ConstraintWord::Source, "につけ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "동사 어미가 이어지는 につけ는 煮付け나 につけ가 아니라 に와 付ける (地面につけずに 땅조림 → 지면에 붙이지 않고)", {},
+     "ずに|ず、|ない|なか|なく|なけ|ます|ませ|ました|ている|ていた|てい|たら|よう|られ|させ"},
+    {"toba-before-kari", ConstraintWord::Source, "とば", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "かりに 앞의 とば는 이름이 아니라 とばかりに (今だ、とばかりに 토바 만일 → 이라는 듯이)", {}, "かりに"},
+    {"nioi-before-oide", ConstraintWord::Source, "におい", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "글 끝이나 문장 끝 부호, よ 앞의 においで는 냄새로가 아니라 に와 おいで (部屋においで 방냄새로 → 방으로 와). においで、는 그대로", {},
+     "で$|で。|で！|で!|でよ|でー|で～|で」|で…|でなさい"},
     {"niwa-before-zuka", ConstraintWord::Source, "にわ", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "ずか 앞의 にわ는 庭가 아니라 に와 わずか (中にわずかに 속 정원않고 게 → 속에 조금)", {}, "ずか"},
     {"hashita-before-end", ConstraintWord::Source, "はした", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -558,7 +579,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::BeforeListed:
         for (std::string_view rest = rule.follows; !rest.empty();) {
             const std::size_t bar = rest.find('|');
-            if (after.starts_with(rest.substr(0, bar))) return true;
+            const std::string_view follow = rest.substr(0, bar);
+            if (follow.ends_with("$") ? after == follow.substr(0, follow.size() - 1) : after.starts_with(follow)) return true;
             rest = bar == std::string_view::npos ? std::string_view() : rest.substr(bar + 1);
         }
         return false;

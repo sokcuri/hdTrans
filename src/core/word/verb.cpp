@@ -1077,9 +1077,19 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if ((base.kind == 10 && specialEnd) || following == nullptr) return true;
     const std::string_view consumed = From(text, start);
     const int endWidth = WidthOf(consumed.substr(0, std::min<std::size_t>(static_cast<std::size_t>(end), consumed.size())));
+    // A bare ichidan stem of one kanji before the ない of its negative is the verb, not a noun of the same
+    // kanji before the adjective ない (着ない 입지 않는다, not 벌 없다; 経なかった; spec GRM-4000).
+    auto negativeStem = [&]() {
+        if (matched || oldKind != 7 || oldState != 8 || !Conjugation(7, 8).empty()) return false;
+        const std::string_view beyond = consumed.substr(std::min<std::size_t>(static_cast<std::size_t>(end), consumed.size()));
+        for (const std::string_view n : {"ない", "なかっ", "なく", "なけれ", "なきゃ"}) {
+            if (beyond.starts_with(n)) return true;
+        }
+        return false;
+    };
     for (const Record* r = following;;) {
         if (const char sel = At(r->partCode, 1); sel != '4' && sel != '5' && end < static_cast<int>(r->source.size())) break;
-        if (endWidth == 2) break;
+        if (endWidth == 2 && !negativeStem()) break;
         if ((r = r->child) == nullptr) return true;
     }
     base.group = nullptr;

@@ -1257,9 +1257,18 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     if (!bar && !OneOf(s, p, U"ぇえ")) return false;
     if (s.substr(p).starts_with("も")) return false;
     if (!CharOrEnd(s, p, bar ? U"なよぜぞしかけだっわの" : U"なよぜぞしかけだっわの。、！？!?…‥」』）) 　", m, 2)) return false;
-    // The particle ね after から, なら, で or the question か (ですからねえ, 君ならねぇ, 東京でねえ, ですかねぇ).
+    // The particle ね after から, なら, で or the question か (ですからねえ, 君ならねぇ, 東京でねえ, ですかねぇ); not where the
+    // kanji and kana before the ら spell a verb in かる or なる whole (見つからねえ, 助からねえ, 重ならねえ).
     const std::string_view head = s.substr(0, pos);
-    if (k.cp == U'で' || (k.cp == U'ら' && (head.ends_with("か") || head.ends_with("な"))) ||
+    auto kanjiVerb = [&] {
+        size_t start = head.size();
+        while (start > 0 && IsHiraganaRune(LastRune(head.substr(0, start)).cp)) start -= LastRune(head.substr(0, start)).size;
+        const size_t kana = start;
+        while (start > 0 && IsKanjiClass(LastRune(head.substr(0, start)).cp)) start -= LastRune(head.substr(0, start)).size;
+        if (start == kana || runs.verbForm == nullptr) return false;
+        return runs.verbForm(runs.context, std::string(head.substr(start)) + "る");
+    };
+    if (k.cp == U'で' || (k.cp == U'ら' && (head.ends_with("か") || head.ends_with("な")) && !kanjiVerb()) ||
         (k.cp == U'か' && (head.ends_with("す") || head.ends_with("ま") || head.ends_with("の")))) {
         return false;
     }
