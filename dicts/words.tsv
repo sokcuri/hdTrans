@@ -12155,8 +12155,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 個所	부분	N110			GN				xxx	1	かしょ	w:12106
 個虫	개충	N110			GN				xxx llm	1		w:12107
 倍良	놀래기과	N110			GN						べら	w:12108
-倒さ	거꾸로	N110			GN				llm		さかさ	w:12109
-倒さ	거꾸로%D4@	G8U0			GN				llm		さかさ	w:12110
 倒れ	쓰러&AL@	M427			GN				xxx llm	1		w:12111
 倒れ伏	엎어&AL@	M423			GN				llm		たおれふす	w:12112
 倒幕運動	도막운동	N110			GN						とうばくうんどう	w:12113
@@ -28362,3 +28360,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 縦に	세로로	E300			GN			LEX-5005: 縦に並ぶ 세로로 늘어서다		1	たてに	w:34662
 真っ逆さまに	거꾸로	E300			GN			LEX-5005: 真っ逆さまに落ちる 거꾸로 떨어지다		1	まっさかさまに	w:34663
 真っ逆様に	거꾸로	E300			GN			LEX-5005: 真っ逆様に落ちる 거꾸로 떨어지다		1	まっさかさまに	w:34664
+罷り通	버젓이 통&AV@	M428			GN			LEX-5102: 試合でもこれがまかり通る 시합에서도 이것이 버젓이 통한다				w:34800
+まかり通	버젓이 통&AV@	M428			GN			LEX-5102				w:34801
+任じ	임명&AV@	M447			GN			LEX-5102: 子爵に任じられておるが 자작에 임명되어 있지만				w:34802

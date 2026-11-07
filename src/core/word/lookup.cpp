@@ -1102,6 +1102,24 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
         return false;
     };
     if ((ending.ends_with("けども") || ending.ends_with("とも")) && givesToAdverb("も")) return true;
+    // An ending in ての or での (来ての) gives its の to a verb or an adverb that starts with it and reaches further than the
+    // words after the ending do (倒れてのたうち回った: 倒れて + のたうち回った, 走ってのぞいた: のぞく; spec GRM-4002).
+    const std::string teNo = std::string(before) + std::string(ending);
+    if ((teNo.ends_with("ての") || teNo.ends_with("での")) && !after.empty()) {
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query = "の";
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const std::size_t n = text::RuneCount(c.source);
+            const bool verbOrAdverb = (At(part, 0) == 'M' && At(part, 1) == '4') || At(part, 0) == 'E';
+            if ((c.user == nullptr || !c.user->nameLayer) && verbOrAdverb && n >= 2 && n >= word + 1) return true;
+        }
+    }
     // An ending in か gives it to かなり (してしまうかなり: してしまう + かなり).
     if (ending.ends_with("か") && after.starts_with("なり") && givesToAdverb("か")) return true;
     static constexpr std::string_view kToAdverbRests[] = {"ても", "っても", "もかく", "にかく"};
