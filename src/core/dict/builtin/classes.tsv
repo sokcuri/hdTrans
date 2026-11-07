@@ -224,6 +224,7 @@
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
+//= ko.determiner	Korean determiners that the dictionary writes for Japanese nouns (何の 무슨, とある 어떤, あらゆる 모든): one is written apart from the noun it modifies (何の音 무슨 소리, とある村 어떤 마을).
 //= ko.adverb-noun	Korean adverbs that the dictionary writes for Japanese nouns without the code Nn (結局 결국, 初めて 처음, 日々 날마다): one is written apart from the noun after it, with which it forms no compound (結局昼 결국 낮, 毎日猫 매일 고양이; spec LAY-19).
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
@@ -3176,6 +3177,24 @@ ko-verb.sequence	숙제하다
 ko-verb.sequence	운동하다
 ko-verb.sequence	산책하다
 ko.recall-interjection	앗
+ko.determiner	무슨
+ko.determiner	어떤
+ko.determiner	어떠한
+ko.determiner	아무
+ko.determiner	아무런
+ko.determiner	웬
+ko.determiner	이런
+ko.determiner	그런
+ko.determiner	저런
+ko.determiner	이러한
+ko.determiner	그러한
+ko.determiner	저러한
+ko.determiner	모든
+ko.determiner	온갖
+ko.determiner	갖은
+ko.determiner	어느
+ko.determiner	여러
+ko.determiner	별의별
 ko.adverb-noun	결국
 ko.adverb-noun	갑자기
 ko.adverb-noun	그대로
