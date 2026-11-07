@@ -1,0 +1,28 @@
+# 규칙: GRM-4017
+rule	input	expected	kind	layer
+cx:toha-foresee:10	　まさか、その妄想が現実になるとは思わなかったが……。	has:현실이 될 줄은 생각하지 못했지만	fix	rewrites
+cx:toha-foresee:10	「しかし、筧がこんな話に乗るとは思わなかった」	has:응할 줄은 생각하지 못했어	fix	rewrites
+cx:toha-foresee:10	「ごめんねー、引っかかるとは思わなかった」	「미안해~, 걸릴 줄은 생각하지 못했어」	fix	rewrites
+cx:toha-foresee:10	まさか、こんなことを考える日が来るとは思わなかった。	설마, 이런 것을 생각하는 날이 올 줄은 생각하지 못했다.	fix	rewrites
+cx:toha-foresee:10	「しかし、女の子とキャンプできるとは思わなかった」	「하지만, 여자아이와 캠프할 수 있을 줄은 생각하지 못했어」	fix	rewrites
+cx:toha-foresee:10	こういう手があるとは知らなかったね」	이런 손이 있을 줄은 몰랐네」	fix	rewrites
+cx:toha-foresee:10	ミミ族の地球攻撃が、そこまで進んでいるとは知らなかった。	has:나아가고 있을 줄은 몰랐다	fix	rewrites
+cx:toha-foresee:10	密航させるとは思いもしなかった	밀항시킬 줄은 생각하지도 못했다	fix	rewrites
+cx:toha-foresee:10	まさか死ぬとは思わなかったであろう。	설마 죽을 줄은 생각하지 못했을 것이다.	fix	rewrites
+cx:toha-foresee:10	まさか褒められるとは思っていなかった三人は目を丸くする。	has:칭찬받을 줄은	fix	rewrites
+cx:toha-foresee:10	こんなことになるとは知りませんでした。	이렇게 될 줄은 몰랐습니다.	fix	rewrites
+cx:toha-foresee:10	彼が来るとは思わない。	그가 온다고는 생각하지 않는다.	keep	rewrites
+cx:toha-foresee:10	彼が来たとは知らなかった。	!rule:cx:toha-foresee:10	keep	rewrites
+cx:toha-foresee:10	愛とは何か。	사랑이란 무엇인가.	keep	rewrites
+cx:toha-foresee:10	勝つとは限らない。	!rule:cx:toha-foresee:10	keep	rewrites
+cx:toha-foresee:10	まさか本当に春希と付き合うことになるとはな	!rule:cx:toha-foresee:10	keep	rewrites
+cx:toha-foresee:20	あの時は、まさか佳奈とこんなことになるとは思わなかった。	그 때는, 설마 카나와 이렇게 될 줄은 생각하지 못했다.	fix	rewrites
+cx:toha-foresee:20	「まさか、お前と同じ部活になるとは思わなかった」	「설마, 너와 같은 동아리가 될 줄은 생각하지 못했어」	fix	rewrites
+cx:toha-foresee:20	こんなことになるとは思ってもいなかった。	이렇게 될 줄은 생각하지도 못했다.	fix	rewrites
+cx:toha-foresee:20	こんなことになるとは予想もしていなかった。	!rule:cx:toha-foresee:20	keep	rewrites
+cx:toha-foresee:25	「まさか、筧先輩が入ってくるとは思いませんでした」	has:들어 올 줄은 생각하지 못했습니다	fix	rewrites
+cx:toha-foresee:25	強引に武器ごと斬られるとは思いませんでした』	has:베어질 줄은 생각하지 못했습니다	fix	rewrites
+cx:toha-foresee:25	こんなことになるとは知りませんでした。	!rule:cx:toha-foresee:25	keep	rewrites
+cx:toha-foresee:30	こんなことになるとは想像しなかった。	이렇게 될 줄은 상상하지 못했다.	fix	rewrites
+cx:toha-foresee:30	こんなことになるとは予想しなかった。	이렇게 될 줄은 예상하지 못했다.	fix	rewrites
+cx:toha-foresee:30	彼が来るとは想像しない。	!rule:cx:toha-foresee:30	keep	rewrites

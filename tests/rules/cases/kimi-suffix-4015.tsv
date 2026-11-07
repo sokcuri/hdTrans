@@ -1,0 +1,64 @@
+# 규칙: GRM-4015
+rule	input	expected	kind	layer
+dict:w:34830	前世も今世も、猫背気味である。	전생도 이번 생도, 새우등 기미가 있다.	fix	lookup
+dict:w:34830	前の方に腰掛けている白崎と桜庭もグロッキー気味だ。	앞쪽에 앉아 있는 시라사키와 사쿠라바도 그로기 기미가 있다.	fix	lookup
+dict:w:34830	レアメタルは常に不足気味ですし、	has:부족 기미가 있고	fix	lookup
+dict:w:34830	恥ずかしさのあまり、玉藻は錯乱気味だ。	has:착란 기미가 있다	fix	lookup
+cx:kimi-suffix:72	「ごめん。急だったから混乱気味で」	has:혼란한 듯해	fix	lookup
+dict:w:34830	部活の中で孤立気味だった彼女にとっては、	has:고립 기미가 있었던	fix	lookup
+dict:w:34832	「悪い、ちょっと風邪気味でさ。また明日にしてくれないか」	has:감기 기운이 있어	fix	lookup
+dict:w:34832	彼は風邪気味です。	그는 감기 기운이 있습니다.	fix	lookup
+dict:w:34831	ふゝゝ、いゝ気味だ。	후후후, 꼴좋다.	fix	lookup
+dict:w:34831	《いい気味ね。誕生日に放置ｓｒ》	has:꼴좋네	fix	lookup
+dict:w:34830	気味が悪い。	기분 나쁘다.	keep	lookup
+dict:w:34830	電気看板がビクリと瞬く――気味がわるいじゃないか。	has:기분이 나쁘잖아	fix	lookup
+dict:w:34830	不気味な子供だった。	섬뜩한 아이였다.	keep	lookup
+cx:kimi-suffix:10	最近、太り気味の男がいた。	최근, 살찌는 기미가 있는 남자가 있었다.	fix	rewrites
+cx:kimi-suffix:10	キレ気味の桜庭が、	has:이성을 잃는 기미가 있는 사쿠라바가	fix	rewrites
+cx:kimi-suffix:10	あたりはひっそりとして、気味のわるいほど静まりかえっていました。	!rule:cx:kimi-suffix:10	keep	rewrites
+cx:kimi-suffix:5	緊張気味の声が聞こえた。	긴장한 듯한 목소리가 들렸다.	fix	rewrites
+cx:kimi-suffix:20	「健忘症気味のヒーローで悪かったな。	has:건망증 기미가 있는 히어로	fix	rewrites
+cx:kimi-suffix:5	白崎を見ると、興奮気味の顔をしていた。	has:흥분한 듯한 얼굴	fix	rewrites
+cx:kimi-suffix:20	胸の騒ぐ気味のわるい景色だった。	!rule:cx:kimi-suffix:20	keep	rewrites
+cx:kimi-suffix:25	風邪気味の人は帰ってください。	has:감기 기운이 있는 사람	fix	rewrites
+cx:kimi-suffix:25	「昨日から風邪の気味で隣の六畳に寝て居るよ、呼んで見ようか」	!rule:cx:kimi-suffix:25	keep	rewrites
+cx:kimi-suffix:30	多岐川さんが慌て気味に、何かの資料を取り出す。	has:당황한 듯이	fix	rewrites
+cx:kimi-suffix:30	ちょっと拗ね気味に白崎が俺を見る。	조금 삐친 듯이 시라사키가 나를 본다.	fix	rewrites
+cx:kimi-suffix:30	４分の１くらいを残し、もてあまし気味になっていた。	!rule:cx:kimi-suffix:30	keep	rewrites
+cx:kimi-suffix:40	興奮気味に御園が言う。	흥분한 듯이 미소노가 말한다.	fix	rewrites
+cx:kimi-suffix:40	紅雄は自嘲気味に笑った。	has:자조한 듯이 웃었다	fix	rewrites
+cx:kimi-suffix:40	母が嘆息気味に注意する。	has:탄식한 듯이	fix	rewrites
+cx:kimi-suffix:40	敬遠気味になった	!rule:cx:kimi-suffix:40	keep	rewrites
+cx:kimi-suffix:50	やけくそ気味に盛り上がる佳奈すけ。	has:자포자기인 듯이	fix	rewrites
+cx:kimi-suffix:50	大いにカゼ気味となる。	!rule:cx:kimi-suffix:50	keep	rewrites
+cx:kimi-suffix:55	４分の１くらいを残し、もてあまし気味になっていた。	has:주체 못하는 기미를 보이고 있었다	fix	rewrites
+cx:kimi-suffix:55	役者たちも、浮かれ気味になる）	!rule:cx:kimi-suffix:55	keep	rewrites
+cx:kimi-suffix:60	役者たちも、浮かれ気味になる）	has:들뜨는 기미를 보인다	fix	rewrites
+cx:kimi-suffix:60	酸欠気味になり、	!rule:cx:kimi-suffix:60	keep	rewrites
+cx:kimi-suffix:65	それで、周りの子達も、芹沢さんを敬遠気味になってるみたいです	!rule:cx:kimi-suffix:65	keep	rewrites
+cx:kimi-suffix:65	芹沢さんを敬遠気味になっている	has:기피 기미를 보이고 있다	fix	rewrites
+cx:kimi-suffix:70	酸欠気味になり、	has:산소 결핍 기미를 보여	fix	rewrites
+cx:kimi-suffix:70	すると、その晩から熱が出て、風邪の気味になった。	has:감기의 기미를 보였다	fix	rewrites
+cx:kimi-suffix:70	興奮気味に話す。	!rule:cx:kimi-suffix:70	keep	rewrites
+cx:kimi-suffix:80	すでにキレ気味だった。	이미 이성을 잃는 기미가 있었다.	fix	rewrites
+cx:kimi-suffix:80	うーん スケジュールどれも遅れ気味だ	has:늦는 기미가 있다	fix	rewrites
+cx:kimi-suffix:80	平次は少しからかい気味です。	헤이지는 조금 놀리는 기미가 있습니다.	fix	rewrites
+cx:kimi-suffix:80	彼は風邪気味だ。	!rule:cx:kimi-suffix:80	keep	rewrites
+cx:kimi-suffix:20	少し疲れ気味の顔。	has:피로 기미가 있는 얼굴	fix	rewrites
+cx:kimi-suffix:20	すでにグロッキー気味の俺たちの前に立ちはだかったのは……	has:그로기 기미가 있는 우리	fix	rewrites
+cx:kimi-suffix:5	健忘症気味のヒーロー	!rule:cx:kimi-suffix:5	keep	rewrites
+cx:kimi-suffix:5	興奮気味の男は、それをひったくるように奪い取る。	has:흥분한 듯한 남자는	fix	rewrites
+cx:kimi-suffix:72	金髪のあの娘がちょっと緊張気味だけど、一応及第点かな	has:긴장한 듯하지만	fix	rewrites
+cx:kimi-suffix:72	すると、緊張気味だった青海さんの顔がふっと緩んだ。	has:긴장한 듯했던 아오미 씨의 얼굴	fix	rewrites
+cx:kimi-suffix:72	興奮気味だった会長のテンションが、すっと落ちる。	has:흥분한 듯했던 회장	fix	rewrites
+cx:kimi-suffix:72	部活の中で孤立気味だった彼女にとっては、	!rule:cx:kimi-suffix:72	keep	rewrites
+cx:kimi-suffix:74	御園と佳奈すけに挟まれて、さよりちゃんは困惑気味。	has:곤혹한 듯.	fix	rewrites
+cx:kimi-suffix:74	寝不足気味？	!rule:cx:kimi-suffix:74	keep	rewrites
+cx:kimi-suffix:76	「悪い、ちょっと風邪気味なんだ。また明日にしてくれないか」	has:감기 기운이 있어.	fix	rewrites
+cx:kimi-suffix:76	彼は風邪気味なんだ。	!rule:cx:kimi-suffix:76	keep	rewrites
+cx:kimi-suffix:78	そしてそのまま、ぶるぶるっと水からもぐり出る様な気味で、身を起しながらつっ立った。	has:것 같은 기분으로	fix	rewrites
+cx:kimi-suffix:78	猫背気味で、	!rule:cx:kimi-suffix:78	keep	rewrites
+cx:kimi-suffix:30	　架子が興奮気味で近寄ってくる。	!rule:cx:kimi-suffix:30	keep	rewrites
+cx:kimi-suffix:40	　架子が興奮気味で近寄ってくる。	has:흥분한 듯이 접근해 온다	fix	rewrites
+cx:kimi-suffix:75	「殴っていいよ。この猫、壊れ気味なんだ」	「때려도 돼. 이 고양이, 망가지는 기미가 있어」	fix	rewrites
+cx:kimi-suffix:75	「ちょっと風邪気味なんだ」	!rule:cx:kimi-suffix:75	keep	rewrites

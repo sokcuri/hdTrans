@@ -28379,3 +28379,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 焼鮭	연어구이	N110			GN			LEX-5150: 生卵に焼鮭 날달걀에 연어구이			やきざけ	w:34913
 焼き鮭	연어구이	N110			GN			LEX-5150: 焼き鮭定食 연어구이 정식			やきざけ	w:34914
 扇状	부채꼴	N110			GN			LEX-5150: 扇状に広がる 부채꼴로 퍼진다			せんじょう	w:34915
+気味	기미가 %B7@	G8U0			GN							w:34830
+いい気味	꼴%B8@	G8U0			GN						いいきみ	w:34831
+風邪気味	감기 기운이 %B7@	G8U0			GN						かぜぎみ	w:34832

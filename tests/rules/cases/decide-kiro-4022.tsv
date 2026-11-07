@@ -1,0 +1,20 @@
+# 규칙: GRM-4022
+rule	input	expected	kind	layer
+cx:decide-kiro:10	あっさりと放っておいて帰るという事を決断できた。	has:돌아가기로 결심할 수 있었다	fix	rewrites
+cx:decide-kiro:10	ふるさとの実家に帰るということを決めた	has:돌아가기로 결정했다	fix	rewrites
+cx:decide-kiro:10	しばし悩み、サラは入ることを決意した。	has:들어오기로 결심했다	fix	rewrites
+cx:decide-kiro:10	その話を聞き、ハインリヒは会うことを決め、部下に指示を出す。	그 이야기를 듣고, 하인리히는 만나기로 결정해, 부하에게 지시를 내린다.	fix	rewrites
+cx:decide-kiro:10	全員と友達になることを決めた。	전원과 친구가 되기로 결정했다.	fix	rewrites
+cx:decide-kiro:10	この時、ぼくと彼女は数奇な運命に抗うことを決めた。	이 때, 나와 그녀는 기구한 운명에 저항하기로 결정했다.	fix	rewrites
+cx:decide-kiro:10	短期間で仕上げに入ることを決意する。	단기간으로 마무리에 들어가기로 결심한다.	fix	rewrites
+cx:decide-kiro:10	積乱雲の中へ飛び込むことを決断したという。	has:뛰어들기로 결심했다고	fix	rewrites
+cx:decide-kiro:10	…で 我々 警務部隊は全力で捜査に 乗り出すことを決定した	has:나서기로 결정했다	fix	rewrites
+cx:decide-kiro:10	「逆に、退くことを決めた人間が、選挙を続けるのも不誠実です……」	has:물러나기로 결정한 인간	fix	rewrites
+cx:decide-kiro:10	故郷に帰ることを決心した。	고향에 돌아가기로 결심했다.	fix	rewrites
+cx:decide-kiro:10	真実だということを知った。	진실이라는 것을 알았다.	keep	rewrites
+cx:decide-kiro:10	帰ることを忘れた。	돌아가는 것을 잊었다.	keep	rewrites
+cx:decide-kiro:10	帰るということを伝えた。	!rule:cx:decide-kiro:10	keep	rewrites
+cx:decide-kiro:10	下院が弾劾手続きの開始を決定したため、	!rule:cx:decide-kiro:10	keep	rewrites
+cx:decide-kiro:20	行かないことを決めた。	가지 않기로 결정했다.	fix	rewrites
+cx:decide-kiro:20	もう泣かないことを決意した。	has:울지 않기로 결심했다	fix	rewrites
+cx:decide-kiro:20	行かないことを伝えた。	!rule:cx:decide-kiro:20	keep	rewrites

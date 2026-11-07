@@ -1,0 +1,22 @@
+# 규칙: GRM-4016
+rule	input	expected	kind	layer
+cx:temo-minai:15	こんな形で実現するなんて 思ってもみなかった	이런 형태로 실현되다니 생각하지도 못했다	fix	rewrites
+cx:temo-minai:15	思ってもみない申し出だっただけに、混乱している。	has:생각하지도 못한 제의	fix	rewrites
+cx:temo-minai:15	でもまさか氷山にぶつかるなんて思ってもみなかったよ	has:생각하지도 못했어	fix	rewrites
+cx:temo-minai:15	こんなに簡単に密航出来るなんて 思ってもみなかったな	has:생각하지도 못했네	fix	rewrites
+cx:temo-minai:15	嘘吐きかと思えば、時に思ってもみない事を成し遂げる。	has:생각하지도 못한 것을	fix	rewrites
+cx:temo-minai:15	夢にも思ってもみなかった。	꿈에도 생각하지도 못했다.	fix	rewrites
+cx:temo-minai:15	新橋駅の心の誓いなどてんで思い出してもみなかった。	!rule:cx:temo-minai:15	keep	rewrites
+cx:temo-minai:20	新橋駅の心の誓いなどてんで思い出してもみなかった。	has:생각해 내 보지도 않았다	fix	rewrites
+cx:temo-minai:20	私は子供のことなんかそれっきり考えてもみない。	has:생각해 보지도 않는다	fix	rewrites
+cx:temo-minai:20	想像してもみなかった。	상상해 보지도 않았다.	fix	rewrites
+cx:temo-minai:20	読んでもみなかった。	읽어 보지도 않았다.	fix	rewrites
+cx:temo-minai:20	思ってもみない。	생각해 보지도 않는다.	fix	rewrites
+cx:temo-minai:20	地球上どちらを向いてもみな南だといふ、不思議な地点です。	!rule:cx:temo-minai:20	keep	rewrites
+cx:temo-minai:30	考えてもみませんでした。	생각해 보지도 않았습니다.	keep	rewrites
+cx:temo-minai:30	思ってもみません。	생각해 보지도 않습니다.	fix	rewrites
+cx:temo-minai:30	読んでもみないで捨てた。	읽어 보지도 않고 버렸다.	fix	rewrites
+cx:temo-minai:30	食べてもみないで文句を言う。	먹어 보지도 않고 불평한다.	fix	rewrites
+cx:temo-minai:40	考えてもみろ。	생각해 봐라.	fix	rewrites
+cx:temo-minai:40	一度考えてもみてください。	한 번 생각해 봐 주세요.	fix	rewrites
+cx:temo-minai:40	考えてもみなかった。	!rule:cx:temo-minai:40	keep	rewrites

@@ -1,0 +1,30 @@
+# 규칙: GRM-4021
+rule	input	expected	kind	layer
+cx:kotoni-omitted:10	どうしてこんなことに……。	왜 이렇게 된 거지…….	fix	rewrites
+cx:kotoni-omitted:10	「ウソよっ！　だったらどうして、こんなことに……」	has:왜, 이렇게 된 거지……	fix	rewrites
+cx:kotoni-omitted:10	「……どうして、どうして、こんなことに」	「……왜, 왜, 이렇게 된 거지」	fix	rewrites
+cx:kotoni-omitted:10	「……どうして、こんなことに」	「……왜, 이렇게 된 거지」	fix	rewrites
+cx:kotoni-omitted:10	一体どうしてこんなことに	도대체 왜 이렇게 된 거지	fix	rewrites
+cx:kotoni-omitted:10	どうしてこんなことになったんだ？	!rule:cx:kotoni-omitted:10	keep	rewrites
+cx:kotoni-omitted:20	そんなことに？	그렇게 된 거야?	fix	rewrites
+cx:kotoni-omitted:20	こんなことにならないように	!rule:cx:kotoni-omitted:20	keep	rewrites
+cx:kotoni-omitted:30	大体 そんな格好(かっこ)でいるから こんなことに…	has:이런 일이…	fix	rewrites
+cx:kotoni-omitted:30	まさかこんなことに……	설마 이런 일이……	fix	rewrites
+cx:kotoni-omitted:30	まさかこんなことになるなんて	설마 이렇게 되다니	keep	rewrites
+cx:kotoni-omitted:40	「ああ、ああっ――どうしてこんな事に！」	has:왜 이렇게 된 거지!	fix	rewrites
+cx:kotoni-omitted:40	どうしてそんなことに？	왜 그렇게 된 거지?	fix	rewrites
+cx:kotoni-omitted:40	どうしてあんなことに	왜 저렇게 된 거지	fix	rewrites
+cx:kotoni-omitted:40	そんなことに使うな。	!rule:cx:kotoni-omitted:40	keep	rewrites
+cx:kotoni-omitted:50	あんなことに？	저렇게 된 거야?	fix	rewrites
+cx:kotoni-omitted:50	どうしてそんなことに？	!rule:cx:kotoni-omitted:50	keep	rewrites
+cx:kotoni-omitted:60	あんなことに……	저런 일이……	fix	rewrites
+cx:kotoni-omitted:60	まさかそんな事に。	설마 그런 일이.	fix	rewrites
+cx:kotoni-omitted:60	そんなことに使うな。	!rule:cx:kotoni-omitted:60	keep	rewrites
+cx:why-came-about:10	（……どうしてこうなった）	(……왜 이렇게 된 거지)	fix	rewrites
+cx:why-came-about:10	知らんがな。どうしてこうなった！どうしてこうなった！	has:왜 이렇게 된 거지! 왜 이렇게 된 거지!	fix	rewrites
+cx:why-came-about:10	『どうしてこうなった。』	『왜 이렇게 된 거지.』	fix	rewrites
+cx:why-came-about:10	さて、なぜこうなったのか、その前の話をするとしよう。	!rule:cx:why-came-about:10	keep	rewrites
+cx:why-came-about:10	どうしてこうなったんだ？	왜 이렇게 된 거야?	keep	rewrites
+cx:why-came-about:20	なんでそうなった！	왜 그렇게 된 거지!	fix	rewrites
+cx:why-came-about:20	「なぜそうなった？」	「왜 그렇게 됐어?」	keep	rewrites
+cx:kotoni-omitted:10	アレコレ考えながら編んでたら、どうしてか、こんなことに	!rule:cx:kotoni-omitted:10	keep	rewrites
