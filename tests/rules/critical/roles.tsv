@@ -30,7 +30,7 @@ voice:passive-agent	母に叱られた。	has:어머니에게 야단맞았다	ke
 voice:passive-agent	犬に噛まれた。	has:개에게 물렸다	keep	rewrites
 cx:voice-agent:10	それを姉に見透かされた。	has:언니가 간파했다	keep	rewrites
 cx:benefactive-provider:10	先生に説明していただいた。	has:선생님이 설명해 주셨다	keep	rewrites
-voice:causative	母が子供に野菜を食べさせた。	has:아이에게 채소를 먹였다	keep	rewrites
+voice:causative	母が子供に野菜を食べさせた。	has:아이에게 야채를 먹였다	keep	rewrites
 cx:ni-partner:30	小柄なわたしの身体が姉に勝てるはずがない。	has:내 몸이 언니를 이길	fix	rewrites
 cx:ni-partner:30	この剣が奴に勝てるか	has:검이 놈을 이길	fix	rewrites
 cx:ni-partner:30	日本語が話せる	has:일본어를	keep	rewrites
@@ -58,7 +58,7 @@ conjugation:godan-causative	≪いいから、飛ばせるだけ飛ばして≫	
 cx:receive-potential:10	「そう言ってもらえてよかったです」	lacks:말해 줄 수 있어서	fix	rewrites
 cx:receive-potential:10	教えてもらえたら嬉しい	lacks:가르쳐 줄 수 있으면	fix	rewrites
 cx:receive-potential:10	良い家族がいて、こういう人に出会えて、助けてもらえたってことが僕の幸運だった。	lacks:도와 줄 수 있었다	fix	rewrites
-verb:causative-of-shorter	子供に野菜を食べさせられない。	has:아이에게 채소를 먹일 수 없다	fix	conjugation
+verb:causative-of-shorter	子供に野菜を食べさせられない。	has:아이에게 야채를 먹일 수 없다	fix	conjugation
 verb:causative-of-shorter	私は苦い野菜を食べさせられた。	has:먹게 되었다	fix	conjugation
 verb:causative-of-shorter	嫌って言うほど信じさせられたよ	has:믿게 되었	fix	conjugation
 dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	fix	compose

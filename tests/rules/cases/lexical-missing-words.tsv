@@ -40,7 +40,7 @@ dict:w:28583	その通り、恥ずべき行いだと存じますわ。	그대로
 dict:w:28532	蛇口をひねり、口をゆすぐ。	수도꼭지를 비틀고, 입을 헹군다.	fix	defaults
 dict:w:28537	どんな被害をこうむるか分からない。	어떤 피해를 입는지 모른다.	fix	defaults
 dict:w:28538	キャンディのスティックを摘まむ。	캔디의 스틱을 집는다.	fix	defaults
-dict:w:28587	野菜たっぷりです！	채소 듬뿍입니다!	fix	defaults
+dict:w:28587	野菜たっぷりです！	야채 듬뿍입니다!	fix	defaults
 lookup:missing-words	いくらあのねちっこい日中の屈辱	아무리 그 끈질긴 낮의 굴욕	keep	lookup
 lookup:missing-words	光がまぶしい	빛이 눈부시다	keep	lookup
 lookup:missing-words	こうむいんになった	공무원이 되었다	keep	lookup

@@ -15,7 +15,7 @@ dict:everyday-words:1	祭りを見に来た人が多い。	축제를 보러 온 
 dict:everyday-words:1	見にくい字だ。	보기 어려운 글자다.	keep	lookup
 dict:everyday-words:1	映画を見に行った。	영화를 보러 갔다.	keep	lookup
 dict:everyday-words:2	兄が会いに来ました。	형이 만나러 왔습니다.	fix	lookup
-dict:everyday-words:3	客が野菜を買いに来た。	손님이 채소를 사러 왔다.	fix	lookup
+dict:everyday-words:3	客が野菜を買いに来た。	손님이 야채를 사러 왔다.	fix	lookup
 dict:everyday-words:4	妹がケーキを食べに来た。	여동생이 케이크를 먹으러 왔다.	fix	lookup
 dict:everyday-words:4	あいにく雨だった。	공교롭게도 비였다.	keep	lookup
 dict:everyday-words:5	頭にはちまきをした。	머리에 머리띠를 했다.	fix	lookup

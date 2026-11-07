@@ -35,5 +35,13 @@ cx:try-on:20	試着室はどこですか	has:탈의실은	keep	rewrites
 cx:humble-give:60	ただいまお持ちしますので少々お待ちください。	has:곧 가져오겠으니	fix	rewrites
 dict:w:35164	ええと 1月初旬よ	lacks:제철	keep	lookup
 pack:argument-senses:5065	それには見たことも聞いたことも無い料理がずらりと並んでいた。	lacks:놓	keep	packs
-dict:jisjk:28758	「もっと、野菜を食べなさい」	has:채소를	fix	lookup
+dict:jisjk:28758	「もっと、野菜を食べなさい」	has:야채를	keep	lookup
 dict:jisjk:28758	野菜炒めを作った	lacks:채소볶음	keep	lookup
+pack:argument-senses:5068	野菜の価格が高騰している。	has:채소의 가격이	fix	packs
+pack:argument-senses:5068	野菜を栽培する農家	has:채소를 재배하는	fix	packs
+pack:argument-senses:5068	客が野菜を買いに来た。	has:야채를	keep	packs
+dict:w:35174	温野菜サラダ	has:데친 채소	fix	lookup
+dict:jisjk:256109	緑黄色野菜を摂ろう	has:녹황색 채소를	fix	lookup
+dict:s:6735	野菜ジュースを飲む	has:야채주스를	fix	lookup
+dict:w:35160	葉物野菜が高い	has:잎채소가	fix	lookup
+dict:w:34698	有機野菜の店	has:유기농 채소	fix	lookup
