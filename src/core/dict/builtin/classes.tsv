@@ -66,6 +66,8 @@
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= casual.ikanai-after	The particles, phrases and adverbs of going well after which a kana いか with the casual negative ねえ or ん is the negative of いく, it won't do (そうはいかねえ, わけにはいかん, うまくいかねえ), not the かねる of いいかねえ nor the ダメ of それはいかん.
 //= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
+//= casual.nna-prohibition-stem	Stems of godan verbs in る whose ん said for る before な is a prohibition, not the request りな (触んな 만지지 마, 殴んなって; spec LEX-5073); other godan stems stay (帰んな, 頑張んな).
+//= casual.ni-naru-stem	Adjectival nouns of dislike and failure whose になる is said んなる (嫌んなる, だめんなっちゃう), STEM or STEM=WRITTEN: before んな and a kana of なる, the に of becoming (spec LEX-5074).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
 //= copula.kansai-negative	The dictionary words of the Kansai ちゃう that is じゃない after a noun (マザコンちゃうわ 마더 콤플렉스 아니거든); after a verb the same kana are the contracted てしまう (やっちゃうね), and constraint chau-after-verb drops the word there.
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
@@ -119,9 +121,10 @@
 //= ending.voice-polite	Polite forms after (ら)れ; in a question with no subject they ask the listener, whose act the (ら)れ honours (何を読まれているんですか 무엇을 읽고 계십니까).
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
-//= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
+//= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ, 泣いてんですよ; spec LEX-5074).
 //= follower.prohibition-janai	Sentence particles after the んじゃない or んじゃねえ of a rebuke (泣くんじゃないよ, 気を抜くんじゃないぞ, なめた口をきいているんじゃないわよ): the prohibition 지 마 (spec MNG-6).
 //= follower.prohibition-janai-teru	The particles of follower.prohibition-janai after which the てるんじゃない of a て form forbids too, not only before ！ (ビビってんじゃねぇぞ, きいているんじゃないわよ; spec MNG-6).
+//= follower.prohibition-pause	Words that start a new phrase right after a contracted prohibition with no comma written: the demonstratives in kana and the rough words of address (ふざけんなこんな話, 見んなこの野郎, 触んなてめえ): the prohibition 지 마 and an unwritten pause (spec LEX-5073).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.count	What follows a count of things to say how they are shared or measured: ずつ, 分 and the times sign (二面ずつ 두 면씩, 四面分 네 면분, 四面×四面 네 면×네 면).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
@@ -472,6 +475,8 @@
 //= spelling.katakana-ending-after-kana	Endings of spelling.katakana-ending that are respelled only after hiragana, the stem of a verb (行きマース; not 一マス).
 //= spelling.katakana-particle	Final particles written in katakana, respelled like spelling.katakana-ending but only after hiragana or kanji (楽しいネー, 天気ネ; not Decemberネー).
 //= spelling.old-form	Old forms of kanji that the Jōyō kanji table gives with their new forms, and variant forms with the form Japanese text uses (說 説, 嚙 噛, 𠮷 吉), OLD=NEW: an old form that no dictionary word holds, not even on its own, is written in its new form before lookup, so that both read alike (格好惡い 格好悪い, 隱れる 隠れる; 赤澤 of a name stays).
+//= spelling.slurred	Slurred spellings of a demonstrative and its noun, of a casual なる and of すると after そう or こう, FROM=TO, read as TO where no hiragana other than a particle stands before them (そん時はそん時 その時はその時, あん子 あの子, やんなる 嫌になる, そーすっと そうすると; spec LEX-5076).
+//= spelling.slurred-inner	Spellings with an emphatic っ inside a casual ending, FROM=TO, read as TO wherever they stand (行かなくっちゃ 行かなくちゃ; spec LEX-5076).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
 //= spelling.variant-after-predicate	Kanji variants of spelling.variant that are the grammatical word only after an inflected word or the particle の as the analysis reads the text before them, and before a word of spelling.variant-after-predicate-next (慌てた様に 慌てたように, 太陽の様な 太陽のような); after a noun or a name they stay (ひなた様に, あなた様に).
@@ -854,6 +859,18 @@ casual.nna-word	ありえんな
 casual.nna-word	あり得んな
 casual.nna-word	見えんな
 casual.nna-word	聞こえんな
+casual.ni-naru-stem	嫌
+casual.ni-naru-stem	いや=嫌
+casual.ni-naru-stem	イヤ=嫌
+casual.ni-naru-stem	ダメ
+casual.ni-naru-stem	だめ
+casual.ni-naru-stem	駄目
+casual.ni-naru-stem	バカ
+casual.ni-naru-stem	ばか
+casual.ni-naru-stem	馬鹿
+casual.nna-prohibition-stem	触
+casual.nna-prohibition-stem	さわ
+casual.nna-prohibition-stem	殴
 
 copula.after-dake	だ
 copula.after-dake	で
@@ -1560,11 +1577,41 @@ follower.contracted-iru	じゃ
 
 follower.contracted-teru	じゃ
 follower.contracted-teru	だろ
+follower.contracted-teru	です
+follower.contracted-teru	でしょ
 follower.prohibition-janai	よ
 follower.prohibition-janai	ぞ
 follower.prohibition-janai	わよ
 follower.prohibition-janai-teru	ぞ
 follower.prohibition-janai-teru	わよ
+follower.prohibition-pause	この
+follower.prohibition-pause	こんな
+follower.prohibition-pause	こっち
+follower.prohibition-pause	その
+follower.prohibition-pause	そんな
+follower.prohibition-pause	あの
+follower.prohibition-pause	あんな
+follower.prohibition-pause	お前
+follower.prohibition-pause	おまえ
+follower.prohibition-pause	オマエ
+follower.prohibition-pause	おめえ
+follower.prohibition-pause	おめぇ
+follower.prohibition-pause	オメエ
+follower.prohibition-pause	オメェ
+follower.prohibition-pause	貴様
+follower.prohibition-pause	きさま
+follower.prohibition-pause	キサマ
+follower.prohibition-pause	てめえ
+follower.prohibition-pause	てめぇ
+follower.prohibition-pause	てめー
+follower.prohibition-pause	テメエ
+follower.prohibition-pause	テメェ
+follower.prohibition-pause	テメー
+follower.prohibition-pause	クソ
+follower.prohibition-pause	くそ
+follower.prohibition-pause	バカ
+follower.prohibition-pause	ばか
+follower.prohibition-pause	馬鹿
 
 follower.ita	い
 follower.ita	か
@@ -6517,6 +6564,22 @@ spelling.old-form	鷗=鴎
 spelling.old-form	屛=屏
 spelling.old-form	繫=繋
 spelling.old-form	蠟=蝋
+spelling.slurred	そん時=その時
+spelling.slurred	こん時=この時
+spelling.slurred	どん時=どの時
+spelling.slurred	あん子=あの子
+spelling.slurred	そん子=その子
+spelling.slurred	こん子=この子
+spelling.slurred	やんなる=嫌になる
+spelling.slurred	やんなり=嫌になり
+spelling.slurred	やんなっ=嫌になっ
+spelling.slurred	やんなれ=嫌になれ
+spelling.slurred	そうすっと=そうすると
+spelling.slurred	そーすっと=そうすると
+spelling.slurred	こうすっと=こうすると
+spelling.slurred	こーすっと=こうすると
+spelling.slurred-inner	なくっちゃ=なくちゃ
+spelling.slurred-inner	なくっちゃあ=なくちゃあ
 spelling.variant	程=ほど
 spelling.variant	位=くらい
 spelling.variant	等=など
@@ -10321,6 +10384,9 @@ noun.casual-lacked	愛
 noun.casual-lacked	欲
 noun.casual-lacked	土地勘
 noun.casual-lacked	物
+noun.casual-lacked	キリ
+noun.casual-lacked	きり
+noun.casual-lacked	切り
 
 //= verb.tame-state	Verbs of a state, of what happens to something or of what something brings about, after which a ため is the cause, not an aim (数で勝るため 수로 우수하기 때문에, 時間がかかるため 시간이 걸리기 때문에, 貧血を引き起こすため 빈혈을 일으키기 때문에); as the predicate after a ため they are no act aimed at (豆腐作りに適している).
 verb.tame-state	勝る

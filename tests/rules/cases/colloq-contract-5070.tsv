@@ -1,0 +1,152 @@
+# 규칙: LEX-5070, LEX-5071, LEX-5072, LEX-5073, LEX-5074, LEX-5075, LEX-5076
+rule	input	expected	kind	layer
+normalize:fused-adjective	「ふはっ、ひっでェなお前」	has:심하다	fix	normalize
+normalize:fused-adjective	「おまえのバイク、見た目はひでーけど中身はマジだな」	has:심하지만	fix	normalize
+normalize:fused-adjective	「ひでえことを云う娘だ」	has:심한 일	fix	normalize
+normalize:fused-adjective	「ひでえもんだな」	has:심한 	fix	normalize
+normalize:fused-adjective	「課長、ひでえや。	has:심해	fix	normalize
+normalize:fused-adjective	『食い物がひでえです。	has:심합니다	fix	normalize
+normalize:fused-adjective	「ひっでー理由だなぁ……」	has:심한 이유	fix	normalize
+normalize:fused-adjective	「しっかし…ひっでえ目にあった。	lacks:히로	fix	normalize
+normalize:fused-adjective	「いってーっ！」	has:아파	fix	normalize
+normalize:fused-adjective	いってぇ！？ ちくしょう、マジムカつくーっ！	has:아파	fix	normalize
+normalize:fused-adjective	おっ、かてぇこと言うなって。	has:딱딱한	fix	normalize
+normalize:fused-adjective	器がちっちぇな	has:작	fix	normalize
+normalize:fused-adjective	なんか、すげえことをいろいろ聞かされた気がするんだけどなあ。	has:대단한 일	fix	normalize
+normalize:fused-adjective	俺すげーことに気がついたんだけど	has:대단한	fix	normalize
+normalize:fused-adjective	「おっせーよっ！！」	has:늦어	fix	normalize
+normalize:fused-adjective	やっべーだろ、おい、みんなこっちだ	has:위험하	fix	normalize
+normalize:fused-adjective	「あっれー、千莉もいたんだ？」	lacks:거칠	keep	normalize
+normalize:fused-adjective	うわっ、足きっれー	lacks:싫	keep	normalize
+normalize:fused-adjective	するでー	lacks:예리	keep	normalize
+normalize:fused-adjective	もういいから、入ってきてぇ！	lacks:싶	keep	normalize
+normalize:fused-adjective	もっと素直に褒めてぇな！	lacks:메타	keep	normalize
+normalize:fused-adjective	読んでー	has:읽어	keep	normalize
+normalize:fused-adjective	してるときも…ホントに、じっくり見て	has:때도	keep	normalize
+normalize:none-nee	「色気もへったくれもねえな」	has:없네	fix	normalize
+normalize:none-nee	テメェ 連れてかなきゃ 何の意味もねえんだよ	has:의미도 없어	fix	normalize
+normalize:none-nee	「そんな話をしたって際限もねえや。	has:끝도 없어	fix	normalize
+normalize:none-nee	こっちは興味もクソもねーんだよ	has:없어	fix	normalize
+normalize:none-nee	あなた方と話してる暇は１秒たりともねーのです	has:없습니다	fix	normalize
+normalize:none-nee	「文字吉には旦那も亭主もねえのか」	has:없는	fix	normalize
+normalize:none-nee	此界隈には猫の子の祝言もねえ。	has:혼례도 없다	fix	normalize
+normalize:none-nee	「ここでジッとしてたって、どうしようもねぇ。	has:어쩔 수 없	fix	normalize
+normalize:none-nee	いや、どこの帰りでもねえ。	has:아니다	fix	normalize
+normalize:none-nee	おめえほかに行くとこなんかねえじゃねえか。	has:없잖아	fix	normalize
+normalize:none-nee	「帰る所なんかねえんだよ。	has:없어	fix	normalize
+normalize:none-nee	や、やっぱり、羨ましくなんてねーです！	has:않습니다	fix	normalize
+normalize:none-nee	「あー、なんかねーかなー……」	has:없을까	fix	normalize
+normalize:none-nee	おめえに言われたかねえや。そうかい？	has:듣고 싶지는 않아	fix	normalize
+normalize:none-nee	お互い、言いたかないけど若くはないんだから	has:말하고 싶지는 않지만	fix	normalize
+normalize:none-nee	悪いところを挙げりゃぁキリがねぇんだ。	has:끝이 없	fix	normalize
+normalize:none-nee	戦の準備なんてやりだしたらキリがねーし	has:끝이 없고	fix	normalize
+normalize:none-nee	私もねー、お兄が素敵な恋人見つけてくれて	has:나도	keep	normalize
+normalize:none-nee	赤母衣はちょっと鍛錬不足かもねー。	has:지도	keep	normalize
+normalize:none-nee	そうは言ってもねえ。	lacks:없	keep	normalize
+normalize:none-nee	「大沢事件もねぇ……」	lacks:없	keep	normalize
+normalize:none-nee	今から来てもねえ…	lacks:없	keep	normalize
+normalize:none-nee	なりに収穫はできたかねえ	lacks:싶	keep	normalize
+normalize:none-nee	あったかないか分からない	lacks:싶	keep	normalize
+normalize:none-nee	あなたが“動物”だなんてねぇ」	lacks:없	keep	normalize
+normalize:none-nee	「でもねえ、何んだか、私は不安心ですよ。	lacks:없	keep	normalize
+normalize:prohibition-janai	余計なこと あちこちでベラベラしゃべんじゃねえぞ！	has:말하지 마	fix	normalize
+normalize:prohibition-janai	手伝うんだってことを忘れんじゃねーぞ？	has:잊지 마	fix	normalize
+normalize:prohibition-janai	勝手に締めんじゃねぇ	has:조이지 마	fix	normalize
+normalize:prohibition-janai	マジで虫歯甘く見んじゃねーぞ！	has:보지 마	fix	normalize
+normalize:prohibition-janai	「おいオメェら！　手柄横取りさせんじゃねーぞっ！！！」	has:시키지 마	fix	normalize
+normalize:prohibition-janai	俺を嘗めんじゃねぇぞッ！	has:얕보지 마	fix	normalize
+normalize:prohibition-janai	藤丸ナオをナメんじゃねえぞッッ！！	has:얕보지 마	fix	normalize
+normalize:prohibition-janai	勝手にそっちに入れんじゃねぇ！	has:넣지 마	fix	normalize
+normalize:prohibition-janai	逃げんじゃねぇぞっ！！	has:도망치지 마	fix	normalize
+normalize:prohibition-janai	な―誰が、あんな馬鹿姉貴っ！ふざけんじゃねーよ！	has:장난치지 마	fix	normalize
+normalize:prohibition-janai	てめぇ、小便チビッてんじゃねーぞ？	has:마?	fix	normalize
+normalize:prohibition-janai	たりめーだ。なめんじゃねーぞ、公方	has:얕보지 마	fix	normalize
+normalize:prohibition-janai	話かけんじゃねえこのクズどもっ！	has:걸지 마	fix	normalize
+normalize:prohibition-janai	盗撮してる共犯でもいたんじゃねえの？	lacks:도달	keep	normalize
+normalize:prohibition-janai	「いいんじゃねえの、これはこれで」	has:좋은 거 아니야	keep	normalize
+normalize:prohibition-janai	そうなんじゃねえか	lacks:되는	keep	normalize
+normalize:prohibition-janai	火事は寄合所で起きてるんじゃねぇ、現場で起きてるんだ！	has:아닌	keep	normalize
+normalize:prohibition-nna	「邪魔すんなぁーーーー」	has:방해하지 마	fix	normalize
+normalize:prohibition-nna	ふざけんなこんなありきたりな話あってたまるか	has:장난치지 마 이런	fix	normalize
+normalize:prohibition-nna	ふざけんなてめえ！	has:장난치지 마	fix	normalize
+normalize:prohibition-nna	「ヤロウォォ！　クズ女ナメんなよ！」	has:얕보지 마	fix	normalize
+normalize:prohibition-nna	「ナメんなッッ！！！！」	has:얕보지 마	fix	normalize
+normalize:prohibition-nna	大崎鉄工所の装甲技術を舐めんなぁ―ッ！！	has:얕보지 마	fix	normalize
+normalize:prohibition-nna	こっちぃ、くんなぁ～っ！	has:오지 마	fix	normalize
+normalize:prohibition-nna	いちいち触んなっ！	has:만지지 마	fix	normalize
+normalize:prohibition-nna	触んなよ	has:만지지 마	fix	normalize
+normalize:prohibition-nna	だ。良い子はママんとこへ帰んな！	lacks:지 마	keep	normalize
+normalize:prohibition-nna	まずはイベント頑張んなよ」	lacks:지 마	keep	normalize
+normalize:prohibition-nna	「偽造したのか。よくできてんなぁ」	has:되고 있구나	keep	normalize
+normalize:prohibition-nna	む、無茶すんなぁ……シグ……フネを飛ばすなんて……	lacks:하지 마	keep	normalize
+normalize:prohibition-nna	そういう事かいな。エグい事すんなぁ	lacks:하지 마	keep	normalize
+normalize:prohibition-nna	「捏造すんなっ！」	has:날조하지 마!	keep	normalize
+normalize:prohibition-nna	「こ、こっち見んな！」	has:보지 마	keep	normalize
+normalize:prohibition-nna	決めてんな　お前	has:결정하고 있구나	keep	normalize
+normalize:contracted-teru	うれしくて 泣いてんですよ…。	has:울고 있는	fix	normalize
+normalize:contracted-teru	「い、いや、なに言ってんですか、そんなわけないですよっ！」	has:무슨 소리예요	fix	normalize
+normalize:contracted-teru	何やってんです？ほっぺた引っ張り合ったりして	has:하고 있습니까	fix	normalize
+normalize:contracted-teru	さっきから道がむちゃくちゃ枝分かれしまくってんですけど？	has:있는데요	fix	normalize
+normalize:contracted-teru	いくらニブいあんたでも、わかってんでしょ？	has:알고 있는 거지	fix	normalize
+normalize:contracted-teru	相手を殺さずに制圧しようって考えてんでしょ	has:생각하고 있는 거지	fix	normalize
+normalize:contracted-teru	「おでんです」	has:오뎅	keep	normalize
+normalize:contracted-teru	どんな楽しみ方があるってんですか。	lacks:비칩	keep	normalize
+normalize:contracted-teru	ちげーっつってんだろ	has:말하잖아	keep	normalize
+normalize:contracted-yaru	ならオレが出してやんよ	has:내 줄게	fix	normalize
+normalize:contracted-yaru	そっか。なら鞠の言葉、信じてやんぜ！	has:믿어 줄게	fix	normalize
+normalize:contracted-yaru	「やんのかー！　センセ、レフェリーを！」	has:하는 건가	fix	normalize
+normalize:contracted-yaru	え、俺もやんの？ マジかよー……	has:하는 거야	fix	normalize
+normalize:contracted-yaru	結局、落とされてやんの	lacks:줘	keep	normalize
+normalize:ni-naru	嫌んなりませんか？	has:싫어지지	fix	normalize
+normalize:ni-naru	「はぁ……やんなっちゃう……」	has:싫어져	fix	normalize
+normalize:ni-naru	「だめんなっちゃう……みゃああっ	has:안되게	fix	normalize
+normalize:ni-naru	あー、やんなるわー	has:싫어져	fix	normalize
+normalize:ni-naru	もう嫌んなる	has:싫어진다	fix	normalize
+normalize:godan-ya	メマーをちょいと撃ちゃ赤字確定。	has:쏘면 적자	fix	normalize
+normalize:godan-ya	「電気屋に行きゃ、いくらでも飾ってあるだろ？」	has:가면	fix	normalize
+normalize:godan-ya	「書きゃいいんだろう。	has:쓰면 되	fix	normalize
+normalize:godan-ya	逃げて行きゃ捕まる。	has:가면 잡힌다	fix	normalize
+normalize:godan-ya	一万出しゃあ十万になって返って来るんだ。	has:내면	fix	normalize
+normalize:godan-ya	直撃じゃねぇんだ、あたしは沈みゃしない！	has:가라앉지는	fix	normalize
+normalize:godan-ya	パンツ見られたぐらいじゃ死にゃーしませんから	has:죽지는	fix	normalize
+normalize:godan-ya	「エルムの樹に花なんか咲きゃしませんよ」	has:피지는	fix	normalize
+normalize:godan-ya	（大騒ぎとなりゃ、それにまぎれて逃出しゃいい）	has:도망가면	fix	normalize
+normalize:godan-ya	え…こ、子分ちゃん？正気に戻ったの？	lacks:번	keep	normalize
+normalize:godan-ya	……あ、夕立ちゃん。水着かわいい	lacks:번	keep	normalize
+normalize:godan-ya	でもないのに出しゃばってすまない	lacks:내면	keep	normalize
+normalize:godan-ya	あ、２人とも見ちゃダメですよ」	has:보면 안	keep	normalize
+normalize:godan-ya	「ねえ、この人誰？　なんで計画しゃべっちゃうの？」	has:말해버리는	keep	normalize
+normalize:kanji-nya	もう俺にゃ必要ないものさ	has:나에게는 필요	fix	normalize
+normalize:kanji-nya	担架で運ばれた日にゃ末代までの恥だ。	has:날에는	fix	normalize
+normalize:kanji-nya	夜の魚雷にゃ気をつけんと。	has:어뢰에는	fix	normalize
+normalize:kanji-nya	苦にゃならねえ。	has:되지 않	fix	normalize
+normalize:kanji-nya	目標が何であれ、俺達にゃ関係ないこと……	has:우리에게는	fix	normalize
+normalize:kanji-nya	提督宛の手紙にゃ。	has:편지	keep	normalize
+normalize:kanji-nya	しかもそれがＲＰＧでなくサウンドノベルでとは何と斬新にゃり！！！	lacks:붙여	keep	normalize
+normalize:kanji-nya	ここが南蛮だったら…狩りで一発にゃのに	has:한 방인데	keep	normalize
+normalize:slurred-spelling	「そん時はそん時だぁ」	has:그때 가서 생각하자	fix	normalize
+normalize:slurred-spelling	「おう、そん時はたくさん買ってってくれぃ」	has:그 때는	fix	normalize
+normalize:slurred-spelling	「んじゃ、そん時はよろしくな」	has:그 때는	fix	normalize
+normalize:slurred-spelling	あん子は肯づいてみせた。	has:그 아이는	fix	normalize
+normalize:slurred-spelling	「…そーすっとアレかな。	has:그렇다면	fix	normalize
+normalize:slurred-spelling	「そうすっと、多岐川は、さっき写真を買ってたってことね」	has:그렇다면	fix	normalize
+normalize:slurred-spelling	「へへ、そうこなくっちゃな」	has:그래야지	fix	normalize
+normalize:slurred-spelling	そう来なくっちゃなぁ、抜錨だっ！	has:그래야지	keep	normalize
+normalize:slurred-spelling	そうこなくっちゃ♪	has:그래야지	fix	normalize
+normalize:slurred-spelling	「教室へ行かなくっちゃ……」	has:가야 해	fix	normalize
+normalize:slurred-spelling	史料の残存がはんぱないんですね。	has:장난 아니네요	fix	normalize
+normalize:slurred-spelling	その時はその時だ、何事も遅いと	has:생각하자,	fix	normalize
+normalize:slurred-spelling	あん時のこと	has:그때	keep	normalize
+normalize:slurred-spelling	とはいえ、どん底からの再スタート	lacks:그 	keep	normalize
+normalize:slurred-spelling	「こん畜生……。	lacks:이 때	keep	normalize
+normalize:slurred-spelling	興奮気味だった会長のテンションが、すっと落ちる。	has:슥	keep	normalize
+normalize:godan-ya	死にゃ元も子もない	has:죽으면	fix	normalize
+normalize:prohibition-nna	勝てんなお前	lacks:지 마	keep	normalize
+normalize:prohibition-nna	読めんなこの字	lacks:지 마	keep	normalize
+normalize:prohibition-nna	止めんなこの野郎	has:멈추지 마	fix	normalize
+normalize:none-nee	しかもねえな	lacks:없	keep	normalize
+normalize:none-nee	よく見ると、なに、それほどの門構でもねえ。	has:문구도 아니다	fix	normalize
+normalize:kanji-nya	大丈夫にゃよ	lacks:에는	keep	normalize
+normalize:fused-adjective	頭かてぇな！	lacks:싶은	keep	normalize
+normalize:contracted-teru	「ダメっつってんでしょうが。出直してきな！」	lacks:이겠지만	keep	normalize
+normalize:slurred-spelling	ふふ、秋月姉に自慢しなくっちゃ♪ いひひ♪	has:자랑해야	fix	normalize
