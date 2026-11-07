@@ -7,7 +7,7 @@ cx:teru-tsumori:20	そこで何してるつもり？	거기서 뭐하는 셈이�
 cx:teru-tsumori:10	いつまで寝てるつもり？	언제까지 자고 있을 셈이야?	fix	rewrites
 cx:teru-tsumori:10	まだ寝てるつもり？	아직 자고 있을 셈이야?	fix	rewrites
 cx:teru-tsumori:10	いつまで泣いてるつもり？	언제까지 울고 있을 셈이야?	fix	rewrites
-cx:teru-tsumori:10	ヒトヨンマルマルです、提督。もう…有明、ちゃんとして！私が恥ずかしいでしょ？一体いつまでお昼寝してるつもり？	1400입니다, 제독. 이제…아리아케, 제대로 해! 내가 부끄럽지? 도대체 언제까지 점심잠 하고 있을 셈이야?	fix	rewrites
+cx:teru-tsumori:10	ヒトヨンマルマルです、提督。もう…有明、ちゃんとして！私が恥ずかしいでしょ？一体いつまでお昼寝してるつもり？	1400입니다, 제독. 이제…아리아케, 제대로 해! 내가 부끄럽지? 도대체 언제까지 낮잠하고 있을 셈이야?	fix	rewrites
 cx:teru-tsumori:10	「いつまでこうしてるつもりなんですか？」	「언제까지 이렇게 하고 있는 작정입니까?」	keep	rewrites
 cx:teru-tsumori:20	「いや、自分でも気を付けてるつもりなんだけど……」	「아니, 스스로도 조심하고 있는 작정이지만……」	keep	rewrites
 cx:teru-tsumori:20	明日は行くつもり？	내일은 갈 생각?	keep	rewrites

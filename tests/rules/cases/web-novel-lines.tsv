@@ -55,7 +55,7 @@ cx:excuse-me:10	あの、ちょっとすみません、道を聞きたいんで�
 cx:excuse-me:10	すみません、遅れました。	죄송합니다, 늦었습니다.	keep	rewrites
 cx:excuse-me:30	すみません、ちょっといいですか。	실례합니다, 잠깐 괜찮습니까.	fix	rewrites
 cx:excuse-me:30	本当にすみません。	정말 죄송합니다.	keep	rewrites
-cx:swift-write:10	筆をとると優美な動きでなにかをさらさらと書く。	붓을 취하면 우아한 움직임으로 뭔가를 술술 쓴다.	fix	rewrites
+cx:swift-write:10	筆をとると優美な動きでなにかをさらさらと書く。	붓을 들면 우아한 움직임으로 뭔가를 술술 쓴다.	fix	rewrites
 cx:swift-write:10	髪はさらさらとしている。	머리카락은 찰랑찰랑 하고 있다.	keep	rewrites
 cx:level-of:10	今なら並の戦艦にだって負けない。	!rule:cx:level-of:10	keep	rewrites
 cx:level-of:10	軽空母並の航空戦力を運用可能な航空戦艦です。	경항공모함급 항공전력을 운용 가능한 항공전함입니다.	fix	rewrites

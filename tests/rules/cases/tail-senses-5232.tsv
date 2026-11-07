@@ -1,0 +1,26 @@
+# 규칙: LEX-5232
+rule	input	expected	kind	layer
+dict:tail-5232	もう少ししたら来るよ	has:조금 있으면	fix	lookup
+dict:tail-5232	屋根にのっかっている	has:올라타고	fix	lookup
+dict:tail-5232	彼を引きとめた	has:붙잡았다	fix	lookup
+dict:tail-5232	スーパーのお惣菜	has:반찬	fix	lookup
+dict:tail-5232	負い目を感じる	has:부채감을 느낀다	fix	lookup
+dict:tail-5232	勝利を取り零した	has:놓쳤다	fix	lookup
+dict:tail-5232	お茶の間人気の猫	has:안방 인기	fix	lookup
+dict:tail-5232	お昼寝の時間	has:낮잠	fix	lookup
+dict:tail-5232	新しい女の人が来た	has:새로운 여자가	fix	lookup
+dict:tail-5232	酷いことしたって 自覚してる	has:심한 일	keep	lookup
+pack:argument-senses:5210	今朝方ロッテに働いた蛮行	has:저지른 만행	fix	packs
+pack:argument-senses:5210	工場で働いた	has:일했다	keep	packs
+pack:argument-senses:5211	窓から光が差し込んでいた	has:비쳐 들고	fix	packs
+pack:argument-senses:5213	突っ込んで訊いてくる	has:파고들어	fix	packs
+pack:argument-senses:5215	沙汰を待つがよい	has:처분을 기다리도록	fix	packs
+pack:argument-senses:97	金メダルをとった	has:금메달을 땄다	fix	packs
+pack:argument-senses:97	筆をとると優美な動きで	has:붓을 들면	fix	packs
+pack:argument-senses:97	責任をとる	has:책임을 진다	keep	packs
+pack:collocs	熱に浮かされた頭	has:열에 들뜬 머리	fix	packs
+cx:sense-cues-1:430	好きに使っていい	has:마음대로 써도	fix	rewrites
+cx:sense-cues-1:430	で、テロリスト役やってやるから、好きに揉んでやれと。	has:마음대로 주물러	fix	rewrites
+cx:sense-cues-1:430	彼を好きになった	!rule:cx:sense-cues-1:430	keep	rewrites
+cx:sense-cues-1:430	好きにしろ	has:마음대로 해라	keep	rewrites
+cx:sense-cues-1:430	タイプじゃないけど、好きにさせられた	!rule:cx:sense-cues-1:430	keep	rewrites
