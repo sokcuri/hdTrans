@@ -360,8 +360,51 @@ cx:novel-fixes:20	LEX-4000	&&2 S+0== "の" S-1== "当然といえば当然"	set-
 cx:novel-fixes:30	LEX-4000	&&2 S+0== "得" S-1== "でもあ"	set-target "있을 수 &HN@" set-target@-1 "" set-ending@-1 "" append-target@-2 "(이)라도"	何色の髪でもあり得る 무슨 색의 머리카락이라도 있을 수 있다
 //= quote-after-comma	after QuoteTo 41	A と right after a comma and before a verb of thinking or saying quotes the clause before the comma, (이)라고 (帰りたい、と思う 돌아가고 싶다, 라고 생각한다), not (으)로.
 cx:quote-after-comma:10	GRM-3452	&&4 S+0== "と" S-1== "、" D+0== "(으)로" ||2 &&2 F+1== "verb" ||3 S+1== "L思" S+1== "L考" S+1== "L言" &&2 F+2== "verb" ||3 S+2== "L思" S+2== "L考" S+2== "L言"	set-target "(이)라고"	帰りたい、とひたすら思う 돌아가고 싶다, 라고 오로지 생각한다
-//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로.
+//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로. A label of 有り, あり, 無し or なし right after a noun, with no particle between, says whether the noun is there (spec LEX-5110). 有り or あり before a noun describes it, 있는 (空行有り版 빈 줄 있는 판); one that ends its sentence is the noun form 있음 that なし reads 없음 (駐車場有り 주차장 있음), and so is one before a comma when only nouns and other such labels stand before it in its sentence, an item of a list (空行有り、句点改行形式 빈 줄 있음, 마침표 개행 형식, 空室あり、室内浴室あり、 빈방 있음, 실내 욕실 있음,). A noun read in 있음 or 없음 (なし, 訳あり, 底無し) before a noun, right after it or after an の that then writes nothing, is 있는 or 없는 (ギアなし男 기어 없는 남자, 水着なしの桜庭 수영복 없는 사쿠라바, 訳ありの品 사연 있는 물건), and なし or 無し right after a noun before a bare で is 없이, written apart from the noun (詠唱なしで 영창 없이, 駐車場無しで、 주차장 없이,). After a particle (問題があり、) or after other words before the comma (その後、紆余曲折あり、) あり stays the verb.
+//~ label-adnominal	있음=있는 없음=없는	A noun of a state read in 있음 or 없음 before the noun it describes.
+//: label-ari	&&4 ||2 I+0== "有り" I+0== "あり" F+0== "verb" P-1== "1" F+0== "touches-prev"	A 有り or あり right after a noun.
+//: label-state	||2 D+0== "R있음" D+0== "R없음"	A word read in 있음 or 없음.
+//: label-item	||5 P+0== "1" I+0== "有り" I+0== "あり" :label-state &&2 S+0== "、" ||5 I-1== "R有り" I-1== "Rあり" S-1== "Rなし" S-1== "R無し" D-1== "R있음"	A noun, a label of 有り or あり, a word read in 있음 or 없음, or a comma after a label.
+//: label-opens	<0 &&2 ||2 P+0== "1" :label-state ||3 F+0== "first" F+0== "opens-line" S-1== "00。！？!?「『（(“" !1 :label-item	Only nouns and labels before commas stand before the word back to the start of its sentence, line or bracket.
 cx:without:10	LEX-4007	&&3 S+0== "で" S-1== "なし" S+1== "、"	set-target "" set-target@-1 "없고"	機械類はなしで、 기계류는 없고,
+cx:without:14	LEX-5110	&&6 S+0== "で" ||2 S-1== "なし" S-1== "無し" P-2== "1" F-1== "touches-prev" !1 F+0== "conjugating" F+1== "boundary"	set-target "" set-target@-1 "없이"	駐車場無しで、月五万円 주차장 없이, 월 5만 엔
+cx:without:15	LEX-5110	&&5 S+0== "で" ||2 S-1== "なし" S-1== "無し" P-2== "1" F-1== "touches-prev" !1 F+0== "conjugating"	set-target " " set-target@-1 "없이"	成果無しで帰る 성과 없이 돌아가다
+cx:without:17	LEX-5110	&&3 ||2 S+0== "なしで" S+0== "無しで" P-1== "1" F+0== "touches-prev"	prepend-target " "	詠唱なしで魔法を使う 영창 없이 마법을 쓴다
+cx:without:20	LEX-5110	&&5 :label-ari P+1== "1" F+1== "touches-prev" !1 F+1== "hiragana" !1 F+0== "clipped"	set-ending "0"	空行有り版 빈 줄 있는 판
+cx:without:30	LEX-5110	&&2 :label-ari ||2 F+0== "sentence-end" F+0== "period-after"	set-ending "B"	駐車場有り 주차장 있음
+cx:without:40	LEX-5110	&&3 :label-ari S+1== "、" :label-opens	set-ending "B"	空行有り、句点改行形式 빈 줄 있음, 마침표 개행 형식
+cx:without:50	LEX-5110	&&6 P+0== "1" :label-state P+1== "1" F+1== "touches-prev" !1 F+1== "hiragana" !1 F+0== "clipped"	map-target-tail @label-adnominal append-target " "	ギアなし男 기어 없는 남자
+cx:without:60	LEX-5110	&&4 P+0== "1" :label-state S+1== "の" P+2== "1"	map-target-tail @label-adnominal set-target@+1 " "	水着なしの桜庭 수영복 없는 사쿠라바
+//= attached	after Select 214	guard ||3 I+0== "付き" I+0== "つき" S+0== "つきの"	A 付き right after a noun, with no particle between, is a label of what comes with it (spec LEX-5111), never 첨부: before a noun, also with an の that then writes nothing, it is 달린 (ミサイルポッド付きの個体 미사일 포드 달린 개체), after a facility of noun.amenity 딸린 (大型駐車場付きの家 대형 주차장 딸린 집), after a meal of noun.meal-included 포함 (朝食付きのプラン 아침 식사 포함 플랜), and after a master, one of noun.role or a person before a person, 전속 (陛下付きの騎士 폐하 전속 기사); before a bare で it is (와)과 함께 (首輪付きで 목걸이와 함께), after a meal or a facility 포함해서 (朝食付きで一泊一万円 아침 식사 포함해서); elsewhere, at the end of a sentence, before a comma or a copula, the 첨부 of the dictionary is the noun 포함 (タクシー付き 택시 포함, デザート付きなら 디저트 포함이라면), and the 부착 it reads after a device stays (カメラ付き 카메라 부착). The one word つきの before a noun reads like 付きの (朝食つきのプラン 아침 식사 포함 플랜). A kana つき only after a katakana word (ポストカードつき), as it is also 突き, 着き and 吐き. Words that hold 付き (顔付き, 目付き, 手付き, 気付き, 期限付き) are other words.
+//: attached-label	&&3 ||2 I+0== "付き" &&2 I+0== "つき" F-1== "katakana" P-1== "1" F+0== "touches-prev"	A 付き or つき right after a noun.
+//: attached-no	&&4 S+0== "つきの" P-1== "1" F+0== "touches-prev" P+1== "1"	The one word つきの right after a noun and before one.
+//: attached-before-noun	||2 &&3 P+1== "1" F+1== "touches-prev" !1 F+1== "hiragana" &&2 S+1== "の" P+2== "1"	A noun follows, right after it or after の.
+//: attached-served	||2 &&2 S-1== @noun.role :attached-before-noun &&2 F-1== "person" ||2 &&3 P+1== "1" F+1== "touches-prev" F+1== "person" &&2 S+1== "の" F+2== "person"	A master before it: one of noun.role before a noun, or another person before a person.
+cx:attached:5	LEX-5111	&&2 :attached-no S-1== @noun.meal-included	set-target " 포함 "	朝食つきのプラン 아침 식사 포함 플랜
+cx:attached:6	LEX-5111	&&2 :attached-no S-1== @noun.amenity	set-target " 딸린 "	駐車場つきの家 주차장 딸린 집
+cx:attached:7	LEX-5111	:attached-no	set-target " 달린 "	ミサイルポッドつきの個体 미사일 포드 달린 개체
+cx:attached:10	LEX-5111	&&3 :attached-label :attached-served S+1== "の"	set-target "전속" set-ending "" set-target@+1 " "	陛下付きの騎士 폐하 전속 기사
+cx:attached:20	LEX-5111	&&2 :attached-label :attached-served	set-target "전속 " set-ending ""	司令付き秘書艦 사령 전속 비서함
+cx:attached:30	LEX-5111	&&4 :attached-label S-1== @noun.meal-included S+1== "の" P+2== "1"	set-target "포함" set-ending "" set-target@+1 " "	朝食付きのプラン 아침 식사 포함 플랜
+cx:attached:40	LEX-5111	&&3 :attached-label S-1== @noun.meal-included :attached-before-noun	set-target "포함 " set-ending ""	朝食付きプラン 아침 식사 포함 플랜
+cx:attached:50	LEX-5111	&&4 :attached-label S-1== @noun.amenity S+1== "の" P+2== "1"	set-target "딸린" set-ending "" set-target@+1 " "	駐車場付きの家 주차장 딸린 집
+cx:attached:60	LEX-5111	&&3 :attached-label S-1== @noun.amenity :attached-before-noun	set-target "딸린 " set-ending ""	駐車場付き物件 주차장 딸린 물건
+cx:attached:70	LEX-5111	&&3 :attached-label S+1== "の" P+2== "1"	set-target "달린" set-ending "" set-target@+1 " "	ミサイルポッド付きの個体 미사일 포드 달린 개체
+cx:attached:80	LEX-5111	&&2 :attached-label :attached-before-noun	set-target "달린 " set-ending ""	台紙付きプリペイドカード 받침 종이 달린 선불 카드
+cx:attached:85	LEX-5111	&&4 :attached-label ||2 S-1== @noun.meal-included S-1== @noun.amenity S+1== "で" !1 F+1== "conjugating"	set-target "" set-ending "" append-target@-1 " 포함해서" set-target@+1 " "	朝食付きで一泊一万円 아침 식사 포함해서 1박 1만 엔
+cx:attached:90	LEX-5111	&&3 :attached-label S+1== "で" !1 F+1== "conjugating"	set-target "" set-ending "" append-target@-1 "(와)과 함께" set-target@+1 " "	首輪付きで 목걸이와 함께
+cx:attached:100	LEX-5111	&&2 :attached-label F+0== "verb"	set-target "" set-ending "" append-target@-1 " 포함"	朝食付き、夕食なし 아침 식사 포함, 저녁식사 없음
+cx:attached:110	LEX-5111	&&2 :attached-label D+0== "첨부"	set-target "포함"	タクシー付き 택시 포함
+//= te-loss	after Select 209	guard ||4 S+0== "損" S+0== "損す" S+0== "損を" S+0== "損し"	A 損 right after a verb in て is the loss that doing it brings, so the て is -어서 (spec GRM-4010): with ない after it, past は, も, の or が, it is what one stands to lose, 손해 볼 것, also after ても (知っても損はない 알아도 손해 볼 것은 없다; 聞いて損のない内容 들어서 손해 볼 것이 없는 내용, 知って損はない 알아서 손해 볼 것은 없다); 損することはない keeps 손해 볼 일. A する after 損 and は or も is 보다 (買って損はしない 사서 손해는 보지 않는다).
+//~ te-reason	6=6서 있어=있어서 둬=둬서	The て endings in -어 and their -어서.
+//: te-before	&&2 F-1== "verb" ||2 U-1== "Rて" U-1== "Rで"	The word before is a verb in て or で.
+//: loss-none	&&2 ||5 S+1== "は" S+1== "も" S+1== "の" S+1== "が" L+1== "없다" ||2 L+1== "없다" L+2== "없다"	ない follows, right after it or past は, も, の or が.
+cx:te-loss:10	GRM-4010	&&3 S+0== "損" :te-before :loss-none	set-target "손해 볼 것" map-ending-tail@-1 @te-reason	知って損はない 알아서 손해 볼 것은 없다
+cx:te-loss:15	GRM-4010	&&4 S+0== "損" F-1== "verb" ||3 U-1== "Rても" U-1== "Rでも" Y-1== "6도" :loss-none	set-target "손해 볼 것"	知っても損はない 알아도 손해 볼 것은 없다
+cx:te-loss:20	GRM-4010	:te-before	map-ending-tail@-1 @te-reason	知って損することはない 알아서 손해 볼 일은 없다
+//= loss-suru	after Select 213	guard ||2 B+0== "する" S+0== "Lし"	A する after 損 and は or も is suffering the loss, 보다, not 하다 (損はしない 손해는 보지 않는다; spec GRM-4010).
+cx:loss-suru:10	GRM-4010	&&3 ||2 S-1== "は" S-1== "も" S-2== "損" D+0== "L하지"	replace-head "하지" "보지"	買って損はしねぇよ 사서 손해는 보지 않아
+cx:loss-suru:20	GRM-4010	&&3 ||2 S-1== "は" S-1== "も" S-2== "損" D+0== "L하고"	replace-head "하고" "보고"	損はしたくない 손해는 보고 싶지 않다
 //= fresh-made	after Select 161	A verb before たて read -ㄴ 지 얼마 안 된 right before a noun is freshly made, 갓 and the past adnominal (焼きたてパン 갓 구운 빵).
 cx:fresh-made:10	LEX-4008	&&2 F+0== "verb" Y+0== "8 지 얼마 안 된"	prepend-target "갓 " set-ending "8"	焼きたてパン 갓 구운 빵
 //= looks-adj	after Select 162	そうな after a na-adjective or a noun of a state is how something looks, -한 듯한 (怪訝そうな顔 의아한 듯한 표정), not the guess -ㄹ 것 같은 a verb takes (降りそうな 내릴 것 같은).

@@ -1,0 +1,36 @@
+# 규칙: LEX-5111
+rule	input	expected	kind	layer
+cx:attached:5	朝食つきのプラン	아침 식사 포함 플랜	fix	rewrites
+cx:attached:6	駐車場つきの家	주차장 딸린 집	fix	rewrites
+cx:attached:7	ミサイルポッドつきの個体	미사일 포드 달린 개체	fix	rewrites
+cx:attached:7	嘘つきの顔じゃ!!	거짓말쟁이의 얼굴이야!!	keep	rewrites
+cx:attached:10	エドバルト陛下付きの騎士見習いに上がられた	has:폐하 전속 기사 견습	fix	rewrites
+cx:attached:10	バイザー付きのID｡	!rule:cx:attached:10	keep	rewrites
+cx:attached:20	本日の司令付き秘書艦は	has:사령 전속 비서함	fix	rewrites
+cx:attached:20	陛下付きの騎士	!rule:cx:attached:20	keep	rewrites
+cx:attached:30	朝食付きのプラン	아침 식사 포함 플랜	fix	rewrites
+cx:attached:30	おかず付きのお昼ご飯ですっ。	!rule:cx:attached:30	keep	rewrites
+cx:attached:40	朝食付きプラン	아침 식사 포함 플랜	fix	rewrites
+cx:attached:40	朝食付きです	!rule:cx:attached:40	keep	rewrites
+cx:attached:50	駐車場付きの家	주차장 딸린 집	fix	rewrites
+cx:attached:50	駐車場付きで月五万円	!rule:cx:attached:50	keep	rewrites
+cx:attached:60	温泉付き旅館	온천 딸린 여관	fix	rewrites
+cx:attached:60	大型駐車場付き 宇宙お化け屋敷のオーナー	!rule:cx:attached:60	keep	rewrites
+cx:attached:70	あのミサイルポッド付きの個体が群れのリーダーよ	has:미사일 포드 달린 개체	fix	rewrites
+cx:attached:70	備品のカメラ、スマートフォン、カメラ付きの携帯ゲーム	has:카메라 달린 휴대용 게임기	fix	rewrites
+cx:attached:70	ツーショット撮影権付きの『大島ロール』	!rule:cx:attached:70	keep	rewrites
+cx:attached:80	「台紙付きプリペイドカードに、ボーカルＣＤ？」	has:받침 종이 달린 선불 카드	fix	rewrites
+cx:attached:80	護衛付きとはいえ	!rule:cx:attached:80	keep	rewrites
+cx:attached:85	朝食付きで一泊一万円	has:아침 식사 포함해서	fix	rewrites
+cx:attached:85	写真付きで解説	!rule:cx:attached:85	keep	rewrites
+cx:attached:90	沙都子は首輪付きで妹属性化。	has:목걸이와 함께	fix	rewrites
+cx:attached:90	ちょっと待ってな、coffee付きでねー。	has:coffee와 함께	fix	rewrites
+cx:attached:90	運転手付きでな	!rule:cx:attached:90	keep	rewrites
+cx:attached:100	朝食付き、夕食なし	아침 식사 포함, 저녁식사 없음	fix	rewrites
+cx:attached:100	ボールペン2種（ポストカードつき）	has:우편 엽서 포함	fix	rewrites
+cx:attached:100	必ず護衛が付き、まるでＶＩＰ扱いである。	!rule:cx:attached:100	keep	rewrites
+cx:attached:110	片道送迎バス又はタクシー付き	has:택시 포함	fix	rewrites
+cx:attached:110	カメラ付き	카메라 부착	keep	rewrites
+cx:attached:5	顔付き	표정	keep	rewrites
+cx:attached:6	彼と付き合う	그와 사귄다	keep	rewrites
+cx:attached:70	期限付きの契約	기한부의 계약	keep	rewrites
