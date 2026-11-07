@@ -1,0 +1,39 @@
+# 규칙: LEX-5004
+rule	input	expected	kind	layer
+pack:everyday-sense-glosses:5055	あそこに行く位なら 死ぬ方がましだわ	has:죽는 편이 낫구나	fix	packs
+pack:everyday-sense-glosses:5055	蛇の口は噛むかも知れぬが、人の口よりましだ	has:소문보다 낫다	fix	packs
+pack:everyday-sense-glosses:5055	「夕方から少しはましな天気になりましたね」と彼は言った。	has:조금은 나은 날씨가	fix	packs
+pack:everyday-sense-glosses:5055	名奉行とうたわれるなら もうちっと ましな手 考えてくれ｡	has:조금 나은 손	fix	packs
+pack:everyday-sense-glosses:5055	板壁と障子だけの簡單な造作で寒々としてゐたが、戸外にゐるよりはましである。	has:옥외에 루보다는 낫다	fix	packs
+pack:everyday-sense-glosses:5055	もう少しましな話はないのか？	has:좀 더 나은 이야기는	fix	packs
+pack:everyday-sense-glosses:5055	たとえ歯が立たないほど強力な魔獣が現れても、無策よりはよほどましである。	has:상당히 낫다	fix	packs
+pack:everyday-sense-glosses:5055	いつまでも残りかすばっか拾っててねぇで、もうちっとましなとこ見せてみろや。	has:조금 나은 곳	fix	packs
+pack:everyday-sense-glosses:5055	どっちのベッドがましかなぁ……。	has:침대가 나은가	fix	packs
+pack:everyday-sense-glosses:5055	少しはましになった	has:조금은 나아졌다	fix	packs
+pack:everyday-sense-glosses:5055	随分ましになったな	has:나아졌군	fix	packs
+pack:everyday-sense-glosses:5055	ましだった	has:나았다	fix	packs
+pack:everyday-sense-glosses:5055	こっちの方がまだましです	has:낫습니다	fix	packs
+pack:everyday-sense-glosses:5055	まだマシか	has:나은가	fix	packs
+pack:everyday-sense-glosses:5055	売上は三割増しになった	lacks:나은	keep	packs
+pack:everyday-sense-glosses:5055	ありがとうございました	lacks:나은	keep	packs
+cx:web-fixes-j:255	　その日、アキラはハンターを目指して立ち上がった。今日よりましな明日を目指して。	has:헌터를 목표로 일어섰다. 오늘보다 나은 내일을 목표로.	fix	rewrites
+cx:web-fixes-j:255	彼女は菓子職人を目指し、初等学院卒業後から菓子店に勤めている。	!rule:cx:web-fixes-j:255	keep	rewrites
+cx:web-fixes-j:255	京成電鉄は６日、２０２８年３月の運賃改定を目指し、国土交通省に認可申請したと発表した。	!rule:cx:web-fixes-j:255	keep	rewrites
+cx:web-fixes-j:255	艦隊型駆逐艦の最高峰を目指して開発された、高速で重雷装の駆逐艦、島風型よ。	has:최고봉을 목표로 개발된	fix	rewrites
+cx:web-fixes-j:255	苟くも生涯を賭けるべき仕事を目指して、修業の途につかうとするもの	has:일을 목표로,	fix	rewrites
+cx:web-fixes-j:255	連覇を目指し続ける姿勢を強調した。	!rule:cx:web-fixes-j:255	keep	rewrites
+cx:web-fixes-j:255	彼は医者を目指している	has:의사를 목표로 하고 있다	keep	rewrites
+cx:web-fixes-j:255	合格を目指す	has:합격을 목표로 한다	keep	rewrites
+cx:web-fixes-j:255	松小説家目指してるん？ｗ	!rule:cx:web-fixes-j:255	keep	rewrites
+cx:web-fixes-j:254	頂上を目指して歩く。	has:정상을 향해 걷는다	fix	rewrites
+cx:web-fixes-j:254	「さぁ、ともにあの道を目指して歩こうね」	has:그 길을 향해 걷자	fix	rewrites
+cx:web-fixes-j:254	葵の中に埋まっていた部分が半分出たところで、再度奥を目指して進んでいく。	has:안쪽을 향해 나간다	fix	rewrites
+cx:web-fixes-j:254	出口を目指して走った。	has:출구를 향해 달렸다	fix	rewrites
+cx:web-fixes-j:254	北を目指して進む	has:북쪽을 향해 나아간다	fix	rewrites
+cx:web-fixes-j:254	艦隊型駆逐艦の最高峰を目指して開発された、高速で重雷装の駆逐艦、島風型よ。	!rule:cx:web-fixes-j:254	keep	rewrites
+cx:web-fixes-j:254	頂上を目指していく	!rule:cx:web-fixes-j:254	keep	rewrites
+pack:everyday-sense-glosses:5055	「何もないよりはまし」	has:없는 것보다는 낫다	fix	packs
+pack:everyday-sense-glosses:5055	こっちの方がまし。	has:여기가 낫다.	fix	packs
+pack:everyday-sense-glosses:5055	お許し下さいまし	lacks:나은	keep	packs
+cx:web-fixes-j:255	「頂上を目指して！」	!rule:cx:web-fixes-j:255	keep	rewrites
+cx:web-fixes-j:254	頂上を目指して歩け！	has:정상을 향해 걸어라	fix	rewrites
