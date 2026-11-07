@@ -10,7 +10,7 @@ normalize:kobe-tou	見とうよ。	보고 있어.	fix	normalize
 normalize:kobe-tou	見とうない	보고 싶지 않다	keep	normalize
 normalize:kobe-tou	ありがとう。	고마워.	keep	normalize
 normalize:kansai-mahen	かまへんで。	상관없어.	fix	normalize
-normalize:kansai-mahen	別にかまへんけど	별로 상관없는데	keep	normalize
+normalize:kansai-mahen	別にかまへんけど	딱히 상관없는데	keep	normalize
 lexical:dialect	おめえ、何してんだ。	너, 뭐하는 거야.	fix	lookup
 lexical:dialect	あたいらの庭で好き勝手が通ると思うなよ？おめえら！	우리의 뜰에서 제멋대로가 통과한다고 생각하지 마? 너희!	fix	lookup
 lexical:dialect	せやな。	그렇지.	fix	lookup

@@ -19,7 +19,7 @@ lookup:iku-ccha	（小声）行っちゃうですわ	(작은 목소리) 가버�
 lookup:iku-ccha	「きゃー♪蒼、ラノベに行っちゃうじゃん！	「꺄아♪창, 라노벨에 가버리잖아!	keep	lookup
 lookup:iku-ccha	行っちゃいけないって、お父様が	가면 안된다고, 아버님이	keep	lookup
 lookup:iku-ccha	「むー\n行っちゃうでしょ」	「무우\n가버리겠지」	keep	lookup
-lookup:iku-ccha	「べ、別にお姉ちゃん氏、夢に行っちゃうですわ～」	「벼, 별로 언니 씨, 꿈에 가버려요~」	keep	lookup
+lookup:iku-ccha	「べ、別にお姉ちゃん氏、夢に行っちゃうですわ～」	「따, 딱히 언니 씨, 꿈에 가버려요~」	keep	lookup
 cx:homograph-kara:10	私のグラスが空だろう。	내 잔이 비어 있을 것이다.	fix	rewrites
 cx:homograph-kara:10	「おい、ロザリア。先刻から何をぼさっとしている。私のグラスが空だろう。気が利かないな」	「어이, 로살리아. 잠시 전부터 뭘 멍하고 있다. 내 잔이 비어 있을 것이다. 눈치가 없네」	fix	rewrites
 cx:homograph-kara:15	箱が空だったのを 誰も確認しなかったのか？	상자가 비어 있었던 것을 아무도 확인하지 않았던 건가?	fix	rewrites
