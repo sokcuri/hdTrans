@@ -6,7 +6,7 @@ cx:neg-clause-nanka:10	弥生は…秋は…苦手。怒ってなんか…ない
 cx:neg-clause-nanka:10	なんか変だ	왠지 이상하다	keep	rewrites
 cx:meaning-flips-1:182	あたいは、戦いが終わっても……やることが、あんのによ……。	나는, 싸움이 끝나도……하는 것이, 있는 것에…….	fix	rewrites
 cx:meaning-flips-1:182	猫に餌をやる	고양이에게 먹이를 준다	keep	rewrites
-cx:meaning-flips-1:184	奥の間で、武田の衆と次の戦について談合している。	안쪽 방에서, 타케다의 사람들과 다음 전에 대해 담합하고 있다.	fix	rewrites
+cx:meaning-flips-1:184	奥の間で、武田の衆と次の戦について談合している。	안쪽 방에서, 타케다의 사람들과 다음 싸움에 대해 담합하고 있다.	fix	rewrites
 cx:meaning-flips-1:184	駅について休む	역에 도착해 쉰다	keep	rewrites
 dict:jisjk:120307	「あなたでは……ちょっと厳しいですねー」	「당신으로는……조금 어렵네요~」	fix	local
 dict:jisjk:120307	彼は私にちょっと厳しい	그는 나에게 조금 엄격하다	keep	local
