@@ -33,7 +33,7 @@ normalize:spelling-variant	「そんな事まで調べてるんですか！？�
 normalize:spelling-variant	そんな事を何故考えていたかというと、	그런 일을 왜 생각하고 있었는가라고 하면,	keep	normalize
 normalize:spelling-variant	「このまま何事もなければいいけれど」	「이대로 아무 일도 없으면 좋지만」	keep	normalize
 normalize:spelling-variant	今日も何事も無くて、本当に良かった。	오늘도 아무 일도 없어서, 정말 좋았다.	keep	normalize
-normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐 손해 볼 일은 없다」	keep	normalize
+normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐서 손해 볼 일은 없다」	keep	normalize
 normalize:spelling-variant	「大丈夫大丈夫、ただの考え事だから」	「괜찮아 괜찮아, 그냥 생각이니까」	keep	normalize
 normalize:spelling-variant	しれー、わたしに隠し事とかよくない。	사령관님, 나에게 비밀사항이라든지 좋지 않다.	keep	normalize
 normalize:spelling-variant	ちょっとした頼み事があるのだけれど、	약간의 부탁이 있는데,	keep	normalize

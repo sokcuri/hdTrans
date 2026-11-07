@@ -73,7 +73,7 @@ cx:web-fixes-k:310	「……お腹がすきましたわ」	「……배가 고�
 cx:web-fixes-k:310	「いえ、なんでもありませんわ。お腹がすいたので、おやつを用意していただけるかしら？」	has:배가 고파서, 간식을	fix	rewrites
 cx:web-fixes-k:310	昨日はお腹がすいたよ	!rule:cx:web-fixes-k:310	keep	rewrites
 cx:web-fixes-k:310	さすがに腹が減った程度でビービー泣くような歳じゃない。	!rule:cx:web-fixes-k:310	keep	rewrites
-cx:web-fixes-k:316	これくらいは作れるようになっておいて損は無いと思ってさ	has:두어서 손해는 없다고	fix	rewrites
+cx:web-fixes-k:316	これくらいは作れるようになっておいて損は無いと思ってさ	has:두어서 손해 볼 것은 없다고	fix	rewrites
 cx:web-fixes-k:316	放っておいても害がある	!rule:cx:web-fixes-k:316	keep	rewrites
 cx:web-fixes-k:318	窓辺に手を置いて背伸びをして外を眺めていると	has:창가에 손을 두고 발돋움을	fix	rewrites
 cx:web-fixes-k:318	当然怪我を負った友人を置いて逃げるわけにもいかず	has:친구를 두고 도망칠	fix	rewrites

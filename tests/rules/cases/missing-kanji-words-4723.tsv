@@ -18,7 +18,7 @@ lexical:missing-word	眼附が悪い	눈빛이 나쁘다	fix	lookup
 lexical:missing-word	人殺しだ	살인이다	keep	lookup
 lexical:missing-word	人並みに	보통으로	keep	lookup
 lexical:missing-word	物干しに干す	빨래 너는 곳에 말린다	keep	lookup
-lexical:missing-word	命令書付きでやるのか	명령서 첨부로 하는 건가	keep	lookup
+lexical:missing-word	命令書付きでやるのか	명령서와 함께 하는 건가	keep	lookup
 lexical:missing-word	満更でもない表情	그렇지만도 않은 표정	keep	lookup
 lexical:missing-word	銀のような白髪を背後で束ね繻珍の帯を胸高に結んだ﨟たけた老女がこっちを見ながら静かに鼓を調べている。	은과 같은 백발을 뒤에서 묶음 수자직의 띠를 가슴 높이로 맨﨟사나워진 노녀가 여기를 보면서 조용하게 북을 조사하고 있다.	fix	lookup
 lexical:missing-word	仕上げると、仕附糸まで仔細に見調べた上、折目正しくたたんで、錦紗の風呂敷につつみ、胸高く手で抱えて、依頼先へ届けに行く。	마무리하면, 사부실까지 자세하게 보고 조사한 위, 예의있게 접어, 금사의 보자기에 꾸러미, 가슴 높게 손으로 움켜 쥐어, 의뢰처에 전달하러 간다.	fix	lookup

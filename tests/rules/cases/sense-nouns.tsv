@@ -41,7 +41,7 @@ dict:金木犀	銀木犀の花が咲いた。	은목서의 꽃이 피었다.	kee
 dict:詫び	詫びとして金を置く。	사과로서 돈을 둔다.	fix	defaults
 dict:詫び	詫びて謝る。	사과해 사과한다.	keep	defaults
 dict:王族付き	王族付きのメイドだ。	왕족 전속의 메이드다.	fix	defaults
-dict:王族付き	写真付きの手紙だ。	사진 첨부 편지다.	keep	defaults
+dict:王族付き	写真付きの手紙だ。	사진 달린 편지다.	keep	defaults
 dict:殿下	殿下に話した。	전하에게 이야기했다.	fix	defaults
 dict:殿下	写真に写った。	사진에 찍혔다.	keep	defaults
 dict:首席	首席で卒業した。	수석으로 졸업했다.	fix	defaults
