@@ -110,6 +110,9 @@ struct Settings {
     // Text path: the line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue: わらわ,
     // じゃ, ておる, おぬし, そなた), read by the construction feature old-self-line.
     bool oldSelfLine = false;
+    // Text path: the line speaks of food or drink (word.taste-cue: 料理, 食べ, 飲), read by the construction
+    // feature taste-line.
+    bool tasteLine = false;
     // Text path: the document writes its speech in 「」, so its text outside them is narration.
     bool narrated = false;
     // Text path: the name rows of the document's name list, applied with the snapshot's packs; null

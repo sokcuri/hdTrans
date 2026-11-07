@@ -593,6 +593,12 @@
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
 //= word.adjective-noun-lead	Kana nouns that spell an adjective and a formal noun (いいわけ 변명: いい + わけ). Before a predicate ending and not after a modifier the adjective reads (すればいいわけ？ 하면 되는 거?), after の, な or という and before a case particle the noun (男のいいわけ 남자의 변명).
+//= word.taste-cue	Text of a line that speaks of food or drink (料理, 食べ, 飲, 召し上が): an お試し in it with no other object asks for a taste, 드셔 보다. Read by the construction feature taste-line.
+//= word.try-food	Ends of nouns of food that お試し or 試してみる takes: then it is tasting, 드셔 보다 or 먹어 보다 (この料理をお試しください 이 요리를 드셔 보세요).
+//= word.try-drink	Ends of nouns of drink that お試し or 試してみる takes: 드셔 보다 or 마셔 보다 (このワインをお試しください 이 와인을 드셔 보세요).
+//= word.try-method	Ends of nouns of a tip or method that お試し or 試してみる takes: 해 보다 (このやり方を試してみて 이 방식을 해 봐).
+//= word.try-tool	Ends of nouns of a product, app, service, format or tool that お試し or 試してみる takes: 써 보다 (このアプリを試してみてください 이 앱을 써 보세요).
+//= word.try-wear	Ends of nouns of clothes that お試し or 試してみる takes: 입어 보다 (この服を試してみて 이 옷을 입어 봐).
 //= word.copula-predicate	Adverbs and nouns that a copula, an adnominal な or a question か after them makes the adjectival noun of the same key (ばっちりです 완벽해요, しっかりですね 확실하네요, アリなのか 괜찮은 건가), not an adverb or a noun before a copula.
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
@@ -9247,6 +9253,129 @@ word.confirm-action	続け
 word.confirm-action	み
 word.confirm-action	修理
 word.adjective-noun-lead	いいわけ
+word.taste-cue	料理
+word.taste-cue	ケーキ
+word.taste-cue	菓子
+word.taste-cue	スープ
+word.taste-cue	デザート
+word.taste-cue	ワイン
+word.taste-cue	ビール
+word.taste-cue	コーヒー
+word.taste-cue	紅茶
+word.taste-cue	お茶
+word.taste-cue	召し上が
+word.taste-cue	食べ
+word.taste-cue	飲
+word.taste-cue	味わ
+word.taste-cue	美味
+word.taste-cue	おいし
+word.taste-cue	自信作
+word.taste-cue	新作メニュー
+word.taste-cue	チョコ
+word.try-food	料理
+word.try-food	ケーキ
+word.try-food	菓子
+word.try-food	パン
+word.try-food	寿司
+word.try-food	弁当
+word.try-food	ご飯
+word.try-food	飯
+word.try-food	肉
+word.try-food	魚
+word.try-food	刺身
+word.try-food	果物
+word.try-food	野菜
+word.try-food	スープ
+word.try-food	カレー
+word.try-food	ラーメン
+word.try-food	麺
+word.try-food	そば
+word.try-food	うどん
+word.try-food	パスタ
+word.try-food	ピザ
+word.try-food	焼き
+word.try-food	鍋
+word.try-food	サラダ
+word.try-food	デザート
+word.try-food	定食
+word.try-food	味
+word.try-food	おにぎり
+word.try-food	団子
+word.try-food	饅頭
+word.try-food	チョコ
+word.try-food	チョコレート
+word.try-food	アイス
+word.try-food	クッキー
+word.try-food	タルト
+word.try-food	プリン
+word.try-food	新作
+word.try-food	一品
+word.try-food	メニュー
+word.try-drink	酒
+word.try-drink	ワイン
+word.try-drink	ビール
+word.try-drink	茶
+word.try-drink	コーヒー
+word.try-drink	ジュース
+word.try-drink	カクテル
+word.try-drink	ウイスキー
+word.try-drink	ドリンク
+word.try-drink	ミルク
+word.try-drink	牛乳
+word.try-drink	スムージー
+word.try-method	コツ
+word.try-method	方
+word.try-method	方法
+word.try-method	やり方
+word.try-method	レシピ
+word.try-method	手順
+word.try-method	手法
+word.try-method	メソッド
+word.try-method	トレーニング
+word.try-method	ストレッチ
+word.try-method	体操
+word.try-method	運動
+word.try-method	ポーズ
+word.try-method	呼吸法
+word.try-tool	アプリ
+word.try-tool	機能
+word.try-tool	サービス
+word.try-tool	形式
+word.try-tool	ツール
+word.try-tool	ソフト
+word.try-tool	商品
+word.try-tool	製品
+word.try-tool	版
+word.try-tool	化粧品
+word.try-tool	クリーム
+word.try-tool	シャンプー
+word.try-tool	石鹸
+word.try-tool	プラン
+word.try-tool	コース
+word.try-tool	モード
+word.try-tool	設定
+word.try-tool	システム
+word.try-tool	ゲーム
+word.try-tool	サンプル
+word.try-tool	道具
+word.try-tool	マシン
+word.try-tool	香水
+word.try-tool	洗剤
+word.try-tool	フォント
+word.try-tool	テンプレート
+word.try-tool	ブラウザ
+word.try-wear	服
+word.try-wear	ドレス
+word.try-wear	着物
+word.try-wear	浴衣
+word.try-wear	水着
+word.try-wear	コート
+word.try-wear	ジャケット
+word.try-wear	シャツ
+word.try-wear	スカート
+word.try-wear	ズボン
+word.try-wear	衣装
+word.try-wear	制服
 word.copula-predicate	ばっちり
 word.copula-predicate	バッチリ
 word.copula-predicate	しっかり
