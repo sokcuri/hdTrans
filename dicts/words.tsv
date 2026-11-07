@@ -22729,8 +22729,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 苦無	쿠나이	N110			GN						クナイ	w:22644
 苦鉄質	고철질	N110			GN						くてつしつ	w:22645
 英単語	영단어	N110	UTs		GN				llm		えいたんご	w:22646
-英名	명성	N110	UTh		GN				xxx llm		えいめい	w:22647
-英名	영어 이름	N110	UTs		GN				llm		えいめい	w:22648
+英名	명성	N110	UTh		GN				llm		えいめい	w:22647
+英名	영어 이름	N110	UTs		GN			LEX-5230: 狂犬病の英名 광견병의 영어 이름	xxx llm		えいめい	w:22648
 英数字	영숫자	N110			GN				llm		えいすうじ	w:22649
 英文学	영문학	N110			GN						えいぶんがく	w:22650
 英桃	앵두나무	N110			GN						ゆすらうめ	w:22651
@@ -28443,3 +28443,23 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お下がり下さい	물러나 주세요	A9H1			GN			LEX-5051: お下がり下さい 물러나 주세요				w:34708
 お下がりくださいませ	물러나 주십시오	A9H1			GN			LEX-5051: お下がりくださいませ 물러나 주십시오				w:34709
 ドック入り	도크 입거	N110			GN			LEX-5051: ドック入り 도크 입거				w:34710
+倒壊	붕괴	N110			GN			LEX-5230: 建物が倒壊する 건물이 붕괴한다	replace xxx		とうかい	w:35221
+輩	무리	N110	VHn		GN			LEX-5230: ああいう輩 저런 무리	replace xxx		やから	w:35223
+鉄くず	고철	N110			GN			LEX-5230: 鉄くずを拾う 고철을 줍는다	replace xxx		てつくず	w:35225
+鉄くず屋	고철상	N110	VHn		GN			LEX-5230: 鉄くず屋が引き取る 고철상이 인수한다	replace xxx		てつくずや	w:35226
+掛け合わせ	교배	N110			GN			LEX-5230: 感染源との掛け合わせ 감염원과의 교배	replace xxx		かけあわせ	w:35227
+体当たり	몸통 박치기	N110			GN			LEX-5230: 体当たりで扉を破った 몸통 박치기로 문을 부쉈다	replace xxx		たいあたり	w:35228
+尻叩き	엉덩이 때리기	N110			GN			LEX-5230: 尻叩きの刑 엉덩이 때리기 벌	replace xxx		しりたたき	w:35229
+幻術	환술	N110			GN			LEX-5230: 幻術の得意な魔物 환술에 능한 마물	replace xxx		げんじゅつ	w:35230
+煮干し	멸치	N110			GN			LEX-5230: 煮干しで出汁をとる 멸치로 국물을 우려낸다	replace xxx		にぼし	w:35232
+芋虫	애벌레	N110			GN			LEX-5230: 芋虫が葉を食べる 애벌레가 잎을 먹는다	replace xxx		いもむし	w:35233
+殺処分	살처분	N110			GN			LEX-5230: 殺処分された 살처분되었다	replace xxx		さつしょぶん	w:35234
+立役者	주역	N110	VHn		GN			LEX-5230: 今回の立役者 이번의 주역	replace xxx		たてやくしゃ	w:35235
+飴屋	사탕 가게	N110			GN			LEX-5230: 飴屋の前で 사탕 가게 앞에서	replace xxx		あめや	w:35236
+夢魔	몽마	N110			GN			LEX-5230: 夢魔に襲われた 몽마에게 습격당했다	replace xxx		むま	w:35237
+遠吠え	울부짖음	N110			GN			LEX-5230: 遠吠えが聞こえる 울부짖음이 들린다	replace xxx		とおぼえ	w:35238
+焼き林檎	구운 사과	N110			GN			LEX-5230: 焼き林檎の味 구운 사과의 맛	replace xxx		やきりんご	w:35239
+焼きりんご	구운 사과	N110			GN			LEX-5230: 焼きりんご 구운 사과	replace xxx		やきりんご	w:35240
+焼きリンゴ	구운 사과	N110			GN			LEX-5230: 焼きリンゴ 구운 사과	replace xxx		やきりんご	w:35241
+副首相	부총리	N110	VHn		GN			LEX-5230: 副首相が訪問した 부총리가 방문했다	replace xxx		ふくしゅしょう	w:35242
+日系人	일본계	N110	VHn		GN			LEX-5230: 日系人の多い町 일본계가 많은 마을	replace xxx		にっけいじん	w:35243

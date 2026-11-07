@@ -148,3 +148,10 @@ argument-senses:5141	あおり|煽り	n	sense	pred=受ける|食う|食らう	�
 argument-senses:5143	制する	vs	sense	obj=@competition|@sport|@game|大会|選挙|試合|リーグ|決勝|レース|争い|戦い|覇権|市場|激戦|接戦	제패하다	LEX-5015		大会を制した 대회를 제패했다			
 argument-senses:5145	あおり|煽り	n	sense	after=の next=で	여파	LEX-5015		不況のあおりで 불황의 여파로			
 argument-senses:5100	持つ	v5	sense	subj=電池|バッテリー|充電|食料|食糧|酸素|燃料|魔力|結界|障壁|シールド|防壁	버티다	LEX-5013		バッテリーが持たない 배터리가 버티지 않는다			
+argument-senses:5180	寝返る	v5	sense	dat=*	배신하다	LEX-5230		敵に寝返った者 적에게 배신한 자			
+argument-senses:5181	噴き出す|吹き出す|ふきだす	v5	sense	after=思わず|つい|ぷっと|プッと|ぶっと|ブッと|たまらず|堪らず|堪えきれず|こらえきれず|一斉に obj=-	웃음을 터뜨리다	LEX-5230		思わず噴き出してしまった 나도 모르게 웃음을 터뜨려 버렸다			
+argument-senses:5182	結ぶ	v5	sense	obj=関係|同盟|縁|約束|絆|友好|縁組|主従|盟約|友情|信頼関係	맺다	LEX-5230		易々とは結べない関係 손쉽게는 맺을 수 없는 관계			
+argument-senses:5183	沈む	v5	sense	subj=日|太陽|夕日|陽|お日様|夕陽	지다	LEX-5230		日が沈む 해가 지다			
+argument-senses:5184	真剣	n	sense	next=を|が|は|も|で|の|一刀|一本	진검	LEX-5230		真剣を差してある 진검을 차 두었다			
+argument-senses:5185	差す|挿す	v5	sense	obj=@weapon|真剣|刀|脇差|脇差し|太刀|小太刀|短刀|木刀|大小	차다	LEX-5230		真剣を差してある 진검을 차 두었다			
+argument-senses:5186	日	n	sense	pred=沈む|昇る|しずむ	해	LEX-5230		日が沈む 해가 지다			

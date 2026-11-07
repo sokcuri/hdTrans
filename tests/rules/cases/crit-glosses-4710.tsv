@@ -29,7 +29,7 @@ cx:notice-words-1:126	司令さん、頑張ってるのね～。	사령관 씨, 
 lexical:false-friend	司令官に報告する。	사령관에 보고한다.	keep	lookup
 lexical:false-friend	司令部より入電。	사령부에서 입전.	keep	lookup
 lexical:false-friend	副長、状況は？	부장, 상황은?	keep	lookup
-lexical:false-friend	強い絆を結んだ艦娘を旗艦とした第一艦隊でリランカ島へ出撃、敵中枢を撃滅せよ！	강한 유대를 묶은 칸무스를 기함으로 한 제1함대로 리란카섬에 출격, 적 중추를 격멸하라!	fix	lookup
+lexical:false-friend	強い絆を結んだ艦娘を旗艦とした第一艦隊でリランカ島へ出撃、敵中枢を撃滅せよ！	강한 유대를 맺은 칸무스를 기함으로 한 제1함대로 리란카섬에 출격, 적 중추를 격멸하라!	fix	lookup
 lexical:false-friend	ボールが的中した。	공이 적중했다.	keep	lookup
 lexical:sino-gloss	三時限目の授業	3교시의 수업	fix	lookup
 lexical:sino-gloss	二時限目、体育だっけ	2교시, 체육이었나	fix	lookup
