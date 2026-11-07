@@ -755,7 +755,10 @@ void BuildTexts(const tokenizer::Tokens& tokens, const word::Analysis& analysis,
             texts[j].type = tokens[j].type;
             texts[j].span = tokens[j].span;
             texts[j].text = std::string(tokens.Raw(j));
-            if (tokens[j].span != 0) texts[j].spanText = std::string(tokens.Raw(j));
+            if (tokens[j].span != 0) {
+                texts[j].spanText = std::string(tokens.Raw(j));
+                texts[j].spanSource = texts[j].spanText.size();
+            }
         }
     }
     for (int j = first; j <= last; j++) {

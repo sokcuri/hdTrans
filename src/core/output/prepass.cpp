@@ -1967,7 +1967,8 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             Add(out, " ");
         }
         if (tok.span != 0) {
-            std::string extra = tok.text.substr(std::min(tok.spanText.size(), tok.text.size()));
+            const std::size_t source = tok.spanSource == std::string::npos ? tok.spanText.size() : tok.spanSource;
+            std::string extra = tok.text.substr(std::min(source, tok.text.size()));
             if (const std::string_view t = TextTail(out); tok.span == SpanClose && i > first &&
                                                          tokens[i - 1].type != tokenizer::kTypeAsciiSpace &&
                                                          t.ends_with(" ")) {
