@@ -1641,6 +1641,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             HangulWord(nextEntry)) {
             return Result(std::move(t), true);
         }
+        // LEX-5001: a Korean determiner (ko.determiner: 무슨, 어떤, 모든) is written apart from the noun it
+        // modifies (何の音 무슨 소리, not 무슨소리).
+        if (nextKind == '1' && dict::InClass(HDTRANS_CLASS("ko.determiner"), t) && HangulWord(nextEntry)) {
+            return Result(std::move(t), true);
+        }
     }
     // A number joins a noun after it that starts with a counter read in Sino-Korean (2000년
     // 후, 14일째) unless it is the verbal noun of the predicate (1 회복했다), and an ordinal

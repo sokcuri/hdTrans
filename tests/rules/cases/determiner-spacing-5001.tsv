@@ -1,0 +1,28 @@
+# 규칙: LEX-5001
+rule	input	expected	kind	layer
+compose:determiner-apart	「……何の音？」	has:무슨 소리?	fix	compose
+compose:determiner-apart	何の音だ？	has:무슨 소리야?	fix	compose
+compose:determiner-apart	「で、何の用だ？」	has:무슨 용무야?	fix	compose
+compose:determiner-apart	「で、俺に何の用？」	has:무슨 용무?	fix	compose
+compose:determiner-apart	「レナか！ こんな朝っぱらから何の用だよ…。」	has:무슨 용무야	fix	compose
+compose:determiner-apart	謎？謎って何の謎だ？	has:무슨 수수께끼야?	fix	compose
+compose:determiner-apart	紬ちゃんの血は何色ですか！？	has:무슨 색입니까	fix	compose
+compose:determiner-apart	今日は何の日？ ……子日だよー！	has:무슨 일?	fix	compose
+compose:determiner-apart	「何の事かな」	has:무슨 일일까	fix	compose
+compose:determiner-apart	ひょっとして今の聞いてた？ああ。いや、何の事？	has:무슨 말?	fix	compose
+compose:determiner-apart	「わしが貴様のような得体の知れない輩を招いて何の得があると言うのじゃ」	has:무슨 이득이	fix	compose
+compose:determiner-apart	　不気味なほど、何の音も伝わってこなかった。	has:어떤 소리도	fix	compose
+compose:determiner-apart	何の縁もないご令嬢に頼むなど	has:아무 인연도	fix	compose
+compose:determiner-apart	何の奇もないところに量ることのできないものがある。	has:아무 진기함도	fix	compose
+compose:determiner-apart	凪がとある店の前で足を止めた。	lacks:어떤점	fix	compose
+compose:determiner-apart	とある村に行った	has:어떤 마을에	fix	compose
+compose:determiner-apart	何の話？	has:무슨 이야기?	keep	compose
+compose:determiner-apart	そんなことをしても何の意味もない	has:아무 의미도 없다	keep	compose
+compose:determiner-apart	何もない	has:아무것도 없다	keep	compose
+compose:determiner-apart	どんな人だった？	has:어떤 사람이었어?	keep	compose
+compose:determiner-apart	あらゆる手段を使う	has:모든 수단을	keep	compose
+dict:w:34620	私たちは何の為に戦っているのだろうね	has:무엇을 위해서 싸우고	fix	lookup
+dict:w:34620	君は何の為にここにいる？	lacks:무슨	fix	lookup
+dict:w:34620	「そりゃ、何の為に」	lacks:무슨	fix	lookup
+dict:w:34621	何の為の訓練だ	has:무엇을 위한 훈련	fix	lookup
+dict:w:34620	何のために来たの？	has:뭘 위해서 왔어?	keep	lookup
