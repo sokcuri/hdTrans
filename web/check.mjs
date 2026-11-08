@@ -273,15 +273,21 @@ async function progressCheck() {
 async function speechCheck() {
   const pick = (value) => evaluate(`(() => { const s = document.getElementById('speech');
     s.value = '${value}'; s.dispatchEvent(new Event('change')); })()`);
-  const strict = (await translate('「明日、海に行く」')).out;
+  const strict = (await translate('「海に行く」')).out;
   await pick('soft');
   const soft = (await settled()).out;
   const saved = await evaluate(`localStorage.getItem('hdtrans.speech')`);
   await pick('strict');
   const back = (await settled()).out;
-  const ok = soft !== strict && back === strict && saved === 'soft';
+  // an intent with a time cue reads -ㄹ 거야 in both modes (spec SPC-1)
+  const intent = (await translate('「明日、海に行く」')).out;
+  await pick('soft');
+  const intentSoft = (await settled()).out;
+  await pick('strict');
+  await settled();
+  const ok = soft !== strict && back === strict && saved === 'soft' && intent === intentSoft;
   failed ||= !ok;
-  console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
+  console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}, intent ${intent} / ${intentSoft}`);
 }
 
 // outputCheck shows a two-line translation in each 출력 mode and checks the

@@ -466,7 +466,8 @@
 //= speech.old-self-lookalike	Text that holds a member of speech.old-self-cue and is no old speech (じゃない, じゃあ, それじゃ).
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-lookalike	Words that hold a mark of speech.polite-grammar and are no polite speech (ますます).
-//= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= speech.polite-answer	Answers that open a reply (はい, いいえ, いえ, いや, いいや, ええ): a line that says one may speak politely although its end is plain, so its closing ので keeps 기 때문에 (spec REG-3).
+//= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください, the honorific negative なさら of お〜なさらず).
 //= spelling.cry-kanji	Kanji spellings of a cry, KANJI=KANA, read as the kana where they start an utterance and a drawn-out run follows before a pause (嫌ぁぁぁ いやぁぁぁ, 嫌っ！ いやっ！).
 //= spelling.katakana-copula	The copula です written in katakana, alone or with a final particle, respelled like spelling.katakana-ending (私デース 私でーす, 秋刀魚デスネー).
 //= spelling.katakana-copula-kept-after	Ends of a predicate (a past in た or だ after the kana that a verb conjugates with, a progressive in てる or でる) after which spelling.katakana-copula stays in katakana: the verb and です do not make a sentence (言ったデース, 何してるデース; not あなたデス, まだデス).
@@ -6133,7 +6134,14 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
+speech.polite-grammar	なさら
 speech.polite-lookalike	ますます
+speech.polite-answer	はい
+speech.polite-answer	いいえ
+speech.polite-answer	いえ
+speech.polite-answer	いや
+speech.polite-answer	いいや
+speech.polite-answer	ええ
 spelling.cry-kanji	嫌=いや
 spelling.katakana-copula	デス
 spelling.katakana-copula	デスネ

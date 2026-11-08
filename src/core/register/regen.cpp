@@ -911,6 +911,12 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         const auto quoteAt = [&](std::size_t q) -> const RegDecision::Quote& {
             return dec.quotes[std::min(quoteOf[q], dec.quotes.size() - 1)];
         };
+        // the last sentence end of each quote (a final V node, not nested, not -ㄹ까 하다, not before a comma)
+        std::vector<std::size_t> lastEnd(nodes.empty() ? 1 : quoteOf.back() + 1, nodes.size());
+        for (std::size_t q = 0; q < nodes.size(); ++q) {
+            const bool comma = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
+            if (nodes[q].kind == Kind::V && nodes[q].ctype == CType::final_ && !nested[q] && !thinkOf(q) && !comma) lastEnd[quoteOf[q]] = q;
+        }
         std::vector<Reg> reg;
         UttLevel u;
         u.narration = dec.narration;
@@ -986,6 +992,52 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 for (const char* key : {"mixed.hapsyo", n.kind == Kind::Raw ? "mixed.haeyo" : "mixed.word"})
                     if (EndsWithAny(n.lemma, t.G(key))) mixed = true;
             }
+            // REG-12: where a quote's last sentence end is already at the quote's level, an inner sentence end takes that
+            // level only where its source sentence ends in a negative (間に合わない。急げよ 늦어. 서둘러), read on the source's
+            // sentence ends, one for one with the translation's when the counts agree; another plain -다 before it may be an
+            // exclamation, a declaration or an authoritative statement that keeps it
+            const std::vector<std::u32string> sourceEnds = !u.narration && !perQuote ? SourceSentenceEnds(line.ja) : std::vector<std::u32string>{};
+            std::vector<std::size_t> sentenceAt(nodes.size(), 0);
+            std::size_t sentences = 0;
+            {
+                bool tail = false;
+                for (std::size_t k = 0; k < nodes.size(); ++k) {
+                    const bool boundary = nodes[k].kind == Kind::Punct && !nested[k] &&
+                                          (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl);
+                    if (boundary) {
+                        if (tail) ++sentences;
+                        tail = false;
+                    } else if (nodes[k].kind != Kind::Punct) {
+                        tail = true;
+                    }
+                    sentenceAt[k] = sentences;
+                }
+                if (tail) ++sentences;
+            }
+            const bool aligned = !sourceEnds.empty() && sentences == sourceEnds.size();
+            const auto sourceEndIs = [&](std::size_t q, const char* key) {
+                return aligned && sentenceAt[q] < sourceEnds.size() && EndsWithAny(ToU8(sourceEnds[sentenceAt[q]]), t.G(key));
+            };
+            const auto negativeSource = [&](std::size_t q) {
+                return sourceEndIs(q, "source.inner-negative") && !sourceEndIs(q, "source.inner-negative-not") &&
+                       !sourceEndIs(q, "source.inner-keep");
+            };
+            // only where the last sentence end is already at the quote's level: when it changes too, the whole quote
+            // changes as before
+            const auto lastChanges = [&](std::size_t q) {
+                const std::size_t last = lastEnd[quoteOf[q]];
+                if (last >= nodes.size()) return false;
+                for (const auto& g : reg)
+                    if (g.node == nodes[last].id) return g.level != nodes[last].was;
+                return false;
+            };
+            const auto innerKept = [&](std::size_t q) {
+                const Node& n = nodes[q];
+                if (n.ctype != CType::final_ || q == lastEnd[quoteOf[q]] || lastChanges(q)) return false;
+                // the でしょう(ね) of a guess in a casual quote is the casual guess too (受け持っていたのでしょうね。 맡고 있었겠지)
+                const bool guess = n.was == Level::haeyo && sourceEndIs(q, "source.casual-guess");
+                return !negativeSource(q) && !guess;
+            };
             for (std::size_t q = 0; q < nodes.size(); ++q) {
                 if (nodes[q].kind != Kind::V) continue;
                 const Level was = nodes[q].was;
@@ -1030,7 +1082,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 const bool declared = dec.declBang && lastWord && was == Level::haera && nodes[q].ctype == CType::final_ &&
                                       nodes[q].mood == Mood::decl && nodes[q].tense == Tense::nonpast && SingleVerb(nodes, q);
                 const bool keep = (perQuote ? quoteAt(q).keep : dec.keep) || thinkOf(q) || nested[q] || trail || trailing ||
-                                  declared;
+                                  declared || innerKept(q);
                 // REG-21: a plain 주다, or 보다 after a verb or for てみる, at the end (빌려 준다, 해 본다) has in 해체 the
                 // form that asks (빌려 줘, 해 봐): the speaker's own will (てあげる, てみる, お前に貸してやる) is a promise, -ㄹ게;
                 // any other keeps -다 (殺してやる: a threat, not 죽여 줄게)
@@ -1042,7 +1094,11 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
                                   (command && dec.key.starts_with("scene-speech")) || (give && !dec.giveDecl);
                 if (!held && give) nodes[q].eomi = "lge";
-                if (!held && raisePlain) {
+                // REG-3: in a lady's polite quote (polite-fem) a plain end the source closes with かな muses to oneself:
+                // it stays plain (売っても良いかな？ 팔아도 좋을까?)
+                const bool musing = dec.key == "polite-fem" && sourceEndIs(q, "source.musing") &&
+                                    (was == Level::haera || was == Level::hae);
+                if (!held && (raisePlain || musing)) {
                     // the plain end stays plain, at the dialogue level of REG-2 (해), not raised to 해요
                     for (auto& g : reg)
                         if (g.node == nodes[q].id) {
@@ -1069,6 +1125,31 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 }
             u.level = Level::haera;
         }
+        // REG-12: where the last sentence end of a quote keeps its plain 해라체 (a declaration, -ㄴ가, a -라 command), the
+        // sentence ends before it keep theirs too: one level for the quote
+        if (options.levels && !dec.narration) {
+            const std::size_t quotes = nodes.empty() ? 1 : quoteOf.back() + 1;
+            for (std::size_t qi = 0; qi < quotes; ++qi) {
+                const std::size_t last = qi < lastEnd.size() ? lastEnd[qi] : nodes.size();
+                if (last == nodes.size()) continue;
+                // a command in 해라 -라 (持ってけ 가져가라) is plain whatever level the reader gives it
+                const bool command = nodes[last].eomi == "ra";
+                if (nodes[last].was != Level::haera && !command) continue;
+                Level lastNow = Level::none;
+                for (const auto& g : reg)
+                    if (g.node == nodes[last].id) lastNow = g.level;
+                if (lastNow != Level::haera && !command) continue;
+                for (std::size_t q = 0; q < last; ++q) {
+                    if (quoteOf[q] != qi || nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nodes[q].was != Level::haera)
+                        continue;
+                    for (auto& g : reg)
+                        if (g.node == nodes[q].id) {
+                            g.level = Level::haera;
+                            g.hon = false;
+                        }
+                }
+            }
+        }
         // REG-18: an exclamation with な on a predicate (寒いなぁ) ends in 해체 -네 (춥네): the last sentence end
         bool neChanged = false;
         if (options.levels && dec.exclaimNe && !dec.narration) {
@@ -1094,7 +1175,9 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         const std::size_t quoteCount = nodes.empty() ? 1 : quoteOf.back() + 1;
         for (std::size_t qi = 0; qi < quoteCount; ++qi) {
             Level end = Level::none;
-            bool lastChanged = false;  // the quote's last sentence end (a V node, not a Raw word) changes level
+            // a sentence end of the quote (a V node, not a Raw word) changes level; REG-12: every sentence end of a quote
+            // takes the quote's level, so an inner one that changes changes the quote too (늦는다. 서둘러 → 늦어. 서둘러)
+            bool lastChanged = false;
             std::vector<Level> innerPolite;
             for (std::size_t q = 0; q < nodes.size(); ++q) {
                 const Node& n = nodes[q];
@@ -1105,7 +1188,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     if (g.node == n.id) now = g.level;
                 if (now == Level::none) continue;
                 const bool inner = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
-                if (!inner) lastChanged = n.was != Level::none && n.was != now;
+                if (!inner && n.was != Level::none && n.was != now) lastChanged = true;
                 if (inner) {
                     if (now == Level::haeyo || now == Level::hapsyo) innerPolite.push_back(now);
                 } else if (end == Level::none) {

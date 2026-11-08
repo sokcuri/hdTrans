@@ -857,6 +857,7 @@ struct LineSpeech {
     bool poiTic = false;
     bool humble = false;
     bool formal = false;
+    bool politeAnswer = false;  // the line answers はい or いいえ (speech.polite-answer)
     bool threat = false;
     bool oldSelf = false;
     bool taste = false;
@@ -1134,6 +1135,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         settings.lineLevel = LineLevelOf(s.decision->level);
         settings.authoritative = s.decision->authoritative;
         settings.prose = s.decision->prose;
+        settings.casualCue = s.decision->key == "casual" && !speech.politeAnswer;
         settings.quoteLevels = s.quoteLevels;
     }
     settings.poiTic = speech.poiTic;
@@ -1285,6 +1287,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.formal = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.formal-cue")),
                                         dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
         speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.politeAnswer = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.polite-answer")), {});
         speech.taste = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("word.taste-cue")), {});
         speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
                                          dict::ClassMembers(HDTRANS_CLASS("speech.old-self-lookalike")));
