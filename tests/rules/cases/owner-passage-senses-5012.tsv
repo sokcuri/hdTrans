@@ -53,8 +53,8 @@ cx:web-fixes-j:260	事件には関わらないで	!rule:cx:web-fixes-j:260	keep	
 cx:web-fixes-j:261	多くの人と関わる仕事がしたい	has:많은 사람과 관계를 맺는 일	fix	rewrites
 cx:web-fixes-j:261	「学園を楽しくする活動で人と関わっていけば、性格が変わるんじゃないかって話だったが」	has:사람과 관계를 맺어 가면	fix	rewrites
 cx:web-fixes-j:261	あの時 彼女が関わっていたなら	!rule:cx:web-fixes-j:261	keep	rewrites
-cx:web-fixes-j:262	裏を返せば、人間をやめることでしか家族に関われなかった男でもあったのだ。	has:가족과 관계를 맺을 수 없었던	fix	rewrites
-cx:web-fixes-j:262	製造コストも保険の審査に関わりますか やっぱり。	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:263	裏を返せば、人間をやめることでしか家族に関われなかった男でもあったのだ。	has:가족과 관계를 맺을 수 없었던	fix	rewrites
+cx:web-fixes-j:263	製造コストも保険の審査に関わりますか やっぱり。	!rule:cx:web-fixes-j:263	keep	rewrites
 cx:web-fixes-j:257	なるべく まっすぐになるように 気をつけましょう	has:가능한 한 똑바로	fix	rewrites
 cx:web-fixes-j:257	次の世代のためにも なるべく平和な里を残したいよね	!rule:cx:web-fixes-j:257	keep	rewrites
-cx:web-fixes-j:262	魔法に関わることだし、エレナも興味があったのかも。	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:263	魔法に関わることだし、エレナも興味があったのかも。	!rule:cx:web-fixes-j:263	keep	rewrites
