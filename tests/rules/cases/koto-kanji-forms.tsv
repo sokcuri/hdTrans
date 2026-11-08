@@ -47,8 +47,8 @@ normalize:spelling-variant	全力で見なかった事にした。	전력으로 
 normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
 normalize:spelling-variant	信じてもいない事を言わないで下さい。	믿지도 않은 말을 말하지 마세요.	keep	normalize
 normalize:spelling-variant	「？　何かおかしな事を言ったか？」	「? 뭔가 이상한 말을 말했나?」	keep	normalize
-normalize:spelling-variant	小さな私の事も…覚えていてくださいね。	작은 제 일도…기억하고 있어 주세요.	keep	normalize
-normalize:spelling-variant	なんで 僕の事がわかったんですか？	왜 제 일을 알 수 있었습니까?	keep	normalize
+normalize:spelling-variant	小さな私の事も…覚えていてくださいね。	has:작은 저도	fix	normalize
+normalize:spelling-variant	なんで 僕の事がわかったんですか？	has:저를 알	fix	normalize
 normalize:spelling-variant	私の事丈博さんから聞いてませんか？	제 일다케히로 씨에게서 듣지 않습니까?	keep	normalize
 cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
 cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites

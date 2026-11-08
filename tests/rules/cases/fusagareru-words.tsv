@@ -33,5 +33,5 @@ lookup:novel-words	抗議の声を上げる真帆の口を舌で塞ぐ。	항의
 lookup:novel-words	小太刀が自信に満ちた表情を浮かべる。	작은 칼이 자신감으로 가득 찬 표정을 짓는다.	keep	lookup
 lookup:novel-words	堰を切ったように、言葉が溢れてくる。	봇물이 터진 것처럼, 말이 새어 나온다.	keep	lookup
 lookup:novel-words	溢れたその体液を、凪が舌先ですくう。	흘러넘친 그 체액을, 지가 혀끝 (로) 건진다.	keep	lookup
-lookup:novel-words	凪が喜ぶと、結合部から愛液が溢れる。	지가 기뻐하면, 결합부에서 애액이 흘러넘친다.	keep	lookup
+lookup:novel-words	凪が喜ぶと、結合部から愛液が溢れる。	has:나기가 기뻐하면	fix	lookup
 lookup:novel-words	「ああ……筧くんが、溢れちゃう……」	「아……카케이 군이, 흘러넘칠 것 같아……」	keep	lookup

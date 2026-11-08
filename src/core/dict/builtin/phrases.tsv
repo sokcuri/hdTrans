@@ -1041,11 +1041,11 @@
 あいててて	아야야	intj
 わかるわかる	알아 알아	intj
 もち	당연하지	intj
-あたい	나	n	attr=VHn
 こんの	이 녀석	intj
 あかん	안 돼	intj
 あかーん	안 돼	intj
 あっかーん	안 돼	intj
+あたい	나	pron
 んじゃ	그럼	intj
 いっくよ	간다	intj
 いっくぞ	간다	intj
@@ -1229,7 +1229,7 @@
 驚くなかれ	놀라지 마라	adv
 驚く無かれ	놀라지 마라	adv
 馬が合う	마음이 맞다	v5
-わたくし	저	n	attr=VHn
+わたくし	저	pron
 わたくしたち	저희	n	attr=VHn
 わたくし達	저희	n	attr=VHn
 どけ	비켜	intj

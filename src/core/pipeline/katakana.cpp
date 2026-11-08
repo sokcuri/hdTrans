@@ -8,6 +8,7 @@
 #include "core/names/labels.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -1172,19 +1173,22 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             prose = prose && r->prose;
         }
         if (words >= 2 && prose) continue;
-        // A line whose only run that reads as words is a name of the document or a person or place
-        // of the name layer, spelling no native word whole, is that name called (「――コレット！！」);
-        // so is one whose reading conjugates a stem wrongly (アレッタ……).
-        if (words == 1) {
+        // A line whose runs that read as words are all names of the document or persons or places
+        // of the name layer, spelling no native word whole, is those names called (「――コレット！！」,
+        // トウヤ、…トウヤ。); so is one whose only such run conjugates a stem wrongly (アレッタ……).
+        if (words >= 1) {
+            bool names = true;
             const KataRun* only = nullptr;
             for (const KataRun* r : all) {
-                if (!r->pieces.empty()) only = r;
+                if (r->pieces.empty()) continue;
+                only = r;
+                const std::string key = Utf8(r->kana);
+                bool name = ctx.named != nullptr && ctx.named->contains(key);
+                for (const dict::Record& rec : snap.NameRecords(key)) name = name || (rec.codes != nullptr && rec.codes->sem.HasPrefix("QP"));
+                names = names && name && KeyTags(ToHiragana(key), ctx, snap).empty();
             }
-            const std::string key = Utf8(only->kana);
-            bool name = ctx.named != nullptr && ctx.named->contains(key);
-            for (const dict::Record& r : snap.NameRecords(key)) name = name || (r.codes != nullptr && r.codes->sem.HasPrefix("QP"));
-            if (name && KeyTags(ToHiragana(key), ctx, snap).empty()) continue;
-            if (StemMisconjugated(*only, snap)) continue;
+            if (names) continue;
+            if (words == 1 && StemMisconjugated(*only, snap)) continue;
         }
         bool okurigana = false;
         if (IsKataSpeech(japanese, all)) {
@@ -1636,7 +1640,15 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
                     if (!base.empty() || afterKanji || CountRunes(head, [](char32_t) { return true; }) < 2 || !snap.NamePerson(head)) {
                         continue;
                     }
-                    std::string kr = snap.NameReading(head);
+                    // The name as its person row writes it, as the name standing alone reads (トウヤっち 토야치 beside
+                    // トウヤ 토야).
+                    std::string kr;
+                    const std::string fan = snap.NameReading(head);
+                    for (const dict::Record& rec : snap.NameRecords(head)) {
+                        if (kr.empty() && !fan.empty() && rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN") && text::SameSound(rec.target, fan)) {
+                            kr = std::string(rec.target);
+                        }
+                    }
                     if (kr.empty()) kr = text::FromKana(head, text::Preset::FanShort);
                     if (kr.empty()) continue;
                     hangul = kr + text::FromKana(suffix, text::Preset::FanShort);
