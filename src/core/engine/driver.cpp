@@ -715,7 +715,12 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
                                      (one(j) && (one(j - 1) || (j + 1 < n && tokens[static_cast<std::size_t>(j + 1)].afterSpace && one(j + 1))));
                 const bool noun = lead != nullptr && lead->entry.code.starts_with("1") && !lead->entry.text.empty() &&
                                   !previous.entry.code.starts_with("6") && !previous.entry.text.empty() && !spelled;
-                if (previous.entry.code.starts_with("32") ||
+                // An unknown kana word after the space (ぞうれっしゃ合唱団) is a word of its own too: the
+                // compose stage reads it by sound (KeepDropped) or leaves the space.
+                const bool unknownLead = head >= 0 && items[static_cast<std::size_t>(head)].entry.text.empty() &&
+                                         items[static_cast<std::size_t>(head)].entry.gattr.find("Nm") != std::string::npos &&
+                                         !previous.entry.text.empty() && !spelled;
+                if (previous.entry.code.starts_with("32") || unknownLead ||
                     (previous.detailClass == output::DetailClass::None &&
                      dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1)))) ||
                     noun) {

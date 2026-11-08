@@ -747,7 +747,9 @@ std::vector<std::u32string> ParenthesizedGroups(std::string_view source) {
 // of a reading or a name reads once translated (저(저) 저, 미카(미카) 미카), or that repeats the end of
 // the word as the reading of its last kanji (魔剣（けん） 마검). A gloss repeating the end of the word
 // stays when its source group is katakana, a short name after the full one (セレスティナ（ティナ）
-// 세레스티나(티나)); groups of line and source pair by order when both have as many.
+// 세레스티나(티나)), and a group with a kanji that repeats only the end of the word is text, not a reading
+// (28日（日） 28일(일)); groups of line
+// and source pair by order when both have as many.
 std::string DropEchoedGlosses(std::string_view line, std::string_view source) {
     std::u32string rs = Runes(line);
     const std::vector<std::u32string> groups = ParenthesizedGroups(source);
@@ -776,6 +778,10 @@ std::string DropEchoedGlosses(std::string_view line, std::string_view source) {
         while (word > 0 && hangul(rs[word - 1])) word--;
         if (i - word < n || rs.compare(i - n, n, rs, i + 1, n) != 0) continue;
         if (i - word > n && paired && katakana(groups[at])) continue;
+        // A group with a kanji that repeats only the end of the word is no reading but text of its own
+        // (28日（日） 28일(일), the weekday); one that repeats the whole word is (マミーヤ（間宮） 마미야).
+        const bool counted = word > 0 && rs[word - 1] >= U'0' && rs[word - 1] <= U'9';  // 28일: the word is 28일
+        if ((i - word > n || counted) && paired && std::any_of(groups[at].begin(), groups[at].end(), [](char32_t r) { return text::IsKanji(r); })) continue;
         rs.erase(i, n + 2);
         i--;
     }

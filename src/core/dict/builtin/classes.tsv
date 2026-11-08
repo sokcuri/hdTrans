@@ -138,6 +138,7 @@
 //= follower.kata-adjective-stem	Endings after which the hiragana spelling of a katakana run that no katakana word reads is an i-adjective stem (クサい, オモシロかった).
 //= follower.kata-adverb	What a katakana adverb read in hiragana takes after it as part of its key (シッカリと, ロクに), and the particles and verb starts before which a katakana mimetic said twice reads as an adverb (ジワジワと, ドロドロに, イロイロやる).
 //= follower.kata-noun	What may follow a katakana noun: particles, the copula and honorifics (イカなんて, イカを).
+//= follower.unread-kana	Particles that, at the start of a kana run no dictionary word read after a katakana word, show the run is a particle the analysis missed, not a word to read by sound (クイーンてば, クラブこそ).
 //= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
 //= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
@@ -1736,6 +1737,10 @@ follower.kata-noun	だけ
 follower.kata-noun	しか
 follower.kata-noun	ね
 follower.kata-noun	よ
+follower.unread-kana	てば
+follower.unread-kana	こそ
+follower.unread-kana	さえ
+follower.unread-kana	すら
 
 follower.kata-pronoun	は
 follower.kata-pronoun	が
