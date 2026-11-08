@@ -88,8 +88,6 @@ int ClassifySelected(const ResolvedItem& it) {
 
 char32_t FirstRune(std::string_view s) { return text::DecodeRune(s).cp; }
 
-// Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
-// same surface and Korean, a Korean of two equal halves (부슬부슬).
 // Whether a word of the class (noun.weather-come, noun.rising-level) is the subject of the verb at item i: the
 // noun and a subject particle of particle.copies-subject (雪が, 物価は) before it in its clause, back to a comma
 // or the end of a sentence.
@@ -105,6 +103,8 @@ bool SubjectIn(const std::vector<ResolvedItem>& items, int i, dict::ClassId cls)
     return false;
 }
 
+// Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
+// same surface and Korean, a Korean of two equal halves (부슬부슬).
 bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
     const std::string_view ko = EntryText(a);
     const size_t half = ko.size() / 2;
