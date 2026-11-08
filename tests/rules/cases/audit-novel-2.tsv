@@ -1,0 +1,77 @@
+# 규칙: LEX-5651
+rule	input	expected	kind	layer
+dict:audit-novel-2	十九駆、見参！	has:등장!	fix	lookup
+dict:audit-novel-2	川内、参上！	has:등장!	fix	lookup
+dict:audit-novel-2	ご挨拶に参上しました。	has:찾아 뵈었습니다	keep	lookup
+dict:audit-novel-2	夕餉の支度をする。	has:저녁밥 준비	fix	lookup
+dict:audit-novel-2	すこしだけ待って。	has:조금만 기다려	fix	lookup
+dict:audit-novel-2	成る程な。	has:그렇구나	fix	lookup
+dict:audit-novel-2	いい飲みっぷりだね。	has:마시는 모습	fix	lookup
+dict:audit-novel-2	気が散って勉強できない。	has:정신이 산만해져	fix	lookup
+dict:audit-novel-2	浜辺に流れ着いた。	has:해변에 밀려왔다	fix	lookup
+dict:audit-novel-2	物知りだな。	has:척척박사네	fix	lookup
+dict:audit-novel-2	物知りなお爺さん	has:박식한 할아버지	fix	lookup
+dict:audit-novel-2	すごいワザだ。	has:대단한 기술	fix	lookup
+dict:audit-novel-2	よそ者は帰れ。	has:외지인은	fix	lookup
+dict:audit-novel-2	気安く呼ぶな。	has:스스럼없이	fix	lookup
+dict:audit-novel-2	ほうじ茶でいいか？	has:호지차	fix	lookup
+dict:audit-novel-2	とっておきのワインを開けよう。	has:비장의 와인	fix	lookup
+dict:audit-novel-2	お父ちゃん、ただいま。	has:아빠	fix	lookup
+dict:audit-novel-2	迷惑な話だ。	has:민폐인 이야기	fix	lookup
+dict:audit-novel-2	カワイイ服だね。	has:귀여운 옷	fix	lookup
+dict:audit-novel-2	カワイイ！	has:귀여워	keep	lookup
+dict:audit-novel-2	新曲のお披露目	has:신곡의 공개	fix	lookup
+dict:audit-novel-2	従者を連れてきた。	has:시종을	fix	lookup
+dict:audit-novel-2	改行してください。	has:줄바꿈해	fix	lookup
+dict:audit-novel-2	新しき時代	has:새로운 시대	fix	lookup
+dict:audit-novel-2	吊り橋を渡る。	has:흔들다리를	fix	lookup
+dict:audit-novel-2	とくと見よ！	has:똑똑히 봐라	fix	lookup
+dict:audit-novel-2	熱を出して三日も寝込んだ。	has:앓아누웠다	fix	lookup
+dict:audit-novel-2	ぐっすり寝込んでしまった。	has:잠들어버렸다	fix	lookup
+dict:audit-novel-2	たいしたことないよ。	has:별것 아니야	fix	lookup
+dict:audit-novel-2	下ごしらえをする。	has:밑준비를	fix	lookup
+dict:audit-novel-2	ふだんはおとなしい。	has:평소는	fix	lookup
+dict:audit-novel-2	大の字に寝転ぶ。	has:큰대자	fix	lookup
+dict:audit-novel-2	豆まきをしよう。	has:콩 뿌리기	fix	lookup
+dict:audit-novel-2	詳報を待つ。	has:상세 보도	fix	lookup
+dict:audit-novel-2	たたかいが始まる。	has:싸움이	fix	lookup
+dict:audit-novel-2	市電に乗る。	has:노면전차를	fix	lookup
+dict:audit-novel-2	貴様の采配を見せてもらおう。	has:지휘를	fix	lookup
+dict:audit-novel-2	交通機関が止まった。	has:교통수단이	fix	lookup
+dict:audit-novel-2	黒板消しを投げる。	has:칠판지우개를	fix	lookup
+dict:audit-novel-2	彼はナイスガイだ。	has:나이스 가이	fix	lookup
+dict:audit-novel-2	主砲を撃ちまくる。	has:마구 쏜다	fix	lookup
+dict:audit-novel-2	なんだか泣けてくる。	has:눈물이 나온다	fix	lookup
+dict:audit-novel-2	むだな努力だ。	has:쓸데없는 노력	fix	lookup
+dict:audit-novel-2	義父が来た。	has:의붓아버지가	fix	lookup
+dict:audit-novel-2	お腹すいた。	has:배고프다	fix	lookup
+dict:audit-novel-2	昼寝する。	has:낮잠 잔다	fix	lookup
+dict:audit-novel-2	プレゼントのラッピング	has:래핑	fix	lookup
+dict:audit-novel-2	北アフリカの国	has:북아프리카의	fix	lookup
+dict:audit-novel-2	竜巻が起きた。	has:회오리바람이	fix	lookup
+dict:audit-novel-2	おろかな人間め。	has:어리석은 인간	fix	lookup
+dict:audit-novel-2	謝罪はおろか、礼も言わない。	has:사죄는커녕	keep	lookup
+dict:audit-novel-2	鍾乳洞を探検する。	has:석회동굴을	fix	lookup
+dict:audit-novel-2	兵舎に戻る。	has:막사로	fix	lookup
+dict:audit-novel-2	よろしくてよ。	has:좋아요	fix	lookup
+dict:audit-novel-2	鎧袖一触よ。	has:식은 죽 먹기	fix	lookup
+dict:audit-novel-2	スイカ割りをしよう。	has:수박 깨기를	fix	lookup
+dict:audit-novel-2	運転見合わせ中です。	has:운행 중단	fix	lookup
+dict:audit-novel-2	お味は如何でしたか？	has:어땠습니까	fix	lookup
+dict:audit-novel-2	結果如何によっては	has:여하에 따라서는	fix	lookup
+dict:audit-novel-2	口からでまかせを言うな。	has:엉터리를	fix	lookup
+dict:audit-novel-2	肩こりがひどい。	has:어깨 결림이	fix	lookup
+dict:audit-novel-2	拳を握ってグーを作る	has:주먹 모양을 만든다	fix	lookup
+dict:audit-novel-2	新メンバーが入った。	has:새 멤버가	fix	lookup
+dict:audit-novel-2	新ルールを作る。	has:새 규칙을	fix	lookup
+dict:audit-novel-2	新メニューを試す。	has:신메뉴를	keep	lookup
+dict:audit-novel-2	楽勝した。	has:손쉽게 이겼다	fix	lookup
+dict:audit-novel-2	楽勝だ。	has:식은 죽 먹기다	fix	lookup
+dict:audit-novel-2	楽勝でしょ。	has:식은 죽 먹기지	fix	lookup
+dict:audit-novel-2	拳を握ってグー！いいね！	has:굿!	keep	lookup
+dict:audit-novel-2	グーを出した。	has:주먹을 냈다	fix	lookup
+dict:audit-novel-2	彼は小さな村に流れ着いた。	has:떠밀려 왔다	fix	lookup
+dict:audit-novel-2	瓶が浜辺に流れ着いた。	has:밀려왔다	keep	lookup
+dict:audit-novel-2	推参つかまつった。	has:등장했다	fix	lookup
+dict:audit-novel-2	失礼仕る。	has:실례한다	fix	lookup
+dict:audit-novel-2	こんなの楽勝だよ。	has:식은 죽 먹기야	fix	lookup

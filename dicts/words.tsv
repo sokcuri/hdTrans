@@ -14451,7 +14451,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 夕潮	저녁 조수	N110			GN				xxx llm	1		w:14376
 夕霧	저녁 안개	N110	VFrVHn		GN				llm		ゆうぎり	w:14377
 夕靄	이내	N110	VHn		GN						ゆうもや	w:14378
-夕餉	석식	N110		Om	GN						ゆうげ	w:14379
+夕餉	저녁밥	N110		Om	GN						ゆうげ	w:14379
 外つ国	이국	N110			GN						とつくに	w:14380
 外交史	외교사	N110			GN						がいこうし	w:14381
 外付	외부에 장착&AV@	M429			GN				llm		そとづけ	w:14382
@@ -16745,8 +16745,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成り済まし	신원 도용	N110			GN				xxx		なりすまし	w:16664
 成り済まし	스푸핑	N110	UTt		GN				llm		なりすまし	w:16665
 成る可く	되도록	E300			GN						なるべく	w:16666
-成る程	옳아	E300			GN				xxx		なるほど	w:16667
-成る程	옳아	E320			GN						なるほど	w:16668
+成る程	그렇구나	E300			GN				xxx		なるほど	w:16667
+成る程	그렇구나	E320			GN						なるほど	w:16668
 成功率	성공률	N110			GN						せいこうりつ	w:16669
 成熟度	성숙도	N110			GN						せいじゅくど	w:16670
 成熟期	성숙기	N110			GN						せいじゅくき	w:16671
@@ -23872,7 +23872,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 谷間	계곡	N110	VPl		GN				xxx	1	たにま	w:23793
 谿谷	계곡	N110			GN						けいこく	w:23794
 谿間	계곡	N110			GN						けいかん	w:23795
-豆まき	콩 심기	N110		Hd	GN				xxx llm		まめまき	w:23796
+豆まき	콩 뿌리기	N110		Hd	GN				xxx llm		まめまき	w:23796
 豆まき	콩 뿌리기	N110	UCl	Hd	GN				llm		まめまき	w:23797
 豆娘	실잠자리아목	N110			GN						いととんぼ	w:23798
 豆富	두부	N110			GN						とうふ	w:23799
@@ -26205,7 +26205,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 黒曹以	조피볼락	N110			GN						くろそい	w:26126
 黒板	칠판	N110			GN				xxx llm	1		w:26127
 黒板拭き	지우개	N110			GN						こくばんふき	w:26128
-黒板消し	지우개	N110			GN						こくばんけし	w:26129
+黒板消し	칠판지우개	N110			GN						こくばんけし	w:26129
 黒桧	일본측백나무	N110			GN						くろべ	w:26130
 黒梶木	녹새치	N110			GN						くろかじき	w:26131
 黒檜	일본측백나무	N110			GN						くろべ	w:26132
