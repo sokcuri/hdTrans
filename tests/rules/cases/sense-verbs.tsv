@@ -14,7 +14,7 @@ dict:jisjk:267312	風邪にかかった。	감기에 걸렸다.	keep	local
 dict:jisjk:94471	子供を引き取った。	아이를 맡았다.	fix	local
 dict:jisjk:94471	商品を引き取った。	상품을 인수했다.	keep	local
 dict:jisjk:94471	債権を引き取った。	채권을 인수했다.	keep	local
-dict:jisjk:361304	始発に間に合った。	시발에 늦지 않았다.	fix	local
+dict:jisjk:361304	始発に間に合った。	첫차에 늦지 않았다.	fix	local
 dict:jisjk:361304	時間に間に合った。	시간에 맞게 도착했다.	keep	local
 dict:jisjk:364119	今日をもって退職する。	오늘로써 퇴직한다.	fix	local
 dict:jisjk:267312	私は病院にかかった。	나는 병원에서 진료받았다.	fix	local

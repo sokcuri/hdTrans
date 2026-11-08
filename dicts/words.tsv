@@ -11653,7 +11653,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 人外	인외	N110			GN				xxx llm	1		w:11605
 人工ふ化	인공부화	N110			GN						じんこうふか	w:11606
 人工呼吸器	인공호흡기	N110			GN						じんこうこきゅうき	w:11607
-人工妊娠中絶	중절	N110	UTi		GN						じんこうにんしんちゅうぜつ	w:11608
+人工妊娠中絶	인공 임신 중절	N110	UTi		GN						じんこうにんしんちゅうぜつ	w:11608
 人工物	인공물	N110			GN						じんこうぶつ	w:11609
 人工肛門	인공항문	N110	UTi		GN						じんこうこうもん	w:11610
 人工臓器	인공 장기	N110			GN						じんこうぞうき	w:11611
@@ -12229,7 +12229,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 働きざかり	한창때	N110			GN						はたらきざかり	w:12182
 働きアリ	일개미	N110	VHn		GN						はたらきあり	w:12183
 働き始め	일하기 시작&AV@	M427			GN				llm			w:12184
-働き手	일꾼	N110	VHn		GN						はたらきて	w:12185
+働き手	일손	N110	VHn		GN						はたらきて	w:12185
 働き掛け	요청	N110			GN			LEX-5015: 政府への働き掛け 정부에 대한 요청			はたらきかけ	w:12186
 働き甲斐	일의 보람	N110			GN						はたらきがい	w:12187
 働き盛り	한창때	N110			GN						はたらきざかり	w:12188
@@ -12415,7 +12415,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 全世界	전 세계	N110			GN				xxx llm			w:12334
 全世界	온누리	N110			GN						ぜんせかい	w:12335
 全優	전 과목 우수	N110			GN				xxx llm	1		w:12336
-全壊	완전 파괴	N110			GN				xxx llm	1		w:12337
+全壊	완파	N110			GN				xxx llm	1		w:12337
 全山	산 전체	N110			GN				xxx llm	1		w:12338
 全微分	전미분	N110			GN						ぜんびぶん	w:12339
 全潰	완전 붕괴	N110		Hd	GN				llm		ぜんかい	w:12340
@@ -14411,7 +14411,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 壱百萬	백만	N110			GN						ひゃくまん	w:14335
 売っ払	팔아치&AI@	M420			GN				llm			w:14336
 売り	장점	N110			GN				xxx llm	1		w:14337
-売り上げ金	매상금	N110	VMo		GN				llm		うりあげきん	w:14338
+売り上げ金	매출금	N110	VMo		GN				llm		うりあげきん	w:14338
 売り上げ高	매출액	N110			GN						うりあげだか	w:14339
 売り仕掛け	매도 공세	N110			GN				xxx llm	1		w:14340
 売り場	매장	I110			GN				xxx	1	うりば	w:14341
@@ -17748,7 +17748,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本紅斑熱	일본홍반열	N110	UTi		GN						にほんこうはんねつ	w:17666
 日本紙	일본 종이	N110			GN				llm		にほんし	w:17667
 日本経済	일본 경제	N110			GN				llm		にほんけいざい	w:17668
-日本製	일제	N110			GN						にほんせい	w:17669
+日本製	일본산	N110			GN						にほんせい	w:17669
 日本語学	일본어학	N110			GN						にほんごがく	w:17670
 日本軍	일본군	N110			GN						にほんぐん	w:17671
 日本野兎	일본멧토끼	N110			GN						ニホンノウサギ	w:17672
@@ -18220,7 +18220,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 来孫	내손	N110			GN						らいそん	w:18139
 来援	지원	N110		Hd	GN				llm		らいえん	w:18140
 来援	도우러 &AH@	M429			GN				llm		らいえん	w:18141
-来月	내달	I110	UMe	Tm	GN				xxx	1	らいげつ	w:18142
+来月	다음 달	I110	UMe	Tm	GN				xxx	1	らいげつ	w:18142
 来航	내항	I110			GN				xxx llm	1		w:18143
 来訪	방문	I110		Hi	GN				xxx llm	1		w:18144
 来訪神	내방신	N110			GN						らいほうしん	w:18145
@@ -21105,7 +21105,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 秋まつり	가을 축제	N110			GN				llm		あきまつり	w:21022
 秋官	추관	N110			GN						しゅうかん	w:21023
 秋晴	추청	N110			GN				xxx	1	あきばれ	w:21024
-秋晴れ	추청	I110			GN				xxx	1	あきばれ	w:21025
+秋晴れ	맑은 가을 날씨	I110			GN				xxx	1	あきばれ	w:21025
 秋楡	가을느릅나무	N110			GN				xxx llm	1		w:21026
 秋興	추흥	N110			GN						しゅうきょう	w:21027
 科学主義	과학주의	N110			GN						かがくしゅぎ	w:21028

@@ -1,0 +1,18 @@
+#! layer=pack-classes
+# 뉴스 팩 행이 쓰는 곳 부류에 드는 역 이름 (LEX-5600)
+lemma	classes
+東京駅	@place
+新宿駅	@place
+渋谷駅	@place
+品川駅	@place
+上野駅	@place
+池袋駅	@place
+大阪駅	@place
+新大阪駅	@place
+京都駅	@place
+名古屋駅	@place
+博多駅	@place
+横浜駅	@place
+仙台駅	@place
+札幌駅	@place
+当駅	@place

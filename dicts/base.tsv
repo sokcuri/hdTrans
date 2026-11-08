@@ -580,7 +580,6 @@ ttt	ttt	K110			GN				jisjk:201744
 あおむし	애벌레	N110	VAm		GN				jisjk:123932		
 あおもの	야채	N110	VFdVPt		GN				jisjk:123933		
 あおやぎ	푸른 버드나무	N110	VPt		GN				jisjk:123937		
-あおられ	선동&C6@	M427			GN				jisjk:139796		
 あおり	선동	N110			GN				jisjk:6436		
 あおりたて	부추&A2@	M437			GN				jisjk:90338		
 あおり立て	부추&A2@	M437			GN				jisjk:90339		
@@ -5202,9 +5201,9 @@ ttt	ttt	K110			GN				jisjk:201744
 うら枯れ	시&L4@	M427	VPt		GN				jisjk:144606		
 うら若	젊디$FD@	H7U0			GN				jisjk:4913		
 うら街	뒷골목	I110	VPl		GN				jisjk:40441		
-うりあげ	매상	N110	VMo		GN				jisjk:127164		
-うりあげにあた	매상에 해당&AV@	M428			GN				jisjk:146450		
-うりあげをしめ	매상을 합계&AV@	M447			GN				jisjk:146455		
+うりあげ	매출	N110	VMo		GN				jisjk:127164		
+うりあげにあた	매출에 해당&AV@	M428			GN				jisjk:146450		
+うりあげをしめ	매출을 합계&AV@	M447			GN				jisjk:146455		
 うりいそ	서둘러 &K8@	M442	VMo		GN				jisjk:144639		
 うりかい	매매	N110	VMo	Hd	GN				jisjk:127168		
 うりかけ	외상 판매	N110	VMo		GN				jisjk:127169		
@@ -11383,7 +11382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 がりりと	우두둑	E311			GN				jisjk:263		
 がり刷り	등사 인쇄	I110			GN				jisjk:112277		
 がり版	등사판	I110			GN				jisjk:106357		
-がれき	기왓조각과 돌	I110			GN				jisjk:106358		
+がれき	잔해	I110			GN				jisjk:106358		
 がれき	와륵	I110			GN				jisjk:373255		
 がんえん	암염	N110	VFd		GN				jisjk:171526		-1
 がんがん	땅땅	E311			GN				jisjk:264		
@@ -14522,7 +14521,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぐるぐる	친친	E301			GN				jisjk:117234		
 ぐるぐると	빙글빙글	E311			GN				jisjk:344		
 ぐるっと	빙빙	E300			GN				jisjk:123038		
-ぐるみ	모두	K110			GN				jisjk:104246		
+ぐるみ	전체	K110			GN				jisjk:104246		
 ぐるり	둘레	I110			GN				jisjk:40899		
 ぐれ	자포자기&AV@	M417			GN				jisjk:90731		
 ぐれつ	어리석고 못%D7@	G8U0			GN				jisjk:120718		
@@ -29566,7 +29565,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そのあと	그 후	N110	UMe		GN				jisjk:200901		-1
 そのうえ	게다가	E310		J1	GN				jisjk:595		
 そのうえ	게다가	E330		J1	GN				jisjk:596		
-そのうえで	게다가	E330			GN				jisjk:118927		
+そのうえで	그런 다음	E330			GN				jisjk:118927		
 そのうえでの	그런 뒤의	E0H0			GN				jisjk:150293		
 そのうえに	그 위에	E300			GN				jisjk:149261		
 そのうち	그 중	E300	VPlUMe		GN				jisjk:597		
@@ -94539,7 +94538,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一人天下	독판	I110			GN				jisjk:80407		
 一人娘	외동딸	I110	VQwVHn		GN				jisjk:80396		
 一人寂しく	홀로 외로히	E300			GN				jisjk:265617		
-一人当たり	일인당	N110			GN				jisjk:151714		
+一人当たり	1인당	N110			GN				jisjk:151714		
 一人当千	일인 당천	N110			GN				jisjk:228407		
 一人息子	외아들	I110	VHnVQm		GN				jisjk:80402		
 一人旅	홀로 여행	I110			GN				jisjk:105679		
@@ -107510,8 +107509,8 @@ ttt	ttt	K110			GN				jisjk:201744
 与那覇岳	요나하다케	N130	VPl		GN				jisjk:223501		
 与野	요노	N130	QCT		GN				jisjk:29176		
 与野フードセンター	유노 푸드 센터	I130	QIDVGt		GN				jisjk:78176		
-与野党	여야당	I110	VGt		GN				jisjk:78177		
-与野党とも	여야당 모두	I110			GN				jisjk:118856		
+与野党	여야	I110	VGt		GN				jisjk:78177		
+与野党とも	여야 모두	I110			GN				jisjk:118856		
 与野党首	여야당수	I110	VHn		GN				jisjk:202573		
 与野市	요노시	N130	VPl		GN				jisjk:223521		
 与野市	요노시	N130	VPl		GN				jisjk:223522		
@@ -117472,7 +117471,7 @@ ttt	ttt	K110			GN				jisjk:201744
 人間らし	인간$G4@	H7U0			GN				jisjk:5868		
 人間わざ	인간의 행위	I110			GN				jisjk:80060		
 人間を置き去りに	인간을 남겨 &C7@	M419			GN				jisjk:147572		
-人間ドック	종합건강진단	N110	QHP		GN				jisjk:153960		
+人間ドック	종합 건강검진	N110	QHP		GN				jisjk:153960		
 人間並み	보통 수준	N110			GN				jisjk:248369		
 人間会計情報	인간회계정보	N110			BZ				jisjk:362698		
 人間像	인간상	N110			GN				jisjk:153959		
@@ -121858,7 +121857,7 @@ ttt	ttt	K110			GN				jisjk:201744
 位相遅れ	위상 지연	N110			GN				jisjk:152811		
 位相配列レーダー	위상 배열 레이다	N110			GN				jisjk:228265		
 位置	위치	N110	VPl	Hd	GN	361	||1 &&3 S-1== "に" A-2== "UDrVPl" D-1= "에"	位置는 앞말이 に이고 두 단어 앞의 의미 코드가 UDr·VPl이면 に를 ‘에’로 고치고 명사 ‘위치’를 고른다.	jisjk:10614		
-位置づけ	위치설정	N110		Hd	GN				jisjk:10615		
+位置づけ	자리매김	N110		Hd	GN				jisjk:10615		
 位置づけ	평가&AV@	M437	UTh		GN				jisjk:118924		
 位置づけ	자리매김&AV@	M437			GN				jisjk:140869		
 位置づけ	위치 부여&AV@	M437			GN				jisjk:140873		
@@ -121866,8 +121865,8 @@ ttt	ttt	K110			GN				jisjk:201744
 位置づけ直	다시 위치를 부여&AV@	M443			GN				jisjk:144357		
 位置エネルギー	위치 에너지	N110			GN				jisjk:228460		
 位置ベクトル	위치 벡터	N110			GN				jisjk:228423		
-位置付け	자리 매김	N110	UTh		GN				jisjk:107156		
-位置付け	자리 매김을 &AV@	M457	UTh		GN				jisjk:140866		
+位置付け	자리매김	N110	UTh		GN				jisjk:107156		
+位置付け	자리매김&AV@	M457	UTh		GN				jisjk:140866		
 位置付けられ	자리매김&C6@	M4U7			GN	4599	||1 &&2 S-1== "と" D-1= "(으)로"	と 바로 뒤에서 位置付けられ를 자리매김되다로 고르고 と를 으로로 바꾼다. (미발동: rare-word)	jisjk:367233		
 位置合わせ	위치 맞춤	I110			GN				jisjk:107157		
 位置合わせ用	얼라인먼트용	N110			GN				jisjk:164459		
@@ -122026,7 +122025,7 @@ ttt	ttt	K110			GN				jisjk:201744
 住こ	입주&AV@	M415			GN				jisjk:94955		
 住の江町	스미노에쵸	I130	QCTVPl		GN				jisjk:303643		
 住ま	&AX@	M420			GN				jisjk:114524		
-住まい	거주지	I110	VPlVSwUTs		GN				jisjk:84051		
+住まい	집	I110	VPlVSwUTs		GN				jisjk:84051		
 住まい	살림살이	I110	VCk		GN				jisjk:84052		
 住みか	거처	I110	VPl		GN				jisjk:84053		
 住みこ	입주&AV@	M415			GN				jisjk:94956		
@@ -123918,7 +123917,7 @@ ttt	ttt	K110			GN				jisjk:201744
 作業中	작업중	N110	UMe		GN				jisjk:184857		
 作業化	작업화	N110		Hd	GN				jisjk:184848		
 作業台	작업대	N110	VMo		GN				jisjk:184855		
-作業員	작업원	N110	VMoVHn		GN				jisjk:184846		
+作業員	작업자	N110	VMoVHn		GN				jisjk:184846		
 作業場	작업장	I110	VPl		GN				jisjk:82179		
 作業工程	작업 공정	N110			BZ				jisjk:354631		
 作業帽	작업모	I110	VAcVCp		GN				jisjk:82176		
@@ -129724,7 +129723,7 @@ ttt	ttt	K110			GN				jisjk:201744
 全垂惑	전수용	N130	QPN		GN				jisjk:209540		
 全域	전역	N110			GN				jisjk:32669		
 全基定	전기정	N130	QPN		GN				jisjk:209509		
-全壊	전괴	N110	VBl		GN				jisjk:199597		
+全壊	완파	N110	VBl		GN				jisjk:199597		
 全壊家屋	전괴 가옥	I110	VPl		GN				jisjk:82662		
 全天	하늘 전체	N110	VSs		GN				jisjk:239844		
 全天カメラ	전천 카메라	N110	VPe		GN				jisjk:239848		
@@ -134032,7 +134031,7 @@ ttt	ttt	K110			GN				jisjk:201744
 冷え性	냉한체질	I110			GN				jisjk:67648		
 冷え症	냉증	N110	UTi		GN				jisjk:203501		
 冷え込	차가워&AL@	M425			GN				jisjk:263706		
-冷え込み	냉각	N110	VFr		GN				jisjk:361623		
+冷え込み	추위	N110	VFr		GN				jisjk:361623		
 冷しばめ	냉간 끼움	I110			GN				jisjk:67649		
 冷た	차$KB@	H7U0			GN				jisjk:5482		
 冷たい姿勢をと	냉정한 자세를 취&AV@	M428			GN				jisjk:140939		
@@ -134998,7 +134997,7 @@ ttt	ttt	K110			GN				jisjk:201744
 出演	출연	N110		Hd	GN				jisjk:36341		
 出演者	출연자	N110	VHn		GN				jisjk:190159		
 出潮	밀물	N110	VSs		GN				jisjk:153647		
-出火	출화	N110		Hd	GN				jisjk:36373		
+出火	발화	N110		Hd	GN				jisjk:36373		
 出灰	이즈리하	N130	QCTVPl		GN				jisjk:272461		
 出炭	출탄	N110		Hd	GN				jisjk:190120		
 出炭量	출탄량	I110			GN				jisjk:103117		
@@ -138413,8 +138412,8 @@ ttt	ttt	K110			GN				jisjk:201744
 割賦価格	할부 가격	N110			BZ				jisjk:353617		
 割賦債権	할부 채권	N110			BZ				jisjk:353876		
 割賦基準	할부 기준	N110			BZ				jisjk:353619		
-割賦売上未実現益	할부 매상 미실현익	N110			BZ				jisjk:353614		
-割賦売上益	할부 매상익	N110			BZ				jisjk:353611		
+割賦売上未実現益	할부 매출 미실현익	N110			BZ				jisjk:353614		
+割賦売上益	할부 매출익	N110			BZ				jisjk:353611		
 割賦手数料	할부 수수료	N110			BZ				jisjk:353881		
 割賦未収入金	할부 미수입금	N110			BZ				jisjk:353884		
 割賦販売	할부판매	N110	VMo		GN				jisjk:168839		
@@ -148014,7 +148013,7 @@ ttt	ttt	K110			GN				jisjk:201744
 卸売会計	도매 회계	N110			BZ				jisjk:349866		
 卸売値段	도매 가격	N110			BZ				jisjk:349874		
 卸売商	도매상	N110			BZ				jisjk:349873		
-卸売売上税	도매 매상세	N110			BZ				jisjk:350103		
+卸売売上税	도매 매출세	N110			BZ				jisjk:350103		
 卸売市場	도매시장	N110			BZ				jisjk:350864		
 卸売市場法	도매시장법	N110	ULw		BZ				jisjk:359929		
 卸売業	도매업	N110			BZ				jisjk:349868		
@@ -148868,7 +148867,7 @@ ttt	ttt	K110			GN				jisjk:201744
 参照ください	참조해 주십시오	A9H1			GN				jisjk:90307		
 参照カウンタ	참조 카운터	N110			IT				jisjk:261603		
 参照編	참조편	I110			GN				jisjk:85634		
-参画	참가	N110		Hd	GN				jisjk:185610		
+参画	참여	N110		Hd	GN				jisjk:185610		
 参画者	참가자	N110	VHn		GN				jisjk:185618		
 参看	참조	N110		Hd	GN				jisjk:232872		
 参着	도착	N110		Hd	GN				jisjk:186023		
@@ -157605,7 +157604,7 @@ ttt	ttt	K110			GN				jisjk:201744
 商標権者	상표권자	N110	VHn		GN				jisjk:191199		
 商標法	상표법	N110	ULw		BZ				jisjk:360285		
 商権	상권	N110	URt		GN				jisjk:25791		
-商機	기회	N110	UMe		GN				jisjk:190695		
+商機	사업 기회	N110	UMe		GN				jisjk:190695		
 商況	상황	N110			GN				jisjk:25808		
 商法	상법	N110	ULw		GN				jisjk:25796		
 商法典	상법전	N110	VBk		GN				jisjk:363985		
@@ -161220,7 +161219,7 @@ ttt	ttt	K110			GN				jisjk:201744
 土地改革	토지 개혁	N110			GN				jisjk:245953		
 土地政策	토지 정책	N110			GN				jisjk:245964		
 土地政策審議会	토지정책 심의회	N110	VGt		BZ				jisjk:359404		
-土地柄	지방 풍습	I110			GN				jisjk:87354		
+土地柄	지역 특성	I110			GN				jisjk:87354		
 土地流動化	토지 유동화	N110			BZ				jisjk:361992		
 土地流動化策	토지유동화 정책	N110	UMn		BZ				jisjk:360388		
 土地登記簿	토지등기부	I110			GN				jisjk:87353		
@@ -165819,13 +165818,13 @@ ttt	ttt	K110			GN				jisjk:201744
 売りオペレーション	매각 오퍼레이션	I110			BZ				jisjk:68515		
 売りサイド	판매측	N110			BZ				jisjk:349280		
 売りヘッジ	매각헷지	N110			BZ				jisjk:349264		
-売り上げ	매상	I110	VMy		BZ				jisjk:68526		
+売り上げ	매출	I110	VMy		BZ				jisjk:68526		
 売り上げ	&K8@	I467			GN				jisjk:348093		
-売り上げにあた	매상에 해당&AV@	M428			GN				jisjk:146449		
-売り上げを締め	매상을 합계&AV@	M447			GN				jisjk:146453		
+売り上げにあた	매출에 해당&AV@	M428			GN				jisjk:146449		
+売り上げを締め	매출을 합계&AV@	M447			GN				jisjk:146453		
 売り上げノルマ	판매 책임량	I110			GN				jisjk:68527		
-売り上げ利潤	매상 이윤	I110			BZ				jisjk:351184		
-売り上げ増	매상 증가	N110	VMo		GN				jisjk:127166		
+売り上げ利潤	매출 이윤	I110			BZ				jisjk:351184		
+売り上げ増	매출 증가	N110	VMo		GN				jisjk:127166		
 売り主	판매측	I110	VHn		GN				jisjk:68534		
 売り仕掛け	 매각조정	N110			BZ				jisjk:363958		
 売り付け	강매&AV@	M447	VMo		GN				jisjk:144690		
@@ -165924,58 +165923,58 @@ ttt	ttt	K110			GN				jisjk:201744
 売れ行き	매출	N110			GN				jisjk:68546		
 売れ足	팔림새	I110			GN				jisjk:68545		
 売れ高	매상고	I110	VMo		GN				jisjk:68541		
-売上	매상	N110			BZ				jisjk:21509		
-売上げ	매상	I110			GN				jisjk:68552		
-売上り	매상	N110			BZ				jisjk:348778		
-売上仕訳帳	매상 분개장	I110			BZ				jisjk:348791		
-売上伝票	매상전표	N110			BZ				jisjk:348804		
-売上値引き	매상공제	N110			BZ				jisjk:348805		
-売上値引高	매상 공제액	N110			BZ				jisjk:363322		
-売上債権	매상 채권	N110			BZ				jisjk:348428		
-売上債権回収期間	매상 채권 회수 기간	N110			BZ				jisjk:348786		
-売上債権回転日数	매상채권 회전일수	N110			BZ				jisjk:348427		
-売上債権回転率	매상 채권 회전율	I110			BZ				jisjk:348787		
-売上元帳	매상 원장	N110			BZ				jisjk:349318		
-売上分析	매상 분석	N110			BZ				jisjk:349319		
+売上	매출	N110			BZ				jisjk:21509		
+売上げ	매출	I110			GN				jisjk:68552		
+売上り	매출	N110			BZ				jisjk:348778		
+売上仕訳帳	매출 분개장	I110			BZ				jisjk:348791		
+売上伝票	매출전표	N110			BZ				jisjk:348804		
+売上値引き	매출공제	N110			BZ				jisjk:348805		
+売上値引高	매출 공제액	N110			BZ				jisjk:363322		
+売上債権	매출 채권	N110			BZ				jisjk:348428		
+売上債権回収期間	매출 채권 회수 기간	N110			BZ				jisjk:348786		
+売上債権回転日数	매출채권 회전일수	N110			BZ				jisjk:348427		
+売上債権回転率	매출 채권 회전율	I110			BZ				jisjk:348787		
+売上元帳	매출 원장	N110			BZ				jisjk:349318		
+売上分析	매출 분석	N110			BZ				jisjk:349319		
 売上利益率	매출 이익률	N110			BZ				jisjk:349317		
-売上割戻	매상공제	N110			BZ				jisjk:363686		
-売上割戻し	매상공제	N110			BZ				jisjk:349315		
-売上勘定	매상 계산	N110			BZ				jisjk:348781		
-売上原価	매상원가	N110			BZ				jisjk:348421		
-売上原価率	매상 원가율	N110			BZ				jisjk:348785		
-売上収益	매상수익	N110			BZ				jisjk:348788		
-売上品構成	매상품 구성	N110			BZ				jisjk:348806		
-売上基準	매상 기준	N110			BZ				jisjk:348782		
-売上増加率	매상 증가율	N110			BZ				jisjk:348795		
-売上帳	매상장	N110			BZ				jisjk:348803		
+売上割戻	매출공제	N110			BZ				jisjk:363686		
+売上割戻し	매출공제	N110			BZ				jisjk:349315		
+売上勘定	매출 계산	N110			BZ				jisjk:348781		
+売上原価	매출원가	N110			BZ				jisjk:348421		
+売上原価率	매출 원가율	N110			BZ				jisjk:348785		
+売上収益	매출수익	N110			BZ				jisjk:348788		
+売上品構成	매출품 구성	N110			BZ				jisjk:348806		
+売上基準	매출 기준	N110			BZ				jisjk:348782		
+売上増加率	매출 증가율	N110			BZ				jisjk:348795		
+売上帳	매출장	N110			BZ				jisjk:348803		
 売上戻り	반품	N110			BZ				jisjk:363311		
-売上戻り高	매상 공제액	N110			BZ				jisjk:363323		
-売上数量	매상 수량	N110			BZ				jisjk:348792		
-売上税	매상세	N110			BZ				jisjk:348793		
-売上税引前利益率	매상세 인전 이익률	N110			BZ				jisjk:348794		
+売上戻り高	매출 공제액	N110			BZ				jisjk:363323		
+売上数量	매출 수량	N110			BZ				jisjk:348792		
+売上税	매출세	N110			BZ				jisjk:348793		
+売上税引前利益率	매출세 인전 이익률	N110			BZ				jisjk:348794		
 売上税率上げ	매출세율인상	I110			GN				jisjk:68554		
-売上純利益率	매상 순이익률	I110			BZ				jisjk:348790		
-売上純益	매상 순익	N110			BZ				jisjk:348789		
-売上総利益	매상 총이익	N110			BZ				jisjk:348797		
+売上純利益率	매출 순이익률	I110			BZ				jisjk:348790		
+売上純益	매출 순익	N110			BZ				jisjk:348789		
+売上総利益	매출 총이익	N110			BZ				jisjk:348797		
 売上総利益率	매출 총이익률	N110			BZ				jisjk:348798		
-売上総損失	매상 총손실	N110			BZ				jisjk:348796		
-売上計算基準	매상 계산 기준	N110			BZ				jisjk:348783		
-売上計算書	매상 계산서 	N110			BZ				jisjk:348784		
-売上送状	매상 운송장	N110			BZ				jisjk:348779		
-売上金	매상금	N110			GN				jisjk:127165		
-売上額	매상액	N110			BZ				jisjk:348780		
+売上総損失	매출 총손실	N110			BZ				jisjk:348796		
+売上計算基準	매출 계산 기준	N110			BZ				jisjk:348783		
+売上計算書	매출 계산서 	N110			BZ				jisjk:348784		
+売上送状	매출 운송장	N110			BZ				jisjk:348779		
+売上金	매출금	N110			GN				jisjk:127165		
+売上額	매출액	N110			BZ				jisjk:348780		
 売上高	매출액	I110		Ct	BZ				jisjk:68553		
-売上高予測	매상고 예측	N110			BZ				jisjk:348802		
-売上高予算	매상고 인식	N110			BZ				jisjk:348801		
-売上高付加価値率	매상고 부가가치율	I110			BZ				jisjk:348472		
+売上高予測	매출액 예측	N110			BZ				jisjk:348802		
+売上高予算	매출액 인식	N110			BZ				jisjk:348801		
+売上高付加価値率	매출액 부가가치율	I110			BZ				jisjk:348472		
 売上高利益率	매출액 이익률	I110	UYr		BZ				jisjk:359430		
-売上高売上原価率	매상고 매상원가율	I110	UYr		BZ				jisjk:348435		
-売上高変動費比率	매상고 변동비 비율	I110			BZ				jisjk:348486		
+売上高売上原価率	매출액 매출원가율	I110	UYr		BZ				jisjk:348435		
+売上高変動費比率	매출액 변동비 비율	I110			BZ				jisjk:348486		
 売上高税引き利益率	매출액 세후 이익률	I110	UYr		BZ				jisjk:348464		
 売上高純利益率	매출액 순이익률	I110			BZ				jisjk:348800		
-売上高経常利益率	매상고 경상 이익률	N110			BZ				jisjk:348455		
+売上高経常利益率	매출액 경상 이익률	N110			BZ				jisjk:348455		
 売上高総利益率	매출 총이익률	I110			BZ				jisjk:348463		
-売上高限界利益率	매상고 한계 이익률	I110			BZ				jisjk:348799		
+売上高限界利益率	매출액 한계 이익률	I110			BZ				jisjk:348799		
 売主	판매측	N110	VHn		BZ				jisjk:21517		
 売予約	매예약	N110			BZ				jisjk:349258		
 売人	판매원	N110	UAqVHn		GN				jisjk:21513		
@@ -175997,7 +175996,7 @@ ttt	ttt	K110			GN				jisjk:201744
 奮い立	분발&AV@	M414			GN				jisjk:93160		
 奮い起	불러 일으&AQ@	M433			GN				jisjk:93158		
 奮い起こ	불러 일으&AQ@	M433			GN				jisjk:93159		
-奮って	분발해서	E311			GN				jisjk:1651		
+奮って	적극적으로	E311			GN				jisjk:1651		
 奮励	분발	N110	VTw	Hd	GN				jisjk:154709		
 奮戦	분전	N110		Hd	GN				jisjk:24517		
 奮戦記	분전기	I110			GN				jisjk:71294		
@@ -176832,9 +176831,9 @@ ttt	ttt	K110			GN				jisjk:201744
 始球	시구	N110			GN				jisjk:27692		
 始球式	시구식	N110	VRw		GN				jisjk:186950		
 始生代	시생대	N110	VPlVPt		GN				jisjk:187450		
-始発	시발	N110		Hd	GN				jisjk:27697		
-始発便	시발편	N110	VTp		GN				jisjk:188177		
-始発便	시발편	N110	VBl		GN				jisjk:188179		
+始発	첫차	N110		Hd	GN				jisjk:27697		
+始発便	첫차	N110	VTp		GN				jisjk:188177		
+始発便	첫차	N110	VBl		GN				jisjk:188179		
 始発点	시발점	I110	VPl		GN				jisjk:76233		
 始発駅	시발역	N110	VTpVBl		GN				jisjk:188175		
 始皇帝	시황제	I110	VHn		GN				jisjk:76234		
@@ -178970,7 +178969,7 @@ ttt	ttt	K110			GN				jisjk:201744
 安全係数	안전계수	N110			BZ				jisjk:227867		
 安全保証申立	안전보증규약	N110			BZ				jisjk:350267		
 安全保障	안전 보장	N110			BZ				jisjk:125050		
-安全保障上	안전보장상	N110			GN				jisjk:359733		
+安全保障上	안보상	N110			GN				jisjk:359733		
 安全保障会議	안전 보장 회의	N110	VBl		GN				jisjk:227873		
 安全保障対話	안전보장 회담	N110			MI				jisjk:345715		
 安全保障條約	안전보장조약	I110			GN				jisjk:107713		
@@ -186046,7 +186045,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小売値	소매가	I110	VMo		GN				jisjk:74809		
 小売値段	소매가격	I110			GN				jisjk:109532		
 小売商	소매상	I110	VHn		GN				jisjk:74807		
-小売売上税	소매 매상세	N110			BZ				jisjk:350104		
+小売売上税	소매 매출세	N110			BZ				jisjk:350104		
 小売市場	소매시장	N110			BZ				jisjk:353670		
 小売店	소매점	N110	VBlVMo		GN				jisjk:181516		
 小売店舗	소매점포	N110			BZ				jisjk:350800		
@@ -188843,7 +188842,7 @@ ttt	ttt	K110			GN				jisjk:201744
 少女歌劇	소녀가극	N110	UArVBl		GN				jisjk:235266		
 少女趣味	소녀 취미	N110			GN				jisjk:235276		
 少子	소자	N110			GN				jisjk:101084		
-少子化	소자녀화	I110		Hd	GN				jisjk:101085		
+少子化	저출산	I110		Hd	GN				jisjk:101085		
 少子高齢化	소자 고령화	N110			BZ				jisjk:354223		
 少将	소장	N110	VHn		GN				jisjk:26839		
 少将井御旅町	쇼쇼이오타비쵸	I130	QCTVPl		GN				jisjk:300778		
@@ -196584,7 +196583,7 @@ ttt	ttt	K110			GN				jisjk:201744
 市田	이치타	N130	QPN	Wa	GN				jisjk:345532		
 市田町	이치다쵸	N130	QCTVPl		GN				jisjk:272864		
 市町	이치쵸	N130	QCTVPl		GN				jisjk:272865		
-市町村	시읍면	N110	QCT		GN				jisjk:76262		
+市町村	시정촌	N110	QCT		GN				jisjk:76262		
 市町村合併	시읍면 합병	N110			GN				jisjk:234037		
 市町村民税	시읍면민세	N110	VMo		GN				jisjk:234041		
 市町村税	시읍면세	N110	VMo		GN				jisjk:234039		
@@ -201677,7 +201676,7 @@ ttt	ttt	K110			GN				jisjk:201744
 弊店	폐점	N110			GN				jisjk:37686		
 弊政	폐정	N110			GN				jisjk:37687		
 弊村	폐촌	N110	VPl		GN				jisjk:154808		
-弊社	폐사	N110			GN				jisjk:37683		
+弊社	저희 회사	N110			GN				jisjk:37683		
 弊端	폐단	N110			GN				jisjk:37681		
 弊紙	폐지	N110			GN				jisjk:37688		
 弊習	폐습	N110			GN				jisjk:37684		
@@ -204719,11 +204718,11 @@ ttt	ttt	K110			GN				jisjk:201744
 従属的に	종속적으로	E300			GN				jisjk:123233		
 従属節	종속절	N110			GN				jisjk:236960		
 従弟	사촌동생	N110	VQmVHnUQf		GN				jisjk:33850		
-従来	종래	N110	UMe		GN				jisjk:33842		
+従来	기존	N110	UMe		GN				jisjk:33842		
 従来妨害	종래 방해	N110			BZ				jisjk:349742		
 従来機	종래기계	I110			GN				jisjk:106209		
 従来相場	종래 시세	N110			BZ				jisjk:349740		
-従来通り	종래대로	N110			GN				jisjk:151239		
+従来通り	기존대로	N110			GN				jisjk:151239		
 従業	종업	N110			GN				jisjk:33846		
 従業員	종업원	I110	VHnUAq		GN				jisjk:83853		
 従業員代表	종업원대표	I110			GN				jisjk:110346		
@@ -216109,8 +216108,7 @@ ttt	ttt	K110			GN				jisjk:201744
 据え付け面	설치면	N110	VPl		GN				jisjk:162934		
 据え切り	정차 조타	I110			GN				jisjk:111439		
 据え物	장식으로 두는 것	N110			GN				jisjk:237934		
-据え置	그대로 &C7@	M441			GN				jisjk:91733		
-据え置き	보류	N110		Hd	GN				jisjk:6752		
+据え置き	동결	N110		Hd	GN				jisjk:6752		
 据え置き型	거치형	N110			GN				jisjk:359604		
 据え置き期間	거치 기간	N110	UMe		BZ				jisjk:355800		
 据え置き申請	거치 신청	N110			GN				jisjk:196513		
@@ -225273,7 +225271,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日笠町	히가사쵸	N130	QCTVPl		GN				jisjk:322005		
 日管	닛칸	N110	VPl		GN				jisjk:31583		
 日管工業	일관공업	I130	VGt		PN				jisjk:80545		
-日米	일·미	N110	VPl		GN				jisjk:31608		
+日米	미일	N110	VPl		GN				jisjk:31608		
 日米スーパーコンピューター交渉	일.미 슈퍼컴퓨터 교섭	N110			BZ				jisjk:362502		
 日米レジン	니치베레진	I110	VPl		GN				jisjk:80723		
 日米包括協議	일·미 포괄협의	N110			BZ				jisjk:356461		
@@ -225304,7 +225302,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日米金融協議	일미 금융 협의	N110			BZ				jisjk:354245		
 日米電子	니치베전자	I110	VPl		GN				jisjk:80731		
 日米電気通信摩擦	일.미 전기통신 마찰	N110			BZ				jisjk:362526		
-日米韓	일·미·한	N110			GN				jisjk:257465		
+日米韓	한미일	N110			GN				jisjk:257465		
 日精	닛세이	N110	VPl		GN				jisjk:31671		
 日精エー. エス。 ビー機械	닛세이 ASB 기계	I130	VGt		PN				jisjk:81741		
 日精エーエスビー機械	닛세에에스비기계	I110	VPl		GN				jisjk:81742		
@@ -225679,7 +225677,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日面	양지	N110	VPl		GN				jisjk:31603		
 日面	히오모	N130	QCTVPl		GN				jisjk:321959		
 日面	히요모	N130	QCTVPl		GN				jisjk:324871		
-日韓	일한	N110	QNN		GN				jisjk:31694		
+日韓	한일	N110	QNN		GN				jisjk:31694		
 日韓ともだち	일한 친구	K110	VHn		GN				jisjk:342677		
 日韓会談	중일 회담	N110	VBl		GN				jisjk:247957		
 日韓併合	한일합방	N110			GN				jisjk:159755		
@@ -231080,7 +231078,7 @@ ttt	ttt	K110			GN				jisjk:201744
 有数	유수	N110			GN				jisjk:3492		
 有数の	유수한	E0H0			GN				jisjk:123699		
 有料	유료	N110			GN				jisjk:30682		
-有料老人ホーム	유료 양노원	N110	VBl		GN				jisjk:254744		
+有料老人ホーム	유료 요양원	N110	VBl		GN				jisjk:254744		
 有料職業紹介事業	유료 직업소개 사업	N110			BZ				jisjk:350741		
 有料道路	유료 도로	N110	VPlVTp		GN				jisjk:156014		
 有明	아리아케	N130	QCT		GN				jisjk:30684		
@@ -231299,7 +231297,7 @@ ttt	ttt	K110			GN				jisjk:201744
 有袋類	유대류	I110			GN				jisjk:79487		
 有視界飛行	유시계 비행	N110			GN				jisjk:254638		
 有識	유식	N110			GN				jisjk:30700		
-有識者	유식자	N110	UThVHn		GN				jisjk:155942		
+有識者	전문가	N110	UThVHn		GN				jisjk:155942		
 有谷	아라타니	N130	QCTVPl		GN				jisjk:270863		
 有象無象	어중이떠중이	I110	VHn		GN				jisjk:79500		
 有責配偶者	유책 배우자	N110	ULwVHn		GN				jisjk:254670		
@@ -233032,7 +233030,7 @@ ttt	ttt	K110			GN				jisjk:201744
 未承認	미승인	N110			BZ				jisjk:347643		
 未整備	미정비	N110			BZ				jisjk:351886		
 未整備な中で	미정비인 가운데	N110			GN				jisjk:151812		
-未明	미명	N110	UMeVFr		GN				jisjk:22408		
+未明	새벽	N110	UMeVFr		GN				jisjk:22408		
 未明	호노카	N130	QCTVPl		GN				jisjk:328129		
 未明子	미메이시	N130	QPN	Wb	GN				jisjk:358147		
 未曽有	미증유	I110			GN				jisjk:69434		
@@ -241852,7 +241850,7 @@ ttt	ttt	K110			GN				jisjk:201744
 架空利益	가공이익	N110			BZ				jisjk:350598		
 架空受取人	가공 수취인	N110	VHn		BZ				jisjk:350603		
 架空名義預金	가공 명의 예금	N110	VMoVMy		BZ				jisjk:350599		
-架空売上伝票	가공 매상전표	N110	VMo		BZ				jisjk:350602		
+架空売上伝票	가공 매출전표	N110	VMo		BZ				jisjk:350602		
 架空資本	가공자본	N110	VMoVMy		BZ				jisjk:350600		
 架空資本	가공자산	N110	VMoVMy		BZ				jisjk:350601		
 架線	가선	N110			GN				jisjk:14377		
@@ -295263,7 +295261,7 @@ ttt	ttt	K110			GN				jisjk:201744
 策を講	대책을 강구&AV@	M41:			GN				jisjk:95245		
 策動	책동	N110		Hd	GN				jisjk:35389		
 策士	계략가	N110	VHn		GN				jisjk:35392		
-策定	책정	N110		Hd	GN				jisjk:35393		
+策定	수립	N110		Hd	GN				jisjk:35393		
 策応	책응	N110		Hd	GN				jisjk:232343		
 策源地	근원지	N110	VPl		GN				jisjk:184884		
 策牛	무치우시	N130	QCTVPl		GN				jisjk:333907		
@@ -299958,7 +299956,7 @@ ttt	ttt	K110			GN				jisjk:201744
 給人	급인	N110			GN				jisjk:97899		
 給人町	큐우님마치	N130	QCTVPl		GN				jisjk:289687		
 給仕	시중	N110	VHn	Hd	GN				jisjk:17603		
-給付	급부	N110		Hd	GN				jisjk:17601		
+給付	지급	N110		Hd	GN				jisjk:17601		
 給付年限	급부연한	I110			GN				jisjk:108111		
 給付期間	급부기간	N110	UMe		BZ				jisjk:354887		
 給付費	급부비	N110			BZ				jisjk:352647		
@@ -301103,7 +301101,7 @@ ttt	ttt	K110			GN				jisjk:201744
 総状	총상	N110			GN				jisjk:240100		
 総状花序	총상 꽃차례	N110			GN				jisjk:240103		
 総理	총리	N110	VHnUQf		GN				jisjk:36037		
-総理大臣	총리대신	I110	UAqURt		GN				jisjk:86442		
+総理大臣	총리	I110	UAqURt		GN				jisjk:86442		
 総理室	총리실	N110	VBl		GN				jisjk:200511		
 総理室行政調整室長	총리실행조실장	N110	QPN		GN				jisjk:209800		
 総理府	총리부	N110	VBl		GN				jisjk:200515		
@@ -301175,7 +301173,7 @@ ttt	ttt	K110			GN				jisjk:201744
 総連系	조총련계	N130	VGt		GN				jisjk:257866		
 総進	소우신	N130	QCTVPl		GN				jisjk:304646		
 総選	총선	N110			GN				jisjk:36040		
-総選挙	총선거	I110			GN				jisjk:86449		
+総選挙	총선	I110			GN				jisjk:86449		
 総選挙期日	총선거기일	I110	UMe		GN				jisjk:86450		
 総量	총량	N110			GN				jisjk:36032		
 総量規制	총량규제	N110	ULw		BZ				jisjk:240273		
@@ -303221,8 +303219,8 @@ ttt	ttt	K110			GN				jisjk:201744
 義勇海運	기유 해운	N110	VMoVBl		GN				jisjk:175298		
 義務	의무	N110		Mi	GN				jisjk:31062		
 義務つけられ	의무지워&AL@	M427			GN				jisjk:148117		
-義務づけ	의무 부여	N110			GN				jisjk:175209		
-義務づけ	의무 부여&AV@	M437			GN				jisjk:202238		
+義務づけ	의무화	N110			GN				jisjk:175209		
+義務づけ	의무화&AV@	M437			GN				jisjk:202238		
 義務づけられ	의무 지워&AL@	M427			GN	1573	||1 &&2 S-1== "を" D-1= "(이)가"	「を」 뒤에서 「義務づけられ」를 ‘의무 지워지다’로 고르고 앞 조사를 ‘(이)가’로 바꾼다. (미발동: rare-word)	jisjk:148166		
 義務付け	의무부여	N110			GN				jisjk:175207		
 義務付け	의무화 &AV@	M437			GN				jisjk:348239		
@@ -303817,7 +303815,7 @@ ttt	ttt	K110			GN				jisjk:201744
 老久保山	오이쿠보야마	I130	QCTVPl		GN				jisjk:276972		
 老人	노인	N110	VHn		GN				jisjk:20613		
 老人の日	경로일	N110	UMe		GN				jisjk:256565		
-老人ホーム	양로원	N110	VBl		GN				jisjk:156712		
+老人ホーム	요양원	N110	VBl		GN				jisjk:156712		
 老人ホ－ム	양로원	N110	VBl		GN				jisjk:159844		
 老人保健施設	노인보건시설	N110	VPl		BZ				jisjk:363804		
 老人保健法	노인 보건법	N110	QHPULw		GN				jisjk:256568		
@@ -318510,8 +318508,8 @@ ttt	ttt	K110			GN				jisjk:201744
 被測定物	피측정물	N110			GN				jisjk:164598		
 被演算子	피연산자	I110			IT				jisjk:261900		
 被演算数	피연산수	I110			IT				jisjk:261902		
-被災	재해	N110			GN				jisjk:38094		
-被災地	재해지	N110	VPl		BZ				jisjk:358593		
+被災	피해	N110			GN				jisjk:38094		
+被災地	피해 지역	N110	VPl		BZ				jisjk:358593		
 被災者	이재민	N110	VHn		BZ				jisjk:351042		
 被爆	피폭	N110		Hd	GN				jisjk:38096		
 被爆国	피폭국	N110	VPl		GN				jisjk:154418		
@@ -319121,7 +319119,7 @@ ttt	ttt	K110			GN				jisjk:201744
 製造物責任制度	제조물 책임제도	N110	VMo		GN				jisjk:238591		
 製造物責任法	제조물 책임법	N110	ULw		BZ				jisjk:359045		
 製造用	제조용	N110			GN				jisjk:162660		
-製造者売上税	제조자 매상세	N110			BZ				jisjk:350101		
+製造者売上税	제조자 매출세	N110			BZ				jisjk:350101		
 製造能力	제조능력	I110			GN				jisjk:110689		
 製鉄	제철	N110		Hd	GN				jisjk:33434		
 製鉄化学工業	세이테츠화학공업	I110	VGt		GN				jisjk:83523		
@@ -322929,7 +322927,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見こみ	전망	N110	USe		GN				jisjk:6773		
 見こみがあ	전망이 &HN@	M418		PnMa	GN	634	||1 &&2 U+0== "Lません" D+0= "전망이 &M9@"	見こみがあ의 어미가 ません으로 시작하면 번역을 전망이 없다로 바꾼다. (미발동: rare-word)	jisjk:91773		
 見こみが違	예산이 틀&AA@	M410			GN				jisjk:91774		
-見ごろ	제철	I110	UMe		GN				jisjk:60857		
+見ごろ	절정	I110	UMe		GN				jisjk:60857		
 見させて頂	&AY@	M461			GN				jisjk:342111		
 見しらな	낯$J1@	H7U0			GN				jisjk:5350		
 見ずじまい	보지 않고 끝냄	N110		Hd	GN				jisjk:341856		
@@ -323421,7 +323419,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見離	단념&AV@	M433			GN				jisjk:91801		
 見難	보기 어$G8@	H7N0			GN				jisjk:136350		
 見面	외견	N110			GN				jisjk:252500		
-見頃	볼 만한 시기	N110	UMe		GN				jisjk:15265		
+見頃	절정	N110	UMe		GN				jisjk:15265		
 見頃	볼만%A1@	G8U0			GN				jisjk:369914		
 見頃時期	볼만한 시기	N110			GN				jisjk:369917		
 見頃道上	미고로미치우에	I130	QCTVPl		GN				jisjk:330373		
@@ -326633,8 +326631,8 @@ ttt	ttt	K110			GN				jisjk:201744
 課税告知日	과세 고지일	N110			BZ				jisjk:352237		
 課税品	과세품	N110			BZ				jisjk:352252		
 課税基準	과세 기준	N110			BZ				jisjk:352231		
-課税売上	과세 매상	N110			BZ				jisjk:352225		
-課税売上高	과세 매상고	N110			BZ				jisjk:352226		
+課税売上	과세 매출	N110			BZ				jisjk:352225		
+課税売上高	과세 매출액	N110			BZ				jisjk:352226		
 課税対象	과세대상	I110			GN				jisjk:202208		
 課税年度	과세 연도	N110			BZ				jisjk:352247		
 課税庁	과세청	N110	VPl		GN				jisjk:160563		
@@ -333463,10 +333461,10 @@ ttt	ttt	K110			GN				jisjk:201744
 転義	전의	N110			GN				jisjk:32888		
 転職	전직	N110		Hd	GN				jisjk:32895		
 転荷	전하	N110			GN				jisjk:32899		
-転落	전락	N110		Hd	GN				jisjk:32878		
-転落	전락&AV@	M419			GN				jisjk:264434		
+転落	추락	N110		Hd	GN				jisjk:32878		
+転落	추락&AV@	M419			GN				jisjk:264434		
 転落しかねな	전락할지도 $C4@	H7N0		Av	GN				jisjk:137234		
-転落死	전락사	N110		Hd	GN				jisjk:153641		
+転落死	추락사	N110		Hd	GN				jisjk:153641		
 転覆	전복	N110		Hd	GN				jisjk:32881		
 転記	전기	N110	VSwVSw	Hd	GN				jisjk:32876		
 転語	말	N110			GN				jisjk:32885		
@@ -334255,7 +334253,7 @@ ttt	ttt	K110			GN				jisjk:201744
 農林中金	농림 중금	N110			BZ				jisjk:352935		
 農林大臣	농림 수산부 장관	N110	VHn		GN				jisjk:248933		
 農林局	농림국	N110	VPl		GN				jisjk:206010		
-農林水産大臣	농림 수산부 장관	N110	VHn		GN				jisjk:248932		
+農林水産大臣	농림수산상	N110	VHn		GN				jisjk:248932		
 農林水産省	농림 수산성	I130	VPlVGt		GN				jisjk:64407		
 農林水産部	농림수산부	N110	VPl		GN				jisjk:206009		
 農林漁業金融公庫	농림어업 금융공고	I110			GN				jisjk:110065		
@@ -335372,7 +335370,7 @@ ttt	ttt	K110			GN				jisjk:201744
 退屈	싫증	N110		Hd	GN				jisjk:3834		
 退屈きわま	지루하기 짝이 &M9@	M428			GN				jisjk:139119		
 退屈しのぎ	심심풀이	N110			GN				jisjk:152882		
-退席	퇴석	N110		HdHi	GN				jisjk:37148		
+退席	퇴장	N110		HdHi	GN				jisjk:37148		
 退庁	퇴청	N110			GN				jisjk:37163		
 退庁時間	퇴청시간	I110			GN				jisjk:111067		
 退座	퇴석	N110			GN				jisjk:37160		
@@ -336645,7 +336643,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連結協約	연결협약	N110			BZ				jisjk:359808		
 連結器	연결기	N110	VTpVPe		GN				jisjk:156630		
 連結基礎概念	연결기초개념	N110			BZ				jisjk:364072		
-連結売上	연결매상	N110			BZ				jisjk:359787		
+連結売上	연결매출	N110			BZ				jisjk:359787		
 連結子会社	연결 자회사	N110			BZ				jisjk:348981		
 連結損益計算書	연결 손익계산서	N110			BZ				jisjk:359794		
 連結方針	연결방침	N110			BZ				jisjk:359801		
@@ -337384,7 +337382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 運転者	운전자	N110	VHn		GN				jisjk:162000		
 運転費用	운전 비용	N110			BZ				jisjk:349396		
 運転資本	운전 자본	N110			BZ				jisjk:349388		
-運転資本売上率	운전 자본 매상률	N110			BZ				jisjk:349392		
+運転資本売上率	운전 자본 매출률	N110			BZ				jisjk:349392		
 運転資本構成	운전 자본 구성	N110			BZ				jisjk:349393		
 運転資本状態	운전 자본 상태	N110			BZ				jisjk:349394		
 運転資金	운용자금	N110	VMyVMo		GN				jisjk:127315		
@@ -350291,7 +350289,7 @@ ttt	ttt	K110			GN				jisjk:201744
 障害物	장애물	N110			GN				jisjk:190668		
 障害物競走	장해물 경주	N110	VRw		GN				jisjk:235103		
 障害競走	장애물 경주	N110	VRw		GN				jisjk:190663		
-障害者	장애자	I110	VHnUTi		GN				jisjk:82426		
+障害者	장애인	I110	VHnUTi		GN				jisjk:82426		
 障害補償	장해보상	N110			GN				jisjk:235104		
 障害飛越	장해비월	N110	VRw		GN				jisjk:235102		
 障屏画	장병화	N110			GN				jisjk:235448		
@@ -357515,7 +357513,7 @@ ttt	ttt	K110			GN				jisjk:201744
 首聯	수련	N110			GN				jisjk:235001		
 首肯	수긍	N110		Hd	GN				jisjk:27481		
 首肯しかね	수긍이 안 &A1@	M427			GN				jisjk:122146		
-首脳	수뇌	N110	VHnVBp		GN				jisjk:27482		
+首脳	정상	N110	VHnVBp		GN				jisjk:27482		
 首脳ら	수뇌들	N110	VHn		GN				jisjk:190248		
 首脳会談	정상회담	I110			GN				jisjk:110089		
 首脳会議	정상회의	N110			BZ				jisjk:347341		
@@ -360108,8 +360106,8 @@ ttt	ttt	K110			GN				jisjk:201744
 高次方程式	고차방정식	N110	UMn		GN				jisjk:206690		
 高次財	고차재	N110			BZ				jisjk:359493		
 高止まり	비싸게 머&Mx@	M419			GN				jisjk:138138		
-高止まり	상승	N110			GN				jisjk:265884		
-高止まり	상승	N110		Hd	GN				jisjk:265885		
+高止まり	고공 행진	N110			GN				jisjk:265884		
+高止まり	고공 행진	N110		Hd	GN				jisjk:265885		
 高正	타카마사	N130	QPN		GN				jisjk:96758		
 高正云	고 정운	N130	QPN		GN				jisjk:207220		
 高正埼風	다카사키 마사카제	N130	VHn		GN				jisjk:217225		

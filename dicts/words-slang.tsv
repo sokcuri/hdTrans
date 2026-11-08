@@ -8285,7 +8285,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テンションが上が	텐션이 &E6@	M428			GN				llm			s:8281
 ツイッター民	트위터 유저들	N110			GN				llm			s:8282
 頬染め	볼 홍조 표현	N110			GN				llm			s:8283
-自分事	내 일	N110			GN				llm			s:8284
+自分事	자기 일	N110			GN				llm			s:8284
 自分ごと	내 일	N110			GN				llm			s:8285
 違くない	아니지 않아	A9D0			GN				llm			s:8286
 違うくない	아니지 않아	A9D0			GN				llm			s:8287

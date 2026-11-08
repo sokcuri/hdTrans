@@ -35,7 +35,7 @@ cx:novel-fixes-4:227	頭のコブだって 骨折したことにして…	has:�
 cx:novel-fixes-4:227	ふやけてしもたことにしたらよろしいがな	has:불어버린 것으로	fix	rewrites
 cx:novel-fixes-4:227	名前で呼び合うことにしたんだね」	!rule:cx:novel-fixes-4:227	keep	rewrites
 cx:novel-fixes-4:227	その足でこの国を出ることにした。	!rule:cx:novel-fixes-4:227	keep	rewrites
-cx:novel-fixes-4:228	これはある意味で、直に被災する事とは別の意味で恐ろしい。	has:재해하는 것과는	fix	rewrites
+cx:novel-fixes-4:228	これはある意味で、直に被災する事とは別の意味で恐ろしい。	has:피해를 입는 것과는	fix	rewrites
 cx:novel-fixes-4:228	なるほど、見事とは言っておこう。	!rule:cx:novel-fixes-4:228	keep	rewrites
 cx:novel-fixes-4:228	続けろ｡そもそも 坂本のこととか	!rule:cx:novel-fixes-4:228	keep	rewrites
 cx:novel-fixes-4:231	あり得ない事ではない。	has:없는 일이	fix	rewrites
