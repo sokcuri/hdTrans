@@ -162,10 +162,10 @@ analysis:can-tehairu	まだ何も出来てはいなかった。	has:할 수는 �
 analysis:can-tehairu	まだ何も出来てはいません。	has:할 수는 없습니다	fix	analysis
 analysis:can-tehairu	まだ何も出来てはいないよ！	has:할 수는 없어	fix	analysis
 analysis:can-tehairu	準備が出来てはいない。	has:되어 있지는 않다	keep	analysis
-analysis:can-tehairu	料理が出来ている。	has:요리가 되어있다	keep	analysis
+analysis:can-tehairu	料理が出来ている。	has:요리가 되어 있다	keep	analysis
 analysis:can-tehairu	少なくとも彼の顔は公表できる	has:공표할 수 있다	keep	analysis
 cx:web-fixes-j:265	敵共を蹴散らせ	has:적들을	fix	rewrites
-cx:web-fixes-j:265	雑魚共が	has:잡졸들이	fix	rewrites
+cx:web-fixes-j:265	雑魚共が	has:잔챙이들이	fix	rewrites
 cx:web-fixes-j:265	う゛っ……痛たた……。外道共め、今に……今に見とれよ！	has:악당들	fix	rewrites
 cx:web-fixes-j:265	共に戦おう	!rule:cx:web-fixes-j:265	keep	rewrites
 cx:web-fixes-j:264	親子共、元気です	has:부모와 자식 모두	fix	rewrites

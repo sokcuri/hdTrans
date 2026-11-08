@@ -2074,8 +2074,92 @@ Item* AlreadyBefore(Item* v) {
 
 }  // namespace
 
+namespace {
+// LEX-5017: whether the している of a change, item suru after item noun, is the change going on: an adverb of
+// gradual change or of this very moment in the clause (徐々に劣化している, 今まさに沈没している) or a noun of the
+// midst after it (崩壊している最中, 沈没しているところ).
+bool OngoingChange(const Item* noun, const Item* suru) {
+    for (const Item* p = noun->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("adverb.gradual"), p->group->surface) > 0 ||
+            dict::InClass(HDTRANS_CLASS("adverb.this-moment"), p->group->surface))
+            return true;
+        if (p->detail->Yougo()) break;
+    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("noun.midst"), suru->DirectSurface()) > 0) return true;
+    const Item* n = suru->After();
+    return n != nullptr && n->group != nullptr && dict::InClass(HDTRANS_CLASS("noun.midst"), n->group->surface);
+}
+}  // namespace
+
 void ResultState(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        // LEX-5017: the している of a verbal noun of a change that leaves a state (noun.result-suru-state: 全壊, 倒壊,
+        // 浸水) is the state, 되어 있다 (全壊していた 완파되어 있었다), not 하고 있다, and before a noun the change done, 된
+        // (全壊している家 완파된 집); the plain する of one whose Korean takes 되다 alone (noun.result-suru-become) is
+        // 되다 too (全壊した 완파되었다, 全壊した家 완파된 집; 停止します 정지합니다 stays). A noun whose
+        // Korean is a 하다 verb of its own (noun.result-suru-state-ha: 沈没, 腐敗) is 해 있다 (沈没している 침몰해 있다).
+        // With an object in its clause (道路を封鎖している) the する is done to it, as written.
+        const Item* noun = it->prev != nullptr && it->prev->group != nullptr && !it->prev->detail->Yougo() ? it->prev : nullptr;
+        const bool resultNoun = noun != nullptr && dict::InClass(HDTRANS_CLASS("noun.result-suru-state"), noun->group->surface);
+        const bool resultNounHa = noun != nullptr && dict::InClass(HDTRANS_CLASS("noun.result-suru-state-ha"), noun->group->surface);
+        const bool becomes = noun != nullptr && dict::InClass(HDTRANS_CLASS("noun.result-suru-become"), noun->group->surface);
+        const auto objectBefore = [&] {
+            for (const Item* p = noun->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+                if (p->group->surface == "を") return true;
+                if (p->detail->Yougo()) break;
+            }
+            return false;
+        };
+        const std::string_view suru = it->group->surface;
+        // A change still going on keeps 하고 있다, 되고 있다: an adverb of gradual change or of this very moment in the
+        // clause (徐々に劣化している, 今まさに沈没している) or a noun of the midst after it (崩壊している最中, 沈没しているところ).
+        // A noun one does to a thing (noun.result-suru-transitive: 封鎖, 閉鎖, 停止, 凍結) is a state only with a が
+        // subject that is no agent (道路が封鎖している); alone, after an agent or with an object it is done (封鎖している
+        // 봉쇄하고 있다, 警察が封鎖している 경찰이 봉쇄하고 있다). Either way the する of noun.result-suru-become is 하다 again.
+        const auto ongoing = [&] { return OngoingChange(noun, it); };
+        // a が subject that is not a person or an organization (道路が封鎖している; 警察が封鎖している is done)
+        const auto doneTo = [&] {
+            if (!dict::InClass(HDTRANS_CLASS("noun.result-suru-transitive"), noun->group->surface)) return false;
+            for (const Item* p = noun->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+                if (p->group->surface == "が" && p->prev != nullptr && p->prev->group != nullptr) {
+                    const Item* subject = p->prev;
+                    return Person(subject->Attr(std::max(subject->selected, 0))) ||
+                           dict::EndsWithMember(HDTRANS_CLASS("noun.organization"), subject->group->surface) > 0 ||
+                           dict::EndsWithMember(HDTRANS_CLASS("noun.public-body"), subject->group->surface) > 0;
+                }
+                if (p->detail->Yougo()) break;
+            }
+            return true;
+        };
+        if ((resultNoun || resultNounHa) && (suru == "する" || suru.starts_with("し")) && it->selected >= 0) {
+            const bool done = objectBefore() || doneTo();
+            if (done || ongoing()) {
+                const std::string_view t = it->EntryText(it->selected);
+                if (!done && becomes && t.starts_with("하고 ") && (suru.starts_with("してい") || suru.starts_with("してお")))
+                    it->AssignEntrySurface(it->selected, "되고 " + std::string(t.substr(std::string_view("하고 ").size())));
+                else if ((done || !becomes) && t == "&C6@")
+                    it->AssignEntrySurface(it->selected, "&AV@");
+                continue;
+            }
+        }
+        if ((resultNoun || resultNounHa) && it->selected >= 0 && (suru == "する" || suru.starts_with("し")) && !objectBefore()) {
+            const std::string t(it->EntryText(it->selected));
+            const Entry* e = it->DirectIndex() >= 0 ? it->DirectEntry(it->DirectIndex()) : nullptr;
+            const std::string_view going = "하고 ", plain = "하지 ";
+            const bool aspect = suru.starts_with("してい") || suru.starts_with("してお");
+            if (aspect && resultNoun && t == "하고 &HN@" && e != nullptr && e->dst == "0") {
+                // written whole, as a marker after a noun with no 하다 code stands apart (붕괴 된)
+                it->AssignEntrySurface(it->selected, "된    ");
+                it->AssignDirectSlot(it->DirectIndex(), "");
+                continue;
+            }
+            if (aspect && t.starts_with(going)) {
+                it->AssignEntrySurface(it->selected, (resultNoun ? "되어 " : "해 ") + t.substr(going.size()));
+                continue;
+            }
+            if (becomes && t == "&AV@") it->AssignEntrySurface(it->selected, "&C6@");
+            else if (becomes && t.starts_with(plain)) it->AssignEntrySurface(it->selected, "되지 " + t.substr(plain.size()));
+        }
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
         // An unlisted 込む holds the ending of the verb before it, which decides (惚れ込んでいる
         // 반해 있다); InwardAuxiliary moves the ending onto that verb later.
@@ -2127,6 +2211,31 @@ void ResultState(Flusher& f) {
                               dict::InClass(HDTRANS_CLASS("noun.result-suru-past"), v->prev->group->surface);
         const bool past = already || nounPast ||
                           (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
+        // the same noun read as a する verb of its own (半壊 반파&AV@): 반파되어 있다
+        const bool ownNoun = v == it && v->detail->record == 0 && it->selected >= 0 &&
+                             dict::InClass(HDTRANS_CLASS("noun.result-suru-state"), verb) &&
+                             (it->EntryText(it->selected).ends_with("&AV@") || it->EntryText(it->selected).ends_with("&C6@"));
+        // going on (だんだん麻痺している) it is no state, though one of noun.result-suru-become is still 되다 (마비되고 있다)
+        const bool ownOngoing = ownNoun && OngoingChange(it, it->After() != nullptr ? it->After() : it);
+        const bool ownNounVerb = ownNoun && !ownOngoing;
+        if ((ownNounVerb || (ownOngoing && dict::InClass(HDTRANS_CLASS("noun.result-suru-become"), verb))) &&
+            it->EntryText(it->selected).ends_with("&AV@")) {
+            const std::string_view t = it->EntryText(it->selected);
+            it->AssignEntrySurface(it->selected, std::string(t.substr(0, t.size() - std::string_view("&AV@").size())) + "&C6@");
+        }
+        // before a noun the change done, 된 (全壊している家 완파된 집)
+        if (ownNounVerb && it->DirectIndex() >= 0 && it->DirectEntry(it->DirectIndex()) != nullptr &&
+            it->DirectEntry(it->DirectIndex())->dst == "1고") {
+            Item* n = it->After();
+            const Entry* ne = n != nullptr && n->selected >= 0 && n->DirectIndex() >= 0 ? n->DirectEntry(n->DirectIndex()) : nullptr;
+            if (ne != nullptr && n->group->surface == "い" && n->EntryText(n->selected) == "&HN@" && ne->dst == "0") {
+                it->AssignDirectSlot(it->DirectIndex(), "8");
+                n->AssignEntrySurface(n->selected, "    ");
+                n->AssignDirectSlot(n->DirectIndex(), "");
+                continue;
+            }
+        }
+        const bool nounState = ((verb == "する" || verb == "し") && v == it && v->detail->record == 0 && resultNoun) || ownNounVerb;
         // A verb of going after a place, a noun in に or へ, has gone there (spec LEX-5655): in the explanatory ていたんだ,
         // ていたのだ, ていたんです or ていたのよ unless a word of habit or of a period (昔は, 毎週, 三回) or a place one attends
         // (学校, 会社) makes it the going done again (トイレに行っていたんだ 화장실에 가 있던 거야, 小学生の頃は学校に
@@ -2141,7 +2250,7 @@ void ResultState(Flusher& f) {
                                                    !dict::InClass(HDTRANS_CLASS("noun.attended-place"), v->prev->prev->group->surface)
                                              : StateCueBefore(v);
         }
-        const bool state = past || destination || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
+        const bool state = past || nounState || destination || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass(HDTRANS_CLASS("verb.result-passive"), stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
                             !v->EntryText(v->selected).ends_with("&HN@"));
@@ -2496,6 +2605,59 @@ void NotYet(Flusher& f) {
             rest = rest.substr(had.size());
             return rest.starts_with("어") ? "아" + rest.substr(std::string_view("어").size()) : rest;
         };
+        // LEX-5014: ことができる folds into 수 있다 in the てはいる paradigm too (泳ぐことができてはいない 헤엄칠 수는 없다,
+        // 泳ぐことができてはいるが 헤엄칠 수는 있지만): the verb before takes 할 수는, できる the 있다 or 없다 after it.
+        if (Item* v = it->prev; v != nullptr && v->detail->Yougo() && v->DirectIndex() >= 0 && it->DirectIndex() >= 0 &&
+                                it->selected >= 0 &&
+                                (it->group->surface == "でき" || it->group->surface == "出来" || it->group->surface == "出来てはい") &&
+                                (v->DirectSurface().ends_with("ことが") || v->DirectSurface().ends_with("事が"))) {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            Item* n = it->After();
+            const std::string notSo = "1지 않";
+            const std::string notSoWa = "1지는 않";
+            const std::string_view had = "았";
+            const bool negNext = n != nullptr && n->selected >= 0 && (n->group->surface == "な" || n->group->surface == "いな") &&
+                                 (ItemLemma(f, n, n->selected) == "않다" || ItemLemma(f, n, n->selected) == "없다");
+            const bool ruNext = n != nullptr && n->group->surface == "い" && n->selected >= 0 && n->EntryText(n->selected) == "&HN@";
+            bool done = false;
+            if (e != nullptr && it->group->surface == "出来てはい") {
+                if (negNext) {
+                    it->AssignEntrySurface(it->selected, "    ");
+                    it->AssignDirectSlot(it->DirectIndex(), "");
+                    n->AssignEntrySurface(n->selected, "$FA@");
+                } else if (e->dst.starts_with(notSo)) {
+                    const std::string rest = e->dst.substr(notSo.size());
+                    it->AssignEntrySurface(it->selected, "&M9@");
+                    it->AssignDirectSlot(it->DirectIndex(), rest.starts_with(had) ? "5" + rest.substr(had.size()) : "1" + NoneTail(rest));
+                } else {
+                    it->AssignEntrySurface(it->selected, "&HN@");
+                }
+                done = true;
+            } else if (e != nullptr && e->dst.starts_with(notSoWa)) {
+                std::string rest = e->dst.substr(notSoWa.size());
+                const bool past = it->DirectSurface().find("なかっ") != std::string_view::npos;
+                it->AssignEntrySurface(it->selected, "&M9@");
+                it->AssignDirectSlot(it->DirectIndex(),
+                                     rest.starts_with(had) ? (past ? "5" : "1") + rest.substr(had.size()) : "1" + NoneTail(rest));
+                done = true;
+            } else if (e != nullptr && ((e->dst == "1고는" && ruNext) || (e->dst == "1지는" && negNext))) {
+                it->AssignEntrySurface(it->selected, "    ");
+                it->AssignDirectSlot(it->DirectIndex(), "");
+                if (negNext) {
+                    n->AssignEntrySurface(n->selected, "$FA@");
+                } else if (const Entry* ne = n->DirectIndex() >= 0 ? n->DirectEntry(n->DirectIndex()) : nullptr;
+                           ne != nullptr && ne->dst.starts_with(notSo)) {
+                    const std::string rest = ne->dst.substr(notSo.size());
+                    n->AssignEntrySurface(n->selected, "&M9@");
+                    n->AssignDirectSlot(n->DirectIndex(), rest.starts_with(had) ? "5" + rest.substr(had.size()) : "1" + NoneTail(rest));
+                }
+                done = true;
+            }
+            if (done) {
+                v->AssignDirectSlot(v->DirectIndex(), "3 수는");
+                continue;
+            }
+        }
         const std::string_view canWa = " 수는 &HN@";
         if (it->selected >= 0 && it->group->surface == "出来てはい" && it->EntryText(it->selected).ends_with(canWa) &&
             it->DirectIndex() >= 0) {

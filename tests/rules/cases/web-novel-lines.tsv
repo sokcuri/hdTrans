@@ -112,7 +112,7 @@ cx:dislike-of:5	運動が嫌いな人向けの授業だ。	운동을 싫어하�
 cx:dislike-of:5	ミーアの嫌いなもの。	미아가 싫어하는 것.	keep	rewrites
 cx:line-toiu:10	という事はおねえさんの家なのかな……？	그 말은 언니의 집인가……?	keep	rewrites
 cx:dislike-of:10	大っ嫌えな侍に借り作りたくねえ。	!rule:cx:dislike-of:10	keep	rewrites
-cx:novel-fixes-1:10	汚れで変色している唯の服と、整備状態の怪しい拳銃。	더러움으로 변색하고 있는 그냥 옷과, 정비 상태의 수상한 권총.	fix	rewrites
+cx:novel-fixes-1:10	汚れで変色している唯の服と、整備状態の怪しい拳銃。	더러움으로 변색된 그냥 옷과, 정비 상태의 수상한 권총.	fix	rewrites
 cx:novel-fixes-1:10	唯一の希望。	유일한 희망.	keep	rewrites
 cx:novel-fixes-1:20	（……この先客も所持品は無しか）	(……이 선객도 소지품은 없나)	fix	rewrites
 cx:novel-fixes-1:20	無しかもしれない。	!rule:cx:novel-fixes-1:20	keep	rewrites

@@ -586,6 +586,13 @@
 //= adverb.frequency	Words of frequency, counts of times and of a stretch of time that make a going in verb.destination-state a going done again, not having gone (週に三回ジムに行っていたんだ 가고 있던 거야, 何度も, 毎週末, ずっと; spec LEX-5655).
 //= noun.period-topic	Words of a period of one's life or of a past time that, before は, make a going in verb.destination-state the going done again in that period, not having gone (小学生の頃は学校に行っていたんだ 가고 있던 거야, 昔は; spec LEX-5655).
 //= noun.attended-place	Places one goes to regularly, school or work, whose に before a verb of going is the attending, not having gone (学校に行っていたんだ 가고 있던 거야; spec LEX-5655).
+//= adverb.this-moment	Adverbs of this very moment, after which the している of a change is the change going on (今まさに沈没している 침몰하고 있다; spec LEX-5017).
+//= noun.midst	Nouns of the midst of an act, before which the している of a change is the change going on (崩壊している最中 붕괴하고 있는 도중; spec LEX-5017).
+//= noun.public-body	Ends of nouns of authorities and forces that act, as agents of noun.result-suru-transitive (警察が封鎖している 경찰이 봉쇄하고 있다; spec LEX-5017).
+//= noun.result-suru-transitive	Verbal nouns of noun.result-suru-state one does to a thing, whose している is a state only with a が subject that is no person or organization (道路が封鎖している; 警察が封鎖している is done; spec LEX-5017).
+//= noun.result-suru-become	Verbal nouns of noun.result-suru-state whose Korean takes 되다 alone, whose plain する is 되다 too (全壊した 완파되었다, 全壊した家 완파된 집; spec LEX-5017).
+//= noun.result-suru-state-ha	Verbal nouns of a change that leaves a state whose Korean is a 하다 verb of its own, whose している is 해 있다 (沈没している 침몰해 있다, 腐敗している 부패해 있다; spec LEX-5017).
+//= noun.result-suru-state	Verbal nouns of a change that leaves a thing in a state, whose している is that state, 되어 있다 (全壊していた 완파되어 있었다), before a noun 된 (浸水している家 침수된 집), and whose plain する is 되다 (全壊した 완파되었다; spec LEX-5017), not the act going on.
 //= noun.result-suru-past	Verbal nouns of a change done once whose しているs and してる is the state it left, read as the Korean past (もう結婚してる 벌써 결혼했어, 卒業している 졸업했다; spec LEX-4766).
 //= noun.experience-suru	Verbal nouns of an experience or a life event one has had or not (恋愛, 経験, 結婚, 卒業): in していない it is what never happened, the Korean past negative (恋愛もしていない 연애도 하지 않았다, 結婚はしていない 결혼은 하지 않았다; spec LEX-5052).
 //= verb.promise-act	Stems of verbs of an act one promises to do for the listener (戻る, 返す, 払う, 待つ, 作る), whose から before a request is the promise the request leans on, -ㄹ 테니까 (すぐ戻るから待ってて 바로 돌아올 테니까; spec LEX-4766).
@@ -12801,6 +12808,91 @@ noun.o-stem	変わり
 stem.o-past	呼び
 stem.o-past	見え
 stem.o-arrived	見え
+noun.result-suru-become	全壊
+noun.result-suru-become	半壊
+noun.result-suru-become	損壊
+noun.result-suru-become	破損
+noun.result-suru-become	損傷
+noun.result-suru-become	浸水
+noun.result-suru-become	冠水
+noun.result-suru-become	水没
+noun.result-suru-become	全焼
+noun.result-suru-become	半焼
+noun.result-suru-become	焼失
+noun.result-suru-become	消失
+noun.result-suru-become	陥没
+noun.result-suru-become	汚染
+noun.result-suru-become	変色
+noun.result-suru-become	断線
+noun.result-suru-become	欠損
+noun.result-suru-become	硬直
+noun.result-suru-become	麻痺
+noun.result-suru-become	停電
+noun.result-suru-become	断水
+adverb.this-moment	今まさに
+adverb.this-moment	まさに
+adverb.this-moment	刻々と
+adverb.this-moment	刻々
+adverb.this-moment	刻一刻と
+adverb.this-moment	刻一刻
+noun.midst	真っ最中
+noun.midst	最中
+noun.midst	途中
+noun.midst	ところ
+noun.midst	所
+noun.midst	とこ
+noun.public-body	警察
+noun.public-body	政府
+noun.public-body	当局
+noun.public-body	軍
+noun.public-body	自衛隊
+noun.public-body	機動隊
+noun.public-body	警備隊
+noun.public-body	騎士団
+noun.public-body	役所
+noun.public-body	市役所
+noun.public-body	国
+noun.public-body	銀行
+noun.public-body	学校
+noun.public-body	警視庁
+noun.public-body	消防
+noun.result-suru-transitive	封鎖
+noun.result-suru-transitive	閉鎖
+noun.result-suru-transitive	停止
+noun.result-suru-transitive	凍結
+noun.result-suru-state-ha	沈没
+noun.result-suru-state-ha	腐敗
+noun.result-suru-state-ha	座礁
+noun.result-suru-state	崩壊
+noun.result-suru-state	倒壊
+noun.result-suru-state	決壊
+noun.result-suru-state	停止
+noun.result-suru-state	全壊
+noun.result-suru-state	半壊
+noun.result-suru-state	損壊
+noun.result-suru-state	破損
+noun.result-suru-state	損傷
+noun.result-suru-state	浸水
+noun.result-suru-state	冠水
+noun.result-suru-state	水没
+noun.result-suru-state	全焼
+noun.result-suru-state	半焼
+noun.result-suru-state	焼失
+noun.result-suru-state	消失
+noun.result-suru-state	転覆
+noun.result-suru-state	陥没
+noun.result-suru-state	凍結
+noun.result-suru-state	汚染
+noun.result-suru-state	劣化
+noun.result-suru-state	変色
+noun.result-suru-state	断線
+noun.result-suru-state	閉鎖
+noun.result-suru-state	封鎖
+noun.result-suru-state	停電
+noun.result-suru-state	断水
+noun.result-suru-state	麻痺
+noun.result-suru-state	硬直
+noun.result-suru-state	欠損
 noun.result-suru-past	結婚
 noun.result-suru-past	離婚
 noun.result-suru-past	卒業
