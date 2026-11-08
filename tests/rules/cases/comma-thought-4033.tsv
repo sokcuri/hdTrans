@@ -1,18 +1,18 @@
 # 규칙: GRM-4033
 rule	input	expected	kind	layer
-cx:comma-terminal:30	風邪でも引かれると何となく寝覚めが悪い、そう思ったから	has:개운치 않다, 그렇게 생각했으니까	fix	rewrites
-cx:comma-terminal:30	寝覚めが悪い、そう思ったから傘を差し出す。	has:않다, 그렇게	fix	rewrites
+cx:comma-terminal:30	風邪でも引かれると何となく寝覚めが悪い、そう思ったから	has:마음이 찜찜하다, 그렇게 생각했으니까	fix	rewrites
+cx:comma-terminal:30	寝覚めが悪い、そう思ったから傘を差し出す。	has:찜찜하다, 그렇게	fix	rewrites
 cx:comma-terminal:10	私の口でしてもらえる、そう思って…	has:받을 수 있다, 그렇게 생각해	fix	rewrites
 cx:comma-terminal:20	彼が来た、そう思った瞬間	has:그가 왔다, 그렇게 생각한 순간	fix	rewrites
 cx:comma-terminal:20	彼が来た、そう思った瞬間に目が覚めた	has:왔다, 그렇게	fix	rewrites
 cx:comma-terminal:30	もう遅い、そう思ったから走った	has:늦다, 그렇게	fix	rewrites
-cx:comma-terminal:30	寝覚めが悪い、そう思った。	has:않다, 그렇게 생각했다	keep	rewrites
+cx:comma-terminal:30	寝覚めが悪い、そう思った。	has:찜찜하다, 그렇게 생각했다	keep	rewrites
 cx:comma-terminal:30	彼女は優しい、そう思う。	has:다정하다, 그렇게 생각한다	keep	rewrites
 cx:comma-terminal:10	明日は雨が降る、そう思った。	has:온다, 그렇게	keep	rewrites
 cx:comma-terminal:10	胸の小さな女性が好きだ、そう言ってやるべきなのだろう。	has:좋아한다, 그렇게	keep	rewrites
 cx:comma-terminal:30	悪い人、そう思った。	has:나쁜 사람, 그렇게	keep	rewrites
-cx:comma-terminal:30	寝覚めが悪い、と思った。	has:않다, 라고	keep	rewrites
-cx:comma-terminal:30	寝覚めが悪い、そんな気がした。	has:않다, 그런	keep	rewrites
+cx:comma-terminal:30	寝覚めが悪い、と思った。	has:찜찜하다, 라고	keep	rewrites
+cx:comma-terminal:30	寝覚めが悪い、そんな気がした。	has:찜찜하다, 그런	keep	rewrites
 cx:comma-terminal:20	あっさりと、そう言われた。	has:쉽게, 그런 말을	keep	rewrites
 cx:comma-terminal:20	いろいろな意味で、そう思った。	has:여러 가지 의미로, 그렇게	keep	rewrites
 cx:comma-terminal:30	俺なんかが、そう思うのはおこがましいだろうけど	has:나 같은 게, 그렇게	keep	rewrites
