@@ -2206,6 +2206,40 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // Outside quotes, a run of two or more ー right after a noun with kanji (運命, 笑み) or a particle
+    // (彼の名は) and before 。, 、, a closing bracket, the end or more text is a dash of narration, ――
+    // (運命ーーー。 운명――.), not a lengthening; before a shout's ！, ？ or っ, or a ん that ends the
+    // drawn word (ドラえもーーーん), it stays one (spec SND-23).
+    for (size_t k = 1, depth = 0; k < rs.size(); k++) {
+        if (In(rs[k - 1], U"「『")) depth++;
+        if (In(rs[k - 1], U"」』") && depth > 0) depth--;
+        if (rs[k] != U'ー' || depth > 0) continue;
+        size_t end = k;
+        while (end < rs.size() && rs[end] == U'ー') end++;
+        if (end - k < 2 || (end < rs.size() && In(rs[end], U"！？!?っッんンー～〜"))) {
+            k = end - 1;
+            continue;
+        }
+        const char32_t prev = rs[k - 1];
+        // The particles の and や mark a dash only after a kanji (名の; not あげるのーー 줘어어), and a particle
+        // with hiragana after the run is part of a drawn word (正解でーーす).
+        const bool kanaAfter = end < rs.size() && IsHiraganaRune(rs[end]);
+        bool noun = IsKanjiRune(prev) ||
+                    (k >= 2 && !kanaAfter &&
+                     ((In(prev, U"はがをにもとでへ") && (IsKanjiRune(rs[k - 2]) || IsHiraganaRune(rs[k - 2]))) ||
+                      (In(prev, U"のや") && IsKanjiRune(rs[k - 2]))));
+        for (size_t j = k > 6 ? k - 6 : 0; j + 1 < k && !noun && IsHiraganaRune(prev); j++) {
+            const std::u32string_view w = std::u32string_view(rs).substr(j, k - j);
+            noun = HasKanji(w) && e.Tags(w).find('N') != std::string::npos;
+        }
+        if (noun) {
+            rs = Spliced(rs, k, U"――", end);
+            changed = true;
+            k += 1;
+        } else {
+            k = end - 1;
+        }
+    }
     // In a line with hiragana or kanji (not speech written in katakana: イタァイ！ ヤメテヨォォ！), two or
     // more small katakana vowels that draw out the vowel of the katakana before them at the end of a
     // phrase, also before a shout's っ (アキラァァァって, ママァァーッ), are its ー, which the word stage
