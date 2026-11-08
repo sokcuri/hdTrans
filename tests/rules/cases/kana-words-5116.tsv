@@ -1,0 +1,25 @@
+# 규칙: LEX-5116
+rule	input	expected	kind	layer
+lookup:kana-spelling	ちびっこタイムズの時間です。	꼬마 타임즈의 시간입니다.	fix	lookup
+lookup:kana-spelling	以上 ちびっこタイムズでした。	이상 꼬마 타임즈였습니다.	fix	lookup
+lookup:kana-spelling	そして とりいがあったね。	has:기둥문이 있었네	fix	lookup
+lookup:kana-spelling	着物に ちとせあめ➡	기모노에 치토세아메 ➡	fix	lookup
+lookup:kana-spelling	「そっそうだよぉ！あたしのかれしなんだぞっ！」	「그, 그래! 내 남자친구야!」	fix	lookup
+lookup:kana-spelling	「ごたくはいいからこのへんてこの暴走を止めるのが」	has:넋두리는	fix	lookup
+lookup:kana-spelling	数年後には絶滅するのではないかとまことしやかに囁かれる	has:그럴싸하게 속삭여	fix	lookup
+lookup:kana-spelling	けもみみ：兎	짐승 귀：토끼	fix	lookup
+lookup:kana-spelling	魔王にあるまじき優しい微笑み。うっとおしい。	has:성가시다	fix	lookup
+lookup:kana-spelling	梅雨はうっとおしいよなあ。	has:성가셔	fix	lookup
+lookup:kana-spelling	「おいしゃさんになって 2りの びょうきを なおしたい!!」	has:의사가 돼	fix	lookup
+lookup:kana-spelling	きあつのへんかでみかくが にぶるので➡	has:미각이 무디어지므로	fix	lookup
+lookup:kana-spelling	「えいこう」は さっそく ねがいごとを ためしました!!	has:소원을 시험했습니다	fix	lookup
+lookup:kana-spelling	「あると」しんしは 「このごちそうの なかに」	has:신사는	fix	lookup
+lookup:kana-spelling	一番最初の初代というのは私のひいおじいさん。	has:내 증조할아버지	fix	lookup
+lookup:kana-spelling	ええ、ひいおじいちゃんの家でね	has:증조할아버지의 집	fix	lookup
+lookup:kana-spelling	「えとえと、ペンならあるけど」	「음, 음, 펜이라면 있는데」	fix	lookup
+lookup:kana-spelling	な〜 へこむな〜。水の いきおいで➡	has:물의 기세로	fix	lookup
+lookup:kana-spelling	かれしかいない	그밖에 없다	keep	lookup
+lookup:kana-spelling	とりいって	lacks:기둥문	keep	lookup
+lookup:kana-spelling	しんしな態度	lacks:신사	keep	lookup
+lookup:kana-spelling	にぶい人だ	둔한 사람이다	keep	lookup
+lookup:kana-spelling	ねがいを かなえる	has:소원을	keep	lookup

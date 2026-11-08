@@ -1,0 +1,17 @@
+# 규칙: LEX-5117
+rule	input	expected	kind	layer
+defaults:kana-common-sense	ウィルソン じゅんびは いいか？	윌슨 준비는 좋은가?	fix	defaults
+defaults:kana-common-sense	せいかい言ってもいい？	정답 말해도 괜찮아?	fix	defaults
+defaults:kana-common-sense	せいかいは➡	정답은 ➡	fix	defaults
+defaults:kana-common-sense	よーし れんけつ かんりょう！見てろよ。	좋아~ 연결 완료! 두고 봐.	fix	defaults
+defaults:kana-common-sense	さくせんがかんりょうしたと	has:작전이 완료했다고	fix	defaults
+defaults:kana-common-sense	上官のこうぎは毎回同じ……。	has:상관의 강의는	fix	defaults
+defaults:kana-common-sense	しかも かいふくのくすりでＨＰが満タンに。	has:회복의 약	fix	defaults
+defaults:kana-common-sense	睦月、補給かんげき～☆	has:보급 감격	fix	defaults
+defaults:kana-common-sense	いつもげんきちゃんとあいさつする	has:원기	keep	defaults
+defaults:kana-common-sense	老人の好きだったらしいすいせんを病院の庭に植えた	has:수선화	keep	defaults
+defaults:kana-common-sense	これでおしまい｡	has:끝	keep	defaults
+defaults:kana-common-sense	こう こう こう…	has:이렇게…	keep	defaults
+defaults:kana-common-sense	しんぱいだなぁ	걱정이구나	keep	defaults
+defaults:kana-common-sense	作者のこうかい日記	lacks:고해	keep	defaults
+defaults:kana-common-sense	彼のきもち	has:기분	keep	defaults

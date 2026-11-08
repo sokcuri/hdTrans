@@ -1,0 +1,30 @@
+# 규칙: LEX-5115
+rule	input	expected	kind	layer
+segment:kana-word-first	笑顔のしわを増やす	웃는 얼굴의 주름을 늘린다	fix	segment
+segment:kana-word-first	「くるみ割り人形」。	「호두까기 인형」.	fix	segment
+segment:kana-word-first	「くるみ割り人形」の世界観が	「호두까기 인형」의 세계관이	fix	segment
+segment:kana-word-first	だがその時かまいたちが吹き荒れ、	has:그 때 가마이타치가	fix	segment
+segment:kana-word-first	ひこうきに乗ったときぜひ たしかめてみてくださ〜い。	has:꼭 확인해 보세요	fix	segment
+segment:kana-word-first	信金中央金庫としんきん共同センター	has:신용 금고 공동 센터	fix	segment
+segment:kana-word-first	麦飯とたくあん、そして味噌汁。	보리밥과 단무지, 그리고 된장국.	fix	segment
+segment:kana-word-first	仕方ない、私のたくあん少しあげるから。	has:내 단무지 조금	fix	segment
+segment:kana-word-first	Nevadaのいいとこ？	Nevada의 좋은 데?	fix	segment
+segment:kana-word-first	ちょっと、ちょっと、いいとこに来たわね！	has:좋은 데에 왔네	fix	segment
+segment:kana-word-first	なら、わがままを言っていいですか？	그렇다면, 떼를 써도 됩니까?	fix	segment
+segment:kana-word-first	ごちそうを たいらげた	맛좋은 음식을 먹어치웠다	fix	segment
+sound:small-kana-after	」するりょうりは こちら。	has:하는 요리는 이쪽	fix	sound
+segment:kana-word-first	「あ、それいい。さすが佳奈、いいこと言うね」	has:좋은 말 하네	keep	segment
+segment:kana-word-first	クソ 東からだ	lacks:몸	keep	segment
+segment:kana-word-first	「？　メールか。誰からだ……」	lacks:몸	keep	segment
+segment:kana-word-first	「そうなんか」	lacks:조난	keep	segment
+segment:kana-word-first	こんなん全然意味あらへん	lacks:곤란	keep	segment
+segment:kana-word-first	アイリスはぁ、リコといっしょに	has:아이리스는, 리코와 함께	keep	segment
+segment:kana-word-first	頭がいい子だ。	has:머리가 좋은 아이	keep	segment
+segment:kana-word-first	なんだか急に家の中がにぎやかになってしまいましたよ。	has:떠들썩해져	keep	segment
+segment:kana-word-first	口の中に広がるのは、たっぷりとした肉汁。	lacks:낙낙	keep	segment
+segment:kana-word-first	リットリオあらため、イタリアです。	lacks:심문	keep	segment
+segment:kana-word-first	「ぶっちゃけ、シンシア嬢のお下がりだもんなあ」	has:솔직히 말해서	keep	segment
+segment:kana-word-first	あ、提督ちょっと待ってください。	has:기다려 주세요	keep	segment
+segment:kana-word-first	見たら分かんねん ただの餅つく道具やんけ！	lacks:관념	keep	segment
+segment:kana-word-first	運が良かったんだろ、今回は	lacks:갈탄	keep	segment
+sound:small-kana-after	天龍様の攻撃だ！うっしゃぁっ！	has:웃샤앗	keep	sound

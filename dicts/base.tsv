@@ -2249,7 +2249,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あわら町	아와라마치	I130	QCTVPl		GN				jisjk:271159		
 あわれ	불쌍%A1@	G8L0			GN				jisjk:2107		
 あわれ	애련	I110	UFl		GN				jisjk:2108		
-あわれ	사랑&AV@	M435			GN				jisjk:2109		
+あわれ	불쌍히 여&A2@	M435			GN				jisjk:2109		
 あわれが	측은하게 여&A2@	M418			GN				jisjk:90407		
 あわれが	불쌍히 여&A2@	M448	SFl		GN				jisjk:138910		
 あわれっぽ	처량$AB@	H7U0			GN				jisjk:4831		
@@ -2714,8 +2714,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いきうつし	꼭 닮은 것	N110			GN				jisjk:125234		
 いきうまのめをぬ	눈 감으면 코 베어&A1@	M421			GN				jisjk:143832		
 いきうめ	생매장	N110	ULw		GN				jisjk:125236		
-いきおい	자연히	E311			GN				jisjk:40		
-いきおい	세력	N110			GN				jisjk:125238		
+いきおい	기세	N110			GN				jisjk:125238		
 いきおいがついてい	열심&Ac@	M427			GN				jisjk:143836		
 いきおいこ	힘&A6@	M425	SFl		GN				jisjk:140500		
 いきおいご	단단히 마음&HU@	M425			GN				jisjk:140507		
@@ -8267,7 +8266,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいがらついほう	패각 추방	N110	ULw		GN				jisjk:166562		-1
 かいがらむし	패각충	N110	VAm		GN				jisjk:166567		
 かいがん	개안	N110	QHP	Hd	GN				jisjk:166568		-1
-かいがん	해안	N110	VPl		GN				jisjk:166569		-1
+かいがん	해안	N110	VPl		GN				jisjk:166569		1
 かいき	모조리 &AX@	M448			GN				jisjk:147157		
 かいき	전세&A6@	M448			GN				jisjk:147161		
 かいきいわい	병의 쾌유 축하	N110			GN				jisjk:166588		-1
@@ -8382,7 +8381,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいせん	개선	N110	QHP		GN				jisjk:166859		-1
 かいせん	개전	N110	VTw	Hd	GN				jisjk:166860		-1
 かいせん	회전	N110	VTw	Hd	GN				jisjk:166865		-1
-かいせん	해전	N110	VTw		GN				jisjk:166866		-1
+かいせん	해전	N110	VTw		GN				jisjk:166866		1
 かいぜん	개선	N110		Hd	GN				jisjk:166870		
 かいぜん	앞마당	N110	VBl		GN				jisjk:166872		
 かいぜんほうほう	개선방법	N110			GN				jisjk:162681		
@@ -8457,7 +8456,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいでん	전수받음	N110		Hd	GN				jisjk:167011		-1
 かいとう	해답	N110		Hd	GN				jisjk:167012		-1
 かいとう	잘 드는 칼	N110	VPeVFd		GN				jisjk:167013		-1
-かいとう	회답	N110		Hd	GN				jisjk:167014		-1
+かいとう	회답	N110		Hd	GN				jisjk:167014		1
 かいとう	괴도	N110	VBpVHn		GN				jisjk:167015		-1
 かいとう	회장	N110	VHn		GN				jisjk:167016		-1
 かいとう	쾌투	N110	VRw	Hd	GN				jisjk:167018		-1
@@ -8469,7 +8468,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいどう	가도	N110			GN				jisjk:167035		-1
 かいどう	회관	N110	VBl		GN				jisjk:167039		-1
 かいどく	싸게 삼	N110	VMo		GN				jisjk:167040		-1
-かいどく	해독	N110	UTs	Hd	GN				jisjk:167041		-1
+かいどく	해독	N110	UTs	Hd	GN				jisjk:167041		1
 かいどり	접어 올림	N110			GN				jisjk:167047		-1
 かいどり	사육새	N110	VAm		GN				jisjk:167049		-1
 かいな	보람$FA@	H7U0			GN				jisjk:4957		
@@ -8494,7 +8493,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいばおけ	구유	N110	VPe		GN				jisjk:167087		-1
 かいばしら	조개	N110	VAmVFd		GN				jisjk:167088		-1
 かいばつ	해발	N110	VPl		GN				jisjk:167089		-1
-かいひょう	개표	N110	VTp	Hd	GN				jisjk:167097		-1
+かいひょう	개표	N110	VTp	Hd	GN				jisjk:167097		1
 かいひょう	바다표범	N110	VAm		GN				jisjk:167098		
 かいひょうき	해빙기	N110	VPe		GN				jisjk:167100		-1
 かいひん	해변	N110	VPl		GN				jisjk:167101		-1
@@ -8502,7 +8501,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かいふう	해풍	N110	VSs		GN				jisjk:167110		-1
 かいふう	개봉	N110		Hd	GN				jisjk:167111		-1
 かいふく	쾌유	N110	QHP		GN				jisjk:167113		-1
-かいふく	회복	N110	QHPVBp	Hd	GN				jisjk:167114		-1
+かいふく	회복	N110	QHPVBp	Hd	GN				jisjk:167114		1
 かいふく	개복	N110	QHP	Hd	GN				jisjk:167116		-1
 かいふくき	회복기	N110	UMe		GN				jisjk:167118		-1
 かいぶし	모깃불	N110			GN				jisjk:167122		-1
@@ -8845,7 +8844,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かくしょう	객장	N110	VHn		GN				jisjk:167664		-1
 かくしょゆうしゃ	각소유자	N110	VHn		GN				jisjk:160978		
 かくしん	핵심	N110			GN				jisjk:167667		-1
-かくしん	확신	N110	SFl	Hd	GN				jisjk:167668		-1
+かくしん	확신	N110	SFl	Hd	GN				jisjk:167668		1
 かくしん	혁신	N110	ULw	Hd	GN				jisjk:167669		-1
 かくじっけん	핵실험	N110	UTh		GN				jisjk:167676		-1
 かくじつ	격일	N110	UMe		GN				jisjk:167677		-1
@@ -8856,7 +8855,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かくじん	각인	N110	VBpVHn		GN				jisjk:167684		-1
 かくすい	각뿔	N110	VBl		GN				jisjk:167685		-1
 かくせい	격세	N110	VSsUMe		GN				jisjk:167686		-1
-かくせい	각성	N110	SFl	Hd	GN				jisjk:167687		-1
+かくせい	각성	N110	SFl	Hd	GN				jisjk:167687		1
 かくせいき	확성기	N110	USoQMUVEl		GN				jisjk:167693		-1
 かくせいざい	각성제	N110	QHPSFl		GN				jisjk:167694		-1
 かくせいのかん	격세지감	N110	SFl		GN				jisjk:167695		-1
@@ -8918,7 +8917,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かくらん	교란	N110		Hd	GN				jisjk:167801		-1
 かくりしつ	격리실	N110	VBl		GN				jisjk:167803		-1
 かくりつ	확률	N110			GN				jisjk:167804		-1
-かくりつ	확립	N110		Hd	GN				jisjk:167805		-1
+かくりつ	확립	N110		Hd	GN				jisjk:167805		1
 かくりょう	각료	N110	VHn		GN				jisjk:167807		-1
 かくりょうポスト	각료 임명	N110			MI				jisjk:345874		
 かくれ	&HD@	M427			GN				jisjk:202083		
@@ -9129,7 +9128,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かし	하지	N110	VBp		GN				jisjk:168125		-1
 かし	빚	N110	VMo		GN				jisjk:168126		-1
 かし	가시	N110	VSs		GN				jisjk:168127		-1
-かし	과자	N110	VFd		GN				jisjk:168128		-1
+かし	과자	N110	VFd		GN				jisjk:168128		1
 かし	꽃실	N110	VPt		GN				jisjk:168130		-1
 かし	하자	N110			GN				jisjk:168131		-1
 かし	화씨	N110	VPeQHP		GN				jisjk:168132		-1
@@ -9188,7 +9187,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かしょう	과소	N110		Dd	GN				jisjk:168243		-1
 かしょう	가칭	N110		Hd	GN				jisjk:168244		-1
 かしょう	가창	N110	USoQMU		GN				jisjk:168245		-1
-かしょう	화상	N110	QHP		GN				jisjk:168246		-1
+かしょう	화상	N110	QHP		GN				jisjk:168246		1
 かしょう	하천의 바닥	N110	VPl		GN				jisjk:168247		-1
 かしょう	화상	N110	UClVHn		GN				jisjk:168250		-1
 かしょく	과식	N110		Hd	GN				jisjk:168257		-1
@@ -9219,7 +9218,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かじゅえん	과수원	N110	VPtVBl		GN				jisjk:168329		-1
 かじゅく	가숙	N110	VBl		GN				jisjk:168330		-1
 かじょう	가죠	N110	UMe		GN				jisjk:168342		-1
-かじょう	과잉	N110			MI				jisjk:168344		-1
+かじょう	과잉	N110			MI				jisjk:168344		1
 かじょうがき	조목별로 나누어 쓴 글	N110	VBkVSw		GN				jisjk:168347		-1
 かじり付	물고 늘어&AL@	M411			GN				jisjk:90592		
 かじんはくめい	미인 박명	N110	UTs		GN				jisjk:168353		-1
@@ -10579,7 +10578,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんきょうちょう	환경청	N110	VBl		GN				jisjk:170109		-1
 かんきり	깡통 따개	N110	VPe		GN				jisjk:170110		-1
 かんきん	환금	N110	VMo	Hd	GN				jisjk:170111		-1
-かんきん	감금	N110	ULw	Hd	GN				jisjk:170112		-1
+かんきん	감금	N110	ULw	Hd	GN				jisjk:170112		1
 かんぎょ	건어	N110	VFd		GN				jisjk:170116		-1
 かんぎょう	관업	N110			GN				jisjk:170118		-1
 かんぎょう	산업 권장	N110	VMo		GN				jisjk:170121		-1
@@ -10600,7 +10599,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんげいこ	한중 훈련	N110	VRw		GN				jisjk:170159		-1
 かんげき	틈	N110	VBl		GN				jisjk:170162		-1
 かんげき	관람	N110	UAr	Hd	GN				jisjk:170163		-1
-かんげき	감격	N110	SFl	Hd	GN				jisjk:170164		-1
+かんげき	감격	N110	SFl	Hd	GN				jisjk:170164		1
 かんげつ	한가한 달	N110	UMe		GN				jisjk:170168		-1
 かんげつ	달 구경	N110	VRwVSs		GN				jisjk:170169		-1
 かんげん	환원	N110		Hd	GN				jisjk:170172		-1
@@ -10609,7 +10608,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんげんがく	관현악	N110	USoQMU		GN				jisjk:170178		-1
 かんこう	완공	N110	VBl	Hd	GN				jisjk:170182		-1
 かんこう	관행	N110			GN				jisjk:170183		-1
-かんこう	관광	N110	VRw		GN				jisjk:170184		-1
+かんこう	관광	N110	VRw		GN				jisjk:170184		1
 かんこう	감행	N110	VTw	Hd	GN				jisjk:170185		-1
 かんこう	감광	N110	UAr		GN				jisjk:170186		-1
 かんこうきゃく	관광객	N110	VHn		GN				jisjk:170196		-1
@@ -10649,7 +10648,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんさかん	감사관	N110	VHn		GN				jisjk:170283		-1
 かんさく	간작	N110		Hd	GN				jisjk:170285		-1
 かんさつ	감찰	N110		Hd	GN				jisjk:170286		-1
-かんさつ	관찰	N110		Hd	GN				jisjk:170287		-1
+かんさつ	관찰	N110		Hd	GN				jisjk:170287		1
 かんさつ	감찰	N110		Hd	GN				jisjk:170288		-1
 かんさつ	감찰	N110			GN				jisjk:170289		-1
 かんさつしゃ	관찰자	N110	VHn		GN				jisjk:170291		-1
@@ -10681,7 +10680,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんしょ	고구마	N110	VPtVFd		GN				jisjk:170358		
 かんしょう	관상	N110	UTh	Hd	GN				jisjk:170360		-1
 かんしょう	완충	N110		Hd	GN				jisjk:170365		-1
-かんしょう	간섭	N110	SFl	Hd	GN				jisjk:170366		-1
+かんしょう	간섭	N110	SFl	Hd	GN				jisjk:170366		1
 かんしょう	완승	N110	VRw	Hd	GN				jisjk:170367		-1
 かんしょう	감상	N110	SFl	Hd	GN				jisjk:170368		-1
 かんしょう	감상	N110		Hd	GN				jisjk:170369		-1
@@ -10694,7 +10693,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんしょうしゅぎ	감상주의	N110			GN				jisjk:170383		-1
 かんしょうちたい	중립 지대	N110	VPlULw		GN				jisjk:170385		-1
 かんしょく	간식	N110	UMeVFd		GN				jisjk:170388		-1
-かんしょく	감촉	N110	VBpSFl		GN				jisjk:170390		-1
+かんしょく	감촉	N110	VBpSFl		GN				jisjk:170390		1
 かんしょく	관직	N110	VMo		GN				jisjk:170392		-1
 かんしん	감탄	N110	SFl	Hd	GN				jisjk:170395		-1
 かんしんじ	관심사	N110			GN				jisjk:170400		-1
@@ -10715,7 +10714,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんじょ	차분	N110		Dd	GN				jisjk:170434		-1
 かんじょう	계산	N110		Hd	GN				jisjk:170435		-1
 かんじょう	환상	N110			GN				jisjk:170436		-1
-かんじょう	감정	N110	SFl		GN				jisjk:170437		-1
+かんじょう	감정	N110	SFl		GN				jisjk:170437		1
 かんじょう	관상	N110			GN				jisjk:170438		-1
 かんじょういにゅう	감정이입	N110			GN				jisjk:170442		-1
 かんじょうか	감정가	N110	VHn		GN				jisjk:170444		-1
@@ -10742,7 +10741,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんせい	환성	N110			GN				jisjk:170475		-1
 かんせい	관성	N110			GN				jisjk:170476		-1
 かんせい	감성	N110	SFl		GN				jisjk:170477		-1
-かんせい	완성	N110		Hd	GN				jisjk:170478		-1
+かんせい	완성	N110		Hd	GN				jisjk:170478		1
 かんせい	간세이	N110	UMe		GN				jisjk:170485		-1
 かんせいこうほう	관성항법	N110			MI				jisjk:345828		
 かんせいしょくぶつ	건생 식물	N110	VPt		GN				jisjk:170488		-1
@@ -10814,7 +10813,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんちょう	관청	N110	VBl		GN				jisjk:170622		-1
 かんちょう	관장	N110	VHn		GN				jisjk:170624		-1
 かんちょう	관장	N110	QHP	Hd	GN				jisjk:170626		-1
-かんちょう	함장	N110	VHn		GN				jisjk:170627		-1
+かんちょう	함장	N110	VHn		GN				jisjk:170627		1
 かんちょうがい	관청가	N110	VPl		GN				jisjk:170628		-1
 かんつう	관통	N110		Hd	GN				jisjk:170629		-1
 かんつばき	겨울철의 동백꽃	N110	VPt		GN				jisjk:170631		-1
@@ -10939,7 +10938,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんようご	관용어	N110	UTs		GN				jisjk:170891		-1
 かんようしょくぶつ	관엽 식물	N110	VPt		GN				jisjk:170893		-1
 かんらく	함락	N110	VTw		GN				jisjk:170898		-1
-かんらん	관람	N110		Hd	GN				jisjk:170901		-1
+かんらん	관람	N110		Hd	GN				jisjk:170901		1
 かんらん	양배추	N110	VPtVFd		GN				jisjk:170902		
 かんらんせき	감람석	N110	VSn		GN				jisjk:170906		-1
 かんらんせき	관람석	N110	VBl		GN				jisjk:170907		-1
@@ -10953,7 +10952,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんりにん	관리인	N110	VHn		GN				jisjk:170933		-1
 かんりゃくか	간략화	N110		Hd	GN				jisjk:170936		-1
 かんりょう	관료	N110	VHn		GN				jisjk:170938		-1
-かんりょう	완료	N110		Hd	GN				jisjk:170939		-1
+かんりょう	완료	N110		Hd	GN				jisjk:170939		1
 かんりょう	감량	N110			GN				jisjk:170940		-1
 かんりょうしゅぎ	관료주의	N110			GN				jisjk:170942		-1
 かんりょうせい	관료제	N110	VBl		GN				jisjk:170945		-1
@@ -11713,7 +11712,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きじゅつ	요술	N110			GN				jisjk:172189		-1
 きじゅつ	기술	N110		Hd	GN				jisjk:172190		-1
 きじゅん	귀순	N110	VTw		GN				jisjk:172191		-1
-きじゅん	기준	N110	SFl		GN				jisjk:172192		-1
+きじゅん	기준	N110	SFl		GN				jisjk:172192		1
 きじゅん	규준	N110	ULw		GN				jisjk:172193		-1
 きじゅんごさ	기준 오차	N110			MI				jisjk:345969		
 きじゅんち	기준치	N110			GN				jisjk:172194		-1
@@ -12109,7 +12108,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きゅうくつ	궁극	N110			GN				jisjk:369315		
 きゅうぐん	구 일본군	N110			MI				jisjk:345926		
 きゅうけい	구형	N110	ULw	Hd	GN				jisjk:172966		-1
-きゅうけい	휴식	N110		Hd	GN				jisjk:172967		-1
+きゅうけい	휴식	N110		Hd	GN				jisjk:172967		1
 きゅうけつ	혈액 공급	N110	QHP	Hd	GN				jisjk:172970		-1
 きゅうけつ	구혈	N110	VBpQHP		GN				jisjk:172972		-1
 きゅうけつ	궁궐	N110	VBl		GN				jisjk:172973		-1
@@ -12119,7 +12118,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きゅうげん	급감	N110		Hd	GN				jisjk:172980		-1
 きゅうこう	휴교	N110		Hd	GN				jisjk:172981		-1
 きゅうこう	휴강	N110		Hd	GN				jisjk:172982		-1
-きゅうこう	급행	N110	VTpVBl		GN				jisjk:172983		-1
+きゅうこう	급행	N110	VTpVBl		GN				jisjk:172983		1
 きゅうこう	옛 정	N110	SFl		GN				jisjk:172984		-1
 きゅうこうか	급강하	N110			GN				jisjk:172990		-1
 きゅうこうさくもつ	구황 작물	N110	VFd		GN				jisjk:172992		-1
@@ -12352,7 +12351,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きょうおん	발자국 소리	N110			GN				jisjk:173426		-1
 きょうか	강화	Q110	SFl	Hd	GN				jisjk:173427		
 きょうか	교화	N110		Hd	GN				jisjk:173428		-1
-きょうか	교과	N110	VPl		GN				jisjk:173429		-1
+きょうか	교과	N110	VPl		GN				jisjk:173429		1
 きょうかい	협회	N110	VBl		GN				jisjk:173434		-1
 きょうかい	교회	N110	VBlUCl		GN				jisjk:173435		-1
 きょうかい	경계	N110	VPl		GN				jisjk:173436		-1
@@ -12448,7 +12447,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きょうしゅ	교주	N110	UClVHn		GN				jisjk:173628		-1
 きょうしゅう	향수	N110	SFl		GN				jisjk:173629		-1
 きょうしゅう	교습	N110		Hd	GN				jisjk:173630		-1
-きょうしゅう	강습	N110	VTwVRw	Hd	GN				jisjk:173632		-1
+きょうしゅう	강습	N110	VTwVRw	Hd	GN				jisjk:173632		1
 きょうしゅう	흥행 수입	N110			GN				jisjk:173634		-1
 きょうしゅく	송구%A2@	G8U0			GN				jisjk:120467		
 きょうしゅつ	공출	N110		Hd	GN				jisjk:173635		-1
@@ -12479,7 +12478,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きょうすい	흉수	N110	QHPVBp		GN				jisjk:173690		-1
 きょうすいびょう	공수병	N110	QHPVAm		GN				jisjk:173691		-1
 きょうせい	교정	N110	QHP	Hd	GN				jisjk:173692		-1
-きょうせい	강제	N110	ULw	Hd	GN				jisjk:173693		-1
+きょうせい	강제	N110	ULw	Hd	GN				jisjk:173693		1
 きょうせい	공생	N110	VAmVPt	Hd	GN				jisjk:173694		-1
 きょうせいしっこう	강제 집행	N110	ULw		GN				jisjk:173702		-1
 きょうせいしょぶん	강제 처분	N110	ULw		GN				jisjk:173704		-1
@@ -12491,7 +12490,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きょうそう	경주	N110	VRw	Hd	GN				jisjk:173713		-1
 きょうそう	미친 듯이 소란함	N110	QHP		GN				jisjk:173716		-1
 きょうそう	강장	N110	VBp		GN				jisjk:173718		-1
-きょうそう	경쟁	N110	VRw	Hd	GN				jisjk:173719		-1
+きょうそう	경쟁	N110	VRw	Hd	GN				jisjk:173719		1
 きょうそうきょく	협주곡	N110	USoQMU		GN				jisjk:173720		-1
 きょうそうざい	강장제	N110	QHP		GN				jisjk:173722		-1
 きょうそうしゃ	경쟁자	N110	VHn		GN				jisjk:160677		
@@ -12975,7 +12974,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きんえん	주술	N110			GN				jisjk:174549		-1
 きんえんせき	금연석	N110	VBl		GN				jisjk:174551		-1
 きんかい	금괴	N110	VPeVMo		GN				jisjk:174556		-1
-きんかい	근해	N110	VPl		GN				jisjk:174557		-1
+きんかい	근해	N110	VPl		GN				jisjk:174557		1
 きんかいきん	금 수출의 해제	N110	VMo		GN				jisjk:174563		-1
 きんかぎょくじょう	금과옥조	N110	ULw		GN				jisjk:174566		-1
 きんかくし	가리개	N110	VPe		GN				jisjk:174568		-1
@@ -13101,7 +13100,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きんそしき	근조직	N110	VBp		GN				jisjk:174782		-1
 きんそん	이웃 마을	N110	VPl		GN				jisjk:174784		-1
 きんぞく	근속	N110	UMeVMo	Hd	GN				jisjk:174785		-1
-きんぞく	금속	N110	VSn		GN				jisjk:174786		-1
+きんぞく	금속	N110	VSn		GN				jisjk:174786		1
 きんぞくげんそ	금속 원소	N110			GN				jisjk:174788		-1
 きんぞくこうたく	금속 광택	N110			GN				jisjk:174790		-1
 きんぞくせい	금속성	N110			GN				jisjk:174791		-1
@@ -13186,7 +13185,7 @@ ttt	ttt	K110			GN				jisjk:201744
 きんゆうしほん	금융 자본	N110	VMoVMy		GN				jisjk:174934		-1
 きんゆうふあん	금융 불안	N110			GN				jisjk:174937		-1
 きんよう	긴요	N110		Dd	GN				jisjk:174940		-1
-きんよう	금요일	N110	UMe		GN				jisjk:174941		-1
+きんよう	금요일	N110	UMe		GN				jisjk:174941		1
 きんようちけい	중요 지형 지물	N110			MI				jisjk:345909		
 きんようどうろ	주요 도로	N110			MI				jisjk:345894		
 きんようび	금요일	N110	UMe		GN				jisjk:174943		-1
@@ -14676,7 +14675,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいこう	휴대	N110		Hd	GN				jisjk:177275		-1
 けいこう	형광	N110	VPe		GN				jisjk:177276		-1
 けいこう	경구	N110	QHP		GN				jisjk:177277		-1
-けいこう	경향	N110	SFl		GN				jisjk:177278		-1
+けいこう	경향	N110	SFl		GN				jisjk:177278		1
 けいこうぎょう	경공업	N110	VMo		GN				jisjk:177285		-1
 けいこうとう	형광등	N110	VPeVEl		GN				jisjk:177289		-1
 けいこうとりょう	형광 도료	N110			GN				jisjk:177291		-1
@@ -14684,7 +14683,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいこうぶんがく	사회주의 문학	N110			GN				jisjk:177295		-1
 けいこぎ	연습복	N110	VCpVRw		GN				jisjk:177297		-1
 けいこく	계곡	N110	VPl		GN				jisjk:177298		-1
-けいこく	경고	N110	VRw	Hd	GN				jisjk:177299		-1
+けいこく	경고	N110	VRw	Hd	GN				jisjk:177299		1
 けいこく	경국	N110			GN				jisjk:177301		-1
 けいこく	미인	N110	VHnUTs		GN				jisjk:177302		-1
 けいこだい	연습 상대	N110	VHnVRw		GN				jisjk:177304		-1
@@ -14735,7 +14734,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいしょ	경서	N110	VBkVSw		GN				jisjk:177418		-1
 けいしょう	경상	N110	QHP		GN				jisjk:177419		-1
 けいしょう	형상	N110			GN				jisjk:177420		-1
-けいしょう	계승	N110		Hd	GN				jisjk:177421		-1
+けいしょう	계승	N110		Hd	GN				jisjk:177421		1
 けいしょう	경칭	N110	UTs		GN				jisjk:177422		-1
 けいしょう	경승	N110	VPl		GN				jisjk:177423		-1
 けいしょう	경종	N110			GN				jisjk:177424		-1
@@ -14760,7 +14759,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいじょう	경상	N110			GN				jisjk:177465		-1
 けいじょう	계상	N110	VMo	Hd	GN				jisjk:177466		-1
 けいじょう	형장	N110	ULw		GN				jisjk:177467		-1
-けいじょう	형상	N110			GN				jisjk:177468		-1
+けいじょう	형상	N110			GN				jisjk:177468		1
 けいじょう	존경과 겸양	N110			GN				jisjk:177469		-1
 けいじょうご	겸양어	N110	UTs		GN				jisjk:177476		-1
 けいじょうひ	경상비	N110	VMyVMo		GN				jisjk:177478		-1
@@ -14770,7 +14769,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいすうかん	계수관	N110	VPe		GN				jisjk:177486		-1
 けいずかい	장물 매매	N110	VMo		GN				jisjk:177495		-1
 けいせい	형세	N110			GN				jisjk:177497		-1
-けいせい	형성	N110		Hd	GN				jisjk:177498		-1
+けいせい	형성	N110		Hd	GN				jisjk:177498		1
 けいせい	미인	N110	VHnUTs		GN				jisjk:177502		-1
 けいせい	경정	N110			GN				jisjk:177504		-1
 けいせいさいみん	경세 제민	N110			GN				jisjk:177506		-1
@@ -14822,7 +14821,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けいでんき	계전기	N110	VEl		GN				jisjk:177586		-1
 けいとう	심취	N110	SFl	Hd	GN				jisjk:177589		-1
 けいとう	맨드라미	N110	VPt		GN				jisjk:177590		
-けいとう	계통	N110			GN				jisjk:177591		-1
+けいとう	계통	N110			GN				jisjk:177591		1
 けいとう	계투	N110	VRw	Hd	GN				jisjk:177592		-1
 けいどうみゃく	경동맥	N110	QHPVBp		GN				jisjk:177599		-1
 けいどうみゃく	경동맥	N110	QHP		GN				jisjk:177601		-1
@@ -15304,7 +15303,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けんさん	연구	N110	UTh	Hd	GN				jisjk:178326		-1
 けんさん	연찬	N110			GN				jisjk:178327		-1
 けんざい	현재	N110		Hd	GN				jisjk:178329		-1
-けんざい	건재	N110	VBp	Dd	GN				jisjk:178330		-1
+けんざい	건재	N110	VBp	Dd	GN				jisjk:178330		1
 けんざい	건축 재료	N110	VPe		GN				jisjk:178331		-1
 けんざいか	표면화	N110		Hd	GN				jisjk:178334		-1
 けんざん	검산	N110		Hd	GN				jisjk:178335		-1
@@ -15321,14 +15320,14 @@ ttt	ttt	K110			GN				jisjk:201744
 けんしゅうかい	연수회	N110	VBl		GN				jisjk:178370		-1
 けんしゅうせい	연수생	N110	VHnUTh		GN				jisjk:178374		-1
 けんしゅつ	현출	N110		Hd	GN				jisjk:160016		
-けんしゅつ	검출	N110	QHP	Hd	GN				jisjk:178375		-1
+けんしゅつ	검출	N110	QHP	Hd	GN				jisjk:178375		1
 けんしゅつき	검출기	N110			GN				jisjk:161790		
 けんしゅん	험준	N110	VPl	Dd	GN				jisjk:178376		-1
 けんしょ	험한 곳	N110	VPl		GN				jisjk:178378		-1
 けんしょう	현창	N110		Hd	GN				jisjk:178380		-1
 けんしょう	현상	N110	VMo		GN				jisjk:178381		-1
 けんしょう	헌장	N110	VBkVSw		GN				jisjk:178382		-1
-けんしょう	검증	N110	ULw	Hd	GN				jisjk:178384		-1
+けんしょう	검증	N110	ULw	Hd	GN				jisjk:178384		1
 けんしょうきん	현상금	N110			GN				jisjk:178393		-1
 けんしょく	겸직	N110	VMo	Hd	GN				jisjk:178396		-1
 けんしん	헌신	N110		Hd	GN				jisjk:178399		-1
@@ -15560,7 +15559,7 @@ ttt	ttt	K110			GN				jisjk:201744
 げきしょく	격무	N110	VMo		GN				jisjk:178850		-1
 げきしん	강진	N110	VSs		GN				jisjk:178851		-1
 げきじょう	격정	N110	SFl		GN				jisjk:178852		-1
-げきじょう	극장	N110	VBl		GN				jisjk:178853		-1
+げきじょう	극장	N110	VBl		GN				jisjk:178853		1
 げきせん	격전	N110	VRwVTw	Hd	GN				jisjk:178858		-1
 げきぜつ	격설	N110			GN				jisjk:178860		-1
 げきぞう	급증	N110		Hd	GN				jisjk:178861		-1
@@ -15718,7 +15717,7 @@ ttt	ttt	K110			GN				jisjk:201744
 げんげん	한마디 한마디	N110			GN				jisjk:179195		-1
 げんこ	주먹	I110	VBpVTw		GN				jisjk:40923		
 げんこう	현행	N110	UMeVBl		GN				jisjk:179196		-1
-げんこう	원고	N110	VBkVSw		GN				jisjk:179197		-1
+げんこう	원고	N110	VBkVSw		GN				jisjk:179197		1
 げんこう	언행	N110	UTs		GN				jisjk:179198		-1
 げんこうはん	현행범	N110	ULwVHn		GN				jisjk:179212		-1
 げんこうほう	현행법	N110	ULw		GN				jisjk:179214		-1
@@ -15988,7 +15987,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こううんじ	행운아	N110	VHn		GN				jisjk:179708		-1
 こううんりゅうすい	행운 유수	N110	UTs		GN				jisjk:179710		-1
 こうえい	공영	N110			GN				jisjk:179711		-1
-こうえい	영광	N110			GN				jisjk:179713		-1
+こうえい	영광	N110			GN				jisjk:179713		1
 こうえい	뛰어난 시가	N110			GN				jisjk:179715		-1
 こうえい	자손	N110	VHn		GN				jisjk:179716		-1
 こうえい	코에이	N130	VPlVGtVMo		GN				jisjk:179717		-1
@@ -16001,7 +16000,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうえつしゃ	교열자	N110	VHn		GN				jisjk:179732		-1
 こうえん	호연	N110	USoQMUUAr		GN				jisjk:179733		-1
 こうえん	공연	N110	USoQMUUAr	Hd	GN				jisjk:179734		-1
-こうえん	공원	N110	VPl		GN				jisjk:179735		-1
+こうえん	공원	N110	VPl		GN				jisjk:179735		1
 こうえん	후원	N110		Hd	GN				jisjk:179736		-1
 こうえん	강연	N110	VBl	Hd	GN				jisjk:179737		-1
 こうえん	향의 연기	N110			GN				jisjk:179740		-1
@@ -16079,7 +16078,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうきしん	호기심	N110	SFl		GN				jisjk:179951		-1
 こうきど	고휘도	N110			GN				jisjk:179953		-1
 こうきゅう	항구	N110	UMe		GN				jisjk:179959		-1
-こうきゅう	고급	N110	VCpVAc		GN				jisjk:179960		-1
+こうきゅう	고급	N110	VCpVAc		GN				jisjk:179960		1
 こうきゅう	높은 급료	N110	VMo		GN				jisjk:179962		-1
 こうきゅう	후궁	N110	VHn		GN				jisjk:179969		-1
 こうきゅうか	영구화	N110		Hd	GN				jisjk:179974		-1
@@ -16089,7 +16088,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうきゅうび	공휴일	N110	UMe		GN				jisjk:179980		-1
 こうきょ	황거	N110	VBl		GN				jisjk:179981		-1
 こうきょう	호황	N110	VMo		GN				jisjk:179985		-1
-こうきょう	공공	N110			GN				jisjk:179986		-1
+こうきょう	공공	N110			GN				jisjk:179986		1
 こうきょう	흉년	N110			GN				jisjk:179989		-1
 こうきょういく	공교육	N110			GN				jisjk:179992		-1
 こうきょうかい	천주교회	N110	UClVBl		GN				jisjk:179993		-1
@@ -16108,7 +16107,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうきん	공금	N110	VMo		GN				jisjk:180021		-1
 こうきん	항균	N110	QHP		GN				jisjk:180024		-1
 こうぎ	공공	N110			GN				jisjk:180028		
-こうぎ	강의	N110		Hd	GN				jisjk:180029		-1
+こうぎ	강의	N110		Hd	GN				jisjk:180029		1
 こうぎ	교분	N110	SFl		GN				jisjk:180031		-1
 こうぎ	광의	N110	UTs		GN				jisjk:180032		
 こうぎ	항의	N110	ULw	Hd	GN				jisjk:180033		-1
@@ -16131,7 +16130,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうぎょく	강옥	N110	VSnVAc		GN				jisjk:180065		-1
 こうぎろく	강의록	N110	VBkVSw		GN				jisjk:180067		-1
 こうくう	고공	N110	VSs		GN				jisjk:180069		-1
-こうくう	항공	N110	VTp		GN				jisjk:180070		-1
+こうくう	항공	N110	VTp		GN				jisjk:180070		1
 こうくう	구강	N110	VBp		GN				jisjk:180071		-1
 こうくうき	항공기	N110	VPeVTp		GN				jisjk:180072		-1
 こうくうけん	항공권	N110	VTp		GN				jisjk:180076		-1
@@ -16181,7 +16180,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうこう	항행	N110	VTp	Hd	GN				jisjk:180161		-1
 こうこう	효행	N110			GN				jisjk:180162		-1
 こうこう	구강	N110	VBpQHP		GN				jisjk:180163		-1
-こうこう	고등학교	N110	VBl		GN				jisjk:180164		-1
+こうこう	고등학교	N110	VBl		GN				jisjk:180164		1
 こうこう	공고	N110	VBl		GN				jisjk:180168		
 こうこう	갱구	N110	VBl		GN				jisjk:180169		-1
 こうこう	후고	N110			GN				jisjk:180173		
@@ -16194,7 +16193,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうこうや	마음좋은 할아버지	N110	VHn		GN				jisjk:180201		-1
 こうこがく	고고학	N110			GN				jisjk:180204		-1
 こうこく	항고	N110	ULw	Hd	GN				jisjk:180205		-1
-こうこく	광고	N110	VCm	Hd	GN				jisjk:180206		-1
+こうこく	광고	N110	VCm	Hd	GN				jisjk:180206		1
 こうこく	공고	N110		Hd	GN				jisjk:180207		-1
 こうこくにん	항고인	N110	VHn		GN				jisjk:161226		
 こうこつ	황홀	I110			GN				jisjk:111819		
@@ -16217,7 +16216,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうさいひ	교제비	N110	VMyVMo		GN				jisjk:180257		-1
 こうさく	경작	N110	VPe	Hd	GN				jisjk:180258		-1
 こうさく	교착	N110		Hd	GN				jisjk:180259		-1
-こうさく	공작	N110	VPe		GN				jisjk:180260		-1
+こうさく	공작	N110	VPe		GN				jisjk:180260		1
 こうさくきかい	공작 기계	N110	VPe		GN				jisjk:180261		-1
 こうさくち	경작지	N110	VPl		GN				jisjk:180262		-1
 こうさつ	교살	N110		Hd	GN				jisjk:180263		-1
@@ -16280,7 +16279,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうしゃ	뒷차	N110	VTpVPe		GN				jisjk:180351		-1
 こうしゃく	강석	N110			GN				jisjk:180352		-1
 こうしゃく	후작	N110			GN				jisjk:180353		-1
-こうしゃく	공작	N110			GN				jisjk:180354		-1
+こうしゃく	공작	N110			GN				jisjk:180354		1
 こうしゃくし	야담가	N110	VHn		GN				jisjk:180355		-1
 こうしゃさい	공사채	N110	VMo		GN				jisjk:180356		-1
 こうしゃほう	고사포	N110	VPeVTw		GN				jisjk:180357		-1
@@ -16328,7 +16327,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうしん	후진	N110	VTp	Hd	GN				jisjk:180453		-1
 こうしん	나빠짐	N110	QHP		GN				jisjk:180456		-1
 こうしん	행진	N110	VRw	Hd	GN				jisjk:180457		-1
-こうしん	갱신	N110		Hd	GN				jisjk:180458		-1
+こうしん	갱신	N110		Hd	GN				jisjk:180458		1
 こうしん	교신	N110		Hd	GN				jisjk:180462		-1
 こうしん	항진	N110		Hd	GN				jisjk:180468		-1
 こうしん	고신	N110	VMoVBl		GN				jisjk:180470		-1
@@ -16402,7 +16401,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうせい	후진	N110	VPeVHn		GN				jisjk:180611		-1
 こうせい	교정	N110	VBkVSwVCm	Hd	GN				jisjk:180612		-1
 こうせい	후세	N110	VHnVHnVBl		GN				jisjk:180613		-1
-こうせい	구성	N110	VPl	Hd	GN				jisjk:180614		-1
+こうせい	구성	N110	VPl	Hd	GN				jisjk:180614		1
 こうせい	교성	N110	USoQMU		GN				jisjk:180616		-1
 こうせい	경정	N110		Hd	GN				jisjk:180621		-1
 こうせいいん	구성원	N110	VHn		GN				jisjk:180630		-1
@@ -16520,7 +16519,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうちょ	고저	N110	VBkVSwUTs		GN				jisjk:180880		-1
 こうちょ	황태자	N110	VHn		GN				jisjk:180882		-1
 こうちょう	고조	N110	SFl		GN				jisjk:180883		-1
-こうちょう	교장	N110	VHnVMo		GN				jisjk:180884		-1
+こうちょう	교장	N110	VHnVMo		GN				jisjk:180884		1
 こうちょう	호조	N110			GN				jisjk:180885		-1
 こうちょう	홍조	N110			GN				jisjk:180886		-1
 こうちょう	고조	N110			GN				jisjk:180892		-1
@@ -16575,7 +16574,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうでんち	광전지	N110	VPe		GN				jisjk:180992		-1
 こうとう	앙등	N110	VMo	Hd	GN				jisjk:180998		-1
 こうとう	구두	N110	UTs		GN				jisjk:180999		-1
-こうとう	고등	N110			GN				jisjk:181000		-1
+こうとう	고등	N110			GN				jisjk:181000		1
 こうとう	공당	N110	VBl		GN				jisjk:181003		-1
 こうとう	호투	N110	VRw	Hd	GN				jisjk:181004		-1
 こうとう	고토	N120	VPl		GN				jisjk:181011		-1
@@ -16621,7 +16620,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうにゅうさき	구입처	N110	VPl		GN				jisjk:181094		-1
 こうにゅうしゃ	구입자	N110	VHn		GN				jisjk:181096		-1
 こうにん	후임	N110	VHn		GN				jisjk:181099		-1
-こうにん	공인	N110		Hd	GN				jisjk:181100		-1
+こうにん	공인	N110		Hd	GN				jisjk:181100		1
 こうにんかいけいし	공인 회계사	N110	VHnVMo		GN				jisjk:181103		-1
 こうねつ	고열	N110	QHP		GN				jisjk:181105		-1
 こうねつ	광열	N110			GN				jisjk:181106		-1
@@ -16649,7 +16648,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうはつ	후발	N110		Hd	GN				jisjk:181158		-1
 こうはん	광범	N110		Dd	GN				jisjk:160437		
 こうはん	공판	N110	ULwVBl		GN				jisjk:181161		-1
-こうはん	후반	N110	UMeVRw		GN				jisjk:181162		-1
+こうはん	후반	N110	UMeVRw		GN				jisjk:181162		1
 こうはん	공판	N110	VPe		GN				jisjk:181164		-1
 こうはん	갑판	N110	VPl		GN				jisjk:181165		-1
 こうはん	강가	N110	VPl		GN				jisjk:181167		-1
@@ -16679,7 +16678,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうばんねんしょう	교번 연소	N110			GN				jisjk:162925		
 こうひつ	연필	N110			GN				jisjk:181224		-1
 こうひょう	강평	N110		Hd	GN				jisjk:181227		-1
-こうひょう	공표	N110	VBl	Hd	GN				jisjk:181228		-1
+こうひょう	공표	N110	VBl	Hd	GN				jisjk:181228		1
 こうひょう	호평	N110			GN				jisjk:181229		-1
 こうひんい	고품위	N110		Dd	GN				jisjk:181233		-1
 こうひんしつ	고품질	N110	VMo		GN				jisjk:181235		-1
@@ -16693,7 +16692,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうふきん	교부금	N110	VMy		GN				jisjk:181263		-1
 こうふく	행복%A1@	G8L0			GN				jisjk:115388		
 こうふく	항복	N110	VRwVTw	Hd	GN				jisjk:181264		-1
-こうふく	행복	N110	SFl	Dd	GN				jisjk:181265		-1
+こうふく	행복	N110	SFl	Dd	GN				jisjk:181265		1
 こうふしょ	보급대	N110			MI				jisjk:346200		
 こうふん	흥분	N110	SFl	Hd	GN				jisjk:181273		-1
 こうふん	화장	N110	VAc		GN				jisjk:181277		-1
@@ -18485,7 +18484,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ごうびょう	업병	N110	QHP		GN				jisjk:183528		-1
 ごうべん	합작	N110	VMo		GN				jisjk:183534		-1
 ごうほう	신호포	N110	VPeVTw		GN				jisjk:183536		-1
-ごうほう	합법	N110	ULw		GN				jisjk:183537		-1
+ごうほう	합법	N110	ULw		GN				jisjk:183537		1
 ごうほう	호방	N110	SFl	Dd	GN				jisjk:183539		-1
 ごうほうか	합법화	N110		Hd	GN				jisjk:183543		-1
 ごうまつ	추호	N110			GN				jisjk:183547		-1
@@ -19265,7 +19264,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さいげい	재능과 기예	N110			GN				jisjk:184244		-1
 さいげつ	세월	N110	UMe		GN				jisjk:184245		-1
 さいげん	제한	N110			GN				jisjk:184246		-1
-さいげん	재현	N110		Hd	GN				jisjk:184247		-1
+さいげん	재현	N110		Hd	GN				jisjk:184247		1
 さいこ	최고	N110			GN				jisjk:184248		
 さいこう	최고	N110			GN				jisjk:184249		-1
 さいこう	채광	N110			GN				jisjk:184250		-1
@@ -19301,7 +19300,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さいしゅ	제주	N110	VHn		GN				jisjk:184311		-1
 さいしゅ	제주	N110	VHn		GN				jisjk:184313		-1
 さいしゅう	채집	N110	VPtVAm	Hd	GN				jisjk:184317		-1
-さいしゅう	최종	N110	UMe		GN				jisjk:184318		-1
+さいしゅう	최종	N110	UMe		GN				jisjk:184318		1
 さいしゅうかい	최종회	N110	UArVBl		GN				jisjk:184320		-1
 さいしゅうしょく	재취직	N110	VMo	Hd	GN				jisjk:184324		-1
 さいしゅうせん	최종전	N110	VPl		GN				jisjk:184326		-1
@@ -19359,7 +19358,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さいたん	채탄	N110		Hd	GN				jisjk:184432		-1
 さいたん	최단	N110			GN				jisjk:184433		-1
 さいだい	자초지종	N110			GN				jisjk:184436		-1
-さいだい	최대	N110			GN				jisjk:184437		-1
+さいだい	최대	N110			GN				jisjk:184437		1
 さいだいか	최대화	N110		Hd	GN				jisjk:184439		-1
 さいだいげん	최대한	N110			GN				jisjk:184440		-1
 さいだいこうやくすう	최대 공약수	N110			GN				jisjk:184441		-1
@@ -19685,7 +19684,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さくじょ	삭제	N110		Hd	GN				jisjk:184908		-1
 さくじょう	고랑	N110	VPl		GN				jisjk:184910		-1
 さくせい	제작	N110		Hd	GN				jisjk:184914		-1
-さくせい	작성	N110		Hd	GN				jisjk:184915		-1
+さくせい	작성	N110		Hd	GN				jisjk:184915		1
 さくせいしゃ	작성자	N110	VHn		GN				jisjk:160594		
 さくせん	작전	N110	VTw		GN				jisjk:184920		-1
 さくそう	복잡	N110		Hd	GN				jisjk:184923		-1
@@ -21186,7 +21185,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しきうつし	모방	N110			GN				jisjk:186873		-1
 しきかく	색각	N110	SFl		GN				jisjk:186876		-1
 しきかん	색감	N110	SFl		GN				jisjk:186877		-1
-しきかん	지휘관	N110	VHn		GN				jisjk:186878		-1
+しきかん	지휘관	N110	VHn		GN				jisjk:186878		1
 しきがみ	종이 깔개 	N110	VPe		GN				jisjk:186882		-1
 しきがわ	모피 깔개	N110	VPe		GN				jisjk:186884		-1
 しきがわ	구두 안창	N110	VPe		GN				jisjk:186885		-1
@@ -21227,7 +21226,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しきゅうがん	자궁암	N110	QHP		GN				jisjk:186947		-1
 しきゅうがん	자궁암	N110	QHP		GN				jisjk:186949		-1
 しきゅうしき	시구식	N110	VRw		GN				jisjk:186951		-1
-しきょう	주교	N110	UClVMoVHn		GN				jisjk:186953		-1
+しきょう	주교	N110	UClVMoVHn		GN				jisjk:186953		1
 しきょう	최고의 경지	N110	VPl		GN				jisjk:186956		-1
 しきょう	지교	N110		Hd	GN				jisjk:186958		-1
 しきょう	거래 상황	N110	VMo		GN				jisjk:186964		
@@ -21368,7 +21367,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ししゅんき	사춘기	N110	UMe		GN				jisjk:187287		-1
 ししょう	사상	N110	QHP	Hd	GN				jisjk:187298		-1
 ししょう	선생	N110	VHn		GN				jisjk:187299		-1
-ししょう	지장	N110			GN				jisjk:187300		-1
+ししょう	지장	N110			GN				jisjk:187300		1
 ししょう	사생	N110	UCl		GN				jisjk:187302		-1
 ししょう	생사	N110			GN				jisjk:187303		-1
 ししょうしゃ	사상자	N110	VHn		GN				jisjk:187312		-1
@@ -21778,7 +21777,7 @@ ttt	ttt	K110			GN				jisjk:201744
 してい	해 나&A1@	M44?		Sk	GN				jisjk:187952		
 してい	자제	N110	VHn		GN				jisjk:187953		
 してい	사제	N110	VHn		GN				jisjk:187955		-1
-してい	지정	N110		Hd	GN				jisjk:187957		-1
+してい	지정	N110		Hd	GN				jisjk:187957		1
 してい	사정	N110	VHn		GN				jisjk:187959		-1
 してい	하지 &LW@	M427		Tu	GN	2114	||1 &&3 U+0== "Lません" ||3 S-1== "結婚" S-1== "R注" S-1== "L注" P-1== "1**"	してい가 ません형이고 앞 명사가 結婚이거나 注로 시작하거나 끝나면 하지 않다를 고른다. (미발동: rare-context)	jisjk:263745		
 してい	&NC@	M437		Sk	GN	3287	||2 S-1== "結婚" &&2 S-1== "を" S-2== "約束"	앞에 結婚 또는 約束を가 오면 してい를 완료·상태의 하다 계열로 고른다. (미발동: rare-context)	jisjk:342587		
@@ -22415,7 +22414,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しゃじょう	사격장	N110	VBl		GN				jisjk:188922		-1
 しゃじょう	사장	N110			GN				jisjk:188924		-1
 しゃせい	사생	N110		Hd	GN				jisjk:188925		-1
-しゃせい	사정	N110	QHP	Hd	GN				jisjk:188926		-1
+しゃせい	사정	N110	QHP	Hd	GN				jisjk:188926		1
 しゃせいが	사생화	N110			GN				jisjk:188927		-1
 しゃせいぶん	사생문	N110			GN				jisjk:188931		-1
 しゃせき	자갈	N110	VSn		GN				jisjk:188933		-1
@@ -22668,13 +22667,13 @@ ttt	ttt	K110			GN				jisjk:201744
 しゅうじょく	취침	N110		Hd	GN				jisjk:189358		-1
 しゅうじょし	종조사	N110	UTs		GN				jisjk:189360		-1
 しゅうじん	중인	N110	VHn		GN				jisjk:189361		-1
-しゅうじん	죄수	N110	VHnULw		GN				jisjk:189362		-1
+しゅうじん	죄수	N110	VHnULw		GN				jisjk:189362		1
 しゅうじんかんし	중인 환시	N110			GN				jisjk:189364		-1
 しゅうすい	맑은 물	N110			GN				jisjk:189365		-1
 しゅうせい	평생	N110	UMe		GN				jisjk:189367		-1
 しゅうせい	습성	N110	SFl		GN				jisjk:189368		-1
 しゅうせい	집성	N110		Hd	GN				jisjk:189369		-1
-しゅうせい	수정	N110		Hd	GN				jisjk:189370		-1
+しゅうせい	수정	N110		Hd	GN				jisjk:189370		1
 しゅうせい	평생	N110	UMe		GN				jisjk:189372		-1
 しゅうせい	가을철 바람 소리	N110	USoQMUVSs		GN				jisjk:189373		-1
 しゅうせいあん	수정안	N110	ULw		GN				jisjk:189375		-1
@@ -22744,7 +22743,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しゅうにん	취임	N110	VMo	Hd	GN				jisjk:189489		-1
 しゅうにんしき	취임식	N110	VBl		GN				jisjk:189491		-1
 しゅうねん	집념	N110	SFl		GN				jisjk:189492		-1
-しゅうねん	주년	N110	UMe		GN				jisjk:189493		-1
+しゅうねん	주년	N110	UMe		GN				jisjk:189493		1
 しゅうねん	한평생	N110	UMe		GN				jisjk:189495		-1
 しゅうのう	수납	N110	VMo	Hd	GN				jisjk:189496		-1
 しゅうのうこ	수납고	N110	VBl		GN				jisjk:189498		-1
@@ -23027,7 +23026,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しゅちゅう	수중	N110	VBp		GN				jisjk:190019		-1
 しゅちょ	주저	N110	VBkVSw		GN				jisjk:190020		-1
 しゅちょう	수장	N110	VHn		GN				jisjk:190021		-1
-しゅちょう	주장	N110		Hd	GN				jisjk:190022		-1
+しゅちょう	주장	N110		Hd	GN				jisjk:190022		1
 しゅちょう	총애	N110		Hd	GN				jisjk:190026		-1
 しゅちょうおん	주조음	N110	USoQMU		GN				jisjk:190031		-1
 しゅちょうしあ	서로 주장&AV@	M440			GN				jisjk:136425		
@@ -23190,7 +23189,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しゅもん	주문	N110	VBl		GN				jisjk:190315		-1
 しゅやく	주역	N110	UAr		GN				jisjk:190316		-1
 しゅよう	종양	N110	QHP		GN				jisjk:190321		-1
-しゅよう	주요	N110	SFl	Dd	GN				jisjk:190322		-1
+しゅよう	주요	N110	SFl	Dd	GN				jisjk:190322		1
 しゅようこく	주요국	N110	VPl		GN				jisjk:190328		-1
 しゅよく	주익	N110	VPeVTp		GN				jisjk:190329		-1
 しゅよく	주 날개	N110			MI				jisjk:345948		
@@ -23314,7 +23313,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しょうあん	질산 암모늄	N110			GN				jisjk:190521		-1
 しょうあん	쇼안	N110	UMe		GN				jisjk:190523		-1
 しょうい	소이	N110			GN				jisjk:190525		-1
-しょうい	소위	N110	VTwVHn		GN				jisjk:190526		-1
+しょうい	소위	N110	VTwVHn		GN				jisjk:190526		1
 しょういだん	소이탄	N110	VPeVTw		GN				jisjk:190530		-1
 しょういだん	소이탄	N110	VTw		GN				jisjk:190532		-1
 しょういん	승인	N110	VRwVTw		GN				jisjk:190533		-1
@@ -23340,7 +23339,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しょうおん	소음	N110		Hd	GN				jisjk:190573		-1
 しょうか	상가	N110	VMo		GN				jisjk:190578		-1
 しょうか	창가	N110	USoQMU		GN				jisjk:190579		-1
-しょうか	소화	N110	QHP	Hd	GN				jisjk:190580		-1
+しょうか	소화	N110	QHP	Hd	GN				jisjk:190580		1
 しょうか	승화	N110		Hd	GN				jisjk:190581		-1
 しょうか	잠깐의 틈	N110	UMe		GN				jisjk:190585		-1
 しょうか	상과	N110			GN				jisjk:190586		-1
@@ -23491,7 +23490,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しょうしょ	증서	N110	ULwVMo		GN				jisjk:190912		-1
 しょうしょう	조금	N110			GN				jisjk:123209		
 しょうしょう	소조	N110			GN				jisjk:263891		
-しょうしょう	소장	N110			GN				jisjk:263892		
+しょうしょう	소장	N110			GN				jisjk:263892		1
 しょうしょうお待ちください	잠시 기다려 주십시요	N110			GN				jisjk:151188		
 しょうしょく	소식	N110	VFd		GN				jisjk:190916		-1
 しょうしん	승진	N110	VMo	Hd	GN				jisjk:190921		-1
@@ -23514,13 +23513,13 @@ ttt	ttt	K110			GN				jisjk:201744
 しょうじょ	소녀	N110	VBpVHn		GN				jisjk:190944		-1
 しょうじょ	짧은 서문	N110			GN				jisjk:190946		-1
 しょうじょう	상장	N110			GN				jisjk:190947		-1
-しょうじょう	증상	N110	QHP		GN				jisjk:190948		-1
+しょうじょう	증상	N110	QHP		GN				jisjk:190948		1
 しょうじょう	청정	N110		Dd	GN				jisjk:190951		-1
 しょうじょう	종 모양	N110			GN				jisjk:190955		-1
 しょうじるてん	생사 유전	N110	UCl	Hd	GN				jisjk:190960		-1
 しょうじん	정진	N110	UCl	Hd	GN				jisjk:190962		-1
 しょうじん	몸	N110	VBp		GN				jisjk:190964		-1
-しょうじん	상인	N110			GN				jisjk:190966		-1
+しょうじん	상인	N110			GN				jisjk:190966		1
 しょうじんあげ	야채 튀김	N110	VFd		GN				jisjk:190968		-1
 しょうじんぶつ	소인물	N110	VHn		GN				jisjk:190970		-1
 しょうじゴルフ	쇼지 골프	N110	VBlVRw		GN				jisjk:190972		
@@ -23828,7 +23827,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しょくせき	직책	N110	VMo		GN				jisjk:191540		-1
 しょくぜん	식전	N110	VFdUMe		GN				jisjk:191542		-1
 しょくたく	촉탁	N110		Hd	GN				jisjk:191545		-1
-しょくたく	식탁	N110	VFd		GN				jisjk:191546		-1
+しょくたく	식탁	N110	VFd		GN				jisjk:191546		1
 しょくたくえん	식탁염	N110	VFd		GN				jisjk:191548		-1
 しょくだい	촛대	N110	VPe		GN				jisjk:191549		-1
 しょくだん	계급	N110			MI				jisjk:345875		
@@ -23922,7 +23921,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しょしょう	여러 장군	N110	VHnVTw		GN				jisjk:191718		-1
 しょしん	초진	N110	QHP		GN				jisjk:191719		-1
 しょしん	소신	N110	SFl		GN				jisjk:191720		-1
-しょしん	초심	N110	UMe		GN				jisjk:191721		-1
+しょしん	초심	N110	UMe		GN				jisjk:191721		1
 しょしん	초심	N110	ULw		GN				jisjk:191722		-1
 しょしん	편지	N110			GN				jisjk:191723		-1
 しょしんしゃ	초보자	N110	VHn		GN				jisjk:191724		-1
@@ -24272,7 +24271,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんえん	진원	N110			GN				jisjk:162400		
 しんえん	신연	N110		Hd	GN				jisjk:163659		
 しんえん	심원	N110	VPl		GN				jisjk:192227		-1
-しんえん	심연	N110	VPl		GN				jisjk:192228		-1
+しんえん	심연	N110	VPl		GN				jisjk:192228		1
 しんおう	마음속 깊은 곳	N110	SFl		GN				jisjk:192230		-1
 しんおう	심오	N110	SFl	Dd	GN				jisjk:192231		-1
 しんおう	진앙	N110	VPl		GN				jisjk:192233		-1
@@ -24326,7 +24325,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんきょう	심경	N110	SFl		GN				jisjk:192343		-1
 しんきろう	신기루	N110	VSs		GN				jisjk:192350		-1
 しんきん	심근	N110	VBp		GN				jisjk:192352		-1
-しんきん	신용 금고	N110	VBlVMo		GN				jisjk:192355		-1
+しんきん	신용 금고	N110	VBlVMo		GN				jisjk:192355		1
 しんきん	신금	N110			GN				jisjk:192357		-1
 しんきんかん	친근감	N110	SFl		GN				jisjk:192359		-1
 しんきんこうそく	심근 경색	N110	QHP		GN				jisjk:192360		-1
@@ -24367,7 +24366,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんげん	진언	N110		Hd	GN				jisjk:192427		-1
 しんげんち	진원지	N110	VPl		GN				jisjk:192435		-1
 しんこう	진공	N110	VTw		GN				jisjk:192448		-1
-しんこう	진행	N110		Hd	GN				jisjk:192449		-1
+しんこう	진행	N110		Hd	GN				jisjk:192449		1
 しんこう	친교	N110			GN				jisjk:192450		-1
 しんこう	신흥	N110	UCl		GN				jisjk:192451		-1
 しんこう	침공	N110	VTw	Hd	GN				jisjk:192452		-1
@@ -24477,7 +24476,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんじょう	심정	N110	SFl		GN				jisjk:192695		-1
 しんじょたい	신접 살림	N110	VBl		GN				jisjk:192697		-1
 しんじん	신앙심	N110	UClSFl		GN				jisjk:192698		-1
-しんじん	신인	N110	VRwUArVHn		GN				jisjk:192699		-1
+しんじん	신인	N110	VRwUArVHn		GN				jisjk:192699		1
 しんじん	신인	N110	VHn		GN				jisjk:192700		-1
 しんじんしょう	신인상	N110			GN				jisjk:192703		-1
 しんすい	진수	N110			GN				jisjk:192704		-1
@@ -24526,7 +24525,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんそう	신장	N110	VMo		GN				jisjk:192794		-1
 しんそう	진상	N110	ULw		GN				jisjk:192795		-1
 しんそう	진서와 초서	N110			GN				jisjk:192797		-1
-しんそう	심층	N110	VPl		GN				jisjk:192798		-1
+しんそう	심층	N110	VPl		GN				jisjk:192798		1
 しんそう	진짜 창	N110	VPe		GN				jisjk:192800		-1
 しんそう	신장	N110			GN				jisjk:192801		-1
 しんそく	신속	N110		Dd	GN				jisjk:192804		-1
@@ -24539,7 +24538,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんぞうまひ	심장 마비	N110	QHP		GN				jisjk:192816		-1
 しんぞく	친족	N110	VHnVHn		GN				jisjk:192817		-1
 しんたい	진퇴	N110	VTw	Hd	GN				jisjk:192821		-1
-しんたい	신체	N110	VBp		GN				jisjk:192822		-1
+しんたい	신체	N110	VBp		GN				jisjk:192822		1
 しんたいうかがい	사직서	N110	VMo		GN				jisjk:192825		-1
 しんたいきわま	진퇴 유곡에 빠&AL@	M428			GN				jisjk:136837		
 しんたいけんさ	신체 검사	N110	QHPVBp		GN				jisjk:192826		-1
@@ -24592,7 +24591,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんてんち	신천지	N110			GN				jisjk:192923		-1
 しんてんどうち	진천 동지	N110	UTs		GN				jisjk:192925		-1
 しんでん	새로 일군 논	N110	VPl		GN				jisjk:192928		-1
-しんでん	신전	N110	UClVBl		GN				jisjk:192929		-1
+しんでん	신전	N110	UClVBl		GN				jisjk:192929		1
 しんでん	신전	N110	VPlULw		GN				jisjk:192930		-1
 しんでんず	심전도	N110	QHP		GN				jisjk:192932		-1
 しんでんづくり	귀족의 건축 양식	N110	VBl		GN				jisjk:192934		-1
@@ -24608,7 +24607,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんど	힘$KH@	H7U0			GN				jisjk:5115		
 しんど	피곤$AB@	H7N0	QHPSFl		GN				jisjk:121024		
 しんどう	새 길	N110	VBlVPl		GN				jisjk:192964		-1
-しんどう	진동	N110		Hd	GN				jisjk:192965		-1
+しんどう	진동	N110		Hd	GN				jisjk:192965		1
 しんどう	신동	N110	VHn		GN				jisjk:192966		-1
 しんどう	진동	N110	VPe	Hd	GN				jisjk:192967		-1
 しんどう	진동	N110		Hd	GN				jisjk:192968		-1
@@ -24618,7 +24617,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんにちは	친일파	N110	VHn		GN				jisjk:192981		-1
 しんにゅう	진입	N110	VTp	Hd	GN				jisjk:192983		-1
 しんにゅう	신입	N110	VMo		GN				jisjk:192984		-1
-しんにゅう	침입	N110	VTw	Hd	GN				jisjk:192985		-1
+しんにゅう	침입	N110	VTw	Hd	GN				jisjk:192985		1
 しんにゅうしゃ	침입자	N110	VHn		GN				jisjk:192988		-1
 しんにゅうせい	신입생	N110	VHn		GN				jisjk:192989		-1
 しんにゅうろ	진입로	N110	VPl		GN				jisjk:192991		-1
@@ -24908,7 +24907,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じしゅけん	자주권	N110	ULw		GN				jisjk:193545		-1
 じしゅてき	자주적	N110			GN				jisjk:193547		-1
 じしょう	사실과 현상	N110			GN				jisjk:193553		-1
-じしょう	자칭	N110		Hd	GN				jisjk:193554		-1
+じしょう	자칭	N110		Hd	GN				jisjk:193554		1
 じしょう	자증	N110		Hd	GN				jisjk:193556		-1
 じしょう	자조	N110		Hd	GN				jisjk:193557		-1
 じしょうや	지쇼야	N130	QPN	Wa	GN				jisjk:358463		
@@ -25392,7 +25391,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じゅうだいし	중대시	N110		Hd	GN				jisjk:194450		-1
 じゅうだいじ	중대사	N110			GN				jisjk:194452		-1
 じゅうだん	종단	N110		Hd	GN				jisjk:194453		-1
-じゅうだん	총탄	N110	VTw		GN				jisjk:194454		-1
+じゅうだん	총탄	N110	VTw		GN				jisjk:194454		1
 じゅうちゅうはっく	십중팔구	N110			GN				jisjk:194455		-1
 じゅうちん	중진	N110	VMo		GN				jisjk:194457		-1
 じゅうづめ	찬합에 담긴 요리	N110	VFd		GN				jisjk:194459		-1
@@ -25534,7 +25533,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じゅしょうしき	수상식	N110	VPl		GN				jisjk:194715		-1
 じゅしょうしゃ	수상자	N110	VHn		GN				jisjk:194716		-1
 じゅしん	진찰	N110	QHP	Hd	GN				jisjk:194717		-1
-じゅしん	수신	N110	QHP	Hd	GN				jisjk:194718		-1
+じゅしん	수신	N110	QHP	Hd	GN				jisjk:194718		1
 じゅじゅ	주고 받음	N110			GN				jisjk:102059		
 じゅじゅつ	주술	N110			GN				jisjk:194721		-1
 じゅじょう	나무 위	N110	VPl		GN				jisjk:194722		-1
@@ -25580,7 +25579,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じゅみょう	수명	N110	UMeQHP		GN				jisjk:194794		-1
 じゅもん	주문	N110			GN				jisjk:194796		-1
 じゅよう	수용	N110	UTh	Hd	GN				jisjk:194798		-1
-じゅよう	수요	N110	VMo		GN				jisjk:194799		-1
+じゅよう	수요	N110	VMo		GN				jisjk:194799		1
 じゅようか	수요가	N110	VMoVHn		GN				jisjk:194804		-1
 じゅようしゃ	수용자	N110	VHn		GN				jisjk:194806		-1
 じゅようインフレ	수요 인플레이션	N110	VMo		GN				jisjk:194808		
@@ -25670,7 +25669,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じゅんばん	순번	N110	VTw		GN				jisjk:194953		-1
 じゅんぱい	순례	N110		Hd	GN				jisjk:194955		-1
 じゅんぱく	순백	N110	SFl		GN				jisjk:194956		-1
-じゅんび	준비	N110		Dd	GN				jisjk:194957		-1
+じゅんび	준비	N110		Dd	GN				jisjk:194957		1
 じゅんび	순미	N110		Dd	GN				jisjk:268130		
 じゅんびいいんかい	준비위원회	N110	VBl		GN				jisjk:194961		-1
 じゅんびきん	준비금	N110	VMyVMo		GN				jisjk:194965		-1
@@ -25731,7 +25730,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じょうい	양이	N110			GN				jisjk:195067		-1
 じょういき	사원 경내	N110	VPl		GN				jisjk:195069		-1
 じょういん	상원	N110	VBl		GN				jisjk:195070		-1
-じょういん	승무원	N110	VHnVMo		GN				jisjk:195071		-1
+じょういん	승무원	N110	VHnVMo		GN				jisjk:195071		1
 じょういん	승무원	N110	VHnVTp		GN				jisjk:195072		-1
 じょうえ	흰 옷	N110	VCp		GN				jisjk:195078		-1
 じょうえい	상영	N110	UAr	Hd	GN				jisjk:195079		-1
@@ -25808,7 +25807,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じょうざん	곱셈	N110			GN				jisjk:195223		-1
 じょうざんけいホテル	조잔케이 호텔	N130	VBlVPlVGtVMo		GN				jisjk:195225		
 じょうし	성터	N110	VPl		GN				jisjk:195227		-1
-じょうし	상사	N110	VHnVMo		GN				jisjk:195228		-1
+じょうし	상사	N110	VHnVMo		GN				jisjk:195228		1
 じょうし	성터	N110	VPl		GN				jisjk:195231		-1
 じょうし	삼짇날	N110	UMe		GN				jisjk:195233		-1
 じょうしき	상식	N110	UTh		GN				jisjk:195235		-1
@@ -25873,7 +25872,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じょうぜつ	수다	N110	SFl		GN				jisjk:195335		-1
 じょうそ	상소	N110	ULw	Hd	GN				jisjk:195337		-1
 じょうそう	정서	N110	SFl		GN				jisjk:195340		-1
-じょうそう	상층	N110	VBl		GN				jisjk:195341		-1
+じょうそう	상층	N110	VBl		GN				jisjk:195341		1
 じょうそううん	상층운	N110	VSs		GN				jisjk:195342		-1
 じょうそうきりゅう	상층 기류	N110	VSs		GN				jisjk:195344		-1
 じょうぞう	양조	N110	VFd	Hd	GN				jisjk:195348		-1
@@ -26072,7 +26071,7 @@ ttt	ttt	K110			GN				jisjk:201744
 じょせい	사위	N110	VHnVHn		GN				jisjk:195710		-1
 じょせい	조성	N110	UTh	Hd	GN				jisjk:195711		-1
 じょせい	여자 목소리	N110	UTs		GN				jisjk:195712		-1
-じょせい	여성	N110	QHPVHn		GN				jisjk:195713		-1
+じょせい	여성	N110	QHPVHn		GN				jisjk:195713		1
 じょせいきゃく	여성 손님	N110	VHn		GN				jisjk:195717		-1
 じょせいきん	조성금	N110	VMy		GN				jisjk:195719		-1
 じょせいご	여성어	N110	UTs		GN				jisjk:195721		-1
@@ -26383,7 +26382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すいすいと	휙휙	E311			GN				jisjk:526		
 すいせい	수성	N110	VSs		GN				jisjk:196247		-1
 すいせい	수생	N110	VAmVPt		GN				jisjk:196248		-1
-すいせい	혜성	N110	VSs		GN				jisjk:196250		-1
+すいせい	혜성	N110	VSs		GN				jisjk:196250		1
 すいせい	물살	N110			GN				jisjk:196251		-1
 すいせい	혜성	N110	VSs		GN				jisjk:196255		-1
 すいせい	수서	N110			GN				jisjk:196257		-1
@@ -27341,7 +27340,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいか	탓인지	N100			GN	3422	||1 &&2 S-1== "の" P-2== "1**"	せいか는 명사＋の 뒤에서 ‘탓인지’를 고른다.	jisjk:343237		
 せいか	0 탓인지	S500			GN				jisjk:361333		
 せいかい	정계	N110	VPl		GN				jisjk:197158		-1
-せいかい	정답	N110	VBkVSwUTh	Hd	GN				jisjk:197159		-1
+せいかい	정답	N110	VBkVSwUTh	Hd	GN				jisjk:197159		1
 せいかい	성대한 모임	N110			GN				jisjk:197160		-1
 せいかいけん	해상권	N110	ULw		GN				jisjk:197164		-1
 せいかいしゃ	정해자	N110	VHn		GN				jisjk:197166		-1
@@ -27373,7 +27372,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいかつようしき	생활 양식	N110			GN				jisjk:197213		-1
 せいかてん	제과점	N110	VBl		GN				jisjk:197217		-1
 せいかん	정관	N110	SFl	Hd	GN				jisjk:197218		-1
-せいかん	생환	N110	VTwVBpQHP	Hd	GN				jisjk:197219		-1
+せいかん	생환	N110	VTwVBpQHP	Hd	GN				jisjk:197219		1
 せいがく	성악	N110	USoQMU		GN				jisjk:197223		-1
 せいがく	성악	N110	USoQMUUCl		GN				jisjk:197225		-1
 せいがくか	성악가	N110	USoQMUVHn		GN				jisjk:197229		-1
@@ -27386,7 +27385,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいきまつ	세기말	N110	UMe		GN				jisjk:197263		-1
 せいきゃく	정치가	N110	VHn		GN				jisjk:197264		-1
 せいきゅう	성급	N110	SFl	Dd	GN				jisjk:197266		-1
-せいきゅう	청구	N110	VMo	Hd	GN				jisjk:197267		-1
+せいきゅう	청구	N110	VMo	Hd	GN				jisjk:197267		1
 せいきゅう	청구	N110		Hd	GN				jisjk:197268		-1
 せいきゅう	투구 조절	N110	VRw		GN				jisjk:197269		-1
 せいきゅうけん	청구권	N110	ULw		GN				jisjk:197270		-1
@@ -27421,7 +27420,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいけいひ	생활비	N110	VMyVMo		GN				jisjk:197325		-1
 せいけつ	청결	N110	SFl	Dd	GN				jisjk:197326		-1
 せいけん	정견	N110			GN				jisjk:197330		-1
-せいけん	정권	N110	VBl		GN				jisjk:197331		-1
+せいけん	정권	N110	VBl		GN				jisjk:197331		1
 せいけんか	정권화	N110	VPl	Hd	GN				jisjk:197337		-1
 せいけんとう	정권당	N110	VBl		GN				jisjk:197340		-1
 せいげん	사인	N110			GN				jisjk:197341		-1
@@ -27431,7 +27430,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいこう	성향	N110	SFlVBp		GN				jisjk:197355		-1
 せいこう	제강	N110	VPe	Hd	GN				jisjk:197356		-1
 せいこう	성교	N110	QHPVBp		GN				jisjk:197357		-1
-せいこう	성공	N110		Hd	GN				jisjk:197358		-1
+せいこう	성공	N110		Hd	GN				jisjk:197358		1
 せいこう	정교	N110	UArSFl	Dd	GN				jisjk:197359		-1
 せいこう	청명한 빛	N110	VSs		GN				jisjk:197360		-1
 せいこう	청향	N110	SFl		GN				jisjk:197362		-1
@@ -27464,7 +27463,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいさん	처참%A1@	G8U0			GN				jisjk:2197		
 せいさん	정산	N110	VMo	Hd	GN				jisjk:197426		-1
 せいさん	청산	N110	ULwVMo	Hd	GN				jisjk:197427		-1
-せいさん	생산	N110	VPe	Hd	GN				jisjk:197428		-1
+せいさん	생산	N110	VPe	Hd	GN				jisjk:197428		1
 せいさん	성산	N110	VMo		GN				jisjk:197429		-1
 せいさんいり	청산 함유	N110			GN				jisjk:159724		
 せいさんかくけい	정삼각형	N110			GN				jisjk:197439		-1
@@ -27548,7 +27547,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいじょ	성녀	N110	VHn		GN				jisjk:197606		-1
 せいじょ	정제	N110		Hd	GN				jisjk:197608		-1
 せいじょう	청정	N110		Dd	GN				jisjk:197609		-1
-せいじょう	정상	N110			GN				jisjk:197610		-1
+せいじょう	정상	N110			GN				jisjk:197610		1
 せいじょう	정계의 정세	N110			GN				jisjk:197615		-1
 せいじょう	세이조	N120	VPl		GN				jisjk:197618		-1
 せいじょうか	정상화	N110		Hd	GN				jisjk:197620		-1
@@ -27587,7 +27586,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいぜん	생전	N110	UMe		GN				jisjk:197687		-1
 せいぜんと	정연&L4@	M429			GN				jisjk:139975		
 せいそう	정장	N110	VCp	Hd	GN				jisjk:197694		-1
-せいそう	청소	N110		Hd	GN				jisjk:197696		-1
+せいそう	청소	N110		Hd	GN				jisjk:197696		1
 せいそう	정쟁	N110			GN				jisjk:197698		-1
 せいそういん	환경 미화원	N110	VHn		GN				jisjk:197704		-1
 せいそうけん	성층권	N110	VSs		GN				jisjk:197705		-1
@@ -27640,7 +27639,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいつう	정통	N110		Hd	GN				jisjk:197814		-1
 せいてい	제정	N110	ULw	Hd	GN				jisjk:197815		-1
 せいてき	정적	N110			GN				jisjk:197816		-1
-せいてき	성적	N110	SFl		GN				jisjk:197817		-1
+せいてき	성적	N110	SFl		GN				jisjk:197817		1
 せいてき	성적	N110			GN				jisjk:197818		-1
 せいてきいやがらせ	성희롱	N110			GN				jisjk:197819		-1
 せいてきいやがらせ	성희롱	N110			GN				jisjk:197821		-1
@@ -27652,7 +27651,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいてんし	성천자	N110	VHn		GN				jisjk:197838		-1
 せいでんき	정전기	N110	VEl		GN				jisjk:197841		-1
 せいとう	제당	N110	VFd	Hd	GN				jisjk:197852		-1
-せいとう	정당	N110	SFl	Dd	GN				jisjk:197853		-1
+せいとう	정당	N110	SFl	Dd	GN				jisjk:197853		1
 せいとう	정통	N110			GN				jisjk:197854		-1
 せいとう	정당	N110	VBl		GN				jisjk:197855		-1
 せいとう	정답	N110		Hd	GN				jisjk:197856		-1
@@ -27715,7 +27714,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいふんしょ	제분소	N110	VBlVMo		GN				jisjk:197984		-1
 せいぶげき	서부극	N110	UAr		GN				jisjk:197988		-1
 せいぶつ	정물	N110			GN				jisjk:197989		-1
-せいぶつ	생물	N110	VAmVPt		GN				jisjk:197990		-1
+せいぶつ	생물	N110	VAmVPt		GN				jisjk:197990		1
 せいぶつが	정물화	N110			GN				jisjk:197992		-1
 せいぶつがく	생물학	N110	UThVAmVPt		GN				jisjk:197993		-1
 せいぶつへいき	생물병기	N110			MI				jisjk:346026		
@@ -27744,7 +27743,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいみつへいき	정밀병기	N110			MI				jisjk:346018		
 せいむじかん	정무 차관	N110	VBp		GN				jisjk:198043		-1
 せいめい	성명	N110	VCmUTsVBl	Hd	GN				jisjk:198044		-1
-せいめい	생명	N110	QHP		GN				jisjk:198045		-1
+せいめい	생명	N110	QHP		GN				jisjk:198045		1
 せいめい	성명	N110	UTs		GN				jisjk:198046		-1
 せいめい	청명	N110	UMe		GN				jisjk:198048		-1
 せいめいしょ	성명서	N110			GN				jisjk:198050		-1
@@ -27765,7 +27764,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいゆう	세이유	N120	VMoVPl		GN				jisjk:198096		-1
 せいゆうかい	정우회	N110	VBl		GN				jisjk:198098		-1
 せいよう	정양	N110	QHP	Hd	GN				jisjk:198102		-1
-せいよう	서양	N110	VPl		GN				jisjk:198103		-1
+せいよう	서양	N110	VPl		GN				jisjk:198103		1
 せいようかん	서양관	N110	VBl		GN				jisjk:198104		-1
 せいようが	서양화	N110			GN				jisjk:198105		-1
 せいようし	양지	N110	VPe		GN				jisjk:198110		-1
@@ -27784,7 +27783,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せいりょういんりょう	청량 음료	N110			GN				jisjk:198135		-1
 せいりょうざい	청량제	N110	QHP		GN				jisjk:198139		-1
 せいりょく	정력	N110			GN				jisjk:198146		-1
-せいりょく	세력	N110	VMo		GN				jisjk:198147		-1
+せいりょく	세력	N110	VMo		GN				jisjk:198147		1
 せいりょくけん	세력권	N110	VPl		GN				jisjk:198149		-1
 せいりょくてき	정력적	N110			GN				jisjk:198151		-1
 せいるい	생물	N110	VAm		GN				jisjk:198154		-1
@@ -28274,7 +28273,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せんきゃく	선객	N110	VBp		GN				jisjk:198866		-1
 せんきゃくばんらい	천객만래	N110			GN				jisjk:198867		-1
 せんきょ	점거	N110	VTw	Hd	GN				jisjk:198868		-1
-せんきょ	선거	N110	VBl	Hd	GN				jisjk:198869		-1
+せんきょ	선거	N110	VBl	Hd	GN				jisjk:198869		1
 せんきょ	점거	N110		Hd	GN				jisjk:198871		-1
 せんきょう	전황	N110	VTw		GN				jisjk:198872		-1
 せんきょうし	선교사	N110	VBpUCl		GN				jisjk:198874		-1
@@ -28393,7 +28392,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せんじん	선인	N110	VBpVHn		GN				jisjk:199091		-1
 せんじ薬	달인 약	I110			GN				jisjk:111883		
 せんすい	뜰에 만든 연못	N110	VPl		GN				jisjk:199094		-1
-せんすい	잠수	N110		Hd	GN				jisjk:199095		-1
+せんすい	잠수	N110		Hd	GN				jisjk:199095		1
 せんすいかん	잠수함	N110	VPe		GN				jisjk:199096		-1
 せんすいきゅうじょてい	잠수 구조정	N110			MI				jisjk:345908		
 せんすいびょう	잠수병	N110	QHP		GN				jisjk:199097		-1
@@ -28449,7 +28448,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せんでん	선전	N110	VCmUArVMo	Hd	GN				jisjk:199193		-1
 せんと	천도	N110	VPl	Hd	GN				jisjk:199194		
 せんとう	공중 목욕탕	N110	VBlVAc		GN				jisjk:199195		-1
-せんとう	전투	N110	VTw	Hd	GN				jisjk:199196		-1
+せんとう	전투	N110	VTw	Hd	GN				jisjk:199196		1
 せんとう	선두	N110	VRwVTw		GN				jisjk:199197		-1
 せんとうき	전투기	N110	VPeVTw		GN				jisjk:199202		-1
 せんとうさんれつ	전투 참가	N110			MI				jisjk:346171		
@@ -28463,7 +28462,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せんにゅうしゅ	선입관	N110	SFl		GN				jisjk:199220		-1
 せんにょ	선녀	N110	VHnUCl		GN				jisjk:199221		-1
 せんにん	전임	N110	VBpVMo	Hd	GN				jisjk:199222		-1
-せんにん	선임	N110	VBpVMo		GN				jisjk:199223		-1
+せんにん	선임	N110	VBpVMo		GN				jisjk:199223		1
 せんにん	선인	N110	VBp		GN				jisjk:199224		-1
 せんにん	선임	N110		Hd	GN				jisjk:199225		-1
 せんにんしゃ	선임자	N110	VHn		GN				jisjk:199227		-1
@@ -28761,7 +28760,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぜんしょく	전직	N110	UAq		GN				jisjk:199699		-1
 ぜんしん	점진	N110			GN				jisjk:199702		-1
 ぜんしん	전진	N110	VTw	Hd	GN				jisjk:199703		-1
-ぜんしん	전신	N110	QHPVBpVAm		GN				jisjk:199704		-1
+ぜんしん	전신	N110	QHPVBpVAm		GN				jisjk:199704		1
 ぜんしん	전신	N110	VMo		GN				jisjk:199705		-1
 ぜんしんかんそくしょ	전방 관측소	N110			GN				jisjk:346172		
 ぜんしんぜんれい	전신 전령	N110	SFl		GN				jisjk:199708		-1
@@ -28949,7 +28948,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そうがい	창 밖	N110	VPl		GN				jisjk:200001		-1
 そうがかり	전원이 달려들어서 함	N110			GN				jisjk:200002		-1
 そうがく	연주	N110	USoQMU	Hd	GN				jisjk:200003		-1
-そうがく	총액	N110	VMo		GN				jisjk:200004		-1
+そうがく	총액	N110	VMo		GN				jisjk:200004		1
 そうがんきょう	쌍안경	N110	VPe		GN				jisjk:200007		-1
 そうきゅう	조급	N110	SFl	Dd	GN				jisjk:200015		-1
 そうきゅう	송구	N110	VRw		GN				jisjk:200016		-1
@@ -29008,9 +29007,9 @@ ttt	ttt	K110			GN				jisjk:201744
 そうごふじょ	상호 부조	N110			GN				jisjk:200136		-1
 そうご電器	소고전기	I110	VPl		GN				jisjk:41194		
 そうさ	조작	N110	VPeVEl	Hd	GN				jisjk:200139		
-そうさ	수사	N110		Hd	GN				jisjk:200140		-1
+そうさ	수사	N110		Hd	GN				jisjk:200140		1
 そうさい	상쇄	N110	VMoULw		GN				jisjk:200141		-1
-そうさい	총재	N110	VTpVHn		GN				jisjk:200142		-1
+そうさい	총재	N110	VTpVHn		GN				jisjk:200142		1
 そうさいん	수사원	N110	VHn		GN				jisjk:200148		-1
 そうさかん	수사관	N110	VHn		GN				jisjk:200150		-1
 そうさく	창작	N110		Hd	GN				jisjk:200155		-1
@@ -29145,7 +29144,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そうだんのうえ	상담 후	N110	UMe		GN				jisjk:160064		
 そうだんやく	상담역	N110			GN				jisjk:200359		-1
 そうちゃく	이른 도착	N110		Hd	GN				jisjk:200370		-1
-そうちゃく	장착	N110	VPe	Hd	GN				jisjk:200371		-1
+そうちゃく	장착	N110	VPe	Hd	GN				jisjk:200371		1
 そうちょう	총장	N110	VTwVHn		GN				jisjk:200372		-1
 そうちょう	이른 아침	N110	UMe		GN				jisjk:200373		-1
 そうちわく	장치 틀	N110			GN				jisjk:161709		
@@ -29232,7 +29231,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そうへき	쌍벽	N110			GN				jisjk:200461		-1
 そうべつ	송별	N110		Hd	GN				jisjk:200462		-1
 そうほう	주법	N110			GN				jisjk:200463		-1
-そうほう	쌍방	N110	VPl		GN				jisjk:200464		-1
+そうほう	쌍방	N110	VPl		GN				jisjk:200464		1
 そうほうこう	쌍방향	N110	UDr		GN				jisjk:200465		-1
 そうほん	초본	N110	VPt		GN				jisjk:200466		-1
 そうほん	서책 발송	N110		Hd	GN				jisjk:200468		-1
@@ -30093,7 +30092,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そんだい	존경하는 당신	N120	VHn		GN				jisjk:201121		-1
 そんだいぶ	거드름 피&AI@	M428			GN				jisjk:139076		
 そんちょう	존중	N110	ULw	Hd	GN				jisjk:201122		-1
-そんちょう	촌장	N110	VHn		GN				jisjk:201123		-1
+そんちょう	촌장	N110	VHn		GN				jisjk:201123		1
 そんとく	손익	N110	VMo		GN				jisjk:201124		-1
 そんどう	마을의 아이	N110	VHn		GN				jisjk:201125		-1
 そんどう	존당	N110	VBl		GN				jisjk:201127		-1
@@ -30176,7 +30175,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぞうえい	조영	N110	UArVBl	Hd	GN				jisjk:201171		-1
 ぞうえき	증익	N110		Hd	GN				jisjk:201172		-1
 ぞうえん	조원	N110	VBl	Hd	GN				jisjk:201174		-1
-ぞうえん	증원	N110		Hd	GN				jisjk:201175		-1
+ぞうえん	증원	N110		Hd	GN				jisjk:201175		1
 ぞうかん	증간	N110	VCmVBkVSw	Hd	GN				jisjk:201183		-1
 ぞうがく	증액	N110	VMo	Hd	GN				jisjk:201184		-1
 ぞうがん	상감	N110	UAr		GN				jisjk:201185		-1
@@ -144535,7 +144534,7 @@ ttt	ttt	K110			GN				jisjk:201744
 千歳観光	치토세 관광	I130	VGt		PN				jisjk:85778		
 千歳通	치토세도리	N130	QCTVPl		GN				jisjk:308603		
 千歳電気工業	치토세 전기공업	I130	VGt		PN				jisjk:85781		
-千歳飴	지토세아메	N110			GN				jisjk:242737		
+千歳飴	치토세아메	N110			GN				jisjk:242737		
 千段巻	천단 두루말이	N110			GN				jisjk:239506		
 千沢	센자와	N130	QCTVPl		GN				jisjk:304259		
 千河原	치가와라	N130	QCTVPl		GN				jisjk:308473		
@@ -180841,7 +180840,7 @@ ttt	ttt	K110			GN				jisjk:201744
 実	진짜	N110			GN	1076	||1 &&3 S+1== "の" P+2== "1**" A+2-= "VHn"	実는 뒤에 の와 사람 의미 계열 명사가 이어지면 ‘진짜’를 고른다.	jisjk:115803		
 実	열매	N110	XXX		GN				jisjk:339883		
 実	실	N110		CtOn	GN				jisjk:344782		
-実しやか	천연덕%A2@	G8U0			GN				jisjk:146519		
+実しやか	그럴싸%A1@	G8U0			GN				jisjk:146519		
 実に	실로	N351			GN				jisjk:6387		
 実のところ	사실	I110			GN				jisjk:77010		
 実のところ	사실	A9H0		J1	GN				jisjk:77011		
@@ -205609,7 +205608,7 @@ ttt	ttt	K110			GN				jisjk:201744
 御親父	춘부장	N110	VHn		GN				jisjk:183798		
 御触れ	관청의 공고	I110	VSwUHrUTs		GN				jisjk:78045		
 御言	말씀	N110			GN				jisjk:252225		
-御託	주장	N110	UTs		GN				jisjk:28989		
+御託	넋두리	N110	UTs		GN				jisjk:28989		
 御託宣	신탁	N110	UCl		GN				jisjk:183889		
 御許	앞	N110	UTs		GN				jisjk:166092		
 御許	앞	N110	UTs		GN				jisjk:166445		
