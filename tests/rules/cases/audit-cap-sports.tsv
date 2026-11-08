@@ -1,0 +1,145 @@
+# 규칙: LEX-5601	fix	lookup
+rule	input	expected	kind	layer
+dict:audit-cap-sports	モンゴル襲来＝元寇です｡	has:몽골	fix	lookup
+dict:audit-cap-sports	ホルムズ海峡で、この日までの９日間に	has:호르무즈 해협	fix	lookup
+dict:audit-cap-sports	日経平均株価が上がった	has:닛케이	fix	lookup
+dict:audit-cap-sports	全日空もすでに	has:전일본공수	fix	lookup
+dict:audit-cap-sports	トレドでの重大な列車事故に	has:톨레도	fix	lookup
+dict:audit-cap-sports	今、ダラス近郊の住宅街で	has:댈러스	fix	lookup
+dict:audit-cap-sports	どうしても大統領としては、レガシー作りのために	has:레거시	fix	lookup
+dict:audit-cap-sports	勝手にディールを結んでしまうということ、	has:딜	fix	lookup
+dict:audit-cap-sports	コンプラ室からも報告が上がってきてね	has:컴플라이언스	fix	lookup
+dict:audit-cap-sports	初戦では３本のヒットがありました。	has:첫 경기	fix	lookup
+dict:audit-cap-sports	自身が持つ最年長出場記録を	has:최고령	fix	lookup
+dict:audit-cap-sports	ツアー初出場となった	has:첫 출전	fix	lookup
+dict:audit-cap-sports	ミルウォーキー・ブルワーズ	has:밀워키 브루어스	fix	lookup
+dict:audit-cap-sports	ブルワーズは	has:브루어스	fix	lookup
+dict:audit-cap-sports	フォアボール連続という	has:볼넷	fix	lookup
+dict:audit-cap-sports	ショートのグラブをはじく	has:글러브	fix	lookup
+dict:audit-cap-sports	ガーディアンズ戦との第３戦に	has:가디언스	fix	lookup
+dict:audit-cap-sports	ファストボールだと	has:패스트	fix	lookup
+dict:audit-cap-sports	勝負所で世界１位の実力を	has:승부처	fix	lookup
+dict:audit-cap-sports	体操の絶対王者が語る	has:절대 강자	fix	lookup
+dict:audit-cap-sports	実は 箱根駅伝３連覇中の強豪	has:하코네 에키덴	fix	lookup
+dict:audit-cap-sports	去年、リベロからアタッカーに	has:어태커	fix	lookup
+dict:audit-cap-sports	激闘の末…＞	has:격전	fix	lookup
+dict:audit-cap-sports	パ・リーグ王者のソフトバンクが	has:퍼시픽리그	fix	lookup
+dict:audit-cap-sports	板割りを披露>	has:격파	fix	lookup
+dict:audit-cap-sports	ロサンゼルスオリンピックの	has:로스앤젤레스 올림픽	fix	lookup
+dict:audit-cap-sports	幸先よく先制しましたね。	has:순조롭게	fix	lookup
+dict:audit-cap-sports	エイエイオー？	has:에이에이오	fix	lookup
+dict:audit-cap-sports	二人三脚で進んできたのが	has:이인삼각	fix	lookup
+dict:audit-cap-sports	ナレーションだと	has:내레이션	fix	lookup
+dict:audit-cap-sports	怪獣ザウルス	has:사우루스	fix	lookup
+dict:audit-cap-sports	レタスフォカッチャで勝負する｡	has:포카치아	fix	lookup
+dict:audit-cap-sports	ネックレスや ブレスレットのように	has:브레이슬릿	fix	lookup
+dict:audit-cap-sports	無限ループ､錬金術などと話題となり	has:무한 루프	fix	lookup
+dict:audit-cap-sports	敬虔なクリスチャンが多い土地柄か	has:크리스천	fix	lookup
+dict:audit-cap-sports	ライフサポートカンパニー＞	has:컴퍼니	fix	lookup
+dict:audit-cap-sports	大手のテック企業の決算も控えて	has:테크	fix	lookup
+dict:audit-cap-sports	お休みを頂いてしっかりとリフレッシュできました。	has:리프레시	fix	lookup
+dict:audit-cap-sports	ヒアルロン４Ｇ美容液成分 配合。	has:히알루론	fix	lookup
+dict:audit-cap-sports	このお茶はトクホです	has:특정 보건용 식품	fix	lookup
+dict:audit-cap-sports	リンカーン記念堂前の人工池リフレクティング・プールでした。	has:리플렉팅 풀	fix	lookup
+dict:audit-cap-sports	アサヒスーパードライを飲む	has:슈퍼드라이	fix	lookup
+dict:audit-cap-sports	こちらはニューヨーク、マンハッタンにある投票所です。	has:맨해튼	fix	lookup
+dict:audit-cap-sports	クノールのスープ	has:크노르	fix	lookup
+dict:audit-cap-sports	読心術でカンニングとか？だめだよ〜。	has:커닝	fix	lookup
+dict:audit-cap-sports	大丈夫ですか？メディカルスタッフ呼びましょうか？	has:메디컬 스태프	fix	lookup
+dict:audit-cap-sports	ウッソだ〜	has:거짓말	fix	lookup
+dict:audit-cap-sports	だから 会社はマレーシアに替え玉を送った	has:말레이시아	fix	lookup
+dict:audit-cap-sports	石材や木材を使ったアーツ・アンド・クラフツ様式で	has:아츠 앤드 크래프츠	fix	lookup
+dict:audit-cap-sports	このアメリカの政治アナリストの分析というのが	has:애널리스트	fix	lookup
+dict:audit-cap-sports	イラン革命防衛隊は２日	has:이란 혁명수비대	fix	lookup
+dict:audit-cap-sports	１０日から１１日にＵＡＥ＝アラブ首長国連邦で	has:아랍에미리트	fix	lookup
+dict:audit-cap-sports	オッホホホホ…。	has:오호호호호	fix	lookup
+dict:audit-cap-sports	オッホホホ。 身が軽いこと。	has:오호호호	fix	lookup
+dict:audit-cap-sports	バレーボール競技を	has:배구	fix	lookup
+dict:audit-cap-sports	カミュとかサルトルのね	has:카뮈	fix	lookup
+dict:audit-cap-sports	いいテレビ番組を見たな	has:TV 프로그램	fix	lookup
+dict:audit-cap-sports	スポーツ科学を習ってたりとか	has:스포츠 과학	fix	lookup
+dict:audit-cap-sports	続く３番のティーショット。	has:티샷	fix	lookup
+dict:audit-cap-sports	トリプルサルコウ。	has:살코	fix	lookup
+dict:audit-cap-sports	トリプルトウループ。	has:토루프	fix	lookup
+dict:audit-cap-sports	トリプルフリップトリプルトウループ。	has:트리플 플립	fix	lookup
+dict:audit-cap-sports	ピッチコム、ピッチクロックを使って	has:피치 클록	fix	lookup
+dict:audit-cap-sports	女子プロボウラー１期生１３人による	has:프로 볼러	fix	lookup
+dict:audit-cap-sports	大阪での ロケ地 選びや	has:촬영지	fix	lookup
+dict:audit-cap-sports	スマートウオッチを買った	has:워치	fix	lookup
+dict:audit-cap-sports	ダディ、おかえり	has:대디	fix	lookup
+dict:audit-cap-sports	アオリイカが旬で｡	has:무늬오징어	fix	lookup
+dict:audit-cap-sports	タイムズの記事によると	has:타임스	fix	lookup
+dict:audit-cap-sports	タンパベイ・レイズ対	has:탬파베이 레이스	fix	lookup
+dict:audit-cap-sports	フランス、カルチエ・ラタンに	has:카르티에 라탱	fix	lookup
+dict:audit-cap-sports	ミラクルキャッチで同点を死守＞	has:미라클	fix	lookup
+dict:audit-cap-sports	プロ野球の日本一決まりましたね。	has:일본 최고	fix	lookup
+dict:audit-cap-sports	トリプルレッドを達成	has:트리플 레드	keep	lookup
+dict:audit-cap-sports	マレーシア航空	has:말레이시아 항공	fix	lookup
+dict:audit-cap-sports	バレーボール部	has:배구부	fix	lookup
+dict:audit-cap-sports	タイムズスクエア	has:타임스 스퀘어	fix	lookup
+dict:audit-cap-sports	トリプルフリップ	has:트리플 플립	keep	lookup
+dict:audit-cap-sports	ＭＶＰはシリーズ２ホーマーの	has:홈런	fix	lookup
+dict:audit-cap-sports	特大のホーマーを放った	has:특대 홈런을 날렸다	fix	lookup
+dict:audit-cap-sports	ホーマーが帰ってきた	has:호머가	fix	lookup
+dict:audit-cap-sports	クラスで最年長だ	has:최연장	keep	lookup
+dict:audit-cap-sports	史上最年長で出場	has:사상 최고령	fix	lookup
+dict:audit-cap-sports	最年長出場記録を更新	has:최고령 출전 기록	fix	lookup
+dict:audit-cap-sports	日本一高い山	has:일본에서 가장 높은 산	fix	lookup
+dict:audit-cap-sports	日本一周の旅	has:일본 일주	fix	lookup
+dict:audit-cap-sports	日本一の山	has:일본 최고의 산	fix	lookup
+dict:audit-cap-sports	オッホホホホホ	has:오호호호호호	fix	lookup
+dict:audit-cap-sports	オッホホ	has:오호호	fix	lookup
+dict:audit-cap-sports	バレーボールを投げる	has:배구공을	fix	lookup
+dict:audit-cap-sports	バレーボールが転がってきた	has:배구공이	fix	lookup
+dict:audit-cap-sports	ウッソー！	has:거짓말~!	fix	lookup
+dict:audit-cap-sports	ニューヨーク・タイムズによると	has:뉴욕 타임스	fix	lookup
+dict:audit-cap-sports	コンプライアンスを守る	has:컴플라이언스	fix	lookup
+dict:audit-cap-sports	２ゲームを連取します。	has:연달아 따냅니다	fix	lookup
+dict:audit-cap-sports	２ゲームを連取され	has:연달아 내주고	fix	lookup
+dict:audit-cap-sports	ホーマーを打った	has:홈런을 쳤다	fix	lookup
+dict:audit-cap-sports	ソロホーマー	has:솔로 홈런	fix	lookup
+dict:audit-cap-sports	自己最多３８ホーマーを放った	has:38홈런을	fix	lookup
+dict:audit-cap-sports	ホーマーが剣で敵を打つ	has:호머가	keep	lookup
+dict:audit-cap-sports	ホーマーはMVPに選ばれた	has:호머는	keep	lookup
+dict:audit-cap-sports	シリーズ最終章でホーマーが登場した	has:호머가	keep	lookup
+dict:audit-cap-sports	父ホーマー	has:호머	keep	lookup
+dict:audit-cap-sports	バレーボールを持っている	has:배구공을	fix	lookup
+dict:audit-cap-sports	バレーボールを打つ	has:배구공을 친다	fix	lookup
+dict:audit-cap-sports	ボールを打った	has:공을 쳤다	fix	lookup
+dict:audit-cap-sports	碁を打つ	has:바둑을 둔다	keep	lookup
+dict:audit-cap-sports	チェスを打つ	has:체스를 둔다	fix	lookup
+dict:audit-cap-sports	釘を打つ	has:못을 박는다	fix	lookup
+dict:audit-cap-sports	碁石を打つ	has:바둑돌을 놓는다	fix	lookup
+dict:audit-cap-sports	布石を打つ	has:포석을 둔다	fix	lookup
+dict:audit-cap-sports	逆転の一手を打った	has:한 수를 두었다	fix	lookup
+dict:audit-cap-sports	ホーマーを浴びた	has:홈런을 맞았다	fix	lookup
+dict:audit-cap-sports	本塁打王争い、ホーマーが量産	has:홈런이	fix	lookup
+dict:audit-cap-sports	3から離れた	has:떨어졌다	keep	lookup
+dict:audit-cap-sports	一手に引き受ける	has:혼자서 맡는다	keep	lookup
+dict:audit-cap-sports	首相官邸で会見	has:총리 관저에서	fix	lookup
+dict:audit-cap-sports	石破首相は述べた	has:총리는	fix	lookup
+dict:audit-cap-sports	電話をおかけになった	has:전화를 거셨다	fix	lookup
+dict:audit-cap-sports	どうぞおかけになってください	has:앉으셔	keep	lookup
+dict:audit-cap-sports	荷物を運び出す	has:짐을 들어낸다	fix	lookup
+dict:audit-cap-sports	機密文書を運び出した	has:반출했다	keep	lookup
+dict:audit-cap-sports	荷物が運び出された	has:짐이 옮겨졌다	fix	lookup
+dict:audit-cap-sports	運び出された文書	has:반출된 문서	keep	lookup
+dict:audit-cap-sports	初戦で大差をつけた	has:첫 대결에서	fix	lookup
+dict:audit-cap-sports	初戦闘の相手	has:첫 전투의	fix	lookup
+dict:audit-cap-sports	帰リハ遠イ	lacks:리허설	keep	lookup
+dict:audit-cap-sports	ホーマーの『オデュッセイア』	has:호메로스	fix	lookup
+dict:audit-cap-sports	石を打つ音	has:돌을 치는	keep	lookup
+dict:audit-cap-sports	盤に石を打つ	has:돌을 놓는다	fix	lookup
+dict:audit-cap-sports	一手間かけた料理	has:수고를 들인	fix	lookup
+dict:audit-cap-sports	ひと手間加える	has:수고를 더한다	fix	lookup
+dict:audit-cap-sports	けが人を運び出す	has:부상자를 옮긴다	fix	lookup
+dict:audit-cap-sports	遺体を運び出した	has:시신을 옮겼다	fix	lookup
+dict:audit-cap-sports	けが人が運び出された	has:부상자가 옮겨졌다	fix	lookup
+dict:audit-cap-sports	ホーマーが打席に立った	has:호머가	keep	lookup
+dict:audit-cap-sports	前首相	has:전 총리	fix	lookup
+dict:audit-cap-sports	新首相	has:신임 총리	fix	lookup
+dict:audit-cap-sports	現首相	has:현 총리	fix	lookup
+dict:audit-cap-sports	サッチャー英元首相	has:대처 전 영국 총리	fix	lookup
+dict:audit-cap-sports	新監督が就任	has:신임 감독이	fix	lookup
+dict:audit-cap-sports	駅は始発から混んでいた	has:첫차부터	fix	lookup
+dict:audit-cap-sports	この駅は始発ですか？	has:출발역입니까	fix	lookup

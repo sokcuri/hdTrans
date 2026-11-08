@@ -26,6 +26,6 @@ audit-cap-news:42	バス	n	sense	始発のバス	첫 버스	LEX-5600	audit	始�
 audit-cap-news:43	列車	n	sense	始発の列車	첫 열차	LEX-5600	audit	始発の列車 첫 열차	colloc		
 audit-cap-news:44	飛行機	n	sense	始発の飛行機	첫 비행기	LEX-5600	audit	始発の飛行機 첫 비행기	colloc		
 audit-cap-news:45	地下鉄	n	sense	始発の地下鉄	첫 지하철	LEX-5600	audit	始発の地下鉄 첫 지하철	colloc		
-audit-cap-news:46	始発	n	sense	駅が始発	역이 출발역	LEX-5600	audit	この駅が始発です 이 역이 출발역입니다	colloc		form=cop
-audit-cap-news:47	始発	n	sense	駅は始発	역은 출발역	LEX-5600	audit	この駅は始発です 이 역은 출발역입니다	colloc		form=cop
-audit-cap-news:48	始発	n	sense	{X:@place}が始発	{X}이 출발역	LEX-5600	audit	東京駅が始発です 도쿄역이 출발역입니다	colloc		form=cop
+audit-cap-news:46	始発	n	sense	駅が始発	역이 출발역	LEX-5600	audit	この駅が始発です 이 역이 출발역입니다	colloc		next=です|ですか|ですね|ですよ|だ|だよ|でした|だった|でしょう|でしょうか|だろう|なの|なのか|じゃ|では
+audit-cap-news:47	始発	n	sense	駅は始発	역은 출발역	LEX-5600	audit	この駅は始発です 이 역은 출발역입니다	colloc		next=です|ですか|ですね|ですよ|だ|だよ|でした|だった|でしょう|でしょうか|だろう|なの|なのか|じゃ|では
+audit-cap-news:48	始発	n	sense	{X:@place}が始発	{X}이 출발역	LEX-5600	audit	東京駅が始発です 도쿄역이 출발역입니다	colloc		next=です|ですか|ですね|ですよ|だ|だよ|でした|だった|でしょう|でしょうか|だろう|なの|なのか|じゃ|では

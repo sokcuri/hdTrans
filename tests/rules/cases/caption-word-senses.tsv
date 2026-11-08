@@ -24,7 +24,7 @@ sense:進む	iPS細胞の研究がすごく進んでいます。	iPS 세포 연�
 sense:進む	前に進む	앞으로 나아간다	keep	senses
 sense:進む	計画が進んでいる。	계획이 나아가고 있다.	keep	senses
 sense:打つ	注射打ったらヒーローになれるよ｡	주사 놓으면 히어로가 될 수 있어.	fix	senses
-sense:打つ	釘を打つ	못을 친다	keep	senses
+sense:打つ	釘を打つ	못을 박는다	keep	senses
 L9600	過去最高の１リットル当たり	과거 최고의 1리터당	fix	local
 L9600	当たり！	정답!	keep	local
 L9600	これが当たりだ。	이것이 당이다.	keep	local

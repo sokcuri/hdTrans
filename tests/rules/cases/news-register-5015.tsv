@@ -21,5 +21,5 @@ dict:w:35190	政府は方針を明らかにした。	has:방침을 밝혔다	fix
 dict:w:35190	真相を明らかにする	has:진상을 밝힌다	fix	lookup
 dict:w:35190	事実が明らかになった	lacks:밝혔	keep	lookup
 pack:argument-senses:5141	王女のあおりに、警備が止めてそのまま退場させていた。	has:왕녀의 선동에	keep	packs
-dict:jisjk:266990	首相に働きかけた	has:수상에게 촉구했다	fix	local
+dict:jisjk:266990	首相に働きかけた	has:총리에게 촉구했다	fix	local
 dict:w:35196	何かを伝えようと、変えようと、働きかける。	lacks:촉구	keep	local

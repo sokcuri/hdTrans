@@ -3308,7 +3308,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レピート	리피트	N110			GN							jisjk:135721
 リフォーム・インストラクター	리폼 인스트럭터	N110	VBlVHnUAq		GN							jisjk:152608
 リフレイン	리프레인	N110			GN							jisjk:107169
-リフレシュ	리프레쉬	N110			IT							jisjk:263331
+リフレシュ	리프레시	N110			IT							jisjk:263331
 ライボゾーム	리보솜	N110			GN							jisjk:135748
 リヴォルヴァー	리볼버	N110			GN							jisjk:107236
 リヴォルバー	리볼버	N110			GN							jisjk:107236
@@ -18315,7 +18315,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 食付	덥석 &L5@	M421			GN				xxx llm	1		w:25796
 喰付	&L5@	M411			GN							jisjk:93815
 喰付	덥석 &L5@	M421			GN				xxx llm	1		w:25796
-勝負どころ	승패의 갈림길	N110	VPl		GN							jisjk:191238
+勝負どころ	승부처	N110	VPl		GN							jisjk:191238
 ミミズ腫れ	상채기	I110			GN							jisjk:115163
 蚯蚓腫れ	상채기	I110			GN							jisjk:115163
 みみず脹れ	상채기	I110			GN							jisjk:115163
