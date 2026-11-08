@@ -92,7 +92,7 @@ normalize:dialect-order	しっかりせえ 日は まだ高い	정신차려 날�
 normalize:dialect-order	この船の持ち主 呼んでこんかい	이 배의 소유자 부르고 와	fix	normalize
 normalize:dialect-order	借金の100万円 返さんかい！	빚의 100만엔 돌려주어라!	fix	normalize
 normalize:dialect-order	者ども こやつらを逃がすな 斬り捨てい！	사람들 이자식들을 놓친데 버림!	fix	normalize
-normalize:dialect-order	一度見てから判断せえや｡ そんなもん 見んでも わかるわ｡	한 번 보고 나서 판단해라야. 그런 것 보지 않아도 알아.	fix	normalize
+normalize:dialect-order	一度見てから判断せえや｡ そんなもん 見んでも わかるわ｡	한 번 보고 나서 판단해라. 그런 것 보지 않아도 알아.	fix	normalize
 normalize:dialect-nen	客とちゃうねや	손님이 아니다	fix	normalize
 normalize:dialect-nen	お前 何してんねや？	너 뭐하고 있어?	fix	normalize
 normalize:dialect-nen	これを目指してんねや？ 今	이것을 목표로 하고 있어? 지금	fix	normalize

@@ -1,0 +1,48 @@
+# 규칙: SPC-39
+rule	input	expected	kind	layer
+normalize:kansai-request-ya	うまいから食えや。	맛있으니까 먹어.	fix	normalize
+normalize:kansai-request-ya	「駄目。外でやれや」	「안 된다. 밖에서 해」	fix	normalize
+normalize:kansai-request-ya	「んじゃま、上がってくれや」	has:올라 줘」	fix	normalize
+normalize:kansai-request-ya	まっ、とりあえずゆっくりしろや！	뭐, 우선 쉬어라!	fix	normalize
+normalize:kansai-request-ya	信じてぇやー。	믿어~.	fix	normalize
+normalize:kansai-request-ya	たくさん食べて～や。	많이 먹어~.	fix	normalize
+normalize:kansai-request-ya	頑張ってや！	힘내!	fix	normalize
+normalize:kansai-request-ya	「待てや！　なんでそうなんねん！」	has:「기다려!	fix	normalize
+normalize:kansai-request-ya	おいしいって言えや～！	맛있다고 말해!	fix	normalize
+normalize:kansai-request-ya	りんごやみかんを買った。	사과나 귤을 샀다.	keep	normalize
+normalize:kansai-request-ya	やっと終わった。	드디어 끝났다.	keep	normalize
+normalize:kansai-request-ya	部屋に入った。	방에 들어갔다.	keep	normalize
+normalize:kansai-request-ya	俺がやる。	내가 한다.	keep	normalize
+normalize:kansai-request-ya	宿題をやった。	숙제를 했다.	keep	normalize
+normalize:kansai-request-ya	ましてや、彼は知らない。	하물며, 그는 모른다.	keep	normalize
+normalize:kansai-request-ya	初めてや。	처음이야.	keep	normalize
+normalize:kansai-request-ya	これや。	이거야.	keep	normalize
+normalize:kansai-request-ya	してやったぞ。	해 줬어.	keep	normalize
+normalize:kansai-ntoite	気にせんといてぇ～や。	신경 쓰지 마~.	fix	normalize
+normalize:kansai-ntoite	気にせんといて。	신경 쓰지 마.	fix	normalize
+normalize:kansai-ntoite	そんなこと言わんといて。	그런 말 하지 마.	fix	normalize
+normalize:kansai-ntoite	触らんといてください。	만지지 마세요.	fix	normalize
+normalize:kansai-ntoite	食べんといて。	먹지 마.	fix	normalize
+normalize:kansai-ntoite	見んといてや！	보지 마!	fix	normalize
+normalize:kansai-ntoite	ここに置いといて。	여기에 놓아두어.	keep	normalize
+normalize:kansai-final-de	「待っとったで」	「기다리고 있었어」	fix	normalize
+normalize:kansai-final-de	うんって自分で言うたで。	has:말했어.	fix	normalize
+normalize:kansai-final-de	知っとるで。	알고 있어.	fix	normalize
+normalize:kansai-final-de	やったで！	해냈어!	fix	normalize
+normalize:kansai-final-de	三人で。	세 명이서.	keep	normalize
+normalize:kansai-te-oru-negative	何も言っとりはせん！！	아무것도 말하지는 않았다!!	fix	normalize
+normalize:kansai-te-oru-negative	楽しみになんてしとりゃせんし…	has:하고 있지는 않고	fix	normalize
+normalize:kansai-negative-ya	持っとらんやないか。	가지고 있지 않잖아.	fix	normalize
+normalize:kansai-negative-ya	知らんやん。	모르잖아.	fix	normalize
+normalize:kansai-negative-ya	これ思いつかんやろ？	이것 생각해내지 못하지?	fix	normalize
+normalize:kansai-negative-ya	今日はどないしたんやろ？	오늘은 어떻게 한 거지?	keep	normalize
+normalize:kansai-hin	できひん。	할 수 없다.	fix	normalize
+normalize:kansai-hin	見いひん。	보지 않는다.	fix	normalize
+normalize:kansai-hin	出来ひんかった。	할 수 없었다.	fix	normalize
+normalize:kansai-hin	ひんやりした。	서늘했다.	keep	normalize
+normalize:kansai-hin	気品がある。	기품이 있다.	keep	normalize
+normalize:kansai-yanne	そうやんね。	그렇지.	fix	normalize
+normalize:kansai-yanne	紙の皿やんね。	종이 접시지.	fix	normalize
+normalize:kansai-soya	そらそやろ。	그야 그렇지.	fix	normalize
+normalize:kansai-ee-quote	スタートだけ決めてええって言ったよ	스타트만 결정해도 된다고 말했어	fix	normalize
+normalize:kansai-ee-quote	行ってもええと思う。	가도 괜찮다고 생각한다.	fix	normalize
