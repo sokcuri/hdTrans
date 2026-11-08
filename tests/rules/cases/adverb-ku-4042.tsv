@@ -26,3 +26,5 @@ cx:adverb-ku:10	いえ、もう分かってるんです。拉致では無く、�
 cx:adverb-ku:20	といっても対案があるわけではなく、諦めるよりほかない。	has:아니고,	keep	rewrites
 cx:adverb-ku:20	若く、見るからに健康で腕の立つクロード	has:젊고,	keep	rewrites
 cx:adverb-ku:10	レナの拳銃射撃は、速く、そして正確だった。	has:빠르고,	keep	rewrites
+cx:adverb-ku:20	「…そうしなくちゃでなく、そうして差し上げたいって」	has:아니고	keep	rewrites
+cx:adverb-ku:20	彼は学生でなく、教師だった。	has:학생이 아니고	keep	rewrites
