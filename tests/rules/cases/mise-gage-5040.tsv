@@ -1,0 +1,21 @@
+# 규칙: LEX-5040
+rule	input	expected	kind	layer
+G30	凪がとある店の前で足を止めた。	has:어떤 가게 앞에서	fix	global-stem
+G30	何の店？	has:무슨 가게?	fix	global-stem
+G30	何の石のことだ？	has:무슨 돌이야?	fix	global-stem
+G30	姫様 これは何の肉ですか？	has:무슨 고기입니까?	fix	global-stem
+G30	今日 何の日？	has:무슨 날?	fix	global-stem
+G30	此の日諸隊躍進何れも先駆の功名にはやり後方の配備甚だ手薄だった。	has:이날	fix	global-stem
+G30	天空のように快活な気体の中で油然と入れ変り立ち変り現れる色彩の波はあれはいったい生と死の間の何物なのであろう。	has:생과 죽음의 사이의	fix	global-stem
+G30	小さなもの同士 助け合わないとね ねぇ！	has:작은 것끼리	keep	global-stem
+G30	ラーメン店	has:라면점	keep	global-stem
+G30	渋谷店	has:시부야점	keep	global-stem
+defaults:mise-5040	この店は美味しい。	has:이 가게는	keep	defaults
+defaults:mise-5040	あの店で買った。	has:그 가게에서	keep	defaults
+defaults:mise-5040	店の前に立つ	has:가게 앞에	keep	defaults
+defaults:mise-5040	近くの店まで歩いた	has:근처 가게까지	keep	defaults
+defaults:mise-5040	本店に戻る	has:본점으로	keep	defaults
+defaults:mise-5040	売店で買う	has:매점에서	keep	defaults
+defaults:mise-5040	店長に聞いた	has:점장에게	keep	defaults
+dict:w:35181	小さな店を開いた	has:작은 가게를 열었다	fix	lookup
+dict:w:35181	朝十時に店を開く	has:가게를 연다	fix	lookup
