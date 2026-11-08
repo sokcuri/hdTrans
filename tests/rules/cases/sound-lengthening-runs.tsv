@@ -33,3 +33,8 @@ sound:lengthening	ママーーーっ！	has:엄마아아앗!	fix	compose
 sound:lengthening	「ええーーっ！部長様、屋上は知らないにゃーー」	has:모른다냥~」	fix	compose
 sound:lengthening	「むーリン、告白を行くにゃーー」	has:간다냥~」	fix	compose
 sound:lengthening	（む、難しい〜〜〜〜〜〜〜〜〜〜〜〜！！）	has:~~~~~~~~~~~~!!	keep	compose
+sound:lengthening	すごーい！	has:대단해~!	fix	compose
+sound:lengthening	すごーーい！	has:대단해애애!	fix	compose
+sound:lengthening	いってきまーす！	lacks:~	keep	compose
+sound:lengthening	えーと	lacks:~	keep	compose
+sound:lengthening	うるせー	lacks:~	keep	compose

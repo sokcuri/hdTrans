@@ -28527,3 +28527,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 その時はその時だ	그때 가서 생각하자	A9D0			GN			LEX-5076: その時はその時だ 그때 가서 생각하자				w:34750
 そう来なくちゃ	그래야지	A9D0			GN			LEX-5076: そう来なくちゃな 그래야지				w:34751
 そうこなくちゃ	그래야지	A9D0			GN			LEX-5076: そうこなくちゃな 그래야지				w:34752
+赤みがか	붉은빛이 &K9@	M428	UCr		GN			LEX-5204				w:35031
+青みがか	푸른빛이 &K9@	M428	UCr		GN			LEX-5204				w:35032
+黒みがか	검은빛이 &K9@	M428	UCr		GN			LEX-5204				w:35033
+白みがか	흰빛이 &K9@	M428	UCr		GN			LEX-5204				w:35034
+黄みがか	노란빛이 &K9@	M428	UCr		GN			LEX-5204				w:35035
+黄色みがか	노란빛이 &K9@	M428	UCr		GN			LEX-5204				w:35036
+茶色みがか	갈색빛이 &K9@	M428	UCr		GN			LEX-5204				w:35037
+緑がか	초록빛이 &K9@	M428	UCr		GN			LEX-5204				w:35038
+紫がか	보랏빛이 &K9@	M428	UCr		GN			LEX-5204				w:35039
+灰色がか	회색빛이 &K9@	M428	UCr		GN			LEX-5204				w:35040
+茶がか	갈색빛이 &K9@	M428	UCr		GN			LEX-5204				w:35041

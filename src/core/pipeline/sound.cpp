@@ -2490,6 +2490,16 @@ size_t Repeats(std::u32string_view unit, std::u32string_view f, size_t i, std::s
 
 }  // namespace
 
+// Whether key, an interjection with a ー before its last kana, is a word of sound.drawn-word whose ー
+// draws out the word (すごーい 대단해~), not its usual spelling (はーい, おーい).
+bool DrawnWordRow(std::u32string_view key) {
+    std::u32string h(key);
+    for (char32_t& c : h) {
+        if (c >= U'ァ' && c <= U'ヶ') c -= 0x60;
+    }
+    return dict::InClass(HDTRANS_CLASS("sound.drawn-word"), EncodeText(h));
+}
+
 bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& end, std::string& units) {
     units.clear();
     const std::u32string_view unit = RepeatedUnit(row);
@@ -2503,6 +2513,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     }
     if (p + stem.size() > f.size()) return false;
     bool tilde = false;  // a ～ stands for the key's ー (う～ん)
+    size_t inner = 0;    // the ー that draw out the end of an interjection before its last kana
     const auto isMark = [](char32_t c) { return c == U'ー' || c == U'～'; };
     size_t q = p;
     for (size_t k = 0; k < stem.size(); k++, q++) {
@@ -2520,6 +2531,13 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
                 q++;
             }
             if (!mark) return false;
+            // Before the last kana of the key it draws out the word's end (すごーい 대단해~, すごーーい
+            // 대단해애애; spec SND-23): a lengthening unit for each ー.
+            if (k + 2 == stem.size() && !tilde && DrawnWordRow(row.key)) {
+                for (size_t m = from; m < q; m++) {
+                    if (f[m] == U'ー') inner++;
+                }
+            }
             q--;
             continue;
         }
@@ -2541,6 +2559,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
             return false;
         }
     }
+    units.append(inner, 'i');
     char32_t last = stem.back();
     if (last == U'ー' && stem.size() > 1) last = stem[stem.size() - 2];
     size_t i = q;
@@ -2579,6 +2598,17 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
 }
 
 std::string Lengthen(std::string_view korean, std::string_view units) {
+    // The ー that drew out the end of an interjection's key (すごーい): one is ~ after the word, more
+    // a lengthening each, which the restore stage writes drawn out at the end of a phrase.
+    if (const size_t inner = static_cast<size_t>(std::count(units.begin(), units.end(), 'i')); inner > 0) {
+        std::string rest(units);
+        std::erase(rest, 'i');
+        std::string out = Lengthen(korean, rest);
+        if (out.ends_with('~') || out.ends_with(kLengthenText)) return out;
+        if (inner == 1) return out + "~";
+        for (size_t k = 0; k < std::min<size_t>(inner, 5); k++) text::AppendRune(out, output::kLengthenMark);
+        return out;
+    }
     if (const size_t d = units.find('d'); d != std::string_view::npos) {
         std::string rest(units);
         std::erase(rest, 'd');
