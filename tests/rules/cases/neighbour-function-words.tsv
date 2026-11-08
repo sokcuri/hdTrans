@@ -1,6 +1,6 @@
 # 규칙: GRM-24, GRM-3073, GRM-3074, GRM-3075, GRM-3078, GRM-3079, GRM-3080, GRM-3081, GRM-3082, LEX-3475, LEX-3476, LEX-3477, LEX-3478, LEX-3479, LEX-3480
 rule	input	expected	kind	layer
-dict:jisjk:201813	麻衣は剣があると分かっても別に動じずそこまで持ってきた運動エネルギーを腕に回し、男の胸目掛けて攻撃する。	has:별로 동요하지 않고	fix	local
+dict:jisjk:201813	麻衣は剣があると分かっても別に動じずそこまで持ってきた運動エネルギーを腕に回し、男の胸目掛けて攻撃する。	has:딱히 동요하지 않고	fix	local
 dict:jisjk:201813	あいつとは別に行動する。	rule:dict:jisjk:201813=따로	keep	local
 dict:jisjk:201813	別に用意した。	rule:dict:jisjk:201813=따로	keep	local
 dict:jisjk:114644	さて、最後の子どうぞ」	!rule:dict:jisjk:114644	fix	local
