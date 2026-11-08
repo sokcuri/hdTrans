@@ -247,7 +247,7 @@ cx:count-what:45	テントを三張張った。	텐트를 세 동 쳤다.	keep	r
 cx:count-what:50	花を何輪買った？	꽃을 몇 송이 샀어?	fix	rewrites
 cx:count-what:50	花を3輪買った。	꽃을 3송이 샀다.	keep	rewrites
 cx:count-what:55	光が何筋も差し込んだ。	has:몇 줄기	fix	rewrites
-cx:count-what:55	光が三筋差し込んだ。	빛이 세 줄기 비추었다.	keep	rewrites
+cx:count-what:55	光が三筋差し込んだ。	빛이 세 줄기 비쳐 들었다.	keep	rewrites
 cx:count-what:60	涙が何滴落ちた？	눈물이 몇 방울 떨어졌어?	fix	rewrites
 cx:count-what:60	涙が三滴落ちた。	눈물이 세 방울 떨어졌다.	keep	rewrites
 cx:count-what:65	何口食べた？	몇 입 먹었어?	fix	rewrites

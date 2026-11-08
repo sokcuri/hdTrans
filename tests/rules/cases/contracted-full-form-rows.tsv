@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-dict:jisjk:4231	で、オフ会のみなさんが、テロリスト役やってやるから、好きに揉んでやれと。	그래서, 오프라인 파티의 여러분이, 테러리스트역 해 주니까, 좋아하게 주물러 주라고.	fix	local-ending
+dict:jisjk:4231	で、オフ会のみなさんが、テロリスト役やってやるから、好きに揉んでやれと。	그래서, 오프라인 파티의 여러분이, 테러리스트역 해 주니까, 마음대로 주물러 주라고.	fix	local-ending
 dict:jisjk:4231	さあ、やってやるわよ。	자, 해 줄 거야.	fix	local-ending
 dict:jisjk:4231	よし、俺も……本気でやってやるぜーー！	좋아, 나도……진심으로 해 준다~!	fix	local-ending
 dict:jisjk:4231	やってやる！	해 준다!	fix	local-ending

@@ -75,3 +75,4 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 伸ばす/のばす/v5#2	sense	伸ばす/のばす/v5	v5	colloc	羽を伸ばす		마음껏 쉬다	70	LEX-4907	corpus	羽を伸ばす → 마음껏 쉬다
 通す/とおす/v5#1	sense	通す/とおす/v5	v5	colloc	目を通す|目は通す		훑어보다	70	LEX-4907	corpus	目を通す → 훑어보다
 立てる/たてる/v1#5007	sense	立てる/たてる/v1	v1:ㄷ	colloc	お伺いを立てる|伺いを立てる|おうかがいを立てる		의향을 묻다	70	LEX-5007	hand	お伺いを立てる → 의향을 묻다
+浮かす/うかす/v5#5232	sense	浮かす/うかす/v5	v5	colloc	熱に浮かされ		열에 들뜨다	70	LEX-5232	hand	熱に浮かされる → 열에 들뜨다
