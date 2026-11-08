@@ -18,7 +18,7 @@ cx:function-words:70	姉貴は姉貴、あたいはあたいさ。まあでも�
 cx:function-words:70	俺は俺さ！	나는 나야!	fix	rewrites
 cx:function-words:70	「おまえさ。おまえには舞踏会場の備品を触っちゃ駄目禁止令がでているだろう。」	has:「너. 너에게는	keep	rewrites
 cx:function-words:70	俺さ 電話とか そんなに マメじゃないし	lacks:나야	keep	rewrites
-dict:jisjk:184122	まあ いいや おいらさ バットってんだ よろしく	has:저 배트라고	fix	local
+dict:jisjk:184122	まあ いいや おいらさ バットってんだ よろしく	has:나 배트라고	fix	local
 names:common-surname	氷室将嗣が笑った。	히무로 마사츠구가 웃었다.	fix	names
 names:common-surname	氷室に氷を運ぶ	has:빙실에	keep	names
 names:common-surname	…流石和奏、抜け目ないね！	has:역시 와카나	keep	names

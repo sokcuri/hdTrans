@@ -3738,7 +3738,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鰻どん	장어 덮밥	N110	VFd		GN							jisjk:126997
 馬舎	마구간	N110			GN				llm			w:13266
 雲ゆき	동향	I110			GN							jisjk:105722
-くも助	못된 놈	N110	VHn		GN							jisjk:30295
+くも助	가마꾼	N110	VHn		GN							jisjk:30295
 影ぼうし	그림자	I110			GN							jisjk:78360
 映畫	영화	N110	UAr		GN	475	||1 &&6 S+1== "に" D+1== "" P+1== "2**" ||2 S+2== "行" S+2== "い" P+2== "4**" D+0= "영화 보러"	映画 뒤의 に가 빈 번역인 조사이고 그다음 동사가 行 또는 い이면 映画를 '영화 보러'로 바꾼다. (미발동: rare-context)				jisjk:29459
 映畵	영화	N110	UAr		GN	475	||1 &&6 S+1== "に" D+1== "" P+1== "2**" ||2 S+2== "行" S+2== "い" P+2== "4**" D+0= "영화 보러"	映画 뒤의 に가 빈 번역인 조사이고 그다음 동사가 行 또는 い이면 映画를 '영화 보러'로 바꾼다. (미발동: rare-context)				jisjk:29459
@@ -4758,8 +4758,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 亢ぶ	흥분&C6@	M428	SFl		GN							jisjk:139237
 高びしゃ	고압적인 자세	I110			GN							jisjk:105466
 豪球	강속구	N110			GN							jisjk:96320
-合の手	간주	N110	USoQMU		GN							jisjk:123852
-あいの手	간주	N110	USoQMU		GN							jisjk:123852
+合の手	추임새	N110	USoQMU		GN							jisjk:123852
+あいの手	추임새	N110	USoQMU		GN							jisjk:123852
 あわせ鏡	거울	N110	VPe		GN							jisjk:124997
 合せ鏡	거울	N110	VPe		GN							jisjk:124997
 合せもの	합주	N110	USoQMU		GN							jisjk:125001
@@ -5677,8 +5677,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 証正	시정	N110		Hd	GN							jisjk:27741
 是否	시비	E110			GN	470	||1 &&2 ||7 S+1== "を" S+1== "が" S+1== "は" S+1== "の" S+1== "など" S+1== "などについて" S+1== "に" P+1== "2**"	是非는 다음 말이 조사 を·が·は·の·など·などについて·に이면 명사 ‘시비’를 고른다.				jisjk:27739
 是否	부디	E110	XXX		GN							jisjk:264107
-スゴ腕	놀라운 솜씨	N110			GN							jisjk:102838
-すご腕	놀라운 솜씨	N110			GN							jisjk:102838
+スゴ腕	실력자	N110			GN							jisjk:102838
+すご腕	실력자	N110			GN							jisjk:102838
 制慾	금욕	N110		Hd	GN							jisjk:198113
 弾車	플라이휠	I110			GN							jisjk:87081
 勢車	플라이휠	I110			GN							jisjk:87081
@@ -5805,9 +5805,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 キリトリ線	절취선	I110			GN							jisjk:83045
 切取り線	절취선	I110			GN							jisjk:83045
 きりとり線	절취선	I110			GN							jisjk:83045
-切りもり	처리	I110		Hd	GN							jisjk:110520
-切盛	처리	I110		Hd	GN							jisjk:110520
-きり盛り	처리	I110		Hd	GN							jisjk:110520
+切りもり	운영	I110		Hd	GN							jisjk:110520
+切盛	운영	I110		Hd	GN							jisjk:110520
+きり盛り	운영	I110		Hd	GN							jisjk:110520
 切窓	채광창	N110	VBl		GN							jisjk:174448
 切りかわ	바&CW@	M428			GN							jisjk:94757
 切炭	숯	N110	VPeVSn		GN							jisjk:174397
@@ -6772,8 +6772,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鼻づら	콧등	N110	VBp		GN							jisjk:24869
 髭剃り	면도질	I110			GN							jisjk:41519
 髭そり	면도질	I110			GN							jisjk:41519
-ひざ関節	슬관절	N110	VBp		GN							jisjk:234080
-ヒザ関節	슬관절	N110	VBp		GN							jisjk:234080
+ひざ関節	무릎 관절	N110	VBp		GN							jisjk:234080
+ヒザ関節	무릎 관절	N110	VBp		GN							jisjk:234080
 膝がしら	무릎	N110	VBp		GN							jisjk:27598
 姫さま	공주님	N110			GN							jisjk:264827
 ヒモ付き	조건부	I110			GN							jisjk:41555
@@ -9348,8 +9348,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 死蠟	사납	N110			GN							jisjk:235850
 𠮟正	질정	N110	UTs		Gn							jisjk:35034
 ノルタルジック	환상적%D4@	G8U0			GN							jisjk:268315
-もの申	불평&AV@	M413	UTs		GN							jisjk:92913
-モノ申	불평&AV@	M413	UTs		GN							jisjk:92913
+もの申	한마디 &AV@	M413	UTs		GN							jisjk:92913
+モノ申	한마디 &AV@	M413	UTs		GN							jisjk:92913
 ご霊前	영전	I110	VPl		GN							jisjk:77936
 同原	근원이 같음	N110			GN							jisjk:246376
 湯タンポ	탕파	I110			GN							jisjk:87134
@@ -12247,7 +12247,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おおい隠	감&CL@	M443			GN							jisjk:145458
 覆いかく	덮어 가&AA@	M433			GN							jisjk:93076
 覆いかく	감&CL@	M443			GN							jisjk:145458
-岡引	앞잡이	I110	VHn		GN							jisjk:60497
+岡引	포졸	I110	VHn		GN							jisjk:60497
 押し留め	말&AA@	M437			GN							jisjk:93968
 押し留め	제지&AV@	M447			GN							jisjk:146047
 押止め	말&AA@	M437			GN							jisjk:93968
@@ -13103,10 +13103,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 色取々	여러 가지 색	N110			GN							jisjk:126336
 色取々	형형색색	N110			GN				xxx llm	1		w:22603
 水のあわ	물거품	I110			GN							jisjk:75858
-数ヶ所	수군데	N110			GN							jisjk:115280
-数ケ所	수군데	N110			GN							jisjk:115280
-数か所	수군데	N110			GN							jisjk:115280
-数箇所	수군데	N110			GN							jisjk:115280
+数ヶ所	몇 군데	N110			GN							jisjk:115280
+数ケ所	몇 군데	N110			GN							jisjk:115280
+数か所	몇 군데	N110			GN							jisjk:115280
+数箇所	몇 군데	N110			GN							jisjk:115280
 数珠繋ぎ	죽 늘어서 묶은 것	I110			GN							jisjk:75843
 生れながら	태어날 때부터	E301			GN							jisjk:1697
 生まれ乍ら	태어날 때부터	E301			GN							jisjk:1697
@@ -14164,7 +14164,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御勤め	근무	K110		Hd	GN							jisjk:40556
 余儀無くされ	어쩔 수 없이 &AV@	H467			GN							jisjk:353370
 余儀無くされ	피할 수 없게 &C6@	H467			GN	4300	||1 S-1== "を"	앞에 を가 오면 余儀なくされ를 피할 수 없게 되다로 고른다. (미발동: rare-word)				jisjk:363269
-話が分か	이해&AV@	M418			GN							jisjk:96031
+話が分か	말을 이해&AV@	M418			GN							jisjk:96031
 何にも増して	무엇보다도	A9D0			GN							jisjk:346898
 諸処	도처	N110			GN							jisjk:33452
 ことば通り	말대로	N110			GN							jisjk:151084

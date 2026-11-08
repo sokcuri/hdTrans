@@ -22,7 +22,7 @@ normalize:spelling-variant	利人さんが伝えたい事。	has:싶은 것	fix	
 normalize:spelling-variant	工業エリアという事で。	has:에리어라는 것으로	fix	normalize
 normalize:spelling-variant	手術する事もできます。	has:수술할 수도	fix	normalize
 normalize:spelling-variant	確かめたい事があって｡	has:싶은 것이	fix	normalize
-normalize:spelling-variant	うわべだけをまねる事｡	has:흉내내는 것	fix	normalize
+normalize:spelling-variant	うわべだけをまねる事｡	has:흉내 내는 것	fix	normalize
 normalize:spelling-variant	近々 この地を去る事に	has:떠나는 것에	fix	normalize
 normalize:spelling-variant	調べりゃ　分かる事だ。	has:아는 것이다	fix	normalize
 normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize

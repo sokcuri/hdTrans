@@ -1,0 +1,8 @@
+#! layer=pack
+# 일상 말의 뜻을 목적어로 고르는 팩 행: 手掛ける 맡다 (LEX-5603)
+id	lemma	pos	slot	cond	target	spec	prov	note	kind
+audit-cap-everyday:1	手掛ける|手がける	v1	sense	obj=脚本|台本|デザイン|演出|作曲|編曲|作詞|プロデュース|設計|監修|編集|翻訳|振り付け|制作|製作|作品|ドラマ|映画|番組|事業|開発	맡다	LEX-5603	audit	脚本を手掛ける 각본을 맡다
+audit-cap-everyday:2	そば	n	sense	mod=美味しい|おいしい|うまい|旨い|美味い|冷たい|温かい|あったかい|熱い|あつい|ゆでた|茹でた|太い|細い|うまかった|美味しかった	메밀국수	LEX-5603	audit	美味しいそば 맛있는 메밀국수
+audit-cap-everyday:3	見守る	v5	sense	{X}と見守り	{X}와 돌봄	LEX-5603	audit	介護と見守り 간병과 돌봄	colloc
+audit-cap-everyday:5	話が分かる|話がわかる	v5	sense	head=人|方|奴|やつ|男|女|相手|上司|親|大人|親父|ボス|連中	말이 통하다	LEX-5603	audit	話が分かる人 말이 통하는 사람	
+audit-cap-everyday:6	話が分かる|話がわかる	v5	sense	subj=@person|彼|彼女|あいつ|お前|あなた|君|親友	말이 통하다	LEX-5603	audit	彼は話が分かる 그는 말이 통한다	
