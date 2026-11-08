@@ -28505,3 +28505,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 誰でもな	아무도 아$A3@	E7U0			GN			GRM-4011: 誰でもない 아무도 아니다				w:34809
 だれでもな	아무도 아$A3@	E7U0			GN			GRM-4011: 誰でもない 아무도 아니다				w:34825
 どこでもな	어디도 아$A3@	E7U0			GN			GRM-4011: 誰でもない 아무도 아니다				w:34826
+どこにでも	어디에나	E311			GN			GRM-4011: どこにでもある 어디에나 있다				w:34827
