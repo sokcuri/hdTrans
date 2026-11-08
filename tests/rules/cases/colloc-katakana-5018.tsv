@@ -1,0 +1,18 @@
+# 규칙: LEX-5018
+rule	input	expected	kind	layer
+pack:idiom	ドジ踏んだ	얼빠진 짓을 했다	fix	packs
+pack:idiom	ドジ踏んだ。	얼빠진 짓을 했다.	fix	packs
+pack:idiom	ドジ踏んだ！	얼빠진 짓을 했다!	fix	packs
+pack:idiom	ドジ踏んだ？	얼빠진 짓을 했어?	fix	packs
+pack:idiom	ドジ踏んじゃった。	얼빠진 짓을 해버렸다.	fix	packs
+pack:idiom	ドジ踏みました。	얼빠진 짓을 했습니다.	fix	packs
+pack:idiom	ドジ踏んで怒られた。	얼빠진 짓을 해 혼났다.	fix	packs
+pack:idiom	ドジ踏まなかった。	얼빠진 짓을 하지 않았다.	fix	packs
+pack:idiom	……ドジ踏んだ	……얼빠진 짓을 했다	fix	packs
+pack:idiom	ドジ踏む	얼빠진 짓을 한다	fix	packs
+pack:idiom	ドジ踏んだら終わりだ。	얼빠진 짓을 하면 끝이다.	fix	packs
+pack:idiom	ドジを踏んだ	얼빠진 짓을 했다	keep	packs
+pack:idiom	ウマが合う	서로 마음이 맞는다	keep	packs
+pack:idiom	イヤミをいわれた	싫은 소리를 들었다	keep	packs
+pack:idiom	バランスを取るのが難しい。	균형을 잡는 것이 어렵다.	keep	packs
+pack:idiom	ズボンを履く	바지를 입는다	keep	packs
