@@ -30,3 +30,5 @@ names:status-window	名前：カイト\nジョブ：無し\n力：35\n\n名前�
 names:status-window	【若葉】おはよう\n【健太】おう\n【若葉】何点だった？\n【健太】85\n【若葉】すごい\n若葉は笑った。	has:와카바는 웃었다.	keep	names
 names:real-name	「樹くん、おはよう」\n樹「うん」\n樹は大きく揺れた。\n樹は笑った。	has:나무는 크게 흔들렸다.\n이츠키는 웃었다.	fix	names
 names:real-name	「樹くん、おはよう」\n樹「うん」\n樹が囁くように揺れた。\n樹は笑った。	has:나무가 속삭이듯이 흔들렸다.\n이츠키는 웃었다.	fix	names
+names:real-name	「桜さん、こんにちは」\n桜「はい」\n桜が咲いた。\n桜は笑った。	has:벚꽃이 피었다.\n사쿠라는 웃었다.	fix	names
+names:real-name	「樹くん、おはよう」\n樹「うん」\n大きな樹を見上げた。	has:큰 나무를	fix	names

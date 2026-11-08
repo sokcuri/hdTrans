@@ -256,10 +256,11 @@ private:
     int fieldRunLines_ = 0, fieldRunValues_ = 0;
     std::set<std::string> fieldRunNames_;
     bool fieldRunRepeats_ = false;  // a field name said twice in the run, as speakers take turns
+    bool fieldRunSpeech_ = false;   // a field of the run that reads as speech (【若葉】うん)
     std::vector<std::string> fieldRunLabels_;
     // Whether line opens with a bracketed or colon field (name) and text after it; value tells whether that
-    // text is a value.
-    static bool BracketField(std::string_view line, bool& value, std::string& name);
+    // text is a value, speech whether it reads as speech (おはよう, うん).
+    static bool BracketField(std::string_view line, bool& value, std::string& name, bool& speech);
     void RowParts(const std::string& x, const std::string& y);
     // The common words GivenSplit took for the surname of a full name (氷室 of 氷室将嗣) and their
     // name-layer Korean (히무로), which they read as in that full name only.

@@ -939,7 +939,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 }
 
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
-    if (CommonSenseAt(after) || WordBeforeAt(before)) return false;
+    if (CommonSenseAt(after)) return false;
     // An honorific: the document has named the word already, so a sense of an animal does not stand in the
     // way (千鳥（ちどり）さん).
     const bool honorific = HonorificStart(after);

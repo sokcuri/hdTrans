@@ -33,3 +33,5 @@ dict:jisjk:260867	風が吹くたび、樹がざわめく。	has:나무가 웅�
 dict:jisjk:260867	樹が茂っている。	has:나무가	fix	local
 dict:jisjk:260867	一本の樹が立っていた。	has:한 개의 나무가	fix	local
 dict:jisjk:260867	樹は静かに佇んでいた。	lacks:나무는	keep	local
+dict:jisjk:260867	元気な樹が走ってきた。	lacks:나무가	keep	local
+dict:jisjk:260867	一本の巨大な樹が描かれていた。	has:거대한 나무가	fix	local

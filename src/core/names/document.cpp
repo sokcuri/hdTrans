@@ -709,7 +709,10 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
             // A name of the whole document gives way where the line keeps the common sense (names::CommonSenseAt:
             // 朝日を浴びて, 樹は大きく揺れた; 朝日は背が高い is the person, its own subject being 背).
             const std::string_view after = cues.substr(at + k.size());
-            if (names::CommonSenseAt(after) || names::WordBeforeAt(cues.substr(0, at))) {
+            // An adnominal before it makes it the word unless a person act or call after it makes it the person
+            // (大きな樹を見上げた; 大きな樹くん).
+            if (names::CommonSenseAt(after) ||
+                (names::WordBeforeAt(cues.substr(0, at)) && !names::PersonSlotAt(*doc.snap, k, cues.substr(0, at), after))) {
                 common = true;
             } else {
                 other = true;

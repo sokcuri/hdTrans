@@ -577,10 +577,24 @@ std::vector<std::string> SpeakerCueLabels(std::string_view text) {
 
 std::vector<std::string> SpeakerCues(std::string_view text) { return internal::SpeakerCueLabels(text); }
 
-bool Registry::BracketField(std::string_view line, bool& value, std::string& name) {
+// Whether the text of a field reads as speech: kana only or a sentence mark (おはよう, うん, 行こう！), not a
+// value word of a status window (無し, カイト, 傭兵見習い).
+bool SpeechField(std::string_view text) {
+    bool hiragana = true;
+    for (std::size_t i = 0; i < text.size();) {
+        const text::Rune r = RuneAt(text, i);
+        if (InRunes(r.cp, "。！？!?…")) return true;
+        if (!IsHiragana(r.cp) && r.cp != U'ー' && r.cp != U'、' && r.cp != U'～') hiragana = false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return hiragana;
+}
+
+bool Registry::BracketField(std::string_view line, bool& value, std::string& name, bool& speech) {
     std::string_view rest;
     if (::hdTrans::names::BracketField(line, rest)) {
         value = StatusValueAt(rest);
+        speech = !value && SpeechField(rest);
         const std::size_t open = line.find("【");
         const std::size_t close = line.find("】");
         name = std::string(line.substr(open + std::string_view("【").size(), close - open - std::string_view("【").size()));
@@ -607,6 +621,7 @@ bool Registry::BracketField(std::string_view line, bool& value, std::string& nam
     while (text.starts_with(" ") || text.starts_with("　")) text.remove_prefix(text.starts_with("　") ? std::string_view("　").size() : 1);
     if (text.empty() || text.starts_with("「") || text.starts_with("『")) return false;
     value = StatusFieldAt(after);
+    speech = !value && SpeechField(text);
     name = std::string(label);
     return true;
 }

@@ -712,13 +712,14 @@ void Registry::Add(std::string_view rawLine) {
     // A run of lines that open with a bracketed field and text after it that holds a value on one of its lines
     // (【ジョブ】　無し, 【力】　16) is a status window: its fields are no speakers, however often the window
     // repeats; a run of speaker lines (【若葉】おはよう) keeps its labels (spec LEX-5175).
-    bool value = false;
+    bool value = false, speech = false;
     std::string fieldName;
-    const bool field = BracketField(line, value, fieldName);
+    const bool field = BracketField(line, value, fieldName, speech);
     const std::string label = Label(line, script);
     if (!field) {
         fieldRunValue_ = false;
         fieldRunRepeats_ = false;
+        fieldRunSpeech_ = false;
         fieldRunLines_ = fieldRunValues_ = 0;
         fieldRunLabels_.clear();
         fieldRunNames_.clear();
@@ -726,10 +727,12 @@ void Registry::Add(std::string_view rawLine) {
         fieldRunLines_++;
         if (value) fieldRunValues_++;
         fieldRunRepeats_ = fieldRunRepeats_ || !fieldRunNames_.insert(fieldName).second;
+        fieldRunSpeech_ = fieldRunSpeech_ || speech;
         // A status window has values on two lines and on half the run, or a value among three fields or more
-        // that each come once (名前／ジョブ／力：35); one number said in a run of speakers taking turns (【健太】85) makes none.
+        // that each come once and none reads as speech (名前／ジョブ／力：35); one number said in a run of speakers
+        // (【健太】85 beside 【若葉】うん) makes none.
         const bool window = (fieldRunValues_ >= 2 && 2 * fieldRunValues_ >= fieldRunLines_) ||
-                            (fieldRunValues_ >= 1 && fieldRunLines_ >= 3 && !fieldRunRepeats_);
+                            (fieldRunValues_ >= 1 && fieldRunLines_ >= 3 && !fieldRunRepeats_ && !fieldRunSpeech_);
         if (!fieldRunValue_ && window) {
             for (const std::string& l : fieldRunLabels_) {
                 if (prefixes_[l] > 0) prefixes_[l]--;
