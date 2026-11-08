@@ -2909,7 +2909,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カキコ	글쓰기	N110			GN				xxx llm	1		w:2900
 カキノキ目	감나무목	N110			GN						カキノキもく	w:2901
 カキノキ科	감나무과	N110			GN						カキノキか	w:2902
-カキフライ	가키후라이	N110			GN						カキフライ	w:2903
+カキフライ	굴튀김	N110			GN						カキフライ	w:2903
 カキ氷	빙수	N110	VFd		GN						かきごおり	w:2904
 カキ油	굴소스	N110			GN						カキあぶら	w:2905
 カクテルソース	칵테일 소스	N110			GN						カクテルソース	w:2906
@@ -23147,7 +23147,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蟲	벌레	N110			GN				llm			w:23062
 蟷螂	사마귀	N110			GN						かまきり	w:23063
 蟷螂擬	사마귀붙이과	N110			GN						かまきりもどき	w:23064
-蟹味噌	장	N110			GN						かにみそ	w:23065
+蟹味噌	게 내장	N110			GN						かにみそ	w:23065
 蟹虫	앉은뱅이목	N110			GN						かにむし	w:23066
 蟹食海豹	게잡이물범	N110			GN						かにくいあざらし	w:23067
 蟹食犬	게잡이여우	N110			GN						かにくいいぬ	w:23068

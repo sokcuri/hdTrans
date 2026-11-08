@@ -46,7 +46,7 @@ normalize:ru-contraction	「これは……本当に俺の人生なのか？　�
 normalize:toku	幼いときから わたしは人が地獄へ流される印として	어릴 때로부터 나는 사람이 지옥에 떠밀리는 표로서	keep	normalize
 normalize:ru-contraction	「昨夜から今朝まであのテンションらしいよ？！ 責任取れんの？！」	「어젯밤부터 오늘 아침까지 그 텐션인 것 같아?! 책임 잡히는 거야?!」	fix	normalize
 normalize:ru-contraction	何でみんな鬼怒に豆投げんのよ！？	왜 모두 키누에 콩 던지는 거야!?	fix	normalize
-normalize:toku	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 선술집, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	normalize
+normalize:toku	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 이자카야, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	normalize
 normalize:toku	フタサンマルマル。提督、お疲れだな。明日も忙しいだろ？ ちと寝とけって。ああ、お疲れ。	2300. 제독, 피곤하네. 내일도 바쁘지? 좀 자 두라고. 아, 수고했어.	fix	normalize
 normalize:fused-adjective	いいじゃん細けえことはよ！	좋잖아 사소한 일은!	fix	normalize
 normalize:spoken-verb	何か もう分かっちゃってんじゃん この２人は	뭔가 벌써 알아 버렸지 이 2명은	keep	normalize
