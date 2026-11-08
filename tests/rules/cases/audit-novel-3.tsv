@@ -1,0 +1,180 @@
+# 규칙: LEX-5656
+rule	input	expected	kind	layer
+dict:jisjk:192280	今は新幹線に乗り換えて、予約席に座っているので、それほど窮屈な思いをしていないが。	has:신칸센	fix	lookup
+dict:jisjk:342921	ここの工廠の者たちは働き者なのであります。	has:부지런한 사람	fix	lookup
+dict:jisjk:111474	椿の生い立ちに同情すべき点が多大にあったからだ。	has:성장 과정	fix	lookup
+dict:jisjk:4939	まったく悪びれず、堂々とおぞましいことを言ってのける子爵。	has:끔찍	fix	lookup
+dict:jisjk:125817	この存在が一級死亡フラグ建築士と化した俺。	has:1급	fix	lookup
+dict:jisjk:116224	「……そ、そうなのか、ナンシー？　まさか清らかな君が、鳥の糞に塗れたなど……」	has:똥	fix	lookup
+dict:w:10966	千五百六十五年 三月中旬	has:3월	fix	lookup
+dict:jisjk:28730	あ、首輪が無い。やっぱ野良か……？	has:떠돌이	fix	lookup
+dict:jisjk:104898	「ヒーローの口上ナメてんのかッ！　もっと真面目に考えろやッ！」	has:대사	fix	lookup
+dict:colloquial-variants:2	てめーも同罪だぞ。	has:네놈	fix	lookup
+dict:jisjk:84838	「あぁらこんにちは。仲良しそうでいいわねぇ！」	has:친한 사이	fix	lookup
+dict:jisjk:37254	なにしろ…カードの傷や特長をどれだけ暗記しているかがものを言う…！	has:특징	fix	lookup
+dict:jisjk:22681	うぉ？！ 日本ではもうこんな季節に薄着になっていくというのか。そうか。夏用を…買うか。	has:얇게 입기	fix	lookup
+dict:jisjk:16709	午後2時です！阿賀野、意見具申！お昼寝しましょ…。	has:건의	fix	lookup
+dict:jisjk:239665	磯風の戦歴は伊達ではないぞ。忘れるな。	has:전적	fix	lookup
+dict:jisjk:159246	ワタクシも微力ながら、援護いたします。Feu!	has:저	fix	lookup
+dict:jisjk:106126	積み荷は…大丈夫…？よし、第一潜水隊、伊13…出ます。	has:짐	fix	lookup
+dict:jisjk:102027	シャングリラ？そうね、どこかしら。	has:샹그릴라	fix	lookup
+dict:jisjk:3579	現在時刻、ヒトヨンマルマル。や、貴様は……あきつ丸。壮健か？ それはなにより。共に励もう。	has:건강	fix	lookup
+dict:jisjk:201239	「陸攻」隊の増勢	has:증강	fix	lookup
+dict:jisjk:100403	“ わらうキツネコブタ亭酔っぱらい 大歓迎！ ”	has:새끼 돼지	fix	lookup
+dict:jisjk:153000	多分そうでしょう。彼等は卓絶した科学力と軍事力を持った組織。	has:탁월	fix	lookup
+dict:jisjk:27509	<div>宿屋の主人は、<em>いつも</em>無愛想だ。</div>	has:여관	fix	lookup
+dict:jisjk:10538	至宝の眠る場所に続く扉はそれによって開かれる……てぇ言い伝えさ。	has:전설	fix	lookup
+dict:jisjk:188051	先程と同じものしか品揃えはないですけどもいかがですか？	has:구색	fix	lookup
+dict:jisjk:74472	その日、バーガンディーはシャルトルーズに、砂の国の城下町を案内していた。	has:성하 마을	fix	lookup
+dict:jisjk:86833	安全報告書・その他の取組み	has:노력	fix	lookup
+dict:jisjk:25074	伊47、ヨナ、了解。射程につきます！	has:사거리	fix	lookup
+dict:jisjk:68711	小さな損傷でも、命取りになる場合があります。	has:치명상	fix	lookup
+dict:w:894	あの愚かな両親のせいで潰されてきた縁談がどれ程あったのか。	has:얼마나	fix	lookup
+dict:jisjk:4598	とりあえず、なけなしの金でロープだけ買った。	has:얼마 안 되는	fix	lookup
+dict:jisjk:15143	俺の剣幕にフィーナはグスグスと鼻を鳴らした。	has:서슬	fix	lookup
+dict:jisjk:33210	噂では次第に政情不安が深まっているとか……。	has:정세	fix	lookup
+dict:jisjk:57347	ミリタリーマニアの姉らしい一品で後二つほど買わされたが、そちらも鞄の中に入っている。	has:마니아	fix	lookup
+dict:jisjk:69298	まだ年齢が若いせいか、物覚えが異常にいい気がする。	has:기억력	fix	lookup
+dict:jisjk:35125	そして、「水と厠の差配」という、はっきりした持ち場。	has:관리	fix	lookup
+dict:jisjk:43935	司法ウォッチ@justice_watch▼	has:워치	fix	lookup
+dict:jisjk:26628	この世界の侑李の記憶によると米が不作だったり、世情は日本のままだ。	has:세상 물정	fix	lookup
+dict:jisjk:76418	どうやら周囲からはよほど食い意地がはっていると思われているらしかった。	has:식탐	fix	lookup
+dict:jisjk:165991	しかも、トイレって、寝室でおまる使うんだよ？ すごい羞恥プレイだから。	has:요강	fix	lookup
+dict:jisjk:123363	第二に、使いやすい。	has:둘째로	fix	lookup
+dict:jisjk:91860	才能なんて眼に見えないものを勝手に決め付けやがって。	has:단정	fix	lookup
+dict:jisjk:117190	窓をがらりと開ければそこは一面の緑。	has:드르륵	fix	lookup
+dict:jisjk:84905	憎まれ口を叩く沙都子でも、俺が揃うまでは弁当箱を開けない。	has:밉살스러운 말	fix	lookup
+dict:jisjk:18236	さすがクラス委員長。最年長。魅音のいびり方、追い詰め方は年季が違う。	has:연륜	fix	lookup
+dict:jisjk:38459	いくら寒村とは言え、歩いていれば人とも出会う。	has:외딴 마을	fix	lookup
+dict:jisjk:110563	置いてきぼりは嫌だったが、今日一日の疲れもあったので、結局俺は待つことにする。	has:남겨짐	fix	lookup
+dict:jisjk:108271	「警察が事情聴取に来てるって言ってた！」	has:조사	fix	lookup
+dict:w:11417	「警察が事情聴取に来てるって言ってた！」	has:조사	fix	lookup
+dict:jisjk:3195	年齢をわきまえないクソ生意気なガキンチョだ。	has:건방	fix	lookup
+dict:jisjk:14603	「…ぎゃ〜…堪忍して〜………。」	has:용서	fix	lookup
+dict:jisjk:84299	夏だぁ！ ひゃっはー！ 浜辺で酒盛りもいいねぇ！	has:술판	fix	lookup
+dict:jisjk:99500	隠れた名店はどこにあるのかと思ったら……。それは何と駅前のファミレスだった。	has:유명한 가게	fix	lookup
+dict:jisjk:37806	秋刀魚か……悪くない、手伝おう。蒲焼も良いが、やはり塩焼きだろう。楽しみだ。	has:양념구이	fix	lookup
+dict:jisjk:93406	司令官、春…ですね。舞鶴の春、想い出す。春は…好き。	has:떠올	fix	lookup
+dict:jisjk:247169	ああ、任せておきなよ。最期の殴り込みでも、付き合うさ。	has:쳐들어감	fix	lookup
+dict:jisjk:86161	提督、筑摩よ、今日は晴れの日じゃな。うむ、吾輩も嬉しいぞ！	has:맑은 날	fix	lookup
+dict:jisjk:86644	あっ！ 強い風が……春一番かしら？ もう、このスカートだと……。	has:봄의 첫 강풍	fix	lookup
+dict:jisjk:106849	11時です。今日のお昼はお蕎麦、とか？	has:메밀국수	fix	lookup
+dict:jisjk:32997	提督、また節目の季節ね。すごいじゃない？ ありがとう。そして、おめでとう、私達！	has:전환점	fix	lookup
+dict:jisjk:40666	雛祭り…お雛様可愛いですぅ！ 御内裏様はモガミン、御雛様に三隈。ふふ♪ 作っちゃおうかな？	has:히나 인형	fix	lookup
+dict:w:21053	もう午後11時か。フッ、相棒よ。夜戦も程々にな。…何だ？仕方のない奴。…ふふ、仕方ないな。	has:적당히	fix	lookup
+dict:jisjk:362156	大和型二番艦、武蔵…推参する！どうだ？この色。この装束も似合うだろう？	has:의상	fix	lookup
+dict:jisjk:262502	さあ、年の瀬ですね。艦隊も鎮守府も、一年の汚れを取りましょう。大掃除、ですね。	has:연말	fix	lookup
+dict:jisjk:122003	艦隊出撃！徹底的に叩きましょう！索敵も怠りなく！	has:게을리하지	fix	lookup
+dict:jisjk:1293	最近めっきり足腰が弱くなっちまって……。まいったぜ、ほんとに。	has:부쩍	fix	lookup
+dict:jisjk:94128	「良かろう。貴様の能力わしの為に役立てよ。貴様がわしから離れる時は死ぬ時、それを忘れるな」	has:활용	fix	lookup
+lexical:audit-novel-3	上司にゴマをする。	has:아부를 한다	fix	lookup
+lexical:audit-novel-3	ゴマをすっても無駄だ。	has:아부를 해도	fix	lookup
+lexical:audit-novel-3	胡麻をするのが得意だ。	has:아부를 하는	fix	lookup
+lexical:audit-novel-3	ゴマすりはやめろ。	has:아부는	fix	lookup
+lexical:audit-novel-3	上司にごまをすっている。	has:아부를 하고 있다	keep	lookup
+lexical:audit-novel-3	年齢のサバを読んだ。	has:나이를 속였다	fix	lookup
+lexical:audit-novel-3	サバを読むな。	has:속이지 마	keep	lookup
+lexical:audit-novel-3	ネコをかぶるのはやめて。	has:내숭을 떠는	fix	lookup
+lexical:audit-novel-3	ネコかぶりだ。	has:내숭이다	fix	lookup
+lexical:audit-novel-3	猫を被っていたのね。	has:내숭을 떨고	keep	lookup
+lexical:audit-novel-3	部下にハッパをかける。	has:호되게 다그친다	fix	lookup
+lexical:audit-novel-3	ハッパを掛けておいた。	has:호되게 다그쳐 두었다	fix	lookup
+lexical:audit-novel-3	発破をかけた。	has:호되게 다그쳤다	keep	lookup
+lexical:audit-novel-3	ワザとらしく	has:작위적으로	fix	lookup
+lexical:audit-novel-3	ワザとらしく笑う。	has:작위적으로 웃는다	keep	lookup
+lexical:audit-novel-3	提督、もう一息ですよ。頑張って！	has:조금만 더	fix	lookup
+lexical:audit-novel-3	単装砲って、なにげに侘び寂びよねー。	has:은근히	fix	lookup
+lexical:audit-novel-3	本日はお日柄もよく、なのです	has:날도 좋고	fix	lookup
+lexical:audit-novel-3	やばっ！急速潜行！急いで！	has:급속 잠항	fix	lookup
+lexical:audit-novel-3	少し空が白み始めましたね。	has:밝아 오기 시작했	fix	lookup
+lexical:audit-novel-3	あの力さえありゃあ勝てる。	has:만 있으면	fix	lookup
+lexical:audit-novel-3	西方海域の敵勢力を撃破せよ！	has:적 세력을	fix	lookup
+lexical:audit-novel-3	「ありがたきお言葉にございます」	has:황공한 말씀	fix	lookup
+lexical:audit-novel-3	エリザベスもそのひとりだ。	has:그중 한 명	fix	lookup
+lexical:audit-novel-3	雪解けの水の匂いがした。	has:눈 녹은 물	fix	lookup
+lexical:audit-novel-3	この戦国の世を生き延びて。	has:전국 시대	fix	lookup
+lexical:audit-novel-3	「全会一致で却下！！」	has:만장일치	fix	lookup
+lexical:audit-novel-3	サンキュウなー司令官！	has:땡큐	fix	lookup
+lexical:audit-novel-3	子日アターック！	has:어택	fix	lookup
+lexical:audit-novel-3	提督、相変わらずお強いですね。	lacks:팥밥	fix	lookup
+lexical:audit-novel-3	おべんと、食べる？	has:도시락	fix	lookup
+lexical:audit-novel-3	早ちん、ついといで。	has:따라와	fix	lookup
+lexical:audit-novel-3	鰤の照り焼き、美味しいですね！	has:방어	fix	lookup
+lexical:audit-novel-3	あの筏？覚えてるよ。	has:뗏목	fix	lookup
+lexical:audit-novel-3	がってんだ！	has:알았어	fix	lookup
+lexical:audit-novel-3	けったいな祭りじゃな！	has:괴상한 축제	fix	lookup
+lexical:audit-novel-3	これでもっと戦えるわ。	has:이걸로 더	fix	lookup
+lexical:audit-novel-3	この頃になると、俺もハイハイぐらいは出来るようになった。	has:이 무렵이 되자	fix	lookup
+lexical:audit-novel-3	日本店頭で買いました。	has:매장에서	keep	lookup
+lexical:audit-novel-3	うむ。そうだ。こまめな修繕が勝利をもたらすのじゃ！	has:세세한 수리	keep	lookup
+lexical:audit-novel-3	アヤメは誰かを癒し励まし、そっとその背を押すだけだ。	has:등을 밀	keep	lookup
+cx:audit-novel-2:10	王に謁見を求めた。	has:왕에게 알현을	fix	rewrites
+cx:audit-novel-2:10	陛下に拝謁を願い出た。	has:폐하에게	fix	rewrites
+cx:audit-novel-2:12	王に見参！	has:왕을 알현	fix	rewrites
+sense:見参	城に見参した。	has:성에 등장했다	fix	senses
+sense:見参	戦場に見参！	has:전장에 등장	fix	senses
+sense:見参	殿に見参した。	has:주군을 알현했다	keep	senses
+cx:audit-novel-2:20	自分自身では気づかない。	has:스스로는 눈치채지	fix	rewrites
+cx:audit-novel-2:20	自分では分からない。	has:스스로는	fix	rewrites
+cx:audit-novel-2:20	自分自身ではない。	has:자기 자신이 아니다	keep	rewrites
+cx:audit-novel-2:22	彼自身では気づかない。	has:그 스스로는	fix	rewrites
+cx:audit-novel-2:24	彼女自身では気づかない。	has:그녀 스스로는	fix	rewrites
+cx:audit-novel-2:30	ワザとか？	has:일부러야?	fix	rewrites
+cx:audit-novel-2:42	ワザと、ね。	has:일부러, 말이야	fix	rewrites
+cx:audit-novel-2:10	王に謁見した。	has:왕을 알현했다	keep	rewrites
+cx:audit-novel-2:12	殿に見参した。	has:주군을 알현했다	keep	rewrites
+cx:audit-novel-2:22	彼自身ではない。	lacks:스스로	keep	rewrites
+cx:audit-novel-2:24	彼女自身ではない。	lacks:스스로	keep	rewrites
+cx:audit-novel-2:30	ワザとか偶然とか関係ない。	lacks:일부러야	keep	rewrites
+cx:audit-novel-2:42	そうだよ、ね。	lacks:말이야	keep	rewrites
+cx:audit-novel-2:42	ワザと、そうした。	lacks:말이야	keep	rewrites
+lexical:audit-novel-3	人生のたのしみ	has:인생의 즐거움	keep	lookup
+lexical:audit-novel-3	たのしみにしてるね。	has:기대하고 있	fix	lookup
+lexical:audit-novel-3	たのしみにしています。	has:기대하고 있습니다	fix	lookup
+lexical:audit-novel-3	たのしみに待っている。	has:기대하며 기다리고	fix	lookup
+lexical:audit-novel-3	読書がたのしみだ。	lacks:기대다	fix	lookup
+lexical:audit-novel-3	天下御免の向こう傷	lacks:천하무적	keep	lookup
+lexical:audit-novel-3	ネコかぶってる。	has:내숭 떨고 있다	fix	lookup
+lexical:audit-novel-3	猫かぶってる。	has:내숭 떨고 있다	fix	lookup
+lexical:audit-novel-3	ハッパをかけられた。	has:닦달을 받았다	fix	lookup
+lexical:audit-novel-3	口上を述べる。	has:인사말을 한다	fix	lookup
+lexical:audit-novel-3	置いてきぼりにされた。	has:남겨졌다	fix	lookup
+lexical:audit-novel-3	世情不安が続く。	has:정세 불안	fix	lookup
+lexical:audit-novel-3	晴れの日を迎える。	has:경사스러운 날을 맞이한다	fix	lookup
+lexical:audit-novel-3	晴れの日は少ない。	has:맑은 날	keep	lookup
+lexical:audit-novel-3	がらりと変わった。	has:확 바뀌었다	fix	lookup
+lexical:audit-novel-3	窓をがらりと開ければそこは一面の緑。	has:드르륵	keep	lookup
+phrase:えいえいおー	えいえいおー！	has:에이에이오	fix	sound
+sense:取組み	今日の取組みは横綱同士だ。	has:대전	fix	senses
+sense:取組み	安全への取組み	has:노력	keep	senses
+sense:節目	竹の節目	has:마디	fix	senses
+cx:audit-novel-2:70	すり鉢で胡麻をすった。	has:깨를 갈았다	fix	rewrites
+cx:audit-novel-2:70	ゴマをすって和え物を作る。	has:깨를 갈아	fix	rewrites
+cx:audit-novel-2:70	上司にゴマをする。	has:아부를	keep	rewrites
+cx:audit-novel-2:72	糞！	has:젠장	fix	rewrites
+cx:audit-novel-2:72	糞だらけだ。	has:똥	keep	rewrites
+lexical:audit-novel-3	ただの節操なしのスケベ野郎だ！！	has:색골	keep	lookup
+lexical:audit-novel-3	他鄕暮し	has:살림	keep	lookup
+cx:audit-novel-2:50	二月ぶりに会った。	has:두 달	fix	rewrites
+cx:audit-novel-2:50	二月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	あれから二月が経った。	has:두 달이 지났다	fix	rewrites
+cx:audit-novel-2:51	二月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:52	三月ぶりに会った。	has:석 달	fix	rewrites
+cx:audit-novel-2:52	三月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:53	あれから三月が経った。	has:석 달이 지났다	fix	rewrites
+cx:audit-novel-2:53	三月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:54	四月ぶりに会った。	has:넉 달	fix	rewrites
+cx:audit-novel-2:54	四月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:55	あれから四月が経った。	has:넉 달이 지났다	fix	rewrites
+cx:audit-novel-2:55	四月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:56	五月ぶりに会った。	has:다섯 달	fix	rewrites
+cx:audit-novel-2:56	五月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:57	あれから五月が経った。	has:다섯 달이 지났다	fix	rewrites
+cx:audit-novel-2:57	五月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:58	六月ぶりに会った。	has:여섯 달	fix	rewrites
+cx:audit-novel-2:58	六月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:59	あれから六月が経った。	has:여섯 달이 지났다	fix	rewrites
+cx:audit-novel-2:59	六月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:52	三月ほど入院した。	has:석 달	fix	rewrites
+cx:audit-novel-2:52	三月ばかり前のことだ。	has:석 달	fix	rewrites
+cx:audit-novel-2:53	三月の末日に出発する。	has:3월의	keep	rewrites

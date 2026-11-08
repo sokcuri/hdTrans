@@ -1,0 +1,5 @@
+#! layer=words
+# 소설에서 틀렸던 관용구의 가타카나와 한자 표기, 활용 표지가 있는 행 (LEX-5656)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ゴマをす	아부를 &AV@	M428			GN							audit-novel-3w:1
+胡麻をす	아부를 &AV@	M428			GN							audit-novel-3w:2

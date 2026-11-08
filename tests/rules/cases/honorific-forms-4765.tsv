@@ -12,7 +12,7 @@ normalize:honorific-okure	助けておくれよ、我が親友ぅ～！	도와 �
 normalize:honorific-okure	「そいぢや、お豆をやるから、鳩を出しておくれ、ねえ、ばあや。	「소이지나, 콩을 주니까, 비둘기를 내 줘, 응, 무늬.	fix	normalize
 normalize:honorific-okure	リキ　　戯談にも薪割りなんぞ手伝はせないでおくれよ、シゲさん。	리키　　농담에도 장작패기 따위 수전은 등 있고로 주어라, 시게 씨.	fix	normalize
 normalize:honorific-okure	さぁ、見ておくれ、この防弾インナーを…キミに似合うと思って買っておいたんだ！	자, 봐 주어, 이 방탄 이너를…너에 어울린다고 생각해 사 둔 거야!	fix	normalize
-normalize:honorific-okure	「親方、早く私に背の刺青を見せておくれ、お前さんの命を貰った代りに、私は嘸美しくなったろうねえ」	「우두머리, 빨리 나에게 등 문신을 보여 줘, 당신의 생명을 받은 대신에, 나는 틀림없이 아름다워졌지 응」	fix	normalize
+normalize:honorific-okure	「親方、早く私に背の刺青を見せておくれ、お前さんの命を貰った代りに、私は嘸美しくなったろうねえ」	「대장, 빨리 나에게 등 문신을 보여 줘, 당신의 생명을 받은 대신에, 나는 틀림없이 아름다워졌지 응」	fix	normalize
 normalize:honorific-okure	また裸にしておくれねえ	또 알몸으로 해 주고 응	fix	normalize
 normalize:honorific-okure	あまり パパを 悲しませないでおくれよ うん？	그다지 아빠를 슬퍼하게 하지 않고 줘 응?	fix	normalize
 normalize:honorific-okure	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	fix	normalize
@@ -30,7 +30,7 @@ normalize:honorific-okure	どうぞ待っておくれ」	어서 기다려 다오
 normalize:honorific-okure	せめて 夢をかなえて 絶望しておくれ…。	적어도 꿈을 이루어 절망해 다오….	keep	normalize
 normalize:honorific-okure	「誰か来ておくれ！	「누군가 와 다오!	keep	normalize
 normalize:honorific-okure	「どうしたていうの話しておくれ。	「어떻게 한 지 얼마 안 되는 말하는 거 이야기해 다오.	keep	normalize
-normalize:honorific-oide	三月の末日に乳母は家を出るはずであったから、その日に宇治から恋人を移そうと計画をしておいでになるのであった。	삼월의 말일에 유모는 집을 나갈 것이었으니까, 그날에 우지에서 애인을 옮기려고 계획을 하고 계시는 것이었다.	fix	normalize
+normalize:honorific-oide	三月の末日に乳母は家を出るはずであったから、その日に宇治から恋人を移そうと計画をしておいでになるのであった。	3월의 말일에 유모는 집을 나갈 것이었으니까, 그날에 우지에서 애인을 옮기려고 계획을 하고 계시는 것이었다.	fix	normalize
 normalize:honorific-oide	武も知も持ち合わせておいでなのに、ひけらかすところは微塵もなく、むしろいつも謙遜ばかりして	무도 지도 가지고 계시는데, 끌 수 있는들 빌려주는 곳은 조금도 없고, 오히려 언제나 겸손만 해	fix	normalize
 normalize:honorific-oide	何事にも天才を持っておいでになる方であったが、よこしまな恋に心を打ち込んでおいでになるだけは罪の深いことである。	무슨 일에도 천재를 가지고 계시는 분이었지만, 간악한 사랑에 가슴에 와 닿고 계실 뿐은 죄의 깊은 것이다.	fix	normalize
 normalize:honorific-oide	剣丞どのは、この日の本から鬼を無くしたい、と考えておいでなのですよ	검승님은, 이 일본으로부터 귀신을 없게 하고 싶다, 라고 생각하고 계시는 거예요	fix	normalize
@@ -111,7 +111,7 @@ normalize:honorific-ikare	シキ君と和服の子 労働区へ連れていか�
 normalize:honorific-ikare	置いていかれなかった。	남겨지지 않았다.	keep	normalize
 normalize:honorific-ikare	お父が… 連れていかれた。	아버지가… 끌려갔다.	keep	normalize
 normalize:favour-moraenai	「一度も見せてもらえませんでした。ユリアン様は、ターニャ様を疑うこと自体が残酷だと」	「한 번도 보여 주지 않았습니다. 유리안 님은, 타냐 님을 의심하는 거 자체가 잔혹하다고」	fix	normalize
-normalize:favour-moraenai	それを憎まれ口をたたくなんて、あなたみたいな非常識な人はどこも雇ってもらえないわよ！	그것을 욕설을 치다니, 당신 같은 비상식적인 사람은 어디도 고용해 주지 않아!	fix	normalize
+normalize:favour-moraenai	それを憎まれ口をたたくなんて、あなたみたいな非常識な人はどこも雇ってもらえないわよ！	그것을 밉살스러운 말을 치다니, 당신 같은 비상식적인 사람은 어디도 고용해 주지 않아!	fix	normalize
 normalize:favour-moraenai	マイクロフトはあなたがつけたはず なのに一生 呼んでもらえないのかな ホームズさん	마이크로후트는 당신이 붙였을 텐데 평생 불러 주지 않는 건지 홈스 씨	fix	normalize
 normalize:favour-moraenai	「どうでもいいものじゃ、いくらタダでも受け取ってもらえないだろうし……」	「아무래도 좋은 것은, 아무리 공짜라도 받아 주지 않을 테고……」	fix	normalize
 normalize:favour-moraenai	森下さんは、全然受け取ってもらえない。	모리시타 씨는, 전혀 받아 주지 않는다.	fix	normalize

@@ -899,7 +899,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どれ程	얼마나	N110			GN				xxx llm		どれほど	w:891
 どれ程	아무리	N110			GN				llm		どれほど	w:892
 どれ程	별로	N110		Zn	GN				llm		どれほど	w:893
-どれ程	오죽	E300			GN				xxx		どれほど	w:894
+どれ程	얼마나	E300			GN				xxx		どれほど	w:894
 どれ程	별로	E300		Zn	GN				llm		どれほど	w:895
 どろぼう猫	도적고양이	N110			GN						どろぼうねこ	w:896
 どろレス	돌로레스	N110			GN						どろレス	w:897
@@ -11013,7 +11013,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三斎市	삼재시	N110			GN				xxx llm	1		w:10963
 三日はしか	풍진	N110			GN						みっかはしか	w:10964
 三日ばしか	풍진	N110			GN						みっかばしか	w:10965
-三月	삼월	N110			GN				xxx	1	さんがつ	w:10966
+三月	3월	N110			GN				xxx	1	さんがつ	w:10966
 三条舞舞	분홍입술달팽이	N110			GN						みすじまいまい	w:10967
 三条蝸牛	분홍입술달팽이	N110			GN						みすじまいまい	w:10968
 三枚おろし	세장뜨기	N110			GN				llm		さんまいおろし	w:10969
@@ -11463,7 +11463,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 事務当局	당국	N110	VGt		GN				llm		じむとうきょく	w:11414
 事務用品	사무용품	N110			GN						じむようひん	w:11415
 事務総局	사무총국	N110	VGt		GN				llm		じむそうきょく	w:11416
-事情聴取	사정 청취	I110			GN				xxx llm	1		w:11417
+事情聴取	조사	I110			GN				xxx llm	1		w:11417
 事業性	사업성	N110			GN						じぎょうせい	w:11418
 事無く	없이	N110		Z7Nn	GN				llm		ことなく	w:11419
 事無く	무사히	E300			GN						ことなく	w:11420
@@ -15019,7 +15019,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 子ギャル	고갸루	N110			GN						こギャル	w:14945
 子プロセス	자식 프로세스	N110			GN				xxx llm	1		w:14946
 子嚢菌門	자낭균류	N110			GN						しのうきんもん	w:14947
-子守り	애보기	N110		Hd	GN						こもり	w:14948
+子守り	아이 돌보기	N110		Hd	GN						こもり	w:14948
 子守唄	자장가	N110			GN						こもりうた	w:14949
 子守鮫	대서양수염상어	N110			GN						こもりざめ	w:14950
 子宮ガン	자궁암	N110	UTi		GN						しきゅうがん	w:14951
@@ -16890,7 +16890,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 打ち刀	타도	N110			GN						うちがたな	w:16810
 打ち切	중단&AV@	M428			GN				xxx llm	1		w:16811
 打ち合い	난타전	N110			GN				llm		うちあい	w:16812
-打ち止め	마감	N110			GN				xxx llm	1		w:16813
+打ち止め	끝	N110			GN				xxx llm	1		w:16813
 打ち破	격파&AV@	M428			GN				xxx llm	1		w:16814
 打ち込	입력&AV@	M425			GN				xxx llm	1		w:16815
 打克	이&A2@	M424			GN						うちかつ	w:16816
@@ -21131,7 +21131,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 稀ガス	희가스	N110			GN						きガス	w:21050
 稀人	손님	N110	VHn		GN				xxx llm		まれびと	w:21051
 稀人	내방신	N110			GN				llm		まれびと	w:21052
-程々に	작작	E300			GN						ほどほどに	w:21053
+程々に	적당히	E300			GN						ほどほどに	w:21053
 程なく	곧	E300			GN				llm		ほどなく	w:21054
 程ほどに	작작	E300			GN						ほどほどに	w:21055
 程無く	곧	E300			GN				llm		ほどなく	w:21056
@@ -23496,7 +23496,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 親征	친정	N110		Hd	GN						しんせい	w:23414
 親征	친정&AV@	M429			GN						しんせい	w:23415
 親指の爪	엄지손톱	N110			GN						おやゆびのつめ	w:23416
-親方	우두머리	N110	VHn		GN				xxx llm	1		w:23417
+親方	대장	N110	VHn		GN				xxx llm	1		w:23417
 親父ギャグ	아재 개그	N110			GN						おやじギャグ	w:23418
 親王妃	친왕비	N110			GN						しんのうひ	w:23419
 親睨	꺽저기	N110			GN						おやにらみ	w:23420
@@ -26793,6 +26793,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自然と	자연스럽게	E300			GN							word:shizento:adverb
 自然と	자연과	E300			GN	5201	||4 S+1== "共に" S+1== "ともに" S+1== "一体" S+1== "人間"	共に, 一体, 人間 앞의 自然と는 명사와 조사 자연과로 고른다.				word:shizento:nature
 楽しみ	기대돼	N110			GN	5202	||2 &&2 G+0== "Hz" ||3 G+0== "Ow" P+1== "6**" S+1== "?" &&2 S-1!= "Rの" ||3 G+0== "Ow" P+1== "6**" S+1== "?"	の 뒤가 아니고 문장 끝이나 문장 부호 앞에 홀로 오는 楽しみ를 기대돼로 고른다.				word:tanoshimi:alone
+たのしみ	기대돼	N110			GN	5202	||2 &&2 G+0== "Hz" ||3 G+0== "Ow" P+1== "6**" S+1== "?" &&2 S-1!= "Rの" ||3 G+0== "Ow" P+1== "6**" S+1== "?"	の 뒤가 아니고 문장 끝이나 문장 부호 앞에 홀로 오는 たのしみ를 기대돼로 고른다.				w:tanoshimi-kana
 なんとなく	어렴풋이	E311			GN	5203	||8 S+1== "L分か" S+1== "Lわか" S+1== "L知" S+1== "L覚" S+1== "L憶" S+1== "L察" S+1== "L理解" S+1== "L把握"	わかる, 知る, 覚える, 察する, 理解, 把握 앞의 なんとなく를 어렴풋이로 고른다.				word:nantonaku:vaguely
 何となく	어렴풋이	E311			GN	5203	||8 S+1== "L分か" S+1== "Lわか" S+1== "L知" S+1== "L覚" S+1== "L憶" S+1== "L察" S+1== "L理解" S+1== "L把握"	わかる, 知る, 覚える, 察する, 理解, 把握 앞의 なんとなく를 어렴풋이로 고른다.				word:nantonaku:vaguely-kanji
 弾け	칠 수 &HN@	M427			GN	5501	||2 &&4 S-1== "が" P-2== "1**" A-2== "VRy" D-1= "(을)를" &&2 P-1== "2**" A-2== "VRy"	악기(VRy) 뒤 조사 다음의 弾け를 터지다가 아니라 칠 수 있다로 고르고, が는 (을)를로 바꾼다 (ピアノが弾ける 피아노를 칠 수 있다).				w:26717
@@ -27143,7 +27144,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 精々	기껏해야	E300			GN						せいぜい	w:28864
 脈々と	면면히	E300			GN						みゃくみゃくと	w:28865
 鬱々と	울적하게	E300			GN						うつうつと	w:28866
-清々	후련&AV@	M429			GN						せいせい	w:28867
+清々	후련&Mf@	M429			GN						せいせい	w:28867
 精々が	기껏해야	E300			GN						せいぜいが	w:28868
 迷惑	성가%DO@	E8U0			GN	8641	||1 &&2 ||2 S-1== "は" S-1== "が" A-2== "UHrVFnUGsVFrQAEQAA"	소리, 물건, 연기, 날씨, 벌레가 주어인 迷惑だ는 성가시다로 고른다.				w:28869
 気味悪が	기분 나빠&AV@	M438			GN						きみわるが	w:28870
