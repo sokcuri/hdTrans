@@ -1,0 +1,9 @@
+# 규칙: LEX-5235
+rule	input	expected	kind	layer
+builtin-phrase:寄ってくる	すると、みいちゃんがするすると寄ってきて――	has:스르르 다가와	fix	builtin-phrase
+builtin-phrase:寄ってくる	他の女子が寄ってこないようにしっかり見張ってなきゃ	has:다가오지 않도록	fix	builtin-phrase
+builtin-phrase:寄ってくる	などとつまらない話をしていると、御園が寄って来た。	has:미소노가 다가왔다	fix	builtin-phrase
+builtin-phrase:寄ってくる	と、高峰が側に寄ってきた。	has:다가왔다	fix	builtin-phrase
+builtin-phrase:寄ってくる	そして人を空飛ぶ魚のエサにしつつ、寄ってきた奴を捕まえて観察し始める。	has:다가온 놈을	fix	builtin-phrase
+builtin-phrase:寄ってくる	店に寄ってから帰る	has:들르고 나서	keep	builtin-phrase
+builtin-phrase:寄ってくる	帰りにコンビニに寄って行く	lacks:다가	keep	builtin-phrase
