@@ -87,6 +87,12 @@ dict:audit-cap-news	足の先まで冷え込んだ	has:차가워졌다	fix	looku
 dict:audit-cap-news	この駅が始発です	has:출발역입니다	fix	lookup
 dict:audit-cap-news	始発の新幹線に乗った	has:첫 신칸센을	fix	lookup
 dict:audit-cap-news	始発の電車で	has:첫 전철로	fix	lookup
+dict:audit-cap-news	東京駅が始発です	has:도쿄역이 출발역입니다	fix	lookup
+dict:audit-cap-news	駅は始発から混んでいた	has:첫차	keep	lookup
+dict:audit-cap-news	この電車が始発です	has:첫차입니다	keep	lookup
+dict:audit-cap-news	心の奥まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	山間部では景気が冷え込む	has:얼어붙는다	fix	lookup
+dict:audit-cap-news	山間部では体が冷え込む	has:차가워진다	keep	lookup
 dict:audit-cap-news	首脳会談が行われた	has:정상회담	keep	lookup
 dict:audit-cap-news	被災者の支援	has:이재민	keep	lookup
 dict:audit-cap-news	全米オープンで優勝	has:전미 오픈	keep	lookup
