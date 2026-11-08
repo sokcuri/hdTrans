@@ -12,10 +12,6 @@ local:別に	　だが、別に悪い奴でもない。	has:딱히 나쁜 놈도
 local:別に	こうして身体を捧げているんだ。その覚悟くらいあるよ。別に絶対孕まないと思っているわけではない	has:딱히 절대	fix	local
 local:別に	これはあくまで一般バトラーに支払われる賞金額です、囚人の方はランク別に賞金額が異なります。	has:랭크별로 상금액이	keep	local
 local:別に	「別に私はあなたに罰を求めてなんか……あら？」	has:딱히 나는	fix	local
-cx:web-fixes-j:248	「ううん、別に待ってないよっ」	has:별로 기다리지 않았어	fix	rewrites
-cx:web-fixes-j:248	伏間「別に逃げなくてもいいじゃん。」	has:별로 도망치지	fix	rewrites
-cx:web-fixes-j:248	「別に慣れてないよ」	has:별로 익숙해지지	fix	rewrites
-cx:web-fixes-j:248	「うちは別に裕福ではないぞ」	!rule:cx:web-fixes-j:248	keep	rewrites
 sense:求める	「謝罪を求める」	has:사죄를 요구	keep	senses
 sense:湧く	よくわからないが、確実なのは白崎により興味が湧いたということだ。	has:흥미가 생겼다	fix	senses
 sense:湧く	どうしてなの？ 彼女への興味が湧いた。	has:흥미가 생겼다	fix	senses
@@ -31,3 +27,7 @@ dict:w:34665	　アキラの素朴な疑問に、アルファがちょっとし�
 dict:w:34665	豆知識を披露する	has:토막 상식을	fix	lookup
 dict:w:34666	多分街の警備の為に生成された個体で、個体差がある	has:개체 차이가	fix	lookup
 dict:w:34666	個体識別番号	lacks:차이	keep	lookup
+cx:betsuni-not:10	「ううん、別に待ってないよっ」	has:딱히 기다리지 않았어	fix	rewrites
+cx:betsuni-not:10	「別に慣れてないよ」	has:딱히 익숙해지지 않았어	fix	rewrites
+cx:betsuni-not:10	別に求めた訳ではなかった。	has:딱히 구한 것은 아니었다	fix	rewrites
+cx:betsuni-not:10	これはあくまで一般バトラーに支払われる賞金額です、囚人の方はランク別に賞金額が異なります。	has:랭크별로	keep	rewrites
