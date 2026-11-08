@@ -897,6 +897,37 @@ std::vector<std::string> Registry::FullNameParts() {
     return {out.begin(), out.end()};
 }
 
+void Registry::RowParts(const std::string& x, const std::string& y) {
+    if (snap_ == nullptr || rowParts_.count(x) > 0 || rowParts_.count(y) > 0) return;
+    for (const dict::Record& rec : snap_->NameRecords(x + y)) {
+        if (rec.codes == nullptr || !rec.codes->sem.HasPrefix("QPN") || !IsHangulText(rec.target)) continue;
+        const std::size_t sp = rec.target.find(' ');
+        if (sp == std::string_view::npos || rec.target.find(' ', sp + 1) != std::string_view::npos) continue;
+        rowParts_[x] = std::string(rec.target.substr(0, sp));
+        rowParts_[y] = std::string(rec.target.substr(sp + 1));
+        return;
+    }
+}
+
+bool Registry::LayerPerson(std::string_view t) const {
+    if (snap_ == nullptr) return false;
+    for (const dict::Record& rec : snap_->NameRecords(t)) {
+        if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN")) return true;
+    }
+    return false;
+}
+
+std::string Registry::CommonSurnameReading(std::string_view x) const {
+    const std::string guessed = internal::GuessedName(x);
+    if (snap_ == nullptr || guessed.empty()) return "";
+    for (const dict::Record& rec : snap_->NameRecords(x)) {
+        if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN") && IsHangulText(rec.target) && text::SameSound(rec.target, guessed)) {
+            return std::string(rec.target);
+        }
+    }
+    return "";
+}
+
 std::vector<std::string> Registry::HonorificOnlyNames() {
     std::vector<std::string> out;
     for (const auto& [t, n] : Accepted()) {
@@ -908,6 +939,8 @@ std::vector<std::string> Registry::HonorificOnlyNames() {
 const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
+    rowParts_.clear();
+    commonSurnames_.clear();
     std::set<std::string> labelled;
     auto addLabel = [&](const std::string& raw, bool plain) {
         for (const std::string& p : LabelParts(raw)) {
@@ -1148,10 +1181,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         g.score = std::max(g.score, kSingleThreshold);
         g.person = true;
         g.given = true;
+        // The name layer's row of the full name written without the space (小鳥遊聖 타카나시 세이) reads both
+        // parts, here and wherever the document writes either alone (聖 세이, not 히지리).
+        RowParts(x, y);
     }
     for (const auto& [t, c] : ended_) {
         const auto [x, y] = GivenSplit(t);
         if (y.empty()) continue;
+        if (Flags(x).common) commonSurnames_[x] = CommonSurnameReading(x);
         full(x, y, t, c);
         // The given name stands for the person alone too, but a common word (大森海: 海)
         // reads as that word wherever the full name is not written, unless it has two kanji or
@@ -1329,8 +1366,15 @@ std::pair<std::string, std::string> Registry::GivenSplit(std::string_view t) {
         const std::size_t nx = RuneCount(x);
         if (nx < 2 || nx > 3 || RuneCount(y) > 3) continue;
         const DictFlags fx = Flags(x), fy = Flags(y);
-        if (!(fx.surname || fx.layerSurname) || fx.common || fx.role) continue;
         if (!(fy.given || fy.layerGiven) || fy.role) continue;
+        // A common word of two kanji that the name layer writes as a person the way names read its kanji is the
+        // surname before a given name of the name layer of two kanji or more that is no common word (氷室将嗣
+        // 히무로 마사츠구, 氷 ひ and 室 むろ; 氷室に氷を運ぶ keeps 빙실). Not a row that reads its kanji otherwise
+        // (日向 휴가, 流石 사스가, 風間 카자마 beside ふう and ま).
+        // A full name the name layer writes whole (大石蔵人 오이시 쿠라우도) reads by that row.
+        const bool namedCommon = fx.common && !fx.human && !fx.pronoun && fy.layerGiven && !fy.common && RuneCount(y) >= 2 &&
+                                 !CommonSurnameReading(x).empty() && !LayerPerson(t);
+        if (!(fx.surname || fx.layerSurname || namedCommon) || (fx.common && !namedCommon) || fx.role) continue;
         if (dict::InClass(HDTRANS_CLASS("suffix.person-after-surname"), y) || dict::InClass(HDTRANS_CLASS("honorific.name"), y) || Crossed(t, i)) {
             continue;
         }

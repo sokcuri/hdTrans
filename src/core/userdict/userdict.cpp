@@ -200,6 +200,8 @@ std::string Compile(std::string_view jp, std::string_view kr, std::string_view p
     std::string target;
     if (pos == "n") {
         add(std::string(jp), std::string(kr), "N110");
+    } else if (pos == "pron") {
+        add(std::string(jp), std::string(kr), "N120", "VHn");
     } else if (pos == "phrase") {
         add(std::string(jp), std::string(kr), "A9D0");
     } else if (pos == "name") {

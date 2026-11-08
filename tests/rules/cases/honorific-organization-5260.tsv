@@ -1,0 +1,33 @@
+# 규칙: LEX-5260
+rule	input	expected	kind	layer
+cx:org-honorific:10	ノベルポート様にて公開中です。	has:노벨 포트에서 공개	fix	rewrites
+cx:org-honorific:10	ノベルポート様にて連載中！	has:노벨 포트에서 연재	fix	rewrites
+cx:org-honorific:10	田中様にて承ります。	!rule:cx:org-honorific:10	keep	rewrites
+cx:org-honorific:20	＊ノベルポート様に空行有り版、句点改行版を掲載しております。	has:노벨 포트에 빈 줄	fix	rewrites
+cx:org-honorific:20	小説投稿サイト様に掲載しています。	has:소설 투고 사이트에 게재	fix	rewrites
+cx:org-honorific:20	ルミナ文庫編集部様にお礼を申し上げます。	has:편집부에 감사	fix	rewrites
+cx:org-honorific:20	株式会社ルミナ様にご協力いただきました。	has:주식회사 루미나에 협력	fix	rewrites
+cx:org-honorific:20	小説投稿サイト様にも投稿しています。	has:사이트에도 투고	fix	rewrites
+cx:org-honorific:20	「アルファ社様に送ったよ」	has:알파사에 보냈어	fix	rewrites
+cx:org-honorific:20	田中様に連絡しました。	has:타나카님에게	keep	rewrites
+cx:org-honorific:20	アリス様に掲載の許可をいただいた。	has:앨리스님에게	keep	rewrites
+cx:org-honorific:20	お客様に説明する。	!rule:cx:org-honorific:20	keep	rewrites
+cx:org-honorific:30	ノベルポート様へ投稿しました。	has:노벨 포트에 투고	fix	rewrites
+cx:org-honorific:30	シンシア様へ手紙を送った。	!rule:cx:org-honorific:30	keep	rewrites
+cx:org-honorific:40	アルファ社様より発売中です。	has:알파사에서 발매	fix	rewrites
+cx:org-honorific:40	ルミナ出版様から書籍が発売されます。	has:루미나 출판에서 서적	fix	rewrites
+cx:org-honorific:40	ノベルポート様より書籍化されました。	has:노벨 포트에서 서적화	fix	rewrites
+cx:org-honorific:40	アルファ社様より安いです。	lacks:알파사에서	keep	rewrites
+cx:org-honorific:40	シンシア様から手紙が届いた。	!rule:cx:org-honorific:40	keep	rewrites
+cx:org-honorific:50	ノベルポート様で連載しています。	has:노벨 포트에서 연재	fix	rewrites
+cx:org-honorific:50	ノベルポート様で書籍化が決定しました。	has:노벨 포트에서 서적화	fix	rewrites
+cx:org-honorific:50	田中様で間違いありませんか。	!rule:cx:org-honorific:50	keep	rewrites
+cx:org-honorific:60	ノベルポート運営様の企画です。	has:운영의 기획	fix	rewrites
+cx:org-honorific:60	アルファ社様には大変お世話になりました。	has:알파사에는	fix	rewrites
+cx:org-honorific:60	アルファ社様が主催するコンテストです。	has:알파사가 주최	fix	rewrites
+cx:org-honorific:60	他社様のものですと持ち込み料が発生いたします	has:타사의 것	fix	rewrites
+cx:org-honorific:60	ルミナ編集部様、ありがとうございます。	has:편집부님,	keep	rewrites
+cx:org-honorific:60	ノベルポート様の企画に参加しました。	has:노벨 포트님의	keep	rewrites
+cx:org-honorific:60	王様の命令だ。	has:임금님의	keep	rewrites
+constraint:honorific-kanji-name	アルファ社さんが来た。	has:알파사 씨	fix	lookup
+constraint:honorific-kanji-name	山田さんが来た。	has:야마다 씨	keep	lookup

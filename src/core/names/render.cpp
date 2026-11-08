@@ -159,7 +159,11 @@ std::string Registry::RenderName(std::string_view t, const Name& n) {
     if (!n.hasParts) return RenderPart(t, true);
     std::string out;
     for (std::size_t i = 0; i < n.parts.size(); i++) {
-        const std::string part = RenderPart(n.parts[i]);
+        // A common word that GivenSplit took for the surname is the person of the name layer there (氷室将嗣
+        // 히무로 마사츠구, not 빙실).
+        const auto surname = i == 0 ? commonSurnames_.find(n.parts[i]) : commonSurnames_.end();
+        const bool read = reading_.count(n.parts[i]) > 0 || listed_.count(n.parts[i]) > 0;
+        const std::string part = surname != commonSurnames_.end() && !surname->second.empty() && !read ? surname->second : RenderPart(n.parts[i]);
         if (part.empty()) return "";
         if (i > 0) out += " ";
         out += part;
@@ -203,6 +207,8 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     if (const auto r = reading_.find(key); r != reading_.end() && !r->second.empty()) {
         return Written(r->second);
     }
+    Accepted();
+    if (const auto rp = rowParts_.find(key); rp != rowParts_.end()) return rp->second;
     if (const auto v = tables_->readings.find(key); v != tables_->readings.end() && !v->second.empty()) {
         if (IsKanaText(v->second)) return Written(v->second);
         return v->second;

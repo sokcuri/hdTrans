@@ -993,8 +993,10 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 } else if (rule.reject == ConstraintReject::NonName) {
                     // No name sense among the candidates: the name layer's person reading of
                     // the word (千里ちゃん 치사토짱, not 천리), unless a person noun, a user
-                    // entry or a verb or adjective as long reads it.
+                    // entry or a verb or adjective as long reads it, or the word is a site, company or office
+                    // (アルファ社様 알파사, not 알파 야시로; spec LEX-5260).
                     const bool blocked =
+                        dict::EndsWithMember(HDTRANS_CLASS("noun.organization"), source) > 0 ||
                         std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
                         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
                             return PersonNoun(*list[k].codes) || PersonSense(*list[k].codes) || list[k].user != nullptr;
