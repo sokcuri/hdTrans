@@ -25,6 +25,8 @@
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
+//= noun.pair-people	Nouns of a pair or a set of people named together, after which 共 is both, 모두 (親子共 부모와 자식 모두, 夫婦共 부부 모두), not the plural 들.
+//= noun.plural-head	Nouns of people or creatures one counts as a crowd, after which 共 is the plural 들 even where their chosen reading has no person code (敵共 적들, 雑魚共 잡졸들).
 //= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
@@ -510,7 +512,7 @@
 //= suffix.label-parent	Ends of a speaker label Xの父 that name a relative of the name X (アリスの母).
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
-//= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
+//= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども), and that a word already plural takes as nothing (あいつら共).
 //= suffix.stem-noun	Nouns a verb's continuative runs into as one noun (考え中, 取調べ側, 伸び放題, 助け甲斐, 掛け率, 出来次第): an ichidan stem before one stays the noun, even after を or が (spec GRM-3847).
 //= suffix.title-in-name	Title words that may follow a name inside its run (茜たち, 水無月家).
 //= suru.predicate-noun	Starts of the する after a verbal noun that make the noun the predicate (回復した, 回復できる).
@@ -562,6 +564,8 @@
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.ni-partner	Verbs whose own argument is a person in に, the one met, beaten, followed or leaned on (勝つ, 会う, 頼る, 逆らう): their potential does not make that person the one who can (私に勝てる 나를 이길 수 있다, not 내가).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
+//= verb.perceived	Stems of the verbs of what is seen or heard whose てはいない and てはいません are 하지는 않는다, 않습니다 now (見えてはいません 보이지는 않습니다, 聞こえてはいない 들리지는 않는다), not 하고는 있지 않습니다.
+//= verb.notyet-tewa	Stems of the verbs of understanding or remembering that take 못하다 in their てはいない and てはいません, which are now states (分かってはいない 알지는 못한다, 覚えてはいない 기억하지는 못한다; 分からない stays 모르다).
 //= verb.unattained	Stems of the passives of something one wishes for and does not get (愛され, 報われ, 褒められ), whose negative takes 못하다 (愛されなかった 사랑받지 못했다), not a concession or a condition (愛されなくても 사랑받지 않아도); not a permission refused (許されない 허락되지 않는다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
@@ -1227,6 +1231,41 @@ ko-noun.cp-danghada	강등
 ko-noun.cp-danghada	부상
 ko-noun.cp-danghada	괴멸
 ko-noun.cp-danghada	파멸
+noun.pair-people	親子
+noun.pair-people	兄弟
+noun.pair-people	夫婦
+noun.pair-people	姉妹
+noun.pair-people	両親
+noun.pair-people	父子
+noun.pair-people	母子
+noun.pair-people	母娘
+noun.pair-people	父娘
+noun.pair-people	兄妹
+noun.pair-people	姉弟
+noun.pair-people	双子
+noun.pair-people	男女
+noun.pair-people	主従
+noun.pair-people	師弟
+noun.pair-people	親兄弟
+noun.plural-head	敵
+noun.plural-head	雑魚
+noun.plural-head	奴
+noun.plural-head	下郎
+noun.plural-head	悪党
+noun.plural-head	野郎
+noun.plural-head	馬鹿
+noun.plural-head	阿呆
+noun.plural-head	餓鬼
+noun.plural-head	屑
+noun.plural-head	外道
+noun.plural-head	小僧
+noun.plural-head	化け物
+noun.plural-head	魔物
+noun.plural-head	鬼
+noun.plural-head	獣
+noun.plural-head	賊
+noun.plural-head	盗賊
+noun.plural-head	輩
 noun.plural-suffix	たち
 noun.plural-suffix	達
 noun.plural-suffix	ら
@@ -6950,6 +6989,7 @@ suffix.plural-pronoun	たち
 suffix.plural-pronoun	達
 suffix.plural-pronoun	ら
 suffix.plural-pronoun	ども
+suffix.plural-pronoun	共
 
 suffix.stem-noun	中
 suffix.stem-noun	側
@@ -7655,6 +7695,14 @@ verb.naming	名付ける
 verb.naming	称する
 verb.naming	読む
 
+verb.notyet-tewa	分か
+verb.notyet-tewa	わか
+verb.notyet-tewa	覚え
+verb.notyet-tewa	憶え
+verb.perceived	見え
+verb.perceived	聞こえ
+verb.perceived	みえ
+verb.perceived	きこえ
 verb.notyet	気づ
 verb.notyet	気付
 verb.notyet	気がつ

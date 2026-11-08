@@ -2475,14 +2475,100 @@ void NotYet(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         // LEX-5014: the てはいる of a potential verb is ている with は, 할 수는 있다 (書けてはいるが 쓸 수는 있지만, 動かせてはいた
         // 움직일 수는 있었다), and its てはいない is 할 수는 없다 (書けてはいない 쓸 수는 없다), where 쓸 수 있고는 있다 and 쓸 수
-        // 있지는 않았다 are no Korean.
-        if (it->detail->Yougo() && it->detail->record == 4 && it->DirectIndex() >= 0) {
+        // 있지는 않았다 are no Korean; so for a word the dictionary reads 할 수 있다 itself (できてはいない 할 수는 없다,
+        // 行けてはいません 갈 수는 없습니다).
+        const std::string_view can = " 수 &HN@";
+        const bool lexicalCan = it->selected >= 0 && it->EntryText(it->selected).ends_with(can) && it->EntryText(it->selected).size() > can.size();
+        // 出来てはい, the dictionary's own word for できてはいる, is 할 수는 있다 and its negative 할 수는 없다 (出来てはいない);
+        // できる of 準備, 用意 or 覚悟 (noun.ready-dekiru) in が, は or も is done, 되어 있다 (準備はできてはいない 준비는 되어
+        // 있지는 않다, 準備が出来てはいません 준비가 되어 있지는 않습니다), as the dictionary reads its other forms 되다.
+        const auto ready = [&] {
+            const Item* p = it->prev;
+            return p != nullptr && (p->group->surface == "が" || p->group->surface == "は" || p->group->surface == "も") &&
+                   p->prev != nullptr && dict::InClass(HDTRANS_CLASS("noun.ready-dekiru"), p->prev->group->surface);
+        };
+        // the state is now unless the ending is past (なかった, でした): 않았다 is 않는다, 않았습니다 않습니다
+        // (after 있지는 않다 the plain present stays 않다, as with an adjective)
+        const auto stateNow = [&](std::string rest, std::string_view surface) {
+            const std::string_view had = "았";
+            if (!rest.starts_with(had) || surface.find("なかっ") != std::string_view::npos || surface.find("でし") != std::string_view::npos)
+                return rest;
+            rest = rest.substr(had.size());
+            return rest.starts_with("어") ? "아" + rest.substr(std::string_view("어").size()) : rest;
+        };
+        const std::string_view canWa = " 수는 &HN@";
+        if (it->selected >= 0 && it->group->surface == "出来てはい" && it->EntryText(it->selected).ends_with(canWa) &&
+            it->DirectIndex() >= 0) {
+            const bool made = ready();
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            const std::string notSo = "1지 않";
+            Item* n = it->After();
+            const bool notAfter = n != nullptr && n->selected >= 0 && (n->group->surface == "な" || n->group->surface == "いな") &&
+                                  ItemLemma(f, n, n->selected) == "않다";
+            const std::string head(it->EntryText(it->selected).substr(0, it->EntryText(it->selected).size() - canWa.size()));
+            if (made && notAfter) {
+                it->AssignEntrySurface(it->selected, "되어 있지는    ");
+                it->AssignDirectSlot(it->DirectIndex(), "");
+            } else if (made && e != nullptr && e->dst.starts_with(notSo)) {
+                it->AssignEntrySurface(it->selected, "되어 &HN@");
+                it->AssignDirectSlot(it->DirectIndex(), "1지는 않" + stateNow(e->dst.substr(notSo.size()), it->DirectSurface()));
+            } else if (made) {
+                it->AssignEntrySurface(it->selected, "되어는 &HN@");
+            } else if (notAfter) {
+                // 할 수는 + 없다 for the ない after it
+                it->AssignEntrySurface(it->selected, head + " 수는    ");
+                it->AssignDirectSlot(it->DirectIndex(), "");
+                n->AssignEntrySurface(n->selected, "$FA@");
+            } else if (e != nullptr && e->dst.starts_with(notSo)) {
+                const std::string rest = e->dst.substr(notSo.size());
+                const std::string_view had = "았";
+                it->AssignEntrySurface(it->selected, head + " 수는 &M9@");
+                it->AssignDirectSlot(it->DirectIndex(), rest.starts_with(had) ? "5" + rest.substr(had.size()) : "1" + NoneTail(rest));
+            }
+            continue;
+        }
+        const Entry* paradigm = it->DirectIndex() >= 0 ? it->DirectEntry(it->DirectIndex()) : nullptr;
+        if ((it->group->surface == "でき" || it->group->surface == "出来") && it->selected >= 0 &&
+            it->EntryText(it->selected) == "&C6@" && paradigm != nullptr && ready()) {
+            Item* n = it->After();
+            const std::string notSo = "1지 않", notSoWa = "1지는 않";
+            const Entry* ne = n != nullptr && n->selected >= 0 && n->DirectIndex() >= 0 ? n->DirectEntry(n->DirectIndex()) : nullptr;
+            if (paradigm->dst == "1고는" && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
+                n->EntryText(n->selected) == "&HN@") {
+                if (ne != nullptr && ne->dst.starts_with(notSo)) {
+                    it->AssignEntrySurface(it->selected, "되어    ");
+                    n->AssignDirectSlot(n->DirectIndex(), "1지는 않" + stateNow(ne->dst.substr(notSo.size()), n->DirectSurface()));
+                } else {
+                    it->AssignEntrySurface(it->selected, "되어는    ");
+                }
+                it->AssignDirectSlot(it->DirectIndex(), "");
+            } else if (paradigm->dst == "1지는" && n != nullptr && n->selected >= 0 &&
+                       (n->group->surface == "いな" || n->group->surface == "な") && ItemLemma(f, n, n->selected) == "않다") {
+                it->AssignEntrySurface(it->selected, "되어 있지는    ");
+                it->AssignDirectSlot(it->DirectIndex(), "");
+            } else if (paradigm->dst.starts_with(notSoWa)) {
+                it->AssignEntrySurface(it->selected, "되어 &HN@");
+                it->AssignDirectSlot(it->DirectIndex(), "1지는 않" + stateNow(paradigm->dst.substr(notSoWa.size()), it->DirectSurface()));
+            }
+            continue;
+        }
+        if (it->detail->Yougo() && (it->detail->record == 4 || lexicalCan) && it->DirectIndex() >= 0) {
             const Entry* e = it->DirectEntry(it->DirectIndex());
             Item* n = it->After();
+            const std::string head = lexicalCan ? std::string(it->EntryText(it->selected).substr(0, it->EntryText(it->selected).size() - can.size())) : std::string();
+            // the word up to 수는, before what is written after it: the potential's adnominal, or the dictionary's own words
+            const auto canHead = [&](std::string_view after) {
+                it->detail->record = 0;
+                if (lexicalCan) {
+                    // a fixed word keeps four spaces where a conjugation mark would be
+                    it->AssignEntrySurface(it->selected, head + " 수는" + (after.empty() ? std::string("    ") : " " + std::string(after)));
+                    return std::string(after.empty() ? "" : "1");
+                }
+                return std::string("3 수는") + (after.empty() ? "" : " ");
+            };
             if (e != nullptr && e->dst == "1고는" && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
                 n->EntryText(n->selected) == "&HN@") {
-                it->detail->record = 0;
-                it->AssignDirectSlot(it->DirectIndex(), "3 수는");
+                it->AssignDirectSlot(it->DirectIndex(), canHead(""));
                 // てはいません is 할 수는 없습니다, てはいませんでした 할 수는 없었습니다
                 const Entry* ne = n->DirectIndex() >= 0 ? n->DirectEntry(n->DirectIndex()) : nullptr;
                 const std::string notSo = "1지 않";
@@ -2495,9 +2581,9 @@ void NotYet(Flusher& f) {
                 continue;
             }
             if (e != nullptr && e->dst == "1지는" && n != nullptr && n->selected >= 0 &&
-                (n->group->surface == "いな" || n->group->surface == "な") && ItemLemma(f, n, n->selected) == "않다") {
-                it->detail->record = 0;
-                it->AssignDirectSlot(it->DirectIndex(), "3 수는");
+                (n->group->surface == "いな" || n->group->surface == "な") &&
+                (ItemLemma(f, n, n->selected) == "않다" || ItemLemma(f, n, n->selected) == "없다")) {
+                it->AssignDirectSlot(it->DirectIndex(), canHead(""));
                 n->AssignEntrySurface(n->selected, "$FA@");
                 continue;
             }
@@ -2507,9 +2593,73 @@ void NotYet(Flusher& f) {
                 // ていない is now, ていなかった the past (隠せてはいない 숨길 수는 없다, 隠せてはいなかった 숨길 수는 없었다)
                 const bool past = it->DirectSurface().find("なかっ") != std::string_view::npos;
                 const std::string_view had = "았";
-                rest = rest.starts_with(had) ? (past ? "었" : "") + rest.substr(had.size()) : NoneTail(rest);
-                it->detail->record = 0;
-                it->AssignDirectSlot(it->DirectIndex(), "3 수는 없" + rest);
+                if (lexicalCan) {
+                    const std::string ending = rest.starts_with(had) ? (past ? "5" : "1") + rest.substr(had.size()) : "1" + NoneTail(rest);
+                    canHead("&M9@");
+                    it->AssignDirectSlot(it->DirectIndex(), ending);
+                } else {
+                    rest = rest.starts_with(had) ? (past ? "었" : "") + rest.substr(had.size()) : NoneTail(rest);
+                    it->AssignDirectSlot(it->DirectIndex(), canHead("") + " 없" + rest);
+                }
+                continue;
+            }
+        }
+        // LEX-5014: a verb of noticing, remembering or understanding (verb.notyet, verb.notyet-tewa) takes 못하다 in its
+        // てはいない and てはいません (分かってはいない 알지는 못한다, 分かってはいません 알지는 못합니다), and a verb of what is
+        // seen or heard (verb.perceived) takes 않다 (見えてはいません 보이지는 않습니다, 聞こえてはいない 들리지는 않는다). The
+        // states of understanding, remembering, seeing and hearing are now, past only in なかった; noticing is done
+        // (気づいてはいない 눈치채지는 못했다).
+        if (it->detail->Yougo() && it->DirectIndex() >= 0) {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            Item* n = it->After();
+            const std::string_view surface = it->group->surface;
+            const bool perceived = dict::EndsWithMember(HDTRANS_CLASS("verb.perceived"), surface) > 0;
+            const bool state = perceived || dict::EndsWithMember(HDTRANS_CLASS("verb.notyet-tewa"), surface) > 0;
+            const bool notYet = !perceived && (state || dict::EndsWithMember(HDTRANS_CLASS("verb.notyet"), surface) > 0);
+            const std::string notSo = "1지 않";
+            if ((notYet || perceived) && e != nullptr && e->dst == "1고는" && n != nullptr && n->group->surface == "い" &&
+                n->selected >= 0 && n->EntryText(n->selected) == "&HN@" && n->DirectIndex() >= 0) {
+                const Entry* ne = n->DirectEntry(n->DirectIndex());
+                if (ne != nullptr && ne->dst.starts_with(notSo)) {
+                    const std::string rest = ne->dst.substr(notSo.size());
+                    const std::string_view past = "았";
+                    it->AssignDirectSlot(it->DirectIndex(), "1지는");
+                    n->AssignEntrySurface(n->selected, notYet ? "못&AV@" : "&NF@");
+                    const std::string_view formal = "습";  // 습니다 after 않, ㅂ니다 after 하 (7); 아 after 않, 해 after 하 (6)
+                    n->AssignDirectSlot(n->DirectIndex(), rest.starts_with(past)     ? "5" + rest.substr(past.size())
+                                                          : rest.starts_with(formal) ? "7" + rest.substr(formal.size())
+                                                          : rest.starts_with("아")   ? "6" + rest.substr(std::string_view("아").size())
+                                                                                     : "1" + rest);
+                    continue;
+                }
+            }
+            if (notYet && e != nullptr && e->dst == "1지는" && n != nullptr && n->selected >= 0 &&
+                (n->group->surface == "いな" || n->group->surface == "な") && ItemLemma(f, n, n->selected) == "않다") {
+                n->AssignEntrySurface(n->selected, "못$AB@");
+                continue;
+            }
+            const std::string notSoWa = "1지는 않";
+            if ((notYet || perceived) && e != nullptr && e->dst.starts_with(notSoWa)) {
+                std::string rest = e->dst.substr(notSoWa.size());
+                const std::string_view had = "았";
+                // a state is now: 않았다 is 않는다, 않았어 않아, 않았습니다 않습니다
+                if (state && rest.starts_with(had) && it->DirectSurface().find("なかっ") == std::string_view::npos &&
+                    it->DirectSurface().find("でし") == std::string_view::npos) {
+                    rest = rest.substr(had.size());
+                    rest = rest.starts_with("다") ? "는" + rest : rest.starts_with("어") ? "아" + rest.substr(std::string_view("어").size()) : rest;
+                }
+                if (perceived) {
+                    it->AssignDirectSlot(it->DirectIndex(), "1지는 않" + rest);
+                    continue;
+                }
+                std::string mot = "하" + rest;
+                for (const auto& [from, to] : {std::pair<std::string_view, std::string_view>{"았", "했"}, {"는다", "한다"}, {"아", "해"}, {"습", "합"}}) {
+                    if (rest.starts_with(from)) {
+                        mot = std::string(to) + rest.substr(from.size());
+                        break;
+                    }
+                }
+                it->AssignDirectSlot(it->DirectIndex(), "1지는 못" + mot);
                 continue;
             }
         }
@@ -4237,7 +4387,12 @@ void PluralPronoun(Flusher& f) {
         // spelled in katakana may be read as a sound (キサマラッ 네놈들, spec LEX-5654).
         if (cls != '1' || ((suffix != "들" && suffix != "등") && lemma != "네놈")) continue;
         std::string_view target;
+        // A word already plural, in a plural suffix of its own and 들, takes nothing for the suffix (あいつら共 저
+        // 녀석들, 彼ら達 그들; 息子さんたち 아들들 is no such word).
+        const std::string_view surface = it->group->surface;
+        const std::size_t own = dict::EndsWithMember(HDTRANS_CLASS("suffix.plural-pronoun"), surface);
         if (lemma == "네놈") target = "네놈들";
+        else if (suffix == "들" && lemma.ends_with("들") && own > 0 && own < surface.size()) target = lemma;
         else if (lemma == "나") target = "우리";
         else if (lemma == "저") target = "저희";
         else if (lemma == "너") target = "너희";
