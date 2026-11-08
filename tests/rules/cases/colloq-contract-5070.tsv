@@ -149,4 +149,19 @@ normalize:none-nee	よく見ると、なに、それほどの門構でもねえ�
 normalize:kanji-nya	大丈夫にゃよ	lacks:에는	keep	normalize
 normalize:fused-adjective	頭かてぇな！	lacks:싶은	keep	normalize
 normalize:contracted-teru	「ダメっつってんでしょうが。出直してきな！」	lacks:이겠지만	keep	normalize
+normalize:contracted-teru	へえ、それが猫ってんですか？	has:고양이라는	fix	normalize
+normalize:contracted-teru	「あの人は誰ってんです？」	has:누구라는	fix	normalize
+normalize:contracted-teru	名前は何ってんだろ	has:무엇이라는	fix	normalize
+normalize:contracted-teru	それがどうしたってんだ	has:했다는 거야	fix	normalize
+normalize:contracted-teru	「昨日の晩に全部食べたってんだ」	has:먹었다는 거야	fix	normalize
+normalize:contracted-teru	「死んだってんだ」	has:죽었다는 거야	fix	normalize
+normalize:contracted-teru	「バカだってんですか？」	has:바보라는	fix	normalize
+normalize:contracted-teru	「好きだってんだろ」	has:좋아한다는 거지	fix	normalize
+normalize:contracted-teru	誰が土瓶ってんだ	has:주전자라는 거야	fix	normalize
+normalize:contracted-teru	「泣いてんです」	has:울고 있	keep	normalize
+normalize:contracted-teru	何言ってんだろ	has:말을 하는 거지	keep	normalize
+normalize:contracted-teru	「待ってんです、ずっと」	has:기다리고 있	keep	normalize
+normalize:contracted-teru	またビビってんだろ	lacks:라는	keep	normalize
+normalize:contracted-teru	そこで何やってんだろ	lacks:라는	keep	normalize
+normalize:contracted-teru	がんばってんですよ	has:하고 있는	keep	normalize
 normalize:slurred-spelling	ふふ、秋月姉に自慢しなくっちゃ♪ いひひ♪	has:자랑해야	fix	normalize
