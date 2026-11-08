@@ -11,7 +11,7 @@ cx:fused-obligation:5	「帰って試験勉強をしなくてはならないん�
 cx:fused-obligation:5	足止めしなくてはならない。	저지해야 한다.	fix	rewrites
 cx:fused-obligation:5	「では、俺はそこで何かしなければいけないのですか？」	「그럼, 나는 거기서 뭔가 해야 합니까?」	fix	rewrites
 cx:fused-obligation:10	ミキさんとお揃いの水着、買わなくちゃ。	미키 씨와 세트의 수영복, 사야 한다.	fix	rewrites
-cx:fused-obligation:20	「強くならなきゃいけなかったんだから」	「강해지지 않으면 안됐으니까」	fix	rewrites
+cx:fused-obligation:20	「強くならなきゃいけなかったんだから」	「강해지지 않으면 안 됐으니까」	fix	rewrites
 cx:obligation-alone:20	そう。それよりお礼を言わなくちゃね。	그래. 그것보다 감사 인사를 해야지.	fix	rewrites
 cx:obligation-alone:20	まずは基本操作を覚えなきゃね。	우선은 기본 조작을 익혀야지.	fix	rewrites
 cx:obligation-alone:20	『教会』本部から、メカニックを呼んでこなきゃな。	『교회』본부에서, 메카닉을 불러 와야지.	fix	rewrites
@@ -38,7 +38,7 @@ cx:obligation-alone:50	早く行かなきゃって思った。	!rule:cx:obligati
 cx:obligation-alone:60	「皆さんの期待に応えなきゃって気持ちの方が強くて」	!rule:cx:obligation-alone:60	keep	rewrites
 cx:fused-obligation:10	今買わなきゃ損だ	!rule:cx:fused-obligation:10	keep	rewrites
 cx:fused-obligation:20	強くならなきゃ、意味がない	!rule:cx:fused-obligation:20	keep	rewrites
-cx:fused-obligation:5	「ダメじゃないフリーか確認しなきゃ！」	「안되지 않는 프리나 확인해야 해!」	fix	rewrites
+cx:fused-obligation:5	「ダメじゃないフリーか確認しなきゃ！」	「안 되지 않는 프리나 확인해야 해!」	fix	rewrites
 cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなければ……。	슬슬 목욕하고 잘 준비를 해야 해…….	fix	rewrites
 cx:fused-obligation:5	後で姉にもお礼をしなくちゃ。	나중에 언니에게도 감사 인사를 해야 한다.	fix	rewrites
 cx:obligation-alone:10	むしろ、そうしなきゃいけなかったような……	오히려, 그렇게 해야 했던 것 같은……	fix	rewrites

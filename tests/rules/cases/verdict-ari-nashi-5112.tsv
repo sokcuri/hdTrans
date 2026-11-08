@@ -1,0 +1,36 @@
+# 규칙: LEX-5112
+rule	input	expected	kind	layer
+dict:w:34810	「それもありですね。」	「그것도 괜찮네요.」	fix	lookup
+dict:w:34810	「そっか。真帆なら留学ってのもありだよな」	has:유학이라는 것도 괜찮지	fix	lookup
+dict:w:34810	このNevadaの秘書艦、ありだよ？	has:비서함, 괜찮아?	fix	lookup
+dict:w:34810	手段の一つとしてはありなのではないかと考える	has:괜찮지 않을까	fix	lookup
+dict:w:34810	客観的な意見としては、ありだと思いますし……	has:괜찮다고 생각하고	fix	lookup
+dict:w:34810	…もう何でもありだな。	…이제 뭐든 괜찮네.	fix	lookup
+dict:w:34810	それもありじゃない？	그것도 괜찮지 않아?	fix	lookup
+dict:w:34810	関係ありません	관계 없습니다	keep	lookup
+dict:w:34810	まだ 会ったばかりでは ありませんか	아직 만났던 바로 직후가 아닙니까	keep	lookup
+dict:w:34810	「あー、ありそう」	lacks:괜찮	keep	lookup
+dict:w:34810	残りの炭疽菌のありかについて	has:있는 곳에 대해	keep	lookup
+dict:w:34811	……ナシだな。	……안 되네.	fix	lookup
+dict:w:34811	それもなしかな	그것도 안 되나	fix	lookup
+dict:w:34811	「ちなみに、母親とか言うのはなしだぞ……ひっく」	has:말하는 건 안 된다	fix	lookup
+dict:w:34811	問題なしだ	문제 없음이다	keep	lookup
+dict:w:34811	（……この先客も所持品は無しか）	(……이 선객도 소지품은 없나)	keep	lookup
+dict:w:34811	あなたなしじゃ生きていけない	lacks:안 되	keep	lookup
+cx:verdict-none:10	それはなしだろ	그것은 아니지	fix	rewrites
+cx:verdict-none:10	それもなしかな	!rule:cx:verdict-none:10	keep	rewrites
+cx:verdict-none:20	いや、それはないわ	has:그것은 아니야	fix	rewrites
+cx:verdict-none:20	それはないと聞いた	!rule:cx:verdict-none:20	keep	rewrites
+cx:verdict-none:30	今は遠慮はなしだ！	has:사양 없기야	fix	rewrites
+cx:verdict-none:30	「な、前原さん、暴力はなしですよ！」	has:폭력 없기예요	fix	rewrites
+cx:verdict-none:30	宿題はなしです	!rule:cx:verdict-none:30	keep	rewrites
+cx:verdict-none:40	反則はなし！	반칙 없기!	fix	rewrites
+cx:verdict-none:40	返事はなし。	!rule:cx:verdict-none:40	keep	rewrites
+cx:verdict-none:50	手加減なしだ	힘 조절 없기다	fix	rewrites
+cx:verdict-none:50	手加減なしで戦おう	힘 조절 없이 싸우자	keep	rewrites
+cx:verdict-none:60	返事はなしだった。	대답은 없었다.	fix	rewrites
+cx:verdict-none:60	宿題はなしです	숙제는 없습니다	fix	rewrites
+cx:verdict-none:60	母親とか言うのはなしだぞ	!rule:cx:verdict-none:60	keep	rewrites
+cx:without:17	ホワイトハウスの許可なしに	has:허가 없이	fix	rewrites
+cx:without:17	恋愛とか関係なしに	연애라든지 관계없이	keep	rewrites
+dict:w:34811	「サボったらデートはナシな」	lacks:없는」	keep	lookup

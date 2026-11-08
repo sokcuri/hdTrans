@@ -165,9 +165,9 @@
 そうだな	그래	intj
 そうなんだわ	그렇거든	intj
 そのまさかよ	바로 그 설마야	intj
-だめだわ	안되겠어	intj
-だめよ	안돼	intj
-だめよね	안되지	intj
+だめだわ	안 되겠어	intj
+だめよ	안 돼	intj
+だめよね	안 되지	intj
 それはありですね	그것도 괜찮네요	intj
 ここですね	여기군요	intj
 そこですね	거기군요	intj
@@ -1043,9 +1043,9 @@
 もち	당연하지	intj
 あたい	나	n	attr=VHn
 こんの	이 녀석	intj
-あかん	안돼	intj
-あかーん	안돼	intj
-あっかーん	안돼	intj
+あかん	안 돼	intj
+あかーん	안 돼	intj
+あっかーん	안 돼	intj
 んじゃ	그럼	intj
 いっくよ	간다	intj
 いっくぞ	간다	intj
@@ -1201,7 +1201,7 @@
 知りませんでしたわ	몰랐어요	phrase
 わかりませんわ	모르겠어요	phrase
 分かりませんわ	모르겠어요	phrase
-いけませんわ	안돼요	phrase
+いけませんわ	안 돼요	phrase
 // Set phrases of narration and speech.
 気が付けば	정신을 차려 보니	adv
 正直なところ	솔직히 말해서	adv

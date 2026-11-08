@@ -26,7 +26,7 @@ voice:respectful	御園さんは、両脇をがっちり確保されていた。
 cx:honorific-nasareru:25	村民はこの凍結が力によってなされていると信じた	촌민은 이 동결이 힘에 의해 되고 있다고 믿었다	fix	rewrites
 cx:honorific-nasareru:25	「………では、あなたは先生と生活なされていたのですか」	「………그럼, 당신은 선생님과 생활 하고 계셨습니까」	keep	rewrites
 cx:honorific-nasareru:20	議論も活発になされ、意見交換会としては十分な内容だった	논의도 활발하게 되어, 의견교환회로서는 충분한 내용이었다	fix	rewrites
-cx:honorific-sareru:10	あッ ダメです 私が お願いされたんですから	앗 안됩니다 제가 부탁되었으니까요	keep	rewrites
+cx:honorific-sareru:10	あッ ダメです 私が お願いされたんですから	앗 안 됩니다 제가 부탁되었으니까요	keep	rewrites
 cx:honorific-sareru:10	「お仕置きされている側が要求するなんて……」	「벌되고 있는 측이 요구하다니……」	keep	rewrites
 voice:respectful	大好きな人に失望されたくない	정말 좋아하는 사람에 실망되고 싶지 않다	keep	voice
 voice:respectful	超事務的に挨拶されて追い出された。	매우 사무적으로 인사되어 쫓겨났다.	keep	voice

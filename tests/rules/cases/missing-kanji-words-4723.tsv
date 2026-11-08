@@ -1,6 +1,6 @@
 # 규칙: LEX-4723
 rule	input	expected	kind	layer
-lexical:missing-word	旅籠だぁ？お天道様は起きたばかりだぜ？	여관이야? 태양은 일어난지 얼마 안되었음이지?	fix	lookup
+lexical:missing-word	旅籠だぁ？お天道様は起きたばかりだぜ？	여관이야? 태양은 일어난지 얼마 안 되었음이지?	fix	lookup
 lexical:missing-word	ひゃっはー！者共かかれー！	히햐하! 자들 쓰여되고―！	fix	lookup
 lexical:missing-word	視界の端に見える己の小さな手脚。	시야의 구석으로 보이는 자신의 작은 손발.	fix	lookup
 lexical:missing-word	お城では妖婆アダムウイッチが	성에서는 마귀할멈 아담 마녀가	fix	lookup

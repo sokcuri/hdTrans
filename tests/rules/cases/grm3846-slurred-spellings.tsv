@@ -10,7 +10,7 @@ normalize:slurred	つうか 地平線 そもそも見えないし	그보다 지�
 normalize:slurred	通過する	통과한다	keep	normalize
 normalize:slurred	どぉーせラブラブ	어차피 알콩달콩	fix	normalize
 normalize:slurred	でもまあ これで いよいよ優勝しなきゃだね	하지만 뭐 이것으로 드디어 우승해야 하네	fix	normalize
-normalize:slurred	しなきゃだめ	하지 않으면 안돼	keep	normalize
+normalize:slurred	しなきゃだめ	하지 않으면 안 돼	keep	normalize
 normalize:slurred	岩崎の命は もう帰ってこねえ ！	이와사키의 목숨은 이제 돌아오지 않아 !	fix	normalize
 normalize:slurred	あーゆーいい子ちゃんって	저런 좋은 아이는	fix	normalize
 normalize:ru-contraction	汚ぇ真似はすんじゃねぇぞ	더러운 짓은 하지 마	fix	normalize

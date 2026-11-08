@@ -101,7 +101,7 @@ cx:web-fixes-j:140	「何をしたのか話せ、でなければ助けられな�
 cx:web-fixes-j:140	本物でなければ意味がない。	!rule:cx:web-fixes-j:140	keep	rewrites
 cx:web-fixes-j:145	小蘭からついでに聞いた話をすると、快くかわってくれた。	has:기분 좋게 대신해 주었다	fix	rewrites
 cx:web-fixes-j:145	彼はすっかりかわってしまった。	!rule:cx:web-fixes-j:145	keep	rewrites
-cx:web-fixes-j:150	「殿下。国民はあなたが護り、慈しむべき存在です。そのようなお言葉はなりません」	has:그러한 말씀은 안됩니다	fix	rewrites
+cx:web-fixes-j:150	「殿下。国民はあなたが護り、慈しむべき存在です。そのようなお言葉はなりません」	has:그러한 말씀은 안 됩니다	fix	rewrites
 cx:web-fixes-j:150	雛見沢への帰り道は長いはずなのに、あまり気にはならない。	!rule:cx:web-fixes-j:150	keep	rewrites
 cx:web-fixes-j:150	同行させてくれませんか？なあに、決して足でまといにはなりませんよ！	!rule:cx:web-fixes-j:150	keep	rewrites
 cx:web-fixes-j:155	お前のような性根のねじ曲がった女が、王妃になどなれると思ったのか！？	has:왕비 따위가 될 수 있다고	fix	rewrites

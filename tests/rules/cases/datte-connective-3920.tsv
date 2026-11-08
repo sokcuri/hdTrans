@@ -19,7 +19,7 @@ segment:datte-space	人類誕生の歴史とか 分かっちゃうし あ～ 未
 segment:datte-space	なんか ふられたって 噂だよ｡ 小高先生｡	뭔가 차였다는 소문이야. 코다카 선생님.	fix	segment
 segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	이 사람들을 화내도 수는 돌아오지 않아 >> 리에	fix	segment
 segment:datte-space	放っといたって 腐るだけなんだからいいじゃない？	내버려 두어도 썩을 뿐이니까 좋잖아?	fix	segment
-segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안된다고	fix	segment
+segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안 된다고	fix	segment
 segment:datte-space	まだまだ これからだよ！ 今日 負けたって 全部 パワーに変えればいいんだ！ ピカチュ～！	아직도 지금부터야! 오늘 져도 전부 파워로 바꾸면 돼! 피카츄~!	fix	segment
 segment:datte-space	どっちにしたって 間違いなく怒られちゃうよな	어느 쪽으로 해도 틀림없이 혼나버린다	fix	segment
 segment:datte-space	今すぐと言ったって 家内を連れてこなくちゃ…	당장이라고 해도 아내를 데려와야 한다…	fix	segment
@@ -58,7 +58,7 @@ sense:initial-datte	だって、この状況から穴熊なんて崩し方わか
 sense:initial-datte	だって お兄ちゃんが違うって言ってるだもん	그치만 오빠가 다르다고 하는인걸	fix	senses
 sense:initial-datte	だって そうでもしないと 娯楽とか楽しめないじゃん｡	그치만 그래도 하지 않으면 오락이라든지 즐길 수 없잖아.	fix	senses
 sense:initial-datte	だって、その……そんなの……」	그치만, 그……그런 것……」	fix	senses
-sense:initial-datte	だって…ああっ、あああっ、伊月の赤ちゃんを…ひうっ、あうっ、ああっ…作る練習を…ああっ、しないとダメですからぁ	그치만…아앗, 아아앗, 이츠키의 아기를…히읏, 아읏, 아앗…만드는 연습을…아앗, 하지 않으면 안되니까요	fix	senses
+sense:initial-datte	だって…ああっ、あああっ、伊月の赤ちゃんを…ひうっ、あうっ、ああっ…作る練習を…ああっ、しないとダメですからぁ	그치만…아앗, 아아앗, 이츠키의 아기를…히읏, 아읏, 아앗…만드는 연습을…아앗, 하지 않으면 안 되니까요	fix	senses
 sense:initial-datte	「だって、裕樹の体温感じないと、安心できないんだもん」	「그치만, 유우키의 체온 느끼지 않으면, 안심할 수 없는걸」	fix	senses
 sense:initial-datte	「だって、私はずっと、最初から最後まで{k=-5.0}―――{/k} 」	「그치만, 나는 계속, 처음부터 끝까지{k=-5.0}―――{/k} 」	fix	senses
 sense:initial-datte	「だって！　よく分かんないけど、行こう」	「그치만! 잘 모르지만, 가자」	fix	senses

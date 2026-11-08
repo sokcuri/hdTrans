@@ -50,7 +50,7 @@ cx:sense-cues-1:350	本当なら完全無理です	사실이라면 완전 무리
 sense:aogu-look-up	仰げば尊し、わが師の恩。	우러러보면 존 해, 우리 스승의 은혜.	fix	senses
 sense:aogu-look-up	今ここで 仰いでいた	지금 여기서 우러러보고 있었다	fix	senses
 sense:aogu-look-up	毒を仰いだ	독을 들이켰다	keep	senses
-dict:w:32616	「駄目だ。なんか気色悪い」	「안돼. 왠지 기분 나빠」	fix	lookup
+dict:w:32616	「駄目だ。なんか気色悪い」	「안 돼. 왠지 기분 나빠」	fix	lookup
 dict:w:32616	気色を窺う	기색을 살핀다	keep	lookup
 dict:w:32617	お姉ちゃんの晴れ舞台を ほっとけないと	언니의 화려한 무대를 가만히 두어야 한다	fix	lookup
 dict:w:32612	ここは一見さんお断りだ	여기는 처음 온 손님 거절이다	fix	lookup

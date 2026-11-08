@@ -49,8 +49,8 @@ ending:rhetorical-ja-nai	嫌いじゃないの？	has:싫지 않	keep	builtin-en
 dict:gram:beki-rhetorical:7	ここに住む者として祝福すべきではないでしょうか。	has:축복해야 하지 않을까요	fix	local
 dict:gram:beki-rhetorical:7	そうすべきではないかと思う	has:해야 하지 않을까	fix	local
 dict:gram:beki-rhetorical:2	行くべきではないのか	has:가야 하지 않나	fix	local
-dict:gram:beki-rhetorical:7	すべきではない。	has:해서는 안된다	keep	local
-dict:gram:beki-rhetorical:8	行くべきではない	has:가서는 안된다	keep	local
+dict:gram:beki-rhetorical:7	すべきではない。	has:해서는 안 된다	keep	local
+dict:gram:beki-rhetorical:8	行くべきではない	has:가서는 안 된다	keep	local
 constraint:chau-after-verb	ま、マザコンちゃうわ！	has:아니	fix	lookup
 constraint:chau-after-verb	嘘ちゃうで。	has:아니	fix	lookup
 constraint:chau-after-verb	アホちゃう？	has:아니	fix	lookup

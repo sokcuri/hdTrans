@@ -32,7 +32,7 @@ dict:colloq:yacchau-past	「やっちゃって！」	!rule:dict:colloq:yacchau-p
 dict:colloq:yacchau-past	「やっちゃおうか」	「해 치울까」	keep	local
 sound:contracted-iku	「待って、置いてかないで」	「기다려, 두고 가지 마」	fix	sound
 sound:contracted-iku	「突っ込んでった」	「돌진해 갔어」	fix	sound
-sound:contracted-iku	「ついてっちゃ駄目だぞ」	「따라가면 안된다」	fix	sound
+sound:contracted-iku	「ついてっちゃ駄目だぞ」	「따라가면 안 된다」	fix	sound
 sound:contracted-iku	「はい、お皿持ってって。」	「네, 접시 가져가.」	fix	sound
 sound:contracted-iku	「持ってってください」	「가져가 주세요」	fix	sound
 sound:contracted-iku	「たくさん買ってってくれ」	「많이 사 가 줘」	fix	sound

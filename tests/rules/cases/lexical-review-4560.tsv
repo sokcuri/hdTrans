@@ -65,8 +65,8 @@ dict:w:32401	無線機で連絡した。	has:무전기	keep	defaults
 dict:w:2009	イケる、と静子は思った。	된다, 라고 시즈코는 생각했다.	fix	defaults
 dict:w:2009	今の俺なら、それらの単語だけで３発はイケる。	has:3발은 된다	fix	defaults
 dict:w:2009	イケメンだ。	미남이다.	keep	defaults
-dict:w:32402	イケない子だ。	has:안되는 아이다	fix	defaults
-dict:w:32402	いけない子だ。	has:안되는 아이다	keep	defaults
+dict:w:32402	イケない子だ。	has:안 되는 아이다	fix	defaults
+dict:w:32402	いけない子だ。	has:안 되는 아이다	keep	defaults
 dict:w:32403	お酒はイケる口ですか？	술은 잘하는 편입니까?	fix	defaults
 dict:w:32403	まだイケる！	lacks:편	keep	defaults
 dict:w:32404	ちょっとした頼み事があるのだけれど	has:약간의 부탁이 있는데	fix	defaults

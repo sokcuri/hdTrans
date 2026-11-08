@@ -1,7 +1,7 @@
 # 규칙: LEX-140, LEX-141, LEX-143, LEX-144, LEX-145, LEX-146, LEX-147, LEX-148, LEX-149
 rule	input	expected	kind	layer
-cx:cue-sense:20	「ば、馬鹿な……男爵令嬢だぞ!?」	has:말도 안돼……남작 영애다	fix	rewrites
-cx:cue-sense:20	「ば、馬鹿な……あれだけ素っ気なくしていたのに」	has:말도 안돼……	fix	rewrites
+cx:cue-sense:20	「ば、馬鹿な……男爵令嬢だぞ!?」	has:말도 안 돼……남작 영애다	fix	rewrites
+cx:cue-sense:20	「ば、馬鹿な……あれだけ素っ気なくしていたのに」	has:말도 안 돼……	fix	rewrites
 cx:cue-sense:20	なんて馬鹿な娘だろうか。	!rule:cx:cue-sense:20	keep	rewrites
 cx:cue-sense:20	「馬鹿なことを二度も言うな！」	!rule:cx:cue-sense:20	keep	rewrites
 cx:cue-sense:30	千里とおしゃべりしてるうちに、	has:이야기 하고 있는 동안에,	fix	rewrites

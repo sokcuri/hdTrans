@@ -32,7 +32,7 @@ cx:novel-fixes-2:1925	「今はお主のイメージでクワになっている�
 cx:novel-fixes-2:1925	形になる。	!rule:cx:novel-fixes-2:1925	keep	rewrites
 cx:novel-fixes-2:1930	望んだ通りに出し入れできるぞ。	has:넣었다 뺐다 할 수	fix	rewrites
 cx:novel-fixes-2:1930	お金の出し入れが多い。	!rule:cx:novel-fixes-2:1930	keep	rewrites
-cx:novel-fixes-2:1935	駄目ではないが、その願いは私の管轄外でな。	has:안되는 건 아니지만	fix	rewrites
+cx:novel-fixes-2:1935	駄目ではないが、その願いは私の管轄外でな。	has:안 되는 건 아니지만	fix	rewrites
 cx:novel-fixes-2:1935	それ、貴族としてダメなんじゃないの？	!rule:cx:novel-fixes-2:1935	keep	rewrites
 cx:novel-fixes-2:1950	幹の直径一メートル超えクラスがそこらにある。	has:초과 급이	fix	rewrites
 cx:novel-fixes-2:1950	同じクラスになった。	!rule:cx:novel-fixes-2:1950	keep	rewrites

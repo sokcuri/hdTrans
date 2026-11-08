@@ -51,7 +51,7 @@ sound:clipped-volitional-aux	そんとき顔見ていこか	라고 하고 얼굴
 sound:clipped-volitional-aux	あっ 待てよ しずかちゃん所に 来たんだから遊んでいこっと	앗 기다려 시즈카짱소에 왔으니까 놀아 가야지	fix	sound
 segment:na-space	同じような 気がする	같은 생각이 든다	keep	segment
 segment:na-space	全力を出すな って 言っているんじゃない	전력을 내지 말라고 말하는 거 아니야	keep	segment
-segment:na-space	そんな 馬鹿な	말도 안돼	keep	segment
+segment:na-space	そんな 馬鹿な	말도 안 돼	keep	segment
 sound:clipped-volitional-aux	ただじゃおかねーからな！！	그냥 두지 않으니까!!	keep	sound
 sound:clipped-volitional-aux	もう生かしちゃおかねえぞ！ 裏切り？	이제 살리면 두지 않아! 배반?	keep	sound
 sound:clipped-volitional-aux	どんなやつだろうと 絶対に生かしちゃおかーん	어떤 녀석일 거라고 절대로 살리면 두지 않아~	keep	sound

@@ -512,6 +512,19 @@ bool CopulaFollows(std::string_view s) {
     return false;
 }
 
+// Whether a verdict of word.copula-verdict may stand after the text before it: at the start, after a
+// mark (、 「 …) or a space, or after a particle of particle.before-verdict (それもありだな, それってありなの);
+// after any other word it is that word's label of being there or not (駐車場ありだ, あなたなしじゃ).
+bool VerdictPlace(std::string_view before) {
+    while (!before.empty() && text::IsSpace(DecodeLastRune(before).cp)) before.remove_suffix(DecodeLastRune(before).size);
+    if (before.empty()) return true;
+    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("particle.before-verdict"))) {
+        if (before.ends_with(p)) return true;
+    }
+    const char32_t r = DecodeLastRune(before).cp;
+    return !text::IsLetter(r) && !text::IsDigit(r);
+}
+
 // An adverb or a noun of word.copula-predicate is its adjectival noun before a copula, an adnominal
 // な or a question か (ばっちりだ 완벽하다, アリなのか 괜찮은 건가): the adjectival noun records of the
 // key go first, and the others stay behind them for an ending they do not take.
@@ -539,6 +552,40 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
     }
     *frontTail = back;
     return front != nullptr ? front : back;
+}
+
+// The adjectival noun records of a verdict of word.copula-verdict read only before a copula, an
+// adnominal な or a question か and in a VerdictPlace (それもありだな 그것도 괜찮네); elsewhere they are
+// left out when other records remain (駐車場ありだ, 関係ありません, 許可無しに, ありそう).
+Record* VerdictsInPlace(Record* records, std::string_view before, std::string_view text) {
+    const auto stray = [&](const Record* r) {
+        if (At(r->partCode, 1) != '8' || !dict::InClass(HDTRANS_CLASS("word.copula-verdict"), r->source)) return false;
+        const std::string_view after = text.substr(std::min(text.size(), r->source.size()));
+        // A bare question か after one of word.verdict-asks-there asks whether the thing is there
+        // (所持品は無しか); かな, かも and the copula still give the verdict (それもなしかな).
+        const bool asks = after.starts_with("か") && !CopulaFollows(after.substr(std::string_view("か").size())) &&
+                          !after.starts_with("かな") && !after.starts_with("かよ") && !after.starts_with("かも") &&
+                          !after.starts_with("かしら") && dict::InClass(HDTRANS_CLASS("word.verdict-asks-there"), r->source);
+        // A sentence-final な after it is no copula of the verdict (デートはナシな).
+        const bool finalNa = after.starts_with("な") && !after.starts_with("なの") && !after.starts_with("なん");
+        return asks || finalNa || !(CopulaFollows(after) && VerdictPlace(before));
+    };
+    bool any = false;
+    bool others = false;
+    for (const Record* r = records; r != nullptr; r = r->child) (stray(r) ? any : others) = true;
+    if (!any || !others) return records;
+    Record* kept = nullptr;
+    Record** tail = &kept;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!stray(r)) {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = next;
+    }
+    return kept;
 }
 
 // LEX-5000: a kana noun of word.adjective-noun-lead spells an adjective and a formal noun (いいわけ: いい + わけ).
@@ -2752,6 +2799,7 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
+    if (settings.text) records = VerdictsInPlace(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = AdjectiveOverKanaNoun(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));

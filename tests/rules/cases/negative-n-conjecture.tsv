@@ -18,7 +18,7 @@ normalize:negative-conjecture	そいつは誰にもわからんじゃろ、今�
 normalize:negative-conjecture	言われずとも体は動かんだろうがのう	듣지 않아도 몸은 움직이지 않겠지만 말이야	fix	normalize
 normalize:negative-conjecture	見ないとわからんだろ	보지 않으면 모르지	fix	normalize
 normalize:negative-conjecture	使えんだろ? キック	쓸 수 있는 거지? 킥	keep	normalize
-normalize:negative-conjecture	いかんでしょ！	안돼지!	keep	normalize
+normalize:negative-conjecture	いかんでしょ！	안 돼지!	keep	normalize
 normalize:negative-conjecture	昨日から一睡もしとらんじゃろ	어제부터 한 잠도 하고 있지 않겠지	keep	normalize
 normalize:negative-conjecture	まず無事では済まんじゃろ	우선 무사한 것은 끝나지 않겠지	keep	normalize
 normalize:negative-conjecture	あれを 見てもらうのが いちばんだろう。	저것을 보이는 것이 가장일 것이다.	keep	normalize

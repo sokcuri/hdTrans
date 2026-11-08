@@ -1074,7 +1074,10 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     }
                     if (bound) {
                         const dict::Candidates right = snap.GetWordInfo(after, dict::LookupMode::General, lookup);
+                        // A verdict of word.copula-verdict (あり 괜찮다) is no word that the verb would cut
+                        // into (では ありません).
                         for (const dict::Candidate& r : right.list) {
+                            if (ClassOf(r) == '8' && dict::InClass(HDTRANS_CLASS("word.copula-verdict"), r.source)) continue;
                             if (r.source.size() > c.source.size() - left.size() && r.codes != nullptr &&
                                 std::string_view("0134789").find(ClassOf(r)) != std::string_view::npos) {
                                 bound = false;

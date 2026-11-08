@@ -34,7 +34,7 @@ names:kana-drawn-honorific	まつりちゃーん」	마츠리짱~」	keep	lookup
 names:kana-drawn-honorific	「みどりく〜ん、こっち！」	「미도리 군~, 여기!」	keep	lookup
 names:kana-kinship	という事はおねえさんの家なのかな……？	그 말은 언니의 집인가……?	keep	lookup
 names:kana-kinship	「だっておにーちゃんの作った料理食べてみたいんだもん！」	「그치만 오빠가 만든 요리 먹어 보고 싶은걸!」	keep	lookup
-names:kana-kinship	そうだおにーちゃんが起きるまでここを動いたらダメなんだ。	그렇다 오빠가 일어날 때까지 여기를 움직이면 안돼.	keep	lookup
+names:kana-kinship	そうだおにーちゃんが起きるまでここを動いたらダメなんだ。	그렇다 오빠가 일어날 때까지 여기를 움직이면 안 돼.	keep	lookup
 names:kana-kinship	目が覚めると、知らないおねえさんにだかれていた。	has:모르는 언니에게	keep	lookup
 names:kana-kinship	おねえちゃーん！」	언니~!」	keep	lookup
 names:kana-drawn-honorific	「おかあさーん！	「어머니~!	keep	lookup

@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:jisjk:114680	五十代半ば、白髪交じりの頭をしていた。	50대 중반, 백발 섞임의 머리를 하고 있었다.	fix	defaults
 dict:jisjk:114680	まだ二十代半ばの若い教師で、	아직 이십대 중반의 젊은 교사로,	fix	defaults
 dict:jisjk:114680	振り向いたのは三十代半ばほどの女だった。	뒤돌아 본 것은 30대 중반 정도의 여자였다.	fix	defaults
-dict:jisjk:114680	眉目麗しく二十代も半ばを過ぎたばかりだ。	미목 아름답게 이십대도 중반을 지난 지 얼마 안됐다.	fix	defaults
+dict:jisjk:114680	眉目麗しく二十代も半ばを過ぎたばかりだ。	미목 아름답게 이십대도 중반을 지난 지 얼마 안 됐다.	fix	defaults
 dict:jisjk:114680	四十代も半ばに差し掛かり、	40대도 중반에 접어들어,	fix	defaults
 dict:jisjk:114680	年齢は二十代半ばほどだろうか。	연령은 이십대 중반만큼일까.	fix	defaults
 dict:jisjk:114680	重ねた彼は20代半ばにして宇宙軍大尉になった。	거듭한 그는 20대 중반으로 해 우주군 대위가 되었다.	fix	defaults

@@ -1,23 +1,23 @@
 # 규칙: LEX-4764
 rule	input	expected	kind	layer
 lookup:iku-ccha	俺が起しに行っちゃ工合が悪い。	내가 일으키러 가면 상태가 나쁘다.	fix	lookup
-lookup:iku-ccha	はわわっ、照ちゃん、行っちゃダメだよぉ！二人に気づかれちゃうってばぁ！	하와왓, 테루짱, 가면 안돼! 두 사람에게 들켜버린다는 정말!	fix	lookup
+lookup:iku-ccha	はわわっ、照ちゃん、行っちゃダメだよぉ！二人に気づかれちゃうってばぁ！	하와왓, 테루짱, 가면 안 돼! 두 사람에게 들켜버린다는 정말!	fix	lookup
 lookup:iku-ccha	おに…待って…行っちゃや	도깨비…기다려…가면이야	fix	lookup
-lookup:iku-ccha	ダメなんだよ、神域に行っちゃ！	안되어, 신사의 경내에 가면!	fix	lookup
-lookup:iku-ccha	みんな海岸に戻ってていい ジャック だめよ! 一人で行っちゃ!	모두 바닷가로 돌아가 있어 좋은 잭 안돼! 혼자서 가면!	fix	lookup
+lookup:iku-ccha	ダメなんだよ、神域に行っちゃ！	안 되어, 신사의 경내에 가면!	fix	lookup
+lookup:iku-ccha	みんな海岸に戻ってていい ジャック だめよ! 一人で行っちゃ!	모두 바닷가로 돌아가 있어 좋은 잭 안 돼! 혼자서 가면!	fix	lookup
 lookup:iku-ccha	「行っちゃやだ～！」	「가면이나다~!」	fix	lookup
-lookup:iku-ccha	帰りに１人で 赤城なんかに 走りに行っちゃ駄目だよ	오는 길에 혼자서 아카기같은 것에 달리러 가면 안돼	fix	lookup
-lookup:iku-ccha	だから 行っちゃダメなんだって！	그러니까 가면 안된다고!	fix	lookup
-lookup:iku-ccha	いや ちょちょ 行っちゃ駄目だって！	아니 잠깐잠깐 가면 안된다고!	fix	lookup
-lookup:iku-ccha	ロニーが言ってたよ行っちゃダメだって	로니가 말했어 가면 안된다고	fix	lookup
+lookup:iku-ccha	帰りに１人で 赤城なんかに 走りに行っちゃ駄目だよ	오는 길에 혼자서 아카기같은 것에 달리러 가면 안 돼	fix	lookup
+lookup:iku-ccha	だから 行っちゃダメなんだって！	그러니까 가면 안 된다고!	fix	lookup
+lookup:iku-ccha	いや ちょちょ 行っちゃ駄目だって！	아니 잠깐잠깐 가면 안 된다고!	fix	lookup
+lookup:iku-ccha	ロニーが言ってたよ行っちゃダメだって	로니가 말했어 가면 안 된다고	fix	lookup
 lookup:iku-ccha	今日も一緒に行っちゃおー！	오늘도 함께 가면―！	fix	lookup
-lookup:iku-ccha	「行っちゃだめって言ったでしょ！	「가면 안된다고 말했잖아!	fix	lookup
+lookup:iku-ccha	「行っちゃだめって言ったでしょ！	「가면 안 된다고 말했잖아!	fix	lookup
 lookup:iku-ccha	Lv.62 ミク氏「行っちゃう」HP:6990/9999 MP:989	Lv.62 미쿠 씨 「가버린다」HP:6990/9999 MP:989	keep	lookup
 lookup:iku-ccha	あれ、行っちゃった……えっと……	어라, 가버린……음……	keep	lookup
 lookup:iku-ccha	ありゃりゃ、行っちゃったや。しずるんってば、ホント気むずかしいねー	아랴레바, 가버렸다야. 해 질질 끄는 은 정말, 진짜 까다롭네~	keep	lookup
 lookup:iku-ccha	（小声）行っちゃうですわ	(작은 목소리) 가버려요	keep	lookup
 lookup:iku-ccha	「きゃー♪蒼、ラノベに行っちゃうじゃん！	「꺄아♪창, 라노벨에 가버리잖아!	keep	lookup
-lookup:iku-ccha	行っちゃいけないって、お父様が	가면 안된다고, 아버님이	keep	lookup
+lookup:iku-ccha	行っちゃいけないって、お父様が	가면 안 된다고, 아버님이	keep	lookup
 lookup:iku-ccha	「むー\n行っちゃうでしょ」	「무우\n가버리겠지」	keep	lookup
 lookup:iku-ccha	「べ、別にお姉ちゃん氏、夢に行っちゃうですわ～」	「따, 딱히 언니 씨, 꿈에 가버려요~」	keep	lookup
 cx:homograph-kara:10	私のグラスが空だろう。	내 잔이 비어 있을 것이다.	fix	rewrites
@@ -59,7 +59,7 @@ pattern:yue	しかるに自分が部落出身であるが故に、多少世間�
 pattern:yue	かの最明寺時頼の著と俗称する人国記に、「陸奥は日の本故に、色白うして眼青みあり」とあるのはこれである。	인가의 최명사시 뢰의 저와 속칭하는 인국기에, 「무츠는 일본이기에, 흰 피부 소라고 눈 서로 파래져」라고 있는 것은 이것이다.	fix	builtin-pattern
 pattern:yue	治者の言、明察にして断なるが故に、その政が紊れないからである。	통치자의 말, 명찰로 해 단 되기 때문에, 그 정이 문없기 때문이다.	fix	builtin-pattern
 pattern:yue	しかし孤独であるが故に家庭的ではない。	하지만 고독하기 때문에 가정적이 아니다.	fix	builtin-pattern
-pattern:yue	俳優であるが故に、民衆の偶像であつてはならないのだ。	배우이기 때문에, 민중의 우상에서 연줄은 안되는 것이다.	fix	builtin-pattern
+pattern:yue	俳優であるが故に、民衆の偶像であつてはならないのだ。	배우이기 때문에, 민중의 우상에서 연줄은 안 되는 것이다.	fix	builtin-pattern
 pattern:yue	けれども、感情に於て圧える事の出来ない哀愁、それは感情的であるが故に、一層まとまりのないものであり、且つ、深いものである。	그러나, 감정에서 억누를 수 없는 애수, 그것은 감정적이기 때문에, 한층 정리가 없는 것이며, 또한, 깊은 것이다.	fix	builtin-pattern
 pattern:yue	あなたに与えられた唯一の弁解はその際「弁護人なるが故に」という一語だけです。	당신에게 줄 수 있던 유일한 변명은 그 때 「변호인 되기 때문에」라는 한마디만입니다.	fix	builtin-pattern
 pattern:yue	ユフィリアに対して厳しい親ではあるが、それも我が子を思う故だ。	유필리아에 대해서 엄한 부모이지만, 그것도 우리 아이를 생각하기 때문이다.	fix	builtin-pattern

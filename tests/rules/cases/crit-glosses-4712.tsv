@@ -6,7 +6,7 @@ cx:notice-words-1:128	それは感心しないな。	그것은 좋게 보지 않
 cx:notice-words-1:128	感心しませんね。	좋게 보지 않아요.	fix	rewrites
 cx:notice-words-1:128	彼の努力には感心した。	그의 노력에는 감탄했다.	keep	rewrites
 cx:notice-words-1:128	感心しながら聞いた。	감탄하면서 들었다.	keep	rewrites
-cx:notice-words-1:130	「なるほど……つまり、極論、人間が駄目なら心中するもやむなしということか」	「그렇구나……즉, 극론, 인간이 안되면 동반자살하는 것도 불가피라는 건가」	fix	rewrites
+cx:notice-words-1:130	「なるほど……つまり、極論、人間が駄目なら心中するもやむなしということか」	「그렇구나……즉, 극론, 인간이 안 되면 동반자살하는 것도 불가피라는 건가」	fix	rewrites
 cx:notice-words-1:130	二人は心中した。	두 사람은 동반자살했다.	fix	rewrites
 cx:notice-words-1:130	その心中は、なんとなく察することができる。	그 심중은, 어렴풋이 헤아릴 수가 있다.	keep	rewrites
 cx:notice-words-1:130	彼の心中を察する。	그의 심중을 헤아린다.	keep	rewrites

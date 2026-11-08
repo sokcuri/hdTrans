@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:contracted-teiru	鍵も開いてるんだし。	열쇠도 열려 있으니까.	fix	normalize
 normalize:contracted-teiru	もういいわよ。あんたがどう受け取ろうと、姫野は感謝してるんだし。お礼ぐらい素直に聞いたら？	이제 돼. 네가 어떻게 받든, 히메노는 감사하고 있으니까. 감사 인사 정도 솔직하게 들으면?	fix	normalize
-normalize:contracted-teiru	な、ならないよ。だから断ってるんだし	아, 안돼. 그러니까 거절하고 있으니까	fix	normalize
+normalize:contracted-teiru	な、ならないよ。だから断ってるんだし	아, 안 돼. 그러니까 거절하고 있으니까	fix	normalize
 normalize:contracted-teiru	「もう寝てるんだし、そっと離せば起こさないって」	「이미 자고 있으니까, 살며시 떼어 놓으면 깨우지 않는다고」	fix	normalize
 normalize:contracted-teiru	「ただ、ライブのためにこんだけ頑張ってるんだし、何かあってもいいんじゃないかと思ってさ」	「다만, 라이브를 위해만 힘내고 있으니까, 뭔가 있어도 괜찮지 않을까 생각해」	fix	normalize
 normalize:contracted-teiru	せっかくこんな格好してるんだし まとめて今日やっちゃいましょう	모처럼 이런 차림을 하고 있으니까 정리해 오늘 해 치웁시다	fix	normalize

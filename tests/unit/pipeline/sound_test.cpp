@@ -155,7 +155,7 @@ HD_TEST(pipeline_sound) {
     LineContext ctx;
     ctx.lookup.plain = &snap->TextPlain();
     const Case cases[] = {
-        {"あんっ、だめぇ", "앙、안돼"},
+        {"あんっ、だめぇ", "앙、안 돼"},
         {"うわ…柔らかい", "우와…柔らかい"},
         {"フキフキ", "쓱쓱"},
         {"肉がジュージューと焼ける。", "肉が지글지글 焼ける。"},
