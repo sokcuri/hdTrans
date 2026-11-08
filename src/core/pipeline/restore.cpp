@@ -663,7 +663,7 @@ std::string WriteLengthening(std::string_view s) {
         if (IsStretch(r) && !out.empty() && IsHangulSyllable(out.back())) {
             // The stretch after a syllable: its marks and ～, with the clip and cry marks among them. A
             // lengthening right after a ～ is the mark of that ～ and counts once.
-            size_t j = i, n = 0, drawn = 0;
+            size_t j = i, n = 0, drawn = 0, tildes = 0;
             bool clip = false, drawnOnly = true;
             char32_t before = 0, tilde = 0;
             for (; j < rs.size(); j++) {
@@ -679,6 +679,7 @@ std::string WriteLengthening(std::string_view s) {
                 if (!counted) continue;
                 n++;
                 drawn += c == kDrawnMark;
+                tildes += c == U'~' || c == U'～';
                 drawnOnly = drawnOnly && c == kDrawnMark;
                 if (tilde == 0 && (c == U'~' || c == U'～')) tilde = c;
             }
@@ -686,6 +687,12 @@ std::string WriteLengthening(std::string_view s) {
             const bool end = next == 0 || Contains(U"!?！？。、,.…‥」』）)］】\n♪☆★♥♡❤", next);
             // A stretch of ～ and lengthenings does not draw out a syllable closed by a stop (낮, 삯):
             // one ~ (spec SND-23).
+            // ～ the author typed stay, up to three (기다려~~~!).
+            if (tildes == n && n >= 2) {
+                out.append(std::min<size_t>(n, 3), U'~');
+                i = j - 1;
+                continue;
+            }
             // Drawn marks, from vowel kana, draw the syllable out by one each whatever else the stretch
             // holds (くうぅっ 쿠우읏).
             if (drawn > 0 || (end && n >= 2 && StressFinal(text::Final(out.back())))) {

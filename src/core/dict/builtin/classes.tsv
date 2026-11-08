@@ -12689,3 +12689,11 @@ noun.eye-common	黒眼
 noun.eye-common	黒目
 noun.eye-common	金眼
 noun.eye-common	金瞳
+//= ending.cute-sound	Cute sound endings (にゃ, みゃ, ぴょ, もん) after which a stretch of ー is one ~, the Korean convention (知らないにゃーー 모른다냥~), not drawn-out vowels (spec SND-23).
+ending.cute-sound	にゃ
+ending.cute-sound	みゃ
+ending.cute-sound	ぴょ
+ending.cute-sound	ニャ
+ending.cute-sound	ミャ
+ending.cute-sound	ピョ
+ending.cute-sound	もん

@@ -9,11 +9,11 @@ sound:lengthening	「ママーーー！」	has:엄마아아아!	fix	compose
 sound:lengthening	「架子ーーーっ！！」	has:가자아아앗!!	fix	compose
 sound:lengthening	もう海底洞窟は飽きたー！！	has:질렸다~!!	keep	compose
 sound:lengthening	お、御大将ーー！	has:두령자아앙!	fix	compose
-sound:lengthening	昂晴く～～ん、カルボナーラとオムライスをお願いね	has:앙청 구우운,	fix	compose
-sound:lengthening	嗅いじゃダメ～～～っ！もう許して～～～っ！	has:용서해애애애!	fix	compose
-sound:lengthening	お兄ちゃんの裏切り者～～！！	has:배신자아아!!	fix	compose
-sound:lengthening	瓜生くんがアンジェの旦那様に～～～っ！？	lacks:~~	fix	compose
-sound:lengthening	ちゅぱちゅぱ、ぢゅぅぅ～～～っ！！	lacks:~~	fix	compose
+sound:lengthening	昂晴く～～ん、カルボナーラとオムライスをお願いね	lacks:구우운	keep	compose
+sound:lengthening	嗅いじゃダメ～～～っ！もう許して～～～っ！	has:용서해~~~!	keep	compose
+sound:lengthening	お兄ちゃんの裏切り者～～！！	has:배신자~~!!	keep	compose
+sound:lengthening	瓜生くんがアンジェの旦那様に～～～っ！？	lacks:~~~~	keep	compose
+sound:lengthening	ちゅぱちゅぱ、ぢゅぅぅ～～～～～っ！！	has:~~~!!	fix	compose
 sound:lengthening	あぁぁっ…あぁァァァァァァァーーーッッ！！	has:아아아아아아앗!!	fix	compose
 sound:lengthening	「アキラァァァ！」と叫んだ。	has:아키라아아아!	fix	compose
 sound:lengthening	「いやぁーーーっ！」	has:싫어어어엇!	keep	compose
@@ -30,3 +30,6 @@ sound:lengthening	おねがあああい	has:부탁~	keep	compose
 sound:lengthening	なぜにメイド服ーーーッ！！	has:메이드복~!!	keep	compose
 sound:lengthening	「田村ー！」	has:타무라~!	keep	compose
 sound:lengthening	ママーーーっ！	has:엄마아아앗!	fix	compose
+sound:lengthening	「ええーーっ！部長様、屋上は知らないにゃーー」	has:모른다냥~」	fix	compose
+sound:lengthening	「むーリン、告白を行くにゃーー」	has:간다냥~」	fix	compose
+sound:lengthening	（む、難しい〜〜〜〜〜〜〜〜〜〜〜〜！！）	has:~~~!!	fix	compose

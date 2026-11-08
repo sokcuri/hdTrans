@@ -13,7 +13,7 @@ phrase:takeaway-cry	お持ち帰りですか？	가지고 가실겁니까?	keep	
 phrase:takeaway-cry	お持ち帰りしたい〜！	가지고 돌아가고 싶어~!	keep	builtin-phrase
 phrase:takeaway-cry	ふぁいと、おー！	파이팅, 오―！	fix	builtin-phrase
 cx:cheer-fight:10	「…ファイト、おーです。」	「…파이팅, 오입니다.」	fix	rewrites
-cx:cheer-fight:10	「「「ファイト、お〜〜〜♪」」」	「「「파이팅, 오오오오♪」」」	fix	rewrites
+cx:cheer-fight:10	「「「ファイト、お〜〜〜♪」」」	「「「파이팅, 오~~~♪」」」	fix	rewrites
 cx:cheer-fight:10	うん！ファイト！！	응! 파이팅!!	fix	rewrites
 cx:cheer-fight:10	いいファイトだった	좋은 투지였다	keep	rewrites
 cx:cheer-fight:10	ファイトマネー	파이트 머니	keep	rewrites

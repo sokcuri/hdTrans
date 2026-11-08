@@ -3818,6 +3818,11 @@ void LongVowelAfterKatakana(Flusher& f) {
         }
         const std::string_view after = From(last->text, last->start + kMark);
         const char32_t next = after.empty() ? U'\0' : text::DecodeRune(after).cp;
+        // After a cute sound ending of ending.cute-sound (ニャ 냥) the run is one lengthening: 냥~.
+        std::size_t count = n;
+        for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("ending.cute-sound"))) {
+            if (word.ends_with(member)) count = 1;
+        }
         if (n >= 2) {
             // Two or more after a word draw it out (アキラーー！ 아키라아아!) at the end of a phrase, also
             // before a shout's っ, which closes the last syllable (ママーーっ 엄마아앗); elsewhere they are
@@ -3831,8 +3836,8 @@ void LongVowelAfterKatakana(Flusher& f) {
             const char32_t real = rest.empty() ? U'\0' : text::DecodeRune(rest).cp;
             const bool end = rest.empty() || RuneIn(real, "、。！？!?」』）)…‥ 　~～");
             std::string marks;
-            for (std::size_t k = 0; k < (end ? std::min<std::size_t>(n, 5) : 1); k++) text::AppendRune(marks, output::kLengthenMark);
-            if (end && clip) text::AppendRune(marks, output::kClipMark);
+            for (std::size_t k = 0; k < (end ? std::min<std::size_t>(count, 5) : 1); k++) text::AppendRune(marks, output::kLengthenMark);
+            if (end && clip && count >= 2) text::AppendRune(marks, output::kClipMark);
             // The marks go on the word before, so that no space parts them from it (べよぉーーー).
             Item* owner = it->prev;
             // past the words read as nothing (よぉ: the small vowel)

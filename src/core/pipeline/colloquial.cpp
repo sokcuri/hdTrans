@@ -1294,12 +1294,26 @@ size_t AbsorbClip(std::u32string_view rs, size_t end, std::u32string& marks) {
 // or more vowel kana after an honorific are a drawn mark each (さああああん 씨이이이이).
 // After an honorific the vowel kana count when it has any and a ー or ～ after them ends the stretch
 // (くぅぅん～ 구우운, さぁ～ん 씨~; vowelsFirst).
-std::u32string StretchMarks(std::u32string_view rs, size_t i, size_t end, bool vowelsFirst = false) {
+// Whether before ends in a cute sound ending of ending.cute-sound, whose stretch Korean writes as ~
+// (にゃーー 냥~).
+bool CuteEnding(std::u32string_view before) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("ending.cute-sound"))) {
+        if (before.ends_with(DecodeText(member))) return true;
+    }
+    return false;
+}
+
+// A run of ～ the author typed with no ー stays ～, up to three (待て～～～！ 기다려~~~!), and after a
+// cute sound ending (にゃ, みゃ, ぴょ: 냥, 먀, 뾰) any run is one lengthening (にゃーー 냥~).
+std::u32string StretchMarks(std::u32string_view rs, size_t i, size_t end, bool vowelsFirst = false, bool cute = false) {
     const size_t dashes = static_cast<size_t>(std::count_if(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(end), IsDash));
+    const size_t bars = static_cast<size_t>(std::count(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(end), U'ー'));
     const size_t vowels = end - i - dashes;
     const bool byVowels = vowelsFirst ? vowels > 0 : dashes == 0;
     const size_t n = byVowels ? vowels : dashes;
     if (n == 0) return {};
+    if (cute) return std::u32string(1, kLengthenMark);
+    if (!byVowels && bars == 0 && dashes >= 2) return std::u32string(std::min<size_t>(dashes, 3), U'～');
     if (n == 1) return std::u32string(1, kLengthenMark);
     if (byVowels && vowelsFirst) return std::u32string(std::min<size_t>(n, 16), kDrawnMark);
     return std::u32string(std::min<size_t>(n, 5), kLengthenMark);
@@ -2106,7 +2120,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             // The vowel kana are the marks; a ー or ～ after them ends the stretch (様ぁ～ 님~), and a ー or ～
             // alone counts (様ーっ 님~).
             std::u32string marks = StretchMarks(rs, i + h.size(), end, true);
-            if (after > end && marks.size() >= 2) marks.push_back(output::kClipMark);
+            if (after > end && marks.size() >= 2 && marks.front() != U'～') marks.push_back(output::kClipMark);
             rs = Spliced(rs, i + h.size(), marks, after);
             i += h.size() + marks.size() - 1;
             changed = true;
@@ -2515,7 +2529,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                         }
                         // A run of two or more is drawn out, with the shout's っ (だめーーっ！ 안돼에엣!); one
                         // is ～ (提督ー 제독~, だめーっ！ 안돼~!).
-                        if (const std::u32string marks = StretchMarks(rs, keep, end); marks.size() >= 2) {
+                        if (const std::u32string marks = StretchMarks(rs, keep, end, false, CuteEnding(std::u32string_view(rs).substr(0, keep))); marks.size() >= 2) {
                             // The ～ stays for the word stage, which reads it as before; the marks after it
                             // say how long (the first is the ～'s own).
                             std::u32string drawn = U"～" + marks;
@@ -2723,6 +2737,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             read && (vowelRun || !drawn.empty() ||
                      (!spelled && cands[best].empty() && std::any_of(rs.begin() + i, rs.begin() + end, IsDash)));
         const std::u32string stretch = rs.substr(i, end - i);
+        const bool cute = CuteEnding(std::u32string_view(rs).substr(0, i));
         rs = Spliced(rs, i, cands[best], end);
         changed = true;
         if (lengthened) {
@@ -2741,9 +2756,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 if (drawn.empty()) {
                     // One lengthening for one mark, a drawn mark for each of two or more (せんぱーい！
                     // 선배~!, せんぱーーい！ 선배애애!).
-                    std::u32string marks = StretchMarks(stretch, 0, stretch.size());
+                    std::u32string marks = StretchMarks(stretch, 0, stretch.size(), false, cute);
                     size_t to = q;
-                    if (marks.size() >= 2) {
+                    if (marks.size() >= 2 && marks.front() != U'～') {
                         to = AbsorbClip(rs, q, marks);
                     } else {
                         while (to < rs.size() && In(rs[to], kTsu)) to++;
@@ -2789,6 +2804,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             continue;
         }
         const std::u32string stretch = rs.substr(i, j - i);
+        const bool cute = CuteEnding(std::u32string_view(rs).substr(0, i));
         rs = Spliced(rs, i, fill, j);
         changed = true;
         if (!fill.empty()) continue;
@@ -2797,8 +2813,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         size_t to = q;
         while (to < rs.size() && In(rs[to], kTsu)) to++;
         if (wordEnd < q || (to < rs.size() && (!IsPause(rs[to]) || IsDash(rs[to]) || rs[to] == kLengthenMark))) continue;
-        std::u32string marks = StretchMarks(stretch, 0, stretch.size());
-        if (marks.size() >= 2) to = AbsorbClip(rs, q, marks);
+        std::u32string marks = StretchMarks(stretch, 0, stretch.size(), false, cute);
+        if (marks.size() >= 2 && marks.front() != U'～') to = AbsorbClip(rs, q, marks);
         rs = Spliced(rs, q, marks, to);
     }
     if (!changed) return std::string(text);
