@@ -3785,16 +3785,98 @@ void WonderingDarou(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether it is a ー the word stage read as the mark -.
+bool LongMarkItem(Flusher& f, Item* it) {
+    return it != nullptr && it->group->surface == "ー" && it->selected >= 0 && ItemLemma(f, it, it->selected) == "-";
+}
+
+}  // namespace
+
 void LongVowelAfterKatakana(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (it->group->surface != "ー" || it->selected < 0 || ItemLemma(f, it, it->selected) != "-") continue;
+        if (!LongMarkItem(f, it)) continue;
         const std::string_view before = std::string_view(it->text).substr(0, static_cast<std::size_t>(it->start));
         if (before.empty()) continue;
         const char32_t r = DecodeLastRune(before).cp;
-        const std::string_view after = From(it->text, it->start + static_cast<long>(std::string_view("ー").size()));
+        // A ー after a ー draws out the word before that one, which must be a word (マリーーー), not a
+        // line of marks (ーーーー, 。ーー).
+        std::string_view word = before;
+        while (!word.empty() && DecodeLastRune(word).cp == U'ー') word.remove_suffix(std::string_view("ー").size());
+        if (word.empty()) continue;
+        if (const char32_t w = DecodeLastRune(word).cp; !(w >= U'ぁ' && w <= U'ヺ') && !text::IsKanji(w)) continue;
+        const bool katakana = (r >= U'ァ' && r <= U'ヺ') || r == U'ー';
+        if (!katakana && !(r >= U'ぁ' && r <= U'ゖ') && !text::IsKanji(r)) continue;
+        // The run of ー after the word, each its own word.
+        constexpr long kMark = static_cast<long>(std::string_view("ー").size());
+        Item* last = it;
+        std::size_t n = 1;
+        while (LongMarkItem(f, last->next) && last->next->text == last->text && last->next->start == last->start + kMark) {
+            last = last->next;
+            n++;
+        }
+        const std::string_view after = From(last->text, last->start + kMark);
         const char32_t next = after.empty() ? U'\0' : text::DecodeRune(after).cp;
-        if (r >= U'ァ' && r <= U'ヺ' &&
-            ((next >= U'ぁ' && next <= U'ヺ') || text::IsKanji(next) || RuneIn(next, "、。！？」』）…"))) {
+        if (n >= 2) {
+            // Two or more after a word draw it out (アキラーー！ 아키라아아!) at the end of a phrase, also
+            // before a shout's っ, which closes the last syllable (ママーーっ 엄마아앗); elsewhere they are
+            // one lengthening. The restore stage writes the marks (spec SND-23).
+            std::string_view rest = after;
+            bool clip = false;
+            while (!rest.empty() && RuneIn(text::DecodeRune(rest).cp, "っッ")) {
+                rest.remove_prefix(text::DecodeRune(rest).size);
+                clip = true;
+            }
+            const char32_t real = rest.empty() ? U'\0' : text::DecodeRune(rest).cp;
+            const bool end = rest.empty() || RuneIn(real, "、。！？!?」』）)…‥ 　~～");
+            std::string marks;
+            for (std::size_t k = 0; k < (end ? std::min<std::size_t>(n, 5) : 1); k++) text::AppendRune(marks, output::kLengthenMark);
+            if (end && clip) text::AppendRune(marks, output::kClipMark);
+            // The marks go on the word before, so that no space parts them from it (べよぉーーー).
+            Item* owner = it->prev;
+            // past the words read as nothing (よぉ: the small vowel)
+            for (int k = 0; k < 3 && owner != nullptr && owner->selected >= 0 && owner->group->At(owner->selected) != nullptr &&
+                            owner->DirectIndex() < 0 && owner->EntryText(owner->selected).empty();
+                 k++) {
+                owner = owner->prev;
+            }
+            const bool onWord = owner != nullptr && !owner->Fixed() && owner->selected >= 0 &&
+                                owner->group->At(owner->selected) != nullptr && owner->DirectIndex() < 0 &&
+                                !owner->EntryText(owner->selected).empty();
+            // A word with an ending takes the marks after the ending (すんなぁーーーー).
+            const bool onEnding = !onWord && owner != nullptr && !owner->Fixed() && owner->DirectIndex() >= 0;
+            if (onEnding) {
+                const int at = owner->DirectIndex();
+                std::string ending(owner->DirectText(at));
+                ending += marks;
+                owner->AssignDirectSlot(at, ending);
+                for (Item* m = it; m != last->next; m = m->next) {
+                    if (m->group->At(m->selected) != nullptr) m->AssignEntrySurface(m->selected, "");
+                }
+                it = last;
+                continue;
+            }
+            // With no such word before (kana a later stage writes out: おぉぉぉーーー) the run stays.
+            if (!onWord) {
+                it = last;
+                continue;
+            }
+            std::string target(owner->EntryText(owner->selected));
+            target += marks;
+            owner->AssignEntrySurface(owner->selected, target);
+            for (Item* m = it; m != last->next; m = m->next) {
+                if (m->group->At(m->selected) != nullptr) m->AssignEntrySurface(m->selected, "");
+            }
+            it = last;
+            continue;
+        }
+        // At the end of its token the ー ends the phrase unless a word follows (アキラー！; not
+        // アドベンチャー-BEYOND-).
+        const std::string_view following = last->next != nullptr ? std::string_view(last->next->group->surface) : std::string_view();
+        const char32_t nextWord = following.empty() ? U'\0' : text::DecodeRune(following).cp;
+        const bool tokenEnd = after.empty() && (nextWord == U'\0' || RuneIn(nextWord, "、。！？!?」』）)…"));
+        if (katakana && (tokenEnd || (next >= U'ぁ' && next <= U'ヺ') || text::IsKanji(next) || RuneIn(next, "、。！？!?」』）)…"))) {
             if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, "");
         }
     }

@@ -24,6 +24,19 @@ namespace internal {
 
 namespace {
 
+// The UTF-8 of output::kLengthenMark, which Lengthen writes for a stretch of two or more units.
+constexpr std::string_view kLengthenText = "\xEE\x80\x8A";
+
+// Whether k ends in a lengthening: ~ or the marks of a longer stretch (잠깐~, 잠깐\uE00A\uE00A).
+bool EndsLengthened(std::string_view k) { return k.ends_with('~') || k.ends_with(kLengthenText); }
+
+// k without the lengthening at its end.
+std::string_view WithoutLengthening(std::string_view k) {
+    if (k.ends_with('~')) return k.substr(0, k.size() - 1);
+    while (k.ends_with(kLengthenText)) k.remove_suffix(kLengthenText.size());
+    return k;
+}
+
 bool IsKana(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || r == U'～'; }
 
 bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32string_view::npos; }
@@ -303,8 +316,7 @@ std::u32string_view CryStem(const SoundMatch& m) {
 // やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
 bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
     // The Korean of one may draw out the other's (가버려, 가버려어어엇).
-    const auto plain = [](std::string_view k) { return k.ends_with('~') ? k.substr(0, k.size() - 1) : k; };
-    const std::string_view x = plain(a.korean), y = plain(b.korean);
+    const std::string_view x = WithoutLengthening(a.korean), y = WithoutLengthening(b.korean);
     return a.cry && b.cry && (x.starts_with(y) || y.starts_with(x)) && CryStem(a) == CryStem(b);
 }
 
@@ -946,8 +958,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
-                             runKorean.empty() && s.intj && !s.phrase && best.korean.ends_with('~') &&
-                             !Lengthen(Reading(s, p, end), units).ends_with('~');
+                             runKorean.empty() && s.intj && !s.phrase && EndsLengthened(best.korean) &&
+                             !EndsLengthened(Lengthen(Reading(s, p, end), units));
         if (ok && (chosen == nullptr || end > best.end || redrawn)) {
             std::string korean = !runKorean.empty()
                                      ? std::move(runKorean)
@@ -1477,7 +1489,7 @@ bool SoundText::Manner(const SoundMatch& m, size_t i) const {
 // ふわふわのクッション 푹신푹신한 쿠션, ぼさぼさの髪 부스스한 머리카락).
 bool SoundText::Adnominal(const SoundMatch& m, size_t i) const {
     // A sound drawn out with ~ is no adjective stem (ふわふわーの).
-    if (!m.adj || m.intj || m.korean.ends_with('~') || i + 1 >= rs_.size() || rs_[i] != U'の') return false;
+    if (!m.adj || m.intj || EndsLengthened(m.korean) || i + 1 >= rs_.size() || rs_[i] != U'の') return false;
     // The noun may take the prefix お or ご (つやつやのご飯); before 音 or 声 the row is a heard sound.
     size_t noun = i + 1;
     if (In(rs_[noun], U"おご") && noun + 1 < rs_.size() && IsKanjiRune(rs_[noun + 1])) noun++;
@@ -2308,7 +2320,7 @@ std::string SoundText::Write() {
                     b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
                 } else if (SoundMatch after; !m.alone.empty() && !copy && !CryCopyAfter(m, after)) {
                     b += m.alone;
-                    if (m.korean.ends_with('~')) b += '~';
+                    if (EndsLengthened(m.korean)) b += m.korean.substr(WithoutLengthening(m.korean).size());
                 } else {
                     b += m.korean;
                 }
@@ -2538,6 +2550,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
             tilde = true;  // a hum drawn out with ー or ～ ends in ~ (んんー 으응~)
         } else if (f[i] != U'～') {
             units += 'v';
+            if (f[i] == U'ー') units += 'b';  // the ー among them, which alone count for a word of more syllables
         } else if (units.empty() || units.back() != '~') {
             units += '~';
         }
@@ -2600,8 +2613,15 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
     const int initial = s / 588, vowel = s % 588 / 28;
     int final = s % 28;
     if (rs.size() > 1 && initial != 11) {
-        if (units.find_first_of("v~") != std::string_view::npos) return std::string(korean) + "~";
-        return std::string(korean);
+        // A word of more syllables keeps its last one and takes a ~ for one unit, a lengthening for
+        // each of more, which the restore stage writes drawn out at the end of a phrase (잠깐~, 잠까아아안).
+        // A ～ ends the run (あらぁ～ 어머~), and where the run has ー only those count (あらぁー 어머~).
+        const size_t bars = static_cast<size_t>(std::count(units.begin(), units.end(), 'b'));
+        const size_t n = units.find('~') != std::string_view::npos ? 1 : bars > 0 ? bars : static_cast<size_t>(std::count(units.begin(), units.end(), 'v'));
+        if (n <= 1) return n == 1 ? std::string(korean) + "~" : std::string(korean);
+        std::string out(korean);
+        for (size_t k = 0; k < std::min<size_t>(n, 5); k++) text::AppendRune(out, output::kLengthenMark);
+        return out;
     }
     rs.back() = Syllable(initial, vowel, 0);
     int added = 0;

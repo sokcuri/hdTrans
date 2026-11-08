@@ -29,7 +29,7 @@ cx:drawn-cry:10	「痛いぃ、やめて」	「아프다, 그만해」	keep	rewr
 cx:drawn-cry:10	「最高だあああっ！」	「최고야아아앗!」	keep	rewrites
 cx:drawn-cry:10	「勝ったあああっ！」	「이겼어어어엇!」	keep	rewrites
 cx:drawn-cry:10	「怖いよおおお」	「무서워어어어」	keep	rewrites
-cx:drawn-cry:10	「すごおおおい！」	「대단해~!」	keep	rewrites
+cx:drawn-cry:10	「すごおおおい！」	「대단해애애애!」	keep	rewrites
 cx:drawn-cry:10	「痛い痛いいいいっ！」	「아파 아파아아앗!」	keep	rewrites
 cx:drawn-cry:10	「見てみたいいいいい」	「보고 싶어어어어어」	fix	rewrites
 cx:copies:36	「痛いぃ、痛いぃ」	「아파, 아파」	fix	rewrites
@@ -76,7 +76,7 @@ cx:drawn-cry:10	「怖い……夢」	「무서운……꿈」	keep	local
 cx:drawn-cry:10	「痛いぃ……でも、まだ！」	「아파……하지만, 아직!」	fix	local
 cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹아」	fix	local
 cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 잘 거야」	fix	local
-cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~~~~~~~~!!)	keep	rewrites
+cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워어어어어어!!)	keep	rewrites
 cx:drawn-cry:10	（痛いー）	(아프다~)	keep	rewrites
 cx:drawn-cry:10	逃・が・さ・な・いー！	has:다―!	keep	rewrites
 cx:drawn-cry:10	う・れ・し・いー！	has:뻐~!	keep	rewrites
@@ -85,5 +85,5 @@ cx:copies:36	「怖いーっ、怖いーっ」	「무서워~, 무서워~」	fix	
 cx:copies:36	「痛い～、痛い～」	「아파~, 아파~」	fix	sound
 cx:copies:36	「痛いー、痛いー、痛いー」	「아파~, 아파~, 아파~」	fix	sound
 cx:drawn-cry:10	「暑い～っ！」	「더워~!」	fix	sound
-cx:drawn-cry:10	「痛い～～～！」	「아파~~~!」	fix	sound
+cx:drawn-cry:10	「痛い～～～！」	「아파아아아!」	fix	sound
 cx:drawn-cry:10	「痛いー、やめて」	「아프다~, 그만해」	keep	sound

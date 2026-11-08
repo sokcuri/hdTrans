@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 sound:cry-copy	イっちゃう、イっちゃうぅぅっ！	가버려, 가버려어엇!	fix	sound
 sound:cry-copy	イっちゃう、イっちゃうぅぅ	가버려, 가버려어어	fix	sound
-sound:cry-copy	イっちゃうぅぅっ！	갈 것 같아~!	keep	sound
+sound:cry-copy	イっちゃうぅぅっ！	갈 것 같아아아!	keep	sound
 sound:cry-copy	やだっ、やだっ	싫엇, 싫엇	keep	sound
 sound:cry-copy	やだ、やだぁぁっ	싫어, 싫어엇	keep	sound
 sound:cry-copy	イっちゃう、イっちゃうぅぅぅっ！	가버려, 가버려어어엇!	keep	sound

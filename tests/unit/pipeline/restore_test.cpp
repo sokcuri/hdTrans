@@ -296,13 +296,21 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A!"), std::string("군~~!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A\uE00A!"), std::string("군~~!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("군~\uE00A\uE00A!"), std::string("군~~!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("케이짱\uE00A\uE00B!"), std::string("케이짜~앙!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("여러분\uE00A\uE00B"), std::string("여러부~운"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A!"), std::string("구우운!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A\uE00A!"), std::string("구우우운!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군~\uE00A\uE00A!"), std::string("구우운!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("케이짱\uE00A\uE00B!"), std::string("케이짜앙!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("여러분\uE00A\uE00B"), std::string("여러부운"));
     HD_CHECK_EQ(pipeline::WriteLengthening("씨\uE00A\uE00B"), std::string("씨이"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A"), std::string("선배~"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("타무라\uE00A\uE00A\uE00A\uE00A\uE00A\uE00A\uE00A」"), std::string("타무라아아아아아」"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("기다려~~~!"), std::string("기다려어어어!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("잠깐\uE00A\uE00A\uE00A"), std::string("잠까아아안"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("부탁\uE00A\uE00A\uE00A"), std::string("부탁~"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("제대로~~ 해"), std::string("제대로~ 해"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("이것은~입니다"), std::string("이것은~입니다"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("1~2"), std::string("1~2"));
     // A drawn mark draws out the vowel of the syllable before it, the final moved last.
     HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼에"));

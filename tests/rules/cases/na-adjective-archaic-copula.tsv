@@ -33,7 +33,7 @@ dict:gozaru:copula-3	大丈夫でございましたよ	괜찮았습니다	fix	lo
 dict:gozaru:copula-10	嫌でございますよ	싫습니다	fix	lookup
 dict:gozaru:copula-10	綺麗でございますよ	예쁩니다	fix	lookup
 dict:gozaru:copula-12	平気でございますわ	괜찮아요	fix	lookup
-dict:gozaru:copula-12	「上等でございますわーー！！！！」	「훌륭해요~!!!!」	keep	lookup
+dict:gozaru:copula-12	「上等でございますわーー！！！！」	「훌륭해요오오!!!!」	keep	lookup
 dict:gozaru:copula-18	意外に想像力貧困でございますのね〜。	has:빈곤하네요	fix	lookup
 dict:gozaru:copula-21	「貧民風情は逃げ帰って涙で枕をぬらすのがお似合いでございますことよ〜？？」	has:어울려요	fix	lookup
 ending:静かでござる	大丈夫でござる	괜찮소	fix	builtin-ending
