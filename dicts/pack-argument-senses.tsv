@@ -155,3 +155,7 @@ argument-senses:5183	沈む	v5	sense	subj=日|太陽|夕日|陽|お日様|夕陽
 argument-senses:5184	真剣	n	sense	next=を|が|は|も|で|の|一刀|一本	진검	LEX-5230		真剣を差してある 진검을 차 두었다			
 argument-senses:5185	差す|挿す	v5	sense	obj=@weapon|真剣|刀|脇差|脇差し|太刀|小太刀|短刀|木刀|大小	차다	LEX-5230		真剣を差してある 진검을 차 두었다			
 argument-senses:5186	日	n	sense	pred=沈む|昇る|しずむ	해	LEX-5230		日が沈む 해가 지다			
+argument-senses:5065	並ぶ	v5:규칙	sense	subj=@food|皿|お皿|大皿|小皿 next=行く|いく|ゆく|来る|くる	놓이다	LEX-5010		料理が並んで行く 요리가 놓여 간다			
+argument-senses:5066	並べる	v1:규칙	sense	obj=@food	차리다	LEX-5010		テーブルに料理を並べた 테이블에 요리를 차렸다			
+argument-senses:5069	並べる	v1:규칙	sense	subj=@food|皿|お皿|大皿|小皿	차리다	LEX-5010		料理が並べられている 요리가 차려져 있다			
+argument-senses:5068	野菜	n	sense	pred=価格|値段|高騰|値上がり|相場|農家|栽培|栽培する|生産|生産する|出荷|出荷する|収穫|収穫する|産地|市場|卸売|輸入|輸出|消費量|自給率	채소	LEX-5010		野菜の価格 채소 가격			
