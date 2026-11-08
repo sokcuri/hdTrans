@@ -41,3 +41,24 @@ defaults:trans-5014	　俺はバッグを取り出して、本棚の前に屈む
 defaults:trans-5014	拷問には屈しない！	has:굴하지 않아	keep	lookup
 defaults:trans-5014	熊谷教授は「誰にも聞かれたくない悩みなどが漏えいしたらショックは大きい」と指摘。	lacks:누설	fix	lookup
 defaults:trans-5014	およそ9万2000人分の個人情報が漏えいした可能性があると発表しました。	has:유출된 가능성이	fix	lookup
+analysis:su-causative-te	体を動かせてる。	has:움직일 수 있다	keep	analysis
+analysis:su-causative-te	体を動かせてた。	has:움직일 수 있었다	keep	analysis
+analysis:su-causative-te	体を動かせてん？	has:움직일 수 있어	keep	analysis
+analysis:su-causative-te	体を動かせてます。	has:움직일 수 있습니다	keep	analysis
+analysis:su-causative-te	体を動かせても	has:움직일 수 있어도	keep	analysis
+analysis:su-causative-te	体を動かせては駄目だ	has:움직여선 안 된다	keep	analysis
+analysis:su-causative-te	体を動かせてて楽しい	has:움직일 수 있어 즐겁다	keep	analysis
+analysis:su-causative-te	体を動かせている。	has:움직일 수 있다	keep	analysis
+analysis:su-causative-te	量を減らせてる。	has:줄일 수 있다	keep	analysis
+analysis:su-causative-te	唇を尖らせてた。	has:입술을 삐죽 내밀었다	fix	analysis
+analysis:su-causative-te	布を湿らせても	has:천을 적셔도	fix	analysis
+analysis:su-causative-te	布を湿らせてもらった	has:적셔 주었다	fix	analysis
+analysis:su-causative-te	量を減らせていく。	has:줄여 간다	fix	analysis
+analysis:su-causative-te	唇を尖らせてる。	has:입술을 삐죽 내밀고 있다	fix	analysis
+analysis:su-causative-te	可愛らしく唇を尖らせる。	has:입술을 삐죽 내민다	fix	analysis
+analysis:su-causative-te	お望み通り脇の下に触れ、指を滑らせる。	has:손가락을 헛디딘다	fix	analysis
+analysis:su-causative-te	呼び止められ、顔を曇らせる御園。	has:얼굴을 흐리는 미소노	fix	analysis
+analysis:su-causative-te	大陸で武名を轟かせる、異国の剣豪。	has:명성을 울리는	fix	analysis
+analysis:su-causative-te	困難な強行輸送をやり遂げるには、正しい情報は欠かせません。	has:빠뜨릴 수 없습니다	keep	analysis
+analysis:su-causative-te	量を減らせてた。	has:줄일 수 있었다	keep	analysis
+analysis:su-causative-te	　待てよ、修正液を塗ったとして……あれって{rb}剥{/rb}{rt}は{/rt}がせるのか？	lacks:벗기는	keep	analysis
