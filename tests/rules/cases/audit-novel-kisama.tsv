@@ -1,0 +1,22 @@
+# 규칙: LEX-5654
+rule	input	expected	kind	layer
+dict:jisjk:172046	きさまは沙漠をウロウロしていただけじゃないか！	has:네놈은	fix	lookup
+dict:jisjk:172046	きさま、何者だ。	has:네놈,	fix	lookup
+dict:jisjk:172046	きさまの負けだ。	has:네놈의 패배	fix	lookup
+dict:jisjk:172046	きさまが悪い。	has:네놈이	fix	lookup
+dict:jisjk:172046	き、きさま……	has:네놈	fix	lookup
+rewrite:plural-pronoun	きさまら、何をしている！	has:네놈들,	fix	rewrites
+rewrite:plural-pronoun	きさまらの好きにはさせん。	has:네놈들의	fix	rewrites
+rewrite:plural-pronoun	きさま達も来い。	has:네놈들도	fix	rewrites
+rewrite:plural-pronoun	ヤルナ……キサマラッ！	has:네놈들!	fix	rewrites
+rewrite:plural-pronoun	グアァァッ…！キサマラァ！	has:네놈들!	fix	rewrites
+rewrite:plural-pronoun	キサマタチノミライニ……。	has:네놈들의	fix	rewrites
+dict:w:kisamara	キサマラ、覚悟しろ。	has:네놈들,	fix	lookup
+dict:w:kisamara	キサマラの負けだ！	has:네놈들의	fix	lookup
+rewrite:plural-pronoun	「き……貴様ら！！　平民風情が、僕に対して不敬だぞ！！」	has:네놈들	keep	rewrites
+rewrite:plural-pronoun	悪いが、ここが貴様らの墓場だな！	has:네놈들의 묘지	keep	rewrites
+rewrite:plural-pronoun	貴様達は、二戦隊。	has:네놈들은	keep	rewrites
+dict:w:23881	貴様、何者だ。	has:네놈,	keep	lookup
+dict:w:31538	キ、キサマ……かけるぞ、その手に！	has:네놈	keep	lookup
+rewrite:plural-pronoun	お前らも来い。	has:너희들도	keep	rewrites
+rewrite:plural-pronoun	僕たちの勝ちだ。	has:우리	keep	rewrites

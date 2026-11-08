@@ -2002,6 +2002,64 @@ bool HonorificAspect(Flusher& f, const Item* it) {
     return it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
+// Whether a word of adverb.destination-state stands before verb item v in its sentence, past a comma but not past
+// another predicate (彼は今、東京に行っている, すでに東京に行っていた, どこに行っているの).
+bool StateCueBefore(const Item* v) {
+    for (const Item* p = v->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || s == "。" || s == "「" || s == "」" || s == "！" || s == "？") return false;
+        // A word of state marked as the topic with は sets that time against another (今は大学に行っている 다니고
+        // 있다), no state.
+        if (dict::InClass(HDTRANS_CLASS("adverb.destination-state"), s) && !(p->next != nullptr && p->next->group->surface == "は")) {
+            return true;
+        }
+        if (p->detail->Yougo()) return false;  // another predicate begins a clause of its own
+    }
+    return false;
+}
+
+// Whether the いる after verb item it, or its own contracted てる, ends in the explanatory ん or の of a past or present
+// (行っていたんだ, 行ってたんです, 行っているのよ).
+bool ExplanatoryIru(const Item* it) {
+    if (it->start < 0 || static_cast<std::size_t>(it->start) > it->text.size()) return false;
+    std::string_view rest = std::string_view(it->text).substr(static_cast<std::size_t>(it->start));
+    // The いる of the verb: its て, then い or nothing (行っていたんだ, 行ってたんです), then the ending.
+    const std::size_t te = rest.find("て");
+    if (te == std::string_view::npos || te > 6) return false;
+    rest.remove_prefix(te + std::string_view("て").size());
+    if (rest.starts_with("い")) rest.remove_prefix(std::string_view("い").size());
+    for (const std::string_view head : {"たん", "たの", "るん", "るの"}) {
+        if (rest.starts_with(head)) return true;
+    }
+    return false;
+}
+
+// Whether a word of adverb.frequency (何度も, 三回, 毎週末, ずっと), or a word of noun.period-topic before the particle
+// は (小学生の頃は, 昔は), stands before verb item v in its sentence.
+bool PeriodCueBefore(const Item* v) {
+    for (const Item* p = v->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || s == "。" || s == "「" || s == "」" || s == "！" || s == "？") return false;
+        if (dict::InClass(HDTRANS_CLASS("adverb.frequency"), s)) return true;
+        if (const Item* n = p->next; n != nullptr && n->group->surface == "は" && dict::InClass(HDTRANS_CLASS("noun.period-topic"), s)) {
+            return true;
+        }
+        if (p->detail->Yougo()) return false;
+    }
+    return false;
+}
+
+// Whether a word of adverb.habit stands before verb item v in its clause (毎日学校に行っている).
+bool HabitBefore(const Item* v) {
+    for (const Item* p = v->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || s == "、" || s == "。" || s == "「" || s == "」" || s == "！" || s == "？" || s == ",") return false;
+        if (dict::InClass(HDTRANS_CLASS("adverb.habit"), s)) return true;
+        if (p->detail->Yougo()) return false;  // another predicate begins a clause of its own
+    }
+    return false;
+}
+
 // The もう, 既に, すでに, とっくに or もはや that stands before verb item v in its clause, or null.
 Item* AlreadyBefore(Item* v) {
     static constexpr std::string_view kAlready[] = {"もう", "既に", "すでに", "とっくに", "もはや"};
@@ -2069,7 +2127,21 @@ void ResultState(Flusher& f) {
                               dict::InClass(HDTRANS_CLASS("noun.result-suru-past"), v->prev->group->surface);
         const bool past = already || nounPast ||
                           (!madeOf && v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb));
-        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
+        // A verb of going after a place, a noun in に or へ, has gone there (spec LEX-5655): in the explanatory ていたんだ,
+        // ていたのだ, ていたんです or ていたのよ unless a word of habit or of a period (昔は, 毎週, 三回) or a place one attends
+        // (学校, 会社) makes it the going done again (トイレに行っていたんだ 화장실에 가 있던 거야, 小学生の頃は学校に
+        // 行っていたんだ 가고 있던 거야); in a plain ている or ていた only with a word of state (すでに東京に行っていた 가 있었다,
+        // 今どこに行っているの), the going or attending otherwise (学校に行っていた 가고 있었다). A word of habit keeps the going
+        // in both (毎日学校に行っている).
+        bool destination = false;
+        if (v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.destination-state"), verb) &&
+            v->prev != nullptr && (v->prev->group->surface == "に" || v->prev->group->surface == "へ") && v->prev->prev != nullptr &&
+            v->prev->prev->selected >= 0 && At(v->prev->prev->Code(v->prev->prev->selected), 0) == '1' && !HabitBefore(v)) {
+            destination = ExplanatoryIru(it) ? !PeriodCueBefore(v) &&
+                                                   !dict::InClass(HDTRANS_CLASS("noun.attended-place"), v->prev->prev->group->surface)
+                                             : StateCueBefore(v);
+        }
+        const bool state = past || destination || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass(HDTRANS_CLASS("verb.result-passive"), stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
                             !v->EntryText(v->selected).ends_with("&HN@"));
@@ -4160,10 +4232,13 @@ void PluralPronoun(Flusher& f) {
         }
         const char cls = At(it->Code(it->selected), 0);
         const std::string suffix = ItemLemma(f, n, n->selected);
-        if (cls != '1' || (suffix != "들" && suffix != "등")) continue;
         const std::string lemma = ItemLemma(f, it, it->selected);
+        // 네놈 (貴様, きさま) has the plural 네놈들 whatever the suffix was read as: the ら of a cry
+        // spelled in katakana may be read as a sound (キサマラッ 네놈들, spec LEX-5654).
+        if (cls != '1' || ((suffix != "들" && suffix != "등") && lemma != "네놈")) continue;
         std::string_view target;
-        if (lemma == "나") target = "우리";
+        if (lemma == "네놈") target = "네놈들";
+        else if (lemma == "나") target = "우리";
         else if (lemma == "저") target = "저희";
         else if (lemma == "너") target = "너희";
         else if (lemma == "우리" || lemma == "저희" || lemma == "너희") target = lemma;
@@ -4485,6 +4560,14 @@ bool VerbGlossNegative(std::string_view lemma) {
     return dict::EndsWithMember(HDTRANS_CLASS("ko-verb.negated-stem-end"), stem) > 0;
 }
 
+// Whether the negative is the bare 하지 않다 after a stative Sino する noun (gram Hw), whose Korean 하다 is an
+// adjective: 不足していない 부족하지 않다, 充実してない 충실하지 않다 (spec LEX-5652).
+bool StativeNounNegative(const Item* it, std::string_view lemma) {
+    if (lemma != "하지 않다") return false;
+    const Item* p = it->prev;
+    return p != nullptr && p->selected >= 0 && Has(p->GAttr(p->selected), "Hw");
+}
+
 bool AdjectiveNegative(std::string_view lemma) {
     const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지 않다").size());
     return dict::EndsWithMember(HDTRANS_CLASS("ko-adjective.stem-end"), stem) > 0;
@@ -4521,7 +4604,7 @@ void VerbNegative(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->DirectIndex() < 0 || At(it->Code(it->selected), 0) != '7') continue;
         const std::string lemma = ItemLemma(f, it, it->selected);
-        if (!lemma.ends_with("지 않다") || StativeNegative(lemma)) continue;
+        if (!lemma.ends_with("지 않다") || StativeNegative(lemma) || StativeNounNegative(it, lemma)) continue;
         const std::string_view surface = it->group->surface;
         if (!surface.ends_with("な")) continue;
         const std::string_view stem = surface.substr(0, surface.size() - std::string_view("な").size());

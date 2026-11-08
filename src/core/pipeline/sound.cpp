@@ -504,6 +504,7 @@ private:
     bool WordAt(size_t p, size_t n) const;
     bool WordAfterCry(size_t p, size_t n) const;
     bool CryBeforeWord(const SoundMatch& m) const;
+    bool DrawnBeforeWord(size_t start, size_t end) const;
     bool NounAt(size_t p, size_t n, bool common) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
@@ -1272,6 +1273,25 @@ bool SoundText::CryBeforeWord(const SoundMatch& m) const {
     return tsu >= 2 && WordAfterCry(m.end, tsu);
 }
 
+// Whether the sound at [start, end) opens an utterance drawn out by two or more vowel kana that end in a small vowel
+// (はぁぁ, はあぁ, ふぅぅ, へぇぇ) right before a word in hiragana that the dictionary reads: a key of two kana
+// or more, or the stem of a verb or adjective that is no particle (はぁぁいいね 하아아 좋네, ふぅぅすごい); the word
+// stage would split the drawl into empty kana that join the cry to the word. Not before a lone particle or the quoting
+// って (はぁぁと, はぁぁって), nor before the ん that ends the cry (わああぁん), and not after a word, where the kana
+// draw out a particle (あたしはぁぁ; spec SND-24).
+bool SoundText::DrawnBeforeWord(size_t start, size_t end) const {
+    if (end >= rs_.size() || end < start + 3 || !UtteranceStart(start) || !IsHiraganaRune(rs_[end]) ||
+        !In(rs_[end - 1], U"ぁぃぅぇぉ") || In(rs_[end], U"ぁぃぅぇぉっゃゅょゎーん")) {
+        return false;
+    }
+    size_t vowels = 0;
+    for (size_t k = start + 1; k < end; k++) vowels += PlainVowel(f_[k]) != 0 && Lengthens(f_[k], f_[k - 1]);
+    if (vowels < 2 || std::u32string_view(rs_).substr(end).starts_with(U"って")) return false;
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(end, base, user, name, true);
+    return std::max(base, user) >= 2 || (std::max(base, user) == 1 && !In(rs_[end], kParticles));
+}
+
 // Whether the n characters at p are in the dictionary as the stem of a verb (ビビ of ビビる),
 // also when they are a name too.
 bool SoundText::VerbStemAt(size_t p, size_t n) const {
@@ -1433,10 +1453,10 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
             return chain;
         }
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") || QuotedBy(last, p) > 0 ||
-            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry ||
+            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry || (chain.size() == 1 && last.intj && !last.open && DrawnBeforeWord(last.start, last.end)) ||
             (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
-            if (cry) last.spaceAfter = true;
+            if (cry || (chain.size() == 1 && last.intj && !last.open && DrawnBeforeWord(last.start, last.end))) last.spaceAfter = true;
             last.end = end;
             if (loose && chain.size() < 2) return {};
             return chain;

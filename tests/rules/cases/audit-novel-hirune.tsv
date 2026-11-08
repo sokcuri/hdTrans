@@ -1,0 +1,22 @@
+# 규칙: LEX-5653
+rule	input	expected	kind	layer
+dict:lex:o-hirune-v	3時よ。お昼寝する？おやつにする？	has:낮잠 자?	fix	lookup
+dict:lex:o-hirune-v	午後一時。ちょっと、お昼寝しない？	has:낮잠 자지 않을래	fix	lookup
+dict:lex:o-hirune-v	ランチが終わったら、お昼寝したいの～	has:낮잠 자고 싶어	fix	lookup
+dict:lex:o-hirune-v	一体いつまでお昼寝してるつもり？	has:낮잠 자고 있을 셈	fix	lookup
+dict:lex:o-hirune-v	「いいよ、お昼寝してて」	has:낮잠 자고 있어	fix	lookup
+dict:lex:o-hirune-v	少しだけ、お昼寝しちゃいますか？	has:낮잠 자버릴까요	fix	lookup
+dict:lex:o-hirune-v	少しお昼寝するね……。	has:낮잠 잘게	fix	lookup
+dict:lex:o-hirune-v	お昼寝しよう。	has:낮잠 자자	fix	lookup
+dict:lex:o-hirune-v	お昼寝した。	has:낮잠 잤다	fix	lookup
+dict:lex:o-hirune-v	お昼寝して、	has:낮잠 자,	fix	lookup
+dict:lex:o-hirune-wo	お昼寝をしていました。	has:낮잠을 자고 있었습니다	fix	lookup
+dict:lex:o-hirune-wo	お昼寝をしよう。	has:낮잠을 자자	fix	lookup
+cx:humble-give:20	阿賀野、意見具申！お昼寝しましょ…。	has:낮잠 잡시다	fix	rewrites
+cx:humble-give:20	お昼寝しますね。	lacks:드릴게요	fix	rewrites
+dict:lex:o-hirune-n	お昼寝の時間だ。	has:낮잠의 시간	keep	lookup
+dict:lex:o-hirune-n	お昼寝中だ。	has:낮잠 중	keep	lookup
+dict:jisjk:346813	2時！。提督、昼寝しよ、昼寝！	has:낮잠 자자	keep	lookup
+dict:jisjk:346813	昼寝する。	has:낮잠 잔다	keep	lookup
+dict:jisjk:340228	昼寝をしていた。	has:낮잠을 자고 있었다	keep	lookup
+cx:humble-give:20	お散歩しましょう。	has:산책합시다	keep	rewrites

@@ -86,6 +86,8 @@ constexpr ConstraintRule kRules[] = {
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
     {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
      "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
+    {"itanda-after-te", ConstraintWord::Source, "いたんだ", ConstraintContext::AfterTe, ConstraintReject::Word,
+     "て·で 바로 뒤의 いたんだ는 한 말 있었다가 아니라 いる의 과거와 んだ라서 ていた와 같이 읽음 (食べていたんだ 먹어 있었다 → 먹고 있던 거야)", {}},
     {"iru-form-after-te", ConstraintWord::IruForm, "", ConstraintContext::AfterTe, ConstraintReject::Word,
      "て, で 바로 뒤에서 いる의 활용형과 같은 글자로 시작하는 낱말은 그 낱말이 아니라 いる의 활용 (固まっていろよ 굳어져 색이야 → 굳어져 있어라, 何していようかな 뭐해 이상한가 → 뭐하고 있을까)", {}},
     {"iru-past-after-te", ConstraintWord::Source, "い", ConstraintContext::AfterTeBeforeTa, ConstraintReject::NonVerbs,
