@@ -1,0 +1,36 @@
+# 규칙: GRM-4090, GRM-4091
+rule	input	expected	kind	layer
+dict:jisjk:92837	彼は黙ってしまった。	has:입을 다물어버렸다	fix	local
+dict:jisjk:92837	黙ってしまいました。	has:다물어버렸습니다	fix	local
+dict:jisjk:92837	「黙ってしまった」と言った。	has:「입을 다물어버렸다」	fix	local
+dict:jisjk:92837	黙ってしまうと、誰も話さない。	has:다물어버리면	fix	local
+dict:jisjk:92837	すぐに出せば、親には黙っといてやるよ。	lacks:다물고 두어	fix	local
+dict:jisjk:92837	このことは黙っておいた。	has:다물어 두었다	fix	local
+dict:jisjk:92837	黙っておけ。	has:다물어 두어라	fix	local
+dict:jisjk:92837	しばらく黙ってみる。	has:다물어 본다	fix	local
+dict:jisjk:92837	黙ってあげる。	has:다물어 준다	fix	local
+dict:jisjk:92837	黙っていただけますか。	has:다물어 주시겠습니까	keep	local
+dict:jisjk:92837	黙っててくれ。	has:다물고 있어 줘	keep	local
+dict:jisjk:92837	黙って聞いていた。	has:잠자코 듣고 있었다	keep	local
+dict:jisjk:92837	黙って見ていた。	has:잠자코 보고 있었다	keep	local
+dict:jisjk:92837	黙って頷いた。	has:말없이 끄덕였다	keep	local
+dict:jisjk:374730	ようやく家に入れる、と安心してしまったのが悪かったのだろうか。	has:안심해버렸던	fix	local
+dict:jisjk:374730	安心しておく。	has:안심해 둔다	fix	local
+dict:jisjk:374730	安心して眠った。	has:안심하고 잤다	keep	local
+dict:jisjk:374730	安心していた。	has:안심하고 있었다	keep	local
+dict:jisjk:95081	振り返ってしまった。	has:돌아봐버렸다	fix	local
+dict:jisjk:95081	振り返ってくれ。	has:돌아봐 줘	fix	local
+dict:jisjk:95081	振り返っていた。	has:보고 있었다	keep	local
+conjugation:verb-family-dam	心を込める。	마음을 담는다.	fix	conjugation
+conjugation:verb-family-dam	瓶に詰める。	병에 담는다.	fix	conjugation
+conjugation:verb-family-dam	思いを込める歌。	마음을 담은 노래.	keep	conjugation
+conjugation:verb-family-dam	心を込めて作った料理。	마음을 담아 만든 요리.	keep	conjugation
+conjugation:verb-family-dam	心を込めた手紙を書く。	마음을 담은 편지를 쓴다.	keep	conjugation
+conjugation:verb-family-dam	愛を込めます。	사랑을 담습니다.	keep	conjugation
+conjugation:verb-family-dam	願いを込めよう。	소원을 담자.	keep	conjugation
+conjugation:verb-family-dam	心を込めない。	has:담지 않는다	keep	conjugation
+conjugation:verb-family-meogeum	目に涙をうかべる。	눈에 눈물을 머금는다.	fix	conjugation
+conjugation:verb-family-meogeum	涙をうかべた。	has:머금었다	keep	conjugation
+conjugation:verb-family-meogeum	涙をうかべる少女。	눈물을 머금은 소녀.	keep	conjugation
+dict:jisjk:92837	黙ってみんなを見た。	has:모두를 보았다	keep	local
+dict:jisjk:92837	黙ってみた。	has:다물어 보았다	fix	local
