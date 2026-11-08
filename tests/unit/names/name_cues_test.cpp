@@ -159,6 +159,20 @@ HD_TEST(names_name_cues) {
     }
 }
 
+HD_TEST(names_status_field_values) {
+    // A value is the whole run up to a space: a number, a level or a grade (spec LEX-5175).
+    for (const std::string_view v : {"35", "　３５", "7/10", "1,200", "50％", "+5", "Lv.3", "S", "Ｂ+", "SS", "A-", "∞", "35　敏捷：52"}) {
+        HD_CHECK(names::StatusValueAt(v));
+    }
+    for (const std::string_view v : {"", "……", "OK", "！？", "あと10分だよ。", "無し", "SSSS", "3時に"}) {
+        HD_CHECK(!names::StatusValueAt(v));
+    }
+    HD_CHECK(names::StatusFieldAt("：35"));
+    HD_CHECK(names::StatusFieldAt(":　Ｂ"));
+    HD_CHECK(!names::StatusFieldAt("：あと10分だよ。"));
+    HD_CHECK(!names::StatusFieldAt("：……"));
+}
+
 HD_TEST(names_caption_reading_cue_passage) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
@@ -238,6 +252,17 @@ HD_TEST(names_caption_reading_cue_passage) {
     HD_CHECK(addedLookup.cued.contains("高峰"));
     HD_CHECK(!addedLookup.cued.contains("恭"));
     HD_CHECK(lexicalDoc->cued.contains("高峰"));
+    // A common word (高峰 고봉) that one speaker label names, in a document that also writes it in its
+    // common sense, is the name only where it stands where a person stands (spec LEX-5175).
+    const std::vector<std::string> commonLines = {"（高峰）はい", "高峰の下で休んだ。"};
+    const auto commonDoc = pipeline::BuildDocument(*snap, commonLines);
+    HD_REQUIRE(commonDoc != nullptr);
+    HD_CHECK(!commonDoc->cued.contains("高峰"));
+    HD_CHECK(commonDoc->slotted.contains("高峰"));
+    const auto labelled = pipeline::LookupOf(*commonDoc, pipeline::ReadLine(*commonDoc, "（高峰）はい"));
+    HD_CHECK(labelled.cued.contains("高峰"));
+    const auto peak = pipeline::LookupOf(*commonDoc, pipeline::ReadLine(*commonDoc, "高峰の下で休んだ。"));
+    HD_CHECK(!peak.cued.contains("高峰"));
     HD_CHECK(!lexicalDoc->cued.contains("恭"));
 }
 

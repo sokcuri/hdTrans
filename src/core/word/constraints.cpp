@@ -613,7 +613,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return false;
     }
     case ConstraintContext::NotCommonSense:
-        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false);
+        // An adnominal before it makes it the word too (大きな樹, 一本の樹; spec LEX-5175).
+        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false) &&
+               (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead) == 0 ||
+                dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead) > 0);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
         return false;
     case ConstraintContext::BeforeHiragana:
@@ -799,6 +802,11 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
                    (c.source.size() > source.size() ||
                     (c.source.size() == source.size() && InflectsAfter(after, c.codes->part.ClassDigit() == '8')));
         }) ||
+        // Nor in a longer kanji word that starts with it (光子 미츠코 beside 光ちゃん; spec LEX-5175).
+        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+            return c.codes != nullptr && c.source.size() > source.size() && c.source.starts_with(source) &&
+                   text::IsKanji(text::DecodeRune(c.source.substr(source.size())).cp);
+        }) ||
         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
             return (PersonNoun(*list[k].codes) && !NameSense(*list[k].codes)) || (list[k].user != nullptr && !list[k].user->nameLayer);
         });
@@ -823,7 +831,8 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
         if (own != same.end()) return {list[*own].codes->asPlain, list[*own].target, list[*own].id};
     }
     const auto fits = [&](const dict::Codes* codes, std::string_view target) {
-        return codes != nullptr && codes->sem.HasPrefix("QPN") && !TranslatedName(list, same, source, target) &&
+        // A person row whose codes put VHn first (海江田 카이에다 VHnQPN) is a person sense too.
+        return codes != nullptr && (codes->sem.HasPrefix("QPN") || codes->sem.HasCode("QPN")) && !TranslatedName(list, same, source, target) &&
                (kana ? text::SameSound(target, reading) : text::JapaneseSpelling(target));
     };
     // A person sense among the candidates comes first (佐渡 사도); then a person reading of the name

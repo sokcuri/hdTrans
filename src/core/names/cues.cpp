@@ -13,6 +13,7 @@
 #include "core/names/chars.h"
 #include "core/names/labels.h"
 #include "core/names/registry.h"
+#include "core/names/name_cues.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -195,7 +196,9 @@ bool BracketName(std::string_view line, std::string& label) {
             q += r.size;
             n++;
         }
-        if (n >= 1 && n <= 16 && line.substr(q).starts_with("】")) {
+        // A field of a status window, a value after the bracket (【力】　16, 【MP】 7), names no speaker
+        // (spec LEX-5175).
+        if (n >= 1 && n <= 16 && line.substr(q).starts_with("】") && !StatusValueAt(line.substr(q + std::string_view("】").size()))) {
             label = std::string(line.substr(start, q - start));
             return true;
         }
@@ -217,6 +220,22 @@ bool BracketName(std::string_view line, std::string& label) {
     return false;
 }
 
+// Whether line opens with a bracketed label of one to sixteen characters (【力】, 【ジョブ】) and text after it
+// on the same line that opens no quote, set in rest (16, 無し, 傭兵見習い).
+bool BracketField(std::string_view line, std::string_view& rest) {
+    const std::size_t p = SkipSpace(line, 0);
+    if (!line.substr(p).starts_with("【")) return false;
+    const std::size_t close = line.find("】", p);
+    if (close == std::string_view::npos) return false;
+    const std::size_t n = RuneCount(line.substr(p + std::string_view("【").size(), close - p - std::string_view("【").size()));
+    if (n < 1 || n > 16) return false;
+    rest = line.substr(close + std::string_view("】").size());
+    while (rest.starts_with(" ") || rest.starts_with("　") || rest.starts_with("\t")) rest.remove_prefix(rest.starts_with("　") ? std::string_view("　").size() : 1);
+    while (!rest.empty() && (rest.back() == '\r' || rest.back() == ' ')) rest.remove_suffix(1);
+    return !rest.empty() && !rest.starts_with("「") && !rest.starts_with("『");
+}
+
+
 // ^\s*([^\s「」『』【】\[\]（）：:。、！？!?…]{1,16})\s*(?:[「『]|[:：])
 bool QuoteName(std::string_view line, std::string& label) {
     static constexpr std::u32string_view kExcluded = U"「」『』【】[]（）：:。、！？!?…";
@@ -233,6 +252,8 @@ bool QuoteName(std::string_view line, std::string& label) {
     if (after >= line.size()) return false;
     const std::string_view rest = line.substr(after);
     if (!(rest.starts_with("「") || rest.starts_with("『") || rest.starts_with(":") || rest.starts_with("："))) return false;
+    // A field of a status window (力：35, レベル：12) names no speaker (spec LEX-5175).
+    if (StatusFieldAt(rest)) return false;
     // A speaker's quote ends the line; words after its closing bracket make the bracket a
     // title or ruby, not speech (精鋭「第八駆逐隊」、出撃せよ, 全「すべ」て). Punctuation, spaces
     // and an aside in parentheses may follow (田中「おはよう」。, 「…」（笑）).
@@ -555,6 +576,55 @@ std::vector<std::string> SpeakerCueLabels(std::string_view text) {
 }  // namespace internal
 
 std::vector<std::string> SpeakerCues(std::string_view text) { return internal::SpeakerCueLabels(text); }
+
+// Whether the text of a field reads as speech: kana only or a sentence mark (おはよう, うん, 行こう！), not a
+// value word of a status window (無し, カイト, 傭兵見習い).
+bool SpeechField(std::string_view text) {
+    bool hiragana = true;
+    for (std::size_t i = 0; i < text.size();) {
+        const text::Rune r = RuneAt(text, i);
+        if (InRunes(r.cp, "。！？!?…")) return true;
+        if (!IsHiragana(r.cp) && r.cp != U'ー' && r.cp != U'、' && r.cp != U'～') hiragana = false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return hiragana;
+}
+
+bool Registry::BracketField(std::string_view line, bool& value, std::string& name, bool& speech) {
+    std::string_view rest;
+    if (::hdTrans::names::BracketField(line, rest)) {
+        value = StatusValueAt(rest);
+        speech = !value && SpeechField(rest);
+        const std::size_t open = line.find("【");
+        const std::size_t close = line.find("】");
+        name = std::string(line.substr(open + std::string_view("【").size(), close - open - std::string_view("【").size()));
+        return true;
+    }
+    // A label of one to sixteen characters and a colon with text after it that opens no quote (名前：カイト,
+    // 力：35) is a field of a status window in the same way.
+    const std::size_t p = SkipSpace(line, 0);
+    std::size_t colon = std::string_view::npos;
+    for (const std::string_view c : {std::string_view("："), std::string_view(":")}) {
+        const std::size_t at = line.find(c, p);
+        if (at != std::string_view::npos && at < colon) colon = at;
+    }
+    if (colon == std::string_view::npos || colon == p) return false;
+    const std::string_view label = line.substr(p, colon - p);
+    // The marks are searched as whole characters, not as bytes of a UTF-8 set (名前, ジョブ hold bytes of 「).
+    if (RuneCount(label) > 16) return false;
+    for (const std::string_view mark : {" ", "　", "「", "『", "【"}) {
+        if (label.find(mark) != std::string_view::npos) return false;
+    }
+    std::string_view after = line.substr(colon);
+    const std::size_t width = after.starts_with("：") ? std::string_view("：").size() : 1;
+    std::string_view text = after.substr(width);
+    while (text.starts_with(" ") || text.starts_with("　")) text.remove_prefix(text.starts_with("　") ? std::string_view("　").size() : 1);
+    if (text.empty() || text.starts_with("「") || text.starts_with("『")) return false;
+    value = StatusFieldAt(after);
+    speech = !value && SpeechField(text);
+    name = std::string(label);
+    return true;
+}
 
 std::string Registry::Label(std::string_view line, bool& script) {
     script = false;

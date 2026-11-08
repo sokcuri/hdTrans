@@ -66,6 +66,11 @@ struct DocumentContext {
     std::string historical;            // JP KR POS rows
     dict::KeySet persons_;             // the persons of the document, for the person places
     dict::KeySet cued;                 // the keys a strong cue of the document names (names::NameCues)
+    // The common words the document names on too little evidence: names only where they stand where a
+    // person stands (names::PersonSlotAt; spec LEX-5175).
+    dict::KeySet slotted;
+    // The common words the document names, cued or accepted: the word as the field of a status window.
+    dict::KeySet common;
     dict::KeySet accepted;             // the accepted names of the registry
     dict::KeySet named;                // the accepted names and the surfaces shown to be names
     std::map<std::string, int, std::less<>> prose;  // Registry::ProseKatakana
@@ -102,6 +107,7 @@ struct LineFacts {
     bool verse = false;                    // the line runs on into the next line
     std::vector<std::string> prose;        // names::ProseRuns of the line
     std::vector<std::string> cued;         // the keys a cue of the line names, sorted
+    std::vector<std::string> uncued;       // the keys the line writes as the word only (a status field)
 };
 
 // The lookups of a line: its plain entries, the names it confirms and its person places.

@@ -16,7 +16,7 @@ lookup:iku-ccha	Lv.62 ミク氏「行っちゃう」HP:6990/9999 MP:989	Lv.62 �
 lookup:iku-ccha	あれ、行っちゃった……えっと……	어라, 가버린……음……	keep	lookup
 lookup:iku-ccha	ありゃりゃ、行っちゃったや。しずるんってば、ホント気むずかしいねー	아랴레바, 가버렸다야. 해 질질 끄는 은 정말, 진짜 까다롭네~	keep	lookup
 lookup:iku-ccha	（小声）行っちゃうですわ	(작은 목소리) 가버려요	keep	lookup
-lookup:iku-ccha	「きゃー♪蒼、ラノベに行っちゃうじゃん！	「꺄아♪창, 라노벨에 가버리잖아!	keep	lookup
+lookup:iku-ccha	「きゃー♪蒼、ラノベに行っちゃうじゃん！	has:라노벨에 가버리잖아!	keep	lookup
 lookup:iku-ccha	行っちゃいけないって、お父様が	가면 안 된다고, 아버님이	keep	lookup
 lookup:iku-ccha	「むー\n行っちゃうでしょ」	「무우\n가버리겠지」	keep	lookup
 lookup:iku-ccha	「べ、別にお姉ちゃん氏、夢に行っちゃうですわ～」	「따, 딱히 언니 씨, 꿈에 가버려요~」	keep	lookup
