@@ -4477,7 +4477,8 @@ void InitialSoundRule(Flusher& f) {
             const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
             // A mask stands for a letter or a digit (○年 ○년).
             const bool mask = std::u32string_view(U"○●◯◎×✕＊*■□△▲◇◆").find(last) != std::u32string_view::npos;
-            if (!particle && (text::IsLetter(last) || text::IsDigit(last) || mask)) continue;
+            // 〇 is a numeral too, though no letter or decimal digit (二〇二〇年 2020년).
+            if (!particle && (text::IsLetter(last) || text::IsDigit(last) || mask || last == U'〇')) continue;
         }
         if (CounterAfterSpacedNumber(f, it)) continue;
         const std::string target(it->EntryText(it->selected));

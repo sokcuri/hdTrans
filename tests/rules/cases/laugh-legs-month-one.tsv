@@ -1,4 +1,4 @@
-# 규칙: LEX-5790, NUM-32
+# 규칙: LEX-5790, NUM-32, LEX-5656
 rule	input	expected	kind	layer
 sense:笑う	その時、魅音が鋭い目つきで笑いながら言った。	has:눈초리로 웃으면서	fix	senses
 sense:笑う	足が笑っている	has:다리가 후들거리고	fix	senses
@@ -19,3 +19,27 @@ dict:jisjk:267062	今年の一月は寒い	has:올해 1월은	fix	local
 dict:jisjk:267062	一月ほど休んだ。	has:한 달	keep	local
 dict:jisjk:267062	もう一月になる	has:한 달이	keep	local
 dict:jisjk:267062	一月後に戻る	has:한 달 후	keep	local
+lookup:date-number	一月二日	1월 2일	fix	lookup
+lookup:date-number	一月十日	1월 10일	fix	lookup
+lookup:date-number	一月二十日	1월 20일	fix	lookup
+lookup:date-number	七月七日	7월 7일	fix	lookup
+lookup:date-number	三月三日	3월 3일	fix	lookup
+lookup:date-number	十月十日	10월 10일	fix	lookup
+lookup:date-number	九月九日	9월 9일	fix	lookup
+lookup:date-number	八月十五日	8월 15일	fix	lookup
+lookup:date-number	二〇二〇年一月一日	2020년 1월 1일	fix	lookup
+lookup:date-number	二〇二〇年	2020년	fix	lookup
+lookup:date-number	2021年三月十日	2021년 3월 10일	fix	lookup
+lookup:date-number	平成三十一年四月三十日	헤이세이 31년 4월 30일	fix	lookup
+lookup:date-number	四月一日に会った	has:4월 1일에	fix	lookup
+lookup:date-number	四月一日くん	has:와타누키	keep	lookup
+lookup:date-number	四月一日さんが来た	has:와타누키	keep	lookup
+lookup:date-number	三日間	3일간	keep	lookup
+lookup:date-number	十日ほど	열흘 정도	keep	lookup
+lookup:date-number	七日目	이레째	keep	lookup
+lookup:date-number	二十日ぶり	has:20일	keep	lookup
+cx:audit-novel-2:51	一月もかかった	has:한 달도	fix	rewrites
+cx:audit-novel-2:50	一月ぶりに会った	has:한 달	keep	rewrites
+cx:audit-novel-2:80	あと七月で卒業だ	has:일곱 달	fix	rewrites
+cx:audit-novel-2:51	九月が経った	has:아홉 달이	fix	rewrites
+cx:audit-novel-2:50	十月ぶりに会った	has:열 달 만에	fix	rewrites

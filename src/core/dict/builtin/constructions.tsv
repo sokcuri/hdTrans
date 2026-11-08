@@ -3710,34 +3710,10 @@ cx:audit-novel-2:22	LEX-5656	&&3 S+0== "では" S-1== "彼自身" P+1== "4**"	se
 cx:audit-novel-2:24	LEX-5656	&&3 S+0== "では" S-1== "彼女自身" P+1== "4**"	set-target@-1 "그녀 스스" set-target "로는"	彼女自身では気づかない 그녀 스스로는 눈치채지 못한다
 cx:audit-novel-2:30	LEX-5656	&&3 S+0== "ワザ" S+1== "とか" F+1== "sentence-end"	set-target "일부러" set-target@+1 "야"	ワザとか？ 일부러야?
 cx:audit-novel-2:42	LEX-5656	&&4 S+0== "ね" F+0== "quote-end" S-1== "と、" S-2== "ワザ"	set-target " 말이야"	ワザと、ね。 일부러, 말이야
-cx:audit-novel-2:50	LEX-5656	&&2 S+0== "二月" S+1== "ぶり"	set-target "두 달" set-target@+1 " 만"	二月ぶりに会った 두 달 만에 만났다
-cx:audit-novel-2:51	LEX-5656	&&3 S+0== "二月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "두 달"	二月が経った 두 달이 지났다
-cx:audit-novel-2:52	LEX-5656	&&2 S+0== "三月" S+1== "ぶり"	set-target "석 달" set-target@+1 " 만"	三月ぶりに会った 석 달 만에 만났다
-cx:audit-novel-2:53	LEX-5656	&&3 S+0== "三月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "석 달"	三月が経った 석 달이 지났다
-cx:audit-novel-2:54	LEX-5656	&&2 S+0== "四月" S+1== "ぶり"	set-target "넉 달" set-target@+1 " 만"	四月ぶりに会った 넉 달 만에 만났다
-cx:audit-novel-2:55	LEX-5656	&&3 S+0== "四月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "넉 달"	四月が経った 넉 달이 지났다
-cx:audit-novel-2:56	LEX-5656	&&2 S+0== "五月" S+1== "ぶり"	set-target "다섯 달" set-target@+1 " 만"	五月ぶりに会った 다섯 달 만에 만났다
-cx:audit-novel-2:57	LEX-5656	&&3 S+0== "五月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "다섯 달"	五月が経った 다섯 달이 지났다
-cx:audit-novel-2:58	LEX-5656	&&2 S+0== "六月" S+1== "ぶり"	set-target "여섯 달" set-target@+1 " 만"	六月ぶりに会った 여섯 달 만에 만났다
-cx:audit-novel-2:59	LEX-5656	&&3 S+0== "六月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "여섯 달"	六月が経った 여섯 달이 지났다
+//~ month-span	1월=한 2월=두 3월=석 4월=넉 5월=다섯 6월=여섯 7월=일곱 8월=여덟 9월=아홉 10월=열	The native count of months a kanji month word counts as a span, from the month name it reads (三月 3월 → 석, then 달: 석 달).
+cx:audit-novel-2:50	LEX-5656	&&4 S+0== @Lnumeral.lead S+0== "R月" ||10 D+0== "1월" D+0== "2월" D+0== "3월" D+0== "4월" D+0== "5월" D+0== "6월" D+0== "7월" D+0== "8월" D+0== "9월" D+0== "10월" S+1== "ぶり"	map-target @month-span append-target " 달" set-target@+1 " 만"	三月ぶりに会った 석 달 만에 만났다
+cx:audit-novel-2:51	LEX-5656	&&5 S+0== @Lnumeral.lead S+0== "R月" ||10 D+0== "1월" D+0== "2월" D+0== "3월" D+0== "4월" D+0== "5월" D+0== "6월" D+0== "7월" D+0== "8월" D+0== "9월" D+0== "10월" ||2 S+1== "が" S+1== "も" ||4 S+2== "L経" S+2== "Lたっ" S+2== "Lたち" S+2== "Lかか"	map-target @month-span append-target " 달"	三月が経った 석 달이 지났다, 一月もかかった 한 달도 걸렸다
+cx:audit-novel-2:60	LEX-5656	&&4 S+0== @Lnumeral.lead S+0== "R月" ||10 D+0== "1월" D+0== "2월" D+0== "3월" D+0== "4월" D+0== "5월" D+0== "6월" D+0== "7월" D+0== "8월" D+0== "9월" D+0== "10월" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	map-target @month-span append-target " 달"	三月ほど入院した 석 달만큼 입원했다
+cx:audit-novel-2:80	LEX-5656	&&4 S+0== @Lnumeral.lead S+0== "R月" ||10 D+0== "1월" D+0== "2월" D+0== "3월" D+0== "4월" D+0== "5월" D+0== "6월" D+0== "7월" D+0== "8월" D+0== "9월" D+0== "10월" S-1== "あと"	map-target @month-span append-target " 달"	あと三月で卒業だ 앞으로 석 달이면 졸업이다
 cx:audit-novel-2:70	LEX-5656	&&2 ||3 S+0== "胡麻をす" S+0== "ゴマをす" S+0== "ごまをす" ||2 ||4 S-2== "すり鉢" S-2== "擂り鉢" S-2== "すりこぎ" S-2== "擂粉木" ||4 S+1== "和え物" S+2== "和え物" S+1== "L和え" S+2== "L和え"	set-target "깨를 &KB@"	すり鉢で胡麻をすった 절구로 깨를 갈았다
 cx:audit-novel-2:72	LEX-5656	&&3 S+0== "糞" F+0== "opens-line" ||3 F+0== "sentence-end" F+0== "quote-end" F+0== "utterance-end"	set-target "젠장"	糞！ 젠장!
-cx:audit-novel-2:60	LEX-5656	&&2 S+0== "二月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "두 달"	二月ほど入院した 두 달만큼 입원했다
-cx:audit-novel-2:62	LEX-5656	&&2 S+0== "三月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "석 달"	三月ほど入院した 석 달만큼 입원했다
-cx:audit-novel-2:64	LEX-5656	&&2 S+0== "四月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "넉 달"	四月ほど入院した 넉 달만큼 입원했다
-cx:audit-novel-2:66	LEX-5656	&&2 S+0== "五月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "다섯 달"	五月ほど入院した 다섯 달만큼 입원했다
-cx:audit-novel-2:68	LEX-5656	&&2 S+0== "六月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "여섯 달"	六月ほど入院した 여섯 달만큼 입원했다
-cx:audit-novel-2:80	LEX-5656	&&2 S+0== "二月" S-1== "あと"	set-target "두 달"	あと二月で卒業だ 앞으로 두 달이면 졸업이다
-cx:audit-novel-2:81	LEX-5656	&&2 S+0== "三月" S-1== "あと"	set-target "석 달"	あと三月で卒業だ 앞으로 석 달이면 졸업이다
-cx:audit-novel-2:82	LEX-5656	&&2 S+0== "四月" S-1== "あと"	set-target "넉 달"	あと四月で卒業だ 앞으로 넉 달이면 졸업이다
-cx:audit-novel-2:83	LEX-5656	&&2 S+0== "五月" S-1== "あと"	set-target "다섯 달"	あと五月で卒業だ 앞으로 다섯 달이면 졸업이다
-cx:audit-novel-2:84	LEX-5656	&&2 S+0== "六月" S-1== "あと"	set-target "여섯 달"	あと六月で卒業だ 앞으로 여섯 달이면 졸업이다
-cx:audit-novel-2:90	LEX-5656	&&2 S+0== "二日" S-1== "R月"	set-target "2일"	七月二日 7월 2일
-cx:audit-novel-2:92	LEX-5656	&&2 S+0== "四日" S-1== "R月"	set-target "4일"	七月四日 7월 4일
-cx:audit-novel-2:93	LEX-5656	&&2 S+0== "五日" S-1== "R月"	set-target "5일"	七月五日 7월 5일
-cx:audit-novel-2:94	LEX-5656	&&2 S+0== "六日" S-1== "R月"	set-target "6일"	七月六日 7월 6일
-cx:audit-novel-2:95	LEX-5656	&&2 S+0== "七日" S-1== "R月"	set-target "7일"	七月七日 7월 7일
-cx:audit-novel-2:96	LEX-5656	&&2 S+0== "八日" S-1== "R月"	set-target "8일"	七月八日 7월 8일
-cx:audit-novel-2:97	LEX-5656	&&2 S+0== "九日" S-1== "R月"	set-target "9일"	七月九日 7월 9일
-cx:audit-novel-2:98	LEX-5656	&&2 S+0== "十日" S-1== "R月"	set-target "10일"	七月十日 7월 10일
-cx:audit-novel-2:100	LEX-5656	&&2 S+0== "一月" S+1== "R日"	set-target "1월"	一月一日 1월 1일

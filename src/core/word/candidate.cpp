@@ -1361,6 +1361,33 @@ namespace {
 // Whether a unit that numbers name (counter.unit-abbrev) follows the number of size bytes at the
 // start of text, after more kanji digits written on without 十 (二水戦 2수전, 三一駆 31구): the
 // number is read as digits then, and those digits read by place value.
+// Whether the kanji number of size bytes at the start of text, at cursor of full, is part of a
+// date: a month before a day or after a year (七月七日, 二〇二〇年一月), or a day after a month
+// (一月二日). Its digits are read then, not a word that spells it (七月 칠월, 七日 이레, 二日 이틀).
+// A date before an honorific of honorific.candidate or a speaker label is a name (四月一日くん).
+bool DateNumber(std::string_view full, int cursor, std::string_view text, std::size_t size) {
+    constexpr std::string_view kMonth = "月", kDay = "日", kYear = "年", kTen = "十";
+    // Only a kanji number: digits already part from a word the dictionary spells (9月23日).
+    if (size > text.size() || !(IsNumeral(FirstChar(text)) || FirstChar(text) == kTen)) return false;
+    const std::string_view head = full.substr(0, static_cast<std::size_t>(cursor));
+    std::string_view rest = text.substr(size);
+    const auto named = [](std::string_view after) {
+        return dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0 || after.starts_with("：") ||
+               after.starts_with(":") || after.starts_with("「");
+    };
+    if (rest.starts_with(kDay)) return head.ends_with(kMonth) && !named(rest.substr(kDay.size()));
+    if (!rest.starts_with(kMonth)) return false;
+    rest.remove_prefix(kMonth.size());
+    std::size_t digits = 0;
+    while (IsNumeral(FirstChar(rest)) || FirstChar(rest) == kTen) {
+        rest.remove_prefix(FirstChar(rest).size());
+        digits++;
+    }
+    const bool day = digits > 0 && rest.starts_with(kDay);
+    if (day && named(rest.substr(kDay.size()))) return false;
+    return day || head.ends_with(kYear);
+}
+
 bool UnitAfterNumber(std::string_view text, std::size_t size) {
     if (size > text.size()) return false;
     std::string_view rest = text.substr(size);
@@ -2255,7 +2282,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         // Before a unit name the kanji number is its digits, not a word that starts with it or
         // the Sino-Korean reading of 一 (一航戦 1항전, 二水戦 2수전).
-        if (UnitAfterNumber(text, numeric->source.size())) {
+        if (UnitAfterNumber(text, numeric->source.size()) || DateNumber(full, cursor, text, numeric->source.size())) {
             if (text::RuneCount(numeric->source) == 1 && static_cast<unsigned char>(numeric->source[0]) >= 0x80) {
                 numeric = LookupFallbackRecord(token, numeric->source, 12, 15, true);
             }
