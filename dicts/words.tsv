@@ -804,7 +804,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ちん入	침입&AV@	M429			GN				llm		ちんにゅう	w:796
 つい	불과	E311			GN							w:26621
 つかまり立ち	붙잡고 서기	N110		Hd	GN				llm		つかまりだち	w:797
-つかみ取	싸&FK@	M428			GN						つかみとる	w:798
 つがい目	이음매	N110			GN				llm		つがいめ	w:799
 つきもの	으레 따르는 것	N110			GN				llm			w:800
 つき倒	밀&AO@	M423			GN						つきたおす	w:801
@@ -12066,7 +12065,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 併立	병립	N110		Hd	GN				llm		へいりつ	w:12017
 併立	병립&AV@	M429			GN				llm		へいりつ	w:12018
 使いすぎ	과용	N110			GN				llm		つかいすぎ	w:12019
-使いどころ	쓸데	N110			GN						つかいどころ	w:12020
+使いどころ	쓰임새	N110			GN						つかいどころ	w:12020
 使いわけ	구분 사용	N110		Hd	GN				llm		つかいわけ	w:12021
 使いをや	사람을 보&A6@	M428			GN				llm			w:12022
 使い回し	돌려쓰기	N110			GN				llm			w:12023
@@ -15605,7 +15604,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 岩鷓鴣	추카	N110			GN						いわしゃこ	w:15523
 岱山	태산	N110	VPl		GN				llm		たいざん	w:15524
 岸べ	물가	N110	VPl		GN				llm		きしべ	w:15525
-峠道	잿길	N110			GN						とうげみち	w:15526
+峠道	고갯길	N110			GN						とうげみち	w:15526
 島しょ	도서	N110			GN						とうしょ	w:15527
 島じま	섬들	N110	VPl		GN				llm		しまじま	w:15528
 島寒菊	감국	N110			GN						しまかんぎく	w:15529
@@ -18098,7 +18097,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 望楼	망루	N110			GN						ぼうろう	w:18017
 望遠魚	기간투라속	N110			GN						ぼうえんぎょ	w:18018
 朝っ腹	이른 아침	N110	UMe	Tm	GN				llm		あさっぱら	w:18019
-朝めし	아침	N110			GN						あさめし	w:18020
+朝めし	아침밥	N110			GN						あさめし	w:18020
 朝メシ	아침	N110			GN						あさめし	w:18021
 朝一番	아침 일찍	N110	UMe	Tm	GN				llm		あさいちばん	w:18022
 朝令暮改	조령모개	N110		Hd	GN				llm		ちょうれいぼかい	w:18023

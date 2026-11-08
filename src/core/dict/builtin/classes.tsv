@@ -5860,6 +5860,8 @@ pronoun.first-person-genitive	ぼく
 pronoun.first-person-genitive	おれ
 pronoun.first-person-genitive	ボク
 pronoun.first-person-genitive	オレ
+pronoun.first-person-genitive	おいら
+pronoun.first-person-genitive	オイラ
 
 pronoun.hiragana-end	これ
 pronoun.hiragana-end	それ
@@ -5901,6 +5903,8 @@ pronoun.humble-first-person	僕ら
 pronoun.humble-first-person	私のこと
 pronoun.humble-first-person	わたしのこと
 pronoun.humble-first-person	僕のこと
+pronoun.humble-first-person	おいら
+pronoun.humble-first-person	オイラ
 
 pronoun.second-person-genitive	君
 pronoun.second-person-genitive	お前

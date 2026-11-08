@@ -72,7 +72,7 @@ cx:na-observed:30	うれしいこと言ってくれるな かんぱーい	기쁜
 cx:na-observed:30	私のことを可愛いとかやんちゃとか、好きなように言ってくれるな	나를 귀엽다든가 응석이라든지, 좋아하는 대로 말해 주는구나	fix	rewrites
 cx:na-observed:30	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	keep	rewrites
 cx:na-observed:30	水野家のためと思ってくれるな	미즈노가 때문에라고 생각하지 말아 줘	keep	rewrites
-cx:na-observed:35	むちゃくちゃ言うな この人	지독하게 말하는구나 이 사람	fix	rewrites
+cx:na-observed:35	むちゃくちゃ言うな この人	has:말도 안 되는 소리를 하는구나	fix	rewrites
 cx:na-observed:35	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	fix	rewrites
 cx:na-observed:35	心配するな 俺がいる	걱정하지 마 내가 있다	keep	rewrites
 segment:na-space	あっ 電話 借りるな ア… どうぞ	앗 전화 빌린데 아… 받아 주세요	keep	segment

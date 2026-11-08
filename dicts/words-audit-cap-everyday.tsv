@@ -1,0 +1,6 @@
+#! layer=words
+# 일상 말의 기본 뜻 (LEX-5603)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+見守り	돌봄	N110			GN					10	みまもり	audit-cap-everyday:1
+解答者	도전자	N110	VHn		GN						かいとうしゃ	audit-cap-everyday:2
+ボツ	퇴짜	N110			GN						ぼつ	audit-cap-everyday:3
