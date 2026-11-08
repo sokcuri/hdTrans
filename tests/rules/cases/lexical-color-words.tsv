@@ -110,3 +110,18 @@ cx:color-no:48	赤毛碧眼	has:붉은 머리에 푸른 눈	fix	rewrites
 cx:color-no:48	短い黒髪に、高くも低くもない平均的な身長。	has:짧은 흑발에,	keep	rewrites
 cx:color-no:48	金髪碧眼の少年	!rule:cx:color-no:48	keep	rewrites
 cx:color-no:42	黒髪赤眼の男	has:흑발적안의 남자	fix	rewrites
+cx:color-no:16	碧の瞳	has:푸른 눈동자	fix	rewrites
+cx:color-no:16	蒼の瞳	has:푸른 눈동자	fix	rewrites
+cx:color-no:16	蒼の騎士	!rule:cx:color-no:16	keep	rewrites
+cx:color-no:17	翠の髪	has:초록빛 머리카락	fix	rewrites
+cx:color-no:17	翠の言葉	!rule:cx:color-no:17	keep	rewrites
+cx:color-no:18	藍の着物	has:쪽빛 기모노	fix	rewrites
+cx:color-no:18	藍の染料	!rule:cx:color-no:18	keep	rewrites
+cx:color-no:19	あかの髪	has:빨간 머리카락	fix	rewrites
+cx:color-no:19	あかの他人	!rule:cx:color-no:19	keep	rewrites
+cx:color-no:49	空が紅に染まる。	has:붉게 물든다	fix	rewrites
+cx:color-no:49	頬を紅に染めて	has:붉게 물들여	fix	rewrites
+cx:color-no:49	紅の唇	!rule:cx:color-no:49	keep	rewrites
+cx:color-no:78	赤みがかった髪	has:붉은빛이 도는 머리카락	fix	rewrites
+cx:color-no:78	赤みがかっていた	!rule:cx:color-no:78	keep	rewrites
+dict:w:35031	赤みがかった髪	has:붉은빛이	fix	defaults

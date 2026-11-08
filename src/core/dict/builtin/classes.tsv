@@ -12777,3 +12777,29 @@ ending.cute-sound	ニャ
 ending.cute-sound	ミャ
 ending.cute-sound	ピョ
 ending.cute-sound	もん
+//= noun.colored-thing	Things a bare literary color kanji (碧, 蒼, 翠, 藍) before の paints, as noun.colored-part does (藍の着物 쪽빛 기모노, 碧の空 푸른 하늘), not abstract words (翠の言葉; spec LEX-5201).
+noun.colored-thing	着物
+noun.colored-thing	衣
+noun.colored-thing	衣装
+noun.colored-thing	ドレス
+noun.colored-thing	服
+noun.colored-thing	空
+noun.colored-thing	海
+noun.colored-thing	湖
+noun.colored-thing	水
+noun.colored-thing	炎
+noun.colored-thing	光
+noun.colored-thing	宝石
+noun.colored-thing	石
+noun.colored-thing	花
+noun.colored-thing	葉
+noun.colored-thing	布
+noun.colored-thing	旗
+noun.colored-thing	鎧
+noun.colored-thing	マント
+noun.colored-thing	宝玉
+noun.colored-thing	玉
+noun.colored-thing	波
+//= sound.drawn-word	Interjection rows whose ー before the last kana draws out a word said as an exclamation (すごーい 대단해~, すごーーい 대단해애애; spec SND-23), unlike the usual spelling of はーい or おーい.
+sound.drawn-word	すごーい
+sound.drawn-word	ねむーい
