@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:lex:3832:わんさか	くくくっ。人がわんさか集まってきた。	크크큭. 사람이 잔뜩 모여 왔다.	fix	lookup
 dict:lex:3832:わんさか	そうだ。江都には強敵がわんさか居る。	그래. 에도에는 강적이 잔뜩 있다.	fix	lookup
 dict:lex:3832:utsuke	自分で言うな、うつけめ。では行くぞ	스스로 말하지 마, 얼간이 녀석. 그럼 가겠어	fix	lookup
-dict:lex:3832:utsuke	あの殿さま。ただのうつけと思っていたが、中々の策士だったな	그 주인님. 그냥 얼간이라고 생각했지만, 꽤의 계략가였네	fix	lookup
+dict:lex:3832:utsuke	あの殿さま。ただのうつけと思っていたが、中々の策士だったな	그 주인님. 그냥 얼간이라고 생각했지만, 상당한 계략가였네	fix	lookup
 dict:lex:3832:utsuke	心がうつろになる	마음이 속이 비어 있게 된다	keep	lookup
 dict:lex:3832:おにい	おにい～、いっしょに寝るぅ～	오빠~, 함께 잔다~	fix	lookup
 dict:lex:3832:おにい	いま、おにいに手で触られたら	지금, 오빠에게 손으로 만져지면	fix	lookup
