@@ -36,7 +36,7 @@ bool PredicateFollows(const Item* it) {
 
 namespace {
 
-constexpr std::string_view kUtteranceTail = "…‥」』）)≫》】〉＞。．、ーっッ～";
+constexpr std::string_view kUtteranceTail = "…‥」』）)≫》】〉＞。．、ーっッ～♪☆★♡♥";
 
 std::size_t ScanMarks(std::string_view text, std::size_t at, std::string_view set) {
     while (at < text.size()) {

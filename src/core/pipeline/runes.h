@@ -1,6 +1,7 @@
 #pragma once
 // Character classes and UTF-8 scanning shared by the protect and segment stages.
 #include <cstddef>
+#include <string>
 #include <string_view>
 #include <utility>
 #include <vector>
@@ -23,6 +24,8 @@ bool RuneIn(char32_t c, std::u32string_view set);
 inline bool IsHiraganaRune(char32_t r) { return r >= 0x3041 && r <= 0x3096; }
 // ァ..ヶ and ー
 inline bool IsKatakanaRune(char32_t r) { return (r >= 0x30A1 && r <= 0x30F6) || r == 0x30FC; }
+// s with each katakana letter written in hiragana (ナメ なめ); other characters as they are.
+std::string KatakanaToHiragana(std::string_view s);
 // The characters that mask a letter of a word (伏せ字): ○ ● ◯ 〇 ◎ × ✕ ＊ * ■ □ △ ▲ ◇ ◆.
 inline bool IsMaskRune(char32_t r) {
     return std::u32string_view(U"○●◯〇◎×✕＊*■□△▲◇◆").find(r) != std::u32string_view::npos;

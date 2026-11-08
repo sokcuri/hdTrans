@@ -27,6 +27,22 @@ text::Rune LastRune(std::string_view s) {
     return {text::kReplacement, 1};
 }
 
+std::string KatakanaToHiragana(std::string_view s) {
+    std::string out;
+    out.reserve(s.size());
+    for (size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        const size_t n = r.size == 0 ? 1 : r.size;
+        if (r.cp >= U'ァ' && r.cp <= U'ヶ') {
+            text::AppendRune(out, r.cp - 0x60);
+        } else {
+            out.append(s.substr(i, n));
+        }
+        i += n;
+    }
+    return out;
+}
+
 bool ValidUtf8(std::string_view s) {
     while (!s.empty()) {
         const text::Rune r = text::DecodeRune(s);

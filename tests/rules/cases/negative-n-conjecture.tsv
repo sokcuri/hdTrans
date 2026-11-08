@@ -27,7 +27,7 @@ normalize:negative-conjecture	ですが、どうして西園寺先生はこの�
 normalize:negative-conjecture	挙動不審な態度で店内を物色しています。強盗さんでしょうか	거동 의심스러운 태도로 가게 안을 물색하고 있습니다. 강도입니까	keep	normalize
 normalize:negative-conjecture	見りゃわかんだろ	보면 끓지 않아지	keep	normalize
 normalize:negative-conjecture	） どうせ大したことねえんだろ？	) 어차피 별일 아닌 거지?	keep	normalize
-normalize:negative-conjecture	イヤだって 言ってんでしょう	싫다고 말해 지요	keep	normalize
+normalize:negative-conjecture	イヤだって 言ってんでしょう	싫다고 말하는 거지요	keep	normalize
 normalize:negative-conjecture	教えてくれんだろ？ 正しいデート。	가르쳐 주는 거지? 올바른 데이트.	keep	normalize
 normalize:old-suru-negative	わしを許しはせんだろう	내를 용서하지는 않을 것이다	fix	normalize
 normalize:old-suru-negative	そんなことはせんだろう	그런 일은 하지 않을 것이다	fix	normalize
