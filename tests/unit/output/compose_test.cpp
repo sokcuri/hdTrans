@@ -567,6 +567,27 @@ HD_TEST(compose_emit_opening_bracket_apart) {
     }
 }
 
+// A word span that a rewrite read anew writes its new Korean whole, shorter or longer than the span's
+// source text, and keeps what followed the source text (바삭바삭 → 척척, not 척척바삭).
+HD_TEST(compose_emit_reread_span_length) {
+    struct Case {
+        std::vector<TokenText> tokens;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{tokenizer::kTypeProtected, 1, "바삭바삭", "척척", 12}, {tokenizer::kTypeJapanese, 0, " 간다", ""}}, "척척 간다"},
+        {{{tokenizer::kTypeProtected, 1, "바삭바삭 ", "척척", 12}, {tokenizer::kTypeJapanese, 0, "간다", ""}}, "척척 간다"},
+        {{{tokenizer::kTypeProtected, 1, "찡", "찔끔", 3}, {tokenizer::kTypeJapanese, 0, " 또", ""}}, "찔끔 또"},
+        {{{tokenizer::kTypeProtected, 1, "wiki", "wiki"}, {tokenizer::kTypeJapanese, 0, " 문서", ""}}, "wiki 문서"},
+    };
+    Settings settings;
+    for (const Case& c : cases) {
+        Pieces out;
+        EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+        HD_CHECK_EQ(String(out), c.expected);
+    }
+}
+
 HD_TEST(compose_comma_before_symbol_run) {
     struct Case {
         const char* symbols;

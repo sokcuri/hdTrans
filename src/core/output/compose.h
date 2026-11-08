@@ -84,12 +84,14 @@ QuoteState QuotesAfter(QuoteState state, std::string_view text);
 
 // A token of the chunk as the compose stage reads and writes it: its type and text
 // after the per-token stage (the text receives the Korean of the items), its span kind
-// and, for a span, the span text.
+// and, for a span, the span text and the bytes of its source text that text starts with
+// (a rewrite may give the span a Korean of another length; npos: the span text's length).
 struct TokenText {
     int type = 0;
     int span = 0;
     std::string text;
     std::string spanText;
+    std::size_t spanSource = std::string::npos;
 };
 
 // An item as FinalOutputPrepass wrote it: its composed text (after the gloss removal),
