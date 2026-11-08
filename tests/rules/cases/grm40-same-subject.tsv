@@ -17,7 +17,7 @@ rewrite:past-sequence	俺がそう言うと、犬はゆっくりと目を閉じ�
 rewrite:past-sequence	騎士はもう一度咳払いをすると、人好きのする柔和な笑みを浮かべた。	has:하고는,	fix	rewrites
 rewrite:past-sequence	嬉野さんはそれだけ言うと、独特の歩調で去っていった。	has:말하고는,	fix	rewrites
 rewrite:past-sequence	エナはボトルのフタを開けると、口をつけてそのまま中の液体を飲み始めた。	has:열고는,	fix	rewrites
-rewrite:past-sequence	俺は携帯をポケットにねじ込むと、大急ぎで家を出た。	has:틀어넣고는,	fix	rewrites
+rewrite:past-sequence	俺は携帯をポケットにねじ込むと、大急ぎで家を出た。	has:쑤셔 넣고는,	fix	rewrites
 rewrite:past-sequence	夕食をすませると私は、駅の商店街を歩いて行った。	has:끝내고	fix	rewrites
 rewrite:past-sequence	一方的にまくし立てると親父は席を立ち、お手洗いへ向かっていった。	has:쏘아붙이고	fix	rewrites
 rewrite:past-sequence	越後屋気分を満喫すると俺は隠れられる場所を探した。	has:만끽하고	fix	rewrites

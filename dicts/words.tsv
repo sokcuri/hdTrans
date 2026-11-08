@@ -949,7 +949,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ねぎトロ	네기토로	N110			GN						ねぎトロ	w:941
 ねじりしんどう	비틀림 진동	N110			GN				xxx llm	1		w:942
 ねじり剛性	비틀림 강성	N110			GN				xxx llm	1		w:943
-ねじ込	틀어&H5@	M425			GN						ねじこむ	w:944
+ねじ込	쑤셔 &H5@	M425			GN						ねじこむ	w:944
 ねじ釘	나사못	N110			GN						ねじくぎ	w:945
 ねずみカンガルー	쥐캥거루속	N110			GN						ねずみカンガルー	w:946
 ねずみ色	쥐색	N110			GN						ねずみいろ	w:947
@@ -13023,7 +13023,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 劈頭	벽두	N110			GN						へきとう	w:12946
 力づく	완력	N110			GN				llm		ちからづく	w:12947
 力なく	힘없이	E300			GN				llm			w:12948
-力を入れ	힘을 기울&AJ@	M427			GN				xxx llm	1		w:12949
+力を入れ	힘을 &CJ@	M427			GN				xxx llm	1		w:12949
 力を出	힘&A6@	M423		Pn	GN						ちからをだす	w:12950
 力一杯	힘껏	E300			GN				llm		ちからいっぱい	w:12951
 力布	보강천	N110			GN				xxx llm	1		w:12952
@@ -19530,7 +19530,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火炎瓶	화염병	N110			GN						かえんびん	w:19446
 火炎茸	붉은사슴뿔버섯	N110			GN						かえんたけ	w:19447
 火焔茸	붉은사슴뿔버섯	N110			GN						かえんたけ	w:19448
-火照	화끈&C5@	M428			GN						ほてる	w:19449
+火照	달아&E6@	M428			GN						ほてる	w:19449
 火熨斗	다리미	N110			GN						ひのし	w:19450
 火球	화구	N110			GN						かきゅう	w:19451
 火病	화병	N110			GN						ファビョン	w:19452
@@ -28557,3 +28557,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 そっち側	그쪽	I110			GN			// LEX-5701			そっちがわ	w:35256
 済みません	죄송합니다	A110			GN			// LEX-5700			すみません	w:35257
 済みませんでした	죄송합니다	A110			GN			// LEX-5700			すみませんでした	w:35258
+ハグ	허그	N110		Hd	GN			// LEX-5704			はぐ	w:35260
+ホワッツ	왓츠	N110			GN			// LEX-5704			ほわっつ	w:35261
+お手柄	잘한 일	N110			GN			// LEX-5705			おてがら	w:35263

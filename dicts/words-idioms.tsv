@@ -171,7 +171,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 軽佻浮薄	경박부박	N110			GN				llm			i:166
 血の巡りの悪い	머리 회전이 느린	A9D0			GN				llm			i:167
 剣を抜	검을 &FF@	M421		Pn	GN				llm			i:168
-肩をすくめ	으쓱거&AA@	M427		Pn	GN							i:169
+肩をすくめ	어깨를 으쓱&AV@	M427		Pn	GN							i:169
 肩を竦め	어깨를 으쓱&AV@	M427		Pn	GN				llm			i:170
 険しい顔つき	험상궂은 얼굴	N110			GN				llm			i:171
 厳密に言えば	엄밀히 말하면	A9D0			GN				llm			i:172
@@ -3544,7 +3544,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成ろう事なら	가능하다면	A9D0			GN				llm			i:3536
 けじめを付け	매듭을 &JA@	M427		Pn	GN				llm			i:3537
 サムズ・アップ	섬즈 업	A9D0			GN				llm			i:3538
-参考にな	참고&C6@	M428		Dx	GN							i:3539
+参考にな	참고가 &C6@	M428		Dx	GN							i:3539
 バランスを取	균형을 &FK@	M428		Pn	GN				llm			i:3540
 手をこまね	팔짱을 끼고 &AY@	M421		Pn	GN				llm			i:3541
 手を拱	팔짱을 끼고 &AY@	M421		Pn	GN				llm			i:3542

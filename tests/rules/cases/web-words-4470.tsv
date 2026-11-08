@@ -1,7 +1,7 @@
 # 규칙: LEX-4470, LEX-4474, LEX-4481, LEX-4482, LEX-4483, LEX-4484, LEX-4485
 rule	input	expected	kind	layer
 dict:w:32101	「こうして二人で飲み交わすのは、いつ以来になるか」	has:둘이서 술잔을 주고 받는 건	fix	lookup
-dict:w:32101	久しぶりに会った友人のお母さんと軽く言葉を交わし、家路を辿る。	has:가볍게 말을 주고 받고	keep	lookup
+dict:w:32101	久しぶりに会った友人のお母さんと軽く言葉を交わし、家路を辿る。	has:가볍게 말을 주고받고	keep	lookup
 dict:w:32102	夕立、お鍋大好きっぽい！ご相伴するっぽい！	has:함께 식사한다	fix	lookup
 dict:w:32102	旗風もぜひご相伴させて頂ければと……ありがとう存じます。	has:꼭 함께 식사	fix	lookup
 dict:w:32102	占守もお相伴♪ ん～、美味しいっしゅ♪	has:점수도 함께 식사♪	fix	lookup
