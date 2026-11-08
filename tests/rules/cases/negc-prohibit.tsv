@@ -19,7 +19,7 @@ cx:neg-clause-prohibit:50	行ってはならない	has:가서는 안 된다	keep
 cx:neg-clause-prohibit:60	おのれ、言ってはならんことを	has:말해서는 안 되는 일을	fix	rewrites
 cx:neg-clause-prohibit:60	言ってはならないことを	!rule:cx:neg-clause-prohibit:60	keep	rewrites
 cx:neg-clause-prohibit:70	あいつを信用してはいけませんぞ！	has:신용해서는 안 됩니다	fix	rewrites
-cx:neg-clause-prohibit:70	あんまり無理しちゃあいけませんぜ。	lacks:안되지 않	fix	rewrites
+cx:neg-clause-prohibit:70	あんまり無理しちゃあいけませんぜ。	lacks:안 되지 않	fix	rewrites
 cx:neg-clause-prohibit:70	人を傷つけてはいけません	has:상처 입혀서는 안 됩니다	keep	rewrites
 cx:neg-clause-prohibit:72	呪いのビデオを取りに行かなきゃいけないんスよー	lacks:않아요	fix	rewrites
 cx:neg-clause-prohibit:72	まだまだいけんだろうよ！	!rule:cx:neg-clause-prohibit:72	keep	rewrites

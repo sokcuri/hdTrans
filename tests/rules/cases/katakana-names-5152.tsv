@@ -10,9 +10,9 @@ protect:katakana-speech	ナンデサ…ナンデアキラメナインダヨォ�
 protect:katakana-speech	モウ…トベナイノ	has:이제…날 수 없어	keep	protect
 protect:katakana-speech	ヤメテ！	has:그만해	keep	protect
 protect:katakana-speech	コレデ…シズメェッ！	has:가라앉아라	keep	protect
-sound:katakana-run	全部 ラメ入りです。	lacks:안돼	fix	sound
-sound:katakana-run	ダメッ！	has:안돼	keep	sound
-sound:katakana-run	ラメ、ラメぇ	has:안돼	keep	sound
+sound:katakana-run	全部 ラメ入りです。	lacks:안 돼	fix	sound
+sound:katakana-run	ダメッ！	has:안 돼	keep	sound
+sound:katakana-run	ラメ、ラメぇ	has:안 돼	keep	sound
 dict:jisjk:131723	「さぁ！　ここで第２ドールこと戦う者はおらんのかッ！」	has:제2돌	fix	defaults
 dict:jisjk:133888	６９年に第１回女子プロテストが行われたのも、運命的だった。	has:여자 프로테스트	fix	defaults
 dict:jisjk:133888	プロテストは１位だった。	has:프로테스트는	fix	defaults

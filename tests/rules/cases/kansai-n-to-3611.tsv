@@ -36,7 +36,7 @@ sound:contracted-n	薬をせんじて飲ませた。	약을 달여 먹였다.	ke
 sound:contracted-n	ハーブはせんじて使う。	허브는 달여 쓴다.	keep	sound
 sound:contracted-n	薬はせんじて飲む。	약은 달여 마신다.	fix	sound
 sound:contracted-n	いざ行かんと思う。	lacks:가지 않는다고	keep	sound
-sound:contracted-n	では、はいけん。	lacks:안된다	keep	sound
+sound:contracted-n	では、はいけん。	lacks:안 된다	keep	sound
 sound:contracted-n	いざとなったら行かんと。	has:가야 한다	fix	sound
 sound:contracted-n	いざという時、行かんと。	has:가야 한다	fix	sound
 sound:contracted-n	いざ、行かんと思う。	lacks:가지 않는다고	keep	sound
