@@ -25,6 +25,7 @@
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
+//= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
@@ -1221,6 +1222,11 @@ ko-noun.cp-danghada	강등
 ko-noun.cp-danghada	부상
 ko-noun.cp-danghada	괴멸
 ko-noun.cp-danghada	파멸
+noun.plural-suffix	たち
+noun.plural-suffix	達
+noun.plural-suffix	ら
+noun.plural-suffix	ども
+noun.plural-suffix	共
 noun.ability-condition	これ
 noun.ability-condition	ここ
 noun.cp-change	中断

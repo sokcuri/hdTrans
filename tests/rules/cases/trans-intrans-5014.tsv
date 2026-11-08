@@ -73,6 +73,35 @@ analysis:su-potential-tehairu	書けてはいるが	has:쓸 수는 있지만	fix
 analysis:su-potential-tehairu	食べられてはいるが	has:먹을 수는 있지만	keep	analysis
 analysis:su-potential-tehairu	体を動かせてはいけない	has:움직여선 안 된다	keep	analysis
 analysis:su-potential-tehairu	体を動かせては駄目だ	has:움직여선 안 된다	keep	analysis
-analysis:su-potential-tehairu	体を動かせてはいない。	has:움직일 수는 없었다	fix	analysis
+analysis:su-potential-tehairu	体を動かせてはいない。	has:움직일 수는 없다	fix	analysis
 analysis:su-potential-tehairu	字を書けてはいないけど	has:쓸 수는 없는데	fix	analysis
 analysis:su-potential-tehairu	体を動かせていない。	has:움직이지 못했다	keep	analysis
+analysis:su-potential-tehairu	秘密を隠せてはいない。	has:숨길 수는 없다.	fix	analysis
+analysis:su-potential-tehairu	秘密を隠せてはいなかった。	has:숨길 수는 없었다	keep	analysis
+analysis:su-potential-tehairu	秘密を隠せてはいません。	has:숨길 수는 없습니다	fix	analysis
+analysis:su-potential-tehairu	秘密を隠せてはいませんでした。	has:숨길 수는 없었습니다	fix	analysis
+analysis:su-potential-tehairu	秘密を隠せちゃいない。	has:숨길 수는 없다	keep	analysis
+analysis:su-potential-tehairu	「秘密を隠せてはいない」	has:숨길 수는 없어	fix	analysis
+analysis:su-potential-tehairu	字を書けてはいなかった	has:쓸 수는 없었다	keep	analysis
+analysis:su-potential-tehairu	すぐに走れてはいません。	has:달릴 수는 없습니다	fix	analysis
+pack:argument-senses:5120	子供たちを遊ばせてはいけない	has:아이들을 놀게 해선 안 된다	fix	packs
+pack:argument-senses:5120	子供を遊ばせて、休んだ。	has:아이를 놀게 하고	fix	packs
+pack:argument-senses:5120	犬を庭で遊ばせる	has:놀게 한다	fix	packs
+pack:argument-senses:5120	子供を公園で遊ばせてください	has:놀게 해 주세요	fix	packs
+pack:argument-senses:5120	土地を遊ばせておくのはもったいない	has:토지를 놀려 두는	keep	packs
+pack:argument-senses:5120	金を遊ばせている	has:돈을 놀리고 있다	keep	packs
+pack:argument-senses:5120	子供を泣かせた	has:아이를 울렸다	keep	packs
+analysis:su-potential-tehairu	書けてはいませんよ。	has:쓸 수는 없어요	fix	analysis
+analysis:su-potential-tehairu	書けてはいませんね。	has:쓸 수는 없어요	fix	analysis
+analysis:su-potential-tehairu	書けてはいませんよね。	has:쓸 수는 없죠	fix	analysis
+analysis:su-potential-tehairu	書けてはいませんか？	has:쓸 수는 없습니까	fix	analysis
+pack:argument-senses:5120	猫たちを遊ばせる	has:고양이들을 놀게 한다	fix	packs
+pack:argument-senses:5120	子供らを遊ばせる	has:아이들을 놀게 한다	fix	packs
+pack:argument-senses:5120	孫たちを遊ばせる	has:손자들을 놀게 한다	fix	packs
+pack:argument-senses:5120	少年たちを遊ばせる	has:소년들을 놀게 한다	fix	packs
+pack:argument-senses:5120	みんなを遊ばせる	has:모두를 놀게 한다	fix	packs
+pack:argument-senses:5120	人々を遊ばせる	has:사람들을 놀게 한다	fix	packs
+pack:argument-senses:5120	金を遊ばせておく	has:돈을 놀려 둔다	keep	packs
+pack:argument-senses:5120	手を遊ばせている	has:손을 놀리고 있다	keep	packs
+pack:argument-senses:5120	指を遊ばせて	has:손가락을 놀려	keep	packs
+pack:argument-senses:5120	みんなを起こしてくる	has:모두를 깨워 온다	keep	packs
