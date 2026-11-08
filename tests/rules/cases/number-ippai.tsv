@@ -34,7 +34,7 @@ dict:jisjk:373504	ドキドキ……頭がいっぱいさ	두근두근……머�
 dict:jisjk:373504	胸が一杯さ。	가슴이 벅차.	fix	local-ending
 dict:jisjk:373504	お腹がいっぱいさ	배가 불러	fix	local-ending
 dict:jisjk:373504	大丈夫さ！	괜찮아!	fix	local-ending
-dict:jisjk:373504	狩りは得意さ。	사냥은 자신있어.	fix	local-ending
+dict:jisjk:373504	狩りは得意さ。	has:자신 있어.	fix	local-ending
 dict:jisjk:373504	俺の狡猾さ…！！	내 교활함…!!	keep	ending-defaults
 dict:jisjk:373504	大変さがわかる。	힘듦을 알 수 있다.	keep	ending-defaults
 dict:jisjk:373504	その大切さを知った。	그 중요함을 알았다.	keep	ending-defaults

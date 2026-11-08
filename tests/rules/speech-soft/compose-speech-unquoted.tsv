@@ -12,7 +12,7 @@ compose:speech-unquoted	いや、寺ではなく神社だ	아니, 절이 아니�
 compose:speech-unquoted	良かった、スピード解決だったみたいだな	다행이야, 스피드 해결이었던 것 같네	fix	compose
 compose:speech-unquoted	なんかタクシー来た	뭔가 택시 왔어	fix	compose
 compose:speech-unquoted	あまり怖いと思うようなら、迷わずスレを閉じて欲しい	너무 무섭다고 생각하는 것 같으면, 망설이지 않고 스레를 닫았으면 좋겠어	fix	compose
-compose:speech-unquoted	ほんとは得意だし…こういうの	사실은 자신있고…이런 거	fix	compose
+compose:speech-unquoted	ほんとは得意だし…こういうの	has:자신 있고…이런	fix	compose
 compose:speech-unquoted	途中からだけどね。聞いていたんだ、二人の話。	도중부터지만. 들어 있었어, 두 사람의 이야기.	fix	compose
 compose:speech-unquoted	早く使いなよ。こっちは遊びでやってるんじゃないんだから。	빨리 써. 이쪽은 놀이로 하고 있는 게 아니니까.	fix	compose
 compose:speech-unquoted	カッコよくなった！やったね！	멋져졌어! 해냈네!	fix	compose

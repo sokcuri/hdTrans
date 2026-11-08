@@ -7661,7 +7661,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 やり目	몸 목적	N110			GN				llm			s:7658
 モロバレ	훤히 들통&A5@	M429			GN				llm			s:7659
 ガチで	진짜로	E300			GN				llm			s:7660
-アゲアゲ	텐션이 오름	N110			GN				llm			s:7661
+アゲアゲ	하이텐션	N110			GN				llm			s:7661
 ビシバシ	사정없이	E300			GN				llm			s:7662
 しちゃダメ	하면 안 돼	A9D0			GN				llm			s:7663
 マル暴	조직폭력단 담당 경찰	N110			GN				llm			s:7664
@@ -9111,7 +9111,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ケコーン	결혼	N110			GN				llm			s:9108
 ハンネ	닉네임	N110			GN				llm			s:9109
 チンコロ	밀고	N110			GN				llm			s:9110
-何なの	뭐야 대체	C0D1			GN				llm			s:9111
+何なの	뭐야	C0D1			GN				llm			s:9111
 インカジ	온라인 카지노	N110			GN				llm			s:9112
 日の丸半導体	일본 반도체 산업	N110			GN				llm			s:9113
 ウザった	짜증$A2@	H7N0			GN				llm			s:9114
@@ -9441,7 +9441,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 分かりみ	공감	N110			GN							s:9438
 陽キャラ	인싸	N110			GN							s:9442
 ガチ	진짜	N110			GN							s:9443
-ワンチャン	가능성	N110			GN							s:9444
+ワンチャン	어쩌면	N110			GN							s:9444
 厨二病	중2병	N110			GN							s:9445
 厨二	중2	N110			GN							s:9446
 ディス	디스&AV@	M428			GN							s:9448

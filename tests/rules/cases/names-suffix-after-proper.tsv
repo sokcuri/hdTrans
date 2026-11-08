@@ -7,7 +7,7 @@ names:katakana-honorific	ふたばチャンが来た。	후타바짱이 왔다.	
 names:katakana-honorific	フタバチャンが来た。	후타바짱이 왔다.	fix	lookup
 names:katakana-honorific	オウ！毛利サン！ 私 チンヨ	has:모우리 씨!	fix	lookup
 names:katakana-honorific	ユイチャンが来た。	유이짱이 왔다.	keep	lookup
-names:katakana-honorific	ワンチャンある。	가능성 있다.	keep	lookup
+names:katakana-honorific	ワンチャンある。	has:가능성이	keep	lookup
 names:katakana-honorific	セバスチャン　すぐに調査を	has:세바스찬	keep	lookup
 names:katakana-honorific	２日も連チャンで来やがって	has:연속으로	keep	lookup
 names:katakana-honorific	あっしはすぐそこのチャンそば屋でね	lacks:짱	keep	lookup

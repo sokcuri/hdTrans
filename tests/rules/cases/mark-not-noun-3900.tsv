@@ -10,7 +10,7 @@ analysis:mark-not-noun	大変な一日だった	힘든 하루였다	keep	analysi
 analysis:mark-not-noun	身長は190㎝以上でしょうか	키는 190㎝ 이상입니까	keep	analysis
 analysis:mark-not-noun	特改Ⅰ型駆逐艦	특개Ⅰ형 구축함	keep	analysis
 analysis:mark-not-noun	投票率は９８．４％で、平均を０．１％下回った	투표율은 98.4%로, 평균을 0.1% 밑돌았다	keep	analysis
-analysis:mark-not-noun	「戦闘糧食」(★+6以上)を第1スロに装備。	「전투식량」(★+6 이상)을 제1스로에 장비.	keep	analysis
+analysis:mark-not-noun	「戦闘糧食」(★+6以上)を第1スロに装備。	has:제1슬롯에	keep	analysis
 dict:jisjk:372190	まずは幽霊って思うべきじゃない？	우선은 유령이라고 생각해야 하는 것이 아니야?	keep	local
 dict:jisjk:372190	そんなことを言うべきじゃない。	그런 말을 해서는 안 된다.	keep	local
 dict:jisjk:372190	「そんなこと言うべきじゃない」	「그런 말 해서는 안 돼」	keep	local

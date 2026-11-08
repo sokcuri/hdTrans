@@ -20,7 +20,7 @@ dict:lex:ittai-counter	「一体だけですよぅ！	「한 체 뿐이에요!	f
 dict:lex:ittai-counter	一体ずつとどめを刺す。	한 마리씩 결정타를 날린다.	fix	local
 dict:lex:ittai-counter	聖霊は一人につき一体しか使役	성령은 한 사람에 대해 한 체밖에 사역	fix	local
 dict:lex:ittai-counter	手負いの中鬼が一体だけとはいえ、	상처 입은 중귀가 한 마리만이라고 해도,	fix	local
-dict:lex:ittai-counter	「あれ、一体何なの！？」	「어라, 도대체 뭐야 대체!?」	keep	local
+dict:lex:ittai-counter	「あれ、一体何なの！？」	has:뭐야!?	keep	local
 dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨 이야기다.	keep	local
 constraint:name-after-numeral	１日村でゆっくりし、	1일 마을에서 쉬어,	fix	lookup
 constraint:name-after-numeral	もう１日村に泊ってから帰ろうと話がまとまった所で、	이제 1일 마을에 묵고 나서 돌아가려고 이야기가 정리된 곳에서,	fix	lookup

@@ -147,7 +147,7 @@ normalize:honorific-stem	「王妃様がお探しです。	「왕비님이 찾�
 normalize:honorific-stem	あたしが軽はずみの好色の念からあなたに言い寄ったとでもお思いなの？	내가 경솔의 호색 생각에서 당신에게 구애했다고라도 생각하시는 거야?	fix	normalize
 normalize:honorific-stem	「お揃いです」	「세트입니다」	keep	normalize
 normalize:honorific-stem	「将棋、お好きなんですか？	「쇼기, 좋아합니까?	keep	normalize
-normalize:honorific-stem	このくらい、綾那にお任せなのですっ！	이 정도, 아야나에게 맡겨라인 것입니다!	keep	normalize
+normalize:honorific-stem	このくらい、綾那にお任せなのですっ！	has:맡겨 줘	keep	normalize
 normalize:honorific-stem	お似合いですね?	어울리네요?	keep	normalize
 normalize:honorific-stem	「先生はあんな田舎の方がお好きですか」	「선생님은 저런 시골이 좋아합니까」	keep	normalize
 normalize:honorific-stem	「お仕置きです」	「벌입니다」	keep	normalize

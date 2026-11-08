@@ -1110,7 +1110,7 @@ lemma	classes
 舌先	@body
 舞台	@place
 船	@vehicle
-艦	@vehicle
+艦	@vehicle|@force
 艦長	@person.role
 芝居	@event|@show
 花火	@event
@@ -1215,7 +1215,7 @@ lemma	classes
 身	@body
 車	@vehicle
 車両	@vehicle
-軍	@organization
+軍	@organization|@force
 軽巡	@vehicle
 輸送	@activity
 辺	@place
@@ -1467,3 +1467,17 @@ lemma	classes
 異性	@person
 人たち	@person
 人達	@person
+戦力	@force
+部隊	@force
+艦隊	@force
+兵力	@force
+軍勢	@force
+増援	@force
+援軍	@force
+騎士団	@force
+戦列艦	@force
+船団	@force
+師団	@force
+軍団	@force
+義勇軍	@force
+傭兵団	@force

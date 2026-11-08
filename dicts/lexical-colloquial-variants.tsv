@@ -1,7 +1,7 @@
 #! layer=words
 # 구어 표기: 작은 모음이나 장음으로 쓴 대명사와 줄여 쓴 인사말
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
-てめぇ	너	I120	VHn		GN							colloquial-variants:1
+てめぇ	네놈	I120	VHn		GN							colloquial-variants:1
 てめー	너	I120	VHn		GN							colloquial-variants:2
 おめぇ	너	I120	VHn		GN							colloquial-variants:3
 おめー	너	I120	VHn		GN							colloquial-variants:4

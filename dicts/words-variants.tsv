@@ -8439,7 +8439,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 とめ金	이음쇠	I110			GN							jisjk:67980
 留めがね	이음쇠	I110			GN							jisjk:67980
 止めがね	이음쇠	I110			GN							jisjk:67980
-共々	다 같이	E311			GN							jisjk:1462
+共々	(와)과 함께	E311		Tu	GN							jisjk:1462
 取敢えず	우선	E300			GN							jisjk:369711
 取り合えず	우선	E300			GN							jisjk:369711
 取合えず	우선	E300			GN							jisjk:369711
