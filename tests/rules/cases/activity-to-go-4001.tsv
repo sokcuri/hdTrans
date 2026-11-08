@@ -1,6 +1,5 @@
 # 규칙: GRM-4001
 rule	input	expected	kind	layer
-cx:activity-go:10	このまま父上のところに訪問と行きましょうか！	has:방문할까요	fix	rewrites
 cx:activity-go:10	早速実験と行こう	곧바로 실험하자	fix	rewrites
 cx:activity-go:10	早速実験といくか	곧바로 실험할까	fix	rewrites
 cx:activity-go:10	ここは様子見といこうか	여기는 관망할까	fix	rewrites
@@ -47,3 +46,7 @@ constraint:toi-before-iku	さあ、続きといこうか。勝負はこれから
 constraint:toi-before-iku	「なら、お手並み拝見といこうか。私の分も頼むぞ」	has:솜씨 좀 볼까	keep	lookup
 constraint:toi-before-iku	一緒にいこう	함께 가자	keep	lookup
 constraint:toi-before-iku	問いかけるように見た	묻듯이 보았다	keep	lookup
+cx:activity-go:8	現場へ視察と行こう	현장에 시찰하러 가자	fix	rewrites
+cx:activity-go:8	先生のところに相談と行こう	has:상담하러 가자	fix	rewrites
+cx:activity-go:8	お互いに自己紹介といこうか	has:소개할까	keep	rewrites
+cx:activity-go:8	大人にケンカを売ったガキにお仕置きといくか	lacks:하러	keep	rewrites
