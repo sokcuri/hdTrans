@@ -205,9 +205,10 @@ bool Blank(std::string_view s) {
 }
 
 // An item that no dictionary word reads its text as: its surface is the text, and the
-// text is one kana or none of its entries holds Hangul.
+// text is one kana or none of its entries holds Hangul. A word a collocation row read is read
+// even when the row leaves it empty (ホーマーを打つ 홈런을 치다).
 bool Unread(const ResolvedItem& it, std::string_view text) {
-    if (it.surface != text) return false;
+    if (it.surface != text || it.packed) return false;
     if (text::RuneCount(text) == 1) return true;
     if (internal::HasSyllable(it.first.text)) return false;
     if (it.selected > 0 && internal::HasSyllable(it.entry.text)) return false;

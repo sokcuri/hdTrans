@@ -48,6 +48,7 @@ output::ResolvedItem ItemOf(const word::Item& it) {
     if (const word::Entry* e = it.group == nullptr ? nullptr : it.group->At(it.selected)) {
         r.reread = e->targetChoice.layer == word::Provenance::Rewrite;
     }
+    r.packed = it.choice.layer == word::Provenance::Pack;
     const int entries = it.group == nullptr ? 0 : static_cast<int>(it.group->entries.size());
     if (entries > 0) {
         r.first = EntryOf(it, 0);
