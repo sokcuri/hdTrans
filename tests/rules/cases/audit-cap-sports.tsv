@@ -143,3 +143,8 @@ dict:audit-cap-sports	サッチャー英元首相	has:대처 전 영국 총리	f
 dict:audit-cap-sports	新監督が就任	has:신임 감독이	fix	lookup
 dict:audit-cap-sports	駅は始発から混んでいた	has:첫차부터	fix	lookup
 dict:audit-cap-sports	この駅は始発ですか？	has:출발역입니까	fix	lookup
+dict:audit-cap-sports	現代表現	has:현대 표현	keep	lookup
+dict:audit-cap-sports	現代表記	has:현대 표기	keep	lookup
+dict:audit-cap-sports	新代表作	has:새 대표작	fix	lookup
+dict:audit-cap-sports	初戦で勝利した	has:첫 대결에서	keep	lookup
+dict:audit-cap-sports	選挙の初戦で	has:첫 경선에서	fix	lookup
