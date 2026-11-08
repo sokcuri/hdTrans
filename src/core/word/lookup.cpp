@@ -951,6 +951,40 @@ bool Worker::GodanCausative(std::string_view stem) const {
     return false;
 }
 
+// LEX-5014: whether stem, or its part from its last kanji (唇を尖ら: 尖ら), is the negative stem of a godan verb of
+// the dictionary (尖ら of 尖る, 滑ら of 滑る), the verb a す verb of that stem makes act (尖らす).
+bool Worker::GodanBase(std::string_view stem) const {
+    std::size_t from = 0;
+    for (std::size_t i = 0; i < stem.size(); i += text::DecodeRune(stem.substr(i)).size) {
+        if (text::IsKanji(text::DecodeRune(stem.substr(i)).cp)) from = i;
+    }
+    const std::string_view part = stem.substr(from);
+    const std::string_view last = LastChar(part);
+    const std::string_view godan = part.substr(0, part.size() - last.size());
+    if (godan.empty()) return false;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(godan, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source != godan || pc.size() != 4 || !pc.starts_with("M4")) continue;
+        const int kind = pc[3] - '0';
+        if (kind != 3 && kind != 7 && kind >= 0 && kind <= 8 && Conjugation(kind, 8) == last) return true;
+    }
+    return false;
+}
+
+// LEX-5014: whether the last character of a godan stem and the e-row kana of its potential spell the
+// stem of an ichidan verb of the dictionary (入 + れ: 入れる, 付 + け: 付ける, 売 + れ: 売れる), the
+// transitive or intransitive partner that a て form reads before the potential (勢い付けて, 売れており).
+bool Worker::IchidanPartner(std::string_view stem, std::string_view kana) const {
+    const std::string_view last = LastChar(stem);
+    if (last.empty() || !text::IsKanji(text::DecodeRune(last).cp)) return false;
+    const std::string key = std::string(last) + std::string(kana);
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source == key && pc.size() == 4 && pc.starts_with("M4") && pc[3] == '7') return true;
+    }
+    return false;
+}
+
 // An interjection (E32) or set phrase (A9) whose key ends in て or ます and is a form
 // of a verb of the base dictionary: the key without its last one to three characters,
 // all hiragana, is a verb stem none of whose Korean starts like r's.

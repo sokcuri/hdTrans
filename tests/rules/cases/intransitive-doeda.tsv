@@ -15,7 +15,7 @@ cx:corpus-fixes-1:100	……あのトンネルか。爆弾の件も解決した�
 cx:corpus-fixes-1:100	俺の罰ゲームが確定したことを知ると魅音は本領発揮！！	has:게임이 확정된	fix	rewrites
 cx:corpus-fixes-1:100	そのうち、射出速度設定を術者がいじることで、魔術が完成する。	has:마술이 완성된다	fix	rewrites
 cx:corpus-fixes-1:100	これで、すべてのプロセスが終了し、	has:프로세스가 종료되어	fix	rewrites
-cx:corpus-fixes-1:100	合計約７００万件の会員情報が漏えいしたと発表した。	has:회원 정보가 누설되었다고	fix	rewrites
+cx:corpus-fixes-1:100	合計約７００万件の会員情報が漏えいしたと発表した。	has:회원 정보가 유출되었다고	fix	rewrites
 cx:corpus-fixes-1:100	顧客企業によって異なるものの、氏名や電話番号、住所なども流出したという。	has:주소 등도 유출되었다고	fix	rewrites
 cx:corpus-fixes-1:100	政府は延期した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	委員会は中止した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
@@ -33,7 +33,7 @@ cx:corpus-fixes-1:100	「とりあえず、柴犬クラスが入ることので�
 cx:corpus-fixes-1:105	実戦には出ませんでしたが、出撃準備は完了しています。	has:완료되어 있습니다	fix	rewrites
 cx:corpus-fixes-1:105	彼は宿題を完了している。	!rule:cx:corpus-fixes-1:105	keep	rewrites
 cx:corpus-fixes-1:105	覚悟は完了してる。	!rule:cx:corpus-fixes-1:105	keep	rewrites
-cx:corpus-fixes-1:107	同社によると、クレジットカード情報やＩＤ、パスワードなどは漏えいしていない。	has:누설되어 있지 않다	fix	rewrites
+cx:corpus-fixes-1:107	同社によると、クレジットカード情報やＩＤ、パスワードなどは漏えいしていない。	has:유출되어 있지 않다	fix	rewrites
 cx:corpus-fixes-1:107	彼はまだ作業を完了していない。	!rule:cx:corpus-fixes-1:107	keep	rewrites
 cx:corpus-fixes-1:100	作業は開始してください。	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	作業は開始してください。	has:작업은 개시해 주세요	keep	rewrites

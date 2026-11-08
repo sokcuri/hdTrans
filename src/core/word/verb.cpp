@@ -142,6 +142,28 @@ bool OruForm(std::string_view tail, int& branch, int& length) {
     return !(tail.substr(0, static_cast<std::size_t>(length)) == "って" && (rest.starts_with("いう") || rest.starts_with("言")));
 }
 
+// LEX-5014: the せ of a す verb whose shorter godan verb exists (尖らす, 尖る), before a て form that goes on to
+// another act, ながら or a pause, continues the verb itself, the lexical causative (唇を尖らせて 삐죽 내밀어,
+// 生地を湿らせていく 적셔 간다, 息を切らせながら), not its potential. A て form before ている, ない, おる or a word of
+// thanks or relief (word.thanks: 返せてよかった) and the plain, past, negative, conditional and volitional forms keep
+// the potential (動かせる, 隠せてない).
+bool SuVerbCausativeForm(std::string_view rest) {
+    if (rest.starts_with("ながら")) return true;
+    if (rest.starts_with("て")) {
+        const std::string_view next = rest.substr(std::string_view("て").size());
+        if (dict::StartsWithMember(HDTRANS_CLASS("word.thanks"), next) > 0) return false;
+        if (next.starts_with("な") || next.starts_with("お") || next.starts_with("ま")) return false;
+        if (next.starts_with("い")) {
+            const std::string_view motion = next.substr(std::string_view("い").size());
+            return motion.starts_with("く") || motion.starts_with("っ") || motion.starts_with("き") ||
+                   motion.starts_with("か") || motion.starts_with("こ") || motion.starts_with("け");
+        }
+        return true;
+    }
+    if (rest.empty()) return false;
+    const char32_t c = text::DecodeRune(rest).cp;
+    return c == U'、' || c == U'，' || text::IsKanji(c);
+}
 }  // namespace
 
 bool ProgressiveEndings(Group& g, Detail& d, std::string_view head, bool every) {
@@ -628,6 +650,12 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // The ており of the potential of a godan verb whose stem and e-row kana spell an ichidan verb is that
+    // verb (売れており 팔리고 있으며, 割れており), not the potential.
+    if (!matched && oldState == 4 && oldKind != 3 && w->settings.text && after().starts_with("てお") &&
+        w->IchidanPartner(surface, tail.substr(0, static_cast<std::size_t>(pattern())))) {
+        return false;
+    }
     // The passive of that す causative is the godan verb's causative-passive (言わされた of 言う, spec GRM-3350).
     if (!matched && oldState == 1 && oldKind == 3 && w->settings.text && w->settings.improvements.causativePassive &&
         w->GodanCausative(surface)) {
@@ -649,6 +677,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     }
     if (!matched && (oldState == 1 || oldState == 2 || oldState == 4 || shortCausativePassive)) {
         base.record = oldState;
+        if (oldState == 4 && oldKind == 3 && w->settings.text && SuVerbCausativeForm(after()) && w->GodanBase(surface)) base.record = 0;
         adjusted = true;
         sourceLength += pattern();
         base.patternKind = 7;
