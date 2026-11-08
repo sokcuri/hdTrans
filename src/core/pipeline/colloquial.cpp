@@ -89,6 +89,14 @@ public:
         return false;
     }
 
+    // Whether the name layer has s as a person.
+    bool NamesPerson(std::u32string_view s) const {
+        for (const dict::Record& rec : snap_.NameRecords(EncodeText(s))) {
+            if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
+        }
+        return false;
+    }
+
     // Whether s is a noun of the dictionary or a person of the name layer.
     bool NounOrPerson(std::u32string_view s) const {
         if (Tags(s).find('N') != std::string::npos) return true;
@@ -2206,6 +2214,66 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // Outside quotes, a run of two or more ー after a noun or a particle in narration is a dash, ――, not
+    // a lengthening (spec SND-23): after a noun with kanji that names no person or title (運命ーーー。
+    // 운명――., 木刀ーーーーそれは), before 。, a closing bracket or more text; after a particle that
+    // follows a kanji, a katakana or a noun (彼の名はーーー, 雨がーーー降って; a と, で or に that ends a
+    // kana word is no particle: ほんとーーー, それでーーー), before 。, 、, the end or text that is no
+    // hiragana. A run before a shout's ！, ？ or っ, or before a ん that ends the drawn word, stays a
+    // lengthening; so does one after a person or
+    // title, one before 、 after a noun (a call: 先生ーーー、待って) and one that ends a line with no 「」
+    // after a noun (先輩ーーー) or after も (俺もーーー), which is speech.
+    const bool quoted = std::any_of(rs.begin(), rs.end(), [](char32_t c) { return In(c, U"「『"); });
+    for (size_t k = 1, depth = 0; k < rs.size(); k++) {
+        if (In(rs[k - 1], U"「『")) depth++;
+        if (In(rs[k - 1], U"」』") && depth > 0) depth--;
+        if (rs[k] != U'ー' || depth > 0) continue;
+        size_t end = k;
+        while (end < rs.size() && rs[end] == U'ー') end++;
+        const char32_t prev = rs[k - 1], next = end < rs.size() ? rs[end] : 0;
+        if (end - k < 2 || In(next, U"！？!?っッんンー～〜")) {
+            k = end - 1;
+            continue;
+        }
+        // The noun that ends at k: the longest key with kanji tagged a noun or a person of the name layer.
+        size_t from = k;
+        for (size_t j = k > 6 ? k - 6 : 0; j < k && from == k; j++) {
+            const std::u32string_view w = std::u32string_view(rs).substr(j, k - j);
+            if (HasKanji(w) && e.NounOrPerson(w)) from = j;
+        }
+        bool dash = false;
+        if (from < k) {
+            const std::u32string_view w = std::u32string_view(rs).substr(from, k - from);
+            bool person = e.PersonFirst(w) || e.NamesPerson(w);
+            for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
+                person = person || w.ends_with(DecodeText(m));
+            }
+            dash = !person && next != U'、' && next != U'，';
+        } else if (k >= 2 && In(prev, U"はがをにもとでへのや")) {
+            // The word before the particle: a kanji, a katakana or a noun, and the particle is no end of a
+            // kana key (ほんと, それで).
+            size_t start = k - 1;
+            while (start > 0 && k - 1 - start < kMaxKeyRunes && (IsHiraganaRune(rs[start - 1]) || IsKanjiRune(rs[start - 1]))) start--;
+            size_t noun = k - 1;
+            for (size_t j = start; j + 1 < k && noun == k - 1; j++) {
+                if (e.NounOrPerson(std::u32string_view(rs).substr(j, k - 1 - j))) noun = j;
+            }
+            bool word = IsKanjiRune(rs[k - 2]) || IsKatakanaRune(rs[k - 2]) || noun < k - 1;
+            if (noun < k - 1 && In(prev, U"とでに") && !e.Tags(std::u32string_view(rs).substr(noun, k - noun)).empty()) word = false;
+            if (In(prev, U"のや") && !IsKanjiRune(rs[k - 2])) word = false;
+            dash = word && !IsHiraganaRune(next);
+            const bool lineEnd = next == 0 || (In(next, U"。．.") && end + 1 == rs.size());
+            if (prev == U'も' && lineEnd) dash = false;
+        }
+        if (dash && next == 0 && from < k && !quoted) dash = false;
+        if (dash) {
+            rs = Spliced(rs, k, U"――", end);
+            changed = true;
+            k += 1;
+        } else {
+            k = end - 1;
+        }
+    }
     // In a line with hiragana or kanji (not speech written in katakana: イタァイ！ ヤメテヨォォ！), two or
     // more small katakana vowels that draw out the vowel of the katakana before them at the end of a
     // phrase, also before a shout's っ (アキラァァァって, ママァァーッ), are its ー, which the word stage
