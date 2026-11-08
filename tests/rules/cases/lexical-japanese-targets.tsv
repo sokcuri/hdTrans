@@ -11,7 +11,7 @@ dict:names.481926	原貫太さんが来た。	하라 간타 씨가 왔다.	fix	l
 dict:jisjk:339705	俊太郎は小さく笑った。	슌타로는 작게 웃었다.	fix	lookup
 dict:jisjk:289646	喜屋武の海は青い。	기얀의 바다는 푸르다.	keep	lookup
 dict:jisjk:300693	春田町まで歩いた。	슌다쵸까지 걸었다.	fix	lookup
-dict:names.726780	重戦車が三両、こちらに向かってくる。	중전차가 3량, 이쪽을 향해 온다.	keep	lookup
+dict:names.726780	重戦車が三両、こちらに向かってくる。	중전차가 3량, 이쪽으로 다가온다.	keep	lookup
 dict:names.667295	神メニューを考えたぞ！	갓 메뉴를 생각했어!	fix	lookup
 dict:names.645102	特務機関森羅の任務だ。	특무기관 삼라의 임무다.	fix	lookup
 dict:names.521244	守岡未央という名前だった。	모리오카 미오라는 이름이었다.	keep	lookup

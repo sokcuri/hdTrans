@@ -1,0 +1,12 @@
+# 규칙: GRM-4043
+rule	input	expected	kind	layer
+cx:body-motion-te:10	水分で重くなっていそうな長い髪を揺らして、こちらを向く。	has:흔들며, 이쪽을	fix	rewrites
+cx:body-motion-te:10	首を振って、彼を見た	has:저으며	fix	rewrites
+cx:body-motion-te:10	首を傾げて、こちらを見上げた。	has:갸웃하며	fix	rewrites
+cx:body-motion-te:10	髪を揺らして振り返った。	has:흔들며	fix	rewrites
+cx:body-motion-te:10	首を振って否定した。	has:저어 부정했다	keep	rewrites
+cx:body-motion-te:10	揺す振って見たくもなった。	lacks:흔들며	keep	rewrites
+cx:body-motion-te:10	小さな舌を揺らして、ぬるぬるとこすりつけてくる。	has:흔들고,	keep	rewrites
+cx:body-motion-te:10	手を振って別れた。	lacks:며	keep	rewrites
+cx:body-motion-te:10	ミケは手を振って、廊下の向こうに行った。	lacks:흔들며	keep	rewrites
+cx:body-motion-te:10	問いに答えず、ユメは手を振って、廊下の向こうに消えた。	lacks:흔들며	keep	rewrites

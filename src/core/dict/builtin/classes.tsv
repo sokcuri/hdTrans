@@ -27,6 +27,10 @@
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
+//= noun.assortment-head	Nouns of an assortment or a taste that Korean compounds with the food, fruit or flower noun before an の, with no 의 (フルーツの盛り合わせ 과일 모둠, イチゴの味 딸기 맛; spec GRM-4040).
+//= noun.dish-head	Nouns of a dish or a drink that Korean compounds with the food, fruit or flower noun before an の, or with a loanword the dictionary lacks, with no 의 (木苺のケーキ 나무딸기 케이크, ムーンベリーのパイ 문베리 파이; spec GRM-4040).
+//= verb.body-motion	Stems, matched at the end of a word, of verbs of moving or swinging a part of one's body or one's hair (揺らす, 振る, 傾げる): their て form before a verb of turning or looking in the same sentence is what one does meanwhile, -며 (髪を揺らして、こちらを向く 머리카락을 흔들며 이쪽을 향한다; spec GRM-4043).
+//= verb.turn-look	Stems, matched at the end of a word, of verbs of turning toward something or looking (向く, 振り向く, 見上げる) that a て form of verb.body-motion before them accompanies (spec GRM-4043).
 //= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
 //= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
@@ -11277,6 +11281,42 @@ noun.relation-compound	火災
 noun.relation-compound	死亡
 noun.relation-compound	事故
 noun.relation-compound	故障
+noun.assortment-head	盛り合わせ
+noun.assortment-head	詰め合わせ
+noun.assortment-head	セット
+noun.assortment-head	味
+noun.dish-head	パイ
+noun.dish-head	ケーキ
+noun.dish-head	タルト
+noun.dish-head	スープ
+noun.dish-head	ジュース
+noun.dish-head	ジャム
+noun.dish-head	サンド
+noun.dish-head	サンドイッチ
+noun.dish-head	パン
+noun.dish-head	煮込み
+noun.dish-head	マリネ
+noun.dish-head	シチュー
+verb.body-motion	揺ら
+verb.body-motion	揺す
+verb.body-motion	振
+verb.body-motion	振り乱
+verb.body-motion	傾げ
+verb.body-motion	なびかせ
+verb.body-motion	揺らめかせ
+verb.body-motion	弾ませ
+verb.body-motion	震わせ
+verb.turn-look	向
+verb.turn-look	振り返
+verb.turn-look	見
+verb.turn-look	見上げ
+verb.turn-look	見下ろ
+verb.turn-look	見つめ
+verb.turn-look	見や
+verb.turn-look	仰
+verb.turn-look	覗き込
+verb.turn-look	見返
+verb.turn-look	向き直
 word.direction-demonstrative	そっち
 word.direction-demonstrative	こっち
 word.direction-demonstrative	あっち

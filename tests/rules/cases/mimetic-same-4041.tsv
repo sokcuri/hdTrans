@@ -1,0 +1,13 @@
+# 규칙: GRM-4041
+rule	input	expected	kind	layer
+cx:mimetic-same:10	水分でずっしりと重くなっていそうな長い髪	has:묵직해져	fix	rewrites
+cx:mimetic-same:10	「いや、チョコ系の、ズシッと重そうなケーキが多いよなって思って」	has:묵직해 보이는	fix	rewrites
+cx:mimetic-same:10	猟銃から延びるチューブをくわえてゆっくり息を吹き込むと、銃身がずっしりと質量を増していく。	has:묵직이 질량을	keep	rewrites
+cx:mimetic-same:20	握り合った手だけは、ぽかぽかと温かかった。	has:따끈따끈했다	fix	rewrites
+cx:mimetic-same:20	ぽかぽかと陽が照る	has:따끈따끈	keep	rewrites
+cx:mimetic-same:30	ふにふにと柔らかい千莉の乳房。	has:말랑말랑한	fix	rewrites
+cx:mimetic-same:30	佳奈のおっぱいは、ふにふにと形を変えている。	has:말랑말랑 형태를	keep	rewrites
+cx:mimetic-same:40	すべすべと滑らかな肌	매끈매끈한 피부	fix	rewrites
+cx:mimetic-same:40	すべすべとした肌	매끈매끈한 피부	keep	rewrites
+cx:mimetic-same:50	上目遣いの目が、しっとりと潤っている。	has:눈이, 촉촉하다	fix	rewrites
+cx:mimetic-same:50	しっとりと潤んだ瞳が、俺を見つめている。	has:촉촉하게 물기를	keep	rewrites
