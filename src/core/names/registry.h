@@ -131,6 +131,11 @@ public:
     std::string DropReadings(std::string_view line, std::string* cueText = nullptr,
                              std::vector<std::string>* captionNames = nullptr);
 
+    // line with each hiragana name of a speaker label at its start written in Hangul by its sound
+    // ((のぼる)うん 노보루, ［たまお］はい, ゆう：うん, ひかる「待って」): a run of two to six kana that the
+    // dictionaries have as no whole common word, role or sound, read as the katakana names are (spec LEX-5800).
+    std::string ReadKanaLabels(std::string_view line);
+
     text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
     std::string chan = "짱";
@@ -176,6 +181,11 @@ private:
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
+    // Whether the hiragana run t of a speaker label is a name (ReadKanaLabels); bracketed: the label is in brackets,
+    // which also tag sounds and voices.
+    bool KanaLabelName(std::string_view t, bool bracketed);
+    // Whether the dictionaries have the hiragana run t as a word whole (KanaLabelName).
+    bool KanaWordRun(std::string_view t);
     // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
     // それから), which is no name however often the document writes it (spec LEX-4828).
     bool WordThenParticle(std::string_view t);

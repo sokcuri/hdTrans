@@ -43,6 +43,11 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 // or as the subject or topic of what a person does or says (spec LEX-5175).
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after);
 
+// Whether the word between before and after is a speaker label at the start of a line: a part of a label in
+// round or square brackets followed by speech ((のぼる)うん, ［たまお］はい), or the word alone before a colon,
+// ≫, a quote that ends the line or a role in round brackets, after caption marks only (spec LEX-5800).
+bool SpeakerLabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after);
+
 // Whether after opens the value of a field of a status window: a colon and a value with no kana or kanji
 // (力：35, 敏捷：Ｂ+; spec LEX-5175).
 bool StatusFieldAt(std::string_view after);

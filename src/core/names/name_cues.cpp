@@ -938,6 +938,10 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
     return out;
 }
 
+bool SpeakerLabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
+    return LabelAt(snap, before, after) || internal::SquareLabelAt(before, after);
+}
+
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     if (CommonSenseAt(after)) return false;
     // An honorific: the document has named the word already, so a sense of an animal does not stand in the
