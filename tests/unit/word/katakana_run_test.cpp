@@ -82,15 +82,12 @@ HD_TEST(word_katakana_run_time_grows_with_its_length) {
         HD_CHECK(longOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 3200)));
         // Sixteen times the run takes 16 times the time in proportion and 256 times with the square,
         // so the ratio is 16 + 240q for a share q of quadratic time at 200. The bound 64 leaves four
-        // times the linear ratio for a loaded machine and fails once q passes 0.2. On a shared CI runner
-        // (CI set) or with HDTRANS_SKIP_TIMING set the timing is too uneven for the bound, so there
-        // the ratio is only written to stderr.
-        const char* ci = std::getenv("CI");
-        const char* skip = std::getenv("HDTRANS_SKIP_TIMING");
-        if ((ci != nullptr && *ci != '\0') || (skip != nullptr && *skip != '\0')) {
-            std::fprintf(stderr, "katakana run time ratio %.1f (bound 64, not checked)\n", longRun / shortRun);
-        } else {
+        // times the linear ratio for a loaded machine and fails once q passes 0.2. It is checked off a
+        // shared CI runner only (hdtest::TimingChecked); there the ratio is written to stderr.
+        if (hdtest::TimingChecked()) {
             HD_CHECK(longRun < 64 * shortRun);
+        } else {
+            std::fprintf(stderr, "katakana run time ratio %.1f (bound 64, not checked)\n", longRun / shortRun);
         }
     }
 }

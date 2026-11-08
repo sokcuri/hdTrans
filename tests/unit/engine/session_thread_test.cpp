@@ -427,7 +427,8 @@ HD_TEST(engine_session_fallback) {
         const double fallbackMs = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count();
         std::printf("session fallback call %d: %.3f ms, text %.3f ms\n", call + 1, fallbackMs, normalMs);
 #if defined(NDEBUG) && !defined(HDTRANS_TEST_INSTRUMENTED) && !defined(__SANITIZE_ADDRESS__) && !defined(__SANITIZE_THREAD__)
-        HD_CHECK(fallbackMs < std::max(20.0, normalMs * 20.0));
+        // The time bound is checked off a shared CI runner only; the times are printed above.
+        if (hdtest::TimingChecked()) HD_CHECK(fallbackMs < std::max(20.0, normalMs * 20.0));
 #endif
     }
 #if !defined(NDEBUG) || defined(HDTRANS_TEST_INSTRUMENTED) || defined(__SANITIZE_ADDRESS__) || defined(__SANITIZE_THREAD__)
