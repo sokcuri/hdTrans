@@ -3530,3 +3530,8 @@ cx:why-came-about:20	GRM-4021	&&5 ||3 S+0== "こうな" S+0== "そうな" S+0== 
 //: decide-next	||5 S+1== "決断" S+1== "決意" S+1== "決心" S+1== "決定" S+1== "L決め"	A verb of deciding after を.
 cx:decide-kiro:10	GRM-4022	&&4 S+0== "を" F-1== "verb" Y-1== "R것" :decide-next	set-ending@-1 "1기로" set-target " " replace-head@+1 "결단" "결심" replace-head@+1 "결의" "결심"	帰るということを決断した 돌아가기로 결심했다
 cx:decide-kiro:20	GRM-4022	&&5 S+0== "を" ||2 S-1== "こと" S-1== "事" D-1== "것" ||2 F-2== "verb" P-2== "7" :decide-next	set-ending@-2 "1기로" set-target@-1 "" set-target "" replace-head@+1 "결단" "결심" replace-head@+1 "결의" "결심"	行かないことを決めた 가지 않기로 결정했다
+//: polite-ask-end	||2 F+0== "question-after" &&2 I+0== "Rかしら" F+0== "quoted"	The request ends the sentence as a question: a question mark, or かしら said to someone in a quote (not a かしら of wondering in narration).
+//= polite-ask	after OfferPromise 1998	A て form before the plain いただける or くださる that ends the sentence as a question (:polite-ask-end) asks politely, 주시겠어요 (用意していただけるかしら？ 준비해 주시겠어요?, 見てくださる？ 봐 주시겠어요?; spec LEX-5051), not 주실 수 있을까 or 주셔. ます forms and negative questions keep their reading.
+cx:polite-ask:10	LEX-5051	&&3 ||2 S+0== "していただけ" S+0== "して頂け" ||2 I+0== "Rける" I+0== "Rけるかしら" :polite-ask-end	set-target "해 주&AE@" set-ending "1겠어요"	用意していただけるかしら？ 준비해 주시겠어요?
+cx:polite-ask:20	LEX-5051	&&4 ||2 S+0== "いただけ" S+0== "頂け" F-1== "verb" ||2 I+0== "Rける" I+0== "Rけるかしら" :polite-ask-end	set-target "주&AE@" set-ending "1겠어요"	待っていただける？ 기다려 주시겠어요?
+cx:polite-ask:30	LEX-5051	&&4 ||2 S+0== "くださ" S+0== "下さ" F-1== "verb" ||2 I+0== "Rさる" I+0== "Rさるかしら" :polite-ask-end	set-ending "1겠어요"	見てくださる？ 봐 주시겠어요?

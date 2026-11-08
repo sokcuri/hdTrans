@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 constraint:itadake-dake	きさまは沙漠をウロウロしていただけじゃないか！	너는 사막을 어슬렁어슬렁하고 있었을 뿐이잖아!	fix	lookup
 constraint:itadake-dake	旅の想い出を形にしていただける清流線グッズや地元の名産品を取りそろえてお待ちしております。	여행의 추억을 형태로 해 주시는 청류선굿즈나 동네의 명산품을 두루 갖추어 기다리고 있습니다.	keep	lookup
-constraint:itadake-dake	……きちんと、１から１０まで、聞かせていただけるかしら？	……제대로, 1에서 10까지, 들려주어 주실 수 있을까?	keep	lookup
+constraint:itadake-dake	……きちんと、１から１０まで、聞かせていただけるかしら？	has:주시겠어요?	keep	lookup
 constraint:itadake-dake	もう少し声を出していただけるとありがたいのですが	좀 더 소리를 내주면 고맙습니다만	keep	lookup
 constraint:itadake-dake	我々治安部に、あなた方の選挙を、手伝わせていただけませんか？	우리 치안부에, 여러분의 선거를, 도와도 될까요?	keep	lookup
 constraint:itadake-dake	これがダメなら、すっぱり諦めます……ですから、一度、目を通していただけませんか？	이것이 안되면, 깨끗이 포기합니다……니까, 한 번, 훑어봐 주실 수 없습니까?	keep	lookup

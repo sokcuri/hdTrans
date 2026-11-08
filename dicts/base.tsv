@@ -5724,7 +5724,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おうち	집	N110	VPl		GN				jisjk:264807		
 おうちゃく	뻔뻔스%A4@	G8U0			GN				jisjk:119441		
 おうちゃくもの	게으른 놈	N110	VHn		GN				jisjk:127909		
-おうち合わせ	협의	N110			GN				jisjk:127907		
+おうち合わせ	협의	N110		Hd	GN				jisjk:127907		
 おうて	장군	N110	VRw		GN				jisjk:127912		
 おうてい	진심	N110	SFl		GN				jisjk:127913		
 おうと	구토	N110	QHP	Hd	GN				jisjk:127915		
@@ -7689,7 +7689,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お手紙	편지	I110	VSwVCm		GN				jisjk:40618		
 お手軽	간단	K110		Hd	GN				jisjk:343267		
 お手軽価格	부담없는 가격	I110			GN				jisjk:264679		
-お打合わせ	협의	N110			GN				jisjk:127906		
+お打合わせ	협의	N110		Hd	GN				jisjk:127906		
 お払い	지불	I110			GN				jisjk:40593		
 お払い箱	해고	I110			GN				jisjk:40594		
 お払箱	해고	I110			GN				jisjk:40595		
@@ -7715,7 +7715,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お探しの	찾으시는	A9H1			GN				jisjk:104017		
 お探しの	찾으시는	E0H0			GN				jisjk:149766		
 お握り	주먹밥	I110			GN				jisjk:40624		
-お支払い	지불	N110			GN				jisjk:342961		
+お支払い	지불	N110		Hd	GN				jisjk:342961		
 お支払いくださ	지불해 주&AE@	M448			GN				jisjk:262861		
 お支払い済み	지불필	N110			GN				jisjk:150688		
 お支払い額	지불액	N110	VMo		GN				jisjk:150687		
@@ -7823,7 +7823,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お申し付けください	말씀해 주십시오	A9D0			GN				jisjk:267795		
 お申し入れ	신청	N110			GN				jisjk:166037		
 お申し越しの	말씀하신	E0H0			GN				jisjk:123432		
-お申し込み	신청	N110			GN				jisjk:260545		
+お申し込み	신청	N110		Hd	GN				jisjk:260545		
 お申し込み下さいますよう	신청해 주시길	E300			GN				jisjk:149053		
 お申し込み下さいますように	신청해 주시길	N110			GN				jisjk:150754		
 お申出	신청	N110		Hd	GN				jisjk:267796		
@@ -7973,7 +7973,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お薦めのもの	추천하실 것	N110			GN				jisjk:150696		
 お行きにな	가&AE@	M428	UMv		GN				jisjk:343793		
 お袋	어머니	N110	VHn		GN				jisjk:13849		
-お褒め	칭찬	I110			GN				jisjk:106870		
+お褒め	칭찬	I110		Hd	GN				jisjk:106870		
 お見えにな	오&AE@	M428			GN				jisjk:263730		
 お見せ	보여드&AA@	M449			GN				jisjk:263627		
 お見せいた	보여 드&AA@	M443			GN				jisjk:266158		
@@ -13830,7 +13830,7 @@ ttt	ttt	K110			GN				jisjk:201744
 くださいますよう	6 주시도록	S570			GN				jisjk:262847		
 くださいますよう	6 주시도록	S5:0			GN				jisjk:262897		
 くださいますれば	해주시면	P200			GN				jisjk:267049		
-くださいませ	주십시오	E200			GN	2644	||1 &&2 P-1== "4**" M-1== "5:057*"	くださいませ는 앞 동사가 정중형 또는 연결형 어미를 지니면 주십시오로 고른다.	jisjk:267036		
+くださいませ	 주십시오	E200			GN	2644	||1 &&2 P-1== "4**" M-1== "5:057*"	くださいませ는 앞 동사가 정중형 또는 연결형 어미를 지니면 주십시오로 고른다.	jisjk:267036		
 くださいませ	해 주십시오	E200			GN	2645	||1 &&2 P-1== "1**" G-1== "Hd"	「くださいませ」가 동작명사 뒤에 오면 ‘해 주십시오’를 고른다.	jisjk:267037		
 くださいませ	해 주십시오	E200			GN				jisjk:267038		
 くださいませ	6 주십시오	S580			GN				jisjk:267589		
@@ -18867,8 +18867,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ご再考頂	재고해 주&AE@	M441			GN				jisjk:119755		
 ご出場頂	나오시기 바&A9@	M421			GN				jisjk:119766		
 ご出身はどちらですか	어디 출신이십니까	A9D0			GN				jisjk:114775		
-ご出金	출금	N110			BZ				jisjk:356333		
-ご利用	이용	N110			GN				jisjk:184087		
+ご出金	출금	N110		Hd	BZ				jisjk:356333		
+ご利用	이용	N110		Hd	GN				jisjk:184087		
 ご利用いただ	이용하&AE@	M441			GN				jisjk:263726		
 ご利用いただいてお	이용하실 수 &HN@	M4U1		Ma	GN	2111	||1 &&2 U+0== "Lません" D+0= "이용하실 수 &M9@"	ご利用いただいてお가 ません 계열 어미를 가지면 번역을 이용하실 수 없다로 바꾼다. (미발동: rare-word)	jisjk:263727		
 ご利用ください	이용하십시오	N110			GN				jisjk:151120		
@@ -18878,11 +18878,11 @@ ttt	ttt	K110			GN				jisjk:201744
 ご利用の前	이용하시기 전	N110			GN				jisjk:151121		
 ご利用下さい	이용하십시오	N110			GN				jisjk:151119		
 ご加入いただ	가입&AV@	M421			GN				jisjk:119714		
-ご勘弁	용서	I110			GN				jisjk:264713		
+ご勘弁	용서	I110		Hd	GN				jisjk:264713		
 ご協力	협력	N110		Hd	GN				jisjk:260580		
 ご協力を得	협력을 &HH@	M427		Pn	GN				jisjk:266508		
 ご協力頂	협력해 주&AE@	M421			GN				jisjk:119729		
-ご協議	협의	I110			CT				jisjk:260615		
+ご協議	협의	I110		Hd	CT				jisjk:260615		
 ご厚情に預か	관심을 베풀어 주&AE@	M428		Pn	GN				jisjk:370977		
 ご厚情に預かり、	관심을 가져 주시니	A9D0			GN				jisjk:262785		
 ご厚情を賜わ	관심을 베풀어 주&AE@	M428			GN				jisjk:119743		
@@ -18977,7 +18977,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ご支援の賜と深謝いた	지원의 결실로 깊이 감사&AV@	M443		Pn	GN				jisjk:266507		
 ご教示	교시	N110		Hd	GN				jisjk:260617		
 ご教示いただ	알려주&AE@	M441			GN				jisjk:119727		
-ご期待	기대	N110	UTh		GN				jisjk:341218		
+ご期待	기대	N110	UTh	Hd	GN				jisjk:341218		
 ご期待にそ	기대에 부합&C6@	M420			GN				jisjk:119724		
 ご期待に添いかねること	기대에 부응하지 못함	A9D0			GN				jisjk:260751		
 ご期待申しあげ	기대&AV@	M427	UTh	Pn	GN				jisjk:370927		
@@ -18996,7 +18996,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ご機嫌が斜め	기분이 좋지 %B5@	G8U0			GN				jisjk:139405		
 ご機嫌を伺	안부를 &J7@	M440			GN				jisjk:119715		
 ご母堂さま	자당	I110			GN				jisjk:111697		
-ご決済	결제	N110			GN				jisjk:260503		
+ご決済	결제	N110		Hd	GN				jisjk:260503		
 ご注文	주문	N110		Hd	GN				jisjk:260486		
 ご注文申しあげ	주문드&AA@	M447			GN				jisjk:119900		
 ご活用いただ	활용하&AE@	M421			GN				jisjk:119712		
@@ -19013,7 +19013,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ご無沙汰を	오랫동안 연락을 못드&AA@	M429			GN				jisjk:371847		
 ご照会	조회	N110		Hd	GN				jisjk:260561		
 ご照会くださ	조회를 받으&AE@	M428			GN				jisjk:262882		
-ご照合	조합	N110			GN				jisjk:260603		
+ご照合	조합	N110		Hd	GN				jisjk:260603		
 ご理解いただ	이해하&AE@	M421			GN				jisjk:120081		
 ご理解の上	이해하신 후에	E300			GN				jisjk:149157		
 ご理解をいただ	이해해 주&AE@	M421			GN				jisjk:147986		
@@ -19029,10 +19029,10 @@ ttt	ttt	K110			GN				jisjk:201744
 ご用意いた	준비&AV@	M443			GN				jisjk:120021		
 ご用意いただ	준비해 주&AE@	M421			GN				jisjk:120023		
 ご用意させていただ	준비&AV@	M421			GN				jisjk:120025		
-ご留学	유학	K110			GN				jisjk:268225		
+ご留学	유학	K110		Hd	GN				jisjk:268225		
 ご留意なされ	유의하&AE@	M467			GN				jisjk:268193		
 ご病気の由	병환 중이라니	I110			GN				jisjk:262582		
-ご発送	발송	N110			GN				jisjk:260587		
+ご発送	발송	N110		Hd	GN				jisjk:260587		
 ご登録いただ	등록해 주&AE@	M421			GN	1389	||1 &&3 S-1== "に" ||2 S-2== "R方" S-2== "R様" D-1= "(이)가"	ご登録いただ 앞에 方·様로 끝나는 말과 に가 오면 등록해 주시다를 고르고 に를 이·가로 바꾼다. (미발동: rare-word)	jisjk:119923		
 ご盛典をあげられ	성대한 의식을 &MP@	M427		Pn	GN				jisjk:268218		
 ご盛業のことと	성업하시니	A9D0			GN				jisjk:261823		
@@ -19049,7 +19049,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ご笑納ください	변변치 않으나 받아주십시오	A9D0			GN				jisjk:267086		
 ご笑納くだされば	받아주시면 	A9D0			GN				jisjk:267268		
 ご笑納くだされば幸いに存じ	받아 주시면 감사&AV@	A427		Pn	GN				jisjk:267816		
-ご納入	납입	N110			GN				jisjk:260584		
+ご納入	납입	N110		Hd	GN				jisjk:260584		
 ご紹介してい	소개해 &A1@	M42?			GN				jisjk:119771		
 ご紹介してゆ	소개드&AA@	M441			GN				jisjk:119774		
 ご紹介しますよ	소개할게요	N110			GN				jisjk:152719		
@@ -19097,19 +19097,19 @@ ttt	ttt	K110			GN				jisjk:201744
 ご覧察	고려	N110			GN				jisjk:374978		
 ご覧頂	보&AE@	M441			GN				jisjk:361929		
 ご親切	친절	N110			GN				jisjk:373397		
-ご許容	허용	N110			GN				jisjk:260490		
+ご許容	허용	N110		Hd	GN				jisjk:260490		
 ご説明いただ	설명해 주&AE@	M441			GN				jisjk:119800		
 ご説明申しあげた	설명드리고 $F9@	H7U0			GN				jisjk:260642		
-ご調査	조사	N110			GN				jisjk:260601		
+ご調査	조사	N110		Hd	GN				jisjk:260601		
 ご調査のうえ	조사하신 후	I110			GN				jisjk:262902		
-ご請求	청구	N110			GN				jisjk:260600		
+ご請求	청구	N110		Hd	GN				jisjk:260600		
 ご請求申しあげ	청구해 올&AA@	M447			GN				jisjk:119797		
 ご賢察	심사숙고	N110			GN				jisjk:260489		
 ご賢察のうえ	심사숙고한 후	A9D0			GN				jisjk:343397		
 ご賢察の上	심사숙고 하신 후에	I110			GN				jisjk:260819		
 ご足労を願	와 주시기를 바&A9@	M440			GN				jisjk:119808		
 ご辛抱いただ	참아&CJ@	M441			GN				jisjk:119789		
-ご辞退	사퇴	N110			GN				jisjk:260563		
+ご辞退	사퇴	N110		Hd	GN				jisjk:260563		
 ご辞退申しあげます	사양하겠습니다	K110			GN				jisjk:262513		
 ご返事	답변	N110			GN				jisjk:260576		
 ご返送	반송	N110		Hd	GN				jisjk:260596		
@@ -19129,7 +19129,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ご送付の	송부해 주신	I110			CT				jisjk:260610		
 ご送付申しあげ	송부해 드&AA@	M447			GN				jisjk:119806		
 ご送金	송금	N110		Hd	GN				jisjk:260493		
-ご通知	통지	N110			GN				jisjk:260522		
+ご通知	통지	N110		Hd	GN				jisjk:260522		
 ご逝去なされました由	서거하시어	A9D0			GN				jisjk:262522		
 ご連絡	연락	N110		Hd	GN				jisjk:260564		
 ご連絡申し上げ	연락 드&AA@	M447			GN				jisjk:120089		
@@ -215783,7 +215783,7 @@ ttt	ttt	K110			GN				jisjk:201744
 振り起こ	분기&AV@	M433			GN				jisjk:95077		
 振り込	불입&AV@	M445			GN				jisjk:262079		
 振り込まれ	불입&C6@	M427			GN				jisjk:263566		
-振り込み	이체	I110	VMy		GN				jisjk:257726		
+振り込み	이체	I110	VMy	Hd	GN				jisjk:257726		
 振り込み送金	계좌입금	N110		Hd	GN				jisjk:160631		
 振り返	되돌아 &AY@	M438			GN	817	||1 &&3 M+0== "571" U+0== "って" Y+0= "1고"	振り返의 순수 연결형 って만 어미를 -고로 바꾼다. ても·てから 같은 양보·시간 어미는 그대로 둔다.	jisjk:95081		
 振り返	악화&C6@	M413	UTiVFr		GN				jisjk:95082		
