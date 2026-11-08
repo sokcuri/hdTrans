@@ -2208,12 +2208,127 @@ bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32strin
     return false;
 }
 
+// A ～ or 〜 that splits a word the earlier stages do not draw out: after katakana and before kana, a
+// word of three kana or more or an adjective stem (タ〜イム タイム, ヤバ〜い ヤバい), between a kana said twice that makes an adjective or a verb (い～い
+// いい), or after a kana of the e or o row that starts its hiragana run where its long vowel spelled
+// out makes a word of three kana or more (て～とく ていとく); and a small vowel right after a kanji adjective stem before its い
+// (痛ぁい 痛い). The word must be a content word of the dictionary (a noun, a verb or an adjective, no
+// interjection) that no word of the text as written covers. A ～ after a word that then ends its phrase draws it out (ヤバい～).
+bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ctx, const dict::Snapshot& snap) {
+    bool changed = false;
+    const auto inWord = [](char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r); };
+    for (size_t k = 1; k < rs.size(); k++) {
+        const char32_t c = rs[k];
+        const bool tilde = c == U'～' || c == U'〜';
+        const bool small = IsSmallVowel(c) && IsKanjiRune(rs[k - 1]);
+        if (!tilde && !small) continue;
+        size_t end = k;
+        while (end < rs.size() && rs[end] == c) end++;
+        if (end >= rs.size()) continue;
+        const char32_t prev = rs[k - 1], next = rs[end];
+        if (!inWord(prev) || !(IsHiraganaRune(next) || IsKatakanaRune(next)) || IsSmallVowel(next) || next == U'ー' ||
+            next == U'っ' || next == U'ッ') {
+            k = end - 1;
+            continue;
+        }
+        // A kana said again before a word that starts with it is a stutter (お～お前, あ～あなた), no word
+        // drawn out.
+        const bool goodStem = next == U'い' && e.Tags(std::u32string_view(&prev, 1)).find('H') != std::string::npos;  // い～い
+        if (prev == next && !goodStem && e.LongestKey(std::u32string_view(rs).substr(end)) >= 2) {
+            k = end - 1;
+            continue;
+        }
+        size_t from = k - 1;
+        while (from > 0 && k - from < 6 && inWord(rs[from - 1])) from--;
+        // The word that starts in from..k-1 of t and reaches past position k, its end, or 0.
+        const auto reach = [&](const std::u32string& t, size_t minLen) {
+            size_t best = 0;
+            for (size_t j = from; j < k; j++) {
+                const std::string text = EncodeText(std::u32string_view(t).substr(j, std::min(t.size() - j, kMaxKeyRunes)));
+                for (const dict::Candidate& cand : snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup).list) {
+                    const size_t n = text::RuneCount(cand.source);
+                    const std::string_view part = cand.codes != nullptr ? cand.codes->partText : std::string_view();
+                    if (n < minLen || j + n <= k || part.size() < 3 || !In(part[0], U"NIMHG") || part[2] == '3') continue;
+                    best = std::max(best, j + n);
+                }
+            }
+            return best;
+        };
+        std::u32string m;
+        size_t best = 0;
+        if (small) {
+            m = rs.substr(0, k) + rs.substr(end);
+            if (m[k] == U'い') {
+                for (size_t j = from; j < k && best == 0; j++) {
+                    if (e.Tags(std::u32string_view(m).substr(j, k - j)).find('H') != std::string::npos) best = k + 1;
+                }
+            }
+        } else if (IsKatakanaRune(prev)) {
+            // A katakana word of three kana or more (タイム; not ザ～ラ, which may be a name).
+            m = rs.substr(0, k) + rs.substr(end);
+            best = reach(m, 3);
+            // A katakana adjective stem before its い (ヤバ〜い ヤバい).
+            for (size_t j = from; j < k && best == 0 && m[k] == U'い'; j++) {
+                if (e.Tags(std::u32string_view(m).substr(j, k - j)).find('H') != std::string::npos) best = k + 1;
+            }
+        } else if (IsHiraganaRune(prev) && prev == next && IsHiraganaRune(next)) {
+            m = rs.substr(0, k) + rs.substr(end);
+            best = reach(m, 2);
+            if (best > 0 && (from != k - 1 || e.Tags(std::u32string_view(m).substr(k - 1, best - k + 1)).find_first_of("HM") == std::string::npos)) {
+                best = 0;
+            }
+            // An adjective stem said again before its い (い～い いい).
+            if (best == 0 && from == k - 1 && m[k] == U'い' && e.Tags(std::u32string_view(m).substr(k - 1, 1)).find('H') != std::string::npos) {
+                best = k + 1;
+            }
+        } else if (IsHiraganaRune(prev) && IsHiraganaRune(next)) {
+            const int v = HiraganaVowel(prev);
+            // The word starts at the kana before the mark, which starts its hiragana run (て～とく; not the
+            // particle of 追い込みますよ～ついて), and goes on two kana or more past the mark (ていとく; not
+            // うんめい|お, すごう|い). An adjective without the mark first (お～いし～い おいし～い), then a word with
+            // the long vowel of an e- or o-row kana spelled out.
+            const bool starts = k == 1 || !IsHiraganaRune(rs[k - 2]);
+            if (starts && next != U'ん') {
+                // Only an adjective drawn out (おいし～い): before another word the kana is a sound of its
+                // own (あ～そこ 아~거기).
+                m = rs.substr(0, k) + rs.substr(end);
+                best = reach(m, 3);
+                if (best < k + 2 || e.Tags(std::u32string_view(m).substr(k - 1, best - k + 1)).find('H') == std::string::npos) best = 0;
+            }
+            if (best == 0 && (v == 3 || v == 4) && starts && next != U'っ' && next != U'ん') {
+                m = Spliced(rs, k, v == 3 ? U"い" : U"う", end);
+                best = reach(m, 3);
+                if (best < k + 3) best = 0;
+            }
+        }
+        if (best == 0) {
+            k = end - 1;
+            continue;
+        }
+        // Not where the text as written holds a word across the mark that reaches as far (お～い is a key,
+        // but おいしい goes further).
+        bool written = false;
+        for (size_t j = from; j < k && !written; j++) {
+            const size_t far = j + e.LongestKey(std::u32string_view(rs).substr(j));
+            written = far > end && far - (end - k) + (m.size() + (end - k) - rs.size()) >= best;
+        }
+        if (written) {
+            k = end - 1;
+            continue;
+        }
+        if (tilde && (best >= m.size() || (!inWord(m[best]) && !In(m[best], U"～〜ー")))) m.insert(best, 1, U'～');
+        rs = std::move(m);
+        changed = true;
+    }
+    return changed;
+}
+
 }  // namespace
 
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
-    bool changed = false;
+    bool changed = MidWordStretch(rs, e, ctx, snap);
     // Outside quotes, a run of two or more ー after a noun or a particle in narration is a dash, ――, not
     // a lengthening (spec SND-23): after a noun with kanji that names no person or title (運命ーーー。
     // 운명――., 木刀ーーーーそれは), before 。, a closing bracket or more text; after a particle that

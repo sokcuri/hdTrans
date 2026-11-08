@@ -28564,3 +28564,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 私共	저희	N110	VHn		GN			LEX-5014: 私共にお任せください 저희에게 맡겨 주세요	replace		わたくしども	w:35128
 男共	남자들	N110	VHn		GN			LEX-5014: 男共が騒いでいる 남자들이 떠들고 있다			おとこども	w:35129
 女共	여자들	N110	VHn		GN			LEX-5014: 女共は黙れ 여자들은 입을 다물어라			おんなども	w:35130
+かぁい	귀$GJ@	H7U0			GN			かわいい를 줄여 늘인 말씨(かぁいい 귀여워).				w:35280
