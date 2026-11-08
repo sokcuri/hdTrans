@@ -2609,7 +2609,7 @@ const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, 
 }
 
 // Whether s starts with two hiragana.
-bool TwoKanaLead(std::string_view s) {
+static bool TwoKanaLead(std::string_view s) {
     const std::size_t one = FirstChar(s).size();
     return one != 0 && one < s.size() && AllHiragana(s.substr(0, one + FirstChar(s.substr(one)).size()));
 }

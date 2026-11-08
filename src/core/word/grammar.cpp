@@ -4483,9 +4483,9 @@ void VerbNegative(Flusher& f) {
         // that glosses it (似つかわしくない 어울리지 않는, spec GRM-3963).
         if ((stem.ends_with("く") && !VerbGlossNegative(lemma)) || AdjectiveNegative(lemma)) {
             if (e->dst == "4") it->AssignDirectSlot(it->DirectIndex(), "1은");
-        } else if (e->dst.starts_with("1다") && !e->dst.starts_with("1다가")) {
-            // every ending that starts with the plain 다 (1다, 1다고, 1다면, 1다는), not the 다가 of a switch: 어울리지 않는다고
-            // (spec LEX-5052)
+        } else if (e->dst.starts_with("1다") && !e->dst.starts_with("1다가") && !e->dst.starts_with("1다간")) {
+            // every ending that starts with the plain 다 (1다, 1다고, 1다면, 1다는), not the 다가 or 다간 of a switch:
+            // 어울리지 않는다고 (spec LEX-5052)
             it->AssignDirectSlot(it->DirectIndex(), "1는다" + e->dst.substr(std::string_view("1다").size()));
         } else if (e->dst == "4") {
             it->AssignDirectSlot(it->DirectIndex(), "1는");

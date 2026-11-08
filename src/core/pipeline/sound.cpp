@@ -2494,7 +2494,7 @@ size_t Repeats(std::u32string_view unit, std::u32string_view f, size_t i, std::s
 
 // Whether key, an interjection with a ー before its last kana, is a word of sound.drawn-word whose ー
 // draws out the word (すごーい 대단해~), not its usual spelling (はーい, おーい).
-bool DrawnWordRow(std::u32string_view key) {
+static bool DrawnWordRow(std::u32string_view key) {
     std::u32string h(key);
     for (char32_t& c : h) {
         if (c >= U'ァ' && c <= U'ヶ') c -= 0x60;

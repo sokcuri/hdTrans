@@ -973,7 +973,7 @@ bool UngivenFavour(std::string_view s, size_t pos, Match& m) {
                                                        {"なくて", "くれなくて"}, {"なく", "くれなく"}, {"ない", "くれない"}, {"ず", "くれず"}};
     for (const auto& f : kForms) {
         size_t q = p;
-        // a word of the dictionary that starts before the お and covers the form reads it (いかがお過ごしでしょうか)
+        // a word of the dictionary that starts at the last kana of the て form and covers the form reads it
         if (!Lit(s, q, f[0]) || (pos > 0 && WordCovers(s, pos - LastRune(s.substr(0, pos)).size, q))) continue;
         const std::string_view rest = s.substr(q);
         for (const std::string_view ask : {"か", "？", "?", "だろうか", "でしょうか", "かな", "かしら", "かね", "の？", "の?"}) {
