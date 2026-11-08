@@ -546,7 +546,7 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassHiragana:
         // な and がら after it are the ながら of a verb stem (みながら 보면서).
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
-        // An adjectival noun of three letters or more takes its adnominal な (まことしやかな噂; LEX-5113).
+        // An adjectival noun of three letters or more takes its adnominal な (まことしやかな噂; LEX-5116).
         if (next == "な" && pc.size() > 1 && pc[1] == '8' && text::RuneCount(u.key) >= 3 && !rest.starts_with("なが")) return true;
         return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
     case kClassKanji:
@@ -597,7 +597,7 @@ bool Worker::KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) 
         return false;
     }
     const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
-    // The な of なの and なん after a noun is the copula too (かれしなんだ, かれしなの; LEX-5113).
+    // The な of なの and なん after a noun is the copula too (かれしなんだ, かれしなの; LEX-5116).
     for (const std::string_view c : {"です", "でした", "でしょ", "なの", "なん"}) {
         if (rest.starts_with(c)) return true;
     }

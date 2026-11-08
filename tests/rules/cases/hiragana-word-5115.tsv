@@ -1,4 +1,4 @@
-# 규칙: LEX-5112
+# 규칙: LEX-5115
 rule	input	expected	kind	layer
 segment:kana-word-first	笑顔のしわを増やす	웃는 얼굴의 주름을 늘린다	fix	segment
 segment:kana-word-first	「くるみ割り人形」。	「호두까기 인형」.	fix	segment

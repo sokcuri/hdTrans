@@ -2474,7 +2474,7 @@ bool TwoKanaLead(std::string_view s) {
     return one != 0 && one < s.size() && AllHiragana(s.substr(0, one + FirstChar(s.substr(one)).size()));
 }
 
-// LEX-5112: a word written in hiragana is read whole where it starts a word, not as shorter readings and the kana
+// LEX-5115: a word written in hiragana is read whole where it starts a word, not as shorter readings and the kana
 // after them (しわを 주름을, not し + わ + を; かまいたちが, not か + まい + たち; たしかめて 확인해, not たしか + め +
 // て). The word is a noun row that ends a word (at a particle, a mark, a copula, a character other than hiragana or
 // the end), or a verb whose form reads at full[cursor:]; it starts with two hiragana and is longer than the first

@@ -1,4 +1,4 @@
-# 규칙: LEX-5114
+# 규칙: LEX-5117
 rule	input	expected	kind	layer
 defaults:kana-common-sense	ウィルソン じゅんびは いいか？	윌슨 준비는 좋은가?	fix	defaults
 defaults:kana-common-sense	せいかい言ってもいい？	정답 말해도 괜찮아?	fix	defaults
