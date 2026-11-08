@@ -5891,8 +5891,8 @@ ttt	ttt	K110			GN				jisjk:201744
 おかき	센베과자	K110	VFd		GN				jisjk:116913		
 おかけしな	끼치지 $DH@	H7U0			GN				jisjk:267721		
 おかけにな	앉으&AE@	M428			GN				jisjk:264021		
-おかけにな	&L1@	M428			GN				jisjk:341124		
-おかけにな	&L1@	M428			GN	3019	||3 S-3== "電話" S-2== "電話" S-1== "電話"	앞 세 단어 안에 電話가 있으면 おかけにな를 거시다로 고른다. (미발동: rare-word)	jisjk:341125		
+おかけにな	거&AE@	M428			GN				jisjk:341124		
+おかけにな	거&AE@	M428			GN	3019	||3 S-3== "電話" S-2== "電話" S-1== "電話"	앞 세 단어 안에 電話가 있으면 おかけにな를 거시다로 고른다. (미발동: rare-word)	jisjk:341125		
 おかげ	덕분	N110			GN	514	||1 &&3 S+1== "と" D+1== "(이)라고" S+2== "感謝"	뒤에 이라고로 번역되는 と와 感謝가 이어지면 おかげ를 덕분으로 고른다. (미발동: rare-context)	jisjk:40462		
 おかげさまで	덕분에	A9D0			GN				jisjk:114848		
 おかげさまで	덕분에	N110		Nn	GN				jisjk:150660		
@@ -46116,7 +46116,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アタゴ	아타고	N130			GN				jisjk:97442		
 アタゴニズム	반대	N110			GN				jisjk:42551		
 アタシ	저	N120	VHn		GN				jisjk:344648		
-アタッカー	어텍커	N110			GN				jisjk:42552		
+アタッカー	어태커	N110			GN				jisjk:42552		
 アタック	어택	N110		Hd	GN				jisjk:42553		
 アタッシェ	아타셰	N110			GN				jisjk:42554		
 アタッシェケース	아타쉐 케이스	N110			GN				jisjk:42555		
@@ -46471,7 +46471,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アナリエ	아나리에	N130			GN				jisjk:115172		
 アナリシス	어널리시스	N110			GN				jisjk:42742		
 アナリシステクニックス	애널리시스 테크닉스	N110			GN				jisjk:42743		
-アナリスト	어널리스트	N110	VHn		GN				jisjk:42744		
+アナリスト	애널리스트	N110	VHn		GN				jisjk:42744		
 アナリスト	증권 분석가	N110			BZ				jisjk:347515		-1
 アナル	어널	N110			GN				jisjk:42745		
 アナログ	아날로그	N110			IT				jisjk:42746		
@@ -47039,7 +47039,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アラブ	아랍	N110	QCT	Qq	GN				jisjk:42998		
 アラブ・ボイコット	아랍 보이콧	N110			BZ				jisjk:347347		
 アラブ連盟	아랍연맹 	N110			BZ				jisjk:347353		
-アラブ首長国連邦	아랍 수장국 연방	N130	QNNVPl		GN				jisjk:112582		
+アラブ首長国連邦	아랍에미리트	N130	QNNVPl		GN				jisjk:112582		
 アラベス	알라베스	N130	VGt		GN				jisjk:367224		
 アラベスク	아라베스크	N110	USoVSp		GN				jisjk:42999		
 アラミド繊維	아라미드 섬유	N110			BZ				jisjk:347365		
@@ -50217,7 +50217,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ウォーレン	워렌	N130	QPN		GN				jisjk:119043		
 ウオッカ	보드카	N110			GN				jisjk:43951		
 ウオッシュアンドウエア	물세탁용 의류	N110	VCp		GN				jisjk:152041		
-ウオッチ	웟치	N110			GN				jisjk:43952		
+ウオッチ	워치	N110			GN				jisjk:43952		
 ウオッチャー	워처	N110	VHn		GN				jisjk:43953		
 ウオッチワード	표어	N110			GN				jisjk:113141		
 ウオッチング	워칭	N110			GN				jisjk:43954		
@@ -54328,7 +54328,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カミナガ販売	가미나가판매	N110			GN				jisjk:111719		
 カミナリ	천둥	N110			GN				jisjk:99140		
 カミネーロ	카미네로	N130	QPN		GN				jisjk:367913		
-カミュ	카미유	N130	QPN		GN				jisjk:45524		
+カミュ	카뮈	N130	QPN		GN				jisjk:45524		
 カミロ	카미로	N130	QPN		GN				jisjk:370688		
 カミングアウト	커밍아웃	N110			GN				jisjk:116629		
 カミンズディーゼル	가민즈디젤	N110			GN				jisjk:111761		
@@ -54782,7 +54782,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カンナム区	강남구	N110	VPl		GN				jisjk:158626		
 カンナン	강남	N130	QCT		GN				jisjk:375940		
 カンニリンガス	커널링거스	N110			GN				jisjk:158627		
-カンニング	컨닝	N110			GN				jisjk:45702		
+カンニング	커닝	N110			GN				jisjk:45702		
 カンヌ	칸느	N110	VPl		GN				jisjk:45703		
 カンヌ	칸	N130	QCT		GN				jisjk:368627		
 カンノ製作所	간노제작소	N110			GN				jisjk:111704		
@@ -54796,7 +54796,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カンパニペーパー	컴퍼니페이퍼	N110			GN				jisjk:45716		
 カンパニュラ	캠패뉼러	N110	VPe		GN				jisjk:45717		
 カンパニレ	캠퍼닐리	N110			GN				jisjk:45718		
-カンパニー	컨퍼니	N110	VBlVGt		GN				jisjk:45708		
+カンパニー	컴퍼니	N110	VBlVGt		GN				jisjk:45708		
 カンパニー. タウン	컴퍼니 타운	N110	VGt		GN				jisjk:45709		
 カンパニーエコノミスト	컴퍼니 이코노미스트	N110			EC				jisjk:45710		
 カンパニーエコノミスト	컴퍼니이코노미스트	N110			GN				jisjk:45711		
@@ -56936,7 +56936,7 @@ ttt	ttt	K110			GN				jisjk:201744
 クリスタル製品	크리스탈제품	N110			GN				jisjk:112340		
 クリスタンヴァル	크리스탄발	N130	QPN		GN				jisjk:366627		
 クリスチャニア	크리스티아니아	N110			GN				jisjk:46418		
-クリスチャン	크리스찬	N110	VHnUCl		GN				jisjk:46419		
+クリスチャン	크리스천	N110	VHnUCl		GN				jisjk:46419		
 クリスチャン	크리스챤	N130	QPN		GN				jisjk:365692		
 クリスチャンディオール	크리스찬디올	N110			GN				jisjk:112077		
 クリスチャンネーム	세례명	N110			GN				jisjk:46420		
@@ -57729,7 +57729,7 @@ ttt	ttt	K110			GN				jisjk:201744
 グラフト	그라프트	N110			GN				jisjk:46664		
 グラフトポリオール	그래프트폴리올	N110			GN				jisjk:164013		
 グラフフォロア	그래프 팔로워	N110			GN				jisjk:266792		
-グラブ	글로브	N110	VCp		GN				jisjk:46665		
+グラブ	글러브	N110	VCp		GN				jisjk:46665		
 グラボ	그래픽 카드	N110	VPeVEl		GN				jisjk:374803		
 グラボウスキー	그라보우스키	N130	QPN		GN				jisjk:369567		
 グラマ	글래머	N110			GN				jisjk:100196		
@@ -58746,7 +58746,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コックピットクルー	조종사	N110	VHnUAq		GN				jisjk:128517		
 コックローチ	바퀴벌레	N110	VAm		GN				jisjk:128518		
 コック方式	콕 방식	N110	UMn		BZ				jisjk:357446		
-コック首相	콕 수상	N110	VHn		GN				jisjk:128513		
+コック首相	콕 총리	N110	VHn		GN				jisjk:128513		
 コッコッ	꼬꼬	E311			GN				jisjk:1409		
 コッサート	코사토	N130	QPN		GN				jisjk:367364		
 コッタロ原野	콧타로겐야	I130	QCTVPl		GN				jisjk:293540		
@@ -59709,7 +59709,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コンフリー	칸프리	N110	VPt		GN				jisjk:128738		
 コンブ	다시마	N110			GN				jisjk:128739		
 コンプ	무료 초대권	N110			GN				jisjk:128740		
-コンプライアンス	컴플리언스	N110	UTs		BZ				jisjk:128741		
+コンプライアンス	컴플라이언스	N110	UTs		BZ				jisjk:128741		
 コンプリメンタリ	컴프리멘터리	N110			GN				jisjk:113139		
 コンプリート	컴플리트	N110	UTs		GN				jisjk:128742		
 コンプレインレター	컴플레인 레터	N110			GN				jisjk:364353		
@@ -60002,7 +60002,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コール政権	콜 정권	N110	VBl		GN				jisjk:152187		
 コール独	콜 독일	N110			GN				jisjk:128430		
 コール金利	콜 금리	N110	VMo		GN				jisjk:128428		
-コール首相	콜 수상	N110	VHn		GN				jisjk:152186		
+コール首相	콜 총리	N110	VHn		GN				jisjk:152186		
 コーレー	코레	N110			GN				jisjk:105965		
 コーロングループ	코오롱 그룹	N110	VBlVMo		GN				jisjk:128454		
 コーロンホテル	코롱호텔	N130			GN				jisjk:376040		
@@ -60546,8 +60546,8 @@ ttt	ttt	K110			GN				jisjk:201744
 サッシ施工	샷시 시공	N110			BZ				jisjk:352316		
 サッチャリズム	대처리즘	N110	USm		BZ				jisjk:356126		
 サッチャー	대처	N130	QPN		GN				jisjk:128964		
-サッチャー英元首相	대처 영전수상	N110			GN				jisjk:356127		
-サッチャー英首相	대처 영수상	N130	QPN	WaWb	GN				jisjk:349003		
+サッチャー英元首相	대처 전 영국 총리	N110			GN				jisjk:356127		
+サッチャー英首相	대처 영국 총리	N130	QPN	WaWb	GN				jisjk:349003		
 サッツ	삿츠	N110			GN				jisjk:47662		
 サットン	사튼	N130	QPN		GN				jisjk:369258		
 サッドマック	Sad Mac	N110			IT				jisjk:261654		
@@ -60936,7 +60936,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サルタン	술탄	N110	VHn		GN				jisjk:129045		
 サルチル酸	살리실산	N110			GN				jisjk:129046		
 サルティス	샐티스	N130	QPN		GN				jisjk:101734		
-サルトル	살톨	N130	QPN		GN				jisjk:47756		
+サルトル	사르트르	N130	QPN		GN				jisjk:47756		
 サルバ	살바	N130	QPN		GN				jisjk:368143		
 サルバトーレ	살바토레	N130	QPN		GN				jisjk:367469		
 サルバトーレ・ビカーリ	살바토레·비카리	N130	QPN		SO				jisjk:373222		
@@ -61227,7 +61227,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サンフジ企画	썬 후지기획	N130	QIDVGt		GN				jisjk:47839		
 サンフラワー	썬 플라워	N130	QIDVGt		GN				jisjk:47840		
 サンフランシスコ	샌프란시스코	N110	QCT	Qq	GN				jisjk:47841		
-サンフレッチェ	산프렛체	N130	VGt		SO				jisjk:257690		
+サンフレッチェ	산프레체	N130	VGt		SO				jisjk:257690		
 サンフレッチェ広島	산프렛체 히로시마	N130	VGt		SO				jisjk:257689		
 サンフレール	삼푸레루	N110	VPl		GN				jisjk:47842		
 サンフードジャパン	선푸드재팬	N110			GN				jisjk:111823		
@@ -61545,7 +61545,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ザウザ	자우사	N130	QPN		GN				jisjk:365317		
 ザウラ	자우라	N130	QPN		GN				jisjk:257610		
 ザウリ	자우리	N130	QPN		GN				jisjk:367805		
-ザウルス	자우르스	N110	VPe		GN				jisjk:100471		
+ザウルス	사우루스	N110	VPe		GN				jisjk:100471		
 ザウルスカラ	자우르스 칼라	N110			GN				jisjk:100472		
 ザウルスパワ	자우르스 파워	N110			GN				jisjk:100473		
 ザウルスライク	자우르스 라이크	N110			GN				jisjk:100474		
@@ -63749,7 +63749,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ジュノー	쥬노	N130	QPN		GN				jisjk:129618		
 ジュノー	쥬노	N130	QCTVPl		GN				jisjk:366133		
 ジュバリ	쥬바리	N130	QPN		GN				jisjk:366143		
-ジュビロ	쥬빌로	N130			SO				jisjk:102074		
+ジュビロ	주빌로	N130			SO				jisjk:102074		
 ジュビロ磐田	쥬빌로 이와타	N130	VGt		SO				jisjk:257681		
 ジュピター	주피터	N110	VHn		GN				jisjk:48515		
 ジュピターコーポレ	주피타코포레숀	N110	VPl		GN				jisjk:48516		
@@ -66721,7 +66721,7 @@ ttt	ttt	K110			GN				jisjk:201744
 セヴィニー	세비니	N110	VHn		GN				jisjk:130416		
 セヴィージャ	세비야	N130			GN				jisjk:368282		
 セヴェリーノ	세베리노	N130	QPN		GN				jisjk:366315		
-セ・リーグ	센츄럴 · 리그	N130	VGt		GN				jisjk:118455		
+セ・リーグ	센트럴리그	N130	VGt		GN				jisjk:118455		
 セ・大阪	세렛소 오사카	N130	VGt		SO				jisjk:373793		
 セーキン	세킨	N130	QPN		GN				jisjk:369819		
 セーシェル	세이셸	N110	VPl		GN				jisjk:49465		
@@ -67451,7 +67451,7 @@ ttt	ttt	K110			GN				jisjk:201744
 タイムスパン	타임 스팬	N110			GN				jisjk:50001		
 タイムスライス	타임 슬라이스	N110			IT				jisjk:261361		
 タイムスリップ	타임 슬립	N110			GN				jisjk:130638		
-タイムズ	타임즈	N130	VBk		GN				jisjk:50002		
+タイムズ	타임스	N130	VBk		GN				jisjk:50002		
 タイムズスクェア	타임스 스퀘어	N110	VPl		GN				jisjk:130640		
 タイムズ紙	타임지	N110			GN				jisjk:113318		
 タイムゾーン	타임 존	N110			IT				jisjk:261362		
@@ -68304,7 +68304,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ダッピー	더피	N110	VHn		GN				jisjk:130834		
 ダッフル	더플	N110			GN				jisjk:50398		
 ダティ	다티	N130	QPN		GN				jisjk:371734		
-ダディ	다디	N130	QPN		GN				jisjk:366650		
+ダディ	대디	N130	QPN		GN				jisjk:366650		
 ダド	다도	N130	QPN		GN				jisjk:370832		
 ダドフィールド	더드필드	N130	QPN		GN				jisjk:368426		
 ダナックス	다낙스	N110	VPl		GN				jisjk:50399		
@@ -68439,7 +68439,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ダラ	다라	N130	QPN		GN				jisjk:367708		
 ダライラマ	달라이 라마	N110	VHnUCl		GN				jisjk:130875		
 ダライ・ラマ	달라이 라마	N130	QPN		GN				jisjk:359922		
-ダラス	달라스	N110	VPl		GN				jisjk:50426		
+ダラス	댈러스	N110	VPl		GN				jisjk:50426		
 ダラダラ道	완만한 길	N110	VPl		GN				jisjk:130876		
 ダラー	달러	N110	VMy		GN				jisjk:50425		
 ダリア	달리아	N130			GN				jisjk:106917		
@@ -69581,7 +69581,7 @@ ttt	ttt	K110			GN				jisjk:201744
 テセレーション	티셀레이션	N110			GN				jisjk:113179		
 テチュ茶	대추차	N130	VFd		GN				jisjk:373444		
 テッキー	기술자	N110	VHn		GN				jisjk:131183		
-テック	텍	N110			GN				jisjk:105892		
+テック	테크	N110			GN				jisjk:105892		
 テックエンジニアリング	텍엔지니어링	N130	QIDVGt		GN				jisjk:50857		
 テックス	옷감	N110	VCp		GN				jisjk:131184		
 テックスメックス	텍스 멕스	N110	VFd		GN				jisjk:131185		
@@ -69738,7 +69738,7 @@ ttt	ttt	K110			GN				jisjk:201744
 テレビ映え	텔레비전 영상	N110			GN				jisjk:131231		
 テレビ朝日	TV아사히	N130	VBlVCm		GN				jisjk:131226		
 テレビ東京	TV도쿄	N130	VGt		GN				jisjk:50910		
-テレビ番組	TV프로	N110			GN				jisjk:354288		
+テレビ番組	TV 프로그램	N110			GN				jisjk:354288		
 テレビ神奈川	TV가나가와	N130	QIDVGt		GN				jisjk:50912		
 テレビ西日本	TV니시닛폰	N130	QIDVGt		GN				jisjk:50911		
 テレビ電話	화상 전화	N110	VPe		GN				jisjk:131230		
@@ -70319,7 +70319,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ディーリング	딜링	N130	QPN		GN				jisjk:370936		
 ディーリングルーム	딜링 룸	N110			BZ				jisjk:350449		
 ディーリング売買	딜링 매매	N110			BZ				jisjk:360682		
-ディール	거래	N110	VMo		GN				jisjk:131302		
+ディール	딜	N110	VMo		GN				jisjk:131302		
 ディーン	딘	N130	QPN		GN				jisjk:131303		
 ディー・エイチ・シー・ピー	DHCP	N110			CT				jisjk:259935		
 ディー・エス・ブイ・ディー	DSVD	N110			CT				jisjk:259939		
@@ -71747,7 +71747,7 @@ ttt	ttt	K110			GN				jisjk:201744
 トレッカー	트레커	N110	VHn		GN				jisjk:131694		
 トレッド	트레드	N110			GN				jisjk:51931		
 トレッドミル	트레드밀	N110	VPe		GN				jisjk:131695		
-トレド	토레도	N130	QPN		GN				jisjk:371594		
+トレド	톨레도	N130	QPN		GN				jisjk:371594		
 トレハロース	트레할로스	N110			GN				jisjk:131696		
 トレバー	트레버	N130	QPN		GN				jisjk:368325		
 トレビアン	트레 비앵	N110	UTs		GN				jisjk:131697		
@@ -72921,7 +72921,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ナレッジエンジニア	지식 공학자	N110	VHn		GN				jisjk:131895		
 ナレッジマネージメント	지식관리	N110			BZ				jisjk:364137		
 ナレッジワーカー	지적 노동자	N110	VHn		GN				jisjk:131896		
-ナレーション	나레이션	N110	UTs		GN				jisjk:52337		
+ナレーション	내레이션	N110	UTs		GN				jisjk:52337		
 ナレーター	나레이터	N110	UAqUTs		GN				jisjk:52338		
 ナロヲ	나로	N130	QCTVPl		GN				jisjk:315724		
 ナロー	네로우	N110			GN				jisjk:52340		
@@ -75929,7 +75929,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バレー	배구	N110	VRw		GN				jisjk:53565		
 バレージ	바레지	N130	QPN		GN				jisjk:367192		
 バレード	퍼레이드	N110			GN				jisjk:53566		
-バレーボール	발리볼	N110	VRw		GN				jisjk:53567		
+バレーボール	배구	N110	VRw		GN				jisjk:53567		
 バロイ	바로이	N130	QPN		GN				jisjk:369937		
 バロス	바로스	N130	QPN		GN				jisjk:365944		
 バロック	바로크	N110			GN				jisjk:53575		
@@ -76565,7 +76565,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パニング	패닝	N110			GN				jisjk:114040		
 パヌッチ	파누찌	N130	QPN		GN				jisjk:367631		
 パネイラ	바네이라	N130	QPN		GN				jisjk:371453		
-パネラー	패널리스트	N110			GN				jisjk:114094		
+パネラー	패널	N110			GN				jisjk:114094		
 パネリスト	패널리스트	N110	VHn		GN				jisjk:53792		
 パネル	패널	N110			GN				jisjk:53793		
 パネルショー	패널 쇼	N110	UAr		GN				jisjk:132827		
@@ -76979,7 +76979,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パヴィオ	파비오	N130	QPN		GN				jisjk:366978		
 パヴォン	파본	N130	QPN		GN				jisjk:366979		
 パヴォーネ	파보네	N130	QPN		GN				jisjk:367639		
-パ・リーグ	퍼시픽 · 리그	N130	VGt		GN				jisjk:118453		
+パ・リーグ	퍼시픽리그	N130	VGt		GN				jisjk:118453		
 パー	파	N110			GN				jisjk:114131		
 パーオキシ	파옥시	N110			GN				jisjk:164219		
 パーカ	파카	N110	VCp		GN				jisjk:132687		
@@ -77170,7 +77170,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パ行	파행	N110			GN				jisjk:341728		
 ヒアリング	히어링	N110			GN				jisjk:53979		
 ヒアリングエイド	보청기	N110	VPe		GN				jisjk:132926		
-ヒアルロン	히알론	N110			GN				jisjk:114170		
+ヒアルロン	히알루론	N110			GN				jisjk:114170		
 ヒアルロンさん	히알론산	N110			GN				jisjk:163866		
 ヒィリップス	필립스	N110			GN				jisjk:53980		
 ヒェーリスティック	휴리스틱	N110			GN				jisjk:53981		
@@ -78751,7 +78751,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ファジャーニ	화지아니	N130	QPN		GN				jisjk:365780		
 ファジー	퍼지	N110			GN				jisjk:54611		
 ファジー理論	퍼지이론	N110	USmUSu		BZ				jisjk:361404		
-ファスト	퍼스트	N110			GN				jisjk:54628		
+ファスト	패스트	N110			GN				jisjk:54628		
 ファストトラック	패스트트랙	N110			GN				jisjk:133240		
 ファストバック	패스트백	N110			GN				jisjk:54629		
 ファストフード	패스트푸드	N110	VFd		GN				jisjk:114026		
@@ -81398,7 +81398,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ブレス	브레스	N110	VBp		GN				jisjk:133685		
 ブレスト	가슴	N110	VBp		GN				jisjk:55831		
 ブレストストローク	평영	N110	VRw		GN				jisjk:133686		
-ブレスレット	블래셀렛	N110			GN				jisjk:114352		
+ブレスレット	브레이슬릿	N110			GN				jisjk:114352		
 ブレック	블랙	N110			GN				jisjk:55832		
 ブレックファスト	브렉퍼스트	N110	VFd		GN				jisjk:152499		
 ブレッサン	브렛산	N130	QPN		GN				jisjk:367261		
@@ -83945,7 +83945,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ホルマル	포멀	N110			GN				jisjk:113406		
 ホルム	폼	N110			GN				jisjk:56619		
 ホルムアルデヒド	포름알데히드	N110			GN				jisjk:134281		
-ホルムズ海峡	홀머즈 해협	N130	QCT		GN				jisjk:363176		
+ホルムズ海峡	호르무즈 해협	N130	QCT		GN				jisjk:363176		
 ホルモン	호르몬	N110	VBp		GN				jisjk:56620		
 ホルモン	곱창	N110	VFd		GN				jisjk:346724		
 ホルモンの土鍋	곱창 된장전골	N110	VFd		GN				jisjk:346725		
@@ -84063,7 +84063,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ホーベル	호벨	N110			GN				jisjk:56456		
 ホーペイ	허베이	N110	VPl		GN				jisjk:56457		
 ホーボールック	호보 룩	N110			GN				jisjk:56458		
-ホーマー	호메로스	N110	VHn		GN				jisjk:56459		
+ホーマー	호머	N110			GN				jisjk:56459		
 ホーミング	호밍	N110			GN				jisjk:134180		
 ホーミングアビリティー	귀소본능	N110			GN				jisjk:113411		
 ホーミングビーコン	전파 표식	N110	VTp		GN				jisjk:134181		
@@ -86524,7 +86524,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マレスカ	마레스카	N130	QPN		GN				jisjk:367557		
 マレッジーニ	마레찌니	N130	QPN		GN				jisjk:367556		
 マレー	말레이	N130	VPl		GN				jisjk:57600		
-マレーシア	말레이지아	N130	QNNVPl		GN				jisjk:57601		
+マレーシア	말레이시아	N130	QNNVPl		GN				jisjk:57601		
 マレーシヤ	말레이시아	N110	VHn		GN				jisjk:57602		
 マロッキ	마로끼	N130	QPN		GN				jisjk:367561		
 マロニエ	마로니에	N110	VPl		GN				jisjk:134808		
@@ -86599,7 +86599,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マンドレル	맨드릴	N110			GN				jisjk:162372		
 マンネリ	매너리즘	N110			GN				jisjk:134827		
 マンネリズム	매너리즘	N110			GN				jisjk:57626		
-マンハッタン	맨하탄	N110	VPl		GN				jisjk:57627		
+マンハッタン	맨해튼	N110	VPl		GN				jisjk:57627		
 マンハリン	만하린	N130	QPN		GN				jisjk:368065		
 マンパワー	인적자원	N110			GN				jisjk:113341		
 マンパワーポリシー	능력 자원 개발 정책	N110	VMo		GN				jisjk:134828		
@@ -87194,7 +87194,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ミヨシ電子	미요시전자	N110	VPl		GN				jisjk:57827		
 ミヨタ	미요타	N110	VPl		GN				jisjk:57828		
 ミラ	미라	N130	QPN		GN				jisjk:160043		
-ミラクル	미러클	N110			GN				jisjk:57832		
+ミラクル	미라클	N110			GN				jisjk:57832		
 ミラクルチップ	미러클 칩	N110	VEl		GN				jisjk:134928		
 ミラスラフ	미라스라프	N130	QPN		GN				jisjk:370819		
 ミラネーゼ	미라네제	N130	QPN		GN				jisjk:367584		
@@ -88582,7 +88582,7 @@ ttt	ttt	K110			GN				jisjk:201744
 モンク	수도승	N110			GN				jisjk:106909		
 モンク	멍크	N130	QPN		GN				jisjk:369131		
 モンゴメリー	몽고메리	N130	QPN		GN				jisjk:135228		
-モンゴル	몽고	N130	QNNVPl		GN				jisjk:58246		
+モンゴル	몽골	N130	QNNVPl		GN				jisjk:58246		
 モンゴル語	몽골어	N110			GN				jisjk:58247		
 モンゴロイド	황색인종	N110			GN				jisjk:113828		
 モンサント化成	몬산트 화성	N130	QIDVGt		GN				jisjk:58248		
@@ -91093,7 +91093,7 @@ ttt	ttt	K110			GN				jisjk:201744
 リフレクタ	리플렉터	N110			GN				jisjk:59230		
 リフレクター	리플렉터	N110			GN				jisjk:59231		
 リフレックス	반사작용	N110			GN				jisjk:59232		
-リフレッシュ	리프레쉬	N110			IT				jisjk:263331		
+リフレッシュ	리프레시	N110			IT				jisjk:263331		
 リフレッシュ。 サイクル	리프레시 사이클	N110			GN				jisjk:59233		
 リフレッシュアドレス	리프레시 어드레스	N110			GN				jisjk:59234		
 リフレッシュサイクル	리프레시 사이클	N110			GN				jisjk:59235		
@@ -92091,7 +92091,7 @@ ttt	ttt	K110			GN				jisjk:201744
 レオン自動機	레온자동기	N130	QIDVGt		GN				jisjk:59509		
 レカ	레카	N130	QPN		GN				jisjk:366893		
 レカルテ	레칼테	N130	QPN		GN				jisjk:368054		
-レガシー	유산	N110	ULwVMo		GN				jisjk:135890		
+レガシー	레거시	N110	ULwVMo		GN				jisjk:135890		
 レガシー. メインフレーム	레거시 메인프레임	N110			GN				jisjk:59510		
 レガシーカード	레거시 카드	N110			IT				jisjk:261565		
 レガシーデバイス	레거시 장치	N110			IT				jisjk:261566		
@@ -95061,7 +95061,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一所在	1소재	N110	VPl		GN				jisjk:160009		
 一所懸命	열심히	I110		Nn	GN				jisjk:1870		
 一所懸命に	열심히	I110		Nn	GN				jisjk:373915		
-一手	한 방법	N110			GN				jisjk:31503		
+一手	한 수	N110			GN				jisjk:31503		
 一手	독점	N110			BZ				jisjk:31504		-1
 一手に	혼자서	E300			GN				jisjk:149694		
 一手に握	장악&AV@	E428		Pn	GN				jisjk:347383		
@@ -127944,8 +127944,8 @@ ttt	ttt	K110			GN				jisjk:201744
 元頂妙寺町	모토쵸묘지쵸	I130	QCTVPl		GN				jisjk:334617		
 元首	원수	N110	VHnUQfUAq		GN				jisjk:30356		
 元首ら	원수들	N110	VHn		GN				jisjk:179311		
-元首相	전 수상	I110	UAq		GN				jisjk:79223		
-元首相ら	전직 수상들	N110	VHn		GN				jisjk:151856		
+元首相	전 총리	I110	UAq		GN				jisjk:79223		
+元首相ら	전직 총리들	N110	VHn		GN				jisjk:151856		
 元首脳	전수뇌	N110			GN				jisjk:263561		
 元魚町	모토우오쵸	N130	QCTVPl		GN				jisjk:334493		
 元魚町	모토우오마치	N130	QCTVPl		GN				jisjk:334494		
@@ -129794,7 +129794,7 @@ ttt	ttt	K110			GN				jisjk:201744
 全日本金属産業労働組合協議会	전일본 금속산업 노동조합협의회	N110	VGt		BZ				jisjk:359275		
 全日本食品	전일본 식품	I130	VGt		PN				jisjk:82703		
 全日程	전일정	N110			GN				jisjk:199817		
-全日空	전일본항공	N130	QIDVBlVTpVPlVGt		GN				jisjk:82694		
+全日空	전일본공수	N130	QIDVBlVTpVPlVGt		GN				jisjk:82694		
 全日空ビルディング	전일공 빌딩	I130	VGt		PN				jisjk:82695		
 全日空ホテル	젠닛쿠 호텔	N110	VBl		GN				jisjk:199809		
 全日空ワールド	전일공 월드	I130	VGt		PN				jisjk:82696		
@@ -136188,7 +136188,7 @@ ttt	ttt	K110			GN				jisjk:201744
 初冬の候	초겨울 입니다	A9D0			GN				jisjk:263707		
 初出	초출	N110			GN				jisjk:35898		
 初出土	첫 출토	N110			GN				jisjk:372207		
-初出場	첫출장	N110			GN				jisjk:367307		
+初出場	첫 출전	N110			GN				jisjk:367307		
 初刊	초간	N110	VSwVSw		GN				jisjk:35854		
 初初し	청순$AB@	H7U0			GN				jisjk:5965		
 初刷	초판인쇄	N110			GN				jisjk:102998		
@@ -136269,7 +136269,7 @@ ttt	ttt	K110			GN				jisjk:201744
 初恋	첫사랑	N110	UFl		GN				jisjk:35865		
 初恵	하츠에	N130	QPN	Wb	GN				jisjk:12793		
 初感染	초감염	I110	UTi	Hd	GN				jisjk:86315		
-初戦	초전	N110		Hd	GN				jisjk:35892		
+初戦	첫 대결	N110		Hd	GN				jisjk:35892		
 初手	최초	N110			GN				jisjk:35882		
 初日	첫날	N110	UMe		GN				jisjk:35889		
 初日の出	설날 해돋이	N110			GN				jisjk:154066		
@@ -137478,7 +137478,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前夜	전야	N110	UMe		GN				jisjk:32727		
 前夜祭	전야제	N110			GN				jisjk:199897		
 前夜祭	전야제	N110			GN				jisjk:199899		
-前大統領	전대통령	I110	VHn		GN				jisjk:82729		
+前大統領	전 대통령	I110	VHn		GN				jisjk:82729		
 前夫	전 남편	N110	VHnVHn		GN				jisjk:199877		
 前奏	전주	N110	UHr		GN				jisjk:32745		
 前奏曲	전주곡	N110	USoQMU		GN				jisjk:199747		
@@ -137799,8 +137799,8 @@ ttt	ttt	K110			GN				jisjk:201744
 前納	선납	N110		Hd	GN				jisjk:199836		
 前組	마에구미	N130	QCTVPl		GN				jisjk:328767		
 前統一院長官	전통일원장관	N110	QPN		GN				jisjk:209571		
-前総理	전총리	N110	QPN		GN				jisjk:209567		
-前総裁	전총재	N110	QPN		GN				jisjk:209568		
+前総理	전 총리	N110	QPN		GN				jisjk:209567		
+前総裁	전 총재	N110	QPN		GN				jisjk:209568		
 前線	전선	N110	VPl		GN				jisjk:32721		
 前線基地	전선기지	I110			GN				jisjk:110778		
 前線性の雨	전선성 비	N110	VSs		GN				jisjk:239828		
@@ -137930,7 +137930,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前飛保町	마에히보쵸	I130	QCTVPl		GN				jisjk:328880		
 前飯谷	마에이타니	N130	QCTVPl		GN				jisjk:328741		
 前首席	전수석	N110	QPN		GN				jisjk:209539		
-前首相	전수상	I110	VHn		GN				jisjk:82745		
+前首相	전 총리	I110	VHn		GN				jisjk:82745		
 前駆	선구	N110	VTw		GN				jisjk:199628		
 前駆放電	전구방전	N110	VEl		GN				jisjk:239773		
 前駆症状	전구증상	N110	QHP		GN				jisjk:239771		
@@ -138179,7 +138179,7 @@ ttt	ttt	K110			GN				jisjk:201744
 副題	부제	N110			GN				jisjk:24163		
 副食	부식	N110	VFd		GN				jisjk:24155		
 副食物	부식물	I110	VFdVFd		GN				jisjk:70624		
-副首相	부수상	N110	VHn		GN				jisjk:154566		
+副首相	부총리	N110	VHn		GN				jisjk:154566		
 副鼻腔	부비강	I110	VBp		GN				jisjk:70619		
 剰余	잉여	N110			GN				jisjk:31785		
 剰余価値	잉여가치	I110			GN				jisjk:109856		
@@ -140548,7 +140548,7 @@ ttt	ttt	K110			GN				jisjk:201744
 勝負ケ町	쇼부가마치	I130	QCTVPl		GN				jisjk:300921		
 勝負事	도박	I110	VRw		GN				jisjk:76200		
 勝負師	승부사	I110	UAq		GN				jisjk:76201		
-勝負所	승패의 갈림길	N110	VPl		GN				jisjk:191238		
+勝負所	승부처	N110	VPl		GN				jisjk:191238		
 勝負手を打	승부수를 &C7@	M424			GN				jisjk:122342		
 勝負服	승부복	N110	VCp		GN				jisjk:235447		
 勝負服姿	승부복 차림	N110			GN				jisjk:191240		
@@ -213132,7 +213132,7 @@ ttt	ttt	K110			GN				jisjk:201744
 才門	사이몬	N130	QPN	Wa	GN				jisjk:10880		
 才門建設	사이카도 건설	I130	VGt		PN				jisjk:82466		
 打	&AO@	M434	VPl		GN				jisjk:95591		
-打	&C7@	M434	VRw		GN				jisjk:95592		
+打	&C7@	M434			GN				jisjk:95592		
 打	&F6@	M434			GN	847	||1 &&3 P-1== "2**" P-2== "1**" S-2== "注射"	注射와 조사 뒤의 打를 '놓다'로 고른다. (미발동: rare-context)	jisjk:95593		
 打	&FF@	M434	VFd		GN				jisjk:95594		
 打	&HR@	M434			GN	848	||1 &&3 P-1== "2**" P-2== "1**" S-2== "終止符"	打는 終止符와 조사 뒤에서 관용 표현에 맞는 '찍다'를 고른다.	jisjk:95595		
@@ -222135,7 +222135,7 @@ ttt	ttt	K110			GN				jisjk:201744
 新矢悦二	신야 에츠지	N130	VHn		GN				jisjk:225131		
 新矢田	신야다	N130	QCTVPl		GN				jisjk:302187		
 新知	신치	N130	QCTVPl		GN				jisjk:301840		
-新知事	신지사	N110	UQf		GN				jisjk:361005		
+新知事	신임 지사	N110	UQf		GN				jisjk:361005		
 新知町	신치마치	N130	QCTVPl		GN				jisjk:301850		
 新知識	신지식	I110			GN				jisjk:105955		
 新石	아라이시	N130	QPN	Wa	GN				jisjk:27973		
@@ -222662,7 +222662,7 @@ ttt	ttt	K110			GN				jisjk:201744
 新館	니이다테	N130	QPN	Wa	GN				jisjk:10157		
 新館	니다테	N130	QCTVPl		GN				jisjk:315910		
 新館町	신다테쵸	N130	QCTVPl		GN				jisjk:301838		
-新首相	신수상	I110	UAq		GN				jisjk:114846		
+新首相	신임 총리	I110	UAq		GN				jisjk:114846		
 新香	반찬	N110	VFdVFd		GN				jisjk:28011		
 新馬場	심바바	N130	QCTVPl		GN				jisjk:302025		
 新馬場町	심바바쵸	I130	QCTVPl		GN				jisjk:302026		
@@ -224265,7 +224265,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日本ワイパブレード	일본와이파브레도	I110	VPl		GN				jisjk:81151		
 日本ワイパーブレード	일본 와이퍼 블래이드	I130	VGt		PN				jisjk:81150		
 日本・欧州協力基金	일본 유럽 협력기금	N110			BZ				jisjk:350765		
-日本一	일본 제일	I110			GN				jisjk:81357		
+日本一	일본 최고	I110			GN				jisjk:81357		
 日本三代実録	일본 삼대 실록	N110	VBkVSw		GN				jisjk:248115		
 日本三景	일본 삼경	N110	VPl		GN				jisjk:153930		
 日本上下水道設計	일본 상하수도 설계	I130	VGt		PN				jisjk:81288		
@@ -225315,7 +225315,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日系人	일본인계	N110	VHn		GN				jisjk:153926		
 日系米人	일본계 미국인	I110	VHn		GN				jisjk:80539		
 日紙興業	닛시흥업	I110	VPl		GN				jisjk:81780		
-日経	일본경제	N110			GN				jisjk:201635		
+日経	닛케이	N110			GN				jisjk:201635		
 日経	일경	N110			GN	3851	||1 &&2 P+1== "1**" D+0= "닛케이"	명사 앞의 日経를 닛케이로 옮긴다.	jisjk:348191		
 日経	닛케이	N110			BZ				jisjk:363594		
 日経MIX	닛케이 MIX	N110			IT				jisjk:261482		
@@ -234407,7 +234407,7 @@ ttt	ttt	K110			GN				jisjk:201744
 朱里	슈리	N130	QPN	WaWb	GN				jisjk:11687		
 朱里	쥬리	N130	QPN	Wb	GN				jisjk:344291		
 朱鎔基	주 용기	N130	QPN		GN				jisjk:358676		
-朱鎔基首相	주용기 수상	K110	QPNVHn		GN				jisjk:202270		
+朱鎔基首相	주용기 총리	K110	QPNVHn		GN				jisjk:202270		
 朱門	주문	N110	VBl		GN				jisjk:190314		
 朱雀	주작	N110			GN				jisjk:11688		
 朱雀	스자쿠	N130	QPN	WaWb	GN				jisjk:11689		
@@ -234426,7 +234426,7 @@ ttt	ttt	K110			GN				jisjk:201744
 朱鞘	칼집	N110			GN				jisjk:234885		
 朱鞠内	슈마리나이	I110	QCT		GN				jisjk:84242		
 朱鞠内湖	슈마리나이 호수	N110	VPl		GN				jisjk:234979		
-朱首相	주 수상	K110	VHn		GN				jisjk:202271		
+朱首相	주 총리	K110	VHn		GN				jisjk:202271		
 朱鳥	슈초	N110			GN				jisjk:234918		
 朱鷺	따오기	K130	QAB		GN				jisjk:259793		
 朴Dusik	박두식	N130	QPN		GN				jisjk:208101		
@@ -241168,7 +241168,7 @@ ttt	ttt	K110			GN				jisjk:201744
 板刻	판각	N110			GN				jisjk:37371		
 板前	요리사	N110	UAq		GN				jisjk:37388		
 板前	주방	N110	VPl		GN				jisjk:37389		
-板割り	널빤지를 쪼갬	N110			GN				jisjk:125606		
+板割り	격파	N110			GN				jisjk:125606		
 板厚	판두께	N110			GN				jisjk:37393		
 板原	이타하라	N130	QCTVPl		GN				jisjk:272648		
 板取	이타도리	N130	QCT		GN				jisjk:37392		
@@ -245709,7 +245709,7 @@ ttt	ttt	K110			GN				jisjk:201744
 森内	모리우치	N130	QPN	Wa	GN				jisjk:8116		
 森内閣	모리 내각	I110	QPNVGtUAq		GN				jisjk:114835		
 森分	모리와케	N130	QPN	Wa	GN				jisjk:8134		
-森前首相	모리 전 수상	N130	VHn		GN				jisjk:374691		
+森前首相	모리 전 총리	N130	VHn		GN				jisjk:374691		
 森勝	모리카츠	N130	QPN	Wb	GN				jisjk:8143		
 森北	모리키타	N130	QCTVPl		GN				jisjk:334916		
 森北町	모리키타마치	N130	QCTVPl		GN				jisjk:334917		
@@ -246063,7 +246063,7 @@ ttt	ttt	K110			GN				jisjk:201744
 森電機	모리전기	I130			GN				jisjk:105941		
 森青蛙	산청개구리	N110	VAm		GN				jisjk:253901		
 森食品工業	모리식품공업	I110	VGt		GN				jisjk:73274		
-森首相	모리 수상	I130	QPNVHnUQfUAq		GN				jisjk:114833		
+森首相	모리 총리	I130	QPNVHnUQfUAq		GN				jisjk:114833		
 森高千里	모리타카 치사토	N130	QPN		GN				jisjk:100713		
 森高重久	모리타카 시게히사	N130	VHn		GN				jisjk:226377		
 森鴎外	모리 오가이	I130			GN				jisjk:100717		
@@ -266807,7 +266807,7 @@ ttt	ttt	K110			GN				jisjk:201744
 激賞	격상	N110		Hd	GN				jisjk:15216		
 激越	격양	N110	SFl	DdHd	GN				jisjk:178828		
 激退	격퇴	N110			GN				jisjk:15224		
-激闘	격투	N110		Hd	GN				jisjk:15225		
+激闘	격전	N110		Hd	GN				jisjk:15225		
 激震	격진	N110			GN				jisjk:15220		
 激高	격앙	N110	SFl	Hd	GN				jisjk:178989		
 濁	탁해&AL@	M428			GN				jisjk:95635		
@@ -268771,7 +268771,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無防備	무방비	I110			GN				jisjk:69123		
 無限	무한%A1@	G8L0		Ns	GN				jisjk:2888		
 無限	무한	N110			GN				jisjk:2889		
-無限ループ	엔들레스 루프	I110			IT				jisjk:263103		
+無限ループ	무한 루프	I110			IT				jisjk:263103		
 無限大	무한대	N110	VSsUMe		GN				jisjk:155412		
 無限定意見	무한정 의견	N110			BZ				jisjk:360748		
 無限小	무한소	N110			GN				jisjk:252994		
@@ -303965,7 +303965,7 @@ ttt	ttt	K110			GN				jisjk:201744
 老間町	오이마쵸	N130	QCTVPl		GN				jisjk:277025		
 老雄	노웅	N110	VHn		GN				jisjk:256638		
 老頭児	노인	N110	VHn		GN				jisjk:136034		
-老首相	노수상	I110	VHn		GN				jisjk:67837		
+老首相	노총리	I110	VHn		GN				jisjk:67837		
 老馬	노마	N110	QAA		GN				jisjk:20585		
 老駆	노구	N110			GN				jisjk:20579		
 老驥	노기	N110	VAm		GN				jisjk:256530		
@@ -311200,7 +311200,7 @@ ttt	ttt	K110			GN				jisjk:201744
 英雄視	영웅시&AV@	M4U9			GN				jisjk:144970		
 英霊	영령	N110			GN				jisjk:29498		
 英領	영령	N110	VPl		GN				jisjk:29499		
-英首相	영국 수상	N110	VHn		GN				jisjk:127405		
+英首相	영국 총리	N110	VHn		GN				jisjk:127405		
 英高級	영국 고급	N110			GN				jisjk:127385		
 英魂	영령	N110			GN				jisjk:127391		
 英鷹	히데타카	N130	QPN	Wb	GN				jisjk:258141		
@@ -336510,7 +336510,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連勝単式	연승 단식	N110	VRw		GN				jisjk:256475		
 連勝複式	연승 복식	N110	VRw		GN				jisjk:256476		
 連単倍率	연단배율	N110			BZ				jisjk:363628		
-連取	연취	N110	VRw	Hd	GN				jisjk:256473		
+連取	연속 획득	N110	VRw	Hd	GN				jisjk:256473		
 連取町	츠나토리마치	N130	QCTVPl		GN				jisjk:309734		
 連句	연구	N110			GN				jisjk:20343		
 連合	연합	N110	VGt		GN				jisjk:20377		
@@ -357498,14 +357498,14 @@ ttt	ttt	K110			GN				jisjk:201744
 首玉	고리	N110	VPe		GN				jisjk:176270		
 首班	수반	N110	UQf		GN				jisjk:27489		
 首皇子	오비토노 미코	N110	VHn		GN				jisjk:212983		
-首相	수상	N110	UAqVHn		GN				jisjk:27491		
-首相にもたら	수상에게 가져&AH@	M423			GN				jisjk:122149		
-首相ら	수상들	N110	VHn		GN				jisjk:189909		
-首相側	수상측	N110	VBl		GN				jisjk:189905		
-首相官邸	수상관저	I130	VPl		GN				jisjk:110087		
-首相派	수상파	N110	VHn		GN				jisjk:189907		
-首相番記者	수상 담당기자	N110	UQf		GN				jisjk:361310		
-首相臨時代理	수상 임시 대리	K110	UAq		GN				jisjk:114941		
+首相	총리	N110	UAqVHn		GN				jisjk:27491		
+首相にもたら	총리에게 가져&AH@	M423			GN				jisjk:122149		
+首相ら	총리들	N110	VHn		GN				jisjk:189909		
+首相側	총리측	N110	VBl		GN				jisjk:189905		
+首相官邸	총리 관저	I130	VPl		GN				jisjk:110087		
+首相派	총리파	N110	VHn		GN				jisjk:189907		
+首相番記者	총리 담당기자	N110	UQf		GN				jisjk:361310		
+首相臨時代理	총리 임시 대리	K110	UAq		GN				jisjk:114941		
 首筋	목덜미	N110	VBp		GN				jisjk:27480		
 首級	수급	N110			GN				jisjk:234838		
 首縊り	목맨 자살	N110			GN				jisjk:176263		

@@ -1,6 +1,6 @@
 # 규칙: LEX-25
 rule	input	expected	kind	layer
-sense:続投	ネタニヤフ首相が続投。	네타냐후 수상이 유임.	fix	senses
+sense:続投	ネタニヤフ首相が続投。	네타냐후 총리가 유임.	fix	senses
 sense:続投	続投に意欲を見せていました。	유임에 의욕을 보이고 있었습니다.	fix	senses
 sense:続投	多岐川さんは去年からの続投だ。	타키가와 씨는 작년부터의 유임이다.	fix	senses
 sense:続投	あと１点で茂野は続投できるんだ。	그리고 1점으로써 시게노는 연속 투구할 수 있는 거야.	keep	senses

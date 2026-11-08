@@ -1,0 +1,22 @@
+#! layer=pack
+# 스포츠 말의 뜻을 앞뒤 낱말로 고르는 팩 행: 最年長 최고령, 日本一 일본에서 가장, バレーボール 배구공 (LEX-5601)
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
+audit-cap-sports:1	最年長	n	sense	next=出場|記録|出場記録|優勝|勝利|ゴール|得点|安打|受賞|当選|登板|本塁打|メダル|金メダル|完走|入賞	최고령	LEX-5601	audit	最年長出場記録 최고령 출전 기록		
+audit-cap-sports:2	日本一	n	sense	next=高い|大きい|長い|広い|深い|多い|古い|早い|速い|美味しい|おいしい|うまい|美しい|小さい|短い|低い|安い|厳しい|強い|暑い|寒い|有名|人気|きれい|綺麗	일본에서 가장	LEX-5601	audit	日本一高い山 일본에서 가장 높은 산		
+audit-cap-sports:3	バレーボール	n	sense	pred=投げる|拾う|転がる|蹴る|当たる|ぶつける|持つ|打つ|弾む|膨らませる|抱える|受け取る|渡す	배구공	LEX-5601	audit	バレーボールを投げる 배구공을 던진다		
+audit-cap-sports:4	打つ	v5	sense	obj=碁|囲碁|将棋|チェス|オセロ|手|一手|妙手|悪手|次の手|駒|布石	두다	LEX-5601	audit	碁を打つ 바둑을 두다		
+audit-cap-sports:8	ホーマー	n	sense	特大のホーマー	특대 홈런	LEX-5601	audit	特大のホーマー 특대 홈런	colloc	
+audit-cap-sports:9	ホーマー	n	sense	after=@count	홈런	LEX-5601	audit	２ホーマー 2홈런		
+audit-cap-sports:5	ホーマー	n	sense	next=を pred=打つ|放つ|浴びる|打たれる|許す|喫する	홈런	LEX-5601	audit	ホーマーを放った 홈런을 날렸다		
+audit-cap-sports:11	バレーボール	n	sense	pred=持つ|持てる|握る|持っている|持ってる|持ってい	배구공	LEX-5601	audit	バレーボールを持っている 배구공을 가지고 있다		
+audit-cap-sports:12	打つ	v5	sense	obj=釘|くぎ|クギ|杭|くい	박다	LEX-5601	audit	釘を打つ 못을 박다		
+audit-cap-sports:13	打つ	v5	sense	obj=碁石	놓다	LEX-5601	audit	碁石を打つ 바둑돌을 놓다		
+audit-cap-sports:14	放つ	v5	sense	obj=ホーマー|ホームラン|本塁打|アーチ	날리다	LEX-5601	audit	ホーマーを放った 홈런을 날렸다		
+audit-cap-sports:15	浴びる	v1	sense	obj=ホーマー|ホームラン|本塁打	맞다	LEX-5601	audit	ホーマーを浴びた 홈런을 맞았다		
+audit-cap-sports:16	運び出す	v5	sense	*	들어내다	LEX-5601	audit	荷物を運び出す 짐을 들어낸다		
+audit-cap-sports:17	運び出す	v5	sense	obj=文書|機密文書|資料|物資|貨物|証拠品|押収品|核燃料|燃料|廃棄物|土砂|がれき|瓦礫|美術品|文化財|部品	반출하다	LEX-5601	audit	機密文書を運び出した 기밀문서를 반출했다		
+audit-cap-sports:18	運び出す	v5	voice	*	passive:옮겨지다	LEX-5601	audit	荷物が運び出された 짐이 옮겨졌다		
+audit-cap-sports:19	運び出す	v5	voice	subj=文書|機密文書|資料|物資|貨物|証拠品|押収品|核燃料|燃料|廃棄物|土砂|がれき|瓦礫|美術品|文化財|部品	passive:반출되다	LEX-5601	audit	文書が運び出された 문서가 반출되었다		
+audit-cap-sports:20	運び出す	v5	sense	obj=@person|けが人|負傷者|遺体|ご遺体|亡骸|子ども|子供|人	옮기다	LEX-5601	audit	けが人を運び出す 부상자를 옮긴다		
+audit-cap-sports:21	ホーマー	n	sense	next=が|は pred=打席|立つ|入る|向かう|迎える|戻る|帰る|登場する	호머	LEX-5601	audit	ホーマーが打席に立った 호머가 타석에 섰다		50
+audit-cap-sports:22	打つ	v5	sense	obj=石 dat=盤|碁盤|盤上	놓다	LEX-5601	audit	盤に石を打つ 반에 돌을 놓는다		
