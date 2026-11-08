@@ -57,7 +57,7 @@ compose:number-label	1ホーマー2ホーマー	1홈런 2홈런	fix	compose
 compose:number-label	1ゴール2アシスト	1골 2어시스트	fix	compose
 compose:number-label	1ヒット2打点	1히트 2타점	fix	compose
 compose:number-label	3ポイント2リバウンド	3포인트 2리바운드	fix	compose
-compose:number-label	大谷が1ホーマー2打点の活躍	has:1홈런 2타점의	fix	compose
+compose:number-label	彼が1ホーマー2打点の活躍	has:1홈런 2타점의	fix	compose
 compose:number-label	1ホーマー、2ホーマー	1홈런, 2홈런	keep	compose
 compose:number-label	2ホーマー	2홈런	keep	compose
 compose:number-label	1勝2敗	1승 2패	keep	compose
