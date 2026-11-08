@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:notice-words-1:87	彼女の新曲は、配信開始から一週間で百万回再生を突破した。	has:그녀의 신곡은, 공개 개시부터	fix	rewrites
 cx:notice-words-1:87	新曲は配信開始から一週間で話題になった。	has:신곡은 공개 개시부터	fix	rewrites
-cx:notice-words-1:87	アルバムは来月配信予定だ。	앨범은 내달 공개 예정이다.	fix	rewrites
+cx:notice-words-1:87	アルバムは来月配信予定だ。	앨범은 다음 달 공개 예정이다.	fix	rewrites
 cx:notice-words-1:87	この曲は配信中です。	이 곡은 공개 중입니다.	fix	rewrites
 cx:notice-words-1:87	配信開始は来週です。	방송 개시는 다음주입니다.	keep	rewrites
 cx:notice-words-1:87	ゲームの配信開始は来週です。	게임 방송 개시는 다음주입니다.	keep	rewrites

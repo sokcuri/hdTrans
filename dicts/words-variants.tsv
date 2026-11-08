@@ -8936,7 +8936,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お気にいり	마음에 드는 것	N110			GN				xxx llm	1		w:266
 思い掛け無	생각치 못$AB@	H7U0			GN							jisjk:5630
 口ケンカ	말싸움	N110	UYh		GN							jisjk:258831
-すえ置き	보류	N110		Hd	GN							jisjk:6752
+すえ置き	동결	N110		Hd	GN							jisjk:6752
 たて突	대&L4@	M421			GN				llm			w:18416
 アイス・コーヒー	냉커피	N110	VFd		GN							jisjk:42101
 取締り役	이사	I110	VHn		GN							jisjk:86838
@@ -9220,7 +9220,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リニュアル	리뉴얼	N110			GN							jisjk:59181
 まわし者	스파이	I110	UAqHGu		GN							jisjk:89755
 根切り虫	야도충	N110	VAm		GN							jisjk:248520
-人間ドッグ	종합건강진단	N110	QHP		GN							jisjk:153960
+人間ドッグ	종합 건강검진	N110	QHP		GN							jisjk:153960
 小っ恥ずかし	열$FA@	H7U0			GN							jisjk:5062
 歩止り	제품 비율	I110			GN							jisjk:70267
 赤提灯	선술집	N110	VBlVFd		GN							jisjk:123983
@@ -12608,8 +12608,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 時分どき	정해진 식사 시간	N110	UMe		GN							jisjk:194052
 宗教々育	종교 교육	N110	UCl		GN							jisjk:189188
 小股すくい	허점을 노리는 수	N110	VRw		GN							jisjk:182956
-しょうがい者	장애자	I110	VHnUTi		GN							jisjk:82426
-障礙者	장애자	I110	VHnUTi		GN							jisjk:82426
+しょうがい者	장애인	I110	VHnUTi		GN							jisjk:82426
+障礙者	장애인	I110	VHnUTi		GN							jisjk:82426
 職権乱用	직권 남용	N110			GN							jisjk:191817
 人情話	인정이나 세정을 소재로 한 만담	N110			GN							jisjk:248380
 人情咄	인정이나 세정을 소재로 한 만담	N110			GN							jisjk:248380
@@ -12998,7 +12998,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 視覚障がい者	장님	N110	VHn		GN							w:23506
 視覚障碍者	장님	N110	VHn		GN							w:23506
 試験管ベイビー	시험관 아기	I110			GN							jisjk:108020
-売り上げ税	매상세	N110			BZ							jisjk:348793
+売り上げ税	매출세	N110			BZ							jisjk:348793
 発しんチフス	발진티푸스	N110	UTi		GN							jisjk:205095
 炉心熔融	노심 융해	N110			GN							jisjk:256721
 こぼれ落ち	쏟아&AL@	M427			GN							w:25480
@@ -17507,8 +17507,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 胸掛	가슴걸이	N110	VPe		GN							jisjk:253183
 引越し屋	이삿짐 센터	N110			GN							jisjk:265288
 高止り	비싸게 머&Mx@	M419			GN							jisjk:138138
-高止り	상승	N110			GN							jisjk:265884
-高止り	상승	N110		Hd	GN							jisjk:265885
+高止り	고공 행진	N110			GN							jisjk:265884
+高止り	고공 행진	N110		Hd	GN							jisjk:265885
 桛糸	감은 실	N110	VPe		GN							jisjk:168424
 御籤	제비	N110			GN							jisjk:252204
 御鬮	제비	N110			GN							jisjk:252204
@@ -19378,7 +19378,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プリント・ショップ	인쇄소	N110			GN				xxx llm	1		w:8426
 そう痒症	소양증	I110	UTi		GN							jisjk:75211
 就蓐	취침	N110		Hd	GN							jisjk:189357
-従来どおり	종래대로	N110			GN							jisjk:151239
+従来どおり	기존대로	N110			GN							jisjk:151239
 喧々	훤효	N110			GN							jisjk:40072
 御名前	이름	I110	UTsUHr		GN							jisjk:40575
 カラオケ・ルーム	가라오케룸 	N110			GN							jisjk:352920
@@ -19794,7 +19794,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ストーリテリング	스토리텔링	N110			GN							w:5131
 ストリーテリング	스토리텔링	N110			GN							w:5131
 名状し難	형언하기 어$G8@	H7N0	SFl		GN							jisjk:136683
-売り上げ総利益	매상 총이익	N110			BZ							jisjk:348797
+売り上げ総利益	매출 총이익	N110			BZ							jisjk:348797
 似てもにつかぬ	전혀 닮지 않은	C0D1			GN							jisjk:4695
 トランス・アクスル	트랜스액슬	N110			GN							w:6399
 おじ様	아저씨	N110			GN				llm			w:15322
