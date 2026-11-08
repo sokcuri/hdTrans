@@ -22,7 +22,7 @@ cx:try-reading:50	この料理を試してみて	has:요리를 먹어 봐	fix	re
 cx:try-reading:50	「あ、いや……と、そうだ、他の味も試してみる？」	has:다른 맛도 먹어 봐?	fix	rewrites
 cx:try-reading:50	ヒトヒトマルマル。さて、キミ、お昼はどうする？ 間宮の新作、試してみないか？	has:먹어 보지 않겠는가	fix	rewrites
 cx:try-reading:52	このワインを試してみた	has:마셔 보았다	fix	rewrites
-cx:try-reading:54	このやり方を試してみて。	has:방식을 해 봐	fix	rewrites
+cx:try-reading:54	このやり方を試してみて。	has:방식을 시도해 봐	fix	rewrites
 cx:try-reading:56	このアプリを試してみてください。	has:앱을 써 보세요	fix	rewrites
 cx:try-reading:58	この服を試してみて	has:옷을 입어 봐	fix	rewrites
 cx:try-reading:10	このケーキのレシピをお試しください。	!rule:cx:try-reading:10	keep	rewrites
@@ -40,3 +40,5 @@ cx:try-reading:30	そちらをお試し下さい。	!rule:cx:try-reading:30	keep
 cx:try-reading:32	このコツをお試しください。	!rule:cx:try-reading:32	keep	rewrites
 cx:try-reading:50	まあ、でも物は試しなので、とりあえず紅茶のポットで試してみることにした。	!rule:cx:try-reading:52	keep	rewrites
 cx:try-reading:56	「手がかりもないし、まずは試してみよう」	has:우선은 시험해 보자	keep	rewrites
+cx:try-reading:54	この方法を試してみて	has:이 방법을 시도해 봐	fix	rewrites
+cx:try-reading:54	このコツを試してみて	has:요령을 시도해 봐	fix	rewrites
