@@ -3686,7 +3686,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 呑み代	술값	I110	VMo		GN							jisjk:79689
 飲みしろ	술값	I110	VMo		GN							jisjk:79689
 飲逃げ	주석에서 몰래 빠져 나감	N110		Hd	GN							jisjk:249091
-飲みあか	밤새워 술마&AE@	M413	VFd		GN							jisjk:94356
+飲みあか	밤새워 술 마&AE@	M413	VFd		GN							jisjk:94356
 飲助	술꾼	N110	VHn		GN							jisjk:249087
 呑み助	술꾼	N110	VHn		GN							jisjk:249087
 婬婦	음부	N110	VHnVQw		GN							jisjk:30927
@@ -4257,7 +4257,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 旧趾	고적	N110	VBl		GN							jisjk:173035
 居あわせ	마침 &HN@	M427	UMe		GN							jisjk:138936
 居すわ	눌러 &FI@	M428			GN							jisjk:140742
-居酒や	선술집	I110	VPlVFd		GN							jisjk:60712
+居酒や	이자카야	I110	VPlVFd		GN							jisjk:60712
 巨なる	커다란	E0H0			GN							jisjk:123421
 巨いなる	커다란	E0H0			GN							jisjk:123421
 渠魁	괴수	N110			GN							jisjk:15032
@@ -10564,7 +10564,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スズメ色	다갈색	N110			GN							jisjk:196722
 咲分け	섞여 피는 꽃	N110	VPt		GN							jisjk:232326
 笑われもの	웃음거리	N110			GN							jisjk:257074
-摺り身	으깬어묵	I110			GN							jisjk:106458
+摺り身	다진 생선살	I110			GN							jisjk:106458
 踏段	계단	I110	VPl		GN							jisjk:64792
 あり切れ	자투리	I110			GN							jisjk:79469
 有り布	자투리	I110			GN							jisjk:79469
@@ -11109,8 +11109,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大和なでしこ	야마토 나데시코	I110			GN				xxx llm	1		w:14506
 太神宮	대신궁	I110	QCT		GN							jisjk:65324
 太神宮	다이징구	N130	QCTVPl		GN							jisjk:308151
-大根おろし	강판	N110	VPe		GN							jisjk:153255
-大根下ろし	강판	N110	VPe		GN							jisjk:153255
+大根おろし	무즙	N110	VPe		GN							jisjk:153255
+大根下ろし	무즙	N110	VPe		GN							jisjk:153255
 太息	한숨	N110	VBp		GN							jisjk:18972
 大マジメ	아주 진지%A1@	G8U0			GN							jisjk:119486
 大晦	섣달 그믐날	I110	UMe		GN							jisjk:64885
@@ -12688,8 +12688,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 はたき込み	쓰러트리기	N110	UTt	Hd	GN							jisjk:249607
 仲店	상점가	N110			GN							jisjk:153855
 望潮	꽃발게	N110	VAmVFd		GN							jisjk:186752
-しめ鯖	자반	N110	VFd		GN							jisjk:234399
-締めさば	자반	N110	VFd		GN							jisjk:234399
+しめ鯖	초절임 고등어	N110	VFd		GN							jisjk:234399
+締めさば	초절임 고등어	N110	VFd		GN							jisjk:234399
 獨活	두릅	N110	QAO		GN							jisjk:203520
 とん汁	돼지고기 된장국	N110			GN							jisjk:246278
 屯服薬	조제약	N110	QHP		GN							jisjk:246290
@@ -14745,7 +14745,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 とりはだが立	소름이 끼&AO@	M424			GN							jisjk:202266
 パソコン・ショップ	PC 관련 상품점	N110	VBl		GN							jisjk:132777
 ゲスト・ルーム	객실	N110	VBl		GN							jisjk:128350
-蟹みそ	장	N110			GN							w:2975
+蟹みそ	게 내장	N110			GN							w:2975
 ユーザーズ・ガイド	유저즈 가이드	N110			GN							jisjk:58452
 立場に立	입장에 &AD@	M424		Pn	GN							jisjk:138190
 イランイラク戦争	이란 이라크 전쟁	N110			BZ							jisjk:348258
@@ -18875,7 +18875,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スクイジ	스퀴지	N110	VPe		GN							jisjk:129744
 ザッツ	삿츠	N110			GN							jisjk:47662
 いたずら心	희롱하는 마음	N110	SFl		GN							jisjk:228309
-飲みごたえ	맛과 분량이 족히 마실 만함	N110			GN							jisjk:249085
+飲みごたえ	마시는 맛	N110			GN							jisjk:249085
 下駄をはかせ	결정을 맡&A2@	M427			GN							jisjk:117382
 ゲタを履かせ	결정을 맡&A2@	M427			GN							jisjk:117382
 げたを履かせ	결정을 맡&A2@	M427			GN							jisjk:117382

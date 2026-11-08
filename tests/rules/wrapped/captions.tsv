@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 wrapped:caption	魔力量を増やすため\n寝るとき以外は➡\nエンチャントを維持しているし➡\n走り込みや模擬戦では\n限界まで 魔力を消費している｡	마력량을 늘리기 위해\n잘 때 이외는 ➡\n인챈트를 유지하고 있고 ➡\n달리기 포함이나 모의전에서는\n한계까지 마력을 소비하고 있다.	keep	driver
 wrapped:caption	カマンベールチーズを→\n生ハムとバジルで包み→\nカラっと揚げた→\n超濃厚…⟩	카망베르를 →\n날 햄과 바질로 감싸 →\n바삭하게 튀긴 →\n초농후…⟩	fix	driver
 wrapped:caption	たとえ 俺に\n刀の才能がなくても➡\nこの技だけは\nものにしてみせるさ！》	비록 나에게\n칼의 재능이 없어도 ➡\n이 기술만은\n물건으로 해 보이지!》	keep	driver
-wrapped:caption	６００人以上が\nけがをしているということです。	600명 이상이\n상처를 입고 있다는 것입니다.	keep	driver
+wrapped:caption	６００人以上が\nけがをしているということです。	600명 이상이\n부상을 입고 있다는 것입니다.	keep	driver
 wrapped:caption	≫週末には、台風として\n沖縄県などに接近し\n豪雨をもたらしました。	≫주말에는, 태풍으로서\n오키나와현 등에 접근해\n폭우를 가져왔습니다.	keep	driver
 wrapped:caption	特製 油みそをたっぷり塗り→\n大量のチーズをトッピングして\n焼き上げた→\n油みそピザが 丸ごと１枚⟩	특제 유 된장을 듬뿍 발라 →\n대량의 치즈를 토핑해\n구운 →\n기름 된장 피자가 통째로 1장 ⟩	fix	driver
 wrapped:caption	規制線が張られたところも\nありました。	규제선이 쳐진 곳\n도 있었습니다.	fix	driver

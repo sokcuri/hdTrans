@@ -29,7 +29,7 @@ lex:shouchi	両親の承知を得た	부모님의 승낙을 얻었다	fix	defaul
 lex:shouchi	承知しました。	알았습니다.	keep	defaults
 dict:w:33206	艦名は…伊の八！	함명은…이8!	fix	lookup
 sense:uchiage	任務の打ち上げとエルの歓迎会を兼ねたすき焼きパーティが始まった。	임무 뒤풀이와 엘의 환영회를 겸한 스키야키 파티가 시작되었다.	fix	senses
-sense:uchiage	サバイバルゲーム後の打ち上げ居酒屋飲み会で	서바이벌 게임 후 뒤풀이 선술집 회식에서	fix	senses
+sense:uchiage	サバイバルゲーム後の打ち上げ居酒屋飲み会で	서바이벌 게임 후 뒤풀이 이자카야 회식에서	fix	senses
 sense:uchiage	ロケットの打ち上げを見た	로켓 발사를 보았다	keep	senses
 sense:copy	ポスターの横に乗せる、大文字のコピーを考えればいいわけだな？	포스터 옆에 싣는, 대문자 카피를 생각하면 되는 것이네?	fix	senses
 sense:copy	資料のコピーを取る	자료 복사를 한다	keep	senses

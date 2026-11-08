@@ -5062,7 +5062,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うまに	조림	N110	VFd		GN				jisjk:127041		
 うまのみみにかぜ	마이동풍	N110			GN				jisjk:150594		
 うまのり	승마	N110	VRw		GN				jisjk:127046		
-うまみ	좋은 맛	I110			GN				jisjk:97791		
+うまみ	감칠맛	I110			GN				jisjk:97791		
 うまや	마굿간	I110			GN				jisjk:106622		
 うまれ	출생	I110			GN				jisjk:97792		
 うまれ	태어&A5@	M427			GN				jisjk:344310		
@@ -5080,7 +5080,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うまれながら	선천적으로	E300	QHPSFl		GN				jisjk:122869		
 うまれながらに	선천적으로	E300			GN				jisjk:149008		
 うまをはせ	말을 &KA@	M447			GN				jisjk:146250		
-うま味	재미	N110			GN				jisjk:127051		
+うま味	감칠맛	N110			GN				jisjk:127051		
 うま味	감칠맛	N110			GN	2853	||1 &&3 P-1== "2**" P-2== "1**" A-2-= "VFd"	음식 의미 계열의 명사와 조사 뒤에서 「うま味」를 ‘감칠맛’으로 고른다. (미발동: rare-word)	jisjk:268405		
 うま年	말의 해	N110	UMe		GN				jisjk:371132		
 うみ	바다	N110			GN				jisjk:97793		
@@ -14908,7 +14908,7 @@ ttt	ttt	K110			GN				jisjk:201744
 けがのこうみょう	뜻밖의 공명	N110	UTs		GN				jisjk:177754		-1
 けがらわし	추접$AB@	H7U0			GN				jisjk:5032		
 けがらわし	더$G7@	H7N0	SFl		GN				jisjk:120590		
-けがを	상처를 &HM@	M419			GN				jisjk:90732		
+けがを	부상을 &HM@	M419			GN				jisjk:90732		
 けがをしてお	상처를 입고 &HN@	M428			GN				jisjk:202287		
 けが人	부상자	K110			GN				jisjk:115405		
 けげん	의아%A1@	G8U0			GN				jisjk:118820		
@@ -17333,7 +17333,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こしゃくにさわ	성질이 &A5@	M428			GN				jisjk:119477		
 こしゃくに障	성질이 &A5@	M428			GN				jisjk:119475		
 こしゅう	고집	N110	SFl	Hd	GN				jisjk:182299		-1
-こしょう	고장	I110		Hd	GN				jisjk:111806		
+こしょう	후추	I110		Hd	GN				jisjk:111806		
 こしょう	후추	I130	VFd		GN				jisjk:373452		
 こしょうがつ	음력 정월 대보름	N110	UMe		GN				jisjk:182310		-1
 こしょうしてい	고장나 &HN@	M427			GN				jisjk:119483		
@@ -27094,7 +27094,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すり替え	몰래 바&C3@	M437			GN				jisjk:137748		
 すり減ら	닳게 &AV@	M443	VPe		GN				jisjk:139719		
 すり落と	비벼 떨어뜨&AA@	M443			GN				jisjk:143119		
-すり身	으깬어묵	I110			GN				jisjk:106458		
+すり身	다진 생선살	I110			GN				jisjk:106458		
 すり鉢	유발	I110			GN				jisjk:106466		
 する	&AV@	V44;	XXXUThUArUMv		GN	905	||3 &&3 S-1== "に" D-1== "(으)로" P-1== "2**" &&5 M+0== "56*" S-1== "しっかり" P-1== "1**" P+1== "1**" D+0= "&C6@" &&3 S-1== "と" S-2== "期限" D-1= "(으)로"	する의 '하다' 후보를 특정 조사, しっかり 문맥에서 선택하고 번역을 '되다'로 또는 期限 뒤의 と를 '-으로'로 바꾼다.	jisjk:114652		
 する	&A5@	V44;			GN	1174	||4 &&3 P-1== "2**" S-2== "笑い声" P-2== "1**" &&3 P-1== "2**" ||3 S-2== "匂い" S-2== "めまい" S-2== "吐き気" P-2== "1**" &&4 P-1== "2**" S-2== "気" D-2== "3 기분" P-2== "450" &&5 G+0== "Hz" U+0== "と" M+0== "50*" D+0= "그러자(면)    " Y+0= ""	する는 웃음소리·냄새·현기증·메스꺼움 등의 문맥에서 나다를 고르고 문장 첫 すると에서는 그러자(면)으로 바꾼다.	jisjk:116568		
@@ -44664,7 +44664,7 @@ ttt	ttt	K110			GN				jisjk:201744
 わけわか	뭔지 &K6@	M428		PnMa	GN	3380	||1 &&2 U+0== "Lません" D+0= "뭔지 &LS@"	わけわか가 ません 계열 어미를 가지면 번역을 뭔지 모르다로 바꾼다. (미발동: rare-word)	jisjk:342979		
 わげ物	둥근 그릇	I110			GN				jisjk:106764		
 わご	일본어	N110	UTs		GN				jisjk:156858		
-わさび	와사비	I130			GN				jisjk:106765		
+わさび	와사비	N110	VFd		GN				jisjk:106765		
 わさび漬け	와사비 절임	I110	VFd		GN				jisjk:260479		
 わざと	일부러	E311			GN				jisjk:1394		
 わざわい	재난	N110	VSs		GN				jisjk:156859		
@@ -57060,7 +57060,7 @@ ttt	ttt	K110			GN				jisjk:201744
 クリーピングインフレーション	서행 인플레이션	N110	VMo		GN				jisjk:152150		
 クリーブ	클리브	N110	VHn		GN				jisjk:159025		
 クリーブランド	클리브랜드	N110	VPl		GN				jisjk:159026		
-クリーミー	크림이 듬뿍%D4@	G8U0			GN				jisjk:268402		
+クリーミー	크리미%A1@	G8U0			GN				jisjk:268402		
 クリーム	크림	N110	VFdVPa		GN				jisjk:46392		
 クリームいろ	엷은 황색	N110			GN				jisjk:159028		
 クリームソース	크림소스	N110	VPeVFd		GN				jisjk:159029		
@@ -132403,7 +132403,7 @@ ttt	ttt	K110			GN				jisjk:201744
 具有	구유	N110		Hd	GN				jisjk:176985		
 具本英	구본영	N130	QPN		GN				jisjk:207292		
 具本茂	구본무	N130	QPN		GN				jisjk:202981		
-具材	속재료	N110			GN				jisjk:164783		
+具材	재료	N110			GN				jisjk:164783		
 具東吉	구동길	N130	QPN		GN				jisjk:207288		
 具栄必	구영필	N130	QPN		GN				jisjk:207299		
 具案	구안	N110		Hd	GN				jisjk:16710		
@@ -170876,7 +170876,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大根占	오네지메	I130	QIDQCT		GN				jisjk:64976		
 大根占町	오네지매쵸	I110			GN				jisjk:110938		
 大根占町	오네지메쵸	I130	QCTVPl		GN				jisjk:278450		
-大根卸し	강판	N110	VPe		GN				jisjk:153255		
+大根卸し	무즙	N110	VPe		GN				jisjk:153255		
 大根坂	오네자카	N130	QCTVPl		GN				jisjk:278449		
 大根子	오네코	N130	QCTVPl		GN				jisjk:278447		
 大根島	다이콘지마	I110	QCT		GN				jisjk:64975		
@@ -189779,7 +189779,7 @@ ttt	ttt	K110			GN				jisjk:201744
 居舟	이후네	N130	QCTVPl		GN				jisjk:273690		
 居辺	오리베	N130	QCTVPl		GN				jisjk:280986		
 居辺川	오리베가와	I110	QCT		GN				jisjk:60709		
-居酒屋	선술집	I110	VPlVFd		GN				jisjk:60712		
+居酒屋	이자카야	I110	VPlVFd		GN				jisjk:60712		
 居開帳	본존의 공개	N110	UCl		GN				jisjk:125214		
 居間	거실	N110	VPl		GN				jisjk:15022		
 居食い	무위 도식	N110		Hd	GN				jisjk:125324		
@@ -225876,7 +225876,7 @@ ttt	ttt	K110			GN				jisjk:201744
 旨	취지	N110	UTh		GN	2642	||1 P-1== "4**"	동사 뒤의 '旨'를 발화 내용·의도를 나타내는 '취지'로 고른다.	jisjk:267028		
 旨	지	N110		On	GN				jisjk:267029		
 旨み	감칠맛	N110	UFl		GN				jisjk:34696		
-旨味	묘미	N110	UFl		GN				jisjk:34697		
+旨味	감칠맛	N110	UFl		GN				jisjk:34697		
 旨回答	취지 회답	N110			GN				jisjk:151834		
 旨旨	감쪽같이	E300			GN				jisjk:122868		
 旨煮	달게 지진 요리	N110	VFd		GN				jisjk:34698		
@@ -253863,7 +253863,7 @@ ttt	ttt	K110			GN				jisjk:201744
 水掛草	부처꽃	N110	VPt		GN				jisjk:252278		
 水掛論	탁상 공론	I110	UTs		GN				jisjk:75880		
 水掻き	물갈퀴	I110			GN				jisjk:105985		
-水揚げ	양륙	I110		Hd	GN				jisjk:75939		
+水揚げ	하역	I110		Hd	GN				jisjk:75939		
 水揚げ	매상고	I110	VMo		GN				jisjk:75940		
 水揚げされたばかりの	양륙된지 얼마 안 된	N110			GN				jisjk:151807		
 水揚げ量	어획고	N110			GN				jisjk:252269		
@@ -260560,7 +260560,7 @@ ttt	ttt	K110			GN				jisjk:201744
 浜海道	하마카이도	N130	VPl		GN				jisjk:219760		
 浜海道	하마카이도	N130	VPl		GN				jisjk:219762		
 浜添通	하마조에도리	N130	QCTVPl		GN				jisjk:321217		
-浜焼き	도미 소금구이	N110	VFd		GN				jisjk:250094	00000000000000000000000000000000000000000000000000000000000000004a4a46334a043f584759df4f1240523f38df4323405e4352df432d4e224e004e31313000564664005377004472554d6556506c000000000000006400750061006800000000000000000000000000474e000000000000000000000000cc2c0c3c	
+浜焼き	해산물 구이	N110	VFd		GN				jisjk:250094	00000000000000000000000000000000000000000000000000000000000000004a4a46334a043f584759df4f1240523f38df4323405e4352df432d4e224e004e31313000564664005377004472554d6556506c000000000000006400750061006800000000000000000000000000474e000000000000000000000000cc2c0c3c	
 浜猿払	하마사루후츠	I110	QCT		GN				jisjk:71691		
 浜玉	하타마타	N110	VPl		GN				jisjk:250066		
 浜玉町	하마타마쵸	N130	QCTVPl		GN				jisjk:321222		
@@ -301523,7 +301523,7 @@ ttt	ttt	K110			GN				jisjk:201744
 締め金	죔쇠	I110	VPe		GN				jisjk:86295		
 締め金	합계금	I110	VMo		GN				jisjk:86296		
 締め高	총액	N110	VMy		GN				jisjk:188616		
-締め鯖	자반	N110	VFd		GN				jisjk:234398		
+締め鯖	초절임 고등어	N110	VFd		GN				jisjk:234398		
 締らな	흐리멍덩$AB@	H7N0	SFl		GN				jisjk:120962		
 締り	야무진 곳	N110	VPl		GN				jisjk:12762		
 締り	죔	N110			GN				jisjk:12763		
@@ -301549,7 +301549,7 @@ ttt	ttt	K110			GN				jisjk:201744
 締結着	체결착	N110		Hd	GN				jisjk:161893		
 締結着	체결착	N110		Hd	GN				jisjk:161894		
 締高	합계	N110			GN				jisjk:188618		
-締鯖	자반	N110	VFd		GN				jisjk:234399		
+締鯖	초절임 고등어	N110	VFd		GN				jisjk:234399		
 編	&AM@	M435			GN				jisjk:95737		
 編	편찬&AV@	M445	VBkVSwUThVCm		GN				jisjk:138515		
 編みかた	뜨는 방법	N110			GN				jisjk:163185		
@@ -305877,7 +305877,7 @@ ttt	ttt	K110			GN				jisjk:201744
 能面	가면	N110			GN				jisjk:98121		
 能面打ち	노멘 장인	N110	VHn		GN				jisjk:248926		
 能駕	능가	N110			GN				jisjk:18409		
-脂	지방	N110			GN				jisjk:115778		
+脂	기름	N110			GN				jisjk:115778		
 脂	지	N110		On	GN				jisjk:258884		
 脂が乗	기름기가 &E6@	M418	VHnQAA		GN				jisjk:95047		
 脂が乗	능률이 &E6@	M418			GN				jisjk:95048		
@@ -331263,7 +331263,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤海	아코우미	N130	QCTVPl		GN				jisjk:269534		
 赤海亀	바다거북	N110	VAm		GN				jisjk:226873		
 赤海星	불가사리	N110	VAm		GN				jisjk:226943		
-赤海老	보리새우과 새우	N110	VAm		GN				jisjk:226877		
+赤海老	붉은새우	N110	VAm		GN				jisjk:226877		
 赤海胆	섬게	N110	VAm		GN				jisjk:226872		
 赤渋	아카시부	N130	QCTVPl		GN				jisjk:269108		
 赤渋町	아카시부쵸	N130	QCTVPl		GN				jisjk:269109		
@@ -356977,13 +356977,13 @@ ttt	ttt	K110			GN				jisjk:201744
 飲み屋	술집	I110	VBlVFd		GN				jisjk:79694		
 飲み干	다 마&AE@	M443			GN				jisjk:267713		
 飲み心地	맛	N110			GN				jisjk:365452		
-飲み応え	마실 맛	N110			GN				jisjk:249085		
+飲み応え	마시는 맛	N110			GN				jisjk:249085		
 飲み手	술꾼	I110	VHn		GN				jisjk:79691		
 飲み掛け	마시다가 중도에서 그침	N110			GN				jisjk:249082		
 飲み放題	맘껏 마시기	N110		Hd	GN				jisjk:353434		
 飲み料	주대	N110	VMy		GN				jisjk:249099		
 飲み明	밤새 술을 마&AE@	M413	VFdVFd		GN				jisjk:94355		
-飲み明か	밤새워 술마&AE@	M413	VFd		GN				jisjk:94356		
+飲み明か	밤새워 술 마&AE@	M413	VFd		GN				jisjk:94356		
 飲み易さ	부드러움	H110			GN				jisjk:365461		
 飲み止し	마시다 남긴 것	N110		Hd	GN				jisjk:249086		
 飲み歩	마시며 돌아 다&A7@	M441			GN				jisjk:360139		
