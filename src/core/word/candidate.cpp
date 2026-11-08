@@ -726,6 +726,99 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     return front;
 }
 
+// LEX-5106: where the longest word at a point of a kanji run ends inside the run and the rest of the
+// run, read word by word, takes more words than a cover that starts with a shorter word (米中 + 間選 +
+// 挙 against 米 + 中間選挙; 敵機 + 動 + 部隊 against 敵 + 機動部隊), the first word of the cover with the
+// fewest words goes first; of those covers the one whose first word is longest. A piece is a dictionary
+// key of two or more kanji found at a point of the run, or one kanji; a piece that starts with 々 counts
+// as two, as 々 repeats the kanji before it (江戸 + 家 + 代々, not 家代 + 々), and so does a piece with 々
+// that the dictionary reads only as a name (親睦会 + 々 + 場, not 親睦 + the name 会々 + 場). A run from a
+// kanji digit or 第 is left to the readings of numbers. A plain word with force keeps its place, and so
+// does every word of a run longer than 16 kanji. A first word of one kanji is also read as that kanji
+// where its rows do not read there (軽 of 軽乗用車, an adjective stem). records holds the words at
+// full[cursor:], longest first.
+Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, std::size_t cursor, int token) {
+    constexpr std::size_t kMaxRun = 16;
+    if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    cursor = std::min(cursor, full.size());
+    const std::string_view text = full.substr(cursor);
+    if (text.empty() || !text::IsKanji(text::DecodeRune(text).cp) || text.starts_with("々") || IsNumeral(FirstChar(text)) ||
+        text.starts_with("第")) {
+        return records;
+    }
+    std::vector<std::size_t> bounds{0};
+    for (std::string_view s = text; !s.empty() && bounds.size() <= kMaxRun + 1;) {
+        const text::Rune r = text::DecodeRune(s);
+        if (!text::IsKanji(r.cp)) break;
+        bounds.push_back(bounds.back() + r.size);
+        s.remove_prefix(r.size);
+    }
+    const std::size_t n = bounds.size();
+    std::size_t greedy = 0;
+    for (const Record* r = records; r != nullptr; r = r->child) greedy = std::max(greedy, r->source.size());
+    if (n < 4 || n > kMaxRun + 1 || greedy >= bounds.back() || !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+        return records;
+    }
+    // ends[i]: the indexes in bounds of the ends of the pieces at bounds[i]; names: i * n + j of the
+    // pieces from bounds[i] to bounds[j] that the dictionary reads only as a name (N130).
+    std::vector<std::vector<std::size_t>> ends(n);
+    std::vector<std::size_t> names;
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        ends[i].push_back(i + 1);
+        if (i + 2 >= n) continue;
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
+        for (std::size_t j = i + 2; j < n; j++) {
+            bool any = false, name = true;
+            for (const dict::Candidate& c : found.list) {
+                if (c.source.size() != bounds[j] - bounds[i] || c.codes == nullptr) continue;
+                any = true;
+                name = name && c.codes->partText == "N130";
+            }
+            if (any) ends[i].push_back(j);
+            if (any && name) names.push_back(i * n + j);
+        }
+    }
+    // A piece costs one; one that starts with 々, or a name with 々 in it, costs two.
+    auto cost = [&](std::size_t i, std::size_t j) {
+        const std::string_view piece = text.substr(bounds[i], bounds[j] - bounds[i]);
+        const bool name = Has(piece, "々") && std::find(names.begin(), names.end(), i * n + j) != names.end();
+        return piece.starts_with("々") || name ? 2 : 1;
+    };
+    // fewest[i]: the fewest pieces, by cost, of a cover of the run from bounds[i].
+    constexpr int kNone = 1 << 20;
+    std::vector<int> fewest(n, kNone);
+    fewest[n - 1] = 0;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const std::size_t j : ends[i]) fewest[i] = std::min(fewest[i], fewest[j] + cost(i, j));
+    }
+    std::size_t greedyEnd = 0;
+    while (bounds[greedyEnd] != greedy) greedyEnd++;
+    if (fewest[greedyEnd] + cost(0, greedyEnd) <= fewest[0]) return records;
+    std::size_t chosen = 0;
+    for (const std::size_t j : ends[0]) {
+        if (fewest[j] + cost(0, j) == fewest[0]) chosen = std::max(chosen, bounds[j]);
+    }
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = r->source.size() == chosen ? frontTail : backTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    if (text::DecodeRune(text).size == chosen) {
+        *frontTail = worker.CreateSyntheticRecord(token, text.substr(0, chosen), false);
+        frontTail = &(*frontTail)->child;
+    }
+    if (front == nullptr) return back;
+    *frontTail = back;
+    return front;
+}
+
 Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text, const Record* lead) {
     Record* owned = nullptr;
     Record* first = records;
@@ -2675,6 +2768,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
     if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+    if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;
