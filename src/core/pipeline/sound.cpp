@@ -878,6 +878,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 rs_[end] != U'茂') {
                 pause = true;
             }
+            // The call なあ that opens an utterance calls the name in kanji or katakana right after it (なあ鈴木 저기
+            // 스즈키) and pauses before an ellipsis (なあ…… 저기……; spec LEX-5053), as おい does; the drawn な of a
+            // predicate never opens an utterance.
+            if (s.key == U"ナア" && end < rs_.size() && rs_[end] != U'ン' &&
+                (text::IsKanji(rs_[end]) || IsKatakanaRune(rs_[end]) || In(rs_[end], U"…‥"))) {
+                pause = true;
+            }
             if (!start || (!pause && !open) || IsKatakanaRune(rs_[p])) continue;
             // Nor where it ends inside a word in katakana (、ってカンジ: the quoting って).
             if (end < rs_.size() && IsKatakanaRune(rs_[end - 1]) && IsKatakanaRune(rs_[end]) && rs_[end] != U'ー') continue;
