@@ -9,7 +9,7 @@ dict:nante-what:1	そんなことを言う、なんてことはない。	!rule:d
 dict:jisjk:342679	何て書けばいいの？	뭐라고 쓰면 되는 거야?	fix	defaults
 dict:jisjk:342679	何て呼べばいい？	뭐라고 부르면 돼?	fix	defaults
 dict:jisjk:342679	今何て？	지금 뭐라고?	fix	defaults
-dict:jisjk:342679	あ、いえ、何ていうか	아, 아니요, 뭐라고 말할까	fix	defaults
+dict:jisjk:342679	あ、いえ、何ていうか	아, 아니요, 뭐랄까	fix	defaults
 dict:nante-kanji:1	何て綺麗なんだ	정말 예쁘다	fix	local
 dict:nante-kanji:1	何て静かな夜だ。	정말 조용한 밤이다.	fix	local
 dict:nante-kanji:1	何て言った？	!rule:dict:nante-kanji:1	keep	local

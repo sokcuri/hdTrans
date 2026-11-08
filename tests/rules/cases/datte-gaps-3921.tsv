@@ -78,7 +78,7 @@ lookup:verb-before-te-form	蕩すのも良いけど、ちゃんと面倒見な�
 lookup:verb-before-te-form	長谷岡さん 梨花さんの事 学生時代から面倒見てたって 言ってなかった？ ええ｡	하세 오카 씨 리카 씨의 일 학생시절부터 돌보고 있었다고 하지 않았어? 네.	fix	lookup
 lookup:verb-before-te-form	ええ、面倒見もいいから人気の先生になれるんじゃないかしら	네, 돌보기도 좋으니까 인기의 선생님이 될 수 있지 않을까	keep	lookup
 lookup:verb-before-te-form	午後2時。さっき夕雲が来た。差し入れだって、やつは相変わらず面倒見がいいなぁ	오후 2시. 조금 전 유구모가 왔다. 간식도, 녀석은 변함없이 잘 돌봐 주는	keep	lookup
-lookup:verb-before-te-form	ヒトサンマルマル。握り飯美味かったろ？谷風はああ見えて面倒見のいい良い奴なんだ。	1300. 주먹밥 맛있었잖아? 골짜기 바람은 아 보여 잘 돌봐주는 좋은 놈이야.	keep	lookup
+lookup:verb-before-te-form	ヒトサンマルマル。握り飯美味かったろ？谷風はああ見えて面倒見のいい良い奴なんだ。	1300. 주먹밥 맛있었잖아? 골짜기 바람은 저래 보여도 잘 돌봐주는 좋은 놈이야.	keep	lookup
 lookup:verb-before-te-form	あの人、クールでぶっきらぼうを装ってるが、実は気配りができて面倒見もいい。	그 사람, 쿨해 무뚝뚝함을 가장하고 있지만, 실은 배려를 할 수 있어 돌보기도 좋다.	keep	lookup
 cx:stem-noun-object:10	「それはお互い様よ。イスカの面倒見てくれてありがとう。助かったわ、色々とね」	「그건 피차일반이야. 이스카를 돌봐 줘서 고마워. 살았어, 여러모로」	fix	rewrites
 cx:stem-noun-object:10	夕飯作ってる時くらい子どもの面倒見ててよ…	저녁 만들고 있을 때 정도 아이를 돌보고 있어…	fix	rewrites

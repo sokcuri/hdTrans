@@ -1,0 +1,59 @@
+# 규칙: LEX-5233
+rule	input	expected	kind	layer
+dict:tail-5233	あいつは頭が行かれている	has:머리가 이상해	fix	lookup
+dict:tail-5233	逆もしかりだ	has:반대도	fix	lookup
+dict:tail-5233	極めつけに、彼は笑った	has:결정적으로	fix	lookup
+dict:tail-5233	腕前なら引けはとらない	has:뒤지지 않	fix	lookup
+dict:tail-5233	そんなことはどうでも良かった	has:아무래도 좋았다	fix	lookup
+dict:tail-5233	どうという事もない話だ	has:별것 아닌	fix	lookup
+dict:tail-5233	這う這うの体で逃げ出した	has:혼비백산하여	fix	lookup
+dict:tail-5233	何不自由ない暮らし	has:아무 부족함 없는	fix	lookup
+dict:tail-5233	縁の下の力持ちになりたい	has:숨은 공로자	fix	lookup
+dict:tail-5233	「墓じまい」が増えている	has:묘지 정리	fix	lookup
+dict:tail-5233	くるみ割り人形を見た	has:호두까기	fix	lookup
+dict:tail-5233	矢張りそうか	has:역시	fix	lookup
+dict:tail-5233	独特の語り口	has:어조	fix	lookup
+dict:tail-5233	いきおいで言ってしまった	has:기세	fix	lookup
+dict:tail-5233	頼りなさげな足取りで	has:미덥지 못한	fix	lookup
+dict:tail-5233	母一人子一人で育った	has:모자 단둘	fix	lookup
+dict:tail-5233	粘土をこねくりまわす	has:이리저리	fix	lookup
+dict:tail-5233	裏を返すと、そういうことだ	has:뒤집어 말하면	fix	lookup
+dict:tail-5233	懐が潤ったから	has:주머니가	fix	lookup
+dict:tail-5233	あの業突く張りめ	has:욕심쟁이	fix	lookup
+dict:tail-5233	バカにできない	has:무시할 수 없	fix	lookup
+dict:tail-5233	バツが悪かった	has:겸연쩍	fix	lookup
+dict:tail-5233	なんていうか、変な人だ	has:뭐랄까	fix	lookup
+dict:tail-5233	私に言わせれば、甘い	has:내가 보기에는	fix	lookup
+dict:tail-5233	真剣勝負だ	has:진검 승부	fix	lookup
+dict:tail-5233	かくし芸を披露する	has:장기	fix	lookup
+dict:tail-5233	あることないこと言いふらす	has:있는 말 없는 말	fix	lookup
+dict:tail-5233	足を棒にして探した	has:발이 부르트도록	fix	lookup
+dict:tail-5233	尾ひれがついて噂される	has:이야기가 부풀려져	fix	lookup
+dict:tail-5233	それからというもの、彼は変わった	has:그 뒤로	fix	lookup
+dict:tail-5233	猫が香箱を組んでいる	has:식빵	fix	lookup
+dict:tail-5233	それに引き換え、お前は	has:그에 비해	fix	lookup
+dict:tail-5233	居た堪れない気持ち	has:견딜 수 없	fix	lookup
+dict:tail-5233	何の因果か、ここにいる	has:무슨 업보인지	fix	lookup
+dict:tail-5233	友達止まりだった	has:그냥 친구	fix	lookup
+dict:tail-5233	脳筋ばかりだ	has:근육 바보	fix	lookup
+dict:tail-5233	ご機嫌取りはやめろ	has:비위 맞추기	fix	lookup
+dict:tail-5233	もったいつけるように言った	has:뜸을 들이	fix	lookup
+dict:tail-5233	惚れた弱みだ	has:반한 죄	fix	lookup
+dict:tail-5233	そうこなくっちゃな	has:그래야지	fix	lookup
+dict:tail-5233	遠路はるばるご苦労だった	has:먼 길 마다않고	fix	lookup
+dict:tail-5233	涼しい顔してんねぇ	has:태연한 얼굴	fix	lookup
+dict:tail-5233	とてもじゃないが無理だ	has:도저히	fix	lookup
+dict:tail-5233	心を通わせていく	has:마음을 나누	fix	lookup
+dict:tail-5233	ああ見えて優しい	has:저래 보여도	fix	lookup
+dict:tail-5233	ここ一番で強い	has:결정적인 순간	fix	lookup
+dict:tail-5233	辻斬りが出た	has:행인 베기	fix	lookup
+dict:tail-5233	たんかを切った	has:호기롭게	fix	lookup
+dict:tail-5233	赤目の兎	has:붉은 눈	fix	lookup
+dict:tail-5233	迷走を始めた	has:갈팡질팡	fix	lookup
+dict:tail-5233	印綬を帯びる	has:인수	fix	lookup
+dict:tail-5233	新疆に向かった	has:신장	fix	lookup
+dict:tail-5233	好印象を持った	has:좋은 인상	fix	lookup
+dict:tail-5233	見慣れぬ旗が翻っていたとか	has:나부끼고 있었다	keep	lookup
+dict:tail-5233	どうでもいいよ	has:아무래도 좋아	keep	lookup
+dict:tail-5233	唇をかみしめる	lacks:음미	keep	lookup
+dict:tail-5233	ああ見えても若は結構寂しがり屋でね。	has:저래 보여도 약은	fix	lookup
