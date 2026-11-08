@@ -20,3 +20,8 @@ sound:mid-word-stretch	ナ～ラ姉さま大丈夫ぅ	has:나~라	keep	sound
 sound:mid-word-stretch	準備はい～い？	has:됐어~	keep	sound
 dict:w:35280	「…はぅ…あの子泣いてる……かぁいいよぅ……。」	has:귀여워	fix	lookup
 dict:w:35280	かぁいいモードの彼女	has:귀여운 모드	fix	lookup
+sound:mid-word-stretch	お～お前は	has:너는	keep	sound
+sound:mid-word-stretch	あ～あなた	has:당신	keep	sound
+sound:mid-word-stretch	お～いし～い	맛있어~	fix	sound
+sound:mid-word-stretch	お～い	어이~	keep	sound
+sound:mid-word-stretch	あ～そこじゃあ。	has:아~거기	keep	sound

@@ -2231,6 +2231,13 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
             k = end - 1;
             continue;
         }
+        // A kana said again before a word that starts with it is a stutter (お～お前, あ～あなた), no word
+        // drawn out.
+        const bool goodStem = next == U'い' && e.Tags(std::u32string_view(&prev, 1)).find('H') != std::string::npos;  // い～い
+        if (prev == next && !goodStem && e.LongestKey(std::u32string_view(rs).substr(end)) >= 2) {
+            k = end - 1;
+            continue;
+        }
         size_t from = k - 1;
         while (from > 0 && k - from < 6 && inWord(rs[from - 1])) from--;
         // The word that starts in from..k-1 of t and reaches past position k, its end, or 0.
@@ -2276,11 +2283,19 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
             }
         } else if (IsHiraganaRune(prev) && IsHiraganaRune(next)) {
             const int v = HiraganaVowel(prev);
-            // The word goes on two kana or more past the mark (ていとく; not うんめい|お, すごう|い).
             // The word starts at the kana before the mark, which starts its hiragana run (て～とく; not the
-            // particle of 追い込みますよ～ついて).
+            // particle of 追い込みますよ～ついて), and goes on two kana or more past the mark (ていとく; not
+            // うんめい|お, すごう|い). An adjective without the mark first (お～いし～い おいし～い), then a word with
+            // the long vowel of an e- or o-row kana spelled out.
             const bool starts = k == 1 || !IsHiraganaRune(rs[k - 2]);
-            if ((v == 3 || v == 4) && starts && next != U'っ' && next != U'ん') {
+            if (starts && next != U'ん') {
+                // Only an adjective drawn out (おいし～い): before another word the kana is a sound of its
+                // own (あ～そこ 아~거기).
+                m = rs.substr(0, k) + rs.substr(end);
+                best = reach(m, 3);
+                if (best < k + 2 || e.Tags(std::u32string_view(m).substr(k - 1, best - k + 1)).find('H') == std::string::npos) best = 0;
+            }
+            if (best == 0 && (v == 3 || v == 4) && starts && next != U'っ' && next != U'ん') {
                 m = Spliced(rs, k, v == 3 ? U"い" : U"う", end);
                 best = reach(m, 3);
                 if (best < k + 3) best = 0;
@@ -2290,8 +2305,13 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
             k = end - 1;
             continue;
         }
+        // Not where the text as written holds a word across the mark that reaches as far (お～い is a key,
+        // but おいしい goes further).
         bool written = false;
-        for (size_t j = from; j < k && !written; j++) written = j + e.LongestKey(std::u32string_view(rs).substr(j)) > end;
+        for (size_t j = from; j < k && !written; j++) {
+            const size_t far = j + e.LongestKey(std::u32string_view(rs).substr(j));
+            written = far > end && far - (end - k) + (m.size() + (end - k) - rs.size()) >= best;
+        }
         if (written) {
             k = end - 1;
             continue;
