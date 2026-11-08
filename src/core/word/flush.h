@@ -139,7 +139,7 @@ void RespectfulPassive(Flusher& f);
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
 // A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
-// plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
+// plural and the suffix as nothing: 나 우리, 저 저희, 너 너희, 네놈 네놈들 (ボクたち 나들 → 우리).
 void PluralPronoun(Flusher& f);
 // The counter 度 after a number of 10 or more or with a decimal point reads as the degree 도,
 // not the count 번, when the number is written in digits (180度 180도, 0.5度 0.5도) or in

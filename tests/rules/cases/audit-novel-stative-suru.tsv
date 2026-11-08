@@ -1,0 +1,38 @@
+# 규칙: LEX-5652
+rule	input	expected	kind	layer
+dict:lex:hw-suru	ヒトマルマルマル。しばらくは心もとなかったが、今はおかげで兵装も充実している。	has:무장도 충실하다	fix	local
+dict:lex:hw-suru	20時になりました。日本の重巡も、充実しているんですねぇ。	has:충실하군요	fix	local
+dict:lex:hw-suru	毎日が充実している。	has:매일이 충실하다	fix	local
+dict:lex:hw-suru	とても充実してる。	has:충실하다	fix	local
+dict:lex:hw-suru	時間が充実してるね！	has:충실하네	fix	local
+dict:lex:hw-suru	時間が不足してる。	has:부족하다	fix	local
+dict:lex:hw-suru	道が混雑する。	has:혼잡하다	fix	local
+dict:lex:hw-suru	「すんすん……貧乏くせー臭いが充満してる」	has:충만해	fix	local
+dict:jisjk:368666	都内の道路はテロ事件により混雑していたが、それを抜けると美浜まではスムーズに移動できた。	has:혼잡했지만	fix	local
+dict:jisjk:368666	ゲーム研究部の内部事情に精通していたなら話は簡単だ。	has:정통했다면	fix	local
+dict:jisjk:368666	二つは類似している。	has:유사하다	fix	local
+dict:jisjk:368666	それは衰弱しているのか？	has:쇠약한 건가	fix	local
+dict:jisjk:368666	「……それほど子爵領は困窮していたか？」	lacks:곤궁하고 있	fix	local
+dict:jisjk:359097	時間が充実していない。	has:충실하지 않다	fix	local
+dict:jisjk:359097	休日は充実していない。	has:충실하지 않다	fix	local
+dict:lex:hw-shitena	時間が充実してない。	has:충실하지 않다	fix	local
+dict:lex:hw-shitena	時間が不足してない。	has:부족하지 않다	fix	local
+dict:jisjk:359482	時間が不足していませんから。	has:부족하지 않으니까요	fix	local-ending
+dict:jisjk:359480	時間が不足していませんが、	has:부족하지 않습니다만	fix	local-ending
+dict:jisjk:359478	時間が不足していないので大丈夫。	has:부족하지 않기 때문에	fix	local-ending
+dict:jisjk:359478	まだ準備していないので待って。	has:준비하고 있지 않았기 때문에	keep	local-ending
+dict:jisjk:359480	彼は何も言っていませんが、	has:말하지 않습니다만	keep	local-ending
+dict:jisjk:368666	人手が不足している。	has:일손이 부족하다	keep	local
+dict:jisjk:368666	書類を作成している。	has:작성하고 있다	fix	local
+dict:jisjk:368666	書類を作成していない。	has:작성하고 있지 않다	fix	local
+dict:lex:hw-suru	そんな時はノートに色々と書き綴って満足していた。	has:만족했다	keep	local
+dict:lex:hw-suru	充実した日々を送っている。	has:충실한 날들	keep	local
+dict:lex:hw-suru	装備を充実させる。	has:충실시킨다	keep	local
+dict:lex:hw-suru	彼女は緊張している。	has:긴장하고 있다	keep	local
+dict:lex:hw-suru	心身ともに充実して臨み、結果につなげた。	has:충실해	keep	local
+dict:lex:hw-suru-change	体が衰弱する。	has:쇠약해진다	fix	local
+dict:lex:hw-suru-change	だから長い戦争で疲弊した国内を救うためという名目で、	has:피폐해진 국내	fix	local
+dict:lex:hw-suru-change	彼は憔悴した。	has:초췌해졌다	fix	local
+dict:jisjk:368666	体が衰弱している。	has:쇠약하다	fix	local
+dict:lex:hw-suru	困窮する家庭の約３割の生徒が	has:곤궁한 가정	fix	local
+dict:lex:hw-suru	子供の活動は後押ししたいが、時には与えられた範囲で満足する事も大切だ。	has:만족하는 일도	keep	local

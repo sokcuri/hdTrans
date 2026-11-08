@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-constraint:itadake-dake	きさまは沙漠をウロウロしていただけじゃないか！	너는 사막을 어슬렁어슬렁하고 있었을 뿐이잖아!	fix	lookup
+constraint:itadake-dake	きさまは沙漠をウロウロしていただけじゃないか！	네놈은 사막을 어슬렁어슬렁하고 있었을 뿐이잖아!	fix	lookup
 constraint:itadake-dake	旅の想い出を形にしていただける清流線グッズや地元の名産品を取りそろえてお待ちしております。	여행의 추억을 형태로 해 주시는 청류선굿즈나 동네의 명산품을 두루 갖추어 기다리고 있습니다.	keep	lookup
 constraint:itadake-dake	……きちんと、１から１０まで、聞かせていただけるかしら？	has:주시겠어요?	keep	lookup
 constraint:itadake-dake	もう少し声を出していただけるとありがたいのですが	좀 더 소리를 내주면 고맙습니다만	keep	lookup

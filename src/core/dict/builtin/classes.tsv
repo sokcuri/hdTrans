@@ -577,6 +577,11 @@
 //= verb.arrival-te	Stems of the verbs of moving to a place whose て form before 来る says the arrival, so that its ている is the state of having come (帰ってきている 돌아와 있다, 入ってきている 들어와 있다).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
+//= verb.destination-state	Stems of the verbs of going whose ている after a place in に or へ is having gone there, the state (東京に行っている 도쿄에 가 있다, トイレに行っていたんだ 화장실에 가 있던 거야; spec LEX-5655).
+//= adverb.destination-state	Words of a state now or already reached that make a verb of going in verb.destination-state the having gone there (すでに東京に行っていた 가 있었다, 今どこに行っているの 어디에 가 있는; spec LEX-5655).
+//= adverb.frequency	Words of frequency, counts of times and of a stretch of time that make a going in verb.destination-state a going done again, not having gone (週に三回ジムに行っていたんだ 가고 있던 거야, 何度も, 毎週末, ずっと; spec LEX-5655).
+//= noun.period-topic	Words of a period of one's life or of a past time that, before は, make a going in verb.destination-state the going done again in that period, not having gone (小学生の頃は学校に行っていたんだ 가고 있던 거야, 昔は; spec LEX-5655).
+//= noun.attended-place	Places one goes to regularly, school or work, whose に before a verb of going is the attending, not having gone (学校に行っていたんだ 가고 있던 거야; spec LEX-5655).
 //= noun.result-suru-past	Verbal nouns of a change done once whose しているs and してる is the state it left, read as the Korean past (もう結婚してる 벌써 결혼했어, 卒業している 졸업했다; spec LEX-4766).
 //= noun.experience-suru	Verbal nouns of an experience or a life event one has had or not (恋愛, 経験, 結婚, 卒業): in していない it is what never happened, the Korean past negative (恋愛もしていない 연애도 하지 않았다, 結婚はしていない 결혼은 하지 않았다; spec LEX-5052).
 //= verb.promise-act	Stems of verbs of an act one promises to do for the listener (戻る, 返す, 払う, 待つ, 作る), whose から before a request is the promise the request leans on, -ㄹ 테니까 (すぐ戻るから待ってて 바로 돌아올 테니까; spec LEX-4766).
@@ -7894,6 +7899,7 @@ verb.result-passive	包
 verb.result-passive	詰め
 verb.result-passive	閉じ込め
 verb.result-passive	埋め
+verb.result-passive	覚え
 verb.result-passive	刺
 verb.result-passive	縛
 verb.result-passive	隠
@@ -8058,6 +8064,67 @@ verb.result-state	わからなくな
 verb.result-state	分からなくな
 verb.result-state	判らなくな
 verb.result-state	孤立
+verb.result-state	日が暮れ
+verb.destination-state	行
+adverb.frequency	何度も
+adverb.frequency	何度
+adverb.frequency	何回も
+adverb.frequency	何回
+adverb.frequency	数回
+adverb.frequency	数度
+adverb.frequency	一回
+adverb.frequency	二回
+adverb.frequency	三回
+adverb.frequency	四回
+adverb.frequency	五回
+adverb.frequency	一度
+adverb.frequency	二度
+adverb.frequency	三度
+adverb.frequency	毎日
+adverb.frequency	毎週
+adverb.frequency	毎週末
+adverb.frequency	毎朝
+adverb.frequency	毎晩
+adverb.frequency	毎月
+adverb.frequency	毎年
+adverb.frequency	毎回
+adverb.frequency	毎度
+adverb.frequency	ずっと
+adverb.frequency	いつも
+adverb.frequency	よく
+adverb.frequency	時々
+adverb.frequency	たまに
+noun.period-topic	頃
+noun.period-topic	ころ
+noun.period-topic	時
+noun.period-topic	とき
+noun.period-topic	昔
+noun.period-topic	当時
+noun.period-topic	小さい頃
+noun.period-topic	子供の頃
+noun.attended-place	学校
+noun.attended-place	小学校
+noun.attended-place	中学
+noun.attended-place	中学校
+noun.attended-place	高校
+noun.attended-place	大学
+noun.attended-place	塾
+noun.attended-place	予備校
+noun.attended-place	幼稚園
+noun.attended-place	保育園
+noun.attended-place	会社
+noun.attended-place	職場
+noun.attended-place	バイト
+noun.attended-place	教会
+noun.attended-place	ジム
+adverb.destination-state	もう
+adverb.destination-state	すでに
+adverb.destination-state	既に
+adverb.destination-state	今
+adverb.destination-state	今頃
+adverb.destination-state	いまごろ
+adverb.destination-state	どこ
+adverb.destination-state	何処
 
 verb.arrival-te	帰
 verb.arrival-te	戻
@@ -8734,6 +8801,7 @@ word.humble-own	願い
 word.humble-own	ねがい
 word.humble-own	一緒
 word.humble-own	散歩
+word.humble-own	昼寝
 word.humble-own	先に
 word.humble-own	聞き
 word.humble-own	伺い

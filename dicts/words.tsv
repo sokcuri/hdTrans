@@ -27386,6 +27386,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ドヨウ	토요	N110			GN			LEX-4304: ドヨウ 토요			どよう	w:31536
 マジパナイ	진짜 장난 아니야	N110			GN			LEX-4304: マジパナイ 진짜 장난 아니야			まじぱない	w:31537
 キサマ	네놈	N120	VHn		GN			LEX-4304: キサマ 네놈			きさま	w:31538
+キサマラ	네놈들	N120	VHn		GN			LEX-5654: キサマラ 네놈들			きさまら	w:kisamara
 ナニコレ	이게 뭐야	N110			GN			LEX-4304: ナニコレ 이게 뭐야			なにこれ	w:31539
 トンチンカン	엉터리	N110			GN			LEX-4304: トンチンカン 엉터리			とんちんかん	w:31540
 ペナン	페낭	N130	QCTVPl		GN			LEX-4301: ペナン 페낭			ペナン	w:31541

@@ -115,7 +115,7 @@ sound:drawn-honorific	「様ぁ」	「모양」	keep	sound
 sound:drawn-honorific	「有様ぁ」	「모양」	keep	sound
 sound:drawn-honorific	「同様あ」	lacks:~	keep	sound
 sound:drawn-honorific	「様様ぁ」	lacks:~	keep	sound
-sound:drawn-honorific	「きさまぁ！」	「너!」	fix	sound
+sound:drawn-honorific	「きさまぁ！」	「네놈!」	fix	sound
 sound:drawn-honorific	「おれさまぁ！」	lacks:님~	fix	sound
 sound:drawn-honorific	「オレ様ぁ」	「이 몸」	keep	sound
 sound:drawn-honorific	「お許し下さいご主人様ぁ〜…！」	「용서해 주세요 주인님~…!」	fix	sound
