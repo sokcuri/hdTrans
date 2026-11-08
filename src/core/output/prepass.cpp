@@ -421,7 +421,8 @@ bool JoinsNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedI
 // times (Aランク A랭크, SSランク SS랭크). They stand apart when the number is the label of the
 // word written straight before it in katakana or Latin letters, or the end of a label
 // (ステージ3ボス戦 스테이지 3 보스전, Lv.10スキル Lv.10 스킬, No.2-1キャラクター No.2-1 캐릭터,
-// R1ボタン R1 버튼, ver2.0アップデート ver2.0 업데이트); when a word in Latin capitals, an
+// R1ボタン R1 버튼, ver2.0アップデート ver2.0 업데이트), but not after a katakana word that a number before it
+// counts (1ホーマー2ホーマー 1홈런 2홈런); when a word in Latin capitals, an
 // abbreviation, is before a noun (ATBゲージ ATB 게이지), or a word with small letters, a name or
 // a word, before a noun of two characters or more (class空母 class 항공모함, Bismarck追撃戦
 // Bismarck 추격전, Googleカレンダー Google 캘린더); and for a reply number after ≫ or >>
@@ -473,6 +474,21 @@ bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<Resol
             return !digit(ascii(LastRune(label)));
         }
         const char32_t r = ascii(LastRune(label));
+        if (tokenizer::Class(r) == tokenizer::kClassKatakana && label.size() == head.size()) {
+            // A katakana word that a number counts is no label: the number after it counts anew
+            // (1ホーマー2ホーマー 1홈런 2홈런, 1ゴール2アシスト 1골 2어시스트).
+            std::string wide(rest);
+            for (int k = a.tokenIndex - 1; k >= 0 && text::RuneCount(wide) < 32; k--) wide.insert(0, tokens[k].text);
+            std::string_view run = wide;
+            while (tokenizer::Class(LastRune(run)) == tokenizer::kClassKatakana) run = DropLastRune(run);
+            // A number that is itself a label (ワールド2ステージ5クリア) leaves the word a label host.
+            if (digit(ascii(LastRune(run)))) {
+                while (digit(ascii(LastRune(run))) || ascii(LastRune(run)) == U'.' || ascii(LastRune(run)) == U',')
+                    run = DropLastRune(run);
+                const char32_t host = ascii(LastRune(run));
+                if (!latin(host) && tokenizer::Class(host) != tokenizer::kClassKatakana) return false;
+            }
+        }
         return digit(r) || tokenizer::Class(r) == tokenizer::kClassKatakana;
     }
     std::size_t letters = 0;

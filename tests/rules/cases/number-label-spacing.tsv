@@ -53,3 +53,13 @@ compose:number-label	Java風の書き方	Java풍의 쓰는 법	keep	compose
 compose:number-label	3ケース買った	3케이스 샀다	keep	compose
 compose:number-label	1レベル上がった	1레벨 올랐다	keep	compose
 compose:number-label	Google カレンダーを開く	Google 캘린더를 연다	keep	compose
+compose:number-label	1ホーマー2ホーマー	1홈런 2홈런	fix	compose
+compose:number-label	1ゴール2アシスト	1골 2어시스트	fix	compose
+compose:number-label	1ヒット2打点	1히트 2타점	fix	compose
+compose:number-label	3ポイント2リバウンド	3포인트 2리바운드	fix	compose
+compose:number-label	大谷が1ホーマー2打点の活躍	has:1홈런 2타점의	fix	compose
+compose:number-label	1ホーマー、2ホーマー	1홈런, 2홈런	keep	compose
+compose:number-label	2ホーマー	2홈런	keep	compose
+compose:number-label	1勝2敗	1승 2패	keep	compose
+compose:number-label	ステージ3クリア	스테이지 3 클리어	keep	compose
+compose:number-label	22コンボ表示	22콤보 표시	keep	compose

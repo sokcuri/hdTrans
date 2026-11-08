@@ -22,3 +22,11 @@ compose:typed-space	マ ル それから？	마르 그리고?	keep	compose
 compose:typed-space	判定はスプリット･ ドローです	판정은 스플릿·드로입니다	keep	compose
 compose:typed-space	運賃 ・ 時刻 ・ 忘れ物のお問い合わせは県庁前駅へ	운임·시각·두고 온 물건 문의는 겐초마에역에	keep	compose
 compose:typed-space	いや そう簡単に分析 できるもんじゃないよ	has:분석할 수	keep	compose
+compose:typed-space	てめえ お倫の亭主じゃねえな！	lacks:놈오린	keep	compose
+compose:typed-space	てめえ お車	has: 차	fix	compose
+compose:typed-space	これ お城だ	이것 성이다	fix	compose
+compose:typed-space	あなた お皿	당신 접시	keep	compose
+compose:typed-space	あれは お車	저것은 차	keep	compose
+compose:typed-space	おい お京	이봐 오쿄	keep	compose
+compose:typed-space	お願い お母ちゃんを助けて！	has:부탁 엄마를	keep	compose
+compose:typed-space	皆様 ご存じ ニワトリが…。	has:여러분 아시는	keep	compose
