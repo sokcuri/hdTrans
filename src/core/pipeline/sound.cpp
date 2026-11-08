@@ -733,6 +733,9 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         }
         size_t end = 0;
         bool ok = MatchSound(s, f_, p, end, units);
+        // A small ャ, ュ or ョ right after a mimetic belongs to its last kana: the sound ends inside a word
+        // (するりょうり: する + りょうり, not するり; spec LEX-5112).
+        if (ok && !s.intj && end < f_.size() && In(f_[end], U"ャュョゃゅょ")) ok = false;
         // A sound in ッ before て or た of a godan verb in る that its kana spell is that verb's
         // form (パクって 훔쳐, チクってやる 고자질해 줄게; not パクッと). A one-kana stem is a cry (あったたた).
         if (ok && s.key.size() >= 3 && s.key.back() == U'ッ' && end == p + s.key.size() && end < f_.size() &&

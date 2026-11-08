@@ -6,4 +6,4 @@ pattern:高いということ	１５００円×１０００で、最低１５０
 pattern:書いたということ	羊飼いからのメールはＰＣ用のアドレスに来たということだった。	양치기로부터의 메일은 PC용의 주소에 왔다는 것이었다.	fix	builtin-pattern
 pattern:学生ではないということ	歌姫の名は伊達ではないということだ。	가희의 이름은 다테가 아니라는 것이다.	fix	builtin-pattern
 pattern:学生だということ	縁が繋がっている状態だということを忘れるな	인연이 연결되어 있는 상태라는 것을 잊지 마	fix	builtin-pattern
-pattern:書くってこと	「それって、わがままを言うってこと？」	「그거, 이기적임을 말한다는 거야?」	keep	builtin-pattern
+pattern:書くってこと	「それって、わがままを言うってこと？」	「그거, 떼를 쓴다는 거야?」	keep	builtin-pattern
