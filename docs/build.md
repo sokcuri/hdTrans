@@ -141,8 +141,7 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
   ([testing.md](testing.md#ci)). 풀 리퀘스트의 `windows-x86`은 단위 테스트와 `rules.critical`, `rules.drops` 같은
   나머지 검사를 돌리고, 데이터만 읽는 규칙 사례 묶음(`rules.cases.*`, `rules.variants`, `rules.packs*`, `examples`)은
-  빼고 돌립니다. 그 묶음은 `linux`가 모든 풀 리퀘스트에서 돌리고, `windows-x86`은 push와 예약 실행에서 전부
-  돌립니다. 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
+  빼고 돌립니다. 그 묶음은 `linux`가 모든 풀 리퀘스트에서 돌리고, `windows-x86`은 push에서 전부 돌립니다. 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
 - Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
   [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트, push, 예약 실행에서 matrix와 함께 돕니다. 풀 리퀘스트의
   `linux-asan`은 `hdtrans_tests`와 CLI만 빌드하고 단위 테스트(`unit.engine.megabyte` 제외), `rules.critical`,
