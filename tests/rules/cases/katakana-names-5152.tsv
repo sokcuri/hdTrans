@@ -1,0 +1,23 @@
+# 규칙: LEX-5152
+rule	input	expected	kind	layer
+protect:katakana-speech	「――コレット！！　待って！！」	has:콜레트	fix	protect
+protect:katakana-speech	「アレッタ……」	has:아렛타	fix	protect
+protect:katakana-speech	「マゼンダ……どうした」	has:마젠타	fix	protect
+protect:katakana-speech	ワタシハ ニホンゴガ ワカリマセン	has:일본어를 모릅니다	keep	protect
+protect:katakana-speech	イッパイタベナヨォ！	has:많이 먹어	keep	protect
+protect:katakana-speech	カッタト…オモッテイルノカ？カワイイナァ！	has:생각하고 있는 건가	keep	protect
+protect:katakana-speech	ナンデサ…ナンデアキラメナインダヨォ…。	has:포기하지 않아	keep	protect
+protect:katakana-speech	モウ…トベナイノ	has:이제…날 수 없어	keep	protect
+protect:katakana-speech	ヤメテ！	has:그만해	keep	protect
+protect:katakana-speech	コレデ…シズメェッ！	has:가라앉아라	keep	protect
+sound:katakana-run	全部 ラメ入りです。	lacks:안돼	fix	sound
+sound:katakana-run	ダメッ！	has:안돼	keep	sound
+sound:katakana-run	ラメ、ラメぇ	has:안돼	keep	sound
+dict:jisjk:131723	「さぁ！　ここで第２ドールこと戦う者はおらんのかッ！」	has:제2돌	fix	defaults
+dict:jisjk:133888	６９年に第１回女子プロテストが行われたのも、運命的だった。	has:여자 프로테스트	fix	defaults
+dict:jisjk:133888	プロテストは１位だった。	has:프로테스트는	fix	defaults
+dict:jisjk:55997	自らの体を糧とするようプルスに命じた。	has:플루스에	fix	defaults
+dict:jisjk:157555	3着　14番ウインマーベル	has:윈 마벨	fix	defaults
+names:names.363729	「ところで、ミルテはまだ何も思い出さない？」	has:미르테는	fix	names
+dict:w:34930	中はモチ米……そしてあんこ……	has:찹쌀	fix	words
+dict:w:34930	もち米を炊く	has:찹쌀	keep	words
