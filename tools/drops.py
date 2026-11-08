@@ -124,6 +124,7 @@ def drops(why_text):
     """{input line number: [dropped runs]} from a -why log of an -each run."""
     found = {}
     last = None
+    previous = 0
     run = []
 
     def close():
@@ -138,9 +139,12 @@ def drops(why_text):
         if len(cells) < 10:
             continue
         number = int(cells[1])
-        if number != last:
+        token = int(cells[4].split(":")[0])
+        if number != last or (run and token not in (previous, previous + 1)):
+            # A token with no row of its own (…) stands between, so the run ends.
             close()
             last = number
+        previous = token
         if cells[7] == "Single" and cells[9] == "" and WORD_CHAR.match(cells[5]):
             run.append(cells[5])
         else:

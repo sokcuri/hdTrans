@@ -1544,6 +1544,52 @@ std::string GodanYaForm(const Match& m) {
 }
 
 
+// A scream spelled as a run of い with a small ぃ in it (……ぃぃぃいいいぃ…ッ, 何ぃいいぃ) is a drawn-out cry, not the
+// adjective いい: the run is cut to the small ぃ that the sound stage reads as a cry, or after 何 to a ぃ drawn out by ー
+// marks (spec LEX-5104). Group 1 the replacement.
+bool ScreamI(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    int count = 0;
+    bool small = false;
+    while (p < s.size()) {
+        if (Lit(s, p, "ぃ")) small = true;
+        else if (!Lit(s, p, "い")) break;
+        count++;
+    }
+    if (!small || count < 3) return false;
+    const char32_t before = pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp;
+    static const std::string kDrawn[] = {"ぃー", "ぃーー", "ぃーーー", "ぃーーーー"};
+    if (before == U'何') {
+        // Before a small っ the word stage draws the cry out itself (何ぃいいぃッ 뭐어어엇).
+        if (s.substr(p).starts_with("っ") || s.substr(p).starts_with("ッ")) return false;
+        m.group[1] = kDrawn[std::min(count, 5) - 2];
+    } else if (before == 0 || In(before, U"。、！？!?…‥「『（( 　ー～〜")) {
+        m.group[1] = "ぃぃぃ";
+    } else {
+        return false;
+    }
+    if (p < s.size() && IsHiraganaRune(text::DecodeRune(s.substr(p)).cp) && !s.substr(p).starts_with("っ")) return false;
+    m.end = p;
+    return true;
+}
+
+// A demonstrative drawn out in its middle (あーんな, こーんな, そーんな, どーんな) is the demonstrative (저런, 이런).
+bool DrawnDemonstrative(std::string_view s, size_t pos, Match& m) {
+    for (const std::string_view d : {"あ", "こ", "そ", "ど"}) {
+        size_t p = pos;
+        if (!Lit(s, p, d)) continue;
+        const size_t mark = p;
+        while (p < s.size() && (s.substr(p).starts_with("ー") || s.substr(p).starts_with("～") || s.substr(p).starts_with("〜"))) {
+            p += std::string_view("ー").size();
+        }
+        if (p == mark || !Lit(s, p, "んな")) continue;
+        m.group[1] = d;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
@@ -1976,6 +2022,8 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         }
         return Cat({stem, "ない", g.group[2]});
     });
+    text = ReplaceAll(text, ScreamI, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, DrawnDemonstrative, [](const Match& m) { return Cat({m.group[1], "んな"}); });
     // A negative stem in ra, ka, ma... after more kana than Nee takes, or an ichidan or potential stem, before
     // ねぇ, ねえ or ねー: a verb of the dictionary in its dictionary form (見当たらねぇ 見当たらない,
     // 止まらねえ, 放っておかねぇ, もらえねぇか). Not the particle after から or なら (ですからねえ).
