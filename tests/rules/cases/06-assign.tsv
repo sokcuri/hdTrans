@@ -32,7 +32,7 @@ dict:jisjk:115361	あと二人必要だ。	rule:dict:jisjk:115361=더	keep	local
 dict:jisjk:115361	あと３日で終わる。	rule:dict:jisjk:115361=앞으로	keep	local
 dict:jisjk:115361	あと１００メートルで着く。	rule:dict:jisjk:115361=앞으로	keep	local
 dict:jisjk:373518	彼の驚きぶりを見た。	그의 놀라움 모습을 보았다.	fix	local
-dict:jisjk:373518	二日ぶりに会った。	이틀만에 만났다.	fix	local
+dict:jisjk:373518	二日ぶりに会った。	이틀 만에 만났다.	fix	local
 dict:jisjk:80454	一通り数えた。	한 차례 세었다.	fix	local
 dict:jisjk:80454	一通りの方法だ。	보통의 방법이다.	fix	local
 dict:jisjk:375256	４人の国を見た。	4명의 나라를 보았다.	keep	local

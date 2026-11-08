@@ -159,68 +159,68 @@ cx:audit-novel-2:50	二月ぶりに会った。	has:두 달	fix	rewrites
 cx:audit-novel-2:50	二月三日に会おう。	lacks: 달	keep	rewrites
 cx:audit-novel-2:51	あれから二月が経った。	has:두 달이 지났다	fix	rewrites
 cx:audit-novel-2:51	二月が好きだ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:52	三月ぶりに会った。	has:석 달	fix	rewrites
-cx:audit-novel-2:52	三月三日に会おう。	lacks: 달	keep	rewrites
-cx:audit-novel-2:53	あれから三月が経った。	has:석 달이 지났다	fix	rewrites
-cx:audit-novel-2:53	三月が好きだ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:54	四月ぶりに会った。	has:넉 달	fix	rewrites
-cx:audit-novel-2:54	四月三日に会おう。	lacks: 달	keep	rewrites
-cx:audit-novel-2:55	あれから四月が経った。	has:넉 달이 지났다	fix	rewrites
-cx:audit-novel-2:55	四月が好きだ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:56	五月ぶりに会った。	has:다섯 달	fix	rewrites
-cx:audit-novel-2:56	五月三日に会おう。	lacks: 달	keep	rewrites
-cx:audit-novel-2:57	あれから五月が経った。	has:다섯 달이 지났다	fix	rewrites
-cx:audit-novel-2:57	五月が好きだ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:58	六月ぶりに会った。	has:여섯 달	fix	rewrites
-cx:audit-novel-2:58	六月三日に会おう。	lacks: 달	keep	rewrites
-cx:audit-novel-2:59	あれから六月が経った。	has:여섯 달이 지났다	fix	rewrites
-cx:audit-novel-2:59	六月が好きだ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:53	三月の末日に出発する。	has:3월의	keep	rewrites
+cx:audit-novel-2:50	三月ぶりに会った。	has:석 달	fix	rewrites
+cx:audit-novel-2:50	三月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	あれから三月が経った。	has:석 달이 지났다	fix	rewrites
+cx:audit-novel-2:51	三月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:50	四月ぶりに会った。	has:넉 달	fix	rewrites
+cx:audit-novel-2:50	四月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	あれから四月が経った。	has:넉 달이 지났다	fix	rewrites
+cx:audit-novel-2:51	四月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:50	五月ぶりに会った。	has:다섯 달	fix	rewrites
+cx:audit-novel-2:50	五月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	あれから五月が経った。	has:다섯 달이 지났다	fix	rewrites
+cx:audit-novel-2:51	五月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:50	六月ぶりに会った。	has:여섯 달	fix	rewrites
+cx:audit-novel-2:50	六月三日に会おう。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	あれから六月が経った。	has:여섯 달이 지났다	fix	rewrites
+cx:audit-novel-2:51	六月が好きだ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:51	三月の末日に出発する。	has:3월의	keep	rewrites
 cx:audit-novel-2:60	二月ほど入院した。	has:두 달	fix	rewrites
 cx:audit-novel-2:60	二月になった。	lacks: 달	keep	rewrites
-cx:audit-novel-2:62	三月ほど入院した。	has:석 달	fix	rewrites
-cx:audit-novel-2:62	三月になった。	lacks: 달	keep	rewrites
-cx:audit-novel-2:64	四月ほど入院した。	has:넉 달	fix	rewrites
-cx:audit-novel-2:64	四月になった。	lacks: 달	keep	rewrites
-cx:audit-novel-2:66	五月ほど入院した。	has:다섯 달	fix	rewrites
-cx:audit-novel-2:66	五月になった。	lacks: 달	keep	rewrites
-cx:audit-novel-2:68	六月ほど入院した。	has:여섯 달	fix	rewrites
-cx:audit-novel-2:68	六月になった。	lacks: 달	keep	rewrites
+cx:audit-novel-2:60	三月ほど入院した。	has:석 달	fix	rewrites
+cx:audit-novel-2:60	三月になった。	lacks: 달	keep	rewrites
+cx:audit-novel-2:60	四月ほど入院した。	has:넉 달	fix	rewrites
+cx:audit-novel-2:60	四月になった。	lacks: 달	keep	rewrites
+cx:audit-novel-2:60	五月ほど入院した。	has:다섯 달	fix	rewrites
+cx:audit-novel-2:60	五月になった。	lacks: 달	keep	rewrites
+cx:audit-novel-2:60	六月ほど入院した。	has:여섯 달	fix	rewrites
+cx:audit-novel-2:60	六月になった。	lacks: 달	keep	rewrites
 cx:audit-novel-2:62	三月ばかり前のことだ。	has:석 달	fix	rewrites
-cx:audit-novel-2:53	三月も過ぎ、四月になった。	lacks:석 달	keep	rewrites
-cx:audit-novel-2:53	三月が過ぎて春が来た。	lacks:석 달	keep	rewrites
-cx:audit-novel-2:52	三月ぶりだ。	has:석 달 만	fix	rewrites
+cx:audit-novel-2:51	三月も過ぎ、四月になった。	lacks:석 달	keep	rewrites
+cx:audit-novel-2:51	三月が過ぎて春が来た。	lacks:석 달	keep	rewrites
+cx:audit-novel-2:50	三月ぶりだ。	has:석 달 만	fix	rewrites
 lexical:audit-novel-3	四月になった。	has:4월	fix	lookup
 lexical:audit-novel-3	十二月の夜	has:12월	keep	lookup
 cx:audit-novel-2:80	あと二月で卒業だ。	has:두 달	fix	rewrites
 cx:audit-novel-2:80	二月で卒業だ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:81	あと三月で卒業だ。	has:석 달	fix	rewrites
-cx:audit-novel-2:81	三月で卒業だ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:82	あと四月で卒業だ。	has:넉 달	fix	rewrites
-cx:audit-novel-2:82	四月で卒業だ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:83	あと五月で卒業だ。	has:다섯 달	fix	rewrites
-cx:audit-novel-2:83	五月で卒業だ。	lacks: 달	keep	rewrites
-cx:audit-novel-2:84	あと六月で卒業だ。	has:여섯 달	fix	rewrites
-cx:audit-novel-2:84	六月で卒業だ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:80	あと三月で卒業だ。	has:석 달	fix	rewrites
+cx:audit-novel-2:80	三月で卒業だ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:80	あと四月で卒業だ。	has:넉 달	fix	rewrites
+cx:audit-novel-2:80	四月で卒業だ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:80	あと五月で卒業だ。	has:다섯 달	fix	rewrites
+cx:audit-novel-2:80	五月で卒業だ。	lacks: 달	keep	rewrites
+cx:audit-novel-2:80	あと六月で卒業だ。	has:여섯 달	fix	rewrites
+cx:audit-novel-2:80	六月で卒業だ。	lacks: 달	keep	rewrites
 lexical:audit-novel-3	五月雨式に届く。	has:띄엄띄엄	fix	lookup
 lexical:audit-novel-3	糞ったれ！	has:빌어먹을	fix	lookup
 lexical:audit-novel-3	十二月二十五日	has:12월 25일	keep	lookup
-cx:audit-novel-2:90	七月二日	has:7월 2일	fix	rewrites
-cx:audit-novel-2:90	二日ほど待った。	lacks:2일 정도	keep	rewrites
-cx:audit-novel-2:92	七月四日	has:7월 4일	fix	rewrites
-cx:audit-novel-2:92	四日ほど待った。	lacks:4일 정도	keep	rewrites
-cx:audit-novel-2:93	七月五日	has:7월 5일	fix	rewrites
-cx:audit-novel-2:93	五日ほど待った。	lacks:5일 정도	keep	rewrites
-cx:audit-novel-2:94	七月六日	has:7월 6일	fix	rewrites
-cx:audit-novel-2:94	六日ほど待った。	lacks:6일 정도	keep	rewrites
-cx:audit-novel-2:95	七月七日	has:7월 7일	fix	rewrites
-cx:audit-novel-2:95	七日ほど待った。	lacks:7일 정도	keep	rewrites
-cx:audit-novel-2:96	七月八日	has:7월 8일	fix	rewrites
-cx:audit-novel-2:96	八日ほど待った。	lacks:8일 정도	keep	rewrites
-cx:audit-novel-2:97	七月九日	has:7월 9일	fix	rewrites
-cx:audit-novel-2:97	九日ほど待った。	lacks:9일 정도	keep	rewrites
-cx:audit-novel-2:98	七月十日	has:7월 10일	fix	rewrites
-cx:audit-novel-2:98	十日ほど待った。	lacks:10일 정도	keep	rewrites
-cx:audit-novel-2:100	一月一日	has:1월 1일	fix	rewrites
-cx:audit-novel-2:100	一月ほど待った。	has:한 달	keep	rewrites
-cx:audit-novel-2:96	七月七日は七夕だ。	has:7월 7일	fix	rewrites
+lookup:date-number	七月二日	has:7월 2일	fix	lookup
+lookup:date-number	二日ほど待った。	lacks:2일 정도	keep	lookup
+lookup:date-number	七月四日	has:7월 4일	fix	lookup
+lookup:date-number	四日ほど待った。	lacks:4일 정도	keep	lookup
+lookup:date-number	七月五日	has:7월 5일	fix	lookup
+lookup:date-number	五日ほど待った。	lacks:5일 정도	keep	lookup
+lookup:date-number	七月六日	has:7월 6일	fix	lookup
+lookup:date-number	六日ほど待った。	lacks:6일 정도	keep	lookup
+lookup:date-number	七月七日	has:7월 7일	fix	lookup
+lookup:date-number	七日ほど待った。	lacks:7일 정도	keep	lookup
+lookup:date-number	七月八日	has:7월 8일	fix	lookup
+lookup:date-number	八日ほど待った。	lacks:8일 정도	keep	lookup
+lookup:date-number	七月九日	has:7월 9일	fix	lookup
+lookup:date-number	九日ほど待った。	lacks:9일 정도	keep	lookup
+lookup:date-number	七月十日	has:7월 10일	fix	lookup
+lookup:date-number	十日ほど待った。	lacks:10일 정도	keep	lookup
+lookup:date-number	一月一日	has:1월 1일	fix	lookup
+lookup:date-number	一月ほど待った。	has:한 달	keep	lookup
+lookup:date-number	七月七日は七夕だ。	has:7월 7일	fix	lookup

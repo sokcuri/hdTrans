@@ -26378,7 +26378,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 １日	하루	N110	UMe	Tm	GN				xxx		いちにち	w:26300
 １日	초하루	N110	UMe	Tm	GN				llm		ついたち	w:26301
 １日中	하루 종일	N110	UMe	Tm	GN				llm		いちにちじゅう	w:26302
-１日中	하루종일	E300		Tm	GN						いちにちじゅう	w:26303
+１日中	하루 종일	E300		Tm	GN						いちにちじゅう	w:26303
 １時	일시	N110			GN						いちじ	w:26304
 １時間	한 시간	N110	UMe	Tm	GN				llm		いちじかん	w:26305
 １月	일월	N110			GN						いちがつ	w:26306
