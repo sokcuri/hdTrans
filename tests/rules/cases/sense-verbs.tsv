@@ -35,9 +35,9 @@ dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 뿌렸다.	f
 dict:jisjk:90581	壁に時計をかけた。	벽에 시계를 걸었다.	keep	local
 dict:jisjk:93609	パンを焼いた。	빵을 구웠다.	fix	local
 dict:jisjk:93609	鍋で焼いた。	냄비로 구웠다.	keep	local
-dict:jisjk:375916	昨日はお腹すいた。	어제는 배 고팠다.	fix	local
-dict:jisjk:375916	お腹すいた。	배 고프다.	keep	local
-dict:jisjk:375916	昨夜もお腹すいた。	어젯밤도 배 고팠다.	fix	local
+dict:jisjk:375916	昨日はお腹すいた。	has:배고팠다.	fix	local
+dict:jisjk:375916	お腹すいた。	has:배고프다.	keep	local
+dict:jisjk:375916	昨夜もお腹すいた。	has:배고팠다.	fix	local
 dict:jisjk:363814	金が受け取れる。	돈을 받을 수 있다.	fix	local
 dict:jisjk:363814	利益が受け取れる。	이익을 받을 수 있다.	keep	local
 dict:思案	思案していた。	궁리하고 있었다.	fix	defaults

@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 sound:ったく	「ったく……」	「참나……」	fix	sound
-sound:ったく	ったく…どんな采配してんのよ	참나…어떤 지휘봉하고 있어	fix	sound
+sound:ったく	ったく…どんな采配してんのよ	has:지휘하고	fix	sound
 sound:ったく	なんだよ、ったく…	뭐야, 참나…	fix	sound
 sound:ったく	……ったく、話し掛けるからわからなくなったじゃないか！	……참나, 말을 거니까 모르게 되었잖아!	fix	sound
 sound:ったく	持ったくせに	가졌으면서	keep	sound

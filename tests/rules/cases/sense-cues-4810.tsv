@@ -78,7 +78,7 @@ cx:sense-cues-1:60	これがレナに捕食される沙都子や梨花ちゃん�
 cx:sense-cues-1:22	いい頃だと思って電話した	좋은 때라고 생각해 전화했다	fix	rewrites
 cx:sense-cues-1:22	君と話をしてもいい頃だな	너와 이야기를 해도 되는 때네	fix	rewrites
 cx:sense-cues-1:22	あの頃はよかった	그 무렵은 좋았다	keep	rewrites
-cx:sense-cues-1:40	「もちろん。公私共々しっかり支えます」	has:함께	keep	rewrites
+cx:sense-cues-1:40	「もちろん。公私共々しっかり支えます」	has:공사 모두	keep	rewrites
 cx:sense-cues-1:40	指のすき間からしっかり見ますので	손가락의 빈틈에서 제대로 보기 때문에	keep	rewrites
 cx:sense-cues-1:10	店内には柏木一人しかいない。	가게 안에는 카시와기 혼자밖에 없다.	fix	rewrites
 cx:sense-cues-1:10	業なんてものを貴様一人に背負わせてはやらん。	업 같은 것을 네놈 혼자에 짊어지게 해 주지 않아.	fix	rewrites

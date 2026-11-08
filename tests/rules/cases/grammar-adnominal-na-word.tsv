@@ -20,7 +20,7 @@ analysis:adnominal-na-word	元気なくて	기운이 없어서	keep	analysis
 analysis:adnominal-na-word	元気なく笑った	has:없이	keep	analysis
 analysis:adnominal-na-word	ような臭い台詞	같은 구린 대사	keep	analysis
 analysis:adnominal-na-word	そんなクサい台詞	has:냄새가	keep	analysis
-analysis:adnominal-na-word	普段は従順なくせに	평소는 온순한 주제에	fix	analysis
+analysis:adnominal-na-word	普段は従順なくせに	has:온순한 주제에	fix	analysis
 analysis:adnominal-na-word	お菓子が大好きなくせに	has:아주 좋아하는 주제에	fix	analysis
 analysis:adnominal-na-word	駄目なくせに、練習もできないなんて	has:주제에	fix	analysis
 analysis:adnominal-na-word	よし、異常なしだ。	has:없음	keep	analysis

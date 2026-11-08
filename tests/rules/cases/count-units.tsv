@@ -23,7 +23,7 @@ cx:count-units:170	薬が一服ある。	약이 한 첩 있다.	fix	rewrites
 cx:count-units:5	薬が3服ある。	약이 3첩 있다.	fix	rewrites
 cx:count-units:10	食卓には箸が二膳、夫婦の分だけ用意されている。	식탁에는 젓가락이 두 벌, 부부의 몫만큼 준비되어 있다.	fix	rewrites
 cx:count-units:200	箸が一膳ある。	젓가락이 한 벌 있다.	fix	rewrites
-cx:count-units:25	なので今夜は、豆腐１丁が夕餉になる。	그래서 오늘 밤은, 두부 1모가 석식이 된다.	fix	rewrites
+cx:count-units:25	なので今夜は、豆腐１丁が夕餉になる。	has:저녁밥이	fix	rewrites
 cx:count-units:190	豆腐が一丁ある。	두부가 한 모 있다.	fix	rewrites
 cx:count-units:215	テントが一張ある。	텐트가 한 동 있다.	fix	rewrites
 cx:count-units:115	一機の飛行船から魔導砲が射出された。	1기의 비행선에서 마도포가 사출되었다.	fix	rewrites

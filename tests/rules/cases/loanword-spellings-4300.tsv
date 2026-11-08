@@ -77,7 +77,7 @@ lex:ミルク	ミルクも、いかがですか？	has:밀크도	keep	lookup
 lex:スープ	パンとスープ、お代わり貰える！	has:빵과 스프	keep	lookup
 lex:アンケート	車内放送に関するアンケートを実施します。	has:앙케이트를	keep	lookup
 lex:マニア	俺は別にＳＦマニアというわけでもないしな……。	has:SF 매니아	keep	lookup
-lex:ラッピング	きれいなラッピングして、あとはタイミングです！	has:랩핑	keep	lookup
+lex:ラッピング	きれいなラッピングして、あとはタイミングです！	has:래핑	keep	lookup
 lex:リラックス	なかなかリラックスしてはもらえないな。	has:릴렉스	keep	lookup
 lex:エリア	エリアで探す	has:에리어에서	keep	lookup
 lex:プール	プールで立ち泳ぎをしながら、エナは変わり果てた周囲の景色を見て言葉を失っている。	has:풀에서	keep	lookup

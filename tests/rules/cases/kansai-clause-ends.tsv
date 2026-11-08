@@ -65,7 +65,7 @@ normalize:old-copula-jato	あ! 拡大したじゃと!?	아! 확대했다고!?	fi
 normalize:old-copula-jato	ディナータイムじゃと?	디너 타임이라고?	fix	normalize
 normalize:old-copula-jato	何じゃと？ コラッ	뭐라고? 코랏	fix	normalize
 normalize:old-copula-jato	じゃとりあえずこれに 集中しよう	그러면 우선 이것에 집중하자	keep	normalize
-normalize:old-copula-jato	じゃとっておきの作戦を出すしかないな	그러면 소중한 작전을 낼 수밖에 없네	keep	normalize
+normalize:old-copula-jato	じゃとっておきの作戦を出すしかないな	has:비장의	keep	normalize
 normalize:old-copula-jato	うじゃうじゃと沸きおるわ	우글우글 끓어 있어	keep	normalize
 normalize:old-copula-jato	俺１人じゃとうてい	나 1명은 도저히	keep	normalize
 normalize:kansai-soya	んん… そやな	으응… 그래	fix	normalize

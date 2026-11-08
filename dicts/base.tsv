@@ -7121,7 +7121,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おろ	도매&AV@	M443	VMo		GN				jisjk:147112		
 おろおろ	허둥지둥	E301			GN				jisjk:178		
 おろおろ	엉엉	E301			GN				jisjk:117173		
-おろか	바보%B3@	G8L0			GN				jisjk:2142		
+おろか	어리%C3@	G8L0			GN				jisjk:2142		
 おろか	커녕	P200			GN				jisjk:344947		
 おろかし	어리$F8@	H7N0	SFl		GN				jisjk:120064		
 おろかもの	바보	N110	VHn		GN				jisjk:166238		-1
@@ -7691,7 +7691,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お払い	지불	I110			GN				jisjk:40593		
 お払い箱	해고	I110			GN				jisjk:40594		
 お払箱	해고	I110			GN				jisjk:40595		
-お披露目	피로연	N110	VCm		GN				jisjk:165907		
+お披露目	공개	N110	VCm		GN				jisjk:165907		
 お抱え	고용	I110			GN				jisjk:40670		
 お招きいただ	불러 주&AE@	M461			GN	3051	||1 &&3 M+0== "5:0" S+1== "ありがとうございます" Y+0= "6서"	お招きいただ의 어미가 5:0이고 뒤에 ありがとうございます가 오면 불러 주시다를 고르고 어미를 아·어서로 바꾼다. (미발동: rare-word)	jisjk:341278		
 お持ち	가지고 %B7@	G8U0			GN				jisjk:373350		
@@ -7812,7 +7812,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お父さま	아버님	I110			GN				jisjk:112356		
 お父さん	아버지	K110	VQmUQfVHn		GN				jisjk:40589		
 お父さん似	아버지와 닮은 꼴	K110			GN				jisjk:201946		
-お父ちゃん	아버지	N110	VHn		GN				jisjk:165646		
+お父ちゃん	아빠	N110	VHn		GN				jisjk:165646		
 お爺さん	할아버지	N110	VBpVHnVHn		GN				jisjk:165405		
 お物	수라	N110			GN				jisjk:13853		
 お玉	달걀	N110	VFd		GN				jisjk:165490		
@@ -7932,7 +7932,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お腹	배	N110	VBp		GN				jisjk:13856		
 お腹がす	배가 고&Aa@	M421		Pn	GN				jisjk:346592		
 お腹が空いた	배가 고픈	C0D1			GN				jisjk:4548		
-お腹す	배 고&Aa@	M421			GN	5088	||1 &&2 M+0== "56*" ||2 &&2 ||3 ||3 S-1== "昨日" S-1== "昨夜" S-1== "当時" ||3 S-2== "昨日" S-2== "昨夜" S-2== "当時" ||3 S-3== "昨日" S-3== "昨夜" S-3== "当時" Y+0= "5다" Y+0= "1다"	お腹す의 과거형은 현재의 배고픔을 나타내는 배 고프다로 잇되, 앞 세 단어 안에 昨日·昨夜·当時가 있으면 과거형을 유지한다.	jisjk:375916		
+お腹す	배고&Aa@	M421			GN	5088	||1 &&2 M+0== "56*" ||2 &&2 ||3 ||3 S-1== "昨日" S-1== "昨夜" S-1== "当時" ||3 S-2== "昨日" S-2== "昨夜" S-2== "当時" ||3 S-3== "昨日" S-3== "昨夜" S-3== "当時" Y+0= "5다" Y+0= "1다"	お腹す의 과거형은 현재의 배고픔을 나타내는 배 고프다로 잇되, 앞 세 단어 안에 昨日·昨夜·当時가 있으면 과거형을 유지한다.	jisjk:375916		
 お腹をこわ	배탈이 &A5@	M423		Pn	GN				jisjk:373758		
 お腹空	배고&Aa@	M421			GN				jisjk:340063		
 お膝元	무릅 밑	I110	VPl		GN				jisjk:40621		
@@ -26675,7 +26675,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すげ替え	갈아 치&AI@	M437	VPeVEl		GN				jisjk:137388		
 すげ替え	교체	N110			GN				jisjk:196634		
 すこし	조금	P110			GN				jisjk:530		
-すこしだけ	약간	E300			GN				jisjk:149216		
+すこしだけ	조금만	E300			GN				jisjk:149216		
 すこしづつ	조금씩	E300			GN				jisjk:123255		
 すこしで	조금이면	E300			GN				jisjk:149217		
 すこしでも	조금이라도	E300			GN				jisjk:149219		
@@ -30376,7 +30376,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たいした	별	H300		Zn	GN				jisjk:265961		
 たいした	이렇다 할	H300		Zn	GN				jisjk:342069		
 たいしたことじゃな	별거 아$A3@	H7U0			GN				jisjk:373506		
-たいしたことな	대단한 것도 아$A3@	H7N0			GN				jisjk:136886		
+たいしたことな	별것 아$A3@	H7N0			GN				jisjk:136886		
 たいしたことはあ	별일 아&A7@	H428		PnMa	GN				jisjk:342072		
 たいしたことはな	별일 아$A3@	H7U0			GN				jisjk:342071		
 たいした問題ではないとでも	큰 문제는 아니라고	N110		Nn	GN				jisjk:151313		
@@ -30634,7 +30634,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たたえ	가득 채&AI@	M447	VFd		GN				jisjk:139459		
 たたえ	칭송&AV@	M447			GN				jisjk:139462		
 たたか	싸&AI@	M410			GN				jisjk:91027		
-たたかい	투쟁	I110			GN				jisjk:111934		
+たたかい	싸움	I110			GN				jisjk:111934		
 たたかれ	얻어&FB@	M427			GN				jisjk:138172		
 たたかわ	전개&AV@	M443			GN				jisjk:139467		
 たたきあげ	차곡차곡 출세&AV@	M447			GN				jisjk:139469		
@@ -34183,7 +34183,7 @@ ttt	ttt	K110			GN				jisjk:201744
 とくしゅけいびたい	일본 해상 테러부대	K110	VGt		MI				jisjk:345771		
 とくちょうづけ	특징지&AI@	M447			GN				jisjk:145185		
 とくてん	득점	N110			GN				jisjk:368456		
-とくと	신중히	E311			GN				jisjk:799		
+とくと	똑똑히	E311			GN				jisjk:799		
 とくとく	쪼로록	E311			GN				jisjk:800		
 とくとくと	득의양양해 &AV@	M429	SFl		GN				jisjk:145193		
 とくな	유리한	E0H0			GN				jisjk:123572		
@@ -34373,7 +34373,7 @@ ttt	ttt	K110			GN				jisjk:201744
 とっていただ	집어 주&AE@	M441			GN				jisjk:265054		
 とっていただ	집어 주&AE@	M441		Pj	GN				jisjk:265055		
 とってお	채택하고 &HN@	M468			GN				jisjk:340292		
-とっておきの	소중한	A9H1			GN				jisjk:104133		
+とっておきの	비장의	A9H1			GN				jisjk:104133		
 とってかえ	되돌아&AH@	M423			GN				jisjk:145351		
 とっても	매우	E300			GN				jisjk:263966		
 とってもかわい	상당히 귀$GJ@	H7N0			GN				jisjk:137340		
@@ -40011,7 +40011,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ふたを明け	시작&AV@	M427			GN				jisjk:118357		
 ふたを明け	결과를 확인&AV@	M427			GN				jisjk:118358		
 ふたを開け	뚜껑을 &LB@	M417			GN				jisjk:91416		
-ふだん	보통	N121			GN				jisjk:6324		
+ふだん	평소	N121			GN				jisjk:6324		
 ふだんに	부단히	E300			GN				jisjk:149496		
 ふだんの努力	끊임없는 노력	I110			GN				jisjk:265470		
 ふだんの練習	끊임없는 연습	I110			GN				jisjk:265469		
@@ -42100,7 +42100,7 @@ ttt	ttt	K110			GN				jisjk:201744
 むせんでんしん	무선 전신	N110	VElVPe		GN				jisjk:155463		
 むせんでんわ	무선 전화	N110	VEl		GN				jisjk:155465		
 むせんりょこう	무전 여행	N110			GN				jisjk:155467		
-むだ	쓸데 %B4@	G8L0			GN				jisjk:2273		
+むだ	쓸데%B4@	G8L0			GN				jisjk:2273		
 むだ	소용 %B4@	G8L0			GN				jisjk:349670		
 むだ	헛됨	N110			GN				jisjk:362963		
 むだ	낭비%EH@	G8L0			GN	4790	||2 &&5 U+0== "だよ" S-1== "の" S-2== "時間" Y+0= "1야" D-1= "" &&3 S-1== "の" S-2== "時間" D-1= ""	むだ는 時間の 뒤에서 낭비이다를 고르고 の를 지우며 だよ 어미는 야로 바꾼다. (미발동: rare-context)	jisjk:373551		
@@ -43773,7 +43773,7 @@ ttt	ttt	K110			GN				jisjk:201744
 よそよそしくな	서먹서먹해&AL@	M428			GN				jisjk:147495		
 よそ事	남의 일	I110			GN				jisjk:41822		
 よそ目	남의 눈	I110	VBp		GN				jisjk:41821		
-よそ者	타관 사람	I110	VHn		GN				jisjk:41823		
+よそ者	외지인	I110	VHn		GN				jisjk:41823		
 よそ行き	외출	I110			GN				jisjk:41824		
 よそ見	곁눈질	I110	VBp		GN				jisjk:41820		
 よぞら	밤하늘	N110	VSsUMe		GN				jisjk:156191		
@@ -54686,7 +54686,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カワイ	카와이	N110	VPl		GN				jisjk:45658		
 カワイ	귀$GJ@	H7U0			GN				jisjk:343320		
 カワイアシスト	카와이아시스트	N130	QIDVGt		GN				jisjk:45659		
-カワイイ	예쁜	E300			GN	1277	||1 P+1== "1**"	カワイイ는 뒤에 명사가 오면 예쁜으로 고른다.	jisjk:116876		
+カワイイ	귀여운	E300			GN	1277	||1 P+1== "1**"	カワイイ는 뒤에 명사가 오면 예쁜으로 고른다.	jisjk:116876		
 カワイイ	귀엽다	N110			GN				jisjk:161609		
 カワイスチール	카와이스칠	N130	QIDVGt		GN				jisjk:45660		
 カワイ精密金属	카와이정밀금속	N130	QIDVGt		GN				jisjk:45661		
@@ -72605,7 +72605,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ナイジェリア	나이지리아	N130	QNNVPl		GN				jisjk:52170		
 ナイジェル	나이젤	N130	QPN		GN				jisjk:369107		
 ナイス	나이스	N110			GN				jisjk:52171		
-ナイスガイ	멋진 녀석	N110	VHn		GN				jisjk:131832		
+ナイスガイ	나이스 가이	N110	VHn		GN				jisjk:131832		
 ナイスショット	나이스 쇼트	N110			GN				jisjk:52172		
 ナイスミドル	중년남자	N110	VHn		GN				jisjk:52173		
 ナイター	나이터	N110			GN				jisjk:52174		
@@ -90071,7 +90071,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ラッパー	래퍼	N130	QPN		GN				jisjk:370961		
 ラッパ呑み	병째 마시기	N110			GN				jisjk:58842		
 ラッパ飲み	병째 마시기	N110			GN				jisjk:58841		
-ラッピング	랩핑	N110			GN				jisjk:58843		
+ラッピング	래핑	N110			GN				jisjk:58843		
 ラッピングコディネーター	포장전문가	N110			GN				jisjk:113551		
 ラッファーカーブ	래퍼 곡선	N110	VMo		GN				jisjk:135509		
 ラッファー曲線	래퍼 곡선	N110			BZ				jisjk:135508		
@@ -93660,7 +93660,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ワコー電子	와코전자	N130	QIDVGt		GN				jisjk:60015		
 ワゴン	왜건	N110	VTp		GN				jisjk:60017		
 ワサビ	와사비	N110			GN				jisjk:60018		
-ワザ	비결	N110	UTt		GN				jisjk:340537		
+ワザ	기술	N110	UTt		GN				jisjk:340537		
 ワシアルミ	와시아루미	N110	QCT	Qq	GN				jisjk:60019		
 ワシダ石油瓦斯	와시다석유가스	N110	VGt		GN				jisjk:60020		
 ワシノエンジニアリング	와시노엔지니어링	N110	VGt		GN				jisjk:60021		
@@ -103590,7 +103590,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下げ足	내림세	N110			BZ				jisjk:363648		
 下げ足を速め	시세의 하락세가 빨라&AL@	M447			GN				jisjk:120447		
 下げ髪	늘어뜨린 머리	I110	VBp		GN				jisjk:88251		
-下ごしらえ	사전 준비	I110			GN				jisjk:88253		
+下ごしらえ	밑준비	I110			GN				jisjk:88253		
 下さ	주&AE@	M438	VMo		GN				jisjk:95830		
 下さ	해 주&AE@	M438			GN	862	||1 P-1== "1**"	下さ는 명사 뒤에서 ‘해 주시다’를 고른다.	jisjk:95831		
 下さ	주&AE@	M438	VMo		GN				jisjk:114480		
@@ -116510,7 +116510,7 @@ ttt	ttt	K110			GN				jisjk:201744
 交通局	교통국	N110	VBl		GN				jisjk:180917		
 交通戦争	교통전쟁	I110			GN				jisjk:108279		
 交通機械	교통기계	I110			GN				jisjk:107032		
-交通機関	교통기관	I110			GN				jisjk:107986		
+交通機関	교통수단	I110			GN				jisjk:107986		
 交通民	교통민법	N110			GN				jisjk:161208		
 交通法律	교통법규	N110	ULw		GN				jisjk:206503		
 交通澁滞	교통정체	K110			GN				jisjk:201678		
@@ -132288,8 +132288,8 @@ ttt	ttt	K110			GN				jisjk:201744
 兵糧	군량	N110		Ct	GN				jisjk:23636		
 兵糧米	군량미	I110	VFdVFd		GN				jisjk:70137		
 兵舍	병사	N110	VPl		GN				jisjk:23645		
-兵舎	병사	N110			GN				jisjk:266656		
-兵舎	병사	N110	VPl		GN				jisjk:266657		
+兵舎	막사	N110			GN				jisjk:266656		
+兵舎	막사	N110	VPl		GN				jisjk:266657		
 兵藤建設	효도건설	I110	VGt		GN				jisjk:70136		
 兵術	병술	N110	VTw		GN				jisjk:154806		
 兵衛	무관	N110			GN				jisjk:103183		
@@ -141107,7 +141107,7 @@ ttt	ttt	K110			GN				jisjk:201744
 北まくら	머리를 북쪽으로 두고 잠	N110			GN				jisjk:172399		
 北アイルランド	북 아일랜드	N110	VPl		GN				jisjk:230920		
 北アイルランド問題	북아일랜드 문제	N110	VPl		GN				jisjk:230921		
-北アフリカ	북부아프리카	N110	QCT		GN				jisjk:204772		
+北アフリカ	북아프리카	N110	QCT		GN				jisjk:204772		
 北アフリカ洲	북아메리카주	N110	QCT		GN				jisjk:204771		
 北アメリカ	북아메리카	I110	QCT	Qq	GN				jisjk:70961		
 北アメリカ星雲	북아메리카 성운	N110	VSs		GN				jisjk:230922		
@@ -148804,7 +148804,7 @@ ttt	ttt	K110			GN				jisjk:201744
 参けい人	참배인	N110	VHn		GN				jisjk:185729		
 参ら	항복케 &AV@	M433			GN				jisjk:95230		
 参らせ候	편지	N110			GN				jisjk:251540		
-参上	방문	N110		HdHi	GN				jisjk:104892		
+参上	등장	N110		HdHi	GN				jisjk:104892		
 参上	찾아 &J8@	M459			GN				jisjk:267045		
 参上いた	방문&AV@	M443	UMv		GN				jisjk:266948		
 参上でき	방문할 수 &HN@	M427			GN				jisjk:262541		
@@ -153744,7 +153744,7 @@ ttt	ttt	K110			GN				jisjk:201744
 吊り屋根構造	현수 지붕 구조	N110	VBl		GN				jisjk:244175		
 吊り柿	곶감	N110			GN				jisjk:244155		
 吊り棒	매달기봉	N110			GN				jisjk:163677		
-吊り橋	조교	I110	VPl		GN				jisjk:82537		
+吊り橋	흔들다리	I110	VPl		GN				jisjk:82537		
 吊り環	조환	I110			GN				jisjk:82539		
 吊り目	위로 치켜올라간 눈	N110	VBp		GN				jisjk:244173		
 吊り籠	어롱	N110			GN				jisjk:244156		
@@ -168072,7 +168072,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大ぬかり	오누카리	I130	QCTVPl		GN				jisjk:278433		
 大の	대단한	E0H1			GN	318	||1 S+1== "R好き"	大の 뒤에 好き로 끝나는 말이 오면 대단한을 고른다. (미발동: rare-context)	jisjk:6361		
 大の	큰	E0H0			GN	1426	||1 &&2 A-1== "QCT" D+0= "대학의"	지명 뒤의 大の를 '큰' 대신 '대학의'로 바꾼다. (미발동: rare-context)	jisjk:123547		
-大の字	큰댓자	I110			GN				jisjk:64890		
+大の字	큰대자	I110			GN				jisjk:64890		
 大の得意	큰 특기	N110			GN				jisjk:151361		
 大の月	큰달	I110	VFr		GN				jisjk:64889		
 大の男	몸이 큰 남자	N110	VHn		GN				jisjk:242211		
@@ -184007,7 +184007,7 @@ ttt	ttt	K110			GN				jisjk:201744
 寝転	드러&J4@	M416			GN				jisjk:95574		
 寝転が	뒹&LL@	M418			GN				jisjk:95575		
 寝転んでい	누워 &HN@	M427			GN				jisjk:147659		
-寝込	드러&J4@	M425			GN				jisjk:264932		
+寝込	앓아&J4@	M425			GN				jisjk:264932		
 寝込	&AK@	M425			GN				jisjk:341444		
 寝返り	몸부림	N110	UYh		GN				jisjk:266396		
 寝返りを打	배반&AV@	M414			GN				jisjk:95571		
@@ -204736,7 +204736,7 @@ ttt	ttt	K110			GN				jisjk:201744
 従業者	종업원	N110	VHn		GN				jisjk:194292		
 従物	종물	N110			GN				jisjk:237003		
 従犯	종범	N110	VHn		GN				jisjk:194526		
-従者	종자	N110	VHn		GN				jisjk:33848		
+従者	시종	N110	VHn		GN				jisjk:33848		
 従軍	종군	N110	VGtVHn	Hd	GN				jisjk:33841		
 従軍慰安婦	종군위안부	I130	QMS		GN				jisjk:83851		
 従軍記者	종군기자	I110			GN				jisjk:110348		
@@ -217496,7 +217496,7 @@ ttt	ttt	K110			GN				jisjk:201744
 撃	&MH@	M444	XXXVTwVRw		GN				jisjk:144074		
 撃き落	쏘아 떨어뜨&AA@	M443	VRwVAm		GN				jisjk:141375		
 撃たれ	총에 &FB@	M427			GN				jisjk:145649		
-撃ちまく	마구 &AO@	M448	VRw		GN				jisjk:143737		
+撃ちまく	마구 &MH@	M448	VRw		GN				jisjk:143737		
 撃ち合	교전&AV@	M440	VTw		GN				jisjk:141358		
 撃ち合い	역공격	N110		Hd	GN				jisjk:115372		
 撃ち合いがあ	총격전이 &HN@	M428	VTw		GN				jisjk:145658		
@@ -218073,7 +218073,7 @@ ttt	ttt	K110			GN				jisjk:201744
 改良費	개량비	N110			BZ				jisjk:350667		
 改華	개화	N110			GN				jisjk:96429		
 改葬	이장	N110		Hd	GN				jisjk:166885		
-改行	개행	N110		Hd	GN				jisjk:14897		
+改行	줄바꿈	N110		Hd	GN				jisjk:14897		
 改装	개장	N110		Hd	GN				jisjk:14884		
 改装中	개장중	N110			GN				jisjk:166895		
 改訂	개정	N110		Hd	GN				jisjk:14888		
@@ -220449,7 +220449,7 @@ ttt	ttt	K110			GN				jisjk:201744
 新しい歴史教科書をつくる会	새 역사교과서를 만드는 모임	A9D0	VGt		GN				jisjk:364024		
 新しい物ずき	새로운 것을 좋아%D1@	G8U0			GN				jisjk:374773		
 新しが	즐겨 받아들&AJ@	M428			GN				jisjk:140143		
-新しき	신식	N110			GN				jisjk:192564		
+新しき	새로운	E0H0			GN				jisjk:192564		
 新しき村	아타라시키무라	N110	VPl		GN				jisjk:227356		
 新しくでき	새롭게 생성&C6@	M427			GN				jisjk:141965		
 新しくな	새로워&AL@	H428			GN				jisjk:141972		
@@ -228367,7 +228367,7 @@ ttt	ttt	K110			GN				jisjk:201744
 昼夜銀行	주야 은행	I110			GN				jisjk:111513		
 昼夜風	주야풍	N110	VSs		GN				jisjk:243089		
 昼寝	낮잠	N110			GN				jisjk:34103		
-昼寝	낮잠&AK@	M429			GN				jisjk:346813		
+昼寝	낮잠 &AK@	M429			GN				jisjk:346813		
 昼寝を	낮잠을 &AK@	M429		Pn	GN				jisjk:340228		
 昼居渡	히루이도	N130	QCTVPl		GN				jisjk:325205		
 昼御飯	점심밥	I110	VFdVFd	Om	GN				jisjk:84238		
@@ -247140,8 +247140,8 @@ ttt	ttt	K110			GN				jisjk:201744
 楽円	라쿠엔	N130	QCTVPl		GN				jisjk:338341		
 楽劇	악극	N110			GN				jisjk:98542		
 楽劇団	악극단	I110	VGtUSo		GN				jisjk:67559		
-楽勝	간단히 이김	N110			GN				jisjk:98547		
-楽勝	간단히 이%D2@	G8U0			GN				jisjk:373342		
+楽勝	낙승	N110			GN				jisjk:98547		
+楽勝	식은 죽 먹기%EH@	G8U0			GN				jisjk:373342		
 楽匠	뛰어난 음악가	N110	USoQMUVHn		GN				jisjk:171262		
 楽古岳	랏코다케	I110	QCT		GN				jisjk:67558		
 楽員	악원	N110	VHn		GN				jisjk:19916		
@@ -252976,7 +252976,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気が強	야무$KL@	H7N0	SFl		GN				jisjk:122267		
 気が抜け	김이 빠&AL@	M417		Dx	GN				jisjk:92208		
 気が揉め	초조해&AL@	M427			GN				jisjk:118255		
-気が散	마음이 산란해&AL@	M428			GN				jisjk:340990		
+気が散	정신이 산만해&AL@	M428			GN				jisjk:340990		
 気が早	성질이 급$AB@	H7U0			GN				jisjk:117308		
 気が晴れ	기분이 풀&AA@	M427		Pn	GN				jisjk:344071		
 気が気でな	제정신이 아$A3@	H7U0			GN				jisjk:5435		
@@ -253204,7 +253204,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気孔径	기공 지름	N110			GN				jisjk:162697		
 気孔蒸散	기공 증산	N110			GN				jisjk:230638		
 気宇	기개와 도량	N110	SFl		GN				jisjk:171649		
-気安	거리낌$FA@	H7U0			GN				jisjk:5448		
+気安	스스럼$FA@	H7U0			GN				jisjk:5448		
 気安さ	편안함	H110			GN				jisjk:342776		
 気室	기실	N110			GN				jisjk:230686		
 気密	기밀	N110		Dd	GN				jisjk:164267		
@@ -258663,7 +258663,7 @@ ttt	ttt	K110			GN				jisjk:201744
 泣くに泣けな	분해서 견딜 수 $FA@	H7U0			GN				jisjk:117845		
 泣く泣く	울면서	E311			GN				jisjk:1831		
 泣け	눈물이 나&AH@	M417			GN				jisjk:94374		
-泣けて	눈물나기 시작&AV@	E4U;			GN				jisjk:264860		
+泣けて	눈물이 나&AH@	E4U;			GN				jisjk:264860		
 泣けて泣けて	눈물이 자꾸 나와	E300			GN				jisjk:149391		
 泣付	애원&AV@	M421			GN				jisjk:147017		
 泣入	몹시 &AI@	M428			GN				jisjk:146941		
@@ -259805,7 +259805,7 @@ ttt	ttt	K110			GN				jisjk:201744
 流れ歩	방랑&AV@	M421			GN				jisjk:146906		
 流れ物	유질물	I110			GN				jisjk:67944		
 流れ玉	유탄	I110			GN				jisjk:67948		
-流れ着	표류&AV@	M421			GN				jisjk:346893		
+流れ着	떠밀려 &AH@	M421			GN				jisjk:346893		
 流れ矢	유시	I110			GN				jisjk:67947		
 流れ続け	계속 &EA@	M427			GN				jisjk:148682		
 流れ線図	흐름선도	N110	VSp		BZ				jisjk:354653		
@@ -271177,7 +271177,7 @@ ttt	ttt	K110			GN				jisjk:201744
 物相飯	콩밥	N110			GN				jisjk:253781		
 物真似	흉내	N110			GN				jisjk:155716		
 物知らず	철부지	I110	VHn		GN				jisjk:69328		
-物知り	박식	I110			GN				jisjk:69329		
+物知り	척척박사	I110			GN				jisjk:69329		
 物知り顔	아는 체하는 얼굴	N110			GN				jisjk:253827		
 物税	물세	N110	VMo		GN				jisjk:22329		
 物種	근본	N110			GN				jisjk:253830		
@@ -293222,7 +293222,7 @@ ttt	ttt	K110			GN				jisjk:201744
 竜岡下	류우오카시모	N130	QCTVPl		GN				jisjk:338400		
 竜峰山	용봉산	N130	QPN		GN				jisjk:208726		
 竜島	류우시마	N130	QCTVPl		GN				jisjk:338429		
-竜巻	맹렬한 회오리	N110	VFr		GN				jisjk:30100		
+竜巻	회오리바람	N110	VFr		GN				jisjk:30100		
 竜座	용좌	N110	VSs		GN				jisjk:255903		
 竜建設工業	류우 건설공업	I130	QIDVGt		GN				jisjk:78856		
 竜彦	타츠히코	N130	QPN	Wb	GN				jisjk:118423		
@@ -303288,7 +303288,7 @@ ttt	ttt	K110			GN				jisjk:201744
 義烈	의열	N110			GN				jisjk:31057		
 義烈の士	의열지사	N110	VHn		GN				jisjk:175524		
 義煕	요시히로	N130	QPN	Wb	GN				jisjk:349898		
-義父	의붓 아버지	N110	VHn		GN				jisjk:31064		
+義父	의붓아버지	N110	VHn		GN				jisjk:31064		
 義理	의리	N110			GN				jisjk:31058		
 義理ずく	의리를 내세우는 태도	I110			GN				jisjk:79748		
 義理の兄	의형	I110	VHn		GN				jisjk:79749		
@@ -323061,8 +323061,8 @@ ttt	ttt	K110			GN				jisjk:201744
 見切り発車	건너뛰기식	N110			GN				jisjk:252196		
 見切品	투매품	I110			GN				jisjk:60888		
 見劣り	열등	I110		Hd	GN				jisjk:60867		
-見参	알현	N110	UTs	Hd	GN				jisjk:178338		
-見参	알현	N110	UTs	Hd	GN				jisjk:179259		
+見参	등장	N110	UTs	Hd	GN				jisjk:178338		
+見参	등장	N110	UTs	Hd	GN				jisjk:179259		
 見取	미도리	N130	QCTVPl		GN				jisjk:331194		
 見取り	숙지	I110			GN				jisjk:60891		
 見取り図	약식도	I110	VSp		GN				jisjk:60892		
@@ -325959,7 +325959,7 @@ ttt	ttt	K110			GN				jisjk:201744
 詳らか	자세%A1@	G8U0			GN				jisjk:3181		
 詳伝	상세한 전기	N110	VBkVSw		GN				jisjk:191096		
 詳叙	상술	N110		Hd	GN				jisjk:235260		
-詳報	상세보도	N110			GN				jisjk:100790		
+詳報	상세 보도	N110			GN				jisjk:100790		
 詳密	세밀	N110		Dd	GN				jisjk:191291		
 詳察	자세한 조사	N110		Hd	GN				jisjk:190855		
 詳審	상세	N110		Dd	GN				jisjk:235246		
@@ -335063,7 +335063,7 @@ ttt	ttt	K110			GN				jisjk:201744
 迷惑かけ	폐를 끼&AO@	M427		Pn	GN				jisjk:342192		
 迷惑そう	달갑지 %B5@	G8U0			GN				jisjk:139510		
 迷惑でつまらぬ	성가시고 하찮은	E0H0			GN				jisjk:150221		
-迷惑な	폐가 되는	E0H0			GN				jisjk:349571		
+迷惑な	민폐인	E0H0			GN				jisjk:349571		
 迷惑にな	폐가 &C6@	E4U8		PnDx	GN	3821	||1 &&4 S-1== "の" P-1== "2**" P-2== "1**" D-1= "에게"	迷惑にな 앞의 명사 뒤 조사 の를 에게로 바꾸어 폐가 되다로 옮긴다. (미발동: rare-word)	jisjk:347077		
 迷惑にもな	폐가 &C6@	G4U8		Pn	GN	3822	||1 &&4 S-1== "の" P-1== "2**" P-2== "1**" D-1= "에게도"	앞에 명사와 の가 이어지면 迷惑にもな를 폐가 되다로 고르고 の를 에게도로 바꾼다. (미발동: rare-word)	jisjk:347078		
 迷惑はかけられな	폐는 끼칠 수 $FA@	H7N0			GN				jisjk:138912		
@@ -340456,7 +340456,7 @@ ttt	ttt	K110			GN				jisjk:201744
 采沢	우네자와	N130	QPN	Wa	GN				jisjk:12394		
 采覧異言	채란이어	N110	VBkVSwVPl		GN				jisjk:232211		
 采谷	우네타니	N130	QPN	Wa	GN				jisjk:12392		
-采配	지휘봉	N110	VPe		GN				jisjk:35381		
+采配	지휘	N110	VPe		GN				jisjk:35381		
 采配を振	지휘&AV@	M418			GN				jisjk:95241		
 采配を振	지휘&AV@	M448			GN				jisjk:120184		
 采配を採	지시&AV@	M418	UTs		GN				jisjk:95242		
@@ -345131,7 +345131,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鍼灸師	침.뜸치료사	I110	UAq		GN				jisjk:363777		
 鍼術	침술	N110			GN				jisjk:36678		
 鍼麻酔手術	침마취 수술	N110	QHP		GN				jisjk:250213		
-鍾乳洞	석회동	I110	VPl		GN				jisjk:83887		
+鍾乳洞	석회동굴	I110	VPl		GN				jisjk:83887		
 鍾乳石	종유석	N110	VPl		GN				jisjk:191139		
 鍾信	카네노부	N130			GN				jisjk:102346		
 鍾子期	종자기	N110	VHn		GN				jisjk:235226		
@@ -356952,7 +356952,7 @@ ttt	ttt	K110			GN				jisjk:201744
 飲みたが	마시고 싶어&AV@	M448			GN				jisjk:201850		
 飲みたがってい	마시고 싶어&AV@	M448			GN				jisjk:201851		
 飲みたくな	마시고 싶어&AL@	M428			GN				jisjk:147934		
-飲みっぷり	먹는 모습	N110			GN				jisjk:366693		
+飲みっぷり	마시는 모습	N110			GN				jisjk:366693		
 飲みっぷり	마시는 모습	N110			GN				jisjk:366695		
 飲みっ振り	마시는 모습	N110			GN				jisjk:249088		
 飲みにく	마시기 어$G8@	H7N0			GN				jisjk:137558		

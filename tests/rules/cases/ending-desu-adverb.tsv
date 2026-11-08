@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-ending:desu-adverb	高熱で寝込んだのですっかり性格が変わった。	고열로 드러누웠으므로 완전히 성격이 바뀌었다.	fix	lookup
+ending:desu-adverb	高熱で寝込んだのですっかり性格が変わった。	has:앓아누웠으므로	fix	lookup
 ending:desu-adverb	遅れたのですみません。	늦었으므로 죄송합니다.	fix	lookup
 ending:desu-adverb	急いだのですでに着いた。	서둘렀으므로 이미 도착했다.	fix	lookup
 ending:desu-adverb	そうなのですか。	그렇습니까.	keep	lookup

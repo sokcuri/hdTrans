@@ -1,6 +1,6 @@
 # 규칙: LEX-5110
 rule	input	expected	kind	layer
-cx:without:20	空行有り版、句点改行版を掲載しております。	빈 줄 있는 판, 마침표 개행판을 게재하고 있습니다.	fix	rewrites
+cx:without:20	空行有り版、句点改行版を掲載しております。	has:줄바꿈판을	fix	rewrites
 cx:without:20	自覚あり美少女が母国ではないところで	has:자각 있는 미소녀	fix	rewrites
 cx:without:20	ご乗車ありあっしたー	!rule:cx:without:20	keep	rewrites
 cx:without:20	駐車場ありの物件	주차장 있는 물건	keep	rewrites
@@ -10,7 +10,7 @@ cx:without:30	研究所前方に空間転移の予兆あり	has:전조 있음	fi
 cx:without:30	「最低限、鍛える必要あり」	has:단련할 필요 있음	fix	rewrites
 cx:without:30	問題があり、	문제가 있어,	keep	rewrites
 cx:without:30	問題ありません	문제 없습니다	keep	rewrites
-cx:without:40	空行有り、句点改行形式をお好みの方は	has:빈 줄 있음, 마침표 개행 형식	fix	rewrites
+cx:without:40	空行有り、句点改行形式をお好みの方は	has:빈 줄 있음, 마침표 줄바꿈 형식	fix	rewrites
 cx:without:40	『空室あり、室内浴室あり、外国人ＯＫ』	『빈방 있음, 실내 욕실 있음, 외국인 OK』	fix	rewrites
 cx:without:40	その後、紆余曲折あり、なんとか実現した婚約だった。	!rule:cx:without:40	keep	rewrites
 cx:without:14	駐車場無しで、月五万円	has:주차장 없이,	fix	rewrites
@@ -30,4 +30,4 @@ cx:without:60	訳ありの品	사연 있는 물건	fix	rewrites
 cx:without:60	文句無しの神ゲー	!rule:cx:without:60	keep	rewrites
 cx:without:60	名無しの怖がりさん	!rule:cx:without:60	keep	rewrites
 dict:jisjk:6401	傷有りの商品	상처 있는 상품	fix	lookup
-dict:jisjk:6401	改行版	개행판	keep	lookup
+dict:jisjk:6401	改行版	has:줄바꿈판	keep	lookup

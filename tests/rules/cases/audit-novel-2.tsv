@@ -1,0 +1,149 @@
+# 규칙: LEX-5651
+rule	input	expected	kind	layer
+dict:audit-novel-2	川内、参上！	has:등장!	fix	lookup
+dict:audit-novel-2	ご挨拶に参上しました。	has:찾아 뵈었습니다	keep	lookup
+dict:audit-novel-2	夕餉の支度をする。	has:저녁밥 준비	fix	lookup
+dict:audit-novel-2	すこしだけ待って。	has:조금만 기다려	fix	lookup
+dict:audit-novel-2	成る程な。	has:그렇구나	fix	lookup
+dict:audit-novel-2	いい飲みっぷりだね。	has:마시는 모습	fix	lookup
+dict:audit-novel-2	気が散って勉強できない。	has:정신이 산만해져	fix	lookup
+dict:audit-novel-2	浜辺に流れ着いた。	has:해변에 떠밀려 왔다	fix	lookup
+dict:audit-novel-2	物知りだな。	has:박식하네	fix	lookup
+dict:audit-novel-2	物知りなお爺さん	has:박식한 할아버지	fix	lookup
+dict:audit-novel-2	すごいワザだ。	has:대단한 기술	fix	lookup
+dict:audit-novel-2	よそ者は帰れ。	has:외지인은	fix	lookup
+dict:audit-novel-2	気安く呼ぶな。	has:스스럼없이	fix	lookup
+dict:audit-novel-2	ほうじ茶でいいか？	has:호지차	fix	lookup
+dict:audit-novel-2	とっておきのワインを開けよう。	has:비장의 와인	fix	lookup
+dict:audit-novel-2	お父ちゃん、ただいま。	has:아빠	fix	lookup
+dict:audit-novel-2	迷惑な話だ。	has:민폐인 이야기	fix	lookup
+dict:audit-novel-2	カワイイ服だね。	has:귀여운 옷	fix	lookup
+dict:audit-novel-2	カワイイ！	has:귀여워	keep	lookup
+dict:audit-novel-2	新曲のお披露目	has:신곡의 공개	fix	lookup
+dict:audit-novel-2	従者を連れてきた。	has:시종을	fix	lookup
+dict:audit-novel-2	改行してください。	has:줄바꿈해	fix	lookup
+dict:audit-novel-2	新しき時代	has:새로운 시대	fix	lookup
+dict:audit-novel-2	吊り橋を渡る。	has:흔들다리를	fix	lookup
+dict:audit-novel-2	とくと見よ！	has:똑똑히 봐라	fix	lookup
+dict:audit-novel-2	熱を出して三日も寝込んだ。	has:앓아누웠다	fix	lookup
+dict:audit-novel-2	ぐっすり寝込んでしまった。	has:잠들어버렸다	fix	lookup
+dict:audit-novel-2	たいしたことないよ。	has:별것 아니야	fix	lookup
+dict:audit-novel-2	下ごしらえをする。	has:밑준비를	fix	lookup
+dict:audit-novel-2	ふだんはおとなしい。	has:평소에는	fix	lookup
+dict:audit-novel-2	大の字に寝転ぶ。	has:큰대자	fix	lookup
+dict:audit-novel-2	豆まきをしよう。	has:콩 뿌리기	fix	lookup
+dict:audit-novel-2	詳報を待つ。	has:상세 보도	fix	lookup
+dict:audit-novel-2	たたかいが始まる。	has:싸움이	fix	lookup
+dict:audit-novel-2	貴様の采配を見せてもらおう。	has:지휘를	fix	lookup
+dict:audit-novel-2	交通機関が止まった。	has:교통수단이	fix	lookup
+dict:audit-novel-2	黒板消しを投げる。	has:칠판지우개를	fix	lookup
+dict:audit-novel-2	彼はナイスガイだ。	has:나이스 가이	fix	lookup
+dict:audit-novel-2	主砲を撃ちまくる。	has:마구 쏜다	fix	lookup
+dict:audit-novel-2	なんだか泣けてくる。	has:눈물이 나온다	fix	lookup
+dict:audit-novel-2	むだな努力だ。	has:쓸데없는 노력	fix	lookup
+dict:audit-novel-2	義父が来た。	has:의붓아버지가	fix	lookup
+dict:audit-novel-2	お腹すいた。	has:배고프다	fix	lookup
+dict:audit-novel-2	昼寝する。	has:낮잠 잔다	fix	lookup
+dict:audit-novel-2	プレゼントのラッピング	has:래핑	fix	lookup
+dict:audit-novel-2	北アフリカの国	has:북아프리카의	fix	lookup
+dict:audit-novel-2	竜巻が起きた。	has:회오리바람이	fix	lookup
+dict:audit-novel-2	おろかな人間め。	has:어리석은 인간	fix	lookup
+dict:audit-novel-2	謝罪はおろか、礼も言わない。	has:사죄는커녕	keep	lookup
+dict:audit-novel-2	鍾乳洞を探検する。	has:석회동굴을	fix	lookup
+dict:audit-novel-2	兵舎に戻る。	has:막사로	fix	lookup
+dict:audit-novel-2	よろしくてよ。	has:좋아요	fix	lookup
+dict:audit-novel-2	鎧袖一触よ。	has:식은 죽 먹기	fix	lookup
+dict:audit-novel-2	スイカ割りをしよう。	has:수박 깨기를	fix	lookup
+dict:audit-novel-2	運転見合わせ中です。	has:운행 중단	fix	lookup
+dict:audit-novel-2	お味は如何でしたか？	has:어땠습니까	fix	lookup
+dict:audit-novel-2	結果如何によっては	has:여하에 따라서는	fix	lookup
+dict:audit-novel-2	口からでまかせを言うな。	has:엉터리를	fix	lookup
+dict:audit-novel-2	肩こりがひどい。	has:어깨 결림이	fix	lookup
+dict:audit-novel-2	拳を握ってグーを作る	has:주먹 모양을 만든다	fix	lookup
+dict:audit-novel-2	新メンバーが入った。	has:새 멤버가	fix	lookup
+dict:audit-novel-2	新ルールを作る。	has:새 규칙을	fix	lookup
+dict:audit-novel-2	新メニューを試す。	has:신메뉴를	keep	lookup
+dict:audit-novel-2	楽勝した。	has:손쉽게 이겼다	fix	lookup
+dict:audit-novel-2	楽勝だ。	has:식은 죽 먹기다	fix	lookup
+dict:audit-novel-2	楽勝でしょ。	has:식은 죽 먹기지	fix	lookup
+dict:audit-novel-2	拳を握ってグー！いいね！	has:굿!	keep	lookup
+dict:audit-novel-2	グーを出した。	has:주먹을 냈다	fix	lookup
+dict:audit-novel-2	彼は小さな村に流れ着いた。	has:떠밀려 왔다	fix	lookup
+dict:audit-novel-2	瓶が浜辺に流れ着いた。	has:떠밀려 왔다	keep	lookup
+dict:audit-novel-2	推参つかまつった。	has:찾아왔소	fix	lookup
+dict:audit-novel-2	失礼仕る。	has:실례하겠소	fix	lookup
+dict:audit-novel-2	こんなの楽勝だよ。	has:식은 죽 먹기야	fix	lookup
+dict:audit-novel-2	楽勝な相手だ。	has:만만한 상대	fix	lookup
+dict:audit-novel-2	楽勝で勝った。	has:손쉽게 이겼다	fix	lookup
+dict:audit-novel-2	楽勝だった。	has:식은 죽 먹기였다	fix	lookup
+dict:audit-novel-2	楽勝ムードが漂う。	has:낙승 분위기	fix	lookup
+dict:audit-novel-2	楽勝ペースで進む。	has:낙승 페이스	fix	lookup
+dict:audit-novel-2	楽勝でした。	has:식은 죽 먹기였습니다	keep	lookup
+dict:audit-novel-2	楽勝ではない。	has:식은 죽 먹기가 아니다	keep	lookup
+dict:audit-novel-2	ご無礼つかまつる。	has:무례를 범하겠소	fix	lookup
+dict:audit-novel-2	では、御免つかまつる！	has:실례하겠소	fix	lookup
+dict:audit-novel-2	お相手つかまつろう。	has:상대해 드리리다	fix	lookup
+dict:audit-novel-2	お供つかまつる。	has:모시겠소	fix	lookup
+dict:audit-novel-2	ご無礼つかまつった。	has:무례를 범했소	fix	lookup
+dict:audit-novel-2	拝見つかまつる。	has:배견한다	keep	lookup
+dict:audit-novel-2	楽勝な試合だった。	has:만만한 시합	fix	lookup
+dict:audit-novel-2	「実際、筧なら楽勝なんじゃないか？」	has:식은 죽 먹기인 게	keep	lookup
+dict:audit-novel-2	先生って物知りなんだよ	has:박식해	fix	lookup
+dict:audit-novel-2	物知りなんです。	has:박식합니다	fix	lookup
+dict:audit-novel-2	殿に見参いたす。	has:알현	keep	lookup
+dict:audit-novel-2	結婚のお披露目	has:피로연	keep	lookup
+dict:audit-novel-2	無人島に流れ着いた。	has:떠밀려 왔다	fix	lookup
+dict:audit-novel-2	楽勝だったのです。	lacks:이기기	fix	lookup
+dict:audit-novel-2	楽勝楽勝！	has:식은 죽 먹기	fix	lookup
+dict:audit-novel-2	新しき艦	has:새로운 함	fix	lookup
+dict:audit-novel-2	ふだんから鍛えている。	has:평소부터	fix	lookup
+dict:audit-novel-2	公私共々よろしくお願いします	has:공사 모두	fix	lookup
+dict:audit-novel-2	夫婦共々元気です。	has:부부 모두	fix	lookup
+dict:audit-novel-2	楽園共々滅びよ。	has:낙원과 함께	keep	lookup
+dict:audit-novel-2	素人の域を出ない。	has:수준을 벗어나지 않는다	fix	lookup
+dict:audit-novel-2	神の域に達する。	has:신의 영역	keep	lookup
+dict:audit-novel-2	市電に乗る。	has:시영전차를	keep	lookup
+dict:audit-novel-2	もっともふだんは、表だけで充分だ	has:다만 평소에는	fix	lookup
+dict:audit-novel-2	もっとも大切なもの	has:가장 중요한	keep	lookup
+cx:audit-novel:10	殿に見参した。	has:주군을 알현했다	fix	rewrites
+cx:audit-novel:10	国王に謁見した。	has:국왕을 알현했다	fix	rewrites
+cx:audit-novel:10	陛下に謁見する機会を得た。	has:폐하를 알현할	fix	rewrites
+cx:audit-novel:10	陛下に謁見を申し込んだ。	has:알현을 신청했다	keep	rewrites
+cx:audit-novel:10	明日に謁見がある。	lacks:내일을	keep	rewrites
+cx:audit-novel:10	三時に謁見の予定	lacks:3시를	keep	rewrites
+cx:audit-novel:10	王都に謁見のため向かう。	lacks:왕도를	keep	rewrites
+cx:audit-novel:20	ワザと負けた。	has:일부러 졌다	fix	rewrites
+cx:audit-novel:20	あいつはワザと負けた。	has:일부러 졌다	fix	rewrites
+cx:audit-novel:20	彼女はワザと、手を抜いた。	has:일부러,	fix	rewrites
+cx:audit-novel:20	すごいワザだ。	has:대단한 기술	keep	rewrites
+cx:audit-novel:30	ワザとは思えない。	has:일부러라고는 생각되지 않는다	fix	rewrites
+cx:audit-novel:30	そのワザとは何だ	has:기술이란	keep	rewrites
+cx:audit-novel:30	あんたらのワザとは違う	has:기술과는 다르다	keep	rewrites
+cx:audit-novel:40	ワザとはいえ、ひどい。	has:일부러라고는 해도	fix	rewrites
+cx:audit-novel:40	底の浅いワザとはわけが違う	has:기술과는	keep	rewrites
+cx:audit-novel:50	ワザとではない。	has:일부러 그런 것은 아니다	fix	rewrites
+cx:audit-novel:50	すごいワザではない。	lacks:일부러	keep	rewrites
+cx:audit-novel:60	ワザとのミスだ。	has:고의적인 실수	fix	rewrites
+cx:audit-novel:60	師匠とのミスだ。	lacks:고의적	keep	rewrites
+cx:audit-novel:70	お前自身で決めろ	has:너 스스로 결정해라	fix	rewrites
+cx:audit-novel:70	君自身で確かめろ	has:너 스스로 확인해라	fix	rewrites
+cx:audit-novel:70	お前自身ではないか	has:너 자신이 아닌가	keep	rewrites
+cx:audit-novel:71	てめえ自身で考えろ	has:너 스스로 생각해라	fix	rewrites
+cx:audit-novel:71	てめえ自身の問題だ。	has:너 자신의 문제	keep	rewrites
+cx:audit-novel:72	自分自身でやる	has:자기 스스로 한다	fix	rewrites
+cx:audit-novel:72	自分自身が嫌いだ	has:자기 자신	keep	rewrites
+dict:audit-novel-2	推測の域を出ないが、	has:추측에 불과하지만	fix	lookup
+dict:audit-novel-2	それはもう趣味の域を出ている。	has:수준을 벗어나 있다	fix	lookup
+dict:audit-novel-2	十九駆、見参！	has:등장!	keep	lookup
+cx:audit-novel:20	剣のワザと魔法を磨く	has:기술과 마법을	keep	rewrites
+cx:audit-novel:20	新しいワザと古いワザ	has:기술과 낡은 기술	keep	rewrites
+cx:audit-novel:20	ワザとワザの組み合わせ	has:기술과 기술의	keep	rewrites
+cx:audit-novel:55	ワザとじゃない。	has:일부러 그런 것이 아니다	fix	rewrites
+cx:audit-novel:55	剣のワザじゃない。	lacks:일부러	keep	rewrites
+dict:audit-novel-2	ワザとらしく咳をした。	has:작위적으로	fix	lookup
+dict:audit-novel-2	ワザとらしい演技だ。	has:작위적인 연기	fix	lookup
+cx:audit-novel:10	王に謁見する。	has:왕을 알현한다	fix	rewrites
+cx:audit-novel:73	彼自身で解決した。	has:그 스스로 해결했다	fix	rewrites
+cx:audit-novel:73	彼自身の問題だ。	has:그 자신의 문제	keep	rewrites
+cx:audit-novel:74	彼女自身で解決した。	has:그녀 스스로 해결했다	fix	rewrites
+cx:audit-novel:74	彼女自身の問題だ。	has:그녀 자신의	keep	rewrites
