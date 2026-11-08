@@ -38,7 +38,7 @@ dict:tail-5233	友達止まりだった	has:그냥 친구	fix	lookup
 dict:tail-5233	脳筋ばかりだ	has:근육 바보	fix	lookup
 dict:tail-5233	ご機嫌取りはやめろ	has:비위 맞추기	fix	lookup
 dict:tail-5233	もったいつけるように言った	has:뜸을 들이	fix	lookup
-dict:tail-5233	惚れた弱みだ	has:반한 죄	fix	lookup
+dict:tail-5233	「惚れた弱みか」	has:반한 약점인가	keep	lookup
 dict:tail-5233	そうこなくっちゃな	has:그래야지	fix	lookup
 dict:tail-5233	遠路はるばるご苦労だった	has:먼 길 마다않고	fix	lookup
 dict:tail-5233	涼しい顔してんねぇ	has:태연한 얼굴	fix	lookup
