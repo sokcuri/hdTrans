@@ -5,7 +5,7 @@ dict:ordinal-first:1	第一戦隊、戦場へ向かう。	제1전대, 전장으�
 dict:ordinal-first:1	新編「第一戦隊」を編成せよ！	신편 「제1전대」를 편성하라!	fix	local
 dict:ordinal-first:1	第一潜水隊、演習？	제1잠수대, 연습?	fix	local
 dict:ordinal-first:1	第一機動部隊、出撃します！	제1기동부대, 출격합니다!	fix	local
-dict:ordinal-first:1	第一スロに「天山」を装備	제1스로에 「텐잔」을 장비	fix	local
+dict:ordinal-first:1	第一スロに「天山」を装備	has:제1슬롯에	fix	local
 dict:ordinal-first:1	第一装備スロットに装備せよ。	제1장비 슬롯에 장비하라.	fix	local
 dict:ordinal-first:1	いよいよ第一競技の始まりだ。	드디어 제1경기의 시작이다.	fix	local
 dict:ordinal-first:1	――第一工程、着手。	――제1공정, 착수.	fix	local

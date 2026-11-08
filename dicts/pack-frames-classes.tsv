@@ -34,6 +34,7 @@ class	parent
 @facility	@building
 @firearm	@weapon
 @fist	@body
+@force	@group
 @furniture	@entity
 @game	@activity
 @group	@entity

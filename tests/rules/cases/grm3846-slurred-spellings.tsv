@@ -14,7 +14,7 @@ normalize:slurred	しなきゃだめ	하지 않으면 안 돼	keep	normalize
 normalize:slurred	岩崎の命は もう帰ってこねえ ！	이와사키의 목숨은 이제 돌아오지 않아 !	fix	normalize
 normalize:slurred	あーゆーいい子ちゃんって	저런 좋은 아이는	fix	normalize
 normalize:ru-contraction	汚ぇ真似はすんじゃねぇぞ	더러운 짓은 하지 마	fix	normalize
-normalize:ru-contraction	てめえが そうすんのは 初めから分かってたんだよ	네가 그렇게 하는 것은 처음부터 알고 있었어	fix	normalize
+normalize:ru-contraction	てめえが そうすんのは 初めから分かってたんだよ	has:네놈이	fix	normalize
 normalize:ru-contraction	喋んのやめろ	말하는 것 그만두어라	fix	normalize
 normalize:ru-contraction	落ちずにすんだのにな	떨어지지 않고 끝났는데	keep	normalize
 normalize:ru-contraction	いくぞ こいつを あの船首に落とすんだ	가겠어 이 녀석을 그 뱃머리에 떨어뜨리는 거야	keep	normalize

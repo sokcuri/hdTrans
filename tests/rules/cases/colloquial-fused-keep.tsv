@@ -6,7 +6,7 @@ sound:fused-adjective	支えになる	버팀목이 된다	keep	sound
 sound:fused-adjective	手前の部屋	앞의 방	keep	sound
 sound:fused-adjective	お前！	너!	keep	sound
 sound:fused-adjective	そしたら　おめえ誰だ？	그랬더니 너 누구야?	keep	sound
-sound:fused-adjective	てめえ	너	keep	sound
+sound:fused-adjective	てめえ	has:네놈	keep	sound
 sound:fused-adjective	甘えるな	응석부리지 마	keep	sound
 sound:fused-adjective	彼には甘えさせてもらってるよ｡	그는 응석부리게 해 주고 있어.	keep	sound
 sound:fused-adjective	最近は夜が冷え込むから	최근에는 밤이 추워지니까	keep	sound
@@ -29,7 +29,7 @@ sound:fused-adjective	うるせえ	시끄러	keep	sound
 sound:fused-adjective	わりい	미안	keep	sound
 sound:fused-adjective	しれー、見なかったー？	사령관님, 보지 않았어~?	keep	sound
 sound:fused-adjective	おえ～！	우웩~!	keep	sound
-sound:fused-adjective	やだ、まじー？	싫어, 진심~?	keep	sound
+sound:fused-adjective	やだ、まじー？	has:진짜~?	keep	sound
 sound:fused-adjective	君ならねぇ、できるよ。	너라면, 할 수 있어.	keep	sound
 sound:fused-adjective	いくで、準備はええか	lacks:빠르	keep	sound
 sound:fused-adjective	何にでも効くのにねえ。	lacks:않	keep	sound

@@ -11850,7 +11850,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 仲裁者	중재자	N110			GN						ちゅうさいしゃ	w:11802
 仲間入り	일원	N110			GN				xxx llm	1		w:11803
 任	임무	N110			GN				llm			w:11804
-任せとけ	나한테 맡겨라	A9D0	UTs		GN				llm		まかせとけ	w:11805
+任せとけ	맡겨 둬	A9D0	UTs		GN				llm		まかせとけ	w:11805
 任せ切り	일임	N110			GN				llm		まかせきり	w:11806
 任免	임면	N110		Hd	GN				llm		にんめん	w:11807
 任免	임면&AV@	M429			GN				llm		にんめん	w:11808
@@ -13037,7 +13037,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 功者	고수	N110	VHn		GN				llm		こうしゃ	w:12960
 功者	능숙%A1@	G8U0			GN				llm		こうしゃ	w:12961
 功能	효능	N110			GN						こうのう	w:12962
-加わ	합류&AV@	M428			GN				xxx llm	1		w:12963
 加減	정도	N110			GN				xxx llm	1		w:12964
 加盟国	회원국	I110	VHn		GN				xxx	1	かめいこく	w:12965
 加硫	가황	N110		Hd	GN				xxx	1	かりゅう	w:12966

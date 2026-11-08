@@ -189,3 +189,5 @@ argument-senses:5082	向いる	v1	sense	obj=こちら|こっち|此方 subj=@per
 argument-senses:5078	落とす	v5	sense	obj=お節介|おせっかい|置き土産	남기다	LEX-5012		お節介を一つだけ落とした 참견을 하나만 남겼다			
 argument-senses:5083	落とす	v5	sense	obj=お節介|おせっかい|一言|ひと言|言葉|置き土産|捨て台詞|台詞|セリフ|助言|忠告|ヒント|爆弾発言 next=い|いく|行く|いっ|行っ|行	-	LEX-5012		一言落としていく: the construction reads 남기고 가다(그대로)			
 argument-senses:5120	遊ばせる	v1	sense	obj=@person|@animal	놀게 하다	LEX-5014		子供たちを遊ばせる 아이들을 놀게 하다 (놀리다 아님)			
+argument-senses:5650	制する	vs	sense	obj=@person|あたし|わたし|オレ|ボク|みんな|皆	제지하다	LEX-5650		俺を軽く制する 나를 가볍게 제지한다			
+argument-senses:5652	加わる	v5	sense	subj=@person|@force|仲間|メンバー|新メンバー|新人|艦娘	합류하다	LEX-5650		新メンバーが加わる 새 멤버가 합류한다			

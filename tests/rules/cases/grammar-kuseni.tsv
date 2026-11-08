@@ -5,7 +5,7 @@ lookup:kuseni	カフェもタコライスも知らなかったくせに、そう
 lookup:kuseni	裏切ったくせに。拒絶したくせに。	배반했으면서. 거절했으면서.	fix	ending-defaults
 lookup:kuseni	何も知らないくせに！	아무것도 모르면서!	fix	ending-defaults
 lookup:kuseni	いつもは研究室に引きこもっているくせして	언제나 연구실에 틀어박혀 있으면서	fix	ending-defaults
-lookup:kuseni	弱いくせに威張るな。	약하면서 잘난체 하지 마.	fix	ending-defaults
+lookup:kuseni	弱いくせに威張るな。	has:잘난 체하지	fix	ending-defaults
 cx:kuseni-clause:42	いっつもお腹空かせてるくせに、ご飯の時間になると居なくなるよね。	rule:cx:kuseni-clause:42=1고 있으면서	fix	rewrites
 cx:kuseni-clause:42	知ってるくせして黙ってた。	알고 있으면서 입을 다물었다.	fix	rewrites
 cx:kuseni-clause:42	無様に負けてたくせに。	보기 흉하게 지고 있었으면서.	fix	rewrites

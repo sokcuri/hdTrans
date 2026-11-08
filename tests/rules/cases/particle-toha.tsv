@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:262240	とかく人間の集団心理とは恐ろしいものである。	has:집단심리란 무서운	fix	defaults
 dict:jisjk:262240	高等部とは地球で言うところの大学に相当する。	has:고등부란 지구에서	fix	defaults
-dict:jisjk:262240	クソゲーとはなんぞや。	has:게임이란 따위야	fix	defaults
+dict:jisjk:262240	クソゲーとはなんぞや。	has:게임이란 무엇인가	fix	defaults
 dict:jisjk:262240	そもそも約束とは守る為にあるので…	has:약속이란 지키기	fix	defaults
 dict:jisjk:262240	必然とはそういうものだ。	has:필연이란 그런	fix	defaults
 cx:toha:5	これで…欠陥戦艦とは言わせないし…	has:전함이라고는 말하게	fix	rewrites

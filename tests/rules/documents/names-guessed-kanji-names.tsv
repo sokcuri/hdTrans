@@ -1,6 +1,6 @@
 # 규칙: LEX-4827
 rule	input	expected	kind	layer
-names:guessed-kanji-names	千莉ちゃん、おはよう。\n千莉はパズルが得意だ。	치리짱, 좋은 아침.\n치리는 퍼즐이 자신있다.	fix	fixed
+names:guessed-kanji-names	千莉ちゃん、おはよう。\n千莉はパズルが得意だ。	치리짱, 좋은 아침.\n치리는 퍼즐이 자신 있다.	fix	fixed
 names:guessed-kanji-names	「魅ぃちゃん、それってどういう意味かな？」\n魅ぃちゃんは元気だ。	「미이짱, 그거 무슨 뜻일까?」\n미이짱은 건강하다.	fix	fixed
 names:guessed-kanji-names	昨日で実力試験が終わり、皆一様に表情が明るい。	어제에 실력 시험이 끝나, 모두 한결같게 표정이 밝다.	keep	fixed
 names:guessed-kanji-names	悪ぃな、待たせた。	나쁜, 기다리게 했다.	keep	fixed
