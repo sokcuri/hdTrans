@@ -627,40 +627,90 @@ std::string WriteStress(std::string_view s) {
     return Utf8(out);
 }
 
+namespace {
+
+// The most syllables a stretch of ー or ～ draws a syllable out by (타무라아아아아아), and a run of
+// vowel kana (그만둬어어어어어어).
+constexpr size_t kMaxDrawn = 5;
+constexpr size_t kMaxDrawnKana = 16;
+
+bool IsStretch(char32_t r) { return r == kLengthenMark || r == kDrawnMark || r == U'~' || r == U'～'; }
+
+bool IsHangulSyllable(char32_t r) { return r >= 0xAC00 && r <= 0xD7A3; }
+
+// The Hangul syllable at the end of out drawn out by n syllables of its vowel, its final consonant
+// moved to the last one (님 니임, 군 구우운).
+void Draw(std::u32string& out, size_t n) {
+    const int syllable = static_cast<int>(out.back() - 0xAC00), final = syllable % 28;
+    const int vowel = kLongVowel[syllable % 588 / 28];
+    out.back() -= static_cast<char32_t>(final);
+    for (size_t k = 0; k < n; k++) {
+        out.push_back(static_cast<char32_t>(0xAC00 + (11 * 21 + vowel) * 28 + (k + 1 == n ? final : 0)));
+    }
+}
+
+}  // namespace
+
 std::string WriteLengthening(std::string_view s) {
     const std::u32string rs = Runes(s);
     if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark) && !Contains(rs, output::kClipMark) &&
-        !Contains(rs, output::kCryMark) && !Contains(rs, output::kClippedCryMark)) {
+        !Contains(rs, output::kCryMark) && !Contains(rs, output::kClippedCryMark) && !Contains(rs, U'~') && !Contains(rs, U'～')) {
         return std::string(s);
     }
     std::u32string out;
-    int lengthenings = 0;  // the lengthenings right before r
-    for (const char32_t r : rs) {
-        if (const auto last = out.size() >= 2 && out.back() == U'~' ? text::Split(out[out.size() - 2]) : std::nullopt;
-            r == kDrawnMark && last) {
-            // After a lengthening the drawn syllable goes after the ~ when the syllable before has a final
-            // consonant (짱~ 짜~앙, 군~ 구~운), and right after it without the ~ when it has none (씨~ 씨이).
-            out.pop_back();
-            out.back() = text::Join(last->initial, last->vowel, 0);
-            if (last->final != 0) out.push_back(U'~');
-            out.push_back(text::Join(11, kLongVowel[last->vowel], last->final));
-        } else if (r == kDrawnMark) {
-            if (out.empty() || out.back() < 0xAC00 || out.back() > 0xD7A3) continue;
-            const int syllable = static_cast<int>(out.back() - 0xAC00), final = syllable % 28;
-            out.back() -= static_cast<char32_t>(final);
-            out.push_back(static_cast<char32_t>(0xAC00 + (11 * 21 + kLongVowel[syllable % 588 / 28]) * 28 + final));
+    for (size_t i = 0; i < rs.size(); i++) {
+        const char32_t r = rs[i];
+        if (IsStretch(r) && !out.empty() && IsHangulSyllable(out.back())) {
+            // The stretch after a syllable: its marks and ～, with the clip and cry marks among them. A
+            // lengthening right after a ～ is the mark of that ～ and counts once.
+            size_t j = i, n = 0, drawn = 0, tildes = 0;
+            bool clip = false, drawnOnly = true;
+            char32_t before = 0, tilde = 0;
+            for (; j < rs.size(); j++) {
+                const char32_t c = rs[j];
+                if (c == output::kClipMark) {
+                    clip = true;
+                    continue;
+                }
+                if (output::IsCryMark(c)) continue;
+                if (!IsStretch(c)) break;
+                const bool counted = !(c == kLengthenMark && (before == U'~' || before == U'～'));
+                before = c;
+                if (!counted) continue;
+                n++;
+                drawn += c == kDrawnMark;
+                tildes += c == U'~' || c == U'～';
+                drawnOnly = drawnOnly && c == kDrawnMark;
+                if (tilde == 0 && (c == U'~' || c == U'～')) tilde = c;
+            }
+            const char32_t next = j < rs.size() ? rs[j] : 0;
+            const bool end = next == 0 || Contains(U"!?！？。、,.…‥」』）)］】\n♪☆★♥♡❤", next);
+            // A stretch of ～ and lengthenings does not draw out a syllable closed by a stop (낮, 삯):
+            // one ~ (spec SND-23).
+            // ～ the author typed stay, one ~ each (기다려~~~!).
+            if (tildes == n && n >= 2) {
+                out.append(n, U'~');
+                i = j - 1;
+                continue;
+            }
+            // Drawn marks, from vowel kana, draw the syllable out by one each whatever else the stretch
+            // holds (くうぅっ 쿠우읏).
+            if (drawn > 0 || (end && n >= 2 && StressFinal(text::Final(out.back())))) {
+                Draw(out, drawn > 0 ? std::min(drawn, kMaxDrawnKana) : std::min(n, kMaxDrawn));
+                if (clip && text::Final(out.back()) == 0) out.back() += static_cast<char32_t>(text::kFinalSiot);
+            } else {
+                out.push_back(n == 1 && tilde != 0 ? tilde : U'~');
+            }
+            i = j - 1;
+        } else if (r == kDrawnMark || output::IsCryMark(r)) {
+            continue;
         } else if (r == output::kClipMark) {
             if (!out.empty() && text::Final(out.back()) == 0) out.back() += static_cast<char32_t>(text::kFinalSiot);
-        } else if (output::IsCryMark(r)) {
-            continue;
         } else if (r != kLengthenMark) {
             out.push_back(r);
         } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
             out.push_back(U'~');
-        } else if (lengthenings == 1) {
-            out.push_back(U'~');  // two lengthenings in a row (くぅぅん 군~~)
         }
-        lengthenings = r == kLengthenMark ? lengthenings + 1 : 0;
     }
     return Utf8(out);
 }

@@ -1287,6 +1287,38 @@ size_t AbsorbClip(std::u32string_view rs, size_t end, std::u32string& marks) {
     return to;
 }
 
+// The marks of the stretch rs[i:end) after a word (spec SND-23). Its ー and ～ count when it has any
+// (よぉーし is one), else its vowel kana. One is a lengthening, which the restore stage writes as ~
+// (そうだねー 그러게~, 田村ー！ 타무라~!); two or more ー or ～ are a lengthening each, up to five, which
+// it writes at the end of a phrase as the vowel of the syllable before (田村ーーー！ 타무라아아아!); two
+// or more vowel kana after an honorific are a drawn mark each (さああああん 씨이이이이).
+// After an honorific the vowel kana count when it has any and a ー or ～ after them ends the stretch
+// (くぅぅん～ 구우운, さぁ～ん 씨~; vowelsFirst).
+// Whether before ends in a cute sound ending of ending.cute-sound, whose stretch Korean writes as ~
+// (にゃーー 냥~).
+bool CuteEnding(std::u32string_view before) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("ending.cute-sound"))) {
+        if (before.ends_with(DecodeText(member))) return true;
+    }
+    return false;
+}
+
+// A run of ～ the author typed with no ー stays ～, as many as typed (待て～～～！ 기다려~~~!), and after a
+// cute sound ending (にゃ, みゃ, ぴょ: 냥, 먀, 뾰) any run is one lengthening (にゃーー 냥~).
+std::u32string StretchMarks(std::u32string_view rs, size_t i, size_t end, bool vowelsFirst = false, bool cute = false) {
+    const size_t dashes = static_cast<size_t>(std::count_if(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(end), IsDash));
+    const size_t bars = static_cast<size_t>(std::count(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(end), U'ー'));
+    const size_t vowels = end - i - dashes;
+    const bool byVowels = vowelsFirst ? vowels > 0 : dashes == 0;
+    const size_t n = byVowels ? vowels : dashes;
+    if (n == 0) return {};
+    if (cute) return std::u32string(1, kLengthenMark);
+    if (!byVowels && bars == 0 && dashes >= 2) return std::u32string(dashes, U'～');
+    if (n == 1) return std::u32string(1, kLengthenMark);
+    if (byVowels && vowelsFirst) return std::u32string(std::min<size_t>(n, 16), kDrawnMark);
+    return std::u32string(std::min<size_t>(n, 5), kLengthenMark);
+}
+
 // Whether the word that ends at rs[at] is said twice right before it (待って待って before ぇぇ).
 bool CopiedBefore(std::u32string_view rs, size_t at) {
     for (size_t n = 2; n <= 8 && 2 * n <= at; n++) {
@@ -2048,16 +2080,14 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (word > h.size()) {
                 plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);  // ちゃーんと 제대로~
             } else {
-                // Drawn out by up to three stretch marks, the honorific keeps its syllable and takes one
-                // lengthening, two for two or three marks (くーん 군~, くぅぅん 군~~); by four or more, its
-                // syllable is drawn out with a drawn mark for each (くぅぅぅぅん 구우우우운, ちゃぁあぁあぁん 짜아아아아앙).
-                // A ー or ～ right after the honorific ends the stretch and adds no mark (くぅぅん～ 군~~).
+                // Drawn out by one stretch mark, the honorific keeps its syllable and takes one lengthening
+                // (くーん 군~); by two or more its syllable is drawn out with a drawn mark for
+                // each (くぅぅん 구우운, ちゃぁあぁあぁん 짜아아아아앙; StretchMarks). A ー or ～ right after the
+                // honorific ends the stretch and adds no mark (くぅぅん～ 구우운).
                 size_t tail = 0;
                 while (mark + tail < plain.size() && IsDash(plain[mark + tail])) tail++;
                 plain.erase(mark, tail);
-                const size_t run = end - i - stem.size();
-                const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
-                                                      : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
+                const std::u32string marks = StretchMarks(rs, i + stem.size(), end, true);
                 plain.insert(static_cast<size_t>(mark), marks);
                 i = mark + marks.size() - 1;
             }
@@ -2089,11 +2119,8 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (after < rs.size() && !IsPause(rs[after])) continue;
             // The vowel kana are the marks; a ー or ～ after them ends the stretch (様ぁ～ 님~), and a ー or ～
             // alone counts (様ーっ 님~).
-            size_t run = 0;
-            for (size_t k = i + h.size(); k < end; k++) run += !IsDash(rs[k]);
-            if (run == 0) run = end - i - h.size();
-            const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
-                                                  : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
+            std::u32string marks = StretchMarks(rs, i + h.size(), end, true);
+            if (after > end && marks.size() >= 2 && marks.front() != U'～') marks.push_back(output::kClipMark);
             rs = Spliced(rs, i + h.size(), marks, after);
             i += h.size() + marks.size() - 1;
             changed = true;
@@ -2139,6 +2166,30 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // In a line with hiragana or kanji (not speech written in katakana: イタァイ！ ヤメテヨォォ！), two or
+    // more small katakana vowels that draw out the vowel of the katakana before them at the end of a
+    // phrase, also before a shout's っ (アキラァァァって, ママァァーッ), are its ー, which the word stage
+    // reads as the lengthening of the word (spec SND-23).
+    const bool kanaSpeech = std::none_of(rs.begin(), rs.end(), [](char32_t c) { return IsHiraganaRune(c) || IsKanjiRune(c); });
+    for (size_t k = 1; k < rs.size() && !kanaSpeech; k++) {
+        const char32_t prev = rs[k - 1];
+        if (!In(rs[k], U"ァィゥェォ") || prev < U'ア' || prev > U'ヺ' || In(prev, U"ァィゥェォャュョヮッー")) continue;
+        const int v = HiraganaVowel(prev - 0x60);
+        size_t end = k;
+        while (end < rs.size() && (rs[end] == U'ー' || (In(rs[end], U"ァィゥェォ") && HiraganaVowel(rs[end] - 0x60) == v))) end++;
+        // One small vowel is often the spelling of the word (テメェ, バカァ, ウィンリィ) and stays, and so
+        // does a run after a long katakana run, which may be speech written in katakana (ウマッテシマエェェッ).
+        size_t word = k - 1;
+        while (word > 0 && rs[word - 1] >= U'ァ' && rs[word - 1] <= U'ヺ') word--;
+        if (k - word > 6) continue;
+        if (v < 0 || HiraganaVowel(rs[k] - 0x60) != v || !ShoutEnd(rs, end) ||
+            std::count_if(rs.begin() + static_cast<std::ptrdiff_t>(k), rs.begin() + static_cast<std::ptrdiff_t>(end), [](char32_t c) { return c != U'ー'; }) < 2) {
+            continue;
+        }
+        for (size_t m = k; m < end; m++) rs[m] = U'ー';
+        changed = true;
+        k = end;
+    }
     // A katakana ッ or ン that stresses a word written in hiragana or kanji (すンばらしい, 素ッ晴らしい,
     // やッぱり): written as its hiragana or dropped, whichever lets a key that starts in the run of kana
     // and kanji before it read further, two or more characters past it; the hiragana on a tie. Not where
@@ -2476,9 +2527,19 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                         if (!IsKanjiRune(prev) && !In(prev, kDrawlKana)) {
                             while (keep < end && IsSmallVowel(rs[keep])) keep++;
                         }
-                        size_t to = end;
-                        while (shoutTsu && to < rs.size() && rs[to] == U'っ') to++;  // だめーっ！ だめ～！
-                        rs = Spliced(rs, keep, U"～", to);
+                        // A run of two or more is drawn out, with the shout's っ (だめーーっ！ 안돼에엣!); one
+                        // is ～ (提督ー 제독~, だめーっ！ 안돼~!).
+                        if (const std::u32string marks = StretchMarks(rs, keep, end, false, CuteEnding(std::u32string_view(rs).substr(0, keep))); marks.size() >= 2) {
+                            // The ～ stays for the word stage, which reads it as before; the marks after it
+                            // say how long (the first is the ～'s own).
+                            std::u32string drawn = U"～" + marks;
+                            const size_t to = AbsorbClip(rs, end, drawn);
+                            rs = Spliced(rs, keep, drawn, to);
+                        } else {
+                            size_t to = end;
+                            while (shoutTsu && to < rs.size() && rs[to] == U'っ') to++;  // だめーっ！ だめ～！
+                            rs = Spliced(rs, keep, U"～", to);
+                        }
                         changed = true;
                     }
                 } else if (!plainStart && (end >= rs.size() || IsPause(rs[end]) || longTsu) &&
@@ -2675,6 +2736,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         const bool lengthened =
             read && (vowelRun || !drawn.empty() ||
                      (!spelled && cands[best].empty() && std::any_of(rs.begin() + i, rs.begin() + end, IsDash)));
+        const std::u32string stretch = rs.substr(i, end - i);
+        const bool cute = CuteEnding(std::u32string_view(rs).substr(0, i));
         rs = Spliced(rs, i, cands[best], end);
         changed = true;
         if (lengthened) {
@@ -2691,9 +2754,16 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                                (!drawn.empty() || (q < rs.size() && In(rs[q], kTsu) && adjective && cands[best].empty()));
             if (IsHiraganaRune(rs[i]) && (q == i + 1 || wordEnd >= q) && (pause || shout)) {
                 if (drawn.empty()) {
+                    // One lengthening for one mark, a drawn mark for each of two or more (せんぱーい！
+                    // 선배~!, せんぱーーい！ 선배애애!).
+                    std::u32string marks = StretchMarks(stretch, 0, stretch.size(), false, cute);
                     size_t to = q;
-                    while (to < rs.size() && In(rs[to], kTsu)) to++;
-                    rs = Spliced(rs, q, std::u32string(1, kLengthenMark), to);
+                    if (marks.size() >= 2 && marks.front() != U'～') {
+                        to = AbsorbClip(rs, q, marks);
+                    } else {
+                        while (to < rs.size() && In(rs[to], kTsu)) to++;
+                    }
+                    rs = Spliced(rs, q, marks, to);
                 } else {
                     std::u32string marks = drawn;
                     const size_t to = AbsorbClip(rs, q, marks);  // いたぁぁぁいっ 아파아아앗
@@ -2733,6 +2803,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         if (!DrawnWord(e, rs, i, j, std::max(covered, SoundWord(rs, from, j, ctx.extraBuiltin) ? j : 0), true, fill, wordEnd)) {
             continue;
         }
+        const std::u32string stretch = rs.substr(i, j - i);
+        const bool cute = CuteEnding(std::u32string_view(rs).substr(0, i));
         rs = Spliced(rs, i, fill, j);
         changed = true;
         if (!fill.empty()) continue;
@@ -2741,7 +2813,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         size_t to = q;
         while (to < rs.size() && In(rs[to], kTsu)) to++;
         if (wordEnd < q || (to < rs.size() && (!IsPause(rs[to]) || IsDash(rs[to]) || rs[to] == kLengthenMark))) continue;
-        rs = Spliced(rs, q, std::u32string(1, kLengthenMark), to);
+        std::u32string marks = StretchMarks(stretch, 0, stretch.size(), false, cute);
+        if (marks.size() >= 2 && marks.front() != U'～') to = AbsorbClip(rs, q, marks);
+        rs = Spliced(rs, q, marks, to);
     }
     if (!changed) return std::string(text);
     return EncodeText(rs);
