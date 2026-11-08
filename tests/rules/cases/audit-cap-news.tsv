@@ -107,3 +107,5 @@ dict:audit-cap-news	王国の大臣が来た	has:대신이	keep	lookup
 dict:audit-cap-news	財務大臣の娘と会った	has:재무대신의	keep	lookup
 dict:audit-cap-news	首脳陣の判断	has:수뇌진	keep	lookup
 dict:audit-cap-news	据え置き型のゲーム機	has:거치형	keep	lookup
+dict:audit-cap-news	被災地域の範囲	has:피해 지역의 범위	fix	lookup
+dict:audit-cap-news	被災地区の住民	has:피해 지구의	fix	lookup
