@@ -690,7 +690,15 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
                 // あんた これ 너 이것); a particle, a copula, a quoting と or a する after it still attaches
                 // (関係 している 관계하고), and so do the letters of a word spaced out one by one (ミ ラ ノ,
                 // 明 家が) and a word after a mark (スプリット･ ドロー).
-                const output::ResolvedItem* lead = head >= 0 ? &items[static_cast<std::size_t>(head)] : nullptr;
+                // The lead is the first item that writes text: a prefix left empty (お倫, お車) does not
+                // start the word.
+                const output::ResolvedItem* lead = nullptr;
+                for (int k = head; k >= 0 && k <= to[static_cast<std::size_t>(j)] && lead == nullptr; k++) {
+                    const output::ResolvedItem& item = items[static_cast<std::size_t>(k)];
+                    if (item.tokenIndex == j && !item.entry.text.empty()) lead = &item;
+                    else if (item.tokenIndex == j && !item.entry.code.starts_with("1")) break;
+                }
+                if (lead == nullptr && head >= 0) lead = &items[static_cast<std::size_t>(head)];
                 const auto one = [&](int k) { return text::RuneCount(tokens.Raw(static_cast<std::size_t>(k))) == 1; };
                 // A kanji standing alone before kanji, after the start or a mark, may spell a compound
                 // across the space (明 家が, (避 難者).
