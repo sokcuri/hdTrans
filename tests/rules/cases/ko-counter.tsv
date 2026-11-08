@@ -1,0 +1,17 @@
+# 규칙: NUM-34
+rule	input	expected	kind	layer
+normalize:ko-counter	メール784コっす	has:784개예요	fix	normalize
+normalize:ko-counter	201コだよね	201개지	fix	normalize
+normalize:ko-counter	446コの	446개의	fix	normalize
+normalize:ko-counter	594コ	594개	fix	normalize
+normalize:ko-counter	１２コ	12개	fix	normalize
+normalize:ko-counter	三コください	세 개 주세요	fix	normalize
+normalize:ko-counter	十コある	열 개 있다	fix	normalize
+normalize:ko-counter	何コある？	몇 개 있어?	fix	normalize
+normalize:ko-counter	3コース	3코스	keep	normalize
+normalize:ko-counter	5コマ	lacks:개	keep	normalize
+normalize:ko-counter	2コンボ	2콤보	keep	normalize
+normalize:ko-counter	100コイン	100코인	keep	normalize
+normalize:ko-counter	3コスト	3코스트	keep	normalize
+normalize:ko-counter	3コロ	3코로	keep	normalize
+normalize:ko-counter	コ、コイツ	lacks:개	keep	normalize

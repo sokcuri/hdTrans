@@ -673,6 +673,17 @@ std::string NormalizeForms(std::string_view text) {
         } else {
             c = MapForm(c);
         }
+        // A katakana コ alone after a number is the counter 個 written in katakana (784コ 784個, 三コ, 何コ);
+        // before more katakana it starts a word (3コース, 5コマ).
+        if (c == U'コ' && !out.empty()) {
+            const char32_t prev = LastRune(out).cp;
+            const char32_t next = At(text, i).cp;
+            const bool number = (prev >= U'0' && prev <= U'9') || (prev >= U'０' && prev <= U'９') ||
+                                In(prev, U"〇一二三四五六七八九十百千何数");
+            const bool word = (next >= U'ァ' && next <= U'ヺ') || next == U'ー' || (next >= 0xFF66 && next <= 0xFF9F) ||
+                              next == 0x3099 || next == 0x309A;
+            if (number && !word) c = U'個';
+        }
         const text::Rune mark = At(text, i);
         if (const char32_t composed = ComposeKanaPair(c, mark.cp)) {
             c = composed;
