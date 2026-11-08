@@ -939,7 +939,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 }
 
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
-    if (CommonSenseAt(after)) return false;
+    if (CommonSenseAt(after) || WordBeforeAt(before)) return false;
     // An honorific: the document has named the word already, so a sense of an animal does not stand in the
     // way (千鳥（ちどり）さん).
     const bool honorific = HonorificStart(after);
@@ -969,6 +969,11 @@ bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_
     return UtteranceStart(before) ||
            (TrimEndSpaces(before).ends_with("、") &&
             dict::StartsWithMember(HDTRANS_CLASS("name.action-after"), after.substr(std::string_view("、").size())) > 0);
+}
+
+bool WordBeforeAt(std::string_view before) {
+    return dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), before) > 0 &&
+           dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), before) == 0;
 }
 
 bool CommonAfterAt(std::string_view after) {

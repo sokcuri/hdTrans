@@ -577,10 +577,13 @@ std::vector<std::string> SpeakerCueLabels(std::string_view text) {
 
 std::vector<std::string> SpeakerCues(std::string_view text) { return internal::SpeakerCueLabels(text); }
 
-bool Registry::BracketField(std::string_view line, bool& value) {
+bool Registry::BracketField(std::string_view line, bool& value, std::string& name) {
     std::string_view rest;
     if (::hdTrans::names::BracketField(line, rest)) {
         value = StatusValueAt(rest);
+        const std::size_t open = line.find("【");
+        const std::size_t close = line.find("】");
+        name = std::string(line.substr(open + std::string_view("【").size(), close - open - std::string_view("【").size()));
         return true;
     }
     // A label of one to sixteen characters and a colon with text after it that opens no quote (名前：カイト,
@@ -593,13 +596,18 @@ bool Registry::BracketField(std::string_view line, bool& value) {
     }
     if (colon == std::string_view::npos || colon == p) return false;
     const std::string_view label = line.substr(p, colon - p);
-    if (RuneCount(label) > 16 || label.find_first_of(" 「『【") != std::string_view::npos || label.find("　") != std::string_view::npos) return false;
+    // The marks are searched as whole characters, not as bytes of a UTF-8 set (名前, ジョブ hold bytes of 「).
+    if (RuneCount(label) > 16) return false;
+    for (const std::string_view mark : {" ", "　", "「", "『", "【"}) {
+        if (label.find(mark) != std::string_view::npos) return false;
+    }
     std::string_view after = line.substr(colon);
     const std::size_t width = after.starts_with("：") ? std::string_view("：").size() : 1;
     std::string_view text = after.substr(width);
     while (text.starts_with(" ") || text.starts_with("　")) text.remove_prefix(text.starts_with("　") ? std::string_view("　").size() : 1);
     if (text.empty() || text.starts_with("「") || text.starts_with("『")) return false;
     value = StatusFieldAt(after);
+    name = std::string(label);
     return true;
 }
 

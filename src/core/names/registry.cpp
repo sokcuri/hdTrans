@@ -713,17 +713,30 @@ void Registry::Add(std::string_view rawLine) {
     // (【ジョブ】　無し, 【力】　16) is a status window: its fields are no speakers, however often the window
     // repeats; a run of speaker lines (【若葉】おはよう) keeps its labels (spec LEX-5175).
     bool value = false;
-    const bool field = BracketField(line, value);
+    std::string fieldName;
+    const bool field = BracketField(line, value, fieldName);
     const std::string label = Label(line, script);
     if (!field) {
         fieldRunValue_ = false;
+        fieldRunRepeats_ = false;
+        fieldRunLines_ = fieldRunValues_ = 0;
         fieldRunLabels_.clear();
-    } else if (value && !fieldRunValue_) {
-        for (const std::string& l : fieldRunLabels_) {
-            if (prefixes_[l] > 0) prefixes_[l]--;
+        fieldRunNames_.clear();
+    } else {
+        fieldRunLines_++;
+        if (value) fieldRunValues_++;
+        fieldRunRepeats_ = fieldRunRepeats_ || !fieldRunNames_.insert(fieldName).second;
+        // A status window has values on two lines and on half the run, or a value among three fields or more
+        // that each come once (名前／ジョブ／力：35); one number said in a run of speakers taking turns (【健太】85) makes none.
+        const bool window = (fieldRunValues_ >= 2 && 2 * fieldRunValues_ >= fieldRunLines_) ||
+                            (fieldRunValues_ >= 1 && fieldRunLines_ >= 3 && !fieldRunRepeats_);
+        if (!fieldRunValue_ && window) {
+            for (const std::string& l : fieldRunLabels_) {
+                if (prefixes_[l] > 0) prefixes_[l]--;
+            }
+            fieldRunLabels_.clear();
+            fieldRunValue_ = true;
         }
-        fieldRunLabels_.clear();
-        fieldRunValue_ = true;
     }
     if (!label.empty() && !(field && fieldRunValue_)) {
         if (script) {

@@ -249,13 +249,17 @@ private:
     // (小鳥遊　聖), and their Korean in the name layer's row of the name written whole (小鳥遊聖 타카나시
     // 세이): the parts read so wherever the document writes them.
     std::map<std::string, std::string> rowParts_;
-    // The run of lines that open with a bracketed field and text after it (BracketField): whether a line of it
-    // holds a value (【力】　16), which makes it a status window, and the labels it counted before one did,
-    // taken back then (spec LEX-5175).
+    // The run of lines that open with a bracketed or colon field and text after it (BracketField): whether it is
+    // a status window (values on two of its lines and on half of them: 【力】　16), its line and value counts,
+    // and the labels it counted before it became one, taken back then (spec LEX-5175).
     bool fieldRunValue_ = false;
+    int fieldRunLines_ = 0, fieldRunValues_ = 0;
+    std::set<std::string> fieldRunNames_;
+    bool fieldRunRepeats_ = false;  // a field name said twice in the run, as speakers take turns
     std::vector<std::string> fieldRunLabels_;
-    // Whether line opens with a bracketed field and text after it; value tells whether that text is a value.
-    static bool BracketField(std::string_view line, bool& value);
+    // Whether line opens with a bracketed or colon field (name) and text after it; value tells whether that
+    // text is a value.
+    static bool BracketField(std::string_view line, bool& value, std::string& name);
     void RowParts(const std::string& x, const std::string& y);
     // The common words GivenSplit took for the surname of a full name (氷室 of 氷室将嗣) and their
     // name-layer Korean (히무로), which they read as in that full name only.

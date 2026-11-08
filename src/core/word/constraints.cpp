@@ -613,7 +613,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return false;
     }
     case ConstraintContext::NotCommonSense:
-        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false);
+        // An adnominal before it makes it the word too (大きな樹, 一本の樹; spec LEX-5175).
+        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false) &&
+               (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead) == 0 ||
+                dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead) > 0);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
         return false;
     case ConstraintContext::BeforeHiragana:

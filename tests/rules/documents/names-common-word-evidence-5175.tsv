@@ -26,3 +26,7 @@ names:status-window	【名前】アリス\n【力】16\n【ジョブ】無し\n\
 names:status-window	「朝日さん、おはよう」\n朝日「おはよう」\n朝日：今日は3時に集合ね。	has:아사히：오늘은 3시	keep	names
 names:real-name	「樹くん、おはよう」\n樹「うん」\n樹の実家に行った。\n樹の影響を受けた。\n樹が生意気なことを言う。	has:이츠키의 본가에 갔다.\n이츠키의 영향을 받았다.\n이츠키가	keep	names
 names:real-name	樹くんが木に登った。\n樹は枝に腰掛けた。\n「樹、危ないよ」\n大きな樹の根元に花が咲いていた。	has:이츠키는 가지에 앉았다.\n「이츠키, 위험해」\n큰 나무 밑동	fix	names
+names:status-window	名前：カイト\nジョブ：無し\n力：35\n\n名前：カイト\nジョブ：無し\n力：35\n\n名前：カイト\nジョブ：無し\n力：35\n\n名前：カイト\nジョブ：無し\n力：35\n\n名前：カイト\nジョブ：無し\n力：35\n\nジョブが変わった。\nその中でも特に力の伸びが異常で、	has:직업이 바뀌었다.\n그 중에서도 특히 힘의	fix	names
+names:status-window	【若葉】おはよう\n【健太】おう\n【若葉】何点だった？\n【健太】85\n【若葉】すごい\n若葉は笑った。	has:와카바는 웃었다.	keep	names
+names:real-name	「樹くん、おはよう」\n樹「うん」\n樹は大きく揺れた。\n樹は笑った。	has:나무는 크게 흔들렸다.\n이츠키는 웃었다.	fix	names
+names:real-name	「樹くん、おはよう」\n樹「うん」\n樹が囁くように揺れた。\n樹は笑った。	has:나무가 속삭이듯이 흔들렸다.\n이츠키는 웃었다.	fix	names

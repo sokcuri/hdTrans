@@ -181,6 +181,8 @@
 //= name.intro-after	Phrases of naming after a name (アヤメと名乗った, 村雨という名の, まるゆと申します).
 //= name.action-after	What follows 、 after a speaker's own name at the start of an utterance: a call to action (時雨、出撃するよ, 狭霧、参ります).
 //= name.introduction-copula	The copulas and よ that make a self-introduction of a name before the end of the sentence (睦月です。, 陽炎よ。, まるゆでち！).
+//= name.word-before	Ends of the text before a common word that the document names which make it the word: an adnominal in な, adjectives of size, age and shape, and a counter of trees with の (大きな樹, 古い樹, 一本の樹; not いい夕立, a good name; spec LEX-5175).
+//= name.word-before-not	Ends of the text in name.word-before that point at or feel for a person rather than describe a thing (こんな白木, そんな千里, 好きな樹): the name stays (spec LEX-5175).
 //= name.common-predicate	Predicates in the clause after a common word and が, は or も that keep its common sense though the document names the word: a measure or the light of the sun (敏捷が特筆して高い, 力が強い, 朝日が眩しい; spec LEX-5175).
 //= name.common-after	Starts of the text after a common word that keep its common sense though a cue or the document names the word: weather, the sky or the sea (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる), the light of the sun (朝日を浴びる) strength (力を込める, 力が抜ける), the parts and shade of a tree (樹の根本, 樹の下で休む), the ground (大地が揺れる) and a crest (葵の紋; spec LEX-5175).
 //= name.family-after	Words of a house or a family after a kanji name of two characters or more that make it a family name, for the line and the document (園崎本家 소노자키 본가, 古手家, 竜宮家, 古手夫妻; spec LEX-4826).
@@ -2275,6 +2277,29 @@ name.common-predicate	揺れ
 name.common-predicate	そびえ
 name.common-predicate	聳え
 name.common-predicate	生い茂
+name.word-before	な
+name.word-before	本の
+name.word-before	古い
+name.word-before	若い
+name.word-before	高い
+name.word-before	太い
+name.word-before	細い
+name.word-before	大きい
+name.word-before	小さい
+name.word-before	低い
+name.word-before	長い
+name.word-before	枯れた
+name.word-before-not	こんな
+name.word-before-not	そんな
+name.word-before-not	あんな
+name.word-before-not	どんな
+name.word-before-not	好きな
+name.word-before-not	大好きな
+name.word-before-not	大切な
+name.word-before-not	大事な
+name.word-before-not	素敵な
+name.word-before-not	可愛い
+name.word-before-not	かわいい
 name.family-after	本家
 name.family-after	分家
 name.family-after	宗家

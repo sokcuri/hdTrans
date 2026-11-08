@@ -706,10 +706,10 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         bool common = false, other = false;
         for (std::size_t at = cues.find(k); at != std::string_view::npos; at = cues.find(k, at + k.size())) {
             if (!KanjiBounded(cues, at, k.size())) continue;
-            // A name of the whole document gives way to a status field and to name.common-after only, not to
-            // a predicate of name.common-predicate (朝日は背が高い is the person).
+            // A name of the whole document gives way where the line keeps the common sense (names::CommonSenseAt:
+            // 朝日を浴びて, 樹は大きく揺れた; 朝日は背が高い is the person, its own subject being 背).
             const std::string_view after = cues.substr(at + k.size());
-            if (names::StatusFieldAt(after) || names::CommonAfterAt(after)) {
+            if (names::CommonSenseAt(after) || names::WordBeforeAt(cues.substr(0, at))) {
                 common = true;
             } else {
                 other = true;

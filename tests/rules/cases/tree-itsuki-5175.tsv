@@ -28,3 +28,8 @@ names:status-window	アヤメ：あと10分だよ。	has:아야메：	keep	names
 dict:jisjk:260867	樹を切った。	나무를 잘랐다.	fix	local
 dict:jisjk:260867	樹の実家に行った。	lacks:나무의 본가	keep	local
 dict:jisjk:260867	樹が生意気なことを言う。	lacks:나무가	keep	local
+dict:jisjk:260867	樹の声が聞こえる。	has:나무의 목소리	fix	local
+dict:jisjk:260867	風が吹くたび、樹がざわめく。	has:나무가 웅성거린다	fix	local
+dict:jisjk:260867	樹が茂っている。	has:나무가	fix	local
+dict:jisjk:260867	一本の樹が立っていた。	has:한 개의 나무가	fix	local
+dict:jisjk:260867	樹は静かに佇んでいた。	lacks:나무는	keep	local
