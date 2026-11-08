@@ -1,8 +1,9 @@
 #! layer=pack
 # 뉴스 말의 뜻을 주어와 앞뒤 낱말로 고르는 팩 행: 冷え込む 추워지다, 얼어붙다, 冷え込み 냉각, 首脳 수뇌부, 働き手 일꾼 (LEX-5600)
-id	lemma	pos	slot	cond	target	spec	prov	note	kind
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
 audit-cap-news:1	冷え込む	v5	sense	subj=-	추워지다	LEX-5600	audit	夜は冷え込む 밤에는 추워진다
-audit-cap-news:2	冷え込む	v5	sense	subj=今朝|けさ|朝|朝晩|夜|今夜|夜間|明日|あす|今日|きょう|週末|各地|全国|気温|空気|日中|明け方|朝方|未明|放射冷却	추워지다	LEX-5600	audit	今朝は各地で冷え込んだ 오늘 아침은 각지에서 추워졌다
+audit-cap-news:2	冷え込む	v5	sense	subj=今朝|けさ|朝|朝晩|夜|今夜|夜間|明日|あす|今日|きょう|週末|各地|全国|気温|日中|明け方|朝方|未明|放射冷却|外|屋外|山間部|内陸|内陸部|平野部|盆地|沿岸部|北日本|東日本|西日本|関東|東北|北海道|北陸|九州|都心|都内|市内|県内|東京|大阪|札幌|仙台|名古屋|福岡|全国各地	추워지다	LEX-5600	audit	今朝は各地で冷え込んだ 오늘 아침은 각지에서 추워졌다
+audit-cap-news:2c	冷え込む	v5	sense	to=@body|芯	차가워지다	LEX-5600	audit	体の芯まで冷え込んだ 몸속까지 차가워졌다		20
 audit-cap-news:3	冷え込む	v5	sense	subj=需要|景気|市場|消費|個人消費|関係|経済|投資|販売|売れ行き|購買意欲|客足|景況感|両国関係|日中関係|日韓関係|米中関係	얼어붙다	LEX-5600	audit	消費が冷え込む 소비가 얼어붙다
 audit-cap-news:4	冷え込み	n	sense	景気の冷え込み	경기 냉각	LEX-5600	audit	景気の冷え込み 경기 냉각	colloc
 audit-cap-news:5	冷え込み	n	sense	消費の冷え込み	소비 냉각	LEX-5600	audit	消費の冷え込み 소비 냉각	colloc

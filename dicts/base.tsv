@@ -176832,8 +176832,8 @@ ttt	ttt	K110			GN				jisjk:201744
 始球式	시구식	N110	VRw		GN				jisjk:186950		
 始生代	시생대	N110	VPlVPt		GN				jisjk:187450		
 始発	첫차	N110		Hd	GN				jisjk:27697		
-始発便	시발편	N110	VTp		GN				jisjk:188177		
-始発便	시발편	N110	VBl		GN				jisjk:188179		
+始発便	첫차	N110	VTp		GN				jisjk:188177		
+始発便	첫차	N110	VBl		GN				jisjk:188179		
 始発点	시발점	I110	VPl		GN				jisjk:76233		
 始発駅	시발역	N110	VTpVBl		GN				jisjk:188175		
 始皇帝	시황제	I110	VHn		GN				jisjk:76234		

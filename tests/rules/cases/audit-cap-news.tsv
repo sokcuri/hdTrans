@@ -69,6 +69,18 @@ dict:audit-cap-news	≫そのうえで新たなサイトが	has:그런 다음	fi
 dict:audit-cap-news	敬虔なクリスチャンが多い土地柄か	has:지역 특성	fix	lookup
 dict:audit-cap-news	ぜひ皆さん奮って ご応募いただきたい	has:적극적으로	fix	lookup
 dict:audit-cap-news	人工妊娠中絶の規制強化	has:인공 임신 중절	fix	lookup
+dict:audit-cap-news	体の芯まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	冷え込んだ空気	has:차가워진 공기	keep	lookup
+dict:audit-cap-news	場の空気が冷え込んだ	has:차가워졌다	keep	lookup
+dict:audit-cap-news	東京は冷え込みます	has:추워집니다	fix	lookup
+dict:audit-cap-news	外は冷え込んでいる	has:추워지고	fix	lookup
+dict:audit-cap-news	山間部では冷え込むでしょう	has:추워지겠지요	fix	lookup
+dict:audit-cap-news	日中韓の首脳	has:한중일	fix	lookup
+dict:audit-cap-news	始発便で羽田空港へ	has:첫 항공편으로	fix	lookup
+dict:audit-cap-news	始発便に乗り遅れた	has:첫차를	fix	lookup
+dict:audit-cap-news	始発電車に乗る	has:첫 전철을	fix	lookup
+dict:audit-cap-news	始発バスで帰った	has:첫 버스로	fix	lookup
+dict:audit-cap-news	始発駅	has:시발역	keep	lookup
 dict:audit-cap-news	首脳会談が行われた	has:정상회담	keep	lookup
 dict:audit-cap-news	被災者の支援	has:이재민	keep	lookup
 dict:audit-cap-news	全米オープンで優勝	has:전미 오픈	keep	lookup
