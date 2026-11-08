@@ -1,0 +1,23 @@
+# 규칙: LEX-5175
+rule	input	expected	kind	layer
+names:status-window	名前：カイト\nレベル：12\n力：35\n敏捷：52\nその中でも特に力の伸びが異常で、\n　見てわかる通り、敏捷が特筆して高い。	has:힘：35\n민첩：52\n그 중에서도 특히 힘의 성장	fix	names
+names:status-window	時雨：「行くよ」\n時雨は笑った。	has:시구레：	keep	names
+names:ordinary-ruby	　俺は力《ちから》を手に入れた。\n【力】と【敏捷】が上がった。\nその中でも特に力の伸びが異常で、\n一思いに力を加える。	has:【힘】과 【민첩】이 올랐다.\n그 중에서도 특히 힘의 성장이 이상해,\n단숨에 힘을 가한다.	fix	names
+names:ordinary-ruby	敏捷《びんしょう》を得た。\n　見てわかる通り、敏捷が特筆して高い。	has:민첩이 특필해	fix	names
+names:single-honorific	朝日くんが来た。\n　……朝日を浴びて、ほっとする。	has:아사히 군이 왔다.\n ……아침해를	fix	names
+names:single-honorific	「朝日さん、おはよう」\n朝日は笑った。\n　……朝日を浴びて、ほっとする。\n窓から朝日が差し込んでいる。	has:「아사히 씨, 좋은 아침」\n아사히는 웃었다.\n ……아침해를 쬐어서, 안심한다.\n창으로부터 아침해가	fix	names
+names:single-honorific	敏捷さん\n　見てわかる通り、敏捷が特筆して高い。	has:민첩이 특필해	fix	names
+names:single-honorific	千鳥（ちどり）さんの…\n千鳥さん、こっちです。	치도리 씨의…\n치도리 씨, 여기입니다.	keep	names
+names:real-name	「朝日さん、おはよう」\n朝日「おはよう、健太くん」\n朝日は笑った。\n朝日が振り返った。\n「朝日、待って！」\n朝日と健太は並んで歩いた。\n　……朝日を浴びて、ほっとする。	has:아사히는 웃었다.\n아사히가 돌아보았다.\n「아사히, 기다려!」\n아사히와 켄타는	fix	names
+names:real-name	「朝日さん、おはよう」\n朝日「おはよう、健太くん」\n朝日は笑った。\n　……朝日を浴びて、ほっとする。	has:아침해를 쬐어서	fix	names
+names:real-name	「樹くん、こっち」\n樹「うん」\n樹は頷いた。\n樹が振り返った。\n樹の手を握った。\n大きな樹の下で休んだ。	has:이츠키는 끄덕였다.\n이츠키가 돌아보았다.\n이츠키의 손을 잡았다.\n큰 나무 아래에서 쉬었다.	fix	names
+names:real-name	「力くん、おはよう」\n力「おう」\n力は笑った。\n一思いに力を加える。\n力が抜けた。	has:단숨에 힘을 가한다.\n힘이 빠졌다.	fix	names
+names:real-name	「力くん、おはよう」\n力「おう」\n力は笑った。	lacks:힘은 웃었다	fix	names
+names:real-name	桃花ちゃんと遊んだ。\n桃花	has:모모카	keep	names
+names:real-name	「朝日さん、おはよう」\n朝日「おはよう」\n朝日は背が高い。\n朝日の実力\n朝日が強がる。\n　……朝日を浴びて、ほっとする。	has:아사히는 키가 크다.\n아사히의 실력\n아사히가 강한척 한다.\n ……아침해를	keep	names
+names:status-window	力：Ｂ　敏捷：Ａ\n力：35　敏捷：52	힘：B 민첩：A\n힘：35 민첩：52	fix	names
+names:single-honorific	「朝日さん、おはよう」\n朝日新聞を読んだ。\n毎朝日を浴びる。	has:「아사히 씨, 좋은 아침」	keep	names
+names:status-window	【名前】　三橋暁一\n【ジョブ】　無し\n【力】　10\n【敏捷】　12\n\n【名前】　三橋暁一\n【ジョブ】　無し\n【力】　11\n【敏捷】　13\n\n【名前】　三橋暁一\n【ジョブ】　無し\n【力】　12\n【敏捷】　14\n\n　あと、なんか力のステータスが特別伸びてるのが気になる。\n　見てわかる通り、敏捷が特筆して高い。	has:【직업】 없음\n【힘】 12\n【민첩】 14\n\n 그리고, 왠지 힘의 스테이터스	fix	names
+names:status-window	「朝日さん、おはよう」\n朝日：……\n朝日：OK\n朝日：！？	has:아사히：……\n아사히：OK\n아사히：!?	keep	names
+names:single-honorific	「ああ、また光ちゃんが頑張ってる……」と、光子先生を眺めていた。	has:미츠코 선생님	keep	names
+names:single-honorific	「吹雪ちゃん、おはよう」\n吹雪は頷いた。	has:후부키는 끄덕였다	fix	names

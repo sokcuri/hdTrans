@@ -13,6 +13,7 @@
 #include "core/names/chars.h"
 #include "core/names/labels.h"
 #include "core/names/registry.h"
+#include "core/names/name_cues.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -195,7 +196,9 @@ bool BracketName(std::string_view line, std::string& label) {
             q += r.size;
             n++;
         }
-        if (n >= 1 && n <= 16 && line.substr(q).starts_with("】")) {
+        // A field of a status window, a value after the bracket (【力】　16, 【MP】 7), names no speaker
+        // (spec LEX-5175).
+        if (n >= 1 && n <= 16 && line.substr(q).starts_with("】") && !StatusValueAt(line.substr(q + std::string_view("】").size()))) {
             label = std::string(line.substr(start, q - start));
             return true;
         }
@@ -216,6 +219,20 @@ bool BracketName(std::string_view line, std::string& label) {
     }
     return false;
 }
+
+// Whether line opens with a bracketed label and has text after it on the same line that opens no quote
+// (【ジョブ】　無し, 【力】　16): a field of a status window when the next or last line is one too.
+bool BracketField(std::string_view line) {
+    std::string label;
+    if (!BracketName(line, label)) return false;
+    const std::size_t close = line.find("】");
+    if (close == std::string_view::npos) return false;
+    std::string_view rest = line.substr(close + std::string_view("】").size());
+    while (rest.starts_with(" ") || rest.starts_with("　") || rest.starts_with("\t")) rest.remove_prefix(rest.starts_with("　") ? std::string_view("　").size() : 1);
+    while (!rest.empty() && (rest.back() == '\r' || rest.back() == ' ')) rest.remove_suffix(1);
+    return !rest.empty() && !rest.starts_with("「") && !rest.starts_with("『");
+}
+
 
 // ^\s*([^\s「」『』【】\[\]（）：:。、！？!?…]{1,16})\s*(?:[「『]|[:：])
 bool QuoteName(std::string_view line, std::string& label) {
@@ -555,6 +572,8 @@ std::vector<std::string> SpeakerCueLabels(std::string_view text) {
 }  // namespace internal
 
 std::vector<std::string> SpeakerCues(std::string_view text) { return internal::SpeakerCueLabels(text); }
+
+bool Registry::BracketField(std::string_view line) { return ::hdTrans::names::BracketField(line); }
 
 std::string Registry::Label(std::string_view line, bool& script) {
     script = false;

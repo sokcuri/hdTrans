@@ -34,6 +34,13 @@ namespace hdTrans::pipeline {
 
 namespace {
 
+// Whether the key at byte at of line stands as a word of its own: no kanji right before or after it (not
+// 協力, 朝日新聞, 毎朝日).
+bool KanjiBounded(std::string_view line, std::size_t at, std::size_t n) {
+    if (at > 0 && names::internal::IsKanji(names::internal::RuneBefore(line, at).cp)) return false;
+    return at + n >= line.size() || !names::internal::IsKanji(text::DecodeRune(line.substr(at + n)).cp);
+}
+
 // Whether key occurs in text with a person title after it or 艦 before it.
 bool Titled(std::string_view text, std::string_view key) {
     for (std::size_t i = 0;;) {
@@ -265,7 +272,8 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     std::vector<names::HistoricalLine> historicalLines;
     historicalLines.reserve(lines.size());
     dict::KeySet persons;
-    std::map<std::string, std::size_t> recurring;
+    std::map<std::string, std::size_t> recurring, evidence;
+    std::set<std::string> carried;  // the keys a carrying cue names for the document
     for (const std::string& line : lines) {
         historicalLines.push_back(names::ReadHistoricalLine(snap, line));
         for (const std::string& key : internal::PersonPlaces(snap, line, nullptr, nullptr)) persons.insert(key);
@@ -274,14 +282,40 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
         for (const names::NameCue& c : CuesOf(*doc, line)) {
-            if (c.strong || c.person) doc->cued.insert(c.key);
+            if (c.strong || c.person) carried.insert(c.key);
             if (c.recurring || c.acted) recurring[c.key]++;
+            if (c.evidence) evidence[c.key]++;
         }
     }
     std::vector<const names::HistoricalLine*> historical;
     for (const names::HistoricalLine& h : historicalLines) historical.push_back(&h);
     for (const auto& [key, count] : recurring) {
-        if (count >= 2) doc->cued.insert(key);
+        if (count >= 2) carried.insert(key);
+    }
+    // A common word of the dictionary (朝日 아침 해, 力 힘) that the document also writes in its common sense
+    // (name.common-after: 朝日を浴びる, 力を込める) is a name of the whole document only on the cues of two
+    // lines; with less, it is the name only where it stands where a person stands (names::PersonSlotAt;
+    // spec LEX-5175): 朝日くん in one line makes no name of 朝日を浴びて in another. A common word with a
+    // cue in one line and none of the carrying cues is the name in its person slots.
+    const auto commonUse = [&](const std::string& key) {
+        for (const std::string& raw : lines) {
+            const std::string line = names::StripRuby(raw);
+            for (std::size_t at = line.find(key); at != std::string::npos; at = line.find(key, at + key.size())) {
+                if (KanjiBounded(line, at, key.size()) && names::CommonSenseAt(std::string_view(line).substr(at + key.size()))) return true;
+            }
+        }
+        return false;
+    };
+    for (const std::string& key : carried) {
+        const auto e = evidence.find(key);
+        if (names::CommonWord(snap, key) && (e == evidence.end() || e->second < 2) && commonUse(key)) {
+            doc->slotted.insert(key);
+        } else {
+            doc->cued.insert(key);
+        }
+    }
+    for (const auto& [key, count] : evidence) {
+        if (!carried.contains(key) && names::CommonWord(snap, key)) doc->slotted.insert(key);
     }
     // The parts of a full name the document writes (古手梨花) name the person alone too (梨花は; spec
     // LEX-4829).
@@ -341,7 +375,27 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
             doc->ownPacks->rows[row].atoms.clear();
         }
     }
-    for (const std::string& t : r.Names()) doc->accepted.insert(t);
+    for (const std::string& t : r.Names()) {
+        doc->accepted.insert(t);
+        doc->slotted.erase(t);
+        const auto e = evidence.find(t);
+        // A part of a full name the document writes (神崎 真, 大見 健) or a speaker label names the person
+        // there, as a list of names does.
+        if (!names::CommonWord(snap, t) || (names != nullptr && names->keys.contains(t)) || r.FullNamePart(t)) continue;
+        // The registry's acceptance is one piece of evidence and the cues of a line another.
+        if (e == evidence.end() && commonUse(t)) doc->slotted.insert(t);
+    }
+    for (const std::string& t : doc->cued) doc->slotted.erase(t);
+    for (const std::string& t : doc->cued) {
+        if (names::CommonWord(snap, t)) doc->common.insert(t);
+    }
+    for (const std::string& t : doc->accepted) {
+        if (names::CommonWord(snap, t)) doc->common.insert(t);
+    }
+    if (!doc->slotted.empty()) {
+        doc->key += std::string("\0slotted", 8);
+        for (const std::string& k : std::set<std::string>(doc->slotted.begin(), doc->slotted.end())) doc->key += "\t" + k;
+    }
     doc->named = doc->accepted;
     for (const std::string& t : r.NamedSurfaces()) doc->named.insert(t);
     for (const auto& [t, n] : r.ProseKatakana()) doc->prose.emplace(t, n);
@@ -616,6 +670,52 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
     for (const names::NameCue& c : CuesOf(doc, cues)) facts.cued.push_back(c.key);
+    // A common word the document names on too little evidence is the name where it stands where a person
+    // stands in the line, and the word elsewhere (spec LEX-5175).
+    for (const std::string& k : doc.slotted) {
+        bool any = false, person = false;
+        for (std::size_t at = cues.find(k); at != std::string_view::npos; at = cues.find(k, at + k.size())) {
+            if (!KanjiBounded(cues, at, k.size())) continue;
+            any = true;
+            person = person || names::PersonSlotAt(*doc.snap, k, cues.substr(0, at), cues.substr(at + k.size()));
+        }
+        // A reading written over it in the line names it there (佑助(ゆうすけ), 石垣（いしがき）; not 魔力（まりょく）).
+        for (const std::string_view open : {"(", "（", "《"}) {
+            const std::string marked = k + std::string(open);
+            for (std::size_t at = line.find(marked); at != std::string_view::npos && !person; at = line.find(marked, at + 1)) {
+                person = at == 0 || !names::internal::IsKanji(names::internal::RuneBefore(line, at).cp);
+            }
+        }
+        if (!any) continue;
+        if (person) {
+            facts.cued.push_back(k);
+        } else {
+            facts.skip.push_back(k);
+        }
+    }
+    // A common word the document names stays the word in a line that writes it only as the field of a status
+    // window or before name.common-after (力：35, 朝日を浴びて); a line that also names it keeps the name.
+    for (const std::string& k : doc.common) {
+        bool common = false, other = false;
+        for (std::size_t at = cues.find(k); at != std::string_view::npos; at = cues.find(k, at + k.size())) {
+            if (!KanjiBounded(cues, at, k.size())) continue;
+            // A name of the whole document gives way to a status field and to name.common-after only, not to
+            // a predicate of name.common-predicate (朝日は背が高い is the person).
+            const std::string_view after = cues.substr(at + k.size());
+            if (names::StatusFieldAt(after) || names::CommonAfterAt(after)) {
+                common = true;
+            } else {
+                other = true;
+            }
+        }
+        if (!common || other) continue;
+        facts.skip.push_back(k);
+        facts.uncued.push_back(k);
+    }
+    std::sort(facts.skip.begin(), facts.skip.end());
+    facts.skip.erase(std::unique(facts.skip.begin(), facts.skip.end()), facts.skip.end());
+    // Nor is a skipped word a person of its place spelling there (朝日 아사히 as a place).
+    std::erase_if(facts.persons, [&](const std::string& t) { return std::binary_search(facts.skip.begin(), facts.skip.end(), t); });
     std::sort(facts.cued.begin(), facts.cued.end());
     facts.cued.erase(std::unique(facts.cued.begin(), facts.cued.end()), facts.cued.end());
     return facts;
@@ -653,6 +753,7 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
         const std::vector<std::size_t> keys = doc.snap->PersonKeysAt(t);
         if (!keys.empty() && keys.back() == t.size()) out.cued.insert(t);
     }
+    for (const std::string& t : facts.uncued) out.cued.erase(t);
     out.prose = facts.prose;
     return out;
 }

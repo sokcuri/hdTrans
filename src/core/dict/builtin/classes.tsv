@@ -181,9 +181,11 @@
 //= name.intro-after	Phrases of naming after a name (アヤメと名乗った, 村雨という名の, まるゆと申します).
 //= name.action-after	What follows 、 after a speaker's own name at the start of an utterance: a call to action (時雨、出撃するよ, 狭霧、参ります).
 //= name.introduction-copula	The copulas and よ that make a self-introduction of a name before the end of the sentence (睦月です。, 陽炎よ。, まるゆでち！).
-//= name.common-after	Starts of the text after a word whose common sense is weather, the sky or the sea, that keep that sense though a cue names the word (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる).
+//= name.common-predicate	Predicates in the clause after a common word and が, は or も that keep its common sense though the document names the word: a measure or the light of the sun (敏捷が特筆して高い, 力が強い, 朝日が眩しい; spec LEX-5175).
+//= name.common-after	Starts of the text after a common word that keep its common sense though a cue or the document names the word: weather, the sky or the sea (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる), the light of the sun (朝日を浴びる) strength (力を込める, 力が抜ける) and the parts and shade of a tree (樹の根本, 樹の下で休む; spec LEX-5175).
 //= name.family-after	Words of a house or a family after a kanji name of two characters or more that make it a family name, for the line and the document (園崎本家 소노자키 본가, 古手家, 竜宮家, 古手夫妻; spec LEX-4826).
 //= name.rank-after	Ranks of the police and the army and academic titles after a kanji name of two characters or more that make it a person's surname, for the line and the document (滝本警部 타키모토 경감, 高野警部; spec LEX-4831).
+//= name.person-belonging	What a person has or does, after a common word and の that the document names: the word is the person there (小太刀の家 코다치의 집, 樹の声; spec LEX-5175).
 //= name.person-part	Parts of the body and the face after Xの that make X a person, not the common word it also spells, when a particle or a mark follows them (皐月の顔 사츠키의 얼굴, のぞみの手を; not 剣の手ほどき; spec LEX-4820).
 //= name.body-part	Parts of the body that, before を in the clause after Xが, Xは or Xも, or before が after Xは or Xも, make X a person doing something with its own body (玉藻が身をよじる 타마모가 몸을 비튼다, 小太刀が眉を上げた; spec LEX-4820).
 //= name.person-act	Starts of verbs and phrases of what only a person does, matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end: they make X a person (玉藻がはにかむ 타마모가 수줍어한다, 小太刀が黙然と腕を組んだ; spec LEX-4820).
@@ -2218,6 +2220,50 @@ name.common-after	の音
 name.common-after	の中
 name.common-after	に打たれ
 name.common-after	に濡れ
+name.common-after	を浴び
+name.common-after	が昇
+name.common-after	が差し込
+name.common-after	を込め
+name.common-after	が込め
+name.common-after	を加え
+name.common-after	が抜け
+name.common-after	が湧
+name.common-after	がみなぎ
+name.common-after	の伸び
+name.common-after	の枝
+name.common-after	の幹
+name.common-after	の葉
+name.common-after	の陰
+name.common-after	巻き起こ
+name.common-after	を巻き起こ
+name.common-after	を、巻き起こ
+name.common-after	が巻き起こ
+name.common-after	が眩し
+name.common-after	は眩し
+name.common-after	に照らさ
+name.common-after	を振り絞
+name.common-after	の限り
+name.common-after	の根本
+name.common-after	の根元
+name.common-after	の木陰
+name.common-after	の下で休
+name.common-after	の下で眠
+name.common-after	の下に立
+name.common-after	が入らな
+name.common-predicate	高い
+name.common-predicate	高か
+name.common-predicate	低い
+name.common-predicate	低か
+name.common-predicate	強い
+name.common-predicate	強か
+name.common-predicate	弱い
+name.common-predicate	弱か
+name.common-predicate	眩し
+name.common-predicate	まぶし
+name.common-predicate	上がっ
+name.common-predicate	下がっ
+name.common-predicate	伸び
+name.common-predicate	足りな
 name.family-after	本家
 name.family-after	分家
 name.family-after	宗家
@@ -2285,6 +2331,17 @@ name.person-part	舌
 name.person-part	頭
 name.person-part	顎
 name.person-part	喉
+name.person-belonging	家
+name.person-belonging	部屋
+name.person-belonging	声
+name.person-belonging	姿
+name.person-belonging	言葉
+name.person-belonging	話
+name.person-belonging	番
+name.person-belonging	方
+name.person-belonging	名前
+name.person-belonging	気持ち
+name.person-belonging	様子
 name.body-part	顔
 name.body-part	頬
 name.body-part	唇
@@ -2393,6 +2450,8 @@ name.person-act	頭を下げ
 name.person-act	返事
 name.person-act	お世話
 name.person-act	世話を
+name.person-act	呆れ
+name.person-act	あきれ
 name.person-say	言っ
 name.person-say	言う
 name.person-say	言い出
@@ -2508,6 +2567,18 @@ name.personified-word	朝焼け
 name.personified-word	満月
 name.personified-word	黄昏
 name.personified-word	夕暮れ
+name.personified-word	花
+name.personified-word	木
+name.personified-word	草
+name.personified-word	森
+name.personified-word	風
+name.personified-word	雨
+name.personified-word	雪
+name.personified-word	月
+name.personified-word	星
+name.personified-word	空
+name.personified-word	海
+name.personified-word	光
 name.call-word	おい
 name.call-word	おーい
 name.call-word	ねえ

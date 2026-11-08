@@ -5,7 +5,7 @@ rewrite:quote-to-answer	それが風習だとアワイは最後に付け加え�
 rewrite:quote-to-answer	ティアナが、そんなことはないと首を振る。	티아나가, 그렇지 않다고 고개를 젓는다.	fix	rewrites
 rewrite:quote-to-answer	よく分からないと首を傾げる。	잘 모른다고 고개를 갸웃한다.	fix	rewrites
 rewrite:quote-to-answer	危険を察知したなら、退散して構わないと付け加えた。	위험을 감지했다면, 해산해 상관없다고 덧붙였다.	fix	rewrites
-rewrite:quote-to-answer	司は悪くないと首を振って歩く。	사는 나쁘지 않다고 고개를 저어 걷는다.	fix	rewrites
+rewrite:quote-to-answer	司は悪くないと首を振って歩く。	has:나쁘지 않다고 고개를 저어 걷는다.	fix	rewrites
 rewrite:quote-to-answer	キラは、信じられないと首を横に振る。	키라는, 믿을 수 없다고 고개를 가로젓는다.	fix	rewrites
 rewrite:quote-to-answer	だが、俺を含めて全員が知り合いではないと首を振った。	하지만, 나를 포함해 전원이 아는 사람이 아니라고 고개를 저었다.	fix	rewrites
 rewrite:quote-to-answer	幸哉は申し訳ないと頭を下げながらも、	행재는 미안하다고 고개를 숙이면서도,	fix	rewrites

@@ -238,6 +238,17 @@ HD_TEST(names_caption_reading_cue_passage) {
     HD_CHECK(addedLookup.cued.contains("高峰"));
     HD_CHECK(!addedLookup.cued.contains("恭"));
     HD_CHECK(lexicalDoc->cued.contains("高峰"));
+    // A common word (高峰 고봉) that one speaker label names, in a document that also writes it in its
+    // common sense, is the name only where it stands where a person stands (spec LEX-5175).
+    const std::vector<std::string> commonLines = {"（高峰）はい", "高峰の下で休んだ。"};
+    const auto commonDoc = pipeline::BuildDocument(*snap, commonLines);
+    HD_REQUIRE(commonDoc != nullptr);
+    HD_CHECK(!commonDoc->cued.contains("高峰"));
+    HD_CHECK(commonDoc->slotted.contains("高峰"));
+    const auto labelled = pipeline::LookupOf(*commonDoc, pipeline::ReadLine(*commonDoc, "（高峰）はい"));
+    HD_CHECK(labelled.cued.contains("高峰"));
+    const auto peak = pipeline::LookupOf(*commonDoc, pipeline::ReadLine(*commonDoc, "高峰の下で休んだ。"));
+    HD_CHECK(!peak.cued.contains("高峰"));
     HD_CHECK(!lexicalDoc->cued.contains("恭"));
 }
 

@@ -94,6 +94,9 @@ public:
     // the document means the person where it writes either alone. A part of one kanji counts only when it
     // is no common word.
     std::vector<std::string> FullNameParts();
+    // Whether the accepted surface t is a part of a full name or a speaker label (Name::surname, given,
+    // label), evidence that names the person wherever the document writes it.
+    bool FullNamePart(std::string_view t);
     // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
     std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
@@ -140,6 +143,11 @@ private:
     std::string Label(std::string_view line, bool& script);
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
+    // Whether reading is the ordinary reading of the common kanji word base: a kana spelling of it that the
+    // kana layer lists (ちから 力, びんしょう 敏捷), or a kana word with the Korean of one of its common
+    // senses. Such a ruby is no evidence of a name, and none against one (spec LEX-5175); in a speaker
+    // label it still names. An on reading alone is not enough: names read so too (桃花 トウカ, 黒羽 こくう).
+    bool OrdinaryReading(std::string_view base, std::string_view reading);
     std::set<std::string_view> Words(std::string_view s);
     unsigned WordClasses(std::string_view s);
     bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
@@ -241,6 +249,11 @@ private:
     // (小鳥遊　聖), and their Korean in the name layer's row of the name written whole (小鳥遊聖 타카나시
     // 세이): the parts read so wherever the document writes them.
     std::map<std::string, std::string> rowParts_;
+    // Whether the last line added opened with a bracketed field and text after it (BracketField), and the
+    // label it counted, taken back when the next line shows a status window.
+    bool lastField_ = false;
+    static bool BracketField(std::string_view line);
+    std::string lastFieldLabel_;
     void RowParts(const std::string& x, const std::string& y);
     // The common words GivenSplit took for the surname of a full name (氷室 of 氷室将嗣) and their
     // name-layer Korean (히무로), which they read as in that full name only.
