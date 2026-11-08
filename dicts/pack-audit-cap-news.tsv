@@ -1,22 +1,31 @@
 #! layer=pack
 # 뉴스 말의 뜻을 주어와 앞뒤 낱말로 고르는 팩 행: 冷え込む 추워지다, 얼어붙다, 冷え込み 냉각, 首脳 수뇌부, 働き手 일꾼 (LEX-5600)
 id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
-audit-cap-news:1	冷え込む	v5	sense	subj=-	추워지다	LEX-5600	audit	夜は冷え込む 밤에는 추워진다
-audit-cap-news:2	冷え込む	v5	sense	subj=今朝|けさ|朝|朝晩|夜|今夜|夜間|明日|あす|今日|きょう|週末|各地|全国|気温|日中|明け方|朝方|未明|放射冷却|外|屋外|山間部|内陸|内陸部|平野部|盆地|沿岸部|北日本|東日本|西日本|関東|東北|北海道|北陸|九州|都心|都内|市内|県内|東京|大阪|札幌|仙台|名古屋|福岡|全国各地	추워지다	LEX-5600	audit	今朝は各地で冷え込んだ 오늘 아침은 각지에서 추워졌다
-audit-cap-news:2c	冷え込む	v5	sense	to=@body|芯	차가워지다	LEX-5600	audit	体の芯まで冷え込んだ 몸속까지 차가워졌다		20
-audit-cap-news:3	冷え込む	v5	sense	subj=需要|景気|市場|消費|個人消費|関係|経済|投資|販売|売れ行き|購買意欲|客足|景況感|両国関係|日中関係|日韓関係|米中関係	얼어붙다	LEX-5600	audit	消費が冷え込む 소비가 얼어붙다
-audit-cap-news:4	冷え込み	n	sense	景気の冷え込み	경기 냉각	LEX-5600	audit	景気の冷え込み 경기 냉각	colloc
-audit-cap-news:5	冷え込み	n	sense	消費の冷え込み	소비 냉각	LEX-5600	audit	消費の冷え込み 소비 냉각	colloc
-audit-cap-news:6	冷え込み	n	sense	個人消費の冷え込み	개인 소비 냉각	LEX-5600	audit	個人消費の冷え込み 개인 소비 냉각	colloc
-audit-cap-news:7	冷え込み	n	sense	市場の冷え込み	시장 냉각	LEX-5600	audit	市場の冷え込み 시장 냉각	colloc
-audit-cap-news:8	冷え込み	n	sense	需要の冷え込み	수요 냉각	LEX-5600	audit	需要の冷え込み 수요 냉각	colloc
-audit-cap-news:9	冷え込み	n	sense	関係の冷え込み	관계 냉각	LEX-5600	audit	関係の冷え込み 관계 냉각	colloc
-audit-cap-news:10	冷え込み	n	sense	経済の冷え込み	경제 냉각	LEX-5600	audit	経済の冷え込み 경제 냉각	colloc
-audit-cap-news:11	冷え込み	n	sense	投資の冷え込み	투자 냉각	LEX-5600	audit	投資の冷え込み 투자 냉각	colloc
-audit-cap-news:12	首脳	n	sense	{X:@organization}の首脳	{X}의 수뇌부	LEX-5600	audit	{X:@organization}の首脳 {X}의 수뇌부	colloc
-audit-cap-news:13	首脳	n	sense	党の首脳	당 수뇌부	LEX-5600	audit	党の首脳 당 수뇌부	colloc
-audit-cap-news:14	首脳	n	sense	軍の首脳	군 수뇌부	LEX-5600	audit	軍の首脳 군 수뇌부	colloc
-audit-cap-news:15	首脳	n	sense	政府の首脳	정부 수뇌부	LEX-5600	audit	政府の首脳 정부 수뇌부	colloc
-audit-cap-news:16	働き手	n	sense	一家の働き手	한 집안의 일꾼	LEX-5600	audit	一家の働き手 한 집안의 일꾼	colloc
-audit-cap-news:17	働き手	n	sense	家族の働き手	가족의 일꾼	LEX-5600	audit	家族の働き手 가족의 일꾼	colloc
-audit-cap-news:18	働き手	n	sense	家の働き手	집안의 일꾼	LEX-5600	audit	家の働き手 집안의 일꾼	colloc
+audit-cap-news:1	冷え込む	v5	sense	subj=-	추워지다	LEX-5600	audit	夜は冷え込む 밤에는 추워진다		
+audit-cap-news:2	冷え込む	v5	sense	subj=今朝|けさ|朝|朝晩|夜|今夜|夜間|明日|あす|今日|きょう|週末|各地|全国|気温|日中|明け方|朝方|未明|放射冷却|外|屋外|山間部|内陸|内陸部|平野部|盆地|沿岸部|北日本|東日本|西日本|関東|東北|北海道|北陸|九州|都心|都内|市内|県内|東京|大阪|札幌|仙台|名古屋|福岡|全国各地	추워지다	LEX-5600	audit	今朝は各地で冷え込んだ 오늘 아침은 각지에서 추워졌다		
+audit-cap-news:2d	冷え込む	v5	sense	loc=今朝|けさ|朝|朝晩|夜|今夜|夜間|明日|あす|今日|きょう|週末|各地|全国|気温|日中|明け方|朝方|未明|放射冷却|外|屋外|山間部|内陸|内陸部|平野部|盆地|沿岸部|北日本|東日本|西日本|関東|東北|北海道|北陸|九州|都心|都内|市内|県内|東京|大阪|札幌|仙台|名古屋|福岡|全国各地	추워지다	LEX-5600	audit	山間部では冷え込む 산간부에서는 추워진다		
+audit-cap-news:2c	冷え込む	v5	sense	to=@body|芯|先|指先|つま先|足先|爪先|奥	차가워지다	LEX-5600	audit	体の芯まで, 足の先まで冷え込んだ 차가워졌다		20
+audit-cap-news:3	冷え込む	v5	sense	subj=需要|景気|市場|消費|個人消費|関係|経済|投資|販売|売れ行き|購買意欲|客足|景況感|両国関係|日中関係|日韓関係|米中関係	얼어붙다	LEX-5600	audit	消費が冷え込む 소비가 얼어붙다		30
+audit-cap-news:4	冷え込み	n	sense	景気の冷え込み	경기 냉각	LEX-5600	audit	景気の冷え込み 경기 냉각	colloc	
+audit-cap-news:5	冷え込み	n	sense	消費の冷え込み	소비 냉각	LEX-5600	audit	消費の冷え込み 소비 냉각	colloc	
+audit-cap-news:6	冷え込み	n	sense	個人消費の冷え込み	개인 소비 냉각	LEX-5600	audit	個人消費の冷え込み 개인 소비 냉각	colloc	
+audit-cap-news:7	冷え込み	n	sense	市場の冷え込み	시장 냉각	LEX-5600	audit	市場の冷え込み 시장 냉각	colloc	
+audit-cap-news:8	冷え込み	n	sense	需要の冷え込み	수요 냉각	LEX-5600	audit	需要の冷え込み 수요 냉각	colloc	
+audit-cap-news:9	冷え込み	n	sense	関係の冷え込み	관계 냉각	LEX-5600	audit	関係の冷え込み 관계 냉각	colloc	
+audit-cap-news:10	冷え込み	n	sense	経済の冷え込み	경제 냉각	LEX-5600	audit	経済の冷え込み 경제 냉각	colloc	
+audit-cap-news:11	冷え込み	n	sense	投資の冷え込み	투자 냉각	LEX-5600	audit	投資の冷え込み 투자 냉각	colloc	
+audit-cap-news:12	首脳	n	sense	{X:@organization}の首脳	{X}의 수뇌부	LEX-5600	audit	{X:@organization}の首脳 {X}의 수뇌부	colloc	
+audit-cap-news:13	首脳	n	sense	党の首脳	당 수뇌부	LEX-5600	audit	党の首脳 당 수뇌부	colloc	
+audit-cap-news:14	首脳	n	sense	軍の首脳	군 수뇌부	LEX-5600	audit	軍の首脳 군 수뇌부	colloc	
+audit-cap-news:15	首脳	n	sense	政府の首脳	정부 수뇌부	LEX-5600	audit	政府の首脳 정부 수뇌부	colloc	
+audit-cap-news:16	働き手	n	sense	一家の働き手	한 집안의 일꾼	LEX-5600	audit	一家の働き手 한 집안의 일꾼	colloc	
+audit-cap-news:17	働き手	n	sense	家族の働き手	가족의 일꾼	LEX-5600	audit	家族の働き手 가족의 일꾼	colloc	
+audit-cap-news:18	働き手	n	sense	家の働き手	집안의 일꾼	LEX-5600	audit	家の働き手 집안의 일꾼	colloc	
+audit-cap-news:40	新幹線	n	sense	始発の新幹線	첫 신칸센	LEX-5600	audit	始発の新幹線 첫 신칸센	colloc	
+audit-cap-news:41	電車	n	sense	始発の電車	첫 전철	LEX-5600	audit	始発の電車 첫 전철	colloc	
+audit-cap-news:42	バス	n	sense	始発のバス	첫 버스	LEX-5600	audit	始発のバス 첫 버스	colloc	
+audit-cap-news:43	列車	n	sense	始発の列車	첫 열차	LEX-5600	audit	始発の列車 첫 열차	colloc	
+audit-cap-news:44	飛行機	n	sense	始発の飛行機	첫 비행기	LEX-5600	audit	始発の飛行機 첫 비행기	colloc	
+audit-cap-news:45	地下鉄	n	sense	始発の地下鉄	첫 지하철	LEX-5600	audit	始発の地下鉄 첫 지하철	colloc	
+audit-cap-news:46	始発	n	sense	駅が始発	역이 출발역	LEX-5600	audit	この駅が始発です 이 역이 출발역입니다	colloc	
+audit-cap-news:47	始発	n	sense	駅は始発	역은 출발역	LEX-5600	audit	この駅は始発です 이 역은 출발역입니다	colloc	

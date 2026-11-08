@@ -81,6 +81,12 @@ dict:audit-cap-news	始発便に乗り遅れた	has:첫차를	fix	lookup
 dict:audit-cap-news	始発電車に乗る	has:첫 전철을	fix	lookup
 dict:audit-cap-news	始発バスで帰った	has:첫 버스로	fix	lookup
 dict:audit-cap-news	始発駅	has:시발역	keep	lookup
+dict:audit-cap-news	東京は景気が冷え込んでいる	has:얼어붙고	fix	lookup
+dict:audit-cap-news	東京は需要が冷え込んだ	has:얼어붙었다	fix	lookup
+dict:audit-cap-news	足の先まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	この駅が始発です	has:출발역입니다	fix	lookup
+dict:audit-cap-news	始発の新幹線に乗った	has:첫 신칸센을	fix	lookup
+dict:audit-cap-news	始発の電車で	has:첫 전철로	fix	lookup
 dict:audit-cap-news	首脳会談が行われた	has:정상회담	keep	lookup
 dict:audit-cap-news	被災者の支援	has:이재민	keep	lookup
 dict:audit-cap-news	全米オープンで優勝	has:전미 오픈	keep	lookup
