@@ -72,6 +72,21 @@ dict:audit-novel-2	拳を握ってグー！いいね！	has:굿!	keep	lookup
 dict:audit-novel-2	グーを出した。	has:주먹을 냈다	fix	lookup
 dict:audit-novel-2	彼は小さな村に流れ着いた。	has:떠밀려 왔다	fix	lookup
 dict:audit-novel-2	瓶が浜辺に流れ着いた。	has:밀려왔다	keep	lookup
-dict:audit-novel-2	推参つかまつった。	has:등장했다	fix	lookup
-dict:audit-novel-2	失礼仕る。	has:실례한다	fix	lookup
+dict:audit-novel-2	推参つかまつった。	has:찾아왔소	fix	lookup
+dict:audit-novel-2	失礼仕る。	has:실례하겠소	fix	lookup
 dict:audit-novel-2	こんなの楽勝だよ。	has:식은 죽 먹기야	fix	lookup
+dict:audit-novel-2	楽勝な相手だ。	has:만만한 상대	fix	lookup
+dict:audit-novel-2	楽勝で勝った。	has:손쉽게 이겼다	fix	lookup
+dict:audit-novel-2	楽勝だった。	has:식은 죽 먹기였다	fix	lookup
+dict:audit-novel-2	楽勝ムードが漂う。	has:낙승 분위기	fix	lookup
+dict:audit-novel-2	楽勝ペースで進む。	has:낙승 페이스	fix	lookup
+dict:audit-novel-2	楽勝でした。	has:식은 죽 먹기였습니다	keep	lookup
+dict:audit-novel-2	楽勝ではない。	has:식은 죽 먹기가 아니다	keep	lookup
+dict:audit-novel-2	ご無礼つかまつる。	has:무례를 범하겠소	fix	lookup
+dict:audit-novel-2	では、御免つかまつる！	has:실례하겠소	fix	lookup
+dict:audit-novel-2	お相手つかまつろう。	has:상대해 드리리다	fix	lookup
+dict:audit-novel-2	お供つかまつる。	has:모시겠소	fix	lookup
+dict:audit-novel-2	ご無礼つかまつった。	has:무례를 범했소	fix	lookup
+dict:audit-novel-2	拝見つかまつる。	has:배견한다	keep	lookup
+dict:audit-novel-2	楽勝な試合だった。	has:만만한 시합	fix	lookup
+dict:audit-novel-2	「実際、筧なら楽勝なんじゃないか？」	has:식은 죽 먹기인 게	keep	lookup
