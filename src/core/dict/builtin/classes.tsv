@@ -364,6 +364,9 @@
 //= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
 //= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
 //= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
+//= noun.received-wo-act	Verbal nouns of what someone does to or for another, whose を される with an agent in に or the speaker as subject is what that other receives: 받다 (先生に質問をされた 선생님에게 질문을 받았다, 注意をされる 주의를 받다).
+//= noun.suffered-wo-act	Nouns of a harm someone does to another, whose を される is suffered: 당하다 (意地悪をされた 심술을 당했다, 無視をされる 무시를 당하다).
+//= noun.gossip-wo-act	Nouns of talk about someone behind their back, whose を される is being talked about: 소문에 오르내리다, or with the talkers in に their act 소문을 내다 (噂をされまくる 소문에 마구 오르내리다).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
@@ -4766,6 +4769,68 @@ noun.received-o-act	ご指導
 noun.received-o-act	ご迷惑
 noun.received-o-act	お尻ペンペン
 noun.received-o-act	お尻叩き
+noun.received-wo-act	質問
+noun.received-wo-act	説明
+noun.received-wo-act	注意
+noun.received-wo-act	告白
+noun.received-wo-act	相談
+noun.received-wo-act	命令
+noun.received-wo-act	指摘
+noun.received-wo-act	誤解
+noun.received-wo-act	邪魔
+noun.received-wo-act	依頼
+noun.received-wo-act	提案
+noun.received-wo-act	要求
+noun.received-wo-act	指導
+noun.received-wo-act	招待
+noun.received-wo-act	治療
+noun.received-wo-act	手当て
+noun.received-wo-act	応援
+noun.received-wo-act	歓迎
+noun.received-wo-act	攻撃
+noun.received-wo-act	批判
+noun.received-wo-act	評価
+noun.received-wo-act	説教
+noun.received-wo-act	指示
+noun.received-wo-act	忠告
+noun.received-wo-act	警告
+noun.received-wo-act	世話
+noun.received-wo-act	診察
+noun.received-wo-act	検査
+noun.received-wo-act	手術
+noun.received-wo-act	挨拶
+noun.received-wo-act	心配
+noun.received-wo-act	期待
+noun.received-wo-act	同情
+noun.received-wo-act	プロポーズ
+noun.received-wo-act	誘い
+noun.received-wo-act	お願い
+noun.received-wo-act	質問攻め
+noun.received-wo-act	罵倒
+noun.received-wo-act	叱責
+noun.received-wo-act	尋問
+noun.received-wo-act	取材
+noun.received-wo-act	マッサージ
+noun.suffered-wo-act	意地悪
+noun.suffered-wo-act	いじめ
+noun.suffered-wo-act	嫌がらせ
+noun.suffered-wo-act	いたずら
+noun.suffered-wo-act	悪戯
+noun.suffered-wo-act	仕打ち
+noun.suffered-wo-act	乱暴
+noun.suffered-wo-act	暴力
+noun.suffered-wo-act	無視
+noun.suffered-wo-act	拷問
+noun.suffered-wo-act	虐待
+noun.suffered-wo-act	差別
+noun.suffered-wo-act	裏切り
+noun.suffered-wo-act	邪険
+noun.suffered-wo-act	冷遇
+noun.suffered-wo-act	門前払い
+noun.gossip-wo-act	噂
+noun.gossip-wo-act	噂話
+noun.gossip-wo-act	陰口
+noun.gossip-wo-act	うわさ
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同

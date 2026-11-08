@@ -269,6 +269,8 @@ bool HonouredPerson(const Item* n) {
 //     ている form nor the continuative before a comma (彼は天才と言われた);
 //   - another quote with an honoured subject in the sentence is the respectful 言われる, which
 //     the active reads (382さんは10体くらいと言われていました);
+//   - with a person in に or から before a quote that holds no predicate (彼女にバカと言われていた),
+//     told (라는 말을 듣다) in every form but before a comma;
 //   - with no such subject: said by people (라고들 하다) in the ている forms, the impersonal
 //     하다 before a comma, told otherwise (バカと言われたことがある 바보라는 말을 들은 적이 있다).
 // head is the Korean before 라고 ((이)), rest the text after the item (われていた); "" keeps the
@@ -291,13 +293,24 @@ std::string QuotePassive(const Item* it, std::string_view head, std::string_view
         const bool person = Person(p->prev->Attr(std::max(p->prev->selected, 0)));
         return h + (person && !stative && !comma ? "라는 말을 &J6@" : "라고 불&AA@");
     }
+    bool agent = false;
+    bool predicate = false;
     for (const Item* p = quote; p != nullptr && !Has("。！？!?「」『』", p->group->surface); p = p->prev) {
         const std::string_view s = p->group->surface;
         if ((s == "は" || s == "が" || s == "も") && p->prev != nullptr &&
             (HonouredPerson(p->prev) || p->prev->group->surface == "さん")) {
             return {};
         }
+        if (!p->detail->Yougo() && !p->group->entries.empty()) {
+            const Entry* e = p->group->At(std::max(p->selected, 0));
+            predicate = predicate || (e != nullptr && (e->cls == 'M' || e->cls == 'H'));
+        }
+        if (!predicate && !agent && (s == "に" || s == "から") && p->prev != nullptr && !p->prev->detail->Yougo() &&
+            Person(p->prev->Attr(std::max(p->prev->selected, 0)))) {
+            agent = true;
+        }
     }
+    if (agent && !comma) return h + "라는 말을 &J6@";
     return h + (stative ? "라고들 &AV@" : comma ? "라고 &AV@" : "라는 말을 &J6@");
 }
 
