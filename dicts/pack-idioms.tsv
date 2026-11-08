@@ -2903,3 +2903,5 @@ idiom:頭を上げる	上げる	v1:ㄹ	sense	idiom	頭 を 上げる	고개를 �
 idiom:後にされる	される	v1:규칙	sense	idiom	後 に される	떠나시다	50	LEX-4760	dict	words.tsv
 idiom:塞がれる	れる	v1:규칙	sense	idiom	塞 が れる	막히다	50	LEX-4760	dict	words.tsv
 idiom:意匠を凝らす	凝らす	v5:규칙	sense	idiom	意匠 を 凝らす	공을 들이다	50	LEX-4760	dict	words.tsv
+idiom:お節介を焼く	焼く	v5:규칙	sense	idiom	お節介 を 焼く +mod	오지랖을 부리다	50	LEX-5012	dict	words.tsv
+idiom:おせっかいを焼く	焼く	v5:규칙	sense	idiom	おせっかい を 焼く +mod	오지랖을 부리다	50	LEX-5012	dict	words.tsv

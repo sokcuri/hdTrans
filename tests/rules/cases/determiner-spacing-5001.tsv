@@ -2,9 +2,9 @@
 rule	input	expected	kind	layer
 compose:determiner-apart	「……何の音？」	has:무슨 소리?	fix	compose
 compose:determiner-apart	何の音だ？	has:무슨 소리야?	fix	compose
-compose:determiner-apart	「で、何の用だ？」	has:무슨 용무야?	fix	compose
-compose:determiner-apart	「で、俺に何の用？」	has:무슨 용무?	fix	compose
-compose:determiner-apart	「レナか！ こんな朝っぱらから何の用だよ…。」	has:무슨 용무야	fix	compose
+compose:determiner-apart	「で、何の用だ？」	has:무슨 볼일이야?	fix	compose
+compose:determiner-apart	「で、俺に何の用？」	has:무슨 볼일?	fix	compose
+compose:determiner-apart	「レナか！ こんな朝っぱらから何の用だよ…。」	has:무슨 볼일이야	fix	compose
 compose:determiner-apart	謎？謎って何の謎だ？	has:무슨 수수께끼야?	fix	compose
 compose:determiner-apart	紬ちゃんの血は何色ですか！？	has:무슨 색입니까	fix	compose
 compose:determiner-apart	今日は何の日？ ……子日だよー！	has:무슨 날?	fix	compose

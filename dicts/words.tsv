@@ -28521,3 +28521,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 えとえと	음, 음	E300			GN			LEX-5116				w:34833
 へんてこ	이상%A1@	G8U0			GN			LEX-5116				w:34834
 ねがいごと	소원	N110			GN			LEX-5116				w:34828
+寝覚めの悪	마음이 찜찜$AB@	H7U0			GN			LEX-5012: 寝覚めの悪い気持ち 마음이 찜찜한 기분			ねざめのわる	w:34617
+寝覚め悪	마음이 찜찜$AB@	H7U0			GN			LEX-5012: 寝覚め悪い 마음이 찜찜하다			ねざめわる	w:34618
+お節介焼き	참견쟁이	N110	VHn		GN			LEX-5012: お節介焼きだ 참견쟁이다			おせっかいやき	w:34619

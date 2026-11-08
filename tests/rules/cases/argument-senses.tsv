@@ -60,7 +60,7 @@ pack:argument-senses:28	だから、僕に詳しい話をし	!rule:pack:argument
 pack:argument-senses:56	あいつと関わりたくない。	rule:pack:argument-senses:56=엮이다	fix	packs
 pack:argument-senses:20	人と関わらないようにしていた。	rule:pack:argument-senses:20=엮이다	fix	packs
 pack:argument-senses:57	僕に関わらない方がいいよ。	rule:pack:argument-senses:57=엮이다	fix	packs
-pack:argument-senses:20	子供たちと関わる仕事がしたい	has:관련되는	keep	packs
+pack:argument-senses:20	子供たちと関わる仕事がしたい	has:관계를 맺는	keep	packs
 pack:argument-senses:20	誰もが、聖女の恩恵に関わろうと動き出した。	!rule:pack:argument-senses:20	keep	packs
 pack:argument-senses:22	ジュゲムが傷を癒してくれたわ。	rule:pack:argument-senses:22=치유하다	fix	packs
 pack:argument-senses:29	再び唇を近づける。	rule:pack:argument-senses:29=가까이 대다	fix	packs

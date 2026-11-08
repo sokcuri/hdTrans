@@ -315,6 +315,7 @@
 //= noun.arena	Ends of the nouns of a realm, a setting, a group or an event in which something holds or is done: でも after one is 에서도, in it too (王都でも指折り 왕도에서도 손꼽히는, 作戦でも働いた 작전에서도 일했다), not before する, a verb of verb.example-object, どう or a word of permission.
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
+//= noun.left-behind	What one leaves behind with words rather than drops: a remark, advice or meddling, the object that makes 落とす 남기다 (一言落としていく 한마디 남기고 가다).
 //= noun.act-head	Formal nouns and nouns of time, chance or result after which a した or している of a mimetic word or an adverb is the act (ちゃんとしたことがない 제대로 한 적이 없다, のんびりしている暇はない), not a quality of the noun.
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと, 見られている気がする).
 //= noun.cp-change	Verbal nouns of a change that befalls someone or something (中断, 孤立, 停止), whose causative-passive is that change done to one, 되다 (思考を中断させられた 사고가 중단되었다), not an act one is made to do.
@@ -12260,6 +12261,19 @@ noun.least-able	あほ
 noun.least-able	初心者
 noun.least-able	新人
 noun.least-able	犬
+noun.left-behind	お節介
+noun.left-behind	おせっかい
+noun.left-behind	一言
+noun.left-behind	ひと言
+noun.left-behind	言葉
+noun.left-behind	置き土産
+noun.left-behind	捨て台詞
+noun.left-behind	台詞
+noun.left-behind	セリフ
+noun.left-behind	助言
+noun.left-behind	忠告
+noun.left-behind	ヒント
+noun.left-behind	爆弾発言
 noun.relation-person	友達
 noun.relation-person	友だち
 noun.relation-person	ともだち

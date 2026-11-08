@@ -19,7 +19,7 @@ lexical:sino-gloss	俺が羊飼いにならないと明言すれば、もう彼�
 lexical:false-friend	電車の中で寝てしまった。	전철 안에서 자버렸다.	fix	lookup
 lexical:false-friend	敵中を突破せよ！	적진을 돌파하라!	fix	lookup
 lexical:false-friend	「じゃなきゃ、本職やってられませんって」	「그렇지 않으면, 본업 할 수 없다고요」	fix	lookup
-lexical:false-friend	ふっふっふっ、その通り。一切、他意はない	훗훗훗, 그대로. 일절, 딴뜻은 없다	fix	lookup
+lexical:false-friend	ふっふっふっ、その通り。一切、他意はない	훗훗훗, 그대로. 일절, 다른 뜻은 없다	fix	lookup
 lexical:false-friend	調教されてしまう前に自害、自害しないと！	조교되어버리기 전에 자결, 자결해야 해!	fix	lookup
 cx:notice-words-1:126	いいのか、司令？	괜찮아, 사령관?	keep	rewrites
 cx:notice-words-1:126	三つの新しい司令所を設置する	세 개의 새로운 사령소를 설치한다	fix	rewrites
