@@ -282,9 +282,10 @@ inline constexpr std::string_view kKansaiNegativeStems[] = {
 };
 
 // Verbs of one kana in kanji said with that kana's vowel drawn before the Kansai へん (寝えへん 寝ない,
-// 見いへん 見ない, 来えへん 来ない), and the kana けえ of 来る (けえへん こない): the drawn stem and the stem.
+// 見いへん 見ない, 来えへん 来ない), the kana けえ and きい of 来る (けえへん こない) and しい of する (しいひん しない): the drawn
+// stem and the stem.
 inline constexpr std::string_view kKansaiDrawnStems[][2] = {
-    {"寝え", "寝"}, {"出え", "出"}, {"見い", "見"}, {"似い", "似"}, {"煮い", "煮"}, {"来え", "来"}, {"けえ", "こ"},
+    {"寝え", "寝"}, {"出え", "出"}, {"見い", "見"}, {"似い", "似"}, {"煮い", "煮"}, {"来え", "来"}, {"けえ", "こ"}, {"来い", "来"}, {"きい", "こ"}, {"しい", "し"},
 };
 
 // What follows the Kansai ええ of いい: a sentence particle, the copula, a conjunction or a noun it describes.
