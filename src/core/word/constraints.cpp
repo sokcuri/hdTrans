@@ -225,7 +225,9 @@ constexpr ConstraintRule kRules[] = {
      "んです, んじゃ, んでしょ 앞의 いた는 傷む, 悼む의 て형이 아니라 いる의 과거 (ここにいたんですね 여기에 손상되어 무릎 → 여기에 있었군요)", {},
      "んです|んじゃ|んでしょ|んだろ"},
     {"niwa-before-zuka", ConstraintWord::Source, "にわ", ConstraintContext::BeforeListed, ConstraintReject::Word,
-     "ずか 앞의 にわ는 庭가 아니라 に와 わずか (中にわずかに 속 정원않고 게 → 속에 조금)", {}, "ずか"},
+     "ずか 앞의 にわ는 庭가 아니라 に와 わずか: 앞이 히라가나여도 (ここにわずかに 여기 정원않고 게 → 여기에 조금)", {}, "ずか"},
+    {"particle-split", ConstraintWord::Any, "", ConstraintContext::ParticleSplit, ConstraintReject::Word,
+     "한자나 가타카나 낱말 바로 뒤에서 조사 한 글자로 시작하는 히라가나 명사는, 그 조사 뒤 글자부터 그 명사보다 길게 이어지는 사전 낱말이 있으면 쓰지 않음: 조사와 그 낱말 (刺身にわさび 생선회 정원 녹 → 생선회에 고추냉이, 中にわずかに 속 정원않고 게 → 속에 조금)", {}},
     {"hashita-before-end", ConstraintWord::Source, "はした", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "が, けど, もの나 문장 부호 앞의 はした는 우수리가 아니라 は와 する의 과거 (巻き込まれはしたが 말려 들어가고 우수리가 → 말려 들어가기는 했지만). はした金은 그대로", {},
      "が|けど|けれ|もの|。|、|！|？|…|よ|ね|わ|ぞ|ん|の|か"},
@@ -622,6 +624,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead) == 0 ||
                 dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead) > 0);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
+    case ConstraintContext::ParticleSplit:  // Worker::ParticleSplit, which looks the longer word up
         return false;
     case ConstraintContext::BeforeHiragana:
         return NameClassOf(FirstChar(after)) == kClassHiragana;
@@ -922,6 +925,32 @@ bool Worker::NotAfterNoun(std::string_view head) {
     return NameClassOf(last) != kClassKatakana && !text::IsKanji(text::DecodeRune(last).cp);
 }
 
+bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
+                           const std::vector<dict::Candidate>& list) {
+    if (head.empty() || text::RuneCount(source) < 2 || !AllOfClass(source, kClassHiragana)) return false;
+    const std::string_view last = LastChar(head);
+    // A long mark draws out a sound (あーーはは), no noun.
+    if (last == "ー" || (!text::IsKanji(text::DecodeRune(last).cp) && NameClassOf(last) != kClassKatakana)) return false;
+    const std::string_view lead = FirstChar(source);
+    if (!dict::InClass(HDTRANS_CLASS("particle.split-lead"), lead)) return false;
+    // Only a noun: a source that is also a particle or another part (には, にも) stays.
+    for (const dict::Candidate& c : list) {
+        if (c.source == source && c.codes != nullptr && c.codes->part.ClassDigit() != '1') return false;
+    }
+    const std::string_view rest = query.substr(lead.size());
+    const std::size_t inside = source.size() - lead.size();
+    std::size_t end = 0;
+    for (int k = 0; k < 6 && end < rest.size(); k++) end += FirstChar(rest.substr(end)).size();
+    for (; end > inside; end -= LastChar(rest.substr(0, end)).size()) {
+        const std::string_view word = rest.substr(0, end);
+        if (text::RuneCount(word) < 2 || !AllOfClass(word, kClassHiragana)) continue;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            if (c.source == word && c.codes != nullptr && c.codes->part.ClassDigit() == '1') return true;
+        }
+    }
+    return false;
+}
+
 // Text path, mode 0. For each rule and each source of the candidates that the rule's word
 // and context fit, the rejected candidates leave the list; a name made from a person
 // reading takes the place of the first of them.
@@ -961,9 +990,9 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                                          : std::string_view(following);
             if (!first ||
-                (rule.context == ConstraintContext::NotAfterNoun
-                     ? !NotAfterNoun(head)
-                     : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
+                (rule.context == ConstraintContext::NotAfterNoun       ? !NotAfterNoun(head)
+                 : rule.context == ConstraintContext::ParticleSplit    ? !ParticleSplit(head, source, query, list)
+                 : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
                 i++;
                 continue;
             }

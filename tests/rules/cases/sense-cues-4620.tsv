@@ -11,7 +11,7 @@ cx:sense-cues-1:220	そういう場合たいてい ドアは開いてたんだ	�
 cx:sense-cues-1:220	開いたドアから部室を覗く。	열린 문에서 동아리방을 들여다 본다.	fix	rewrites
 cx:sense-cues-1:220	そう言って、千里は携帯を取り出し、ぱかっと開いた。	그렇게 말해, 천리는 휴대폰을 꺼내고, 딸깍 열었다.	keep	rewrites
 cx:sense-cues-1:220	敵艦発見！全砲門、開け！	적함 발견! 전포문, 열어라!	keep	rewrites
-cx:sense-cues-1:240	お前だって、３日くらい前に路面電車の中でスルーしただろうが。	너도, 3일 정도 전에 노면 전차 안에서 무시했겠지만.	fix	rewrites
+cx:sense-cues-1:240	お前だって、３日くらい前に路面電車の中でスルーしただろうが。	너도, 3일 정도 전에 노면 전차 안에서 무시했잖아.	fix	rewrites
 cx:sense-cues-1:240	箱の中で何かが動いた。	상자 안에서 뭔가가 움직였다.	fix	rewrites
 cx:sense-cues-1:240	前世の自分がプレイした数多の乙女ゲームの中でまさかこれが選ばれるとは	전생의 자신이 플레이한 많은 여성향 게임 중에서 설마 이것이 선택되다니	keep	rewrites
 cx:sense-cues-1:240	集めた情報の中でも特に重要なことだ	모은 정보 중에서도 특히 중요한 일이다	keep	rewrites

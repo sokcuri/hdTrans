@@ -21,6 +21,7 @@
 //= particle.after-quote-to	Particles right after a と that make it a quotation, not a condition or a step (病気になるとさえされていた, 行くとも言った).
 //= particle.final-after-past	Final particles that may stand alone in the ending of a past whose た is in the conjugation (立っていたよ, ぼやいてたぞ).
 //= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
+//= particle.split-lead	One-kana particles that, right after a noun, may start a hiragana word that a longer dictionary word after the particle splits (刺身にわさび: に + わさび, not にわ 庭 + さび; constraint particle-split).
 //= verb.perception	Verbs of seeing and the passive words of them the dictionary has (見る, 覗く, 見つめる, 見られる; not 聞く, which also asks): with a person before に their passive is that person's act, with no object needed (誰かに見られている 누군가가 보고 있다; spec GRM-2).
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
@@ -3943,6 +3944,14 @@ particle.quoting-after	とか
 particle.quoting-after	とい
 particle.quoting-after	という
 particle.quoting-after	か
+particle.split-lead	に
+particle.split-lead	を
+particle.split-lead	が
+particle.split-lead	は
+particle.split-lead	で
+particle.split-lead	と
+particle.split-lead	へ
+particle.split-lead	も
 ending.told-past	のだった
 ending.told-past	のであった
 ending.told-past	のでした

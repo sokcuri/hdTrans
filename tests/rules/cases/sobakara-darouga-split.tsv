@@ -1,0 +1,30 @@
+# 규칙: GRM-4093, GRM-161, GRM-4094, LEX-5792
+rule	input	expected	kind	layer
+cx:sobakara:10	食べたそばから忘れる	먹자마자 잊는다	fix	rewrites
+cx:sobakara:10	掃除したそばから散らかす	has:청소하자마자	fix	rewrites
+cx:sobakara:10	読んだそばから忘れた	has:읽자마자	fix	rewrites
+cx:sobakara:10	彼女が立ったそばから	has:서자마자	fix	rewrites
+cx:sobakara:10	言ったそばから失敗した	has:말하자마자	keep	rewrites
+cx:sobakara:10	買ったそばから壊れた	has:사자마자	keep	rewrites
+cx:sobakara:10	私のそばから離れないで	has:곁에서	keep	rewrites
+cx:sobakara:10	彼のそばから立ち去った	has:곁에서	keep	rewrites
+cx:lc2e-darouga:50	それはてめえだろうが	has:네놈이잖아	fix	rewrites
+cx:lc2e-darouga:50	お前のせいだろうが！	has:탓이잖아	fix	rewrites
+cx:lc2e-darouga:15	何やってんだよ、危ないだろうが！	has:위험하잖아	fix	rewrites
+cx:lc2e-darouga:10	約束しただろうが！	has:약속했잖아	fix	rewrites
+cx:lc2e-darouga:10	彼は来るだろうが、私は行かない	has:오겠지만	keep	rewrites
+cx:lc2e-darouga:10	雨だろうが雪だろうが行く	has:비든 눈이든	keep	rewrites
+constraint:particle-split	刺身にわさびをつける	has:생선회에 와사비	fix	lookup
+constraint:particle-split	寿司にわさび	has:스시에 와사비	fix	lookup
+constraint:particle-split	家にわたしがいる	has:집에 내가	keep	lookup
+constraint:particle-split	裏庭にわとりがいる	has:닭이	keep	lookup
+constraint:particle-split	雨がにわかに降り出した	has:갑자기	keep	lookup
+constraint:particle-split	家にはいる	has:집에	keep	lookup
+constraint:particle-split	彼はなにも言わない	has:아무것도	keep	lookup
+dict:jisjk:137288	足が笑って立てない	has:설 수 없다	fix	local
+dict:jisjk:137288	怖くて立てない	has:설 수 없다	fix	local
+dict:jisjk:137288	計画を立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	計画も立てない	has:세우지 않는다	keep	local
+dict:w:35264	笑われた	비웃음을 샀다	fix	lookup
+dict:w:35264	そんなことしたら笑われるよ	has:비웃음을 사	fix	lookup
+dict:w:35264	みんなに笑われた	has:비웃음을 당했다	keep	lookup
