@@ -186,7 +186,7 @@ cx:audit-novel-2:60	五月ほど入院した。	has:다섯 달	fix	rewrites
 cx:audit-novel-2:60	五月になった。	lacks: 달	keep	rewrites
 cx:audit-novel-2:60	六月ほど入院した。	has:여섯 달	fix	rewrites
 cx:audit-novel-2:60	六月になった。	lacks: 달	keep	rewrites
-cx:audit-novel-2:60	三月ばかり前のことだ。	has:석 달	fix	rewrites
+cx:audit-novel-2:62	三月ばかり前のことだ。	has:석 달	fix	rewrites
 cx:audit-novel-2:51	三月も過ぎ、四月になった。	lacks:석 달	keep	rewrites
 cx:audit-novel-2:51	三月が過ぎて春が来た。	lacks:석 달	keep	rewrites
 cx:audit-novel-2:50	三月ぶりだ。	has:석 달 만	fix	rewrites

@@ -1364,14 +1364,16 @@ namespace {
 // Whether the kanji number of size bytes at the start of text, at cursor of full, is part of a
 // date: a month before a day or after a year (七月七日, 二〇二〇年一月), or a day after a month
 // (一月二日). Its digits are read then, not a word that spells it (七月 칠월, 七日 이레, 二日 이틀).
-// A date before an honorific of honorific.candidate or a speaker label is a name (四月一日くん).
-bool DateNumber(std::string_view full, int cursor, std::string_view text, std::size_t size) {
+// A date before an honorific of honorific.candidate or a speaker label is a name (四月一日くん, 四月一日：);
+// next is the text of the token after this one.
+bool DateNumber(std::string_view full, int cursor, std::string_view text, std::size_t size, std::string_view next) {
     constexpr std::string_view kMonth = "月", kDay = "日", kYear = "年", kTen = "十";
     // Only a kanji number: digits already part from a word the dictionary spells (9月23日).
     if (size > text.size() || !(IsNumeral(FirstChar(text)) || FirstChar(text) == kTen)) return false;
     const std::string_view head = full.substr(0, static_cast<std::size_t>(cursor));
     std::string_view rest = text.substr(size);
-    const auto named = [](std::string_view after) {
+    const auto named = [&](std::string_view after) {
+        if (after.empty()) after = next;
         return dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0 || after.starts_with("：") ||
                after.starts_with(":") || after.starts_with("「");
     };
@@ -2282,7 +2284,10 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         // Before a unit name the kanji number is its digits, not a word that starts with it or
         // the Sino-Korean reading of 一 (一航戦 1항전, 二水戦 2수전).
-        if (UnitAfterNumber(text, numeric->source.size()) || DateNumber(full, cursor, text, numeric->source.size())) {
+        const std::string_view nextToken =
+            token + 1 < TokenCount() ? tokens.Canonical(static_cast<std::size_t>(token + 1)) : std::string_view();
+        if (UnitAfterNumber(text, numeric->source.size()) ||
+            DateNumber(full, cursor, text, numeric->source.size(), nextToken)) {
             if (text::RuneCount(numeric->source) == 1 && static_cast<unsigned char>(numeric->source[0]) >= 0x80) {
                 numeric = LookupFallbackRecord(token, numeric->source, 12, 15, true);
             }

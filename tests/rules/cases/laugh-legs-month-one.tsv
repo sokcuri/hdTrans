@@ -43,3 +43,18 @@ cx:audit-novel-2:50	一月ぶりに会った	has:한 달	keep	rewrites
 cx:audit-novel-2:80	あと七月で卒業だ	has:일곱 달	fix	rewrites
 cx:audit-novel-2:51	九月が経った	has:아홉 달이	fix	rewrites
 cx:audit-novel-2:50	十月ぶりに会った	has:열 달 만에	fix	rewrites
+lookup:date-number	今月二日に始まる	has:2일에	keep	lookup
+lookup:date-number	先月十日	has:지난달 10일	keep	lookup
+lookup:date-number	毎月一日	has:매월 1일	keep	lookup
+lookup:date-number	四月一日：「おはよう」	has:와타누키	keep	lookup
+cx:audit-novel-2:62	四月後に戻る	has:넉 달 후	fix	rewrites
+cx:audit-novel-2:62	三月後半	has:3월 후반	keep	rewrites
+cx:audit-novel-2:60	七月ほど待った	has:일곱 달 정도	fix	rewrites
+cx:audit-novel-2:60	七月にほど近い	lacks:달	keep	rewrites
+cx:audit-novel-2:61	一月ほど休んだ	has:한 달 정도	fix	rewrites
+cx:audit-novel-2:61	一月に入った	lacks:정도	keep	rewrites
+cx:audit-novel-2:62	三月後に戻る	has:석 달 후	fix	rewrites
+dict:jisjk:80411	一日中	하루 종일	fix	lookup
+dict:jisjk:80495	二十日ぶりに	has:20일 만에	fix	lookup
+dict:jisjk:201988	三年ぶりに	has:3년 만에	fix	lookup
+dict:jisjk:64313	十年ぶりの再会	has:10년 만의	fix	lookup

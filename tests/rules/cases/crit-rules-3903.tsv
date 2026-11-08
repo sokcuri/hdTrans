@@ -20,7 +20,7 @@ cx:meaning-flips-1:160	いや、そうじゃなくて	아니, 그게 아니라	f
 cx:meaning-flips-1:160	「アッ、そうじゃなくて」	「앗, 그게 아니라」	fix	rewrites
 cx:meaning-flips-1:160	だって、今まではそうじゃなくて、それでここへ流れ着いてきた人達だっていた	has:떠밀려 온	keep	rewrites
 cx:meaning-flips-1:162	行けば？ そうでなくて！	가면? 그게 아니라!	fix	rewrites
-cx:meaning-flips-1:162	そうでなくても一日中	그렇지 않아도 하루종일	keep	rewrites
+cx:meaning-flips-1:162	そうでなくても一日中	그렇지 않아도 하루 종일	keep	rewrites
 phrase:待ちな	待ちな。とりあえず、この船じゃなくて	기다려. 우선, 이 배가 아니고	fix	builtin-phrase
 phrase:待ちな	ここで待ちな！	여기서 기다려!	keep	builtin-phrase
 phrase:待ちな	待ちなさい	기다려	keep	builtin-phrase
