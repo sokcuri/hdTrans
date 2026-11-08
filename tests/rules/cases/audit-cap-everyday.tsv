@@ -111,3 +111,6 @@ dict:audit-cap-everyday	ボツにする	has:퇴짜를 놓는다	fix	lookup
 dict:audit-cap-everyday	聞いたそばから忘れる	has:듣자마자	fix	lookup
 dict:audit-cap-everyday	駅のそばから	has:역 옆에서	keep	lookup
 dict:audit-cap-everyday	話が分かる方だ｡	has:말이 통하는 편	fix	lookup
+dict:audit-cap-everyday	話がわかった	has:이해했다	fix	lookup
+dict:audit-cap-everyday	やっと話がわかりました	has:이해했습니다	fix	lookup
+dict:audit-cap-everyday	話がわかった人	has:이해한 사람	fix	lookup
