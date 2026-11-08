@@ -33,6 +33,8 @@ struct RunLookup {
     // Whether stem, whole, is the stem of an adjective in い of the dictionary (DialectForms: 暑う, よか);
     // null for none.
     bool (*adjectiveStem)(const void* context, std::string_view stem) = nullptr;
+    // Whether text, whole, is a key of the dictionary (RewriteCasual: きれい is no old imperative); null for none.
+    bool (*word)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

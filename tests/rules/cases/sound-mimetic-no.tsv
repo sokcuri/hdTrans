@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 sound:adnominal-no	ふわふわの短い尻尾。	푹신푹신한 짧은 꼬리.	fix	sound
 sound:adnominal-no	手触りの良いシーツにふわふわの枕。	감촉이 좋은 시트에 푹신푹신한 베개.	fix	sound
-sound:adnominal-no	つやつやの髪を撫でて様子を見るが、	반들반들한 머리카락을 쓰다듬고 있고 상태를 보지만,	fix	sound
+sound:adnominal-no	つやつやの髪を撫でて様子を見るが、	반들반들한 머리카락을 쓰다듬어 상태를 보지만,	fix	sound
 sound:adnominal-no	ぼさぼさの髪をかき上げながら、	부스스한 머리카락을 쓸어 올리면서,	fix	sound
 sound:adnominal-no	島民の娘と同じ様にボサボサの頭、	도민의 딸과 같게 부스스한 머리,	fix	sound
 sound:adnominal-no	あまりにボロボロの外観から、	너무나 너덜너덜한 외관으로부터,	fix	sound

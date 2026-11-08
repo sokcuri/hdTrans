@@ -27,7 +27,7 @@ pattern:高かったかのように	何もなかったかのように普通に	h
 pattern:高かったかのように	そんな何事もなかったかのようにっ！	has:없었던 것처럼	fix	lookup
 pattern:高かったかのように	まるで、俺たちは敵ではなかったかのように。	has:아니었던 것처럼	fix	lookup
 pattern:高かったかのように	何事もなかったかのように、マリーは澄まし顔。	has:없었던 것처럼	fix	lookup
-cx:lc2a-kanoyou-iru:10	子猫を撫でているかのように笑う。	has:있는 것 같이 웃는다	fix	lookup
+cx:lc2a-kanoyou-iru:10	子猫を撫でているかのように笑う。	has:있는 것처럼 웃는다	fix	lookup
 cx:lc2a-kanoyou-iru:20	まるで子猫を撫でているかのようだ。	has:있는 것 같다	fix	lookup
 cx:lc2a-kanoyou-iru:20	子猫を撫でているかのような顔。	has:있는 것 같은 얼굴	fix	lookup
 pattern:書いているかのような	頭に何か突き刺さっているかのような痛み。	has:것 같은 아픔	fix	lookup

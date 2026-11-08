@@ -499,6 +499,15 @@ bool DictionaryVerbIs(const void* context, std::string_view form) {
     return d.line != nullptr && pipeline::internal::IsDictionaryVerb(form, *d.line, d.snap);
 }
 
+// Whether text, whole, is a key of the dictionary (pipeline::RunLookup::word).
+bool WordIs(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    for (const dict::Candidate& c : Find(d, text).list) {
+        if (c.source == text) return true;
+    }
+    return false;
+}
+
 // Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
 bool AdjectiveStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -1208,7 +1217,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             pipeline::Normalize(text, ctx,
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
-                                 options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs}),
+                                 options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
+                                 options.reference ? nullptr : WordIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
