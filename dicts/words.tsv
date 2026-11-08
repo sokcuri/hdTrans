@@ -10963,7 +10963,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 七宝つなぎ	칠보 무늬	N110			GN				llm		しっぽうつなぎ	w:10912
 七帯アルマジロ	일곱띠아르마딜로	N110			GN						ななつおびアルマジロ	w:10913
 七日	이레	N110			GN						なのか	w:10914
-七月	칠월	N110			GN				xxx	1	しちがつ	w:10915
+七月	7월	N110			GN				xxx	1	しちがつ	w:10915
 七枝刀	칠지도	N110			GN						しちしとう	w:10916
 七種	봄의 칠초	N110	VPt		GN				xxx llm		ななくさ	w:10917
 七種	가을의 칠초	N110	VPt		GN				llm		ななくさ	w:10918
@@ -11386,7 +11386,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 九尾の狐	구미호	N110			GN						きゅうびのきつね	w:11337
 九帯アルマジロ	아홉띠아르마딜로	N110			GN						ここのおびアルマジロ	w:11338
 九日	아흐레	N110			GN						ここのか	w:11339
-九月	구월	N110			GN				xxx	1	くがつ	w:11340
+九月	9월	N110			GN				xxx	1	くがつ	w:11340
 九死	죽을 고비	N110			GN				llm		きゅうし	w:11341
 九牛一毛	구우일모	N110			GN						きゅうぎゅうのいちもう	w:11342
 九絵	자바리	N110			GN						くえ	w:11343
@@ -12437,7 +12437,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 八帯アルマジロ	큰긴코아르마딜로	N110			GN						やつおびアルマジロ	w:12359
 八挺	능숙함	N110			GN				llm		はっちょう	w:12360
 八日	여드레	N110			GN						ようか	w:12361
-八月	팔월	N110			GN				xxx	1	はちがつ	w:12362
+八月	8월	N110			GN				xxx	1	はちがつ	w:12362
 八極拳	팔극권	N110			GN						はっきょくけん	w:12363
 八聖道	팔정도	N110			GN						はっしょうどう	w:12364
 八角鷹	벌매	N110			GN						はちくま	w:12365
@@ -12478,7 +12478,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 六帯アルマジロ	여섯띠아르마딜로	N110			GN						むつおびアルマジロ	w:12402
 六方晶系	육방정계	N110			GN						ろっぽうしょうけい	w:12403
 六日	엿새	N110			GN						むいか	w:12404
-六月	유월	N110			GN				xxx	1	ろくがつ	w:12405
+六月	6월	N110			GN				xxx	1	ろくがつ	w:12405
 六角形	육각형	N110			GN						ろっかっけい	w:12406
 六面体	육면체	N110			GN						ろくめんたい	w:12407
 共依存	공의존	N110			GN						きょういぞん	w:12408
@@ -13174,7 +13174,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 匿名性	익명성	N110			GN						とくめいせい	w:13099
 十一日	십일일	N110	UMe	Tm	GN				xxx llm		じゅういちにち	w:13100
 十一日	십일일간	N110	UMe	Tm	GN				llm		じゅういちにち	w:13101
-十一月	십일월	N110			GN				xxx	1	じゅういちがつ	w:13102
+十一月	11월	N110			GN				xxx	1	じゅういちがつ	w:13102
 十七日	십칠일	N110	UMe	Tm	GN				xxx llm		じゅうしちにち	w:13103
 十七日	십칠 일	N110	UMe	Tm	GN				llm		じゅうしちにち	w:13104
 十三日	십삼일	N110	UMe	Tm	GN				xxx llm		じゅうさんにち	w:13105
@@ -13184,7 +13184,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 十二夜	십이야	N110			GN						じゅうにや	w:13109
 十二日	십이일	N110	UMe	Tm	GN				xxx llm		じゅうににち	w:13110
 十二日	십이 일	N110	UMe	Tm	GN				llm		じゅうににち	w:13111
-十二月	십이월	N110			GN				xxx	1	じゅうにがつ	w:13112
+十二月	12월	N110			GN				xxx	1	じゅうにがつ	w:13112
 十二角形	십이각형	N110			GN						じゅうにかくけい	w:13113
 十五日	십오일	N110	UMe	Tm	GN				xxx llm		じゅうごにち	w:13114
 十五日	십오 일	N110	UMe	Tm	GN				llm		じゅうごにち	w:13115
@@ -13197,7 +13197,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 十数	십여	N110			GN				xxx llm	1		w:13122
 十数年	십수 년	N110	UMe		GN				llm			w:13123
 十日	열흘	N110			GN						とおか	w:13124
-十月	시월	N110			GN				xxx	1	じゅうがつ	w:13125
+十月	10월	N110			GN				xxx	1	じゅうがつ	w:13125
 十界	십계	N110			GN						じっかい	w:13126
 十翼	십익	N110			GN						じゅうよく	w:13127
 十脚目	십각목	N110			GN						じっきゃくもく	w:13128
@@ -14118,7 +14118,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 四指陸亀	러시아땅거북	N110			GN						よつゆびりくがめ	w:14042
 四捨五入	반올림	I110		Hd	GN				xxx	1	ししゃごにゅう	w:14043
 四日	나흘	N110			GN						よっか	w:14044
-四月	사월	N110			GN				xxx	1	しがつ	w:14045
+四月	4월	N110			GN				xxx	1	しがつ	w:14045
 四本	네 개	N110		Ct	GN				llm		よんほん	w:14046
 四死球	사사구	I110			GN				xxx llm	1		w:14047
 四球	볼넷	N110			GN				xxx llm	1		w:14048
