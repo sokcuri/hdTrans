@@ -8,7 +8,7 @@ lookup:imperative-before-tsu	言えっ！ 誰に もらっただい!?	말해라!
 lookup:imperative-before-tsu	シャア 今だ 行けっ	샤아 지금이다 가라	fix	lookup
 lookup:imperative-before-tsu	《私も 流れに身を任せるだけだ…》 《行けっ！》	《나도 흐름에 몸을 맡길 뿐이다…》 《가라!》	fix	lookup
 lookup:imperative-before-tsu	あたしはダイエット中なんだっ。つべこべ言わずに食えっ	나는 다이어트 중이야. 이러쿵저러쿵 말하지 않고 먹어라	fix	lookup
-lookup:imperative-before-tsu	フシギダネ 行けっ！	이상하네 가라!	fix	lookup
+lookup:imperative-before-tsu	フシギダネ 行けっ！	has:가라!	fix	lookup
 lookup:imperative-before-tsu	時間だっ！ 行けっ！	시간이야! 가라!	fix	lookup
 lookup:imperative-before-tsu	目障りだからさっさと行けっ	눈에 거슬리니까 빨리 가라	fix	lookup
 lookup:imperative-before-tsu	両舷いっぱい、行けっ！	양현 많이, 가라!	fix	lookup

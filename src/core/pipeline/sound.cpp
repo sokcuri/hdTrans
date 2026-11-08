@@ -1403,6 +1403,8 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     const bool teClosing = afterTe && closingPhrase && first.phrase && asking;
     if (teOnly && !teClosing) return {};
     if (katakana && IsKanjiRune(prev) && first.keyLen < 3) return {};
+    // A short katakana interjection right before a kanji is the head of a word (ラメ入り), not a cry.
+    if (katakana && chain.size() == 1 && first.intj && first.keyLen < 3 && first.end < rs.size() && IsKanjiRune(rs[first.end])) return {};
     if (katakana) {
         const size_t end = KatakanaEnd(rs, p);
         if (chain.back().end < end) return {};
