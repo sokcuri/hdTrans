@@ -1,13 +1,13 @@
 # 규칙: LEX-5790, NUM-32, LEX-5656
 rule	input	expected	kind	layer
-sense:笑う	その時、魅音が鋭い目つきで笑いながら言った。	has:눈초리로 웃으면서	fix	senses
+sense:笑う	その時、彼女が鋭い目つきで笑いながら言った。	has:눈초리로 웃으면서	fix	senses
 sense:笑う	足が笑っている	has:다리가 후들거리고	fix	senses
 sense:笑う	足が笑って立てない	has:다리가 후들거려	fix	senses
 sense:笑う	脚が笑って動けない	has:다리가 후들거려	fix	senses
 sense:笑う	膝が笑う	무릎이 후들거린다	keep	senses
 sense:笑う	「寝不足の赤い目で笑うな。恐ろしいぞ」	has:눈으로 웃지 마	keep	senses
-sense:笑う	御園が、すっきりとした表情で笑う。	has:표정으로 웃는다	keep	senses
-sense:笑う	佳奈の冗談を冗談で流し、二人で笑う。	has:둘이서 웃는다	keep	senses
+sense:笑う	彼女は、すっきりとした表情で笑う。	has:표정으로 웃는다	keep	senses
+sense:笑う	友達の冗談を冗談で流し、二人で笑う。	has:둘이서 웃는다	keep	senses
 sense:笑う	膝を抱えて笑った。	has:웃었다	keep	senses
 dict:jisjk:267062	2020年一月	2020년 1월	fix	local
 dict:jisjk:267062	2020年一月に始まった。	has:2020년 1월에	fix	local

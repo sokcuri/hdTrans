@@ -16,7 +16,7 @@ dict:jisjk:368194	振り返ってみる。	되돌아본다.	fix	lookup
 dict:jisjk:95081	振り返って時計を見る。	has:되돌아보고 시계를	fix	local
 dict:jisjk:362126	笑って言った。	has:웃어 말했다	fix	local
 dict:jisjk:362126	立ち上がって言った。	has:일어서 말했다	fix	local
-dict:jisjk:362126	ユノーがこちらを振り返って言った。	has:돌아보고 말했다	fix	local
+dict:jisjk:362126	少女がこちらを振り返って言った。	has:돌아보고 말했다	fix	local
 dict:jisjk:362126	「えっ？　狙って言ったわけじゃないんですか？」	has:노려 말한	fix	local
 dict:jisjk:362126	彼が言った言葉	그가 한 말	fix	local
 dict:jisjk:362126	行くって言った。	간다고 했다.	keep	local
