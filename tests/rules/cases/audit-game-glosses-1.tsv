@@ -61,5 +61,11 @@ cx:sense-cues-1:19	その頃のガキどもは	lacks:어릴	keep	rewrites
 lexical:audit-game-gloss	こっちの身体が持たない	lacks:내 몸체	keep	lookup
 lexical:audit-game-gloss	こっちの身分証を見せる	has:신분증	keep	lookup
 lexical:audit-game-gloss	こっちの身内だ	lacks:몸내	keep	lookup
-lexical:audit-game-gloss	レジに並ぶ。	has:줄선다	fix	senses
+lexical:audit-game-gloss	レジに並ぶ。	has:줄을 선다	fix	senses
 lexical:audit-game-gloss	レジに並ぶ。	lacks:대등	fix	local
+lexical:audit-game-gloss	列に並ぶ。	has:줄을 선다	fix	lookup
+lexical:audit-game-gloss	行列に並んだ。	lacks:행렬	fix	lookup
+lexical:audit-game-gloss	列に並んで待つ	has:줄을 서	fix	lookup
+lexical:audit-game-gloss	窓口に並びました	has:줄을 섰습니다	fix	senses
+lexical:audit-game-gloss	トヨタに並ぶ企業	has:대등한	fix	local
+lexical:audit-game-gloss	トヨタが発表した	has:토요타가 발표했다	keep	lookup
