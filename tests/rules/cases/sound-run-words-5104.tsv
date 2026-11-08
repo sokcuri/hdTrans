@@ -1,0 +1,23 @@
+# 규칙: LEX-5104
+rule	input	expected	kind	layer
+sound:interjection-rows	「（のわー、千莉いかんって）」	has:노와~	fix	sound
+sound:interjection-rows	「のわっ、小太刀さんの次は白崎さんですかっ！？」	has:노왓,	fix	sound
+sound:interjection-rows	「うおぅ」	「우오오」	fix	sound
+sound:interjection-rows	「んもー。気持ちは分かるけど、こんな状態でどうやって帰るつもりよ？」	has:정말~.	fix	sound
+sound:interjection-rows	「何笑ってんのよ……んもうっ」	has:정말	fix	sound
+sound:interjection-rows	膝に手を置いてゼーハーしながら体力の回復を待つ。	has:헉헉하면서	fix	sound
+sound:interjection-rows	「おっとっと、また釣られちゃったよ〜。梨花ちゃんはうまいなぁ☆」	has:어이쿠	fix	sound
+sound:interjection-rows	いやっほ〜い！	has:야호	fix	sound
+sound:interjection-rows	もう帰る	이제 돌아간다	keep	sound
+sound:interjection-rows	そのわけを話して	has:이유	keep	sound
+normalize:scream-i	「やッ…やめて下さい…ッ！……ぃぃぃいいいぃ…ッ！」	lacks:좋	fix	normalize
+normalize:scream-i	「な、何ぃいいぃ、お前は■紅ぅううぅ？！？！」	lacks:좋은	fix	normalize
+normalize:scream-i	なッ、何ぃいいぃいいいぃッ？！？！	has:뭐어어	keep	normalize
+normalize:scream-i	かわいいいい	has:귀여	keep	normalize
+normalize:scream-i	何ぃ！	무엇!	keep	normalize
+normalize:drawn-demonstrative	って言うか、あーんな薬や泉の水なんかで、お手軽に魔力回復できるなら苦労しないわよ」	has:저런 약	fix	normalize
+normalize:drawn-demonstrative	そーんなことない	그렇지 않다	fix	normalize
+normalize:drawn-demonstrative	こーんなに大きい	이렇게 크다	fix	normalize
+normalize:drawn-demonstrative	あんなこと	has:저런	keep	normalize
+sound:interjection-rows	「のわあああっ！？」	「노와아아앗!?」	keep	sound
+sound:interjection-rows	「あ、そうなの？　んもー、それならそう言いなさいよ」	has:정말~,	fix	sound
