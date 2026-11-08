@@ -1,6 +1,6 @@
 # 규칙: GRM-3838
 rule	input	expected	kind	layer
-lookup:chau-chimau	「でも……あんまり責めたら辞めちゃうかも」	「하지만……너무 꾸짖으면 그만둬버릴지도」	fix	lookup
+lookup:chau-chimau	「でも……あんまり責めたら辞めちゃうかも」	「하지만……너무 탓하면 그만둬버릴지도」	fix	lookup
 lookup:chau-chimau	「私は夢なんだよ？　いつか消えちゃうかもしれないんだよ？」	「나는 꿈이야? 언젠가 사라져버릴지도 몰라?」	fix	lookup
 lookup:chau-chimau	司令官と長波姉さまに、チョコレート作っちゃったかも…。	사령관과 장파언니님에게, 초콜릿 만들어버렸을지도….	fix	lookup
 lookup:chau-chimau	もう切っちゃっていい？	이제 잘라버려도 좋아?	fix	lookup

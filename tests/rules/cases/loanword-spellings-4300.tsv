@@ -87,7 +87,7 @@ lex:ルックス	リーダーシップがあり、ルックスもまあまあ	ha
 lex:セオリー	セオリー通りじゃなく、自分の頭で考える。	has:시어리대로	keep	lookup
 lex:スウェット	スウェットを掴む手の力が強くなる。	has:스웨트를	keep	lookup
 dict:jisjk:49921	このターキーも食べて？	has:터키도	keep	lookup
-lex:シールド	セリカがシールドで俺を庇い、銃弾を防いでくれる。	has:쉴드로	keep	lookup
+lex:シールド	セリカがシールドで俺を庇い、銃弾を防いでくれる。	has:실드로	keep	lookup
 lex:メトロノーム	メトロノーム	has:메트로놈	keep	lookup
 dict:jisjk:373466	その途中、ふとロースカツが呟く。	has:로스카츠가	fix	lookup
 dict:jisjk:373466	お前は相変わらずみたいだな『ロースカツ』」	has:『로스카츠』	fix	lookup

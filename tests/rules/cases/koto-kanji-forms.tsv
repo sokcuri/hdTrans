@@ -51,7 +51,7 @@ normalize:spelling-variant	小さな私の事も…覚えていてください�
 normalize:spelling-variant	なんで 僕の事がわかったんですか？	has:저를 알	fix	normalize
 normalize:spelling-variant	私の事丈博さんから聞いてませんか？	제 일다케히로 씨에게서 듣지 않습니까?	keep	normalize
 cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
-cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites
+cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총에 맞고 있는 것도 깨닫지	fix	rewrites
 cx:novel-fixes-4:221	もうろくに話す事もないだろう	has:이야기하는 일도 없을	keep	rewrites
 cx:novel-fixes-4:221	その輝きはくすぶる事もなく	has:일도 없이	keep	rewrites
 cx:novel-fixes-4:222	何か気になる事でも～？	has:신경 쓰이는 일이라도	keep	rewrites

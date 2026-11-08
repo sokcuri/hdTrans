@@ -1,0 +1,106 @@
+# 규칙: LEX-5703, LEX-5704, LEX-5705
+rule	input	expected	kind	layer
+lexical:audit-game-verb	──撃たれた！？	has:총에 맞았어	fix	lookup
+lexical:audit-game-verb	真帆が手に力を込めた。	has:힘을 주었다	fix	lookup
+lexical:audit-game-verb	軽くキスを交わす。	has:주고받는다	fix	lookup
+lexical:audit-game-verb	「気まずくないか？」	has:어색하지	fix	lookup
+lexical:audit-game-verb	肩をすくめる。	has:어깨를 으쓱한다	fix	lookup
+lexical:audit-game-verb	「な～に？　ビビってんの？」	has:겁먹고	fix	lookup
+lexical:audit-game-verb	耳の奥に、甲高い金属音が蘇った。	has:되살아났다	fix	lookup
+lexical:audit-game-verb	「生き返った！」	has:되살아났어	fix	lookup
+lexical:audit-game-verb	胸一杯に息を吸い込む。	has:들이마신다	fix	lookup
+lexical:audit-game-verb	がっくりと肩を落とした。	has:어깨를 떨궜다	fix	builtin-phrase
+lexical:audit-game-verb	鋭い音で我に返った。	has:정신을 차렸다	fix	lookup
+lexical:audit-game-verb	かなりおとなしい。	has:얌전하다	fix	lookup
+lexical:audit-game-verb	声に艶っぽさが増した。	has:요염함	fix	lookup
+lexical:audit-game-verb	「参考になりそうか？」	has:참고가 될	fix	lookup
+lexical:audit-game-verb	頬がかぁっと火照る。	has:달아오른다	fix	lookup
+lexical:audit-game-verb	いろんな想いがこみあげてくる。	has:북받쳐	fix	lookup
+lexical:audit-game-verb	このままでは手を入れるのも難しい。	has:손대는	keep	lookup
+lexical:audit-game-verb	今の俺には、なんともくすぐったい言葉だった。	has:낯간지러운	keep	lookup
+lexical:audit-game-verb	「今度からシールドは二枚用意しておくのね」	has:실드는	fix	lookup
+lexical:audit-game-verb	サマーコンクール	has:콩쿠르	fix	lookup
+lexical:audit-game-verb	サッシの向こうに人の気配があった。	has:새시	fix	lookup
+lexical:audit-game-verb	「ラジャー」	has:로저	fix	lookup
+lexical:audit-game-verb	「え……あっ、目玉焼きっ！！」	has:달걀 프라이	fix	lookup
+lexical:audit-game-verb	離れて、クールダウンする。	has:쿨다운	fix	lookup
+lexical:audit-game-verb	ケチャップで線を引いた。	has:케첩	fix	lookup
+lexical:audit-game-verb	パンダの形とかしてたんですけど。	has:판다	fix	lookup
+lexical:audit-game-verb	「それ……ロブスターじゃなくて、ザリガニ……」	has:랍스터	fix	lookup
+lexical:audit-game-verb	「あのポーチ、忍具入れじゃないのか……」	has:파우치	fix	lookup
+lexical:audit-game-verb	インパクトはないが、よくできてる。	has:임팩트는	fix	lookup
+lexical:audit-game-verb	「わ、私もスコア上げなきゃ……」	has:스코어	fix	lookup
+lexical:audit-game-verb	ぎゅっとハグしてあげる。	has:허그해	fix	lookup
+lexical:audit-game-verb	シリアスな話に突入した。	has:시리어스한 이야기	fix	lookup
+lexical:audit-game-verb	「いや、これでもめちゃくちゃシリアスなんだぞ」	has:시리어스한 거야	fix	lookup
+lexical:audit-game-verb	シリアスに耐えきれず、ギャグに走った。	has:시리어스를 견디지 못하고	fix	lookup
+lexical:audit-game-verb	温かいスープを飲む。	has:스프	keep	lookup
+lexical:audit-game-verb	くるりときびすを返す。	has:발길을 돌린다	fix	lookup
+lexical:audit-game-verb	屈託のない笑顔。	has:티 없는	fix	lookup
+lexical:audit-game-verb	容赦ない。	has:가차 없다	fix	lookup
+lexical:audit-game-verb	容赦はしない	has:용서는	keep	lookup
+lexical:audit-game-verb	なんだか、とっても行儀が悪い。	has:버릇없다	fix	lookup
+lexical:audit-game-verb	本当に世話が焼けるなあ	has:손이 많이 가는	fix	lookup
+lexical:audit-game-verb	相手のほうが一枚上手だ	has:한 수 위다	fix	lookup
+lexical:audit-game-verb	精がつく料理	has:기운이 나는	fix	lookup
+lexical:audit-game-verb	無言で頷く	has:말없이	fix	lookup
+lexical:audit-game-verb	「はい、銃で撃たれても」	lacks:총으로 총에	fix	lookup
+lexical:audit-game-verb	裏から手を回して、救援を要請してきた	has:손을 써	fix	lookup
+lexical:audit-game-verb	シリアスが続く	has:시리어스가	fix	lookup
+cx:audit-game-1:10	矢に撃たれた。	has:화살에 맞았다	fix	rewrites
+cx:audit-game-1:10	炎に撃たれた	has:불길에 맞았다	fix	rewrites
+cx:audit-game-1:10	雷に撃たれたような衝撃	has:번개에 맞은	fix	rewrites
+cx:audit-game-1:10	ミサイルに撃たれて墜落した	lacks:총에	fix	rewrites
+cx:audit-game-1:10	彼女に撃たれた	has:총에 맞았다	keep	rewrites
+cx:audit-game-1:10	ラピスに撃たれた	has:총에 맞았다	keep	rewrites
+cx:audit-game-1:10	彼は撃たれた。	has:총에 맞았다	keep	rewrites
+cx:audit-game-1:10	撃たれる前に撃て	has:총에 맞기 전에	keep	rewrites
+cx:audit-game-1:12	魔法で撃たれる	has:마법에 맞는다	fix	rewrites
+cx:audit-game-1:12	銃で撃たれても平気だ	has:총에 맞아도	keep	rewrites
+cx:audit-game-1:20	サービスに力を入れる	has:힘을 쏟는다	fix	rewrites
+cx:audit-game-1:20	軍事に力を入れた	has:힘을 쏟았다	fix	rewrites
+cx:audit-game-1:20	勉強に力を入れる	has:힘을 쏟는다	fix	rewrites
+cx:audit-game-1:20	腕に力を入れる	has:팔에 힘을 준다	keep	rewrites
+cx:audit-game-1:20	力を入れて引っ張った	has:힘을 주어	keep	rewrites
+cx:audit-game-1:20	指先に力を入れた	has:힘을 주었다	keep	rewrites
+cx:audit-game-1:20	腰の奥に力を入れる	has:힘을 준다	keep	rewrites
+cx:audit-game-1:22	教育には力を入れていた	has:교육에는 힘을 쏟고	fix	rewrites
+cx:audit-game-1:22	腕には力を入れた	has:힘을 주었다	keep	rewrites
+cx:audit-game-1:30	黙って見ている	has:잠자코 보고 있다	fix	rewrites
+cx:audit-game-1:30	黙って聞け	has:잠자코 들어라	fix	rewrites
+cx:audit-game-1:30	黙って待つ	has:잠자코 기다린다	fix	rewrites
+cx:audit-game-1:32	黙って去った	has:말없이 떠났다	fix	rewrites
+cx:audit-game-1:32	俺は黙って首を振った	has:말없이 고개를 저었다	fix	rewrites
+cx:audit-game-1:32	黙って手を振った	has:말없이 손을 흔들었다	fix	rewrites
+cx:audit-game-1:32	黙ってうなずく。	has:말없이 끄덕인다	fix	rewrites
+cx:audit-game-1:32	黙ってろ	has:입을 다물어라	keep	rewrites
+cx:audit-game-1:32	黙っていろ	has:입을 다물고 있어라	keep	rewrites
+cx:audit-game-1:32	黙って！	has:입을 다물어	keep	rewrites
+cx:audit-game-1:32	黙れって言ってるんだ	has:입을 다물라니까	keep	rewrites
+cx:audit-game-1:40	腰に手を回して	has:허리에 팔을 둘러	fix	rewrites
+cx:audit-game-1:40	脇の下から手を回す	has:팔을 두른다	fix	rewrites
+cx:audit-game-1:40	王になれるようにって手を回した	has:손을 썼다	keep	rewrites
+cx:audit-game-1:50	ガーゼをあてがう	has:갖다 댄다	fix	rewrites
+cx:audit-game-1:50	耳に手をあてがった	has:손을 갖다 대었다	fix	rewrites
+cx:audit-game-1:50	仕事をあてがう	lacks:갖다 대	keep	rewrites
+cx:audit-game-1:60	ネジをねじ込む	has:박아 넣는다	fix	rewrites
+cx:audit-game-1:60	ポケットにねじ込んだ	lacks:박아	keep	rewrites
+cx:audit-game-1:70	肩を落とすな	has:낙담하지 마	fix	rewrites
+cx:audit-game-1:70	肩を落とさないでください	has:낙담하지 마세요	fix	rewrites
+cx:audit-game-1:70	彼は肩を落とした	has:어깨를 떨궜다	keep	rewrites
+cx:audit-game-1:80	それは考えすぎだよ	has:지나치게 생각하는 것이야	fix	rewrites
+cx:audit-game-1:80	シリアスに考えすぎだ	has:지나치게 생각하는 것이다	fix	rewrites
+cx:audit-game-1:80	考えすぎて眠れない	lacks:생각하는 것	keep	rewrites
+cx:audit-game-1:30	黙っていなさい	lacks:잠자코	keep	rewrites
+cx:audit-game-1:90	あっちに行こう	has:저쪽으로 가자	fix	rewrites
+cx:audit-game-1:90	そっちに行くね	has:그쪽으로 갈게	fix	rewrites
+cx:audit-game-1:90	どっちに逃げた？	has:어느 쪽으로	fix	rewrites
+cx:audit-game-1:90	こっちに来て	lacks:으로	keep	rewrites
+cx:audit-game-1:90	こっちにいるよ	lacks:로 있	keep	rewrites
+cx:audit-game-1:92	こっちにある	has:여기에 있다	fix	rewrites
+cx:audit-game-1:92	こっちを見ろ	has:봐라	keep	rewrites
+lexical:audit-game-verb	こっちが悪かった	has:내가 나빴다	fix	lookup
+lexical:audit-game-verb	お手柄だね	has:잘한 일이구나	fix	lookup
+cx:audit-game-1:30	黙って寝てろ	has:잠자코 자라	fix	rewrites
+cx:audit-game-1:10	エルに撃たれて	has:총에	keep	rewrites
+cx:audit-game-1:12	森で撃たれて死んだ	has:총에 맞아	keep	rewrites

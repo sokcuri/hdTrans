@@ -6574,7 +6574,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おとなげな	어른답지 못$AB@	H7U0			GN				jisjk:4941		
 おとなし	어른스$G7@	H7U0			GN				jisjk:4942		
 おとなし	얌전$AB@	H7U0			GN	2901	||1 &&2 S+1== "する" P+1== "4**"	おとなし를 する 앞에서 '얌전하다'로 선택한다.	jisjk:340294		
-おとなし	점$Ku@	H7U0	XXX		GN				jisjk:340295		
+おとなし	얌전$AB@	H7U0	XXX		GN				jisjk:340295		
 おとなしくな	얌전해&AL@	M428			GN				jisjk:142183		
 おとなしやか	유순하고 숙부드%A4@	G8U0			GN				jisjk:119543		
 おとなび	어른스러워&AL@	M427	SFl		GN				jisjk:146478		
@@ -18025,7 +18025,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こみ	포함	N110			GN				jisjk:6487		
 こみあ	혼잡&AV@	M420	VTp		GN				jisjk:120210		
 こみあ	붐&Ad@	M420			GN				jisjk:120216		
-こみあげ	울컥거&AA@	M427	VTpQHP		GN				jisjk:120221		
+こみあげ	북받&AO@	M427	VTpQHP		GN				jisjk:120221		
 こみあげ	복받&AO@	M427	SFl		GN				jisjk:120236		
 こみい	복잡하게 얽&AW@	M427	SFl		GN				jisjk:120241		
 こみだし	작은 표제	N110	VBkVSwVCm		GN				jisjk:182977		-1
@@ -46393,7 +46393,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アドラ建材	아드라건재	N130	QIDVGt		GN				jisjk:42701		
 アドリアン	아드리안	N130	QPN		GN				jisjk:365989		
 アドリアーノ	아드리아노	N130	QPN		GN				jisjk:366226		
-アドリブ	애들립	N110			GN				jisjk:42702		
+アドリブ	애드리브	N110			GN				jisjk:42702		
 アドルフ	아돌프	N110	VHn		GN				jisjk:42703		
 アドルフォ	아돌퍼	N130	QPN		GN				jisjk:365883		
 アドレス	주소	N110			GN				jisjk:42704		
@@ -49356,7 +49356,7 @@ ttt	ttt	K110			GN				jisjk:201744
 インバーター制御電車	인버터 제어 전철	N110	VTp		GN				jisjk:352508		
 インバート	인버트	N110			GN				jisjk:162867		
 インバーネス	인버니스	N130			GN				jisjk:365324		
-インパクト	임펙트	N110			GN				jisjk:264074		
+インパクト	임팩트	N110			GN				jisjk:264074		
 インパクトアセスメント	임팩트 어세스먼트	N110			GN				jisjk:43732		
 インパクトドットプリンター	임팩트도트 프린터	N110	VPe		GN				jisjk:152024		
 インパクトプリンタ	임팩트 프린터	N110			IT				jisjk:43733		
@@ -53728,7 +53728,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カウンシル	위원회	N110	VGt		GN				jisjk:45323		
 カウンシルタックス	카운슬 택스	N110	ULwVMo		GN				jisjk:158426		
 カウンセラ	카운셀러	N110			GN				jisjk:99059		
-カウンセラー	카운셀러	N110	VHnUAq		GN				jisjk:45324		
+カウンセラー	카운슬러	N110	VHnUAq		GN				jisjk:45324		
 カウンセリング	카운셀링	N110		Hd	GN				jisjk:45325		
 カウンタ	카운터	N110			GN				jisjk:99060		
 カウンタサンク	카우터성크	N110			GN				jisjk:45331		
@@ -58178,7 +58178,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ケチがつ	부정을 &AR@	M421		Pn	GN				jisjk:363982		
 ケチをつけ	트집&FK@	M417	UTs		GN				jisjk:91594		
 ケチを付け	트집&FK@	M417	UTs		GN				jisjk:91595		
-ケチャップ	케찹	N110	VLqVFd		GN				jisjk:46811		
+ケチャップ	케첩	N110	VLqVFd		GN				jisjk:46811		
 ケック	결구	N110			GN				jisjk:100311		
 ケット	모포	N110	VPe		GN				jisjk:128311		
 ケットル	케틀	N110			GN				jisjk:128312		
@@ -59295,7 +59295,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コンクリート造	콘크리트 구조	N110			GN				jisjk:162724		
 コンクリート造り	콘크리트 구조	N110			GN				jisjk:162723		
 コンクリ－ト	콘크리트	N110			GN				jisjk:128648		
-コンクール	콩쿨	N110	VGt		GN				jisjk:47208		
+コンクール	콩쿠르	N110	VGt		GN				jisjk:47208		
 コングレス	콩그레스	N110	VBl		GN				jisjk:128649		
 コングロ マーチャント	컨글로머천트	N110			EC				jisjk:47210		
 コングロマリット	콘글로메리트	N110	VGt		BZ				jisjk:47211		
@@ -60157,7 +60157,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ゴーギャン	고갱	N110	VHn		GN				jisjk:47406		
 ゴーグル	고글	N110	VRw		GN				jisjk:47407		
 ゴーゴー	고고	N110	USoQMU		GN				jisjk:128762		
-ゴーサイン	고우 사인	N110	UAq		GN				jisjk:47408		
+ゴーサイン	고 사인	N110	UAq		GN				jisjk:47408		
 ゴージカット	목다아트	N110			GN				jisjk:47409		
 ゴージャス	고저스	N110			GN				jisjk:47410		
 ゴーステディー	고 스테디	N110			GN				jisjk:128763		
@@ -60539,7 +60539,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サックドレス	헐렁한 드레스	N110	VCp		GN				jisjk:128962		
 サッケッティ	사께띠	N130	QPN		GN				jisjk:367704		
 サッサー	샷사	N110	VHn		GN				jisjk:128963		
-サッシ	샷시	N110			GN				jisjk:106696		
+サッシ	새시	N110			GN				jisjk:106696		
 サッシュ	새시	N110			GN				jisjk:47659		
 サッシュレター	스워시 레터	N110			GN				jisjk:47660		
 サッシ取り付け	샷시 설치	N110			GN				jisjk:47661		
@@ -62485,7 +62485,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ショックストラット	쇼크 스트럿	N110			GN				jisjk:48209		
 ショックセラピー	충격 요법	N110	QHP		GN				jisjk:129383		
 ショック死	쇼크사	N110	QHP	Hd	GN				jisjk:129381		
-ショット	쇼트	N110			GN				jisjk:102117		
+ショット	샷	N110			GN				jisjk:102117		
 ショットガン	산탄총	N110	VPeVTw		GN				jisjk:129384		
 ショットガンブライド	쇼트건 브라이드	N110	VHn		GN				jisjk:129385		
 ショットキダイオード	쇼트키 다이오드	N110			GN				jisjk:48212		
@@ -62605,7 +62605,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シラルトロ	시라루토로	I130	QCTVPl		GN				jisjk:301241		
 シリ	엉덩이	N110			GN				jisjk:102147		
 シリア	시리아	N130	QNNVPl		GN				jisjk:102148		
-シリアス	진지함	N110			GN				jisjk:102149		
+シリアス	시리어스	N110			GN				jisjk:102149		
 シリアライザ	시리얼라이저	N110			GN				jisjk:48237		
 シリアライザー	시리얼라이저	N110			GN				jisjk:48238		
 シリアル	시리얼	N110			GN				jisjk:48239		
@@ -62933,7 +62933,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シークエンス	시퀀스	N110			GN				jisjk:112360		
 シークエンス化	시이퀀스화	N110			GN				jisjk:112067		
 シークタイム	탐색 시간	N110			IT				jisjk:261208		
-シークレット	비밀	N110	UTsUHr		GN				jisjk:47907		
+シークレット	시크릿	N110	UTsUHr		GN				jisjk:47907		
 シークレットサービス	시크릿 서비스	N110	VBl		GN				jisjk:129135		
 シークレットパートナー	익명 사원	N110	VHn		GN				jisjk:129136		
 シーク教	시크교	N110			GN				jisjk:47908		
@@ -63049,7 +63049,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シールインストーラー	실 인스톨러	N110			GN				jisjk:266829		
 シールスキン	실스킨	N110	VCp		GN				jisjk:129168		
 シールズ	실즈	N130	QPN		GN				jisjk:369219		
-シールド	쉴드	N110			GN				jisjk:47953		
+シールド	실드	N110			GN				jisjk:47953		
 シールド工法	실드 공법	N110			BZ				jisjk:362703		
 シーレックス	시렛크스	N110	VPl		GN				jisjk:47955		
 シーレンベック	시렌베크	N130	QPN		GN				jisjk:369797		
@@ -64516,7 +64516,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スケール。 モデル	스케일 모델	N110			GN				jisjk:48860		
 スケールメリット	스케일 메리트	N110			BZ				jisjk:364514		
 スケールーモデル。	스케일 모델	N110			GN				jisjk:48859		
-スコア	스코아	N110		Ct	GN				jisjk:48882		
+スコア	스코어	N110		Ct	GN				jisjk:48882		
 スコアブック	스코어북	N110			GN				jisjk:48883		
 スコアボード	스코어보드	N110	VPe		GN				jisjk:129805		
 スコアラー	스코어러	N110	VHn		GN				jisjk:48884		
@@ -64974,7 +64974,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ステンカラー	스텐 칼라	N110	VCp		GN				jisjk:129920		
 ステンシル	스텐실	N110			GN				jisjk:102293		
 ステンドグラス	스테인드 글라스	N110			GN				jisjk:102294		
-ステンレス	스텐레스	N110	VMa		GN				jisjk:375355		
+ステンレス	스테인리스	N110	VMa		GN				jisjk:375355		
 ステンレスコー	스텐레스강	N110			GN				jisjk:102295		
 ステンレススチール	스테인레스 스틸	N110	VMa		GN				jisjk:49073		
 ステンレススティール	스테인리스 스틸	N110			GN				jisjk:129921		
@@ -74286,7 +74286,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ハイシエラフォーマット	고급 시에라 형식	N110			IT				jisjk:261046		
 ハイジ	하이디	N130	QPN	Wb	GN				jisjk:266079		
 ハイジャッカー	하이재커	N110	VHn		GN				jisjk:53006		
-ハイジャック	하이잭	N110		Hd	GN				jisjk:53007		
+ハイジャック	하이재킹	N110		Hd	GN				jisjk:53007		
 ハイジャンプ	하이점프	N110	VRw		GN				jisjk:132225		
 ハイジャンプ	높이뛰기	N110	VRw		GN				jisjk:132226		
 ハイスクール	하이스쿨	N110	VGt		GN				jisjk:53008		
@@ -75776,7 +75776,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バリ	발리	N130	QCT		GN				jisjk:364091		
 バリ	바리	N130	VGt		GN				jisjk:368481		
 バリしま	발리섬	N110	VPl		GN				jisjk:132631		
-バリア	바리어	N110			GN				jisjk:106898		
+バリア	배리어	N110			GN				jisjk:106898		
 バリア。 クリーム	배리어 크림	N110			GN				jisjk:114138		
 バリアフリー	바리어 프리	N110			GN				jisjk:362522		
 バリアフリー	배리어 프리	N110			BZ				jisjk:366475		
@@ -76375,7 +76375,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パスティッシュ	파스티슈	N110			GN				jisjk:132770		
 パスティーネ	파스티네	N130	QPN		GN				jisjk:367637		
 パステル	파스텔	N110	VPeVSp		GN				jisjk:53723		
-パステルカラー	파스텔 칼라	N110	UCl		GN				jisjk:53724		
+パステルカラー	파스텔 컬러	N110	UCl		GN				jisjk:53724		
 パストラル	목가	N110	USoQMU		GN				jisjk:132771		
 パスバンド。 リップル	페스밴드리플	N110			GN				jisjk:53725		
 パスファインダー	패스파인더	N110	VBl		GN				jisjk:132772		
@@ -76926,7 +76926,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パンソリ	판소리	N110	USoQMU		GN				jisjk:132910		
 パンタグラフ	팬터그래프	N110	VSp		GN				jisjk:53947		
 パンタロン	판탈롱	N110			GN				jisjk:53948		
-パンダ	팬더	N110	QAA		GN				jisjk:53949		
+パンダ	판다	N110	QAA		GN				jisjk:53949		
 パンチ	펀치	N110	VBpVFd		GN				jisjk:53950		
 パンチェン・ラマ	판첸 라마	N130	QPN		GN				jisjk:359926		
 パンチカード	펀치 카드	N110	VEl		GN				jisjk:132911		
@@ -77832,7 +77832,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ビバレッジ	음료	N110	VFd		GN				jisjk:133075		
 ビバーク	비박	N110			GN				jisjk:54249		
 ビバール	비발	N130	QPN		GN				jisjk:368182		
-ビビ	위축&C6@	M418			GN				jisjk:365927		
+ビビ	겁&HU@	M418			GN				jisjk:365927		
 ビビアーニ	비비아니	N130	QPN		GN				jisjk:367795		
 ビビッド	비비드	N110			GN				jisjk:54253		
 ビビッド	비비드%A1@	G8U0			GN				jisjk:147385		
@@ -81390,7 +81390,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ブレインダメージド	브레인대미지드	N110			GN				jisjk:55828		
 ブレオマイシン	블레오마이신	N110			GN				jisjk:55829		
 ブレギー	부레기	N130	QPN		GN				jisjk:370417		
-ブレザー	블레이저 코트	N110	VCp		GN				jisjk:103279		
+ブレザー	블레이저	N110	VCp		GN				jisjk:103279		
 ブレシア	브레시아	N130			GN				jisjk:368250		
 ブレシュ	브레슈	N130	QPN		GN				jisjk:366592		
 ブレジネフ	브레주네프	N110	QPN		GN				jisjk:55830		
@@ -81424,7 +81424,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ブレンダー	브라인더	N110			GN				jisjk:55839		
 ブレンデッドファミリー	혼합 가정	N110	VBlVHn		GN				jisjk:133688		
 ブレント	브렌트	N110			BZ				jisjk:362052		
-ブレンド	브렌드	N110	VFd		GN				jisjk:55840		
+ブレンド	블렌드	N110	VFd		GN				jisjk:55840		
 ブレーカ	브레이커	N110			GN				jisjk:114358		
 ブレーカー	브레이커	N110	VElVPe		GN				jisjk:133677		
 ブレーキ	브레이크	N110	VMa		GN				jisjk:55802		
@@ -82690,7 +82690,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヘラムド	전령	N110			GN				jisjk:114286		
 ヘラルド	헤럴드	N130	QPN		GN				jisjk:133956		
 ヘラルド朝日	헤럴드 아사히	N130			GN				jisjk:359887		
-ヘリ	헬리콥터	N130	VTp		GN				jisjk:105308		
+ヘリ	헬기	N130	VTp		GN				jisjk:105308		
 ヘリ	헤리	N130	QPN		GN				jisjk:367985		
 ヘリウム	헬륨	N110	UGs		GN				jisjk:56206		
 ヘリオグラフ	일조계	N110	VPe		GN				jisjk:133957		
@@ -85040,7 +85040,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ポータル	포털	N110			BZ				jisjk:363155		
 ポータルサイト	포털 사이트	N110			IT				jisjk:262661		
 ポーター	포터	N110	VHnUAq		GN				jisjk:56767		
-ポーチ	포우치	N110			GN				jisjk:134428		
+ポーチ	파우치	N110			GN				jisjk:134428		
 ポーチドエッグ	수란	N110			GN				jisjk:56780		
 ポーチドエッグズ	수란	N110	VFd		GN				jisjk:134429		
 ポーツマス	포츠머스	N130	QCTVPl		GN				jisjk:343429		
@@ -85471,7 +85471,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マシマロ	마시마로	N110	VRw		GN				jisjk:134638		
 マシマロ	마시맬로	N110	VFd		GN				jisjk:374971		
 マシュチク	마셰치크	N130	QPN		GN				jisjk:371522		
-マシュマロ	마시마로	N110			GN				jisjk:57145		
+マシュマロ	마시멜로	N110			GN				jisjk:57145		
 マシュー	머슈	N130	QPN		GN				jisjk:119029		
 マシューズ	마슈즈	N130	QPN		GN				jisjk:369108		
 マシン	머신	N110			IT				jisjk:263051		
@@ -88486,7 +88486,7 @@ ttt	ttt	K110			GN				jisjk:201744
 モラトリアム夫婦	모라토리엄 부부	N110	VHn		GN				jisjk:135221		
 モラリスト	모럴리스트	N110			GN				jisjk:113841		
 モラリティー	도덕성	N110			GN				jisjk:113831		
-モラル	모랄	N110			GN				jisjk:58216		
+モラル	모럴	N110			GN				jisjk:58216		
 モラルセンス	도덕관념	N110			GN				jisjk:113830		
 モラルハザード	모럴헤저드	N110	VMo		GN				jisjk:135222		
 モラルハザード	모럴헤저드	N110	VMo		GN				jisjk:135242		
@@ -88558,7 +88558,7 @@ ttt	ttt	K110			GN				jisjk:201744
 モルヒネ	모르피네	N110			GN				jisjk:58242		
 モルフェオ	몰페오	N130	QPN		GN				jisjk:367593		
 モルフォリン	모르포린	N110			GN				jisjk:164024		
-モルモット	몰모트	N110			GN				jisjk:113819		
+モルモット	모르모트	N110			GN				jisjk:113819		
 モルモン	몰몬	N110			GN				jisjk:113851		
 モルモン教	모르몬교	N110	UCl		GN				jisjk:135225		
 モルーラ	모룰라	N130	QPN		GN				jisjk:369958		
@@ -92439,7 +92439,7 @@ ttt	ttt	K110			GN				jisjk:201744
 レバークーゼン	레버쿠젠	N130			GN				jisjk:365363		
 レパブリック	공화국	N110	VPl		GN				jisjk:135960		
 レパートリ	레퍼토리	N110			GN				jisjk:59629		
-レパートリー	레퍼터리	N110	VSw		GN				jisjk:59630		
+レパートリー	레퍼토리	N110	VSw		GN				jisjk:59630		
 レビジョン	리비전	N110			GN				jisjk:59631		
 レビテーション	공중부양	N110			GN				jisjk:107595		
 レビュー	리뷰	N110			GN				jisjk:107526		
@@ -92772,7 +92772,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ロケットのうちあげ	로켓 발사	N110	VSs		GN				jisjk:152627		
 ロケットの打ち上げ	로켓 발사	N110	VSs		GN				jisjk:152626		
 ロケットシステム	로케트 시스템	N130	QIDVGt		GN				jisjk:59802		
-ロケットランチャー	로켓 발사기	N110	VPe		GN				jisjk:159094		
+ロケットランチャー	로켓 런처	N110	VPe		GN				jisjk:159094		
 ロケット弾	로켓탄	N110	VTw		GN				jisjk:159092		
 ロケット発射装置	로케트 발사장치	N110			GN				jisjk:107527		
 ロケハン	로케이션 헌팅	N110	UAr		GN				jisjk:159095		
@@ -93021,7 +93021,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ロフトハウス	로프트하우스	N130	QPN		GN				jisjk:369094		
 ロブ	로브	N130	QPN		GN				jisjk:159140		
 ロブ	로브	N110	VRw		GN				jisjk:369083		
-ロブスター	로브스타	N110	VFdQAAQACQAC		GN				jisjk:59884		
+ロブスター	랍스터	N110	VFdQAAQACQAC		GN				jisjk:59884		
 ロブストネス	로버스트니스	N110			GN				jisjk:59885		
 ロブソン	로브슨	N130	QPN		GN				jisjk:366344		
 ロブテックス	로브텍스	N130	QIDVGt		GN				jisjk:59886		
@@ -116393,7 +116393,7 @@ ttt	ttt	K110			GN				jisjk:201744
 交ぜ織り	교직물	N110			GN				jisjk:251733		
 交り江	마지리에	N130	QCTVPl		GN				jisjk:329202		
 交わ	사&C1@	M418	VHn		GN				jisjk:92020		
-交わ	주고 &FD@	M443			GN				jisjk:118629		
+交わ	주고&FD@	M443			GN				jisjk:118629		
 交わり	교제	N110			GN				jisjk:62533		
 交互	교호	N110			GN				jisjk:16582		
 交互に	교대로	E300			GN				jisjk:149113		
@@ -138630,7 +138630,7 @@ ttt	ttt	K110			GN				jisjk:201744
 力の限り	힘껏	E311			GN				jisjk:1595		
 力をこめ	힘을 &CJ@	M427		Pn	GN				jisjk:349567		
 力を入れ	힘을 &AF@	M417			GN				jisjk:92553		
-力を入れ	힘을 기울&AJ@	M447			GN				jisjk:139759		
+力を入れ	힘을 &CJ@	M447			GN				jisjk:139759		
 力を入れ始め	힘을 쏟기 시작&AV@	M427			GN				jisjk:139758		
 力を合わ	힘을 합&AO@	M413			GN				jisjk:92555		
 力を合わせ	힘을 합&AV@	M427			GN				jisjk:139757		
@@ -138647,7 +138647,7 @@ ttt	ttt	K110			GN				jisjk:201744
 力を立て	노력&AV@	M417			GN				jisjk:92550		
 力を落と	낙담&AV@	M413			GN				jisjk:92549		
 力を貸	도와&CJ@	M413			GN				jisjk:92547		
-力を込め	힘을 집중&AV@	M447			GN				jisjk:139760		
+力を込め	힘을 &CJ@	M447			GN				jisjk:139760		
 力ヤバ	가야바	I110	VGt		GN				jisjk:67725		
 力ワムラ	가와무라	I110	VGt		GN				jisjk:67726		
 力万	리키만	N130	QCTVPl		GN				jisjk:338366		
@@ -155343,7 +155343,7 @@ ttt	ttt	K110			GN				jisjk:201744
 吸い物	국	I110	VFd		GN				jisjk:90058		
 吸い物椀	대접	N110			GN				jisjk:237866		
 吸い玉	흡각	N110	QHPVPe		GN				jisjk:196306		
-吸い込	들이 마&AE@	M445			GN				jisjk:137067		
+吸い込	들이마&AE@	M445			GN				jisjk:137067		
 吸い込	흡입&AV@	M445	VFd		GN				jisjk:344065		
 吸い込まれ	빨려 들여&A1@	M427			GN				jisjk:137104		
 吸い込み	흡입	N110		Hd	GN				jisjk:237729		
@@ -211241,7 +211241,7 @@ ttt	ttt	K110			GN				jisjk:201744
 我が身	자기몸	I110	VHn		GN				jisjk:77250		
 我が輩	나	I120	VHn		GN				jisjk:77246		
 我が輩	내	I120	VHn		GN				jisjk:77247		
-我に返	제 정신을 차&AA@	M428			GN				jisjk:117101		
+我に返	정신을 차&AA@	M428			GN				jisjk:117101		
 我ら	우리들	N110	VHn		GN				jisjk:28311		
 我を張	고집을 부&AA@	M418			GN				jisjk:93928		
 我を忘れ	넋을 &HL@	M427			GN				jisjk:118284		
@@ -217495,7 +217495,7 @@ ttt	ttt	K110			GN				jisjk:201744
 撃	공격&AV@	M434			GN				jisjk:91751		
 撃	&MH@	M444	XXXVTwVRw		GN				jisjk:144074		
 撃き落	쏘아 떨어뜨&AA@	M443	VRwVAm		GN				jisjk:141375		
-撃たれ	총격당&AV@	M427			GN				jisjk:145649		
+撃たれ	총에 &FB@	M427			GN				jisjk:145649		
 撃ちまく	마구 &AO@	M448	VRw		GN				jisjk:143737		
 撃ち合	교전&AV@	M440	VTw		GN				jisjk:141358		
 撃ち合い	역공격	N110		Hd	GN				jisjk:115372		
@@ -253059,7 +253059,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気まぐれ	변덕	I110	UFl		GN				jisjk:63780		
 気まぐれ	변덕%A2@	G8U0			GN				jisjk:120326		
 気まぐれで	변덕으로	E311			GN				jisjk:1510		
-気まず	거북$AB@	H7U0			GN				jisjk:5441		
+気まず	어색$AB@	H7U0			GN				jisjk:5441		
 気まず	서먹서먹$AB@	H7N0	SFl		GN				jisjk:120308		
 気まずそう	어색한 것 %B3@	G8U0			GN				jisjk:120331		
 気まま	방자	I110			GN				jisjk:63781		
@@ -274602,7 +274602,7 @@ ttt	ttt	K110			GN				jisjk:201744
 生き証文	산 증인	I110			GN				jisjk:73718		
 生き身	살아 있는 몸	N110	VBp		GN				jisjk:125283		
 生き身は死に身	생자 필멸	N110			GN				jisjk:150482		
-生き返	소생&AV@	M418	QHP		GN				jisjk:93443		
+生き返	되살아&A5@	M418	QHP		GN				jisjk:93443		
 生き長らえ	장수&AV@	M427	QHP		GN				jisjk:140547		
 生き難	살기 어$G8@	H7U0			GN				jisjk:262224		
 生き馬	살아 있는 말	N110	UTs		GN				jisjk:125235		
@@ -281330,7 +281330,7 @@ ttt	ttt	K110			GN				jisjk:201744
 目玉を食	야단을 &FB@	M410			GN				jisjk:92811		
 目玉商品	인기상품	I110	VMo		GN				jisjk:68980		
 目玉焼	계란 프라이	N110			GN				jisjk:253463		
-目玉焼き	달걀 후라이	I110	VFdVFd		GN				jisjk:68981		
+目玉焼き	달걀 프라이	I110	VFdVFd		GN				jisjk:68981		
 目田町	메다쵸	N130	QCTVPl		GN				jisjk:334253		
 目白	메지로	N130	QCT		GN				jisjk:21947		
 目白台	메지로다이	N130	QCTVPl		GN				jisjk:334250		
@@ -305164,7 +305164,7 @@ ttt	ttt	K110			GN				jisjk:201744
 肩を抜	책임을 회피&AV@	M411			GN				jisjk:91759		
 肩を持	편을 &J6@	M424			GN				jisjk:91762		
 肩を竝べ	비견&AV@	M417			GN				jisjk:91760		
-肩を落と	낙담&AV@	M413	UTh	Pn	GN				jisjk:91758		
+肩を落と	어깨를 떨&NG@	M413	UTh	Pn	GN				jisjk:91758		
 肩を貸	거들어&CJ@	M413			GN				jisjk:91757		
 肩ロース	어깨등심	N110	VFd		GN				jisjk:349284		
 肩ヶ岳	미다가타케	N130	VPl		GN				jisjk:222002		
@@ -309232,7 +309232,7 @@ ttt	ttt	K110			GN				jisjk:201744
 色魔	호색한	N110	VHn		GN				jisjk:25941		
 色鮮やか	선명%A1@	G8U0			GN				jisjk:342824		
 色麻町	시카마쵸	N130	QCTVPl		GN				jisjk:297263		
-艶っぽ	음란$AB@	H7N0			GN				jisjk:121639		
+艶っぽ	요염$AB@	H7N0			GN				jisjk:121639		
 艶のな	윤기 $FA@	H7N0			GN				jisjk:121649		
 艶め	요염&Mf@	M421	UYh	Va	GN				jisjk:143751		
 艶めかし	요염$AB@	H7N0	VAc		GN				jisjk:121854		
@@ -316331,7 +316331,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蘆薈	노회	N110	VPt		GN				jisjk:256646		
 蘆辺踊り	아시베 무용제	N110	VBlUAr		GN				jisjk:227264		
 蘆雪	로세츠	N110	VHn		GN				jisjk:256727		
-蘇	소생&AV@	M438			GN				jisjk:93626		
+蘇	되살아&A5@	M438			GN				jisjk:93626		
 蘇ジェホ	소재호	N130	QPN		GN				jisjk:207903		
 蘇刈	소카루	N130	QCTVPl		GN				jisjk:304783		
 蘇原	소하라	N130	QCTVPl		GN				jisjk:347621		
@@ -329364,7 +329364,7 @@ ttt	ttt	K110			GN				jisjk:201744
 貫高	간다카	N110			GN				jisjk:230101		
 責め	고문	N110			GN				jisjk:12397		
 責め	책임	N110			GN				jisjk:12398		
-責め	꾸&HP@	M447	UTs		GN				jisjk:12399		
+責め	탓&AV@	M447	UTs		GN				jisjk:12399		
 責め	재촉&AV@	M447	VMoUTs		GN				jisjk:12400		
 責め	탓&AV@	M437			GN	4773	||1 A-2-= "VHn"	두 단어 앞에 사람 의미가 있으면 責め를 '탓하다'로 고른다.	jisjk:373503		
 責めさいな	괴롭&AW@	M445			GN				jisjk:138375		
@@ -364297,7 +364297,7 @@ ttt	ttt	K110			GN				jisjk:201744
 黒鴨	쿠로가모	N130	QCTVPl		GN				jisjk:291503		
 黒黴	검은 곰팡이	N110	VPt		GN				jisjk:176682		
 黒鼠	인쥐	N110	VHn		GN				jisjk:176726		
-黙	입다&L5@	M418		Do	GN	690	||1 &&9 M+0== "57*" P+1== "4**" S+1!= "い" S+1!= "Lくれ" S+1!= "Lくださ" S+1!= "L下さ" S+1!= "Lもら" S+1!= "Lおくれ" Y+0= "1고"	黙 뒤에 いる나 주고받는 보조동사(くれる, くださる, もらう)가 아닌 동사가 이어지는 '-て/で'형이면 '입다물다'를 고르고 어미를 '-고'로 바꾼다(黙っててくれ는 그대로, LEX-4768).	jisjk:92837		
+黙	입을 다&L5@	M418		Do	GN	690	||1 &&9 M+0== "57*" P+1== "4**" S+1!= "い" S+1!= "Lくれ" S+1!= "Lくださ" S+1!= "L下さ" S+1!= "Lもら" S+1!= "Lおくれ" Y+0= "1고"	黙 뒤에 いる나 주고받는 보조동사(くれる, くださる, もらう)가 아닌 동사가 이어지는 '-て/で'형이면 '입다물다'를 고르고 어미를 '-고'로 바꾼다(黙っててくれ는 그대로, LEX-4768).	jisjk:92837		
 黙	말을 &LW@	M428			GN				jisjk:141067		
 黙々と	묵묵히	E300			GN				jisjk:341810		
 黙しがた	저버리기 어$G8@	H7N0			GN				jisjk:136767		

@@ -7,7 +7,7 @@ cx:sense-cues-1:122	艦隊、無事母港に入りました。本当、良かっ
 cx:sense-cues-1:122	It's ten. 今日も本当、いろいろあったわね。	It's ten. 오늘도 정말, 여러 가지 있었네.	fix	rewrites
 cx:sense-cues-1:122	本当なら、生きているうちにこうしてやりたかった	원래라면, 살아 있는 동안에 이렇게 해 주고 싶었다	keep	rewrites
 sense:kakeru-sauce	微笑みながらメンチカツとキャベツにたっぷりとソースをかけている	미소 지으면서 멘치카츠와 양배추에 듬뿍 소스를 뿌리고 있다	fix	senses
-sense:kakeru-sauce	ケチャップをかけすぎじゃないか?	케찹을 너무 뿌리지 않을까?	fix	senses
+sense:kakeru-sauce	ケチャップをかけすぎじゃないか?	케첩을 너무 뿌리지 않을까?	fix	senses
 sense:kakeru-trouble	「……すまん、面倒かけた」	「……미안, 귀찮음 끼쳤다」	fix	senses
 sense:kakeru-trouble	手間かけさせやがって！脱出するぞ。	수고 끼치게 하다니! 탈출하겠어.	fix	senses
 sense:kakeru-sauce	眼鏡をかけた少年	안경을 쓴 소년	keep	senses
