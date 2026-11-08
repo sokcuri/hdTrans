@@ -89,7 +89,7 @@ normalize:kansai-ee	ここでええ？うん！	여기면 돼? 응!	fix	normaliz
 normalize:kansai-ee	サイコロも１個でええ	주사위도 1개면 된다	fix	normalize
 normalize:kansai-ee	よし！　これでええ！	좋아! 이거면 돼!	fix	normalize
 normalize:kansai-ee	「ちょっと遠いんやけど、それでもええ？」	「조금 먼 이나하지만, 그래도 좋아?」	fix	normalize
-normalize:kansai-ee	先っぽだけやのうて、こっちの裏側も舐めた方がええ？	끝이다 케야노우라고, 여기의 뒤편도 핥는 것이 좋아?	fix	normalize
+normalize:kansai-ee	先っぽだけやのうて、こっちの裏側も舐めた方がええ？	끝이다 케야노우라고, 이쪽의 뒤편도 핥는 것이 좋아?	fix	normalize
 normalize:kansai-ee	……え、毎年練度を上げて、うええ！？	……어, 매년 숙련도를 올리고, 위네!?	keep	normalize
 normalize:kansai-ee	もうええで 楠川さん	이제 됐어 구스카와 씨	keep	normalize
 normalize:kansai-ee	新しい服も 贅沢も何もせんでええ	새로운 옷도 사치이고 뭐고 하지 않아도 된다	keep	normalize

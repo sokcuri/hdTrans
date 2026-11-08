@@ -5,7 +5,7 @@ sound:spaced-pairs	おお…｡ ない ない ない｡	오오…. 아냐 아냐
 sound:spaced-pairs	これが　東京駅？そう　そう　そう！	이것이 도쿄역? 맞아 맞아 맞아!	fix	sound
 sound:spaced-pairs	こら こら こら｡	이봐 이봐 이봐.	fix	sound
 sound:spaced-pairs	おい おい！	이봐 이봐!	fix	sound
-sound:spaced-pairs	そうです　そうです。　こっち。	그렇습니다 그렇습니다. 여기.	keep	sound
+sound:spaced-pairs	そうです　そうです。　こっち。	그렇습니다 그렇습니다. 이쪽.	keep	sound
 sound:spaced-pairs	お～　よし　よし　よし。	오~ 좋아 좋아 좋아.	keep	sound
 sound:spaced-pairs	ハァ ハァ	하아 하아	keep	sound
 sound:spaced-pairs	財布が、ない ない！	lacks:아냐	keep	sound

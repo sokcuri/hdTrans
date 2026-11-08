@@ -17,7 +17,7 @@ dict:jisjk:116506	ベッドに横たわった。	침대에 누웠다.	keep	looku
 dict:jisjk:116506	ベッドに横たわる。	침대에 눕는다.	keep	lookup
 dict:jisjk:116506	雪……冬……横たわる未来……。	눈……겨울……눕는 미래…….	keep	lookup
 dict:jisjk:116506	布の上に横たわる人間。	천 위에 눕는 인간.	keep	lookup
-lookup:yokotaeru-boundary	こっち 横にある	여기 옆에 있다	keep	lookup
+lookup:yokotaeru-boundary	こっち 横にある	이쪽 옆에 있다	keep	lookup
 lookup:yokotaeru-boundary	横から見たら	옆에서 보면	keep	lookup
 lookup:yokotaeru-boundary	耐えました！	참았습니다!	keep	lookup
 lookup:yokotaeru-boundary	耐えねばなるまい	참아야 할 것이다	keep	lookup

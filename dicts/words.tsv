@@ -7156,7 +7156,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バカなの	바보야	A9D0			GN				llm			w:7146
 バカらし	바보스$G7@	H7U0			GN						バカらしい	w:7147
 バカを言	말도 안 되는 소리를 &AV@	M420		Pn	GN				llm		バカをいう	w:7148
-バカップル	바캇푸루	N110			GN						バカップル	w:7149
+バカップル	닭살 커플	N110			GN						バカップル	w:7149
 バカバカし	우스꽝스$G7@	H7U0			GN						バカバカしい	w:7150
 バカ者	바보	N110			GN						ばかもの	w:7151
 バカ貝	개량조개	N110			GN						バカガイ	w:7152
@@ -18527,7 +18527,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 横切	가로&E7@	M428			GN				xxx	1	よこぎる	w:18445
 横坐り	옆으로 앉기	N110		Hd	GN				llm		よこずわり	w:18446
 横坐り	옆으로 &FI@	M429			GN				llm		よこずわり	w:18447
-横断幕	플래카드	N110			GN						おうだんまく	w:18448
+横断幕	현수막	N110			GN						おうだんまく	w:18448
 横断線	횡단선	N110			GN						おうだんせん	w:18449
 横滑り	옆으로 미끄러짐	N110		Hd	GN				xxx llm		よこすべり	w:18450
 横滑り	수평 이동	N110	UAq	Hd	GN				llm		よこすべり	w:18451
@@ -28552,3 +28552,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なし	%B6@	G8U0			GN						なし	w:34817
 ナシ	%B6@	G8U0			GN						なし	w:34836
 無し	%B6@	G8U0			GN						なし	w:34819
+こっち側	이쪽	I110			GN			// LEX-5701			こっちがわ	w:35254
+あっち側	저쪽	I110			GN			// LEX-5701			あっちがわ	w:35255
+そっち側	그쪽	I110			GN			// LEX-5701			そっちがわ	w:35256
+済みません	죄송합니다	A110			GN			// LEX-5700			すみません	w:35257
+済みませんでした	죄송합니다	A110			GN			// LEX-5700			すみませんでした	w:35258

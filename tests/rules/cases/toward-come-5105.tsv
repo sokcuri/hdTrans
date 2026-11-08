@@ -7,10 +7,10 @@ cx:toward-come:10	向かってくる者は全て殺すが	has:다가오는 사�
 cx:toward-come:10	しかし奴らは私にしか向かって来ないし	has:다가오지 않고	fix	rewrites
 cx:toward-come:10	ほう… 向かってくるのか｡	has:다가오는 건가	fix	rewrites
 cx:toward-come:10	結構な勢いで自分に向かってくるドアで頭を打ちそうになった	lacks:다가	keep	rewrites
-cx:toward-come:20	「こっちに向かってくるやつだけ、落とせばいいんだね」	has:여기로 다가오는	fix	rewrites
+cx:toward-come:20	「こっちに向かってくるやつだけ、落とせばいいんだね」	has:이쪽으로 다가오는	fix	rewrites
 cx:toward-come:20	こちらには向かってきません	has:이쪽에는 다가오지 않습니다	fix	rewrites
 cx:toward-come:10	海賊たちが こちらへ向かってきます！	has:이쪽으로 다가옵니다	fix	rewrites
-cx:toward-come:20	敵艦がこっちに向かってくる	has:여기로 다가온다	fix	rewrites
+cx:toward-come:20	敵艦がこっちに向かってくる	has:이쪽으로 다가온다	fix	rewrites
 cx:toward-come:10	出口へ向かってください！	has:향해 주세요	keep	rewrites
 cx:toward-come:10	リン、211に向かってくれ	has:향해 줘	keep	rewrites
 cx:toward-come:10	しかも死ぬほどの怪我を負っても回復して立ち向かってくる。	has:맞서 온다	keep	rewrites

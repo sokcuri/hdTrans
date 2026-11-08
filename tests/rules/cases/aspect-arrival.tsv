@@ -4,7 +4,7 @@ rewrite:result-state	その前線艦隊についての追加情報として、�
 rewrite:result-state	……他の家じゃ息子さんたちが帰ってきてるんですよね。	……다른 집은 아들들이 돌아와 있는 거예요.	fix	rewrites
 rewrite:result-state	「……ん？　あぁ、周防さん、戻ってきてたのね」	「……응? 아아, 스오우 씨, 돌아와 있었구나」	fix	rewrites
 rewrite:result-state	放課後の演説を終えて、俺たちは部室に戻ってきていた。	방과 후 연설을 끝내고, 우리는 동아리방으로 돌아와 있었다.	fix	rewrites
-rewrite:result-state	3日くらい前にもうこっちの世界に戻って来てたってこと？！	3일 정도 전에 이제 여기의 세계로 돌아와 있었다는 것?!	fix	rewrites
+rewrite:result-state	3日くらい前にもうこっちの世界に戻って来てたってこと？！	3일 정도 전에 이제 이쪽의 세계로 돌아와 있었다는 것?!	fix	rewrites
 rewrite:result-state	特に被害があったという報告は入ってきていません。	특히 피해가 있었다는 보고는 들어와 있지 않습니다.	fix	rewrites
 rewrite:result-state	新しい目撃情報が入ってきているのだ。	새로운 목격 정보가 들어와 있다.	fix	rewrites
 rewrite:result-state	手紙…きてるよ？	편지…와 있어?	fix	rewrites

@@ -36,6 +36,6 @@ sound:lead-after-ellipsis	……おい！	……어이!	fix	sound
 sound:lead-after-ellipsis	……ね、聞いて	……저기, 들어	fix	sound
 sound:lead-after-ellipsis	したい…ね？	하고 싶다…?	keep	sound
 dict:lexical-garbled-words	手が器用だ。	손재주가 좋다.	fix	lookup
-dict:lexical-garbled-words	ざぶっとかけ湯をして、湯船に浸かった。	첨벙 물 끼얹기를 하고, 목욕통에 잠겼다.	fix	lookup
+dict:lexical-garbled-words	ざぶっとかけ湯をして、湯船に浸かった。	첨벙 물 끼얹기를 하고, 욕조에 잠겼다.	fix	lookup
 dict:lexical-garbled-words	掛け湯をする	물 끼얹기를 한다	fix	lookup
 dict:lexical-garbled-words	し意的な輸出規制	자의적인 수출규제	fix	lookup

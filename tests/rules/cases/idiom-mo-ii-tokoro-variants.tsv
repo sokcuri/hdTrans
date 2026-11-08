@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:novel-idioms:27	王族として見れば落第も良い所である。	왕족으로서 보면 낙제도 이만저만이 아니다.	fix	local
 dict:novel-idioms:25	そんな俺にとって、彼女はブスもいい所だった。	그런 나에게는, 그녀는 추녀도 이만저만이 아니었다.	fix	local
-dict:novel-idioms:31	さっき生まれたばっかの小蜘蛛に無茶振りもいいとこだね。	조금 전 태어난지 얼마 안 된 소거미에게 덤터기도 이만저만이 아니네.	fix	local
+dict:novel-idioms:31	さっき生まれたばっかの小蜘蛛に無茶振りもいいとこだね。	조금 전 태어난지 얼마 안 된 소거미에게 무리한 요구도 이만저만이 아니네.	fix	local
 dict:novel-idioms:31	他の稼ぎなんてクズもいいとこだ。	다른 돈벌이는 쓰레기도 이만저만이 아니다.	fix	local
 dict:novel-idioms:31	「いじられキャラが嫌いじゃないなんて、大嘘もいいとこでしょ」	「만져지고 캐릭터가 싫지 않다니, 대거짓말도 이만저만이 아니지」	fix	local
 dict:novel-idioms:29	勘違いも良いところだ。	착각도 이만저만이 아니다.	fix	local

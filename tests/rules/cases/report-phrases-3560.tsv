@@ -57,7 +57,7 @@ cx:caption-fixes-1:82	ねじを反対に回した。	!rule:cx:caption-fixes-1:82
 dict:jisjk:375040	引き続き、情報収集を続けるとしています。	has:정보수집을 계속한다고 하고 있습니다	fix	local-ending
 dict:jisjk:375040	捜査を進めるとしています。	has:진행시킨다고 하고 있습니다	fix	local-ending
 dict:jisjk:375040	対象者には個別に連絡するとしています。	has:연락한다고 하고 있습니다	fix	local-ending
-dict:jisjk:375040	回答できないとしています。	has:회답할 수 없다고 하고 있습니다	keep	local-ending
+dict:jisjk:375040	回答できないとしています。	has:답변할 수 없다고 하고 있습니다	keep	local-ending
 dict:jisjk:375040	難しいとしています。	has:어렵다고 하고 있습니다	keep	local-ending
 dict:jisjk:4029	値上げするとの発表がありました。	has:인상한다는 발표가	fix	local-ending
 dict:jisjk:4029	上院も接戦にもつれ込むとの見方が広がっています。	has:접전으로 이어진다는 견해가	fix	local-ending

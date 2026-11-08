@@ -18,7 +18,7 @@ sound:short-answer	これは…そう、あれだ	이것은…그렇게, 저것�
 sound:short-answer	いえなんでも…ありません……	아뇨 아무것도…아닙니다……	fix	fixed
 sound:short-answer	「いえそうじゃなくて……あの」	「아뇨 그게 아니라……저기」	fix	fixed
 sound:short-answer	許可？ いえそんなもの必要ありませんよ。	허가? 아뇨 그런 것 필요 없어요.	fix	fixed
-sound:short-answer	「いえいえ、大切なのは愛ですよ」	「아니오, 중요한 건 사랑이에요」	keep	fixed
+sound:short-answer	「いえいえ、大切なのは愛ですよ」	「아니에요, 중요한 건 사랑이에요」	keep	fixed
 sound:short-answer	いえない	말할 수 없다	keep	fixed
 sound:short-answer	そういえば	그러고 보니	keep	fixed
 sound:short-answer	私もお祝い! いぇい！！	나도 축하! 예이!!	fix	fixed

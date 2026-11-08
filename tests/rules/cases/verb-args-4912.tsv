@@ -4,7 +4,7 @@ pack:argument-senses:116	「借りは、返します」	has:빚은, 갚습니다
 pack:argument-senses:116	本を返した	has:책을 돌려주었다	keep	packs
 pack:argument-senses:117	二人の肩に両腕を回してどこかへ行こうとしている	has:양팔을 둘러	fix	packs
 pack:argument-senses:117	少し、僕は手を後ろに回して、捕まらない瓶を探す	lacks:둘러	keep	packs
-pack:argument-senses:118	スマホを見るなり、通知音を切って画面を消す。	has:통지음을 꺼	fix	packs
+pack:argument-senses:118	スマホを見るなり、通知音を切って画面を消す。	has:알림음을 꺼	fix	packs
 pack:argument-senses:118	紙を切る	has:종이를 자른다	keep	packs
 pack:argument-senses:119	わかった。もう通信を切るぞ」	has:통신을 끊겠어	keep	packs
 pack:argument-senses:120	手のひらを切ったナイフに宿した魔法で	has:손바닥을 벤	fix	packs

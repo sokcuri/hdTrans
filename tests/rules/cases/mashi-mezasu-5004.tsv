@@ -33,7 +33,7 @@ cx:web-fixes-j:254	北を目指して進む	has:북쪽을 향해 나아간다	fi
 cx:web-fixes-j:254	艦隊型駆逐艦の最高峰を目指して開発された、高速で重雷装の駆逐艦、島風型よ。	!rule:cx:web-fixes-j:254	keep	rewrites
 cx:web-fixes-j:254	頂上を目指していく	!rule:cx:web-fixes-j:254	keep	rewrites
 pack:everyday-sense-glosses:5055	「何もないよりはまし」	has:없는 것보다는 낫다	fix	packs
-pack:everyday-sense-glosses:5055	こっちの方がまし。	has:여기가 낫다.	fix	packs
+pack:everyday-sense-glosses:5055	こっちの方がまし。	has:이쪽이 낫다.	fix	packs
 pack:everyday-sense-glosses:5055	お許し下さいまし	lacks:나은	keep	packs
 cx:web-fixes-j:255	「頂上を目指して！」	!rule:cx:web-fixes-j:255	keep	rewrites
 cx:web-fixes-j:254	頂上を目指して歩け！	has:정상을 향해 걸어라	fix	rewrites

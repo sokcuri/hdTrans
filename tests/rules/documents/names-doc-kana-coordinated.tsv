@@ -12,7 +12,7 @@ names:doc-kana-coordinated	おやじや照子は？	아버지나 테루코는?	k
 names:doc-kana-coordinated	松田といや 関東でも名の通った組	마츠다와 아니 관동에서도 이름이 알려진 조	keep	fixed
 names:doc-katakana-compound	スーパーマンさん！\nスーパーマンさん、行こう	슈퍼맨 씨!\n슈퍼맨 씨, 가자	keep	fixed
 names:doc-katakana-compound	バットマンさん！\nバットマンさん、行こう	배트맨 씨!\n배트맨 씨, 가자	keep	fixed
-names:doc-kana-coordinated	ひかりとみゆきが来た\nひかり、こっちだよ	히카리와 미유키가 왔다\n히카리, 여기야	fix	fixed
-names:doc-kana-coordinated	ひかり、こっちだよ	빛나, 여기야	keep	fixed
+names:doc-kana-coordinated	ひかりとみゆきが来た\nひかり、こっちだよ	히카리와 미유키가 왔다\n히카리, 이쪽이야	fix	fixed
+names:doc-kana-coordinated	ひかり、こっちだよ	빛나, 이쪽이야	keep	fixed
 names:doc-kana-coordinated	いくとみゆきがいた	가니 미유키가 있었다	keep	fixed
 names:doc-kana-coordinated	あ～ こっちが こうで…｡ 基本は オート操作なんだけど 最初だけ なぜか あやとりなの｡\nあやとりはね｡ ウフフフ！	has:무늬	keep	fixed

@@ -54,7 +54,7 @@ dict:w:34218	じゃあこいつらは綾那が殺ってやるです！	그럼 �
 dict:w:34218	「うーっし、誰が最初に殺れるか勝負だな」	「우-해, 누가 처음에 죽일 수 있을까 승부네」	fix	lookup
 dict:w:34218	必殺って。久遠ちゃんに怒られちゃいますよ？	필살은. 쿠온짱에게 혼나버립니다?	keep	lookup
 dict:w:34218	…くそ、……早くも「殺る気」満々じゃねえか！	…젠장, ……벌써 「죽일 생각」만만하잖아!	fix	lookup
-dict:w:34218	「ったく、ガキを殺るのは後味が悪ぃってのに……」	「참나, 녀석을 죽이는 건 뒷맛이 개운치 않다는의에……」	fix	lookup
+dict:w:34218	「ったく、ガキを殺るのは後味が悪ぃってのに……」	「참나, 꼬맹이를 죽이는 건 뒷맛이 개운치 않다는의에……」	fix	lookup
 dict:w:34218	「なに、逃げなかったの？　まあ、逃げても外の連中に殺らせるけど」	「뭐, 도망치지 않았어? 뭐, 도망쳐도 밖의 무리에게 죽이게 하는데」	fix	lookup
 dict:w:34219	ちん締めつけてるの♡♡ぉ♡♡	친 조여♡♡오♡♡	fix	lookup
 dict:w:34219	うまく締めつけることが できなかったため・	잘 조일 수가 없었기 때문에·	fix	lookup
@@ -74,7 +74,7 @@ normalize:kata-hazu	キチッとやったハズの宿題が 朝起きたら機�
 normalize:kata-hazu	ハズブロ 元ＣＥＯ アラン･ ハッセンフェルド 気が進まなかった	해즈브로 전 CEO 알란·핫센페르드 마음이 내키지 않았다	keep	normalize
 normalize:kata-hazu	けれども、さっきは隣にあったハズの紀子がいる部屋が見つからな後ろからは、あのヤギ男	그러나, 조금 전은 옆에 있었을 터인 토시코가 있는 방이 발견되고뒤에서는, 그 염소남	fix	normalize
 normalize:rough-kudasai	盛り上げ役は任せてくだせぇ！	북돋우고 역은 맡겨 주세요!	fix	normalize
-normalize:rough-kudasai	強く生きてくだせぇ！オレらが一生ついていきますから！	강하게 살아 주세요! 우리가 일생 따라갈 테니까요!	fix	normalize
+normalize:rough-kudasai	強く生きてくだせぇ！オレらが一生ついていきますから！	강하게 살아 주세요! 우리가 평생 따라갈 테니까요!	fix	normalize
 normalize:rough-kudasai	……お武家様、助けて下せえ……」	……무가님, 도와 주세요……」	fix	normalize
 normalize:rough-kudasai	子どもの素質は低下せざるを得ない。	아이의 소질은 저하하지 않을 수 없다.	keep	normalize
 normalize:rough-kudasai	待ってくだせぇ！	기다려 주세요!	fix	normalize

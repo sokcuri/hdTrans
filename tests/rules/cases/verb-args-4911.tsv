@@ -15,7 +15,7 @@ pack:argument-senses:106	俺は通知表の入った封筒を手に持ち、職�
 pack:argument-senses:107	「しっかり持ってろよ」	has:잡아라	fix	packs
 pack:argument-senses:108	ああ、気をしっかり持って！	lacks:잡아	keep	packs
 pack:argument-senses:109	だが、長くは持たないだろう。	has:버티지 않을	fix	packs
-pack:argument-senses:110	効率だけを追求してちゃ、身が持たない。	has:몸이 버티지	fix	packs
+pack:argument-senses:110	効率だけを追求してちゃ、身が持たない。	has:몸이 버틸 수 없다	fix	packs
 pack:argument-senses:111	この調子でいけば、来年には子供が３人できるでしょう	has:3명 생기겠지요	fix	packs
 pack:argument-senses:112	お兄ちゃんはやればできる子だから	has:할 수 있는 아이	keep	packs
 pack:argument-senses:113	彼女ができたって本当？	has:여자친구가 생	fix	packs

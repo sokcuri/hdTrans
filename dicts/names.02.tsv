@@ -123834,7 +123834,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 飲酒運転	음주 운전	N110			GN							names.752183
 飲食	음식	N110			GN							names.752184
 飲食店	음식점	N110			GN							names.752185
-飴	엿	N110			GN						あめ	names.752186
+飴	사탕	N110			GN						あめ	names.752186
 飴かえる	아메카에루	N110			GN						あめかえる	names.752187
 飴の女王スイート	사탕의 여왕 스위트	N110			GN							names.752188
 飴ノ川えるは	아메노가와 에루하	N110			GN						あめのかわえるは	names.752189
