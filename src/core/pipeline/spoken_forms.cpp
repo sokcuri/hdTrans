@@ -219,6 +219,56 @@ bool ContractedTeru(std::string_view s, size_t pos, Match& m) {
     return !(m.group[2] == "でしょ" && s.substr(m.end).starts_with("うが"));
 }
 
+// (だ)?って(ん)(だろ|でしょ|です|だ): the quoting って and the ん of んだ, っていうんだ said short (土瓶ってんですか,
+// 何ってんだ, どうしたってんだ, 魔女だってんだろ), as group 1 the word after ん and as group 2 a copula だ before って, after
+// a word. Whether a word before って quotes or is a verb whose て form the っ makes is left to the replacement, which has
+// the dictionary (GodanTeStem).
+bool QuoteTten(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (pos == 0) return false;
+    m.group[2] = {};
+    // The だ of a past form after ん or い (死んだってんだ, 泳いだってんだ) is the verb's own and stays.
+    if (Lit(s, p, "だ")) {
+        if (In(LastRune(s.substr(0, pos)).cp, U"んい")) return false;
+        m.group[2] = Span(s, pos, p);
+    }
+    if (!Lit(s, p, "ってん")) return false;
+    for (std::string_view w : {"だろ", "でしょ", "です", "だ"}) {
+        size_t q = p;
+        if (!Lit(s, q, w)) continue;
+        // The question だい of a man (どこにあるってんだい) has no row of its own to go to.
+        if (w == "だ" && s.substr(q).starts_with("い")) return false;
+        m.group[1] = Span(s, p, q);
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// Whether head, before the っ of って, ends with the stem of a godan verb of the dictionary whose て form that っ makes: up to
+// three kanji or kana before it and う, つ or る spell the verb (言って 言う, 待って 待つ, がんばって がんばる, ビビって ビビる).
+// The た of a past form after し, っ, い or a kana of the e row and the だ after ん or い quote (どうしたってんだ,
+// 言ったってんです, 食べたってんだ, 死んだってんだ).
+bool GodanTeStem(std::string_view head, const RunLookup& runs) {
+    if (head.ends_with("た")) {
+        const std::string_view past = head.substr(0, head.size() - std::string_view("た").size());
+        if (!past.empty() && In(LastRune(past).cp, U"しっいえけげせてねべめれ")) return false;
+    }
+    if (head.ends_with("んだ") || head.ends_with("いだ")) return false;
+    std::string stem;
+    for (int k = 0; k < 3 && !head.empty(); k++) {
+        const text::Rune r = LastRune(head);
+        if (!IsKanjiClass(r.cp) && !IsHiraganaClass(r.cp) && !IsKatakanaRune(r.cp)) break;
+        stem.insert(0, head.substr(head.size() - r.size));
+        head.remove_suffix(r.size);
+        for (std::string_view u : {"う", "つ", "る"}) {
+            const std::string verb = stem + std::string(u);
+            if (runs.verbForm(runs.context, verb) || runs.verbForm(runs.context, KatakanaToHiragana(verb))) return true;
+        }
+    }
+    return false;
+}
+
 // ([にでもがは])いん(の|だ|じゃ)
 bool ContractedIru(std::string_view s, size_t pos, Match& m) {
     return CharLitWord(s, pos, m, U"にでもがは", "いん", dict::ClassMembers(HDTRANS_CLASS("follower.contracted-iru")));
@@ -1814,6 +1864,33 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && (Contains(text, "と") || Contains(text, "ど")))
         text = ReplaceAll(text, ContractedToru, ReplaceContractedToru);
     if (Contains(text, "ん")) {
+        if (runs.verbForm != nullptr && Contains(text, "ってん")) {
+            // After a word that is no godan verb the って quotes, っていうんだ said short: N(이)라는 거야 (何ってんだ), and
+            // before だろ, でしょ or です the ってこと that reads the same (土瓶ってんですか N라는 것입니까, 魔女だってんだろ
+            // 마녀라는 거지); after one it is the て form of ている, left to ContractedTeru (言ってんだろ).
+            const std::string_view source = text;
+            text = ReplaceAll(text, QuoteTten, [&](const Match& m) {
+                // A key of the dictionary that spells the whole or ends in ってん keeps its row (何だってんだ 뭐라는 거야,
+                // がってんだ 合点だ).
+                if (runs.word != nullptr) {
+                    std::string_view head = source.substr(0, m.begin);
+                    std::string tail;
+                    for (int k = 0; k < 3 && !head.empty(); k++) {
+                        const text::Rune r = LastRune(head);
+                        tail.insert(0, head.substr(head.size() - r.size));
+                        head.remove_suffix(r.size);
+                        if (runs.word(runs.context, tail + std::string(m.group[0])) ||
+                            runs.word(runs.context, tail + std::string(m.group[2]) + "ってん")) {
+                            return std::string(m.group[0]);
+                        }
+                    }
+                }
+                // N(이)라는 거야 says what the copula said (魔女だってんだろ 마녀라는 거지).
+                if (m.group[2].empty() && GodanTeStem(source.substr(0, m.begin), runs)) return std::string(m.group[0]);
+                if (m.group[1] == "だ") return std::string("っていうんだ");
+                return Cat({"ってこと", m.group[1]});
+            });
+        }
         text = ReplaceAll(text, ContractedTeru, [](const Match& m) { return Group1Plus(m, "るん"); });
         text = ReplaceAll(text, ContractedIru, [](const Match& m) {
             const Match g = Rematch(m, ContractedIru);
