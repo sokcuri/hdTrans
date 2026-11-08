@@ -2392,6 +2392,39 @@ void PreparedState(Flusher& f) {
 
 void NotYet(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        // LEX-5014: the てはいる of a potential verb is ている with は, 할 수는 있다 (書けてはいるが 쓸 수는 있지만, 動かせてはいた
+        // 움직일 수는 있었다), and its てはいない is 할 수는 없다 (書けてはいない 쓸 수는 없었다), where 쓸 수 있고는 있다 and 쓸 수
+        // 있지는 않았다 are no Korean.
+        if (it->detail->Yougo() && it->detail->record == 4 && it->DirectIndex() >= 0) {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            Item* n = it->After();
+            if (e != nullptr && e->dst == "1고는" && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
+                n->EntryText(n->selected) == "&HN@") {
+                it->detail->record = 0;
+                it->AssignDirectSlot(it->DirectIndex(), "3 수는");
+                continue;
+            }
+            if (e != nullptr && e->dst == "1지는" && n != nullptr && n->selected >= 0 &&
+                (n->group->surface == "いな" || n->group->surface == "な") && ItemLemma(f, n, n->selected) == "않다") {
+                it->detail->record = 0;
+                it->AssignDirectSlot(it->DirectIndex(), "3 수는");
+                n->AssignEntrySurface(n->selected, "$FA@");
+                continue;
+            }
+            const std::string notSo = "1지는 않";
+            if (e != nullptr && e->dst.starts_with(notSo)) {
+                std::string rest = e->dst.substr(notSo.size());
+                for (const auto& [from, to] : {std::pair<std::string_view, std::string_view>{"았", "었"}, {"는다", "다"}, {"아", "어"}}) {
+                    if (rest.starts_with(from)) {
+                        rest = std::string(to) + rest.substr(from.size());
+                        break;
+                    }
+                }
+                it->detail->record = 0;
+                it->AssignDirectSlot(it->DirectIndex(), "3 수는 없" + rest);
+                continue;
+            }
+        }
         Item* n = it->After();
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());

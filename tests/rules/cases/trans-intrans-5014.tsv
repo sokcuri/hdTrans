@@ -62,3 +62,17 @@ analysis:su-causative-te	大陸で武名を轟かせる、異国の剣豪。	has
 analysis:su-causative-te	困難な強行輸送をやり遂げるには、正しい情報は欠かせません。	has:빠뜨릴 수 없습니다	keep	analysis
 analysis:su-causative-te	量を減らせてた。	has:줄일 수 있었다	keep	analysis
 analysis:su-causative-te	　待てよ、修正液を塗ったとして……あれって{rb}剥{/rb}{rt}は{/rt}がせるのか？	lacks:벗기는	keep	analysis
+analysis:su-causative-te	唇を尖らせながら笑う	has:입술을 삐죽 내밀면서	fix	analysis
+analysis:su-causative-te	顔を曇らせながら	has:얼굴을 흐리면서	fix	analysis
+analysis:su-causative-te	タオルを湿らせながら	has:적시면서	fix	analysis
+analysis:su-causative-te	さあ、言いなさい、今朝、どうして二人で仲良く息を切らせながら、教室に駆け込んできたのかしら？	has:숨을 헐떡이면서	fix	analysis
+analysis:su-causative-te	体を動かしながら	has:몸을 움직이면서	keep	analysis
+analysis:su-potential-tehairu	体を動かせてはいるが	has:움직일 수는 있지만	fix	analysis
+analysis:su-potential-tehairu	体を動かせてはいた	has:움직일 수는 있었다	fix	analysis
+analysis:su-potential-tehairu	書けてはいるが	has:쓸 수는 있지만	fix	analysis
+analysis:su-potential-tehairu	食べられてはいるが	has:먹을 수는 있지만	keep	analysis
+analysis:su-potential-tehairu	体を動かせてはいけない	has:움직여선 안 된다	keep	analysis
+analysis:su-potential-tehairu	体を動かせては駄目だ	has:움직여선 안 된다	keep	analysis
+analysis:su-potential-tehairu	体を動かせてはいない。	has:움직일 수는 없었다	fix	analysis
+analysis:su-potential-tehairu	字を書けてはいないけど	has:쓸 수는 없는데	fix	analysis
+analysis:su-potential-tehairu	体を動かせていない。	has:움직이지 못했다	keep	analysis
