@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:past-noda:1	憎まれているとは思っていなかったのだろう。	미워해지고 있다고는 생각하지 않았을 것이다.	fix	lookup
+dict:past-noda:1	憎まれているとは思っていなかったのだろう。	미워해지고 있을 줄은 생각하지 못했을 것이다.	fix	lookup
 dict:past-noda:1	動きを見逃さなかったのだろう。	움직임을 놓치지 않았을 것이다.	fix	lookup
 dict:past-noda:1	きっと気のせいではなかったのだろう。	분명 기분 탓은 아니었을 것이다.	fix	lookup
 dict:past-noda:1	きっとそれは、顔にも出ていたのだろう。	분명 그것은, 얼굴에도 나와 있었을 것이다.	keep	lookup

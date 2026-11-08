@@ -678,7 +678,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 空きを埋め	빈자리를 메&AI@	M427		Pn	GN				llm			i:673
 悪に染ま	악에 물&L4@	M428			GN				llm			i:674
 悪を懲ら	악을 징벌&AV@	M423		Pn	GN				llm			i:675
-朱に染ま	피로 물&L4@	M428			GN				llm			i:676
+朱に染ま	붉게 물&L4@	M428			GN				llm			i:676
 足を速め	발걸음을 재촉&AV@	M427		Pn	GN							i:677
 味を調え	간을 맞&CL@	M427		Pn	GN				llm			i:678
 暖かい色	따뜻한 색	N110			GN				llm			i:679
@@ -3343,7 +3343,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 目の前が真っ暗にな	눈앞이 캄캄해&AL@	M428			GN				llm			i:3334
 目の前がまっくらにな	눈앞이 캄캄해&AL@	M428			GN				llm			i:3335
 捨てたものではない	버릴 것이 아니다	A9D0			GN				llm			i:3336
-ない内に	기 전에	A9D0			GN				llm			i:3337
 無い内に	기 전에	A9D0			GN				llm			i:3338
 ように言	하도록 말&AV@	M420			GN				llm			i:3339
 様に言	하도록 말&AV@	M420			GN				llm			i:3340

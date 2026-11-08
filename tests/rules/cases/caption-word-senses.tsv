@@ -33,7 +33,7 @@ L1293	十度も言った。	열 번이나 말했다.	keep	local
 lookup:無糖	おいしい無糖	맛있는 무가당	fix	defaults
 lookup:積み重ね	８年間の積み重ねがついに花開く！	8년간의 축적이 마침내 꽃핀다!	fix	defaults
 lookup:横取り	１０万円 横取りタイム	10만엔 가로채기 타임	fix	defaults
-lookup:傷む	体が傷んでしまっては何にもならない。	몸이 상해버려 아무것도 안된다.	fix	defaults
+lookup:傷む	体が傷んでしまっては何にもならない。	몸이 상해버려 아무것도 안 된다.	fix	defaults
 lookup:傷む	ﾎｺﾘでも髪って傷むんだよ｡	먼지라도 머리카락은 상해.	fix	defaults
 lookup:取り組む	竹内教授が取り組んだのは…。	타케우치 교수가 몰두한 것은….	fix	defaults
 lookup:取り組み	欠かせない取り組みなのです。	빠뜨릴 수 없는 노력인 것입니다.	fix	defaults

@@ -221,6 +221,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 | 품사 | 의미 |
 |---|---|
 | `n` (기본값) | 명사 |
+| `pron` | 사람을 가리키는 대명사. 품사 `N120`, 의미 `VHn`. 뒤 명사와 띄어 씁니다(`わたくし佐藤` 저 사토) |
 | `phrase` | 고정 표현 |
 | `name`, `surname` | 이름(또는 성명), 성. 둘 다 품사 `N130`, 의미 `QPNVHn`이고 문법 코드만 `Wb`(이름)와 `Wa`(성)로 다릅니다. 성과 이름이 나란히 올 때 성을 가리는 데 씁니다 |
 | `place` | 땅이름. 품사 `N130`, 의미 `QCTVPl` |

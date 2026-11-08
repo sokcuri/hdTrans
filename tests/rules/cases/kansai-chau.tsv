@@ -16,5 +16,5 @@ constraint:chau-after-verb	バレちゃうよ。	들켜버릴 거야.	keep	looku
 constraint:chau-after-verb	夜更かしはお肌荒れちゃうね。	lacks:아니	keep	lookup
 constraint:chau-after-verb	艦隊防空やっちゃうから！	함대 방공 해 치우니까!	keep	lookup
 constraint:chau-after-verb	食べ過ぎたらバルジっちゃうかな……	lacks:아니	keep	lookup
-constraint:chau-after-verb	いつでも、旗艦やっちゃいますよ、はいっ！	언제라도, 기함 해 치워요, 네!	keep	lookup
+constraint:chau-after-verb	いつでも、旗艦やっちゃいますよ、はいっ！	언제든, 기함 해 치워요, 네!	keep	lookup
 constraint:chau-after-verb	三航戦旗艦瑞鳳、抜錨しちゃいます！	3항전 기함 즈이호우, 출항해버립니다!	keep	lookup

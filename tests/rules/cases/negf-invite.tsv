@@ -74,7 +74,7 @@ cx:neg-final-invite:38	「私も一緒に参りませんか？」	!rule:cx:neg-f
 cx:neg-final-invite:38	「私、参りませんか？」	lacks:가시지	keep	rewrites
 cx:neg-final-invite:40	「一緒に舞いませんか？」	「함께 춤추지 않을래요?」	fix	rewrites
 cx:neg-final-invite:40	「良ければこのまま私の部屋に参りませんか？」	!rule:cx:neg-final-invite:40	keep	rewrites
-cx:neg-final-invite:50	ところで 一献つきあわんか？	has:하지 않겠는가?	fix	rewrites
+cx:neg-final-invite:50	ところで 一献つきあわんか？	has:어울리지 않겠는가?	fix	rewrites
 cx:neg-final-invite:50	うん｡ お前達｡落とし主を捜してくれぬか？	has:찾아 주지 않겠는가?	fix	rewrites
 cx:neg-final-invite:50	わしのそばに　いてくれんか。	has:있어 주지 않겠는가.	fix	rewrites
 cx:neg-final-invite:50	そうは思わんか？	has:생각하지 않는가?	keep	rewrites

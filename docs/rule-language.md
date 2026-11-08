@@ -409,19 +409,20 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
 - 특징: `exists`(단어가 있음), `selected`(후보를 고름), `conjugating`(활용하는 단어), `fixed`, `first`(사슬의 첫 단어),
   `last`(마지막 단어), `verb`(동사로 분석된 단어), `after-digit`(토큰에서 단어 바로 앞이 숫자), `boundary`(쉼표, 문장 끝
   부호, 닫는 따옴표나 괄호, `。`), `lemma-starts-next`(다음 단어의 사전형 한국어가 이 단어의 사전형과 공백으로 시작함),
-  `opens-line`(줄에서 단어 앞에 공백뿐이거나 문장 끝 부호가 있음), `after-pause`(단어 바로 앞에 말줄임표나 줄표가 있음), `after-space`(일본어 낱말을 나눈 원문 공백 바로 뒤), `after-blank`(단어 바로 앞 토큰이 공백임: ちょ　うるさい의 うるさい), `filler`(감탄사 품사이거나 `word.pause-filler`의 독립한 필러), `after-restart`(단어 바로 앞에 `mark.restart`의 부호가 있고 그 앞에 다른 글이 있음: 私が…私が), `after-leave-taking`(줄에서 단어 앞의 글에 `word.leave-taking`의 작별하는 말이 있음: ありがとうございました。御機嫌よう), `humble-line`(줄의 글에 `speech.humble-cue`의 윗사람에게 낮추는 말이 있음, `speech.humble-lookalike`의 글은 빼고: ます, 申し上げ, 殿), `threat-line`(줄의 글에 `speech.threat-cue`의 위협, 하대하는 말이 있음: 貴様, せよ, 斬る), `formal-line`(줄의 글에 `speech.formal-cue`의 ます 문체나 격식 차린 말이 있음: ます, ませ, 申し上げ; ください만으로는 아님), `number`(숫자와 한자 수사로만 된 단어),
+  `opens-line`(줄에서 단어 앞에 공백뿐이거나 문장 끝 부호가 있음), `after-pause`(단어 바로 앞에 말줄임표나 줄표가 있음), `after-space`(일본어 낱말을 나눈 원문 공백 바로 뒤), `after-blank`(단어 바로 앞 토큰이 공백임: ちょ　うるさい의 うるさい), `filler`(감탄사 품사이거나 `word.pause-filler`의 독립한 필러), `after-restart`(단어 바로 앞에 `mark.restart`의 부호가 있고 그 앞에 다른 글이 있음: 私が…私が), `after-leave-taking`(줄에서 단어 앞의 글에 `word.leave-taking`의 작별하는 말이 있음: ありがとうございました。御機嫌よう), `humble-line`(줄의 글에 `speech.humble-cue`의 윗사람에게 낮추는 말이 있음, `speech.humble-lookalike`의 글은 빼고: ます, 申し上げ, 殿), `threat-line`(줄의 글에 `speech.threat-cue`의 위협, 하대하는 말이 있음: 貴様, せよ, 斬る), `formal-line`(줄의 글에 `speech.formal-cue`의 ます 문체나 격식 차린 말이 있음: ます, ませ, 申し上げ; ください만으로는 아님), `taste-line`(줄의 글에 `word.taste-cue`의 음식, 음료 말이 있음: 料理, 食べ, 飲), `number`(숫자와 한자 수사로만 된 단어),
   `quote-verb`(말하기, 생각하기 동사로 시작하거나 聞), `word-span`(앞 단계가 이미 읽은 고정 단어 구간),
-  `adjectival`(의미 표가 그 단어를 하다 형용사의 어근으로 읽음), `person`(고른 후보의 의미 코드가 사람, 동물이나
+  `adjectival`(의미 표가 그 단어를 하다 형용사의 어근으로 읽음), `suru-noun`(고르지 않은 후보까지 보아 그 단어에 する가 붙는 명사(`Hd`) 후보가 있음: 休憩), `person`(고른 후보의 의미 코드가 사람, 동물이나
   신), `person-name`(표기에 한자가 있고 이름 층에 사람 이름으로 있음: 기본 사전이 지명으로 읽는 美咲), `causative`(사역으로 분석된 동사), `passive`(수동으로 분석되었고 아직 한국어 수동 낱말로 바뀌지 않은 동사: 撫でられ), `causative-passive`(사역 수동으로 분석된 동사: 読まされ), `respectful`(그 (ら)れ를 높임으로 읽은 동사, spec GRM-10: 確認されますか), `lexical-passive`(사전 동사의 수동형을 한 낱말로 읽은 사전 행: 書かれ, 使われ, 見られ. 목적어가 있어도 수동인 동사의 부류는 빼고), `touches-prev`(앞 단어가 끝난 자리에서 시작함: 같은 토큰이거나, 앞 단어가
   토큰 끝이고 이 단어가 다음 토큰의 처음), `alnum-start`(표기가 글자나 숫자로 시작함), `hiragana`(표기에 히라가나가
-  있음), `katakana`(표기가 가타카나 ァ..ヶ와 ー뿐임), `blank`(고른 후보의 번역이 비었거나 공백뿐임),
+  있음), `katakana`(표기가 가타카나 ァ..ヶ와 ー뿐임), `kanji`(표기에 々가 아닌 한자가 있음), `blank`(고른 후보의 번역이 비었거나 공백뿐임),
   `final-consonant`(고른 후보의 사전형 한국어가 받침으로 끝남), `copula-target`(고른 후보의 번역이 이다 활용 표지를 씀,
   `큰일$AH@`), `mitai-like`(절 뒤에 올 수 있는 みたい), `contrast`(어간 뒤가 い나 かった, 쉼표, 대조의 조사
-  `particle.contrast`: ではないが), `quote-end`(뒤가 글 끝, 닫는 부호 ！？。」』）나 구간 경계), `period-after`(바로 뒤에 。나 ．가 옴), `pause-after`(바로 뒤에 `mark.pause`의 말줄임표나 줄표, 또는 ・ 두 개가 옴: 失礼な・・・), `narration`(대사를 「」로 쓰는 문서에서 따옴표 밖에 있음: 지문), `quoted`(「」나 『』 안에 있음), `casual-level`(그 말의 물음이 해체임: 말투 단계가 쓰는 대사 줄이면 그 단계가 원문으로 정한 줄의 말투가 해체이고 권위 있는 말투(REG-14)가 아니며, 아니면 높임말, 예스러운 말투, 글로 쓴 『』, 읽기, 인용한 말이 아닌 따옴표 안), `polite-level`(말투 단계가 쓰는 줄이고 그 단계가 원문으로 정한 줄이나 그 말의 따옴표의 말투가 해요체나 합쇼체임), `prose`(말투 단계가 쓰는 줄이고 그 문서가 산문 소설임, REG-20), `utterance-end`(뒤가 글 끝이거나
+  `particle.contrast`: ではないが), `quote-end`(뒤가 글 끝, 닫는 부호 ！？。」』）나 구간 경계), `period-after`(바로 뒤에 。나 ．가 옴), `pause-after`(바로 뒤에 `mark.pause`의 말줄임표나 줄표, 또는 ・ 두 개가 옴: 失礼な・・・), `narration`(대사를 「」로 쓰는 문서에서 따옴표 밖에 있음: 지문), `quoted`(「」나 『』 안에 있음), `casual-level`(그 말의 물음이 해체임: 말투 단계가 쓰는 대사 줄이면 그 단계가 원문으로 정한 줄의 말투가 해체이고 권위 있는 말투(REG-14)가 아니며, 아니면 높임말, 예스러운 말투, 글로 쓴 『』, 읽기, 인용한 말이 아닌 따옴표 안), `polite-level`(말투 단계가 쓰는 줄이고 그 단계가 원문으로 정한 줄이나 그 말의 따옴표의 말투가 해요체나 합쇼체임), `casual-cue`(말투 단계가 원문의 반말 끝으로 해체를 정한 줄임: 단서 없는 줄은 아님), `prose`(말투 단계가 쓰는 줄이고 그 문서가 산문 소설임, REG-20), `utterance-end`(뒤가 글 끝이거나
   말줄임, 닫는 따옴표, 쉼표, ー, っ 같은 것뿐임),
   `sentence-end`(`utterance-end`이거나 뒤에 ！？!?가 옴), `speech-goes-on`(말줄임과 공백을 건너 같은 문장에, 또는 대사 안의 ！？ 뒤 다음 문장에 닫는 부호가 아닌 글이 더 옴: ……そうだ、ほら, 「……そうだ！　ねえ」), `predicate-follows`(문장에서 뒤에 동사가 옴, て형의 보조 동사는 아님),
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
+  `motion-compound`(이 단어와 다음 단어의 사전형 한국어가 `ko-verb.compound-motion`의 짝: 흐르다 + 가다 흘러가다),
   `potential`(가능형으로 활용한 동사), `echoed-by-verb`(겹친 의태어의 반이 같은 절 뒤 동사의 한국어로 시작함: 삐걱삐걱 … 삐걱거리다), `question-after`(뒤에 물음표가 옴, ! … 사이는 건너뜀), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
   `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
   `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `drawn-ending`(어미가 `kana.drawn-out`의 부호로 시작함: すご|ーい), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),

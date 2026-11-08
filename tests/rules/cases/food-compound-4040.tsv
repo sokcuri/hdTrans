@@ -1,0 +1,29 @@
+# 규칙: GRM-4040
+rule	input	expected	kind	layer
+cx:food-compound:10	「フルーツの盛り合わせもありますけど、頂きますか？	has:과일 모둠	fix	rewrites
+cx:food-compound:10	いつか いちごのケーキを ごちそうしてくれませんか？	has:딸기 케이크	fix	rewrites
+cx:food-compound:10	すみません、イチゴのタルトレットってまだ残ってます？	has:딸기 타르트	fix	rewrites
+cx:food-compound:10	ところで、イチゴのサンドイッチってデザートじゃないの？	has:딸기 샌드위치	fix	rewrites
+cx:food-compound:10	だから、コーヒーの味がわかる人に協力をして欲しかったの。	has:커피 맛	fix	rewrites
+cx:food-compound:10	酒の味を覚えた	has:술 맛	fix	rewrites
+cx:food-compound:10	大粒は お豆の味を楽しめます｡	has:콩 맛	fix	rewrites
+cx:food-compound:10	肉に見え 肉の味がするが	has:고기 맛이	fix	rewrites
+cx:food-compound:10	これは… 羊とネギのスープ	has:파 스프	fix	rewrites
+cx:food-compound:10	パンとチーズのシチューかな	has:치즈 스튜	fix	rewrites
+cx:food-compound:10	ラーメンのスープを 染み込ませたノリで巻き…	has:라면 스프	fix	rewrites
+cx:food-compound:10	紅茶の味は何倍にもおいしくなる。	has:홍차 맛	fix	rewrites
+cx:food-compound:10	卓の上には、料理人が焼いてくれた木苺のケーキがある。	has:나무딸기 케이크	fix	rewrites
+cx:food-compound:10	僕は二歳だからね。柔らかく煮込まれた肉と芋のスープの具が、	has:감자 스프	fix	rewrites
+cx:food-compound:20	甘いカブハボタンのパイ...	has:카브하보탄 파이	fix	rewrites
+cx:food-compound:20	ムーンベリーのパイ	has:문베리 파이	fix	rewrites
+cx:food-compound:10	母のパイ	어머니의 파이	keep	rewrites
+cx:food-compound:10	彼のケーキを食べた。	has:그의 케이크	keep	rewrites
+cx:food-compound:10	（そうだわ…これ、お母さんの味）	has:엄마의 맛	keep	rewrites
+cx:food-compound:10	「……すごい、本場の味だ」	has:본고장의 맛	keep	rewrites
+cx:food-compound:10	さっきも配給のパン 誰かにあげてたじゃない	has:배급의 빵	keep	rewrites
+cx:food-compound:10	「売れ残りのパンを持って帰って来ちゃったりとか？」	has:재고품의 빵	keep	rewrites
+cx:food-compound:10	昨日のパスタはおいしいって言ってくれたけど、今日のケーキはどうだろうか……？	has:오늘의 케이크	keep	rewrites
+cx:food-compound:20	エルフのパンなんか 大嫌いね	has:엘프의 빵	keep	rewrites
+cx:food-compound:10	当たり前です。魚には魚の、塩には塩の味がちゃんとあるのですから	has:소금의 맛	keep	rewrites
+cx:food-compound:10	今朝は麦飯に大根の漬物、芋の味噌汁、あと昨日のF作業の焼き魚です。	lacks:감자 된장	keep	rewrites
+cx:food-compound:10	観客も完全に、ないがしろにされていた婚約者の味方だ。	has:약혼자의 아군	keep	rewrites

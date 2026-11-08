@@ -18,7 +18,7 @@ segment:escape-gap	「はぁ…\n行っちゃうね」	「하아…\n가버리�
 segment:escape-gap	「はわわ\n忘れてたぞ」	「하와와\n잊고 있었어」	fix	segment
 segment:escape-gap	「ひゃっ！\n好きだじゃん」	lacks:\n을	fix	segment
 segment:escape-gap	「ふぇ？\n知らないでしょ」	「후에?\n모르지」	fix	segment
-segment:escape-gap	「べ、別に\n知らないじゃん」	「벼, 별로\n모르잖아」	fix	segment
+segment:escape-gap	「べ、別に\n知らないじゃん」	「따, 딱히\n모르잖아」	fix	segment
 segment:escape-gap	「むー\n食べてるですわ」	has:무우\n먹고	fix	segment
 segment:escape-gap	「（に、にこ……）」\n「（ふ、ふふっ……）」	has:」\n「(	fix	segment
 segment:escape-gap	「あ\r\nいい」	has:아\r\n좋	fix	segment

@@ -12,7 +12,7 @@ lexical:fused-row	俺はティラナスという 男に雇われたんだ	나는
 lexical:fused-row	スーツと呼び名が要るな	슈트와 호칭이 필요하구나	fix	lookup
 lexical:fused-row	恋愛とか勉強とか 家族のこととか	연애라든지 공부라든지 가족의 일이라든지	fix	lookup
 lexical:fused-row	手に吸い付きそうなほどになめらかな肌	손에 달라붙을 것 같을 정도로 매끈매끈한 피부	fix	lookup
-lexical:fused-row	そういう意味じゃ、人は誰でも、誰かにとっての羊飼いになれるのかもしれない。	그런 의미는, 사람은 누구라도, 누군가에게 있어 양치기가 될 수 있을지도 모른다.	fix	lookup
+lexical:fused-row	そういう意味じゃ、人は誰でも、誰かにとっての羊飼いになれるのかもしれない。	그런 의미는, 사람은 누구나, 누군가에게 있어 양치기가 될 수 있을지도 모른다.	fix	lookup
 lexical:fused-row	今思い出したけど、それで警戒心を抱かなかったのかも？	지금 생각해 냈지만, 그래서 경계심을 품지 않았던 걸지도?	fix	lookup
 lexical:fused-row	「でも、羊飼いがメールくれたなら、喜んでいいんじゃないの？	「하지만, 양치기가 메일 줬다면, 기뻐해도 되는 거 아니야?	fix	lookup
 lexical:fused-row	お兄ちゃんが満足するまで愛していいから	오빠가 만족할 때까지 사랑해도 되니까	fix	lookup
@@ -22,10 +22,10 @@ lexical:fused-row	どうかなさいましたか、マスター？	무슨 일 �
 lexical:fused-row	大丈夫な訳ないよね	괜찮은 리가 없지	fix	lookup
 lexical:fused-row	でも、さっきの言葉は本当ですからね？	하지만, 조금 전의 말은 사실이니까요?	fix	lookup
 lexical:fused-row	なにかと思えば。まあ、幸せそうなのはなによりだが	뭔가 했더니. 뭐, 행복한 것은 다행이지만	fix	lookup
-lexical:fused-row	「一週間も様子見れば大体の方向性はわかるだろ」	「일주일도 지켜보면 대개의 방향성은 알지」	fix	lookup
+lexical:fused-row	「一週間も様子見れば大体の方向性はわかるだろ」	「일주일도 지켜보면 대략적인 방향성은 알지」	fix	lookup
 lexical:fused-row	なぜ用済みのキミを体よく処分しなかったのか	왜 쓸모없어진 너를 그럴듯하게 처분하지 않았던 건가	fix	lookup
 lexical:fused-row	私、先輩からいただいてばかりですね。	저, 선배에게서 받고만 있네요.	fix	lookup
-lexical:fused-row	隠密作戦をいちいち命令書付きでやるのか	은밀 작전을 일일이 명령서 첨부로 하는 건가	fix	lookup
+lexical:fused-row	隠密作戦をいちいち命令書付きでやるのか	은밀 작전을 일일이 명령서와 함께 하는 건가	fix	lookup
 lexical:fused-row	暴力大革命を起こす。	폭력 대혁명을 일으킨다.	fix	lookup
 lexical:fused-row	私が鳥海です。	제가 초카이입니다.	fix	lookup
 lexical:fused-row	疲労からか、二人とも無言になる。	피로때문인지, 두 사람 모두 무언이 된다.	keep	lookup

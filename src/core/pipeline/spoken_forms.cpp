@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -89,6 +90,84 @@ bool JaneQuestion(std::string_view s, size_t pos, Match& m) {
     return OneOf(s, p, U"良よ") && Lit(s, p, "く") && rest(p);
 }
 
+// Whether the casual ねえ, ねぇ or ねー at p of s goes on as the negative ない: before ん, の, よ, や, し, ぞ, ぜ, さ, か, な, っ,
+// だろ, じゃ, けど, から, です or もん (意味もねえんだよ, 亭主もねえのか, 近道なんてねーからな); its length then, else 0.
+size_t NegativeNeeAt(std::string_view s, size_t p) {
+    size_t q = p;
+    if (!Lit(s, q, "ね")) return 0;
+    const size_t run = q;
+    while (q < s.size() && In(At(s, q).cp, U"ぇえー")) q += At(s, q).size;
+    if (q == run) return 0;
+    const std::string_view rest = s.substr(q);
+    if (!rest.empty() && In(At(rest, 0).cp, U"んのよやしぞぜさかなっ")) return q - p;
+    for (const std::string_view w : {"だろ", "じゃ", "けど", "から", "です", "もん"}) {
+        if (rest.starts_with(w)) return q - p;
+    }
+    return 0;
+}
+
+// The casual negative after も, なんか or なんて, the words of there being none (spec LEX-5071): ねえ, ねぇ or ねー before a word
+// of NegativeNeeAt (へったくれもねえな, 行くとこなんかねえじゃねえか, 正解なんてねぇのさ), and after a noun and も also ねえ or ねぇ
+// before 。！」』 or the end (祝言もねえ。, どうしようもねぇ。). Group 1 is the word before ね. Not the particle ね after かも
+// (かもねえ), しかも, a でも that opens a clause, nor the でも of a て form (読んでもねえ); at a sentence end not after the
+// concessive ても (言ってもねえ。) nor with ねー, and not before a comma or an ellipsis, where it is the particle of a pause
+// (私もねー、, 事件もねぇ……).
+bool NoneNee(std::string_view s, size_t pos, Match& m) {
+    for (const std::string_view w : {"なんか", "なんて", "も"}) {
+        size_t p = pos;
+        if (!Lit(s, p, w)) continue;
+        const std::string_view head = s.substr(0, pos);
+        const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
+        if (w == "も" && (head.ends_with("か") || pos == 0 || (!IsHiraganaClass(b) && !IsKanjiClass(b) && !IsKatakanaRune(b)))) return false;
+        m.group[1] = Span(s, pos, p);
+        // The particle ね after しかも, a clause-opening でも (でもねえ、), or the で of a て form with も (読んでもねえ).
+        if (w == "も") {
+            if (head.ends_with("しか")) return false;
+            if (head.ends_with("で")) {
+                const std::string_view lead = head.substr(0, head.size() - std::string_view("で").size());
+                const char32_t c = lead.empty() ? 0 : LastRune(lead).cp;
+                if (c == 0 || In(c, U"んい「『、。！？!? 　")) return false;
+            }
+        }
+        if (const size_t n = NegativeNeeAt(s, p); n > 0) {
+            m.group[2] = Span(s, p + n, p + n);
+            m.end = p + n;
+            return true;
+        }
+        // At a sentence end only after a noun and も, not after the て of a concession (言ってもねえ。).
+        if (w != "も" || head.ends_with("て")) return false;
+        size_t q = p;
+        if (!Lit(s, q, "ね") || !OneOf(s, q, U"ぇえ")) return false;
+        while (q < s.size() && In(At(s, q).cp, U"ぇえ")) q += At(s, q).size;
+        if (q < s.size() && !In(At(s, q).cp, U"。！!」』")) return false;
+        m.group[2] = Span(s, q, q);
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// The wish たい with は said たか before the casual ねえ (言われたかねえや 듣고 싶지 않아, 行きたかねえよ) or ない (言いたかないけど):
+// たくはない. With ねえ only before a word of NegativeNeeAt other than か, な or の, where たかねえ is no question in かね after a past
+// (行ったかねえ。, できたかねえ).
+bool TakaNee(std::string_view s, size_t pos, Match& m) {
+    const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
+    // After っ or ん the た is a past (あったかないか).
+    if (pos == 0 || !(IsHiraganaClass(b) || IsKanjiClass(b)) || In(b, U"っん")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "たか")) return false;
+    size_t q = p;
+    if (Lit(s, q, "ない")) {
+        m.end = q;
+        return true;
+    }
+    const size_t n = NegativeNeeAt(s, p);
+    if (n == 0) return false;
+    if (In(At(s, p + n).cp, U"かなの")) return false;
+    m.end = p + n;
+    return true;
+}
+
 // ([はも])ね[ぇえー]+(だろ|でしょ|よ|って|し)
 bool ParticleNee(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -124,9 +203,70 @@ bool CharLitWord(std::string_view s, size_t pos, Match& m, std::u32string_view f
     return false;
 }
 
-// ([てで])ん(じゃ|だろ)
+// ([てで])ん(じゃ|だろ|です|でしょ); the で of a て form follows ん or い (読んでんです), so a で after anything else is
+// another word (おでんです), and the って after a dictionary form in る, う or つ or after だ quotes (あるってんですか, だってんだろ).
 bool ContractedTeru(std::string_view s, size_t pos, Match& m) {
-    return CharLitWord(s, pos, m, U"てで", "ん", dict::ClassMembers(HDTRANS_CLASS("follower.contracted-teru")));
+    const std::string_view head = s.substr(0, pos);
+    if (s.substr(pos).starts_with("で") && (pos == 0 || !In(LastRune(head).cp, U"んい"))) return false;
+    if (head.ends_with("っ")) {
+        const std::string_view lead = head.substr(0, head.size() - std::string_view("っ").size());
+        // A godan verb in る, う or つ drops that kana before the っ of its て form, so one before って quotes; the つ of the
+        // っつって of って言って stays (違うっつってんだろ).
+        if (!lead.empty() && In(LastRune(lead).cp, U"うつるだ") && !lead.ends_with("っつ")) return false;
+    }
+    if (!CharLitWord(s, pos, m, U"てで", "ん", dict::ClassMembers(HDTRANS_CLASS("follower.contracted-teru")))) return false;
+    // でしょうが of insistence reads better from the てん the end rows know (言ってんでしょうが).
+    return !(m.group[2] == "でしょ" && s.substr(m.end).starts_with("うが"));
+}
+
+// (だ)?って(ん)(だろ|でしょ|です|だ): the quoting って and the ん of んだ, っていうんだ said short (土瓶ってんですか,
+// 何ってんだ, どうしたってんだ, 魔女だってんだろ), as group 1 the word after ん and as group 2 a copula だ before って, after
+// a word. Whether a word before って quotes or is a verb whose て form the っ makes is left to the replacement, which has
+// the dictionary (GodanTeStem).
+bool QuoteTten(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (pos == 0) return false;
+    m.group[2] = {};
+    // The だ of a past form after ん or い (死んだってんだ, 泳いだってんだ) is the verb's own and stays.
+    if (Lit(s, p, "だ")) {
+        if (In(LastRune(s.substr(0, pos)).cp, U"んい")) return false;
+        m.group[2] = Span(s, pos, p);
+    }
+    if (!Lit(s, p, "ってん")) return false;
+    for (std::string_view w : {"だろ", "でしょ", "です", "だ"}) {
+        size_t q = p;
+        if (!Lit(s, q, w)) continue;
+        // The question だい of a man (どこにあるってんだい) has no row of its own to go to.
+        if (w == "だ" && s.substr(q).starts_with("い")) return false;
+        m.group[1] = Span(s, p, q);
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
+// Whether head, before the っ of って, ends with the stem of a godan verb of the dictionary whose て form that っ makes: up to
+// three kanji or kana before it and う, つ or る spell the verb (言って 言う, 待って 待つ, がんばって がんばる, ビビって ビビる).
+// The た of a past form after し, っ, い or a kana of the e row and the だ after ん or い quote (どうしたってんだ,
+// 言ったってんです, 食べたってんだ, 死んだってんだ).
+bool GodanTeStem(std::string_view head, const RunLookup& runs) {
+    if (head.ends_with("た")) {
+        const std::string_view past = head.substr(0, head.size() - std::string_view("た").size());
+        if (!past.empty() && In(LastRune(past).cp, U"しっいえけげせてねべめれ")) return false;
+    }
+    if (head.ends_with("んだ") || head.ends_with("いだ")) return false;
+    std::string stem;
+    for (int k = 0; k < 3 && !head.empty(); k++) {
+        const text::Rune r = LastRune(head);
+        if (!IsKanjiClass(r.cp) && !IsHiraganaClass(r.cp) && !IsKatakanaRune(r.cp)) break;
+        stem.insert(0, head.substr(head.size() - r.size));
+        head.remove_suffix(r.size);
+        for (std::string_view u : {"う", "つ", "る"}) {
+            const std::string verb = stem + std::string(u);
+            if (runs.verbForm(runs.context, verb) || runs.verbForm(runs.context, KatakanaToHiragana(verb))) return true;
+        }
+    }
+    return false;
 }
 
 // ([にでもがは])いん(の|だ|じゃ)
@@ -152,6 +292,8 @@ bool EndGroup(std::string_view s, size_t p, std::u32string_view set, Match& m) {
 // sentence (やっぱり気になるんじゃない), nor where a verb of saying corrects what was said (そういうこと言ってるんじゃない！),
 // nor the honorific くん after katakana, two kanji, う, ん, ー or a small kana (田中くんじゃない！), nor a てく or でく.
 bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
+    m.group[4] = {};
+    m.group[5] = {};
     size_t p = pos;
     if (!OneOf(s, p, U"うくぐすつぬぶむる")) return false;
     m.group[1] = Span(s, pos, p);
@@ -296,6 +438,18 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
             !In(LastRune(v.substr(0, v.size() - std::string_view("で").size())).cp, U"んい"))
             return false;
     }
+    // The rough rebuke before a word of follower.prohibition-pause (話しかけんじゃねえこのクズども, ふざけんじゃねえぞこの野郎)
+    // ends there, with a pause that is not written: group 4 set, and group 5 the particle.
+    if (nee && dict::StartsWithMember(HDTRANS_CLASS("follower.prohibition-pause"), s.substr(q)) > 0) {
+        m.group[2] = Span(s, q, q);
+        m.group[4] = m.group[2];
+        m.group[5] = Span(s, p, q);
+        m.end = q;
+        return true;
+    }
+    // After a particle the rough rebuke may also end in a question mark, or but after a てる in a comma (忘れんじゃねーぞ？,
+    // なめんじゃねーぞ、公方).
+    if (nee && !particle.empty()) return EndGroup(s, q, teru ? U"！!」』。？?" : U"！!」』。？?、", m);
     return EndGroup(s, q, U"！!」』。", m);
 }
 
@@ -1062,7 +1216,7 @@ bool KansaiAkan(std::string_view s, size_t pos, Match& m) {
     if (!Lit(s, p, "あかん") && !Lit(s, p, "アカン")) return false;
     const bool katakana = s.substr(word).starts_with("アカン");
     // An あかん that opens an utterance before a comma is the interjection of the phrase rows
-    // (あかん、よう盛り上がらんわ 안돼, ...).
+    // (あかん、よう盛り上がらんわ 안 돼, ...).
     if (word == pos &&
         (head.empty() || !(IsHiraganaClass(LastRune(head).cp) || IsKanjiClass(LastRune(head).cp) || IsKatakanaRune(LastRune(head).cp))) &&
         (s.substr(p).starts_with("、") || s.substr(p).starts_with("，") || s.substr(p).starts_with(","))) {
@@ -1613,9 +1767,11 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
             return Cat({hira, g.group[2] == kKataAdjectiveEnding ? std::string_view("い") : g.group[2]});
         });
     }
+    if (Contains(text, "たか")) text = ReplaceAll(text, TakaNee, [](const Match&) { return std::string("たくはない"); });
     if (Contains(text, "ね")) {
         text = ReplaceAll(text, JaneQuestion, [](const Match& m) { return Group1Plus(m, "ない"); });
         text = ReplaceAll(text, ParticleNee, [](const Match& m) { return Group1Plus(m, "ない"); });
+        text = ReplaceAll(text, NoneNee, [](const Match& m) { return Group1Plus(m, "ない"); });
         if (dialectForms) text = ReplaceAll(text, NegativeNee, ReplaceNegativeNee);
     }
     if (dialectForms && Contains(text, "まへん")) {
@@ -1708,6 +1864,33 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && (Contains(text, "と") || Contains(text, "ど")))
         text = ReplaceAll(text, ContractedToru, ReplaceContractedToru);
     if (Contains(text, "ん")) {
+        if (runs.verbForm != nullptr && Contains(text, "ってん")) {
+            // After a word that is no godan verb the って quotes, っていうんだ said short: N(이)라는 거야 (何ってんだ), and
+            // before だろ, でしょ or です the ってこと that reads the same (土瓶ってんですか N라는 것입니까, 魔女だってんだろ
+            // 마녀라는 거지); after one it is the て form of ている, left to ContractedTeru (言ってんだろ).
+            const std::string_view source = text;
+            text = ReplaceAll(text, QuoteTten, [&](const Match& m) {
+                // A key of the dictionary that spells the whole or ends in ってん keeps its row (何だってんだ 뭐라는 거야,
+                // がってんだ 合点だ).
+                if (runs.word != nullptr) {
+                    std::string_view head = source.substr(0, m.begin);
+                    std::string tail;
+                    for (int k = 0; k < 3 && !head.empty(); k++) {
+                        const text::Rune r = LastRune(head);
+                        tail.insert(0, head.substr(head.size() - r.size));
+                        head.remove_suffix(r.size);
+                        if (runs.word(runs.context, tail + std::string(m.group[0])) ||
+                            runs.word(runs.context, tail + std::string(m.group[2]) + "ってん")) {
+                            return std::string(m.group[0]);
+                        }
+                    }
+                }
+                // N(이)라는 거야 says what the copula said (魔女だってんだろ 마녀라는 거지).
+                if (m.group[2].empty() && GodanTeStem(source.substr(0, m.begin), runs)) return std::string(m.group[0]);
+                if (m.group[1] == "だ") return std::string("っていうんだ");
+                return Cat({"ってこと", m.group[1]});
+            });
+        }
         text = ReplaceAll(text, ContractedTeru, [](const Match& m) { return Group1Plus(m, "るん"); });
         text = ReplaceAll(text, ContractedIru, [](const Match& m) {
             const Match g = Rematch(m, ContractedIru);
@@ -1726,9 +1909,18 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
                 const std::string_view stem = verb.substr(0, m.begin);
                 const bool teru = m.group[1] == "る" && (stem.ends_with("て") || stem.ends_with("で") ||
                                                          stem.ends_with("てい") || stem.ends_with("でい"));
-                if (!teru && !runs.verb(runs.context, verb)) return std::string(m.group[0]);
+                // A verb spelled in katakana is the verb in hiragana (ナメるんじゃねえ なめる).
+                const std::string kana = KatakanaToHiragana(verb);
+                if (!teru && !runs.verb(runs.context, verb) && (kana == verb || !runs.verb(runs.context, kana))) {
+                    return std::string(m.group[0]);
+                }
             }
             if (!m.group[3].empty()) return Cat({m.group[1], "な", m.group[3], m.group[2]});
+            if (m.group[4].data() != nullptr) {
+                std::string paused = Cat({m.group[1], m.group[5].empty() ? "な、" : "なよ、"});
+                text::AppendRune(paused, output::kSilentComma);
+                return paused;
+            }
             return Group1Plus(m, "なよ");
         });
         text = ReplaceAll(text, AppealJanai, [](const Match& m) {

@@ -420,7 +420,7 @@ int Item::ContextBefore() const {
 // (っ, ー, small vowels) and then a mark that ends the sentence, a closing quote or the
 // end of the text, or a comma when the stem opens the sentence. A one-kanji stem needs
 // a sentence mark after it and no kanji before it (「朧」 and 李雅微 are names). Stems
-// in hiragana are left to StandsAlone (下さいまし is not まし). "" when the stem does
+// in hiragana read bare only after が, は, も or より (下さいまし is not まし). "" when the stem does
 // not end a clause, ends in な, みたい or そう (the そう row reads 것 같다 there), or a
 // word of its length (a noun reading) exists.
 std::string_view Item::BareStemEnding(std::string_view after) const {
@@ -437,7 +437,16 @@ std::string_view Item::BareStemEnding(std::string_view after) const {
     }
     const text::Rune first = text::DecodeRune(surface);
     const bool oneKanji = first.size == surface.size() && text::IsKanji(first.cp);
-    if (Hiragana(first.cp)) return {};
+    // A stem in hiragana only, not よう, reads bare only after a particle a predicate follows (方がまし。,
+    // よりはまし」), not after a verb stem (下さいまし); one with kanji after a hiragana prefix (お好き) does not.
+    if (Hiragana(first.cp)) {
+        const std::string_view head = text.substr(0, static_cast<std::size_t>(start));
+        bool kana = surface != kJaYou;
+        for (std::string_view left = surface; kana && !left.empty(); left.remove_prefix(text::DecodeRune(left).size)) {
+            kana = Hiragana(text::DecodeRune(left).cp);
+        }
+        if (!kana || (!head.ends_with("が") && !head.ends_with("は") && !head.ends_with("も") && !head.ends_with("より"))) return {};
+    }
     const int before = ContextBefore();
     if (oneKanji && start > 0 && text::IsKanji(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return {};
     bool question = false;

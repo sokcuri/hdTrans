@@ -149,6 +149,8 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool GodanCausative(std::string_view stem) const;
+    bool IchidanPartner(std::string_view stem, std::string_view kana) const;
+    bool GodanBase(std::string_view stem) const;
     bool CausativeOfShorter(std::string_view stem) const;
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
@@ -182,6 +184,7 @@ private:
     bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     const Record* ReadingLead(std::string_view full, int cursor, int token, Record* records);
+    Record* KanaWordFirst(std::string_view full, int cursor, int token, Record* records, const Item* parent);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
     // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana

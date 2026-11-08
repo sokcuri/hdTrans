@@ -1,0 +1,13 @@
+# 규칙: LEX-5120
+rule	input	expected	kind	layer
+dict:jisjk:344947	人の話し声はおろか、物音一つ聞こえない。	사람의 말소리는커녕, 소리 하나 들리지 않는다.	fix	lookup
+dict:jisjk:344947	お粥はおろか、のりも無かったことだ。	죽은커녕, 김도 없었던 일이다.	fix	lookup
+dict:jisjk:344947	陰部はおろか、お尻の方まで丸見えだった。	has:음부는커녕	fix	lookup
+dict:jisjk:344947	地球人は この世界を攻撃はおろか見ることすらできない｡	has:공격은커녕 보는 것조차	fix	lookup
+dict:jisjk:344947	歩いた形跡はおろか、空気が動いた跡さえ感じられなかった。	has:형적은커녕	fix	lookup
+dict:jisjk:344947	本来なら この戦いに 巻き込まれることはおろか	has:것은커녕	fix	lookup
+dict:jisjk:344947	「小判はおろか鐚銭一枚入った財布を持っちゃいない。	has:엽전은커녕	fix	lookup
+dict:jisjk:344947	理性では理解することはおろか、推測することも出来ない	has:이해하는 것은커녕	fix	lookup
+dict:jisjk:344947	結婚はおろか、恋人もいない。	결혼은커녕, 애인도 없다.	fix	lookup
+dict:jisjk:344947	おろかな人間だ。	lacks:커녕	keep	lookup
+dict:jisjk:344947	彼の行いはおろかだった。	lacks:커녕	keep	lookup

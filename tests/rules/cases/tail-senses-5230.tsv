@@ -1,0 +1,37 @@
+# 규칙: LEX-5230
+rule	input	expected	kind	layer
+dict:tail-5230	建物が倒壊する。	has:붕괴한다	fix	lookup
+dict:tail-5230	狂犬病の英名はレイビズ。	has:영어 이름은	fix	lookup
+dict:tail-5230	ああいう輩は嫌いだ。	has:저런 작자들은	fix	lookup
+dict:tail-5230	鉄くず屋が引き取る。	has:고철상이	fix	lookup
+dict:tail-5230	感染源との掛け合わせ	has:조합	fix	lookup
+dict:tail-5230	体当たりで扉を破った。	has:몸통 박치기로	fix	lookup
+dict:tail-5230	尻叩きの刑だ。	has:엉덩이 때리기	fix	lookup
+dict:tail-5230	幻術の得意な魔物	has:환술	fix	lookup
+dict:tail-5230	煮干しで出汁をとる。	has:멸치로	fix	lookup
+dict:tail-5230	芋虫が葉を食べている。	has:애벌레가	fix	lookup
+dict:tail-5230	殺処分された。	has:살처분되었다	fix	lookup
+dict:tail-5230	彼が今回の立役者だ。	has:주역이다	fix	lookup
+dict:tail-5230	飴屋の前で	has:사탕 가게 앞에서	fix	lookup
+dict:tail-5230	夢魔に襲われた。	has:몽마	fix	lookup
+dict:tail-5230	焼き林檎の味	has:구운 사과의 맛	fix	lookup
+dict:tail-5230	副首相が訪問した。	has:부총리가	fix	lookup
+dict:tail-5230	記憶を呼び覚ます。	has:기억을 일깨운다	fix	lookup
+dict:tail-5230	弱い者をいたぶるな。	has:괴롭히지 마	fix	lookup
+dict:tail-5230	刃が頬をかすめた。	has:뺨을 스쳤다	fix	lookup
+dict:tail-5230	そうそうに帰った。	has:일찌감치 돌아갔다	fix	lookup
+dict:tail-5230	二人は睨み合っていた。	has:서로 노려보고	fix	lookup
+dict:tail-5230	取り憑いた鬼	has:빙의한 귀신	fix	lookup
+dict:tail-5230	お金を振り込んだ	has:돈을 입금했다	fix	lookup
+pack:argument-senses:5180	敵に寝返った者	has:넘어간	fix	packs
+pack:argument-senses:5180	寝返りを打った。	has:뒤척였다	keep	packs
+pack:argument-senses:5181	思わず噴き出してしまった。	has:웃음을 터뜨려	fix	packs
+pack:argument-senses:5181	傷口から血が噴き出した。	has:피가 뿜어져 나왔다	keep	packs
+pack:argument-senses:5182	強い絆を結んだ艦娘	has:유대를 맺은	fix	packs
+pack:argument-senses:5182	靴紐を結ぶ	lacks:맺	keep	packs
+pack:argument-senses:5186	ほとんど日が沈んでいた	has:거의 해가 져 있었다	fix	packs
+pack:argument-senses:5186	次の日が来た	has:다음날이 왔다	keep	packs
+pack:argument-senses:5185	真剣を差してある。	has:진검을 차 두었다	fix	packs
+pack:argument-senses:5184	真剣に考える	has:진지하게 생각한다	keep	packs
+pack:argument-senses:5181	血 噴き出しながら ほざいても 説得力がないわ！	lacks:웃음	keep	packs
+pack:argument-senses:5186	日が陰ってきたねー。	lacks:해가	keep	packs

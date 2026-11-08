@@ -499,6 +499,15 @@ bool DictionaryVerbIs(const void* context, std::string_view form) {
     return d.line != nullptr && pipeline::internal::IsDictionaryVerb(form, *d.line, d.snap);
 }
 
+// Whether text, whole, is a key of the dictionary (pipeline::RunLookup::word).
+bool WordIs(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    for (const dict::Candidate& c : Find(d, text).list) {
+        if (c.source == text) return true;
+    }
+    return false;
+}
+
 // Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
 bool AdjectiveStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -746,7 +755,10 @@ void BuildTexts(const tokenizer::Tokens& tokens, const word::Analysis& analysis,
             texts[j].type = tokens[j].type;
             texts[j].span = tokens[j].span;
             texts[j].text = std::string(tokens.Raw(j));
-            if (tokens[j].span != 0) texts[j].spanText = std::string(tokens.Raw(j));
+            if (tokens[j].span != 0) {
+                texts[j].spanText = std::string(tokens.Raw(j));
+                texts[j].spanSource = texts[j].spanText.size();
+            }
         }
     }
     for (int j = first; j <= last; j++) {
@@ -845,8 +857,10 @@ struct LineSpeech {
     bool poiTic = false;
     bool humble = false;
     bool formal = false;
+    bool politeAnswer = false;  // the line answers はい or いいえ (speech.polite-answer)
     bool threat = false;
     bool oldSelf = false;
+    bool taste = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -1060,7 +1074,10 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     }
                     if (bound) {
                         const dict::Candidates right = snap.GetWordInfo(after, dict::LookupMode::General, lookup);
+                        // A verdict of word.copula-verdict (あり 괜찮다) is no word that the verb would cut
+                        // into (では ありません).
                         for (const dict::Candidate& r : right.list) {
+                            if (ClassOf(r) == '8' && dict::InClass(HDTRANS_CLASS("word.copula-verdict"), r.source)) continue;
                             if (r.source.size() > c.source.size() - left.size() && r.codes != nullptr &&
                                 std::string_view("0134789").find(ClassOf(r)) != std::string_view::npos) {
                                 bound = false;
@@ -1121,6 +1138,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         settings.lineLevel = LineLevelOf(s.decision->level);
         settings.authoritative = s.decision->authoritative;
         settings.prose = s.decision->prose;
+        settings.casualCue = s.decision->key == "casual" && !speech.politeAnswer;
         settings.quoteLevels = s.quoteLevels;
     }
     settings.poiTic = speech.poiTic;
@@ -1128,6 +1146,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     settings.formalLine = speech.formal;
     settings.threatLine = speech.threat;
     settings.oldSelfLine = speech.oldSelf;
+    settings.tasteLine = speech.taste;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
@@ -1206,7 +1225,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             pipeline::Normalize(text, ctx,
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
-                                 options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs}),
+                                 options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
+                                 options.reference ? nullptr : WordIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
@@ -1270,6 +1290,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.formal = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.formal-cue")),
                                         dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
         speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.politeAnswer = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.polite-answer")), {});
+        speech.taste = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("word.taste-cue")), {});
         speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
                                          dict::ClassMembers(HDTRANS_CLASS("speech.old-self-lookalike")));
         speech.narrated = ctx.narrated;

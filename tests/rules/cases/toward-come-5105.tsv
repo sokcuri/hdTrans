@@ -1,0 +1,20 @@
+# 규칙: LEX-5105
+rule	input	expected	kind	layer
+cx:toward-come:10	悲鳴が聞こえる。男が向かってくる。手には包丁。	has:남자가 다가온다	fix	rewrites
+cx:toward-come:10	軍隊が向かってきている	has:다가오고 있다	fix	rewrites
+cx:toward-come:10	敵の戦闘機が向かってきます	has:다가옵니다	fix	rewrites
+cx:toward-come:10	向かってくる者は全て殺すが	has:다가오는 사람	fix	rewrites
+cx:toward-come:10	しかし奴らは私にしか向かって来ないし	has:다가오지 않고	fix	rewrites
+cx:toward-come:10	ほう… 向かってくるのか｡	has:다가오는 건가	fix	rewrites
+cx:toward-come:10	結構な勢いで自分に向かってくるドアで頭を打ちそうになった	lacks:다가	keep	rewrites
+cx:toward-come:20	「こっちに向かってくるやつだけ、落とせばいいんだね」	has:여기로 다가오는	fix	rewrites
+cx:toward-come:20	こちらには向かってきません	has:이쪽에는 다가오지 않습니다	fix	rewrites
+cx:toward-come:10	海賊たちが こちらへ向かってきます！	has:이쪽으로 다가옵니다	fix	rewrites
+cx:toward-come:20	敵艦がこっちに向かってくる	has:여기로 다가온다	fix	rewrites
+cx:toward-come:10	出口へ向かってください！	has:향해 주세요	keep	rewrites
+cx:toward-come:10	リン、211に向かってくれ	has:향해 줘	keep	rewrites
+cx:toward-come:10	しかも死ぬほどの怪我を負っても回復して立ち向かってくる。	has:맞서 온다	keep	rewrites
+cx:toward-come:10	わざわざルート外を向かってくる	has:향해 온다	keep	rewrites
+cx:toward-come:20	どうして 急に この村に向かってきたんだ？	has:마을을 향해 온	keep	rewrites
+cx:toward-come:20	ビール瓶の破片で俺に向かってきた	has:나를 향해 왔다	keep	rewrites
+cx:toward-come:20	俺に向かってこう この腰抜け	has:나를 향해 이렇게	keep	rewrites

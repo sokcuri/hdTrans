@@ -1,0 +1,66 @@
+# 규칙: LEX-5151, GRM-3872
+rule	input	expected	kind	layer
+cx:told-quote:5	父には「何かあったら、トビアスに守ってもらえ」と言われていた。	has:」라는 말을 들었다	fix	rewrites
+cx:told-quote:5	母にはよく「早く寝ろ」と言われる	has:」라는 말을 듣는다	fix	rewrites
+cx:told-quote:4	父に「逃げろ」と言われた。	has:」라는 말을 들었다	fix	rewrites
+cx:told-quote:3	……この子にズルいと言われるのも、もう何度目だろう。	has:치사하다는 말을 듣는 것도	fix	rewrites
+cx:told-quote:3	「あの子に話すなと言われたのを律儀に守ってるの？」	has:이야기하지 말라는 말을 들은	fix	rewrites
+cx:told-quote:3	先生に早く帰れと言われていた	has:돌아가라는 말을 들었다	fix	rewrites
+cx:told-quote:6	先生には早く帰れと言われてる	has:돌아가라는 말을 듣는다	fix	rewrites
+cx:told-quote:3	明日から玖星さんになんて言われるかわかりませんね	lacks:라는 말을	keep	rewrites
+cx:told-quote:30	先生は「静かに」と言われた	has:라고 하셨다	keep	rewrites
+cx:told-quote:6	この森には神がいると言われている	lacks:말을 듣	keep	rewrites
+cx:told-quote:6	彼女には恋人がいると言われている	lacks:말을 듣	keep	rewrites
+cx:wo-sareru-passive:20	同情か興味本位の噂をされまくるだろう。	has:소문에 마구 오르내릴	fix	rewrites
+cx:wo-sareru-passive:10	みんなに噂をされる	has:모두의 소문거리가 된다	fix	rewrites
+cx:wo-sareru-passive:30	娘を守ろうとして、ひどい……拷問をされてね	has:고문을 당해	fix	rewrites
+cx:wo-sareru-passive:30	「経済特待生がなぜ差別をされるのか。」	has:차별을 당하는	fix	rewrites
+cx:wo-sareru-passive:30	彼女は皆に無視をされた	has:무시를 당했다	fix	rewrites
+cx:wo-sareru-passive:40	先生に注意をされた	has:주의를 받았다	fix	rewrites
+cx:wo-sareru-passive:40	私は何度も説明をされた	has:설명을 받았다	fix	rewrites
+cx:wo-sareru-passive:40	社長が説明をされる	has:설명을 하신다	keep	rewrites
+cx:wo-sareru-passive:40	社長が挨拶をされた	has:인사를 하셨다	keep	rewrites
+dict:jisjk:267293	お兄から二度もプロポーズをされてしまった	has:프러포즈를 받아	fix	local
+dict:jisjk:267293	私は先生に質問をされた	has:질문을 받았다	fix	local
+cx:attitude-active:10	別に美咲によく思われようが悪く思われようが関わりがない	has:좋게 생각하든지 나쁘게 생각하든지	fix	rewrites
+cx:attitude-active:20	べ… 別に 君に どう思われようが…	has:네가 어떻게 생각하든지	fix	rewrites
+cx:attitude-active:20	たぶんまだ、俺はこの人に小さい子供かなにかだと思われている気がする。	has:이 사람에게	keep	rewrites
+cx:attitude-active:55	彼に変に見られた	has:그가 이상하게	fix	rewrites
+cx:attitude-active:70	下心を持っている、とでも思われたのだろう。	has:생각했을 것이다	fix	rewrites
+cx:attitude-active:20	でも……それ以上に、最後の最後に『ウザい』って思われたくないであります	lacks:생각하고 싶	keep	rewrites
+cx:attitude-active:20	あんたがそんなだから、私も別に、他の人にかわいいと思われたいわけじゃないし	lacks:생각하고 싶	keep	rewrites
+cx:attitude-active:20	犯人は彼だと思われる	has:생각된다	keep	rewrites
+dict:w:34920	下心を持って近づいた	has:흑심을 품어	fix	words
+dict:jisjk:341056	さすが歌姫とでもいうべきか	has:가희라고나	fix	defaults
+dict:jisjk:341056	情報狂とでも言うべきか。	has:정보광이라고나	fix	defaults
+dict:jisjk:140283	初デートって言われて、いきなりメイド喫茶に来たら	has:첫데이트라는 말을 들어	fix	defaults
+dict:jisjk:140283	「中学の時、クラスの女子に『キモい』って言われたときかな？」	has:』라는 말을 들었을	fix	defaults
+cx:attitude-active:20	「別に、君にどう思われようが構わない」	has:네가 어떻게 생각하든지	fix	rewrites
+cx:told-quote:4	「早く寝ろ」と言われた	has:라는 말을 들었다	keep	rewrites
+cx:told-quote:5	先生は「静かに」と言われた	has:라고 하셨다	keep	rewrites
+cx:wo-sareru-passive:10	社長が噂をされる	lacks:소문을 낸다	keep	rewrites
+cx:wo-sareru-passive:20	噂をされたくない	has:소문	keep	rewrites
+cx:wo-sareru-passive:30	社長が説明をされる	lacks:당하	keep	rewrites
+cx:attitude-active:10	彼によく思われたい	lacks:그가	keep	rewrites
+cx:attitude-active:55	ジッと見られると恥ずかしいです	lacks:보면	keep	rewrites
+cx:attitude-active:70	関係者と思われるテロリストを１名捕縛した	lacks:생각한	keep	rewrites
+cx:attitude-active:20	どんな風に思われても仕方がない	lacks:식이	keep	rewrites
+cx:attitude-active:20	ガラスの瓶の中には赤い液体や、多分塩だと思われる粒	has:생각되는	keep	rewrites
+cx:attitude-active:20	「俺が望月さんに取り引きを持ちかけたと思われてるんですが」	lacks:씨가 거래	keep	rewrites
+cx:wo-sareru-passive:25	彼は皆に悪口をされた	has:욕을 먹었다	fix	rewrites
+cx:wo-sareru-passive:25	悪口を言われた	lacks:먹었	keep	rewrites
+cx:attitude-active:20	先生に疑われている	has:의심받고 있다	keep	rewrites
+cx:attitude-active:20	彼女に嫌がられた	has:미움 받았다	keep	rewrites
+cx:told-state:10	父には「逃げろ」と言われている。	has:」라는 말을 듣는다	fix	rewrites
+cx:told-state:10	父には「逃げろ」と言われていたので	has:말을 들었으므로	fix	rewrites
+cx:told-state:10	みんなに悪口を言われていた	has:욕을 들었다	fix	rewrites
+cx:told-state:10	父には「逃げろ」と言われている人	has:말을 듣는 사람	fix	rewrites
+cx:told-state:10	ずっと待っていた	lacks:들었	keep	rewrites
+cx:told-state:20	母によく「寝ろ」と言われてる	has:말을 듣는다	fix	rewrites
+cx:told-state:20	言われてる意味がわからない	lacks:말을 듣는다	keep	rewrites
+cx:told-state:30	母に「寝ろ」と言われてた	has:말을 들었다	fix	rewrites
+cx:told-state:30	陰で悪口を言われてた	has:험담을 들었다	fix	rewrites
+cx:told-state:30	ずっと待ってた	lacks:들었	keep	rewrites
+sense:quote-passive	彼女にバカと言われていた	has:바보라는 말을 들었다	fix	rewrites
+sense:quote-passive	天才と言われている	lacks:말을 들	keep	rewrites
+cx:told-state:10	みんなに悪口を言われている	has:욕을 듣고 있다	keep	rewrites

@@ -75,7 +75,7 @@ HD_TEST(pipeline_lengthen) {
     } cases[] = {
         {"하아", "vv", "하아아아"}, {"앙", "vvv", "아아아앙"}, {"꺅", "vv", "꺄아악"},
         {"앙", "~", "아~앙"},       {"하아", "!", "하앗"},     {"하아", "~", "하아~"},
-        {"정말", "vv", "정말~"},    {"쾅", "v", "콰앙"},       {"하아", "vvvvvvv", "하아아아아아아아아"},
+        {"정말", "vv", "정말\uE00A\uE00A"},    {"쾅", "v", "콰앙"},       {"하아", "vvvvvvv", "하아아아아아아아아"},
         {"꺅", "vvvvvvvvvvvvvvvvvvvv", "꺄아아아아아아아아아아아아아아아악"},
         {"정말", "!", "정말"},      {"ok", "vv", "ok"},        {"", "v", ""},
         // Repeats write the last syllable again and let ! close it.
@@ -84,7 +84,7 @@ HD_TEST(pipeline_lengthen) {
         // A ～ that stood for the key's ー adds one ~ at the end.
         {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
         // 'd' lets the last syllable of a word carry the lengthening.
-        {"안 돼", "vvvd", "안 돼에에에"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
+        {"안 돼", "vvvd", "안 돼에에에"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼\uE00A\uE00A\uE00A"},
         // 'u': a ッ that closes a drawn う writes 읏, other closing 우 stay (わおっ 와웃).
         {"하우", "!u", "하읏"}, {"하우", "v!u", "하우읏"}, {"와우", "!", "와웃"}, {"우우", "rr!u", "우우우읏"},
     };
@@ -110,7 +110,7 @@ HD_TEST(pipeline_casual_danger_boundaries) {
         {"H7N0", "しねぇ。", "しねぇ。"},
         {"H7N0", "危ねええ岩。", "危ない岩。"},
         {"H7N0", "危ねぇに。", "危ねぇに。"},
-        {"H7N0", "かてぇ岩。", "かてぇ岩。"},
+        {"H7N0", "かてぇ岩。", "かたい岩。"},
         {"H7N0", "試合にかてえ！", "試合にかてえ！"},
         {"H7N0", "危ねぇ島。", "危ない島。"},
     };
@@ -155,7 +155,7 @@ HD_TEST(pipeline_sound) {
     LineContext ctx;
     ctx.lookup.plain = &snap->TextPlain();
     const Case cases[] = {
-        {"あんっ、だめぇ", "앙、안돼"},
+        {"あんっ、だめぇ", "앙、안 돼"},
         {"うわ…柔らかい", "우와…柔らかい"},
         {"フキフキ", "쓱쓱"},
         {"肉がジュージューと焼ける。", "肉が지글지글 焼ける。"},
@@ -271,7 +271,7 @@ HD_TEST(pipeline_sound) {
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
         // A drawn よ after a て form at the start of the text: no character before the て.
         {"てよー", "てよ～"},
-        {"でよーーー。聞いてるの？", "でよ～。聞いてるの？"},
+        {"でよーーー。聞いてるの？", "でよ～\uE00A\uE00A\uE00A。聞いてるの？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -281,8 +281,8 @@ HD_TEST(pipeline_sound) {
         {"冷たいねー", "冷たいね～"},
         {"やーめーて！", "やめて\uE00A！"},
         // A run of three plain vowels inside a word, or of two before an adjective's い.
-        {"すごおおおい！", "すごい\uE00A！"},
-        {"うるさああい！", "うるさい\uE00A！"},
+        {"すごおおおい！", "すごい\uE00A\uE00A\uE00A！"},
+        {"うるさああい！", "うるさい\uE00A\uE00A！"},
         {"すごおい！", "すごおい！"},
         // A ー after the い that ends an adjective before a pause is written ～.
         {"すごいー！", "すごい\uE00A！"},
@@ -395,7 +395,7 @@ HD_TEST(pipeline_sound) {
         // A と that starts a stutter after the pause is no quote (と、とと、溶ける).
         {"ひいい！？　と、とと、溶ける", "히이이！？　\xEE\x80\x80" "、\xEE\x80\x80" "、溶ける"},
         // Before a katakana word the と stays adverbial, but not between two sounds.
-        {"スタスタとベッド", "척척 ベッド"},
+        {"スタスタとベッド", "성큼성큼 ベッド"},
         {"ドキドキとワクワク", "두근두근と두근두근"},
         // A doubled hiragana unit no word reads is a sound before と (とてとてと 토테토테).
         {"とてとてと歩く", "토테토테 歩く"},
@@ -711,7 +711,7 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"冷たいーねこ", "冷たいーねこ"},
         // A shout's っ after the lengthening of a word ends the phrase: the run is ～ and the
         // っ goes; a cry (no word before the mark) keeps it for the cry pass.
-        {"まかせてーーっ！", "まかせて～！"},
+        {"まかせてーーっ！", "まかせて～\uE00A\uE00A\uE00C！"},
         {"ぎやぁーっ！", "ぎやぁーっ！"},
         // A dropped run of three or more vowel kana leaves a drawn mark for each, and a clip mark
         // for the shout's っ the marks take.
@@ -1590,7 +1590,7 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"圭ちゃ～ん！", "圭ちゃん\uE00A！"},
         {"田中さぁあぁあん…", "田中さん\uE00B\uE00B\uE00B\uE00B…"},
         {"アルくぅん！", "アルくん\uE00A！"},
-        {"みどりさああんん！", "みどりさん\uE00A\uE00A！"},
+        {"みどりさああんん！", "みどりさん\uE00B\uE00B！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
         {"私がちゃーんと", "私がちゃんと\uE00A"},
         {"ちゃ～んと出撃", "ちゃんと\uE00A出撃"},
@@ -1608,18 +1608,18 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"びちゃーん！", "びちゃーん！"},
         {"田中さん", "田中さん"},
         {"かみつきさあん", "かみつきさあん"},
-        {"みどりさああん", "みどりさん\uE00A\uE00A"},
+        {"みどりさああん", "みどりさん\uE00B\uE00B"},
         // One lengthening for one stretch mark, two for two or three, a drawn mark for each of four or more;
         // さま drawn after itself too.
         {"圭ちゃーん！", "圭ちゃん\uE00A！"},
-        {"あおくーーーん", "あおくん\uE00A\uE00A"},
-        {"あおくーーーーん", "あおくん\uE00B\uE00B\uE00B\uE00B"},
+        {"あおくーーーん", "あおくん\uE00A\uE00A\uE00A"},
+        {"あおくーーーーん", "あおくん\uE00A\uE00A\uE00A\uE00A"},
         {"姫さまぁ！", "姫さま\uE00A！"},
         {"お嬢様ーっ！", "お嬢様\uE00A！"},
         {"さまざま", "さまざま"},
-        {"姫さまあああ！", "姫さま\uE00A\uE00A！"},
+        {"姫さまあああ！", "姫さま\uE00B\uE00B\uE00B！"},
         {"お嬢様ぁ！", "お嬢様\uE00A！"},
-        {"太郎くぅぅん～", "太郎くん\uE00A\uE00A"},
+        {"太郎くぅぅん～", "太郎くん\uE00B\uE00B"},
         // さま after a name drawn out with small vowels, or ending a greeting; not after no name or in a
         // word that holds none.
         {"姉ぇさまぁ、", "姉ぇさま\uE00A、"},

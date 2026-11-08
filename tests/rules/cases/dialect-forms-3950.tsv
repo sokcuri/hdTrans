@@ -1,6 +1,6 @@
 # 규칙: GRM-3950
 rule	input	expected	kind	layer
-normalize:dialect-copula	“個人情報やさかい あかん” 言うて	“개인정보니까 안돼”그렇긴 해도	fix	normalize
+normalize:dialect-copula	“個人情報やさかい あかん” 言うて	“개인정보니까 안 돼”그렇긴 해도	fix	normalize
 normalize:dialect-copula	それは お前 未練 残るやんけ お前	그것은 너 미련 남잖아 너	fix	normalize
 normalize:dialect-copula	すごい嫌やね これ｡	엄청 싫네 이것.	fix	normalize
 normalize:dialect-copula	お前のことやないかい	너잖아	fix	normalize
@@ -25,7 +25,7 @@ normalize:dialect-cause	やかましいわ コラ はよ開けんかい コラ�
 normalize:dialect-cause	私は あの子を 信じてるだけですさかい｡	저는 그 아이를 믿고 있을 뿐이니까.	fix	normalize
 normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	안심해라 틴타에는 입다물고 둘 테니까	fix	normalize
 normalize:dialect-cause	ゆうべ 夜中に大きな声がするさかい	어젯밤 한밤중에 큰 목소리가 들리니까	fix	normalize
-normalize:dialect-cause	おやじ どげんしたんな？ いつでも いいけん｡ はい｡	아버지 어떤 한 인? 언제라도 좋으니까. 네.	fix	normalize
+normalize:dialect-cause	おやじ どげんしたんな？ いつでも いいけん｡ はい｡	아버지 어떤 한 인? 언제든 좋으니까. 네.	fix	normalize
 normalize:dialect-cause	今日は岡安に用あるさかい 先行くで｡	오늘은 오카야스에 용 있으니까 선행으로.	fix	normalize
 normalize:dialect-cause	だ… 出すけん く… 苦しか…	다… 내는 검… 괴로워…	fix	normalize
 normalize:dialect-cause	悪いけんど婿になど行けぬ。 まったくねずみには勝てぬ。	미안하지만 사위 따위에게 갈 수 없다. 완전히 쥐에는 이길수 없다.	fix	normalize
@@ -145,7 +145,7 @@ normalize:dialect-word	ええパンチ 入っとんのやで 倒れへんわ	좋
 normalize:dialect-word	何を隠そう クラスで いちばん早く 九九を習得した神童が この わいや！	솔직히 말하자면 반에서 가장 빨리 99를 습득한 신동이 이 나야!	fix	normalize
 normalize:dialect-word	わいの芝居 そんなに下手か？	나의 연극 그렇게 서투른가?	fix	normalize
 normalize:dialect-word	そげん でかい声出さんでも聞こえとる！	그렇게 큰 소리를 내지 않아도 들려!	fix	normalize
-normalize:dialect-word	さあ おらに付いて来るだ	자 나를 따라 오는이다	fix	normalize
+normalize:dialect-word	さあ おらに付いて来るだ	자 나를 따라오는이다	fix	normalize
 normalize:dialect-word	そこは わいの机やで	거기는 나의 책상이야	fix	normalize
 normalize:dialect-word	そんな ええ犬なら おれのところへも一日 貸せ！	그렇게 좋은 개라면 나 에도 하루 빌려 주어라!	fix	normalize
 normalize:dialect-word	これが 騒がずにおられるか ホントに これ見てみい ええ？	이것이 떠들지 않고 계실까 정말로 이것 봐라 네?	fix	normalize
@@ -161,12 +161,12 @@ normalize:dialect-keep	……お武家様、助けて下せえ……」	……�
 normalize:dialect-keep	残酷な運命のいたずら	잔혹한 운명의 장난	keep	normalize
 normalize:dialect-keep	でも こうしょっちゅうじゃ たまんないよ…｡	하지만 이렇게 언제나는 견딜 수 없어….	keep	normalize
 normalize:dialect-keep	ぼうけんⅡ	모험Ⅱ	keep	normalize
-normalize:dialect-keep	ん？出たか？ 駄目	응? 나왔나? 안된다	keep	normalize
+normalize:dialect-keep	ん？出たか？ 駄目	응? 나왔나? 안 된다	keep	normalize
 normalize:dialect-keep	待ちかねたぞ 伊豆守 苦しゅうない 面を上げい	기다림에 지친 이즈 마모루 괜찮다 고개를 들라	keep	normalize
 normalize:dialect-keep	皆も喜ぶけぇ。	모두도 기뻐할 테니까.	keep	normalize
 normalize:dialect-keep	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	keep	normalize
 normalize:dialect-keep	声を、聞くや否や	목소리를, 듣자마자	keep	normalize
-normalize:dialect-keep	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니야! 별로 그런 작정은……」	keep	normalize
+normalize:dialect-keep	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니야! 딱히 그런 작정은……」	keep	normalize
 normalize:dialect-keep	「戦うたびに強くなる」	「싸울 때마다 강해져」	keep	normalize
 normalize:dialect-keep	本を買うために働いた。	책을 사기 위해 일했다.	keep	normalize
 normalize:dialect-keep	見よか	볼까	keep	normalize
@@ -185,7 +185,7 @@ normalize:dialect-word	「ええ勿論少しはしましたわ。	「네, 물론
 normalize:dialect-word	ええ本当よ。	네, 사실이야.	fix	normalize
 normalize:dialect-word	ええ使いましたよ	네, 썼어요	fix	normalize
 normalize:dialect-word	「ええ云ってごらん。	「네, 말해 봐.	fix	normalize
-normalize:dialect-word	「ええ差上げるわ。	「네, 드릴게.	fix	normalize
+normalize:dialect-word	「ええ差上げるわ。	「응, 드릴게.	fix	normalize
 normalize:dialect-word	ええ塩梅じゃのう。	좋은 간이로구먼.	keep	normalize
 normalize:dialect-word	ええ装備じゃねぇ、皆も喜ぶけぇ。	좋은 장비가 아닌, 모두도 기뻐할 테니까.	keep	normalize
 normalize:dialect-word	ええ旦那さんだなあ。	좋은 남편이구나.	keep	normalize

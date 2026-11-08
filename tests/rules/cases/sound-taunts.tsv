@@ -3,11 +3,11 @@ rule	input	expected	kind	layer
 sound:taunt-tag	わかりましたよーだ	알았어요~	fix	sound
 sound:taunt-tag	「はいはい、あたしはケチですよーだ。」	「네네, 저는 구두쇠예요~.」	fix	sound
 sound:taunt-tag	「ぶー、どうせ貫禄ないですよーだ」	「부우, 어차피 관록 없어요~」	fix	sound
-sound:taunt-tag	「別に怒ってないですよーだ」	「별로 화내지 않아요~」	fix	sound
+sound:taunt-tag	「別に怒ってないですよーだ」	「딱히 화내지 않아요~」	fix	sound
 sound:taunt-tag	オイラも忙しいよ～だ！	나도 바빠~!	fix	sound
 sound:taunt-tag	バーカ、知らないよーっだ	바보, 몰라~	fix	sound
 sound:taunt-tag	わかったよーだ	알았어~	fix	sound
-sound:taunt-tag	分かりましたよーーだっ！	알았어요~!	fix	sound
+sound:taunt-tag	分かりましたよーーだっ！	알았어요오오!	fix	sound
 sound:taunt-tag	行かないもんねーだ	가지 않는 걸―	fix	sound
 sound:taunt-tag	いいもんねーっだ	좋은 걸―	fix	sound
 sound:taunt-tag	行くよー	가~	keep	sound

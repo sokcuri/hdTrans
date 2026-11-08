@@ -1,0 +1,17 @@
+# 규칙: GRM-4013
+rule	input	expected	kind	layer
+cx:motion-come:10	階段を降りてきた	계단을 내려왔다	fix	rewrites
+cx:motion-come:10	　母親は慌てて駆け寄ってきて、俺を抱き上げた。	has:달려와	fix	rewrites
+cx:motion-come:10	あのときも剣丞の方に鬼が寄ってきたの	has:다가왔어	fix	rewrites
+cx:motion-come:10	エラはコンピュータから 手が出てきたって言ってるの	has:손이 나왔다고	fix	rewrites
+cx:motion-come:10	決裂したときと違い、いつもの柔和な笑みを浮かべた会長が、部室の中へ入ってきた。	has:들어왔다	fix	rewrites
+cx:motion-come:10	至宝を狙ってこの地に攻めこんできたとはいったい……？	has:쳐들어왔다고는	fix	rewrites
+cx:motion-come:10	見送ると言って一緒に家を出てきた、青海さんがいた。	has:집을 나온	fix	rewrites
+cx:motion-come:10	帰って……来た。……ふぅ。	has:돌아왔다	fix	rewrites
+cx:motion-come:10	かすかな目眩と共に、不吉なビジョンが頭に滑り込んできた。	has:미끄러져 들어왔다	fix	rewrites
+cx:motion-come:10	「出かけてくる」	lacks:나와	keep	rewrites
+cx:motion-come:10	帰って来れなかった	has:올 수 없었다	keep	rewrites
+cx:motion-come:10	歩み寄ってくれた	has:주었다	keep	rewrites
+cx:motion-come:10	降りていく	has:내려	keep	rewrites
+cx:motion-come:10	納得がいってきた	has:납득이	keep	rewrites
+cx:motion-come:10	三日たって、ようやく熱も下がってきた。	has:내려가	keep	rewrites

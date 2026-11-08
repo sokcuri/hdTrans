@@ -9,10 +9,10 @@ dict:lex:3845:daiji-important	いえいえ、大事なことですから	아니�
 dict:lex:3845:daiji-important	服は大事ですよね	옷은 중요하네요	fix	defaults
 dict:lex:3845:daiji-important	来週 大事な テストがあるから	다음주 중요한 테스트가 있으니까	fix	local
 dict:lex:3845:daiji-important	防衛が大事だな	방위가 중요하네	fix	defaults
-dict:lex:3845:daiji-important	俺も大事な用事が	나도 중요한 용무가	fix	local
+dict:lex:3845:daiji-important	俺も大事な用事が	has:중요한 용무가	fix	local
 dict:lex:3845:daiji-important	大事なのは リュウゼツランの質のよさ	중요한 것은 용설란의 질이 좋음	fix	defaults
 dict:lex:3845:daiji-important	それがお館様の大事なお役目であるからな	그것이 관님의 중요한 역할이니까	fix	local
-dict:lex:3845:daiji-important	そんなに大事な事だったら 緑色で書いてあるはずでしょ？	그렇게 중요한 일이라면 녹색으로 써 있을 것이지?	fix	local
+dict:lex:3845:daiji-important	そんなに大事な事だったら 緑色で書いてあるはずでしょ？	그렇게 중요한 일이라면 초록색으로 써 있을 것이지?	fix	local
 dict:lex:3845:daiji-important	この次が大事だ……	이 다음이 중요해……	fix	defaults
 dict:lex:3845:daiji-important	電話するのは大事なときだけ	전화하는 것은 중요한 때만	fix	local
 dict:lex:3845:daiji-important	お父様たちは 大事なお話があるの。	아버님들은 중요한 이야기가 있어.	fix	local
@@ -44,7 +44,7 @@ dict:jisjk:263827	〇〇の洞窟とか、そんな感じで名称と説明が�
 dict:jisjk:263827	大分ニッポンにも慣れてきたね～ぇ！	상당히 일본에도 익숙해져 왔네~!	fix	local
 dict:jisjk:263827	この景色 大分に移動したみたいｽﾞﾗ｡	이 경치 오이타로 이동한 것 같은 즈라.	fix	local
 dict:jisjk:263827	頭を大分	머리를 상당히	fix	local
-dict:jisjk:263827	１００％大分県産ケールを使った野菜ジュースだ。飲むといい	100% 오이타현산 케일을 쓴 채소 주스다. 마시면 좋다	keep	local
+dict:jisjk:263827	１００％大分県産ケールを使った野菜ジュースだ。飲むといい	100% 오이타현산 케일을 쓴 야채주스다. 마시면 좋다	keep	local
 dict:jisjk:263827	大分痛みが緩和されてきたようだ。	상당히 아픔이 완화되어 온 것 같다.	keep	local
 dict:jisjk:263827	門まで大分近づいたね	문까지 상당히 가까워졌네	keep	local
 dict:jisjk:263827	大分へ行く	오이타에 간다	keep	local

@@ -70,7 +70,7 @@ cx:function-words:10	マイケルが言うには・・・ - マイケルは嘘�
 cx:function-words:40	しかし ある時 不慮の事故を起こした	하지만 어느 날 뜻하지 않은 사고를 냈다	fix	rewrites
 cx:function-words:40	ある時 ヤツらを 牢獄に送るために—	어느 날 녀석들을 감옥에 보내기 위해—	fix	rewrites
 cx:function-words:23	廃品の山で見つけただと?	폐품의 산에서 찾아냈다고?	fix	rewrites
-cx:function-words:50	こうして種々な条件を附けて来ると、創作人物の名前なるものは、いい加減、神経衰弱のタネになるものである。	이렇게 해 다양한 조건을 붙을 수 있어 오면, 창작 인물의 이름이라는 것은, 이제 좀, 신경쇠약의 씨가 되는 것이다.	fix	rewrites
+cx:function-words:50	こうして種々な条件を附けて来ると、創作人物の名前なるものは、いい加減、神経衰弱のタネになるものである。	이렇게 다양한 조건을 붙을 수 있어 오면, 창작 인물의 이름이라는 것은, 이제 좀, 신경쇠약의 씨가 되는 것이다.	fix	rewrites
 cx:function-words:25	酔ってたから覚えてないだと？	취하고 있었으니까 기억하지 않았다고?	fix	rewrites
 cx:function-words:40	そして ある時 俺は やつと戦うことになったのさ	그리고 어느 날 나는 녀석과 싸우게 됐어	fix	rewrites
 cx:function-words:10	あの女が言うには...	그 여자가 말하기로는...	fix	rewrites
@@ -105,11 +105,11 @@ cx:function-words:60	そういうと、吉見はもと来た森の中に帰り�
 cx:function-words:60	姉がそういうと、父と兄は大きな声で笑った。	언니가 그렇게 말하자, 아버지와 형은 큰 목소리로 웃었다.	fix	rewrites
 cx:function-words:60	それで兎に角やって見ようと思ってそういうと、外山さんは私を嘉納さんのところへやった。	그래서 토끼에 모퉁이 해보려고 그렇게 말하자, 소토야마 씨는 나를 카노 씨에게 했다.	fix	rewrites
 cx:function-words:60	キャラコさんがそういうと、佐伯氏は、低い声で笑いだした。	칼리코 씨가 그렇게 말하자, 사에키씨는, 낮은 목소리로 웃기 시작했다.	fix	rewrites
-cx:function-words:60	若奴がそういうと、女主人は、	약노가 그렇게 말하자, 여주인은,	fix	rewrites
+cx:function-words:60	若奴がそういうと、女主人は、	has:그렇게 말하자, 여주인은,	fix	rewrites
 cx:function-words:60	阿曽がそういうと、ハナは、	아소가 그렇게 말하자, 하나는,	fix	rewrites
 cx:function-words:60	柏木は店長にそういうと、「何にする」と、注文用タッチパネルモニターを見て注文をとる。	카시와기는 점장에 그렇게 말하면, 「무엇으로 한다」라고, 주문용 터치스크린 모니터를 보고 주문을 취한다.	fix	rewrites
 cx:function-words:60	そういうと、 下手な兵士を雇わなかっただろうね?	그렇게 말하자, 서투른 병사를 고용하지 않았을 것이다?	fix	rewrites
-cx:function-words:60	そういうと、200まで上がってきた。	그렇게 말하자, 200까지 올라 왔다.	fix	rewrites
+cx:function-words:60	そういうと、200まで上がってきた。	그렇게 말하자, 200까지 올라왔다.	fix	rewrites
 cx:function-words:60	そういうと、... 白人を殺した男にも正義があるんだろ?	그렇게 말하자,... 백인을 죽인 남자에게도 정의가 있는 거지?	fix	rewrites
 cx:function-words:60	そういうと、．．．	그렇게 말하자,. . .	fix	rewrites
 cx:function-words:10	そう言うには 早すぎるが	그렇게 말하기에는 너무 빠르지만	keep	rewrites

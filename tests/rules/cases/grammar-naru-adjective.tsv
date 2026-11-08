@@ -11,7 +11,7 @@ dict:gram:naru-adj:な	食事は豪華になったけど、手作りではなく
 dict:gram:naru-adj:な	宮殿から薬草園まで通うのが面倒になったため、	궁전에서 약초원까지 다니는 것이 귀찮아졌기 때문에,	fix	local
 dict:gram:naru-adj:な	「佳奈の全部が好きなんだ。嫌いになる部分なんてない」	「카나의 전부를 좋아해. 싫어지는 부분 같은 건 없어」	fix	local
 dict:gram:naru-adj:な	果たして美味になるのだろうか？	과연 맛좋아지는 걸까?	fix	local
-dict:gram:naru-adj:な	傲慢になってはだめよ。	오만해져서는 안돼요.	fix	local
+dict:gram:naru-adj:な	傲慢になってはだめよ。	오만해져서는 안 돼요.	fix	local
 dict:gram:naru-adj:な	「立派になったなぁ！」	「훌륭해졌구나!」	fix	local
 dict:gram:naru-adj:な	ちょっと落ち着け、クールになれ。	조금 진정해, 쿨해져라.	fix	local
 dict:gram:naru-adj:な	いつの間にか、先生の表情はおだやかになっていた。	어느새인가, 선생님의 표정은 온화해져 있었다.	fix	local
@@ -19,12 +19,12 @@ dict:gram:naru-adj:な	「ふたりに幸せになってほしいの」	「두 �
 dict:gram:naru-adj:なって	不安になってきた。	불안해졌다.	fix	local
 dict:gram:naru-adj:なって	「何故かしら……逆に不安になってきたわ……」	「왜일까……반대로 불안해졌어……」	fix	local
 dict:gram:naru-adj:なって	もうすっかり夜ですね。静かになってきました。	이제 완전히 밤이군요. 조용해졌습니다.	fix	local
-dict:gram:naru-adj:なって	頬は朱に染まり、その動きも緩慢になってきている。	뺨은 피로 물들어, 그 움직임도 완만해지고 있다.	fix	local
+dict:gram:naru-adj:なって	頬は朱に染まり、その動きも緩慢になってきている。	뺨은 붉게 물들어, 그 움직임도 완만해지고 있다.	fix	local
 dict:gram:naru-adj:な	「気付いたら……好きになってましたから」	「정신을 차려 보니……좋아하게 돼 있었으니까요」	keep	local
 dict:gram:naru-adj:な	分厚い本なので、思わず持てるか心配になってしまう。	두꺼운 책이므로, 나도 모르게 가질 수 있을까 걱정이 되어버린다.	keep	local
 dict:gram:naru-adj:な	「もっと真っ赤になるのかと思ってたよ」	「좀 더 새빨갛게 되는 줄 알았어」	keep	local
 dict:gram:naru-adj:な	「でもそれじゃ、望月さんが悪者みたいになってしまう」	「하지만 그럼, 모치즈키 씨가 나쁜놈같이 돼버린다」	keep	local
-dict:gram:naru-adj:な	そのうち寂しくなったら入ってくるに違いない。	머지않아 외로워지면 들어 올 것임에 틀림없다.	keep	local
+dict:gram:naru-adj:な	そのうち寂しくなったら入ってくるに違いない。	머지않아 외로워지면 들어올 것임에 틀림없다.	keep	local
 dict:gram:naru-adj:な	「では、病気にならない身体をお願いします」	「그럼, 병이 들지 않는 몸을 부탁드립니다」	keep	local
 dict:gram:naru-adj:ならな	戦の前に不安にならないものなんていない。	싸움 앞에 불안해지지 않는 것은 없다.	fix	local
 dict:gram:naru-adj:な	だから不安にならないで	그러니까 불안해지지 마	fix	local

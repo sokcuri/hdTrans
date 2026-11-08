@@ -65045,7 +65045,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミルチョ・マンチェフスキ	밀초 만체프스키	N130	QPNVHn		GN							names.363726
 ミルツ	오인석	N130	QPNVHn	Wb	GN							names.363727
 ミルツ・イフター	미루츠 이프테르	N130	QPNVHn		GN							names.363728
-ミルテ	은매화	N130	QPNVHn	Wb	GN						みるて	names.363729
+ミルテ	미르테	N130	QPNVHn	Wb	GN						みるて	names.363729
 ミルティアディス・テントグルー	밀티아디스 텐도글루	N130	QPNVHn		GN							names.363730
 ミルティアデス	밀티아데스	N130	QPNVHn	Wb	GN						みるてぃあです	names.363731
 ミルティアデス・ゴウスコス	밀티아디스 구스코스	N130	QPNVHn		GN							names.363732
@@ -316707,7 +316707,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 残留	잔류	N110			GN							names.619338
 残留思念	잔류사념	N110			GN							names.619339
 残穢	잔예	N130	QWK		GN							names.619340
-残穢 -住んではいけない部屋	잔예 - 살아서는 안되는 방	N130	QWK		GN							names.619341
+残穢 -住んではいけない部屋	잔예 - 살아서는 안 되는 방	N130	QWK		GN							names.619341
 残菊物語	마지막 국화 이야기	N130	QWK		GN							names.619342
 残虐	잔학	N110			GN						ざんぎゃく	names.619343
 残虐の朱雀	잔학의 주작	N130	QPNVHn		GN							names.619344

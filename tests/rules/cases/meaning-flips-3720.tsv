@@ -30,7 +30,7 @@ dict:jisjk:342197	食べてないと困る	먹지 않으면 곤란하다	fix	loc
 dict:jisjk:342197	寝てないと死ぬぞ	자지 않으면 죽겠어	fix	local-ending
 dict:jisjk:342197	俺に伝わっていないと思い込んでいる彼女	나에게 전해지지 않았다고 믿어버리고 있는 그녀	keep	local-ending
 dict:jisjk:342197	高いと思う	높다고 생각한다	keep	local-ending
-dict:jisjk:342197	大事にしないとダメだよ	소중히 하지 않으면 안돼	keep	local-ending
+dict:jisjk:342197	大事にしないとダメだよ	소중히 하지 않으면 안 돼	keep	local-ending
 dict:jisjk:342197	急がないと間に合わないよ	서두르지 않으면 늦어	keep	local-ending
 cx:meaning-flips-1:10	「勝負しねえって言ってんだろうが」	「승부하지 않는다고 말하잖아」	fix	rewrites
 cx:meaning-flips-1:10	離せって言ってるんだろうが！	떼어 놓으라고 말하잖아!	fix	rewrites

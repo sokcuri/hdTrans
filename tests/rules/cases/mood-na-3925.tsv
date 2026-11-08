@@ -39,19 +39,19 @@ sound:clipped-volitional-aux	笑顔でいこか	웃는 얼굴로 갈까	fix	soun
 sound:clipped-volitional-aux	そうだな。 気を引き締めていこ…。	그래. 마음을 단단히 먹어 가자….	fix	sound
 sound:clipped-volitional-aux	価値観認め合っていこ	가치관 서로 인정해 가자	fix	sound
 sound:clipped-volitional-aux	いいから。 ほら ア行から一緒に探していこ。	좋으니까. 자 아행에서 함께 찾아 가자.	fix	sound
-sound:clipped-volitional-aux	ですね。 回っていこ。 大体 北西なら もう良くない？	그렇죠. 돌아 가자. 대개 북서라면 이제 좋지 않아?	fix	sound
+sound:clipped-volitional-aux	ですね。 回っていこ。 大体 北西なら もう良くない？	has:돌아가자.	fix	sound
 sound:clipped-volitional-aux	次の学祭 それでいこ	다음 학 제 그렇게 하자	fix	sound
-sound:clipped-volitional-aux	大体 北西なら もうよくない？ 回っていこ	대개 북서라면 이제 좋지 않아? 돌아 가자	fix	sound
+sound:clipped-volitional-aux	大体 北西なら もうよくない？ 回っていこ	has:돌아가자	fix	sound
 sound:clipped-volitional-aux	血でいこ！ 血 出しときゃオッケーや！ ちゃう？	피로 가자! 피 내 두면 오케이야! 아니야?	fix	sound
 sound:clipped-volitional-aux	教科書だけに そろそろ“本”気でいこか	교과서인 만큼 슬슬 “책”기분으로 갈까	fix	sound
-sound:clipped-volitional-aux	しかたない 走っていこ	어쩔 수 없다 달려 가자	fix	sound
+sound:clipped-volitional-aux	しかたない 走っていこ	어쩔 수 없다 달려가자	fix	sound
 sound:clipped-volitional-aux	これから少しずつ、ふたりで慣れていこ？	지금부터 조금씩, 둘이서 익숙해져 가자?	fix	sound
 sound:clipped-volitional-aux	先生のところに ﾎﾟﾆ大根 持っていこっと！	선생님에게 포니무 가져가야지!	fix	sound
 sound:clipped-volitional-aux	そんとき顔見ていこか	라고 하고 얼굴 봐 갈까	fix	sound
 sound:clipped-volitional-aux	あっ 待てよ しずかちゃん所に 来たんだから遊んでいこっと	앗 기다려 시즈카짱소에 왔으니까 놀아 가야지	fix	sound
 segment:na-space	同じような 気がする	같은 생각이 든다	keep	segment
 segment:na-space	全力を出すな って 言っているんじゃない	전력을 내지 말라고 말하는 거 아니야	keep	segment
-segment:na-space	そんな 馬鹿な	말도 안돼	keep	segment
+segment:na-space	そんな 馬鹿な	말도 안 돼	keep	segment
 sound:clipped-volitional-aux	ただじゃおかねーからな！！	그냥 두지 않으니까!!	keep	sound
 sound:clipped-volitional-aux	もう生かしちゃおかねえぞ！ 裏切り？	이제 살리면 두지 않아! 배반?	keep	sound
 sound:clipped-volitional-aux	どんなやつだろうと 絶対に生かしちゃおかーん	어떤 녀석일 거라고 절대로 살리면 두지 않아~	keep	sound

@@ -27,4 +27,4 @@ dict:i:2476	噂を耳にした。	소문을 들었다.	fix	lookup
 dict:w:354	熱のせいでかすれているはずなのに	has:갈라지고 있을 텐데	fix	lookup
 dict:jisjk:91792	見慣れた自分のものではない。	has:눈에 익숙한	fix	lookup
 dict:w:31057	わたしはゆっくりと重い瞼を開けた。	has:눈꺼풀을 들어 올렸다	fix	lookup
-sense:伸びる	自分の額に向かって伸びてくる指先が、黄色く染まっている。	has:손가락끝이	keep	senses
+sense:伸びる	自分の額に向かって伸びてくる指先が、黄色く染まっている。	has:손끝이	keep	senses

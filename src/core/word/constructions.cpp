@@ -446,6 +446,8 @@ constexpr NamedFeature kFeatures[] = {
     {"humble-line", [](Flusher& f, const Item*) { return f.w.settings.humbleLine; }},
     {"threat-line", [](Flusher& f, const Item*) { return f.w.settings.threatLine; }},
     {"formal-line", [](Flusher& f, const Item*) { return f.w.settings.formalLine; }},
+    // The line speaks of food or drink (word.taste-cue): what お試し asks for is a taste.
+    {"taste-line", [](Flusher& f, const Item*) { return f.w.settings.tasteLine; }},
     // The line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue).
     {"old-self-line", [](Flusher& f, const Item*) { return f.w.settings.oldSelfLine; }},
     // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.
@@ -470,6 +472,14 @@ constexpr NamedFeature kFeatures[] = {
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
     {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
+    // Some candidate of the word, chosen or not, is a noun that takes する (gram Hd): 休憩, whose chosen row may lack the code.
+    {"suru-noun",
+     [](Flusher&, const Item* it) {
+         for (int i = 0; it->group != nullptr && i < static_cast<int>(it->group->entries.size()); i++) {
+             if (it->GAttr(i).find("Hd") != std::string_view::npos) return true;
+         }
+         return false;
+     }},
     // The sense table read the word as an adjectival noun (senses.tsv, adjective).
     {"adjectival", [](Flusher&, const Item* it) { return it->adjectival; }},
     // The word repeats the word before it (CopyBefore), or the word after it repeats it.
@@ -515,6 +525,10 @@ constexpr NamedFeature kFeatures[] = {
     {"casual-level", CasualLevel},
     // The word's speech is 해요체 or 합쇼체 (PoliteLevel).
     {"polite-level", PoliteLevel},
+    // The line is one the speech-level stage writes in 해체 from a plain end of the source (cue key casual), not a
+    // line with no cue (spec REG-2).
+    {"casual-cue",
+     [](Flusher& f, const Item* it) { return f.w.settings.casualCue && SpeechLevel(f, it) == Settings::LineLevel::casual; }},
     // The line is a line of prose fiction that the speech-level stage writes (spec REG-20).
     {"prose", [](Flusher& f, const Item*) { return f.w.settings.lineLevel != Settings::LineLevel::none && f.w.settings.prose; }},
     // A digit ends the text before the word in its token (3から).
@@ -567,6 +581,16 @@ constexpr NamedFeature kFeatures[] = {
          const char32_t r = text::DecodeRune(it->group->surface).cp;
          return text::IsLetter(r) || text::IsDigit(r);
      }},
+    // The surface holds a kanji other than 々.
+    {"kanji",
+     [](Flusher&, const Item* it) {
+         for (std::string_view t = it->group->surface; !t.empty();) {
+             const text::Rune r = text::DecodeRune(t);
+             if (text::IsKanji(r.cp) && r.cp != U'々') return true;
+             t.remove_prefix(std::max<std::size_t>(r.size, 1));
+         }
+         return false;
+     }},
     // The surface is katakana only, with ー (KatakanaSurface).
     {"katakana", [](Flusher&, const Item* it) { return KatakanaSurface(it->group->surface); }},
     // The Korean of the selected candidate is empty or spaces.
@@ -617,6 +641,15 @@ constexpr NamedFeature kFeatures[] = {
     {"plain-voice", [](Flusher&, const Item* it) { return it->detail->record == 0; }},
     // A noun that the word describes follows it in its token (DescribedNoun).
     {"described-noun", [](Flusher& f, const Item* it) { return DescribedNoun(f.w, it); }},
+    // The Korean lemmas of the word and the word after it make a compound verb of
+    // ko-verb.compound-motion (流れていく 흐르다 + 가다 흘러가다).
+    {"motion-compound",
+     [](Flusher& f, const Item* it) {
+         const Item* n = it->After();
+         return it->selected >= 0 && n != nullptr && n->selected >= 0 &&
+                output::CompoundMotion(ItemLemma(f, it, it->selected), ItemLemma(f, n, n->selected),
+                                       At(it->Code(it->selected), 1) < '3' || At(it->Code(it->selected), 1) > '6');
+     }},
     // The Korean lemma is one of ko-verb.holding or a phrase that ends in one (이를 악물다).
     {"holding-verb",
      [](Flusher& f, const Item* it) {

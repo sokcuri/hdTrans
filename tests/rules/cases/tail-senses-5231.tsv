@@ -1,0 +1,35 @@
+# 규칙: LEX-5231
+rule	input	expected	kind	layer
+dict:tail-5231	ぬかりなく確認し終えると	has:빈틈없이	fix	lookup
+dict:tail-5231	魔力を解き放つ	has:풀어놓는다	fix	lookup
+dict:tail-5231	したたかに打ちつけた	has:호되게	fix	lookup
+dict:tail-5231	激しくせき込んでいた	has:기침하고 있었다	fix	lookup
+dict:tail-5231	凝り固まっていた考え	has:굳어져	fix	lookup
+dict:tail-5231	曲がりくねった地形	has:구불구불한 지형	fix	lookup
+dict:tail-5231	急ぎ参じた	has:급히 찾아왔다	fix	lookup
+dict:tail-5231	春頃に戻る	has:봄 무렵	fix	lookup
+dict:tail-5231	敵を薙いでいく	has:베어 넘겨	fix	lookup
+dict:tail-5231	蔦が絡みついてくる	has:휘감겨 온다	fix	lookup
+dict:tail-5231	在りし日の姿	has:지난날의 모습	fix	lookup
+dict:tail-5231	願いをかなえる	has:소원을 이루어 준다	fix	lookup
+dict:tail-5231	心積もりはしていた	has:마음의 준비는	fix	lookup
+dict:tail-5231	屈みこみ、拾い上げた	has:웅크려	fix	lookup
+dict:tail-5231	薄型になるんだ	has:슬림형이	fix	lookup
+dict:w:35250	中々来ない	has:좀처럼 오지 않는다	fix	lookup
+dict:w:35250	中々いい	has:꽤 좋다	keep	lookup
+dict:w:35253	中々の腕前だ	has:상당한 솜씨다	fix	lookup
+dict:w:35251	めちゃくちゃだった	has:엉망진창이었다	fix	lookup
+dict:w:35251	めちゃくちゃ強い	has:엄청 강하다	keep	lookup
+pack:argument-senses:5190	キセルを吸ってる	has:담뱃대를 피우고	fix	packs
+pack:argument-senses:5191	取り出し、両手に抱えた	has:양손에 안았다	fix	packs
+pack:argument-senses:5192	彼を引き上げようとした。	has:끌어올리려고	fix	packs
+pack:argument-senses:5194	詳細を掴まないと	has:파악해야	fix	packs
+pack:argument-senses:5194	腕を掴んだ	lacks:파악	keep	packs
+pack:argument-senses:5195	茶を吹き出した	has:차를 뿜었다	fix	packs
+pack:argument-senses:5196	髪を纏め終えた	has:묶고	fix	packs
+pack:argument-senses:5196	荷物をまとめた	lacks:묶	keep	packs
+pack:argument-senses:5197	王位についてから	has:왕위에 오르고	fix	packs
+pack:argument-senses:5198	軍務に就いた	has:군무에 종사했다	fix	packs
+pack:argument-senses:5200	コーヒー豆を挽いて	has:커피콩을 갈아	fix	packs
+pack:argument-senses:5203	繋いだ手	has:잡은 손	fix	packs
+dict:tail-5231	「悪いが茶菓子を切らしてね、代わりに相手の娘さんとの馴れ初めでも、何でもいいから話してごらん」	has:사귀게 된 계기라도	fix	lookup

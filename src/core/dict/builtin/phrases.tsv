@@ -165,9 +165,9 @@
 そうだな	그래	intj
 そうなんだわ	그렇거든	intj
 そのまさかよ	바로 그 설마야	intj
-だめだわ	안되겠어	intj
-だめよ	안돼	intj
-だめよね	안되지	intj
+だめだわ	안 되겠어	intj
+だめよ	안 돼	intj
+だめよね	안 되지	intj
 それはありですね	그것도 괜찮네요	intj
 ここですね	여기군요	intj
 そこですね	거기군요	intj
@@ -1041,11 +1041,11 @@
 あいててて	아야야	intj
 わかるわかる	알아 알아	intj
 もち	당연하지	intj
-あたい	나	n	attr=VHn
 こんの	이 녀석	intj
-あかん	안돼	intj
-あかーん	안돼	intj
-あっかーん	안돼	intj
+あかん	안 돼	intj
+あかーん	안 돼	intj
+あっかーん	안 돼	intj
+あたい	나	pron
 んじゃ	그럼	intj
 いっくよ	간다	intj
 いっくぞ	간다	intj
@@ -1201,7 +1201,7 @@
 知りませんでしたわ	몰랐어요	phrase
 わかりませんわ	모르겠어요	phrase
 分かりませんわ	모르겠어요	phrase
-いけませんわ	안돼요	phrase
+いけませんわ	안 돼요	phrase
 // Set phrases of narration and speech.
 気が付けば	정신을 차려 보니	adv
 正直なところ	솔직히 말해서	adv
@@ -1229,7 +1229,7 @@
 驚くなかれ	놀라지 마라	adv
 驚く無かれ	놀라지 마라	adv
 馬が合う	마음이 맞다	v5
-わたくし	저	n	attr=VHn
+わたくし	저	pron
 わたくしたち	저희	n	attr=VHn
 わたくし達	저희	n	attr=VHn
 どけ	비켜	intj
@@ -1276,7 +1276,20 @@
 もーいいよ	이제 됐어	phrase
 いーよ	좋아	intj
 ねーねー	있잖아	intj
-お試しになる	시험해 보시다	v5
+お試しになる	해 보시다	v5
+お試しになってください	해 보세요	phrase
+お試しになって下さい	해 보세요	phrase
+お試しくださいませ	해 보십시오	phrase
+お試し下さいませ	해 보십시오	phrase
+お試しいただければ	해 보시면	phrase
+お試しいただけましたら	해 보시면	phrase
+お試しいただきたい	해 보시길 바라다	phrase
+お試しを	해 보세요	intj	final
+お試しで	시험 삼아	phrase
+お試し版	체험판	n
+お試し期間	체험 기간	n
+お試しキャンペーン	체험 캠페인	n
+お試しセット	체험 세트	n
 
 // Internet slang said as an utterance of its own.
 それな	그러니까	intj
@@ -1361,6 +1374,8 @@
 場を以て	자리에서	phrase
 近づいてくる	다가오다	v
 近付いてくる	다가오다	v
+寄ってくる	다가오다	v
+寄って来る	다가오다	v
 もう少しだけ	조금만 더	phrase
 もうちょっとだけ	조금만 더	phrase
 いかがなさいましたか	무슨 일이십니까	phrase
@@ -1557,11 +1572,16 @@
 年が離れてる	나이 차이가 나다	v1
 年も離れている	나이 차이도 나다	v1
 年も離れてる	나이 차이도 나다	v1
+年は離れている	나이 차이는 나다	v1
+年は離れてる	나이 차이는 나다	v1
+年の離れている	나이 차이가 나다	v1
+年の離れてる	나이 차이가 나다	v1
 声に出す	소리 내다	v5
 ついて回る	따라다니다	v5
 付いて回る	따라다니다	v5
 // LEX-152: verbal nouns whose する verb is no 하다 verb.
 鞍替えする	갈아타다	v
+場慣れする	익숙해지다	v
 寄り道する	딴 데 들르다	v
 // LEX-153: modifier collocations.
 浮いた存在	겉도는 존재	n

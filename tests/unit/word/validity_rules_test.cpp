@@ -24,8 +24,8 @@ HD_TEST(validity_rules_fingerprint) {
         h.Byte(static_cast<uint8_t>(r.followClass));
         h.Str(r.first);
     }
-    HD_CHECK_EQ(h.h, uint64_t{1417647825425905294ull});
-    HD_CHECK_EQ(rules.size(), size_t{766});
+    HD_CHECK_EQ(h.h, uint64_t{18112444764480064080ull});
+    HD_CHECK_EQ(rules.size(), size_t{767});
     HD_REQUIRE(!rules.empty());
     HD_CHECK_EQ(std::string(rules[0].source), std::string("でも"));
     HD_CHECK_EQ(rules[0].sourceClass, '2');

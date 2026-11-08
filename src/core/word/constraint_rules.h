@@ -109,7 +109,8 @@ enum class ConstraintContext : uint8_t {
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
-                        // (ことなどできない: など + できない, not などで + きない)
+                        // (ことなどできない: など + できない, not などで + きない); a follow that ends in $ is the
+                        // whole text after it (部屋においで: で$)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word
                         // with a kanji or katakana that ends there and reads first as a verb or an
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a

@@ -1,10 +1,10 @@
 # 규칙: LEX-4723
 rule	input	expected	kind	layer
-lexical:missing-word	旅籠だぁ？お天道様は起きたばかりだぜ？	여관이야? 태양은 일어난지 얼마 안되었음이지?	fix	lookup
+lexical:missing-word	旅籠だぁ？お天道様は起きたばかりだぜ？	여관이야? 태양은 일어난지 얼마 안 되었음이지?	fix	lookup
 lexical:missing-word	ひゃっはー！者共かかれー！	히햐하! 자들 쓰여되고―！	fix	lookup
 lexical:missing-word	視界の端に見える己の小さな手脚。	시야의 구석으로 보이는 자신의 작은 손발.	fix	lookup
 lexical:missing-word	お城では妖婆アダムウイッチが	성에서는 마귀할멈 아담 마녀가	fix	lookup
-lexical:missing-word	「金髪碧眼色白美少女が相手なら、お見合いを考える。	「금발 푸른 눈 흰 피부 미소녀가 상대라면, 맞선을 생각한다.	fix	lookup
+lexical:missing-word	「金髪碧眼色白美少女が相手なら、お見合いを考える。	「금발벽안 흰 피부 미소녀가 상대라면, 맞선을 생각한다.	fix	lookup
 lexical:missing-word	踏込んだ	발을 들였다	fix	lookup
 lexical:missing-word	片附けた	치웠다	fix	lookup
 lexical:missing-word	面喰った	얼떨떨했다	fix	lookup
@@ -18,7 +18,7 @@ lexical:missing-word	眼附が悪い	눈빛이 나쁘다	fix	lookup
 lexical:missing-word	人殺しだ	살인이다	keep	lookup
 lexical:missing-word	人並みに	보통으로	keep	lookup
 lexical:missing-word	物干しに干す	빨래 너는 곳에 말린다	keep	lookup
-lexical:missing-word	命令書付きでやるのか	명령서 첨부로 하는 건가	keep	lookup
+lexical:missing-word	命令書付きでやるのか	명령서와 함께 하는 건가	keep	lookup
 lexical:missing-word	満更でもない表情	그렇지만도 않은 표정	keep	lookup
 lexical:missing-word	銀のような白髪を背後で束ね繻珍の帯を胸高に結んだ﨟たけた老女がこっちを見ながら静かに鼓を調べている。	은과 같은 백발을 뒤에서 묶음 수자직의 띠를 가슴 높이로 맨﨟사나워진 노녀가 여기를 보면서 조용하게 북을 조사하고 있다.	fix	lookup
 lexical:missing-word	仕上げると、仕附糸まで仔細に見調べた上、折目正しくたたんで、錦紗の風呂敷につつみ、胸高く手で抱えて、依頼先へ届けに行く。	마무리하면, 사부실까지 자세하게 보고 조사한 위, 예의있게 접어, 금사의 보자기에 꾸러미, 가슴 높게 손으로 움켜 쥐어, 의뢰처에 전달하러 간다.	fix	lookup

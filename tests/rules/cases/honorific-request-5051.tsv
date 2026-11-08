@@ -1,0 +1,42 @@
+# 규칙: LEX-5051
+rule	input	expected	kind	layer
+cx:polite-ask:10	「とりあえず、各部屋に、戸締まりの注意を喚起して回っていただけるかしら？」	has:다녀 주시겠어요?	fix	rewrites
+cx:polite-ask:10	おやつを用意していただけるかしら？	has:준비해 주시겠어요?	fix	rewrites
+cx:polite-ask:10	用意していただけますか	준비해 주실 수 있습니까	keep	rewrites
+cx:polite-ask:20	すぐあの宿から出て行っていただけるかしら？	has:나가 주시겠어요?	fix	rewrites
+cx:polite-ask:20	もう少し待っていただけると助かる	좀 더 기다려주면 도움이 된다	keep	rewrites
+cx:polite-ask:30	「その前に、とりあえず服を着てくださる？」	has:입어 주시겠어요?	fix	rewrites
+cx:polite-ask:30	司令官さま、受け取ってくださるかしら？	has:받아 주시겠어요?	fix	rewrites
+cx:polite-ask:30	見てくださいませんか	봐 주시지 않겠습니까	keep	rewrites
+normalize:honorific-stem	ふっふっふ…ご主人様、あれが何かお分かりですか？	has:아십니까?	fix	normalize
+normalize:honorific-stem	はい。だいたいお分かりだとは思うんですが	has:아신다고는	fix	normalize
+normalize:honorific-stem	このような朝早くから、一体どちらにお出かけですか？	has:외출하십니까?	fix	normalize
+normalize:honorific-stem	お正月もすっかり終わった今日このごろ、いかがお過ごしでしょうか？	설날도 완전히 끝난 요즈음, 어떻게 지내세요?	keep	normalize
+normalize:honorific-stem	お変わりありませんか	별고 없습니까	keep	normalize
+normalize:honorific-request	お使いの際は、ブラウザの「更新」ボタンで最新の情報に更新してからお使いください。	has:써 주세요	fix	normalize
+normalize:honorific-request	はい、旦那様っ！どうぞお使いくださいませ！	has:써 주십시오	fix	normalize
+normalize:honorific-request	女神アイリス、お下がりください！この者はもう！	has:물러나 주세요	fix	normalize
+normalize:honorific-request	鞠さまは後ろにお下がりください。	has:물러나 주세요	fix	normalize
+normalize:honorific-request	ふふふ…どうぞどうぞ、お褒めくださいませ	has:칭찬해 주십시오	fix	normalize
+normalize:honorific-request	この心をお許し下さい。	이 마음을 용서해 주세요.	keep	normalize
+normalize:honorific-request	ヤヌスよ…あなたの民なるパロのために その光の力をお貸し下さい	야누스야…당신의 백성 되는 파로를 위해 그 빛의 힘을 빌려 주세요	keep	normalize
+normalize:honorific-request	どうぞお改め下さい」	어서 고쳐 주세요」	keep	normalize
+normalize:honorific-request	お客様の声をお聞かせください	손님의 목소리를 들려주세요	keep	normalize
+normalize:old-request-mashi	「しばらくお待ち下さいまし」	has:기다려 주세요	fix	normalize
+normalize:old-request-mashi	何卒私のこの下らなさをお笑ひ下さいまし。	has:주세요.	fix	normalize
+normalize:old-request-mashi	「白々しいことをおっしゃらないでくださいまし！」	「속이 빤한 걸 말씀하시지 말아 주세요!」	keep	normalize
+normalize:old-request-mashi	来てくださいまして、ありがとう	와 주세요라고, 고마워	keep	normalize
+lookup:honorific-verbal-noun	ご希望の方はお申し込みください。	has:신청해 주세요	fix	lookup
+lookup:honorific-verbal-noun	「これからもっとクオリティ上げてきますんで、ご期待下さい」	has:기대해 주세요	fix	lookup
+lookup:honorific-verbal-noun	ご意見ください	의견 주세요	keep	lookup
+lookup:honorific-verbal-noun	それもある種のお約束か。	그것도 일종의 약속인가.	keep	lookup
+lookup:o-kimari	お待たせいたしました、ご注文はお決まりでしょうか？	has:주문은 정하셨습니까?	fix	lookup
+lookup:o-kimari	GWの予定はお決まりですか？	has:정하셨습니까?	fix	lookup
+lookup:o-kimari	お決まりのセリフだ	상투적인 대사다	keep	lookup
+lookup:kudasaimase-space	見てくださいませ	has:봐 주십시오	fix	lookup
+lookup:kudasaimase-space	ご確認くださいませ	확인해 주십시오	keep	lookup
+lookup:o-tori	出場者の方ですね。どうぞ、お通りください。	has:지나가세요	fix	lookup
+normalize:honorific-request	ダイニングに、お、お降りくださいっ	다이닝에, 내, 내려 주세요	keep	normalize
+normalize:old-request-mashi	ご覧くださいましょう	보아 주십시다	keep	normalize
+normalize:honorific-stem	あらあら、お急ぎですか？	어머어머, 서두르십니까?	keep	normalize
+cx:polite-ask:30	その人、来てくださるかしら	그 사람, 와 주실까	keep	rewrites

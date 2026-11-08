@@ -37,6 +37,6 @@ rewrite:embedded-question	まだ好きでい続けろって言うのかよ？」
 rewrite:embedded-question	「俺にはそんな権利すらないのかよ？」	「나에게는 그런 권리조차 없는 건지?」	keep	rewrites
 rewrite:embedded-question	「単に飲み込めないんじゃないのか？」	「단지 삼킬 수 없는 거 아니야?」	keep	rewrites
 rewrite:embedded-question	「危機管理対策本部できてないのか？」	「위기 관리 대책 본부 하지 못한 거야?」	keep	rewrites
-rewrite:embedded-question	暴力沙汰とかには…ならなかったのか？	폭력 사태라든지에는…안되었던 건가?	keep	rewrites
+rewrite:embedded-question	暴力沙汰とかには…ならなかったのか？	폭력 사태라든지에는…안 되었던 건가?	keep	rewrites
 rewrite:embedded-question	「紡凪が、蒼くんを守ったのかも……」	「방지가, 아오이 군을 지켰을지도……」	keep	rewrites
 rewrite:embedded-question	「絵は親に指示されてやってたのか？」	「그림은 부모에게 지시받아 주고 있었는지?」	keep	rewrites

@@ -10,7 +10,7 @@ sound:end-row-after-particle	彼にぴょんと飛びついた。	그에게 폴�
 sound:end-row-after-particle	猫ぴょんと跳ねた。	고양이 폴짝 뛰었다.	fix	sound
 sound:end-row-after-particle	カエルがぴょーんと跳ねた。	개구리가 뿅~ 뛰었다.	keep	sound
 sound:end-row-after-particle	うさぎもぴょーんと跳んだ。	토끼도 뿅~ 뛰었다.	keep	sound
-sound:end-row-after-particle	うさぎがぴょんぴょんと跳ねていく。	토끼가 폴짝폴짝 뛰어 간다.	keep	sound
+sound:end-row-after-particle	うさぎがぴょんぴょんと跳ねていく。	토끼가 폴짝폴짝 뛰어간다.	keep	sound
 sound:end-row-after-particle	うさぎがぴょん！	토끼가 뿅!	fix	sound
 sound:end-row-after-particle	カエルがぴょん。	개구리가 뿅.	fix	sound
 sound:end-row-after-particle	読んでぴょん！	읽어 뿅!	fix	sound

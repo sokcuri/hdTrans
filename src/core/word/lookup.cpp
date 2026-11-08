@@ -546,6 +546,8 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassHiragana:
         // な and がら after it are the ながら of a verb stem (みながら 보면서).
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
+        // An adjectival noun of three letters or more takes its adnominal な (まことしやかな噂; LEX-5116).
+        if (next == "な" && pc.size() > 1 && pc[1] == '8' && text::RuneCount(u.key) >= 3 && !rest.starts_with("なが")) return true;
         return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
     case kClassKanji:
         return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
@@ -583,7 +585,8 @@ bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name
-// layer does not hold as a person, is followed by the copula だ, です, でした, でしょ or じゃ (LEX-94).
+// layer does not hold as a person, is followed by the copula だ, です, でした, でしょ, じゃ (LEX-94), or the な of
+// なの or なん.
 // だ and the じゃ of じゃう, じゃった, じゃえ after a key ending in い or ん are the past and the
 // contracted てしまう of a godan verb when the key without that kana is the stem of a verb of the
 // matching row in the dictionary: が after い (ゆらいだ), ま, ば, な after ん (こばんだ, 飲んじゃった).
@@ -594,7 +597,8 @@ bool Worker::KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) 
         return false;
     }
     const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
-    for (const std::string_view c : {"です", "でした", "でしょ"}) {
+    // The な of なの and なん after a noun is the copula too (かれしなんだ, かれしなの; LEX-5116).
+    for (const std::string_view c : {"です", "でした", "でしょ", "なの", "なん"}) {
         if (rest.starts_with(c)) return true;
     }
     bool verbShape = false;
@@ -951,6 +955,40 @@ bool Worker::GodanCausative(std::string_view stem) const {
     return false;
 }
 
+// LEX-5014: whether stem, or its part from its last kanji (唇を尖ら: 尖ら), is the negative stem of a godan verb of
+// the dictionary (尖ら of 尖る, 滑ら of 滑る), the verb a す verb of that stem makes act (尖らす).
+bool Worker::GodanBase(std::string_view stem) const {
+    std::size_t from = 0;
+    for (std::size_t i = 0; i < stem.size(); i += text::DecodeRune(stem.substr(i)).size) {
+        if (text::IsKanji(text::DecodeRune(stem.substr(i)).cp)) from = i;
+    }
+    const std::string_view part = stem.substr(from);
+    const std::string_view last = LastChar(part);
+    const std::string_view godan = part.substr(0, part.size() - last.size());
+    if (godan.empty()) return false;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(godan, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source != godan || pc.size() != 4 || !pc.starts_with("M4")) continue;
+        const int kind = pc[3] - '0';
+        if (kind != 3 && kind != 7 && kind >= 0 && kind <= 8 && Conjugation(kind, 8) == last) return true;
+    }
+    return false;
+}
+
+// LEX-5014: whether the last character of a godan stem and the e-row kana of its potential spell the
+// stem of an ichidan verb of the dictionary (入 + れ: 入れる, 付 + け: 付ける, 売 + れ: 売れる), the
+// transitive or intransitive partner that a て form reads before the potential (勢い付けて, 売れており).
+bool Worker::IchidanPartner(std::string_view stem, std::string_view kana) const {
+    const std::string_view last = LastChar(stem);
+    if (last.empty() || !text::IsKanji(text::DecodeRune(last).cp)) return false;
+    const std::string key = std::string(last) + std::string(kana);
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source == key && pc.size() == 4 && pc.starts_with("M4") && pc[3] == '7') return true;
+    }
+    return false;
+}
+
 // An interjection (E32) or set phrase (A9) whose key ends in て or ます and is a form
 // of a verb of the base dictionary: the key without its last one to three characters,
 // all hiragana, is a verb stem none of whose Korean starts like r's.
@@ -1102,6 +1140,24 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
         return false;
     };
     if ((ending.ends_with("けども") || ending.ends_with("とも")) && givesToAdverb("も")) return true;
+    // An ending in ての or での (来ての) gives its の to a verb or an adverb that starts with it and reaches further than the
+    // words after the ending do (倒れてのたうち回った: 倒れて + のたうち回った, 走ってのぞいた: のぞく; spec GRM-4002).
+    const std::string teNo = std::string(before) + std::string(ending);
+    if ((teNo.ends_with("ての") || teNo.ends_with("での")) && !after.empty()) {
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query = "の";
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const std::size_t n = text::RuneCount(c.source);
+            const bool verbOrAdverb = (At(part, 0) == 'M' && At(part, 1) == '4') || At(part, 0) == 'E';
+            if ((c.user == nullptr || !c.user->nameLayer) && verbOrAdverb && n >= 2 && n >= word + 1) return true;
+        }
+    }
     // An ending in か gives it to かなり (してしまうかなり: してしまう + かなり).
     if (ending.ends_with("か") && after.starts_with("なり") && givesToAdverb("か")) return true;
     static constexpr std::string_view kToAdverbRests[] = {"ても", "っても", "もかく", "にかく"};

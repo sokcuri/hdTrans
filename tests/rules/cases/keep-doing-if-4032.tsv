@@ -1,0 +1,19 @@
+# 규칙: GRM-4032
+rule	input	expected	kind	layer
+cx:keep-doing-if:10	ここでまだ話しかけていけば確実に嫌がられるので	has:여기서 계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:10	まだ話しかけていったら	계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:10	まだ説明していったら	!rule:cx:keep-doing-if:10	keep	rewrites
+cx:keep-doing-if:20	このまま話しかけていけば嫌がられる	has:이대로 계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:20	これから話しかけていったら嫌がられる	has:계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:20	今後も話しかけていけば	has:계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:20	ずっと話しかけていけば	has:계속 말을 걸면	fix	rewrites
+cx:keep-doing-if:10	まだ流れていけば	아직 흘러가면	keep	rewrites
+cx:keep-doing-if:10	まだ歩いていけば	!rule:cx:keep-doing-if:10	keep	rewrites
+cx:keep-doing-if:20	あの橋を渡って北へ上って行けば先生の家だ。	has:올라가면	keep	rewrites
+cx:keep-doing-if:20	話しかけていけば	!rule:cx:keep-doing-if:20	keep	rewrites
+cx:keep-doing-if:20	ご飯を食べていけば？	!rule:cx:keep-doing-if:20	keep	rewrites
+cx:keep-doing-if:20	「……俺は、今後どうやってみいちゃんと接していけばいい？」	!rule:cx:keep-doing-if:20	keep	rewrites
+cx:keep-doing-if:20	この調子で続けていけば、選挙はいい勝負が出来るだろう	!rule:cx:keep-doing-if:20	keep	rewrites
+cx:keep-doing-if:20	このまま、ゆっくりと呼吸を浅くしていけば……	has:해 나가면	keep	rewrites
+cx:keep-doing-if:20	あなたたちに協力していけば いずれ	has:협력해 나가면	keep	rewrites
+cx:keep-doing-if:20	このまま話しかけていく	!rule:cx:keep-doing-if:20	keep	rewrites

@@ -19,11 +19,11 @@ segment:datte-space	人類誕生の歴史とか 分かっちゃうし あ～ 未
 segment:datte-space	なんか ふられたって 噂だよ｡ 小高先生｡	뭔가 차였다는 소문이야. 코다카 선생님.	fix	segment
 segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	이 사람들을 화내도 수는 돌아오지 않아 >> 리에	fix	segment
 segment:datte-space	放っといたって 腐るだけなんだからいいじゃない？	내버려 두어도 썩을 뿐이니까 좋잖아?	fix	segment
-segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안된다고	fix	segment
+segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안 된다고	fix	segment
 segment:datte-space	まだまだ これからだよ！ 今日 負けたって 全部 パワーに変えればいいんだ！ ピカチュ～！	아직도 지금부터야! 오늘 져도 전부 파워로 바꾸면 돼! 피카츄~!	fix	segment
 segment:datte-space	どっちにしたって 間違いなく怒られちゃうよな	어느 쪽으로 해도 틀림없이 혼나버린다	fix	segment
 segment:datte-space	今すぐと言ったって 家内を連れてこなくちゃ…	당장이라고 해도 아내를 데려와야 한다…	fix	segment
-segment:datte-space	なあﾃﾂﾔ 魔王竜っつったって 大した防御力ね～んだから ｻｸｯと倒しちまおうぜ｡	테츠야 마왕용이라고 말해도 대단한 방어력이네 니까 싹둑 쓰러뜨려버리자.	fix	segment
+segment:datte-space	なあﾃﾂﾔ 魔王竜っつったって 大した防御力ね～んだから ｻｸｯと倒しちまおうぜ｡	저기 테츠야 마왕용이라고 말해도 대단한 방어력이네 니까 싹둑 쓰러뜨려버리자.	fix	segment
 segment:datte-space	なくなったって 警察には届けられねえんだから	없어져도 경찰에게는 도착되지 않을 거니까	fix	segment
 segment:datte-space	何やったって 無駄だもん！ 事実上の敗北ですよ？	뭐 해도 쓸데없는걸! 사실상의 패배예요?	fix	segment
 segment:datte-space	こんな難しい手術 僕に代われって言われたって 無理ですよ｡	이런 어려운 수술 저에 대신하라고 해도 무리예요.	fix	segment
@@ -49,7 +49,7 @@ segment:datte-space	都が 俺の親父が来てたって 言うんだけど 見
 segment:datte-space	でも いろいろあって強くなるんだって 本人も分かったみたいです。	하지만 여러 가지 있어 강해진다고 본인도 안 것 같습니다.	fix	segment
 segment:datte-space	私たちが 何回インタビューを受けたら どうだって 言うんだ?	우리가 몇 번 인터뷰를 받으면 어때라고 말하는 거야?	fix	segment
 segment:datte-space	タイリースが死んだって 思ってるのかい?	타이 리스가 죽었다고 생각하는 거야?	fix	segment
-segment:datte-space	大体 食べたら食べたって 言えばいいんだ	대개 먹었더니 먹었다고 하면 된다	fix	segment
+segment:datte-space	大体 食べたら食べたって 言えばいいんだ	has:먹었다고 하면 된다	fix	segment
 segment:datte-space	ぬれぎぬだって 言ってるだろ。	누명이라고 말하잖아.	fix	segment
 segment:datte-space	この名刺があったって 言ったんじゃないですか?	이 명함이 있었다고 한 거 아니에요?	fix	segment
 sense:initial-datte	「だって、それは自分のことを守るためで{k=-5.0}―――{/k} 」	「그치만, 그건 자신을 지키기 때문에{k=-5.0}―――{/k} 」	fix	senses
@@ -58,7 +58,7 @@ sense:initial-datte	だって、この状況から穴熊なんて崩し方わか
 sense:initial-datte	だって お兄ちゃんが違うって言ってるだもん	그치만 오빠가 다르다고 하는인걸	fix	senses
 sense:initial-datte	だって そうでもしないと 娯楽とか楽しめないじゃん｡	그치만 그래도 하지 않으면 오락이라든지 즐길 수 없잖아.	fix	senses
 sense:initial-datte	だって、その……そんなの……」	그치만, 그……그런 것……」	fix	senses
-sense:initial-datte	だって…ああっ、あああっ、伊月の赤ちゃんを…ひうっ、あうっ、ああっ…作る練習を…ああっ、しないとダメですからぁ	그치만…아앗, 아아앗, 이츠키의 아기를…히읏, 아읏, 아앗…만드는 연습을…아앗, 하지 않으면 안되니까요	fix	senses
+sense:initial-datte	だって…ああっ、あああっ、伊月の赤ちゃんを…ひうっ、あうっ、ああっ…作る練習を…ああっ、しないとダメですからぁ	그치만…아앗, 아아앗, 이츠키의 아기를…히읏, 아읏, 아앗…만드는 연습을…아앗, 하지 않으면 안 되니까요	fix	senses
 sense:initial-datte	「だって、裕樹の体温感じないと、安心できないんだもん」	「그치만, 유우키의 체온 느끼지 않으면, 안심할 수 없는걸」	fix	senses
 sense:initial-datte	「だって、私はずっと、最初から最後まで{k=-5.0}―――{/k} 」	「그치만, 나는 계속, 처음부터 끝까지{k=-5.0}―――{/k} 」	fix	senses
 sense:initial-datte	「だって！　よく分かんないけど、行こう」	「그치만! 잘 모르지만, 가자」	fix	senses
@@ -109,7 +109,7 @@ segment:datte-space	わたしたち だって こんな コソコソ したく �
 segment:datte-space	あんた だって 昨日は 自分の机もロッカーも 忘れたっていって	너도 어제는 자신의 책상도 로커도 잊었다고 해	fix	segment
 segment:datte-space	バカだよ あんた だって こうなるじゃん...	바보야 너도 이렇게 되잖아...	fix	segment
 segment:datte-space	あたし だって ちゃんと しゃべれてないし	나도 제대로 말하지 못하고	fix	segment
-segment:datte-space	大体 あなた だって あれだもんね	대개 당신도 저것이군	fix	segment
+segment:datte-space	大体 あなた だって あれだもんね	애초에 당신도 저것이군	fix	segment
 segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	가게 가만히 두어도 되는 건가? 너. 너도 지금… 손님 적지 지금.	fix	segment
 segment:datte-space	《これは あなた だって そりゃ もう この香りだよ》	《이것은 당신도 그야 이제 이 향기야》	fix	segment
 segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너도 어쩔 수 없을 거예요	fix	segment

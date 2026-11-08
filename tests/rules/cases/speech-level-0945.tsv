@@ -1,0 +1,46 @@
+# 규칙: REG-3, REG-12
+rule	input	expected	kind	layer
+register:REG-12	「間に合わない。急げよ」	has:늦어. 서둘러	fix	register
+register:REG-12	「話が進まない。筧、説明してくれ」	has:진행되지 않아.	fix	register
+register:REG-12	「わからない。そこのゲーセンの横の道から出てきたけど」	has:몰라.	fix	register
+register:REG-12	「いいや、ちがう。教官を刺したんだ」	「아니, 아니다. 교관을 찌른 거야」	keep	register
+register:REG-12	「よし、では今日の放課後、全員で北の蔵へ行く。準備を怠るな」	「좋아, 그럼 오늘의 방과 후, 전원이 북쪽의 창고에 간다. 준비를 게을리하지 마」	keep	register
+register:REG-12	「それはすまない。空気清浄機は回しているんだけどな」	「그건 미안하다. 공기청정기는 돌리고 있는데」	keep	register
+register:REG-12	「それでも、人は生きていかねばならない。業ってやつさ」	「그래도, 사람은 살아가야 한다. 업이라는 녀석이야」	keep	register
+register:REG-12	「そうよ。たぶん、それを受け持っていたのでしょうね。そうなるのよ」	has:맡고 있었겠지.	fix	register
+register:REG-12	「たぶん来るでしょうね」	「아마 오겠죠」	keep	register
+register:REG-3	「いえ、なんでもありませんわ。お腹がすいたので、おやつを用意していただけるかしら？　ムーンベリーのパイなんか素敵ね」	has:멋지네요	fix	register
+register:REG-3	「よろしいですわ。お任せなさい」	has:좋아요	fix	register
+register:REG-3	「そうですね。でも、行かない」	「그렇네요. 하지만, 가지 않는다」	keep	register
+register:REG-3	「どうかわたしの庭を守ってくれ、フローレンス」	「제발 내 뜰을 지켜 줘, 플로렌스」	keep	register
+word:humble-first-person	「そうですか。お気遣いはありがたいですが、私はここに居たいから居るので。私の事はお気になさらず」	has:제 일은	fix	defaults
+word:humble-first-person	「私は行かない」	「나는 가지 않아」	keep	defaults
+cx:node-final:10	「疲れたから、ここに居るので。」	has:있는 거니까	fix	rewrites
+cx:node-final:10	「用事があるので、帰ります」	「용무가 있으므로, 돌아갑니다」	keep	rewrites
+cx:node-final:15	「今日は忙しいので」	has:바쁜 거니까	fix	rewrites
+cx:node-final:15	今日は忙しいので。	오늘은 바쁘기 때문에.	keep	rewrites
+cx:node-final:20	「疲れたので。」	has:지친 거니까	fix	rewrites
+cx:node-final:20	疲れたので、休んだ。	지쳤으므로, 쉬었다.	keep	rewrites
+cx:ee-casual:10	「…、ええ、そうよ。そうなの」	has:응, 그래	fix	rewrites
+cx:ee-casual:10	「ええ、そうです」	「네, 그렇습니다」	keep	rewrites
+cx:ee-casual:10	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	keep	rewrites
+cx:casual-watakushi:10	――こいつは……、たしか、わたくしがクビを言い渡してやった料理長じゃなかったかしら？	has:내가 해고를	fix	rewrites
+cx:casual-watakushi:10	「わたくしがやりました」	「제가 했습니다」	keep	rewrites
+cx:recall-check:10	――こいつは……、たしか、わたくしがクビを言い渡してやった料理長じゃなかったかしら？	has:주방장이 아니었던가?	fix	rewrites
+cx:recall-check:5	今日じゃなかったっけ？	has:아니었나?	fix	rewrites
+cx:recall-check:10	これは夢じゃなかったのかしら	이것은 꿈이 아니었던 걸까	keep	rewrites
+cx:ee-casual:10	「ええ、はい。では、近いうちに」	「네, 네. 그럼, 가까운 시일내에」	keep	rewrites
+cx:ee-casual:10	「ええ。おかげさまで」	「네. 덕분에」	keep	rewrites
+cx:casual-watakushi:10	「……ほーっほっほっ、ふざけないでちょうだい。どこから見てもわたくしは完璧でしてよっ！」	「……오호호호, 장난치지 말아 줘. 어디로 보나 저는 완벽하답니다!」	keep	rewrites
+cx:ee-casual:10	「ええ、わかったわ」	has:응, 알았어	fix	rewrites
+cx:recall-check:5	――こいつは……、たしか、わたくしがクビを言い渡してやった料理長じゃなかったかしら？	has:아니었던가?	keep	rewrites
+register:REG-3	「それはお断りですわ。適正価格なら売っても良いかな？」	has:팔아도 좋을까?	keep	register
+cx:node-final:20	「音楽でいろいろやっていた時期もあったので」	has:있었으므로	keep	rewrites
+cx:node-final:10	「…と仰有るので？」	「…라고 말씀하시므로?」	keep	rewrites
+cx:node-final:20	「はい。それで願をかけたくなったので」	「네. 그래서 소원을 빌고 싶어졌으므로」	keep	rewrites
+cx:ee-casual:10	「ええ」と心にもない義理の返辞をした。	「네」라고 마음에도 없는 의리 답을 했다.	keep	rewrites
+cx:ee-casual:10	「ええ、馬鹿をするな」	「네, 바보를 하지 마」	keep	rewrites
+register:REG-12	「今日は遅かったんだねぇ。もう寝るよ」	「오늘은 늦었다. 이제 잘게」	keep	register
+cx:node-final:20	「いえ、少し気になったので」	「아뇨, 조금 신경 쓰였으므로」	keep	rewrites
+cx:casual-watakushi:10	お兄様、わたくしと一緒にお茶をいかがかしら？	오빠, 저와 함께 차를 어떨까?	keep	rewrites
+cx:casual-watakushi:10	「わたくしにお任せくださるかしら」	has:저에게	keep	rewrites

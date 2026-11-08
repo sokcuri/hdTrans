@@ -666,7 +666,12 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
     // A single kanji names a person only as the subject of a verb of saying or thinking in its clause
     // (南が言った; not 左の頬, 車が音を言わせて): its other cues are too often its common word.
-    if (text::RuneCount(key) < 2) return after.starts_with("が") && SingleSayer(after.substr(std::string_view("が").size()));
+    // One that only the name layer has, as a person, takes the cues of longer names (晶の胸, 凪は; spec LEX-5160):
+    // no dictionary word reads it but the reading of the kanji (정, 지).
+    if (text::RuneCount(key) < 2) {
+        if (after.starts_with("が") && SingleSayer(after.substr(std::string_view("が").size()))) return true;
+        if (snap.DictionaryWord(key) || !SingleNameKey(snap, key)) return false;
+    }
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
     if (after.starts_with("は") || after.starts_with("も")) {

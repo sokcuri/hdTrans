@@ -1,7 +1,7 @@
 # 규칙: LAY-14
 rule	input	expected	kind	layer
 wrapped:caption	魔力量を増やすため\n寝るとき以外は➡\nエンチャントを維持しているし➡\n走り込みや模擬戦では\n限界まで 魔力を消費している｡	마력량을 늘리기 위해\n잘 때 이외는 ➡\n인챈트를 유지하고 있고 ➡\n달리기 포함이나 모의전에서는\n한계까지 마력을 소비하고 있다.	keep	driver
-wrapped:caption	カマンベールチーズを→\n生ハムとバジルで包み→\nカラっと揚げた→\n超濃厚…⟩	카망베르를 →\n날 햄과 바질로 감싸 →\n바삭 튀긴 →\n초농후…⟩	fix	driver
+wrapped:caption	カマンベールチーズを→\n生ハムとバジルで包み→\nカラっと揚げた→\n超濃厚…⟩	카망베르를 →\n날 햄과 바질로 감싸 →\n바삭하게 튀긴 →\n초농후…⟩	fix	driver
 wrapped:caption	たとえ 俺に\n刀の才能がなくても➡\nこの技だけは\nものにしてみせるさ！》	비록 나에게\n칼의 재능이 없어도 ➡\n이 기술만은\n물건으로 해 보이지!》	keep	driver
 wrapped:caption	６００人以上が\nけがをしているということです。	600명 이상이\n상처를 입고 있다는 것입니다.	keep	driver
 wrapped:caption	≫週末には、台風として\n沖縄県などに接近し\n豪雨をもたらしました。	≫주말에는, 태풍으로서\n오키나와현 등에 접근해\n폭우를 가져왔습니다.	keep	driver
@@ -39,5 +39,5 @@ wrapped:caption	分かりました\nお車を ご用意します	알겠습니다
 wrapped:caption	それでは発表します\n私の好きな食べ物～｡	그러면 발표합니다\n내가 좋아하는 음식~.	keep	driver
 wrapped:caption	面白かった\nはい	재미있었다\n네	keep	driver
 wrapped:caption	そっか\nで 決まったの？	그렇구나\n그리고 정해졌어?	keep	driver
-wrapped:caption	強調してはいけないらしい。➡	강조해선 안되는 것 같다. ➡	keep	driver
-wrapped:caption	では 行ってまいります➡	그럼 다녀 오겠습니다 ➡	keep	driver
+wrapped:caption	強調してはいけないらしい。➡	강조해선 안 되는 것 같다. ➡	keep	driver
+wrapped:caption	では 行ってまいります➡	그럼 다녀오겠습니다 ➡	keep	driver

@@ -37,8 +37,8 @@ cx:novel-fixes-3:140	「俺の事、分かるよな」	has:나를, 알지	fix	re
 cx:novel-fixes-3:140	沢渡の事が好きだ。	!rule:cx:novel-fixes-3:140	keep	rewrites
 cx:novel-fixes-3:145	全部許してやるから、彼女の事、幸せにしてやれよ。	has:그녀를, 행복하게 해 줘	fix	rewrites
 cx:novel-fixes-3:145	彼女の事が好きだ。	!rule:cx:novel-fixes-3:145	keep	rewrites
-cx:novel-fixes-3:160	ってそれは駄目か。	has:그것은 안되나.	fix	rewrites
-cx:novel-fixes-3:160	「…端っこではダメか？」	has:가장자리에서는 안되나?	fix	rewrites
+cx:novel-fixes-3:160	ってそれは駄目か。	has:그것은 안 되나.	fix	rewrites
+cx:novel-fixes-3:160	「…端っこではダメか？」	has:가장자리에서는 안 되나?	fix	rewrites
 cx:novel-fixes-3:160	それは駄目だ。	!rule:cx:novel-fixes-3:160	keep	rewrites
 cx:novel-fixes-3:180	どう見ても恋愛に縁の無さそうな俺に	has:연애에 인연이 없을 것 같은	fix	rewrites
 cx:novel-fixes-3:180	恋愛に縁の深い人	!rule:cx:novel-fixes-3:180	keep	rewrites

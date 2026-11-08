@@ -24,6 +24,19 @@ namespace internal {
 
 namespace {
 
+// The UTF-8 of output::kLengthenMark, which Lengthen writes for a stretch of two or more units.
+constexpr std::string_view kLengthenText = "\xEE\x80\x8A";
+
+// Whether k ends in a lengthening: ~ or the marks of a longer stretch (잠깐~, 잠깐\uE00A\uE00A).
+bool EndsLengthened(std::string_view k) { return k.ends_with('~') || k.ends_with(kLengthenText); }
+
+// k without the lengthening at its end.
+std::string_view WithoutLengthening(std::string_view k) {
+    if (k.ends_with('~')) return k.substr(0, k.size() - 1);
+    while (k.ends_with(kLengthenText)) k.remove_suffix(kLengthenText.size());
+    return k;
+}
+
 bool IsKana(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || r == U'～'; }
 
 bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32string_view::npos; }
@@ -267,6 +280,22 @@ struct SoundMatch {
     bool adj = false;   // SoundRow::adj
 };
 
+// Whether the ono sound m, the last of its chain, writes the root of a Korean 하다 adjective
+// (ko-root.mimetic-adjective: ふんわり 폭신) as an adverb, with or without its と: a と that ends it is
+// its key's or one it took, not the last kana of a doubled key (べとべと).
+bool MimeticAdjectiveAdverb(const SoundMatch& m, char32_t last) {
+    if (m.intj || !dict::InClass(HDTRANS_CLASS("ko-root.mimetic-adjective"), m.korean)) return false;
+    const std::u32string_view k = m.key;
+    return last != U'と' || !(k.ends_with(U'ト') && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2));
+}
+
+// Whether the key of the ono sound m, without a final ト, is one unit said twice (ポンポン, ヌルヌル).
+bool DoubledKey(const SoundMatch& m) {
+    std::u32string_view k = m.key;
+    if (k.ends_with(U'ト')) k.remove_suffix(1);
+    return k.size() >= 2 && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
+}
+
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
 // out the vowel before it (히이, 아우; not 아앗).
 bool EndsDrawn(std::string_view s) {
@@ -287,8 +316,7 @@ std::u32string_view CryStem(const SoundMatch& m) {
 // やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
 bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
     // The Korean of one may draw out the other's (가버려, 가버려어어엇).
-    const auto plain = [](std::string_view k) { return k.ends_with('~') ? k.substr(0, k.size() - 1) : k; };
-    const std::string_view x = plain(a.korean), y = plain(b.korean);
+    const std::string_view x = WithoutLengthening(a.korean), y = WithoutLengthening(b.korean);
     return a.cry && b.cry && (x.starts_with(y) || y.starts_with(x)) && CryStem(a) == CryStem(b);
 }
 
@@ -509,6 +537,8 @@ private:
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     bool Adnominal(const SoundMatch& m, size_t i) const;
+    bool StartsAdjective(size_t i) const;
+    bool StartsConjugatedVerb(size_t i) const;
     size_t QuotingAt(size_t i) const;
     size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
@@ -715,6 +745,9 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         }
         size_t end = 0;
         bool ok = MatchSound(s, f_, p, end, units);
+        // A small ャ, ュ or ョ right after a mimetic belongs to its last kana: the sound ends inside a word
+        // (するりょうり: する + りょうり, not するり; spec LEX-5115).
+        if (ok && !s.intj && end < f_.size() && In(f_[end], U"ャュョゃゅょ")) ok = false;
         // A sound in ッ before て or た of a godan verb in る that its kana spell is that verb's
         // form (パクって 훔쳐, チクってやる 고자질해 줄게; not パクッと). A one-kana stem is a cry (あったたた).
         if (ok && s.key.size() >= 3 && s.key.back() == U'ッ' && end == p + s.key.size() && end < f_.size() &&
@@ -860,6 +893,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 rs_[end] != U'茂') {
                 pause = true;
             }
+            // The call なあ that opens an utterance calls the name in kanji or katakana right after it (なあ鈴木 저기
+            // 스즈키) and pauses before an ellipsis (なあ…… 저기……; spec LEX-5053), as おい does; the drawn な of a
+            // predicate never opens an utterance.
+            if (s.key == U"ナア" && end < rs_.size() && rs_[end] != U'ン' &&
+                (text::IsKanji(rs_[end]) || IsKatakanaRune(rs_[end]) || In(rs_[end], U"…‥"))) {
+                pause = true;
+            }
             if (!start || (!pause && !open) || IsKatakanaRune(rs_[p])) continue;
             // Nor where it ends inside a word in katakana (、ってカンジ: the quoting って).
             if (end < rs_.size() && IsKatakanaRune(rs_[end - 1]) && IsKatakanaRune(rs_[end]) && rs_[end] != U'ー') continue;
@@ -918,8 +958,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
-                             runKorean.empty() && s.intj && !s.phrase && best.korean.ends_with('~') &&
-                             !Lengthen(Reading(s, p, end), units).ends_with('~');
+                             runKorean.empty() && s.intj && !s.phrase && EndsLengthened(best.korean) &&
+                             !EndsLengthened(Lengthen(Reading(s, p, end), units));
         if (ok && (chosen == nullptr || end > best.end || redrawn)) {
             std::string korean = !runKorean.empty()
                                      ? std::move(runKorean)
@@ -1363,6 +1403,8 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     const bool teClosing = afterTe && closingPhrase && first.phrase && asking;
     if (teOnly && !teClosing) return {};
     if (katakana && IsKanjiRune(prev) && first.keyLen < 3) return {};
+    // A short katakana interjection right before a kanji is the head of a word (ラメ入り), not a cry.
+    if (katakana && chain.size() == 1 && first.intj && first.keyLen < 3 && first.end < rs.size() && IsKanjiRune(rs[first.end])) return {};
     if (katakana) {
         const size_t end = KatakanaEnd(rs, p);
         if (chain.back().end < end) return {};
@@ -1449,7 +1491,7 @@ bool SoundText::Manner(const SoundMatch& m, size_t i) const {
 // ふわふわのクッション 푹신푹신한 쿠션, ぼさぼさの髪 부스스한 머리카락).
 bool SoundText::Adnominal(const SoundMatch& m, size_t i) const {
     // A sound drawn out with ~ is no adjective stem (ふわふわーの).
-    if (!m.adj || m.intj || m.korean.ends_with('~') || i + 1 >= rs_.size() || rs_[i] != U'の') return false;
+    if (!m.adj || m.intj || EndsLengthened(m.korean) || i + 1 >= rs_.size() || rs_[i] != U'の') return false;
     // The noun may take the prefix お or ご (つやつやのご飯); before 音 or 声 the row is a heard sound.
     size_t noun = i + 1;
     if (In(rs_[noun], U"おご") && noun + 1 < rs_.size() && IsKanjiRune(rs_[noun + 1])) noun++;
@@ -1506,6 +1548,54 @@ bool SoundText::StartsVerb(size_t i) const {
         }
     }
     return verb && longest > offsets_[i + 1] - offsets_[i];
+}
+
+// Whether an adjective that is no adverb starts at character i: a dictionary stem of an i-adjective
+// before い, か, け or the negative くない, or of an adjectival noun before な, だ, で or no kana (甘い,
+// 柔らかかった, 甘くない, 滑らかな; not 優しく or 甘くなる).
+bool SoundText::StartsAdjective(size_t i) const {
+    const dict::Candidates rd =
+        snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if ((c.user != nullptr && c.user->kana) || c.codes == nullptr || c.codes->part.Empty()) continue;
+        const size_t after = i + text::RuneCount(c.source);
+        const char digit = c.codes->part.ClassDigit();
+        if (after >= rs_.size() || !IsKana(rs_[after])) {
+            if (digit == '8') return true;
+            continue;
+        }
+        if ((digit == '7' && In(rs_[after], U"いかけ")) || (digit == '8' && In(rs_[after], U"なだで"))) return true;
+        // The negative くない, くなかった of an i-adjective, not the くなる of a change.
+        if (digit == '7' && rs_[after] == U'く' && after + 2 < rs_.size() && rs_[after + 1] == U'な' &&
+            In(rs_[after + 2], U"いかく")) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Whether a verb conjugates at character i: the text there starts with no particle, and the longest
+// dictionary key there is a verb stem, of one character or more, with kana that are no particle after
+// it (膨らむ, 焼く, 笑って; not 光が, 締め付けに, 熱。).
+bool SoundText::StartsConjugatedVerb(size_t i) const {
+    if (i >= rs_.size() || In(rs_[i], kParticles) || In(rs_[i], U"だじ")) return false;
+    const dict::Candidates rd =
+        snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
+    size_t longest = 0;
+    bool verb = false;
+    for (const dict::Candidate& c : rd.list) {
+        if (c.user != nullptr && c.user->kana) continue;
+        const bool isVerb = c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'M';
+        const size_t n = text::RuneCount(c.source);
+        if (n > longest) {
+            longest = n;
+            verb = isVerb;
+        } else if (n == longest && isVerb) {
+            verb = true;
+        }
+    }
+    const size_t after = i + longest;
+    return verb && after < rs_.size() && IsHiraganaRune(rs_[after]) && !In(rs_[after], kParticles);
 }
 
 // The length in characters of the longest dictionary key at character p, at least 1.
@@ -2209,6 +2299,17 @@ std::string SoundText::Write() {
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
             if (quoted == 0 && !chain.back().intj && Quoting(next - 1) > 0) next--;
             const bool doing = quoted > 0 || (next < rs.size() && In(rs[next], kSuruKana));
+            // A lone mimetic with the root of a Korean 하다 adjective, with its と or not, joins an adjective
+            // right after it with 하고 (ふんわりと甘い 폭신하고 달다). One said once, not a doubled sound that
+            // stands as an adverb by itself (ポンポンと叩く 통통 두드리다), is the manner of a verb right after it, 하게
+            // (ふんわりと膨らむ 폭신하게 부풀다; spec GRM-4041).
+            std::string_view joined;
+            // Without its と only a word in kanji starts there (すべすべそうだ: そう is no adjective of its own).
+            if (!doing && quoted == 0 && chain.size() == 1 && next < rs.size() && MimeticAdjectiveAdverb(chain.back(), rs[next - 1]) &&
+                (rs[next - 1] == U'と' || IsKanjiRune(rs[next]))) {
+                if (StartsAdjective(next)) joined = "하고 ";
+                else if (!DoubledKey(chain.back()) && StartsConjugatedVerb(next)) joined = "하게 ";
+            }
             for (size_t k = 0; k < chain.size(); k++) {
                 SoundMatch& m = chain[k];
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
@@ -2221,7 +2322,7 @@ std::string SoundText::Write() {
                     b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
                 } else if (SoundMatch after; !m.alone.empty() && !copy && !CryCopyAfter(m, after)) {
                     b += m.alone;
-                    if (m.korean.ends_with('~')) b += '~';
+                    if (EndsLengthened(m.korean)) b += m.korean.substr(WithoutLengthening(m.korean).size());
                 } else {
                     b += m.korean;
                 }
@@ -2253,6 +2354,8 @@ std::string SoundText::Write() {
             } else if (Adnominal(chain.back(), next)) {
                 b += "한 ";
                 next++;
+            } else if (!joined.empty()) {
+                b += joined;
             } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
                        !Sounds(next + 1, false, false).empty()) {
                 // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
@@ -2389,6 +2492,16 @@ size_t Repeats(std::u32string_view unit, std::u32string_view f, size_t i, std::s
 
 }  // namespace
 
+// Whether key, an interjection with a ー before its last kana, is a word of sound.drawn-word whose ー
+// draws out the word (すごーい 대단해~), not its usual spelling (はーい, おーい).
+bool DrawnWordRow(std::u32string_view key) {
+    std::u32string h(key);
+    for (char32_t& c : h) {
+        if (c >= U'ァ' && c <= U'ヶ') c -= 0x60;
+    }
+    return dict::InClass(HDTRANS_CLASS("sound.drawn-word"), EncodeText(h));
+}
+
 bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& end, std::string& units) {
     units.clear();
     const std::u32string_view unit = RepeatedUnit(row);
@@ -2402,6 +2515,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     }
     if (p + stem.size() > f.size()) return false;
     bool tilde = false;  // a ～ stands for the key's ー (う～ん)
+    size_t inner = 0;    // the ー that draw out the end of an interjection before its last kana
     const auto isMark = [](char32_t c) { return c == U'ー' || c == U'～'; };
     size_t q = p;
     for (size_t k = 0; k < stem.size(); k++, q++) {
@@ -2419,6 +2533,13 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
                 q++;
             }
             if (!mark) return false;
+            // Before the last kana of the key it draws out the word's end (すごーい 대단해~, すごーーい
+            // 대단해애애; spec SND-23): a lengthening unit for each ー.
+            if (k + 2 == stem.size() && !tilde && DrawnWordRow(row.key)) {
+                for (size_t m = from; m < q; m++) {
+                    if (f[m] == U'ー') inner++;
+                }
+            }
             q--;
             continue;
         }
@@ -2440,6 +2561,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
             return false;
         }
     }
+    units.append(inner, 'i');
     char32_t last = stem.back();
     if (last == U'ー' && stem.size() > 1) last = stem[stem.size() - 2];
     size_t i = q;
@@ -2449,6 +2571,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
             tilde = true;  // a hum drawn out with ー or ～ ends in ~ (んんー 으응~)
         } else if (f[i] != U'～') {
             units += 'v';
+            if (f[i] == U'ー') units += 'b';  // the ー among them, which alone count for a word of more syllables
         } else if (units.empty() || units.back() != '~') {
             units += '~';
         }
@@ -2477,6 +2600,17 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
 }
 
 std::string Lengthen(std::string_view korean, std::string_view units) {
+    // The ー that drew out the end of an interjection's key (すごーい): one is ~ after the word, more
+    // a lengthening each, which the restore stage writes drawn out at the end of a phrase.
+    if (const size_t inner = static_cast<size_t>(std::count(units.begin(), units.end(), 'i')); inner > 0) {
+        std::string rest(units);
+        std::erase(rest, 'i');
+        std::string out = Lengthen(korean, rest);
+        if (out.ends_with('~') || out.ends_with(kLengthenText)) return out;
+        if (inner == 1) return out + "~";
+        for (size_t k = 0; k < std::min<size_t>(inner, 5); k++) text::AppendRune(out, output::kLengthenMark);
+        return out;
+    }
     if (const size_t d = units.find('d'); d != std::string_view::npos) {
         std::string rest(units);
         std::erase(rest, 'd');
@@ -2511,8 +2645,15 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
     const int initial = s / 588, vowel = s % 588 / 28;
     int final = s % 28;
     if (rs.size() > 1 && initial != 11) {
-        if (units.find_first_of("v~") != std::string_view::npos) return std::string(korean) + "~";
-        return std::string(korean);
+        // A word of more syllables keeps its last one and takes a ~ for one unit, a lengthening for
+        // each of more, which the restore stage writes drawn out at the end of a phrase (잠깐~, 잠까아아안).
+        // A ～ ends the run (あらぁ～ 어머~), and where the run has ー only those count (あらぁー 어머~).
+        const size_t bars = static_cast<size_t>(std::count(units.begin(), units.end(), 'b'));
+        const size_t n = units.find('~') != std::string_view::npos ? 1 : bars > 0 ? bars : static_cast<size_t>(std::count(units.begin(), units.end(), 'v'));
+        if (n <= 1) return n == 1 ? std::string(korean) + "~" : std::string(korean);
+        std::string out(korean);
+        for (size_t k = 0; k < std::min<size_t>(n, 5); k++) text::AppendRune(out, output::kLengthenMark);
+        return out;
     }
     rs.back() = Syllable(initial, vowel, 0);
     int added = 0;

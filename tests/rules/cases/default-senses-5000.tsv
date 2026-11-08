@@ -1,0 +1,59 @@
+# 규칙: LEX-5000
+rule	input	expected	kind	layer
+defaults:audit-5000	まあ、わたしが迂闊だったのよね	has:내가 경솔했어	fix	defaults
+defaults:audit-5000	　迂闊に動いたら相手の思うつぼだ。	has:경솔하게 움직이면	fix	defaults
+defaults:audit-5000	迂闊な狼狽がますます俺を不利にして行く。	has:경솔한 당황이	fix	defaults
+defaults:audit-5000	だが考えがまとまらねえ	has:생각이 정리되지 않는다	fix	defaults
+defaults:audit-5000	話がまとまったので、さっそくゲーセンに移動した。	has:이야기가 정리되었으므로	fix	defaults
+defaults:audit-5000	「その妹君に、ちょうど縁談がまとまりかけていたそうなんです。	lacks:상당	fix	defaults
+defaults:audit-5000	お笑い芸人になりたい	has:개그맨이 되고 싶다	fix	defaults
+defaults:audit-5000	役者、芸人、美術家、どうも虫が好かんよ。	has:배우, 연예인, 미술가	keep	defaults
+cx:web-fixes-j:217	「幻晶騎士への騎乗訓練は上級騎士課程の最終科目だ。大体は１５歳くらいからになる。	!rule:cx:web-fixes-j:217	keep	rewrites
+cx:web-fixes-j:218	「幻晶騎士への騎乗訓練は上級騎士課程の最終科目だ。大体は１５歳くらいからになる。	has:대개는 15세	fix	rewrites
+cx:web-fixes-j:218	「俺は大したことしてないぞ。大体は桜庭の手柄だろ」	has:대개는 사쿠라바의	keep	rewrites
+cx:web-fixes-j:218	大体分かってきたぞ	!rule:cx:web-fixes-j:218	keep	rewrites
+defaults:audit-5000	「諦めただけだ。嫌々なのは変わらないよ」	lacks:도리도리	fix	defaults
+defaults:audit-5000	私はこの仕事を嫌々やってる訳じゃないわよ？	has:마지못해 하고 있는	fix	defaults
+defaults:audit-5000	無視してもトラブルになりそうなので嫌々ながら眼の少し下を見る。	has:마지못해 눈의	fix	defaults
+defaults:audit-5000	このカードを切れば、彼らは嫌々ながらも協力するだろう。	has:마지못해서라도 협력할	fix	defaults
+defaults:audit-5000	「正式な婚約者を差し置いて、別の女性をエスコートすることは、わたしの体面を非常に傷つけましたわ」	has:약혼자를 제쳐 두고	fix	defaults
+defaults:audit-5000	彼女の私を差し置いて不潔です！	lacks:그대로 두어	fix	defaults
+defaults:audit-5000	それだけ言うと、主人はまた、厨房の奥に引っ込む。	has:주방 안쪽에 들어간다	fix	defaults
+defaults:audit-5000	どすどすと足音を鳴らし、朔夜は自分の部屋に引っ込んでしまった。	lacks:움푹	fix	defaults
+defaults:audit-5000	下へ降りてきたところで、外から戻ってきたエルと鉢合わせした。	has:엘과 딱 마주쳤다	fix	defaults
+defaults:audit-5000	敵と鉢合わせしちゃった～。やるしかない。	lacks:머리를 부딪	fix	defaults
+pack:argument-senses:5000	「さあ、今夜のことは見逃してあげる。行きなさい」	has:오늘 밤의 일은 봐줄게	fix	packs
+pack:argument-senses:5000	甲斐の虎が見逃してくれるかどうか	has:봐줄지	fix	packs
+pack:argument-senses:5000	ボールを見逃した。	has:놓쳤다	keep	packs
+pack:argument-senses:5000	大事な点を見逃していた	lacks:봐주	keep	packs
+defaults:audit-5000	大抵の場合、ルーデウスは笑っていた。	has:대부분의 경우	fix	defaults
+defaults:audit-5000	「大丈夫だって。大抵の奴はわからんよ」	has:대부분의 놈은	fix	defaults
+defaults:audit-5000	「先のことはそのとき決めるよ。一週間も様子見れば大体の方向性はわかるだろ」	has:대략적인 방향성은	fix	defaults
+defaults:audit-5000	その僕が小説を読んで、第一に感ずるのは大体の筋すなわち構造である。	has:대략적인 줄기	fix	defaults
+dict:w:34611	大体のことは紫苑さんや白蓮ちゃんに聞けばいいんだけど	has:대부분의 일은	fix	local
+dict:w:34611	でも、だいたいのヤツにゃぁニャーニャー剤をたっぷり飲ませたはずだが！	has:대부분의 녀석	fix	local
+dict:w:34611	しばらく話し合った結果、大体の宣伝プランがまとまった。	!rule:dict:w:34611	keep	local
+defaults:audit-5000	まあ……だいたいのところはわかった。	has:대체로는 알았다	keep	defaults
+cx:web-fixes-j:216	大体 マキさんは いいのかよ	has:애초에 마키 씨는	fix	rewrites
+cx:web-fixes-j:216	いや… 大体 お前さんが悪いんだぞ	has:애초에 당신이	fix	rewrites
+cx:web-fixes-j:216	大体 パーティなんて 何の関係もないだろ	has:애초에 파티	fix	rewrites
+cx:web-fixes-j:216	だいたい どういう意味なんだ？	has:애초에 무슨 뜻	fix	rewrites
+cx:web-fixes-j:216	大体 適温は53℃ぐらい｡	!rule:cx:web-fixes-j:216	keep	rewrites
+cx:web-fixes-j:216	ここにある国の名前くらい 大体 分かるわ｡	!rule:cx:web-fixes-j:216	keep	rewrites
+cx:web-fixes-j:216	大体 片づいたから 村長 連れてきてって。	!rule:cx:web-fixes-j:216	keep	rewrites
+cx:web-fixes-j:216	大体 こんな感じ	!rule:cx:web-fixes-j:216	keep	rewrites
+cx:web-fixes-j:217	　大体五割り増しだそう。	has:대략 5할증	fix	rewrites
+cx:web-fixes-j:217	水弾を１とすれば、大体２～２０ぐらいか。	has:대략 2~20 정도	fix	rewrites
+cx:web-fixes-j:217	敷地から人が消えるのは、大体午後９時以降。	has:대략 오후 9시	fix	rewrites
+cx:web-fixes-j:217	大体分かってきたぞ	!rule:cx:web-fixes-j:217	keep	rewrites
+cx:web-fixes-j:217	空は大体晴れていたが、ちょうど頭の上には手のひら形をした大きい雲がひとつ浮いている。	!rule:cx:web-fixes-j:217	keep	rewrites
+segment:adjective-noun-lead	「具体的に、なにをすればいいわけ？」	has:하면 좋은 거?	fix	segment
+segment:adjective-noun-lead	「いいわけないだろう。他に手段はないのか。天才なんだろう、おまえは」	has:좋을 리가 없잖아	fix	segment
+segment:adjective-noun-lead	そんなふうに 人を分け隔てて いいわけがない	has:좋을 리가 없다	fix	segment
+segment:adjective-noun-lead	わたしだってそうよ。殿方なら誰でもいいわけじゃない	lacks:변명	fix	segment
+segment:adjective-noun-lead	「ふたり乗りで行けば、青海さんの家まで早く着くよ。その後、俺が自分の家まで自転車に乗って帰ればいいわけだし……」	lacks:변명	fix	segment
+segment:adjective-noun-lead	悪クハナイガ…。イイワケナイダロウッ！	lacks:변명	fix	segment
+segment:adjective-noun-lead	「男のいいわけって、見苦しいわよねー」	has:남자의 변명은	keep	segment
+segment:adjective-noun-lead	邑宰は二人のいいわけを聞き入れないで恒を杖で打とうとした。	has:변명을	keep	segment
+segment:adjective-noun-lead	やがて店の者がいいわけに来た。	has:변명하러 왔다	keep	segment
+segment:adjective-noun-lead	どうせまだ親がかりだなどといういいわけで、職場の設備の悪いことも	has:변명으로	keep	segment

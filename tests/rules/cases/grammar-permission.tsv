@@ -24,7 +24,7 @@ dict:permission:6	一点だけ確認させていただいてもよろしいで�
 dict:permission:6	「会長、着替えをしなくてよろしいんですか？」	「회장, 갈아입음을 하지 않아도 됩니까?」	fix	local
 dict:permission:5	「後で見ておこう。下がってよいぞ。」	!rule:dict:permission:5	keep	local
 dict:permission:5	諦めてよい。	포기해도 좋다.	keep	local
-dict:permission:5	「別に急がなくてもよかったのに」	「별로 서두르지 않아도 됐을텐데」	fix	local
+dict:permission:5	「別に急がなくてもよかったのに」	「딱히 서두르지 않아도 됐을텐데」	fix	local
 dict:permission:5	「話さなくてよかったの？」	「이야기하지 않아도 됐어?」	fix	local
 dict:permission:5	死ななくてよかった人々が死んだ。	죽지 않아도 되었던 사람들이 죽었다.	fix	local
 dict:permission:4	これもう帰っても良いんじゃね？	!rule:dict:permission:4	keep	local

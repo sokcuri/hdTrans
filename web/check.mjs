@@ -25,7 +25,8 @@
 // load error naming the dictionary and row, export and import of the
 // desktop files (userdict*.txt and Ehnd UserDict*.txt) byte for byte, renaming,
 // deleting, and that the list survives a reload. Last it checks the text tab's
-// layout at a desktop, a phone and a 360 px viewport and the × button.
+// layout at a desktop, a phone and a 360 px viewport and the × button, and
+// the 테마 choice (시스템, 라이트, 다크) under a light and a dark system setting.
 // Served over plain http from a LAN address (not a secure context), the same
 // checks run, with clipboard paste and copy seen through events. With SHOT set it saves
 // screenshots there (text tab) and next to it (-dictionaries, -mobile). Exits 1
@@ -272,15 +273,21 @@ async function progressCheck() {
 async function speechCheck() {
   const pick = (value) => evaluate(`(() => { const s = document.getElementById('speech');
     s.value = '${value}'; s.dispatchEvent(new Event('change')); })()`);
-  const strict = (await translate('「明日、海に行く」')).out;
+  const strict = (await translate('「海に行く」')).out;
   await pick('soft');
   const soft = (await settled()).out;
   const saved = await evaluate(`localStorage.getItem('hdtrans.speech')`);
   await pick('strict');
   const back = (await settled()).out;
-  const ok = soft !== strict && back === strict && saved === 'soft';
+  // an intent with a time cue reads -ㄹ 거야 in both modes (spec SPC-1)
+  const intent = (await translate('「明日、海に行く」')).out;
+  await pick('soft');
+  const intentSoft = (await settled()).out;
+  await pick('strict');
+  await settled();
+  const ok = soft !== strict && back === strict && saved === 'soft' && intent === intentSoft;
   failed ||= !ok;
-  console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
+  console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}, intent ${intent} / ${intentSoft}`);
 }
 
 // outputCheck shows a two-line translation in each 출력 mode and checks the
@@ -836,6 +843,51 @@ async function expandCheck() {
   await send('Emulation.clearDeviceMetricsOverride');
 }
 
+// themeCheck checks the 테마 choice under a light and a dark system setting:
+// 시스템 follows the system, 라이트 and 다크 override it, the saved choice is set
+// on the root before the body exists (no flash), and choosing in the settings
+// layer applies at once and is saved. It also checks that the pressed ↕ is
+// filled with the accent color and named 접기.
+async function themeCheck() {
+  const ok = say('theme');
+  await click('#tab-text');
+  const { identifier } = await send('Page.addScriptToEvaluateOnNewDocument', { source: `new MutationObserver((m, o) => {
+    if (document.body) { window.themeAtBody = document.documentElement.dataset.theme ?? ''; o.disconnect(); } }).observe(document, { childList: true, subtree: true });` });
+  const state = () => evaluate(`(() => { const s = getComputedStyle(document.documentElement);
+    return { atBody: window.themeAtBody, scheme: s.colorScheme, bg: s.backgroundColor, accent: s.getPropertyValue('--accent').trim(),
+      fg: s.getPropertyValue('--accent-fg').trim(), checked: document.querySelector('input[name=theme]:checked').value }; })()`);
+  const dark = 'rgb(19, 20, 22)', light = 'rgb(246, 247, 249)';
+  for (const system of ['light', 'dark']) {
+    await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: system }] });
+    for (const choice of ['system', 'light', 'dark']) {
+      await evaluate(`localStorage.setItem('hdtrans.theme', '${choice}')`);
+      await send('Page.reload');
+      await dictsReady();
+      const want = choice === 'system' ? system : choice;
+      const s = await state();
+      ok(s.atBody === (choice === 'system' ? '' : choice) && s.scheme === want && s.bg === (want === 'dark' ? dark : light) && s.checked === choice,
+        `${choice} on a ${system} system shows ${want} from the first paint${s.scheme === want ? '' : ' ' + JSON.stringify(s)}`);
+      await click('#srccard .expand');
+      const b = await evaluate(`(() => { const b = document.querySelector('#srccard .expand'), s = getComputedStyle(b);
+        return { pressed: b.getAttribute('aria-pressed'), name: b.title + '/' + b.ariaLabel, bg: s.backgroundColor, color: s.color }; })()`);
+      const hex = (c) => '#' + c.match(/\d+/g).slice(0, 3).map((n) => Number(n).toString(16).padStart(2, '0')).join('');
+      const fill = hex(b.bg) === s.accent && (hex(b.color) === s.fg || (s.fg === '#fff' && hex(b.color) === '#ffffff'));
+      ok(b.pressed === 'true' && b.name === '원문 접기/원문 접기' && fill, `${choice} on ${system}: the pressed ↕ is filled with the accent and named 접기${fill ? '' : ' ' + JSON.stringify(b)}`);
+      await click('#srccard .expand');
+    }
+  }
+  await send('Page.removeScriptToEvaluateOnNewDocument', { identifier });
+  await click('#settings-toggle');
+  for (const v of ['dark', 'light', 'system']) {
+    await click(`input[name=theme][value=${v}]`);
+    const s = await state();
+    ok((await evaluate(`localStorage.getItem('hdtrans.theme')`)) === v && s.scheme === (v === 'light' ? 'light' : 'dark'),
+      `choosing ${v} in the settings layer applies at once and is saved (${s.scheme})`);
+  }
+  await evaluate(`document.getElementById('settings-sheet').close()`);
+  await send('Emulation.setEmulatedMedia', { features: [] });
+}
+
 // resetCheck checks that a new example and × start both cards at their first
 // line: the page at the top, and no scroll left inside either box, also with
 // a card expanded.
@@ -903,6 +955,7 @@ try {
   await outputCheck();
   await exampleCheck(examplesEarly);
   await expandCheck();
+  await themeCheck();
   await resetCheck();
   const version = await evaluate(`document.getElementById('hver').textContent`);
   const versionOk = /^v\S+ \([0-9a-f]{7,}, \d{4}-\d\d-\d\d\)$/.test(version);

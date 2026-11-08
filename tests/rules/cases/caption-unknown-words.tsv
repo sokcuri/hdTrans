@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:lexical-caption-words	自分で湯切りしましたか？	스스로 물 빼기 했습니까?	fix	lookup
-dict:lexical-caption-words	誰でもめちゃ安!LINEMOで検索!	누구라도 엄청 저렴! LINEMO로 검색!	fix	lookup
+dict:lexical-caption-words	誰でもめちゃ安!LINEMOで検索!	누구나 엄청 저렴! LINEMO로 검색!	fix	lookup
 dict:lexical-caption-words	めちゃ安かった	엄청 쌌다	keep	lookup
 dict:lexical-caption-words	激アツ！	대박!	fix	lookup
 dict:lexical-caption-words	カタクチイワシが　激アツなんです	멸치가 대박입니다	fix	lookup

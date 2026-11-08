@@ -1,0 +1,40 @@
+rule	input	expected	kind	layer
+compose:pronoun-apart	　はい。わたくし氷室将嗣。実はロシア語分かります。	has:저 히무로 마사츠구.	fix	compose
+compose:pronoun-apart	わたくし佐藤と申します	has:저 사토라고	fix	compose
+compose:pronoun-apart	「わたくし確信いたしました。	has:저 확신	fix	compose
+compose:pronoun-apart	司令、ここでお茶になさいますか？ わたくし羊羹も用意しているんです。	has:저 양갱도	fix	compose
+compose:pronoun-apart	恐れ入ります。わたくし現在、船団護衛を……	has:저 현재,	fix	compose
+compose:pronoun-apart	わたくしオニーが恋愛治癒術士となってリスナーの皆さんの痛みや苦しみを癒そうというコーナーです。	has:저 오니가	fix	compose
+compose:pronoun-apart	本日は、わたくし夕暮が、お側でお支えしますね。	lacks:저저녁	fix	compose
+compose:pronoun-apart	あたい特製のsandwich、持ってきてるぜ。	has:나 특제	fix	compose
+compose:pronoun-apart	おいら完全無欠の０感ですけどｗｗｗｗ	has:저 완전	fix	compose
+compose:pronoun-apart	わたくしの名前	제 이름	keep	compose
+compose:pronoun-apart	わたくしが参ります。	has:제가	keep	compose
+compose:pronoun-apart	あたい、別に優しくなんかしないぜ？	has:나, 딱히	keep	compose
+dict:gram:nokoto:person-kanji	有明同様、わたくしの事も、どうぞ、可愛がってくださいまし。	has:저도,	fix	local
+dict:gram:nokoto:person-kanji	私の事も可愛がって	has:나도	fix	local
+dict:gram:nokoto:person-kanji	田中の事が好き	has:타나카를	keep	local
+cx:function-words:70	姉貴は姉貴、あたいはあたいさ。まあでも……お茶くらいはいいよ？	has:나는 나야.	fix	rewrites
+cx:function-words:70	俺は俺さ！	나는 나야!	fix	rewrites
+cx:function-words:70	「おまえさ。おまえには舞踏会場の備品を触っちゃ駄目禁止令がでているだろう。」	has:「너. 너에게는	keep	rewrites
+cx:function-words:70	俺さ 電話とか そんなに マメじゃないし	lacks:나야	keep	rewrites
+dict:jisjk:184122	まあ いいや おいらさ バットってんだ よろしく	has:저 배트라고	fix	local
+names:common-surname	氷室将嗣が笑った。	히무로 마사츠구가 웃었다.	fix	names
+names:common-surname	氷室に氷を運ぶ	has:빙실에	keep	names
+names:common-surname	…流石和奏、抜け目ないね！	has:역시 와카나	keep	names
+names:common-surname	改めて。私は明月栞那です。	lacks:곡률광	keep	names
+names:common-surname	（日向翔陽(ひなたしょうよう)たち）どシャット！	has:히나타	keep	names
+names:spaced-full-name	　小鳥遊　聖　　　Lv.55／聖女	has:타카나시 세이　　　Lv.55	fix	names
+names:spaced-full-name	小鳥遊聖	타카나시 세이	keep	names
+names:single-kanji-name	智之の言葉が棘のようにチクリと晶の胸を刺す。	has:아키라의 가슴	fix	names
+names:single-kanji-name	凪の頬にキスをする。	나기의 뺨에 키스를 한다.	fix	names
+names:single-kanji-name	凪が溜息をつく。	나기가 한숨을 쉰다.	fix	names
+names:single-kanji-name	凛は表情を変えずに頷いた。	has:린은	fix	names
+names:single-kanji-name	栞の肩に回ってた左手を戻して田口の太ももの上でモゾモゾしてる栞の右手を掴み、	has:시오리의 어깨	fix	names
+names:single-kanji-name	「筧はどう思う？」	has:카케이는	fix	names
+names:single-kanji-name	筧が先程言った通り、それは多岐川の理想ではないかと、望月は思う。	has:카케이가	keep	names
+names:single-kanji-name	治者の言、明察にして断なるが故に、その政が紊れないからである。	lacks:타다시	keep	names
+names:single-kanji-name	羆は原島さんを食べる時に言ってくれませんからね。	lacks:다케시	keep	names
+names:kana-nickname	うん トウヤも負けてない！ 川の方にいます。 もう近い。	has:토야도	fix	names
+names:kana-nickname	トウヤ、トウヤっち、トウヤ。	토야, 토야치, 토야.	fix	names
+names:kana-nickname	…トウヤっち。	has:토야치	keep	names

@@ -23,6 +23,6 @@ dict:lex:ittai-counter	手負いの中鬼が一体だけとはいえ、	상처 �
 dict:lex:ittai-counter	「あれ、一体何なの！？」	「어라, 도대체 뭐야 대체!?」	keep	local
 dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨 이야기다.	keep	local
 constraint:name-after-numeral	１日村でゆっくりし、	1일 마을에서 쉬어,	fix	lookup
-constraint:name-after-numeral	もう１日村に泊ってから帰ろうと話がまとまった所で、	이제 1일 마을에 묵고 나서 돌아가려고 이야기가 결정된 곳에서,	fix	lookup
+constraint:name-after-numeral	もう１日村に泊ってから帰ろうと話がまとまった所で、	이제 1일 마을에 묵고 나서 돌아가려고 이야기가 정리된 곳에서,	fix	lookup
 constraint:name-after-numeral	第5水陸両用軍団の記録。	제5수륙양용 군단의 기록.	keep	lookup
 dict:lex:ittai-counter	一体しかないのに」	한 체밖에 없는데」	fix	local

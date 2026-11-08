@@ -1,0 +1,27 @@
+# 규칙: LEX-5003
+rule	input	expected	kind	layer
+cx:honorific-doer:30	　空行有り、句点改行形式をお好みの方は、そちらをお試し下さい。	has:형식을 원하시는 분은	fix	rewrites
+cx:honorific-doer:30	沿線にお住まいの方	has:연선에 사시는 분	fix	rewrites
+cx:honorific-doer:30	ご希望の方は受付までお越しください。	has:희망하시는 분은	keep	rewrites
+cx:honorific-doer:30	お好みの方をお選びください。	!rule:cx:honorific-doer:30	keep	rewrites
+cx:honorific-doer:30	ご確認の方。	!rule:cx:honorific-doer:30	keep	rewrites
+cx:honorific-doer:35	辛いものがお好きな方にはおすすめです。	has:좋아하는 분에게는	fix	rewrites
+cx:honorific-doer:35	甘いのがお好きな方へ	has:좋아하는 분에게	fix	rewrites
+cx:honorific-doer:35	おきれいな方ですね	has:예쁜 분이군요	fix	rewrites
+cx:honorific-doer:35	お前の方がよっぽど上手いぞ。	!rule:cx:honorific-doer:35	keep	rewrites
+cx:honorific-doer:35	お店の方は私たちで守ってみせますから	!rule:cx:honorific-doer:35	keep	rewrites
+cx:honorific-doer:35	こちらの方が安い。	has:이쪽이 싸다	keep	rewrites
+dict:w:34636	「温かいものをお求めの方は、こちらでお願いしまーす！」	has:찾으시는 분은	fix	lookup
+dict:w:34635	途中 お降りの方はお手近の降車ﾎﾞﾀﾝを押して	has:내리시는 분은	fix	lookup
+dict:w:34637	＜ お忘れの方に説明しよう。 しづりは酒に弱いのである＞	has:잊으신 분에게	fix	lookup
+dict:w:34638	お急ぎの方はこちらへどうぞ。	has:급하신 분은	fix	lookup
+dict:w:34639	お待ちの方はこちらへどうぞ。	has:기다리시는 분은	fix	lookup
+dict:w:34640	お乗りの方はこちらへどうぞ。	has:타시는 분은	fix	lookup
+dict:w:34641	お申し込みの方はこちらへどうぞ。	has:신청하시는 분은	fix	lookup
+dict:w:34639	少々お待ちください。	has:기다려 주세요	keep	lookup
+dict:w:34642	品質には自信があります。どうぞ　お試しください。	has:한번 해 보세요	fix	lookup
+dict:w:34642	〝30秒後にお試しください〞	has:30초 후에 한번 해 보세요	fix	lookup
+dict:w:34643	お知らせです アクシオンの皆様 ブルーをお試し下さい	has:블루를 써 보세요	fix	lookup
+dict:w:34644	無料でお試しいただけます>	has:무료로 사용해 보실 수 있습니다	keep	lookup
+dict:jisjk:365475	一度お試しあれ。	has:한 번 해 보시길	fix	lookup
+dict:w:34642	お試し期間だって	has:체험 기간	fix	lookup

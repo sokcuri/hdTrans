@@ -9,7 +9,7 @@ normalize:oi-tsu	「あ、おいっ」	「아, 이봐」	fix	normalize
 normalize:n-ka	間接キスしていいんか？	간접 키스 해도 되는 건가?	fix	normalize
 normalize:n-ka	「いや、信じるんかい……」	「아니, 믿는 거야……」	fix	normalize
 normalize:naani	「なーにイチャついてんのよ。」	「뭐 시시덕거리고 있어.」	fix	normalize
-normalize:nsu	「え、ダメなんすか？」	「어, 안됩니까?」	fix	normalize
+normalize:nsu	「え、ダメなんすか？」	「어, 안 됩니까?」	fix	normalize
 normalize:chimau	リーシェお嬢さまにフラれちまったのか？	리쉐 아가씨에게 차여버린 건가?	fix	normalize
 normalize:chimau	見ちまったなぁ？	봐버렸네?	fix	normalize
 normalize:toku	ああ、とっくにやっといた。	아, 진작 해 두었다.	fix	normalize

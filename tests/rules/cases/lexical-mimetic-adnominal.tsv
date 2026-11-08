@@ -162,7 +162,7 @@ cx:mimetic-adnominal:310	ぐったりとしたまま動かない。	축 늘어�
 cx:mimetic-adnominal:310	ぐったりとした少女の顔	축 늘어진 소녀의 얼굴	fix	rewrites
 cx:mimetic-adnominal:310	ぐったりとした状態になっている。	축 늘어진 상태가 되어 있다.	fix	rewrites
 cx:mimetic-adnominal:310	ぐったりとした。	!rule:cx:mimetic-adnominal:310	keep	rewrites
-cx:mimetic-adnominal:320	あっさりした返事が返ってきた。	간단한 대답이 되돌아 왔다.	fix	rewrites
+cx:mimetic-adnominal:320	あっさりした返事が返ってきた。	간단한 대답이 되돌아왔다.	fix	rewrites
 cx:mimetic-adnominal:320	あっさりした。	!rule:cx:mimetic-adnominal:320	keep	rewrites
 cx:mimetic-adnominal:330	あっさりしたスープも悪くない	담백한 스프도 나쁘지 않다	fix	rewrites
 cx:mimetic-adnominal:330	あっさりした口調で言っているが	담백한 어조로 말하지만	fix	rewrites
@@ -195,13 +195,13 @@ cx:mimetic-adnominal:380	中に入るとがらんとした部屋しかない。	
 cx:mimetic-adnominal:380	廊下は誰もおらずがらんとしている。	!rule:cx:mimetic-adnominal:380	keep	rewrites
 cx:mimetic-adnominal:390	ならふんわりした服を選ぶとしようか	그렇다면 부드러운 옷을 선택한다고 할까	fix	rewrites
 cx:mimetic-adnominal:390	少しふんわりした生地だ。	조금 부드러운 옷감이다.	fix	rewrites
-cx:mimetic-adnominal:390	手を振ってくるふんわりした桃色の髪の女の人	손을 흔들어 오는 부드러운 복숭아색 머리카락의 여자	fix	rewrites
+cx:mimetic-adnominal:390	手を振ってくるふんわりした桃色の髪の女の人	손을 흔들어 오는 부드러운 분홍색 머리카락의 여자	fix	rewrites
 cx:mimetic-adnominal:390	昔と同じふんわりした笑顔にもどって	옛날과 같은 부드러운 웃는 얼굴에 돌아와	fix	rewrites
 cx:mimetic-adnominal:390	同時にふんわりしている。	!rule:cx:mimetic-adnominal:390	keep	rewrites
 cx:mimetic-adnominal:390	少しふんわりした。	!rule:cx:mimetic-adnominal:390	keep	rewrites
 cx:mimetic-adnominal:400	すぐにまた元のふんわりとした様子に戻った。	곧바로 또 원래의 부드러운 모습으로 돌아갔다.	fix	rewrites
 cx:mimetic-adnominal:400	少女はその長くふんわりとした金色の髪を揺らしながら	소녀는 그 길고 부드러운 금빛 머리카락을 흔들면서	fix	rewrites
-cx:mimetic-adnominal:400	暖かそうなふんわりとした白のマフラー。	따뜻한 듯한 부드러운 흰색의 머플러.	fix	rewrites
+cx:mimetic-adnominal:400	暖かそうなふんわりとした白のマフラー。	따뜻한 듯한 부드러운 흰색 머플러.	fix	rewrites
 cx:mimetic-adnominal:400	雰囲気がふんわりとした。	!rule:cx:mimetic-adnominal:400	keep	rewrites
 cx:mimetic-adnominal:410	それはぼんやりとした輪郭で	그것은 흐릿한 윤곽으로	fix	rewrites
 cx:mimetic-adnominal:410	ぼんやりとした光が見えた。	흐릿한 빛이 보였다.	fix	rewrites

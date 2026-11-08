@@ -39,3 +39,9 @@ lit.ends	다요까죠	last syllables of a word that the word stage wrote literal
 mixed.hapsyo	니다|니까	words the retrofit could not read that carry 합쇼체; the line then keeps the word stage's levels
 mixed.haeyo	요|죠	same for 해요체
 mixed.word	어요|아요|에요|예요|해요|세요|까요|네요|데요|군요|래요|게요|나요|가요|지요|죠	해요체 ends of a Hangul word the reader kept whole (not 필요, 중요)
+source.inner-negative	ない|なかった|ねえ|ねぇ	REG-12: source sentence ends of a negative, whose inner -다 takes the quote's level
+source.inner-negative-not	だねえ|だねぇ|よねえ|よねぇ|わねえ|わねぇ|かねえ|かねぇ|んねえ|んねぇ|てねえ|てねぇ	ねえ, ねぇ after these is the final particle, no negative
+source.inner-keep	すまない|済まない|すまなかった|済まなかった|ねばならない	REG-12: the set apology and the maxim keep their -다
+source.casual-guess	でしょう	REG-12: a guess that is the casual 겠지 in a casual quote
+source.musing	かな	REG-3: a plain end of musing in a lady's polite quote stays plain
+

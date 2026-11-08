@@ -25,13 +25,13 @@ cx:clipped-copies:10	「先輩っ、先輩っ……」	「선배, 선배……�
 cx:clipped-copies:10	「ウソつきっ、ウソつきっ」	「거짓말쟁이, 거짓말쟁이」	keep	rewrites
 cx:clipped-copies:10	「ないっ、ない、ない……ないっ……」	「없어, 없어, 없어……없어……」	keep	rewrites
 cx:clipped-copies:10	「来てっ、来てえ……っ！」	「와, 와……!」	keep	rewrites
-cx:clipped-copies:20	「だめっ、だめっ！」	「안됏, 안됏!」	fix	rewrites
-cx:clipped-copies:20	だめっだめっ	안됏 안됏	fix	rewrites
-cx:clipped-copies:20	「みゃあああっ、だめっ、だめっ……ああっ」	「먀아아앗, 안됏, 안됏……아앗」	fix	rewrites
-cx:clipped-copies:20	「ひんっ、だめっ、だめだめっ……」	「히잉, 안됏, 안돼 안됏……」	fix	rewrites
-cx:clipped-copies:20	「だめっ……だめっ、もうっ」	「안돼……안돼, 정말」	keep	rewrites
-cx:clipped-copies:20	「だめっ」	「안돼」	keep	rewrites
-cx:clipped-copies:20	だめっ、だめ	안돼, 안돼	keep	rewrites
+cx:clipped-copies:20	「だめっ、だめっ！」	「안 됏, 안 됏!」	fix	rewrites
+cx:clipped-copies:20	だめっだめっ	안 됏 안 됏	fix	rewrites
+cx:clipped-copies:20	「みゃあああっ、だめっ、だめっ……ああっ」	「먀아아앗, 안 됏, 안 됏……아앗」	fix	rewrites
+cx:clipped-copies:20	「ひんっ、だめっ、だめだめっ……」	「히잉, 안 됏, 안 돼 안 됏……」	fix	rewrites
+cx:clipped-copies:20	「だめっ……だめっ、もうっ」	「안 돼……안 돼, 정말」	keep	rewrites
+cx:clipped-copies:20	「だめっ」	「안 돼」	keep	rewrites
+cx:clipped-copies:20	だめっ、だめ	안 돼, 안 돼	keep	rewrites
 cx:clipped-copies:20	だめだめ	!rule:cx:clipped-copies:20	keep	rewrites
 compose:clipped-copies	先輩っ先輩っ	선배 선배	fix	compose
 compose:clipped-copies	「私は、ぜんっぜん仕事しなくても」	lacks:갑자기일하지	keep	compose

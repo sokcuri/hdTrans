@@ -24,7 +24,7 @@ cx:yo-intent:17	「……私も、帰る」	「……나도, 돌아갈 거야」
 cx:yo-intent:17	「では、悪いが私は戻る」	「그럼, 미안하지만 나는 돌아올 거야」	fix	rewrites
 cx:yo-intent:17	「疲れたから、今日はもう寝る」	「지쳤으니까, 오늘은 이제 잘 거야」	fix	rewrites
 normalize:kansai-ee	ほんまにええんか？	진짜로 좋은 건가?	fix	normalize
-normalize:kansai-ee	こうしてワイらしかおらん時くらい、堂々とラブラブしてええんやで	이렇게 해 우리밖에 있지 않는 때 정도, 당당히 알콩달콩해도 되는 이야	keep	normalize
+normalize:kansai-ee	こうしてワイらしかおらん時くらい、堂々とラブラブしてええんやで	이렇게 우리밖에 있지 않는 때 정도, 당당히 알콩달콩해도 되는 이야	keep	normalize
 normalize:kansai-ee	真理紗は悪うない 謝らなくてええんや	진리사는 나쁘지 않다 사과하지 않아도 되는 거야	keep	normalize
 normalize:kansai-ee	めっちゃおもろい 仲ええやん	엄청 재미있는 사이 좋잖아	keep	normalize
 normalize:kansai-ee	１つはテツ用にしたらええんや	1개는 테츠용으로 하면 되는 거야	keep	normalize
@@ -58,7 +58,7 @@ grammar:result-suru-past	あの子 優勝してる。	그 아이 우승했다.	f
 grammar:result-suru-past	そ、そうだね…結婚してたくさん、経ってるのに	그, 그러게…결혼 했던 씨, 지나 있는데	keep	conjugation
 grammar:result-suru-past	ただ、部屋中が破損してるから、怪我に気をつけてね」	다만, 방 전체가 파손하고 있으니, 상처를 조심해」	keep	conjugation
 grammar:result-suru-past	｢結婚してますか｣だって	｢결혼합니까｣래	keep	conjugation
-grammar:result-suru-past	準備してた頃は、香々祭をしてくれるなんて思ってもいませんでしたから	준비하고 있었을 무렵은, 야채 절임제를 해 준다고 생각해도 있지 않았으니까	keep	conjugation
+grammar:result-suru-past	準備してた頃は、香々祭をしてくれるなんて思ってもいませんでしたから	준비하고 있었을 무렵은, 야채 절임제를 해 준다고 생각하지도 않았으니까	keep	conjugation
 grammar:result-suru-past	筧がいなかったら失敗してた」	견이 없었으면 실패했다」	keep	conjugation
 grammar:result-suru-past	俺は結婚してた ３年間	나는 결혼 했던 3년간	keep	conjugation
 grammar:result-suru-past	警察は到着してるけど、避難誘導で手いっぱいみたい。	경찰은 도착하고 있지만, 피난 유도로 힘껏 같다.	keep	conjugation
@@ -123,7 +123,7 @@ cx:kure-request:10	しれーかん、クッキーくれくれ、それ全部く�
 cx:promise-kara:10	私、頑張るから、見捨てないでぇー！	나, 노력할 테니까, 버리지 마~!	fix	rewrites
 cx:promise-kara:10	午前九時。Richelieuは、午前中はゆっくり行きたいわ。用意するから、待っていなさい。	오전 9시. Richelieu는, 오전 중은 천천히 가고 싶어. 준비할 테니까, 기다리고 있어.	fix	rewrites
 cx:promise-kara:10	Admiral、疲れているのか？ 私が紅茶をいれよう。待っていて。薫り高いアールグレイにしよう。ほら、休んでいて。持っていくから、待ってて。	Admiral, 피곤한 건가? 내가 홍차를 탈게. 기다리고 있어. 향기나 높은 얼 그레이로 하자. 자, 쉬고 있어. 가져갈 테니까, 기다리고 있어.	fix	rewrites
-cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
+cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안 돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
 cx:kure-request:10	It's ten now. ふー食った食った。食いすぎたな。帰ってcoffeeでもいれてくれ、なっ？	It's ten now. 후 먹었다 먹었다. 너무 먹었군. 돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
 cx:kure-request:10	待ってくれ、この俺も……この俺も一緒に行かせてくれ。自分の無実は自分で証明してみせる！	기다려 줘, 이 나도……이 나도 함께 가게 해 줘. 자신의 결백은 스스로 증명해 내겠다!	fix	rewrites
 cx:kure-request:10	「たのむ空気を読んでくれ、今じゃないぞ今じゃ」	has:분위기를 읽어 줘,	fix	rewrites

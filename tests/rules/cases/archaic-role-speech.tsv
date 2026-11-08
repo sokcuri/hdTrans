@@ -82,7 +82,7 @@ cx:archaic-speech:80	母親としての妾が目覚めたのじゃ	어머니로�
 cx:archaic-speech:80	妾が命じ各魔王どもの城の地下で 栽培を始めたのじゃ！	이 몸이 명하고 각 마왕들 성 지하에서 재배를 시작한 게야!	fix	rewrites
 cx:archaic-speech:80	よく分かるぞ あのトカゲは 一度泣かしてやらねばと 妾も思っておるのじゃ…。	잘 알겠어 그 도마뱀은 한 번 울려 주어야 한다고 이 몸도 생각하는 게야….	fix	rewrites
 cx:archaic-speech:80	当主たる妾が 花嫁と認めぬ。	당주인 첩이 신부로 인정하지 않는다.	keep	rewrites
-cx:archaic-speech:80	妾の財を委ねるに ふさわしいかどうかを 見定めるために作られた 魔法生命体じゃ	이 몸의 재산을 맡기는에 적격인지 어떤지를 확정하기 위해 만들어진 마법 생명체야	fix	rewrites
+cx:archaic-speech:80	妾の財を委ねるに ふさわしいかどうかを 見定めるために作られた 魔法生命体じゃ	이 몸의 재산을 맡기는에 적격인지 어떤지를 살펴보기 위해 만들어진 마법 생명체야	fix	rewrites
 cx:archaic-speech:80	「お菊は拙者の妾でござる」	「오키쿠는 나의 첩이오」	keep	rewrites
 cx:archaic-speech:80	妾の子という奴か	첩의 자식이라는 놈인가	keep	rewrites
 cx:archaic-speech:80	妾が あの狙撃手を追う！	!rule:cx:archaic-speech:80	keep	rewrites
@@ -177,15 +177,15 @@ normalize:old-negative	何であるかは わしにも分からぬ	왜 있을까
 normalize:old-negative	この村から 誘い出そうとしたのかは知らぬ	이 마을에서 꾀어내려고 했는지는 모른다	fix	normalize
 normalize:old-negative	さっぱりコツが分からぬでござる	전혀 요령을 알 수 없소	keep	normalize
 normalize:old-negative	言っても 分からぬか？	말해도 모르는 건가?	fix	normalize
-normalize:old-negative	ならぬ！ 我々の目的は あくまで エイジャの赤石を 手に入れること｡	안돼! 우리의 목적은 어디까지나 에이자의 적석을 손에 넣는 것.	fix	normalize
-normalize:old-negative	ならぬぞ	안돼	fix	normalize
+normalize:old-negative	ならぬ！ 我々の目的は あくまで エイジャの赤石を 手に入れること｡	안 돼! 우리의 목적은 어디까지나 에이자의 적석을 손에 넣는 것.	fix	normalize
+normalize:old-negative	ならぬぞ	안 돼	fix	normalize
 normalize:old-negative	カービィ殿、訳あってそなたと戦わなくてはならぬ？	커비전, 사정이 있어 그대와 싸워야 해?	fix	normalize
 normalize:old-negative	見知らぬ人が来た。	낯선 사람이 왔다.	keep	normalize
 normalize:old-negative	「知らぬ間に眠っていた」	「어느새 자고 있었어」	keep	normalize
 normalize:old-negative	「知らぬが仏」	「모르는게 약」	keep	normalize
 normalize:old-negative	「知らぬ存ぜぬ」	「아무것도 모르는체」	keep	normalize
 normalize:old-negative	「何も知らぬ子供だ」	「아무것도 모르는 아이야」	keep	normalize
-normalize:old-negative	いかん！目を閉じよ 何も見てはならぬ！	안돼! 눈을 감아라 아무것도 봐서는 안된다!	keep	normalize
+normalize:old-negative	いかん！目を閉じよ 何も見てはならぬ！	안 돼! 눈을 감아라 아무것도 봐서는 안 된다!	keep	normalize
 normalize:old-negative	「そうはならぬ」	「그렇게는 되지 않는다」	keep	normalize
 normalize:old-negative	「相手にならぬ」	「상대가 되지 않는다」	keep	normalize
 normalize:old-negative	人ならぬ 神の作りたもうた肉体	사람 되지 않는 신의 만들기도 노래 육체	keep	normalize
@@ -254,7 +254,7 @@ cx:archaic-speech:5	「しからば、拙者は貴様を斬るぞ」	「해인�
 cx:archaic-speech:5	「拙者が参る」	「내가 간다」	keep	rewrites
 cx:archaic-speech:5	「お綱ッ、拙者につかまれ！」	「밧줄, 나에게 잡혀라!」	keep	rewrites
 cx:archaic-speech:5	「拙者の友でござる」	「나의 친구이오」	keep	rewrites
-cx:archaic-speech:5	「拙者に何の用」	「나에게 무슨용무」	keep	rewrites
+cx:archaic-speech:5	「拙者に何の用」	has:무슨 볼일	keep	rewrites
 cx:archaic-speech:26	いかがいたす？	어찌하겠느냐?	fix	rewrites
 cx:archaic-speech:26	何といたす	어찌하겠느냐	fix	rewrites
 cx:archaic-speech:26	何をいたす!?	!rule:cx:archaic-speech:26	keep	rewrites

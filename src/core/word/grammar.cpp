@@ -269,6 +269,8 @@ bool HonouredPerson(const Item* n) {
 //     ている form nor the continuative before a comma (彼は天才と言われた);
 //   - another quote with an honoured subject in the sentence is the respectful 言われる, which
 //     the active reads (382さんは10体くらいと言われていました);
+//   - with a person in に or から before a quote that holds no predicate (彼女にバカと言われていた),
+//     told (라는 말을 듣다) in every form but before a comma;
 //   - with no such subject: said by people (라고들 하다) in the ている forms, the impersonal
 //     하다 before a comma, told otherwise (バカと言われたことがある 바보라는 말을 들은 적이 있다).
 // head is the Korean before 라고 ((이)), rest the text after the item (われていた); "" keeps the
@@ -291,13 +293,24 @@ std::string QuotePassive(const Item* it, std::string_view head, std::string_view
         const bool person = Person(p->prev->Attr(std::max(p->prev->selected, 0)));
         return h + (person && !stative && !comma ? "라는 말을 &J6@" : "라고 불&AA@");
     }
+    bool agent = false;
+    bool predicate = false;
     for (const Item* p = quote; p != nullptr && !Has("。！？!?「」『』", p->group->surface); p = p->prev) {
         const std::string_view s = p->group->surface;
         if ((s == "は" || s == "が" || s == "も") && p->prev != nullptr &&
             (HonouredPerson(p->prev) || p->prev->group->surface == "さん")) {
             return {};
         }
+        if (!p->detail->Yougo() && !p->group->entries.empty()) {
+            const Entry* e = p->group->At(std::max(p->selected, 0));
+            predicate = predicate || (e != nullptr && (e->cls == 'M' || e->cls == 'H'));
+        }
+        if (!predicate && !agent && (s == "に" || s == "から") && p->prev != nullptr && !p->prev->detail->Yougo() &&
+            Person(p->prev->Attr(std::max(p->prev->selected, 0)))) {
+            agent = true;
+        }
     }
+    if (agent && !comma) return h + "라는 말을 &J6@";
     return h + (stative ? "라고들 &AV@" : comma ? "라고 &AV@" : "라는 말을 &J6@");
 }
 
@@ -2067,6 +2080,13 @@ void ResultState(Flusher& f) {
         if (dict::InClass(HDTRANS_CLASS("aux.te-start"), verb) && AfterTeForm(v) && !ArrivalBefore(v)) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
+        // The contracted てるの of a question, read 6 for an act going on (何してるの？ 뭐해?), is the past of a change
+        // done as its てる is (結婚してるの？ 결혼했어?, もう来てんの？ 벌써 왔어?; spec LEX-5052).
+        if (past && e->dst == "6" && (it->DirectSurface().ends_with("るの") || it->DirectSurface().ends_with("んの"))) {
+            it->AssignDirectSlot(it->DirectIndex(), "1고 있어");
+            e = it->DirectEntry(it->DirectIndex());
+            if (e == nullptr) continue;
+        }
         const std::string lemma = output::Lemma(e->dst, f.families);
         if (!lemma.starts_with("1고")) continue;
         const std::string_view rest = std::string_view(lemma).substr(std::string_view("1고").size());
@@ -3765,16 +3785,103 @@ void WonderingDarou(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether it is a ー the word stage read as the mark -.
+bool LongMarkItem(Flusher& f, Item* it) {
+    return it != nullptr && it->group->surface == "ー" && it->selected >= 0 && ItemLemma(f, it, it->selected) == "-";
+}
+
+}  // namespace
+
 void LongVowelAfterKatakana(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (it->group->surface != "ー" || it->selected < 0 || ItemLemma(f, it, it->selected) != "-") continue;
+        if (!LongMarkItem(f, it)) continue;
         const std::string_view before = std::string_view(it->text).substr(0, static_cast<std::size_t>(it->start));
         if (before.empty()) continue;
         const char32_t r = DecodeLastRune(before).cp;
-        const std::string_view after = From(it->text, it->start + static_cast<long>(std::string_view("ー").size()));
+        // A ー after a ー draws out the word before that one, which must be a word (マリーーー), not a
+        // line of marks (ーーーー, 。ーー).
+        std::string_view word = before;
+        while (!word.empty() && DecodeLastRune(word).cp == U'ー') word.remove_suffix(std::string_view("ー").size());
+        if (word.empty()) continue;
+        if (const char32_t w = DecodeLastRune(word).cp; !(w >= U'ぁ' && w <= U'ヺ') && !text::IsKanji(w)) continue;
+        const bool katakana = (r >= U'ァ' && r <= U'ヺ') || r == U'ー';
+        if (!katakana && !(r >= U'ぁ' && r <= U'ゖ') && !text::IsKanji(r)) continue;
+        // The run of ー after the word, each its own word.
+        constexpr long kMark = static_cast<long>(std::string_view("ー").size());
+        Item* last = it;
+        std::size_t n = 1;
+        while (LongMarkItem(f, last->next) && last->next->text == last->text && last->next->start == last->start + kMark) {
+            last = last->next;
+            n++;
+        }
+        const std::string_view after = From(last->text, last->start + kMark);
         const char32_t next = after.empty() ? U'\0' : text::DecodeRune(after).cp;
-        if (r >= U'ァ' && r <= U'ヺ' &&
-            ((next >= U'ぁ' && next <= U'ヺ') || text::IsKanji(next) || RuneIn(next, "、。！？」』）…"))) {
+        // After a cute sound ending of ending.cute-sound (ニャ 냥) the run is one lengthening: 냥~.
+        std::size_t count = n;
+        for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("ending.cute-sound"))) {
+            if (word.ends_with(member)) count = 1;
+        }
+        if (n >= 2) {
+            // Two or more after a word draw it out (アキラーー！ 아키라아아!) at the end of a phrase, also
+            // before a shout's っ, which closes the last syllable (ママーーっ 엄마아앗); elsewhere they are
+            // one lengthening. The restore stage writes the marks (spec SND-23).
+            std::string_view rest = after;
+            bool clip = false;
+            while (!rest.empty() && RuneIn(text::DecodeRune(rest).cp, "っッ")) {
+                rest.remove_prefix(text::DecodeRune(rest).size);
+                clip = true;
+            }
+            const char32_t real = rest.empty() ? U'\0' : text::DecodeRune(rest).cp;
+            const bool end = rest.empty() || RuneIn(real, "、。！？!?」』）)…‥ 　~～");
+            std::string marks;
+            for (std::size_t k = 0; k < (end ? std::min<std::size_t>(count, 5) : 1); k++) text::AppendRune(marks, output::kLengthenMark);
+            if (end && clip && count >= 2) text::AppendRune(marks, output::kClipMark);
+            // The marks go on the word before, so that no space parts them from it (べよぉーーー).
+            Item* owner = it->prev;
+            // past the words read as nothing (よぉ: the small vowel)
+            for (int k = 0; k < 3 && owner != nullptr && owner->selected >= 0 && owner->group->At(owner->selected) != nullptr &&
+                            owner->DirectIndex() < 0 && owner->EntryText(owner->selected).empty();
+                 k++) {
+                owner = owner->prev;
+            }
+            const bool onWord = owner != nullptr && !owner->Fixed() && owner->selected >= 0 &&
+                                owner->group->At(owner->selected) != nullptr && owner->DirectIndex() < 0 &&
+                                !owner->EntryText(owner->selected).empty();
+            // A word with an ending takes the marks after the ending (すんなぁーーーー).
+            const bool onEnding = !onWord && owner != nullptr && !owner->Fixed() && owner->DirectIndex() >= 0;
+            if (onEnding) {
+                const int at = owner->DirectIndex();
+                std::string ending(owner->DirectText(at));
+                ending += marks;
+                owner->AssignDirectSlot(at, ending);
+                for (Item* m = it; m != last->next; m = m->next) {
+                    if (m->group->At(m->selected) != nullptr) m->AssignEntrySurface(m->selected, "");
+                }
+                it = last;
+                continue;
+            }
+            // With no such word before (kana a later stage writes out: おぉぉぉーーー) the run stays.
+            if (!onWord) {
+                it = last;
+                continue;
+            }
+            std::string target(owner->EntryText(owner->selected));
+            target += marks;
+            owner->AssignEntrySurface(owner->selected, target);
+            for (Item* m = it; m != last->next; m = m->next) {
+                if (m->group->At(m->selected) != nullptr) m->AssignEntrySurface(m->selected, "");
+            }
+            it = last;
+            continue;
+        }
+        // At the end of its token the ー ends the phrase unless a word follows (アキラー！; not
+        // アドベンチャー-BEYOND-).
+        const std::string_view following = last->next != nullptr ? std::string_view(last->next->group->surface) : std::string_view();
+        const char32_t nextWord = following.empty() ? U'\0' : text::DecodeRune(following).cp;
+        const bool tokenEnd = after.empty() && (nextWord == U'\0' || RuneIn(nextWord, "、。！？!?」』）)…"));
+        if (katakana && (tokenEnd || (next >= U'ぁ' && next <= U'ヺ') || text::IsKanji(next) || RuneIn(next, "、。！？!?」』）)…"))) {
             if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, "");
         }
     }
@@ -4376,8 +4483,10 @@ void VerbNegative(Flusher& f) {
         // that glosses it (似つかわしくない 어울리지 않는, spec GRM-3963).
         if ((stem.ends_with("く") && !VerbGlossNegative(lemma)) || AdjectiveNegative(lemma)) {
             if (e->dst == "4") it->AssignDirectSlot(it->DirectIndex(), "1은");
-        } else if (e->dst == "1다") {
-            it->AssignDirectSlot(it->DirectIndex(), "1는다");
+        } else if (e->dst.starts_with("1다") && !e->dst.starts_with("1다가")) {
+            // every ending that starts with the plain 다 (1다, 1다고, 1다면, 1다는), not the 다가 of a switch: 어울리지 않는다고
+            // (spec LEX-5052)
+            it->AssignDirectSlot(it->DirectIndex(), "1는다" + e->dst.substr(std::string_view("1다").size()));
         } else if (e->dst == "4") {
             it->AssignDirectSlot(it->DirectIndex(), "1는");
         }

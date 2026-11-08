@@ -6735,8 +6735,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 野球選手	야구 선수	N110			GN							s:6732
 野生の花	들꽃	N110			GN							s:6733
 野糞	노상 배변	N110			GN							s:6734
-野菜ジュース	채소 주스	N110			GN				llm			s:6735
-野菜スープ	채소 수프	N110			GN				llm			s:6736
+野菜ジュース	야채주스	N110			GN				llm			s:6735
+野菜スープ	야채수프	N110			GN				llm			s:6736
 野菜料理	채소 요리	N110			GN				llm			s:6737
 野鳥観察	탐조	N110			GN							s:6738
 金属探知機	금속 탐지기	N110			GN							s:6739

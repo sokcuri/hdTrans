@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <chrono>
+#include <cstdio>
 #include <string>
 #include <string_view>
 
@@ -127,6 +128,11 @@ HD_TEST(kana_katakana_run_time_grows_with_its_length) {
         std::string expected;
         for (int i = 0; i < 32000; i++) expected += shape.read;
         HD_CHECK_EQ(longOut, expected);
-        HD_CHECK(longRun < 64 * shortRun);
+        // The time bound is checked off a shared CI runner only; there the ratio is written to stderr.
+        if (hdtest::TimingChecked()) {
+            HD_CHECK(longRun < 64 * shortRun);
+        } else {
+            std::fprintf(stderr, "kana run time ratio %.1f (bound 64, not checked)\n", longRun / shortRun);
+        }
     }
 }

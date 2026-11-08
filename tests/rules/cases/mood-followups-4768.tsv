@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:contracted-teiru	鍵も開いてるんだし。	열쇠도 열려 있으니까.	fix	normalize
 normalize:contracted-teiru	もういいわよ。あんたがどう受け取ろうと、姫野は感謝してるんだし。お礼ぐらい素直に聞いたら？	이제 돼. 네가 어떻게 받든, 히메노는 감사하고 있으니까. 감사 인사 정도 솔직하게 들으면?	fix	normalize
-normalize:contracted-teiru	な、ならないよ。だから断ってるんだし	아, 안돼. 그러니까 거절하고 있으니까	fix	normalize
+normalize:contracted-teiru	な、ならないよ。だから断ってるんだし	아, 안 돼. 그러니까 거절하고 있으니까	fix	normalize
 normalize:contracted-teiru	「もう寝てるんだし、そっと離せば起こさないって」	「이미 자고 있으니까, 살며시 떼어 놓으면 깨우지 않는다고」	fix	normalize
 normalize:contracted-teiru	「ただ、ライブのためにこんだけ頑張ってるんだし、何かあってもいいんじゃないかと思ってさ」	「다만, 라이브를 위해만 힘내고 있으니까, 뭔가 있어도 괜찮지 않을까 생각해」	fix	normalize
 normalize:contracted-teiru	せっかくこんな格好してるんだし まとめて今日やっちゃいましょう	모처럼 이런 차림을 하고 있으니까 정리해 오늘 해 치웁시다	fix	normalize
@@ -12,34 +12,34 @@ normalize:contracted-teiru	肉体関係まで進んでるんだし	육체관계�
 normalize:contracted-teiru	勉強してるんだし	공부하고 있으니까	fix	normalize
 normalize:contracted-teiru	寝てるんだし、静かにして	자고 있으니까, 조용하게 해	fix	normalize
 dict:w:34535	「チィヒーロを見捨てないでくれて」	「치히로를 버리지 않아 줘서」	fix	local
-dict:jisjk:116569	これ以上 罪を重ねないでくれ 。	더 이상 죄를 거듭하지 말아 줘 .	fix	local
-dict:jisjk:116569	お願いだから そんな目で見ないでくれよ	제발 부탁이니까 그런 눈으로 보지 말아 줘	fix	local
-dict:jisjk:116569	ああ…そんな、見ないでくれ。妾の変顔なんて	아…그런, 보지 말아 줘. 첩의 웃긴 표정 같은 건	fix	local
-dict:jisjk:116569	何も言わないでくれ、ロベルタ	아무것도 말하지 말아 줘, 로베르타	fix	local
-dict:jisjk:116569	今 話しかけないでくれ	지금 말을 걸지 말아 줘	fix	local
-dict:jisjk:116569	来るな 近づかないでくれ	has:가까워지지 말아 줘	fix	local
+cx:neg-give:5	これ以上 罪を重ねないでくれ 。	더 이상 죄를 거듭하지 말아 줘 .	fix	rewrites
+cx:neg-give:10	お願いだから そんな目で見ないでくれよ	제발 부탁이니까 그런 눈으로 보지 말아 줘	fix	rewrites
+cx:neg-give:5	ああ…そんな、見ないでくれ。妾の変顔なんて	아…그런, 보지 말아 줘. 첩의 웃긴 표정 같은 건	fix	rewrites
+cx:neg-give:10	何も言わないでくれ、ロベルタ	아무것도 말하지 말아 줘, 로베르타	fix	rewrites
+cx:neg-give:5	今 話しかけないでくれ	지금 말을 걸지 말아 줘	fix	rewrites
+cx:neg-give:5	来るな 近づかないでくれ	has:가까워지지 말아 줘	fix	rewrites
 dict:w:34535	や～、アンジェメイドやめないでくれてよかった～っ。昨日あんなこと言ってたけど、撤回なんだよね？	has:그만두지 않아 줘서 좋았다	fix	local
-dict:jisjk:116569	や、やめろ〜…！ そんなヘンなことを耳元で言わないでくれ〜！！	그, 그만두어라~…! 그렇게 이상한 일을 귓가로 말하지 말아 줘~!!	fix	local
+cx:neg-give:5	や、やめろ〜…！ そんなヘンなことを耳元で言わないでくれ〜！！	그, 그만두어라~…! 그렇게 이상한 일을 귓가로 말하지 말아 줘~!!	fix	rewrites
 dict:w:34535	初めまして、弥生、着任…。あ、気を使わないでくれていい…です。	lacks:줘라고	fix	local
-dict:jisjk:116569	マルキュウマルマル！あ、吹雪！この深雪さまを置いてかないでくれよ！十一駆の深雪さまを！な！	0900! 아, 눈보라! 이 미유키 님을 두고 가지 말아 줘! 11구의 미유키 님을! !	fix	local
-dict:jisjk:116569	……そうだな、置き去られるのは慣れている。気にしないでくれ、寂しくなぞ……	……그래, 버려지는 것은 익숙해져 있다. 신경 쓰지 말아 줘, 외롭고 수수께끼……	fix	local
-dict:jisjk:116569	あたし…白露型駆逐艦……その八番艦。山風。手を離さないでね、帰ってくるから…！	나…시라츠유급 구축함……그 8번함. 산바람. 손을 놓지 말아 줘, 돌아오니까…!	fix	local
-dict:jisjk:116569	少しだけ、少しだけ休むんだから。覗かないでね、すぐ終わるから。	약간, 약간 쉬니까. 들여다 보지 말아 줘, 바로 끝날 테니까.	fix	local
-dict:jisjk:116569	……すまん、今はちょっと話し掛けないでくれないか。	……미안, 지금은 조금 말을 걸지 말아 줘 않는가.	keep	local
-dict:jisjk:116569	気にしないでくれよ。	신경 쓰지 말아 줘.	fix	local
-dict:jisjk:116569	これからこうぎが始まるんだ。すぐ済むんだが、邪魔なんでね。今は話しかけないでくれ。	지금부터 공공이 시작되는 거야. 바로 끝나는데, 방해이니까. 지금은 말을 걸지 말아 줘.	fix	local
-dict:jisjk:116569	……いや、いいんだ。気にしないでくれ、先生。	……아니, 좋다. 신경 쓰지 말아 줘, 선생님.	fix	local
-dict:jisjk:116569	何度も言わせないでくれ。ギアは嫌いだしそんなものには興味はないんだ！	몇 번이나 말하게 하지 말아 줘. 기어는 싫고 그런 것에는 흥미는 없어!	fix	local
-dict:jisjk:116569	「ま、ただの思いつきだから、あんまり気にしないでくれ」	「뭐, 그냥 착상이니까, 너무 신경 쓰지 말아 줘」	fix	local
-dict:jisjk:116569	「あまりいじめないでくれ」	「너무 괴롭히지 말아 줘」	fix	local
-dict:jisjk:116569	ちょっと 私より先に リアクションしないでくれる？	조금 나보다 먼저 리액션하지 말고 줘?	keep	local
-dict:jisjk:116569	公私の別はつける、心配しないでくれ」	공사의 구별은 붙이는, 걱정하지 말아 줘」	keep	local
-dict:jisjk:116569	「……\n来ないでね」	「……\n오지 않도록」	keep	local
-dict:jisjk:116569	ただ、白崎を誤解しないでくれ」	다만, 시라사키를 오해하지 말아 줘」	keep	local
-dict:jisjk:116569	ちょっと、ウチの瑞穂に手を出さないでくれる？	잠깐, 우리의 미즈호에 손을 출없고 줘?	keep	local
-dict:jisjk:116569	似ないでね お願いだから｡	닮지 마 제발 부탁이니까.	keep	local
-dict:jisjk:116569	「うそっミク殿、学校に来ないでねorz」	「거짓말미쿠님, 학교에 오지 않도록 orz」	keep	local
-dict:jisjk:116569	「もう二度とかけてこないでね、はいはい、ばいちゃー」	「이제 두 번 다시 걸어 오지 않도록, 네네, 있으면~」	keep	local
+cx:neg-give:10	マルキュウマルマル！あ、吹雪！この深雪さまを置いてかないでくれよ！十一駆の深雪さまを！な！	0900! 아, 눈보라! 이 미유키 님을 두고 가지 말아 줘! 11구의 미유키 님을! !	fix	rewrites
+cx:neg-give:10	……そうだな、置き去られるのは慣れている。気にしないでくれ、寂しくなぞ……	……그래, 버려지는 것은 익숙해져 있다. 신경 쓰지 말아 줘, 외롭고 수수께끼……	fix	rewrites
+dict:jisjk:340904	あたし…白露型駆逐艦……その八番艦。山風。手を離さないでね、帰ってくるから…！	나…시라츠유급 구축함……그 8번함. 산바람. 손을 놓지 말아 줘, 돌아오니까…!	fix	local
+dict:jisjk:340904	少しだけ、少しだけ休むんだから。覗かないでね、すぐ終わるから。	약간, 약간 쉬니까. 들여다 보지 말아 줘, 바로 끝날 테니까.	fix	local
+cx:neg-give:10	……すまん、今はちょっと話し掛けないでくれないか。	has:말을 걸지 말아 주지 않겠는가	fix	rewrites
+cx:neg-give:10	気にしないでくれよ。	신경 쓰지 말아 줘.	fix	rewrites
+cx:neg-give:5	これからこうぎが始まるんだ。すぐ済むんだが、邪魔なんでね。今は話しかけないでくれ。	지금부터 강의가 시작되는 거야. 바로 끝나는데, 방해이니까. 지금은 말을 걸지 말아 줘.	fix	rewrites
+cx:neg-give:10	……いや、いいんだ。気にしないでくれ、先生。	……아니, 좋다. 신경 쓰지 말아 줘, 선생님.	fix	rewrites
+cx:neg-give:5	何度も言わせないでくれ。ギアは嫌いだしそんなものには興味はないんだ！	몇 번이나 말하게 하지 말아 줘. 기어는 싫고 그런 것에는 흥미는 없어!	fix	rewrites
+cx:neg-give:5	「ま、ただの思いつきだから、あんまり気にしないでくれ」	「뭐, 그냥 착상이니까, 너무 신경 쓰지 말아 줘」	fix	rewrites
+cx:neg-give:5	「あまりいじめないでくれ」	「너무 괴롭히지 말아 줘」	fix	rewrites
+cx:neg-give:30	ちょっと 私より先に リアクションしないでくれる？	has:리액션하지 말아 줄래?	fix	rewrites
+cx:neg-give:25	公私の別はつける、心配しないでくれ」	공사의 구별은 붙이는, 걱정하지 말아 줘」	keep	rewrites
+dict:jisjk:340904	「……\n来ないでね」	「……\n오지 않도록」	keep	local
+cx:neg-give:25	ただ、白崎を誤解しないでくれ」	다만, 시라사키를 오해하지 말아 줘」	keep	rewrites
+cx:neg-give:10	ちょっと、ウチの瑞穂に手を出さないでくれる？	has:손을 대지 말아 줄래?	fix	rewrites
+dict:jisjk:340904	似ないでね お願いだから｡	닮지 마 제발 부탁이니까.	keep	local
+dict:jisjk:340904	「うそっミク殿、学校に来ないでねorz」	「거짓말미쿠님, 학교에 오지 않도록 orz」	keep	local
+dict:jisjk:340904	「もう二度とかけてこないでね、はいはい、ばいちゃー」	「이제 두 번 다시 걸어 오지 않도록, 네네, 있으면~」	keep	local
 dict:jisjk:9283	「エルをからかうのはそのくらいにして、少し黙ってもらえると助かる。	「엘을 놀리는 건 그 정도로 해, 조금 입을 다물어 주면 도움이 된다.	fix	local
 dict:jisjk:9283	黙ってくれ、頼む。	입을 다물어 줘, 부탁한다.	fix	local
 dict:jisjk:9283	黙っておくれ、もう泣いてくれるな。	입을 다물어 줘, 이제 울지 말아 줘.	fix	local
@@ -79,7 +79,7 @@ normalize:contracted-teiru	勉強してるのですか？	공부합니까?	keep	
 cx:kure-request:15	黙ってくれ、頼む。	입을 다물어 줘, 부탁한다.	fix	rewrites
 dict:jisjk:9283	黙ってくれ。	입을 다물어 줘.	fix	local
 dict:jisjk:9283	黙って聞いていた。	입다물고 듣고 있었다.	keep	local
-dict:jisjk:116569	「お前らは喋らないでくれ、頭が痛くなる」	「너희들은 말하지 말아 줘, 머리가 아파져」	fix	local
+cx:neg-give:10	「お前らは喋らないでくれ、頭が痛くなる」	「너희들은 말하지 말아 줘, 머리가 아파져」	fix	rewrites
 normalize:contracted-teiru	これなら勝てるんだし	이것이라면 이길 수 있으니까	keep	normalize
 normalize:contracted-teiru	まだ待てるんだし	아직 기다릴 수 있으니까	keep	normalize
 normalize:contracted-teiru	どうせ捨てるんだし	어차피 버리니까	keep	normalize

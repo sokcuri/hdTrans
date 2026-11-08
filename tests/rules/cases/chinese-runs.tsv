@@ -6,7 +6,7 @@ protect:chinese-run	是黑帮的报复吗	是黑帮的报复吗	fix	protect
 protect:chinese-run	ユニバース我们的宇宙	유니버스 我们的宇宙	fix	protect
 protect:chinese-run	約束しよう所以我们约定好了	약속하자 所以我们约定好了	fix	protect
 protect:chinese-run	ここが僕らのユニバース这里就是我们的宇宙	여기가 우리의 유니버스 这里就是我们的宇宙	fix	protect
-protect:chinese-run	誰でも一つぐらい持っているでしょう（キミも　キミも）无论谁都至少有一个（你也是 你也是）	누구라도 하나 정도 가지고 있겠지요(너도 너도) 无论谁都至少有一个(你也是 你也是)	fix	protect
+protect:chinese-run	誰でも一つぐらい持っているでしょう（キミも　キミも）无论谁都至少有一个（你也是 你也是）	누구나 하나 정도 가지고 있겠지요(너도 너도) 无论谁都至少有一个(你也是 你也是)	fix	protect
 protect:chinese-run	さあ 顔を上げて来 抬起头来	자 고개를 들어 와 抬起头来	fix	protect
 protect:chinese-run	时间轴 : 塔塔君	时间轴 : 塔塔君	fix	protect
 protect:chinese-run	本字幕由夏叶字幕团制作	本字幕由夏叶字幕团制作	fix	protect
@@ -34,7 +34,7 @@ protect:chinese-grammar	※日語中姑姑 阿姨 大媽都唸作おばさん	�
 protect:chinese-grammar	※腐る(くさる)和寝腐る(ねくさる)發音相近	※썩는(썩는다) 화침 썩는(네 썩는다) 發音相近	fix	protect
 protect:chinese-grammar	「そこへなおれ」意味著讓犯錯的人老實坐好，等待受刑	「거기에 나아라」意味著讓犯錯的人老實坐好, 等待受刑	fix	protect
 protect:chinese-grammar	「それそれ」是「看招看招」的意思	「그것 그것」是 「看招看招」的意思	fix	protect
-protect:chinese-grammar	「そんなバカな! 」的諧音	「말도 안돼!」的諧音	fix	protect
+protect:chinese-grammar	「そんなバカな! 」的諧音	「말도 안 돼!」的諧音	fix	protect
 protect:chinese-grammar	「たけゆきて」的「たけ」也就是「升起向上」的意思	「사나워지고 유키라고」的 「사나워지고」也就是 「升起向上」的意思	fix	protect
 protect:chinese-grammar	「牛(うし)」發音為usi	「牛」發音為usi	fix	protect
 protect:chinese-grammar	「阿樂（ぐらさん）」與「墨鏡 」音同。	「阿樂」與 「墨鏡 」音同.	fix	protect
@@ -56,7 +56,7 @@ protect:chinese-run	彼は最終的是認を得た。	그는 최종적 시인을
 protect:chinese-run	就職して三年。	취직해 3년.	keep	protect
 protect:chinese-run	是非是非お越しください。	꼭 와 주세요.	keep	protect
 protect:chinese-run	対処法は是正勧告。	대처법은 시정 권고.	keep	protect
-protect:chinese-run	また実現を目指して政治的意思決定のために 奮闘しているところもあります	또 실현을 목표로 해 정치적 의사결정을 위해 분투하고 있는 곳도 있습니다	keep	protect
+protect:chinese-run	また実現を目指して政治的意思決定のために 奮闘しているところもあります	또 실현을 목표로 정치적 의사결정을 위해 분투하고 있는 곳도 있습니다	keep	protect
 protect:chinese-run	敵に積極的意思があれば	적에게 적극적 의사가 있으면	keep	protect
 protect:chinese-run	政治的意思があれば 解決できる	정치적 의사가 있으면 해결할 수 있다	keep	protect
 protect:chinese-run	あんな途中登場して 何もせんて珍しいよ	저런 도중 등장해 아무것도 라고 드물어	keep	protect

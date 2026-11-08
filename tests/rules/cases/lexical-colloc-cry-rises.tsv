@@ -34,8 +34,8 @@ cx:colloc-noun-verb:255	声が飛んでくるのが聞こえた。	has:목소리
 cx:colloc-noun-verb:255	声が飛んで来た。	has:목소리가 날아왔다	fix	rewrites
 cx:colloc-noun-verb:255	叱責が飛んでくる。	has:질책이 날아온다	fix	rewrites
 cx:colloc-noun-verb:255	野次が飛んでくる。	has:야유가 날아온다	fix	rewrites
-cx:colloc-noun-verb:255	石が飛んでくる。	has:날아 온다	keep	rewrites
-cx:colloc-noun-verb:255	ボールが飛んできた。	has:공이 날아 왔다	keep	rewrites
+cx:colloc-noun-verb:255	石が飛んでくる。	has:날아온다	keep	rewrites
+cx:colloc-noun-verb:255	ボールが飛んできた。	has:공이 날아왔다	keep	rewrites
 cx:colloc-noun-verb:260	アルザ議員が俺を“彼”と呼び続けている事に対して、野次が飛ぶ。	has:야유가 날아든다	fix	rewrites
 cx:colloc-noun-verb:260	殆どの学生から抗議や文句の野次が飛んだ。	has:야유가 날아들었다	fix	rewrites
 cx:colloc-noun-verb:260	エリオットが足を止めるのと同時に、硬い声が飛ぶ。	has:굳은 목소리가 날아든다	fix	rewrites

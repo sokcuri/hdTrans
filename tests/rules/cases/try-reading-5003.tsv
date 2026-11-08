@@ -1,0 +1,44 @@
+# 규칙: LEX-5003
+rule	input	expected	kind	layer
+cx:try-reading:14	この料理は私の自信作です。お試しあれ。	has:드셔 보시길	fix	rewrites
+cx:try-reading:14	ふふっ。狭霧特製、栗と抹茶を使った和風チョコレート、完成です！ お試しください	has:드셔 보세요	fix	rewrites
+cx:try-reading:10	新作のケーキをぜひお試しください。	has:케이크를 꼭 드셔 보세요	fix	rewrites
+cx:try-reading:12	このワインをお試しください。	has:와인을 드셔 보세요	fix	rewrites
+cx:try-reading:20	新しい機能をお試しいただけます。	has:기능을 써 보실 수 있습니다	fix	rewrites
+cx:try-reading:20	このアプリをお試しになってください。	has:앱을 써 보세요	fix	rewrites
+cx:try-reading:22	この服をお試しください。	has:옷을 입어 보세요	fix	rewrites
+cx:try-reading:32	お知らせです アクシオンの皆様 ブルーをお試し下さい	has:블루를 써 보세요	fix	rewrites
+cx:try-reading:32	　空行有り、句点改行形式をお好みの方は、そちらをお試し下さい。	has:그쪽을 써 보세요	fix	rewrites
+cx:try-reading:40	簡単なコツなので、ぜひお試しあれ！	has:꼭 한번 해 보시길!	fix	rewrites
+cx:try-reading:40	「論より証拠、どーぞお試しください」	has:한번 해 보세요	fix	rewrites
+cx:try-reading:40	一度お試しになってください。	has:한 번 해 보세요	fix	rewrites
+cx:try-reading:40	一度お試しください。	!rule:cx:try-reading:40	keep	rewrites
+cx:try-reading:40	ぜひお試しいただければ幸いです。	has:꼭 한번 해 보시면	fix	rewrites
+cx:try-reading:40	お試しになりますか？	has:한번 해 보시겠습니까	fix	rewrites
+cx:try-request:10	ぜひお試しを！	has:꼭 한번 해 보세요!	fix	rewrites
+cx:try-request:10	このケーキをお試しを。	has:케이크를 드셔 보세요	fix	rewrites
+cx:try-request:10	「手を抜いたら、お試しの意味がないだろ？」	has:시험의 의미	keep	rewrites
+cx:try-reading:50	この料理を試してみて	has:요리를 먹어 봐	fix	rewrites
+cx:try-reading:50	「あ、いや……と、そうだ、他の味も試してみる？」	has:다른 맛도 먹어 봐?	fix	rewrites
+cx:try-reading:50	ヒトヒトマルマル。さて、キミ、お昼はどうする？ 間宮の新作、試してみないか？	has:먹어 보지 않겠는가	fix	rewrites
+cx:try-reading:52	このワインを試してみた	has:마셔 보았다	fix	rewrites
+cx:try-reading:54	このやり方を試してみて。	has:방식을 시도해 봐	fix	rewrites
+cx:try-reading:56	このアプリを試してみてください。	has:앱을 써 보세요	fix	rewrites
+cx:try-reading:58	この服を試してみて	has:옷을 입어 봐	fix	rewrites
+cx:try-reading:10	このケーキのレシピをお試しください。	!rule:cx:try-reading:10	keep	rewrites
+cx:try-reading:12	ワインに合うアプリをお試しください。	!rule:cx:try-reading:12	keep	rewrites
+cx:try-reading:14	料理のコツをお試しください。	!rule:cx:try-reading:14	keep	rewrites
+cx:try-reading:20	このアプリの使い方のコツをお試しください。	!rule:cx:try-reading:20	keep	rewrites
+cx:try-reading:22	服のたたみ方のコツをお試しください。	!rule:cx:try-reading:22	keep	rewrites
+cx:try-reading:30	このコツをお試しください。	has:요령을 시도해 보세요	fix	rewrites
+cx:try-reading:50	この料理の作り方を試してみて	!rule:cx:try-reading:50	keep	rewrites
+cx:try-reading:52	ワインに合う料理を試してみて	!rule:cx:try-reading:52	keep	rewrites
+cx:try-reading:54	自分の力を試してみたい。	!rule:cx:try-reading:54	keep	rewrites
+cx:try-reading:56	このアプリでレシピを試してみて	!rule:cx:try-reading:56	keep	rewrites
+cx:try-reading:58	この服に合う方法を試してみて	!rule:cx:try-reading:58	keep	rewrites
+cx:try-reading:30	そちらをお試し下さい。	!rule:cx:try-reading:30	keep	rewrites
+cx:try-reading:32	このコツをお試しください。	!rule:cx:try-reading:32	keep	rewrites
+cx:try-reading:50	まあ、でも物は試しなので、とりあえず紅茶のポットで試してみることにした。	!rule:cx:try-reading:52	keep	rewrites
+cx:try-reading:56	「手がかりもないし、まずは試してみよう」	has:우선은 시험해 보자	keep	rewrites
+cx:try-reading:54	この方法を試してみて	has:이 방법을 시도해 봐	fix	rewrites
+cx:try-reading:54	このコツを試してみて	has:요령을 시도해 봐	fix	rewrites

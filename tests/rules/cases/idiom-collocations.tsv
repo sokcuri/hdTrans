@@ -12,7 +12,7 @@ dict:compound-verbs:12	すっかり前世に思いを馳せていた。	완전�
 dict:compound-verbs:13	すっかり前世に思いをはせていた。	완전히 전생을 떠올리고 있었다.	fix	local
 dict:compound-verbs:12	恒星間移動について思いを馳せている。	항성간 이동에 대해 생각을 떠올리고 있다.	keep	local
 dict:idiom:1	いえ、なんでもありませんわ。	아뇨, 아무것도 아니에요.	fix	local
-dict:idiom:1	ははは、別になんでもありませんよ。	하하하, 별로 아무것도 아니에요.	fix	local
+dict:idiom:1	ははは、別になんでもありませんよ。	하하하, 딱히 아무것도 아니에요.	fix	local
 dict:idiom:1	ここにはなんでもある。	여기에는 뭐든 있다.	keep	local
 dict:idiom-verbs	食事ものどを通らなくって、ランチを食べることができなかった。	식사도 목구멍으로 넘어가지 않아서, 런치를 먹을 수가 없었다.	fix	lookup
 dict:idiom-verbs	野菜たっぷりのシチューを見て、頬をゆるめた。	야채 듬뿍의 스튜를 보고, 미소 지었다.	fix	lookup

@@ -8,6 +8,7 @@
 #include "core/names/labels.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -437,6 +438,8 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
 // word reads as words only when its other words have three or more morae and do not
 // conjugate (アリスデス, not ウルトラマンネクサス). One kana reads only as a particle
 // (ハ, ヲ).
+bool ConjugatesWith(int kind, std::string_view text);
+
 std::vector<KataPiece> ReadRun(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string h;
     std::vector<size_t> at;
@@ -502,6 +505,29 @@ std::vector<KataRun> KataRuns(std::string_view line, const LineContext& ctx, con
         runs.push_back(std::move(run));
     }
     return runs;
+}
+
+// Whether the reading of a run of four kana or fewer is a verb stem followed by a geminate っ
+// ending that the stem does not conjugate into (アレッタ: 荒れ takes た, not った), so that it is no verb form but a word of its own.
+bool StemMisconjugated(const KataRun& r, const dict::Snapshot& snap) {
+    const std::vector<KataPiece>& p = r.pieces;
+    if (r.kana.size() > 4) return false;
+    for (size_t k = 0; k + 1 < p.size(); k++) {
+        const bool ending = p[k + 1].kind == PieceKind::Conj || (p[k + 1].kind == PieceKind::Word && MostlyTags(p[k + 1].tags, "S"));
+        if (p[k].kind != PieceKind::Word || !ending || !MostlyTags(p[k].tags, "M")) continue;
+        const std::string stem = ToHiragana(Utf8(std::u32string_view(r.kana).substr(p[k].from, p[k].to - p[k].from)));
+        const std::string rest = ToHiragana(Utf8(std::u32string_view(r.kana).substr(p[k].to)));
+        if (!rest.starts_with("っ")) continue;
+        bool verb = false, conjugates = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(stem, dict::LookupMode::General)) {
+            const std::string_view part = c.codes != nullptr ? c.codes->partText : std::string_view();
+            if (part.size() != 4 || part[0] != 'M' || part[1] != '4') continue;
+            verb = true;
+            conjugates = conjugates || ConjugatesWith(part[3] - '0', rest);
+        }
+        if (verb && !conjugates) return true;
+    }
+    return false;
 }
 
 // Whether a line with japanese Japanese characters is speech written in katakana: the
@@ -1147,6 +1173,23 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             prose = prose && r->prose;
         }
         if (words >= 2 && prose) continue;
+        // A line whose runs that read as words are all names of the document or persons or places
+        // of the name layer, spelling no native word whole, is those names called (「――コレット！！」,
+        // トウヤ、…トウヤ。); so is one whose only such run conjugates a stem wrongly (アレッタ……).
+        if (words >= 1) {
+            bool names = true;
+            const KataRun* only = nullptr;
+            for (const KataRun* r : all) {
+                if (r->pieces.empty()) continue;
+                only = r;
+                const std::string key = Utf8(r->kana);
+                bool name = ctx.named != nullptr && ctx.named->contains(key);
+                for (const dict::Record& rec : snap.NameRecords(key)) name = name || (rec.codes != nullptr && rec.codes->sem.HasPrefix("QP"));
+                names = names && name && KeyTags(ToHiragana(key), ctx, snap).empty();
+            }
+            if (names) continue;
+            if (words == 1 && StemMisconjugated(*only, snap)) continue;
+        }
         bool okurigana = false;
         if (IsKataSpeech(japanese, all)) {
         } else if (kata == japanese && IsPlainKataSpeech(line, all, snap)) {
@@ -1597,7 +1640,15 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
                     if (!base.empty() || afterKanji || CountRunes(head, [](char32_t) { return true; }) < 2 || !snap.NamePerson(head)) {
                         continue;
                     }
-                    std::string kr = snap.NameReading(head);
+                    // The name as its person row writes it, as the name standing alone reads (トウヤっち 토야치 beside
+                    // トウヤ 토야).
+                    std::string kr;
+                    const std::string fan = snap.NameReading(head);
+                    for (const dict::Record& rec : snap.NameRecords(head)) {
+                        if (kr.empty() && !fan.empty() && rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN") && text::SameSound(rec.target, fan)) {
+                            kr = std::string(rec.target);
+                        }
+                    }
                     if (kr.empty()) kr = text::FromKana(head, text::Preset::FanShort);
                     if (kr.empty()) continue;
                     hangul = kr + text::FromKana(suffix, text::Preset::FanShort);

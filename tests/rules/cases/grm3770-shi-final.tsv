@@ -83,7 +83,7 @@ rewrite:sentence-final-shi	「ゆっくり暮らしてもいいしね」	「천�
 rewrite:sentence-final-shi	「想像したことだって、ないとは言えないし」	「상상한 것도, 없다고는 말할 수 없고」	keep	rewrites
 rewrite:sentence-final-shi	「全員がそうとは限りませんし」	「전원이 그렇다고는 할 수 없고」	keep	rewrites
 rewrite:sentence-final-shi	「……まあ、そういうわけだしな」	「……뭐, 그런 거잖아」	fix	rewrites
-rewrite:sentence-final-shi	「別に怒ってないし。」	「별로 화내지 않거든.」	keep	rewrites
+rewrite:sentence-final-shi	「別に怒ってないし。」	「딱히 화내지 않거든.」	keep	rewrites
 rewrite:sentence-final-shi	「星も綺麗だし」	「별도 예쁘잖아」	keep	rewrites
 cx:narration-style-1:20	「別に怒ってないし。全然気にしてないし」	has:화내지 않거든. 전혀 신경 쓰지 않거든	fix	rewrites
 cx:narration-style-1:20	「大丈夫大丈夫、今いないし。俺たちも内緒にしてるから」	has:지금 없거든.	fix	rewrites

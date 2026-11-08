@@ -9,6 +9,6 @@ constraint:o-stem-nasai	ちょーっとお待ちなさいな！	조금 기다려
 constraint:o-stem-nasai	お待ちなさいませ	기다리십시오	fix	lookup
 phrase:おやすみなさいませ	本当にお騒がせしました、おやすみなさいませ	정말 시끄럽게 했습니다, 안녕히 주무세요	fix	builtin-phrase
 phrase:おかえりなさいまし	おかえりなさいまし！	어서 오세요!	fix	builtin-phrase
-dict:honor:8	見てご覧なさいませーー！！	봐 보십시오--!!	fix	lookup
+dict:honor:8	見てご覧なさいませーー！！	봐 보십시오오오!!	fix	lookup
 dict:honor:4	何になさいますか	!rule:dict:honor:4	keep	local
 dict:honor:3	確認なさいます？	!rule:dict:honor:3	keep	local

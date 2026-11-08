@@ -30706,8 +30706,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 白髪ポニーテール	백발 포니테일	N110			GN							names.657539
 白髪ロング	백발 롱헤어	N110			GN							names.657540
 白髪教団	백발 교단	N130	QPNVHn		GN							names.657542
-白髪碧眼	백발벽안	N110			GN							names.657543
-白髪赤眼	백발적안	N130	QPNVHn	Wb	GN							names.657544
 白髪鬼	백발귀	N130	QPNVHn	Wb	GN							names.657545
 白髪魔女伝2	백발마녀전 2	N130	QWK		GN							names.657546
 白髭雄大	시라히게 유다이	N130	QPNVHn		GN						しらひげ ゆうだい	names.657547
@@ -57672,7 +57670,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 緑風ふわり	미도리카제 후와리	N130	QPNVHn		GN						みどりかぜふわり	names.685014
 緑髪	녹발	N110			GN							names.685015
 緑髪ツインテール	녹발 트윈테일	N110			GN							names.685016
-緑髪碧眼	녹발벽안	N130	QPNVHn	Wb	GN							names.685017
 緑鬼	녹귀	N110			GN						りょくき	names.685018
 緑魔子	미도리 마코	N130	QPNVHn		GN							names.685019
 緑魔道士	녹마도사	N110			GN							names.685020
@@ -104665,13 +104662,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 金髪少女	금발 소녀	N110			GN							names.732719
 金髪少年	금발 소년	N110			GN							names.732720
 金髪幼女	금발 유녀	N110			GN							names.732721
-金髪碧眼	금발벽안	N110			GN							names.732722
-金髪紫眼	금발자안	N110			GN							names.732723
 金髪縦ロール	금발 세로롤	N110			GN							names.732724
 金髪美女	금발 미녀	N110			GN						きんぱつびじょ	names.732725
 金髪美少女	금발 미소녀	N110			GN							names.732726
-金髪赤眼	금발적안	N110			GN							names.732727
-金髪金眼	금발금안	N110			GN							names.732728
 金髪陰毛	금발 음모	N110			GN							names.732729
 金髮	금발	N110			GN							names.732730
 金魂	은혼	N130	QWK		GN							names.732731
@@ -107275,10 +107268,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 銀髪ポニーテール	은발 포니테일	N110			GN							names.735352
 銀髪ロング	은발 롱헤어	N110			GN							names.735353
 銀髪巨乳	은발 거유	N130	QPNVHn		GN							names.735354
-銀髪碧眼	은발벽안	N110			GN							names.735355
-銀髪翠眼	은발 취안	N110			GN							names.735356
-銀髪赤眼	은발적안	N110			GN							names.735357
-銀髪金眼	은발 금안	N130	QPNVHn		GN							names.735358
 銀魂	은혼	N130	QWK		GN							names.735359
 銀魂2 掟は破るためにこそある	은혼 2: 규칙은 깨기 위해 있다	N130	QWK		GN							names.735360
 銀魂_THE_FINAL	은혼 THE FINAL	N130	QWK		GN							names.735361
@@ -119366,9 +119355,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 青騎士	청기사파	N130	QPNVHn	Wb	GN							names.747622
 青騎士ヘルダイン	청기사 헬다인	N110			GN						あおきしへるだいん	names.747623
 青髪 ピアス	파란머리 피어스	N130	QPNVHn		GN							names.747624
-青髪碧眼	청발벽안	N110			GN							names.747625
-青髪翠眼	청발녹안	N110			GN							names.747626
-青髪赤眼	청발적안	N110			GN						せいはつせきがん	names.747627
 青鬼	아오오니	N130	QPNVHn	Wb	GN						あおおに	names.747629
 青鬼 ブルーベリー温泉の怪異	아오오니 블루베리 온천의 괴이	N130	QWK		GN							names.747630
 青鬼2	아오오니 2	N110			GN						あおおに2	names.747631
@@ -137870,15 +137856,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 黒髪村	구로카미촌	N130	QCTVPl		GN							names.766350
 黒髪爆乳	흑발 폭유	N130	QPNVHn		GN							names.766351
 黒髪王女	흑발 왕녀	N130	QPNVHn		GN							names.766352
-黒髪碧眼	흑발벽안	N110			GN							names.766353
-黒髪紫眼	흑발자안	N110			GN							names.766354
 黒髪美人	흑발미인	N130	QPNVHn	Wb	GN							names.766355
 黒髪美少女	흑발 미소녀	N110			GN							names.766356
 黒髪蜜璃	흑발 미츠리	N130	QPNVHn		GN						くろかみみつり	names.766357
-黒髪赤眼	흑발 적안	N110			GN						こくはつせきがん	names.766358
-黒髪金眼	흑발금안	N130	QPNVHn	Wb	GN							names.766359
 黒髪魔人	흑발마인	N110			GN						くろかみまじん	names.766360
-黒髪黒眼	흑발흑안	N110			GN							names.766361
 黒髭	에드워드 티치	N130	QPNVHn		GN							names.766362
 黒魔人	흑마인	N130	QPNVHn	Wb	GN						こくまじん	names.766363
 黒魔女	흑마녀	N130	QPNVHn	Wb	GN						くろまじょ	names.766364

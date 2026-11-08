@@ -1,0 +1,33 @@
+# 규칙: LEX-5006
+rule	input	expected	kind	layer
+local:別に	　聞いて損のない内容だが、アキラは別にモンスター達の解説を求めた訳ではなかった。	has:딱히 몬스터들의 해설을 요구한 것은 아니었다	fix	local
+local:別に	別にレナは悪くないのだが、取り合えず叩いておくことにする。	has:딱히 레나는 나쁘지 않은데	fix	local
+local:別に	「い、いや、別に……つーか、なんで今日に限って、普通にドアから……」	has:아니, 딱히……	fix	local
+local:別に	「そ、それは……別になにもないけど」	has:딱히 아무것도 없는데	fix	local
+local:別に	別に 楽しくはないけどね。 わたしは 明君の担任として。	has:딱히 즐겁지는 않지만	fix	local
+local:別に	「別に構わない」	has:딱히 상관없어	fix	local
+local:別に	「別にニヤニヤなんてしてないけど？」	has:딱히 히죽히죽은	fix	local
+local:別に	別に何だっていいよそんなの。	has:딱히 뭐든지 좋아	fix	local
+local:別に	　だが、別に悪い奴でもない。	has:딱히 나쁜 놈도 아니다	fix	local
+local:別に	こうして身体を捧げているんだ。その覚悟くらいあるよ。別に絶対孕まないと思っているわけではない	has:딱히 절대	fix	local
+local:別に	これはあくまで一般バトラーに支払われる賞金額です、囚人の方はランク別に賞金額が異なります。	has:랭크별로 상금액이	keep	local
+local:別に	「別に私はあなたに罰を求めてなんか……あら？」	has:딱히 나는	fix	local
+sense:求める	「謝罪を求める」	has:사죄를 요구	keep	senses
+sense:湧く	よくわからないが、確実なのは白崎により興味が湧いたということだ。	has:흥미가 생겼다	fix	senses
+sense:湧く	どうしてなの？ 彼女への興味が湧いた。	has:흥미가 생겼다	fix	senses
+sense:湧く	「つれないですね。私はアラタの事、気に入っていますよ。文句は多いですが、好きに身体をイジらせてくれますから。もう自分の所有物のように愛着が湧いています」	lacks:솟아	fix	senses
+sense:湧く	谷底の石の間から湧く温泉の中へ吾儕は肩まで沈んで、各自放肆に手足を伸ばした。	lacks:생기	keep	senses
+sense:湧く	そんな言葉だけで、私の中に勇気が湧いてくる。	lacks:생기	keep	senses
+sense:湧く	「こうして風見くんや装置の実物を目の前にしたら、急に実感が湧いてきて……」	has:실감이 나	keep	senses
+cx:web-fixes-j:247	それでも聞いてしまえばいろいろ疑問も湧いてくる。	has:의문도 생긴다	fix	rewrites
+cx:web-fixes-j:247	そんで、操られてたまるかってさぁ、唐突に闘志が湧いてきて、部屋の外に飛び出したんだ。	has:투지가 끓어올라	fix	rewrites
+cx:web-fixes-j:247	　どうしてこんな、途方も無い劣等感が湧いてくるんだろう……。	!rule:cx:web-fixes-j:247	keep	rewrites
+cx:web-fixes-j:247	ライバルの力を目にして、ヤル気が湧き上がってきたようだ。	!rule:cx:web-fixes-j:247	keep	rewrites
+dict:w:34665	　アキラの素朴な疑問に、アルファがちょっとした豆知識を教える感覚で答える。	has:토막 상식을	fix	lookup
+dict:w:34665	豆知識を披露する	has:토막 상식을	fix	lookup
+dict:w:34666	多分街の警備の為に生成された個体で、個体差がある	has:개체 차이가	fix	lookup
+dict:w:34666	個体識別番号	lacks:차이	keep	lookup
+cx:betsuni-not:10	「ううん、別に待ってないよっ」	has:딱히 기다리지 않았어	fix	rewrites
+cx:betsuni-not:10	「別に慣れてないよ」	has:딱히 익숙해지지 않았어	fix	rewrites
+cx:betsuni-not:10	別に求めた訳ではなかった。	has:딱히 구한 것은 아니었다	fix	rewrites
+cx:betsuni-not:10	これはあくまで一般バトラーに支払われる賞金額です、囚人の方はランク別に賞金額が異なります。	has:랭크별로	keep	rewrites

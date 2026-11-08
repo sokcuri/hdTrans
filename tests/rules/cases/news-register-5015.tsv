@@ -1,0 +1,25 @@
+# 규칙: LEX-5015
+rule	input	expected	kind	layer
+dict:w:35197	男は現金を盗んだ疑いが持たれている。	has:훔친 혐의를 받고 있다	fix	lookup
+dict:jisjk:10636	殺人の疑いで逮捕された。	has:혐의로 체포되었다	keep	local
+dict:jisjk:10636	疑いの目で見る	has:의심의 눈초리로	keep	local
+dict:jisjk:10636	彼女に疑いを抱いた	has:의심을 품었다	keep	local
+sense:出所	１２月中旬の出所なら刑期満了となる見込み。	has:출소라면	fix	senses
+sense:出所	刑務所を出所した男が再び逮捕された。	has:출소한	keep	senses
+sense:出所	情報の出所は不明だ。	has:정보의 출처는	keep	senses
+dict:w:35198	今年度の売上は前年を上回ると見込んでいる。	has:예상하고 있다	fix	local
+dict:w:35198	彼の才能を見込んで頼んだ	lacks:예상	keep	local
+dict:w:35196	企業に被害防止に取り組むよう働き掛ける。	has:촉구한다	fix	lookup
+dict:w:35196	政府への働き掛けを強める。	has:정부에 대한 요청을	fix	lookup
+pack:argument-senses:5141	円安のあおりを受けて	has:엔저의 여파를	fix	packs
+pack:argument-senses:5145	不況のあおりで倒産した	has:불황의 여파로	fix	packs
+pack:argument-senses:5143	大会を制した。	has:대회를 제패했다	fix	packs
+pack:argument-senses:5143	選挙を制する	has:선거를 제패한다	fix	packs
+pack:argument-senses:5143	感情を制する	has:감정을 억제한다	keep	packs
+dict:w:35190	複数の日中関係筋が明らかにした。	has:소식통이 밝혔다	fix	lookup
+dict:w:35190	政府は方針を明らかにした。	has:방침을 밝혔다	fix	lookup
+dict:w:35190	真相を明らかにする	has:진상을 밝힌다	fix	lookup
+dict:w:35190	事実が明らかになった	lacks:밝혔	keep	lookup
+pack:argument-senses:5141	王女のあおりに、警備が止めてそのまま退場させていた。	has:왕녀의 선동에	keep	packs
+dict:jisjk:266990	首相に働きかけた	has:수상에게 촉구했다	fix	local
+dict:w:35196	何かを伝えようと、変えようと、働きかける。	lacks:촉구	keep	local

@@ -139,7 +139,7 @@ dict:jisjk:265679	歌が歌われた。	노래가 불렸다.	fix	local
 dict:jisjk:265679	歌を歌えません。	노래를 부를 수 없습니다.	fix	local
 dict:jisjk:342596	お読みしますか。	읽습니까.	fix	local
 dict:jisjk:342596	お読みする本です。	읽는 책입니다.	fix	local
-dict:jisjk:267277	兄について行く。	형을 따라 간다.	fix	local
+dict:jisjk:267277	兄について行く。	형을 따라간다.	fix	local
 dict:jisjk:267277	兄について話す。	형에 대해 이야기한다.	fix	local
 dict:jisjk:264571	ご飯できたよ。	밥 다 됐어.	fix	local
 dict:jisjk:264571	友達ができたよ。	!rule:dict:jisjk:264571	keep	local

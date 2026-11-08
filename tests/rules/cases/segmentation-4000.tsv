@@ -1,0 +1,57 @@
+# 규칙: GRM-4000, GRM-4002, GRM-4003, GRM-4004, LEX-5102
+rule	input	expected	kind	layer
+analysis:one-kanji-negative	これも着ないと駄目だよ	has:입지 않으면	fix	analysis
+analysis:one-kanji-negative	二度とあれを着ないと 私に約束してくれ	has:입지 않는다고	fix	analysis
+analysis:one-kanji-negative	同じ服は2度と着ない、セレブのような生活である。	has:입지 않는	fix	analysis
+analysis:one-kanji-negative	え、水着？ 着ないわよ！	has:입지 않아	fix	analysis
+analysis:one-kanji-negative	そんな服は着なかった	그런 옷은 입지 않았다	fix	analysis
+analysis:one-kanji-negative	その映画はまだ観ない	그 영화는 아직 보지 않는다	fix	analysis
+analysis:one-kanji-negative	結局その映画は観なかった	결국 그 영화는 보지 않았다	fix	analysis
+analysis:one-kanji-negative	早く着なきゃ遅れる	빨리 입지 않으면 늦는다	keep	analysis
+analysis:one-kanji-negative	服が一着もない	옷이 한 벌도 없다	keep	analysis
+analysis:one-kanji-negative	着ません	입지 않습니다	keep	analysis
+analysis:one-kanji-negative	外に出ないで待ってて	has:나오지 않고	keep	analysis
+segment:te-no	倒れてのたうち回った。	쓰러져 몸부림쳐 다녔다.	fix	analysis
+segment:te-no	走ってのたうち回る	달려 몸부림쳐 다닌다	fix	analysis
+segment:te-no	帰ってのんびりする	돌아가 빈둥거린다	keep	analysis
+segment:te-no	来てのお楽しみ	has:온	keep	analysis
+segment:te-no	初めてのこと	첫 일	keep	analysis
+normalize:kana-nee	お前は見つからねえって言うが	너는 발견되지 않는다고 말하지만	fix	normalize
+normalize:kana-nee	どうしても助からねえ	아무래도 살아나지 않는다	fix	normalize
+normalize:kana-nee	ですからねえ	lacks:않	keep	normalize
+normalize:kana-nee	東京からねえ	lacks:않	keep	normalize
+normalize:kana-nee	君ならねぇ	너라면	keep	normalize
+constraint:tai-stem-before-me	詩音はだいぶ長いことためらった後、……白状するように言った。	has:망설인 후	fix	lookup
+constraint:tai-stem-before-me	《はじめは ｱｲﾄﾞﾙになることも ためらっていた私だったけど	has:망설이던	fix	lookup
+constraint:tai-stem-before-me	ためらうことなく、会長の手を握る。	has:망설이는 일 없이	fix	lookup
+constraint:tetai-stem-before-me	ためらわれた	망설여졌다	fix	lookup
+constraint:tai-stem-before-me	ためして	시험해	keep	lookup
+constraint:tai-stem-before-me	行きたい	가고 싶다	keep	lookup
+constraint:tai-stem-before-me	力をためた	힘을 모아 두었다	keep	lookup
+lexical:reading	試合でもこれがまかり通る。	시합에서도 이것이 버젓이 통한다.	fix	lookup
+lexical:reading	天下の第四駆逐隊、まかり通る！ くらえっ！	has:버젓이 통한다	fix	lookup
+lexical:reading	子爵に任じられておるが、	has:임명되	fix	lookup
+lexical:reading	任を解く	임무를 푼다	keep	lookup
+lexical:reading	倒さなきゃいけないんだ！	쓰러뜨려야 해!	fix	lookup
+lexical:reading	「やはりあなたを倒さないといけないんですね。あまり気乗りはしませんが」	has:쓰러뜨려야 하네요	fix	lookup
+lexical:reading	動きができるなら、	움직임이 생긴다면,	fix	lookup
+lexical:reading	動きが鈍い	움직임이 둔하다	keep	lookup
+lexical:reading	１年も経たない内に	1년도 지나기도 전에	fix	lookup
+lexical:reading	暗くならないうちに帰ろう	어두워지기 전에 돌아가자	keep	lookup
+constraint:shikamo-before-motanai	一分ほどしかもたなかった。	has:정도밖에	fix	lookup
+constraint:shikamo-before-motanai	しかも高い	게다가 높다	keep	lookup
+constraint:hai-before-ttai	俺はいったいどうなって何者になったのだろうか？	has:나는 도대체	fix	lookup
+constraint:hai-before-ttai	部屋にはいった	방에 들어갔다	keep	lookup
+constraint:jinchi-before-ri	あの人知り合いなんですか？	has:그 사람 아는 사람	fix	lookup
+constraint:jinchi-before-ri	人知を超える	사람의 지혜를 넘는다	keep	lookup
+constraint:nitsuke-before-ending	地面につけずに	has:붙이지 않고	fix	lookup
+constraint:nitsuke-before-ending	何かにつけ文句を言う	걸핏하면 불평한다	keep	lookup
+constraint:toba-before-kari	付け合せも気にはなるが、まずはメインをとばかりに、皿の上に乗ったそれにナイフを入れる。	has:라는 듯이	fix	lookup
+constraint:toba-before-kari	その後も、一発の威力が小さいなら数を撃て、とばかりに度々面会に来てたので	has:라는 듯이	fix	lookup
+constraint:toba-before-kari	ここぞとばかりに	이때다 하고	keep	lookup
+constraint:nioi-before-oide	部屋においで	방으로 와	fix	lookup
+constraint:nioi-before-oide	"塔へ遊びにおいで" "ジム・モリアーティ"	has:놀러 와	fix	lookup
+constraint:nioi-before-oide	汗のにおいで目が覚めた	has:냄새로	keep	lookup
+constraint:nioi-before-oide	そのにおいで、	그 냄새로,	keep	lookup
+constraint:tarou-after-tsu	１０歳の時もそうだったろう、とばかりにサンチェスが納得している。	lacks:타로	fix	lookup
+constraint:tarou-after-tsu	太郎だったろう	타로였을 것이다	keep	lookup

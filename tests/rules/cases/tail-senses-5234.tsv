@@ -1,0 +1,24 @@
+# 규칙: LEX-5234
+rule	input	expected	kind	layer
+dict:tail-5234	その願い虚しく、彼は倒れた	has:바람도 헛되이	fix	lookup
+dict:tail-5234	脂肪太りの体	has:지방형 비만	fix	lookup
+dict:tail-5234	鳥居をこえる	has:도리이를	fix	lookup
+dict:tail-5234	価格が破格な上に	has:파격적인	fix	lookup
+dict:tail-5234	扉が閉まり切る直前で	has:완전히 닫히기	fix	lookup
+dict:tail-5234	階級敵？	has:계급의 적	fix	lookup
+dict:tail-5234	霞がかった頭で考える	has:흐릿해진 머리	fix	lookup
+dict:tail-5234	この下賤な奴らめ	has:천한 놈들	fix	lookup
+dict:tail-5234	万年床の中で	has:늘 깔아 둔 이부자리	fix	lookup
+dict:tail-5234	昔の彼を彷彿させる	has:연상시킨다	fix	lookup
+dict:tail-5234	応援する張り合いがない	has:보람이 없다	fix	lookup
+dict:tail-5234	銘柄米を買う	has:브랜드 쌀	fix	lookup
+dict:tail-5234	外出禁止を延長した	has:외출 금지를	fix	lookup
+dict:tail-5234	初乗り運賃が上がる	has:기본 운임	fix	lookup
+dict:tail-5234	上振れリスクがある	has:상방 리스크	fix	lookup
+dict:tail-5234	紙巻きたばこを吸う	has:궐련을	fix	lookup
+dict:tail-5234	難しい役どころ	has:어려운 역할	fix	lookup
+dict:tail-5234	画づくりにこだわる	has:화면 구성	fix	lookup
+dict:tail-5234	紅ズワイガニを食べた	has:붉은대게	fix	lookup
+dict:tail-5234	猫の鳴きまね	has:울음소리 흉내	fix	lookup
+dict:tail-5234	目下の者に優しい	has:아랫사람	keep	lookup
+dict:tail-5234	この花は虫除けとしての効き目があり、広く使われていた。	has:방충으로서	keep	lookup

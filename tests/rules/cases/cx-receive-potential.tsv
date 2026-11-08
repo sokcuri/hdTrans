@@ -17,7 +17,7 @@ cx:receive-potential:5	手伝ってもらえますか？	도움을 받을 수 �
 cx:receive-potential:5	手伝ってもらえない？	도움을 받을 수 없어?	keep	rewrites
 cx:receive-potential:5	教えてもらえるか？	가르쳐 줄 수 있을까?	keep	rewrites
 cx:receive-potential:5	それ信じてもらえると思う…？	그것 믿어 줄 수 있다고 생각해…?	keep	rewrites
-cx:receive-potential:10	こんなに一生懸命やってもらえるとは思わなかった	이렇게 열심히 해 줄 수 있다고는 생각하지 않았다	keep	rewrites
+cx:receive-potential:10	こんなに一生懸命やってもらえるとは思わなかった	이렇게 열심히 해 줄 수 있을 줄은 생각하지 못했다	keep	rewrites
 cx:receive-potential:10	だけど町で働かせてもらえるところはどこにもないこと。	하지만 마을에서 일하게 해 줄 수 있는 곳은 어디에도 없는 것.	keep	rewrites
 cx:receive-potential:10	あの、手伝ってもらえませんか	저, 도움을 받을 수 없습니까	keep	rewrites
 cx:receive-potential:5	教えてもらえるかな？	가르쳐 줄 수 있을까?	keep	rewrites

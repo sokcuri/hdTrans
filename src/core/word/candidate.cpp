@@ -512,6 +512,19 @@ bool CopulaFollows(std::string_view s) {
     return false;
 }
 
+// Whether a verdict of word.copula-verdict may stand after the text before it: at the start, after a
+// mark (、 「 …) or a space, or after a particle of particle.before-verdict (それもありだな, それってありなの);
+// after any other word it is that word's label of being there or not (駐車場ありだ, あなたなしじゃ).
+bool VerdictPlace(std::string_view before) {
+    while (!before.empty() && text::IsSpace(DecodeLastRune(before).cp)) before.remove_suffix(DecodeLastRune(before).size);
+    if (before.empty()) return true;
+    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("particle.before-verdict"))) {
+        if (before.ends_with(p)) return true;
+    }
+    const char32_t r = DecodeLastRune(before).cp;
+    return !text::IsLetter(r) && !text::IsDigit(r);
+}
+
 // An adverb or a noun of word.copula-predicate is its adjectival noun before a copula, an adnominal
 // な or a question か (ばっちりだ 완벽하다, アリなのか 괜찮은 건가): the adjectival noun records of the
 // key go first, and the others stay behind them for an ending they do not take.
@@ -534,6 +547,85 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
         } else {
             *backTail = r;
             backTail = &r->child;
+        }
+        r = next;
+    }
+    *frontTail = back;
+    return front != nullptr ? front : back;
+}
+
+// The adjectival noun records of a verdict of word.copula-verdict read only before a copula, an
+// adnominal な or a question か and in a VerdictPlace (それもありだな 그것도 괜찮네); elsewhere they are
+// left out when other records remain (駐車場ありだ, 関係ありません, 許可無しに, ありそう).
+Record* VerdictsInPlace(Record* records, std::string_view before, std::string_view text) {
+    const auto stray = [&](const Record* r) {
+        if (At(r->partCode, 1) != '8' || !dict::InClass(HDTRANS_CLASS("word.copula-verdict"), r->source)) return false;
+        const std::string_view after = text.substr(std::min(text.size(), r->source.size()));
+        // A bare question か after one of word.verdict-asks-there asks whether the thing is there
+        // (所持品は無しか); かな, かも and the copula still give the verdict (それもなしかな).
+        const bool asks = after.starts_with("か") && !CopulaFollows(after.substr(std::string_view("か").size())) &&
+                          !after.starts_with("かな") && !after.starts_with("かよ") && !after.starts_with("かも") &&
+                          !after.starts_with("かしら") && dict::InClass(HDTRANS_CLASS("word.verdict-asks-there"), r->source);
+        // A sentence-final な after it is no copula of the verdict (デートはナシな).
+        const bool finalNa = after.starts_with("な") && !after.starts_with("なの") && !after.starts_with("なん");
+        return asks || finalNa || !(CopulaFollows(after) && VerdictPlace(before));
+    };
+    bool any = false;
+    bool others = false;
+    for (const Record* r = records; r != nullptr; r = r->child) (stray(r) ? any : others) = true;
+    if (!any || !others) return records;
+    Record* kept = nullptr;
+    Record** tail = &kept;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!stray(r)) {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = next;
+    }
+    return kept;
+}
+
+// LEX-5000: a kana noun of word.adjective-noun-lead spells an adjective and a formal noun (いいわけ: いい + わけ).
+// Before a predicate ending (じゃ, では, で, だ, です, ない, ある, ね, よ, か, が or も before ない or ある, a stop or
+// the end) and not after a modifier (の, な, という), the noun records of the key go behind the others, so the
+// adjective and its pattern read there (すればいいわけ？ 하면 되는 거?, いいわけがない 좋을 리가 없다); 男のいいわけ,
+// いいわけを keep the noun.
+Record* AdjectiveOverKanaNoun(Record* records, std::string_view before, std::string_view text) {
+    if (records == nullptr || records->user != nullptr ||
+        !dict::InClass(HDTRANS_CLASS("word.adjective-noun-lead"), records->source) || !text.starts_with(records->source)) {
+        return records;
+    }
+    while (!before.empty() && text::IsSpace(DecodeLastRune(before).cp)) before.remove_suffix(DecodeLastRune(before).size);
+    if (before.ends_with("の") || before.ends_with("な") || before.ends_with("という") || before.ends_with("っていう")) {
+        return records;
+    }
+    const std::string_view key = records->source;
+    std::string_view after = text.substr(key.size());
+    if (after.starts_with("が") || after.starts_with("も")) {
+        after.remove_prefix(text::DecodeRune(after).size);
+        if (!after.starts_with("な") && !after.starts_with("あ")) return records;
+    }
+    bool predicate = after.empty() || RuneIn(text::DecodeRune(after).cp, "。、！？!?…‥―ー～」』）) 　");
+    for (const std::string_view c : {"じゃ", "では", "で", "だ", "です", "でし", "な", "あ", "ね", "よ", "か"}) {
+        predicate = predicate || after.starts_with(c);
+    }
+    if (!predicate) return records;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == key && At(r->partCode, 1) == '1') {
+            *backTail = r;
+            backTail = &r->child;
+        } else {
+            *frontTail = r;
+            frontTail = &r->child;
         }
         r = next;
     }
@@ -677,6 +769,99 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
         r = next;
     }
     if (front == nullptr) return records;
+    *frontTail = back;
+    return front;
+}
+
+// LEX-5106: where the longest word at a point of a kanji run ends inside the run and the rest of the
+// run, read word by word, takes more words than a cover that starts with a shorter word (米中 + 間選 +
+// 挙 against 米 + 中間選挙; 敵機 + 動 + 部隊 against 敵 + 機動部隊), the first word of the cover with the
+// fewest words goes first; of those covers the one whose first word is longest. A piece is a dictionary
+// key of two or more kanji found at a point of the run, or one kanji; a piece that starts with 々 counts
+// as two, as 々 repeats the kanji before it (江戸 + 家 + 代々, not 家代 + 々), and so does a piece with 々
+// that the dictionary reads only as a name (親睦会 + 々 + 場, not 親睦 + the name 会々 + 場). A run from a
+// kanji digit or 第 is left to the readings of numbers. A plain word with force keeps its place, and so
+// does every word of a run longer than 16 kanji. A first word of one kanji is also read as that kanji
+// where its rows do not read there (軽 of 軽乗用車, an adjective stem). records holds the words at
+// full[cursor:], longest first.
+Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, std::size_t cursor, int token) {
+    constexpr std::size_t kMaxRun = 16;
+    if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    cursor = std::min(cursor, full.size());
+    const std::string_view text = full.substr(cursor);
+    if (text.empty() || !text::IsKanji(text::DecodeRune(text).cp) || text.starts_with("々") || IsNumeral(FirstChar(text)) ||
+        text.starts_with("第")) {
+        return records;
+    }
+    std::vector<std::size_t> bounds{0};
+    for (std::string_view s = text; !s.empty() && bounds.size() <= kMaxRun + 1;) {
+        const text::Rune r = text::DecodeRune(s);
+        if (!text::IsKanji(r.cp)) break;
+        bounds.push_back(bounds.back() + r.size);
+        s.remove_prefix(r.size);
+    }
+    const std::size_t n = bounds.size();
+    std::size_t greedy = 0;
+    for (const Record* r = records; r != nullptr; r = r->child) greedy = std::max(greedy, r->source.size());
+    if (n < 4 || n > kMaxRun + 1 || greedy >= bounds.back() || !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+        return records;
+    }
+    // ends[i]: the indexes in bounds of the ends of the pieces at bounds[i]; names: i * n + j of the
+    // pieces from bounds[i] to bounds[j] that the dictionary reads only as a name (N130).
+    std::vector<std::vector<std::size_t>> ends(n);
+    std::vector<std::size_t> names;
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        ends[i].push_back(i + 1);
+        if (i + 2 >= n) continue;
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
+        for (std::size_t j = i + 2; j < n; j++) {
+            bool any = false, name = true;
+            for (const dict::Candidate& c : found.list) {
+                if (c.source.size() != bounds[j] - bounds[i] || c.codes == nullptr) continue;
+                any = true;
+                name = name && c.codes->partText == "N130";
+            }
+            if (any) ends[i].push_back(j);
+            if (any && name) names.push_back(i * n + j);
+        }
+    }
+    // A piece costs one; one that starts with 々, or a name with 々 in it, costs two.
+    auto cost = [&](std::size_t i, std::size_t j) {
+        const std::string_view piece = text.substr(bounds[i], bounds[j] - bounds[i]);
+        const bool name = Has(piece, "々") && std::find(names.begin(), names.end(), i * n + j) != names.end();
+        return piece.starts_with("々") || name ? 2 : 1;
+    };
+    // fewest[i]: the fewest pieces, by cost, of a cover of the run from bounds[i].
+    constexpr int kNone = 1 << 20;
+    std::vector<int> fewest(n, kNone);
+    fewest[n - 1] = 0;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const std::size_t j : ends[i]) fewest[i] = std::min(fewest[i], fewest[j] + cost(i, j));
+    }
+    std::size_t greedyEnd = 0;
+    while (bounds[greedyEnd] != greedy) greedyEnd++;
+    if (fewest[greedyEnd] + cost(0, greedyEnd) <= fewest[0]) return records;
+    std::size_t chosen = 0;
+    for (const std::size_t j : ends[0]) {
+        if (fewest[j] + cost(0, j) == fewest[0]) chosen = std::max(chosen, bounds[j]);
+    }
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = r->source.size() == chosen ? frontTail : backTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    if (text::DecodeRune(text).size == chosen) {
+        *frontTail = worker.CreateSyntheticRecord(token, text.substr(0, chosen), false);
+        frontTail = &(*frontTail)->child;
+    }
+    if (front == nullptr) return back;
     *frontTail = back;
     return front;
 }
@@ -2423,6 +2608,146 @@ const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// Whether s starts with two hiragana.
+bool TwoKanaLead(std::string_view s) {
+    const std::size_t one = FirstChar(s).size();
+    return one != 0 && one < s.size() && AllHiragana(s.substr(0, one + FirstChar(s.substr(one)).size()));
+}
+
+// LEX-5115: a word written in hiragana is read whole where it starts a word, not as shorter readings and the kana
+// after them (しわを 주름을, not し + わ + を; かまいたちが, not か + まい + たち; たしかめて 확인해, not たしか + め +
+// て). The word is a noun row that ends a word (at a particle, a mark, a copula, a character other than hiragana or
+// the end), or a verb whose form reads at full[cursor:]; it starts with two hiragana and is longer than the first
+// record, a verb, an adjective, an adjectival noun, an adverb or a particle. It goes first when it starts a word (the
+// start of the token, after a character other than hiragana or kanji, after a particle, or after a noun of two
+// characters or more written in kanji) and when the reading of the first record and the words read after it one by
+// one end where the word ends, in three words or more, or in two of which one is a single kana or the first a verb's
+// bare continuative, or, for a noun, no word reads on before it ends. A reading that reads as far, words that run past the end of the word, two longer words (いいこと:
+// いい + こと, not いいこ + と), after a particle fewer than two content words (から + だ, not からだ), or a longer
+// record (しれいかんさま) keep their place. Plain-dictionary records stay in front.
+Record* Worker::KanaWordFirst(std::string_view full, int cursor, int token, Record* records, const Item* parent) {
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) first = first->child;
+    if (first == nullptr || NounRow(*first)) return records;
+    const std::string_view text = From(full, cursor);
+    if (NameClassOf(FirstChar(text)) != kClassHiragana) return records;
+    // One kanji before is mostly the stem of a verb or an adjective (分かんねん, 良かったんだ).
+    if (const int before = cursor > 0 ? NameClassOf(LastChar(full.substr(0, static_cast<std::size_t>(cursor)))) : kClassOther;
+        before == kClassHiragana || before == kClassKanji) {
+        if (parent == nullptr || parent->detail == nullptr || parent->detail->cls == kDetailVerb) return records;
+        if (before == kClassHiragana && !dict::InClass(HDTRANS_CLASS("particle.verb-boundary"), parent->group->surface)) {
+            return records;
+        }
+        if (before == kClassKanji && (At(parent->Code(0), 0) != '1' || text::RuneCount(parent->group->surface) < 2)) return records;
+    }
+    const char lead = At(first->partCode, 1);
+    if (lead != '2' && lead != '3' && lead != '4' && lead != '7' && lead != '8') return records;
+    const Item* read = InsertLateCandidate(full, cursor, token, first);
+    if (read == nullptr || read->detail == nullptr) return records;
+    // The word: the longest noun row that ends a word, or after an adverb or adjectival noun the longest verb form.
+    // A reading of that adverb or adjectival noun that runs into the verb's stem gives way to the verb (たしか + め of
+    // たしかめて), unless it took an ending of its own there (にぎやかに + なって 떠들썩해져).
+    const std::size_t leadSize = first->source.size();
+    const bool runsOn = read->length > static_cast<int>(leadSize);
+    // The same holds for an ending that follows the reading (たっぷり + と + した 듬뿍 담긴, not たっぷりとした).
+    if (lead == '3' || lead == '8') {
+        const std::string_view after = text.substr(runsOn ? leadSize : static_cast<std::size_t>(read->length));
+        for (const std::string_view e : {"に", "な", "で", "だ", "と", "の"}) {
+            if (after.starts_with(e)) return records;
+        }
+    }
+    std::string_view word;
+    char kind = 0;
+    int stop = 0;
+    for (Record* r = first->child; r != nullptr; r = r->child) {
+        if (r->user != nullptr || !text.starts_with(r->source) || !TwoKanaLead(r->source)) continue;
+        int end = 0;
+        if (lead == '3' || lead == '8') {
+            if (At(r->partCode, 1) != '4' || read->length > static_cast<int>(r->source.size())) continue;
+            const Item* verb = InsertLateCandidate(full, cursor, token, r);
+            // The verb with an ending of its own (たしかめて), not its bare stem (あらため、).
+            if (verb == nullptr || verb->detail == nullptr || verb->detail->cls != kDetailVerb || verb->group->surface != r->source ||
+                verb->length <= static_cast<int>(r->source.size()) ||
+                NameClassOf(FirstChar(text.substr(r->source.size()))) != kClassHiragana) {
+                continue;
+            }
+            end = cursor + verb->length;
+        } else if (NounRow(*r)) {
+            const std::string_view after = text.substr(r->source.size());
+            if (NameClassOf(FirstChar(after)) == kClassHiragana && !NounEnd(after) && !NounGoesOn(snapshot, after)) continue;
+            end = cursor + static_cast<int>(r->source.size());
+        } else {
+            continue;
+        }
+        if (end > stop) {
+            word = r->source;
+            kind = At(r->partCode, 1);
+            stop = end;
+        }
+    }
+    const bool verbWord = kind == '4' && runsOn;
+    if (word.empty() || cursor + read->length >= stop) return records;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > word.size() && text.starts_with(r->source) && cursor + static_cast<int>(r->source.size()) > stop) return records;
+    }
+    auto oneKana = [&](int at, int length) {
+        const std::string_view piece = From(full, at).substr(0, static_cast<std::size_t>(length));
+        return text::RuneCount(piece) == 1 && AllHiragana(piece);
+    };
+    int at = cursor + read->length;
+    int words = 1;
+    int content = 0;
+    bool broken = false;
+    bool single = lead != '2' && oneKana(cursor, read->length);
+    while (at < stop) {
+        if (words >= 6) return records;
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        const Item* next = l.count == 0 ? nullptr : InsertLateCandidate(full, at, token, l.records);
+        if (next == nullptr || next->length <= 0) {
+            broken = true;
+            break;
+        }
+        const bool contentWord = !AnyOf("256", At(next->Code(0), 0));
+        single = single || (contentWord && oneKana(at, next->length) && !From(full, at).starts_with("ん"));
+        content += contentWord;
+        at += next->length;
+        words++;
+    }
+    // A verb in its bare continuative takes no noun after it (かまい + たち of かまいたち).
+    const bool stem = read->detail->cls == kDetailVerb && read->detail->kind == 10 &&
+                      (read->detail->group == nullptr || read->detail->group->length <= 0) && !oneKana(cursor, read->length);
+    // Words that run past the end of the word by as much as the word and the word after it do are a tie, which a
+    // single kana breaks for the word (しわが: し + わが, not before しわ + が).
+    if (at > stop && single && !broken) {
+        const Lookup l = DoLookup(From(full, stop), kModeGeneral);
+        const Item* next = l.count == 0 ? nullptr : InsertLateCandidate(full, stop, token, l.records);
+        if (next != nullptr && stop + next->length == at) at = stop;
+    }
+    if (!verbWord && !(broken && kind != '4') && (at > stop || (words < 3 && !single && !stem) || (lead == '2' && content < 2))) return records;
+    Record* owned = nullptr;
+    for (Record* r = records; r != first; r = r->child) owned = r;
+    Record* front = nullptr;
+    Record* rest = nullptr;
+    Record** frontTail = &front;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == word && At(r->partCode, 1) == kind) {
+            *frontTail = r;
+            frontTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *frontTail = rest;
+    if (owned == nullptr) return front;
+    owned->child = front;
+    return records;
+}
+
 // LEX-4984: at the end of the retry budget, where a word starts at cursor (no reading from before it runs past it) and
 // the reading that failed is no verb, the longest reading among the records left at cursor after c's group that is
 // longer than c and ends at the end of the token or where a word of two or more characters, or one that starts with
@@ -2474,7 +2799,9 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
+    if (settings.text) records = VerdictsInPlace(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
+    if (settings.text) records = AdjectiveOverKanaNoun(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
@@ -2487,7 +2814,9 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
+    if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
     if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+    if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;

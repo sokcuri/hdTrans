@@ -139,13 +139,16 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   `vcvarsall`로 MSVC 환경을 설정합니다. 네이티브 프리셋은 `HDTRANS_DICTS=dicts`로 `ctest`를 실행하고, `wasm`은
   Node로 `tools/wasm_smoke.mjs`를 실행해 작은 사전으로 한 번 번역해 봅니다(셋째 인자로 그 사전을
   컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
-  ([testing.md](testing.md#ci)). 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
+  ([testing.md](testing.md#ci)). 풀 리퀘스트의 `windows-x86`은 단위 테스트와 `rules.critical`, `rules.drops` 같은
+  나머지 검사를 돌리고, 데이터만 읽는 규칙 사례 묶음(`rules.cases.*`, `rules.variants`, `rules.packs*`, `examples`)은
+  빼고 돌립니다. 그 묶음은 `linux`가 모든 풀 리퀘스트에서 돌리고, `windows-x86`은 push에서 전부 돌립니다. 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
 - Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
   [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트, push, 예약 실행에서 matrix와 함께 돕니다. 풀 리퀘스트의
   `linux-asan`은 `hdtrans_tests`와 CLI만 빌드하고 단위 테스트(`unit.engine.megabyte` 제외), `rules.critical`,
   예문만 돌립니다. 규칙 사례는 `linux`가 sanitizer 없이 돌리고, 나머지는 push와 예약 실행이 sanitizer로 돌립니다.
-- Build의 `linux-perf` 작업은 풀 리퀘스트에서 `linux` 빌드의 [성능 예산](#성능-예산)을 잽니다. 알리기만 하고
-  run을 실패시키지 않으며 `ci-ok`가 기다리지 않습니다.
+- Build의 `linux-perf` 작업은 `linux` 빌드의 [성능 예산](#성능-예산)을 잽니다. 수동 실행, `perf` 라벨이 붙은
+  풀 리퀘스트, `develop` → `main` 승격 풀 리퀘스트에서만 돕니다. 라벨은 run이 시작될 때 읽으므로 라벨을 붙인 뒤
+  push해야 돕니다. 알리기만 하고 run을 실패시키지 않으며 `ci-ok`가 기다리지 않습니다.
 - 예약 실행은 `develop`에서 `linux-asan` 전체와 긴 무작위 퍼징만 돌리고, 패키지나 릴리스를 만들지 않습니다.
   push와 다른 동시 실행 그룹이라 `develop` push를 막거나 취소하지 않습니다.
 - Build의 `ci-ok` 작업은 풀 리퀘스트와 push에서 항상 돌고, `gate`가 성공하지 않았거나 테스트 작업 하나가
@@ -225,7 +228,8 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   많은 행은 `over:`, 1% 넘게 적은 행은 `under:`로 시작하는 줄을 더합니다. 기준 빌드를 재지 못하면 이 빌드의 수만
   적습니다. 종료 코드는 잰 경우 늘 0이고, 이 빌드를 재지 못하면(멈춤 포함) 2입니다. `--measure CLI DICTS`는 한
   빌드의 수만 출력합니다. `--base`를 주지 않으면 develop과의 병합 기준 커밋을 씁니다.
-- 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux-perf` 작업은 PR에서 같은 run의 `linux`
+- 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux-perf` 작업은 PR(`perf` 라벨이나 승격 PR)과
+  수동 실행에서 같은 run의 `linux`
   빌드와 기준 커밋(PR 빌드가 병합한 기준 브랜치의 커밋, 곧 병합 커밋의 첫 부모)의 linux 빌드를 같은 러너에서 함께
   재고, 표를 작업 요약에 적습니다. 1% 넘게 많은 행과 인프라 문제는 경고가 됩니다. 시간을 넘기거나 실패해도
   run은 통과하고, `ci-ok`는 이 작업을 기다리지 않습니다.
@@ -234,8 +238,8 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
     올라갑니다), 없으면 같은 트리를 기록한 `tested-tree-<트리>` run의 아티팩트를 씁니다.
   - push Build가 아직 돌고 있으면 30초마다 다시 보며 10분까지 기다립니다.
   - 그래도 없거나 컴파일러가 다르면 그 커밋을 작업 안에서 빌드합니다. 빌드도 실패하면 이 빌드의 수만 적고 경고합니다.
-- push에서는 재지 않습니다. develop → main 승격 PR의 표가 릴리스 주기 전체의 변화이고, 크게 늘었으면 릴리스
-  리뷰에서 살펴봅니다.
+- push와 보통의 PR에서는 재지 않습니다. develop → main 승격 PR의 표가 릴리스 주기 전체의 변화이고, 크게 늘었으면
+  릴리스 리뷰에서 살펴봅니다. 한 PR의 성능을 보려면 `perf` 라벨을 붙이고 push합니다.
 - 로컬에서 따로 잴 필요는 없습니다. 경고를 다시 보려면 `linux-perf` 작업만 다시 실행합니다. 같은 빌드의 수는 다시
   재도 같습니다.
 

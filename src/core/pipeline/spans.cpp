@@ -138,14 +138,14 @@ Match DrawlSpan(std::string_view s) {
     return {};
 }
 
-// An emphasis mark: kEmphasisOpen and kStressMark open a span, kEmphasisClose, kLengthenMark
-// and a run of kDrawnMark or a cry mark (output::IsCryMark), with the kClipMark of a clipped one,
+// An emphasis mark: kEmphasisOpen and kStressMark open a span, kEmphasisClose and a run of
+// kLengthenMark, kDrawnMark or a cry mark (output::IsCryMark), with the kClipMark of a clipped one,
 // close one.
 Match EmphasisSpan(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
     if (r.cp == kEmphasisOpen || r.cp == output::kStressMark) return {r.size, output::SpanOpen};
-    if (r.cp == kEmphasisClose || r.cp == kLengthenMark || r.cp == output::kSilentComma) return {r.size, output::SpanClose};
-    if (r.cp == output::kDrawnMark || output::IsCryMark(r.cp)) {
+    if (r.cp == kEmphasisClose || r.cp == output::kSilentComma) return {r.size, output::SpanClose};
+    if (r.cp == kLengthenMark || r.cp == output::kDrawnMark || output::IsCryMark(r.cp)) {
         size_t n = 0;
         while (n < s.size() && text::DecodeRune(s.substr(n)).cp == r.cp) n += r.size;
         if (n < s.size() && text::DecodeRune(s.substr(n)).cp == output::kClipMark) n += text::DecodeRune(s.substr(n)).size;

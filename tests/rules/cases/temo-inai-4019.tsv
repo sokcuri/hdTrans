@@ -1,0 +1,28 @@
+# 규칙: GRM-4019
+rule	input	expected	kind	layer
+cx:temo-inai:10	「うん。明日の予定だったから、まだ書いても出してもいない」	「응. 내일 예정이었으니까, 아직 쓰지도 내지도 않았어」	fix	rewrites
+cx:temo-inai:10	読んでも見てもいない。	읽지도 보지도 않았다.	fix	rewrites
+cx:temo-inai:10	食べても飲んでもいないのに、	먹지도 마시지도 않았는데,	fix	rewrites
+cx:temo-inai:10	押しても引いても扉は開かない。	눌러도 당겨도 문은 열리지 않는다.	keep	rewrites
+cx:temo-inai:10	「勝っても負けても恨みっこなしなのよ？」	!rule:cx:temo-inai:10	keep	rewrites
+cx:temo-inai:20	ついに、やってもいないことをズルいと言われてしまった……。	마침내, 하지도 않은 것을 치사하다는 말을 들어버렸다…….	fix	rewrites
+cx:temo-inai:20	聞いてもいないのに喋りだした。	has:듣지도 않았는데	fix	rewrites
+cx:temo-inai:20	千莉の息は乱れてもいない。	has:흐트러지지도 않았다	fix	rewrites
+cx:temo-inai:20	なぜ諦めるんですか？試してもいないのに	왜 포기합니까? 시험하지도 않았는데	fix	rewrites
+cx:temo-inai:20	泣き喚きもしないし、怯えてもいない。	울며 아우성치지도 않고, 무서워하지도 않았다.	fix	rewrites
+cx:temo-inai:20	信じてもいない事を言わないで下さい。	믿지도 않은 말을 말하지 마세요.	fix	rewrites
+cx:temo-inai:20	愛してもいない男との 生活で行き詰まって	has:사랑하지도 않은 남자	fix	rewrites
+cx:temo-inai:20	自分が病気になるなんて 思ってもいなかったもんな。	has:생각하지도 않았잖아	fix	rewrites
+cx:temo-inai:20	どこを捜してもいないよ。	!rule:cx:temo-inai:20	keep	rewrites
+cx:temo-inai:20	濡れてもいなければ寒くもありません。	!rule:cx:temo-inai:20	keep	rewrites
+cx:temo-inai:30	まだ書いても出してもいません。	has:쓰지도 내지도 않	fix	rewrites
+cx:temo-inai:30	ここにはいません。	!rule:cx:temo-inai:30	keep	rewrites
+cx:temo-inai:40	準備してた頃は、香々祭をしてくれるなんて思ってもいませんでしたから	has:생각하지도 않았으니까	fix	rewrites
+cx:temo-inai:40	まだ見てもいません。	has:보지도 않	fix	rewrites
+cx:temo-inai:40	まだ見ていません。	!rule:cx:temo-inai:40	keep	rewrites
+dict:jisjk:138602	　いてもいなくても驚きはしない。	has:있어도 없어도	fix	local
+dict:jisjk:138602	「なら、羊飼いなんていてもいなくても一緒じゃない」	has:있어도 없어도	fix	local
+dict:jisjk:138602	どうせ売れなかっただろうし いてもいなくても一緒だ。	has:있어도 없어도	fix	local
+dict:jisjk:138602	肉も魚も食べない。	고기도 생선도 먹지 않는다.	keep	local
+cx:temo-inai:20	よっぽど不勉強か、都合良く忘れ去ってでもいない限り。	!rule:cx:temo-inai:20	keep	rewrites
+cx:temo-inai:40	遠慮してもいませんよ。	!rule:cx:temo-inai:40	keep	rewrites

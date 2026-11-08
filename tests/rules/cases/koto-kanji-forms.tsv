@@ -33,7 +33,7 @@ normalize:spelling-variant	「そんな事まで調べてるんですか！？�
 normalize:spelling-variant	そんな事を何故考えていたかというと、	그런 일을 왜 생각하고 있었는가라고 하면,	keep	normalize
 normalize:spelling-variant	「このまま何事もなければいいけれど」	「이대로 아무 일도 없으면 좋지만」	keep	normalize
 normalize:spelling-variant	今日も何事も無くて、本当に良かった。	오늘도 아무 일도 없어서, 정말 좋았다.	keep	normalize
-normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐 손해 볼 일은 없다」	keep	normalize
+normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐서 손해 볼 일은 없다」	keep	normalize
 normalize:spelling-variant	「大丈夫大丈夫、ただの考え事だから」	「괜찮아 괜찮아, 그냥 생각이니까」	keep	normalize
 normalize:spelling-variant	しれー、わたしに隠し事とかよくない。	사령관님, 나에게 비밀사항이라든지 좋지 않다.	keep	normalize
 normalize:spelling-variant	ちょっとした頼み事があるのだけれど、	약간의 부탁이 있는데,	keep	normalize
@@ -45,10 +45,10 @@ normalize:spelling-variant	これが魔力を消耗したと言う事なのだ�
 normalize:spelling-variant	下と言う事はないだろうが、そう年上にも見えない。	아래라는 일은 없을 테지만, 그렇게 연상에도 안 보인다.	keep	normalize
 normalize:spelling-variant	全力で見なかった事にした。	전력으로 못 본 척했다.	keep	normalize
 normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
-normalize:spelling-variant	信じてもいない事を言わないで下さい。	믿지 않은 말을 말하지 마세요.	keep	normalize
+normalize:spelling-variant	信じてもいない事を言わないで下さい。	믿지도 않은 말을 말하지 마세요.	keep	normalize
 normalize:spelling-variant	「？　何かおかしな事を言ったか？」	「? 뭔가 이상한 말을 말했나?」	keep	normalize
-normalize:spelling-variant	小さな私の事も…覚えていてくださいね。	작은 제 일도…기억하고 있어 주세요.	keep	normalize
-normalize:spelling-variant	なんで 僕の事がわかったんですか？	왜 제 일을 알 수 있었습니까?	keep	normalize
+normalize:spelling-variant	小さな私の事も…覚えていてくださいね。	has:작은 저도	fix	normalize
+normalize:spelling-variant	なんで 僕の事がわかったんですか？	has:저를 알	fix	normalize
 normalize:spelling-variant	私の事丈博さんから聞いてませんか？	제 일다케히로 씨에게서 듣지 않습니까?	keep	normalize
 cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
 cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites

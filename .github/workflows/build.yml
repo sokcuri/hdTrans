@@ -313,7 +313,13 @@ jobs:
               2>&1 | tee build/wasm/ctest.log
           else
             export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/hdtrans-data/dicts.hdsnap"
-            ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose \
+            # On pull requests windows-x86 runs the unit tests and the critical and drops cases: the
+            # other rule-case suites read only data, and linux runs them on every pull request.
+            exclude=()
+            if [[ "${{ matrix.preset }}" == windows-x86 && "${{ github.event_name }}" == pull_request ]]; then
+              exclude=(-E '^(rules\.cases\.|rules\.variants$|rules\.packs|examples$)')
+            fi
+            ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose "${exclude[@]}" \
               2>&1 | tee "build/${{ matrix.preset }}/ctest.log"
           fi
       - name: Check out the test data
@@ -669,16 +675,21 @@ jobs:
             build/linux-fuzz/found/
 
   # Instruction counts of fixed inputs under valgrind (tools/perf-budget.py, docs/build.md "성능 예산") of the
-  # linux build of a pull request, against its base commit's linux build measured on the same runner:
-  # downloaded (tools/perf-base.py, waiting for a develop build in progress) or else built here. The
-  # counts go to the job summary and a row more than 1% over the base build becomes a warning. The job
-  # never fails the run and ci-ok does not wait for it; a large rise is looked at in the release review.
+  # linux build, against its base commit's linux build measured on the same runner: downloaded
+  # (tools/perf-base.py, waiting for a develop build in progress) or else built here. The counts go to
+  # the job summary and a row more than 1% over the base build becomes a warning. The job never fails
+  # the run and ci-ok does not wait for it; a large rise is looked at in the release review. It runs on
+  # manual runs, on pull requests with the perf label (read when the run starts: push after labelling)
+  # and on develop to main pull requests.
   perf:
     name: linux-perf
     needs: [gate, build]
     if: >-
-      !cancelled() && github.event_name == 'pull_request' && needs.gate.outputs.run != 'false' &&
-      needs.gate.outputs.native != 'false'
+      !cancelled() && needs.gate.outputs.run != 'false' && needs.gate.outputs.native != 'false' &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'pull_request' &&
+        (contains(github.event.pull_request.labels.*.name, 'perf') ||
+         (github.head_ref == 'develop' && github.base_ref == 'main'))))
     continue-on-error: true
     permissions:
       contents: read

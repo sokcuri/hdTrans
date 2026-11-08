@@ -10,7 +10,7 @@ dict:w:31006	今まで頭上を覆っていた傘を差し出す。	지금까지
 dict:w:31006	傘を差した。	우산을 썼다.	keep	lookup
 dict:jisjk:446	亜麻色のストレートヘアーはいつもさらさらとして光沢が見える。	아마색 스트레이트 헤어는 언제나 찰랑찰랑 해 광택이 보인다.	fix	lookup
 dict:jisjk:446	さらさらと流れる川。	찰랑찰랑 흐르는 강.	keep	lookup
-dict:jisjk:118331	風邪でも引かれると何となく寝覚めが悪い。	감기라도 걸리면 왠지 뒤가 개운치 않다.	fix	lookup
+dict:jisjk:118331	風邪でも引かれると何となく寝覚めが悪い。	has:마음이 찜찜하다	fix	lookup
 dict:jisjk:258806	お気遣いはありがたいですが、私はここに居たいから居るので。	배려는 고맙습니다만, 나는 여기에 있고 싶으니까 있으므로.	fix	lookup
 dict:jisjk:94196	これは恐らく警戒を緩める事はまずないな。	이것은 아마 경계를 느슨하게 하는 일은 거의 없네.	fix	lookup
 dict:w:20028	拒絶の現れに、周も深追いする気はなかった。	거절의 표현에, 주도 깊이 쫓을 생각은 없었다.	fix	lookup
@@ -55,7 +55,7 @@ cx:excuse-me:10	あの、ちょっとすみません、道を聞きたいんで�
 cx:excuse-me:10	すみません、遅れました。	죄송합니다, 늦었습니다.	keep	rewrites
 cx:excuse-me:30	すみません、ちょっといいですか。	실례합니다, 잠깐 괜찮습니까.	fix	rewrites
 cx:excuse-me:30	本当にすみません。	정말 죄송합니다.	keep	rewrites
-cx:swift-write:10	筆をとると優美な動きでなにかをさらさらと書く。	붓을 취하면 우아한 움직임으로 뭔가를 술술 쓴다.	fix	rewrites
+cx:swift-write:10	筆をとると優美な動きでなにかをさらさらと書く。	붓을 들면 우아한 움직임으로 뭔가를 술술 쓴다.	fix	rewrites
 cx:swift-write:10	髪はさらさらとしている。	머리카락은 찰랑찰랑 하고 있다.	keep	rewrites
 cx:level-of:10	今なら並の戦艦にだって負けない。	!rule:cx:level-of:10	keep	rewrites
 cx:level-of:10	軽空母並の航空戦力を運用可能な航空戦艦です。	경항공모함급 항공전력을 운용 가능한 항공전함입니다.	fix	rewrites
@@ -64,7 +64,7 @@ cx:novel-fixes:10	それもある種のお約束か。	그것도 일종의 약�
 cx:novel-fixes:10	そういうこともある。	그런 것도 있다.	keep	rewrites
 cx:novel-fixes:20	当然といえば当然の話だ。	당연하다면 당연한 이야기다.	fix	rewrites
 cx:novel-fixes:20	当然の結果だ。	당연한 결과다.	keep	rewrites
-cx:novel-fixes:30	何色の髪でもあり得る。	무슨색의 머리카락이라도 있을 수 있다.	fix	rewrites
+cx:novel-fixes:30	何色の髪でもあり得る。	무슨 색 머리카락이든 있을 수 있다.	fix	rewrites
 cx:novel-fixes:30	それでもある。	그래도 있다.	keep	rewrites
 cx:quote-after-comma:10	帰りたい、とひたすら思う。	돌아가고 싶다, 라고 오로지 생각한다.	fix	rewrites
 cx:quote-after-comma:10	彼と、彼女と話した。	그와, 그녀와 이야기했다.	keep	rewrites
@@ -84,10 +84,10 @@ dict:jisjk:344978	無理やり連れて行かれた。	억지로 끌려갔다.	k
 dict:jisjk:358465	嫌いな野菜である黄月トマトの入った料理を作ったコックを、その場でクビにしたからか？	싫어하는 야채인 황월 토마토가 들어간 요리를 만든 요리사를, 그 자리에서 해고했으니까인가?	fix	lookup
 dict:jisjk:358465	コックをひねって水を止めた。	콕을 비틀어 물을 멈추었다.	keep	lookup
 dict:w:31009	その場でクビにした。	그 자리에서 해고했다.	fix	lookup
-dict:w:31010	フリルがふんだんに使われている、さわり心地のいいやつだ。	프릴이 충분하게 사용되고 있는, 감촉이 좋은 녀석이다.	fix	lookup
-dict:w:31012	こうして血染めの日記帳を見てしまった後となっては。	이렇게 해 피로 물든 일기장을 봐버린 후가 돼.	fix	lookup
+dict:w:31010	フリルがふんだんに使われている、さわり心地のいいやつだ。	프릴이 듬뿍 사용되고 있는, 감촉이 좋은 녀석이다.	fix	lookup
+dict:w:31012	こうして血染めの日記帳を見てしまった後となっては。	이렇게 피로 물든 일기장을 봐버린 후가 돼.	fix	lookup
 phrase:酸っぱさ	あの何とも言えない青臭さと酸っぱさとえぐみ……。	그 뭐라고 말할 수 없는 풋내와 신맛과 아린 맛…….	fix	phrases
-cx:fresh-made:10	ふんわりと香ばしい焼きたてパン。	폭신 고소한 갓 구운 빵.	fix	rewrites
+cx:fresh-made:10	ふんわりと香ばしい焼きたてパン。	폭신하고 고소한 갓 구운 빵.	fix	rewrites
 cx:fresh-made:10	パンを焼いた。	빵을 구웠다.	keep	rewrites
 cx:looks-adj:10	中にいた男が怪訝そうな顔を向けてきた。	안에 있던 남자가 의아스러운 듯한 표정을 향하여 왔다.	fix	rewrites
 cx:looks-adj:10	雨が降りそうな空。	비가 올 것 같은 하늘.	keep	rewrites

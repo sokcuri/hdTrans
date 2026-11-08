@@ -13,9 +13,9 @@ lookup:nara-ii	殴ってくるだけならいいんだけど、毒はずるい�
 lookup:nara-ii	いや、だからって腹とかならいいって問題でも無いんだよ？	has:배라든지라면 좋다는	fix	lookup
 lookup:nara-ii	私あんまり教えるのうまくないですけど、師匠にならいいですよ	has:스승에게라면 좋아요	fix	lookup
 lookup:nara-ii	そりゃ驚いたけれども、理由があったことならいいと俺は思うのに。	has:것이라면 좋다고	fix	lookup
-lookup:nara-ii	食べるつもりならいつでも俺は食われるだろう。	has:생각이라면 언제라도	fix	lookup
-lookup:nara-ii	通常フィールドからならいつでもログアウト自体は可能だった。	has:필드에서라면 언제라도	fix	lookup
-lookup:nara-ii	勝負をするつもりならいつでも受けてやる、と告げさせるために。	has:생각이라면 언제라도	fix	lookup
+lookup:nara-ii	食べるつもりならいつでも俺は食われるだろう。	has:생각이라면 언제든	fix	lookup
+lookup:nara-ii	通常フィールドからならいつでもログアウト自体は可能だった。	has:필드에서라면 언제든	fix	lookup
+lookup:nara-ii	勝負をするつもりならいつでも受けてやる、と告げさせるために。	has:생각이라면 언제든	fix	lookup
 lookup:nai-nara	殺してないなら、	has:않으면	fix	lookup
 lookup:nai-nara	友井が嘘を吐いてないなら。	has:않으면	fix	lookup
 lookup:nai-nara	被害が出てないなら、隠す必要もないだろ。	has:않으면	fix	lookup

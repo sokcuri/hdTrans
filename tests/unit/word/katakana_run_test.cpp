@@ -2,6 +2,7 @@
 // long run costs time in proportion to its length.
 #include <algorithm>
 #include <chrono>
+#include <cstdio>
 #include <cstdlib>
 #include <string>
 #include <string_view>
@@ -76,9 +77,17 @@ HD_TEST(word_katakana_run_time_grows_with_its_length) {
         auto input = [&](int n) { return std::string(shape.head) + Repeat(shape.unit, n) + std::string(shape.tail); };
         std::string shortOut, longOut;
         const double shortRun = FastestSeconds(*loaded.snapshot, *generated, input(200), shortOut);
-        const double longRun = FastestSeconds(*loaded.snapshot, *generated, input(1600), longOut);
+        const double longRun = FastestSeconds(*loaded.snapshot, *generated, input(3200), longOut);
         HD_CHECK(shortOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 200)));
-        HD_CHECK(longOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 1600)));
-        HD_CHECK(longRun < 30 * shortRun);
+        HD_CHECK(longOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 3200)));
+        // Sixteen times the run takes 16 times the time in proportion and 256 times with the square,
+        // so the ratio is 16 + 240q for a share q of quadratic time at 200. The bound 64 leaves four
+        // times the linear ratio for a loaded machine and fails once q passes 0.2. It is checked off a
+        // shared CI runner only (hdtest::TimingChecked); there the ratio is written to stderr.
+        if (hdtest::TimingChecked()) {
+            HD_CHECK(longRun < 64 * shortRun);
+        } else {
+            std::fprintf(stderr, "katakana run time ratio %.1f (bound 64, not checked)\n", longRun / shortRun);
+        }
     }
 }

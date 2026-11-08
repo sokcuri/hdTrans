@@ -1,0 +1,28 @@
+# 규칙: LEX-5002
+rule	input	expected	kind	layer
+cx:sense-cues-1:365	　効果が良いんだからいいじゃないと思っているのだが、ジュード曰く、こういう謎現象を研究し、原因を解明するのも研究員の仕事だと怒られた。	has:쥬드 말로는,	fix	rewrites
+cx:sense-cues-1:365	「あと、殿下曰く、マリアローゼ嬢がナンシー嬢の私物取り上げて壊したらしいぜ」	has:전하 말로는,	fix	rewrites
+cx:sense-cues-1:365	ミドリさんいわく、乗りかかった船だそうです	has:미도리 씨 말로는,	fix	rewrites
+cx:sense-cues-1:365	刑事さんいわく、そこは雑貨や衣類、100均などが入っている大きいスーパーだそう	has:형사 말로는,	fix	rewrites
+cx:sense-cues-1:365	本人いわく、霊感がないからだって言うんだけど	has:본인 말로는,	fix	rewrites
+cx:sense-cues-1:365	本人いわく 若いころは銀座で ナンバーワンホステスだったみたい	has:본인 말로는	fix	rewrites
+cx:sense-cues-1:365	「その人曰く、展開を大げさにして山を作らないとオチがつかないそうだ」	has:그 사람 말로는,	fix	rewrites
+cx:sense-cues-1:365	　霊媒師──のような人曰く、此処は漂着地となってしまったそうだ。	has:사람 말로는,	fix	rewrites
+cx:sense-cues-1:365	学園長曰く、頭の固い上のお偉いさんたちに手持ちの情報を提示したところで──	has:학원장 말로는,	fix	rewrites
+cx:sense-cues-1:365	「マスター曰く、訓練で見たことがある戦術と近い状況であれば落ち着いて対処が出来る可能性が上がるそうです」	has:마스터 말로는,	fix	rewrites
+cx:sense-cues-1:365	彼女曰く、彼がそう言ったと	has:그녀 말로는,	fix	rewrites
+cx:sense-cues-1:365	教官曰く、「繊細な道具を扱うセンスが絶望的にない」ということだった。	has:교관 왈,	keep	rewrites
+cx:sense-cues-1:365	家康曰く「一つは三楽ならん、二つは分らず」と。	has:이에야스 왈 「	keep	rewrites
+cx:sense-cues-1:365	「犬は仏性があるかないか」、趙州曰く「無」	has:조주 왈 「무」	keep	rewrites
+cx:sense-cues-1:365	孔子いわく 君子に 三畏あり…｡	has:공자 왈	keep	rewrites
+cx:sense-cues-1:365	孟子曰く、人の性は善なり。	has:맹자 왈,	keep	rewrites
+cx:sense-cues-1:365	緑の目の方は視力がとても弱いそうですが、ミドリさんいわく	has:미도리 씨 왈	keep	rewrites
+cx:sense-cues-1:365	フランスの例えに曰く	lacks:말로는	keep	rewrites
+cx:sense-cues-1:365	いわく付きの品	사연 있는 물건	keep	rewrites
+compose:iwaku-apart	白木自身がこの能力に気づいたのは中学時代だったそうで、白木曰く、「一瞬でも意識して見たものや聞いたことは全て忘れない。	lacks:무왈	fix	compose
+compose:iwaku-apart	ジュード曰く「無理だ」	has:쥬드 왈 「	fix	compose
+compose:iwaku-apart	相良いわく	has:사가라 왈	fix	compose
+cx:sense-cues-1:363	いやね。曰くのある牛舎が近くに建ってたなと思い出して	has:사연이 있는 외양간	fix	rewrites
+cx:sense-cues-1:363	何か曰くのあることらしいとは感づいた	has:뭔가 사연이 있는	fix	rewrites
+cx:sense-cues-1:363	あの空家には何かの曰くがあるらしいような気もするのであった。	has:사연이 있는	fix	rewrites
+cx:sense-cues-1:363	曰く、高峰には尊敬する空手部の先輩がいたらしい。	!rule:cx:sense-cues-1:363	keep	rewrites

@@ -1,0 +1,40 @@
+# 규칙: LEX-5005
+rule	input	expected	kind	layer
+pack:argument-senses:5010	自分の額に向かって伸びてくる指先が、黄色や緑で斑に染まっている。	has:뻗어 오는 손끝이	fix	packs
+pack:argument-senses:5010	辺境伯本人だと気がつき、慌てて礼を取ろうとして足がもつれると、とっさに伸びてきた腕に支えられる。	has:뻗어 온 팔에	fix	packs
+pack:argument-senses:5010	凪の手がベルトに伸びる。	has:손이 벨트에 뻗는다	fix	packs
+pack:argument-senses:5010	玉藻の手が下半身に伸びる。	has:손이 하반신에 뻗는다	fix	packs
+pack:argument-senses:5010	真帆の手が俺の下半身へと伸び、ズボンの上から部分に触れてくる。	has:하반신으로 뻗어	fix	packs
+pack:argument-senses:5010	熱を測るつもりなのだろう、トゥーリの汚い手が自分に向かって伸びてくる。	has:자신을 향해 뻗어 온다	fix	packs
+pack:argument-senses:5010	髪が伸びた。	has:머리카락이 자랐다	keep	packs
+pack:argument-senses:5010	爪が伸びている。	has:손톱이 자라고 있다	keep	packs
+pack:argument-senses:5010	麺が伸びる。	has:면이 분다	keep	packs
+pack:argument-senses:5010	ちょっと引くっていうか 料理できなさそうじゃん	has:조금 질린다고 할까	keep	packs
+pack:argument-senses:5010	瘴気の出所はお姉ちゃんに宿っていた魔力だね	lacks:품던	keep	packs
+pack:argument-senses:5011	黒い影がこちらに向かって伸びてくる	has:이쪽을 향해 뻗어 온다	fix	packs
+pack:argument-senses:5012	記録が伸びる。	has:기록이 는다	fix	packs
+pack:argument-senses:5013	突然、大金が入るとか、寿命が１０年伸びるとか	has:수명이 10년 길어진다든가	fix	packs
+defaults:reach-5005	横から見れば、指先や膝が震えているのがわかる。	has:손끝이나 무릎을	fix	lookup
+defaults:reach-5005	指先に感じる湿り気が、少しずつ広がっていくような気がした。	has:손끝에 느끼는	fix	lookup
+defaults:reach-5005	薔薇を挿してくれた姉の指先だった。	has:언니의 손끝이었다	fix	lookup
+defaults:reach-5005	乳首に指先を伸ばすと、みいちゃんは敏感な反応を示した。	has:손끝을 뻗자	fix	lookup
+defaults:reach-5005	それは斑に赤や青の着色があって	has:얼룩덜룩하게 빨강이나 파랑	fix	lookup
+defaults:reach-5005	肌がまだらに赤くなった。	has:얼룩덜룩하게 붉어졌다	fix	lookup
+defaults:reach-5005	斑模様の猫	has:얼룩 모양의 고양이	keep	lookup
+defaults:reach-5005	早く帰って寝たかったので、すぐに散り散りに別れた。	has:곧바로 뿔뿔이 헤어졌다	fix	lookup
+defaults:reach-5005	それを理解したのか、彼女は首を縦に動かす。	has:목을 세로로 움직인다	fix	lookup
+defaults:reach-5005	縦に四歩、横に二歩の小さな部屋	has:세로로 4보	fix	lookup
+defaults:reach-5005	首を縦に振った。	has:고개를 끄덕였다	keep	lookup
+cx:ni-after-adverb:50	見慣れた石壁と等間隔に並ぶ木の柱。	has:등간격으로 늘어서는	fix	rewrites
+cx:ni-after-adverb:50	放射状に広がる。	has:방사상으로 퍼진다	fix	rewrites
+cx:ni-after-adverb:50	一列に並ぶ。	has:일렬로 늘어선다	fix	rewrites
+cx:ni-after-adverb:50	木っ端微塵に砕けた。	has:산산조각으로 부서졌다	fix	rewrites
+cx:ni-after-adverb:50	一列にならない	!rule:cx:ni-after-adverb:50	keep	rewrites
+cx:ni-after-adverb:50	現状に満足する	!rule:cx:ni-after-adverb:50	keep	rewrites
+cx:ni-after-adverb:30	逆さまに落ちた	has:거꾸로 떨어졌다	fix	rewrites
+cx:ni-after-adverb:30	逆さに吊るす。	has:거꾸로 매단다	keep	rewrites
+defaults:reach-5005	真っ逆さまに落ちた	has:거꾸로 떨어졌다	fix	lookup
+pack:argument-senses:5014	髪がのびてきた。	has:머리카락이 자라 왔다	fix	packs
+pack:argument-senses:5015	背がのびた！	has:키가 자랐다	fix	packs
+pack:argument-senses:5016	セーターが伸びてしまった。	has:스웨터가 늘어나버렸다	fix	packs
+pack:argument-senses:5016	ゴムが伸びた。	has:고무가 늘어났다	fix	packs

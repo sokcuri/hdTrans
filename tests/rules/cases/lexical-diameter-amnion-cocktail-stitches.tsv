@@ -14,7 +14,7 @@ dict:jisjk:28899	羊膜に包まれている。	양막에 싸여 있다.	fix	def
 dict:jisjk:28899	羊水	양수	keep	defaults
 dict:jisjk:375114	缶入りカクテル	캔 칵테일	fix	defaults
 dict:jisjk:375114	缶入りカクテルを買った。	캔 칵테일을 샀다.	fix	defaults
-dict:jisjk:375114	缶入りカクテルの味。	캔 칵테일의 맛.	fix	defaults
+dict:jisjk:375114	缶入りカクテルの味。	캔 칵테일 맛.	fix	defaults
 dict:jisjk:375114	缶入りカクテルを飲んだ。	캔 칵테일을 마셨다.	fix	defaults
 dict:jisjk:375114	カクテル	칵테일	keep	defaults
 dict:jisjk:375114	缶ビール	캔맥주	keep	defaults

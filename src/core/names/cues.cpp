@@ -721,6 +721,18 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
         if (Flags(word).records > 0) return "";
     }
     const char32_t next = FirstRune(rest.substr(h.size())).cp;
+    // A site, company or office before the honorific is no person (アルファ社様, 編集部様), and neither is a
+    // katakana run with 様 whose sentence goes on to a word of publishing (ノベルポート様に掲載; spec LEX-5260).
+    if (dict::EndsWithMember(HDTRANS_CLASS("noun.organization"), t) > 0) return "";
+    if (!run.kanji && (h == "様" || h == "さま")) {
+        const std::string_view after = rest.substr(h.size());
+        for (std::size_t i = 0; i < after.size();) {
+            const text::Rune r = RuneAt(after, i);
+            if (InRunes(r.cp, "。！？!?」』\n")) break;
+            if (dict::StartsWithMember(HDTRANS_CLASS("verb.publish"), after.substr(i)) > 0) return "";
+            i += r.size == 0 ? 1 : r.size;
+        }
+    }
     if (next == U'ゃ' || next == U'ゅ' || next == U'ょ') return "";
     // After a word that is no noun, name or place (大丈夫 G8U0), the ちゃんと is the adverb, not
     // the honorific and a particle: an honorific follows a noun (猫ちゃんと, 連装砲ちゃんと).

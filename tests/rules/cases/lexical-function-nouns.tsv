@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:201018	というかそもそも、元婚約者である貴方がそれを言う？	그렇다고 할까 애초에, 전 약혼자인 당신이 그것을 말해?	fix	defaults
 dict:jisjk:201018	そもそも俺は女子と話すのが苦手なのだ。	애초에 나는 여자와 이야기하는 것이 서투르다.	fix	defaults
-dict:jisjk:201018	そもそもあの二人は婚約していない。	애초에 그 두 사람은 약혼하고 있지 않다.	fix	defaults
+dict:jisjk:201018	そもそもあの二人は婚約していない。	애초에 그 두 사람은 약혼하지 않았다.	fix	defaults
 dict:function-nouns:69	そもそもの話、領地にいなかった。	애초의 이야기, 영지에 없었다.	fix	defaults
 dict:jisjk:115676	元婚約者である王太子だ。	전 약혼자인 왕태자다.	fix	local
 sense:元	元婚約者の王太子だ。	전 약혼자의 왕태자다.	fix	senses

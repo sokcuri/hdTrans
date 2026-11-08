@@ -185,7 +185,7 @@ struct Cues {
     bool giveDecl = false;    // REG-21: the speaker's own will, てあげる, てみる or a benign てやる to someone (お前に貸してやる)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ
     std::vector<std::pair<std::size_t, std::size_t>> authParts;  // parts of speaker auth rows found (row, part)
-    bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
+    bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, pfem = false, arch = false, stiff = false,
          cend = false;
     std::string first;
 };
@@ -308,7 +308,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         bool hit = false;
         const auto before = [&](std::u32string_view str, std::size_t at) {
             // a polite auxiliary (ます, ました) cannot start the utterance, and ます beside ます is ますます
-            const bool aux = r.cue == "polite" || r.cue == "polite-any";
+            const bool aux = r.cue == "polite" || r.cue == "polite-any" || r.cue == "polite-fem";
             if (aux && r.text.starts_with(U"ま")) {
                 if (at == 0) return true;
                 if (StartsAt(str, at, U"ますます") || (at >= 2 && str.substr(at - 2, 2) == U"ます")) return true;
@@ -342,6 +342,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!hit) continue;
         if (r.cue == "polite") c.pend = true;
         else if (r.cue == "polite-any") c.pany = true;
+        else if (r.cue == "polite-fem") c.pany = c.pfem = true;
         else if (r.cue == "keigo") c.keigo = true;
         else if (r.cue == "set") c.set = true;
         else if (r.cue == "archaic") c.arch = true;
@@ -586,7 +587,7 @@ std::string Key(const Cues& c) {
     if (c.keigo && (c.lastStrong || c.lastKa) && c.arch) return "archaic";
     if (c.keigo) return c.lastStrong || c.lastKa ? "keigo-casual" : "keigo";
     if (c.arch) return "archaic";
-    if (c.pany) return "polite-any";
+    if (c.pany) return c.pfem ? "polite-fem" : "polite-any";
     if (c.stiff) return "stiff";
     if (c.cend && c.declZo) return "decl-zo";
     if (c.cend && c.exclaimNe) return "exclaim-ne";

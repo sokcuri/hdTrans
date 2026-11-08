@@ -208,6 +208,11 @@ private:
     // Scores, splits and the accepted names (registry.cpp).
     const std::map<std::string, Name>& Accepted();
     std::pair<std::string, std::string> GivenSplit(std::string_view t);
+    // The Korean of a person row of the name layer for the two-kanji common word x that reads x as names
+    // read its kanji (internal::GuessedName: 氷室 히무로); "" for none.
+    std::string CommonSurnameReading(std::string_view x) const;
+    // Whether the name layer has a person row of t.
+    bool LayerPerson(std::string_view t) const;
     bool Crossed(std::string_view t, std::size_t i);
     bool Split(std::string_view t, std::vector<std::string>& parts);
     void SplitReading(const std::string& x, const std::string& y, const std::string& kana);
@@ -232,6 +237,14 @@ private:
     void SetActor(const std::string& key, const std::string& value);
     const dict::Snapshot* snap_;
     std::map<std::string, Listed> listed_;
+    // The surname and given name of the full names the document writes with one space between them
+    // (小鳥遊　聖), and their Korean in the name layer's row of the name written whole (小鳥遊聖 타카나시
+    // 세이): the parts read so wherever the document writes them.
+    std::map<std::string, std::string> rowParts_;
+    void RowParts(const std::string& x, const std::string& y);
+    // The common words GivenSplit took for the surname of a full name (氷室 of 氷室将嗣) and their
+    // name-layer Korean (히무로), which they read as in that full name only.
+    std::map<std::string, std::string> commonSurnames_;
     struct Tables {
         std::map<std::string, std::string> readings;  // surface to reading or Hangul
         std::map<std::string, std::string> fixed;     // plain-dictionary name renderings

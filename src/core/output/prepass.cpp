@@ -88,6 +88,21 @@ int ClassifySelected(const ResolvedItem& it) {
 
 char32_t FirstRune(std::string_view s) { return text::DecodeRune(s).cp; }
 
+// Whether a word of the class (noun.weather-come, noun.rising-level) is the subject of the verb at item i: the
+// noun and a subject particle of particle.copies-subject (雪が, 物価は) before it in its clause, back to a comma
+// or the end of a sentence.
+bool SubjectIn(const std::vector<ResolvedItem>& items, int i, dict::ClassId cls) {
+    for (int j = i - 1; j >= 0; j--) {
+        const std::string_view s = items[j].surface;
+        if (s == "、" || s == "，" || s == "," || dict::InClass(HDTRANS_CLASS("mark.sentence-end"), s)) return false;
+        if (j + 1 < i && First(Code(items[j])) == '1' && items[j].endingSurface.empty() && dict::InClass(cls, s) &&
+            dict::InClass(HDTRANS_CLASS("particle.copies-subject"), items[j + 1].surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
 // same surface and Korean, a Korean of two equal halves (부슬부슬).
 bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
@@ -134,19 +149,6 @@ bool JoinedCopies(const std::vector<ResolvedItem>& items, int i, int next) {
         return false;
     }
     return text::RuneCount(EntryText(items[i])) > 1 || JoinedCopies(items, i - 1, i);
-}
-
-// t with the space dropped between a word of ko.joined-before-doe that starts t or follows a
-// space and a form of 되다 after it (안 돼 안돼, 안 된다 안된다; LAY-11).
-void JoinBeforeDoe(std::string& t) {
-    for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("ko.joined-before-doe"))) {
-        for (std::size_t at = t.find(w); at != std::string::npos; at = t.find(w, at + 1)) {
-            const std::size_t space = at + w.size();
-            if ((at > 0 && t[at - 1] != ' ') || space >= t.size() || t[space] != ' ') continue;
-            const auto doe = text::Split(text::DecodeRune(std::string_view(t).substr(space + 1)).cp);
-            if (doe && doe->initial == 3 && (doe->vowel == 10 || doe->vowel == 11)) t.erase(space, 1);  // ㄷ, ㅙ ㅚ
-        }
-    }
 }
 
 // Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
@@ -975,7 +977,7 @@ bool ClippedCopy(const std::vector<ResolvedItem>& items, int i) {
 }
 
 // Whether item i ends a node of items before end: it is the last, or a ClippedCopy whose っ ends
-// the node (だめ|っ 안돼 안돼).
+// the node (だめ|っ 안 돼 안 돼).
 // Whether items[i] is a polite お or ご the rules emptied between a word and a kanji word that writes
 // something (田中さん お一人で: お before 一人で 혼자서); after a symbol the symbol's spacing holds
 // (“元”ご婚約者 “전”약혼자).
@@ -1490,7 +1492,21 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         t.insert(0, " ");
     }
     using Result = std::pair<std::string, bool>;
-    JoinBeforeDoe(t);
+    // The 아/어 form of a verb and a 가다 or 오다 after it that make a Korean compound verb are
+    // one word (過ぎていった 지나갔다); an auxiliary of aspect stays apart (更けていった 깊어져
+    // 갔다), as does a verb that only sounds like the first one (話しかけていく 말을 걸어 가다; GRM-4031).
+    // Weather that falls (noun.weather-come) comes down but does not go down: before 가다 its 내리다 takes
+    // the aspect (雪が降っていく 눈이 내려 간다; 山を降って行く 산을 내려간다, 雪が降ってくる 내려온다). An
+    // amount that rises or falls (noun.rising-level) changes, no motion (物価が上がってきた 물가가 올라 왔다).
+    if (nextIndex == i + 1 && item.ending.text == "6") {
+        const std::string second = Lemma(EntryText(items[nextIndex]), *generated_);
+        const bool apart = (second == "가다" && SubjectIn(items, i, HDTRANS_CLASS("noun.weather-come"))) ||
+                           SubjectIn(items, i, HDTRANS_CLASS("noun.rising-level"));
+        if (!apart && CompoundMotion(Lemma(EntryText(item), *generated_), second,
+                                     At(Code(item), 1) < '3' || At(Code(item), 1) > '6')) {
+            return Result(std::move(t), false);
+        }
+    }
     // An auxiliary verb (gram Ds) read as a word of ko-aux.joined after the 아/어 form is
     // written joined to it (食べてしまった 먹어버렸다); the main verb stays apart (拾って捨てた
     // 주워 버렸다; LAY-11).
@@ -1616,7 +1632,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         {"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"}, {"ほど", "정도"},
         {"程", "정도"},   {"等", "등"},     {"など", "등"},   {"前", "전"},   {"後", "후"},
         {"前", "앞"},     {"後", "뒤"},     {"中", "중"},     {"くらい", "정도", true}, {"ぐらい", "정도", true},
-        {"など", "같은", true}, {"側", "측"},
+        {"など", "같은", true}, {"側", "측"},     {"曰く", "왈"},   {"いわく", "왈"},
     };
     if (settings_.literal && kind == '1' && AttachesToNoun(next.surface, nextEntry)) return Result(std::move(t), false);
     // A direction noun and 쪽 make one word (위쪽, 앞쪽, 오른쪽); 쪽 after other nouns stands
@@ -1639,6 +1655,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && AdverbKorean(t, tags) &&
             !Contains(nextTags, "Ct") && !(Code(item).starts_with("12") && Contains(nextTags, "Z7")) &&
             HangulWord(nextEntry)) {
+            return Result(std::move(t), true);
+        }
+        // LEX-5001: a Korean determiner (ko.determiner: 무슨, 어떤, 모든) is written apart from the noun it
+        // modifies (何の音 무슨 소리, not 무슨소리).
+        if (nextKind == '1' && dict::InClass(HDTRANS_CLASS("ko.determiner"), t) && HangulWord(nextEntry)) {
             return Result(std::move(t), true);
         }
     }
@@ -1962,7 +1983,8 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             Add(out, " ");
         }
         if (tok.span != 0) {
-            std::string extra = tok.text.substr(std::min(tok.spanText.size(), tok.text.size()));
+            const std::size_t source = tok.spanSource == std::string::npos ? tok.spanText.size() : tok.spanSource;
+            std::string extra = tok.text.substr(std::min(source, tok.text.size()));
             if (const std::string_view t = TextTail(out); tok.span == SpanClose && i > first &&
                                                          tokens[i - 1].type != tokenizer::kTypeAsciiSpace &&
                                                          t.ends_with(" ")) {

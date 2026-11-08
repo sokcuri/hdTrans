@@ -25,11 +25,12 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw and src[-1] not ends "は" and src[-1] not ends "が" and src[-1] not ends "も" and src[-1] not ends "を" and src[-1] not ends "に" and src != "味" and (src != "ら" or sem[-1] lacks VHn)
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw and src[-1] not ends "は" and src[-1] not ends "が" and src[-1] not ends "も" and src[-1] not ends "を" and src[-1] not ends "に" and (src[-1] not ends "の" or src[-1] == "もの") and src[-1] != "とある" and src != "味" and (src != "ら" or sem[-1] lacks VHn)
 //     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv) && (GramNe(p, 0, "Hp"sv) ||
-           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv) && SrcNe(p, -1, "Rは"sv) && SrcNe(p, -1, "Rが"sv) && SrcNe(p, -1, "Rも"sv) && SrcNe(p, -1, "Rを"sv) && SrcNe(p, -1, "Rに"sv) && SrcNe(p, 0, "味"sv) && (SrcNe(p, 0, "ら"sv) ||
+           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv) && SrcNe(p, -1, "Rは"sv) && SrcNe(p, -1, "Rが"sv) && SrcNe(p, -1, "Rも"sv) && SrcNe(p, -1, "Rを"sv) && SrcNe(p, -1, "Rに"sv) && (SrcNe(p, -1, "Rの"sv) ||
+           SrcEq(p, -1, "もの"sv)) && SrcNe(p, -1, "とある"sv) && SrcNe(p, 0, "味"sv) && (SrcNe(p, 0, "ら"sv) ||
            AttrNe(p, -1, "VHn"sv))) ||
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
@@ -67,9 +68,10 @@ bool RuleG80([[maybe_unused]] Item* p) {
 }
 
 // global 1010 stem pos 1 prio 90
-//     pos is not 13* and sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4** and sem lacks QPN and (gram has Hz or gram[-1] lacks Nj|Nd)
+//     pos is not 13* and sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4** and sem lacks QPN and (gram lacks Ct or gram has Nq) and (gram has Hz or gram[-1] lacks Nj|Nd)
 bool RuleG90([[maybe_unused]] Item* p) {
-    return (PumsaNe(p, 0, "13*"sv) && AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv) && AttrNe(p, 0, "QPN"sv) && (GramEq(p, 0, "Hz"sv) ||
+    return (PumsaNe(p, 0, "13*"sv) && AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv) && AttrNe(p, 0, "QPN"sv) && (GramNe(p, 0, "Ct"sv) ||
+           GramEq(p, 0, "Nq"sv)) && (GramEq(p, 0, "Hz"sv) ||
            GramNe(p, -1, "NjNd"sv)));
 }
 
@@ -267,13 +269,13 @@ constexpr CompiledRule kLocal[] = {
 constexpr CompiledRule kGlobal[] = {
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0x590e94927bc61937ull},
+    {RuleG30, 0xb94d7f529c5233afull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
-    {RuleG90, 0xd168e3592ff5cec5ull},
+    {RuleG90, 0x646c0109f2a51c5cull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},
     {RuleG130, 0x60209eb785257c06ull},

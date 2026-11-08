@@ -198,7 +198,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{87});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{100});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -609,6 +609,17 @@ HD_TEST(constraint_wake_formal_noun) {
         {"二つにわけ、", "わけ、", "わけ", "나&C4@ 이유"},
         {"パンをわけない", "わけない", "わけ", "나&C4@ 이유"},
         {"わけ合う", "わけ合う", "わけ", "나&C4@ 이유"},
+    });
+}
+
+// とい before こう, きま, きた or く is と and いく (友達といこうか), not 問い; といかける keeps it.
+HD_TEST(constraint_toi_before_iku) {
+    const std::string toi = Senses("といかける", "といかける", "とい");
+    HD_CHECK(!toi.empty());
+    CheckCases({
+        {"友達といこうか", "といこうか", "とい", ""},
+        {"決戦といきましょう", "といきましょう", "とい", ""},
+        {"様子見といきたい", "といきたい", "とい", ""},
     });
 }
 

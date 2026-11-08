@@ -19,7 +19,7 @@ dict:jisjk:40770	からすみの味。	어란의 맛.	fix	defaults
 dict:jisjk:40770	からすみを買った。	어란을 샀다.	fix	defaults
 dict:jisjk:40770	からすが鳴く。	까마귀가 운다.	keep	defaults
 dict:jisjk:169518	かもなんばんを食べる。	오리고기 국수를 먹는다.	fix	lookup
-dict:jisjk:169518	かもなんばんの味。	오리고기 국수의 맛.	fix	lookup
+dict:jisjk:169518	かもなんばんの味。	오리고기 국수 맛.	fix	lookup
 dict:jisjk:169518	かもなんばんを注文した。	오리고기 국수를 주문했다.	fix	lookup
 dict:jisjk:169518	そばを食べる。	메밀국수를 먹는다.	keep	lookup
 dict:jisjk:169697	かりごやを建てた。	임시 오두막을 지었다.	fix	lookup
@@ -62,7 +62,7 @@ dict:jisjk:40821	きつつきを見た。	딱따구리를 보았다.	fix	lookup
 dict:jisjk:40821	きつつきの巣。	딱따구리의 둥지.	fix	lookup
 dict:jisjk:40821	啄木鳥を見た。	딱따구리를 보았다.	keep	lookup
 dict:jisjk:172704	きびだんごを食べる。	기장 경단을 먹는다.	fix	lookup
-dict:jisjk:172704	きびだんごの味。	기장 경단의 맛.	fix	lookup
+dict:jisjk:172704	きびだんごの味。	기장 경단 맛.	fix	lookup
 dict:jisjk:265557	きび団子を買った。	기장 경단을 샀다.	fix	lookup
 dict:jisjk:265557	きび団子の材料。	기장 경단의 재료.	fix	lookup
 dict:jisjk:172704	だんごを食べる。	경단을 먹는다.	keep	lookup
@@ -96,7 +96,7 @@ dict:jisjk:40892	くろうまに乗る。	검은 말을 탄다.	fix	defaults
 dict:jisjk:40892	くろうまが走る。	검은 말이 달린다.	fix	defaults
 dict:jisjk:40892	くろうまのたてがみ。	검은 말의 갈기.	fix	defaults
 dict:jisjk:176723	くろづくりを食べる。	오징어 젓을 먹는다.	fix	defaults
-dict:jisjk:176723	くろづくりの味。	오징어 젓의 맛.	fix	defaults
+dict:jisjk:176723	くろづくりの味。	오징어 젓 맛.	fix	defaults
 dict:jisjk:176723	くろづくりを買った。	오징어 젓을 샀다.	fix	defaults
 dict:jisjk:176723	塩辛を食べる。	젓갈을 먹는다.	keep	defaults
 dict:jisjk:176849	くんどうに会った。	초등학교 교사를 만났다.	fix	defaults

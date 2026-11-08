@@ -29,7 +29,7 @@ normalize:honorific-okure	「雪や、こんこん、あられや、こんこん
 normalize:honorific-okure	どうぞ待っておくれ」	어서 기다려 다오」	keep	normalize
 normalize:honorific-okure	せめて 夢をかなえて 絶望しておくれ…。	적어도 꿈을 이루어 절망해 다오….	keep	normalize
 normalize:honorific-okure	「誰か来ておくれ！	「누군가 와 다오!	keep	normalize
-normalize:honorific-okure	「どうしたていうの話しておくれ。	「어떻게 한 지 얼마 안되는 말하는 거 이야기해 다오.	keep	normalize
+normalize:honorific-okure	「どうしたていうの話しておくれ。	「어떻게 한 지 얼마 안 되는 말하는 거 이야기해 다오.	keep	normalize
 normalize:honorific-oide	三月の末日に乳母は家を出るはずであったから、その日に宇治から恋人を移そうと計画をしておいでになるのであった。	삼월의 말일에 유모는 집을 나갈 것이었으니까, 그날에 우지에서 애인을 옮기려고 계획을 하고 계시는 것이었다.	fix	normalize
 normalize:honorific-oide	武も知も持ち合わせておいでなのに、ひけらかすところは微塵もなく、むしろいつも謙遜ばかりして	무도 지도 가지고 계시는데, 끌 수 있는들 빌려주는 곳은 조금도 없고, 오히려 언제나 겸손만 해	fix	normalize
 normalize:honorific-oide	何事にも天才を持っておいでになる方であったが、よこしまな恋に心を打ち込んでおいでになるだけは罪の深いことである。	무슨 일에도 천재를 가지고 계시는 분이었지만, 간악한 사랑에 가슴에 와 닿고 계실 뿐은 죄의 깊은 것이다.	fix	normalize
@@ -125,7 +125,7 @@ normalize:favour-moraenai	引き受けてもらえませんか」	맡겨 줄 수
 normalize:favour-moraenai	「明日、練習に付き合ってもらえませんか？	「내일, 연습에 어울려주실 수 있겠습니까?	keep	normalize
 normalize:favour-moraenai	「みなさん、桜庭さんが戻ってくるまで、ちょっとこれを読んでもらえませんか？	「여러분, 사쿠라바 씨가 돌아올 때까지, 조금 이것을 읽어주실 수 있겠습니까?	keep	normalize
 normalize:favour-moraenai	これ やめてもらえません？	이것 그만두어 줄 수 없습니까?	keep	normalize
-normalize:favour-moraenai	私が特殊性癖持ちの変態みたいに言わないでもらえませんか！	제가 특수 성벽 보유자의 변태같이 말함정 있고에서 받을 수 없습니까!	keep	normalize
+normalize:favour-moraenai	私が特殊性癖持ちの変態みたいに言わないでもらえませんか！	제가 특수 성벽 보유자의 변태같이 말하지 말아 줄 수 없습니까!	keep	normalize
 normalize:favour-moraenai	上手くできないと、もう二度としてもらえなくなっちゃうんじゃないかって	잘 할 수 없으면, 이제 두 번 다시 해 줄 수 있지 않게 되어버리는 것이 아니냐고	keep	normalize
 normalize:favour-moraenai	こんなこと、誰かに話しても信じてもらえないだろうから、あんたにしか言わないけど	이런 일, 누군가에게 이야기해도 믿어 주지 않을 테니까, 너밖에 말하지 않는데	keep	normalize
 normalize:favour-moraenai	常磐さんかアメリさんにヘルプ入ってもらえないかなって	토키와 씨나 아메리 씨에게 헬프 들어가 줄 수 없을까 하고	keep	normalize
