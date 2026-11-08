@@ -3687,12 +3687,15 @@ cx:audit-game-1:80	LEX-5703	&&2 ||2 S+0== "考えすぎ" S+0== "考え過ぎ" ||
 cx:audit-game-1:90	LEX-5703	&&3 ||2 S+0== "に" S+0== "へ" ||4 S-1== "こっち" S-1== "あっち" S-1== "そっち" S-1== "どっち" ||12 S+1== "L行" S+1== "Lいこ" S+1== "Lいく" S+1== "Lいっ" S+1== "Lいき" S+1== "Lいけ" S+1== "L向か" S+1== "L進" S+1== "L走" S+1== "L逃" S+1== "L飛" S+1== "L急"	set-target "(으)로"	あっちに行こう 저쪽으로 가자
 cx:audit-game-1:92	LEX-5703	&&2 S+0== "こっち" ||4 S+1== "にあ" S+1== "にい" S+1== "にお" S+1== "Lにあ"	set-target "여기"	こっちにある 여기에 있다
 //= audit-novel	after Select 248	The に after a person before 見参, 拝謁 or 謁見 used as a する verb marks the person 알현 takes as its object, 을/를 (殿に見参した 주군을 알현했다). ワザと is the adverb わざと, 일부러, before a verb, a comma or ではない, and before とは with 思う or いう (ワザとは思えない 일부러라고는 생각되지 않는다); ワザとの before 行為, こと or ミス is 고의적인; ワザ before とは 違う or 何 stays the noun 기술. 自身で before a verb is 스스로 (お前自身で決めろ 너 스스로 결정해라; spec LEX-5651).
-cx:audit-novel:10	LEX-5651	&&4 S+0== "に" ||6 F-1== "person" A-1== "VHn" S-1== "R殿" S-1== "R様" S-1== "R陛下" S-1== "R殿下" ||3 S+1== "見参" S+1== "拝謁" S+1== "謁見" ||4 B+2== "する" B+2== "いたす" B+2== "つかまつる" B+2== "仕る"	select-target "(을)를"	殿に見参した 주군을 알현했다
-cx:audit-novel:20	LEX-5651	&&2 S+0== "ワザ" ||2 S+1== "と" S+1== "と、"	set-target "일부" set-target@+1 "러"	ワザと負けた 일부러 졌다
+cx:audit-novel:10	LEX-5651	&&4 S+0== "に" ||10 F-1== "person" A-1== "VHn" S-1== "R殿" S-1== "R様" S-1== "R陛下" S-1== "R殿下" S-1== "王" S-1== "国王" S-1== "皇帝" S-1== "女王" ||3 S+1== "見参" S+1== "拝謁" S+1== "謁見" ||4 B+2== "する" B+2== "いたす" B+2== "つかまつる" B+2== "仕る"	select-target "(을)를"	殿に見参した 주군을 알현했다
+cx:audit-novel:20	LEX-5651	&&8 S+0== "ワザ" ||2 S+1== "と" S+1== "と、" !1 S-1== "の" !1 S-1== "ワザ" !1 ||2 P-1== "7**" P-1== "0**" !1 P+2== "1**" !1 S+2== "Lじゃ" !1 S+2== "Lらし"	set-target "일부" set-target@+1 "러"	ワザと負けた 일부러 졌다
 cx:audit-novel:30	LEX-5651	&&3 S+0== "ワザ" S+1== "とは" ||5 S+2== "L思" S+2== "Lおも" S+2== "Lいえ" S+2== "L言え" S+2== "Lいう"	set-target "일부러"	ワザとは思えない 일부러라고는 생각되지 않는다
 cx:audit-novel:40	LEX-5651	&&2 S+0== "ワザ" S+1== "とはいえ"	set-target "일부러"	ワザとはいえ 일부러라고는 해도
 cx:audit-novel:50	LEX-5651	&&2 S+0== "ワザ" S+1== "とでは"	set-target "일부러 그런 것" set-target@+1 "(은)는"	ワザとではない 일부러 그런 것은 아니다
+cx:audit-novel:55	LEX-5651	&&3 S+0== "ワザ" S+1== "と" S+2== "Lじゃ"	set-target "일부러 그런" set-target@+1 " 것"	ワザとじゃない 일부러 그런 것이 아니다
 cx:audit-novel:60	LEX-5651	&&3 S+0== "ワザ" S+1== "との" ||4 S+2== "行為" S+2== "こと" S+2== "事" S+2== "ミス"	set-target "고의적" set-target@+1 "인"	ワザとのミス 고의적인 실수
-cx:audit-novel:70	LEX-5651	&&3 S+0== "で" S-1== "自身" P+1== "4**"	set-target@-1 "스스" set-target "로"	お前自身で決めろ 너 스스로 결정해라
-cx:audit-novel:71	LEX-5651	&&3 S+0== "で" ||3 S-1== "てめえ自身" S-1== "てめぇ自身" S-1== "テメェ自身" P+1== "4**"	set-target@-1 "너 스스" set-target "로"	てめえ自身で考えろ 너 스스로 생각해라
-cx:audit-novel:72	LEX-5651	&&3 S+0== "で" S-1== "自分自身" P+1== "4**"	set-target@-1 "자기 스스" set-target "로"	自分自身でやる 자기 스스로 한다
+cx:audit-novel:70	LEX-5651	&&3 S+0== "で" S-1== "自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "스스" set-target "로"	お前自身で決めろ 너 스스로 결정해라
+cx:audit-novel:71	LEX-5651	&&3 S+0== "で" ||3 S-1== "てめえ自身" S-1== "てめぇ自身" S-1== "テメェ自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "너 스스" set-target "로"	てめえ自身で考えろ 너 스스로 생각해라
+cx:audit-novel:72	LEX-5651	&&3 S+0== "で" S-1== "自分自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "자기 스스" set-target "로"	自分自身でやる 자기 스스로 한다
+cx:audit-novel:73	LEX-5651	&&3 S+0== "で" S-1== "彼自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "그 스스" set-target "로"	彼自身で解決した 그 스스로 해결했다
+cx:audit-novel:74	LEX-5651	&&3 S+0== "で" S-1== "彼女自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "그녀 스스" set-target "로"	彼女自身で解決した 그녀 스스로 해결했다

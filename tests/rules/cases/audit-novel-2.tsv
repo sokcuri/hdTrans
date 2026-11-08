@@ -135,3 +135,15 @@ cx:audit-novel:72	自分自身が嫌いだ	has:자기 자신	keep	rewrites
 dict:audit-novel-2	推測の域を出ないが、	has:추측에 불과하지만	fix	lookup
 dict:audit-novel-2	それはもう趣味の域を出ている。	has:수준을 벗어나 있다	fix	lookup
 dict:audit-novel-2	十九駆、見参！	has:등장!	keep	lookup
+cx:audit-novel:20	剣のワザと魔法を磨く	has:기술과 마법을	keep	rewrites
+cx:audit-novel:20	新しいワザと古いワザ	has:기술과 낡은 기술	keep	rewrites
+cx:audit-novel:20	ワザとワザの組み合わせ	has:기술과 기술의	keep	rewrites
+cx:audit-novel:55	ワザとじゃない。	has:일부러 그런 것이 아니다	fix	rewrites
+cx:audit-novel:55	剣のワザじゃない。	lacks:일부러	keep	rewrites
+dict:audit-novel-2	ワザとらしく咳をした。	has:작위적으로	fix	lookup
+dict:audit-novel-2	ワザとらしい演技だ。	has:작위적인 연기	fix	lookup
+cx:audit-novel:10	王に謁見する。	has:왕을 알현한다	fix	rewrites
+cx:audit-novel:73	彼自身で解決した。	has:그 스스로 해결했다	fix	rewrites
+cx:audit-novel:73	彼自身の問題だ。	has:그 자신의 문제	keep	rewrites
+cx:audit-novel:74	彼女自身で解決した。	has:그녀 스스로 해결했다	fix	rewrites
+cx:audit-novel:74	彼女自身の問題だ。	has:그녀 자신의	keep	rewrites
