@@ -1,0 +1,30 @@
+# 규칙: LEX-5800
+rule	input	expected	kind	layer
+names:kana-label	(ひかる)待って！	(히카루) 기다려!	fix	names
+names:kana-label	（まもる）大丈夫だよ。	(마모루) 괜찮아.	fix	names
+names:kana-label	［のぼる］行くぞ！	has:[노보루]	fix	names
+names:kana-label	[あゆむ]うん。	has:[아유무]	fix	names
+names:kana-label	かける「早く来て」	has:카케루 「	fix	names
+names:kana-label	(ひかる・まもる)せーの！	has:(히카루·마모루)	fix	names
+names:kana-label	(会場 笑い)(のぼる)ほんと？	has:(회장 웃음)(노보루)	fix	names
+names:kana-label	ぽんた(Feat.IA)	has:폰타(	fix	names
+names:kana-label	いさむ：それは違う。	has:이사무：	keep	names
+names:kana-label	⚟（すすむ）もしもし？	has:⚟(스스무)	keep	names
+names:kana-label	(たまお)はい！	has:(타마오)	keep	names
+names:kana-label	(かけるくん)おはよう。	has:(카케루 군)	keep	names
+names:kana-label	山田太郎(たろー/T-BOX)	has:(타로/T-BOX)	keep	names
+names:kana-label	（笑い）そうだね。	has:(웃음)	keep	names
+names:kana-label	(ざわめき)皆さん 静かに。	has:(웅성거림)	keep	names
+names:kana-label	(くしゃみ)ああ…	has:(재채기)	keep	names
+names:kana-label	(おかあさん)ごはんよ。	has:(어머니)	keep	names
+names:kana-label	(おきゃくさん)すみません。	has:(손님)	keep	names
+names:kana-label	(わらい)そうだね。	lacks:와라이	keep	names
+names:kana-label	(ひそひそ)聞いた？	has:(소곤소곤)	keep	names
+names:kana-label	昨日は(たぶん)晴れだった。	has:(아마)	keep	names
+names:kana-label	(はい)そうです。	has:(네)	keep	names
+names:kana-label	ねえ「待って」	has:저기	keep	names
+names:kana-label	（ナレーション）その日、	has:(내레이션)	keep	names
+names:kana-label	ほら「見て」	has:자 「	keep	names
+names:kana-label	それは(まもる)ためだ。	lacks:마모루	keep	names
+names:kana-label	けもみみ：兎　美徳：純潔	lacks:케모미미	keep	names
+names:kana-label	これは(とても/very)いい	lacks:토테모	keep	names

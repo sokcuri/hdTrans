@@ -1,0 +1,4 @@
+# 규칙: LEX-5800
+rule	input	expected	kind	layer
+names:kana-label	(のぼる)行くぞ！\n(あゆむ)うん。\n（笑い）\n(のぼる)待って！	has:(노보루) 가겠어!\n(아유무) 응.\n(웃음)\n(노보루) 기다려!	fix	names
+names:kana-label	かける「早く来て」\nかける「ほら」	has:카케루 「빨리 와」\n카케루 「	fix	names
