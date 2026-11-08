@@ -119,9 +119,9 @@ normalize:dialect-senba	そんなん言われるんも オヤジあっての わ
 normalize:dialect-senba	さあ 人けのないうちに 出立しまひょ｡ へぇ｡	자 인기척이 없는 동안에 출발합시다. 헤에.	fix	normalize
 normalize:dialect-senba	分かりました。 お出ししまひょ。	알겠습니다. 내 드릴게요.	fix	normalize
 normalize:dialect-senba	よう１晩で…｡ 待ちなはれ！	요우 1밤에…. 기다려!	fix	normalize
-normalize:dialect-senba	おやっさん えらいけったいな部屋でっせ	아저씨 대단한 결체인 방이에요	fix	normalize
+normalize:dialect-senba	おやっさん えらいけったいな部屋でっせ	아저씨 대단한 괴상한 방이에요	fix	normalize
 normalize:dialect-senba	そうだす｡ その会で お三味線 弾かしてもらう事に なりましたんや｡	그렇습니다. 그 회의에서 샤미센 연주하게 해 주게 되었던 이야.	fix	normalize
-normalize:dialect-senba	もう 堪忍しとくんなはれ	이제 인내해 두어 주세요	fix	normalize
+normalize:dialect-senba	もう 堪忍しとくんなはれ	이제 용서해 두어 주세요	fix	normalize
 normalize:dialect-senba	シルクハットに義理のない漁師 知ってはりまっか？	실크해트에 의리가 없는 어부 알고 계십니까?	fix	normalize
 normalize:dialect-senba	それ ホンマにうれしいことでっせ	그것 진짜로 기쁜 일이에요	fix	normalize
 normalize:dialect-senba	やったりまっせ！ れんげきのかた！	해 줘요! 렝게 오고 분!	fix	normalize

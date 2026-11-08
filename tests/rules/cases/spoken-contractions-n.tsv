@@ -1,7 +1,7 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
 sound:contracted-n	「腐れ上司も去年同じことやってたし、文句は言わせんぞ」	has:말하게 하지 않아	fix	sound
-sound:contracted-n	こっち見んな！この糞提督！	이쪽 보지 마! 이 대변 제독!	fix	sound
+sound:contracted-n	こっち見んな！この糞提督！	이쪽 보지 마! 이 똥제독!	fix	sound
 sound:contracted-n	次から次へと…、こっち来んな！	잇달아…, 여기 오지 마!	fix	sound
 sound:contracted-n	だから、ジロジロ見んなって、このクソ提督！	그러니까, 빤히 보지 말라고, 이 빌어먹을 제독!	fix	sound
 sound:contracted-n	よクソエセ霊能力者さん笑わせんな	has:웃기지 마	fix	sound

@@ -9537,7 +9537,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 酒びたり	장취	N110			GN							jisjk:185045
 言難	말하기 어$G8@	H7U0	UTsUSe		GN	268	||1 &&4 S-1== "とは" P-2== "1**" A-2!= "VHn" D-1= "(이)라고는"	사람 일반 의미코드가 없는 명사와 とは 뒤에서 言い難를 말하기 어렵다로 고르고 とは를 이라고는으로 바꾼다. (미발동: rare-context)				jisjk:5784
 継歯	의치를 이어댐	N110			GN							jisjk:243840
-稀代	희세	N110			GN							jisjk:40206
+稀代	희대	N110			GN							jisjk:40206
 帳つけ	기장	N110		Hd	GN							jisjk:153465
 帳づけ	기장	N110		Hd	GN							jisjk:153465
 幼な名	아명	N110			GN							jisjk:30647
@@ -18939,7 +18939,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あぶら汚れ	기름때	N110			GN							w:18960
 閩語	민어	N110			GN							w:7697
 フル・メンバー	전원	N110	VHn		GN							jisjk:133531
-煮ころがし	굴리면서 바짝 조린 음식	N110			GN							jisjk:247763
+煮ころがし	조림	N110			GN							jisjk:247763
 カフェテリア・プラン	카페테리아 플랜	N110			BZ							jisjk:351997
 目もあてられな	눈 뜨고 볼 수 $FA@	H7U0			GN							jisjk:117128
 目もあてられな	차마 볼 수 $FA@	H7N0	SFl		GN							jisjk:136736

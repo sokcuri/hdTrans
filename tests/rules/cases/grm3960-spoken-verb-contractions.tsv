@@ -8,7 +8,7 @@ normalize:ru-contraction	清めんのよ 全てを これで… 嫌い！	정화
 normalize:ru-contraction	あんたなんかに 何が分かんのよ｡	너같은 것에 무엇을 알 수 있는 거야.	fix	normalize
 normalize:ru-contraction	寅さん 帰ってくんの？	토라 씨 돌아오는 거야?	fix	normalize
 normalize:ru-contraction	「ギャル系で攻めんならよ、高雄妹は超えてこいや！」	「갸루계로 공격한다면, 다카오여동생은 넘고 와야!」	fix	normalize
-normalize:spoken-verb	親方 お帰んなさい	우두머리 어서 오세요	fix	normalize
+normalize:spoken-verb	親方 お帰んなさい	대장 어서 오세요	fix	normalize
 normalize:spoken-verb	だめだこいつ話になんねぇ。	안 된다 이 녀석 이야기가 되지 않는다.	fix	normalize
 normalize:spoken-verb	だから うまくなんないんじゃないの？	그러니까 능숙해지지 않는 거 아니야?	fix	normalize
 normalize:spoken-verb	殺しちまったらシャレになんねえぞ	죽여버리면 장난이 아니야	fix	normalize

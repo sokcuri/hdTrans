@@ -117,7 +117,7 @@ cx:archaic-speech:115	いろいろあって疲れたんじゃろう	!rule:cx:arc
 cx:archaic-speech:118	「書見いたそうか」	「독서할까」	fix	rewrites
 cx:archaic-speech:118	「それほどの御熱心なら、思う存分の夢を見る手段が御座るが、伝授いたそうか」	「그렇게의 어 열심이라면, 마음껏의 꿈을 꾸는 수단이 계시지만, 전수할까」	fix	rewrites
 cx:archaic-speech:118	「いたそうか」	「아파 보이는가」	keep	rewrites
-cx:archaic-speech:120	装束を拙者が用意いたそう	의복을 내가 준비하겠소	fix	rewrites
+cx:archaic-speech:120	装束を拙者が用意いたそう	의상을 내가 준비하겠소	fix	rewrites
 cx:archaic-speech:120	「いよいよ今夜決行いたそう」	「드디어 오늘 밤 결행하겠소」	fix	rewrites
 cx:archaic-speech:120	助太刀いたそう	조력하겠소	fix	rewrites
 cx:archaic-speech:120	と 言われていたそうだ	라고 하고 있었다고 한다	keep	rewrites

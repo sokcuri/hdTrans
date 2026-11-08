@@ -3702,3 +3702,42 @@ cx:audit-novel:71	LEX-5651	&&3 S+0== "で" ||3 S-1== "てめえ自身" S-1== "�
 cx:audit-novel:72	LEX-5651	&&3 S+0== "で" S-1== "自分自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "자기 스스" set-target "로"	自分自身でやる 자기 스스로 한다
 cx:audit-novel:73	LEX-5651	&&3 S+0== "で" S-1== "彼自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "그 스스" set-target "로"	彼自身で解決した 그 스스로 해결했다
 cx:audit-novel:74	LEX-5651	&&3 S+0== "で" S-1== "彼女自身" ||2 P+1== "4**" &&2 P+1== "1**" B+2== "する"	set-target@-1 "그녀 스스" set-target "로"	彼女自身で解決した 그녀 스스로 해결했다
+//= audit-novel-2	after Select 249	The に after a person before the noun 謁見 or 拝謁 and を asks to see that person, 에게 (王に謁見を求めた 왕에게 알현을 청했다); 見参 that ends the sentence after a person in に is 알현 that takes the person, 을/를 (王に見参！ 왕을 알현!). 自身では before a verb is 스스로는 (自分自身では気づかない 스스로는 눈치채지 못한다). ワザとか at the end of an utterance asks whether it was on purpose, 일부러야 (ワザとか？). A lone ね after ワザと and a comma at the end of an utterance is 말이야 (ワザと、ね。 일부러, 말이야). 二月 to 六月 before ぶり (written apart, 석 달 만), ほど, ばかり, 近く, 余り or a passing (が経った, not 過ぎ, which a calendar month does too) count months, 두 달 to 여섯 달 (三月ぶり 석 달 만). 胡麻をする after すり鉢 or before 和え物 grinds sesame, 깨를 갈다; a 糞 alone as an utterance is the curse 젠장 (spec LEX-5656).
+cx:audit-novel-2:10	LEX-5656	&&4 S+0== "に" ||10 F-1== "person" A-1== "VHn" S-1== "R殿" S-1== "R様" S-1== "R陛下" S-1== "R殿下" S-1== "王" S-1== "国王" S-1== "皇帝" S-1== "女王" ||2 S+1== "謁見" S+1== "拝謁" S+2== "を"	select-target "에게"	王に謁見を求めた 왕에게 알현을 청했다
+cx:audit-novel-2:12	LEX-5656	&&4 S+0== "に" ||10 F-1== "person" A-1== "VHn" S-1== "R殿" S-1== "R様" S-1== "R陛下" S-1== "R殿下" S-1== "王" S-1== "国王" S-1== "皇帝" S-1== "女王" S+1== "見参" F+1== "sentence-end"	select-target "(을)를" set-target@+1 "알현"	王に見参！ 왕을 알현!
+cx:audit-novel-2:20	LEX-5656	&&3 S+0== "では" ||3 S-1== "自身" S-1== "自分自身" S-1== "自分" P+1== "4**"	set-target@-1 "스스" set-target "로는"	自分自身では気づかない 스스로는 눈치채지 못한다
+cx:audit-novel-2:22	LEX-5656	&&3 S+0== "では" S-1== "彼自身" P+1== "4**"	set-target@-1 "그 스스" set-target "로는"	彼自身では無理だ 그 스스로는 무리다
+cx:audit-novel-2:24	LEX-5656	&&3 S+0== "では" S-1== "彼女自身" P+1== "4**"	set-target@-1 "그녀 스스" set-target "로는"	彼女自身では気づかない 그녀 스스로는 눈치채지 못한다
+cx:audit-novel-2:30	LEX-5656	&&3 S+0== "ワザ" S+1== "とか" F+1== "sentence-end"	set-target "일부러" set-target@+1 "야"	ワザとか？ 일부러야?
+cx:audit-novel-2:42	LEX-5656	&&4 S+0== "ね" F+0== "quote-end" S-1== "と、" S-2== "ワザ"	set-target " 말이야"	ワザと、ね。 일부러, 말이야
+cx:audit-novel-2:50	LEX-5656	&&2 S+0== "二月" S+1== "ぶり"	set-target "두 달" set-target@+1 " 만"	二月ぶりに会った 두 달 만에 만났다
+cx:audit-novel-2:51	LEX-5656	&&3 S+0== "二月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "두 달"	二月が経った 두 달이 지났다
+cx:audit-novel-2:52	LEX-5656	&&2 S+0== "三月" S+1== "ぶり"	set-target "석 달" set-target@+1 " 만"	三月ぶりに会った 석 달 만에 만났다
+cx:audit-novel-2:53	LEX-5656	&&3 S+0== "三月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "석 달"	三月が経った 석 달이 지났다
+cx:audit-novel-2:54	LEX-5656	&&2 S+0== "四月" S+1== "ぶり"	set-target "넉 달" set-target@+1 " 만"	四月ぶりに会った 넉 달 만에 만났다
+cx:audit-novel-2:55	LEX-5656	&&3 S+0== "四月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "넉 달"	四月が経った 넉 달이 지났다
+cx:audit-novel-2:56	LEX-5656	&&2 S+0== "五月" S+1== "ぶり"	set-target "다섯 달" set-target@+1 " 만"	五月ぶりに会った 다섯 달 만에 만났다
+cx:audit-novel-2:57	LEX-5656	&&3 S+0== "五月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "다섯 달"	五月が経った 다섯 달이 지났다
+cx:audit-novel-2:58	LEX-5656	&&2 S+0== "六月" S+1== "ぶり"	set-target "여섯 달" set-target@+1 " 만"	六月ぶりに会った 여섯 달 만에 만났다
+cx:audit-novel-2:59	LEX-5656	&&3 S+0== "六月" ||2 S+1== "が" S+1== "も" ||3 S+2== "L経" S+2== "Lたっ" S+2== "Lたち"	set-target "여섯 달"	六月が経った 여섯 달이 지났다
+cx:audit-novel-2:70	LEX-5656	&&2 ||3 S+0== "胡麻をす" S+0== "ゴマをす" S+0== "ごまをす" ||2 ||4 S-2== "すり鉢" S-2== "擂り鉢" S-2== "すりこぎ" S-2== "擂粉木" ||4 S+1== "和え物" S+2== "和え物" S+1== "L和え" S+2== "L和え"	set-target "깨를 &KB@"	すり鉢で胡麻をすった 절구로 깨를 갈았다
+cx:audit-novel-2:72	LEX-5656	&&3 S+0== "糞" F+0== "opens-line" ||3 F+0== "sentence-end" F+0== "quote-end" F+0== "utterance-end"	set-target "젠장"	糞！ 젠장!
+cx:audit-novel-2:60	LEX-5656	&&2 S+0== "二月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "두 달"	二月ほど入院した 두 달만큼 입원했다
+cx:audit-novel-2:62	LEX-5656	&&2 S+0== "三月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "석 달"	三月ほど入院した 석 달만큼 입원했다
+cx:audit-novel-2:64	LEX-5656	&&2 S+0== "四月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "넉 달"	四月ほど入院した 넉 달만큼 입원했다
+cx:audit-novel-2:66	LEX-5656	&&2 S+0== "五月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "다섯 달"	五月ほど入院した 다섯 달만큼 입원했다
+cx:audit-novel-2:68	LEX-5656	&&2 S+0== "六月" ||4 S+1== "Lほど" S+1== "Lばかり" S+1== "L近く" S+1== "L余り"	set-target "여섯 달"	六月ほど入院した 여섯 달만큼 입원했다
+cx:audit-novel-2:80	LEX-5656	&&2 S+0== "二月" S-1== "あと"	set-target "두 달"	あと二月で卒業だ 앞으로 두 달이면 졸업이다
+cx:audit-novel-2:81	LEX-5656	&&2 S+0== "三月" S-1== "あと"	set-target "석 달"	あと三月で卒業だ 앞으로 석 달이면 졸업이다
+cx:audit-novel-2:82	LEX-5656	&&2 S+0== "四月" S-1== "あと"	set-target "넉 달"	あと四月で卒業だ 앞으로 넉 달이면 졸업이다
+cx:audit-novel-2:83	LEX-5656	&&2 S+0== "五月" S-1== "あと"	set-target "다섯 달"	あと五月で卒業だ 앞으로 다섯 달이면 졸업이다
+cx:audit-novel-2:84	LEX-5656	&&2 S+0== "六月" S-1== "あと"	set-target "여섯 달"	あと六月で卒業だ 앞으로 여섯 달이면 졸업이다
+cx:audit-novel-2:90	LEX-5656	&&2 S+0== "二日" S-1== "R月"	set-target "2일"	七月二日 7월 2일
+cx:audit-novel-2:92	LEX-5656	&&2 S+0== "四日" S-1== "R月"	set-target "4일"	七月四日 7월 4일
+cx:audit-novel-2:93	LEX-5656	&&2 S+0== "五日" S-1== "R月"	set-target "5일"	七月五日 7월 5일
+cx:audit-novel-2:94	LEX-5656	&&2 S+0== "六日" S-1== "R月"	set-target "6일"	七月六日 7월 6일
+cx:audit-novel-2:95	LEX-5656	&&2 S+0== "七日" S-1== "R月"	set-target "7일"	七月七日 7월 7일
+cx:audit-novel-2:96	LEX-5656	&&2 S+0== "八日" S-1== "R月"	set-target "8일"	七月八日 7월 8일
+cx:audit-novel-2:97	LEX-5656	&&2 S+0== "九日" S-1== "R月"	set-target "9일"	七月九日 7월 9일
+cx:audit-novel-2:98	LEX-5656	&&2 S+0== "十日" S-1== "R月"	set-target "10일"	七月十日 7월 10일
+cx:audit-novel-2:100	LEX-5656	&&2 S+0== "一月" S+1== "R日"	set-target "1월"	一月一日 1월 1일
