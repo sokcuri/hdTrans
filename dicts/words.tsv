@@ -28444,10 +28444,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お下がりくださいませ	물러나 주십시오	A9H1			GN			LEX-5051: お下がりくださいませ 물러나 주십시오				w:34709
 ドック入り	도크 입거	N110			GN			LEX-5051: ドック入り 도크 입거				w:34710
 倒壊	붕괴	N110			GN			LEX-5230: 建物が倒壊する 건물이 붕괴한다	replace xxx		とうかい	w:35221
-輩	무리	N110	VHn		GN			LEX-5230: ああいう輩 저런 무리	replace xxx		やから	w:35223
+輩	작자들	N110	VHn		GN			LEX-5230: ああいう輩 저런 작자들	replace xxx		やから	w:35223
 鉄くず	고철	N110			GN			LEX-5230: 鉄くずを拾う 고철을 줍는다	replace xxx		てつくず	w:35225
 鉄くず屋	고철상	N110	VHn		GN			LEX-5230: 鉄くず屋が引き取る 고철상이 인수한다	replace xxx		てつくずや	w:35226
-掛け合わせ	교배	N110			GN			LEX-5230: 感染源との掛け合わせ 감염원과의 교배	replace xxx		かけあわせ	w:35227
+掛け合わせ	조합	N110			GN			LEX-5230: 感染源との掛け合わせ 감염원과의 조합	replace xxx		かけあわせ	w:35227
 体当たり	몸통 박치기	N110			GN			LEX-5230: 体当たりで扉を破った 몸통 박치기로 문을 부쉈다	replace xxx		たいあたり	w:35228
 尻叩き	엉덩이 때리기	N110			GN			LEX-5230: 尻叩きの刑 엉덩이 때리기 벌	replace xxx		しりたたき	w:35229
 幻術	환술	N110			GN			LEX-5230: 幻術の得意な魔物 환술에 능한 마물	replace xxx		げんじゅつ	w:35230
@@ -28462,4 +28462,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 焼きりんご	구운 사과	N110			GN			LEX-5230: 焼きりんご 구운 사과	replace xxx		やきりんご	w:35240
 焼きリンゴ	구운 사과	N110			GN			LEX-5230: 焼きリンゴ 구운 사과	replace xxx		やきりんご	w:35241
 副首相	부총리	N110	VHn		GN			LEX-5230: 副首相が訪問した 부총리가 방문했다	replace xxx		ふくしゅしょう	w:35242
-日系人	일본계	N110	VHn		GN			LEX-5230: 日系人の多い町 일본계가 많은 마을	replace xxx		にっけいじん	w:35243
+日系人	일본계 사람	N110	VHn		GN			LEX-5230: 日系人の多い町 일본계 사람이 많은 마을	replace xxx		にっけいじん	w:35243
