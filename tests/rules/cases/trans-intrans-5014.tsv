@@ -105,3 +105,110 @@ pack:argument-senses:5120	金を遊ばせておく	has:돈을 놀려 둔다	keep
 pack:argument-senses:5120	手を遊ばせている	has:손을 놀리고 있다	keep	packs
 pack:argument-senses:5120	指を遊ばせて	has:손가락을 놀려	keep	packs
 pack:argument-senses:5120	みんなを起こしてくる	has:모두를 깨워 온다	keep	packs
+analysis:can-tehairu	まだ何もできてはいない。	has:할 수는 없다	fix	analysis
+analysis:can-tehairu	まだ何もできてはいなかった。	has:할 수는 없었다	fix	analysis
+analysis:can-tehairu	まだ何もできてはいません。	has:할 수는 없습니다	fix	analysis
+analysis:can-tehairu	まだ何もできてはいませんでした。	has:할 수는 없었습니다	fix	analysis
+analysis:can-tehairu	まだ何もできてはいるが	has:할 수는 있지만	fix	analysis
+analysis:can-tehairu	まだ何もできちゃいない。	has:할 수는 없다	fix	analysis
+analysis:can-tehairu	まだ何もできてはいないよ！	has:할 수는 없어	fix	analysis
+analysis:can-tehairu	まだ誰も来られてはいない。	has:올 수는 없다	fix	analysis
+analysis:can-tehairu	まだ誰も来られてはいません。	has:올 수는 없습니다	fix	analysis
+analysis:can-tehairu	まだ誰も行けてはいない。	has:갈 수는 없다	fix	analysis
+analysis:can-tehairu	まだ誰も行けてはいるが	has:갈 수는 있지만	fix	analysis
+analysis:can-tehairu	まだ何も分かってはいない。	has:알지는 못한다	fix	analysis
+analysis:can-tehairu	まだ何も分かってはいません。	has:알지는 못합니다	fix	analysis
+analysis:can-tehairu	まだ何も分かってはいませんよ。	has:알지는 못해요	fix	analysis
+analysis:can-tehairu	まだ何も分かってはいないよ！	has:알지는 못해	fix	analysis
+analysis:can-tehairu	「ええまあ。つっても俺も良く分かっちゃいないんですがね。	has:알지는 못한다	fix	analysis
+analysis:can-tehairu	まだ何も分かってはいるが	has:알고는 있지만	keep	analysis
+analysis:can-tehairu	まだ何も見えてはいません。	has:보이지는 않습니다	fix	analysis
+analysis:can-tehairu	「仕事に疲れ、人間関係に疲れ、もう生きていく希望がない……。そんなふうに苦しんではいませんか？」	has:괴로워하고는 있지 않습니까	keep	analysis
+analysis:can-tehairu	分からない	has:모른다	keep	analysis
+analysis:can-tehairu	何わけわかんねえこと言ってんだ	has:알지 않는	keep	analysis
+dict:w:35127	男共が騒いでいる	has:남자들이	fix	local
+dict:w:35127	それはこの国の馬鹿共を見ていれば判るだろう？	has:바보들을	fix	local
+dict:w:35127	これより先は、化け物共がはいかいする帝都領土外です。	has:괴물들이	fix	local
+dict:w:35127	部下共は洗礼の結果がどうあれ何かと新参者のおまえが気に入らない	has:부하들은	fix	local
+dict:w:35127	子供共を集めろ	has:아이들을 모아라	fix	local
+dict:w:35127	それじゃあ、二人共ラムサスに……？	lacks:들	keep	local
+dict:w:35127	三人共来た	has:세 명 모두	keep	local
+dict:w:35127	貴様たちは夫婦共揃って弱虫だな。	has:부부 모두	keep	local
+dict:w:35127	共に戦おう	has:함께 싸우자	keep	local
+dict:w:35127	親子共に元気だ	has:모두 건강하다	keep	local
+defaults:trans-5014	私共にお任せください	has:저희에게 맡겨 주세요	fix	lookup
+pack:argument-senses:1	猫たちを起こす	has:고양이들을 깨운다	fix	packs
+pack:argument-senses:1	犬を起こした	has:개를 깨웠다	fix	packs
+pack:argument-senses:1	猫を起こさないで	has:고양이를 깨우지 마	fix	packs
+pack:argument-senses:1	事件を起こす	has:사건을 일으킨다	keep	packs
+pack:argument-senses:1	問題を起こした	has:문제를 일으켰다	keep	packs
+analysis:can-tehairu	まだ何も分かってはいなかった。	has:알지는 못했다	keep	analysis
+analysis:can-tehairu	覚えてはいない。	has:기억하지는 못한다	fix	analysis
+analysis:can-tehairu	その内容はよくは覚えてはいないが、アメリカインデアンの写真を見たが	has:기억하지는 못하지만	fix	analysis
+analysis:can-tehairu	覚えてはいなかった。	has:기억하지는 못했다	keep	analysis
+analysis:can-tehairu	気づいてはいない。	has:눈치채지는 못했다	keep	analysis
+analysis:can-tehairu	まだ何も見えてはいない。	has:보이지는 않는다	fix	analysis
+analysis:can-tehairu	まだ何も見えてはいなかった。	has:보이지는 않았다	keep	analysis
+analysis:can-tehairu	まだ何も聞こえてはいない。	has:들리지는 않는다	fix	analysis
+analysis:can-tehairu	まだ何も聞こえてはいませんでした。	has:들리지는 않았습니다	fix	analysis
+analysis:can-tehairu	まだ何も見えてはいませんよ。	has:보이지는 않아요	fix	analysis
+dict:jisjk:115606	三人共揃った	has:세 명 모두	fix	local
+dict:jisjk:115606	二人共元気だ	has:두 사람 모두	fix	local
+analysis:can-tehairu	まだ何も来られちゃいない。	has:올 수는 없다	fix	analysis
+analysis:can-tehairu	まだ何も行けちゃいない。	has:갈 수는 없다	fix	analysis
+analysis:can-tehairu	まだ何もできちゃいません。	has:할 수는 없습니다	fix	analysis
+analysis:can-tehairu	まだ何も出来てはいない。	has:할 수는 없다	fix	analysis
+analysis:can-tehairu	まだ何も出来てはいなかった。	has:할 수는 없었다	fix	analysis
+analysis:can-tehairu	まだ何も出来てはいません。	has:할 수는 없습니다	fix	analysis
+analysis:can-tehairu	まだ何も出来てはいないよ！	has:할 수는 없어	fix	analysis
+analysis:can-tehairu	準備が出来てはいない。	has:되어 있지는 않다	keep	analysis
+analysis:can-tehairu	料理が出来ている。	has:요리가 되어있다	keep	analysis
+analysis:can-tehairu	少なくとも彼の顔は公表できる	has:공표할 수 있다	keep	analysis
+cx:web-fixes-j:265	敵共を蹴散らせ	has:적들을	fix	rewrites
+cx:web-fixes-j:265	雑魚共が	has:잡졸들이	fix	rewrites
+cx:web-fixes-j:265	う゛っ……痛たた……。外道共め、今に……今に見とれよ！	has:악당들	fix	rewrites
+cx:web-fixes-j:265	共に戦おう	!rule:cx:web-fixes-j:265	keep	rewrites
+cx:web-fixes-j:264	親子共、元気です	has:부모와 자식 모두	fix	rewrites
+cx:web-fixes-j:264	兄弟共、元気です	has:형제 모두	fix	rewrites
+cx:web-fixes-j:264	男共が騒いでいる	!rule:cx:web-fixes-j:264	keep	rewrites
+pack:argument-senses:5043	倒れた馬を起こした。	has:쓰러진 말을 일으켰다	fix	packs
+pack:argument-senses:5043	転んだ犬を起こしてやった。	has:개를 일으켜 주었다	fix	packs
+pack:argument-senses:5043	倒れた彼を起こした。	has:그를 일으켰다	fix	packs
+pack:argument-senses:5043	転んだ子供を起こしてあげた。	has:아이를 일으켜 주었다	fix	packs
+pack:argument-senses:5043	倒れている馬を起こした。	has:말을 일으켰다	fix	packs
+pack:argument-senses:5043	倒れていた男を起こした。	has:남자를 일으켰다	fix	packs
+pack:argument-senses:5043	地面に倒れた兵士を起こす。	has:병사를 일으킨다	fix	packs
+pack:argument-senses:5043	転んだ彼女を起こして、	has:그녀를 일으키고	fix	packs
+pack:argument-senses:5044	馬を起こして立たせた。	has:말을 일으켜	fix	packs
+pack:argument-senses:5044	彼を起こして座らせた。	has:그를 일으켜	fix	packs
+pack:argument-senses:1	寝ている猫を起こす。	has:고양이를 깨운다	keep	packs
+pack:argument-senses:1	寝ている彼を起こした。	has:그를 깨웠다	keep	packs
+pack:argument-senses:1	朝早く犬を起こした。	has:개를 깨웠다	keep	packs
+analysis:plural-suffix	あいつら共を倒せ。	has:저 녀석들을	fix	analysis
+analysis:plural-suffix	あいつら達	lacks:들들	fix	analysis
+analysis:plural-suffix	奴ら共め	lacks:들들	fix	analysis
+analysis:plural-suffix	彼ら達は	has:그들은	fix	analysis
+analysis:plural-suffix	息子さんたち	has:아들들	keep	analysis
+analysis:plural-suffix	僕たち	has:우리	keep	analysis
+analysis:notyet-chau	覚えちゃいません。	has:기억하지는 못합니다.	fix	analysis
+analysis:notyet-chau	分かっちゃいませんでした。	has:알지는 못했습니다.	fix	analysis
+analysis:notyet-chau	食べちゃいませんでした。	has:먹지는 않았습니다.	fix	analysis
+analysis:notyet-chau	見えちゃいませんでした。	has:보이지는 않았습니다.	fix	analysis
+analysis:notyet-chau	分かっちゃいない。	has:알지는 못한다.	keep	analysis
+analysis:notyet-chau	食べちゃいません。	has:먹지는 않습니다.	keep	analysis
+analysis:can-tehairu	理解できてはいない。	has:이해할 수는 없다	keep	analysis
+analysis:can-tehairu	勉強はできてはいるが、	has:공부는 할 수는 있지만	fix	analysis
+analysis:can-tehairu	準備はできてはいる。	has:준비는 되어는 있다	fix	analysis
+analysis:can-tehairu	準備はできてはいない。	has:준비는 되어 있지는 않다	fix	analysis
+analysis:can-tehairu	準備はできてはいません。	has:준비는 되어 있지는 않습니다	fix	analysis
+analysis:can-tehairu	準備もできてはいませんでした。	has:준비도 되어 있지는 않았습니다	fix	analysis
+analysis:can-tehairu	用意が出来てはいなかった。	has:되어 있지는 않았다	fix	analysis
+pack:argument-senses:5043	倒れた白い馬を起こした。	has:흰 말을 일으켰다	fix	packs
+pack:argument-senses:5043	倒れた大きな犬を起こした。	has:큰 개를 일으켰다	fix	packs
+pack:argument-senses:5043	倒れて泣いている子を起こした。	has:아이를 일으켰다	fix	packs
+pack:argument-senses:5043	倒れた彼の馬を起こした。	has:그의 말을 일으켰다	fix	packs
+pack:argument-senses:5043	倒れて馬を起こした。	has:말을 일으켰다	fix	packs
+dict:me-yatsu:1	悪党共め！	has:악당들!	fix	local
+dict:me-yatsu:1	男共め	has:남자들	fix	local
+dict:me-yatsu:1	奴ら共め	lacks:녀석	fix	local
+pack:argument-senses:5043	倒れた私の犬を起こした。	has:내 개를 일으켰다	fix	packs

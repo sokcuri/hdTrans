@@ -405,7 +405,9 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         static constexpr std::string_view kArgSlots[] = {"arg", "subj", "obj", "dat", "loc", "with", "from", "to"};
         const std::size_t dot = a.slot.find('.');
         const std::string_view base = std::string_view(a.slot).substr(0, dot);
-        if (dot != std::string_view::npos && base != "cl" && base != "main") {
+        // <slot>.mod: the predicate right before an argument of that slot that modifies it (倒れた馬を 倒れる)
+        const bool argMod = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "mod";
+        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod) {
             // <slot>.how: how an argument of that slot is written (bare, omitted …), with an attachment
             if (!c.attached) return false;
             bool held = false;
@@ -430,7 +432,29 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             spec[2]++;
             continue;
         }
-        if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
+        if (argMod) {
+            nouns = false;
+            for (const Arg& g : c.args) {
+                if ((base != "arg" && g.slot != base) || g.item == nullptr) continue;
+                // the predicates of the noun phrase before the argument, through adnominals, other modifiers and a
+                // possessor (倒れた白い馬, 倒れた大きな犬, 倒れた彼の馬), and the て forms and auxiliaries of the one next to it
+                // (倒れて泣いている子); a て form right before the argument counts too (倒れて馬を起こした)
+                bool started = false;
+                const Item* m = g.item->prev;
+                for (int k = 0; k < 6 && m != nullptr && m->group != nullptr; k++, m = m->prev) {
+                    const char cls = ClassOf(m);
+                    if (cls == '0') continue;  // an adnominal word (大きな, この)
+                    // a possessor between the modifier and the argument (倒れた彼の馬, 倒れた私の犬)
+                    if (!started && m->group->surface == "の" && m->prev != nullptr && m->prev->group != nullptr && ClassOf(m->prev) == '1') {
+                        m = m->prev;
+                        continue;
+                    }
+                    if (!Predicate(cls)) break;
+                    started = true;
+                    if (!dict::InClass(HDTRANS_CLASS("aux.te-through"), m->group->surface)) pool.push_back({a.slot, m, {}, {}, {}});
+                }
+            }
+        } else if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
             for (const Arg& g : c.args)
                 if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
