@@ -1,0 +1,26 @@
+# 규칙: LEX-5011
+rule	input	expected	kind	layer
+dict:jisjk:344810	ここで少女がずぶ濡れになって一人ぼっちで居る、というのも居心地が悪い	has:마음이 불편하다	fix	lookup
+dict:jisjk:344810	なんだか居心地が悪い。	has:왠지 마음이 불편하다	fix	lookup
+dict:jisjk:344810	居心地が悪くなった。	has:마음이 불편해졌다	fix	lookup
+dict:w:35171	居心地の悪さを感じた。	has:불편함을 느꼈다	fix	lookup
+pack:argument-senses:5070	居心地が悪い部屋だった	has:지내기 불편한 방	keep	packs
+pack:argument-senses:5071	居心地がいい部屋	has:지내기 편한 방	fix	packs
+pack:argument-senses:5071	居心地のいい場所	has:지내기 편한 장소	fix	packs
+dict:w:35167	この部屋は居心地がいい。	has:편안하다	fix	lookup
+pack:argument-senses:5072	わたくしがクビを言い渡してやった料理長	has:해고를 통보	fix	packs
+pack:argument-senses:5072	彼に解雇を言い渡した。	has:해고를 통보했다	fix	packs
+pack:argument-senses:5072	停学処分を言い渡す	has:처분을 통보한다	fix	packs
+pack:argument-senses:5072	王は全員に待機を言い渡した。	has:대기를 명했다	keep	packs
+pack:argument-senses:5073	判決を言い渡す。	has:판결을 선고한다	fix	packs
+pack:argument-senses:5073	「お前に罰を言い渡す」	has:벌을 선고해	fix	packs
+pack:argument-senses:5073	だから、国外追放を言い渡された瞬間、リーシェは家に向かって駆け出した。	has:추방을 선고받은	keep	packs
+pack:argument-senses:5073	死刑を言い渡された。	has:사형을 선고받았다	keep	packs
+pack:argument-senses:5074	退学を言い渡された。	has:퇴학을 통보받았다	fix	packs
+pack:argument-senses:5074	別れを言い渡された	has:이별을 통보받았다	fix	packs
+pack:argument-senses:5074	判決が言い渡された。	has:판결이 내려졌다	keep	packs
+dict:jisjk:94070	クビにする	has:해고한다	keep	lookup
+dict:jisjk:94070	お前はクビだ！	has:해고야	keep	lookup
+pack:argument-senses:5067	全力疾走で酸素を求める肺が痙攣する	has:산소를 갈구하는 폐	fix	packs
+pack:argument-senses:5067	助けを求める	has:도움을 구한다	keep	packs
+pack:argument-senses:5067	答えを求める	lacks:갈구	keep	packs
