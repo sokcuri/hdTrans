@@ -36,7 +36,7 @@ lexical:reading	倒さなきゃいけないんだ！	쓰러뜨려야 해!	fix	lo
 lexical:reading	「やはりあなたを倒さないといけないんですね。あまり気乗りはしませんが」	has:쓰러뜨려야 하네요	fix	lookup
 lexical:reading	動きができるなら、	움직임이 생긴다면,	fix	lookup
 lexical:reading	動きが鈍い	움직임이 둔하다	keep	lookup
-lexical:reading	１年も経たない内に	1년도 지나지 않는 동안에	fix	lookup
+lexical:reading	１年も経たない内に	1년도 지나기도 전에	fix	lookup
 lexical:reading	暗くならないうちに帰ろう	어두워지기 전에 돌아가자	keep	lookup
 constraint:shikamo-before-motanai	一分ほどしかもたなかった。	has:정도밖에	fix	lookup
 constraint:shikamo-before-motanai	しかも高い	게다가 높다	keep	lookup

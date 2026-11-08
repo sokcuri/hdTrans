@@ -1395,6 +1395,22 @@ thread_local const RunLookup* imperativeRuns = nullptr;
 
 bool ImperativeIAt(std::string_view s, size_t pos, Match& m) { return imperativeRuns != nullptr && ImperativeI(s, pos, m, *imperativeRuns); }
 
+// The negative before 内に or a classical ぬ before うちに or 内に (経たない内に, 経たぬうちに, 知らぬ内に): the ないうちに
+// of an act that has not happened yet, which the word stage reads as -기 전에 (spec GRM-4012). ぬ follows an a-row kana, so
+// that 死ぬ stays.
+bool NaiUchi(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (Lit(s, p, "ない")) {
+        if (!Lit(s, p, "内に")) return false;
+    } else {
+        p = pos;
+        if (!Lit(s, p, "ぬ") || pos == 0 || !In(LastRune(s.substr(0, pos)).cp, U"かがさざただなばぱまらわ")) return false;
+        if (!Lit(s, p, "内に") && !Lit(s, p, "うちに")) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
@@ -1739,6 +1755,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         text = ReplaceAll(text, ImperativeIAt, [](const Match& m) { return std::string(m.group[1]); });
         imperativeRuns = nullptr;
     }
+    text = ReplaceAll(text, NaiUchi, [](const Match&) { return std::string("ないうちに"); });
     if (runs.dictionaryVerb != nullptr) {
         verbNeeRuns = &runs;
         text = ReplaceAll(text, VerbNeeAt, [](const Match& m) { return Cat({m.group[1], "ない", m.group[2]}); });
