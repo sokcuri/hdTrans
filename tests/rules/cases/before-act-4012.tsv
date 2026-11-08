@@ -1,0 +1,25 @@
+# 규칙: GRM-4012
+rule	input	expected	kind	layer
+normalize:nai-uchi	１年も経たない内に	1년도 지나기도 전에	fix	normalize
+normalize:nai-uchi	暗くならない内に帰ろう	어두워지기 전에 돌아가자	fix	normalize
+normalize:nai-uchi	冷めない内にどうぞ	has:식기도 전에	fix	normalize
+normalize:nai-uchi	忘れない内にメモする	has:잊기도 전에	fix	normalize
+normalize:nai-uchi	言い終わらぬうちに撃ったカーネルの弾丸をかわし、	has:끝내기도 전에	fix	normalize
+normalize:nai-uchi	経たぬうちに	지나기도 전에	fix	normalize
+normalize:nai-uchi	が、まだ仕合せと引張らない内に、怖い顔をした惣吉の母は	has:끌기도 전에	fix	normalize
+normalize:nai-uchi	知らない内に	모르는 사이에	keep	normalize
+normalize:nai-uchi	気付かない内に	깨닫지 못하는 사이에	keep	normalize
+normalize:nai-uchi	死ぬうちに	has:죽는	keep	normalize
+normalize:nai-uchi	見ない内は	has:동안은	keep	normalize
+cx:count-mo-negative:10	「いや、白崎と１年も違わないだろ」	has:1년도 다르지	fix	rewrites
+cx:count-mo-negative:10	「そっ！　教室から１分も掛からずに行けるんだから！」	has:1분도 걸리지	fix	rewrites
+cx:count-mo-negative:10	「実は、これを作るのに、部費は１円も使ってないんですよ。全部、俺の自腹」	has:1엔도	fix	rewrites
+cx:count-mo-negative:10	一人だったら一時間も耐えられんだろ	has:1시간도	fix	rewrites
+cx:count-mo-negative:10	三日も経った	3일이나 지났다	keep	rewrites
+cx:count-mo-negative:10	十人もいた	열 명이나 있었다	keep	rewrites
+cx:count-mo-negative:10	3000円の借金にまだ500円も足らん	has:500엔이나	keep	rewrites
+cx:count-mo-negative:10	何年も会わなかった	has:몇 년이나	keep	rewrites
+cx:final-adnominal-word:10	中２日の日程について監督は「今後、いろいろなチームで起こりうる。考えてもらいたい」と求めた。	has:일어날 수 있다.	fix	rewrites
+cx:final-adnominal-word:10	誰にでも起こり得る、	has:일어날 수 있다,	fix	rewrites
+cx:final-adnominal-word:10	起こりうる事故	일어날 수 있는 사고	keep	rewrites
+cx:count-mo-negative:10	もう２日も 入っておらぬ！	has:2일이나	keep	rewrites
