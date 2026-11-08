@@ -1,0 +1,22 @@
+# 규칙: SND-26
+rule	input	expected	kind	layer
+sound:mid-word-stretch	さぁ楽しいランチタ〜イム！	has:타임~	fix	sound
+sound:mid-word-stretch	ヤバ〜い！	큰일이야~!	fix	sound
+sound:mid-word-stretch	ねぇ、こいつら…やっちゃって、い～い？	has:좋아~?	fix	sound
+sound:mid-word-stretch	い～いねえ～。	has:좋구나	fix	sound
+sound:mid-word-stretch	うわあぁん、痛ぁい…！	has:아파	fix	sound
+sound:mid-word-stretch	て～とくにご連絡？見せて。	has:제독에게	fix	sound
+sound:mid-word-stretch	メリークリスマ～ス、みんな！	has:크리스마스~	fix	sound
+sound:mid-word-stretch	スペシャ～～～～ル！	has:스페셜~	fix	sound
+sound:mid-word-stretch	すご〜い	대단해~	keep	sound
+sound:mid-word-stretch	あ～あ	아~아	keep	sound
+sound:mid-word-stretch	うーん	으음	keep	sound
+sound:mid-word-stretch	ええー	에에	keep	sound
+sound:mid-word-stretch	コーヒー	커피	keep	sound
+sound:mid-word-stretch	や～だ	싫어~	keep	sound
+sound:mid-word-stretch	か～わ～い～い～！	귀여워~!	keep	sound
+sound:mid-word-stretch	さーて、追い込みますよ～ついてきて！	has:몰아넣어요~	keep	sound
+sound:mid-word-stretch	ナ～ラ姉さま大丈夫ぅ	has:나~라	keep	sound
+sound:mid-word-stretch	準備はい～い？	has:됐어~	keep	sound
+dict:w:35280	「…はぅ…あの子泣いてる……かぁいいよぅ……。」	has:귀여워	fix	lookup
+dict:w:35280	かぁいいモードの彼女	has:귀여운 모드	fix	lookup
