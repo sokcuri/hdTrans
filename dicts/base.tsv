@@ -95299,7 +95299,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一曲	한 곡	N110	USoQMU		GN				jisjk:125820		
 一書	일서	N110	VBkVSwVPl		GN				jisjk:125865		
 一書に	일서로 &AV@	M429			GN				jisjk:148480		
-一月	1월	N110	UMe		GN				jisjk:267062		
+一月	1월	N110	UMe		GN	13961	||7 &&1 S-1== "R年" &&2 S-1== "の" S-2== "R年" &&1 S+1== "R日" &&1 S+1== "L上旬" &&1 S+1== "L中旬" &&1 S+1== "L下旬" &&1 S+1== "L末"	연도 뒤(2020年一月, 昨年一月, 2020年の一月)와 날짜, 상순, 중순, 하순, 말 앞(一月一日, 一月末)의 一月은 기간 '한 달'이 아니라 달 이름 '1월'로 고른다.	jisjk:267062		
 一月分	1월분	N110			GN				jisjk:125622		
 一月寺	일월사	N110	UClVBl		GN				jisjk:228347		
 一服	휴식	N110			GN				jisjk:104676		
@@ -294103,7 +294103,6 @@ ttt	ttt	K110			GN				jisjk:201744
 笑	&HJ@	M460	UFl		GN				jisjk:93617		
 笑	미소&JA@	M425			GN				jisjk:93618		
 笑	비&HJ@	M440			GN				jisjk:93619		
-笑	힘이 빠&AL@	M420	VBp		GN				jisjk:93620		
 笑	익어서 벌어&AL@	M425	VPt		GN				jisjk:145043		
 笑い	웃음	N110	VBpUHr		GN				jisjk:9320		
 笑いぐさ	웃음거리	I110			GN				jisjk:75405		
