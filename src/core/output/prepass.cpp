@@ -1,6 +1,7 @@
 // Writing the composed items into their token texts, the spacing rules, and the output
 // of a sentence.
 #include <algorithm>
+#include <cctype>
 #include <map>
 #include <optional>
 
@@ -1373,6 +1374,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
     if (end > static_cast<int>(src.size())) return translated;
     const bool blank = Blank(translated);
     const bool empty = blank && Unread(item, src.substr(start, end - start));
+    const bool unknown = Contains(GAttr(item), "Nm");
     auto find = [&](int pos) -> const Written* {
         for (const Written& w : written_) {
             if (w.token == token && w.start == pos) return &w;
@@ -1380,15 +1382,35 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         return nullptr;
     };
     if (Written* w = const_cast<Written*>(find(start))) {
-        *w = {token, start, end, blank, empty};
+        *w = {token, start, end, blank, empty, unknown};
     } else {
-        written_.push_back({token, start, end, blank, empty});
+        written_.push_back({token, start, end, blank, empty, unknown});
     }
     if (!empty || KanaPrefix(src.substr(start, end - start)) != static_cast<size_t>(end - start)) return translated;
     const TextBefore before_(src.substr(0, start));
     const auto beforeRune = DecodeLastRune(before_, start);
     const char32_t before = beforeRune.cp;
-    if (start > 0 && !Opens(before)) return translated;
+    // Past the start of the token and an opening mark, a run is kept only when it starts with a kana no
+    // word of the dictionary reads and goes on kana by kana, it has two syllables or more, it starts with nothing that follows a katakana
+    // noun (follower.kata-noun, follower.unread-kana: particles, the copula) and a word in kanji or katakana follows it: after a
+    // space the source typed (ぞうれっしゃ合唱団 조우렛샤 합창단), or glued to a katakana, Latin or digit
+    // word (キャンパスちば企画 캠퍼스 치바 기획). After kanji such a run is mostly the okurigana of a verb
+    // the analysis missed, which a sound reading only garbles.
+    const bool opened = start == 0 || Opens(before);
+    const bool spaced = !opened && i > 0 && (*items_)[i - 1].tokenIndex == token && (*items_)[i - 1].spaceAfter &&
+                        (*items_)[i - 1].offset + (*items_)[i - 1].length == start;
+    const auto wordRune = [](char32_t r) {
+        return (r >= U'ァ' && r <= U'ヺ') || r == U'ー' || (r < 0x80 && std::isalnum(static_cast<int>(r))) ||
+               (r >= U'Ａ' && r <= U'Ｚ') || (r >= U'ａ' && r <= U'ｚ') || (r >= U'０' && r <= U'９');
+    };
+    const bool glued = !opened && !spaced && wordRune(before);
+    if (!opened && ((!spaced && !glued) ||
+                    dict::StartsWithMember(HDTRANS_CLASS("follower.kata-noun"), src.substr(start, KanaPrefix(src.substr(start)))) > 0 ||
+                    dict::StartsWithMember(HDTRANS_CLASS("follower.unread-kana"), src.substr(start, KanaPrefix(src.substr(start)))) > 0)) {
+        return translated;
+    }
+    // The run starts with a kana no word of the dictionary reads and goes on kana by kana.
+    bool single = unknown && text::RuneCount(src.substr(start, end - start)) == 1;
     const int runEnd = end + static_cast<int>(KanaPrefix(src.substr(end)));
     int pos = end;
     bool particle = false;  // the run ends before a written one-kana particle
@@ -1402,10 +1424,32 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         }
         if (next == nullptr || (!next->blank && next->end <= runEnd)) return translated;
         if (!next->empty || next->end <= pos) break;
+        single = single && text::RuneCount(src.substr(pos, next->end - pos)) == 1;
         pos = next->end;
     }
-    const std::string_view run = src.substr(start, pos - start);
+    std::string_view run = src.substr(start, pos - start);
     const char32_t after = FirstRune(src.substr(pos));
+    bool genitive = false;  // a の that ends the run is the particle 의 (サッちんの 삿친의)
+    bool nickname = false;  // the run is a nickname suffix that joins the name before it (サッちん 삿친)
+    if (!opened) {
+        if (run.size() > std::string_view("の").size() && run.ends_with("の")) {
+            run.remove_suffix(std::string_view("の").size());
+            genitive = true;
+        }
+        nickname = glued && dict::InClass(HDTRANS_CLASS("follower.nickname"), run);
+        // A run that ends like a verb is mostly a verb the analysis missed (ほれた); a drop reads better
+        // than its sound.
+        if (dict::EndsWithMember(HDTRANS_CLASS("ending.unread-kana-verb"), run) > 0) return translated;
+        int syllables = 0;
+        for (size_t k = 0; k < run.size();) {
+            const auto r = text::DecodeRune(run.substr(k));
+            if (!HasRune(U"ぁぃぅぇぉっゃゅょゎーん", r.cp)) syllables++;  // ん closes the syllable before it
+            k += r.size;
+        }
+        if (!single || pos != runEnd || (syllables < 2 && !nickname) || !(IsKanji(after) || (after >= U'ァ' && after <= U'ヺ'))) {
+            return translated;
+        }
+    }
     bool kanjiBefore = false;
     if (start > 0) {
         const std::string_view head = src.substr(0, start - beforeRune.size);
@@ -1447,7 +1491,10 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         marked += ' ';
     }
     while (!translated.empty() && translated.back() == ' ') translated.pop_back();
+    // A run glued to the word before it is a word of its own (캠퍼스 치바), but for a nickname suffix.
+    if (glued && !nickname && translated.empty()) translated = " ";
     translated += marked;
+    if (genitive) translated += "의";
     return translated;
 }
 

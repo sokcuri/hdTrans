@@ -154,6 +154,7 @@ private:
         int end;
         bool blank;
         bool empty;
+        bool unknown;  // the item is no word of the dictionary (Nm)
     };
 
     std::string Build(int i, int action, std::string_view mode);
