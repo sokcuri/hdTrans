@@ -49,8 +49,8 @@ cx:neg-give-close:50	心配しないでくれて	has:걱정하지 않아 주어�
 cx:neg-give-close:50	言わないでくれて	말하지 않아 줘서	keep	rewrites
 cx:neg-give:50	せめて 我らの邪魔だけは しないでもらいたい	has:하지 말아 주었으면 한다	fix	rewrites
 cx:neg-give:50	邪魔は しないで帰った	방해는 하지 않고 돌아갔다	keep	rewrites
-cx:neg-give:60	邪魔は しないでくれた	has:하지 않아 주었다	fix	rewrites
-cx:neg-give:60	邪魔は しないでくれ	방해는 하지 말아 줘	keep	rewrites
+cx:neg-give:40	邪魔は しないでくれた	has:하지 않아 주었다	fix	rewrites
+cx:neg-give:25	邪魔は しないでくれ	방해는 하지 말아 줘	keep	rewrites
 cx:neg-give:10	≪わかったわ。何があるかわからないから、油断だけはしないでちょうだい≫	has:방심만은 하지 말아 줘	fix	rewrites
 cx:neg-give:10	――もうお餅なんか焼かないで頂戴。	has:굽지 말아 줘	fix	rewrites
 cx:neg-give:20	言わないでくださった	has:말하지 않아 주셨다	fix	rewrites

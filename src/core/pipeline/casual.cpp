@@ -1015,9 +1015,10 @@ bool Shaanai(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// なぁ at the start of a clause before a mark, an ellipsis, a name in kanji or katakana or the end: the call なあ
-// (なぁ、架子 저기, 가자; spec LEX-5053). Not なぁんだ, なぁ～んて, なぁ～んか, drawn-out words in ん, nor before hiragana
-// (なぁお前), where a kana word may go on.
+// なぁ at the start of a clause before a mark, ～ or ー, an ellipsis, a kanji or katakana or the end: the call なあ
+// (なぁ、架子 저기, 가자; spec LEX-5053). Not before a ん, straight or after a run of ～ and ー (なぁんだ, なぁ～んて,
+// なぁーんか), nor before hiragana straight after it (なぁお前), where a kana word may go on. Only the character after
+// the run is checked for ん, so a ～ or ー before other kana is the call too (なぁ～に).
 bool CallNaa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!ClauseStart(s, pos) || !Lit(s, p, "なぁ")) return false;
@@ -1717,11 +1718,6 @@ bool HasKanjiText(std::string_view s) {
     return false;
 }
 
-// The る (or るの) of a verb said ん before の, だ, じゃ, です or なら (喋んの, 馬鹿にすんの, 過ぎんだよ, 待たせんのよ):
-// the verb in its dictionary form. Only where the ん can be no other: a godan verb in る of one kanji before の
-// (喋んの; not 死んだ, 飲んじゃ, the past and the て form of godan verbs in む, ぶ, ぬ), a verb of the dictionary read
-// from up to three characters back before の or なら (stemVerb below), and する said す. The ん after an ichidan stem
-// before のだ, のか or だろ (疲れんだろ, 出来んのか) is as often the old or western negative, so it stays.
 // Whether a verb stem of the dictionary ends at pos of s, before the ん of a rough んじゃねえ (RuContraction): one to three
 // characters back, with a kanji (触, 忘れ, 締め, 出来, 話しかけ), in katakana (ビビ) or in two or more hiragana that start a
 // word or follow a て form (しゃべ, ふざけ, てくれ). Not a kanji whose word holds the ん (盛ん), nor a kana stem inside a word
@@ -1765,6 +1761,12 @@ bool JaneeStem(std::string_view s, size_t pos, const RunLookup& runs) {
 // The lookups of the RewriteSlurred call that RuContraction reads, set around its scan. Each thread sets its own:
 // a shared pointer would let one thread read the lookups of another call after it has returned.
 thread_local const RunLookup* ruContractionRuns = nullptr;
+
+// The る (or るの) of a verb said ん before の, だ, じゃ, です or なら (喋んの, 馬鹿にすんの, 過ぎんだよ, 待たせんのよ):
+// the verb in its dictionary form. Only where the ん can be no other: a godan verb in る of one kanji before の
+// (喋んの; not 死んだ, 飲んじゃ, the past and the て form of godan verbs in む, ぶ, ぬ), a verb of the dictionary read
+// from up to three characters back before の or なら (stemVerb below), and する said す. The ん after an ichidan stem
+// before のだ, のか or だろ (疲れんだろ, 出来んのか) is as often the old or western negative, so it stays.
 bool RuContraction(std::string_view s, size_t pos, Match& m) {
     const RunLookup* runs = ruContractionRuns;
     if (runs == nullptr || runs->verbForm == nullptr || runs->dictionaryVerb == nullptr || pos == 0) return false;

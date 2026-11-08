@@ -40,3 +40,4 @@ cx:neg-done:10	知ってないよね	알지 않지	keep	rewrites
 cx:neg-done:10	分かってないよね？	모르지?	keep	rewrites
 cx:neg-done:10	信じてないよね	믿지 않지	keep	rewrites
 cx:neg-done:10	住んでないよね	살지 않지	keep	rewrites
+word:verb-negative-da	上司のために裁判に 勝ち続けないでいたら	lacks:는다	keep	word

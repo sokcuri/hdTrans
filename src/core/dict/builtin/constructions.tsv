@@ -1827,7 +1827,6 @@ cx:attitude-active:70	LEX-5151	&&3 ||2 S+0== "思われ" S+0== "おもわれ" ||
 //= told-state	after WonderingDarou 65	guard I+0== "~言われ"	A 言われ read 말을 듣다 or 듣다 before い of ている is the state of having been told, not listening: 말을 듣다 takes the ending of い (言われていた 말을 들었다, 言われている 말을 듣는다, 言われていたので 말을 들었으므로; spec GRM-3872).
 cx:told-state:10	GRM-3872	&&5 ||2 D+0== "R말을 &J6@" &&2 ||2 D+0== "R을 &J6@" D+0== "R를 &J6@" Y+1== "L5" Y+0== "1고" S+1== "い" D+1== "&HN@" !1 Y+1== "~것"	take-prev-target@+1 replace-ending-head@+1 "4" "0"	父には「逃げろ」と言われていた 「도망쳐라」라는 말을 들었다
 cx:told-state:20	GRM-3872	&&2 D+0== "R말을 &J6@" Y+0== "1고 있다"	set-ending "4다"	母によく「寝ろ」と言われてる 「자라」라는 말을 듣는다
-cx:told-state:30	GRM-3872	&&2 ||3 D+0== "R말을 &J6@" D+0== "R을 &J6@" D+0== "R를 &J6@" Y+0== "1고 있었다"	set-ending "5다"	悪口を言われてた 욕을 들었다
 //= speaker-asked	after WonderingDarou 62	guard ||2 S+0== "聞かれ" S+0== "言われ"	The 聞かれ or 言われ after the speaker and に in a concession (僕に聞かれても, 私に言われても) is what the listener asks or tells the speaker, who cannot help: 나한테 물어도, 저한테 말해도, not the speaker as the doer that L2345 reads (spec GRM-3874).
 cx:speaker-asked:10	GRM-3874	&&4 S+0== "聞かれ" S-1== "に" S-2== @pronoun.first-person I+0== "~ても"	set-target "&JB@" set-target@-1 "한테" map-target@-2 @speaker-plain	それは僕に聞かれても 그건 나한테 물어도
 cx:speaker-asked:20	GRM-3874	&&4 S+0== "言われ" S-1== "に" S-2== @pronoun.first-person I+0== "~ても"	set-target "말&AV@" set-target@-1 "한테" map-target@-2 @speaker-plain	私に言われても困ります 저한테 말해도 곤란합니다
@@ -2203,7 +2202,6 @@ cx:neg-give:25	LEX-5050	&&6 ||2 S+0== "くれ" S+0== "呉れ" D+0== "줘" S-1== 
 cx:neg-give:30	LEX-5050	&&5 S+0== @aux.give-after-neg S-1== "しな" P-1== "7**" U-1== "いで" !1 :neg-give-done	set-target@-1 "$Kz@" set-ending@-1 "1지 말아"	心配しないでくれよ 걱정하지 말아 줘
 cx:neg-give:40	LEX-5050	&&5 S+0== @aux.give-after-neg S-1== "しな" P-1== "7**" U-1== "いで" :neg-give-done	set-target@-1 "$Kz@" set-ending@-1 "1지 않아"	心配しないでくれた 걱정하지 않아 주었다
 cx:neg-give:50	LEX-5050	&&3 S+0== @aux.give-after-neg S-1== "しないで" !1 :neg-give-done	set-target@-1 "하지 말아"	邪魔だけは しないでもらいたい 방해만은 하지 말아 주었으면 한다
-cx:neg-give:60	LEX-5050	&&3 S+0== @aux.give-after-neg S-1== "しないで" :neg-give-done	set-target@-1 "하지 않아"	邪魔は しないでくれた 방해는 하지 않아 주었다
 //= neg-give-close	after OfferPromise 649	The くれ read as the joining 주어 after a request not to act (지 말아, neg-give) is the request 줘 (気にしないでくれ、先生 신경 쓰지 말아 줘, 선생님; spec LEX-5050), its くれる asks, 줄래 (茶化さないでくれる 놀리지 말아 줄래, 言わないでくれる？ 말하지 말아 줄래?), its くれます asks politely, 주시겠습니까 (触らないでくれます？ 만지지 말아 주시겠습니까?), and もらいたい and もらえる after it are what one gets done, 주었으면 and 줄 수 (忘れないでもらいたい 잊지 말아 주었으면 한다), not 받다.
 cx:neg-give-close:10	LEX-5050	&&4 S+0== "くれ" D+0== "&CJ@" I+0== "99くれる" Y-1== "1지 말아"	set-ending "3래"	今は話しかけないでくれる。 지금은 말을 걸지 말아 줄래.
 cx:neg-give-close:15	LEX-5050	&&4 S+0== "くれ" D+0== "&CJ@" ||2 I+0== "99くれます" I+0== "99くれますか" Y-1== "1지 말아"	set-ending "1시겠습니까"	触らないでくれます？ 만지지 말아 주시겠습니까?
