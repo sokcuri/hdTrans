@@ -1,0 +1,112 @@
+# 규칙: LEX-5200, LEX-5201, LEX-5202, LEX-5203, LEX-5204
+rule	input	expected	kind	layer
+dict:jisjk:19327	桃色の頬	has:분홍색 뺨	fix	defaults
+dict:jisjk:123997	茜色の空	has:붉은빛 하늘	fix	defaults
+dict:jisjk:256819	若草色のドレス	has:연두색 드레스	fix	defaults
+cx:color-no:10	マルチェラの鳶色の目が、	has:마르셀라의 다갈색 눈이	fix	rewrites
+dict:jisjk:35774	青色の壁が立ち並ぶ街並みを、	has:파란색 벽이	fix	defaults
+dict:jisjk:123882	青色申告	has:청색 신고	fix	defaults
+dict:w:35000	山吹色のドレス	has:진노란색 드레스	fix	defaults
+dict:w:35022	じっと注がれる灰青色の視線が、	has:청회색 시선이	fix	defaults
+dict:w:35023	焦げ茶色のコートを身に着けた金髪の男	has:짙은 갈색 코트를	fix	defaults
+dict:w:18482	橙色の夕焼けに背中を照らされて	has:주황색 저녁놀에	fix	defaults
+dict:w:35025	使える知識はせいぜい黒色火薬の配合率ぐらいか。	has:흑색 화약	keep	defaults
+dict:w:35011	赤眼の男	has:붉은 눈의 남자	fix	defaults
+dict:w:35014	「碧眼じゃなくて翠眼だけどな。	has:초록 눈이지만	fix	defaults
+dict:w:35026	美男腹黒眼鏡。	lacks:눈거울	keep	defaults
+dict:jisjk:30866	栗色の髪	has:밤색 머리카락	keep	defaults
+dict:jisjk:105162	水色のワンピース	has:하늘색 원피스	keep	defaults
+dict:jisjk:133178	ピンク色の髪	has:핑크색 머리카락	keep	defaults
+cx:color-no:10	イルマの赤茶の目と、	has:이르마의 적갈색 눈과	fix	rewrites
+cx:color-no:10	少女の金色の髪	has:소녀의 금빛 머리카락	fix	rewrites
+cx:color-no:10	さらちゃんの虹色の輝き 見せて｡	has:사라짱의 무지개색 빛	fix	rewrites
+cx:color-no:10	ていうかミドリのHNはミヅチ様の緑色の目から？	has:미즈치님의 초록색 눈	fix	rewrites
+cx:color-no:10	アリスの家の前	has:앨리스의 집 앞	keep	rewrites
+cx:color-no:10	アリスの部屋の窓	!rule:cx:color-no:10	keep	rewrites
+cx:color-no:20	赤茶の目	has:적갈색 눈	fix	rewrites
+cx:color-no:20	紅の唇	has:붉은 입술	fix	rewrites
+cx:color-no:20	金茶の髪	has:금갈색 머리카락	fix	rewrites
+cx:color-no:20	薄く張った緑の苔は壁全体を覆い、	has:초록 이끼는	fix	rewrites
+cx:color-no:20	黒髪に暗い緑の瞳をした女が受け取った。	has:어두운 초록 눈동자를	fix	rewrites
+cx:color-no:20	見た目は華やかな、深紅のドレスを着た若い女性がいた。	has:진홍색 드레스를	fix	rewrites
+cx:color-no:20	そこにも紫の光が翻った。	has:보라색 빛이	fix	rewrites
+cx:color-no:20	２本目のワインは、赤のブルゴーニュをご用意しました。	has:빨간색 브루고니를	fix	rewrites
+cx:color-no:20	つまり 私の白の占有率は 限りなく100ﾊﾟｰｾﾝﾄに 近づいたということです｡	has:흰색 점유율은	fix	rewrites
+cx:color-no:20	ベージュのコート	has:베이지 코트	fix	rewrites
+cx:color-no:20	深紅の女神	has:진홍의 여신	keep	rewrites
+cx:color-no:20	白のエルザとして	has:흰색의 엘사	keep	rewrites
+cx:color-no:20	青の祈り(アニメ)	!rule:cx:color-no:20	keep	rewrites
+cx:color-no:20	黒と白の戦士によって倒される。	has:흰색의 전사	keep	rewrites
+cx:color-no:20	緑の強いハシバミ色の瞳	has:초록의 강한	keep	rewrites
+cx:color-no:20	茶の間に	lacks:갈색	keep	rewrites
+cx:color-no:20	漆黒の闇	has:칠흑의 어둠	keep	rewrites
+cx:color-no:25	薄紫色の花	has:연보라색 꽃	fix	rewrites
+cx:color-no:25	虻色の翼	has:등에색 날개	fix	rewrites
+cx:color-no:25	その色の服	!rule:cx:color-no:25	keep	rewrites
+cx:color-no:25	髪の色の話	!rule:cx:color-no:25	keep	rewrites
+cx:color-no:30	金の髪	has:금빛 머리카락	fix	rewrites
+cx:color-no:32	銀の髪	has:은빛 머리카락	fix	rewrites
+cx:color-no:32	銀のスプーン	!rule:cx:color-no:32	keep	rewrites
+cx:color-no:30	金のために	!rule:cx:color-no:30	keep	rewrites
+cx:color-no:80	果物の汁と何かをあわせた、茶色い汁。	has:갈색 국물	fix	rewrites
+dict:w:35028	茶色く透き通ったテリヤキソース	has:갈색으로 투명한	fix	defaults
+cx:color-no:80	色素の薄い金髪と茶色い瞳を持つ	has:갈색 눈동자	fix	rewrites
+cx:color-no:80	その犬は茶色い。	!rule:cx:color-no:80	keep	rewrites
+dict:w:35028	茶色の髪	has:갈색 머리카락	keep	defaults
+dict:w:35028	きいろの髪	has:노란색 머리카락	fix	defaults
+dict:w:35028	むらさきの花	has:보라색 꽃	fix	defaults
+dict:w:35028	ちゃいろの犬	has:갈색 개	fix	defaults
+dict:jisjk:116736	あかの他人	lacks:빨간	keep	defaults
+dict:i:676	千莉の頬がさらに朱に染まる。	has:붉게 물든다	fix	defaults
+dict:jisjk:115943	「赤と青だけじゃないでしょ、	has:빨강과 파랑	keep	defaults
+cx:color-no:50	空が赤に染まる。	has:빨간색으로 물든다	fix	rewrites
+cx:color-no:50	春の残雪が銀色に輝く。	has:은색으로 빛난다	fix	rewrites
+cx:color-no:50	彼女の全身が赤色に染まっていく。	has:빨간색으로 물들어	fix	rewrites
+cx:color-no:50	その肌がみるみるうちに上気し、ピンク色に染まる。	has:핑크색으로 물든다	fix	rewrites
+cx:color-no:50	しばらく無言で夕闇色に染まっていく空の移り変わりを見守った。	has:땅거미색으로 물들어	fix	rewrites
+cx:color-no:50	歩行者用の信号が青に変わる。	!rule:cx:color-no:50	keep	rewrites
+cx:color-no:50	顔色に出る	!rule:cx:color-no:50	keep	rewrites
+cx:color-no:52	金に輝く剣	has:금빛으로 빛나는 검	fix	rewrites
+cx:color-no:52	金に変わる	!rule:cx:color-no:52	keep	rewrites
+cx:color-no:54	銀に輝く剣	has:은빛으로 빛나는 검	fix	rewrites
+cx:color-no:54	銀に替える	!rule:cx:color-no:54	keep	rewrites
+cx:color-no:70	「細かいことはわからないけど……ピンク色したライフルで撃ったとか」	has:핑크색 라이플로	fix	rewrites
+cx:color-no:70	金色した髪	has:금빛 머리카락	fix	rewrites
+cx:color-no:70	青い顔色した男	!rule:cx:color-no:70	keep	rewrites
+cx:color-no:75	鼠色をした十階建てのマンション。	has:쥐색 10층	fix	rewrites
+cx:color-no:75	青い顔色をした男	has:안색을 한 남자	keep	rewrites
+cx:color-no:75	変な色をしている	!rule:cx:color-no:75	keep	rewrites
+cx:color-no:20	白の猫	has:흰색 고양이	fix	rewrites
+cx:color-no:75	全体がピンク色をしたハデなバイク	has:핑크색을 한	keep	rewrites
+cx:color-no:85	あ～ 青色ＬＥＤ使うやつね。	has:청색 LED	fix	rewrites
+cx:color-no:85	青色の壁が立ち並ぶ街並みを、	!rule:cx:color-no:85	keep	rewrites
+dict:w:35029	青色発光ダイオード	has:청색 발광 다이오드	fix	defaults
+dict:w:35030	赤茶色した髪	has:적갈색 머리카락	fix	defaults
+cx:color-no:15	赤の瞳が揺れた。	has:붉은 눈동자가	fix	rewrites
+cx:color-no:15	白の髪	has:흰 머리카락	fix	rewrites
+cx:color-no:15	白のドレス	!rule:cx:color-no:15	keep	rewrites
+cx:color-no:20	愛らしいピンクのアルベルティーヌ。	has:핑크의	keep	rewrites
+cx:color-no:30	金の巻き毛	has:금빛 곱슬머리	fix	rewrites
+cx:color-no:36	赤髪碧眼	has:적발벽안	fix	rewrites
+cx:color-no:36	赤髪の少女	!rule:cx:color-no:36	keep	rewrites
+cx:color-no:37	青髪赤眼	has:청발적안	fix	rewrites
+cx:color-no:37	青髪の少年	!rule:cx:color-no:37	keep	rewrites
+cx:color-no:38	緑髪碧眼	has:녹발벽안	fix	rewrites
+cx:color-no:38	緑髪翠眼	!rule:cx:color-no:38	keep	rewrites
+cx:color-no:40	絵にかいたような金髪碧眼の爽やかな外見で、	has:금발벽안의	keep	rewrites
+cx:color-no:40	「うーん、金髪碧眼とか？	has:금발벽안이라든지	keep	rewrites
+cx:color-no:40	銀髪蒼眼の美女	has:은발벽안의 미녀	fix	rewrites
+cx:color-no:40	茶髪碧眼の少女	!rule:cx:color-no:40	keep	rewrites
+cx:color-no:42	銀髪赤眼の少女	has:은발적안의 소녀	keep	rewrites
+cx:color-no:42	赤眼の男	!rule:cx:color-no:42	keep	rewrites
+cx:color-no:44	ツンデレ？黒髪黒目	has:흑발흑안	fix	rewrites
+cx:color-no:44	黒眼鏡の男	!rule:cx:color-no:44	keep	rewrites
+cx:color-no:46	白髪金眼の老人	has:백발금안의 노인	fix	rewrites
+cx:color-no:46	金眼の竜	!rule:cx:color-no:46	keep	rewrites
+cx:color-no:48	金髪紫眼の少女	has:금발에 보라색 눈의 소녀	fix	rewrites
+cx:color-no:48	銀髪翠眼	has:은발에 초록 눈	fix	rewrites
+cx:color-no:48	茶髪碧眼の少女	has:갈색 머리에 푸른 눈의 소녀	fix	rewrites
+cx:color-no:48	赤毛碧眼	has:붉은 머리에 푸른 눈	fix	rewrites
+cx:color-no:48	短い黒髪に、高くも低くもない平均的な身長。	has:짧은 흑발에,	keep	rewrites
+cx:color-no:48	金髪碧眼の少年	!rule:cx:color-no:48	keep	rewrites
+cx:color-no:42	黒髪赤眼の男	has:흑발적안의 남자	fix	rewrites

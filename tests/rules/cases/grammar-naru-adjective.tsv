@@ -19,7 +19,7 @@ dict:gram:naru-adj:な	「ふたりに幸せになってほしいの」	「두 �
 dict:gram:naru-adj:なって	不安になってきた。	불안해졌다.	fix	local
 dict:gram:naru-adj:なって	「何故かしら……逆に不安になってきたわ……」	「왜일까……반대로 불안해졌어……」	fix	local
 dict:gram:naru-adj:なって	もうすっかり夜ですね。静かになってきました。	이제 완전히 밤이군요. 조용해졌습니다.	fix	local
-dict:gram:naru-adj:なって	頬は朱に染まり、その動きも緩慢になってきている。	뺨은 피로 물들어, 그 움직임도 완만해지고 있다.	fix	local
+dict:gram:naru-adj:なって	頬は朱に染まり、その動きも緩慢になってきている。	뺨은 붉게 물들어, 그 움직임도 완만해지고 있다.	fix	local
 dict:gram:naru-adj:な	「気付いたら……好きになってましたから」	「정신을 차려 보니……좋아하게 돼 있었으니까요」	keep	local
 dict:gram:naru-adj:な	分厚い本なので、思わず持てるか心配になってしまう。	두꺼운 책이므로, 나도 모르게 가질 수 있을까 걱정이 되어버린다.	keep	local
 dict:gram:naru-adj:な	「もっと真っ赤になるのかと思ってたよ」	「좀 더 새빨갛게 되는 줄 알았어」	keep	local
