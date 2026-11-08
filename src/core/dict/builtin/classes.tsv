@@ -14,6 +14,7 @@
 //= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
 //= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
 //= adverb.suppose	Words of supposition that make a と or たら in their sentence a condition, not a step that followed (もしあの時断っていたら 거절했다면, 仮に負けたとしたら).
+//= ending.unread-kana-verb	Ends of an unread kana run after a space or a katakana word that show a verb the analysis missed: た, て, る or ない after an i- or e-row kana, た and て after っ or ん, ない after an a-row kana (ほれた, すねてる, おもわない); such a run is dropped rather than read by sound. A noun in た after another row (ねぷた) is no verb.
 //= ending.told-past	Ends of a sentence that tell what happened in a nominalised past (笑うのだった, 連絡が入るのであった): the past copula there is no state.
 //= ko-ending.quote	Korean endings of a quotation (다고, 라고, 다는): a って at the start of the ending that reads one quotes, it is no て form (気を付けろって).
 //= mark.clause-link	Ends of a predicate that link its clause to the next (けど, のに, ので, から, が): after a present one the と or たら before it joins that clause (来ると騒がしいから 오면), and a word of supposition before the link stays in its clause.
@@ -139,6 +140,7 @@
 //= follower.kata-adverb	What a katakana adverb read in hiragana takes after it as part of its key (シッカリと, ロクに), and the particles and verb starts before which a katakana mimetic said twice reads as an adverb (ジワジワと, ドロドロに, イロイロやる).
 //= follower.kata-noun	What may follow a katakana noun: particles, the copula and honorifics (イカなんて, イカを).
 //= follower.unread-kana	Particles that, at the start of a kana run no dictionary word read after a katakana word, show the run is a particle the analysis missed, not a word to read by sound (クイーンてば, クラブこそ).
+//= follower.nickname	Nickname suffixes a kana run glued to a katakana name may be, read by sound and joined to the name (サッちん 삿친, ユキりん); for an unknown run only.
 //= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
 //= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
@@ -1741,6 +1743,10 @@ follower.unread-kana	てば
 follower.unread-kana	こそ
 follower.unread-kana	さえ
 follower.unread-kana	すら
+follower.nickname	ちん
+follower.nickname	りん
+follower.nickname	ぴょん
+follower.nickname	っち
 
 follower.kata-pronoun	は
 follower.kata-pronoun	が
@@ -13082,6 +13088,138 @@ ending.cute-sound	ニャ
 ending.cute-sound	ミャ
 ending.cute-sound	ピョ
 ending.cute-sound	もん
+ending.unread-kana-verb	あない
+ending.unread-kana-verb	いた
+ending.unread-kana-verb	いだ
+ending.unread-kana-verb	いて
+ending.unread-kana-verb	いで
+ending.unread-kana-verb	いない
+ending.unread-kana-verb	いる
+ending.unread-kana-verb	えた
+ending.unread-kana-verb	えて
+ending.unread-kana-verb	えない
+ending.unread-kana-verb	える
+ending.unread-kana-verb	かない
+ending.unread-kana-verb	がない
+ending.unread-kana-verb	きた
+ending.unread-kana-verb	きて
+ending.unread-kana-verb	きない
+ending.unread-kana-verb	きる
+ending.unread-kana-verb	ぎた
+ending.unread-kana-verb	ぎだ
+ending.unread-kana-verb	ぎて
+ending.unread-kana-verb	ぎで
+ending.unread-kana-verb	ぎない
+ending.unread-kana-verb	ぎる
+ending.unread-kana-verb	けた
+ending.unread-kana-verb	けて
+ending.unread-kana-verb	けない
+ending.unread-kana-verb	ける
+ending.unread-kana-verb	げた
+ending.unread-kana-verb	げて
+ending.unread-kana-verb	げない
+ending.unread-kana-verb	げる
+ending.unread-kana-verb	さない
+ending.unread-kana-verb	ざない
+ending.unread-kana-verb	した
+ending.unread-kana-verb	しだ
+ending.unread-kana-verb	して
+ending.unread-kana-verb	しで
+ending.unread-kana-verb	しない
+ending.unread-kana-verb	しる
+ending.unread-kana-verb	じた
+ending.unread-kana-verb	じて
+ending.unread-kana-verb	じない
+ending.unread-kana-verb	じる
+ending.unread-kana-verb	せた
+ending.unread-kana-verb	せて
+ending.unread-kana-verb	せない
+ending.unread-kana-verb	せる
+ending.unread-kana-verb	ぜた
+ending.unread-kana-verb	ぜて
+ending.unread-kana-verb	ぜない
+ending.unread-kana-verb	ぜる
+ending.unread-kana-verb	たない
+ending.unread-kana-verb	だない
+ending.unread-kana-verb	ちた
+ending.unread-kana-verb	ちて
+ending.unread-kana-verb	ちない
+ending.unread-kana-verb	ちる
+ending.unread-kana-verb	ぢた
+ending.unread-kana-verb	ぢて
+ending.unread-kana-verb	ぢない
+ending.unread-kana-verb	ぢる
+ending.unread-kana-verb	った
+ending.unread-kana-verb	っだ
+ending.unread-kana-verb	って
+ending.unread-kana-verb	っで
+ending.unread-kana-verb	てた
+ending.unread-kana-verb	てて
+ending.unread-kana-verb	てない
+ending.unread-kana-verb	てる
+ending.unread-kana-verb	でた
+ending.unread-kana-verb	でて
+ending.unread-kana-verb	でない
+ending.unread-kana-verb	でる
+ending.unread-kana-verb	なない
+ending.unread-kana-verb	にた
+ending.unread-kana-verb	にて
+ending.unread-kana-verb	にない
+ending.unread-kana-verb	にる
+ending.unread-kana-verb	ねた
+ending.unread-kana-verb	ねて
+ending.unread-kana-verb	ねない
+ending.unread-kana-verb	ねる
+ending.unread-kana-verb	はない
+ending.unread-kana-verb	ばない
+ending.unread-kana-verb	ぱない
+ending.unread-kana-verb	ひた
+ending.unread-kana-verb	ひて
+ending.unread-kana-verb	ひない
+ending.unread-kana-verb	ひる
+ending.unread-kana-verb	びた
+ending.unread-kana-verb	びて
+ending.unread-kana-verb	びない
+ending.unread-kana-verb	びる
+ending.unread-kana-verb	ぴた
+ending.unread-kana-verb	ぴて
+ending.unread-kana-verb	ぴない
+ending.unread-kana-verb	ぴる
+ending.unread-kana-verb	へた
+ending.unread-kana-verb	へて
+ending.unread-kana-verb	へない
+ending.unread-kana-verb	へる
+ending.unread-kana-verb	べた
+ending.unread-kana-verb	べて
+ending.unread-kana-verb	べない
+ending.unread-kana-verb	べる
+ending.unread-kana-verb	ぺた
+ending.unread-kana-verb	ぺて
+ending.unread-kana-verb	ぺない
+ending.unread-kana-verb	ぺる
+ending.unread-kana-verb	まない
+ending.unread-kana-verb	みた
+ending.unread-kana-verb	みて
+ending.unread-kana-verb	みない
+ending.unread-kana-verb	みる
+ending.unread-kana-verb	めた
+ending.unread-kana-verb	めて
+ending.unread-kana-verb	めない
+ending.unread-kana-verb	める
+ending.unread-kana-verb	らない
+ending.unread-kana-verb	りた
+ending.unread-kana-verb	りて
+ending.unread-kana-verb	りない
+ending.unread-kana-verb	りる
+ending.unread-kana-verb	れた
+ending.unread-kana-verb	れて
+ending.unread-kana-verb	れない
+ending.unread-kana-verb	れる
+ending.unread-kana-verb	わない
+ending.unread-kana-verb	んた
+ending.unread-kana-verb	んだ
+ending.unread-kana-verb	んて
+ending.unread-kana-verb	んで
 //= noun.colored-thing	Things a bare literary color kanji (碧, 蒼, 翠, 藍) before の paints, as noun.colored-part does (藍の着物 쪽빛 기모노, 碧の空 푸른 하늘), not abstract words (翠の言葉; spec LEX-5201).
 noun.colored-thing	着物
 noun.colored-thing	衣

@@ -1401,7 +1401,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
                         (*items_)[i - 1].offset + (*items_)[i - 1].length == start;
     const auto wordRune = [](char32_t r) {
         return (r >= U'ァ' && r <= U'ヺ') || r == U'ー' || (r < 0x80 && std::isalnum(static_cast<int>(r))) ||
-               (r >= U'Ａ' && r <= U'ｚ') || (r >= U'０' && r <= U'９');
+               (r >= U'Ａ' && r <= U'Ｚ') || (r >= U'ａ' && r <= U'ｚ') || (r >= U'０' && r <= U'９');
     };
     const bool glued = !opened && !spaced && wordRune(before);
     if (!opened && ((!spaced && !glued) ||
@@ -1427,16 +1427,28 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         single = single && text::RuneCount(src.substr(pos, next->end - pos)) == 1;
         pos = next->end;
     }
-    const std::string_view run = src.substr(start, pos - start);
+    std::string_view run = src.substr(start, pos - start);
     const char32_t after = FirstRune(src.substr(pos));
+    bool genitive = false;  // a の that ends the run is the particle 의 (サッちんの 삿친의)
+    bool nickname = false;  // the run is a nickname suffix that joins the name before it (サッちん 삿친)
     if (!opened) {
+        if (run.size() > std::string_view("の").size() && run.ends_with("の")) {
+            run.remove_suffix(std::string_view("の").size());
+            genitive = true;
+        }
+        nickname = glued && dict::InClass(HDTRANS_CLASS("follower.nickname"), run);
+        // A run that ends like a verb is mostly a verb the analysis missed (ほれた); a drop reads better
+        // than its sound.
+        if (dict::EndsWithMember(HDTRANS_CLASS("ending.unread-kana-verb"), run) > 0) return translated;
         int syllables = 0;
         for (size_t k = 0; k < run.size();) {
             const auto r = text::DecodeRune(run.substr(k));
             if (!HasRune(U"ぁぃぅぇぉっゃゅょゎーん", r.cp)) syllables++;  // ん closes the syllable before it
             k += r.size;
         }
-        if (!single || pos != runEnd || syllables < 2 || !(IsKanji(after) || (after >= U'ァ' && after <= U'ヺ'))) return translated;
+        if (!single || pos != runEnd || (syllables < 2 && !nickname) || !(IsKanji(after) || (after >= U'ァ' && after <= U'ヺ'))) {
+            return translated;
+        }
     }
     bool kanjiBefore = false;
     if (start > 0) {
@@ -1479,9 +1491,10 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         marked += ' ';
     }
     while (!translated.empty() && translated.back() == ' ') translated.pop_back();
-    // A run glued to the word before it is a word of its own (캠퍼스 치바).
-    if (glued && translated.empty()) translated = " ";
+    // A run glued to the word before it is a word of its own (캠퍼스 치바), but for a nickname suffix.
+    if (glued && !nickname && translated.empty()) translated = " ";
     translated += marked;
+    if (genitive) translated += "의";
     return translated;
 }
 

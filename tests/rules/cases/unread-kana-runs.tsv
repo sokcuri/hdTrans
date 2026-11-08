@@ -21,3 +21,5 @@ restore:echoed-gloss	２月２３日（日）列車運転見合わせのお知�
 restore:echoed-gloss	マミーヤ（間宮）に繰り出す	lacks:(마미야)	keep	restore
 restore:echoed-gloss	あたしたち（俺たち）	lacks:(우리)	keep	restore
 restore:echoed-gloss	魔剣（けん）を抜く	has:마검	keep	restore
+restore:dropped-kana	≪アイツら、サッちんの襲撃を恐れて距離を取ってるのよ≫	has:삿친의 습격	fix	restore
+restore:dropped-kana	カシラは ほれた女が➡	lacks:호레타	keep	restore
