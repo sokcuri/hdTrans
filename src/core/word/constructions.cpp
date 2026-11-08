@@ -525,6 +525,10 @@ constexpr NamedFeature kFeatures[] = {
     {"casual-level", CasualLevel},
     // The word's speech is 해요체 or 합쇼체 (PoliteLevel).
     {"polite-level", PoliteLevel},
+    // The line is one the speech-level stage writes in 해체 from a plain end of the source (cue key casual), not a
+    // line with no cue (spec REG-2).
+    {"casual-cue",
+     [](Flusher& f, const Item* it) { return f.w.settings.casualCue && SpeechLevel(f, it) == Settings::LineLevel::casual; }},
     // The line is a line of prose fiction that the speech-level stage writes (spec REG-20).
     {"prose", [](Flusher& f, const Item*) { return f.w.settings.lineLevel != Settings::LineLevel::none && f.w.settings.prose; }},
     // A digit ends the text before the word in its token (3から).

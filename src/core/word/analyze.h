@@ -96,6 +96,9 @@ struct Settings {
     // fiction (spec REG-20); the levels of the quotes of a line of several quotes, in order (REG-15).
     bool authoritative = false;
     bool prose = false;
+    // With lineLevel: the level comes from a plain end the source says (cue key casual), not from a line
+    // with no cue at all (bare), and the line answers with no polite はい or いいえ.
+    bool casualCue = false;
     std::span<const LineLevel> quoteLevels;
     // Text path: the line uses the tic ぽい (PoiTicLine).
     bool poiTic = false;

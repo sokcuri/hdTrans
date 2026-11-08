@@ -185,7 +185,7 @@ normalize:dialect-word	「ええ勿論少しはしましたわ。	「네, 물론
 normalize:dialect-word	ええ本当よ。	네, 사실이야.	fix	normalize
 normalize:dialect-word	ええ使いましたよ	네, 썼어요	fix	normalize
 normalize:dialect-word	「ええ云ってごらん。	「네, 말해 봐.	fix	normalize
-normalize:dialect-word	「ええ差上げるわ。	「네, 드릴게.	fix	normalize
+normalize:dialect-word	「ええ差上げるわ。	「응, 드릴게.	fix	normalize
 normalize:dialect-word	ええ塩梅じゃのう。	좋은 간이로구먼.	keep	normalize
 normalize:dialect-word	ええ装備じゃねぇ、皆も喜ぶけぇ。	좋은 장비가 아닌, 모두도 기뻐할 테니까.	keep	normalize
 normalize:dialect-word	ええ旦那さんだなあ。	좋은 남편이구나.	keep	normalize

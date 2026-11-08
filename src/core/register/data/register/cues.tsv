@@ -4,7 +4,8 @@
 # these rows. A cue fires when one of its rows matches.
 #
 # Columns
-#   cue     polite (desu/masu at a sentence end), polite-any (desu/masu anywhere), keigo (尊敬語/謙譲語),
+#   cue     polite (desu/masu at a sentence end), polite-any (desu/masu anywhere), polite-fem (a lady's polite
+#           ませんわ, ですわ anywhere), keigo (尊敬語/謙譲語),
 #           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
 #           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
 #           quotative (a string after which an any-not-quoted match does not count),
@@ -75,6 +76,11 @@ polite-any	any-not-quoted	ましょう
 polite-any	any-not-quoted	ください
 polite-any	any-not-quoted	下さい
 polite-any	any-not-quoted	っす
+polite-fem	any-not-quoted	ませんわ		the polite end of a lady (ませんわ, ですわ, ますわ): the whole quote is 해요, plain ends and かしら too (REG-3)
+polite-fem	any-not-quoted	ですわ
+polite-fem	any-not-quoted	ますわ
+polite-fem	any-not-quoted	ましたわ
+polite-fem	any-not-quoted	でしたわ
 keigo	any	いらっしゃ
 keigo	any	おっしゃい
 keigo	any	おっしゃっ
