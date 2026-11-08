@@ -28396,3 +28396,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 個体差	개체 차이	N110			GN			LEX-5006: 個体差がある 개체 차이가 있다			こたいさ	w:34666
 自信作	자신 있는 작품	N110			GN			LEX-5003: 私の自信作です 제 자신 있는 작품입니다 (자신작 아님)	replace		じしんさく	w:34697
 店を開	가게를 &LB@	M421		Pn	GN			LEX-5040: 小さな店を開いた 작은 가게를 열었다	replace		みせをひらく	w:35181
+機	기	N110		Z7Ct	GN	1665	||1 G-1== "NjNd"	수(何 포함) 뒤의 機를 조수사 기로 고른다(三機 3기, 何機 몇 기; LEX-5103).				w:34849
