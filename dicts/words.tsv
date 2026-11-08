@@ -28555,3 +28555,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 こっち側	이쪽	I110			GN			// LEX-5701			こっちがわ	w:35254
 あっち側	저쪽	I110			GN			// LEX-5701			あっちがわ	w:35255
 そっち側	그쪽	I110			GN			// LEX-5701			そっちがわ	w:35256
+済みません	죄송합니다	A110			GN			// LEX-5700			すみません	w:35257
+済みませんでした	죄송합니다	A110			GN			// LEX-5700			すみませんでした	w:35258

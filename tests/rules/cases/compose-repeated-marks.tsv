@@ -8,7 +8,7 @@ compose:repeated-marks	「すごい～！！」	「대단해~!!」	fix	compose
 compose:repeated-marks	「待って‼」	「기다려!!」	fix	compose
 compose:repeated-marks	「えっ⁉」	「어!?」	fix	compose
 compose:repeated-marks	……！！	……!!	fix	compose
-compose:repeated-marks	行くよ！！手柄は	갈게!! 공은	fix	compose
+compose:repeated-marks	行くよ！！手柄は	갈게!! 공로는	fix	compose
 compose:repeated-marks	マジで!!	진짜로!!	keep	compose
 compose:repeated-marks	行くよ！	갈게!	keep	compose
 compose:repeated-marks	「え？」	「어?」	keep	compose

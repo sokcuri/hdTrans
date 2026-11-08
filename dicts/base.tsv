@@ -18079,7 +18079,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こようほけん	고용 보험	N110	ULw		GN				jisjk:183072		-1
 こよなく	각별히	E300			GN				jisjk:123099		
 こよみ	달력	I110	VSwUMe		GN				jisjk:40990		
-こら	이봐	N130		J1	GN	13	||1 D+1== ","	こら를 쉼표로 번역되는 단어 앞에서 '이봐'로 선택한다.	jisjk:393		
+こら	이봐	N320		J1	GN	13	||1 D+1== ","	こら를 쉼표로 번역되는 단어 앞에서 '이봐'로 선택한다.	jisjk:393		
 こら	집중시&AQ@	M443	VBkVSw		GN				jisjk:120295		
 こら	징벌&AV@	M443	ULw		GN				jisjk:120302		
 こらえ	&FM@	M447	SFl		GN				jisjk:120281		
@@ -212762,7 +212762,7 @@ ttt	ttt	K110			GN				jisjk:201744
 手杵町	테키네마치	N130	QCTVPl		GN				jisjk:310230		
 手枕	팔베개	N110		Hd	GN				jisjk:27256		
 手枝	손금	N110	VBp		GN				jisjk:202953		
-手柄	공	N110			GN				jisjk:27218		
+手柄	공로	N110			GN				jisjk:27218		
 手柄	테가라	N130	QCTVPl		GN				jisjk:310228		
 手柄顔	자랑스러운 얼굴	N110			GN				jisjk:244434		
 手染め	손수 물들임	N110			GN				jisjk:244483		
@@ -336083,7 +336083,7 @@ ttt	ttt	K110			GN				jisjk:201744
 通用口	통용구	I110	VPl		GN				jisjk:87403		
 通町	토리쵸	N130	QCTVPl		GN				jisjk:311216		
 通町	토리마치	N130	QCTVPl		GN				jisjk:311220		
-通知	알림	N110	VSw	Hd	GN				jisjk:37121		
+通知	통지	N110	VSw	Hd	GN				jisjk:37121		
 通知の時	통지시	N110			GN				jisjk:152689		
 通知もれ	통지 누설	N110			GN				jisjk:159962		
 通知もれの	통지누락된	E0H0			GN				jisjk:150258		

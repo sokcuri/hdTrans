@@ -28,7 +28,7 @@ lexical:audit-game-gloss	ロクな案が出ない。	has:변변한	fix	lookup
 lexical:audit-game-gloss	西日が俺たちの顔を赤く照らす。	has:석양이	fix	lookup
 lexical:audit-game-gloss	「こうしてみると、ホントに大きな横断幕ですねー」	has:현수막	fix	lookup
 lexical:audit-game-gloss	「合い鍵ができ次第、みんなに渡すね」	has:여벌 열쇠	fix	lookup
-lexical:audit-game-gloss	通知が来た。	has:알림	fix	lookup
+lexical:audit-game-gloss	通知が来た。	has:통지	keep	lookup
 lexical:audit-game-gloss	「どーおー？　そっち側はー？」	has:그쪽은	fix	lookup
 lexical:audit-game-gloss	「あっ、こら、待ちなさい！」	has:이봐	fix	local
 lexical:audit-game-gloss	「こっちに来るまで、ずっとコンテナの中にいたから」	has:여기에 올 때까지	keep	senses
@@ -69,3 +69,20 @@ lexical:audit-game-gloss	列に並んで待つ	has:줄을 서	fix	lookup
 lexical:audit-game-gloss	窓口に並びました	has:줄을 섰습니다	fix	senses
 lexical:audit-game-gloss	トヨタに並ぶ企業	has:대등한	fix	local
 lexical:audit-game-gloss	トヨタが発表した	has:토요타가 발표했다	keep	lookup
+lexical:audit-game-gloss	こら桃！	has:이봐 복숭아	fix	lookup
+lexical:audit-game-gloss	済みません	has:죄송합니다	fix	lookup
+lexical:audit-game-gloss	済みませんでした	has:죄송합니다	fix	lookup
+lexical:audit-game-gloss	こっちに帰ってきてたの	has:여기에 돌아왔	fix	senses
+lexical:audit-game-gloss	ちょっとこっちに寄って	has:여기에 들러	fix	senses
+lexical:audit-game-gloss	こっち注文お願いします	has:여기 주문	fix	senses
+cx:sense-cues-1:18	こっち行こう	has:이쪽으로 가자	fix	rewrites
+lexical:audit-game-gloss	こっちの方がいい	has:이쪽이	keep	lookup
+lexical:audit-game-gloss	こっちを見ろ	has:이쪽을	keep	lookup
+lexical:audit-game-gloss	こっちが聞きたいよ	has:내가 묻고 싶어	fix	lookup
+lexical:audit-game-gloss	この間に逃げよう	has:그사이에	fix	lookup
+lexical:audit-game-gloss	手柄を立てた	has:공로를	fix	lookup
+lexical:audit-game-gloss	合格通知が届いた	has:합격 통지	keep	lookup
+lexical:audit-game-gloss	スマホに通知が来た	has:알림이	fix	senses
+lexical:audit-game-gloss	ドレスに合う靴を選ぶ	has:구두	fix	senses
+lexical:audit-game-gloss	靴を脱ぐ	has:신발을	keep	lookup
+cx:sense-cues-1:18	こっちに行こう	lacks:이쪽으로에	keep	rewrites
