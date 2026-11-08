@@ -14,6 +14,7 @@
 #include "core/names/labels.h"
 #include "core/names/registry.h"
 #include "core/names/name_cues.h"
+#include "core/pipeline/sound.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -1017,36 +1018,91 @@ bool CreditNameAt(std::string_view before, std::string_view after) {
 
 }  // namespace
 
-bool Registry::KanaLabelName(std::string_view t) {
+bool Registry::KanaWordRun(std::string_view t) {
+    if (snap_ == nullptr || t.empty()) return false;
+    const DictFlags f = Flags(t);
+    if (f.role || f.pronoun || f.human || f.thing) return true;
+    // A common word of its own: no ending, particle, verb or adjective row (るな 구나 ends a verb) and no reading of
+    // a kanji standing alone.
+    for (const dict::Candidate& c : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != t || c.codes->partText.empty() || c.codes->gram.Contains("On")) continue;
+        if (c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QCT")) continue;
+        if (!InRunes(static_cast<unsigned char>(c.codes->partText[0]), "STUVPMH")) return true;
+    }
+    // An interjection or a sound of the sound lexicon (てか, うん, ざわざわ).
+    std::u32string katakana;
+    for (std::size_t i = 0; i < t.size();) {
+        const text::Rune r = RuneAt(t, i);
+        katakana.push_back(IsHiragana(r.cp) ? r.cp + 0x60 : r.cp);
+        i += r.size == 0 ? 1 : r.size;
+    }
+    if (pipeline::internal::IsSoundKey(katakana)) return true;
+    // A kana spelling of a word of the base dictionary (おとこ 男, ははおや 母親, てんいん 店員).
+    for (const dict::UserEntry* e : snap_->TextPlain().Search(t, dict::LookupMode::General)) {
+        if (e->key == t && e->kana && !e->nameLayer) return true;
+    }
+    dict::LookupContext ctx;
+    ctx.plain = &snap_->Plain();
+    for (const dict::Candidate& c : snap_->GetWordInfo(t, dict::LookupMode::General, ctx).list) {
+        if (c.codes == nullptr || c.source.size() > t.size()) continue;
+        const std::string_view part = c.codes->partText;
+        if (part.empty()) continue;
+        // A word the engine reads whole that is no verb: a noun, an adverb or an interjection (てか, ないしょ).
+        if (c.source == t && part[0] != 'M' && !c.codes->sem.HasPrefix("QPN")) return true;
+        if (part.size() != 4) continue;
+        const std::string_view tail = t.substr(c.source.size());
+        // An adjective (いい, すごく).
+        if (part[0] == 'H' && (tail == "い" || tail == "く" || tail == "かった" || tail == "くて")) return true;
+        if (part[0] != 'M') continue;
+        // The stem of a する verb is a noun (てき 適).
+        if (c.source == t && part[3] == '9') return true;
+        // A verb in any form but its dictionary form, which given names take (ひかる, まもる): the て form, the
+        // continuative or the past (まって, やめて, わらい, こごえ).
+        const int kind = part[3] - '0';
+        if (kind < 0 || kind > word::kKindIku) continue;
+        for (int branch = 1; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(kind, branch);
+            if (conj.find_first_of("(X") == std::string_view::npos && tail == conj && (!conj.empty() || branch == 10)) return true;
+        }
+    }
+    return false;
+}
+
+bool Registry::KanaLabelName(std::string_view t, bool bracketed) {
     const std::size_t n = RuneCount(t);
     // A name in hiragana runs to six kana at most; a longer run is words (でもいつのまにか).
     if (n < 2 || n > 6 || !IsHiragana(FirstRune(t).cp) || RoleLike(t) || LabelRole(t) || WordThenParticle(t)) return false;
-    // A small kana or a long mark cannot open the name, and a run that ends in っ or repeats its half is a sound
-    // (えっ, ざわざわ, ひそひそ).
+    // A small kana cannot open the name, and a run that ends in っ is a sound (えっ).
     if (InRunes(FirstRune(t).cp, "ぁぃぅぇぉっゃゅょゎ") || t.ends_with("っ")) return false;
-    // Kana are three bytes each in UTF-8.
-    if (n >= 4 && n % 2 == 0 && t.size() == 3 * n && t.substr(0, t.size() / 2) == t.substr(t.size() / 2)) return false;
     std::string_view core = t;
     while (core.ends_with("ー") || core.ends_with("～") || core.ends_with("〜")) core.remove_suffix(RuneBefore(core, core.size()).size);
-    if (RuneCount(core) < 2 || !AllRunes(core, IsHiragana)) return false;
-    // A person of the dictionaries or the name layer is the name (みのり 미노리); a whole common word, a
-    // person noun or a pronoun is the word (ざわめき, くしゃみ, せんせい, おばあさん, あなた).
+    const std::size_t m = RuneCount(core);
+    if (m < 2 || !AllRunes(core, IsHiragana)) return false;
+    // A run that repeats its half is a sound (ざわざわ, ひそひそ); kana are three bytes each in UTF-8.
+    if (m >= 4 && m % 2 == 0 && core.size() == 3 * m && core.substr(0, core.size() / 2) == core.substr(core.size() / 2)) return false;
+    // A person row of the dictionaries is the name (みのり 미노리).
     const DictFlags f = Flags(core);
-    if (f.role || f.pronoun || f.human || f.thing) return false;
-    if (f.person || f.layerSurname || f.layerGiven) return true;
-    if (f.common && f.word) return false;
-    // The continuative of a verb names an act, as a stage direction does (わらい, こごえ, せきこみ).
-    dict::LookupContext ctx;
-    ctx.plain = &snap_->Plain();
-    for (const dict::Candidate& c : snap_->GetWordInfo(core, dict::LookupMode::General, ctx).list) {
-        if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M' ||
-            c.source.size() > core.size()) {
-            continue;
-        }
-        const std::string_view tail = core.substr(c.source.size());
-        const std::string_view stem = word::Conjugation(c.codes->partText[3] - '0', 10);
-        if (stem.find_first_of("(X") == std::string_view::npos && tail == stem) return false;
+    if (f.person) return true;
+    // Before 「, a colon or ≫ only a speaker stands, and a person of the name layer is the name there (さくら「).
+    // Brackets also tag a sound or a voice, so a word there stays the word though the name layer has a person of
+    // that name ((うた), (おと)).
+    if (!bracketed && (f.layerSurname || f.layerGiven)) return true;
+    // A word the dictionaries have whole is the word: a common word or its kana spelling, a person noun or a
+    // pronoun, an adverb, an interjection or a sound, a verb or an adjective in a form a name never takes
+    // (ざわめき, おとこ, ははおや, うた, おばあさん, てか, まって, わらい, いい).
+    if (KanaWordRun(core)) return false;
+    if (f.layerSurname || f.layerGiven) return true;
+    // Two kana are most often a word: they name a person only on a person row or where no dictionary has them
+    // (おと, てき, but ゆう, もず).
+    if (m == 2 && (f.records > 0 || (snap_ != nullptr && !snap_->NameRecords(core).empty()))) return false;
+    // A word and a particle that ends a sentence are a phrase (いいよ, そうね, あるぞ).
+    const text::Rune last = RuneBefore(core, core.size());
+    if (InRunes(last.cp, "よねぞぜわさなのか") && m >= 3) {
+        const std::string_view head = core.substr(0, core.size() - last.size);
+        if (KanaWordRun(head) || InflectedRun(head)) return false;
     }
+    // A run that ends in the て of a verb's て form is one (まって, よんで) though the dictionaries spell it otherwise.
+    if ((core.ends_with("って") || core.ends_with("んで") || core.ends_with("いて") || core.ends_with("いで")) && m >= 3) return false;
     return true;
 }
 
@@ -1097,7 +1153,18 @@ std::string Registry::ReadKanaLabels(std::string_view line) {
         // Nor one that holds no kana nor mark of a sentence: a value (けもみみ：兎).
         const bool field = colon > 0 && (value.find(':') != std::string_view::npos || value.find("：") != std::string_view::npos ||
                                          !AnyRuneOf(value, [](char32_t c) { return IsHiragana(c) || IsKatakana(c) || InRunes(c, "。！？!?…‥～〜"); }));
-        if (credit || (!field && SpeakerLabelAt(*snap_, before, after) && KanaLabelName(run))) {
+        // A copula after the brackets makes them a word of the sentence ((ないしょ)だよ).
+        bool copula = false;
+        {
+            std::string_view rest = after.substr(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), after));
+            const char32_t close = rest.empty() ? 0 : FirstRune(rest).cp;
+            if (InRunes(close, ")）]］")) {
+                rest = TrimSpace(rest.substr(FirstRune(rest).size));
+                copula = rest.starts_with("だ") || rest.starts_with("です") || rest.starts_with("でし") || rest.starts_with("じゃ");
+            }
+        }
+        const bool bracketed = BracketLabelAt(before, after) || SquareLabelAt(before, after);
+        if (credit || (!field && !copula && SpeakerLabelAt(*snap_, before, after) && KanaLabelName(run, bracketed))) {
             // A person row's reading (ゆうこ 유우코), else the kana as the names of the document are read, one long
             // vowel pair dropped (ゆう 유, しどう 시도).
             const DictFlags f = Flags(run);

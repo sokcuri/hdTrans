@@ -181,8 +181,11 @@ private:
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
-    // Whether the hiragana run t of a speaker label is a name (ReadKanaLabels).
-    bool KanaLabelName(std::string_view t);
+    // Whether the hiragana run t of a speaker label is a name (ReadKanaLabels); bracketed: the label is in brackets,
+    // which also tag sounds and voices.
+    bool KanaLabelName(std::string_view t, bool bracketed);
+    // Whether the dictionaries have the hiragana run t as a word whole (KanaLabelName).
+    bool KanaWordRun(std::string_view t);
     // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
     // それから), which is no name however often the document writes it (spec LEX-4828).
     bool WordThenParticle(std::string_view t);

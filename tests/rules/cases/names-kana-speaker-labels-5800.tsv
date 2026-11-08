@@ -28,3 +28,16 @@ names:kana-label	ほら「見て」	has:자 「	keep	names
 names:kana-label	それは(まもる)ためだ。	lacks:마모루	keep	names
 names:kana-label	けもみみ：兎　美徳：純潔	lacks:케모미미	keep	names
 names:kana-label	これは(とても/very)いい	lacks:토테모	keep	names
+names:kana-label	（おとこ）待て！	has:(남자)	keep	names
+names:kana-label	（ははおや）ごはんよ。	has:(어머니)	keep	names
+names:kana-label	（てんいん）いらっしゃいませ。	has:(점원)	keep	names
+names:kana-label	（うた）ラララ	has:(노래)	keep	names
+names:kana-label	（てき）来るぞ！	lacks:테키	keep	names
+names:kana-label	（ないしょ）だよ	lacks:나이쇼	keep	names
+names:kana-label	まって「行かないで」	has:기다려 「	keep	names
+names:kana-label	やめて「お願い」	lacks:야메테	keep	names
+names:kana-label	てか≫マジ？	has:그보다	keep	names
+names:kana-label	てか「マジ？」	has:그보다 「	keep	names
+names:kana-label	いいよ「どうぞ」	has:좋아 「	keep	names
+names:kana-label	あるぞ「おう」	lacks:아루조	keep	names
+names:kana-label	さくら「早く来て」	has:사쿠라 「	fix	names
