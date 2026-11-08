@@ -22,6 +22,7 @@
 //= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
 //= verb.perception	Verbs of seeing and the passive words of them the dictionary has (見る, 覗く, 見つめる, 見られる; not 聞く, which also asks): with a person before に their passive is that person's act, with no object needed (誰かに見られている 누군가가 보고 있다; spec GRM-2).
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
+//= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
@@ -3698,6 +3699,33 @@ word.quote-stem-other	決め手
 word.quote-stem-other	決め顔
 word.quote-stem-other	決めポーズ
 word.quote-stem-other	決め技
+verb.su-transitive	欠か
+verb.su-transitive	凝ら
+verb.su-transitive	剥が
+verb.su-transitive	逃が
+verb.su-transitive	溶か
+verb.su-transitive	抜か
+verb.su-transitive	透か
+verb.su-transitive	惑わ
+verb.su-transitive	動か
+verb.su-transitive	減ら
+verb.su-transitive	鳴ら
+verb.su-transitive	照ら
+verb.su-transitive	散ら
+verb.su-transitive	乾か
+verb.su-transitive	沸か
+verb.su-transitive	転が
+verb.su-transitive	飛ば
+verb.su-transitive	驚か
+verb.su-transitive	笑わ
+verb.su-transitive	回ら
+verb.su-transitive	暮ら
+verb.su-transitive	果た
+verb.su-transitive	活か
+verb.su-transitive	生か
+verb.su-transitive	冷や
+verb.su-transitive	増や
+verb.su-transitive	生や
 verb.te-state-aux	い
 verb.te-state-aux	居
 verb.te-state-aux	お
