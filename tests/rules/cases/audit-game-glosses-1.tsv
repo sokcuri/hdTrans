@@ -1,0 +1,65 @@
+# 규칙: LEX-5700, LEX-5701, LEX-5702
+rule	input	expected	kind	layer
+lexical:audit-game-gloss	「こっちはどうだ」	has:이쪽은 어때	fix	lookup
+lexical:audit-game-gloss	「そういうのもあったな」	has:그런 것도	fix	local
+lexical:audit-game-gloss	「い、いえいえ！」	lacks:아니오	fix	lookup
+lexical:audit-game-gloss	と、いつもの回答が来た。	has:답변	fix	lookup
+lexical:audit-game-gloss	「あ、いえ……すいません、先輩」	has:죄송해요	fix	lookup
+lexical:audit-game-gloss	「嘘をついたら一生恨むわよ」	has:평생 원망	fix	lookup
+lexical:audit-game-gloss	……俺も、和服を見てみたいし。	has:기모노를	fix	lookup
+lexical:audit-game-gloss	靴を脱いで波打ち際へと進む。	has:신발을 벗고	fix	local
+lexical:audit-game-gloss	再度エアマイクを向ける。	has:다시 에어 마이크	fix	lookup
+lexical:audit-game-gloss	「ゆっくり湯船に浸かって体を労ってください」	has:욕조에	fix	lookup
+lexical:audit-game-gloss	「本題って？」	has:본론	fix	lookup
+lexical:audit-game-gloss	口の中で飴を転がしながら喋る。	has:사탕을	fix	lookup
+lexical:audit-game-gloss	「お待たせしましたー」	has:오래 기다리셨습니다	fix	lookup
+lexical:audit-game-gloss	「人前だってのに」	has:사람들 앞	fix	local
+lexical:audit-game-gloss	「でも、この間言われたんです……」	has:얼마 전	fix	lookup
+lexical:audit-game-gloss	「私こそすみませんでした」	has:죄송합니다	fix	lookup
+lexical:audit-game-gloss	無茶振りだ。	has:무리한 요구	fix	lookup
+lexical:audit-game-gloss	でも……人影は……ない。	has:사람 그림자	fix	lookup
+lexical:audit-game-gloss	「今週の土日って空いてます？」	has:주말	fix	lookup
+lexical:audit-game-gloss	「相変わらずバカップルねー」	has:닭살 커플	fix	lookup
+lexical:audit-game-gloss	「じゃ、またね」	has:또 봐	fix	lookup
+lexical:audit-game-gloss	見張りが突然、糸の切れた人形のように崩れ落ちた。	has:보초가	fix	lookup
+lexical:audit-game-gloss	先生も認める、会心の一手。	has:한 수	fix	lookup
+lexical:audit-game-gloss	誰だって、少なからず感じるだろう。	has:적잖이	fix	lookup
+lexical:audit-game-gloss	ロクな案が出ない。	has:변변한	fix	lookup
+lexical:audit-game-gloss	西日が俺たちの顔を赤く照らす。	has:석양이	fix	lookup
+lexical:audit-game-gloss	「こうしてみると、ホントに大きな横断幕ですねー」	has:현수막	fix	lookup
+lexical:audit-game-gloss	「合い鍵ができ次第、みんなに渡すね」	has:여벌 열쇠	fix	lookup
+lexical:audit-game-gloss	通知が来た。	has:알림	fix	lookup
+lexical:audit-game-gloss	「どーおー？　そっち側はー？」	has:그쪽은	fix	lookup
+lexical:audit-game-gloss	「あっ、こら、待ちなさい！」	has:이봐	fix	local
+lexical:audit-game-gloss	「こっちに来るまで、ずっとコンテナの中にいたから」	has:여기에 올 때까지	keep	senses
+lexical:audit-game-gloss	「こっちこっち」	has:여기 여기	keep	senses
+lexical:audit-game-gloss	こっち来てから	has:여기 오고	keep	senses
+lexical:audit-game-gloss	人の一生は曲がり角だらけ	has:사람의 일생은	keep	senses
+lexical:audit-game-gloss	短い一生だった。	has:짧은 일생	keep	senses
+lexical:audit-game-gloss	再度のノック。	has:재차의 노크	keep	senses
+lexical:audit-game-gloss	靴の踵を折ってから走り出す。	has:구두의 굽	keep	senses
+lexical:audit-game-gloss	革靴が必要だ。	has:가죽 구두	keep	lookup
+cx:sense-cues-1:19	ガキの頃か。	has:어릴 때	fix	rewrites
+cx:sense-cues-1:19	ガキの頃からずっと一緒だ。	has:어릴 때부터	fix	rewrites
+lexical:audit-game-gloss	子供の頃からずっと一緒だ。	has:어릴 때부터	fix	lookup
+lexical:audit-game-gloss	「このガキ！」	has:꼬맹이	fix	lookup
+lexical:audit-game-gloss	ごっこ遊びをする。	lacks:놀이 놀이	fix	lookup
+lexical:audit-game-gloss	お医者さんごっこ遊び	has:의사 놀이	fix	lookup
+lexical:audit-game-gloss	こっちの身にもなれ！	has:내 입장도 생각해	fix	lookup
+lexical:audit-game-gloss	少しはこっちの身にもなってくれ	has:내 입장도 생각해 줘	fix	lookup
+lexical:audit-game-gloss	こっちの身にもなってください	has:내 입장도 생각해 주세요	fix	lookup
+lexical:audit-game-gloss	こっちの身が持たないよ	has:내 몸이 버틸 수 없어	fix	lookup
+lexical:audit-game-gloss	これじゃ身が持たないわ	has:몸이 버틸 수 없어	fix	lookup
+lexical:audit-game-gloss	こっちの気も知らないで	has:내 속도 모르고	fix	lookup
+lexical:audit-game-gloss	こっちの気持ちも知らないで	has:내 마음도 모르고	fix	lookup
+lexical:audit-game-gloss	本当にすいませんでした。	has:정말 죄송합니다.	fix	lookup
+lexical:audit-game-gloss	すいませんでした！	lacks:미안 했습니다	fix	lookup
+lexical:audit-game-gloss	レジに並ぶ。	lacks:계산대	keep	lookup
+cx:sense-cues-1:19	あいつとは、ガキの頃からずーっと、一緒だった	has:저 녀석과는, 어릴 때부터	fix	rewrites
+cx:sense-cues-1:19	ガキのくせに生意気だ	has:꼬맹이	keep	rewrites
+cx:sense-cues-1:19	その頃のガキどもは	lacks:어릴	keep	rewrites
+lexical:audit-game-gloss	こっちの身体が持たない	lacks:내 몸체	keep	lookup
+lexical:audit-game-gloss	こっちの身分証を見せる	has:신분증	keep	lookup
+lexical:audit-game-gloss	こっちの身内だ	lacks:몸내	keep	lookup
+lexical:audit-game-gloss	レジに並ぶ。	has:줄선다	fix	senses
+lexical:audit-game-gloss	レジに並ぶ。	lacks:대등	fix	local

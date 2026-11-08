@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 segment:particle-run	今まで向こうからかかってきたことなんて、一度もないのに。	지금까지 저편에서 걸려 온 것은, 한 번도 없는데.	fix	segment
 segment:particle-run	「ん～、今日もがっつり体を動かしたな」	「음~, 오늘도 제대로 몸을 움직였구나」	fix	segment
 segment:particle-run	新しい時代も来そうだし……。私もがんばらなきゃ！	새로운 시대도 올 것 같고……. 나도 열심히 해야 해!	fix	segment
-segment:particle-run	「うーん、たぶん。こっちのちっこい子、生かしておく方が展開が有利に運べそうだし♪」	「으음, 아마. 여기의 작은 아이, 살려 두는 편이 전개가 유리하게 옮길 수 있을 것 같고♪」	fix	segment
+segment:particle-run	「うーん、たぶん。こっちのちっこい子、生かしておく方が展開が有利に運べそうだし♪」	「으음, 아마. 이쪽의 작은 아이, 살려 두는 편이 전개가 유리하게 옮길 수 있을 것 같고♪」	fix	segment
 segment:particle-run	手ずから遺跡を発掘するよりも横からかすめ取る方が遥かに効率が良い……、	몸소 유적을 발굴하는 것보다도 옆에서 집어삼키는 편이 훨씬 더 효율이 좋다……,	fix	segment
 segment:particle-run	―え？え？本当にするんですか？今から？じゃれ合いとかではなくて？	―어? 어? 정말 합니까? 지금부터? 장난질이라든지가 아니라?	fix	segment
 segment:particle-run	高峰とがっしり握手する。	고봉과 튼튼 악수한다.	fix	segment

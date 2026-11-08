@@ -8062,7 +8062,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハンコ絵	같은 얼굴 증후군	N110			GN				llm			s:8058
 バッチ来い	얼마든지 와라	E320			GN				llm			s:8059
 ばっち来い	얼마든지 와라	E320			GN				llm			s:8060
-無茶振り	덤터기	N110			GN							s:8061
+無茶振り	무리한 요구	N110			GN							s:8061
 無茶ぶり	무리한 요구	N110			GN				llm			s:8062
 プリケツ	빵빵한 엉덩이	N110			GN				llm			s:8063
 パーティーピープル	파티 피플	N110			GN				llm			s:8064

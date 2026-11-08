@@ -1,6 +1,6 @@
 # 규칙: GRM-3872
 rule	input	expected	kind	layer
-cx:told-quote:10	私みたいな かわいいガキは 嫌いだって言われたんだ	나 같은 귀여운 녀석은 싫다는 말을 들은 거야	fix	rewrites
+cx:told-quote:10	私みたいな かわいいガキは 嫌いだって言われたんだ	나 같은 귀여운 꼬맹이는 싫다는 말을 들은 거야	fix	rewrites
 cx:told-quote:10	偽物だと言われたのに どうなってる？	가짜라는 말을 들었는데 어떻게 되어 있어?	fix	rewrites
 cx:told-quote:10	玉… 玉子？ に しゃべるなと言われた	구슬… 계란? 에 말하지 말라는 말을 들었다	fix	rewrites
 cx:told-quote:10	明日 宿を出てくれと 言われた	내일 숙소를 나오라는 말을 들었다	fix	rewrites

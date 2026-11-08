@@ -1,6 +1,6 @@
 # 규칙: NUM-30, NUM-31
 rule	input	expected	kind	layer
-cx:count-units:90	靴を一足用意してくれた。	구두를 한 켤레 준비해 주었다.	fix	rewrites
+cx:count-units:90	靴を一足用意してくれた。	신발을 한 켤레 준비해 주었다.	fix	rewrites
 cx:count-units:100	服が一着ある。	옷이 한 벌 있다.	fix	rewrites
 cx:count-units:45	とても広い大地に１輪の花。	무척 넓은 대지에 1송이의 꽃.	fix	rewrites
 cx:count-units:135	花が三輪ある。	꽃이 세 송이 있다.	fix	rewrites
@@ -112,7 +112,7 @@ cx:count-units:60	筋が通っている。	조리가 서 있다.	keep	rewrites
 cx:count-units:65	３柱の女神が来た。	3명의 여신이 왔다.	keep	rewrites
 cx:count-units:80	水が3滴落ちた。	물이 3방울 떨어졌다.	fix	rewrites
 cx:count-units:80	滴が落ちた。	물방울이 떨어졌다.	keep	rewrites
-cx:count-units:90	靴を一足買った。	구두를 한 켤레 샀다.	fix	rewrites
+cx:count-units:90	靴を一足買った。	신발을 한 켤레 샀다.	fix	rewrites
 cx:count-units:90	一足先に帰った。	한발 앞서 돌아갔다.	keep	rewrites
 cx:count-units:100	服を一着買った。	옷을 한 벌 샀다.	fix	rewrites
 cx:count-units:100	服を着た。	옷을 입었다.	keep	rewrites
@@ -276,10 +276,10 @@ cx:count-units:36	六切れだけ	여섯 조각만	keep	rewrites
 cx:count-units:42	何切れてんの？	뭐 끊어져 있어?	keep	rewrites
 cx:count-units:38	ケーキを八切れ食べた。	케이크를 여덟 조각 먹었다.	fix	rewrites
 cx:count-units:38	八切りにする。	팔등분으로 한다.	keep	rewrites
-cx:count-units:91	靴が三足ある。	구두가 세 켤레 있다.	fix	rewrites
+cx:count-units:91	靴が三足ある。	신발이 세 켤레 있다.	fix	rewrites
 cx:count-units:91	二足歩行	2족 보행	keep	rewrites
-cx:count-what:75	靴を何足持ってる？	구두를 몇 켤레 가지고 있어?	fix	rewrites
-cx:count-what:75	靴を三足持ってる。	구두를 세 켤레 가지고 있다.	keep	rewrites
+cx:count-what:75	靴を何足持ってる？	신발을 몇 켤레 가지고 있어?	fix	rewrites
+cx:count-what:75	靴を三足持ってる。	신발을 세 켤레 가지고 있다.	keep	rewrites
 cx:count-what:20	何空気読んでんの	무엇 공기 읽고 있어	keep	rewrites
 cx:tai-count:50	アレンが一体知っているのか。	알렌이 도대체 알고 있는 건가.	keep	rewrites
 cx:tai-count:50	クロエが一体……	클로이가 도대체……	keep	rewrites

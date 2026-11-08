@@ -14,7 +14,7 @@ phrase:なんていうか	うん……なんていうかね……すごかった
 dict:jisjk:103790	あっという間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
 phrase:わずかに	今朝はわずかに寒い。	오늘 아침은 조금 춥다.	fix	lookup
 phrase:最低でも	最低でも一週間はかかる。	최소한 일주일간은 걸린다.	fix	lookup
-phrase:何倍も	こっちの方が何倍も楽だ。	여기가 몇 배나 편하다.	fix	lookup
+phrase:何倍も	こっちの方が何倍も楽だ。	이쪽이 몇 배나 편하다.	fix	lookup
 dict:word:ayauku:narrowly	危うく転ぶところだった。	rule:dict:word:ayauku:narrowly=하마터면	fix	local
 dict:word:ayauku:narrowly	計画が危うくなった。	!rule:dict:word:ayauku:narrowly	keep	local
 dict:word:ayauku:narrowly	彼の嘘が立場を危うくする。	!rule:dict:word:ayauku:narrowly	keep	local

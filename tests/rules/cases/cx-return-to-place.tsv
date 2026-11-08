@@ -27,7 +27,7 @@ cx:return-to:20	無事に戻った。	무사히 돌아왔다.	keep	rewrites
 cx:return-to:20	部屋に戻ってきた。	방으로 돌아왔다.	keep	rewrites
 cx:return-to:20	仕事に戻れ。	일로 돌아가라.	fix	rewrites
 cx:return-to:15	こっちに戻ってるって	여기로 돌아와 있다고	fix	rewrites
-cx:return-to:15	ちょっと前にもうこっちの世界に戻って来てた	조금 전에 이제 여기의 세계로 돌아왔다	fix	rewrites
+cx:return-to:15	ちょっと前にもうこっちの世界に戻って来てた	조금 전에 이제 이쪽의 세계로 돌아왔다	fix	rewrites
 cx:return-to:15	我が精鋭艦隊が母港に戻りました	우리 정예 함대가 모항으로 돌아왔습니다	fix	rewrites
 cx:return-to:15	いひっ、母港に戻ったぜ。	이힛, 모항으로 돌아왔다.	fix	rewrites
 cx:return-to:15	タイトル画面に戻ります	!rule:cx:return-to:15	keep	rewrites

@@ -14,7 +14,7 @@ dict:function-nouns:31	改めるべきはお前の方だ。	고쳐야 하는 것
 dict:function-nouns:31	緊張してるのは俺の方だっての！	긴장하고 있는 것은 내 쪽이라니까!	fix	local
 dict:function-nouns:31	ＷＷの方の難易度が初心者には難しい。	WW의 쪽의 난이도가 초심자에게는 어렵다.	fix	local
 dict:function-nouns:65	ハイスペックな方がいらっしゃいましたら、教えてください。	하이스펙인 분이 계시면, 가르쳐 주세요.	fix	local
-dict:function-nouns:31	こっちの方がいい。	여기가 좋다.	keep	defaults
+dict:function-nouns:31	こっちの方がいい。	이쪽이 좋다.	keep	defaults
 dict:function-nouns:31	簡単な方がいい。	간단한 편이 좋다.	keep	defaults
 dict:function-nouns:31	あの方は誰ですか。	그 분은 누구입니까.	keep	defaults
 dict:jisjk:115875	パーティの場は瞬く間に祝いの場から弾劾の場へと変貌した。	파티의 자리는 순식간에 축하의 자리에서 탄핵의 자리로 변모했다.	fix	defaults

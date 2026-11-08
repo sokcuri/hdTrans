@@ -42,7 +42,7 @@ normalize:honorific-oide	その声をジッと聞いておいでになったら�
 normalize:honorific-oide	又はその黒いキーの光りを見る時、お母様がつけておいでになったオハグロの美しさをいつもいつも思い出しました。	또는 그 검은 키의 빛을 볼 때, 어머님이 붙이고 계신 오하그로의 아름다움을 언제나 언제나 생각해 냈습니다.	fix	normalize
 normalize:honorific-oide	宮の御風采の艶な所が源氏によく似ておいでになると言って女房たちは賞めていた。	궁의 풍채의 윤기인 곳이 겐지에 잘 닮아 계신다고 해 부인들은 상이라고 있었다.	fix	normalize
 normalize:honorific-oide	僕がいつぞや申し上げたことは、覚えておいででしょう。	내가 언젠가 말씀드렸던 것은, 기억하고 계시겠죠.	fix	normalize
-normalize:honorific-oide	「じゃあ、話しますがね、実はこの間から竜王のお后さまが御病気で、死にかけておいでになるのです。	「그럼, 이야기합니다만, 실은 이전으로부터 용왕의 황후님이 병으로, 다 죽어 가고 계십니다.	fix	normalize
+normalize:honorific-oide	「じゃあ、話しますがね、実はこの間から竜王のお后さまが御病気で、死にかけておいでになるのです。	「그럼, 이야기합니다만, 실은 얼마 전으로부터 용왕의 황후님이 병으로, 다 죽어 가고 계십니다.	fix	normalize
 normalize:honorific-oide	月夜の美と恋人の艶な容姿が添って、宇治川にこんな趣があったかと宮は恍惚としておいでになった。	달밤의 미와 애인의 윤기인 용모가 더해져, 우지가와에게 이런 정취가 있었는지 하고 궁은 황홀로 하고 있어졌다.	fix	normalize
 normalize:honorific-oide	「そんなにわたしの身体ばかりを見ておいでになっては、溶けてしまいますよ」	「그렇게 제 신체만을 보고 계셔서는, 녹아버려요」	fix	normalize
 normalize:honorific-oide	馬上の宮は少し遠くへ立っておいでになるのであったが、田舎風な犬が集まって来て吠え散らす。	마상의 궁은 조금 멀리 서 계시는 것이었지만, 시골풍인 개가 모여 와 마구 짖는다.	fix	normalize
@@ -107,12 +107,12 @@ normalize:honorific-ikare	車で20分…まぁ置いていかれても帰れな�
 normalize:honorific-ikare	「特に今は対テロ法案をまとめようとしている議員たちの護衛に人員を持っていかれている」	「특히 지금은 대테러 법안을 정리하려 하고 있는 의원들의 호위에 인원이 가져가지고 있어」	keep	normalize
 normalize:honorific-ikare	意識が もっていかれそうだ》	의식이 가져가질 것 같다》	keep	normalize
 normalize:honorific-ikare	山田さん１枚持ってって｡ >>また持っていかれちゃう｡	야마다 씨 1장 가져가. >>또 가져가져버린다.	keep	normalize
-normalize:honorific-ikare	シキ君と和服の子 労働区へ連れていかれちゃったのね	시키 군과 일본식 옷의 아이 노동구에 끌려가버렸어	keep	normalize
+normalize:honorific-ikare	シキ君と和服の子 労働区へ連れていかれちゃったのね	시키 군과 기모노의 아이 노동구에 끌려가버렸어	keep	normalize
 normalize:honorific-ikare	置いていかれなかった。	남겨지지 않았다.	keep	normalize
 normalize:honorific-ikare	お父が… 連れていかれた。	아버지가… 끌려갔다.	keep	normalize
 normalize:favour-moraenai	「一度も見せてもらえませんでした。ユリアン様は、ターニャ様を疑うこと自体が残酷だと」	「한 번도 보여 주지 않았습니다. 유리안 님은, 타냐 님을 의심하는 거 자체가 잔혹하다고」	fix	normalize
 normalize:favour-moraenai	それを憎まれ口をたたくなんて、あなたみたいな非常識な人はどこも雇ってもらえないわよ！	그것을 욕설을 치다니, 당신 같은 비상식적인 사람은 어디도 고용해 주지 않아!	fix	normalize
-normalize:favour-moraenai	マイクロフトはあなたがつけたはず なのに一生 呼んでもらえないのかな ホームズさん	마이크로후트는 당신이 붙였을 텐데 일생 불러 주지 않는 건지 홈스 씨	fix	normalize
+normalize:favour-moraenai	マイクロフトはあなたがつけたはず なのに一生 呼んでもらえないのかな ホームズさん	마이크로후트는 당신이 붙였을 텐데 평생 불러 주지 않는 건지 홈스 씨	fix	normalize
 normalize:favour-moraenai	「どうでもいいものじゃ、いくらタダでも受け取ってもらえないだろうし……」	「아무래도 좋은 것은, 아무리 공짜라도 받아 주지 않을 테고……」	fix	normalize
 normalize:favour-moraenai	森下さんは、全然受け取ってもらえない。	모리시타 씨는, 전혀 받아 주지 않는다.	fix	normalize
 normalize:favour-moraenai	「自分たちでビラを配っても、なかなか受け取ってもらえないらしい」	「자신들로 전단을 나눠줘도, 좀처럼 받아 주지 않는 것 같아」	fix	normalize

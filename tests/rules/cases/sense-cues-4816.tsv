@@ -10,7 +10,7 @@ cx:sense-cues-1:80	仕方ない、私も付き合うか……	어쩔 수 없다,
 cx:sense-cues-1:80	「……ウチら……付き合う？」	「……우리……사귀어?」	keep	rewrites
 cx:sense-cues-1:80	彼女と付き合ってる	그녀와 사귀고 있다	keep	rewrites
 cx:sense-cues-1:90	お願い！止めてっ！	부탁! 그만해!	fix	rewrites
-cx:sense-cues-1:90	エイミー、そういうの止めて	에이미, 그러한 것 그만해	fix	rewrites
+cx:sense-cues-1:90	エイミー、そういうの止めて	에이미, 그런 것 그만해	fix	rewrites
 cx:sense-cues-1:90	二人とも止めなさい	두 사람 모두 그만해	fix	rewrites
 cx:sense-cues-1:90	「この辺だって、俺には厳しいんだ。止めろ。これ以上奥には行くな」	「이 근처도, 나에게는 어렵다. 멈추어라. 더 이상 안쪽에는 가지 마」	keep	rewrites
 cx:sense-cues-1:90	王女のあおりに、警備が止めてそのまま退場させていた。	왕녀의 선동에, 경비가 멈추어 그대로 퇴장시키고 있었다.	keep	rewrites
@@ -28,7 +28,7 @@ cx:sense-cues-1:101	あたしも最後の方は、さすがに普通じゃなか
 cx:sense-cues-1:101	最後のページを開いた	마지막 페이지를 폈다	keep	rewrites
 cx:sense-cues-1:14	最後の一人になった	마지막 한 사람이 되었다	keep	rewrites
 cx:sense-cues-1:102	なので、軽い方へ話を誘導する。	그래서, 가벼운 쪽으로 이야기를 유도한다.	fix	rewrites
-cx:sense-cues-1:102	こっちの方がいい	여기가 좋다	keep	rewrites
+cx:sense-cues-1:102	こっちの方がいい	이쪽이 좋다	keep	rewrites
 cx:sense-cues-1:104	「ん？　んんん？　見知らぬ方がおられるのですが？」	「응? 으으응? 낯선 분이 계십니다만?」	fix	rewrites
 cx:sense-cues-1:104	その方がいい	그쪽이 좋다	keep	rewrites
 sense:tataku-hit	ズボンを脱がして ケツを叩くぞ	바지를 벗겨 엉덩이를 때리겠어	fix	senses

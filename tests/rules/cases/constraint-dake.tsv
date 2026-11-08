@@ -16,6 +16,6 @@ constraint:da-before-ke	だけど行く	하지만 간다	keep	lookup
 constraint:da-before-ke	そうだけど、違う	그렇지만, 아니다	keep	lookup
 constraint:da-before-ke	１曲だけなら	1곡뿐이라면	keep	lookup
 constraint:da-before-ke	部分だけが鉄製	부분만이 철제	keep	lookup
-constraint:da-before-ke	和服がはだけてしまう	일본식 옷이 열려버린다	keep	lookup
+constraint:da-before-ke	和服がはだけてしまう	기모노가 열려버린다	keep	lookup
 constraint:da-before-ke	半分だけ	반만	keep	lookup
 constraint:da-before-ke	それだけやらせてください	그것만 시켜 주세요	keep	lookup
