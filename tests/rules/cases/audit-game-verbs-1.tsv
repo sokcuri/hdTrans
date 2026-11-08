@@ -107,3 +107,7 @@ cx:audit-game-1:12	森で撃たれて死んだ	has:총에 맞아	keep	rewrites
 cx:audit-game-1:30	黙ってついてこい	has:잠자코 따라와	fix	rewrites
 cx:audit-game-1:30	「黙って申せ」	has:잠자코 말해라	fix	rewrites
 cx:audit-game-1:12	ライフルで撃たれた	has:라이플에 맞았다	fix	rewrites
+cx:audit-game-1:32	俺は黙ってないぞ	lacks:말없이	keep	rewrites
+cx:audit-game-1:32	あたしゃ黙ってないよぉ	lacks:말없이	keep	rewrites
+cx:audit-game-1:10	ビームに撃たれた	has:빔에 맞았다	fix	rewrites
+cx:audit-game-1:10	レーザーに撃たれて倒れた	has:레이저에 맞아	fix	rewrites
