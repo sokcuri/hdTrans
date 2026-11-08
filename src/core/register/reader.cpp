@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "core/dict/classes.h"
 #include "core/output/families.h"
 #include "core/output/inflect.h"
 #include "core/register/hangul.h"
@@ -212,10 +213,32 @@ struct Row {
 // writes as one compound of ko-verb.compound-motion (달려 + 오는 달려오는; not the pairs that need an
 // intransitive verb, whose code the capture lacks) are one verb: the verb item of prev, the last of out,
 // takes the compound's lemma and the ending of the 가다 or 오다.
-bool MergeCompoundMotion(const Row* prev, const std::vector<PreItem>& its, std::vector<PreItem>& out) {
+// Whether a noun of cls and a subject particle of particle.copies-subject after it (雪が, 物価は) come before row
+// k in its clause, back to a comma or the end of a sentence (the guard the output's spacing applies, GRM-4031).
+bool SubjectIn(const std::vector<Row>& rows, std::size_t k, dict::ClassId cls) {
+    for (std::size_t j = k; j-- > 0;) {
+        if (rows[j].sent != rows[k].sent) return false;
+        const std::string s = ToU8(rows[j].surf);
+        if (s == "、" || s == "，" || s == "," || dict::InClass(HDTRANS_CLASS("mark.sentence-end"), s)) return false;
+        if (j + 1 < k && rows[j].ending.empty() && dict::InClass(cls, s) &&
+            dict::InClass(HDTRANS_CLASS("particle.copies-subject"), ToU8(rows[j + 1].surf))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MergeCompoundMotion(const std::vector<Row>& rows, const Row* prev, const std::vector<PreItem>& its,
+                         std::vector<PreItem>& out) {
     if (prev == nullptr || prev->ending != U"6" || its.size() != 1 || its[0].kind != K::V || out.empty() ||
         out.back().kind != K::V || prev->target.size() < 4 ||
         !output::CompoundMotion(out.back().lemma, its[0].lemma, false)) {
+        return false;
+    }
+    // Weather that falls before 가다 and an amount that rises or falls stay apart (雪が降っていく, 物価が上がってきた).
+    const std::size_t k = static_cast<std::size_t>(prev - rows.data());
+    if ((its[0].lemma == "가다" && SubjectIn(rows, k, HDTRANS_CLASS("noun.weather-come"))) ||
+        SubjectIn(rows, k, HDTRANS_CLASS("noun.rising-level"))) {
         return false;
     }
     const KoreanFamily* f = FindKoreanFamily(ToU8(prev->target.substr(prev->target.size() - 4)));
@@ -299,7 +322,7 @@ std::vector<PreItem> ConvertLine(const Reader& d, const std::u32string& ja, cons
                 }
             }
         }
-        if (!MergeCompoundMotion(prev, its, out)) out.insert(out.end(), its.begin(), its.end());
+        if (!MergeCompoundMotion(rows, prev, its, out)) out.insert(out.end(), its.begin(), its.end());
         prev = &r;
     }
     while (ri < runs.size()) out.push_back(runs[ri++].second);

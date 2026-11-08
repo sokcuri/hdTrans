@@ -5,7 +5,7 @@ compose:compound-motion	時が流れていった	때가 흘러갔다	fix	compose
 compose:compound-motion	続いて聞こえてきた甘い声に	has:들려온	fix	compose
 compose:compound-motion	じゃがな 皆 去っていってしまった｡	has:떠나가버렸다	fix	compose
 compose:compound-motion	24年間 生きてきました	has:살아왔습니다	fix	compose
-compose:compound-motion	右から レベルが1～4まで上がっていきます。	has:올라갑니다	fix	compose
+compose:compound-motion	右から レベルが1～4まで上がっていきます。	has:레벨이 1~4까지 올라 갑니다	keep	compose
 compose:compound-motion	南方の山嶽を越えて吹いてくる	has:불어온다	fix	compose
 compose:compound-motion	君が越えてきた境界線	has:넘어온	fix	compose
 compose:compound-motion	この山の 半分まで登ってくるなんて。	has:올라오다니	fix	compose
@@ -29,3 +29,11 @@ compose:compound-motion	大丈夫な気がしてきたｗｗｗ	lacks:들어왔�
 compose:compound-motion	熱が出てきたみてえだな	lacks:나온	keep	compose
 compose:compound-motion	布地を掴んで、ずり下げていく。	has:질질 내려 간다	keep	compose
 compose:compound-motion	富竹さんの姿がないことを知った俺は、斜面を降りていった。	has:경사면을 내려갔다	fix	compose
+compose:compound-motion	雪が降っていく	눈이 내려 간다	keep	compose
+compose:compound-motion	勿体ない、勿体ない、と振踠いて肯かない爺やを無理に肩に援けて、彼女は雪の石段をようやく上がって行った。	has:돌층계를 드디어 올라갔다	keep	compose
+compose:compound-motion	画面の外から猛スピードで飛んできたのは	has:날아온	keep	compose
+compose:compound-motion	かれは会釈して、しずかに岡を降って行った。	has:언덕을 내려갔다	fix	compose
+compose:compound-motion	「せっかく図書部の知名度が上がってきたのに、こんな形で水を差されるなんて」	has:지명도가 올라 왔는데	keep	compose
+compose:compound-motion	物価が上がってきた	물가가 올라 왔다	keep	compose
+compose:compound-motion	成績が上がってきた	성적이 올라 왔다	keep	compose
+compose:compound-motion	にっこり笑って、小太刀が上がってきた。	has:올라왔다	fix	compose

@@ -90,6 +90,21 @@ char32_t FirstRune(std::string_view s) { return text::DecodeRune(s).cp; }
 
 // Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
 // same surface and Korean, a Korean of two equal halves (부슬부슬).
+// Whether a word of the class (noun.weather-come, noun.rising-level) is the subject of the verb at item i: the
+// noun and a subject particle of particle.copies-subject (雪が, 物価は) before it in its clause, back to a comma
+// or the end of a sentence.
+bool SubjectIn(const std::vector<ResolvedItem>& items, int i, dict::ClassId cls) {
+    for (int j = i - 1; j >= 0; j--) {
+        const std::string_view s = items[j].surface;
+        if (s == "、" || s == "，" || s == "," || dict::InClass(HDTRANS_CLASS("mark.sentence-end"), s)) return false;
+        if (j + 1 < i && First(Code(items[j])) == '1' && items[j].endingSurface.empty() && dict::InClass(cls, s) &&
+            dict::InClass(HDTRANS_CLASS("particle.copies-subject"), items[j + 1].surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
     const std::string_view ko = EntryText(a);
     const size_t half = ko.size() / 2;
@@ -1494,10 +1509,17 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // The 아/어 form of a verb and a 가다 or 오다 after it that make a Korean compound verb are
     // one word (過ぎていった 지나갔다); an auxiliary of aspect stays apart (更けていった 깊어져
     // 갔다), as does a verb that only sounds like the first one (話しかけていく 말을 걸어 가다; GRM-4031).
-    if (nextIndex == i + 1 && item.ending.text == "6" &&
-        CompoundMotion(Lemma(EntryText(item), *generated_), Lemma(EntryText(items[nextIndex]), *generated_),
-                       At(Code(item), 1) < '3' || At(Code(item), 1) > '6')) {
-        return Result(std::move(t), false);
+    // Weather that falls (noun.weather-come) comes down but does not go down: before 가다 its 내리다 takes
+    // the aspect (雪が降っていく 눈이 내려 간다; 山を降って行く 산을 내려간다, 雪が降ってくる 내려온다). An
+    // amount that rises or falls (noun.rising-level) changes, no motion (物価が上がってきた 물가가 올라 왔다).
+    if (nextIndex == i + 1 && item.ending.text == "6") {
+        const std::string second = Lemma(EntryText(items[nextIndex]), *generated_);
+        const bool apart = (second == "가다" && SubjectIn(items, i, HDTRANS_CLASS("noun.weather-come"))) ||
+                           SubjectIn(items, i, HDTRANS_CLASS("noun.rising-level"));
+        if (!apart && CompoundMotion(Lemma(EntryText(item), *generated_), second,
+                                     At(Code(item), 1) < '3' || At(Code(item), 1) > '6')) {
+            return Result(std::move(t), false);
+        }
     }
     // An auxiliary verb (gram Ds) read as a word of ko-aux.joined after the 아/어 form is
     // written joined to it (食べてしまった 먹어버렸다); the main verb stays apart (拾って捨てた

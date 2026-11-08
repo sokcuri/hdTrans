@@ -81,4 +81,4 @@ register:REG-2	「答えは10だ」	「대답은 10이야」	fix	register
 register:REG-2	「彼の名前はミクだ」	「그의 이름은 미쿠야」	fix	register
 register:REG-2	「人をツンデレみたいに言わないでくれる？　それでいい」	has:그거면 돼	fix	register
 register:REG-2	「なーるほど、ここで夜の街ネタがいきてくるわけだ」	has:살아오는 거야	keep	register
-register:REG-2	「ふむ……狙い通りに撃てる確率が上がってきたな」	has:올라왔구나	keep	register
+register:REG-2	「ふむ……狙い通りに撃てる確率が上がってきたな」	has:올라 왔구나	keep	register
