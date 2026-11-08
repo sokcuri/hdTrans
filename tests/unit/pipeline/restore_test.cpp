@@ -305,7 +305,7 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A"), std::string("선배~"));
     HD_CHECK_EQ(pipeline::WriteLengthening("타무라\uE00A\uE00A\uE00A\uE00A\uE00A\uE00A\uE00A」"), std::string("타무라아아아아아」"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("기다려~~~~~!"), std::string("기다려~~~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("기다려~~~~~!"), std::string("기다려~~~~~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("잠깐\uE00A\uE00A\uE00A"), std::string("잠까아아안"));
     HD_CHECK_EQ(pipeline::WriteLengthening("부탁\uE00A\uE00A\uE00A"), std::string("부탁~"));
     HD_CHECK_EQ(pipeline::WriteLengthening("제대로~~ 해"), std::string("제대로~~ 해"));

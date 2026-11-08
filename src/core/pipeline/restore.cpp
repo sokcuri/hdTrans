@@ -687,9 +687,9 @@ std::string WriteLengthening(std::string_view s) {
             const bool end = next == 0 || Contains(U"!?！？。、,.…‥」』）)］】\n♪☆★♥♡❤", next);
             // A stretch of ～ and lengthenings does not draw out a syllable closed by a stop (낮, 삯):
             // one ~ (spec SND-23).
-            // ～ the author typed stay, up to three (기다려~~~!).
+            // ～ the author typed stay, one ~ each (기다려~~~!).
             if (tildes == n && n >= 2) {
-                out.append(std::min<size_t>(n, 3), U'~');
+                out.append(n, U'~');
                 i = j - 1;
                 continue;
             }

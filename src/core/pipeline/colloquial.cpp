@@ -1303,7 +1303,7 @@ bool CuteEnding(std::u32string_view before) {
     return false;
 }
 
-// A run of ～ the author typed with no ー stays ～, up to three (待て～～～！ 기다려~~~!), and after a
+// A run of ～ the author typed with no ー stays ～, as many as typed (待て～～～！ 기다려~~~!), and after a
 // cute sound ending (にゃ, みゃ, ぴょ: 냥, 먀, 뾰) any run is one lengthening (にゃーー 냥~).
 std::u32string StretchMarks(std::u32string_view rs, size_t i, size_t end, bool vowelsFirst = false, bool cute = false) {
     const size_t dashes = static_cast<size_t>(std::count_if(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(end), IsDash));
@@ -1313,7 +1313,7 @@ std::u32string StretchMarks(std::u32string_view rs, size_t i, size_t end, bool v
     const size_t n = byVowels ? vowels : dashes;
     if (n == 0) return {};
     if (cute) return std::u32string(1, kLengthenMark);
-    if (!byVowels && bars == 0 && dashes >= 2) return std::u32string(std::min<size_t>(dashes, 3), U'～');
+    if (!byVowels && bars == 0 && dashes >= 2) return std::u32string(dashes, U'～');
     if (n == 1) return std::u32string(1, kLengthenMark);
     if (byVowels && vowelsFirst) return std::u32string(std::min<size_t>(n, 16), kDrawnMark);
     return std::u32string(std::min<size_t>(n, 5), kLengthenMark);

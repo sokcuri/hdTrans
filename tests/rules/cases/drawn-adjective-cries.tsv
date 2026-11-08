@@ -76,7 +76,7 @@ cx:drawn-cry:10	「怖い……夢」	「무서운……꿈」	keep	local
 cx:drawn-cry:10	「痛いぃ……でも、まだ！」	「아파……하지만, 아직!」	fix	local
 cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹아」	fix	local
 cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 잘 거야」	fix	local
-cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~!!)	keep	rewrites
+cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~~~~~~~~!!)	keep	rewrites
 cx:drawn-cry:10	（痛いー）	(아프다~)	keep	rewrites
 cx:drawn-cry:10	逃・が・さ・な・いー！	has:다―!	keep	rewrites
 cx:drawn-cry:10	う・れ・し・いー！	has:뻐~!	keep	rewrites
