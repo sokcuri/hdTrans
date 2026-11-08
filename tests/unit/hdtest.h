@@ -31,6 +31,16 @@ inline bool RequireAll() {
     return value != nullptr && std::string(value) == "1";
 }
 
+// Whether wall-clock ratio checks run. A shared CI runner (CI set) times too unevenly for them, and
+// HDTRANS_SKIP_TIMING turns them off by hand; there a test writes the measured ratio to stderr instead.
+inline bool TimingChecked() {
+    for (const char* name : {"CI", "HDTRANS_SKIP_TIMING"}) {
+        const char* value = std::getenv(name);
+        if (value != nullptr && *value != '\0') return false;
+    }
+    return true;
+}
+
 inline State& Cur() {
     static State s;
     return s;
