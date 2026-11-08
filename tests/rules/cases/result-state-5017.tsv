@@ -1,0 +1,73 @@
+# 규칙: LEX-5017
+rule	input	expected	kind	layer
+analysis:result-suru-state	家が全壊していた。	has:완파되어 있었다	fix	analysis
+analysis:result-suru-state	家が倒壊していた。	has:붕괴되어 있었다	fix	analysis
+analysis:result-suru-state	家が浸水していた。	has:침수되어 있었다	fix	analysis
+analysis:result-suru-state	家が全焼していた。	has:전소되어 있었다	fix	analysis
+analysis:result-suru-state	家が全壊しています。	has:완파되어 있습니다	fix	analysis
+analysis:result-suru-state	家が全壊していました。	has:완파되어 있었습니다	fix	analysis
+analysis:result-suru-state	全壊している家	has:완파된 집	fix	analysis
+analysis:result-suru-state	家が全壊してる。	has:완파되어 있다	fix	analysis
+analysis:result-suru-state	家が半壊していた。	has:반파되어 있었다	fix	analysis
+analysis:result-suru-state	ストリングスデータベースが破損しています	has:파손되어 있습니다	fix	analysis
+analysis:result-suru-state	　ドス黒く変色していた。	has:변색되어 있었다	fix	analysis
+analysis:result-suru-state	「銀のスプーンが黒く変色してます。	has:변색돼 있습니다	fix	analysis
+analysis:result-suru-state	提督、申し訳ありません。大きく損傷しています。	has:손상되어 있습니다	fix	analysis
+analysis:result-suru-state	　あれだけの事故だ。手足が欠損してる可能性も高い。	has:결손되어 있는	fix	analysis
+analysis:result-suru-state	俺にはスパイ容疑がかけられている。そのため、ハンドラーとしての権限が停止している。	has:정지되어 있다	fix	analysis
+analysis:result-suru-state	彼は勉強していた。	has:공부하고 있었다	keep	analysis
+analysis:result-suru-state	彼は勉強している。	has:공부하고 있다	keep	analysis
+analysis:result-suru-state	「おい、話が脱線してるぞ……」	has:탈선하고 있어	keep	analysis
+analysis:result-suru-state	車が故障していた。	has:고장나 있었다	keep	analysis
+dict:jisjk:355010	アメリカに並ぶ大国	has:미국과 대등한 대국	fix	local
+dict:jisjk:355010	トヨタに並ぶ企業	has:토요타와 대등한 기업	fix	local
+dict:jisjk:355010	日本に並ぶ国	has:일본과 대등한 나라	fix	local
+dict:jisjk:355010	東京に並ぶ都市	has:도쿄와 대등한 도시	fix	local
+dict:jisjk:355010	彼に並ぶ者はいない	has:그와 대등한 사람은 없다	fix	local
+dict:jisjk:355010	彼女に並ぶ人はいない	has:그녀와 대등한 사람은 없다	fix	local
+dict:jisjk:355010	本棚に並ぶ本	has:책장에 늘어서는 책	keep	local
+dict:jisjk:355010	棚に並ぶ商品	has:선반에 늘어서는 상품	keep	local
+dict:jisjk:355010	彼と肩を並べる	has:그와 어깨를 나란히 한다	keep	local
+dict:jisjk:355010	アメリカと肩を並べる国	has:미국과 어깨를 나란히 하는 나라	keep	local
+cx:corpus-fixes-1:101	家が全壊してる。	has:완파되어 있다	fix	rewrites
+cx:corpus-fixes-1:101	「銀のスプーンが黒く変色してます。	has:변색돼 있습니다	fix	rewrites
+cx:corpus-fixes-1:101	家が全壊した。	!rule:cx:corpus-fixes-1:101	keep	rewrites
+analysis:result-suru-state	全壊した家	has:완파된 집	fix	analysis
+analysis:result-suru-state	家が全壊した。	has:집이 완파되었다.	fix	analysis
+analysis:result-suru-state	全壊しました。	has:완파되었습니다.	fix	analysis
+analysis:result-suru-state	全壊しなかった。	has:완파되지 않았다.	fix	analysis
+analysis:result-suru-state	全壊していない。	has:완파되지 않았다.	fix	analysis
+analysis:result-suru-state	全壊していなかった。	has:완파되지 않았다.	fix	analysis
+analysis:result-suru-state	全壊しておらず、	has:완파되지 않고,	fix	analysis
+analysis:result-suru-state	「全壊したぞ！」	has:「완파됐어!」	fix	analysis
+analysis:result-suru-state	浸水した家屋	has:침수된 가옥	fix	analysis
+analysis:result-suru-state	船が沈没している。	has:배가 침몰해 있다.	fix	analysis
+analysis:result-suru-state	肉が腐敗している。	has:고기가 부패해 있다.	fix	analysis
+analysis:result-suru-state	沈没していない。	has:침몰해 있지 않다.	fix	analysis
+analysis:result-suru-state	機能が停止している。	has:기능이 정지되어 있다.	fix	analysis
+analysis:result-suru-state	沈没した船	has:침몰한 배	keep	analysis
+analysis:result-suru-state	船が座礁した。	has:배가 좌초했다.	keep	analysis
+analysis:result-suru-state	道路を封鎖している。	has:도로를 봉쇄하고 있다.	keep	analysis
+analysis:result-suru-state	道路を封鎖した。	has:도로를 봉쇄했다.	keep	analysis
+analysis:result-suru-state	炎上している	lacks:되어 있다	keep	analysis
+analysis:result-suru-state	全壊させた。	has:완파시켰다.	keep	analysis
+analysis:result-suru-state	今まさに崩壊している最中だ	has:붕괴하고 있는 도중	fix	analysis
+analysis:result-suru-state	倒壊している途中	has:붕괴하고 있는 도중	fix	analysis
+analysis:result-suru-state	沈没しているところだ	has:침몰하고 있는 중	fix	analysis
+analysis:result-suru-state	今まさに沈没している！	has:침몰하고 있어	fix	analysis
+analysis:result-suru-state	どんどん変色している	has:변색되고 있다	fix	analysis
+analysis:result-suru-state	次第に汚染している。	has:오염되고 있다	fix	analysis
+analysis:result-suru-state	だんだん麻痺している。	has:마비되고 있다	fix	analysis
+analysis:result-suru-state	今まさに全壊している	has:완파되고 있다	fix	analysis
+analysis:result-suru-state	封鎖している。	has:봉쇄하고 있다	fix	analysis
+analysis:result-suru-state	警察が封鎖している。	has:경찰이 봉쇄하고 있다	fix	analysis
+analysis:result-suru-state	警察が現場を封鎖してた。	has:현장을 봉쇄했다	fix	analysis
+analysis:result-suru-state	港を閉鎖してます。	has:항구를 폐쇄하고 있습니다	fix	analysis
+analysis:result-suru-state	倒壊している家	has:붕괴된 집	fix	analysis
+analysis:result-suru-state	劣化している部品	has:열화된 부품	fix	analysis
+analysis:result-suru-state	道路が封鎖している。	has:도로가 봉쇄되어 있다	keep	analysis
+analysis:result-suru-state	港が閉鎖してます。	has:항구가 폐쇄되어 있습니다	keep	analysis
+analysis:result-suru-state	口座が凍結している。	has:계좌가 동결되어 있다	keep	analysis
+analysis:result-suru-state	銀行が口座を凍結している。	has:계좌를 동결하고 있다	keep	analysis
+analysis:result-suru-state	彼が停止した。	has:그가 정지했다	keep	analysis
+analysis:result-suru-state	機能が麻痺している。	has:기능이 마비되어 있다	keep	analysis
