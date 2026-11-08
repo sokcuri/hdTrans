@@ -1,0 +1,45 @@
+# 규칙: LEX-5013
+rule	input	expected	kind	layer
+cx:crit-fixes-1:20	中東の安定確保やウクライナ支援に加え、サイバー攻撃への対応など人工知能（ＡＩ）を巡る諸課題について議論する。	has:인공지능(AI)을 둘러싼	fix	rewrites
+cx:crit-fixes-1:20	高市早苗首相の台湾有事を巡る国会答弁から７日で１年。	has:대만 유사를 둘러싼 국회답변	fix	rewrites
+cx:crit-fixes-1:20	宗教とＡＩを巡る試行錯誤が続いている。	has:AI를 둘러싼 시행 착오	fix	rewrites
+cx:crit-fixes-1:20	政治資金パーティーを巡る事件で	has:파티를 둘러싼 사건	fix	rewrites
+cx:crit-fixes-1:20	今回の取材ではこの人物を巡る捜査の進展は確認できていない。	has:인물을 둘러싼 수사	fix	rewrites
+cx:crit-fixes-1:20	ただ１匹 不服従の犬 ファキイルを巡る物語	has:파키일을 둘러싼 이야기	fix	rewrites
+cx:crit-fixes-1:20	島を巡る旅に出た。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	昭和５年　歌人の与謝野鉄幹　晶子夫妻は山陰地方を巡る旅の途中にこの地を訪れました。	has:지방을 도는 여행	keep	rewrites
+cx:crit-fixes-1:20	これは 浅草を巡る こっちは鎌倉	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	頭を巡るのは、先日の白崎とのやりとりだ。	has:머리를 도는 것은	keep	rewrites
+cx:crit-fixes-1:15	ウエノ銀行の破綻を巡っては、３日から預金の返還などを求める抗議活動が広がった。	has:파탄을 둘러싸고는	fix	rewrites
+cx:crit-fixes-1:15	鉄道の運賃改定を巡っては、東京地下鉄も２９年３月の値上げを目指すと発表している。	has:운임 개정을 둘러싸고는	fix	rewrites
+cx:crit-fixes-1:15	武部大臣を巡っては文春オンラインが	has:대신을 둘러싸고는	fix	rewrites
+cx:crit-fixes-1:10	そして手にした者の願いをかなえるという伝説の聖杯を巡って選ばれた主人公たちが様々なジョブを持つキャラクターたちを従え、終わらぬ戦いに身を投じていくのだ！！」	has:성배를 둘러싸고 선택된	fix	rewrites
+cx:crit-fixes-1:10	漢代中頃には匈奴と組み河西を巡って漢と争うも	has:둘러싸고 한과 싸우는	fix	rewrites
+cx:crit-fixes-1:10	それを巡って選手たちの壮絶な奪い合いが続く	has:그것을 둘러싸고	fix	rewrites
+cx:crit-fixes-1:10	降伏条件を巡って意見の対立があるらしい	has:조건을 둘러싸고 의견	fix	rewrites
+cx:crit-fixes-1:10	病院で 孝弘君から聞きました｡ 離婚されるとき 孝弘君の親権を巡って ずいぶんもめたそうですね｡	has:친권을 둘러싸고	fix	rewrites
+cx:crit-fixes-1:10	彼女を巡って二人の男が争う。	has:그녀를 둘러싸고	fix	rewrites
+cx:crit-fixes-1:10	三角の帽子をかぶり、赤や青の着物を着、一人の子供をつれて、田舎の町々を廻り歩きました。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	鬼を殺して山中を巡っておったら、少々迷ってな。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	「喜望峰を廻って行くとその位だそうです。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	熱い想いが全身を巡り、一瞬、意識が飛んでしまう。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	急いで視線を巡らせ、ここから一番近い隠れられる場所を探し──	has:시선을 돌게 해	keep	rewrites
+cx:crit-fixes-1:10	などと思い少し思考を巡らせてみるが、見事に思い出せなかった。	lacks:둘러	keep	rewrites
+cx:crit-fixes-1:10	血が巡る	has:피가 돈다	keep	rewrites
+cx:crit-fixes-1:10	季節が巡る	has:계절이 돈다	keep	rewrites
+cx:web-fixes-j:262	三日しか持たなかった	has:3일밖에 버티지	fix	rewrites
+cx:web-fixes-j:262	でも NSA の手に掛かれば ２〜３日しか持たないだろう	has:2~3일밖에 버티지	fix	rewrites
+cx:web-fixes-j:262	そんなプレーをしてたら 一日も持たないわよ	has:하루도 버티지	fix	rewrites
+cx:web-fixes-j:262	「猶予がなかったＺｅ。半日も持たなかったＹｏ。	has:반나절도 버티지	fix	rewrites
+cx:web-fixes-j:262	「この病人はもう一日は持たん」と翁が云うと	has:하루는 버티지	fix	rewrites
+cx:web-fixes-j:262	ドライにすりゃ半年は持つぜ	has:반년은 버틴다	fix	rewrites
+cx:web-fixes-j:262	あと五分も持たないぞ	has:5분도 버티지	fix	rewrites
+cx:web-fixes-j:262	食料は一ヶ月ほど持つ	has:한 달 정도 버틴다	fix	rewrites
+cx:web-fixes-j:262	お金は三万円しか持っていない	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:262	二本しか持っていない	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:262	今は持ってなくて｡ほう｡	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:262	佐々木さん。 母親が ７年も持ち続けた袋から	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:262	三年も持った家宝	!rule:cx:web-fixes-j:262	keep	rewrites
+cx:web-fixes-j:262	門限も持たない生徒がこれだけブラついていて	!rule:cx:web-fixes-j:262	keep	rewrites
+pack:argument-senses:5100	バッテリーが持たない	has:배터리가 버티지	fix	packs
+pack:argument-senses:5100	シールドを持った騎士	has:쉴드를 가진 기사	keep	packs

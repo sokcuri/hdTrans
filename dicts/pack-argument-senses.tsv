@@ -147,3 +147,4 @@ argument-senses:5140	見込む	v5	sense	after=と|とも	예상하다	LEX-5015		
 argument-senses:5141	あおり|煽り	n	sense	pred=受ける|食う|食らう	여파	LEX-5015		円安のあおりを受けて 엔저의 여파를 받아			
 argument-senses:5143	制する	vs	sense	obj=@competition|@sport|@game|大会|選挙|試合|リーグ|決勝|レース|争い|戦い|覇権|市場|激戦|接戦	제패하다	LEX-5015		大会を制した 대회를 제패했다			
 argument-senses:5145	あおり|煽り	n	sense	after=の next=で	여파	LEX-5015		不況のあおりで 불황의 여파로			
+argument-senses:5100	持つ	v5	sense	subj=電池|バッテリー|充電|食料|食糧|酸素|燃料|魔力|結界|障壁|シールド|防壁	버티다	LEX-5013		バッテリーが持たない 배터리가 버티지 않는다			
