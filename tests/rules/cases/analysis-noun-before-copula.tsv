@@ -15,7 +15,7 @@ analysis:noun-before-copula	なすとお肉の梅肉炒めだったりとか…�
 analysis:noun-before-copula	さあ　出来だ。	자 성과다.	fix	analysis
 analysis:noun-before-copula	いや やっぱ 今日の出来でしょ	아니 역시 오늘의 성과지	fix	analysis
 analysis:noun-before-copula	近年で一番の出来だった	근년에 제일의 성과였다	fix	analysis
-analysis:noun-before-copula	いつでも　死と隣り合わせだ	언제라도 죽음과 이웃이다	fix	analysis
+analysis:noun-before-copula	いつでも　死と隣り合わせだ	언제든 죽음과 이웃이다	fix	analysis
 analysis:noun-before-copula	｢逆上だ 非常識だ｣と決めつけられて	has:흥분이다	fix	analysis
 analysis:noun-before-copula	曇りです	흐림입니다	keep	analysis
 analysis:noun-before-copula	曇りだった	흐림이었다	keep	analysis

@@ -40,7 +40,7 @@ rewrite:offer-promise	お母さんが作ってあげる！	엄마가 만들어 �
 rewrite:offer-promise	田中が作ってあげる！	타나카가 만들어 줄게!	current	rewrites
 rewrite:offer-promise	彼が花をあげます！	그가 꽃을 줍니다!	keep	rewrites
 rewrite:offer-promise	田中くんの秘密を作ってあげるさーー	타나카 군의 비밀을 만들어 주지--	keep	rewrites
-rewrite:offer-promise	いつでも俺が受けてやる……	언제라도 내가 받아 준다……	keep	rewrites
+rewrite:offer-promise	いつでも俺が受けてやる……	언제든 내가 받아 준다……	keep	rewrites
 rewrite:offer-promise	あたいが、やったるわ！	내가, 해 줄게!	fix	rewrites
 rewrite:offer-promise	全艦戦闘用意！ ああ、やったるさ。	전 함선 전투 준비! 아, 해 줄게.	fix	rewrites
 rewrite:offer-promise	うっし、いける。やったるぜ！	좋았어, 갈 수 있다. 해 준다!	keep	rewrites
