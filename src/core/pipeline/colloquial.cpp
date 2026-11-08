@@ -2217,11 +2217,12 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     // Outside quotes, a run of two or more ー after a noun or a particle in narration is a dash, ――, not
     // a lengthening (spec SND-23): after a noun with kanji that names no person or title (運命ーーー。
     // 운명――., 木刀ーーーーそれは), before 。, a closing bracket or more text; after a particle that
-    // follows a kanji, a katakana or a noun (彼の名はーーー, 雨がーーー降って); a と, で or に that ends a
-    // kana word is no particle (ほんとーーー, それでーーー), before 。, 、, the end or text that is no hiragana. A run before a shout's ！, ？
-    // or っ, or before a ん that ends the drawn word, stays a lengthening; so does one after a person or
+    // follows a kanji, a katakana or a noun (彼の名はーーー, 雨がーーー降って; a と, で or に that ends a
+    // kana word is no particle: ほんとーーー, それでーーー), before 。, 、, the end or text that is no
+    // hiragana. A run before a shout's ！, ？ or っ, or before a ん that ends the drawn word, stays a
+    // lengthening; so does one after a person or
     // title, one before 、 after a noun (a call: 先生ーーー、待って) and one that ends a line with no 「」
-    // after a noun (先輩ーーー), which is speech.
+    // after a noun (先輩ーーー) or after も (俺もーーー), which is speech.
     const bool quoted = std::any_of(rs.begin(), rs.end(), [](char32_t c) { return In(c, U"「『"); });
     for (size_t k = 1, depth = 0; k < rs.size(); k++) {
         if (In(rs[k - 1], U"「『")) depth++;
@@ -2261,6 +2262,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             if (noun < k - 1 && In(prev, U"とでに") && !e.Tags(std::u32string_view(rs).substr(noun, k - noun)).empty()) word = false;
             if (In(prev, U"のや") && !IsKanjiRune(rs[k - 2])) word = false;
             dash = word && !IsHiraganaRune(next);
+            const bool lineEnd = next == 0 || (In(next, U"。．.") && end + 1 == rs.size());
+            if (prev == U'も' && lineEnd) dash = false;
         }
         if (dash && next == 0 && from < k && !quoted) dash = false;
         if (dash) {
