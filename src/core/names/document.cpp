@@ -314,8 +314,15 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
             doc->cued.insert(key);
         }
     }
+    // A common word whose cues stay in their lines (one kanji: 樹くん, 樹「うん」) is the name of the whole document
+    // on the cues of two lines too, and in its person slots on one.
     for (const auto& [key, count] : evidence) {
-        if (!carried.contains(key) && names::CommonWord(snap, key)) doc->slotted.insert(key);
+        if (carried.contains(key) || !names::CommonWord(snap, key)) continue;
+        if (count >= 2) {
+            doc->cued.insert(key);
+        } else {
+            doc->slotted.insert(key);
+        }
     }
     // The parts of a full name the document writes (古手梨花) name the person alone too (梨花は; spec
     // LEX-4829).

@@ -709,22 +709,30 @@ void Registry::Add(std::string_view rawLine) {
         count(gloss_, std::string(m.reading));
     }
     bool script = false;
-    // A run of lines that open with a bracketed field and a value on the same line (【ジョブ】　無し, 【力】　16)
-    // is a status window: its fields are no speakers, however often the window repeats (spec LEX-5175).
-    const bool field = BracketField(line);
+    // A run of lines that open with a bracketed field and text after it that holds a value on one of its lines
+    // (【ジョブ】　無し, 【力】　16) is a status window: its fields are no speakers, however often the window
+    // repeats; a run of speaker lines (【若葉】おはよう) keeps its labels (spec LEX-5175).
+    bool value = false;
+    const bool field = BracketField(line, value);
     const std::string label = Label(line, script);
-    if (field && lastField_) {
-        if (!lastFieldLabel_.empty() && prefixes_[lastFieldLabel_] > 0) prefixes_[lastFieldLabel_]--;
-        lastFieldLabel_.clear();
-    } else if (!label.empty()) {
+    if (!field) {
+        fieldRunValue_ = false;
+        fieldRunLabels_.clear();
+    } else if (value && !fieldRunValue_) {
+        for (const std::string& l : fieldRunLabels_) {
+            if (prefixes_[l] > 0) prefixes_[l]--;
+        }
+        fieldRunLabels_.clear();
+        fieldRunValue_ = true;
+    }
+    if (!label.empty() && !(field && fieldRunValue_)) {
         if (script) {
             count(labels_, label);
         } else {
             count(prefixes_, label);
+            if (field) fieldRunLabels_.push_back(label);
         }
     }
-    lastFieldLabel_ = field && !lastField_ && !script ? label : std::string();
-    lastField_ = field;
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
     const auto bare = [](char32_t p) { return p == U'は' || p == U'を' || p == U'へ'; };
     for (const LooseUse& u : FreeKanaNames(line)) {

@@ -24,3 +24,7 @@ names:status-window	アヤメ：OK	has:아야메：	keep	names
 names:status-window	力：Lv.3	has:힘：	fix	names
 names:ordinary-ruby	力《ちから》が欲しいか。	has:힘을	fix	names
 names:ordinary-ruby	力（ちから）は誰にも止められない。	has:힘은	fix	names
+names:status-window	アヤメ：あと10分だよ。	has:아야메：	keep	names
+dict:jisjk:260867	樹を切った。	나무를 잘랐다.	fix	local
+dict:jisjk:260867	樹の実家に行った。	lacks:나무의 본가	keep	local
+dict:jisjk:260867	樹が生意気なことを言う。	lacks:나무가	keep	local

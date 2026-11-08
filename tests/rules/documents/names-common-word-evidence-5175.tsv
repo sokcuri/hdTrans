@@ -7,7 +7,7 @@ names:ordinary-ruby	敏捷《びんしょう》を得た。\n　見てわかる�
 names:single-honorific	朝日くんが来た。\n　……朝日を浴びて、ほっとする。	has:아사히 군이 왔다.\n ……아침해를	fix	names
 names:single-honorific	「朝日さん、おはよう」\n朝日は笑った。\n　……朝日を浴びて、ほっとする。\n窓から朝日が差し込んでいる。	has:「아사히 씨, 좋은 아침」\n아사히는 웃었다.\n ……아침해를 쬐어서, 안심한다.\n창으로부터 아침해가	fix	names
 names:single-honorific	敏捷さん\n　見てわかる通り、敏捷が特筆して高い。	has:민첩이 특필해	fix	names
-names:single-honorific	千鳥（ちどり）さんの…\n千鳥さん、こっちです。	치도리 씨의…\n치도리 씨, 여기입니다.	keep	names
+names:single-honorific	千鳥（ちどり）さんの…\n千鳥さん、こっちです。	has:치도리 씨의…\n치도리 씨,	keep	names
 names:real-name	「朝日さん、おはよう」\n朝日「おはよう、健太くん」\n朝日は笑った。\n朝日が振り返った。\n「朝日、待って！」\n朝日と健太は並んで歩いた。\n　……朝日を浴びて、ほっとする。	has:아사히는 웃었다.\n아사히가 돌아보았다.\n「아사히, 기다려!」\n아사히와 켄타는	fix	names
 names:real-name	「朝日さん、おはよう」\n朝日「おはよう、健太くん」\n朝日は笑った。\n　……朝日を浴びて、ほっとする。	has:아침해를 쬐어서	fix	names
 names:real-name	「樹くん、こっち」\n樹「うん」\n樹は頷いた。\n樹が振り返った。\n樹の手を握った。\n大きな樹の下で休んだ。	has:이츠키는 끄덕였다.\n이츠키가 돌아보았다.\n이츠키의 손을 잡았다.\n큰 나무 아래에서 쉬었다.	fix	names
@@ -21,3 +21,8 @@ names:status-window	【名前】　三橋暁一\n【ジョブ】　無し\n【�
 names:status-window	「朝日さん、おはよう」\n朝日：……\n朝日：OK\n朝日：！？	has:아사히：……\n아사히：OK\n아사히：!?	keep	names
 names:single-honorific	「ああ、また光ちゃんが頑張ってる……」と、光子先生を眺めていた。	has:미츠코 선생님	keep	names
 names:single-honorific	「吹雪ちゃん、おはよう」\n吹雪は頷いた。	has:후부키는 끄덕였다	fix	names
+names:status-window	【若葉】おはよう\n【健太】おう\n【若葉】今日も元気だね\n【若葉】行こう	has:【와카바】좋은 아침\n【켄타】어\n【와카바】오늘도	keep	names
+names:status-window	【名前】アリス\n【力】16\n【ジョブ】無し\n\n【名前】アリス\n【力】17\n【ジョブ】無し\n\n【名前】アリス\n【力】18\n【ジョブ】無し\nその中でも特に力の伸びが異常で、	has:【직업】없음\n그 중에서도 특히 힘의	fix	names
+names:status-window	「朝日さん、おはよう」\n朝日「おはよう」\n朝日：今日は3時に集合ね。	has:아사히：오늘은 3시	keep	names
+names:real-name	「樹くん、おはよう」\n樹「うん」\n樹の実家に行った。\n樹の影響を受けた。\n樹が生意気なことを言う。	has:이츠키의 본가에 갔다.\n이츠키의 영향을 받았다.\n이츠키가	keep	names
+names:real-name	樹くんが木に登った。\n樹は枝に腰掛けた。\n「樹、危ないよ」\n大きな樹の根元に花が咲いていた。	has:이츠키는 가지에 앉았다.\n「이츠키, 위험해」\n큰 나무 밑동	fix	names

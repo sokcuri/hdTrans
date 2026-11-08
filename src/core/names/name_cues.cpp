@@ -482,6 +482,21 @@ enum class Role {
 // 入れた), going on as no wish or passive (見たい, 知られ). The clause ends at a mark, a bracket, a
 // member of name.person-clause-stop and, with clause, at the next subject a kanji or katakana word
 // with が or は opens (泉がある場所で彼女は).
+// How far after a verb a simile ending may come (泣いているようだ), in characters.
+constexpr std::size_t kSimileReach = 8;
+
+// Whether a simile ending (よう, みたい) follows soon after a verb, before a clause end.
+bool SimileAfter(std::string_view s) {
+    for (std::size_t i = 0, runes = 0; i < s.size() && runes < kSimileReach; runes++) {
+        const std::string_view rest = s.substr(i);
+        if (rest.starts_with("よう") || rest.starts_with("みたい")) return true;
+        const text::Rune r = text::DecodeRune(rest);
+        if (InRunes(r.cp, kClauseEnds)) return false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
 bool PersonActIn(std::string_view s, Role role, bool clause) {
     bool object = false;
     std::size_t runes = 0;
@@ -490,12 +505,16 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
         const char32_t prev = i == 0 ? 0 : RuneBefore(s, i).cp;
         if (const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.body-part"), rest);
             n > 0 && role != Role::Act && !IsKanji(prev) && prev != U'の' && !(text::RuneCount(rest.substr(0, n)) == 1 && InRunes(prev, kStemEnds)) &&
-            (rest.substr(n).starts_with("を") || ((role == Role::Topic || role == Role::NamedTopic || role == Role::Act) && rest.substr(n).starts_with("が")))) {
+            (rest.substr(n).starts_with("を") || ((role == Role::Topic || role == Role::NamedTopic) && rest.substr(n).starts_with("が")))) {
             return true;
         }
         // A verb starts a word: not after a kanji (世話して is no 話し).
         const bool wordStart = !IsKanji(prev) || !IsKanji(FirstRune(rest).cp);
-        if (wordStart && dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest) > 0) return true;
+        if (const std::size_t act = wordStart ? dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest) : 0; act > 0) {
+            // For a common word of one kanji, an act in a simile (囁くように揺れた, 泣いているようだった) is
+            // no act of its own.
+            if (role != Role::Act || !SimileAfter(rest.substr(act))) return true;
+        }
         object = object || (i > 0 && rest.starts_with("を"));
         if (wordStart && role == Role::NamedTopic && dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), rest) > 0) return true;
         for (const bool say : {true, false}) {
@@ -510,7 +529,11 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
             if (!wish && !passive) return true;
         }
         const text::Rune r = text::DecodeRune(rest);
-        if (InRunes(r.cp, kClauseEnds) || dict::StartsWithMember(HDTRANS_CLASS("name.person-clause-stop"), rest) > 0) return false;
+        // A simile in ように goes on to the act it describes (からかうように笑った).
+        if (InRunes(r.cp, kClauseEnds) ||
+            (dict::StartsWithMember(HDTRANS_CLASS("name.person-clause-stop"), rest) > 0 && !(role == Role::Act && rest.starts_with("ように")))) {
+            return false;
+        }
         if (clause && i > 0 && (r.cp == U'が' || r.cp == U'は') && (IsKanji(prev) || IsKatakana(prev))) return false;
         i += r.size == 0 ? 1 : r.size;
     }
@@ -677,6 +700,21 @@ bool KatakanaAnimalKey(const dict::Snapshot& snap, std::string_view key) {
     return animal;
 }
 
+// How far after a person act a passive られ may come (呆れられる), in bytes.
+constexpr std::size_t kPassiveReach = 12;
+
+// Whether after makes the word one that speaks (樹の言うとおり: の and name.person-speak) or one whose act
+// befalls someone (樹に呆れられる: に, a person act and られ).
+bool SpeakerOrAgentAt(std::string_view after) {
+    if (after.starts_with("の")) {
+        return dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), after.substr(std::string_view("の").size())) > 0;
+    }
+    if (!after.starts_with("に")) return false;
+    const std::string_view rest = after.substr(std::string_view("に").size());
+    const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest);
+    return n > 0 && rest.substr(n, kPassiveReach).find("られ") != std::string_view::npos;
+}
+
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     // A katakana name that also spells an animal (アリ, サイ) names a person as the subject of a verb of
     // saying or thinking in its clause, as a single kanji does (アリが言った 아리가 말했다; spec LEX-4840).
@@ -704,15 +742,7 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
             if (after.starts_with("が") || after.starts_with("は") || after.starts_with("も")) {
                 return PersonActIn(after.substr(FirstRune(after).size), Role::Act, true);
             }
-            if (after.starts_with("の")) {
-                const std::string_view rest = after.substr(std::string_view("の").size());
-                return rest.starts_with("言う") || rest.starts_with("言っ") || rest.starts_with("言葉");
-            }
-            if (after.starts_with("に")) {
-                const std::string_view rest = after.substr(std::string_view("に").size());
-                const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest);
-                return n > 0 && rest.substr(n, 12).find("られ") != std::string_view::npos;
-            }
+            if (after.starts_with("の") || after.starts_with("に")) return SpeakerOrAgentAt(after);
             // A call opens the quote (not 元、… or …！　尚、).
             const std::string_view b = TrimEndSpaces(before);
             return after.starts_with("、") && (b.ends_with("「") || b.ends_with("『")) && CallableKey(snap, key, true) && !CommonSenseAt(after);
@@ -920,6 +950,7 @@ bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_
         IntroductionAt(before, after, false) || (TitleBefore(before, false) && NameEnd(after))) {
         return true;
     }
+    if (SpeakerOrAgentAt(after)) return true;
     if (after.starts_with("の")) {
         const std::string_view rest = after.substr(std::string_view("の").size());
         return PersonPartAt(rest) || dict::StartsWithMember(HDTRANS_CLASS("name.person-belonging"), rest) > 0;
@@ -954,7 +985,8 @@ bool CommonSenseAt(std::string_view after) {
     std::string_view rest = after.substr(FirstRune(after).size);
     for (std::size_t i = 0, runes = 0; i < rest.size() && runes < kClauseReach; runes++) {
         const text::Rune r = text::DecodeRune(rest.substr(i));
-        if (InRunes(r.cp, kClauseEnds) || r.cp == U'が' || r.cp == U'は') return false;
+        const char32_t prev = i == 0 ? 0 : RuneBefore(rest, i).cp;
+        if (InRunes(r.cp, kClauseEnds) || ((r.cp == U'が' || r.cp == U'は') && (IsKanji(prev) || IsKatakana(prev)))) return false;
         if (dict::StartsWithMember(HDTRANS_CLASS("name.common-predicate"), rest.substr(i)) > 0) return true;
         i += r.size == 0 ? 1 : r.size;
     }
@@ -971,22 +1003,31 @@ bool StatusValueAt(std::string_view rest) {
     }
     const std::string_view value = rest.substr(i, end - i);
     if (value.empty()) return false;
-    // A number, a percent or infinity (35, ３５, 7/10, 50％, ∞), a level (Lv.3), or a grade of one to three
-    // letters with a sign (S, ＢＢ+, A-); not punctuation, an ellipsis or a word (……, ！？, OK).
-    if (value.starts_with("Lv") || value.starts_with("LV") || value.starts_with("Ｌｖ")) return true;
-    bool grade = true;
+    // The whole value is a number (35, ３５, 7/10, 1,200, 50％, +5, ∞), a level (Lv.3) or a grade of one to
+    // three letters with a sign (S, ＢＢ+, A-); a word, punctuation or a sentence with a number in it
+    // (……, OK, あと10分だよ。) is none.
+    std::string_view v = value;
+    for (const std::string_view lv : {std::string_view("Lv."), std::string_view("Lv"), std::string_view("LV"), std::string_view("Ｌｖ．"), std::string_view("Ｌｖ")}) {
+        if (v.starts_with(lv) && v.size() > lv.size()) {
+            v.remove_prefix(lv.size());
+            break;
+        }
+    }
+    bool digit = false;
     std::size_t letters = 0;
-    for (std::size_t k = 0; k < value.size();) {
-        const text::Rune r = text::DecodeRune(value.substr(k));
-        if ((r.cp >= U'0' && r.cp <= U'9') || (r.cp >= U'０' && r.cp <= U'９') || r.cp == U'∞' || r.cp == U'％' || r.cp == U'%') return true;
-        if (InRunes(r.cp, "SABCDEFＳＡＢＣＤＥＦ")) {
-            letters += grade ? 1 : 0;
-        } else if (!InRunes(r.cp, "+-＋－")) {
-            grade = false;
+    for (std::size_t k = 0; k < v.size();) {
+        const text::Rune r = text::DecodeRune(v.substr(k));
+        if ((r.cp >= U'0' && r.cp <= U'9') || (r.cp >= U'０' && r.cp <= U'９') || r.cp == U'∞') {
+            digit = true;
+        } else if (InRunes(r.cp, "SABCDEFＳＡＢＣＤＥＦ")) {
+            letters++;
+        } else if (!InRunes(r.cp, "+-＋－/／.．,，%％")) {
+            return false;
         }
         k += r.size == 0 ? 1 : r.size;
     }
-    return grade && letters >= 1 && letters <= 3;
+    if (digit) return letters == 0;
+    return letters >= 1 && letters <= 3;
 }
 
 bool StatusFieldAt(std::string_view after) {

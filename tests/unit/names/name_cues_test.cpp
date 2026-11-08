@@ -159,6 +159,20 @@ HD_TEST(names_name_cues) {
     }
 }
 
+HD_TEST(names_status_field_values) {
+    // A value is the whole run up to a space: a number, a level or a grade (spec LEX-5175).
+    for (const std::string_view v : {"35", "　３５", "7/10", "1,200", "50％", "+5", "Lv.3", "S", "Ｂ+", "SS", "A-", "∞", "35　敏捷：52"}) {
+        HD_CHECK(names::StatusValueAt(v));
+    }
+    for (const std::string_view v : {"", "……", "OK", "！？", "あと10分だよ。", "無し", "SSSS", "3時に"}) {
+        HD_CHECK(!names::StatusValueAt(v));
+    }
+    HD_CHECK(names::StatusFieldAt("：35"));
+    HD_CHECK(names::StatusFieldAt(":　Ｂ"));
+    HD_CHECK(!names::StatusFieldAt("：あと10分だよ。"));
+    HD_CHECK(!names::StatusFieldAt("：……"));
+}
+
 HD_TEST(names_caption_reading_cue_passage) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
