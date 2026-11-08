@@ -392,7 +392,7 @@ cx:novel-fixes:29	GRM-4011	&&3 S+0== "得" S-1== "でもあ" <5 S+0== @question.
 cx:novel-fixes:30	LEX-4000	&&2 S+0== "得" S-1== "でもあ"	set-target "있을 수 &HN@" set-target@-1 "" set-ending@-1 "" append-target@-2 "(이)라도"	何色の髪でもあり得る 무슨 색의 머리카락이라도 있을 수 있다
 //= quote-after-comma	after QuoteTo 41	A と right after a comma and before a verb of thinking or saying quotes the clause before the comma, (이)라고 (帰りたい、と思う 돌아가고 싶다, 라고 생각한다), not (으)로.
 cx:quote-after-comma:10	GRM-3452	&&4 S+0== "と" S-1== "、" D+0== "(으)로" ||2 &&2 F+1== "verb" ||3 S+1== "L思" S+1== "L考" S+1== "L言" &&2 F+2== "verb" ||3 S+2== "L思" S+2== "L考" S+2== "L言"	set-target "(이)라고"	帰りたい、とひたすら思う 돌아가고 싶다, 라고 오로지 생각한다
-//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로. A label of 有り, あり, 無し or なし right after a noun, with no particle between, says whether the noun is there (spec LEX-5110). 有り or あり before a noun describes it, 있는 (空行有り版 빈 줄 있는 판); one that ends its sentence is the noun form 있음 that なし reads 없음 (駐車場有り 주차장 있음), and so is one before a comma when only nouns and other such labels stand before it in its sentence, an item of a list (空行有り、句点改行形式 빈 줄 있음, 마침표 개행 형식, 空室あり、室内浴室あり、 빈방 있음, 실내 욕실 있음,). A noun read in 있음 or 없음 (なし, 訳あり, 底無し) before a noun, right after it or after an の that then writes nothing, is 있는 or 없는 (ギアなし男 기어 없는 남자, 水着なしの桜庭 수영복 없는 사쿠라바, 訳ありの品 사연 있는 물건), and なし or 無し right after a noun before a bare で is 없이, written apart from the noun (詠唱なしで 영창 없이, 駐車場無しで、 주차장 없이,). After a particle (問題があり、) or after other words before the comma (その後、紆余曲折あり、) あり stays the verb.
+//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로. A label of 有り, あり, 無し or なし right after a noun, with no particle between, says whether the noun is there (spec LEX-5110). 有り or あり before a noun describes it, 있는 (空行有り版 빈 줄 있는 판); one that ends its sentence is the noun form 있음 that なし reads 없음 (駐車場有り 주차장 있음), and so is one before a comma when only nouns and other such labels stand before it in its sentence, an item of a list (空行有り、句点改行形式 빈 줄 있음, 마침표 개행 형식, 空室あり、室内浴室あり、 빈방 있음, 실내 욕실 있음,). A noun read in 있음 or 없음 (なし, 訳あり, 底無し) before a noun, right after it or after an の that then writes nothing, is 있는 or 없는 (ギアなし男 기어 없는 남자, 水着なしの桜庭 수영복 없는 사쿠라바, 訳ありの品 사연 있는 물건), and なし or 無し right after a noun before a bare で, and なしに, is 없이, written apart from the noun (詠唱なしで 영창 없이, 駐車場無しで、 주차장 없이, 許可なしに 허가 없이) unless Korean writes the noun and 없다 as one word (関係なしに 관계없이). After a particle (問題があり、) or after other words before the comma (その後、紆余曲折あり、) あり stays the verb.
 //~ label-adnominal	있음=있는 없음=없는	A noun of a state read in 있음 or 없음 before the noun it describes.
 //: label-ari	&&4 ||2 I+0== "有り" I+0== "あり" F+0== "verb" P-1== "1" F+0== "touches-prev"	A 有り or あり right after a noun.
 //: label-state	||2 D+0== "R있음" D+0== "R없음"	A word read in 있음 or 없음.
@@ -401,7 +401,7 @@ cx:quote-after-comma:10	GRM-3452	&&4 S+0== "と" S-1== "、" D+0== "(으)로" ||
 cx:without:10	LEX-4007	&&3 S+0== "で" S-1== "なし" S+1== "、"	set-target "" set-target@-1 "없고"	機械類はなしで、 기계류는 없고,
 cx:without:14	LEX-5110	&&6 S+0== "で" ||2 S-1== "なし" S-1== "無し" P-2== "1" F-1== "touches-prev" !1 F+0== "conjugating" F+1== "boundary"	set-target "" set-target@-1 "없이"	駐車場無しで、月五万円 주차장 없이, 월 5만 엔
 cx:without:15	LEX-5110	&&5 S+0== "で" ||2 S-1== "なし" S-1== "無し" P-2== "1" F-1== "touches-prev" !1 F+0== "conjugating"	set-target " " set-target@-1 "없이"	成果無しで帰る 성과 없이 돌아가다
-cx:without:17	LEX-5110	&&3 ||2 S+0== "なしで" S+0== "無しで" P-1== "1" F+0== "touches-prev"	prepend-target " "	詠唱なしで魔法を使う 영창 없이 마법을 쓴다
+cx:without:17	LEX-5110	&&4 ||4 S+0== "なしで" S+0== "無しで" S+0== "なしに" S+0== "無しに" P-1== "1" F+0== "touches-prev" !1 D-1== @ko.noun-joined-eopda	prepend-target " "	詠唱なしで魔法を使う 영창 없이 마법을 쓴다
 cx:without:20	LEX-5110	&&5 :label-ari P+1== "1" F+1== "touches-prev" !1 F+1== "hiragana" !1 F+0== "clipped"	set-ending "0"	空行有り版 빈 줄 있는 판
 cx:without:30	LEX-5110	&&2 :label-ari ||2 F+0== "sentence-end" F+0== "period-after"	set-ending "B"	駐車場有り 주차장 있음
 cx:without:40	LEX-5110	&&3 :label-ari S+1== "、" :label-opens	set-ending "B"	空行有り、句点改行形式 빈 줄 있음, 마침표 개행 형식
@@ -452,6 +452,17 @@ cx:te-loss:20	GRM-4010	:te-before	map-ending-tail@-1 @te-reason	知って損す�
 //= loss-suru	after Select 213	guard ||2 B+0== "する" S+0== "Lし"	A する after 損 and は or も is suffering the loss, 보다, not 하다 (損はしない 손해는 보지 않는다; spec GRM-4010).
 cx:loss-suru:10	GRM-4010	&&3 ||2 S-1== "は" S-1== "も" S-2== "損" D+0== "L하지"	replace-head "하지" "보지"	買って損はしねぇよ 사서 손해는 보지 않아
 cx:loss-suru:20	GRM-4010	&&3 ||2 S-1== "は" S-1== "も" S-2== "損" D+0== "L하고"	replace-head "하고" "보고"	損はしたくない 손해는 보고 싶지 않다
+//= verdict-none	after Select 217	guard ||4 S+0== "なし" S+0== "ナシ" S+0== "無し" S+0== "な"	What なし after a topic says (spec LEX-5112). After a demonstrative and は or って it denies what was said, 아니다 (それはなしだろ 그건 아니지), and so does a sentence-final ない there (それはないわ 그것은 아니야). After an act of noun.rule-act and は, or right after one, it declares a rule, N 없기 (遠慮はなしだ 사양 없기다, 反則はなし 반칙 없기, 手加減なし 힘 조절 없기). After another noun and は or も it says the thing is not there, 없다 (宿題はなしです 숙제는 없습니다, 返事はなしだった 대답은 없었다). After a clause in のは, at the start, or after a mark it stays 안 되다 (言うのはなしだ 말하는 건 안 된다, なしだな 안 되네).
+//: none-verdict	&&2 ||3 S+0== "なし" S+0== "ナシ" S+0== "無し" D+0== "L안 "	なし read as the verdict 안 되다.
+//: none-noun	&&2 ||4 S+0== "なし" S+0== "ナシ" S+0== "無し" S+0== "な" D+0== "L없음"	なし read as the noun 없음.
+//: none-that	||2 &&2 ||2 S-1== "は" S-1== "って" S-2== @pronoun.demonstrative ||2 S-1== "そりゃ" S-1== "こりゃ"	A demonstrative with は or って before it (それは, あれって, そりゃ).
+//: none-end	||3 F+0== "sentence-end" F+0== "period-after" ||5 S+1== "よ" S+1== "ね" S+1== "ぞ" S+1== "ぜ" S+1== "な"	Nothing but a final particle or the end of the sentence after it.
+cx:verdict-none:10	LEX-5112	&&2 :none-verdict :none-that	take-target "%B6@"	それはなしだろ 그건 아니지
+cx:verdict-none:20	LEX-5112	&&5 S+0== "な" D+0== "$FA@" :none-that ||3 F+0== "sentence-end" F+0== "period-after" ||4 S+1== "よ" S+1== "わ" S+1== "って" S+1== "な" ||3 F-2== "first" F-2== "opens-line" S-3== "00、。！？!?「『（(“…"	set-target "아$A3@"	いや、それはないわ 아니, 그것은 아니야
+cx:verdict-none:30	LEX-5112	&&3 :none-verdict S-1== "は" S-2== @noun.rule-act	set-target " 없기%D4@" set-target@-1 ""	遠慮はなしだ 사양 없기다
+cx:verdict-none:40	LEX-5112	&&4 :none-noun :none-end S-1== "は" S-2== @noun.rule-act	set-target "" set-ending "" set-target@-1 "" append-target@-2 " 없기"	反則はなし 반칙 없기
+cx:verdict-none:50	LEX-5112	&&4 :none-noun ||5 :none-end S+1== "Lだ" S+1== "Lです" S+1== "Lでしょ" S+1== "Lじゃ" S-1== @noun.rule-act F+0== "touches-prev"	set-target "없기"	手加減なし 힘 조절 없기
+cx:verdict-none:60	LEX-5112	&&5 :none-verdict ||2 S-1== "は" S-1== "も" P-2== "1" !1 S-2== "の" !1 S-2== @pronoun.demonstrative	take-target "%B4@"	宿題はなしです 숙제는 없습니다
 //= fresh-made	after Select 161	A verb before たて read -ㄴ 지 얼마 안 된 right before a noun is freshly made, 갓 and the past adnominal (焼きたてパン 갓 구운 빵).
 cx:fresh-made:10	LEX-4008	&&2 F+0== "verb" Y+0== "8 지 얼마 안 된"	prepend-target "갓 " set-ending "8"	焼きたてパン 갓 구운 빵
 //= looks-adj	after Select 162	そうな after a na-adjective or a noun of a state is how something looks, -한 듯한 (怪訝そうな顔 의아한 듯한 표정), not the guess -ㄹ 것 같은 a verb takes (降りそうな 내릴 것 같은).
@@ -1558,7 +1569,7 @@ cx:copies:30		&&5 F+0== "copied-straight" F+0== "connective-copies" ||2 U+0== "R
 cx:copies:31	SND-2	&&5 F+0== "predicate-copies" F+0== "copies-end" F+0!= "copula-target" F+0== "drawn-ending" F+0!= "clipped"	copy-word set-ending "6" draw-ending	すごいすごーい 대단해 대단해~
 cx:copies:34	SND-2	&&5 F+0== "predicate-copies" F+0== "copies-end" F+0== "copied" F+0!= "cried-copies" B+0== @adjective.grumble	copy-word set-ending "1다"	寒い寒い 춥다 추워
 cx:copies:35	SND-2	&&4 F+0== "predicate-copies" F+0== "copies-end" F+0!= "cried-copies" B+0== @adjective.grumble	set-ending "6"	寒い寒い 춥다 추워
-cx:copies:36	SND-2	&&3 F+0== "predicate-copies" F+0== "copies-end" F+0!= "copula-target"	copy-word set-ending "6"	痛い痛い 아파 아파; だめだだめだ 안돼 안돼
+cx:copies:36	SND-2	&&3 F+0== "predicate-copies" F+0== "copies-end" F+0!= "copula-target"	copy-word set-ending "6"	痛い痛い 아파 아파; だめだだめだ 안 돼 안 돼
 cx:copies:40		&&2 F+0== "copied-straight" ||2 F+0== "copies-end" &&2 F+0== "exclaimed" F+0== "verb"	copy-ending	待って待って 기다려 기다려; 見て見て、どう？ 봐 봐
 cx:copies:50		&&3 F+0== "copied" F+0!= "copied-straight" Y+0== "1고"	copy-ending	待って、待って 기다려, 기다려
 //= clipped-copies	after EmphaticMo 20	In a run of copies whose last copy is clipped, a copy that a clipping っ or ッ follows closes its last syllable with ㅅ: a predicate in the bare 6 form, or a predicate of noun.predicate (痛いっ、痛いっ 아팟, 아팟, 待って待ってっ 기다려 기다렷, だめっ、だめっ 안됏, 안됏).
@@ -1713,7 +1724,7 @@ cx:web-fixes-j:127	GRM-3685	&&3 S+0== "なんて" F+0== "question-after" S-1== "
 cx:web-fixes-j:135	GRM-3685	&&4 S+0== "だって" D+0== "도" P-1== "1" F+0== "question-after"	set-target "(이)라고"	誰と誰が婚約だって？ 누구와 누가 약혼이라고?
 cx:web-fixes-j:140	GRM-3686	&&3 S+0== "でな" D+0== "(이)가 아$A3@" S-1== "、"	set-target "그렇지 $D7@"	そうよね、でなければ 그렇지, 그렇지 않으면
 cx:web-fixes-j:145	LEX-4536	&&3 S+0== "かわ" L+0== "변하다" ||3 S+1== "くれ" S+1== "もら" S+1== "あげ"	set-verb "대신하다"	快くかわってくれた 흔쾌히 대신해 주었다
-cx:web-fixes-j:150	LEX-4536	&&5 S+0== "な" D+0== "&C6@" Y+0== "1지 않습니다" S-1== "は" P-2== "1"	set-target "안 &C6@" set-ending "7니다"	そのようなお言葉はなりません 그러한 말씀은 안됩니다
+cx:web-fixes-j:150	LEX-4536	&&5 S+0== "な" D+0== "&C6@" Y+0== "1지 않습니다" S-1== "は" P-2== "1"	set-target "안 &C6@" set-ending "7니다"	そのようなお言葉はなりません 그러한 말씀은 안 됩니다
 cx:web-fixes-j:155	GRM-3686	&&2 S+0== "になど" S+1== "Lな"	set-target "따위가"	王妃になどなれる 왕비 따위가 될 수 있다
 cx:web-fixes-j:165	LEX-4536	&&4 S+0== "手" Y-1== "0" S+1== "は" D+2== "$FA@"	set-target "수" set-ending@-1 "3"	これを逃す手はない 이것을 놓칠 수는 없다
 cx:web-fixes-j:170	LEX-4536	&&5 S+0== "や" D+0== "&CJ@" ||2 S-2== "を" S-1== "~を" ||6 S-1== "Rも" S-1== "R持" S-1== "R懸け" S-1== "R賭け" S-1== "R込め" S-1== "Rこめ" !1 ||3 S+1== "き" S+1== "来" S+1== "く"	set-verb "하다" set-ending@-1 "1고"	覚悟をもってやった 각오를 가지고 했다

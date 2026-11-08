@@ -99,7 +99,7 @@ normalize:contracted-yaru	え、俺もやんの？ マジかよー……	has:하
 normalize:contracted-yaru	結局、落とされてやんの	lacks:줘	keep	normalize
 normalize:ni-naru	嫌んなりませんか？	has:싫어지지	fix	normalize
 normalize:ni-naru	「はぁ……やんなっちゃう……」	has:싫어져	fix	normalize
-normalize:ni-naru	「だめんなっちゃう……みゃああっ	has:안되게	fix	normalize
+normalize:ni-naru	「だめんなっちゃう……みゃああっ	has:안 되게	fix	normalize
 normalize:ni-naru	あー、やんなるわー	has:싫어져	fix	normalize
 normalize:ni-naru	もう嫌んなる	has:싫어진다	fix	normalize
 normalize:godan-ya	メマーをちょいと撃ちゃ赤字確定。	has:쏘면 적자	fix	normalize

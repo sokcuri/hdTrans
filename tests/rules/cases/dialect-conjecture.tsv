@@ -20,7 +20,7 @@ normalize:kansai-conjecture	（小杉）気付いてほしいんやろが書く�
 ending:学生やろが	今 おばはんの話やろが	지금 아줌마는 이야기잖아	fix	builtin-ending
 ending:書いたやろが	お仕事って言うたやろが｡	일이라고 말했잖아.	fix	builtin-ending
 ending:学生やろが	勝手に出てったのはそっちやろが！	마음대로 나간 것은 그쪽이잖아!	fix	builtin-ending
-ending:書いたじゃろうが	あっ それ 言うたらいかん｡いかんって言うたじゃろうが｡	앗 그것 말하면 안돼. 안돼라고 말했잖아.	fix	builtin-ending
+ending:書いたじゃろうが	あっ それ 言うたらいかん｡いかんって言うたじゃろうが｡	앗 그것 말하면 안 돼. 안 돼라고 말했잖아.	fix	builtin-ending
 ending:学生じゃろうが	申し込んだのは宅食のコースだけじゃろうが	신청한 것은 택식의 코스만이잖아	fix	builtin-ending
 normalize:kansai-conjecture	(ノブ) ウソやろ!?	(노브) 거짓말이지!?	keep	normalize
 normalize:kansai-conjecture	(秋良)どっちやろ	(아키라) 어느 쪽이지	keep	normalize

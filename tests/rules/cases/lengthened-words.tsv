@@ -46,7 +46,7 @@ sound:drawn-adjective	「いいいいい！」	「이이이이이!」	keep	sound
 sound:drawn-adjective	「かわいーー！」	「귀여워~!」	fix	sound
 sound:drawn-adjective	「長いオフ貰ってい～い？」	「긴 오프 받아도 돼~?」	fix	sound
 sound:drawn-adjective	「ああー！」	「아아아!」	keep	sound
-sound:shout-tilde	「だめーーーっ！」	「안돼에에엣!」	fix	sound
+sound:shout-tilde	「だめーーーっ！」	「안 돼에에엣!」	fix	sound
 sound:shout-tilde	「なんでよーーーっ！」	「어째서어어엇!」	fix	sound
 sound:shout-tilde	「千莉、頑張れーーっ！」	「천리, 힘내라아앗!」	fix	sound
 sound:shout-tilde	「するかぁーっ！」	「할까~!」	fix	sound
@@ -58,6 +58,6 @@ sound:drawn-word	「余計なこと言うなあああああっ！！」	「쓸�
 sound:drawn-word	「たすけてぇぇぇぇぇっ！」	「살려어어어어엇!」	fix	sound
 sound:drawn-word	「やめてぇ！」	「그만해!」	keep	sound
 sound:drawn-word	「のおおおおお！」	「노오오오오오!」	keep	sound
-sound:drawn-word	「だめぇぇぇぇぇぇっ！！」	「안돼에에에에엣!!」	fix	sound
+sound:drawn-word	「だめぇぇぇぇぇぇっ！！」	「안 돼에에에에엣!!」	fix	sound
 sound:drawn-word	「ばかぁぁぁ……」	「바보오오오……」	fix	sound
 sound:drawn-word	犬ぇぇぇ	개	keep	sound

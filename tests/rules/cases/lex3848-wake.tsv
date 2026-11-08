@@ -1,7 +1,7 @@
 # 규칙: LEX-3848
 rule	input	expected	kind	layer
 dict:lex:3848:wake-eimon	訳分かんない子だね	영문 모르는 아이구나	fix	local
-dict:lex:3848:wake-eimon	僕 今来たばっかりで 訳わかんないんだけど｡	나 지금 온지 얼마 안됨으로 영문 모르는데.	fix	local
+dict:lex:3848:wake-eimon	僕 今来たばっかりで 訳わかんないんだけど｡	나 지금 온지 얼마 안 됨으로 영문 모르는데.	fix	local
 dict:lex:3848:wake-eimon	もう訳わかんねー	이제 영문 모른다	fix	local
 dict:lex:3848:wake-eimon	言ってることは訳わかんないし	말하는 것은 영문 모르고	fix	local
 dict:lex:3848:wake-eimon	訳の分からん連載も終わりになるし	영문 모르겠어 연재도 끝나게 되고	fix	local

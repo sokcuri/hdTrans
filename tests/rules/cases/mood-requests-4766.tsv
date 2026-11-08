@@ -123,7 +123,7 @@ cx:kure-request:10	しれーかん、クッキーくれくれ、それ全部く�
 cx:promise-kara:10	私、頑張るから、見捨てないでぇー！	나, 노력할 테니까, 버리지 마~!	fix	rewrites
 cx:promise-kara:10	午前九時。Richelieuは、午前中はゆっくり行きたいわ。用意するから、待っていなさい。	오전 9시. Richelieu는, 오전 중은 천천히 가고 싶어. 준비할 테니까, 기다리고 있어.	fix	rewrites
 cx:promise-kara:10	Admiral、疲れているのか？ 私が紅茶をいれよう。待っていて。薫り高いアールグレイにしよう。ほら、休んでいて。持っていくから、待ってて。	Admiral, 피곤한 건가? 내가 홍차를 탈게. 기다리고 있어. 향기나 높은 얼 그레이로 하자. 자, 쉬고 있어. 가져갈 테니까, 기다리고 있어.	fix	rewrites
-cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
+cx:promise-kara:10	いかん、やられた！ 直すから、待て。	안 돼, 당했어! 고칠 테니까, 기다려.	fix	rewrites
 cx:kure-request:10	It's ten now. ふー食った食った。食いすぎたな。帰ってcoffeeでもいれてくれ、なっ？	It's ten now. 후 먹었다 먹었다. 너무 먹었군. 돌아가 coffee라도 넣어 줘, 그치?	fix	rewrites
 cx:kure-request:10	待ってくれ、この俺も……この俺も一緒に行かせてくれ。自分の無実は自分で証明してみせる！	기다려 줘, 이 나도……이 나도 함께 가게 해 줘. 자신의 결백은 스스로 증명해 내겠다!	fix	rewrites
 cx:kure-request:10	「たのむ空気を読んでくれ、今じゃないぞ今じゃ」	has:분위기를 읽어 줘,	fix	rewrites

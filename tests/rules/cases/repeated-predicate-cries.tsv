@@ -21,7 +21,7 @@ cx:copies:36	すごいすごい	대단해 대단해	fix	rewrites
 cx:copies:36	えっ怖い怖い	어 무서워 무서워	fix	rewrites
 cx:copies:36	――危ない危ない。	――위험해 위험해.	fix	rewrites
 cx:copies:36	つまんない、つまんない。	재미없어, 재미없어.	fix	rewrites
-cx:copies:36	だめだだめだ！！	안돼 안돼!!	fix	rewrites
+cx:copies:36	だめだだめだ！！	안 돼 안 돼!!	fix	rewrites
 cx:copies:36	長い長い夜だった。	긴 긴 밤이었다.	keep	rewrites
 cx:copies:36	「怖い怖いお化け」	「무서운 무서운 도깨비」	keep	rewrites
 cx:copies:36	固い固い、決意のこもった握手だった。	!rule:cx:copies:36	keep	rewrites
@@ -37,20 +37,20 @@ cx:clipped-copies:10	「熱い熱いっ！」	「뜨거워 뜨거웟!」	fix	rew
 cx:clipped-copies:10	こわいこわいっ	무서워 무서웟	fix	rewrites
 cx:clipped-copies:10	「いやだいやだっ」	「싫어 싫엇」	fix	rewrites
 cx:clipped-copies:10	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
-cx:clipped-copies:10	だめだだめだっ	안돼 안됏	fix	rewrites
+cx:clipped-copies:10	だめだだめだっ	안 돼 안 됏	fix	rewrites
 cx:clipped-copies:10	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
 cx:clipped-copies:10	「痛いっ！」	「아파!」	keep	rewrites
 cx:clipped-copies:10	痛い痛い	!rule:cx:clipped-copies:10	keep	rewrites
-cx:clipped-copies:20	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
-cx:clipped-copies:20	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites
-cx:clipped-copies:20	「だめ、だめっ、これ」	「안돼, 안됏, 이거」	fix	rewrites
-cx:clipped-copies:20	「だめっ」	「안돼」	keep	rewrites
+cx:clipped-copies:20	「だめ……だめだめっ、こんなの……！」	「안 돼……안 돼 안 됏, 이런 건……!」	fix	rewrites
+cx:clipped-copies:20	「きゃー、だめだめっ」	「꺄아, 안 돼 안 됏」	fix	rewrites
+cx:clipped-copies:20	「だめ、だめっ、これ」	「안 돼, 안 됏, 이거」	fix	rewrites
+cx:clipped-copies:20	「だめっ」	「안 돼」	keep	rewrites
 cx:clipped-copies:20	だめだめ	!rule:cx:clipped-copies:20	keep	rewrites
-compose:joined-before-doe	だめだめ	안돼 안돼	fix	compose
-compose:joined-before-doe	「だめだめだめ！」	「안돼 안돼 안돼!」	fix	compose
-compose:joined-before-doe	「だめだめそんな、それは悪いよ……！」	「안돼 안돼 그런, 그건 나빠……!」	fix	compose
-compose:joined-before-doe	「だめ」	「안돼」	keep	compose
-compose:joined-before-doe	「無理無理！」	「무리 무리!」	keep	compose
+compose:an-doe-spaced	だめだめ	안 돼 안 돼	fix	compose
+compose:an-doe-spaced	「だめだめだめ！」	「안 돼 안 돼 안 돼!」	fix	compose
+compose:an-doe-spaced	「だめだめそんな、それは悪いよ……！」	「안 돼 안 돼 그런, 그건 나빠……!」	fix	compose
+compose:an-doe-spaced	「だめ」	「안 돼」	keep	compose
+compose:an-doe-spaced	「無理無理！」	「무리 무리!」	keep	compose
 cx:copies:34	ねむいねむい	졸리다 졸려	fix	rewrites
 cx:copies:34	さむいさむい	춥다 추워	fix	rewrites
 cx:copies:34	寒い寒い	춥다 추워	fix	rewrites
@@ -66,32 +66,32 @@ cx:copies:35	寒い寒いっ	!rule:cx:copies:35	keep	rewrites
 cx:copies:35	「寒い寒い……」	!rule:cx:copies:35	keep	rewrites
 sound:cry-copies	やだやだやだっ	싫어 싫어 싫엇	fix	sound
 sound:cry-copies	「やだやだっ！」	「싫어 싫엇!」	fix	sound
-sound:cry-copies	「やだ、あ、だめ、だめ、だめ、だめだめだめぇぇぇぇぇぇっ！！」	「싫어, 아, 안돼, 안돼, 안돼, 안돼 안돼 안돼에에에에에엣!!」	fix	sound
+sound:cry-copies	「やだ、あ、だめ、だめ、だめ、だめだめだめぇぇぇぇぇぇっ！！」	「싫어, 아, 안 돼, 안 돼, 안 돼, 안 돼 안 돼 안 돼에에에에에엣!!」	fix	sound
 sound:cry-copies	やだっ	싫어	keep	sound
 sound:cry-copies	やだやだやだ！	싫어 싫어 싫어!	keep	sound
 sound:cry-copies	やだやだ	싫어 싫어	keep	sound
 sound:cry-copies	「げほげほっ」	「콜록콜록」	keep	sound
-sound:drawn-clip	だめだめぇぇぇっ	안돼 안돼에에엣	fix	sound
+sound:drawn-clip	だめだめぇぇぇっ	안 돼 안 돼에에엣	fix	sound
 sound:drawn-clip	痛い痛いいいいっ	아파 아파아아앗	fix	sound
 sound:drawn-clip	「やめてぇぇぇっ」	「그만해애애앳」	fix	sound
 sound:drawn-clip	「待ったああああっ！」	「기다렸다아아아앗!」	fix	sound
 sound:drawn-clip	痛い痛いいいい	아파 아파아아아	fix	sound
 sound:drawn-clip	こわいこわいいいい	무서워 무서워어어어	fix	sound
 sound:drawn-clip	かわいいかわいいいいい	귀여워 귀여워어어어	fix	sound
-sound:drawn-clip	そこはだめぇぇぇ	거기는 안돼에에에	keep	sound
+sound:drawn-clip	そこはだめぇぇぇ	거기는 안 돼에에에	keep	sound
 sound:drawn-clip	「やめてぇ」	「그만해」	keep	sound
-compose:copy-contraction	だめだだめだっ	안돼 안됏	fix	compose
-compose:copy-contraction	　だめだ、だめだだめだ……。	 안돼, 안돼 안돼…….	fix	compose
-compose:copy-contraction	だめだ	안된다	keep	compose
+compose:copy-contraction	だめだだめだっ	안 돼 안 됏	fix	compose
+compose:copy-contraction	　だめだ、だめだだめだ……。	 안 돼, 안 돼 안 돼…….	fix	compose
+compose:copy-contraction	だめだ	안 된다	keep	compose
 dict:jisjk:124	うそうそ	거짓말 거짓말	fix	lookup
 dict:jisjk:124	「うそうそ！」	「거짓말 거짓말!」	fix	lookup
 dict:jisjk:124	「ウソウソ！」	「거짓말 거짓말!」	keep	lookup
 sound:cry-copies	やだやだやだぁ。	싫어 싫어 싫어.	fix	sound
 cx:copies:36	「うるさいうるさいうるさいうるさいうるさい！！！！！！」	「시끄러워 시끄러워 시끄러워 시끄러워 시끄러워!!!!!!」	fix	rewrites
-dict:jisjk:342476	ダメダメ	안돼 안돼	fix	lookup
-dict:jisjk:342476	「ダメダメ、全然ダメ！」	「안돼 안돼, 전혀 안돼!」	fix	lookup
-dict:jisjk:342476	もうダメ	이제 안돼	fix	lookup
-dict:jisjk:342476	ダメダメダメっ	안돼 안돼 안됏	fix	lookup
+dict:jisjk:342476	ダメダメ	안 돼 안 돼	fix	lookup
+dict:jisjk:342476	「ダメダメ、全然ダメ！」	「안 돼 안 돼, 전혀 안 돼!」	fix	lookup
+dict:jisjk:342476	もうダメ	이제 안 돼	fix	lookup
+dict:jisjk:342476	ダメダメダメっ	안 돼 안 돼 안 됏	fix	lookup
 dict:w:27515	ダメ出し	지적	fix	lookup
 dict:w:27515	監督にダメ出しをもらった	감독에게 지적을 받았다	fix	lookup
 dict:jisjk:342476	ダメージ	데미지	keep	lookup

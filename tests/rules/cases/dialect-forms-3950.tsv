@@ -1,6 +1,6 @@
 # 규칙: GRM-3950
 rule	input	expected	kind	layer
-normalize:dialect-copula	“個人情報やさかい あかん” 言うて	“개인정보니까 안돼”그렇긴 해도	fix	normalize
+normalize:dialect-copula	“個人情報やさかい あかん” 言うて	“개인정보니까 안 돼”그렇긴 해도	fix	normalize
 normalize:dialect-copula	それは お前 未練 残るやんけ お前	그것은 너 미련 남잖아 너	fix	normalize
 normalize:dialect-copula	すごい嫌やね これ｡	엄청 싫네 이것.	fix	normalize
 normalize:dialect-copula	お前のことやないかい	너잖아	fix	normalize
@@ -161,7 +161,7 @@ normalize:dialect-keep	……お武家様、助けて下せえ……」	……�
 normalize:dialect-keep	残酷な運命のいたずら	잔혹한 운명의 장난	keep	normalize
 normalize:dialect-keep	でも こうしょっちゅうじゃ たまんないよ…｡	하지만 이렇게 언제나는 견딜 수 없어….	keep	normalize
 normalize:dialect-keep	ぼうけんⅡ	모험Ⅱ	keep	normalize
-normalize:dialect-keep	ん？出たか？ 駄目	응? 나왔나? 안된다	keep	normalize
+normalize:dialect-keep	ん？出たか？ 駄目	응? 나왔나? 안 된다	keep	normalize
 normalize:dialect-keep	待ちかねたぞ 伊豆守 苦しゅうない 面を上げい	기다림에 지친 이즈 마모루 괜찮다 고개를 들라	keep	normalize
 normalize:dialect-keep	皆も喜ぶけぇ。	모두도 기뻐할 테니까.	keep	normalize
 normalize:dialect-keep	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	keep	normalize

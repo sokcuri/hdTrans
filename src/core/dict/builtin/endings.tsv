@@ -766,8 +766,8 @@
 // のよう at the end of a sentence (お姫様のよう 공주님 같다).
 学生のよう	학생 같다	end	prio=-1
 // 〜たばかり at the end of a sentence (なったばかり 된 지 얼마 안 됐다).
-書いたばかり	쓴 지 얼마 안됐다	end	prio=-1
-書いたばかりだ	쓴 지 얼마 안됐다	end	prio=-1
+書いたばかり	쓴 지 얼마 안 됐다	end	prio=-1
+書いたばかりだ	쓴 지 얼마 안 됐다	end	prio=-1
 // っけ: asking what one half remembers, in the spoken forms (言ったっけ 말했나,
 // 行くんだっけ 가는 거였지, 鈴木さんだっけ 스즈키 씨였나).
 書いたっけ	썼나	end	prio=-1

@@ -298,8 +298,9 @@
 //= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
 //= noun.coming-flow	Nouns of what keeps coming, whose 来ている comes on rather than has arrived (いい風きてる 좋은 바람 오고 있어, 波が来ている 파도가 오고 있다).
 //= noun.kin	Kinship words that たん and っち after them belong to, as ちゃん does (お兄ちゃんたん 오빠, 妹たん 여동생).
-//= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안돼 안됏).
-//= ko.joined-before-doe	Korean words written joined to a form of 되다 right after them (안 돼 안돼, 안 된다 안된다).
+//= ko.noun-joined-eopda	Korean nouns written as one word with 없다 (관계없이, 상관없이), which a なしで or なしに after them does not set apart (spec LEX-5110).
+//= noun.rule-act	Acts that a rule forbids, after which は and なし or a なし right after them declare the rule, N 없기 (遠慮はなしだ 사양 없기다, 反則はなし 반칙 없기; spec LEX-5112).
+//= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안 돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안 돼 안 됏).
 //= adverb.keep-on	Adverbs of a time that goes on (まだ, このまま, これから, 今後, ずっと): an いく of aspect after a verb in a condition under one is going on doing it, 계속 (まだ話しかけていけば 계속 말을 걸면).
 //= ko-verb.compound-motion	Pairs of Korean verbs, by their lemmas, whose 아/어 form and 가다 or 오다 make a compound verb of motion or path written as one word (지나다 가다 지나가다, 흐르다 오다 흘러오다, 걷다 가다 걸어가다): 過ぎていった 지나갔다. An auxiliary of aspect stays apart (깊어지다 가다 깊어져 가다), and so does a verb that only sounds like the first one (걸다 가다 말을 걸어 가다; 들다 and 나다 are left out: 생각이 들어 오다, 열이 나 오다).
 //= ko-verb.compound-motion-intransitive	Pairs as ko-verb.compound-motion whose first verb also lowers or moves something (내리다): they make the compound only when the Japanese verb takes no object (降りていく 내려가다; ずり下げていく 내려 가다).
@@ -413,6 +414,7 @@
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.after-space	Sentence-final particles that a single space may set apart from the predicate they end, before a mark or the end of the line (そうだ ね……, いい ね――): that space parts no words.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
+//= particle.before-verdict	Particles after which あり and なし of word.copula-verdict before a copula are a verdict, 괜찮다 and 안 되다, not a label of the word before (それもありだな, それってありなの, それはそれでありだな; spec LEX-5112).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.copies-subject	Particles of a subject or topic after which copies of a word said apart are its predicate, not an interjection (財布が、ない ない).
@@ -620,6 +622,8 @@
 //= word.try-tool	Ends of nouns of a product, app, service, format or tool that お試し or 試してみる takes: 써 보다 (このアプリを試してみてください 이 앱을 써 보세요).
 //= word.try-wear	Ends of nouns of clothes that お試し or 試してみる takes: 입어 보다 (この服を試してみて 이 옷을 입어 봐).
 //= word.copula-predicate	Adverbs and nouns that a copula, an adnominal な or a question か after them makes the adjectival noun of the same key (ばっちりです 완벽해요, しっかりですね 확실하네요, アリなのか 괜찮은 건가), not an adverb or a noun before a copula.
+//= word.copula-verdict	Verdicts among word.copula-predicate written as the label of being there or not, あり 괜찮다 and なし 안 되다 (それもありだな 그것도 괜찮네, それはなしだ 그건 안 된다; spec LEX-5112): after a word that no particle of particle.before-verdict, mark or space ends they are that word's label, not a verdict (駐車場ありだ, 問題なしだ, あなたなしじゃ).
+//= word.verdict-asks-there	Verdicts of word.copula-verdict that a bare question か after them makes the question whether the thing is there, not the verdict (所持品は無しか 소지품은 없나; それもなしかな stays 그것도 안 되나).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
 //= word.give-request	Words that ask to be given what is named before them (もう一枚ください 한 장 더 주세요).
@@ -3483,7 +3487,6 @@ noun.kin	お父さん
 noun.predicate	だめ
 noun.predicate	ダメ
 noun.predicate	駄目
-ko.joined-before-doe	안
 ko-aux.joined	버&AA@
 
 ko-verb.compound-motion	지나다 가다
@@ -9618,6 +9621,21 @@ word.copula-predicate	めちゃくちゃ
 word.copula-predicate	バッチリ
 word.copula-predicate	しっかり
 word.copula-predicate	アリ
+word.copula-predicate	あり
+word.copula-predicate	なし
+word.copula-predicate	ナシ
+word.copula-predicate	無し
+word.copula-verdict	あり
+word.copula-verdict	なし
+word.copula-verdict	ナシ
+word.copula-verdict	無し
+word.verdict-asks-there	なし
+word.verdict-asks-there	ナシ
+word.verdict-asks-there	無し
+particle.before-verdict	は
+particle.before-verdict	も
+particle.before-verdict	って
+particle.before-verdict	で
 word.offer-cue	さて
 word.offer-cue	じゃあ
 word.offer-cue	じゃ
@@ -12918,3 +12936,33 @@ noun.colored-thing	波
 //= sound.drawn-word	Interjection rows whose ー before the last kana draws out a word said as an exclamation (すごーい 대단해~, すごーーい 대단해애애; spec SND-23), unlike the usual spelling of はーい or おーい.
 sound.drawn-word	すごーい
 sound.drawn-word	ねむーい
+noun.rule-act	遠慮
+noun.rule-act	手加減
+noun.rule-act	反則
+noun.rule-act	冗談
+noun.rule-act	暴力
+noun.rule-act	隠し事
+noun.rule-act	殺生
+noun.rule-act	無茶
+noun.rule-act	抜け駆け
+noun.rule-act	言い訳
+noun.rule-act	嘘
+noun.rule-act	喧嘩
+noun.rule-act	私語
+noun.rule-act	文句
+noun.rule-act	容赦
+noun.rule-act	手出し
+noun.rule-act	口出し
+noun.rule-act	抵抗
+noun.rule-act	恨みっこ
+noun.rule-act	ズル
+noun.rule-act	不正
+noun.rule-act	卑怯
+noun.rule-act	泣き言
+noun.rule-act	弱音
+noun.rule-act	ネタバレ
+noun.rule-act	手抜き
+noun.rule-act	八百長
+noun.rule-act	イカサマ
+ko.noun-joined-eopda	관계
+ko.noun-joined-eopda	상관

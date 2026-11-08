@@ -7,13 +7,13 @@ normalize:kansai-akan	整理せなあかん。	정리해야 한다.	fix	normaliz
 normalize:kansai-akan	なんとか上昇させなあかん……	어떻게든 상승시켜야 해……	fix	normalize
 normalize:kansai-akan	他のとこも行かんとアカンし	다른 곳도 가야 하고	fix	normalize
 normalize:kansai-akan	これ 撮らなアカンから。 これ。	이것 찍어야 하니까. 이것.	fix	normalize
-normalize:kansai-akan	あわてたらあかん。	당황하면 안된다.	fix	normalize
-normalize:kansai-akan	「私、もうあかんねん……」	「나, 이제 안되거든……」	fix	normalize
-normalize:kansai-akan	これはアカンです。	이것은 안됩니다.	fix	normalize
-normalize:kansai-akan	ウチ、もうあかん……。さいならぁ～……。	우리, 이제 안돼……. 다시 봅시다~…….	fix	normalize
-normalize:kansai-akan	司令はん、チョコのお返し、まだやね？ 忘れてたらあかんで？	has:잊어선 안돼	fix	normalize
-normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않아」	keep	normalize
-normalize:kansai-akan	行ったらアカン！）	가면 안돼!)	keep	normalize
+normalize:kansai-akan	あわてたらあかん。	당황하면 안 된다.	fix	normalize
+normalize:kansai-akan	「私、もうあかんねん……」	「나, 이제 안 되거든……」	fix	normalize
+normalize:kansai-akan	これはアカンです。	이것은 안 됩니다.	fix	normalize
+normalize:kansai-akan	ウチ、もうあかん……。さいならぁ～……。	우리, 이제 안 돼……. 다시 봅시다~…….	fix	normalize
+normalize:kansai-akan	司令はん、チョコのお返し、まだやね？ 忘れてたらあかんで？	has:잊어선 안 돼	fix	normalize
+normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안 돼, 요우 고조되지 않아」	keep	normalize
+normalize:kansai-akan	行ったらアカン！）	가면 안 돼!)	keep	normalize
 normalize:kansai-akan	埒があかん。	결말이 나지 않아.	keep	normalize
 normalize:kansai-akan	ミチョアカン州	미초아칸주	keep	normalize
 normalize:old-wish-negative	うち このまま負けとうない。	has:이대로 지고 싶지 않다	fix	normalize

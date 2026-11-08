@@ -1166,7 +1166,7 @@ bool KansaiAkan(std::string_view s, size_t pos, Match& m) {
     if (!Lit(s, p, "あかん") && !Lit(s, p, "アカン")) return false;
     const bool katakana = s.substr(word).starts_with("アカン");
     // An あかん that opens an utterance before a comma is the interjection of the phrase rows
-    // (あかん、よう盛り上がらんわ 안돼, ...).
+    // (あかん、よう盛り上がらんわ 안 돼, ...).
     if (word == pos &&
         (head.empty() || !(IsHiraganaClass(LastRune(head).cp) || IsKanjiClass(LastRune(head).cp) || IsKatakanaRune(LastRune(head).cp))) &&
         (s.substr(p).starts_with("、") || s.substr(p).starts_with("，") || s.substr(p).starts_with(","))) {

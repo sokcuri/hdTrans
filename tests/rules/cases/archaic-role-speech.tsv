@@ -177,15 +177,15 @@ normalize:old-negative	何であるかは わしにも分からぬ	왜 있을까
 normalize:old-negative	この村から 誘い出そうとしたのかは知らぬ	이 마을에서 꾀어내려고 했는지는 모른다	fix	normalize
 normalize:old-negative	さっぱりコツが分からぬでござる	전혀 요령을 알 수 없소	keep	normalize
 normalize:old-negative	言っても 分からぬか？	말해도 모르는 건가?	fix	normalize
-normalize:old-negative	ならぬ！ 我々の目的は あくまで エイジャの赤石を 手に入れること｡	안돼! 우리의 목적은 어디까지나 에이자의 적석을 손에 넣는 것.	fix	normalize
-normalize:old-negative	ならぬぞ	안돼	fix	normalize
+normalize:old-negative	ならぬ！ 我々の目的は あくまで エイジャの赤石を 手に入れること｡	안 돼! 우리의 목적은 어디까지나 에이자의 적석을 손에 넣는 것.	fix	normalize
+normalize:old-negative	ならぬぞ	안 돼	fix	normalize
 normalize:old-negative	カービィ殿、訳あってそなたと戦わなくてはならぬ？	커비전, 사정이 있어 그대와 싸워야 해?	fix	normalize
 normalize:old-negative	見知らぬ人が来た。	낯선 사람이 왔다.	keep	normalize
 normalize:old-negative	「知らぬ間に眠っていた」	「어느새 자고 있었어」	keep	normalize
 normalize:old-negative	「知らぬが仏」	「모르는게 약」	keep	normalize
 normalize:old-negative	「知らぬ存ぜぬ」	「아무것도 모르는체」	keep	normalize
 normalize:old-negative	「何も知らぬ子供だ」	「아무것도 모르는 아이야」	keep	normalize
-normalize:old-negative	いかん！目を閉じよ 何も見てはならぬ！	안돼! 눈을 감아라 아무것도 봐서는 안된다!	keep	normalize
+normalize:old-negative	いかん！目を閉じよ 何も見てはならぬ！	안 돼! 눈을 감아라 아무것도 봐서는 안 된다!	keep	normalize
 normalize:old-negative	「そうはならぬ」	「그렇게는 되지 않는다」	keep	normalize
 normalize:old-negative	「相手にならぬ」	「상대가 되지 않는다」	keep	normalize
 normalize:old-negative	人ならぬ 神の作りたもうた肉体	사람 되지 않는 신의 만들기도 노래 육체	keep	normalize

@@ -94,10 +94,10 @@ normalize:prohibition-janai	泣かしてんじゃねえよ！	has:울리지 마	
 normalize:prohibition-janai	さあ　泣くんじゃないよ	has:울지 마	fix	normalize
 normalize:prohibition-janai	そういう一般論を言ってるんじゃない	lacks:지 마	keep	normalize
 normalize:prohibition-janai	怒ってんじゃねえよ、心配してんだ	lacks:지 마	keep	normalize
-cx:neg-clause-prohibit:10	この悪魔の甘言に耳を傾けてはなりません	has:기울여서는 안됩니다	fix	rewrites
-cx:neg-clause-prohibit:40	運行管理者以外はここに近づいてはならん！	has:가까워져서는 안돼	fix	rewrites
-cx:neg-clause-prohibit:70	あいつを信用してはいけませんぞ！	lacks:안되지 않	fix	rewrites
-cx:neg-clause-prohibit:10	廊下を走ってはいけません!	has:달려서는 안됩니다	keep	rewrites
+cx:neg-clause-prohibit:10	この悪魔の甘言に耳を傾けてはなりません	has:기울여서는 안 됩니다	fix	rewrites
+cx:neg-clause-prohibit:40	運行管理者以外はここに近づいてはならん！	has:가까워져서는 안 돼	fix	rewrites
+cx:neg-clause-prohibit:70	あいつを信用してはいけませんぞ！	lacks:안 되지 않	fix	rewrites
+cx:neg-clause-prohibit:10	廊下を走ってはいけません!	has:달려서는 안 됩니다	keep	rewrites
 cx:neg-clause-obligation:10	死ななきゃいけません。	has:죽어야 합니다	fix	rewrites
 cx:neg-clause-obligation:60	間に入って止めないといけない。	has:멈추어야 한다	fix	rewrites
 cx:neg-clause-obligation:60	行かないと間に合わない	has:가지 않으면 늦는다	keep	rewrites

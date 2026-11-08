@@ -17,8 +17,8 @@ dict:w:24980	まさか幼女に鎌をかけられるとは思わなかった。	
 dict:jisjk:35155	一斉に男達の視線が此方に向かい、一人が此方の方に向かってくる。	has:시선이 이쪽으로 향해	fix	defaults
 dict:jisjk:35155	「それは此方の台詞です」	has:이쪽의 대사입니다	fix	defaults
 dict:jisjk:152415	バカな女だが、くだらない女じゃない。	has:바보 같은	fix	defaults
-pack:misread-glosses:p4	そんなバカな。	말도 안돼.	fix	packs
-pack:misread-glosses:p4	「んなバカな。裏は俺が抑えてたんだぞ？」	has:말도 안돼. 뒤는	fix	packs
+pack:misread-glosses:p4	そんなバカな。	말도 안 돼.	fix	packs
+pack:misread-glosses:p4	「んなバカな。裏は俺が抑えてたんだぞ？」	has:말도 안 돼. 뒤는	fix	packs
 pack:misread-glosses:p4	「こ、こんなバカな光景見たら誰だって笑うわよ！	has:바보 같은 광경	keep	packs
 pack:misread-glosses:p5	「さ、最初っからそう言いなさいよっ。バカなんだから……」	has:바보니까	fix	packs
 pack:misread-glosses:p5	「まあぶっちゃけ紘輝はバカなんだから」	has:히로키는 바보니까	fix	packs

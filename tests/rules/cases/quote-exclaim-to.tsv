@@ -34,7 +34,7 @@ cx:exclaim-quote-to:20	楽しかったねと笑った。	즐거웠네 하고 웃
 cx:exclaim-quote-to:30	それをぼんやり目で追いながら、相変わらず美人だなと思った。	그것을 멍하니 눈으로 쫓으면서, 변함없이 미인이구나 하고 생각했다.	fix	rewrites
 cx:exclaim-quote-to:30	俺は失礼な奴だなと思うが、	나는 무례한 놈이구나 하고 생각하지만,	fix	rewrites
 cx:exclaim-quote-to:30	前に来た二人だなと思った灰色スーツ姿の悪魔は、	앞에 온 두 사람이구나 하고 생각한 회색 정장 차림의 악마는,	fix	rewrites
-cx:exclaim-quote-to:30	ダメだと思った。	안된다고 생각했다.	keep	rewrites
+cx:exclaim-quote-to:30	ダメだと思った。	안 된다고 생각했다.	keep	rewrites
 cx:exclaim-quote-to:40	実践しやすい形にアレンジした形なんだなと	실천하기 쉬운 형태에 어레인지한 형태구나 하고	fix	rewrites
 cx:exclaim-quote-to:40	そこはアナログなんだなと思い、	거기는 아날로그구나 하고 생각해,	fix	rewrites
 cx:exclaim-quote-to:40	ショッピングモールとはこんな風なんだなと思う。	쇼핑몰이란 이런 식이구나 하고 생각한다.	fix	rewrites

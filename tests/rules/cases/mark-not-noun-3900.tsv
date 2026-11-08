@@ -12,8 +12,8 @@ analysis:mark-not-noun	特改Ⅰ型駆逐艦	특개Ⅰ형 구축함	keep	analysi
 analysis:mark-not-noun	投票率は９８．４％で、平均を０．１％下回った	투표율은 98.4%로, 평균을 0.1% 밑돌았다	keep	analysis
 analysis:mark-not-noun	「戦闘糧食」(★+6以上)を第1スロに装備。	「전투식량」(★+6 이상)을 제1스로에 장비.	keep	analysis
 dict:jisjk:372190	まずは幽霊って思うべきじゃない？	우선은 유령이라고 생각해야 하는 것이 아니야?	keep	local
-dict:jisjk:372190	そんなことを言うべきじゃない。	그런 말을 해서는 안된다.	keep	local
-dict:jisjk:372190	「そんなこと言うべきじゃない」	「그런 말 해서는 안돼」	keep	local
+dict:jisjk:372190	そんなことを言うべきじゃない。	그런 말을 해서는 안 된다.	keep	local
+dict:jisjk:372190	「そんなこと言うべきじゃない」	「그런 말 해서는 안 돼」	keep	local
 dict:jisjk:362128	真影流は受けの剣術と言ったか？	사진류는 접수의 검술이라고 했나?	keep	local
 dict:jisjk:362128	はあ… と言いますと？	하아… 라고 하면?	keep	local
 dict:jisjk:362137	Admiral、これは？ チョコレートのお返しだと言うのか？	Admiral, 이것은? 초콜릿 답례라는 건가?	keep	local

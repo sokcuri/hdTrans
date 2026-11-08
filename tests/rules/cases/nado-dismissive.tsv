@@ -21,7 +21,7 @@ cx:nado-dismissive:35	この地域では米など作られていない。	rule:c
 cx:nado-dismissive:35	先生は報酬など受け取られませんでした。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
 cx:nado-dismissive:35	結婚相手に家柄の良さなど求めていらっしゃいません。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
 cx:nado-dismissive:35	安全な後方で護られていた方に心配などされたくありません	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
-cx:nado-dismissive:20	ダメです。考える余地などありません。	안됩니다. 생각하는 여지 같은 건 없습니다.	fix	rewrites
+cx:nado-dismissive:20	ダメです。考える余地などありません。	안 됩니다. 생각하는 여지 같은 건 없습니다.	fix	rewrites
 cx:nado-dismissive:20	子育てに正解など無い、と言っていた	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
 cx:nado-dismissive:20	落ち度など無し！	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
 cx:nado-dismissive:20	「愚か者など私の娘にはいない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites

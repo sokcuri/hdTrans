@@ -37,7 +37,7 @@ pack:utterance	フフン、そりゃそうさ。愛情という名の調味料�
 pack:utterance	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	packs
 pack:utterance	よおっし！ 直衛をかわした！	요옷해! 나오에를 주고 받았다!	keep	packs
 pack:utterance	姉貴、いいかい？一斉射撃だ。	누님, 좋아? 일제 사격이다.	keep	packs
-pack:utterance	「……これでも、やっぱりダメですか？」	「……이것이라도, 역시 안됩니까?」	keep	packs
+pack:utterance	「……これでも、やっぱりダメですか？」	「……이것이라도, 역시 안 됩니까?」	keep	packs
 pack:utterance	格納庫も大掃除しなきゃ…って、コラ！	격납고도 대청소해야 한다…라니, 코라!	keep	packs
 pack:utterance	口やかましい母親	잔소리가 심한 어머니	keep	packs
 dict:lex4762	助けて	도와줘	fix	lookup

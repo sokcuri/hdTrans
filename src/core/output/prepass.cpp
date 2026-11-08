@@ -151,19 +151,6 @@ bool JoinedCopies(const std::vector<ResolvedItem>& items, int i, int next) {
     return text::RuneCount(EntryText(items[i])) > 1 || JoinedCopies(items, i - 1, i);
 }
 
-// t with the space dropped between a word of ko.joined-before-doe that starts t or follows a
-// space and a form of 되다 after it (안 돼 안돼, 안 된다 안된다; LAY-11).
-void JoinBeforeDoe(std::string& t) {
-    for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("ko.joined-before-doe"))) {
-        for (std::size_t at = t.find(w); at != std::string::npos; at = t.find(w, at + 1)) {
-            const std::size_t space = at + w.size();
-            if ((at > 0 && t[at - 1] != ' ') || space >= t.size() || t[space] != ' ') continue;
-            const auto doe = text::Split(text::DecodeRune(std::string_view(t).substr(space + 1)).cp);
-            if (doe && doe->initial == 3 && (doe->vowel == 10 || doe->vowel == 11)) t.erase(space, 1);  // ㄷ, ㅙ ㅚ
-        }
-    }
-}
-
 // Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
 bool Doubled(std::string_view s, size_t min) {
     const size_t half = s.size() / 2;
@@ -990,7 +977,7 @@ bool ClippedCopy(const std::vector<ResolvedItem>& items, int i) {
 }
 
 // Whether item i ends a node of items before end: it is the last, or a ClippedCopy whose っ ends
-// the node (だめ|っ 안돼 안돼).
+// the node (だめ|っ 안 돼 안 돼).
 // Whether items[i] is a polite お or ご the rules emptied between a word and a kanji word that writes
 // something (田中さん お一人で: お before 一人で 혼자서); after a symbol the symbol's spacing holds
 // (“元”ご婚約者 “전”약혼자).
@@ -1505,7 +1492,6 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         t.insert(0, " ");
     }
     using Result = std::pair<std::string, bool>;
-    JoinBeforeDoe(t);
     // The 아/어 form of a verb and a 가다 or 오다 after it that make a Korean compound verb are
     // one word (過ぎていった 지나갔다); an auxiliary of aspect stays apart (更けていった 깊어져
     // 갔다), as does a verb that only sounds like the first one (話しかけていく 말을 걸어 가다; GRM-4031).

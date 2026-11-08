@@ -82,9 +82,9 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("寒い寒い寒い"), "추워 추워 추워");  // three copies cry
     HD_CHECK_EQ(translate("寒い寒い！"), "추워 추워!");
     HD_CHECK_EQ(translate("痛い。"), "아프다.");  // said once
-    HD_CHECK_EQ(translate("だめだめっ"), "안돼 안됏");  // a predicate without an ending, one word
-    HD_CHECK_EQ(translate("だめ"), "안돼");  // LAY-11
-    HD_CHECK_EQ(translate("だめだだめだ！"), "안돼 안돼!");  // the copy before another is contracted too
+    HD_CHECK_EQ(translate("だめだめっ"), "안 돼 안 됏");  // a predicate without an ending, one word
+    HD_CHECK_EQ(translate("だめ"), "안 돼");  // LAY-11
+    HD_CHECK_EQ(translate("だめだだめだ！"), "안 돼 안 돼!");  // the copy before another is contracted too
     HD_CHECK_EQ(translate("やだやだやだっ"), "싫어 싫어 싫엇");  // a sound of the lexicon
     HD_CHECK_EQ(translate("長い長い夜だった。"), "긴 긴 밤이었다.");  // copies before a noun
     // Copies drawn out by one or two vowel kana are copies across their cry marks.
@@ -95,7 +95,7 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("痛いー、痛いー"), "아파~, 아파~");  // copies across their lengthening
     HD_CHECK_EQ(translate("（痛いー）"), "(아프다~)");  // a thought is no cry
     // Each copy clipped with its own っ is still a copy and closes with ㅅ.
-    HD_CHECK_EQ(translate("だめっだめっ"), "안됏 안됏");
+    HD_CHECK_EQ(translate("だめっだめっ"), "안 됏 안 됏");
     HD_CHECK_EQ(translate("痛いっ、痛いっ……"), "아팟, 아팟……");
     HD_CHECK_EQ(translate("待って待ってっ"), "기다려 기다렷");
     HD_CHECK_EQ(translate("先輩っ先輩っ"), "선배 선배");  // a noun keeps its Korean

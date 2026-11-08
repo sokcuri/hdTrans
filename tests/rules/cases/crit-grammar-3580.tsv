@@ -71,7 +71,7 @@ cx:crit-fixes-1:110	映画をみたくない。	!rule:cx:crit-fixes-1:110	keep	r
 cx:crit-fixes-1:120	どっちも変わらないと岩城は強く思う。	어느 쪽도 변함없다고 이와키는 강하게 생각한다.	fix	rewrites
 cx:crit-fixes-1:120	私は可愛いと誰もが言うけれど、	나는 귀엽다고 누구나 말하지만,	fix	rewrites
 cx:crit-fixes-1:120	寒いと彼は家にいる。	!rule:cx:crit-fixes-1:120	keep	rewrites
-cx:crit-fixes-1:120	「ケートク生への差別は、なんとかしないといけない問題です。」	has:하지 않으면 안되는	keep	rewrites
+cx:crit-fixes-1:120	「ケートク生への差別は、なんとかしないといけない問題です。」	has:하지 않으면 안 되는	keep	rewrites
 cx:crit-fixes-1:125	まさに渡りに船。率直にこの申し出をうれしく思った。	has:기쁘게 생각했다	fix	rewrites
 cx:crit-fixes-1:125	司令にご心配をかけして、申し訳なく思います。	has:미안하게 생각합니다	fix	rewrites
 cx:crit-fixes-1:125	「北条、悪いけど…僕も優勝賞金を狙ってるんだ。悪く思うなよぉ！」	has:나쁘게 생각하지 마	fix	rewrites

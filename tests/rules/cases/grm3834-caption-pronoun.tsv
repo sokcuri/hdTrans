@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 segment:caption-pronoun	彼には妙なところがあった 俺は刑事ですよ 先生	그에게는 이상한 점이 있었다 나는 형사예요 선생님	fix	segment
 segment:caption-pronoun	分かってる 僕とティナを助けるために	알고 있다 나와 티나를 돕기 위해	fix	segment
-segment:caption-pronoun	村を乗っ取ろうとしてる あなたは何かしないといけない	마을을 빼앗으려 하고 있다 당신은 뭔가 하지 않으면 안된다	fix	segment
+segment:caption-pronoun	村を乗っ取ろうとしてる あなたは何かしないといけない	마을을 빼앗으려 하고 있다 당신은 뭔가 하지 않으면 안 된다	fix	segment
 segment:caption-pronoun	違う 俺だって… やれる	아니다 나도… 할 수 있다	fix	segment
 segment:caption-pronoun	貴重品箱を探してる 俺達が盗んだと言ってる	귀중품상자를 찾고 있다 우리가 훔쳤다고 하고 있다	fix	segment
 segment:caption-pronoun	何もさせない 私が見てる	아무것도 시키지 않는다 내가 보고 있다	fix	segment

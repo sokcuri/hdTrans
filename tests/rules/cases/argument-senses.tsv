@@ -78,7 +78,7 @@ pack:argument-senses:34	男が近づいていたことに気づけなかった�
 pack:argument-senses:35	背後から近づいてくる気配に大きなため息を吐く。	has:다가오는	keep	packs
 pack:argument-senses:36	早くその場から離れろ！	rule:pack:argument-senses:36=벗어나다	fix	packs
 pack:argument-senses:39	王都から離れた場所で構いません。	rule:pack:argument-senses:39=떨어지다	fix	packs
-pack:argument-senses:48	でも、ここから離れてはダメ……	has:떠나서는 안돼	keep	packs
+pack:argument-senses:48	でも、ここから離れてはダメ……	has:떠나서는 안 돼	keep	packs
 pack:argument-senses:37	彼の頭が胴体から離れ、血が噴き出す。	rule:pack:argument-senses:37=떨어지다	fix	packs
 pack:argument-senses:37	マ、マコトさんから離れてくださいっ！	rule:pack:argument-senses:37=떨어지다	fix	packs
 pack:argument-senses:46	あの光景が頭から離れない。	rule:pack:argument-senses:46=떠나다	fix	packs

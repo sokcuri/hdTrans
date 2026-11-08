@@ -292,7 +292,7 @@ std::string_view Unclipped(std::string_view s) {
 }
 
 // Whether the item right after item i is a copy of it said again: the same text, Korean and
-// ending, clipped or not (だめだだめだ 안돼 안돼), so that it ends its clause as the copy does.
+// ending, clipped or not (だめだだめだ 안 돼 안 돼), so that it ends its clause as the copy does.
 bool CopyFollows(const std::vector<ResolvedItem>& items, int i) {
     const auto next = static_cast<std::size_t>(i) + 1;
     if (next >= items.size()) return false;
