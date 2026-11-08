@@ -1,6 +1,5 @@
 # 규칙: LEX-5651
 rule	input	expected	kind	layer
-dict:audit-novel-2	十九駆、見参！	has:등장!	fix	lookup
 dict:audit-novel-2	川内、参上！	has:등장!	fix	lookup
 dict:audit-novel-2	ご挨拶に参上しました。	has:찾아 뵈었습니다	keep	lookup
 dict:audit-novel-2	夕餉の支度をする。	has:저녁밥 준비	fix	lookup
@@ -35,7 +34,6 @@ dict:audit-novel-2	大の字に寝転ぶ。	has:큰대자	fix	lookup
 dict:audit-novel-2	豆まきをしよう。	has:콩 뿌리기	fix	lookup
 dict:audit-novel-2	詳報を待つ。	has:상세 보도	fix	lookup
 dict:audit-novel-2	たたかいが始まる。	has:싸움이	fix	lookup
-dict:audit-novel-2	市電に乗る。	has:노면전차를	fix	lookup
 dict:audit-novel-2	貴様の采配を見せてもらおう。	has:지휘를	fix	lookup
 dict:audit-novel-2	交通機関が止まった。	has:교통수단이	fix	lookup
 dict:audit-novel-2	黒板消しを投げる。	has:칠판지우개를	fix	lookup
@@ -98,5 +96,42 @@ dict:audit-novel-2	無人島に流れ着いた。	has:떠밀려 왔다	fix	looku
 dict:audit-novel-2	楽勝だったのです。	lacks:이기기	fix	lookup
 dict:audit-novel-2	楽勝楽勝！	has:식은 죽 먹기	fix	lookup
 dict:audit-novel-2	新しき艦	has:새로운 함	fix	lookup
-dict:audit-novel-2	ワザと負けた。	has:일부러 졌다	fix	lookup
 dict:audit-novel-2	ふだんから鍛えている。	has:평소부터	fix	lookup
+dict:audit-novel-2	公私共々よろしくお願いします	has:공사 모두	fix	lookup
+dict:audit-novel-2	夫婦共々元気です。	has:부부 모두	fix	lookup
+dict:audit-novel-2	楽園共々滅びよ。	has:낙원과 함께	keep	lookup
+dict:audit-novel-2	素人の域を出ない。	has:수준을 벗어나지 않는다	fix	lookup
+dict:audit-novel-2	神の域に達する。	has:신의 영역	keep	lookup
+dict:audit-novel-2	市電に乗る。	has:시영전차를	keep	lookup
+dict:audit-novel-2	もっともふだんは、表だけで充分だ	has:다만 평소에는	fix	lookup
+dict:audit-novel-2	もっとも大切なもの	has:가장 중요한	keep	lookup
+cx:audit-novel:10	殿に見参した。	has:주군을 알현했다	fix	rewrites
+cx:audit-novel:10	国王に謁見した。	has:국왕을 알현했다	fix	rewrites
+cx:audit-novel:10	陛下に謁見する機会を得た。	has:폐하를 알현할	fix	rewrites
+cx:audit-novel:10	陛下に謁見を申し込んだ。	has:알현을 신청했다	keep	rewrites
+cx:audit-novel:10	明日に謁見がある。	lacks:내일을	keep	rewrites
+cx:audit-novel:10	三時に謁見の予定	lacks:3시를	keep	rewrites
+cx:audit-novel:10	王都に謁見のため向かう。	lacks:왕도를	keep	rewrites
+cx:audit-novel:20	ワザと負けた。	has:일부러 졌다	fix	rewrites
+cx:audit-novel:20	あいつはワザと負けた。	has:일부러 졌다	fix	rewrites
+cx:audit-novel:20	彼女はワザと、手を抜いた。	has:일부러,	fix	rewrites
+cx:audit-novel:20	すごいワザだ。	has:대단한 기술	keep	rewrites
+cx:audit-novel:30	ワザとは思えない。	has:일부러라고는 생각되지 않는다	fix	rewrites
+cx:audit-novel:30	そのワザとは何だ	has:기술이란	keep	rewrites
+cx:audit-novel:30	あんたらのワザとは違う	has:기술과는 다르다	keep	rewrites
+cx:audit-novel:40	ワザとはいえ、ひどい。	has:일부러라고는 해도	fix	rewrites
+cx:audit-novel:40	底の浅いワザとはわけが違う	has:기술과는	keep	rewrites
+cx:audit-novel:50	ワザとではない。	has:일부러 그런 것은 아니다	fix	rewrites
+cx:audit-novel:50	すごいワザではない。	lacks:일부러	keep	rewrites
+cx:audit-novel:60	ワザとのミスだ。	has:고의적인 실수	fix	rewrites
+cx:audit-novel:60	師匠とのミスだ。	lacks:고의적	keep	rewrites
+cx:audit-novel:70	お前自身で決めろ	has:너 스스로 결정해라	fix	rewrites
+cx:audit-novel:70	君自身で確かめろ	has:너 스스로 확인해라	fix	rewrites
+cx:audit-novel:70	お前自身ではないか	has:너 자신이 아닌가	keep	rewrites
+cx:audit-novel:71	てめえ自身で考えろ	has:너 스스로 생각해라	fix	rewrites
+cx:audit-novel:71	てめえ自身の問題だ。	has:너 자신의 문제	keep	rewrites
+cx:audit-novel:72	自分自身でやる	has:자기 스스로 한다	fix	rewrites
+cx:audit-novel:72	自分自身が嫌いだ	has:자기 자신	keep	rewrites
+dict:audit-novel-2	推測の域を出ないが、	has:추측에 불과하지만	fix	lookup
+dict:audit-novel-2	それはもう趣味の域を出ている。	has:수준을 벗어나 있다	fix	lookup
+dict:audit-novel-2	十九駆、見参！	has:등장!	keep	lookup
