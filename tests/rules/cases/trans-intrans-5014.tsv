@@ -1,0 +1,43 @@
+# 규칙: LEX-5014
+rule	input	expected	kind	layer
+analysis:su-causative-te	白崎が、少し唇を尖らせて考える。	has:입술을 삐죽 내밀고 생각한다	fix	analysis
+analysis:su-causative-te	と、杉は急に顔を曇らせて、不安らしい眼付をした。	has:얼굴을 흐려,	fix	analysis
+analysis:su-causative-te	和服の生地をじわじわと湿らせていく。	has:서서히 적셔 간다	fix	analysis
+analysis:su-causative-te	呪いは触れた人の願いも腐らせてしまう	has:소원도 썩여버린다	fix	analysis
+analysis:su-causative-te	未散がキスの雨を降らせてきた。	has:세례를 퍼부어 왔다	fix	analysis
+analysis:su-causative-te	息を切らせて必死な横でゆとり伐採荷物持ちでさくさくいくおにいちゃんの姿が	has:숨을 헐떡여 필사적인	fix	analysis
+analysis:su-causative-te	服を切らせて、骨を断つのよ！	has:다 써버리고, 뼈를	fix	analysis
+analysis:su-causative-te	顔が沸騰したかのように熱くなった。恥ずかしくて思わず視線を逸らせてしまう。	has:시선을 돌려버린다	fix	analysis
+analysis:su-causative-te	次々と攻撃してくるビートリッチの嘴を躱しながら短剣をすべらせていく。	lacks:수 있어	fix	analysis
+analysis:su-causative-te	それでも彼は、話せてよかったと言った。	has:이야기할 수 있어서 좋았다	keep	analysis
+analysis:su-causative-te	照れが隠せてねぇぜ、ご両人。	has:숨기지 못해	keep	analysis
+analysis:su-causative-te	わたしたちはまだ、風見くんに何も返せていないのだから。	has:돌려주지 못하	keep	analysis
+analysis:su-causative-te	提督、メリークリスマス！ この季節を一緒に過ごせて、古鷹、嬉しいです！	has:보낼 수 있어	keep	analysis
+analysis:su-causative-te	みんなが普通に暮らせる国	has:살 수 있는 나라	keep	analysis
+analysis:su-causative-te	自分の意思で動かせる身体	has:움직일 수 있는 신체	keep	analysis
+analysis:ichidan-partner-teori	同書は電子版を含め１０６万部売れておりベストセラーとなっています。	has:106만부 팔려	fix	analysis
+analysis:ichidan-partner-teori	「じゃ、その……私はこれで。噂の圭ちゃんと話せて楽しかったです。」	has:이야기할 수 있어	keep	analysis
+analysis:ichidan-partner-teori	携帯から書き込めてるんだろ？	has:적을 수 있는	keep	analysis
+dict:jisjk:94559	ホントに 砂糖とかをちょっとだけ入れて	has:조금 넣어	fix	local
+dict:jisjk:94559	女性が１人でも気軽に入れて １人でも くつろげるお店が いいかなって。	has:부담없이 들어갈 수 있어	keep	local
+dict:jisjk:94559	「どうにかして、裕樹も一緒に入れないかな……？」	has:함께 들어갈 수 없을까	keep	local
+dict:jisjk:95888	謎も解けたことだし、開店の準備をしましょうか	has:수수께끼도 풀렸으니	fix	local
+dict:jisjk:95888	「罪を克服するんです、そうすれば洗脳は解ける……」	has:세뇌는 풀린다	fix	local
+dict:jisjk:95888	問題を解けた	lacks:풀렸	keep	local
+dict:jisjk:92133	なぁに、すぐに帰してやっからよ。	has:곧바로 돌려보내 줄 테니까	fix	local
+dict:jisjk:92133	このウサギを自然に帰したら	has:자연스럽게 돌려보내면	fix	local
+dict:jisjk:92133	瀬戸は一先ず五百円だけを与えて逐い帰した。	has:돌려보냈다	fix	local
+dict:jisjk:92133	「…フ、…あとわずかのところで日光が刺し、悪のゾンビ軍団は灰塵と帰したか…。	!rule:dict:jisjk:92133	keep	local
+dict:jisjk:92133	失敗に帰した。	!rule:dict:jisjk:92133	keep	local
+dict:w:35125	胸に添えた手を、さわさわと動かしはじめた。	has:가슴에 얹은 손을	fix	local
+dict:w:35125	グランツの手がユフィリアの頭に添えるように置かれ、不器用な手付きでユフィリアの頭を撫でた。	has:머리에 얹도록	fix	local
+dict:w:35125	　不意に、お母さんの手が俺の額に添えられた。	has:이마에 얹어졌다	fix	local
+dict:w:35125	それからメンチカツに場違いに添えられた鮮やかな黄色の果物	has:곁들여진	keep	local
+dict:w:35126	「ごめんなさいね、ご期待に添えなくて。	has:기대에 부응할 수 없어서	fix	local
+defaults:trans-5014	欲次郎さんの耳に入れておこうと思っただけですよ。	has:귀에 넣어 두려고	fix	lookup
+defaults:trans-5014	ただ、大島候補も同じ政策を挙げたので、一応耳に入れておいた方がいいと思い	has:귀에 넣어 두는	fix	lookup
+defaults:trans-5014	そして、屈んで釣り銭を取り出す。	has:웅크려 거스름돈을	fix	lookup
+defaults:trans-5014	　俺はバッグを取り出して、本棚の前に屈む。	has:책장 앞에 웅크린다	fix	lookup
+defaults:trans-5014	拷問には屈しない！	has:굴하지 않아	keep	lookup
+defaults:trans-5014	熊谷教授は「誰にも聞かれたくない悩みなどが漏えいしたらショックは大きい」と指摘。	lacks:누설	fix	lookup
+defaults:trans-5014	およそ9万2000人分の個人情報が漏えいした可能性があると発表しました。	has:유출된 가능성이	fix	lookup

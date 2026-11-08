@@ -149,6 +149,8 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool GodanCausative(std::string_view stem) const;
+    bool IchidanPartner(std::string_view stem, std::string_view kana) const;
+    bool GodanBase(std::string_view stem) const;
     bool CausativeOfShorter(std::string_view stem) const;
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
