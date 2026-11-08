@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:datte-quote:45	このユニットで良かったって 思えるように	이 유닛이라서 다행이었다고 생각되도록	fix	rewrites
 cx:datte-quote:47	生まれて初めて 生きててよかったって思えた	태어나서 처음으로 살아서 좋았다고 생각되었다	fix	rewrites
-cx:datte-quote:47	いや、いいんだ。こうして告白を聞いてくれただけでも、君を好きになってよかったって思えたから	아니, 좋다. 이렇게 해 고백을 들어 준 것만으로도, 너를 좋아하게 되어서 좋았다고 생각되었으니까	fix	rewrites
+cx:datte-quote:47	いや、いいんだ。こうして告白を聞いてくれただけでも、君を好きになってよかったって思えたから	아니, 좋다. 이렇게 고백을 들어 준 것만으로도, 너를 좋아하게 되어서 좋았다고 생각되었으니까	fix	rewrites
 cx:datte-quote:47	「あたし？　あたしは逆。すっごく楽しいし、やってよかったって思ってる」	「나? 나는 반대. 엄청 즐겁고, 해서 좋았다고 생각해」	fix	rewrites
 cx:datte-quote:47	俺も あのとき真琴がいてくれてよかったって思ってるよ	나도 그 때 마코토가 있어 주어서 좋았다고 생각해	fix	rewrites
 cx:datte-quote:47	勇太　生きててよかったって思う日は	유타 살아서 좋았다고 생각하는 날은	fix	rewrites
@@ -62,7 +62,7 @@ cx:datte-listing-head:10	同級生が みんな 洋服だ 合コンだって楽�
 cx:datte-listing:10	>> はい。 秋田だ 長崎だって言って。	>> 네. 아키타니 나가사키니 말해.	fix	rewrites
 lookup:verb-before-te-form	提督さん！新年ね、今年もリベがしっかり面倒見てあげるから大丈夫よ、ねっ！	제독님! 신년이네, 올해도 리베가 제대로 돌봐 주니까 괜찮아, 네!	fix	lookup
 lookup:verb-before-te-form	今日は、私がバッチリ面倒見てあげる。まかせといて、よろしくね。	오늘은, 내가 딱 돌봐 준다. 맡기고 물어라고, 잘 부탁해.	fix	lookup
-lookup:verb-before-te-form	「できれば、わたしもついて行って毎日面倒見たいくらいだよ」	「가능하면, 나도 따라 가 매일 돌보고 싶을 정도야」	fix	lookup
+lookup:verb-before-te-form	「できれば、わたしもついて行って毎日面倒見たいくらいだよ」	「가능하면, 나도 따라가 매일 돌보고 싶을 정도야」	fix	lookup
 lookup:verb-before-te-form	いいのよ私が死ぬまで面倒見るんだから	좋아 내가 죽을 때까지 돌보니까	fix	lookup
 lookup:verb-before-te-form	おふくろのことは　俺たちが面倒見るよ。	어머니는 우리가 돌봐.	fix	lookup
 lookup:verb-before-te-form	俺が面倒見る。	내가 돌본다.	fix	lookup

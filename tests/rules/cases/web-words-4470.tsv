@@ -85,4 +85,4 @@ validity:katsu-ra	有能かつ真面目な上司。	유능하고 성실한 상�
 lookup:hairu-not-suffix	ダリヤは、日差しの入る窓に向かって顔を上げる。	has:햇볕이 들어가는 창을	fix	lookup
 lookup:hairu-not-suffix	最新の給湯施設はおろか、隙間風の入る壁の補修もままならない。	has:외풍이 들어가는 벽	fix	lookup
 lookup:hairu-not-suffix	「入る……かな？」	lacks:깊이	fix	lookup
-lookup:hairu-not-suffix	都市すら買える大金が手に入ることもある。	has:손에 들어 오는	keep	lookup
+lookup:hairu-not-suffix	都市すら買える大金が手に入ることもある。	has:손에 들어오는	keep	lookup

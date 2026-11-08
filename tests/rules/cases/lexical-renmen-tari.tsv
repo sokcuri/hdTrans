@@ -11,7 +11,7 @@ dict:jisjk:20393	連綿と、受け継いだ。	연면하게, 계승했다.	fix	
 dict:gram:to:tari	悠然と歩いた。	유연하게 걸었다.	keep	local
 dict:jisjk:149013	社交界で延々と馬鹿にされる。	사교계에서 끝없이 바보 취급 당한다.	keep	lookup
 dict:jisjk:149013	延々と聞かされ、	끝없이 들어,	keep	lookup
-dict:jisjk:149013	廃鉱を延々と歩いてきた	폐광을 끝없이 걸어 왔다	keep	lookup
+dict:jisjk:149013	廃鉱を延々と歩いてきた	폐광을 끝없이 걸어왔다	keep	lookup
 dict:jisjk:341810	黙々と真剣に	묵묵히 진지하게	keep	lookup
 dict:jisjk:341810	言葉も忘れて黙々と食べる。	말도 잊어 묵묵히 먹는다.	keep	lookup
 dict:jisjk:341810	黙々とノートに	묵묵히 노트에	keep	lookup

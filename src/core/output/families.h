@@ -80,4 +80,11 @@ std::uint64_t UnexpandedMarkers();
 // (만나다); other targets as they are.
 std::string Lemma(std::string_view target, const Families& generated);
 
+// Whether the verbs of lemmas first and second make a Korean compound verb of
+// ko-verb.compound-motion, written as one word (지나다 + 가다 지나가다, 흐르다 + 오다 흘러오다), or, when
+// the first verb takes no object (intransitive), of ko-verb.compound-motion-intransitive (降りていく
+// 내리다 + 가다 내려가다, not ずり下げていく); first may be a phrase that ends in the verb (말을 걸다 + 가다
+// is none).
+bool CompoundMotion(std::string_view first, std::string_view second, bool intransitive);
+
 }  // namespace hdTrans::output

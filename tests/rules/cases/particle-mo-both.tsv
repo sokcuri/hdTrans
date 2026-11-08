@@ -6,7 +6,7 @@ dict:jisjk:347161	女子も男子も、恋愛感情も関係ない。	여자도 
 dict:jisjk:347161	明日も明後日も、未来永劫！	내일도 모레도, 미래 영겁!	fix	defaults
 dict:jisjk:347161	でも、昨日も一昨日もいたし	!rule:dict:jisjk:347161	fix	defaults
 dict:jisjk:347161	壁も天井も、ベッドも、全てが白だった。	벽도 천장도, 침대도, 모두가 흰색이었다.	fix	defaults
-dict:jisjk:347161	武器も防具もスキルも簡単に手に入る。	무기도 방어구도 스킬도 간단하게 손에 들어 온다.	fix	defaults
+dict:jisjk:347161	武器も防具もスキルも簡単に手に入る。	무기도 방어구도 스킬도 간단하게 손에 들어온다.	fix	defaults
 dict:jisjk:347161	騎士様も私も死には至ってない。	!rule:dict:jisjk:347161	fix	defaults
 dict:jisjk:347161	ワタシも私も知識として知っている。	!rule:dict:jisjk:347161	fix	defaults
 dict:jisjk:347161	この学園も生徒会も甘くない。	!rule:dict:jisjk:347161	fix	defaults

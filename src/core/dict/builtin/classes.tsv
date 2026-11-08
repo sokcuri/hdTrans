@@ -31,6 +31,7 @@
 //= noun.dish-head	Nouns of a dish or a drink that Korean compounds with the food, fruit or flower noun before an の, or with a loanword the dictionary lacks, with no 의 (木苺のケーキ 나무딸기 케이크, ムーンベリーのパイ 문베리 파이; spec GRM-4040).
 //= verb.body-motion	Stems, matched at the end of a word, of verbs of moving or swinging a part of one's body or one's hair (揺らす, 振る, 傾げる): their て form before a verb of turning or looking in the same sentence is what one does meanwhile, -며 (髪を揺らして、こちらを向く 머리카락을 흔들며 이쪽을 향한다; spec GRM-4043).
 //= verb.turn-look	Stems, matched at the end of a word, of verbs of turning toward something or looking (向く, 振り向く, 見上げる) that a て form of verb.body-motion before them accompanies (spec GRM-4043).
+//= noun.rising-level	Amounts and levels that rise and fall (物価, 気温, 成績, 知名度): with one as its subject a verb before てくる or ていく is the change going on, not a motion compound, and is written apart (物価が上がってきた 물가가 올라 왔다; spec GRM-4031).
 //= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
 //= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
@@ -299,6 +300,9 @@
 //= noun.kin	Kinship words that たん and っち after them belong to, as ちゃん does (お兄ちゃんたん 오빠, 妹たん 여동생).
 //= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안돼 안됏).
 //= ko.joined-before-doe	Korean words written joined to a form of 되다 right after them (안 돼 안돼, 안 된다 안된다).
+//= adverb.keep-on	Adverbs of a time that goes on (まだ, このまま, これから, 今後, ずっと): an いく of aspect after a verb in a condition under one is going on doing it, 계속 (まだ話しかけていけば 계속 말을 걸면).
+//= ko-verb.compound-motion	Pairs of Korean verbs, by their lemmas, whose 아/어 form and 가다 or 오다 make a compound verb of motion or path written as one word (지나다 가다 지나가다, 흐르다 오다 흘러오다, 걷다 가다 걸어가다): 過ぎていった 지나갔다. An auxiliary of aspect stays apart (깊어지다 가다 깊어져 가다), and so does a verb that only sounds like the first one (걸다 가다 말을 걸어 가다; 들다 and 나다 are left out: 생각이 들어 오다, 열이 나 오다).
+//= ko-verb.compound-motion-intransitive	Pairs as ko-verb.compound-motion whose first verb also lowers or moves something (내리다): they make the compound only when the Japanese verb takes no object (降りていく 내려가다; ずり下げていく 내려 가다).
 //= ko-aux.joined	Korean auxiliary verbs, by their selected Korean, written joined to the 아/어 form before them when the Japanese entry is an auxiliary (gram Ds) (먹어 버렸다 먹어버렸다).
 //= mark.cry	Marks right after the last copy of an adjective of adjective.grumble said twice that make the copies a cry (寒い寒いっ, 寒い寒い！, 寒い寒いー, 寒い寒い……, 寒い寒い♪).
 //= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
@@ -3481,6 +3485,65 @@ noun.predicate	ダメ
 noun.predicate	駄目
 ko.joined-before-doe	안
 ko-aux.joined	버&AA@
+
+ko-verb.compound-motion	지나다 가다
+ko-verb.compound-motion	지나다 오다
+ko-verb.compound-motion	흐르다 가다
+ko-verb.compound-motion	흐르다 오다
+ko-verb.compound-motion	돌다 가다
+ko-verb.compound-motion	돌다 오다
+ko-verb.compound-motion	되돌다 가다
+ko-verb.compound-motion	되돌다 오다
+ko-verb.compound-motion	오르다 가다
+ko-verb.compound-motion	오르다 오다
+ko-verb.compound-motion	따르다 가다
+ko-verb.compound-motion	따르다 오다
+ko-verb.compound-motion	뒤따르다 가다
+ko-verb.compound-motion	뒤따르다 오다
+ko-verb.compound-motion	날다 가다
+ko-verb.compound-motion	날다 오다
+ko-verb.compound-motion	뛰다 가다
+ko-verb.compound-motion	뛰다 오다
+ko-verb.compound-motion	걷다 가다
+ko-verb.compound-motion	걷다 오다
+ko-verb.compound-motion	달리다 가다
+ko-verb.compound-motion	달리다 오다
+ko-verb.compound-motion	넘다 가다
+ko-verb.compound-motion	넘다 오다
+ko-verb.compound-motion	건너다 가다
+ko-verb.compound-motion	건너다 오다
+ko-verb.compound-motion	살다 가다
+ko-verb.compound-motion	살다 오다
+ko-verb.compound-motion	데리다 가다
+ko-verb.compound-motion	데리다 오다
+ko-verb.compound-motion	가지다 가다
+ko-verb.compound-motion	가지다 오다
+ko-verb.compound-motion	끌리다 가다
+ko-verb.compound-motion	끌리다 오다
+ko-verb.compound-motion	쫓다 가다
+ko-verb.compound-motion	쫓다 오다
+ko-verb.compound-motion	몰리다 가다
+ko-verb.compound-motion	몰리다 오다
+ko-verb.compound-motion	밀리다 가다
+ko-verb.compound-motion	밀리다 오다
+ko-verb.compound-motion	떠나다 가다
+ko-verb.compound-motion	기다 가다
+ko-verb.compound-motion	기다 오다
+ko-verb.compound-motion	구르다 가다
+ko-verb.compound-motion	구르다 오다
+ko-verb.compound-motion	불다 오다
+ko-verb.compound-motion	들리다 오다
+ko-verb.compound-motion	다니다 가다
+ko-verb.compound-motion	다니다 오다
+ko-verb.compound-motion	잡히다 가다
+ko-verb.compound-motion-intransitive	내리다 가다
+ko-verb.compound-motion-intransitive	내리다 오다
+adverb.keep-on	まだ
+adverb.keep-on	このまま
+adverb.keep-on	これから
+adverb.keep-on	今後
+adverb.keep-on	ずっと
+adverb.keep-on	引き続き
 mark.cry	っ
 mark.cry	ッ
 mark.cry	！
@@ -12213,6 +12276,50 @@ noun.edible	パン
 noun.edible	おにぎり
 noun.edible	団子
 noun.edible	饅頭
+noun.rising-level	物価
+noun.rising-level	気温
+noun.rising-level	温度
+noun.rising-level	体温
+noun.rising-level	室温
+noun.rising-level	水温
+noun.rising-level	熱
+noun.rising-level	成績
+noun.rising-level	値段
+noun.rising-level	価格
+noun.rising-level	株価
+noun.rising-level	地価
+noun.rising-level	相場
+noun.rising-level	数値
+noun.rising-level	水位
+noun.rising-level	レベル
+noun.rising-level	知名度
+noun.rising-level	人気
+noun.rising-level	評価
+noun.rising-level	評判
+noun.rising-level	支持率
+noun.rising-level	視聴率
+noun.rising-level	確率
+noun.rising-level	血圧
+noun.rising-level	血糖値
+noun.rising-level	気分
+noun.rising-level	テンション
+noun.rising-level	速度
+noun.rising-level	スピード
+noun.rising-level	濃度
+noun.rising-level	順位
+noun.rising-level	給料
+noun.rising-level	給与
+noun.rising-level	金利
+noun.rising-level	税率
+noun.rising-level	料金
+noun.rising-level	運賃
+noun.rising-level	家賃
+noun.rising-level	物価上昇率
+noun.rising-level	偏差値
+noun.rising-level	点数
+noun.rising-level	得点
+noun.rising-level	好感度
+noun.rising-level	士気
 noun.weather-come	雨
 noun.weather-come	大雨
 noun.weather-come	小雨

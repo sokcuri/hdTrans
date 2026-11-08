@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:native-count	二匹の犬は、俺の後をついて歩いてきた。	두 마리의 개는, 내 뒤따라 걸어 왔다.	fix	compose
+compose:native-count	二匹の犬は、俺の後をついて歩いてきた。	두 마리의 개는, 내 뒤따라 걸어왔다.	fix	compose
 compose:native-count	子犬四匹には、もう名前をつけた。	강아지 네 마리에는, 이제 이름을 붙였다.	fix	compose
 compose:native-count	新しい命が四つ、生まれていた。	새로운 생명이 네 개, 태어나고 있었다.	fix	compose
 compose:native-count	八本の足が、左右に同じくらい。	여덟 개의 다리가, 좌우에 같은 정도.	fix	compose

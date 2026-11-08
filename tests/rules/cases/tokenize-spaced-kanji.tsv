@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 tokenize:spaced-kanji	(龍)私 先 行くね。	lacks:선행	fix	lookup
 tokenize:spaced-kanji	私 下 行って寝ますから	lacks:하행	fix	lookup
-tokenize:spaced-kanji	（西野）俺 今 入ってきたやん	has:지금 들어 왔	fix	lookup
+tokenize:spaced-kanji	（西野）俺 今 入ってきたやん	has:지금 들어왔	fix	lookup
 tokenize:spaced-kanji	通 知 表が来た	성적표가 왔다	keep	lookup
 tokenize:spaced-kanji	こ の 展 開は予想外	이 전개는 예상외	keep	lookup
 tokenize:spaced-kanji	未 来	미래	keep	lookup

@@ -1,0 +1,35 @@
+# 규칙: GRM-4030
+rule	input	expected	kind	layer
+cx:kou-shite:10	私の一日はこうしてポーション作りで過ぎていった。	has:하루는 이렇게 포션	fix	rewrites
+cx:kou-shite:10	こうして二人は出会った	이렇게 두 사람은 만났다	fix	rewrites
+cx:kou-shite:10	こうして見ると綺麗だ	이렇게 보면 예쁘다	fix	rewrites
+cx:kou-shite:10	こうして、突然の王子様の訪問は終わった。	has:이렇게, 갑작스러운	fix	rewrites
+cx:kou-shite:10	こうして、エルの特訓に2人の友人が加わったのだった。	has:이렇게, 엘	fix	rewrites
+cx:kou-shite:10	今は何か動きがあるまでこうして待機しているという訳さ。	has:이렇게 대기하고	fix	rewrites
+cx:kou-shite:10	こうして子爵家の爵位は返上され、	has:이렇게 자작가의	fix	rewrites
+cx:kou-shite:10	俺の 17 歳の夏休みは　こうして始まった	has:이렇게 시작되었다	fix	rewrites
+cx:kou-shite:10	こうして 3378組は ついに８組にまで絞られた	has:이렇게 3378조는	fix	rewrites
+cx:kou-shite:10	こうしてゴロゴロしていたいな～。	has:이렇게 데굴데굴	fix	rewrites
+cx:kou-shite:10	こうして椿に生まれ変わっているのだから	has:이렇게 츠바키로	fix	rewrites
+cx:kou-shite:10	⟨こうして通報から23分たった…⟩	has:이렇게 신고로부터	fix	rewrites
+cx:kou-shite:10	<こうして ＳＬ車内の撮影ができることになりました>	has:이렇게 SL	fix	rewrites
+cx:kou-shite:20	ああして笑っている	저렇게 웃고 있다	fix	rewrites
+cx:kou-shite:15	――そうして、少女の目覚めより時は流れた。	has:그렇게 해서, 소녀	fix	rewrites
+cx:kou-shite:15	そうして夜が更けていった	그렇게 해서 밤이 깊어져 갔다	fix	rewrites
+cx:kou-shite:15	そうして、二人はその運だめしに	has:그렇게 해서, 두 사람은	fix	rewrites
+cx:kou-shite:10	こうしてくれ	이렇게 해 줘	keep	rewrites
+cx:kou-shite:10	こうしておけば大丈夫だ	has:이렇게 해 두면	keep	rewrites
+cx:kou-shite:10	こうしてはいられない	has:이렇게 하고 있을 수 없다	keep	rewrites
+cx:kou-shite:10	こうしてもいい？	has:이렇게 해도	keep	rewrites
+cx:kou-shite:10	こうしてから寝る	has:이렇게 하고 나서	keep	rewrites
+cx:kou-shite:10	こうしてみると	has:이렇게 해 보면	keep	rewrites
+cx:kou-shite:10	「こうして」	「이렇게 해」	keep	rewrites
+cx:kou-shite:10	「こうして、こうするの」	has:이렇게 해,	keep	rewrites
+cx:kou-shite:15	そうしてほしい	has:그렇게 해 줬으면	keep	rewrites
+cx:kou-shite:15	そうしておく	has:그렇게 해 둔다	keep	rewrites
+cx:kou-shite:15	<でも そうしていると・	has:그렇게 하고 있으면	keep	rewrites
+cx:kou-shite:15	そうしてたら、他にも近所の人4～5人が	has:그렇게 하고 있으면	keep	rewrites
+cx:kou-shite:20	ああしてくれ	!rule:cx:kou-shite:20	keep	rewrites
+cx:kou-shite:10	エリさんだって きついはずなのに こうして手を差し伸べてくれる	has:이렇게 손을	fix	rewrites
+cx:kou-shite:15	そうしてはいられない。	has:그렇게 하고 있을 수 없다	keep	rewrites
+cx:kou-shite:15	そうして？	그렇게 해?	keep	rewrites

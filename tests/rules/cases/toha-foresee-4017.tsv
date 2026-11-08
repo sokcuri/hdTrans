@@ -20,7 +20,7 @@ cx:toha-foresee:20	あの時は、まさか佳奈とこんなことになると�
 cx:toha-foresee:20	「まさか、お前と同じ部活になるとは思わなかった」	「설마, 너와 같은 동아리가 될 줄은 생각하지 못했어」	fix	rewrites
 cx:toha-foresee:20	こんなことになるとは思ってもいなかった。	이렇게 될 줄은 생각하지도 못했다.	fix	rewrites
 cx:toha-foresee:20	こんなことになるとは予想もしていなかった。	!rule:cx:toha-foresee:20	keep	rewrites
-cx:toha-foresee:25	「まさか、筧先輩が入ってくるとは思いませんでした」	has:들어 올 줄은 생각하지 못했습니다	fix	rewrites
+cx:toha-foresee:25	「まさか、筧先輩が入ってくるとは思いませんでした」	has:들어올 줄은 생각하지 못했습니다	fix	rewrites
 cx:toha-foresee:25	強引に武器ごと斬られるとは思いませんでした』	has:베어질 줄은 생각하지 못했습니다	fix	rewrites
 cx:toha-foresee:25	こんなことになるとは知りませんでした。	!rule:cx:toha-foresee:25	keep	rewrites
 cx:toha-foresee:30	こんなことになるとは想像しなかった。	이렇게 될 줄은 상상하지 못했다.	fix	rewrites

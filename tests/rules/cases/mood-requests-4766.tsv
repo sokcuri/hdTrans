@@ -24,7 +24,7 @@ cx:yo-intent:17	「……私も、帰る」	「……나도, 돌아갈 거야」
 cx:yo-intent:17	「では、悪いが私は戻る」	「그럼, 미안하지만 나는 돌아올 거야」	fix	rewrites
 cx:yo-intent:17	「疲れたから、今日はもう寝る」	「지쳤으니까, 오늘은 이제 잘 거야」	fix	rewrites
 normalize:kansai-ee	ほんまにええんか？	진짜로 좋은 건가?	fix	normalize
-normalize:kansai-ee	こうしてワイらしかおらん時くらい、堂々とラブラブしてええんやで	이렇게 해 우리밖에 있지 않는 때 정도, 당당히 알콩달콩해도 되는 이야	keep	normalize
+normalize:kansai-ee	こうしてワイらしかおらん時くらい、堂々とラブラブしてええんやで	이렇게 우리밖에 있지 않는 때 정도, 당당히 알콩달콩해도 되는 이야	keep	normalize
 normalize:kansai-ee	真理紗は悪うない 謝らなくてええんや	진리사는 나쁘지 않다 사과하지 않아도 되는 거야	keep	normalize
 normalize:kansai-ee	めっちゃおもろい 仲ええやん	엄청 재미있는 사이 좋잖아	keep	normalize
 normalize:kansai-ee	１つはテツ用にしたらええんや	1개는 테츠용으로 하면 되는 거야	keep	normalize

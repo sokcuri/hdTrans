@@ -25,7 +25,7 @@ sense:ぼろい	冒険者、ぼろい商売だぜ。	모험가, 수지맞은 장
 dict:jisjk:85533	「……お前の差し金か」	「……네 사주인가」	fix	lookup
 dict:jisjk:189138	しゅうかく祭に 持っていけるぞ。	수확제에 가져갈 수 있어.	fix	lookup
 dict:jisjk:92746	権力闘争に明け暮れる	권력 투쟁에 몰두한다	fix	lookup
-dict:jisjk:92746	こうして信長は いやおうなく戦に明け暮れることになってしまった。	이렇게 해 노부나가는 억지로 싸움에 몰두하게 되어버렸다.	fix	lookup
+dict:jisjk:92746	こうして信長は いやおうなく戦に明け暮れることになってしまった。	이렇게 노부나가는 억지로 싸움에 몰두하게 되어버렸다.	fix	lookup
 dict:jisjk:92095	だが、あいつは屈せず……	하지만, 저 녀석은 굴하지 않고……	fix	lookup
 dict:jisjk:92095	暴力に屈した。	폭력에 굴했다.	keep	lookup
 dict:w:29119	「そうね、結ってくれる？	「그래, 묶어 줄래?	fix	lookup
