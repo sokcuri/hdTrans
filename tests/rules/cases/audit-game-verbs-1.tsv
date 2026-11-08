@@ -104,3 +104,6 @@ lexical:audit-game-verb	お手柄だね	has:잘한 일이구나	fix	lookup
 cx:audit-game-1:30	黙って寝てろ	has:잠자코 자라	fix	rewrites
 cx:audit-game-1:10	エルに撃たれて	has:총에	keep	rewrites
 cx:audit-game-1:12	森で撃たれて死んだ	has:총에 맞아	keep	rewrites
+cx:audit-game-1:30	黙ってついてこい	has:잠자코 따라와	fix	rewrites
+cx:audit-game-1:30	「黙って申せ」	has:잠자코 말해라	fix	rewrites
+cx:audit-game-1:12	ライフルで撃たれた	has:라이플에 맞았다	fix	rewrites

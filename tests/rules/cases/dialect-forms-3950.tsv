@@ -23,7 +23,7 @@ normalize:dialect-copula	これ お父様に買ってもろた 洋服やね｡ �
 normalize:dialect-cause	この際やき聞きますけんど 嵩さんは どういて いっぺんも お姉ちゃんに気持ちをぶつけんがですか？	이참에 태워 듣는데요 타케루 씨는 어떻게 있어 한번도 언니에게 기분을 부딪치지 않아가 말입니까?	fix	normalize
 normalize:dialect-cause	やかましいわ コラ はよ開けんかい コラ！	시끄러워 코라 빨리 열어라 이놈!	fix	normalize
 normalize:dialect-cause	私は あの子を 信じてるだけですさかい｡	저는 그 아이를 믿고 있을 뿐이니까.	fix	normalize
-normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	안심해라 틴타에는 입을 다물고 둘 테니까	fix	normalize
+normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	has:테니까	fix	normalize
 normalize:dialect-cause	ゆうべ 夜中に大きな声がするさかい	어젯밤 한밤중에 큰 목소리가 들리니까	fix	normalize
 normalize:dialect-cause	おやじ どげんしたんな？ いつでも いいけん｡ はい｡	아버지 어떤 한 인? 언제든 좋으니까. 네.	fix	normalize
 normalize:dialect-cause	今日は岡安に用あるさかい 先行くで｡	오늘은 오카야스에 용 있으니까 선행으로.	fix	normalize

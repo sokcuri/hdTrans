@@ -7,7 +7,7 @@ dict:w:28451	「では、申してみるがよい」	「그럼, 말해 보도록
 dict:w:28451	「余に申してみよ」	「짐에게 말해 봐라」	fix	local
 dict:w:28451	「我に申してみろ」	「나에게 말해 봐라」	fix	local
 dict:w:28451	「遠慮なく申せ」	「거리낌 없이 말해라」	fix	local
-dict:w:28451	「黙って申せ」	「말없이 말해라」	fix	local
+dict:w:28451	「黙って申せ」	has:말해라	fix	local
 dict:w:28451	「名を申せ」	「이름을 말해라」	fix	local
 dict:w:28451	「そなた、それを承知で申したな？」	!rule:dict:w:28451	keep	local
 dict:w:28451	私は田中と申します。	저는 타나카라고 합니다.	keep	local
