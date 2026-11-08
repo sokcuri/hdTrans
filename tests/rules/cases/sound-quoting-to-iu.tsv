@@ -6,12 +6,12 @@ sound:quoting-to-iu	その刹那、ドォーーンという衝撃が走る	그 �
 sound:quoting-to-iu	カサカサという音が微かに聞こえる	바스락바스락하는 소리가 희미하게 들린다	fix	sound
 sound:quoting-to-iu	カタカタという音	달각달각하는 소리	fix	sound
 sound:quoting-to-iu	ゴトンという大きな音がした	덜컹 하는 큰 소리가 났다	fix	sound
-sound:quoting-to-iu	キリキリという音と共に	지끈지끈하는 소리와 함께	fix	sound
+sound:quoting-to-iu	キリキリという音と共に	has:하는 소리와 함께	fix	sound
 sound:quoting-to-iu	ドンという音	쾅 하는 소리	fix	sound
 sound:quoting-to-iu	バタンという音	쾅 하는 소리	fix	sound
 sound:quoting-to-iu	ピンポーンというチャイムが鳴った	딩동 하는 차임이 울렸다	fix	sound
 sound:quoting-to-iu	ドキドキという気持ち	두근두근하는 기분	fix	sound
-sound:quoting-to-iu	ゴゴゴという地響きが聞こえた	우우웅 하는 땅울림이 들렸다	fix	sound
+sound:quoting-to-iu	ゴゴゴという地響きが聞こえた	쿠구구 하는 땅울림이 들렸다	fix	sound
 sound:quoting-to-iu	カチャカチャという食器の音	달그락달그락하는 식기의 소리	fix	sound
 sound:quoting-to-iu	カタカタという。	달각달각이라고 한다.	fix	sound
 sound:quoting-to-iu	カタカタというのは	달각달각이라는 것은	fix	sound

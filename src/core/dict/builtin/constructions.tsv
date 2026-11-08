@@ -403,6 +403,21 @@ cx:attached:85	LEX-5111	&&4 :attached-label ||2 S-1== @noun.meal-included S-1== 
 cx:attached:90	LEX-5111	&&3 :attached-label S+1== "で" !1 F+1== "conjugating"	set-target "" set-ending "" append-target@-1 "(와)과 함께" set-target@+1 " "	首輪付きで 목걸이와 함께
 cx:attached:100	LEX-5111	&&2 :attached-label F+0== "verb"	set-target "" set-ending "" append-target@-1 " 포함"	朝食付き、夕食なし 아침 식사 포함, 저녁식사 없음
 cx:attached:110	LEX-5111	&&2 :attached-label D+0== "첨부"	set-target "포함"	タクシー付き 택시 포함
+//= mimetic-cues	after Select 215	Mimetic words whose Korean the words after them choose (LEX-5016). The sound reading of ごろり before 喉 is the purr 그르렁; ぎゅんぎゅん before に is 빡빡 (packed full); じわっ before a word of oozing (滲む, 染み出す, 溢れる, 涙, 汗) is 찔끔; ぴっ before 胸 or 背筋 is 쫙; さくさく before a verb of going on or getting done (いく, 進む, 終わる, 片付く, 決まる, こなす) is 순조롭게; ばくばく and どきどき before 言う are 두근두근 with the verb 뛰다, and ばくばく before 食べる is 우걱우걱; ぽんぽん before 使う, 言う, 出す or 買う is 펑펑; すらりと before 抜く is 스르릉; きゅっ before なる is 움찔 with 오그라들다; じゃり said again or before と is the sound 자박; ぶつぶつ before 言う or a complaint (不平, 不満, 文句, 愚痴) is 투덜투덜; はっと before 胸 or 息 is 흠칫; さらっと before 髪 is 찰랑.
+cx:mimetic-cues:10	LEX-5016	&&2 S+0== "L데굴" >6 S+0== "L喉" ||0	set-target "그르렁"	ごろり、ごろりと喉を鳴らし 그르렁, 그르렁
+cx:mimetic-cues:20	LEX-5016	||2 S+0== "휭휭하게" &&2 S+0== "휭휭" S+1== "Lに"	set-target "빡빡하게"	ギュンギュンに予定を詰め込む 빡빡하게
+cx:mimetic-cues:30	LEX-5016	&&2 S+0== "찡" >8 ||10 S+0== "L滲" S+0== "L染み出" S+0== "L溢" S+0== "L垂" S+0== "L濡" S+0== "L涙" S+0== "L汗" S+0== "L血" S+0== "R液" S+0== "L湧" S+0== "00。！？!?"	set-target "찔끔"	じわっと愛液が染み出してくる 찔끔
+cx:mimetic-cues:40	LEX-5016	&&2 S+0== "삑" >3 ||3 S+0== "L胸" S+0== "L背筋" S+0== "L背" S+0== "00。！？!?、「"	set-target "쫙"	ぴっと胸を張り 쫙 가슴을 펴
+cx:mimetic-cues:50	LEX-5016	&&2 S+0== "바삭바삭" ||10 S+1== "Lいく" B+1== "いく" B+1== "行く" S+1== "L行" S+1== "L進" S+1== "L終" S+1== "L片付" S+1== "L決ま" S+1== "Lこな" S+1== "Lやっ"	set-target "순조롭게"	さくさくいく 순조롭게 간다
+cx:mimetic-cues:60	LEX-5016	&&2 S+0== "두근두근" ||2 B+1== "言う" B+1== "いう"	set-verb@+1 "뛰다"	心臓がバクバク言い 심장이 두근두근 뛰고
+cx:mimetic-cues:62	LEX-5016	&&2 S+0== "두근두근" ||4 B+1== "食べる" B+1== "食う" B+1== "喰う" B+1== "たべる"	set-target "우걱우걱"	バクバク食べる 우걱우걱 먹는다
+cx:mimetic-cues:70	LEX-5016	&&2 ||3 S+0== "통통" S+0== "토닥토닥" S+0== "ぽんぽん" ||5 B+1== "使う" B+1== "言う" B+1== "出す" B+1== "買う" B+1== "撃つ"	set-target "펑펑"	そうぽんぽん使うわけにも 그렇게 펑펑 쓸 수도
+cx:mimetic-cues:80	LEX-5016	&&2 S+0== "すらりと" B+1== "抜く"	set-target "스르릉"	剣をすらりと抜いた 검을 스르릉 뽑았다
+cx:mimetic-cues:90	LEX-5016	&&2 S+0== "꼭" ||2 B+1== "なる" S+1== "Lな"	set-target "움찔" set-verb@+1 "오그라들다"	股間がキュッとなってしまい 움찔 오그라들어버려
+cx:mimetic-cues:100	LEX-5016	&&2 S+0== "じゃり" ||3 S+1== "Lと" &&2 S+1== "、" S+2== "じゃり" &&2 S-1== "、" S-2== "じゃり"	set-target "자박"	じゃり、じゃり、と 자박, 자박
+cx:mimetic-cues:110	LEX-5016	&&2 S+0== "중얼중얼" ||2 B+1== "言う" >4 ||5 S+0== "L不平" S+0== "L不満" S+0== "L文句" S+0== "L愚痴" S+0== "L悪口" S+0== "00。！？!?"	set-target "투덜투덜"	ぶつぶつと不満を口にしながら 투덜투덜 불만을
+cx:mimetic-cues:120	LEX-5016	&&2 S+0== "퍼뜩" >3 ||2 S+0== "L胸" S+0== "L息" S+0== "00。！？!?、"	set-target "흠칫"	はっと胸をつかれて 흠칫 가슴이
+cx:mimetic-cues:130	LEX-5016	&&2 S+0== "슬쩍" >4 S+0== "R髪" S+0== "00。！？!?"	set-target "찰랑"	さらっと、長い黒髪が風に揺れる 찰랑, 긴 흑발이
 //= te-loss	after Select 209	guard ||4 S+0== "損" S+0== "損す" S+0== "損を" S+0== "損し"	A 損 right after a verb in て is the loss that doing it brings, so the て is -어서 (spec GRM-4010): with ない after it, past は, も, の or が, it is what one stands to lose, 손해 볼 것, also after ても (知っても損はない 알아도 손해 볼 것은 없다; 聞いて損のない内容 들어서 손해 볼 것이 없는 내용, 知って損はない 알아서 손해 볼 것은 없다); 損することはない keeps 손해 볼 일. A する after 損 and は or も is 보다 (買って損はしない 사서 손해는 보지 않는다).
 //~ te-reason	6=6서 있어=있어서 둬=둬서	The て endings in -어 and their -어서.
 //: te-before	&&2 F-1== "verb" ||2 U-1== "Rて" U-1== "Rで"	The word before is a verb in て or で.
