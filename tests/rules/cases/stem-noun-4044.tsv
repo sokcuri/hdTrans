@@ -1,0 +1,29 @@
+# 규칙: GRM-4044
+rule	input	expected	kind	layer
+cx:stem-noun:10	正はその場から立ち上がると、文句一つ言わずに用具入れからモップを取り出す。	has:용구 넣기로부터	fix	rewrites
+cx:stem-noun:10	原島さんは今から掃除用具入れを整理して、自分のスペースを作るといいのです！	has:청소 용구 넣기를	fix	rewrites
+cx:stem-noun:10	明日明後日は、自分で最後の煮詰めをするように。わかった？	has:졸이기를	fix	rewrites
+cx:stem-noun:10	芹沢さんの態度には、照れや冗談の入る余地などない。	has:쑥스러워하기나	fix	rewrites
+cx:stem-noun:10	「慶ちゃん、待ち受けの写真、わたしにしてくれたんだ」	lacks:기다리고의	fix	rewrites
+cx:stem-noun:10	ステージの進行を妨げないよう、なるべく最小限で声かけをしていく。	has:말을 걸기를	fix	rewrites
+cx:stem-noun:10	父ちゃんの残してくれた本や 書きつけが いっぱいあって―	lacks:두고가	fix	rewrites
+cx:stem-noun:10	羅漢様方は山神様のお側仕えをされると共に	has:섬기기를	fix	rewrites
+cx:stem-noun:10	我は時を経ずして正気を失い、穢れを撒き散らす祟り神となろう。	has:더럽혀지기를	fix	rewrites
+cx:stem-noun:10	文字化けの謎	lacks:변하고의	fix	rewrites
+cx:stem-noun:10	「ふーん……出来がいいから、俺の分はないと……」	lacks:있고가	fix	rewrites
+cx:stem-noun:10	まずしっかりした地固めをするのが先決と考えるのも、自然な選択に思えます。	has:굳히기를	fix	rewrites
+cx:stem-noun:10	小菊と小花の身請けの金は600円やったな？	lacks:찾고의	fix	rewrites
+cx:stem-noun:10	木ノ葉隠れの里と 渦潮隠れの里は 深い関係にあったの	lacks:숨고의	fix	rewrites
+cx:stem-noun:10	私が さっきコンビニで買ってきた このケミカルなプリンが この 本格的な固めのプリンに 進化したのだ！	has:굳히기의	fix	rewrites
+cx:stem-noun:10	雪崩に巻き込まれはしたが、	눈사태에 말려 들어가기는 했지만,	keep	rewrites
+cx:stem-noun:10	一応見はしたけど	일단 보기는 했지만	keep	rewrites
+cx:stem-noun:10	誰も助けに来ないわ	lacks:돕기	keep	rewrites
+cx:stem-noun:10	食べに行こう	먹으러 가자	keep	rewrites
+cx:stem-noun:10	時間がかかるし、おまけに	has:걸리고,	keep	rewrites
+cx:stem-noun:10	色々とうちあわせをしないとダメだからね	has:여러모로	keep	rewrites
+cx:stem-noun:10	受け入れを決めた	has:수락을	keep	rewrites
+cx:stem-noun:10	読みもしない	읽지도 않는다	keep	rewrites
+cx:stem-noun:10	考え中です	생각 중입니다	keep	rewrites
+cx:stem-noun:10	「隠れ教育費が家計を圧迫している」	has:교육비가	keep	rewrites
+cx:stem-noun:10	商品が棚から落ち営業が難しい状態になっています。	has:선반에서	keep	rewrites
+cx:stem-noun:10	「おいコラっ！　なんとか言えやっ！」	lacks:있기야	keep	rewrites

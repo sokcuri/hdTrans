@@ -577,6 +577,16 @@ constexpr NamedFeature kFeatures[] = {
          const char32_t r = text::DecodeRune(it->group->surface).cp;
          return text::IsLetter(r) || text::IsDigit(r);
      }},
+    // The surface holds a kanji other than 々.
+    {"kanji",
+     [](Flusher&, const Item* it) {
+         for (std::string_view t = it->group->surface; !t.empty();) {
+             const text::Rune r = text::DecodeRune(t);
+             if (text::IsKanji(r.cp) && r.cp != U'々') return true;
+             t.remove_prefix(std::max<std::size_t>(r.size, 1));
+         }
+         return false;
+     }},
     // The surface is katakana only, with ー (KatakanaSurface).
     {"katakana", [](Flusher&, const Item* it) { return KatakanaSurface(it->group->surface); }},
     // The Korean of the selected candidate is empty or spaces.

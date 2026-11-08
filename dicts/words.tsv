@@ -28539,3 +28539,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 灰色がか	회색빛이 &K9@	M428	UCr		GN			LEX-5204				w:35040
 茶がか	갈색빛이 &K9@	M428	UCr		GN			LEX-5204				w:35041
 モチ米	찹쌀	I110			GN			LEX-5152: 中はモチ米 안은 찹쌀			もちごめ	w:34930
+振込先	입금처	N110			GN			LEX-5106: 振込先口座 입금처 계좌				w:34816
+不随	불수	N110			GN			LEX-5106: 下半身不随 하반신 불수				w:34818

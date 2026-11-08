@@ -1,0 +1,35 @@
+# 규칙: LEX-5106
+rule	input	expected	kind	layer
+segmentation:kanji-cover	米中間選挙で対イラン軍事作戦を批判してきた民主党が上下両院を奪還し、原油価格は下落した。	has:미 중간 선거	fix	lookup
+segmentation:kanji-cover	民主党が大勝した米中間選挙後の対応について	has:미 중간 선거 후	fix	lookup
+segmentation:kanji-cover	指笛で鳴きます江戸家代々伝統の初春のウグイスです。	has:에도가 대대로 전통	fix	lookup
+segmentation:kanji-cover	都道府県警が把握した詐欺被害金の振込先口座を警察庁で集約し	has:입금처 계좌	fix	lookup
+segmentation:kanji-cover	軽乗用車が対向車線にはみ出し乗用車と衝突しました。	has:경승용차가	fix	lookup
+segmentation:kanji-cover	この事故で、軽乗用車を運転していた４３歳のアルバイト従業員の男性が	has:경승용차를	fix	lookup
+segmentation:kanji-cover	図書部が丸ごと新生徒会執行部になってからも、この部屋は俺たちの憩いの場だ。	has:신학생회 집행부	fix	lookup
+segmentation:kanji-cover	「前生徒会副会長の多岐川葵さんと、図書部部長の白崎つぐみさんです」	has:전학생회 부회장	fix	lookup
+segmentation:kanji-cover	アビドス高校生徒会が消えたことで	has:고등학교 학생회	fix	lookup
+segmentation:kanji-cover	調査に協力した千葉大の白川優治教授（教育社会学）は	has:(교육 사회학)	fix	lookup
+segmentation:kanji-cover	そしてこれが学院内免責特権のパスになる。	has:학원내 면책 특권	fix	lookup
+segmentation:kanji-cover	それではただ今から二藤部内閣総理大臣の記者会見を行います。	has:내각총리대신	fix	lookup
+segmentation:kanji-cover	この日本に 『異星生命体の超巨大な宇宙船がやってきた』 のだ。	has:이성생명체	fix	lookup
+segmentation:kanji-cover	英語・露語・日本語・仏語で全周波数帯で行った。	has:전주파수대	fix	lookup
+segmentation:kanji-cover	主力艦上戦闘機の更新	has:주력 함상전투기	fix	lookup
+segmentation:kanji-cover	装甲甲板を持つ英正規空母よ。	lacks:히데마사	fix	lookup
+segmentation:kanji-cover	坊ノ岬沖海戦で米艦載機の猛攻と戦ったの。	has:미 함재기	fix	lookup
+segmentation:kanji-cover	「第39回信州上田大花火大会」開催に伴うお知らせとお願い	has:불꽃놀이	fix	lookup
+segmentation:kanji-cover	警視庁身元不明人相談室	has:불명인 상담실	fix	lookup
+segmentation:kanji-cover	そうだぜ、日本海防艦はちっこいけど意外と侮れねぇ。	has:일본 해방함	fix	lookup
+segmentation:kanji-cover	下半身不随など無かったかのように歩けるようになった	has:하반신 불수	fix	lookup
+segmentation:kanji-cover	ハワイ攻撃機動部隊を始め、様々な作戦に参加したわ！	has:공격 기동부대	fix	lookup
+segmentation:kanji-cover	将来は臨海地区の国際展示場に出展したい	has:국제 전시장	fix	lookup
+segmentation:kanji-cover	駅東公園前	has:히가시코우엔	keep	lookup
+segmentation:kanji-cover	多賀大社前	has:다가 다이샤	keep	lookup
+segmentation:kanji-cover	菜月昴は平成日本生まれのゆとり教育世代出身である。	has:헤이세이 일본	keep	lookup
+segmentation:kanji-cover	中国勢もＥＶ大手の比亜迪（ＢＹＤ）や電子商取引大手のアリババ集団などが日本市場に攻勢をかける。	has:중국세도	keep	lookup
+segmentation:kanji-cover	中谷氏は「米国に制裁撤回を粘り強く求めていく」と強調。	has:나카타니 씨는	keep	lookup
+segmentation:kanji-cover	あの一角だけは、古手梨花ファンクラブ親睦会々場と化している…ッ！！	lacks:아이아이	keep	lookup
+segmentation:kanji-cover	1000円とそれから五百円玉しかない	has:500엔	keep	lookup
+segmentation:kanji-cover	おれが航宙資格 第二種免許を取るために ここへ来てからすでに 1ヶ月が過ぎようとしていた	has:제2종 면허를 따기	keep	lookup
+segmentation:kanji-cover	生徒会長御自ら、一体どんな相談を持ってきたんだろう。	has:학생회장	keep	lookup
+segmentation:kanji-cover	今のところはコレットを含め皆無事のようだが	has:콜레트를	keep	lookup
