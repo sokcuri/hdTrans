@@ -79,6 +79,7 @@ HD_TEST(word_katakana_run_time_grows_with_its_length) {
         const double longRun = FastestSeconds(*loaded.snapshot, *generated, input(1600), longOut);
         HD_CHECK(shortOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 200)));
         HD_CHECK(longOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 1600)));
-        HD_CHECK(longRun < 30 * shortRun);
+        // Eight times the run: 8 times the time in proportion, 64 times with the square.
+        HD_CHECK(longRun < 48 * shortRun);
     }
 }

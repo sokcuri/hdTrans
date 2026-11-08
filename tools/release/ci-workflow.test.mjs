@@ -795,17 +795,29 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
 const perfStep = build.slice(build.indexOf('      - name: Performance budget\n'),
   build.indexOf('\n      - name:', build.indexOf('      - name: Performance budget\n') + 1));
 
-test('the performance budget measures pull requests only and never fails the job', () => {
+test('the performance budget measures labelled and release pull requests and manual runs only, and never fails the job', () => {
   const job = build.slice(build.indexOf('\n  perf:\n'), build.indexOf('\n  release:\n'));
-  const runs = new Function('github', 'needs', 'cancelled', `return (${foldedCondition(job)});`);
+  const contains = (list, item) => list.includes(item);
+  // The object filter labels.*.name of the expression, as a plain list.
+  const condition = foldedCondition(job).replace('github.event.pull_request.labels.*.name', 'github.event.pull_request.labelNames');
+  const runs = new Function('github', 'needs', 'cancelled', 'contains', `return (${condition});`);
   const needs = (run, native) => ({ gate: { outputs: { run, native } } });
-  assert.equal(runs({ event_name: 'pull_request' }, needs('true', 'true'), () => false), true);
-  assert.equal(runs({ event_name: 'pull_request' }, needs('', ''), () => false), true);
-  assert.equal(runs({ event_name: 'pull_request' }, needs('true', 'false'), () => false), false);
-  assert.equal(runs({ event_name: 'pull_request' }, needs('false', 'true'), () => false), false);
-  for (const event_name of ['push', 'schedule', 'workflow_dispatch']) {
-    assert.equal(runs({ event_name }, needs('true', 'true'), () => false), false, event_name);
+  const pr = (labels, head_ref = 'fix/x', base_ref = 'develop') =>
+    ({ event_name: 'pull_request', head_ref, base_ref, event: { pull_request: { labelNames: labels } } });
+  const go = (github, n = needs('true', 'true')) => runs(github, n, () => false, contains);
+  assert.equal(go(pr(['perf'])), true);
+  assert.equal(go(pr(['perf']), needs('', '')), true);
+  assert.equal(go(pr(['perf']), needs('true', 'false')), false);
+  assert.equal(go(pr(['perf']), needs('false', 'true')), false);
+  assert.equal(go(pr([])), false);
+  assert.equal(go(pr(['mistranslation'])), false);
+  assert.equal(go(pr([], 'develop', 'main')), true);
+  assert.equal(go(pr([], 'develop', 'develop')), false);
+  assert.equal(go({ event_name: 'workflow_dispatch', event: {} }), true);
+  for (const event_name of ['push', 'schedule']) {
+    assert.equal(go({ event_name, event: {} }), false, event_name);
   }
+  assert.match(job, /contains\(github\.event\.pull_request\.labels\.\*\.name, 'perf'\)/);
   assert.match(job, /^    needs: \[gate, build\]$/m);
   assert.match(job, /^    continue-on-error: true$/m);
   assert.match(job, /name: hdtrans-linux\n          path: build\/linux\n/);
@@ -884,6 +896,20 @@ test('the sanitizer job runs every unit test shard on pushes and all but the meg
   }
   assert.ok(!runs(full, 'units') && !runs(quick, 'units'));
   assert.match(job, /if \[\[ "\$SANITIZE_ALL" != true \]\]; then targets=\(--target hdtrans_tests hdtrans_cli\); fi/);
+});
+
+test('windows-x86 leaves the data-only rule-case suites to linux on pull requests and runs them on pushes', () => {
+  const step = build.slice(build.indexOf('      - name: Test without external fixtures\n'),
+    build.indexOf('\n      - name:', build.indexOf('      - name: Test without external fixtures\n') + 1));
+  assert.match(step, /if \[\[ "\$\{\{ matrix\.preset \}\}" == windows-x86 && "\$\{\{ github\.event_name \}\}" == pull_request \]\]; then/);
+  const exclude = new RegExp(step.match(/exclude=\(-E '([^']+)'\)/)[1]);
+  for (const name of ['rules.cases.themes', 'rules.cases.documents', 'rules.variants', 'rules.packs', 'rules.packs.guide', 'examples']) {
+    assert.ok(exclude.test(name), name);
+  }
+  for (const name of ['unit.word', 'unit.engine.megabyte', 'rules.critical', 'rules.drops', 'rules.constructions', 'cli.version']) {
+    assert.ok(!exclude.test(name), name);
+  }
+  assert.match(step, /--verbose "\$\{exclude\[@\]\}"/);
 });
 
 const ciOkJob = build.slice(build.indexOf('\n  ci-ok:\n'));
