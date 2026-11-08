@@ -8,8 +8,8 @@ dict:audit-novel-2	すこしだけ待って。	has:조금만 기다려	fix	looku
 dict:audit-novel-2	成る程な。	has:그렇구나	fix	lookup
 dict:audit-novel-2	いい飲みっぷりだね。	has:마시는 모습	fix	lookup
 dict:audit-novel-2	気が散って勉強できない。	has:정신이 산만해져	fix	lookup
-dict:audit-novel-2	浜辺に流れ着いた。	has:해변에 밀려왔다	fix	lookup
-dict:audit-novel-2	物知りだな。	has:척척박사네	fix	lookup
+dict:audit-novel-2	浜辺に流れ着いた。	has:해변에 떠밀려 왔다	fix	lookup
+dict:audit-novel-2	物知りだな。	has:박식하네	fix	lookup
 dict:audit-novel-2	物知りなお爺さん	has:박식한 할아버지	fix	lookup
 dict:audit-novel-2	すごいワザだ。	has:대단한 기술	fix	lookup
 dict:audit-novel-2	よそ者は帰れ。	has:외지인은	fix	lookup
@@ -30,7 +30,7 @@ dict:audit-novel-2	熱を出して三日も寝込んだ。	has:앓아누웠다	f
 dict:audit-novel-2	ぐっすり寝込んでしまった。	has:잠들어버렸다	fix	lookup
 dict:audit-novel-2	たいしたことないよ。	has:별것 아니야	fix	lookup
 dict:audit-novel-2	下ごしらえをする。	has:밑준비를	fix	lookup
-dict:audit-novel-2	ふだんはおとなしい。	has:평소는	fix	lookup
+dict:audit-novel-2	ふだんはおとなしい。	has:평소에는	fix	lookup
 dict:audit-novel-2	大の字に寝転ぶ。	has:큰대자	fix	lookup
 dict:audit-novel-2	豆まきをしよう。	has:콩 뿌리기	fix	lookup
 dict:audit-novel-2	詳報を待つ。	has:상세 보도	fix	lookup
@@ -71,7 +71,7 @@ dict:audit-novel-2	楽勝でしょ。	has:식은 죽 먹기지	fix	lookup
 dict:audit-novel-2	拳を握ってグー！いいね！	has:굿!	keep	lookup
 dict:audit-novel-2	グーを出した。	has:주먹을 냈다	fix	lookup
 dict:audit-novel-2	彼は小さな村に流れ着いた。	has:떠밀려 왔다	fix	lookup
-dict:audit-novel-2	瓶が浜辺に流れ着いた。	has:밀려왔다	keep	lookup
+dict:audit-novel-2	瓶が浜辺に流れ着いた。	has:떠밀려 왔다	keep	lookup
 dict:audit-novel-2	推参つかまつった。	has:찾아왔소	fix	lookup
 dict:audit-novel-2	失礼仕る。	has:실례하겠소	fix	lookup
 dict:audit-novel-2	こんなの楽勝だよ。	has:식은 죽 먹기야	fix	lookup
@@ -90,3 +90,13 @@ dict:audit-novel-2	ご無礼つかまつった。	has:무례를 범했소	fix	lo
 dict:audit-novel-2	拝見つかまつる。	has:배견한다	keep	lookup
 dict:audit-novel-2	楽勝な試合だった。	has:만만한 시합	fix	lookup
 dict:audit-novel-2	「実際、筧なら楽勝なんじゃないか？」	has:식은 죽 먹기인 게	keep	lookup
+dict:audit-novel-2	先生って物知りなんだよ	has:박식해	fix	lookup
+dict:audit-novel-2	物知りなんです。	has:박식합니다	fix	lookup
+dict:audit-novel-2	殿に見参いたす。	has:알현	keep	lookup
+dict:audit-novel-2	結婚のお披露目	has:피로연	keep	lookup
+dict:audit-novel-2	無人島に流れ着いた。	has:떠밀려 왔다	fix	lookup
+dict:audit-novel-2	楽勝だったのです。	lacks:이기기	fix	lookup
+dict:audit-novel-2	楽勝楽勝！	has:식은 죽 먹기	fix	lookup
+dict:audit-novel-2	新しき艦	has:새로운 함	fix	lookup
+dict:audit-novel-2	ワザと負けた。	has:일부러 졌다	fix	lookup
+dict:audit-novel-2	ふだんから鍛えている。	has:평소부터	fix	lookup

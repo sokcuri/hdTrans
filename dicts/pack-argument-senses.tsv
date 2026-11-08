@@ -191,4 +191,3 @@ argument-senses:5083	落とす	v5	sense	obj=お節介|おせっかい|一言|ひ
 argument-senses:5120	遊ばせる	v1	sense	obj=@person|@animal	놀게 하다	LEX-5014		子供たちを遊ばせる 아이들을 놀게 하다 (놀리다 아님)			
 argument-senses:5650	制する	vs	sense	obj=@person|あたし|わたし|オレ|ボク|みんな|皆	제지하다	LEX-5650		俺を軽く制する 나를 가볍게 제지한다			
 argument-senses:5652	加わる	v5	sense	subj=@person|@force|仲間|メンバー|新メンバー|新人|艦娘	합류하다	LEX-5650		新メンバーが加わる 새 멤버가 합류한다			
-argument-senses:5653	流れ着く	v5	sense	subj=@person	떠밀려 오다	LEX-5651		人達が流れ着いた 사람들이 떠밀려 왔다			
