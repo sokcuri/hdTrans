@@ -380,6 +380,19 @@ std::string_view Feature(const AttachClause* c, std::string_view key) {
     return {};
 }
 
+// Whether the argument word x is of class cls by the pack-classes files; a plural of a noun of the class is of it
+// (猫たち, 子供ら, 少年たち: noun.plural-suffix), whether the suffix is a word of its own or ends the word.
+bool ArgMember(const dict::PackTable& t, const Item* x, std::string_view cls) {
+    const std::string_view s = x->group->surface;
+    if (t.Member(s, cls)) return true;
+    if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), s)) {
+        const Item* head = x->prev;
+        return head != nullptr && head->group != nullptr && head->tokenIndex == x->tokenIndex && t.Member(head->group->surface, cls);
+    }
+    const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("noun.plural-suffix"), s);
+    return n > 0 && n < s.size() && t.Member(s.substr(0, s.size() - n), cls);
+}
+
 // Whether every atom of the row holds for the word, and its specificity: lexical atoms, class
 // depth, neighbour and form atoms, register atoms, atom count.
 bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, std::array<int, 5>& spec) {
@@ -467,7 +480,7 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             for (const std::string& v : a.values) {
                 if (v.starts_with("@")) {
                     // by the pack-classes files, or by the class the attachment gives the argument
-                    if ((x != nullptr && t.Member(x->group->surface, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
+                    if ((x != nullptr && ArgMember(t, x, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
                         held = true;
                         depth = std::max(depth, t.Depth(v));
                     }

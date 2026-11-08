@@ -954,6 +954,8 @@ lemma	classes
 登山	@activity
 白木	@person
 皆	@person
+みんな	@person
+人々	@person
 皇帝	@person.higher
 皿	@container|@tableware
 盆	@container|@tableware
