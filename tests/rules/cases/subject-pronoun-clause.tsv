@@ -34,7 +34,7 @@ cx:subject-no:10	君の来ない夜は長い。	네가 오지 않는 밤은 길�
 cx:subject-no:10	自分のダメなところ	!rule:cx:subject-no:10	keep	rewrites
 cx:subject-no:10	朝の来ない夜	아침이 오지 않는 밤	fix	rewrites
 cx:subject-before-ga:40	誰の見た夢	누가 본 꿈	fix	rewrites
-cx:subject-before-ga:40	誰の言った言葉	누가 말한 말	fix	rewrites
+cx:subject-before-ga:40	誰の言った言葉	누가 한 말	fix	rewrites
 cx:subject-before-ga:40	誰の住む家	누가 사는 집	fix	rewrites
 cx:subject-before-ga:40	誰の行かない店	누가 가지 않는 가게	fix	rewrites
 cx:subject-before-ga:40	誰の本	누구의 책	keep	rewrites
