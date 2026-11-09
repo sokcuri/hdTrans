@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.9.5](https://github.com/sokcuri/hdTrans/compare/v0.9.4...v0.9.5) (2026-11-09)
+
+
+### Bug Fixes
+
+* **dict:** read common game and VN verbs, loanwords and idioms in today's Korean, part 2 ([#793](https://github.com/sokcuri/hdTrans/issues/793)) ([3a0b9e8](https://github.com/sokcuri/hdTrans/commit/3a0b9e86526b8227140d9ce16a9a955d0eb9c78e))
+* **dict:** read dated or wrong default glosses of common game and VN words, part 1 ([#787](https://github.com/sokcuri/hdTrans/issues/787)) ([4a89311](https://github.com/sokcuri/hdTrans/commit/4a89311436af1020de23242c95cee0b77e0dc829))
+* **dict:** read everyday words of captions by their usual Korean ([#798](https://github.com/sokcuri/hdTrans/issues/798)) ([4b35172](https://github.com/sokcuri/hdTrans/commit/4b35172532f5b93cdd5bca7b89fda7cb050c3203))
+* **dict:** read food words of captions by the words Korean food writing uses ([#797](https://github.com/sokcuri/hdTrans/issues/797)) ([979d8f8](https://github.com/sokcuri/hdTrans/commit/979d8f8360ed84b9c4fe210050de1564db005ffd))
+* **dict:** read katakana idioms (ゴマをする, サバを読む, ネコをかぶる, ハッパをかける), 年の瀬 as 연말, 新幹線 as 신칸센 and other novel words by their usual sense ([#801](https://github.com/sokcuri/hdTrans/issues/801)) ([09a3d9e](https://github.com/sokcuri/hdTrans/commit/09a3d9ea47aa155fe8a405b1336050c85b8fedde))
+* **dict:** read news, weather and politics words of captions by their current Korean ([#788](https://github.com/sokcuri/hdTrans/issues/788)) ([35da59a](https://github.com/sokcuri/hdTrans/commit/35da59a3ceecdb2011c9b4931364f11658db1c1d))
+* **dict:** read sports words of captions as Korean broadcasts say them and write loanwords in their familiar spelling ([#791](https://github.com/sokcuri/hdTrans/issues/791)) ([a6fb407](https://github.com/sokcuri/hdTrans/commit/a6fb40730eaead210a89906635126f7b494714e7))
+* **dict:** read stative Sino する nouns as adjectives, お昼寝する as 낮잠 자다, きさまら as 네놈들 and ていたんだ like ていた ([#795](https://github.com/sokcuri/hdTrans/issues/795)) ([f70d39d](https://github.com/sokcuri/hdTrans/commit/f70d39dabf3fe142deaf73f603195fa77c0cad47))
+* **dict:** read 洗い物 as 설거지, 侮る as 얕보다, 大盛り as 곱빼기, 仕方あるまい as 어쩔 수 없겠지 and other novel words by their usual sense ([#786](https://github.com/sokcuri/hdTrans/issues/786)) ([15a4cc5](https://github.com/sokcuri/hdTrans/commit/15a4cc58dbf5e554064b0b20a9335a9cc95cd89a))
+* **dict:** read 流れ着く as 밀려오다, 寝込む as 앓아눕다, 物知り as 척척박사, 新メンバー as 새 멤버 and other novel words by their usual sense ([#792](https://github.com/sokcuri/hdTrans/issues/792)) ([ce5c458](https://github.com/sokcuri/hdTrans/commit/ce5c458cab3e59567c164b42a18bd52f52e7ad85))
+* **dict:** read 笑う as 웃다 after a face or a look, 후들거리다 only after legs, and 一月 after a year as 1월 ([#803](https://github.com/sokcuri/hdTrans/issues/803)) ([ede7fb8](https://github.com/sokcuri/hdTrans/commit/ede7fb87770924f383478705db6ce6a6d0386b04))
+* **grammar:** keep -어 before auxiliaries after rows that pick -고, and conjugate 담다 and 머금다 as verbs ([#799](https://github.com/sokcuri/hdTrans/issues/799)) ([3c07275](https://github.com/sokcuri/hdTrans/commit/3c07275868f61ef81fc92babac282d74f8af4d08))
+* **grammar:** keep the potential of a common す verb before a contracted ている, and read a lexical causative す verb as itself in every form ([#783](https://github.com/sokcuri/hdTrans/issues/783)) ([3e03edb](https://github.com/sokcuri/hdTrans/commit/3e03edb491bb1d362a7b11740f76ed040390b5fd))
+* **grammar:** read a potential's てはいない in the present and てはいません as 수는 없습니다, and 遊ばせる with a person as 놀게 하다 ([#785](https://github.com/sokcuri/hdTrans/issues/785)) ([f722c0b](https://github.com/sokcuri/hdTrans/commit/f722c0b894beb3ab9718c5248a129e68ad99ed3f))
+* **grammar:** read a す verb's せ before ながら as the verb, and a potential's てはいる as 수는 있다 ([#784](https://github.com/sokcuri/hdTrans/issues/784)) ([61e6ec1](https://github.com/sokcuri/hdTrans/commit/61e6ec178ff4d40b052598ebbe3cf175e40fae80))
+* **grammar:** read Kansai requests, んといて, final で and ひん negatives as standard forms ([#808](https://github.com/sokcuri/hdTrans/issues/808)) ([6755289](https://github.com/sokcuri/hdTrans/commit/6755289f576f88144e4a5ea9550082332b4fc414))
+* **grammar:** read the している of a change that leaves a state as 되어 있다, and the に before a 並ぶ of equals as (와)과 ([#794](https://github.com/sokcuri/hdTrans/issues/794)) ([d7a1e77](https://github.com/sokcuri/hdTrans/commit/d7a1e77aad30e654ad8745398de6cf1e08918018))
+* **grammar:** read the てはいる and てはいない of できる and other 할 수 있다 words, 分かってはいない as 알지는 못하다, 共 after a person as 들, and 起こす an animal as 깨우다 ([#789](https://github.com/sokcuri/hdTrans/issues/789)) ([f7aefa4](https://github.com/sokcuri/hdTrans/commit/f7aefa43a9ac9d90ddda84b760be112268703178))
+* **grammar:** read 言う after a て-form as 말하다, 담다 before a noun by its verb, and a Vてみ before んな as みんな ([#804](https://github.com/sokcuri/hdTrans/issues/804)) ([9ed1a27](https://github.com/sokcuri/hdTrans/commit/9ed1a275f8ecd995dcdeb7ae152e235c774218f2))
+* **names:** name a common word only on its evidence: status windows, one-off cues and same-reading rubies rename no other line ([#790](https://github.com/sokcuri/hdTrans/issues/790)) ([581dafe](https://github.com/sokcuri/hdTrans/commit/581dafe385acb2b1fa2302ba53c7a7cc645eaf11))
+* **names:** transliterate kana speaker labels in captions ([#807](https://github.com/sokcuri/hdTrans/issues/807)) ([3de0a72](https://github.com/sokcuri/hdTrans/commit/3de0a72dec87256f9e710a9aabb7b10bfe8efbc6))
+* **numbers:** read a katakana コ alone after a number as the counter 個 ([#809](https://github.com/sokcuri/hdTrans/issues/809)) ([0cb3bd4](https://github.com/sokcuri/hdTrans/commit/0cb3bd4ba1766dd14e4cfae4af1912617d210304))
+* **output:** keep a katakana word a collocation row read and left empty from being read again by sound ([#796](https://github.com/sokcuri/hdTrans/issues/796)) ([7aa4cc9](https://github.com/sokcuri/hdTrans/commit/7aa4cc95f84e11735da65d2f2cc89f17c929b67e))
+* **output:** read an unknown hiragana word after a typed space or a katakana word by sound, and keep a kanji in parentheses that is no reading ([#802](https://github.com/sokcuri/hdTrans/issues/802)) ([fb8e8d7](https://github.com/sokcuri/hdTrans/commit/fb8e8d7746a34070b71ebd049d0d8301efcee56d))
+* **output:** space a noun after a typed space past an empty お, and join a number after a counted katakana word to the next word ([#800](https://github.com/sokcuri/hdTrans/issues/800)) ([4503dc7](https://github.com/sokcuri/hdTrans/commit/4503dc7440d9b6c929537b68132198931a4846cf))
+* **release:** stop common words becoming names in documents and fix dialect, dates, stretched words and caption labels ([06092cc](https://github.com/sokcuri/hdTrans/commit/06092ccf70365d1cd2ed8ec6eef279360bcf7d6c))
+* **sound:** read a word split by a ～ or a small vowel inside it as that word ([#806](https://github.com/sokcuri/hdTrans/issues/806)) ([fe0ddec](https://github.com/sokcuri/hdTrans/commit/fe0ddeca8979e5218a06ff1df670ef7ea8ae238e))
+
 ## [0.9.4](https://github.com/sokcuri/hdTrans/compare/v0.9.3...v0.9.4) (2026-11-08)
 
 
