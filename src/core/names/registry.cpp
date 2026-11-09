@@ -170,6 +170,29 @@ bool Registry::WordAloud(std::string_view base, std::string_view reading) {
     return false;
 }
 
+bool Registry::OrdinaryReading(std::string_view base, std::string_view reading) {
+    if (snap_ == nullptr || !AllRunes(base, IsKanji) || !Flags(base).common) return false;
+    const std::string kana = ToHiragana(reading);
+    // A word of the dictionary in kana with the Korean of a common sense of the base (ちから 힘 over 力 힘).
+    // A place the base also names with that sound reads by it (竜宮(りゅうぐう) 류구).
+    const std::string sound = text::FromKana(kana, text::Preset::Fan);
+    for (const dict::Candidate& c : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == base && c.codes->sem.HasCode("QCT") && IsHangulText(c.target) && text::SameSound(c.target, sound)) return false;
+    }
+    std::set<std::string> korean;
+    for (const dict::Candidate& c : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == base && !c.codes->sem.HasCode("QPN") && IsHangulText(c.target)) korean.emplace(c.target);
+    }
+    for (const dict::Candidate& c : snap_->RetrieveRecords(kana, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == kana && !c.codes->sem.HasPrefix("QPN") && korean.count(std::string(c.target)) > 0) return true;
+    }
+    // A kana spelling of the base word that the kana layer lists (kana.tsv: ちから 力, びんしょう 敏捷).
+    for (const dict::UserEntry* e : snap_->TextPlain().Search(kana, dict::LookupMode::General)) {
+        if (e->kana && e->key == kana && korean.count(e->target) > 0) return true;
+    }
+    return false;
+}
+
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
     // A reading over a name of no common sense names it when the reading is a name too or no
@@ -663,7 +686,7 @@ void Registry::Add(std::string_view rawLine) {
         RubyMatch m;
         if (!FindRuby(line, from, m)) break;
         const std::string base(m.base), kana(m.reading);
-        if (IsKanaText(kana) && !Gikun(base, kana)) {
+        if (IsKanaText(kana) && !Gikun(base, kana) && !OrdinaryReading(base, kana)) {
             count(gloss_, base);
             SetReading(base, kana);
         }
@@ -686,11 +709,44 @@ void Registry::Add(std::string_view rawLine) {
         count(gloss_, std::string(m.reading));
     }
     bool script = false;
-    if (const std::string label = Label(line, script); !label.empty()) {
+    // A run of lines that open with a bracketed field and text after it that holds a value on one of its lines
+    // (【ジョブ】　無し, 【力】　16) is a status window: its fields are no speakers, however often the window
+    // repeats; a run of speaker lines (【若葉】おはよう) keeps its labels (spec LEX-5175).
+    bool value = false, speech = false;
+    std::string fieldName;
+    const bool field = BracketField(line, value, fieldName, speech);
+    const std::string label = Label(line, script);
+    if (!field) {
+        fieldRunValue_ = false;
+        fieldRunRepeats_ = false;
+        fieldRunSpeech_ = false;
+        fieldRunLines_ = fieldRunValues_ = 0;
+        fieldRunLabels_.clear();
+        fieldRunNames_.clear();
+    } else {
+        fieldRunLines_++;
+        if (value) fieldRunValues_++;
+        fieldRunRepeats_ = fieldRunRepeats_ || !fieldRunNames_.insert(fieldName).second;
+        fieldRunSpeech_ = fieldRunSpeech_ || speech;
+        // A status window has values on two lines and on half the run, or a value among three fields or more
+        // that each come once and none reads as speech (名前／ジョブ／力：35); one number said in a run of speakers
+        // (【健太】85 beside 【若葉】うん) makes none.
+        const bool window = (fieldRunValues_ >= 2 && 2 * fieldRunValues_ >= fieldRunLines_) ||
+                            (fieldRunValues_ >= 1 && fieldRunLines_ >= 3 && !fieldRunRepeats_ && !fieldRunSpeech_);
+        if (!fieldRunValue_ && window) {
+            for (const std::string& l : fieldRunLabels_) {
+                if (prefixes_[l] > 0) prefixes_[l]--;
+            }
+            fieldRunLabels_.clear();
+            fieldRunValue_ = true;
+        }
+    }
+    if (!label.empty() && !(field && fieldRunValue_)) {
         if (script) {
             count(labels_, label);
         } else {
             count(prefixes_, label);
+            if (field) fieldRunLabels_.push_back(label);
         }
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
@@ -822,8 +878,13 @@ void Registry::Add(std::string_view rawLine) {
         RubyMatch m;
         if (!FindGloss(line, from, m)) break;
         const std::string base(m.base);
-        // A word read aloud is no name unless an honorific follows (陸(くが)さん).
-        if (Gikun(base, m.reading) || (WordAloud(base, m.reading) && KanaHonorificAt(std::string_view(line).substr(m.end)).empty())) {
+        // A word read aloud is no name unless an honorific follows (陸(くが)さん), and a common word over
+        // a kana word of its own sense is no evidence of a name (spec LEX-5175).
+        // A reading inside a speaker label in round brackets names the speaker ((黒羽(こくう))).
+        const bool inLabel = m.begin > 0 && (std::string_view(line).substr(0, m.begin).ends_with("（") || std::string_view(line).substr(0, m.begin).ends_with("(")) &&
+                           (std::string_view(line).substr(m.end).starts_with("）") || std::string_view(line).substr(m.end).starts_with(")"));
+        if (Gikun(base, m.reading) || (!inLabel && OrdinaryReading(base, m.reading)) ||
+            (WordAloud(base, m.reading) && KanaHonorificAt(std::string_view(line).substr(m.end)).empty())) {
             from = m.end;
             continue;
         }
@@ -926,6 +987,12 @@ std::string Registry::CommonSurnameReading(std::string_view x) const {
         }
     }
     return "";
+}
+
+bool Registry::FullNamePart(std::string_view t) {
+    const auto& acc = Accepted();
+    const auto it = acc.find(std::string(t));
+    return it != acc.end() && (it->second.surname || it->second.given || it->second.label || it->second.hasParts);
 }
 
 std::vector<std::string> Registry::HonorificOnlyNames() {

@@ -17,7 +17,7 @@ cx:verb-cue:30	暴風雨が吹き荒れながら……。	!rule:cx:verb-cue:30	k
 cx:verb-cue:40	手紙を大切に仕舞う。	편지를 소중히 간직한다.	fix	rewrites
 cx:verb-cue:40	と大きな声を出して仕舞います。	!rule:cx:verb-cue:40	keep	rewrites
 cx:verb-cue:40	これで話は一度お仕舞い。	has:한 번 끝	keep	rewrites
-cx:verb-cue:50	レイモンドが荒々しく無線を切り、几帳面にポーチに仕舞う。	has:꼼꼼하게 포우치에 넣는다	fix	rewrites
+cx:verb-cue:50	レイモンドが荒々しく無線を切り、几帳面にポーチに仕舞う。	has:꼼꼼하게 파우치에 넣는다	fix	rewrites
 cx:verb-cue:50	金貨をアイテムボックスに仕舞いギルドを後にする。	has:아이템 박스에 넣어	fix	rewrites
 cx:verb-cue:50	と大きな声を出して仕舞います。	!rule:cx:verb-cue:50	keep	rewrites
 cx:verb-cue:50	「お仕舞い、礼」	!rule:cx:verb-cue:50	keep	rewrites

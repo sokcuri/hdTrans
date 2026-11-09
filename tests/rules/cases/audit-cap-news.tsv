@@ -1,0 +1,111 @@
+# 규칙: LEX-5600
+rule	input	expected	kind	layer
+dict:audit-cap-news	冷え込みとなった所も	has:추위가	fix	lookup
+dict:audit-cap-news	夜中に 急に冷え込んでたからか？	has:추워지고	fix	lookup
+dict:audit-cap-news	障害者向けの	has:장애인	fix	lookup
+dict:audit-cap-news	今日未明	has:새벽	fix	lookup
+dict:audit-cap-news	作業員が部品のようなものを運び出しています。	has:작업자가	fix	lookup
+dict:audit-cap-news	道路脇に転落しました。	has:추락했습니다	fix	lookup
+dict:audit-cap-news	日米両ツアーを兼ねる	has:미일	fix	lookup
+dict:audit-cap-news	あすの始発からは通常どおりの	has:첫차	fix	lookup
+dict:audit-cap-news	両首脳は防衛分野で	has:두 정상은	fix	lookup
+dict:audit-cap-news	参画しておりまして	has:참여하고	fix	lookup
+dict:audit-cap-news	退席した議員に	has:퇴장한	fix	lookup
+dict:audit-cap-news	さらに来月、東京で	has:다음 달	fix	lookup
+dict:audit-cap-news	全壊が２５８５棟など	has:완파가	fix	lookup
+dict:audit-cap-news	防衛大臣は訪問先で	has:방위상은	fix	lookup
+dict:audit-cap-news	厚生労働大臣を務めた	has:후생노동상을	fix	lookup
+dict:audit-cap-news	この中で両大臣は	has:두 장관은	fix	lookup
+dict:audit-cap-news	今回、金利据え置きが濃厚ですか	has:금리 동결이	fix	lookup
+dict:audit-cap-news	レストランなどは10％に据え置かれたまま。	has:동결된	fix	lookup
+dict:audit-cap-news	１兆円以上を給付すると表明。	has:지급한다고	fix	lookup
+dict:audit-cap-news	少子化対策の効果	has:저출산 대책	fix	lookup
+dict:audit-cap-news	国民一人当たり250円	has:1인당	fix	lookup
+dict:audit-cap-news	千葉市美浜区の老人ホームで	has:요양원에서	fix	lookup
+dict:audit-cap-news	市町村ごとの震度の情報が入りました。	has:시정촌마다	fix	lookup
+dict:audit-cap-news	今後は与野党ともに	has:여야 모두	fix	lookup
+dict:audit-cap-news	原油価格の高止まりの影響で	has:고공 행진	fix	lookup
+dict:audit-cap-news	人口戦略の策定に向け	has:수립을	fix	lookup
+dict:audit-cap-news	近く立ち上がる有識者会議と	has:전문가 회의	fix	lookup
+dict:audit-cap-news	遺体の身元や出火原因を調べています。	has:발화 원인	fix	lookup
+dict:audit-cap-news	被災地では	has:피해 지역에서는	fix	lookup
+dict:audit-cap-news	避難所や被災した自宅などで	has:피해를 입은 자택	fix	lookup
+dict:audit-cap-news	全国的に秋晴れの１日となりましたが	has:맑은 가을 날씨	fix	lookup
+dict:audit-cap-news	紅葉の見ごろを迎えますが	has:절정을	fix	lookup
+dict:audit-cap-news	強風にあおられ	has:휩쓸리	fix	lookup
+dict:audit-cap-news	今も多くのがれきが	has:잔해가	fix	lookup
+dict:audit-cap-news	弊社の工場の玄関に	has:저희 회사의	fix	lookup
+dict:audit-cap-news	3カ月前の人間ドックで	has:종합 건강검진	fix	lookup
+dict:audit-cap-news	義務づける方向で	has:의무화할	fix	lookup
+dict:audit-cap-news	売上全体の半分を占める	has:매출 전체	fix	lookup
+dict:audit-cap-news	売り上げが伸びた	has:매출이	fix	lookup
+dict:audit-cap-news	従来通りの方法	has:기존대로	fix	lookup
+dict:audit-cap-news	発災直後からの支援に	has:재해 발생 직후	fix	lookup
+dict:audit-cap-news	地対艦ミサイルの発射訓練	has:지대함 미사일	fix	lookup
+dict:audit-cap-news	北極圏のガス田開発を巡り	has:가스전 개발	fix	lookup
+dict:audit-cap-news	「おかけになった電話は…」。	has:거신 전화는	fix	lookup
+dict:audit-cap-news	全米各地で抗議	has:미국 각지에서	fix	lookup
+dict:audit-cap-news	今夜は冷え込む。	has:추워진다	fix	lookup
+dict:audit-cap-news	けさは各地で冷え込みました。	has:추워졌습니다	fix	lookup
+dict:audit-cap-news	個人消費が冷え込んでいる。	has:얼어붙고	fix	lookup
+dict:audit-cap-news	両国関係が冷え込んだ。	has:얼어붙었다	fix	lookup
+dict:audit-cap-news	景気の冷え込みが続く	has:경기 냉각이	fix	lookup
+dict:audit-cap-news	消費の冷え込みを懸念	has:소비 냉각을	fix	lookup
+dict:audit-cap-news	党の首脳が集まった	has:당 수뇌부가	fix	lookup
+dict:audit-cap-news	会社の首脳が交代	has:수뇌부가	fix	lookup
+dict:audit-cap-news	軍首脳が会談した	has:군 수뇌부가	fix	lookup
+dict:audit-cap-news	一家の働き手を失った	has:일꾼을	fix	lookup
+dict:audit-cap-news	日本製品の輸入	has:일본 제품의	fix	lookup
+dict:audit-cap-news	従来から言われている	has:예전부터	fix	lookup
+dict:audit-cap-news	全壊した住宅	has:완파된 주택	fix	lookup
+dict:audit-cap-news	半壊した住宅	has:반파된 주택	fix	lookup
+dict:audit-cap-news	被災された方々	has:피해를 입으신 분들	fix	lookup
+dict:audit-cap-news	被災されました。	has:피해를 입으셨습니다	fix	lookup
+dict:audit-cap-news	転落死した	has:추락사했다	fix	lookup
+dict:audit-cap-news	日米韓の首脳	has:한미일	fix	lookup
+dict:audit-cap-news	日韓首脳会談	has:한일 정상회담	keep	lookup
+dict:audit-cap-news	見頃を迎えた	has:절정을	fix	lookup
+dict:audit-cap-news	≫そのうえで新たなサイトが	has:그런 다음	fix	lookup
+dict:audit-cap-news	敬虔なクリスチャンが多い土地柄か	has:지역 특성	fix	lookup
+dict:audit-cap-news	ぜひ皆さん奮って ご応募いただきたい	has:적극적으로	fix	lookup
+dict:audit-cap-news	人工妊娠中絶の規制強化	has:인공 임신 중절	fix	lookup
+dict:audit-cap-news	体の芯まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	冷え込んだ空気	has:차가워진 공기	keep	lookup
+dict:audit-cap-news	場の空気が冷え込んだ	has:차가워졌다	keep	lookup
+dict:audit-cap-news	東京は冷え込みます	has:추워집니다	fix	lookup
+dict:audit-cap-news	外は冷え込んでいる	has:추워지고	fix	lookup
+dict:audit-cap-news	山間部では冷え込むでしょう	has:추워지겠지요	fix	lookup
+dict:audit-cap-news	日中韓の首脳	has:한중일	fix	lookup
+dict:audit-cap-news	始発便で羽田空港へ	has:첫 항공편으로	fix	lookup
+dict:audit-cap-news	始発便に乗り遅れた	has:첫차를	fix	lookup
+dict:audit-cap-news	始発電車に乗る	has:첫 전철을	fix	lookup
+dict:audit-cap-news	始発バスで帰った	has:첫 버스로	fix	lookup
+dict:audit-cap-news	始発駅	has:시발역	keep	lookup
+dict:audit-cap-news	東京は景気が冷え込んでいる	has:얼어붙고	fix	lookup
+dict:audit-cap-news	東京は需要が冷え込んだ	has:얼어붙었다	fix	lookup
+dict:audit-cap-news	足の先まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	この駅が始発です	has:출발역입니다	fix	lookup
+dict:audit-cap-news	始発の新幹線に乗った	has:첫 신칸센을	fix	lookup
+dict:audit-cap-news	始発の電車で	has:첫 전철로	fix	lookup
+dict:audit-cap-news	東京駅が始発です	has:도쿄역이 출발역입니다	fix	lookup
+dict:audit-cap-news	駅は始発から混んでいた	has:첫차	keep	lookup
+dict:audit-cap-news	この電車が始発です	has:첫차입니다	keep	lookup
+dict:audit-cap-news	心の奥まで冷え込んだ	has:차가워졌다	fix	lookup
+dict:audit-cap-news	山間部では景気が冷え込む	has:얼어붙는다	fix	lookup
+dict:audit-cap-news	山間部では体が冷え込む	has:차가워진다	keep	lookup
+dict:audit-cap-news	首脳会談が行われた	has:정상회담	keep	lookup
+dict:audit-cap-news	被災者の支援	has:이재민	keep	lookup
+dict:audit-cap-news	全米オープンで優勝	has:전미 오픈	keep	lookup
+dict:audit-cap-news	全米チャンピオン	has:전미 챔피언	keep	lookup
+dict:audit-cap-news	全米１位	has:전미 1위	keep	lookup
+dict:audit-cap-news	城を接収した	has:성을 접수했다	keep	lookup
+dict:audit-cap-news	体が冷え込んでしまった。	has:차가워져	keep	lookup
+dict:audit-cap-news	今シーズン一番の冷え込みとなりました。	has:추위가	keep	lookup
+dict:audit-cap-news	チームの首脳陣	has:수뇌진	keep	lookup
+dict:audit-cap-news	働き手不足が深刻だ	has:일손 부족	keep	lookup
+dict:audit-cap-news	王国の大臣が来た	has:대신이	keep	lookup
+dict:audit-cap-news	財務大臣の娘と会った	has:재무대신의	keep	lookup
+dict:audit-cap-news	首脳陣の判断	has:수뇌진	keep	lookup
+dict:audit-cap-news	据え置き型のゲーム機	has:거치형	keep	lookup
+dict:audit-cap-news	被災地域の範囲	has:피해 지역의 범위	fix	lookup
+dict:audit-cap-news	被災地区の住民	has:피해 지구의	fix	lookup

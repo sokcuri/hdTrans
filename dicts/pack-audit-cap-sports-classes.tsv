@@ -1,0 +1,4 @@
+#! layer=pack-classes
+# 스포츠 팩 행이 쓰는 부류 (LEX-5601)
+class	parent
+@count	

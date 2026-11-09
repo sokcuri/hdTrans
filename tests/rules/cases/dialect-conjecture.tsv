@@ -14,7 +14,7 @@ normalize:kansai-conjecture	(あや子)さあな どやろね｡	(아야코) 글
 normalize:kansai-conjecture	お赤飯は 祇園に帰るための保険やろか｡	팥찰밥은 기온에 돌아가기 위한 보험일까.	fix	normalize
 normalize:kansai-conjecture	さっきの子らも　ひもじいんやろな。	조금 전의 아이들도 시장하겠지.	fix	normalize
 normalize:kansai-conjecture	何じゃろな？	무엇일까?	fix	normalize
-normalize:kansai-conjecture	たまげたなぁ 何年ぶりじゃろか元気で何よりでした	has:몇 년만일까	fix	normalize
+normalize:kansai-conjecture	たまげたなぁ 何年ぶりじゃろか元気で何よりでした	has:몇 년 만일까	fix	normalize
 normalize:kansai-conjecture	(清十郎)う～ん 二丁はあるじゃろうな	has:2정은 있겠지	fix	normalize
 normalize:kansai-conjecture	（小杉）気付いてほしいんやろが書くしかあらへんがな	lacks:로가	fix	normalize
 ending:学生やろが	今 おばはんの話やろが	지금 아줌마는 이야기잖아	fix	builtin-ending

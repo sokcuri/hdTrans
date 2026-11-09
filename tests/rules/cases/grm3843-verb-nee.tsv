@@ -8,7 +8,7 @@ normalize:verb-nee	チッ、今日はろくな客がつかねえな。	쳇, 오�
 normalize:verb-nee	だから、これ以上はもたねぇって言ってんだろ	has:갖지 않는다고	fix	normalize
 normalize:verb-nee	元の石像はかなり渋い顔つきですからねえ。	원래의 석상은 꽤 떨떠름한 표정이니까요네.	keep	normalize
 normalize:verb-nee	「女の嫉妬は怖いねぇ」	「여자의 질투는 무섭네」	keep	normalize
-normalize:verb-nee	仲良しそうでいいわねぇ！	의좋은 사이 그렇고 좋네!	keep	normalize
+normalize:verb-nee	仲良しそうでいいわねぇ！	친한 사이 그렇고 좋네!	keep	normalize
 normalize:verb-nee	うーん、そういうものですかねぇ	으음, 그런 것입니까	keep	normalize
 normalize:verb-nee	お待たせ～。あとで感想聞かせてねぇ	기다렸지~. 나중에 감상 들려주어	keep	normalize
 normalize:verb-nee	それねー	그것이네―	keep	normalize

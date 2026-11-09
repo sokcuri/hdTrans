@@ -59,6 +59,15 @@ void BuildItems(const std::vector<ResolvedItem>& items, const std::vector<TokenT
                                 internal::WidthOf(it.surface) != 2) {
                                 break;
                             }
+                            // A number before 月, or before 日 after a word in 月, starts a part of a date of its own
+                            // (一月二日 1월 2일, 昨年一月 작년 1월, 今月二日 이번 달 2일).
+                            const std::string_view g = internal::Selected(it).gattr;
+                            if ((Contains(g, "Nj") || Contains(g, "Nd")) && index + 1 < count &&
+                                items[index + 1].tokenIndex == it.tokenIndex &&
+                                (items[index + 1].surface == "月" ||
+                                 (items[index + 1].surface == "日" && items[index - 1].surface.ends_with("月")))) {
+                                break;
+                            }
                             index++;
                         }
                     } else {

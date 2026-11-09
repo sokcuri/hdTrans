@@ -4,7 +4,7 @@ segment:na-space	だが 心配するな 俺が ぬぐいとってやろう。	�
 segment:na-space	聞き込みでござるな 拙者も行くでござる｡	탐문이구려 나도 가오.	fix	segment
 segment:na-space	おお～ 涼 よく知っているな 確かに そういう機能を持ったダンジョンも 西方諸国にはあるらしい	오오~ 양 잘 알고 있구나 확실히 그런 기능을 가진 던전도 서방 여러 나라에는 있는 것 같다	fix	segment
 segment:na-space	これ そこの御仁 心配するな お前は生きておる。	이것 거기의 그분 걱정하지 마 너는 살아 있다.	fix	segment
-segment:na-space	やはり おるな 見張りの連中が	역시 있네 파수의 무리가	fix	segment
+segment:na-space	やはり おるな 見張りの連中が	역시 있네 보초의 무리가	fix	segment
 segment:na-space	何か たくらんでるな 部長	뭔가 꾀하고 있구나 부장	fix	segment
 segment:na-space	今夜 カルロッタの指揮をするな さもないと恐ろしいことになる	오늘 밤 카를로타의 지휘를 하지 마 그렇지 않으면 무섭게 된다	fix	segment
 segment:na-space	ちょっと 反省はしてるな まだ	조금 반성은 하고 있구나 아직	fix	segment
@@ -22,7 +22,7 @@ sound:clipped-volitional-aux	早く天下取っちゃお？	빨리 강림나고 
 sound:clipped-volitional-aux	よーし じゃあ皆で行っちゃお！	좋아~ 그럼 모두가 가버리자!	fix	sound
 sound:clipped-volitional-aux	全部 モヤモヤ吐き出しちゃお。 それがいい。	전부 찜찜 토해내버리자. 그것이 좋다.	fix	sound
 sound:clipped-volitional-aux	だが しかし ここに私は 宣言しちゃお	하지만 여기에 나는 선언해버리자	fix	sound
-sound:clipped-volitional-aux	５歳児攻撃 いいかも！ こっちも同じようにやっちゃお！	5세아 공격 좋을지도! 여기도 똑같이 해 치우자!	fix	sound
+sound:clipped-volitional-aux	５歳児攻撃 いいかも！ こっちも同じようにやっちゃお！	5세아 공격 좋을지도! 이쪽도 똑같이 해 치우자!	fix	sound
 sound:clipped-volitional-aux	さあ！ 早く降りて食べちゃお	자! 빨리 내려 먹어버리자	fix	sound
 sound:clipped-volitional-aux	みんなにシェアしちゃお！	모두에게 쉐어해버리자!	fix	sound
 sound:clipped-volitional-aux	ウケる。 ねっ。 撮っちゃお。私も撮ろう。	웃겨. 저기. 찍어버리자. 나도 찍자.	fix	sound
@@ -72,7 +72,7 @@ cx:na-observed:30	うれしいこと言ってくれるな かんぱーい	기쁜
 cx:na-observed:30	私のことを可愛いとかやんちゃとか、好きなように言ってくれるな	나를 귀엽다든가 응석이라든지, 좋아하는 대로 말해 주는구나	fix	rewrites
 cx:na-observed:30	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	keep	rewrites
 cx:na-observed:30	水野家のためと思ってくれるな	미즈노가 때문에라고 생각하지 말아 줘	keep	rewrites
-cx:na-observed:35	むちゃくちゃ言うな この人	지독하게 말하는구나 이 사람	fix	rewrites
+cx:na-observed:35	むちゃくちゃ言うな この人	has:말도 안 되는 소리를 하는구나	fix	rewrites
 cx:na-observed:35	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	fix	rewrites
 cx:na-observed:35	心配するな 俺がいる	걱정하지 마 내가 있다	keep	rewrites
 segment:na-space	あっ 電話 借りるな ア… どうぞ	앗 전화 빌린데 아… 받아 주세요	keep	segment

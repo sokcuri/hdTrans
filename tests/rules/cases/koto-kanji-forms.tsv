@@ -22,7 +22,7 @@ normalize:spelling-variant	利人さんが伝えたい事。	has:싶은 것	fix	
 normalize:spelling-variant	工業エリアという事で。	has:에리어라는 것으로	fix	normalize
 normalize:spelling-variant	手術する事もできます。	has:수술할 수도	fix	normalize
 normalize:spelling-variant	確かめたい事があって｡	has:싶은 것이	fix	normalize
-normalize:spelling-variant	うわべだけをまねる事｡	has:흉내내는 것	fix	normalize
+normalize:spelling-variant	うわべだけをまねる事｡	has:흉내 내는 것	fix	normalize
 normalize:spelling-variant	近々 この地を去る事に	has:떠나는 것에	fix	normalize
 normalize:spelling-variant	調べりゃ　分かる事だ。	has:아는 것이다	fix	normalize
 normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
@@ -51,7 +51,7 @@ normalize:spelling-variant	小さな私の事も…覚えていてください�
 normalize:spelling-variant	なんで 僕の事がわかったんですか？	has:저를 알	fix	normalize
 normalize:spelling-variant	私の事丈博さんから聞いてませんか？	제 일다케히로 씨에게서 듣지 않습니까?	keep	normalize
 cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
-cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites
+cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총에 맞고 있는 것도 깨닫지	fix	rewrites
 cx:novel-fixes-4:221	もうろくに話す事もないだろう	has:이야기하는 일도 없을	keep	rewrites
 cx:novel-fixes-4:221	その輝きはくすぶる事もなく	has:일도 없이	keep	rewrites
 cx:novel-fixes-4:222	何か気になる事でも～？	has:신경 쓰이는 일이라도	keep	rewrites

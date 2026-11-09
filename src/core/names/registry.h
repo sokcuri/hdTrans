@@ -94,6 +94,9 @@ public:
     // the document means the person where it writes either alone. A part of one kanji counts only when it
     // is no common word.
     std::vector<std::string> FullNameParts();
+    // Whether the accepted surface t is a part of a full name or a speaker label (Name::surname, given,
+    // label), evidence that names the person wherever the document writes it.
+    bool FullNamePart(std::string_view t);
     // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
     std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
@@ -128,6 +131,11 @@ public:
     std::string DropReadings(std::string_view line, std::string* cueText = nullptr,
                              std::vector<std::string>* captionNames = nullptr);
 
+    // line with each hiragana name of a speaker label at its start written in Hangul by its sound
+    // ((のぼる)うん 노보루, ［たまお］はい, ゆう：うん, ひかる「待って」): a run of two to six kana that the
+    // dictionaries have as no whole common word, role or sound, read as the katakana names are (spec LEX-5800).
+    std::string ReadKanaLabels(std::string_view line);
+
     text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
     std::string chan = "짱";
@@ -140,6 +148,11 @@ private:
     std::string Label(std::string_view line, bool& script);
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
+    // Whether reading is the ordinary reading of the common kanji word base: a kana spelling of it that the
+    // kana layer lists (ちから 力, びんしょう 敏捷), or a kana word with the Korean of one of its common
+    // senses. Such a ruby is no evidence of a name, and none against one (spec LEX-5175); in a speaker
+    // label it still names. An on reading alone is not enough: names read so too (桃花 トウカ, 黒羽 こくう).
+    bool OrdinaryReading(std::string_view base, std::string_view reading);
     std::set<std::string_view> Words(std::string_view s);
     unsigned WordClasses(std::string_view s);
     bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
@@ -168,6 +181,11 @@ private:
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
+    // Whether the hiragana run t of a speaker label is a name (ReadKanaLabels); bracketed: the label is in brackets,
+    // which also tag sounds and voices.
+    bool KanaLabelName(std::string_view t, bool bracketed);
+    // Whether the dictionaries have the hiragana run t as a word whole (KanaLabelName).
+    bool KanaWordRun(std::string_view t);
     // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
     // それから), which is no name however often the document writes it (spec LEX-4828).
     bool WordThenParticle(std::string_view t);
@@ -241,6 +259,18 @@ private:
     // (小鳥遊　聖), and their Korean in the name layer's row of the name written whole (小鳥遊聖 타카나시
     // 세이): the parts read so wherever the document writes them.
     std::map<std::string, std::string> rowParts_;
+    // The run of lines that open with a bracketed or colon field and text after it (BracketField): whether it is
+    // a status window (values on two of its lines and on half of them: 【力】　16), its line and value counts,
+    // and the labels it counted before it became one, taken back then (spec LEX-5175).
+    bool fieldRunValue_ = false;
+    int fieldRunLines_ = 0, fieldRunValues_ = 0;
+    std::set<std::string> fieldRunNames_;
+    bool fieldRunRepeats_ = false;  // a field name said twice in the run, as speakers take turns
+    bool fieldRunSpeech_ = false;   // a field of the run that reads as speech (【若葉】うん)
+    std::vector<std::string> fieldRunLabels_;
+    // Whether line opens with a bracketed or colon field (name) and text after it; value tells whether that
+    // text is a value, speech whether it reads as speech (おはよう, うん).
+    static bool BracketField(std::string_view line, bool& value, std::string& name, bool& speech);
     void RowParts(const std::string& x, const std::string& y);
     // The common words GivenSplit took for the surname of a full name (氷室 of 氷室将嗣) and their
     // name-layer Korean (히무로), which they read as in that full name only.

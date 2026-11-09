@@ -10,9 +10,9 @@ names:nickname-prefix	ベルンハルト様とベルンハルト様。「ちょ�
 names:nickname-prefix	ベルンハルト様とベルンハルト様。ベル様は何だか不満げな表情のままだ。	베른할트 님과 베른할트 님. 베르 님은 왠지 불만인 표정인 채다.	fix	lookup
 names:nickname-prefix	エルンスト様とエルンスト様。「エルくん、おはよう」	에른스트 님과 에른스트 님. 「에르 군, 좋은 아침」	fix	lookup
 names:nickname-prefix	エルンスト様とエルンスト様。エル君が手を振った。	에른스트 님과 에른스트 님. 에르 군이 손을 흔들었다.	fix	lookup
-names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん、またね」	아렉산들 님과 아렉산들 님. 「아렉 군, 다시 또 보자」	fix	lookup
+names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん、またね」	아렉산들 님과 아렉산들 님. 「아렉 군, 또 봐」	fix	lookup
 names:nickname-prefix	アレクサンドル様とアレクサンドル様。アレク様はうなずいた。	아렉산들 님과 아렉산들 님. 아렉 님은 끄덕였다.	fix	lookup
-names:nickname-prefix	アルフォンス様とアルフォンス様。そうなんだよねぇ、結局アルくんが暴走したせいだ。	아르폰스 님과 아르폰스 님. 그래요, 결국 아르 군이 폭주한 탓이다.	keep	lookup
+names:nickname-prefix	アルフォンス様とアルフォンス様。そうなんだよねぇ、結局アルくんが暴走したせいだ。	아르폰스 님과 아르폰스 님. 맞아, 결국 아르 군이 폭주한 탓이다.	keep	lookup
 names:nickname-prefix	アンネローゼ様とアンネローゼ様。「アンネちゃん、遅いよ」	안네로제 님과 안네로제 님. 「안네짱, 늦어」	keep	lookup
 names:nickname-prefix	エリザベス様とエリザベス様。「エリちゃん、おいで」	엘리자베스 님과 엘리자베스 님. 「엘리짱, 와」	keep	lookup
 names:nickname-prefix	ベルンハルト様とベルンハルト様。「ベルンくん、おいで」	베른할트 님과 베른할트 님. 「베른 군, 와」	keep	lookup
@@ -24,7 +24,7 @@ names:nickname-prefix	「エルくん、おはよう」	「엘 군, 좋은 아�
 names:nickname-prefix	パンドラ様とパンドラ様。パンを食べた。	판도라 님과 판도라 님. 빵을 먹었다.	keep	lookup
 names:nickname-prefix	スキルヴィア様とスキルヴィア様。スキルを覚えた。	스키르비아 님과 스키르비아 님. 스킬을 배웠다.	keep	lookup
 names:nickname-prefix	エミリア様とエミリア様。エミリア様が笑った。	에밀리아 님과 에밀리아 님. 에밀리아 님이 웃었다.	keep	lookup
-names:nickname-prefix	エミリア様とエミリア様。「エミちゃん、こっち！」	에밀리아 님과 에밀리아 님. 「에미짱, 여기!」	fix	lookup
+names:nickname-prefix	エミリア様とエミリア様。「エミちゃん、こっち！」	에밀리아 님과 에밀리아 님. 「에미짱, 이쪽!」	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。レオくん、おいで。	레온하르트 님과 레온하르트 님. 레오 군, 와.	fix	lookup
 names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん」	아렉산들 님과 아렉산들 님. 「아렉 군」	fix	lookup
 names:nickname-prefix	「あれ、アルくん！」	「어라, 알 군!」	keep	lookup

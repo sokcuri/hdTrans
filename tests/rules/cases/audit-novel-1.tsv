@@ -1,0 +1,107 @@
+# 규칙: LEX-5650
+rule	input	expected	kind	layer
+dict:audit-novel-1	演習ですか？	has:연습입니까	keep	lookup
+dict:audit-novel-1	演習問題を解く。	has:연습 문제	keep	lookup
+dict:audit-novel-1	西村艦隊、これより主力部隊を援護するよ。	has:엄호할게	fix	lookup
+dict:audit-novel-1	まじやばかですもんね	has:진짜	fix	lookup
+dict:audit-novel-1	提督、ほい。	has:제독, 자.	fix	lookup
+dict:audit-novel-1	母が洗い物を終えたばかりの冷たい手で	has:설거지를 끝낸	fix	lookup
+dict:audit-novel-1	「早起きしないと朝飯を食いそびれるんだよ。」	has:아침밥을	fix	lookup
+dict:audit-novel-1	「あの二人を侮るなよ。」	has:얕보지 마	fix	lookup
+dict:audit-novel-1	それを看破する梨花ちゃんも侮れないな。	has:얕볼 수 없네	fix	lookup
+dict:audit-novel-1	新しい艦だって！ワンチャン、戦艦とか…！？	has:어쩌면, 전함	fix	lookup
+dict:audit-novel-1	「はぁ～オモシロい。」	has:하아~	fix	lookup
+dict:audit-novel-1	そいじゃ俺のことはほっといてくれよ。	has:내버려 두어 줘	fix	lookup
+dict:audit-novel-1	新しい仲間が艦隊に加わりました。	has:함대에 합류했습니다	fix	lookup
+dict:audit-novel-1	五十鈴です。水雷戦隊の指揮ならお任せ。	has:지휘라면 맡겨 줘	fix	lookup
+dict:audit-novel-1	司令官様、海上護衛はお任せくださいませ。	has:맡겨 주십시오	keep	lookup
+dict:audit-novel-1	柔らかく煮込まれた肉と芋のスープの具が	has:스프의 재료	fix	lookup
+dict:audit-novel-1	凪が片手で俺を制してくる。	has:나를 제지해 온다	fix	lookup
+dict:audit-novel-1	本年も、妹の瑞鶴共々、どうぞよろしくお願いいたします。	has:즈이카쿠와 함께	fix	lookup
+dict:audit-novel-1	綾波お供いたします。	has:동행하겠습니다	fix	lookup
+dict:audit-novel-1	「は、はい。今日は炎の魔術と、戦での陣形について学びます」	has:진형에 대해	fix	lookup
+dict:audit-novel-1	敷波、抜錨！心配いらないって！	has:걱정할 필요 없다고	fix	lookup
+dict:audit-novel-1	それなら心配いらないよ。	has:걱정할 필요 없어	fix	lookup
+dict:audit-novel-1	「そうそう、あとは若人たちに任せとけって」	lacks:나한테 맡겨라	fix	lookup
+dict:audit-novel-1	これは一体何なの？	lacks:뭐야 대체	fix	lookup
+dict:audit-novel-1	何なのだろう、この御園の顔は。	has:뭘까, 이 미소노의 얼굴은	fix	lookup
+dict:audit-novel-1	神の域に達する。	has:신의 영역	fix	lookup
+dict:audit-novel-1	国語は得意だけれど、そろそろ頭が煮詰まってくる。	has:자신 있지만	fix	lookup
+dict:audit-novel-1	今日は菜っ葉のお味噌汁と……	has:잎채소	fix	lookup
+dict:audit-novel-1	機雷には気を付けないと	has:기뢰에는	fix	lookup
+dict:audit-novel-1	グーで殴るぞ。	has:주먹으로	fix	lookup
+dict:audit-novel-1	大学の演習に行く。	has:연습	keep	lookup
+dict:audit-novel-1	はぁぁぁいいよなぁ、このデカい焼き鳥！！	has:하아아아 좋아	fix	lookup
+dict:audit-novel-1	じゃんけんでグーを出した。	has:주먹을	fix	senses
+dict:audit-novel-1	それはグーだね。	has:굿이구나	keep	senses
+dict:audit-novel-1	グー！いいね！	has:굿!	keep	senses
+dict:audit-novel-1	ご飯は大盛りです。	has:곱빼기입니다	fix	lookup
+dict:audit-novel-1	痛っつつつ…まいったな。名誉の負傷だよ…。	has:난감하네	fix	lookup
+dict:audit-novel-1	明石の酒保にようこそ！	has:매점에	fix	lookup
+dict:audit-novel-1	「……物好きだな、筧は……」	has:괴짜	fix	lookup
+dict:audit-novel-1	重改装高速戦艦「金剛改二丙」、南方突入！	has:개2병	fix	lookup
+dict:audit-novel-1	先の御前試合、感服いたしました。	has:어전 시합	fix	lookup
+dict:audit-novel-1	「威張るなよ……」	has:잘난 체하지 마	fix	lookup
+dict:audit-novel-1	「てめぇ……！」	has:네놈	fix	lookup
+dict:audit-novel-1	佳奈すけは最初から及び腰だった。	has:엉거주춤했다	fix	lookup
+dict:audit-novel-1	「両思いなら、もう私のことは関係ないよ」	has:서로 좋아하는 사이라면	fix	lookup
+dict:audit-novel-1	小顔の演劇部員	has:작은 얼굴	fix	lookup
+dict:audit-novel-1	「大王様、統一の暁には、あの約束も、お忘れ無く」	has:통일의 날에는	fix	lookup
+dict:audit-novel-1	ギャンギャンと親子喧嘩を始めた二人にアヤメが笑みを浮かべる。	has:부모 자식 싸움을	fix	lookup
+dict:audit-novel-1	曙、出撃よ、蹴散らしてやるわ！	has:쓸어버려 줄게	fix	lookup
+dict:audit-novel-1	上から目線で話す	has:내려다보는 시선	fix	lookup
+dict:audit-novel-1	歴代の教母様とアヴェの国王様がまつられているんだ。	has:교모님	fix	lookup
+dict:audit-novel-1	早歩きとテレテレ走りの間くらいのイメージだ。	has:빠른 걸음	fix	lookup
+dict:audit-novel-1	提督、早いものでもう師走です、多分。	has:어느덧	fix	lookup
+dict:audit-novel-1	赤面して卒倒するんだろうな……。	has:얼굴을 붉혀	fix	lookup
+dict:audit-novel-1	いつもの見慣れた風景、着慣れたスーツ。	has:입어 익숙해진 슈트	fix	lookup
+dict:audit-novel-1	ちょうど制服を着終えたらしいエルが	has:제복을 다 입은	fix	lookup
+dict:audit-novel-1	やだっ！？そ、そこは…ちっくしょう、今に見てなさいよ…	has:두고 봐	fix	lookup
+dict:audit-novel-1	「はいもう一丁あがりっと。」	has:하나 완성	fix	lookup
+dict:audit-novel-1	新装備は、私がきーっちりチェックするからね。	has:새 장비는	fix	lookup
+dict:audit-novel-1	新家具の準備	has:새 가구	fix	lookup
+dict:audit-novel-1	平賀譲氏設計による日本海軍の第一級の戦闘艦です。	has:일본 해군의	fix	lookup
+dict:audit-novel-1	仕方あるまい。	has:어쩔 수 없겠지	fix	lookup
+dict:audit-novel-1	「今日からしばらく座学を休みにして」	has:이론 수업	fix	lookup
+dict:audit-novel-1	まぁ、もとから属性がちがうんだよな、俺と未来は……。	has:원래부터	fix	lookup
+dict:audit-novel-1	対空、対潜見張り、厳として！	has:엄중히	fix	lookup
+dict:audit-novel-1	生息域や利権がぶつかる事で戦争は起こる。	has:서식지나	fix	lookup
+dict:audit-novel-1	長10cmよし、高射装置よし	has:고사 장치	fix	lookup
+dict:audit-novel-1	ググれば分かる。	has:구글링하면	fix	lookup
+dict:audit-novel-1	一番スロに「試製41cm三連装砲」搭載	has:슬롯에	fix	lookup
+dict:audit-novel-1	ジャンケン……グーチョキパー	has:바위 가위 보	fix	lookup
+dict:audit-novel-1	よそいきのドレスを着て舞踏会に参加していた。	has:외출용	fix	lookup
+dict:audit-novel-1	三連装主砲はおもちゃじゃないの。	has:3연장 주포	fix	lookup
+dict:audit-novel-1	最近、体の方が大分なまってしまった。	has:둔해져	fix	lookup
+dict:audit-novel-1	ありがとうございました！またおこしください。	has:또 와 주세요	fix	lookup
+dict:audit-novel-1	夏が過ぎ、秋がやってきます。	has:가을이 옵니다	keep	lookup
+dict:audit-novel-1	この国において、婚約者を公然と侮辱し	has:모욕해	keep	lookup
+dict:audit-novel-1	お供を連れて歩く	has:수행원	keep	lookup
+dict:audit-novel-1	感情を制する	has:감정을 억제한다	keep	lookup
+dict:audit-novel-1	まだワンチャンある。	has:가능성이 있다	fix	lookup
+dict:audit-novel-1	ワンチャンあるかも。	has:가능성이 있을지도	fix	lookup
+dict:audit-novel-1	生活援護を受けている。	has:생활 지원을 받고	fix	lookup
+dict:audit-novel-1	援護制度がある。	has:지원 제도	fix	lookup
+dict:audit-novel-1	味方を援護する。	has:엄호한다	keep	lookup
+dict:audit-novel-1	お腹がグーと鳴った。	has:꼬르륵 소리가 났다	fix	lookup
+dict:audit-novel-1	グーグー寝ている。	has:쿨쿨	keep	lookup
+dict:audit-novel-1	言葉がなまっている。	has:사투리가 섞이	fix	lookup
+dict:audit-novel-1	腕がなまる。	has:둔해진다	keep	lookup
+dict:audit-novel-1	彼に侮られた。	has:얕보였다	fix	lookup
+dict:audit-novel-1	知らない人にほいほいついていく。	has:덥석 따라간다	fix	lookup
+dict:audit-novel-1	ほいほい、待ってて。	lacks:자 자	fix	lookup
+dict:audit-novel-1	お任せコースにします。	has:오마카세 코스	fix	lookup
+dict:audit-novel-1	任せとけって！	has:맡겨 두라니까	fix	lookup
+dict:audit-novel-1	てめぇでやれ。	has:직접 해라	fix	lookup
+dict:audit-novel-1	新たな要素が加わった。	has:더해졌다	fix	lookup
+dict:audit-novel-1	風味が加わる。	has:더해진다	fix	lookup
+dict:audit-novel-1	チームに新メンバーが加わる。	has:합류한다	keep	packs
+dict:audit-novel-1	新しい戦力が加わる。	has:합류한다	fix	packs
+dict:audit-novel-1	援軍が加わった。	has:합류했다	fix	packs
+dict:audit-novel-1	高音域が綺麗	has:고음역이	keep	senses
+dict:audit-novel-1	楽園共々滅びよ。	has:낙원과 함께	fix	lookup
+dict:audit-novel-1	てめえ自身の問題だ。	has:너 자신의	fix	lookup
+dict:audit-novel-1	ガチでまじやばい。	has:진짜로 완전	fix	senses
+dict:audit-novel-1	まじやばい。	has:진짜 위험하다	keep	senses
+dict:audit-novel-1	村を滅ぼしたのはお前自身ではないか	has:너 자신이 아닌가	keep	lookup
+dict:audit-novel-1	てめえ お倫の亭主じゃねえな	has:네놈 오린의	fix	lookup

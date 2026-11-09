@@ -1,0 +1,17 @@
+#! layer=pack
+# 음식 말의 뜻을 앞뒤 낱말로 고르는 팩 행: 髪のコシ 탄력, 商売のうまみ 묘미 (LEX-5602)
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	cue
+audit-cap-food:3	うまみ	n	sense	商売のうまみ|商売の旨味|商売のうま味|商売の旨み	장사의 묘미	LEX-5602	audit	商売のうまみ 장사의 묘미	colloc	
+audit-cap-food:4	うまみ	n	sense	取引のうまみ|取引の旨味|取引のうま味|取引の旨み	거래의 묘미	LEX-5602	audit	取引のうまみ 거래의 묘미	colloc	
+audit-cap-food:5	うまみ	n	sense	ビジネスのうまみ|ビジネスの旨味|ビジネスのうま味|ビジネスの旨み	비즈니스의 묘미	LEX-5602	audit	ビジネスのうまみ 비즈니스의 묘미	colloc	
+audit-cap-food:6	こしょう	n	sense	next=する|し|して|した|している|してる|しました|します|中|です|だ	고장	LEX-5602	audit	ロボットがこしょうした 로봇이 고장 났다		
+audit-cap-food:7	うまみ	n	sense	仕事のうまみ|仕事の旨味|仕事のうま味|仕事の旨み	일의 묘미	LEX-5602	audit	仕事のうまみ 일의 묘미	colloc	
+audit-cap-food:8	添えてある	v5	sense	subj=@food|花|花束|ソース|たれ|タレ|薬味|レモン|わさび|大根おろし|パセリ|野菜|サラダ|漬物|ご飯|スープ|みそ汁|味噌汁	곁들여져 있다	LEX-5602	audit	ソースが添えてある 소스가 곁들여져 있다		
+audit-cap-food:9	旬	n	sense	next=くん|さん|ちゃん|君|様|先輩|先生	슌	LEX-5602	audit	旬くん 슌 군		
+audit-cap-food:10	旬	n	sense	旬を過ぎる	한물가다	LEX-5602	audit	旬を過ぎたアイドル 한물간 아이돌	colloc	
+audit-cap-food:12	まかない	n	sense	pred=食べる|作る|出る|食う|いただく|頂く|出す	직원 식사	LEX-5602	audit	まかないを食べる 직원 식사를 먹는다		
+audit-cap-food:13	振る	v5	sense	obj=こしょう|胡椒|コショウ|塩|塩こしょう|塩コショウ|砂糖|粉|スパイス|ふりかけ|七味|一味	뿌리다	LEX-5602	audit	こしょうを振る 후추를 뿌린다		
+audit-cap-food:14	する	vs	sense	塩こしょうする|塩コショウする|塩胡椒する	소금 후추를 치다	LEX-5602	audit	塩こしょうする 소금 후추를 친다	colloc	
+audit-cap-food:15	する	vs	sense	こしょうをする|胡椒をする|コショウをする	후추를 치다	LEX-5602	audit	こしょうをする 후추를 친다	colloc	
+audit-cap-food:16	する	vs	sense	こしょうする|胡椒する|コショウする	후추를 치다	LEX-5602	audit	こしょうして焼きます 후추를 쳐서 굽습니다	colloc	subj=-
+audit-cap-food:17	する	vs	sense	天日干しする|天日干しにする	햇볕에 말리다	LEX-5602	audit	布団を天日干しした 이불을 햇볕에 말렸다	colloc	

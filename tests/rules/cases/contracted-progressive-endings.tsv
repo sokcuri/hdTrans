@@ -5,7 +5,7 @@ dict:colloquial-endings:14	置いちゃいましょう｡	두어버립시다.	fi
 dict:colloquial-endings:14	はいっ。テキパキと片付けちゃいましょう。	네. 척척 정리해버립시다.	fix	lookup
 dict:colloquial-endings:14	まっ 終電までに終わらせちゃいましょう｡	뭐 막차까지 끝내버립시다.	fix	lookup
 dict:colloquial-endings:14	もう 言っちゃいましょうよ｡	이제 말해버립시다.	fix	lookup
-dict:colloquial-endings:15	今日はお祝いですね！ 酒保開けちゃいましょ！	오늘은 축하군요! 피엑스 열어버립시다!	fix	lookup
+dict:colloquial-endings:15	今日はお祝いですね！ 酒保開けちゃいましょ！	has:매점	fix	lookup
 dict:colloquial-endings:15	楽しんじゃいましょ今日はね	즐겨버립시다 오늘은	fix	lookup
 dict:colloquial-endings:16	先に奥様梱包しちゃいましょうか｡	먼저 사모님 꾸려버릴까요.	fix	lookup
 dict:colloquial-endings:16	クレーンにイルミネーション飾っちゃいましょうか？	크레인에 일루미네이션 장식해버릴까요?	fix	lookup

@@ -2,7 +2,10 @@
 rule	input	expected	kind	layer
 cx:told-quote:5	父には「何かあったら、トビアスに守ってもらえ」と言われていた。	has:」라는 말을 들었다	fix	rewrites
 cx:told-quote:5	母にはよく「早く寝ろ」と言われる	has:」라는 말을 듣는다	fix	rewrites
-cx:told-quote:4	父に「逃げろ」と言われた。	has:」라는 말을 들었다	fix	rewrites
+cx:told-quote:5	父に「逃げろ」と言われた。	has:」라는 말을 들었다	fix	rewrites
+cx:told-quote:5	父に「逃げろ」と言われた。	rule:cx:told-quote:5=」(이)라는	fix	rewrites
+cx:told-quote:4	「あいつ、気合入れてアバター作りすぎじゃね？」と言われたくはない。	rule:cx:told-quote:4=」(이)라는	fix	rewrites
+cx:told-quote:4	父に「逃げろ」と言われた。	!rule:cx:told-quote:4	keep	rewrites
 cx:told-quote:3	……この子にズルいと言われるのも、もう何度目だろう。	has:치사하다는 말을 듣는 것도	fix	rewrites
 cx:told-quote:3	「あの子に話すなと言われたのを律儀に守ってるの？」	has:이야기하지 말라는 말을 들은	fix	rewrites
 cx:told-quote:3	先生に早く帰れと言われていた	has:돌아가라는 말을 들었다	fix	rewrites
@@ -36,7 +39,8 @@ dict:jisjk:341056	情報狂とでも言うべきか。	has:정보광이라고나
 dict:jisjk:140283	初デートって言われて、いきなりメイド喫茶に来たら	has:첫데이트라는 말을 들어	fix	defaults
 dict:jisjk:140283	「中学の時、クラスの女子に『キモい』って言われたときかな？」	has:』라는 말을 들었을	fix	defaults
 cx:attitude-active:20	「別に、君にどう思われようが構わない」	has:네가 어떻게 생각하든지	fix	rewrites
-cx:told-quote:4	「早く寝ろ」と言われた	has:라는 말을 들었다	keep	rewrites
+cx:told-quote:20	「早く寝ろ」と言われた	has:라는 말을 들었다	keep	rewrites
+cx:told-quote:20	「早く寝ろ」と言われた	rule:cx:told-quote:20=」(이)라는	keep	rewrites
 cx:told-quote:5	先生は「静かに」と言われた	has:라고 하셨다	keep	rewrites
 cx:wo-sareru-passive:10	社長が噂をされる	lacks:소문을 낸다	keep	rewrites
 cx:wo-sareru-passive:20	噂をされたくない	has:소문	keep	rewrites
@@ -58,9 +62,9 @@ cx:told-state:10	父には「逃げろ」と言われている人	has:말을 듣
 cx:told-state:10	ずっと待っていた	lacks:들었	keep	rewrites
 cx:told-state:20	母によく「寝ろ」と言われてる	has:말을 듣는다	fix	rewrites
 cx:told-state:20	言われてる意味がわからない	lacks:말을 듣는다	keep	rewrites
-cx:told-state:30	母に「寝ろ」と言われてた	has:말을 들었다	fix	rewrites
-cx:told-state:30	陰で悪口を言われてた	has:험담을 들었다	fix	rewrites
-cx:told-state:30	ずっと待ってた	lacks:들었	keep	rewrites
+cx:told-quote:5	母に「寝ろ」と言われてた	has:말을 들었다	fix	rewrites
+dict:i:3693	陰で悪口を言われてた	has:험담을 들었다	fix	rewrites
+cx:told-state:10	ずっと待ってた	lacks:들었	keep	rewrites
 sense:quote-passive	彼女にバカと言われていた	has:바보라는 말을 들었다	fix	rewrites
 sense:quote-passive	天才と言われている	lacks:말을 들	keep	rewrites
 cx:told-state:10	みんなに悪口を言われている	has:욕을 듣고 있다	keep	rewrites

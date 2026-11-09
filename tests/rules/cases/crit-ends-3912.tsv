@@ -4,7 +4,7 @@ builtin-ending:ませんこと	その…美濃の予行演習で…もう少し�
 builtin-ending:ませんこと	「あらあら、圭一さんのお弁当は今日は大奮発ではございませんことぉ？」	「어머어머, 케이이치 씨의 도시락은 오늘은 대분발이 아닌가요?」	fix	builtin-ending
 builtin-ending:ませんこと	「富田〜岡村〜！ 圭一さんを見かけなかったでございませんこと？！」	「토미타~오카무라~! 케이이치 씨를 보지 않았나요?!」	fix	builtin-ending
 builtin-ending:ませんこと	歩いてみませんか？	걸어 보지 않을래요?	keep	builtin-ending
-builtin-ending:あるまい	樹木を操るお家流を使う、エセ風流人が言う言葉でもあるまい？	수목을 조종하는 집류를 쓰는, 사이비 풍류인이 말하는 말도 아니겠지?	fix	builtin-ending
+builtin-ending:あるまい	樹木を操るお家流を使う、エセ風流人が言う言葉でもあるまい？	수목을 조종하는 집류를 쓰는, 사이비 풍류인이 하는 말도 아니겠지?	fix	builtin-ending
 builtin-ending:あるまい	入間め 何か ちょっかいを 出しているのではあるまいな	이루마 뭔가 장난을 하고 있는 것은 아니겠지	fix	builtin-ending
 builtin-ending:あるまい	学生でもあるまいし	학생도 아니고	keep	builtin-ending
 builtin-ending:だとよ	「……ＳＯＲＤだとよ。お上の犬が何しに来た」	「……SORD라는군. 관청의 개가 뭐하러 왔어」	fix	builtin-ending

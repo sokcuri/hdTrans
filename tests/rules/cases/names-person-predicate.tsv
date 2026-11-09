@@ -37,7 +37,7 @@ names:person-predicate	深緑の髪と瞳が印象的な青年が立っていた
 names:person-predicate	見たことのない菓子が出れば真っ先に手を伸ばす。	본 적이 없는 과자가 나오면 먼저 손을 뻗는다.	keep	lookup
 names:person-predicate	明日、陽が昇ってから出口を探そう。	내일, 햇빛이 오르고 나서 출구를 찾자.	keep	lookup
 names:person-predicate	左の頬ばっかり見て。	왼쪽의 뺨뿐 봐.	keep	lookup
-names:person-predicate	黒板消しに石が入れてある。	지우개에 돌이 들어 있다.	keep	lookup
+names:person-predicate	黒板消しに石が入れてある。	has:칠판지우개에	keep	lookup
 names:person-predicate	桃は食べた。	복숭아는 먹었다.	keep	lookup
 names:person-predicate	桃が食べたい。	복숭아를 먹고 싶다.	keep	lookup
 names:person-predicate	小太刀を抜いた。	작은 칼을 뽑았다.	keep	lookup

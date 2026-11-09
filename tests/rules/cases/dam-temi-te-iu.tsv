@@ -1,0 +1,26 @@
+# 규칙: GRM-4091, GRM-4092, LEX-5791
+rule	input	expected	kind	layer
+dict:i:5658	思いを込める歌。	마음을 담은 노래.	keep	local-ending
+dict:i:5658	思いを込めるのは難しい。	has:담는 것은	fix	local-ending
+dict:i:1975	心を込める。	마음을 담는다.	keep	local-ending
+dict:i:1975	心を込めた手紙。	마음을 담은 편지.	keep	local-ending
+conjugation:verb-family-dam	料理を盛る皿。	요리를 담는 접시.	fix	conjugation
+conjugation:verb-family-dam	ご飯を盛る茶碗。	has:담는	fix	conjugation
+conjugation:verb-family-dam	瓶に詰める作業。	병에 담는 작업.	fix	conjugation
+constraint:temi-before-nna	振り返ってみんなを見た。	has:모두를 보았다	fix	lookup
+constraint:temi-before-nna	作ってみんなで食べた。	lacks:보지 않지	fix	lookup
+constraint:temi-before-nna	本を読んでみんなに聞かせる。	has:모두에게	keep	lookup
+constraint:temi-before-nna	作ってみた。	만들어 보았다.	keep	lookup
+constraint:temi-before-nna	読んでみよう。	읽어 보자.	keep	lookup
+dict:jisjk:368194	振り返ってみる。	되돌아본다.	fix	lookup
+dict:jisjk:95081	振り返って時計を見る。	has:되돌아보고 시계를	fix	local
+dict:jisjk:362126	笑って言った。	has:웃어 말했다	fix	local
+dict:jisjk:362126	立ち上がって言った。	has:일어서 말했다	fix	local
+dict:jisjk:362126	少女がこちらを振り返って言った。	has:돌아보고 말했다	fix	local
+dict:jisjk:362126	「えっ？　狙って言ったわけじゃないんですか？」	has:노려 말한	fix	local
+dict:jisjk:362126	彼が言った言葉	그가 한 말	fix	local
+dict:jisjk:362126	行くって言った。	간다고 했다.	keep	local
+dict:jisjk:362126	来るって言ってた	has:온다고 했다	keep	local
+dict:jisjk:362126	行こうって言った。	가자고 했다.	keep	local
+dict:jisjk:362126	やめろって言っただろ	has:그만두라고 했지	keep	local
+dict:jisjk:362126	姉に向かって言ったあの言葉	has:향한 그 말	keep	local

@@ -142,17 +142,23 @@ bool OruForm(std::string_view tail, int& branch, int& length) {
     return !(tail.substr(0, static_cast<std::size_t>(length)) == "って" && (rest.starts_with("いう") || rest.starts_with("言")));
 }
 
-// LEX-5014: the せ of a す verb whose shorter godan verb exists (尖らす, 尖る), before a て form that goes on to
-// another act, ながら or a pause, continues the verb itself, the lexical causative (唇を尖らせて 삐죽 내밀어,
-// 生地を湿らせていく 적셔 간다, 息を切らせながら), not its potential. A て form before ている, ない, おる or a word of
-// thanks or relief (word.thanks: 返せてよかった) and the plain, past, negative, conditional and volitional forms keep
-// the potential (動かせる, 隠せてない).
+// LEX-5014: whether the せ of a す verb that is the common transitive of its pair (動かす, 減らす) or is written in kana,
+// before rest, still continues the verb rather than its potential: before a て form that goes on to another act (動かせていく 움직여 간다,
+// 減らせてしまった), ながら or a pause. A て form before ている and its contractions (てる, てた, てん, てて, てます), ない,
+// おる, ても (not てもらう), てはいる or a word of thanks or relief (word.thanks: 返せてよかった) keeps the potential, as do the
+// plain, past, negative, conditional and volitional forms (動かせる, 動かせてる 움직일 수 있다, 隠せてない).
 bool SuVerbCausativeForm(std::string_view rest) {
     if (rest.starts_with("ながら")) return true;
     if (rest.starts_with("て")) {
         const std::string_view next = rest.substr(std::string_view("て").size());
         if (dict::StartsWithMember(HDTRANS_CLASS("word.thanks"), next) > 0) return false;
-        if (next.starts_with("な") || next.starts_with("お") || next.starts_with("ま")) return false;
+        // ている and its contractions (てる, てた, てん, てて, てます) and the concessive ても keep it
+        for (const std::string_view keep : {"な", "お", "ま", "る", "た", "ん", "て"}) {
+            if (next.starts_with(keep)) return false;
+        }
+        if (next.starts_with("も") && !next.starts_with("もら") && !next.starts_with("もろ")) return false;
+        // てはいる is ている with は (動かせてはいるが 움직일 수는 있지만); てはいけない, てはいかん forbid the act
+        if (next.starts_with("はい") && !next.starts_with("はいけ") && !next.starts_with("はいか")) return false;
         if (next.starts_with("い")) {
             const std::string_view motion = next.substr(std::string_view("い").size());
             return motion.starts_with("く") || motion.starts_with("っ") || motion.starts_with("き") ||
@@ -163,6 +169,15 @@ bool SuVerbCausativeForm(std::string_view rest) {
     if (rest.empty()) return false;
     const char32_t c = text::DecodeRune(rest).cp;
     return c == U'、' || c == U'，' || text::IsKanji(c);
+}
+
+// The part of a stem from its last kanji (唇を尖ら: 尖ら), all of it when it has none.
+std::string_view LastKanjiPart(std::string_view stem) {
+    std::size_t from = 0;
+    for (std::size_t i = 0; i < stem.size(); i += text::DecodeRune(stem.substr(i)).size) {
+        if (text::IsKanji(text::DecodeRune(stem.substr(i)).cp)) from = i;
+    }
+    return stem.substr(from);
 }
 }  // namespace
 
@@ -644,7 +659,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
-    bool adjusted = false, desire = false;
+    bool adjusted = false, desire = false, suVerbPlain = false;
     const int oldKind = base.patternKind, oldState = base.kind;
     const bool shortCausativePassive = w->settings.text && w->settings.improvements.causativePassive && !matched &&
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
@@ -677,7 +692,16 @@ bool Item::AcceptVerbContinuation(Record* following) {
     }
     if (!matched && (oldState == 1 || oldState == 2 || oldState == 4 || shortCausativePassive)) {
         base.record = oldState;
-        if (oldState == 4 && oldKind == 3 && w->settings.text && SuVerbCausativeForm(after()) && w->GodanBase(surface)) base.record = 0;
+        // LEX-5014: the せ of a す verb that makes a shorter godan verb act (尖らす of 尖る, 湿らす of 湿る) is that verb in
+        // every form, the lexical causative, not its potential (唇を尖らせて 삐죽 내밀고, 唇を尖らせてる 삐죽 내밀고 있다); that
+        // of a kana stem or of a す verb that is the common transitive of its pair (verb.su-transitive: 動かす, 減らす) is the verb only where
+        // SuVerbCausativeForm says (動かせていく 움직여 간다; 動かせてる 움직일 수 있다).
+        if (oldState == 4 && oldKind == 3 && w->settings.text && w->GodanBase(surface) &&
+            ((HasKanji(surface) && dict::StartsWithMember(HDTRANS_CLASS("verb.su-transitive"), LastKanjiPart(surface)) == 0) ||
+             SuVerbCausativeForm(after()))) {
+            base.record = 0;
+            suVerbPlain = true;
+        }
         adjusted = true;
         sourceLength += pattern();
         base.patternKind = 7;
@@ -798,6 +822,16 @@ bool Item::AcceptVerbContinuation(Record* following) {
             base.patternKind = oldKind;
             base.kind = oldState;
             if (base.record == 4) base.record = 0;
+            // The せ of a す verb read as the verb before ながら is its continuative (唇を尖らせながら 삐죽 내밀면서, as
+            // 尖らしながら).
+            if (suVerbPlain && after().starts_with("ながら")) {
+                for (int b = 0; b < kConjugationBranches; b++) {
+                    if (Conjugation(oldKind, b) == "し") {
+                        base.kind = b;
+                        break;
+                    }
+                }
+            }
         }
     };
     auto fill = [&](const Group* g) {

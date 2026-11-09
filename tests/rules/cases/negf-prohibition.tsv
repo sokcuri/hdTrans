@@ -1,7 +1,7 @@
 # 규칙: MNG-6
 rule	input	expected	kind	layer
 normalize:prohibition-janai	砲撃戦も気を抜くんじゃないぞ！	has:방심하지 마!	fix	normalize
-normalize:prohibition-janai	夜戦突入だ！ビビってんじゃねぇぞ！	has:위축되지 마!	fix	normalize
+normalize:prohibition-janai	夜戦突入だ！ビビってんじゃねぇぞ！	has:겁먹지 마!	fix	normalize
 normalize:prohibition-janai	「寝言ぬかしてるんじゃねえぞ！」	has:지 마!	fix	normalize
 normalize:prohibition-janai	「おい、ガキが、なめた口をきいているんじゃないわよ」	has:하지 마」	fix	normalize
 normalize:prohibition-janai	テメェ笑ってんじゃねぇーーーー！！	네놈 웃지 마!!	fix	normalize

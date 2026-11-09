@@ -42,7 +42,7 @@ dict:s:9442	ガチでやばい。	진짜로 위험하다.	keep	lookup
 dict:s:8315	ガチ勢がいる。	찐 마니아가 있다.	keep	lookup
 sound:がちっ	ガチッ！	딱!	fix	sound
 sound:がちっ	俺もかなりガチガチになっている	나도 꽤 딱딱하게 되어 있다	keep	sound
-dict:s:9443	ワンチャンあるかも。	가능성 있을지도.	fix	lookup
+dict:s:9443	ワンチャンあるかも。	has:가능성이	fix	lookup
 dict:s:9444	厨二かよ	중2인가	fix	lookup
 dict:s:9445	厨二病。	중2병.	fix	lookup
 dict:s:9448	ディスるなよ。	디스하지 마.	fix	lookup

@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:market-rebound:10	東京株式市場で日経平均株価は反発した。	도쿄 주식시장에서 닛케이 평균주가는 반등했다.	fix	rewrites
 cx:market-rebound:10	円相場は対ドルで反発した。	엔 시세는 대달러로 반등했다.	fix	rewrites
-cx:market-rebound:10	株価が3日ぶりに反発した。	주가가 3일만에 반등했다.	fix	rewrites
+cx:market-rebound:10	株価が3日ぶりに反発した。	주가가 3일 만에 반등했다.	fix	rewrites
 cx:market-rebound:10	原油価格は小幅に反発した。	원유가격은 소폭적으로 반등했다.	fix	rewrites
 cx:market-rebound:10	長期金利が反発した。	장기금리가 반등했다.	fix	rewrites
 cx:market-rebound:10	住民の反発を招いた。	주민의 반발을 불렀다.	keep	rewrites

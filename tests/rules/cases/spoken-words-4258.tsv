@@ -34,7 +34,7 @@ cx:caption-fixes-1:90	南方の海で取れたシュライプにパンの衣を�
 cx:caption-fixes-1:90	顔に泥をつけた。	!rule:cx:caption-fixes-1:90	keep	rewrites
 cx:caption-fixes-1:92	衣につけて油で揚げた。	has:튀김옷을 묻혀	fix	rewrites
 cx:caption-fixes-1:92	服を衣につけて	!rule:cx:caption-fixes-1:92	keep	rewrites
-sense:arasou-compete	中学生と高校生600人が３日間にわたって日本一を争った全国大会。	has:일본 제일을 다툰	fix	senses
+sense:arasou-compete	中学生と高校生600人が３日間にわたって日本一を争った全国大会。	has:일본 최고를 다툰	fix	senses
 sense:arasou-compete	優勝を争う。	우승을 다툰다.	fix	senses
 sense:arasou-compete	首位を争う両チーム	has:선두를 다투는	fix	senses
 sense:arasou-compete	彼と争った。	그와 싸웠다.	keep	senses

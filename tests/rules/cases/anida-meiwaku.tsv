@@ -19,7 +19,7 @@ dict:meiwaku:5	迷惑が掛かる	민폐가 된다	fix	defaults
 dict:meiwaku:6	みんなに迷惑がかかった	모두에게 민폐가 되었다	fix	defaults
 dict:meiwaku:6	迷惑がかからないように	민폐가 되지 않도록	fix	defaults
 phrase:ii-meiwaku	いい迷惑だ	완전 민폐다	fix	phrases
-phrase:ii-meiwaku	こっちはいい迷惑だよ	여기는 완전 민폐야	fix	phrases
+phrase:ii-meiwaku	こっちはいい迷惑だよ	이쪽은 완전 민폐야	fix	phrases
 phrase:ii-meiwaku	いい迷惑な話だ	완전 민폐인 이야기다	fix	phrases
 dict:meiwaku:2	迷惑している	곤란해하고 있다	keep	local
 dict:meiwaku:1	迷惑をかけた	폐를 끼쳤다	keep	defaults

@@ -1,0 +1,116 @@
+# 규칙: LEX-5603
+rule	input	expected	kind	layer
+dict:audit-cap-everyday	ボツ仲間です。	has:퇴짜	fix	lookup
+dict:audit-cap-everyday	自分がろくろで引いた器に	has:물레	fix	lookup
+dict:audit-cap-everyday	口々に叫んだ	has:저마다	fix	lookup
+dict:audit-cap-everyday	脚本家の新作	has:각본가	fix	lookup
+dict:audit-cap-everyday	アザなんてないよ	has:멍	fix	lookup
+dict:audit-cap-everyday	かみさんもらう婚礼の晩に	has:아내	fix	lookup
+dict:audit-cap-everyday	家族ぐるみで高級時計店に侵入し	has:시계점	fix	lookup
+dict:audit-cap-everyday	算額絵馬って	has:산가쿠	fix	lookup
+dict:audit-cap-everyday	雲助たちが来た	has:가마꾼	fix	lookup
+dict:audit-cap-everyday	共演者のみんなとも	has:공동 출연자	fix	lookup
+dict:audit-cap-everyday	来場者投票の得点を合算した	has:방문객	fix	lookup
+dict:audit-cap-everyday	美容液ボディミルク。	has:에센스	fix	lookup
+dict:audit-cap-everyday	みんなに向けての設問でしょ	has:문제	fix	lookup
+dict:audit-cap-everyday	両陛下と皇族方は	has:양 폐하	fix	lookup
+dict:audit-cap-everyday	どんな せいちょうが	has:성장	fix	lookup
+dict:audit-cap-everyday	岡っ引きになられるなんて	has:포졸	fix	lookup
+dict:audit-cap-everyday	太刀打ちできませんよ！	has:대적	fix	lookup
+dict:audit-cap-everyday	伊和手から羽ばたき	has:날갯짓	fix	lookup
+dict:audit-cap-everyday	山々を結ぶ峠道です｡	has:고갯길	fix	lookup
+dict:audit-cap-everyday	しっかりしろよ｡	has:정신 차려	fix	lookup
+dict:audit-cap-everyday	一人で招喚されてたら	has:소환	fix	lookup
+dict:audit-cap-everyday	せきこんだ	has:기침	fix	lookup
+dict:audit-cap-everyday	選挙戦の締めくくり演説	has:마무리	fix	lookup
+dict:audit-cap-everyday	ほぼ５人きょうだいじゃん。	has:형제	fix	lookup
+dict:audit-cap-everyday	なぜ今、日本のこういった実写映画が	has:실사 영화	fix	lookup
+dict:audit-cap-everyday	この演目を、日本のクリスマスの	has:공연작	fix	lookup
+dict:audit-cap-everyday	源平の侍ですよ？	has:겐페이	fix	lookup
+dict:audit-cap-everyday	切り盛りするパワフルな女性です｡	has:운영	fix	lookup
+dict:audit-cap-everyday	当協会を含め	has:본 협회	fix	lookup
+dict:audit-cap-everyday	彼らは金級の中でも話が分かる方だ	has:말이 통하는 편	fix	lookup
+dict:audit-cap-everyday	おいら あいつに	has:나	fix	lookup
+dict:audit-cap-everyday	ハンから話を聞きだして	has:알아내	fix	lookup
+dict:audit-cap-everyday	朝めしでも食おう｡	has:아침밥	fix	lookup
+dict:audit-cap-everyday	隠しカメラのレンズが故障。	has:몰래카메라	fix	lookup
+dict:audit-cap-everyday	きれいな三日月形にしています。	has:초승달 모양	fix	lookup
+dict:audit-cap-everyday	日本で数か所でしか	has:몇 군데	fix	lookup
+dict:audit-cap-everyday	ブナやミズナラなどの落葉広葉樹｡	has:너도밤나무	fix	lookup
+dict:audit-cap-everyday	使いどころっていうんですかね	has:쓰임새	fix	lookup
+dict:audit-cap-everyday	誰かと出歩くことも初めて｡	has:돌아다	fix	lookup
+dict:audit-cap-everyday	報賞金は	has:포상	fix	lookup
+dict:audit-cap-everyday	それが生きた証しになると	has:증거	fix	lookup
+dict:audit-cap-everyday	本物果実のワクワクを一年中＞	has:일 년 내내	fix	lookup
+dict:audit-cap-everyday	木造平屋建ての住宅で火事があり	has:단층 주택	fix	lookup
+dict:audit-cap-everyday	付け焼き刃	has:벼락치기	fix	lookup
+dict:audit-cap-everyday	《アレンジ自在!	has:자유자재	fix	lookup
+dict:audit-cap-everyday	それとも、踏みとどまるのか。	has:버티	fix	lookup
+dict:audit-cap-everyday	もう１回、またつかみ取って	has:움켜쥐	fix	lookup
+dict:audit-cap-everyday	すると いにしえの都にも	has:옛날	fix	lookup
+dict:audit-cap-everyday	川のせせらぎ｡	has:물 흐르는 소리	fix	lookup
+dict:audit-cap-everyday	横浜駅の目と鼻の先にあるビル。	has:코앞	fix	lookup
+dict:audit-cap-everyday	変形性膝関節症。	has:무릎 관절	fix	lookup
+dict:audit-cap-everyday	むちゃくちゃある。	has:엄청	fix	lookup
+dict:audit-cap-everyday	小っちゃい。	has:작	fix	lookup
+dict:audit-cap-everyday	ブチギレてはいる…。	has:빡치	fix	lookup
+dict:audit-cap-everyday	うらないしに占ってもらう	has:점쟁이	fix	lookup
+dict:audit-cap-everyday	火の始末をしてください。	has:불단속	fix	lookup
+dict:audit-cap-everyday	それでは ただ今より	has:지금부터	fix	lookup
+dict:audit-cap-everyday	吹きすさぶ地吹雪。	has:몰아치	fix	lookup
+dict:audit-cap-everyday	１分置きに｡	has:분 간격	fix	lookup
+dict:audit-cap-everyday	明治天皇のために作られた螺鈿細工の書棚など	has:나전 세공	fix	lookup
+dict:audit-cap-everyday	芝山細工は 東洋のモザイクと呼ばれ珍重された。	has:시바야마 세공	fix	lookup
+dict:audit-cap-everyday	細工をした形跡がある	has:조작을	keep	lookup
+dict:audit-cap-everyday	解答用紙を配る	has:답안지	fix	lookup
+dict:audit-cap-everyday	来場者数が増えた	has:방문객 수	fix	lookup
+dict:audit-cap-everyday	見守り隊が立つ	has:안전 지킴이	fix	lookup
+dict:audit-cap-everyday	子どもを見守り、声をかける	has:지켜보고	keep	lookup
+dict:audit-cap-everyday	地域の見守り活動	has:돌봄	fix	lookup
+dict:audit-cap-everyday	ドラマの脚本を手掛けた	has:각본을 맡았다	fix	lookup
+dict:audit-cap-everyday	仏壇などを手掛ける	has:다룬다	keep	lookup
+dict:audit-cap-everyday	解答者は前へ	has:도전자	fix	lookup
+dict:audit-cap-everyday	ろくろ首	has:로쿠로쿠비	fix	lookup
+dict:audit-cap-everyday	そのものを見せて	has:그것을	keep	lookup
+dict:audit-cap-everyday	アザラシがいる	has:바다표범	keep	lookup
+dict:audit-cap-everyday	まねしないで	has:흉내 내고	fix	lookup
+dict:audit-cap-everyday	執ような攻撃	has:집요한	fix	lookup
+dict:audit-cap-everyday	メンチ切ってんじゃねえ	has:꼬나보지	fix	lookup
+dict:audit-cap-everyday	合いの手？	has:추임새	fix	lookup
+dict:audit-cap-everyday	コシのあるそば	has:쫄깃한 메밀국수	fix	lookup
+dict:audit-cap-everyday	美味しいそば	has:맛있는 메밀국수	fix	lookup
+dict:audit-cap-everyday	手打ちのそば	has:수타 메밀국수	fix	lookup
+dict:audit-cap-everyday	コシのある紙	has:빳빳한 종이	fix	lookup
+dict:audit-cap-everyday	まかない付きのアルバイト	has:식사가 제공되는 아르바이트	fix	lookup
+dict:audit-cap-everyday	駅のそばにある	has:역 옆에	keep	lookup
+dict:audit-cap-everyday	優しい彼のそばで	has:곁에서	keep	lookup
+dict:audit-cap-everyday	むちゃくちゃ言うな この人	has:말도 안 되는 소리를	fix	lookup
+dict:audit-cap-everyday	見守りカメラ	has:모니터링 카메라	fix	lookup
+dict:audit-cap-everyday	介護と見守りが必要	has:간병과 돌봄이	fix	lookup
+dict:audit-cap-everyday	試験の解答者	has:응시자	fix	lookup
+dict:audit-cap-everyday	ボツになった	has:퇴짜를 맞았다	fix	lookup
+dict:audit-cap-everyday	企画がボツった	has:퇴짜 맞았다	fix	lookup
+dict:audit-cap-everyday	前にボツったキャラ	has:퇴짜 맞은 캐릭터	fix	lookup
+dict:audit-cap-everyday	美味しいそばだった	has:메밀국수였다	fix	lookup
+dict:audit-cap-everyday	年越しそば	has:섣달그믐 메밀국수	fix	lookup
+dict:audit-cap-everyday	凄腕のハッカー	has:실력 좋은 해커	fix	lookup
+dict:audit-cap-everyday	彼は凄腕だ	has:실력자다	keep	lookup
+dict:audit-cap-everyday	部屋の通気をよくする	has:환기	keep	lookup
+dict:audit-cap-everyday	通気性がいい	has:통기성	fix	lookup
+dict:audit-cap-everyday	おいらは行きます	has:저는	fix	lookup
+dict:audit-cap-everyday	おいらも行くぞ	has:나도	fix	lookup
+dict:audit-cap-everyday	その話がわかりません	has:말을 모르겠습니다	fix	lookup
+dict:audit-cap-everyday	模範解答	has:모범 답안	fix	lookup
+dict:audit-cap-everyday	おいらがやります	has:제가 합니다	fix	lookup
+dict:audit-cap-everyday	おいらの番です	has:제 차례입니다	fix	lookup
+dict:audit-cap-everyday	おいらに何か用でしょうか	has:저에게	fix	lookup
+dict:audit-cap-everyday	おいらがやる	has:내가 한다	fix	lookup
+dict:audit-cap-everyday	話がわからない	has:말을 모르겠다	fix	lookup
+dict:audit-cap-everyday	介護と見守り	has:간병과 돌봄	fix	lookup
+dict:audit-cap-everyday	ボツにする	has:퇴짜를 놓는다	fix	lookup
+dict:audit-cap-everyday	聞いたそばから忘れる	has:듣자마자	fix	lookup
+dict:audit-cap-everyday	駅のそばから	has:역 옆에서	keep	lookup
+dict:audit-cap-everyday	話が分かる方だ｡	has:말이 통하는 편	fix	lookup
+dict:audit-cap-everyday	話がわかった	has:이해했다	fix	lookup
+dict:audit-cap-everyday	やっと話がわかりました	has:이해했습니다	fix	lookup
+dict:audit-cap-everyday	話がわかった人	has:이해한 사람	fix	lookup

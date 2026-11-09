@@ -7,7 +7,7 @@ cx:take-out:30	「リュックから勉強道具を出して、考え事をし�
 cx:take-out:10	剣を隠して、出した。	검을 숨겼다가 꺼냈다.	fix	rewrites
 cx:take-out:20	剣を収納して、また出した	검을 수납하고, 또 꺼냈다	fix	rewrites
 cx:take-out:30	箱から人形を出した。	상자에서 인형을 꺼냈다.	keep	rewrites
-cx:take-out:30	袋から飴を出す。	봉투에서 엿을 꺼낸다.	keep	rewrites
+cx:take-out:30	袋から飴を出す。	봉투에서 사탕을 꺼낸다.	keep	rewrites
 cx:take-out:30	声を出す	소리를 낸다	keep	rewrites
 cx:take-out:10	大きな声を出して笑った	큰 소리를 내 웃었다	keep	rewrites
 cx:take-out:30	手を出すな	손을 대지 마	keep	rewrites

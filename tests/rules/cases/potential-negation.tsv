@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 compose:potential-negation	おや？寝付けませんか？	어라? 잠들 수 없습니까?	fix	compose
 compose:potential-negation	「まいどあり…それとお嬢さん、これを頼めませんかね？」	has:부탁할 수 없습니까	fix	compose
 compose:potential-negation	その婚約破棄のお話はちょっと後にできませんか？	has:할 수 없습니까	fix	compose
-compose:potential-negation	お夕食も、私がお作りしましょう。侮れませんよ…？	has:경시할 수 없어요	fix	compose
+compose:potential-negation	お夕食も、私がお作りしましょう。侮れませんよ…？	has:얕볼 수 없어요	fix	compose
 compose:potential-negation	我々はこの間の祭りには帰ってこれませんでしたからね。	has:돌아올 수 없었으니까	fix	compose
 compose:potential-negation	深夜三時ですって！？ ありえませんわ	has:있을 수 없어요	fix	compose
 compose:potential-negation	深夜4時よ。付き合ってられませんわ	has:수 없어요	fix	compose

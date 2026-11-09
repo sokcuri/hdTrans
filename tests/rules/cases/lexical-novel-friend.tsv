@@ -13,7 +13,7 @@ dict:novel-common-nouns:15	う～ん｡恋に悩む 我が親友のために	으
 dict:novel-common-nouns:15	分け合おう｡親友じゃないか｡ ﾊﾊ…｡	나누자. 절친이잖아. 하하….	fix	defaults
 dict:novel-common-nouns:15	(上田)浪人時代の親友の須藤さん｡	(우에다) 재수생 시대의 절친 스도우 씨.	fix	defaults
 dict:novel-common-nouns:15	かつての親友	한 때의 절친	fix	defaults
-dict:novel-common-nouns:15	「さっすが、話がわかるぜ親友！」	「역시, 이해한다 절친!」	fix	defaults
+dict:novel-common-nouns:15	「さっすが、話がわかるぜ親友！」	has:말이 통한다	fix	defaults
 dict:novel-common-nouns:15	友人と会った。	친구와 만났다.	keep	defaults
 dict:novel-common-nouns:15	友達の家に行く。	친구의 집에 간다.	keep	defaults
 dict:novel-common-nouns:15	大親友なんだ。	절친한 친구야.	keep	defaults

@@ -79,7 +79,7 @@ cx:benefactive-provider:10	だれに話してもらう。	누가 이야기해 �
 dict:jisjk:80454	基本は一通り学んだ。	기본은 한 차례 배웠다.	fix	local
 dict:jisjk:92227	彼はいつも気をつけます。	그는 언제나 조심합니다.	fix	local
 dict:jisjk:115623	これは金と言う金属です。	이것은 금이라는 금속입니다.	fix	local
-dict:jisjk:115635	運動用の靴が必要だ。	운동용의 구두가 필요하다.	fix	local
+dict:jisjk:115635	運動用の靴が必要だ。	운동용의 신발이 필요하다.	fix	local
 dict:jisjk:116112	箱の内にある。	상자의 안에 있다.	fix	local
 dict:jisjk:120856	仕事はもうきつい。	일은 이제 힘들다.	fix	local
 dict:jisjk:262308	ガラス越しに見える。	유리 너머로 보인다.	fix	local
@@ -100,7 +100,7 @@ dict:jisjk:348598	日程のどれを選びますか。	일정의 어느 것을 �
 dict:jisjk:358020	ひと通り調べた。	한 차례 조사했다.	fix	local
 dict:jisjk:361956	会議において決めた。	회의에서 결정했다.	fix	local
 dict:jisjk:362273	いただきます、後で返します。	받습니다, 나중에 돌려줍니다.	fix	local
-dict:jisjk:365922	彼はそういうのを食べる。	그는 그러한 것을 먹는다.	fix	local
+dict:jisjk:365922	彼はそういうのを食べる。	그는 그런 것을 먹는다.	fix	local
 dict:jisjk:373518	彼の喜びぶりを見た。	그의 기쁨 모습을 보았다.	fix	local
 dict:jisjk:374955	汚れ防止の布です。	오염 방지의 천입니다.	fix	local
 dict:jisjk:374955	汚れ対策を考える。	오염 대책을 생각한다.	fix	local

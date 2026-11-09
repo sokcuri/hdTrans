@@ -11,19 +11,19 @@ normalize:dialect-copula	わいはな ちっちゃい糸工場を 造りたい�
 normalize:dialect-copula	俺が 精一杯やけん	내가 힘껏이니까	fix	normalize
 normalize:dialect-copula	そうやね。 一夜漬けいう言葉は 福ちゃんと萬平さんの間だけで 使た方がええわね。	그러게. 벼락치기 하는 말은 후쿠짱과 만페이 씨 사이에서만 사편이 좋네.	fix	normalize
 normalize:dialect-copula	⚟立てるやないかい⚞	⚟세우잖아 ⚞	fix	normalize
-normalize:dialect-copula	自分の部屋に隠しカメラば 仕掛けとうくらいやけん	자신의 방에 비밀 카메라 장치 물을 정도니까	fix	normalize
+normalize:dialect-copula	自分の部屋に隠しカメラば 仕掛けとうくらいやけん	has:몰래카메라	fix	normalize
 normalize:dialect-copula	最後の晴れ舞台にしようと 決めたやないか｡ グランプリなんか取ってしもたら ややこしくなって かなんわ｡	마지막 화려한 무대로 하려고 결정했잖아. 그랑프리는 받아버리면 까다로워져일까.	fix	normalize
 normalize:dialect-copula	また 誰やねん ええ！？ こんなとこ ちょろ～っと開けてんのは きちんと閉めんかい！	또 누구야 네!? 이런 곳 찔끔~ 열고 있는 것은 제대로 닫아라!	fix	normalize
 normalize:dialect-copula	家族経営なんて もう安泰やね	가족 경영 같은 건 이제 안정적이네	fix	normalize
 normalize:dialect-copula	そ… そうやね	그… 그러게	fix	normalize
-normalize:dialect-copula	ガキの使いやないかい!	녀석의 사용이잖아!	fix	normalize
+normalize:dialect-copula	ガキの使いやないかい!	꼬맹이의 사용이잖아!	fix	normalize
 normalize:dialect-copula	これは 壊れ物やけん 後でよかね。	이것은 파손물이니까 나중에 돈.	fix	normalize
 normalize:dialect-copula	それが おかしいやないか ウッ…	그것이 이상하지 않은가 윽…	fix	normalize
 normalize:dialect-copula	これ お父様に買ってもろた 洋服やね｡ そう｡	이것 아버님이 사준 옷이구나. 그래.	fix	normalize
 normalize:dialect-cause	この際やき聞きますけんど 嵩さんは どういて いっぺんも お姉ちゃんに気持ちをぶつけんがですか？	이참에 태워 듣는데요 타케루 씨는 어떻게 있어 한번도 언니에게 기분을 부딪치지 않아가 말입니까?	fix	normalize
 normalize:dialect-cause	やかましいわ コラ はよ開けんかい コラ！	시끄러워 코라 빨리 열어라 이놈!	fix	normalize
 normalize:dialect-cause	私は あの子を 信じてるだけですさかい｡	저는 그 아이를 믿고 있을 뿐이니까.	fix	normalize
-normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	안심해라 틴타에는 입다물고 둘 테니까	fix	normalize
+normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	has:테니까	fix	normalize
 normalize:dialect-cause	ゆうべ 夜中に大きな声がするさかい	어젯밤 한밤중에 큰 목소리가 들리니까	fix	normalize
 normalize:dialect-cause	おやじ どげんしたんな？ いつでも いいけん｡ はい｡	아버지 어떤 한 인? 언제든 좋으니까. 네.	fix	normalize
 normalize:dialect-cause	今日は岡安に用あるさかい 先行くで｡	오늘은 오카야스에 용 있으니까 선행으로.	fix	normalize
@@ -33,7 +33,7 @@ normalize:dialect-cause	そんでも 浅牧村と日沢村辺りの 出来のい
 normalize:dialect-cause	いま おとっつぁんが 呼びに行ってはりますさかい	지금 아버지가 부르러 가고 계실 테니까요	fix	normalize
 normalize:dialect-cause	女好きやったんも あんたが やめろ言うさかいに。	여자 좋아해 한 도 네가 그만두어라 말하니까.	fix	normalize
 normalize:dialect-cause	若い衆 迎えに行かすさかいな	젊은이 마중에 행 빌려주니까	fix	normalize
-normalize:dialect-cause	もう あと ひとつきしか 時間あれへんさかい 早速 どないな演目にするか みんなの意見 聞かしてください。	이제 나머지 하나 오고밖에 시간 저것 없으니까 곧바로 어떻게 상연 목록으로 할까 모두의 의견 묻게 해 주세요.	fix	normalize
+normalize:dialect-cause	もう あと ひとつきしか 時間あれへんさかい 早速 どないな演目にするか みんなの意見 聞かしてください。	has:공연작으로	fix	normalize
 normalize:dialect-cause	お母ちゃん… うち もっともっと有名になって 必ず ヨシヲ捜し出したるさかいな。	엄마… 쳐 좀더 좀더 유명하게 되어 반드시 요시 찾아 내 줄 테니까.	fix	normalize
 normalize:dialect-cause	今晩だけ泊めたってて 店長に頼んだげるさかい｡	오늘 밤만 묵게 해도라고 점장에게 부탁해 줄 테니까.	fix	normalize
 normalize:dialect-end	ダ～リン 今日も素敵だに	다~린 오늘도 멋져	fix	normalize
@@ -92,7 +92,7 @@ normalize:dialect-order	しっかりせえ 日は まだ高い	정신차려 날�
 normalize:dialect-order	この船の持ち主 呼んでこんかい	이 배의 소유자 부르고 와	fix	normalize
 normalize:dialect-order	借金の100万円 返さんかい！	빚의 100만엔 돌려주어라!	fix	normalize
 normalize:dialect-order	者ども こやつらを逃がすな 斬り捨てい！	사람들 이자식들을 놓친데 버림!	fix	normalize
-normalize:dialect-order	一度見てから判断せえや｡ そんなもん 見んでも わかるわ｡	한 번 보고 나서 판단해라야. 그런 것 보지 않아도 알아.	fix	normalize
+normalize:dialect-order	一度見てから判断せえや｡ そんなもん 見んでも わかるわ｡	한 번 보고 나서 판단해라. 그런 것 보지 않아도 알아.	fix	normalize
 normalize:dialect-nen	客とちゃうねや	손님이 아니다	fix	normalize
 normalize:dialect-nen	お前 何してんねや？	너 뭐하고 있어?	fix	normalize
 normalize:dialect-nen	これを目指してんねや？ 今	이것을 목표로 하고 있어? 지금	fix	normalize
@@ -119,9 +119,9 @@ normalize:dialect-senba	そんなん言われるんも オヤジあっての わ
 normalize:dialect-senba	さあ 人けのないうちに 出立しまひょ｡ へぇ｡	자 인기척이 없는 동안에 출발합시다. 헤에.	fix	normalize
 normalize:dialect-senba	分かりました。 お出ししまひょ。	알겠습니다. 내 드릴게요.	fix	normalize
 normalize:dialect-senba	よう１晩で…｡ 待ちなはれ！	요우 1밤에…. 기다려!	fix	normalize
-normalize:dialect-senba	おやっさん えらいけったいな部屋でっせ	아저씨 대단한 결체인 방이에요	fix	normalize
+normalize:dialect-senba	おやっさん えらいけったいな部屋でっせ	아저씨 대단한 괴상한 방이에요	fix	normalize
 normalize:dialect-senba	そうだす｡ その会で お三味線 弾かしてもらう事に なりましたんや｡	그렇습니다. 그 회의에서 샤미센 연주하게 해 주게 되었던 이야.	fix	normalize
-normalize:dialect-senba	もう 堪忍しとくんなはれ	이제 인내해 두어 주세요	fix	normalize
+normalize:dialect-senba	もう 堪忍しとくんなはれ	이제 용서해 두어 주세요	fix	normalize
 normalize:dialect-senba	シルクハットに義理のない漁師 知ってはりまっか？	실크해트에 의리가 없는 어부 알고 계십니까?	fix	normalize
 normalize:dialect-senba	それ ホンマにうれしいことでっせ	그것 진짜로 기쁜 일이에요	fix	normalize
 normalize:dialect-senba	やったりまっせ！ れんげきのかた！	해 줘요! 렝게 오고 분!	fix	normalize
@@ -176,7 +176,7 @@ normalize:dialect-keep	あきれるほど単純な作戦だが 悪かねェ…	�
 normalize:dialect-keep	「おら、座れ」	「이봐, 앉아라」	keep	normalize
 normalize:dialect-keep	いい感じぃ～！	좋은 느낌!	keep	normalize
 normalize:dialect-keep	フル～ツや きのみの はいったパンは みんな だいスキですものね。	풀~츠나 열매가 들어간 빵은 모두 매우 좋아하잖아요.	keep	normalize
-normalize:dialect-keep	激しく締めつけられて、病みつきになりそうな刺激がこみあげてきた。	격렬하게 조여져, 푹 빠질 것 같은 자극이 울컥거려 왔다.	keep	normalize
+normalize:dialect-keep	激しく締めつけられて、病みつきになりそうな刺激がこみあげてきた。	격렬하게 조여져, 푹 빠질 것 같은 자극이 북받쳐 왔다.	keep	normalize
 normalize:dialect-keep	約束の時間は疾うに過ぎた。	약속의 시간은 벌써 지났다.	keep	normalize
 normalize:dialect-keep	あいつ、マジでうるせえよ。	저 녀석, 진짜로 시끄러워.	keep	normalize
 normalize:dialect-word	ええ確かに	네, 확실히	fix	normalize

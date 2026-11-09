@@ -1,6 +1,6 @@
 # 규칙: LEX-85
 rule	input	expected	kind	layer
-normalize:kanji-pair-iteration	私はおとなしく、一枚々々丁寧に拭いていた。	나는 점잖고, 한 장 한 장 정중하게 닦고 있었다.	fix	normalize
+normalize:kanji-pair-iteration	私はおとなしく、一枚々々丁寧に拭いていた。	나는 얌전하고, 한 장 한 장 정중하게 닦고 있었다.	fix	normalize
 normalize:kanji-pair-iteration	雨は毎日々々降り続いた。	비는 매일매일 계속 내렸다.	fix	normalize
 normalize:kanji-pair-iteration	胸の中で次第々々に恋慕の情が募ってきた。	가슴속에서 점점 연모의 정이 커져 왔다.	fix	normalize
 normalize:kanji-pair-iteration	何を愚図々々しているのだ。	무엇을 꾸물꾸물하고 있나.	fix	normalize

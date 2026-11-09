@@ -10,8 +10,8 @@ cx:de-scene:30	電車で本を読んだ。	전철에서 책을 읽었다.	fix	re
 cx:de-scene:30	「電車で行くの？」	has:전철로 가는	keep	rewrites
 cx:de-scene:30	友達の車で行きました	has:차로 갔습니다	keep	rewrites
 cx:de-scene:30	自宅までは車で三十分だ。	has:차로 30분	keep	rewrites
-cx:de-scene:30	今新幹線で向かっている途中だ	has:신간선으로 향하고	keep	rewrites
-cx:de-scene:30	朝一番の新幹線で行く	has:신간선으로 간다	keep	rewrites
+cx:de-scene:30	今新幹線で向かっている途中だ	has:신칸센으로 향하고	keep	rewrites
+cx:de-scene:30	朝一番の新幹線で行く	has:신칸센으로 간다	keep	rewrites
 cx:de-scene:30	今きた道を今度は自転車で戻る。	has:자전거로 돌아온다	keep	rewrites
 cx:de-scene:30	そのまま、まっすぐ自転車で進む。	has:자전거로 나아간다	keep	rewrites
 cx:de-scene:30	「マズイっ！　車で連れ去られたら――」	has:차로	keep	rewrites
@@ -19,9 +19,9 @@ cx:de-scene:30	タクシーで潜入先であるノストラの元へと向か�
 cx:de-scene:30	車で近づくと彼は手を振って止まれの合図を出した。	has:차로 가까워	keep	rewrites
 cx:de-scene:30	「皇太子は、ここに車でいらっしゃる予定よ」	has:차로	keep	rewrites
 cx:de-scene:30	ここから高藤学園は、地下鉄でひと駅しか離れてないので、	has:지하철로	keep	rewrites
-cx:de-scene:30	怪我人を優先しつつ、数回にわけてレイチェルのヘリで救助をしてもらった。	has:헬리콥터로 구조	keep	rewrites
+cx:de-scene:30	怪我人を優先しつつ、数回にわけてレイチェルのヘリで救助をしてもらった。	has:헬기로 구조	keep	rewrites
 cx:de-scene:30	「えーと、自転車でいいよね？」	has:자전거면 되지	keep	rewrites
 cx:de-scene:30	「あの車は車で高いだろ……」	lacks:차에서	keep	rewrites
-cx:de-scene:30	「迂回しながら島の北側へ向かう。合流予定時間の３０分前にヘリで出るぞ」	has:헬리콥터로 나오	keep	rewrites
+cx:de-scene:30	「迂回しながら島の北側へ向かう。合流予定時間の３０分前にヘリで出るぞ」	has:헬기로 나오	keep	rewrites
 cx:de-scene:30	車で帰宅する者の中には、とんでもない車でやってきた連中もいた。	lacks:차에서	keep	rewrites
 cx:de-scene:30	「半分の生徒は町の学校まではるばる自転車で登校してるんだってさ。」	has:자전거로 등교	keep	rewrites

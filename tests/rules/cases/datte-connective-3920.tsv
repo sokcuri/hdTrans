@@ -40,7 +40,7 @@ segment:datte-space	きっと僕にも悪いところがあったって 思う�
 segment:datte-space	いや 替わったって 言ってましたよ	아니 바뀌었다고 했었어요	fix	segment
 segment:datte-space	かわいいじゃないですか。 いいから 心配したって 言ってあげてください。 とりあえず あれだ。	귀엽잖아요. 좋으니까 걱정했다고 해 주세요. 우선 저것이다.	fix	segment
 segment:datte-space	いや でも さっきはﾃﾚﾋﾞ用に ﾄﾞﾀｷｬﾝして迷惑かけたって 言ってたけど 光石さんが謝りたいのは それだけじゃないからさ｡	아니 하지만 조금 전은 텔레비전용으로 펑크해 폐를 끼쳤다고 했지만 코우세키 씨가 사과하고 싶은 것은 그것만이 아니니까.	fix	segment
-segment:datte-space	そのとおりだ で こっちの彼女は あんたの上官の大佐殿だって 言ってるわけね	그대로다로 여기의 그녀는 너의 상관의 대령님이라고 말하는 것이네	fix	segment
+segment:datte-space	そのとおりだ で こっちの彼女は あんたの上官の大佐殿だって 言ってるわけね	그대로다로 이쪽의 그녀는 너의 상관의 대령님이라고 말하는 것이네	fix	segment
 segment:datte-space	松吉でおまんな。 そうだ。 確か そいつなら なかなか達者な指使いするやつだって 聞いてます。	마츠요시로 만인. 그래. 분명 그 녀석이라면 꽤 능숙한 손가락 써 하는 녀석이라고 듣고 있습니다.	fix	segment
 segment:datte-space	ルイスはとても元気で いい子にしてたって 言っておくわ	루이스는 무척 건강하고 좋은 아이로 하고 있었다고 해	fix	segment
 segment:datte-space	自分だけで悩んでたって 解決しませんよ｡	자신만으로 고민하고 있었다고 해결하지 않아요.	fix	segment
@@ -75,7 +75,7 @@ segment:datte-space	頑張りましょうって言った。	힘냅시다라고 �
 segment:datte-space	私だって言うよ	나도 말해	keep	segment
 cx:datte-quote:10	まだ喜多野くんが犯人だって 決まったわけやないにか	아직 기타들 군이 범인이라고 정해진 것이 아닌 인가	fix	rewrites
 cx:datte-quote:10	状況証拠は 完全に 田中斗真が犯人だって 告げてるな これ｡	정황증거는 완전히 타나카 토마가 범인이라고 고하고 있구나 이것.	fix	rewrites
-cx:datte-quote:10	ＵＳＪをねじ込んだのは 堀川の手腕だって 俺 知ってるよ！	USJ를 틀어넣은 것은 호리카와의 수완이라고 나 알고 있어!	fix	rewrites
+cx:datte-quote:10	ＵＳＪをねじ込んだのは 堀川の手腕だって 俺 知ってるよ！	USJ를 쑤셔 넣은 것은 호리카와의 수완이라고 나 알고 있어!	fix	rewrites
 cx:datte-quote:10	((俺が守りたいのは紗奈だって 気付いたんだ))	((내가 지키고 싶은 것은 사나라고 깨달았다))	fix	rewrites
 cx:datte-quote:10	私だって そう思う	나도 그렇게 생각한다	keep	rewrites
 cx:datte-quote:15	出来高制だって 最初に言ったよな	거래량제라고 처음에 말했지	fix	rewrites
@@ -94,12 +94,12 @@ segment:datte-space	>> 佐伯有美香さんですが 彼女は 店をｵｰﾌ�
 segment:datte-space	黒の暴牛に入ったのだって 自分たちのためだ	검은 폭우에 들어갔던 것은 자신들을 위해서다	keep	segment
 segment:datte-space	今日 協力するのだって 自分のためよ。	오늘 협력한다고 자신을 위해.	keep	segment
 segment:datte-space	おまけに せんじ薬だと！？ 何だって 素人が 勝手に診断して 勝手に投薬するんだ！！	게다가 달인 약이라고!? 뭐라고 아마추어가 마음대로 진단해 마음대로 투약하는 거야!!	keep	segment
-cx:datte-quote:5	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	rewrites
+cx:datte-quote:5	こっちだって もう１人くらい—	이쪽도 이제 1명 정도—	keep	rewrites
 cx:datte-quote:5	それだって君が言う 人の命を弄んだ結果だろ？	그것도 네가 말하는 사람의 생명을 희롱한 결과지?	keep	rewrites
 cx:datte-quote:5	先生 こっちだって	선생님 나도 마찬가지야	keep	rewrites
-cx:datte-quote:5	蒔奈が帰り道はこっちだって言うから信用したのに	시내가 돌아가는 길은 여기라고 말하니까 신용했는데	keep	rewrites
+cx:datte-quote:5	蒔奈が帰り道はこっちだって言うから信用したのに	시내가 돌아가는 길은 이쪽이라고 말하니까 신용했는데	keep	rewrites
 cx:datte-quote:5	それだって思い出に変わりはないでしょう	그것도 추억에 변함은 없을 거예요	keep	rewrites
-cx:datte-quote:5	こっちだってな 毎日 我慢してんだ お前に！	여기도매일 참는 거야 너에게!	keep	rewrites
+cx:datte-quote:5	こっちだってな 毎日 我慢してんだ お前に！	이쪽도매일 참는 거야 너에게!	keep	rewrites
 cx:datte-quote:5	ここだって自由な学校に見えても みんな何かに縛られてる	여기도 자유로운 학교로 보여도 모두 무언가에 속박되어 있다	fix	rewrites
 cx:datte-quote:5	これだって入ったの ５話からだし	이것도 들어간 것 5화로부터이고	fix	rewrites
 cx:datte-quote:5	あそこだって昔は賑やかだった	저기도 옛날은 떠들썩했다	keep	rewrites
@@ -110,7 +110,7 @@ segment:datte-space	あんた だって 昨日は 自分の机もロッカーも
 segment:datte-space	バカだよ あんた だって こうなるじゃん...	바보야 너도 이렇게 되잖아...	fix	segment
 segment:datte-space	あたし だって ちゃんと しゃべれてないし	나도 제대로 말하지 못하고	fix	segment
 segment:datte-space	大体 あなた だって あれだもんね	애초에 당신도 저것이군	fix	segment
-segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	가게 가만히 두어도 되는 건가? 너. 너도 지금… 손님 적지 지금.	fix	segment
+segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	has:내버려	fix	segment
 segment:datte-space	《これは あなた だって そりゃ もう この香りだよ》	《이것은 당신도 그야 이제 이 향기야》	fix	segment
 segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너도 어쩔 수 없을 거예요	fix	segment
 segment:datte-space	えっ？あんた だって さっき 裏千家とか何か言ってたじゃん。	어? 너도 조금 전 우라센케라든가 뭔가 말했잖아.	fix	segment
@@ -118,7 +118,7 @@ segment:datte-space	あなた だって エールワン？	당신도 에일 원?
 segment:datte-space	お茶 買ったの？ あんた だって 佐藤さん 来たから	차 샀어? 너도 사토 씨 왔으니까	fix	segment
 segment:datte-space	あらっ あなた だって 完成版しか見てないでしょう？	어머나 당신도 완성판밖에 보지 않을 거예요?	fix	segment
 segment:datte-space	本気で言ってる？ あんた だって 踊り子だよ？	진심으로 말해? 너도 무희야?	fix	segment
-segment:datte-space	でも だって ほら あたしだけ事件とかそういうの関係ないじゃないですか	하지만 그치만 자 저만 사건이라든지 그러한 것 관계없잖아요	keep	segment
+segment:datte-space	でも だって ほら あたしだけ事件とかそういうの関係ないじゃないですか	하지만 그치만 자 저만 사건이라든지 그런 것 관계없잖아요	keep	segment
 segment:datte-space	だって だって 近いよ…	그치만 그치만 가까워…	keep	segment
 segment:datte-space	いいでしょ 何でも こんな時間に わざわざ何でもええもん買いに行かんでも だって ないんだもん	좋지 뭐든 이런 시간에 일부러 뭐든지 좋은 걸 사러 가지 않아도 그치만 없는걸	keep	segment
 segment:datte-space	でも だって このお店がやばかったとき➡	하지만 그치만 이 가게가 위험했을 때 ➡	keep	segment

@@ -5,7 +5,7 @@ dict:ordinal-first:1	第一戦隊、戦場へ向かう。	제1전대, 전장으�
 dict:ordinal-first:1	新編「第一戦隊」を編成せよ！	신편 「제1전대」를 편성하라!	fix	local
 dict:ordinal-first:1	第一潜水隊、演習？	제1잠수대, 연습?	fix	local
 dict:ordinal-first:1	第一機動部隊、出撃します！	제1기동부대, 출격합니다!	fix	local
-dict:ordinal-first:1	第一スロに「天山」を装備	제1스로에 「텐잔」을 장비	fix	local
+dict:ordinal-first:1	第一スロに「天山」を装備	has:제1슬롯에	fix	local
 dict:ordinal-first:1	第一装備スロットに装備せよ。	제1장비 슬롯에 장비하라.	fix	local
 dict:ordinal-first:1	いよいよ第一競技の始まりだ。	드디어 제1경기의 시작이다.	fix	local
 dict:ordinal-first:1	――第一工程、着手。	――제1공정, 착수.	fix	local
@@ -18,7 +18,7 @@ dict:ordinal-first:2	第一、俺はこんなに巧くはないよ。	애초에,
 dict:ordinal-first:2	第一お前、俺より上級生だろ？！	애초에 너, 나보다 상급생이지?!	fix	local
 dict:ordinal-first:2	第一それ、賛辞じゃねえし！！！	애초에 그것, 찬사가 아니고!!!	fix	local
 dict:ordinal-first:2	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	이제……도련님이면 돼. 애초에 그런 성격이 아니고.	fix	local
-dict:ordinal-first:2	（……第一、俺みたいなガキを騙して何の意味があるんだ？）	(……애초에, 나 같은 녀석을 속여 무슨 의미가 있는 거야?)	fix	local
+dict:ordinal-first:2	（……第一、俺みたいなガキを騙して何の意味があるんだ？）	(……애초에, 나 같은 꼬맹이를 속여 무슨 의미가 있는 거야?)	fix	local
 dict:ordinal-first:1	第一、第二主砲！いい……撃て！	제1, 제2주포! 좋다……쏘아라!	fix	local
 dict:ordinal-first:1	第一人者だ。	일인자다.	keep	defaults
 dict:ordinal-first:1	第一線で戦う	제일선에서 싸운다	keep	defaults

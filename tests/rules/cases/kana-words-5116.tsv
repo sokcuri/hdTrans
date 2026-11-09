@@ -1,7 +1,7 @@
 # 규칙: LEX-5116
 rule	input	expected	kind	layer
-lookup:kana-spelling	ちびっこタイムズの時間です。	꼬마 타임즈의 시간입니다.	fix	lookup
-lookup:kana-spelling	以上 ちびっこタイムズでした。	이상 꼬마 타임즈였습니다.	fix	lookup
+lookup:kana-spelling	ちびっこタイムズの時間です。	꼬마 타임스의 시간입니다.	fix	lookup
+lookup:kana-spelling	以上 ちびっこタイムズでした。	이상 꼬마 타임스였습니다.	fix	lookup
 lookup:kana-spelling	そして とりいがあったね。	has:기둥문이 있었네	fix	lookup
 lookup:kana-spelling	着物に ちとせあめ➡	기모노에 치토세아메 ➡	fix	lookup
 lookup:kana-spelling	「そっそうだよぉ！あたしのかれしなんだぞっ！」	「그, 그래! 내 남자친구야!」	fix	lookup

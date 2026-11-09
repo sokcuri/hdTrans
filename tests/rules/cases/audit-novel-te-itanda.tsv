@@ -1,0 +1,60 @@
+# 규칙: LEX-5655
+rule	input	expected	kind	layer
+lexical:te-itanda	食べていたんだ。	has:먹고 있던 거야	fix	lookup
+lexical:te-itanda	寝ていたんだ。	has:자고 있던 거야	fix	lookup
+lexical:te-itanda	勉強していたんだ。	has:공부하고 있던 거야	fix	lookup
+lexical:te-itanda	ずっと待っていたんだ。	has:기다리고 있던 거야	fix	lookup
+lexical:te-itanda	知っていたんだ。	has:알고 있던 거야	fix	lookup
+lexical:te-itanda	着ていたんだ。	has:입고 있던 거야	fix	lookup
+lexical:te-itanda	「よかった。くまさん、うさぎちゃんたちとお昼寝していたんだ。」	has:낮잠 자고 있던 거야	fix	lookup
+lexical:te-itanda	お腹が空いていたんだ。	has:배가 고팠던 거야	fix	lookup
+lexical:te-itanda	ずっといたんだ。	has:계속 있었다	keep	lookup
+lexical:te-itanda	彼もいたんだ。	has:그도 있었다	keep	lookup
+lexical:te-itanda	いたんだよ。	lacks:손상	keep	lookup
+lexical:te-itanda	ごめん……。キスレブにいたんだよ。	has:있었	keep	lookup
+lexical:te-itanda	結婚していたんだ。	has:결혼한 거야	fix	lookup
+lexical:te-itanda	結婚していたのだ。	has:결혼했다	fix	lookup
+lexical:te-itanda	結婚していた相手。	has:결혼한 상대	fix	lookup
+lexical:te-itanda	彼女は結婚していた。	has:결혼했다	fix	lookup
+lexical:te-itanda	結婚していますが、	has:결혼했습니다만	fix	lookup
+lexical:te-itanda	ここにいたんだ。	has:여기에 있었다	keep	lookup
+lexical:te-itanda	死んでいたんだ。	has:죽어 있던 거야	keep	lookup
+lexical:te-itanda	来ていたんだ。	has:와 있던 거야	keep	lookup
+lexical:te-itanda	座っていたんだ。	has:앉아 있던 거야	keep	lookup
+lexical:te-itanda	残っていたんだ。	has:남아 있던 거야	keep	lookup
+lexical:te-itanda	生きていたんだ。	has:살아 있던 거야	keep	lookup
+lexical:te-itanda	私が焼いたんだから、ちゃんと味わってよね。	has:구웠으니까	keep	lookup
+lexical:te-itanda	胸がいたんだ。	has:가슴이 아팠다	keep	lookup
+lexical:te-itanda	覚えられていたんだ。	has:기억되어 있던 거야	fix	lookup
+lexical:te-itanda	名前を覚えられている。	has:기억되어 있다	fix	lookup
+lexical:te-itanda	覚えていたんだ。	has:기억하고 있던 거야	keep	lookup
+lexical:te-itanda	どこに行っていたの？	has:어디에 가 있었어	fix	lookup
+lexical:te-itanda	毎日学校に行っている。	has:학교에 가고 있다	keep	lookup
+lexical:te-itanda	今行っているところだ。	has:가고 있는 중	keep	lookup
+lexical:te-itanda	日が暮れていたんだ。	has:해가 져 있던 거야	fix	lookup
+lexical:te-itanda	日が暮れていた。	has:해가 져 있었다	fix	lookup
+lexical:te-itanda	途方に暮れていた。	has:어찌할 바를 모르고 있었다	keep	lookup
+lexical:te-itanda	「いえ、農家さんには廃棄しちゃうお野菜を買いに行ってるんです」	has:사러 가고 있	keep	lookup
+lexical:te-itanda	幼馴染に会いに行っていた伯爵令息だ。	lacks:만나러 가 있던	keep	lookup
+lexical:te-itanda	さっきから何度も小遍に行ってるんだけど。	lacks:가 있는데	keep	lookup
+lexical:te-itanda	父はすでに東京に行っていたんだ。	has:가 있던 거야	fix	lookup
+lexical:te-itanda	彼は今、東京に行っている。	has:도쿄에 가 있다	fix	lookup
+lexical:te-itanda	今どこに行っているの？	has:어디에 가 있는	fix	lookup
+lexical:te-itanda	小学生の頃は学校に行っていた。	has:가고 있었다	keep	lookup
+lexical:te-itanda	週に三回ジムに行っている。	has:가고 있다	keep	lookup
+lexical:te-itanda	毎週末、実家に行っている。	has:가고 있다	keep	lookup
+lexical:te-itanda	娘は幼稚園に行っている。	has:가고 있다	keep	lookup
+lexical:te-itanda	昔は教会に行っていた。	has:가고 있었다	keep	lookup
+lexical:te-itanda	トイレに行っていたんだ。	has:화장실에 가 있던 거야	fix	lookup
+lexical:te-itanda	留学でイギリスに行っていたんだ。	has:영국에 가 있던 거야	fix	lookup
+lexical:te-itanda	散歩に行っていたんだ。	has:산책하러 가 있던 거야	fix	lookup
+lexical:te-itanda	東京に行っていたんだ。	has:도쿄에 가 있던 거야	fix	lookup
+lexical:te-itanda	コンビニに行っていたのよ。	has:편의점에 가 있었	fix	lookup
+lexical:te-itanda	小学生の頃は学校に行っていたんだ。	has:가고 있던 거야	keep	lookup
+lexical:te-itanda	週に三回ジムに行っていたんだ。	has:가고 있던 거야	keep	lookup
+lexical:te-itanda	毎週末、実家に行っていたんだ。	has:가고 있던 거야	keep	lookup
+lexical:te-itanda	学校に行っていたんだ。	has:가고 있던 거야	keep	lookup
+lexical:te-itanda	会社に行っているんです。	has:가고 있습니다	keep	lookup
+lexical:te-itanda	まだ学校に行っている。	has:가고 있다	keep	lookup
+lexical:te-itanda	今は大学に行っている。	has:가고 있다	keep	lookup
+lexical:te-itanda	トイレに行っている。	has:가고 있다	keep	lookup

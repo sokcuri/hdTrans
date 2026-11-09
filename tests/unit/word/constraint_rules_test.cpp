@@ -85,6 +85,7 @@ const dict::Snapshot* Dictionary() {
          "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"
          "いた\t아$AA@\tH7N0\t\t\tGN\t87\n"
          "いた\t손상&C6@\tM425\t\t\tGN\t88\n"
+         "いたんだ\t있었다\tA9D1\t\t\tGN\t88\n"
          "い\t&HN@\tM417\t\t\tGN\t89\n"
          "わけ\t이유\tN110\t\t\tGN\t90\n"
          "わけ\t나&C4@\tM417\t\t\tGN\t91\n"
@@ -198,7 +199,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{100});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{103});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -435,6 +436,15 @@ HD_TEST(constraint_ita_after_te) {
         {"見ていたい", "いたい", "いた", "아$AA@ 손상&C6@"},
         {"部屋でいたします", "いたします", "いた", "아$AA@ 손상&C6@"},
         {"肩がいたんだ", "いたんだ", "いた", "아$AA@ 손상&C6@"},
+    });
+}
+
+// いたんだ right after て or で is いる's past and んだ, not the word 있었다 (食べていたんだ); elsewhere it stays.
+HD_TEST(constraint_itanda_after_te) {
+    CheckCases({
+        {"食べていたんだ", "いたんだ", "いたんだ", ""},
+        {"読んでいたんだ", "いたんだ", "いたんだ", ""},
+        {"ここにいたんだ", "いたんだ", "いたんだ", "있었다"},
     });
 }
 

@@ -1,0 +1,26 @@
+# 규칙: SND-24
+rule	input	expected	kind	layer
+sound:drawn-before-word	はぁぁいいね。	has:하아아 좋네	fix	sound
+sound:drawn-before-word	はぁぁすごい。	has:하아아 대단해	fix	sound
+sound:drawn-before-word	はぁぁもう無理。	has:하아아 이제 무리	fix	sound
+sound:drawn-before-word	はぁぁおいしい。	has:하아아 맛있다	fix	sound
+sound:drawn-before-word	はぁぁいや、	has:하아아 아니	fix	sound
+sound:drawn-before-word	はぁぁとても疲れた。	has:하아아 무척	fix	sound
+sound:drawn-before-word	はあぁいいね。	has:하아아 좋네	fix	sound
+sound:drawn-before-word	はあぁすごい。	has:하아아 대단해	fix	sound
+sound:drawn-before-word	ふぅぅいいね。	has:후우우 좋네	fix	sound
+sound:drawn-before-word	ふぅぅのんびり。	has:후우우 한가로이	fix	sound
+sound:drawn-before-word	へぇぇすごい。	has:헤에에 대단해	fix	sound
+sound:drawn-before-word	「はぁぁいいね」	has:하아아 좋네	fix	sound
+sound:drawn-before-word	はぁぁ、いいね。	has:하아아, 좋네	keep	sound
+sound:drawn-before-word	はぁぁ良いね。	has:하아아 좋네	keep	sound
+sound:drawn-before-word	はぁぁ気持ちいい。	has:하아아 기분 좋다	keep	sound
+sound:drawn-before-word	はぁぁ……疲れた。	has:하아아……지쳤다	keep	sound
+sound:drawn-before-word	はぁいいね。	has:하아 좋네	keep	sound
+sound:drawn-before-word	はぁぁぁいいね。	has:하아아아 좋네	keep	sound
+sound:drawn-before-word	はぁぁと溜息をついた。	has:하아아 하고 한숨	keep	sound
+sound:drawn-before-word	あたしはぁぁ、もう無理。	has:나는, 이제 무리	keep	sound
+sound:drawn-before-word	私はぁぁ……	has:나는……	keep	sound
+sound:drawn-before-word	はぁぁっ！	has:하아앗	keep	sound
+sound:drawn-before-word	はあぁっ！か、艦首が…くっ…	has:하아앗	keep	sound
+sound:drawn-before-word	わああぁん！	lacks:와아아 응	keep	sound

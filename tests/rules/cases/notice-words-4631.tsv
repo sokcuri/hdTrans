@@ -74,7 +74,7 @@ cx:notice-words-1:66	「私は、赤点を取ってない」	has:낙제점을 �
 cx:notice-words-1:66	バスケで点を取った。	!rule:cx:notice-words-1:66	keep	rewrites
 cx:notice-words-1:84	昔のことを思い出した。	옛일을 떠올렸다.	fix	rewrites
 cx:notice-words-1:84	用事を思い出しました。	용무를 떠올렸습니다.	fix	rewrites
-cx:notice-words-1:84	来月結婚すると言っていたのを思い出した。	내달 결혼한다고 한 것을 떠올렸다.	fix	rewrites
+cx:notice-words-1:84	来月結婚すると言っていたのを思い出した。	다음 달 결혼한다고 한 것을 떠올렸다.	fix	rewrites
 cx:notice-words-1:84	ああ…思い出した！	아…생각해 냈어!	keep	rewrites
 cx:notice-words-1:84	アオ君が私を思い出すまで。	아오 군이 나를 생각해 낼 때까지.	keep	rewrites
 cx:notice-words-1:86	新曲を配信する。	신곡을 공개한다.	fix	rewrites

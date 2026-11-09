@@ -9,7 +9,7 @@ cx:datte-quote:47	勇太　生きててよかったって思う日は	유타 살
 cx:datte-quote:20	その会社社長ずっと好きだった人と　キスしたって自分から奥さんに話したの。	그 회사 사장 계속 좋아했던 사람과 키스했다고 스스로 부인에게 이야기했어.	fix	rewrites
 cx:datte-quote:20	なんか この辺で 道場破りが出たって ＳＮＳで 今 話題になってるみたいです。	뭔가 이 근처에 무예 겨루기가 나왔다고 SNS에서 지금 화제가 되고 있는 것 같습니다.	fix	rewrites
 cx:datte-quote:45	後で母親が、ミドリさんとお話したら体が軽くなったってぼそっと言ってた	나중에 어머니가, 미도리 씨와 이야기 하면 몸이 가벼워졌다고 툭 말했다	keep	rewrites
-cx:datte-quote:45	まだ八月だっていうのにね	아직 팔월이라고 말하는데	keep	rewrites
+cx:datte-quote:45	まだ八月だっていうのにね	아직 8월이라고 말하는데	keep	rewrites
 cx:datte-quote:45	ダメだダメだって、まるで自分に言い聞かせるみたいに	안 된다 안 된다고, 마치 자신에게 타이르는 것 같이	keep	rewrites
 cx:datte-quote:47	新しい醫者が来たっておまえ言ってたけど……誰もいないじゃないか。	새로운 의사가 왔다고 너 말했지만……아무도 없잖아.	keep	rewrites
 cx:datte-quote:47	（昌子）いじめられたって娘が言ってるんですよ。	(마사코) 괴롭힘을 당했다고 딸이 말하는 거예요.	keep	rewrites
@@ -45,7 +45,7 @@ cx:datte-listing:10	大変だ ホテルだって｡ なんとかならない？	
 cx:datte-listing:30	あんた 家事も育児もしないし たまに休みでも ゴルフだ何だって 遊んでばっかりで｡	너 가사도 육아도 하지 않고 이따금 휴일이라도 골프니 뭐니 놀아뿐으로.	fix	rewrites
 cx:datte-listing:30	神だ何だって胡散臭いけど	신이니 뭐니 어쩐지 수상한데	fix	rewrites
 cx:datte-listing:30	それに 毎日 残業だ何だって 言って 夜中まで帰ってこない。	게다가 매일 잔업이니 뭐니 말해 한밤중까지 돌아오지 않는다.	fix	rewrites
-cx:datte-listing:30	少子化だ何だっていわれてるけど	소자녀화니 뭐니 말해지고 있는데	fix	rewrites
+cx:datte-listing:30	少子化だ何だっていわれてるけど	저출산이니 뭐니 말해지고 있는데	fix	rewrites
 cx:datte-listing:30	社長だ何だって いい気になってるらしいがな	사장이니 뭐니 혼자 좋아하게 되어 있는 모양이	fix	rewrites
 cx:datte-listing:30	セクハラだ何だって 大騒ぎしますからね	성희롱이니 뭐니 소란을 피우니까요	fix	rewrites
 cx:datte-listing:30	会長だ何だって いつまでも会社に居座る｡	회장이니 뭐니 언제까지나 회사에 눌러 앉는다.	fix	rewrites
@@ -84,7 +84,7 @@ cx:stem-noun-object:10	「それはお互い様よ。イスカの面倒見てく
 cx:stem-noun-object:10	夕飯作ってる時くらい子どもの面倒見ててよ…	저녁 만들고 있을 때 정도 아이를 돌보고 있어…	fix	rewrites
 cx:stem-noun-object:10	だから 捜してください 兄はずっと僕の面倒見てくれて...	그러니까 찾아 주세요 형은 계속 나를 돌봐 줘...	fix	rewrites
 cx:stem-noun-object:10	母親が子供の面倒見るのは 当然じゃないか。	어머니가 아이를 돌보는 것은 당연하잖아.	fix	rewrites
-cx:stem-noun-object:10	でも 何万って靴の面倒見てきた人 そうは いないと思いますよ。	하지만 몇만은 구두를 돌봐 온 사람 그렇게는 없다고 생각해요.	fix	rewrites
+cx:stem-noun-object:10	でも 何万って靴の面倒見てきた人 そうは いないと思いますよ。	하지만 몇만은 신발을 돌봐 온 사람 그렇게는 없다고 생각해요.	fix	rewrites
 cx:stem-noun-object:10	物心ついた頃から ずっと 肇の面倒見てきて 仕送りもして	철이 들었을 무렵부터 계속 조를 돌봐 와 송금도 해	fix	rewrites
 cx:stem-noun-object:10	あいつの面倒見てあげられるのも 俺ぐらいしか いないからさ。	저 녀석을 돌봐 줄 수 있는 것도 나 정도밖에 없으니까.	fix	rewrites
 cx:stem-noun-object:10	相葉君は　あれでなかなか人望が厚いのですよ。スタッフにも愛されていますし後輩への面倒見もいいです	아이바 군은 저것으로 꽤 덕망이 두터운 것이에요. 스태프에게도 사랑받고 있고 후배에 대한 돌보기도 좋습니다	keep	rewrites

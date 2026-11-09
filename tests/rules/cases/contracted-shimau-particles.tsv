@@ -27,7 +27,7 @@ ending:chau-particles	こんなに暇だと体がくさっちまうよ。	이렇
 ending:chau-particles	このままじゃ、戦場に送られちまうよ。	이대로는, 전장에 보내져버릴 거야.	fix	builtin-ending
 ending:chau-particles	がんばっちゃうよ～！	열심히 해버릴 거야~!	fix	builtin-ending
 ending:chau-particles	フッ、襲っちゃうよ？	훗, 덮쳐버릴 거야?	fix	builtin-ending
-ending:chau-particles	見参しちゃうよぉ！	알현해버릴 거야!	fix	builtin-ending
+ending:chau-particles	見参しちゃうよぉ！	has:등장해버릴	fix	builtin-ending
 ending:chau-particles	じゃあ、勝手に机とか見ちゃうよ？	그럼, 마음대로 책상이라든지 봐버릴 거야?	fix	builtin-ending
 ending:chau-particles	「と、とと、溶けちゃうよ！？」	「노, 노, 녹아버릴 거야!?」	fix	builtin-ending
 ending:chau-particles	「すぐに尽きちゃうよ」	「곧바로 다해버릴 거야」	fix	builtin-ending

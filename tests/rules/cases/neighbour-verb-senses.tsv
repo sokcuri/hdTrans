@@ -42,17 +42,17 @@ dict:jisjk:93094	幼い頃、こっそり出かける親の後に付いていっ
 dict:jisjk:93094	もつれそうな足を引きずって、ジークさんに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	ブレトはカブリの様子を不思議がりながらも、彼の後に付いて行く。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	『意識』は、その『誰か』の後ろに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
-dict:jisjk:93288	どうなったか、コンラートさんに聞こうと思っていたんだ。	has:물으려고 하고 있었다	fix	local
-dict:jisjk:93288	「前から言おうと思っていたんだけどねぇ森……」	has:말하려고 하고 있었다	fix	local
-dict:jisjk:93288	「行こうと思っていたんだけど、急に怖くなって」	has:가려고 하고 있었다	fix	local
+dict:jisjk:93288	どうなったか、コンラートさんに聞こうと思っていたんだ。	has:물으려고 한 거야	fix	local
+dict:jisjk:93288	「前から言おうと思っていたんだけどねぇ森……」	has:말하려고 했는데	fix	local
+dict:jisjk:93288	「行こうと思っていたんだけど、急に怖くなって」	has:가려고 했는데	fix	local
 dict:jisjk:93288	本当はもう少し溜まってから一気にやろうと思っていたんだが、どうせ暇ならやってもいいだろう。	has:하려고 하고 있었는데	fix	local
-dict:jisjk:93288	それも謝ろうと思っていたんだ」	has:사과하려고 하고 있었다	fix	local
-dict:jisjk:93288	うさぎ焼きは後で食べようと思っていたんだ。	has:먹으려고 하고 있었다	fix	local
-dict:jisjk:93288	早いとこ適当なことを言って帰ろうと思っていたんだ。	has:돌아가려고 하고 있었다	fix	local
-dict:jisjk:93288	「あ、いいよ！ほんとはこちらからお願いしようと思っていたんだ」	has:부탁하려고 하고 있었어	fix	local
-dict:jisjk:93288	「そのことをお前に相談しようと思っていたんだ。運よくこちらに出向いてくれて助かったよ」	has:상담하려고 하고 있었어	fix	local
-dict:jisjk:93288	「ああ。丁度行こうと思っていたんだ」	has:가려고 하고 있었어	fix	local
-dict:jisjk:93288	戦いが始まる前にクランメンバーの様子を確認しておこうと思っていたんだ。	has:두려고 하고 있었다	fix	local
+dict:jisjk:93288	それも謝ろうと思っていたんだ」	has:사과하려고 한 거야	fix	local
+dict:jisjk:93288	うさぎ焼きは後で食べようと思っていたんだ。	has:먹으려고 한 거야	fix	local
+dict:jisjk:93288	早いとこ適当なことを言って帰ろうと思っていたんだ。	has:돌아가려고 한 거야	fix	local
+dict:jisjk:93288	「あ、いいよ！ほんとはこちらからお願いしようと思っていたんだ」	has:부탁하려고 한 거야	fix	local
+dict:jisjk:93288	「そのことをお前に相談しようと思っていたんだ。運よくこちらに出向いてくれて助かったよ」	has:상담하려고 한 거야	fix	local
+dict:jisjk:93288	「ああ。丁度行こうと思っていたんだ」	has:가려고 한 거야	fix	local
+dict:jisjk:93288	戦いが始まる前にクランメンバーの様子を確認しておこうと思っていたんだ。	has:두려고 한 거야	fix	local
 dict:jisjk:93288	後、ジュンに引導をわたそうと思っていたんだが。	has:건네려고 하고 있었는데	fix	local
 dict:jisjk:93288	お手伝いしようと思って、彼女の尻を上げさせた。	has:도우려고 해,	keep	local
 dict:jisjk:93288	「…ええ。そっちは別件として頼もうと思っていました」	has:부탁하려고 했습니다	keep	local

@@ -13,7 +13,7 @@ rewrite:past-sequence	スプーンでご飯を皿に掻き出すと、白いも�
 rewrite:past-sequence	スカイデッキにあがると、無数の星が散りばめられた夜空が頭上に広がった。	has:오르니,	fix	rewrites
 rewrite:past-sequence	漫画を手渡して帰ろうとすると、廊下の奥から驚いたような声が聞こえてきた。	has:하니,	fix	rewrites
 rewrite:past-sequence	そう決意して、さらに足を進めると、奇妙なふたり組の会話がハッキリと聞こえてきた。	has:옮기니,	fix	rewrites
-rewrite:past-sequence	菊の門にぎゅっと力を込めると、それが堰となって熱の暴走を一時的にせき止められた気がした。	has:집중하니,	fix	rewrites
+rewrite:past-sequence	菊の門にぎゅっと力を込めると、それが堰となって熱の暴走を一時的にせき止められた気がした。	has:힘을 주니,	fix	rewrites
 rewrite:past-sequence	テレジアの父、ヴァーゲル公爵が憤然として言うと、貴族から次々に「賛成」の声が上がった。	has:말하자,	keep	rewrites
 rewrite:past-sequence	未だ蒼ざめているテレジアが微かに首を振ると、ハッとしたように口を押えて言い直した。	has:젓자,	keep	rewrites
 rewrite:past-sequence	元気よく朝の挨拶をすると、クラスメイトがどーっと集まってきた。	has:하자,	keep	rewrites

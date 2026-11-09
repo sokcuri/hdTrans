@@ -12,7 +12,7 @@ lookup:closing-greeting	「わかったよ。後輩２人組、よろしくな�
 lookup:closing-greeting	よろしくな　裕太	잘 부탁해 유우타	fix	lookup
 lookup:closing-greeting	ミカを よろしくな｡	미카를 잘 부탁해.	fix	lookup
 lookup:closing-greeting	妹か… よろしくな｡	여동생인가… 잘 부탁해.	fix	lookup
-lookup:closing-greeting	よろしくな｡ こっちは妹の二葉｡	has:잘 부탁해. 여기는	fix	lookup
+lookup:closing-greeting	よろしくな｡ こっちは妹の二葉｡	has:잘 부탁해. 이쪽은	fix	lookup
 lookup:closing-greeting	（エドガー）よろしくな	(에드거) 잘 부탁해	fix	lookup
 lookup:closing-greeting	司令、よろしくな。会えて嬉しいぜ。	사령관, 잘 부탁해. 만날 수 있어서 기뻐.	fix	lookup
 lookup:closing-greeting	今年もよろしくな？	올해도 잘 부탁해?	fix	lookup

@@ -1,0 +1,37 @@
+rule	input	expected	kind	layer
+dict:jisjk:260867	樹の根本に何かの種のようなものが落ちていることに気付いた。	has:나무의	fix	defaults
+dict:jisjk:260867	大きな樹の下で休んだ。	has:큰 나무 아래	fix	defaults
+dict:jisjk:260867	樹が倒れた。	나무가 쓰러졌다.	fix	defaults
+dict:jisjk:260867	錬と樹に目を向ける。	lacks:나무에	keep	defaults
+dict:jisjk:115824	樹さんが来た。	has:이츠키 씨	keep	defaults
+dict:jisjk:260867	樹木	수목	keep	defaults
+dict:jisjk:260867	果樹園	과수원	keep	defaults
+dict:jisjk:260867	街路樹	가로수	keep	defaults
+names:status-window	力：35	힘：35	fix	names
+names:status-window	敏捷：Ｂ+	has:민첩：	fix	names
+names:status-window	アヤメ：こんにちは	아야메：안녕하세요	keep	names
+dict:jisjk:260867	一本の巨大な樹が描かれていた。	has:거대한 나무가	fix	local
+dict:jisjk:260867	人影は皆、細長い物を抱え樹の根元へ向かっていた。	has:나무 밑동	fix	local
+names:single-kanji-name	樹は笑った。	이츠키는 웃었다.	fix	names
+names:single-kanji-name	「樹、どこ行くの？」	has:「이츠키,	fix	names
+names:single-kanji-name	　樹の言うとおり、基本的に周はあまり自身の事に頓着しない。	has:이츠키가 말하는	fix	names
+names:single-kanji-name	　よくそれで一人暮らしすると言えたな、と樹に呆れられるほどだ。	has:이츠키에게	fix	names
+names:single-kanji-name	力は笑った。	치카라는 웃었다.	fix	names
+names:single-kanji-name	力が全てではない。	has:힘이	keep	names
+names:single-kanji-name	車はじゃり道の上をがりがり言わせてＵターンすると	has:차는	keep	names
+names:status-window	アヤメ：……	아야메：……	keep	names
+names:status-window	アヤメ：OK	has:아야메：	keep	names
+names:status-window	力：Lv.3	has:힘：	fix	names
+names:ordinary-ruby	力《ちから》が欲しいか。	has:힘을	fix	names
+names:ordinary-ruby	力（ちから）は誰にも止められない。	has:힘은	fix	names
+names:status-window	アヤメ：あと10分だよ。	has:아야메：	keep	names
+dict:jisjk:260867	樹を切った。	나무를 잘랐다.	fix	local
+dict:jisjk:260867	樹の実家に行った。	lacks:나무의 본가	keep	local
+dict:jisjk:260867	樹が生意気なことを言う。	lacks:나무가	keep	local
+dict:jisjk:260867	樹の声が聞こえる。	has:나무의 목소리	fix	local
+dict:jisjk:260867	風が吹くたび、樹がざわめく。	has:나무가 웅성거린다	fix	local
+dict:jisjk:260867	樹が茂っている。	has:나무가	fix	local
+dict:jisjk:260867	一本の樹が立っていた。	has:한 개의 나무가	fix	local
+dict:jisjk:260867	樹は静かに佇んでいた。	lacks:나무는	keep	local
+dict:jisjk:260867	元気な樹が走ってきた。	lacks:나무가	keep	local
+dict:jisjk:260867	一本の巨大な樹が描かれていた。	has:거대한 나무가	fix	local

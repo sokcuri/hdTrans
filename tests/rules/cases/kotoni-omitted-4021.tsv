@@ -6,7 +6,8 @@ cx:kotoni-omitted:10	「……どうして、どうして、こんなことに�
 cx:kotoni-omitted:10	「……どうして、こんなことに」	「……왜, 이렇게 된 거지」	fix	rewrites
 cx:kotoni-omitted:10	一体どうしてこんなことに	도대체 왜 이렇게 된 거지	fix	rewrites
 cx:kotoni-omitted:10	どうしてこんなことになったんだ？	!rule:cx:kotoni-omitted:10	keep	rewrites
-cx:kotoni-omitted:20	そんなことに？	그렇게 된 거야?	fix	rewrites
+cx:kotoni-omitted:20	こんなことに？	rule:cx:kotoni-omitted:20=이렇게 된 거야	fix	rewrites
+cx:kotoni-omitted:50	そんなことに？	그렇게 된 거야?	fix	rewrites
 cx:kotoni-omitted:20	こんなことにならないように	!rule:cx:kotoni-omitted:20	keep	rewrites
 cx:kotoni-omitted:30	大体 そんな格好(かっこ)でいるから こんなことに…	has:이런 일이…	fix	rewrites
 cx:kotoni-omitted:30	まさかこんなことに……	설마 이런 일이……	fix	rewrites

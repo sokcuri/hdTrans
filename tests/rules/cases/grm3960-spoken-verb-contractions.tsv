@@ -8,7 +8,7 @@ normalize:ru-contraction	清めんのよ 全てを これで… 嫌い！	정화
 normalize:ru-contraction	あんたなんかに 何が分かんのよ｡	너같은 것에 무엇을 알 수 있는 거야.	fix	normalize
 normalize:ru-contraction	寅さん 帰ってくんの？	토라 씨 돌아오는 거야?	fix	normalize
 normalize:ru-contraction	「ギャル系で攻めんならよ、高雄妹は超えてこいや！」	「갸루계로 공격한다면, 다카오여동생은 넘고 와야!」	fix	normalize
-normalize:spoken-verb	親方 お帰んなさい	우두머리 어서 오세요	fix	normalize
+normalize:spoken-verb	親方 お帰んなさい	대장 어서 오세요	fix	normalize
 normalize:spoken-verb	だめだこいつ話になんねぇ。	안 된다 이 녀석 이야기가 되지 않는다.	fix	normalize
 normalize:spoken-verb	だから うまくなんないんじゃないの？	그러니까 능숙해지지 않는 거 아니야?	fix	normalize
 normalize:spoken-verb	殺しちまったらシャレになんねえぞ	죽여버리면 장난이 아니야	fix	normalize
@@ -38,7 +38,7 @@ normalize:spoken-verb	まったく。相変わらずめんどくさいわねぇ�
 normalize:ru-contraction	兄さんのことを考えると、お胸がちくちくするです	형님을 생각하면, 가슴이 따끔따끔합니다	keep	normalize
 normalize:spoken-verb	隼斗もすっかり逞しくなったな。胸板もこんなに厚くなって	하야토도 완전히 다부져졌군. 가슴팍도 이렇게 두꺼워져	keep	normalize
 normalize:spoken-verb	「あ、謝んないでよ……筧は悪くない」	「아, 사과하지 마……견은 나쁘지 않아」	keep	normalize
-normalize:spoken-verb	ならほっとけば良いじゃない。相手にするだけ時間の無駄よね	그렇다면 가만히 두면 되잖아. 상대로 할 뿐 시간 낭비지	keep	normalize
+normalize:spoken-verb	ならほっとけば良いじゃない。相手にするだけ時間の無駄よね	has:내버려	keep	normalize
 normalize:ru-contraction	おい何でお前も手伝わんのだ？	어이 왜 너도 돕지 않는 거야?	keep	normalize
 normalize:ru-contraction	ふん、器になる適正がある以外で、この女になんの価値があるというのよ	흥, 그릇이 되는 적성이 있는 이외로, 이 여자에게 무슨 가치가 있다는 것	keep	normalize
 normalize:ru-contraction	か、可愛いんならよかったんですけど	귀, 귀여운다면 좋았는데요	keep	normalize
@@ -46,7 +46,7 @@ normalize:ru-contraction	「これは……本当に俺の人生なのか？　�
 normalize:toku	幼いときから わたしは人が地獄へ流される印として	어릴 때로부터 나는 사람이 지옥에 떠밀리는 표로서	keep	normalize
 normalize:ru-contraction	「昨夜から今朝まであのテンションらしいよ？！ 責任取れんの？！」	「어젯밤부터 오늘 아침까지 그 텐션인 것 같아?! 책임 잡히는 거야?!」	fix	normalize
 normalize:ru-contraction	何でみんな鬼怒に豆投げんのよ！？	왜 모두 키누에 콩 던지는 거야!?	fix	normalize
-normalize:toku	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 선술집, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	normalize
+normalize:toku	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 이자카야, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	normalize
 normalize:toku	フタサンマルマル。提督、お疲れだな。明日も忙しいだろ？ ちと寝とけって。ああ、お疲れ。	2300. 제독, 피곤하네. 내일도 바쁘지? 좀 자 두라고. 아, 수고했어.	fix	normalize
 normalize:fused-adjective	いいじゃん細けえことはよ！	좋잖아 사소한 일은!	fix	normalize
 normalize:spoken-verb	何か もう分かっちゃってんじゃん この２人は	뭔가 벌써 알아 버렸지 이 2명은	keep	normalize

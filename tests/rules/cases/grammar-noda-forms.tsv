@@ -6,7 +6,7 @@ ending:noda-na	隊長よ、貴様も苦労しているのだな。	대장이여,
 ending:noda-na	これを佐藤にぶつけるのだな。	has:부딪치는구나.	fix	builtin-ending
 ending:noda-na	「わたしは死んだのだな……」	「나는 죽었구나……」	fix	builtin-ending
 ending:noda-na	この艦隊もクリスマスは祝うのだな。	이 함대도 크리스마스는 축하하는구나.	fix	builtin-ending
-ending:noda-na	こっちに逃げたんだな？	여기에 도망쳤구나?	keep	builtin-ending
+ending:noda-na	こっちに逃げたんだな？	이쪽으로 도망쳤구나?	keep	builtin-ending
 ending:noda-na	夏が来るのだ。	여름이 온다.	keep	builtin-ending
 dict:gram:noda-aru:1	自らの身を守ることが必要だったのである。	스스로의 몸을 지키는 것이 필요했던 것이다.	fix	local
 dict:gram:noda-aru:1	静かだったのである。	조용했던 것이다.	fix	local

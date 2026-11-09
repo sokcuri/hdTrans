@@ -42,4 +42,4 @@ cx:web-fixes-j:262	佐々木さん。 母親が ７年も持ち続けた袋か�
 cx:web-fixes-j:262	三年も持った家宝	!rule:cx:web-fixes-j:262	keep	rewrites
 cx:web-fixes-j:262	門限も持たない生徒がこれだけブラついていて	!rule:cx:web-fixes-j:262	keep	rewrites
 pack:argument-senses:5100	バッテリーが持たない	has:배터리가 버티지	fix	packs
-pack:argument-senses:5100	シールドを持った騎士	has:쉴드를 가진 기사	keep	packs
+pack:argument-senses:5100	シールドを持った騎士	has:실드를 가진 기사	keep	packs

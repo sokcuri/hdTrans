@@ -56,7 +56,7 @@ grammar:result-suru-past	半年だけ結婚してるが 移民を合法化する
 grammar:result-suru-past	Jean Bart、完成してるわ。	Jean Bart, 완성했어.	fix	conjugation
 grammar:result-suru-past	あの子 優勝してる。	그 아이 우승했다.	fix	conjugation
 grammar:result-suru-past	そ、そうだね…結婚してたくさん、経ってるのに	그, 그러게…결혼 했던 씨, 지나 있는데	keep	conjugation
-grammar:result-suru-past	ただ、部屋中が破損してるから、怪我に気をつけてね」	다만, 방 전체가 파손하고 있으니, 상처를 조심해」	keep	conjugation
+grammar:result-suru-past	ただ、部屋中が破損してるから、怪我に気をつけてね」	다만, 방 전체가 파손되어 있으니, 상처를 조심해」	keep	conjugation
 grammar:result-suru-past	｢結婚してますか｣だって	｢결혼합니까｣래	keep	conjugation
 grammar:result-suru-past	準備してた頃は、香々祭をしてくれるなんて思ってもいませんでしたから	준비하고 있었을 무렵은, 야채 절임제를 해 준다고 생각하지도 않았으니까	keep	conjugation
 grammar:result-suru-past	筧がいなかったら失敗してた」	견이 없었으면 실패했다」	keep	conjugation
@@ -113,7 +113,7 @@ cx:promise-kara:10	「うん、台所にいる。片付けてから行くから�
 cx:promise-kara:10	当たり。次のときは頑張るから期待しててね…おやすみ	정답. 다음 때는 노력할 테니까 기대하고 있어…잘 자	fix	rewrites
 cx:promise-kara:10	「おい！　俺が悪かったよ！　こないだの事は謝るから出してくれ！」	「어이! 내가 나빴어! 지난번의 일은 사과할 테니까 내 줘!」	fix	rewrites
 cx:promise-kara:10	「俺が何かしたなら謝るから、ここから出してくれ！　頼むよ！」	「내가 뭔가 했다면 사과할 테니까, 여기에서 내 줘! 부탁해!」	fix	rewrites
-cx:promise-kara:10	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 선술집, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	rewrites
+cx:promise-kara:10	「あーそれから、いつもの居酒屋、連絡入れとくからお二人連れて飲んでいきなさい。積もる話もあるだろ、ワシのおごりだ」	「아-그리고, 평소의 이자카야, 연락 넣어 둘 테니까 두 사람 데리고 마셔 가. 쌓이는 이야기도 있겠지, 내가 계산하다」	fix	rewrites
 cx:yo-intent:17	「そのカメラ全部使ってとにかくあのデカブツを撮影しろ、全部動画でな。俺は地上に状況を報告に行く」	「그 카메라 전부 써 어쨌든 그 덩치를 촬영해라, 전부 동영상 나오는 거야. 나는 지상에 상황을 보고하러 갈 거야」	fix	rewrites
 cx:kure-request:10	『リック、とにかくこの事を早く大統領に報告してくれ、それと世界各国にもだ。ほっておいても世界に知れ渡るだろうが、とにかく早いほうがいい』	『릭, 어쨌든 이 일을 빨리 대통령에게 보고해 줘, 그것과 세계 각국에도다. 그냥 두어도 세계에 널리 알려지겠지만, 어쨌든 빠른 편이 좋아』	fix	rewrites
 cx:promise-kara:10	ちょっと詳しく書き込むから待っててー	조금 자세하게 적을 테니까 기다리고 있어~	fix	rewrites

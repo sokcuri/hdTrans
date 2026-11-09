@@ -129,7 +129,8 @@ std::string ComposeKanaPairs(std::string_view text);
 // small vowel or a katakana letter composed (ウ゛ァ ヴァ); the CP932 mapping differences (〜 ～,
 // − －, ‖ ∥, ¢ £ ¬ in full width) and kanji forms outside JIS X 0208 (頰 頬, 𠮟 叱) mapped;
 // ‼ ⁉ ⁈ as two marks (！！ ！？ ？！) without a variation selector after them; U+0000..U+0003 as
-// spaces. Invalid UTF-8 bytes are kept.
+// spaces; a katakana コ alone after a number as the counter 個 (784コ 784個, not 3コース). Invalid UTF-8
+// bytes are kept.
 std::string NormalizeForms(std::string_view text);
 
 // A run of two or more っ or ッ after a letter and before a letter other than a small kana, ー

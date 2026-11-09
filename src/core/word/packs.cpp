@@ -380,6 +380,19 @@ std::string_view Feature(const AttachClause* c, std::string_view key) {
     return {};
 }
 
+// Whether the argument word x is of class cls by the pack-classes files; a plural of a noun of the class is of it
+// (猫たち, 子供ら, 少年たち: noun.plural-suffix), whether the suffix is a word of its own or ends the word.
+bool ArgMember(const dict::PackTable& t, const Item* x, std::string_view cls) {
+    const std::string_view s = x->group->surface;
+    if (t.Member(s, cls)) return true;
+    if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), s)) {
+        const Item* head = x->prev;
+        return head != nullptr && head->group != nullptr && head->tokenIndex == x->tokenIndex && t.Member(head->group->surface, cls);
+    }
+    const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("noun.plural-suffix"), s);
+    return n > 0 && n < s.size() && t.Member(s.substr(0, s.size() - n), cls);
+}
+
 // Whether every atom of the row holds for the word, and its specificity: lexical atoms, class
 // depth, neighbour and form atoms, register atoms, atom count.
 bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, std::array<int, 5>& spec) {
@@ -392,7 +405,9 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         static constexpr std::string_view kArgSlots[] = {"arg", "subj", "obj", "dat", "loc", "with", "from", "to"};
         const std::size_t dot = a.slot.find('.');
         const std::string_view base = std::string_view(a.slot).substr(0, dot);
-        if (dot != std::string_view::npos && base != "cl" && base != "main") {
+        // <slot>.mod: the predicate right before an argument of that slot that modifies it (倒れた馬を 倒れる)
+        const bool argMod = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "mod";
+        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod) {
             // <slot>.how: how an argument of that slot is written (bare, omitted …), with an attachment
             if (!c.attached) return false;
             bool held = false;
@@ -417,7 +432,29 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             spec[2]++;
             continue;
         }
-        if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
+        if (argMod) {
+            nouns = false;
+            for (const Arg& g : c.args) {
+                if ((base != "arg" && g.slot != base) || g.item == nullptr) continue;
+                // the predicates of the noun phrase before the argument, through adnominals, other modifiers and a
+                // possessor (倒れた白い馬, 倒れた大きな犬, 倒れた彼の馬), and the て forms and auxiliaries of the one next to it
+                // (倒れて泣いている子); a て form right before the argument counts too (倒れて馬を起こした)
+                bool started = false;
+                const Item* m = g.item->prev;
+                for (int k = 0; k < 6 && m != nullptr && m->group != nullptr; k++, m = m->prev) {
+                    const char cls = ClassOf(m);
+                    if (cls == '0') continue;  // an adnominal word (大きな, この)
+                    // a possessor between the modifier and the argument (倒れた彼の馬, 倒れた私の犬)
+                    if (!started && m->group->surface == "の" && m->prev != nullptr && m->prev->group != nullptr && ClassOf(m->prev) == '1') {
+                        m = m->prev;
+                        continue;
+                    }
+                    if (!Predicate(cls)) break;
+                    started = true;
+                    if (!dict::InClass(HDTRANS_CLASS("aux.te-through"), m->group->surface)) pool.push_back({a.slot, m, {}, {}, {}});
+                }
+            }
+        } else if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
             for (const Arg& g : c.args)
                 if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
@@ -467,7 +504,7 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             for (const std::string& v : a.values) {
                 if (v.starts_with("@")) {
                     // by the pack-classes files, or by the class the attachment gives the argument
-                    if ((x != nullptr && t.Member(x->group->surface, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
+                    if ((x != nullptr && ArgMember(t, x, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
                         held = true;
                         depth = std::max(depth, t.Depth(v));
                     }

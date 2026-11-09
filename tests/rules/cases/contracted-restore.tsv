@@ -73,7 +73,7 @@ sound:contracted-auxiliaries	いつまでたっても	아무리 시간이 흘러
 lookup:past-before-ge	弱者はただしいたげられるだけ	약자는 다만 시달릴 뿐	keep	lookup
 sound:contracted-auxiliaries	丁度クリーニングに出そうと思ってたところだから	꼭 클리닝에 맡기려고 한 참이니까	fix	sound
 sound:contracted-auxiliaries	手を当ててたいへんだ	손을 대어 힘들다	keep	sound
-sound:contracted-auxiliaries	言ってたいしたことない	말해 대단한 것도 아니다	keep	sound
+sound:contracted-auxiliaries	言ってたいしたことない	has:별것	keep	sound
 sound:contracted-auxiliaries	割ってちゃわんを	나누어 공기 그릇을	keep	sound
 sound:contracted-auxiliaries	見てちゃんと	봐 제대로	keep	sound
 sound:contracted-auxiliaries	見てようやく	봐 드디어	keep	sound

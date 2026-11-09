@@ -213,7 +213,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アオバト	녹색비둘기	N110			GN							s:210
 アオミドロ	해캄	N110			GN							s:211
 アオミノウミウシ	파란갯민숭달팽이	N110			GN							s:212
-アオリイカ	흰꼴뚜기	N110			GN							s:213
+アオリイカ	무늬오징어	N110			GN							s:213
 アカアシクワガタ	홍다리사슴벌레	N110			GN							s:214
 アカアシドゥクラングール	붉은정강이두크	N110			GN							s:215
 アカウミガメ	붉은바다거북	N110			GN							s:216
@@ -1496,7 +1496,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 クンパオチキン	궁바오지딩	N110			GN							s:1493
 クーラーボックス	아이스박스	N110			GN							s:1494
 クールジャパン	쿨 재팬	N110			GN							s:1495
-クールダウン	정리운동	N110			GN							s:1496
+クールダウン	쿨다운	N110			GN							s:1496
 グアバ	구아바	N110			GN							s:1497
 グアバオ	꾸아빠우	N110			GN							s:1498
 グアンロン	구안롱	N110			GN							s:1499
@@ -6417,7 +6417,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 色見本	컬러 차트	N110			GN							s:6414
 色違いポケモン	색이 다른 포켓몬	N110			GN							s:6415
 艶本	춘화	N110			GN							s:6416
-芋羊羹	이모요캉	N110			GN							s:6417
+芋羊羹	고구마 양갱	N110			GN							s:6417
 芝麻球	참깨볼	N110			GN							s:6418
 花かんむり	화관	N110			GN				llm			s:6419
 芸術作品	예술 작품	N110			GN							s:6420
@@ -7048,7 +7048,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マスをか	자위를 &AV@	M421		Pn	GN				llm			s:7045
 悪ガキ	개구쟁이	N110			GN				llm			s:7046
 家宅捜査	가택 수색	N110			GN				llm			s:7047
-小っちゃ	아담$AB@	H7N0			GN							s:7048
 承知の助	알겠습니다	E320			GN				llm			s:7049
 承知之助	알겠습니다	E320			GN				llm			s:7050
 乗っか	올라&AR@	M428			GN				llm			s:7051
@@ -7661,7 +7660,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 やり目	몸 목적	N110			GN				llm			s:7658
 モロバレ	훤히 들통&A5@	M429			GN				llm			s:7659
 ガチで	진짜로	E300			GN				llm			s:7660
-アゲアゲ	텐션이 오름	N110			GN				llm			s:7661
+アゲアゲ	하이텐션	N110			GN				llm			s:7661
 ビシバシ	사정없이	E300			GN				llm			s:7662
 しちゃダメ	하면 안 돼	A9D0			GN				llm			s:7663
 マル暴	조직폭력단 담당 경찰	N110			GN				llm			s:7664
@@ -8062,7 +8061,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハンコ絵	같은 얼굴 증후군	N110			GN				llm			s:8058
 バッチ来い	얼마든지 와라	E320			GN				llm			s:8059
 ばっち来い	얼마든지 와라	E320			GN				llm			s:8060
-無茶振り	덤터기	N110			GN							s:8061
+無茶振り	무리한 요구	N110			GN							s:8061
 無茶ぶり	무리한 요구	N110			GN				llm			s:8062
 プリケツ	빵빵한 엉덩이	N110			GN				llm			s:8063
 パーティーピープル	파티 피플	N110			GN				llm			s:8064
@@ -8285,7 +8284,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テンションが上が	텐션이 &E6@	M428			GN				llm			s:8281
 ツイッター民	트위터 유저들	N110			GN				llm			s:8282
 頬染め	볼 홍조 표현	N110			GN				llm			s:8283
-自分事	내 일	N110			GN				llm			s:8284
+自分事	자기 일	N110			GN				llm			s:8284
 自分ごと	내 일	N110			GN				llm			s:8285
 違くない	아니지 않아	A9D0			GN				llm			s:8286
 違うくない	아니지 않아	A9D0			GN				llm			s:8287
@@ -9111,7 +9110,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ケコーン	결혼	N110			GN				llm			s:9108
 ハンネ	닉네임	N110			GN				llm			s:9109
 チンコロ	밀고	N110			GN				llm			s:9110
-何なの	뭐야 대체	C0D1			GN				llm			s:9111
+何なの	뭐야	C0D1			GN				llm			s:9111
 インカジ	온라인 카지노	N110			GN				llm			s:9112
 日の丸半導体	일본 반도체 산업	N110			GN				llm			s:9113
 ウザった	짜증$A2@	H7N0			GN				llm			s:9114
@@ -9441,7 +9440,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 分かりみ	공감	N110			GN							s:9438
 陽キャラ	인싸	N110			GN							s:9442
 ガチ	진짜	N110			GN							s:9443
-ワンチャン	가능성	N110			GN							s:9444
+ワンチャン	어쩌면	N110			GN							s:9444
 厨二病	중2병	N110			GN							s:9445
 厨二	중2	N110			GN							s:9446
 ディス	디스&AV@	M428			GN							s:9448

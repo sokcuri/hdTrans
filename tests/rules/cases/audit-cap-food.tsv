@@ -1,0 +1,73 @@
+# 규칙: LEX-5602
+rule	input	expected	kind	layer
+dict:audit-cap-food	カキフライを注文した	has:굴튀김을	fix	lookup
+dict:audit-cap-food	刺し盛りを頼んだ	has:모둠회를	fix	lookup
+dict:audit-cap-food	ゲタ盛りで出てきた	has:나무판 모둠	fix	lookup
+dict:audit-cap-food	帆立の殻焼	has:껍데기 구이	fix	lookup
+dict:audit-cap-food	浜焼きセット	has:해산물 구이	fix	lookup
+dict:audit-cap-food	居酒屋で飲む	has:이자카야에서	fix	lookup
+dict:audit-cap-food	魚のうまみが出る	has:감칠맛이	fix	lookup
+dict:audit-cap-food	けがをしたのか	has:부상을 입은	fix	lookup
+dict:audit-cap-food	おろしポン酢で食べる	has:무즙 폰즈	fix	lookup
+dict:audit-cap-food	脂のりが抜群で	has:기름기가	fix	lookup
+dict:audit-cap-food	しめ鯖を食べた	has:초절임 고등어	fix	lookup
+dict:audit-cap-food	旬の野菜	has:제철	keep	lookup
+dict:audit-cap-food	サバの塩焼き	has:고등어의	fix	lookup
+dict:audit-cap-food	蟹味噌を乗せる	has:게 내장	fix	lookup
+dict:audit-cap-food	麹を作る部屋	has:누룩을	fix	lookup
+dict:audit-cap-food	米麹	has:쌀누룩	fix	lookup
+dict:audit-cap-food	魚のすり身	has:다진 생선살	fix	lookup
+dict:audit-cap-food	濃厚でクリーミーな白子	has:크리미한	fix	lookup
+dict:audit-cap-food	赤海老の串焼	has:붉은새우	fix	lookup
+dict:audit-cap-food	レバ刺し	has:간 회	fix	lookup
+dict:audit-cap-food	水揚げされる鮭	has:어획되는	fix	lookup
+dict:audit-cap-food	大根おろしを添える	has:무즙을	fix	lookup
+dict:audit-cap-food	こしょうを振る	has:후추를	fix	lookup
+dict:audit-cap-food	毎晩 飲み明かした	has:술 마셨다	fix	lookup
+dict:audit-cap-food	まかないを食べる	has:직원 식사	fix	lookup
+dict:audit-cap-food	練り物の店	has:어묵	fix	lookup
+dict:audit-cap-food	タコ唐を頼む	has:문어 튀김	fix	lookup
+dict:audit-cap-food	揚げ鶏が好き	has:닭튀김	fix	lookup
+dict:audit-cap-food	具材を煮込む	has:재료를	fix	lookup
+dict:audit-cap-food	麺のコシ	has:쫄깃함	fix	lookup
+dict:audit-cap-food	髪のコシがなくなった	has:탄력이	fix	lookup
+dict:audit-cap-food	旨味成分	has:감칠맛 성분	fix	lookup
+dict:audit-cap-food	サバを読む	has:속인다	keep	lookup
+dict:audit-cap-food	脂汗をかいた	has:비지땀	keep	lookup
+dict:audit-cap-food	レバニラ炒め	has:부추 간 볶음	fix	lookup
+dict:audit-cap-food	ロボットがこしょうした	has:고장	keep	lookup
+dict:audit-cap-food	塩とこしょうで味付け	has:후추로	fix	lookup
+dict:audit-cap-food	ええと 1月初旬よ	has:초순	keep	lookup
+dict:audit-cap-food	好物は読書だ	has:좋아하는 것은	keep	lookup
+dict:audit-cap-food	旬くんが来た	has:슌 군	fix	lookup
+dict:audit-cap-food	ソースが添えてある	has:곁들여져	fix	lookup
+dict:audit-cap-food	手紙が添えてある	has:첨부되어	keep	lookup
+dict:audit-cap-food	こしょうして焼きます	has:후추를 쳐	fix	lookup
+dict:audit-cap-food	塩こしょうする	has:소금 후추를 친다	fix	lookup
+dict:audit-cap-food	こしょうをする	has:후추를 친다	fix	lookup
+dict:audit-cap-food	こしょうを振る	has:후추를 뿌린다	fix	lookup
+dict:audit-cap-food	荷物の水揚げ	has:하역	fix	lookup
+dict:audit-cap-food	花の水揚げ	has:물올림	fix	lookup
+dict:audit-cap-food	髪のコシがなくなった	has:탄력이	fix	lookup
+dict:audit-cap-food	コシを抜かした	has:기겁했다	fix	lookup
+dict:audit-cap-food	コシが低い	has:겸손하다	fix	lookup
+dict:audit-cap-food	旨味のある投資	has:이점이 있는 투자	fix	lookup
+dict:audit-cap-food	カニのうまみが凝縮	has:감칠맛이	fix	lookup
+dict:audit-cap-food	布団を天日干しした	has:햇볕에 말렸다	fix	lookup
+dict:audit-cap-food	天日干しした魚	has:햇볕에 말린	fix	lookup
+dict:audit-cap-food	まかないを食べる	has:직원 식사를	fix	lookup
+dict:audit-cap-food	費用をまかないきれない	has:충당할 수 없다	fix	lookup
+dict:audit-cap-food	旬を過ぎたアイドル	has:한물간 아이돌	fix	lookup
+dict:audit-cap-food	旬な話題	has:요즘 뜨는 화제	fix	lookup
+dict:audit-cap-food	仕事のうまみ	has:일의 묘미	fix	lookup
+dict:audit-cap-food	この商売のうまみ	has:묘미	fix	lookup
+dict:audit-cap-food	このパン、コシがある	has:쫄깃함	fix	lookup
+dict:audit-cap-food	コシが強い	has:탄력이 강하다	fix	lookup
+dict:audit-cap-food	コシのある声	has:힘 있는 목소리	fix	lookup
+dict:audit-cap-food	うまみが出る	has:감칠맛이	fix	lookup
+dict:audit-cap-food	うまみたっぷり	has:감칠맛 듬뿍	fix	lookup
+dict:audit-cap-food	うまみのある話	has:이점이 있는 이야기	fix	lookup
+dict:audit-cap-food	旬の芸人	has:요즘 뜨는 개그맨	fix	lookup
+dict:audit-cap-food	旬のアーティスト	has:요즘 뜨는 아티스트	fix	lookup
+dict:audit-cap-food	まかないつき	has:식사 포함	fix	lookup
+dict:audit-cap-food	わさびが添えてある	has:와사비가 곁들여져	fix	lookup

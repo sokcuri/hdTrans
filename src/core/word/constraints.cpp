@@ -86,6 +86,8 @@ constexpr ConstraintRule kRules[] = {
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
     {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
      "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
+    {"itanda-after-te", ConstraintWord::Source, "いたんだ", ConstraintContext::AfterTe, ConstraintReject::Word,
+     "て·で 바로 뒤의 いたんだ는 한 말 있었다가 아니라 いる의 과거와 んだ라서 ていた와 같이 읽음 (食べていたんだ 먹어 있었다 → 먹고 있던 거야)", {}},
     {"iru-form-after-te", ConstraintWord::IruForm, "", ConstraintContext::AfterTe, ConstraintReject::Word,
      "て, で 바로 뒤에서 いる의 활용형과 같은 글자로 시작하는 낱말은 그 낱말이 아니라 いる의 활용 (固まっていろよ 굳어져 색이야 → 굳어져 있어라, 何していようかな 뭐해 이상한가 → 뭐하고 있을까)", {}},
     {"iru-past-after-te", ConstraintWord::Source, "い", ConstraintContext::AfterTeBeforeTa, ConstraintReject::NonVerbs,
@@ -181,6 +183,10 @@ constexpr ConstraintRule kRules[] = {
     {"nimoi-before-iru", ConstraintWord::Source, "にもい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "い가 이어지지 않는 にもい는 にもいい가 아니라 にも와 いる (どこにもいない 어디에도 좋은 있고 → 어디에도 없다). それにもいいところ는 그대로", {},
      "な|ね|る|た|ま|て|ら|れ|よ"},
+    {"temi-before-nna", ConstraintWord::EndsInSource, "てみ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "んな 앞에서 てみ로 끝나는 말은 て형과 みる가 아니라 て형과 みんな (振り返ってみんなを見た 되돌아 보지 않지를 → 돌아보며 모두를)", {}, "んな"},
+    {"demi-before-nna", ConstraintWord::EndsInSource, "でみ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "でみ도 같다 (読んでみんなに聞かせる)", {}, "んな"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
     {"shi-before-nitsuite", ConstraintWord::Source, "死", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
@@ -611,7 +617,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return false;
     }
     case ConstraintContext::NotCommonSense:
-        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false);
+        // An adnominal before it makes it the word too (大きな樹, 一本の樹; spec LEX-5175).
+        return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false) &&
+               (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead) == 0 ||
+                dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead) > 0);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
         return false;
     case ConstraintContext::BeforeHiragana:
@@ -797,6 +806,11 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
                    (c.source.size() > source.size() ||
                     (c.source.size() == source.size() && InflectsAfter(after, c.codes->part.ClassDigit() == '8')));
         }) ||
+        // Nor in a longer kanji word that starts with it (光子 미츠코 beside 光ちゃん; spec LEX-5175).
+        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+            return c.codes != nullptr && c.source.size() > source.size() && c.source.starts_with(source) &&
+                   text::IsKanji(text::DecodeRune(c.source.substr(source.size())).cp);
+        }) ||
         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
             return (PersonNoun(*list[k].codes) && !NameSense(*list[k].codes)) || (list[k].user != nullptr && !list[k].user->nameLayer);
         });
@@ -821,7 +835,8 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
         if (own != same.end()) return {list[*own].codes->asPlain, list[*own].target, list[*own].id};
     }
     const auto fits = [&](const dict::Codes* codes, std::string_view target) {
-        return codes != nullptr && codes->sem.HasPrefix("QPN") && !TranslatedName(list, same, source, target) &&
+        // A person row whose codes put VHn first (海江田 카이에다 VHnQPN) is a person sense too.
+        return codes != nullptr && (codes->sem.HasPrefix("QPN") || codes->sem.HasCode("QPN")) && !TranslatedName(list, same, source, target) &&
                (kana ? text::SameSound(target, reading) : text::JapaneseSpelling(target));
     };
     // A person sense among the candidates comes first (佐渡 사도); then a person reading of the name

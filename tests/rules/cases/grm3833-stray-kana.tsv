@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 segment:stray-kana	さっきの言葉は本当ですからね？	조금 전의 말은 사실이니까요?	fix	segment
 segment:stray-kana	手に吸い付きそうなほどになめらかな肌が	손에 달라붙을 것 같을 정도로 매끈매끈한 피부가	fix	segment
-segment:stray-kana	んだてめぇ。	has:너.	fix	segment
+segment:stray-kana	んだてめぇ。	has:네놈.	fix	segment
 segment:stray-kana	下働きのおばちゃんですら正妃が俺を殺すと思っている。	has:아줌마로조차	fix	segment
 segment:stray-kana	スレの書き込みですら怖かったんだから	has:글로조차 무서웠으니까	fix	segment
 segment:stray-kana	誰も引き受けたがらない現場の安全管理	has:하고 싶어하지 않는 현장	fix	segment

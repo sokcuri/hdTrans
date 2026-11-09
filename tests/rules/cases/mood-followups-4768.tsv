@@ -43,14 +43,14 @@ dict:jisjk:340904	「もう二度とかけてこないでね、はいはい、�
 dict:jisjk:9283	「エルをからかうのはそのくらいにして、少し黙ってもらえると助かる。	「엘을 놀리는 건 그 정도로 해, 조금 입을 다물어 주면 도움이 된다.	fix	local
 dict:jisjk:9283	黙ってくれ、頼む。	입을 다물어 줘, 부탁한다.	fix	local
 dict:jisjk:9283	黙っておくれ、もう泣いてくれるな。	입을 다물어 줘, 이제 울지 말아 줘.	fix	local
-dict:jisjk:9283	さっきから黙って聞いてりゃ 何様だよ てめえは｡	조금 전부터 입다물고 들으면 어떤 분이야 너는.	keep	local
+dict:jisjk:9283	さっきから黙って聞いてりゃ 何様だよ てめえは｡	has:네놈은.	keep	local
 dict:jisjk:9283	なぜ黙っていたのです。	왜 입을 다물고 있었습니다.	keep	local
-dict:jisjk:9283	時三は黙って自分の膝を見ていた。	때 3은 입을 다물어 자신의 무릎을 보고 있었다.	keep	local
+dict:jisjk:9283	時三は黙って自分の膝を見ていた。	때 3은 말없이 자신의 무릎을 보고 있었다.	keep	local
 dict:jisjk:9283	吉五郎はその石五枚を積まれたが、やはり強情に黙っていた。	기치고로는 그 돌 다섯 장이 쌓였지만, 역시 고집이 있게 입을 다물고 있었다.	keep	local
 dict:jisjk:9283	お前らちょっと黙っててくれ	너희들 조금 입을 다물고 있어 줘	keep	local
 dict:jisjk:9283	「じゃあ、みいちゃんはみんなに黙って……？	「그럼, 미이짱은 모두에게 입을 다물어……?	keep	local
-dict:jisjk:9283	薫は黙って抜き手を切るばかり、貝原は懸命な抜き手の間から怒鳴り立てた。	훈은 입을 다물어 헤엄을 자를 뿐, 가이바라는 필사적인 헤엄 사이부터 고함쳐 세웠다.	keep	local
-dict:jisjk:9283	いいから、裕樹は黙ってあたしにくっついてればいいのっ！	됐으니까, 유우키는 입을 다물어 나에게 들러붙어 있으면 좋아!	keep	local
+dict:jisjk:9283	薫は黙って抜き手を切るばかり、貝原は懸命な抜き手の間から怒鳴り立てた。	has:말없이 헤엄을 자를 뿐	keep	local
+dict:jisjk:9283	いいから、裕樹は黙ってあたしにくっついてればいいのっ！	됐으니까, 유우키는 말없이 나에게 들러붙어 있으면 좋아!	keep	local
 cx:late-present:10	彼は随分時間を空費した、早く書き出さねば間に合わない。	그는 상당히 시간을 낭비한, 빨리 써내지 않으면 늦는다.	fix	rewrites
 cx:late-present:10	もういそがないと間に合わない。	이제 서두르지 않으면 늦는다.	fix	rewrites
 cx:late-present:10	もう竹の杖では間に合わない。	이제 대나무 지팡이에서는 늦는다.	fix	rewrites
@@ -78,7 +78,7 @@ normalize:contracted-teiru	私がついてるんですから	제가 붙어 있�
 normalize:contracted-teiru	勉強してるのですか？	공부합니까?	keep	normalize
 cx:kure-request:15	黙ってくれ、頼む。	입을 다물어 줘, 부탁한다.	fix	rewrites
 dict:jisjk:9283	黙ってくれ。	입을 다물어 줘.	fix	local
-dict:jisjk:9283	黙って聞いていた。	입다물고 듣고 있었다.	keep	local
+dict:jisjk:9283	黙って聞いていた。	잠자코 듣고 있었다.	keep	local
 cx:neg-give:10	「お前らは喋らないでくれ、頭が痛くなる」	「너희들은 말하지 말아 줘, 머리가 아파져」	fix	rewrites
 normalize:contracted-teiru	これなら勝てるんだし	이것이라면 이길 수 있으니까	keep	normalize
 normalize:contracted-teiru	まだ待てるんだし	아직 기다릴 수 있으니까	keep	normalize

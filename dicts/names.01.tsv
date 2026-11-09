@@ -1648,7 +1648,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ファストレ・I・デ・オイシ	파스트레 I 데 오이시	N130	QPNVHn		GN							names.299447
 ファストレ・I・ドオイシ	파스트레 I 도이시	N130	QPNVHn		GN							names.299448
 ファスト映画	패스트 무비	N110			GN							names.299449
-ファスナー	지퍼	N110			GN						ふぁすなー	names.299450
+ファスナー	패스너	N110			GN						ふぁすなー	names.299450
 ファスナー	파스너	N110			GN						ファスナー	names.299451
 ファスナービキニ	지퍼 비키니	N110			GN						ふぁすなーびきに	names.299452
 ファズ	파즈	N130	QPNVHn	Wb	GN						ふぁず	names.299453
@@ -73950,7 +73950,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モララーのビデオ棚	모라라의 비디오 선반	N110			GN							names.372723
 モラリア	모랄리아	N130	QWK		GN							names.372724
 モラリア共和国	모라리아 공화국	N130	QCTVPl		GN							names.372725
-モラル	모랄	N130	QPNVHn	Wb	GN						もらる	names.372726
+モラル	모럴	N130	QPNVHn	Wb	GN						もらる	names.372726
 モラルと政治学アカデミー	윤리·정치학 아카데미	N130	VGt		GN							names.372727
 モラルジー・デーサーイー	모라르지 데사이	N130	QPNVHn		GN							names.372728
 モラルタ	모라르타	N130	QPNVHn	Wb	GN						もらるた	names.372730
@@ -86905,7 +86905,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ラジャ・ベルシオン	라자 벨시온	N110			GN						らじゃ・べるしおん	names.385803
 ラジャ・マハラジャー	라자 마하라자	N110			GN						らじゃ・まはらじゃー	names.385804
 ラジャ・マハール	라자 마할	N130	QPNVHn		GN						らじゃ まはーる	names.385805
-ラジャー	라저	N110			GN						らじゃー	names.385806
+ラジャー	로저	N110			GN						らじゃー	names.385806
 ラジャーイー・アーイド	라자에이 아예드	N130	QPNVHn		GN							names.385807
 ラジュガー	라즈거	N130	QCTVPl		GN							names.385808
 ラジュサマンド	라즈사만드	N130	QCTVPl		GN							names.385809
@@ -127304,7 +127304,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一班城面	일반성면	N130	QCTVPl		GN							names.426767
 一理ある愛	일리 있는 사랑	N130	QWK		GN							names.426768
 一環	일환	N110			GN						いっかん	names.426769
-一生	일생	N110			GN						いっしょう	names.426770
+一生	평생	N110			GN						いっしょう	names.426770
 一生わたしの助手でいて!	평생 내 조수로 있어줘!	N130	QWK		GN							names.426771
 一生好きってゆったじゃん	평생 좋아한다고 했잖아	N130	QPNVHn		GN							names.426772
 一田	이치타	N130	QPNVHn	Wa	GN							names.426773

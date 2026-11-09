@@ -29,7 +29,7 @@ cx:notice-words-1:99	その触り方、エッチっぽいよ	그 만지는 방�
 cx:notice-words-1:99	エッチなこと考えてる	야한 일 생각하고 있다	keep	rewrites
 cx:notice-words-1:100	伊駆逐、独駆逐、米駆逐、仏艦艇	이탈리아 구축, 독일 구축, 미 구축, 프랑스 함정	fix	rewrites
 cx:notice-words-1:100	仏の顔も三度まで	부처의 얼굴도 세 번까지	keep	rewrites
-cx:notice-words-1:100	いきなり仏さん見たらビビる	갑자기 부처 씨 보면 위축된다	keep	rewrites
+cx:notice-words-1:100	いきなり仏さん見たらビビる	갑자기 부처 씨 보면 겁먹는다	keep	rewrites
 lexical:hamewaza	「ハメ技は使いません」	「얍삽이는 쓰지 않습니다」	fix	lookup
 dict:w:33101	このチップからはあのチカラが使用された	이 칩으로부터는 그 힘이 사용되었다	fix	lookup
 dict:w:33102	彼はナイツウォッチの団長だった	그는 나이츠워치의 단장이었다	fix	lookup

@@ -1,0 +1,7 @@
+#! layer=words
+# 음식 말의 기본 뜻 (LEX-5602)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+コシ	탄력	N110			GN						こし	audit-cap-food:1
+旬	제철	N110	UMe		GN						しゅん	audit-cap-food:2
+月初旬	월 초순	N110	UMe		GN						がつしょじゅん	audit-cap-food:3
+天日干し	햇볕 건조	N110		Hd	GN						てんぴぼし	audit-cap-food:4

@@ -15,7 +15,7 @@ cx:sense-cues-1:15	初日から一人は心細いわよね。	첫날부터 혼�
 cx:sense-cues-1:15	一人は残って見張れ	한 사람은 남아 감시해라	keep	rewrites
 cx:sense-cues-1:16	一人の時は 何を穿けばいいの？	혼자일 때는 뭘 입으면 되는 거야?	fix	rewrites
 cx:sense-cues-1:16	一人の男が立っていた	한 사람의 남자가 서 있었다	keep	rewrites
-cx:sense-cues-1:17	西日で赤熱したような台所で、彼女は一人、ダイニングの椅子に座っていた。	저녁 햇볕으로 적열한 것 같은 부엌에서, 그녀는 혼자, 다이닝의 의자에 앉아 있었다.	fix	rewrites
+cx:sense-cues-1:17	西日で赤熱したような台所で、彼女は一人、ダイニングの椅子に座っていた。	석양으로 적열한 것 같은 부엌에서, 그녀는 혼자, 다이닝의 의자에 앉아 있었다.	fix	rewrites
 cx:sense-cues-1:17	一人、また一人と倒れていく	한 사람, 또 한 사람 쓰러져 간다	keep	rewrites
 dict:lex:3849:hitori-atama	とすると 一人頭 およそ2300万	로 하면 1인당 대략 2300만	fix	lookup
 dict:lex:3849:hitori-atama	一人頭 およそ304万ペリカ	1인당 대략 304만 펠리카	fix	lookup

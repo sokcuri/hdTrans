@@ -18,7 +18,7 @@ phrase:よろしくお願いいたします	引き続きよろしくお願いい
 phrase:お任せください	お任せください！	맡겨 주세요!	fix	lookup
 phrase:お任せください	提督、この私にお任せ下さい。	제독, 이 저에게 맡겨 주세요.	fix	lookup
 phrase:お任せを	私にお任せを！	나에게 맡겨 주세요!	fix	lookup
-phrase:お任せ	お任せ！	맡겨라!	keep	lookup
+phrase:お任せ	お任せ！	has:맡겨 줘!	keep	lookup
 phrase:お持ちでいらっしゃる	相当なコネをお持ちでいらっしゃる。	상당한 커넥션을 가지고 계신다.	fix	lookup
 phrase:お待ちでいらっしゃる	お客様がお待ちでいらっしゃいます。	손님이 기다리고 계십니다.	fix	lookup
 pattern:学生でいらっしゃいますか	田中様でいらっしゃいますか？	타나카 님이십니까?	fix	builtin-pattern

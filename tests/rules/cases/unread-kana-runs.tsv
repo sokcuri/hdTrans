@@ -1,0 +1,25 @@
+# 규칙: SND-25, LAY-21
+rule	input	expected	kind	layer
+restore:dropped-kana	サウンドパークちぬ企画	has:파크 치누 기획	fix	restore
+restore:dropped-kana	６月２８日（日） サウンドパークちぬ企画 ぬいぽ合唱団	has:기획 누이포 합창단	fix	restore
+restore:dropped-kana	東山鉄道 ぬいぽ列車	has:철도 누이포 열차	fix	restore
+restore:dropped-kana	１０位は つぶ貝焼きです。	has:츠부 조개	fix	restore
+restore:dropped-kana	鯖か つぶ貝やろ。	has:츠부 조개	fix	restore
+restore:dropped-kana	「おーちぬ頑張ってるー？」	has:치누	fix	restore
+restore:dropped-kana	『ルミナちぬ子』ちゃんの合図	has:치누	fix	restore
+restore:dropped-kana	ぬいぽ列車	누이포 열차	keep	restore
+restore:dropped-kana	私のお手製	lacks:노오	keep	restore
+restore:dropped-kana	父上によう似ておる	lacks:니요우	keep	restore
+restore:dropped-kana	目的がすり替わっている。	lacks:가스리	keep	restore
+restore:dropped-kana	大事な報告書をほっぽり出して	lacks:오홋포리	keep	restore
+restore:dropped-kana	クラブこそ違えど	lacks:코소	keep	restore
+restore:dropped-kana	猛った気持ち	lacks:맹 타	keep	restore
+restore:dropped-kana	言うときながらももう よう食わへんわ。	lacks:요우	keep	restore
+restore:echoed-gloss	１６日（日）…休日	16일(일)…휴일	fix	restore
+restore:echoed-gloss	９月２５日（土）～２６日（日）の２日間。	has:26일(일)의	fix	restore
+restore:echoed-gloss	２月２３日（日）の予定	has:23일(일)	fix	restore
+restore:echoed-gloss	ミヤビ（雅）に繰り出す	lacks:(미야비)	keep	restore
+restore:echoed-gloss	あたしたち（俺たち）	lacks:(우리)	keep	restore
+restore:echoed-gloss	魔剣（けん）を抜く	has:마검	keep	restore
+restore:dropped-kana	「アイツら、ミッちんの襲撃を恐れてるのよ」	has:밋친의 습격	fix	restore
+restore:dropped-kana	親分は ほれた女が	lacks:호레타	keep	restore
