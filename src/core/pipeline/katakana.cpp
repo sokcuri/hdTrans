@@ -823,7 +823,7 @@ bool WholeAdjective(std::string_view ending) {
 // leave the run standing as a call (long_: …ワラエルッ！; not タツ or ネル, nor ノボル！ or
 // ノボル、 at the start of a line, read as a given name); with an ending in the run it may stand
 // as a call (イクヨ！ 行くよ).
-bool WholeVerb(int kind, std::string_view ending, bool long_) {
+bool WholeVerb(int kind, std::string_view ending, bool long_, std::size_t& afterSize) {
     static constexpr std::pair<std::string_view, int> kBranches[] = {
         {"dict", 0}, {"past", 6}, {"te", 7}, {"neg", 8}, {"stem", 10}, {"imp", 11}, {"imp2", 12}, {"cha", 17},
     };
@@ -835,7 +835,10 @@ bool WholeVerb(int kind, std::string_view ending, bool long_) {
             if (n != name || (branch == 0 && after.empty() && !long_)) continue;
             const std::string_view conj = word::Conjugation(kind, branch);
             if (conj.find_first_of("(X") != std::string_view::npos || (conj.empty() && after.empty())) continue;
-            if (ending.size() == conj.size() + after.size() && ending.starts_with(conj) && ending.ends_with(after)) return true;
+            if (ending.size() == conj.size() + after.size() && ending.starts_with(conj) && ending.ends_with(after)) {
+                afterSize = after.size();
+                return true;
+            }
         }
     }
     return false;
@@ -954,10 +957,14 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
     for (const dict::Candidate& c : snap.GetWordInfo(hira, dict::LookupMode::General, ctx.lookup).list) {
         tailWord = tailWord || (c.codes != nullptr && c.source.size() > tailFrom && !(c.user != nullptr && c.user->nameLayer));
     }
-    bool kataRow = false;
-    for (const dict::Candidate& c : snap.GetWordInfo(word, dict::LookupMode::General, ctx.lookup).list) {
-        kataRow = kataRow || (c.codes != nullptr && c.source == word && !(c.user != nullptr && c.user->nameLayer) && !c.codes->sem.HasPrefix("QP"));
-    }
+    const auto keyed = [&](std::string_view w) {
+        for (const dict::Candidate& c : snap.GetWordInfo(w, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes != nullptr && c.source == w && !(c.user != nullptr && c.user->nameLayer) && !c.codes->sem.HasPrefix("QP")) return true;
+        }
+        return false;
+    };
+    const bool kataRow = keyed(word);
+    std::size_t afterSize = 0;  // the ending WholeVerb found in the run after the form (ワカッタヨ: よ)
     for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
         if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QPN")) continue;
         const std::string_view part = c.codes->partText;
@@ -971,7 +978,9 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
         } else if (part[0] == 'M' && part[1] == '4' && !runsOn && !named && !nameThenSuru && !nounFollows && !kataRow && !tailWord &&
                    c.source.size() < core.size() && (!hasTail || text::RuneCount(core) >= 3) &&
-                   WholeVerb(part[3] - '0', std::string_view(core).substr(c.source.size()), text::RuneCount(core) >= 3 && !rest.empty() && !call) &&
+                   WholeVerb(part[3] - '0', std::string_view(core).substr(c.source.size()), text::RuneCount(core) >= 3 && !rest.empty() && !call, afterSize) &&
+                   // nor a katakana key before that ending (カッタヨ: カッタ, a cutter)
+                   (afterSize == 0 || !keyed(word.substr(0, core.size() - afterSize))) &&
                    (PredicateFollows(rest, tsu, false) || quoted || rest.starts_with("、"))) {
             // A verb written whole in katakana (マッテ！ 待って, ワカッタ… 分かった, ヤメテェ！ やめて):
             // the stem and a whole form of it fill the run, but for a closing ッ or a drawn tail, before

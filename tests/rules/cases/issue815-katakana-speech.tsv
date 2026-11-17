@@ -64,6 +64,7 @@ lex:kata-verb-whole	イクヨ！	가!	fix	protect
 lex:kata-verb-whole	「イクヨッ！」	「가!」	fix	protect
 lex:kata-verb-whole	ヤルヨ。	할게.	fix	protect
 lex:kata-verb-whole	ヤロウ！！	lacks:해 보자	keep	protect
+lex:kata-verb-whole	……カッタヨ……？	lacks:샀	keep	protect
 lex:te-drawl	やめてええ！	그만해!	fix	sound
 lex:te-drawl	まってええ！	기다려!	fix	sound
 lex:te-drawl	たすけてええ！	살려!	fix	sound
