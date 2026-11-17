@@ -156,6 +156,7 @@
 //= follower.continuative-only	What follows a verb's continuative and no noun without a particle, beside suffix.continuative: そう of seeming, ながら, やすい, にくい, づらい and たい (雨降りそう 비가 올 것 같다; spec LEX-5810).
 //= follower.weather-continuative	Starts of the second verb of a compound after the continuative of a weather noun (雨降り + 出した, 雪降り + 続いてる, 雨降り + やまない, 雨降り + しきる): the noun is the subject and the compound its verb (雨 + 降り出した 비가 내리기 시작했다; spec LEX-5810).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
+//= follower.te-verb	Starts of the text after the て form or the ないで of a verb spelled in hiragana that ask someone to act or go on as the verb, before which a longer word that spells that form gives way to the verb (おきてください, かえってきた, こないでね; LEX-5921).
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
@@ -1915,6 +1916,35 @@ follower.te-imperative	ます
 follower.te-imperative	ませ
 follower.te-imperative	まし
 follower.te-imperative	ず
+follower.te-verb	ください
+follower.te-verb	くださ
+follower.te-verb	くれ
+follower.te-verb	ちょうだい
+follower.te-verb	ほしい
+follower.te-verb	もらえ
+follower.te-verb	もらい
+follower.te-verb	いただ
+follower.te-verb	あげ
+follower.te-verb	きた
+follower.te-verb	きて
+follower.te-verb	くる
+follower.te-verb	こない
+follower.te-verb	こなか
+follower.te-verb	しま
+follower.te-verb	ちゃ
+follower.te-verb	いる
+follower.te-verb	いた
+follower.te-verb	いて
+follower.te-verb	る
+follower.te-verb	た
+follower.te-verb	ね。
+follower.te-verb	ね！
+follower.te-verb	ね？
+follower.te-verb	ね」
+follower.te-verb	よ。
+follower.te-verb	よ！
+follower.te-verb	よ？
+follower.te-verb	よ」
 
 fraction.numerator-lead	一
 fraction.numerator-lead	二
@@ -11962,6 +11992,7 @@ word.evaluative-talk	生ぬるい
 word.evaluative-talk	ふざける
 word.evaluative-talk	寝ぼける
 word.evaluative-talk	寝惚ける
+word.evaluative-talk	ねぼける
 word.evaluative-talk	舐める
 word.evaluative-talk	なめる
 word.evaluative-talk	ナメる

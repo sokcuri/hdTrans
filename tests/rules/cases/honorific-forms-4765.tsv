@@ -84,7 +84,7 @@ normalize:honorific-rashi	「ずっと仲良くしていらしたでしょう？
 normalize:honorific-rashi	おまえさんは、どこから乗っていらしたの。	너 씨는, 어디에서 타 오셨어.	keep	normalize
 normalize:honorific-rashi	まだ起きていらしたのですか？	아직 깨어 오셨습니까?	keep	normalize
 normalize:honorific-rashi	「いいえ、そうそう、こちらからは見えなかった方、棕梠の蔭に坐っていらした方ですわ」	「아니요, 맞아 맞아, 이쪽에서는 안 보였던 편, 종려의 음에 앉아 오신 분이에요」	keep	normalize
-normalize:honorific-rashi	のびのびとした、ねぼけたような春の日光は縫目にしらみの行列の有りそうな袷の背中をてらして居る。	느긋하게 한, 이네 노망난 것 같은 봄의 일광은 솔기로 해들 보고의 행렬이 있을 것 같은 겹옷의 등을 비추어 있다.	keep	normalize
+normalize:honorific-rashi	のびのびとした、ねぼけたような春の日光は縫目にしらみの行列の有りそうな袷の背中をてらして居る。	has:있을 것 같은 겹옷의 등을 비추어 있다	keep	normalize
 normalize:humble-mairu	悪魔は急いでひなげしの所へやって参りました。	악마는 서둘러 히 던지고 해의 곳에 왔습니다.	fix	normalize
 normalize:humble-mairu	松永弾正少弼は、坂本城に進駐しておりました我らのところへ、手勢五十ほどと共にやって参りました	마츠나가 단죠쇼히츠는, 사카모토성에 진주하고 있었던 우리들에게, 수하 병력 50 정도와 함께 왔습니다	fix	normalize
 normalize:humble-mairu	恥ずかしながら モモちゃん帰って参りましたー！	부끄럽지만 모모짱 돌아왔습니다~!	fix	normalize

@@ -1107,6 +1107,95 @@ Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std:
     return records;
 }
 
+// Text path: the verb records of a hiragana stem move ahead of a longer record of another class that spells
+// the verb's て form or the start of its ないで (おきて 掟: おき + て; にげない: にげ + ないで) where the text
+// after that form asks or tells someone to act or goes on as the verb: the end of the utterance (おきて！,
+// こないでっ。) or a start of follower.te-verb (おきてください, かえってきた). Elsewhere the longer word stays
+// (かえって悪くなった, おきてを守れ, かえって、). A name record never gives way, nor a word before a stem of one
+// kana, of する or くる or of a phrase row (どうして, やってきた, どうやって, にわたって; LEX-5921).
+Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_view text, std::string_view nextToken) {
+    const auto verbOf = [](const Record& r) {
+        return r.partCode.size() == 4 && At(r.partCode, 0) == 'M' && At(r.partCode, 1) == '4' && r.partCode[3] >= '0' &&
+               r.partCode[3] - '0' < kConjugationKinds;
+    };
+    const auto named = [](const Record& r) {
+        return (r.user != nullptr && r.user->nameLayer) || At(r.semantic, 0) == 'Q' ||
+               (At(r.partCode, 1) == '1' && At(r.partCode, 2) == '3');
+    };
+    // The rest after a verb form that makes it the verb: past small kana and long marks, the end, a mark
+    // that ends the utterance, or a start of follower.te-verb.
+    const auto verbContext = [nextToken](std::string_view rest) {
+        while (!rest.empty() && Has("っッーぁぃぅぇぉ〜～…‥", FirstChar(rest))) rest.remove_prefix(FirstChar(rest).size());
+        // At the end of the token, the next token goes on: the end of the line or a mark that ends the utterance
+        // as a request; a question asks how or whether (どうやって？, かえって？) and keeps the word.
+        if (rest.empty()) rest = nextToken;
+        if (rest.empty() || Has("。！!」』）)", FirstChar(rest))) return true;
+        return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest) > 0;
+    };
+    // A noun after a particle is an argument or the predicate of a topic (ケーキははじめて 처음, 村のおきて), and a
+    // time noun closes an utterance as the noun (あさって。 모레): neither gives way.
+    const bool afterParticle = !before.empty() && Has("はがものをにでとへ", LastChar(before));
+    const Record* verb = nullptr;
+    for (const Record* w = records; w != nullptr && verb == nullptr; w = w->child) {
+        if (verbOf(*w) || named(*w) || !AllHiragana(w->source) || !text.starts_with(w->source)) continue;
+        if (At(w->partCode, 1) == '1' && (afterParticle || Has(w->semantic, "UMe"))) continue;
+        for (const Record* v = records; v != nullptr; v = v->child) {
+            if (!verbOf(*v) || v->source.empty() || v->source.size() >= w->source.size() || !w->source.starts_with(v->source)) {
+                continue;
+            }
+            // A stem of two kana or more of a verb of its own: no する or くる (どうして, やってきた, なってきた stay).
+            const int kind = v->partCode[3] - '0';
+            // A phrase row (にわた 에 걸치다, どうや 어떻게 하다) is no stem of a verb of its own either.
+            if (text::RuneCount(v->source) < 2 || kind == 9 || kind == 10 || kind == 11 || kind == 13 ||
+                v->target.find(' ') != std::string::npos) {
+                continue;
+            }
+            const std::string_view form = text.substr(v->source.size());
+            const std::string te(Conjugation(kind, 7)), negative = std::string(Conjugation(kind, 8)) + "ないで";
+            // An adverb that is a verb's て form grown into a word of its own (かえって, せめて, あえて, かねて) closes an
+            // utterance as the adverb (せめて！, 少なくとも、せめて。, 「あえて」): it gives way only before a start of
+            // follower.te-verb in this token or the next (かえってきた, あわせてください).
+            const std::string_view after = form.substr(std::min(form.size(), te.size()));
+            const bool adverb = At(w->partCode, 1) != '1';
+            const auto goesOn = [&nextToken](std::string_view rest) {
+                return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest.empty() ? nextToken : rest) > 0;
+            };
+            const bool teForm = w->source.size() - v->source.size() == te.size() && form.starts_with(te) &&
+                                (adverb ? goesOn(after) : verbContext(after));
+            // A ないで asks only at the end or before a giving auxiliary (こないでください); before いる it is a state
+            // (集中できないでいる).
+            const std::string_view afterNegative = form.substr(std::min(form.size(), negative.size()));
+            const bool request = form.starts_with(negative) && negative.size() > w->source.size() - v->source.size() &&
+                                 (dict::StartsWithMember(HDTRANS_CLASS("aux.give-after-neg"), afterNegative) > 0 ||
+                                  (verbContext(afterNegative) &&
+                                   dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), afterNegative) == 0));
+            if (teForm || request) {
+                verb = v;
+                break;
+            }
+        }
+    }
+    if (verb == nullptr) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == verb->source && verbOf(*r)) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    return verbs;
+}
+
 // Text path: after a case particle or a comma, the verb records of the kana stem か (かく) whose
 // past or て form the text spells move ahead of the other records: no particle か follows there
 // (汗もかいた 땀도 흘렸다, 手紙をかいて 편지를 써서; but 何匹かいた, 誰かいた after a noun). A word that
@@ -3003,6 +3092,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
     if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
+    if (settings.text) records = KanaVerbOverWord(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor), current + 1 < TokenCount() ? Tok(current + 1).text : std::string_view());
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
