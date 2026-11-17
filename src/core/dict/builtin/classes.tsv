@@ -193,7 +193,7 @@
 //= name.person-part	Parts of the body and the face after Xの that make X a person, not the common word it also spells, when a particle or a mark follows them (皐月の顔 사츠키의 얼굴, のぞみの手を; not 剣の手ほどき; spec LEX-4820).
 //= name.body-part	Parts of the body that, before を in the clause after Xが, Xは or Xも, or before が after Xは or Xも, make X a person doing something with its own body (玉藻が身をよじる 타마모가 몸을 비튼다, 小太刀が眉を上げた; spec LEX-4820).
 //= name.person-act	Starts of nouns and phrases of what only a person does (ため息, 赤面, 初耳, 身を), matched as name.person-verb is (spec LEX-4820); the verbs are lemmas of name.person-verb.
-//= name.person-verb	Verbs and verb phrases of what only a person does (語る, 見つめる, 腕を組む), one lemma per row with its kind in the note (v5, v1, vs, vk) and the flags t (it takes an object, which may stand as the topic: after Xは or Xも a cue only after an object in を) and say (a verb of saying, a cue after a named topic with no object). Their active forms, made with the one conjugation table, are matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end and make X a person (高峰が語る 타카미네가 말한다; not 姿が見えない or 礼は受け取ろう; spec LEX-4820).
+//= name.person-verb	Verbs and verb phrases of what only a person does (語る, 見つめる, 腕を組む), one lemma per row with its kind in the note (v5, v1, vs) and the flags t (it takes an object, which may stand as the topic: after Xは or Xも a cue only after an object in を), say (a verb of saying, a cue after a named topic with no object) and move (a verb of moving on one's own, which a vehicle or an animal does too: no cue for a key with such a common sense nor for a common word of one kanji, 車が近づいてくる). A row whose note does not parse fails the unit test names_person_verb_rows. Their active forms, made with the one conjugation table, are matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end and make X a person (高峰が語る 타카미네가 말한다; not 姿が見えない or 礼は受け取ろう; spec LEX-4820).
 //= name.person-say	Starts of verbs of saying, knowing and asking, matched in the clause after Xが, or after Xは where an object in を comes first: they make X a person (小太刀が知っている 코다치가 알고 있다; not 泉は知らない; spec LEX-4820).
 //= name.person-speak	Starts of verbs of saying and thinking, matched in the clause after Xは or Xも on a kanji word with a person's name row of no time, statement, name, thought or money sense: they make X a person (梨花は言った 리카는 말했다; not 昼間も言った, 言葉は聞いた; spec LEX-4830).
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
@@ -2483,9 +2483,9 @@ name.person-verb	振り向く	v5
 name.person-verb	振り返る	v5
 name.person-verb	座る	v5
 name.person-verb	座り込む	v5
-name.person-verb	歩く	v5
-name.person-verb	歩き出す	v5
-name.person-verb	駆け寄る	v5
+name.person-verb	歩く	v5 move
+name.person-verb	歩き出す	v5 move
+name.person-verb	駆け寄る	v5 move
 name.person-verb	寝る	v1
 name.person-verb	喋る	v5
 name.person-verb	しゃべる	v5
@@ -2579,26 +2579,26 @@ name.person-verb	俯く	v5
 name.person-verb	微笑みかける	v1
 name.person-verb	笑いかける	v1
 name.person-verb	欠伸する	vs
-name.person-verb	逃げだす	v5
-name.person-verb	逃げ出す	v5
-name.person-verb	逃げる	v1
-name.person-verb	走り出す	v5
-name.person-verb	駆け出す	v5
-name.person-verb	駆けだす	v5
-name.person-verb	駆け込む	v5
-name.person-verb	飛び込む	v5
-name.person-verb	近づく	v5
-name.person-verb	近付く	v5
-name.person-verb	近寄る	v5
-name.person-verb	歩み寄る	v5
-name.person-verb	立ち止まる	v5
-name.person-verb	立ち去る	v5
-name.person-verb	駆けつける	v1
-name.person-verb	駆け付ける	v1
+name.person-verb	逃げだす	v5 move
+name.person-verb	逃げ出す	v5 move
+name.person-verb	逃げる	v1 move
+name.person-verb	走り出す	v5 move
+name.person-verb	駆け出す	v5 move
+name.person-verb	駆けだす	v5 move
+name.person-verb	駆け込む	v5 move
+name.person-verb	飛び込む	v5 move
+name.person-verb	近づく	v5 move
+name.person-verb	近付く	v5 move
+name.person-verb	近寄る	v5 move
+name.person-verb	歩み寄る	v5 move
+name.person-verb	立ち止まる	v5 move
+name.person-verb	立ち去る	v5 move
+name.person-verb	駆けつける	v1 move
+name.person-verb	駆け付ける	v1 move
 name.person-verb	起き上がる	v5
 name.person-verb	飛び起きる	v1
-name.person-verb	跳び上がる	v5
-name.person-verb	飛び上がる	v5
+name.person-verb	跳び上がる	v5 move
+name.person-verb	飛び上がる	v5 move
 name.person-verb	しゃがむ	v5
 name.person-verb	しゃがみ込む	v5
 name.person-verb	跪く	v5
@@ -2606,9 +2606,9 @@ name.person-verb	ひざまずく	v5
 name.person-verb	寝転ぶ	v5
 name.person-verb	寝転がる	v5
 name.person-verb	正座する	vs
-name.person-verb	歩き回る	v5
-name.person-verb	走り去る	v5
-name.person-verb	帰る	v5
+name.person-verb	歩き回る	v5 move
+name.person-verb	走り去る	v5 move
+name.person-verb	帰る	v5 move
 name.person-verb	出かける	v1
 name.person-verb	出掛ける	v1
 name.person-verb	着替える	v1

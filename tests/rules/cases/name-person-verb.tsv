@@ -30,3 +30,16 @@ names:person-predicate	昼間は仕事に出かける母親から子守りを頼
 names:person-predicate	「とにかく、風呂、着替え、洗濯物。」	lacks:후로	keep	lookup
 names:person-predicate	「大方、命惜しさに味方を見捨てて逃げたんだろう。」	lacks:오카타	keep	lookup
 names:person-predicate	千里はさして驚く様子もなく、淡々と歩いている。	has:치사토	keep	lookup
+names:person-predicate	車が近づいてくる。	lacks:쿠루마	keep	lookup
+names:person-predicate	車が帰ってきた。	lacks:쿠루마	keep	lookup
+names:person-predicate	車が逃げた。	lacks:쿠루마	keep	lookup
+names:person-predicate	一台の車が走り出した。	lacks:쿠루마	keep	lookup
+names:person-predicate	車は走り出した。	lacks:쿠루마	keep	lookup
+names:person-predicate	車が駆け込んできた。	lacks:쿠루마	keep	lookup
+names:person-predicate	車は走り去った。	lacks:쿠루마	keep	lookup
+names:person-predicate	小舟が近づいてくる。	lacks:코후네	keep	lookup
+names:person-predicate	小舟は岸に近寄った。	lacks:코후네	keep	lookup
+names:person-predicate	高峰が近づいてきた。	has:타카미네	fix	lookup
+names:person-predicate	小太刀が走り出した。	has:코다치	fix	lookup
+names:person-predicate	千里が駆け寄ってきた。	has:치사토	fix	lookup
+names:person-predicate	小太刀は帰った。	has:코다치	fix	lookup

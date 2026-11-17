@@ -72,4 +72,8 @@ bool CommonAfterAt(std::string_view after);
 // 아침 해, 力 힘, 敏捷 민첩).
 bool CommonWord(const dict::Snapshot& snap, std::string_view key);
 
+// The lemmas of name.person-verb whose note does not parse (no kind v5, v1 or vs, an unknown flag, or a
+// lemma that does not end as its kind does), which give no forms; empty when every row reads.
+std::vector<std::string> PersonVerbProblems();
+
 }  // namespace hdTrans::names
