@@ -35,6 +35,9 @@ struct RunLookup {
     bool (*adjectiveStem)(const void* context, std::string_view stem) = nullptr;
     // Whether text, whole, is a key of the dictionary (RewriteCasual: きれい is no old imperative); null for none.
     bool (*word)(const void* context, std::string_view text) = nullptr;
+    // The length in bytes of the longest key of the dictionary that text starts with (NormalizeForms: が of
+    // か゛んばれ against か); null for none.
+    size_t (*keyReach)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
@@ -131,7 +134,7 @@ std::string ComposeKanaPairs(std::string_view text);
 // ‼ ⁉ ⁈ as two marks (！！ ！？ ？！) without a variation selector after them; U+0000..U+0003 as
 // spaces; a katakana コ alone after a number as the counter 個 (784コ 784個, not 3コース). Invalid UTF-8
 // bytes are kept.
-std::string NormalizeForms(std::string_view text);
+std::string NormalizeForms(std::string_view text, const RunLookup& runs = {});
 
 // A run of two or more っ or ッ after a letter and before a letter other than a small kana, ー
 // or ～ as its first character (褒められちゃっっっった 褒められちゃった, とっっても とっても),

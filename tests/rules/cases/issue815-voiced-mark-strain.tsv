@@ -1,0 +1,36 @@
+# 규칙: LEX-5870
+rule	input	expected	kind	layer
+normalize:voiced-mark	「や゛めて！」	「그만해!」	fix	normalize
+normalize:voiced-mark	「や゛め゛て゛ぇ゛！」	「그만해!」	fix	normalize
+normalize:voiced-mark	「ま゛って！」	「기다려!」	fix	normalize
+normalize:voiced-mark	「ま゛ってよ！　置いていかないで！」	「기다려! 두고 가지 마!」	fix	normalize
+normalize:voiced-mark	「だ゛め……」	「안 돼……」	fix	normalize
+normalize:voiced-mark	「い゛や゛だ！」	「싫어!」	fix	normalize
+normalize:voiced-mark	「ご゛め゛ん゛な゛さ゛い゛！」	「미안해!」	fix	normalize
+normalize:voiced-mark	「し゛にたくない……」	「죽고 싶지 않아……」	fix	normalize
+normalize:voiced-mark	「な゛んで……」	「왜……」	fix	normalize
+normalize:voiced-mark	「わ゛かった……」	「알았어……」	fix	normalize
+normalize:voiced-mark	「た゛すけて！」	「살려!」	fix	normalize
+normalize:voiced-mark	「タ゛ス゛ケ゛テ゛！」	「도와줘!」	fix	normalize
+normalize:voiced-mark	「ヤ゛メテ！」	「그만해!」	fix	normalize
+normalize:voiced-mark	「ﾔﾞﾒﾃ！」	「그만해!」	fix	normalize
+normalize:voiced-mark	「や゙めて！」	「그만해!」	fix	normalize
+normalize:voiced-mark	「か゛んばれ！」	「힘내라!」	fix	normalize
+normalize:voiced-mark	「カ゛ンダム」	「건담」	fix	normalize
+normalize:voiced-mark	「カ゛ンハ゛レ！」	「힘내라!」	fix	normalize
+normalize:voiced-mark	「う゛ぁいおりん」	「바이올린」	fix	normalize
+normalize:voiced-mark	「ば゛か！」	「바보!」	fix	normalize
+normalize:voiced-mark	「ほ゛ら！」	「자!」	fix	normalize
+normalize:voiced-mark	「ひ゛どい……」	「심해……」	fix	normalize
+normalize:voiced-mark	「く゛るしい……」	「괴로워……」	fix	normalize
+normalize:voiced-mark	「ゆ゛るして……」	「용서해……」	fix	normalize
+normalize:voiced-mark	「ち゛がう！」	「아니야!」	fix	normalize
+normalize:voiced-mark	「そ゛んな……」	「그런……」	fix	normalize
+normalize:voiced-mark	「濁点「゛」をつける。」	「탁점 「゛」를 붙여.」	keep	normalize
+normalize:voiced-mark	「が゛んばれ！」	「힘내라!」	fix	normalize
+normalize:voiced-mark	「がんばれ！」	「힘내라!」	keep	normalize
+normalize:voiced-mark	「たすけて！」	「살려!」	keep	normalize
+normalize:voiced-mark	゛ニューヨーカー゛って呼ばれてたんだ	゛뉴요커゛라고 불리고 있었어	keep	normalize
+normalize:voiced-mark	「ぶふっ……う゛ぉうふっ」	lacks:ゔ	fix	normalize
+normalize:voiced-mark	い゛ら゛っしゃい゛	어서 오세요	fix	normalize
+normalize:voiced-mark	に゛ゃ！？	냐!?	fix	normalize

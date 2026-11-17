@@ -26,6 +26,8 @@ inline bool IsHiraganaRune(char32_t r) { return r >= 0x3041 && r <= 0x3096; }
 inline bool IsKatakanaRune(char32_t r) { return (r >= 0x30A1 && r <= 0x30F6) || r == 0x30FC; }
 // s with each katakana letter written in hiragana (ナメ なめ); other characters as they are.
 std::string KatakanaToHiragana(std::string_view s);
+// s with each hiragana letter written in katakana (ゔぁ ヴァ); other characters as they are.
+std::string HiraganaToKatakana(std::string_view s);
 // The characters that mask a letter of a word (伏せ字): ○ ● ◯ 〇 ◎ × ✕ ＊ * ■ □ △ ▲ ◇ ◆.
 inline bool IsMaskRune(char32_t r) {
     return std::u32string_view(U"○●◯〇◎×✕＊*■□△▲◇◆").find(r) != std::u32string_view::npos;

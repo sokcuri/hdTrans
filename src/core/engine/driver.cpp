@@ -508,6 +508,14 @@ bool WordIs(const void* context, std::string_view text) {
     return false;
 }
 
+// The length of the longest key of the dictionary that text starts with (pipeline::RunLookup::keyReach).
+size_t KeyReach(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    size_t reach = 0;
+    for (const dict::Candidate& c : Find(d, text).list) reach = std::max(reach, c.source.size());
+    return reach;
+}
+
 // Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
 bool AdjectiveStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -1239,7 +1247,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
-                                 options.reference ? nullptr : WordIs}),
+                                 options.reference ? nullptr : WordIs, KeyReach}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);

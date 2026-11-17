@@ -43,6 +43,22 @@ std::string KatakanaToHiragana(std::string_view s) {
     return out;
 }
 
+std::string HiraganaToKatakana(std::string_view s) {
+    std::string out;
+    out.reserve(s.size());
+    for (size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        const size_t n = r.size == 0 ? 1 : r.size;
+        if (r.cp >= U'ぁ' && r.cp <= U'ゖ') {
+            text::AppendRune(out, r.cp + 0x60);
+        } else {
+            out.append(s.substr(i, n));
+        }
+        i += n;
+    }
+    return out;
+}
+
 bool ValidUtf8(std::string_view s) {
     while (!s.empty()) {
         const text::Rune r = text::DecodeRune(s);
