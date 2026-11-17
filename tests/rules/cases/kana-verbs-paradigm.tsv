@@ -57,3 +57,7 @@ lookup:kana-verb-paradigm	ゆめみの家。	has:유메미	keep	lookup
 lookup:kana-verb-paradigm	はえ、にげて！	has:파리	keep	lookup
 lookup:kana-verb-paradigm	かえってたいへんだ。	has:오히려	keep	lookup
 lookup:kana-verb-paradigm	かえってたのしい。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたよりない。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたよ。	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってた。	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってるね？	has:돌아	fix	lookup

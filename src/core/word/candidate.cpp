@@ -1123,23 +1123,28 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
         return (r.user != nullptr && r.user->nameLayer) || At(r.semantic, 0) == 'Q' ||
                (At(r.partCode, 1) == '1' && At(r.partCode, 2) == '3');
     };
+    // The text after a verb form up to the end of this token goes on into the next token: a member of
+    // follower.te-verb that ends in a mark spans both (かえってたよ + 。).
+    const auto goingOn = [nextToken](std::string_view rest) { return std::string(rest) + std::string(nextToken); };
     // The rest after a verb form that makes it the verb: past small kana and long marks, the end, a mark
     // that ends the utterance, or a start of follower.te-verb.
-    const auto verbContext = [nextToken](std::string_view rest) {
+    const auto verbContext = [nextToken, &goingOn](std::string_view rest) {
         const auto strip = [](std::string_view& s) {
             while (!s.empty() && Has("っッーぁぃぅぇぉ〜～…‥", FirstChar(s))) s.remove_prefix(FirstChar(s).size());
         };
         strip(rest);
         // At the end of the token, the next token goes on: the end of the line or a mark that ends the utterance
         // as a request; a question asks how or whether (どうやって？, かえって？) and keeps the word.
-        if (rest.empty()) {
+        const bool inToken = !rest.empty();
+        if (!inToken) {
             rest = nextToken;
             strip(rest);
         }
         if (rest.empty() || Has("。！!」』）)", FirstChar(rest))) return true;
         // A から after a verb-coded or noun-coded record is the verb's (おきてから 일어나고 나서); an adverb's から is
         // its own (かねてからの), and the adverb path does not come here.
-        return rest.starts_with("から") || dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest) > 0;
+        return rest.starts_with("から") ||
+               dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), inToken ? goingOn(rest) : std::string(rest)) > 0;
     };
     // A noun after a particle is an argument or the predicate of a topic (ケーキははじめて 처음, 村のおきて), and a
     // time noun closes an utterance as the noun (あさって。 모레): neither gives way.
@@ -1178,8 +1183,8 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
             // follower.te-verb in this token or the next (かえってきた, あわせてください).
             const std::string_view after = form.substr(std::min(form.size(), te.size()));
             const bool adverb = At(w->partCode, 1) != '1';
-            const auto goesOn = [&nextToken](std::string_view rest) {
-                return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest.empty() ? nextToken : rest) > 0;
+            const auto goesOn = [&goingOn](std::string_view rest) {
+                return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), goingOn(rest)) > 0;
             };
             // A word of word.te-alone (はじめて 처음) closes an utterance as itself even as a noun: only a request after
             // it or a lead before it makes it the verb (はじめてください, さあ、はじめて！, but はじめて！, はじめてきた).
@@ -1197,7 +1202,7 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
             const bool request = form.starts_with(negative) && negative.size() > w->source.size() - v->source.size() &&
                                  (dict::StartsWithMember(HDTRANS_CLASS("aux.give-after-neg"), afterNegative) > 0 ||
                                   (verbContext(afterNegative) &&
-                                   dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), afterNegative) == 0));
+                                   dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), goingOn(afterNegative)) == 0));
             if (teForm || request) {
                 verb = v;
                 break;
