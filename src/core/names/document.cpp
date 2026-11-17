@@ -328,10 +328,11 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     // the whole document on the cue of one line: there is no word for a later line to mean (spec LEX-5940).
     for (const auto& [key, count] : evidence) {
         if (carried.contains(key)) continue;
-        if (!names::CommonWord(snap, key)) {
+        if (names::NameOnlyKey(snap, key)) {
             doc->cued.insert(key);
             continue;
         }
+        if (!names::CommonWord(snap, key)) continue;
         if (count >= 2) {
             doc->cued.insert(key);
         } else {
@@ -457,7 +458,15 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
                         }
                         const std::string kana = line.substr(start, at - start);
                         if (names::internal::RuneCount(kana) < 2) continue;
-                        if (const auto f = spoken.find(r.Written(kana)); f != spoken.end()) {
+                        // The kana spells the name with its long vowels (かけい 카케이; まおう is no 마오) and is no noun
+                        // of the dictionary itself, which the honorific would address (ことりさん; かな of かなさん is a particle).
+                        const auto f = spoken.find(text::FromKana(kana, text::Preset::Fan));
+                        if (f == spoken.end()) continue;
+                        const auto records = snap.RetrieveRecords(kana, dict::LookupMode::General);
+                        if (std::none_of(records.begin(), records.end(), [&](const dict::Candidate& c) {
+                                return c.codes != nullptr && c.source == kana && !c.codes->sem.HasPrefix("QPN") &&
+                                       !c.codes->part.Empty() && c.codes->part.Tag() == 'N';
+                            })) {
                             add(kana, f->first, true);
                         }
                     }

@@ -5,10 +5,8 @@ names:name-box	【千里】「おはよう」	has:【치사토】	fix	lookup
 names:name-box	【千里さん】「おはよう」	has:【치사토 씨】	fix	lookup
 names:name-box	　【凪】「おはよう」	has:【나기】	fix	lookup
 names:name-box	【梨花】「みー」	has:【리카】	fix	lookup
-names:name-box	【愛】「おはよう」	has:【아이】	fix	lookup
 names:name-box	【葉月】「行こう」	has:【하즈키】	fix	lookup
 names:name-box	【エナ】「うん」	has:【에나】	fix	lookup
-names:name-box	【幸】「何？」	has:【사치】	fix	lookup
 names:name-box	【小太刀】「待って」	has:【코다치】	fix	lookup
 names:name-box	【高峰】「よっしゃ」	has:【타카미네】	fix	lookup
 names:name-box	【凪】『それで？』	has:【나기】	fix	lookup
@@ -17,3 +15,10 @@ names:name-box	【お知らせ】「明日は休みです」	has:【알림】	ke
 names:name-box	【重要】「必ず読んでください」	has:【중요】	keep	lookup
 names:name-box	【速報】大雨のため運休	has:【속보】	keep	lookup
 names:name-box	愛してる	has:사랑	keep	lookup
+names:name-box	【筧】：「おはよう」	has:【카케이】	fix	lookup
+names:name-box	【新】「春の新作」	has:【신】	keep	lookup
+names:name-box	【完】『おわり』	has:【완】	keep	lookup
+names:name-box	【壱】「始まり」	lacks:이치	keep	lookup
+names:name-box	【改】「新ルール」	has:【개】	keep	lookup
+names:name-box	【つづく】次回もお楽しみに	lacks:츠즈쿠	keep	lookup
+names:name-box	【ないよう】これは説明	lacks:나이요	keep	lookup

@@ -424,11 +424,12 @@ namespace {
 // BracketLabelAt for the brackets of opens (( and （, or [ and ［), each closed by its pair.
 bool LabelInBracketsAt(std::string_view before, std::string_view after, bool square, bool lenticularOnly = false) {
     static constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
-    const std::string_view kStops = square ? "[]［］【】()（）\n「」『』、。！？!?…‥" : "()（）\n「」『』、。！？!?…‥";
+    const std::string_view kStops = lenticularOnly ? "[]［］【】()（）\n「」『』、。！？!?…‥"
+                                    : square       ? "[]［］()（）\n「」『』、。！？!?…‥"
+                                                   : "()（）\n「」『』、。！？!?…‥";
     const char32_t half = square ? U'[' : U'(', full = square ? U'［' : U'（';
-    // A name box in lenticular brackets is a label in square brackets too (【千里】「おはよう」; spec LEX-5941);
-    // lenticularOnly takes those alone.
-    const char32_t lenticular = square ? U'【' : U'（';
+    // lenticularOnly takes a name box in lenticular brackets alone (【千里】「おはよう」; spec LEX-5941).
+    const char32_t lenticular = lenticularOnly ? U'【' : full;
     std::size_t open = before.size();
     for (int n = 0; open > 0; n++) {
         const text::Rune r = RuneBefore(before, open);
@@ -449,11 +450,15 @@ bool LabelInBracketsAt(std::string_view before, std::string_view after, bool squ
         std::string_view box = after;
         box.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), box));
         if (bracket != U'【' || open != before.size() || !box.starts_with("】")) return false;
-        const std::string_view speech = TrimLineSpace(box.substr(std::string_view("】").size()));
+        // A colon may stand between the box and the quote (【筧】：「…」).
+        std::string_view speech = TrimLineSpace(box.substr(std::string_view("】").size()));
+        for (const std::string_view colon : {"：", ":"}) {
+            if (speech.starts_with(colon)) speech = TrimLineSpace(speech.substr(colon.size()));
+        }
         return speech.starts_with("「") || speech.starts_with("『");
     }
     // A label in square brackets opens the line: one after another group is a word of a list ([ガンガン] [いのち]).
-    if (square && AnyRuneOf(lead, [](char32_t c) { return InRunes(c, ")）]］】"); })) return false;
+    if (square && AnyRuneOf(lead, [](char32_t c) { return InRunes(c, ")）]］"); })) return false;
     std::string_view rest = after;
     rest.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
     if (!rest.empty() && !InRunes(FirstRune(rest).cp, kLabelSeparators) && FirstRune(rest).cp != closing) {
