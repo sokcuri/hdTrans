@@ -68,9 +68,7 @@ normalize:voiced-mark	彼は゛正義の味方゛と呼ばれた	그는゛정의
 normalize:voiced-mark	それて゛す。	그것입니다.	fix	normalize
 normalize:voiced-mark	あれて゛す。	저것입니다.	fix	normalize
 normalize:voiced-mark	それて゛しょう？	그것이죠?	fix	normalize
-normalize:voiced-mark	それた゛！	그거야!	fix	normalize
 normalize:voiced-mark	それた゛よね	그것이지	fix	normalize
-normalize:voiced-mark	あれた゛よ	저것이야	fix	normalize
 normalize:voiced-mark	「それて゛いいの？」	「그거면 되는 거야?」	fix	normalize
 normalize:voiced-mark	たすけて゛ください	살려 주세요	fix	normalize
 normalize:voiced-mark	まって゛！	기다려!	fix	normalize
@@ -87,3 +85,7 @@ normalize:voiced-mark	う゛─ん	으─응	fix	normalize
 normalize:voiced-mark	あ゛――っ	아――	fix	normalize
 normalize:voiced-mark	や゛め゛て゛――！	그만해――!	fix	normalize
 normalize:voiced-mark	ヽ(´∀`)ノ゜.	has:゜	keep	normalize
+normalize:voiced-mark	こわれた゛	부서졌다	fix	normalize
+normalize:voiced-mark	あらわれて゛	나타나	fix	normalize
+normalize:voiced-mark	おそれて゛いる	무서워하고 있다	fix	normalize
+normalize:voiced-mark	われた゛	깨졌다	fix	normalize

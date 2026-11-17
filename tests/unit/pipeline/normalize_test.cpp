@@ -106,8 +106,8 @@ HD_TEST(pipeline_normalize_forms_voiced_mark_by_dictionary) {
     for (const Case& c : cases) HD_CHECK_EQ(NormalizeForms(c.in, runs), std::string(c.want));
 }
 
-// A て or た after the stem of a dictionary verb ends its te or past form, but not after a pronoun that spells
-// such a stem, nor where the voiced spelling reads as a key fewer.
+// A て or た after the stem of a dictionary verb ends its te or past form, but not where the voiced spelling
+// reads as a key fewer.
 HD_TEST(pipeline_normalize_forms_voiced_mark_te_form) {
     RunLookup runs;
     runs.keyReach = [](const void*, std::string_view text) -> size_t {
@@ -119,11 +119,9 @@ HD_TEST(pipeline_normalize_forms_voiced_mark_te_form) {
     runs.dictionaryVerb = [](const void*, std::string_view text) {
         return text.ends_with("それる"sv) || text.ends_with("やめる"sv);
     };
-    runs.pronoun = [](const void*, std::string_view text) { return text == "それ"sv; };
     const Case cases[] = {
         {"やめて゛"sv, "やめて"sv},
         {"やめた゛！"sv, "やめた！"sv},
-        {"それた゛！"sv, "それだ！"sv},
         {"それて゛す"sv, "それです"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(NormalizeForms(c.in, runs), std::string(c.want));

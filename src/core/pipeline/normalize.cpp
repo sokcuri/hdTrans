@@ -684,19 +684,9 @@ constexpr int kVoicedLookAhead = 16;
 
 enum class Voicing { Strains, Voices, Stays };
 
-// Whether out ends with the stem of a dictionary verb in る that is no pronoun: やめ, たすけ, but not それ or あれ,
-// which read as the pronoun before で or だ.
+// Whether out ends with the stem of a dictionary verb in る: やめ, たすけ.
 bool VerbStemEnds(std::string_view out, const RunLookup& runs) {
-    if (runs.dictionaryVerb == nullptr || !runs.dictionaryVerb(runs.context, std::string(out) + "る")) return false;
-    if (runs.pronoun == nullptr) return true;
-    size_t back = out.size();
-    for (int n = 0; n < kVoicedLookBack && back > 0; n++) {
-        const text::Rune last = LastRune(out.substr(0, back));
-        if (!IsJapaneseRune(last.cp) || AnyMark(last.cp)) break;
-        back -= last.size;
-        if (runs.pronoun(runs.context, out.substr(back))) return false;
-    }
-    return true;
+    return runs.dictionaryVerb != nullptr && runs.dictionaryVerb(runs.context, std::string(out) + "る");
 }
 
 // How the spacing mark at text[at] reads after the kana base that out ends with: it voices it into letter unless the letter
@@ -713,8 +703,8 @@ Voicing VoicingReads(std::string_view out, char32_t base, char32_t letter, std::
     const char32_t following = At(text, at + At(text, at).size).cp;
     if (base == U'う' && (!IsJapaneseRune(following) || In(following, U"ーッゥンウっぅんう"))) return Voicing::Strains;
     // A て or た after っ or after the stem of a dictionary verb in る ends its te or past form (やめて゛ やめて,
-    // たすけて゛, まって゛), where a で or だ is no word; not after a pronoun that spells such a stem (それ of
-    // それる, あれ of あれる: それた゛ それだ), nor where the voiced spelling reads as a key fewer (それて゛す です).
+    // たすけて゛, まって゛), where a で or だ is no word; not where the voiced spelling reads as a key fewer
+    // (それて゛す です).
     const bool teForm = In(base, U"てた") && (LastRune(out).cp == U'っ' || VerbStemEnds(out, runs));
     if (runs.keyReach == nullptr) return teForm ? Voicing::Strains : base == U'う' ? Voicing::Stays : Voicing::Voices;
     size_t back = out.size();
