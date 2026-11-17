@@ -815,6 +815,35 @@ bool WholeAdjective(std::string_view ending) {
     return more.empty() || more == "た" || more == "て";
 }
 
+// Whether ending, the hiragana of a katakana run after the stem of a verb of kind, is a whole
+// form of the verb: a conjugation and what may end the form after it, as
+// follower.kata-verb-whole lists them (マッテ 待っ+て, ワカラナイ 分から+ない, ヤメロ やめ+ろ,
+// コロシテヤル 殺し+て+やる). The conjugation of an ichidan verb may be empty (ヤメナイ). The
+// dictionary form alone needs a run of three kana or more with something after it that does not
+// leave the run standing as a call (long_: …ワラエルッ！; not タツ or ネル, nor ノボル！ or
+// ノボル、 at the start of a line, 「ノボル」と, read as a given name); with an ending in the run it
+// may stand as a call (イクヨ！ 行くよ) but for one before a comma (comma: テルヨ、来て, a name).
+bool WholeVerb(int kind, std::string_view ending, bool long_, bool comma, std::size_t& afterSize) {
+    static constexpr std::pair<std::string_view, int> kBranches[] = {
+        {"dict", 0}, {"past", 6}, {"te", 7}, {"neg", 8}, {"stem", 10}, {"imp", 11}, {"imp2", 12}, {"cha", 17},
+    };
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("follower.kata-verb-whole"))) {
+        const std::size_t colon = m.find(':');
+        if (colon == std::string_view::npos) continue;
+        const std::string_view name = m.substr(0, colon), after = m.substr(colon + 1);
+        for (const auto& [n, branch] : kBranches) {
+            if (n != name || (branch == 0 && (after.empty() ? !long_ : comma))) continue;
+            const std::string_view conj = word::Conjugation(kind, branch);
+            if (conj.find_first_of("(X") != std::string_view::npos || (conj.empty() && after.empty())) continue;
+            if (ending.size() == conj.size() + after.size() && ending.starts_with(conj) && ending.ends_with(after)) {
+                afterSize = after.size();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 // Whether rest, the text after a katakana run, is what follows a predicate: the end of the line, a
 // sentence end, a closing mark after a closing ッ (tsu), a final particle (final: after a form in い),
 // a particle or a predicate of follower.kata-adjective or follower.kata-verb (の only before an end), or,
@@ -842,13 +871,17 @@ bool PredicateFollows(std::string_view rest, bool tsu, bool final) {
 //     (ブッ放す ぶっ放す, ベタぼれ べたぼれ), unless a particle, an honorific or a drawn
 //     honorific follows the run (サッちゃん, サラったら, アルくぅん) or the run is a person of the
 //     name layer before suru.verbal-noun-start (ナオして, ナオすごい);
+//   - a verb written whole in katakana before what follows a predicate, a comma or a quoting と:
+//     its stem and a whole form of it (WholeVerb) fill the run but for a closing ッ or a drawn
+//     tail (マッテ！ まって, ワカッタ… わかった, ヤメテェ…… やめて), when the run is no katakana key
+//     at all, no name of the name layer and no stem with a particle after it;
 //   - an adverb of AdverbShape (シッカリと しっかりと, ヤッパリ やっぱり), a unit said twice only
 //     before と that does not quote it, a kanji or a hiragana word other than a particle or the
 //     copula (ソロソロ帰ろう; not マルマルです, メキメキという, ウソウソ！).
 // The run must be no katakana word: no key other than a name, a row that spells its sound
 // (パラパラ 파라파라) or a stem the text does not conjugate reads it, and no name of the document.
 std::string NativeSpelling(std::string_view word, bool tsu, std::string_view rest, const LineContext& ctx,
-                           const dict::Snapshot& snap) {
+                           const dict::Snapshot& snap, bool call) {
     const std::u32string k = Runes(word);
     if (k.size() < 2) return {};
     if (ctx.named != nullptr && ctx.named->contains(std::string(word))) return {};
@@ -889,6 +922,49 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
     const bool adverbial = !next.empty() && !quoted && !drawn(0) &&
                            (IsKanjiRune(next[0]) || dict::InClassRune(HDTRANS_CLASS("follower.kata-adverb"), next[0]) ||
                             (IsHiraganaRune(next[0]) && !nounFollows));
+    // The reading of the run without a closing ッ or a drawn tail of ー or small vowels (ヤメテェ,
+    // マッテー; a small vowel only after a form of three kana or more, as it also spells a contracted
+    // word: イテェ 痛え), the tail ～ when it holds a ー, and whether a row other than a name has the run as
+    // its katakana key, a loanword even when its Korean spells the sound (ネタ 네타, カット 컷).
+    std::string core = hira, drawnTail;
+    bool hasTail = false;  // the drawn tail has a small vowel
+    bool teDrawl = false;  // the tail is two え after a te form
+    {
+        std::u32string h = Runes(hira);
+        size_t e = h.size();
+        if (tsu && e > 0 && h[e - 1] == U'っ') e--;
+        bool dash = false;
+        while (e > 1 && (h[e - 1] == U'ー' || (RuneIn(h[e - 1], U"ぁぃぅぇぉ") && VowelOf(h[e - 1] + 0x60) == VowelOf(h[e - 2] + 0x60)))) {
+            dash = dash || h[e - 1] == U'ー';
+            hasTail = hasTail || h[e - 1] != U'ー';
+            e--;
+        }
+        // Two え that draw out the て or で of a te form before a shout's end (ヤメテエエ！ やめて), as
+        // RewriteEmphasis drops them in hiragana.
+        const char32_t r0 = text::DecodeRune(rest).cp;
+        if (!hasTail && !dash && e >= 3 && h[e - 1] == U'え' && h[e - 2] == U'え' && RuneIn(h[e - 3], U"てで") &&
+            (rest.empty() || RuneIn(r0, U"！!…‥"))) {
+            e -= 2;
+            teDrawl = true;
+        }
+        core = Utf8(std::u32string_view(h).substr(0, e));
+        if (dash) drawnTail = "～";
+    }
+    // A key that reads into the drawn tail makes it part of a word, not a tail; a key may take one
+    // of two drawn え (ミテエエ: みてえ).
+    bool tailWord = false;
+    const std::size_t tailFrom = core.size() + (teDrawl ? std::string_view("え").size() : 0);
+    for (const dict::Candidate& c : snap.GetWordInfo(hira, dict::LookupMode::General, ctx.lookup).list) {
+        tailWord = tailWord || (c.codes != nullptr && c.source.size() > tailFrom && !(c.user != nullptr && c.user->nameLayer));
+    }
+    const auto keyed = [&](std::string_view w) {
+        for (const dict::Candidate& c : snap.GetWordInfo(w, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes != nullptr && c.source == w && !(c.user != nullptr && c.user->nameLayer) && !c.codes->sem.HasPrefix("QP")) return true;
+        }
+        return false;
+    };
+    const bool kataRow = keyed(word);
+    std::size_t afterSize = 0;  // the ending WholeVerb found in the run after the form (ワカッタヨ: よ)
     for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
         if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QPN")) continue;
         const std::string_view part = c.codes->partText;
@@ -900,6 +976,16 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             if (c.source.size() + (tsu ? 3 : 0) < hira.size()) continue;
             // An ichidan stem that takes in okurigana after the run may stand bare (カブれない).
             if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
+        } else if (part[0] == 'M' && part[1] == '4' && !runsOn && !named && !nameThenSuru && !nounFollows && !kataRow && !tailWord &&
+                   c.source.size() < core.size() && (!hasTail || text::RuneCount(core) >= 3) &&
+                   WholeVerb(part[3] - '0', std::string_view(core).substr(c.source.size()), text::RuneCount(core) >= 3 && !rest.empty() && !call, rest.starts_with("、") || rest.starts_with("，"), afterSize) &&
+                   // nor a katakana key before that ending (カッタヨ: カッタ, a cutter)
+                   (afterSize == 0 || !keyed(word.substr(0, core.size() - afterSize))) &&
+                   (PredicateFollows(rest, tsu, false) || quoted || rest.starts_with("、"))) {
+            // A verb written whole in katakana (マッテ！ 待って, ワカッタ… 分かった, ヤメテェ！ やめて):
+            // the stem and a whole form of it fill the run, but for a closing ッ or a drawn tail, before
+            // what follows a predicate, a comma or a quoting と (ワカッタと言った).
+            return core + drawnTail;
         } else if (part[0] == 'H' && part[1] == '7' && c.source.size() == hira.size() && !tsu && !nounFollows) {
             if (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-stem"), after) > 0) return hira;
         } else if (part[0] == 'H' && part[1] == '7' && c.source.size() < hira.size() &&
@@ -1021,7 +1107,10 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         if (kw == nullptr) {
             // After a digit the run counts something (1モグり), not a native word.
             if (joined || text::IsDigit(prev)) continue;
-            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap); !native.empty()) {
+            // The run stands as a call (ノボル！, おい、アタル…): after the start of the line, a bracket, a
+            // comma or a space and before a mark, a comma, a closing bracket or the end (「ノボル」と).
+            const bool call = (start == 0 || RuneIn(prev, U"「『（(、，,　 \n")) && (rest.empty() || RuneIn(next, U"！!？?…‥、，,」』）)\n"));
+            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap, call); !native.empty()) {
                 b.append(text.substr(at, start - at));
                 b += native;
                 at = i;
