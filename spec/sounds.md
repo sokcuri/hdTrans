@@ -411,7 +411,7 @@
 | f(w)を求める | f(w)를 구한다 | 유지 |
 | 100Wの電球 | 100W의 전구 | 유지 |
 | 変数wの値 | 변수 w의 값 | 유지 |
-| wwwって何 | www는 무엇 | 유지 |
+| wwwって何 | www가 뭐야 | 유지 |
 | 庭の草。 | 뜰의 풀. | 유지 |
 
 사례: `tests/rules/cases/sound-laughter.tsv`, `tests/rules/cases/laugh-mark.tsv`(笑)
