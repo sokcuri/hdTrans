@@ -1,0 +1,33 @@
+rule	input	expected	kind	layer
+compose:adverb-noun-space	明日雨だ。	has:내일 비다	fix	compose
+compose:adverb-noun-space	明日朝から捜索を再開する。	has:내일 아침부터	fix	compose
+compose:adverb-noun-space	明日朝の予想最低気温は	has:내일 아침 예상	fix	compose
+compose:adverb-noun-space	来年春から引き下げる。	has:내년 봄부터	fix	compose
+compose:adverb-noun-space	つーか昨日傘持ってなかったっけ	has:어제 우산	fix	compose
+compose:adverb-noun-space	最近雨が多いね。	has:최근 비가	fix	compose
+compose:adverb-noun-space	昨夜本で読んだ。	has:어젯밤 책에서	fix	compose
+compose:adverb-noun-space	昨日家で焼いたんです。	has:어제 집에서	fix	compose
+compose:adverb-noun-space	明日車に轢かれたらどうする？	has:내일 차에	fix	compose
+compose:adverb-noun-space	今日雨だった。	has:오늘 비였다	fix	compose
+compose:adverb-noun-space	きょう雨だね。	has:오늘 비구나	fix	compose
+compose:adverb-noun-space	「明日雨だって」	has:내일 비래	fix	compose
+compose:adverb-noun-space	今年夏は暑い。	has:올해 여름은	fix	compose
+compose:adverb-noun-space	去年秋、旅に出た。	has:작년 가을	fix	compose
+compose:adverb-noun-space	明後日雨だ。	has:모레 비다	fix	compose
+compose:adverb-noun-space	一昨日雨だった。	has:그저께 비였다	fix	compose
+compose:adverb-noun-space	今晩雨だ。	has:오늘 밤 비다	fix	compose
+compose:adverb-noun-space	毎朝雨だ。	has:매일 아침 비다	fix	compose
+compose:adverb-noun-space	今週雨が多い。	has:이번 주 비가	fix	compose
+compose:adverb-noun-space	今夜月が綺麗だ。	has:오늘 밤 달이	fix	compose
+compose:adverb-noun-space	先日雨だった。	has:요전날 비였다	fix	compose
+compose:adverb-noun-space	目下次の作戦準備で待機中です。	has:지금 다음 작전	fix	compose
+compose:adverb-noun-space	今日用の服を選ぶ。	has:오늘용의	keep	compose
+compose:adverb-noun-space	今年産のお米。	has:올해산의	keep	compose
+compose:adverb-noun-space	明日付で辞める。	has:내일부로	keep	compose
+compose:adverb-noun-space	今年分の税金。	has:올해분의	keep	compose
+compose:adverb-noun-space	去年製の車。	has:작년제의	keep	compose
+compose:adverb-noun-space	明日は雨だ。	내일은 비다.	keep	compose
+compose:adverb-noun-space	今日の雨はひどい。	오늘의 비는 심하다.	keep	compose
+compose:adverb-noun-space	最近作が評判だ。	has:최근작이	keep	compose
+dict:w:35500	昨年比で一割増えた。	has:작년 대비로	fix	lookup
+dict:w:35501	去年比で二割増し。	has:작년 대비로	fix	lookup
