@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 voice:rare-shimau	食べられてしまいました	먹혀버렸습니다	fix	voice
 voice:rare-shimau	結局　百目鬼に食べられちまった	결국 도메키에 먹혀버렸다	fix	voice
-voice:rare-shimau	首をはねられてしまうのでしょう。	목을 베어져버리겠죠.	fix	voice
+voice:rare-shimau	首をはねられてしまうのでしょう。	목이 베여버리겠죠.	fix	voice
 voice:rare-shimau	顔を変えられてしまったんだ	얼굴이 바꾸어져버린 거야	fix	voice
 voice:rare-shimau	あからさまに避けられてしまうと	명백하게 피해져버리면	fix	voice
 voice:rare-shimau	魔水晶に変えられてしまい―	마수정으로 바꾸어져버려-	fix	voice

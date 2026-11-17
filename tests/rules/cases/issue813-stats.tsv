@@ -25,10 +25,10 @@ lex:agaru-nerves	緊張してあがる。	긴장해 얼어붙는다.	fix	senses
 lex:agaru-nerves	舞台であがって声が出なかった。	무대에서 긴장해 목소리가 나오지 않았다.	fix	senses
 lex:agaru-nerves	初舞台であがってしまった。	첫무대에서 긴장해버렸다.	fix	senses
 lex:agaru-nerves	発表会であがってしまった。	발표회에서 긴장해버렸다.	fix	senses
-lex:agaru-nerves	試合であがってしまって実力が出せなかった。	has:긴장해버려 ;; lacks:올라	fix	senses
-lex:agaru-nerves	試験であがってしまった。	has:긴장해버렸다 ;; lacks:올라	fix	senses
-lex:agaru-nerves	本番で上がってしまった。	has:긴장해버렸다 ;; lacks:올라	fix	senses
-lex:agaru-nerves	面接であがりました。	has:긴장했습니다 ;; lacks:올랐	fix	senses
+lex:agaru-nerves	試合であがってしまって実力が出せなかった。	has:긴장해버려	fix	senses
+lex:agaru-nerves	試験であがってしまった。	has:긴장해버렸다	fix	senses
+lex:agaru-nerves	本番で上がってしまった。	has:긴장해버렸다	fix	senses
+lex:agaru-nerves	面接であがりました。	has:긴장했습니다	fix	senses
 lex:agaru-nerves	人前だとあがる。	has:긴장한다	fix	senses
 lex:agaru-nerves	舞台の幕があがった。	무대의 막이 올랐다.	keep	senses
 lex:agaru-nerves	試合でレベルがあがった。	has:레벨이 올랐다	keep	senses

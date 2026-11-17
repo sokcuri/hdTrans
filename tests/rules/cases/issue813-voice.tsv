@@ -34,7 +34,7 @@ voice:cue	「なんだか、私ひとりに責任を押しつけられた……�
 voice:cue	先生に褒められる。	선생님에게 칭찬받는다.	keep	voice
 voice:cue	これなら食べられる。	이것이라면 먹을 수 있다.	keep	voice
 voice:readily	言われなくたって、頑張りますから。	has:말하지 않아도	keep	local
-voice:readily	言われるままに従った。	말하는 대로 따랐다.	fix	local
+voice:readily	言われるままに従った。	듣는 대로 따랐다.	fix	local
 voice:readily	言われなき差別を受けて	has:이유 없는 차별을	fix	lookup
 voice:cue	敵から攻撃を仕掛けられた。	적에게서 공격을 당했다.	fix	packs
 voice:cue	敵に奇襲を仕掛けられた。	적에게 기습을 당했다.	fix	packs

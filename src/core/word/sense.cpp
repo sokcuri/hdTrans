@@ -210,8 +210,8 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
             At(main->Code(main->selected), 0) == '4' && main->JoinsNext() && SenseTriggers(main, it, s)) {
             return true;
         }
-        // Before the word, a verbal noun with its する (緊張してあがる) lets the noun be the trigger.
-        if (cls == '4' && s.side == userdict::Side::Before && x->group->surface == kJaSuru && main != nullptr &&
+        // Right before the word, a verbal noun with its する (緊張してあがる) lets the noun be the trigger.
+        if (n == 0 && cls == '4' && s.side == userdict::Side::Before && x->group->surface == kJaSuru && main != nullptr &&
             main->selected >= 0 && At(main->Code(main->selected), 0) == '1' && main->JoinsNext() &&
             SenseTriggers(main, it, s)) {
             return true;
