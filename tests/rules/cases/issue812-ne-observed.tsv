@@ -49,11 +49,30 @@ cx:saki-first:5	少し先行ったところ。	has:조금 앞서	fix	rewrites
 cx:saki-first:5	もう少し先行くと駅がある。	has:좀 더 앞서	fix	rewrites
 cx:saki-first:5	少し先に行った。	lacks:앞서	keep	rewrites
 cx:saki-first:5	ちょっと先行ってて。	has:먼저 가	keep	rewrites
-cx:suru-phrase:10	腕組みして立っていた。	has:팔짱을 껴	fix	rewrites
-cx:suru-phrase:10	腕組みして考える。	has:팔짱을 끼고	fix	rewrites
-cx:suru-phrase:10	腕組みしながら言った。	has:팔짱을 끼면서	fix	rewrites
-cx:suru-phrase:10	腕組みのまま立っていた。	lacks:끼	keep	rewrites
-cx:suru-phrase:15	腕組みしている。	has:팔짱을 끼고 있다	fix	rewrites
-cx:suru-phrase:15	腕組みを解いた。	lacks:끼	keep	rewrites
-cx:suru-phrase:20	腕組みをした。	has:팔짱을 꼈	fix	rewrites
-cx:suru-phrase:20	腕を組んだ。	has:팔짱을 꼈	keep	rewrites
+dict:w:35404	腕組みして立っていた。	has:팔짱을 껴	fix	lookup
+dict:w:35404	腕組みして考える。	has:팔짱을 끼고	fix	lookup
+dict:w:35404	腕組みしながら言った。	has:팔짱을 끼면서	fix	lookup
+dict:w:35404	腕組みのまま立っていた。	lacks:끼	keep	lookup
+dict:w:35404	腕組みしている。	has:팔짱을 끼고 있다	fix	lookup
+dict:w:35404	腕組みを解いた。	lacks:끼	keep	lookup
+dict:w:35405	腕組みをした。	has:팔짱을 꼈	fix	lookup
+pack:idiom	腕を組んだ。	has:팔짱을 꼈	keep	packs
+dict:w:35406	腕組して立っていた。	has:팔짱을 껴	fix	lookup
+dict:w:35405	腕組みをして黙っていた。	has:팔짱을 껴	fix	lookup
+dict:w:35404	腕組みしています。	has:팔짱을 끼고 있습니다	fix	lookup
+dict:w:35408	うでぐみして考えた。	has:팔짱을 끼고	fix	lookup
+dict:w:35404	腕組みはやめて。	lacks:끼	keep	lookup
+cx:ne-promise:35	お母さん呼びますね。	has:부를게요	keep	rewrites
+cx:ne-promise:35	先生呼びますね。	has:부를게요	keep	rewrites
+cx:ne-promise:35	友達誘いますね。	has:게요	keep	rewrites
+cx:ne-promise:35	彼女送りますね。	has:게요	keep	rewrites
+cx:ne-promise:35	彼女待ちますね。	has:기다릴게요	keep	rewrites
+cx:ne-promise:35	雨避けますね。	has:피할게요	keep	rewrites
+cx:ne-promise:35	雪払いますね。	has:털게요	keep	rewrites
+cx:ne-promise:35	お母さん呼ぶね。	has:부를게	keep	rewrites
+cx:ne-promise:35	彼帰りますね。	has:돌아가네요	fix	rewrites
+cx:ne-promise:35	先生戻りますね。	has:돌아오네요	fix	rewrites
+cx:ne-promise:35	お父さん寝ますね。	has:자네요	fix	rewrites
+cx:ne-promise:35	田中さん来ますね。	has:오네요	keep	rewrites
+cx:ne-promise:35	子供泣いてますね。	has:우네요	keep	rewrites
+cx:ne-promise:35	風吹いてますね。	has:바람 부	fix	rewrites
