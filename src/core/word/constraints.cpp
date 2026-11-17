@@ -935,12 +935,11 @@ bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::
     if (!dict::InClass(HDTRANS_CLASS("particle.split-lead"), lead)) return false;
     const std::string_view rest = query.substr(lead.size());
     // Only a noun: a source that is also a particle or another part (には, にも, 見にくい) stays; one that is
-    // also an adjective stem only where an ending of it follows (先輩にくすっと: no い, く, か, け, さ or そ after にく).
+    // also an adjective stem only where an ending of it (kana.adjective-ending) follows (先輩にくすっと: none after にく).
     const std::string_view next = FirstChar(query.substr(source.size()));
     for (const dict::Candidate& c : list) {
         if (c.source != source || c.codes == nullptr || c.codes->part.ClassDigit() == '1') continue;
-        if (c.codes->part.ClassDigit() == '7' && !next.empty() &&
-            std::string_view("いくかけさそ").find(next) == std::string_view::npos) {
+        if (c.codes->part.ClassDigit() == '7' && !next.empty() && !dict::InClass(HDTRANS_CLASS("kana.adjective-ending"), next)) {
             continue;
         }
         return false;

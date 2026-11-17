@@ -1,4 +1,4 @@
-# 규칙: GRM-4093, GRM-161, GRM-75, GRM-4094, LEX-5792
+# 규칙: GRM-4093, GRM-161, GRM-75, GRM-4094, LEX-5792, LEX-5796
 rule	input	expected	kind	layer
 cx:sobakara:10	食べたそばから忘れる	먹자마자 잊는다	fix	rewrites
 cx:sobakara:10	掃除したそばから散らかす	has:청소하자마자	fix	rewrites
@@ -108,9 +108,9 @@ dict:jisjk:137288	作戦とか立てない	has:세우지 않는다	keep	local
 dict:jisjk:137288	舞台に立てない	has:설 수 없다	keep	local
 dict:w:35264	わらわれた	비웃음을 샀다	fix	lookup
 dict:w:35264	笑われたくない	has:비웃음을 사	fix	lookup
-dict:w:35312	にっこり笑われた	has:방긋 웃으셨다	fix	lookup
-dict:w:35312	優しく笑われた	has:웃으셨다	fix	lookup
-dict:w:35312	静かに笑われた	has:웃으셨다	fix	lookup
+cx:smile-respect:10	にっこり笑われた	has:방긋 웃으셨다	fix	lookup
+cx:smile-respect:10	優しく笑われた	has:웃으셨다	fix	lookup
+cx:smile-respect:10	静かに笑われた	has:웃으셨다	fix	lookup
 dict:w:35312	先生が笑われた	has:선생님이 웃으셨다	fix	lookup
 dict:w:35312	彼に笑われた	has:비웃음을 당했다	keep	lookup
 dict:w:35312	笑われて恥ずかしかった	has:비웃음을 사	keep	lookup
@@ -129,3 +129,36 @@ constraint:particle-split	読みにくい本	has:읽기 어려운	keep	lookup
 dict:w:35312	スベって笑われるのはみんな覚悟してるさ	has:비웃음을 사는	keep	lookup
 dict:w:35312	面白いことを言ってないのに笑われるのは不愉快だわ	has:비웃음을 사는	keep	lookup
 cx:nai-stem-request:10	あのー……。ウチ、身体どこも悪くないで？	lacks:나쁘지 마	keep	rewrites
+cx:smile-respect:10	ふふっと笑われた	has:웃으셨다	fix	rewrites
+cx:smile-respect:10	また笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	ずっと笑われていた	has:비웃음을 사고 있었다	keep	rewrites
+cx:smile-respect:10	どっと笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	クスクス笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	ひどく笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	皆からずっと笑われてきた	has:비웃음을 사 왔다	keep	rewrites
+cx:youto-concessive:36	いくら金持ちだろうが、許さない	has:부자라도,	fix	rewrites
+cx:youto-concessive:36	大変だろうが、頑張って	has:힘들겠지만	keep	rewrites
+cx:youto-concessive:34	どんな相手だろうが負けない	has:어떤 상대든	fix	rewrites
+cx:youto-concessive:34	何度も練習したホラ話だろうが―	has:허풍이겠지만	keep	rewrites
+cx:youto-concessive:34	何回も聞いた話だろうが我慢しろ	has:이야기겠지만	keep	rewrites
+cx:lc2e-darouga:47	たまに遅刻してるだろうが。	has:지각하고 있잖아	fix	rewrites
+cx:lc2e-darouga:47	だから言ってるだろうが	has:말하잖아	fix	rewrites
+cx:lc2e-darouga:47	ほっておいても世界に知れ渡るだろうが	has:알려지겠지만	keep	rewrites
+cx:lc2e-darouga:15	それはそうだろうが	has:그렇겠지만	keep	rewrites
+dict:jisjk:13899	天ぷらとそばを頼んだ	has:튀김과 메밀국수를	fix	local
+dict:jisjk:13899	そばでパンを食べた	has:곁에서	keep	local
+dict:jisjk:13899	ご飯をそばに置いた	has:곁에	keep	local
+dict:jisjk:13899	肉をそばに置いた	has:곁에	keep	local
+cx:youto-concessive:35	相手が子供だろうが手加減しない	has:아이라도	fix	rewrites
+cx:youto-concessive:35	敵は女だろうが容赦しない	has:여자라도	fix	rewrites
+cx:youto-concessive:35	何度も見た顔だろうが思い出せない	has:얼굴이겠지만	keep	rewrites
+cx:youto-concessive:37	誰だろうが、関係ない	has:누구든,	fix	rewrites
+cx:youto-concessive:37	何だろうが、構わない	has:무엇이든,	fix	rewrites
+cx:youto-concessive:37	大変だろうが、頑張って	has:힘들겠지만,	keep	rewrites
+cx:lc2e-darouga:15	遅いだろうが。	has:늦잖아	fix	rewrites
+cx:lc2e-darouga:15	うるさいだろうが。	has:시끄럽잖아	fix	rewrites
+cx:lc2e-darouga:15	それはそうだろうが。	has:그렇겠지만	keep	rewrites
+cx:lc2e-darouga:15	彼は来るだろうが。	has:오겠지만	keep	rewrites
+phrase:hana-de-warawareru	鼻で笑われた	코웃음을 당했다	fix	phrases
+phrase:hana-de-warawareru	鼻で笑われて悔しい	has:코웃음을 당해	fix	phrases
+phrase:hana-de-warawareru	鼻で笑う	has:코웃음	keep	phrases
