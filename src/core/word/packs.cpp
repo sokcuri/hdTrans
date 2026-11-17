@@ -48,6 +48,11 @@ std::string_view ArgSlot(std::string_view particle) {
                                       {"とは", "with"}, {"とも", "with"}};
     for (const Mark& m : kMarks)
         if (particle == m.particle) return m.slot;
+    // も marks the subject of a person atom (嬉野さんも下がった; Holds); のこと before a particle marks the slot of the particle
+    // (桜庭のことを止める: 桜庭 is the object)
+    if (particle == "も") return "subj";
+    if (particle.starts_with("のこと") && particle.size() > std::string_view("のこと").size())
+        return ArgSlot(particle.substr(std::string_view("のこと").size()));
     return {};
 }
 
@@ -182,7 +187,7 @@ Context ContextOf(Flusher& f, const Item* it) {
             if (SentenceEnd(q) || q->group->surface == "「" || q->group->surface == "『" || Predicate(ClassOf(q))) break;
             if (ClassOf(q) == '2' && q->prev != nullptr && ClassOf(q->prev) == '1') {
                 if (const std::string_view slot = ArgSlot(q->group->surface); !slot.empty())
-                    c.args.push_back({slot, q->prev, {}, {}, "marked"});
+                    c.args.push_back({slot, q->prev, {}, {}, q->group->surface == "も" ? "also" : "marked"});
                 q = q->prev;
             }
         }
@@ -485,8 +490,11 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
                 }
             }
         } else if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
+            // a も phrase may be the subject or the object (風邪も引かない): it fills the subject of a person atom only
+            const bool personAtom = std::any_of(a.values.begin(), a.values.end(),
+                                                [&](const std::string& v) { return v.starts_with("@") && CoversPerson(t, v); });
             for (const Arg& g : c.args)
-                if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
+                if ((a.slot == "arg" || g.slot == a.slot) && (g.how != "also" || personAtom)) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
             // (an attachment says itself which argument the head is)
             if (pool.empty() && !c.attached && (a.slot == "subj" || (a.slot == "obj" && !c.headThroughAux)) && c.head != nullptr)
@@ -538,6 +546,7 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         for (const Arg& g : pool) {
             const Item* x = g.item;
             for (const std::string& v : a.values) {
+                if (g.how == "also" && !(v.starts_with("@") && CoversPerson(t, v))) continue;
                 if (v.starts_with("@")) {
                     // by the pack-classes files, or by the class the attachment gives the argument
                     // a name or a noun before an honorific is @person (FramePerson) as a case phrase, not as the
@@ -715,11 +724,17 @@ bool SlotSuffix(const Item* x) {
 // センサー) do not count; common person nouns come from the pack-classes files.
 bool FramePerson(const Item* x) {
     if (x->group == nullptr || x->selected < 0) return false;
-    if (x->next != nullptr && x->next->tokenIndex == x->tokenIndex && SlotSuffix(x->next)) return true;
+    // a plural of a person (桜庭たち, 田中くんたち) is one, as ArgMember reads the plural of a class noun
+    if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), x->group->surface))
+        return x->prev != nullptr && x->prev->tokenIndex == x->tokenIndex && FramePerson(x->prev);
+    // the suffix goes on from the word before it; a name the name stage wrote as a token of its own (あお|くん)
+    // stands in the token right before
+    const auto joined = [](const Item* a, const Item* b) {
+        return a->group != nullptr && b->group != nullptr && (b->tokenIndex == a->tokenIndex || b->tokenIndex == a->tokenIndex + 1);
+    };
+    if (x->next != nullptr && joined(x, x->next) && SlotSuffix(x->next)) return true;
     // the case phrase of 田中さんを ends in the suffix
-    if (SlotSuffix(x) && x->prev != nullptr && x->prev->group != nullptr && x->prev->tokenIndex == x->tokenIndex &&
-        ClassOf(x->prev) == '1')
-        return true;
+    if (SlotSuffix(x) && x->prev != nullptr && joined(x->prev, x) && ClassOf(x->prev) == '1') return true;
     // the selected reading, or a surname or given-name row of the word that reads the same (葵 아오이)
     const Entry* chosen = x->group->At(x->selected);
     if (chosen == nullptr) return false;
