@@ -286,6 +286,7 @@ private:
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::set<std::string> honGuess_;                    // those before an honorific other than 殿
+    std::set<std::string> boxGuess_;                    // those alone in a name box before speech (【綺衣】「)
     std::map<std::string, int> framed_;                 // kanji runs in a person frame (PersonFrame)
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)

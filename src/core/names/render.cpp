@@ -258,7 +258,7 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     }
     // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
     if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t) && !OldFormWord(t)) {
-        if (std::string kr = internal::GuessedName(t, GuessFallback(t)); IsHangulText(kr)) {
+        if (std::string kr = internal::GuessedName(t, GuessFallback(t), boxGuess_.count(std::string(t)) != 0); IsHangulText(kr)) {
             // The name layer's own reading comes first (龍鳳 류호, 日村 히무라, 日代 히시로).
             if (std::string own = NonPlaceLayerReading(t); IsHangulText(own)) return own;
             return kr;

@@ -864,12 +864,15 @@ bool SingleNameKey(const dict::Snapshot& snap, std::string_view key) {
     return false;
 }
 
-// Whether key, one kanji, stands in a lenticular box before speech as a heading or a word: it has a common
-// sense (【新】「春の新作」, 【月】, 【心】) or is of noun.bracket-note (【完】, 【壱】). Only a key with no reading but a
-// name names the speaker in a box of one (【凪】「うん」; spec LEX-5941).
+// Whether key, one kanji, stands in a lenticular box before speech as a heading or a word: it is of
+// noun.bracket-note (【完】), or has a common sense and no person's reading in the name layer or is of
+// noun.box-heading (【新】「春の新作」).
+// A key with a person's reading names the speaker in a box of one, in its line only (【凪】「うん」, 【幸】「ねえ」;
+// spec LEX-5941, LEX-6060).
 bool HeadingBoxAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     return text::RuneCount(key) < 2 && internal::NameBoxAt(before, after) && !internal::BracketLabelAt(before, after) &&
-           (!NameOnlyKey(snap, key) || dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key));
+           ((!NameOnlyKey(snap, key) && (!SingleNameKey(snap, key) || dict::InClass(HDTRANS_CLASS("noun.box-heading"), key))) ||
+            dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key));
 }
 
 // Whether a person cue of key may be a figure of speech (瞳が見つめる, 心が泣く, 花が笑う, 夢が叫ぶ,
@@ -1448,6 +1451,8 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             i += step;
             continue;
         }
+        // A box of one kanji with a common sense names the speaker there only (【愛】「ふふ」 beside 愛がすべてだ).
+        const bool boxOnly = text::RuneCount(key) < 2 && internal::NameBoxAt(before, after) && !NameOnlyKey(snap, key);
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed
@@ -1479,7 +1484,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             (runStart && SuffixAfter(snap, after, key) && CallableKey(snap, key, false)) || ClassAfter(after, key, kanji) ||
             (LabelAt(snap, before, after) &&
              (!single || (bracketLabel && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)) || LabelNoun(snap, key) || (SingleNameKey(snap, key) && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)))) || (!single && ActionAt(snap, key, before, after))) {
-            add(key, true);
+            add(key, !boxOnly);
         } else if (runStart && !hiragana && HonorificAfter(snap, after, key)) {
             add(key, false, true);
         } else if (kanji && runStart && AloneCallAt(before, after, !OnlyNames(snap, key) || !single) &&

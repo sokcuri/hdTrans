@@ -411,6 +411,7 @@
 //= stem.o-past	Verb stems whose お + stem + ですか asks what has happened (お呼びですか 부르셨습니까, お見えですか 오셨습니까).
 //= stem.o-arrived	Verb stems whose お + stem + です says someone has arrived (お見えです 오셨습니다).
 //= noun.bracket-note	Characters that, alone in round brackets before a line or in a lenticular box before a quote, annotate it rather than name its speaker ((続), (株), (注), (笑), 【壱】).
+//= noun.box-heading	Characters that, alone in a lenticular box before a quote, mark it as new or the like, though the name layer reads them as a person (【新】「春の新作」 신; spec LEX-6060). Labels in round brackets or before a quote keep the name ((新)「おはよう」 아라타).
 //= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
 //= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
 //= noun.received-wo-act	Verbal nouns of what someone does to or for another, whose を される with an agent in に or the speaker as subject is what that other receives: 받다 (先生に質問をされた 선생님에게 질문을 받았다, 注意をされる 주의를 받다).
@@ -3197,6 +3198,7 @@ name.side-word	左
 name.side-word	右
 name.side-word	上
 name.side-word	下
+name.side-word	中
 name.side-word	前
 name.side-word	後
 char.ascii-alnum	0
@@ -5610,6 +5612,7 @@ noun.inside-medium	物語
 noun.bracket-note	続
 noun.bracket-note	仮
 noun.bracket-note	旧
+noun.box-heading	新
 noun.bracket-note	株
 noun.bracket-note	有
 noun.bracket-note	財
