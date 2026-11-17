@@ -1,4 +1,4 @@
-# 규칙: LEX-5920, LEX-5921, LEX-5922
+# 규칙: LEX-5920, LEX-5921, LEX-5922, LEX-5923
 rule	input	expected	kind	layer
 lookup:kana-verb-paradigm	うごいて！	has:움직여	fix	lookup
 lookup:kana-verb-paradigm	うごかないでください。	has:움직이지 마세요	fix	lookup
@@ -30,3 +30,31 @@ lookup:kana-verb-paradigm	少なくとも、せめて。	lacks:책	keep	lookup
 lookup:kana-verb-paradigm	せめて！	has:적어도	keep	lookup
 lookup:kana-verb-paradigm	あさって。	has:모레	keep	lookup
 lookup:kana-verb-paradigm	あえて！	has:굳이	keep	lookup
+lookup:kana-verb-paradigm	はじめてください。	has:시작해 주세요	fix	lookup
+lookup:kana-verb-paradigm	はやくはじめて！	has:시작해	fix	lookup
+lookup:kana-verb-paradigm	発艦はじめて！	has:시작	fix	lookup
+lookup:kana-verb-paradigm	もうおきて、朝だよ。	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	おきてから食べる。	has:일어나고	fix	lookup
+lookup:kana-verb-paradigm	おきてよ、おにいちゃん！	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	おきて…	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	はやくおうちにかえって！	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってから話そう。	has:돌아가고	fix	lookup
+lookup:kana-verb-paradigm	ぼくはにげない。	has:도망치지 않는다	fix	lookup
+lookup:kana-verb-paradigm	うまれて	has:태어나	fix	lookup
+lookup:kana-verb-paradigm	ゆめみ、にげて！	has:유메미	fix	lookup
+lookup:kana-verb-paradigm	おどろう！	has:춤추자	fix	lookup
+lookup:kana-verb-paradigm	とじて。	has:닫아	fix	lookup
+lookup:kana-verb-paradigm	はじめて。	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめて！	has:처음	keep	lookup
+lookup:kana-verb-paradigm	「はじめて」	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめてよ。	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめてきた。	has:처음 왔다	keep	lookup
+lookup:kana-verb-paradigm	ほんとうにはじめて！	has:처음	keep	lookup
+lookup:kana-verb-paradigm	ゆめみ。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	ゆめみが来た。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	「ゆめみ」	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	ゆめみの家。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	はえ、にげて！	has:파리	keep	lookup
+lookup:kana-verb-paradigm	かえってたいへんだ。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたのしい。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	まるでゆめみたい。	lacks:꿈꾸고 싶	keep	lookup

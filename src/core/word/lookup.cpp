@@ -587,6 +587,15 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
         }
     }
     const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    // A verb stem with no kana ending after it (before a mark, a kanji, a katakana or the end) never beats a name
+    // or a noun of the base under the same key (ゆめみ。 유메미, はえ、 파리; LEX-5923).
+    if (pc.size() > 1 && pc[1] == '4' && NameClassOf(FirstChar(rest)) != kClassHiragana) {
+        if (!snapshot.NameRecords(u.key).empty()) return false;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(u.key, dict::LookupMode::General)) {
+            const std::string_view p = c.codes->partText;
+            if (c.user == nullptr && p.size() > 1 && p[1] == '1') return false;
+        }
+    }
     // A verb or adjective spelling that reads as the particle は and a final particle (はね: は + ね) needs a
     // full hiragana after it: before a mark, a kanji or the end it is は and the final particle (私はね、,
     // はね配合比); はだけ、 stays the verb.
