@@ -2690,7 +2690,11 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             // Two kana that draw out a word said twice (待って待ってぇぇ) are drawn out like three.
             const bool copyDrawl = end - i == 2 && CopiedBefore(rs, i);
             const bool longTsu = tsuEnd && !dashed && (!Drawn(rs, i, end).empty() || copyDrawl);
-            if (end >= rs.size() || !IsHiraganaRune(rs[end]) || shoutTsu || longTsu) {
+            // Two え that draw out the て or で of a te form before a shout's end (やめてええ！ やめて,
+            // まってええっ); not the Kansai ええ of 見てええか？ or 行ってええよ, nor one a key reads (読んでええ).
+            const bool teDrawl = end - i == 2 && In(prev, U"てで") && rs[i] == U'え' && rs[i + 1] == U'え' &&
+                                 (end >= rs.size() || In(rs[end], U"！!…‥っッ"));
+            if (end >= rs.size() || !IsHiraganaRune(rs[end]) || shoutTsu || longTsu || (teDrawl && tsuEnd)) {
                 // The tokenizer ends a hiragana run at a ー before other than kana or kanji, so there
                 // a word spelled with it that the mark may not lengthen (おはよー おはよ～) is written
                 // with the small vowel of the same sound when the dictionary has that spelling too
@@ -2727,7 +2731,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                              e.WordEnds(rs, from, i)) ||
                             // Three or more plain vowel kana after words, before a pause or a ッ
                             // (待ったああああっ, 言うなあああっ: a key such as なあ may take one).
-                            (plainStart && !Drawn(rs, i, end).empty() && e.Reach(rs, from, i) <= i + 1 &&
+                            (plainStart && (!Drawn(rs, i, end).empty() || teDrawl) && e.Reach(rs, from, i) <= i + 1 &&
                              e.ReadsTo(rs, i) && (end >= rs.size() || IsPause(rs[end]) || In(rs[end], kTsu))))) {
                     // A shout: そりゃああぁあッ, 何ぃいいぃッ, 待ったああああっ, its vowel kana
                     // drawn marks when there are three or more, which take the ッ after them.
