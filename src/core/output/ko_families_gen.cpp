@@ -436,6 +436,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"%EH@", "(이)", Pos::Adjective, Class::Regular, 0, 0x01fe, std::span{kExceptions}.subspan(72, 8)},
     {"%EI@", "되", Pos::Adjective, Class::Regular, 0, 0x01fe, std::span{kExceptions}.subspan(80, 1)},
     {"%EJ@", "이", Pos::Verb, Class::Regular, kContractIeung, 0x01fe, {}},
+    {"%EK@", "프", Pos::Adjective, Class::Eu, kBrightEu, 0x01fe, {}},
     {"&A1@", "가", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&A2@", "기", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&A3@", "끄", Pos::Verb, Class::Eu, 0, 0x0fff, {}},

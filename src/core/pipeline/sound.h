@@ -375,6 +375,13 @@ struct SoundRow {
     // KR takes 하다 as an adjective, written KR한 before an の and a noun (fourth column adj:
     // ふわふわのクッション 푹신푹신한 쿠션).
     bool adj = false;
+    // The dictionary reads the mimetic in hiragana as the state it describes (fourth column
+    // state: びしょびしょだ 흠뻑 젖어 있다, びしょびしょになった 흠뻑 젖었다), which it is
+    // before a copula, に or a word of the dictionary that goes on from it.
+    bool state = false;
+    // The Korean of a state row before に and a verb, _ for a space (ni=녹초가_되도록: くたくたに疲れた
+    // 녹초가 되도록 지쳤다); KR when empty.
+    std::string ni;
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause

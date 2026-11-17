@@ -6621,7 +6621,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おない年	동갑	I110			GN				jisjk:40506		
 おなか	배	N110	VBp		GN				jisjk:40507		
 おなかがす	배고&Aa@	M421		Pn	GN	3141	||2 &&3 U+0== "ろう" M+0== "560" Y+0= "5지" &&2 M+0== "560" Y+0= "1다"	おなかがす가 과거형 계열이면 배고프다로 고르고 ろう 여부에 따라 한국어 종결 어미를 바꾼다. (미발동: rare-word)	jisjk:341815		
-おなかがペコペコ	배가 고%DB@	G8U0		Pn	GN				jisjk:373356		
+おなかがペコペコ	배가 고%EK@	G8U0		Pn	GN				jisjk:373356		
 おなかす	배고&Aa@	M421			GN	1935	||2 &&3 U+0== "ろう" M+0== "560" Y+0= "5지" &&2 M+0== "560" Y+0= "1다"	おなかす의 '배고프다' 후보가 정해진 종결어미를 가지면 '-다'로 바꾸고 ろう형이면 '-었지'로 바꾼다.	jisjk:259527		
 おなかをこわ	배탈이 &A5@	M423		Pn	GN				jisjk:267715		
 おながざる	긴꼬리원숭이	N110	VAm		GN				jisjk:165773		
@@ -11360,7 +11360,6 @@ ttt	ttt	K110			GN				jisjk:201744
 がやがやと	와글와글	E311			GN				jisjk:260		
 がやむをえな	(이)가 불가피$AB@	H7N0		Tu	GN				jisjk:138883		
 がようし	도화지	N110			GN				jisjk:171492		-1
-がらがら	와르르	E301			GN				jisjk:117189		
 がらがら	딸랑이	N110	VPeVRw		GN				jisjk:171499		
 がらがらの	텅 비어 있는	C0D1			GN				jisjk:4553		
 がらがらへび	방울뱀	N110	VAm		GN				jisjk:171501		
@@ -11374,7 +11373,6 @@ ttt	ttt	K110			GN				jisjk:201744
 がらんと	텅	E311			GN				jisjk:115306		
 がらんどう	텅 %DJ@	G8U0			GN				jisjk:119894		
 がら空き	텅 비어 %B7@	G8U0			GN				jisjk:119887		
-がりがり	으드득으드득	E311			GN				jisjk:262		
 がりばん	등사판	N110	VPe		GN				jisjk:171515		-1
 がりゅう	자기류	N110	SFl		GN				jisjk:171516		-1
 がりょう	아량	N110	SFl		GN				jisjk:171517		-1
@@ -13790,7 +13788,6 @@ ttt	ttt	K110			GN				jisjk:201744
 くそみそに	호되게	E300			GN				jisjk:123020		
 くそむし	구더기	N110	VAm		GN				jisjk:176006		-1
 くそ力	뚝심	I110			GN				jisjk:40865		
-くたくた	기진맥진	E301			GN				jisjk:2174		
 くたくた	지쳐서 녹초가 %D5@	G8U0			GN				jisjk:120578		
 くたって	6도	T500			GN				jisjk:260872		
 くったって	6도	T500			GN				kuttatte:1		
@@ -39771,7 +39768,6 @@ ttt	ttt	K110			GN				jisjk:201744
 びくりと	움찍	E311			GN				jisjk:1123		
 びしびし	가차없이	E301			GN				jisjk:1124		
 びしょぬれ	흠뻑 젖음	N110			GN				jisjk:154512		
-びしょびしょ	흠뻑	E301			GN				jisjk:1125		
 びしょ濡れ	흠뻑 젖음	I110			GN				jisjk:41562		
 びじゃく	미약	N110			MI				jisjk:345805		
 びじゅつかん	미술관	N130			GN				jisjk:103696		
@@ -40366,7 +40362,6 @@ ttt	ttt	K110			GN				jisjk:201744
 へと	(으)로	P211			GN				jisjk:6330		
 へと	 	P200			GN	4572	||1 &&3 P-1== "7**" U-1== "く" Y-1= "1게"	앞 형용사의 어미가 く이면 へと를 빈 번역으로 고르고 앞 어미를 게로 바꾼다. (미발동: rare-context)	jisjk:365817		
 へとど	에게 도착&C6@	M411		Tu	GN				jisjk:91454		
-へとへと	몹시 지침	E301			GN				jisjk:117634		
 へとも思わな	대수롭지 않게 생각$AB@	H7U0			GN				jisjk:118036		
 へどろ	하수폐액	I110			GN				jisjk:41600		
 へなへな	휘청휘청	E311			GN				jisjk:1190		
@@ -40463,7 +40458,6 @@ ttt	ttt	K110			GN				jisjk:201744
 べっこう	대모갑	I110			GN				jisjk:112624		
 べったり	찰삭	E301			GN				jisjk:1195		
 べったりと	찰싹	E311			GN				jisjk:1196		
-べっとり	흠뻑	E301			GN				jisjk:1197		
 べっぴん	미인	I110	VHn		GN				jisjk:41608		
 べつだん	특별히	E300			GN				jisjk:346328		
 べつに	특별히	E311			GN				jisjk:1198		
@@ -40472,7 +40466,6 @@ ttt	ttt	K110			GN				jisjk:201744
 べつべつに	따로따로	E300			GN				jisjk:149504		
 べつろん	별론	N110			GN				jisjk:160301		
 べとつ	끈적거&AA@	M411			GN				jisjk:91459		
-べとべと	끈적끈적	E311			GN				jisjk:1199		
 べらべら	쫑알쫑알	E301			GN				jisjk:1200		
 べらぼう	엄청%D7@	G8U0			GN				jisjk:145926		
 べろべろ	할짝할짝	E301			GN				jisjk:1201		
@@ -40497,8 +40490,6 @@ ttt	ttt	K110			GN				jisjk:201744
 べース	베이스	I110		Ct	GN				jisjk:41607		
 べール	베일	I110			GN				jisjk:112628		
 ぺけ	수준 미달	N110			GN				jisjk:13919		
-ぺこぺこ	몹시 고픔	E301			GN				jisjk:117623		
-ぺこぺこ	굽실굽실	E301			GN				jisjk:117624		
 ぺこりと	움푹	E311			GN				jisjk:1202		
 ぺたりと	딱	E311			GN				jisjk:1203		
 ぺちゃんこ	납작해%C1@	G8U0			GN				jisjk:145944		
@@ -40509,8 +40500,6 @@ ttt	ttt	K110			GN				jisjk:201744
 ぺてん	사기	I110	VHn		GN				jisjk:106532		
 ぺてん師	사기꾼	N110	VHn		GN				jisjk:154862		
 ぺとぺと	끈적끈적	E311			GN				jisjk:1204		
-ぺらぺら	줄줄	E301			GN				jisjk:1205		
-ぺらぺら	흐르르	E301			GN				jisjk:117638		
 ぺらぺら	유창%A1@	G8U0			GN				jisjk:145948		
 ぺろぺろ	날름날름	E301			GN				jisjk:117643		
 ぺんてる	펜텔	I130	QIDVGt		GN				jisjk:41612		
@@ -83473,7 +83462,6 @@ ttt	ttt	K110			GN				jisjk:201744
 ペラエス	페라에스	N130	QPN		GN				jisjk:370267		
 ペラペラ	줄줄	E301			GN				jisjk:117639		
 ペラペラ	흐르르	E301			GN				jisjk:117640		
-ペラペラと	펄럭펄럭	E311			GN				jisjk:1428		
 ペラルゴニウム	제라늄	N110	VPt		GN				jisjk:134152		
 ペラルタ	페랄타	N130	QPN		GN				jisjk:365893		
 ペリエー	페리에	N130	QPN		GN				jisjk:366985		
@@ -278456,7 +278444,7 @@ ttt	ttt	K110			GN				jisjk:201744
 病死	병사	N110	UTi	Hd	GN				jisjk:23675		
 病毒	병독	N110			GN				jisjk:23668		
 病気	병	N110	UTi	Hd	GN				jisjk:23667		
-病気がち	자주 아%DB@	G8U0			GN				jisjk:144069		
+病気がち	자주 아%EK@	G8U0			GN				jisjk:144069		
 病気がち	잦은 병치레	I110			GN				jisjk:265988		
 病気が難し	병이 고치기 어$G8@	H7N0			GN				jisjk:137788		
 病気と戦	병과 싸&AI@	M420			GN				jisjk:266575		
@@ -306615,7 +306603,7 @@ ttt	ttt	K110			GN				jisjk:201744
 腹ばい	엎드림	N110			GN				jisjk:7627		
 腹ばい	엎드림	I110			GN				jisjk:7628		
 腹びれ	배지느러미	N110	VBp		GN				jisjk:204871		
-腹ぺこ	배가 몹시 고%DB@	G8U0			GN				jisjk:143480		
+腹ぺこ	배가 몹시 고%EK@	G8U0			GN				jisjk:143480		
 腹ぺこ	배고픔	N110			GN				jisjk:375015		
 腹まき	복대	I110	VAc		GN				jisjk:70451		
 腹をすえ	각오&AV@	M427			GN				jisjk:117904		
