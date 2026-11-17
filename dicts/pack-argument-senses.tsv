@@ -201,3 +201,6 @@ argument-senses:5657	開く	v5	sense	after=ドア|扉|窓|門|戸|蓋|ふた|カ
 argument-senses:35800	挫く|くじく	v5	sense	obj=@body	삐다	LEX-5965		足を挫いた 발을 삐었다			
 argument-senses:35801	挫く	v5	sense	*	꺾다	LEX-5965		出鼻を挫く 의욕을 꺾다			
 argument-senses:35802	挫く	v5:규칙	voice	*	passive:꺾이다	LEX-5965		自信を挫かれた 자신감이 꺾였다			
+argument-senses:35803	靡く	v5	sense	subj=心|気持ち|気|人心|民心|世論|女心|関心	쏠리다	LEX-5963		金に心が靡く 돈에 마음이 쏠리다			
+argument-senses:35804	靡く	v5	sense	dat=@person	넘어가다	LEX-5963		彼に靡いた 그에게 넘어갔다			
+argument-senses:35805	たぐる|手繰る	v5	sense	obj=記憶|思い出|過去|記録|糸口|手がかり|手掛かり|縁	더듬다	LEX-5963		記憶をたぐる 기억을 더듬다			
