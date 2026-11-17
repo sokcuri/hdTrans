@@ -196,6 +196,9 @@ private:
     // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends
     // where that noun starts; null when c stands.
     Record* OverCutWord(std::string_view full, int cursor, int token, const Item& c);
+    // A noun whose last part starts a verb that runs past it before hiragana no noun takes (雨降り + ますね,
+    // 私行 + きます): the shorter reading that ends where that verb starts; null when c stands.
+    Record* OverSwallowedVerb(std::string_view full, int cursor, int token, const Item& c);
     // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
     // same where the text ends after it.
     bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);

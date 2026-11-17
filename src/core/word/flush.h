@@ -111,6 +111,9 @@ bool QuoteVerbFollows(const Item* it);
 // Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
 // span boundary (grammar.cpp).
 bool QuoteEnd(const Worker& w, const Item* it);
+// Whether periods in a row follow the item (..., 。。。, ．．．, also spaced or split into tokens): an ellipsis that
+// trails off, no full stop (grammar.cpp).
+bool PeriodRunEnd(const Worker& w, const Item* it);
 // Whether the item ends its sentence: the end of the utterance (UtteranceEnd), or ！？!? after it
 // (grammar.cpp).
 bool SentenceEnd(const Worker& w, const Item* it);

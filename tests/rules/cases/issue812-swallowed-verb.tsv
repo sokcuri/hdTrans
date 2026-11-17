@@ -1,0 +1,59 @@
+# 규칙: LEX-5810, LEX-5811
+rule	input	expected	kind	layer
+segment:swallowed-verb	雨降りますね。	has:비 내리네요	fix	segment
+segment:swallowed-verb	もうすぐ雨降りますね。	has:곧 비 내리네요	fix	segment
+segment:swallowed-verb	雨降りますね！	lacks:무릎	fix	segment
+segment:swallowed-verb	もうすぐ雪降りますね。	has:눈 내리네요	fix	segment
+segment:swallowed-verb	雨降りそうですね。	has:내릴 것 같네요	fix	segment
+segment:swallowed-verb	雨降りそう。	lacks:그렇	fix	segment
+segment:swallowed-verb	雪降りそう。	has:눈 내릴 것 같다	fix	segment
+segment:swallowed-verb	雨降りながら歩いた。	has:비 내리면서	fix	segment
+segment:swallowed-verb	じゃあ、私行きますね。	has:저 갈게요	fix	segment
+segment:swallowed-verb	私行きたい。	has:가고 싶다	fix	segment
+segment:swallowed-verb	私行こうかな。	has:갈까	fix	segment
+segment:swallowed-verb	私行ってくる。	lacks:사사	fix	segment
+segment:swallowed-verb	姿見たよ。	has:봤어	fix	segment
+segment:swallowed-verb	先行きますね。	has:먼저 갈게요	fix	segment
+segment:swallowed-verb	本来ないはずだ。	본래 없을 것이다.	keep	segment
+segment:swallowed-verb	夏休みどう？	여름 방학 어때?	keep	segment
+segment:swallowed-verb	私立って高いよね。	has:사립은	keep	segment
+segment:swallowed-verb	先生って優しい。	선생님은 다정하다.	keep	segment
+segment:swallowed-verb	私見ですが	사견입니다만	keep	segment
+segment:swallowed-verb	私有地に入るな。	has:사유지	keep	segment
+segment:swallowed-verb	残念ながら	유감스럽지만	keep	segment
+segment:swallowed-verb	昔ながらの味	옛날 그대로의 맛	keep	segment
+segment:swallowed-verb	あ、お湯が沸きますね。	아, 뜨거운 물이 끓네요.	keep	segment
+dict:w:35400	雨降りの日は嫌いだ。	비 오는 날은 싫다.	fix	lookup
+dict:w:35400	雨降りの午後	has:비 오는 오후	fix	lookup
+dict:w:35401	雪降りの朝だった。	눈 오는 아침이었다.	fix	lookup
+pack:idiom	「どうしたんだ、２人で腕組んだりして」	has:팔짱을 끼거나	fix	packs
+pack:idiom	彼は腕組んで黙っていた。	has:팔짱을 껴	fix	packs
+pack:idiom	腕を組んで考えた。	팔짱을 끼고 생각했다.	keep	packs
+segment:swallowed-verb	「あの……言い過ぎたかもしれません」	has:심한 말	keep	segment
+segment:swallowed-verb	少女の目覚めより時は流れた。	has:눈뜸보다	keep	segment
+dict:w:35403	ちょっと退屈なんだけど…不貞腐れるぞ！	has:토라지	fix	lookup
+segment:swallowed-verb	やはり飛車角落ちくらいが適当かと	has:각 떼기	keep	segment
+segment:swallowed-verb	スマホが電池切れそうだ。	스마트폰이 방전 직전이다.	keep	segment
+pack:argument-senses	リモコンの電池が切れちゃった	has:전지가 다 되어버렸다	fix	packs
+pack:argument-senses	糸が切れた	실이 끊어졌다	keep	packs
+pack:argument-senses	リモコンの電池切れちゃったみたい	has:다 되어버린	fix	packs
+segment:swallowed-verb	夜更かしはお肌荒れちゃうね。	has:피부 거칠어져	fix	segment
+segment:swallowed-verb	花咲きますね。	꽃 피네요.	fix	segment
+segment:swallowed-verb	風吹いてますね。	바람 부네요.	fix	segment
+segment:swallowed-verb	雨降り出した。	has:비 내리기 시작	fix	segment
+segment:swallowed-verb	雨降り始めた。	has:비 내리기 시작	fix	segment
+segment:swallowed-verb	雪降り続いてる。	has:계속 내리	fix	segment
+segment:swallowed-verb	雨降りやまないね。	has:그치지 않	fix	segment
+segment:swallowed-verb	雨上がりますね。	has:비 그치네요	fix	segment
+segment:swallowed-verb	先行って。	has:먼저 가	fix	segment
+segment:swallowed-verb	先行っていいよ。	has:먼저 가	fix	segment
+segment:swallowed-verb	花咲きますね。	has:꽃 피네요	fix	segment
+segment:swallowed-verb	風吹いてますね。	has:바람 부	fix	segment
+segment:swallowed-verb	美咲いてる？	has:미사키	keep	segment
+segment:swallowed-verb	美咲いた？	has:미사키	keep	segment
+segment:swallowed-verb	美咲いてくれて嬉しい。	has:미사키	keep	segment
+segment:swallowed-verb	先行っては駄目。	lacks:선행은은	keep	segment
+segment:swallowed-verb	私立って高いよね。	has:사립	keep	segment
+segment:swallowed-verb	充電切れた。	has:충전 다 떨어졌	fix	segment
+segment:swallowed-verb	ケータイの充電が切れちゃって。	lacks:다 되	fix	segment
+segment:swallowed-verb	電話が切れた。	lacks:다 되	keep	segment

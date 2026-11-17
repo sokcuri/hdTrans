@@ -1,0 +1,33 @@
+# 규칙: GRM-3915
+rule	input	expected	kind	layer
+cx:fic-connectives-1:11	このボタンを押すと...	이 버튼을 누르면...	fix	rewrites
+cx:fic-connectives-1:11	ドアを開けると..	has:열면	fix	rewrites
+cx:fic-connectives-1:11	ドアを開けると。。。	has:열면	fix	rewrites
+cx:fic-connectives-1:11	ドアを開けると．．．	has:열면	fix	rewrites
+cx:fic-connectives-1:11	この薬を飲むと...	lacks:다고	fix	rewrites
+cx:fic-connectives-1:10	ドアを開けると…	문을 열면…	keep	rewrites
+cx:fic-connectives-1:10	窓を開けると、風が入ってきた。	창을 열자, 바람이 들어왔다.	keep	rewrites
+cx:fic-connectives-1:10	このボタンを押すと？	이 버튼을 누른다고?	keep	rewrites
+cx:fic-connectives-1:10	来るなら来ると。	온다면 온다고.	keep	rewrites
+cx:fic-connectives-1:10	強くならないと！	강해지지 않으면!	keep	rewrites
+cx:fic-connectives-1:11	これを食べると...	이것을 먹으면...	fix	rewrites
+cx:fic-connectives-1:11	あの角を曲がると...	그 모퉁이를 돌면...	fix	rewrites
+cx:fic-connectives-1:11	スイッチを入れると。。。	has:켜면	fix	rewrites
+cx:fic-connectives-1:11	触ると...	만지면...	fix	rewrites
+cx:fic-connectives-1:11	このまま放っておくと...	has:두면	fix	rewrites
+cx:fic-connectives-1:11	本当だと...	사실이라고...	keep	rewrites
+cx:fic-connectives-1:11	雨が降ると...	비가 오면...	fix	rewrites
+cx:fic-connectives-1:11	目を閉じると.....	has:감으면	fix	rewrites
+cx:fic-connectives-1:11	それを言うと...	그것을 말하면...	keep	rewrites
+cx:fic-connectives-1:11	押しますと...	누르면...	keep	rewrites
+cx:fic-connectives-1:10	ドアを開けると……	문을 열면……	keep	rewrites
+cx:fic-connectives-1:11	だが 彼らが言うには 完全に精神破壊を 起こしてると...	has:일으키고 있다고...	keep	rewrites
+cx:fic-connectives-1:11	彼が言うには、このボタンを押すと...	has:누른다고...	keep	rewrites
+cx:fic-connectives-1:11	そこにいると...	거기에 있다고...	keep	rewrites
+cx:fic-connectives-1:11	ここを押すと . . .	has:누르면	keep	rewrites
+cx:fic-connectives-1:11	「このボタンを押すと...」	「이 버튼을 누르면...」	fix	rewrites
+cx:fic-connectives-1:11	「このボタンを押すと」	「이 버튼을 누른다고」	keep	rewrites
+cx:fic-connectives-1:11	このボタンを押すと. . .	has:누르면	fix	rewrites
+cx:fic-connectives-1:11	彼が来ると...思ってた。	has:온다고	keep	rewrites
+cx:fic-connectives-1:11	彼は必ず来ると...信じてる。	has:온다고	keep	rewrites
+cx:fic-connectives-1:11	押すと...画面が変わる。	lacks:누르면	keep	rewrites

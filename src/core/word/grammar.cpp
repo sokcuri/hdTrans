@@ -3910,6 +3910,31 @@ bool QuoteEnd(const Worker& w, const Item* it) {
     return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)≫》】〉＞");
 }
 
+bool PeriodRunEnd(const Worker& w, const Item* it) {
+    std::string_view rest = From(it->text, it->start + it->length);
+    int token = it->tokenIndex + 1;
+    int periods = 0;
+    // ..., 。。。, ．．． or . . ., one token each or not; the spaces of a spaced run may stand in tokens of their own.
+    while (true) {
+        while (!rest.empty()) {
+            const text::Rune r = text::DecodeRune(rest);
+            if (RuneIn(r.cp, "。．.")) {
+                periods++;
+            } else if (r.cp != U' ') {
+                break;
+            }
+            rest.remove_prefix(r.size);
+        }
+        if (!rest.empty() || token >= w.TokenCount()) break;
+        const int type = w.Tok(token).type;
+        if (type == tokenizer::kTypeEnd || type == tokenizer::kTypeNewline) break;
+        if (w.Span(token) != 0) return false;
+        rest = w.Tok(token++).text;
+    }
+    // The run ends the line or the quote: nothing but a closing mark follows.
+    return periods >= 2 && (rest.empty() || RuneIn(text::DecodeRune(rest).cp, "」』）)"));
+}
+
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
