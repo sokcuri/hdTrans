@@ -1234,6 +1234,8 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                     // the head right after the slot: the slot's particle is written after the slot's word
                     Item* own = items[best.slotEnd - 1];
                     own->appended += ResolvedParticle(own->EntryText(own->selected), c.particle);
+                    // the target's space after that particle (に逃げられ, one word: 범인이 도망쳤다)
+                    if (!text.empty() && !text.starts_with(" ")) text.insert(0, " ");
                 } else if (c.slot && ((c.spaced && c.particle.empty()) || particleLeft) && k >= best.slotEnd) {
                     // the space the target puts after the slot's Korean
                     text.insert(0, " ");
