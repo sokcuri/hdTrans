@@ -238,6 +238,16 @@
 // ですわ, わね: polite
 書きますわ	써요	end	prio=-1
 静かですわね	조용하네요	end	prio=-1
+// のね after a polite predicate: 〜군요, as after a noun (LEX-6013)
+静かでしたのね	조용했군요	end	prio=-1
+静かですのね	조용하군요	end	prio=-1
+書きましたのね	썼군요	end	prio=-1
+書きますのね	쓰는군요	end	prio=-1
+書いていましたのね	쓰고 있었군요	end	prio=-1
+書いてましたのね	쓰고 있었군요	end	prio=-1
+高かったですのね	높았군요	end	prio=-1
+学生でしたのね	학생이었군요	end	prio=-1
+学生ですのね	학생이군요	end	prio=-1
 // のう: old speech
 書くのう	쓰는구나	end	prio=-1
 高いのう	높구나	end	prio=-1

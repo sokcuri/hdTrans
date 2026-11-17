@@ -29,6 +29,7 @@
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.pair-people	Nouns of a pair or a set of people named together, after which 共 is both, 모두 (親子共 부모와 자식 모두, 夫婦共 부부 모두), not the plural 들.
+//= noun.group-subject	Words of everyone or of a number of people that can stand as a subject with no particle, which a 先〜てる after them tells about, not a promise (みんな先に行ってるよ 모두 먼저 가고 있어, 二人とも先に帰ってるよ).
 //= noun.plural-head	Nouns of people or creatures one counts as a crowd, after which 共 is the plural 들 even where their chosen reading has no person code (敵共 적들, 雑魚共 잡졸들).
 //= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
@@ -67,7 +68,11 @@
 //= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
 //= noun.felt-ga	Starts of a word or phrase of a feeling in が (気が, 小腹が, お腹が), whose negative question asks how one feels: no invitation (気がしないか？ 그런 생각이 들지 않아?; spec MNG-7).
 //= word.invite-not	Stems of predicates of a feeling or a happening that no one invites to (気にしない？ 신경 쓰이지 않아?, 生まれない？): a negative question after one asks, it invites to nothing (spec MNG-7).
-//= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
+//= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね), and a present verb with な an exclamation, not a prohibition (やけにあっさり引き下がるな 유난히 간단히 물러나는구나).
+//= adverb.foresee	Words that tell what will come or reassure (きっと, すぐ, そのうち, なんとか, 大丈夫): a plain present verb with さ after them in its sentence foresees, -ㄹ 거야 (なんとかなるさ 어떻게든 될 거야), not the assertion 지.
+//= noun.mood-state	Nouns of a mood one comes into with になる (気分, 気持ち): the な after it observes that mood (寂しい気分になるな 외로운 기분이 드네), no prohibition.
+//= verb.moved-state	Stems of verbs of moving into a place whose ている is being there, -아 있다, when the speaker tells what they will be doing or asks leave to keep at it (先に上がってるね 먼저 올라가 있을게, 入っててもいい 들어가 있어도 돼).
+//= adjective.come-upon	Adjectives of a state that comes upon the speaker (weather, the hour, being busy, lonely, sleepy, having fun), and their く+なる written as one word: the な after their く form with なる observes it, 네 (寂しくなるな 외로워지네, 寒くなるな 추워지네). Attitudes the subject controls (熱く, 固く, 暗く, 偉く) are not listed and keep the prohibition (熱くなるな 흥분하지 마).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.give-after-neg	Giving and request auxiliaries after a negative ないで (くれる, くださる, ちょうだい, いただける, もらえる, もらいたい): the ないで is a request not to act or what one does not do for someone (spec LEX-5050).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
@@ -797,6 +802,103 @@ adverb.observation	意外と
 adverb.observation	相変わらず
 adverb.observation	なぜか
 adverb.observation	何故か
+adverb.observation	やけに
+adverb.observation	いやに
+adverb.observation	妙に
+adverb.observation	なんだか
+adverb.observation	何だか
+adverb.observation	案外
+adverb.observation	意外に
+adverb.observation	えらく
+adverb.observation	随分と
+adverb.observation	ずいぶんと
+
+adverb.foresee	きっと
+adverb.foresee	すぐ
+adverb.foresee	すぐに
+adverb.foresee	もうすぐ
+adverb.foresee	そのうち
+adverb.foresee	いつか
+adverb.foresee	いずれ
+adverb.foresee	じきに
+adverb.foresee	今に
+adverb.foresee	必ず
+adverb.foresee	なんとか
+adverb.foresee	何とか
+adverb.foresee	どうにか
+adverb.foresee	大丈夫
+adverb.foresee	明日
+adverb.foresee	あした
+adverb.foresee	明後日
+adverb.foresee	来週
+adverb.foresee	来年
+adverb.foresee	心配いらな
+
+noun.mood-state	気分
+noun.mood-state	気持ち
+adjective.come-upon	寒い
+adjective.come-upon	さむい
+adjective.come-upon	暑い
+adjective.come-upon	涼しい
+adjective.come-upon	暖かい
+adjective.come-upon	明るい
+adjective.come-upon	遅い
+adjective.come-upon	忙しい
+adjective.come-upon	いそがしい
+adjective.come-upon	寂しい
+adjective.come-upon	さびしい
+adjective.come-upon	淋しい
+adjective.come-upon	さみしい
+adjective.come-upon	楽しい
+adjective.come-upon	たのしい
+adjective.come-upon	眠い
+adjective.come-upon	ねむい
+adjective.come-upon	眠たい
+adjective.come-upon	面白い
+adjective.come-upon	おもしろい
+adjective.come-upon	懐かしい
+adjective.come-upon	悲しい
+adjective.come-upon	切ない
+adjective.come-upon	恋しい
+adjective.come-upon	嬉しい
+adjective.come-upon	うれしい
+adjective.come-upon	恥ずかしい
+adjective.come-upon	痛い
+adjective.come-upon	苦しい
+adjective.come-upon	怖い
+adjective.come-upon	こわい
+adjective.come-upon	心細い
+adjective.come-upon	待ち遠しい
+adjective.come-upon	難しい
+adjective.come-upon	むずかしい
+adjective.come-upon	寒くなる
+adjective.come-upon	暑くなる
+adjective.come-upon	涼しくなる
+adjective.come-upon	暖かくなる
+adjective.come-upon	明るくなる
+adjective.come-upon	遅くなる
+adjective.come-upon	忙しくなる
+adjective.come-upon	寂しくなる
+adjective.come-upon	淋しくなる
+adjective.come-upon	楽しくなる
+adjective.come-upon	眠くなる
+adjective.come-upon	面白くなる
+adjective.come-upon	懐かしくなる
+adjective.come-upon	悲しくなる
+adjective.come-upon	切なくなる
+adjective.come-upon	恋しくなる
+adjective.come-upon	嬉しくなる
+adjective.come-upon	恥ずかしくなる
+adjective.come-upon	痛くなる
+adjective.come-upon	苦しくなる
+adjective.come-upon	怖くなる
+adjective.come-upon	心細くなる
+adjective.come-upon	難しくなる
+verb.moved-state	上が
+verb.moved-state	あが
+verb.moved-state	来
+verb.moved-state	入
+verb.moved-state	出
 verb.polite-remark	食べ
 verb.polite-remark	飲
 verb.polite-remark	召し上が
@@ -1311,6 +1413,19 @@ noun.pair-people	男女
 noun.pair-people	主従
 noun.pair-people	師弟
 noun.pair-people	親兄弟
+noun.group-subject	みんな
+noun.group-subject	皆
+noun.group-subject	皆さん
+noun.group-subject	みなさん
+noun.group-subject	全員
+noun.group-subject	皆んな
+noun.group-subject	二人とも
+noun.group-subject	ふたりとも
+noun.group-subject	お二人とも
+noun.group-subject	三人とも
+noun.group-subject	両方とも
+noun.group-subject	二人
+noun.group-subject	三人
 noun.plural-head	敵
 noun.plural-head	雑魚
 noun.plural-head	奴
