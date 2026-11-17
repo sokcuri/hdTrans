@@ -227,7 +227,7 @@ constexpr ConstraintRule kRules[] = {
     {"niwa-before-zuka", ConstraintWord::Source, "にわ", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "ずか 앞의 にわ는 庭가 아니라 に와 わずか: 앞이 히라가나여도 (ここにわずかに 여기 정원않고 게 → 여기에 조금)", {}, "ずか"},
     {"particle-split", ConstraintWord::Any, "", ConstraintContext::ParticleSplit, ConstraintReject::Word,
-     "한자나 가타카나 낱말 바로 뒤에서 조사 한 글자로 시작하는 히라가나 명사는, 그 조사 뒤 글자부터 그 명사보다 길게 이어지는 사전 낱말이 있으면 쓰지 않음: 조사와 그 낱말 (刺身にわさび 생선회 정원 녹 → 생선회에 고추냉이, 中にわずかに 속 정원않고 게 → 속에 조금)", {}},
+     "한자나 가타카나 낱말 바로 뒤에서 조사 한 글자로 시작하는 히라가나 명사는, 그 조사 뒤 글자부터 그 명사보다 길게 이어지는 사전 낱말이 있으면 쓰지 않음: 조사와 그 낱말 (刺身にわさび 생선회 정원 녹 → 생선회에 고추냉이, 中にわずかに 속 정원않고 게 → 속에 조금, 先輩にくすっと 선배 고기 슥 → 선배에게 키득키득). 형용사 어간으로도 읽히는 덩어리는 뒤에 그 어미가 오지 않을 때만", {}},
     {"hashita-before-end", ConstraintWord::Source, "はした", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "が, けど, もの나 문장 부호 앞의 はした는 우수리가 아니라 は와 する의 과거 (巻き込まれはしたが 말려 들어가고 우수리가 → 말려 들어가기는 했지만). はした金은 그대로", {},
      "が|けど|けれ|もの|。|、|！|？|…|よ|ね|わ|ぞ|ん|の|か"},
@@ -933,11 +933,18 @@ bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::
     if (last == "ー" || (!text::IsKanji(text::DecodeRune(last).cp) && NameClassOf(last) != kClassKatakana)) return false;
     const std::string_view lead = FirstChar(source);
     if (!dict::InClass(HDTRANS_CLASS("particle.split-lead"), lead)) return false;
-    // Only a noun: a source that is also a particle or another part (には, にも) stays.
-    for (const dict::Candidate& c : list) {
-        if (c.source == source && c.codes != nullptr && c.codes->part.ClassDigit() != '1') return false;
-    }
     const std::string_view rest = query.substr(lead.size());
+    // Only a noun: a source that is also a particle or another part (には, にも, 見にくい) stays; one that is
+    // also an adjective stem only where an ending of it follows (先輩にくすっと: no い, く, か, け, さ or そ after にく).
+    const std::string_view next = FirstChar(query.substr(source.size()));
+    for (const dict::Candidate& c : list) {
+        if (c.source != source || c.codes == nullptr || c.codes->part.ClassDigit() == '1') continue;
+        if (c.codes->part.ClassDigit() == '7' && !next.empty() &&
+            std::string_view("いくかけさそ").find(next) == std::string_view::npos) {
+            continue;
+        }
+        return false;
+    }
     const std::size_t inside = source.size() - lead.size();
     std::size_t end = 0;
     for (int k = 0; k < 6 && end < rest.size(); k++) end += FirstChar(rest.substr(end)).size();
