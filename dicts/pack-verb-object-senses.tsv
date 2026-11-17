@@ -16,3 +16,36 @@ verb-object-senses:10	付き合い	n	sense	長い付き合い|古い付き合い
 verb-object-senses:14	掴まる	v5	voice	head=腕|手|手首|肩|胸ぐら|胸倉|襟|襟首|髪|足|足首|首|腰|頭	passive	LEX-3140	audit	掴まれた腕 잡힌 팔	
 verb-object-senses:15	沈める	v1	sense	{X}に腰を沈める	{X}에 깊숙이 앉다	LEX-3142	audit	ソファに腰を沈める 소파에 깊숙이 앉다	colloc
 verb-object-senses:16	沈める	v1	sense	{X}に深く腰を沈める	{X}에 깊숙이 앉다	LEX-3142	audit	ソファに深く腰を沈める 소파에 깊숙이 앉다	colloc
+verb-object-senses:814-101	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	obj=@blow|@fist|攻撃|連続攻撃|打撃|カウンター|肘打ち|膝蹴り|キック|アタック|斬撃|突き|ストレート|フック|アッパー|ジャブ|一発|弾|ボディブロー|タックル|蹴り|回し蹴り|飛び蹴り|頭突き	꽂아 넣다	LEX-5851	issue	パンチを叩き込む 펀치를 꽂아 넣는다	
+verb-object-senses:814-102	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	obj=@spike	박아 넣다	LEX-5851	issue	杭を地面に叩き込む 말뚝을 땅에 박아 넣는다	
+verb-object-senses:814-103	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	dat=ゴール|ネット|ゴールネット|ゴールマウス|ゴール前	꽂아 넣다	LEX-5851	issue	ボールをゴールに叩き込んだ 공을 골에 꽂아 넣었다	
+verb-object-senses:814-104	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	dat=腹|顔面|顔|顎|あご|鳩尾|みぞおち|急所|脇腹|延髄|ボディ|胸|背中|後頭部|股間|顔面	꽂아 넣다	LEX-5851	issue	腹に叩き込む 배에 꽂아 넣는다	
+verb-object-senses:814-105	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	dat=牢|牢屋|牢獄|監獄|刑務所|檻|独房|地獄|三途の川|川|海|沼|穴|ゴミ箱	처넣다	LEX-5851	issue	牢屋に叩き込む 감옥에 처넣는다	
+verb-object-senses:814-106	打ち込む|打ちこむ|打込む	v5	sense	obj=@spike	박다	LEX-5852	issue	釘を壁に打ち込んだ 못을 벽에 박았다	
+verb-object-senses:814-107	打ち込む|打ちこむ|打込む	v5	sense	obj=@blow|@fist|攻撃|連続攻撃|打撃|カウンター|肘打ち|膝蹴り|キック|アタック|斬撃|突き|ストレート|フック|アッパー|ジャブ|一発|弾|ボディブロー|タックル|蹴り|回し蹴り|飛び蹴り|頭突き|肘|膝|拳|踵|かかと	꽂아 넣다	LEX-5852	issue	膝蹴りを打ち込んだ 무릎차기를 꽂아 넣었다	
+verb-object-senses:814-108	打ち込む|打ちこむ|打込む	v5	sense	obj=@ammunition	박아 넣다	LEX-5852	issue	弾丸を打ち込んだ 탄환을 박아 넣었다	
+verb-object-senses:814-109	打ち込む|打ちこむ|打込む	v5	sense	obj=腰|ペニス|肉棒|男根|一物|逸物	박다	LEX-5852	issue	腰を打ち込む 허리를 박는다	
+verb-object-senses:814-110	打ち込む|打ちこむ|打込む	v5	sense	obj=文字|文字列|URL|ＵＲＬ|データ|コマンド|パスワード|名前|数字|メール|メッセージ|コード|住所|番号|暗証番号|キーワード|単語|テキスト|文|数値|@message	입력하다	LEX-5852	issue	文字を打ち込む 문자를 입력한다	
+verb-object-senses:814-111	打ち込む|打ちこむ|打込む	v5	sense	dat=@device|@computer|@phone|キーボード|画面|ドキュメント|フォーム|検索窓|欄	입력하다	LEX-5852	issue	スマホに打ち込む 스마트폰에 입력한다	
+verb-object-senses:814-112	打ち込む|打ちこむ|打込む	v5	sense	dat=@activity|@lesson|@sport|@task|@music|@game|@competition|@subject.school|@writing|研究|練習|勉強|趣味|稽古|修行|創作|執筆|絵画|読書|部活|部活動|作業|家事|何か|こと|事|もの|物|学問|芸術|音楽|剣道|剣術|仕事	몰두하다	LEX-5852	issue	練習に打ち込んでいる 연습에 몰두하고 있다	
+verb-object-senses:814-113	打ち込む|打ちこむ|打込む	v5	sense	obj=- dat=- loc=-	몰두하다	LEX-5852	issue	最近かなり打ち込んでる 요즘 꽤 몰두하고 있다	
+verb-object-senses:814-114	打ち込む|打ちこむ|打込む	v5	sense	head=もの|物|こと|事|何か|なにか	몰두하다	LEX-5852	issue	打ち込めるもの 몰두할 수 있는 것	
+verb-object-senses:814-117	被る|かぶる	v5	sense	obj=毛布|布団|掛け布団|シーツ|タオルケット|布|水|お湯|泥|砂|埃|ほこり|ホコリ|返り血|血|罪|汚名|濡れ衣|責任|ペンキ|粉|灰|雪|泥水|冷水|@bedding|@liquid	뒤집어쓰다	LEX-5854	issue	水をかぶった 물을 뒤집어썼다	
+verb-object-senses:814-118	打ち込む|打ちこむ|打込む	v5	sense	obj=@activity|@lesson|@sport|@task|@music|@game|@competition|@subject.school|研究|練習|勉強|趣味|稽古|修行|創作|執筆|絵画|読書|部活|部活動|作業|家事|学問|芸術|音楽|剣道|剣術|仕事	몰두하다	LEX-5852	issue	打ち込める趣味 몰두할 수 있는 취미	
+verb-object-senses:814-121	打ち込む|打ちこむ|打込む	v5	sense	obj=- dat=- loc=- after=と|って|」と|」って|』と|』って	입력하다	LEX-5852	issue	「…」と打ち込んで見せた 「…」라고 입력해 보였다	
+
+verb-object-senses:814-122	打ち込む|打ちこむ|打込む	v5	sense	obj=- dat=- loc=- after=長文|文章|文|文字|文字列|コマンド|パスワード|メッセージ|メール|返信|@writing|@message	입력하다	LEX-5852	issue	あんな長文打ち込める 저런 장문을 입력할 수 있다	
+verb-object-senses:814-123	打ち込む|打ちこむ|打込む	v5	sense	obj=- dat=@manner	몰두하다	LEX-5852	issue	一心不乱に打ち込んだ 일심불란하게 몰두했다	
+verb-object-senses:814-124	打ち込む|打ちこむ|打込む	v5	sense	obj=- loc=@manner	몰두하다	LEX-5852	issue	全力で打ち込む 전력으로 몰두한다	
+verb-object-senses:814-125	被る|かぶる	v5	sense	obj=- subj=予定|日程|スケジュール|時間|時間帯|キャラ|キャラクター|名前|色|ネタ|役|役柄|声|内容|話|話題|台詞|セリフ|服|服装|デザイン|曜日|日付|試合|授業|会議|イベント|シフト|髪型|設定|誕生日|@plan|@event	겹치다	LEX-5852	issue	予定がかぶった 예정이 겹쳤다	
+verb-object-senses:814-126	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	sense	obj=- after=発|一発|二発|三発|四発|五発|六発|七発|八発|九発|十発|数発|何発|数十発	꽂아 넣다	LEX-5852	issue	三発叩き込む 세 발 꽂아 넣는다	
+verb-object-senses:814-127	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	obj=@blow|@fist|攻撃|連続攻撃|打撃|カウンター|肘打ち|膝蹴り|キック|アタック|斬撃|突き|ストレート|フック|アッパー|ジャブ|一発|弾|ボディブロー|タックル|蹴り|回し蹴り|飛び蹴り|頭突き	passive:맞다	LEX-5852	issue	拳を叩き込まれた 주먹을 맞았다	
+verb-object-senses:814-128	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	subj=@blow|@fist|攻撃|連続攻撃|打撃|カウンター|肘打ち|膝蹴り|キック|アタック|斬撃|突き|ストレート|フック|アッパー|ジャブ|一発|弾|ボディブロー|タックル|蹴り|回し蹴り|飛び蹴り|頭突き	passive:꽂히다	LEX-5852	issue	アタックが陣地に叩き込まれる 어택이 진지에 꽂힌다	
+verb-object-senses:814-129	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	dat=ゴール|ネット|ゴールネット|ゴールマウス|ゴール前	passive:꽂히다	LEX-5852	issue	ボールがゴールに叩き込まれた 공이 골에 꽂혔다	
+verb-object-senses:814-130	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	dat=牢|牢屋|牢獄|監獄|刑務所|檻|独房	passive:갇히다	LEX-5852	issue	牢に叩き込まれた 감옥에 갇혔다	
+verb-object-senses:814-131	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	dat=地獄|三途の川|川|海|沼|穴|ゴミ箱	passive:처박히다	LEX-5852	issue	地獄に叩き込まれた 지옥에 처박혔다	
+verb-object-senses:814-132	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	subj=@spike	passive:박히다	LEX-5852	issue	杭が叩き込まれた 말뚝이 박혔다	
+verb-object-senses:814-133	打ち込む|打ちこむ|打込む	v5	voice	obj=@blow|@fist|攻撃|連続攻撃|打撃|カウンター|肘打ち|膝蹴り|キック|アタック|斬撃|突き|ストレート|フック|アッパー|ジャブ|一発|弾|ボディブロー|タックル|蹴り|回し蹴り|飛び蹴り|頭突き	passive:맞다	LEX-5852	issue	膝蹴りを打ち込まれた 무릎차기를 맞았다	
+verb-object-senses:814-134	打ち込む|打ちこむ|打込む	v5	sense	after=何かに|なにかに|何事にも|なにごとにも	몰두하다	LEX-5852	issue	何かに打ち込める人 무언가에 몰두할 수 있는 사람	
+verb-object-senses:814-135	被る|かぶる	v5	sense	obj=予定|日程|スケジュール|時間|時間帯|キャラ|キャラクター|名前|色|ネタ|役|役柄|声|内容|話|話題|台詞|セリフ|服|服装|デザイン|曜日|日付|試合|授業|会議|イベント|シフト|髪型|設定|誕生日|@plan|@event head=予定|日程|スケジュール|時間|時間帯|キャラ|キャラクター|名前|色|ネタ|役|役柄|声|内容|話|話題|台詞|セリフ|服|服装|デザイン|曜日|日付|試合|授業|会議|イベント|シフト|髪型|設定|誕生日|@plan|@event	겹치다	LEX-5854	issue	かぶった予定 겹친 예정	
+verb-object-senses:814-136	叩き込む|叩きこむ|たたき込む|たたきこむ	v5	voice	after=発|一発|二発|三発|四発|五発|六発|七発|八発|九発|十発|数発|何発|数十発	passive:맞다	LEX-5851	issue	数発叩き込まれた 몇 발 맞았다	

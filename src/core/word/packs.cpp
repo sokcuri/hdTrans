@@ -101,6 +101,7 @@ struct Context {
     const Item* after = nullptr;  // the word before (the word is after it)
     std::set<std::string_view> forms;
     std::string final;  // the sentence particles and the mark that end the sentence after the word (final=)
+    std::string ending;  // the text of the word's ending entry (ending=: it starts with the value, 勝る|ものは)
     bool polite = false;
     std::string_view voice;  // voice rows: the reading of (ら)れ the chain decided
     // With an attachment: the word's own how as an argument, its clause and its main clause.
@@ -225,6 +226,7 @@ Context ContextOf(Flusher& f, const Item* it) {
     // the form of the word, from its ending and the word after it
     // the ending, with that of a negative auxiliary written right after the word
     std::string ending(it->DirectSurface());
+    c.ending = ending;
     // An ending that starts with the formal noun こと (向けられたことが) holds no form: the form is the
     // conjugated text between the stem and the ending (られた).
     if (Predicate(cls) && ending.starts_with("こと")) {
@@ -236,6 +238,22 @@ Context ContextOf(Flusher& f, const Item* it) {
     } else if (const Item* aux = NegativeAux(it)) {
         ending += aux->group->surface;
         ending += aux->DirectSurface();
+    }
+    // the whole conjugated text after the stem, for the tense when the ending entry reads only its tail
+    // (ら of 勝ったら, 行ったら: ったら), without the sentence particles after it
+    std::string_view conjugated;
+    if (const std::string_view whole = Slice(it->text, it->start, it->length), stem = it->group->surface;
+        Predicate(cls) && !ending.empty() && whole.starts_with(stem) && whole.size() > stem.size()) {
+        conjugated = whole.substr(stem.size());
+        for (bool cut = true; cut;) {
+            cut = false;
+            for (const std::string_view p : kFinalParticles) {
+                if (conjugated.size() > p.size() && conjugated.ends_with(p)) {
+                    conjugated.remove_suffix(p.size());
+                    cut = true;
+                }
+            }
+        }
     }
     const std::string_view after = c.next != nullptr ? std::string_view(c.next->group->surface) : std::string_view();
     // the conjugated form without the sentence particles after it (行ったか, 行こうよ)
@@ -302,7 +320,7 @@ Context ContextOf(Flusher& f, const Item* it) {
     // ta: the past auxiliary closes the form (行った, 読んだ, 高かった, 行ったら); not the た of a stem (待たない)
     // (the だ forms only on verbs: 静かだ is the copula)
     for (const std::string_view ta : {"た", "たら", "たり", "たろう", "だ", "だら", "だり"}) {
-        if (form.ends_with(ta) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
+        if ((form.ends_with(ta) || conjugated.ends_with(ta)) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
     }
     // neg: the last negative auxiliary of the ending right after the stem (NegatedStem: 行か|ない, 高く|ない,
     // 行き|ません, 食べ|ない, 読んで|ない, 書か|れ|ない), not after a noun phrase, the copula, しか or っきゃ
@@ -328,7 +346,9 @@ Context ContextOf(Flusher& f, const Item* it) {
         const std::string_view before = std::string_view(ending).substr(0, at);
         if (!before.ends_with("た") && !before.ends_with("だ")) c.forms.insert("nja");
     }
-    if (form.ends_with("て") || form.ends_with("で")) {
+    // te: the te form, also inside a contraction after the geminate stem that only te and ta take
+    // (勝ってる, 勝っちゃう: 勝っている, 勝ってしまう)
+    if (form.ends_with("て") || form.ends_with("で") || (conjugated.starts_with("っ") && !c.forms.contains("ta"))) {
         c.forms.insert("te");
         if (after.starts_with("くださ") || after.starts_with("下さ") || after.starts_with("くれ")) c.forms.insert("te-request");
     }
@@ -468,12 +488,18 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             const Item* x = a.slot == "mod" ? c.mod : a.slot == "pred" ? c.pred : a.slot == "next" ? c.next : c.after;
             if (x != nullptr && x->group != nullptr) pool.push_back({a.slot, x, {}, {}, {}});
         } else if (a.slot == "form") {
-            if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.forms.count(v) > 0; }))
+            if (std::none_of(a.values.begin(), a.values.end(),
+                             [&](const std::string& v) { return v == "-" ? c.forms.empty() : c.forms.count(v) > 0; }))
                 return false;
             spec[2]++;
             continue;
         } else if (a.slot == "voice") {
             if (std::find(a.values.begin(), a.values.end(), c.voice) == a.values.end()) return false;
+            spec[2]++;
+            continue;
+        } else if (a.slot == "ending") {
+            if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.ending.starts_with(v); }))
+                return false;
             spec[2]++;
             continue;
         } else if (a.slot == "final") {
@@ -1010,6 +1036,22 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     return true;
 }
 
+// Whether the godan verb x conjugates as the dictionary form that pattern ends with: the text after
+// its stem starts in the row of that form's last kana or with its euphonic kana (勝る: 勝らない,
+// 勝ります, 勝れば, 勝った; not 勝たない, 勝とう, 勝てば of 勝つ, which shares the stem).
+bool GodanRowForm(const Item* x, std::string_view pattern) {
+    static constexpr std::array<std::pair<std::string_view, std::string_view>, 9> kRows{{
+        {"う", "わいうえおっ"}, {"く", "かきくけこい"}, {"ぐ", "がぎぐげごい"}, {"す", "さしすせそ"}, {"つ", "たちつてとっ"},
+        {"ぬ", "なにぬねのん"}, {"ぶ", "ばびぶべぼん"}, {"む", "まみむめもん"}, {"る", "らりるれろっ"}}};
+    const std::string_view final = pattern.substr(pattern.size() - DecodeLastRune(pattern).size);
+    const auto row = std::find_if(kRows.begin(), kRows.end(), [&](const auto& r) { return r.first == final; });
+    if (row == kRows.end()) return true;
+    const std::string_view whole = Slice(x->text, x->start, x->length), stem = x->group->surface;
+    if (!whole.starts_with(stem) || whole.size() == stem.size()) return true;
+    const std::string_view rest = whole.substr(stem.size());
+    return row->second.find(rest.substr(0, text::DecodeRune(rest).size)) != std::string_view::npos;
+}
+
 // Whether the match can be written: no user word in it but in the slot, no word another span took,
 // a head outside the slot, and a predicate head only with a phrase of its class.
 bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& items, std::size_t i,
@@ -1027,6 +1069,7 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     }
     if (c.slot && m.end == m.slotEnd) return false;
     const char cls = ClassOf(items[m.end - 1]);
+    if (cls == '4' && c.godan && !GodanRowForm(items[m.end - 1], c.slot ? c.after : c.befores[0])) return false;
     const std::string& compiled = cls == '4' ? c.headVerb : cls == '7' ? c.headAdjective : cls == '8' ? c.headNa : c.headRaw;
     // an utterance is written as it is, its last word's ending dropped
     if (c.anchored) {

@@ -27,7 +27,7 @@ rewrite:past-sequence	そしてパパが知ったら捨てられるぞと脅さ�
 rewrite:past-sequence	血約を結ばれたら人形として使えるか彼女にはわからなかった。	lacks:맺었더니	keep	rewrites
 rewrite:past-sequence	戻ってきたら日にちは変わってしまうけど俺の気持ちは変わってしまった。	has:돌아오면	keep	rewrites
 rewrite:past-sequence	俺はこうなったら二人が何をしていたのか確かめてみることにした。	has:되면	keep	rewrites
-rewrite:past-sequence	「学校の先生も知らない人に話しかけられたら気を付けろって言ってた」	has:걸어지면	keep	rewrites
+rewrite:past-sequence	「学校の先生も知らない人に話しかけられたら気を付けろって言ってた」	has:걸어오면	keep	rewrites
 rewrite:past-sequence	「いや、でも……いじめたら損をするって……話……したよな？」	has:괴롭히면	keep	rewrites
 rewrite:past-sequence	門が閉じられていたらお終いだけど、天は私たちを見放さなかった。	lacks:있었더니	keep	rewrites
 rewrite:past-sequence	元の姿に戻ったら絶対にお礼参りをしよう、とユフィーリアは心に決めた。	lacks:돌아갔더니	keep	rewrites
