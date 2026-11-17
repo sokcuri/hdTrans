@@ -1137,7 +1137,9 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
             strip(rest);
         }
         if (rest.empty() || Has("。！!」』）)", FirstChar(rest))) return true;
-        return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest) > 0;
+        // A から after a verb-coded or noun-coded record is the verb's (おきてから 일어나고 나서); an adverb's から is
+        // its own (かねてからの), and the adverb path does not come here.
+        return rest.starts_with("から") || dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), rest) > 0;
     };
     // A noun after a particle is an argument or the predicate of a topic (ケーキははじめて 처음, 村のおきて), and a
     // time noun closes an utterance as the noun (あさって。 모레): neither gives way.
@@ -1305,8 +1307,12 @@ Record* VerbBeforeTeForm(Record* records, std::string_view text) {
     }
     if (noun == nullptr || At(noun->partCode, 1) != '1' || !text.starts_with(noun->source)) return records;
     const std::string_view key = noun->source;
-    // A hiragana key takes three kana or more (うまれて 태어나, うまれた; LEX-5923).
-    if (HasKanji(key) ? text::RuneCount(key) < 2 : (text::RuneCount(key) < 3 || !AllHiragana(key))) return records;
+    // A hiragana key takes three kana or more and a noun record of class N or I (うまれて 태어나, うまれた, but
+    // とはいえただ stays the conjunction; LEX-5923).
+    if (HasKanji(key) ? text::RuneCount(key) < 2
+                      : (text::RuneCount(key) < 3 || !AllHiragana(key) || std::string_view("NI").find(At(noun->partCode, 0)) == std::string_view::npos)) {
+        return records;
+    }
     const std::string_view after = text.substr(key.size());
     bool form = false;
     for (const std::string_view f : {"る", "た", "て", "ない", "なか", "なき", "なく", "なけ", "なさ", "よう", "ろ", "ます", "られ"}) {
