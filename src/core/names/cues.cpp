@@ -422,26 +422,38 @@ std::size_t CaptionLabelEnd(std::string_view line) {
 namespace {
 
 // BracketLabelAt for the brackets of opens (( and （, or [ and ［), each closed by its pair.
-bool LabelInBracketsAt(std::string_view before, std::string_view after, bool square) {
+bool LabelInBracketsAt(std::string_view before, std::string_view after, bool square, bool lenticularOnly = false) {
     static constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
-    const std::string_view kStops = square ? "[]［］()（）\n「」『』、。！？!?…‥" : "()（）\n「」『』、。！？!?…‥";
+    const std::string_view kStops = square ? "[]［］【】()（）\n「」『』、。！？!?…‥" : "()（）\n「」『』、。！？!?…‥";
     const char32_t half = square ? U'[' : U'(', full = square ? U'［' : U'（';
+    // A name box in lenticular brackets is a label in square brackets too (【千里】「おはよう」; spec LEX-5941);
+    // lenticularOnly takes those alone.
+    const char32_t lenticular = square ? U'【' : U'（';
     std::size_t open = before.size();
     for (int n = 0; open > 0; n++) {
         const text::Rune r = RuneBefore(before, open);
-        if (r.cp == half || r.cp == full) break;
+        if (r.cp == half || r.cp == full || r.cp == lenticular) break;
         if (InRunes(r.cp, kStops) || n >= kMaxCaptionGroup) return false;
         open -= r.size;
     }
     if (open == 0) return false;
     const char32_t bracket = RuneBefore(before, open).cp;
-    const char32_t closing = bracket == U'(' ? U')' : bracket == U'（' ? U'）' : bracket == U'[' ? U']' : U'］';
+    const char32_t closing = bracket == U'(' ? U')' : bracket == U'（' ? U'）' : bracket == U'[' ? U']' : bracket == U'【' ? U'】' : U'］';
     const std::string_view parts = before.substr(open);
     if (!parts.empty() && !InRunes(RuneBefore(parts, parts.size()).cp, kLabelSeparators)) return false;
     const std::string_view lead = before.substr(0, open - RuneBefore(before, open).size);
     if (!CaptionLead(lead)) return false;
+    // A name box holds the name alone and opens the speech in quotes (【千里】「おはよう」; not 【節分任務:柊】節分拡張作戦
+    // nor a heading alone, 【中】).
+    if (lenticularOnly) {
+        std::string_view box = after;
+        box.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), box));
+        if (bracket != U'【' || open != before.size() || !box.starts_with("】")) return false;
+        const std::string_view speech = TrimLineSpace(box.substr(std::string_view("】").size()));
+        return speech.starts_with("「") || speech.starts_with("『");
+    }
     // A label in square brackets opens the line: one after another group is a word of a list ([ガンガン] [いのち]).
-    if (square && AnyRuneOf(lead, [](char32_t c) { return InRunes(c, ")）]］"); })) return false;
+    if (square && AnyRuneOf(lead, [](char32_t c) { return InRunes(c, ")）]］】"); })) return false;
     std::string_view rest = after;
     rest.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
     if (!rest.empty() && !InRunes(FirstRune(rest).cp, kLabelSeparators) && FirstRune(rest).cp != closing) {
@@ -465,6 +477,8 @@ bool LabelInBracketsAt(std::string_view before, std::string_view after, bool squ
 bool BracketLabelAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, false); }
 
 bool SquareLabelAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, true); }
+
+bool NameBoxAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, true, true); }
 
 bool SpeechAfterLabel(std::string_view rest) {
     while (rest.starts_with(" ") || rest.starts_with("　")) rest.remove_prefix(rest.starts_with(" ") ? 1 : std::string_view("　").size());

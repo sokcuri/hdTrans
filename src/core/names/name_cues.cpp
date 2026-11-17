@@ -300,7 +300,10 @@ bool ClosedLabelAt(std::string_view before, std::string_view after) {
 // round brackets, after caption marks only (⚟アヤメ：, ≫アヤメ：, 》アヤメ：), or a part of a label in
 // round brackets there ((アヤメ), ⚟（アヤメ）).
 bool LabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
-    if (internal::BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
+    if (internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after) || ClosedLabelAt(before, after) ||
+        RoleAfterLabel(snap, before, after)) {
+        return true;
+    }
     if (!internal::CaptionLead(before)) return false;
     // A quote ends the line; text after its closing bracket makes the bracket a reading or a
     // title (光「ひかり」散「ち」らす, 新「三川艦隊」を編成せよ).
@@ -1431,7 +1434,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         // A label in round brackets, or one that a colon or ≫ closes, is a whole word: it neither
         // inflects (さくら：, (わかば)) nor stands for a verb or a prefix of one character ((恋)); a
         // character of noun.bracket-note in brackets annotates the line ((続)).
-        const bool bracketLabel = internal::BracketLabelAt(before, after);
+        const bool bracketLabel = internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after);
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed

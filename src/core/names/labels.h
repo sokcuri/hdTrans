@@ -34,6 +34,8 @@ std::size_t CaptionLabelEnd(std::string_view line);
 bool BracketLabelAt(std::string_view before, std::string_view after);
 // The same in square brackets ([のぼる]はい, ［たまお］うん; spec LEX-5800).
 bool SquareLabelAt(std::string_view before, std::string_view after);
+// The same in lenticular brackets, a name box before speech (【千里】「おはよう」; spec LEX-5941).
+bool NameBoxAt(std::string_view before, std::string_view after);
 
 // Whether rest, the text after a speaker label in brackets, starts an utterance: there is text
 // before the line ends, and it neither quotes the brackets with と or って nor starts with a
