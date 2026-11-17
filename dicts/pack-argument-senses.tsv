@@ -4,6 +4,7 @@ id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri	agent
 argument-senses:1	起こす	v5	sense	obj=@person|@animal	깨우다	LEX-3471		お姉ちゃんを起こして 언니를 깨워			
 argument-senses:5043	起こす	v5	sense	obj=@person|@animal obj.mod=倒れる|転ぶ|倒れ込む|転がる|崩れ落ちる|へたり込む|座り込む|うずくまる|突っ伏す|伏せる	일으키다	LEX-5014		倒れた馬を起こした 쓰러진 말을 일으켰다			
 argument-senses:5044	起こす	v5	sense	obj=@person|@animal next=立たせる|立つ|立ち上がる|座らせる|座る	일으키다	LEX-5014		馬を起こして立たせた 말을 일으켜 서게 했다			
+argument-senses:14700	起こす	v5	sense	obj=@person|@animal obj.mod=眠る|寝る|眠り込む|寝入る|寝込む|眠りこける|寝こける|寝息を立てる|昼寝する|居眠りする|うたた寝する	깨우다	LEX-6040		倒れたまま眠る子を起こした 쓰러진 채로 자는 아이를 깨웠다		20	
 argument-senses:50	起こす	v5	sense	obj=兵|軍|軍勢|兵力|義兵|兵馬	-	LEX-3471		兵を起こした 군사를 일으켰다(그대로)		10	
 argument-senses:2	入れる	v1:규칙	sense	obj=客人|客|お客|来客|お客様|客人たち	들이다	LEX-3471		客人を入れる 손님을 들이다			
 argument-senses:23	入れる	v1:규칙	sense	obj=@person dat=部屋|家|中|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|ハーレム|自宅|部屋の中|家の中	들이다	LEX-3471		変な人を部屋に入れて 이상한 사람을 방에 들여			
@@ -204,3 +205,15 @@ argument-senses:35802	挫く	v5:규칙	voice	*	passive:꺾이다	LEX-5965		自�
 argument-senses:35803	靡く	v5	sense	subj=心|気持ち|気|人心|民心|世論|女心|関心	쏠리다	LEX-5963		金に心が靡く 돈에 마음이 쏠리다			
 argument-senses:35804	靡く	v5	sense	dat=@person	넘어가다	LEX-5963		彼に靡いた 그에게 넘어갔다			
 argument-senses:35805	たぐる|手繰る	v5	sense	obj=記憶|思い出|過去|記録|糸口|手がかり|手掛かり|縁	더듬다	LEX-5963		記憶をたぐる 기억을 더듬다			
+argument-senses:14701	擦る|こする	v5	sense	obj=マッチ|マッチ棒|燐寸	긋다	LEX-6040		マッチを擦った 성냥을 그었다			
+argument-senses:14705	切れる	v1	sense	subj=薬|薬効	떨어지다	LEX-6040		薬が切れた 약이 떨어졌다			
+argument-senses:14714	切れる	v1	sense	subj=効果|効き目	다하다	LEX-6040		ガスの効果が切れたら 가스의 효과가 다하면			
+argument-senses:14706	切れる	v1	sense	subj=麻酔|魔法|術|催眠|暗示	풀리다	LEX-6040		麻酔が切れた 마취가 풀렸다			
+argument-senses:14707	はねのける|撥ね除ける|跳ね除ける|撥ねのける|跳ねのける	v1	sense	obj=提案|申し出|要求|要請|誘い|依頼|反対|意見|抗議|忠告|助言|命令|頼み	거절하다	LEX-6040		提案をはねのけた 제안을 거절했다			
+argument-senses:14708	上がる|あがる	v5	sense	dat=舞台|ステージ|壇上|演壇|壇|土俵|リング|表彰台|高座|檀上	오르다	LEX-6040		舞台にあがった 무대에 올랐다			
+argument-senses:14709	取る	v5	sense	from=*	집다	LEX-6040		窓のそばからパンを取った 창 옆에서 빵을 집었다			
+argument-senses:14712	取る	v5	sense	from=* next=くる|来る|き|来|いく|行く	-	LEX-6040		取ってくる 가져오다(그대로)		10	
+argument-senses:14713	取る	v5	sense	from=* obj=水|お湯|湯|酒|血|データ|情報|金|お金|命	-	LEX-6040		水を外から取る(그대로)		10	
+argument-senses:14710	そば	n	sense	pred=好き|大好き|嫌い|食べる|すする|啜る|茹でる|ゆでる|打つ|注文する|頼む|食う	메밀국수	LEX-6040		そばが好きだ 메밀국수를 좋아한다			
+argument-senses:14711	下がる	v5	sense	subj=@person from=* next=くる|来る	-	LEX-6040		教卓から下がってくる 교탁에서 내려온다(그대로)			
+argument-senses:14715	宿る	v5	sense	obj=光|輝き|力|魔力|炎|意志|決意|怒り|闘志|殺意|熱|感情|魂|覚悟|希望|闇|光り|灯	품다	LEX-6040		目に強い輝きを宿らせて 눈에 강한 빛을 품게 해			

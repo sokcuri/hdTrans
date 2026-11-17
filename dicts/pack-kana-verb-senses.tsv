@@ -5,3 +5,7 @@ kana-verb-senses:1	ととのえる	v1	sense	obj=息|呼吸|息遣い	고르다	L
 kana-verb-senses:2	ととのえる	v1	sense	obj=身なり|身だしなみ|身支度|服装|髪|体勢|態勢|姿勢|居住まい	가다듬다	LEX-3702		身だしなみをととのえる 몸가짐을 가다듬다		
 kana-verb-senses:3	ととのえる	v1	sense	obj=準備|用意|手筈|手はず|環境|条件|態勢	갖추다	LEX-3702		準備をととのえる 준비를 갖추다		
 kana-verb-senses:4	ととのえる	v1	sense	obj=味	맞추다	LEX-3702		味をととのえる 맛을 맞추다		
+kana-verb-senses:14720	はなす	v5	sense	obj=手|両手|片手|腕|指|手綱|ハンドル|紐|ひも|ロープ|袖|裾|手首	놓다	LEX-6042		手をはなして 손을 놓아		
+kana-verb-senses:14721	おこる	v5	sense	subj=@person	화내다	LEX-6042		母がおこった 어머니가 화냈다		
+kana-verb-senses:14722	おこる	v5	sense	subj=-	화내다	LEX-6042		おこらないで 화내지 마		
+kana-verb-senses:14723	ひく	v5	sense	obj=@person|@animal	치다	LEX-6042		車で人をひいてしまった 차로 사람을 쳐 버렸다		

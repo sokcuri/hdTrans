@@ -441,6 +441,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                 one.lexeme = own[0].target;
             }
             one.key = recs[0].key;
+            one.lemma = std::string(jp);
+            one.godan = std::string_view(pos).starts_with("v5");
             one.classDigit = pos == "p" ? '2' : pos == "adv" ? '3' : recs[0].part.size() > 1 ? recs[0].part[1] : 0;
             if (word && !keep) one.target = recs[0].target;
             one.adjective = adjective;
