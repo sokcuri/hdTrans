@@ -324,7 +324,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             const bool attached = a.slot == "how" || ((first == "cl" || first == "main") && !tail.empty()) ||
                                   (tail == "how" && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs));
             // <argument slot>.mod: the predicate that modifies that argument
-            const bool argMod = tail == "mod" && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs);
+            // <argument slot>.of: the noun before の right before that argument
+            const bool argMod = (tail == "mod" || tail == "of") && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs);
             if (!attached && !argMod && std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
                 return fail("cue slot " + userdict::internal::Quote(a.slot) + " is not one of the cue DSL");
             for (const std::string_view v : Split(atom.substr(eq + 1), '|')) {

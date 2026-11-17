@@ -8,6 +8,8 @@ argument-senses:14700	起こす	v5	sense	obj=@person|@animal obj.mod=眠る|寝�
 argument-senses:50	起こす	v5	sense	obj=兵|軍|軍勢|兵力|義兵|兵馬	-	LEX-3471		兵を起こした 군사를 일으켰다(그대로)		10	
 argument-senses:2	入れる	v1:규칙	sense	obj=客人|客|お客|来客|お客様|客人たち	들이다	LEX-3471		客人を入れる 손님을 들이다			
 argument-senses:23	入れる	v1:규칙	sense	obj=@person dat=部屋|家|中|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|ハーレム|自宅|部屋の中|家の中	들이다	LEX-3471		変な人を部屋に入れて 이상한 사람을 방에 들여			
+argument-senses:14724	入れる	v1	sense	obj=@person dat=中 dat.of=*	-	LEX-6043		御園をコートの中に入れた 미소노를 코트 안에 넣었다(그대로)			
+argument-senses:14725	入れる	v1:규칙	sense	obj=@person dat=中 dat.of=部屋|家|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|自宅|建物|宿|テント|車|馬車|車内	들이다	LEX-6043		客を店の中に入れた 손님을 가게 안에 들였다			
 argument-senses:3	入れる	v1	sense	obj=*	넣다	LEX-3471		バッグに入れると 가방에 넣으니			
 argument-senses:24	入れる	v1	sense	obj=お茶|茶|紅茶|緑茶|コーヒー|珈琲|ココア|ミルク|スイッチ|電源|暖房|冷房|力|籍	-	LEX-3471		お茶を入れる 차를 끓이다(그대로)			
 argument-senses:30	入れる	v1	sense	obj=* head=部屋|場所|所|ところ|店|家|建物|空間|エリア|区域|範囲|ダンジョン|城|町|街|村|国|世界|学校|会場|施設|領域|風呂|温泉	-	LEX-3471		先生でも入れる部屋(그대로)			

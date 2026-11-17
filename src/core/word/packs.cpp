@@ -451,7 +451,9 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         const std::string_view base = std::string_view(a.slot).substr(0, dot);
         // <slot>.mod: the predicate right before an argument of that slot that modifies it (倒れた馬を 倒れる)
         const bool argMod = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "mod";
-        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod) {
+        // <slot>.of: the noun before の right before an argument of that slot (コートの中に コート)
+        const bool argOf = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "of";
+        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod && !argOf) {
             // <slot>.how: how an argument of that slot is written (bare, omitted …), with an attachment
             if (!c.attached) return false;
             bool held = false;
@@ -497,6 +499,14 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
                     started = true;
                     if (!dict::InClass(HDTRANS_CLASS("aux.te-through"), m->group->surface)) pool.push_back({a.slot, m, {}, {}, {}});
                 }
+            }
+        } else if (argOf) {
+            for (const Arg& g : c.args) {
+                if ((base != "arg" && g.slot != base) || g.item == nullptr) continue;
+                const Item* no = g.item->prev;
+                if (no != nullptr && no->group != nullptr && no->group->surface == "の" && no->prev != nullptr &&
+                    no->prev->group != nullptr && ClassOf(no->prev) == '1')
+                    pool.push_back({a.slot, no->prev, {}, {}, {}});
             }
         } else if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
             // a も phrase may be the subject or the object (風邪も引かない): it fills the subject of a person atom only

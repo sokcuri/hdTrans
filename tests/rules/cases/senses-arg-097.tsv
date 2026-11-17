@@ -1,4 +1,4 @@
-# senses by argument: names as @person, subject across a te verb, セットする, 打ち込む, kana はなす/おこる/ひく, collocations (LEX-6040–6042)
+# senses by argument: names as @person, subject across a te verb, セットする, 打ち込む, kana はなす/おこる/ひく, collocations (LEX-6040–6043)
 rule	input	expected	kind	layer
 pack:argument-senses:1	葵を起こした。	has:아오이를 깨웠다	fix	packs
 pack:argument-senses:1	アリスがため息をついた。アリスを起こした。	has:앨리스를 깨웠다	fix	packs
@@ -61,3 +61,19 @@ pack:argument-senses:1	ミナを起こした。	has:미나를 깨웠다	fix	pack
 pack:argument-senses:14714	ガスの効果が切れたら、襲ってくる。	has:효과가 다하면	fix	packs
 pack:argument-senses:14715	目だけは強い輝きを宿らせて。	has:빛을 품게 해	fix	packs
 pack:argument-senses:14715	光が宿る。	lacks:품	keep	packs
+pack:kana-verb-senses:14722	おこらないでください。	has:화내지 마세요	fix	packs
+pack:kana-verb-senses:14722	そんなにおこらないでよ！	has:화내지 마	fix	packs
+pack:kana-verb-senses:14722	はなこ、おこらないで。	has:화내지 마	fix	packs
+pack:kana-verb-senses:14722	またおこった。	has:또 일어났다	keep	packs
+pack:kana-verb-senses:14722	何がおこったの？	has:일어났어	keep	packs
+pack:argument-senses:14724	御園をコートの中に入れた。	has:코트 안에 넣었다	keep	packs
+pack:argument-senses:14724	御園をコートの中に入れて、抱きしめた。	has:코트 안에 넣어	keep	packs
+pack:argument-senses:14724	猫を箱の中に入れた。	has:상자 안에 넣었다	keep	packs
+pack:argument-senses:14724	財布をバッグの中に入れた。	has:가방 안에 넣었다	keep	packs
+pack:argument-senses:14725	葵を屋敷の中に入れた。	has:저택 안에 들였다	fix	packs
+pack:argument-senses:14725	葵を部屋の中に入れた。	has:방 안에 들였다	fix	packs
+pack:argument-senses:14725	美也子を車の中に入れた。	has:차 안에 들였다	keep	packs
+pack:argument-senses:14725	客を店の中に入れた。	has:가게 안에 들였다	keep	packs
+pack:argument-senses:23	少女を中に入れた。	has:안에 들였다	keep	packs
+pack:argument-senses:23	ミナを中に入れました。	has:안에 들였습니다	fix	packs
+pack:argument-senses:23	傘を開き、白崎を中に入れた。	has:시라사키를 안에 들였다	fix	packs
