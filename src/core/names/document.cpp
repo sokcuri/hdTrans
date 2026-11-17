@@ -324,8 +324,15 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     }
     // A common word whose cues stay in their lines (one kanji: 樹くん, 樹「うん」) is the name of the whole document
     // on the cues of two lines too, and in its person slots on one.
+    // A key the dictionary has no common sense for (凪, 筧: a name or the reading of each kanji) is the name of
+    // the whole document on the cue of one line: there is no word for a later line to mean (spec LEX-5940).
     for (const auto& [key, count] : evidence) {
-        if (carried.contains(key) || !names::CommonWord(snap, key)) continue;
+        if (carried.contains(key)) continue;
+        if (names::NameOnlyKey(snap, key)) {
+            doc->cued.insert(key);
+            continue;
+        }
+        if (!names::CommonWord(snap, key)) continue;
         if (count >= 2) {
             doc->cued.insert(key);
         } else {
@@ -401,6 +408,87 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         if (e == evidence.end() && commonUse(t)) doc->slotted.insert(t);
     }
     for (const std::string& t : doc->cued) doc->slotted.erase(t);
+    // A name the document proves is read as a listed name is: a hiragana name no kana word of the dictionary spells,
+    // which verb forms would split otherwise (つぐみらしい, 「つぐみっ」), and the kana of a kanji name it proves before an honorific
+    // (筧 카케이 gives かけいさん; spec LEX-5940).
+    {
+        names::List learned;
+        const auto personKo = [&](std::string_view k) -> std::string {
+            for (const dict::Record& rec : snap.NameRecords(k)) {
+                if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN")) return std::string(rec.target);
+            }
+            return {};
+        };
+        const auto add = [&](const std::string& ja, const std::string& ko, bool hon) {
+            if (ko.empty() || (names != nullptr && names->keys.contains(ja))) return;
+            for (const names::Listed& l : learned.names) {
+                if (l.ja == ja) return;
+            }
+            names::Listed l;
+            l.ja = ja;
+            l.ko = ko;
+            l.honorificOnly = hon;
+            l.line = static_cast<int>(learned.names.size()) + 1;
+            l.source = "learned";
+            learned.names.push_back(std::move(l));
+        };
+        std::map<std::string, std::string> spoken;  // the Korean of each proven kanji name, without spaces
+        for (const std::string& k : std::set<std::string>(doc->cued.begin(), doc->cued.end())) {
+            const std::string ko = personKo(k);
+            if (names::internal::AllRunes(k, names::internal::IsHiragana)) {
+                // Not a kana word of the dictionary (ことり 작은새), which keeps its sense outside the cue.
+                const auto records = snap.RetrieveRecords(k, dict::LookupMode::General);
+                if (std::none_of(records.begin(), records.end(), [&](const dict::Candidate& c) {
+                        return c.codes != nullptr && c.source == k && !c.codes->sem.HasPrefix("QPN");
+                    })) {
+                    add(k, ko, false);
+                }
+            } else if (!ko.empty() && ko.find(' ') == std::string::npos) {
+                spoken.emplace(ko, k);
+            }
+        }
+        if (!spoken.empty()) {
+            for (const std::string& raw : lines) {
+                const std::string line = names::StripRuby(raw);
+                for (const std::string_view h : dict::internal::kNameHonorifics) {
+                    for (std::size_t at = line.find(h); at != std::string::npos; at = line.find(h, at + 1)) {
+                        std::size_t start = at;
+                        while (start > 0 && names::internal::IsHiragana(names::internal::RuneBefore(line, start).cp)) {
+                            start -= names::internal::RuneBefore(line, start).size;
+                        }
+                        const std::string kana = line.substr(start, at - start);
+                        if (names::internal::RuneCount(kana) < 2) continue;
+                        // The kana spells the name with its long vowels (かけい 카케이; まおう is no 마오) and is no noun
+                        // of the dictionary itself, which the honorific would address (ことりさん; かな of かなさん is a particle).
+                        const auto f = spoken.find(text::FromKana(kana, text::Preset::Fan));
+                        if (f == spoken.end()) continue;
+                        const auto records = snap.RetrieveRecords(kana, dict::LookupMode::General);
+                        if (std::none_of(records.begin(), records.end(), [&](const dict::Candidate& c) {
+                                return c.codes != nullptr && c.source == kana && !c.codes->sem.HasPrefix("QPN") &&
+                                       !c.codes->part.Empty() && c.codes->part.Tag() == 'N';
+                            })) {
+                            add(kana, f->first, true);
+                        }
+                    }
+                }
+            }
+        }
+        if (!learned.names.empty()) {
+            if (doc->ownPacks == nullptr) {
+                doc->ownPacks = names != nullptr ? std::make_unique<dict::PackTable>(names->packs) : std::make_unique<dict::PackTable>();
+            }
+            std::vector<dict::PackError> errors;
+            dict::ParsePackRows("learned", ListPackRows(learned), &snap.Base(), doc->families, *doc->ownPacks, errors);
+            doc->packs = doc->ownPacks.get();
+            std::string key = std::string("\0learned", 8);
+            for (const names::Listed& l : learned.names) {
+                r.AddListed(l);
+                key += "\t" + names::ListLine(l);
+            }
+            doc->registryKey += key;
+            doc->key += key;
+        }
+    }
     for (const std::string& t : doc->cued) {
         if (names::CommonWord(snap, t)) doc->common.insert(t);
     }

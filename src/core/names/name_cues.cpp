@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
+#include <set>
 #include <span>
 #include <string>
 #include <string_view>
@@ -300,7 +301,10 @@ bool ClosedLabelAt(std::string_view before, std::string_view after) {
 // round brackets, after caption marks only (⚟アヤメ：, ≫アヤメ：, 》アヤメ：), or a part of a label in
 // round brackets there ((アヤメ), ⚟（アヤメ）).
 bool LabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
-    if (internal::BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
+    if (internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after) || ClosedLabelAt(before, after) ||
+        RoleAfterLabel(snap, before, after)) {
+        return true;
+    }
     if (!internal::CaptionLead(before)) return false;
     // A quote ends the line; text after its closing bracket makes the bracket a reading or a
     // title (光「ひかり」散「ち」らす, 新「三川艦隊」を編成せよ).
@@ -858,6 +862,14 @@ bool SingleNameKey(const dict::Snapshot& snap, std::string_view key) {
         if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) return true;
     }
     return false;
+}
+
+// Whether key, one kanji, stands in a lenticular box before speech as a heading or a word: it has a common
+// sense (【新】「春の新作」, 【月】, 【心】) or is of noun.bracket-note (【完】, 【壱】). Only a key with no reading but a
+// name names the speaker in a box of one (【凪】「うん」; spec LEX-5941).
+bool HeadingBoxAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    return text::RuneCount(key) < 2 && internal::NameBoxAt(before, after) && !internal::BracketLabelAt(before, after) &&
+           (!NameOnlyKey(snap, key) || dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key));
 }
 
 // Whether a person cue of key may be a figure of speech (瞳が見つめる, 心が泣く, 花が笑う, 夢が叫ぶ,
@@ -1431,7 +1443,11 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         // A label in round brackets, or one that a colon or ≫ closes, is a whole word: it neither
         // inflects (さくら：, (わかば)) nor stands for a verb or a prefix of one character ((恋)); a
         // character of noun.bracket-note in brackets annotates the line ((続)).
-        const bool bracketLabel = internal::BracketLabelAt(before, after);
+        const bool bracketLabel = internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after);
+        if (HeadingBoxAt(snap, key, before, after)) {
+            i += step;
+            continue;
+        }
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed
@@ -1617,6 +1633,31 @@ bool CommonWord(const dict::Snapshot& snap, std::string_view key) {
         return true;
     }
     return false;
+}
+
+bool NameOnlyKey(const dict::Snapshot& snap, std::string_view key) {
+    if (!internal::AllRunes(key, IsKanji) && !internal::AllRunes(key, IsHiragana)) return false;
+    const auto bare = [](std::string_view ko) {
+        std::string out;
+        for (const char ch : ko) {
+            if (ch != ' ') out += ch;
+        }
+        return out;
+    };
+    std::set<std::string> person;
+    const std::vector<dict::Record> names = snap.NameRecords(key);
+    for (const dict::Record& r : names) {
+        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) person.insert(bare(r.target));
+    }
+    if (person.empty()) return false;
+    for (const dict::Record& r : names) {
+        if (r.codes != nullptr && !r.codes->sem.HasPrefix("QPN") && !person.contains(bare(r.target))) return false;
+    }
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QNN")) continue;
+        if (!person.contains(bare(c.target))) return false;
+    }
+    return true;
 }
 
 }  // namespace hdTrans::names

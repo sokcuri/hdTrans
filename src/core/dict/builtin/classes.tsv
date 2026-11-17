@@ -404,7 +404,7 @@
 //= noun.o-stem	Nouns made of a verb stem after お (お願い, お返し, お待ち, お休み), which お + stem + です does not read as an honoured act (spec LEX-4765).
 //= stem.o-past	Verb stems whose お + stem + ですか asks what has happened (お呼びですか 부르셨습니까, お見えですか 오셨습니까).
 //= stem.o-arrived	Verb stems whose お + stem + です says someone has arrived (お見えです 오셨습니다).
-//= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
+//= noun.bracket-note	Characters that, alone in round brackets before a line or in a lenticular box before a quote, annotate it rather than name its speaker ((続), (株), (注), (笑), 【壱】).
 //= noun.attitude-sareru	Verbal nouns of a feeling or an act toward someone, whose される has that someone as its subject (失望されたくない 실망받고 싶지 않다, 挨拶されて 인사받아, 納得されると): GRM-3873 does not read them as respectful with no subject.
 //= noun.received-o-act	Nouns with お or ご of what is done to or asked of someone (お願いされた 부탁받았다, お仕置きされている, お供えされた): their される is the passive, not the respectful of GRM-3873.
 //= noun.received-wo-act	Verbal nouns of what someone does to or for another, whose を される with an agent in に or the speaker as subject is what that other receives: 받다 (先生に質問をされた 선생님에게 질문을 받았다, 注意をされる 주의를 받다).
@@ -5516,6 +5516,8 @@ noun.bracket-note	号
 noun.bracket-note	副
 noun.bracket-note	特
 noun.bracket-note	独
+noun.bracket-note	壱
+noun.bracket-note	弐
 noun.attitude-sareru	失望
 noun.attitude-sareru	感動
 noun.attitude-sareru	安心

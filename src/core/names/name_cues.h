@@ -76,6 +76,11 @@ bool CommonAfterAt(std::string_view after);
 // 아침 해, 力 힘, 敏捷 민첩).
 bool CommonWord(const dict::Snapshot& snap, std::string_view key);
 
+// Whether key, all kanji or all hiragana, has no reading but a person's name: the name layer has key as a
+// person and every other sense of it only spells that name (筧 카케이, 凪 나기, つぐみ; not 空 하늘, 島 섬, 新 신,
+// なぎさ 물가; spec LEX-5940).
+bool NameOnlyKey(const dict::Snapshot& snap, std::string_view key);
+
 // The lemmas of name.person-verb whose note does not parse (no kind v5, v1 or vs, an unknown flag, or a
 // lemma that does not end as its kind does), which give no forms; empty when every row reads.
 std::vector<std::string> PersonVerbProblems();
