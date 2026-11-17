@@ -192,7 +192,8 @@
 //= name.person-belonging	What a person has or does, after a common word and の that the document names: the word is the person there (小太刀の家 코다치의 집, 樹の声; spec LEX-5175).
 //= name.person-part	Parts of the body and the face after Xの that make X a person, not the common word it also spells, when a particle or a mark follows them (皐月の顔 사츠키의 얼굴, のぞみの手を; not 剣の手ほどき; spec LEX-4820).
 //= name.body-part	Parts of the body that, before を in the clause after Xが, Xは or Xも, or before が after Xは or Xも, make X a person doing something with its own body (玉藻が身をよじる 타마모가 몸을 비튼다, 小太刀が眉を上げた; spec LEX-4820).
-//= name.person-act	Starts of verbs and phrases of what only a person does, matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end: they make X a person (玉藻がはにかむ 타마모가 수줍어한다, 小太刀が黙然と腕を組んだ; spec LEX-4820).
+//= name.person-act	Starts of nouns and phrases of what only a person does (ため息, 赤面, 初耳, 身を), matched as name.person-verb is (spec LEX-4820); the verbs are lemmas of name.person-verb.
+//= name.person-verb	Verbs and verb phrases of what only a person does (語る, 見つめる, 腕を組む), one lemma per row with its kind in the note (v5, v1, vs, vk) and the flags t (it takes an object, which may stand as the topic: after Xは or Xも a cue only after an object in を) and say (a verb of saying, a cue after a named topic with no object). Their active forms, made with the one conjugation table, are matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end and make X a person (高峰が語る 타카미네가 말한다; not 姿が見えない or 礼は受け取ろう; spec LEX-4820).
 //= name.person-say	Starts of verbs of saying, knowing and asking, matched in the clause after Xが, or after Xは where an object in を comes first: they make X a person (小太刀が知っている 코다치가 알고 있다; not 泉は知らない; spec LEX-4820).
 //= name.person-speak	Starts of verbs of saying and thinking, matched in the clause after Xは or Xも on a kanji word with a person's name row of no time, statement, name, thought or money sense: they make X a person (梨花は言った 리카는 말했다; not 昼間も言った, 言葉は聞いた; spec LEX-4830).
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
@@ -2428,87 +2429,216 @@ name.body-part	頭
 name.body-part	眉
 name.body-part	息
 name.body-part	涙
-name.person-act	はにか
-name.person-act	笑っ
-name.person-act	笑う
 name.person-act	笑い
 name.person-act	笑み
 name.person-act	微笑
-name.person-act	ほほえ
 name.person-act	苦笑
-name.person-act	頷
-name.person-act	うなず
-name.person-act	呟
-name.person-act	つぶや
-name.person-act	囁
-name.person-act	ささや
-name.person-act	叫ん
-name.person-act	叫ぶ
 name.person-act	叫び
-name.person-act	怒っ
-name.person-act	怒る
-name.person-act	泣い
-name.person-act	泣く
-name.person-act	泣き出
-name.person-act	泣きそう
-name.person-act	照れ
-name.person-act	黙っ
-name.person-act	黙る
-name.person-act	黙り
 name.person-act	黙然
-name.person-act	驚い
-name.person-act	驚く
-name.person-act	戸惑
 name.person-act	困惑
-name.person-act	喜ん
-name.person-act	喜ぶ
-name.person-act	悩ん
-name.person-act	慌て
-name.person-act	焦っ
-name.person-act	怯え
-name.person-act	拗ね
-name.person-act	甘え
-name.person-act	恥じら
 name.person-act	赤面
 name.person-act	ため息
 name.person-act	溜息
 name.person-act	溜め息
 name.person-act	舌打ち
 name.person-act	身を
-name.person-act	胸を張
-name.person-act	腕を組
-name.person-act	立ち上が
-name.person-act	振り向
-name.person-act	振り返っ
-name.person-act	振り返る
-name.person-act	座っ
-name.person-act	座る
-name.person-act	座り込
-name.person-act	歩い
-name.person-act	歩き出
-name.person-act	駆け寄
-name.person-act	寝て
-name.person-act	寝る
-name.person-act	喋っ
-name.person-act	喋る
-name.person-act	しゃべ
-name.person-act	答え
-name.person-act	首を傾げ
 name.person-act	小首を
-name.person-act	抱きつ
-name.person-act	抱き着
 name.person-act	初耳
-name.person-act	謝っ
-name.person-act	謝る
-name.person-act	頭を下げ
 name.person-act	返事
 name.person-act	お世話
 name.person-act	世話を
-name.person-act	呆れ
-name.person-act	あきれ
-name.person-act	腰掛け
-name.person-act	腰かけ
+// からか stays a raw start until the document carry-over covers the lines it proves by chance (だったからか).
 name.person-act	からか
+name.person-act	おしゃべり
+name.person-verb	はにかむ	v5
+name.person-verb	笑う	v5
+name.person-verb	微笑む	v5
+name.person-verb	ほほえむ	v5
+name.person-verb	頷く	v5
+name.person-verb	うなずく	v5
+name.person-verb	呟く	v5
+name.person-verb	つぶやく	v5
+name.person-verb	囁く	v5
+name.person-verb	ささやく	v5
+name.person-verb	叫ぶ	v5
+name.person-verb	怒る	v5
+name.person-verb	泣く	v5
+name.person-verb	泣き出す	v5
+name.person-verb	照れる	v1
+name.person-verb	黙る	v5
+name.person-verb	驚く	v5
+name.person-verb	戸惑う	v5
+name.person-verb	喜ぶ	v5
+name.person-verb	悩む	v5
+name.person-verb	慌てる	v1
+name.person-verb	焦る	v5
+name.person-verb	怯える	v1
+name.person-verb	拗ねる	v1
+name.person-verb	甘える	v1
+name.person-verb	恥じらう	v5
+name.person-verb	胸を張る	v5
+name.person-verb	腕を組む	v5
+name.person-verb	立ち上がる	v5
+name.person-verb	振り向く	v5
+name.person-verb	振り返る	v5
+name.person-verb	座る	v5
+name.person-verb	座り込む	v5
+name.person-verb	歩く	v5
+name.person-verb	歩き出す	v5
+name.person-verb	駆け寄る	v5
+name.person-verb	寝る	v1
+name.person-verb	喋る	v5
+name.person-verb	しゃべる	v5
+name.person-verb	答える	v1
+name.person-verb	首を傾げる	v1
+name.person-verb	抱きつく	v5
+name.person-verb	抱き着く	v5
+name.person-verb	謝る	v5
+name.person-verb	頭を下げる	v1
+name.person-verb	呆れる	v1
+name.person-verb	あきれる	v1
+name.person-verb	腰掛ける	v1
+name.person-verb	腰かける	v1
+name.person-verb	からかう	v5
+name.person-verb	語る	v5 t say
+name.person-verb	話す	v5 t say
+name.person-verb	尋ねる	v1 t say
+name.person-verb	訊ねる	v1 t say
+name.person-verb	訊く	v5 t say
+name.person-verb	告げる	v1 t say
+name.person-verb	述べる	v1 t say
+name.person-verb	問う	v5 t say
+name.person-verb	問いかける	v1 say
+name.person-verb	問い掛ける	v1 say
+name.person-verb	呼ぶ	v5 t
+name.person-verb	呼びかける	v1 say
+name.person-verb	呼び掛ける	v1 say
+name.person-verb	話しかける	v1 say
+name.person-verb	話し掛ける	v1 say
+name.person-verb	言い返す	v5 say
+name.person-verb	言い放つ	v5 t say
+name.person-verb	言い切る	v5 t say
+name.person-verb	聞き返す	v5 t say
+name.person-verb	訊き返す	v5 t say
+name.person-verb	問い返す	v5 t say
+name.person-verb	名乗る	v5 t say
+name.person-verb	説明する	vs t say
+name.person-verb	怒鳴る	v5
+name.person-verb	喚く	v5
+name.person-verb	ぼやく	v5 say
+name.person-verb	口ごもる	v5
+name.person-verb	口籠る	v5
+name.person-verb	言い淀む	v5
+name.person-verb	詫びる	v1
+name.person-verb	挨拶する	vs
+name.person-verb	声をかける	v1
+name.person-verb	声を掛ける	v1
+name.person-verb	声を上げる	v1
+name.person-verb	声をあげる	v1
+name.person-verb	声を荒げる	v1
+name.person-verb	見る	v1 t
+name.person-verb	見つめる	v1 t
+name.person-verb	見詰める	v1 t
+name.person-verb	みつめる	v1 t
+name.person-verb	見せる	v1 t
+name.person-verb	見つける	v1 t
+name.person-verb	見付ける	v1 t
+name.person-verb	睨む	v5 t
+name.person-verb	にらむ	v5 t
+name.person-verb	睨みつける	v1 t
+name.person-verb	睨み付ける	v1 t
+name.person-verb	眺める	v1 t
+name.person-verb	見上げる	v1 t
+name.person-verb	見下ろす	v5 t
+name.person-verb	覗き込む	v5 t
+name.person-verb	のぞき込む	v5 t
+name.person-verb	見据える	v1 t
+name.person-verb	見回す	v5
+name.person-verb	見渡す	v5
+name.person-verb	見送る	v5 t
+name.person-verb	見やる	v5 t
+name.person-verb	見遣る	v5 t
+name.person-verb	見守る	v5 t
+name.person-verb	見比べる	v1 t
+name.person-verb	見入る	v5
+name.person-verb	視線を向ける	v1
+name.person-verb	視線を送る	v5
+name.person-verb	視線を逸らす	v5
+name.person-verb	眉根を寄せる	v1
+name.person-verb	そっぽを向く	v5
+name.person-verb	向き直る	v5
+name.person-verb	指さす	v5 t
+name.person-verb	指差す	v5 t
+name.person-verb	ゆびさす	v5 t
+name.person-verb	手招きする	vs
+name.person-verb	会釈する	vs
+name.person-verb	一礼する	vs
+name.person-verb	お辞儀する	vs
+name.person-verb	うつむく	v5
+name.person-verb	俯く	v5
+name.person-verb	微笑みかける	v1
+name.person-verb	笑いかける	v1
+name.person-verb	欠伸する	vs
+name.person-verb	逃げだす	v5
+name.person-verb	逃げ出す	v5
+name.person-verb	逃げる	v1
+name.person-verb	走り出す	v5
+name.person-verb	駆け出す	v5
+name.person-verb	駆けだす	v5
+name.person-verb	駆け込む	v5
+name.person-verb	飛び込む	v5
+name.person-verb	近づく	v5
+name.person-verb	近付く	v5
+name.person-verb	近寄る	v5
+name.person-verb	歩み寄る	v5
+name.person-verb	立ち止まる	v5
+name.person-verb	立ち去る	v5
+name.person-verb	駆けつける	v1
+name.person-verb	駆け付ける	v1
+name.person-verb	起き上がる	v5
+name.person-verb	飛び起きる	v1
+name.person-verb	跳び上がる	v5
+name.person-verb	飛び上がる	v5
+name.person-verb	しゃがむ	v5
+name.person-verb	しゃがみ込む	v5
+name.person-verb	跪く	v5
+name.person-verb	ひざまずく	v5
+name.person-verb	寝転ぶ	v5
+name.person-verb	寝転がる	v5
+name.person-verb	正座する	vs
+name.person-verb	歩き回る	v5
+name.person-verb	走り去る	v5
+name.person-verb	帰る	v5
+name.person-verb	出かける	v1
+name.person-verb	出掛ける	v1
+name.person-verb	着替える	v1
+name.person-verb	苛立つ	v5
+name.person-verb	憤る	v5
+name.person-verb	むくれる	v1
+name.person-verb	ふてくされる	v1
+name.person-verb	狼狽える	v1
+name.person-verb	うろたえる	v1
+name.person-verb	涙ぐむ	v5
+name.person-verb	すすり泣く	v5
+name.person-verb	泣き崩れる	v1
+name.person-verb	泣きじゃくる	v5
+name.person-verb	噴き出す	v5
+name.person-verb	嘆く	v5
+name.person-verb	思い出す	v5 t
+name.person-verb	気付く	v5
+name.person-verb	気づく	v5
+name.person-verb	考える	v1 t
+name.person-verb	考え込む	v5
+name.person-verb	思案する	vs
+name.person-verb	受け取る	v5 t
+name.person-verb	差し出す	v5 t
+name.person-verb	渡す	v5 t
+name.person-verb	着る	v1 t
+name.person-verb	脱ぐ	v5 t
+name.person-verb	買う	v5 t
+name.person-verb	読む	v5 t
+name.person-verb	書く	v5 t
+name.person-verb	選ぶ	v5 t
 name.person-say	言っ
 name.person-say	言う
 name.person-say	言い出

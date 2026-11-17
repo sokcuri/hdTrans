@@ -46,6 +46,8 @@ HD_TEST(classes_parse) {
     HD_CHECK_EQ(std::string(t.classes[0].doc), std::string("case particles"));
     HD_CHECK(t.classes[0].index.contains("に"));
     HD_CHECK(!t.classes[0].index.contains("だ"));
+    HD_REQUIRE(t.classes[0].notes.size() == 3);
+    HD_CHECK(t.classes[0].notes[0].empty() && t.classes[0].notes[1] == "the goal" && t.classes[0].notes[2].empty());
 }
 
 HD_TEST(classes_parse_errors) {

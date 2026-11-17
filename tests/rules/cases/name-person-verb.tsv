@@ -1,0 +1,32 @@
+# 규칙: LEX-4820
+rule	input	expected	kind	layer
+names:person-predicate	慌てる白崎を小太刀が面白そうに見る。	has:코다치	fix	lookup
+names:person-predicate	ほれ、と小太刀がテレビ画面を指さす。	has:코다치	fix	lookup
+names:person-predicate	高峰が携帯を見せてくる。	has:타카미네	fix	lookup
+names:person-predicate	笑顔を見せる玉藻。	has:타마모	fix	lookup
+names:person-predicate	玉藻は水着を脱いでいた。	has:타마모	fix	lookup
+names:person-predicate	高峰は鈴木に近づき、ぽんと肩を叩いた。	has:타카미네	fix	lookup
+names:person-predicate	佳奈すけと高峰が逃げだす。	has:타카미네	fix	lookup
+names:person-predicate	高峰が悠然と語る。	has:타카미네	fix	lookup
+names:person-predicate	敬礼してから小太刀はブツを受け取った。	has:코다치	fix	lookup
+names:person-predicate	玉藻が俺の名前を呼ぶ。	has:타마모	fix	lookup
+names:person-predicate	高峰は何も語らない。	has:타카미네	fix	lookup
+names:person-predicate	高峰が語りながら歩く。	has:타카미네	fix	lookup
+names:person-predicate	「高峰が語れば早い」	has:타카미네	fix	lookup
+names:person-predicate	高峰が窓の外をぼんやりと眺めていた。	has:타카미네	fix	lookup
+names:person-predicate	高峰がみつめてくる。	has:타카미네	fix	lookup
+names:person-predicate	高峰がゆびさした。	has:타카미네	fix	lookup
+names:person-predicate	千里は手紙を読んだ。	has:치사토	fix	lookup
+names:person-predicate	「高峰、こっちを見ろ」	has:타카미네	fix	lookup
+names:person-predicate	小太刀が俺の腕を引いて立ち上がらせる。	has:코다치	fix	lookup
+names:person-predicate	千里はくるっと振り返り、汐浜さんに視線を向けた。	has:치사토	fix	lookup
+names:person-predicate	だが 残念ながら 私には彼の姿が見えない。	lacks:스가타	keep	lookup
+names:person-predicate	会場には外国人の姿もちらほらと見える。	lacks:스가타	keep	lookup
+names:person-predicate	彼の姿が見られる。	lacks:스가타	keep	lookup
+names:person-predicate	量は食べない。	lacks:료	keep	lookup
+names:person-predicate	礼は受け取ろう。	lacks:레이	keep	lookup
+names:person-predicate	と、周囲の木々がざわめいた。	lacks:키키	keep	lookup
+names:person-predicate	昼間は仕事に出かける母親から子守りを頼まれている。	lacks:히루마	keep	lookup
+names:person-predicate	「とにかく、風呂、着替え、洗濯物。」	lacks:후로	keep	lookup
+names:person-predicate	「大方、命惜しさに味方を見捨てて逃げたんだろう。」	lacks:오카타	keep	lookup
+names:person-predicate	千里はさして驚く様子もなく、淡々と歩いている。	has:치사토	keep	lookup

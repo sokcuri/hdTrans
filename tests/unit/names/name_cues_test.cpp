@@ -111,6 +111,17 @@ HD_TEST(names_name_cues) {
         {"雷、落ちた", {}},
         {"時雨が降る", {}},
         {"高峰、テントは？", {}},
+        // Person verbs: the active forms of the lemmas of name.person-verb (spec LEX-4820); no passive or
+        // potential (見える is no 見る), no wish, no てある, and after は no verb that takes an object
+        // without one in を.
+        {"高峰が語った。", {{"高峰", '-'}}},
+        {"高峰が逃げようとした。", {{"高峰", '-'}}},
+        {"高峰は俺を見つめた。", {{"高峰", '-'}}},
+        {"高峰は見つめた。", {}},
+        {"高峰が見えた。", {}},
+        {"高峰が見たい。", {}},
+        {"高峰が書いてある。", {}},
+        {"高峰が読める。", {}},
         {"げ、アヤメ！？", {}},
         {"海防艦計3隻", {}},
         {"32村雨改二", {}},

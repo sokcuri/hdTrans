@@ -79,6 +79,8 @@ std::size_t StartsWithMember(ClassId set, std::string_view s);
 std::size_t EndsWithMember(ClassId set, std::string_view s);
 // The members of class set in table order.
 std::span<const std::string_view> ClassMembers(ClassId set);
+// The notes of the members of class set, in the order of ClassMembers ("" for a row without one).
+std::span<const std::string_view> ClassNotes(ClassId set);
 
 namespace internal {
 
@@ -92,6 +94,7 @@ struct WordClass {
     std::string_view name;
     std::string_view doc;
     std::vector<std::string_view> members;  // in table order
+    std::vector<std::string_view> notes;    // the NOTE of each member, "" for none
     std::unordered_set<std::string_view> index;
     std::vector<ClassBucket> buckets;  // the members by size, smallest first
     std::u32string runes;              // sorted, when every member is one character; empty otherwise

@@ -2,9 +2,12 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <functional>
+#include <iterator>
 #include <span>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 #include "core/dict/classes.h"
@@ -12,6 +15,7 @@
 #include "core/names/labels.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 
 namespace hdTrans::names {
 
@@ -470,6 +474,9 @@ enum class Role {
     // a verb of saying or thinking makes it a person too (name.person-speak; spec LEX-4830).
     NamedTopic,
     Other,    // called with 、, or a sentence end after the clause
+    // As Other, but set off by 、 after another 、 of the sentence, where the word may be one of a list
+    // (りんご、みかん、バナナを買った): only a verb that takes no object.
+    Aside,
     // As Topic, but only for what only a person does: no verb of saying or handling after an object (a
     // common word of one kanji: 樹は笑った, not 車はじゃり道の上をがりがり言わせて).
     Act,
@@ -497,8 +504,194 @@ bool SimileAfter(std::string_view s) {
     return false;
 }
 
-bool PersonActIn(std::string_view s, Role role, bool clause) {
+// A form of a verb of name.person-verb and what it asks of the clause.
+struct PersonVerb {
+    // A verb that takes an object, which may stand as the topic (礼は受け取ろう, 量は食べられない): after
+    // は, も or 、 it is a cue only after an object in を in its clause.
+    bool transitive = false;
+    // A verb of saying: as the verbs of name.person-speak, a cue after a named topic with no object.
+    bool say = false;
+    // What may follow the form: anything (語った, 語りながら), a mark or a kanji (a stem: 語り、, 見つめ返す),
+    // or the end of an utterance (a command: 黙れ！, not the potential 黙れる).
+    enum class Follow { Any, Stem, Command } follow = Follow::Any;
+    // The dictionary form or the past, which a noun after it makes a relative clause (仕事に出かける母親).
+    bool final = false;
+};
+
+// The forms of the verbs of name.person-verb, by text, and their passives (笑われ, 呆れられ). Each row
+// is a lemma with its kind in the note (v5 godan, v1 ichidan, vs a verb in する, vk くる) and the
+// flags t (transitive) and say; the one conjugation table (word::Conjugation) makes its active forms
+// only: the dictionary form, the past, the te form, ちゃ, the conditional, the volitional, the
+// causative, the stem before ます, ながら, そう, つつ or がち, the negative stem before ない, ず, ん or
+// ぬ, and the commands. No passive or potential stem is a form, so 見る gives no 見え or 見られ
+// (姿が見えない).
+struct PersonVerbForms {
+    std::unordered_map<std::string, PersonVerb> forms;
+    std::unordered_map<std::string, bool> passives;
+    std::vector<std::size_t> sizes;  // the sizes of forms in bytes, largest first
+    std::vector<std::size_t> passiveSizes;
+};
+
+// The conjugation kind of lemma for its kind note; -1 for none.
+int PersonVerbKind(std::string_view lemma, std::string_view note) {
+    if (note == "v1") return 7;
+    if (note == "vs") return 9;
+    if (note == "vk") return 11;
+    if (note != "v5") return -1;
+    if (lemma.ends_with("行く") || lemma.ends_with("いく")) return word::kKindIku;
+    constexpr std::string_view kEnds[] = {"う", "く", "ぐ", "す", "つ", "む", "ぶ", "", "る", "", "", "", "ぬ"};
+    for (int kind = 0; kind < static_cast<int>(std::size(kEnds)); kind++) {
+        if (!kEnds[kind].empty() && lemma.ends_with(kEnds[kind])) return kind;
+    }
+    return -1;
+}
+
+const PersonVerbForms& PersonVerbTable() {
+    static const PersonVerbForms table = [] {
+        PersonVerbForms t;
+        const auto members = dict::ClassMembers(HDTRANS_CLASS("name.person-verb"));
+        const auto notes = dict::ClassNotes(HDTRANS_CLASS("name.person-verb"));
+        for (std::size_t k = 0; k < members.size() && k < notes.size(); k++) {
+            const std::string_view lemma = members[k];
+            std::string_view note = notes[k];
+            const std::size_t space = note.find(' ');
+            const std::string_view type = note.substr(0, space);
+            const std::string_view flags = space == std::string_view::npos ? std::string_view() : note.substr(space);
+            const int kind = PersonVerbKind(lemma, type);
+            const std::string_view ending = word::Conjugation(kind, 0);
+            if (kind < 0 || ending.empty() || !lemma.ends_with(ending)) continue;
+            const std::string stem(lemma.substr(0, lemma.size() - ending.size()));
+            PersonVerb v;
+            v.transitive = flags.find(" t") != std::string_view::npos;
+            v.say = flags.find(" say") != std::string_view::npos;
+            const auto add = [&](std::string form, PersonVerb::Follow follow, bool final = false) {
+                if (form.find('(') != std::string::npos || form.find("XX") != std::string::npos) return;
+                PersonVerb f = v;
+                f.follow = follow;
+                f.final = final;
+                const auto [it, fresh] = t.forms.emplace(std::move(form), f);
+                if (!fresh) {
+                    // Two lemmas of one form: the looser of the two.
+                    it->second.transitive = it->second.transitive && f.transitive;
+                    it->second.say = it->second.say || f.say;
+                    it->second.follow = std::min(it->second.follow, f.follow);
+                    it->second.final = it->second.final && f.final;
+                }
+            };
+            const auto cell = [&](int branch) { return std::string(word::Conjugation(kind, branch)); };
+            for (const int branch : {0, 3, 5, 6, 7, 17}) {
+                if (!cell(branch).empty() || branch == 0) add(stem + cell(branch), PersonVerb::Follow::Any, branch == 0 || branch == 6);
+            }
+            // The causative: one who has someone do it is a person too (腕を引いて立ち上がらせる). It takes an
+            // object, so after は it needs one in を (not ボケはてめーだよ…笑わせんな).
+            const bool transitive = v.transitive;
+            v.transitive = true;
+            add(kind == 9 ? stem + "させ" : stem + cell(2), PersonVerb::Follow::Any);
+            v.transitive = transitive;
+            const std::string masu = stem + cell(10);
+            for (const std::string_view tail : {"ま", "なが", "そう", "つつ", "がち"}) add(masu + std::string(tail), PersonVerb::Follow::Any);
+            if (text::RuneCount(masu) >= 2) add(masu, PersonVerb::Follow::Stem);
+            const std::string neg = stem + cell(8);
+            add(neg + "な", PersonVerb::Follow::Any);
+            add(stem + cell(9), PersonVerb::Follow::Any);
+            if (kind != 9) {
+                add(neg + "ん", PersonVerb::Follow::Any);
+                add(neg + "ぬ", PersonVerb::Follow::Any);
+            }
+            for (const int branch : {11, 12}) {
+                if (!cell(branch).empty()) add(stem + cell(branch), PersonVerb::Follow::Command);
+            }
+            const std::string passive = kind == 9 ? stem + "され" : stem + cell(1);
+            if (passive.find('(') == std::string::npos && passive.size() > stem.size()) t.passives.emplace(passive, true);
+        }
+        for (const auto& [form, v] : t.forms) t.sizes.push_back(form.size());
+        for (const auto& [form, v] : t.passives) t.passiveSizes.push_back(form.size());
+        for (auto* sizes : {&t.sizes, &t.passiveSizes}) {
+            std::sort(sizes->begin(), sizes->end(), std::greater<>());
+            sizes->erase(std::unique(sizes->begin(), sizes->end()), sizes->end());
+        }
+        return t;
+    }();
+    return table;
+}
+
+// Whether s starts with a noun of a person (母親, 少女): the longest word of kanji or katakana there
+// that has a common sense of a person.
+bool PersonNounAt(const dict::Snapshot& snap, std::string_view s) {
+    std::size_t end = 0;
+    for (std::size_t runes = 0; end < s.size() && runes < 4; runes++) {
+        const text::Rune r = text::DecodeRune(s.substr(end));
+        if (!IsKanji(r.cp) && !IsKatakana(r.cp)) break;
+        end += r.size;
+    }
+    for (std::size_t n = end; n > 0; n -= RuneBefore(s, n).size) {
+        const std::string_view word = s.substr(0, n);
+        bool found = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.source != word || c.codes->sem.HasPrefix("QPN")) continue;
+            if (c.codes->sem.HasCode("VHn")) return true;
+            found = true;
+        }
+        // Only the longest word: 様子 is no 様.
+        if (found) return false;
+    }
+    return false;
+}
+
+// What a form of a command may stand before: the end of the utterance (黙れ！, 黙れよ, 黙れっ).
+constexpr std::string_view kCommandEnds = "、。！？!?…‥」』）)\n 　ーっよ〜";
+
+// The longest form of a verb of name.person-verb that s starts with, where its ending allows (a
+// wish such as 見たい or a state in てある is no act: its object takes が; nor is an act asked of another
+// in てほしい), and its size in bytes; 0 for none.
+std::size_t PersonVerbAt(std::string_view s, PersonVerb& verb) {
+    const PersonVerbForms& t = PersonVerbTable();
+    for (const std::size_t size : t.sizes) {
+        if (size > s.size()) continue;
+        const auto it = t.forms.find(std::string(s.substr(0, size)));
+        if (it == t.forms.end()) continue;
+        const std::string_view tail = s.substr(size);
+        const char32_t next = tail.empty() ? 0 : FirstRune(tail).cp;
+        switch (it->second.follow) {
+            case PersonVerb::Follow::Any:
+                if (it->first.ends_with("た")) {
+                    bool wish = false;
+                    for (const std::string_view w : {"い", "く", "かっ", "かろ", "がる", "がっ", "がら", "がり", "けれ", "さ"}) wish = wish || tail.starts_with(w);
+                    if (wish) continue;
+                }
+                break;
+            case PersonVerb::Follow::Stem:
+                if (next != U'、' && !IsKanji(next)) continue;
+                break;
+            case PersonVerb::Follow::Command:
+                if (next != 0 && !InRunes(next, kCommandEnds)) continue;
+                break;
+        }
+        // てほしい asks the act of another (見て欲しけりゃ…しとけボケ).
+        if ((it->first.ends_with("て") || it->first.ends_with("で")) && (tail.starts_with("欲し") || tail.starts_with("ほし"))) continue;
+        // てある makes the object the subject (名前が書いてある).
+        if (it->second.transitive && (it->first.ends_with("て") || it->first.ends_with("で")) && tail.starts_with("あ") &&
+            !tail.starts_with("あげ")) {
+            continue;
+        }
+        verb = it->second;
+        return size;
+    }
+    return 0;
+}
+
+// Whether s starts with the passive of a verb of name.person-verb (笑われ, 呆れられ).
+bool PersonVerbPassiveAt(std::string_view s) {
+    const PersonVerbForms& t = PersonVerbTable();
+    for (const std::size_t size : t.passiveSizes) {
+        if (size <= s.size() && t.passives.contains(std::string(s.substr(0, size)))) return true;
+    }
+    return false;
+}
+
+bool PersonActIn(std::string_view s, Role role, bool clause, const dict::Snapshot* snap = nullptr) {
     bool object = false;
+    bool subject = false;
     std::size_t runes = 0;
     for (std::size_t i = 0; i < s.size() && runes < kClauseReach; runes++) {
         const std::string_view rest = s.substr(i);
@@ -515,7 +708,27 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
             // no act of its own.
             if (role != Role::Act || !SimileAfter(rest.substr(act))) return true;
         }
+        PersonVerb verb;
+        if (const std::size_t n = wordStart ? PersonVerbAt(rest, verb) : 0; n > 0) {
+            const std::string_view tail = rest.substr(n);
+            // After は, も or 、 a verb that takes an object may have the word as its object (礼は受け取ろう),
+            // unless an object in を stands before it; a named topic may say with none (高峰は語った).
+            // Before the word at a sentence end, the word is the object only with a subject in the clause (俺が
+            // 見つめる千里; not 涙声で尋ねる千里).
+            const bool objectTopic = verb.transitive && role != Role::Subject && !object && !(verb.say && role == Role::NamedTopic) &&
+                                     (clause || subject);
+            // A topic is no subject of a relative clause on a noun of a person, its own subject (昼間は仕事に出かける
+            // 母親; not 千里は驚く様子もなく).
+            const bool relative = role != Role::Subject && verb.final && snap != nullptr && PersonNounAt(*snap, tail);
+            // A stem right after X、 lists nouns (風呂、着替え、洗濯物).
+            const bool listed = (role == Role::Other || role == Role::Aside) && i == 0 && verb.follow == PersonVerb::Follow::Stem;
+            if (!objectTopic && !relative && !listed && !((role == Role::Act || role == Role::Aside) && verb.transitive) &&
+                !(role == Role::Act && SimileAfter(tail))) {
+                return true;
+            }
+        }
         object = object || (i > 0 && rest.starts_with("を"));
+        subject = subject || (i > 0 && rest.starts_with("が"));
         if (wordStart && role == Role::NamedTopic && dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), rest) > 0) return true;
         for (const bool say : {true, false}) {
             if (!wordStart || role == Role::Act) break;
@@ -712,7 +925,16 @@ bool SpeakerOrAgentAt(std::string_view after) {
     if (!after.starts_with("に")) return false;
     const std::string_view rest = after.substr(std::string_view("に").size());
     const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest);
-    return n > 0 && rest.substr(n, kPassiveReach).find("られ") != std::string_view::npos;
+    return (n > 0 && rest.substr(n, kPassiveReach).find("られ") != std::string_view::npos) || PersonVerbPassiveAt(rest);
+}
+
+// Whether the common word key reads as an adverb (大方 대부분), which sets off a clause with 、 as no
+// call does (大方、味方を見捨てて逃げたんだろう).
+bool AdverbKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == key && c.codes->partText.starts_with("E")) return true;
+    }
+    return false;
 }
 
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
@@ -751,11 +973,11 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
     if (after.starts_with("は") || after.starts_with("も")) {
-        return PersonActIn(after.substr(FirstRune(after).size), SpeakingTopic(snap, key) ? Role::NamedTopic : Role::Topic, true);
+        return PersonActIn(after.substr(FirstRune(after).size), SpeakingTopic(snap, key) ? Role::NamedTopic : Role::Topic, true, &snap);
     }
-    if (after.starts_with("、") && (UtteranceStart(before) || TrimEndSpaces(before).ends_with("、"))) {
+    if (after.starts_with("、") && (UtteranceStart(before) || TrimEndSpaces(before).ends_with("、")) && !AdverbKey(snap, key)) {
         const std::string_view rest = after.substr(std::string_view("、").size());
-        return RequestAt(rest) || PersonActIn(rest, Role::Other, true);
+        return RequestAt(rest) || PersonActIn(rest, UtteranceStart(before) ? Role::Other : Role::Aside, true);
     }
     if (text::RuneCount(key) >= 2 && !internal::AllRunes(key, IsHiragana) && FinalCallAt(key, before, after)) return true;
     if (after.empty() || after.starts_with("。") || after.starts_with("！") || after.starts_with("!") || after.starts_with("…")) {
