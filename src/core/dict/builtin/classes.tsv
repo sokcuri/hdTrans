@@ -63,6 +63,7 @@
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
+//= word.adnominal-before-noun	Adnominals that only a noun can follow: a kana noun spelled like a verb form reads as the noun after them (そのかえるは 그 개구리는, あのつきは 저 달은; LEX-5925).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
 //= noun.same-attribute	Nouns of an outcome or a view two people or things can share (結果, 気持ち, 意見), after which 一緒 with は, が or も is 마찬가지 (結果は一緒 결과는 마찬가지).
 //= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
@@ -11011,6 +11012,14 @@ word.scold	コラコラ
 word.scold	こらっ
 word.scold	コラッ
 word.kana-before-word	みな
+word.adnominal-before-noun	この
+word.adnominal-before-noun	その
+word.adnominal-before-noun	あの
+word.adnominal-before-noun	どの
+word.adnominal-before-noun	大きな
+word.adnominal-before-noun	小さな
+word.adnominal-before-noun	おおきな
+word.adnominal-before-noun	ちいさな
 word.someone	誰か
 word.someone	だれか
 word.someone	誰かさん

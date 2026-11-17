@@ -2682,11 +2682,28 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     const std::string_view particle = FirstChar(source);
     if (!AllHiragana(source) || particle.size() == source.size() || !Has("にもやをがはでとへ", particle)) return nullptr;
     const Entry* first = c.group->At(0);
+    // A particle of two kana that is に, と or へ and a も or で yields to its first kana the same way (猫にも + のすごく:
+    // に + ものすごく, 友達とで + かけた: と + でかけた); never には, とは, whose は stays the particle (医者にはなれない; LEX-5922).
+    const bool compound = first != nullptr && first->cls == 'P' && text::RuneCount(source) == 2 && Has("にとへ", particle) &&
+                          Has("もで", source.substr(particle.size()));
     // A plain noun or adverb, not a phrase (というもの) or an adjectival reading (でさえない).
-    if (first == nullptr || (first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))) return nullptr;
+    if (first == nullptr || (!compound && ((first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))))) {
+        return nullptr;
+    }
     const std::string_view before = LastChar(full.substr(0, static_cast<std::size_t>(cursor)));
     const std::string_view host = parent->group->surface;
-    const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana) &&
+    // A noun in kanji or katakana, or one that ends in a title of persons in hiragana (千里ちゃん, お母さん).
+    auto titled = [&] {
+        std::size_t start = host.size();
+        for (int n = 1; n <= 3 && start > 0; n++) {
+            const std::string_view last = LastChar(host.substr(0, start));
+            if (NameClassOf(last) != kClassHiragana) break;
+            start -= last.size();
+            if (n >= 2 && PersonSuffixAt(host.substr(start))) return true;
+        }
+        return false;
+    };
+    const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana || titled()) &&
                            (parent->detail == nullptr || parent->detail->cls != kDetailVerb) && At(parent->Code(0), 0) == '1';
     const bool afterParticle = particle == "も" && first->cls == 'N' && (host == "に" || host == "で" || host == "と" || host == "へ");
     if (!afterNoun && !afterParticle) return nullptr;
@@ -2706,12 +2723,14 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     };
     const Lookup l = DoLookup(rest, kModeGeneral);
     bool found = false;
+    bool verbAfter = false;
     std::size_t reached = 0;
     Record* from = l.count == 0 ? nullptr : after(l.records);
     for (int tries = 0; from != nullptr && tries < 64 && !found; tries++, from = after(from->child)) {
         const Item* w = InsertLateCandidate(full, at, token, from);
         found = ends(w, *from);
         if (found) reached = static_cast<std::size_t>(w->length);
+        if (found) verbAfter = w->detail->cls != kDetailInfo;
     }
     if (!found) return nullptr;
     // Whether some reading at start reaches at least to end.
@@ -2728,6 +2747,10 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     // る, not で + きる).
     // So does a longer particle whose next word reaches as far (とか + くれたり, not と + かくれたり).
     const int reach = at - cursor + static_cast<int>(reached);
+    // にも, とも and へも keep their place where the word after them reaches as far (家にも + ものが, not に + ももの);
+    // とで is said of a pair (AとBとで), and after one noun a verb that its で starts runs further (と + でかける).
+    // A verb after their も keeps them too (祟りともつかない: とも + つかない, not と + もつかない).
+    if (compound && source.ends_with("も") && (verbAfter || reaches(cursor + c.length, cursor + reach))) return nullptr;
     Record* other = after(c.group->records);
     for (int tries = 0; other != nullptr && tries < 64; tries++, other = after(other->child)) {
         const Item* w = InsertLateCandidate(full, cursor, token, other);

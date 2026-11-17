@@ -149,6 +149,7 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool VerbFormSpelling(std::string_view form) const;
+    bool ProvenName(std::string_view key) const;
     bool GodanCausative(std::string_view stem) const;
     bool IchidanPartner(std::string_view stem, std::string_view kana) const;
     bool GodanBase(std::string_view stem) const;

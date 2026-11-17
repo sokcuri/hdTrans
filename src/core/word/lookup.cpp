@@ -577,11 +577,15 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     if (!surface.ends_with(query)) return false;
     const std::string_view prev = LastChar(surface.substr(0, surface.size() - query.size()));
     const std::string_view pc = u.codes->partText;
+    // An adnominal that only a noun can follow (その, 大きな; LEX-5925).
+    const bool adnominal = pc.size() > 1 && pc[1] == '1' &&
+                           dict::EndsWithMember(HDTRANS_CLASS("word.adnominal-before-noun"),
+                                                surface.substr(0, surface.size() - query.size())) > 0;
     switch (NameClassOf(prev)) {
     case kClassHiragana:
     case kClassKanji:
     case kClassKatakana:
-        if (!Has(kKanaBefore, prev) &&
+        if (!Has(kKanaBefore, prev) && !adnominal &&
             !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query)))) {
             return false;
         }
@@ -612,8 +616,13 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     // A noun whose spelling is also the dictionary form, or in two kana the continuative, of a verb reads as the noun
     // only before が, を, や or the で of a noun (かえるや 개구리나, つきを 달을): elsewhere it is the verb (いえにかえる。,
     // かえるだけ, つきにくい; LEX-5925).
+    // After an adnominal that only a noun follows it is the noun (そのかえるは 그 개구리는, あのつきは 저 달은).
     if (pc.size() > 1 && pc[1] == '1' && VerbFormSpelling(u.key)) {
-        return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest);
+        // After the adnominal the key and the kana after it may be a word of their own, whose rules read the key
+        // (このつきの光: つきの 付きの, whose rule gives 달).
+        return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest) ||
+               (adnominal && (NameClassOf(next) != kClassHiragana ||
+                              snapshot.RetrieveRecords(u.key + std::string(next), dict::LookupMode::General).empty()));
     }
     switch (NameClassOf(next)) {
     case kClassHiragana:
@@ -636,7 +645,7 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
 bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const {
     const std::string_view pc = u.codes->partText;
     if (!rest.starts_with("で") || text::RuneCount(u.key) < 2 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
-        snapshot.NamePerson(u.key)) {
+        snapshot.NamePerson(u.key) || ProvenName(u.key)) {
         return false;
     }
     const std::string_view last = LastChar(u.key);
@@ -983,13 +992,29 @@ bool Worker::VerbFormSpelling(std::string_view form) const {
     if (stem.empty()) return false;
     // A longer noun in a continuative is mostly the noun grown from it (くぼみ, ひかり).
     const bool two = text::RuneCount(form) == 2;
+    // A stem of one kana is a verb of its own only in a record that needs no context: one with a rule is read so only
+    // where its rule says (the お of おぎ 荻 is 오다 only after に and a verb).
+    const bool short_stem = text::RuneCount(stem) == 1;
     for (const dict::Candidate& rec : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
         const std::string_view pc = rec.codes->partText;
-        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
+        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4' || (short_stem && rec.rule != 0)) continue;
         const int kind = pc[3] - '0';
         if (kind >= 0 && kind < kConjugationKinds && (Conjugation(kind, 0) == last || (two && Conjugation(kind, 10) == last))) return true;
     }
+    // In two kana it may be the stem, and so the continuative, of an ichidan verb (つき of 尽きる).
+    if (two) {
+        for (const dict::Candidate& rec : snapshot.RetrieveRecords(form, dict::LookupMode::General)) {
+            const std::string_view pc = rec.codes->partText;
+            if (pc.size() == 4 && pc[0] == 'M' && pc[1] == '4' && pc[3] == '7') return true;
+        }
+    }
     return false;
+}
+
+// Whether a cue of the line or its document has shown the name-layer key to be a person's name (ももさんが来た。
+// before ももで).
+bool Worker::ProvenName(std::string_view key) const {
+    return lookupContext.cued != nullptr && lookupContext.cued->find(key) != lookupContext.cued->end();
 }
 
 // Whether form is also the imperative of a godan verb of the dictionary: form without its
