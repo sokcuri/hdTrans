@@ -24,8 +24,8 @@ struct NameCue {
     // An honorific after the word (皐月さん) on a key of two characters or more that is no hiragana
     // nor a katakana spelling of a native word: it holds for the document (spec LEX-4820).
     bool person = false;
-    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the document
-    // where two lines of the document cue it so, as a recurring cue does.
+    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the other lines of
+    // the document too, except where a line keeps the common sense (spec LEX-4820).
     bool acted = false;
     // Any of the cues above before their limits (a title, suffix, honorific, speaker label, call, phrase
     // of naming or predicate of a person): the evidence that names a common word for the document on two
@@ -60,6 +60,10 @@ bool StatusValueAt(std::string_view rest);
 // 力を込める), a status field, or が, は or も and a predicate of name.common-predicate in the clause
 // (敏捷が特筆して高い; spec LEX-5175).
 bool CommonSenseAt(std::string_view after);
+
+// Whether key has a common sense of a plant (玉藻 말) and after starts with name.plant-after, which keeps the
+// plant (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
+bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after);
 
 // Whether before ends in an adnominal that makes the next common word the word (name.word-before: 大きな,
 // 古い, 一本の), not one that points at or feels for a person (name.word-before-not: そんな, 好きな).

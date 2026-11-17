@@ -1,0 +1,20 @@
+# 규칙: LEX-4820
+rule	input	expected	kind	layer
+names:person-carry	高峰が悠然と語る。\nこういう時の高峰の安定感は抜群だ。	has:타카미네의 안정감	fix	fixed
+names:person-carry	高峰が笑った。\nこういう時の高峰の安定感は抜群だ。	has:타카미네의 안정감	fix	fixed
+names:person-carry	玉藻が首をかしげた。\n「どうしたの？」\n玉藻の目が泳いでいる。	has:타마모의	fix	fixed
+names:person-carry	凪が微笑んだ。\n凪の髪が風に揺れる。	has:나기의 머리	fix	fixed
+names:person-carry	千里が笑った。\n山を越えて3千里を歩いた。	has:3천리	keep	fixed
+names:person-carry	千里が笑った。\n千里、待ってくれ。\n千里の声が聞こえる。	has:치사토의 목소리	fix	fixed
+names:person-carry	高峰が笑った。\n三つの高峰を越えた。	has:고봉을	keep	fixed
+names:person-carry	高峰が笑った。\n3つの高峰を越えた。	has:고봉을	keep	fixed
+names:person-carry	高峰が俺を見た。\n高峰の頂に雪が積もる。	lacks:타카미네 정상	keep	fixed
+names:person-carry	千里が笑った。\n千里の彼方まで続く道。	lacks:치사토의 저쪽	keep	fixed
+names:person-carry	千里が笑った。\nその馬は千里を駆けた。	lacks:치사토를	keep	fixed
+names:person-carry	千里が笑った。\n悪事千里を走る。	lacks:치사토를	keep	fixed
+names:person-carry	玉藻が俺を見た。\n岩に玉藻がからみついている。	lacks:타마모가 얽혀	keep	fixed
+names:person-carry	玉藻が俺を見た。\n玉藻の浮かぶ海。	lacks:타마모가 떠오르는	keep	fixed
+names:person-carry	千里が笑った。\n千里を走らせた。	has:치사토를	fix	fixed
+names:person-carry	千里が笑った。\n17歳の千里がいた。	has:치사토가	fix	fixed
+names:person-carry	高峰が笑った。\n高峰の部屋に入った。	has:타카미네의 방	fix	fixed
+names:person-carry	玉藻が笑った。\n玉藻が手を振った。	has:타마모가	fix	fixed
