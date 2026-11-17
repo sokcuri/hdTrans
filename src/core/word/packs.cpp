@@ -1016,8 +1016,9 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     if (i > 0) {
         const std::string_view prev = items[i - 1]->group->surface;
         const bool together = items[i - 1]->tokenIndex == noun->tokenIndex;
+        // An idiom whose noun takes a describing word takes one of kind too (こんなドジ踏む 이런 실수를 하다).
         for (const std::string_view mod : {"の", "そんな", "こんな", "あんな", "その", "この", "あの", "どんな"}) {
-            if (prev == mod && together) return false;
+            if (prev == mod && together && !(c.modified && mod.ends_with("んな"))) return false;
         }
         // Nor a noun with a word that describes it or a noun it ends (大いなる力を 借りる, 欲しい物 言う,
         // 伯爵家継ぐ): the idiom's noun stands bare.
@@ -1026,7 +1027,12 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // An idiom whose noun takes a describing word takes an adjective, a verb or an adnominal before it
         // (悲しい目に 遭う, 重い腰を 上げる); a noun before it still makes a compound.
         const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
-        if (together && ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) return false;
+        // An opening bracket before it (「ドジ踏んだ」) describes nothing.
+        const bool opens = pc == '6' && dict::InClass(HDTRANS_CLASS("mark.open-bracket"), items[i - 1]->group->surface);
+        if (together && !opens &&
+            ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
+            return false;
+        }
     }
     // A noun said again right after the verb restates it with its particle (足 出せ 足を): the words are
     // taken literally.

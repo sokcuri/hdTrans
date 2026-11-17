@@ -1,0 +1,177 @@
+# 규칙: LEX-5793, LEX-5794, LEX-5795, LEX-5798, GRM-4095, GRM-3770
+rule	input	expected	kind	layer
+cx:tea-ready:10	お茶が入りました。	has:차가 준비되었습니다	fix	rewrites
+cx:tea-ready:10	お茶が入ったよ	has:준비됐어	fix	rewrites
+cx:tea-ready:10	コーヒーが入りました	has:준비되었습니다	fix	rewrites
+cx:tea-ready:10	お茶に砂糖が入った	has:들어갔다	keep	rewrites
+cx:tea-ready:10	箱に本が入った	has:들어갔다	keep	rewrites
+dict:jisjk:257373	涙を浮かべて笑う	눈물을 머금고 웃는다	fix	local
+dict:jisjk:257373	涙を浮かべて言った	has:머금고 말했다	fix	local
+dict:jisjk:257373	涙を浮かべている	has:머금고 있다	keep	local
+dict:jisjk:257373	涙を浮かべてしまった	has:머금어버렸다	keep	local
+dict:jisjk:144641	目に涙をためる	has:눈물을 글썽인다	fix	lookup
+dict:jisjk:144641	涙をためて笑った	has:글썽이며 웃었다	fix	lookup
+builtin-pattern:ちゃったし	本を読んじゃってるし	책을 읽어버렸고	fix	builtin-pattern
+builtin-pattern:ちゃったし	食べちゃったし、行こう	has:먹어버렸고, 가자	fix	builtin-pattern
+builtin-pattern:ちゃったし	忘れてしまったし	has:잊어버렸고	fix	builtin-pattern
+cx:narration-style-1:24	「もう食べちゃったし」	has:먹어버렸거든	fix	rewrites
+builtin-pattern:ちゃったし	食べちゃうし	has:먹어버리고	keep	builtin-pattern
+dict:i:1971	全壊する恐れがある	has:완파될 우려	fix	local-ending
+dict:i:1971	雨が降る恐れがある	has:올 우려	fix	local-ending
+dict:jisjk:3467	死ぬ危険がある	has:죽을 위험	fix	local-ending
+dict:jisjk:3467	危険な場所	has:위험한 장소	keep	local-ending
+pack:idiom:ドジを踏む	「ドジ踏んだ」	has:실수를 했어	fix	packs
+pack:idiom:ドジを踏む	「ドジ踏んじゃった」	has:실수를 해버렸어	fix	packs
+pack:idiom:ドジを踏む	ドジ踏んだ	실수를 했다	keep	packs
+dict:w:35272	ヘマをした	실수를 했다	fix	lookup
+dict:w:35273	ポカをやらかした	has:실수를 저질렀다	fix	lookup
+dict:w:35274	ドジった	실수했다	fix	lookup
+dict:jisjk:142788	ドジな奴	has:얼빠진 놈	keep	lookup
+lexical:nchi-house	俺んちに来いよ	has:우리 집에	fix	lookup
+lexical:nchi-house	おいらんちに来いよ	has:우리 집에	fix	lookup
+lexical:nchi-house	お前んち	너희 집	keep	lookup
+cx:narration-style-1:24	「もう食べちゃったし、行こう」	has:먹어버렸고, 가자	keep	rewrites
+lexical:nchi-house	人んちの前で泣くな	has:남의 집	fix	lookup
+dict:w:35300	涙を溜めて笑った	has:글썽이며 웃었다	fix	lookup
+dict:w:35300	目に涙を溜めている	has:글썽이고 있다	keep	lookup
+dict:jisjk:144641	涙をためてしまった	has:글썽여버렸다	keep	lookup
+dict:w:35300	目じりに涙を溜めて、彼女が痛みに耐える。	has:글썽이며,	fix	lookup
+dict:jisjk:257373	涙を浮かべて、彼は言った	has:머금고,	fix	lookup
+cx:tea-ready:5	お風呂が入ったよ。	목욕물이 준비됐어.	fix	rewrites
+cx:tea-ready:5	お風呂が入りました。	has:목욕물이 준비되었습니다	fix	rewrites
+cx:tea-ready:5	お風呂入った？	목욕했어?	keep	rewrites
+cx:tea-ready:5	お風呂に入った。	목욕을 했다.	keep	rewrites
+cx:tea-ready:10	お茶入ったよ。	차 준비됐어.	fix	rewrites
+cx:tea-ready:10	コーヒー入りました。	has:준비되었습니다	fix	rewrites
+cx:tea-ready:10	お茶、入りました。	has:준비되었습니다	fix	rewrites
+cx:tea-ready:10	紅茶が入ったので、どうぞ。	has:준비되었으므로	fix	rewrites
+cx:tea-ready:10	お茶が入ったら呼んでね。	has:준비되면	fix	rewrites
+cx:tea-ready:10	お茶が入ったコップ	차가 들어간 컵	keep	rewrites
+cx:tea-ready:10	コーヒーが入ったカップを置いた。	커피가 들어간 컵을 두었다.	keep	rewrites
+cx:tea-ready:10	お湯が入った鍋	뜨거운 물이 들어간 냄비	keep	rewrites
+cx:tea-ready:10	お茶が入ってるペットボトル	차가 들어가 있는 페트병	keep	rewrites
+cx:tea-ready:10	お茶が入っている缶	차가 들어가 있는 캔	keep	rewrites
+cx:tea-ready:10	この缶にはお茶が入っている。	이 캔에는 차가 들어가 있다.	keep	rewrites
+dict:jisjk:41024	ご存じですか？	알고 계십니까?	fix	lookup
+dict:jisjk:41024	この人をご存じですか。	이 사람을 알고 계십니까.	fix	lookup
+dict:jisjk:41024	ご存じでしょうか	알고 계실까요	fix	lookup
+dict:jisjk:78034	御存知ですか？	알고 계십니까?	fix	lookup
+dict:jisjk:41024	ご存じですよね？	알고 계시네요?	fix	lookup
+dict:jisjk:41024	もうご存じですね。	이제 알고 계시네요.	fix	lookup
+dict:jisjk:41024	ご存じだろう。	알고 계실 것이다.	fix	lookup
+dict:w:35320	ご存じないですか？	모르십니까?	fix	lookup
+dict:w:35321	ご存知ないですか？	모르십니까?	fix	lookup
+dict:w:35322	御存じないですか？	모르십니까?	fix	lookup
+dict:w:35320	ご存じなかった。	모르셨다.	fix	lookup
+dict:w:35320	ご存じなくて困った。	모르셔서 곤란했다.	fix	lookup
+dict:words-phrases:100	ご存じありませんか？	모르십니까?	fix	lookup
+dict:words-phrases:103	御存知ありませんか？	모르십니까?	fix	lookup
+dict:w:35325	ご存じの方はいますか？	아시는 분은 있습니까?	fix	lookup
+dict:w:35328	御存知の方はいらっしゃいますか。	아시는 분은 계십니까.	fix	lookup
+dict:w:14969	存じません。	모릅니다.	fix	lookup
+dict:w:14969	存じませんでした。	몰랐습니다.	fix	lookup
+dict:jisjk:341104	ご存知のはずです。	아실 것입니다.	fix	lookup
+dict:jisjk:136981	だいじない。	괜찮다.	fix	lookup
+dict:jisjk:365507	ご存じでしたか？	알고 계셨습니까?	keep	lookup
+dict:jisjk:149149	ご存じの通り	아시는 대로	keep	lookup
+dict:jisjk:149149	ご存知のとおり、彼は来ない。	아시는 대로, 그는 오지 않는다.	keep	lookup
+dict:jisjk:149151	ご存じのように、	아시다시피,	keep	lookup
+dict:w:14970	存じております。	알고 있습니다.	keep	lookup
+dict:jisjk:202040	元気ない。	기운이 없다.	keep	lookup
+cx:nchi-home:10	田中さんちに行った。	타나카 씨네 집에 갔다.	fix	rewrites
+cx:nchi-home:10	俺んちに来いよ	!rule:cx:nchi-home:10	keep	rewrites
+cx:nchi-home:20	田中んちに行った。	타나카네 집에 갔다.	fix	rewrites
+cx:nchi-home:20	皆んちに集まろう。	모두네 집에 모이자.	fix	rewrites
+cx:nchi-home:20	友達んちに泊まった。	!rule:cx:nchi-home:20	keep	rewrites
+cx:nchi-home:30	友達んちに泊まった。	친구 집에 묵었다.	fix	rewrites
+cx:nchi-home:30	親戚んちに泊まる。	친척 집에 묵는다.	fix	rewrites
+cx:nchi-home:30	友達んちは広い。	친구 집은 넓다.	fix	rewrites
+cx:nchi-home:30	団地に住んでいる。	단지에 살고 있다.	keep	rewrites
+cx:nchi-home:30	うんち	똥	keep	rewrites
+cx:nchi-home:30	なんちゃって	농담이야	keep	rewrites
+cx:nchi-home:30	お前んち	너희 집	keep	rewrites
+cx:nchi-home:40	お母さんちに行く。	어머니네 집에 간다.	fix	rewrites
+cx:nchi-home:40	佐藤くんちで遊んだ。	사토 군네 집에서 놀았다.	fix	rewrites
+cx:nchi-home:40	ドジっ子	!rule:cx:nchi-home:40	keep	rewrites
+cx:nchi-de:10	友達んちで遊んだ。	친구 집에서 놀았다.	fix	rewrites
+cx:nchi-de:10	友達んちに泊まった。	!rule:cx:nchi-de:10	keep	rewrites
+lexical:nchi-house	僕んちで遊ぼう。	우리 집에서 놀자.	fix	lookup
+lexical:nchi-house	他人んちで騒ぐな。	남의 집에서 떠들지 마.	fix	lookup
+dict:w:35330	へまをした。	실수를 했다.	fix	lookup
+dict:w:35330	へまをやらかした。	실수를 저질렀다.	fix	lookup
+dict:w:35331	ぽかをやった。	실수를 했다.	fix	lookup
+dict:w:35331	ぽかんとした。	멍했다.	keep	lookup
+dict:w:35332	このドジ！	이 덜렁이!	fix	lookup
+dict:jisjk:142788	ドジだなあ。	덜렁이구나.	fix	lookup
+dict:jisjk:142788	本当にドジね。	정말 덜렁이네.	fix	lookup
+dict:jisjk:142788	私ってドジだから。	나는 덜렁이니까.	fix	lookup
+dict:jisjk:142782	どじだなあ。	덜렁이구나.	fix	lookup
+dict:w:35333	ドジな奴	rule:dict:w:35333=얼빠%C1@	keep	local
+dict:w:35333	ドジなところ	얼빠진 곳	keep	local
+dict:w:35334	どじな奴	얼빠진 놈	keep	local
+dict:w:35333	ドジだなあ。	!rule:dict:w:35333	keep	local
+dict:jisjk:144603	涙を浮べて笑った。	눈물을 머금고 웃었다.	fix	local
+dict:w:35329	涙をたたえて微笑んだ。	눈물을 머금고 미소 지었다.	fix	local
+dict:jisjk:144634	涙を湛えて微笑んだ。	눈물을 머금고 미소 지었다.	fix	local
+dict:jisjk:257373	涙を浮かべてみせた。	눈물을 머금어 보였다.	keep	local
+dict:jisjk:144641	涙をためてみせた。	눈물을 글썽여 보였다.	keep	local
+dict:w:35300	涙を溜めてみせた。	눈물을 글썽여 보였다.	keep	local
+dict:jisjk:144603	涙を浮べていた。	눈물을 머금고 있었다.	keep	local
+dict:jisjk:144634	目に涙を湛えていた。	눈에 눈물을 머금고 있었다.	keep	local
+dict:w:35329	涙をたたえた瞳	눈물을 머금은 눈동자	keep	local
+dict:jisjk:79393	爆発する危険性がある。	폭발할 위험성이 있다.	fix	local-ending
+dict:jisjk:79393	感染する危険性が高い。	감염할 위험성이 높다.	fix	local-ending
+dict:jisjk:79393	死ぬ危険性があります。	죽을 위험성이 있습니다.	fix	local-ending
+dict:jisjk:79393	その危険性は低い。	그 위험성은 낮다.	keep	local-ending
+dict:jisjk:79393	二次災害の危険性がある。	이차 재해의 위험성이 있다.	keep	local-ending
+dict:jisjk:79393	失敗を恐れるな。	실패를 두려워하지 마.	keep	local-ending
+cx:set-timer:10	目覚ましをセットした。	자명종을 맞추었다.	fix	rewrites
+cx:set-timer:10	目覚ましを7時にセットした。	자명종을 7시에 맞추었다.	fix	rewrites
+cx:set-timer:10	タイマーを3分にセットする。	타이머를 3분에 맞춘다.	fix	rewrites
+cx:set-timer:10	アラームをセットして寝た。	알람을 맞추어 잤다.	fix	rewrites
+cx:set-timer:10	髪をセットした。	!rule:cx:set-timer:10	keep	rewrites
+cx:set-timer:20	アラームをセットしておいた。	알람을 맞춰 두었다.	fix	rewrites
+cx:set-timer:20	髪をセットしておいた。	!rule:cx:set-timer:20	keep	rewrites
+dict:jisjk:57270	2セットマッチ	2세트 매치	fix	local
+dict:jisjk:57270	3セットマッチで勝った。	3세트 매치로 이겼다.	fix	local
+dict:jisjk:57270	マッチを擦った。	!rule:dict:jisjk:57270	keep	local
+dict:words-phrases:90	ヒビが入った。	금이 갔다.	fix	lookup
+dict:words-phrases:90	壁にヒビが入っている。	벽에 금이 가 있다.	fix	lookup
+dict:words-phrases:90	ひびが入った。	금이 갔다.	keep	lookup
+dict:words-phrases:91	もうご存じのことと思います。	이제 아시는 바라고 생각합니다.	fix	lookup
+dict:words-phrases:96	陛下もご存じのはずです。	폐하도 아실 것입니다.	fix	lookup
+dict:words-phrases:97	御存じのはずだ。	아실 것이다.	fix	lookup
+pack:idiom:ドジを踏む	おまえがこんなドジ踏むなんてな。	네가 이런 실수를 하다니.	fix	packs
+cx:nchi-home:30	「……とんち？」	「……톤치?」	keep	rewrites
+dict:words-phrases:105	なにかご存じありませんか？	뭔가 아시는 게 없습니까?	fix	local
+dict:words-phrases:106	何かご存知ありませんか。	뭔가 아시는 게 없습니까.	fix	local
+dict:words-phrases:105	この人をご存じありませんか？	!rule:dict:words-phrases:105	keep	local
+dict:w:35320	ご存じない。	모르신다.	fix	lookup
+dict:w:35320	誰もご存じない	아무도 모르신다	fix	lookup
+dict:w:35320	ご存じないと思います	has:모르신다고	fix	lookup
+dict:w:35320	ご存じない人	모르시는 사람	fix	lookup
+dict:w:35323	御存知ない人	모르시는 사람	fix	lookup
+dict:w:35324	ごぞんじない人	모르시는 사람	fix	lookup
+dict:w:35320	まだご存じないようですね	has:모르시는 것 같	fix	lookup
+dict:w:35320	ご存じないとは	has:모르신다고	fix	lookup
+cx:notice-words-1:25	ご存じない方もいるでしょう	has:모르시는 분도	fix	rewrites
+cx:notice-words-1:25	ご存じない方がいいこともあります	!rule:cx:notice-words-1:25	keep	rewrites
+cx:honoured-copula:40	良くご存知でいらっしゃる	잘 알고 계신다	fix	rewrites
+cx:honoured-copula:40	ご存じでいらっしゃいますか	알고 계십니까	fix	rewrites
+cx:honoured-copula:40	よくご存じでいらっしゃいますね	has:잘 알고 계시군요	fix	rewrites
+cx:honoured-copula:40	元気でいらっしゃる	!rule:cx:honoured-copula:40	keep	rewrites
+dict:jisjk:41024	ご存じだ	알고 계신다	fix	lookup
+dict:jisjk:41024	彼はご存じだ	그는 알고 계신다	fix	lookup
+dict:w:35336	ドジばかりする	has:실수만	fix	local
+dict:w:35336	ドジをしてしまった	has:실수를	fix	local
+dict:w:35336	とんだドジ	has:실수	fix	local
+dict:w:35336	ドジした	has:실수했다	fix	local
+dict:w:35337	どじをした	has:실수를	fix	local
+dict:w:35332	このドジ！	has:덜렁이	keep	local
+dict:w:35332	私はドジだから	has:덜렁이	keep	local
+dict:words-phrases:110	おじさんちに泊まる	has:아저씨네 집에	fix	lookup
+dict:words-phrases:111	おばさんちで遊んだ	has:아줌마네 집에서	fix	lookup
+dict:words-phrases:114	みんなんちに行く	has:모두네 집에	fix	lookup
+cx:nchi-home:15	田中ちゃんちに行く	has:타나카짱네 집에	fix	rewrites
+cx:nchi-home:15	花子ちゃんちで遊ぶ	!rule:cx:nchi-home:15	keep	rewrites
+cx:nchi-home:40	りんごのさんちは青森だ	!rule:cx:nchi-home:40	keep	rewrites

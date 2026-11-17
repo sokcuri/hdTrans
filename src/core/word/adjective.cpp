@@ -193,6 +193,15 @@ bool Item::RunDakeiyoCase8Query() {
     const std::string_view tail = From(text, start + directLength);
     const int scanOffset = base.scanOffset;
     if (!w->MatchDictionary(tail, groupText, '8', 'X')) return false;
+    // LEX-5793: where the dictionary has the stem with な as an adjective (ご存じな of ご存じない,
+    // だいじな), ない after the stem is that adjective, not the adnominal な and いる.
+    if (tail.starts_with(kJaNa) && tail.substr(kJaNa.size()).starts_with("い")) {
+        const std::string key = std::string(groupText) + std::string(kJaNa);
+        const std::string query = std::string(groupText) + std::string(tail);
+        for (const Record* r = w->DoLookup(query, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (At(r->partCode, 1) == '7' && r->source == key) return false;
+        }
+    }
     length = base.kind != 'X' ? scanOffset + directLength : directLength;
     const std::string_view second = From(tail, scanOffset);
     if (!w->MatchDictionary(second, "", '6', '8')) return false;

@@ -327,6 +327,7 @@
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.thought-open	Marks that open a thought, which an adjective drawn out in it does not make a cry (（む、難しい〜〜） 어렵다~~).
 //= mark.thought-close	Marks that close what mark.thought-open opens.
+//= mark.open-bracket	Opening brackets and quotes, after which an idiom's noun starts a phrase, no word describes it (「ドジ踏んだ」).
 //= mark.stretch	Marks that stretch an い-adjective at the end of its phrase into a cry (暑いー！ 더워~!, 痛い～ 아파~).
 //= mark.lengthening	Marks that draw out the word before them: after a final な of 思う they make it the speaker's opinion (思うなぁ, 思うなー).
 //= mark.long-vowel	Long marks that draw out a kana inside a word: a copy of a word drawn out with them is the same word (すごい|すごーい).
@@ -10449,6 +10450,17 @@ mark.thought-open	（
 mark.thought-open	(
 mark.thought-close	）
 mark.thought-close	)
+mark.open-bracket	「
+mark.open-bracket	『
+mark.open-bracket	（
+mark.open-bracket	(
+mark.open-bracket	【
+mark.open-bracket	〈
+mark.open-bracket	《
+mark.open-bracket	〔
+mark.open-bracket	［
+mark.open-bracket	“
+mark.open-bracket	‘
 mark.stretch	ー
 mark.stretch	～
 mark.stretch	〜

@@ -40,7 +40,7 @@ dict:w:32115	ただ熱を出せば苦しいし、転べば痛いし、食べ物�
 dict:w:32115	熱を測るつもりなのだろう、トゥーリの汚い手が自分に向かって伸びてくる。	has:열을 잴 생각	keep	lookup
 dict:w:32119	そのままぶっ倒れ、知恵熱を出して寝込んだ。	has:지혜열이 나 앓아누웠다	fix	lookup
 dict:w:32116	その関係にヒビを入れてしまうのが、なんとも残念に思えた。	has:관계에 금이 가게 해버리는	fix	lookup
-dict:w:32116	壁にヒビが入った。	벽에 금이 들어갔다.	keep	lookup
+dict:w:32116	壁にヒビが入った。	벽에 금이 갔다.	keep	lookup
 dict:w:32118	「……まだ、頭痛い。寝たい」	has:아직, 머리 아프다.	fix	lookup
 dict:w:32118	思わず頭痛がしてくる。	has:두통이	keep	lookup
 dict:w:32118	「エル……。大丈夫だ、少し頭痛がしただけだ。」	has:조금 두통이 났을 뿐이야	keep	lookup

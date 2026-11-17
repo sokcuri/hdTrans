@@ -8,7 +8,7 @@ rewrite:initial-sound	謹・賀・新・年。	근·하·신·년.	keep	rewrites
 rewrite:initial-sound	筋トレすれば命中率が上がるんですか？	근력 운동 하면 명중률이 오릅니까?	fix	rewrites
 rewrite:initial-sound	出席率があんまり悪いんで。	출석률이 너무 나빠서.	fix	rewrites
 rewrite:initial-sound	黒色火薬の配合率ぐらいか。	흑색 화약 배합률 정도인가.	fix	rewrites
-rewrite:initial-sound	中途退学率をご存じですか？	중도 퇴학률을 아시는 바입니까?	fix	rewrites
+rewrite:initial-sound	中途退学率をご存じですか？	중도 퇴학률을 알고 계십니까?	fix	rewrites
 rewrite:initial-sound	技の修得率が一向に上がらない。	기술 습득률이 전혀 오르지 않는다.	fix	rewrites
 rewrite:initial-sound	合格率の高い幼稚園だった。	합격률이 높은 유치원이었다.	fix	rewrites
 rewrite:initial-sound	車列が２つに分かれて行きます。	차열이 2개로 나누어져 갑니다.	fix	rewrites
@@ -31,7 +31,7 @@ rewrite:initial-sound	藩論は四分五裂	번론은 사분오열	keep	rewrites
 rewrite:initial-sound	何が化石の陳列だ！	무엇이 화석 진열이야!	keep	rewrites
 rewrite:initial-sound	熱烈なジャズファン。	열렬한 재즈 팬.	keep	rewrites
 rewrite:initial-sound	最大倍率の選手が先制だ！	최대 배율의 선수가 선제야!	keep	rewrites
-rewrite:initial-sound	自由律 ご存じない？	자유율 아시는 바 없어?	keep	rewrites
+rewrite:initial-sound	自由律 ご存じない？	자유율 모르셔?	keep	rewrites
 rewrite:initial-sound	（峰月律）うん…。	(미네츠키 리츠) 응….	keep	rewrites
 rewrite:initial-sound	今の日本の法律には問題がある。	지금의 일본의 법률에는 문제가 있다.	keep	rewrites
 rewrite:initial-sound	もっと確率は高い	좀 더 확률은 높다	keep	rewrites
