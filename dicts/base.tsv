@@ -140116,7 +140116,8 @@ ttt	ttt	K110			GN				jisjk:201744
 勘校	교정	N110	VBkVSw	Hd	GN				jisjk:170189		
 勘案	감안	N110		Hd	GN				jisjk:14599		
 勘気	꾸지람	N110	UTs		GN				jisjk:14596		
-勘繰り	의 억측	N110			GN				jisjk:151652		
+勘繰り	억측	N110			GN				jisjk:151652		
+勘ぐり	억측	N110			GN			勘ぐり는 勘繰り처럼 명사 `억측`이다(LEX-5962).	lex:5962:勘ぐり-1		
 勘考	깊은 생각	N110		Hd	GN				jisjk:170187		
 勘航	감항	N110			GN				jisjk:14602		
 勘解由小路町	카게유코우지쵸	I130	QCTVPl		GN				jisjk:281664		
@@ -177991,7 +177992,7 @@ ttt	ttt	K110			GN				jisjk:201744
 学問的	학문적	N110			GN				jisjk:171332		
 学問的に	학문적으로	E300			GN				jisjk:122981		
 学園	학원	N110	VBl		GN				jisjk:38409		
-学園中	가쿠엔나카	N130	QCTVPl		GN				jisjk:287401		
+学園中	학원 전체	N130	QCTVPl		GN				jisjk:287401		
 学園前	가쿠엠마에	N130	QCTVPl		GN				jisjk:287405		
 学園北	가쿠엥키타	N130	QCTVPl		GN				jisjk:287392		
 学園南	가쿠엠미나미	N130	QCTVPl		GN				jisjk:287408		
@@ -246617,9 +246618,9 @@ ttt	ttt	K110			GN				jisjk:201744
 楊貴妃	양귀비	N110	VHn		GN				jisjk:254988		
 楊起国	양기국	N130	QPN		GN				jisjk:208457		
 楊鍾	양중	N110			GN				jisjk:28862		
-楓	단풍	N110			GN				jisjk:116209		
+楓	단풍	N110	XXX		GN				jisjk:116209		
 楓	카에데	N130	QCTVPl		GN				jisjk:259201		
-楓	풍	N110	XXX	On	GN				jisjk:281316		
+楓	풍	N110		On	GN				jisjk:281316		
 楓ケ丘	카에데가오카	N130	QCTVPl		GN				jisjk:281317		
 楓台	카에데다이	N130	QCTVPl		GN				jisjk:281318		
 楓江湾	후코왕	I110	QCT		GN				jisjk:88066		
