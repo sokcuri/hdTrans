@@ -30,7 +30,7 @@ normalize:spelling-variant	……いやいや、そんなことは有りえん�
 normalize:spelling-variant	あ、朝っぱらってことはないと思うな。	아, 이른 아침 라는 것은 없다고 생각해.	keep	normalize
 normalize:spelling-variant	「いえ、さすがにそんなことはないわ」	「아뇨, 아무래도 그렇지 않아」	keep	normalize
 normalize:spelling-variant	「お姉ちゃんを、大事にしてあげて？」	「언니를, 소중히 해 줘?」	keep	normalize
-normalize:spelling-variant	こ、これは困ったことになるのですぞ！	이, 이것은 곤란하게 되는 것이지!	keep	normalize
+normalize:spelling-variant	こ、これは困ったことになるのですぞ！	이, 이것은 곤란하게 됩니다!	keep	normalize
 normalize:spelling-variant	「このまま何事もなければいいけれど」	「이대로 아무 일도 없으면 좋지만」	keep	normalize
 normalize:spelling-variant	「こらっ、余計なことしなさんなっ！」	「이봐, 쓸데없는 일 하지 말아!」	keep	normalize
 normalize:spelling-variant	そう……決して無茶なことはしないで。	그렇게……결코 무리한 것은 하지 마.	keep	normalize

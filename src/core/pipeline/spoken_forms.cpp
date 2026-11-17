@@ -1036,7 +1036,7 @@ bool OldCopulaJato(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// The Kansai そや (そうだ) where a clause starts, before な, ね, から, ねん, ろ, で, a mark or the end (そやけど stays for its own row) (そやな 그렇지,
+// The Kansai そや and せや (そうだ) where a clause starts, before な, ね, から, ねん, ろ, で, a mark or the end (そやけど stays for its own row) (そやな 그렇지,
 // そやから 그러니까, そやねん 그렇다니까, そやろ 그렇지): そうだ, だから for そやから, そうなんだ for そやねん, そうだろ for そやろ;
 // with そら or そりゃ before it, そりゃ and the same (そらそやろ そりゃそうだろ).
 bool KansaiSoya(std::string_view s, size_t pos, Match& m) {
@@ -1047,8 +1047,12 @@ bool KansaiSoya(std::string_view s, size_t pos, Match& m) {
     // そら or そりゃ before it is そりゃ (そらそやろ そりゃそうだろ, そりゃそやな).
     m.group[2] = {};
     if (Lit(s, p, "そら") || Lit(s, p, "そりゃ")) m.group[2] = "そりゃ";
-    if (!Lit(s, p, "そや")) return false;
+    const bool se = s.substr(p).starts_with("せや");
+    if (!Lit(s, p, "そや") && !Lit(s, p, "せや")) return false;
     const std::string_view after = s.substr(p);
+    // せやな, せやから and せやけど are words of the dictionary.
+    // せやろ is the conjecture KansaiConjecture reads (せやろか そうだろうか).
+    if (se && (after.starts_with("な") || after.starts_with("から") || after.starts_with("けど") || after.starts_with("ろ"))) return false;
     if (after.starts_with("から")) {
         m.group[1] = "だから";
         m.end = p + std::string_view("から").size();
@@ -1836,7 +1840,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "とちゃう")) {
         text = ReplaceAll(text, KansaiTochau, [](const Match& m) { return std::string(m.group[1]); });
     }
-    if (dialectForms && Contains(text, "そや")) {
+    if (dialectForms && (Contains(text, "そや") || Contains(text, "せや"))) {
         text = ReplaceAll(text, KansaiSoya, [](const Match& m) { return Cat({m.group[2], m.group[1]}); });
     }
     if (dialectForms && Contains(text, "じゃと")) {
