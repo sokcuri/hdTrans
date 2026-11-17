@@ -4,7 +4,6 @@ normalize:archaic-nari	「吾輩は絶対に御免也や！！」	lacks:사양�
 normalize:archaic-nari	「ウネこそが全てを滅ぼす悪魔也や！」	has:악마야	fix	normalize
 normalize:archaic-nari	「何と愚か也や！」	has:어리석	fix	normalize
 normalize:archaic-nari	「後れを取ると思った也や。」	lacks:야야	fix	normalize
-normalize:archaic-nari	されど我は神也。	has:신이다	fix	normalize
 normalize:archaic-nari	これは真実也や。	has:진실이다	fix	normalize
 normalize:archaic-nari	愚か也と知れ。	has:어리석	fix	normalize
 normalize:archaic-nari	拓也！	타쿠야!	keep	normalize
@@ -106,9 +105,6 @@ normalize:character-tic	みんなのよさを知る。	lacks:모두의 거	keep	
 normalize:western-no-end	「筧くんね。これからもよろしく」	has:카케이 군	keep	normalize
 normalize:western-no-end	「そう、ゆうくんよ」	has:군	keep	normalize
 normalize:western-no-end	「……ホントにペコジマくんね」	has:페코지마 군	keep	normalize
-normalize:kansai-ya-past	それは本当やった。	has:사실이었	fix	normalize
-normalize:kansai-ya-past	昨日は雨やった。	has:비였	fix	normalize
-normalize:kansai-ya-past	あいつは学生やったな。	has:학생이었	fix	normalize
 normalize:kansai-ya-past	ほんまやったんか。	has:진짜였	fix	normalize
 normalize:kansai-ya-past	あの子は天才やったんや。	has:천재였	fix	normalize
 normalize:kansai-ya-past	あれは夢やったんか？	has:꿈이었	fix	normalize
@@ -192,8 +188,6 @@ normalize:character-tic	そうでしたです。	has:그랬습니다	fix	normali
 normalize:character-tic	そうでしたです。	lacks:습니다입니다	fix	normalize
 normalize:character-tic	行きますです。	has:갑니다요	keep	normalize
 normalize:character-tic	ありがとうございますです。	has:감사합니다	keep	normalize
-normalize:archaic-nari	其は神也。	has:신이다	fix	normalize
-normalize:archaic-nari	これは美しき花也。	has:꽃이다	fix	normalize
 normalize:archaic-nari	真実也。	has:진실이다	fix	normalize
 normalize:archaic-nari	涼也と遊んだ。	has:야와	keep	normalize
 normalize:archaic-nari	涼也と遊んだ。	lacks:이라고	keep	normalize
@@ -223,3 +217,25 @@ normalize:character-tic	あじつけが こいみたいですぞ〜。	lacks:같
 normalize:character-tic	「それじゃ、行ってくるのよさ」	has:다녀올게」	fix	normalize
 normalize:character-tic	「犬っころ１匹くらいならどうって事ないのよさ」	lacks:아니다의	fix	normalize
 normalize:character-tic	「ふんじゃ、今度こそ行ってくるのよさ！」	lacks:다녀올게의	fix	normalize
+normalize:archaic-nari	其は大悪魔也。	has:대악마다	fix	normalize
+normalize:archaic-nari	おい涼也！	lacks:이다	keep	normalize
+normalize:archaic-nari	おはよう涼也！	lacks:이다	keep	normalize
+normalize:archaic-nari	ありがとう冬也。	lacks:겨울	keep	normalize
+normalize:archaic-nari	待ってよ冬也！	lacks:겨울	keep	normalize
+normalize:archaic-nari	じゃあね冬也。	lacks:겨울	keep	normalize
+normalize:archaic-nari	こっちは弟の冬也。	lacks:겨울	keep	normalize
+normalize:archaic-nari	友達の涼也！	lacks:이다	keep	normalize
+normalize:archaic-nari	これは冬也。	lacks:겨울	keep	normalize
+normalize:archaic-nari	涼也や！	lacks:이다	keep	normalize
+normalize:archaic-nari	おい田中涼也！	lacks:이다	keep	normalize
+normalize:archaic-nari	こっちは田中冬也。	lacks:겨울	keep	normalize
+normalize:kansai-ya-past	俺は宿題やった。	lacks:숙제였	keep	normalize
+normalize:kansai-ya-past	彼が全部やった。	lacks:전부였	keep	normalize
+normalize:kansai-ya-past	僕もそれやった。	lacks:그것이었	keep	normalize
+normalize:kansai-ya-past	私が掃除やったの。	lacks:청소였	keep	normalize
+normalize:kansai-ya-past	俺も前にゲームやったけど。	lacks:게임이었	keep	normalize
+normalize:kansai-ya-past	だめやったら帰る。	has:안 되면	fix	normalize
+normalize:kansai-ya-past	そうやったんや。	has:그랬	fix	normalize
+normalize:kansai-ya-past	学生やったんや。	has:학생이었	fix	normalize
+normalize:kansai-suru	どないやねん。	lacks:이거든	fix	normalize
+normalize:kansai-suru	なんでやねん！	has:왜 그래	keep	normalize

@@ -302,39 +302,10 @@ size_t KanaNounEnd(std::string_view head) {
     return 0;
 }
 
-// Whether a subject or a topic frames the noun before pos in its clause (昨日は雨, それは本当), with no object's を:
-// then the noun is said of it and the や after it is the copula, not the verb やる with its object.
-bool SubjectFrames(std::string_view s, size_t pos) {
-    size_t start = pos;
-    while (start > 0 && (IsKanjiClass(LastRune(s.substr(0, start)).cp) || IsKatakanaRune(LastRune(s.substr(0, start)).cp) ||
-                         LastRune(s.substr(0, start)).cp == U'ー')) {
-        start -= LastRune(s.substr(0, start)).size;
-    }
-    if (start == pos) start = pos - KanaNounEnd(s.substr(0, pos));
-    const std::string_view noun = s.substr(start, pos - start);
-    // A noun of time or of how often says when, not what (今度やったら, 一度やった).
-    if (noun.empty() || dict::InClass(HDTRANS_CLASS("noun.time-end"), noun) || dict::InClass(HDTRANS_CLASS("adverb.frequency"), noun)) return false;
-    size_t from = start;
-    while (from > 0) {
-        const text::Rune r = LastRune(s.substr(0, from));
-        if (In(r.cp, U"。！？!?」「『、，, 　")) break;
-        from -= r.size;
-    }
-    const std::string_view clause = s.substr(from, start - from);
-    if (clause.find("を") != std::string_view::npos) return false;
-    // The particle follows a noun, not another particle (大学でも, 君にも).
-    for (const std::string_view w : {"は", "が", "も"}) {
-        for (size_t at = clause.find(w); at != std::string_view::npos; at = clause.find(w, at + w.size())) {
-            if (at > 0 && !In(LastRune(clause.substr(0, at)).cp, U"でにとへらてど")) return true;
-        }
-    }
-    return false;
-}
-
 // The past やった, its conditional やったら and やったん of the Kansai copula and the やし of a reason after a noun
-// (昨日は雨やった 어제는 비였다, ほんまやったんか, 学生やし 학생이고) (spec LEX-5996). The verb やる with an object
-// whose を is dropped reads as it is (宿題やった, 今度やったら): the past is the copula where a subject
-// or a topic frames the noun, after a noun in kana (ほんまやった, そうやった) or before the Kansai んか, んや and やん.
+// (ほんまやったんか 진짜였어?, 学生やったんや, 学生やし 학생이고) (spec LEX-5996). The verb やる with an object
+// whose を is dropped reads as it is (宿題やった, 俺は宿題やった, 今度やったら): the past is the copula after a noun
+// in kana of class copula.kansai-past-noun (ほんまやった, そうやった) or before the Kansai んか, んや and やん.
 bool YaPast(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
     if (!YaFollows(head) || head.ends_with("こう") || head.ends_with("ああ")) return false;
@@ -351,18 +322,14 @@ bool YaPast(std::string_view s, size_t pos, Match& m) {
         return true;
     }
     // The kana nouns said of something, not a person (あたしやったげる, お兄ちゃんやったぞ: a doer), an adverb (ようやった,
-    // これだけやった) or a noun of what one does (これやったら).
-    bool kana = false;
-    if (const size_t n = KanaNounEnd(head); n > 0) {
-        for (const std::string_view w : {"ほんま", "うそ", "ほんと", "ほんとう", "そう", "こと", "はず", "わけ", "みたい", "つもり", "まま",
-                                         "きれい", "すてき", "だめ", "いや", "すき", "きらい", "へん", "たいへん", "じょうず", "へた", "あほ", "ばか"}) {
-            kana = kana || head.substr(head.size() - n) == w;
-        }
-    }
+    // これだけやった) or a noun of what one does (これやったら). A subject before the noun does not tell the copula from
+    // the verb (昨日は雨やった, 俺は宿題やった), so it decides nothing.
+    const size_t n = KanaNounEnd(head);
+    const bool kana = n > 0 && dict::InClass(HDTRANS_CLASS("copula.kansai-past-noun"), head.substr(head.size() - n));
     p = pos;
     if (!Lit(s, p, "やった")) return false;
     const bool kansai = s.substr(p).starts_with("んか") || s.substr(p).starts_with("んや") || s.substr(p).starts_with("やん");
-    if (!kana && !kansai && !SubjectFrames(s, pos)) return false;
+    if (!kana && !kansai) return false;
     // What follows is a conditional, an explanation, a conjunction or a sentence particle (not やったげる, やってあげる).
     {
         bool goes = EndAt(s, p) || FinalParticleEnd(s, p) != std::string_view::npos;
@@ -880,9 +847,9 @@ bool KansaiNen(std::string_view s, size_t pos, Match& m) {
             break;
         }
     }
-    // The や of the copula before ねん is なん (好きやねんけど 好きなんだけど, どっちやねん どっちなんだ).
-    if (lead.empty() && s.substr(pos).starts_with("やねん") &&
-        (YaFollows(s.substr(0, pos)) || EndsWithAny(s.substr(0, pos), std::array<std::string_view, 5>{"どっち", "どこ", "どれ", "だれ", "いつ"}))) {
+    // The や of the copula before ねん is なん (好きやねんけど 好きなんだけど). After a question word KansaiQuestionYanen reads
+    // it (どっちやねん 어느 쪽이야).
+    if (lead.empty() && s.substr(pos).starts_with("やねん") && YaFollows(s.substr(0, pos))) {
         lead = "な";
         p = pos + std::string_view("や").size();
     }
@@ -1104,7 +1071,7 @@ bool OldPolite(std::string_view s, size_t pos, Match& m) {
 
 // The archaic copula 也 (なり), alone or with the や of a character's speech, before the end of the sentence or a
 // quoting と (悪魔也 悪魔なり, 御免也や 御免なり, 愚か也や 愚かなり, 思った也や 思ったのだ, その通り也やと その通りだと)
-// (spec LEX-5990). After a verb or an adjective it is のだ; before と or a sentence particle だ. Not where the kanji before it make a word with it (拓也, 達也).
+// (spec LEX-5990). After a verb or an adjective it is のだ; before と or a sentence particle だ. Not where the kanji before it make a word with it (拓也, 達也), nor after one kanji (涼也).
 bool ArchaicNari(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (pos == 0 || !Lit(s, p, "也")) return false;
@@ -1120,16 +1087,24 @@ bool ArchaicNari(std::string_view s, size_t pos, Match& m) {
         while (start > 0 && IsKanjiClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
         const std::string_view run = s.substr(start, pos - start);
         const size_t end = pos + std::string_view("也").size();
-        // A word of two or more kanji before it takes the copula (真実也) unless the run with 也 is a word; after a
-        // shorter run a name with 也 wins (拓也, 佐藤達也).
+        // A word of two or more kanji before it takes the copula (真実也) unless the run with 也 is a word (拓也, 佐藤達也).
         if (IsWord(s.substr(start, end - start))) return false;
-        if (run.size() < 2 * std::string_view("也").size() || !IsWord(run)) {
+        // One kanji with 也 is a name the dictionary lacks (涼也と, おい冬也！, 弟の冬也。, 涼也や！), never the copula,
+        // though the archaic 神也 shares its surface.
+        if (start + LastRune(head).size == pos) return false;
+        if (!IsWord(run)) {
             for (size_t at = start; at < pos; at += text::DecodeRune(s.substr(at)).size) {
                 if (IsWord(s.substr(at, end - at))) return false;
             }
-            // A run that is no word of two kanji or more, or one kanji, with 也 is a name the dictionary lacks (涼也と,
-            // 冬也！, 佐藤冬也と申します) unless a clause frames it: a modifier in kana before it (美しき花也, 武士の道也),
-            // a topic's は, こそ or ぞ before it (其は神也) or the 也や of a character's speech, and the end of the sentence after it.
+            // A run that is no word takes the copula only where it ends with a word of two kanji or more (大悪魔也); else
+            // its last kanji with 也 is a name (田中涼也, 佐藤冬也と申します).
+            bool tail = false;
+            for (size_t at = start; at + LastRune(head).size < pos; at += text::DecodeRune(s.substr(at)).size) {
+                tail = tail || IsWord(s.substr(at, pos - at));
+            }
+            if (!tail) return false;
+            // Even then a clause frames it: a modifier in kana before it, a topic's は, こそ or ぞ before it (其は大悪魔也)
+            // or the 也や of a character's speech, and the end of the sentence after it.
             const char32_t lead = start > 0 ? LastRune(s.substr(0, start)).cp : 0;
             const bool framed = IsHiraganaClass(lead) && !In(lead, U"がもをにへとでや");
             if (!framed || !EndAt(s, p) || (p < s.size() && In(At(s, p).cp, U"、，,"))) {

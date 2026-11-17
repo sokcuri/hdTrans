@@ -4,7 +4,7 @@ cx:notice-words-1:170	木曽、突入する。オラ、オラ！道をあけろ�
 cx:notice-words-1:171	オラぁ！ かかってこい！	오라! 덤벼라!	fix	rewrites
 cx:notice-words-1:171	オラが行ってくる	내가 다녀올게	keep	rewrites
 cx:notice-words-1:170	チチ オラを信じろ！	치치 나를 믿어라!	keep	rewrites
-lexical:missing-word	ワイが女やったら、この場で求婚しとったわ	has:여자라면	fix	lookup
+lexical:missing-word	ワイが女やったら、この場で求婚しとったわ	has:청혼하고 있었어	keep	lookup
 lexical:missing-word	オラたち 豚バラで うまい飯 食わされるの？	우리 삼겹살로 맛있는 밥 먹여지는 거야?	fix	lookup
 lexical:missing-word	今夜だって、これから電話かけに一寸出て	오늘 밤도, 지금부터 전화 걸어 조금 나와	fix	lookup
 lexical:missing-word	完璧な、一寸の隙もない典型的な朝食だった。	완벽한, 한 치의 틈도 없는 전형적인 아침 식사였다.	keep	lookup

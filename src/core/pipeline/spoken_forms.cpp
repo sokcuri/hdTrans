@@ -999,10 +999,10 @@ bool KansaiTon(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// A question word with the Kansai やねん (誰やねん 누구야, 何がやねん 뭐가, なんやねん after a word): なんだよ, or
+// A question word with the Kansai やねん (誰やねん 누구야, どっちやねん 어느 쪽이야, 何がやねん 뭐가, なんやねん after a word): なんだよ, or
 // だよ after 何, なん, 何が. なんでやねん stays the retort that other rows read (왜 그래).
 bool KansaiQuestionYanen(std::string_view s, size_t pos, Match& m) {
-    for (const std::string_view w : {"何で", "なんで", "何が", "なにが", "誰", "だれ", "どこ", "いつ", "何", "なん", "なに", "どう"}) {
+    for (const std::string_view w : {"何で", "なんで", "何が", "なにが", "誰", "だれ", "どこ", "どっち", "どれ", "どない", "いつ", "何", "なん", "なに", "どう"}) {
         if (w == "何で" || w == "なんで") {  // なんでやねん is the retort of its own (왜 그래)
             size_t q = pos;
             if (Lit(s, q, w) && Lit(s, q, "やねん")) return false;
