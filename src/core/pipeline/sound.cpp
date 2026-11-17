@@ -1547,6 +1547,8 @@ bool SoundText::Spaced(size_t i) const {
     if (i >= rs.size() || Quoting(i) > 0) return false;
     if (IsKanjiRune(rs[i]) || (IsKatakanaRune(rs[i]) && IsHiraganaRune(rs[i - 1]))) return true;
     if (!IsKana(rs[i]) || In(rs[i], kSuruKana)) return false;
+    // The に of a result before なる is the 가 of 되다 on the sound (クタクタになった 녹초가 되었다).
+    if (rs[i] == U'に' && i + 2 < rs.size() && rs[i + 1] == U'な' && In(rs[i + 2], U"るっらりれろ")) return false;
     if (In(rs[i - 1], U"とて")) return true;
     return IsHiraganaRune(rs[i]) && StartsVerb(i);
 }
