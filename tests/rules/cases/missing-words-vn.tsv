@@ -1,0 +1,89 @@
+# 규칙: LEX-5960, LEX-5961, LEX-5962, LEX-5963, LEX-5965
+rule	input	expected	kind	layer
+lexical:missing-nouns	男はどぶ川	has:시궁창	fix	fixed
+lexical:missing-nouns	このどぶ川は臭い。	이 시궁창은 구리다.	fix	fixed
+lexical:missing-nouns	ドブの臭いがする。	has:시궁창	fix	fixed
+lexical:missing-nouns	どぶろくを飲む。	막걸리를 마신다.	keep	lookup
+lexical:missing-nouns	牛すじとこんにゃくを甘辛く煮たもの	has:소 힘줄과 곤약	fix	fixed
+lexical:missing-nouns	牛すじ煮込み	소 힘줄 조림	fix	fixed
+lexical:missing-nouns	「ぼっかけ……？」	「보카케……?」	fix	fixed
+lexical:missing-nouns	最善手を模索する	has:최선의 수를	fix	fixed
+lexical:missing-nouns	指を最奥まで突き入れ	has:가장 안쪽까지	fix	fixed
+lexical:missing-nouns	仕事相手として接しようとしているだけだ。	has:일 상대로서	fix	fixed
+lexical:missing-nouns	普段使いできるバッグ。	has:평상시 사용할 수 있는	fix	fixed
+lexical:missing-nouns	数瞬遅れて	has:몇 순간	fix	fixed
+lexical:missing-nouns	サソリ座生まれなのよねぇ	has:전갈자리 태생	fix	fixed
+lexical:missing-nouns	「ぶっつけ本番かよ……」	has:연습 없이 바로 실전인가	fix	fixed
+lexical:missing-nouns	ただ働きで徹夜ってのは酷いわね	has:무보수 노동으로	fix	fixed
+lexical:missing-nouns	私がタダ働きになっちゃいますから	has:무보수 노동이	fix	fixed
+lexical:missing-nouns	ひさしの下で雨宿りした。	has:차양 아래에서	fix	fixed
+lexical:missing-nouns	ひさしぶりだね。	has:오랜만	keep	lookup
+lexical:missing-nouns	学園中の噂になった。	has:학원 전체	fix	fixed
+lexical:missing-nouns	学園中がざわつくのを感じた。	has:학원 전체가	fix	fixed
+lexical:missing-nouns	虫ピンで留めた。	has:곤충핀	fix	fixed
+lexical:missing-nouns	くんずほぐれつの大乱闘	has:뒤엉켜 싸우기	fix	fixed
+lexical:missing-nouns	海苔巻きお好み焼きってこと！？	has:오코노미야키라는	fix	fixed
+lexical:missing-nouns	そんな勘ぐりはやめろ。	has:억측은	fix	fixed
+lexical:missing-nouns	今度はちょっくら行ってくる。	has:잠깐	fix	fixed
+lexical:missing-nouns	ほれぼれするような腕前だ。	has:반하는	fix	fixed
+lexical:missing-nouns	ヘンテコな帽子だ。	이상한 모자다.	fix	fixed
+lexical:missing-nouns	楓の葉が赤い。	has:단풍	fix	lookup
+lexical:missing-nouns	秋になると楓が色づく。	has:단풍이	fix	lookup
+lexical:missing-nouns	楓さん、おはよう。	has:카에데 씨	keep	lookup
+lexical:missing-nouns	「楓、待って！」	has:카에데,	keep	lookup
+lexical:missing-nouns	楓は笑った。	has:카에데는	keep	lookup
+lexical:karakkishi	勉強はからっきしだ。	공부는 젬병이다.	fix	fixed
+lexical:karakkishi	歌の知識なんてからっきしだ。	has:젬병이다	fix	fixed
+lexical:karakkishi	銃の腕はからっきしで、逃げたり隠れたり	has:젬병이어서	fix	fixed
+lexical:karakkishi	格闘戦以外、からっきしなボクにできる事	has:젬병인 내가	fix	fixed
+lexical:karakkishi	俺は、そういうのはからっきしだから	has:젬병이니까	fix	fixed
+lexical:karakkishi	からっきしダメだ。	전혀 안 된다.	fix	fixed
+lexical:stem-nouns	千莉から小さな喘ぎが漏れる。	has:작은 신음이	fix	lookup
+lexical:stem-nouns	声にならない喘ぎ。	has:신음	fix	lookup
+lexical:stem-nouns	甘いあえぎを漏らす。	has:신음을	fix	lookup
+lexical:stem-nouns	喘ぎながら走る。	허덕이면서 달린다.	keep	lookup
+lexical:stem-nouns	あえぎながら走る。	허덕이면서 달린다.	keep	lookup
+lexical:stem-nouns	喘ぎ声が聞こえた。	신음 소리가 들렸다.	keep	lookup
+lexical:stem-nouns	排水管の詰まりを取る。	has:막힘을	fix	lookup
+lexical:stem-nouns	鼻の詰まりがひどい。	has:코의 막힘이	fix	lookup
+lexical:stem-nouns	手詰まりだな。	has:막다른	keep	lookup
+lexical:stem-nouns	つまり、そういうことだ。	has:즉,	keep	lookup
+lexical:stem-nouns	頼みがある。	부탁이 있다.	keep	lookup
+lexical:stem-nouns	照れ隠しに笑った。	쑥스러움을 감추려고 웃었다.	fix	fixed
+lexical:stem-nouns	照れ隠しなんだろうな。	has:쑥스러움 감추기	fix	fixed
+lexical:stem-nouns	真面目な照れ隠しには、ちゃんと乗る	has:쑥스러움 감추기에는	fix	fixed
+lexical:stem-nouns	照れ隠しになると訳の分からない事を	has:쑥스러움 감추기가 되면	fix	fixed
+lexical:stem-nouns	ソファをぐるぐる回って追いかけっこをしていた。	has:술래잡기를	fix	fixed
+lexical:stem-nouns	追いかけっこはもう終わったのか？	has:술래잡기는	fix	fixed
+lexical:missing-verbs	地面に這いつくばって謝った。	has:엎드려 사과했다	fix	fixed
+lexical:missing-verbs	時に這いつくばっても、立ち止まっても	has:엎드려도	fix	fixed
+lexical:missing-verbs	這いつくばり、手探りで出口のドアを探す。	has:엎드려,	fix	fixed
+lexical:missing-verbs	物語を紡ぎだす。	이야기를 자아낸다.	fix	fixed
+lexical:missing-verbs	彼らの過去が紡ぎ出す時間。	has:자아내는	fix	fixed
+lexical:missing-verbs	私たちは分かり合えない。	has:서로 이해할 수 없다	fix	fixed
+lexical:missing-verbs	何でもわかり合ってると思ってた	has:서로 이해하고 있다고	fix	fixed
+lexical:missing-verbs	ガムテープごと引き剥がした。	has:떼어 냈다	fix	fixed
+lexical:missing-verbs	笑いながらじゃれついてくる佳奈。	has:장난치며 달라붙어 오는	fix	fixed
+lexical:missing-verbs	無条件に受け容れてくれる	has:받아들여 준다	fix	fixed
+lexical:missing-verbs	現実を受け容れられてないのか？	has:받아들이지 못한	fix	fixed
+lexical:missing-verbs	胸を寄せ上げるように	has:모아 올리	fix	fixed
+lexical:missing-verbs	妹を着替えさせた。	has:갈아입혔다	fix	fixed
+lexical:missing-verbs	根本まで陰茎をくわえ込む。	has:입에 문다	fix	fixed
+lexical:missing-verbs	爽やかな香りに緊張がほぐれ、	has:긴장이 풀려	fix	fixed
+lexical:missing-verbs	全身の筋肉が適度にほぐれるのよさ	has:풀려	fix	fixed
+lexical:missing-verbs	筧が部外者になびいたのが	has:외부인에게 쏠렸던	fix	fixed
+lexical:missing-verbs	靴底がすり減った。	has:닳았다	fix	fixed
+lexical:missing-verbs	記憶をたぐる。	has:기억을 더듬는다	fix	fixed
+lexical:missing-verbs	そこまで勘ぐるな。	has:억측하지 마	fix	fixed
+lexical:missing-verbs	腕まくりして料理を始めた。	has:소매를 걷어붙여	fix	fixed
+lexical:missing-verbs	つまづいた。	has:걸려 넘어졌다	fix	fixed
+lexical:kujiku	足を挫いて歩けない。	has:삐어	fix	packs
+lexical:kujiku	足首を挫いた。	발목을 삐었다.	fix	packs
+lexical:kujiku	手首をくじいてしまった。	has:삐어	keep	packs
+lexical:kujiku	敵の出鼻を挫く。	has:꺾는다	fix	packs
+lexical:kujiku	彼の自信を挫いた。	has:꺾었다	fix	packs
+lexical:kujiku	気持ちが挫けそうだ。	has:꺾일 것 같다	keep	lookup
+lexical:kujiku	足首を掴まれた。	발목을 잡혔다.	keep	lookup
+lexical:missing-nouns	彼女の最奥で、熱を解き放った。	has:가장 안쪽에서	fix	fixed
+lexical:missing-verbs	今度は俺が腕まくりする。	has:소매를 걷어붙인다	fix	fixed
+lexical:kujiku	自信を徹底的に挫かれたんだろう。	has:꺾였을	fix	packs

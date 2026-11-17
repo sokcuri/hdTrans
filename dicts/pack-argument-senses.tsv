@@ -198,3 +198,6 @@ argument-senses:5654	切れる	v1	sense	after=電池|バッテリー	다 되다	
 argument-senses:5655	切れる	v1	sense	subj=充電	다 떨어지다	LEX-5810		充電が切れた 충전이 다 떨어졌다 (다 되다는 다 찼다는 뜻)			
 argument-senses:5656	切れる	v1	sense	after=充電	다 떨어지다	LEX-5810		充電切れちゃった 충전 다 떨어져 버렸다			
 argument-senses:5657	開く	v5	sense	after=ドア|扉|窓|門|戸|蓋|ふた|カーテン|幕|ゲート|シャッター|ハッチ	열리다	LEX-5810		ドア開きますね 문 열리네요			
+argument-senses:35800	挫く|くじく	v5	sense	obj=@body	삐다	LEX-5965		足を挫いた 발을 삐었다			
+argument-senses:35801	挫く	v5	sense	*	꺾다	LEX-5965		出鼻を挫く 의욕을 꺾다			
+argument-senses:35802	挫く	v5:규칙	voice	*	passive:꺾이다	LEX-5965		自信を挫かれた 자신감이 꺾였다			
