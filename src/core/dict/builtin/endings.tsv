@@ -477,6 +477,19 @@
 書いてたじゃないの	쓰고 있었잖아	end	prio=-1
 高いじゃないの	높잖아	end	prio=-1
 高かったじゃないの	높았잖아	end	prio=-1
+// じゃないのよ and じゃないのさ after a predicate: 〜잖아 (LEX-6001)
+書くじゃないのよ	쓰잖아	end	prio=-1
+書いたじゃないのよ	썼잖아	end	prio=-1
+書いてるじゃないのよ	쓰고 있잖아	end	prio=-1
+書いてたじゃないのよ	쓰고 있었잖아	end	prio=-1
+高いじゃないのよ	높잖아	end	prio=-1
+高かったじゃないのよ	높았잖아	end	prio=-1
+書くじゃないのさ	쓰잖아	end	prio=-1
+書いたじゃないのさ	썼잖아	end	prio=-1
+書いてるじゃないのさ	쓰고 있잖아	end	prio=-1
+書いてたじゃないのさ	쓰고 있었잖아	end	prio=-1
+高いじゃないのさ	높잖아	end	prio=-1
+高かったじゃないのさ	높았잖아	end	prio=-1
 // んじゃない after the past or a negative: 〜ㄴ 거 아니야, not 〜지 않아
 書いたんじゃない	쓴 거 아니야	end	prio=-1
 書いたんじゃないか	쓴 거 아닌가	end	prio=-1
