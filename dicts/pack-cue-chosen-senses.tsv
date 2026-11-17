@@ -63,3 +63,4 @@ cue-chosen-senses:5847	撥ねる|跳ねる|はねる	v1:규칙	voice	subj=@perso
 cue-chosen-senses:5848	はねられる	v1:규칙	sense	dat=@vehicle	치이다	LEX-5840		トラックにはねられた 트럭에 치였다			
 cue-chosen-senses:5849	はねられる	v1:규칙	sense	subj=@person|@animal	치이다	LEX-5840		人がはねられた 사람이 치였다			
 cue-chosen-senses:5830	撥ねる|跳ねる|はねる	v1	sense	obj=@person|@animal head=@vehicle|事故	치다	LEX-5840		猫をはねた車 고양이를 친 차			
+cue-chosen-senses:5831	見せられる	v1:규칙	sense	dat=*	보여지다	LEX-5842		森下さんに見せられたのは 모리시타 씨에게 보여진 것은			

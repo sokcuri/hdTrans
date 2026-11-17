@@ -1412,7 +1412,7 @@ bool ThingSubjectBefore(const Item* it) {
 // the passive whatever its object or of what is taken away (求められ, 取り上げられ), one of acts done to
 // someone after its object or しか in a narrative form (食事を与えられず 식사가 주어지지 않고), a passive of something
 // wished for (褒められない, GRM-36), a feeling (感じられない), a person or 誰 before に, にも, には or から
-// (誰にも見られない), or ないように and ないうちに.
+// (誰にも見られない) but the other party of verb.transfer, or ないように and ないうちに.
 bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem, std::string_view rest) {
     const std::string_view surface = it->group->surface;
     // The ん of くる's られ is its negative (連れてこられん); after another verb it may be the る said
@@ -1438,7 +1438,9 @@ bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem,
     }
     // Not doing it so that, or before, someone does it to one is the passive (誰にも見られないように).
     if (rest.starts_with("ないよう") || rest.starts_with("ないうち")) return false;
-    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+    // The person in に of a verb of giving or showing is the other party (姉さんには見せられない 언니에게는 보일 수 없다).
+    const bool recipient = dict::InClass(HDTRANS_CLASS("verb.transfer"), stem);
+    for (const Item* p = it->prev; !recipient && p != nullptr && !ClauseBreak(p); p = p->prev) {
         const std::string_view s = p->group->surface;
         if (s != "に" && s != "にも" && s != "には" && s != "から") continue;
         const Item* a = p->prev;

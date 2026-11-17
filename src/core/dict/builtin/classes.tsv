@@ -639,7 +639,7 @@
 //= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.youni-unwilled	Verbs of what happens rather than what one does, which a ように of aim can follow without asking anyone (間に合うように 늦지 않도록, 見えるように 보이도록, 届くように 닿도록): a ように after them stays 도록; after a verb one does it is a likeness, 듯이.
 //= verb.youni-depicted	Verbs of a gesture, a look, a voice or a touch, whose manner a ように of a verb one does before them depicts: 듯이 (からかうように笑った 놀리듯이 웃었다, 懇願するように見つめる 간청하듯이 바라본다, 包み込むように抱き締める 감싸듯이 껴안는다).
-//= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
+//= verb.transfer	Ichidan stems of giving, showing, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
 //= verb.permission-word	Dictionary words that hold a causative and the stem of もらう (使わせてもら, 聞かせてもら): their sentence-final ます is the speaker's act with leave, 겠습니다 (spec GRM-44).
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
@@ -9070,6 +9070,8 @@ verb.transfer	借り
 verb.transfer	命じ
 verb.transfer	告げ
 verb.transfer	伝え
+verb.transfer	見せ
+verb.transfer	みせ
 
 verb.writing	書
 verb.writing	か
