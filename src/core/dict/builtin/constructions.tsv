@@ -3791,6 +3791,9 @@ cx:gozonji-comma:40	LEX-5793	&&3 S+0== "な" S-1== "、" ||4 S-2== "御存じ" S
 //: nani-pred-next	||4 &&3 ||5 S+1== "何" S+1== "なに" S+1== "なあに" S+1== "ナニ" S+1== "なーに" !1 F+1== "conjugating" ||9 F+1== "quote-end" F+1== "pause-after" S+2== "Lだ" S+2== "Lです" S+2== "Lでし" S+2== "Lな" S+2== "Lじゃ" S+2== "さ" S+2== "よ" &&2 S+1== "なん" ||5 S+2== "Lだ" S+2== "Lです" S+2== "Lでし" S+2== "Lなの" S+2== "Lなん" ||11 S+1== "何よ" S+1== "なによ" S+1== "何さ" S+1== "L何です" S+1== "Lなんです" S+1== "L何でし" S+1== "Lなんでし" S+1== "L何なの" S+1== "L何なん" S+1== "Lなんなの" S+1== "Lなんなん" &&4 ||2 S+1== "L何だ" S+1== "Lなんだ" S+1!= "L何だか" S+1!= "Lなんだか" S+1!= "Lなんだって"	The next word is a 何 that is the whole predicate: 何 or なに at the end or before the copula, よ or さ, なん before the copula, or one word 何よ, 何ですか, 何なの, 何だ (not 何だか).
 //: tte-before	||5 S-1== "って" S-1== "Rって" U-1== "Rって" S-1== "なんて" S-1== "何て"	The word before is a って (alone, in それって, or the ending of a clause) or なんて.
 //~ tte-nani-ending	다는=다니 다고=다니 자고=자니 라고=라니	The quoting ending of a clause before 何, -다니.
+cx:tte-nani:6	LEX-5820	&&4 S+0== "って" ||3 S-1== "これ" S-1== "コレ" S-1== "此れ" ||2 S+1== "何の" S+1== "なんの" ||2 S+2== "こと" S+2== "事"	set-target@-1 "이게" set-target " " set-target@+2 "말이야"	これってなんのこと？ 이게 무슨 말이야?
+cx:tte-nani:7	LEX-5820	&&2 ||2 S+0== "って何だよ" S+0== "ってなんだよ" ||3 S-1== "これ" S-1== "コレ" S-1== "此れ"	set-target@-1 "이게" set-target " 뭐야"	これって何だよ 이게 뭐야
+cx:tte-nani:8	LEX-5820	&&3 S+0== "って" ||3 S-1== "これ" S-1== "コレ" S-1== "此れ" :nani-pred-next	set-target@-1 "이게" set-target " "	これって何？ 이게 뭐야?
 cx:tte-nani:10	LEX-5820	&&4 S+0== "って" ||2 S+1== "何の" S+1== "なんの" ||2 S+2== "こと" S+2== "事" F+2== "quote-end"	set-target "(이)라니" set-target@+2 "말이야"	猫って何のこと？ 고양이라니 무슨 말이야?
 cx:tte-nani:12	LEX-5820	&&3 ||2 S+0== "それって" S+0== "あれって" ||2 S+1== "何の" S+1== "なんの" ||2 S+2== "こと" S+2== "事"	set-target "그게" set-target@+2 "말이야"	それってなんのこと？ 그게 무슨 말이야?
 cx:tte-nani:20	LEX-5820	&&3 S+0== "って" ||4 F+0== "after-pause" F+0== "first" S-1== "R." S-1== "R…" :nani-pred-next	set-target "라니"	このボタンを押すと...って何？ 이 버튼을 누른다고...라니 뭐야?
@@ -3803,8 +3806,8 @@ cx:tte-nani:47	LEX-5821	&&3 S+0== "だって" P-1== "1" :nani-pred-next	set-targ
 cx:tte-nani:40	LEX-5821	&&4 F+0== "conjugating" U+0== "Rって" Y+0== "6도" :nani-pred-next	set-ending "5다니"	帰ったって何？ 돌아갔다니 뭐야?
 cx:tte-nani:50	LEX-5821	&&3 F+0== "conjugating" U+0== "Rって" :nani-pred-next	map-ending-tail @tte-nani-ending	知らねえって何？ 모른다니 뭐야?
 cx:tte-nani:60	LEX-5820	&&4 !1 F+0== "conjugating" ||7 S+0== "何" S+0== "なに" S+0== "なあに" S+0== "ナニ" S+0== "なーに" S+0== "何さ" S+0== "なにさ" :tte-before ||3 F+0== "quote-end" F+0== "pause-after" &&3 S+1== "さ" F+1== "blank" ||2 F+1== "quote-end" F+1== "pause-after"	set-target "뭐야"	猫って何？ 고양이가 뭐야?
-cx:tte-nani:70	LEX-5820	&&3 ||2 &&2 S+0== "何" D+0== "무엇" &&2 S+0== "なん" D+0== "" :tte-before ||4 S+1== "だよ" S+1== "よ" S+1== "さ" &&2 S+1== "だ" ||2 F+1== "quote-end" S+2== "よ"	set-target "뭐"	押すって何だよ 누른다니 뭐야
-cx:tte-nani:71	LEX-5820	&&4 S+0== "なん" D+0== "" :tte-before ||2 S+1== "Lなの" &&2 S+1== "Lなんだ" !1 S+1== "Lなんだか"	set-target " 뭐"	それってなんなの？ 그게 뭐야?
-cx:tte-nani:72	LEX-5820	&&4 S+0== "なん" D+0== "" :tte-before S+1== "Lだっけ"	set-target " 뭐였더라" set-target@+1 ""	それってなんだっけ？ 그게 뭐였더라?
-cx:tte-nani:73	LEX-5820	&&4 S+0== "なん" D+0== "" :tte-before ||2 S+1== "なんですか" S+1== "なんです"	set-target " 무엇입니까" set-target@+1 ""	それってなんなんですか？ 그게 무엇입니까?
+cx:tte-nani:70	LEX-5820	&&3 ||2 &&2 S+0== "何" D+0== "무엇" &&2 S+0== "なん" D+0== "" :tte-before ||4 S+1== "だよ" S+1== "よ" S+1== "さ" &&2 S+1== "だ" ||2 F+1== "quote-end" S+2== "よ"	set-target " 뭐"	押すって何だよ 누른다니 뭐야
+cx:tte-nani:71	LEX-5820	&&4 S+0== "なん" ||2 D+0== "" &&2 D+0== "무엇" ||3 S-2== "これ" S-2== "コレ" S-2== "此れ" :tte-before ||2 S+1== "Lなの" &&2 S+1== "Lなんだ" !1 S+1== "Lなんだか"	set-target " 뭐"	それってなんなの？ 그게 뭐야?
+cx:tte-nani:72	LEX-5820	&&4 S+0== "なん" ||2 D+0== "" &&2 D+0== "무엇" ||3 S-2== "これ" S-2== "コレ" S-2== "此れ" :tte-before S+1== "Lだっけ"	set-target " 뭐였더라" set-target@+1 ""	それってなんだっけ？ 그게 뭐였더라?
+cx:tte-nani:73	LEX-5820	&&4 S+0== "なん" ||2 D+0== "" &&2 D+0== "무엇" ||3 S-2== "これ" S-2== "コレ" S-2== "此れ" :tte-before ||2 S+1== "なんですか" S+1== "なんです"	set-target " 무엇입니까" set-target@+1 ""	それってなんなんですか？ 그게 무엇입니까?
 cx:tte-nani:75	LEX-5821	&&4 ||3 S+0== "なんだよ" S+0== "なんだ" S+0== "何だ" D+0== "(이)야" :tte-before ||2 F+0== "quote-end" F+0== "pause-after"	set-target " 뭐야"	ごまかすってなんだよ？ 속인다니 뭐야?
