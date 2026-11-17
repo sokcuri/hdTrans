@@ -181,3 +181,22 @@ dict:w:35911	「わけないじゃんわけないじゃん」	lacks:리가	keep	
 cx:na-observed:33	「遊びになんかくんなっ！」	has:지 마	keep	rewrites
 cx:sa-final:10	「今度こそ…護り抜くさ。」	lacks:거야	keep	rewrites
 cx:sa-final:10	「そのためならなんだってやるさ」	lacks:거야	keep	rewrites
+dict:w:35910	慣れればわけない。	has:수월	keep	defaults
+dict:w:35910	コツさえつかめばわけない。	has:수월	keep	defaults
+dict:w:35910	やってみたらわけない。	has:수월	keep	defaults
+dict:w:35910	目をつぶってもわけない。	has:수월	keep	defaults
+dict:w:35910	これを使えばわけないさ。	has:수월	keep	defaults
+dict:w:35910	俺にとってはわけない。	has:수월	keep	defaults
+dict:w:35910	彼にとってわけない。	has:수월	keep	defaults
+dict:w:35910	慣れちゃえばわけない。	has:수월	keep	defaults
+dict:w:35910	慣れれば、わけない。	has:수월	keep	defaults
+dict:w:35911	勝てるわけない。	has:리가	fix	local
+dict:w:35911	寝てたわけない。	has:리가	fix	local
+cx:saki-teru-ne:20	みんな先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	二人とも先に帰ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	三人とも先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	全員先に帰ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	田中先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:14	皆さん先に帰ってますよ。	lacks:있을게요	keep	rewrites
+cx:saki-teru-ne:10	私、先に行ってるね。	has:가 있을게	fix	rewrites
+cx:saki-teru-ne:10	僕先に行ってるね。	has:가 있을게	fix	rewrites

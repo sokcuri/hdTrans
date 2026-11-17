@@ -29,6 +29,7 @@
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.pair-people	Nouns of a pair or a set of people named together, after which 共 is both, 모두 (親子共 부모와 자식 모두, 夫婦共 부부 모두), not the plural 들.
+//= noun.group-subject	Words of everyone or of a number of people that can stand as a subject with no particle, which a 先〜てる after them tells about, not a promise (みんな先に行ってるよ 모두 먼저 가고 있어, 二人とも先に帰ってるよ).
 //= noun.plural-head	Nouns of people or creatures one counts as a crowd, after which 共 is the plural 들 even where their chosen reading has no person code (敵共 적들, 雑魚共 잡졸들).
 //= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
@@ -1412,6 +1413,19 @@ noun.pair-people	男女
 noun.pair-people	主従
 noun.pair-people	師弟
 noun.pair-people	親兄弟
+noun.group-subject	みんな
+noun.group-subject	皆
+noun.group-subject	皆さん
+noun.group-subject	みなさん
+noun.group-subject	全員
+noun.group-subject	皆んな
+noun.group-subject	二人とも
+noun.group-subject	ふたりとも
+noun.group-subject	お二人とも
+noun.group-subject	三人とも
+noun.group-subject	両方とも
+noun.group-subject	二人
+noun.group-subject	三人
 noun.plural-head	敵
 noun.plural-head	雑魚
 noun.plural-head	奴
