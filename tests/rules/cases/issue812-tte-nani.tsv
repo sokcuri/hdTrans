@@ -91,3 +91,21 @@ cx:tte-nani:45	寒かったって言ってた。	!rule:cx:tte-nani:45	keep	rewri
 cx:tte-nani:46	彼女だったって聞いた。	!rule:cx:tte-nani:46	keep	rewrites
 cx:tte-nani:72	それってなんだか怖い。	!rule:cx:tte-nani:72	keep	rewrites
 cx:tte-nani:73	それってなんですか？	!rule:cx:tte-nani:73	keep	rewrites
+cx:tte-nani:70	「アレって何だよ」	「그게 뭐야」	fix	rewrites
+cx:tte-nani:70	あれって何だよ	그게 뭐야	fix	rewrites
+cx:tte-nani:70	それって何だよ	그게 뭐야	fix	rewrites
+cx:tte-nani:70	それって何だよ！	그게 뭐야!	fix	rewrites
+cx:tte-nani:70	それって何だよ？	그게 뭐야?	fix	rewrites
+cx:tte-nani:70	ソレって何だ	그게 뭐냐	fix	rewrites
+cx:tte-nani:70	それって何だ	그게 뭐냐	fix	rewrites
+cx:tte-nani:70	「あれって何だ」	「그게 뭐냐」	fix	rewrites
+cx:tte-nani:70	アレって何だ！	그게 뭐냐!	fix	rewrites
+cx:tte-nani:70	それって何だ？	그게 뭐야?	fix	rewrites
+cx:tte-nani:70	お前の言うそれって何だ？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:70	変な声がしたけど、それって何だよ	has:그게 뭐야	fix	rewrites
+cx:tte-nani:70	知らねえって何だよ！	모른다니 뭐야!	keep	rewrites
+cx:tte-nani:70	嘘だって何だよ	거짓말이라니 뭐야	keep	rewrites
+cx:tte-nani:70	帰ったって何だよ？	돌아갔다니 뭐야?	keep	rewrites
+cx:tte-nani:70	猫って何だ	고양이는 뭐냐	keep	rewrites
+cx:tte-nani:71	ソレってなんだよ	그게 뭐야	keep	rewrites
+cx:tte-nani:35	それって何なの？	그게 뭐야?	keep	rewrites
