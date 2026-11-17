@@ -1,0 +1,164 @@
+# 규칙: GRM-4093, GRM-161, GRM-75, GRM-4094, LEX-5792, LEX-5796
+rule	input	expected	kind	layer
+cx:sobakara:10	食べたそばから忘れる	먹자마자 잊는다	fix	rewrites
+cx:sobakara:10	掃除したそばから散らかす	has:청소하자마자	fix	rewrites
+cx:sobakara:10	読んだそばから忘れた	has:읽자마자	fix	rewrites
+cx:sobakara:10	彼女が立ったそばから	has:서자마자	fix	rewrites
+cx:sobakara:10	言ったそばから失敗した	has:말하자마자	keep	rewrites
+cx:sobakara:10	買ったそばから壊れた	has:사자마자	keep	rewrites
+cx:sobakara:10	私のそばから離れないで	has:곁에서	keep	rewrites
+cx:sobakara:10	彼のそばから立ち去った	has:곁에서	keep	rewrites
+cx:lc2e-darouga:50	それはてめえだろうが	has:네놈이잖아	fix	rewrites
+cx:lc2e-darouga:50	お前のせいだろうが！	has:탓이잖아	fix	rewrites
+cx:lc2e-darouga:15	何やってんだよ、危ないだろうが！	has:위험하잖아	fix	rewrites
+cx:lc2e-darouga:10	約束しただろうが！	has:약속했잖아	fix	rewrites
+cx:lc2e-darouga:10	彼は来るだろうが、私は行かない	has:오겠지만	keep	rewrites
+cx:lc2e-darouga:10	雨だろうが雪だろうが行く	has:비든 눈이든	keep	rewrites
+constraint:particle-split	刺身にわさびをつける	has:생선회에 와사비	fix	lookup
+constraint:particle-split	寿司にわさび	has:스시에 와사비	fix	lookup
+constraint:particle-split	家にわたしがいる	has:집에 내가	keep	lookup
+constraint:particle-split	裏庭にわとりがいる	has:닭이	keep	lookup
+constraint:particle-split	雨がにわかに降り出した	has:갑자기	keep	lookup
+constraint:particle-split	家にはいる	has:집에	keep	lookup
+constraint:particle-split	彼はなにも言わない	has:아무것도	keep	lookup
+dict:jisjk:137288	足が笑って立てない	has:설 수 없다	fix	local
+dict:jisjk:137288	怖くて立てない	has:설 수 없다	fix	local
+dict:jisjk:137288	計画を立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	計画も立てない	has:세우지 않는다	keep	local
+dict:w:35264	笑われた	비웃음을 샀다	fix	lookup
+dict:w:35264	そんなことしたら笑われるよ	has:비웃음을 사	fix	lookup
+dict:w:35264	みんなに笑われた	has:비웃음을 당했다	keep	lookup
+cx:sobakara:5	寝ていたそばから起こされた	has:자자마자	fix	rewrites
+cx:sobakara:5	言ってたそばから忘れてる	has:말하자마자	fix	rewrites
+cx:sobakara:5	話しているそばから寝てしまった	has:이야기하자마자	fix	rewrites
+cx:sobakara:5	片付けているそばから散らかす	has:정리하자마자	fix	rewrites
+cx:sobakara:5	寝ているそばで本を読む	has:곁에서	keep	rewrites
+cx:sobakara:5	私のそばにいてくれた	has:곁에	keep	rewrites
+cx:sobakara:7	言ってるそばから転んだ	말하자마자 넘어졌다	fix	rewrites
+cx:sobakara:7	言ってるそばからこれだ	has:말하자마자	fix	rewrites
+cx:sobakara:7	書いてるそばから消していく	has:쓰자마자	fix	rewrites
+cx:sobakara:7	ベッドのそばから離れた	has:곁에서	keep	rewrites
+cx:sobakara:20	作るそばから売れていく	has:만드는 족족	fix	rewrites
+cx:sobakara:20	食べるそばから忘れる	먹는 족족 잊는다	fix	rewrites
+cx:sobakara:20	稼ぐそばから使ってしまう	has:버는 족족	fix	rewrites
+cx:sobakara:20	片付けるそばから散らかす子供	has:정리하는 족족	fix	rewrites
+cx:sobakara:20	駅のそばから歩いた	has:옆에서	keep	rewrites
+dict:w:35310	注意したそばから転んだ	has:주의를 주자마자	fix	local
+dict:w:35310	注意してるそばから走り出した	has:주의를 주자마자	fix	local
+dict:w:35310	足元に注意して	has:주의해	keep	local
+dict:w:35310	注意してください	has:주의해 주세요	keep	local
+dict:jisjk:13899	そばを食べに行こう	has:메밀국수를 먹으러	fix	local
+dict:jisjk:13899	うどんとそばを注文した	has:우동과 메밀국수를	fix	local
+dict:jisjk:13899	そばからうどんまで食べた	has:메밀국수	fix	local
+dict:jisjk:13899	彼のそばを離れない	has:곁을	keep	local
+dict:jisjk:13899	そばにいて	곁에 있어	keep	local
+cx:lc2e-darouga:15	危ないだろうが	has:위험하잖아	fix	rewrites
+cx:lc2e-darouga:15	いいだろうが	has:좋잖아	fix	rewrites
+cx:lc2e-darouga:15	大変だろうが、頑張って	has:힘들겠지만	keep	rewrites
+cx:lc2e-darouga:42	お前のせいだろが！	has:탓이잖아	fix	rewrites
+cx:lc2e-darouga:42	それはてめえだろが	has:네놈이잖아	fix	rewrites
+cx:lc2e-darouga:42	お前のせいだろ？	has:탓이지	keep	rewrites
+cx:lc2e-darouga:44	危ないだろが！	has:위험하잖아	fix	rewrites
+cx:lc2e-darouga:44	いいだろが	has:좋잖아	fix	rewrites
+cx:lc2e-darouga:44	危ないだろ？	has:위험하지	keep	rewrites
+cx:lc2e-darouga:46	約束しただろが！	has:약속했잖아	fix	rewrites
+cx:lc2e-darouga:46	来ただろが！	has:왔잖아	fix	rewrites
+cx:lc2e-darouga:46	約束しただろ？	has:약속했지	keep	rewrites
+cx:lc2e-darouga:47	知ってるだろうが！	has:알고 있잖아	fix	rewrites
+cx:lc2e-darouga:47	分かってるだろうが！	has:알고 있잖아	fix	rewrites
+cx:lc2e-darouga:47	彼も知っていただろうが、何も言わなかった	has:알고 있었겠지만	keep	rewrites
+cx:lc2e-darouga:48	知ってるだろが！	has:알고 있잖아	fix	rewrites
+cx:lc2e-darouga:48	分かってるだろが！	has:알고 있잖아	fix	rewrites
+cx:lc2e-darouga:48	知ってるだろ？	has:알고 있지	keep	rewrites
+cx:lc2e-darouga:49	言ったはずだろうが！	has:말했잖아	fix	rewrites
+cx:lc2e-darouga:49	あるはずだろうが！	has:있잖아	fix	rewrites
+cx:lc2e-darouga:49	言ったはずだ。	has:말했을 것이다	keep	rewrites
+cx:lc2e-darouga:60	来るんだろうが。	has:오겠지만	fix	rewrites
+cx:lc2e-darouga:60	行ったんだろうが。	has:갔겠지만	fix	rewrites
+cx:lc2e-darouga:60	あるんだろうが。	has:있겠지만	fix	rewrites
+cx:lc2e-darouga:60	理由はあるのだろうが。	has:이유는 있겠지만	keep	rewrites
+cx:lc2e-darouga:60	来るんだろう？	lacks:겠지만	keep	rewrites
+cx:youto-concessive:33	たとえ神だろうが倒す	has:신이라도	fix	rewrites
+cx:youto-concessive:33	いくら王様だろうが許さない	has:임금님이라도	fix	rewrites
+cx:youto-concessive:33	たとえ冗談だろうが言うな	has:농담이라도	fix	rewrites
+cx:youto-concessive:33	彼は来るだろうが、私は行かない	has:오겠지만	keep	rewrites
+cx:youto-concessive:34	誰だろうが容赦しない	has:누구든	fix	rewrites
+cx:youto-concessive:34	相手が誰だろうが関係ない	has:누구든	fix	rewrites
+cx:youto-concessive:34	何だろうが構わない	has:무엇이든	fix	rewrites
+cx:youto-concessive:34	どこだろうが行く	has:어디든	fix	rewrites
+cx:youto-concessive:34	誰だろう？	has:누구일까	keep	rewrites
+cx:nai-stem-request:10	爪を立てないで。	손톱을 세우지 마.	fix	rewrites
+cx:nai-stem-request:10	爪を立てないでね。	has:세우지 마	fix	rewrites
+cx:nai-stem-request:10	旗を立てないでよ。	has:세우지 마	fix	rewrites
+cx:nai-stem-request:10	音を立てないで。	소리를 내지 마.	keep	rewrites
+cx:nai-stem-request:10	足が震えて立てなかった。	has:설 수 없었다	keep	rewrites
+dict:jisjk:137288	足が震えて立てなくなった	has:설 수 없게	fix	local
+dict:jisjk:137288	もう立てない！	has:설 수 없어	fix	local
+dict:jisjk:137288	私はもう立てない	has:설 수 없다	fix	local
+dict:jisjk:137288	立てなくなった	has:설 수 없게	fix	local
+dict:jisjk:137288	音も立てない	has:소리도 내지 않는다	fix	local
+dict:jisjk:137288	物音一つ立てない	has:내지 않는다	fix	local
+dict:jisjk:137288	音もあまり立てない	has:내지 않는다	fix	local
+dict:jisjk:137288	音をあまり立てないように	has:내지 않도록	fix	local
+dict:jisjk:137288	計画をちゃんと立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	旗を高く立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	予定なんて立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	目標すら立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	作戦とか立てない	has:세우지 않는다	keep	local
+dict:jisjk:137288	舞台に立てない	has:설 수 없다	keep	local
+dict:w:35264	わらわれた	비웃음을 샀다	fix	lookup
+dict:w:35264	笑われたくない	has:비웃음을 사	fix	lookup
+cx:smile-respect:10	にっこり笑われた	has:방긋 웃으셨다	fix	lookup
+cx:smile-respect:10	優しく笑われた	has:웃으셨다	fix	lookup
+cx:smile-respect:10	静かに笑われた	has:웃으셨다	fix	lookup
+dict:w:35312	先生が笑われた	has:선생님이 웃으셨다	fix	lookup
+dict:w:35312	彼に笑われた	has:비웃음을 당했다	keep	lookup
+dict:w:35312	笑われて恥ずかしかった	has:비웃음을 사	keep	lookup
+dict:w:35313	世間に笑われるぞ	has:세상에 비웃음을	fix	local
+dict:w:35313	世の中に笑われる	has:세상에 비웃음을	fix	local
+dict:w:35313	人に笑われる	사람에게 비웃음을 당한다	keep	local
+dict:w:35314	人にわらわれる	has:사람에게 비웃음을 당	fix	lookup
+dict:w:35314	先生にわらわれた	has:선생님에게 비웃음을 당	fix	lookup
+dict:w:35315	家にわんこがいる	has:집에 강아지가	fix	lookup
+dict:w:35315	うちのわんこは賢い	has:우리 강아지는	fix	lookup
+dict:w:35316	ワンコが吠えた	has:강아지가 짖었다	fix	lookup
+dict:w:35317	わんちゃんと散歩する	has:강아지와	fix	lookup
+constraint:particle-split	先輩にくすっと笑われた	has:선배에게	fix	lookup
+constraint:particle-split	見にくい字だ	has:보기 어려운	keep	lookup
+constraint:particle-split	読みにくい本	has:읽기 어려운	keep	lookup
+dict:w:35312	スベって笑われるのはみんな覚悟してるさ	has:비웃음을 사는	keep	lookup
+dict:w:35312	面白いことを言ってないのに笑われるのは不愉快だわ	has:비웃음을 사는	keep	lookup
+cx:nai-stem-request:10	あのー……。ウチ、身体どこも悪くないで？	lacks:나쁘지 마	keep	rewrites
+cx:smile-respect:10	ふふっと笑われた	has:웃으셨다	fix	rewrites
+cx:smile-respect:10	また笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	ずっと笑われていた	has:비웃음을 사고 있었다	keep	rewrites
+cx:smile-respect:10	どっと笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	クスクス笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	ひどく笑われた	has:비웃음을 샀다	keep	rewrites
+cx:smile-respect:10	皆からずっと笑われてきた	has:비웃음을 사 왔다	keep	rewrites
+cx:youto-concessive:36	いくら金持ちだろうが、許さない	has:부자라도,	fix	rewrites
+cx:youto-concessive:36	大変だろうが、頑張って	has:힘들겠지만	keep	rewrites
+cx:youto-concessive:34	どんな相手だろうが負けない	has:어떤 상대든	fix	rewrites
+cx:youto-concessive:34	何度も練習したホラ話だろうが―	has:허풍이겠지만	keep	rewrites
+cx:youto-concessive:34	何回も聞いた話だろうが我慢しろ	has:이야기겠지만	keep	rewrites
+cx:lc2e-darouga:47	たまに遅刻してるだろうが。	has:지각하고 있잖아	fix	rewrites
+cx:lc2e-darouga:47	だから言ってるだろうが	has:말하잖아	fix	rewrites
+cx:lc2e-darouga:47	ほっておいても世界に知れ渡るだろうが	has:알려지겠지만	keep	rewrites
+cx:lc2e-darouga:15	それはそうだろうが	has:그렇겠지만	keep	rewrites
+dict:jisjk:13899	天ぷらとそばを頼んだ	has:튀김과 메밀국수를	fix	local
+dict:jisjk:13899	そばでパンを食べた	has:곁에서	keep	local
+dict:jisjk:13899	ご飯をそばに置いた	has:곁에	keep	local
+dict:jisjk:13899	肉をそばに置いた	has:곁에	keep	local
+cx:youto-concessive:35	相手が子供だろうが手加減しない	has:아이라도	fix	rewrites
+cx:youto-concessive:35	敵は女だろうが容赦しない	has:여자라도	fix	rewrites
+cx:youto-concessive:35	何度も見た顔だろうが思い出せない	has:얼굴이겠지만	keep	rewrites
+cx:youto-concessive:37	誰だろうが、関係ない	has:누구든,	fix	rewrites
+cx:youto-concessive:37	何だろうが、構わない	has:무엇이든,	fix	rewrites
+cx:youto-concessive:37	大変だろうが、頑張って	has:힘들겠지만,	keep	rewrites
+cx:lc2e-darouga:15	遅いだろうが。	has:늦잖아	fix	rewrites
+cx:lc2e-darouga:15	うるさいだろうが。	has:시끄럽잖아	fix	rewrites
+cx:lc2e-darouga:15	それはそうだろうが。	has:그렇겠지만	keep	rewrites
+cx:lc2e-darouga:15	彼は来るだろうが。	has:오겠지만	keep	rewrites
+phrase:hana-de-warawareru	鼻で笑われた	코웃음을 당했다	fix	phrases
+phrase:hana-de-warawareru	鼻で笑われて悔しい	has:코웃음을 당해	fix	phrases
+phrase:hana-de-warawareru	鼻で笑う	has:코웃음	keep	phrases

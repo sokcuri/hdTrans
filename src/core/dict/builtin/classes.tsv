@@ -6,6 +6,7 @@
 //= adverb.noun-reading	Adverbs of amount or fit the dictionary also reads as nouns before です or だ (たっぷり, ぴったり), which stay adverbs after a degree word (すごいたっぷり 엄청 듬뿍).
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.smile-manner	Words that draw a gentle smile or laugh (にっこり, ふふっと, 優しく, 静かに), after which a 笑われた or 笑われて with no agent is a respected person's smile, 웃으시다, not 비웃음을 사다 (LEX-5792; not また, ずっと, どっと, クスクス).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
 //= adverb.habit-clause	Adverbs of habit in the clause of a と or たら or after it that make it what used to happen, a condition (いつも彼と話していると 이야기하면, 夕暮れになると子どもたちは必ず通った 되면).
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
@@ -21,6 +22,7 @@
 //= particle.after-quote-to	Particles right after a と that make it a quotation, not a condition or a step (病気になるとさえされていた, 行くとも言った).
 //= particle.final-after-past	Final particles that may stand alone in the ending of a past whose た is in the conjugation (立っていたよ, ぼやいてたぞ).
 //= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
+//= particle.split-lead	One-kana particles that, right after a noun, may start a hiragana word that a longer dictionary word after the particle splits (刺身にわさび: に + わさび, not にわ 庭 + さび; constraint particle-split).
 //= verb.perception	Verbs of seeing and the passive words of them the dictionary has (見る, 覗く, 見つめる, 見られる; not 聞く, which also asks): with a person before に their passive is that person's act, with no object needed (誰かに見られている 누군가가 보고 있다; spec GRM-2).
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
@@ -230,6 +232,8 @@
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.voice-end	Ends of Korean lemmas that read a passive or potential (쓰여지다, 결정되다, 읽히다, 올 수 있다), which the respectful form replaces; a verb of its own (生まれ 태어나다) keeps its Korean.
 //= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
+//= kana.adjective-ending	Kana that start the ending of an adjective stem (い, く, かっ, けれ, さ, そう): a kana chunk that is also an adjective stem is that stem only before one of them (constraint particle-split: 見にくい, but 先輩にくすっと).
+//= ko-word.smile-sound	Korean mimetic words of a gentle smile or soft laugh that the sound stage writes for にっこり, にこにこ, ふふっ (방긋, 빙그레, 후훗), which then stand for adverb.smile-manner before 笑われた (LEX-5792).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
 //= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
@@ -3943,6 +3947,14 @@ particle.quoting-after	とか
 particle.quoting-after	とい
 particle.quoting-after	という
 particle.quoting-after	か
+particle.split-lead	に
+particle.split-lead	を
+particle.split-lead	が
+particle.split-lead	は
+particle.split-lead	で
+particle.split-lead	と
+particle.split-lead	へ
+particle.split-lead	も
 ending.told-past	のだった
 ending.told-past	のであった
 ending.told-past	のでした
@@ -9094,6 +9106,58 @@ word.reciprocal-to	共演	GRM-86
 word.reciprocal-to	連絡	GRM-86
 word.reciprocal-to	契約	GRM-86
 word.reciprocal-to	取引	GRM-86
+adverb.smile-manner	にっこり
+adverb.smile-manner	ニッコリ
+adverb.smile-manner	にこにこ
+adverb.smile-manner	ニコニコ
+adverb.smile-manner	にこりと
+adverb.smile-manner	にこっと
+adverb.smile-manner	ニコッと
+adverb.smile-manner	にっこりと
+adverb.smile-manner	ふふっと
+adverb.smile-manner	フフッと
+adverb.smile-manner	ふふと
+adverb.smile-manner	うふふと
+adverb.smile-manner	くすりと
+adverb.smile-manner	優しく
+adverb.smile-manner	やさしく
+adverb.smile-manner	静かに
+adverb.smile-manner	穏やかに
+adverb.smile-manner	にこやかに
+adverb.smile-manner	柔らかく
+adverb.smile-manner	やわらかく
+adverb.smile-manner	朗らかに
+adverb.smile-manner	楽しそうに
+adverb.smile-manner	嬉しそうに
+adverb.smile-manner	うれしそうに
+adverb.smile-manner	満足そうに
+adverb.smile-manner	おかしそうに
+adverb.smile-manner	小さく
+ko-word.smile-sound	방긋
+ko-word.smile-sound	빙긋
+ko-word.smile-sound	생긋
+ko-word.smile-sound	싱긋
+ko-word.smile-sound	방긋방긋
+ko-word.smile-sound	빙긋빙긋
+ko-word.smile-sound	생긋생긋
+ko-word.smile-sound	싱긋싱긋
+ko-word.smile-sound	빙그레
+ko-word.smile-sound	방실
+ko-word.smile-sound	방실방실
+ko-word.smile-sound	생글생글
+ko-word.smile-sound	싱글싱글
+ko-word.smile-sound	싱글벙글
+ko-word.smile-sound	후훗
+ko-word.smile-sound	후후
+ko-word.smile-sound	후후훗
+ko-word.smile-sound	우후후
+ko-word.smile-sound	우훗
+kana.adjective-ending	い
+kana.adjective-ending	く
+kana.adjective-ending	か
+kana.adjective-ending	け
+kana.adjective-ending	さ
+kana.adjective-ending	そ
 word.pause-filler	あ
 word.pause-filler	え
 word.pause-filler	ええ

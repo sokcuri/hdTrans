@@ -116,6 +116,10 @@ enum class ConstraintContext : uint8_t {
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a
                         // noun, a word the dictionary lacks, the ん of a nominalizer or at a token start
                         // (マザコン|ちゃう, 行くん|ちゃう)
+    ParticleSplit,      // right after a kanji or katakana word, the word is a hiragana noun that starts
+                        // with a one-kana particle of particle.split-lead, and the kana after that particle
+                        // start a dictionary word of two characters or more that goes on past the word's
+                        // end (刺身|にわ|さび: に + わさび, not 庭 + さび)
 };
 
 // The senses a rule rejects.
