@@ -50,17 +50,19 @@ cue-chosen-senses:46	荒れる	v1	sense	吹き荒れる	휘몰아치다	LEX-3473
 cue-chosen-senses:5834	押し付ける	v1	voice	obj=仕事|責任|役目|面倒|用事|罪|雑用|宿題|厄介事|面倒事 voice=passive|none	passive:떠맡다	LEX-5834		仕事を押し付けられた 일을 떠맡았다			
 cue-chosen-senses:5835	押しつける	v1	voice	obj=仕事|責任|役目|面倒|用事|罪|雑用|宿題|厄介事|面倒事 voice=passive|none	passive:떠맡다	LEX-5834		仕事を押しつけられる 일을 떠맡는다			
 cue-chosen-senses:5837	仕掛ける	v1	voice	obj=攻撃|奇襲|夜襲|猛攻|総攻撃|襲撃 voice=passive|none	passive:당하다	LEX-5834		敵から攻撃を仕掛けられる 적에게서 공격을 당한다			
+cue-chosen-senses:5833	仕掛ける	v1	voice	obj=攻撃|奇襲|夜襲|猛攻|総攻撃|襲撃 from=* voice=potential	passive:당하다	LEX-5834		敵から攻撃を仕掛けられる 적에게서 공격을 당한다			
 cue-chosen-senses:5838	目を向ける	v1	voice	voice=passive	passive:눈길을 받다	LEX-5834		皆から白い目を向けられる 모두에게서 흰 눈길을 받는다			
 cue-chosen-senses:5839	浴びせる	v1	voice	obj=罵声|怒声|怒号|罵倒|罵詈雑言|暴言|悪口|悪態|野次|ヤジ|非難|批判|叱責|嘲笑|侮辱|皮肉|嫌味|文句|小言|説教|罵り|罵言 voice=passive	passive:듣다	LEX-5838		罵声を浴びせられる 욕설을 듣는다			
 cue-chosen-senses:5840	浴びせる	v1	voice	obj=@liquid|冷や水|酒|ビール|ワイン|ジュース|レモネード|コーヒー|紅茶|お茶|茶|牛乳|ミルク|泥|泥水|ペンキ|ソース|血|汚水 voice=passive	passive:뒤집어쓰다	LEX-5838		冷水を浴びせられる 찬물을 뒤집어쓴다			
 cue-chosen-senses:5841	浴びせる	v1	voice	obj=* voice=passive	passive:받다	LEX-5838		質問を浴びせられる 질문을 받는다			
 cue-chosen-senses:5842	撥ねる|跳ねる|はねる	v1	sense	obj=@person|@animal head=-	치다	LEX-5840		男性をはねた 남성을 쳤다			
-cue-chosen-senses:5843	撥ねる|跳ねる|はねる	v1	sense	loc=@vehicle	치다	LEX-5840		車ではねた 차로 쳤다			
-cue-chosen-senses:5844	撥ねる|跳ねる|はねる	v1	sense	dat=@vehicle	치다	LEX-5840		車にはねられた 차에 치였다			
-cue-chosen-senses:5845	撥ねる|跳ねる|はねる	v1	sense	obj=首|首級|頸	치다	LEX-5840		首をはねる 목을 친다			
-cue-chosen-senses:5846	撥ねる|跳ねる|はねる	v1:규칙	voice	dat=@vehicle voice=passive|potential	passive:치이다	LEX-5840		車にはねられた 차에 치였다			
+cue-chosen-senses:5843	はねられる	v1:규칙	sense	obj=泥|泥水|水|水しぶき|しぶき|飛沫|@liquid	뒤집어쓰다	LEX-5844		車に泥をはねられた 차에 진흙을 뒤집어썼다			
+cue-chosen-senses:5844	撥ねる|跳ねる|はねる	v1	sense	dat=@vehicle obj=-|@person|@animal	치다	LEX-5840		車にはねられた 차에 치였다			
+cue-chosen-senses:5845	撥ねる|跳ねる|はねる	v1:규칙	voice	obj=首|首級|頸 voice=passive|potential	passive:베이다	LEX-5845		首をはねられた 목이 베였다			
+cue-chosen-senses:5846	撥ねる|跳ねる|はねる	v1:규칙	voice	dat=@vehicle obj=-|@person|@animal voice=passive|potential	passive:치이다	LEX-5840		車にはねられた 차에 치였다			
 cue-chosen-senses:5847	撥ねる|跳ねる|はねる	v1:규칙	voice	subj=@person|@animal voice=passive	passive:치이다	LEX-5840		人がはねられた 사람이 치였다			
-cue-chosen-senses:5848	はねられる	v1:규칙	sense	dat=@vehicle	치이다	LEX-5840		トラックにはねられた 트럭에 치였다			
-cue-chosen-senses:5849	はねられる	v1:규칙	sense	subj=@person|@animal	치이다	LEX-5840		人がはねられた 사람이 치였다			
+cue-chosen-senses:5848	はねられる	v1:규칙	sense	dat=@vehicle obj=-|@person|@animal	치이다	LEX-5840		トラックにはねられた 트럭에 치였다			
+cue-chosen-senses:5849	はねられる	v1:규칙	sense	subj=@person|@animal obj=-|@person|@animal	치이다	LEX-5840		人がはねられた 사람이 치였다			
 cue-chosen-senses:5830	撥ねる|跳ねる|はねる	v1	sense	obj=@person|@animal head=@vehicle|事故	치다	LEX-5840		猫をはねた車 고양이를 친 차			
-cue-chosen-senses:5831	見せられる	v1:규칙	sense	dat=*	보여지다	LEX-5842		森下さんに見せられたのは 모리시타 씨에게 보여진 것은			
+cue-chosen-senses:5832	撥ねる|跳ねる|はねる	v1	sense	obj=泥|泥水|水|水しぶき|しぶき|飛沫|@liquid	튀기다	LEX-5844		泥をはねる 진흙을 튀기다			
+cue-chosen-senses:5831	見せられる	v1:규칙	sense	dat=* obj=-	보여지다	LEX-5842		森下さんに見せられたのは 모리시타 씨에게 보여진 것은			

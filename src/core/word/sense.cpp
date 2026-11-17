@@ -92,11 +92,20 @@ bool HasTag(const Item* it, std::string_view tag) {
 
 bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
     // class:SET matches a member of a word class of classes.tsv, written as a word trigger.
+    // class:SET@P takes only a member followed by the particle P (class:noun.stage-nerves@で).
     if (trigger.starts_with("class:")) {
-        const std::string_view name = trigger.substr(std::string_view("class:").size());
+        std::string_view name = trigger.substr(std::string_view("class:").size());
+        const std::size_t at = name.find('@');
+        const std::string_view argument = at == std::string_view::npos ? std::string_view() : name.substr(at + 1);
+        name = name.substr(0, at);
         const dict::internal::WordClass* c =
             dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name));
         if (c == nullptr) return false;
+        if (!argument.empty()) {
+            const Item* particle = x->After();
+            if (particle == nullptr || particle->selected < 0 || At(particle->Code(particle->selected), 0) != '2' ||
+                particle->group->surface != argument) return false;
+        }
         for (const std::string_view member : c->members) {
             if (IsWord(x, member)) return true;
         }
@@ -199,6 +208,12 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         const Item* main = x->prev;
         if (cls == '4' && s.side == userdict::Side::Before && main != nullptr && main->selected >= 0 &&
             At(main->Code(main->selected), 0) == '4' && main->JoinsNext() && SenseTriggers(main, it, s)) {
+            return true;
+        }
+        // Before the word, a verbal noun with its する (緊張してあがる) lets the noun be the trigger.
+        if (cls == '4' && s.side == userdict::Side::Before && x->group->surface == kJaSuru && main != nullptr &&
+            main->selected >= 0 && At(main->Code(main->selected), 0) == '1' && main->JoinsNext() &&
+            SenseTriggers(main, it, s)) {
             return true;
         }
         if (cls == '6' || cls == '4' || cls == '7') return false;

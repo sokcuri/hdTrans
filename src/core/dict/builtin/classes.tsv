@@ -410,6 +410,7 @@
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
+//= noun.stage-nerves	Nouns of a performance, a test or an audience, and 緊張, whose で before あがる or 上がる with no が subject makes it 긴장하다 (本番であがった 실전에서 긴장했다; 舞台にあがった stays a climb); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
@@ -634,7 +635,7 @@
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.foresee-start	Starts of the verbs of thinking, knowing, imagining or expecting that a non-past verb with とは before them makes an outcome one did not foresee, -(으)ㄹ 줄은 (こんなことになるとは思わなかった 이렇게 될 줄은 생각하지 못했다).
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
-//= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
+//= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, and of hitting or running over (車ではねる, 車で轢く), before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.youni-seem	Verbs of seeming after ように, with or without は, も or しか between, before which ように is a likeness, 것처럼 (泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えない 속이려 하고 있는 것처럼은 보이지 않는다).
 //= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.youni-unwilled	Verbs of what happens rather than what one does, which a ように of aim can follow without asking anyone (間に合うように 늦지 않도록, 見えるように 보이도록, 届くように 닿도록): a ように after them stays 도록; after a verb one does it is a likeness, 듯이.
@@ -8138,6 +8139,29 @@ verb.filling	涙を浮かべる
 verb.filling	涙をうかべる
 verb.putting-in	入れる
 verb.putting-in	いれる
+noun.stage-nerves	本番
+noun.stage-nerves	人前
+noun.stage-nerves	面接
+noun.stage-nerves	舞台
+noun.stage-nerves	初舞台
+noun.stage-nerves	大舞台
+noun.stage-nerves	晴れ舞台
+noun.stage-nerves	檜舞台
+noun.stage-nerves	発表会
+noun.stage-nerves	発表
+noun.stage-nerves	演奏会
+noun.stage-nerves	演奏
+noun.stage-nerves	試合
+noun.stage-nerves	本試験
+noun.stage-nerves	試験
+noun.stage-nerves	入試
+noun.stage-nerves	面接試験
+noun.stage-nerves	コンクール
+noun.stage-nerves	オーディション
+noun.stage-nerves	スピーチ
+noun.stage-nerves	プレゼン
+noun.stage-nerves	演説
+
 noun.practice	経験
 noun.practice	経験値
 noun.practice	実績
@@ -8250,8 +8274,6 @@ verb.passive-after-object	入れ替え
 verb.passive-after-object	取り替え
 verb.passive-after-object	括り付け
 verb.passive-after-object	縛り付け
-verb.passive-after-object	仕掛け
-
 verb.suffered-act	浴びせ
 verb.suffered-act	浴びせかけ
 verb.suffered-act	浴びせ掛け
@@ -8918,6 +8940,16 @@ verb.vehicle-travel	帰郷
 verb.vehicle-travel	ドライブ
 verb.vehicle-travel	かか
 verb.vehicle-travel	掛か
+verb.vehicle-travel	はね
+verb.vehicle-travel	撥ね
+verb.vehicle-travel	跳ね
+verb.vehicle-travel	轢
+verb.vehicle-travel	ひか
+verb.vehicle-travel	ひい
+verb.vehicle-travel	ひき
+verb.vehicle-travel	ひく
+verb.vehicle-travel	ひけ
+verb.vehicle-travel	ぶつけ
 verb.youni-seem	見え
 verb.youni-seem	見せ
 verb.youni-seem	見せかけ

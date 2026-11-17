@@ -23,3 +23,9 @@ lex:miserare	誰にも見られないように隠れた。	has:보이지 않도�
 lex:miserare	森下さんに見せられたのは、ドライバー型の錐だった。	has:모리시타 씨에게 보여진 것은	keep	packs
 lex:miserare	先生に見せられた写真	has:선생님에게 보여진 사진	keep	packs
 lex:miserare	彼女には見せられない。	has:그녀에게는 보일 수 없다	fix	voice
+lex:miserare-object	彼に写真を見せられた。	그에게 사진을 보게 되었다.	fix	packs
+lex:miserare-object	彼女にプレゼントを見せられた。	그녀에게 선물을 보게 되었다.	fix	packs
+lex:miserare-object	母に手紙を見せられました。	어머니에게 편지를 보게 되었습니다.	fix	packs
+lex:miserare-kana	みせられた。	보게 되었다.	fix	lookup
+lex:miserare-kana	写真をみせられた。	사진을 보게 되었다.	fix	lookup
+lex:miserare-kana	みせられない。	보일 수 없다.	keep	lookup

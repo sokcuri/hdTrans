@@ -28616,3 +28616,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦闘力	전투력	N110	UPc		GN			LEX-5832			せんとうりょく	w:35452
 跳ね上げ	치켜올&AA@	M437			GN			LEX-5830			はねあげ	w:35453
 言われなき	이유 없는	E0H0			GN						いわれなき	w:35454
+首をはねられ	목이 베&AJ@	M427		Pn	GN			LEX-5840			くびをはねられ	w:35455
+みせられ	보게 &C6@	M4U7			GN			LEX-5842			みせられ	w:35456

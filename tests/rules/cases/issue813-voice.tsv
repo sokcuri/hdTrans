@@ -36,3 +36,15 @@ voice:cue	これなら食べられる。	이것이라면 먹을 수 있다.	keep
 voice:readily	言われなくたって、頑張りますから。	has:말하지 않아도	keep	local
 voice:readily	言われるままに従った。	말하는 대로 따랐다.	fix	local
 voice:readily	言われなき差別を受けて	has:이유 없는 차별을	fix	lookup
+voice:cue	敵から攻撃を仕掛けられた。	적에게서 공격을 당했다.	fix	packs
+voice:cue	敵に奇襲を仕掛けられた。	적에게 기습을 당했다.	fix	packs
+voice:cue	ここなら罠を仕掛けられる。	여기라면 함정을 걸 수 있다.	keep	packs
+voice:cue	爆弾を仕掛けられる場所はない。	폭탄을 장치할 수 있는 장소는 없다.	keep	packs
+voice:cue	罠を仕掛けられる場所を探す。	함정을 걸 수 있는 장소를 찾는다.	keep	packs
+voice:cue	戦いを仕掛けられる。	싸움을 걸 수 있다.	keep	packs
+voice:cue	勝負を仕掛けられる相手じゃない。	승부를 걸 수 있는 상대가 아니다.	keep	packs
+voice:cue	今なら攻撃を仕掛けられる。	지금이라면 공격을 걸 수 있다.	keep	packs
+gram:iware-speaker	言われるままに従った。	듣는 대로 따랐다.	keep	lookup
+gram:iware-speaker	彼は言われるままに頷いた。	그는 듣는 대로 끄덕였다.	keep	lookup
+gram:iware-speaker	言われるままにする。	듣는 대로 한다.	keep	lookup
+gram:iware-speaker	言われるままに動いた。	듣는 대로 움직였다.	keep	lookup

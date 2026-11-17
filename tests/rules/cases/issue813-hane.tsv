@@ -1,4 +1,4 @@
-# 규칙: LEX-5830, LEX-5840
+# 규칙: LEX-5830, LEX-5840, LEX-5843, LEX-5844, LEX-5845
 rule	input	expected	kind	layer
 lex:hane-kana	魚がはねました。	has:뛰었습니다	fix	lookup
 lex:hane-kana	カエルがはねた。	has:뛰었다	fix	lookup
@@ -44,3 +44,33 @@ lex:hane-kana	「話相手くらいにはなれるから」	has:될 수 있으�
 lex:hane-kana	積極的にはなれず、友達止まりだった。	has:되지 못하고	keep	lookup
 lex:hane-kana	上着をはおった。	윗도리를 걸쳤다.	fix	lookup
 lex:hane-kana	私はね、	lacks:뛰	keep	lookup
+lex:hane-vehicle-de	車で猫をはねた。	차로 고양이를 쳤다.	fix	constructions
+lex:hane-vehicle-de	自転車で人をはねちゃった。	자전거로 사람을 쳐버렸다.	fix	constructions
+lex:hane-vehicle-de	車で人をはねてしまった。	차로 사람을 쳐버렸다.	fix	constructions
+lex:hane-vehicle-de	バイクで犬をはねました。	오토바이로 개를 쳤습니다.	fix	constructions
+lex:hane-vehicle-de	トラックで子供を轢いた。	트럭으로 아이를 쳤다.	fix	constructions
+lex:hane-vehicle-de	車でぶつけた。	차로 부딪쳤다.	fix	constructions
+lex:hane-vehicle-de	トラックで撥ねて逃げた。	has:트럭으로	fix	constructions
+lex:hane-vehicle-de	車で行った。	차로 갔다.	keep	constructions
+lex:hane-vehicle-de	電車で足を踏まれた。	전철에서 발을 밟혔다.	keep	constructions
+lex:hane-vehicle-de	車で寝た。	차에서 잤다.	keep	constructions
+lex:hane-splash	水をはねる音がした。	물을 튀기는 소리가 났다.	fix	packs
+lex:hane-splash	車が泥をはねた。	차가 진흙을 튀겼다.	fix	packs
+lex:hane-splash	魚が水をはねた。	물고기가 물을 튀겼다.	fix	packs
+lex:hane-splash	泥をはねながら走った。	진흙을 튀기면서 달렸다.	fix	packs
+lex:hane-splash	車に泥をはねられた。	차에 진흙을 뒤집어썼다.	fix	packs
+lex:hane-splash	トラックに泥水をはねられて服が汚れた。	트럭에 흙탕물을 뒤집어써 옷이 더러워졌다.	fix	packs
+lex:hane-splash	バイクに水をはねられた。	오토바이에 물을 뒤집어썼다.	fix	packs
+lex:hane-splash	彼は車に泥をはねられた。	그는 차에 진흙을 뒤집어썼다.	fix	packs
+lex:hane-splash	泥がはねた。	진흙이 튀었다.	keep	senses
+lex:hane-splash	水しぶきがはねる。	물보라가 튄다.	keep	senses
+lex:hane-splash	車にはねられた。	차에 치였다.	keep	packs
+lex:hane-splash	はねられた猫を助けた。	치인 고양이를 도왔다.	keep	packs
+lex:hane-splash	車にはねられた猫。	차에 치인 고양이.	keep	packs
+lex:hane-splash	人が車にはねられた。	사람이 차에 치였다.	keep	packs
+lex:hane-behead	首をはねられた。	목이 베였다.	fix	lookup
+lex:hane-behead	首をはねられそうになった。	목이 베일 뻔했다.	fix	lookup
+lex:hane-behead	首を撥ねられた。	has:베였	fix	packs
+lex:hane-behead	首をはねた。	목을 베었다.	keep	lookup
+lex:hane-behead	彼の首をはねる。	그의 목을 벤다.	keep	lookup
+lex:hane-behead	首をはねてやる！	has:목을 베어	keep	lookup
