@@ -1,0 +1,45 @@
+# 규칙: LEX-6020, LEX-6021
+rule	input	expected	kind	layer
+pack:clause-patterns:35930	子供に泣かれて困った。	has:아이가 울어	fix	voice
+pack:clause-patterns:35930	赤ん坊に泣かれちゃった。	has:갓난아기가 울어	fix	voice
+pack:clause-patterns:35930	妹に泣かれると何も言えない。	has:여동생이 울면	fix	voice
+pack:clause-patterns:35930	妹に泣かれたら困る。	has:여동생이 울면	fix	voice
+pack:clause-patterns:35930	「彼女に泣かれたんだ」	has:그녀가 운	fix	voice
+pack:clause-patterns:35930	大事な人に去られた。	has:소중한 사람이 떠났다	fix	voice
+pack:clause-patterns:35930	恋人に去られた男。	has:애인이 떠난 남자	fix	voice
+pack:clause-patterns:35930	彼女にいきなり去られた。	has:그녀가 갑자기 떠났다	fix	voice
+pack:clause-patterns:35930	近所の犬に吠えられて目が覚めた。	has:개가 짖어	fix	voice
+pack:clause-patterns:35930	大事な部下に辞められました。	has:부하가 그만두었습니다	fix	voice
+pack:clause-patterns:35930	部下に辞められては困る。	has:부하가 그만두어서는	fix	voice
+pack:clause-patterns:35930	彼に先に帰られてしまった。	has:그가 먼저 돌아가	fix	voice
+pack:clause-patterns:35930	母に先に寝られた。	has:어머니가 먼저 잤다	fix	voice
+pack:clause-patterns:35930	子供たちに暴れられて大変だった。	has:아이들이 날뛰어	fix	voice
+pack:clause-patterns:35930	太郎に泣かれて困った。	has:타로가 울어	fix	voice
+pack:clause-patterns:35930	桜庭に去られた。	has:사쿠라바가 떠났다	fix	voice
+pack:clause-patterns:35930	田中さんに泣かれた。	has:타나카 씨가 울었다	fix	voice
+pack:clause-patterns:35932	客に急に来られても困る。	has:손님이 갑자기 와도	fix	voice
+pack:clause-patterns:35932	「女子目当ての男子にわんさか来られても困るし」	has:남자가 잔뜩 와도	fix	voice
+pack:clause-patterns:35932	親に急に来られた。	has:부모가 갑자기 왔다	fix	voice
+pack:clause-patterns:35933	子供には来られない場所だ。	has:올 수 없는	keep	voice
+pack:clause-patterns:35931	彼女には辞められない理由がある。	has:그만둘 수 없는	keep	voice
+pack:clause-patterns:35930	先生は帰られた。	has:돌아가셨다	keep	voice
+pack:clause-patterns:35930	先生が来られました。	has:오셨습니다	keep	voice
+pack:clause-patterns:35930	部長は東京へ行かれた。	has:가셨다	keep	voice
+pack:clause-patterns:35930	親に死なれた。	has:돌아가셨다	keep	voice
+pack:clause-patterns:35930	子供を泣かせた。	has:아이를 울렸다	keep	voice
+pack:clause-patterns:35930	明日は来られる？	has:올 수 있어	keep	voice
+grammar:voice-lexical-undergone	「イク……イっちゃうよぅ……っ、筧さんに掻き回されて、千莉に、見られながら……っ」	has:보여지면서	fix	voice
+grammar:voice-lexical-undergone	見られながら食べるのは嫌だ。	lacks:볼 수	fix	voice
+grammar:voice-lexical-undergone	膣に指を入れられたまま、つぐみは首を振る。	lacks:넣을 수	fix	voice
+grammar:voice-lexical-undergone	「だって、目的を伏せられたまま連れてこられたのが撮影スタジオみたいな部屋で」	has:덮인 채로	fix	voice
+grammar:voice-lexical-undergone	「なんか、じっと見られてると、落ち着かないんだけど……」	lacks:볼 수	fix	voice
+grammar:voice-lexical-undergone	「ブックカバー買うところ、見られてたんだ」	lacks:볼 수	fix	voice
+grammar:voice-lexical-undergone	俺が避けられてるのか？	lacks:피할 수	fix	voice
+grammar:voice-lexical-undergone	本人の合意がすでに得られているのは、彼女がここにいる事でも分かる。	has:합의가 이미 얻어지고	fix	voice
+grammar:voice-lexical-undergone	机の傍におかれたゴミ箱の中に、ぐちゃぐちゃになったケーキが捨てられていたからだ。	has:케이크가 버려지고	fix	voice
+grammar:voice-lexical-undergone	面倒ごとが避けられていいかもしれない。	has:피할 수	keep	voice
+grammar:voice-lexical-undergone	彼は二度と来られない。	has:올 수 없다	keep	voice
+grammar:voice-lexical-undergone	これなら見られる。	has:볼 수 있	keep	voice
+pack:clause-patterns:35934	「女の子に泣かれそうになったら、誰でもこうなる」	lacks:그렇게	keep	voice
+pack:clause-patterns:35930	健也さんに先に帰られた。	has:켄야 씨가 먼저 돌아갔다	fix	voice
+pack:clause-patterns:35930	帰蝶に去られた。	has:노히메가 떠났다	fix	voice

@@ -1557,6 +1557,13 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
+    // A dictionary word in られ of an ichidan verb before a form of what is done to one (ending.rare-passive:
+    // 見られながら 보이면서, 着せられたまま) is the passive, as the analysed られ of PassiveReading is (spec LEX-6021);
+    // ていい is て and いい, a leave (避けられていい 피할 수 있어도 좋다).
+    if (form == VoiceForm::Lexical && ichidan && dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0 &&
+        !rest.starts_with("ていい")) {
+        return Voice::Passive;
+    }
     if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
     // A dictionary word that is the られ form of an ichidan verb with an object を in its clause and no
     // agent is the potential, as an analysed られ is (PassiveReading: 魔力を止められる 마력을 멈출 수 있다,

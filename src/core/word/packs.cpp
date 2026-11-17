@@ -685,9 +685,11 @@ bool ReadsText(const std::vector<Item*>& items, std::size_t i, std::string_view 
 
 // Whether x names a person in the engine's own codes: a name, or a word with a person sense.
 bool PersonWord(const Item* x) {
-    const Entry* e = x->group->At(x->selected);
+    // a voice row asks before selection, when the word's default candidate stands for it (太郎に泣かれた)
+    const int slot = std::max(x->selected, 0);
+    const Entry* e = x->group->At(slot);
     if (e != nullptr && e->user != nullptr && (e->user->name || e->user->nameLayer)) return true;
-    const dict::SemCodes sem(x->Attr(x->selected));
+    const dict::SemCodes sem(x->Attr(slot));
     for (const std::string_view code : {"QPN", "QNP", "VHn", "VQw", "VQm", "UAq", "UQf"})
         if (sem.HasCode(code)) return true;
     return false;
@@ -714,7 +716,7 @@ bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std
 // The honorific suffixes that stay with the noun of a slot (青海さん, オクタヴィア様).
 bool SlotSuffix(const Item* x) {
     static constexpr std::string_view kSuffixes[] = {"さん", "様", "さま", "ちゃん", "くん", "君", "殿", "先生", "先輩", "氏"};
-    return x->group != nullptr && x->selected >= 0 &&
+    return x->group != nullptr &&
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
 }
 
@@ -723,7 +725,7 @@ bool SlotSuffix(const Item* x) {
 // Wider person codes (VHn, UAq), QPN rows of common words (メカ) and name-file rows of common nouns (事故,
 // センサー) do not count; common person nouns come from the pack-classes files.
 bool FramePerson(const Item* x) {
-    if (x->group == nullptr || x->selected < 0) return false;
+    if (x->group == nullptr || x->group->entries.empty()) return false;
     // a plural of a person (桜庭たち, 田中くんたち) is one, as ArgMember reads the plural of a class noun
     if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), x->group->surface))
         return x->prev != nullptr && x->prev->tokenIndex == x->tokenIndex && FramePerson(x->prev);
@@ -736,7 +738,7 @@ bool FramePerson(const Item* x) {
     // the case phrase of 田中さんを ends in the suffix
     if (SlotSuffix(x) && x->prev != nullptr && joined(x->prev, x) && ClassOf(x->prev) == '1') return true;
     // the selected reading, or a surname or given-name row of the word that reads the same (葵 아오이)
-    const Entry* chosen = x->group->At(x->selected);
+    const Entry* chosen = x->group->At(std::max(x->selected, 0));
     if (chosen == nullptr) return false;
     for (const Entry* e : x->group->entries) {
         if (e == nullptr || e->dst != chosen->dst || !dict::SemCodes(e->attr).HasCode("QPN")) continue;
