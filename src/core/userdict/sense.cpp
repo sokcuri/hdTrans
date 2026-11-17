@@ -29,7 +29,13 @@ bool ValidTag(std::string_view tag) {
 
 bool ValidTrigger(std::string_view trigger, Side side) {
     if (trigger.starts_with("class:")) {
-        const std::string_view name = trigger.substr(std::string_view("class:").size());
+        std::string_view name = trigger.substr(std::string_view("class:").size());
+        // class:SET@P: a particle after the member, before the word only.
+        if (const std::size_t at = name.find('@'); at != std::string_view::npos) {
+            const std::string_view particle = name.substr(at + 1);
+            if (side != Side::Before || particle.empty() || particle.find('@') != std::string_view::npos) return false;
+            name = name.substr(0, at);
+        }
         return dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name)) != nullptr;
     }
     if (!trigger.starts_with("sem:") && !trigger.starts_with("gram:")) return true;

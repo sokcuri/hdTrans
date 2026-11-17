@@ -129,6 +129,7 @@
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= ending.voice-condition	Conditions and concessions after (ら)れ: when the main clause is a trouble of stem.adverse-outcome the (ら)れ is the passive (見られたら困る), and a word of word.ability-scope before one makes no potential (誰だってそう言われたら).
 //= ending.voice-desire	Forms of wanting after (ら)れ, which only the passive takes (褒められたい, 見られたくない).
+//= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる).
 //= ending.voice-polite	Polite forms after (ら)れ; in a question with no subject they ask the listener, whose act the (ら)れ honours (何を読まれているんですか 무엇을 읽고 계십니까).
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
@@ -409,6 +410,7 @@
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
+//= noun.stage-nerves	Nouns of a performance, a test or an audience, and 緊張, whose で before あがる or 上がる with no が subject makes it 긴장하다 (本番であがった 실전에서 긴장했다; 舞台にあがった stays a climb); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
@@ -590,6 +592,7 @@
 //= verb.unattained	Stems of the passives of something one wishes for and does not get (愛され, 報われ, 褒められ), whose negative takes 못하다 (愛されなかった 사랑받지 못했다), not a concession or a condition (愛されなくても 사랑받지 않아도); not a permission refused (許されない 허락되지 않는다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
+//= verb.suffered-act	Ichidan stems of acts aimed at someone that one seldom speaks of being able to do, whose non-past られる with no recipient に in its clause is the passive (罵声を浴びせられる 욕설을 듣는다, 刃を突きつけられる); a word of ability scope still makes the potential (誰でも浴びせられる).
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
 //= verb.answer-gesture	Starts of the gestures and acts of answering that take what was said before a quoting と (頷く, 首を振る, 頭を下げる, 付け加える): after a predicate other than a verb's plain form the と is the quotation -다고, also with the speaker or an adverb between (異論はないと頷いた 이론은 없다고 끄덕였다, 風習だとアワイは最後に付け加えた 풍습이라고 아와이는 마지막으로 덧붙였다).
 //= verb.write-say	Starts of verbs of writing, telling and promising that quote a と a few words before them, with no predicate between (弟にすると書状に書き残していた 한다고, 提供するとお話しさせて頂きました 제공한다고; spec GRM-40).
@@ -632,12 +635,12 @@
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.foresee-start	Starts of the verbs of thinking, knowing, imagining or expecting that a non-past verb with とは before them makes an outcome one did not foresee, -(으)ㄹ 줄은 (こんなことになるとは思わなかった 이렇게 될 줄은 생각하지 못했다).
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
-//= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
+//= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, and of hitting or running over (車ではねる, 車で轢く), before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.youni-seem	Verbs of seeming after ように, with or without は, も or しか between, before which ように is a likeness, 것처럼 (泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えない 속이려 하고 있는 것처럼은 보이지 않는다).
 //= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.youni-unwilled	Verbs of what happens rather than what one does, which a ように of aim can follow without asking anyone (間に合うように 늦지 않도록, 見えるように 보이도록, 届くように 닿도록): a ように after them stays 도록; after a verb one does it is a likeness, 듯이.
 //= verb.youni-depicted	Verbs of a gesture, a look, a voice or a touch, whose manner a ように of a verb one does before them depicts: 듯이 (からかうように笑った 놀리듯이 웃었다, 懇願するように見つめる 간청하듯이 바라본다, 包み込むように抱き締める 감싸듯이 껴안는다).
-//= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
+//= verb.transfer	Ichidan stems of giving, showing, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
 //= verb.permission-word	Dictionary words that hold a causative and the stem of もらう (使わせてもら, 聞かせてもら): their sentence-final ます is the speaker's act with leave, 겠습니다 (spec GRM-44).
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
@@ -749,6 +752,8 @@ adverb.habitual	時々
 adverb.habitual	ときどき
 adverb.habitual	何度も
 adverb.habitual	しばしば
+adverb.habitual	毎日のように
+adverb.habitual	いつものように
 adverb.going-well	上手く
 adverb.going-well	旨く
 adverb.going-well	巧く
@@ -1653,6 +1658,15 @@ ending.voice-desire	たかっ
 ending.voice-desire	たが
 ending.voice-desire	たけれ
 ending.voice-desire	たき
+
+ending.voice-readily	やす
+ending.voice-readily	にく
+ending.voice-readily	がち
+ending.voice-readily	すぎ
+ending.voice-readily	過ぎ
+ending.voice-readily	づら
+ending.voice-readily	続け
+ending.voice-readily	つづけ
 
 ending.voice-polite	ます
 ending.voice-polite	まし
@@ -8125,6 +8139,29 @@ verb.filling	涙を浮かべる
 verb.filling	涙をうかべる
 verb.putting-in	入れる
 verb.putting-in	いれる
+noun.stage-nerves	本番
+noun.stage-nerves	人前
+noun.stage-nerves	面接
+noun.stage-nerves	舞台
+noun.stage-nerves	初舞台
+noun.stage-nerves	大舞台
+noun.stage-nerves	晴れ舞台
+noun.stage-nerves	檜舞台
+noun.stage-nerves	発表会
+noun.stage-nerves	発表
+noun.stage-nerves	演奏会
+noun.stage-nerves	演奏
+noun.stage-nerves	試合
+noun.stage-nerves	本試験
+noun.stage-nerves	試験
+noun.stage-nerves	入試
+noun.stage-nerves	面接試験
+noun.stage-nerves	コンクール
+noun.stage-nerves	オーディション
+noun.stage-nerves	スピーチ
+noun.stage-nerves	プレゼン
+noun.stage-nerves	演説
+
 noun.practice	経験
 noun.practice	経験値
 noun.practice	実績
@@ -8237,6 +8274,14 @@ verb.passive-after-object	入れ替え
 verb.passive-after-object	取り替え
 verb.passive-after-object	括り付け
 verb.passive-after-object	縛り付け
+verb.suffered-act	浴びせ
+verb.suffered-act	浴びせかけ
+verb.suffered-act	浴びせ掛け
+verb.suffered-act	突きつけ
+verb.suffered-act	突き付け
+verb.suffered-act	押し付け
+verb.suffered-act	押しつけ
+verb.suffered-act	課せ
 
 verb.passive-any-object	恐れ
 verb.passive-any-object	求め
@@ -8262,6 +8307,7 @@ verb.passive-any-object	睨め
 verb.passive-any-object	抱え
 verb.passive-any-object	付け
 verb.passive-any-object	抱き上げ
+verb.passive-any-object	比べ
 
 verb.potential-rareta	見つけ
 verb.potential-rareta	答え
@@ -8894,6 +8940,16 @@ verb.vehicle-travel	帰郷
 verb.vehicle-travel	ドライブ
 verb.vehicle-travel	かか
 verb.vehicle-travel	掛か
+verb.vehicle-travel	はね
+verb.vehicle-travel	撥ね
+verb.vehicle-travel	跳ね
+verb.vehicle-travel	轢
+verb.vehicle-travel	ひか
+verb.vehicle-travel	ひい
+verb.vehicle-travel	ひき
+verb.vehicle-travel	ひく
+verb.vehicle-travel	ひけ
+verb.vehicle-travel	ぶつけ
 verb.youni-seem	見え
 verb.youni-seem	見せ
 verb.youni-seem	見せかけ
@@ -9046,6 +9102,8 @@ verb.transfer	借り
 verb.transfer	命じ
 verb.transfer	告げ
 verb.transfer	伝え
+verb.transfer	見せ
+verb.transfer	みせ
 
 verb.writing	書
 verb.writing	か

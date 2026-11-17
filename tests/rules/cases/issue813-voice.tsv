@@ -1,0 +1,50 @@
+# 규칙: LEX-5834, LEX-5836, LEX-5838
+rule	input	expected	kind	layer
+voice:readily	狙われやすくなった！	노려지기 쉬워졌다!	fix	conjugation
+voice:readily	狙われやすいキャラ。	노려지기 쉬운 캐릭터.	fix	conjugation
+voice:readily	ねらわれやすい。	has:쉽다	fix	conjugation
+voice:readily	狙われにくい。	노려지기 어렵다.	fix	conjugation
+voice:readily	忘れられやすい。	잊히기 쉽다.	fix	conjugation
+voice:readily	言われやすいタイプ。	듣기 쉬운 타입.	fix	conjugation
+voice:readily	狙われすぎる。	너무 노려진다.	fix	compose
+voice:readily	褒められすぎて頭がフラフラする	has:너무 칭찬받아	fix	conjugation
+voice:readily	罵声を浴びせられ続けた。	욕설을 계속 들었다.	fix	voice
+voice:readily	騙されやすい人だ。	속기 쉬운 사람이다.	keep	conjugation
+voice:readily	狙いやすい敵だ。	노리기 쉬운 적이다.	keep	conjugation
+voice:readily	この服は安い。	이 옷은 싸다.	keep	lookup
+voice:nagara	喝采を浴びせられながら、彼は舞台を降りた。	has:갈채를 받으면서	fix	conjugation
+voice:nagara	褒められながら育った。	칭찬받으면서 자랐다.	fix	conjugation
+voice:nagara	エルは頭を撫でられながら、顔を赤く染めた。	has:쓰다듬어지면서	fix	conjugation
+voice:nagara	水結に背中を押されながら、商店街を進む。	has:등을 밀리면서	fix	conjugation
+voice:nagara	きれいな顔を歪ませながら、皐月は苦しげな声を漏らした。	has:일그러지게 하면서	fix	conjugation
+voice:nagara	食べながら歩く。	먹으면서 걷는다.	keep	conjugation
+voice:suffered	毎日罵声を浴びせられる。	매일 욕설을 듣는다.	fix	voice
+voice:suffered	観客から罵声を浴びせられる！	관객에게서 욕설을 듣는다!	fix	voice
+voice:suffered	記者から質問を浴びせられる。	기자에게서 질문을 받는다.	fix	packs
+voice:suffered	毎日罵声を浴びせられます。	매일 욕설을 듣습니다.	fix	voice
+voice:suffered	「いきなり罵声を浴びせられましたが」	「갑자기 욕설을 들었습니다만」	fix	packs
+voice:suffered	頭からレモネードを浴びせられていた。	has:레모네이드를 뒤집어쓰고 있었다	fix	packs
+voice:suffered	唐突な質問を浴びせられて、俺は戸惑った。	has:질문을 받고	fix	packs
+voice:suffered	彼に罵声を浴びせられる者はいない。	그에게 욕설을 퍼부을 수 있는 사람은 없다.	keep	voice
+voice:suffered	誰でも浴びせられる。	누구나 퍼부을 수 있다.	keep	voice
+voice:suffered	罵声を浴びせた。	욕설을 퍼부었다.	keep	lookup
+voice:cue	皆から白い目を向けられる。	모두에게서 흰 눈길을 받는다.	fix	packs
+voice:cue	敵から攻撃を仕掛けられる。	적에게서 공격을 당한다.	fix	packs
+voice:cue	「なんだか、私ひとりに責任を押しつけられた……そんな気分でした……」	has:책임을 떠맡은	fix	packs
+voice:cue	先生に褒められる。	선생님에게 칭찬받는다.	keep	voice
+voice:cue	これなら食べられる。	이것이라면 먹을 수 있다.	keep	voice
+voice:readily	言われなくたって、頑張りますから。	has:말하지 않아도	keep	local
+voice:readily	言われるままに従った。	듣는 대로 따랐다.	fix	local
+voice:readily	言われなき差別を受けて	has:이유 없는 차별을	fix	lookup
+voice:cue	敵から攻撃を仕掛けられた。	적에게서 공격을 당했다.	fix	packs
+voice:cue	敵に奇襲を仕掛けられた。	적에게 기습을 당했다.	fix	packs
+voice:cue	ここなら罠を仕掛けられる。	여기라면 함정을 걸 수 있다.	keep	packs
+voice:cue	爆弾を仕掛けられる場所はない。	폭탄을 장치할 수 있는 장소는 없다.	keep	packs
+voice:cue	罠を仕掛けられる場所を探す。	함정을 걸 수 있는 장소를 찾는다.	keep	packs
+voice:cue	戦いを仕掛けられる。	싸움을 걸 수 있다.	keep	packs
+voice:cue	勝負を仕掛けられる相手じゃない。	승부를 걸 수 있는 상대가 아니다.	keep	packs
+voice:cue	今なら攻撃を仕掛けられる。	지금이라면 공격을 걸 수 있다.	keep	packs
+gram:iware-speaker	言われるままに従った。	듣는 대로 따랐다.	keep	lookup
+gram:iware-speaker	彼は言われるままに頷いた。	그는 듣는 대로 끄덕였다.	keep	lookup
+gram:iware-speaker	言われるままにする。	듣는 대로 한다.	keep	lookup
+gram:iware-speaker	言われるままに動いた。	듣는 대로 움직였다.	keep	lookup

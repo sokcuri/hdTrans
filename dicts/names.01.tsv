@@ -264588,7 +264588,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦闘ロボット軍団	전투 로봇 군단	N110			GN							names.566558
 戦闘不能	전투불능	N130	QPNVHn	Wb	GN						せんとうふのう	names.566559
 戦闘人形 マヤ	전투형 마야	N110			GN							names.566560
-戦闘力	전투력	N130	QPNVHnUPc	Wb	GN							names.566561
 戦闘力1ゾイド	전투력 1 조이드	N110			GN							names.566562
 戦闘力530000	프리저	N130	QPNVHn	Wb	GN							names.566563
 戦闘員	전투원	N110			GN							names.566564
@@ -267522,7 +267521,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 攻撃の勢いで	공격전이다	N110			GN							names.569565
 攻撃の無力化	공격의 무력화	N130	QPNVHn		GN							names.569566
 攻撃は最大の防御	공격은 최대의 방어	N110			GN							names.569567
-攻撃力	공격력	N130	QPNVHn	Wb	GN							names.569568
 攻撃司令艦ザンタル	공격사령함 잔탈	N110			GN							names.569569
 攻撃団・四季	공격단 사계	N130	VGt		GN						こうげきだん・しき	names.569570
 攻撃性	공격성	N110			GN							names.569571
@@ -316230,7 +316228,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 歩行グラフィック	보행 그래픽	N130	QPNVHn		GN							names.618826
 歩行ドット	보행 도트	N110			GN							names.618827
 歩行戦車	보행 전차	N110			GN							names.618828
-歩行者	보행자	N110			GN							names.618829
 歩行者信号	보행자 신호	N110			GN							names.618830
 歩行者優先	보행자 우선	N110			GN						ほこうしゃゆうせん	names.618831
 歩行者天国	보행자 천국	N110			GN							names.618832

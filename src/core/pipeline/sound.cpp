@@ -1553,15 +1553,16 @@ bool SoundText::Spaced(size_t i) const {
     return IsHiraganaRune(rs[i]) && StartsVerb(i);
 }
 
-// Whether the longest dictionary word at character i is a verb.
+// Whether the longest dictionary word at character i is a verb. Of the kana spellings only the verbs
+// count, which the word stage reads after a sound in Hangul (폴짝폴짝 뛴다 for ぴょんぴょんはねる; LEX-5830).
 bool SoundText::StartsVerb(size_t i) const {
     const dict::Candidates rd =
         snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
     size_t longest = 0;
     bool verb = false;
     for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && c.user->kana) continue;
         const bool isVerb = c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'M';
+        if (c.user != nullptr && c.user->kana && !isVerb) continue;
         if (c.source.size() > longest) {
             longest = c.source.size();
             verb = isVerb;

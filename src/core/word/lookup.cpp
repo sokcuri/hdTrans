@@ -527,20 +527,48 @@ bool Worker::StandsApart(std::string_view key, std::string_view query) const {
     return apart(before) && apart(after);
 }
 
+// Whether the text before query in its token ends with a unit of two or three kana said twice, a
+// sound (ぴちぴち, ぴょこぴょこ), after which a verb spelled in kana starts a word (ぴちぴちはねる 팔팔 뛴다;
+// LEX-5830).
+bool Worker::DoubledSoundBefore(std::string_view query) const {
+    const std::string_view before = transformSurface.substr(0, transformSurface.size() - query.size());
+    // Kana take three bytes each in UTF-8.
+    for (std::size_t n = 2; n <= 3; n++) {
+        if (before.size() < 6 * n) continue;
+        const std::string_view unit = before.substr(before.size() - 3 * n), first = before.substr(before.size() - 6 * n, 3 * n);
+        if (unit != first || unit.substr(0, 3) == unit.substr(3, 3)) continue;
+        bool kana = true;
+        for (std::size_t k = 0; k < unit.size(); k += 3) {
+            const int c = NameClassOf(unit.substr(k, 3));
+            kana = kana && (c == kClassHiragana || c == kClassKatakana);
+        }
+        if (kana) return true;
+    }
+    return false;
+}
+
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
     if (!surface.ends_with(query)) return false;
     const std::string_view prev = LastChar(surface.substr(0, surface.size() - query.size()));
+    const std::string_view pc = u.codes->partText;
     switch (NameClassOf(prev)) {
     case kClassHiragana:
     case kClassKanji:
     case kClassKatakana:
-        if (!Has(kKanaBefore, prev)) return false;
+        if (!Has(kKanaBefore, prev) && !(pc.size() > 1 && pc[1] == '4' && DoubledSoundBefore(query))) return false;
     }
-    const std::string_view pc = u.codes->partText;
-    if (pc.size() > 1 && (pc[1] == '4' || pc[1] == '7')) return true;
     const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    // A verb or adjective spelling that reads as the particle は and a final particle (はね: は + ね) needs a
+    // full hiragana after it: before a mark, a kanji or the end it is は and the final particle (私はね、,
+    // はね配合比); はだけ、 stays the verb.
+    if (pc.size() > 1 && (pc[1] == '4' || pc[1] == '7')) {
+        // A small kana or a long mark draws the particle out (あとはねぇ, はねっかえり), which no verb ending starts.
+        return !u.key.starts_with("は") ||
+               !dict::InClass(HDTRANS_CLASS("particle.final-after-past"), u.key.substr(std::string_view("は").size())) ||
+               (NameClassOf(FirstChar(rest)) == kClassHiragana && !Has("ぁぃぅぇぉっゃゅょゎ", FirstChar(rest)));
+    }
     const std::string_view next = FirstChar(rest);
     switch (NameClassOf(next)) {
     case kClassHiragana:
