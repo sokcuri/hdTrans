@@ -148,6 +148,8 @@ public:
     Item* QueryPrefixTable(std::string_view text, int offset, int token);
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
+    bool VerbFormSpelling(std::string_view form) const;
+    bool ProvenName(std::string_view key) const;
     bool GodanCausative(std::string_view stem) const;
     bool IchidanPartner(std::string_view stem, std::string_view kana) const;
     bool GodanBase(std::string_view stem) const;
@@ -191,6 +193,7 @@ private:
     // that a shorter reading lets the next word take; null when c stands.
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
+    Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
     // The longer reading left at cursor that takes the place of c when the retry budget is spent; null for none.
     Item* LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c);
     // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends

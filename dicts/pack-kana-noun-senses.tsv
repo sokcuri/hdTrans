@@ -1,0 +1,5 @@
+#! layer=pack
+# 가나로 쓴 명사의 뜻을 술어로 고르는 팩 행: あめをなめる 사탕을 빨다, みかんのかわをむく 귤 껍질을 벗기다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
+kana-noun-senses:1	あめ	n	sense	pred=なめる|舐める|しゃぶる|食べる|たべる|噛む|かむ|もらう|貰う|買う|かう|あげる|くれる|配る|くばる|溶かす|とかす	사탕	LEX-5926		あめをなめる 사탕을 빨다		
+kana-noun-senses:2	かわ	n	sense	pred=むく|剥く|むける|剥ける|はぐ|剥ぐ	껍질	LEX-5926		かわをむく 껍질을 벗기다		
