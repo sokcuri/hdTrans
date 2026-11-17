@@ -43,3 +43,34 @@ grammar:voice-lexical-undergone	これなら見られる。	has:볼 수 있	keep
 pack:clause-patterns:35934	「女の子に泣かれそうになったら、誰でもこうなる」	lacks:그렇게	keep	voice
 pack:clause-patterns:35930	健也さんに先に帰られた。	has:켄야 씨가 먼저 돌아갔다	fix	voice
 pack:clause-patterns:35930	帰蝶に去られた。	has:노히메가 떠났다	fix	voice
+pack:clause-patterns:35930	犯人に逃げられた。	has:범인이 도망쳤	fix	voice
+pack:clause-patterns:35930	犯人に逃げられて、悔しかった。	has:범인이 도망쳐	fix	voice
+pack:clause-patterns:35930	「犯人に逃げられた！」	has:범인이 도망쳤	fix	voice
+pack:clause-patterns:35930	猫に逃げられちゃった。	has:고양이가 도망쳐	fix	voice
+pack:clause-patterns:35930	敵に逃げられる前に撃て。	has:적이 도망치기 전에	fix	voice
+pack:clause-patterns:35930	妻に逃げ出された。	has:아내가 도망	fix	voice
+grammar:voice-lexical-undergone	無事に逃げられたと思う。	lacks:차였	keep	voice
+grammar:voice-lexical-undergone	彼は逃げられなかった。	has:도망칠 수 없었	keep	voice
+pack:clause-patterns:35930	カラスに鳴かれた。	has:까마귀가 울었	fix	voice
+pack:clause-patterns:35930	犬に一晩中鳴かれて眠れなかった。	has:개가 밤새 울어	fix	voice
+pack:clause-patterns:35930	蝉に鳴かれて眠れない。	has:매미가 울어	fix	voice
+pack:clause-patterns:35930	友達に泣きつかれて、お金を貸した。	has:친구가 울며 매달려	fix	voice
+pack:clause-patterns:35930	部下に休まれた。	has:부하가 쉬었	fix	voice
+pack:clause-patterns:35930	部下に休まれて、困っています。	has:부하가 쉬어	fix	voice
+pack:clause-patterns:35930	犬にほえられた。	has:개가 짖었	fix	voice
+pack:clause-patterns:35930	犬にほえられて、逃げた。	has:개가 짖어	fix	voice
+pack:clause-patterns:35930	子供になかれて困った。	has:아이가 울어	fix	voice
+pack:clause-patterns:35930	子供になきだされた。	has:아이가 울기 시작했	fix	voice
+pack:clause-patterns:35940	子供にこられても困る。	has:아이가 와도	fix	voice
+pack:clause-patterns:35940	客にこられて忙しい。	has:손님이 와	fix	voice
+pack:clause-patterns:35938	彼に先に行かれた。	has:그가 먼저 갔	fix	voice
+pack:clause-patterns:35938	友達に先に行かれちゃった。	has:친구가 먼저 가	fix	voice
+pack:clause-patterns:35938	社長は大阪に行かれました。	has:가셨습니다	keep	voice
+pack:clause-patterns:35939	私には行かれない。	has:갈 수 없다	keep	voice
+dict:w:35930	夫に先立たれた。	has:남편을 잃었	fix	lookup
+dict:w:35930	夫に先立たれて、一人で暮らしている。	has:남편을 잃어	fix	lookup
+dict:w:35930	親に先立たれた子。	has:부모를 잃은	fix	lookup
+dict:w:35930	発売に先立ち、	has:발매에 앞서	keep	lookup
+pack:clause-patterns:35936	彼女に去られたくない。	lacks:떠나고 싶	keep	voice
+pack:clause-patterns:35936	子供に泣かれたくなかった。	lacks:울고 싶	keep	voice
+pack:clause-patterns:35937	部下に辞められたくない。	lacks:그만두고 싶	keep	voice

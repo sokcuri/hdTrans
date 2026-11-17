@@ -11,3 +11,9 @@ clause-patterns:35932	来られる	v1	voice	frame	dat=@person|@animal voice=pass
 clause-patterns:35933	来られる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		子供には来られない → 올 수 없다
 clause-patterns:35934	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=passive next=そう	passive		50	LEX-6020		女の子に泣かれそうになったら: the active does not carry そう (울고 그렇게)
 clause-patterns:35935	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=potential next=そう	potential		50	LEX-6020		部下に辞められそうになった: the active does not carry そう
+clause-patterns:35936	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=passive next=たい	passive		50	LEX-6020		子供に泣かれたくない: the active does not carry たい (울고 싶지 않다 moves the wish)
+clause-patterns:35937	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=potential next=たい	potential		50	LEX-6020		部下に辞められたくない: the active does not carry たい
+clause-patterns:35938	行かれる	v1	voice	frame	dat=@person|@animal voice=passive|potential	passive:가다	(이)가	50	LEX-6020		彼に先に行かれた → 그가 먼저 갔다 (the dictionary 行かれ reads the potential)
+clause-patterns:35939	行かれる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		彼には行かれない: a negative is the potential
+clause-patterns:35940	こられる	v1	voice	frame	dat=@person|@animal voice=passive|potential	passive:오다	(이)가	50	LEX-6020		客にこられて忙しい → 손님이 와서 바쁘다
+clause-patterns:35941	こられる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		彼にはこられない: a negative is the potential

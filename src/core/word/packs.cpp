@@ -570,10 +570,18 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
 }
 
 // Whether a row of lemma * or lemma @class applies to the word, and how it names it (0 for *, 1 for @class).
-bool OpenRowNames(const dict::PackRow& r, const Item* it, int& named) {
+// A key other than the word's surface is the verb the caller found (休まれ: the stem 休ま of 休まる is the
+// passive of 休む, keyed 休), which names a member whose dictionary form it is or is the stem of.
+bool OpenRowNames(const dict::PackRow& r, const Item* it, std::string_view key, int& named) {
     named = 0;
     if (r.lemmaClass.empty()) return true;
     named = 1;
+    if (key != it->group->surface) {
+        const auto own = r.lemmaKeys.find(key);
+        if (own != r.lemmaKeys.end())
+            for (const std::string& lemma : own->second)
+                if (lemma == key || (lemma.starts_with(key) && text::RuneCount(std::string_view(lemma).substr(key.size())) == 1)) return true;
+    }
     const auto keyed = r.lemmaKeys.find(it->group->surface);
     if (keyed == r.lemmaKeys.end()) return false;
     for (const std::string& lemma : keyed->second)
@@ -594,7 +602,7 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
     if (const auto open = t.open.find(dict::OpenIndex(slot, cls)); open != t.open.end()) {
         for (const int i : open->second) {
             int named = 0;
-            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, named)) rows.emplace_back(i, named);
+            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, key, named)) rows.emplace_back(i, named);
         }
     }
     bool any = false;

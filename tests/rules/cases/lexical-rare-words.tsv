@@ -90,7 +90,7 @@ dict:rare-words	冬が近くなった。	겨울이 가까워졌다.	fix	lookup
 dict:rare-words	駅の近くに住む。	역의 근처에 산다.	keep	lookup
 dict:rare-words	近く結婚する。	가까운 시일내에 결혼한다.	keep	lookup
 dict:rare-words	もう逃げられない。	이제 도망칠 수 없다.	fix	lookup
-dict:rare-words	彼女に逃げられた。	그녀에게 차였다.	keep	lookup
+dict:rare-words	彼女に逃げられた。	has:그녀가 도망쳤	fix	lookup
 dict:rare-words	弱気な兄。	마음이 약한 형.	fix	lookup
 dict:rare-words	鍵を探しだす。	열쇠를 찾아낸다.	fix	lookup
 dict:rare-words	風車が回りだした。	풍차가 돌기 시작했다.	fix	lookup

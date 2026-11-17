@@ -1770,6 +1770,12 @@ void DecideVoice(Flusher& f) {
                     (n == nullptr || !dict::InClass(HDTRANS_CLASS("particle.quote"), n->group->surface)))
                     p = q;
             }
+            // A row that names the agent's class in dat= found it in the nearest に of the clause, when the
+            // noun has no animate code (ネコに逃げられた, 蝉に鳴かれて: the frame classes said who it is).
+            const bool dat = std::any_of(packed->atoms.begin(), packed->atoms.end(), [](const dict::PackAtom& a) { return a.slot == "dat"; });
+            for (Item* q = it->prev; dat && p == nullptr && q != nullptr && !ClauseBreak(q); q = q->prev) {
+                if (q->group->surface == "に" && q->prev != nullptr && !q->prev->detail->Yougo()) p = q;
+            }
             if (p != nullptr && !p->Fixed()) {
                 it->packAgent = p;
                 it->packAgentText = packed->agent;
