@@ -433,17 +433,22 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
 }
 
 // start (あれ[～ーぇ]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
-// particle (あれ――は何だ, the pronoun).
+// particle (あれ――は何だ, the pronoun). あれ drawn out with ぇ is the interjection also before 。, a
+// closing bracket or the end (あれぇ。) and after 、 (って、あれぇ？).
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
-    return SentenceStart(s, pos, m, [&](size_t q) {
+    auto rest = [&](size_t q, bool drawnOnly) {
         for (std::string_view w : {"あれ", "え"}) {
             size_t r = q;
             if (!Lit(s, r, w)) continue;
             size_t t = r;
+            bool drawn = false;
             if (w == "あれ") {
-                while (OneOf(s, t, U"～ーぇ")) continue;  // あれ～？, あれぇ？ (the ぇ is written ー)
+                for (size_t k = t; OneOf(s, t, U"～ーぇ"); k = t) drawn = drawn || s.substr(k).starts_with("ぇ");  // あれ～？, あれぇ？ (the ぇ is written ー)
             }
-            if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
+            if (drawnOnly && !drawn) continue;
+            if (!OneOf(s, t, U"、，！？…‥―─—")) {
+                if (!drawn || (t < s.size() && !In(At(s, t).cp, U"。」』）\n"))) continue;
+            }
             size_t after = t;
             while (OneOf(s, after, U"…‥―─—")) continue;
             if (w == "あれ" && In(At(s, r).cp, U"…‥―─—") && OneOf(s, after, U"はがをもにのでと")) continue;
@@ -453,7 +458,13 @@ bool StartInterjection(std::string_view s, size_t pos, Match& m) {
             return true;
         }
         return false;
-    });
+    };
+    if (pos != 0 && In(Before(s, pos), U"、，")) {
+        m.group[1] = Span(s, pos, pos);
+        m.group[2] = Span(s, pos, pos);
+        return rest(pos, true);
+    }
+    return SentenceStart(s, pos, m, [&](size_t q) { return rest(q, false); });
 }
 
 // start え[ぇえー]+([…‥]*[？?])

@@ -204,7 +204,7 @@
 おぉ	오오	intj
 おおっ	오옷	intj
 おお	오오	intj
-おおう	오오	intj
+おおう	오오우	intj
 おぉっ	오옷	intj
 はぁ	하아	intj
 はあ	하아	intj
@@ -328,6 +328,7 @@
 うあっ	우앗	intj
 うぁ	우아	intj
 うぁっ	우앗	intj
+うああん	으아앙	intj
 うあぁ	우아아	intj
 うぇ	우에	intj
 うぇっ	우엑	intj
@@ -489,6 +490,7 @@
 ほっ	휴	intj
 わぁ	와아	intj
 わあ	와아	intj
+わあん	와앙	intj
 わっ	왓	intj
 わー	와아	intj
 わーい	와아	intj
@@ -3030,6 +3032,7 @@
 ふわぁ	후와아	intj
 ふわあ	후와아	intj
 ふわぁっ	후와앗	intj
+ふわあん	후와앙	intj
 んふふ	응후후	intj
 んふふっ	응후훗	intj
 んっふふ	응후후	intj
@@ -3132,6 +3135,8 @@
 んしょ	영차	intj
 んしょっと	영차	intj
 んっしょ	영차	intj
+ふんしょ	영차	intj
+ふんしょっと	영차	intj
 あらよっと	영차	intj
 よしっと	좋아	intj
 やっばい	큰일이다	intj

@@ -1590,14 +1590,23 @@ bool MixedVowelRun(std::string_view s, size_t pos, Match& m) {
                                                      U"くぐすずつづぬふぶぷむゆゅる", U"けげせぜてでねへべぺめれ",
                                                      U"こごそぞとどのほぼぽもよょろを"};
     if (pos == 0) return false;
-    const std::string_view head = s.substr(0, pos);
+    // A shout's っ written before a run that starts small (これだっぁああぁ, だってっぇえぇ) goes after it: the run
+    // draws the word out and the っ clips it (이거야아아앗).
+    const size_t start = pos;
+    const bool tsu = s.substr(pos).starts_with("っ");
+    if (tsu) {
+        pos += std::string_view("っ").size();
+        if (pos >= s.size() || !In(At(s, pos).cp, kSmall)) return false;
+    }
+    const std::string_view head = s.substr(0, start);
     const char32_t before = LastRune(head).cp;
     if (!IsHiraganaRune(before) && !IsKanjiRune(before)) return false;
+    if (tsu && In(before, kPlain)) return false;
     const char32_t first = At(s, pos).cp;
     const size_t small0 = kSmall.find(first), plain0 = kPlain.find(first);
     if (small0 == std::u32string_view::npos && plain0 == std::u32string_view::npos) return false;
     const size_t v = small0 != std::u32string_view::npos ? small0 : plain0;
-    if (In(before, kSmall)) return false;
+    if (In(before, kSmall) || before == U'っ') return false;
     if (In(before, kPlain)) {
         const std::string_view rest = head.substr(0, head.size() - std::string_view("あ").size());
         if (plain0 != std::u32string_view::npos || rest.empty() || (v != 1 && v != 2) || before != kPlain[v]) return false;
@@ -1621,6 +1630,7 @@ bool MixedVowelRun(std::string_view s, size_t pos, Match& m) {
     if (p < s.size() && ((IsHiraganaRune(At(s, p).cp) && At(s, p).cp != U'っ') || At(s, p).cp == U'ー')) return false;
     static constexpr std::string_view kSmallUtf8[5] = {"ぁ", "ぃ", "ぅ", "ぇ", "ぉ"};
     m.group[1] = kSmallUtf8[v];
+    m.group[2] = tsu ? std::string_view("っ") : std::string_view();
     m.end = p;
     return true;
 }
@@ -2078,8 +2088,8 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, ScreamI, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, MixedVowelRun, [](const Match& m) {
         std::string out;
-        for (size_t k = 0; k < m.group[0].size() / m.group[1].size(); k++) out += m.group[1];
-        return out;
+        for (size_t k = 0; k < (m.group[0].size() - m.group[2].size()) / m.group[1].size(); k++) out += m.group[1];
+        return out + std::string(m.group[2]);
     });
     text = ReplaceAll(text, DrawnDemonstrative, [](const Match& m) { return Cat({m.group[1], "んな"}); });
     // A negative stem in ra, ka, ma... after more kana than Nee takes, or an ichidan or potential stem, before

@@ -694,8 +694,10 @@ std::string WriteLengthening(std::string_view s) {
                 continue;
             }
             // Drawn marks, from vowel kana, draw the syllable out by one each whatever else the stretch
-            // holds (くうぅっ 쿠우읏).
+            // holds (くうぅっ 쿠우읏). A final ㅅ that vowel kana draw out is dropped: at the end of the drawl it
+            // would read as the clip of a shout's っ the source lacks (これぇぇぇ 이거어어어, not 이거어어엇).
             if (drawn > 0 || (end && n >= 2 && StressFinal(text::Final(out.back())))) {
+                if (drawn > 0 && !clip && text::Final(out.back()) == text::kFinalSiot) out.back() -= static_cast<char32_t>(text::kFinalSiot);
                 Draw(out, drawn > 0 ? std::min(drawn, kMaxDrawnKana) : std::min(n, kMaxDrawn));
                 if (clip && text::Final(out.back()) == 0) out.back() += static_cast<char32_t>(text::kFinalSiot);
             } else {

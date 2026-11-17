@@ -18,7 +18,7 @@ normalize:mixed-vowel-run	心が貧しいとか言うなぁあぁあぁあッ！
 normalize:mixed-vowel-run	言うなぁぁぁぁっ！	말하지 마아아아앗!	fix	normalize
 normalize:mixed-vowel-run	言うなっ！	말하지 마!	keep	normalize
 normalize:mixed-vowel-run	かわいいぃぃ	귀여워	keep	normalize
-normalize:mixed-vowel-run	かわいぃぃぃ	has:귀엽	keep	normalize
+normalize:mixed-vowel-run	かわいぃぃぃ	has:귀여워	keep	normalize
 normalize:mixed-vowel-run	「……まぁあれもロミオとジュリエットみたいなものかしら……？」	has:뭐 저것도	keep	normalize
 normalize:mixed-vowel-run	はぁああん！　とても…痛い…	has:하아아앙	keep	normalize
 normalize:mixed-vowel-run	「私も、京太郎が、世界で、一番、好き……はああぁん……っ！」	has:하아아앙	keep	normalize
@@ -28,9 +28,9 @@ normalize:mixed-vowel-run	いい天気だね	has:좋은 날씨	keep	normalize
 normalize:mixed-vowel-run	ああいう人	has:저런 사람	keep	normalize
 normalize:mixed-vowel-run	これでいいぃ？	has:돼?	keep	normalize
 normalize:mixed-vowel-run	まえぇぇぇ	has:앞	keep	normalize
-sound:interjection-rows	「おおう……辛辣なのよさ……」	「오오……신랄해……」	fix	sound
-sound:interjection-rows	「おおう、それは私よりマズいな……」	has:「오오, 	fix	sound
-sound:interjection-rows	「おおう！？　……み、みなさんお揃いで」	has:「오오!?	fix	sound
+sound:interjection-rows	「おおう……辛辣なのよさ……」	「오오우……신랄해……」	fix	sound
+sound:interjection-rows	「おおう、それは私よりマズいな……」	has:「오오우, 	fix	sound
+sound:interjection-rows	「おおう！？　……み、みなさんお揃いで」	has:「오오우!?	fix	sound
 sound:interjection-rows	「あれぇ？」	「어라?」	fix	sound
 sound:interjection-rows	「あれぇ……？」	「어라……?」	fix	sound
 sound:interjection-rows	あれぇ、おかしいな	has:어라,	fix	sound
