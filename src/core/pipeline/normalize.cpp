@@ -784,7 +784,7 @@ std::vector<size_t> QuotingMarks(std::string_view text) {
             close += std::max<size_t>(1, At(text, close).size);
             letters++;
         }
-        if (close >= text.size() || At(text, close).cp != U'゛' || pause || letters < (afterOther ? 1 : 2)) continue;
+        if (close >= text.size() || At(text, close).cp != U'゛' || pause || letters < (afterOther ? size_t{1} : size_t{2})) continue;
         // After hiragana a word goes on past the closing mark (の゛…゛です, は゛…゛を), not a ！ or the line end (あ゛痛いよ゛！).
         const size_t past = close + At(text, close).size;
         if (afterHiragana && !afterOther && (past >= text.size() || !IsJapaneseRune(At(text, past).cp))) continue;
