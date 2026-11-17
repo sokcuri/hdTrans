@@ -101,6 +101,7 @@ struct Context {
     const Item* after = nullptr;  // the word before (the word is after it)
     std::set<std::string_view> forms;
     std::string final;  // the sentence particles and the mark that end the sentence after the word (final=)
+    std::string ending;  // the text of the word's ending entry (ending=: it starts with the value, 勝る|ものは)
     bool polite = false;
     std::string_view voice;  // voice rows: the reading of (ら)れ the chain decided
     // With an attachment: the word's own how as an argument, its clause and its main clause.
@@ -225,6 +226,7 @@ Context ContextOf(Flusher& f, const Item* it) {
     // the form of the word, from its ending and the word after it
     // the ending, with that of a negative auxiliary written right after the word
     std::string ending(it->DirectSurface());
+    c.ending = ending;
     // An ending that starts with the formal noun こと (向けられたことが) holds no form: the form is the
     // conjugated text between the stem and the ending (られた).
     if (Predicate(cls) && ending.starts_with("こと")) {
@@ -493,6 +495,11 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             continue;
         } else if (a.slot == "voice") {
             if (std::find(a.values.begin(), a.values.end(), c.voice) == a.values.end()) return false;
+            spec[2]++;
+            continue;
+        } else if (a.slot == "ending") {
+            if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.ending.starts_with(v); }))
+                return false;
             spec[2]++;
             continue;
         } else if (a.slot == "final") {

@@ -95,3 +95,41 @@ pack:verb-object-senses:814-122	メッセージ打ち込んでる。	has:입력�
 pack:verb-object-senses:814-122	10秒で打ち込める。	has:입력할 수	keep	packs
 pack:verb-object-senses:814-121	「愛してる」と打ち込んで見せた。	has:라고 입력해 보였다	fix	packs
 pack:verb-object-senses:814-121	携帯画面に「好き」と打ち込んだ。	has:라고 입력했다	fix	packs
+pack:糸を引く#4b	よだれが糸を引いた。	has:실처럼 늘어졌다	fix	packs
+pack:糸を引く#5	凧の糸を引いた。	has:연의 실을 당겼다	fix	packs
+pack:糸を引く#5	釣り竿の糸を引いた。	has:낚싯대의 실을 당겼다	fix	packs
+pack:糸を引く#7	事件の糸を引いていた。	has:배후에서 조종하고 있었다	keep	packs
+pack:糸を引く#7	組織の糸を引く者。	lacks:실을 당기	keep	packs
+dict:w:35504	皮をかぶったままのソーセージ。	has:껍질에 싸인	fix	local
+dict:w:35504	このソーセージは皮をかぶっている。	has:껍질에 싸여	fix	local
+pack:勝る#2e	技術に勝るものはない。	has:기술보다 앞서는 것은	fix	packs
+pack:勝る#2e	数に勝るものなし。	has:수보다 앞서는	fix	packs
+pack:勝る#2	速さに勝る者はいない。	has:속도에서 앞서는 사람	keep	packs
+pack:勝る#2	数に勝る敵に囲まれた。	has:수에서 앞서는 적	keep	packs
+pack:勝る#8	何にも勝る。	has:무엇보다도 앞선다	fix	packs
+pack:勝る#8n	何にもまさる宝。	has:무엇보다도 앞서는 보물	fix	packs
+pack:勝る#9n	誰にも勝る力。	has:누구보다도 앞서는 힘	fix	packs
+pack:verb-object-senses:814-112	サッカーに打ち込む日々。	has:축구에 몰두하는 날들	fix	packs
+pack:verb-object-senses:814-112	音楽に打ち込んだ青春。	has:음악에 몰두한 청춘	fix	packs
+pack:verb-object-senses:814-134	何かに打ち込める人。	has:몰두할 수 있는 사람	fix	packs
+pack:verb-object-senses:814-114	本気で打ち込める何かが欲しい。	has:몰두할 수 있는	fix	packs
+pack:verb-object-senses:814-123	一心不乱に打ち込んだ。	has:몰두했다	fix	packs
+pack:verb-object-senses:814-124	全力で打ち込む。	has:전력으로 몰두한다	fix	packs
+pack:verb-object-senses:814-107	全力でパンチを打ち込む。	has:펀치를 꽂아 넣는다	keep	packs
+pack:verb-object-senses:814-110	データを入力欄に打ち込む。	has:입력한다	keep	packs
+pack:verb-object-senses:814-125	予定がかぶった。	has:예정이 겹쳤다	fix	packs
+pack:verb-object-senses:814-125	キャラがかぶってる。	has:겹치고 있다	fix	packs
+pack:verb-object-senses:814-125	シフトがかぶりました。	has:겹쳤습니다	fix	packs
+pack:verb-object-senses:814-135	かぶった予定。	has:겹친 예정	fix	packs
+pack:verb-object-senses:814-125	兄がかぶっていた。	has:쓰고 있었다	keep	packs
+pack:verb-object-senses:814-126	三発叩き込む。	has:세 발 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-127	拳を叩き込まれた。	has:주먹을 맞았다	fix	packs
+pack:verb-object-senses:814-127	腹にパンチを叩き込まれた。	has:펀치를 맞았다	fix	packs
+pack:verb-object-senses:814-128	桜庭の痛烈なアタックがこちらの陣地に叩き込まれる。	has:어택이 이쪽의 진지에 꽂힌다	fix	packs
+pack:verb-object-senses:814-130	牢に叩き込まれた。	has:감옥에 갇혔다	fix	packs
+pack:verb-object-senses:814-130	牢屋に叩き込まれて三年が過ぎた。	has:감옥에 갇혀	fix	packs
+pack:verb-object-senses:814-131	地獄に叩き込まれた。	has:지옥에 처박혔다	fix	packs
+pack:verb-object-senses:814-129	ボールがゴールに叩き込まれた。	has:공이 골에 꽂혔다	fix	packs
+pack:verb-object-senses:814-136	数発叩き込まれた。	has:몇 발 맞았다	fix	packs
+pack:verb-object-senses:814-133	膝蹴りを打ち込まれた。	has:맞았다	fix	packs
+pack:verb-object-senses:814-101	頭に叩き込まれた。	has:머리에 주입되었다	keep	packs

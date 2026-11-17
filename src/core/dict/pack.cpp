@@ -315,7 +315,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             a.slot = atom.substr(0, eq);
             constexpr std::string_view kSlots[] = {"subj", "obj",  "dat", "loc",  "with", "from",     "to",       "arg",
                                                    "head", "mod",  "pred", "next", "after", "form",   "register", "domain",
-                                                   "main.vol", "voice", "final"};
+                                                   "main.vol", "voice", "final", "ending"};
             // with an attachment also: how, <argument slot>.how, cl.<feature>, main.<feature>
             static constexpr std::string_view kArgs[] = {"subj", "obj", "dat", "loc", "with", "from", "to", "arg"};
             const std::size_t dot = a.slot.find('.');
