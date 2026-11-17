@@ -206,7 +206,8 @@ HD_TEST(constraint_rules_table) {
         HD_CHECK((r.word == word::ConstraintWord::Source || r.word == word::ConstraintWord::EndsInSource) == !r.source.empty());
         HD_CHECK((r.reject == word::ConstraintReject::OtherTargets || r.reject == word::ConstraintReject::Target) ==
                  !r.target.empty());
-        HD_CHECK((r.context == word::ConstraintContext::BeforeListed) == !r.follows.empty());
+        HD_CHECK((r.context == word::ConstraintContext::BeforeListed ||
+                  r.context == word::ConstraintContext::AfterNounBeforeListed) == !r.follows.empty());
         for (std::string_view rest = r.follows; !rest.empty();) {
             const std::size_t bar = rest.find('|');
             HD_CHECK(bar != 0 && bar + 1 != rest.size());

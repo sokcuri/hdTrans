@@ -20,8 +20,11 @@ colloquial:word-drawl	いいいい	이이이이	keep	colloquial
 colloquial:word-drawl	くうぅぅぅ	쿠우우우우	keep	colloquial
 colloquial:word-drawl	これでいいいい？	이거면 돼?	keep	colloquial
 colloquial:word-drawl	ちっくしょー、負けたあ！！信じられねーぜ！ぐやじいいい……！！	has:구야지이이이	keep	colloquial
-restore:drawn-siot	これぇええ	이거어어어	fix	restore
+restore:drawn-siot	これぇええ	이거어어엇	keep	restore
 restore:drawn-siot	これぇぇぇっ！	이거어어엇!	keep	restore
+restore:drawn-siot	服ぅぅぅ！	has:옷	keep	restore
+restore:drawn-siot	味ぃぃぃ！	has:앗	keep	restore
+restore:drawn-siot	私の服ぅぅぅ！	has:옷	keep	restore
 word:de-before-final-na	学校でなぁぁあ！	has:학교에서	fix	word
 word:de-before-final-na	学校でなぁぁあ！	lacks:나오는	fix	word
 word:de-before-final-na	学校でな、事件があった	학교에서, 사건이 있었다	fix	word
@@ -57,3 +60,11 @@ sound:stutter-ichi	はい、一つ	네, 하나	keep	sound
 casual:mixed-after-tsu	「見えたッ！！ これだっぁああぁああぁああ！！！！」	has:이거야아아	fix	casual
 casual:mixed-after-tsu	５万円を…自腹だってっぇえぇええぇ？！	has:자기부담도오오	fix	casual
 word:de-before-final-na	運転手付きでな	has:운전기사와 함께	fix	word
+word:de-before-final-na	そとにでな！	has:밖에 나오	keep	word
+word:de-before-final-na	はやくでな。	has:빨리 나오	keep	word
+word:de-before-final-na	部屋をでな。	has:방을 나오	keep	word
+word:de-before-final-na	家からでな！	has:집에서 나오	keep	word
+word:de-before-final-na	ゲームでな。	게임에서.	fix	word
+word:de-before-final-na	訓練中の事故でな。	훈련 중의 사고로.	fix	word
+word:de-before-final-na	太郎でな。	has:타로로	fix	word
+word:de-before-final-na	ユウキでな！	유우키로!	fix	word
