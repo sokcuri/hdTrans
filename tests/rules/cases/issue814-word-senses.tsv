@@ -133,3 +133,9 @@ pack:verb-object-senses:814-129	ボールがゴールに叩き込まれた。	ha
 pack:verb-object-senses:814-136	数発叩き込まれた。	has:몇 발 맞았다	fix	packs
 pack:verb-object-senses:814-133	膝蹴りを打ち込まれた。	has:맞았다	fix	packs
 pack:verb-object-senses:814-101	頭に叩き込まれた。	has:머리에 주입되었다	keep	packs
+pack:勝る#2e	人数に勝るものの、敗れた。	has:인원수에서 앞서지만	keep	packs
+pack:勝る#2e	数に勝るもので、有利だった。	has:수에서 앞서	keep	packs
+pack:verb-object-senses:814-135	帽子をかぶった服装で来た。	has:모자를 쓴 복장	keep	packs
+pack:verb-object-senses:814-135	かぶった予定を直す。	has:겹친 예정을	fix	packs
+pack:勝る#2i	数に勝るものなし。	has:수보다 앞서는	fix	packs
+pack:勝る#2h	数に勝るモノなし。	has:수보다 앞서는	fix	packs

@@ -93,8 +93,9 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 勝る#1n	sense	勝る/まさる/v5	v5	colloc	{X}に勝る	form=neg|vol|attr|adv	{X}보다 앞서다	78	LEX-5853	issue	不安が期待に勝る 불안이 기대보다 앞선다
 勝る#2	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	form=-	{X}에서 앞서다	80	LEX-5853	issue	人数に勝る 인원수에서 앞선다
 勝る#2n	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	form=neg|vol|attr|adv	{X}에서 앞서다	80	LEX-5853	issue	人数に勝る 인원수에서 앞선다
-勝る#2h	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	next=もの|物	{X}보다 앞서다	82	LEX-5853	issue	技術に勝るものはない 기술보다 앞서는 것은 없다
-勝る#2e	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	ending=もの|モノ	{X}보다 앞서다	82	LEX-5853	issue	技術に勝るものはない 기술보다 앞서는 것은 없다
+勝る#2h	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	next=もの|物|モノ	{X}보다 앞서다	82	LEX-5853	issue	技術に勝るものはない 기술보다 앞서는 것은 없다
+勝る#2e	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	ending=ものは|ものも|ものが|ものなど|ものなし|ものなん|モノは|モノも|モノが|モノなど|モノなし|モノなん	{X}보다 앞서다	82	LEX-5853	issue	技術に勝るものはない 기술보다 앞서는 것은 없다
+勝る#2i	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	ending=もの|モノ next=なし|無し|など|なんて|なんか	{X}보다 앞서다	82	LEX-5853	issue	数に勝るものなし 수보다 앞서는 것 없음
 勝る#7	sense	勝る/まさる/v5	v5	colloc	{X}にも勝る	form=-	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
 勝る#7k	sense	勝る/まさる/v5	v5	colloc	{X}にもまさる	form=-	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
 勝る#7n	sense	勝る/まさる/v5	v5	colloc	{X}にも勝る	form=neg|vol|attr|adv	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
