@@ -55,3 +55,39 @@ cx:novel-fixes-2:340	俺が行くさ。	내가 가지.	fix	rewrites
 cx:novel-fixes-2:340	断ったさ。	거절했지.	fix	rewrites
 cx:novel-fixes-2:340	見てろよ、勝つさ。	has:이기지.	fix	rewrites
 cx:novel-fixes-2:340	それでさ、聞いてよ。	!rule:cx:novel-fixes-2:340	keep	rewrites
+cx:tte-nani:71	それってなんなの？	그게 뭐야?	fix	rewrites
+cx:tte-nani:71	あれってなんなの？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんなんだ？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	あれってなんなんだよ。	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんなのよ。	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんか変だね。	lacks:뭐야	keep	rewrites
+cx:tte-nani:71	それってなんだか怖い。	has:왠지	keep	rewrites
+cx:tte-nani:72	それってなんだっけ？	그게 뭐였더라?	fix	rewrites
+cx:tte-nani:72	あれってなんだっけ。	has:그게 뭐였더라	fix	rewrites
+cx:tte-nani:73	それってなんなんですか？	has:그게 무엇입니까	fix	rewrites
+cx:tte-nani:12	それってなんのこと？	그게 무슨 말이야?	fix	rewrites
+cx:tte-nani:12	あれってなんのこと？	has:그게 무슨 말이야	fix	rewrites
+cx:tte-nani:45	寒かったって何？	추웠다니 뭐야?	fix	rewrites
+cx:tte-nani:45	可愛かったって何？	has:귀여웠다니	fix	rewrites
+cx:tte-nani:45	行かなかったって何？	has:않았다니	fix	rewrites
+cx:tte-nani:45	好きだったって何？	has:좋아했다니	fix	rewrites
+cx:tte-nani:45	綺麗だったって何？	has:예뻤다니	fix	rewrites
+cx:tte-nani:46	彼女だったって何？	has:그녀였다니	fix	rewrites
+cx:tte-nani:47	嘘だって何？	거짓말이라니 뭐야?	fix	rewrites
+cx:tte-nani:47	本当だって何？	has:사실이라니 뭐야	fix	rewrites
+cx:tte-nani:47	冗談だってなんだよ。	has:농담이라니 뭐야	fix	rewrites
+cx:tte-nani:47	子供だって何でも知ってる。	has:아이도	keep	rewrites
+cx:tte-nani:47	誰だって何か持ってる。	lacks:라니	keep	rewrites
+cx:tte-nani:50	生きるってなんだろう。	산다는 것은 무엇일까.	keep	rewrites
+cx:novel-fixes-2:342	食べなかったさ。	먹지 않았지.	fix	rewrites
+cx:novel-fixes-2:342	知らなかったさ。	몰랐지.	fix	rewrites
+cx:novel-fixes-2:342	寒かったさ。	추웠지.	fix	rewrites
+cx:novel-fixes-2:342	知らなかったさ！	has:몰랐지!	fix	rewrites
+cx:novel-fixes-2:342	あの頃は楽しかったさ。	has:즐거웠지	fix	rewrites
+cx:novel-fixes-2:342	それでさ、聞いてよ。	!rule:cx:novel-fixes-2:342	keep	rewrites
+cx:novel-fixes-2:342	食べたさ。	!rule:cx:novel-fixes-2:342	keep	rewrites
+cx:tte-nani:12	それって何？	!rule:cx:tte-nani:12	keep	rewrites
+cx:tte-nani:45	寒かったって言ってた。	!rule:cx:tte-nani:45	keep	rewrites
+cx:tte-nani:46	彼女だったって聞いた。	!rule:cx:tte-nani:46	keep	rewrites
+cx:tte-nani:72	それってなんだか怖い。	!rule:cx:tte-nani:72	keep	rewrites
+cx:tte-nani:73	それってなんですか？	!rule:cx:tte-nani:73	keep	rewrites
