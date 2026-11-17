@@ -58,3 +58,28 @@ words:higuma-bear	羆に襲われた。	has:불곰에게	fix	lookup
 words:yoso-ni	漫才をやっている俺と高峰をよそに、女性陣が視線のバトルを繰り広げている。	has:타카미네를 아랑곳하지 않고	fix	lookup
 words:yoso-ni	周囲の心配をよそに、彼は笑った。	has:걱정을 아랑곳하지 않고	fix	lookup
 words:yoso-ni	親の心配をよそに遊び回る。	has:걱정을 아랑곳하지 않고	fix	lookup
+names:person-call	「千里、行かないで」	has:치사토	fix	lookup
+names:person-call	「千里、忘れないで」	has:치사토	fix	lookup
+names:person-call	「千里、そこをどいて」	has:치사토	fix	lookup
+names:person-call	「高峰、それ読んで」	has:타카미네	fix	lookup
+names:person-call	「千里、早く来て！」	has:치사토	fix	lookup
+names:person-call	「高峰、何してるんだ？」	has:타카미네	fix	lookup
+names:person-call	「千里、なにしてんの？」	has:치사토	fix	lookup
+names:person-call	「高峰、何しに来た？」	has:타카미네	fix	lookup
+names:person-call	行かないで、千里！	has:치사토	fix	lookup
+names:person-call	「た、た、高峰！」	has:타카미네	fix	lookup
+names:person-call	「ち、ち、千里……」	has:치사토	fix	lookup
+names:person-call	「財布、忘れないで」	has:지갑	keep	lookup
+names:person-call	一生懸命作りました。チョコ、よかったら召し上がって。	has:초콜릿	keep	lookup
+names:person-call	「そ、そ、空が！」	has:하늘	keep	lookup
+names:person-pair	高峰と俺は月を見た。	has:타카미네와 나는	fix	lookup
+names:person-pair	高峰と彼女が並んで歩く。	has:타카미네와 그녀가	fix	lookup
+names:person-pair	千里とお前は似ている。	has:치사토와 너는	fix	lookup
+names:person-pair	千里と姉は笑った。	has:치사토와	fix	lookup
+names:person-pair	高峰とあいつは仲がいい。	has:타카미네와	fix	lookup
+names:person-pair	俺と千里と高峰で海へ行った。	has:치사토와 타카미네	fix	lookup
+names:person-pair	彼女と千里と俺の三人。	has:치사토	fix	lookup
+names:person-pair	僕と千里と玉藻で遊んだ。	has:치사토와 타마모	fix	lookup
+names:person-pair	高峰と雲が見えた。	has:고봉	keep	lookup
+names:person-pair	俺と海と空で遊んだ。	has:바다	keep	lookup
+names:person-pair	俺と酒と肴で十分だ。	has:술	keep	lookup

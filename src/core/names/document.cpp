@@ -720,8 +720,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
             const std::string_view after = cues.substr(at + k.size());
             // An adnominal before it makes it the word unless a person act or call after it makes it the person
             // (大きな樹を見上げた; 大きな樹くん).
-            // A number before it counts the word (3千里).
-            if (names::CommonSenseAt(after) || NumberBefore(cues.substr(0, at)) ||
+            // A number before it counts the word (3千里); a predicate of a plant keeps a plant (岩に玉藻がからみつく).
+            if (names::CommonSenseAt(after) || NumberBefore(cues.substr(0, at)) || names::PlantSenseAt(*doc.snap, k, after) ||
                 (names::WordBeforeAt(cues.substr(0, at)) && !names::PersonSlotAt(*doc.snap, k, cues.substr(0, at), after))) {
                 common = true;
             } else {

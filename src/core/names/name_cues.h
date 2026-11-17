@@ -61,6 +61,10 @@ bool StatusValueAt(std::string_view rest);
 // (敏捷が特筆して高い; spec LEX-5175).
 bool CommonSenseAt(std::string_view after);
 
+// Whether key has a common sense of a plant (玉藻 말) and after starts with name.plant-after, which keeps the
+// plant (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
+bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after);
+
 // Whether before ends in an adnominal that makes the next common word the word (name.word-before: 大きな,
 // 古い, 一本の), not one that points at or feels for a person (name.word-before-not: そんな, 好きな).
 bool WordBeforeAt(std::string_view before);

@@ -636,9 +636,9 @@ const PersonVerbForms& PersonVerbTable() {
     return table;
 }
 
-// Whether s starts with a noun of a person (母親, 少女): the longest word of kanji or katakana there
-// that has a common sense of a person.
-bool PersonNounAt(const dict::Snapshot& snap, std::string_view s) {
+// The byte length of the noun of a person that starts s (母親, 少女), 0 for none: the longest word of kanji or
+// katakana there that has a common sense of a person.
+std::size_t PersonNounLength(const dict::Snapshot& snap, std::string_view s) {
     std::size_t end = 0;
     for (std::size_t runes = 0; end < s.size() && runes < 4; runes++) {
         const text::Rune r = text::DecodeRune(s.substr(end));
@@ -650,14 +650,16 @@ bool PersonNounAt(const dict::Snapshot& snap, std::string_view s) {
         bool found = false;
         for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
             if (c.codes == nullptr || c.source != word || c.codes->sem.HasPrefix("QPN")) continue;
-            if (c.codes->sem.HasCode("VHn")) return true;
+            if (c.codes->sem.HasCode("VHn")) return n;
             found = true;
         }
         // Only the longest word: 様子 is no 様.
-        if (found) return false;
+        if (found) return 0;
     }
-    return false;
+    return 0;
 }
+
+bool PersonNounAt(const dict::Snapshot& snap, std::string_view s) { return PersonNounLength(snap, s) > 0; }
 
 // What a form of a command may stand before: the end of the utterance (黙れ！, 黙れよ, 黙れっ).
 constexpr std::string_view kCommandEnds = "、。！？!?…‥」』）)\n 　ーっよ〜";
@@ -984,7 +986,9 @@ bool AdverbKey(const dict::Snapshot& snap, std::string_view key) {
 // Whether s ends in a command or a request (戻れ, 落ち着け, 来い, 発言しろ, 手伝ってくれ, 待ってください), before
 // よ, っ, ー or 〜: a command of the one conjugation table after a verb stem of the dictionary that starts with a
 // kanji, しろ or せよ, 来い or こい after て, or a request in てくれ, てください, てちょうだい or なさい.
-bool CommandEndIn(const dict::Snapshot& snap, std::string_view s) {
+// With negative set, a negative request counts too (行かないで); with te set, a request in a bare te form (そこをどいて,
+// 待って, 読んで), but no adjective's くて.
+bool CommandEndIn(const dict::Snapshot& snap, std::string_view s, bool negative = false, bool te = false) {
     for (bool more = true; more;) {
         more = false;
         for (const std::string_view t : {"よ", "っ", "ー", "〜", "～"}) {
@@ -998,6 +1002,15 @@ bool CommandEndIn(const dict::Snapshot& snap, std::string_view s) {
         if (s.ends_with(t) && s.size() > t.size()) return true;
     }
     if (s.ends_with("てこい") || s.ends_with("でこい")) return true;
+    // A negative request (行かないで, 忘れないで).
+    if (negative && s.ends_with("ないで") && s.size() > std::string_view("ないで").size()) return true;
+    if (te && s.size() > std::string_view("て").size() * 2) {
+        if (s.ends_with("んで") || s.ends_with("いで")) return true;
+        if (s.ends_with("て")) {
+            const char32_t prev = RuneBefore(s, s.size() - std::string_view("て").size()).cp;
+            if (prev != U'く' && (IsHiragana(prev) || IsKanji(prev))) return true;
+        }
+    }
     // The command ending is the last one or two kana; the stem goes back to a kanji (戻れ, 落ち着け: 着).
     std::size_t q = s.size();
     for (int endRunes = 1; endRunes <= 2 && q > 0 && IsHiragana(RuneBefore(s, q).cp); endRunes++) {
@@ -1028,9 +1041,12 @@ constexpr std::string_view kUtteranceCloses = "」』！？!?。…‥\n";
 // Whether s, after X、 at the start of an utterance, is one clause up to the end of the utterance that calls on
 // X: a command or a request (小太刀、いい加減仕事に戻れ, 高峰、ちょっと手伝ってくれ), or, where question is set, a
 // question (筧、今まで読んだ本の数は？, 凪、お茶でも飲むか？; spec LEX-4820). A question with no object of its own
-// may ask about X (スイカ、食べる？, スイカ、俺も食べる？): only a word of time, which nobody eats or calls, is called
+// may ask about X (スイカ、食べる？, スイカ、俺も食べる？); 何 before a verb of doing is its object with を
+// dropped (高峰、何してるんだ？). A bare te form asks with te set (千里、そこをどいて), for a key not of hiragana,
+// which may be a phrase of its own (ここね、待って), nor a katakana word of the dictionary, which may be what is
+// offered (チョコ、よかったら召し上がって). Otherwise only a word of time, which nobody eats or calls, is called
 // there (睦月、呼んだ？), with time set.
-bool CalledClauseAt(const dict::Snapshot& snap, std::string_view s, bool question, bool time = false) {
+bool CalledClauseAt(const dict::Snapshot& snap, std::string_view s, bool question, bool time = false, bool te = false) {
     std::size_t i = 0;
     for (std::size_t runes = 0; i < s.size() && runes < kClauseReach; runes++) {
         const text::Rune r = text::DecodeRune(s.substr(i));
@@ -1044,10 +1060,14 @@ bool CalledClauseAt(const dict::Snapshot& snap, std::string_view s, bool questio
         if (!(close.starts_with("？") || close.starts_with("?")) || !IsHiragana(RuneBefore(clause, clause.size()).cp)) return false;
         // An object in を or でも, or a noun asked about in は (本の数は？).
         if (time || clause.ends_with("は") || clause.find("を") != std::string_view::npos) return true;
+        for (const std::string_view what : {"何し", "なにし", "なんし", "何や", "なにや"}) {
+            const std::size_t at = clause.find(what);
+            if (at != std::string_view::npos && !clause.substr(at + what.size()).starts_with("ら")) return true;
+        }
         const std::size_t demo = clause.find("でも");
         return demo != std::string_view::npos && demo > 0;
     }
-    return CommandEndIn(snap, clause);
+    return CommandEndIn(snap, clause, te, te);
 }
 
 // Whether key has a common sense of a time the dictionary has as a common noun (昼間 낮, 今日 오늘), which a question
@@ -1084,7 +1104,7 @@ bool CommandCallAt(const dict::Snapshot& snap, std::string_view before, std::str
     if (!(after.empty() || InRunes(FirstRune(after).cp, kUtteranceCloses))) return false;
     std::string_view b = TrimEndSpaces(before);
     if (b.ends_with("、")) b.remove_suffix(std::string_view("、").size());
-    return !b.empty() && IsHiragana(RuneBefore(b, b.size()).cp) && CommandEndIn(snap, ClauseBefore(b));
+    return !b.empty() && IsHiragana(RuneBefore(b, b.size()).cp) && CommandEndIn(snap, ClauseBefore(b), true);
 }
 
 // Whether the word is called after a stutter of its first syllable at the start of an utterance (「……ち、千里？」):
@@ -1098,6 +1118,9 @@ bool StutterCallAt(const dict::Snapshot& snap, std::string_view key, std::string
     const text::Rune kana = RuneBefore(b, b.size());
     if (!IsHiragana(kana.cp) && !IsKatakana(kana.cp)) return false;
     std::string_view head = b.substr(0, b.size() - kana.size);
+    // The stutter may repeat (た、た、高峰).
+    const std::string again = std::string(b.substr(b.size() - kana.size)) + "、";
+    while (head.ends_with(again)) head.remove_suffix(again.size());
     while (head.ends_with("…") || head.ends_with("‥")) head.remove_suffix(RuneBefore(head, head.size()).size);
     if (!UtteranceStart(head)) return false;
     // The matrix holds katakana: a hiragana is its katakana less 0x60.
@@ -1131,14 +1154,10 @@ bool PersonNounBefore(const dict::Snapshot& snap, std::string_view s) {
     return false;
 }
 
-// Whether the word stands second in a pair of persons joined by と before a particle of the clause (俺と千里は,
-// 僕と凪が, 高峰さんと凪は, 姉と千里は; spec LEX-4820): the first is a speaker's pronoun (pronoun.speaker), a noun
-// of a person or a word with an honorific, standing as a word of its own. Not before の, where the pair may own a
-// common word (俺と千里の道).
-// A common word of one kanji pairs only with a pronoun or an honorific (俺と凪は; not 女房と畳は), with nouns false.
-bool PairedAt(const dict::Snapshot& snap, std::string_view before, std::string_view after, bool nouns = true) {
-    if (!before.ends_with("と") || !InRunes(FirstRune(after).cp, "がはもをに")) return false;
-    const std::string_view b = before.substr(0, before.size() - std::string_view("と").size());
+// Whether b ends in the first of a pair of persons before と: a speaker's pronoun (pronoun.speaker), a noun of a
+// person or a word with an honorific, standing as a word of its own. With nouns false, only a pronoun or an
+// honorific.
+bool PairAnchorBefore(const dict::Snapshot& snap, std::string_view b, bool nouns) {
     if (nouns && PersonNounBefore(snap, b)) return true;
     std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("pronoun.speaker"), b);
     bool honorific = false;
@@ -1153,6 +1172,59 @@ bool PairedAt(const dict::Snapshot& snap, std::string_view before, std::string_v
     if (honorific) return IsKanji(prev) || IsKatakana(prev);
     if (IsKanji(first)) return !IsKanji(prev);
     return !IsHiragana(prev) && !IsKatakana(prev);
+}
+
+// The byte length of a pronoun of a person (俺, お前, 彼女) or a noun of a person (姉) that starts s, 0 for none.
+std::size_t PersonWordAt(const dict::Snapshot& snap, std::string_view s) {
+    std::size_t n = 0;
+    // The longest member: 彼女 is no 彼.
+    for (const dict::ClassId c : {HDTRANS_CLASS("pronoun.speaker"), HDTRANS_CLASS("pronoun.listener"), HDTRANS_CLASS("pronoun.third-person")}) {
+        for (const std::string_view m : dict::ClassMembers(c)) {
+            if (s.starts_with(m)) n = std::max(n, m.size());
+        }
+    }
+    return n > 0 ? n : PersonNounLength(snap, s);
+}
+
+// Whether after, past と, goes on with another person of a chain (千里と高峰で, 千里と俺の): a person word or a
+// person's name of the name layer.
+bool ChainGoesOnAt(const dict::Snapshot& snap, std::string_view after) {
+    if (!after.starts_with("と")) return false;
+    const std::string_view rest = after.substr(std::string_view("と").size());
+    return PersonWordAt(snap, rest) > 0 || !snap.PersonKeysAt(rest).empty();
+}
+
+// Whether the word stands second in a pair of persons joined by と before a particle of the clause (俺と千里は,
+// 僕と凪が, 高峰さんと凪は, 姉と千里は; spec LEX-4820): the first is a speaker's pronoun (pronoun.speaker), a noun
+// of a person or a word with an honorific, standing as a word of its own. Not before の, where the pair may own a
+// common word (俺と千里の道).
+// A common word of one kanji pairs only with a pronoun or an honorific (俺と凪は; not 女房と畳は), with nouns false.
+// With nouns set, a chain counts too: the word goes on with と and another person (俺と千里と高峰で), or stands
+// after one more word and と (俺と千里と高峰で), or before で.
+bool PairedAt(const dict::Snapshot& snap, std::string_view before, std::string_view after, bool nouns = true) {
+    if (!before.ends_with("と")) return false;
+    if (!InRunes(FirstRune(after).cp, "がはもをに") && !(nouns && (after.starts_with("で") || ChainGoesOnAt(snap, after)))) return false;
+    const std::string_view b = before.substr(0, before.size() - std::string_view("と").size());
+    if (PairAnchorBefore(snap, b, nouns)) return true;
+    if (!nouns) return false;
+    // The middle of a chain: a word of kanji or katakana and と before the word.
+    std::size_t k = b.size();
+    for (std::size_t runes = 0; k > 0 && runes < 4 && (IsKanji(RuneBefore(b, k).cp) || IsKatakana(RuneBefore(b, k).cp)); runes++) {
+        k -= RuneBefore(b, k).size;
+    }
+    if (k == b.size() || !b.substr(0, k).ends_with("と")) return false;
+    return PairAnchorBefore(snap, b.substr(0, k - std::string_view("と").size()), true);
+}
+
+// Whether the word stands first in a pair with a person after と and a particle of the clause (高峰と俺は,
+// 高峰と彼女が, 千里とお前は; spec LEX-4820). Not before の.
+bool PairedFirstAt(const dict::Snapshot& snap, std::string_view after) {
+    if (!after.starts_with("と")) return false;
+    const std::string_view rest = after.substr(std::string_view("と").size());
+    const std::size_t n = PersonWordAt(snap, rest);
+    if (n == 0) return false;
+    const std::string_view tail = rest.substr(n);
+    return InRunes(FirstRune(tail).cp, "がはもで") || ChainGoesOnAt(snap, tail);
 }
 
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
@@ -1202,7 +1274,7 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
         return n > 0 && !IsKanji(FirstRune(rest.substr(n)).cp) && IsHiragana(RuneBefore(before, before.size()).cp) &&
                PersonActIn(ClauseBefore(before), Role::Other, false, nullptr, MoverKey(snap, key));
     }
-    if (PairedAt(snap, before, after)) return true;
+    if (PairedAt(snap, before, after) || PairedFirstAt(snap, after)) return true;
     const bool mover = MoverKey(snap, key);
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true, nullptr, mover);
     if (after.starts_with("は") || after.starts_with("も")) {
@@ -1214,7 +1286,8 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
         if (RequestAt(rest) || PersonActIn(rest, UtteranceStart(before) ? Role::Other : Role::Aside, true, nullptr, mover)) return true;
         // Called at the start of an utterance with a command, a request or a question that runs to its end.
         return CallStart(before) &&
-               (CalledClauseAt(snap, rest, false) || (!CommonTimeKey(snap, key) && CalledClauseAt(snap, rest, true, TimeKey(snap, key))));
+               (CalledClauseAt(snap, rest, false, false,
+                                !internal::AllRunes(key, IsHiragana) && !(internal::AllRunes(key, IsKatakana) && snap.DictionaryWord(key))) || (!CommonTimeKey(snap, key) && CalledClauseAt(snap, rest, true, TimeKey(snap, key))));
     }
     // Not a katakana spelling of a native word, which after a command is a word said at the one told (行けボケ).
     if (!internal::AllRunes(key, IsHiragana) && !(internal::AllRunes(key, IsKatakana) && snap.DictionaryWord(internal::ToHiragana(key))) &&
@@ -1476,6 +1549,15 @@ bool CommonSenseAt(std::string_view after) {
         if (InRunes(r.cp, kClauseEnds) || ((r.cp == U'が' || r.cp == U'は') && (IsKanji(prev) || IsKatakana(prev)))) return false;
         if (dict::StartsWithMember(HDTRANS_CLASS("name.common-predicate"), rest.substr(i)) > 0) return true;
         i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
+bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after) {
+    if (dict::StartsWithMember(HDTRANS_CLASS("name.plant-after"), after) == 0) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QCT")) continue;
+        if (c.codes->sem.HasCode("QAL") || c.codes->sem.HasCode("VPt")) return true;
     }
     return false;
 }
