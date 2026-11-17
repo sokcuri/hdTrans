@@ -43,7 +43,7 @@ lex:kata-verb-whole	ネル！	네루!	keep	protect
 lex:kata-verb-whole	タケシ！	타케시!	keep	protect
 lex:kata-verb-whole	アレッタ……	아렛타……	keep	protect
 lex:kata-verb-whole	ってイテェ！	lacks:있어	keep	protect
-lex:kata-verb-whole	もうヤンデル。	이제 병들어 있다.	fix	protect
+lex:kata-verb-whole	もうヤンデル。	이제 병든 상태.	fix	protect
 lex:kata-verb-whole	ヤッター！	앗싸!	keep	protect
 lex:kata-verb-whole	マテ茶を飲む。	마테차를 마신다.	keep	protect
 lex:kata-verb-whole	ノボル！	노보루!	keep	protect
@@ -65,6 +65,7 @@ lex:kata-verb-whole	「イクヨッ！」	「가!」	fix	protect
 lex:kata-verb-whole	ヤルヨ。	할게.	fix	protect
 lex:kata-verb-whole	ヤロウ！！	lacks:해 보자	keep	protect
 lex:kata-verb-whole	……カッタヨ……？	lacks:샀	keep	protect
+lex:kata-verb-whole	明らかにヤンデルである。	has:병든 상태이다	fix	protect
 lex:te-drawl	やめてええ！	그만해!	fix	sound
 lex:te-drawl	まってええ！	기다려!	fix	sound
 lex:te-drawl	たすけてええ！	살려!	fix	sound
