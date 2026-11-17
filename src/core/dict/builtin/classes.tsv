@@ -145,7 +145,7 @@
 //= follower.nickname	Nickname suffixes a kana run glued to a katakana name may be, read by sound and joined to the name (サッちん 삿친, ユキりん); for an unknown run only.
 //= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
 //= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
-//= follower.kata-verb-whole	The forms of a verb written whole in katakana, as branch:ending: the conjugation (dict, past, te, neg, stem, imp, imp2, cha) and what ends the form after it; dict only for a run of three kana or more (マッテ te:, ワカラナイ neg:ない, コロシテヤル te:やる; spec LEX-5875).
+//= follower.kata-verb-whole	The forms of a verb written whole in katakana, as branch:ending: the conjugation (dict, past, te, neg, stem, imp, imp2, cha) and what ends the form after it; a bare dict only for a run of three kana or more with hiragana after it, never a run standing as a call (マッテ te:, ワカラナイ neg:ない, コロシテヤル te:やる; spec LEX-5875).
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.quoting-to	The と that quotes the katakana run before it, which leaves the run a sound (メキメキという, ゴロゴロと言う).
@@ -1786,10 +1786,14 @@ follower.kata-verb	し
 follower.kata-verb	ぜ
 
 follower.kata-verb-whole	dict:
+follower.kata-verb-whole	dict:よ
 follower.kata-verb-whole	past:
+follower.kata-verb-whole	past:よ
 follower.kata-verb-whole	imp:
 follower.kata-verb-whole	imp2:
 follower.kata-verb-whole	te:
+follower.kata-verb-whole	te:て
+follower.kata-verb-whole	te:ください
 follower.kata-verb-whole	te:る
 follower.kata-verb-whole	te:た
 follower.kata-verb-whole	te:ない

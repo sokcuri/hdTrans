@@ -819,8 +819,10 @@ bool WholeAdjective(std::string_view ending) {
 // form of the verb: a conjugation and what may end the form after it, as
 // follower.kata-verb-whole lists them (マッテ 待っ+て, ワカラナイ 分から+ない, ヤメロ やめ+ろ,
 // コロシテヤル 殺し+て+やる). The conjugation of an ichidan verb may be empty (ヤメナイ). The
-// dictionary form needs a run of three kana or more with something after it (long_: ガンバル！,
-// not タツ, ネル or a bare アタル).
+// dictionary form alone needs a run of three kana or more with something after it that does not
+// leave the run standing as a call (long_: …ワラエルッ！; not タツ or ネル, nor ノボル！ or
+// ノボル、 at the start of a line, read as a given name); with an ending in the run it may stand
+// as a call (イクヨ！ 行くよ).
 bool WholeVerb(int kind, std::string_view ending, bool long_) {
     static constexpr std::pair<std::string_view, int> kBranches[] = {
         {"dict", 0}, {"past", 6}, {"te", 7}, {"neg", 8}, {"stem", 10}, {"imp", 11}, {"imp2", 12}, {"cha", 17},
@@ -830,7 +832,7 @@ bool WholeVerb(int kind, std::string_view ending, bool long_) {
         if (colon == std::string_view::npos) continue;
         const std::string_view name = m.substr(0, colon), after = m.substr(colon + 1);
         for (const auto& [n, branch] : kBranches) {
-            if (n != name || (branch == 0 && !long_)) continue;
+            if (n != name || (branch == 0 && after.empty() && !long_)) continue;
             const std::string_view conj = word::Conjugation(kind, branch);
             if (conj.find_first_of("(X") != std::string_view::npos || (conj.empty() && after.empty())) continue;
             if (ending.size() == conj.size() + after.size() && ending.starts_with(conj) && ending.ends_with(after)) return true;
@@ -876,7 +878,7 @@ bool PredicateFollows(std::string_view rest, bool tsu, bool final) {
 // The run must be no katakana word: no key other than a name, a row that spells its sound
 // (パラパラ 파라파라) or a stem the text does not conjugate reads it, and no name of the document.
 std::string NativeSpelling(std::string_view word, bool tsu, std::string_view rest, const LineContext& ctx,
-                           const dict::Snapshot& snap) {
+                           const dict::Snapshot& snap, bool call) {
     const std::u32string k = Runes(word);
     if (k.size() < 2) return {};
     if (ctx.named != nullptr && ctx.named->contains(std::string(word))) return {};
@@ -923,6 +925,7 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
     // its katakana key, a loanword even when its Korean spells the sound (ネタ 네타, カット 컷).
     std::string core = hira, drawnTail;
     bool hasTail = false;  // the drawn tail has a small vowel
+    bool teDrawl = false;  // the tail is two え after a te form
     {
         std::u32string h = Runes(hira);
         size_t e = h.size();
@@ -933,13 +936,23 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             hasTail = hasTail || h[e - 1] != U'ー';
             e--;
         }
+        // Two え that draw out the て or で of a te form before a shout's end (ヤメテエエ！ やめて), as
+        // RewriteEmphasis drops them in hiragana.
+        const char32_t r0 = text::DecodeRune(rest).cp;
+        if (!hasTail && !dash && e >= 3 && h[e - 1] == U'え' && h[e - 2] == U'え' && RuneIn(h[e - 3], U"てで") &&
+            (rest.empty() || RuneIn(r0, U"！!…‥"))) {
+            e -= 2;
+            teDrawl = true;
+        }
         core = Utf8(std::u32string_view(h).substr(0, e));
         if (dash) drawnTail = "～";
     }
-    // A key that reads into the drawn tail makes it part of a word, not a tail.
+    // A key that reads into the drawn tail makes it part of a word, not a tail; a key may take one
+    // of two drawn え (ミテエエ: みてえ).
     bool tailWord = false;
+    const std::size_t tailFrom = core.size() + (teDrawl ? std::string_view("え").size() : 0);
     for (const dict::Candidate& c : snap.GetWordInfo(hira, dict::LookupMode::General, ctx.lookup).list) {
-        tailWord = tailWord || (c.codes != nullptr && c.source.size() > core.size() && !(c.user != nullptr && c.user->nameLayer));
+        tailWord = tailWord || (c.codes != nullptr && c.source.size() > tailFrom && !(c.user != nullptr && c.user->nameLayer));
     }
     bool kataRow = false;
     for (const dict::Candidate& c : snap.GetWordInfo(word, dict::LookupMode::General, ctx.lookup).list) {
@@ -958,7 +971,7 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
         } else if (part[0] == 'M' && part[1] == '4' && !runsOn && !named && !nameThenSuru && !nounFollows && !kataRow && !tailWord &&
                    c.source.size() < core.size() && (!hasTail || text::RuneCount(core) >= 3) &&
-                   WholeVerb(part[3] - '0', std::string_view(core).substr(c.source.size()), text::RuneCount(core) >= 3 && !rest.empty()) &&
+                   WholeVerb(part[3] - '0', std::string_view(core).substr(c.source.size()), text::RuneCount(core) >= 3 && !rest.empty() && !call) &&
                    (PredicateFollows(rest, tsu, false) || quoted || rest.starts_with("、"))) {
             // A verb written whole in katakana (マッテ！ 待って, ワカッタ… 分かった, ヤメテェ！ やめて):
             // the stem and a whole form of it fill the run, but for a closing ッ or a drawn tail, before
@@ -1085,7 +1098,10 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         if (kw == nullptr) {
             // After a digit the run counts something (1モグり), not a native word.
             if (joined || text::IsDigit(prev)) continue;
-            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap); !native.empty()) {
+            // The run stands as a call (ノボル！, おい、アタル…): after the start of the line, a bracket, a
+            // comma or a space and before a mark or a comma or the end.
+            const bool call = (start == 0 || RuneIn(prev, U"「『（(、，,　 \n")) && (rest.empty() || RuneIn(next, U"！!？?…‥、，,\n"));
+            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap, call); !native.empty()) {
                 b.append(text.substr(at, start - at));
                 b += native;
                 at = i;
