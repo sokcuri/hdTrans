@@ -440,13 +440,19 @@ std::vector<dict::UserEntry> KanaSpellings(std::string_view text, const dict::Di
         if (f.size() < 2 || f[0].empty() || f[0].starts_with("//")) continue;
         const std::string_view cls = f.size() > 2 ? f[2] : std::string_view();
         bool seen[256] = {};
+        std::string rows;
         for (const dict::Record& r : base.Records(f[1])) {
             const std::string& part = r.codes->partText;
             if (part.size() < 2) continue;
             const char d = part[1];
-            if (seen[static_cast<unsigned char>(d)]) continue;
+            // A verb spelling takes the first verb record of its key in each conjugation row, so that the
+            // conjugation of the text picks the row it fits (うごく: 動 + く of 動く, not 動ずる; LEX-5920); other
+            // classes take the first record.
+            const char row = d == '4' && part.size() > 3 ? part[3] : '\0';
+            if (row != '\0' ? rows.find(row) != std::string::npos : seen[static_cast<unsigned char>(d)]) continue;
             if ((!cls.empty() && cls != std::string_view(&d, 1)) || (cls.empty() && (d == '4' || d == '7'))) continue;
             seen[static_cast<unsigned char>(d)] = true;
+            if (row != '\0') rows.push_back(row);
             dict::UserEntry e;
             e.key = f[0];
             e.target = r.target;

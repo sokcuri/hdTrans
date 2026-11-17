@@ -163,7 +163,7 @@ dict:archaic-speech	そうじゃろ そうじゃろ すごいじゃろ	그렇지
 dict:archaic-speech	何かの隠語じゃろうか？	뭔가의 은어일까?	keep	lookup
 dict:archaic-speech	民間人だけでも避難させる事が 先決じゃろうが	민간인만으로도 피난시키는 것이 선결이잖아	keep	lookup
 dict:archaic-speech	ああ あそこは 楽園じゃからのう。	아 저기는 낙원이니까 말이야.	fix	lookup
-dict:archaic-speech	おまえらとは きたえ方が ちがうからのう。	너희와는 온 편이 다르니까 말이야.	fix	lookup
+dict:archaic-speech	おまえらとは きたえ方が ちがうからのう。	has:단련하는 방법이 다르니까 말이야	fix	lookup
 dict:archaic-speech	確かに 繭玉は 奇麗じゃからのう。	확실히 설날 장식은 깨끗하니까 말이야.	fix	lookup
 dict:archaic-speech	よい天気じゃのう	좋은 날씨로구먼	keep	lookup
 dict:archaic-speech	雑魚が飛び込んできたでおじゃる	잔챙이가 뛰어들어 왔소	fix	lookup

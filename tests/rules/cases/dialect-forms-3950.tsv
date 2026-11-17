@@ -4,7 +4,7 @@ normalize:dialect-copula	“個人情報やさかい あかん” 言うて	“�
 normalize:dialect-copula	それは お前 未練 残るやんけ お前	그것은 너 미련 남잖아 너	fix	normalize
 normalize:dialect-copula	すごい嫌やね これ｡	엄청 싫네 이것.	fix	normalize
 normalize:dialect-copula	お前のことやないかい	너잖아	fix	normalize
-normalize:dialect-copula	おどれ まだ自分の立場いうのを 分かっとらんようやの	뛰어올라라 아직 자신의 입장 말하는 것을 모르는 것 같아	fix	normalize
+normalize:dialect-copula	おどれ まだ自分の立場いうのを 分かっとらんようやの	has:아직 자신의 입장 말하는 것을 모르는 것 같아	fix	normalize
 normalize:dialect-copula	）遅れとるやないか	) 늦어 있잖아	fix	normalize
 normalize:dialect-copula	わし カブしたついでに ポリとプロレスやっただけやんけ	나 카브한 김에 폴리와 프로레슬링 했을 뿐이잖아	fix	normalize
 normalize:dialect-copula	わいはな ちっちゃい糸工場を 造りたいんやわ	나는작은 실공장을 만들고 싶은 이나 와	fix	normalize

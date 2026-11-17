@@ -6591,7 +6591,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おとり捜査	함정 수사	N110			GN				jisjk:165741		
 おとろえ	쇠약해&AL@	M427	QHPUMe		GN				jisjk:146493		
 おど	협박&AV@	M443			GN				jisjk:146512		
-おど	뛰어&E6@	M428			GN				jisjk:146549		
+おど	춤&CL@	M428			GN				jisjk:146549		
 おどおど	벌벌 &LG@	E429			GN				jisjk:162		
 おどおど	벌벌	E301			GN				jisjk:365920		
 おどおどと	벌벌	E311			GN				jisjk:163		
@@ -34331,9 +34331,9 @@ ttt	ttt	K110			GN				jisjk:201744
 としょかん	도서관	I110	VBlVPl		GN				jisjk:343625		
 としょしつ	도서실	N110	VPl		GN				jisjk:346489		
 としわすれ	망년회	N110		Hd	GN				jisjk:153752		
+とじ	&FQ@	M447			GN				jisjk:145296		
 とじ	철&AV@	M447			GN				jisjk:145283		
 とじ	풀어 &Hj@	M447	VFd		GN				jisjk:145290		
-とじ	&FQ@	M447			GN				jisjk:145296		
 とじこ	철&AV@	M435			GN				jisjk:91125		
 とじこめ	감금&AV@	M437			GN				jisjk:91126		
 とじこめ	가&C7@	M447			GN				jisjk:145275		
@@ -36685,7 +36685,6 @@ ttt	ttt	K110			GN				jisjk:201744
 にくらべて	에 비해서	E310		J1Tu	GN				jisjk:974		
 にけんか	하고 싸움&AV@	M429			GN				jisjk:262091		
 にけんか	하고 싸움&AV@	M429		Tu	GN				jisjk:262092		
-にげな	어울리지 $D7@	H7N0	SFl		GN				jisjk:121971		
 にげるにしかず	도망치는 게 상수다	I110			GN				jisjk:113127		
 にげ腰	발뺌	I110			GN				jisjk:106861		
 にこ	2개	Q110			GN				jisjk:160148		

@@ -547,6 +547,30 @@ bool Worker::DoubledSoundBefore(std::string_view query) const {
     return false;
 }
 
+// Whether the text before query in its token ends with a hiragana adverb of two kana or more that the
+// dictionary holds and that starts the token or follows a particle of kKanaBefore, after which a verb
+// spelled in kana starts a word (はやくにげて 빨리 도망쳐, ゆっくりはなれる 천천히 떨어진다; LEX-5922).
+bool Worker::KanaModifierBefore(std::string_view query) const {
+    const std::string_view surface = transformSurface;
+    if (!surface.ends_with(query)) return false;
+    const std::string_view before = surface.substr(0, surface.size() - query.size());
+    // Kana take three bytes each in UTF-8; up to five kana back.
+    for (std::size_t n = 2; n <= 5 && 3 * n <= before.size(); n++) {
+        const std::string_view word = before.substr(before.size() - 3 * n);
+        bool kana = true;
+        for (std::size_t k = 0; k < word.size(); k += 3) kana = kana && NameClassOf(word.substr(k, 3)) == kClassHiragana;
+        if (!kana) break;
+        const std::string_view lead = LastChar(before.substr(0, before.size() - word.size()));
+        if (!lead.empty() && NameClassOf(lead) != kClassOther && !Has(kKanaBefore, lead)) continue;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            const std::string_view p = c.codes->partText;
+            // An adverb (N3xx, E3xx): a noun before is too often the noun and a particle (これはねえ).
+            if (p.size() > 1 && (p[0] == 'N' || p[0] == 'E') && p[1] == '3') return true;
+        }
+    }
+    return false;
+}
+
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
@@ -557,13 +581,28 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassHiragana:
     case kClassKanji:
     case kClassKatakana:
-        if (!Has(kKanaBefore, prev) && !(pc.size() > 1 && pc[1] == '4' && DoubledSoundBefore(query))) return false;
+        if (!Has(kKanaBefore, prev) &&
+            !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query)))) {
+            return false;
+        }
     }
     const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    // A verb stem with no kana ending after it (before a mark, a kanji, a katakana or the end) never beats a name
+    // or a noun of the base under the same key (ゆめみ。 유메미, はえ、 파리; LEX-5923).
+    if (pc.size() > 1 && pc[1] == '4' && NameClassOf(FirstChar(rest)) != kClassHiragana) {
+        if (!snapshot.NameRecords(u.key).empty()) return false;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(u.key, dict::LookupMode::General)) {
+            const std::string_view p = c.codes->partText;
+            if (c.user == nullptr && p.size() > 1 && p[1] == '1') return false;
+        }
+    }
     // A verb or adjective spelling that reads as the particle は and a final particle (はね: は + ね) needs a
     // full hiragana after it: before a mark, a kanji or the end it is は and the final particle (私はね、,
     // はね配合比); はだけ、 stays the verb.
     if (pc.size() > 1 && (pc[1] == '4' || pc[1] == '7')) {
+        // After に, と, へ or の a は that starts the spelling is the particle of には, とは, へは or のは
+        // (くらいにはなれる 정도는 될 수 있다, そういうのはやめて; LEX-5922); after で it may be the verb (手探りではだけ).
+        if (u.key.starts_with("は") && !prev.empty() && Has("にとへの", prev)) return false;
         // A small kana or a long mark draws the particle out (あとはねぇ, はねっかえり), which no verb ending starts.
         return !u.key.starts_with("は") ||
                !dict::InClass(HDTRANS_CLASS("particle.final-after-past"), u.key.substr(std::string_view("は").size())) ||
