@@ -194,8 +194,9 @@ bool Item::RunDakeiyoCase8Query() {
     const int scanOffset = base.scanOffset;
     if (!w->MatchDictionary(tail, groupText, '8', 'X')) return false;
     // LEX-5793: where the dictionary has the stem with な as an adjective (ご存じな of ご存じない,
-    // だいじな), ない after the stem is that adjective, not the adnominal な and いる.
-    if (tail.starts_with(kJaNa) && tail.substr(kJaNa.size()).starts_with("い")) {
+    // だいじな), ない or なければ after the stem is that adjective, not the adnominal な and いる.
+    if (tail.starts_with(kJaNa) &&
+        (tail.substr(kJaNa.size()).starts_with("い") || tail.substr(kJaNa.size()).starts_with("けれ"))) {
         const std::string key = std::string(groupText) + std::string(kJaNa);
         const std::string query = std::string(groupText) + std::string(tail);
         for (const Record* r = w->DoLookup(query, kModeGeneral).records; r != nullptr; r = r->child) {

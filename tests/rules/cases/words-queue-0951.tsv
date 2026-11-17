@@ -197,3 +197,5 @@ cx:gozonji-comma:30	ご存知なのに黙っていた	has:알고 계신데	keep	
 cx:gozonji-comma:30	ご存じ、なのですね	!rule:cx:gozonji-comma:30	keep	rewrites
 cx:gozonji-comma:40	御存知なんですか	!rule:cx:gozonji-comma:40	keep	rewrites
 cx:gozonji-comma:40	御存じ、なのに	!rule:cx:gozonji-comma:40	keep	rewrites
+dict:w:35320	ご存じなければ教えます	has:모르시면	fix	lookup
+dict:w:35320	もしご存じなければ、私が案内します。	has:만약 모르시면	fix	lookup
