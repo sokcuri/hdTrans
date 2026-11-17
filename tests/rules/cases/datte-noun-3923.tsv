@@ -94,7 +94,7 @@ cx:datte-noun:5	パパのこと 友達だって 思ってる?	아빠친구라고
 cx:datte-noun:5	先生だって知ってるでしょ!?	선생님도 알고 있지!?	keep	rewrites
 cx:datte-noun:15	雨だって行くよ。	비가 와도 갈게.	fix	rewrites
 cx:datte-noun:15	雨だって行く。	비가 와도 간다.	fix	rewrites
-cx:datte-noun:15	雨だって降るさ。	비도 내리고 말이야.	keep	rewrites
+cx:datte-noun:15	雨だって降るさ。	비도 내리지.	keep	rewrites
 cx:datte-noun:15	嵐だって平気だ。	폭풍우도 괜찮다.	keep	rewrites
 cx:datte-noun:16	夜だって働く。	밤에도 일한다.	fix	rewrites
 cx:datte-noun:16	夜だって装備や艦載機体によってはいけちゃうから。まあ、太陽が出てる時間のほうが好きだけどね！	밤에도 장비나 함재기체에 따라서는 갈 수 있어버리니까. 뭐, 태양이 나오고 있는 시간 쪽을 좋아하지만!	fix	rewrites
