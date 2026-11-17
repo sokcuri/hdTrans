@@ -111,6 +111,8 @@ enum class ConstraintContext : uint8_t {
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
                         // (ことなどできない: など + できない, not などで + きない); a follow that ends in $ is the
                         // whole text after it (部屋においで: で$)
+    AfterNounBeforeListed,  // BeforeListed, right after a noun as NotAfterNoun tells it, in its token or at the
+                            // end of the token before (学校|でな、 particle で; そとに|でな！, はやく|でな。 stay 出な)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word
                         // with a kanji or katakana that ends there and reads first as a verb or an
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a
@@ -175,7 +177,7 @@ struct ConstraintRule {
     ConstraintReject reject;
     std::string_view note;    // the rule in Korean
     std::string_view target;  // ConstraintReject::OtherTargets and Target only
-    std::string_view follows = {};  // ConstraintContext::BeforeListed only
+    std::string_view follows = {};  // ConstraintContext::BeforeListed and AfterNounBeforeListed only
 };
 
 // In table order; each rule runs on the candidates the earlier ones left.

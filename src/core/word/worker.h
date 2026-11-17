@@ -234,6 +234,9 @@ private:
     // Whether the text head that a word follows in its token ends in something other than a noun
     // (ConstraintContext::NotAfterNoun).
     bool NotAfterNoun(std::string_view head);
+    // Whether lead ends in a noun: the ん of a nominalizer, or a word with a kanji or katakana that ends
+    // there and has a noun sense or is not in the dictionary (ConstraintContext::AfterNounBeforeListed).
+    bool AfterNoun(std::string_view lead);
     // Whether the hiragana noun source at the start of query, after head, is a particle and the start
     // of a longer word (ConstraintContext::ParticleSplit).
     bool ParticleSplit(std::string_view head, std::string_view source, std::string_view query,

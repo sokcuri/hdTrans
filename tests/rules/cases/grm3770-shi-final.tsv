@@ -38,9 +38,9 @@ cx:narration-style-1:21	あんま言ったことなかったしな。	별로 말
 cx:narration-style-1:22	「……降ってるし」	「……내리고 있거든」	fix	rewrites
 cx:narration-style-1:22	「さっきからキョロキョロしてるし」	「조금 전부터 두리번두리번하고 있거든」	fix	rewrites
 cx:narration-style-1:22	……降ってるし。	……내리고 있고.	keep	rewrites
-cx:narration-style-1:23	「おおう、あんときゃもう今にも死にそうな顔してたし」	「감싸는, 아와 꺄 이제 당장이라도 죽을 것 같은 얼굴 하고 있었거든」	fix	rewrites
+cx:narration-style-1:23	「おおう、あんときゃもう今にも死にそうな顔してたし」	has:얼굴 하고 있었거든」	fix	rewrites
 cx:narration-style-1:23	「それのエプロン買ってたし」	「그것의 에이프런 사고 있었거든」	fix	rewrites
-cx:narration-style-1:23	おおう、あんときゃもう今にも死にそうな顔してたし。	감싸는, 아와 꺄 이제 당장이라도 죽을 것 같은 얼굴 하고 있었고.	keep	rewrites
+cx:narration-style-1:23	おおう、あんときゃもう今にも死にそうな顔してたし。	has:얼굴 하고 있었고.	keep	rewrites
 cx:narration-style-1:29	「やってることはまあ、グレーというか……なわけだしな」	「하고 있는 건 뭐, 회색이라고 할까……거잖아」	fix	rewrites
 cx:narration-style-1:29	やってることはまあ、グレーというか……なわけだしな。	하고 있는 것은 뭐, 회색이라고 할까……것이고.	keep	rewrites
 cx:narration-style-1:30	「……まぁ真面目な話、退院祝いをしなくちゃだしな」	「……뭐 진지한 이야기, 퇴원 축하를 하지 않으면이거든」	fix	rewrites

@@ -2005,8 +2005,10 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         StutterHeadMora(rs, i, !dict::InClass(HDTRANS_CLASS("mark.comma"), Bytes(p + n, p + n + 1))) == x) {
         notStutter = false;
     }
-    // The restore stage copies the next Korean syllable, which a numeral does not give.
-    if (NumeralRune(rs[i])) {
+    // The restore stage copies the next Korean syllable, which a numeral does not give; a word of
+    // sound.stutter-head that starts with one gives it (い、一回 하, 한 번).
+    if (NumeralRune(rs[i]) &&
+        StutterHeadMora(rs, i, !dict::InClass(HDTRANS_CLASS("mark.comma"), Bytes(p + n, p + n + 1))) != x) {
         pieces.clear();
         return 0;
     }

@@ -114,6 +114,9 @@ constexpr ConstraintRule kRules[] = {
      "い가 이어지지 않는 もうい는 もういい가 아니라 もう와 뒤 낱말의 첫 글자 (もういない 이제 된 있고 → 이제 없다). もういい는 그대로", {}},
     {"dea-before-aitsu", ConstraintWord::Source, "であ", ConstraintContext::BeforeAitsu, ConstraintReject::Word,
      "いつ 앞의 であ는 出会う나 である가 아니라 で와 あいつ (俺たちであいつを 우리에서 만나며 개를 → 우리로 저 녀석을)", {}},
+    {"de-before-final-na", ConstraintWord::Source, "で", ConstraintContext::AfterNounBeforeListed, ConstraintReject::Target,
+     "명사 뒤, 끝에 남은 な, なぁ, なあ, なー 앞의 で는 出る의 어간이 아니라 조사나 だ의 で와 종조사 な (学校でな、 학교 나오는 거야 → 학교에서, 管轄外でな。 관할 밖이라서). に, を 따위나 부사 뒤는 出な (そとにでな！ 밖에 나와)", "나&AH@",
+     "な$|なぁ$|なあ$|なー$|な、|な，|な。|な！|な？|な!|な?|な…|な‥|な」|な』|な）|なぁ、|なぁ。|なぁ！|なぁ？|なぁ…|なぁ」|なあ、|なあ！|なあ？|なー、|なー！|なー？|なー…"},
     {"nihama-before-marude", ConstraintWord::Source, "にはま", ConstraintContext::BeforeMarude, ConstraintReject::Word,
      "るで, るっきり 앞의 にはま는 はまる가 아니라 には와 まるで, まるっきり (その顔にはまるで 그 얼굴에 빠지는 것으로 → 그 얼굴에는 전혀). はまるでしょう는 그대로", {}},
     {"de-before-desu", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeDesu, ConstraintReject::Word,
@@ -594,6 +597,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                           c.codes->gram.HasCode("Ct");
                });
     case ConstraintContext::BeforeListed:
+    case ConstraintContext::AfterNounBeforeListed:  // and Worker::NotAfterNoun, in ApplyConstraints
         for (std::string_view rest = rule.follows; !rest.empty();) {
             const std::size_t bar = rest.find('|');
             const std::string_view follow = rest.substr(0, bar);
@@ -925,6 +929,28 @@ bool Worker::NotAfterNoun(std::string_view head) {
     return NameClassOf(last) != kClassKatakana && !text::IsKanji(text::DecodeRune(last).cp);
 }
 
+bool Worker::AfterNoun(std::string_view lead) {
+    if (lead.empty()) return false;
+    const std::string_view last = LastChar(lead);
+    if (last == "ん") return true;
+    // The longest dictionary word of up to eight characters with a kanji or a katakana that ends where lead
+    // ends, by any of its senses (外 밖 beside the stem of 外す, 事故, 手の平, 付き; not 早く).
+    std::size_t start = lead.size();
+    for (int k = 0; k < 8 && start > 0; k++) start -= LastChar(lead.substr(0, start)).size();
+    for (std::string_view word = lead.substr(start); !word.empty(); word.remove_prefix(FirstChar(word).size())) {
+        if (!HasKanji(word) && NameClassOf(FirstChar(word)) != kClassKatakana) continue;
+        bool found = false;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            if (c.source != word || c.codes == nullptr) continue;
+            if (c.codes->part.TagIn("NI")) return true;
+            found = true;
+        }
+        if (found) return false;
+    }
+    // A kanji or katakana word the dictionary lacks is a noun; kana after a particle or an adverb is not.
+    return NameClassOf(last) == kClassKatakana || text::IsKanji(text::DecodeRune(last).cp);
+}
+
 bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
                            const std::vector<dict::Candidate>& list) {
     if (head.empty() || text::RuneCount(source) < 2 || !AllOfClass(source, kClassHiragana)) return false;
@@ -998,6 +1024,9 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             if (!first ||
                 (rule.context == ConstraintContext::NotAfterNoun       ? !NotAfterNoun(head)
                  : rule.context == ConstraintContext::ParticleSplit    ? !ParticleSplit(head, source, query, list)
+                 : rule.context == ConstraintContext::AfterNounBeforeListed
+                     ? !AfterNoun(lead) ||
+                           !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)
                  : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
                 i++;
                 continue;
