@@ -17,7 +17,7 @@ sound:mimetic-join	彼女は自分の腿をぽんぽんと叩いた。	has:통�
 sound:mimetic-join	温かくて小さなモノがぬるぬると這い回る。	has:미끌미끌 기어다닌다	keep	sound
 sound:mimetic-join	わたしのお腹の辺りをぽんぽんと優しく叩いて	has:통통 다정하게	keep	sound
 sound:mimetic-join	ほっこりとした卵	훈훈한 알	keep	sound
-sound:mimetic-join	ふふっ、お顔べとべとです	후훗, 얼굴 끈적끈적입니다	keep	sound
+sound:mimetic-join	ふふっ、お顔べとべとです	후훗, 얼굴 끈적끈적합니다	fix	sound
 sound:mimetic-join	先端に感じる、ぬめりと熱。	끝에 느끼는, 미끈 열.	keep	sound
 sound:mimetic-join	ふふっ、不思議と今はこの辺りがぽかぽかと幸せで	has:따끈따끈하고 행복해	fix	sound
 cx:mimetic-join:10	ひんやりと冷たい	서늘하고 차갑다	fix	rewrites

@@ -278,7 +278,19 @@ struct SoundMatch {
     std::string redrawn;
     std::string alone;  // SoundRow::alone
     bool adj = false;   // SoundRow::adj
+    bool state = false; // SoundRow::state
+    std::string ni;     // SoundRow::ni
 };
+
+// Whether the ono sound m is said once as written: its key alone, or a state row with the one
+// ッ of stress that MatchSound lets it take (ガリッガリ; LEX-5905).
+bool AsWritten(const SoundMatch& m, std::u32string_view f) {
+    const size_t n = m.end - m.start;
+    if (n == m.keyLen) return true;
+    const std::u32string_view said = f.substr(m.start, n);
+    return m.state && n == m.keyLen + 1 &&
+           std::count(said.begin(), said.end(), U'ッ') == std::count(m.key.begin(), m.key.end(), U'ッ') + 1;
+}
 
 // Whether the ono sound m, the last of its chain, writes the root of a Korean 하다 adjective
 // (ko-root.mimetic-adjective: ふんわり 폭신) as an adverb, with or without its と: a と that ends it is
@@ -287,6 +299,11 @@ bool MimeticAdjectiveAdverb(const SoundMatch& m, char32_t last) {
     if (m.intj || !dict::InClass(HDTRANS_CLASS("ko-root.mimetic-adjective"), m.korean)) return false;
     const std::u32string_view k = m.key;
     return last != U'と' || !(k.ends_with(U'ト') && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2));
+}
+
+// Whether key is one unit said twice, a final ト included (ヘトヘト).
+bool UnitKey(std::u32string_view k) {
+    return k.size() >= 2 && k.size() % 2 == 0 && k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
 }
 
 // Whether the key of the ono sound m, without a final ト, is one unit said twice (ポンポン, ヌルヌル).
@@ -524,6 +541,7 @@ private:
     bool Stopped(const SoundMatch& m) const;
     bool VerbStemAt(size_t p, size_t n) const;
     bool MimeticAfterWord(const SoundMatch& m) const;
+    bool StateAfterWord(const SoundMatch& m) const;
     bool PredicateStartsAt(size_t start, size_t p) const;
     bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
     bool StemAt(size_t p, size_t n) const;
@@ -538,8 +556,12 @@ private:
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     bool Adnominal(const SoundMatch& m, size_t i) const;
+    bool StateWord(const SoundMatch& m) const;
+    bool StatePredicate(const SoundMatch& m) const;
+    std::string StateKey(const SoundMatch& m) const;
+    size_t StateManner(const SoundMatch& m, size_t i) const;
     bool StartsAdjective(size_t i) const;
-    bool StartsConjugatedVerb(size_t i) const;
+    bool StartsConjugatedVerb(size_t i, bool te = false) const;
     size_t QuotingAt(size_t i) const;
     size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
@@ -907,8 +929,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             if (open && end < rs_.size() && In(rs_[end], U"？?")) continue;  // 見ゆ！ってか？ quotes
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
         }
-        if (ok && runKorean.empty() && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
-            ok = false;  // a final と is the particle, not katakana ト
+        // A final と is the particle, not katakana ト, unless the ト ends the unit of a doubled key
+        // (ヘトヘト, ベトベト).
+        if (ok && runKorean.empty() && s.key.back() == U'ト' && !UnitKey(s.key) &&
+            !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
+            ok = false;
         }
         if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
         // An interjection drawn out by three or more vowel kana draws out its last syllable
@@ -992,7 +1017,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             const std::string_view root = describes ? std::string_view() : std::string_view(s.root);
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), root, s.intj, s.lead, open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone,
-                              s.adj};
+                              s.adj, s.state, s.ni};
             chosen = &s;
         }
     }
@@ -1028,6 +1053,12 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
     if (name > surface && IsKanjiRune(rs_[best.end]) && IsKanjiRune(rs_[nameEnd - 1]) &&
         (nameEnd == rs_.size() || !IsKanjiRune(rs_[nameEnd]))) {
         return false;
+    }
+    // A katakana sound that the name layer reads as it stands names someone right before an
+    // honorific (ガリガリ君 가리가리 군).
+    if (IsKatakanaRune(rs_[p]) && best.end < rs_.size() &&
+        dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), Bytes(best.end, rs_.size())) > 0) {
+        if (!snap_.NameRecords(Bytes(p, best.end)).empty()) return false;
     }
     // Right before を or が the sound is a noun when the dictionary reads it only as one
     // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb), and so is a
@@ -1347,6 +1378,12 @@ bool SoundText::PredicateStartsAt(size_t start, size_t p) const {
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
 // kana of that shape never continue the word before them, so the sound stands after a
 // kanji word too. A long vowel in it may be a volitional ending (治そーっと, 休もうっと).
+// Whether the ono sound m is a state mimetic of one doubled unit of two kana said once as written
+// (毎日へとへとになる 매일 녹초가 되다), which starts after a word even with the kana of a particle.
+bool SoundText::StateAfterWord(const SoundMatch& m) const {
+    return m.state && !m.intj && m.keyLen == 4 && AsWritten(m, f_) && UnitKey(m.key);
+}
+
 bool SoundText::MimeticAfterWord(const SoundMatch& m) const {
     return !m.intj && (m.keyLen == 2 || m.keyLen == 3) && f_[m.end - 1] == U'ッ' && !In(f_[m.start + 1], U"ーウ") &&
            !In(rs_[m.start], kParticles) && m.end < rs_.size() && rs_[m.end] == U'と';
@@ -1434,7 +1471,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     } else if ((afterParticle && !teClosing && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
                (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
-                !MimeticAfterWord(first)) ||
+                !MimeticAfterWord(first) && !StateAfterWord(first)) ||
                // A particle after a closing bracket that a dictionary word goes on from past the first
                // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
                (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1))) {
@@ -1472,11 +1509,13 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
 // key's or one it took, or is a doubled unit (ぐさぐさ). Kana after a short hiragana word
 // often go on as grammar (な|くたって, から|っと), which these conditions keep out.
 bool SoundText::WordStartsSound(size_t p, const SoundMatch& last, size_t end) const {
-    if (In(rs_[p], kParticles)) return false;
+    if (In(rs_[p], kParticles) && !StateAfterWord(last)) return false;
     const std::u32string_view key = last.key;
     // A dictionary word that reads the kana as far (ぶすっとした, ふわふわ, さらりと) is left
     // to the word stage, unless ー cuts it there (ぼーっと).
-    if (key.find(U'ー') == std::u32string_view::npos && p + WordLen(p) >= last.end) return false;
+    // A state mimetic stays a sound, which hands the dictionary its state word only where that
+    // reads it (StateWord; もうびしょびしょ。, もうびしょびしょに濡れた).
+    if (key.find(U'ー') == std::u32string_view::npos && p + WordLen(p) >= last.end && !last.state) return false;
     // Three kana or more before the と (ぼーっと, not すっと of はぶ|すっと).
     if (key.size() - (key.ends_with(U'ト') ? 1 : 0) < 3) return false;
     if (key.ends_with(U'ト') || (end > last.end && rs_[last.end] == U'と')) return true;
@@ -1519,6 +1558,68 @@ bool SoundText::Adnominal(const SoundMatch& m, size_t i) const {
     return !In(rs_[noun], U"音声");
 }
 
+// Whether the ono sound m of a state row is the state word the dictionary reads its hiragana
+// spelling as (LEX-5900): a word of the dictionary that goes on from it into the text after it
+// (がりがりの体 삐쩍 마른, 声ががらがらになった 목이 쉬었다), or its adjectival noun before a
+// copula, な or になる (ぺらぺらだ 유창하다, ぺらぺらになった 유창해졌다, びしょびしょになった
+// 흠뻑 젖었다).
+// Said once as written, without a と or a drawn-out end.
+bool SoundText::StateWord(const SoundMatch& m) const {
+    if (!m.state || m.intj || !AsWritten(m, f_) || StateManner(m, m.end) > 0) return false;
+    const bool predicate = StatePredicate(m);
+    if (m.end >= rs_.size() && !predicate) return false;
+    const std::string key = StateKey(m);
+    const std::string text = key + std::string(Bytes(m.end, std::min(rs_.size(), m.end + 12)));
+    bool na = false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(text, dict::LookupMode::General, ctx_.lookup).list) {
+        if (c.codes == nullptr || (c.user != nullptr && (c.user->kana || c.user->nameLayer))) continue;
+        const size_t n = text::RuneCount(c.source);
+        if (n > m.keyLen) return true;
+        if (n == m.keyLen && c.codes->part.ClassDigit() == '8') na = true;
+    }
+    // A state word of the dictionary that ends with the mimetic stands wherever it ends (お腹ぺこぺこ
+    // 배가 고프다).
+    for (size_t b = 1; b <= 4 && b <= m.start; b++) {
+        const std::string before = std::string(Bytes(m.start - b, m.start)) + text;
+        for (const dict::Candidate& c : snap_.GetWordInfo(before, dict::LookupMode::General, ctx_.lookup).list) {
+            if (c.codes == nullptr || (c.user != nullptr && (c.user->kana || c.user->nameLayer))) continue;
+            if (text::RuneCount(c.source) == b + m.keyLen && c.codes->part.ClassDigit() == '8') return true;
+        }
+    }
+    if (!na) return false;
+    if (predicate || In(rs_[m.end], U"だでじな")) return true;
+    return rs_[m.end] == U'に' && m.end + 1 < rs_.size() && rs_[m.end + 1] == U'な';
+}
+
+// Whether the state mimetic m said as written stands as the predicate that closes its clause after
+// a word or particle (席はガラガラ。 자리는 텅 비어 있다, 「もうびしょびしょ」 이제 흠뻑 젖어 있어): the end
+// of the text, a full stop, ！, ？ or a closing bracket follows. At the start of an utterance or
+// before a pause it is a sound (「ガラガラ」, 戸がガラガラ……; LEX-5904).
+bool SoundText::StatePredicate(const SoundMatch& m) const {
+    if (!m.state || m.intj || !AsWritten(m, f_) || m.start == 0) return false;
+    const char32_t prev = rs_[m.start - 1];
+    if (!IsHiraganaRune(prev) && !IsKanjiRune(prev)) return false;
+    return m.end == rs_.size() || In(rs_[m.end], U"。！？!?」』）)");
+}
+
+// The hiragana spelling of the key of the state mimetic m, which the dictionary reads.
+std::string SoundText::StateKey(const SoundMatch& m) const {
+    std::u32string hira(m.key);
+    for (char32_t& c : hira) {
+        if (c >= U'ァ' && c <= U'ヶ') c -= 0x60;
+    }
+    return EncodeText(hira);
+}
+
+// The start of the verb after the に at i that a state mimetic m is the manner of, which drops
+// the に (びしょびしょに濡れた 흠뻑 젖었다), or 0: a verb in kanji or in hiragana other than
+// なる and する, the mimetic said once as written.
+size_t SoundText::StateManner(const SoundMatch& m, size_t i) const {
+    if (!m.state || m.intj || !AsWritten(m, f_) || i != m.end || i + 1 >= rs_.size() || rs_[i] != U'に') return 0;
+    if (In(rs_[i + 1], U"なしすさせ")) return 0;
+    return StartsConjugatedVerb(i + 1, true) ? i + 1 : 0;
+}
+
 // The end of the quoting form at character i (sound.quoting: という) that describes the word in
 // kanji or katakana after a sound (カタカタという音 달각달각하는 소리, ドンという衝撃 쾅 하는 충격),
 // or 0.
@@ -1546,7 +1647,8 @@ bool SoundText::Spaced(size_t i) const {
     const std::u32string_view rs = rs_;
     if (i >= rs.size() || Quoting(i) > 0) return false;
     if (IsKanjiRune(rs[i]) || (IsKatakanaRune(rs[i]) && IsHiraganaRune(rs[i - 1]))) return true;
-    if (!IsKana(rs[i]) || In(rs[i], kSuruKana)) return false;
+    // A し or さ said with a small ゃ, ゅ or ょ starts no form of する (ペラペラしゃべる 유창하게 말하다).
+    if (!IsKana(rs[i]) || (In(rs[i], kSuruKana) && !(i + 1 < rs.size() && In(rs[i + 1], U"ゃゅょ")))) return false;
     // The に of a result before なる is the 가 of 되다 on the sound (クタクタになった 녹초가 되었다).
     if (rs[i] == U'に' && i + 2 < rs.size() && rs[i + 1] == U'な' && In(rs[i + 2], U"るっらりれろ")) return false;
     if (In(rs[i - 1], U"とて")) return true;
@@ -1600,7 +1702,7 @@ bool SoundText::StartsAdjective(size_t i) const {
 // Whether a verb conjugates at character i: the text there starts with no particle, and the longest
 // dictionary key there is a verb stem, of one character or more, with kana that are no particle after
 // it (膨らむ, 焼く, 笑って; not 光が, 締め付けに, 熱。).
-bool SoundText::StartsConjugatedVerb(size_t i) const {
+bool SoundText::StartsConjugatedVerb(size_t i, bool te) const {
     if (i >= rs_.size() || In(rs_[i], kParticles) || In(rs_[i], U"だじ")) return false;
     const dict::Candidates rd =
         snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup);
@@ -1618,7 +1720,8 @@ bool SoundText::StartsConjugatedVerb(size_t i) const {
         }
     }
     const size_t after = i + longest;
-    return verb && after < rs_.size() && IsHiraganaRune(rs_[after]) && !In(rs_[after], kParticles);
+    // With te, the て or で of the te form also goes on from the stem (濡れて, 痩せている).
+    return verb && after < rs_.size() && IsHiraganaRune(rs_[after]) && (!In(rs_[after], kParticles) || (te && In(rs_[after], U"てで")));
 }
 
 // The length in characters of the longest dictionary key at character p, at least 1.
@@ -2311,6 +2414,19 @@ std::string SoundText::Write() {
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
+            if (chain.size() == 1 && StateWord(chain[0])) {
+                // A state word: the dictionary reads it, in hiragana (ビショビショだ びしょびしょだ), and
+                // one that closes its clause with the copula it leaves out (席はガラガラ。 席はがらがらだ。).
+                // Right after a word in kanji a space keeps the dictionary from reading a first kana of
+                // a particle as that particle (毎日へとへとだ 毎日 へとへとだ, not 毎日 + へと).
+                const std::string key = StateKey(chain[0]);
+                if (i > 0 && IsKanjiRune(rs[i - 1]) && In(DecodeText(key)[0], kParticles)) b += ' ';
+                b += key;
+                if (StatePredicate(chain[0])) b += "だ";
+                afterParticle = afterWord = false;
+                i = next;
+                continue;
+            }
             if (next - i > 1 && UtteranceStart(i) &&
                 std::all_of(chain.begin(), chain.end(), [](const SoundMatch& m) { return m.intj && !m.phrase; })) {
                 intjEnd_ = next;
@@ -2369,6 +2485,15 @@ std::string SoundText::Write() {
                 if (chain.back().root.empty() && !DoubledHangul(chain.back().korean)) b += ' ';
                 b += "する";
                 next = quoted;
+            } else if (const size_t verb = StateManner(chain.back(), next); verb > 0) {
+                // A state mimetic before に and a verb is the adverb of the verb without the に
+                // (びしょびしょに濡れた 흠뻑 젖었다, くたくたに疲れた 녹초가 되도록 지쳤다).
+                if (!chain.back().ni.empty()) {
+                    b.resize(b.size() - chain.back().korean.size());
+                    b += chain.back().ni;
+                }
+                b += ' ';
+                next = verb;
             } else if (Manner(chain.back(), next)) {
                 // An adverb of manner or result: 꼬깃꼬깃하게 말다, 딱딱하게 굳다.
                 b += "하게";
@@ -2541,9 +2666,17 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     size_t inner = 0;    // the ー that draw out the end of an interjection before its last kana
     const auto isMark = [](char32_t c) { return c == U'ー' || c == U'～'; };
     size_t q = p;
+    // A state row of one unit said twice is said with stress by one ッ inside or after its first
+    // unit (ビッショビショ, ガリッガリ, くったくた as びしょびしょ, がりがり, くたくた; LEX-5905).
+    bool stressed = false;
+    const bool stressable = row.state && UnitKey(row.key);
     for (size_t k = 0; k < stem.size(); k++, q++) {
         if (q >= f.size()) return false;
         const char32_t r = stem[k];
+        if (stressable && !stressed && k >= 1 && k <= row.key.size() / 2 && f[q] == U'ッ' && r != U'ッ' && q + 1 < f.size()) {
+            stressed = true;
+            q++;
+        }
         if (r == U'ー' && k > 0 && k + 1 < stem.size() && row.intj) {
             // A ー inside the key of an interjection stands for a lengthening of any length, a
             // small vowel of the syllable before it included (わーーい, はぁーい).

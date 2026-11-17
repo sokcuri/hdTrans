@@ -453,6 +453,9 @@ cx:mimetic-cues:100	LEX-5016	&&2 S+0== "じゃり" ||3 S+1== "Lと" &&2 S+1== "�
 cx:mimetic-cues:110	LEX-5016	&&2 S+0== "중얼중얼" ||2 B+1== "言う" >4 ||5 S+0== "L不平" S+0== "L不満" S+0== "L文句" S+0== "L愚痴" S+0== "L悪口" S+0== "00。！？!?"	set-target "투덜투덜"	ぶつぶつと不満を口にしながら 투덜투덜 불만을
 cx:mimetic-cues:120	LEX-5016	&&2 S+0== "퍼뜩" >3 ||2 S+0== "L胸" S+0== "L息" S+0== "00。！？!?、"	set-target "흠칫"	はっと胸をつかれて 흠칫 가슴이
 cx:mimetic-cues:130	LEX-5016	&&2 S+0== "슬쩍" >4 S+0== "R髪" S+0== "00。！？!?"	set-target "찰랑"	さらっと、長い黒髪が風に揺れる 찰랑, 긴 흑발이
+cx:mimetic-cues:140	LEX-5907	&&2 S+0== "나불나불" ||4 S+1== "Lめく" S+1== "L捲" S+1== "Lページ" &&2 S-2== "ページ" S-1== "を"	set-target "팔랑팔랑"	ページをペラペラとめくった 페이지를 팔랑팔랑 넘겼다
+cx:mimetic-cues:142	LEX-5906	&&2 S+0== "나불나불" ||4 &&2 S-2== "R語" !1 S-2== "R物語" S-1== "R語" S+1== "R語" S+2== "R語"	set-target "유창하게"	英語をぺらぺら話す 영어를 유창하게 이야기한다
+cx:mimetic-cues:144	LEX-5907	&&2 S+0== "녹초가 되도록" ||4 S+1== "L煮" S+1== "L茹" S+1== "Lゆで" S+1== "Lにこ"	set-target "흐물흐물하게"	野菜をくたくたに煮る 야채를 흐물흐물하게 익힌다
 //= te-loss	after Select 209	guard ||4 S+0== "損" S+0== "損す" S+0== "損を" S+0== "損し"	A 損 right after a verb in て is the loss that doing it brings, so the て is -어서 (spec GRM-4010): with ない after it, past は, も, の or が, it is what one stands to lose, 손해 볼 것, also after ても (知っても損はない 알아도 손해 볼 것은 없다; 聞いて損のない内容 들어서 손해 볼 것이 없는 내용, 知って損はない 알아서 손해 볼 것은 없다); 損することはない keeps 손해 볼 일. A する after 損 and は or も is 보다 (買って損はしない 사서 손해는 보지 않는다).
 //~ te-reason	6=6서 있어=있어서 둬=둬서	The て endings in -어 and their -어서.
 //: te-before	&&2 F-1== "verb" ||2 U-1== "Rて" U-1== "Rで"	The word before is a verb in て or で.
@@ -1121,6 +1124,19 @@ cx:only-that:20	LEX-4002	&&2 S+0== "これだけ" ||2 S+1== "Lだ" S+1== "でし
 //= soaked	after Select 156	ずぶ濡れ and びしょ濡れ before になる are the verb 젖다 with 흠뻑 (ずぶ濡れになって 흠뻑 젖어), and before の 흠뻑 젖은, not 흠뻑 젖음이 되다.
 cx:soaked:10	LEX-4003	&&2 S+0== "にな" ||2 S-1== "ずぶ濡れ" S-1== "びしょ濡れ"	set-target "흠뻑 &HV@" set-target@-1 ""	ずぶ濡れになって 흠뻑 젖어
 cx:soaked:20	LEX-4003	&&2 ||2 S+0== "ずぶ濡れ" S+0== "びしょ濡れ" S+1== "の"	set-target "흠뻑 젖은" set-target@+1 " "	ずぶ濡れの服 흠뻑 젖은 옷
+//= mimetic-state	after Select 219	A mimetic that the dictionary reads as a state (LEX-5900: ぺこぺこ 배고프다) before になる is the verb of that state, not 게 되다 (びしょびしょになった 흠뻑 젖었다, ぺこぺこになった 배고파졌다); がらがら before の 声 is a hoarse voice (쉰 목소리).
+cx:mimetic-state:10	LEX-5900	||2 &&3 S+0== "Lな" P+0== "4" ||2 S-1== "びしょびしょ" S-1== "ぐしょぐしょ" &&2 S+0== "にな" S-1== "흠뻑"	set-target "흠뻑 &HV@" set-target@-1 ""	びしょびしょになった 흠뻑 젖었다
+cx:mimetic-state:20	LEX-5900	&&3 S+0== "Lな" P+0== "4" S-1== "がりがり"	set-target "삐쩍 &E4@" set-target@-1 ""	がりがりになった 삐쩍 말랐다
+cx:mimetic-state:30	LEX-5900	&&4 S+0== "Lな" P+0== "4" S-1== "ぺこぺこ" !1 &&2 ||3 S-2== "が" S-2== "は" S-2== "も" ||2 S-3== "R腹" S-3== "Rおなか"	set-target "배고파&AL@" set-target@-1 ""	ぺこぺこになった 배고파졌다
+cx:mimetic-state:31	LEX-5902	&&5 S+0== "Lな" P+0== "4" S-1== "ぺこぺこ" ||3 S-2== "が" S-2== "は" S-2== "も" ||2 S-3== "R腹" S-3== "Rおなか"	set-target "고파&AL@" set-target@-1 ""	腹がぺこぺこになった 배가 고파졌다
+cx:mimetic-state:32	LEX-5900	&&3 S+0== "Lな" P+0== "4" ||3 S-1== "お腹ぺこぺこ" S-1== "おなかぺこぺこ" S-1== "おなかがペコペコ"	set-target "배가 고파&AL@" set-target@-1 ""	お腹ぺこぺこになった 배가 고파졌다
+cx:mimetic-state:34	LEX-5902	&&4 S+0== "ぺこぺこ" D+0== "배고%EK@" ||3 S-1== "が" S-1== "は" S-1== "も" ||2 S-2== "R腹" S-2== "Rおなか"	set-target "고%EK@"	腹がぺこぺこだ 배가 고프다
+cx:mimetic-state:36	LEX-5902	&&4 S+0== "ぺこぺこ" D+0== "배고%EK@" U-1== "Rて" ||3 S-1== "R空" S-1== "Rす" S-1== "R減"	set-target "죽을 것 %B3@"	お腹がすいてぺこぺこだ 배가 고파 죽을 것 같다
+cx:mimetic-state:40	LEX-5900	&&4 S+0== "Lな" P+0== "4" S-1== "がらがら" !1 &&2 ||3 S-2== "が" S-2== "は" S-2== "も" ||2 S-3== "R声" S-3== "R喉"	set-target "텅 &CQ@" set-target@-1 ""	店ががらがらになった 가게가 텅 비었다
+cx:mimetic-state:41	LEX-5901	&&5 S+0== "Lな" P+0== "4" S-1== "がらがら" ||3 S-2== "が" S-2== "は" S-2== "も" ||2 S-3== "R声" S-3== "R喉"	set-target "&CG@" set-target@-1 ""	喉ががらがらになった 목이 쉬었다
+cx:mimetic-state:44	LEX-5901	&&4 S+0== "がらがら" D+0== "텅 비어 %B7@" ||3 S-1== "が" S-1== "は" S-1== "も" ||2 S-2== "R声" S-2== "R喉"	set-target "쉬어 %B7@"	喉ががらがらだ 목이 쉬어 있다
+cx:mimetic-state:50	LEX-5901	&&2 S+0== "がらがらの" S+1== "声"	set-target "쉰"	がらがらの声 쉰 목소리
+cx:mimetic-state:60	LEX-5903	&&4 S+0== "ぼこぼこ" D+0== "만신창이%D4@" ||3 S-1== "が" S-1== "は" S-1== "も" A-2== "VPl"	set-target "울퉁불퉁%A1@"	道がぼこぼこだ 길이 울퉁불퉁하다
 //= sound-of	after Select 157	The の between a noun and 声がする, 音がする or 匂いがする, whose が is inside the phrase, stays the genitive 의 (真昼の声がする 마히루의 목소리가 들린다), not the subject (이)가.
 cx:sound-of:10	LEX-4004	&&3 S+0== "の" D+0== "(이)가" ||4 S+1== "L声が" S+1== "L音が" S+1== "L匂いが" S+1== "Lにおいが"	set-target "의"	真昼の声がする 마히루의 목소리가 들린다
 //= kakeru-aspect	after OwnPassives 10	The て of かける after に with a から before it in its clause spans a stretch, 걸쳐 (ウエストから尻山にかけて). A かける right after the continuative of a verb, not one of verb.kakeru-directed, is an act begun and not finished. After a change that befalls the subject (verb.kakeru-unwilled) or a passive, its past that ends the clause or is taken by こと, ところ, の or せい nearly happened, (으)ㄹ 뻔하다 (流されかけた 떠밀릴 뻔했다, パニックになりかけたが 패닉이 될 뻔했지만); before another noun, in ている and in its other forms it is the change going on, 어 가다 (沈みかけた夕日 가라앉아 가던 석양, 忘れかけている 잊어 가고 있다). After a verb done on purpose it is the act one set out to do, (으)려고 하다 (言いかけた 말하려고 했다), and its て before a pause is 다 말고 (歩きかけて、 걷다 말고). The passive of a かける read 걸다, not in ている, is 걸리다 (持ち手にかけられた木札 손잡이에 걸린 목찰), but with an object を it is 걸치다 (テーブルクロスをかけられた机). After glasses in the line it is 쓰다 (メガネ…あ、私かけてた).

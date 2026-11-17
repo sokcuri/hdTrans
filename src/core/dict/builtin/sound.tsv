@@ -12,6 +12,11 @@
 // ぷるぷるした身 탱글탱글한); adj marks an ono row whose KR takes 하다 as an adjective, written KR한
 // before an の and a noun (ふわふわのクッション 푹신푹신한 쿠션); final marks an intj row said only at the end of an
 // utterance, which draws out no word after it (みー 미~, but みーつけた 찾아냈다).
+// state marks an ono row whose hiragana spelling the dictionary reads as the state it describes, which
+// it is before a copula, に or a dictionary word that goes on from it (びしょびしょだ 흠뻑 젖어 있다,
+// びしょびしょになった 흠뻑 젖었다, びしょびしょに濡れた 흠뻑 젖었다; LEX-5900).
+// ni=K (with _ for a space) after state is what the row writes for its に before a verb, in place of KR
+// (くたくた ni=녹초가_되도록: クタクタに疲れた 녹초가 되도록 지쳤다; LEX-5907).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -779,7 +784,7 @@
 ぐしゅ	질척	ono
 ぐしゅぐしゅ	질척질척	ono
 ぐしょ	흠뻑	ono
-ぐしょぐしょ	흠뻑	ono
+ぐしょぐしょ	흠뻑	ono	state
 ぐっしょり	흠뻑	ono
 ぐしょり	흠뻑	ono
 じゅぷ	쥬릅	ono
@@ -878,8 +883,8 @@
 ねっとり	끈적	ono
 ねとねと	끈적끈적	ono
 ねばねば	끈적끈적	ono
-べとべと	끈적끈적	ono	adj
-べっとり	끈적	ono
+べとべと	끈적끈적	ono	adj state ni=끈적끈적하게
+べっとり	끈적	ono	state
 べちゃ	철퍽	ono
 べちゃっ	철퍽	ono
 べちゃべちゃ	철퍽철퍽	ono
@@ -1128,7 +1133,7 @@
 ひぃひぃ	히이히이	ono
 ひいひい	히이히이	ono
 ひーひー	히이히이	ono
-へとへと	녹초	ono
+へとへと	녹초	ono	state ni=녹초가_되도록
 へろへろ	비틀비틀	ono
 ふらふら	비틀비틀	ono
 ふらっ	휘청	ono
@@ -1136,8 +1141,7 @@
 くらっ	어질	ono
 くらくら	어질어질	ono
 くらり	어질	ono
-びしょびしょ	흠뻑	ono
-びっしょびしょ	흠뻑	ono
+びしょびしょ	흠뻑	ono	state
 びっしょり	흠뻑	ono
 とろとろ	걸쭉걸쭉	ono
 とろっ	걸쭉	ono
@@ -1426,7 +1430,9 @@
 がらん	텅	ono
 がらーん	텅	ono
 がらがらがら	드르르르륵	ono
+がらがら	와르르	ono	state ni=텅
 がりっ	와작	ono
+がりがり	으드득으드득	ono	state ni=삐쩍
 がぶっ	덥석	ono
 がぶり	덥석	ono
 がぶがぶ	벌컥벌컥	ono
@@ -1543,7 +1549,7 @@
 ぽっこり	볼록	ono
 ぼこっ	퍽	ono
 ぼこん	퍽	ono
-ぼこぼこ	흠씬	ono
+ぼこぼこ	흠씬	ono	state
 ぼこり	불룩	ono
 ぼっこり	불룩	ono
 ぼっこぼこ	흠씬	ono
@@ -1782,6 +1788,7 @@
 ぺたん	털썩	ono
 ぺたんっ	털썩	ono
 ぺたぺた	찰싹찰싹	ono
+ぺらぺら	나불나불	ono	state
 べたっ	철썩	ono
 べたべた	끈적끈적	ono	adj
 べったり	찰싹	ono
@@ -2155,7 +2162,7 @@
 ぐでんぐでん	곤드레만드레	ono
 ぐでー	추욱	ono
 ぐでっ	축	ono
-くたくた	녹초	ono
+くたくた	녹초	ono	state ni=녹초가_되도록
 くたっ	축	ono
 くたり	축	ono
 ぐたっ	축	ono
@@ -2173,8 +2180,7 @@
 へらっ	히죽	ono
 へらり	히죽	ono
 へこへこ	굽실굽실	ono
-ぺこぺこ	꼬르륵	ono
-ぺっこぺこ	꼬르륵	ono
+ぺこぺこ	굽실굽실	ono	state
 ぺこっ	꾸벅	ono
 ぺこり	꾸벅	ono
 ぺこん	꾸벅	ono

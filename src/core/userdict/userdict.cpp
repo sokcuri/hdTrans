@@ -337,10 +337,11 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
         } else if ((opt == "exclaim" || opt == "predicate" || opt == "cry" || opt == "haeyo") && pos == "intj") {
             // Read by the sound stage (an exclamation is no sound before a question mark, a Korean in
             // 해요 speech is no half of copies said apart).
-        } else if ((opt == "acts" || opt == "adj") && pos == "ono" && ctx.soundTable) {
+        } else if ((opt == "acts" || opt == "adj" || opt == "state" || key == "ni") && pos == "ono" && ctx.soundTable) {
             // Read by the sound stage (the lemma only before a する that describes no noun; KR한
-            // before an の and a noun).
-        } else if (opt == "acts" || opt == "adj") {
+            // before an の and a noun; a state word the dictionary reads, and what its に before a
+            // verb writes).
+        } else if (opt == "acts" || opt == "adj" || opt == "state" || key == "ni") {
             return "option " + Quote(opt) + ": " + std::string(opt) + " is only for the built-in sound table";
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
