@@ -112346,7 +112346,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 防弾少年団	방탄소년단	N110			GN							names.740489
 防彈少年團	방탄소년단	N110			GN							names.740490
 防御	방어	N110			GN							names.740491
-防御力	방어력	N130	QPNVHn	Wb	GN							names.740492
 防御輪	방어륜	N130	QPNVHn	Wb	GN						ぼうぎょりん	names.740493
 防御魔法	방어 마법	N110			GN						ぼうぎょまほう	names.740494
 防波亭手寅	보하테이 테토라	N130	QPNVHn		GN						ぼうはていてとら	names.740495

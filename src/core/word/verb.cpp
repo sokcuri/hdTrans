@@ -764,42 +764,50 @@ bool Item::AcceptVerbContinuation(Record* following) {
     }
 
     bool state10 = base.kind == 10;
+    bool voiceStem = false;  // the stem form of a (ら)れ or せ before a word on the stem (狙われやすい)
     six = {};
     if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
+    Window eight;
+    if (w->settings.improvements.desireWindow && WidthOf(after()) >= 8) eight = Left(after(), 8);
+    // The words that go on the stem form of a verb (読みやすい, 読みながら, 読みすぎる).
+    auto compoundAfter = [&]() {
+        const std::pair<const Window*, std::string_view> compounds[] = {
+            {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
+            {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},
+            {&four, kJaKane},      {&four, kJaYasuKanji},  {&four, kJaYou},        {&four, kJaUru},
+            {&four, kJaTai},       {&eight, kJaTakatta},   {&four, kJaTaku},       {&eight, kJaTakereba},
+            {&four, kJaTaki},      {&four, kJaKudasaKanji}, {&six, kJaKudasa},     {&four, kJaTsudzu},
+            {&four, kJaSugi},      {&four, kJaNao},        {&two, kJaTsudzuKanji}, {&four, kJaSugiKanji},
+            {&six, kJaSokona},     {&four, kJaSokonaKanji}, {&four, kJaDzura},     {&two, kJaNaoKanji},
+            {&two, kJaAiKanji},    {&two, kJaA},           {&four, kJaKawaKanji},  {&four, kJaKawa},
+            {&four, kJaAsa},       {&two, kJaAsaKanji},    {&four, kJaChira},      {&four, kJaChiraKanji},
+            {&four, kJaTsuku},     {&four, kJaTsukuKanji},
+        };
+        for (const auto& [win, s] : compounds) {
+            if (*win == s && (s != kJaTaku || Taku(after()))) return true;
+        }
+        return false;
+    };
+    // The (ら)れ of another verb takes the words of ending.voice-readily on its stem form, as an
+    // ichidan stem does (狙われやすい, 言われがち, 狙われすぎる; spec LEX-5836).
     if (((!adjusted && !matched && base.patternKind == 7 && base.kind == 8) || (base.patternMatched == 1 && base.kind == 8)) &&
         ((!(two == kJaNa) && !(four == kJaZaru) && !(four == kJaNna) && !(four == kJaNeba) && !(two == kJaNu)) ||
          six == kJaNasai || six == kJaNagara || four == kJaNao)) {
         state10 = true;
         base.kind = 10;
+    } else if (adjusted && !matched && base.patternKind == 7 && base.kind == 8 &&
+               (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-readily"), after()) > 0 || six == kJaNagara)) {
+        state10 = true;
+        base.kind = 10;
+        voiceStem = true;
     }
 
-    Window eight;
-    if (w->settings.improvements.desireWindow && WidthOf(after()) >= 8) eight = Left(after(), 8);
     if ((!matched && base.patternKind == 7 && base.kind == 10) ||
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
               two == kJaNasai || two == kJaNi || ((SuruAfterMo(after()) || suruAfterSae() || stressedNegative()) && !OneKana(surface)))) {
-            const std::pair<const Window*, std::string_view> compounds[] = {
-                {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
-                {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},
-                {&four, kJaKane},      {&four, kJaYasuKanji},  {&four, kJaYou},        {&four, kJaUru},
-                {&four, kJaTai},       {&eight, kJaTakatta},   {&four, kJaTaku},       {&eight, kJaTakereba},
-                {&four, kJaTaki},      {&four, kJaKudasaKanji}, {&six, kJaKudasa},     {&four, kJaTsudzu},
-                {&four, kJaSugi},      {&four, kJaNao},        {&two, kJaTsudzuKanji}, {&four, kJaSugiKanji},
-                {&six, kJaSokona},     {&four, kJaSokonaKanji}, {&four, kJaDzura},     {&two, kJaNaoKanji},
-                {&two, kJaAiKanji},    {&two, kJaA},           {&four, kJaKawaKanji},  {&four, kJaKawa},
-                {&four, kJaAsa},       {&two, kJaAsaKanji},    {&four, kJaChira},      {&four, kJaChiraKanji},
-                {&four, kJaTsuku},     {&four, kJaTsukuKanji},
-            };
-            bool compound = false;
-            for (const auto& [win, s] : compounds) {
-                if (*win == s && (s != kJaTaku || Taku(after()))) {
-                    compound = true;
-                    break;
-                }
-            }
-            if (!compound) {
+            if (!compoundAfter()) {
                 if (!state10) return false;
                 base.kind = 8;
             }
@@ -818,7 +826,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     base.punct = 0;
 
     auto restore = [&]() {
-        if (adjusted && patternWidth == 0 && !desire) {
+        if (adjusted && patternWidth == 0 && !desire && !voiceStem) {
             base.patternKind = oldKind;
             base.kind = oldState;
             if (base.record == 4) base.record = 0;

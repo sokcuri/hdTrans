@@ -889,7 +889,10 @@ void Composer::BuildAction(int i, int action, std::string_view mode) {
     const std::string stemText(stem);
     const auto [cls, suffix] = FirstByte(mode);
     const std::string key = Cat({marker, cls});
-    const std::string replacement(Lookup(First(key), key));
+    // A passive verb takes the adverb on its 어지다 form (狙われすぎる 너무 노려진다), as Build writes it.
+    const std::string replacement = it.detailRecord == 1 && First(key) == '&'
+                                        ? Cat({LookupSource(Cat({marker, "6"}), *generated_), LookupSource(Cat({"&AL@", cls}), *generated_)})
+                                        : std::string(Lookup(First(key), key));
     const std::string suffixText(suffix);
     const int linked = i - 1;
     std::string carried, pending;

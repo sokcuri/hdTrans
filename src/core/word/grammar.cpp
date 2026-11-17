@@ -171,10 +171,53 @@ bool ObjectWithoutRecipient(const Item* it) {
     return object;
 }
 
+// Whether the clause before item it has a に or には (彼に罵声を浴びせられる).
+bool RecipientInClause(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (p->group->surface == "に" || p->group->surface == "には") return true;
+    }
+    return false;
+}
+
+// Whether the verb of item it, whose stem without (ら)れ is stem, is one of an act done to someone
+// (verb.passive-after-object, verb.passive-any-object), the last verb of a phrase included (白い目を向け,
+// と比べ).
+// The verb that ends a phrase stem: the part after its last を or its first と (目を向け 向け, と比べ 比べ).
+std::string_view PhraseVerb(std::string_view stem) {
+    if (const std::size_t o = stem.rfind("を"); o != std::string_view::npos) return stem.substr(o + std::string_view("を").size());
+    if (stem.starts_with("と")) return stem.substr(std::string_view("と").size());
+    return stem;
+}
+
+bool DoneToSomeone(const Item* it, std::string_view stem) {
+    const std::string_view verb = PhraseVerb(stem.empty() ? std::string_view(it->group->surface) : stem);
+    return dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), verb) ||
+           dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), verb);
+}
+
+// Whether item p ends the clause before a verb that the words describing its nouns do not end (白い目を):
+// another verb or punctuation.
+bool VerbClauseBreak(const Item* p) {
+    const std::string_view s = p->group->surface;
+    return s.empty() || Has("、。,「」『』！？", s) ||
+           (p->detail->Yougo() && At(p->Code(std::max(p->selected, 0)), 0) == '4');
+}
+
+// Whether a word of frequency (adverb.habitual) stands before item it in its clause.
+bool FrequencyBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !VerbClauseBreak(p); p = p->prev) {
+        if (dict::InClass(HDTRANS_CLASS("adverb.habitual"), p->group->surface)) return true;
+    }
+    return false;
+}
+
 // The passive reading of the られ of verb item it; rest is the text after られ:
 //   - a conditional of a verb of verb.passive-after-object is passive after its object without a
 //     recipient に;
+//   - an act done to someone under a word of frequency (adverb.habitual) in a plain or polite non-past
+//     is passive;
 //   - a negative, conditional or volitional form and the polite non-past are potential;
+//   - a verb of verb.suffered-act with no に in its clause is passive;
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
 //   - going back through the clause, the nearest を (potential unless listed, or a narrative
@@ -190,9 +233,19 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
         dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), it->group->surface)) {
         return ObjectWithoutRecipient(it);
     }
-    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0) return false;
-    const bool listed =
-        dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), it->group->surface) || CompoundAction(it->group->surface);
+    // What keeps being done to one, an act done to someone under a word of frequency in a plain or polite
+    // non-past (毎日罵声を浴びせられる, いつも比べられます), is the passive.
+    if (DoneToSomeone(it, {}) && FrequencyBefore(it) &&
+        (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) == 0 || rest.starts_with("ます"))) {
+        return true;
+    }
+    // The な of ながら is no negative (喝采を浴びせられながら).
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 && !rest.starts_with("ながら")) return false;
+    // An act aimed at someone that one seldom speaks of being able to do (verb.suffered-act) with no recipient
+    // に in its clause is done to one (罵声を浴びせられる 욕설을 듣는다; not 彼に罵声を浴びせられる者; spec LEX-5838).
+    if (dict::InClass(HDTRANS_CLASS("verb.suffered-act"), PhraseVerb(it->group->surface)) && !RecipientInClause(it)) return true;
+    const bool listed = dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), PhraseVerb(it->group->surface)) ||
+                        CompoundAction(it->group->surface);
     if (!listed && !Transitive(it) && !it->detail->syntheticCausative) return false;
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0) return true;
     const Item* subject = nullptr;
@@ -1082,6 +1135,17 @@ VoiceForm VoiceFormOf(Flusher& f, const Item* it, std::string_view& stem, std::s
 // is に.
 Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
     bool recipient = dict::InClass(HDTRANS_CLASS("verb.transfer"), stem) || dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem);
+    // The から of a person before a verb of an act done to someone is who does it (観客から罵声を浴びせられる,
+    // 皆から白い目を向けられる).
+    if (DoneToSomeone(it, stem)) {
+        for (Item* p = it->prev; p != nullptr && !VerbClauseBreak(p); p = p->prev) {
+            const Item* a = p->prev;
+            if (p->group->surface == "から" && a != nullptr && !a->detail->Yougo() && Animate(a->Attr(std::max(a->selected, 0)))) {
+                ni = false;
+                return p;
+            }
+        }
+    }
     for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
         recipient = recipient || GrammarCode(it->GAttr(slot), "Rc");
     }
@@ -1467,7 +1531,10 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
         return Voice::Passive;
     }
-    if (object && dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0) return Voice::Passive;
+    if (object && (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0 ||
+                   dict::StartsWithMember(HDTRANS_CLASS("ending.voice-readily"), rest) > 0)) {
+        return Voice::Passive;
+    }
     if (AbilityScope(it, rest)) return Voice::Potential;
     // The られ of an ichidan verb with an object before しまう (てしまう, ちゃう, ちまう) is what befell
     // someone (猫に食べられちゃった 먹혀 버렸다, 見られてしまった), not an ability: one does not "end up able to",
@@ -1635,9 +1702,10 @@ void ObjectAsSubject(Flusher& f, Item* it) {
         return;
     }
     // The られ of an ichidan verb with an object outside the past and the て form is as often the
-    // potential (これなら奴らをやっつけられる).
+    // potential (これなら奴らをやっつけられる), but not that of an act one suffers (刃を突きつけられる 칼날이 들이대어진다).
     const std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
-    if (const char k = At(it->Code(it->selected), 2); (k == '7' || k == ';' || k == '=') && rest.starts_with(kRare)) {
+    if (const char k = At(it->Code(it->selected), 2);
+        (k == '7' || k == ';' || k == '=') && rest.starts_with(kRare) && !dict::InClass(HDTRANS_CLASS("verb.suffered-act"), surface)) {
         const std::string_view form = From(rest, static_cast<long>(kRare.size()));
         if (!form.starts_with("た") && !form.starts_with("て")) return;
     }

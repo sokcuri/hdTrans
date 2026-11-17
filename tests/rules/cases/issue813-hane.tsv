@@ -1,0 +1,46 @@
+# 규칙: LEX-5830, LEX-5840
+rule	input	expected	kind	layer
+lex:hane-kana	魚がはねました。	has:뛰었습니다	fix	lookup
+lex:hane-kana	カエルがはねた。	has:뛰었다	fix	lookup
+lex:hane-kana	ウサギがぴょんとはねた。	has:폴짝 뛰었다	fix	lookup
+lex:hane-kana	ぴょんぴょんはねる。	has:폴짝폴짝 뛴다	fix	sound
+lex:hane-kana	魚がぴちぴちはねている。	has:팔팔 뛰고 있다	fix	lookup
+lex:hane-kana	びくんとはねた。	움찔 뛰었다.	fix	lookup
+lex:hane-kana	千莉の腰がはねる。	lacks:잔다	fix	lookup
+lex:hane-kana	ピョンとはねていた髪が、どうにかまとまってくれた。	has:폴짝 뛰던 머리카락이	fix	lookup
+lex:hane-kana	はねるように走った。	has:뛰	fix	lookup
+lex:hane-kana	跳ねた子供	뛴 아이	fix	conjugation
+lex:hane-kana	はねた魚を捕まえた。	뛴 물고기를 잡았다.	fix	lookup
+lex:hane-splash	「ええ、大丈夫。油がはねただけだから」	has:기름이 튀었을 뿐이니까	fix	senses
+lex:hane-splash	泥がはねて服が汚れた。	has:진흙이 튀어	fix	senses
+lex:hane-splash	ボールが跳ねて転がった。	has:공이 튀어	fix	senses
+lex:hane-kana	申し出をはねつけた。	has:거절했다	fix	lookup
+lex:hane-kana	水をはね上げた。	has:치켜올렸다	fix	lookup
+lex:hane-kana	彼はねた。	그는 잤다.	keep	lookup
+lex:hane-kana	もうねるね。	이제 잘게.	keep	lookup
+lex:hane-kana	彼はベッドで寝た。	그는 침대에서 잤다.	keep	lookup
+lex:hane-kana	魚が跳ねた。	물고기가 뛰었다.	keep	lookup
+lex:hane-kana	首をはねろ！	목을 베어라!	keep	lookup
+lex:hane-hit	男性をはねたあと海へ転落しました。	has:남성을 친 뒤	fix	senses
+lex:hane-hit	車が男性をはねました。	has:남성을 쳤습니다	fix	senses
+lex:hane-hit	信号無視の車が歩行者をはねてしまった。	has:보행자를 쳐버렸다	fix	senses
+lex:hane-hit	人をはねるな！	사람을 치지 마!	fix	senses
+lex:hane-hit	犬をはねた運転手が逮捕された。	has:개를 친 운전기사	fix	packs
+lex:hane-hit	猫をはねた車	고양이를 친 차	fix	packs
+lex:hane-hit	彼女は車に撥ねられた。	그녀는 차에 치였다.	fix	packs
+lex:hane-hit	子供がトラックに跳ねられた。	아이가 트럭에 치였다.	fix	packs
+lex:hane-hit	猫が車にはねられました。	고양이가 차에 치였습니다.	fix	lookup
+lex:hane-hit	タクシーにはねられ、重傷を負った。	has:택시에 치여	fix	lookup
+lex:hane-hit	トラックに人がはねられた。	트럭에 사람이 치였다.	fix	packs
+lex:hane-hit	ぴょんと跳ねた彼女が、腕に抱きついてくる。	has:폴짝 뛴 그녀가	keep	packs
+lex:hane-hit	跳ねる猫を見た。	뛰는 고양이를 보았다.	keep	packs
+lex:hane-hit	応募者をはねた。	응모자를 떨어뜨렸다.	fix	senses
+lex:hane-hit	上前をはねる。	has:가로챈다	fix	senses
+lex:hane-splash	芝居がはねた後、飲みに行った。	has:연극이 끝난 후	fix	senses
+lex:hane-splash	血がはねた。	피가 튀었다.	fix	senses
+lex:hane-splash	舞台で跳ねた。	무대에서 뛰었다.	keep	senses
+lex:hane-kana	ブラジャーがはだけ、桜庭の乳房が露わになる。	has:브래지어가 열려	keep	lookup
+lex:hane-kana	「話相手くらいにはなれるから」	has:될 수 있으니까	keep	lookup
+lex:hane-kana	積極的にはなれず、友達止まりだった。	has:되지 못하고	keep	lookup
+lex:hane-kana	上着をはおった。	윗도리를 걸쳤다.	fix	lookup
+lex:hane-kana	私はね、	lacks:뛰	keep	lookup
