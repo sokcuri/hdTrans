@@ -52,7 +52,7 @@ normalize:dialect-onbin	ワシ 恥ずかしゅうて 恥ずかしゅうて	나 �
 normalize:dialect-onbin	それを奪ったお前が憎うて わいは特訓に特訓を積み―	그것을 빼앗은 네가 미워서 나는 특훈에 특훈을 쌓아-	fix	normalize
 normalize:dialect-onbin	強う思い続けたら 夢はかなうがや｡	강하게 줄곧 생각하면 꿈은 이루어지지만이야.	fix	normalize
 normalize:dialect-onbin	《お匙の遺骸を 早う始末しや》	《숟가락의 유해를 빨리 뒤처리해야》	fix	normalize
-normalize:dialect-onbin	編集長 力強うて えい字やと 私は思います｡	편집장 힘차서 에잇 글자라고 저는 생각합니다.	fix	normalize
+normalize:dialect-onbin	編集長 力強うて えい字やと 私は思います｡	has:글자라고	fix	normalize
 normalize:dialect-adj	ほんまでっか！ ありがとうございます｡	진짜입니까! 감사합니다.	fix	normalize
 normalize:dialect-adj	茨田さんに言われたこと やはり 気になりまっか。	이바라다 씨에게 들은 것 역시 신경 쓰입니까.	fix	normalize
 normalize:dialect-adj	絶対行くか！ わいは 絶対行かんからな！	절대 갈까! 나는 절대 가지 않으니까!	fix	normalize
@@ -108,7 +108,8 @@ normalize:dialect-quote	実はな あちらのお方が おまんらに話があ
 normalize:dialect-quote	なんや 様子がおかしかったっちゅうて…	뭐야 모습이 이상했다고 하는이라고…	fix	normalize
 normalize:dialect-quote	お奉行所から早々に 天狗の居所 つかめっちゅう お達しやが・	부교소에서 일찌감치 텐구의 거처 잡으라는 지시나가·	fix	normalize
 normalize:dialect-quote	トマトの話 昨日したのは トマトの話だっちゅうの	토마토 이야기 어제 한 것은 토마토 이야기라고 해	fix	normalize
-normalize:dialect-quote	ハン！ 上等やないけ 舞妓に何ができるっちゅうねん	흥! 상등인 가라 마이코에 무엇을 할 수 있다고 하는 거야	fix	normalize
+normalize:dialect-quote	ハン！ 上等やないけ 舞妓に何ができるっちゅうねん	has:하는 거야	fix	normalize
+normalize:dialect-quote	ハン！ 上等やないけ 舞妓に何ができるっちゅうねん	lacks:하거든	fix	normalize
 normalize:dialect-quote	殺すっちゅう話	죽인다는 이야기	fix	normalize
 normalize:dialect-quote	あの玲子っちゅう女も一緒です	그 레이코라는 여자도 함께입니다	fix	normalize
 normalize:dialect-senba	あんさん 何してますのや？ 男になりなはれ！	당신 뭐하고 있습니다 거야? 남자가 돼!	fix	normalize

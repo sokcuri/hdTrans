@@ -14,7 +14,7 @@ normalize:kansai-mahen	別にかまへんけど	딱히 상관없는데	keep	norm
 lexical:dialect	おめえ、何してんだ。	너, 뭐하는 거야.	fix	lookup
 lexical:dialect	あたいらの庭で好き勝手が通ると思うなよ？おめえら！	우리의 뜰에서 제멋대로가 통과한다고 생각하지 마? 너희!	fix	lookup
 lexical:dialect	せやな。	그렇지.	fix	lookup
-lexical:dialect	なんでやねん！？自分ら、何さくっと納得してんねん！	왜 그래!? 자신들, 무엇 싹둑 납득하고 있거든!	fix	lookup
+lexical:dialect	なんでやねん！？自分ら、何さくっと納得してんねん！	has:납득해	fix	lookup
 lexical:dialect	ちゃうちゃう。	아니 아니.	fix	lookup
 lexical:dialect	いや～ん おおきに！ みんなも大変やのに アリガトな～。	이야앙~ 고마워! 모두도 큰 일이나의에 아리가트인~.	fix	lookup
 lexical:dialect	「あちゃ～、下手すぎて見てられへんかったわ。アンタ、どないしたんや」	「아차~, 너무 서툴러 보고 있을 수 없었어. 너, 무슨 일이야」	fix	lookup

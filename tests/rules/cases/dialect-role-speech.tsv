@@ -1,4 +1,4 @@
-# 규칙: LEX-5990 LEX-5991 LEX-5992 LEX-5993 LEX-5994 LEX-5995
+# 규칙: LEX-5990 LEX-5991 LEX-5992 LEX-5993 LEX-5994 LEX-5995 LEX-5996 LEX-5997
 rule	input	expected	kind	layer
 normalize:archaic-nari	「吾輩は絶対に御免也や！！」	lacks:사양야야	fix	normalize
 normalize:archaic-nari	「ウネこそが全てを滅ぼす悪魔也や！」	has:악마야	fix	normalize
@@ -25,7 +25,7 @@ normalize:kansai-suru	「食べたいものを言ってくれれば案内すん�
 normalize:kansai-suru	勉強すんねん。	has:공부하	fix	normalize
 normalize:kansai-suru	何すんねん！	lacks:거든	fix	normalize
 normalize:kansai-suru	どこ行くねん。	lacks:가거든	fix	normalize
-normalize:kansai-suru	何してんねん！	has:하고 있	keep	normalize
+normalize:kansai-suru	何してんねん！	has:뭐해	keep	normalize
 normalize:kansai-suru	もうすんで、帰ろう。	lacks:할 거야	keep	normalize
 normalize:western-no-end	「海苔で巻いてあるんよ」	lacks:이야	fix	normalize
 normalize:western-no-end	「そうなんよ」	has:그래	fix	normalize
@@ -106,3 +106,120 @@ normalize:character-tic	みんなのよさを知る。	lacks:모두의 거	keep	
 normalize:western-no-end	「筧くんね。これからもよろしく」	has:카케이 군	keep	normalize
 normalize:western-no-end	「そう、ゆうくんよ」	has:군	keep	normalize
 normalize:western-no-end	「……ホントにペコジマくんね」	has:페코지마 군	keep	normalize
+normalize:kansai-ya-past	それは本当やった。	has:사실이었	fix	normalize
+normalize:kansai-ya-past	昨日は雨やった。	has:비였	fix	normalize
+normalize:kansai-ya-past	あいつは学生やったな。	has:학생이었	fix	normalize
+normalize:kansai-ya-past	ほんまやったんか。	has:진짜였	fix	normalize
+normalize:kansai-ya-past	あの子は天才やったんや。	has:천재였	fix	normalize
+normalize:kansai-ya-past	あれは夢やったんか？	has:꿈이었	fix	normalize
+normalize:kansai-ya-past	学生やし、金がない。	has:학생이고	fix	normalize
+normalize:kansai-ya-past	今日は休みやし、寝よう。	has:휴일이고	fix	normalize
+normalize:kansai-ya-past	何やと！	has:뭐라고	fix	normalize
+normalize:kansai-ya-past	「何やと？」	has:뭐라고	fix	normalize
+normalize:kansai-ya-past	なんやと！	has:뭐라고	fix	normalize
+normalize:kansai-ya-past	宿題やった？	has:숙제 했	keep	normalize
+normalize:kansai-ya-past	今度やったら殺す。	has:이번에 하면	keep	normalize
+normalize:kansai-ya-past	一度やったことだ。	has:한 번 한	keep	normalize
+normalize:kansai-ya-past	精一杯やった。	has:힘껏 했	keep	normalize
+normalize:kansai-ya-past	宿題やろう。	has:숙제 하자	keep	normalize
+normalize:kansai-ya-past	一緒にやろうよ。	has:하자	keep	normalize
+normalize:kansai-ya-past	一緒にやろうよ。	lacks:함께일	keep	normalize
+normalize:kansai-ya-past	これをやろう。	has:이것을 하자	keep	normalize
+normalize:kansai-ya-past	何やと思う？	lacks:뭐라고	keep	normalize
+normalize:kansai-ya-past	やしの木。	has:야자수	keep	normalize
+normalize:kansai-soya	せやで！	has:그래	fix	normalize
+normalize:kansai-soya	せやで！	lacks:그렇다로	fix	normalize
+normalize:kansai-soya	そやで。	has:그래	fix	normalize
+normalize:kansai-soya	そやで。	lacks:그렇다로	fix	normalize
+normalize:kansai-soya	せやでな。	has:그렇지	fix	normalize
+normalize:kansai-soya	せやろ？	has:그렇지	fix	normalize
+normalize:kansai-soya	せやせや。	has:맞아	fix	normalize
+normalize:kansai-soya	そやそや！	has:맞아	fix	normalize
+normalize:kansai-soya	せやったな。	has:그랬	fix	normalize
+normalize:kansai-soya	せやったら行くわ。	has:그러면	fix	normalize
+normalize:kansai-soya	そやったんか。	has:그랬	fix	normalize
+normalize:kansai-soya	誰も来おへんかった。	has:오지 않았	fix	normalize
+normalize:kansai-soya	来おへん。	has:오지 않	fix	normalize
+normalize:kansai-soya	せやな。	has:그렇지	keep	normalize
+normalize:kansai-soya	せやろか。	has:그럴까	keep	normalize
+normalize:kansai-soya	驚かせやがって。	has:놀라게	keep	normalize
+normalize:kansai-suru	何してんねん。	has:뭐해	fix	normalize
+normalize:kansai-suru	何してんねん。	lacks:있거든	fix	normalize
+normalize:kansai-suru	どっちやねん！	has:어느 쪽이야	fix	normalize
+normalize:kansai-suru	何でやねん！	has:왜 그래	fix	normalize
+normalize:kansai-suru	好きやねんけど。	has:좋아하는데	fix	normalize
+normalize:kansai-suru	行くねんな？	has:가는구나	fix	normalize
+normalize:kansai-suru	どこ行くねん？	has:어디 가는	fix	normalize
+normalize:kansai-suru	雨やねんな。	has:비구나	fix	normalize
+normalize:kansai-suru	好きやねん。	has:좋아하거든	keep	normalize
+normalize:kansai-suru	行くねん。	has:가거든	keep	normalize
+normalize:kansai-suru	何しとんねん。	has:뭐하고 있	keep	normalize
+normalize:kansai-suru	気がすんで。	has:풀려	keep	normalize
+normalize:kansai-suru	気がすんで。	lacks:들 거야	keep	normalize
+normalize:kansai-suru	用がすんで。	has:끝나	keep	normalize
+normalize:kansai-suru	用がすんで。	lacks:할 거야	keep	normalize
+normalize:western-no-end	行くんよ。	has:가	fix	normalize
+normalize:western-no-end	行くんよ。	lacks:이야	fix	normalize
+normalize:western-no-end	私が行くんよ。	has:내가 가	fix	normalize
+normalize:western-no-end	私が行くんよ。	lacks:이야	fix	normalize
+normalize:western-no-end	それでええんよ。	has:돼	fix	normalize
+normalize:western-no-end	それでええんよ。	lacks:좋은 이야	fix	normalize
+normalize:western-no-end	知らんかったんよ。	has:몰랐	fix	normalize
+normalize:western-no-end	知らんかったんよ。	lacks:야.	fix	normalize
+normalize:western-no-end	行ったんよ。	has:갔어	fix	normalize
+normalize:western-no-end	書くんよ。	has:써	fix	normalize
+normalize:western-no-end	書くんよ。	lacks:이야	fix	normalize
+normalize:western-no-end	うんよ。	has:응	keep	normalize
+normalize:western-no-end	うんよ。	lacks:우노	keep	normalize
+normalize:western-no-end	たぶんよ。	has:아마	keep	normalize
+normalize:kansai-mau	行ってまえ！	has:가버려	fix	normalize
+normalize:kansai-mau	忘れてまえ。	has:잊어버려	fix	normalize
+normalize:kansai-mau	食べてまえよ。	has:먹어버려	fix	normalize
+normalize:kansai-mau	お点前を頂く。	lacks:버려	keep	normalize
+normalize:kansai-mau	その手前で止まる。	lacks:버려	keep	normalize
+normalize:character-tic	これは本物ですぞっ！	has:진짜입니다	fix	normalize
+normalize:character-tic	「おはようですぞぉ！」	has:아침입니다	fix	normalize
+normalize:character-tic	まだまだこんなものではないはずですぞ》	has:것입니다	fix	normalize
+normalize:character-tic	大変でしたぞ。	has:힘들었습니다	fix	normalize
+normalize:character-tic	楽しかったですぞ。	has:즐거웠습니다	fix	normalize
+normalize:character-tic	分かりませんです。	has:모릅니다	fix	normalize
+normalize:character-tic	分かりませんです。	lacks:모르지 않	fix	normalize
+normalize:character-tic	知りませんです！	has:모릅니다	fix	normalize
+normalize:character-tic	知りませんです！	lacks:모르지 않	fix	normalize
+normalize:character-tic	行きますですか？	has:갑니까	fix	normalize
+normalize:character-tic	行きますですか？	lacks:입니까	fix	normalize
+normalize:character-tic	そうでしたです。	has:그랬습니다	fix	normalize
+normalize:character-tic	そうでしたです。	lacks:습니다입니다	fix	normalize
+normalize:character-tic	行きますです。	has:갑니다요	keep	normalize
+normalize:character-tic	ありがとうございますです。	has:감사합니다	keep	normalize
+normalize:archaic-nari	其は神也。	has:신이다	fix	normalize
+normalize:archaic-nari	これは美しき花也。	has:꽃이다	fix	normalize
+normalize:archaic-nari	真実也。	has:진실이다	fix	normalize
+normalize:archaic-nari	涼也と遊んだ。	has:야와	keep	normalize
+normalize:archaic-nari	涼也と遊んだ。	lacks:이라고	keep	normalize
+normalize:archaic-nari	冬也！	has:야!	keep	normalize
+normalize:archaic-nari	冬也！	lacks:이다	keep	normalize
+normalize:archaic-nari	柊也！	has:야!	keep	normalize
+normalize:archaic-nari	柊也！	lacks:이다	keep	normalize
+normalize:archaic-nari	涼也、行くぞ。	has:야,	keep	normalize
+normalize:archaic-nari	涼也、行くぞ。	lacks:이다	keep	normalize
+normalize:archaic-nari	「涼也と一緒なら」	has:야와	keep	normalize
+normalize:archaic-nari	「涼也と一緒なら」	lacks:이라면	keep	normalize
+normalize:archaic-nari	佐藤冬也と申します。	lacks:겨울이라고	keep	normalize
+normalize:archaic-nari	冬也さん、おはよう。	has:씨	keep	normalize
+normalize:archaic-nari	冬也さん、おはよう。	lacks:이다	keep	normalize
+normalize:kansai-copula	お菓子やお茶やと迷う。	lacks:차라고	keep	normalize
+normalize:kansai-ya-past	よし、まずは一杯やろう！	has:한잔 하자	keep	normalize
+normalize:kansai-ya-past	いいよ、あたしやったげる。	has:해 줄게	keep	normalize
+normalize:kansai-ya-past	「お兄ちゃんやったぞーっ」	lacks:오빠였	keep	normalize
+normalize:kansai-ya-past	「これやったら、ドレスが着られるの？」	lacks:이것이라면	keep	normalize
+normalize:kansai-ya-past	大学でもバターンやったからね	lacks:이었으니까	keep	normalize
+normalize:kansai-ya-past	演習もたくさんやったし、経験も積んだし。	has:많이 했고	keep	normalize
+normalize:kansai-ya-past	最高の流れやったやん。	has:흐름이었잖아	fix	normalize
+normalize:kansai-ya-past	私の装甲、抜けやしないんだから！	lacks:누락이고	keep	normalize
+normalize:kansai-ya-past	時間を費やし、勉強した	has:쏟고	keep	normalize
+normalize:kansai-ya-past	このばかやろう。	has:바보 녀석	keep	normalize
+normalize:character-tic	あじつけが こいみたいですぞ〜。	lacks:같습니다	keep	normalize
+normalize:character-tic	「それじゃ、行ってくるのよさ」	has:다녀올게」	fix	normalize
+normalize:character-tic	「犬っころ１匹くらいならどうって事ないのよさ」	lacks:아니다의	fix	normalize
+normalize:character-tic	「ふんじゃ、今度こそ行ってくるのよさ！」	lacks:다녀올게의	fix	normalize
