@@ -695,7 +695,7 @@ std::size_t PersonVerbAt(std::string_view s, PersonVerb& verb) {
                 break;
         }
         // てほしい asks the act of another (見て欲しけりゃ…しとけボケ).
-        if ((it->first.ends_with("て") || it->first.ends_with("で")) && (tail.starts_with("欲し") || tail.starts_with("ほし"))) continue;
+        if ((it->first.ends_with("て") || it->first.ends_with("で")) && dict::StartsWithMember(HDTRANS_CLASS("ending.te-wish"), tail) > 0) continue;
         // てある makes the object the subject (名前が書いてある).
         if (it->second.transitive && (it->first.ends_with("て") || it->first.ends_with("で")) && tail.starts_with("あ") &&
             !tail.starts_with("あげ")) {
@@ -1010,7 +1010,7 @@ bool CommandEndIn(const dict::Snapshot& snap, std::string_view s, bool negative 
             }
         }
     }
-    for (const std::string_view t : {"てくれ", "でくれ", "てください", "でください", "てちょうだい", "でちょうだい", "なさい", "しろ", "せよ", "来い"}) {
+    for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("ending.command-request"))) {
         if (s.ends_with(t) && s.size() > t.size()) return true;
     }
     if (s.ends_with("てこい") || s.ends_with("でこい")) return true;
@@ -1072,7 +1072,7 @@ bool CalledClauseAt(const dict::Snapshot& snap, std::string_view s, bool questio
         if (!(close.starts_with("？") || close.starts_with("?")) || !IsHiragana(RuneBefore(clause, clause.size()).cp)) return false;
         // An object in を or でも, or a noun asked about in は (本の数は？).
         if (time || clause.ends_with("は") || clause.find("を") != std::string_view::npos) return true;
-        for (const std::string_view what : {"何し", "なにし", "なんし", "何や", "なにや"}) {
+        for (const std::string_view what : dict::ClassMembers(HDTRANS_CLASS("name.what-doing"))) {
             const std::size_t at = clause.find(what);
             if (at != std::string_view::npos && !clause.substr(at + what.size()).starts_with("ら")) return true;
         }

@@ -14387,3 +14387,39 @@ noun.company-prefix	有限会社
 noun.company-prefix	合同会社
 noun.company-prefix	一般社団法人
 noun.company-prefix	公益財団法人
+//= name.what-doing	Starts of 何 as the object of a verb of doing with を dropped (何してる, なにやってんの): a question with one after X、 calls X (高峰、何してるんだ？; spec LEX-4820). A ら right after one is no such verb (何やら).
+name.what-doing	何し
+name.what-doing	なにし
+name.what-doing	なんし
+name.what-doing	何や
+name.what-doing	なにや
+//= ending.te-wish	Starts of the words after a て form that ask the act of another (見てほしい, 見て欲しけりゃ): the verb before them is not the act of the one named before it.
+ending.te-wish	欲し
+ending.te-wish	ほし
+//= ending.command-request	Ends of a command or a request with more of the word before them (手伝ってくれ, 待ってください, 発言しろ, 来い), which make a clause after X、 a call to X (spec LEX-4820).
+ending.command-request	てくれ
+ending.command-request	でくれ
+ending.command-request	てください
+ending.command-request	でください
+ending.command-request	てちょうだい
+ending.command-request	でちょうだい
+ending.command-request	なさい
+ending.command-request	しろ
+ending.command-request	せよ
+ending.command-request	来い
+//= question.kansai-yanen	Question words before the Kansai やねん (誰やねん 누구야, 何がやねん 뭐가), tried in table order, with the ending they take in the note: なんだよ, or だよ after 何, なん and 何が; keep for なんでやねん, the retort that other rows read (왜 그래).
+question.kansai-yanen	何で	keep
+question.kansai-yanen	なんで	keep
+question.kansai-yanen	何が	だよ
+question.kansai-yanen	なにが	だよ
+question.kansai-yanen	誰	なんだよ
+question.kansai-yanen	だれ	なんだよ
+question.kansai-yanen	どこ	なんだよ
+question.kansai-yanen	どっち	なんだよ
+question.kansai-yanen	どれ	なんだよ
+question.kansai-yanen	どない	なんだよ
+question.kansai-yanen	いつ	なんだよ
+question.kansai-yanen	何	だよ
+question.kansai-yanen	なん	だよ
+question.kansai-yanen	なに	だよ
+question.kansai-yanen	どう	なんだよ

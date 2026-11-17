@@ -999,11 +999,14 @@ bool KansaiTon(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// A question word with the Kansai やねん (誰やねん 누구야, どっちやねん 어느 쪽이야, 何がやねん 뭐가, なんやねん after a word): なんだよ, or
-// だよ after 何, なん, 何が. なんでやねん stays the retort that other rows read (왜 그래).
+// A question word of question.kansai-yanen with the Kansai やねん (誰やねん 누구야, どっちやねん 어느 쪽이야, 何がやねん 뭐가, なんやねん
+// after a word): the ending in its note, なんだよ or だよ. なんでやねん stays the retort that other rows read (왜 그래).
 bool KansaiQuestionYanen(std::string_view s, size_t pos, Match& m) {
-    for (const std::string_view w : {"何で", "なんで", "何が", "なにが", "誰", "だれ", "どこ", "どっち", "どれ", "どない", "いつ", "何", "なん", "なに", "どう"}) {
-        if (w == "何で" || w == "なんで") {  // なんでやねん is the retort of its own (왜 그래)
+    const auto words = dict::ClassMembers(HDTRANS_CLASS("question.kansai-yanen"));
+    const auto endings = dict::ClassNotes(HDTRANS_CLASS("question.kansai-yanen"));
+    for (std::size_t k = 0; k < words.size() && k < endings.size(); k++) {
+        const std::string_view w = words[k];
+        if (endings[k] == "keep") {  // なんでやねん is the retort of its own (왜 그래)
             size_t q = pos;
             if (Lit(s, q, w) && Lit(s, q, "やねん")) return false;
             continue;
@@ -1012,7 +1015,7 @@ bool KansaiQuestionYanen(std::string_view s, size_t pos, Match& m) {
         if (!Lit(s, p, w)) continue;
         if (!Lit(s, p, "やねん")) return false;
         m.group[1] = w;
-        m.group[2] = (w == "何が" || w == "なにが" || w == "何" || w == "なん" || w == "なに") ? "だよ" : "なんだよ";
+        m.group[2] = endings[k];
         m.end = p;
         return true;
     }

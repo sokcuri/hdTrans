@@ -318,6 +318,8 @@ if(NOT EMSCRIPTEN)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs rules.packs.guide
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
+        # The theme tables are the largest set; under ASan they take most of 300 s.
+        set_tests_properties(rules.cases.themes PROPERTIES TIMEOUT 600)
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
         if(HDTRANS_PYTHON)
