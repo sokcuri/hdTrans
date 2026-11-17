@@ -570,16 +570,28 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
     return korean == "당" && (surface == "あたり" || surface == "当たり" || surface == "当り");
 }
 
+// Korean t without its spaces.
+std::string Unspaced(std::string_view t) {
+    std::string words(t);
+    std::erase(words, ' ');
+    return words;
+}
+
 // Whether a noun's Korean is an adverb, which forms no compound with the noun after it (結局昼
 // 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn), also one of several words
-// (血染めの 피로 물든), or a word of ko.adverb-noun or ko.time-noun (今夜 오늘 밤).
+// (血染めの 피로 물든), or a word of ko.adverb-noun.
 bool AdverbKorean(std::string_view korean, std::string_view tags) {
     if (text::RuneCount(korean) < 2) return false;
-    std::string words(korean);
-    std::erase(words, ' ');
-    if (Contains(tags, "Nn")) return HangulWord(words);
-    return HangulWord(words) && (dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean) ||
-                                 dict::InClass(HDTRANS_CLASS("ko.time-noun"), korean));
+    if (Contains(tags, "Nn")) return HangulWord(Unspaced(korean));
+    return HangulWord(korean) && dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
+}
+
+// Whether item i, read t, is a time noun (ko.time-noun: 明日 내일, 今夜 오늘 밤) or a time of day
+// (ko.time-of-day: 夜 밤, 朝 아침) written straight after one (明日夜 내일 밤, 今日朝 오늘 아침).
+bool TimeNoun(const std::vector<ResolvedItem>& items, int i, std::string_view t) {
+    if (dict::InClass(HDTRANS_CLASS("ko.time-noun"), t)) return true;
+    return dict::InClass(HDTRANS_CLASS("ko.time-of-day"), t) && Adjoins(items, i) &&
+           dict::InClass(HDTRANS_CLASS("ko.time-noun"), EntryText(items[i - 1]));
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,
@@ -1741,11 +1753,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), true);
         }
         // LAY-19: an adverb or time noun stands apart from the noun after it (結局昼 결국 낮, 明日雨 내일 비) but
-        // not from a counter, and a time noun or pronoun not from a suffix (Z7: 今日用 오늘용, 誰か様 누군가님).
-        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && AdverbKorean(t, tags) &&
-            !Contains(nextTags, "Ct") &&
-            !(Contains(nextTags, "Z7") &&
-              (Code(item).starts_with("12") || dict::InClass(HDTRANS_CLASS("ko.time-noun"), t))) &&
+        // not from a counter, and a time noun or pronoun not from a suffix (Z7: 今日用 오늘용, 誰か様 누군가님); a time
+        // noun also joins a kanji read by its Sino-Korean syllable (On: 当日券 당일권).
+        const bool timeNoun = HangulWord(Unspaced(t)) && TimeNoun(items, i, t);
+        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && (AdverbKorean(t, tags) || timeNoun) &&
+            !Contains(nextTags, "Ct") && !(Contains(nextTags, "Z7") && (Code(item).starts_with("12") || timeNoun)) &&
+            !(timeNoun && Contains(nextTags, "On")) &&
             HangulWord(nextEntry)) {
             return Result(std::move(t), true);
         }

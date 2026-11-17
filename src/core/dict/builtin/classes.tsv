@@ -256,6 +256,7 @@
 //= ko.determiner	Korean determiners that the dictionary writes for Japanese nouns (何の 무슨, とある 어떤, あらゆる 모든): one is written apart from the noun it modifies (何の音 무슨 소리, とある村 어떤 마을).
 //= ko.adverb-noun	Korean adverbs that the dictionary writes for Japanese nouns without the code Nn (結局 결국, 初めて 처음, 日々 날마다): one is written apart from the noun after it, with which it forms no compound (結局昼 결국 낮, 毎日猫 매일 고양이; spec LAY-19).
 //= ko.time-noun	Korean time nouns that also stand as adverbs (明日 내일, 今年 올해, 今 지금, 今夜 오늘 밤): one is written apart from the noun after it (明日雨 내일 비, 今年夏 올해 여름) but joins a suffix (今日用 오늘용, 今年産 올해산; spec LAY-19).
+//= ko.time-of-day	Korean nouns of a time of day (아침, 밤, 저녁): written straight after a word of ko.time-noun they make a time phrase with it, written apart from the noun after it (明日夜パーティ 내일 밤 파티, 今日朝雨 오늘 아침 비; spec LAY-19).
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
 //= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), or of the おる after a て form said with と or ど (生きとる 살고 있다), ending in the marker family that the ending after it conjugates.
@@ -3761,6 +3762,33 @@ ko.time-noun	지난 달
 ko.time-noun	다음달
 ko.time-noun	이달
 ko.time-noun	이번 해
+ko.time-noun	이튿날
+ko.time-noun	다음날
+ko.time-noun	다음 날
+ko.time-noun	전날
+ko.time-noun	당일
+ko.time-noun	금일
+ko.time-noun	그날
+ko.time-noun	이튿날 아침
+ko.time-noun	다음날 아침
+ko.time-noun	다음 날 아침
+ko.time-noun	전날 밤
+ko.time-noun	오늘 저녁
+ko.time-noun	어제 저녁
+ko.time-noun	내일 저녁
+
+ko.time-of-day	아침
+ko.time-of-day	낮
+ko.time-of-day	밤
+ko.time-of-day	저녁
+ko.time-of-day	점심
+ko.time-of-day	새벽
+ko.time-of-day	오전
+ko.time-of-day	오후
+ko.time-of-day	밤중
+ko.time-of-day	한밤중
+ko.time-of-day	아침나절
+ko.time-of-day	저녁때
 
 ko-verb.voice-end	지다
 ko-verb.voice-end	되다

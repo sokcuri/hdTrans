@@ -31,3 +31,12 @@ compose:adverb-noun-space	今日の雨はひどい。	오늘의 비는 심하다
 compose:adverb-noun-space	最近作が評判だ。	has:최근작이	keep	compose
 dict:w:35500	昨年比で一割増えた。	has:작년 대비로	fix	lookup
 dict:w:35501	去年比で二割増し。	has:작년 대비로	fix	lookup
+compose:adverb-noun-space	明日夜パーティだ。	has:내일 밤 파티	fix	compose
+compose:adverb-noun-space	明日朝学校に行く。	has:내일 아침 학교에	keep	compose
+compose:adverb-noun-space	翌朝雪が降った。	has:이튿날 아침 눈이	fix	compose
+compose:adverb-noun-space	翌日雨だった。	has:다음날 비였다	fix	compose
+compose:adverb-noun-space	前日雨だった。	has:전날 비였다	fix	compose
+compose:adverb-noun-space	当日雨なら中止。	has:당일 비라면	fix	compose
+compose:adverb-noun-space	当日券はもうないんです。	has:당일권은	keep	compose
+compose:adverb-noun-space	明日朝飯どうする？	has:아침밥	keep	compose
+compose:adverb-noun-space	本日休業。	has:금일 휴업	fix	compose
