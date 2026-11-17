@@ -100,7 +100,7 @@ HD_TEST(names_name_cues) {
         {"「アヤメ、来て」", {}},
         {"「大丈夫か、アヤメ」", {{"アヤメ", '-'}}},
         {"「ありがとう、高峰」", {{"高峰", '-'}}},
-        {"「高峰、テントは？」", {}},
+        {"「高峰、テントは？」", {{"高峰", '-'}}},
         {"「鈴谷」「村雨」「夕立」の旗艦", {{"鈴谷", '-'}, {"村雨", '-'}, {"夕立", '-'}}},
         // Not cued: a time word called at the start, a number after a ship type, a longer
         // word, a weak shape inside a sentence, a single kanji called.
@@ -110,7 +110,7 @@ HD_TEST(names_name_cues) {
         {"これは睦月です。", {}},
         {"雷、落ちた", {}},
         {"時雨が降る", {}},
-        {"高峰、テントは？", {}},
+        {"高峰、テントは？", {{"高峰", '-'}}},
         // Person verbs: the active forms of the lemmas of name.person-verb (spec LEX-4820); no passive or
         // potential (見える is no 見る), no wish, no てある, and after は no verb that takes an object
         // without one in を.

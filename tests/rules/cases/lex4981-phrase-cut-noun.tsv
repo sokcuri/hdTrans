@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 segment:phrase-cut	次の日曜日にまた来るわ、と約束した。	다음 일요일에 또 와, 라고 약속했다.	fix	segment
 segment:phrase-cut	完璧な王太子妃で、完璧な王妃であり、公爵家の後ろ盾もあるソランジュは、社交界でも実務でも優秀だった。	완벽한 왕태자비로, 완벽한 왕비이며, 공작가의 후원자도 있는 솔란지는, 사교계에서도 실무라도 우수했다.	fix	segment
 segment:phrase-cut	父にとってアデライドは公爵家の後継者でしかなかった。	아버지에게 아델라이드는 공작가의 후계자에 지나지 않았다.	fix	segment
-segment:phrase-cut	「まあ、落ち着け小太刀。俺もこいつの頭の中身はわからない」	「뭐, 진정해 작은 칼. 나도 이 녀석의 머리의 내용물은 몰라」	fix	segment
+segment:phrase-cut	「まあ、落ち着け小太刀。俺もこいつの頭の中身はわからない」	「뭐, 진정해 코다치. 나도 이 녀석의 머리의 내용물은 몰라」	fix	segment
 segment:phrase-cut	ったく… それにしても コンテナの中身って何なんだ？	참나… 그나저나 컨테이너의 내용물은 뭐야?	fix	segment
 segment:phrase-cut	脾臓があるのは 体の中心ではなく 左側だろう。	지라가 있는 것은 몸의 중심이 아니고 좌측일 것이다.	fix	segment
 segment:phrase-cut	「いえ、自分の力不足を痛感させられて……」	「아뇨, 자신의 역부족을 통감하지 않을 수 없어……」	fix	segment

@@ -41,6 +41,12 @@ bool KanjiBounded(std::string_view line, std::size_t at, std::size_t n) {
     return at + n >= line.size() || !names::internal::IsKanji(text::DecodeRune(line.substr(at + n)).cp);
 }
 
+// Whether before ends in a digit, which counts the word after it (3千里).
+bool NumberBefore(std::string_view before) {
+    const char32_t c = names::internal::RuneBefore(before, before.size()).cp;
+    return (c >= U'0' && c <= U'9') || (c >= U'０' && c <= U'９');
+}
+
 // Whether key occurs in text with a person title after it or 艦 before it.
 bool Titled(std::string_view text, std::string_view key) {
     for (std::size_t i = 0;;) {
@@ -282,8 +288,10 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
         for (const names::NameCue& c : CuesOf(*doc, line)) {
-            if (c.strong || c.person) carried.insert(c.key);
-            if (c.recurring || c.acted) recurring[c.key]++;
+            // A predicate of a person in one line names the key in the other lines of the call too, unless a line
+            // keeps the common sense there (doc->common below; spec LEX-4820).
+            if (c.strong || c.person || c.acted) carried.insert(c.key);
+            if (c.recurring) recurring[c.key]++;
             if (c.evidence) evidence[c.key]++;
         }
     }
@@ -712,7 +720,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
             const std::string_view after = cues.substr(at + k.size());
             // An adnominal before it makes it the word unless a person act or call after it makes it the person
             // (大きな樹を見上げた; 大きな樹くん).
-            if (names::CommonSenseAt(after) ||
+            // A number before it counts the word (3千里).
+            if (names::CommonSenseAt(after) || NumberBefore(cues.substr(0, at)) ||
                 (names::WordBeforeAt(cues.substr(0, at)) && !names::PersonSlotAt(*doc.snap, k, cues.substr(0, at), after))) {
                 common = true;
             } else {

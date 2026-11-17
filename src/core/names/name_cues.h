@@ -24,8 +24,8 @@ struct NameCue {
     // An honorific after the word (皐月さん) on a key of two characters or more that is no hiragana
     // nor a katakana spelling of a native word: it holds for the document (spec LEX-4820).
     bool person = false;
-    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the document
-    // where two lines of the document cue it so, as a recurring cue does.
+    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the other lines of
+    // the document too, except where a line keeps the common sense (spec LEX-4820).
     bool acted = false;
     // Any of the cues above before their limits (a title, suffix, honorific, speaker label, call, phrase
     // of naming or predicate of a person): the evidence that names a common word for the document on two

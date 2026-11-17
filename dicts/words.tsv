@@ -1334,7 +1334,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 わん子	멍멍이	N110	VAm		GN				llm		わんこ	w:1326
 わん曲	만곡	N110		Hd	GN						わんきょく	w:1327
 わん曲	만곡&AV@	M429			GN						わんきょく	w:1328
-をよそに	아랑곳하지 않고	E300			GN				xxx llm	1		w:1329
+をよそに	(을)를 아랑곳하지 않고	E310		J1Tu	GN				xxx llm	1		w:1329
 んまぁ	어머나	E300			GN				llm			w:1330
 アイアイ	아이아이	N110			GN						アイアイ	w:1331
 アイアンクロー	아이언 클로	N110			GN				llm			w:1332
@@ -28618,3 +28618,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 言われなき	이유 없는	E0H0			GN						いわれなき	w:35454
 首をはねられ	목이 베&AJ@	M427		Pn	GN			LEX-5840			くびをはねられ	w:35455
 みせられ	보게 &C6@	M4U7			GN			LEX-5842			みせられ	w:35456
+岬	곶	N110	VPl		GN			바다로 뻗은 땅. 이름 행(미사키)은 이름 단서가 있을 때 읽는다.				w:35600
+羆	불곰	N110	QAA		GN			큰 곰. 이름 행(다케시)은 이름 단서가 있을 때 읽는다.				w:35601

@@ -45,7 +45,7 @@ names:person-predicate	時雨が降る。	늦가을 비가 내린다.	keep	looku
 names:person-predicate	玉藻が揺れる。	말이 흔들린다.	keep	lookup
 names:person-predicate	皐月の空は青い。	5월의 하늘은 푸르다.	keep	lookup
 names:person-predicate	お前と王子殿下の仲が進展していないとは聞いていた	너와 왕자 전하의 사이가 진전하고 있지 않다고는 듣고 있었다	keep	lookup
-names:person-predicate	羆は原島さんを食べる時に言ってくれませんからね。	비는 하라시마 씨를 먹을 때 말해 주지 않으니까요.	keep	lookup
+names:person-predicate	羆は原島さんを食べる時に言ってくれませんからね。	불곰은 하라시마 씨를 먹을 때 말해 주지 않으니까요.	fix	lookup
 names:person-predicate	それじゃみんな、いくよー！	그럼 모두, 가~!	keep	lookup
 names:person-predicate	「な、中っ……！」	「아, 안……!」	keep	lookup
 names:person-predicate	富竹さんの姿がないことを知った俺は、斜面を降りていった。	토미타케 씨의 모습이 없는 것을 안 나는, 경사면을 내려갔다.	keep	lookup

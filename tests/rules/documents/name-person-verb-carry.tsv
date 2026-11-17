@@ -1,0 +1,8 @@
+# 규칙: LEX-4820
+rule	input	expected	kind	layer
+names:person-carry	高峰が悠然と語る。\nこういう時の高峰の安定感は抜群だ。	has:타카미네의 안정감	fix	fixed
+names:person-carry	高峰が笑った。\nこういう時の高峰の安定感は抜群だ。	has:타카미네의 안정감	fix	fixed
+names:person-carry	玉藻が首をかしげた。\n「どうしたの？」\n玉藻の目が泳いでいる。	has:타마모의	fix	fixed
+names:person-carry	凪が微笑んだ。\n凪の髪が風に揺れる。	has:나기의 머리	fix	fixed
+names:person-carry	千里が笑った。\n山を越えて3千里を歩いた。	has:3천리	keep	fixed
+names:person-carry	千里が笑った。\n千里、待ってくれ。\n千里の声が聞こえる。	has:치사토의 목소리	fix	fixed

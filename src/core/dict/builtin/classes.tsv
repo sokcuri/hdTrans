@@ -197,6 +197,8 @@
 //= name.rank-after	Ranks of the police and the army and academic titles after a kanji name of two characters or more that make it a person's surname, for the line and the document (滝本警部 타키모토 경감, 高野警部; spec LEX-4831).
 //= name.person-belonging	What a person has or does, after a common word and の that the document names: the word is the person there (小太刀の家 코다치의 집, 樹の声; spec LEX-5175).
 //= name.person-part	Parts of the body and the face after Xの that make X a person, not the common word it also spells, when a particle or a mark follows them (皐月の顔 사츠키의 얼굴, のぞみの手を; not 剣の手ほどき; spec LEX-4820).
+//= name.person-voice	Voices after Xの that make X a person when a clause of what a person does stands before X (静かに語る凪の声が響く 조용히 말하는 나기의 목소리가 울린다; not 風の声; spec LEX-4820).
+//= name.person-hair	Hair after Xの that makes X a person when no dictionary word reads X, only the name layer (凪の髪が揺れる 나기의 머리카락; not 白銀の髪 은빛 머리카락; spec LEX-4820).
 //= name.body-part	Parts of the body that, before を in the clause after Xが, Xは or Xも, or before が after Xは or Xも, make X a person doing something with its own body (玉藻が身をよじる 타마모가 몸을 비튼다, 小太刀が眉を上げた; spec LEX-4820).
 //= name.person-act	Starts of nouns and phrases of what only a person does (ため息, 赤面, 初耳, 身を), matched as name.person-verb is (spec LEX-4820); the verbs are lemmas of name.person-verb.
 //= name.person-verb	Verbs and verb phrases of what only a person does (語る, 見つめる, 腕を組む), one lemma per row with its kind in the note (v5, v1, vs) and the flags t (it takes an object, which may stand as the topic: after Xは or Xも a cue only after an object in を), say (a verb of saying, a cue after a named topic with no object) and move (a verb of moving on one's own, which a vehicle or an animal does too: no cue for a key with such a common sense nor for a common word of one kanji, 車が近づいてくる). A row whose note does not parse fails the unit test names_person_verb_rows. Their active forms, made with the one conjugation table, are matched in the clause after Xが, Xは, Xも or X、 or before X at a sentence end and make X a person (高峰が語る 타카미네가 말한다; not 姿が見えない or 礼は受け取ろう; spec LEX-4820).
@@ -2463,6 +2465,15 @@ name.person-part	舌
 name.person-part	頭
 name.person-part	顎
 name.person-part	喉
+name.person-hair	髪
+name.person-hair	前髪
+name.person-hair	髪の毛
+name.person-voice	声
+name.person-voice	話し声
+name.person-voice	笑い声
+name.person-voice	歌声
+name.person-voice	叫び声
+name.person-voice	呟き
 name.person-belonging	家
 name.person-belonging	部屋
 name.person-belonging	声
