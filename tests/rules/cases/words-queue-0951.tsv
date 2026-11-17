@@ -175,3 +175,25 @@ dict:words-phrases:114	みんなんちに行く	has:모두네 집에	fix	lookup
 cx:nchi-home:15	田中ちゃんちに行く	has:타나카짱네 집에	fix	rewrites
 cx:nchi-home:15	花子ちゃんちで遊ぶ	!rule:cx:nchi-home:15	keep	rewrites
 cx:nchi-home:40	りんごのさんちは青森だ	!rule:cx:nchi-home:40	keep	rewrites
+cx:gozonji-comma:10	「ご存じ、ないみたいね……」	has:모르시는 것 같네	fix	rewrites
+cx:gozonji-comma:10	「ご存じ、ないの？」	has:모르시는 거야	fix	rewrites
+cx:gozonji-comma:10	ご存じ、なかったんですか	has:모르셨습니까	fix	rewrites
+cx:gozonji-comma:10	ご存じ、ないでしょう。	has:모르실 거예요	fix	rewrites
+cx:gozonji-comma:10	「ご存じ、ないのね」	has:모르시는구나	fix	rewrites
+cx:gozonji-comma:10	知らない、ないの？	!rule:cx:gozonji-comma:10	keep	rewrites
+cx:gozonji-comma:20	御存じ、なかった	has:모르셨다	fix	rewrites
+cx:gozonji-comma:20	「御存じ、ないの？」	has:모르시는 거야	fix	rewrites
+cx:gozonji-comma:30	「ご存知、ないの？」	has:모르시는 거야	fix	rewrites
+cx:gozonji-comma:30	ご存知、ないですか？	has:모르십니까	fix	rewrites
+cx:gozonji-comma:40	御存知、ないの？	has:모르시는 거야	fix	rewrites
+cx:gozonji-comma:40	御存知、ないでしょう	has:모르실 거예요	fix	rewrites
+dict:w:35338	存じ上げません。	모릅니다.	fix	lookup
+dict:w:35338	存じ上げませんでした。	몰랐습니다.	fix	lookup
+dict:w:35339	存じあげません。	모릅니다.	fix	lookup
+dict:w:35338	よく存じ上げています	has:잘 알고 있습니다	keep	lookup
+cx:gozonji-comma:10	ご存じなのですか？	has:알고 계십니까	keep	rewrites
+cx:gozonji-comma:20	御存じなのですね	!rule:cx:gozonji-comma:20	keep	rewrites
+cx:gozonji-comma:30	ご存知なのに黙っていた	has:알고 계신데	keep	rewrites
+cx:gozonji-comma:30	ご存じ、なのですね	!rule:cx:gozonji-comma:30	keep	rewrites
+cx:gozonji-comma:40	御存知なんですか	!rule:cx:gozonji-comma:40	keep	rewrites
+cx:gozonji-comma:40	御存じ、なのに	!rule:cx:gozonji-comma:40	keep	rewrites
