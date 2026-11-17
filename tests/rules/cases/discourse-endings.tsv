@@ -63,3 +63,71 @@ cx:baii-janai:10	「行けばいいじゃないのさ」	has:가면 되잖아	fi
 cx:baii-janai:10	「実績つくればいいじゃないの」	has:만들면 되잖아	fix	rewrites
 cx:baii-janai:10	「いいじゃないのよ」	has:좋잖아	keep	rewrites
 cx:baii-janai:10	「食べてもいいじゃないのよ」	lacks:되잖아	keep	rewrites
+cx:noka-past:20	外で寝たのかよ	has:잔 거냐	fix	rewrites
+cx:noka-past:20	本当に食べたのかよ！	has:먹은 거냐	fix	rewrites
+cx:noka-past:20	お前が壊したのかよ。	has:부순 거냐	fix	rewrites
+cx:noka-past:20	「あいつら、本当に書いたのかよ」	has:쓴 거냐	fix	rewrites
+cx:noka-past:20	あいつ死んだのかよ	has:죽은 거냐	fix	rewrites
+cx:noka-past:20	もう帰ったのかよ、あいつ。	has:돌아간 거냐	fix	rewrites
+cx:noka-past:20	「なんだ。物陰から見てたのかよ…。」	has:보고 있었던 거냐	keep	rewrites
+cx:noka-past:20	あいつ、いたのかよ	has:있었던 거냐	keep	rewrites
+cx:noka-past:20	高かったのかよ！	has:높았던 거냐	keep	rewrites
+cx:noka-past:10	もう諦めたのかなって。	has:포기한 걸까	fix	rewrites
+cx:noka-past:10	誰か来たのかな？	has:온 걸까	fix	rewrites
+cx:noka-past:10	やっぱ、ちょっといろいろ積みすぎたのかなぁ‥。	has:쌓은 걸까	fix	rewrites
+cx:noka-past:10	寒かったのかな	has:추웠던 걸까	keep	rewrites
+cx:noka-final:5	負けたいのかなって思いました。	has:싶은 걸까 하고 생각했습니다	fix	rewrites
+cx:noka-final:5	有明なら、そういうことも詳しいのかなって。	has:걸까 하고	fix	rewrites
+cx:noka-final:5	本当にいいのかなって思った。	has:좋은 걸까 하고	fix	rewrites
+cx:noka-final:5	来ないのかな？	lacks:하고	keep	rewrites
+cx:noka-final:22	何か心配事があるのかなって思った。	has:있는 걸까 하고 생각했다	fix	rewrites
+cx:noka-final:22	いつ帰るのかなって考えてた。	has:걸까 하고	fix	rewrites
+cx:noka-final:22	誰か来るのかなって思った。	has:오는 걸까 하고	fix	rewrites
+cx:noka-final:10	帰るのかよ、もう。	has:돌아가는 거냐	fix	rewrites
+cx:noka-final:10	「あれ？ これ通るのかよ？」	has:통과하는 거냐	fix	rewrites
+cx:noka-final:12	知らなかったのかよ	has:몰랐던 거냐	fix	rewrites
+cx:noka-final:12	大丈夫なのかよ。	has:괜찮은 거냐	fix	rewrites
+cx:noka-final:12	寒かったのかな	lacks:거냐	keep	rewrites
+cx:noka-final:20	行くのかなあ。	has:가는 걸까	fix	rewrites
+cx:noka-final:20	行くのかなぁ…	has:가는 걸까	fix	rewrites
+cx:noka-final:24	来ないのかな？	has:오지 않는 걸까	fix	rewrites
+cx:noka-final:24	寂しいのかな。	has:걸까	fix	rewrites
+cx:noka-final:24	「プランってこのままでいいのかな？」	has:좋은 걸까	fix	rewrites
+cx:noka-final:24	あんまりこの迷彩は役に立たないのかな…	has:걸까	fix	rewrites
+cx:noka-final:24	寒いのかな、と思った。	lacks:걸까?	keep	rewrites
+cx:noka-final:60	本当なのかよ！	has:사실인 거냐	fix	rewrites
+cx:noka-final:60	マジなのかよ	has:진짜인 거냐	fix	rewrites
+cx:noka-final:60	本当なのか？	has:사실인가	keep	rewrites
+cx:noka-final:60	そういうものなのかよ	lacks:것인 거냐	keep	rewrites
+cx:noka-final:70	あっ！ あんただったのか！	has:너였던 거냐	fix	rewrites
+cx:noka-final:70	嘘だったのかよ	has:거짓말이었던 거냐	fix	rewrites
+cx:noka-final:70	何だったのか、分からない。	lacks:거냐	keep	rewrites
+cx:noka-final:72	あれは本当に夢だったのか？	has:꿈이었던 거야	fix	rewrites
+cx:noka-final:72	誰だったのかは知らない。	lacks:거야	keep	rewrites
+cx:noka-final:74	夢だったのかな。	has:꿈이었던 걸까	fix	rewrites
+cx:noka-final:74	夢だったのかなって思った。	lacks:였는가	keep	rewrites
+cx:noka-final:76	彼女だったのか。	has:그녀였던 건가	fix	rewrites
+cx:noka-final:76	スクリーンセーバーだったのか。	has:세이버였던 건가	fix	rewrites
+cx:noka-final:76	「ああ、そういうことだったのか」	has:것이었던 건가	fix	rewrites
+cx:noka-final:76	何だったのか、分からない。	lacks:건가	keep	rewrites
+cx:baii-janai:20	聞けばよかったじゃない。	has:들으면 됐잖아	fix	rewrites
+cx:baii-janai:20	「ほらー、やっぱり先に席を取っておけばよかったじゃない」	has:두면 됐잖아	fix	rewrites
+cx:baii-janai:20	良かったじゃない。	has:좋았잖아	keep	rewrites
+cx:baii-janai:30	「先輩が行けばいいじゃないですか」	has:가면 되잖아요	fix	rewrites
+cx:baii-janai:30	行けばいいじゃないですか？	has:가면 되잖아요	fix	rewrites
+cx:baii-janai:30	いいじゃないですか。	lacks:되잖아요	keep	rewrites
+cx:tte-echo:20	もっとって、どれくらい？	has:더라니	fix	rewrites
+cx:tte-echo:20	まだって、何が？	has:아직이라니	fix	rewrites
+cx:tte-echo:20	なおって、誰？	lacks:이라니	keep	rewrites
+cx:tte-echo:20	もっと食べたいって言った。	lacks:이라니	keep	rewrites
+ending:学生だったじゃないのよ	学生だったじゃないのよ。	has:학생이었잖아	fix	builtin-ending
+ending:静かだったじゃないのさ	静かだったじゃないのさ。	has:조용했잖아	fix	builtin-ending
+ending:静かだったじゃない	「だって蒼くん、お紅茶好きだったじゃない？」	has:좋아했잖아	fix	builtin-ending
+ending:学生だったじゃない	「一緒に住み始めた頃は毎晩だったじゃない？」	has:매일 밤이었잖아	fix	builtin-ending
+ending:書いてるじゃないのよね	知ってるじゃないのよね。	has:알고 있잖아	fix	builtin-ending
+ending:書いたじゃないのよね	言ったじゃないのよね。	has:말했잖아	fix	builtin-ending
+ending:学生だったじゃないのよ	学生じゃないのよ。	has:학생은 아닌	keep	builtin-ending
+cx:noka-past:20	解散してたのかよ！	has:해산했	keep	rewrites
+cx:noka-past:20	捨てたのかよ	has:버린 거냐	fix	rewrites
+cx:noka-past:10	ちがったのかなぁ？	has:아니었	keep	rewrites
+cx:noka-final:76	「そこで気づいたのだ。自分の過ちと、自分にとっての最高が何だったのか」	has:무엇이었는가	keep	rewrites
