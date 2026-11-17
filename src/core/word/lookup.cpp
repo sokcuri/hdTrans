@@ -609,6 +609,12 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
                (NameClassOf(FirstChar(rest)) == kClassHiragana && !Has("ぁぃぅぇぉっゃゅょゎ", FirstChar(rest)));
     }
     const std::string_view next = FirstChar(rest);
+    // A noun whose spelling is also the dictionary form, or in two kana the continuative, of a verb reads as the noun
+    // only before が, を, や or the で of a noun (かえるや 개구리나, つきを 달을): elsewhere it is the verb (いえにかえる。,
+    // かえるだけ, つきにくい; LEX-5925).
+    if (pc.size() > 1 && pc[1] == '1' && VerbFormSpelling(u.key)) {
+        return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest);
+    }
     switch (NameClassOf(next)) {
     case kClassHiragana:
         // な and がら after it are the ながら of a verb stem (みながら 보면서).
@@ -622,14 +628,14 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     return text::RuneCount(u.key) >= 3;
 }
 
-// Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name layer
-// does not hold as a person, is followed by the particle で (このへんで, ぶんざいで; LEX-4721): not where the
-// key without a last い or ん is the stem of a godan verb whose て form that で ends (およいで, ならんで), as
+// Whether the kana spelling u, a noun or adjectival noun of two letters or more that the name layer
+// does not hold as a person, is followed by the particle で (このへんで, ぶんざいで, かわで; LEX-4721,
+// LEX-5925): not where the key without a last い or ん is the stem of a godan verb whose て form that で ends (およいで, ならんで), as
 // for the copula だ (KanaBeforeCopula), nor after a last ま or の, whose まで or ので it is (こうまで), nor where
 // the end of the key and で are a word of their own (みたところで).
 bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const {
     const std::string_view pc = u.codes->partText;
-    if (!rest.starts_with("で") || text::RuneCount(u.key) < 3 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
+    if (!rest.starts_with("で") || text::RuneCount(u.key) < 2 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
         snapshot.NamePerson(u.key)) {
         return false;
     }
@@ -964,6 +970,24 @@ bool Worker::PersonSuffixAt(std::string_view s) const {
                 return true;
             }
         }
+    }
+    return false;
+}
+
+// Whether form is also the dictionary form of a verb of the dictionary, or a continuative of two kana: form without
+// its last kana is the stem of a verb whose dictionary form or continuative ends in that kana (かえる of 帰る and
+// 変える, つき of 付く).
+bool Worker::VerbFormSpelling(std::string_view form) const {
+    const std::string_view last = LastChar(form);
+    const std::string_view stem = form.substr(0, form.size() - last.size());
+    if (stem.empty()) return false;
+    // A longer noun in a continuative is mostly the noun grown from it (くぼみ, ひかり).
+    const bool two = text::RuneCount(form) == 2;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
+        const int kind = pc[3] - '0';
+        if (kind >= 0 && kind < kConjugationKinds && (Conjugation(kind, 0) == last || (two && Conjugation(kind, 10) == last))) return true;
     }
     return false;
 }

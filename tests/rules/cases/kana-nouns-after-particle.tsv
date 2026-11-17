@@ -1,0 +1,46 @@
+# 규칙: LEX-5924, LEX-5925
+rule	input	expected	kind	layer
+lookup:particle-kana-word	空にくもが浮かぶ	has:하늘에 구름이	fix	lookup
+lookup:particle-kana-word	空にもくもが浮かぶ	has:하늘에도 구름이	fix	lookup
+lookup:particle-kana-word	山にくもがかかる。	has:산에 구름이	fix	lookup
+lookup:particle-kana-word	白崎もうなずく。	has:도 끄덕인다	fix	lookup
+lookup:particle-kana-word	他の面子もうなずいた。	has:도 끄덕였다	fix	lookup
+lookup:particle-kana-word	母もうなずきました。	has:어머니도 끄덕였	fix	lookup
+lookup:particle-kana-word	彼女もうたった。	has:그녀도	fix	lookup
+lookup:particle-kana-word	眉もうっとり垂れ下がっている。	has:눈썹도	fix	lookup
+lookup:particle-kana-word	教師もうかうかしていられない	has:교사도	fix	lookup
+lookup:particle-kana-word	彼にくわしく話した。	has:그에게 자세	fix	lookup
+lookup:particle-kana-word	母にくわしくきいた。	has:어머니에게 자세	fix	lookup
+lookup:particle-kana-word	本番できちんとやる。	has:제대로	fix	lookup
+lookup:particle-kana-word	金もうけの話。	has:돈벌이	keep	lookup
+lookup:particle-kana-word	私もうれしい。	has:나도 기쁘	keep	lookup
+lookup:particle-kana-word	今日もうちにいる。	has:오늘도 집에	keep	lookup
+lookup:particle-kana-word	私もうそをついた。	has:거짓말	keep	lookup
+lookup:particle-kana-word	修理できるだけで。	has:수리할 수 있	keep	lookup
+lookup:particle-kana-word	確認できるだけでいい。	has:확인할 수 있	keep	lookup
+lookup:particle-kana-word	お菓子とかくれた。	has:과자라든지	keep	lookup
+lookup:particle-kana-word	艦隊にもういる。	has:이제 있다	keep	lookup
+lookup:particle-kana-word	もうなにもない。	has:이제 아무것도	keep	lookup
+lookup:particle-kana-word	人にきいた。	has:사람에게 물었다	keep	lookup
+lookup:particle-kana-word	手にいれた。	has:손에 넣었다	keep	lookup
+lookup:kana-noun-verb-spelling	にわにかえるがいる。	has:개구리가	fix	lookup
+lookup:kana-noun-verb-spelling	かえるやへびがいる。	has:개구리나	fix	lookup
+lookup:kana-noun-verb-spelling	かえるをつかまえた。	has:개구리를	fix	lookup
+lookup:kana-noun-verb-spelling	つきがきれいだ。	has:달이	fix	lookup
+lookup:kana-noun-verb-spelling	つきをながめた	has:달을	fix	lookup
+lookup:kana-noun-verb-spelling	かわであそぶ。	has:강에서	fix	lookup
+lookup:kana-noun-verb-spelling	かわをわたる。	has:강을	fix	lookup
+lookup:kana-noun-verb-spelling	あめがやんだ。	has:비가	fix	lookup
+lookup:kana-noun-verb-spelling	どうぐをつかう	has:도구를	fix	lookup
+lookup:kana-noun-verb-spelling	まおうをたおせ！	has:마왕을	fix	lookup
+lookup:kana-noun-verb-spelling	たからばこをあけた。	has:보물	fix	lookup
+lookup:kana-noun-verb-spelling	いえにかえる。	has:돌아	keep	lookup
+lookup:kana-noun-verb-spelling	家にかえるよ。	has:돌아	keep	lookup
+lookup:kana-noun-verb-spelling	配合比をかえるだけ。	has:바꿀	keep	lookup
+lookup:kana-noun-verb-spelling	そろそろかえるか。	has:돌아갈까	keep	lookup
+lookup:kana-noun-verb-spelling	かえるの？	has:돌아가는	keep	lookup
+lookup:kana-noun-verb-spelling	つきにくい。	lacks:달	keep	lookup
+lookup:kana-noun-verb-spelling	くっつきにくい場所だ。	has:들러붙기	keep	lookup
+lookup:kana-noun-verb-spelling	何のことかわからない。	has:모른다	keep	lookup
+lookup:kana-noun-verb-spelling	ゆきが来た。	has:유키	keep	lookup
+lookup:kana-noun-verb-spelling	ももちゃん、おはよう。	has:모모	keep	lookup

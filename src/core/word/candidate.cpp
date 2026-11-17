@@ -2667,6 +2667,86 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// LEX-5924: a noun or adverb in hiragana that starts with a one-kana particle right after a noun, or a noun that
+// starts with a も right after the particle に, で, と or へ (にく of 空にくもが, もう of 千里もうなずいた, もく of にもくもが) yields to
+// the particle alone when the word after the particle is a hiragana word of two kana or more that runs past the
+// reading and ends a word: a noun before a particle, a mark or the end, an adverb, or a verb or adjective that takes
+// its ending (に + くもが 구름이, も + うなずいた 끄덕였다, に + くわしく 자세히). A reading that the word after the
+// particle does not run past keeps its place (雨もよう, 金もうけ).
+Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent) {
+    if (parent == nullptr || parent->group == nullptr || c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb) {
+        return nullptr;
+    }
+    const std::string_view text = From(full, cursor);
+    const std::string_view source = text.substr(0, static_cast<std::size_t>(c.length));
+    const std::string_view particle = FirstChar(source);
+    if (!AllHiragana(source) || particle.size() == source.size() || !Has("にもやをがはでとへ", particle)) return nullptr;
+    const Entry* first = c.group->At(0);
+    // A plain noun or adverb, not a phrase (というもの) or an adjectival reading (でさえない).
+    if (first == nullptr || (first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))) return nullptr;
+    const std::string_view before = LastChar(full.substr(0, static_cast<std::size_t>(cursor)));
+    const std::string_view host = parent->group->surface;
+    const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana) &&
+                           (parent->detail == nullptr || parent->detail->cls != kDetailVerb) && At(parent->Code(0), 0) == '1';
+    const bool afterParticle = particle == "も" && first->cls == 'N' && (host == "に" || host == "で" || host == "と" || host == "へ");
+    if (!afterNoun && !afterParticle) return nullptr;
+    const int at = cursor + static_cast<int>(particle.size());
+    const std::string_view rest = From(full, at);
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // Some reading of the word after the particle, each record tried (くわ before くわしく).
+    auto ends = [&](const Item* w, const Record& r) {
+        if (w == nullptr || w->detail == nullptr || at + w->length <= cursor + c.length || AnyOf("256", At(w->Code(0), 0))) return false;
+        const std::string_view spelled = rest.substr(0, static_cast<std::size_t>(w->length));
+        if (!AllHiragana(spelled) || text::RuneCount(spelled) < 2) return false;
+        if (w->detail->cls != kDetailInfo) return w->length > static_cast<int>(r.source.size());
+        return At(w->Code(0), 0) == '3' || NounEnd(rest.substr(spelled.size()));
+    };
+    const Lookup l = DoLookup(rest, kModeGeneral);
+    bool found = false;
+    std::size_t reached = 0;
+    Record* from = l.count == 0 ? nullptr : after(l.records);
+    for (int tries = 0; from != nullptr && tries < 64 && !found; tries++, from = after(from->child)) {
+        const Item* w = InsertLateCandidate(full, at, token, from);
+        found = ends(w, *from);
+        if (found) reached = static_cast<std::size_t>(w->length);
+    }
+    if (!found) return nullptr;
+    // Whether some reading at start reaches at least to end.
+    auto reaches = [&](int start, int end) {
+        const Lookup m = DoLookup(From(full, start), kModeGeneral);
+        Record* r = m.count == 0 ? nullptr : after(m.records);
+        for (int tries = 0; r != nullptr && tries < 64; tries++, r = after(r->child)) {
+            const Item* w = InsertLateCandidate(full, start, token, r);
+            if (w != nullptr && start + w->length >= end) return true;
+        }
+        return false;
+    };
+    // A reading at the particle that reaches as far keeps the word to the readings after this one (修理できる: でき +
+    // る, not で + きる).
+    // So does a longer particle whose next word reaches as far (とか + くれたり, not と + かくれたり).
+    const int reach = at - cursor + static_cast<int>(reached);
+    Record* other = after(c.group->records);
+    for (int tries = 0; other != nullptr && tries < 64; tries++, other = after(other->child)) {
+        const Item* w = InsertLateCandidate(full, cursor, token, other);
+        if (w == nullptr) continue;
+        if (w->length >= reach) return nullptr;
+        const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+        if (e != nullptr && e->cls == 'P' && w->length > at - cursor && reaches(cursor + w->length, cursor + reach)) {
+            return nullptr;
+        }
+    }
+    Record* shorter = after(c.group->records);
+    for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+        if (shorter->source != particle) continue;
+        const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+        if (head != nullptr && head->length == static_cast<int>(particle.size())) return shorter;
+    }
+    return nullptr;
+}
+
 // LEX-4981: a phrase reading that cuts a common noun. Where the longest reading at a point is a phrase X の Y that
 // starts with kanji or katakana and whose Y is a noun of its own (次の日 of 次の日曜日, バッグの中 of バッグの中身, 家の後
 // of 家の後ろ盾), and a noun that ends in kanji or katakana and holds no particle starts at its Y and runs past its end,
@@ -3163,6 +3243,10 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
         if (Record* shorter = OverFusedParticle(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverParticleKanaWord(full, cursor, token, *candidate, parent)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
