@@ -1014,7 +1014,7 @@ idiom:腕を拱く	拱く	v5:하다	sense	idiom	腕 を 拱く	수수 방관하�
 idiom:腕を振う	振う	v5:하다	sense	idiom	腕 を 振う	솜씨를 발휘하다	50	LEX-4760	dict	base.tsv
 idiom:腕を振るう	振るう	v5:하다	sense	idiom	腕 を 振るう	솜씨를 발휘하다	50	LEX-4760	dict	base.tsv
 idiom:腕を磨く	磨く	v5:하다	sense	idiom	腕 を 磨く	솜씨를 연마하다	50	LEX-4760	dict	base.tsv
-idiom:腕を組む	組む	v5:하다	sense	idiom	腕 を 組む	방관하다	50	LEX-4760	dict	base.tsv
+idiom:腕を組む	組む	v5:규칙	sense	idiom	腕 を 組む	팔짱을 끼다	50	LEX-4760	dict	base.tsv
 idiom:腕を試す	試す	v5:하다	sense	idiom	腕 を 試す	실력을 시험하다	50	LEX-4760	dict	base.tsv
 idiom:腕を買われる	買われる	v1:규칙	sense	idiom	腕 を 買われる	실력을 인정받다	50	LEX-4760	dict	base.tsv
 idiom:腕首を取る	取る	v5:하다	sense	idiom	腕首 を 取る	아첨하다	50	LEX-4760	dict	base.tsv
@@ -2722,7 +2722,7 @@ idiom:腹をわる	わる	v5:규칙	sense	idiom	腹 を わる	본심을 털어�
 idiom:ハラを割る	割る	v5:규칙	sense	idiom	ハラ を 割る	본심을 털어놓다	50	LEX-4760	dict	words-variants.tsv
 idiom:火蓋をきる	きる	v5:규칙	sense	idiom	火蓋 を きる	시작되다	50	LEX-4760	dict	words-variants.tsv
 idiom:腹がすく	すく	v5:하다	sense	idiom	腹 が すく	헛헛하다	50	LEX-4760	dict	words-variants.tsv
-idiom:腕をくむ	くむ	v5:하다	sense	idiom	腕 を くむ	방관하다	50	LEX-4760	dict	words-variants.tsv
+idiom:腕をくむ	くむ	v5:규칙	sense	idiom	腕 を くむ	팔짱을 끼다	50	LEX-4760	dict	words-variants.tsv
 idiom:御目に掛ける	掛ける	v1:규칙	sense	idiom	御目 に 掛ける	보여 드리다	50	LEX-4760	dict	words-variants.tsv
 idiom:御目にかける	かける	v1:규칙	sense	idiom	御目 に かける	보여 드리다	50	LEX-4760	dict	words-variants.tsv
 idiom:小腰を屈める	屈める	v1:규칙	sense	idiom	小腰 を 屈める	허리를 좀 굽히다	50	LEX-4760	dict	words-variants.tsv

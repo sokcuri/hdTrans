@@ -619,6 +619,8 @@ constexpr NamedFeature kFeatures[] = {
          if (rest.empty() && it->tokenIndex >= 0 && next < f.w.tokens.size()) rest = f.w.tokens.Canonical(next);
          return !rest.empty() && RuneIn(text::DecodeRune(rest).cp, "。．.");
      }},
+    // Periods in a row follow the word and end the line or the quote (..., 。。。, ．．．, . . .): an ellipsis that trails off.
+    {"period-run-end", [](Flusher& f, const Item* it) { return PeriodRunEnd(f.w, it); }},
     // An ellipsis or a dash of mark.pause, or two ・ (· in the canonical text), follows the word (失礼な・・・, 生意気な…).
     {"pause-after",
      [](Flusher& f, const Item* it) {

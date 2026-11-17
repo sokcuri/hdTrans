@@ -26,7 +26,7 @@ normalize:dialect-cause	私は あの子を 信じてるだけですさかい｡
 normalize:dialect-cause	安心せえ チンタには黙っとくけぇ	has:테니까	fix	normalize
 normalize:dialect-cause	ゆうべ 夜中に大きな声がするさかい	어젯밤 한밤중에 큰 목소리가 들리니까	fix	normalize
 normalize:dialect-cause	おやじ どげんしたんな？ いつでも いいけん｡ はい｡	아버지 어떤 한 인? 언제든 좋으니까. 네.	fix	normalize
-normalize:dialect-cause	今日は岡安に用あるさかい 先行くで｡	오늘은 오카야스에 용 있으니까 선행으로.	fix	normalize
+normalize:dialect-cause	今日は岡安に用あるさかい 先行くで｡	has:먼저 갈	fix	normalize
 normalize:dialect-cause	だ… 出すけん く… 苦しか…	다… 내는 검… 괴로워…	fix	normalize
 normalize:dialect-cause	悪いけんど婿になど行けぬ。 まったくねずみには勝てぬ。	미안하지만 사위 따위에게 갈 수 없다. 완전히 쥐에는 이길수 없다.	fix	normalize
 normalize:dialect-cause	そんでも 浅牧村と日沢村辺りの 出来のいい藍葉は おおかた買い取ってきた… つもりだけんど｡	들어도 천마키무라와 히자와마을 근처의 됨됨이가 좋은 람엽은 대충 매입해 온… 작정이지만.	fix	normalize

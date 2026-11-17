@@ -2617,6 +2617,170 @@ Record* Worker::OverCutWord(std::string_view full, int cursor, int token, const 
     return nullptr;
 }
 
+// LEX-5810: a noun that swallows the start of a verb. Where the reading at a point is a noun (雨降り, 姿見, 私行) and
+// the hiragana after it is nothing a noun takes (no particle, copula, mark or form of する), and a verb read from a
+// kanji inside it runs past its end, the shorter reading that ends where that verb starts wins when
+// - the noun ends in a verb's continuative and ます follows, or, for a weather noun, anything that takes only a
+//   continuative (先行き + ますね, 雨降り + そう, 雨降り + ながら);
+// - the reading before the verb is a person pronoun (私行 + きます is 私 + 行きます);
+// - the reading before the verb ends in kanji, the verb stays inside the hiragana after the noun, and the noun and
+//   the words after it up to
+//   the verb's end are more words than the two of the split, or as many when the word after the noun is one kana of
+//   a verb ending (姿見 + た) or the noun is a name and no particle follows the verb (風吹 + いてますね).
+// After a particle the noun takes, only more words split, and only when no particle or end follows that particle (先行 +
+// って + て splits, 私立 + って and 勝ち負け + か + ねえ stay). A verb at the point reading as far as the noun goes first
+// (ずり落ちる), and a longer noun at the point (勢揃い), a person suffix, an honorific or a noun the next word reads on from
+// (本来 + ない, 夏休み + どう) keeps the noun.
+Record* Worker::OverSwallowedVerb(std::string_view full, int cursor, int token, const Item& c) {
+    if (c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb) return nullptr;
+    const Entry* lead = c.group->At(0);
+    if (lead == nullptr || !Has("IKNQ", std::string_view(&lead->cls, 1)) || !lead->code.starts_with('1')) return nullptr;
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    const int end = cursor + c.length;
+    const std::string_view rest = From(full, end);
+    const text::Rune next = text::DecodeRune(rest);
+    // The noun ends in the kana of a verb's continuative and what comes next only follows that continuative: the
+    // polite ます after any such noun (先行き + ますね is 先 + 行きますね), and after a weather noun (sem VFr) also the
+    // other followers of a continuative (雨降り + そう is 雨 + 降りそう). Other nouns keep their reading there
+    // (電池切れそう).
+    bool weather = false;
+    for (const Entry* e : c.group->entries) weather = weather || Has(e->attr, "VFr");
+    const bool stemTail = !text::IsKanji(text::DecodeRune(LastChar(source)).cp) &&
+                          (dict::StartsWithMember(HDTRANS_CLASS("follower.polite-masu"), rest) > 0 ||
+                           (weather && (dict::StartsWithMember(HDTRANS_CLASS("suffix.continuative"), rest) > 0 ||
+                                        dict::StartsWithMember(HDTRANS_CLASS("follower.continuative-only"), rest) > 0 ||
+                                        dict::StartsWithMember(HDTRANS_CLASS("follower.weather-continuative"), rest) > 0)));
+    if (text::RuneCount(source) < 2) return nullptr;
+    if (!stemTail && (next.cp < U'ぁ' || next.cp > U'ゖ' || NounEnd(rest) || Has("しさすせ", FirstChar(rest)) ||
+                      StartsWithHonorific(rest) || PersonSuffixAt(rest))) {
+        return nullptr;
+    }
+    // A particle or copula a noun takes (先行 + って, 勝ち負け + か) leaves the noun unless the split is fewer words.
+    const bool goesOn = !stemTail && NounGoesOn(snapshot, rest);
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // The longest reading at at, 0 for none; verb only counts verbs.
+    auto reach = [&](int at, bool verb) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w != nullptr && (!verb || (w->detail != nullptr && w->detail->cls == kDetailVerb))) longest = std::max(longest, w->length);
+        }
+        return longest;
+    };
+    // The shorter reading at cursor that ends at k; a verb at cursor that reads as far as the noun or further goes
+    // first (鉢合わせ + た is the verb 鉢合わせる, ずり落ち + そう the verb ずり落ちる).
+    auto shorterTo = [&](int k) -> Record* {
+        Record* verb = after(c.group->records);
+        for (int tries = 0; verb != nullptr && tries < 64; tries++, verb = after(verb->child)) {
+            const Item* w = InsertLateCandidate(full, cursor, token, verb);
+            if (w != nullptr && w->detail != nullptr && w->detail->cls == kDetailVerb && cursor + w->length >= end) return verb;
+        }
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head != nullptr && cursor + head->length == k) return shorter;
+        }
+        return nullptr;
+    };
+    // The reading at cursor that ends at k has the sem code: 雨 of 雨やみ and 風 of 風吹 are weather (VFr), 花 of 花咲
+    // a plant (QAL).
+    auto semTo = [&](int k, std::string_view code) {
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head == nullptr || cursor + head->length != k || head->group == nullptr) continue;
+            for (const Entry* e : head->group->entries) {
+                if (Has(e->attr, code)) return true;
+            }
+        }
+        return false;
+    };
+    // A longer noun at cursor takes the kana (勢揃 + いした is 勢揃い + した, 目覚 + めより 目覚め + より).
+    {
+        const Lookup l = DoLookup(From(full, cursor), kModeGeneral);
+        for (Record* r = l.count == 0 ? nullptr : after(l.records); r != nullptr; r = after(r->child)) {
+            if (NounRow(*r) && r->source.size() > source.size() && From(full, cursor).starts_with(r->source)) return nullptr;
+        }
+    }
+    for (std::size_t off = text::DecodeRune(source).size; off < source.size(); off += text::DecodeRune(source.substr(off)).size) {
+        if (!text::IsKanji(text::DecodeRune(source.substr(off)).cp)) continue;
+        const int k = cursor + static_cast<int>(off);
+        const int verbEnd = k + reach(k, true);
+        // The noun ends in the verb's continuative and what follows only follows that (雨降り + そう, 雨降り + ながら).
+        if (verbEnd >= end && stemTail) {
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        if (verbEnd <= end) continue;
+        // A person pronoun with no particle before a verb that runs past the noun is its subject (私行 + きます is 私 +
+        // 行きます, 私 + 行こうかな), but not before a particle the noun takes (私立 + って).
+        const std::string_view head = source.substr(0, off);
+        if (!goesOn && (dict::InClass(HDTRANS_CLASS("pronoun.speaker"), head) || dict::InClass(HDTRANS_CLASS("pronoun.listener"), head) ||
+                        dict::InClass(HDTRANS_CLASS("pronoun.third-person"), head))) {
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        // Past here the reading before the verb ends in kanji (肌 + 荒れちゃう; not 言い + 過ぎた), and the verb stays
+        // inside the hiragana after the noun (not the compound 角打 + ち見てる).
+        int runEnd = end;
+        while (runEnd < static_cast<int>(full.size())) {
+            const text::Rune r = text::DecodeRune(From(full, runEnd));
+            if (r.size == 0 || r.cp < U'ぁ' || r.cp > U'ゖ') break;
+            runEnd += static_cast<int>(r.size);
+        }
+        if (!text::IsKanji(text::DecodeRune(LastChar(head)).cp) || verbEnd > runEnd) continue;
+        // The words of the noun's reading up to the verb's end, by the longest word at each point; text no word
+        // reads counts one word a character.
+        int words = 1, at = end, first = 0;
+        while (at < verbEnd && words < 8) {
+            const int r = std::max(reach(at, false), static_cast<int>(text::DecodeRune(From(full, at)).size));
+            if (first == 0) first = r;
+            at += r;
+            words++;
+        }
+        const int split = at > verbEnd ? 3 : 2;
+        if (goesOn) {
+            // After the particle comes what no particle is followed by (先行って + て, キャラ変わって + ない), not a particle or
+            // the end (都会って + の, 勝ち負けか + ねえ).
+            // A noun that modifies a verb bare (先) splits before its て form too when the sentence ends there or kana
+            // that is no particle follows (先行って + 。, 先行って + ください; not 先行って + 何, 先行って + は), but not
+            // from a person (先生 + って).
+            const std::string_view tail = From(full, end + first);
+            const char32_t t0 = text::DecodeRune(tail).cp;
+            bool person = false;
+            for (const Entry* e : c.group->entries) person = person || Has(e->attr, "VHn");
+            const bool bare = !person && dict::InClass(HDTRANS_CLASS("noun.bare-adverb"), head) && verbEnd == end + first;
+            if (bare && !NounGoesOn(snapshot, tail) &&
+                (tail.empty() || RuneIn(t0, "。！!」』）)") || (t0 >= U'ぁ' && t0 <= U'ゖ'))) {
+                if (Record* shorter = shorterTo(k)) return shorter;
+                continue;
+            }
+            if (words <= split || NounEnd(tail) || NounGoesOn(snapshot, tail)) continue;
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        // As many words split when the word after a noun ending in kanji is one kana of a verb ending (姿見 + た; not
+        // 目覚 + め, 口封じ + て).
+        const bool oneKana = first == static_cast<int>(text::DecodeRune(rest).size) &&
+                             text::IsKanji(text::DecodeRune(LastChar(source)).cp) &&
+                             KeyLengths(snapshot, rest, dict::LookupMode::VerbEnding, 'S') != 0;
+        // A name splits too when its head is weather or a plant and what follows the verb is no particle (風吹 +
+        // いてますね, 花咲 + きますね; not 美咲 + いてる, 角落 + ち + くらい).
+        const std::string_view beyond = From(full, verbEnd);
+        const text::Rune b = text::DecodeRune(beyond);
+        const bool name = lead->code.starts_with("13") && (semTo(k, "VFr") || semTo(k, "QAL")) &&
+                          (b.cp < U'ぁ' || b.cp > U'ゖ' || (!NounEnd(beyond) && !NounGoesOn(snapshot, beyond)));
+        if (words < split || (words == split && !oneKana && !name)) continue;
+        if (Record* shorter = shorterTo(k)) return shorter;
+    }
+    return nullptr;
+}
+
 // The first base record of records that reads at full[cursor:] when a record ahead of it does
 // not and a longer noun row that it starts follows it; null otherwise (the first base record leads).
 const Record* Worker::ReadingLead(std::string_view full, int cursor, int token, Record* records) {
@@ -2868,6 +3032,10 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
         if (Record* shorter = OverCutWord(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverSwallowedVerb(full, cursor, token, *candidate)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }

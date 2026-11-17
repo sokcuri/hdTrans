@@ -1,0 +1,59 @@
+# 규칙: SPC-5
+rule	input	expected	kind	layer
+cx:ne-promise:35	あ、バス来ますね。	아, 버스 오네요.	fix	rewrites
+cx:ne-promise:35	ほら、もうすぐ花火上がりますね。	has:불꽃 오르네요	fix	rewrites
+cx:ne-promise:35	電車もうすぐ来ますね。	has:곧 오네요	fix	rewrites
+cx:ne-promise:35	船着きますね。	has:도착하네요	fix	rewrites
+cx:ne-promise:35	お湯沸きますね。	has:끓네요	fix	rewrites
+cx:ne-promise:35	バスきますね。	has:오네요	fix	rewrites
+cx:ne-promise:35	トイレ行きますね。	화장실 갈게요.	keep	rewrites
+cx:ne-promise:35	明日来ますね。	내일 올게요.	keep	rewrites
+cx:ne-promise:35	もうすぐ着きますね。	이제 곧 도착할게요.	keep	rewrites
+cx:ne-promise:35	先に行くね。	먼저 갈게.	keep	rewrites
+cx:ne-promise:35	あ、お湯が沸きますね。	아, 뜨거운 물이 끓네요.	keep	rewrites
+cx:saki-first:10	先帰るね。	먼저 돌아갈게.	fix	rewrites
+cx:saki-first:10	先行きますね。	has:먼저 갈게요	fix	rewrites
+cx:saki-first:10	この先行くと村がある。	lacks:먼저	keep	rewrites
+cx:ne-promise:35	バス、来ますね。	has:버스, 오네요	fix	rewrites
+cx:ne-promise:35	電車、来ましたね。	lacks:올게요	fix	rewrites
+cx:ne-promise:35	彼来ますね。	has:그 오네요	fix	rewrites
+cx:ne-promise:35	彼女行きますね。	has:가네요	fix	rewrites
+cx:ne-promise:35	先輩来ますね。	has:오네요	fix	rewrites
+cx:ne-promise:35	誰か来ますね。	has:누군가 오네요	fix	rewrites
+cx:ne-promise:35	お父さん帰ってきますね。	has:오네요	fix	rewrites
+cx:ne-promise:35	みんな来ますね。	has:오네요	fix	rewrites
+cx:ne-promise:35	雪積もりますね。	has:눈 쌓이네요	fix	rewrites
+cx:ne-promise:35	あ、月出ますね。	has:달 나오네요	fix	rewrites
+cx:ne-promise:35	ドア開きますね。	has:문 열리네요	fix	rewrites
+cx:ne-promise:35	先生、来ますね。	has:올게요	keep	rewrites
+cx:ne-promise:35	私来ますね。	has:올게요	keep	rewrites
+cx:ne-promise:35	僕来ますね。	has:올게요	keep	rewrites
+cx:ne-promise:35	俺行くね。	has:갈게	keep	rewrites
+cx:ne-promise:35	休みますね。	has:쉴게요	keep	rewrites
+cx:ne-promise:20	外出ますね。	has:나갈게요	keep	rewrites
+cx:saki-first:10	俺先行くね。	has:나 먼저 갈게	fix	rewrites
+cx:saki-first:10	じゃあ、俺先行くね。	has:먼저 갈게	fix	rewrites
+cx:saki-first:10	私先行きますね。	has:먼저 갈게요	fix	rewrites
+cx:saki-first:10	あたし先寝るね。	has:먼저 잘게	fix	rewrites
+cx:saki-first:10	先失礼します。	has:먼저 실례	fix	rewrites
+cx:saki-first:10	俺先失礼するわ。	has:먼저 실례	fix	rewrites
+cx:saki-first:10	先行ってください。	has:먼저 가	fix	rewrites
+cx:saki-first:10	先入って。	has:먼저 들어	fix	rewrites
+cx:saki-first:10	先日行った店。	lacks:먼저	keep	rewrites
+cx:saki-first:10	先行投資だ。	has:선행 투자	keep	rewrites
+cx:saki-first:10	先行って何？	lacks:먼저	keep	rewrites
+cx:saki-first:4	一歩先行く技術。	has:한 걸음 앞서	fix	rewrites
+cx:saki-first:4	三歩先行く。	has:앞서	fix	rewrites
+cx:saki-first:4	一歩先を行く。	!rule:cx:saki-first:4	keep	rewrites
+cx:saki-first:5	少し先行ったところ。	has:조금 앞서	fix	rewrites
+cx:saki-first:5	もう少し先行くと駅がある。	has:좀 더 앞서	fix	rewrites
+cx:saki-first:5	少し先に行った。	lacks:앞서	keep	rewrites
+cx:saki-first:5	ちょっと先行ってて。	has:먼저 가	keep	rewrites
+cx:suru-phrase:10	腕組みして立っていた。	has:팔짱을 껴	fix	rewrites
+cx:suru-phrase:10	腕組みして考える。	has:팔짱을 끼고	fix	rewrites
+cx:suru-phrase:10	腕組みしながら言った。	has:팔짱을 끼면서	fix	rewrites
+cx:suru-phrase:10	腕組みのまま立っていた。	lacks:끼	keep	rewrites
+cx:suru-phrase:15	腕組みしている。	has:팔짱을 끼고 있다	fix	rewrites
+cx:suru-phrase:15	腕組みを解いた。	lacks:끼	keep	rewrites
+cx:suru-phrase:20	腕組みをした。	has:팔짱을 꼈	fix	rewrites
+cx:suru-phrase:20	腕を組んだ。	has:팔짱을 꼈	keep	rewrites

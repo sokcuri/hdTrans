@@ -39,6 +39,8 @@
 //= verb.body-motion	Stems, matched at the end of a word, of verbs of moving or swinging a part of one's body or one's hair (揺らす, 振る, 傾げる): their て form before a verb of turning or looking in the same sentence is what one does meanwhile, -며 (髪を揺らして、こちらを向く 머리카락을 흔들며 이쪽을 향한다; spec GRM-4043).
 //= verb.turn-look	Stems, matched at the end of a word, of verbs of turning toward something or looking (向く, 振り向く, 見上げる) that a て form of verb.body-motion before them accompanies (spec GRM-4043).
 //= noun.rising-level	Amounts and levels that rise and fall (物価, 気温, 成績, 知名度): with one as its subject a verb before てくる or ていく is the change going on, not a motion compound, and is written apart (物価が上がってきた 물가가 올라 왔다; spec GRM-4031).
+//= noun.bare-adverb	Nouns that modify a verb with no particle, as an adverb: before the て form of a verb that a longer noun starts, with no particle after it, they split from that noun (先行って 먼저 가, 先入ってください 먼저 들어가 주세요; not 先行っては; spec LEX-5810).
+//= noun.celestial	Bodies in the sky that come out by themselves (月, 太陽, 星): one with no particle before 出る is its subject, so 出ますね observes, 나오네요, not a promise (月出ますね 달 나오네요; spec SPC-5).
 //= noun.weather-come	Weather that comes or falls (雨, 雪, 嵐, 台風): its だって before an act is the condition the act holds through, (이)가 와도 (雨だって行く 비가 와도 간다; spec GRM-3923).
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
 //= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
@@ -150,6 +152,8 @@
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.quoting-to	The と that quotes the katakana run before it, which leaves the run a sound (メキメキという, ゴロゴロと言う).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
+//= follower.continuative-only	What follows a verb's continuative and no noun without a particle, beside suffix.continuative: そう of seeming, ながら, やすい, にくい, づらい and たい (雨降りそう 비가 올 것 같다; spec LEX-5810).
+//= follower.weather-continuative	Starts of the second verb of a compound after the continuative of a weather noun (雨降り + 出した, 雪降り + 続いてる, 雨降り + やまない, 雨降り + しきる): the noun is the subject and the compound its verb (雨 + 降り出した 비가 내리기 시작했다; spec LEX-5810).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
@@ -541,6 +545,7 @@
 //= verb.chant-volitional	Sino-Japanese verb nouns of a spell or an oath whose せん is the literary volitional, not the old negative of する (浄化せん！, 顕現せん, 召喚せん); the negative reading skips them.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
+//= verb.self-moving	Dictionary forms of verbs that take no object, of something that comes, rises, falls, sounds or happens by itself (来る, 上がる, 降る, 沸く, 着く), not verbs of going somewhere that a speaker says of their own move with a bare place (お風呂行くね 목욕 갈게), and no kana spelling whose stem is one kana (やむ, なく): a noun right before one with no particle, or with only an adverb between, is its subject, so with ね it is observed, not promised by the speaker (バス来ますね 버스 오네요; spec SPC-5).
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
 //= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
@@ -1856,6 +1861,33 @@ follower.stem	なかっ
 follower.stem	は
 follower.stem	も
 follower.stem	に
+follower.continuative-only	そう
+follower.continuative-only	ながら
+follower.continuative-only	やすい
+follower.continuative-only	やすく
+follower.continuative-only	やすかっ
+follower.continuative-only	にくい
+follower.continuative-only	にくく
+follower.continuative-only	にくかっ
+follower.continuative-only	づらい
+follower.continuative-only	づらく
+follower.continuative-only	づらかっ
+follower.continuative-only	たい
+follower.continuative-only	たく
+follower.continuative-only	たかっ
+follower.weather-continuative	出
+follower.weather-continuative	だし
+follower.weather-continuative	だす
+follower.weather-continuative	続
+follower.weather-continuative	つづ
+follower.weather-continuative	止
+follower.weather-continuative	やま
+follower.weather-continuative	やみ
+follower.weather-continuative	やん
+follower.weather-continuative	やむ
+follower.weather-continuative	しき
+follower.weather-continuative	積
+follower.weather-continuative	つも
 
 follower.te-imperative	な
 follower.te-imperative	って
@@ -3725,6 +3757,7 @@ ko.adverb-noun	아주
 ko.adverb-noun	정말
 ko.adverb-noun	날마다
 ko.adverb-noun	해마다
+ko.adverb-noun	먼저
 
 ko.time-noun	오늘
 ko.time-noun	내일
@@ -7593,6 +7626,75 @@ verb.unwilled	疲れる
 verb.unwilled	晴れる
 verb.unwilled	曇る
 verb.unwilled	光る
+verb.self-moving	来る
+verb.self-moving	着く
+verb.self-moving	上がる
+verb.self-moving	降る
+verb.self-moving	落ちる
+verb.self-moving	止まる
+verb.self-moving	停まる
+verb.self-moving	止む
+verb.self-moving	動く
+verb.self-moving	沸く
+verb.self-moving	鳴る
+verb.self-moving	鳴く
+verb.self-moving	泣く
+verb.self-moving	吠える
+verb.self-moving	笑う
+verb.self-moving	咲く
+verb.self-moving	散る
+verb.self-moving	吹く
+verb.self-moving	光る
+verb.self-moving	揺れる
+verb.self-moving	遅れる
+verb.self-moving	届く
+verb.self-moving	始まる
+verb.self-moving	終わる
+verb.self-moving	晴れる
+verb.self-moving	曇る
+verb.self-moving	消える
+verb.self-moving	開く
+verb.self-moving	閉まる
+verb.self-moving	沈む
+verb.self-moving	流れる
+verb.self-moving	溢れる
+verb.self-moving	燃える
+verb.self-moving	倒れる
+verb.self-moving	集まる
+verb.self-moving	増える
+verb.self-moving	減る
+verb.self-moving	暮れる
+verb.self-moving	明ける
+verb.self-moving	生まれる
+verb.self-moving	膨らむ
+verb.self-moving	冷める
+verb.self-moving	溶ける
+verb.self-moving	積もる
+verb.self-moving	くる
+verb.self-moving	あがる
+verb.self-moving	おちる
+verb.self-moving	とまる
+verb.self-moving	うごく
+verb.self-moving	わらう
+verb.self-moving	ひかる
+verb.self-moving	ゆれる
+verb.self-moving	おくれる
+verb.self-moving	とどく
+verb.self-moving	はじまる
+verb.self-moving	おわる
+verb.self-moving	はれる
+verb.self-moving	くもる
+verb.self-moving	きえる
+verb.self-moving	しまる
+verb.self-moving	しずむ
+verb.self-moving	ながれる
+verb.self-moving	あふれる
+verb.self-moving	もえる
+verb.self-moving	たおれる
+verb.self-moving	あつまる
+verb.self-moving	ふえる
+verb.self-moving	うまれる
+verb.self-moving	とける
 verb.janai-state	あ
 verb.janai-state	有
 verb.janai-state	在
@@ -12453,6 +12555,7 @@ noun.test-score	落第点
 noun.test-score	高得点
 noun.test-score	最高点
 noun.test-score	平均点
+//= word.distance-ahead	Words of a distance right before a 先 with no particle that touches a verb, which make it a place ahead, 앞서 (一歩先行く 한 걸음 앞서 가는, 少し先行った 조금 앞서 간; spec SPC-5).
 //= word.degree-adverb	Adverbs of degree that an attribute test of a rule passes over to reach the collocation partner (ラーメン、めっちゃうまい 라면, 엄청 맛있다).
 word.degree-adverb	めっちゃ
 word.degree-adverb	めちゃ
@@ -12496,6 +12599,19 @@ word.degree-adverb	特に
 word.degree-adverb	すげえ
 word.degree-adverb	すげー
 word.degree-adverb	最高に
+word.distance-ahead	少し
+word.distance-ahead	もう少し
+word.distance-ahead	もうちょっと
+word.distance-ahead	一歩
+word.distance-ahead	二歩
+word.distance-ahead	三歩
+word.distance-ahead	数歩
+word.distance-ahead	半歩
+word.distance-ahead	歩
+word.distance-ahead	メートル
+word.distance-ahead	キロ
+word.distance-ahead	遥か
+word.distance-ahead	はるか
 word.archaic-person	拙者
 word.archaic-person	それがし
 word.archaic-person	わらわ
@@ -12958,6 +13074,17 @@ noun.weather-come	吹雪
 noun.weather-come	豪雨
 noun.weather-come	雷雨
 noun.weather-come	暴風雨
+noun.celestial	月
+noun.celestial	太陽
+noun.celestial	お日様
+noun.celestial	お日さま
+noun.celestial	お月様
+noun.celestial	お月さま
+noun.celestial	朝日
+noun.celestial	夕日
+noun.celestial	星
+noun.celestial	お星様
+noun.bare-adverb	先
 noun.time-ni	夜
 noun.time-ni	朝
 noun.time-ni	昼
