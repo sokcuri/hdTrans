@@ -1,0 +1,19 @@
+# 규칙: NUM-2, NUM-33
+rule	input	expected	kind	layer
+compose:number-label	1セット2セット3セット	1세트 2세트 3세트	fix	compose
+compose:number-label	1セット2セット	1세트 2세트	fix	compose
+compose:number-label	2セット3ゲーム	2세트 3게임	fix	compose
+compose:number-label	ワールド2ステージ5クリア	월드 2 스테이지 5 클리어	keep	compose
+compose:number-label	3ゲーム目	3게임째	keep	compose
+compose:number-label	5回復	has:5 회복	keep	compose
+analysis:kata-speech	セット2セット	lacks:셋와	fix	analysis
+analysis:kata-speech	オマエヲコロス	너를 죽인다	keep	analysis
+analysis:kata-speech	ワタシハ ニホンゴガ ワカリマセン	has:일본어를	keep	analysis
+compose:number-label	5ゲーム6ゲーム	5게임 6게임	fix	compose
+compose:number-label	5ゲーム6ゲーム目	5게임 6게임째	fix	compose
+compose:number-label	2セット3ゲームで	2세트 3게임에서	keep	compose
+compose:number-label	HPが1回復	HP가 1 회복	keep	compose
+compose:number-label	攻撃力が5アップ	공격력이 5업	keep	compose
+compose:number-label	キハ40‐1009デビュー9周年記念	키하 40‐1009 데뷔 9주년 기념	keep	compose
+compose:number-label	答えは5ページ3です	has:3입니다	keep	compose
+compose:number-label	残りは2ゲーム3です	has:3입니다	keep	compose

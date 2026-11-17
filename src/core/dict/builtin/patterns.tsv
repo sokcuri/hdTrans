@@ -1401,3 +1401,12 @@
 書いていたかのように	쓰고 있던 것처럼	pat
 書いていたかのような	쓰고 있던 것 같은	pat
 書いていたかのようだ	쓰고 있던 것 같다	pat
+
+// ちゃった, ちゃってる and their full forms before し give a reason, at the end or before 、: 버렸고 (食べちゃったし 먹어버렸고), not し read as
+// する; at the end of an utterance in quotes it is 버렸거든 (spec GRM-3770).
+書いちゃったし	써버렸고	pat
+書いてしまったし	써버렸고	pat
+書いちゃってるし	써버렸고	pat
+書いちゃっているし	써버렸고	pat
+書いてしまってるし	써버렸고	pat
+書いてしまっているし	써버렸고	pat

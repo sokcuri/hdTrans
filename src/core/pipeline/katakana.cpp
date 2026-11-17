@@ -469,7 +469,17 @@ std::vector<KataPiece> ReadRun(std::u32string_view kana, const LineContext& ctx,
         return {{0, kana.size(), PieceKind::Word, Morae(h), std::move(tags)}};
     }
     std::vector<KataPiece> p = SegmentRun(kana, h, at, ctx, snap);
-    if (p.size() == 2 && p[0].kind == PieceKind::Word && p[1].kind == PieceKind::Conj) return p;
+    if (p.size() == 2 && p[0].kind == PieceKind::Word && p[1].kind == PieceKind::Conj) {
+        // A stem of one kana or one that ends in っ must be a verb that conjugates into the rest: a
+        // loanword the dictionary has in katakana is no such stem and a stray ending (セット; コロス stays 殺す).
+        const std::string stem = ToHiragana(Utf8(kana.substr(p[0].from, p[0].to - p[0].from)));
+        const std::string rest = ToHiragana(Utf8(kana.substr(p[0].to)));
+        if (p[0].to - p[0].from > 1 && !stem.ends_with("っ")) return p;
+        for (const dict::Candidate& c : snap.RetrieveRecords(stem, dict::LookupMode::General)) {
+            const std::string_view part = c.codes != nullptr ? c.codes->partText : std::string_view();
+            if (part.size() == 4 && part[0] == 'M' && part[1] == '4' && ConjugatesWith(part[3] - '0', rest)) return p;
+        }
+    }
     return {};
 }
 

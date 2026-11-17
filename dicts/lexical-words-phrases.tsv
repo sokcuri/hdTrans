@@ -35,7 +35,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 傲然と	오만하게	E311			GN							words-phrases:32
 夜毎	밤마다	E311			GN							words-phrases:33
 水だまり	웅덩이	N110			GN							words-phrases:34
-お前んち	너희 집	N110			GN							words-phrases:35
+お前んち	너희 집	N110	VPl		GN							words-phrases:35
 お前ん家	너희 집	N110			GN							words-phrases:36
 一か所	한 곳	N110			GN							words-phrases:37
 大き目な	다소 큰	E0H0			GN							words-phrases:38
@@ -67,3 +67,51 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御構いなしに	상관없이	E311			GN							words-phrases:64
 夜毎に	밤마다	E311			GN							words-phrases:65
 足	발	N110	VBp		GN	7463	||1 &&2 P+1== "2**" S+2== "L踏"	조사를 사이에 두고 踏む가 뒤따르는 足는 밟는 데 쓰는 발이다.				words-phrases:66
+俺んち	우리 집	N110	VPl		GN							words-phrases:67
+おれんち	우리 집	N110	VPl		GN							words-phrases:68
+おいらんち	우리 집	N110	VPl		GN							words-phrases:69
+僕んち	우리 집	N110	VPl		GN							words-phrases:70
+ぼくんち	우리 집	N110	VPl		GN							words-phrases:71
+あたしんち	우리 집	N110	VPl		GN							words-phrases:72
+私んち	우리 집	N110	VPl		GN							words-phrases:73
+わたしんち	우리 집	N110	VPl		GN							words-phrases:74
+うちんち	우리 집	N110	VPl		GN							words-phrases:75
+あんたんち	너희 집	N110	VPl		GN							words-phrases:76
+君んち	너희 집	N110	VPl		GN							words-phrases:77
+きみんち	너희 집	N110	VPl		GN							words-phrases:78
+おまえんち	너희 집	N110	VPl		GN							words-phrases:79
+てめえんち	네놈 집	N110	VPl		GN							words-phrases:80
+あいつんち	그 녀석 집	N110	VPl		GN							words-phrases:81
+こいつんち	이 녀석 집	N110	VPl		GN							words-phrases:82
+そいつんち	그 녀석 집	N110	VPl		GN							words-phrases:83
+ばあちゃんち	할머니 집	N110	VPl		GN							words-phrases:84
+じいちゃんち	할아버지 집	N110	VPl		GN							words-phrases:85
+おじいちゃんち	할아버지 집	N110	VPl		GN							words-phrases:86
+おじさんち	아저씨네 집	N110	VPl		GN							words-phrases:110
+おばさんち	아줌마네 집	N110	VPl		GN							words-phrases:111
+おじいさんち	할아버지 집	N110	VPl		GN							words-phrases:112
+おばあさんち	할머니 집	N110	VPl		GN							words-phrases:113
+みんなんち	모두네 집	N110	VPl		GN							words-phrases:114
+人んち	남의 집	N110	VPl		GN							words-phrases:87
+ひとんち	남의 집	N110	VPl		GN							words-phrases:88
+他人んち	남의 집	N110	VPl		GN							words-phrases:89
+ヒビが入	금이 &A1@	M428		Dx	GN			ひびが入る의 가타카나 표기. 금이 가다(ヒビが入った 금이 갔다).				words-phrases:90
+ご存じのこと	아시는 바	N110			GN			ご存じのこと는 아시는 바다(ご存じのことと思います 아시는 바로 생각합니다).				words-phrases:91
+ご存知のこと	아시는 바	N110			GN			ご存じのこと는 아시는 바다(ご存じのことと思います 아시는 바로 생각합니다).				words-phrases:92
+御存じのこと	아시는 바	N110			GN			ご存じのこと는 아시는 바다(ご存じのことと思います 아시는 바로 생각합니다).				words-phrases:93
+御存知のこと	아시는 바	N110			GN			ご存じのこと는 아시는 바다(ご存じのことと思います 아시는 바로 생각합니다).				words-phrases:94
+ごぞんじのこと	아시는 바	N110			GN			ご存じのこと는 아시는 바다(ご存じのことと思います 아시는 바로 생각합니다).				words-phrases:95
+ご存じのはず	아실 것	C110			GN			ご存じのはず는 아실 것이다(ご存じのはずです 아실 것입니다).				words-phrases:96
+御存じのはず	아실 것	C110			GN			ご存じのはず는 아실 것이다(ご存じのはずです 아실 것입니다).				words-phrases:97
+御存知のはず	아실 것	C110			GN			ご存じのはず는 아실 것이다(ご存じのはずです 아실 것입니다).				words-phrases:98
+ごぞんじのはず	아실 것	C110			GN			ご存じのはず는 아실 것이다(ご存じのはずです 아실 것입니다).				words-phrases:99
+ご存じあ	모르&AE@	M428		Ma	GN			ご存じありません(모르십니다)의 어간. ご存じ 뒤의 ありません은 한 낱말이다(ご存じありませんか 모르십니까).				words-phrases:100
+ご存知あ	모르&AE@	M428		Ma	GN			ご存じありません(모르십니다)의 어간. ご存じ 뒤의 ありません은 한 낱말이다(ご存じありませんか 모르십니까).				words-phrases:101
+御存じあ	모르&AE@	M428		Ma	GN			ご存じありません(모르십니다)의 어간. ご存じ 뒤의 ありません은 한 낱말이다(ご存じありませんか 모르십니까).				words-phrases:102
+御存知あ	모르&AE@	M428		Ma	GN			ご存じありません(모르십니다)의 어간. ご存じ 뒤의 ありません은 한 낱말이다(ご存じありませんか 모르십니까).				words-phrases:103
+ごぞんじあ	모르&AE@	M428		Ma	GN			ご存じありません(모르십니다)의 어간. ご存じ 뒤의 ありません은 한 낱말이다(ご存じありませんか 모르십니까).				words-phrases:104
+ご存じあ	아시는 게 &M9@	M428		Ma	GN	13983	||2 S-1== "なにか" S-1== "何か"	目的어 없이 なにか 뒤의 ご存じありませんか는 아시는 게 없습니까다(なにかご存じありませんか 뭔가 아시는 게 없습니까).				words-phrases:105
+ご存知あ	아시는 게 &M9@	M428		Ma	GN	13984	||2 S-1== "なにか" S-1== "何か"	目的어 없이 なにか 뒤의 ご存じありませんか는 아시는 게 없습니까다(なにかご存じありませんか 뭔가 아시는 게 없습니까).				words-phrases:106
+御存じあ	아시는 게 &M9@	M428		Ma	GN	13985	||2 S-1== "なにか" S-1== "何か"	目的어 없이 なにか 뒤의 ご存じありませんか는 아시는 게 없습니까다(なにかご存じありませんか 뭔가 아시는 게 없습니까).				words-phrases:107
+御存知あ	아시는 게 &M9@	M428		Ma	GN	13986	||2 S-1== "なにか" S-1== "何か"	目的어 없이 なにか 뒤의 ご存じありませんか는 아시는 게 없습니까다(なにかご存じありませんか 뭔가 아시는 게 없습니까).				words-phrases:108
+ごぞんじあ	아시는 게 &M9@	M428		Ma	GN	13987	||2 S-1== "なにか" S-1== "何か"	目的어 없이 なにか 뒤의 ご存じありませんか는 아시는 게 없습니까다(なにかご存じありませんか 뭔가 아시는 게 없습니까).				words-phrases:109

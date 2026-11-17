@@ -1973,7 +1973,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 天下無敵	천하무적	N110			GN							i:1968
 雨天中止	우천 취소	A9D0			GN				llm			i:1969
 雨天延期	우천 연기	A9D0			GN				llm			i:1970
-恐れがあ	우려가 &HN@	M428			GN				llm			i:1971
+恐れがあ	우려가 &HN@	M428		Mi	GN				llm			i:1971
 希望に添	희망에 부응&AV@	M420			GN				llm			i:1972
 希望に沿	희망에 부응&AV@	M420			GN				llm			i:1973
 中心とな	주&C6@	M428		Dx	GN							i:1974

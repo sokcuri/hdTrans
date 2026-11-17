@@ -358,11 +358,33 @@ bool HangulWord(std::string_view s) {
     return true;
 }
 
+// Whether item n is a katakana word counted in a chain of numbers and katakana words, each number
+// starting the token right after the word before it (5ゲーム6ゲーム 5게임 6게임, 2セット3ゲーム 2세트 3게임;
+// NUM-33): a number before it, and after it a number with a katakana word, or before that number a
+// katakana word after a number (not 1009デビュー9周年).
+bool Adjoins(const std::vector<ResolvedItem>& items, int k);
+bool CountedInChain(const std::vector<ResolvedItem>& items, int n) {
+    const int size = static_cast<int>(items.size());
+    const auto katakana = [&](int k) {
+        return k >= 0 && k < size && tokenizer::Class(text::DecodeRune(items[k].surface).cp) == tokenizer::kClassKatakana;
+    };
+    const auto digit = [&](int k) {
+        if (k < 0 || k >= size) return false;
+        const char32_t r = text::DecodeRune(items[k].surface).cp;
+        return (r >= U'0' && r <= U'9') || (r >= U'０' && r <= U'９');
+    };
+    // Item k starts the token after the one of item k - 1.
+    const auto next = [&](int k) { return k > 0 && k < size && items[k].tokenIndex == items[k - 1].tokenIndex + 1 && items[k].offset == 0; };
+    if (!katakana(n) || !digit(n - 1) || !Adjoins(items, n)) return false;
+    if (digit(n + 1) && next(n + 1) && katakana(n + 2) && Adjoins(items, n + 2)) return true;
+    return next(n - 1) && katakana(n - 2) && digit(n - 3) && Adjoins(items, n - 2);
+}
+
 // Whether item n is a verbal noun that is the predicate: one with する after it, or one that
-// ends its word run (HPが1回復した, HPが1回復).
+// ends its word run (HPが1回復した, HPが1回復); a katakana word counted in a chain is none.
 bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
     if (!Contains(GAttr(items[n]), "Hd")) return false;
-    if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return true;
+    if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return !CountedInChain(items, n);
     return dict::StartsWithMember(HDTRANS_CLASS("suru.predicate-noun"), items[n + 1].surface) > 0;
 }
 
@@ -480,14 +502,17 @@ bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<Resol
             // (1ホーマー2ホーマー 1홈런 2홈런, 1ゴール2アシスト 1골 2어시스트).
             std::string wide(rest);
             for (int k = a.tokenIndex - 1; k >= 0 && text::RuneCount(wide) < 32; k--) wide.insert(0, tokens[k].text);
+            // Walk the chain of numbers and katakana words back: one that starts with a number counts
+            // (1セット2セット3セット 1세트 2세트 3세트), one that starts with a word labels (ワールド2ステージ5クリア).
             std::string_view run = wide;
-            while (tokenizer::Class(LastRune(run)) == tokenizer::kClassKatakana) run = DropLastRune(run);
-            // A number that is itself a label (ワールド2ステージ5クリア) leaves the word a label host.
-            if (digit(ascii(LastRune(run)))) {
+            for (;;) {
+                while (tokenizer::Class(LastRune(run)) == tokenizer::kClassKatakana) run = DropLastRune(run);
+                if (!digit(ascii(LastRune(run)))) break;
                 while (digit(ascii(LastRune(run))) || ascii(LastRune(run)) == U'.' || ascii(LastRune(run)) == U',')
                     run = DropLastRune(run);
                 const char32_t host = ascii(LastRune(run));
-                if (!latin(host) && tokenizer::Class(host) != tokenizer::kClassKatakana) return false;
+                if (latin(host)) break;
+                if (tokenizer::Class(host) != tokenizer::kClassKatakana) return false;
             }
         }
         return digit(r) || tokenizer::Class(r) == tokenizer::kClassKatakana;
