@@ -85,6 +85,9 @@ pack:kana-noun-senses:1	あめをたべる。	has:사탕을 먹는다	fix	packs
 pack:kana-noun-senses:1	君にあめをあげる。	has:사탕을 준다	fix	packs
 pack:kana-noun-senses:1	彼女はあめをくれた。	has:사탕을 주었다	fix	packs
 lookup:kana-noun-verb-spelling	空があめもようだ。	has:비 올 듯한	fix	lookup
+lookup:kana-noun-verb-spelling	いとこのかえる日だ。	has:돌아가는 날	keep	lookup
+lookup:kana-noun-verb-spelling	むすこのかえる家。	has:돌아가는	keep	lookup
+lookup:kana-noun-verb-spelling	このかえる道は長い。	has:돌아가는 길	keep	lookup
 pack:kana-noun-senses:2	かわをむく。	has:껍질을	fix	packs
 pack:kana-noun-senses:2	みかんのかわをむいた。	has:껍질을	fix	packs
 pack:kana-noun-senses:2	りんごのかわをむく。	has:껍질을	fix	packs

@@ -577,10 +577,21 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     if (!surface.ends_with(query)) return false;
     const std::string_view prev = LastChar(surface.substr(0, surface.size() - query.size()));
     const std::string_view pc = u.codes->partText;
-    // An adnominal that only a noun can follow (その, 大きな; LEX-5925).
-    const bool adnominal = pc.size() > 1 && pc[1] == '1' &&
-                           dict::EndsWithMember(HDTRANS_CLASS("word.adnominal-before-noun"),
-                                                surface.substr(0, surface.size() - query.size())) > 0;
+    // An adnominal that only a noun can follow (その, 大きな; LEX-5925), as a word of its own: it starts the line or
+    // follows a mark, a space, a kanji, a katakana or a particle after one (犬がそのかえるを), not the end of a kana
+    // word (いとこのかえる日 is いとこ, の and the verb).
+    bool adnominal = false;
+    if (pc.size() > 1 && pc[1] == '1') {
+        const std::string_view head = surface.substr(0, surface.size() - query.size());
+        const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("word.adnominal-before-noun"), head);
+        if (n > 0) {
+            const std::string_view lead_text = head.substr(0, head.size() - n);
+            const std::string_view lead = LastChar(lead_text);
+            adnominal = NameClassOf(lead) != kClassHiragana ||
+                        (Has(kKanaBefore, lead) &&
+                         NameClassOf(LastChar(lead_text.substr(0, lead_text.size() - lead.size()))) != kClassHiragana);
+        }
+    }
     switch (NameClassOf(prev)) {
     case kClassHiragana:
     case kClassKanji:
@@ -616,13 +627,16 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     // A noun whose spelling is also the dictionary form, or in two kana the continuative, of a verb reads as the noun
     // only before が, を, や or the で of a noun (かえるや 개구리나, つきを 달을): elsewhere it is the verb (いえにかえる。,
     // かえるだけ, つきにくい; LEX-5925).
-    // After an adnominal that only a noun follows it is the noun (そのかえるは 그 개구리는, あのつきは 저 달은).
+    // After an adnominal that only a noun follows it is the noun (そのかえるは 그 개구리는, あのつきは 저 달은) before a
+    // particle, a mark or the end; before a kanji or katakana noun it is the verb of a relative clause (このかえる道
+    // 이 돌아가는 길).
     if (pc.size() > 1 && pc[1] == '1' && VerbFormSpelling(u.key)) {
         // After the adnominal the key and the kana after it may be a word of their own, whose rules read the key
         // (このつきの光: つきの 付きの, whose rule gives 달).
         return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest) ||
-               (adnominal && (NameClassOf(next) != kClassHiragana ||
-                              snapshot.RetrieveRecords(u.key + std::string(next), dict::LookupMode::General).empty()));
+               (adnominal && (NameClassOf(next) == kClassOther ||
+                              (NameClassOf(next) == kClassHiragana &&
+                               snapshot.RetrieveRecords(u.key + std::string(next), dict::LookupMode::General).empty())));
     }
     switch (NameClassOf(next)) {
     case kClassHiragana:
