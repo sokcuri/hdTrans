@@ -23,8 +23,8 @@ HD_TEST(word_shorter_ending) {
         return out.empty() ? std::string() : out[0];
     };
     auto has = [](const std::string& s, std::string_view part) { return s.find(part) != std::string::npos; };
-    HD_CHECK(has(translate("読むのですぞ"), "읽는"));
-    HD_CHECK(has(translate("金がかかるのですぞ"), "드는"));
+    HD_CHECK(has(translate("読むのだぞ"), "읽는"));
+    HD_CHECK(has(translate("金がかかるのだぞ"), "드는"));
     HD_CHECK(has(translate("考えてみるとこれ"), "보면 이것"));
     HD_CHECK(has(translate("自分となるとこれは落ち着かない"), "되면 이것은"));
     HD_CHECK(has(translate("首を傾げるわたしを見て"), "갸웃하는"));

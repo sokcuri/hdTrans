@@ -81,6 +81,7 @@
 //= casual.ni-naru-stem	Adjectival nouns of dislike and failure whose になる is said んなる (嫌んなる, だめんなっちゃう), STEM or STEM=WRITTEN: before んな and a kana of なる, the に of becoming (spec LEX-5074).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
 //= copula.kansai-negative	The dictionary words of the Kansai ちゃう that is じゃない after a noun (マザコンちゃうわ 마더 콤플렉스 아니거든); after a verb the same kana are the contracted てしまう (やっちゃうね), and constraint chau-after-verb drops the word there.
+//= copula.kansai-past-noun	Nouns in kana said of something after which the Kansai やった is the past copula だった (ほんまやった 진짜였다, そうやった, だめやったら), not the verb やる with a dropped を; not a doer (あたしやったげる) nor an adverb (ようやった) (spec LEX-5996).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
@@ -1259,6 +1260,29 @@ copula.kansai-negative	ちゃうか
 copula.kansai-negative	ちゃうやろ
 copula.kansai-negative	ちゃいます
 copula.kansai-negative	ちゃいますか
+copula.kansai-past-noun	ほんま
+copula.kansai-past-noun	うそ
+copula.kansai-past-noun	ほんと
+copula.kansai-past-noun	ほんとう
+copula.kansai-past-noun	そう
+copula.kansai-past-noun	こと
+copula.kansai-past-noun	はず
+copula.kansai-past-noun	わけ
+copula.kansai-past-noun	みたい
+copula.kansai-past-noun	つもり
+copula.kansai-past-noun	まま
+copula.kansai-past-noun	きれい
+copula.kansai-past-noun	すてき
+copula.kansai-past-noun	だめ
+copula.kansai-past-noun	いや
+copula.kansai-past-noun	すき
+copula.kansai-past-noun	きらい
+copula.kansai-past-noun	へん
+copula.kansai-past-noun	たいへん
+copula.kansai-past-noun	じょうず
+copula.kansai-past-noun	へた
+copula.kansai-past-noun	あほ
+copula.kansai-past-noun	ばか
 
 ko-noun.cp-danghada	해고
 ko-noun.cp-danghada	퇴학

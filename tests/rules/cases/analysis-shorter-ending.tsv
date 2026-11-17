@@ -7,10 +7,10 @@ analysis:shorter-ending	野分、どこ？助けてよ！嫌…沈むのだけ�
 analysis:shorter-ending	激しく頭を振り、座布団を強く握りしめるのぞみ。	has:움켜쥐는	fix	analysis
 analysis:shorter-ending	思わず口をついて出た褒め言葉に、大まじめに反応するのぞみ。	has:반응하는	fix	analysis
 analysis:shorter-ending	涙声で訴えるのぞみ。	has:호소하는	fix	analysis
-analysis:shorter-ending	我が『驚嘆祝祭部』の活動には金がかかるのですぞ！	우리 『경탄 축제부』 활동에는 돈이 드는 것이지!	fix	analysis
-analysis:shorter-ending	「頑張るのですぞっ！」	「노력하는 거지!」	fix	analysis
-analysis:shorter-ending	「発表されたのですぞ！　東雲皐月のマニフェストが！」	「발표된 거지! 시노노메 사츠키의 마니페스트가!」	fix	analysis
-analysis:shorter-ending	読むのですぞ	읽는 것이지	fix	analysis
+analysis:shorter-ending	我が『驚嘆祝祭部』の活動には金がかかるのですぞ！	우리 『경탄 축제부』 활동에는 돈이 듭니다!	fix	analysis
+analysis:shorter-ending	「頑張るのですぞっ！」	has:노력합니다	fix	analysis
+analysis:shorter-ending	「発表されたのですぞ！　東雲皐月のマニフェストが！」	has:발표됐습니다	fix	analysis
+analysis:shorter-ending	読むのですぞ	읽습니다	fix	analysis
 analysis:shorter-ending	⟨するとここで…⟩	⟨하면 여기서…⟩	fix	analysis
 analysis:shorter-ending	いろんな観光地で乗ったけどもう張ってあったからね｡	여러 가지 관광지에서 탔지만 이미 쳐 두었으니까.	fix	analysis
 analysis:shorter-ending	普通に焼いたのより何倍も香ばしい｡	그냥 구운 것보다 몇 배나 고소하다.	fix	analysis
