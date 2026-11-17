@@ -38,6 +38,9 @@ struct RunLookup {
     // The length in bytes of the longest key of the dictionary that text starts with (NormalizeForms: が of
     // か゛んばれ against か); null for none.
     size_t (*keyReach)(const void* context, std::string_view text) = nullptr;
+    // Whether text, whole, is a key read as a pronoun (NormalizeForms: それ of それて゛す is no stem of それる);
+    // null for none.
+    bool (*pronoun)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

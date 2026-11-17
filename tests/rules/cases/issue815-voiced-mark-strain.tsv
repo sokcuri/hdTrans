@@ -65,3 +65,25 @@ normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ�
 normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ゛です	has:보라゛	keep	normalize
 normalize:voiced-mark	映画の゛ローマの休日゛を見た	영화의゛로마의 휴일゛을 보았다	keep	normalize
 normalize:voiced-mark	彼は゛正義の味方゛と呼ばれた	그는゛정의의 아군゛으로 불렸다	keep	normalize
+normalize:voiced-mark	それて゛す。	그것입니다.	fix	normalize
+normalize:voiced-mark	あれて゛す。	저것입니다.	fix	normalize
+normalize:voiced-mark	それて゛しょう？	그것이죠?	fix	normalize
+normalize:voiced-mark	それた゛！	그거야!	fix	normalize
+normalize:voiced-mark	それた゛よね	그것이지	fix	normalize
+normalize:voiced-mark	あれた゛よ	저것이야	fix	normalize
+normalize:voiced-mark	「それて゛いいの？」	「그거면 되는 거야?」	fix	normalize
+normalize:voiced-mark	たすけて゛ください	살려 주세요	fix	normalize
+normalize:voiced-mark	まって゛！	기다려!	fix	normalize
+normalize:voiced-mark	やめた゛	그만두었다	keep	normalize
+normalize:voiced-mark	ん゛ッ！ん゛んんッッ！！んじゅぶぶぶッ！	lacks:゛	fix	normalize
+normalize:voiced-mark	ん゛んッ、ん゛ッ、ん゛んんッッ―！	lacks:゛	fix	normalize
+normalize:voiced-mark	あ゛痛いよ゛！	lacks:゛	fix	normalize
+normalize:voiced-mark	え゛司令官、助けて゛！	lacks:゛	fix	normalize
+normalize:voiced-mark	映画゛タイタニック゛は名作だ	영화゛타이타닉゛은 명작이다	keep	normalize
+normalize:voiced-mark	゛モーロック゛って何？	has:゛모로크゛	keep	normalize
+normalize:voiced-mark	う゛―― 集中できない	으―― 집중할 수 없다	fix	normalize
+normalize:voiced-mark	うﾞ―― 私には無理ぃ	으―― 나에게는 무리	fix	normalize
+normalize:voiced-mark	う゛─ん	으─응	fix	normalize
+normalize:voiced-mark	あ゛――っ	아――	fix	normalize
+normalize:voiced-mark	や゛め゛て゛――！	그만해――!	fix	normalize
+normalize:voiced-mark	ヽ(´∀`)ノ゜.	has:゜	keep	normalize

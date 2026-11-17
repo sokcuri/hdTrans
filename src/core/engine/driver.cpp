@@ -522,6 +522,20 @@ size_t KeyReach(const void* context, std::string_view text) {
     return reach;
 }
 
+// Whether text, whole, is a key read as a pronoun (class 1, subclass 2: これ, あれ, あなた), names left out
+// (pipeline::RunLookup::pronoun).
+bool PronounIs(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const dict::Candidates found = Find(d, text);
+    for (const dict::Candidate& c : found.list) {
+        const bool name = c.user != nullptr && !found.names.empty() && c.user >= found.names.data() &&
+                          c.user < found.names.data() + found.names.size();
+        if (!name && c.source == text && c.codes != nullptr && c.codes->part.ClassDigit() == '1' && c.codes->part.Sub() == '2')
+            return true;
+    }
+    return false;
+}
+
 // Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
 bool AdjectiveStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -1253,7 +1267,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
-                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach}),
+                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach,
+                                 options.reference ? nullptr : PronounIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
