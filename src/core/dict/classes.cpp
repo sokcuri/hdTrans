@@ -98,13 +98,13 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
             } else if (!byName.emplace(set, t.classes.size()).second) {
                 fail(number, "a second doc line for " + std::string(set));
             } else {
-                t.classes.push_back({set, doc, {}, {}, {}, {}});
+                t.classes.push_back({set, doc, {}, {}, {}, {}, {}});
             }
             continue;
         }
         if (line.starts_with("//")) continue;
         const auto [set, rest] = Cut(line);
-        const std::string_view member = Cut(rest).first;
+        const auto [member, note] = Cut(rest);
         if (set.empty() || member.empty() || Trailing(member)) {
             fail(number, "a row is SET <TAB> MEMBER, the member neither empty nor ending in a space");
             continue;
@@ -120,6 +120,7 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
             continue;
         }
         c.members.push_back(member);
+        c.notes.push_back(Cut(note).first);
     }
     for (WordClass& c : t.classes) {
         if (c.members.empty()) fail(0, "no rows for the set " + std::string(c.name));
@@ -192,6 +193,11 @@ bool InClass(std::string_view set, std::string_view surface) { return InClass(Cl
 std::span<const std::string_view> ClassMembers(ClassId set) {
     if (set.data == nullptr) return {};
     return set.data->members;
+}
+
+std::span<const std::string_view> ClassNotes(ClassId set) {
+    if (set.data == nullptr) return {};
+    return set.data->notes;
 }
 
 bool InClassRune(ClassId set, char32_t cp) { return set.data != nullptr && internal::RuneMember(*set.data, cp); }
