@@ -65,7 +65,7 @@ dict:jisjk:364499	マスコミとかで話す	rule:dict:jisjk:364499=등에서	c
 dict:jisjk:373336	今度友達と旅行に行きます。	rule:dict:jisjk:373336=이번에	current	local
 dict:jisjk:373524	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local-ending
 dict:jisjk:373549	天気がよくなくて残念だ。	날씨가 좋지 않아 유감이다.	current	local-ending
-dict:jisjk:4209	兄より弟の方が背が高い。	rule:dict:jisjk:4209=보다	current	local
+dict:jisjk:4209	兄より弟の方が背が高い。	has:형보다	keep	local
 dict:jisjk:342560	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
 dict:jisjk:374896	彼とのことは忘れた	rule:dict:jisjk:374896=(와)과의 일	current	local
 dict:jisjk:375007	ステンレス流しを買う。	rule:dict:jisjk:375007=흘려 보내기	current	local

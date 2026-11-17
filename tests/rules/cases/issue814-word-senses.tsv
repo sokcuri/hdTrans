@@ -1,0 +1,97 @@
+# 규칙: LEX-5850, LEX-5851, LEX-5852, LEX-5853, LEX-5854, LEX-5855, LEX-5856, LEX-5857
+rule	input	expected	kind	layer
+pack:糸を引く#4b	納豆が糸を引いている。	has:실처럼 늘어지고	fix	packs
+pack:糸を引く#2	チーズが糸を引いて伸びた。	has:실처럼 늘어났다	fix	packs
+pack:糸を引く#2a	蜂蜜が糸を引いて垂れた。	has:실처럼 늘어져	fix	packs
+pack:糸を引く#4b	愛液がツゥと糸を引く。	has:실처럼 늘어진다	fix	packs
+pack:糸を引く#4c	温めると糸を引くチーズ。	has:실처럼 늘어지는 치즈	fix	packs
+pack:糸を引く#4d	糸を引くほど粘る。	has:실처럼 늘어지는 만큼	fix	packs
+pack:糸を引く#4d	糸を引くくらいネバネバだ。	has:실처럼 늘어질 정도로	fix	packs
+pack:糸を引く#6a	納豆の糸を引く。	lacks:조종	fix	packs
+pack:糸を引く#1	黒幕が裏で糸を引いている。	has:흑막이 뒤에서 조종하고 있다	fix	packs
+pack:糸を引く#1	彼が裏で糸を引いていた。	has:그가 뒤에서 조종하고	fix	packs
+pack:糸を引く#7	誰が糸を引いているんだ？	has:배후에서 조종하고	keep	packs
+pack:糸を引く#7	糸を引いている人物がいる。	has:배후에서 조종하고 있는 인물	keep	packs
+pack:皮をかぶる#1	羊の皮をかぶった狼だ。	양의 탈을 쓴 늑대다.	fix	packs
+pack:皮をかぶる#2	羊の皮を被った狼。	has:양의 탈을 쓴 늑대	fix	packs
+pack:皮をかぶる#1	羊の皮をかぶっていた。	has:양의 탈을 쓰고 있었다	fix	packs
+dict:w:35504	このバナナはまだ皮をかぶっている。	has:껍질에 싸여 있다	fix	local
+dict:w:35504	皮をかぶった栗。	has:껍질에 싸인 밤	fix	local
+dict:w:35504	猫をかぶっている。	has:내숭을 떨고	keep	lookup
+pack:verb-object-senses:814-102	杭を地面に叩き込む。	has:말뚝을 땅에 박아 넣는다	fix	packs
+pack:verb-object-senses:814-102	杭を叩き込んで固定した。	has:박아 넣어	fix	packs
+pack:verb-object-senses:814-101	パンチを叩き込む。	has:펀치를 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-101	ヒット確認と同時に続けて連続攻撃を叩き込むッ！	has:연속 공격을 꽂아 넣	fix	packs
+pack:verb-object-senses:814-101	と同時に、カウンターを叩き込む。	has:카운터를 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-101	頷いたコヨイは、そのまま打撃を叩き込んできた。	has:타격을 꽂아 넣어	fix	packs
+pack:verb-object-senses:814-104	翻って大太刀の柄頭で大魔神の腹に叩き込む。	has:배에 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-103	ボールをゴールに叩き込んだ！	has:골에 꽂아 넣었다	fix	packs
+pack:verb-object-senses:814-105	奴を牢屋に叩き込め。	has:감옥에 처넣어라	fix	packs
+pack:verb-object-senses:814-101	新人に基本を叩き込む。	신인에게 기본을 주입한다.	keep	lookup
+pack:verb-object-senses:814-101	頭に叩き込んでおけ。	머리에 주입해 두어라.	keep	lookup
+pack:verb-object-senses:814-106	釘を壁に打ち込んだ。	has:못을 벽에 박았다	fix	packs
+pack:verb-object-senses:814-107	イスカは我を忘れたように斬撃を打ち込む。	has:참격을 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-107	次こそ、必殺の一撃を俺に打ち込むつもりなのだろう。	has:일격을 나에게 꽂아 넣을	fix	packs
+pack:verb-object-senses:814-107	罵るアールに、エルが打撃を打ち込む。	has:타격을 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-108	弾丸を打ち込んだ。	has:탄환을 박아 넣었다	fix	packs
+pack:verb-object-senses:814-110	文字を打ち込む。	has:문자를 입력한다	fix	packs
+pack:verb-object-senses:814-110	コマンドを打ち込んだ。	has:커맨드를 입력했다	keep	packs
+pack:verb-object-senses:814-111	スマホに打ち込む。	has:스마트폰에 입력한다	keep	packs
+pack:verb-object-senses:814-112	練習に打ち込んでいる。	has:연습에 몰두하고 있다	fix	packs
+pack:verb-object-senses:814-112	仕事に打ち込む。	has:일에 몰두한다	keep	packs
+pack:verb-object-senses:814-113	最近かなり打ち込んでる。	has:몰두하고 있다	fix	packs
+pack:verb-object-senses:814-118	打ち込める趣味がない。	has:몰두할 수 있는 취미	fix	packs
+pack:verb-object-senses:814-117	水をかぶった。	has:물을 뒤집어썼다	fix	packs
+pack:verb-object-senses:814-117	罪をかぶった。	has:죄를 뒤집어썼다	fix	packs
+pack:verb-object-senses:814-117	汚名をかぶった。	has:오명을 뒤집어썼다	fix	packs
+pack:verb-object-senses:814-117	布団をかぶって寝た。	has:이불을 뒤집어써	fix	packs
+pack:verb-object-senses:814-117	帽子をかぶった。	모자를 썼다.	keep	lookup
+pack:verb-object-senses:814-117	フードを被った男。	has:후드를 쓴 남자	keep	lookup
+pack:verb-object-senses:814-117	ヘルメットをかぶれ。	has:헬멧을 써라	keep	lookup
+dict:issue814:1	眠気が勝る。	has:졸음이 앞선다	fix	local
+dict:issue814:1	眠気が勝るな…	has:졸음이 앞서는구나	fix	local
+pack:勝る#1	不安が期待に勝る。	has:불안이 기대보다 앞선다	fix	local
+pack:勝る#2	体格に勝る相手だ。	has:체격에서 앞서는 상대	fix	local
+pack:勝る#7	何物にも勝る喜びだ。	has:무엇보다도 앞서는 기쁨	fix	local
+pack:勝る#1	愛は全てに勝ります。	has:모두보다 앞섭니다	fix	packs
+pack:勝る#1	相手に勝る点がない。	has:상대보다 앞서는 점	fix	packs
+pack:勝る#1n	彼の実力は師匠にも勝らない。	has:앞서지 않는다	fix	packs
+pack:勝る#1n	彼に勝ろうとした。	has:그보다 앞서려고	fix	packs
+pack:勝る#2	数に勝る敵に囲まれた。	has:수에서 앞서는 적	fix	packs
+pack:勝る#2	人数に勝る敵軍。	has:인원수에서 앞서는 적군	fix	packs
+pack:勝る#1	経験に勝るものはない。	has:경험보다 앞서는 것은 없다	fix	packs
+dict:jisjk:201711	彼の努力は才能にまさる。	has:재능보다 앞선다	fix	local
+dict:jisjk:201711	努力にまされば勝てる。	has:노력보다 앞서면	fix	local
+dict:jisjk:93766	選挙に勝ったら減税する。	has:선거에 이기면	keep	local
+dict:jisjk:93766	ゲームに勝ったらおやつね。	has:게임에 이기면	keep	local
+dict:jisjk:93766	試合に勝ってる。	has:시합에 이기고 있다	keep	local
+dict:jisjk:93766	試合に勝とう！	has:시합에 이기자	keep	local
+dict:jisjk:93766	試合に勝たないと意味がない。	has:시합에 이기지 않으면	keep	local
+dict:jisjk:93766	試合に勝てば優勝だ。	has:시합에 이기면	keep	local
+dict:jisjk:93766	敵に勝っちゃった。	has:적을 이겨버렸다	keep	local
+dict:jisjk:93766	試合に勝つために練習した。	has:시합에 이기기 위해	keep	local
+pack:勝る#3a	健康に勝るものはない。	has:건강보다 앞서는 것은 없다	fix	packs
+pack:勝る#6	聞きしに勝る美しさだ。	has:듣던 것 이상인 아름다움	fix	packs
+pack:勝る#4	田中少将の指揮に勝るとも劣らないね。	has:지휘에 뒤지지 않네	fix	packs
+pack:勝る#5	勝るとも劣らない。	has:뒤지지 않는다	fix	packs
+dict:jisjk:93767	実力では彼が勝る。	실력으로는 그가 우수하다.	keep	local
+dict:jisjk:93767	数で勝る敵に挑む。	has:수로 우수한 적	keep	local
+dict:jisjk:93766	彼に勝った。	그를 이겼다.	keep	local
+dict:jisjk:93766	試合に勝つ。	has:시합에 이긴다	keep	local
+dict:jisjk:374562	彼の方が速い。	has:그가 빠르다	fix	lookup
+dict:jisjk:374562	彼の方が先に来た。	has:그가 먼저 왔다	fix	lookup
+dict:jisjk:4209	僕より彼の方が上手だ。	has:나보다 그가	fix	lookup
+dict:jisjk:4209	東京より大阪の方が近い。	has:도쿄보다 오사카가	fix	lookup
+dict:jisjk:374562	見たことの方が多い。	lacks:것편이	fix	lookup
+dict:jisjk:374562	彼女の方が背が高い。	has:그녀가 키가 크다	keep	lookup
+dict:jisjk:374562	兄の方が背が高い。	has:형이 키가 크다	keep	lookup
+dict:jisjk:4209	昨日より寒い。	어제보다 춥다.	keep	lookup
+dict:jisjk:116375	狼の群れが現れた。	has:늑대	fix	lookup
+dict:jisjk:264636	「ソックスだね！」	has:삭스	fix	lookup
+dict:jisjk:132233	ハイソックスを履く。	has:하이삭스	fix	lookup
+dict:jisjk:46755	グローブをはめた。	has:글러브	fix	lookup
+dict:jisjk:116628	ガーターベルトを着ける。	lacks:가타	fix	lookup
+pack:verb-object-senses:814-122	メッセージ打ち込んでる。	has:입력하고	fix	packs
+pack:verb-object-senses:814-122	10秒で打ち込める。	has:입력할 수	keep	packs
+pack:verb-object-senses:814-121	「愛してる」と打ち込んで見せた。	has:라고 입력해 보였다	fix	packs
+pack:verb-object-senses:814-121	携帯画面に「好き」と打ち込んだ。	has:라고 입력했다	fix	packs

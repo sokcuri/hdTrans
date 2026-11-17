@@ -112,3 +112,5 @@ class	parent
 @filing	@document
 @submission	@document
 @bill	@money
+@spike	@tool
+@amount	@abstract

@@ -76,6 +76,7 @@ struct Colloc {
     std::vector<std::string> befores;  // the spellings of the pattern before the slot (all of it without one)
     std::string after;                 // the pattern after the slot
     bool slot = false;
+    bool godan = false;              // pos v5: the head verb reads only the forms of its final's row
     bool spaced = false;             // the target has a space right after {X}
     std::string slotClass;           // @class of the slot, "" for any noun
     std::string lead, particle;      // Korean before the slot's, and the particle after it (0.7.x notation)

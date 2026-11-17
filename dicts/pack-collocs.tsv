@@ -76,3 +76,29 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 通す/とおす/v5#1	sense	通す/とおす/v5	v5	colloc	目を通す|目は通す		훑어보다	70	LEX-4907	corpus	目を通す → 훑어보다
 立てる/たてる/v1#5007	sense	立てる/たてる/v1	v1:ㄷ	colloc	お伺いを立てる|伺いを立てる|おうかがいを立てる		의향을 묻다	70	LEX-5007	hand	お伺いを立てる → 의향을 묻다
 浮かす/うかす/v5#5232	sense	浮かす/うかす/v5	v5	colloc	熱に浮かされ		열에 들뜨다	70	LEX-5232	hand	熱に浮かされる → 열에 들뜨다
+糸を引く#1	sense	引く/ひく/v5	v5	colloc	裏で糸を引く|陰で糸を引く|背後で糸を引く|影で糸を引く|後ろで糸を引く|裏で糸をひく|陰で糸をひく|背後で糸をひく|かげで糸を引く		뒤에서 조종하다	80	LEX-5850	issue	黒幕が裏で糸を引いている 흑막이 뒤에서 조종하고 있다
+糸を引く#2	sense	引く/ひく/v5	v5	colloc	糸を引いて伸びる|糸をひいて伸びる		실처럼 늘어나다	80	LEX-5850	issue	チーズが糸を引いて伸びた 치즈가 실처럼 늘어났다
+糸を引く#2a	sense	引く/ひく/v5	v5	colloc	糸を引いて垂れる|糸をひいて垂れる		실처럼 늘어져 떨어지다	80	LEX-5850	issue	蜂蜜が糸を引いて垂れた 벌꿀이 실처럼 늘어져 떨어졌다
+糸を引く#4b	sense	引く/ひく/v5	v5	colloc	糸を引く|糸をひく	subj=@food|@liquid|@body.output|@body	실처럼 늘어지다	78	LEX-5850	issue	納豆が糸を引いている 낫토가 실처럼 늘어지고 있다
+糸を引く#4c	sense	引く/ひく/v5	v5	colloc	糸を引く|糸をひく	head=@food|@liquid|@body.output|@body	실처럼 늘어지다	78	LEX-5850	issue	糸を引いたチーズ 실처럼 늘어진 치즈
+糸を引く#4d	sense	引く/ひく/v5	v5	colloc	糸を引くほど|糸をひくほど|糸を引くくらい|糸を引くぐらい|糸をひくくらい|糸をひくぐらい		실처럼 늘어지다	78	LEX-5850	issue	糸を引くほど粘る 실처럼 늘어질 만큼 끈적하다
+糸を引く#5	sense	引く/ひく/v5	v5	colloc	{X}の糸を引く		{X}의 실을 당기다	75	LEX-5850	issue	凧の糸を引いた 연의 실을 당겼다
+糸を引く#6	sense	引く/ひく/v5	v5	colloc	{X:@body.output}の糸を引く		{X}이 실처럼 늘어지다	80	LEX-5850	issue	唾液の糸を引く 침이 실처럼 늘어진다
+糸を引く#6a	sense	引く/ひく/v5	v5	colloc	{X:@food}の糸を引く		{X}이 실처럼 늘어지다	80	LEX-5850	issue	納豆の糸を引く 낫토가 실처럼 늘어진다
+糸を引く#6b	sense	引く/ひく/v5	v5	colloc	{X:@liquid}の糸を引く		{X}이 실처럼 늘어지다	80	LEX-5850	issue	納豆の糸を引く 낫토가 실처럼 늘어진다
+糸を引く#7	sense	引く/ひく/v5	v5	colloc	糸を引く|糸をひく		배후에서 조종하다	70	LEX-5850	issue	彼が糸を引いていた 그가 배후에서 조종하고 있었다
+勝る#3a	sense	勝る/まさる/v5	v5	colloc	健康に勝る|健康にまさる	form=-	건강보다 앞서다	80	LEX-5853	issue	健康に勝るものはない 건강보다 앞서는 것은 없다
+勝る#3an	sense	勝る/まさる/v5	v5	colloc	健康に勝る|健康にまさる	form=neg|vol|attr|adv	건강보다 앞서다	80	LEX-5853	issue	健康に勝るものはない 건강보다 앞서는 것은 없다
+勝る#1	sense	勝る/まさる/v5	v5	colloc	{X}に勝る	form=-	{X}보다 앞서다	78	LEX-5853	issue	不安が期待に勝る 불안이 기대보다 앞선다
+勝る#1n	sense	勝る/まさる/v5	v5	colloc	{X}に勝る	form=neg|vol|attr|adv	{X}보다 앞서다	78	LEX-5853	issue	不安が期待に勝る 불안이 기대보다 앞선다
+勝る#2	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	form=-	{X}에서 앞서다	80	LEX-5853	issue	人数に勝る 인원수에서 앞선다
+勝る#2n	sense	勝る/まさる/v5	v5	colloc	{X:@amount}に勝る	form=neg|vol|attr|adv	{X}에서 앞서다	80	LEX-5853	issue	人数に勝る 인원수에서 앞선다
+勝る#7	sense	勝る/まさる/v5	v5	colloc	{X}にも勝る	form=-	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
+勝る#7k	sense	勝る/まさる/v5	v5	colloc	{X}にもまさる	form=-	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
+勝る#7n	sense	勝る/まさる/v5	v5	colloc	{X}にも勝る	form=neg|vol|attr|adv	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
+勝る#7nk	sense	勝る/まさる/v5	v5	colloc	{X}にもまさる	form=neg|vol|attr|adv	{X}보다도 앞서다	80	LEX-5853	issue	何物にも勝る 무엇보다도 앞선다
+勝る#4	sense	劣る/おとる/v5	v5	colloc	{X}に勝るとも劣る		{X}에 뒤지다	80	LEX-5853	issue	彼に勝るとも劣らない 그에 뒤지지 않는다
+勝る#5	sense	劣る/おとる/v5	v5	colloc	勝るとも劣る		뒤지다	70	LEX-5853	issue	能力は勝るとも劣らない 능력은 뒤지지 않는다
+勝る#6	sense	勝る/まさる/v5	v5:이다	colloc	聞きしに勝る		듣던 것 이상이다	80	LEX-5853	issue	聞きしに勝る美しさ 듣던 것 이상인 아름다움
+皮をかぶる#1	sense	かぶる/かぶる/v5	v5	colloc	{X}の皮をかぶる		{X}의 탈을 쓰다	80	LEX-5855	issue	羊の皮をかぶった狼 양의 탈을 쓴 늑대
+皮をかぶる#2	sense	被る/かぶる/v5	v5	colloc	{X}の皮を被る		{X}의 탈을 쓰다	80	LEX-5855	issue	善人の皮を被った悪魔 선인의 탈을 쓴 악마

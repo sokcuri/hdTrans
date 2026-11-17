@@ -24,7 +24,7 @@ cx:novel-fixes-3:95	イベントを全て見た事になる。	!rule:cx:novel-fi
 cx:novel-fixes-3:100	対熱耐寒耐性を獲得した事により、	has:획득함으로써,	fix	rewrites
 cx:novel-fixes-3:100	事によると、雨かもしれない。	!rule:cx:novel-fixes-3:100	keep	rewrites
 cx:novel-fixes-3:110	続けて、エクストラスキル『賢者』をユニークスキル『大賢者』に進化させます	has:『대현자』로 진화시킵니다	fix	rewrites
-cx:novel-fixes-3:110	狼に変化した。	has:이리로 변화했다	fix	rewrites
+cx:novel-fixes-3:110	狼に変化した。	has:늑대로 변화했다	fix	rewrites
 cx:novel-fixes-3:110	気温に変化があった。	!rule:cx:novel-fixes-3:110	keep	rewrites
 cx:novel-fixes-3:115	彼は魔王に変化した。	has:마왕으로 변화했다	fix	rewrites
 cx:novel-fixes-3:115	彼に変化を感じた。	!rule:cx:novel-fixes-3:115	keep	rewrites

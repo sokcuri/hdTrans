@@ -396,6 +396,18 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                 joined = c.noun + c.idiomParticle + c.verb;
             }
             if (std::string err = CompileColloc(joined, target, kclass, base, families, c); !err.empty()) return fail(err);
+            // the row's own godan verb ends each spelling (勝る of {X}に勝る, not 伸びる of 糸を引いて伸びる
+            // or 取られる of {X}と取られる), in its written form or its reading (引く/ひく)
+            if (pos == "v5") {
+                const std::string_view id = col(f, "lemma");
+                std::vector<std::string_view> names = Split(lemma, '|');
+                if (const std::vector<std::string_view> parts = Split(id, '/'); parts.size() >= 2 && !parts[1].empty())
+                    names.push_back(parts[1]);
+                const auto ends = [&](std::string_view spelling) {
+                    return std::any_of(names.begin(), names.end(), [&](std::string_view w) { return spelling.ends_with(w); });
+                };
+                c.godan = c.slot ? ends(c.after) : std::all_of(c.befores.begin(), c.befores.end(), ends);
+            }
             c.row = static_cast<int>(table.rows.size());
             r.target = target;
             r.global = Register(r);

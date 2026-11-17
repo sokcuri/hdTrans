@@ -34,7 +34,7 @@ cx:tame-purpose:10	数が多すぎるため、都市を何個か放棄しなけ�
 cx:tame-purpose:10	中盤以降必須になるため、取得しておいた。	!rule:cx:tame-purpose:10	keep	rewrites
 cx:tame-purpose:10	中盤以降必須になるため、取得しておいた。	has:되기 때문에,	keep	rewrites
 cx:tame-purpose:10	「七人ミサキ」に数で勝るため、八体にした。	!rule:cx:tame-purpose:10	keep	rewrites
-cx:tame-purpose:10	「七人ミサキ」に数で勝るため、八体にした。	has:우수하기 때문에,	keep	rewrites
+cx:tame-purpose:10	「七人ミサキ」に数で勝るため、八体にした。	has:앞서기 때문에,	keep	rewrites
 cx:tame-purpose:10	神秘的な美少女であるため、羨望の眼差しで見られている。	!rule:cx:tame-purpose:10	keep	rewrites
 cx:tame-purpose:10	神秘的な美少女であるため、羨望の眼差しで見られている。	has:미소녀이기 때문에,	keep	rewrites
 cx:tame-purpose:10	純血瑞鸞生のみで構成される為、途中入学生は入れない。	!rule:cx:tame-purpose:10	keep	rewrites
