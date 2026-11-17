@@ -204,8 +204,15 @@ Context ContextOf(Flusher& f, const Item* it) {
             last = next;
             next = next->After();
         }
+        // a conditional (止めたら, 止めれば) modifies no noun: the text the predicate covers ends in たら, だら or ば
+        const auto conditional = [](const Item* v) {
+            const std::string_view text = v->text;
+            const auto from = static_cast<std::size_t>(std::max(v->start, 0));
+            const std::string_view covered = from < text.size() ? text.substr(from, static_cast<std::size_t>(std::max(v->length, 0))) : std::string_view();
+            return covered.ends_with("たら") || covered.ends_with("だら") || covered.ends_with("ば");
+        };
         if (next != nullptr && ClassOf(next) == '1' && !Faint(next->group->surface) &&
-            last->DirectSurface().find("て") == std::string_view::npos) {
+            last->DirectSurface().find("て") == std::string_view::npos && !conditional(last)) {
             c.head = next;
             c.pred = next;
             c.headThroughAux = last != it;
@@ -400,6 +407,9 @@ std::string_view Feature(const AttachClause* c, std::string_view key) {
     return {};
 }
 
+bool CoversPerson(const dict::PackTable& t, std::string_view cls);
+bool FramePerson(const Item* x);
+
 // Whether the argument word x is of class cls by the pack-classes files; a plural of a noun of the class is of it
 // (猫たち, 子供ら, 少年たち: noun.plural-suffix), whether the suffix is a word of its own or ends the word.
 bool ArgMember(const dict::PackTable& t, const Item* x, std::string_view cls) {
@@ -530,7 +540,10 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             for (const std::string& v : a.values) {
                 if (v.starts_with("@")) {
                     // by the pack-classes files, or by the class the attachment gives the argument
-                    if ((x != nullptr && ArgMember(t, x, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
+                    // a name or a noun before an honorific is @person (FramePerson) as a case phrase, not as the
+                    // noun the predicate modifies (止めた田中さん: 田中 may be its subject)
+                    const bool person = x != nullptr && !g.how.empty() && CoversPerson(t, v) && FramePerson(x);
+                    if ((x != nullptr && ArgMember(t, x, v)) || person || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
                         held = true;
                         depth = std::max(depth, t.Depth(v));
                     }
@@ -671,20 +684,22 @@ bool PersonWord(const Item* x) {
     return false;
 }
 
-// Whether noun (the word x, or its noun part) is of class cls: by the pack-classes files, and for
-// @person and the classes above it also by the engine's person codes.
-bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std::string_view cls) {
-    if (t.Member(noun, cls)) return true;
-    // @person or a class above it (its parent chain reaches cls)
-    bool covers = false;
+// Whether cls is @person or a class above it (the parent chain of @person reaches cls).
+bool CoversPerson(const dict::PackTable& t, std::string_view cls) {
     std::string_view c = "@person";
-    for (int guard = 0; guard < 32 && !c.empty() && !covers; guard++) {
-        covers = c == cls;
+    for (int guard = 0; guard < 32 && !c.empty(); guard++) {
+        if (c == cls) return true;
         const auto p = t.parent.find(c);
         if (p == t.parent.end()) break;
         c = p->second;
     }
-    return covers && PersonWord(x);
+    return false;
+}
+
+// Whether noun (the word x, or its noun part) is of class cls: by the pack-classes files, and for
+// @person and the classes above it also by the engine's person codes.
+bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std::string_view cls) {
+    return t.Member(noun, cls) || (CoversPerson(t, cls) && PersonWord(x));
 }
 
 // The honorific suffixes that stay with the noun of a slot (青海さん, オクタヴィア様).
@@ -692,6 +707,29 @@ bool SlotSuffix(const Item* x) {
     static constexpr std::string_view kSuffixes[] = {"さん", "様", "さま", "ちゃん", "くん", "君", "殿", "先生", "先輩", "氏"};
     return x->group != nullptr && x->selected >= 0 &&
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
+}
+
+// Whether the argument x names a person by itself in a frame atom: a word read as a surname or given name
+// (a row with QPN and the grammar code Wa or Wb reads it so: 桜庭, レナ, 葵 아오이) or a noun before an honorific suffix (青海さん, 店長さん).
+// Wider person codes (VHn, UAq), QPN rows of common words (メカ) and name-file rows of common nouns (事故,
+// センサー) do not count; common person nouns come from the pack-classes files.
+bool FramePerson(const Item* x) {
+    if (x->group == nullptr || x->selected < 0) return false;
+    if (x->next != nullptr && x->next->tokenIndex == x->tokenIndex && SlotSuffix(x->next)) return true;
+    // the case phrase of 田中さんを ends in the suffix
+    if (SlotSuffix(x) && x->prev != nullptr && x->prev->group != nullptr && x->prev->tokenIndex == x->tokenIndex &&
+        ClassOf(x->prev) == '1')
+        return true;
+    // the selected reading, or a surname or given-name row of the word that reads the same (葵 아오이)
+    const Entry* chosen = x->group->At(x->selected);
+    if (chosen == nullptr) return false;
+    for (const Entry* e : x->group->entries) {
+        if (e == nullptr || e->dst != chosen->dst || !dict::SemCodes(e->attr).HasCode("QPN")) continue;
+        const std::string_view g = e->gattr;
+        for (std::size_t i = 0; i + 1 < g.size(); i += 2)
+            if (g.substr(i, 2) == "Wa" || g.substr(i, 2) == "Wb") return true;
+    }
+    return false;
 }
 
 // Whether x ends an utterance on its side: no word (the start or end of the text), a mark, or a word

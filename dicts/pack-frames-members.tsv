@@ -1549,3 +1549,16 @@ lemma	classes
 ひたすら	@manner
 釣り竿	@tool
 釣竿	@tool
+みなさん	@person
+皆さん	@person
+皆様	@person
+客人	@person
+お嬢様	@person
+側近	@person.role
+獣人	@person
+冒険者	@person.role
+民衆	@person
+群衆	@person
+あいつら	@person
+こいつら	@person
+そいつら	@person

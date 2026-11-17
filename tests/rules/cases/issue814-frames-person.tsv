@@ -1,0 +1,24 @@
+# frames @person: names and nouns before an honorific count as @person in case phrases (LEX-160)
+rule	input	expected	kind	layer
+pack:止める/とめる/v1#3	桜庭を止める。	has:사쿠라바를 막는다	fix	packs
+pack:止める/とめる/v1#3	「誰かが多岐川を止めないと」	has:타키가와를 막	fix	packs
+pack:止める/とめる/v1#3	田中さんを止めた。	has:타나카 씨를 막았다	fix	packs
+pack:止める/とめる/v1#3	店長さんを止めた。	has:점장님을 막았다	fix	packs
+pack:止める/とめる/v1#3	ピカチュウ あのメカを止めるぞ	has:메카를 멈추겠어	keep	packs
+pack:止める/とめる/v1#3	センサーを止めにいく。	has:센서를 멈추러	keep	packs
+pack:止める/とめる/v1#3	それにサーバー止めたらユーザーさんからクレーム来るじゃない！	has:서버 멈추면	keep	packs
+pack:止める/とめる/v1#3	止めた田中さんが怒る。	has:멈춘 타나카 씨가	keep	packs
+pack:止める/とめる/v1#3	車を止めた。	has:차를 세웠다	keep	packs
+pack:止める/とめる/v1#3	息を止めた。	has:숨을 멈추었다	keep	packs
+pack:argument-senses:1	佳奈を起こさないように、そっと扉を開ける。	has:카나를 깨우지 않도록	fix	packs
+pack:argument-senses:1	嬉野さんを起こさないように、ベッドに運ぶ。	has:우레시노 씨를 깨우지	fix	packs
+pack:argument-senses:1	みなさんを起こしてきますね。	has:여러분을 깨워	fix	packs
+pack:argument-senses:1	冒険者たちを起こした。	has:모험가들을 깨웠다	fix	packs
+pack:argument-senses:1	ラピスちゃんを起こしてきてくれないかな	has:라피스짱을 깨워	fix	packs
+pack:argument-senses:1	問題を起こした。	has:문제를 일으켰다	keep	packs
+pack:argument-senses:1	事故が起これば中止だ。	has:사고가 일어나면	keep	packs
+pack:argument-senses:4	射線をかわして、ハルトが下がる。	has:하루토가 물러난다	fix	packs
+pack:argument-senses:4	嬉野さんがキッチンに下がる。	has:우레시노 씨가 키친에 물러난다	fix	packs
+pack:argument-senses:4	気温が下がる。	has:기온이 내려간다	keep	packs
+pack:argument-senses:20	正直、あたしも大島くんに直接関わってなければ	has:오오시마 군에게 직접 엮이지	fix	packs
+pack:argument-senses:20	事件と関わりたくない。	has:사건과 관련되고	keep	packs
