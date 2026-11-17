@@ -570,10 +570,18 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
 }
 
 // Whether a row of lemma * or lemma @class applies to the word, and how it names it (0 for *, 1 for @class).
-bool OpenRowNames(const dict::PackRow& r, const Item* it, int& named) {
+// A key other than the word's surface is the verb the caller found (休まれ: the stem 休ま of 休まる is the
+// passive of 休む, keyed 休), which names a member whose dictionary form it is or is the stem of.
+bool OpenRowNames(const dict::PackRow& r, const Item* it, std::string_view key, int& named) {
     named = 0;
     if (r.lemmaClass.empty()) return true;
     named = 1;
+    if (key != it->group->surface) {
+        const auto own = r.lemmaKeys.find(key);
+        if (own != r.lemmaKeys.end())
+            for (const std::string& lemma : own->second)
+                if (lemma == key || (lemma.starts_with(key) && text::RuneCount(std::string_view(lemma).substr(key.size())) == 1)) return true;
+    }
     const auto keyed = r.lemmaKeys.find(it->group->surface);
     if (keyed == r.lemmaKeys.end()) return false;
     for (const std::string& lemma : keyed->second)
@@ -594,7 +602,7 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
     if (const auto open = t.open.find(dict::OpenIndex(slot, cls)); open != t.open.end()) {
         for (const int i : open->second) {
             int named = 0;
-            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, named)) rows.emplace_back(i, named);
+            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, key, named)) rows.emplace_back(i, named);
         }
     }
     bool any = false;
@@ -685,9 +693,11 @@ bool ReadsText(const std::vector<Item*>& items, std::size_t i, std::string_view 
 
 // Whether x names a person in the engine's own codes: a name, or a word with a person sense.
 bool PersonWord(const Item* x) {
-    const Entry* e = x->group->At(x->selected);
+    // a voice row asks before selection, when the word's default candidate stands for it (太郎に泣かれた)
+    const int slot = std::max(x->selected, 0);
+    const Entry* e = x->group->At(slot);
     if (e != nullptr && e->user != nullptr && (e->user->name || e->user->nameLayer)) return true;
-    const dict::SemCodes sem(x->Attr(x->selected));
+    const dict::SemCodes sem(x->Attr(slot));
     for (const std::string_view code : {"QPN", "QNP", "VHn", "VQw", "VQm", "UAq", "UQf"})
         if (sem.HasCode(code)) return true;
     return false;
@@ -714,7 +724,7 @@ bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std
 // The honorific suffixes that stay with the noun of a slot (青海さん, オクタヴィア様).
 bool SlotSuffix(const Item* x) {
     static constexpr std::string_view kSuffixes[] = {"さん", "様", "さま", "ちゃん", "くん", "君", "殿", "先生", "先輩", "氏"};
-    return x->group != nullptr && x->selected >= 0 &&
+    return x->group != nullptr &&
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
 }
 
@@ -723,7 +733,7 @@ bool SlotSuffix(const Item* x) {
 // Wider person codes (VHn, UAq), QPN rows of common words (メカ) and name-file rows of common nouns (事故,
 // センサー) do not count; common person nouns come from the pack-classes files.
 bool FramePerson(const Item* x) {
-    if (x->group == nullptr || x->selected < 0) return false;
+    if (x->group == nullptr || x->group->entries.empty()) return false;
     // a plural of a person (桜庭たち, 田中くんたち) is one, as ArgMember reads the plural of a class noun
     if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), x->group->surface))
         return x->prev != nullptr && x->prev->tokenIndex == x->tokenIndex && FramePerson(x->prev);
@@ -736,7 +746,7 @@ bool FramePerson(const Item* x) {
     // the case phrase of 田中さんを ends in the suffix
     if (SlotSuffix(x) && x->prev != nullptr && joined(x->prev, x) && ClassOf(x->prev) == '1') return true;
     // the selected reading, or a surname or given-name row of the word that reads the same (葵 아오이)
-    const Entry* chosen = x->group->At(x->selected);
+    const Entry* chosen = x->group->At(std::max(x->selected, 0));
     if (chosen == nullptr) return false;
     for (const Entry* e : x->group->entries) {
         if (e == nullptr || e->dst != chosen->dst || !dict::SemCodes(e->attr).HasCode("QPN")) continue;
@@ -1224,6 +1234,8 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                     // the head right after the slot: the slot's particle is written after the slot's word
                     Item* own = items[best.slotEnd - 1];
                     own->appended += ResolvedParticle(own->EntryText(own->selected), c.particle);
+                    // the target's space after that particle (に逃げられ, one word: 범인이 도망쳤다)
+                    if (!text.empty() && !text.starts_with(" ")) text.insert(0, " ");
                 } else if (c.slot && ((c.spaced && c.particle.empty()) || particleLeft) && k >= best.slotEnd) {
                     // the space the target puts after the slot's Korean
                     text.insert(0, " ");

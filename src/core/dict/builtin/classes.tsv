@@ -128,7 +128,7 @@
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
 //= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
-//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった).
+//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった), ながら and たまま, said of what is done to one while or after (見られながら 보이면서, 着せられたまま); spec LEX-6021).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.rare-negative	The negative forms after られ, which make a dictionary word in the られ of くる the potential (連れてこられない, 連れてこられません).
 //= ending.lexical-potential-negative	The negative forms after られ that make a dictionary word in the られ of another ichidan verb the potential (決められない, 続けられなかった, 与えられません, 見せられず; spec GRM-50): not な of ながら or なさい, nor ん, which may be the る said short (考えられんの).
@@ -607,6 +607,7 @@
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
 //= verb.suffered-act	Ichidan stems of acts aimed at someone that one seldom speaks of being able to do, whose non-past られる with no recipient に in its clause is the passive (罵声を浴びせられる 욕설을 듣는다, 刃を突きつけられる); a word of ability scope still makes the potential (誰でも浴びせられる).
+//= verb.suffered-intransitive	Dictionary forms of verbs that take no object and that someone does to one's cost (泣く, 去る, 来る, 辞める): their (ら)れ after a person or an animal in に is that one's act, said in Korean in the active with the agent as subject (子供に泣かれて 아이가 울어서, 大事な人に去られた 소중한 사람이 떠났다; spec LEX-6020).
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
 //= verb.answer-gesture	Starts of the gestures and acts of answering that take what was said before a quoting と (頷く, 首を振る, 頭を下げる, 付け加える): after a predicate other than a verb's plain form the と is the quotation -다고, also with the speaker or an adverb between (異論はないと頷いた 이론은 없다고 끄덕였다, 風習だとアワイは最後に付け加えた 풍습이라고 아와이는 마지막으로 덧붙였다).
 //= verb.write-say	Starts of verbs of writing, telling and promising that quote a と a few words before them, with no predicate between (弟にすると書状に書き残していた 한다고, 提供するとお話しさせて頂きました 제공한다고; spec GRM-40).
@@ -1749,6 +1750,8 @@ ending.rare-passive	とる
 ending.rare-passive	とっ
 ending.rare-passive	とら
 ending.rare-passive	とり
+ending.rare-passive	ながら
+ending.rare-passive	たまま
 
 ending.rare-negative	な
 ending.rare-negative	ず
@@ -8717,6 +8720,41 @@ verb.intransitive-godan	頑張られ
 verb.intransitive-godan	亡くなられ
 verb.intransitive-godan	引きこもられ
 verb.intransitive-godan	上がられ
+verb.suffered-intransitive	泣く
+verb.suffered-intransitive	泣き出す
+verb.suffered-intransitive	泣き叫ぶ
+verb.suffered-intransitive	去る
+verb.suffered-intransitive	立ち去る
+verb.suffered-intransitive	吠える
+verb.suffered-intransitive	来る
+verb.suffered-intransitive	来られる
+verb.suffered-intransitive	辞める
+verb.suffered-intransitive	帰る
+verb.suffered-intransitive	行く
+verb.suffered-intransitive	出て行く
+verb.suffered-intransitive	出ていく
+verb.suffered-intransitive	寝る
+verb.suffered-intransitive	休む
+verb.suffered-intransitive	暴れる
+verb.suffered-intransitive	居座る
+verb.suffered-intransitive	黙る
+verb.suffered-intransitive	喚く
+verb.suffered-intransitive	逃げる
+verb.suffered-intransitive	逃げ出す
+verb.suffered-intransitive	鳴く
+verb.suffered-intransitive	泣きつく
+verb.suffered-intransitive	ほえる
+verb.suffered-intransitive	こられる
+verb.suffered-intransitive	くる
+verb.suffered-intransitive	にげる
+verb.suffered-intransitive	やすむ
+verb.suffered-intransitive	やめる
+verb.suffered-intransitive	なきだす
+verb.suffered-intransitive	わめく
+verb.suffered-intransitive	あばれる
+verb.suffered-intransitive	いすわる
+verb.suffered-intransitive	さる
+verb.suffered-intransitive	なく
 verb.object-passive	つけ
 verb.object-passive	付け
 verb.object-passive	着け

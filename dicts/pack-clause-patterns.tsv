@@ -5,3 +5,18 @@ clause-patterns:1	会う	v5	voice	frame	*	respectful		50	GRM-3061	audit	会わ�
 clause-patterns:2	話しかける	v1	voice	frame	form=ta|te	passive:말을 걸어오다	(이)가	50	GRM-3065	audit	話しかけられた/て → 말을 걸어오다
 clause-patterns:3	気づく	v5	voice	frame	voice=respectful	respectful:눈치채다		50	LEX-3854		気づかれましたか → 눈치채셨습니까 (the dictionary 気づかれ reads 들키다)
 clause-patterns:4	気付く	v5	voice	frame	voice=respectful	respectful:깨닫다		50	LEX-3854		気付かれましたか → 깨달으셨습니까 (the dictionary 気付かれ reads 들키다)
+clause-patterns:35930	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=passive|potential	active	(이)가	50	LEX-6020		子供に泣かれて困った → 아이가 울어 곤란했다 (no Korean passive)
+clause-patterns:35931	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		子供には来られない → 올 수 없다 (a negative is the potential)
+clause-patterns:35932	来られる	v1	voice	frame	dat=@person|@animal voice=passive|potential	passive:오다	(이)가	50	LEX-6020		客に来られて忙しい → 손님이 와서 바쁘다 (the dictionary 来られ reads the potential)
+clause-patterns:35933	来られる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		子供には来られない → 올 수 없다
+clause-patterns:35942	来られる	v1	voice	frame	dat=@person|@animal voice=passive|potential next=たい	passive		50	LEX-6020		客に来られたくない: the active does not carry たい (오고 싶지 않다 moves the wish)
+clause-patterns:35934	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=passive next=そう	passive		50	LEX-6020		女の子に泣かれそうになったら: the active does not carry そう (울고 그렇게)
+clause-patterns:35935	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=potential next=そう	potential		50	LEX-6020		部下に辞められそうになった: the active does not carry そう
+clause-patterns:35936	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=passive next=たい	passive		50	LEX-6020		子供に泣かれたくない: the active does not carry たい (울고 싶지 않다 moves the wish)
+clause-patterns:35937	@verb.suffered-intransitive	v	voice	frame	dat=@person|@animal voice=potential next=たい	potential		50	LEX-6020		部下に辞められたくない: the active does not carry たい
+clause-patterns:35938	行かれる	v1	voice	frame	dat=@person|@animal voice=passive|potential	passive:가다	(이)가	50	LEX-6020		彼に先に行かれた → 그가 먼저 갔다 (the dictionary 行かれ reads the potential)
+clause-patterns:35939	行かれる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		彼には行かれない: a negative is the potential
+clause-patterns:35943	行かれる	v1	voice	frame	dat=@person|@animal voice=passive|potential next=たい	passive		50	LEX-6020		彼に先に行かれたくない: the active does not carry たい
+clause-patterns:35940	こられる	v1	voice	frame	dat=@person|@animal voice=passive|potential	passive:오다	(이)가	50	LEX-6020		客にこられて忙しい → 손님이 와서 바쁘다
+clause-patterns:35941	こられる	v1	voice	frame	dat=@person|@animal voice=potential form=neg	potential		50	LEX-6020		彼にはこられない: a negative is the potential
+clause-patterns:35944	こられる	v1	voice	frame	dat=@person|@animal voice=passive|potential next=たい	passive		50	LEX-6020		客にこられたくない: the active does not carry たい

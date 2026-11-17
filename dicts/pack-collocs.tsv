@@ -109,3 +109,7 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 勝る#6	sense	勝る/まさる/v5	v5:이다	colloc	聞きしに勝る		듣던 것 이상이다	80	LEX-5853	issue	聞きしに勝る美しさ 듣던 것 이상인 아름다움
 皮をかぶる#1	sense	かぶる/かぶる/v5	v5	colloc	{X}の皮をかぶる		{X}의 탈을 쓰다	80	LEX-5855	issue	羊の皮をかぶった狼 양의 탈을 쓴 늑대
 皮をかぶる#2	sense	被る/かぶる/v5	v5	colloc	{X}の皮を被る		{X}의 탈을 쓰다	80	LEX-5855	issue	善人の皮を被った悪魔 선인의 탈을 쓴 악마
+逃げる#1	sense	逃げる/にげる/v1	v1	colloc	{X:@person}に逃げられる		{X}가 도망치다	80	LEX-6020	fault	犯人に逃げられた → 범인이 도망쳤다 (the dictionary に逃げられ 에게 차이다 stays for other nouns)
+逃げる#2	sense	逃げる/にげる/v1	v1	colloc	{X:@animal}に逃げられる		{X}가 도망치다	80	LEX-6020	fault	犯人に逃げられた → 범인이 도망쳤다 (the dictionary に逃げられ 에게 차이다 stays for other nouns)
+逃げる#1t	sense	逃げる/にげる/v1	v1:규칙	colloc	{X:@person}に逃げられる	next=たい	{X}에게 차이다	81	LEX-6020	fault	彼女に逃げられたくない → 그녀에게 차이고 싶지 않다 (the active would move the wish to the agent)
+逃げる#2t	sense	逃げる/にげる/v1	v1:규칙	colloc	{X:@animal}に逃げられる	next=たい	{X}에게 차이다	81	LEX-6020	fault	彼女に逃げられたくない → 그녀에게 차이고 싶지 않다 (the active would move the wish to the agent)
