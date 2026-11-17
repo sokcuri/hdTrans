@@ -1455,6 +1455,7 @@ bool ParticleNe(std::u32string_view rs, size_t k) {
 bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_t i) {
     const char32_t prev = rs[i - 1];
     if (IsKanjiRune(prev)) return !e.EndsInStem(rs, from, i);
+    if (prev == U'だ' && i >= 2 && In(rs[i - 2], U"」』）)")) return true;  // the copula after a quote (「左手」だぁぁぁ)
     if (IsSmallVowel(prev) || i < 2 || (!IsHiraganaRune(rs[i - 2]) && !IsKanjiRune(rs[i - 2])) || IsSmallVowel(rs[i - 2])) {
         return false;  // a lone kana: ほー, よー, ぃやぁ, すぅー
     }
@@ -2646,7 +2647,16 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 changed = true;
                 continue;
             }
-            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI && !adjectiveI)) {
+            // The い or う that ends a word draws out with three or more small kana of its vowel
+            // (下さいぃぃぃ, お願いぃぃぃ, ちがうぅぅぅ), not the い of an adjective stem (かわいぃぃぃ);
+            // alone, after another vowel kana or after one kana it is a cry (いぃぃぃ, いいぃぃぃ, くうぅぅぅ).
+            const bool wordDrawl = In(prev, U"いう") && v >= 0 && i >= 2 && !e.StemTagged(rs, from, i, "H") &&
+                                   (IsKanjiRune(rs[i - 2]) || (IsHiraganaRune(rs[i - 2]) && !In(rs[i - 2], U"あいうえおぁぃぅぇぉっ") && i >= 3 &&
+                                                                (IsHiraganaRune(rs[i - 3]) || IsKanjiRune(rs[i - 3])))) &&
+                                   i + 3 <= rs.size() && std::all_of(rs.begin() + i, rs.begin() + i + 3,
+                                                                     [&](char32_t c) { return c == kEmphasisVowels[v][0]; });
+            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) ||
+                (In(prev, U"あいうえお") && !stemI && !adjectiveI && !wordDrawl)) {
                 continue;
             }
             const bool plainStart = !IsSmallVowel(r) && r != U'ー' && r != U'～';

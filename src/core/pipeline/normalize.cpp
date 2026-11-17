@@ -432,7 +432,7 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
     });
 }
 
-// start (あれ[～ー]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
+// start (あれ[～ーぇ]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
 // particle (あれ――は何だ, the pronoun).
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
     return SentenceStart(s, pos, m, [&](size_t q) {
@@ -441,7 +441,7 @@ bool StartInterjection(std::string_view s, size_t pos, Match& m) {
             if (!Lit(s, r, w)) continue;
             size_t t = r;
             if (w == "あれ") {
-                while (OneOf(s, t, U"～ー")) continue;  // あれ～？
+                while (OneOf(s, t, U"～ーぇ")) continue;  // あれ～？, あれぇ？ (the ぇ is written ー)
             }
             if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
             size_t after = t;
@@ -975,7 +975,9 @@ std::string JoinPausedCopula(std::string_view text) {
 
 std::string RewriteInterjections(std::string_view text) {
     std::string s = ReplaceAll(text, StartInterjection, [](const Match& m) {
-        return Cat({m.group[1], m.group[2], m.group[3], "っ", m.group[4]});
+        std::string stretch(m.group[4]);
+        for (size_t at; (at = stretch.find("ぇ")) != std::string::npos;) stretch.replace(at, std::string_view("ぇ").size(), "ー");
+        return Cat({m.group[1], m.group[2], m.group[3], "っ", stretch});
     });
     s = ReplaceAll(s, StartEe, [](const Match& m) { return Cat({m.group[1], m.group[2], "えっ", m.group[3]}); });
     s = ReplaceAll(s, PauseEe, [](const Match& m) { return Cat({m.group[1], "えっ", m.group[2]}); });
