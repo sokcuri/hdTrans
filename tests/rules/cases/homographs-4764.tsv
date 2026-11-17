@@ -63,7 +63,7 @@ pattern:yue	俳優であるが故に、民衆の偶像であつてはならな�
 pattern:yue	けれども、感情に於て圧える事の出来ない哀愁、それは感情的であるが故に、一層まとまりのないものであり、且つ、深いものである。	그러나, 감정에서 억누를 수 없는 애수, 그것은 감정적이기 때문에, 한층 정리가 없는 것이며, 또한, 깊은 것이다.	fix	builtin-pattern
 pattern:yue	あなたに与えられた唯一の弁解はその際「弁護人なるが故に」という一語だけです。	당신에게 줄 수 있던 유일한 변명은 그 때 「변호인 되기 때문에」라는 한마디만입니다.	fix	builtin-pattern
 pattern:yue	ユフィリアに対して厳しい親ではあるが、それも我が子を思う故だ。	유필리아에 대해서 엄한 부모이지만, 그것도 우리 아이를 생각하기 때문이다.	fix	builtin-pattern
-pattern:yue	この季節になってくると、何故か、少し寂しい気分になるな。	이 계절이 되어 지면, 어째서인지, 조금 외로운 기분이 되지 마.	keep	builtin-pattern
+pattern:yue	この季節になってくると、何故か、少し寂しい気分になるな。	이 계절이 되어 지면, 어째서인지, 조금 외로운 기분이 드네.	keep	builtin-pattern
 pattern:yue	ではＥＬＦは ここに挙がっている者を 事故死でいいな？	그럼 ELF는 여기에 오르고 있는 사람을 사고사면 돼?	keep	builtin-pattern
 pattern:yue	何故そっとしておいてくれない！	왜 살며시 해 두어 주지 않아!	keep	builtin-pattern
 pattern:yue	礼号作戦…私が旗艦を務めた…何故…鮮明に覚えている…なんで？	레호 작전…내가 기함을 맡았다…왜…선명히 기억하고 있다…왜?	keep	builtin-pattern
