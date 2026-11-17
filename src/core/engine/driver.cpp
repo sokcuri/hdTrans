@@ -508,11 +508,17 @@ bool WordIs(const void* context, std::string_view text) {
     return false;
 }
 
-// The length of the longest key of the dictionary that text starts with (pipeline::RunLookup::keyReach).
+// The length of the longest key of the dictionary that text starts with, names left out: a name (ダズ, ゲデ)
+// is no evidence of how a word is spelled (pipeline::RunLookup::keyReach).
 size_t KeyReach(const void* context, std::string_view text) {
     const auto& d = *static_cast<const RespellLookup*>(context);
+    const dict::Candidates found = Find(d, text);
     size_t reach = 0;
-    for (const dict::Candidate& c : Find(d, text).list) reach = std::max(reach, c.source.size());
+    for (const dict::Candidate& c : found.list) {
+        const bool name = c.user != nullptr && !found.names.empty() && c.user >= found.names.data() &&
+                          c.user < found.names.data() + found.names.size();
+        if (!name) reach = std::max(reach, c.source.size());
+    }
     return reach;
 }
 
@@ -1247,7 +1253,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
-                                 options.reference ? nullptr : WordIs, KeyReach}),
+                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);

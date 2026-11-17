@@ -39,9 +39,9 @@ HD_TEST(pipeline_normalize_forms) {
     const Case cases[] = {
         {"ｶﾞﾝﾊﾞﾚ"sv, "ガンバレ"sv},
         {"ﾊﾟﾝ ｳﾞｧｲｵﾘﾝ"sv, "パン ヴァイオリン"sv},
-        {"ｱﾞ ﾞ ｶﾟ"sv, "ア ゛ カ゜"sv},
+        {"ｱﾞ ﾞ ｶﾟ"sv, "ア ゛ カ"sv},
         {"あ゛っ お゛ほぉ゛ ん゛ん゛ う゛ー ああ゛゛～"sv, "あっ おほぉ んん うー ああ～"sv},
-        {"い\u3099や ア゛ア゛ッ ウ゛ァ う゛ぁ"sv, "いや アアッ ヴァ うぁ"sv},
+        {"い\u3099や ア゛ア゛ッ ウ゛ァ う゛ぁ"sv, "いや アアッ ヴァ う゛ぁ"sv},
         {"ウ゛ー ウ゛ーッ ウ゛ゥ ウ゛ィーナス ウ゛"sv, "ウー ウーッ ウゥ ヴィーナス ウ"sv},
         {"ウ゛ウ゛ー ウ゛ウ゛ッ ウ゛ン ウ゛ウ゛ァ"sv, "ウウー ウウッ ウン ヴヴァ"sv},
         {"｢ｱｲｳ｣､ｦ･ｰ｡"sv, "｢アイウ｣、ヲ・ー。"sv},
@@ -61,13 +61,15 @@ HD_TEST(pipeline_normalize_forms) {
     Check([](std::string_view text) { return NormalizeForms(text); }, cases);
 }
 
-// A spacing voiced mark voices a kana only where a dictionary key reads the voiced letter further than the
-// letter as written; otherwise, and next to a mark that strains its kana, it strains and is dropped.
+// A spacing mark voices a kana that takes it unless the letter as written reads as fewer dictionary keys than
+// the voiced one; then, and after a kana it strains, it strains and is dropped. Quoting pairs stay.
 HD_TEST(pipeline_normalize_forms_voiced_mark_by_dictionary) {
     RunLookup runs;
     runs.keyReach = [](const void*, std::string_view text) -> size_t {
         size_t reach = 0;
-        for (const std::string_view key : {"がんばれ"sv, "たすけて"sv, "ヴァイオリン"sv, "ヴォウフ"sv, "ほら"sv, "ぼら"sv})
+        for (const std::string_view key : {"がんばれ"sv, "たすけて"sv, "ヴァイオリン"sv, "ほら"sv, "だ"sv, "だす"sv, "です"sv,
+                                           "て"sv, "す"sv, "これ"sv, "ため"sv, "だめ"sv, "か"sv, "が"sv, "かい"sv,
+                                           "いい"sv, "の"sv, "それ"sv, "ワタシ"sv, "う"sv, "うわ"sv})
             if (text.substr(0, key.size()) == key) reach = std::max(reach, key.size());
         return reach;
     };
@@ -80,10 +82,23 @@ HD_TEST(pipeline_normalize_forms_voiced_mark_by_dictionary) {
         {"タ゛ス゛ケ゛テ゛"sv, "タスケテ"sv},
         {"ほ゛ら"sv, "ほら"sv},
         {"や゛めて"sv, "やめて"sv},
-        {"う゛ぁ"sv, "うぁ"sv},
-        {"う゛ぉうふっ"sv, "うぉうふっ"sv},
+        {"う゛ぁ"sv, "う゛ぁ"sv},
+        {"う゛わぁ"sv, "うわぁ"sv},
+        {"タ゛ス゛ケ゛テ゛ ほ゛ら"sv, "タスケテ ほら"sv},
+        {"う゛ん う゛ー"sv, "うん うー"sv},
+        {"て゛す"sv, "です"sv},
+        {"これて゛す"sv, "これです"sv},
+        {"た゛め た゛め゛え゛"sv, "だめ だめえ"sv},
+        {"それか゛いいの"sv, "それがいいの"sv},
+        {"ワ゛タシ 痛゛い"sv, "ワタシ 痛い"sv},
+        {"や゜めて ぱ゜んつ"sv, "やめて ぱんつ"sv},
         {"「゛」"sv, "「゛」"sv},
         {"゛モーロック゛って何"sv, "゛モーロック゛って何"sv},
+        {"゛モーロック゛って何？ や゛めろ"sv, "゛モーロック゛って何？ やめろ"sv},
+        {"映画の゛ローマの休日゛を見た"sv, "映画の゛ローマの休日゛を見た"sv},
+        {"え゛司令官"sv, "え司令官"sv},
+        {"映画゛タイタニック゛"sv, "映画゛タイタニック゛"sv},
+        {"まって゛"sv, "まって"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(NormalizeForms(c.in, runs), std::string(c.want));
 }
@@ -177,17 +192,17 @@ HD_TEST(pipeline_normalize_canonical_kana_boundaries) {
         {"\u3099\u309A"sv, "\u3099\u309A"sv},
         {"か\u309A"sv, "か\u309A"sv},
         {"が\u3099"sv, "が"sv},
-        {"カ゛ハ゜"sv, "カハ゜"sv},
+        {"カ゛ハ゜"sv, "ガパ"sv},
         {"ゝ\u3099ヽ\u3099ゞヾ"sv, "ゝ\u3099ヽ\u3099ゞヾ"sv},
         {"か \u3099"sv, "か \u3099"sv},
         {"か́\u3099"sv, "か́\u3099"sv},
         {"ｶﾞﾊﾟｳﾞ"sv, "ガパヴ"sv},
         {"ﾜﾞ"sv, "ヷ"sv},
-        {"カﾞ"sv, "カ"sv},
+        {"カﾞ"sv, "ガ"sv},
         {"い\u3099や"sv, "いや"sv},
         {"ウ゛ー"sv, "ウー"sv},
         {"ウ゛ァ"sv, "ヴァ"sv},
-        {"う゛ぁ"sv, "うぁ"sv},
+        {"う゛ぁ"sv, "う゛ぁ"sv},
         {"ｶ\u3099"sv, "ガ"sv},
         {"う\u3099ぁ"sv, "ゔぁ"sv},
         {"ウ\u3099ー"sv, "ヴー"sv},

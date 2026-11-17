@@ -34,3 +34,34 @@ normalize:voiced-mark	゛ニューヨーカー゛って呼ばれてたんだ	゛
 normalize:voiced-mark	「ぶふっ……う゛ぉうふっ」	lacks:ゔ	fix	normalize
 normalize:voiced-mark	い゛ら゛っしゃい゛	어서 오세요	fix	normalize
 normalize:voiced-mark	に゛ゃ！？	냐!?	fix	normalize
+normalize:voiced-mark	て゛す。	입니다.	fix	normalize
+normalize:voiced-mark	これて゛す。	이것입니다.	fix	normalize
+normalize:voiced-mark	そうて゛すね。	그렇네요.	fix	normalize
+normalize:voiced-mark	さ゛んねんて゛した。	유감이었습니다.	fix	normalize
+normalize:voiced-mark	て゛きない…	할 수 없어…	fix	normalize
+normalize:voiced-mark	た゛れ？	누구?	fix	normalize
+normalize:voiced-mark	と゛こ？	어디?	fix	normalize
+normalize:voiced-mark	ふ゛たのにく	has:돼지	fix	normalize
+normalize:voiced-mark	ふ゛たのにく	lacks:뚜껑	fix	normalize
+normalize:voiced-mark	は゛か	바보	fix	normalize
+normalize:voiced-mark	た゛めえ！	안 돼!	fix	normalize
+normalize:voiced-mark	た゛め゛え゛！	안 돼!	fix	normalize
+normalize:voiced-mark	痛゛い！	아파!	fix	normalize
+normalize:voiced-mark	ワ゛タシ	나	fix	normalize
+normalize:voiced-mark	それか゛いいの	그것이 좋아	fix	normalize
+normalize:voiced-mark	あなたか゛やる	당신이 한다	fix	normalize
+normalize:voiced-mark	もう、や゜めてってば！	이제, 그만하라니까!	fix	normalize
+normalize:voiced-mark	たすけて゛！	살려!	fix	normalize
+normalize:voiced-mark	やめて゛	그만해	fix	normalize
+normalize:voiced-mark	こっちて゛	이쪽으로	fix	normalize
+normalize:voiced-mark	は゛い！	네!	fix	normalize
+normalize:voiced-mark	゛モーロック゛って何だ？ や゛めろ！	has:゛모로크゛	fix	normalize
+normalize:voiced-mark	゛モーロック゛って何だ？ や゛めろ！	has:그만	fix	normalize
+normalize:voiced-mark	゛モーロック゛って何だ？ や゛めろ！	lacks:나゛	fix	normalize
+normalize:voiced-mark	え゛司令官、本当ですか	lacks:゛	fix	normalize
+normalize:voiced-mark	う゛るさい！	시끄러워!	fix	normalize
+normalize:voiced-mark	う゛ん…	응…	fix	normalize
+normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ゛です	has:゛천사여	keep	normalize
+normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ゛です	has:보라゛	keep	normalize
+normalize:voiced-mark	映画の゛ローマの休日゛を見た	영화의゛로마의 휴일゛을 보았다	keep	normalize
+normalize:voiced-mark	彼は゛正義の味方゛と呼ばれた	그는゛정의의 아군゛으로 불렸다	keep	normalize
