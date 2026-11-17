@@ -608,24 +608,7 @@ bool OpenRowNames(const dict::PackRow& r, const Item* it, std::string_view key, 
     return false;
 }
 
-// Whether the text of a godan verb's stem it goes on in another row than the final kana of the row's lemma: the kana
-// right after the stem must be of that row or its euphonic form (おこら, おこっ for おこる; おこし is of おこす).
-bool OtherRow(const Item* it, const dict::PackRow& r) {
-    if (!r.godan) return false;
-    const std::string_view surface = it->group->surface;
-    if (!r.lemma.starts_with(surface) || text::RuneCount(std::string_view(r.lemma).substr(surface.size())) != 1) return false;
-    const std::string_view final = std::string_view(r.lemma).substr(surface.size());
-    const std::string_view whole = Slice(it->text, it->start, it->length);
-    if (!whole.starts_with(surface) || whole.size() == surface.size()) return false;
-    const std::string_view after = whole.substr(surface.size());
-    const std::string_view next = after.substr(0, text::DecodeRune(after).size);
-    static constexpr std::pair<std::string_view, std::string_view> kRows[] = {
-        {"う", "わいうえおっ"}, {"く", "かきくけこい"}, {"ぐ", "がぎぐげごい"}, {"す", "さしすせそ"}, {"つ", "たちつてとっ"},
-        {"ぬ", "なにぬねのん"}, {"ぶ", "ばびぶべぼん"}, {"む", "まみむめもん"}, {"る", "らりるれろっ"}};
-    for (const auto& [k, row] : kRows)
-        if (k == final) return row.find(next) == std::string_view::npos;
-    return false;
-}
+bool GodanRowForm(const Item* x, std::string_view pattern);
 
 // The row of slot that decides the word, or -1.
 int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_view key, dict::PackSlot slot,
@@ -640,7 +623,10 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
     if (keyed != t.byKey.end())
         for (const int i : keyed->second) {
             const dict::PackRow& r = t.rows[static_cast<std::size_t>(i)];
-            if (cls == '4' && r.classDigit == '4' && OtherRow(it, r)) continue;
+            if (cls == '4' && r.classDigit == '4' && r.godan && r.lemma.starts_with(it->group->surface) &&
+                text::RuneCount(std::string_view(r.lemma).substr(it->group->surface.size())) == 1 &&
+                !GodanRowForm(it, r.lemma))
+                continue;
             rows.emplace_back(i, 2);
         }
     if (const auto open = t.open.find(dict::OpenIndex(slot, cls)); open != t.open.end()) {
@@ -800,15 +786,17 @@ bool FramePerson(const Item* x, const dict::Snapshot* snap) {
     }
     // or a surname or given-name row of the name layer that reads the same (葵 아오이, ミナ 미나, アリス 앨리스): the
     // name layer keeps its rows out of the word's candidates unless the name stage wrote the word. Only when a
-    // candidate with the chosen reading is a proper noun or a person (白崎, 嬉野 as places, 葵 아오이, アリス) or the
-    // word has no dictionary row (ミナ): a common
-    // noun (破壊, ダイヤ, パンチ) keeps its reading though a name row (a nickname) reads the same
+    // candidate with the chosen reading is a proper noun (白崎, 嬉野 as places, 葵 아오이) or the word has no
+    // dictionary row (ミナ), or a katakana word with the wide person code (VHn: アリス): a common noun (破壊, ダイヤ,
+    // パンチ) and a kana or kanji word of that code, which also marks creatures and bodies (とかげ, にわとり, 加盟国),
+    // keep their reading though a name row (a nickname) reads the same
     if (snap == nullptr) return false;
     bool proper = chosen->field.empty();  // no dictionary row: a katakana run read by its sound (ミナ)
+    const bool katakana = KatakanaSurface(x->group->surface);
     for (const Entry* e : x->group->entries) {
         if (e == nullptr || e->dst != chosen->dst) continue;
         const dict::SemCodes sem(e->attr);
-        proper = proper || e->code == "130" || sem.HasCode("VHn") || sem.HasCode("QPN");
+        proper = proper || e->code == "130" || sem.HasCode("QPN") || (sem.HasCode("VHn") && katakana);
     }
     if (!proper) return false;
     for (const dict::Record& r : snap->NameRecords(x->group->surface)) {
