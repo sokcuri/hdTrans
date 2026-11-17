@@ -66,6 +66,9 @@ lex:kata-verb-whole	ヤルヨ。	할게.	fix	protect
 lex:kata-verb-whole	ヤロウ！！	lacks:해 보자	keep	protect
 lex:kata-verb-whole	……カッタヨ……？	lacks:샀	keep	protect
 lex:kata-verb-whole	明らかにヤンデルである。	has:병든 상태이다	fix	protect
+lex:kata-verb-whole	「ノボル」と呼んだ。	has:노보루	keep	protect
+lex:kata-verb-whole	「アタル」と名乗った。	has:아타루	keep	protect
+lex:kata-verb-whole	テルヨ、来て。	lacks:비쳐	keep	protect
 lex:te-drawl	やめてええ！	그만해!	fix	sound
 lex:te-drawl	まってええ！	기다려!	fix	sound
 lex:te-drawl	たすけてええ！	살려!	fix	sound
