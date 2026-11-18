@@ -59,9 +59,9 @@ dict:w:36062	何周目？	몇 바퀴째?	fix	local
 dict:w:36062	今何周目だ	has:몇 바퀴째	fix	local
 dict:w:36055	グラウンドを何周走った	has:몇 바퀴 달렸다	fix	local
 dict:w:36055	何周回った	몇 바퀴 돌았다	fix	local
-dict:w:36055	何周かした	has:몇 바퀴	fix	local
-dict:w:36055	何周した？	has:몇 바퀴	fix	local
-dict:w:36055	何周して疲れた	has:몇 바퀴	fix	local
+dict:w:36134	何周かした	몇 바퀴인가 돌았다	fix	local
+dict:w:36130	何周した？	몇 바퀴 돌았어?	fix	local
+dict:w:36130	何周して疲れた	has:몇 바퀴 돌아 지쳤	fix	local
 dict:w:36056	何粒も食べた	has:몇 알이나	fix	local
 dict:w:36056	何粒	몇 알	fix	local
 dict:w:36057	何ページ目	몇 페이지째	fix	local
@@ -151,3 +151,23 @@ constraint:nande-dekite-before-negative	何でできてねえんだよ	lacks:무
 constraint:nande-dekite-kanji-before-negative	何で出来てないんだ	lacks:무엇으로	fix	lookup
 constraint:nande-dekitei-kanji-before-negative	何で出来ていない	lacks:무엇으로	fix	lookup
 constraint:nande-dekite-before-negative	これは何でできてるの？	has:무엇으로 되어 있는 거야	keep	lookup
+dict:w:36130	何周したの？	몇 바퀴 돌았어?	fix	local
+dict:w:36130	グラウンドを何周した？	그라운드를 몇 바퀴 돌았어?	fix	local
+dict:w:36130	何周する？	몇 바퀴 돌아?	fix	local
+dict:w:36130	何周しました？	몇 바퀴 돌았습니까?	fix	local
+dict:w:36130	何周したい？	has:몇 바퀴 돌고 싶어	fix	local
+dict:w:36130	何周してる？	몇 바퀴 돌고 있어?	fix	local
+dict:w:36130	「何周した？」	「몇 바퀴 돌았어?」	fix	local
+dict:w:36130	何周したんだ？	has:몇 바퀴 돈	fix	local
+dict:w:36131	何周もした。	몇 바퀴나 돌았다.	fix	local
+dict:w:36131	何周もしている。	몇 바퀴나 돌고 있다.	fix	local
+dict:w:36132	何周りした？	몇 바퀴 돌았어?	fix	local
+dict:w:36133	何周りもして、ようやく着いた。	has:몇 바퀴나 돌아,	fix	local
+dict:w:36134	何周かして休んだ。	has:몇 바퀴인가 돌아	fix	local
+dict:w:36134	何周か走った	몇 바퀴인가 달렸다	keep	local
+dict:w:36130	何周走った？	has:몇 바퀴 달렸어	keep	local
+dict:w:36130	一周する	일주한다	keep	local
+dict:w:36130	世界一周した	세계일주했다	keep	local
+dict:w:36130	何周目？	몇 바퀴째?	keep	local
+dict:w:36130	何周年	몇 주년	keep	local
+dict:w:36130	藤宮周が来た。周は何周した？と聞いた。	has:아마네는 몇 바퀴 돌았어	keep	local
