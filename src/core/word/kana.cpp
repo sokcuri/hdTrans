@@ -341,7 +341,14 @@ void Run::Matrix(long cursor) {
                 kNonEnglishLongU.find(search) == std::string_view::npos) {
                 Replace(cursor, search, Keep(WithFinal(cell, kVowelU, 0)));
                 Replace(cursor + 1, kLongVowel, "");
-                if (Has(cursor + 1, kMarkN)) AddFinalN(cursor);
+                // ン and ム close the syllable as after any other vowel (セツブーン 세츠분, カブーム 카붐),
+                // unless ー or a small vowel makes ム a syllable.
+                if (Has(cursor + 1, kMarkN)) {
+                    AddFinalN(cursor);
+                } else if (At(cursor + 1) == kMarkMu && !Has(cursor + 2, kLongVowel) &&
+                           (At(cursor + 2).empty() || kSmallVowels.find(At(cursor + 2)) == std::string_view::npos)) {
+                    AddFinal(cursor, 16, kMarkMu);
+                }
             } else {
                 Replace(cursor, search, cell);
                 Replace(cursor + 1, kLongVowel, "");

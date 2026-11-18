@@ -2261,6 +2261,10 @@ bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32strin
 // interjection) that no word of the text as written covers. A ～ after a word that then ends its phrase draws it out (ヤバい～).
 // The kana that start an adjective's ending after its stem: い, かった, くない, ければ, そう.
 constexpr std::u32string_view kAdjectiveEndingStarts = U"いかくけそイカクケソ";
+// The kana that start the copula or a particle after a noun: だ, です, じゃ, よ, ね, な, わ.
+constexpr std::u32string_view kAfterNounStarts = U"だでじよねなわ";
+// The kana that start a particle or the copula after a word.
+constexpr std::u32string_view kParticleStarts = U"だでじよねなわかのをがにはもとへや";
 
 bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ctx, const dict::Snapshot& snap) {
     bool changed = false;
@@ -2358,15 +2362,42 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
             // A short word whose bare first vowel the mark draws out (い～な いいな, い～や いいや, う～そ うそ):
             // after い the long vowel spelled out, after う the mark dropped, makes a dictionary key from the
             // vowel past the mark. The vowel opens its word (no kanji or kana before it), and the kana after
-            // the mark start no word of two kana or more, or the key takes that word in too.
+            // the mark start no word of two kana or more that stands on its own, or the key takes that word in
+            // too. An ending (なあ, かな, です) stands on no word of its own; a verb stem only with its ending
+            // after it (そだ of う～そだよ is no word). After い, the text read without the mark wins where the い
+            // starts a word across it that takes the copula or a particle after a noun (い～やだ いやだ, い～やよ
+            // いやよ): いい is an adjective and takes no だ.
             if (best == 0 && (prev == U'い' || prev == U'う') && (k == 1 || !inWord(rs[k - 2])) && next != U'ん') {
                 const std::u32string_view vowel = prev == U'い' ? U"い" : U"";
                 const std::u32string t = Spliced(rs, k, vowel, end);
                 const size_t key = e.LongestKey(std::u32string_view(t).substr(k - 1));
-                const size_t own = e.LongestKey(std::u32string_view(rs).substr(end));
                 const size_t past = k - 1 + key;  // the end of the key in t
                 const size_t after = k + vowel.size();  // where the kana after the mark start in t
-                if (key >= 2 && past >= after + (vowel.empty() ? 1 : 0) && (own < 2 || past >= after + own)) {
+                // Whether the key of n kana that starts rest is a word of its own there: no ending (なあ, かな,
+                // です), a verb stem only before its ending (not そだ of そだよ), and the end, a mark or a particle
+                // after it (not そで of そでしょ).
+                const std::u32string_view rest = std::u32string_view(rs).substr(end);
+                const size_t own = e.LongestKey(rest);
+                const auto standsAlone = [&](size_t n) {
+                    const std::string tags = e.Tags(rest.substr(0, n));
+                    if (tags.find_first_of("SUT") != std::string::npos) return false;
+                    if (tags.find_first_not_of('M') == std::string::npos) return ConjugatesFrom(snap, rest.substr(0, n), rest.substr(n)) > 0;
+                    return n >= rest.size() || !IsHiraganaRune(rest[n]) || In(rest[n], kParticleStarts);
+                };
+                const bool ownWord = own >= 2 && standsAlone(own);
+                // After い read without the mark, a noun across it before the copula or a particle (いや of い～やだ).
+                std::u32string u;
+                size_t noun = 0;
+                if (!vowel.empty() && past == after) {
+                    u = rs.substr(0, k) + rs.substr(end);
+                    const std::u32string_view word = std::u32string_view(u).substr(k - 1);
+                    const size_t n = e.LongestKey(word);
+                    if (n >= 2 && n < word.size() && In(word[n], kAfterNounStarts) && e.Tags(word.substr(0, n)).find('N') != std::string::npos) noun = n;
+                }
+                if (noun > 0) {
+                    m = u;
+                    best = k - 1 + noun;
+                } else if (key >= 2 && past >= after + (vowel.empty() ? 1 : 0) && (!ownWord || past >= after + own)) {
                     m = t;
                     best = past;
                 }
