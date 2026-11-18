@@ -1,0 +1,23 @@
+# 규칙: GRM-4201
+rule	input	expected	kind	layer
+cx:x5-cx:20	よそのクラブにしたって、ショッケンとたいして変わらないだろう。	has:다른 클럽이라고 해도,	fix	rewrites
+cx:x5-cx:20	あいつにしたって、人並みの不純さは抱えているのだ。	has:저 녀석이라고 해도,	fix	rewrites
+cx:x5-cx:20	魅音にしたって、レナにしたって梨花ちゃんにしたって。	has:리카짱이라고 해도.	fix	rewrites
+cx:x5-cx:20	先生にしたって、知らないはずだ。	has:선생님이라고 해도,	fix	rewrites
+cx:x5-cx:20	「梨花ちゃんにしたって」	has:리카짱이라고 해도」	fix	rewrites
+cx:x5-cx:20	部長にしたって！	has:부장이라고 해도!	fix	rewrites
+cx:x5-cx:20	お前にしたって……	has:너라고 해도……	fix	rewrites
+cx:x5-cx:20	サボることにしたってわけ。	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	奪うことにしたってわけ。	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	彼を部長にしたって本当？	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	気にしたってしょうがない。	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	なにしたって無駄だ。	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	馬鹿にしたって仕方ない。	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	遊び場所をよつば橋にしたってのに……	!rule:cx:x5-cx:20	keep	rewrites
+cx:x5-cx:20	明日にしたって聞いた。	!rule:cx:x5-cx:20	keep	rewrites
+x5:nishitatte:1	それにしたって困る。	그렇다 해도 곤란하다.	fix	words
+x5:nishitatte:1	それにしたって、３５００人前後はいるわけである。	has:그렇다 해도,	fix	words
+x5:nishitatte:1	使用感があるから中古だろうが、それにしたって高いものだ。	has:그렇다 해도 높은	fix	words
+x5:nishitatte:1	「それにしたって……７セットは必要だから」	has:그렇다 해도……	fix	words
+x5:nishitatte:1	それにしたって事前に一言頂戴してもよかった。	has:그렇다 해도 사전에	fix	words
+x5:nishitatte:1	それに、困る。	has:게다가,	keep	words
