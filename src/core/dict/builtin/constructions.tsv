@@ -457,6 +457,17 @@ cx:mimetic-cues:130	LEX-5016	&&2 S+0== "슬쩍" >4 S+0== "R髪" S+0== "00。！�
 cx:mimetic-cues:140	LEX-5907	&&2 S+0== "나불나불" ||4 S+1== "Lめく" S+1== "L捲" S+1== "Lページ" &&2 S-2== "ページ" S-1== "を"	set-target "팔랑팔랑"	ページをペラペラとめくった 페이지를 팔랑팔랑 넘겼다
 cx:mimetic-cues:142	LEX-5906	&&2 S+0== "나불나불" ||4 &&2 S-2== "R語" !1 S-2== "R物語" S-1== "R語" S+1== "R語" S+2== "R語"	set-target "유창하게"	英語をぺらぺら話す 영어를 유창하게 이야기한다
 cx:mimetic-cues:144	LEX-5907	&&2 S+0== "녹초가 되도록" ||4 S+1== "L煮" S+1== "L茹" S+1== "Lゆで" S+1== "Lにこ"	set-target "흐물흐물하게"	野菜をくたくたに煮る 야채를 흐물흐물하게 익힌다
+cx:mimetic-cues:200	LEX-6086	&&2 S+0== "와르르" >4 B+0== @verb.open-shut ||2 F+0== "verb" F+0== "boundary"	set-target "드르륵"	ガラガラと戸を開けた 드르륵 문을 열었다
+cx:mimetic-cues:201	LEX-6086	&&2 S+0== "와르르" ||2 &&3 S+1== @Rnoun.sliding-door S+2== "を" B+3== "引く" &&2 B+1== "引く" <3 S+0== @Rnoun.sliding-door ||0	set-target "드르륵"	引き戸をガラガラと引いた 미닫이를 드르륵 당겼다
+cx:mimetic-cues:202	LEX-6086	&&3 S+0== "와르르" S+1== "を" ||2 B+2== "振る" B+2== "鳴らす"	set-target "딸랑이"	ガラガラを振る 딸랑이를 흔든다
+cx:mimetic-cues:204	LEX-6086	&&2 S+0== "흠씬" ||9 B+1== "沸く" B+1== "沸かす" B+1== "煮える" B+1== "煮立つ" B+1== "沸き立つ" B+1== "泡立つ" S+1== "L煮え立" S+1== "L沸騰" S+1== "L泡"	set-target "보글보글"	お湯がボコボコと沸いた 뜨거운 물이 보글보글 끓었다
+cx:mimetic-cues:206	LEX-6086	&&2 S+0== "으드득으드득" S+1== "L勉強"	set-target "악착같이"	ガリガリ勉強した 악착같이 공부했다
+cx:mimetic-cues:208	LEX-6080	&&2 S+0== "くたくたの" ||2 S+1== @Rnoun.count-clothes S+1== @Lnoun.count-clothes	set-target "후줄근한"	クタクタのシャツ 후줄근한 셔츠
+cx:mimetic-cues:210	LEX-6080	&&2 S+0== "ぺらぺらの" ||2 S+1== @Rnoun.thin-thing S+1== @Lnoun.count-clothes	set-target "얇은"	ペラペラの紙 얇은 종이
+cx:mimetic-cues:212	LEX-6080	&&3 S+0== "ぺらぺら" U+0== "な" ||2 S+1== @Rnoun.thin-thing S+1== @Lnoun.count-clothes	set-target "얄팍%A1@"	ペラペラな生地 얄팍한 옷감
+cx:mimetic-cues:214	LEX-6080	&&3 S+0== "ぼこぼこ" U+0== "な" S+1== @Rnoun.rough-surface	set-target "울퉁불퉁%A1@"	ボコボコな道 울퉁불퉁한 길
+cx:mimetic-cues:216	LEX-6080	&&2 S+0== "ぼこぼこの" S+1== @Rnoun.rough-surface	set-target "울퉁불퉁한"	ボコボコの道 울퉁불퉁한 길
+cx:mimetic-cues:218	LEX-6080	&&2 S+0== "ぼこぼこの" S+1== @Rnoun.boiling-liquid	set-target "부글부글 끓는"	ボコボコのお湯 부글부글 끓는 물
 //= te-loss	after Select 209	guard ||4 S+0== "損" S+0== "損す" S+0== "損を" S+0== "損し"	A 損 right after a verb in て is the loss that doing it brings, so the て is -어서 (spec GRM-4010): with ない after it, past は, も, の or が, it is what one stands to lose, 손해 볼 것, also after ても (知っても損はない 알아도 손해 볼 것은 없다; 聞いて損のない内容 들어서 손해 볼 것이 없는 내용, 知って損はない 알아서 손해 볼 것은 없다); 損することはない keeps 손해 볼 일. A する after 損 and は or も is 보다 (買って損はしない 사서 손해는 보지 않는다).
 //~ te-reason	6=6서 있어=있어서 둬=둬서	The て endings in -어 and their -어서.
 //: te-before	&&2 F-1== "verb" ||2 U-1== "Rて" U-1== "Rで"	The word before is a verb in て or で.

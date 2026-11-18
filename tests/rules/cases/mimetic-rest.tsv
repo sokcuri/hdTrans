@@ -1,0 +1,76 @@
+# 규칙: LEX-6080, LEX-6084, LEX-6085, LEX-6086
+rule	input	expected	kind	layer
+cx:mimetic-cues:216	ボコボコの道。	has:울퉁불퉁한 길	fix	words
+words:mimetic-state	ぼこぼこの地面を歩く。	has:울퉁불퉁한	fix	words
+words:mimetic-state	ボコボコに殴られた。	has:흠씬	keep	words
+words:mimetic-state	びっしょりの服。	has:흠뻑 젖은 옷	fix	words
+words:mimetic-state	壁までびっしょりと濡れている。	has:흠뻑 젖어	keep	words
+words:mimetic-state	くたくたの体を引きずる。	has:녹초가 된	fix	words
+cx:mimetic-cues:208	クタクタのシャツを着ている。	has:후줄근한 셔츠	fix	words
+cx:mimetic-cues:208	くたくたの服。	has:후줄근한 옷	fix	words
+words:mimetic-state	もうクタクタになった。	has:녹초가	keep	words
+cx:mimetic-cues:210	ペラペラの紙	has:얇은 종이	fix	words
+cx:mimetic-cues:210	ぺらぺらのシャツ。	has:얇은 셔츠	fix	words
+words:mimetic-state	英語ペラペラの人	has:유창한	keep	words
+words:mimetic-state	日本語がペラペラの人	has:유창한	keep	words
+words:mimetic-state	ペラペラしゃべる。	has:나불나불	keep	words
+words:mimetic-state	腹ペコペコ。	has:배가 고프	fix	words
+words:mimetic-state	腹ぺこぺこだ。	has:배가 고프	fix	words
+words:mimetic-state	みんなにちやほやされる。	has:떠받들린다	fix	words
+words:mimetic-state	やっぱり、ちやほやされたいです。	has:떠받들리고 싶	fix	words
+words:mimetic-state	TVでちやほやされた経験がある。	has:떠받들린 경험	fix	words
+words:mimetic-state	チヤホヤされて育った。	has:떠받들려	fix	words
+words:mimetic-state	彼をちやほやする。	has:오냐오냐	keep	words
+cx:mimetic-cues:200	戸をガラガラ開ける。	has:드르륵	fix	words
+cx:mimetic-cues:200	シャッターをガラガラと閉めた。	has:드르륵	fix	words
+cx:mimetic-cues:200	ガラガラって開けて落としちゃえばいい	has:드르륵	fix	words
+cx:mimetic-cues:200	理性がガラガラと崩れていく。	has:와르르	keep	words
+cx:mimetic-cues:202	赤ちゃんがガラガラを振る。	has:딸랑이	fix	words
+cx:mimetic-cues:204	お湯がボコボコと沸いた。	has:보글보글	fix	words
+cx:mimetic-cues:204	鍋がぼこぼこ煮立っている。	has:보글보글	fix	words
+cx:mimetic-cues:206	ガリガリ勉強した。	has:악착같이 공부	fix	words
+cx:mimetic-cues:206	ガリガリ食べる。	lacks:악착	keep	words
+sound:mimetic-to	ペコペコと頭を下げた。	굽실굽실 고개를 숙였다.	fix	sound
+sound:mimetic-to	ニコニコと頭を下げた。	lacks:이라고	fix	sound
+sound:mimetic-to	異論はないと頭を下げた。	has:없다고	keep	sound
+sound:mimetic-to	ペコペコ頭を下げた。	has:굽실굽실 고개를	keep	sound
+cx:mimetic-cues:202	ガラガラと音を立てた。	has:와르르	keep	words
+cx:mimetic-cues:204	ボコボコに殴られた。	has:흠씬	keep	words
+cx:mimetic-cues:204	ボコボコと泡が出る。	has:보글보글	fix	words
+cx:mimetic-cues:208	くたくたの体を引きずる。	has:녹초가 된	keep	words
+cx:mimetic-cues:216	ぼこぼこの道路を走った。	has:울퉁불퉁한 도로	fix	words
+cx:mimetic-cues:216	ぼこぼこのアスファルト。	has:울퉁불퉁한	fix	words
+cx:mimetic-cues:214	ボコボコな道が続く。	has:울퉁불퉁한 길	fix	words
+cx:mimetic-cues:214	ボコボコな床だ。	has:울퉁불퉁한 바닥	fix	words
+cx:mimetic-cues:216	ボコボコの顔で帰ってきた。	has:만신창이가 된 얼굴	keep	words
+words:mimetic-state	ボコボコの彼を見た。	lacks:울퉁불퉁	fix	words
+cx:mimetic-cues:218	ボコボコの車。	has:만신창이가 된 차	keep	words
+cx:mimetic-cues:218	ボコボコのお湯。	has:부글부글 끓는	fix	words
+words:mimetic-state	ボコボコだった。	has:만신창이였다	keep	words
+cx:mimetic-cues:208	くたくたの服を着た。	has:후줄근한 옷	fix	words
+cx:mimetic-cues:210	ペラペラの布団で寝た。	has:얇은 이불	fix	words
+cx:mimetic-cues:210	このカーテン、ペラペラの生地だね。	has:얇은 옷감	fix	words
+cx:mimetic-cues:212	ペラペラな生地のシャツ。	has:얄팍한 옷감	fix	words
+cx:mimetic-cues:212	ぺらぺらな紙。	has:얄팍한 종이	fix	words
+cx:mimetic-cues:210	ペラペラの英語で話した。	has:유창한 영어	keep	words
+words:mimetic-state	ぺらぺらの日本語で答えた。	has:유창한 일본어	keep	words
+words:mimetic-state	ペラペラの口調で話した。	lacks:얇은	keep	words
+words:mimetic-state	英会話ペラペラの人。	has:유창한	keep	words
+cx:mimetic-cues:212	英語がペラペラな人。	has:영어가 유창한 사람	keep	words
+cx:mimetic-cues:200	ガラガラと扉を開けて入ってきた。	has:드르륵 문을	fix	words
+cx:mimetic-cues:200	ガラガラと戸が開いた。	has:드르륵 문이	fix	words
+cx:mimetic-cues:200	ガラガラッと戸を開けた。	has:드르륵	fix	words
+cx:mimetic-cues:200	ガラガラと玄関の戸を開けた。	has:드르륵	fix	words
+cx:mimetic-cues:200	ガラガラと窓を閉めた。	has:드르륵 창을	fix	words
+cx:mimetic-cues:200	ガラガラと崩れ落ちた。	has:와르르	keep	words
+cx:mimetic-cues:200	ガラガラと崩れた壁を開けた。	has:와르르	keep	words
+cx:mimetic-cues:201	引き戸をガラガラと引いた。	has:미닫이를 드르륵	fix	words
+cx:mimetic-cues:201	ガラガラと引き戸を引いた。	has:드르륵 미닫이를	fix	words
+cx:mimetic-cues:201	ガラガラと荷車を引いた。	has:와르르	keep	words
+cx:mimetic-cues:204	お湯をボコボコ沸かした。	has:보글보글	fix	words
+cx:mimetic-cues:204	鍋がボコボコと煮え立った。	has:보글보글	fix	words
+sound:mimetic-to	ガラガラと呼ばれるおもちゃ。	has:로 불리는	keep	sound
+sound:mimetic-to	ワンワンと呼ばれる犬。	has:으로 불리는	keep	sound
+sound:mimetic-to	「すみません」と頭を下げた。	has:라고 고개를	keep	sound
+cx:mimetic-cues:214	ボコボコな顔だ。	has:만신창이인 얼굴	keep	words
+cx:mimetic-cues:212	ペラペラな日本語で話す。	has:유창한 일본어	keep	words
