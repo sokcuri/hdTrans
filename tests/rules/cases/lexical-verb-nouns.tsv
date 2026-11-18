@@ -86,7 +86,7 @@ cx:verb-pair:100	上級組合員でも相手に出来るかどうかという所
 cx:verb-pair:100	ならば相手に出来るだけ近づき	!rule:cx:verb-pair:100	keep	rewrites
 cx:verb-pair:100	あんな奴、相手にできない	!rule:cx:verb-pair:100	keep	rewrites
 cx:verb-pair:100	「くっ、この全軍を相手に出来ると思うな！	!rule:cx:verb-pair:100	keep	rewrites
-cx:verb-pair:110	膝をつき、頭を垂れ、自分の拳を心臓の位置へと押し付けた。	has:심장 위치로 눌렀다	fix	rewrites
+cx:verb-pair:110	膝をつき、頭を垂れ、自分の拳を心臓の位置へと押し付けた。	has:심장 위치로 갖다 대었다	fix	rewrites
 cx:verb-pair:110	顔を壁に押し付けた	has:얼굴을 벽에 눌렀다	fix	rewrites
 cx:verb-pair:110	正しく言えば押し付けた周は、彼女の唇が動く前に背を向けた。	!rule:cx:verb-pair:110	keep	rewrites
 cx:verb-pair:110	責任を押し付ける	!rule:cx:verb-pair:110	keep	rewrites

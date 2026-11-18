@@ -55,7 +55,7 @@ cx:datte-listing:30	イップス病だ 何だって？	입스병이다 뭐라고
 cx:datte-listing:30	海賊船だ 何だって？	해적선이다 뭐라고?	keep	rewrites
 cx:datte-listing:30	何だ　何だって？	뭐냐 뭐라고?	keep	rewrites
 cx:datte-listing:30	近頃は何だってそうだ。	최근은 뭐든지 그렇다.	keep	rewrites
-cx:datte-listing-head:10	やれ地震だ 大水だ 崩落だって 大崩壊だっけ？	할 수 있는 지진이니 홍수니 폭락이니 대붕괴였나?	fix	rewrites
+cx:datte-listing-head:10	やれ地震だ 大水だ 崩落だって 大崩壊だっけ？	할 수 있는 지진이니 홍수니 붕괴니 대붕괴였나?	fix	rewrites
 cx:datte-listing-head:10	あら 私たちなんて 秋田だ 富山だ 東京だって 振り回されてきたのよ｡	어머나 우리는 아키타니 도야마니 도쿄니 좌지우지되어 왔어.	fix	rewrites
 cx:datte-listing-head:10	アフリカじゃ ジオンだ 連邦だ ティターンズだって	아프리카는 지온이니 연방이니 티탄즈니	fix	rewrites
 cx:datte-listing-head:10	同級生が みんな 洋服だ 合コンだって楽しんでるときに	동급생이 모두 옷이다 미팅도 즐기고 있을 때	keep	rewrites

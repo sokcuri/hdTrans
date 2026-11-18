@@ -1,6 +1,6 @@
 # 규칙: GRM-3521
 rule	input	expected	kind	layer
-cx:novel-fixes-4:100	舌腹を押しつけるようにして舐めるたび、	has:강요하듯이	fix	rewrites
+cx:novel-fixes-4:100	舌腹を押しつけるようにして舐めるたび、	has:갖다 대듯이	fix	rewrites
 cx:novel-fixes-4:100	俺の上にまたがるようにして入ってきたため、	has:올라타듯이	fix	rewrites
 cx:novel-fixes-4:100	俺は彼女の視線を避けるようにして通り過ぎる。	has:피하듯이	fix	rewrites
 cx:novel-fixes-4:100	兄弟３人 肩寄せ合うようにして生きてきました	has:기대듯이	fix	rewrites
@@ -14,7 +14,7 @@ cx:novel-fixes-4:100	俺の行動を予想してかグリークが見下すよ�
 cx:novel-fixes-4:100	彼女は今、アルガルドの隣に支えられるようにして立ち尽くしていた。	has:의지하듯이	fix	rewrites
 cx:novel-fixes-4:100	気が付けばセリカとフランは後部座席で重なるようにして眠っていた。	has:겹치듯이	fix	rewrites
 cx:novel-fixes-4:100	路地を挟むようにして建った家々はまるで互いを見合う顔のようです。	has:사이에 두듯이	fix	rewrites
-cx:novel-fixes-4:100	生クリームに覆われた乳首を、舌腹を押しつけるようにして舐めあげた。	has:강요하듯이	fix	rewrites
+cx:novel-fixes-4:100	生クリームに覆われた乳首を、舌腹を押しつけるようにして舐めあげた。	has:갖다 대듯이	fix	rewrites
 cx:novel-fixes-4:100	でも、一応アポは取るようにするから」	!rule:cx:novel-fixes-4:100	keep	rewrites
 cx:novel-fixes-4:100	哀願するようにしなだれかかってくる。	!rule:cx:novel-fixes-4:100	keep	rewrites
 cx:novel-fixes-4:100	音量を上げて聞こえるようにしてやる。	!rule:cx:novel-fixes-4:100	keep	rewrites

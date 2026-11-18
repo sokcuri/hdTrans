@@ -1,0 +1,180 @@
+# 규칙: LEX-6650, LEX-6651, LEX-6652
+rule	input	expected	kind	layer
+dict:crit-lex	来たるべき日を いましばらく待とう…。	has:다가올 날을	fix	lookup
+dict:crit-lex	「そう！　あたしが活躍する来たるべき日のために、力を温存してるの！」	has:다가올 날을 위해	fix	lookup
+dict:crit-lex	「核不拡散」「核軍縮」を３本柱として	has:핵 비확산	fix	lookup
+dict:crit-lex	彼女は労せずに手にしていた。	has:힘들이지 않고	fix	lookup
+dict:crit-lex	労せずして勝った。	has:힘들이지 않고 이겼다	fix	lookup
+dict:crit-lex	どうしようもなく疑心暗鬼に溢れていた。	has:의심암귀에	fix	lookup
+dict:crit-lex	各国が疑心暗鬼になっていますからね	has:의심암귀가	fix	lookup
+dict:crit-lex	いずれ何がしか遣わそう。	has:얼마간	fix	lookup
+dict:crit-lex	彼等にとって何がしかの有益なものがあった	has:얼마간의 유익한	fix	lookup
+dict:crit-lex	脚を引き摺りながら路地裏の更に奥に逃げる。	has:뒷골목의 더욱 안쪽	fix	lookup
+dict:crit-lex	路地裏に隠れていたのを発見した。	has:뒷골목에 숨어	fix	lookup
+dict:crit-lex	お医者様たちが大慌てでなだれ込んで来る。	has:몰려들어 온다	fix	lookup
+dict:crit-lex	先頭のセリカのカウントで室内になだれ込む。	has:실내에 몰려든다	fix	lookup
+dict:crit-lex	敵が雪崩れ込んだ。	has:적이 몰려들었다	fix	lookup
+dict:crit-lex	沙都子が粋がって見せて。	has:허세를 부려 보여	fix	lookup
+dict:crit-lex	粋がるなよ。	has:허세를 부리지 마	fix	lookup
+dict:crit-lex	衣更えの季節だね。	has:옷 바꿔 입기의 계절	fix	lookup
+dict:crit-lex	君に幸あれ	has:행복하기를	fix	lookup
+dict:crit-lex	目詰まりを起こす。	has:막힘을 일으킨다	fix	lookup
+dict:crit-lex	寮は寮母がいないので	has:사감이 없기	fix	lookup
+dict:crit-lex	油断なく構える武器は、黒塗りの大鎌。	has:큰 낫	fix	lookup
+dict:crit-lex	あまり公の場に出ることはないから	has:공적인 자리에	fix	lookup
+dict:crit-lex	授業内容を影武者のテイラムが持ち帰る毎日だ。	has:대역의	fix	lookup
+dict:crit-lex	橋の一部が崩落し、車の通行が不可能となった。	has:붕괴해	fix	lookup
+dict:crit-lex	まるで崩落する洞窟に置き去りにされたように	has:붕괴하는 동굴	fix	lookup
+dict:crit-lex	一部崩落、車通行不可か	has:일부 붕괴	fix	lookup
+dict:crit-lex	ＦＴＡＡＰを採り上げた付属文書	has:다룬 부속 문서	fix	lookup
+dict:crit-lex	この問題を採り上げます。	has:다룹니다	fix	lookup
+dict:crit-lex	俺は左手を、佳奈すけの太腿に差し込んだ。	has:허벅지에	fix	lookup
+dict:crit-lex	太腿を撫でた後	has:허벅지를 쓰다듬은	fix	lookup
+dict:crit-lex	泣き寝入りする者もいれば	has:억울함을 삼키는 사람	fix	lookup
+dict:crit-lex	ここの勇者に恥をかかす事もないだろう。	has:창피를 주는 일도	fix	lookup
+dict:crit-lex	人前で恥をかかせるな。	has:창피를 주지 마	keep	lookup
+dict:crit-lex	「それで支持率下げてるんだから、世話ねえよな」	has:어이없지	fix	lookup
+dict:crit-lex	采を振るう。	has:지휘한다	fix	lookup
+dict:crit-lex	采を振った。	has:지휘했다	keep	lookup
+dict:crit-lex	「解任という結論ありきで、理由をでっち上げようとしている」	has:결론을 정해 놓고	fix	lookup
+dict:crit-lex	結論ありきの議論だ。	has:결론을 정해 놓은 논의	fix	lookup
+dict:crit-lex	ときおりすっ転んで、笑って	has:나자빠져	fix	lookup
+dict:crit-lex	打ち上げ会に行く。	has:뒤풀이에	fix	lookup
+dict:crit-lex	布団を延べて寝た。	has:이불을 펴	keep	lookup
+dict:crit-lex	栞さんが来た。	has:시오리 씨	keep	lookup
+dict:crit-lex	凪が笑った。	has:나기가	keep	lookup
+dict:crit-lex	城はいく重にも囲まれていた。	has:겹겹이	keep	lookup
+dict:crit-lex	国際基準に合わせていく重要性と	has:중요성과	fix	lookup
+dict:crit-lex-rows	すぐさま、隠し持ったナイフを幾本もアゼリアに投げつけた。	has:몇 개나	fix	lookup
+dict:crit-lex-rows	幾本もの矢	has:여러 개의 화살	fix	lookup
+dict:crit-lex-rows	幾枚もの紙。	has:여러 장의 종이	fix	lookup
+dict:crit-lex-rows	ほつれ毛が、幾筋か白い肌に張り付いている。	has:몇 줄기인가	fix	lookup
+dict:crit-lex-rows	何本もの矢	has:여러 개의 화살	keep	lookup
+dict:crit-lex-rows	核不拡散条約に加盟した。	has:핵확산 금지 조약	fix	lookup
+dict:crit-lex-rows	山が見えます	has:산이 보입니다	fix	lookup
+dict:crit-lex-rows	持ってこい！	has:가져와라!	fix	lookup
+dict:crit-lex-rows	何？余に持ってこいと？	has:가져오라고	fix	lookup
+dict:crit-lex-rows	水を持ってこい。	has:물을 가져와라	fix	lookup
+dict:crit-lex-rows	彼にとって持ってこいの役だ。	has:안성맞춤인 역	fix	lookup
+dict:crit-lex-rows	この仕事にはもってこいだ。	has:안성맞춤이다	keep	lookup
+dict:crit-lex-rows	２０１４年１２月に打ち上げられ、１８年６月に到着。	has:12월에 발사되어	fix	lookup
+dict:crit-lex-rows	衛星は３日に打ち上げられた。	has:3일에 발사되었다	fix	lookup
+dict:crit-lex-rows	死体が浜に打ち上げられた。	has:바닷가에 밀려왔다	keep	lookup
+dict:crit-lex-rows	すっかり調子を取り戻した。	has:컨디션을 되찾았다	fix	lookup
+dict:crit-lex-rows	調子を取り戻したのが、ソフィーは軽い返事をする。	has:컨디션을 되찾았던	fix	lookup
+dict:crit-lex-rows	電話に出なかった。	has:전화를 받지 않았다	keep	lookup
+dict:crit-lex-rows	周辺の地図をスマホに出したわ	has:스마트폰에 냈어	keep	lookup
+dict:crit-lex-rows	道を曲って	has:길을 돌아	fix	lookup
+dict:crit-lex-rows	腰の曲ってる老人	has:허리가 구부러져 있는	fix	lookup
+dict:crit-lex-rows	次の角を右に曲った。	has:오른쪽으로 돌았다	fix	lookup
+dict:crit-lex-rows	曲利は前を歩いた。	has:마가리는	keep	lookup
+pack:crit-lex:7	前を歩く人	has:앞을 걷는 사람	fix	packs
+pack:crit-lex:7	前を走る車も、急ブレーキをかけているのが分かります。	has:앞을 달리는 차	fix	packs
+pack:crit-lex:7	これから走るときは、前をちゃんと見た方がいいよ	has:앞을 제대로	fix	packs
+pack:crit-lex:7	スマホは前を歩く人の、口の開いたカバンに吸い込まれていった。	has:앞을 걷는	fix	packs
+pack:crit-lex:7	天井から授業開始五分前を告げる鐘が鳴る。	has:5분 전을	keep	packs
+pack:crit-lex:7	三日前を思い出す。	has:3일 전을	keep	packs
+pack:crit-lex:7	前を上回る成績だ。	has:전을 웃도는	keep	packs
+pack:crit-lex:9	全体として額が足りない	has:액수가 부족하다	fix	packs
+pack:crit-lex:9	額が増えた	has:액수가 늘어났다	fix	packs
+pack:crit-lex:9	額を拭う	has:이마를 닦는다	keep	packs
+pack:crit-lex:9	お陰で前より賞金額が増えたんだ。	has:상금액이	keep	packs
+pack:crit-lex:10	取材の対応？　スタッフと打ち上げ？	has:스태프와 뒤풀이	fix	packs
+pack:crit-lex:10	ロケットの打ち上げに成功した。	has:로켓 발사에	keep	packs
+pack:crit-lex:11	強烈なパンチを見舞った。	has:펀치를 날렸다	fix	packs
+pack:crit-lex:11	俺に平手を見舞った後、千里はそそくさと荷物をまとめはじめる。	has:손바닥을 날린	fix	packs
+pack:crit-lex:11	いきなり初日に、石の入った黒板消しを見舞ってくれた沙都子。	has:칠판지우개를	keep	packs
+pack:crit-lex:11	祖母を見舞った。	has:할머니를 문병했다	keep	packs
+pack:crit-lex:11	入院中の友人を見舞う。	has:친구를 문병한다	keep	packs
+pack:crit-lex:13	敵の動きを見切った。	has:움직임을 간파했다	fix	packs
+pack:crit-lex:13	エルはとっくにクイーンの攻撃を見切っていたんだ。	has:공격을 간파하고	fix	packs
+pack:crit-lex:13	彼を見切った。	has:그를 단념했다	keep	packs
+pack:crit-lex:14	彼女は顔を胸に押しつけた。	has:얼굴을 가슴에 갖다 대었다	fix	packs
+pack:crit-lex:14	レナは震えながら背中を壁に押しつけていた。	has:등을 벽에 갖다 대고	fix	packs
+pack:crit-lex:14	仕事を押しつけるな。	has:일을 강요하지 마	keep	packs
+pack:crit-lex:3	NASAのプロジェクトに助言する重要なポストに就いている。	has:중요한 직책을 맡고 있다	fix	packs
+pack:crit-lex:6	もういい年だ	has:이제 적지 않은 나이다	fix	packs
+pack:crit-lex:6	いい年になりますように	has:좋은 해가 되기를	keep	packs
+pack:crit-lex:2	煙幕で稼げる時間などたかが知れている。	has:뻔하다	fix	packs
+pack:crit-lex:2	加速もたかが知れている。	has:가속도 뻔하다	fix	packs
+pack:crit-lex:2	渡せる数はたかが知れてる	lacks:알려져	fix	packs
+pack:crit-lex:23	微笑みをたたえたまま、佳奈は俺を見る。	has:미소를 머금은 채로	fix	packs
+pack:crit-lex:24	目に涙をたたえて言った。	has:눈물을 머금고	fix	packs
+pack:crit-lex:23	英雄をたたえる。	has:영웅을 기린다	keep	packs
+dict:crit-lex	路地裏で倒れてたあなたをここへ運んだ。	has:뒷골목에서 쓰러져	fix	lookup
+dict:crit-lex	路地裏でドブネズミのように暮らしていた。	has:뒷골목에서 시궁쥐처럼	fix	lookup
+dict:crit-lex	寮母さんなんかが面倒見てくれるんじゃないですか？	has:사감 선생님	fix	lookup
+dict:crit-lex	ここは昼寝に持ってこいです。	has:낮잠에 안성맞춤입니다	keep	lookup
+dict:crit-lex	この仕事に持ってこいだ。	has:안성맞춤이다	keep	lookup
+dict:crit-lex	こちらも手を振り返すと、東雲さんは優雅な笑みをたたえた後、この場を後にした。	has:우아한 미소를 머금은 후	fix	packs
+dict:crit-lex-rows	面白い。クロノスの力を試すにはもってこいだ	has:안성맞춤이다	keep	lookup
+dict:crit-lex-rows	根城の場所を教える。書くもん持ってこい！	has:가져와라!	fix	lookup
+dict:crit-lex-rows	早く水をもってこいと怒鳴った。	has:가져오라고	fix	local
+dict:crit-lex-rows	酒をもって来いと思った。	has:가져오라고	fix	local
+dict:crit-lex-rows	持ってこいって言われた。	has:가져오라는	fix	local
+dict:crit-lex-rows	本を持ってこいと？	has:가져오라고?	fix	local
+dict:crit-lex-rows	練習にもってこいの場所。	has:안성맞춤인 장소	fix	local
+dict:crit-lex-rows	散歩に持って来いな天気だ。	has:안성맞춤인 날씨	fix	lookup
+dict:crit-lex-rows	昼寝には持ってこいでした。	has:안성맞춤이었	fix	local
+dict:crit-lex-rows	水を持ってこいよ。	has:물을 가져와	fix	lookup
+dict:crit-lex-rows	父と母が来た。	has:아버지와 어머니가	keep	lookup
+pack:crit-lex:11	昨日、妹のさよりを見舞ってきた。	has:문병	keep	packs
+pack:crit-lex:11	顔面に蹴りを見舞った。	has:날렸	fix	packs
+pack:crit-lex:11	拳を見舞ってやった。	has:날려	fix	packs
+pack:crit-lex:11	一撃を見舞う。	has:날린다	fix	packs
+pack:crit-lex:11	被災地を見舞った。	lacks:날렸	keep	packs
+pack:crit-lex:11	先生を見舞いに行く。	has:문병	keep	packs
+pack:crit-lex:11	見舞いに行った方がいいんじゃないか	lacks:날리	keep	packs
+pack:crit-lex:11	わかっている。見舞いに行きたいんだろう？	lacks:날리	keep	packs
+dict:crit-lex-rows	幾筋もの光が差した。	has:여러 줄기의 빛	fix	lookup
+dict:crit-lex-rows	髪が幾筋か落ちた。	has:몇 줄기인가	fix	lookup
+dict:crit-lex-rows	幾台の車が来た？	has:몇 대의 차	fix	local
+dict:crit-lex-rows	幾回も試した。	has:몇 번이나	fix	local
+dict:crit-lex-rows	幾千の星。	has:몇천의 별	fix	lookup
+dict:crit-lex-rows	幾万の人々。	has:몇만의	fix	lookup
+dict:crit-lex-rows	いく重もの壁。	has:겹겹의 벽	fix	lookup
+dict:crit-lex-rows	幾日か過ぎた。	has:며칠인가	keep	lookup
+dict:crit-lex-rows	幾度も言った。	has:몇 번이고	keep	lookup
+dict:crit-lex-rows	幾子は笑った。	has:이쿠코는	keep	lookup
+dict:crit-lex-rows	幾田さんが来た。	has:이쿠타 씨가	keep	lookup
+dict:crit-lex-rows	幾多の困難。	has:무수한	keep	lookup
+dict:crit-lex-rows	幾ら払った？	has:얼마	keep	lookup
+dict:crit-lex-rows	携帯に出した。	has:휴대폰에 냈다	keep	packs
+dict:crit-lex-rows	画面をスマホに出す。	has:스마트폰에 낸다	keep	packs
+dict:crit-lex-rows	小嶺さん……お願いだから電話に出て……	has:전화를 받아	keep	packs
+dict:crit-lex-rows	スマホに出てくる画面。	has:스마트폰에 나오는	keep	packs
+dict:crit-lex-rows	来年に打ち上げられる予定だ。	has:발사될	fix	local
+dict:crit-lex-rows	衛星は宇宙に打ち上げられた。	has:우주에 발사되었다	fix	local
+dict:crit-lex-rows	ロケットが軌道に打ち上げられた。	has:궤도에 발사	fix	local
+dict:crit-lex-rows	午後に打ち上げられた。	has:발사	fix	local
+dict:crit-lex-rows	上空に打ち上げられた花火。	has:발사된	fix	local
+dict:crit-lex-rows	クジラが海岸に打ち上げられていた。	has:밀려오고	keep	lookup
+dict:crit-lex-rows	船が岸に打ち上げられる。	has:밀려온다	keep	lookup
+pack:crit-lex:27	みんなと打ち上げに行った。	has:뒤풀이하러	fix	packs
+pack:crit-lex:27	仲間と打ち上げた。	has:뒤풀이했다	fix	packs
+pack:crit-lex:10	部員たちと打ち上げをした。	has:뒤풀이를	fix	packs
+pack:crit-lex:27	友達と花火を打ち上げた。	lacks:뒤풀이	keep	packs
+pack:crit-lex:27	ロケットを打ち上げた。	has:발사했다	keep	packs
+dict:words	たかが知れてるけど、	has:뻔하지만	fix	local
+pack:crit-lex:2	たかが知れた。	has:뻔했다	fix	packs
+pack:crit-lex:2	たかが知れたものだ。	has:뻔한 것	fix	packs
+pack:crit-lex:2	たかが知れてた。	has:뻔했다	fix	packs
+pack:crit-lex:18	実力はたかが知れています。	has:뻔합니다	fix	packs
+pack:crit-lex:2	たかが知れてるから。	lacks:알려져	fix	packs
+dict:words	知れてる。	has:알려져	keep	lookup
+dict:words	名が知れてる。	has:이름이 알려져	keep	lookup
+dict:crit-lex-rows	スマホに出てくる画面を見た。	has:스마트폰에 나오는	keep	packs
+dict:crit-lex-rows	練習に持ってこいなんだ。	lacks:안성맞춤인 이	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなんです。	has:안성맞춤입니다	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなので行く。	lacks:것으로	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなのに。	has:안성맞춤인데	keep	lookup
+dict:crit-lex-rows	練習に持ってこいかもしれない。	has:안성맞춤일지도	keep	lookup
+dict:crit-lex-rows	練習に持ってこいかな。	has:안성맞춤일까	keep	lookup
+dict:crit-lex-rows	練習に持ってこいらしい。	has:안성맞춤	keep	lookup
+dict:crit-lex-rows	持って来い！	has:가져와라	fix	lookup
+dict:crit-lex-rows	もってこい……	has:가져와라	fix	lookup
+dict:crit-lex-rows	早く持ってこいね。	has:가져와	fix	lookup
+dict:crit-lex-rows	地図がスマホに出た。	lacks:받았	keep	lookup
+dict:crit-lex-rows	携帯に出る広告。	lacks:받는	keep	lookup
+dict:crit-lex-rows	スマホに出せる。	lacks:받을	keep	lookup
+dict:crit-lex-rows	名前が携帯に出ない。	lacks:받지	keep	lookup
