@@ -207,7 +207,7 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
     const std::string_view prefix = text.substr(0, static_cast<std::size_t>(offset));
     if (recordText.size() + static_cast<std::size_t>(offset) > text.size()) return false;
     const std::string_view tail = From(text, offset + static_cast<long>(recordText.size()));
-    if (WidthOf(prefix) > 2 && recordText == kJaOki && tail.starts_with(",") &&
+    if (WidthAtLeast(prefix, 3) && recordText == kJaOki && tail.starts_with(",") &&
         (prefix.ends_with(kJaTe) || prefix.ends_with(kJaDe))) {
         return false;
     }
@@ -346,7 +346,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
                 }
             } else if (kind == 9 && (d.kind == 8 || d.kind == 10)) {
                 const auto lengthText = d.tailLengthCheck ? tail : recordText;
-                if (WidthOf(lengthText) >= 4 && Cut(tail, 0, 4) == Conjugation(kind, 11)) d.kind = 11;
+                if (WidthAtLeast(lengthText, 4) && Cut(tail, 0, 4) == Conjugation(kind, 11)) d.kind = 11;
             }
         }
         if (d.kind == 0) {
@@ -410,7 +410,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     }
     auto politeRequest = [&]() {
         Window middle;
-        if (WidthOf(tail) >= 6) middle = Cut(tail, 2, 4);
+        if (WidthAtLeast(tail, 6)) middle = Cut(tail, 2, 4);
         return Starts(tail, kJaI) && (middle == kJaMasu || middle == kJaMase || middle == kJaMashi);
     };
     // Only a godan verb in る takes the い of these stems (仰います of 仰る, not 仰ぐ or 仰向く).
@@ -608,9 +608,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
         return !dict::InClass(HDTRANS_CLASS("noun.sensed"), form) && !dict::InClass(HDTRANS_CLASS("noun.feeling-suru"), form);
     };
     Window two, four, six;
-    if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
-    if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
-    if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
+    if (const std::string_view r = after(); WidthAtLeast(r, 2)) two = Left(r, 2);
+    if (const std::string_view r = after(); WidthAtLeast(r, 4)) four = Left(r, 4);
+    if (const std::string_view r = after(); WidthAtLeast(r, 6)) six = Left(r, 6);
 
     if (!matched && base.kind == 10 && base.patternKind == 0 && w->TeAfterWaStem(surface, after())) return false;
     // A bare ichidan stem before a form of する is the godan verb in す of the same key where the dictionary has
@@ -766,9 +766,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
     bool state10 = base.kind == 10;
     bool voiceStem = false;  // the stem form of a (ら)れ or せ before a word on the stem (狙われやすい)
     six = {};
-    if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
+    if (const std::string_view r = after(); WidthAtLeast(r, 6)) six = Left(r, 6);
     Window eight;
-    if (w->settings.improvements.desireWindow && WidthOf(after()) >= 8) eight = Left(after(), 8);
+    if (w->settings.improvements.desireWindow && WidthAtLeast(after(), 8)) eight = Left(after(), 8);
     // The words that go on the stem form of a verb (読みやすい, 読みながら, 読みすぎる).
     auto compoundAfter = [&]() {
         const std::pair<const Window*, std::string_view> compounds[] = {

@@ -61,6 +61,16 @@ int WidthOf(std::string_view s) {
     return n;
 }
 
+bool WidthAtLeast(std::string_view s, int n) {
+    int w = 0;
+    while (w < n && !s.empty()) {
+        const text::Rune r = text::DecodeRune(s);
+        w += Width(r.cp);
+        s.remove_prefix(r.size);
+    }
+    return w >= n;
+}
+
 UnitPos UnitOffset(std::string_view s, int n) {
     int w = 0;
     std::size_t i = 0;
