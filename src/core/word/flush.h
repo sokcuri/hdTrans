@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <span>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -42,6 +43,20 @@ struct Flusher {
     // slot holds stamp << 1 | value, for the stamp of the try it was found in.
     struct Constructions {
         std::vector<uint32_t> surfaces;
+        // RunConstructions: the words of the chain in order; the families after the pass and the places
+        // of the words where an anchor holds (candidates: of the anchors no action changes; changed: of
+        // the others, found in the epoch changedEpoch); the places a family visits.
+        std::vector<Item*> items;
+        std::vector<std::pair<uint32_t, uint32_t>> candidates, changed;
+        uint32_t changedEpoch = 0;
+        std::vector<uint32_t> visit;
+        std::string lemma;  // the value of an anchor's field, when it is made
+        // The epoch of RunConstructions, numbered on through runs (epochStart: the first of this run),
+        // and of each slot of the atoms the epoch in which slotPlaces, the places where its atoms
+        // hold, were found.
+        uint32_t epoch = 0, epochStart = 0;
+        std::vector<uint32_t> slotEpochs;
+        std::vector<std::vector<uint32_t>> slotPlaces;
         std::vector<uint32_t> slots;
         uint32_t stamp = 0;
         const Item* word = nullptr;
