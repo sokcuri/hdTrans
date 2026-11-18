@@ -1,7 +1,7 @@
 # 규칙: GRM-3
 rule	input	expected	kind	layer
 cx:benefactive-topic:10	私が友達にノートを見せてもらった	나는 친구가 노트를 보여 주었다	fix	rewrites
-cx:benefactive-topic:10	「私が先輩に教えてもらったんです」	「저는 선배가 가르쳐 줬습니다」	fix	rewrites
+cx:benefactive-topic:10	「私が先輩に教えてもらったんです」	「저는 선배가 가르쳐 줬어요」	fix	rewrites
 cx:benefactive-topic:10	私が彼に送ってもらった。	나는 그가 보내 주었다.	fix	rewrites
 cx:benefactive-topic:10	あなたが先生に説明していただいた	당신은 선생님이 설명해 주셨다	fix	rewrites
 cx:benefactive-topic:10	僕が姉に髪を切ってもらいました。	저는 언니가 머리를 잘라 주었습니다.	fix	rewrites

@@ -127,6 +127,6 @@ normalize:predicate-variant	そんな様だった。	lacks:것 같	keep	normaliz
 normalize:predicate-variant	いぜい足掻く様を見せてくれ」	has:발버둥치는 모양을	keep	normalize
 normalize:predicate-variant	どちら様が僕に何の用ですか？	has:어느 분이	keep	normalize
 normalize:predicate-variant	「なるほどの、戦と言うものはこの様に状況に応じて、千差万別に変化させるのだな。」	has:이와 같이 상황에	fix	normalize
-normalize:predicate-variant	「た、確かにその様です」	has:그와 같습니다」	fix	normalize
+normalize:predicate-variant	「た、確かにその様です」	has:그와 같아요」	fix	normalize
 normalize:predicate-variant	これからアナタは、どの様に生きてく？」	has:어떻게 살아가?」	keep	normalize
 normalize:predicate-variant	どうやら強い衝撃を受けた様じゃな。	has:받은 같군.	keep	normalize

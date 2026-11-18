@@ -5,12 +5,14 @@
 
 #include "core/dict/classes.h"
 #include "core/output/pieces.h"
+#include "core/pipeline/restore.h"
 #include "core/rules/match.h"
 #include "core/text/hangul.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/tokenizer/token.h"
 #include "core/word/conjugation.h"
+#include "core/word/flush.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
 #include "core/word/util.h"
@@ -29,6 +31,24 @@ std::string_view Chunk(std::string_view s, std::size_t i, std::size_t n) {
 int Count(const Item& it) { return static_cast<int>(it.group->entries.size()); }
 
 }  // namespace
+
+bool CutStutter(std::string_view& s) {
+    std::string_view rest = s;
+    while (!rest.empty()) {
+        const char32_t c = DecodeLastRune(rest).cp;
+        if (c == pipeline::kStutterMark || c == pipeline::kStutterRest) {
+            while (!rest.empty() && (DecodeLastRune(rest).cp == pipeline::kStutterMark ||
+                                     DecodeLastRune(rest).cp == pipeline::kStutterRest)) {
+                rest.remove_suffix(DecodeLastRune(rest).size);
+            }
+            s = rest;
+            return true;
+        }
+        if (!text::IsSpace(c) && std::u32string_view(U"、，,…‥~～〜―ー-").find(c) == std::u32string_view::npos) return false;
+        rest.remove_suffix(DecodeLastRune(rest).size);
+    }
+    return false;
+}
 
 bool Item::CheckSrc(std::string_view s) { return rules::MatchRuleSurface(group->surface, s); }
 
@@ -198,9 +218,16 @@ bool Item::AfterPause(bool sentenceEnd) const {
         while (!s.empty() && text::IsSpace(DecodeLastRune(s).cp)) s.remove_suffix(DecodeLastRune(s).size);
         return s;
     };
-    std::string_view before = unspaced(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
+    // A stutter of the word (な、なんでしょう) is part of it: the pause is the one before the stutter
+    // (はい……な、なんでしょう).
+    auto unstuttered = [&unspaced](std::string_view s) {
+        s = unspaced(s);
+        while (CutStutter(s)) s = unspaced(s);
+        return s;
+    };
+    std::string_view before = unstuttered(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
     for (int j = tokenIndex - 1; before.empty() && w != nullptr && j >= 0; j--) {
-        before = unspaced(w->tokens.Raw(static_cast<std::size_t>(j)));
+        before = unstuttered(w->tokens.Raw(static_cast<std::size_t>(j)));
     }
     const std::string_view last = LastChar(before);
     return (sentenceEnd && dict::InClass(HDTRANS_CLASS("mark.sentence-end"), last)) || dict::InClass(HDTRANS_CLASS("mark.pause"), last);
@@ -468,7 +495,9 @@ bool Item::IsRuleRightBoundary() const {
             const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
             const bool run = !t.empty() && TrimRunes(t, "…‥・.").empty();
             dots = dots || run;
-            ellipsis = run || ClosingMarks(t);
+            // A stutter of the next word stands between too (すごい……た、たくさん).
+            std::string_view stutter = t;
+            ellipsis = run || ClosingMarks(t) || (CutStutter(stutter) && stutter.empty());
         }
         if (ellipsis && dots) return true;
     }

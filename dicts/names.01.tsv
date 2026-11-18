@@ -179074,7 +179074,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 南奎熙	남규희	N130	QPNVHn	Wb	GN							names.479244
 南好雄	미나미 요시오	N130	QPNVHn		GN							names.479245
 南威島	스프래틀리섬	N130	QCTVPl		GN							names.479246
-南子	남자	N130	QPNVHn	Wb	GN							names.479247
+南子	미나코	N130	QPNVHn	Wb	GN						みなこ	names.479247
 南孝温	남효온	N130	QPNVHn	Wb	GN							names.479248
 南学	난가쿠	N130	QPNVHn	Wa	GN						なんがく	names.479249
 南宇和郡	미나미우와군	N130	QCTVPl		GN							names.479250
@@ -201661,8 +201661,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 変面	변검	N110			GN							names.502219
 変革の風	변화의 바람	N130	QWK		GN							names.502220
 変革連合軍	연합변혁사령부	N130	VGt		GN							names.502221
-夏	넛츠	N130	QPNVHn	Wb	GN							names.502222
-夏	너츠	N130	QPNVHn	Wb	GN							names.502223
 夏	나츠	N130	QPNVHn	Wb	GN							names.502224
 夏 wanna say love U	나츠 wanna say love U	N130	QWK		GN							names.502225
 夏、バス停、君を待つ	여름, 버스 정류장, 너를 기다려	N130	QWK		GN							names.502227
@@ -264588,7 +264586,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦闘ロボット軍団	전투 로봇 군단	N110			GN							names.566558
 戦闘不能	전투불능	N130	QPNVHn	Wb	GN						せんとうふのう	names.566559
 戦闘人形 マヤ	전투형 마야	N110			GN							names.566560
-戦闘力	전투력	N130	QPNVHnUPc	Wb	GN							names.566561
 戦闘力1ゾイド	전투력 1 조이드	N110			GN							names.566562
 戦闘力530000	프리저	N130	QPNVHn	Wb	GN							names.566563
 戦闘員	전투원	N110			GN							names.566564
@@ -267522,7 +267519,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 攻撃の勢いで	공격전이다	N110			GN							names.569565
 攻撃の無力化	공격의 무력화	N130	QPNVHn		GN							names.569566
 攻撃は最大の防御	공격은 최대의 방어	N110			GN							names.569567
-攻撃力	공격력	N130	QPNVHn	Wb	GN							names.569568
 攻撃司令艦ザンタル	공격사령함 잔탈	N110			GN							names.569569
 攻撃団・四季	공격단 사계	N130	VGt		GN						こうげきだん・しき	names.569570
 攻撃性	공격성	N110			GN							names.569571
@@ -281130,7 +281126,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 會澤翼	아이자와 츠바사	N110			GN						あいざわ つばさ	names.583519
 會田	아이타	N130	QPNVHn	Wa	GN						あいた	names.583520
 會田勝美	아이다 가츠미	N130	QPNVHn		GN							names.583521
-月	유에	N130	QPNVHn	Wb	GN							names.583522
+月	츠키	N130	QPNVHn	Wb	GN							names.583522
 月 なぎさ	츠키 나기사	N130	QPNVHn		GN						つき なぎさ	names.583523
 月が導く異世界道中	달이 이끄는 이세계 여행	N130	QWK		GN							names.583525
 月が導く異世界道中 天下泰平旅日記	달이 이끄는 이세계 여행 천하태평 기행록	N130	QWK		GN							names.583526
@@ -316230,7 +316226,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 歩行グラフィック	보행 그래픽	N130	QPNVHn		GN							names.618826
 歩行ドット	보행 도트	N110			GN							names.618827
 歩行戦車	보행 전차	N110			GN							names.618828
-歩行者	보행자	N110			GN							names.618829
 歩行者信号	보행자 신호	N110			GN							names.618830
 歩行者優先	보행자 우선	N110			GN						ほこうしゃゆうせん	names.618831
 歩行者天国	보행자 천국	N110			GN							names.618832

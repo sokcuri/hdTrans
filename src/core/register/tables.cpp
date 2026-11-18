@@ -256,7 +256,7 @@ bool LoadKo(Tables& t, std::string& err) {
         for (const char* need :
              {"conn.aux", "aux.neg", "aux.neg-mot", "aux.prohib", "aux.give", "conn.neg", "family.jima", "nom.geot", "conn.default",
               "final.fallback", "pre.hon", "pre.past", "pre.gess", "lemma.cop", "lemma.negcop", "voice.aux", "lit.ends",
-              "mixed.hapsyo", "mixed.haeyo", "mixed.word"})
+              "mixed.hapsyo", "mixed.haeyo", "mixed.word", "listener.hon"})
             if (!t.grammar.contains(need)) {
                 err = std::string("grammar.tsv: missing ") + need;
                 return false;
@@ -397,6 +397,7 @@ bool LoadReader(Reader& d, std::string& err) {
         else if (kind == "punct-ko" && c.size() >= 4) d.punctKo[c[1]] = {ToU8(c[2]), c[3] == U"-" ? std::u32string() : c[3]};
         else if (kind == "sym") d.sym.insert(c[1][0]);
         else if (kind == "ja-particle") d.jaParticles.insert(c[1]);
+        else if (kind == "ja-focus") d.jaFocus.insert(c[1]);
         else if (kind == "copula-not") d.copulaNot.insert(c[1]);
         else if (kind == "dep") d.deps.insert(c[1]);
         else if (kind == "glue-lemma") d.glueLemmas.insert(c[1]);

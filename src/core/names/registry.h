@@ -135,6 +135,9 @@ public:
     // ((のぼる)うん 노보루, ［たまお］はい, ゆう：うん, ひかる「待って」): a run of two to six kana that the
     // dictionaries have as no whole common word, role or sound, read as the katakana names are (spec LEX-5800).
     std::string ReadKanaLabels(std::string_view line);
+    // line with each one-kanji name in a name box (names::BoxNameAt) written as the name layer's person reading
+    // (【月】「月がきれい」 → 【츠키】「月がきれい」), so the word stays the word elsewhere in the line (spec LEX-6060).
+    std::string ReadBoxNames(std::string_view line);
 
     text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
@@ -286,6 +289,7 @@ private:
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::set<std::string> honGuess_;                    // those before an honorific other than 殿
+    std::set<std::string> boxGuess_;                    // those alone in a name box before speech (【綺衣】「)
     std::map<std::string, int> framed_;                 // kanji runs in a person frame (PersonFrame)
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)

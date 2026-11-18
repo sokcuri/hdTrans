@@ -1,0 +1,47 @@
+# 규칙: LEX-6060
+rule	input	expected	kind	layer
+names:name-box	【幸】「ぼっかけ……？」	has:【사치】	fix	lookup
+names:name-box	【幸】：「ねえ」	has:【사치】	fix	lookup
+names:name-box	【幸】『ねえ』	has:【사치】	fix	lookup
+names:name-box	【愛】「え？　あたし？　なんで？」	has:【아이】	fix	lookup
+names:name-box	【朧】「ううぅん……」	has:【오보로】	fix	lookup
+names:name-box	【慶】「朔夜、動いていい？」	has:【케이】	fix	lookup
+names:name-box	【采】「……も、……もう駄目………、」	has:【아야】	fix	lookup
+names:name-box	【月】「おはよう」	has:【츠키】	fix	lookup
+names:name-box	【花】「きれい」	has:【하나】	fix	lookup
+names:name-box	【衣更】「みたいです」	lacks:의갱	fix	lookup
+names:name-box	【綺衣】「ええと……ええと……」	has:【키이】	fix	lookup
+names:name-box	【蒔菜】「あー……うん……」	has:【마키나】	fix	lookup
+names:name-box	【陽高】「そうか」	lacks:양고	fix	lookup
+names:name-box	【鉄平】「おう、話はついたがーー？」	has:【텟페이】	fix	lookup
+names:name-box	【幸】ねえ、待って	lacks:사치	keep	lookup
+names:name-box	【新】「春の新作」	has:【신】	keep	lookup
+names:name-box	【続】「次回」	has:【속】	keep	lookup
+names:name-box	【注意】「ここは危険です」	has:【주의】	keep	lookup
+names:name-box	【速報】「地震がありました」	has:【속보】	keep	lookup
+names:name-box	【結論】「やめよう」	has:【결론】	keep	lookup
+names:name-box	【電話】「もしもし」	has:【전화】	keep	lookup
+names:name-box	【少女】「だれ？」	has:【소녀】	keep	lookup
+names:name-box	【幸運】「やった」	has:【행운】	keep	lookup
+names:name-box	【心の声】「どうしよう」	has:【마음의 소리】	keep	lookup
+names:name-box	【月】「今夜は月がきれいだね」	has:달이	keep	lookup
+names:name-box	【空】「空が青いね」	has:하늘이	keep	lookup
+names:name-box	【海】「海に行こうよ」	has:바다에	keep	lookup
+names:name-box	【春】「春の新作です」	has:봄	keep	lookup
+names:name-box	【心】「心が痛い」	has:마음이	keep	lookup
+names:name-box	【星】「星がきれい」	has:별이	keep	lookup
+names:name-box	【風】「風が強いね」	has:바람이	keep	lookup
+names:name-box	【愛】「愛が欲しい」	has:사랑을	keep	lookup
+names:name-box	【雪】「雪だ」	has:눈이야	keep	lookup
+names:name-box	【月】「月さんって呼んで」	has:츠키 씨	fix	lookup
+names:name-box	【夏】「夏ちゃん！」	has:【나츠】「나츠짱	fix	lookup
+names:name-box	【采】「采を振る」	lacks:아야를	keep	lookup
+names:name-box	【萬平】「おはよう」	has:【만페이】	keep	lookup
+names:name-box	【萬平】「萬平さんは？」	has:만페이 씨	keep	lookup
+names:name-box	【萬智】「萬智さんは？」	has:마치 씨	fix	lookup
+names:name-box	【惠斗】「おはよう」	has:【케이토】	keep	lookup
+names:name-box	【黑鷹】「おはよう」	has:【쿠로타카】	keep	lookup
+names:name-box	惠斗さんは来た。	has:케이토 씨	fix	lookup
+names:name-box	【瀧昌】「おはよう」	has:【타키마사】	fix	lookup
+names:name-box	采配を振るう将軍。	has:지휘	keep	lookup
+names:name-box	喝采を浴びる。	has:갈채	keep	lookup

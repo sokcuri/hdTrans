@@ -21,12 +21,12 @@ cx:neg-done:10	「……まさか忘れてないわよね？」	has:잊지 않�
 cx:neg-done:10	婚姻届はまだ出してないわよね？	has:않았지?	fix	rewrites
 cx:neg-done:10	「Ｓ特の救済は決まってるけど、治安部の処分はまだ決まってないのよね？」	has:정해지지 않았지?	fix	rewrites
 cx:neg-done:10	覚えてないよね？	기억하지 못하지?	keep	rewrites
-cx:neg-done:20	「よかった、みんなケガしてないのよさ」	has:입지 않았어	fix	rewrites
+cx:neg-done:20	「よかった、みんなケガしてないよ」	has:입지 않았어	fix	rewrites
 cx:neg-done:20	まだ食べてないよ	has:먹지 않았어	fix	rewrites
 cx:neg-done:20	今は見てないの	지금은 보지 않아	keep	rewrites
 word:verb-negative-da	似つかわしくないと思います。	has:어울리지 않는다고	fix	word
 word:verb-negative-da	誰も納得しなかったのよ。もう願い事は叶えてもらえないって言ってもね	has:이루어 주지 않는다고	fix	word
-word:verb-negative-da	「……も、もしかして、立てないとか？」	has:않는다든가	fix	word
+word:verb-negative-da	「……も、もしかして、立てないとか？」	has:없다든가	fix	word
 word:verb-negative-da	美しくないと思う	아름답지 않다고 생각한다	keep	word
 cx:neg-result:11	恋愛をしていないです	has:하지 않았습니다	fix	rewrites
 cx:neg-result:11	勉強していないです	공부하지 않습니다	keep	rewrites

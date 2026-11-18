@@ -127,6 +127,16 @@ namespace internal {
 // (아・이・우, あ・ー 아・ー).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// Each hiragana ゔ that no dictionary key holds in katakana (ゔぁいおりん is ヴァイオリン) written as the
+// kana Korean hears: ゔぁ ゔぃ ゔ ゔぇ ゔぉ as ば び ぶ べ ぼ (しゔぁるみゃー しばるみゃー 시바루먀~), and a ゔ
+// alone or before ー, っ, ん or u as the groan う (ゔー 으~). The character set of the dictionary has no ゔ.
+std::string ReadUnheldVu(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Each word spelled out with 、 between its kana (お、は、よ, あ、り、が、と) written as heard, kana by kana
+// with the commas kept (오, 하, 요): three or more pieces of one plain kana each, not next to other kana,
+// kanji or ・, no kana said twice in a row, when the dictionary reads the kana joined as words.
+std::string ReadCommaSpelled(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // Each word spaced out character by character (お　と　な　の, こ ろ し て や る) joined: three or
 // more pieces of JoinSpelledOut with one space or ideographic space between them, not next to
 // other kana or kanji but for a copula or particle after it, when the dictionary or the sound
@@ -267,6 +277,9 @@ std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap
 // words (いーから, しょーに合わない) and loanwords written in hiragana (ちょこれいと チョコレート), spelled
 // as the dictionary keys them where only the respelling reads as words (spec LEX-4822).
 std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+// The length of the loanword in hiragana that RewriteSpellingVariants spells in katakana at character i of
+// rs (ふぁいと of ふぁいとー ファイト), 0 where none starts there.
+size_t HiraganaLoanwordLen(std::u32string_view rs, size_t i, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The pause comma inside a unit dropped: between a predicate and a final particle that ends the
 // utterance (ない、よ？), a word and さま (ご主人、さま) and the halves of a katakana word
@@ -375,6 +388,13 @@ struct SoundRow {
     // KR takes 하다 as an adjective, written KR한 before an の and a noun (fourth column adj:
     // ふわふわのクッション 푹신푹신한 쿠션).
     bool adj = false;
+    // The dictionary reads the mimetic in hiragana as the state it describes (fourth column
+    // state: びしょびしょだ 흠뻑 젖어 있다, びしょびしょになった 흠뻑 젖었다), which it is
+    // before a copula, に or a word of the dictionary that goes on from it.
+    bool state = false;
+    // The Korean of a state row before に and a verb, _ for a space (ni=녹초가_되도록: くたくたに疲れた
+    // 녹초가 되도록 지쳤다); KR when empty.
+    std::string ni;
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause

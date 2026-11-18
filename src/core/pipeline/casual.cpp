@@ -350,12 +350,14 @@ bool Tsutte(std::string_view s, size_t pos, Match& m) {
     return Done(s, m, q, p, 2);
 }
 
-// ([うくぐすつぬぶむる])な[ぁー]*[っッ]+([^ぁ-ゖ]|$)
+// ([うくぐすつぬぶむる])な[ぁー]*[っッ]+([^ぁ-ゖ]|$); not with three or more ぁ, a shout the colloquial stage draws out
+// (言うなぁぁぁっ 말하지 마아아앗).
 bool NaTsu(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"うくぐすつぬぶむる")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "な")) return false;
+    if (s.substr(p).starts_with("ぁぁぁ")) return false;
     return Repeat(s, p, InSet(U"ぁー"), 0, kUnbounded, [&](size_t q) {
         return Repeat(s, q, InSet(U"っッ"), 1, kUnbounded, [&](size_t r) {
             size_t t = r;
@@ -500,8 +502,8 @@ bool Run(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// ([るたなういくすつぬむぶぐてでだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
-// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ that end the sentence after
+// ([るたなういくすつぬむぶぐてでだ])んっ?[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
+// んです (行くんすか, 苦手なんスけど, 何なんっすか) and なのです (何なのっすか), but not ないんすか, ないんすよ that end the sentence after
 // a verb, which the end rows read (書かないんすか 쓰지 않나요). Without contracted forms read, not
 // after で, and not ないんすか or ないんすよ anywhere.
 template <bool kContracted>
@@ -517,7 +519,16 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
         if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー')) return false;
     }
     m.group[1] = Span(s, pos, p);
-    if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
+    if (Lit(s, p, "ん")) {
+        Lit(s, p, "っ");  // んっす, spelled with the small っ of っす (何なんっすか).
+    } else if (m.group[1] == "な" && Lit(s, p, "のっ")) {
+        // なのっす is なのです (何なのっすか, 嫌いなのっす); group 1 keeps the の, so that a name
+        // ending in なの (ひなのっすか) stays one word.
+        m.group[1] = Span(s, pos, p - std::string_view("っ").size());
+    } else {
+        return false;
+    }
+    if (!OneOf(s, p, U"すス")) return false;
     // The end rows of ないんすか and ないんすよ read a verb's ない at the end of a sentence; the ない
     // of a noun or a particle (問題ないんすか, 何にもないんすか) and one the sentence goes on after
     // (じゃないんすかね) are read as ないんです.
@@ -1574,6 +1585,65 @@ bool ScreamI(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// A run of one vowel spelled with small and plain kana mixed right after a word (静粛にぃいいぃ, 下さいぃいいぃ,
+// ゃあああぁぁぁ, うぐぁあああ) draws out the syllable before it; it is no いい or ああ of its own. The run is
+// written with the small kana alone, which the later stages read as a drawl (spec SND-23). It starts at a small
+// kana after a kana or kanji, or after the い or う that ends a word (下さいぃいいぃ); or at a plain kana after a
+// small ゃ, ゅ or ょ of its vowel, and then holds three or more (ゃあああぁ). After other kana a run that starts
+// plain is a shout the later stages read as it is (汚してええぇぇ). It ends the phrase:
+// before other kana or a ー it is part of a longer cry or the next word (まぁあの, はああぁん, ふぁああーー). A
+// run after a pause or a plain vowel kana stays (あああぁぁ, かわいいぃ), as does one of one size alone.
+bool MixedVowelRun(std::string_view s, size_t pos, Match& m) {
+    static constexpr std::u32string_view kSmall = U"ぁぃぅぇぉ", kPlain = U"あいうえお";
+    static constexpr std::u32string_view kRows[5] = {U"かがさざただなはばぱまやゃらわ", U"きぎしじちぢにひびぴみり",
+                                                     U"くぐすずつづぬふぶぷむゆゅる", U"けげせぜてでねへべぺめれ",
+                                                     U"こごそぞとどのほぼぽもよょろを"};
+    if (pos == 0) return false;
+    // A shout's っ written before a run that starts small (これだっぁああぁ, だってっぇえぇ) goes after it: the run
+    // draws the word out and the っ clips it (이거야아아앗).
+    const size_t start = pos;
+    const bool tsu = s.substr(pos).starts_with("っ");
+    if (tsu) {
+        pos += std::string_view("っ").size();
+        if (pos >= s.size() || !In(At(s, pos).cp, kSmall)) return false;
+    }
+    const std::string_view head = s.substr(0, start);
+    const char32_t before = LastRune(head).cp;
+    if (!IsHiraganaRune(before) && !IsKanjiRune(before)) return false;
+    if (tsu && In(before, kPlain)) return false;
+    const char32_t first = At(s, pos).cp;
+    const size_t small0 = kSmall.find(first), plain0 = kPlain.find(first);
+    if (small0 == std::u32string_view::npos && plain0 == std::u32string_view::npos) return false;
+    const size_t v = small0 != std::u32string_view::npos ? small0 : plain0;
+    if (In(before, kSmall) || before == U'っ') return false;
+    if (In(before, kPlain)) {
+        const std::string_view rest = head.substr(0, head.size() - std::string_view("あ").size());
+        if (plain0 != std::u32string_view::npos || rest.empty() || (v != 1 && v != 2) || before != kPlain[v]) return false;
+        const char32_t word = LastRune(rest).cp;
+        if ((!IsHiraganaRune(word) && !IsKanjiRune(word)) || In(word, kSmall) || In(word, kPlain) || word == U'っ') return false;
+    } else if (plain0 != std::u32string_view::npos && (!In(before, U"ゃゅょ") || !In(before, kRows[v]))) {
+        return false;
+    }
+    size_t p = pos, count = 0;
+    bool small = false, plain = false;
+    while (p < s.size()) {
+        const char32_t c = At(s, p).cp;
+        if (c == kSmall[v]) small = true;
+        else if (c == kPlain[v]) plain = true;
+        else break;
+        p += At(s, p).size;
+        count++;
+    }
+    if (!small || !plain || count < (plain0 != std::u32string_view::npos ? 3u : 2u)) return false;
+    // Before kana or a ー the run is part of a longer cry or the next word (まぁあの, はああぁん, ふぁああーー).
+    if (p < s.size() && ((IsHiraganaRune(At(s, p).cp) && At(s, p).cp != U'っ') || At(s, p).cp == U'ー')) return false;
+    static constexpr std::string_view kSmallUtf8[5] = {"ぁ", "ぃ", "ぅ", "ぇ", "ぉ"};
+    m.group[1] = kSmallUtf8[v];
+    m.group[2] = tsu ? std::string_view("っ") : std::string_view();
+    m.end = p;
+    return true;
+}
+
 // A demonstrative drawn out in its middle (あーんな, こーんな, そーんな, どーんな) is the demonstrative (저런, 이런).
 bool DrawnDemonstrative(std::string_view s, size_t pos, Match& m) {
     for (const std::string_view d : {"あ", "こ", "そ", "ど"}) {
@@ -2025,6 +2095,11 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         return Cat({stem, "ない", g.group[2]});
     });
     text = ReplaceAll(text, ScreamI, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, MixedVowelRun, [](const Match& m) {
+        std::string out;
+        for (size_t k = 0; k < (m.group[0].size() - m.group[2].size()) / m.group[1].size(); k++) out += m.group[1];
+        return out + std::string(m.group[2]);
+    });
     text = ReplaceAll(text, DrawnDemonstrative, [](const Match& m) { return Cat({m.group[1], "んな"}); });
     // A negative stem in ra, ka, ma... after more kana than Nee takes, or an ichidan or potential stem, before
     // ねぇ, ねえ or ねー: a verb of the dictionary in its dictionary form (見当たらねぇ 見当たらない,
@@ -2107,7 +2182,8 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     // てんす and でんす are the contracted ている before it (言ってんすか 言ってるんですか).
     text = ReplaceAll(text, contracted ? Nsu<true> : Nsu<false>, [contracted](const Match& m) {
         const bool te = contracted && (m.group[1] == "て" || m.group[1] == "で");
-        return Cat({m.group[1], te ? "るんです" : "んです", m.group[2]});
+        const bool no = m.group[1].ends_with("の");
+        return Cat({m.group[1], te ? "るんです" : no ? "です" : "んです", m.group[2]});
     });
     text = ReplaceAll(text, KonnaN, [](const Match& m) { return Cat({m.group[1], "の"}); });
     text = ReplaceAll(text, QuestionKai, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });

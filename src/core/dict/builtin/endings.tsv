@@ -238,6 +238,16 @@
 // ですわ, わね: polite
 書きますわ	써요	end	prio=-1
 静かですわね	조용하네요	end	prio=-1
+// のね after a polite predicate: 〜군요, as after a noun (LEX-6013)
+静かでしたのね	조용했군요	end	prio=-1
+静かですのね	조용하군요	end	prio=-1
+書きましたのね	썼군요	end	prio=-1
+書きますのね	쓰는군요	end	prio=-1
+書いていましたのね	쓰고 있었군요	end	prio=-1
+書いてましたのね	쓰고 있었군요	end	prio=-1
+高かったですのね	높았군요	end	prio=-1
+学生でしたのね	학생이었군요	end	prio=-1
+学生ですのね	학생이군요	end	prio=-1
 // のう: old speech
 書くのう	쓰는구나	end	prio=-1
 高いのう	높구나	end	prio=-1
@@ -477,6 +487,36 @@
 書いてたじゃないの	쓰고 있었잖아	end	prio=-1
 高いじゃないの	높잖아	end	prio=-1
 高かったじゃないの	높았잖아	end	prio=-1
+// じゃないのよ and じゃないのさ after a predicate: 〜잖아 (LEX-6001)
+書くじゃないのよ	쓰잖아	end	prio=-1
+書いたじゃないのよ	썼잖아	end	prio=-1
+書いてるじゃないのよ	쓰고 있잖아	end	prio=-1
+書いてたじゃないのよ	쓰고 있었잖아	end	prio=-1
+高いじゃないのよ	높잖아	end	prio=-1
+高かったじゃないのよ	높았잖아	end	prio=-1
+書くじゃないのさ	쓰잖아	end	prio=-1
+書いたじゃないのさ	썼잖아	end	prio=-1
+書いてるじゃないのさ	쓰고 있잖아	end	prio=-1
+書いてたじゃないのさ	쓰고 있었잖아	end	prio=-1
+高いじゃないのさ	높잖아	end	prio=-1
+高かったじゃないのさ	높았잖아	end	prio=-1
+書くじゃないのよね	쓰잖아	end	prio=-1
+書いたじゃないのよね	썼잖아	end	prio=-1
+書いてるじゃないのよね	쓰고 있잖아	end	prio=-1
+書いてたじゃないのよね	쓰고 있었잖아	end	prio=-1
+高いじゃないのよね	높잖아	end	prio=-1
+高かったじゃないのよね	높았잖아	end	prio=-1
+学生だったじゃない	학생이었잖아	end	prio=-1
+学生だったじゃないの	학생이었잖아	end	prio=-1
+学生だったじゃないのよ	학생이었잖아	end	prio=-1
+学生だったじゃないのさ	학생이었잖아	end	prio=-1
+学生だったじゃないのよね	학생이었잖아	end	prio=-1
+静かだったじゃないか	조용했잖아	end	prio=-1
+静かだったじゃない	조용했잖아	end	prio=-1
+静かだったじゃないの	조용했잖아	end	prio=-1
+静かだったじゃないのよ	조용했잖아	end	prio=-1
+静かだったじゃないのさ	조용했잖아	end	prio=-1
+静かだったじゃないのよね	조용했잖아	end	prio=-1
 // んじゃない after the past or a negative: 〜ㄴ 거 아니야, not 〜지 않아
 書いたんじゃない	쓴 거 아니야	end	prio=-1
 書いたんじゃないか	쓴 거 아닌가	end	prio=-1

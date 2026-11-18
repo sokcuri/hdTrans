@@ -100,7 +100,7 @@ HD_TEST(names_name_cues) {
         {"「アヤメ、来て」", {}},
         {"「大丈夫か、アヤメ」", {{"アヤメ", '-'}}},
         {"「ありがとう、高峰」", {{"高峰", '-'}}},
-        {"「高峰、テントは？」", {}},
+        {"「高峰、テントは？」", {{"高峰", '-'}}},
         {"「鈴谷」「村雨」「夕立」の旗艦", {{"鈴谷", '-'}, {"村雨", '-'}, {"夕立", '-'}}},
         // Not cued: a time word called at the start, a number after a ship type, a longer
         // word, a weak shape inside a sentence, a single kanji called.
@@ -110,7 +110,21 @@ HD_TEST(names_name_cues) {
         {"これは睦月です。", {}},
         {"雷、落ちた", {}},
         {"時雨が降る", {}},
-        {"高峰、テントは？", {}},
+        {"高峰、テントは？", {{"高峰", '-'}}},
+        // Person verbs: the active forms of the lemmas of name.person-verb (spec LEX-4820); no passive or
+        // potential (見える is no 見る), no wish, no てある, and after は no verb that takes an object
+        // without one in を.
+        {"高峰が語った。", {{"高峰", '-'}}},
+        {"高峰が逃げようとした。", {{"高峰", '-'}}},
+        {"高峰は俺を見つめた。", {{"高峰", '-'}}},
+        {"高峰は見つめた。", {}},
+        {"高峰が見えた。", {}},
+        {"高峰が見たい。", {}},
+        {"高峰が書いてある。", {}},
+        {"高峰が読める。", {}},
+        // A verb of moving on one's own is no cue for a word that names a vehicle or an animal.
+        {"小舟が近づいてくる。", {}},
+        {"高峰が近づいてきた。", {{"高峰", '-'}}},
         {"げ、アヤメ！？", {}},
         {"海防艦計3隻", {}},
         {"32村雨改二", {}},
@@ -312,6 +326,13 @@ HD_TEST(names_canonical_kana_before_document_and_line_readings) {
 HD_TEST(text_japanese_spelling) {
     for (const char* s : {"무라사메", "신지", "핫토리", "유우키", "와카바"}) HD_CHECK(text::JapaneseSpelling(s));
     for (const char* s : {"펑", "러", "김", "샹", "", "abc"}) HD_CHECK(!text::JapaneseSpelling(s));
+}
+
+// Every row of name.person-verb reads: a kind v5, v1 or vs that the lemma ends as, and known flags.
+HD_TEST(names_person_verb_rows) {
+    for (const std::string& lemma : names::PersonVerbProblems()) {
+        hdtest::Fail(__FILE__, __LINE__, "name.person-verb row does not parse: " + lemma);
+    }
 }
 
 // A cue that would hold for the document but names a weather word holds there when two lines give it.

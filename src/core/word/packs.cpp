@@ -48,6 +48,11 @@ std::string_view ArgSlot(std::string_view particle) {
                                       {"とは", "with"}, {"とも", "with"}};
     for (const Mark& m : kMarks)
         if (particle == m.particle) return m.slot;
+    // も marks the subject of a person atom (嬉野さんも下がった; Holds); のこと before a particle marks the slot of the particle
+    // (桜庭のことを止める: 桜庭 is the object)
+    if (particle == "も") return "subj";
+    if (particle.starts_with("のこと") && particle.size() > std::string_view("のこと").size())
+        return ArgSlot(particle.substr(std::string_view("のこと").size()));
     return {};
 }
 
@@ -101,8 +106,10 @@ struct Context {
     const Item* after = nullptr;  // the word before (the word is after it)
     std::set<std::string_view> forms;
     std::string final;  // the sentence particles and the mark that end the sentence after the word (final=)
+    std::string ending;  // the text of the word's ending entry (ending=: it starts with the value, 勝る|ものは)
     bool polite = false;
     std::string_view voice;  // voice rows: the reading of (ら)れ the chain decided
+    const dict::Snapshot* snapshot = nullptr;  // the name layer, for FramePerson
     // With an attachment: the word's own how as an argument, its clause and its main clause.
     bool attached = false;
     std::string_view how;
@@ -165,6 +172,7 @@ void AttachedContext(const Flusher::Attached& a, const Item* it, Context& c) {
 
 Context ContextOf(Flusher& f, const Item* it) {
     Context c;
+    c.snapshot = &f.w.snapshot;
     const char cls = ClassOf(it);
     c.next = it->After();
     c.after = it->prev;
@@ -174,15 +182,6 @@ Context ContextOf(Flusher& f, const Item* it) {
             for (const std::string_view p : {"が", "は"}) {
                 const std::size_t at = w.find(p);
                 if (at != std::string_view::npos && at > 0 && at + p.size() < w.size()) c.args.emplace_back("subj", it);
-            }
-        }
-        // the case phrases before it in its clause (noun + particle), right to left
-        for (const Item* q = it->prev; q != nullptr && q->group != nullptr; q = q->prev) {
-            if (SentenceEnd(q) || q->group->surface == "「" || q->group->surface == "『" || Predicate(ClassOf(q))) break;
-            if (ClassOf(q) == '2' && q->prev != nullptr && ClassOf(q->prev) == '1') {
-                if (const std::string_view slot = ArgSlot(q->group->surface); !slot.empty())
-                    c.args.push_back({slot, q->prev, {}, {}, "marked"});
-                q = q->prev;
             }
         }
         // through the auxiliaries of a て form (伸びてくる指先, 伸びている指) the predicate still modifies the noun; a
@@ -195,6 +194,22 @@ Context ContextOf(Flusher& f, const Item* it) {
             const std::string_view covered = from < text.size() ? text.substr(from, static_cast<std::size_t>(std::max(v->length, 0))) : std::string_view();
             return !covered.starts_with(v->group->surface) || covered.substr(v->group->surface.size()) == ending;
         };
+        // the case phrases before it in its clause (noun + particle), right to left; across one て form verb right
+        // before it the subject is shared (少女が慌てて下がる: 少女 is the subject of 下がる too), its other phrases are not
+        bool subjOnly = false;
+        for (const Item* q = it->prev; q != nullptr && q->group != nullptr; q = q->prev) {
+            if (SentenceEnd(q) || q->group->surface == "「" || q->group->surface == "『") break;
+            if (Predicate(ClassOf(q))) {
+                if (subjOnly || q != it->prev || ClassOf(q) != '4' || !teForm(q)) break;
+                subjOnly = true;
+                continue;
+            }
+            if (ClassOf(q) == '2' && q->prev != nullptr && ClassOf(q->prev) == '1') {
+                if (const std::string_view slot = ArgSlot(q->group->surface); !slot.empty() && (!subjOnly || slot == "subj"))
+                    c.args.push_back({slot, q->prev, {}, {}, q->group->surface == "も" ? "also" : "marked"});
+                q = q->prev;
+            }
+        }
         const Item* last = it;
         const Item* next = c.next;
         for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && ClassOf(next) == '4' && teForm(last) &&
@@ -203,8 +218,15 @@ Context ContextOf(Flusher& f, const Item* it) {
             last = next;
             next = next->After();
         }
+        // a conditional (止めたら, 止めれば) modifies no noun: the text the predicate covers ends in たら, だら or ば
+        const auto conditional = [](const Item* v) {
+            const std::string_view text = v->text;
+            const auto from = static_cast<std::size_t>(std::max(v->start, 0));
+            const std::string_view covered = from < text.size() ? text.substr(from, static_cast<std::size_t>(std::max(v->length, 0))) : std::string_view();
+            return covered.ends_with("たら") || covered.ends_with("だら") || covered.ends_with("ば");
+        };
         if (next != nullptr && ClassOf(next) == '1' && !Faint(next->group->surface) &&
-            last->DirectSurface().find("て") == std::string_view::npos) {
+            last->DirectSurface().find("て") == std::string_view::npos && !conditional(last)) {
             c.head = next;
             c.pred = next;
             c.headThroughAux = last != it;
@@ -225,6 +247,7 @@ Context ContextOf(Flusher& f, const Item* it) {
     // the form of the word, from its ending and the word after it
     // the ending, with that of a negative auxiliary written right after the word
     std::string ending(it->DirectSurface());
+    c.ending = ending;
     // An ending that starts with the formal noun こと (向けられたことが) holds no form: the form is the
     // conjugated text between the stem and the ending (られた).
     if (Predicate(cls) && ending.starts_with("こと")) {
@@ -236,6 +259,22 @@ Context ContextOf(Flusher& f, const Item* it) {
     } else if (const Item* aux = NegativeAux(it)) {
         ending += aux->group->surface;
         ending += aux->DirectSurface();
+    }
+    // the whole conjugated text after the stem, for the tense when the ending entry reads only its tail
+    // (ら of 勝ったら, 行ったら: ったら), without the sentence particles after it
+    std::string_view conjugated;
+    if (const std::string_view whole = Slice(it->text, it->start, it->length), stem = it->group->surface;
+        Predicate(cls) && !ending.empty() && whole.starts_with(stem) && whole.size() > stem.size()) {
+        conjugated = whole.substr(stem.size());
+        for (bool cut = true; cut;) {
+            cut = false;
+            for (const std::string_view p : kFinalParticles) {
+                if (conjugated.size() > p.size() && conjugated.ends_with(p)) {
+                    conjugated.remove_suffix(p.size());
+                    cut = true;
+                }
+            }
+        }
     }
     const std::string_view after = c.next != nullptr ? std::string_view(c.next->group->surface) : std::string_view();
     // the conjugated form without the sentence particles after it (行ったか, 行こうよ)
@@ -302,7 +341,7 @@ Context ContextOf(Flusher& f, const Item* it) {
     // ta: the past auxiliary closes the form (行った, 読んだ, 高かった, 行ったら); not the た of a stem (待たない)
     // (the だ forms only on verbs: 静かだ is the copula)
     for (const std::string_view ta : {"た", "たら", "たり", "たろう", "だ", "だら", "だり"}) {
-        if (form.ends_with(ta) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
+        if ((form.ends_with(ta) || conjugated.ends_with(ta)) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
     }
     // neg: the last negative auxiliary of the ending right after the stem (NegatedStem: 行か|ない, 高く|ない,
     // 行き|ません, 食べ|ない, 読んで|ない, 書か|れ|ない), not after a noun phrase, the copula, しか or っきゃ
@@ -328,7 +367,9 @@ Context ContextOf(Flusher& f, const Item* it) {
         const std::string_view before = std::string_view(ending).substr(0, at);
         if (!before.ends_with("た") && !before.ends_with("だ")) c.forms.insert("nja");
     }
-    if (form.ends_with("て") || form.ends_with("で")) {
+    // te: the te form, also inside a contraction after the geminate stem that only te and ta take
+    // (勝ってる, 勝っちゃう: 勝っている, 勝ってしまう)
+    if (form.ends_with("て") || form.ends_with("で") || (conjugated.starts_with("っ") && !c.forms.contains("ta"))) {
         c.forms.insert("te");
         if (after.starts_with("くださ") || after.starts_with("下さ") || after.starts_with("くれ")) c.forms.insert("te-request");
     }
@@ -380,6 +421,9 @@ std::string_view Feature(const AttachClause* c, std::string_view key) {
     return {};
 }
 
+bool CoversPerson(const dict::PackTable& t, std::string_view cls);
+bool FramePerson(const Item* x, const dict::Snapshot* snap);
+
 // Whether the argument word x is of class cls by the pack-classes files; a plural of a noun of the class is of it
 // (猫たち, 子供ら, 少年たち: noun.plural-suffix), whether the suffix is a word of its own or ends the word.
 bool ArgMember(const dict::PackTable& t, const Item* x, std::string_view cls) {
@@ -407,7 +451,9 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         const std::string_view base = std::string_view(a.slot).substr(0, dot);
         // <slot>.mod: the predicate right before an argument of that slot that modifies it (倒れた馬を 倒れる)
         const bool argMod = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "mod";
-        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod) {
+        // <slot>.of: the noun before の right before an argument of that slot (コートの中に コート)
+        const bool argOf = dot != std::string_view::npos && std::string_view(a.slot).substr(dot + 1) == "of";
+        if (dot != std::string_view::npos && base != "cl" && base != "main" && !argMod && !argOf) {
             // <slot>.how: how an argument of that slot is written (bare, omitted …), with an attachment
             if (!c.attached) return false;
             bool held = false;
@@ -454,9 +500,20 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
                     if (!dict::InClass(HDTRANS_CLASS("aux.te-through"), m->group->surface)) pool.push_back({a.slot, m, {}, {}, {}});
                 }
             }
+        } else if (argOf) {
+            for (const Arg& g : c.args) {
+                if ((base != "arg" && g.slot != base) || g.item == nullptr) continue;
+                const Item* no = g.item->prev;
+                if (no != nullptr && no->group != nullptr && no->group->surface == "の" && no->prev != nullptr &&
+                    no->prev->group != nullptr && ClassOf(no->prev) == '1')
+                    pool.push_back({a.slot, no->prev, {}, {}, {}});
+            }
         } else if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
+            // a も phrase may be the subject or the object (風邪も引かない): it fills the subject of a person atom only
+            const bool personAtom = std::any_of(a.values.begin(), a.values.end(),
+                                                [&](const std::string& v) { return v.starts_with("@") && CoversPerson(t, v); });
             for (const Arg& g : c.args)
-                if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
+                if ((a.slot == "arg" || g.slot == a.slot) && (g.how != "also" || personAtom)) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
             // (an attachment says itself which argument the head is)
             if (pool.empty() && !c.attached && (a.slot == "subj" || (a.slot == "obj" && !c.headThroughAux)) && c.head != nullptr)
@@ -468,12 +525,18 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             const Item* x = a.slot == "mod" ? c.mod : a.slot == "pred" ? c.pred : a.slot == "next" ? c.next : c.after;
             if (x != nullptr && x->group != nullptr) pool.push_back({a.slot, x, {}, {}, {}});
         } else if (a.slot == "form") {
-            if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.forms.count(v) > 0; }))
+            if (std::none_of(a.values.begin(), a.values.end(),
+                             [&](const std::string& v) { return v == "-" ? c.forms.empty() : c.forms.count(v) > 0; }))
                 return false;
             spec[2]++;
             continue;
         } else if (a.slot == "voice") {
             if (std::find(a.values.begin(), a.values.end(), c.voice) == a.values.end()) return false;
+            spec[2]++;
+            continue;
+        } else if (a.slot == "ending") {
+            if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.ending.starts_with(v); }))
+                return false;
             spec[2]++;
             continue;
         } else if (a.slot == "final") {
@@ -502,9 +565,13 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         for (const Arg& g : pool) {
             const Item* x = g.item;
             for (const std::string& v : a.values) {
+                if (g.how == "also" && !(v.starts_with("@") && CoversPerson(t, v))) continue;
                 if (v.starts_with("@")) {
                     // by the pack-classes files, or by the class the attachment gives the argument
-                    if ((x != nullptr && ArgMember(t, x, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
+                    // a name or a noun before an honorific is @person (FramePerson) as a case phrase, not as the
+                    // noun the predicate modifies (止めた田中さん: 田中 may be its subject)
+                    const bool person = x != nullptr && !g.how.empty() && CoversPerson(t, v) && FramePerson(x, c.snapshot);
+                    if ((x != nullptr && ArgMember(t, x, v)) || person || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
                         held = true;
                         depth = std::max(depth, t.Depth(v));
                     }
@@ -522,16 +589,26 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
 }
 
 // Whether a row of lemma * or lemma @class applies to the word, and how it names it (0 for *, 1 for @class).
-bool OpenRowNames(const dict::PackRow& r, const Item* it, int& named) {
+// A key other than the word's surface is the verb the caller found (休まれ: the stem 休ま of 休まる is the
+// passive of 休む, keyed 休), which names a member whose dictionary form it is or is the stem of.
+bool OpenRowNames(const dict::PackRow& r, const Item* it, std::string_view key, int& named) {
     named = 0;
     if (r.lemmaClass.empty()) return true;
     named = 1;
+    if (key != it->group->surface) {
+        const auto own = r.lemmaKeys.find(key);
+        if (own != r.lemmaKeys.end())
+            for (const std::string& lemma : own->second)
+                if (lemma == key || (lemma.starts_with(key) && text::RuneCount(std::string_view(lemma).substr(key.size())) == 1)) return true;
+    }
     const auto keyed = r.lemmaKeys.find(it->group->surface);
     if (keyed == r.lemmaKeys.end()) return false;
     for (const std::string& lemma : keyed->second)
         if (IsWord(it, lemma, std::max(it->selected, 0))) return true;
     return false;
 }
+
+bool GodanRowForm(const Item* x, std::string_view pattern);
 
 // The row of slot that decides the word, or -1.
 int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_view key, dict::PackSlot slot,
@@ -541,12 +618,21 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
     // the rows that may decide the word: those of its key (naming it, 2), then those of lemma @class (1)
     // and lemma * (0) of its class digit
     std::vector<std::pair<int, int>> rows;
+    // a godan verb row names the word only when the word conjugates as its lemma: the stem おこ of おこした is no
+    // word of a row of おこる
     if (keyed != t.byKey.end())
-        for (const int i : keyed->second) rows.emplace_back(i, 2);
+        for (const int i : keyed->second) {
+            const dict::PackRow& r = t.rows[static_cast<std::size_t>(i)];
+            if (cls == '4' && r.classDigit == '4' && r.godan && r.lemma.starts_with(it->group->surface) &&
+                text::RuneCount(std::string_view(r.lemma).substr(it->group->surface.size())) == 1 &&
+                !GodanRowForm(it, r.lemma))
+                continue;
+            rows.emplace_back(i, 2);
+        }
     if (const auto open = t.open.find(dict::OpenIndex(slot, cls)); open != t.open.end()) {
         for (const int i : open->second) {
             int named = 0;
-            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, named)) rows.emplace_back(i, named);
+            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, key, named)) rows.emplace_back(i, named);
         }
     }
     bool any = false;
@@ -637,35 +723,89 @@ bool ReadsText(const std::vector<Item*>& items, std::size_t i, std::string_view 
 
 // Whether x names a person in the engine's own codes: a name, or a word with a person sense.
 bool PersonWord(const Item* x) {
-    const Entry* e = x->group->At(x->selected);
+    // a voice row asks before selection, when the word's default candidate stands for it (太郎に泣かれた)
+    const int slot = std::max(x->selected, 0);
+    const Entry* e = x->group->At(slot);
     if (e != nullptr && e->user != nullptr && (e->user->name || e->user->nameLayer)) return true;
-    const dict::SemCodes sem(x->Attr(x->selected));
+    const dict::SemCodes sem(x->Attr(slot));
     for (const std::string_view code : {"QPN", "QNP", "VHn", "VQw", "VQm", "UAq", "UQf"})
         if (sem.HasCode(code)) return true;
+    return false;
+}
+
+// Whether cls is @person or a class above it (the parent chain of @person reaches cls).
+bool CoversPerson(const dict::PackTable& t, std::string_view cls) {
+    std::string_view c = "@person";
+    for (int guard = 0; guard < 32 && !c.empty(); guard++) {
+        if (c == cls) return true;
+        const auto p = t.parent.find(c);
+        if (p == t.parent.end()) break;
+        c = p->second;
+    }
     return false;
 }
 
 // Whether noun (the word x, or its noun part) is of class cls: by the pack-classes files, and for
 // @person and the classes above it also by the engine's person codes.
 bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std::string_view cls) {
-    if (t.Member(noun, cls)) return true;
-    // @person or a class above it (its parent chain reaches cls)
-    bool covers = false;
-    std::string_view c = "@person";
-    for (int guard = 0; guard < 32 && !c.empty() && !covers; guard++) {
-        covers = c == cls;
-        const auto p = t.parent.find(c);
-        if (p == t.parent.end()) break;
-        c = p->second;
-    }
-    return covers && PersonWord(x);
+    return t.Member(noun, cls) || (CoversPerson(t, cls) && PersonWord(x));
 }
 
 // The honorific suffixes that stay with the noun of a slot (青海さん, オクタヴィア様).
 bool SlotSuffix(const Item* x) {
     static constexpr std::string_view kSuffixes[] = {"さん", "様", "さま", "ちゃん", "くん", "君", "殿", "先生", "先輩", "氏"};
-    return x->group != nullptr && x->selected >= 0 &&
+    return x->group != nullptr &&
            std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
+}
+
+// Whether the argument x names a person by itself in a frame atom: a word read as a surname or given name
+// (a row with QPN and the grammar code Wa or Wb reads it so: 桜庭, レナ, 葵 아오이) or a noun before an honorific suffix (青海さん, 店長さん).
+// Wider person codes (VHn, UAq), QPN rows of common words (メカ) and name-file rows of common nouns (事故,
+// センサー) do not count; common person nouns come from the pack-classes files.
+bool FramePerson(const Item* x, const dict::Snapshot* snap) {
+    if (x->group == nullptr || x->group->entries.empty()) return false;
+    // a plural of a person (桜庭たち, 田中くんたち) is one, as ArgMember reads the plural of a class noun
+    if (dict::InClass(HDTRANS_CLASS("noun.plural-suffix"), x->group->surface))
+        return x->prev != nullptr && x->prev->tokenIndex == x->tokenIndex && FramePerson(x->prev, snap);
+    // the suffix goes on from the word before it; a name the name stage wrote as a token of its own (あお|くん)
+    // stands in the token right before
+    const auto joined = [](const Item* a, const Item* b) {
+        return a->group != nullptr && b->group != nullptr && (b->tokenIndex == a->tokenIndex || b->tokenIndex == a->tokenIndex + 1);
+    };
+    if (x->next != nullptr && joined(x, x->next) && SlotSuffix(x->next)) return true;
+    // the case phrase of 田中さんを ends in the suffix
+    if (SlotSuffix(x) && x->prev != nullptr && joined(x->prev, x) && ClassOf(x->prev) == '1') return true;
+    // the selected reading, or a surname or given-name row of the word that reads the same (葵 아오이)
+    const Entry* chosen = x->group->At(std::max(x->selected, 0));
+    if (chosen == nullptr) return false;
+    for (const Entry* e : x->group->entries) {
+        if (e == nullptr || e->dst != chosen->dst || !dict::SemCodes(e->attr).HasCode("QPN")) continue;
+        const std::string_view g = e->gattr;
+        for (std::size_t i = 0; i + 1 < g.size(); i += 2)
+            if (g.substr(i, 2) == "Wa" || g.substr(i, 2) == "Wb") return true;
+    }
+    // or a surname or given-name row of the name layer that reads the same (葵 아오이, ミナ 미나, アリス 앨리스): the
+    // name layer keeps its rows out of the word's candidates unless the name stage wrote the word. Only when a
+    // candidate with the chosen reading is a proper noun (白崎, 嬉野 as places, 葵 아오이) or the word has no
+    // dictionary row (ミナ), or a katakana word with the wide person code (VHn: アリス): a common noun (破壊, ダイヤ,
+    // パンチ) and a kana or kanji word of that code, which also marks creatures and bodies (とかげ, にわとり, 加盟国),
+    // keep their reading though a name row (a nickname) reads the same
+    if (snap == nullptr) return false;
+    bool proper = chosen->field.empty();  // no dictionary row: a katakana run read by its sound (ミナ)
+    const bool katakana = KatakanaSurface(x->group->surface);
+    for (const Entry* e : x->group->entries) {
+        if (e == nullptr || e->dst != chosen->dst) continue;
+        const dict::SemCodes sem(e->attr);
+        proper = proper || e->code == "130" || sem.HasCode("QPN") || (sem.HasCode("VHn") && katakana);
+    }
+    if (!proper) return false;
+    for (const dict::Record& r : snap->NameRecords(x->group->surface)) {
+        if (r.codes == nullptr || r.target != chosen->dst || !r.codes->sem.HasCode("QPN")) continue;
+        const std::string_view g = r.codes->gram.Text();
+        for (std::size_t i = 0; i + 1 < g.size(); i += 2)
+            if (g.substr(i, 2) == "Wa" || g.substr(i, 2) == "Wb") return true;
+    }
+    return false;
 }
 
 // Whether x ends an utterance on its side: no word (the start or end of the text), a mark, or a word
@@ -990,8 +1130,9 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     if (i > 0) {
         const std::string_view prev = items[i - 1]->group->surface;
         const bool together = items[i - 1]->tokenIndex == noun->tokenIndex;
+        // An idiom whose noun takes a describing word takes one of kind too (こんなドジ踏む 이런 실수를 하다).
         for (const std::string_view mod : {"の", "そんな", "こんな", "あんな", "その", "この", "あの", "どんな"}) {
-            if (prev == mod && together) return false;
+            if (prev == mod && together && !(c.modified && mod.ends_with("んな"))) return false;
         }
         // Nor a noun with a word that describes it or a noun it ends (大いなる力を 借りる, 欲しい物 言う,
         // 伯爵家継ぐ): the idiom's noun stands bare.
@@ -1000,7 +1141,12 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // An idiom whose noun takes a describing word takes an adjective, a verb or an adnominal before it
         // (悲しい目に 遭う, 重い腰を 上げる); a noun before it still makes a compound.
         const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
-        if (together && ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) return false;
+        // An opening bracket before it (「ドジ踏んだ」) describes nothing.
+        const bool opens = pc == '6' && dict::InClass(HDTRANS_CLASS("mark.open-bracket"), items[i - 1]->group->surface);
+        if (together && !opens &&
+            ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
+            return false;
+        }
     }
     // A noun said again right after the verb restates it with its particle (足 出せ 足を): the words are
     // taken literally.
@@ -1008,6 +1154,22 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     if (omitted && verb->detail != nullptr && (verb->detail->kind == 11 || verb->detail->kind == 12)) return false;
     m.end = j + 1;
     return true;
+}
+
+// Whether the godan verb x conjugates as the dictionary form that pattern ends with: the text after
+// its stem starts in the row of that form's last kana or with its euphonic kana (勝る: 勝らない,
+// 勝ります, 勝れば, 勝った; not 勝たない, 勝とう, 勝てば of 勝つ, which shares the stem).
+bool GodanRowForm(const Item* x, std::string_view pattern) {
+    static constexpr std::array<std::pair<std::string_view, std::string_view>, 9> kRows{{
+        {"う", "わいうえおっ"}, {"く", "かきくけこい"}, {"ぐ", "がぎぐげごい"}, {"す", "さしすせそ"}, {"つ", "たちつてとっ"},
+        {"ぬ", "なにぬねのん"}, {"ぶ", "ばびぶべぼん"}, {"む", "まみむめもん"}, {"る", "らりるれろっ"}}};
+    const std::string_view final = pattern.substr(pattern.size() - DecodeLastRune(pattern).size);
+    const auto row = std::find_if(kRows.begin(), kRows.end(), [&](const auto& r) { return r.first == final; });
+    if (row == kRows.end()) return true;
+    const std::string_view whole = Slice(x->text, x->start, x->length), stem = x->group->surface;
+    if (!whole.starts_with(stem) || whole.size() == stem.size()) return true;
+    const std::string_view rest = whole.substr(stem.size());
+    return row->second.find(rest.substr(0, text::DecodeRune(rest).size)) != std::string_view::npos;
 }
 
 // Whether the match can be written: no user word in it but in the slot, no word another span took,
@@ -1027,6 +1189,7 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     }
     if (c.slot && m.end == m.slotEnd) return false;
     const char cls = ClassOf(items[m.end - 1]);
+    if (cls == '4' && c.godan && !GodanRowForm(items[m.end - 1], c.slot ? c.after : c.befores[0])) return false;
     const std::string& compiled = cls == '4' ? c.headVerb : cls == '7' ? c.headAdjective : cls == '8' ? c.headNa : c.headRaw;
     // an utterance is written as it is, its last word's ending dropped
     if (c.anchored) {
@@ -1122,6 +1285,8 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                     // the head right after the slot: the slot's particle is written after the slot's word
                     Item* own = items[best.slotEnd - 1];
                     own->appended += ResolvedParticle(own->EntryText(own->selected), c.particle);
+                    // the target's space after that particle (に逃げられ, one word: 범인이 도망쳤다)
+                    if (!text.empty() && !text.starts_with(" ")) text.insert(0, " ");
                 } else if (c.slot && ((c.spaced && c.particle.empty()) || particleLeft) && k >= best.slotEnd) {
                     // the space the target puts after the slot's Korean
                     text.insert(0, " ");

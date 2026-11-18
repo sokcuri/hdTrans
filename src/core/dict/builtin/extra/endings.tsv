@@ -66,6 +66,10 @@
 書くやろが	쓰잖아	end	prio=-1
 書いたやろが	썼잖아	end	prio=-1
 高いやろが	높잖아	end	prio=-1
+書くやろう	쓰겠지	end	prio=-1
+書いたやろう	썼지	end	prio=-1
+高いやろう	높지	end	prio=-1
+書かないやろう	쓰지 않겠지	end	prio=-1
 学生じゃけえ	학생이니까	end	prio=-1
 学生じゃけん	학생이니까	end	prio=-1
 書くけえ	쓸 테니까	end	prio=-1

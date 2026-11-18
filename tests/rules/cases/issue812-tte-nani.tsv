@@ -1,0 +1,134 @@
+# 규칙: LEX-5820, LEX-5821, LEX-4025
+rule	input	expected	kind	layer
+cx:tte-nani:10	猫って何のこと？	has:고양이라니 무슨 말이야	fix	rewrites
+cx:tte-nani:10	ってなんのこと？	has:라니 무슨 말이야	fix	rewrites
+cx:tte-nani:10	猫って何の本？	!rule:cx:tte-nani:10	keep	rewrites
+cx:tte-nani:20	ハーモニカ……って何?	has:라니 뭐야	fix	rewrites
+cx:tte-nani:20	このボタンを押すと...って何？	has:...라니 뭐야	fix	rewrites
+cx:tte-nani:20	って、冗談だよ	!rule:cx:tte-nani:20	keep	rewrites
+cx:tte-nani:30	銀聖って何？	은성이 뭐야?	fix	rewrites
+cx:tte-nani:30	「おう。で、相談って何だ？」	has:상담은 뭐야	keep	rewrites
+cx:tte-nani:30	「結局、タコライスってなんなの？」	has:타코라이스는 뭐야	keep	rewrites
+cx:tte-nani:30	「Ａ定食ってなんですか？」	has:A정식은	keep	rewrites
+cx:tte-nani:30	「え？『本』って何？」	has:『책』이 뭐야	fix	rewrites
+cx:tte-nani:30	「ロクってなによ？」	has:로쿠는 뭐야	keep	rewrites
+cx:tte-nani:30	「結局あのメールって何だったんですかね」	has:메일은	keep	rewrites
+cx:tte-nani:30	「ねぇ師匠。爆弾って何？」	has:폭탄이 뭐야	fix	rewrites
+cx:tte-nani:30	猫って何度も鳴いた	has:고양이는 몇 번이나	keep	rewrites
+cx:tte-nani:30	猫って何か食べる？	has:고양이는 뭔가	keep	rewrites
+cx:tte-nani:30	猫って何も食べない	has:고양이는 아무것도	keep	rewrites
+cx:tte-nani:30	猫って何を食べる？	has:고양이는 뭘	keep	rewrites
+cx:tte-nani:30	食べ物って何がある？	has:음식은 뭐가	keep	rewrites
+cx:tte-nani:30	猫って何だか可愛い	has:고양이는 왠지	keep	rewrites
+cx:tte-nani:30	先生って何歳？	has:선생님은 몇 살	keep	rewrites
+cx:tte-nani:35	それって何？	그게 뭐야?	fix	rewrites
+cx:tte-nani:35	それって何ですか？	has:그게	fix	rewrites
+cx:tte-nani:35	それって何の本？	!rule:cx:tte-nani:35	keep	rewrites
+cx:tte-nani:36	「アレって何？」	has:그게 뭐야	fix	rewrites
+cx:tte-nani:36	「あれってなに？」	has:그게 뭐야	fix	rewrites
+cx:tte-nani:36	あれって何度目？	!rule:cx:tte-nani:36	keep	rewrites
+cx:tte-nani:40	帰ったって何？	has:돌아갔다니 뭐야	fix	rewrites
+cx:tte-nani:40	食べたって何？	has:먹었다니 뭐야	fix	rewrites
+cx:tte-nani:40	こっちに来たって何も無いでしょうに	has:와도 아무것도	keep	rewrites
+cx:tte-nani:50	知らねえって何？	모른다니 뭐야?	fix	rewrites
+cx:tte-nani:50	「心が狭いってナニ！？　失礼だよ！」	has:속이 좁다니 뭐야	fix	rewrites
+cx:tte-nani:50	「かもしれないって何よ」	has:모른다니 뭐야	fix	rewrites
+cx:tte-nani:50	行こうって何？	has:가자니 뭐야	fix	rewrites
+cx:tte-nani:50	死ねって何よ	has:죽으라니 뭐야	fix	rewrites
+cx:tte-nani:50	可愛いって何？	has:귀엽다니 뭐야	fix	rewrites
+cx:tte-nani:50	生きるってなんだろう	has:산다는 것은 무엇일까	keep	rewrites
+cx:tte-nani:50	「違うって何が？」	!rule:cx:tte-nani:50	keep	rewrites
+cx:tte-nani:60	猫って何？	고양이가 뭐야?	fix	rewrites
+cx:tte-nani:60	「イケナイコトってなに……」	has:뭐야……	fix	rewrites
+cx:tte-nani:60	猫なんて何？	has:뭐야?	fix	rewrites
+cx:tte-nani:60	「トップスリーって何さ？」	has:톱 쓰리가 뭐야	fix	rewrites
+cx:tte-nani:60	先生って何してるの？	has:선생님은 뭐해	keep	rewrites
+cx:tte-nani:60	何？	뭐?	keep	rewrites
+cx:tte-nani:60	これは何？	!rule:cx:tte-nani:60	keep	rewrites
+cx:tte-nani:70	押すって何だよ	누른다니 뭐야	fix	rewrites
+cx:tte-nani:70	猫って何さ	has:고양이는 뭐야	fix	rewrites
+cx:tte-nani:70	何だよ、それ	!rule:cx:tte-nani:70	keep	rewrites
+cx:tte-nani:75	ごまかすってなんだよ？	has:속인다니 뭐야	fix	rewrites
+cx:tte-nani:75	知らないってなんだ？	has:모른다니 뭐야	fix	rewrites
+cx:tte-nani:75	嘘なんだよ	!rule:cx:tte-nani:75	keep	rewrites
+cx:novel-fixes-2:340	俺が行くさ。	내가 가지.	fix	rewrites
+cx:novel-fixes-2:340	断ったさ。	거절했지.	fix	rewrites
+cx:novel-fixes-2:340	見てろよ、勝つさ。	has:이기지.	fix	rewrites
+cx:novel-fixes-2:340	それでさ、聞いてよ。	!rule:cx:novel-fixes-2:340	keep	rewrites
+cx:tte-nani:71	それってなんなの？	그게 뭐야?	fix	rewrites
+cx:tte-nani:71	あれってなんなの？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんなんだ？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	あれってなんなんだよ。	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんなのよ。	has:그게 뭐야	fix	rewrites
+cx:tte-nani:71	それってなんか変だね。	lacks:뭐야	keep	rewrites
+cx:tte-nani:71	それってなんだか怖い。	has:왠지	keep	rewrites
+cx:tte-nani:72	それってなんだっけ？	그게 뭐였더라?	fix	rewrites
+cx:tte-nani:72	あれってなんだっけ。	has:그게 뭐였더라	fix	rewrites
+cx:tte-nani:73	それってなんなんですか？	has:그게 뭐예요	fix	rewrites
+cx:tte-nani:12	それってなんのこと？	그게 무슨 말이야?	fix	rewrites
+cx:tte-nani:12	あれってなんのこと？	has:그게 무슨 말이야	fix	rewrites
+cx:tte-nani:45	寒かったって何？	추웠다니 뭐야?	fix	rewrites
+cx:tte-nani:45	可愛かったって何？	has:귀여웠다니	fix	rewrites
+cx:tte-nani:45	行かなかったって何？	has:않았다니	fix	rewrites
+cx:tte-nani:45	好きだったって何？	has:좋아했다니	fix	rewrites
+cx:tte-nani:45	綺麗だったって何？	has:예뻤다니	fix	rewrites
+cx:tte-nani:46	彼女だったって何？	has:그녀였다니	fix	rewrites
+cx:tte-nani:47	嘘だって何？	거짓말이라니 뭐야?	fix	rewrites
+cx:tte-nani:47	本当だって何？	has:사실이라니 뭐야	fix	rewrites
+cx:tte-nani:47	冗談だってなんだよ。	has:농담이라니 뭐야	fix	rewrites
+cx:tte-nani:47	子供だって何でも知ってる。	has:아이도	keep	rewrites
+cx:tte-nani:47	誰だって何か持ってる。	lacks:라니	keep	rewrites
+cx:tte-nani:50	生きるってなんだろう。	산다는 것은 무엇일까.	keep	rewrites
+cx:novel-fixes-2:342	食べなかったさ。	먹지 않았지.	fix	rewrites
+cx:novel-fixes-2:342	知らなかったさ。	몰랐지.	fix	rewrites
+cx:novel-fixes-2:342	寒かったさ。	추웠지.	fix	rewrites
+cx:novel-fixes-2:342	知らなかったさ！	has:몰랐지!	fix	rewrites
+cx:novel-fixes-2:342	あの頃は楽しかったさ。	has:즐거웠지	fix	rewrites
+cx:novel-fixes-2:342	それでさ、聞いてよ。	!rule:cx:novel-fixes-2:342	keep	rewrites
+cx:novel-fixes-2:342	食べたさ。	!rule:cx:novel-fixes-2:342	keep	rewrites
+cx:tte-nani:12	それって何？	!rule:cx:tte-nani:12	keep	rewrites
+cx:tte-nani:45	寒かったって言ってた。	!rule:cx:tte-nani:45	keep	rewrites
+cx:tte-nani:46	彼女だったって聞いた。	!rule:cx:tte-nani:46	keep	rewrites
+cx:tte-nani:72	それってなんだか怖い。	!rule:cx:tte-nani:72	keep	rewrites
+cx:tte-nani:73	それってなんですか？	!rule:cx:tte-nani:73	keep	rewrites
+cx:tte-nani:70	「アレって何だよ」	「그게 뭐야」	fix	rewrites
+cx:tte-nani:70	あれって何だよ	그게 뭐야	fix	rewrites
+cx:tte-nani:70	それって何だよ	그게 뭐야	fix	rewrites
+cx:tte-nani:70	それって何だよ！	그게 뭐야!	fix	rewrites
+cx:tte-nani:70	それって何だよ？	그게 뭐야?	fix	rewrites
+cx:tte-nani:70	ソレって何だ	그게 뭐냐	fix	rewrites
+cx:tte-nani:70	それって何だ	그게 뭐냐	fix	rewrites
+cx:tte-nani:70	「あれって何だ」	「그게 뭐냐」	fix	rewrites
+cx:tte-nani:70	アレって何だ！	그게 뭐냐!	fix	rewrites
+cx:tte-nani:70	それって何だ？	그게 뭐야?	fix	rewrites
+cx:tte-nani:70	お前の言うそれって何だ？	has:그게 뭐야	fix	rewrites
+cx:tte-nani:70	変な声がしたけど、それって何だよ	has:그게 뭐야	fix	rewrites
+cx:tte-nani:70	知らねえって何だよ！	모른다니 뭐야!	keep	rewrites
+cx:tte-nani:70	嘘だって何だよ	거짓말이라니 뭐야	keep	rewrites
+cx:tte-nani:70	帰ったって何だよ？	돌아갔다니 뭐야?	keep	rewrites
+cx:tte-nani:70	猫って何だ	고양이는 뭐냐	keep	rewrites
+cx:tte-nani:71	ソレってなんだよ	그게 뭐야	keep	rewrites
+cx:tte-nani:35	それって何なの？	그게 뭐야?	keep	rewrites
+cx:tte-nani:6	これって何のこと？	이게 무슨 말이야?	fix	rewrites
+cx:tte-nani:6	コレってなんのこと	이게 무슨 말이야	fix	rewrites
+cx:tte-nani:6	「此れって何のこと」	「이게 무슨 말이야」	fix	rewrites
+cx:tte-nani:6	これって何の本？	lacks:이게	keep	rewrites
+cx:tte-nani:7	これって何だよ	이게 뭐야	fix	rewrites
+cx:tte-nani:7	コレってなんだよ！	이게 뭐야!	fix	rewrites
+cx:tte-nani:8	これって何？	이게 뭐야?	fix	rewrites
+cx:tte-nani:8	ねえ、これって何？	has:이게 뭐야?	fix	rewrites
+cx:tte-nani:8	「コレってなに」	「이게 뭐야」	fix	rewrites
+cx:tte-nani:8	これって何だ	이게 뭐냐	fix	rewrites
+cx:tte-nani:8	これってなんなの？	이게 뭐야?	fix	rewrites
+cx:tte-nani:8	これってなんだっけ	이게 뭐였더라	fix	rewrites
+cx:tte-nani:8	これって何ですか？	has:이게 뭐예요?	fix	rewrites
+cx:tte-nani:8	これって何か変だね	lacks:이게	keep	rewrites
+cx:tte-nani:8	これって何度目？	lacks:이게	keep	rewrites
+cx:tte-nani:8	これってすごいね	lacks:이게	keep	rewrites
+cx:tte-nani:8	これって猫？	lacks:이게	keep	rewrites
+cx:tte-nani:8	これってなんだか怖い	lacks:이게	keep	rewrites
+cx:tte-nani:8	これって何を意味するの？	lacks:이게	keep	rewrites
+cx:tte-nani:7	猫って何だよ	!rule:cx:tte-nani:7	keep	rewrites
+cx:tte-nani:7	あれって何だよ	!rule:cx:tte-nani:7	keep	rewrites
+cx:tte-nani:72	羊飼いってなんだっけ？	!rule:cx:tte-nani:72	keep	rewrites
+cx:tte-nani:71	手抜きってなんなのさ？	lacks:뭐인	keep	rewrites

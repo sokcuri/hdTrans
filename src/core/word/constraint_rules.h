@@ -78,6 +78,8 @@ enum class ConstraintContext : uint8_t {
                         // しっくり or しっとり (時もしっかり: も + しっかり, それでもしっかり: それでも + しっかり)
     NotBeforeIi,        // a letter follows that is no い, ぃ, ー, ～, 〜, っ or ッ (もういない: もう + いない; not
                         // もういい, もういー, もういっか)
+    NotBeforeIiPredicate,  // NotBeforeIi, or that letter and then a kanji or katakana, the attributive before
+                           // a noun (もうよく: もう + よく, もうよい子: もう + よい子; not もう良いって, もう良い、)
     BeforeAitsu,        // いつ follows but not いつつ, so the word's last あ starts あいつ (俺たちであいつを:
                         // で + あいつ; not であいつつ)
     BeforeMarude,       // るで, るっきり, るきり or るごと follows, so the word's last ま starts まるで, まるっきり,
@@ -108,14 +110,24 @@ enum class ConstraintContext : uint8_t {
                             // (7体の中鬼: の and the noun 中鬼, not の中; 8体の中一つ stays)
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
+    BeforeTopicTte,     // って follows, を is not right before the word, and the text after the って starts no
+                        // ている aspect: an い or none and then a member of contraction.te-iru that no longer
+                        // kana word of the dictionary spans (この曲って: the topic; not 道を曲って, 曲ってる, 曲っていた;
+                        // この曲ってたしか: たしか)
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
                         // (ことなどできない: など + できない, not などで + きない); a follow that ends in $ is the
                         // whole text after it (部屋においで: で$)
+    AfterNounBeforeListed,  // BeforeListed, right after a noun as NotAfterNoun tells it, in its token or at the
+                            // end of the token before (学校|でな、 particle で; そとに|でな！, はやく|でな。 stay 出な)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word
                         // with a kanji or katakana that ends there and reads first as a verb or an
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a
                         // noun, a word the dictionary lacks, the ん of a nominalizer or at a token start
                         // (マザコン|ちゃう, 行くん|ちゃう)
+    ParticleSplit,      // right after a kanji or katakana word, the word is a hiragana noun that starts
+                        // with a one-kana particle of particle.split-lead, and the kana after that particle
+                        // start a dictionary word of two characters or more that goes on past the word's
+                        // end (刺身|にわ|さび: に + わさび, not 庭 + さび)
 };
 
 // The senses a rule rejects.
@@ -171,7 +183,7 @@ struct ConstraintRule {
     ConstraintReject reject;
     std::string_view note;    // the rule in Korean
     std::string_view target;  // ConstraintReject::OtherTargets and Target only
-    std::string_view follows = {};  // ConstraintContext::BeforeListed only
+    std::string_view follows = {};  // ConstraintContext::BeforeListed and AfterNounBeforeListed only
 };
 
 // In table order; each rule runs on the candidates the earlier ones left.

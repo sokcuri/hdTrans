@@ -1,0 +1,70 @@
+# 규칙: LEX-5982, LEX-5983, LEX-5984, LEX-5981
+rule	input	expected	kind	layer
+colloquial:word-drawl	下さいいいい	주세요오오오	fix	colloquial
+colloquial:word-drawl	下さいいいいっ！	주세요오오옷!	fix	colloquial
+colloquial:word-drawl	来ないでくださいいいい	has:주세요오오오	fix	colloquial
+colloquial:word-drawl	来ないでくださいいいい	lacks:좋은	fix	colloquial
+colloquial:word-drawl	お願いいいい	부탁~	fix	colloquial
+colloquial:word-drawl	お願いぃぃぃっ！	부탁~!	fix	colloquial
+colloquial:word-drawl	もういいぃいい	has:이제	fix	colloquial
+colloquial:word-drawl	もういいぃいい	lacks:좋다	fix	colloquial
+colloquial:word-drawl	もういいぃいい	lacks:있고	fix	colloquial
+colloquial:word-drawl	もういいいいい	has:이제	fix	colloquial
+colloquial:word-drawl	もういいいいい	lacks:좋은	fix	colloquial
+colloquial:word-drawl	もういいいいい	lacks:있고	fix	colloquial
+colloquial:word-drawl	帰りたいいいい	돌아가고 싶어어어어	fix	colloquial
+colloquial:word-drawl	ごめんなさいいいい	미안해요오오오	fix	colloquial
+colloquial:word-drawl	嫌だいいいい	싫어어어어	fix	colloquial
+colloquial:word-drawl	気持ちいいいい	기분 좋아	keep	colloquial
+colloquial:word-drawl	いいいい	이이이이	keep	colloquial
+colloquial:word-drawl	くうぅぅぅ	쿠우우우우	keep	colloquial
+colloquial:word-drawl	これでいいいい？	이거면 돼?	keep	colloquial
+colloquial:word-drawl	ちっくしょー、負けたあ！！信じられねーぜ！ぐやじいいい……！！	has:구야지이이이	keep	colloquial
+restore:drawn-siot	これぇええ	이거어어엇	keep	restore
+restore:drawn-siot	これぇぇぇっ！	이거어어엇!	keep	restore
+restore:drawn-siot	服ぅぅぅ！	has:옷	keep	restore
+restore:drawn-siot	味ぃぃぃ！	has:앗	keep	restore
+restore:drawn-siot	私の服ぅぅぅ！	has:옷	keep	restore
+word:de-before-final-na	学校でなぁぁあ！	has:학교에서	fix	word
+word:de-before-final-na	学校でなぁぁあ！	lacks:나오는	fix	word
+word:de-before-final-na	学校でな、事件があった	학교에서, 사건이 있었다	fix	word
+word:de-before-final-na	俺の手の平でなぁあぁあぁああ！！！	has:손바닥에서	fix	word
+word:de-before-final-na	俺の手の平でなぁあぁあぁああ！！！	lacks:나오는	fix	word
+word:de-before-final-na	駄目ではないが、その願いは私の管轄外でな。	안 되는 건 아니지만, 그 소원은 내 관할 밖이라서.	keep	word
+word:de-before-final-na	元気でな	잘 지내	keep	word
+word:de-before-final-na	学校でなかった	학교가 아니었다	keep	word
+word:de-before-final-na	外にでなさい	밖에 나와	keep	word
+word:de-before-final-na	ここでなぁああ	has:여기서	keep	word
+word:de-before-final-na	ここでなぁああ	lacks:여기서 아	keep	word
+sound:cry-n	わああぁああぁあぁあああぁあぁあん！！	lacks:아 아	fix	sound
+sound:cry-n	わああぁああぁあぁあああぁあぁあん！！	has:와아	fix	sound
+sound:cry-n	「うああぁぁあああぁぁぁん……」	lacks:아 아	fix	sound
+sound:cry-n	「うああぁぁあああぁぁぁん……」	has:으아아	fix	sound
+sound:cry-n	ふわあぁあぁあぁああぁああん…！！	lacks:아 아	fix	sound
+sound:cry-n	ふわあぁあぁあぁああぁああん…！！	has:후와아	fix	sound
+sound:cry-n	わあん、と泣いた	has:와앙	fix	sound
+sound:cry-n	わあ、すごい	우와, 대단해	keep	sound
+sound:cry-n	ごあいさつ	인사	keep	sound
+sound:cry-n	ふんしょ、っと	has:영차	fix	sound
+sound:cry-n	ふんしょ、っと	lacks:훈쇼	fix	sound
+normalize:drawn-are	あれぇ	어라	fix	normalize
+normalize:drawn-are	あれぇ。	어라.	fix	normalize
+normalize:drawn-are	って、あれぇ？あなた、D区画の……。	has:어라?	fix	normalize
+normalize:drawn-are	って、あれぇ？あなた、D区画の……。	lacks:저것	fix	normalize
+normalize:drawn-are	あれぇはなんだ	저것은 뭐야	keep	normalize
+sound:stutter-ichi	い、一撃で緊張したっ！	이, 일격으로 긴장했다!	fix	sound
+sound:stutter-ichi	い、一気に走った	다, 단번에 달렸다	fix	sound
+sound:stutter-ichi	い、一杯ください	하, 한 잔 주세요	fix	sound
+sound:stutter-ichi	い、一切ない	이, 일절 없다	fix	sound
+sound:stutter-ichi	はい、一つ	네, 하나	keep	sound
+casual:mixed-after-tsu	「見えたッ！！ これだっぁああぁああぁああ！！！！」	has:이거야아아	fix	casual
+casual:mixed-after-tsu	５万円を…自腹だってっぇえぇええぇ？！	has:자기부담도오오	fix	casual
+word:de-before-final-na	運転手付きでな	has:운전기사와 함께	fix	word
+word:de-before-final-na	そとにでな！	has:밖에 나오	keep	word
+word:de-before-final-na	はやくでな。	has:빨리 나오	keep	word
+word:de-before-final-na	部屋をでな。	has:방을 나오	keep	word
+word:de-before-final-na	家からでな！	has:집에서 나오	keep	word
+word:de-before-final-na	ゲームでな。	게임에서.	fix	word
+word:de-before-final-na	訓練中の事故でな。	훈련 중의 사고로.	fix	word
+word:de-before-final-na	太郎でな。	has:타로로	fix	word
+word:de-before-final-na	ユウキでな！	유우키로!	fix	word

@@ -1,0 +1,39 @@
+# 규칙: LEX-5940
+rule	input	expected	kind	layer
+names:learned-carry	凪がにっこり笑う。\n凪が人差し指を立てた。	has:나기가 집게	fix	fixed
+names:learned-carry	凪がにっこり笑う。\nそして凪の体温が伝わってくる。	has:나기의 체온	fix	fixed
+names:learned-carry	凪がにっこり笑う。\n立ち上がった凪を、後ろから抱く。	has:나기를	fix	fixed
+names:learned-carry	凪がにっこり笑う。\n「今度は凪とさせてくれ」	has:나기와	fix	fixed
+names:learned-carry	凪がにっこり笑う。\n海が凪いでいる。	has:바다가 잔잔	keep	fixed
+names:learned-carry	筧くんの好み、調べてみようよ。\n各々、筧を憎からず思っていた。	has:카케이를	fix	fixed
+names:learned-carry	筧くんの好み、調べてみようよ。\n「しょーがねえな、俺も筧狙いで行くか」	has:카케이	fix	fixed
+names:learned-carry	筧さーん、止めて下さいよ。\n「そうそう、もうすぐ筧佳奈だしね」	has:카케이	fix	fixed
+names:learned-carry	筧さん、こっち。\n「全部冗談。筧とはただの隣人、それだけ」	has:카케이	fix	fixed
+names:learned-carry	ご機嫌な凪が、くるりと回って俺を見る。\n凪が笑った。	has:나기가, 빙그르	fix	fixed
+names:learned-carry	千里が笑った。\n山を越えて3千里を歩いた。	has:3천리	keep	fixed
+names:learned-kana	筧さん、こっち。\n「かけいさんっ、だめっ」	has:「카케이 씨	fix	fixed
+names:learned-kana	筧さん、こっち。\n「は、はいっ……嬉しいですっ……かけいさんっ」	has:……카케이 씨	fix	fixed
+names:learned-kana	筧さん、こっち。\n「かけいさん……」	has:「카케이 씨	fix	fixed
+names:learned-kana	筧さん、こっち。\n声をかけいさんで行った。	lacks:카케이 씨로	keep	fixed
+names:learned-kana	やっぱりすごいよ、つぐみは。\nつぐみの手を握る。\n「いや、つぐみらしいと思う」	has:츠구미답다	fix	fixed
+names:learned-kana	やっぱりすごいよ、つぐみは。\nつぐみの手を握る。\n「その時つぐみが考えてたのは、助けようってことだけだった」	has:츠구미가 생각	fix	fixed
+names:learned-kana	やっぱりすごいよ、つぐみは。\nつぐみの手を握る。\n彼は口をつぐみ、黙った。	has:그는 입을 다물	keep	fixed
+names:learned-kana	しずくちゃんが来た。\nしずくが落ちた。	has:물방울	keep	fixed
+names:learned-kana	めぐみさんが来た。\n自然のめぐみに感謝する。	has:은혜	keep	fixed
+names:learned-kana	のぞみさんが来た。\n最後ののぞみを捨てない。	has:희망	keep	fixed
+names:name-box	【凪】「今度はあたしの番ね」\n凪が人差し指を立てた。	has:나기가 집게	fix	fixed
+names:name-box	【千里】「おはよう」\n【千里】「行こう」\n千里に言われた。	has:치사토에게	fix	fixed
+names:name-box	【筧】：「おはよう」\n筧は来ないの？	has:카케이는	fix	fixed
+names:learned-carry	空ちゃん、おはよう。\n空は青い。	has:하늘은 푸르	keep	fixed
+names:learned-carry	島さん、おはよう。\n島に渡る船に乗った。	has:섬에	keep	fixed
+names:learned-carry	なぎさちゃん、おはよう。\nなぎさを歩いた。	has:물가를	keep	fixed
+names:learned-carry	谷くん、どうも。\n谷に落ちた。	has:골짜기에	keep	fixed
+names:name-box	【海】「行こう」\n海に行こう。	has:바다에	keep	fixed
+names:name-box	【泉】「待って」\n泉の水を飲んだ。	has:샘	keep	fixed
+names:learned-kana	真央さん、どうも。\nまおうさまが来た。	has:마왕	keep	fixed
+names:learned-kana	真央さん、どうも。\nまおうさま、お待ちください。	has:마왕	keep	fixed
+names:learned-kana	佳奈さん、おはよう。\nかなさん、行こう。	has:카나 씨, 가자	fix	fixed
+names:name-box	【幸】「何？」\n幸ちゃん、待って。	has:【사치】	fix	fixed
+names:name-box	【月】「おはよう」\n月が出た。	has:달이	keep	fixed
+names:name-box	【中】「おはよう」\n中に入った。	lacks:나카	keep	fixed
+names:name-box	【心】「どうしよう」\n心が痛い。	has:마음이	keep	fixed

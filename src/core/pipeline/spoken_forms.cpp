@@ -999,11 +999,14 @@ bool KansaiTon(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// A question word with the Kansai やねん (誰やねん 누구야, 何がやねん 뭐가, なんやねん after a word): なんだよ, or
-// だよ after 何, なん, 何が. なんでやねん stays the retort that other rows read (왜 그래).
+// A question word of question.kansai-yanen with the Kansai やねん (誰やねん 누구야, どっちやねん 어느 쪽이야, 何がやねん 뭐가, なんやねん
+// after a word): the ending in its note, なんだよ or だよ. なんでやねん stays the retort that other rows read (왜 그래).
 bool KansaiQuestionYanen(std::string_view s, size_t pos, Match& m) {
-    for (const std::string_view w : {"何で", "なんで", "何が", "なにが", "誰", "だれ", "どこ", "いつ", "何", "なん", "なに", "どう"}) {
-        if (w == "何で" || w == "なんで") {  // なんでやねん is the retort of its own (왜 그래)
+    const auto words = dict::ClassMembers(HDTRANS_CLASS("question.kansai-yanen"));
+    const auto endings = dict::ClassNotes(HDTRANS_CLASS("question.kansai-yanen"));
+    for (std::size_t k = 0; k < words.size() && k < endings.size(); k++) {
+        const std::string_view w = words[k];
+        if (endings[k] == "keep") {  // なんでやねん is the retort of its own (왜 그래)
             size_t q = pos;
             if (Lit(s, q, w) && Lit(s, q, "やねん")) return false;
             continue;
@@ -1012,7 +1015,7 @@ bool KansaiQuestionYanen(std::string_view s, size_t pos, Match& m) {
         if (!Lit(s, p, w)) continue;
         if (!Lit(s, p, "やねん")) return false;
         m.group[1] = w;
-        m.group[2] = (w == "何が" || w == "なにが" || w == "何" || w == "なん" || w == "なに") ? "だよ" : "なんだよ";
+        m.group[2] = endings[k];
         m.end = p;
         return true;
     }
@@ -1036,7 +1039,7 @@ bool OldCopulaJato(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// The Kansai そや (そうだ) where a clause starts, before な, ね, から, ねん, ろ, で, a mark or the end (そやけど stays for its own row) (そやな 그렇지,
+// The Kansai そや and せや (そうだ; spec LEX-5997) where a clause starts, before な, ね, から, ねん, ろ, で, a mark or the end (そやけど stays for its own row) (そやな 그렇지,
 // そやから 그러니까, そやねん 그렇다니까, そやろ 그렇지): そうだ, だから for そやから, そうなんだ for そやねん, そうだろ for そやろ;
 // with そら or そりゃ before it, そりゃ and the same (そらそやろ そりゃそうだろ).
 bool KansaiSoya(std::string_view s, size_t pos, Match& m) {
@@ -1047,8 +1050,39 @@ bool KansaiSoya(std::string_view s, size_t pos, Match& m) {
     // そら or そりゃ before it is そりゃ (そらそやろ そりゃそうだろ, そりゃそやな).
     m.group[2] = {};
     if (Lit(s, p, "そら") || Lit(s, p, "そりゃ")) m.group[2] = "そりゃ";
-    if (!Lit(s, p, "そや")) return false;
+    const bool se = s.substr(p).starts_with("せや");
+    if (!Lit(s, p, "そや") && !Lit(s, p, "せや")) return false;
     const std::string_view after = s.substr(p);
+    // せやな, せやから and せやけど are words of the dictionary.
+    if (se && (after.starts_with("な") || after.starts_with("から") || after.starts_with("けど"))) return false;
+    // Said twice it agrees: そうそう (せやせや 맞아 맞아, そやそや).
+    if (after.starts_with(se ? "せや" : "そや")) {
+        m.group[1] = "そうそう";
+        m.end = p + std::string_view("せや").size();
+        return true;
+    }
+    // The past and its conditional: そうだった (せやったな 그랬지, そやったら 그러면).
+    if (after.starts_with("った")) {
+        m.group[1] = "そうだった";
+        m.end = p + std::string_view("った").size();
+        return true;
+    }
+    // A で that ends the sentence or goes on with な or ね tells: そうだよ (せやで！ 그래!, そやでな 그렇지).
+    if (after.starts_with("で")) {
+        const std::string_view rest = after.substr(std::string_view("で").size());
+        bool tells = rest.empty() || rest.starts_with("な") || rest.starts_with("ね");
+        for (const std::string_view w : {"。", "、", "！", "？", "!", "?", "…", "～", "ー", "」", "』", " ", "　"}) tells = tells || rest.starts_with(w);
+        if (!tells) return false;
+        m.group[1] = "そうだよ";
+        m.end = p + std::string_view("で").size();
+        return true;
+    }
+    // そやろか asks: そうだろうか (せやろか 그럴까).
+    if (after.starts_with("ろか")) {
+        m.group[1] = "そうだろうか";
+        m.end = p + std::string_view("ろか").size();
+        return true;
+    }
     if (after.starts_with("から")) {
         m.group[1] = "だから";
         m.end = p + std::string_view("から").size();
@@ -1066,7 +1100,7 @@ bool KansaiSoya(std::string_view s, size_t pos, Match& m) {
         return true;
     }
     bool ok = after.empty();
-    for (const std::string_view w : {"な", "ね", "で", "し", "。", "、", "！", "？", "!", "?", "…", " ", "　"}) ok = ok || after.starts_with(w);
+    for (const std::string_view w : {"な", "ね", "し", "。", "、", "！", "？", "!", "?", "…", " ", "　"}) ok = ok || after.starts_with(w);
     if (!ok) return false;
     m.group[1] = "そうだ";
     m.end = p;
@@ -1614,6 +1648,22 @@ bool QuestionN(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// (なんなん|何なん) asking 何なの: before a mark or the end (これなんなん 이거 뭐야), or before the word it
+// asks about, said after it (なんなんそれ 뭐야 그거, なんなんあんた), where no copula, particle or ending
+// goes on (なんなんだ, なんなんですか, なんなんや stay). The なん of そんなん or あんなん is no question word.
+bool AskingNannan(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && LastRune(s.substr(0, pos)).cp == U'ん') return false;
+    size_t p = pos;
+    if (!Lit(s, p, "なんなん") && !Lit(s, p, "何なん")) return false;
+    if (p < s.size()) {
+        const char32_t next = At(s, p).cp;
+        if (IsHiraganaClass(next) && In(next, U"だでじやすかよねさなのってとがはもをにへわぞぜけぁぃぅぇぉゃゅょゎん")) return false;
+        if (next == U'ー' || next == U'～' || next == U'〜') return false;
+    }
+    m.end = p;
+    return true;
+}
+
 // (なんて|何て|なんという|何という)こと(だ)? standing as an exclamation: before a mark or
 // the end, after a mark, a space or the start (なんてこと！, 「なんということだ」). It is
 // written as なんてこった, the interjection 이럴 수가.
@@ -1836,7 +1886,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "とちゃう")) {
         text = ReplaceAll(text, KansaiTochau, [](const Match& m) { return std::string(m.group[1]); });
     }
-    if (dialectForms && Contains(text, "そや")) {
+    if (dialectForms && (Contains(text, "そや") || Contains(text, "せや"))) {
         text = ReplaceAll(text, KansaiSoya, [](const Match& m) { return Cat({m.group[2], m.group[1]}); });
     }
     if (dialectForms && Contains(text, "じゃと")) {
@@ -1987,6 +2037,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     }
     if (dialectForms && Contains(text, "こと")) {
         text = ReplaceAll(text, WhatAThing, [](const Match&) { return std::string("なんてこった"); });
+    }
+    if (dialectForms && Contains(text, "なん")) {
+        text = ReplaceAll(text, AskingNannan, [](const Match&) { return std::string("何なの"); });
     }
     if (dialectForms && Contains(text, "ん")) {
         text = ReplaceAll(text, QuestionN, [](const Match& m) { return Cat({m.group[1], "の", m.group[2]}); });

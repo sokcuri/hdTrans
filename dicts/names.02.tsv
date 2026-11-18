@@ -98269,7 +98269,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 醸造	양조	N110			GN							names.726292
 醸造台	양조기	N110			GN							names.726293
 釆澤靖起	우네자와 야스유키	N130	QPNVHn		GN							names.726294
-采	채	N130	QPNVHn	Wb	GN						あや	names.726295
+采	아야	N130	QPNVHn	Wb	GN						あや	names.726295
 采佳	아야카	N130	QPNVHn	Wb	GN							names.726296
 采夏	아야카	N130	QPNVHn	Wb	GN						あやか	names.726297
 采女	우네메	N130	QPNVHn	Wa	GN						うねめ	names.726298
@@ -106624,7 +106624,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鉄巨兵ギガヴォルト	철거병 기가볼트	N110			GN						てっきょへいぎがぼると	names.734689
 鉄師団	강철사단	N130	VGt		GN							names.734690
 鉄帽	철모	N110			GN						てつぼう	names.734691
-鉄平	츠치야 텟페이	N130	QPNVHn		GN						てっぺい	names.734692
 鉄平	텟페이	N130	QPNVHn	Wb	GN							names.734693
 鉄幹	텟칸	N130	QPNVHn	Wb	GN						てっかん	names.734694
 鉄弗部	철불흉노	N130	VGt		GN							names.734695
@@ -112346,7 +112345,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 防弾少年団	방탄소년단	N110			GN							names.740489
 防彈少年團	방탄소년단	N110			GN							names.740490
 防御	방어	N110			GN							names.740491
-防御力	방어력	N130	QPNVHn	Wb	GN							names.740492
 防御輪	방어륜	N130	QPNVHn	Wb	GN						ぼうぎょりん	names.740493
 防御魔法	방어 마법	N110			GN						ぼうぎょまほう	names.740494
 防波亭手寅	보하테이 테토라	N130	QPNVHn		GN						ぼうはていてとら	names.740495

@@ -315,7 +315,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             a.slot = atom.substr(0, eq);
             constexpr std::string_view kSlots[] = {"subj", "obj",  "dat", "loc",  "with", "from",     "to",       "arg",
                                                    "head", "mod",  "pred", "next", "after", "form",   "register", "domain",
-                                                   "main.vol", "voice", "final"};
+                                                   "main.vol", "voice", "final", "ending"};
             // with an attachment also: how, <argument slot>.how, cl.<feature>, main.<feature>
             static constexpr std::string_view kArgs[] = {"subj", "obj", "dat", "loc", "with", "from", "to", "arg"};
             const std::size_t dot = a.slot.find('.');
@@ -324,7 +324,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             const bool attached = a.slot == "how" || ((first == "cl" || first == "main") && !tail.empty()) ||
                                   (tail == "how" && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs));
             // <argument slot>.mod: the predicate that modifies that argument
-            const bool argMod = tail == "mod" && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs);
+            // <argument slot>.of: the noun before の right before that argument
+            const bool argMod = (tail == "mod" || tail == "of") && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs);
             if (!attached && !argMod && std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
                 return fail("cue slot " + userdict::internal::Quote(a.slot) + " is not one of the cue DSL");
             for (const std::string_view v : Split(atom.substr(eq + 1), '|')) {
@@ -396,6 +397,18 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                 joined = c.noun + c.idiomParticle + c.verb;
             }
             if (std::string err = CompileColloc(joined, target, kclass, base, families, c); !err.empty()) return fail(err);
+            // the row's own godan verb ends each spelling (勝る of {X}に勝る, not 伸びる of 糸を引いて伸びる
+            // or 取られる of {X}と取られる), in its written form or its reading (引く/ひく)
+            if (pos == "v5") {
+                const std::string_view id = col(f, "lemma");
+                std::vector<std::string_view> names = Split(lemma, '|');
+                if (const std::vector<std::string_view> parts = Split(id, '/'); parts.size() >= 2 && !parts[1].empty())
+                    names.push_back(parts[1]);
+                const auto ends = [&](std::string_view spelling) {
+                    return std::any_of(names.begin(), names.end(), [&](std::string_view w) { return spelling.ends_with(w); });
+                };
+                c.godan = c.slot ? ends(c.after) : std::all_of(c.befores.begin(), c.befores.end(), ends);
+            }
             c.row = static_cast<int>(table.rows.size());
             r.target = target;
             r.global = Register(r);
@@ -429,6 +442,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                 one.lexeme = own[0].target;
             }
             one.key = recs[0].key;
+            one.lemma = std::string(jp);
+            one.godan = std::string_view(pos).starts_with("v5");
             one.classDigit = pos == "p" ? '2' : pos == "adv" ? '3' : recs[0].part.size() > 1 ? recs[0].part[1] : 0;
             if (word && !keep) one.target = recs[0].target;
             one.adjective = adjective;

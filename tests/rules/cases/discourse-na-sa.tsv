@@ -1,0 +1,202 @@
+# 규칙: LEX-6010 LEX-6011 LEX-6012 LEX-6013
+rule	input	expected	kind	layer
+cx:na-observed:33	「あの時はやけにあっさり引き下がるな」	has:물러나는구나	fix	rewrites
+cx:na-observed:33	「やけに静かに笑うな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	妙に絡むな。	lacks:지 마	fix	rewrites
+cx:na-observed:33	「なんだか緊張するな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「何だか照れるな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「いやに素直に謝るな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「案外よく食べるな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「意外にしっかり働くな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「意外と芸人魂あるな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「相変わらずよく喋るな」	lacks:지 마	fix	rewrites
+cx:na-observed:36	寂しくなるな。	has:외로워지네	fix	rewrites
+cx:na-observed:36	「暑くなるな……」	lacks:지 마	fix	rewrites
+cx:na-observed:36	「明日から忙しくなるな」	lacks:지 마	fix	rewrites
+cx:na-observed:36	この人を見ていると、どうも厳しいことを言いにくくなるな。	lacks:지 마	fix	rewrites
+cx:na-observed:32	寂しい気分になるな。	has:기분이 드네	fix	rewrites
+cx:na-observed:32	「優しい気持ちになるな」	has:드네	fix	rewrites
+cx:na-observed:32	「なんだか懐かしい気分になるな」	has:기분이 드네	fix	rewrites
+cx:na-observed:38	「そう言われると、迷うな……」	lacks:지 마	fix	rewrites
+cx:na-observed:38	「この距離だと俺も死ぬな」	lacks:지 마	fix	rewrites
+cx:na-observed:38	「急がないと遅れるな」	lacks:지 마	fix	rewrites
+cx:na-observed:38	「あの写真を見ると、思い出すな」	lacks:지 마	fix	rewrites
+cx:na-observed:36	「気にするな」	has:신경 쓰지 마	keep	rewrites
+cx:na-observed:36	「ここに来るな！」	has:오지 마	keep	rewrites
+cx:na-observed:36	「行くな」	has:가지 마	keep	rewrites
+cx:na-observed:36	「迷うなよ」	has:지 마	keep	rewrites
+cx:na-observed:36	「熱くなるな！」	has:지 마	keep	rewrites
+cx:na-observed:36	「あまり熱くなるな」	has:지 마	keep	rewrites
+cx:na-observed:36	「感情的になるな」	has:지 마	keep	rewrites
+cx:na-observed:36	「弱気になるな！」	has:지 마	keep	rewrites
+cx:na-observed:36	「軽々しく言うな」	has:지 마	keep	rewrites
+cx:na-observed:36	「話をややこしくするな」	has:지 마	keep	rewrites
+cx:na-observed:36	「そんな同情っぽく言うなぁあ！！」	has:지 마	keep	rewrites
+cx:na-observed:36	「緊張するな」	has:지 마	keep	rewrites
+cx:na-observed:38	「負けたら帰ってくるな！」	has:지 마	keep	rewrites
+cx:na-observed:38	「鳴ったら動くな」	has:지 마	keep	rewrites
+cx:na-observed:38	「見つかると困るから、騒ぐな」	has:지 마	keep	rewrites
+cx:na-observed:36	「絶対に負けるな」	has:지 마	keep	rewrites
+cx:na-observed:36	「二度と来るな」	has:지 마	keep	rewrites
+cx:na-observed:33	よく覚えておけ。忘れるな。	has:지 마	keep	rewrites
+cx:na-observed:36	「あんまり無理するな」	has:지 마	keep	rewrites
+cx:na-observed:36	「勝手に動くな」	has:지 마	keep	rewrites
+cx:na-observed:36	「逃げるな太郎！！」	has:지 마	keep	rewrites
+cx:na-observed:36	「来るな、来るなっ」	has:지 마	keep	rewrites
+cx:na-observed:36	「いい天気だな」	has:날씨네	keep	rewrites
+cx:na-observed:32	「いい気分になるな！」	has:지 마	keep	rewrites
+cx:wake-nai:10	「邪魔なわけないってっ！」	has:방해일 리가 없	fix	rewrites
+cx:wake-nai:45	「ど、どうすればいいのかわかる……、わけないのです……。」	has:알……, 리가 없	fix	rewrites
+cx:wake-nai:40	寝てるわけないです！	has:자고 있을 리가 없	fix	rewrites
+cx:wake-nai:40	「なってるわけないだろ」	has:있을 리가 없	fix	rewrites
+cx:wake-nai:40	「座ってられるわけないじゃないですかっ！」	has:있을 리가 없	fix	rewrites
+cx:wake-nai:20	……なわけない。	has:그럴 리가 없	fix	rewrites
+dict:w:35910	「わけないじゃん」	has:수월	keep	defaults
+cx:wake-nai:10	「ＯＫなわけないよ」	has:일 리가 없	fix	rewrites
+cx:wake-nai:45	問題無い…わけないかぁ。	lacks:수월	fix	rewrites
+cx:wake-nai:60	「嬉しくない、……わけはないのです。」	has:리는 없	fix	rewrites
+pattern:高くなかったわけもない	心細くなかったわけもない。	has:않았을 리도 없	fix	lookup
+pattern:学生のわけもない	少女のわけもない。	has:소녀일 리도 없	fix	lookup
+pattern:学生のわけがない	「彼が犯人のわけがない」	has:범인일 리가 없	fix	lookup
+dict:w:35912	「死んだわけないよ」	has:죽었을 리가 없	fix	local-ending
+dict:w:35912	「行ったわけもないし」	has:갔을 리도 없	fix	local-ending
+dict:w:35913	「行くわけもないし」	has:갈 리도 없	fix	local-ending
+dict:w:35913	「来るわけはないよ」	has:올 리는 없	fix	local-ending
+pattern:書くわけありません	「勝てるわけありません」	has:리가 없어요	fix	lookup
+cx:wake-nai:40	「わかるわけない」	has:알 리가 없	keep	rewrites
+dict:w:35911	「そんなわけないでしょ」	has:리 없	keep	defaults
+dict:w:35910	「そんなの訳ないよ」	has:쉬워	keep	defaults
+dict:w:35910	「そんなのわけないよ」	has:수월	keep	defaults
+dict:w:35910	「忍び込むくらいわけないよ」	has:수월	keep	defaults
+cx:wake-nai:60	「その、わけは言えない」	has:이유	keep	rewrites
+cx:wake-nai:60	「わけを話して」	has:이유	keep	rewrites
+cx:sa-final:10	「大丈夫、なんとかなるさ。」	has:될 거야	fix	rewrites
+cx:sa-final:10	「そのうち思いだすさ。」	has:거야	fix	rewrites
+cx:sa-final:10	「雨もすぐ止むさ」	has:그칠 거야	fix	rewrites
+cx:sa-final:10	「きっとうまくいくさ！」	has:잘될 거야	fix	rewrites
+cx:sa-final:10	「いつか分かるさ」	has:알 거야	fix	rewrites
+cx:sa-final:10	「すぐに慣れるさ」	has:거야	fix	rewrites
+cx:sa-final:12	「きっと来るさ、あいつは」	has:올 거야	fix	rewrites
+cx:sa-final:20	「行くのさ。」	has:가는 거야	fix	rewrites
+cx:sa-final:20	「高いのさ。」	has:높은 거야	fix	rewrites
+cx:sa-final:30	「来なかったさ、誰も。」	has:않았지	fix	rewrites
+cx:sa-final:10	「血くらい出るさ！」	has:나오지	keep	rewrites
+cx:sa-final:10	「そうさ、俺がやった」	has:그래	keep	rewrites
+cx:sa-final:10	「誰だってそう思うさ」	has:생각하지	keep	rewrites
+cx:sa-final:10	「知ってるさ」	lacks:거야	keep	rewrites
+cx:tete-ii:10	「先食べてていいよ。」	has:먹고 있어도 돼	fix	rewrites
+cx:tete-ii:10	「寝てていいわよ？」	has:있어도 돼	fix	rewrites
+cx:tete-ii:10	「先に行ってていい」	has:있어도 돼	fix	rewrites
+cx:tete-ii:10	「ここで本読んでていいかな？」	has:있어도 될까	fix	rewrites
+cx:tete-ii:10	「先帰ってていいから」	has:있어도 되니까	fix	rewrites
+cx:tete-ii:10	「つかまってていいぞ」	has:있어도 돼	fix	rewrites
+cx:tete-ii:10	大きいメロンが載っかってていい匂いで。	has:좋은 냄새	keep	rewrites
+cx:tete-ii:10	「食べていいよ」	has:먹어도 돼	keep	rewrites
+cx:saki-teru-ne:10	「先行ってるね。」	has:가 있을게	fix	rewrites
+cx:saki-teru-ne:20	「先に食べてるね」	has:먹고 있을게	fix	rewrites
+cx:saki-teru-ne:10	「先帰ってるね」	has:돌아가 있을게	fix	rewrites
+ending:静かでしたのね	「静かでしたのね」	has:조용했군요	fix	builtin-ending
+ending:静かでしたのね	「綺麗でしたのね」	has:군요	fix	builtin-ending
+ending:静かでしたのね	「先生でしたのね」	has:선생님이었군요	keep	builtin-ending
+cx:wake-nai:10	「静かなわけではない」	has:조용한	keep	rewrites
+cx:wake-nai:20	「そんなわけない」	has:그럴 리	keep	rewrites
+dict:w:35910	「そんなの、わけないよ」	has:수월	keep	defaults
+cx:wake-nai:47	「行った……、わけない」	has:갔을……, 리가 없	fix	rewrites
+cx:wake-nai:50	「寝てる、わけないよ」	has:자고 있을, 리가 없	fix	rewrites
+cx:wake-nai:50	「寝てる、わけを聞いた」	has:이유	keep	rewrites
+cx:sa-final:12	「来るさ、あいつは」	lacks:거야	keep	rewrites
+cx:sa-final:30	「楽しかったさ。」	has:즐거웠지	keep	rewrites
+cx:saki-teru-ne:10	「雨降ってるね」	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	「先に言ってたね」	lacks:있을게	keep	rewrites
+cx:sa-final:20	「楽しいのさえ忘れた」	has:즐거운 것조차	keep	rewrites
+cx:wake-nai:40	「寝てるわけじゃない」	has:자고 있는 게 아니야	keep	rewrites
+cx:wake-nai:45	「わかる、わけを話す」	has:이유를	keep	rewrites
+cx:wake-nai:47	「見た、わけを話す」	lacks:봤을	keep	rewrites
+cx:wake-nai:5	「行く訳ない」	has:갈 리가 없어	fix	rewrites
+cx:wake-nai:5	「来る訳ないよ」	has:올 리가 없어	keep	rewrites
+dict:w:35911	「寝てるわけないです」	has:자고 있을 리가 없어요	fix	local
+dict:w:35911	「なわけないじゃん」	has:그럴 리가 없	fix	local
+dict:w:35910	「こんな仕事、わけない」	has:수월	keep	defaults
+dict:w:35910	「わけないよ」	has:수월	keep	defaults
+dict:w:35910	「お安い御用、わけないよ」	has:수월	keep	defaults
+dict:w:35910	「わけない、わけない」	lacks:리가	keep	defaults
+dict:w:35910	「赤子の手をひねるよりわけない」	lacks:리가	keep	defaults
+dict:w:35910	「こんな問題わけないよ」	lacks:리가	keep	defaults
+cx:sa-final:10	「明日には治るさ」	has:나을 거야	fix	rewrites
+cx:sa-final:10	「あいつなら勝つさ」	has:이길 거야	fix	rewrites
+cx:sa-final:10	「心配いらない、うまくいくさ」	has:잘될 거야	fix	rewrites
+cx:sa-final:10	「刺されたら血くらい出るさ！」	has:나오지	keep	rewrites
+cx:sa-final:10	「誰だって泣くさ」	lacks:거야	keep	rewrites
+cx:sa-final:25	「負けたさ、完全に」	has:졌지	fix	rewrites
+cx:sa-final:25	「行ったさ」	has:갔지	keep	rewrites
+cx:tete-ii:20	「先に座っててもいいよ」	has:앉아 있어도 돼	fix	rewrites
+cx:tete-ii:20	「先に部屋に入っててもいいよ」	has:있어도 돼	fix	rewrites
+cx:tete-ii:22	「寝ててもいいぞ」	lacks:있어도	keep	rewrites
+cx:tete-ii:22	「先に読んでてもいいよ」	has:읽고 있어도 돼	fix	rewrites
+cx:tete-ii:22	「寝てもいいぞ」	lacks:있어도	keep	rewrites
+cx:tete-ii:22	「食べてもいいよ」	lacks:있어도	keep	rewrites
+cx:saki-teru-ne:10	「先に戻ってるね」	has:돌아와 있을게	fix	rewrites
+cx:saki-teru-ne:10	「一足先に帰ってるね」	has:있을게	fix	rewrites
+cx:saki-teru-ne:10	「先に行ってるよ」	has:가 있을게	fix	rewrites
+cx:saki-teru-ne:10	「先に行ってるわね」	has:가 있을게	fix	rewrites
+cx:saki-teru-ne:12	「先に行ってるから」	has:가 있을 테니까	fix	rewrites
+cx:saki-teru-ne:14	「先に行ってます」	has:가 있을게요	fix	rewrites
+cx:saki-teru-ne:14	「先に行ってますね」	has:가 있을게요	fix	rewrites
+cx:saki-teru-ne:20	「先に寝てるぞ」	has:자고 있을게	fix	rewrites
+cx:saki-teru-ne:22	「先に食べてるから」	has:먹고 있을 테니까	fix	rewrites
+cx:saki-teru-ne:24	「先に食べてますね」	has:먹고 있을게요	fix	rewrites
+cx:saki-teru-ne:10	「あいつは先に行ってるよ」	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:10	「もう先に行ってるよ」	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:24	「ワイン、先にお飲みになってます？」	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	「待ってるね」	lacks:있을게	keep	rewrites
+cx:na-observed:36	「寒くなるな」	has:추워지네	fix	rewrites
+cx:na-observed:36	「言いにくくなるな」	lacks:지 마	fix	rewrites
+cx:na-observed:36	「楽しくなるな、これは」	lacks:지 마	fix	rewrites
+cx:na-observed:36	「急に眠くなるな」	lacks:지 마	fix	rewrites
+cx:na-observed:36	「熱くなるな。」	has:지 마	keep	rewrites
+cx:na-observed:36	「熱くなるな、落ち着け。」	has:지 마	keep	rewrites
+cx:na-observed:36	「固くなるな。リラックスしろ。」	has:지 마	keep	rewrites
+cx:na-observed:36	「暗くなるな。」	has:지 마	keep	rewrites
+cx:na-observed:36	「そう熱くなるな。」	has:지 마	keep	rewrites
+cx:na-observed:36	「偉くなるな。」	has:지 마	keep	rewrites
+cx:na-observed:36	「寂しくなるなよ」	has:지 마	keep	rewrites
+cx:na-observed:36	「遅くなるな、急げ」	has:지 마	keep	rewrites
+cx:na-observed:33	「なんか照れるな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「なんか、緊張するな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「随分と褒められるな」	lacks:지 마	fix	rewrites
+cx:na-observed:33	「やけになるな」	has:지 마	keep	rewrites
+cx:na-observed:33	「嘘なんかつくな」	has:지 마	keep	rewrites
+cx:na-observed:33	「俺なんか気にするな」	has:지 마	keep	rewrites
+ending:書きましたのね	「来ましたのね」	has:왔군요	fix	builtin-ending
+ending:書いていましたのね	「知っていましたのね」	has:알고 있었군요	fix	builtin-ending
+ending:書いてましたのね	「知ってましたのね」	has:알고 있었군요	fix	builtin-ending
+ending:静かでしたのね	「お気づきでしたのね」	has:군요	fix	builtin-ending
+cx:saki-teru-ne:22	「先に言ってるから」	lacks:있을	keep	rewrites
+cx:saki-teru-ne:12	「もう先に行ってるから」	lacks:있을	keep	rewrites
+cx:saki-teru-ne:14	「彼はもう先に行ってます」	lacks:있을게요	keep	rewrites
+cx:tete-ii:20	「座ってもいいよ」	lacks:있어도	keep	rewrites
+cx:tete-ii:22	「ちょっと部屋で横になっててもいいですか？」	lacks:고 있어도	keep	rewrites
+cx:saki-teru-ne:12	「その先は通行止めになってるからルートを変えなさい」	lacks:있을 테니까	keep	rewrites
+dict:w:35911	「わけないじゃんわけないじゃん」	lacks:리가	keep	local
+cx:na-observed:33	「遊びになんかくんなっ！」	has:지 마	keep	rewrites
+cx:sa-final:10	「今度こそ…護り抜くさ。」	lacks:거야	keep	rewrites
+cx:sa-final:10	「そのためならなんだってやるさ」	lacks:거야	keep	rewrites
+dict:w:35910	慣れればわけない。	has:수월	keep	defaults
+dict:w:35910	コツさえつかめばわけない。	has:수월	keep	defaults
+dict:w:35910	やってみたらわけない。	has:수월	keep	defaults
+dict:w:35910	目をつぶってもわけない。	has:수월	keep	defaults
+dict:w:35910	これを使えばわけないさ。	has:수월	keep	defaults
+dict:w:35910	俺にとってはわけない。	has:수월	keep	defaults
+dict:w:35910	彼にとってわけない。	has:수월	keep	defaults
+dict:w:35910	慣れちゃえばわけない。	has:수월	keep	defaults
+dict:w:35910	慣れれば、わけない。	has:수월	keep	defaults
+dict:w:35911	勝てるわけない。	has:리가	fix	local
+dict:w:35911	寝てたわけない。	has:리가	fix	local
+cx:saki-teru-ne:20	みんな先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	二人とも先に帰ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	三人とも先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	全員先に帰ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:20	田中先に行ってるよ。	lacks:있을게	keep	rewrites
+cx:saki-teru-ne:14	皆さん先に帰ってますよ。	lacks:있을게요	keep	rewrites
+cx:saki-teru-ne:10	私、先に行ってるね。	has:가 있을게	fix	rewrites
+cx:saki-teru-ne:10	僕先に行ってるね。	has:가 있을게	fix	rewrites

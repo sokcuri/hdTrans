@@ -1,0 +1,20 @@
+# 규칙: LEX-5858
+rule	input	expected	kind	layer
+sound:result-naru	もうクタクタになった。	벌써 녹초가 되었다.	fix	sound
+sound:result-naru	一日中歩いてクタクタになった。	하루 종일 걸어 녹초가 되었다.	fix	sound
+sound:result-naru	疲れてクタクタになってしまった。	has:녹초가 되어	fix	sound
+sound:result-naru	パパは毎日クタクタになって帰ってくるけど	has:녹초가 되어 돌아오는데	fix	sound
+sound:result-naru	クタクタにならない。	has:녹초가 되지 않는다	fix	sound
+sound:result-naru	クタクタになるまで遊んだ。	has:녹초가 될 때까지	fix	sound
+sound:result-naru	へとへとになっちゃった…	has:녹초가 되어	fix	sound
+sound:result-naru	絞りすぎてくたくたになった塩歯磨き粉のチューブ	lacks:녹초 가	fix	sound
+sound:result-naru	僕らの実験の結果ペッチャンコになっちゃったよー！	lacks:납작 이	fix	sound
+sound:result-naru	汗でべっとりになった手を握る。	lacks:끈적 이	fix	sound
+sound:result-naru	疲労と睡魔でよれよれになった佳奈すけ	lacks:후줄근 이	fix	sound
+sound:result-naru	下着は大量の愛液でぐしょぐしょになっていて	lacks:흠뻑 이	fix	sound
+sound:result-naru	ペコペコになった。	lacks:꼬르륵 이	fix	sound
+sound:result-naru	一日中働いてクタクタだ。	has:녹초다	keep	sound
+sound:result-naru	くしゃくしゃになった。	has:꼬깃꼬깃하게 되었다	keep	sound
+sound:result-naru	ドキドキになる。	has:두근두근하게 된다	keep	sound
+sound:result-naru	くしゃくしゃに丸める。	has:꼬깃꼬깃하게	keep	sound
+sound:result-naru	ニコニコしている。	has:싱글벙글	keep	sound

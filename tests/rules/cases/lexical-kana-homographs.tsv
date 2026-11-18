@@ -10,7 +10,7 @@ lookup:kana-homograph	あるいは、内部を確認したかもしれない。	
 lookup:kana-homograph	「三角テントだったら２人じゃきつかったかもしれない」	「삼각 텐트라면 2명은 힘들었던 걸지도 몰라」	fix	lookup
 lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이야!	fix	lookup
 lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
-lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup
+lookup:kana-homograph	車にはねられた。	차에 치였다.	keep	lookup
 lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨 그게 아니라……저, 마신 라페르이죠?」	keep	lookup
 validity:genki-nai	「……元気ない？」	「……기운이 없어?」	fix	analysis
 validity:genki-nai	司令官、元気ないね。	사령관, 기운이 없네.	fix	analysis
@@ -74,7 +74,7 @@ dict:jisjk:342448	「え！じゃあなんでこの大会に出ろなんて言�
 dict:jisjk:342448	訳なんで、	것이니까,	keep	local
 dict:jisjk:259274	内容は百人一首の現代語訳と解釈だ。	has:현대어역	fix	local
 dict:jisjk:259274	そういう訳だ。	그런 것이다.	keep	local
-dict:jisjk:104796	「脚立が倒れそうですっ」	「접사다리가 쓰러질 것 같습니다」	fix	lookup
+dict:jisjk:104796	「脚立が倒れそうですっ」	「접사다리가 쓰러질 것 같아요」	fix	lookup
 dict:jisjk:82576	ついに俺たちは幼馴染から赤の他人になった。	마침내 우리는 소꿉친구에게서 생판 남이 되었다.	fix	lookup
 dict:w:28632	「脱がしていい？」	「벗겨도 돼?」	fix	lookup
 dict:w:28632	その悪戯した人形を脱がしてやる！	has:벗겨 준	fix	lookup

@@ -318,6 +318,23 @@ bool NativeStart(std::u32string_view h, const LineContext& ctx, const dict::Snap
     return false;
 }
 
+// The length of the loanword in hiragana that the run of hiragana starts, before the particle or
+// copula that closes the run, and its katakana key in key; 0 where the run reads as words.
+size_t LoanCore(std::u32string_view run, const LineContext& ctx, const dict::Snapshot& snap, std::u32string& key) {
+    for (const std::u32string_view tail : kLoanTails) {
+        if (run.size() < tail.size() + 3 || run.substr(run.size() - tail.size()) != tail) continue;
+        const std::u32string_view h = run.substr(0, run.size() - tail.size());
+        // A small vowel marks a loanword (ふぁいん, あだるてぃー); a small tsu, a small y kana or a long
+        // mark only in four kana or more (せっくす, ちょこれいと, ぶらぼー; not あっと, あーと, えっち).
+        const bool vowel = std::any_of(h.begin(), h.end(), LoanKana);
+        const bool weak = std::any_of(h.begin(), h.end(), [](char32_t r) { return In(r, U"っゃゅょー"); });
+        if (!(vowel || (weak && h.size() >= 4)) || IsKey(h, ctx, snap) || ReadsAsKeys(h, ctx, snap) || NativeStart(h, ctx, snap)) continue;
+        key = LoanKey(h, ctx, snap);
+        if (!key.empty()) return h.size();
+    }
+    return 0;
+}
+
 // rs with each whole run of hiragana that writes a loanword with a small vowel, a small tsu or a
 // long mark (ふぁいん, ちょこれいと, せっくす, あだるてぃー), and reads as no words, in katakana
 // where a key spells it, before the particle or copula that closes the run.
@@ -331,21 +348,7 @@ std::u32string LoanwordsInHiragana(std::u32string rs, const LineContext& ctx, co
         while (j < rs.size() && (IsHiraganaRune(rs[j]) || rs[j] == U'ー')) j++;
         const std::u32string_view run = std::u32string_view(rs).substr(i, j - i);
         std::u32string key;
-        size_t core = 0;
-        for (const std::u32string_view tail : kLoanTails) {
-            if (run.size() < tail.size() + 3 || run.substr(run.size() - tail.size()) != tail) continue;
-            const std::u32string_view h = run.substr(0, run.size() - tail.size());
-            // A small vowel marks a loanword (ふぁいん, あだるてぃー); a small tsu, a small y kana or a long
-            // mark only in four kana or more (せっくす, ちょこれいと, ぶらぼー; not あっと, あーと, えっち).
-            const bool vowel = std::any_of(h.begin(), h.end(), LoanKana);
-            const bool weak = std::any_of(h.begin(), h.end(), [](char32_t r) { return In(r, U"っゃゅょー"); });
-            if (!(vowel || (weak && h.size() >= 4)) || IsKey(h, ctx, snap) || ReadsAsKeys(h, ctx, snap) || NativeStart(h, ctx, snap)) continue;
-            key = LoanKey(h, ctx, snap);
-            if (!key.empty()) {
-                core = h.size();
-                break;
-            }
-        }
+        const size_t core = LoanCore(run, ctx, snap, key);
         if (!key.empty()) {
             rs = rs.substr(0, i) + key + rs.substr(i + core);
             changed = true;
@@ -382,6 +385,15 @@ bool CommonKey(std::u32string_view s, const dict::Snapshot& snap) {
 }
 
 }  // namespace
+
+size_t HiraganaLoanwordLen(std::u32string_view rs, size_t i, const LineContext& ctx, const dict::Snapshot& snap) {
+    size_t j = i;
+    while (j < rs.size() && (IsHiraganaRune(rs[j]) || rs[j] == U'ー')) j++;
+    // A long mark at the end draws the word out (ふぁいとー), as the sound stage reads it before the respelling.
+    while (j > i && rs[j - 1] == U'ー') j--;
+    std::u32string key;
+    return LoanCore(rs.substr(i, j - i), ctx, snap, key);
+}
 
 std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap) {
     std::u32string rs = DecodeText(text);

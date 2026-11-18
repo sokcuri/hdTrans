@@ -24,8 +24,8 @@ struct NameCue {
     // An honorific after the word (皐月さん) on a key of two characters or more that is no hiragana
     // nor a katakana spelling of a native word: it holds for the document (spec LEX-4820).
     bool person = false;
-    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the document
-    // where two lines of the document cue it so, as a recurring cue does.
+    // A predicate of a person (玉藻がはにかむ, 皐月の顔) on such a key: it holds for the other lines of
+    // the document too, except where a line keeps the common sense (spec LEX-4820).
     bool acted = false;
     // Any of the cues above before their limits (a title, suffix, honorific, speaker label, call, phrase
     // of naming or predicate of a person): the evidence that names a common word for the document on two
@@ -42,6 +42,10 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 // person stands: before an honorific, as a speaker label or a call, before の and a part of a person,
 // or as the subject or topic of what a person does or says (spec LEX-5175).
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after);
+
+// Whether key, one kanji with a person's reading in the name layer and a common sense, stands alone in a name
+// box before speech (【月】「…」): it names the speaker in the box only (spec LEX-6060).
+bool BoxNameAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after);
 
 // Whether the word between before and after is a speaker label at the start of a line: a part of a label in
 // round or square brackets followed by speech ((のぼる)うん, ［たまお］はい), or the word alone before a colon,
@@ -61,6 +65,10 @@ bool StatusValueAt(std::string_view rest);
 // (敏捷が特筆して高い; spec LEX-5175).
 bool CommonSenseAt(std::string_view after);
 
+// Whether key has a common sense of a plant (玉藻 말) and after starts with name.plant-after, which keeps the
+// plant (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
+bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after);
+
 // Whether before ends in an adnominal that makes the next common word the word (name.word-before: 大きな,
 // 古い, 一本の), not one that points at or feels for a person (name.word-before-not: そんな, 好きな).
 bool WordBeforeAt(std::string_view before);
@@ -71,5 +79,14 @@ bool CommonAfterAt(std::string_view after);
 // Whether key, all kanji, is a common word of the dictionary: a sense that is no name or place (朝日
 // 아침 해, 力 힘, 敏捷 민첩).
 bool CommonWord(const dict::Snapshot& snap, std::string_view key);
+
+// Whether key, all kanji or all hiragana, has no reading but a person's name: the name layer has key as a
+// person and every other sense of it only spells that name (筧 카케이, 凪 나기, つぐみ; not 空 하늘, 島 섬, 新 신,
+// なぎさ 물가; spec LEX-5940).
+bool NameOnlyKey(const dict::Snapshot& snap, std::string_view key);
+
+// The lemmas of name.person-verb whose note does not parse (no kind v5, v1 or vs, an unknown flag, or a
+// lemma that does not end as its kind does), which give no forms; empty when every row reads.
+std::vector<std::string> PersonVerbProblems();
 
 }  // namespace hdTrans::names

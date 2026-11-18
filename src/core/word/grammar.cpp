@@ -171,10 +171,53 @@ bool ObjectWithoutRecipient(const Item* it) {
     return object;
 }
 
+// Whether the clause before item it has a に or には (彼に罵声を浴びせられる).
+bool RecipientInClause(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (p->group->surface == "に" || p->group->surface == "には") return true;
+    }
+    return false;
+}
+
+// Whether the verb of item it, whose stem without (ら)れ is stem, is one of an act done to someone
+// (verb.passive-after-object, verb.passive-any-object), the last verb of a phrase included (白い目を向け,
+// と比べ).
+// The verb that ends a phrase stem: the part after its last を or its first と (目を向け 向け, と比べ 比べ).
+std::string_view PhraseVerb(std::string_view stem) {
+    if (const std::size_t o = stem.rfind("を"); o != std::string_view::npos) return stem.substr(o + std::string_view("を").size());
+    if (stem.starts_with("と")) return stem.substr(std::string_view("と").size());
+    return stem;
+}
+
+bool DoneToSomeone(const Item* it, std::string_view stem) {
+    const std::string_view verb = PhraseVerb(stem.empty() ? std::string_view(it->group->surface) : stem);
+    return dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), verb) ||
+           dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), verb);
+}
+
+// Whether item p ends the clause before a verb that the words describing its nouns do not end (白い目を):
+// another verb or punctuation.
+bool VerbClauseBreak(const Item* p) {
+    const std::string_view s = p->group->surface;
+    return s.empty() || Has("、。,「」『』！？", s) ||
+           (p->detail->Yougo() && At(p->Code(std::max(p->selected, 0)), 0) == '4');
+}
+
+// Whether a word of frequency (adverb.habitual) stands before item it in its clause.
+bool FrequencyBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !VerbClauseBreak(p); p = p->prev) {
+        if (dict::InClass(HDTRANS_CLASS("adverb.habitual"), p->group->surface)) return true;
+    }
+    return false;
+}
+
 // The passive reading of the られ of verb item it; rest is the text after られ:
 //   - a conditional of a verb of verb.passive-after-object is passive after its object without a
 //     recipient に;
+//   - an act done to someone under a word of frequency (adverb.habitual) in a plain or polite non-past
+//     is passive;
 //   - a negative, conditional or volitional form and the polite non-past are potential;
+//   - a verb of verb.suffered-act with no に in its clause is passive;
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
 //   - going back through the clause, the nearest を (potential unless listed, or a narrative
@@ -190,9 +233,19 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
         dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), it->group->surface)) {
         return ObjectWithoutRecipient(it);
     }
-    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0) return false;
-    const bool listed =
-        dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), it->group->surface) || CompoundAction(it->group->surface);
+    // What keeps being done to one, an act done to someone under a word of frequency in a plain or polite
+    // non-past (毎日罵声を浴びせられる, いつも比べられます), is the passive.
+    if (DoneToSomeone(it, {}) && FrequencyBefore(it) &&
+        (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) == 0 || rest.starts_with("ます"))) {
+        return true;
+    }
+    // The な of ながら is no negative (喝采を浴びせられながら).
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 && !rest.starts_with("ながら")) return false;
+    // An act aimed at someone that one seldom speaks of being able to do (verb.suffered-act) with no recipient
+    // に in its clause is done to one (罵声を浴びせられる 욕설을 듣는다; not 彼に罵声を浴びせられる者; spec LEX-5838).
+    if (dict::InClass(HDTRANS_CLASS("verb.suffered-act"), PhraseVerb(it->group->surface)) && !RecipientInClause(it)) return true;
+    const bool listed = dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), PhraseVerb(it->group->surface)) ||
+                        CompoundAction(it->group->surface);
     if (!listed && !Transitive(it) && !it->detail->syntheticCausative) return false;
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0) return true;
     const Item* subject = nullptr;
@@ -499,9 +552,35 @@ std::string_view TextBefore(const Worker& w, const Item* it, int& token) {
     }
 }
 
-bool OpensLine(const Worker& w, const Item* it) {
+namespace {
+
+// TextBefore without the stutter of the item (や、 of や、やばい, な、な、 of な、な、なんて), and
+// without marks of mark.restart before it where restart is set (……な、なんて).
+std::string_view TextBeforeStutter(const Worker& w, const Item* it, bool restart = false) {
     int token = 0;
-    const std::string_view before = TextBefore(w, it, token);
+    std::string_view before = TextBefore(w, it, token);
+    const auto cut = [&](std::string_view& s) {
+        bool any = CutStutter(s);
+        if (!restart) return any;
+        while (const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("mark.restart"), s)) {
+            s.remove_suffix(n);
+            any = true;
+        }
+        return any;
+    };
+    while (cut(before)) {
+        before = TrimSpace(before);
+        while (before.empty() && token > 0) before = TrimSpace(w.Tok(--token).text);
+    }
+    return before;
+}
+
+}  // namespace
+
+bool StartsLine(const Worker& w, const Item* it) { return TextBeforeStutter(w, it, true).empty(); }
+
+bool OpensLine(const Worker& w, const Item* it) {
+    const std::string_view before = TextBeforeStutter(w, it);
     return before.empty() || RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
 }
 
@@ -555,6 +634,46 @@ bool AfterWonder(const Worker& w, const Item* it) {
         bool ends = false;
         for (const std::string_view stop : {"。", "！", "？", "!", "?", "."}) ends = ends || rest.find(stop) != std::string_view::npos;
         if (!ends) return true;
+    }
+    return false;
+}
+
+bool AfterCallReply(const Worker& w, const Item* it, bool puzzled) {
+    std::string before(w.settings.lineBefore);
+    for (int token = 0; token < it->tokenIndex; token++) before += w.Tok(token).text;
+    before += it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
+    std::string_view s = before;
+    // The stutter marks (pipeline/restore.h kStutterMark, kStutterRest) stand where a stutter was cut
+    // (はい……な、なんでしょう).
+    static constexpr std::string_view kMarks[] = {"、", "，", ",", "…", "‥", "―", "？", "?", "！", "!", "　", " ", "\uE000", "\uE004"};
+    bool marked = false;
+    bool asked = false;
+    for (bool more = true; more;) {
+        more = false;
+        for (const std::string_view mark : kMarks) {
+            if (!s.ends_with(mark)) continue;
+            s.remove_suffix(mark.size());
+            asked = asked || mark == "？" || mark == "?";
+            marked = more = true;
+        }
+    }
+    if (!marked || (puzzled && !asked)) return false;
+    // A stretched or clipped answer word (はいっ, んー, えぇ～).
+    static constexpr std::string_view kStretch[] = {"ー", "～", "〜", "~", "っ", "ッ"};
+    for (bool more = true; more;) {
+        more = false;
+        for (const std::string_view mark : kStretch) {
+            if (!s.ends_with(mark)) continue;
+            s.remove_suffix(mark.size());
+            more = true;
+        }
+    }
+    static constexpr std::string_view kOpens[] = {"「", "『", "（", "(", "、", "，", "。", ".", "．", "？", "?", "！", "!", "…", "　", " "};
+    const auto members = puzzled ? dict::ClassMembers(HDTRANS_CLASS("word.puzzled")) : dict::ClassMembers(HDTRANS_CLASS("word.call-reply"));
+    for (const std::string_view m : members) {
+        if (!s.ends_with(m)) continue;
+        const std::string_view rest = s.substr(0, s.size() - m.size());
+        if (rest.empty() || std::ranges::any_of(kOpens, [&](std::string_view o) { return rest.ends_with(o); })) return true;
     }
     return false;
 }
@@ -1082,6 +1201,17 @@ VoiceForm VoiceFormOf(Flusher& f, const Item* it, std::string_view& stem, std::s
 // is に.
 Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
     bool recipient = dict::InClass(HDTRANS_CLASS("verb.transfer"), stem) || dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem);
+    // The から of a person before a verb of an act done to someone is who does it (観客から罵声を浴びせられる,
+    // 皆から白い目を向けられる).
+    if (DoneToSomeone(it, stem)) {
+        for (Item* p = it->prev; p != nullptr && !VerbClauseBreak(p); p = p->prev) {
+            const Item* a = p->prev;
+            if (p->group->surface == "から" && a != nullptr && !a->detail->Yougo() && Animate(a->Attr(std::max(a->selected, 0)))) {
+                ni = false;
+                return p;
+            }
+        }
+    }
     for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
         recipient = recipient || GrammarCode(it->GAttr(slot), "Rc");
     }
@@ -1348,7 +1478,7 @@ bool ThingSubjectBefore(const Item* it) {
 // the passive whatever its object or of what is taken away (求められ, 取り上げられ), one of acts done to
 // someone after its object or しか in a narrative form (食事を与えられず 식사가 주어지지 않고), a passive of something
 // wished for (褒められない, GRM-36), a feeling (感じられない), a person or 誰 before に, にも, には or から
-// (誰にも見られない), or ないように and ないうちに.
+// (誰にも見られない) but the other party of verb.transfer, or ないように and ないうちに.
 bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem, std::string_view rest) {
     const std::string_view surface = it->group->surface;
     // The ん of くる's られ is its negative (連れてこられん); after another verb it may be the る said
@@ -1374,7 +1504,9 @@ bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem,
     }
     // Not doing it so that, or before, someone does it to one is the passive (誰にも見られないように).
     if (rest.starts_with("ないよう") || rest.starts_with("ないうち")) return false;
-    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+    // The person in に of a verb of giving or showing is the other party (姉さんには見せられない 언니에게는 보일 수 없다).
+    const bool recipient = dict::InClass(HDTRANS_CLASS("verb.transfer"), stem);
+    for (const Item* p = it->prev; !recipient && p != nullptr && !ClauseBreak(p); p = p->prev) {
         const std::string_view s = p->group->surface;
         if (s != "に" && s != "にも" && s != "には" && s != "から") continue;
         const Item* a = p->prev;
@@ -1467,7 +1599,10 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
         return Voice::Passive;
     }
-    if (object && dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0) return Voice::Passive;
+    if (object && (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0 ||
+                   dict::StartsWithMember(HDTRANS_CLASS("ending.voice-readily"), rest) > 0)) {
+        return Voice::Passive;
+    }
     if (AbilityScope(it, rest)) return Voice::Potential;
     // The られ of an ichidan verb with an object before しまう (てしまう, ちゃう, ちまう) is what befell
     // someone (猫に食べられちゃった 먹혀 버렸다, 見られてしまった), not an ability: one does not "end up able to",
@@ -1488,6 +1623,13 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
+    // A dictionary word in られ of an ichidan verb before a form of what is done to one (ending.rare-passive:
+    // 見られながら 보이면서, 着せられたまま) is the passive, as the analysed られ of PassiveReading is (spec LEX-6021);
+    // ていい is て and いい, a leave (避けられていい 피할 수 있어도 좋다).
+    if (form == VoiceForm::Lexical && ichidan && dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0 &&
+        !rest.starts_with("ていい")) {
+        return Voice::Passive;
+    }
     if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
     // A dictionary word that is the られ form of an ichidan verb with an object を in its clause and no
     // agent is the potential, as an analysed られ is (PassiveReading: 魔力を止められる 마력을 멈출 수 있다,
@@ -1635,9 +1777,10 @@ void ObjectAsSubject(Flusher& f, Item* it) {
         return;
     }
     // The られ of an ichidan verb with an object outside the past and the て form is as often the
-    // potential (これなら奴らをやっつけられる).
+    // potential (これなら奴らをやっつけられる), but not that of an act one suffers (刃を突きつけられる 칼날이 들이대어진다).
     const std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
-    if (const char k = At(it->Code(it->selected), 2); (k == '7' || k == ';' || k == '=') && rest.starts_with(kRare)) {
+    if (const char k = At(it->Code(it->selected), 2);
+        (k == '7' || k == ';' || k == '=') && rest.starts_with(kRare) && !dict::InClass(HDTRANS_CLASS("verb.suffered-act"), surface)) {
         const std::string_view form = From(rest, static_cast<long>(kRare.size()));
         if (!form.starts_with("た") && !form.starts_with("て")) return;
     }
@@ -1692,6 +1835,12 @@ void DecideVoice(Flusher& f) {
                     Animate(a->Attr(std::max(a->selected, 0))) &&
                     (n == nullptr || !dict::InClass(HDTRANS_CLASS("particle.quote"), n->group->surface)))
                     p = q;
+            }
+            // A row that names the agent's class in dat= found it in the nearest に of the clause, when the
+            // noun has no animate code (ネコに逃げられた, 蝉に鳴かれて: the frame classes said who it is).
+            const bool dat = std::any_of(packed->atoms.begin(), packed->atoms.end(), [](const dict::PackAtom& a) { return a.slot == "dat"; });
+            for (Item* q = it->prev; dat && p == nullptr && q != nullptr && !ClauseBreak(q); q = q->prev) {
+                if (q->group->surface == "に" && q->prev != nullptr && !q->prev->detail->Yougo()) p = q;
             }
             if (p != nullptr && !p->Fixed()) {
                 it->packAgent = p;
@@ -3910,6 +4059,31 @@ bool QuoteEnd(const Worker& w, const Item* it) {
     return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)≫》】〉＞");
 }
 
+bool PeriodRunEnd(const Worker& w, const Item* it) {
+    std::string_view rest = From(it->text, it->start + it->length);
+    int token = it->tokenIndex + 1;
+    int periods = 0;
+    // ..., 。。。, ．．． or . . ., one token each or not; the spaces of a spaced run may stand in tokens of their own.
+    while (true) {
+        while (!rest.empty()) {
+            const text::Rune r = text::DecodeRune(rest);
+            if (RuneIn(r.cp, "。．.")) {
+                periods++;
+            } else if (r.cp != U' ') {
+                break;
+            }
+            rest.remove_prefix(r.size);
+        }
+        if (!rest.empty() || token >= w.TokenCount()) break;
+        const int type = w.Tok(token).type;
+        if (type == tokenizer::kTypeEnd || type == tokenizer::kTypeNewline) break;
+        if (w.Span(token) != 0) return false;
+        rest = w.Tok(token++).text;
+    }
+    // The run ends the line or the quote: nothing but a closing mark follows.
+    return periods >= 2 && (rest.empty() || RuneIn(text::DecodeRune(rest).cp, "」』）)"));
+}
+
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
@@ -4603,6 +4777,8 @@ void HumbleFirstPerson(Flusher& f) {
         else if (lemma == "우리") target = "저희";
         else if (lemma == "우리들") target = "저희들";
         else continue;
+        // a word whose 우리 is a group or a home (うちの学園 우리 학원) is humbled only where it reads the speaker
+        if (target.starts_with("저희") && dict::InClass(HDTRANS_CLASS("pronoun.humble-singular"), it->group->surface)) continue;
         if (!PoliteAfter(it)) continue;
         if (target == "저" && it->After() != nullptr && it->After()->selected >= 0 &&
             ItemLemma(f, it->After(), it->After()->selected).starts_with("(이)가")) {

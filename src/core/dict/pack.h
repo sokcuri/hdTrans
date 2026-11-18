@@ -50,6 +50,8 @@ struct PackRow {
     std::string id, file, spec, prov;
     PackSlot slot = PackSlot::Sense;
     std::string key;        // the dictionary key of the words it applies to ("" for lemma * and @class)
+    std::string lemma;      // the lemma spelling the row was keyed from (起こる for the key 起こ)
+    bool godan = false;     // its pos is v5: a godan verb, whose conjugation stays in the row of its final kana
     char classDigit = 0;    // their class digit (part code byte 1)
     std::string lemmaClass; // lemma @class: the words of that pack class or classes.tsv set; "" with key "" is lemma *
     // lemma @class: the dictionary keys a member can have (the member, without its last kana or する),
@@ -76,6 +78,7 @@ struct Colloc {
     std::vector<std::string> befores;  // the spellings of the pattern before the slot (all of it without one)
     std::string after;                 // the pattern after the slot
     bool slot = false;
+    bool godan = false;              // pos v5: the head verb reads only the forms of its final's row
     bool spaced = false;             // the target has a space right after {X}
     std::string slotClass;           // @class of the slot, "" for any noun
     std::string lead, particle;      // Korean before the slot's, and the particle after it (0.7.x notation)

@@ -23,7 +23,7 @@ cx:nanto-say:10	なんと言っても	뭐라 해도	keep	rewrites
 cx:kiwa-suru:10	雪崩に巻き込まれはしたが、	눈사태에 말려 들어가기는 했지만,	fix	rewrites
 cx:kiwa-suru:10	一応見はしたけど	일단 보기는 했지만	fix	rewrites
 cx:kiwa-suru:10	怒られはしたが、	혼나기는 했지만,	fix	rewrites
-cx:kiwa-suru:10	「えっと……食べはしますけど、一度に１０個は食べないですかね……？」	「음……먹기는 하는데요, 한꺼번에 10개는 먹지 않습니까……?」	fix	rewrites
+cx:kiwa-suru:10	「えっと……食べはしますけど、一度に１０個は食べないですかね……？」	has:먹기는 하는데요	fix	rewrites
 cx:kiwa-suru:10	つまり、疑われはしても、	즉, 의심받기는 해도,	fix	rewrites
 constraint:hashita-before-end	特例で貸しはしたが、もう剣は返してもらった。	특례로 대여는 했지만, 이제 검은 돌려 받았다.	keep	lookup
 constraint:hashita-before-end	見はしない。	보지는 않는다.	keep	lookup

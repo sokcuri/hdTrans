@@ -1,21 +1,24 @@
 #! layer=pack
 # 목적어, 주어, 자리 명사로 동사와 형용사의 뜻을 고르는 팩 행: 起こす 깨우다, 下がる 물러나다, 漏れる 새어 나오다, 詳しい 밝다, 離れる 떨어지다
 id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri	agent
-argument-senses:1	起こす	v5	sense	obj=@person|@animal|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達	깨우다	LEX-3471		お姉ちゃんを起こして 언니를 깨워			
-argument-senses:5043	起こす	v5	sense	obj=@person|@animal|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 obj.mod=倒れる|転ぶ|倒れ込む|転がる|崩れ落ちる|へたり込む|座り込む|うずくまる|突っ伏す|伏せる	일으키다	LEX-5014		倒れた馬を起こした 쓰러진 말을 일으켰다			
-argument-senses:5044	起こす	v5	sense	obj=@person|@animal|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 next=立たせる|立つ|立ち上がる|座らせる|座る	일으키다	LEX-5014		馬を起こして立たせた 말을 일으켜 서게 했다			
-argument-senses:50	起こす	v5	sense	obj=兵|軍|軍勢|兵力|義兵|兵馬	-	LEX-3471		兵を起こした 군사를 일으켰다(그대로)		10	
+argument-senses:1	起こす|おこす	v5	sense	obj=@person|@animal	깨우다	LEX-3471		お姉ちゃんを起こして 언니를 깨워			
+argument-senses:5043	起こす|おこす	v5	sense	obj=@person|@animal obj.mod=倒れる|転ぶ|倒れ込む|転がる|崩れ落ちる|へたり込む|座り込む|うずくまる|突っ伏す|伏せる	일으키다	LEX-5014		倒れた馬を起こした 쓰러진 말을 일으켰다			
+argument-senses:5044	起こす|おこす	v5	sense	obj=@person|@animal next=立たせる|立つ|立ち上がる|座らせる|座る	일으키다	LEX-5014		馬を起こして立たせた 말을 일으켜 서게 했다			
+argument-senses:14700	起こす|おこす	v5	sense	obj=@person|@animal obj.mod=眠る|寝る|眠り込む|寝入る|寝込む|眠りこける|寝こける|寝息を立てる|昼寝する|居眠りする|うたた寝する	깨우다	LEX-6040		倒れたまま眠る子を起こした 쓰러진 채로 자는 아이를 깨웠다		20	
+argument-senses:50	起こす|おこす	v5	sense	obj=兵|軍|軍勢|兵力|義兵|兵馬	-	LEX-3471		兵を起こした 군사를 일으켰다(그대로)		10	
 argument-senses:2	入れる	v1:규칙	sense	obj=客人|客|お客|来客|お客様|客人たち	들이다	LEX-3471		客人を入れる 손님을 들이다			
-argument-senses:23	入れる	v1:규칙	sense	obj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 dat=部屋|家|中|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|ハーレム|自宅|部屋の中|家の中	들이다	LEX-3471		変な人を部屋に入れて 이상한 사람을 방에 들여			
+argument-senses:23	入れる	v1:규칙	sense	obj=@person dat=部屋|家|中|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|ハーレム|自宅|部屋の中|家の中	들이다	LEX-3471		変な人を部屋に入れて 이상한 사람을 방에 들여			
+argument-senses:14724	入れる	v1	sense	obj=@person dat=中 dat.of=*	-	LEX-6043		御園をコートの中に入れた 미소노를 코트 안에 넣었다(그대로)			
+argument-senses:14725	入れる	v1:규칙	sense	obj=@person dat=中 dat.of=部屋|家|室内|屋敷|店|城|小屋|寝室|自室|館|屋内|教室|自宅|建物|宿|テント|車|馬車|車内	들이다	LEX-6043		客を店の中に入れた 손님을 가게 안에 들였다			
 argument-senses:3	入れる	v1	sense	obj=*	넣다	LEX-3471		バッグに入れると 가방에 넣으니			
 argument-senses:24	入れる	v1	sense	obj=お茶|茶|紅茶|緑茶|コーヒー|珈琲|ココア|ミルク|スイッチ|電源|暖房|冷房|力|籍	-	LEX-3471		お茶を入れる 차를 끓이다(그대로)			
 argument-senses:30	入れる	v1	sense	obj=* head=部屋|場所|所|ところ|店|家|建物|空間|エリア|区域|範囲|ダンジョン|城|町|街|村|国|世界|学校|会場|施設|領域|風呂|温泉	-	LEX-3471		先生でも入れる部屋(그대로)			
 argument-senses:32	入れる	v1	sense	after=にでも|にも|には|へは|へも|でも	-	LEX-3471		店にでも入れるか(그대로)		10	
-argument-senses:4	下がる	v5	sense	subj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達	물러나다	LEX-3471		少女が下がる 소녀가 물러나다			
-argument-senses:25	下がる	v5	sense	subj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 after=大分|だいぶ|かなり|ずいぶん|随分|すっかり|だいぶん|少しずつ	-	LEX-3471		熱が大分下がってた(그대로)			
-argument-senses:26	下がる	v5	sense	subj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 head=*	-	LEX-3471		下がり切った肩(그대로)			
-argument-senses:27	下がる	v5	sense	subj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 next=切る	-	LEX-3471		下がり切った肩(그대로)			
-argument-senses:5	下がる	v5	sense	obj=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達	물러나다	LEX-3471		側近を下がらせた 측근을 물러나게 했다			
+argument-senses:4	下がる	v5	sense	subj=@person	물러나다	LEX-3471		少女が下がる 소녀가 물러나다			
+argument-senses:25	下がる	v5	sense	subj=@person after=大分|だいぶ|かなり|ずいぶん|随分|すっかり|だいぶん|少しずつ	-	LEX-3471		熱が大分下がってた(그대로)			
+argument-senses:26	下がる	v5	sense	subj=@person head=*	-	LEX-3471		下がり切った肩(그대로)			
+argument-senses:27	下がる	v5	sense	subj=@person next=切る	-	LEX-3471		下がり切った肩(그대로)			
+argument-senses:5	下がる	v5	sense	obj=@person	물러나다	LEX-3471		側近を下がらせた 측근을 물러나게 했다			
 argument-senses:31	下がる	v5	sense	arg=テンション|熱|温度|気温|室温|値段|価格|評価|レベル|ランク|ランキング|好感度|株|血圧|体温|ボルテージ|士気|眉|眉尻|目尻|口角|視線|目線|速度|スピード|成績|順位|水位|気分|溜飲|ズボン|パンツ|スカート|頻度|確率|威力|攻撃力|防御力|ステータス|能力|数値|値|物価|地位|身分|評判|信用|人気|支持率|好感|頭|首|肩|腕|手|尻尾|耳	-	LEX-3471		テンションが下がらない(그대로)		10	
 argument-senses:7	漏れる	v1	sense	subj=ため息|溜息|溜め息|タメ息|吐息|声|息|笑み|笑い|悲鳴|嗚咽|呻き|呻き声|喘ぎ|喘ぎ声|苦笑|笑い声|泣き声|呟き|言葉	새어 나오다	LEX-3471		ため息が漏れる 한숨이 새어 나오다			
 argument-senses:8	散る	v5	sense	subj=彼ら|彼女ら|人々|生徒|生徒たち|生徒達|兵|兵士|兵士たち|兵士達|兵たち|部下|部下たち|騎士たち|冒険者|冒険者たち|獣人|獣人たち|獣人達|子供たち|子供達|皆|みんな|皆さん|群衆|民衆|野次馬|観衆|男たち|女たち|使用人|使用人たち|女性たち|仲間たち|仲間達|一同|一行	흩어지다	LEX-3471		獣人たちは散った 수인들은 흩어졌다			
@@ -33,10 +36,10 @@ argument-senses:16	潜る	v5	sense	obj=門|扉|ドア|ゲート|暖簾|のれん
 argument-senses:17	乗り越える	v1	sense	obj=柵|塀|壁|フェンス|手すり|窓|窓枠|垣根|背|背もたれ|欄干|石垣|瓦礫|死体|屍|バリケード|机|カウンター|城壁|段差	넘다	LEX-3471		柵を乗り越える 울타리를 넘다			
 argument-senses:18	詳しい	adj	sense	dat=* head=-	밝다	LEX-3471		山に詳しい 산에 밝다			
 argument-senses:28	詳しい	adj	sense	dat=* head=@person|人|者|方|奴|やつ|ヤツ|連中|子|娘|男|女|人物|人間|専門家	밝다	LEX-3471		医療に詳しい弁護士 의료에 밝은 변호사			
-argument-senses:20	関わる	v5:규칙	sense	with=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|奴|やつ|ヤツ|あいつ|こいつ|そいつ|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 form=neg	엮이다	LEX-3471		彼とは関わらない 그와는 엮이지 않는다			
-argument-senses:56	関わる	v5:규칙	sense	with=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|奴|やつ|ヤツ|あいつ|こいつ|そいつ|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 next=たい	엮이다	LEX-3471		彼女とは関わりたくない 그녀와는 엮이고 싶지 않다			
-argument-senses:57	関わる	v5:규칙	sense	dat=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|奴|やつ|ヤツ|あいつ|こいつ|そいつ|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 form=neg	엮이다	LEX-3471		私には関わらない 나와는 엮이지 않는다			
-argument-senses:60	関わる	v5:규칙	sense	dat=@person|客人|みんな|彼ら|彼女ら|人々|子供たち|子供達|お嬢様|側近|獣人|冒険者|奴ら|奴|やつ|ヤツ|あいつ|こいつ|そいつ|あいつら|皆さん|皆様|民衆|群衆|兵|兵たち|兵士たち|兵士達|部下たち|部下達 next=たい	엮이다	LEX-3471		あいつに関わりたくない 저 녀석과 엮이고 싶지 않다			
+argument-senses:20	関わる	v5:규칙	sense	with=@person|やつ|ヤツ|あいつ|こいつ|そいつ form=neg	엮이다	LEX-3471		彼とは関わらない 그와는 엮이지 않는다			
+argument-senses:56	関わる	v5:규칙	sense	with=@person|やつ|ヤツ|あいつ|こいつ|そいつ next=たい	엮이다	LEX-3471		彼女とは関わりたくない 그녀와는 엮이고 싶지 않다			
+argument-senses:57	関わる	v5:규칙	sense	dat=@person|やつ|ヤツ|あいつ|こいつ|そいつ form=neg	엮이다	LEX-3471		私には関わらない 나와는 엮이지 않는다			
+argument-senses:60	関わる	v5:규칙	sense	dat=@person|やつ|ヤツ|あいつ|こいつ|そいつ next=たい	엮이다	LEX-3471		あいつに関わりたくない 저 녀석과 엮이고 싶지 않다			
 argument-senses:22	癒す	v5	sense	obj=傷|怪我|ダメージ|病|負傷|傷口|傷跡	치유하다	LEX-3471		傷を癒す 상처를 치유하다			
 argument-senses:29	近づける	v1	sense	obj=@body|たいまつ|松明|明かり|灯り|ランプ|ランタン|スマホ|携帯|カップ|グラス|コップ|ペン|刃|剣|ナイフ|銃口|杖|マイク|カメラ|ライト|火|炎|鏡|紙|手紙|写真|花|カード	가까이 대다	LEX-3471		たいまつを近づけ 횃불을 가까이 대어			
 argument-senses:49	近づける	v1	voice	obj=@body voice=passive	active	LEX-3471		彼女に顔を近づけられた 그녀가 얼굴을 가까이 대었다			(이)가
@@ -193,3 +196,29 @@ argument-senses:5083	落とす	v5	sense	obj=お節介|おせっかい|一言|ひ
 argument-senses:5120	遊ばせる	v1	sense	obj=@person|@animal	놀게 하다	LEX-5014		子供たちを遊ばせる 아이들을 놀게 하다 (놀리다 아님)			
 argument-senses:5650	制する	vs	sense	obj=@person|あたし|わたし|オレ|ボク|みんな|皆	제지하다	LEX-5650		俺を軽く制する 나를 가볍게 제지한다			
 argument-senses:5652	加わる	v5	sense	subj=@person|@force|仲間|メンバー|新メンバー|新人|艦娘	합류하다	LEX-5650		新メンバーが加わる 새 멤버가 합류한다			
+argument-senses:5653	切れる	v1	sense	subj=電池|バッテリー	다 되다	LEX-5810		電池が切れた 전지가 다 됐다			
+argument-senses:5654	切れる	v1	sense	after=電池|バッテリー	다 되다	LEX-5810		電池切れちゃった 전지 다 되어 버렸다			
+argument-senses:5655	切れる	v1	sense	subj=充電	다 떨어지다	LEX-5810		充電が切れた 충전이 다 떨어졌다 (다 되다는 다 찼다는 뜻)			
+argument-senses:5656	切れる	v1	sense	after=充電	다 떨어지다	LEX-5810		充電切れちゃった 충전 다 떨어져 버렸다			
+argument-senses:5657	開く	v5	sense	after=ドア|扉|窓|門|戸|蓋|ふた|カーテン|幕|ゲート|シャッター|ハッチ	열리다	LEX-5810		ドア開きますね 문 열리네요			
+argument-senses:35800	挫く|くじく	v5	sense	obj=@body	삐다	LEX-5965		足を挫いた 발을 삐었다			
+argument-senses:35801	挫く	v5	sense	*	꺾다	LEX-5965		出鼻を挫く 의욕을 꺾다			
+argument-senses:35802	挫く	v5:규칙	voice	*	passive:꺾이다	LEX-5965		自信を挫かれた 자신감이 꺾였다			
+argument-senses:35803	靡く	v5	sense	subj=心|気持ち|気|人心|民心|世論|女心|関心	쏠리다	LEX-5963		金に心が靡く 돈에 마음이 쏠리다			
+argument-senses:35804	靡く	v5	sense	dat=@person	넘어가다	LEX-5963		彼に靡いた 그에게 넘어갔다			
+argument-senses:35805	たぐる|手繰る	v5	sense	obj=記憶|思い出|過去|記録|糸口|手がかり|手掛かり|縁	더듬다	LEX-5963		記憶をたぐる 기억을 더듬다			
+argument-senses:14701	擦る|こする	v5	sense	obj=マッチ|マッチ棒|燐寸	긋다	LEX-6040		マッチを擦った 성냥을 그었다			
+argument-senses:14705	切れる	v1	sense	subj=薬|薬効	떨어지다	LEX-6040		薬が切れた 약이 떨어졌다			
+argument-senses:14717	切れる	v1	sense	subj=- after=薬|薬効	떨어지다	LEX-6040		薬切れた 약 떨어졌다			
+argument-senses:14714	切れる	v1	sense	subj=効果|効き目	다하다	LEX-6040		ガスの効果が切れたら 가스의 효과가 다하면			
+argument-senses:14706	切れる	v1	sense	subj=麻酔|魔法|術|催眠|暗示	풀리다	LEX-6040		麻酔が切れた 마취가 풀렸다			
+argument-senses:14718	切れる	v1	sense	subj=- after=麻酔|魔法|術|催眠|暗示	풀리다	LEX-6040		麻酔切れた 마취 풀렸다			
+argument-senses:14707	はねのける|撥ね除ける|跳ね除ける|撥ねのける|跳ねのける	v1	sense	obj=提案|申し出|要求|要請|誘い|依頼|反対|意見|抗議|忠告|助言|命令|頼み	거절하다	LEX-6040		提案をはねのけた 제안을 거절했다			
+argument-senses:14708	上がる|あがる	v5	sense	dat=舞台|ステージ|壇上|演壇|壇|土俵|リング|表彰台|高座|檀上	오르다	LEX-6040		舞台にあがった 무대에 올랐다			
+argument-senses:14709	取る	v5	sense	from=@room|@position|@container|@furniture|@vehicle|@hand|床|場所|そば|傍|隣|足元|地面|棚|本棚|戸棚|テーブル|机|台|カウンター|ポーチ|ウェストポーチ|かご|懐|トランク|荷物|カバン|手のひら|タンス|箪笥|袖	집다	LEX-6040		窓のそばからパンを取った 창 옆에서 빵을 집었다			
+argument-senses:14716	取る	v5	sense	from=@room|@position|@container|@furniture|@vehicle|@hand|床|場所|そば|傍|隣|足元|地面|棚|本棚|戸棚|テーブル|机|台|カウンター|ポーチ|ウェストポーチ|かご|懐|トランク|荷物|カバン|手のひら|タンス|箪笥|袖 obj=@body	-	LEX-6040		後ろから両手を取って 뒤에서 양손을 잡아(그대로)		10	
+argument-senses:14712	取る	v5	sense	from=@room|@position|@container|@furniture|@vehicle|@hand|床|場所|そば|傍|隣|足元|地面|棚|本棚|戸棚|テーブル|机|台|カウンター|ポーチ|ウェストポーチ|かご|懐|トランク|荷物|カバン|手のひら|タンス|箪笥|袖 next=くる|来る|き|来|いく|行く	-	LEX-6040		取ってくる 가져오다(그대로)		10	
+argument-senses:14713	取る	v5	sense	from=@room|@position|@container|@furniture|@vehicle|@hand|床|場所|そば|傍|隣|足元|地面|棚|本棚|戸棚|テーブル|机|台|カウンター|ポーチ|ウェストポーチ|かご|懐|トランク|荷物|カバン|手のひら|タンス|箪笥|袖 obj=水|お湯|湯|酒|血|データ|情報|金|お金|命	-	LEX-6040		水を外から取る(그대로)		10	
+argument-senses:14710	そば	n	sense	pred=好き|大好き|嫌い|食べる|すする|啜る|茹でる|ゆでる|打つ|注文する|頼む|食う	메밀국수	LEX-6040		そばが好きだ 메밀국수를 좋아한다			
+argument-senses:14711	下がる	v5	sense	subj=@person from=* next=くる|来る	-	LEX-6040		教卓から下がってくる 교탁에서 내려온다(그대로)			
+argument-senses:14715	宿る	v5	sense	obj=光|輝き|力|魔力|炎|意志|決意|怒り|闘志|殺意|熱|感情|魂|覚悟|希望|闇|光り|灯	품다	LEX-6040		目に強い輝きを宿らせて 눈에 강한 빛을 품게 해			

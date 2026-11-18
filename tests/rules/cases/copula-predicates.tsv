@@ -19,7 +19,7 @@ dict:copula-predicates:3	しっかりした人だ。	견실한 사람이다.	kee
 dict:copula-predicates:3	「同棲もいいけど、テストもしっかりな」	「동거도 좋지만, 테스트도 확실한」	keep	lookup
 dict:copula-predicates:4	こんな流れはアリなのか？	이런 흐름은 괜찮은가?	fix	lookup
 dict:copula-predicates:4	「練習するのはアリなんじゃない？」	「연습하는 건 괜찮은 게 아니야?」	fix	lookup
-dict:copula-predicates:4	「わたしは全然アリですっ……！！」	「저는 전혀 괜찮습니다……!!」	fix	lookup
+dict:copula-predicates:4	「わたしは全然アリですっ……！！」	「저는 전혀 괜찮아요……!!」	fix	lookup
 dict:copula-predicates:4	「んー……そうね、付加価値を付けるのはたしかにアリよねぇ……」	「음……그래, 부가가치를 매기는 건 확실히 괜찮지……」	fix	lookup
 dict:copula-predicates:4	「……いや、それはそれでアリか」	「……아니, 그건 그것대로 괜찮은가」	fix	lookup
 dict:copula-predicates:4	音楽でもマジックでも落語でも学術発表でも、何でもアリだ。	음악이라도 매직이라도 만담이라도 학술 발표에서도, 뭐든 괜찮다.	fix	lookup

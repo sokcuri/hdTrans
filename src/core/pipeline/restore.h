@@ -153,6 +153,9 @@ namespace internal {
 // The length of a stutter separator at rs[i]: 、 or ，, a run of … ‥ ― ─ —, or a run of two or more
 // ・, . or ． (し..しつれい).
 size_t StutterSeparator(std::u32string_view rs, size_t i);
+// The separator after a stutter mark: StutterSeparator's, or the ～ run that the sound stage takes
+// before a word that the syllable starts (そ～そう).
+size_t MarkedStutterSeparator(std::u32string_view rs, size_t i);
 
 
 // Kana in Hangul as heard, by text::FromKana under Fan (きょどきょど 쿄도쿄도, ぬちゃっ 누챳):

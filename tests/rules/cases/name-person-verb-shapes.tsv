@@ -1,0 +1,85 @@
+# 규칙: LEX-4820
+rule	input	expected	kind	layer
+names:person-pair	俺と千里は駅で別れた。	has:치사토	fix	lookup
+names:person-pair	俺と小太刀は図書室にいた。	has:코다치	fix	lookup
+names:person-pair	その日の午後、俺と凪は買い物に出ていた。	has:나기	fix	lookup
+names:person-pair	この時間、俺と高峰はお客の呼び込み担当だ。	has:타카미네	fix	lookup
+names:person-pair	僕と凪が見つめ合う。	has:나기	fix	lookup
+names:person-pair	高峰さんと凪は先に帰った。	has:나기	fix	lookup
+names:person-pair	手を繋いだまま、俺と千里は見つめ合って、同時に頷いた。	has:치사토	fix	lookup
+names:person-pair	みんなが俺と小太刀を見る。	has:코다치	fix	lookup
+names:person-pair	鈴木さんと高峰が、さんせーと唱和した。	has:타카미네	fix	lookup
+names:person-pair	でも、俺と皐月は、もうひとつの顔を持っている。	has:사츠키	fix	lookup
+names:person-pair	彼女と千里は駅で別れた。	has:치사토	fix	lookup
+names:person-pair	俺と千里の道は違う。	has:천리의 길	keep	lookup
+names:person-pair	千里の道も一歩から。	has:천리의 길	keep	lookup
+names:person-pair	私と音楽は切り離せない。	has:음악	keep	lookup
+names:person-pair	僕と未来は繋がっている。	has:미래	keep	lookup
+names:person-pair	女房と畳は新しい方が良い。	has:다다미	keep	lookup
+names:person-pair	刀と小太刀を持っていた。	has:작은 칼	keep	lookup
+names:person-call	「小太刀、いい加減仕事に戻れ」	has:코다치	fix	lookup
+names:person-call	「高峰、ちょっと手伝ってくれ」	has:타카미네	fix	lookup
+names:person-call	「凪、早く来い！」	has:나기	fix	lookup
+names:person-call	「おい、筧、考えて発言しろ」	has:카케이	fix	lookup
+names:person-call	「凪、伏せろっ！」	has:나기	fix	lookup
+names:person-call	「筧、残ってくれ」	has:카케이	fix	lookup
+names:person-call	「千里、待ってください」	has:치사토	fix	lookup
+names:person-call	「まあ、落ち着け小太刀。俺もこいつの頭の中身はわからない」	has:코다치	fix	lookup
+names:person-call	「戻れ、高峰！」	has:타카미네	fix	lookup
+names:person-call	「……ち、千里？」	has:치사토	fix	lookup
+names:person-call	「た、高峰？」	has:타카미네	fix	lookup
+names:person-call	およ、提督？睦月、呼んだ？	has:무츠키	fix	lookup
+names:person-call	「筧、今まで読んだ本の数は？」	has:카케이	fix	lookup
+names:person-call	「凪、お茶でも飲むか？　俺が淹れるよ」	has:나기	fix	lookup
+names:person-call	「え、千里？」	has:천리	keep	lookup
+names:person-call	「昼間、何してた？」	has:낮	keep	lookup
+names:person-call	「今日、来る？」	has:오늘	keep	lookup
+names:person-call	夏だよ、司令官。スイカ、食べる？	lacks:스이카	keep	lookup
+names:person-call	「大方、逃げたんだろう？」	has:대부분	keep	lookup
+names:person-call	「高峰、すごいね」	has:고봉	keep	lookup
+names:person-predicate	凪がこれ見よがしに、俺と腕を組む。	has:나기	fix	lookup
+names:person-predicate	高峰が不意に、立ち上がった。	has:타카미네	fix	lookup
+names:person-predicate	千里が来たのに、俺は笑った。	has:천리	keep	lookup
+names:person-predicate	静かに語る凪の声が響く。	has:나기	fix	lookup
+names:person-predicate	静かに語る千里の声が聞こえた。	has:치사토	fix	lookup
+names:person-predicate	千里の声が聞こえる。	has:천리	keep	lookup
+names:person-predicate	白銀の髪をした凛々しい青年だ。	lacks:시로가네	keep	lookup
+names:person-predicate	後ろを振り向くと、深緑の髪と瞳が印象的な青年が立っていた。	lacks:후카미도리	keep	lookup
+words:uchi-owner	「筧、うちの白崎が面倒だとでも言うのか？」	has:우리 시라사키	fix	lookup
+words:uchi-owner	「タカシ、うちの白崎が面倒だとでも言うのか？」	has:우리 시라사키	fix	lookup
+words:uchi-owner	タカシのうちで遊んだ。	has:타카시의 집	keep	lookup
+words:uchi-owner	彼女のうちで遊んだ。	has:그녀의 집	keep	lookup
+words:misaki-cape	岬に近づいた。	has:곶에	fix	lookup
+words:misaki-cape	船は岬に近づいた。	has:곶에	fix	lookup
+words:misaki-cape	岬さんが笑った。	has:미사키 씨	keep	lookup
+words:misaki-cape	「岬、待ってくれ」	has:미사키	keep	lookup
+words:higuma-bear	羆が現れた。	has:불곰이	fix	lookup
+words:higuma-bear	羆に襲われた。	has:불곰에게	fix	lookup
+words:yoso-ni	漫才をやっている俺と高峰をよそに、女性陣が視線のバトルを繰り広げている。	has:타카미네를 아랑곳하지 않고	fix	lookup
+words:yoso-ni	周囲の心配をよそに、彼は笑った。	has:걱정을 아랑곳하지 않고	fix	lookup
+words:yoso-ni	親の心配をよそに遊び回る。	has:걱정을 아랑곳하지 않고	fix	lookup
+names:person-call	「千里、行かないで」	has:치사토	fix	lookup
+names:person-call	「千里、忘れないで」	has:치사토	fix	lookup
+names:person-call	「千里、そこをどいて」	has:치사토	fix	lookup
+names:person-call	「高峰、それ読んで」	has:타카미네	fix	lookup
+names:person-call	「千里、早く来て！」	has:치사토	fix	lookup
+names:person-call	「高峰、何してるんだ？」	has:타카미네	fix	lookup
+names:person-call	「千里、なにしてんの？」	has:치사토	fix	lookup
+names:person-call	「高峰、何しに来た？」	has:타카미네	fix	lookup
+names:person-call	行かないで、千里！	has:치사토	fix	lookup
+names:person-call	「た、た、高峰！」	has:타카미네	fix	lookup
+names:person-call	「ち、ち、千里……」	has:치사토	fix	lookup
+names:person-call	「財布、忘れないで」	has:지갑	keep	lookup
+names:person-call	一生懸命作りました。チョコ、よかったら召し上がって。	has:초콜릿	keep	lookup
+names:person-call	「そ、そ、空が！」	has:하늘	keep	lookup
+names:person-pair	高峰と俺は月を見た。	has:타카미네와 나는	fix	lookup
+names:person-pair	高峰と彼女が並んで歩く。	has:타카미네와 그녀가	fix	lookup
+names:person-pair	千里とお前は似ている。	has:치사토와 너는	fix	lookup
+names:person-pair	千里と姉は笑った。	has:치사토와	fix	lookup
+names:person-pair	高峰とあいつは仲がいい。	has:타카미네와	fix	lookup
+names:person-pair	俺と千里と高峰で海へ行った。	has:치사토와 타카미네	fix	lookup
+names:person-pair	彼女と千里と俺の三人。	has:치사토	fix	lookup
+names:person-pair	僕と千里と玉藻で遊んだ。	has:치사토와 타마모	fix	lookup
+names:person-pair	高峰と雲が見えた。	has:고봉	keep	lookup
+names:person-pair	俺と海と空で遊んだ。	has:바다	keep	lookup
+names:person-pair	俺と酒と肴で十分だ。	has:술	keep	lookup

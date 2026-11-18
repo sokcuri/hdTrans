@@ -1,0 +1,100 @@
+# 규칙: LEX-5924, LEX-5925, LEX-5926
+rule	input	expected	kind	layer
+lookup:particle-kana-word	空にくもが浮かぶ	has:하늘에 구름이	fix	lookup
+lookup:particle-kana-word	空にもくもが浮かぶ	has:하늘에도 구름이	fix	lookup
+lookup:particle-kana-word	山にくもがかかる。	has:산에 구름이	fix	lookup
+lookup:particle-kana-word	白崎もうなずく。	has:도 끄덕인다	fix	lookup
+lookup:particle-kana-word	他の面子もうなずいた。	has:도 끄덕였다	fix	lookup
+lookup:particle-kana-word	母もうなずきました。	has:어머니도 끄덕였	fix	lookup
+lookup:particle-kana-word	彼女もうたった。	has:그녀도	fix	lookup
+lookup:particle-kana-word	眉もうっとり垂れ下がっている。	has:눈썹도	fix	lookup
+lookup:particle-kana-word	教師もうかうかしていられない	has:교사도	fix	lookup
+lookup:particle-kana-word	彼にくわしく話した。	has:그에게 자세	fix	lookup
+lookup:particle-kana-word	母にくわしくきいた。	has:어머니에게 자세	fix	lookup
+lookup:particle-kana-word	本番できちんとやる。	has:제대로	fix	lookup
+lookup:particle-kana-word	金もうけの話。	has:돈벌이	keep	lookup
+lookup:particle-kana-word	私もうれしい。	has:나도 기쁘	keep	lookup
+lookup:particle-kana-word	今日もうちにいる。	has:오늘도 집에	keep	lookup
+lookup:particle-kana-word	私もうそをついた。	has:거짓말	keep	lookup
+lookup:particle-kana-word	修理できるだけで。	has:수리할 수 있	keep	lookup
+lookup:particle-kana-word	確認できるだけでいい。	has:확인할 수 있	keep	lookup
+lookup:particle-kana-word	お菓子とかくれた。	has:과자라든지	keep	lookup
+lookup:particle-kana-word	艦隊にもういる。	has:이제 있다	keep	lookup
+lookup:particle-kana-word	もうなにもない。	has:이제 아무것도	keep	lookup
+lookup:particle-kana-word	人にきいた。	has:사람에게 물었다	keep	lookup
+lookup:particle-kana-word	手にいれた。	has:손에 넣었다	keep	lookup
+lookup:kana-noun-verb-spelling	にわにかえるがいる。	has:개구리가	fix	lookup
+lookup:kana-noun-verb-spelling	かえるやへびがいる。	has:개구리나	fix	lookup
+lookup:kana-noun-verb-spelling	かえるをつかまえた。	has:개구리를	fix	lookup
+lookup:kana-noun-verb-spelling	つきがきれいだ。	has:달이	fix	lookup
+lookup:kana-noun-verb-spelling	つきをながめた	has:달을	fix	lookup
+lookup:kana-noun-verb-spelling	かわであそぶ。	has:강에서	fix	lookup
+lookup:kana-noun-verb-spelling	かわをわたる。	has:강을	fix	lookup
+lookup:kana-noun-verb-spelling	あめがやんだ。	has:비가	fix	lookup
+lookup:kana-noun-verb-spelling	どうぐをつかう	has:도구를	fix	lookup
+lookup:kana-noun-verb-spelling	まおうをたおせ！	has:마왕을	fix	lookup
+lookup:kana-noun-verb-spelling	たからばこをあけた。	has:보물	fix	lookup
+lookup:kana-noun-verb-spelling	いえにかえる。	has:돌아	keep	lookup
+lookup:kana-noun-verb-spelling	家にかえるよ。	has:돌아	keep	lookup
+lookup:kana-noun-verb-spelling	配合比をかえるだけ。	has:바꿀	keep	lookup
+lookup:kana-noun-verb-spelling	そろそろかえるか。	has:돌아갈까	keep	lookup
+lookup:kana-noun-verb-spelling	かえるの？	has:돌아가는	keep	lookup
+lookup:kana-noun-verb-spelling	つきにくい。	lacks:달	keep	lookup
+lookup:kana-noun-verb-spelling	くっつきにくい場所だ。	has:들러붙기	keep	lookup
+lookup:kana-noun-verb-spelling	何のことかわからない。	has:모른다	keep	lookup
+lookup:kana-noun-verb-spelling	ゆきが来た。	has:유키	keep	lookup
+lookup:kana-noun-verb-spelling	ももちゃん、おはよう。	has:모모	keep	lookup
+lookup:particle-kana-word	猫にものすごく好かれる。	has:고양이에게 대단히	fix	lookup
+lookup:particle-kana-word	友達とでかける。	has:친구와 나간다	fix	lookup
+lookup:particle-kana-word	母とでかけました。	has:어머니와 나갔습니다	fix	lookup
+lookup:particle-kana-word	家族とでかけるのが好き。	has:가족과 나가는	fix	lookup
+lookup:particle-kana-word	友達とできる遊び。	has:친구와 할 수 있는	fix	lookup
+lookup:particle-kana-word	猫とでかい犬。	has:고양이와 큰 개	fix	lookup
+lookup:particle-kana-word	お母さんとでかけた。	has:엄마와 나갔다	fix	lookup
+lookup:particle-kana-word	お姉ちゃんもうなずいた。	has:언니도 끄덕였다	fix	lookup
+lookup:particle-kana-word	千里ちゃんもうなずいた。	has:도 끄덕였다	fix	lookup
+lookup:particle-kana-word	田中さんにものすごく怒られた。	has:씨에게 대단히	fix	lookup
+lookup:particle-kana-word	田中さんとこうして話す。	has:씨와 이렇게	fix	lookup
+lookup:particle-kana-word	家にもものがある。	lacks:모모	keep	lookup
+lookup:particle-kana-word	医者にはなれない。	lacks:떨어	keep	lookup
+lookup:particle-kana-word	彼とも話した。	has:그와도 이야기	keep	lookup
+lookup:particle-kana-word	友達とももう会えない。	has:친구와도 이제	keep	lookup
+lookup:particle-kana-word	母にもらった。	has:어머니에게 받았다	keep	lookup
+lookup:particle-kana-word	彼女にもてる。	has:인기	keep	lookup
+lookup:particle-kana-word	学校へも行った。	has:학교에도 갔다	keep	lookup
+lookup:particle-kana-word	お母さんもうれしそう。	has:엄마도 기쁠	keep	lookup
+lookup:particle-kana-word	お兄さんもいた。	has:오빠도 있었다	keep	lookup
+lookup:kana-noun-verb-spelling	そのかえるは大きい。	has:그 개구리는	fix	lookup
+lookup:kana-noun-verb-spelling	あのつきはきれいだ。	has:달은	fix	lookup
+lookup:kana-noun-verb-spelling	このかえるの名前。	has:개구리의 이름	fix	lookup
+lookup:kana-noun-verb-spelling	どのかえるがいい？	has:개구리가	fix	lookup
+lookup:kana-noun-verb-spelling	大きなかえるだ。	has:큰 개구리	fix	lookup
+lookup:kana-noun-verb-spelling	おおきなつきが出た。	has:큰 달이	fix	lookup
+lookup:kana-noun-verb-spelling	小さなくもが浮かぶ。	has:작은 구름이	fix	lookup
+lookup:kana-noun-verb-spelling	小さなかわを渡る。	has:작은 강을	fix	lookup
+lookup:kana-noun-verb-spelling	そのおぎの話をした。	has:물억새	keep	lookup
+lookup:kana-noun-verb-spelling	おぎの話をした。	has:물억새	keep	lookup
+lookup:kana-noun-verb-spelling	そのにじるはうまい。	has:끓인 국물	keep	lookup
+lookup:kana-noun-verb-spelling	そのままかえる。	has:돌아간다	keep	lookup
+lookup:kana-noun-verb-spelling	あの、かえる。	has:돌아간다	keep	lookup
+lookup:kana-noun-verb-spelling	大きなかばんを持つ。	has:큰 가방을	keep	lookup
+pack:kana-noun-senses:1	あめをなめる。	has:사탕을	fix	packs
+pack:kana-noun-senses:1	あめをもらった。	has:사탕을 받았다	fix	packs
+pack:kana-noun-senses:1	あめをかってあげる。	has:사탕을 사	fix	packs
+pack:kana-noun-senses:1	あめをたべる。	has:사탕을 먹는다	fix	packs
+pack:kana-noun-senses:1	君にあめをあげる。	has:사탕을 준다	fix	packs
+pack:kana-noun-senses:1	彼女はあめをくれた。	has:사탕을 주었다	fix	packs
+lookup:kana-noun-verb-spelling	空があめもようだ。	has:비 올 듯한	fix	lookup
+lookup:kana-noun-verb-spelling	いとこのかえる日だ。	has:돌아가는 날	keep	lookup
+lookup:kana-noun-verb-spelling	むすこのかえる家。	has:돌아가는	keep	lookup
+lookup:kana-noun-verb-spelling	このかえる道は長い。	has:돌아가는 길	keep	lookup
+pack:kana-noun-senses:2	かわをむく。	has:껍질을	fix	packs
+pack:kana-noun-senses:2	みかんのかわをむいた。	has:껍질을	fix	packs
+pack:kana-noun-senses:2	りんごのかわをむく。	has:껍질을	fix	packs
+pack:kana-noun-senses:2	かわがむける。	has:껍질	fix	packs
+pack:kana-noun-senses:1	あめがふってきた。	has:비가	keep	packs
+pack:kana-noun-senses:1	あめが降る。	has:비가	keep	packs
+pack:kana-noun-senses:2	かわでおよいだ。	has:강에서	keep	packs
+pack:kana-noun-senses:2	かわがながれる。	has:강이	keep	packs
+lookup:particle-kana-word	汗とも花ともつかない香り。	lacks:가질까	keep	lookup
+lookup:particle-kana-word	祟りとも犯罪ともつかない事件だ。	lacks:가질까	keep	lookup

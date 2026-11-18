@@ -31,12 +31,12 @@ sound:particle-nee	「ねぇねぇねぇ、先生」	「있잖아 있잖아 있�
 builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 몰라」	fix	builtin-phrase
 restore:retort-idiom	「彼に何を言うの？」	「그에게 무슨 말을 하는 거야?」	keep	restore
 restore:retort-idiom	何を言っていいか分からない	무슨 말을 해도 좋은가 모른다	keep	restore
-compose:spoken-syllables	「この文の主語は何ですか」	「이 문장의 주어는 뭡니까」	keep	compose
+compose:spoken-syllables	「この文の主語は何ですか」	has:주어는 뭐예요	keep	compose
 compose:spoken-syllables	「与えられた仕事」	「주어진 일」	keep	compose
 compose:verbal-noun	「毎日するよ」	「매일 할게」	fix	compose
 compose:verbal-noun	「即答した」	「즉답했다」	keep	compose
 sound:oi-call	「おい茂る草むら」	「무성한 풀숲」	keep	sound
-compose:spoken-syllables	「主語です」	「주어입니다」	keep	compose
+compose:spoken-syllables	「主語です」	「주어예요」	keep	compose
 sound:oi-call	「おい出てこい」	「어이 나와라」	keep	sound
 normalize:shime	「〆の一杯」	「마무리의 한 잔」	fix	normalize
 restore:retort-idiom	「何言ってるんだろう」	「무슨 말을 하는 걸까」	keep	restore

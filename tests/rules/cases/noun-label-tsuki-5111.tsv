@@ -25,7 +25,7 @@ cx:attached:85	朝食付きで一泊一万円	has:아침 식사 포함해서	fix
 cx:attached:85	写真付きで解説	!rule:cx:attached:85	keep	rewrites
 cx:attached:90	沙都子は首輪付きで妹属性化。	has:목걸이와 함께	fix	rewrites
 cx:attached:90	ちょっと待ってな、coffee付きでねー。	has:coffee와 함께	fix	rewrites
-cx:attached:90	運転手付きでな	!rule:cx:attached:90	keep	rewrites
+cx:attached:90	運転手付きでない	!rule:cx:attached:90	keep	rewrites
 cx:attached:100	朝食付き、夕食なし	아침 식사 포함, 저녁식사 없음	fix	rewrites
 cx:attached:100	ボールペン2種（ポストカードつき）	has:우편 엽서 포함	fix	rewrites
 cx:attached:100	必ず護衛が付き、まるでＶＩＰ扱いである。	!rule:cx:attached:100	keep	rewrites

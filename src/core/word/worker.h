@@ -148,6 +148,8 @@ public:
     Item* QueryPrefixTable(std::string_view text, int offset, int token);
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
+    bool VerbFormSpelling(std::string_view form) const;
+    bool ProvenName(std::string_view key) const;
     bool GodanCausative(std::string_view stem) const;
     bool IchidanPartner(std::string_view stem, std::string_view kana) const;
     bool GodanBase(std::string_view stem) const;
@@ -191,11 +193,15 @@ private:
     // that a shorter reading lets the next word take; null when c stands.
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
+    Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
     // The longer reading left at cursor that takes the place of c when the retry budget is spent; null for none.
     Item* LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c);
     // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends
     // where that noun starts; null when c stands.
     Record* OverCutWord(std::string_view full, int cursor, int token, const Item& c);
+    // A noun whose last part starts a verb that runs past it before hiragana no noun takes (雨降り + ますね,
+    // 私行 + きます): the shorter reading that ends where that verb starts; null when c stands.
+    Record* OverSwallowedVerb(std::string_view full, int cursor, int token, const Item& c);
     // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
     // same where the text ends after it.
     bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);
@@ -222,6 +228,8 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool DoubledSoundBefore(std::string_view query) const;
+    bool KanaModifierBefore(std::string_view query) const;
     bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
@@ -229,6 +237,15 @@ private:
     // Whether the text head that a word follows in its token ends in something other than a noun
     // (ConstraintContext::NotAfterNoun).
     bool NotAfterNoun(std::string_view head);
+    // Whether lead ends in a noun: the ん of a nominalizer, or a word with a kanji or katakana that ends
+    // there and has a noun sense or is not in the dictionary (ConstraintContext::AfterNounBeforeListed).
+    bool AfterNoun(std::string_view lead);
+    // Whether the hiragana noun source at the start of query, after head, is a particle and the start
+    // of a longer word (ConstraintContext::ParticleSplit).
+    bool ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
+                       const std::vector<dict::Candidate>& list);
+    // Whether rest, the text after a て form's って, starts the ている aspect (ConstraintContext::BeforeTopicTte).
+    bool TeAspectAt(std::string_view rest);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);

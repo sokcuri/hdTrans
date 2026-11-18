@@ -44,7 +44,7 @@ cx:sense-cues-1:330	　《全く、連絡くらいしなさいよ》	 《정말�
 cx:sense-cues-1:330	ええ、全く。当然相手にもよりますが。	네, 전혀. 당연히 상대에게도 따릅니다만.	keep	rewrites
 cx:sense-cues-1:330	私、全く、全然、怒っていません！	저, 전혀, 전혀, 화나 있지 않습니다!	keep	rewrites
 cx:sense-cues-1:340	小春 目下検討しないといけないのは文化祭の出し物だよ	초봄 지금 검토해야 하는 것은 문화제의 상연물이야	fix	rewrites
-cx:sense-cues-1:340	「それなのに頭を撫でるなんて、あきらかに目下に対する行為です」	「그런데도 머리를 쓰다듬다니, 명확하게 아랫 사람에 대한 행위입니다」	keep	rewrites
+cx:sense-cues-1:340	「それなのに頭を撫でるなんて、あきらかに目下に対する行為です」	「그런데도 머리를 쓰다듬다니, 명확하게 아랫 사람에 대한 행위예요」	keep	rewrites
 cx:sense-cues-1:350	本当ならあなたは消えてるはず	원래라면 당신은 사라져 있을 것	fix	rewrites
 cx:sense-cues-1:350	本当なら完全無理です	사실이라면 완전 무리입니다	keep	rewrites
 sense:aogu-look-up	仰げば尊し、わが師の恩。	우러러보면 존 해, 우리 스승의 은혜.	fix	senses

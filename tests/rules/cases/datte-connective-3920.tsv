@@ -17,7 +17,7 @@ segment:datte-space	それで受けたの？ えっ だって そんなこと書
 segment:datte-space	あの人が気にするのは 人の目だけ｡ 僕の事だって 恥だから 人に言わなかったのよ｡ おたくの事だって… 信じちゃいないよ あの人は｡	그 사람이 신경 쓰는 것은 사람의 눈만. 내 일도 수치니까 사람에게 말하지 않았어. 댁의 일도… 믿지는 않는다 그 사람은.	fix	segment
 segment:datte-space	人類誕生の歴史とか 分かっちゃうし あ～ 未来には こんな すごい文明 生まれてたんだって 分かっちゃうし！	인류 탄생의 역사라든지 알아버리고 아~ 미래에는 이런 대단한 문명 태어나고 있었다는 걸 알아버리고!	fix	segment
 segment:datte-space	なんか ふられたって 噂だよ｡ 小高先生｡	뭔가 차였다는 소문이야. 코다카 선생님.	fix	segment
-segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	이 사람들을 화내도 수는 돌아오지 않아 >> 리에	fix	segment
+segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	has:화내도	fix	segment
 segment:datte-space	放っといたって 腐るだけなんだからいいじゃない？	내버려 두어도 썩을 뿐이니까 좋잖아?	fix	segment
 segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안 된다고	fix	segment
 segment:datte-space	まだまだ これからだよ！ 今日 負けたって 全部 パワーに変えればいいんだ！ ピカチュ～！	아직도 지금부터야! 오늘 져도 전부 파워로 바꾸면 돼! 피카츄~!	fix	segment

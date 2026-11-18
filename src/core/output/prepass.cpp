@@ -358,11 +358,33 @@ bool HangulWord(std::string_view s) {
     return true;
 }
 
+// Whether item n is a katakana word counted in a chain of numbers and katakana words, each number
+// starting the token right after the word before it (5ゲーム6ゲーム 5게임 6게임, 2セット3ゲーム 2세트 3게임;
+// NUM-33): a number before it, and after it a number with a katakana word, or before that number a
+// katakana word after a number (not 1009デビュー9周年).
+bool Adjoins(const std::vector<ResolvedItem>& items, int k);
+bool CountedInChain(const std::vector<ResolvedItem>& items, int n) {
+    const int size = static_cast<int>(items.size());
+    const auto katakana = [&](int k) {
+        return k >= 0 && k < size && tokenizer::Class(text::DecodeRune(items[k].surface).cp) == tokenizer::kClassKatakana;
+    };
+    const auto digit = [&](int k) {
+        if (k < 0 || k >= size) return false;
+        const char32_t r = text::DecodeRune(items[k].surface).cp;
+        return (r >= U'0' && r <= U'9') || (r >= U'０' && r <= U'９');
+    };
+    // Item k starts the token after the one of item k - 1.
+    const auto next = [&](int k) { return k > 0 && k < size && items[k].tokenIndex == items[k - 1].tokenIndex + 1 && items[k].offset == 0; };
+    if (!katakana(n) || !digit(n - 1) || !Adjoins(items, n)) return false;
+    if (digit(n + 1) && next(n + 1) && katakana(n + 2) && Adjoins(items, n + 2)) return true;
+    return next(n - 1) && katakana(n - 2) && digit(n - 3) && Adjoins(items, n - 2);
+}
+
 // Whether item n is a verbal noun that is the predicate: one with する after it, or one that
-// ends its word run (HPが1回復した, HPが1回復).
+// ends its word run (HPが1回復した, HPが1回復); a katakana word counted in a chain is none.
 bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
     if (!Contains(GAttr(items[n]), "Hd")) return false;
-    if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return true;
+    if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return !CountedInChain(items, n);
     return dict::StartsWithMember(HDTRANS_CLASS("suru.predicate-noun"), items[n + 1].surface) > 0;
 }
 
@@ -480,14 +502,17 @@ bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<Resol
             // (1ホーマー2ホーマー 1홈런 2홈런, 1ゴール2アシスト 1골 2어시스트).
             std::string wide(rest);
             for (int k = a.tokenIndex - 1; k >= 0 && text::RuneCount(wide) < 32; k--) wide.insert(0, tokens[k].text);
+            // Walk the chain of numbers and katakana words back: one that starts with a number counts
+            // (1セット2セット3セット 1세트 2세트 3세트), one that starts with a word labels (ワールド2ステージ5クリア).
             std::string_view run = wide;
-            while (tokenizer::Class(LastRune(run)) == tokenizer::kClassKatakana) run = DropLastRune(run);
-            // A number that is itself a label (ワールド2ステージ5クリア) leaves the word a label host.
-            if (digit(ascii(LastRune(run)))) {
+            for (;;) {
+                while (tokenizer::Class(LastRune(run)) == tokenizer::kClassKatakana) run = DropLastRune(run);
+                if (!digit(ascii(LastRune(run)))) break;
                 while (digit(ascii(LastRune(run))) || ascii(LastRune(run)) == U'.' || ascii(LastRune(run)) == U',')
                     run = DropLastRune(run);
                 const char32_t host = ascii(LastRune(run));
-                if (!latin(host) && tokenizer::Class(host) != tokenizer::kClassKatakana) return false;
+                if (latin(host)) break;
+                if (tokenizer::Class(host) != tokenizer::kClassKatakana) return false;
             }
         }
         return digit(r) || tokenizer::Class(r) == tokenizer::kClassKatakana;
@@ -545,17 +570,28 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
     return korean == "당" && (surface == "あたり" || surface == "当たり" || surface == "当り");
 }
 
+// Korean t without its spaces.
+std::string Unspaced(std::string_view t) {
+    std::string words(t);
+    std::erase(words, ' ');
+    return words;
+}
+
 // Whether a noun's Korean is an adverb, which forms no compound with the noun after it (結局昼
 // 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn), also one of several words
 // (血染めの 피로 물든), or a word of ko.adverb-noun.
 bool AdverbKorean(std::string_view korean, std::string_view tags) {
     if (text::RuneCount(korean) < 2) return false;
-    if (Contains(tags, "Nn")) {
-        std::string words(korean);
-        std::erase(words, ' ');
-        return HangulWord(words);
-    }
+    if (Contains(tags, "Nn")) return HangulWord(Unspaced(korean));
     return HangulWord(korean) && dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
+}
+
+// Whether item i, read t, is a time noun (ko.time-noun: 明日 내일, 今夜 오늘 밤) or a time of day
+// (ko.time-of-day: 夜 밤, 朝 아침) written straight after one (明日夜 내일 밤, 今日朝 오늘 아침).
+bool TimeNoun(const std::vector<ResolvedItem>& items, int i, std::string_view t) {
+    if (dict::InClass(HDTRANS_CLASS("ko.time-noun"), t)) return true;
+    return dict::InClass(HDTRANS_CLASS("ko.time-of-day"), t) && Adjoins(items, i) &&
+           dict::InClass(HDTRANS_CLASS("ko.time-noun"), EntryText(items[i - 1]));
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,
@@ -1716,8 +1752,13 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (f.korean == "등" && (IsDigit(First(t)) || nd(tags))) break;
             return Result(std::move(t), true);
         }
-        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && AdverbKorean(t, tags) &&
-            !Contains(nextTags, "Ct") && !(Code(item).starts_with("12") && Contains(nextTags, "Z7")) &&
+        // LAY-19: an adverb or time noun stands apart from the noun after it (結局昼 결국 낮, 明日雨 내일 비) but
+        // not from a counter, and a time noun or pronoun not from a suffix (Z7: 今日用 오늘용, 誰か様 누군가님); a time
+        // noun also joins a kanji read by its Sino-Korean syllable (On: 当日券 당일권).
+        const bool timeNoun = HangulWord(Unspaced(t)) && TimeNoun(items, i, t);
+        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && (AdverbKorean(t, tags) || timeNoun) &&
+            !Contains(nextTags, "Ct") && !(Contains(nextTags, "Z7") && (Code(item).starts_with("12") || timeNoun)) &&
+            !(timeNoun && Contains(nextTags, "On")) &&
             HangulWord(nextEntry)) {
             return Result(std::move(t), true);
         }

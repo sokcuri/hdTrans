@@ -2,9 +2,13 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <functional>
+#include <iterator>
+#include <set>
 #include <span>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 #include "core/dict/classes.h"
@@ -12,6 +16,8 @@
 #include "core/names/labels.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
+#include "core/word/kana_tables.h"
 
 namespace hdTrans::names {
 
@@ -295,7 +301,10 @@ bool ClosedLabelAt(std::string_view before, std::string_view after) {
 // round brackets, after caption marks only (⚟アヤメ：, ≫アヤメ：, 》アヤメ：), or a part of a label in
 // round brackets there ((アヤメ), ⚟（アヤメ）).
 bool LabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
-    if (internal::BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
+    if (internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after) || ClosedLabelAt(before, after) ||
+        RoleAfterLabel(snap, before, after)) {
+        return true;
+    }
     if (!internal::CaptionLead(before)) return false;
     // A quote ends the line; text after its closing bracket makes the bracket a reading or a
     // title (光「ひかり」散「ち」らす, 新「三川艦隊」を編成せよ).
@@ -470,6 +479,9 @@ enum class Role {
     // a verb of saying or thinking makes it a person too (name.person-speak; spec LEX-4830).
     NamedTopic,
     Other,    // called with 、, or a sentence end after the clause
+    // As Other, but set off by 、 after another 、 of the sentence, where the word may be one of a list
+    // (りんご、みかん、バナナを買った): only a verb that takes no object.
+    Aside,
     // As Topic, but only for what only a person does: no verb of saying or handling after an object (a
     // common word of one kanji: 樹は笑った, not 車はじゃり道の上をがりがり言わせて).
     Act,
@@ -497,8 +509,218 @@ bool SimileAfter(std::string_view s) {
     return false;
 }
 
-bool PersonActIn(std::string_view s, Role role, bool clause) {
+// A form of a verb of name.person-verb and what it asks of the clause.
+struct PersonVerb {
+    // A verb that takes an object, which may stand as the topic (礼は受け取ろう, 量は食べられない): after
+    // は, も or 、 it is a cue only after an object in を in its clause.
+    bool transitive = false;
+    // A verb of saying: as the verbs of name.person-speak, a cue after a named topic with no object.
+    bool say = false;
+    // What may follow the form: anything (語った, 語りながら), a mark or a kanji (a stem: 語り、, 見つめ返す),
+    // or the end of an utterance (a command: 黙れ！, not the potential 黙れる).
+    enum class Follow { Any, Stem, Command } follow = Follow::Any;
+    // The dictionary form or the past, which a noun after it makes a relative clause (仕事に出かける母親).
+    bool final = false;
+    // A verb of moving on one's own (近づく, 逃げる, 走り出す), which a vehicle or an animal does too: no
+    // cue for a key with such a common sense nor for a common word of one kanji (車が近づいてくる).
+    bool move = false;
+};
+
+// The forms of the verbs of name.person-verb, by text, and their passives (笑われ, 呆れられ). Each row
+// is a lemma with its kind in the note (v5 godan, v1 ichidan, vs a verb in する) and the flags t
+// (transitive), say and move; the one conjugation table (word::Conjugation) makes its active forms
+// only: the dictionary form, the past, the te form, ちゃ, the conditional, the volitional, the
+// causative, the stem before ます, ながら, そう, つつ or がち, the negative stem before ない, ず, ん or
+// ぬ, and the commands. No passive or potential stem is a form, so 見る gives no 見え or 見られ
+// (姿が見えない).
+struct PersonVerbForms {
+    std::unordered_map<std::string, PersonVerb> forms;
+    std::unordered_map<std::string, bool> passives;
+    std::vector<std::size_t> sizes;  // the sizes of forms in bytes, largest first
+    std::vector<std::size_t> passiveSizes;
+};
+
+// The conjugation kind of lemma for the kind in its note and its flags; -1 for a note that does not
+// parse: no kind, an unknown flag, or a lemma that does not end as its kind does (PersonVerbProblems).
+int PersonVerbKind(std::string_view lemma, std::string_view note, PersonVerb& v) {
+    const std::size_t space = note.find(' ');
+    const std::string_view type = note.substr(0, space);
+    int kind = -1;
+    if (type == "v1") kind = 7;
+    if (type == "vs") kind = 9;
+    if (type == "v5") {
+        constexpr std::string_view kEnds[] = {"う", "く", "ぐ", "す", "つ", "む", "ぶ", "", "る", "", "", "", "ぬ"};
+        for (int k = 0; k < static_cast<int>(std::size(kEnds)) && kind < 0; k++) {
+            if (!kEnds[k].empty() && lemma.ends_with(kEnds[k])) kind = k;
+        }
+        if (lemma.ends_with("行く") || lemma.ends_with("いく")) kind = word::kKindIku;
+    }
+    const std::string_view ending = kind < 0 ? std::string_view() : word::Conjugation(kind, 0);
+    if (ending.empty() || !lemma.ends_with(ending) || lemma.size() == ending.size()) return -1;
+    v = PersonVerb();
+    std::string_view flags = space == std::string_view::npos ? std::string_view() : note.substr(space + 1);
+    while (!flags.empty()) {
+        const std::size_t end = flags.find(' ');
+        const std::string_view flag = flags.substr(0, end);
+        if (flag == "t") {
+            v.transitive = true;
+        } else if (flag == "say") {
+            v.say = true;
+        } else if (flag == "move") {
+            v.move = true;
+        } else {
+            return -1;
+        }
+        flags = end == std::string_view::npos ? std::string_view() : flags.substr(end + 1);
+    }
+    return kind;
+}
+
+const PersonVerbForms& PersonVerbTable() {
+    static const PersonVerbForms table = [] {
+        PersonVerbForms t;
+        const auto members = dict::ClassMembers(HDTRANS_CLASS("name.person-verb"));
+        const auto notes = dict::ClassNotes(HDTRANS_CLASS("name.person-verb"));
+        for (std::size_t k = 0; k < members.size() && k < notes.size(); k++) {
+            const std::string_view lemma = members[k];
+            PersonVerb v;
+            const int kind = PersonVerbKind(lemma, notes[k], v);
+            // A row that does not parse is no verb here; the unit test of PersonVerbProblems fails on it.
+            if (kind < 0) continue;
+            const std::string stem(lemma.substr(0, lemma.size() - word::Conjugation(kind, 0).size()));
+            const auto add = [&](std::string form, PersonVerb::Follow follow, bool final = false) {
+                if (form.find('(') != std::string::npos || form.find("XX") != std::string::npos) return;
+                PersonVerb f = v;
+                f.follow = follow;
+                f.final = final;
+                const auto [it, fresh] = t.forms.emplace(std::move(form), f);
+                if (!fresh) {
+                    // Two lemmas of one form: the looser of the two.
+                    it->second.transitive = it->second.transitive && f.transitive;
+                    it->second.say = it->second.say || f.say;
+                    it->second.move = it->second.move || f.move;
+                    it->second.follow = std::min(it->second.follow, f.follow);
+                    it->second.final = it->second.final && f.final;
+                }
+            };
+            const auto cell = [&](int branch) { return std::string(word::Conjugation(kind, branch)); };
+            for (const int branch : {0, 3, 5, 6, 7, 17}) {
+                if (!cell(branch).empty() || branch == 0) add(stem + cell(branch), PersonVerb::Follow::Any, branch == 0 || branch == 6);
+            }
+            // The causative: one who has someone do it is a person too (腕を引いて立ち上がらせる). It takes an
+            // object, so after は it needs one in を (not ボケはてめーだよ…笑わせんな).
+            const bool transitive = v.transitive;
+            v.transitive = true;
+            add(kind == 9 ? stem + "させ" : stem + cell(2), PersonVerb::Follow::Any);
+            v.transitive = transitive;
+            const std::string masu = stem + cell(10);
+            for (const std::string_view tail : {"ま", "なが", "そう", "つつ", "がち"}) add(masu + std::string(tail), PersonVerb::Follow::Any);
+            if (text::RuneCount(masu) >= 2) add(masu, PersonVerb::Follow::Stem);
+            const std::string neg = stem + cell(8);
+            add(neg + "な", PersonVerb::Follow::Any);
+            add(stem + cell(9), PersonVerb::Follow::Any);
+            if (kind != 9) {
+                add(neg + "ん", PersonVerb::Follow::Any);
+                add(neg + "ぬ", PersonVerb::Follow::Any);
+            }
+            for (const int branch : {11, 12}) {
+                if (!cell(branch).empty()) add(stem + cell(branch), PersonVerb::Follow::Command);
+            }
+            const std::string passive = kind == 9 ? stem + "され" : stem + cell(1);
+            if (passive.find('(') == std::string::npos && passive.size() > stem.size()) t.passives.emplace(passive, true);
+        }
+        for (const auto& [form, v] : t.forms) t.sizes.push_back(form.size());
+        for (const auto& [form, v] : t.passives) t.passiveSizes.push_back(form.size());
+        for (auto* sizes : {&t.sizes, &t.passiveSizes}) {
+            std::sort(sizes->begin(), sizes->end(), std::greater<>());
+            sizes->erase(std::unique(sizes->begin(), sizes->end()), sizes->end());
+        }
+        return t;
+    }();
+    return table;
+}
+
+// The byte length of the noun of a person that starts s (母親, 少女), 0 for none: the longest word of kanji or
+// katakana there that has a common sense of a person.
+std::size_t PersonNounLength(const dict::Snapshot& snap, std::string_view s) {
+    std::size_t end = 0;
+    for (std::size_t runes = 0; end < s.size() && runes < 4; runes++) {
+        const text::Rune r = text::DecodeRune(s.substr(end));
+        if (!IsKanji(r.cp) && !IsKatakana(r.cp)) break;
+        end += r.size;
+    }
+    for (std::size_t n = end; n > 0; n -= RuneBefore(s, n).size) {
+        const std::string_view word = s.substr(0, n);
+        bool found = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.source != word || c.codes->sem.HasPrefix("QPN")) continue;
+            if (c.codes->sem.HasCode("VHn")) return n;
+            found = true;
+        }
+        // Only the longest word: 様子 is no 様.
+        if (found) return 0;
+    }
+    return 0;
+}
+
+bool PersonNounAt(const dict::Snapshot& snap, std::string_view s) { return PersonNounLength(snap, s) > 0; }
+
+// What a form of a command may stand before: the end of the utterance (黙れ！, 黙れよ, 黙れっ).
+constexpr std::string_view kCommandEnds = "、。！？!?…‥」』）)\n 　ーっよ〜";
+
+// The longest form of a verb of name.person-verb that s starts with, where its ending allows (a
+// wish such as 見たい or a state in てある is no act: its object takes が; nor is an act asked of another
+// in てほしい), and its size in bytes; 0 for none.
+std::size_t PersonVerbAt(std::string_view s, PersonVerb& verb) {
+    const PersonVerbForms& t = PersonVerbTable();
+    for (const std::size_t size : t.sizes) {
+        if (size > s.size()) continue;
+        const auto it = t.forms.find(std::string(s.substr(0, size)));
+        if (it == t.forms.end()) continue;
+        const std::string_view tail = s.substr(size);
+        const char32_t next = tail.empty() ? 0 : FirstRune(tail).cp;
+        switch (it->second.follow) {
+            case PersonVerb::Follow::Any:
+                if (it->first.ends_with("た")) {
+                    bool wish = false;
+                    for (const std::string_view w : {"い", "く", "かっ", "かろ", "がる", "がっ", "がら", "がり", "けれ", "さ"}) wish = wish || tail.starts_with(w);
+                    if (wish) continue;
+                }
+                break;
+            case PersonVerb::Follow::Stem:
+                if (next != U'、' && !IsKanji(next)) continue;
+                break;
+            case PersonVerb::Follow::Command:
+                if (next != 0 && !InRunes(next, kCommandEnds)) continue;
+                break;
+        }
+        // てほしい asks the act of another (見て欲しけりゃ…しとけボケ).
+        if ((it->first.ends_with("て") || it->first.ends_with("で")) && dict::StartsWithMember(HDTRANS_CLASS("ending.te-wish"), tail) > 0) continue;
+        // てある makes the object the subject (名前が書いてある).
+        if (it->second.transitive && (it->first.ends_with("て") || it->first.ends_with("で")) && tail.starts_with("あ") &&
+            !tail.starts_with("あげ")) {
+            continue;
+        }
+        verb = it->second;
+        return size;
+    }
+    return 0;
+}
+
+// Whether s starts with the passive of a verb of name.person-verb (笑われ, 呆れられ).
+bool PersonVerbPassiveAt(std::string_view s) {
+    const PersonVerbForms& t = PersonVerbTable();
+    for (const std::size_t size : t.passiveSizes) {
+        if (size <= s.size() && t.passives.contains(std::string(s.substr(0, size)))) return true;
+    }
+    return false;
+}
+
+// With mover, the key has a common sense of a vehicle or an animal (MoverKey): a verb of moving on one's own
+// is no cue for it, nor for a common word of one kanji (Role::Act).
+bool PersonActIn(std::string_view s, Role role, bool clause, const dict::Snapshot* snap = nullptr, bool mover = false) {
     bool object = false;
+    bool subject = false;
     std::size_t runes = 0;
     for (std::size_t i = 0; i < s.size() && runes < kClauseReach; runes++) {
         const std::string_view rest = s.substr(i);
@@ -515,7 +737,28 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
             // no act of its own.
             if (role != Role::Act || !SimileAfter(rest.substr(act))) return true;
         }
+        PersonVerb verb;
+        if (const std::size_t n = wordStart ? PersonVerbAt(rest, verb) : 0; n > 0) {
+            const std::string_view tail = rest.substr(n);
+            // After は, も or 、 a verb that takes an object may have the word as its object (礼は受け取ろう),
+            // unless an object in を stands before it; a named topic may say with none (高峰は語った).
+            // Before the word at a sentence end, the word is the object only with a subject in the clause (俺が
+            // 見つめる千里; not 涙声で尋ねる千里).
+            const bool objectTopic = verb.transitive && role != Role::Subject && !object && !(verb.say && role == Role::NamedTopic) &&
+                                     (clause || subject);
+            // A topic is no subject of a relative clause on a noun of a person, its own subject (昼間は仕事に出かける
+            // 母親; not 千里は驚く様子もなく).
+            const bool relative = role != Role::Subject && verb.final && snap != nullptr && PersonNounAt(*snap, tail);
+            // A stem right after X、 lists nouns (風呂、着替え、洗濯物).
+            const bool listed = (role == Role::Other || role == Role::Aside) && i == 0 && verb.follow == PersonVerb::Follow::Stem;
+            const bool moved = verb.move && (mover || role == Role::Act);
+            if (!objectTopic && !relative && !listed && !moved && !((role == Role::Act || role == Role::Aside) && verb.transitive) &&
+                !(role == Role::Act && SimileAfter(tail))) {
+                return true;
+            }
+        }
         object = object || (i > 0 && rest.starts_with("を"));
+        subject = subject || (i > 0 && rest.starts_with("が"));
         if (wordStart && role == Role::NamedTopic && dict::StartsWithMember(HDTRANS_CLASS("name.person-speak"), rest) > 0) return true;
         for (const bool say : {true, false}) {
             if (!wordStart || role == Role::Act) break;
@@ -529,6 +772,11 @@ bool PersonActIn(std::string_view s, Role role, bool clause) {
             if (!wish && !passive) return true;
         }
         const text::Rune r = text::DecodeRune(rest);
+        // After Xが a comma that closes an adverb in に keeps the clause (凪がこれ見よがしに、俺と腕を組む).
+        if (r.cp == U'、' && role == Role::Subject && prev == U'に') {
+            i += r.size;
+            continue;
+        }
         // A simile in ように goes on to the act it describes (からかうように笑った).
         if (InRunes(r.cp, kClauseEnds) ||
             (dict::StartsWithMember(HDTRANS_CLASS("name.person-clause-stop"), rest) > 0 && !(role == Role::Act && rest.starts_with("ように")))) {
@@ -616,6 +864,17 @@ bool SingleNameKey(const dict::Snapshot& snap, std::string_view key) {
     return false;
 }
 
+// Whether key, one kanji, stands in a lenticular box before speech as a heading or a word: it is of
+// noun.bracket-note (【完】), or has a common sense and no person's reading in the name layer or is of
+// noun.box-heading (【新】「春の新作」).
+// A key with a person's reading names the speaker in a box of one, in its line only (【凪】「うん」, 【幸】「ねえ」;
+// spec LEX-5941, LEX-6060).
+bool HeadingBoxAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    return text::RuneCount(key) < 2 && internal::NameBoxAt(before, after) && !internal::BracketLabelAt(before, after) &&
+           ((!NameOnlyKey(snap, key) && (!SingleNameKey(snap, key) || dict::InClass(HDTRANS_CLASS("noun.box-heading"), key))) ||
+            dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key));
+}
+
 // Whether a person cue of key may be a figure of speech (瞳が見つめる, 心が泣く, 花が笑う, 夢が叫ぶ,
 // 未来が微笑む): key is a single character that is no SingleNameKey, a member of name.personified-word, or a word the dictionary
 // reads as a part of the body, a colour, a feeling, weather, the sky or a place.
@@ -643,6 +902,21 @@ bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
             if (c.codes->sem.HasCode("VPl") && !c.codes->sem.HasCode("UDr")) return true;
         } else if (c.codes->sem.HasCode("VPl")) {
             return true;
+        }
+    }
+    return false;
+}
+
+// Whether key has a common sense of a vehicle or an animal (車 차, 小舟 작은 배), which moves on its own as a
+// person does (PersonVerb::move).
+bool MoverKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasCode("QCT") ||
+            c.codes->sem.HasCode("QNN")) {
+            continue;
+        }
+        for (const std::string_view code : {"VTp", "QAL", "QAA", "QAB"}) {
+            if (c.codes->sem.HasCode(code)) return true;
         }
     }
     return false;
@@ -712,7 +986,260 @@ bool SpeakerOrAgentAt(std::string_view after) {
     if (!after.starts_with("に")) return false;
     const std::string_view rest = after.substr(std::string_view("に").size());
     const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-act"), rest);
-    return n > 0 && rest.substr(n, kPassiveReach).find("られ") != std::string_view::npos;
+    return (n > 0 && rest.substr(n, kPassiveReach).find("られ") != std::string_view::npos) || PersonVerbPassiveAt(rest);
+}
+
+// Whether the common word key reads as an adverb (大方 대부분), which sets off a clause with 、 as no
+// call does (大方、味方を見捨てて逃げたんだろう).
+bool AdverbKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == key && c.codes->partText.starts_with("E")) return true;
+    }
+    return false;
+}
+
+// Whether s ends in a command or a request (戻れ, 落ち着け, 来い, 発言しろ, 手伝ってくれ, 待ってください), before
+// よ, っ, ー or 〜: a command of the one conjugation table after a verb stem of the dictionary that starts with a
+// kanji, しろ or せよ, 来い or こい after て, or a request in てくれ, てください, てちょうだい or なさい.
+// With negative set, a negative request counts too (行かないで); with te set, a request in a bare te form (そこをどいて,
+// 待って, 読んで), but no adjective's くて.
+bool CommandEndIn(const dict::Snapshot& snap, std::string_view s, bool negative = false, bool te = false) {
+    for (bool more = true; more;) {
+        more = false;
+        for (const std::string_view t : {"よ", "っ", "ー", "〜", "～"}) {
+            if (s.ends_with(t)) {
+                s.remove_suffix(t.size());
+                more = true;
+            }
+        }
+    }
+    for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("ending.command-request"))) {
+        if (s.ends_with(t) && s.size() > t.size()) return true;
+    }
+    if (s.ends_with("てこい") || s.ends_with("でこい")) return true;
+    // A negative request (行かないで, 忘れないで).
+    if (negative && s.ends_with("ないで") && s.size() > std::string_view("ないで").size()) return true;
+    if (te && s.size() > std::string_view("て").size() * 2) {
+        if (s.ends_with("んで") || s.ends_with("いで")) return true;
+        if (s.ends_with("て")) {
+            const char32_t prev = RuneBefore(s, s.size() - std::string_view("て").size()).cp;
+            if (prev != U'く' && (IsHiragana(prev) || IsKanji(prev))) return true;
+        }
+    }
+    // The command ending is the last one or two kana; the stem goes back to a kanji (戻れ, 落ち着け: 着).
+    std::size_t q = s.size();
+    for (int endRunes = 1; endRunes <= 2 && q > 0 && IsHiragana(RuneBefore(s, q).cp); endRunes++) {
+        q -= RuneBefore(s, q).size;
+        const std::string_view ending = s.substr(q);
+        std::size_t j = q;
+        for (int stemRunes = 1; stemRunes <= 4 && j > 0; stemRunes++) {
+            const char32_t c = RuneBefore(s, j).cp;
+            if (!IsKanji(c) && !IsHiragana(c)) break;
+            j -= RuneBefore(s, j).size;
+            if (!IsKanji(c)) continue;
+            const std::string_view stem = s.substr(j, q - j);
+            for (const dict::Candidate& r : snap.RetrieveRecords(stem, dict::LookupMode::General)) {
+                if (r.codes == nullptr || r.source != stem || r.codes->partText.size() < 4 || !r.codes->partText.starts_with("M4")) continue;
+                const int kind = r.codes->partText[3] - '0';
+                for (const int branch : {11, 12}) {
+                    if (word::Conjugation(kind, branch) == ending) return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// What closes an utterance after a clause: a mark of its end or a closing bracket.
+constexpr std::string_view kUtteranceCloses = "」』！？!?。…‥\n";
+
+// Whether s, after X、 at the start of an utterance, is one clause up to the end of the utterance that calls on
+// X: a command or a request (小太刀、いい加減仕事に戻れ, 高峰、ちょっと手伝ってくれ), or, where question is set, a
+// question (筧、今まで読んだ本の数は？, 凪、お茶でも飲むか？; spec LEX-4820). A question with no object of its own
+// may ask about X (スイカ、食べる？, スイカ、俺も食べる？); 何 before a verb of doing is its object with を
+// dropped (高峰、何してるんだ？). A bare te form asks with te set (千里、そこをどいて), for a key not of hiragana,
+// which may be a phrase of its own (ここね、待って), nor a katakana word of the dictionary, which may be what is
+// offered (チョコ、よかったら召し上がって). Otherwise only a word of time, which nobody eats or calls, is called
+// there (睦月、呼んだ？), with time set.
+bool CalledClauseAt(const dict::Snapshot& snap, std::string_view s, bool question, bool time = false, bool te = false) {
+    std::size_t i = 0;
+    for (std::size_t runes = 0; i < s.size() && runes < kClauseReach; runes++) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        if (InRunes(r.cp, kClauseEnds)) break;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    if (i == 0 || (i < s.size() && !InRunes(FirstRune(s.substr(i)).cp, kUtteranceCloses))) return false;
+    const std::string_view clause = s.substr(0, i);
+    const std::string_view close = s.substr(i);
+    if (question) {
+        if (!(close.starts_with("？") || close.starts_with("?")) || !IsHiragana(RuneBefore(clause, clause.size()).cp)) return false;
+        // An object in を or でも, or a noun asked about in は (本の数は？).
+        if (time || clause.ends_with("は") || clause.find("を") != std::string_view::npos) return true;
+        for (const std::string_view what : dict::ClassMembers(HDTRANS_CLASS("name.what-doing"))) {
+            const std::size_t at = clause.find(what);
+            if (at != std::string_view::npos && !clause.substr(at + what.size()).starts_with("ら")) return true;
+        }
+        const std::size_t demo = clause.find("でも");
+        return demo != std::string_view::npos && demo > 0;
+    }
+    return CommandEndIn(snap, clause, te, te);
+}
+
+// Whether key has a common sense of a time the dictionary has as a common noun (昼間 낮, 今日 오늘), which a question
+// after 、 asks about (昼間、何してた？); a month (睦月 1월) is a proper noun of time and no such word.
+bool CommonTimeKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN")) continue;
+        if (c.codes->sem.HasCode("UMe") && c.codes->partText.size() >= 3 && c.codes->partText[2] == '1') return true;
+    }
+    return false;
+}
+
+// Whether key has a common sense of time (睦月 1월).
+bool TimeKey(const dict::Snapshot& snap, std::string_view key) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == key && !c.codes->sem.HasPrefix("QPN") && c.codes->sem.HasCode("UMe")) return true;
+    }
+    return false;
+}
+
+// Whether before is the start of an utterance, also after a call word and 、 (「おい、筧、).
+bool CallStart(std::string_view before) {
+    if (UtteranceStart(before)) return true;
+    std::string_view b = TrimEndSpaces(before);
+    if (!b.ends_with("、")) return false;
+    b.remove_suffix(std::string_view("、").size());
+    std::size_t k = b.size();
+    while (k > 0 && !InRunes(RuneBefore(b, k).cp, kOpens) && !InRunes(RuneBefore(b, k).cp, "、 　")) k -= RuneBefore(b, k).size;
+    return k < b.size() && dict::InClass(HDTRANS_CLASS("name.call-word"), b.substr(k)) && UtteranceStart(b.substr(0, k));
+}
+
+// Whether the word is called after a command at the end of an utterance (「まあ、落ち着け小太刀。」, 戻れ、高峰！).
+bool CommandCallAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
+    if (!(after.empty() || InRunes(FirstRune(after).cp, kUtteranceCloses))) return false;
+    std::string_view b = TrimEndSpaces(before);
+    if (b.ends_with("、")) b.remove_suffix(std::string_view("、").size());
+    return !b.empty() && IsHiragana(RuneBefore(b, b.size()).cp) && CommandEndIn(snap, ClauseBefore(b), true);
+}
+
+// Whether the word is called after a stutter of its first syllable at the start of an utterance (「……ち、千里？」):
+// one kana and 、 before it, whose Hangul starts the reading of a person's name row of key, and a mark or the end
+// after it.
+bool StutterCallAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    if (!(after.empty() || InRunes(FirstRune(after).cp, "」』！？!?…‥"))) return false;
+    std::string_view b = before;
+    if (!b.ends_with("、")) return false;
+    b.remove_suffix(std::string_view("、").size());
+    const text::Rune kana = RuneBefore(b, b.size());
+    if (!IsHiragana(kana.cp) && !IsKatakana(kana.cp)) return false;
+    std::string_view head = b.substr(0, b.size() - kana.size);
+    // The stutter may repeat (た、た、高峰).
+    const std::string again = std::string(b.substr(b.size() - kana.size)) + "、";
+    while (head.ends_with(again)) head.remove_suffix(again.size());
+    while (head.ends_with("…") || head.ends_with("‥")) head.remove_suffix(RuneBefore(head, head.size()).size);
+    if (!UtteranceStart(head)) return false;
+    // The matrix holds katakana: a hiragana is its katakana less 0x60.
+    std::string k;
+    text::AppendRune(k, IsHiragana(kana.cp) ? kana.cp + 0x60 : kana.cp);
+    const int index = word::KanaMatrixIndex(k);
+    if (index < 0) return false;
+    for (const dict::Record& r : snap.NameRecords(key)) {
+        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN")) continue;
+        const std::string_view first = r.target.substr(0, FirstRune(r.target).size);
+        for (const int n : {index % 5, 5 + index % 5}) {
+            if (!first.empty() && word::KanaCell(index / 5, n) == first) return true;
+        }
+    }
+    return false;
+}
+
+// Whether the kanji or katakana run that ends s is a noun of a person (彼女, 姉, 先生), a word of its own.
+bool PersonNounBefore(const dict::Snapshot& snap, std::string_view s) {
+    std::size_t start = s.size();
+    for (std::size_t runes = 0; start > 0 && runes < 4; runes++) {
+        const char32_t c = RuneBefore(s, start).cp;
+        if (!IsKanji(c) && !IsKatakana(c)) break;
+        start -= RuneBefore(s, start).size;
+    }
+    if (start == s.size() || (start > 0 && (IsKanji(RuneBefore(s, start).cp) || IsKatakana(RuneBefore(s, start).cp)))) return false;
+    const std::string_view word = s.substr(start);
+    for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == word && !c.codes->sem.HasPrefix("QPN") && c.codes->sem.HasCode("VHn")) return true;
+    }
+    return false;
+}
+
+// Whether b ends in the first of a pair of persons before と: a speaker's pronoun (pronoun.speaker), a noun of a
+// person or a word with an honorific, standing as a word of its own. With nouns false, only a pronoun or an
+// honorific.
+bool PairAnchorBefore(const dict::Snapshot& snap, std::string_view b, bool nouns) {
+    if (nouns && PersonNounBefore(snap, b)) return true;
+    std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("pronoun.speaker"), b);
+    bool honorific = false;
+    if (n == 0) {
+        n = dict::EndsWithMember(HDTRANS_CLASS("honorific.candidate"), b);
+        honorific = n > 0;
+    }
+    if (n == 0 || n == b.size()) return n > 0 && !honorific;
+    const char32_t first = FirstRune(b.substr(b.size() - n)).cp;
+    const char32_t prev = RuneBefore(b, b.size() - n).cp;
+    // An honorific follows a name of kanji or katakana (高峰さん); a pronoun is no part of a longer word (独自分).
+    if (honorific) return IsKanji(prev) || IsKatakana(prev);
+    if (IsKanji(first)) return !IsKanji(prev);
+    return !IsHiragana(prev) && !IsKatakana(prev);
+}
+
+// The byte length of a pronoun of a person (俺, お前, 彼女) or a noun of a person (姉) that starts s, 0 for none.
+std::size_t PersonWordAt(const dict::Snapshot& snap, std::string_view s) {
+    std::size_t n = 0;
+    // The longest member: 彼女 is no 彼.
+    for (const dict::ClassId c : {HDTRANS_CLASS("pronoun.speaker"), HDTRANS_CLASS("pronoun.listener"), HDTRANS_CLASS("pronoun.third-person")}) {
+        for (const std::string_view m : dict::ClassMembers(c)) {
+            if (s.starts_with(m)) n = std::max(n, m.size());
+        }
+    }
+    return n > 0 ? n : PersonNounLength(snap, s);
+}
+
+// Whether after, past と, goes on with another person of a chain (千里と高峰で, 千里と俺の): a person word or a
+// person's name of the name layer.
+bool ChainGoesOnAt(const dict::Snapshot& snap, std::string_view after) {
+    if (!after.starts_with("と")) return false;
+    const std::string_view rest = after.substr(std::string_view("と").size());
+    return PersonWordAt(snap, rest) > 0 || !snap.PersonKeysAt(rest).empty();
+}
+
+// Whether the word stands second in a pair of persons joined by と before a particle of the clause (俺と千里は,
+// 僕と凪が, 高峰さんと凪は, 姉と千里は; spec LEX-4820): the first is a speaker's pronoun (pronoun.speaker), a noun
+// of a person or a word with an honorific, standing as a word of its own. Not before の, where the pair may own a
+// common word (俺と千里の道).
+// A common word of one kanji pairs only with a pronoun or an honorific (俺と凪は; not 女房と畳は), with nouns false.
+// With nouns set, a chain counts too: the word goes on with と and another person (俺と千里と高峰で), or stands
+// after one more word and と (俺と千里と高峰で), or before で.
+bool PairedAt(const dict::Snapshot& snap, std::string_view before, std::string_view after, bool nouns = true) {
+    if (!before.ends_with("と")) return false;
+    if (!InRunes(FirstRune(after).cp, "がはもをに") && !(nouns && (after.starts_with("で") || ChainGoesOnAt(snap, after)))) return false;
+    const std::string_view b = before.substr(0, before.size() - std::string_view("と").size());
+    if (PairAnchorBefore(snap, b, nouns)) return true;
+    if (!nouns) return false;
+    // The middle of a chain: a word of kanji or katakana and と before the word.
+    std::size_t k = b.size();
+    for (std::size_t runes = 0; k > 0 && runes < 4 && (IsKanji(RuneBefore(b, k).cp) || IsKatakana(RuneBefore(b, k).cp)); runes++) {
+        k -= RuneBefore(b, k).size;
+    }
+    if (k == b.size() || !b.substr(0, k).ends_with("と")) return false;
+    return PairAnchorBefore(snap, b.substr(0, k - std::string_view("と").size()), true);
+}
+
+// Whether the word stands first in a pair with a person after と and a particle of the clause (高峰と俺は,
+// 高峰と彼女が, 千里とお前は; spec LEX-4820). Not before の.
+bool PairedFirstAt(const dict::Snapshot& snap, std::string_view after) {
+    if (!after.starts_with("と")) return false;
+    const std::string_view rest = after.substr(std::string_view("と").size());
+    const std::size_t n = PersonWordAt(snap, rest);
+    if (n == 0) return false;
+    const std::string_view tail = rest.substr(n);
+    return InRunes(FirstRune(tail).cp, "がはもで") || ChainGoesOnAt(snap, tail);
 }
 
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
@@ -739,6 +1266,7 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
         // act befalls someone (樹に呆れられる), or one called at the start of an utterance (「樹、どこ行くの？」;
         // spec LEX-5175).
         if (snap.DictionaryWord(key)) {
+            if (PairedAt(snap, before, after, false) && !after.starts_with("を") && !after.starts_with("に")) return true;
             if (after.starts_with("が") || after.starts_with("は") || after.starts_with("も")) {
                 return PersonActIn(after.substr(FirstRune(after).size), Role::Act, true);
             }
@@ -748,18 +1276,42 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
             return after.starts_with("、") && (b.ends_with("「") || b.ends_with("『")) && CallableKey(snap, key, true) && !CommonSenseAt(after);
         }
     }
-    if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
-    if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
-    if (after.starts_with("は") || after.starts_with("も")) {
-        return PersonActIn(after.substr(FirstRune(after).size), SpeakingTopic(snap, key) ? Role::NamedTopic : Role::Topic, true);
+    if (after.starts_with("の")) {
+        // A voice is a person's after a clause of what a person does (静かに語る凪の声が響く).
+        const std::string_view rest = after.substr(std::string_view("の").size());
+        if (PersonPartAt(rest)) return true;
+        // Hair is a person's for a word that only the name layer reads (凪の髪; not 白銀の髪).
+        if (const std::size_t hair = dict::StartsWithMember(HDTRANS_CLASS("name.person-hair"), rest);
+            hair > 0 && !snap.DictionaryWord(key) && !IsKanji(FirstRune(rest.substr(hair)).cp)) {
+            return true;
+        }
+        const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-voice"), rest);
+        return n > 0 && !IsKanji(FirstRune(rest.substr(n)).cp) && IsHiragana(RuneBefore(before, before.size()).cp) &&
+               PersonActIn(ClauseBefore(before), Role::Other, false, nullptr, MoverKey(snap, key));
     }
-    if (after.starts_with("、") && (UtteranceStart(before) || TrimEndSpaces(before).ends_with("、"))) {
+    if (PairedAt(snap, before, after) || PairedFirstAt(snap, after)) return true;
+    const bool mover = MoverKey(snap, key);
+    if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true, nullptr, mover);
+    if (after.starts_with("は") || after.starts_with("も")) {
+        return PersonActIn(after.substr(FirstRune(after).size), SpeakingTopic(snap, key) ? Role::NamedTopic : Role::Topic, true, &snap,
+                           mover);
+    }
+    if (after.starts_with("、") && (UtteranceStart(before) || TrimEndSpaces(before).ends_with("、")) && !AdverbKey(snap, key)) {
         const std::string_view rest = after.substr(std::string_view("、").size());
-        return RequestAt(rest) || PersonActIn(rest, Role::Other, true);
+        if (RequestAt(rest) || PersonActIn(rest, UtteranceStart(before) ? Role::Other : Role::Aside, true, nullptr, mover)) return true;
+        // Called at the start of an utterance with a command, a request or a question that runs to its end.
+        return CallStart(before) &&
+               (CalledClauseAt(snap, rest, false, false,
+                                !internal::AllRunes(key, IsHiragana) && !(internal::AllRunes(key, IsKatakana) && snap.DictionaryWord(key))) || (!CommonTimeKey(snap, key) && CalledClauseAt(snap, rest, true, TimeKey(snap, key))));
+    }
+    // Not a katakana spelling of a native word, which after a command is a word said at the one told (行けボケ).
+    if (!internal::AllRunes(key, IsHiragana) && !(internal::AllRunes(key, IsKatakana) && snap.DictionaryWord(internal::ToHiragana(key))) &&
+        (CommandCallAt(snap, before, after) || StutterCallAt(snap, key, before, after))) {
+        return true;
     }
     if (text::RuneCount(key) >= 2 && !internal::AllRunes(key, IsHiragana) && FinalCallAt(key, before, after)) return true;
     if (after.empty() || after.starts_with("。") || after.starts_with("！") || after.starts_with("!") || after.starts_with("…")) {
-        return IsHiragana(RuneBefore(before, before.size()).cp) && PersonActIn(ClauseBefore(before), Role::Other, false);
+        return IsHiragana(RuneBefore(before, before.size()).cp) && PersonActIn(ClauseBefore(before), Role::Other, false, nullptr, mover);
     }
     return false;
 }
@@ -815,6 +1367,17 @@ std::vector<std::string_view> ListedNames(const dict::Snapshot& snap, std::strin
 }
 
 }  // namespace
+
+std::vector<std::string> PersonVerbProblems() {
+    std::vector<std::string> out;
+    const auto members = dict::ClassMembers(HDTRANS_CLASS("name.person-verb"));
+    const auto notes = dict::ClassNotes(HDTRANS_CLASS("name.person-verb"));
+    for (std::size_t k = 0; k < members.size(); k++) {
+        PersonVerb v;
+        if (k >= notes.size() || PersonVerbKind(members[k], notes[k], v) < 0) out.emplace_back(members[k]);
+    }
+    return out;
+}
 
 std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text) {
     std::vector<NameCue> out;
@@ -883,7 +1446,17 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         // A label in round brackets, or one that a colon or ≫ closes, is a whole word: it neither
         // inflects (さくら：, (わかば)) nor stands for a verb or a prefix of one character ((恋)); a
         // character of noun.bracket-note in brackets annotates the line ((続)).
-        const bool bracketLabel = internal::BracketLabelAt(before, after);
+        const bool bracketLabel = internal::BracketLabelAt(before, after) || internal::NameBoxAt(before, after);
+        if (HeadingBoxAt(snap, key, before, after)) {
+            i += step;
+            continue;
+        }
+        // A box of one kanji with a common sense names the speaker in the box only, which Registry::ReadBoxNames
+        // writes there (【月】「月がきれい」 달이, 愛がすべてだ 사랑이): it cues no other occurrence.
+        if (BoxNameAt(snap, key, before, after)) {
+            i += step;
+            continue;
+        }
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed
@@ -942,6 +1515,13 @@ bool SpeakerLabelAt(const dict::Snapshot& snap, std::string_view before, std::st
     return LabelAt(snap, before, after) || internal::SquareLabelAt(before, after);
 }
 
+bool BoxNameAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    return text::RuneCount(key) == 1 && internal::NameBoxAt(before, after) && !internal::BracketLabelAt(before, after) &&
+           SingleNameKey(snap, key) && !NameOnlyKey(snap, key) && !HeadingBoxAt(snap, key, before, after) &&
+           !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key) && !dict::InClass(HDTRANS_CLASS("noun.role"), key) &&
+           !dict::InClass(HDTRANS_CLASS("noun.label-role"), key);
+}
+
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     if (CommonSenseAt(after)) return false;
     // An honorific: the document has named the word already, so a sense of an animal does not stand in the
@@ -959,8 +1539,11 @@ bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_
         const std::string_view rest = after.substr(std::string_view("の").size());
         return PersonPartAt(rest) || dict::StartsWithMember(HDTRANS_CLASS("name.person-belonging"), rest) > 0;
     }
-    if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true);
-    if (after.starts_with("は") || after.starts_with("も")) return PersonActIn(after.substr(FirstRune(after).size), Role::Topic, true);
+    const bool mover = MoverKey(snap, key);
+    if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true, nullptr, mover);
+    if (after.starts_with("は") || after.starts_with("も")) {
+        return PersonActIn(after.substr(FirstRune(after).size), Role::Topic, true, nullptr, mover);
+    }
     if (after.starts_with("と")) {
         const std::string_view rest = after.substr(std::string_view("と").size());
         const std::vector<std::size_t> keys = snap.PersonKeysAt(rest);
@@ -998,6 +1581,15 @@ bool CommonSenseAt(std::string_view after) {
         if (InRunes(r.cp, kClauseEnds) || ((r.cp == U'が' || r.cp == U'は') && (IsKanji(prev) || IsKatakana(prev)))) return false;
         if (dict::StartsWithMember(HDTRANS_CLASS("name.common-predicate"), rest.substr(i)) > 0) return true;
         i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
+bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after) {
+    if (dict::StartsWithMember(HDTRANS_CLASS("name.plant-after"), after) == 0) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QCT")) continue;
+        if (c.codes->sem.HasCode("QAL") || c.codes->sem.HasCode("VPt")) return true;
     }
     return false;
 }
@@ -1057,6 +1649,31 @@ bool CommonWord(const dict::Snapshot& snap, std::string_view key) {
         return true;
     }
     return false;
+}
+
+bool NameOnlyKey(const dict::Snapshot& snap, std::string_view key) {
+    if (!internal::AllRunes(key, IsKanji) && !internal::AllRunes(key, IsHiragana)) return false;
+    const auto bare = [](std::string_view ko) {
+        std::string out;
+        for (const char ch : ko) {
+            if (ch != ' ') out += ch;
+        }
+        return out;
+    };
+    std::set<std::string> person;
+    const std::vector<dict::Record> names = snap.NameRecords(key);
+    for (const dict::Record& r : names) {
+        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) person.insert(bare(r.target));
+    }
+    if (person.empty()) return false;
+    for (const dict::Record& r : names) {
+        if (r.codes != nullptr && !r.codes->sem.HasPrefix("QPN") && !person.contains(bare(r.target))) return false;
+    }
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QNN")) continue;
+        if (!person.contains(bare(c.target))) return false;
+    }
+    return true;
 }
 
 }  // namespace hdTrans::names

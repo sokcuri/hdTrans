@@ -11135,7 +11135,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 置所	놓아 둔 장소	I110	VPl		GN							jisjk:86911
 置きどころ	놓아 둔 장소	I110	VPl		GN							jisjk:86911
 置屋	기생집	N110	VBl		GN							jisjk:165103
-左様	그와 같이	E300			GN							jisjk:123151
+左様	그%C5@	G8U0			GN							jisjk:123151
 佐様	그와 같이	E300			GN							jisjk:123151
 差し引き勘定	차감 잔액 계산	I110			GN							jisjk:108969
 差し向い	마주 보고 앉음	N110			GN							jisjk:185200
@@ -13683,7 +13683,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ドラ焼	도라야키	N110	VFd		GN							w:886
 銅鑼焼	도라야키	N110	VFd		GN							w:886
 サタデイ	세터데이	N110	UMe		GN							jisjk:128955
-腹ペコ	배가 몹시 고%DB@	G8U0			GN							jisjk:143480
+腹ペコ	배가 몹시 고%EK@	G8U0			GN							jisjk:143480
 腹ペコ	배고픔	N110			GN							jisjk:375015
 初摺	초판인쇄	N110			GN							jisjk:102998
 初摺り	초판인쇄	N110			GN							jisjk:102998
@@ -14128,7 +14128,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 絎け針	공그름바늘	I110			GN							jisjk:106583
 草熱れ	풀숲의 열기	I110			GN							jisjk:110836
 草熅れ	풀숲의 열기	I110			GN							jisjk:110836
-ドジを踏	얼빠진 짓을 &AV@	M445			GN							jisjk:143900
+ドジを踏	실수를 &AV@	M445			GN							jisjk:143900
 轍をふ	전철을 &FE@	M425			GN							jisjk:141713
 テツを踏	전철을 &FE@	M425			GN							jisjk:141713
 大した事ではな	별일 아$A3@	H7U0			GN							jisjk:341479
@@ -18841,7 +18841,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 錦卵	니시키타마고	N110			GN							jisjk:247798
 な行	나행	N110			GN							jisjk:341718
 フィン・スイミング	핀 스위밍	N110			GN							jisjk:54837
-涙をうかべ	눈물을 &MU@	M427			GN							jisjk:257373
+涙をうかべ	눈물을 &MU@	M427			GN	13964	||1 &&11 M+0== "57*" ||2 P+1== "4**" S+1== "、" S+1!= "Lい" S+1!= "Lしま" S+1!= "Lお" S+1!= "Lみ" S+1!= "Lくれ" S+1!= "Lくださ" S+1!= "Lもら" S+1!= "Lあげ" Y+0= "1고"	눈물을 머금은 채 다른 동작이 이어지는 て형은 '-고'로 잇는다(涙を浮かべて笑う 눈물을 머금고 웃는다). 보조 동사 앞은 그대로 '-어'다.				jisjk:257373
 必要無	필요 $FA@	H7N0			GN							jisjk:137733
 沙汰やみ	계획이 중지	N110			GN							jisjk:185263
 折畳み式	접는 식	N110			GN							jisjk:166195

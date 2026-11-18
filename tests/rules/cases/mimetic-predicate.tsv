@@ -1,0 +1,80 @@
+# 규칙: LEX-5900, LEX-5901, LEX-5902, LEX-5903, LEX-5904, LEX-5905, LEX-5906, LEX-5907, LEX-5908
+rule	input	expected	kind	layer
+sound:mimetic-state	ヘトヘトだ。	녹초다.	fix	sound
+sound:mimetic-state	もうへとへとだよ。	이제 녹초야.	fix	sound
+sound:mimetic-state	くたくたです。	녹초입니다.	keep	sound
+sound:mimetic-state	彼は英語がペラペラだ。	그는 영어가 유창하다.	fix	sound
+cx:mimetic-state:40	店はガラガラだった。	가게는 텅 비어 있었다.	keep	rewrites
+sound:mimetic-state	雨でびしょびしょだ。	비로 흠뻑 젖어 있다.	fix	sound
+sound:mimetic-state	ガリガリの男が立っていた。	삐쩍 마른 남자가 서 있었다.	fix	sound
+sound:mimetic-state	びしょびしょの服を脱いだ。	흠뻑 젖은 옷을 벗었다.	fix	sound
+cx:mimetic-state:50	ガラガラ声で言った。	쉰 목소리로 말했다.	keep	rewrites
+sound:mimetic-state	こっちはお腹ペコペコよ	이쪽은 배가 고파	fix	sound
+cx:mimetic-state:34	お腹がぺこぺこです	배가 고픕니다	keep	rewrites
+cx:mimetic-state:30	ぺこぺこじゃない	배고프지 않다	keep	rewrites
+sound:mimetic-state	病気がちで学校を休んだ	자주 아파 학교를 쉬었다	fix	sound
+sound:mimetic-manner	びしょびしょに濡れた。	흠뻑 젖었다.	fix	sound
+cx:mimetic-state:20	ガリガリに痩せた。	삐쩍 야위었다.	keep	rewrites
+sound:mimetic-manner	クタクタに疲れた。	녹초가 되도록 지쳤다.	fix	sound
+sound:mimetic-manner	ペラペラ喋ってくれた。	나불나불 말해 주었다.	fix	sound
+cx:mimetic-cues:140	ページをペラペラとめくった。	페이지를 팔랑팔랑 넘겼다.	fix	rewrites
+sound:mimetic-manner	ガラガラと崩れた。	와르르 무너졌다.	keep	sound
+sound:mimetic-manner	ぺこぺこ頭を下げながら	굽실굽실 고개를 숙이면서	fix	sound
+sound:mimetic-name	ガリガリ君が好き。	가리가리 군을 좋아해.	keep	sound
+cx:mimetic-state:10	ビショビショになった。	흠뻑 젖었다.	fix	rewrites
+cx:mimetic-state:20	ガリガリになった。	삐쩍 말랐다.	fix	rewrites
+cx:mimetic-state:30	ペコペコになった。	배고파졌다.	fix	rewrites
+cx:mimetic-state:31	お腹がぺこぺこになってきた	배가 고파졌다	fix	rewrites
+cx:mimetic-state:40	ガラガラになった。	텅 비었다.	fix	rewrites
+cx:mimetic-state:41	声がガラガラになった。	목소리가 쉬었다.	fix	rewrites
+cx:mimetic-state:50	ガラガラの声で言った。	쉰 목소리로 말했다.	fix	rewrites
+sound:doubled-to	ベトベトの手	끈적끈적한 손	fix	sound
+sound:doubled-to	ゴトゴトと揺れる	덜컹덜컹 흔들린다	fix	sound
+cx:mimetic-state:10	びしょびしょじゃない	흠뻑 젖어 있지 않다	keep	rewrites
+cx:mimetic-state:44	声ががらがらだ。	목소리가 쉬어 있다.	keep	rewrites
+sound:mimetic-state	毎日へとへとになると、	매일 녹초가 되면,	fix	sound
+sound:mimetic-state	店ががらがらだった。	가게가 텅 비어 있었다.	fix	sound
+sound:mimetic-state	彼女ががりがりだ。	그녀가 삐쩍 말라 있다.	fix	sound
+sound:mimetic-state	ロシア語ペラペラの方がいらっしゃいましたら	러시아어 유창한 분이 계시면	fix	sound
+sound:mimetic-state	ペコペコの子供たち	배고픈 아이들	fix	sound
+sound:mimetic-state	ヘトヘトの体	녹초가 된 몸	fix	sound
+sound:mimetic-manner	車はじゃり道の上をがりがり言わせて	has:으드득으드득	keep	sound
+sound:mimetic-manner	ひとりペラペラしゃべってくれる奴がいないと	혼자 나불나불 말해 주는 놈이 없으면	fix	sound
+sound:mimetic-stress	ビッショビショになった。	흠뻑 젖었다.	fix	sound
+sound:mimetic-stress	ガリッガリになった。	삐쩍 말랐다.	fix	sound
+sound:mimetic-stress	ペッコペコだ。	배고프다.	fix	sound
+sound:mimetic-stress	ヘットヘトだ。	녹초다.	fix	sound
+sound:mimetic-stress	もうくったくただよ。	이제 녹초야.	fix	sound
+sound:mimetic-state	びしょびしょに濡れている。	흠뻑 젖어 있다.	fix	sound
+sound:mimetic-state	彼女はガリガリに痩せていた。	그녀는 삐쩍 야위어 있었다.	fix	sound
+sound:mimetic-state	ヘトヘトに疲れて帰った。	녹초가 되도록 지쳐 돌아갔다.	fix	sound
+sound:mimetic-state	ガラガラに空いていた。	텅 비어 있었다.	fix	sound
+sound:mimetic-predicate	「もうびしょびしょ」	「이제 흠뻑 젖어 있어」	fix	sound
+sound:mimetic-predicate	「お腹ペコペコ」	「배가 고파」	fix	sound
+sound:mimetic-predicate	席はガラガラ。	자리는 텅 비어 있다.	fix	sound
+sound:mimetic-predicate	店内ガラガラ。	가게 안 텅 비어 있다.	fix	sound
+sound:mimetic-predicate	戸をガラガラ開ける。	lacks:텅|쉬	keep	sound
+sound:mimetic-predicate	「ガラガラ」	lacks:텅|쉬	keep	sound
+cx:mimetic-state:44	喉がガラガラだ。	목이 쉬어 있다.	fix	rewrites
+cx:mimetic-state:41	喉がガラガラになった。	목이 쉬었다.	fix	rewrites
+cx:mimetic-state:44	彼の声はガラガラだった。	그의 목소리는 쉬어 있었다.	fix	rewrites
+cx:mimetic-state:34	腹がペコペコだ。	배가 고프다.	fix	rewrites
+cx:mimetic-state:31	腹がぺこぺこになった。	배가 고파졌다.	fix	rewrites
+cx:mimetic-state:36	お腹がすいてペコペコだ。	배가 고파 죽을 것 같다.	fix	rewrites
+cx:mimetic-state:60	道がボコボコだ。	길이 울퉁불퉁하다.	fix	rewrites
+cx:mimetic-state:60	顔がボコボコだ。	얼굴이 만신창이다.	keep	rewrites
+sound:mimetic-state	手がベトベトだ。	손이 끈적끈적하다.	fix	sound
+cx:mimetic-cues:142	秘密をペラペラしゃべるな。	비밀을 나불나불 말하지 마.	fix	rewrites
+cx:mimetic-cues:142	英語をペラペラ話す。	영어를 유창하게 이야기한다.	keep	rewrites
+cx:mimetic-cues:144	野菜をくたくたに煮る。	야채를 흐물흐물하게 익힌다.	fix	rewrites
+cx:mimetic-state:10	びっしょりになった。	흠뻑 젖었다.	fix	rewrites
+sound:mimetic-predicate	毎日へとへとだ。	매일 녹초다.	fix	sound
+sound:mimetic-manner	ペコペコ頭を下げる。	굽실굽실 고개를 숙인다.	fix	sound
+cx:mimetic-cues:140	あいつはぺらぺらとよくしゃべる。	저 녀석은 나불나불 잘 말한다.	keep	rewrites
+cx:mimetic-cues:144	へとへとに疲れ果てた。	녹초가 되도록 완전히 지쳐버렸다.	keep	rewrites
+cx:mimetic-state:31	ぺこぺこになった。	배고파졌다.	keep	rewrites
+cx:mimetic-state:32	お腹ぺこぺこになった。	배가 고파졌다.	fix	rewrites
+cx:mimetic-state:32	おなかがペコペコになった。	배가 고파졌다.	fix	rewrites
+cx:mimetic-state:32	店ががらがらになった。	가게가 텅 비었다.	keep	rewrites
+cx:mimetic-state:36	お腹が空いて眠れない。	배가 고파 잘 수 없다.	keep	rewrites
+cx:mimetic-state:41	店ががらがらになった。	가게가 텅 비었다.	keep	rewrites

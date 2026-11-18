@@ -22,7 +22,7 @@ cx:sense-cues-1:20	おまえとは、ずっとガキの頃から友達だった�
 cx:sense-cues-1:20	お前とは、俺がガキの頃からの付き合いで、以来ずっと一緒だ。	너와는, 내가 어릴 때부터 알고 지내는 사이로, 이래 계속 함께다.	fix	rewrites
 cx:sense-cues-1:20	そういえばガキの頃あそこの売り物を拝借してひどく怒られたっけ。	그러고 보니 어릴 때 저기의 파는 물건을 빌려 몹시 혼났나.	fix	rewrites
 cx:sense-cues-1:20	７月の初め頃、俺は芹沢さんと一緒にいた。	7월초 무렵, 나는 세리자와 씨와 함께 있었다.	keep	rewrites
-cx:sense-cues-1:20	「その頃にはまだヘイディオは存在していません」	「그 무렵에는 아직 헤이디오는 존재하고 있지 않습니다」	keep	rewrites
+cx:sense-cues-1:20	「その頃にはまだヘイディオは存在していません」	「그 무렵에는 아직 헤이디오는 존재하고 있지 않아요」	keep	rewrites
 cx:sense-cues-1:20	東雲の頃に目が覚めた。	새벽 무렵에 깨어났다.	keep	rewrites
 cx:sense-cues-1:20	「最初の頃はゆで卵にマヨネーズを混ぜて作ってたんだけどね……」	「처음의 무렵은 삶은 달걀에 마요네즈를 섞어 만들고 있었는데……」	keep	rewrites
 cx:sense-cues-1:20	気が付いたのは小学校のお受験前の頃。	깨달은 것은 초등학교의 수험 전 무렵.	keep	rewrites
@@ -38,7 +38,7 @@ cx:sense-cues-1:30	今まで何度も命の危険はあったけれど	지금까
 cx:sense-cues-1:30	命を持つものでありながら	생명을 가지는 것이면서	keep	rewrites
 cx:sense-cues-1:30	あの方は ご自分の命より 他人の命を重んじる方であります	그 분은 자신의 생명보다 타인의 생명을 존중하는 편입니다	keep	rewrites
 cx:sense-cues-1:30	地上に住む者達の命を支え続けていた。	지상에 사는 사람들의 생명을 계속 지탱하고 있었다.	keep	rewrites
-cx:sense-cues-1:30	「声が命なのに、喉が痛かったんです」	「목소리가 생명인데, 목이 아팠습니다」	keep	rewrites
+cx:sense-cues-1:30	「声が命なのに、喉が痛かったんです」	「목소리가 생명인데, 목이 아팠어요」	keep	rewrites
 cx:sense-cues-1:42	「今の調子で一年間しっかり勉強すれば、きっと合格できると思うわ」	「지금의 상태로 1년간 제대로 공부하면, 분명 합격할 수 있다고 생각해」	fix	rewrites
 cx:sense-cues-1:42	「これは参加賞。しっかり飲んで健康になってね」	「이건 참가상. 제대로 마시고 건강하게 돼」	fix	rewrites
 cx:sense-cues-1:42	しっかり煮込むことで、汁を出してそれを混ぜ込んでいる。	제대로 삶음으로써, 국물을 내 그것을 섞어 넣고 있다.	fix	rewrites
@@ -46,7 +46,7 @@ cx:sense-cues-1:42	うむ。しっかり混ぜないと、天和地和の連続�
 cx:sense-cues-1:40	それに。お金の無駄遣いは良くないわ。妻として、財布の紐はしっかり握っておかないと	게다가. 돈의 낭비는 좋지 않아. 아내로서, 지갑끈은 꽉 잡아 두어야 한다	fix	rewrites
 cx:sense-cues-1:42	ちょっと、しっかり見てよ。越後屋の未来はお兄ちゃんの股間にかかってるんだからね	잠깐, 제대로 봐. 에치고야의 미래는 오빠의 가랑이에 걸려 있으니까	fix	rewrites
 cx:sense-cues-1:40	「しっかりつかまって」	「꽉 잡혀」	fix	rewrites
-cx:sense-cues-1:42	今でもしっかり覚えているさ。	지금도 확실히 기억하고 있고 말이야.	keep	rewrites
+cx:sense-cues-1:42	今でもしっかり覚えているさ。	지금도 확실히 기억하고 있지.	keep	rewrites
 cx:sense-cues-1:42	何？今は備蓄はしっかりあるだと？	뭐? 지금은 비축은 확실히 있다고?	keep	rewrites
 cx:sense-cues-1:42	でも、けじめはしっかりつけないと」	하지만, 매듭은 확실히 지어야 한다」	keep	rewrites
 cx:sense-cues-1:42	……しっかりしてるな。	……확실히 하고 있구나.	keep	rewrites

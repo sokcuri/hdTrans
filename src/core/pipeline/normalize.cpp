@@ -86,7 +86,7 @@ std::string Normalize(std::string_view line, const LineContext& ctx, const RunLo
     }
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female, runs.holds, runs.context));
-    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
+    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text, runs), runs)));
     text = JoinMasu(RewriteSlurred(text, runs));
     if (ctx.dialectForms) text = DialectForms(text, runs);
     text = RewriteCasual(RewriteInterjections(SpokenForms(text, ctx.exclamationNa, ctx.dialectForms, runs)), runs, ctx.dialectForms);
@@ -432,18 +432,23 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
     });
 }
 
-// start (あれ[～ー]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
-// particle (あれ――は何だ, the pronoun).
+// start (あれ[～ーぇ]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
+// particle (あれ――は何だ, the pronoun). あれ drawn out with ぇ is the interjection also before 。, a
+// closing bracket or the end (あれぇ。) and after 、 (って、あれぇ？).
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
-    return SentenceStart(s, pos, m, [&](size_t q) {
+    auto rest = [&](size_t q, bool drawnOnly) {
         for (std::string_view w : {"あれ", "え"}) {
             size_t r = q;
             if (!Lit(s, r, w)) continue;
             size_t t = r;
+            bool drawn = false;
             if (w == "あれ") {
-                while (OneOf(s, t, U"～ー")) continue;  // あれ～？
+                for (size_t k = t; OneOf(s, t, U"～ーぇ"); k = t) drawn = drawn || s.substr(k).starts_with("ぇ");  // あれ～？, あれぇ？ (the ぇ is written ー)
             }
-            if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
+            if (drawnOnly && !drawn) continue;
+            if (!OneOf(s, t, U"、，！？…‥―─—")) {
+                if (!drawn || (t < s.size() && !In(At(s, t).cp, U"。」』）\n"))) continue;
+            }
             size_t after = t;
             while (OneOf(s, after, U"…‥―─—")) continue;
             if (w == "あれ" && In(At(s, r).cp, U"…‥―─—") && OneOf(s, after, U"はがをもにのでと")) continue;
@@ -453,7 +458,13 @@ bool StartInterjection(std::string_view s, size_t pos, Match& m) {
             return true;
         }
         return false;
-    });
+    };
+    if (pos != 0 && In(Before(s, pos), U"、，")) {
+        m.group[1] = Span(s, pos, pos);
+        m.group[2] = Span(s, pos, pos);
+        return rest(pos, true);
+    }
+    return SentenceStart(s, pos, m, [&](size_t q) { return rest(q, false); });
 }
 
 // start え[ぇえー]+([…‥]*[？?])
@@ -621,14 +632,189 @@ size_t TimeEnd(std::string_view text, const Match& m) {
     return (c >= U'ァ' && c <= U'ヶ') || (c >= U'一' && c <= U'鿿') ? 0 : p;
 }
 
-// The kana that a voiced mark cannot voice: vowels, ん, っ, ー and small kana.
-constexpr std::u32string_view kUnvoicedKana = U"あいうえおぁぃぅぇぉゃゅょゎんっアイウエオァィゥェォャュョヮヵヶンッー～";
+// A kana that a voiced or semi-voiced mark left after it strains rather than voices: any kana letter, ー or
+// ～. A combining mark (U+3099, U+309A) has composed with a letter that takes it by then, so the mark left is a
+// spacing one (゛, ﾞ, ゜, ﾟ) that the dictionary does not read as voicing (VoicingReads), or one after a kana
+// with no such form (や, ま, な, ら rows, vowels, ん, っ, small kana) or one already voiced (だ, ガ, ぱ).
+bool StrainedKana(char32_t c) {
+    return (c >= U'ぁ' && c <= U'ゖ') || (c >= U'ァ' && c <= U'ヺ') || c == U'ー' || c == U'～';
+}
+
+bool VoicedMark(char32_t c) { return In(c, U"゛゙ﾞ"); }
+bool AnyMark(char32_t c) { return In(c, U"゛゙ﾞ゜゚ﾟ"); }
+
+// Whether a word goes on after the marks at text[at]: a Japanese letter, a mark that ends a sentence or a clause,
+// a dash that stretches the voice (う゛――), a space or the line end follow them, not a symbol of a face
+// (ヽ(´∀`)ノ゜. ☆゛￣).
+bool WordGoesOn(std::string_view text, size_t at) {
+    while (at < text.size() && AnyMark(At(text, at).cp)) at += At(text, at).size;
+    if (at >= text.size()) return true;
+    const char32_t r = At(text, at).cp;
+    return (IsJapaneseRune(r) && r != U'・') || In(r, U"、。！？!?…‥」』～―─— 　");
+}
+
+// The combining mark that the spacing mark m stands for.
+char32_t CombiningMark(char32_t m) { return VoicedMark(m) ? U'゙' : U'゚'; }
+
+// The least cost of reading line, whole, as dictionary keys over every way to cut it: 2 for a key as written,
+// 3 for a key in the other kana (ボラ for ほら, ヴァイオリン for ゔぁいおりん) and 4 for a syllable that is no key
+// (a letter and the small kana after it).
+size_t ReadingCost(const std::string& line, const RunLookup& runs) {
+    const std::string spellings[] = {line, KatakanaToHiragana(line), HiraganaToKatakana(line)};
+    std::vector<size_t> cost(line.size() + 1, std::string::npos);
+    cost[0] = 0;
+    const auto relax = [&](size_t to, size_t c) { cost[to] = std::min(cost[to], c); };
+    for (size_t at = 0; at < line.size(); at += At(line, at).size) {
+        if (cost[at] == std::string::npos) continue;  // inside a syllable
+        size_t next = at + At(line, at).size;
+        while (next < line.size() && In(At(line, next).cp, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ")) next += At(line, next).size;
+        relax(next, cost[at] + 4);
+        for (const std::string& spelling : spellings) {
+            if (spelling.size() != line.size()) continue;
+            const std::string_view rest = std::string_view(spelling).substr(at);
+            for (size_t key = runs.keyReach(runs.context, rest); key > 0;
+                 key = runs.keyReach(runs.context, rest.substr(0, key - LastRune(rest.substr(0, key)).size)))
+                relax(at + key, cost[at] + (&spelling == &spellings[0] ? 2 : 3));
+        }
+    }
+    return cost[line.size()];
+}
+
+// Whether a key of the dictionary holds the rune of line at through, as written or in the other kana.
+bool KeyHolds(const std::string& line, size_t through, const RunLookup& runs) {
+    for (const std::string& spelling : {line, KatakanaToHiragana(line), HiraganaToKatakana(line)}) {
+        for (size_t start = 0; start <= through && start < spelling.size(); start += At(spelling, start).size)
+            if (start + runs.keyReach(runs.context, std::string_view(spelling).substr(start)) > through) return true;
+    }
+    return false;
+}
+
+// How far VoicingReads reads around a mark, in letters.
+constexpr int kVoicedLookBack = 8;
+constexpr int kVoicedLookAhead = 16;
+
+enum class Voicing { Strains, Voices, Stays };
+
+// Whether out ends with the stem of a dictionary verb in る: やめ, たすけ.
+bool VerbStemEnds(std::string_view out, const RunLookup& runs) {
+    return runs.dictionaryVerb != nullptr && runs.dictionaryVerb(runs.context, std::string(out) + "る");
+}
+
+// How the spacing mark at text[at] reads after the kana base that out ends with: it voices it into letter unless the letter
+// as written reads as a dictionary key fewer than the voiced one (ReadingCost) over the letters around it, from
+// up to kVoicedLookBack before over up to kVoicedLookAhead after (た゛すけて たすけて, ほ゛ら ほら; but て゛す
+// です, と゛こ どこ, た゛め だめ, それか゛いいの それがいいの, う゛ぁいおりん ゔぁいおりん). Each spelling is read with
+// the later marks left out (た゛す゛け゛て゛) and with those that can voice their kana composed (カ゛ンハ゛レ).
+// With no dictionary the mark voices. A ゔ before ー, っ, ん, small ぅ or another う is a cry (う゛ー, う゛ん); one
+// that voices but that no key holds stays as written (しう゛ぁるみゃー), as ゔ has no place in the dictionary's
+// character set.
+
+Voicing VoicingReads(std::string_view out, char32_t base, char32_t letter, std::string_view text, size_t at,
+                     const RunLookup& runs) {
+    const char32_t following = At(text, at + At(text, at).size).cp;
+    if (base == U'う' && (!IsJapaneseRune(following) || In(following, U"ーッゥンウっぅんう"))) return Voicing::Strains;
+    // A て or た after っ or after the stem of a dictionary verb in る ends its te or past form (やめて゛ やめて,
+    // たすけて゛, まって゛), where a で or だ is no word; not where the voiced spelling reads as a key fewer
+    // (それて゛す です).
+    const bool teForm = In(base, U"てた") && (LastRune(out).cp == U'っ' || VerbStemEnds(out, runs));
+    if (runs.keyReach == nullptr) return teForm ? Voicing::Strains : base == U'う' ? Voicing::Stays : Voicing::Voices;
+    size_t back = out.size();
+    for (int n = 0; n < kVoicedLookBack && back > 0; n++) {
+        const text::Rune last = LastRune(out.substr(0, back));
+        if (!IsJapaneseRune(last.cp) || AnyMark(last.cp)) break;
+        back -= last.size;
+    }
+    std::u32string plain, voiced;  // the letters after the mark, its later marks left out or composed
+    for (int n = 0; n < kVoicedLookAhead && at < text.size();) {
+        const text::Rune r = At(text, at);
+        at += r.size;
+        if (AnyMark(r.cp)) {
+            if (const char32_t composed = voiced.empty() ? 0 : ComposeKanaPair(voiced.back(), CombiningMark(r.cp)))
+                voiced.back() = composed;
+            continue;
+        }
+        if (!IsJapaneseRune(r.cp)) break;
+        plain.push_back(r.cp);
+        voiced.push_back(r.cp);
+        n++;
+    }
+    const auto spell = [&](char32_t first, const std::u32string& after) {
+        std::string line(out.substr(back));
+        text::AppendRune(line, first);
+        for (const char32_t c : after) text::AppendRune(line, c);
+        return line;
+    };
+    const auto cost = [&](char32_t first) {
+        return std::min(ReadingCost(spell(first, plain), runs), ReadingCost(spell(first, voiced), runs));
+    };
+    // A key fewer decides; a key in the other kana alone does not (それか゛いいの それがいいの with ガイ).
+    const size_t plainCost = cost(base), voicedCost = cost(letter);
+    if (voicedCost > plainCost + 1 || (teForm && plainCost <= voicedCost + 1)) return Voicing::Strains;
+    if (base != U'う') return Voicing::Voices;
+    const size_t through = out.size() - back;
+    return KeyHolds(spell(letter, plain), through, runs) || KeyHolds(spell(letter, voiced), through, runs) ? Voicing::Voices
+                                                                                                           : Voicing::Stays;
+}
+
+// Whether a katakana word of two letters or more starts at text[at] (ローマ, not the ッ of ん゛ッ).
+bool KatakanaWordAt(std::string_view text, size_t at) {
+    size_t letters = 0;
+    for (; at < text.size(); at += At(text, at).size) {
+        const char32_t c = At(text, at).cp;
+        if (!((c >= U'ァ' && c <= U'ヺ') || c == U'ー')) break;
+        if (!In(c, U"ァィゥェォッャュョヮヵヶー")) letters++;
+    }
+    return letters >= 2;
+}
+
+bool IsAsciiLetterOrDigit(char32_t c) { return (c >= U'0' && c <= U'9') || (c >= U'A' && c <= U'Z') || (c >= U'a' && c <= U'z'); }
+
+// Where the spacing voiced marks are that the line quotes with, sorted: a pair of ゛ with no mark between,
+// whose first opens a word after the line start or a character other than a letter (゛モーロック゛って何,
+// 名作 ゛天使よ゛), or after a hiragana letter or a kanji before a kanji or a katakana word of two letters or more
+// (映画の゛ローマの休日゛, 彼は゛正義の味方゛, 映画゛タイタニック゛), with no 、。！？ between the two and, after
+// hiragana, a letter after the second. A mark with no closing one strains (え゛司令官).
+std::vector<size_t> QuotingMarks(std::string_view text) {
+    std::vector<size_t> marks;
+    char32_t prev = 0;
+    for (size_t at = 0; at < text.size();) {
+        const text::Rune r = At(text, at);
+        const size_t open = at;
+        at += std::max<size_t>(1, r.size);
+        const char32_t next = At(text, at).cp;
+        const bool afterOther = !IsJapaneseRune(prev) && !IsAsciiLetterOrDigit(prev) && IsJapaneseRune(next) && !AnyMark(next);
+        const bool afterHiragana = prev >= U'ぁ' && prev <= U'ゖ';
+        const bool afterKana = (afterHiragana || IsKanjiRune(prev)) && (IsKanjiRune(next) || KatakanaWordAt(text, at));
+        prev = r.cp;
+        if (r.cp != U'゛' || !(afterOther || afterKana)) continue;
+        size_t close = at;
+        size_t letters = 0;
+        bool pause = false;  // a mark that ends a sentence or a clause inside: no quote (え゛司令官、助けて゛)
+        while (close < text.size() && !AnyMark(At(text, close).cp)) {
+            pause = pause || In(At(text, close).cp, U"、。！？!?");
+            close += std::max<size_t>(1, At(text, close).size);
+            letters++;
+        }
+        if (close >= text.size() || At(text, close).cp != U'゛' || pause || letters < (afterOther ? size_t{1} : size_t{2})) continue;
+        // After hiragana a word goes on past the closing mark (の゛…゛です, は゛…゛を), not a ！ or the line end (あ゛痛いよ゛！).
+        const size_t past = close + At(text, close).size;
+        if (afterHiragana && !afterOther && (past >= text.size() || !IsJapaneseRune(At(text, past).cp))) continue;
+        marks.push_back(open);
+        marks.push_back(close);
+        prev = U'゛';
+        at = close + At(text, close).size;
+    }
+    return marks;
+}
 
 }  // namespace
 
-std::string NormalizeForms(std::string_view text) {
+std::string NormalizeForms(std::string_view text, const RunLookup& runs) {
     std::string out;
     out.reserve(text.size());
+    bool strained = false;  // the kana before had a voiced mark that strains it
+    const std::vector<size_t> quoting = QuotingMarks(text);
+    const auto quotes = [&](size_t at) { return std::binary_search(quoting.begin(), quoting.end(), at); };
     for (size_t i = 0; i < text.size();) {
         const text::Rune r = At(text, i);
         i += r.size;
@@ -640,7 +826,7 @@ std::string NormalizeForms(std::string_view text) {
         if (c >= 0xFF61 && c <= 0xFF9F && c != U'｢' && c != U'｣') {
             c = tokenizer::WidenHalfWidth(c);
             const text::Rune mark = At(text, i);
-            if (mark.size > 0 && mark.cp == U'ﾞ' && (c == U'ウ' || In(c, kDakutenBases))) {
+            if (mark.size > 0 && mark.cp == U'ﾞ' && ComposeKanaPair(c, U'\u3099') != 0) {
                 c = ComposeKanaPair(c, U'\u3099');
                 i += mark.size;
             } else if (mark.size > 0 && mark.cp == U'ﾟ' && In(c, kHandakutenBases)) {
@@ -688,14 +874,34 @@ std::string NormalizeForms(std::string_view text) {
         if (const char32_t composed = ComposeKanaPair(c, mark.cp)) {
             c = composed;
             i += mark.size;
+        } else if (In(mark.cp, U"゛ﾞ゜ﾟ") && c != U'ウ' && !strained && !quotes(i) && WordGoesOn(text, i)) {
+            // A spacing mark voices a kana that takes it (て゛す です, と゛こ どこ, か゛んばれ がんばれ, ワ゛ ヷ, は゜ ぱ)
+            // unless the dictionary reads the kana as written (た゛すけて たすけて, ほ゛ら ほら, ワ゛タシ ワタシ);
+            // then, and next to a strained kana (や゛め゛て゛, ご゛め゛ん゛な゛さ゛い゛), it strains it, as below.
+            const char32_t voiced = ComposeKanaPair(c, CombiningMark(mark.cp));
+            const Voicing reads = voiced == 0 ? Voicing::Strains : VoicingReads(out, c, voiced, text, i, runs);
+            if (reads == Voicing::Voices) {
+                c = voiced;
+                i += mark.size;
+            } else if (reads == Voicing::Stays) {
+                text::AppendRune(out, c);
+                out.append(text.substr(i, mark.size));
+                i += mark.size;
+                strained = false;
+                continue;
+            }
         }
-        // A voiced mark on a kana that has no voiced form strains the voice of a cry (あ゛っ, ん゛,
-        // ウ゛ー); the kana is read without it. Katakana ウ with the mark before a small vowel or
-        // another katakana letter spells ヴ (ウ゛ァイオリン), and hiragana う before a small vowel
-        // keeps the mark (う゛ぁ).
-        if (In(c, kUnvoicedKana)) {
+        strained = false;
+        // A mark that does not compose with the kana strains the voice of a cry or a word (あ゛っ, ん゛, ウ゛ー,
+        // や゛めて, だ゛め, た゛す゛け゛て゛, や゜めて, ぱ゜んつ); the kana is read without it, and so is a kanji
+        // (痛゛い). Katakana ウ with the mark before a small vowel or another katakana letter spells ヴ
+        // (ウ゛ァイオリン). The marks the line quotes with stay (QuotingMarks).
+        // A mark in a face (ヽ(´∀`)ノ゜.) stays, but for a voiced mark after a kana that cannot take it.
+        const bool word = WordGoesOn(text, i);
+        if (((StrainedKana(c) && (word || ComposeKanaPair(c, U'゙') == 0)) || (IsKanjiRune(c) && word)) && !quotes(i)) {
             size_t j = i;
-            while (j < text.size() && In(At(text, j).cp, U"゛゙ﾞ")) j += At(text, j).size;
+            const std::u32string_view marks = IsKanjiRune(c) ? U"゛ﾞ゜ﾟ" : word ? U"゛゙ﾞ゜ﾟ" : U"゛゙ﾞ";
+            while (j < text.size() && In(At(text, j).cp, marks)) j += At(text, j).size;
             // A run of ウ゛ reads by what follows the whole run (ウ゛ウ゛ッ ウウッ).
             size_t k = j;
             while (c == U'ウ' && k < text.size() && At(text, k).cp == U'ウ') {
@@ -705,11 +911,12 @@ std::string NormalizeForms(std::string_view text) {
                 k = m;
             }
             const char32_t next = k < text.size() ? At(text, k).cp : 0;
-            if (j > i && c == U'ウ' && IsKatakanaRune(next) && !In(next, U"ーッゥンウ")) {
+            if (j > i && c == U'ウ' && VoicedMark(At(text, i).cp) && IsKatakanaRune(next) && !In(next, U"ーッゥンウ")) {
                 c = U'ヴ';
                 i = j;
-            } else if (j > i && !(c == U'う' && In(next, U"ぁぃぇぉ"))) {
+            } else if (j > i) {
                 i = j;
+                strained = true;
             }
         }
         text::AppendRune(out, c);
@@ -779,7 +986,9 @@ std::string JoinPausedCopula(std::string_view text) {
 
 std::string RewriteInterjections(std::string_view text) {
     std::string s = ReplaceAll(text, StartInterjection, [](const Match& m) {
-        return Cat({m.group[1], m.group[2], m.group[3], "っ", m.group[4]});
+        std::string stretch(m.group[4]);
+        for (size_t at; (at = stretch.find("ぇ")) != std::string::npos;) stretch.replace(at, std::string_view("ぇ").size(), "ー");
+        return Cat({m.group[1], m.group[2], m.group[3], "っ", stretch});
     });
     s = ReplaceAll(s, StartEe, [](const Match& m) { return Cat({m.group[1], m.group[2], "えっ", m.group[3]}); });
     s = ReplaceAll(s, PauseEe, [](const Match& m) { return Cat({m.group[1], "えっ", m.group[2]}); });

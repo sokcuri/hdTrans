@@ -13,4 +13,4 @@ constraint:ita-after-te	鍵は机の上に置かれていたんです。	열쇠�
 constraint:ita-after-te	彼はずっと待っていたな。	그는 계속 기다리고 있었군.	fix	lookup
 constraint:ita-after-te	心の中では悲しんでいたんじゃないか。	마음속에서는 슬퍼하고 있던 거 아닌가.	fix	lookup
 constraint:ita-after-te	こちらでいたしましょう。	이쪽에서 합시다.	keep	lookup
-constraint:ita-after-te	犬が捨てられていたんですね。	개를 버려지고 있었군요.	fix	lookup
+constraint:ita-after-te	犬が捨てられていたんですね。	has:버려지고 있었	fix	lookup

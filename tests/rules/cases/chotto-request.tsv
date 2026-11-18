@@ -22,7 +22,7 @@ cx:chotto-request:10	ちょっと疲れて、寝た。	조금 지쳐, 잤다.	ke
 cx:chotto-request:10	ちょっと見てくる	!rule:cx:chotto-request:10	keep	rewrites
 cx:chotto-request:10	もうちょっと考えて下さい	좀 더 생각해 주세요	keep	rewrites
 dict:w:26722	「すまないが、ちょっといいか？」	「미안하지만, 잠깐 괜찮아?」	fix	local
-dict:w:26722	「あの、ちょっといいですか？」	「저, 잠깐 괜찮습니까?」	fix	local
+dict:w:26722	「あの、ちょっといいですか？」	「저, 잠깐 괜찮아요?」	fix	local
 dict:w:26722	「あの、ちょっとよろしいですか？」	rule:dict:w:26722=잠깐	fix	local
 dict:w:26722	「ねえ……ちょっといいかな」	rule:dict:w:26722=잠깐	fix	local
 dict:w:26722	ちょっと待ってて	rule:dict:w:26722=잠깐	keep	local

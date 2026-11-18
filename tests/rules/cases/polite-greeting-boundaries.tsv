@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:greeting:polite-copula	先生、お久しぶりです。	선생님, 오랜만입니다.	fix	local
 dict:greeting:polite-copula	お久しぶりです。	오랜만입니다.	fix	local
 dict:greeting:polite-copula	お久しぶりです！	오랜만입니다!	fix	local
-dict:greeting:polite-copula	「お久しぶりです」	「오랜만입니다」	fix	local
+dict:greeting:polite-copula	「お久しぶりです」	「오랜만이에요」	fix	local
 dict:greeting:polite-copula	お久しぶりです123。	오랜만입니다 123.	fix	local
 dict:greeting:polite-copula	お久しぶりですABC。	오랜만입니다 ABC.	fix	local
 dict:greeting:polite-copula	お久しぶりです１２３。	오랜만입니다 123.	fix	local

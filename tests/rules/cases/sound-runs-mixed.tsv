@@ -1,0 +1,50 @@
+# 규칙: LEX-5980, LEX-5981, LEX-5104
+rule	input	expected	kind	layer
+normalize:mixed-vowel-run	「うぉおおおぉおお、天の神様、オヤシロさま！！　どうか梯子をお恵み下さいぃいいぃ！！」	has:주세요오오	fix	normalize
+normalize:mixed-vowel-run	静粛にぃいいぃ！	정숙하게에에에에!	fix	normalize
+normalize:mixed-vowel-run	「うっ……ぐっ、うぐぁあああああああああああッッ」	lacks:아 아	fix	normalize
+normalize:mixed-vowel-run	「ぅあっ、ふっ……あっ……あっ、ああっ、あぁっ！　ゃあああぁぁぁぁぁぁぁっっっ！」	has:야아아아앗!	fix	normalize
+normalize:mixed-vowel-run	「け、圭一くん！！ 助けてぇええぇッ！！！」	has:도와줘어어어엇	fix	normalize
+normalize:mixed-vowel-run	「…ぅのれレナぁあぁあ…！！ よくも…俺を見殺しにぃいいぃいい！！」	lacks:좋은	fix	normalize
+normalize:mixed-vowel-run	「てンめぇええぇえ〜…！！」	lacks:네네	fix	normalize
+normalize:mixed-vowel-run	５万円を…自腹だってっぇえぇええぇ？！	lacks:네네	fix	normalize
+normalize:mixed-vowel-run	「ならこれで俺も……あがりだぁあぁあッ！！」	has:이야아아	fix	normalize
+normalize:mixed-vowel-run	「お前らみんな鬼だぁあぁああ！」	has:귀신이야아아	fix	normalize
+normalize:mixed-vowel-run	「それは嫌ぁぁああぁあ〜…！」	has:싫어	fix	normalize
+normalize:mixed-vowel-run	お願いぃいいい！	lacks:좋은	fix	normalize
+normalize:mixed-vowel-run	下さいぃぃぃぃ！	주세요오오오오!	fix	normalize
+normalize:mixed-vowel-run	「やめろ…。やめろぉおぉ…ッ！」	has:그만둬라아아아	fix	normalize
+normalize:mixed-vowel-run	心が貧しいとか言うなぁあぁあぁあッ！！	has:말하지 마아아아	fix	normalize
+normalize:mixed-vowel-run	言うなぁぁぁぁっ！	말하지 마아아아앗!	fix	normalize
+normalize:mixed-vowel-run	言うなっ！	말하지 마!	keep	normalize
+normalize:mixed-vowel-run	かわいいぃぃ	귀여워	keep	normalize
+normalize:mixed-vowel-run	かわいぃぃぃ	has:귀여워	keep	normalize
+normalize:mixed-vowel-run	「……まぁあれもロミオとジュリエットみたいなものかしら……？」	has:뭐 저것도	keep	normalize
+normalize:mixed-vowel-run	はぁああん！　とても…痛い…	has:하아아앙	keep	normalize
+normalize:mixed-vowel-run	「私も、京太郎が、世界で、一番、好き……はああぁん……っ！」	has:하아아앙	keep	normalize
+normalize:mixed-vowel-run	あああぁぁ	아아아아아	keep	normalize
+normalize:mixed-vowel-run	「ひっ、くうぅぅぅ……っ！」	lacks:먹	keep	normalize
+normalize:mixed-vowel-run	いい天気だね	has:좋은 날씨	keep	normalize
+normalize:mixed-vowel-run	ああいう人	has:저런 사람	keep	normalize
+normalize:mixed-vowel-run	これでいいぃ？	has:돼?	keep	normalize
+normalize:mixed-vowel-run	まえぇぇぇ	has:앞	keep	normalize
+sound:interjection-rows	「おおう……辛辣なのよさ……」	「오오우……신랄해……」	fix	sound
+sound:interjection-rows	「おおう、それは私よりマズいな……」	has:「오오우, 	fix	sound
+sound:interjection-rows	「おおう！？　……み、みなさんお揃いで」	has:「오오우!?	fix	sound
+sound:interjection-rows	「あれぇ？」	「어라?」	fix	sound
+sound:interjection-rows	「あれぇ……？」	「어라……?」	fix	sound
+sound:interjection-rows	あれぇ、おかしいな	has:어라,	fix	sound
+sound:interjection-rows	「でしょー、かっこいいでしょ……ほら、んしょっと」	has:자, 영차	fix	sound
+sound:interjection-rows	「えへへ、そうかな……うんしょ、うんしょ」	has:영차, 영차	fix	sound
+sound:interjection-rows	「んしょ、んしょ……」	「영차, 영차……」	fix	sound
+sound:interjection-rows	「んしょっ、んっしょっ！」	lacks:은숏	fix	sound
+sound:interjection-rows	あれを見て	has:저것을	keep	sound
+sound:interjection-rows	おおうなばら	has:바다	keep	sound
+sound:stutter-numeral	「い、一回も勝てなかった……」	「하, 한 번도 이길 수 없었어……」	fix	sound
+sound:stutter-numeral	い、一緒に行こう	has:하, 함께	fix	sound
+sound:stutter-numeral	い、一度だけ	has:하, 한 번만	fix	sound
+sound:stutter-numeral	ひ、一人で	has:히, 혼자서	keep	sound
+sound:stutter-numeral	「すると、なんだ、つまり……ふ、二人きりということか」	has:후, 단둘이	keep	sound
+sound:stutter-numeral	え、一回？	어, 한 번?	keep	sound
+sound:stutter-numeral	あ、一つ目	has:아, 첫 번째	keep	sound
+sound:stutter-numeral	い、１回	lacks:하,	keep	sound

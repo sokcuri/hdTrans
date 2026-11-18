@@ -449,6 +449,14 @@ size_t internal::StutterSeparator(std::u32string_view rs, size_t i) {
     }
 }
 
+size_t internal::MarkedStutterSeparator(std::u32string_view rs, size_t i) {
+    size_t n = StutterSeparator(rs, i);
+    if (n == 0) {
+        while (i + n < rs.size() && Contains(U"~～〜", rs[i + n])) n++;
+    }
+    return n;
+}
+
 std::string WriteStutters(std::string_view s) {
     const std::u32string rs = Runes(s);
     if (!Contains(rs, kStutterMark) && !Contains(rs, kStutterRest)) return std::string(s);
@@ -466,10 +474,16 @@ std::string WriteStutters(std::string_view s) {
         while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
         while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
         i += marks + rest - 1;
-        const size_t k = internal::StutterSeparator(rs, i + 1);
+        // A ～ the sound stage took as the separator (そ～そんな 그~그런) is written as one ~.
+        size_t k = internal::MarkedStutterSeparator(rs, i + 1);
         std::u32string sep = rs.substr(i + 1, k);
+        const bool tilde = !sep.empty() && Contains(U"~～〜", sep[0]);
+        if (tilde) sep = U"~";
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
+        // The word goes on right after the ~ (な～なんで 왜~왜), and after the one space of a comma
+        // even when its own Korean starts with a space (な、なんでしょう 무, 무엇이지요).
+        while ((tilde || sep == U", ") && i + 1 < rs.size() && rs[i + 1] == U' ') i++;
         size_t j = i + 1;
         while (j < rs.size()) {
             if (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest) {

@@ -1,0 +1,63 @@
+# 규칙: LEX-5920, LEX-5921, LEX-5922, LEX-5923
+rule	input	expected	kind	layer
+lookup:kana-verb-paradigm	うごいて！	has:움직여	fix	lookup
+lookup:kana-verb-paradigm	うごかないでください。	has:움직이지 마세요	fix	lookup
+lookup:kana-verb-paradigm	うごくと危ない。	has:움직이면	fix	lookup
+lookup:kana-verb-paradigm	にげて！	has:도망쳐	fix	lookup
+lookup:kana-verb-paradigm	はやくにげて！	has:빨리 도망쳐	fix	lookup
+lookup:kana-verb-paradigm	にげるな！	has:도망치지 마	fix	lookup
+lookup:kana-verb-paradigm	にげてください。	has:도망쳐 주세요	fix	lookup
+lookup:kana-verb-paradigm	にげないで！	has:도망치지 마	fix	lookup
+lookup:kana-verb-paradigm	はなれないで！	has:떠나지 마	fix	lookup
+lookup:kana-verb-paradigm	ゆっくりはなれる。	has:천천히 떠난다	fix	lookup
+lookup:kana-verb-paradigm	おきて！	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	おきてください。	has:일어나 주세요	fix	lookup
+lookup:kana-verb-paradigm	かえってきた。	has:돌아왔다	fix	lookup
+lookup:kana-verb-paradigm	かえってくれ。	has:돌아가 줘	fix	lookup
+lookup:kana-verb-paradigm	周東、かえってきて	has:돌아와	fix	lookup
+lookup:kana-verb-paradigm	きたえ方がちがう。	has:단련하는 방법	fix	lookup
+lookup:kana-verb-paradigm	記憶をよびさます。	has:일깨운다	fix	lookup
+lookup:kana-verb-paradigm	なにねぼけたこと言ってんだ！	has:잠이 덜 깬 소리	fix	lookup
+lookup:kana-verb-paradigm	ケーキバイキングははじめて	has:처음	keep	lookup
+lookup:kana-verb-paradigm	これははじめて	has:처음	keep	lookup
+lookup:kana-verb-paradigm	くらいにはなれる	lacks:떠나	keep	lookup
+lookup:kana-verb-paradigm	そういうのはやめて。	has:그만해	keep	lookup
+lookup:kana-verb-paradigm	かえって悪くなった。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	おきてを守れ。	has:규정을	keep	lookup
+lookup:kana-verb-paradigm	村のおきてだ。	has:규정이다	keep	lookup
+lookup:kana-verb-paradigm	せめて一口だけでも。	has:적어도	keep	lookup
+lookup:kana-verb-paradigm	少なくとも、せめて。	lacks:책	keep	lookup
+lookup:kana-verb-paradigm	せめて！	has:적어도	keep	lookup
+lookup:kana-verb-paradigm	あさって。	has:모레	keep	lookup
+lookup:kana-verb-paradigm	あえて！	has:굳이	keep	lookup
+lookup:kana-verb-paradigm	はじめてください。	has:시작해 주세요	fix	lookup
+lookup:kana-verb-paradigm	はやくはじめて！	has:시작해	fix	lookup
+lookup:kana-verb-paradigm	発艦はじめて！	has:시작	fix	lookup
+lookup:kana-verb-paradigm	もうおきて、朝だよ。	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	おきてから食べる。	has:일어나고	fix	lookup
+lookup:kana-verb-paradigm	おきてよ、おにいちゃん！	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	おきて…	has:일어나	fix	lookup
+lookup:kana-verb-paradigm	はやくおうちにかえって！	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってから話そう。	has:돌아가고	fix	lookup
+lookup:kana-verb-paradigm	ぼくはにげない。	has:도망치지 않는다	fix	lookup
+lookup:kana-verb-paradigm	うまれて	has:태어나	fix	lookup
+lookup:kana-verb-paradigm	ゆめみ、にげて！	has:유메미	fix	lookup
+lookup:kana-verb-paradigm	おどろう！	has:춤추자	fix	lookup
+lookup:kana-verb-paradigm	とじて。	has:닫아	fix	lookup
+lookup:kana-verb-paradigm	はじめて。	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめて！	has:처음	keep	lookup
+lookup:kana-verb-paradigm	「はじめて」	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめてよ。	has:처음	keep	lookup
+lookup:kana-verb-paradigm	はじめてきた。	has:처음 왔다	keep	lookup
+lookup:kana-verb-paradigm	ほんとうにはじめて！	has:처음	keep	lookup
+lookup:kana-verb-paradigm	ゆめみ。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	ゆめみが来た。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	「ゆめみ」	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	ゆめみの家。	has:유메미	keep	lookup
+lookup:kana-verb-paradigm	はえ、にげて！	has:파리	keep	lookup
+lookup:kana-verb-paradigm	かえってたいへんだ。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたのしい。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたよりない。	has:오히려	keep	lookup
+lookup:kana-verb-paradigm	かえってたよ。	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってた。	has:돌아	fix	lookup
+lookup:kana-verb-paradigm	かえってるね？	has:돌아	fix	lookup

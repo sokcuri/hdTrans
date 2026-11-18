@@ -35,7 +35,7 @@ dict:jisjk:120474	どこを指してらっしゃるのですか。	어디를 가
 dict:jisjk:120474	地図を指してらっしゃる。	지도를 가리키고 계신다.	fix	defaults
 dict:jisjk:120474	指してらっしゃった。	가리키고 계셨다.	fix	defaults
 dict:jisjk:120474	指してらっしゃる場所。	가리키고 계시는 장소.	fix	defaults
-dict:jisjk:120474	「彼は何を指してらっしゃるのですか。」	「그는 뭘 가리키고 계십니까.」	fix	defaults
+dict:jisjk:120474	「彼は何を指してらっしゃるのですか。」	「그는 뭘 가리키고 계세요?」	fix	defaults
 dict:jisjk:120474	彼は地図を指している。	그는 지도를 가리키고 있다.	keep	defaults
 dict:jisjk:120474	先生が教えていらっしゃる。	선생님이 가르치고 계신다.	keep	defaults
 dict:jisjk:120474	「彼は地図を指している。」	「그는 지도를 가리키고 있어.」	keep	defaults

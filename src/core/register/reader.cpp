@@ -201,6 +201,10 @@ std::vector<PreItem> ItemsOfTarget(const Reader& d, const std::u32string& t, con
         return out;
     }
     PlainWords(d, t, out);
+    // a focus word joined to が or は in one item (なんかが 같은 게, などは 등은): its last word is the subject or topic
+    if (jsurf.size() >= 2 && (jsurf.back() == U'が' || jsurf.back() == U'は') &&
+        d.jaFocus.contains(jsurf.substr(0, jsurf.size() - 1)) && !out.empty() && out.back().kind == K::N)
+        out.back().kase = jsurf.back() == U'が' ? "subj" : "top";
     return out;
 }
 

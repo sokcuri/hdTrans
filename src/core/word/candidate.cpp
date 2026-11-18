@@ -1107,6 +1107,129 @@ Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std:
     return records;
 }
 
+// Text path: the verb records of a hiragana stem move ahead of a longer record of another class that spells
+// the verb's て form or the start of its ないで (おきて 掟: おき + て; にげない: にげ + ないで) where the text
+// after that form asks or tells someone to act or goes on as the verb: the end of the utterance (おきて！,
+// こないでっ。) or a start of follower.te-verb (おきてください, かえってきた). Elsewhere the longer word stays
+// (かえって悪くなった, おきてを守れ, かえって、). A name record never gives way, nor a word before a stem of one
+// kana, of する or くる or of a phrase row (どうして, やってきた, どうやって, にわたって; LEX-5921).
+Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_view text, std::string_view nextToken,
+                         std::string_view previousToken) {
+    const auto verbOf = [](const Record& r) {
+        return r.partCode.size() == 4 && At(r.partCode, 0) == 'M' && At(r.partCode, 1) == '4' && r.partCode[3] >= '0' &&
+               r.partCode[3] - '0' < kConjugationKinds;
+    };
+    const auto named = [](const Record& r) {
+        return (r.user != nullptr && r.user->nameLayer) || At(r.semantic, 0) == 'Q' ||
+               (At(r.partCode, 1) == '1' && At(r.partCode, 2) == '3');
+    };
+    // The text after a verb form up to the end of this token goes on into the next token: a member of
+    // follower.te-verb that ends in a mark spans both (かえってたよ + 。).
+    const auto goingOn = [nextToken](std::string_view rest) { return std::string(rest) + std::string(nextToken); };
+    // The rest after a verb form that makes it the verb: past small kana and long marks, the end, a mark
+    // that ends the utterance, or a start of follower.te-verb.
+    const auto verbContext = [nextToken, &goingOn](std::string_view rest) {
+        const auto strip = [](std::string_view& s) {
+            while (!s.empty() && Has("っッーぁぃぅぇぉ〜～…‥", FirstChar(s))) s.remove_prefix(FirstChar(s).size());
+        };
+        strip(rest);
+        // At the end of the token, the next token goes on: the end of the line or a mark that ends the utterance
+        // as a request; a question asks how or whether (どうやって？, かえって？) and keeps the word.
+        const bool inToken = !rest.empty();
+        if (!inToken) {
+            rest = nextToken;
+            strip(rest);
+        }
+        if (rest.empty() || Has("。！!」』）)", FirstChar(rest))) return true;
+        // A から after a verb-coded or noun-coded record is the verb's (おきてから 일어나고 나서); an adverb's から is
+        // its own (かねてからの), and the adverb path does not come here.
+        return rest.starts_with("から") ||
+               dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), inToken ? goingOn(rest) : std::string(rest)) > 0;
+    };
+    // A noun after a particle is an argument or the predicate of a topic (ケーキははじめて 처음, 村のおきて), and a
+    // time noun closes an utterance as the noun (あさって。 모레): neither gives way.
+    const bool afterParticle = !before.empty() && Has("はがものをにでとへ", LastChar(before));
+    // A lead for a word of word.te-alone: a noun right before it (発艦はじめて！) or a start of lead.te-request at
+    // the start of its clause (さあ、はじめて！, はやくおうちにかえって！).
+    const bool lead = [before, previousToken] {
+        if (!before.empty() && NameClassOf(LastChar(before)) == kClassKanji) return true;
+        const std::string joined = std::string(previousToken) + std::string(before);
+        std::string_view clause = joined;
+        for (const std::string_view mark : {"。", "！", "？", "!", "?", "「", "『", "\n"}) {
+            if (const std::size_t at = clause.rfind(mark); at != std::string_view::npos) clause.remove_prefix(at + mark.size());
+        }
+        while (!clause.empty() && Has(" 　", FirstChar(clause))) clause.remove_prefix(FirstChar(clause).size());
+        return dict::StartsWithMember(HDTRANS_CLASS("lead.te-request"), clause) > 0;
+    }();
+    const Record* verb = nullptr;
+    for (const Record* w = records; w != nullptr && verb == nullptr; w = w->child) {
+        if (verbOf(*w) || named(*w) || !AllHiragana(w->source) || !text.starts_with(w->source)) continue;
+        if (At(w->partCode, 1) == '1' && ((afterParticle && !lead) || Has(w->semantic, "UMe"))) continue;
+        for (const Record* v = records; v != nullptr; v = v->child) {
+            if (!verbOf(*v) || v->source.empty() || v->source.size() >= w->source.size() || !w->source.starts_with(v->source)) {
+                continue;
+            }
+            // A stem of two kana or more of a verb of its own: no する or くる (どうして, やってきた, なってきた stay).
+            const int kind = v->partCode[3] - '0';
+            // A phrase row (にわた 에 걸치다, どうや 어떻게 하다) is no stem of a verb of its own either.
+            if (text::RuneCount(v->source) < 2 || kind == 9 || kind == 10 || kind == 11 || kind == 13 ||
+                v->target.find(' ') != std::string::npos) {
+                continue;
+            }
+            const std::string_view form = text.substr(v->source.size());
+            const std::string te(Conjugation(kind, 7)), negative = std::string(Conjugation(kind, 8)) + "ないで";
+            // An adverb that is a verb's て form grown into a word of its own (かえって, せめて, あえて, かねて) closes an
+            // utterance as the adverb (せめて！, 少なくとも、せめて。, 「あえて」): it gives way only before a start of
+            // follower.te-verb in this token or the next (かえってきた, あわせてください).
+            const std::string_view after = form.substr(std::min(form.size(), te.size()));
+            const bool adverb = At(w->partCode, 1) != '1';
+            const auto goesOn = [&goingOn](std::string_view rest) {
+                return dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), goingOn(rest)) > 0;
+            };
+            // A word of word.te-alone (はじめて 처음) closes an utterance as itself even as a noun: only a request after
+            // it or a lead before it makes it the verb (はじめてください, さあ、はじめて！, but はじめて！, はじめてきた).
+            const bool alone = dict::InClass(HDTRANS_CLASS("word.te-alone"), w->source);
+            const auto asked = [&nextToken](std::string_view rest) {
+                return dict::StartsWithMember(HDTRANS_CLASS("follower.te-request"), rest.empty() ? nextToken : rest) > 0;
+            };
+            const bool teForm = w->source.size() - v->source.size() == te.size() && form.starts_with(te) &&
+                                (alone    ? asked(after) || (lead && verbContext(after))
+                                 : adverb ? goesOn(after) || (lead && verbContext(after))
+                                          : verbContext(after) || (lead && after.starts_with("、")));
+            // A ないで asks only at the end or before a giving auxiliary (こないでください); before いる it is a state
+            // (集中できないでいる).
+            const std::string_view afterNegative = form.substr(std::min(form.size(), negative.size()));
+            const bool request = form.starts_with(negative) && negative.size() > w->source.size() - v->source.size() &&
+                                 (dict::StartsWithMember(HDTRANS_CLASS("aux.give-after-neg"), afterNegative) > 0 ||
+                                  (verbContext(afterNegative) &&
+                                   dict::StartsWithMember(HDTRANS_CLASS("follower.te-verb"), goingOn(afterNegative)) == 0));
+            if (teForm || request) {
+                verb = v;
+                break;
+            }
+        }
+    }
+    if (verb == nullptr) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == verb->source && verbOf(*r)) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    return verbs;
+}
+
 // Text path: after a case particle or a comma, the verb records of the kana stem か (かく) whose
 // past or て form the text spells move ahead of the other records: no particle か follows there
 // (汗もかいた 땀도 흘렸다, 手紙をかいて 편지를 써서; but 何匹かいた, 誰かいた after a noun). A word that
@@ -1173,7 +1296,7 @@ Record* KanaVerbAfterParticle(const Item& parent, Record* records, std::string_v
 // An ichidan verb whose stem a noun spells (面倒見 돌보기, 面倒見る 돌보다) is the verb before an
 // ending a noun does not take: る, た, て, ない, なさい, よう, ろ, ます, られ (面倒見てた 돌보고 있었다,
 // 面倒見る 돌본다, 面倒見なさい 돌봐), while 面倒見が, 面倒見も, 面倒見だ stay with the noun. Only a kanji key of two characters or more, which the
-// noun leads (spec GRM-3921).
+// noun leads, or a hiragana key of three kana or more (spec GRM-3921, LEX-5923).
 Record* VerbBeforeTeForm(Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -1189,7 +1312,12 @@ Record* VerbBeforeTeForm(Record* records, std::string_view text) {
     }
     if (noun == nullptr || At(noun->partCode, 1) != '1' || !text.starts_with(noun->source)) return records;
     const std::string_view key = noun->source;
-    if (text::RuneCount(key) < 2 || !HasKanji(key)) return records;
+    // A hiragana key takes three kana or more and a noun record of class N or I (うまれて 태어나, うまれた, but
+    // とはいえただ stays the conjunction; LEX-5923).
+    if (HasKanji(key) ? text::RuneCount(key) < 2
+                      : (text::RuneCount(key) < 3 || !AllHiragana(key) || std::string_view("NI").find(At(noun->partCode, 0)) == std::string_view::npos)) {
+        return records;
+    }
     const std::string_view after = text.substr(key.size());
     bool form = false;
     for (const std::string_view f : {"る", "た", "て", "ない", "なか", "なき", "なく", "なけ", "なさ", "よう", "ろ", "ます", "られ"}) {
@@ -2539,6 +2667,109 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
     return nullptr;
 }
 
+// LEX-5924: a noun or adverb in hiragana that starts with a one-kana particle right after a noun, or a noun that
+// starts with a も right after the particle に, で, と or へ (にく of 空にくもが, もう of 千里もうなずいた, もく of にもくもが) yields to
+// the particle alone when the word after the particle is a hiragana word of two kana or more that runs past the
+// reading and ends a word: a noun before a particle, a mark or the end, an adverb, or a verb or adjective that takes
+// its ending (に + くもが 구름이, も + うなずいた 끄덕였다, に + くわしく 자세히). A reading that the word after the
+// particle does not run past keeps its place (雨もよう, 金もうけ).
+Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent) {
+    if (parent == nullptr || parent->group == nullptr || c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb) {
+        return nullptr;
+    }
+    const std::string_view text = From(full, cursor);
+    const std::string_view source = text.substr(0, static_cast<std::size_t>(c.length));
+    const std::string_view particle = FirstChar(source);
+    if (!AllHiragana(source) || particle.size() == source.size() || !Has("にもやをがはでとへ", particle)) return nullptr;
+    const Entry* first = c.group->At(0);
+    // A particle of two kana that is に, と or へ and a も or で yields to its first kana the same way (猫にも + のすごく:
+    // に + ものすごく, 友達とで + かけた: と + でかけた); never には, とは, whose は stays the particle (医者にはなれない; LEX-5922).
+    const bool compound = first != nullptr && first->cls == 'P' && text::RuneCount(source) == 2 && Has("にとへ", particle) &&
+                          Has("もで", source.substr(particle.size()));
+    // A plain noun or adverb, not a phrase (というもの) or an adjectival reading (でさえない).
+    if (first == nullptr || (!compound && ((first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))))) {
+        return nullptr;
+    }
+    const std::string_view before = LastChar(full.substr(0, static_cast<std::size_t>(cursor)));
+    const std::string_view host = parent->group->surface;
+    // A noun in kanji or katakana, or one that ends in a title of persons in hiragana (千里ちゃん, お母さん).
+    auto titled = [&] {
+        std::size_t start = host.size();
+        for (int n = 1; n <= 3 && start > 0; n++) {
+            const std::string_view last = LastChar(host.substr(0, start));
+            if (NameClassOf(last) != kClassHiragana) break;
+            start -= last.size();
+            if (n >= 2 && PersonSuffixAt(host.substr(start))) return true;
+        }
+        return false;
+    };
+    const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana || titled()) &&
+                           (parent->detail == nullptr || parent->detail->cls != kDetailVerb) && At(parent->Code(0), 0) == '1';
+    const bool afterParticle = particle == "も" && first->cls == 'N' && (host == "に" || host == "で" || host == "と" || host == "へ");
+    if (!afterNoun && !afterParticle) return nullptr;
+    const int at = cursor + static_cast<int>(particle.size());
+    const std::string_view rest = From(full, at);
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // Some reading of the word after the particle, each record tried (くわ before くわしく).
+    auto ends = [&](const Item* w, const Record& r) {
+        if (w == nullptr || w->detail == nullptr || at + w->length <= cursor + c.length || AnyOf("256", At(w->Code(0), 0))) return false;
+        const std::string_view spelled = rest.substr(0, static_cast<std::size_t>(w->length));
+        if (!AllHiragana(spelled) || text::RuneCount(spelled) < 2) return false;
+        if (w->detail->cls != kDetailInfo) return w->length > static_cast<int>(r.source.size());
+        return At(w->Code(0), 0) == '3' || NounEnd(rest.substr(spelled.size()));
+    };
+    const Lookup l = DoLookup(rest, kModeGeneral);
+    bool found = false;
+    bool verbAfter = false;
+    std::size_t reached = 0;
+    Record* from = l.count == 0 ? nullptr : after(l.records);
+    for (int tries = 0; from != nullptr && tries < 64 && !found; tries++, from = after(from->child)) {
+        const Item* w = InsertLateCandidate(full, at, token, from);
+        found = ends(w, *from);
+        if (found) reached = static_cast<std::size_t>(w->length);
+        if (found) verbAfter = w->detail->cls != kDetailInfo;
+    }
+    if (!found) return nullptr;
+    // Whether some reading at start reaches at least to end.
+    auto reaches = [&](int start, int end) {
+        const Lookup m = DoLookup(From(full, start), kModeGeneral);
+        Record* r = m.count == 0 ? nullptr : after(m.records);
+        for (int tries = 0; r != nullptr && tries < 64; tries++, r = after(r->child)) {
+            const Item* w = InsertLateCandidate(full, start, token, r);
+            if (w != nullptr && start + w->length >= end) return true;
+        }
+        return false;
+    };
+    // A reading at the particle that reaches as far keeps the word to the readings after this one (修理できる: でき +
+    // る, not で + きる).
+    // So does a longer particle whose next word reaches as far (とか + くれたり, not と + かくれたり).
+    const int reach = at - cursor + static_cast<int>(reached);
+    // にも, とも and へも keep their place where the word after them reaches as far (家にも + ものが, not に + ももの);
+    // とで is said of a pair (AとBとで), and after one noun a verb that its で starts runs further (と + でかける).
+    // A verb after their も keeps them too (祟りともつかない: とも + つかない, not と + もつかない).
+    if (compound && source.ends_with("も") && (verbAfter || reaches(cursor + c.length, cursor + reach))) return nullptr;
+    Record* other = after(c.group->records);
+    for (int tries = 0; other != nullptr && tries < 64; tries++, other = after(other->child)) {
+        const Item* w = InsertLateCandidate(full, cursor, token, other);
+        if (w == nullptr) continue;
+        if (w->length >= reach) return nullptr;
+        const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
+        if (e != nullptr && e->cls == 'P' && w->length > at - cursor && reaches(cursor + w->length, cursor + reach)) {
+            return nullptr;
+        }
+    }
+    Record* shorter = after(c.group->records);
+    for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+        if (shorter->source != particle) continue;
+        const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+        if (head != nullptr && head->length == static_cast<int>(particle.size())) return shorter;
+    }
+    return nullptr;
+}
+
 // LEX-4981: a phrase reading that cuts a common noun. Where the longest reading at a point is a phrase X の Y that
 // starts with kanji or katakana and whose Y is a noun of its own (次の日 of 次の日曜日, バッグの中 of バッグの中身, 家の後
 // of 家の後ろ盾), and a noun that ends in kanji or katakana and holds no particle starts at its Y and runs past its end,
@@ -2613,6 +2844,170 @@ Record* Worker::OverCutWord(std::string_view full, int cursor, int token, const 
             if (stop == k || stop + reach(stop, false) == k) return shorter;
         }
         return nullptr;
+    }
+    return nullptr;
+}
+
+// LEX-5810: a noun that swallows the start of a verb. Where the reading at a point is a noun (雨降り, 姿見, 私行) and
+// the hiragana after it is nothing a noun takes (no particle, copula, mark or form of する), and a verb read from a
+// kanji inside it runs past its end, the shorter reading that ends where that verb starts wins when
+// - the noun ends in a verb's continuative and ます follows, or, for a weather noun, anything that takes only a
+//   continuative (先行き + ますね, 雨降り + そう, 雨降り + ながら);
+// - the reading before the verb is a person pronoun (私行 + きます is 私 + 行きます);
+// - the reading before the verb ends in kanji, the verb stays inside the hiragana after the noun, and the noun and
+//   the words after it up to
+//   the verb's end are more words than the two of the split, or as many when the word after the noun is one kana of
+//   a verb ending (姿見 + た) or the noun is a name and no particle follows the verb (風吹 + いてますね).
+// After a particle the noun takes, only more words split, and only when no particle or end follows that particle (先行 +
+// って + て splits, 私立 + って and 勝ち負け + か + ねえ stay). A verb at the point reading as far as the noun goes first
+// (ずり落ちる), and a longer noun at the point (勢揃い), a person suffix, an honorific or a noun the next word reads on from
+// (本来 + ない, 夏休み + どう) keeps the noun.
+Record* Worker::OverSwallowedVerb(std::string_view full, int cursor, int token, const Item& c) {
+    if (c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb) return nullptr;
+    const Entry* lead = c.group->At(0);
+    if (lead == nullptr || !Has("IKNQ", std::string_view(&lead->cls, 1)) || !lead->code.starts_with('1')) return nullptr;
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    const int end = cursor + c.length;
+    const std::string_view rest = From(full, end);
+    const text::Rune next = text::DecodeRune(rest);
+    // The noun ends in the kana of a verb's continuative and what comes next only follows that continuative: the
+    // polite ます after any such noun (先行き + ますね is 先 + 行きますね), and after a weather noun (sem VFr) also the
+    // other followers of a continuative (雨降り + そう is 雨 + 降りそう). Other nouns keep their reading there
+    // (電池切れそう).
+    bool weather = false;
+    for (const Entry* e : c.group->entries) weather = weather || Has(e->attr, "VFr");
+    const bool stemTail = !text::IsKanji(text::DecodeRune(LastChar(source)).cp) &&
+                          (dict::StartsWithMember(HDTRANS_CLASS("follower.polite-masu"), rest) > 0 ||
+                           (weather && (dict::StartsWithMember(HDTRANS_CLASS("suffix.continuative"), rest) > 0 ||
+                                        dict::StartsWithMember(HDTRANS_CLASS("follower.continuative-only"), rest) > 0 ||
+                                        dict::StartsWithMember(HDTRANS_CLASS("follower.weather-continuative"), rest) > 0)));
+    if (text::RuneCount(source) < 2) return nullptr;
+    if (!stemTail && (next.cp < U'ぁ' || next.cp > U'ゖ' || NounEnd(rest) || Has("しさすせ", FirstChar(rest)) ||
+                      StartsWithHonorific(rest) || PersonSuffixAt(rest))) {
+        return nullptr;
+    }
+    // A particle or copula a noun takes (先行 + って, 勝ち負け + か) leaves the noun unless the split is fewer words.
+    const bool goesOn = !stemTail && NounGoesOn(snapshot, rest);
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // The longest reading at at, 0 for none; verb only counts verbs.
+    auto reach = [&](int at, bool verb) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w != nullptr && (!verb || (w->detail != nullptr && w->detail->cls == kDetailVerb))) longest = std::max(longest, w->length);
+        }
+        return longest;
+    };
+    // The shorter reading at cursor that ends at k; a verb at cursor that reads as far as the noun or further goes
+    // first (鉢合わせ + た is the verb 鉢合わせる, ずり落ち + そう the verb ずり落ちる).
+    auto shorterTo = [&](int k) -> Record* {
+        Record* verb = after(c.group->records);
+        for (int tries = 0; verb != nullptr && tries < 64; tries++, verb = after(verb->child)) {
+            const Item* w = InsertLateCandidate(full, cursor, token, verb);
+            if (w != nullptr && w->detail != nullptr && w->detail->cls == kDetailVerb && cursor + w->length >= end) return verb;
+        }
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head != nullptr && cursor + head->length == k) return shorter;
+        }
+        return nullptr;
+    };
+    // The reading at cursor that ends at k has the sem code: 雨 of 雨やみ and 風 of 風吹 are weather (VFr), 花 of 花咲
+    // a plant (QAL).
+    auto semTo = [&](int k, std::string_view code) {
+        Record* shorter = after(c.group->records);
+        for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+            const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+            if (head == nullptr || cursor + head->length != k || head->group == nullptr) continue;
+            for (const Entry* e : head->group->entries) {
+                if (Has(e->attr, code)) return true;
+            }
+        }
+        return false;
+    };
+    // A longer noun at cursor takes the kana (勢揃 + いした is 勢揃い + した, 目覚 + めより 目覚め + より).
+    {
+        const Lookup l = DoLookup(From(full, cursor), kModeGeneral);
+        for (Record* r = l.count == 0 ? nullptr : after(l.records); r != nullptr; r = after(r->child)) {
+            if (NounRow(*r) && r->source.size() > source.size() && From(full, cursor).starts_with(r->source)) return nullptr;
+        }
+    }
+    for (std::size_t off = text::DecodeRune(source).size; off < source.size(); off += text::DecodeRune(source.substr(off)).size) {
+        if (!text::IsKanji(text::DecodeRune(source.substr(off)).cp)) continue;
+        const int k = cursor + static_cast<int>(off);
+        const int verbEnd = k + reach(k, true);
+        // The noun ends in the verb's continuative and what follows only follows that (雨降り + そう, 雨降り + ながら).
+        if (verbEnd >= end && stemTail) {
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        if (verbEnd <= end) continue;
+        // A person pronoun with no particle before a verb that runs past the noun is its subject (私行 + きます is 私 +
+        // 行きます, 私 + 行こうかな), but not before a particle the noun takes (私立 + って).
+        const std::string_view head = source.substr(0, off);
+        if (!goesOn && (dict::InClass(HDTRANS_CLASS("pronoun.speaker"), head) || dict::InClass(HDTRANS_CLASS("pronoun.listener"), head) ||
+                        dict::InClass(HDTRANS_CLASS("pronoun.third-person"), head))) {
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        // Past here the reading before the verb ends in kanji (肌 + 荒れちゃう; not 言い + 過ぎた), and the verb stays
+        // inside the hiragana after the noun (not the compound 角打 + ち見てる).
+        int runEnd = end;
+        while (runEnd < static_cast<int>(full.size())) {
+            const text::Rune r = text::DecodeRune(From(full, runEnd));
+            if (r.size == 0 || r.cp < U'ぁ' || r.cp > U'ゖ') break;
+            runEnd += static_cast<int>(r.size);
+        }
+        if (!text::IsKanji(text::DecodeRune(LastChar(head)).cp) || verbEnd > runEnd) continue;
+        // The words of the noun's reading up to the verb's end, by the longest word at each point; text no word
+        // reads counts one word a character.
+        int words = 1, at = end, first = 0;
+        while (at < verbEnd && words < 8) {
+            const int r = std::max(reach(at, false), static_cast<int>(text::DecodeRune(From(full, at)).size));
+            if (first == 0) first = r;
+            at += r;
+            words++;
+        }
+        const int split = at > verbEnd ? 3 : 2;
+        if (goesOn) {
+            // After the particle comes what no particle is followed by (先行って + て, キャラ変わって + ない), not a particle or
+            // the end (都会って + の, 勝ち負けか + ねえ).
+            // A noun that modifies a verb bare (先) splits before its て form too when the sentence ends there or kana
+            // that is no particle follows (先行って + 。, 先行って + ください; not 先行って + 何, 先行って + は), but not
+            // from a person (先生 + って).
+            const std::string_view tail = From(full, end + first);
+            const char32_t t0 = text::DecodeRune(tail).cp;
+            bool person = false;
+            for (const Entry* e : c.group->entries) person = person || Has(e->attr, "VHn");
+            const bool bare = !person && dict::InClass(HDTRANS_CLASS("noun.bare-adverb"), head) && verbEnd == end + first;
+            if (bare && !NounGoesOn(snapshot, tail) &&
+                (tail.empty() || RuneIn(t0, "。！!」』）)") || (t0 >= U'ぁ' && t0 <= U'ゖ'))) {
+                if (Record* shorter = shorterTo(k)) return shorter;
+                continue;
+            }
+            if (words <= split || NounEnd(tail) || NounGoesOn(snapshot, tail)) continue;
+            if (Record* shorter = shorterTo(k)) return shorter;
+            continue;
+        }
+        // As many words split when the word after a noun ending in kanji is one kana of a verb ending (姿見 + た; not
+        // 目覚 + め, 口封じ + て).
+        const bool oneKana = first == static_cast<int>(text::DecodeRune(rest).size) &&
+                             text::IsKanji(text::DecodeRune(LastChar(source)).cp) &&
+                             KeyLengths(snapshot, rest, dict::LookupMode::VerbEnding, 'S') != 0;
+        // A name splits too when its head is weather or a plant and what follows the verb is no particle (風吹 +
+        // いてますね, 花咲 + きますね; not 美咲 + いてる, 角落 + ち + くらい).
+        const std::string_view beyond = From(full, verbEnd);
+        const text::Rune b = text::DecodeRune(beyond);
+        const bool name = lead->code.starts_with("13") && (semTo(k, "VFr") || semTo(k, "QAL")) &&
+                          (b.cp < U'ぁ' || b.cp > U'ゖ' || (!NounEnd(beyond) && !NounGoesOn(snapshot, beyond)));
+        if (words < split || (words == split && !oneKana && !name)) continue;
+        if (Record* shorter = shorterTo(k)) return shorter;
     }
     return nullptr;
 }
@@ -2839,6 +3234,13 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
     if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
+    if (settings.text) {
+        // The tokens before this one, for the clause a comma ends (さあ、はじめて！).
+        std::string previous;
+        for (int t = std::max(0, current - 4); t < current; t++) previous += Tok(t).text;
+        records = KanaVerbOverWord(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor), current + 1 < TokenCount() ? Tok(current + 1).text : std::string_view(),
+                                   previous);
+    }
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
@@ -2867,7 +3269,15 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
+        if (Record* shorter = OverParticleKanaWord(full, cursor, token, *candidate, parent)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
         if (Record* shorter = OverCutWord(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverSwallowedVerb(full, cursor, token, *candidate)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }

@@ -2,7 +2,11 @@
 # 동사의 뜻 칸을 덮는 틀 행(LEX-160): 같은 절의 논항이 정해진 부류나 낱말일 때만 0.7.x의 뜻을 바꿈
 id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
 止める/とめる/v1#3	止める/とめる/v1	v1	sense	frame	obj=@person	막다	50	LEX-160	corpus	止める obj=@person → 막다
+止める/とめる/v1#3k	止める/とめる/v1	v1	sense	frame	obj=@person.kin	말리다	50	LEX-160	review	止める obj=@person.kin → 말리다 (family, as the kin-address rewrite reads it)
 止める/とめる/v1#6	止める/とめる/v1	v1	sense	frame	obj=@vehicle	세우다	45	LEX-160	review	止める obj=@vehicle → 세우다
+止められない#1	止められない/とめられない/adj	adj	sense	frame	obj=@person	막을 수 없다	50	LEX-160	review	止められない obj=@person → 막을 수 없다 (a potential negative written as one word)
+止められない#1k	止められない/とめられない/adj	adj	sense	frame	obj=@person.kin	말릴 수 없다	50	LEX-160	review	止められない obj=@person.kin → 말릴 수 없다
+止められない#2	止められない/とめられない/adj	adj	sense	frame	obj=@vehicle	세울 수 없다	45	LEX-160	review	止められない obj=@vehicle → 세울 수 없다
 伸びる#5	伸びる/のびる/v1	v1	sense	frame	subj=背筋|背中	펴지다	50	LEX-160	corpus	伸びる subj=背筋|背中 → 펴지다
 閉じる#3	閉じる/とじる/v1	v1	sense	frame	obj=口|唇	다물다	50	LEX-160	review	閉じる obj=口|唇 → 다물다
 閉じる#4	閉じる/とじる/v1	v1	sense	frame	obj=@book	덮다	50	LEX-160	review	閉じる obj=@book → 덮다

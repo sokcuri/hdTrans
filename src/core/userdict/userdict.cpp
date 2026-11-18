@@ -118,7 +118,8 @@ std::string VerbKind(std::string_view jp, std::string_view pos, const dict::Dict
         return std::string();
     };
     const auto without2 = [&] { return Utf8(std::u32string_view(r).substr(0, n - 2)); };
-    if (jp.ends_with("する") && n > 2) return set(without2(), '9');
+    // a godan verb given as v5 that ends in する (こする, すする) is no suru verb
+    if (jp.ends_with("する") && n > 2 && !pos.starts_with("v5")) return set(without2(), '9');
     if (jp.ends_with("ずる") && n > 2 && IsKanji(r[n - 3])) return set(without2(), ':');
     // 来ない, 来た, 来て, 来よう conjugate like an ichidan verb on 来; 出来る is できる.
     if (jp == "来る" || jp.ends_with("出来る")) return set(stem, '7');
@@ -337,10 +338,11 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
         } else if ((opt == "exclaim" || opt == "predicate" || opt == "cry" || opt == "haeyo") && pos == "intj") {
             // Read by the sound stage (an exclamation is no sound before a question mark, a Korean in
             // 해요 speech is no half of copies said apart).
-        } else if ((opt == "acts" || opt == "adj") && pos == "ono" && ctx.soundTable) {
+        } else if ((opt == "acts" || opt == "adj" || opt == "state" || key == "ni") && pos == "ono" && ctx.soundTable) {
             // Read by the sound stage (the lemma only before a する that describes no noun; KR한
-            // before an の and a noun).
-        } else if (opt == "acts" || opt == "adj") {
+            // before an の and a noun; a state word the dictionary reads, and what its に before a
+            // verb writes).
+        } else if (opt == "acts" || opt == "adj" || opt == "state" || key == "ni") {
             return "option " + Quote(opt) + ": " + std::string(opt) + " is only for the built-in sound table";
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
@@ -439,13 +441,19 @@ std::vector<dict::UserEntry> KanaSpellings(std::string_view text, const dict::Di
         if (f.size() < 2 || f[0].empty() || f[0].starts_with("//")) continue;
         const std::string_view cls = f.size() > 2 ? f[2] : std::string_view();
         bool seen[256] = {};
+        std::string rows;
         for (const dict::Record& r : base.Records(f[1])) {
             const std::string& part = r.codes->partText;
             if (part.size() < 2) continue;
             const char d = part[1];
-            if (seen[static_cast<unsigned char>(d)]) continue;
+            // A verb spelling takes the first verb record of its key in each conjugation row, so that the
+            // conjugation of the text picks the row it fits (うごく: 動 + く of 動く, not 動ずる; LEX-5920); other
+            // classes take the first record.
+            const char row = d == '4' && part.size() > 3 ? part[3] : '\0';
+            if (row != '\0' ? rows.find(row) != std::string::npos : seen[static_cast<unsigned char>(d)]) continue;
             if ((!cls.empty() && cls != std::string_view(&d, 1)) || (cls.empty() && (d == '4' || d == '7'))) continue;
             seen[static_cast<unsigned char>(d)] = true;
+            if (row != '\0') rows.push_back(row);
             dict::UserEntry e;
             e.key = f[0];
             e.target = r.target;

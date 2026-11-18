@@ -1,0 +1,41 @@
+# 규칙: LEX-5832, LEX-5846
+rule	input	expected	kind	layer
+lex:stat-rise	攻撃力があがった！	공격력이 올랐다!	fix	lookup
+lex:stat-rise	防御力があがったぞ！	방어력이 올랐어!	fix	lookup
+lex:stat-rise	攻撃力があがってる！	공격력이 오르고 있어!	fix	lookup
+lex:stat-rise	攻撃力があがったら	공격력이 오르면	fix	lookup
+lex:stat-rise	攻撃力が少しあがった。	공격력이 조금 올랐다.	fix	lookup
+lex:stat-rise	攻撃力と防御力があがった！	공격력과 방어력이 올랐다!	fix	lookup
+lex:stat-rise	戦闘力があがった！	전투력이 올랐다!	fix	lookup
+lex:stat-rise	こうげきりょくがあがった！	공격력이 올랐다!	fix	lookup
+lex:stat-rise	ぼうぎょりょくがあがった！	방어력이 올랐다!	fix	lookup
+lex:stat-rise	攻撃力があがりました！	공격력이 올랐습니다!	fix	lookup
+lex:stat-rise	攻撃力をあげる。	공격력을 올린다.	fix	senses
+lex:stat-rise	値段をさげた。	가격을 내렸다.	keep	senses
+lex:stat-rise	本番であがってしまった。	has:긴장해버렸다	keep	senses
+lex:stat-rise	人前だとあがっちゃう。	has:긴장	keep	senses
+lex:stat-rise	魔力があがった！	마력이 올랐다!	keep	lookup
+lex:stat-rise	レベルがあがった！	레벨이 올랐다!	keep	lookup
+lex:stat-rise	攻撃力があがらない…	공격력이 오르지 않아…	keep	lookup
+lex:stat-rise	雨があがった。	비가 그쳤다.	keep	lookup
+lex:stat-rise	お風呂からあがった。	목욕을 마쳤다.	keep	lookup
+lex:stat-rise	攻撃力が高い。	공격력이 높다.	keep	lookup
+lex:agaru-nerves	緊張してあがってしまった。	긴장해 얼어붙어버렸다.	fix	senses
+lex:agaru-nerves	緊張してあがる。	긴장해 얼어붙는다.	fix	senses
+lex:agaru-nerves	舞台であがって声が出なかった。	무대에서 긴장해 목소리가 나오지 않았다.	fix	senses
+lex:agaru-nerves	初舞台であがってしまった。	첫무대에서 긴장해버렸다.	fix	senses
+lex:agaru-nerves	発表会であがってしまった。	발표회에서 긴장해버렸다.	fix	senses
+lex:agaru-nerves	試合であがってしまって実力が出せなかった。	has:긴장해버려	fix	senses
+lex:agaru-nerves	試験であがってしまった。	has:긴장해버렸다	fix	senses
+lex:agaru-nerves	本番で上がってしまった。	has:긴장해버렸다	fix	senses
+lex:agaru-nerves	面接であがりました。	has:긴장했습니다	fix	senses
+lex:agaru-nerves	人前だとあがる。	has:긴장한다	fix	senses
+lex:agaru-nerves	舞台の幕があがった。	무대의 막이 올랐다.	keep	senses
+lex:agaru-nerves	試合でレベルがあがった。	has:레벨이 올랐다	keep	senses
+lex:agaru-nerves	試験で成績があがった。	has:성적이 올랐다	keep	senses
+lex:agaru-nerves	緊張して体温があがった。	긴장해 체온이 올랐다.	keep	senses
+lex:agaru-nerves	舞台にあがった。	lacks:긴장	keep	senses
+lex:agaru-nerves	二階にあがってください。	lacks:긴장	keep	senses
+lex:agaru-nerves	攻撃力があがってしまった。	공격력이 올라버렸다.	keep	senses
+lex:agaru-nerves	テンションがあがる！	텐션이 오른다!	keep	senses
+lex:agaru-nerves	雨があがったね。	비가 그쳤네.	keep	senses

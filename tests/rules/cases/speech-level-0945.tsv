@@ -22,10 +22,10 @@ cx:node-final:15	今日は忙しいので。	오늘은 바쁘기 때문에.	keep
 cx:node-final:20	「疲れたので。」	has:지친 거니까	fix	rewrites
 cx:node-final:20	疲れたので、休んだ。	지쳤으므로, 쉬었다.	keep	rewrites
 cx:ee-casual:10	「…、ええ、そうよ。そうなの」	has:응, 그래	fix	rewrites
-cx:ee-casual:10	「ええ、そうです」	「네, 그렇습니다」	keep	rewrites
+cx:ee-casual:10	「ええ、そうです」	「네, 그래요」	keep	rewrites
 cx:ee-casual:10	「えゝ⁉……裏切ってやがるな、あいつ！	「네!? ……배반하는구나, 저 녀석!	keep	rewrites
 cx:casual-watakushi:10	――こいつは……、たしか、わたくしがクビを言い渡してやった料理長じゃなかったかしら？	has:내가 해고를	fix	rewrites
-cx:casual-watakushi:10	「わたくしがやりました」	「제가 했습니다」	keep	rewrites
+cx:casual-watakushi:10	「わたくしがやりました」	「제가 했어요」	keep	rewrites
 cx:recall-check:10	――こいつは……、たしか、わたくしがクビを言い渡してやった料理長じゃなかったかしら？	has:주방장이 아니었던가?	fix	rewrites
 cx:recall-check:5	今日じゃなかったっけ？	has:아니었나?	fix	rewrites
 cx:recall-check:10	これは夢じゃなかったのかしら	이것은 꿈이 아니었던 걸까	keep	rewrites

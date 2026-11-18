@@ -11,7 +11,7 @@ cx:lc-quote-bracket:10	『彼女は男友達みたいなものだから』と寝
 cx:lc-quote-bracket:10	生徒会との全面戦争という記事を見て、『いざ鎌倉』と駆けつけてきてくれたわけか。	has:』라고 달려와	fix	rewrites
 cx:lc-quote-bracket:10	もう一度見てみても、間違いなく末尾に『６５点』と添えられている。	has:』이라고 더해져	fix	rewrites
 cx:lc-quote-bracket:10	通りに出てすぐのところに、『Oceans』と掲げられたお店があった。	has:』라고 내걸어진	fix	rewrites
-cx:lc-quote-bracket:10	「あの少女は『シンダリオン』と名乗りました」	has:』이라고 자칭했습니다	fix	rewrites
+cx:lc-quote-bracket:10	「あの少女は『シンダリオン』と名乗りました」	has:』이라고 자칭했어요	fix	rewrites
 cx:lc-quote-bracket:10	「わかってるわ、液晶に『ペコジマ』と出ていたから」	has:』라고 나와	fix	rewrites
 cx:lc-quote-bracket:10	笑顔の女性に『お願いします』とやられると、けっこう効きます	has:』라고 당하면	fix	rewrites
 cx:lc-quote-bracket:10	『住吉家』と彫られた墓石が目に入った。	has:』라고 조각된	fix	rewrites
@@ -45,7 +45,7 @@ cx:lc-quote-bracket:30	「妹？　それは末っ子がお母さんに“妹が
 cx:lc-quote-bracket:30	「うん、サチが掃除してるの見かけて『あたしも手伝う』って声かけたんだけど……」	has:』라고 말을 걸었는데	fix	rewrites
 cx:lc-quote-bracket:30	｢俺が 必ず借金返すから｣って	has:｣라고	fix	rewrites
 cx:lc-quote-bracket:30	「まあ、みんな『タコス』ってしか言わないから」	has:』라고밖에	fix	rewrites
-cx:lc-quote-bracket:30	「いい返事だ」って笑われたけどｗ	has:」라고 웃어졌지만	fix	rewrites
+cx:lc-quote-bracket:30	「いい返事だ」って笑われたけどｗ	has:」라고 비웃음을 샀지만	fix	rewrites
 cx:lc-quote-bracket:30	「たしかに言ったわよアイツは！　『私が直しました』って！！」	has:』라고!!	fix	rewrites
 cx:lc-quote-bracket:30	まあ、昨日から今日にかけて、『千里が』『千里が』ってひたすら言ってたから	has:』라고 오로지	fix	rewrites
 cx:lc-quote-bracket:30	「仕事うまくいってないんでしょ。結婚しなさい、結婚」って毎日のように言ってきて	has:」이라고 거의 매일	fix	rewrites

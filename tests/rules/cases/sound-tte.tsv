@@ -1,0 +1,106 @@
+# 규칙: LEX-6120, LEX-6121
+rule	input	expected	kind	layer
+sound:tte-named	ドキドキって言葉	두근두근이라는 말	fix	sound
+sound:tte-named	ドキドキって何？	두근두근이 뭐야?	fix	sound
+sound:tte-named	「スパって何だ？」	has:싹둑은 뭐야	fix	sound
+sound:tte-named	「ダメですよ！　それにペコってなんですか？」	has:꾸벅은 뭐예요	fix	sound
+sound:tte-named	どきどきってなに？	has:두근두근이 뭐	fix	sound
+sound:tte-named	ドキッて何？	has:철렁이 뭐	fix	sound
+sound:tte-named	ドキドキってなんなの？	has:두근두근은 뭐야	fix	sound
+sound:tte-named	ドキドキって感じ。	has:두근두근이라는 느낌	fix	sound
+sound:tte-named	キュンキュンって感じ	has:이라는 느낌	fix	sound
+sound:tte-named	れんこんの このシャキってのがもう大好きで	has:싹둑이라는 것이	fix	sound
+sound:tte-named	ドキドキってのは恋だよ	has:두근두근이라는 것은	fix	sound
+sound:tte-named	「どどーんってやつを触ったら」	has:두두둥이라는 녀석을	fix	sound
+sound:tte-named	ワクワクって音がした。	has:이라는 소리가 났다	fix	sound
+sound:tte-named	ドンって音	쾅이라는 소리	fix	sound
+sound:tte-named	ドキーンって音がした	has:철렁이라는 소리	fix	sound
+sound:tte-named	ドキドキーって言葉	has:두근두근이라는 말	fix	sound
+sound:tte-named	ドキドキって名前	has:두근두근이라는 이름	fix	sound
+sound:tte-named	ドキドキって呼ばれた	has:두근두근이라고 불렸다	fix	sound
+sound:tte-named	みんなはドキドキって呼んでいます	has:두근두근이라고 부르고	fix	sound
+sound:tte-named	ドキドキって言われて困った	has:두근두근이라는 말을 들어	fix	sound
+sound:tte-named	「……ほんと、男って意味不明よね」	has:남자는 의미 불명하지	keep	sound
+sound:tte-named	意味不明な言葉	의미 불명한 말	keep	sound
+sound:tte-named	「ぐしゃぐしゃって何か踏んづけてるみてえですね。」	has:엉망진창 뭔가	keep	sound
+sound:tte-named	フワ～って感じて おいしいです。	has:두둥실~ 느껴	keep	sound
+sound:tte-named	ドキドキって音を立てた	두근두근 소리를 냈다	keep	sound
+sound:tte-named	キラキラって光った。	반짝반짝 빛났다.	keep	sound
+sound:tte-named	ガツンって当たって	has:쾅 맞아	keep	sound
+sound:tte-named	えへへって何？	has:에헤헤라니 뭐	keep	sound
+sound:tte-named	えへへって言った	has:에헤헤라고 말했다	keep	sound
+sound:tte-named	うふふって笑った	has:우후후 하고 웃었다	keep	sound
+sound:tte-named	ぎゅって音羽を抱きしめた	has:꽉 오토와를	keep	sound
+sound:tte-named	ぎゅって呼子を抱いた	has:꽉 요부코를	keep	sound
+sound:tte-named	ドキドキって声也くん	has:두근두근 세이야	keep	sound
+sound:tte-named	ぎゅってことりを抱いた	lacks:꽉은	keep	sound
+sound:tte-named	ドキドキってことばが好き	has:두근두근이라는 말	fix	sound
+sound:tte-named	ガチャって音がした	has:철컥이라는 소리	fix	sound
+sound:tte-named	ガタンって音は嫌い	has:덜컹이라는 소리는	fix	sound
+sound:tte-named	ゴーンって響きが好き	has:데엥이라는 울림	fix	sound
+sound:tte-named	ドキドキって言葉の意味	has:두근두근이라는 말의	fix	sound
+sound:tte-named	ドキドキってやつだ	has:두근두근이라는 녀석	fix	sound
+sound:tte-named	ドキドキって感じの曲	has:두근두근이라는 느낌의	fix	sound
+sound:tte-named	ドキドキって擬音	has:두근두근이라는	fix	sound
+sound:tte-named	うふふって声が漏れた	has:우후후 하는 소리	fix	sound
+sound:tte-named	ぎゃーって声が聞こえた	has:꺄악 하는	fix	sound
+sound:tte-called	ぴょんぴょんってなんだよ	has:폴짝폴짝	fix	sound
+sound:tte-called	ドキドキってなんのこと？	lacks:두근두근 무슨	fix	sound
+sound:tte-called	ドキドキってなんでしょうか	lacks:두근두근 입니까	fix	sound
+sound:tte-called	ピヨピヨってよばれてる	has:삐약삐약이라고 불리	fix	sound
+cx:tte-echo:30	今時ピチピチって……	has:팔팔이라니……	fix	rewrites
+cx:tte-echo:30	今時ピチピチって？	has:팔팔이라니?	fix	rewrites
+sound:tte-named	ドキドキって感じちゃう	lacks:이라는 느낌	keep	sound
+sound:tte-named	ドキドキって感じ取った	has:두근두근 감지했다	keep	sound
+sound:tte-named	ドキドキって感じた	두근두근 느꼈다	keep	sound
+sound:tte-named	ゴーンって響き渡った	데엥 울려 퍼졌다	keep	sound
+sound:tte-named	ガタンって音をたてた	has:덜컹 소리를 냈다	keep	sound
+sound:tte-named	ガタンって音を鳴らした	has:덜컹 소리를	keep	sound
+sound:tte-named	ぎゅって声をかけた	has:꽉 말을 걸었다	keep	sound
+sound:tte-named	ぎゃーって声を上げた	has:꺄악 하고 소리를	keep	sound
+sound:tte-named	ガタンって物が落ちた	has:덜컹 물건이 떨어졌다	keep	sound
+sound:tte-named	ぎゅって娘を抱きしめた	lacks:꽉이라는|꽉은	keep	sound
+sound:tte-named	ぽんって人の肩を叩いた	lacks:퐁은|퐁이라는	keep	sound
+sound:tte-called	ポンってなにげなく置いた	has:퐁 무심코	keep	sound
+sound:tte-called	ふわってなんだか変な感じ	lacks:둥실은|둥실이라는	keep	sound
+sound:tte-called	ドキドキって何度も	lacks:두근두근은	keep	sound
+sound:tte-named	彼女って声が可愛いよね	has:그녀는 목소리	keep	sound
+sound:tte-named	勉強って意味あるの？	has:공부는 의미	keep	sound
+sound:tte-named	このゲームって音がいいね	has:게임은 소리	keep	sound
+sound:tte-named	ぎゅってヤツオさんが笑った	has:꽉 야츠오	keep	sound
+sound:tte-named	ガタンって声もなく	has:덜컹 소리도 없이	keep	sound
+cx:tte-echo:30	今時ピチピチって。	lacks:라니	keep	rewrites
+cx:tte-echo:30	もっとゆっくりって言った	lacks:라니	keep	rewrites
+cx:tte-echo:30	信じてもらえたらよしって…	lacks:라니	keep	rewrites
+sound:tte-called	ドキドキってなんだろう	has:두근두근은 무엇일까	fix	sound
+sound:tte-called	ふわふわってなんだろうね。	has:푹신푹신은 무엇일까	fix	sound
+sound:tte-called	ザラザラってなんなのよ！	has:까칠까칠은 뭐야	fix	sound
+sound:tte-called	ドキドキってなんなの？	has:두근두근은 뭐야	fix	sound
+sound:tte-called	ドキドキって何なんだろう	has:두근두근은 무엇일까	fix	sound
+sound:tte-called	ドキドキってなんだい？	has:두근두근은 뭐야	fix	sound
+sound:tte-called	ドキドキって呼びます	has:두근두근이라고 부릅니다	fix	sound
+sound:tte-called	みんなはドキドキって呼びます。	has:두근두근이라고 부릅니다	fix	sound
+sound:tte-called	ドキドキって呼びましょう	has:두근두근이라고 부릅시다	fix	sound
+sound:tte-called	ドキドキって呼びたい	has:두근두근이라고 부르고 싶다	fix	sound
+sound:tte-called	ドキドキってよびます	has:두근두근이라고 부릅니다	fix	sound
+sound:tte-called	ドキドキってよばれる	has:두근두근이라고 불린다	fix	sound
+sound:tte-called	ふわってなんだか眠い	has:둥실 왠지 졸리다	keep	sound
+sound:tte-called	ドキドキってなんで？	has:두근두근 왜	keep	sound
+sound:tte-called	ポンってなにげなく置いた	has:퐁 무심코	keep	sound
+sound:tte-called	よびこが来た。ドキドキってよびこが言った。	has:두근두근 요비코가 말했다	keep	sound
+sound:tte-named	ゴーンって響きわたった	lacks:데엥이라는|데엥은	keep	sound
+sound:tte-named	ゴーンって響きわたる鐘	lacks:데엥이라는|데엥은	keep	sound
+sound:tte-named	もふもふって意味わかる？	has:복슬복슬이라는	fix	sound
+sound:tte-named	ドキドキって感じがする	has:두근두근이라는 느낌이 든다	fix	sound
+cx:tte-echo:35	私の奥を、ごりごりって……！	has:삐걱삐걱……!	fix	rewrites
+cx:tte-echo:35	私の奥を、ごりごりって……！	lacks:이라니|삐걱삐걱은	fix	rewrites
+cx:tte-echo:35	壁にどんどんって……	lacks:이라니|점점은	fix	rewrites
+cx:tte-echo:35	ドアをどんどんって……	lacks:이라니|점점은	fix	rewrites
+cx:tte-echo:30	今時ピチピチって？	has:팔팔이라니	keep	rewrites
+cx:tte-echo:35	今時ピチピチって……	has:팔팔이라니……	keep	rewrites
+cx:tte-echo:35	またって？	has:또라니?	keep	rewrites
+sound:tte-called	ガタガタってなにやってるの？	lacks:덜컹덜컹은	keep	sound
+sound:tte-called	ドンって何してるの？	lacks:쾅은	keep	sound
+sound:tte-called	ペコって何すんだよ	lacks:꾸벅은	keep	sound
+sound:tte-called	ぎゅって何するの！	lacks:꽉은	keep	sound
+sound:tte-called	「ドキドキって何」	has:두근두근이 뭐	fix	sound

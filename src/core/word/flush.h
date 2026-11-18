@@ -89,8 +89,15 @@ bool PauseOrEnd(const Item* it);
 // before it, or else the nearest earlier token that is not only spaces; empty at the line start.
 // token receives the index of the token the text is from (grammar.cpp).
 std::string_view TextBefore(const Worker& w, const Item* it, int& token);
-// Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
+// s without a stutter at its end (はい……な、 of はい……な、なんでしょう: the sound stage's marks and
+// the separator after them), and whether it had one (attr.cpp).
+bool CutStutter(std::string_view& s);
+// Whether nothing but spaces stands before the item on its line, or a sentence end does; a stutter
+// of the item (や、やばい, な、な、なんて) is part of it (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
+// Whether nothing but spaces, marks of mark.restart and a stutter of the item stands before it on
+// its line (……な、なんて) (grammar.cpp).
+bool StartsLine(const Worker& w, const Item* it);
 // Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
 // item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
 bool AfterRestart(const Worker& w, const Item* it);
@@ -100,6 +107,11 @@ bool AfterLeaveTaking(const Worker& w, const Item* it);
 // Whether the line opens with a word of wonder (word.wonder: へえ, ほう) and a pause, and no sentence
 // ends between it and the item (grammar.cpp).
 bool AfterWonder(const Worker& w, const Item* it);
+// Whether the text of the line before the item ends in a word that answers a call (word.call-reply: はい, え)
+// standing alone, then commas, pauses, question or exclamation marks (え？　なんですか); with puzzled, a word
+// of puzzlement (word.puzzled: え, あれ) and a question mark among the marks: え？ before 何でしょう wonders
+// (grammar.cpp).
+bool AfterCallReply(const Worker& w, const Item* it, bool puzzled = false);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its
@@ -111,6 +123,9 @@ bool QuoteVerbFollows(const Item* it);
 // Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
 // span boundary (grammar.cpp).
 bool QuoteEnd(const Worker& w, const Item* it);
+// Whether periods in a row follow the item (..., 。。。, ．．．, also spaced or split into tokens): an ellipsis that
+// trails off, no full stop (grammar.cpp).
+bool PeriodRunEnd(const Worker& w, const Item* it);
 // Whether the item ends its sentence: the end of the utterance (UtteranceEnd), or ！？!? after it
 // (grammar.cpp).
 bool SentenceEnd(const Worker& w, const Item* it);

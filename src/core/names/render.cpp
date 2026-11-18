@@ -258,7 +258,7 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     }
     // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
     if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t) && !OldFormWord(t)) {
-        if (std::string kr = internal::GuessedName(t, GuessFallback(t)); IsHangulText(kr)) {
+        if (std::string kr = internal::GuessedName(t, GuessFallback(t), boxGuess_.count(std::string(t)) != 0); IsHangulText(kr)) {
             // The name layer's own reading comes first (龍鳳 류호, 日村 히무라, 日代 히시로).
             if (std::string own = NonPlaceLayerReading(t); IsHangulText(own)) return own;
             return kr;
@@ -293,7 +293,7 @@ bool Registry::GuessFallback(std::string_view t) {
     return !(fa.layerSurname && (fb.layerGiven || fb.person));
 }
 
-// Whether t holds an old form of a kanji whose modern spelling the dictionaries know (萬平: 万平), which
+// Whether t holds an old form of a kanji whose modern spelling the dictionaries or the name layer know (萬平: 万平), which
 // is read as that spelling rather than guessed (瀧昌 has none: 타키마사), unless the name layer reads t
 // (飛龍 히류).
 bool Registry::OldFormWord(std::string_view t) {
@@ -305,7 +305,8 @@ bool Registry::OldFormWord(std::string_view t) {
             modern.replace(at, eq, pair.substr(eq + 1));
         }
     }
-    return modern != t && Flags(modern).records > 0 && !IsHangulText(NonPlaceLayerReading(t));
+    const DictFlags f = Flags(modern);
+    return modern != t && (f.records > 0 || IsHangulText(NonPlaceLayerReading(modern))) && !IsHangulText(NonPlaceLayerReading(t));
 }
 
 bool Registry::GuessedNameBlocked(std::string_view t) {

@@ -1,0 +1,31 @@
+# 규칙: LEX-5842
+rule	input	expected	kind	layer
+lex:miserare	仲間の死を間近で見せられ続けて	has:죽음을 계속 가까이서 보게 되어	fix	lookup
+lex:miserare	お菓子みたいな携帯の画面を見せられた。	has:화면을 보게 되었다	fix	lookup
+lex:miserare	ノートＰＣを見せられた。	노트 PC를 보게 되었다.	fix	lookup
+lex:miserare	写真を見せられました。	사진을 보게 되었습니다.	fix	lookup
+lex:miserare	あんなの見せられたら仕方ないさ	has:보게 되면	fix	lookup
+lex:miserare	見せられた本の表紙には英語が並んでいる。	has:보게 된 책	fix	lookup
+lex:miserare	「人間としての違いを見せられた気がして」	has:차이를 보게 된 것 같아	fix	lookup
+lex:miserare	現実を見せられ、言葉を失った。	has:현실을 보게 되어	fix	lookup
+lex:miserare	悪夢を見せられやすい。	has:악몽을 보게 되기 쉽다	fix	lookup
+lex:miserare	写真を見せられながら話を聞いた。	has:사진을 보게 되면서	fix	lookup
+lex:miserare	「こんなものを見せられて」	has:이런 걸 보게 돼	fix	lookup
+lex:miserare	姉さんには見せられません。	has:언니에게는 보일 수 없습니다	fix	voice
+lex:miserare	こんな姿、彼には見せられない。	has:그에게는 보일 수 없다	fix	voice
+lex:miserare	姉さんに見せられません。	has:언니에게 보일 수 없습니다	fix	voice
+lex:miserare	こんな顔は見せられません。	has:보일 수 없습니다	keep	lookup
+lex:miserare	誰にも見せられない。	has:누구에게도 보일 수 없다	keep	lookup
+lex:miserare	弱みを見せられない。	has:약점을 보일 수 없다	keep	lookup
+lex:miserare	とても見せられない。	has:도저히 보일 수 없다	keep	lookup
+lex:miserare	力の差を見せつけられた。	has:힘의 차이를 보게 되었다	keep	lookup
+lex:miserare	誰にも見られないように隠れた。	has:보이지 않도록	keep	lookup
+lex:miserare	森下さんに見せられたのは、ドライバー型の錐だった。	has:모리시타 씨에게 보여진 것은	keep	packs
+lex:miserare	先生に見せられた写真	lacks:보일 수	keep	packs
+lex:miserare	彼女には見せられない。	has:그녀에게는 보일 수 없다	fix	voice
+lex:miserare-object	彼に写真を見せられた。	그에게 사진을 보게 되었다.	fix	packs
+lex:miserare-object	彼女にプレゼントを見せられた。	그녀에게 선물을 보게 되었다.	fix	packs
+lex:miserare-object	母に手紙を見せられました。	어머니에게 편지를 보게 되었습니다.	fix	packs
+lex:miserare-kana	みせられた。	보게 되었다.	fix	lookup
+lex:miserare-kana	写真をみせられた。	사진을 보게 되었다.	fix	lookup
+lex:miserare-kana	みせられない。	보일 수 없다.	keep	lookup

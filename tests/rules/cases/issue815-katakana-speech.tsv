@@ -1,0 +1,101 @@
+# 규칙: LEX-5875, LEX-5876
+rule	input	expected	kind	layer
+lex:kata-verb-whole	カエレ……ッ！	돌아가라……!	fix	protect
+lex:kata-verb-whole	オチロ！	떨어져라!	fix	protect
+lex:kata-verb-whole	ヤメテェ……。	그만해…….	fix	protect
+lex:kata-verb-whole	「……キタ」	「……왔어」	fix	protect
+lex:kata-verb-whole	マッテ！	기다려!	fix	protect
+lex:kata-verb-whole	マッテ…	기다려…	fix	protect
+lex:kata-verb-whole	「マッテ！」	「기다려!」	fix	protect
+lex:kata-verb-whole	マッテ、	기다려,	fix	protect
+lex:kata-verb-whole	ちょっとマッテ！	잠깐 기다려!	fix	protect
+lex:kata-verb-whole	ワカッタ！	알았어!	fix	protect
+lex:kata-verb-whole	ワカッタ…	알았어…	fix	protect
+lex:kata-verb-whole	ワカッタッ！	알았어!	fix	protect
+lex:kata-verb-whole	コロシテヤル！	has:죽여	fix	protect
+lex:kata-verb-whole	マテ！	has:기다려	fix	protect
+lex:kata-verb-whole	ヤメロ！	has:그만두	fix	protect
+lex:kata-verb-whole	ヤメテー！	has:그만해	fix	protect
+lex:kata-verb-whole	タスケテー！	has:살려	fix	protect
+lex:kata-verb-whole	ヤメテクレ！	has:그만해 줘	fix	protect
+lex:kata-verb-whole	ハシレ！	달려라!	fix	protect
+lex:kata-verb-whole	オキロ！	일어나라!	fix	protect
+lex:kata-verb-whole	タベロ！	먹어라!	fix	protect
+lex:kata-verb-whole	ミテ！	봐!	fix	protect
+lex:kata-verb-whole	ツカマエタ！	잡았어!	fix	protect
+lex:kata-verb-whole	ミツケタ！	찾아냈어!	fix	protect
+lex:kata-verb-whole	ヤラレタ…	당했어…	fix	protect
+lex:kata-verb-whole	アッハッハッ…ワラエルッ！	has:웃	fix	protect
+lex:kata-verb-whole	落ちてイケヨッ！	has:떨어져 가	fix	protect
+lex:kata-verb-whole	マッテー！	has:기다려	fix	protect
+lex:kata-verb-whole	ネット	넷	keep	protect
+lex:kata-verb-whole	カット！	컷!	keep	protect
+lex:kata-verb-whole	シネマ	시네마	keep	protect
+lex:kata-verb-whole	ネタ！	소재!	keep	protect
+lex:kata-verb-whole	カッター	커터	keep	protect
+lex:kata-verb-whole	キル！	킬!	keep	protect
+lex:kata-verb-whole	モデル	모델	keep	protect
+lex:kata-verb-whole	アタル	아타루	keep	protect
+lex:kata-verb-whole	マサル！	마사루!	keep	protect
+lex:kata-verb-whole	ヒカル！	히카루!	keep	protect
+lex:kata-verb-whole	タツ	타츠	keep	protect
+lex:kata-verb-whole	ネル！	네루!	keep	protect
+lex:kata-verb-whole	タケシ！	타케시!	keep	protect
+lex:kata-verb-whole	アレッタ……	아렛타……	keep	protect
+lex:kata-verb-whole	ってイテェ！	lacks:있어	keep	protect
+lex:kata-verb-whole	もうヤンデル。	이제 병든 상태.	fix	protect
+lex:kata-verb-whole	ヤッター！	앗싸!	keep	protect
+lex:kata-verb-whole	マテ茶を飲む。	마테차를 마신다.	keep	protect
+lex:kata-verb-whole	ノボル！	노보루!	keep	protect
+lex:kata-verb-whole	ノボル、来い！	노보루, 와라!	keep	protect
+lex:kata-verb-whole	アタル！	아타루!	keep	protect
+lex:kata-verb-whole	マモル！	마모루!	keep	protect
+lex:kata-verb-whole	ユウナ！	유우나!	keep	protect
+lex:kata-verb-whole	ハルナ！	하루나!	keep	protect
+lex:kata-verb-whole	イクヨさん	lacks:가	keep	protect
+lex:kata-verb-whole	マッテテ！	기다리고 있어!	fix	protect
+lex:kata-verb-whole	「ミテテ」	「보고 있어」	fix	protect
+lex:kata-verb-whole	キテクダサイ。	와 주세요.	fix	protect
+lex:kata-verb-whole	ミテクダサイ…	봐 주세요…	fix	protect
+lex:kata-verb-whole	ワカッタヨ…	알았어…	fix	protect
+lex:kata-verb-whole	キタヨ！	왔어!	fix	protect
+lex:kata-verb-whole	ミタヨ。	봤어.	fix	protect
+lex:kata-verb-whole	イクヨ！	가!	fix	protect
+lex:kata-verb-whole	「イクヨッ！」	「가!」	fix	protect
+lex:kata-verb-whole	ヤルヨ。	할게.	fix	protect
+lex:kata-verb-whole	ヤロウ！！	lacks:해 보자	keep	protect
+lex:kata-verb-whole	……カッタヨ……？	lacks:샀	keep	protect
+lex:kata-verb-whole	明らかにヤンデルである。	has:병든 상태이다	fix	protect
+lex:kata-verb-whole	「ノボル」と呼んだ。	has:노보루	keep	protect
+lex:kata-verb-whole	「アタル」と名乗った。	has:아타루	keep	protect
+lex:kata-verb-whole	テルヨ、来て。	lacks:비쳐	keep	protect
+lex:te-drawl	やめてええ！	그만해!	fix	sound
+lex:te-drawl	まってええ！	기다려!	fix	sound
+lex:te-drawl	たすけてええ！	살려!	fix	sound
+lex:te-drawl	待ってええ！	기다려!	fix	sound
+lex:te-drawl	来てええ！	와!	fix	sound
+lex:te-drawl	助けてええ…	도와줘…	fix	sound
+lex:te-drawl	やめてええ…	그만해…	fix	sound
+lex:te-drawl	離してええ！	놓아!	fix	sound
+lex:te-drawl	逃げてええ！	도망쳐!	fix	sound
+lex:te-drawl	許してええ！	용서해!	fix	sound
+lex:te-drawl	やめてええっ！	그만해!	fix	sound
+lex:te-drawl	「やめてええ！」	「그만해!」	fix	sound
+lex:te-drawl	お願い、やめてええ！	부탁해요, 그만해!	fix	sound
+lex:te-drawl	つれてってええ！	lacks:네	fix	sound
+lex:te-drawl	行ってええよ	가도 돼	keep	sound
+lex:te-drawl	それでええ！	그거면 돼!	keep	sound
+lex:te-drawl	もうええ！	이제 됐어!	keep	sound
+lex:te-drawl	見てええか？	봐도 될까?	keep	sound
+lex:te-drawl	これでええ。	이거면 된다.	keep	sound
+lex:te-drawl	食べてもええ？	먹어도 괜찮아?	keep	sound
+lex:te-drawl	ええ！	네!	keep	sound
+lex:te-drawl	読んでええ！	읽어도 돼!	keep	sound
+lex:te-drawl	帰ってええで	돌아가도 돼	keep	sound
+lex:te-drawl	ヤメテエエ！	그만해!	fix	sound
+lex:te-drawl	「マッテエエ！」	「기다려!」	fix	sound
+lex:te-drawl	キテエエ…	와…	fix	sound
+lex:te-drawl	タスケテエエッ！	살려!	fix	sound
+lex:te-drawl	ヨンデエエ！	읽어!	fix	sound
+lex:te-drawl	ミテエエ！	봐!	fix	sound
+lex:te-drawl	ミテエエカ？	lacks:봐!	keep	sound

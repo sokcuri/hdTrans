@@ -123,9 +123,9 @@ cx:crit-fixes-1:170	ノエルの垂直切りはいとも簡単に父の木剣で
 cx:crit-fixes-1:170	シールドのような物に弾かれたのだが、	has:물건에 튕겨졌는데	fix	rewrites
 cx:crit-fixes-1:170	ピアノが弾かれる音がした。	!rule:cx:crit-fixes-1:170	keep	rewrites
 cx:crit-fixes-1:170	先生の声に弾かれたように前を向く。	!rule:cx:crit-fixes-1:170	keep	rewrites
-constraint:niwa-before-zuka	口の中にわずかに残っていた物が、水分を吸ってより深い香りを出してくれる。	has:입속에 조금 남아 있던	fix	lookup
-constraint:niwa-before-zuka	屋敷の別館にわずかな使用人と一緒に押し込められて、	has:별관에 약간의 하인과	fix	lookup
-constraint:niwa-before-zuka	庭にわずかな花。	뜰에 약간의 꽃.	fix	lookup
+constraint:particle-split	口の中にわずかに残っていた物が、水分を吸ってより深い香りを出してくれる。	has:입속에 조금 남아 있던	fix	lookup
+constraint:particle-split	屋敷の別館にわずかな使用人と一緒に押し込められて、	has:별관에 약간의 하인과	fix	lookup
+constraint:particle-split	庭にわずかな花。	뜰에 약간의 꽃.	fix	lookup
 cx:crit-fixes-1:10	だが、文明が発展していくに連れて彼等は己の主義主張や利権を巡って戦争を繰り返すようになった。	has:이권을 둘러싸고 전쟁을	fix	rewrites
 cx:crit-fixes-1:10	「全く……ユージの隣を巡って争うなんてみっともないわね」	has:옆을 둘러싸고 싸우다니	fix	rewrites
 cx:crit-fixes-1:10	王位を巡り、兄弟が争った。	has:왕위를 둘러싸고,	fix	rewrites
@@ -244,3 +244,4 @@ cx:crit-fixes-1:5	駅について思ったより人が多かった。	!rule:cx:c
 cx:crit-fixes-1:5	駅について思った以上に混んでいた。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	駅について思った通りだった。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	駅について思った。	역에 대해 생각했다.	fix	rewrites
+constraint:niwa-before-zuka	ここにわずかに何かを引きずった跡	has:여기에 조금	fix	lookup

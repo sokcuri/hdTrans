@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:slurred	お答えできましぇん。	대답할 수 없습니다.	fix	normalize
 normalize:slurred	バカが ちったぁ覚えろよ	바보가 조금은 기억해라	fix	normalize
-normalize:slurred	まぁ 少しぐれぇは 何とかなるさ。	뭐 조금은 어떻게든 되고 말이야.	fix	normalize
+normalize:slurred	まぁ 少しぐれぇは 何とかなるさ。	뭐 조금은 어떻게든 될 거야.	fix	normalize
 normalize:slurred	昨日きれいに磨いたばっかだから	어제 깨끗하게 닦은지 얼마 되지 않았으니까	fix	normalize
 normalize:slurred	せっかくあんたが起きてくれたのに あたしが寝てばっかで	모처럼 네가 일어나 주었는데 내가 자고만 있어	fix	normalize
 normalize:slurred	ばっかじゃないの	바보가 아니야	keep	normalize

@@ -422,24 +422,41 @@ std::size_t CaptionLabelEnd(std::string_view line) {
 namespace {
 
 // BracketLabelAt for the brackets of opens (( and （, or [ and ［), each closed by its pair.
-bool LabelInBracketsAt(std::string_view before, std::string_view after, bool square) {
+bool LabelInBracketsAt(std::string_view before, std::string_view after, bool square, bool lenticularOnly = false) {
     static constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
-    const std::string_view kStops = square ? "[]［］()（）\n「」『』、。！？!?…‥" : "()（）\n「」『』、。！？!?…‥";
+    const std::string_view kStops = lenticularOnly ? "[]［］【】()（）\n「」『』、。！？!?…‥"
+                                    : square       ? "[]［］()（）\n「」『』、。！？!?…‥"
+                                                   : "()（）\n「」『』、。！？!?…‥";
     const char32_t half = square ? U'[' : U'(', full = square ? U'［' : U'（';
+    // lenticularOnly takes a name box in lenticular brackets alone (【千里】「おはよう」; spec LEX-5941).
+    const char32_t lenticular = lenticularOnly ? U'【' : full;
     std::size_t open = before.size();
     for (int n = 0; open > 0; n++) {
         const text::Rune r = RuneBefore(before, open);
-        if (r.cp == half || r.cp == full) break;
+        if (r.cp == half || r.cp == full || r.cp == lenticular) break;
         if (InRunes(r.cp, kStops) || n >= kMaxCaptionGroup) return false;
         open -= r.size;
     }
     if (open == 0) return false;
     const char32_t bracket = RuneBefore(before, open).cp;
-    const char32_t closing = bracket == U'(' ? U')' : bracket == U'（' ? U'）' : bracket == U'[' ? U']' : U'］';
+    const char32_t closing = bracket == U'(' ? U')' : bracket == U'（' ? U'）' : bracket == U'[' ? U']' : bracket == U'【' ? U'】' : U'］';
     const std::string_view parts = before.substr(open);
     if (!parts.empty() && !InRunes(RuneBefore(parts, parts.size()).cp, kLabelSeparators)) return false;
     const std::string_view lead = before.substr(0, open - RuneBefore(before, open).size);
     if (!CaptionLead(lead)) return false;
+    // A name box holds the name alone and opens the speech in quotes (【千里】「おはよう」; not 【節分任務:柊】節分拡張作戦
+    // nor a heading alone, 【中】).
+    if (lenticularOnly) {
+        std::string_view box = after;
+        box.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), box));
+        if (bracket != U'【' || open != before.size() || !box.starts_with("】")) return false;
+        // A colon may stand between the box and the quote (【筧】：「…」).
+        std::string_view speech = TrimLineSpace(box.substr(std::string_view("】").size()));
+        for (const std::string_view colon : {"：", ":"}) {
+            if (speech.starts_with(colon)) speech = TrimLineSpace(speech.substr(colon.size()));
+        }
+        return speech.starts_with("「") || speech.starts_with("『");
+    }
     // A label in square brackets opens the line: one after another group is a word of a list ([ガンガン] [いのち]).
     if (square && AnyRuneOf(lead, [](char32_t c) { return InRunes(c, ")）]］"); })) return false;
     std::string_view rest = after;
@@ -465,6 +482,8 @@ bool LabelInBracketsAt(std::string_view before, std::string_view after, bool squ
 bool BracketLabelAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, false); }
 
 bool SquareLabelAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, true); }
+
+bool NameBoxAt(std::string_view before, std::string_view after) { return LabelInBracketsAt(before, after, true, true); }
 
 bool SpeechAfterLabel(std::string_view rest) {
     while (rest.starts_with(" ") || rest.starts_with("　")) rest.remove_prefix(rest.starts_with(" ") ? 1 : std::string_view("　").size());
@@ -1177,6 +1196,40 @@ std::string Registry::ReadKanaLabels(std::string_view line) {
             }
         }
         i = end;
+    }
+    if (at == 0) return std::string(line);
+    out.append(line.substr(at));
+    return out;
+}
+
+std::string Registry::ReadBoxNames(std::string_view line) {
+    if (snap_ == nullptr) return std::string(line);
+    std::string out;
+    std::size_t at = 0;
+    for (std::size_t open = line.find("【"); open != std::string_view::npos; open = line.find("【", open + 1)) {
+        const std::size_t i = open + std::string_view("【").size();
+        const text::Rune r = RuneAt(line, i);
+        if (r.size == 0 || !IsKanji(r.cp)) continue;
+        const std::string_view key = line.substr(i, r.size);
+        if (!BoxNameAt(*snap_, key, line.substr(0, i), line.substr(i + r.size))) continue;
+        // The person reading a cue of the key gives elsewhere (光さん 미츠루): the dictionaries' first, then the name layer's.
+        std::string written;
+        for (const dict::Candidate& c : snap_->RetrieveRecords(key, dict::LookupMode::General)) {
+            if (c.source == key && c.codes != nullptr && c.codes->sem.HasPrefix("QPN") && IsHangulText(c.target)) {
+                written = std::string(c.target);
+                break;
+            }
+        }
+        for (const dict::Record& rec : written.empty() ? snap_->NameRecords(key) : std::vector<dict::Record>{}) {
+            if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN") && IsHangulText(rec.target)) {
+                written = std::string(rec.target);
+                break;
+            }
+        }
+        if (written.empty()) continue;
+        out.append(line.substr(at, i - at));
+        out.append(written);
+        at = i + r.size;
     }
     if (at == 0) return std::string(line);
     out.append(line.substr(at));

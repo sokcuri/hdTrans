@@ -508,6 +508,20 @@ bool WordIs(const void* context, std::string_view text) {
     return false;
 }
 
+// The length of the longest key of the dictionary that text starts with, names left out: a name (ダズ, ゲデ)
+// is no evidence of how a word is spelled (pipeline::RunLookup::keyReach).
+size_t KeyReach(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const dict::Candidates found = Find(d, text);
+    size_t reach = 0;
+    for (const dict::Candidate& c : found.list) {
+        const bool name = c.user != nullptr && !found.names.empty() && c.user >= found.names.data() &&
+                          c.user < found.names.data() + found.names.size();
+        if (!name) reach = std::max(reach, c.source.size());
+    }
+    return reach;
+}
+
 // Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
 bool AdjectiveStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -871,7 +885,9 @@ struct LineSpeech {
     bool humble = false;
     bool formal = false;
     bool politeAnswer = false;  // the line answers はい or いいえ (speech.polite-answer)
+    std::string lineBefore;     // the source text of the line before the chunk, from the start of its column
     bool threat = false;
+    bool setPhrase = false;
     bool oldSelf = false;
     bool taste = false;
     output::QuoteState quotes;
@@ -1144,6 +1160,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Analysis analysis;
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
     settings.before = before;
+    settings.lineBefore = speech.lineBefore;
     settings.quoteDepth = speech.quotes.depth;
     settings.quoteCount = speech.quotes.count;
     settings.quoteStyles = speech.styles;
@@ -1158,6 +1175,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     settings.humbleLine = speech.humble;
     settings.formalLine = speech.formal;
     settings.threatLine = speech.threat;
+    settings.setLine = speech.setPhrase;
     settings.oldSelfLine = speech.oldSelf;
     settings.tasteLine = speech.taste;
     settings.narrated = speech.narrated;
@@ -1239,7 +1257,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
-                                 options.reference ? nullptr : WordIs}),
+                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
@@ -1303,6 +1321,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.formal = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.formal-cue")),
                                         dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
         speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.setPhrase = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.set-cue")), {});
         speech.politeAnswer = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.polite-answer")), {});
         speech.taste = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("word.taste-cue")), {});
         speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
@@ -1336,7 +1355,10 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         if (watch.pass) watch.pass(watch.context);
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
-            if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
+            if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) {
+                before.clear();  // a column starts as a line does
+                pass.lineBefore.clear();
+            }
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
             std::string chunkText = output::String(chunks[i]);
@@ -1344,6 +1366,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                 for (std::size_t at; (at = chunkText.find(span)) != std::string::npos;) chunkText.erase(at, span.size());
             }
             pass.quotes = output::QuotesAfter(pass.quotes, chunkText);
+            pass.lineBefore += chunkText;
             if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
         }
         const output::Pieces cleaned = output::Cleanup(sentences, gaps);
