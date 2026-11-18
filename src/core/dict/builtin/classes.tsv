@@ -302,7 +302,9 @@
 //= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
 //= adjective.character	Stems of adjectives and adjectival nouns of a trait or an attitude of a person, after which ところ is a side of that person, 면 (傲慢なところ 오만한 면, 優しいところ 다정한 면).
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
-//= adjective.ku-greeting	く forms of adjectives that are a greeting or a request of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?; ヤバくね？ 위험하지 않아?).
+//= adjective.ku-greeting	く forms of adjectives that are a greeting or a request of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?, 優しくね？ 부드럽게 해?; ヤバくね？ 위험하지 않아?).
+//= conjunction.archaic-start	Old conjunctions read only where they open a sentence or a quote, longest first, the note their plain form (されば、行こう 그러니까, 가자); inside a sentence they are verb forms and stay (攻撃されば, 大人になれど, お出で下されば).
+//= tail.negative-ni	Tails that begin with に after a negative in ない and make a construction of it (来ないに決まってる, 来ないにしても, 誰も来ないに越したことはない): こないに before them is 来ないに, not the Kansai こんなに (こないに大きい).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
@@ -14771,3 +14773,27 @@ suffix.kanji-noun	数
 suffix.kanji-noun	報
 adjective.ku-greeting	よろしく
 adjective.ku-greeting	宜しく
+adjective.ku-greeting	優しく
+adjective.ku-greeting	やさしく
+adjective.ku-greeting	楽しく
+adjective.ku-greeting	たのしく
+adjective.ku-greeting	仲良く
+adjective.ku-greeting	なかよく
+adjective.ku-greeting	大人しく
+adjective.ku-greeting	おとなしく
+conjunction.archaic-start	さればこそ	だからこそ
+conjunction.archaic-start	されば	だから
+conjunction.archaic-start	なれども	だが
+conjunction.archaic-start	なれど	だが
+tail.negative-ni	に決ま
+tail.negative-ni	にきま
+tail.negative-ni	に違い
+tail.negative-ni	にちがい
+tail.negative-ni	に越し
+tail.negative-ni	にこし
+tail.negative-ni	にしても
+tail.negative-ni	にしたって
+tail.negative-ni	にせよ
+tail.negative-ni	にしろ
+tail.negative-ni	に限る
+tail.negative-ni	にかぎる

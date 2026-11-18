@@ -39,3 +39,42 @@ normalize:dialect-tare	当たれー！！	has:맞아라	keep	normalize
 normalize:dialect-tare	打たれ、倒れた。	has:맞아	keep	normalize
 normalize:dialect-naka	列席者がざわめくなか、千里がくるっと前を向いた。	has:가운데	keep	normalize
 normalize:dialect-dekiru	それがでけたら苦労せんわ。	has:할 수 있으면	fix	normalize
+normalize:dialect-chau	それはちゃうかった。	has:아니었	fix	normalize
+normalize:dialect-chau	それ、ちゃいました。	has:달랐습니다	fix	normalize
+normalize:dialect-chau	それはちゃうよな。	has:아니지	fix	normalize
+normalize:dialect-chau	それはちゃうで。	has:아니야	fix	normalize
+normalize:dialect-chau	俺はちゃうと思う。	has:다르다고	fix	normalize
+normalize:dialect-chau	これ、俺のちゃうで。	has:것이 아니야	fix	normalize
+normalize:dialect-chau	ちゃうねん、聞いてや。	has:아니야	keep	normalize
+normalize:dialect-chau	食べちゃうかもしれない。	has:먹어버릴	keep	normalize
+normalize:dialect-adj	体によかもん食べんね。	has:좋은	fix	normalize
+normalize:dialect-adj	こがんよかもの出されたら。	has:좋은 것	fix	normalize
+normalize:dialect-adj	これでよか。	lacks:인가	fix	normalize
+normalize:dialect-naka	そういうんじゃなかけど気持ちは強く持っとかんばと思って。	has:아니지만	fix	normalize
+normalize:dialect-naka	違うディスプレイにすれば不自然じゃなかし	has:않고	fix	normalize
+normalize:dialect-naka	そうじゃなかばい。	has:그렇지 않아	fix	normalize
+normalize:dialect-naka	そうじゃなかか。	has:그렇잖아	fix	normalize
+normalize:dialect-naka	なかなか来ない。	has:좀처럼	keep	normalize
+normalize:dialect-orasu	社長は家におらすばい。	has:계셔	fix	normalize
+normalize:dialect-toru-potential	見とられん。	has:있을 수 없	fix	normalize
+normalize:dialect-toru-potential	そんなん、見とられへん。	has:있을 수 없	fix	normalize
+normalize:dialect-toru-potential	見とられない。	lacks:있을 수 없	keep	normalize
+normalize:dialect-tare	やったれ！	has:해 주어라	fix	normalize
+normalize:dialect-tare	しみったれた話だ。	has:쩨쩨한	keep	normalize
+normalize:dialect-word	ばかたれが！	has:바보	fix	normalize
+normalize:dialect-word	このバカたれ！	lacks:늘어	fix	normalize
+normalize:dialect-word	こないにしても連絡くらいしろ。	has:오지 않	keep	normalize
+normalize:dialect-word	こないにせよ、待っている。	has:오지 않	keep	normalize
+normalize:dialect-word	誰もこないに越したことはない。	has:오지 않	keep	normalize
+normalize:dialect-word	こないに大きいとは。	has:이렇게 크	fix	normalize
+normalize:dialect-word	私をこがん惹きつける形を作る人に！	has:이렇게 끌어	fix	normalize
+normalize:dialect-word	なんがあったか分からんけどそがんふうに自分ば責めたらいかんよ。	has:그런 식으로	fix	normalize
+normalize:dialect-word	湖岸を歩いた。	has:호숫가	keep	normalize
+normalize:dialect-sero	私は別に…周りが そがんせろって言うけん。	has:그렇게 하라고	fix	normalize
+normalize:dialect-sero	勉強せろ。	has:공부해라	fix	normalize
+normalize:dialect-sero	見せろ！	has:보여라	keep	normalize
+normalize:dialect-sero	とっととうせろ！	has:없어져라	keep	normalize
+normalize:dialect-sero	はよせろや。	has:빨리	fix	normalize
+normalize:dialect-sero	早く伏せろ！	lacks:해라	keep	normalize
+normalize:dialect-word	あいつがこないにしたって、俺は行く。	has:오지 않	keep	normalize
+normalize:dialect-naka	ちゃこじゃなかけど。	has:챠코	keep	normalize

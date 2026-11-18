@@ -1,5 +1,5 @@
 #! layer=words
-# 어휘 보충: 명사·동사·형용사·부사·복합어
+# 어휘 보충: 명사·동사·형용사, 부사·복합어
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 3尉	소위	N110			GN				llm			w:1
 〆切	마감&AV@	M428			GN						しめきる	w:2
@@ -28667,3 +28667,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 こんとき	이때	E120			GN							w:36507
 あほんたれ	멍청이	N110	VHn		GN							w:36508
 くそったれ	빌어먹을	N110	VHn		GN							w:36509
+こがん	이런	E0H1			GN							w:36514
+こがん	이렇게	E0H1			GN	15404	||1 P+1== "4**7**8**"	서부 방언 こがん은 동사와 형용사 앞에서 '이렇게'를 고른다.			こがん	w:36515
+そがん	그런	E0H1			GN							w:36516
+そがん	그렇게	E0H1			GN	15405	||1 P+1== "4**7**8**"	서부 방언 そがん은 동사와 형용사 앞에서 '그렇게'를 고른다.			そがん	w:36517
+こないに	이렇게	E311			GN							w:36518
+ばかたれ	바보 녀석	N110	VHn		GN							w:36503
+バカたれ	바보 녀석	N110	VHn		GN							w:36504

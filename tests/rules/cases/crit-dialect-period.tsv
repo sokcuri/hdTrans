@@ -15,3 +15,7 @@ normalize:dialect-word	勝った。なれど、多くを失った。	has:하지�
 normalize:dialect-word	……なれど、まだ早い。	has:하지만	fix	normalize
 normalize:dialect-word	許されば行く。	lacks:그러니	keep	normalize
 normalize:dialect-word	御覧なされば分かる。	lacks:그러니	keep	normalize
+normalize:dialect-word	さればこそ、こうして来たのだ。	has:그렇기에	fix	normalize
+normalize:dialect-word	なれども、王は動かなかった。	has:하지만	fix	normalize
+normalize:dialect-word	教えてくだされば助かります。	has:가르쳐 주시면	keep	normalize
+normalize:dialect-word	雨なれど出かけた。	has:비지만	keep	normalize

@@ -27,3 +27,13 @@ normalize:adjective-kune	これからも宜しくね？	has:잘 부탁해	keep	n
 normalize:adjective-kune	はあ。多くね？	has:많지 않아	fix	normalize
 normalize:fused-tokiwa	あんときゃもう今にも死にそうな顔してたし	has:그때는	fix	normalize
 normalize:fused-tokiwa	そんときゃ頼む。	has:그때는	fix	normalize
+normalize:adjective-kune	「でも、そんなにゲームしてたら時間足りなくね？」	has:부족하지 않아	fix	normalize
+normalize:adjective-kune	それ、ちょっと早くね？	has:빠르지 않아	fix	normalize
+normalize:adjective-kune	そっと、優しくね？	lacks:다정하지 않아	keep	normalize
+normalize:adjective-kune	急いで、早くね？	lacks:빠르지 않아	keep	normalize
+normalize:adjective-kune	みんなで楽しくね？	lacks:즐겁지 않아	keep	normalize
+normalize:fused-tokiwa	若いときゃ無茶をした。	has:젊을 때는	fix	normalize
+normalize:fused-tokiwa	元気がないときゃ…そうだ！	has:없을 때는	fix	normalize
+normalize:fused-tokiwa	見ときゃよかった。	has:봐 둘	keep	normalize
+normalize:fused-tokiwa	やっときゃよかった。	has:해 둘	keep	normalize
+normalize:fused-tokiwa	まー、でもやるときゃやるぜ。	lacks:유행	keep	normalize
