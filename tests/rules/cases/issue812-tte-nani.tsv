@@ -64,7 +64,7 @@ cx:tte-nani:71	それってなんか変だね。	lacks:뭐야	keep	rewrites
 cx:tte-nani:71	それってなんだか怖い。	has:왠지	keep	rewrites
 cx:tte-nani:72	それってなんだっけ？	그게 뭐였더라?	fix	rewrites
 cx:tte-nani:72	あれってなんだっけ。	has:그게 뭐였더라	fix	rewrites
-cx:tte-nani:73	それってなんなんですか？	has:그게 무엇입니까	fix	rewrites
+cx:tte-nani:73	それってなんなんですか？	has:그게 뭐예요	fix	rewrites
 cx:tte-nani:12	それってなんのこと？	그게 무슨 말이야?	fix	rewrites
 cx:tte-nani:12	あれってなんのこと？	has:그게 무슨 말이야	fix	rewrites
 cx:tte-nani:45	寒かったって何？	추웠다니 뭐야?	fix	rewrites
@@ -121,7 +121,7 @@ cx:tte-nani:8	「コレってなに」	「이게 뭐야」	fix	rewrites
 cx:tte-nani:8	これって何だ	이게 뭐냐	fix	rewrites
 cx:tte-nani:8	これってなんなの？	이게 뭐야?	fix	rewrites
 cx:tte-nani:8	これってなんだっけ	이게 뭐였더라	fix	rewrites
-cx:tte-nani:8	これって何ですか？	이게 무엇입니까?	fix	rewrites
+cx:tte-nani:8	これって何ですか？	has:이게 뭐예요?	fix	rewrites
 cx:tte-nani:8	これって何か変だね	lacks:이게	keep	rewrites
 cx:tte-nani:8	これって何度目？	lacks:이게	keep	rewrites
 cx:tte-nani:8	これってすごいね	lacks:이게	keep	rewrites
@@ -130,5 +130,5 @@ cx:tte-nani:8	これってなんだか怖い	lacks:이게	keep	rewrites
 cx:tte-nani:8	これって何を意味するの？	lacks:이게	keep	rewrites
 cx:tte-nani:7	猫って何だよ	!rule:cx:tte-nani:7	keep	rewrites
 cx:tte-nani:7	あれって何だよ	!rule:cx:tte-nani:7	keep	rewrites
-cx:tte-nani:72	羊飼いってなんだっけ？	lacks:뭐였더라	keep	rewrites
+cx:tte-nani:72	羊飼いってなんだっけ？	!rule:cx:tte-nani:72	keep	rewrites
 cx:tte-nani:71	手抜きってなんなのさ？	lacks:뭐인	keep	rewrites

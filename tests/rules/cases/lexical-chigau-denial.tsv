@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:chigau-denial:10	「は？　違うってば！」	「뭐? 아니라니까!」	fix	rewrites
 cx:chigau-denial:10	「はぁ？　違うって」	「하아? 아니라니까」	fix	rewrites
-cx:chigau-denial:10	へ？何ですか？Catwalk? 違いますってぇ！	어? 무엇입니까? Catwalk? 아니라고요!	fix	rewrites
+cx:chigau-denial:10	へ？何ですか？Catwalk? 違いますってぇ！	has:어? 뭐예요? Catwalk?	fix	rewrites
 cx:chigau-denial:10	「全然違うって言ってるだろ」	!rule:cx:chigau-denial:10	keep	rewrites
 cx:chigau-denial:15	「ち、違うわよ、これは京太郎がムードを壊すから」	「아, 아니야, 이건 교타로가 무드를 부수니까」	fix	rewrites
 cx:chigau-denial:15	「ち、ちがうよぉ……素直な気持ちだもん」	「아, 아니야……솔직한 기분인걸」	fix	rewrites

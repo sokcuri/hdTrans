@@ -638,6 +638,46 @@ bool AfterWonder(const Worker& w, const Item* it) {
     return false;
 }
 
+bool AfterCallReply(const Worker& w, const Item* it, bool puzzled) {
+    std::string before(w.settings.lineBefore);
+    for (int token = 0; token < it->tokenIndex; token++) before += w.Tok(token).text;
+    before += it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
+    std::string_view s = before;
+    // The stutter marks (pipeline/restore.h kStutterMark, kStutterRest) stand where a stutter was cut
+    // (はい……な、なんでしょう).
+    static constexpr std::string_view kMarks[] = {"、", "，", ",", "…", "‥", "―", "？", "?", "！", "!", "　", " ", "\uE000", "\uE004"};
+    bool marked = false;
+    bool asked = false;
+    for (bool more = true; more;) {
+        more = false;
+        for (const std::string_view mark : kMarks) {
+            if (!s.ends_with(mark)) continue;
+            s.remove_suffix(mark.size());
+            asked = asked || mark == "？" || mark == "?";
+            marked = more = true;
+        }
+    }
+    if (!marked || (puzzled && !asked)) return false;
+    // A stretched or clipped answer word (はいっ, んー, えぇ～).
+    static constexpr std::string_view kStretch[] = {"ー", "～", "〜", "~", "っ", "ッ"};
+    for (bool more = true; more;) {
+        more = false;
+        for (const std::string_view mark : kStretch) {
+            if (!s.ends_with(mark)) continue;
+            s.remove_suffix(mark.size());
+            more = true;
+        }
+    }
+    static constexpr std::string_view kOpens[] = {"「", "『", "（", "(", "、", "，", "。", ".", "．", "？", "?", "！", "!", "…", "　", " "};
+    const auto members = puzzled ? dict::ClassMembers(HDTRANS_CLASS("word.puzzled")) : dict::ClassMembers(HDTRANS_CLASS("word.call-reply"));
+    for (const std::string_view m : members) {
+        if (!s.ends_with(m)) continue;
+        const std::string_view rest = s.substr(0, s.size() - m.size());
+        if (rest.empty() || std::ranges::any_of(kOpens, [&](std::string_view o) { return rest.ends_with(o); })) return true;
+    }
+    return false;
+}
+
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {

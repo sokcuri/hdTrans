@@ -1247,12 +1247,14 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                         if (honIncl) g.hon = true;
                     }
             // a word kept with a level the reader could not take apart: changing the others would mix levels
-            // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다; a noun in 요 is no polite end)
-            bool mixed = false;
+            // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다; a noun in 요 is no polite end). A word
+            // kept in 해요체 does not hold a sentence end REG-25 lowers to 해요체: the quote then has one level
+            // (알고 있습니다……취미는 뭐예요 → 알고 있어요……취미는 뭐예요, REG-30)
+            bool mixed = false, mixedHaeyo = false;
             for (const auto& n : nodes) {
                 if (n.kind != Kind::Raw && n.kind != Kind::N) continue;
-                for (const char* key : {"mixed.hapsyo", n.kind == Kind::Raw ? "mixed.haeyo" : "mixed.word"})
-                    if (EndsWithAny(n.lemma, t.G(key))) mixed = true;
+                if (EndsWithAny(n.lemma, t.G("mixed.hapsyo"))) mixed = true;
+                if (EndsWithAny(n.lemma, t.G(n.kind == Kind::Raw ? "mixed.haeyo" : "mixed.word"))) mixedHaeyo = true;
             }
             // REG-12: where a quote's last sentence end is already at the quote's level, an inner sentence end takes that
             // level only where its source sentence ends in a negative (間に合わない。急げよ 늦어. 서둘러), read on the source's
@@ -1362,7 +1364,8 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 const bool give = (nodes[q].lemma == "주다" || auxSee) && nodes[q].ctype == CType::final_ &&
                                   nodes[q].mood == Mood::decl && nodes[q].tense == Tense::nonpast && was == Level::haera &&
                                   nodes[q].eomi.empty() && lastWord && target == Level::hae;
-                const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
+                const bool held = mixed || (mixedHaeyo && !(lower[q] && target == Level::haeyo)) || inner || keep || keigo ||
+                                  askedByEnding || hapsyo || raise || jaCommand ||
                                   (command && dec.key.starts_with("scene-speech")) || (give && !dec.giveDecl);
                 if (!held && give) nodes[q].eomi = "lge";
                 // REG-3: in a lady's polite quote (polite-fem) a plain end the source closes with かな muses to oneself:
@@ -1481,7 +1484,11 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     afterthought = false;
             for (std::size_t q = nodes.size(); q-- > 0 && !afterthought;) {
                 if (quoteOf[q] != qi || nodes[q].kind == Kind::Punct) continue;
-                if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) lastChanged = false;
+                // REG-25, REG-30: a word kept whole in 해요체 (뭐예요) ends the quote at that level when its other sentence
+                // ends now are 해요체 too (알고 있어요……취미는 뭐예요)
+                const bool haeyoWord = end == Level::haeyo && (nodes[q].kind == Kind::Raw || nodes[q].kind == Kind::N) &&
+                                       EndsWithAny(nodes[q].lemma, t.G(nodes[q].kind == Kind::Raw ? "mixed.haeyo" : "mixed.word"));
+                if ((nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) && !haeyoWord) lastChanged = false;
                 break;
             }
             levelChanged = levelChanged || lastChanged;

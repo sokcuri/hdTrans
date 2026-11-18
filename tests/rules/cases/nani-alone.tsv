@@ -8,4 +8,4 @@ dict:jisjk:264553	「何！？」	「뭐!?」	fix	local
 dict:jisjk:264553	何？	뭐?	fix	local
 dict:jisjk:264553	あんた何？	너 뭐?	fix	local
 dict:jisjk:264553	何、それ？	뭐, 그것?	fix	local
-dict:jisjk:264313	何ですか？	무엇입니까?	keep	local
+dict:jisjk:264313	何ですか？	has:뭐예요?	keep	local

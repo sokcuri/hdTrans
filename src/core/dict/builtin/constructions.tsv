@@ -3156,6 +3156,63 @@ cx:s4k-yoroshikunai:30	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+
 cx:s4k-yoroshikunai:40	GRM-251	&&5 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "ござ" I+1== "Lございませ" !1 I+1== "Lございませんでし" !1 I+1== "Rか"	set-target "좋지" set-verb@+1 "않다" set-ending@+1 "7니다"	よろしくございません 좋지 않습니다
 cx:s4k-yoroshikunai:50	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L없"	set-target "좋지" replace-head@+1 "없었" "않았" replace-head@+1 "없어" "않아" replace-head@+1 "없" "않"	顔色がよろしくありませんわ 안색이 좋지 않아요
 cx:s4k-yoroshikunai:55	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L않"	set-target "좋지"	あまりよろしくありませんし 그다지 좋지 않고
+//= nandesuka-style	after OfferPromise 3210	guard !1 &&2 F+0== "set-line" !1 F+0== "quoted"	The 何ですか family in speech, written at the line's level (spec REG-30–REG-33): a bare 何ですか that answers a call (はい、なんですか, 提督、何ですか) asks what the caller wants, 왜요; a bare 何でしょう(か) said alone or after a call is 무슨 일이세요; one that asks about a thing (これは何ですか, 何なんですか, それって何なのですか, なんですか……それ) is 뭐예요, and a 何でしょう that wonders (X は何でしょう, 何でしょうね, え？ 何でしょう？, 何でしょう…) is 뭘까요. On a line the speech-level stage keeps in 합쇼체 they are 무슨 일이십니까 and 뭡니까. Never the written 무엇입니까 or 무엇이죠, also outside quotes.
+//: nds-formal	F+0== "formal-level"	The speech-level stage keeps the line in 합쇼체 (REG-4).
+//: nds-demo-near	||7 S+1== "この" S+1== "その" S+1== "あの" S+1== @pronoun.demonstrative &&2 S+1== "00、，,…………‥―？?！!　" S+2== @pronoun.demonstrative &&2 S-1== "00、，,　" S-2== @pronoun.demonstrative S-1== @pronoun.demonstrative	A demonstrative stands next to the word (なんですか……それ？, それ、なんですか？, 何ですかこれ, なんですかこの展開): it asks about a thing, not what a caller wants.
+//: nds-person-before	||2 &&2 S-1== "00、，," ||3 F-2== "person" F-2== "person-name" S-2== @honorific.name &&2 F+0== "after-pause" ||3 F-1== "person" F-1== "person-name" S-1== @honorific.name	A person called stands right before with a comma or a pause (提督、, 拓也くん……).
+//: nds-person-after	&&3 S+1== "00、，," ||2 F+2== "person" F+2== "person-name" ||3 !1 F+3== "exists" S+3== "00、，,。．.？?！!…‥―」』）)　 ～~" S+3== @honorific.name	A person called comes right after a comma and stands alone, before the end, a mark or a name suffix (何ですか、提督; not 何ですか、あなたは or 何ですか、二人でグルになって).
+//: nds-person-near	||2 :nds-person-before :nds-person-after	A person called is next to the word.
+//: nds-called	||2 F+0== "after-call-reply" :nds-person-near	A word that answers a call (はい, え, after a comma, a pause or a question mark) comes before, or a person called is next to the word.
+//: nds-opens	||2 F+0== "opens-line" S-1== "00「『（(“≪"	The word opens a sentence or a quote.
+//: nds-wonders	||6 S+1== "ね" S+1== "かね" F+0== "pause-after" &&2 S+1== "00、，," !1 :nds-person-after F+0== "after-puzzled-question" &&3 F+0== "after-pause" !1 F+0== "after-call-reply" ||2 F-1== "filler" D-1== @ko.pause-filler	A 何でしょう that goes on with ね, a pause or a comma, or follows a puzzled え？ or a filler and a pause (ええと……なんでしょうか), wonders.
+//: nds-wonders-split	||6 S+1== "でしょうね" S+2== "ね" S+2== "かね" F+1== "pause-after" S+2== "00、，," F+0== "after-puzzled-question"	The same for 何 + でしょう.
+//: nds-reply	&&2 !1 F+0== "after-puzzled-question" ||2 F+0== "after-call-reply" :nds-person-near	A 何でしょう said after a call answers it.
+//: nds-desuka	||2 &&2 ||2 S+0== "何ですか" S+0== "なんですか" ||3 D+0== "무엇입니까" D+0== " 무엇입니까" &&2 D+0== "입니까" :nds-opens &&2 F+0== "fixed" D+0== "뭐예요"	A 何ですか read as the question 무엇입니까 (or, opening a sentence, as the bare copula), or the phrase なんですか said alone.
+//: nds-deshou	&&4 !1 S-1== "00」』）)”’】〉》" ||2 S+0== "なんでしょう" S+0== "なんでしょうか" !1 S+1== @mark.clause-link ||4 D+0== "무엇이지요" D+0== " 무엇이지요" &&2 ||2 D+0== "이지요" D+0== "입니까" :nds-opens &&3 D+0== "이지요" F+0== "after-pause" ||4 P+1== "1" P+1== "0" S+2== "の" &&2 ||3 F-1== "person" F-1== "person-name" S-1== @honorific.name ||2 F-1== "first" S-2== "00「『（(“"	A なんでしょう(か) read as 무엇이지요, or as the copula where it opens a sentence, follows a pause before a noun (ズッキューン……なんでしょう今の感じ) or a person called and a pause (提督…なんでしょう？); not before a clause particle (ということなんでしょうけど).
+//: nds-nani	||3 &&2 S+0== "何" D+0== "무엇" &&2 S+0== "なん" ||2 D+0== "무엇" D+0== "" &&2 S+0== "何なの" D+0== "무엇"	A 何 read 무엇 before its copula word (何 + でしょうか, なん + なんですか, 何なの + ですか).
+//: nds-split-deshou	&&2 ||3 S+1== "でしょう" S+1== "でしょうか" S+1== "でしょうね" !1 S+2== @mark.clause-link	何 + でしょう(か), not before a clause particle.
+//~ nds-why	무엇입니까=왜요 입니까=왜요 뭐예요=왜요	A bare 何ですか that answers a call (REG-31).
+//~ nds-what	무엇입니까=뭐예요 입니까=뭐예요	A 何ですか that asks about a thing (REG-30).
+//~ nds-what-formal	무엇입니까=뭡니까 입니까=뭡니까 뭐예요=뭡니까 무엇이지요=뭡니까 이지요=뭡니까	The same on a line kept in 합쇼체.
+//~ nds-wonder	무엇입니까=뭘까요 입니까=뭘까요 뭐예요=뭘까요 무엇이지요=뭘까요 이지요=뭘까요	A 何でしょう or なんですかね that wonders (REG-32).
+//~ nds-split-what	무엇입니까=뭐예요 무엇=뭐예요	The 何 of 何 + its copula word, which becomes empty (REG-30).
+//~ nds-split-formal	무엇입니까=뭡니까 무엇=뭡니까	The same on a line kept in 합쇼체.
+//~ nds-split-wonder	무엇입니까=뭘까요 무엇=뭘까요	The 何 of 何 + でしょう that wonders (REG-32).
+//~ nds-demo	이것=이거 그것=그거 저것=저거	The spoken demonstrative right before a 何ですか outside quotes (REG-33).
+//~ nds-call	무엇입니까=무슨 입니까=무슨 뭐예요=무슨 무엇이지요=무슨 이지요=무슨 무엇=무슨	The head of a bare 何ですか or 何でしょう that answers a call, before 일이세요 (REG-31, REG-32).
+//~ nds-plain	무엇이지요=뭐죠	A bare なんでしょう(か) with no cue outside quotes, in the spoken form quoted lines already get (REG-32).
+cx:nandesuka-style:9	REG-31	&&5 :nds-formal :nds-desuka !1 S+1== "ね" !1 :nds-demo-near :nds-called	map-target-tail @nds-call append-target " 일이십니까"	はい、何ですか (합쇼) 네, 무슨 일이십니까
+cx:nandesuka-style:10	REG-31	&&4 :nds-desuka !1 S+1== "ね" !1 :nds-demo-near :nds-called	map-target-tail @nds-why	はい、なんですか？ 네, 왜요?
+cx:nandesuka-style:11	REG-30	&&2 :nds-formal :nds-desuka	map-target-tail @nds-what-formal	かしこまりました。ご用件は何ですか 알겠습니다. 용건은 뭡니까
+cx:nandesuka-style:12	REG-32	&&2 :nds-desuka S+1== "ね"	map-target-tail @nds-wonder	まあ、なんですかね？ 뭐, 뭘까요?
+cx:nandesuka-style:13	REG-30	:nds-desuka	map-target-tail @nds-what	これは何ですか？ 이건 뭐예요?
+cx:nandesuka-style:18	REG-32	&&5 :nds-formal :nds-deshou !1 :nds-wonders !1 :nds-demo-near :nds-reply	map-target-tail @nds-call append-target " 일이십니까"	はい、なんでしょうか (합쇼) 네, 무슨 일이십니까
+cx:nandesuka-style:19	REG-32	&&3 :nds-formal :nds-deshou !1 S+1== "ね"	map-target-tail @nds-what-formal	失礼いたします。これはなんでしょうか 실례하겠습니다. 이건 뭡니까
+cx:nandesuka-style:20	REG-32	&&4 :nds-deshou !1 :nds-wonders !1 :nds-demo-near :nds-reply	map-target-tail @nds-call append-target " 일이세요"	提督、なんでしょう？ 제독, 무슨 일이세요?
+cx:nandesuka-style:21	REG-32	&&2 :nds-deshou ||6 :nds-wonders S-1== "は" S-1== "Rは" S-1== "Rって" S-1== "Rとは" S+1!= "00？?！!。．.」』）)…‥―　 "	map-target-tail @nds-wonder	さぁ、なんでしょうね 자, 뭘까요
+cx:nandesuka-style:22	REG-32	&&3 :nds-deshou !1 F+0== "quoted" ||2 D+0== "무엇이지요" D+0== " 무엇이지요"	map-target-tail @nds-plain	なんでしょう。 뭐죠.
+cx:nandesuka-style:28	REG-32	&&5 :nds-formal :nds-nani :nds-split-deshou !1 :nds-wonders-split :nds-reply	map-target-tail @nds-call append-target " 일이십니까" set-target@+1 ""	はい、何でしょうか (합쇼) 네, 무슨 일이십니까
+cx:nandesuka-style:29	REG-32	&&4 :nds-formal :nds-nani :nds-split-deshou !1 S+2== "ね"	map-target-tail @nds-split-formal set-target@+1 ""	失礼いたします。これは何でしょうか 실례하겠습니다. 이건 뭡니까
+cx:nandesuka-style:30	REG-32	&&5 :nds-nani :nds-split-deshou !1 :nds-wonders-split !1 :nds-demo-near :nds-reply	map-target-tail @nds-call append-target " 일이세요" set-target@+1 ""	はい、何でしょうか？ 네, 무슨 일이세요?
+cx:nandesuka-style:31	REG-32	&&2 :nds-nani ||3 :nds-split-deshou S+1== "なんでしょう" S+1== "なんでしょうか"	map-target-tail @nds-split-wonder set-target@+1 ""	理由というのは何なんでしょうか 이유라는 것은 뭘까요
+cx:nandesuka-style:35	REG-30	&&4 :nds-nani :nds-formal ||2 S+1== "ですか" S+1== "なんですか" ||4 S+2== "この" S+2== "その" S+2== "あの" S+2== @pronoun.demonstrative	map-target-tail @nds-split-formal set-target@+1 " "	何なんですかこの人 (합쇼) 뭡니까 이 사람
+cx:nandesuka-style:36	REG-30	&&5 :nds-nani :nds-formal S+1== "なのです" S+2== "か" ||4 S+3== "この" S+3== "その" S+3== "あの" S+3== @pronoun.demonstrative	map-target-tail @nds-split-formal set-target@+1 "" set-target@+2 " "	なんなのですかこれは (합쇼) 뭡니까 이건
+cx:nandesuka-style:37	REG-30	&&4 :nds-nani S+1== "なのです" S+2== "か" ||4 S+3== "この" S+3== "その" S+3== "あの" S+3== @pronoun.demonstrative	map-target-tail @nds-split-what set-target@+1 "" set-target@+2 " "	なんなのですかこれは 뭐예요 이건
+cx:nandesuka-style:38	REG-30	&&3 :nds-nani ||2 S+1== "ですか" S+1== "なんですか" ||4 S+2== "この" S+2== "その" S+2== "あの" S+2== @pronoun.demonstrative	map-target-tail @nds-split-what set-target@+1 " "	何なんですかこの人 뭐예요 이 사람
+cx:nandesuka-style:39	REG-30	&&4 :nds-nani :nds-formal S+1== "なのです" S+2== "か"	map-target-tail @nds-split-formal set-target@+1 "" set-target@+2 ""	趣味はなんなのですか (합쇼) 취미는 뭡니까
+cx:nandesuka-style:40	REG-30	&&3 :nds-nani :nds-formal ||2 S+1== "ですか" S+1== "なんですか"	map-target-tail @nds-split-formal set-target@+1 ""	何なのですか (합쇼) 뭡니까
+cx:nandesuka-style:41	REG-30	&&2 :nds-nani ||2 S+1== "ですか" S+1== "なんですか"	map-target-tail @nds-split-what set-target@+1 ""	何なんですか！ 뭐예요!
+cx:nandesuka-style:42	REG-30	&&3 :nds-nani S+1== "なのです" S+2== "か"	map-target-tail @nds-split-what set-target@+1 "" set-target@+2 ""	趣味はなんなのですか 취미는 뭐예요
+cx:nandesuka-style:43	REG-30	&&4 S+0== "なん" D+0== "" S+1== "っす" S+2== "か"	set-target " 뭐예요" set-target@+1 "" set-target@+2 ""	なんっすか、先輩 뭐예요, 선배
+cx:nandesuka-style:44	REG-30	&&5 :nds-formal S+0== "なんです" ||2 D+0== "입니다" D+0== "뭡니다" S+1== "00？?" ||3 S-1== "は" S-1== "Rって" S-1== "Rとは"	set-target " 뭡니까"	猫ってなんです？ (합쇼) 고양이는 뭡니까?
+cx:nandesuka-style:45	REG-31	&&5 S+0== "なんです" ||2 D+0== "입니다" D+0== "뭡니다" S+1== "00？?" !1 :nds-demo-near :nds-called	set-target "왜요"	はい、なんです？ 네, 왜요?
+cx:nandesuka-style:46	REG-30	&&4 S+0== "なんです" ||2 D+0== "입니다" D+0== "뭡니다" S+1== "00？?" ||3 S-1== "は" S-1== "Rって" S-1== "Rとは"	set-target " 뭐예요"	猫ってなんです？ 고양이는 뭐예요?
+cx:nandesuka-style:47	REG-32	&&5 :nds-formal ||2 S+0== "なんでしょう" S+0== "なんでしょうか" ||2 D+0== "이지요" D+0== "입니까" !1 S+1== "ね" ||3 S-1== "は" S-1== "Rって" S-1== "Rとは"	set-target " 뭡니까"	これはなんでしょうか (합쇼) 이건 뭡니까
+cx:nandesuka-style:48	REG-32	&&3 ||2 S+0== "なんでしょう" S+0== "なんでしょうか" ||2 D+0== "이지요" D+0== "입니까" ||3 S-1== "は" S-1== "Rって" S-1== "Rとは"	set-target " 뭘까요"	それってなんでしょうね 그게 뭘까요
+cx:nandesuka-style:49	REG-30	&&4 ||2 S+0== "なん" S+0== "何" D+0== "무엇" S+1== "だっけ" ||3 S-1== "は" S-1== "Rって" S-1== "Rとは"	set-target " 뭐였더라" set-target@+1 ""	名前はなんだっけ 이름은 뭐였더라
+cx:nandesuka-style:50	REG-33	&&3 S+0== @pronoun.demonstrative !1 F+0== "quoted" ||4 S+1== "何ですか" S+1== "なんですか" S+1== "何" S+1== "なん"	map-target @nds-demo	これ何ですか？ 이거 뭐예요?
+cx:nandesuka-style:51	REG-30	&&5 :nds-formal S+0== "なんです" ||2 D+0== "입니다" D+0== "뭡니다" S+1== "00？?" ||2 F+0== "opens-line" S-1== "00「『（(“、，,…‥―"	set-target "뭡니까"	なんです？ (합쇼) 뭡니까?
+cx:nandesuka-style:52	REG-30	&&4 S+0== "なんです" ||2 D+0== "입니다" D+0== "뭡니다" S+1== "00？?" ||2 F+0== "opens-line" S-1== "00「『（(“、，,…‥―"	set-target "뭐예요"	なんです？ 뭐예요?
 //= s4k-ndaga	after OfferPromise 3000	The -는데 that an explanatory の or ん before が reads (spec GRM-250: 思ったんだが 생각했는데, 金属だったのだが 금속이었는데) is written in the form of the Korean word it ends: the 하다 of 주었으면 하다 (ほしいんだが) is a verb, -는데, not 한데, and the 않다 of a verb's negative (飲み散らかしてないんだが 마셔 어지르지 않는데) is the 않다 of a verb, not 않은데 (있지 않은데 stays). A wish in ばよかった before such a -는데 is (았)더라면 좋았겠는데, as lc2c-bayokatta reads it before けれど. なんだが after a verb in ては or ちゃ is the hedge of the のもなんだが row: -기는 좀 그렇지만 (言ってはなんだが 말하기는 좀 그렇지만).
 //: ndaga-ending	||4 U+0== "Rんだが" U+0== "Rのだが" U+0== "Rんですが" U+0== "Rのですが"	The ending is an explanatory の or ん before が or ですが.
 //~ ndaga-want	$AB@=$Kz@	The 하다 of 주었으면 하다 as a verb.

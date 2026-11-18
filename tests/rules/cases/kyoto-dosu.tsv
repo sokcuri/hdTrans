@@ -2,8 +2,8 @@
 rule	input	expected	kind	layer
 normalize:kyoto-dosu	覚えててくれはったんどすか？	기억하고 있어 주셨습니까?	fix	normalize
 normalize:kyoto-dosu	今まで どこで 誰と何してはったんどすか？	지금까지 어디서 누구와 뭐하고 계셨습니까?	fix	normalize
-normalize:kyoto-dosu	なんどす？	뭡니까?	fix	normalize
-normalize:kyoto-dosu	(紗江子)なんどす？	(사에코) 뭡니까?	fix	normalize
+normalize:kyoto-dosu	なんどす？	has:뭐예요?	fix	normalize
+normalize:kyoto-dosu	(紗江子)なんどす？	has:(사에코) 뭐예요?	fix	normalize
 normalize:kyoto-dosu	うちは お座敷が いちばんどす｡	집은 다다미방이 가장입니다.	fix	normalize
 normalize:kyoto-dosu	＜けど これからがうちにとっての ﾎﾝﾏのいくさ｡花いくさの始まりやったんどす＞	<지만 지금부터가 집에 있어서의 진짜의 전쟁. 꽃전쟁의 시작 했습니다>	fix	normalize
 normalize:kyoto-dosu	ちょうど混んどって	마침 혼잡해	keep	normalize
