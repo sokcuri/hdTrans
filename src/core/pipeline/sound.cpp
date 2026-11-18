@@ -1805,9 +1805,11 @@ size_t SoundText::Adverbial(size_t i) const {
 //   꾸벅이 뭡니까, ドキドキって呼んでる), which the later stages read after the Korean.
 // Not where a dictionary word of any part of speech or a name starts there and runs past the member,
 // but for a noun before a particle (ゴーンって響き渡った, ぐしゃぐしゃって何か踏んだ, ポンってなにげなく, ぎゅって音羽を), where the word in kanji
-// heads a longer one (意味不明, 何度, ヤツオ), where the noun is the stem of a verb that conjugates there
-// (ドキドキって感じちゃう), or where a noun of sound.tte-noise takes を: the noise the sound makes
-// (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた).
+// heads a longer one (意味不明, 何度, ヤツオ), where hiragana other than a particle or だ goes on from a
+// noun that ends in hiragana, the stem of a longer word (ドキドキって感じちゃう, ゴーンって響きわたった), or where a noun of
+// sound.tte-noise takes を: the noise the sound makes (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた).
+// The question word followed by a copula form of sound.tte-asked-copula asks whatever word starts there
+// (ドキドキってなんだろう), but not the indefinite of sound.tte-asked-indefinite (ふわってなんだか).
 SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
     if (i >= rs_.size()) return TteNamed::None;
     const std::string_view at = text_.substr(offsets_[i]);
@@ -1826,6 +1828,24 @@ SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
     if (noun && after < rs_.size() && rs_[after] == U'を' && dict::StartsWithMember(HDTRANS_CLASS("sound.tte-noise"), at) == n) {
         return TteNamed::None;
     }
+    // A member noun that ends in hiragana, a verb's stem form (響き, 感じ), is the stem of a longer word
+    // where hiragana other than a particle or だ goes on from it (ゴーンって響きわたった, ドキドキって
+    // 感じちゃう); a noun in kanji (もふもふって意味わかる？) or one that ends in a particle (のが) is not.
+    if (noun && after < rs_.size() && IsHiraganaRune(rs_[after]) && rs_[after] != U'だ' &&
+        (rs_[after] == U'て' || !In(rs_[after], kParticles)) && IsHiraganaRune(rs_[after - 1]) &&
+        !In(rs_[after - 1], kParticles)) {
+        return TteNamed::None;
+    }
+    // The question word goes on in a copula form: that is the question itself, whatever dictionary
+    // word starts there (なんだろう, なんだっけ, なんです？, 何なんだ), but not where the form makes an
+    // indefinite (なんだか).
+    if (!noun && after < rs_.size()) {
+        const std::string_view rest = text_.substr(offsets_[after]);
+        if (dict::StartsWithMember(HDTRANS_CLASS("sound.tte-asked-copula"), rest) > 0 &&
+            dict::StartsWithMember(HDTRANS_CLASS("sound.tte-asked-indefinite"), rest) == 0) {
+            return TteNamed::Called;
+        }
+    }
     for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup).list) {
         const size_t len = text::RuneCount(c.source);
         const bool verb = c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'M';
@@ -1839,10 +1859,6 @@ SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
         }
         if (len > member && !name && !noun && verb) continue;
         if (len > member) return TteNamed::None;
-        if (noun && verb && len == member && after < rs_.size() && IsHiraganaRune(rs_[after]) &&
-            rs_[after] != U'だ' && (rs_[after] == U'て' || !In(rs_[after], kParticles))) {
-            return TteNamed::None;
-        }
     }
     if (!noun) return TteNamed::Called;
     return rs_[i] == U'の' ? TteNamed::Quoted : TteNamed::Noun;
