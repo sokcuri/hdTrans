@@ -1202,6 +1202,40 @@ std::string Registry::ReadKanaLabels(std::string_view line) {
     return out;
 }
 
+std::string Registry::ReadBoxNames(std::string_view line) {
+    if (snap_ == nullptr) return std::string(line);
+    std::string out;
+    std::size_t at = 0;
+    for (std::size_t open = line.find("【"); open != std::string_view::npos; open = line.find("【", open + 1)) {
+        const std::size_t i = open + std::string_view("【").size();
+        const text::Rune r = RuneAt(line, i);
+        if (r.size == 0 || !IsKanji(r.cp)) continue;
+        const std::string_view key = line.substr(i, r.size);
+        if (!BoxNameAt(*snap_, key, line.substr(0, i), line.substr(i + r.size))) continue;
+        // The person reading a cue of the key gives elsewhere (光さん 미츠루): the dictionaries' first, then the name layer's.
+        std::string written;
+        for (const dict::Candidate& c : snap_->RetrieveRecords(key, dict::LookupMode::General)) {
+            if (c.source == key && c.codes != nullptr && c.codes->sem.HasPrefix("QPN") && IsHangulText(c.target)) {
+                written = std::string(c.target);
+                break;
+            }
+        }
+        for (const dict::Record& rec : written.empty() ? snap_->NameRecords(key) : std::vector<dict::Record>{}) {
+            if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN") && IsHangulText(rec.target)) {
+                written = std::string(rec.target);
+                break;
+            }
+        }
+        if (written.empty()) continue;
+        out.append(line.substr(at, i - at));
+        out.append(written);
+        at = i + r.size;
+    }
+    if (at == 0) return std::string(line);
+    out.append(line.substr(at));
+    return out;
+}
+
 // Whether the kanji k with い is an adjective of the dictionaries (太い), whose く (太く) is no verb's.
 bool Registry::AdjectiveKanji(std::string_view k) {
     if (snap_ == nullptr) return false;

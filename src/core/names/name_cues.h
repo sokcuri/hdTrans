@@ -43,6 +43,10 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 // or as the subject or topic of what a person does or says (spec LEX-5175).
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after);
 
+// Whether key, one kanji with a person's reading in the name layer and a common sense, stands alone in a name
+// box before speech (【月】「…」): it names the speaker in the box only (spec LEX-6060).
+bool BoxNameAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after);
+
 // Whether the word between before and after is a speaker label at the start of a line: a part of a label in
 // round or square brackets followed by speech ((のぼる)うん, ［たまお］はい), or the word alone before a colon,
 // ≫, a quote that ends the line or a role in round brackets, after caption marks only (spec LEX-5800).

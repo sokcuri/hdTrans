@@ -1451,8 +1451,12 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             i += step;
             continue;
         }
-        // A box of one kanji with a common sense names the speaker there only (【愛】「ふふ」 beside 愛がすべてだ).
-        const bool boxOnly = text::RuneCount(key) < 2 && internal::NameBoxAt(before, after) && !NameOnlyKey(snap, key);
+        // A box of one kanji with a common sense names the speaker in the box only, which Registry::ReadBoxNames
+        // writes there (【月】「月がきれい」 달이, 愛がすべてだ 사랑이): it cues no other occurrence.
+        if (BoxNameAt(snap, key, before, after)) {
+            i += step;
+            continue;
+        }
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed
@@ -1484,7 +1488,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             (runStart && SuffixAfter(snap, after, key) && CallableKey(snap, key, false)) || ClassAfter(after, key, kanji) ||
             (LabelAt(snap, before, after) &&
              (!single || (bracketLabel && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)) || LabelNoun(snap, key) || (SingleNameKey(snap, key) && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)))) || (!single && ActionAt(snap, key, before, after))) {
-            add(key, !boxOnly);
+            add(key, true);
         } else if (runStart && !hiragana && HonorificAfter(snap, after, key)) {
             add(key, false, true);
         } else if (kanji && runStart && AloneCallAt(before, after, !OnlyNames(snap, key) || !single) &&
@@ -1509,6 +1513,13 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
 
 bool SpeakerLabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
     return LabelAt(snap, before, after) || internal::SquareLabelAt(before, after);
+}
+
+bool BoxNameAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    return text::RuneCount(key) == 1 && internal::NameBoxAt(before, after) && !internal::BracketLabelAt(before, after) &&
+           SingleNameKey(snap, key) && !NameOnlyKey(snap, key) && !HeadingBoxAt(snap, key, before, after) &&
+           !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key) && !dict::InClass(HDTRANS_CLASS("noun.role"), key) &&
+           !dict::InClass(HDTRANS_CLASS("noun.label-role"), key);
 }
 
 bool PersonSlotAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {

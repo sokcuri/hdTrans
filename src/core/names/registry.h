@@ -135,6 +135,9 @@ public:
     // ((のぼる)うん 노보루, ［たまお］はい, ゆう：うん, ひかる「待って」): a run of two to six kana that the
     // dictionaries have as no whole common word, role or sound, read as the katakana names are (spec LEX-5800).
     std::string ReadKanaLabels(std::string_view line);
+    // line with each one-kanji name in a name box (names::BoxNameAt) written as the name layer's person reading
+    // (【月】「月がきれい」 → 【츠키】「月がきれい」), so the word stays the word elsewhere in the line (spec LEX-6060).
+    std::string ReadBoxNames(std::string_view line);
 
     text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.

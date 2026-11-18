@@ -24,3 +24,24 @@ names:name-box	【電話】「もしもし」	has:【전화】	keep	lookup
 names:name-box	【少女】「だれ？」	has:【소녀】	keep	lookup
 names:name-box	【幸運】「やった」	has:【행운】	keep	lookup
 names:name-box	【心の声】「どうしよう」	has:【마음의 소리】	keep	lookup
+names:name-box	【月】「今夜は月がきれいだね」	has:달이	keep	lookup
+names:name-box	【空】「空が青いね」	has:하늘이	keep	lookup
+names:name-box	【海】「海に行こうよ」	has:바다에	keep	lookup
+names:name-box	【春】「春の新作です」	has:봄	keep	lookup
+names:name-box	【心】「心が痛い」	has:마음이	keep	lookup
+names:name-box	【星】「星がきれい」	has:별이	keep	lookup
+names:name-box	【風】「風が強いね」	has:바람이	keep	lookup
+names:name-box	【愛】「愛が欲しい」	has:사랑을	keep	lookup
+names:name-box	【雪】「雪だ」	has:눈이야	keep	lookup
+names:name-box	【月】「月さんって呼んで」	has:츠키 씨	fix	lookup
+names:name-box	【夏】「夏ちゃん！」	has:【나츠】「나츠짱	fix	lookup
+names:name-box	【采】「采を振る」	lacks:아야를	keep	lookup
+names:name-box	【萬平】「おはよう」	has:【만페이】	keep	lookup
+names:name-box	【萬平】「萬平さんは？」	has:만페이 씨	keep	lookup
+names:name-box	【萬智】「萬智さんは？」	has:마치 씨	fix	lookup
+names:name-box	【惠斗】「おはよう」	has:【케이토】	keep	lookup
+names:name-box	【黑鷹】「おはよう」	has:【쿠로타카】	keep	lookup
+names:name-box	惠斗さんは来た。	has:케이토 씨	fix	lookup
+names:name-box	【瀧昌】「おはよう」	has:【타키마사】	fix	lookup
+names:name-box	采配を振るう将軍。	has:지휘	keep	lookup
+names:name-box	喝采を浴びる。	has:갈채	keep	lookup
