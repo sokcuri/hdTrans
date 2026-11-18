@@ -108,6 +108,8 @@ struct PackTable {
     std::vector<std::pair<int, int>> collocPatterns;
     std::unordered_map<std::string, std::vector<int>, StringHash, std::equal_to<>> collocsByLead;
     std::vector<int> collocsSlotFirst;
+    // The byte length of the longest value of a final= cue atom ("-" aside): a longer final matches no row.
+    std::size_t finalLongest = 0;
 
     bool Empty() const { return rows.empty(); }
     // The depth of a class (a root is 1); 0 for an unknown class.

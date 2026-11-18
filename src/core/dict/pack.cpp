@@ -253,6 +253,7 @@ bool PackTable::Member(std::string_view lemma, std::string_view cls) const {
 
 void ParsePackRows(std::string_view file, std::string_view text, const Dict* base, userdict::Families& families,
                    PackTable& table, std::vector<PackError>& errors) {
+    const std::size_t firstRow = table.rows.size();
     std::vector<std::string> head;
     const std::set<std::string, std::less<>> castOff = CastOffNames();
     auto col = [&](const std::vector<std::string_view>& f, std::string_view name) -> std::string_view {
@@ -452,6 +453,11 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             table.rows.push_back(std::move(one));
         }
     });
+    for (std::size_t i = firstRow; i < table.rows.size(); i++)
+        for (const PackAtom& a : table.rows[i].atoms)
+            if (a.slot == "final")
+                for (const std::string& v : a.values)
+                    if (v != "-") table.finalLongest = std::max(table.finalLongest, v.size());
 }
 
 void ParsePackClasses(std::string_view file, std::string_view text, PackTable& table, std::vector<PackError>& errors) {

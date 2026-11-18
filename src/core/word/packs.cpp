@@ -170,7 +170,21 @@ void AttachedContext(const Flusher::Attached& a, const Item* it, Context& c) {
         }
 }
 
-Context ContextOf(Flusher& f, const Item* it) {
+// Whether a word of the chain is in a polite form: an ending in ます, です, でしょう or the copula です.
+bool ChainPolite(const Flusher& f) {
+    for (const Item* x = f.w.chain.head; x != nullptr; x = x->next) {
+        if (x->group == nullptr) continue;
+        const std::string_view e = x->DirectSurface(), s = x->group->surface;
+        if (e.find("ます") != std::string_view::npos || e.find("まし") != std::string_view::npos ||
+            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos ||
+            e.find("でしょう") != std::string_view::npos || s == "です" ||
+            s == "でした" || s == "でしょう")
+            return true;
+    }
+    return false;
+}
+
+Context ContextOf(Flusher& f, const Item* it, std::size_t finalLongest) {
     Context c;
     c.snapshot = &f.w.snapshot;
     const char cls = ClassOf(it);
@@ -313,7 +327,9 @@ Context ContextOf(Flusher& f, const Item* it) {
         rest.remove_prefix(size);
     }
     const Item* last = NegativeAux(it) != nullptr ? NegativeAux(it) : it;
-    bool stop = false, blank = false;
+    // final is only compared whole with the values of final= atoms: past the longest of them it matches none
+    // and stays so, so the walk stops there and does not cross the rest of a long line for every word
+    bool stop = c.final.size() > finalLongest, blank = false;
     const auto take = [&](std::string_view rest) {
         while (!rest.empty() && !stop) {
             const std::size_t size = text::DecodeRune(rest).size;
@@ -333,6 +349,7 @@ Context ContextOf(Flusher& f, const Item* it) {
             } else if (!Faint(rune)) {
                 c.final += rune;
             }
+            stop = stop || c.final.size() > finalLongest;
         }
     };
     // the rest of the word's token, then the tokens after it as typed
@@ -387,17 +404,8 @@ Context ContextOf(Flusher& f, const Item* it) {
     }
     if (cls == '8' && ending.starts_with("な")) c.forms.insert("attr");
     if (cls == '7' && ending.ends_with("く") && c.next != nullptr && Predicate(ClassOf(c.next))) c.forms.insert("adv");
-    for (const Item* x = f.w.chain.head; x != nullptr; x = x->next) {
-        if (x->group == nullptr) continue;
-        const std::string_view e = x->DirectSurface(), s = x->group->surface;
-        if (e.find("ます") != std::string_view::npos || e.find("まし") != std::string_view::npos ||
-            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos ||
-            e.find("でしょう") != std::string_view::npos || s == "です" ||
-            s == "でした" || s == "でしょう") {
-            c.polite = true;
-            break;
-        }
-    }
+    if (f.polite == -2) f.polite = ChainPolite(f) ? 1 : 0;
+    c.polite = f.polite >= 0 ? f.polite == 1 : ChainPolite(f);
     if (const Flusher::Attached* a = AttachedOf(f)) AttachedContext(*a, it, c);
     return c;
 }
@@ -641,7 +649,7 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
         any = any || (r.slot == slot && r.classDigit == cls);
     }
     if (!any) return -1;
-    Context c = ContextOf(f, it);
+    Context c = ContextOf(f, it, t.finalLongest);
     // polarity and tense rows read the reading of (ら)れ the voice layer decided, and a potential of the dictionary
     c.voice = voice;
     if (voice.empty() && it->detail != nullptr) {
@@ -1180,7 +1188,7 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     // the row's cue atoms hold for the last word of the span (head=- : it modifies no noun)
     if (const dict::PackRow& r = t.rows[static_cast<std::size_t>(c.row)]; !r.atoms.empty()) {
         std::array<int, 5> spec{};
-        if (!Holds(t, r, ContextOf(f, items[m.end - 1]), spec)) return false;
+        if (!Holds(t, r, ContextOf(f, items[m.end - 1], t.finalLongest), spec)) return false;
     }
     for (std::size_t k = i; k < m.end; k++) {
         const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
@@ -1363,6 +1371,7 @@ void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty() && f.w.settings.documentPacks == nullptr) return;
     f.attached.asked = false;  // the chain may have changed since the voice layer asked
+    f.polite = -2;
     std::set<const Item*> taken, heads;
     if (!t.collocs.empty()) ApplyCollocs(f, t, taken, heads);
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -1439,6 +1448,7 @@ void ApplyPacks(Flusher& f) {
             it->packRows.push_back(r.global);
         }
     }
+    f.polite = -1;
 }
 
 }  // namespace hdTrans::word

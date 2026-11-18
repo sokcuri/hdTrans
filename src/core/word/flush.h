@@ -33,6 +33,10 @@ struct Flusher {
         Attachment attachment;
         std::vector<const Item*> items;  // the chain's items, in the attachment's order
     } attached{};
+    // Whether the chain has a polite form (register= of the packs layer), worked out once while ApplyPacks runs:
+    // its writes change targets only, not the surfaces the test reads. 1 or 0 once known, -2 in ApplyPacks before
+    // the first word asks, -1 elsewhere (ask the chain every time).
+    signed char polite = -1;
     // The scratch of the construction families (constructions.cpp): the number of each word's surface
     // among the table's surfaces, and the values of the atoms on the word being tried, by slot; a
     // slot holds stamp << 1 | value, for the stamp of the try it was found in.
