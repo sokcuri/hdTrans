@@ -302,7 +302,9 @@
 //= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
 //= adjective.character	Stems of adjectives and adjectival nouns of a trait or an attitude of a person, after which ところ is a side of that person, 면 (傲慢なところ 오만한 면, 優しいところ 다정한 면).
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
-//= adjective.ku-greeting	く forms of adjectives that are a greeting or a request of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?, 優しくね？ 부드럽게 해?; ヤバくね？ 위험하지 않아?).
+//= adjective.ku-greeting	く forms of adjectives that are a greeting of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?; ヤバくね？ 위험하지 않아?).
+//= adjective.ku-request	く forms of adjectives that make a request of their own with ね？ where no topic or subject comes before them in the sentence (そっと、優しくね？ 부드럽게 해?, みんなで楽しくね？); after one they are the cut negative くない (あいつ、優しくね？ 다정하지 않아?).
+//= adverb.western-kosoado	The western こ, そ, ど words in がん and げん, the note the plain adverb they stand for before the copula or a sentence particle that ends the sentence (そがんです 그래요, そがんね 그래, こげんか); before a verb or a noun the word stage reads them (そがん人 그런 사람).
 //= conjunction.archaic-start	Old conjunctions read only where they open a sentence or a quote, longest first, the note their plain form (されば、行こう 그러니까, 가자); inside a sentence they are verb forms and stay (攻撃されば, 大人になれど, お出で下されば).
 //= tail.negative-ni	Tails that begin with に after a negative in ない and make a construction of it (来ないに決まってる, 来ないにしても, 誰も来ないに越したことはない): こないに before them is 来ないに, not the Kansai こんなに (こないに大きい).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
@@ -14773,14 +14775,20 @@ suffix.kanji-noun	数
 suffix.kanji-noun	報
 adjective.ku-greeting	よろしく
 adjective.ku-greeting	宜しく
-adjective.ku-greeting	優しく
-adjective.ku-greeting	やさしく
-adjective.ku-greeting	楽しく
-adjective.ku-greeting	たのしく
-adjective.ku-greeting	仲良く
-adjective.ku-greeting	なかよく
-adjective.ku-greeting	大人しく
-adjective.ku-greeting	おとなしく
+adjective.ku-request	優しく
+adjective.ku-request	やさしく
+adjective.ku-request	楽しく
+adjective.ku-request	たのしく
+adjective.ku-request	仲良く
+adjective.ku-request	なかよく
+adjective.ku-request	大人しく
+adjective.ku-request	おとなしく
+adverb.western-kosoado	こがん	こう
+adverb.western-kosoado	そがん	そう
+adverb.western-kosoado	どがん	どう
+adverb.western-kosoado	こげん	こう
+adverb.western-kosoado	そげん	そう
+adverb.western-kosoado	どげん	どう
 conjunction.archaic-start	さればこそ	だからこそ
 conjunction.archaic-start	されば	だから
 conjunction.archaic-start	なれども	だが

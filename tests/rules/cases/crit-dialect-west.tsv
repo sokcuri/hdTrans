@@ -78,3 +78,30 @@ normalize:dialect-sero	はよせろや。	has:빨리	fix	normalize
 normalize:dialect-sero	早く伏せろ！	lacks:해라	keep	normalize
 normalize:dialect-word	あいつがこないにしたって、俺は行く。	has:오지 않	keep	normalize
 normalize:dialect-naka	ちゃこじゃなかけど。	has:챠코	keep	normalize
+normalize:dialect-toru-potential	ぬかるみに足とられんように。	lacks:비쳐지|있을 수 없	keep	normalize
+normalize:dialect-toru-potential	揚げ足とられんように気をつけろ。	lacks:비쳐지|있을 수 없	keep	normalize
+normalize:dialect-toru-potential	会社をのっとられないように。	lacks:있을 수 없|오르고	keep	normalize
+normalize:dialect-toru-potential	国を乗っ取られん。	has:빼앗기	keep	normalize
+normalize:dialect-toru-potential	寝とられん。	has:자고 있을 수 없	fix	normalize
+normalize:dialect-toru-potential	食べとられん。	has:먹고 있을 수 없	fix	normalize
+normalize:dialect-toru-potential	黙っとられん。	has:있을 수 없	fix	normalize
+normalize:dialect-toru-potential	待っとられへん。	has:기다리고 있을 수 없	fix	normalize
+normalize:dialect-naka	これではなかから出られない。	lacks:아니니까	keep	normalize
+normalize:dialect-naka	これじゃなかから鍵を開けて。	lacks:아니니까	keep	normalize
+normalize:dialect-naka	白じゃなかと？	has:아니	fix	normalize
+normalize:dialect-kosoado	そがんです。	has:그렇습니다	fix	normalize
+normalize:dialect-kosoado	そがんですね。	has:그렇네요	fix	normalize
+normalize:dialect-kosoado	そがんね。	has:그래	fix	normalize
+normalize:dialect-kosoado	そがんか。	has:그런가	fix	normalize
+normalize:dialect-kosoado	そがんと？	has:그렇다고	fix	normalize
+normalize:dialect-kosoado	そがんやろ？	has:그렇지	fix	normalize
+normalize:dialect-kosoado	そがんだった。	has:그랬다	fix	normalize
+normalize:dialect-kosoado	「そがんね」	has:그래	fix	normalize
+normalize:dialect-kosoado	そげんです。	has:그렇습니다	fix	normalize
+normalize:dialect-kosoado	そげんやろ。	has:그렇지	fix	normalize
+normalize:dialect-kosoado	そがん人はおらん。	has:그런 사람	keep	normalize
+normalize:dialect-kosoado	そがんやつは知らん。	has:그런 녀석	keep	normalize
+normalize:dialect-kosoado	そがん言うた。	has:그렇게 말했	keep	normalize
+normalize:dialect-kosoado	湖岸です。	has:호숫가	keep	normalize
+normalize:dialect-kosoado	コガンです。	has:코간	keep	normalize
+normalize:dialect-kosoado	どがんかね？	lacks:제발	keep	normalize

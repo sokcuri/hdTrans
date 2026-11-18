@@ -1,5 +1,5 @@
 #! layer=words
-# 어휘 보충: 명사·동사·형용사, 부사·복합어
+# 어휘 보충: 명사·동사·형용사·부사·복합어
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 3尉	소위	N110			GN				llm			w:1
 〆切	마감&AV@	M428			GN						しめきる	w:2

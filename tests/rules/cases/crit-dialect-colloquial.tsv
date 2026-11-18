@@ -37,3 +37,13 @@ normalize:fused-tokiwa	元気がないときゃ…そうだ！	has:없을 때는
 normalize:fused-tokiwa	見ときゃよかった。	has:봐 둘	keep	normalize
 normalize:fused-tokiwa	やっときゃよかった。	has:해 둘	keep	normalize
 normalize:fused-tokiwa	まー、でもやるときゃやるぜ。	lacks:유행	keep	normalize
+normalize:adjective-kune	雨が降ってて、寒くね？	has:춥지 않아	fix	normalize
+normalize:adjective-kune	これ、マジで楽しくね？	has:즐겁지 않아	fix	normalize
+normalize:adjective-kune	あいつ、優しくね？	has:다정하지 않아	fix	normalize
+normalize:adjective-kune	彼女は優しくね？	has:다정하지 않아	fix	normalize
+normalize:adjective-kune	お前、大人しくね？	has:얌전하지 않아	fix	normalize
+normalize:adjective-kune	今日、寒くね？	has:춥지 않아	fix	normalize
+normalize:adjective-kune	ゆっくり、優しくね？	lacks:않아	keep	normalize
+normalize:adjective-kune	ちゃんと、優しくね？	lacks:않아	keep	normalize
+normalize:adjective-kune	先生もよろしくね？	has:잘 부탁해	keep	normalize
+normalize:adjective-kune	走って、早くね？	lacks:않아	keep	normalize
