@@ -51,14 +51,15 @@ HD_TEST(word_respectful_passive_of_an_honoured_subject) {
 }
 
 HD_TEST(word_respectful_passive_keeps_the_passive) {
-    // An agent, a subject that is no title, or a verb whose object is a person without its object.
+    // An agent, a subject that is no title, or a transitive verb without its object that is not of
+    // verb.thing-object (GRM-4250: respectful needs a verb whose object is never a person).
     HD_CHECK_EQ(Translate("陛下が彼に手紙を書かれた。"), "폐하가 그에게 편지를 써졌다.");
     HD_CHECK_EQ(Translate("彼が手紙を書かれた。"), "그가 편지를 써졌다.");
     HD_CHECK(Translate("陛下が殴られた。").find("셨") == std::string::npos);
 }
 
-HD_TEST(word_respectful_transitive_without_a_person_object) {
-    // A transitive verb whose object is no person cannot be done to an honoured subject (GRM-4250).
+HD_TEST(word_respectful_thing_object_verb_without_its_object) {
+    // A verb whose object is never a person (verb.thing-object) cannot be done to an honoured subject (GRM-4250).
     HD_CHECK_EQ(Translate("陛下が書かれた。"), "폐하가 쓰셨다.");
     HD_CHECK_EQ(Translate("部長が辞められた。"), "부장이 그만두셨다.");
 }

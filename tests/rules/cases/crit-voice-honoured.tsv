@@ -51,3 +51,36 @@ voice:passive-cue	おいしいもの食べられていいじゃないですか�
 voice:passive-cue	避けられていいのか。	has:피할 수 있어도	keep	voice
 voice:passive-cue	食べられている。	has:먹히고 있다	keep	voice
 voice:passive-cue	「エルです。……それ以上の素性を明かす権限を与えられていません」	lacks:줄 수 있지	fix	voice
+voice:honoured-subject	先生の書かれた本です。	has:쓰신	fix	voice
+voice:honoured-subject	部長がやめられた。	has:그만두셨	fix	voice
+voice:honoured-subject	陛下がのべられた。	has:말씀하셨	fix	voice
+voice:honoured-subject	先生が読まれた本。	has:읽으신	fix	voice
+voice:honoured-subject	会長が始められた会社。	has:시작하신	fix	voice
+voice:honoured-subject	先生が泣かれました。	has:우셨습니다	fix	voice
+voice:honoured-negative	社長は決められない。	has:결정할 수 없	keep	voice
+voice:honoured-negative	社長は決められなかった。	has:결정할 수 없었	keep	voice
+voice:honoured-negative	社長は何も決められませんでした。	has:없었	keep	voice
+voice:honoured-negative	社長は決められず、悩んだ。	has:결정할 수 없	keep	voice
+voice:honoured-negative	部長はやめられない。	has:그만둘 수 없	keep	voice
+voice:honoured-person-act	先生が突き飛ばされた。	lacks:밀치셨	keep	voice
+voice:honoured-person-act	社長が蹴飛ばされた。	lacks:차버리셨	keep	voice
+voice:honoured-person-act	社長が押し倒された。	lacks:넘어뜨리셨	keep	voice
+voice:honoured-person-act	先生が問い詰められた。	lacks:캐물으셨	keep	voice
+voice:honoured-person-act	社長が見下された。	lacks:업신여기셨	keep	voice
+voice:honoured-person-act	先生が引き留められた。	lacks:만류하셨	keep	voice
+voice:honoured-person-act	社長が煽られた。	lacks:부추기셨	keep	voice
+voice:honoured-person-act	先生に決められた。	lacks:결정하셨	keep	voice
+voice:reported-respectful	なんとか宿題を終えられました。	has:끝낼 수 있었	keep	voice
+voice:reported-respectful	どうにか宿題を終えられました。	has:끝낼 수 있었	keep	voice
+voice:reported-respectful	無事に宿題を終えられました。	has:끝낼 수 있었	keep	voice
+voice:reported-respectful	おかげで宿題を終えられました。	has:끝낼 수 있었	keep	voice
+voice:reported-respectful	おかげさまで宿題を終えられました。	has:끝낼 수 있었	keep	voice
+voice:no-cue-potential	ナメられたら終わりだ。	has:얕봐지면	fix	voice
+voice:no-cue-potential	なめられたら困る。	has:얕봐지면	fix	voice
+voice:no-cue-potential	飴をなめられたら嬉しい。	lacks:얕봐지면	keep	voice
+voice:no-cue-potential	連れられるまま歩いた。	has:이끌리는	fix	voice
+voice:no-cue-potential	連れられるがまま歩いた。	has:이끌리는	fix	voice
+voice:no-cue-potential	抱きしめられるまま目を閉じた。	has:안기는 대로	fix	voice
+voice:no-cue-potential	食べられるままに食べた。	has:먹을 수 있는	keep	voice
+voice:no-cue-potential	子供を連れて帰った。	has:데리고	keep	voice
+voice:no-cue-potential	固く握られた拳。	has:쥐어진	keep	voice
