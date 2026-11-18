@@ -107,6 +107,11 @@ bool AfterLeaveTaking(const Worker& w, const Item* it);
 // Whether the line opens with a word of wonder (word.wonder: へえ, ほう) and a pause, and no sentence
 // ends between it and the item (grammar.cpp).
 bool AfterWonder(const Worker& w, const Item* it);
+// Whether the text of the line before the item ends in a word that answers a call (word.call-reply: はい, え)
+// standing alone, then commas, pauses, question or exclamation marks (え？　なんですか); with puzzled, a word
+// of puzzlement (word.puzzled: え, あれ) and a question mark among the marks: え？ before 何でしょう wonders
+// (grammar.cpp).
+bool AfterCallReply(const Worker& w, const Item* it, bool puzzled = false);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its

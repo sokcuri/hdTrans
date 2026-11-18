@@ -25,7 +25,7 @@ cx:novel-fixes-2:430	わがままを言うな。	!rule:cx:novel-fixes-2:430	keep
 sense:落ち着く	五日後、熱も落ち着く頃には	has:열도 가라앉는	fix	senses
 sense:落ち着く	少し落ち着いて話そう。	has:침착해	keep	senses
 dict:jisjk:93098	そんな、王子様に我儘お嬢様は一目ぼれ、そのままひたすら王子様にべったり付きまとった。	has:찰싹 따라다녔다	fix	lookup
-dict:jisjk:368901	「こんにちはお加減はいかがですか？クラエス嬢」	has:몸 상태는 어떻습니까	fix	lookup
+dict:jisjk:368901	「こんにちはお加減はいかがですか？クラエス嬢」	has:몸 상태는 어	fix	lookup
 dict:w:31044	カタリナ・クラエス、御年八歳。	has:올해	fix	lookup
 dict:w:31045	前世の私は少しばかりやんちゃな子供だった。	has:조금 장난스러운	fix	lookup
 dict:w:31046	初めの方こそ「女の子なのに」と言っていた母も	has:처음이야말로	fix	lookup

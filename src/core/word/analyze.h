@@ -81,6 +81,9 @@ struct Settings {
     // Text path: the last character of the line's text before the chunk, white space
     // aside; empty for the first chunk.
     std::string_view before;
+    // Text path: the source text of the line before the chunk, from the start of its column (a call
+    // answered in the chunk before: え？　なんですか).
+    std::string_view lineBefore;
     // Text path: the depth of 「」 and 『』 open at the start of the chunk.
     int quoteDepth = 0;
     // Text path: the quotes of the line opened outside any quote before the chunk, and the styles
@@ -107,6 +110,9 @@ struct Settings {
     // humble-line and threat-line.
     bool humbleLine = false;
     bool threatLine = false;
+    // Text path: the line holds a set phrase that the phrase layer writes in 합쇼체 (speech.set-cue: ようこそ
+    // 어서 오십시오), read by the construction feature set-line.
+    bool setLine = false;
     // Text path: the line speaks in the formal ます style or a set phrase of formality (speech.formal-cue), read by the
     // construction feature formal-line.
     bool formalLine = false;

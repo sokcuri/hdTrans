@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 sound:tte-named	ドキドキって言葉	두근두근이라는 말	fix	sound
 sound:tte-named	ドキドキって何？	두근두근이 뭐야?	fix	sound
 sound:tte-named	「スパって何だ？」	has:싹둑은 뭐야	fix	sound
-sound:tte-named	「ダメですよ！　それにペコってなんですか？」	has:꾸벅은 뭡니까	fix	sound
+sound:tte-named	「ダメですよ！　それにペコってなんですか？」	has:꾸벅은 뭐예요	fix	sound
 sound:tte-named	どきどきってなに？	has:두근두근이 뭐	fix	sound
 sound:tte-named	ドキッて何？	has:철렁이 뭐	fix	sound
 sound:tte-named	ドキドキってなんなの？	has:두근두근은 뭐야	fix	sound

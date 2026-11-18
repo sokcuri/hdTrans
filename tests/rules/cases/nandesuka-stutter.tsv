@@ -1,13 +1,13 @@
 # 규칙: LEX-6101
 rule	input	expected	kind	layer
-cx:nan-copula-pause:10	「は、はい……な、なんでしょう？」	has:네……뭐, 뭐죠?	fix	rewrites
-cx:nan-copula-pause:10	あーっ、え…なんでしょう…	has:어…무엇이죠…	fix	rewrites
-cx:nan-copula-pause:20	「え……なんでしょうか？」	has:……뭐죠?	fix	rewrites
-restore:stutter-comma	「な、なんでしょう？」	「뭐, 뭐죠?」	fix	restore
-restore:stutter-comma	「はい？　な、なんでしょう」	has:뭐, 뭐죠	fix	restore
+cx:nan-copula-pause:10	「は、はい……な、なんでしょう？」	has:네……무, 무슨 일이세요?	fix	rewrites
+cx:nan-copula-pause:10	あーっ、え…なんでしょう…	has:어…뭘까요…	fix	rewrites
+cx:nan-copula-pause:20	「え……なんでしょうか？」	has:어……무슨 일이세요?	fix	rewrites
+restore:stutter-comma	「な、なんでしょう？」	has:「뭐, 뭐죠?」	fix	restore
+restore:stutter-comma	「はい？　な、なんでしょう」	has:네? 무, 무슨 일이세요	fix	restore
 restore:stutter-comma	「疑問……ですか？　な、なんでしょう？」	has:뭐, 뭐죠?	fix	restore
-restore:stutter-comma	な、なんでしょう？	무, 무엇이죠?	fix	restore
-compose:stutter-spoken	「な、何ですか？」	「뭐, 뭡니까?」	fix	compose
+restore:stutter-comma	な、なんでしょう？	뭐, 뭐죠?	fix	restore
+compose:stutter-spoken	「な、何ですか？」	has:「뭐, 뭐예요?」	fix	compose
 compose:stutter-spoken	「な、何を根拠に」	has:뭐, 뭘 근거로	fix	compose
 compose:stutter-spoken	「な……なにを……」	「뭐……뭘……」	fix	compose
 compose:stutter-spoken	「な、なんだろうなぁ」	has:뭐, 뭘까	fix	compose
@@ -20,13 +20,13 @@ attr:pause-stutter	や、やられました…ま…まだ、任務は続行出�
 attr:pause-stutter	天城、本当にびっくりしました…べっ、別に怖くはないです…	has:놀랐습니다…	fix	local
 compose:stutter-spoken	「む、無理だよ」	has:무, 무리	keep	compose
 compose:stutter-spoken	「な、何だ？」	「뭐, 뭐야?」	keep	compose
-cx:nan-copula-pause:10	「はい、なんでしょう？」	「네, 뭐죠?」	keep	rewrites
+cx:nan-copula-pause:10	「はい、なんでしょう？」	has:「네, 무슨 일이세요?」	keep	rewrites
 cx:nan-copula-pause:10	先生なんでしょう？	선생님이죠?	keep	rewrites
 cx:nan-copula-pause:20	これは本なんでしょうか	has:책	keep	rewrites
 attr:pause-stutter	「すごい……たくさんかかって」	「대단해……많이 걸려」	keep	local
 attr:pause-stutter	「あ、あの」	「저, 저기」	keep	local
-cx:nan-copula-pause:10	「あーっ、え…なんでしょう…」	has:어…뭐죠…	fix	rewrites
-cx:nan-copula-pause:20	ええと……なんでしょうか	음……무엇이지요	fix	rewrites
+cx:nan-copula-pause:10	「あーっ、え…なんでしょう…」	has:어…뭘까요…	fix	rewrites
+cx:nan-copula-pause:20	ええと……なんでしょうか	has:음……뭘까요	fix	rewrites
 cx:nan-copula-pause:10	うーん……なんでしょうね	lacks:……이지요	fix	rewrites
 cx:nan-copula-pause:20	そう……なんでしょうか	lacks:무엇	keep	rewrites
 cx:nan-copula-pause:10	好き……なんでしょう	lacks:무엇	keep	rewrites

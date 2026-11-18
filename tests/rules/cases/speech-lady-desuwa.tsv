@@ -13,4 +13,4 @@ ending:lady-desuwa	ひどいですわ	심해요	keep	builtin-ending
 ending:lady-desuwa	よろしいですわ	좋아요	keep	builtin-ending
 dict:gram:desuno:1	何ですの	뭐예요	fix	lookup
 dict:gram:desuno:1	それは何ですの？	그것은 뭐예요?	fix	lookup
-dict:gram:desuno:1	何ですか？	무엇입니까?	keep	lookup
+dict:gram:desuno:1	何ですか？	has:뭐예요?	keep	lookup

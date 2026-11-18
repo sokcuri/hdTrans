@@ -447,6 +447,8 @@ constexpr NamedFeature kFeatures[] = {
     // threat or command (speech.threat-cue: 貴様, せよ, 斬る).
     {"humble-line", [](Flusher& f, const Item*) { return f.w.settings.humbleLine; }},
     {"threat-line", [](Flusher& f, const Item*) { return f.w.settings.threatLine; }},
+    // The line holds a set phrase written in 합쇼체 (speech.set-cue: ようこそ 어서 오십시오).
+    {"set-line", [](Flusher& f, const Item*) { return f.w.settings.setLine; }},
     {"formal-line", [](Flusher& f, const Item*) { return f.w.settings.formalLine; }},
     // The line speaks of food or drink (word.taste-cue): what お試し asks for is a taste.
     {"taste-line", [](Flusher& f, const Item*) { return f.w.settings.tasteLine; }},
@@ -454,6 +456,10 @@ constexpr NamedFeature kFeatures[] = {
     {"old-self-line", [](Flusher& f, const Item*) { return f.w.settings.oldSelfLine; }},
     // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.
     {"after-wonder", [](Flusher& f, const Item* it) { return AfterWonder(f.w, it); }},
+    // The line before the word ends in a word that answers a call and a mark (はい、, え？): AfterCallReply.
+    {"after-call-reply", [](Flusher& f, const Item* it) { return AfterCallReply(f.w, it); }},
+    // The same with a word that is no answer and a question mark (え？): AfterCallReply with puzzled.
+    {"after-puzzled-question", [](Flusher& f, const Item* it) { return AfterCallReply(f.w, it, true); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"after-space", [](Flusher& f, const Item* it) {
@@ -527,6 +533,8 @@ constexpr NamedFeature kFeatures[] = {
     {"casual-level", CasualLevel},
     // The word's speech is 해요체 or 합쇼체 (PoliteLevel).
     {"polite-level", PoliteLevel},
+    // The word's speech is 합쇼체: the speech-level stage keeps the line formal (spec REG-4).
+    {"formal-level", [](Flusher& f, const Item* it) { return SpeechLevel(f, it) == Settings::LineLevel::formal; }},
     // The line is one the speech-level stage writes in 해체 from a plain end of the source (cue key casual), not a
     // line with no cue (spec REG-2).
     {"casual-cue",

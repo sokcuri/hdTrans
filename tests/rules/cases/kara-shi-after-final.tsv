@@ -32,7 +32,7 @@ cx:kara-cause:10	「じゃあ仕事行ってくるから、遅刻しないよう
 cx:kara-cause:5	疲れただろう。	!rule:cx:kara-cause:5	keep	rewrites
 cx:shi-list:9	「念のためセキュリティを解除してみましたが、当然開きませんでしたし」	「만약을 위해 보안을 해제해 보았습니다만, 당연히 열지 않았거든요」	fix	rewrites
 cx:shi-list:9	「では1番も棄権しますわ。私も慰謝料をいただく気はありませんでしたし」	「그럼 1번이나 기권해요. 나도 위자료를 받을 생각은 없었거든요」	fix	rewrites
-cx:shi-list:10	「大丈夫です。店長も、わたしの事情はわかってくれてますし……」	「괜찮습니다. 점장도, 내 사정은 알아 주고 있고요……」	fix	rewrites
+cx:shi-list:10	「大丈夫です。店長も、わたしの事情はわかってくれてますし……」	has:알아 주고 있고요	fix	rewrites
 cx:shi-list:10	まわりのブースにご迷惑かけちゃいましたし。	주위의 부스에 폐 끼쳐버렸고요.	fix	rewrites
 cx:shi-list:9	「はい。佐藤先輩もその様子を見て、ニコニコされてますし」	「네. 사토 선배도 그 상태를 보고, 싱글벙글되고 있거든요」	fix	rewrites
 cx:shi-list:10	「ゆうちゃんも今言ってましたし……」	「유짱도 지금 말했고요……」	fix	rewrites

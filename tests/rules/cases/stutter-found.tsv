@@ -73,7 +73,7 @@ normalize:question-n	これなんなん？	has:뭐야?	fix	normalize
 normalize:question-n	これなんなん	has:뭐야	fix	normalize
 normalize:question-n	なんなん？	뭐야?	keep	normalize
 normalize:question-n	なんなんだ	뭐야	keep	normalize
-normalize:question-n	なんなんですか	무엇입니까	keep	normalize
+normalize:question-n	なんなんですか	has:뭐예요	keep	normalize
 dict:nan-copula	これなんなの？	has:뭐야?	fix	local
 dict:nan-copula	「ええ……なんなの……？」	has:뭐야……?	fix	local
 dict:nan-copula	「アンタ……なんなのよ……」	has:뭐야	fix	local
@@ -108,7 +108,7 @@ normalize:question-n	これ、なんなん	이것, 뭐야	fix	normalize
 normalize:question-n	なんなん拓也	has:타쿠야	keep	normalize
 normalize:question-n	なんなん、ななみ	has:나나미	keep	normalize
 normalize:question-n	なんなんだよ	뭐야	keep	normalize
-normalize:question-n	なんなんすか	무엇입니까	keep	normalize
+normalize:question-n	なんなんすか	has:뭐예요	keep	normalize
 normalize:question-n	なんなんか？	무엇인가?	keep	normalize
 normalize:question-n	そんなん	그런	keep	normalize
 normalize:question-n	なんなんとう	남남동	keep	normalize

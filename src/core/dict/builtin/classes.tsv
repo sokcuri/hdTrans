@@ -519,6 +519,7 @@
 //= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
 //= speech.threat-cue	Text of a line that threatens or commands an inferior (貴様, おのれ, せよ, 斬る, ぞ！): its 拙者 is 나, not 소인 (spec LEX-23).
+//= speech.set-cue	Text of a line that holds a set phrase the phrase layer writes in 합쇼체 (ようこそ 어서 오십시오): outside quotes the 何ですか family keeps its 무엇입니까 there (spec REG-30).
 //= speech.old-self-cue	Text of a line of old speech in which a 妾 is the speaker, 이 몸, not a concubine (わらわ, also as a reading of 妾, じゃ, ておる, おぬし, そなた; spec LEX-4683).
 //= speech.old-self-lookalike	Text that holds a member of speech.old-self-cue and is no old speech (じゃない, じゃあ, それじゃ).
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
@@ -711,6 +712,8 @@
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
 //= word.reciprocal-to	Starts of the verbs and verbal nouns of doing something with a partner (fighting, marrying, meeting, exchanging, discussing), before which a と after a quotation is the partner, not the quoting (『男友達みたいな女』と浮気してた 와 바람피우던).
 //= word.pause-filler	Fillers read apart before a source space; a longer word containing them is not a member.
+//= word.call-reply	Words that answer a call (はい, うん, え): a bare 何ですか or 何でしょう after one asks what the caller wants, 왜요 or 무슨 일이세요 (spec REG-30) The answers that the phrase layer writes before the word stage are listed as written (はいっ 네).
+//= word.puzzled	Words of puzzlement (え, あれ, へ) that, said with a question mark before a bare 何でしょう, make it wonder: 뭘까요 (spec REG-32). The interjections that the phrase layer writes before the word stage are listed as written (あれ？ 어라?, あら？ 어머?, んー？ 음?).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -9986,6 +9989,41 @@ word.pause-filler	はい
 word.pause-filler	いや
 word.pause-filler	まあ
 word.pause-filler	まぁ
+word.call-reply	はい
+word.call-reply	네
+word.call-reply	응
+word.call-reply	네에
+word.call-reply	はーい
+word.call-reply	ええ
+word.call-reply	うん
+word.call-reply	え
+word.call-reply	えっ
+word.call-reply	へ
+word.call-reply	へっ
+word.call-reply	ん
+word.call-reply	んっ
+word.call-reply	はっ
+word.call-reply	あ
+word.call-reply	あっ
+word.call-reply	あの
+word.call-reply	あのう
+word.call-reply	あのー
+word.puzzled	え
+word.puzzled	えっ
+word.puzzled	へ
+word.puzzled	へっ
+word.puzzled	は
+word.puzzled	はっ
+word.puzzled	ん
+word.puzzled	んっ
+word.puzzled	あれ
+word.puzzled	あれっ
+word.puzzled	あら
+word.puzzled	おや
+word.puzzled	어라
+word.puzzled	어라라
+word.puzzled	어머
+word.puzzled	음
 
 word.recall-interjection	あ
 word.recall-interjection	あっ
@@ -13323,6 +13361,7 @@ noun.itasu-state	得心
 noun.itasu-state	納得
 noun.itasu-state	満足
 noun.itasu-state	感激
+speech.set-cue	ようこそ
 speech.threat-cue	貴様
 speech.threat-cue	おのれ
 speech.threat-cue	そち

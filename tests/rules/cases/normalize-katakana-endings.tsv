@@ -24,7 +24,7 @@ normalize:katakana-endings	場所をわきまえなヨー！	장소를 분별해
 normalize:katakana-endings	英国式カレーが出来上がったヨー、召し上がれ♪	영국식 카레가 다됐어~, 드세요♪	fix	normalize
 normalize:katakana-endings	Chocolates! 持ってきたヨー！	Chocolates! 가져왔어~!	fix	normalize
 normalize:katakana-endings	なぜ逃げるデース！？	왜 도망칩니다~!?	fix	normalize
-normalize:katakana-endings	お返しは何ですカー？	답례는 무엇입니까~?	fix	normalize
+normalize:katakana-endings	お返しは何ですカー？	has:답례는 뭐예요~?	fix	normalize
 normalize:katakana-endings	午前九時デース。Japanese breakfast、堪能シマシター	오전 9시입니다~. Japanese breakfast, 만끽했습니다~	fix	normalize
 normalize:katakana-endings	午前零時justデース！	오전 0시 just입니다~!	fix	normalize
 normalize:katakana-endings	New faceが登場したヨー！	New face가 등장했어~!	fix	normalize

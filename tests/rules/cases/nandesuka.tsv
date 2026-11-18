@@ -1,37 +1,37 @@
 # 규칙: LEX-6100
 rule	input	expected	kind	layer
-L14820	「森下さんの趣味はなんなのですか？」	has:취미는 뭡니까?	fix	local
-L14820	「その左手に持っている袋はなんなのですか？」	has:봉투는 뭡니까?	fix	local
-L14820	「それは……なんなのですか？」	has:그건……뭡니까?	fix	local
-L14820	「でー、ちーちゃんのメインイベントとは、なんなのですかー？」	has:이벤트란, 뭡니까	fix	local
-L14820	「では、我が家はなんなのですか。」	has:우리 집은 무엇입니까.	fix	local
-L14820	「なんなんですか……？」	「뭡니까……?」	fix	local
-L14820	「なんなんですか、その奇妙な本は」	has:뭡니까, 그 기묘한 책은	fix	local
-L14820	「一体なんなんですか、これ」	has:도대체 뭡니까	fix	local
-L14820	「アラタ、マジでなんなんですかこの野蛮な生き物……」	has:진짜로 뭡니까	fix	local
-L14820	マジなんなんですか	has:진짜 무엇입니까	fix	local
-L14820	「これは、なんなんでしょうか？」	has:이건, 뭡니까?	fix	local
+L14820	「森下さんの趣味はなんなのですか？」	has:취미는 뭐예요?	fix	local
+L14820	「その左手に持っている袋はなんなのですか？」	has:봉투는 뭐예요?	fix	local
+L14820	「それは……なんなのですか？」	has:그건……뭐예요?	fix	local
+L14820	「でー、ちーちゃんのメインイベントとは、なんなのですかー？」	has:이벤트란, 뭐예요	fix	local
+L14820	「では、我が家はなんなのですか。」	has:우리 집은 뭐예요.	fix	local
+L14820	「なんなんですか……？」	has:「뭐예요……?」	fix	local
+L14820	「なんなんですか、その奇妙な本は」	has:뭐예요, 그 기묘한 책은	fix	local
+L14820	「一体なんなんですか、これ」	has:도대체 뭐예요	fix	local
+L14820	「アラタ、マジでなんなんですかこの野蛮な生き物……」	has:진짜로 뭐예요 이	fix	local
+L14820	マジなんなんですか	has:진짜 뭐예요	fix	local
+L14820	「これは、なんなんでしょうか？」	has:이건, 뭘까요?	fix	local
 L14820	なんなのでしょうか？	무엇일까요?	fix	local
-L14820	なんなんすか！	무엇입니까!	fix	local
+L14820	なんなんすか！	has:뭐예요!	fix	local
 L14820	細胞を培養するファイバとは一体 なんなのか？	has:도대체 무엇인가?	fix	local
-dict:nandesuka	攻撃者の狙いは何なのでしょうか。	has:목적은 무엇일까요.	fix	lookup
+dict:nandesuka	攻撃者の狙いは何なのでしょうか。	has:목적은 뭘까요.	fix	lookup
 dict:nandesuka	「大人と子供という対立構造は何なのでしょうか」	has:구조는 뭘까요	fix	lookup
-dict:nandesuka	陸とか海とか一体何なのでしょうなー	has:도대체 무엇일까요	fix	lookup
-dict:nandesuka	何なのですか！	무엇입니까!	fix	lookup
-dict:nandesuka	「森下さんの趣味は何なのですか？」	has:취미는 뭡니까?	fix	lookup
-dict:nandesuka	あれとはなんですか？	has:무엇입니까?	fix	lookup
+dict:nandesuka	陸とか海とか一体何なのでしょうなー	has:도대체 뭘까요	fix	lookup
+dict:nandesuka	何なのですか！	has:뭐예요!	fix	lookup
+dict:nandesuka	「森下さんの趣味は何なのですか？」	has:취미는 뭐예요?	fix	lookup
+dict:nandesuka	あれとはなんですか？	has:뭐예요?	fix	lookup
 L14820	「何なの？」	「뭐야?」	keep	local
 L14820	「なんなんだ！」	「뭐야!」	keep	local
 L14820	「なんなんだろうな」	「뭘까」	keep	local
 L14820	何なのよ！	뭐야!	keep	local
-L14820	「何ですか？」	「뭡니까?」	keep	local
-L14820	「なんでしょう？」	「뭐죠?」	keep	local
+L14820	「何ですか？」	has:「뭐예요?」	keep	local
+L14820	「なんでしょう？」	has:「뭐죠?」	keep	local
 L14820	それが何なのか知りたい。	그것이 무엇인지 알고 싶다.	keep	local
 L14820	いきなりなんなんですが、お願いがあります。	lacks:무엇	keep	local
 L14820	ナンなんですか？	lacks:무엇	keep	local
 L14820	誰なのですか？	누구입니까?	keep	local
 L14820	なんなんですの？	has:무엇인가요?	keep	local
-L14820	「では、我が家はなんなのですか。娘をなんだと思っておられたのですか」	has:우리 집은 무엇입니까.	fix	local
+L14820	「では、我が家はなんなのですか。娘をなんだと思っておられたのですか」	has:우리 집은 뭡니까.	fix	local
 L14821	なんなのでしたか？	무엇이었습니까?	fix	local
 L14821	なんなのでございますか	무엇입니까	fix	local
 L14821	なんなのでしょ？	무엇이지?	fix	local
@@ -47,30 +47,30 @@ L14824	何なのですね	무엇이군요	fix	local
 L14824	何なのでしたか？	무엇이었습니까?	fix	local
 L14824	何なのでございますか	무엇입니까	fix	local
 L14824	何なのです！	무엇입니다!	fix	local
-L14824	何なのですかこれ	무엇입니까 이것	fix	local
+L14824	何なのですかこれ	has:뭐예요 이것	fix	local
 L14824	何なの？	뭐야?	keep	local
 L14824	何なのか	무엇인지	keep	local
 L14824	何なのだろう	뭘까	keep	local
 L14825	「彼女がよく言う、大人と子供という対立構造は何なのでしょうか」	has:대립 구조는 뭘까요	fix	local
-L14825	ヒトナナマルマル。提督殿、陸とか海とか一体何なのでしょうなー	has:도대체 무엇일까요	fix	local
+L14825	ヒトナナマルマル。提督殿、陸とか海とか一体何なのでしょうなー	has:도대체 뭘까요	fix	local
 L14825	何なのでしょ？	lacks:뭐야	fix	local
 normalize:nsu	兄貴、知らないんすか。前の先生は一般街区担当になったんっすよ。	has:담당이 된 거예요.	fix	normalize
-normalize:nsu	なんなんっすか？	무엇입니까?	fix	normalize
-normalize:nsu	何なんっすか	무엇입니까	fix	normalize
+normalize:nsu	なんなんっすか？	has:뭐예요?	fix	normalize
+normalize:nsu	何なんっすか	has:뭐예요	fix	normalize
 normalize:nsu	誰なんっすか	누구입니까	fix	normalize
 normalize:nsu	好きなんっすか	lacks:입니다인가	fix	normalize
 normalize:nsu	ハルカなんっすか	has:하루카	keep	normalize
 cx:lc3h-nanodesuka:05	誰なのですかあなたは	누구입니까 당신은	fix	rewrites
-cx:lc3h-nanodesuka:05	なんなのですかこれは	무엇입니까 이것은	fix	rewrites
-cx:lc3h-nanodesuka:05	「アラタ、マジでなんなんですかこの野蛮な生き物……」	has:뭡니까 이	keep	rewrites
+cx:lc3h-nanodesuka:05	なんなのですかこれは	has:뭐예요 이것은	fix	rewrites
+cx:lc3h-nanodesuka:05	「アラタ、マジでなんなんですかこの野蛮な生き物……」	has:뭐예요 이	keep	rewrites
 cx:lc3h-nanodesuka:10	誰なのですか？	누구입니까?	keep	rewrites
-cx:lc3h-nanodesuka:10	なんなのですか、これ	무엇입니까, 이것	keep	rewrites
-normalize:nsu	何なのっすか	무엇입니까	fix	normalize
-normalize:nsu	なんなのっすか	무엇입니까	fix	normalize
-normalize:nsu	「何なのっすか！」	「뭡니까!」	fix	normalize
-normalize:nsu	何なのッスか	무엇입니까	fix	normalize
-normalize:nsu	これ何なのっすか	이것 무엇입니까	fix	normalize
-normalize:nsu	それ、何なのっすか、先輩	그것, 무엇입니까, 선배	fix	normalize
+cx:lc3h-nanodesuka:10	なんなのですか、これ	has:뭐예요, 이것	keep	rewrites
+normalize:nsu	何なのっすか	has:뭐예요	fix	normalize
+normalize:nsu	なんなのっすか	has:뭐예요	fix	normalize
+normalize:nsu	「何なのっすか！」	has:「뭐예요!」	fix	normalize
+normalize:nsu	何なのッスか	has:뭐예요	fix	normalize
+normalize:nsu	これ何なのっすか	has:뭐예요	fix	normalize
+normalize:nsu	それ、何なのっすか、先輩	has:뭐예요, 선배	fix	normalize
 normalize:nsu	誰なのっすか	누구입니까	fix	normalize
 normalize:nsu	学生なのっすか	학생입니까	fix	normalize
 normalize:nsu	本当なのっすか	사실입니까	fix	normalize

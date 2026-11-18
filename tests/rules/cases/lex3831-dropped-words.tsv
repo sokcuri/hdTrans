@@ -7,10 +7,10 @@ L4198	それってなんだろう	그게 무엇일까	fix	local
 L4198	愛ってなんだろう	사랑은 무엇일까	keep	local
 L4198	彼は医者なんだろう	그는 의사겠지	keep	local
 L4198	きっと本当なんだろうね	분명 사실이겠지	keep	local
-L3729	強さってなんですか	강함은 무엇입니까	fix	local
-L3729	生きるってなんですか	산다는 것은 무엇입니까	fix	local
-L3729	それってなんですか	그게 무엇입니까	fix	local
-L3729	これは何ですか	이것은 무엇입니까	keep	local
+L3729	強さってなんですか	has:강함은 뭐예요	fix	local
+L3729	生きるってなんですか	has:산다는 것은 뭐예요	fix	local
+L3729	それってなんですか	has:그게 뭐예요	fix	local
+L3729	これは何ですか	has:이것은 뭐예요	keep	local
 dict:lex:3831:onnaji-3	せつない毎日もおんなじ	안타까운 매일도 같다	fix	local
 dict:lex:3831:onnaji-3	おんなじ顔	같은 얼굴	fix	local
 dict:lex:3831:onnaji-3	おんなじだね	같네	keep	local

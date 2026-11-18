@@ -1,0 +1,131 @@
+# 규칙: REG-30, REG-31, REG-32, REG-33
+rule	input	expected	kind	layer
+cx:nandesuka-style:13	「この部屋はなんですか？」	「이 방은 뭐예요?」	fix	rewrites
+cx:nandesuka-style:13	「無効の理由は何ですか？」	「무효의 이유는 뭐예요?」	fix	rewrites
+cx:nandesuka-style:13	「Ａ定食ってなんですか？」	「A정식은 뭐예요?」	fix	rewrites
+cx:nandesuka-style:13	「なんですか……それ？」	「뭐예요……그거?」	fix	rewrites
+cx:nandesuka-style:13	「え、何ですかこれ」	has:어, 뭐예요 이거	fix	rewrites
+cx:nandesuka-style:13	「なんですかこの展開」	「뭐예요 이 전개」	fix	rewrites
+cx:nandesuka-style:13	司令官の夢はなんですか？	사령관의 꿈은 뭐예요?	fix	rewrites
+cx:nandesuka-style:41	「何なんですか！」	「뭐예요!」	fix	rewrites
+cx:nandesuka-style:41	「それってなんなんですか？」	「그게 뭐예요?」	fix	rewrites
+cx:nandesuka-style:41	「何なのですか、あなたは」	「뭐예요, 당신은」	fix	rewrites
+cx:nandesuka-style:38	な、何なんですかこの人！？	뭐, 뭐예요 이 사람!?	fix	rewrites
+cx:nandesuka-style:42	「森下さんの趣味はなんなのですか？」	has:취미는 뭐예요?	fix	rewrites
+cx:nandesuka-style:11	「かしこまりました。ご用件は何ですか？」	「알겠습니다. 용건은 뭡니까?」	fix	rewrites
+cx:nandesuka-style:10	「はい、なんですか？」	「네, 왜요?」	fix	rewrites
+cx:nandesuka-style:10	「え？　なんですか？」	「어? 왜요?」	fix	rewrites
+cx:nandesuka-style:10	「提督、何ですか？」	「제독, 왜요?」	fix	rewrites
+cx:nandesuka-style:10	「何ですか、拓也」	「왜요, 타쿠야」	fix	rewrites
+cx:nandesuka-style:10	「花子さん、何ですか？」	「하나코 씨, 왜요?」	fix	rewrites
+cx:nandesuka-style:13	「何ですか、あなたは」	「뭐예요, 당신은」	keep	rewrites
+cx:nandesuka-style:12	「まあ、なんですかね？」	「뭐, 뭘까요?」	fix	rewrites
+cx:nandesuka-style:20	提督、なんでしょう？	제독, 무슨 일이세요?	fix	rewrites
+cx:nandesuka-style:21	「なんでしょう」	lacks:무슨 일	keep	rewrites
+cx:nandesuka-style:20	なんでしょう、提督。	무슨 일이세요, 제독.	fix	rewrites
+cx:nandesuka-style:30	「はい、何でしょうか」	「네, 무슨 일이세요」	fix	rewrites
+cx:nandesuka-style:30	「拓也くん、何でしょう？」	「타쿠야 군, 무슨 일이세요?」	fix	rewrites
+cx:nandesuka-style:20	「提督…なんでしょう？」	「제독…무슨 일이세요?」	fix	rewrites
+cx:nandesuka-style:31	「え？　何でしょう？　忍耐力とか？」	「어? 뭘까요? 참을성이라든지?」	fix	rewrites
+cx:nandesuka-style:21	「さぁ、なんでしょうね。」	「자, 뭘까요.」	fix	rewrites
+cx:nandesuka-style:21	「さて、中にあるのはなんでしょう？」	lacks:무슨 일	keep	rewrites
+cx:nandesuka-style:31	「何でしょうね」	「뭘까요」	fix	rewrites
+cx:nandesuka-style:31	そもそも理由というのは何なんでしょうか？	애초에 이유라는 것은 뭘까요?	fix	rewrites
+cx:nandesuka-style:21	なんでしょう…何か今年も乗り越えた気がします。	has:뭘까요…	fix	rewrites
+cx:nandesuka-style:21	「ズッキューン…………なんでしょう今の感じ。」	has:뭘까요 지금	fix	rewrites
+cx:nandesuka-style:29	「失礼いたします。これは何でしょうか？」	「실례하겠습니다. 이건 뭡니까?」	fix	rewrites
+cx:nandesuka-style:50	これ何ですか？	이거 뭐예요?	fix	rewrites
+cx:nandesuka-style:21	すぐにピッチャー交代というのはないということなんでしょうけど	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:21	「好き……なんでしょう、たぶん」	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:13	『図書部の守るべきもの』とは何か。	『도서부가 지켜야 할 것』이란 무엇인가.	keep	rewrites
+cx:nandesuka-style:13	「それって何？」	「그게 뭐야?」	keep	rewrites
+cx:nandesuka-style:13	「何か用ですか？」	!rule:cx:nandesuka-style:13	keep	rewrites
+cx:nandesuka-style:13	「何人ですか？」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:10	「ゆうこ、なんですか？」	has:유우코	keep	rewrites
+cx:nandesuka-style:10	「南、なんですか？」	has:미나미	keep	rewrites
+cx:nandesuka-style:9	「失礼いたします。はい、何ですか？」	has:네, 무슨 일이십니까?	fix	rewrites
+cx:nandesuka-style:9	「かしこまりました。はい、何ですか？」	has:네, 무슨 일이십니까?	fix	rewrites
+cx:nandesuka-style:9	「かしこまりました。はい、何かありますか？」	has:뭔가 있	keep	rewrites
+cx:nandesuka-style:10	「わかった。はい、なんですか？」	「알았다. 네, 왜요?」	fix	rewrites
+cx:nandesuka-style:10	「わかった。え？　なんですか？」	「알았다. 어? 왜요?」	fix	rewrites
+cx:nandesuka-style:11	「かしこまりました。何か用ですか？」	has:무슨 볼일	keep	rewrites
+cx:nandesuka-style:12	「何人ですかね」	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:18	「失礼いたします。はい、なんでしょうか？」	has:네, 무슨 일이십니까?	fix	rewrites
+cx:nandesuka-style:18	「失礼いたします。はい、どうでしょうか？」	has:어떨까요	keep	rewrites
+cx:nandesuka-style:19	「かしこまりました。それはなんでしょうか？」	has:그건 뭡니까?	fix	rewrites
+cx:nandesuka-style:19	「かしこまりました。明日なんでしょうか？」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:20	「明日なんでしょう？」	lacks:무슨 일	keep	rewrites
+cx:nandesuka-style:28	「失礼いたします。はい、何でしょうか？」	has:네, 무슨 일이십니까?	fix	rewrites
+cx:nandesuka-style:28	「失礼いたします。はい、何でもいいでしょうか？」	has:뭐든지	keep	rewrites
+cx:nandesuka-style:29	「失礼いたします。何でもいいでしょう」	has:뭐든지	keep	rewrites
+cx:nandesuka-style:30	「はい、何かありますか？」	has:뭔가 있	keep	rewrites
+cx:nandesuka-style:31	「何でもいいでしょう」	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:38	「何なんだ、この人」	「뭐야, 이 사람」	keep	rewrites
+cx:nandesuka-style:39	「失礼いたします。趣味はなんなのですか？」	has:취미는 뭡니까?	fix	rewrites
+cx:nandesuka-style:39	「失礼いたします。何なのか分かりません」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:40	「失礼いたします。それは何なのですか？」	has:그건 뭡니까?	fix	rewrites
+cx:nandesuka-style:40	「失礼いたします。何なのですね」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:41	「それ何なの？」	「그거 뭐야?」	keep	rewrites
+cx:nandesuka-style:42	「何なのですから」	「뭐니까요」	keep	rewrites
+cx:nandesuka-style:43	「なんっすか、先輩」	「뭐예요, 선배」	fix	rewrites
+cx:nandesuka-style:43	「なんっすか？」	「뭐예요?」	fix	rewrites
+cx:nandesuka-style:43	「そうなんっすか？」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:50	「これ何？」	「이거 뭐?」	keep	rewrites
+cx:nandesuka-style:50	「これ何個ですか？」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:35	「失礼いたします。何なんですかこの人」	has:뭡니까 이 사람	fix	rewrites
+cx:nandesuka-style:35	「失礼いたします。何なんだ、この人」	has:뭐야, 이 사람	keep	rewrites
+cx:nandesuka-style:36	「失礼いたします。なんなのですかこれは」	has:뭡니까 이건	fix	rewrites
+cx:nandesuka-style:36	「失礼いたします。なんなのですから」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:37	「なんなのですかこれは」	「뭐예요 이건」	fix	rewrites
+cx:nandesuka-style:37	「なんなのですかあの人は」	「뭐예요 그 사람은」	fix	rewrites
+cx:nandesuka-style:37	「なんなのですか、それは」	「뭐예요, 그건」	keep	rewrites
+cx:nandesuka-style:20	「は、はい……な、なんでしょう？」	has:네……무, 무슨 일이세요?	fix	rewrites
+cx:nandesuka-style:10	「はい……な、なんですか？」	has:네……왜, 왜요?	fix	rewrites
+cx:nandesuka-style:21	「え？　な、なんでしょう？」	has:어? 뭐, 뭘까요?	keep	rewrites
+cx:nandesuka-style:44	「かしこまりました。お名前はなんです？」	has:이름은 뭡니까?	fix	rewrites
+cx:nandesuka-style:44	「失礼いたします。私は学生なんです？」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:45	「はい、なんです？」	「네, 왜요?」	fix	rewrites
+cx:nandesuka-style:45	「提督、なんです？」	「제독, 왜요?」	fix	rewrites
+cx:nandesuka-style:45	「はい、そうなんです？」	lacks:왜요	keep	rewrites
+cx:nandesuka-style:46	「猫ってなんです？」	「고양이는 뭐예요?」	fix	rewrites
+cx:nandesuka-style:46	「これはなんです？」	「이건 뭐예요?」	fix	rewrites
+cx:nandesuka-style:52	「なんです？」	「뭐예요?」	fix	rewrites
+cx:nandesuka-style:46	「本当なんです？」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:46	「そうなんです」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:47	「失礼いたします。これはなんでしょうか？」	has:이건 뭡니까?	fix	rewrites
+cx:nandesuka-style:47	「失礼いたします。あれは嘘なんでしょう？」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:48	「それってなんでしょうね」	「그게 뭘까요」	fix	rewrites
+cx:nandesuka-style:48	「愛ってなんでしょう」	「사랑은 뭘까요」	fix	rewrites
+cx:nandesuka-style:48	「彼女って素敵なんでしょうね」	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:48	「あれは嘘なんでしょう？」	lacks:뭘까요	keep	rewrites
+cx:nandesuka-style:49	「名前はなんだっけ」	「이름은 뭐였더라」	fix	rewrites
+cx:nandesuka-style:49	「猫ってなんだっけ」	「고양이는 뭐였더라」	fix	rewrites
+cx:nandesuka-style:49	「あれは誰だっけ」	lacks:뭐였더라	keep	rewrites
+cx:nandesuka-style:52	「…なんです？」	「…뭐예요?」	fix	rewrites
+cx:nandesuka-style:52	「そうなんです？」	lacks:뭐예요	keep	rewrites
+cx:nandesuka-style:51	「失礼いたします。なんです？」	has:뭡니까?	fix	rewrites
+cx:nandesuka-style:51	「失礼いたします。本当なんです？」	lacks:뭡니까	keep	rewrites
+cx:nandesuka-style:49	羊飼いってなんだっけ？	양치기는 뭐였더라?	fix	rewrites
+cx:nandesuka-style:45	「はい…なんです？」	「네…왜요?」	fix	rewrites
+cx:nandesuka-style:21	「なんでしょう」	!rule:cx:nandesuka-style:21	keep	rewrites
+cx:nandesuka-style:21	「なんでしょうか」	!rule:cx:nandesuka-style:21	keep	rewrites
+cx:nandesuka-style:21	「どうせ、エッチなことも続けるつもりなんでしょう」	!rule:cx:nandesuka-style:21	keep	rewrites
+cx:nandesuka-style:21	「ズッキューン…………なんでしょう今の感じ。」	has:뭘까요 지금	fix	rewrites
+cx:nandesuka-style:22	なんでしょう。	뭐죠.	fix	rewrites
+cx:nandesuka-style:22	なんでしょう	뭐죠	fix	rewrites
+cx:nandesuka-style:22	「なんでしょう」	!rule:cx:nandesuka-style:22	keep	rewrites
+cx:nandesuka-style:10	「何ですか、二人でグルになって。仲がおよろしいことで」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「何ですか、先輩たちで決めたんですか」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「何ですか、提督さん」	has:왜요, 제독님	fix	rewrites
+cx:nandesuka-style:10	「何ですか、拓也くん……」	has:왜요, 타쿠야 군	fix	rewrites
+cx:nandesuka-style:10	何ですか、提督	왜요, 제독	fix	rewrites
+cx:nandesuka-style:10	「何ですか、達也！」	has:왜요, 타츠야	fix	rewrites
+cx:nandesuka-style:42	「わかっているのです……では、森下さんの趣味はなんなのですか？」	has:「알고 있어요……그럼, 모리시타 씨의 취미는 뭐예요?」	fix	rewrites
+cx:nandesuka-style:42	「わかっています……では、森下さんの趣味はなんなのですか？」	has:알고 있어요……그럼	fix	rewrites
+cx:nandesuka-style:13	「わかっています。趣味は何ですか？」	has:「알고 있어요. 취미는 뭐예요?」	fix	rewrites
+cx:nandesuka-style:13	「わかっています。何ですか？」	has:알고 있어요.	fix	rewrites
+cx:nandesuka-style:13	「これは何ですか？　わかっています。」	has:「이건 뭐예요? 알고 있어요.」	keep	rewrites
+cx:nandesuka-style:10	「はい、何ですか、その顔は」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「え？　何ですか、この匂い」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「提督、なんですか、その目は」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「はい、何ですか、あの音」	!rule:cx:nandesuka-style:10	keep	rewrites
