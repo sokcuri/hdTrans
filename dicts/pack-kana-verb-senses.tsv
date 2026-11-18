@@ -14,3 +14,10 @@ kana-verb-senses:14727	おこる	v5	sense	subj=- ending=な	화내다	LEX-6042		
 kana-verb-senses:14728	おこる	v5	sense	subj=- ending=な form=neg	-	LEX-6042		何もおこらない(그대로)		
 kana-verb-senses:14729	おこる	v5	sense	subj=- ending=なんて|など|なら|なり|なあ|なぁ	-	LEX-6042		おこるなんて(그대로)		10
 kana-verb-senses:14723	ひく	v5	sense	obj=@person|@animal	치다	LEX-6042		車で人をひいてしまった 차로 사람을 쳐 버렸다		
+kana-verb-senses:15300	ひく	v5	sense	obj=くじ|クジ|籤|おみくじ|ガチャ|カード|札|貧乏くじ|当たり|ハズレ|はずれ|アタリ|トランプ	뽑다	LEX-6401		カードをひいた 카드를 뽑았다		
+kana-verb-senses:15301	ひく	v5	sense	obj=線|ライン|下線|傍線|線路|一線|境界線|アンダーライン	긋다	LEX-6401		線をひいた 선을 그었다		
+kana-verb-senses:15302	ひく	v5	sense	obj=カーテン|幕|暗幕	치다	LEX-6401		カーテンをひいた 커튼을 쳤다		
+kana-verb-senses:15303	ひく	v5	sense	subj=熱|高熱	내리다	LEX-6401		熱がひいた 열이 내렸다		
+kana-verb-senses:15304	ひく	v5	sense	subj=腫れ|むくみ|潮|水	빠지다	LEX-6401		腫れがひいた 부기가 빠졌다		
+kana-verb-senses:15305	ひく	v5	sense	subj=痛み|汗	가시다	LEX-6401		痛みがひいた 통증이 가셨다		
+kana-verb-senses:15306	ひく	v5	sense	subj=血の気|血	가시다	LEX-6401		血の気がひいた 핏기가 가셨다		
