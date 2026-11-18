@@ -312,6 +312,13 @@ struct Chain {
     // (or, of a later token, whose predecessor has its CrossEnd before it or, on the text
     // path, is of an earlier token).
     int Insert(Item* item, bool overlapping);
+
+private:
+    // Whether the chain is in order of token and then of end, as long as every insert kept it so;
+    // Insert then works from the tail instead of scanning the whole chain.
+    bool sorted = true;
+    void Link(Item* item, Item* before);
+    int InsertSorted(Item* item);
 };
 
 // Objects of one kind, allocated in blocks that are kept for reuse.

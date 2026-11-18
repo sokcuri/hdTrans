@@ -3630,7 +3630,7 @@ namespace {
 bool CheckPrefixTableGate(int group, int& index, std::string_view token, std::string_view sourceTail) {
     auto g = [](int i) { return PrefixGate(i); };
     bool rejected = false;
-    if (group == 1 && index == 6 && WidthOf(sourceTail) >= 4) {
+    if (group == 1 && index == 6 && WidthAtLeast(sourceTail, 4)) {
         if (const Window last = Right(sourceTail, 4); last == g(11) || last == g(12) || last == g(13)) rejected = true;
     }
     const Window two = Cut(token, 2, 2);
@@ -3669,7 +3669,7 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
     // The n width units after byte off of tail, "" when fewer are left.
     auto tailAt = [&](std::size_t off, int n) {
         const std::string_view rest = tail.substr(off);
-        return WidthOf(rest) >= n ? Left(rest, n) : Window{};
+        return WidthAtLeast(rest, n) ? Left(rest, n) : Window{};
     };
     static constexpr int kKinds[] = {0, 9, 11, 13};
     // The と form of する, くる or 来る before おる (切ってきとる, 勉強しとった), as of other verbs (MatchKind):

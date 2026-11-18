@@ -512,7 +512,7 @@ bool Item::MitaiLike() const {
 }
 
 std::string Item::CharBefore() const {
-    if (start <= static_cast<int>(text.size()) && WidthOf(text.substr(0, static_cast<std::size_t>(start))) >= 2) {
+    if (start <= static_cast<int>(text.size()) && WidthAtLeast(text.substr(0, static_cast<std::size_t>(start)), 2)) {
         return Right(text.substr(0, static_cast<std::size_t>(start)), 2).Str();
     }
     if (start != 0) return {};
@@ -520,7 +520,7 @@ std::string Item::CharBefore() const {
         if (w->Span(t) != 0) return {};
         std::string_view typed = w->Typed(t);
         while (typed.ends_with(kJaEllipsis) || typed.ends_with(kJaTwoDots)) typed.remove_suffix(kJaEllipsis.size());
-        if (WidthOf(typed) >= 2) return Right(typed, 2).Str();
+        if (WidthAtLeast(typed, 2)) return Right(typed, 2).Str();
         if (!typed.empty()) return {};
     }
     return {};
