@@ -99,3 +99,8 @@ cx:tte-echo:35	ドアをどんどんって……	lacks:이라니|점점은	fix	r
 cx:tte-echo:30	今時ピチピチって？	has:팔팔이라니	keep	rewrites
 cx:tte-echo:35	今時ピチピチって……	has:팔팔이라니……	keep	rewrites
 cx:tte-echo:35	またって？	has:또라니?	keep	rewrites
+sound:tte-called	ガタガタってなにやってるの？	lacks:덜컹덜컹은	keep	sound
+sound:tte-called	ドンって何してるの？	lacks:쾅은	keep	sound
+sound:tte-called	ペコって何すんだよ	lacks:꾸벅은	keep	sound
+sound:tte-called	ぎゅって何するの！	lacks:꽉은	keep	sound
+sound:tte-called	「ドキドキって何」	has:두근두근이 뭐	fix	sound

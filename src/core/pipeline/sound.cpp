@@ -1809,7 +1809,9 @@ size_t SoundText::Adverbial(size_t i) const {
 // noun that ends in hiragana, the stem of a longer word (ドキドキって感じちゃう, ゴーンって響きわたった), or where a noun of
 // sound.tte-noise takes を: the noise the sound makes (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた).
 // The question word followed by a copula form of sound.tte-asked-copula asks whatever word starts there
-// (ドキドキってなんだろう), but not the indefinite of sound.tte-asked-indefinite (ふわってなんだか).
+// (ドキドキってなんだろう), but not the indefinite of sound.tte-asked-indefinite (ふわってなんだか); a bare
+// question word of sound.tte-asked asks only where the question ends after it (ドキドキって何？, not
+// ガタガタってなにやってるの？).
 SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
     if (i >= rs_.size()) return TteNamed::None;
     const std::string_view at = text_.substr(offsets_[i]);
@@ -1844,6 +1846,13 @@ SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
         if (dict::StartsWithMember(HDTRANS_CLASS("sound.tte-asked-copula"), rest) > 0 &&
             dict::StartsWithMember(HDTRANS_CLASS("sound.tte-asked-indefinite"), rest) == 0) {
             return TteNamed::Called;
+        }
+        // A bare question word (sound.tte-asked) asks about the sound only where the question ends
+        // there: at the end, before a sentence mark or a closing bracket, or before の; before a verb or
+        // を it is the verb's object (ガタガタってなにやってるの？, ドンって何してるの？).
+        if (dict::StartsWithMember(HDTRANS_CLASS("sound.tte-asked"), at) == n &&
+            !In(rs_[after], U"？！。…‥?!」』）)の")) {
+            return TteNamed::None;
         }
     }
     for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup).list) {

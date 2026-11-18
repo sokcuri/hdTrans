@@ -503,6 +503,7 @@
 //= sound.tte-noise	Nouns of sound.tte-named that name a noise: before を they are the noise the sound makes, and the って stays the adverb (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた); after a cry the sound stage writes 하는 before them, not (이)라는 (うふふって声が漏れた 우후후 하는 소리가 새어 나왔다).
 //= sound.tte-asked-copula	Copula forms after the question word of sound.tte-called that make the text after a mimetic and って a question about the sound, whatever dictionary word starts at the question word (ドキドキってなんだろう 두근두근이 뭘까, なんだっけ, なんです？, なんでしょうね, 何なんだ).
 //= sound.tte-asked-indefinite	Forms of sound.tte-asked-copula that make the question word an indefinite, not a question: the って after a mimetic stays the adverb (ふわってなんだか 왠지).
+//= sound.tte-asked	The bare question words of sound.tte-called: after a mimetic and って they ask about the sound only where the question ends after them, at the end, before a sentence mark or a closing bracket, or before の (ドキドキって何？ 두근두근이 뭐야?), or before a copula form of sound.tte-asked-copula; before a verb or を they are its object and the って stays the adverb (ガタガタってなにやってるの？, ドンって何してるの？).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
@@ -10366,6 +10367,9 @@ sound.tte-asked-copula	なん
 sound.tte-asked-copula	じゃ
 sound.tte-asked-copula	っけ
 sound.tte-asked-indefinite	だか
+sound.tte-asked	何
+sound.tte-asked	なに
+sound.tte-asked	なん
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ
