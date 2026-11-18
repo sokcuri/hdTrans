@@ -592,6 +592,96 @@ void SplitNounCopula(const Tables& t, std::vector<Node>& nodes) {
     }
 }
 
+// REG-25: a word with the past -았-/-었-/-였- written out after a vowel (보았습니다, 꾸었습니다, 하였습니다) in the
+// contracted spelling the generator writes (봤습니다, 꿨습니다, 했습니다); other words as they are.
+std::string ContractPast(const std::string& s) {
+    std::u32string u = ToU32(s);
+    const auto syl = [](char32_t c) { return c >= 0xAC00 && c <= 0xD7A3; };
+    for (std::size_t i = 1; i < u.size(); ++i) {
+        const char32_t p = u[i - 1], c = u[i];
+        if (!syl(p) || (p - 0xAC00) % 28 != 0 || (c != U'았' && c != U'었' && c != U'였')) continue;
+        const uint32_t cho = (p - 0xAC00) / 588, jung = (p - 0xAC00) / 28 % 21;
+        int to = -1;
+        if (c == U'았' && jung == 8) to = 9;                     // ㅗ + 았 → ㅘ
+        else if (c == U'었' && jung == 13) to = 14;              // ㅜ + 었 → ㅝ
+        else if (c == U'었' && jung == 20) to = 6;               // ㅣ + 었 → ㅕ
+        else if (c == U'었' && jung == 11) to = 10;              // ㅚ + 었 → ㅙ
+        else if (c == U'였' && jung == 0 && cho == 18) to = 1;   // 하 + 였 → 했
+        if (to < 0) continue;
+        u[i - 1] = static_cast<char32_t>(0xAC00 + (cho * 21 + static_cast<uint32_t>(to)) * 28 + 20);
+        u.erase(i, 1);
+    }
+    return ToU8(u);
+}
+
+// REG-25: a sentence-final word in 합쇼체 the alignment left unread (a phrase row such as 정말입니까 or 어떻습니까, the
+// 있습니다 of 수 있습니다, 이릅니다, 보았습니다) is read as the predicate the tables know, or as a noun with the copula,
+// so that its level can change like any other sentence end.
+void ReadHapsyoFinals(Words& r, const Tables& t, std::vector<Node>& nodes) {
+    for (std::size_t q = 0; q < nodes.size(); ++q) {
+        const Node n = nodes[q];
+        if ((n.kind != Kind::Raw && n.kind != Kind::N) || !IsHangulWord(n.lemma)) continue;
+        if (q + 1 < nodes.size() && nodes[q + 1].kind != Kind::Punct) continue;
+        const std::u32string w = ToU32(n.lemma);
+        if (w.size() < 3 || (!std::u32string_view(w).ends_with(U"니다") && !std::u32string_view(w).ends_with(U"니까"))) continue;
+        const char32_t b = w[w.size() - 3];
+        if ((b - 0xAC00) % 28 != 17) continue;
+        const bool question = w.back() == U'까';
+        AnalyzeHints h;
+        h.want = Want::final_;
+        h.mood = question ? Mood::q : Mood::decl;
+        const std::string surface = ContractPast(n.lemma);
+        // a predicate: the stem before 습니다, or the syllable before ㅂ니다 without its ㅂ; -았-/-었- written out first
+        std::u32string stem = b == U'습' ? w.substr(0, w.size() - 3) : w.substr(0, w.size() - 3) + std::u32string(1, b - 17);
+        if (stem.size() >= 2 && (stem.back() == U'았' || stem.back() == U'었' || stem.back() == U'였')) stem.pop_back();
+        std::vector<Bundle> found;
+        std::string lemma = ToU8(stem) + "다", pos, cls;
+        if (!stem.empty() && (t.stems.contains(lemma) || t.lemmaPos.contains(lemma))) {
+            ItemPosClass(t, lemma, pos, cls);
+            found = r.Find(lemma, pos, cls, surface, h);
+        }
+        std::erase_if(found, [](const Bundle& x) { return x.level != Level::hapsyo || x.node.ctype != CType::final_; });
+        if (!found.empty()) {
+            Node v = found.front().node;
+            v.kind = Kind::V;
+            v.from = n.from;
+            v.to = n.to;
+            v.glue = n.glue;
+            v.was = Level::hapsyo;
+            nodes[q] = v;
+            continue;
+        }
+        // a noun with the copula (정말입니까, 사실이었습니다)
+        for (const std::u32string_view cop : {std::u32string_view(U"이었습니"), std::u32string_view(U"였습니"), std::u32string_view(U"입니")}) {
+            const std::size_t at = w.size() - 1 - cop.size();
+            if (w.size() < cop.size() + 2 || std::u32string_view(w).substr(at, cop.size()) != cop) continue;
+            const std::string host = ToU8(w.substr(0, at)), copText = ToU8(w.substr(at));
+            if (host.empty() || !IsHangulWord(host) || t.stems.contains(host + "다")) break;
+            h.host = host;
+            std::vector<Bundle> c = r.Find(t.G("lemma.cop"), "C", "COP", copText, h);
+            std::erase_if(c, [](const Bundle& x) { return x.level != Level::hapsyo || x.node.ctype != CType::final_; });
+            if (c.empty()) break;
+            Node noun = MakeNode(Kind::N, host);
+            noun.glue = n.glue;
+            noun.from = n.from;
+            noun.to = n.from + static_cast<uint32_t>(at);
+            Node v = c.front().node;
+            v.kind = Kind::V;
+            v.lemma = t.G("lemma.cop");
+            v.kcls = "COP";
+            v.vpos = "C";
+            v.glue = true;
+            v.from = noun.to;
+            v.to = n.to;
+            v.was = Level::hapsyo;
+            nodes[q] = v;
+            nodes.insert(nodes.begin() + static_cast<std::ptrdiff_t>(q), noun);
+            ++q;
+            break;
+        }
+    }
+}
+
 // REG-21: whether the predicate at q stands alone in its clause: before it, back to a mark or the line start,
 // only its own verbs (나와 버린다) and an adverb of time (이제, 또). A verb giving (해 줄게) is no declaration.
 bool SingleVerb(const std::vector<Node>& nodes, std::size_t q) {
@@ -696,6 +786,58 @@ bool ExplanatoryEnd(std::u32string_view e) {
     if (c == U'く') return !katakana;
     if (c == U'ぶ') return kanji;
     return std::u32string_view(U"るただいなうすつぬむぐ").find(c) != std::u32string_view::npos;
+}
+
+// REG-25: the source sentences split again at a run of …/‥ right after a polite sentence end (楽しかったです……本当に).
+std::vector<std::u32string> PoliteSentences(const RegisterTables& rt, const std::vector<std::u32string>& sents) {
+    std::vector<std::u32string> out;
+    for (const auto& s : sents) {
+        std::size_t start = 0;
+        for (std::size_t i = 0; i < s.size(); ++i) {
+            if (s[i] != U'…' && s[i] != U'‥') continue;
+            std::size_t j = i;
+            while (j < s.size() && (s[j] == U'…' || s[j] == U'‥')) ++j;
+            if (i > start && j < s.size() && CuesOfSentence(rt, "「" + ToU8(s.substr(start, i - start)) + "」").pend) {
+                out.push_back(s.substr(start, i - start));
+                start = j;
+            }
+            i = j - 1;
+        }
+        if (start < s.size()) out.push_back(s.substr(start));
+    }
+    return out;
+}
+
+// REG-27: whether a source sentence has a subject marked with が after a noun (雨が, 誰が; not ですが, ながら).
+bool OtherSubject(std::u32string_view s) {
+    for (std::size_t i = 1; i < s.size(); ++i) {
+        if (s[i] != U'が') continue;
+        const char32_t p = s[i - 1];
+        const bool kanji = (p >= U'一' && p <= U'鿿') || p == U'々';
+        const bool katakana = (p >= U'ァ' && p <= U'ヺ') || p == U'ー';
+        const bool pronoun = p == U'れ' && i >= 2 && std::u32string_view(U"こそあど").find(s[i - 2]) != std::u32string_view::npos;
+        if (kanji || katakana || pronoun) return true;
+    }
+    return false;
+}
+
+// REG-26: whether the quote addresses an audience, a master or royalty (source.address), each term matched as a
+// word: not inside a longer katakana word or before the stem of a verb (マスターする, マスターズ).
+bool Addressed(const std::string& ja, const Tables& t) {
+    const std::u32string u = ToU32(ja);
+    const std::u32string notBefore = ToU32(t.G("source.address-notbefore"));
+    for (const auto& w : Split(t.G("source.address"), '|')) {
+        const std::u32string e = ToU32(w);
+        if (e.empty()) continue;
+        const bool kata = (e.back() >= U'ァ' && e.back() <= U'ヺ') || e.back() == U'ー';
+        for (std::size_t at = u.find(e); at != std::u32string::npos; at = u.find(e, at + 1)) {
+            const std::size_t n = at + e.size();
+            if (n < u.size() && notBefore.find(u[n]) != std::u32string::npos) continue;
+            if (kata && n < u.size() && ((u[n] >= U'ァ' && u[n] <= U'ヺ') || u[n] == U'ー')) continue;
+            return true;
+        }
+    }
+    return false;
 }
 
 // The text Generate wrote for each node, by node id (bytes; the spaces between a node's pieces included).
@@ -807,12 +949,14 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
     for (auto gr = groups.rbegin(); gr != groups.rend(); ++gr) {
         const uint32_t from = nodes[gr->first].from, to = nodes[gr->last].to;
         const std::string was = ToU8(o.substr(from, to - from));
-        if (regenAt(oldTexts, og, gr->first, gr->last) != was) {
+        // the past written out (보았습니다) is given back in the generator's contracted spelling (봤습니다)
+        const std::string wasContracted = ContractPast(was);
+        if (regenAt(oldTexts, og, gr->first, gr->last) != was && regenAt(oldTexts, og, gr->first, gr->last) != wasContracted) {
             if (wg.empty()) {
                 wg = Generate(t, oldNodes, old, written, &writtenSpans);
                 writtenTexts = NodeTexts(nodes.size(), writtenSpans);
             }
-            if (regenAt(writtenTexts, wg, gr->first, gr->last) != was) {
+            if (regenAt(writtenTexts, wg, gr->first, gr->last) != was && regenAt(writtenTexts, wg, gr->first, gr->last) != wasContracted) {
                 ok = false;
                 return before;
             }
@@ -866,6 +1010,11 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         std::vector<Node> nodes;
         bool lineOk = BuildAligned(r, line, nodes);
         SplitNounCopula(t, nodes);
+        {
+            const RegDecision& d0 = decisions[li];
+            if (options.levels && !d0.narration && (d0.level == Level::haeyo || d0.level == Level::hapsyo) && !SourceSentences(line.ja).empty())
+                ReadHapsyoFinals(r, t, nodes);
+        }
         uint32_t id = 0;
         for (auto& n : nodes) {
             n.id = ++id;
@@ -924,6 +1073,8 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         };
         // the last sentence end of each quote (a final V node, not nested, not -ㄹ까 하다, not before a comma)
         std::vector<std::size_t> lastEnd(nodes.empty() ? 1 : quoteOf.back() + 1, nodes.size());
+        std::vector<bool> lowered(nodes.size(), false);  // REG-25: the sentence ends lowered to 해요체
+        std::vector<bool> tailEnd(nodes.size(), false);  // REG-25: of them, a last predicate before an afterthought (즐거웠어요, 정말)
         for (std::size_t q = 0; q < nodes.size(); ++q) {
             const bool comma = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
             if (nodes[q].kind == Kind::V && nodes[q].ctype == CType::final_ && !nested[q] && !thinkOf(q) && !comma) lastEnd[quoteOf[q]] = q;
@@ -945,7 +1096,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                             if (g.level != Level::haeyo && g.level != Level::hapsyo) g.hon = false;
                         }
             // REG-25: inside one quote, a sentence the source ends in です or ます (REG-3) is 해요체 where the word stage
-            // wrote 합쇼체 (기쁩니다 → 기뻐요). Keigo, a set greeting, old or stiff speech and a source.formal cue set the
+            // wrote 합쇼체 (기쁩니다 → 기뻐요). Keigo, a set greeting, old or stiff speech and a source.address cue set the
             // level of the whole quote (REG-4, REG-10): such a quote stays as the word stage wrote it. The explanatory
             // んです of REG-23 is one such sentence.
             std::vector<bool> lower(nodes.size(), false);
@@ -954,22 +1105,36 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
             const std::u32string ja32 = ToU32(line.ja);
             const std::size_t firstQuote = ja32.find_first_of(U"「『");
             const bool message = firstQuote != std::u32string::npos && ja32[firstQuote] == U'『';
-            const std::vector<std::u32string> jaSents = !u.narration && !perQuote && !dec.keep && politeLine && !message
-                                                            ? SourceSentences(line.ja)
-                                                            : std::vector<std::u32string>{};
-            // per source sentence: whether it ends in です or ます
-            std::vector<bool> pend(jaSents.size(), false);
+            std::vector<std::u32string> jaSents;
+            if (!u.narration && !perQuote && !dec.keep && politeLine && !message)
+                jaSents = PoliteSentences(d.levels, SourceSentences(line.ja));
+            // per source sentence: whether it ends in です or ます, or does so before an afterthought after 、
+            // (楽しかったです、本当に)
+            std::vector<bool> pend(jaSents.size(), false), pendBeforeTail(jaSents.size(), false);
+            std::vector<bool> firstPerson(jaSents.size(), false);
             bool quoteHeld = false;
             if (!jaSents.empty()) {
                 const SentenceCues c = CuesOfSentence(d.levels, line.ja);
-                quoteHeld = line.keigo || c.set || c.keigo || c.arch || c.stiff || ContainsAny(line.ja, t.G("source.formal"));
+                quoteHeld = line.keigo || c.set || c.keigo || c.arch || c.stiff || Addressed(line.ja, t);
             }
-            for (std::size_t s = 0; s < jaSents.size() && !quoteHeld; ++s)
-                pend[s] = CuesOfSentence(d.levels, "「" + ToU8(jaSents[s]) + "」").pend;
+            for (std::size_t s = 0; s < jaSents.size() && !quoteHeld; ++s) {
+                const SentenceCues c = CuesOfSentence(d.levels, "「" + ToU8(jaSents[s]) + "」");
+                // keigo, a set phrase, a report, old speech or a tic at any sentence end sets the level of the quote
+                if (c.set || c.keigo || c.arch || c.stiff) quoteHeld = true;
+                pend[s] = c.pend;
+                firstPerson[s] = c.first;
+                const std::size_t comma = jaSents[s].find_last_of(U"、，");
+                if (!c.pend && comma != std::u32string::npos && comma > 0)
+                    pendBeforeTail[s] = CuesOfSentence(d.levels, "「" + ToU8(jaSents[s].substr(0, comma)) + "」").pend;
+            }
             if (!jaSents.empty() && !quoteHeld) {
+                // a run of …/‥ right after a polite sentence end ends a sentence too, as in the source (PoliteSentences)
                 const auto boundary = [&](std::size_t k) {
-                    return nodes[k].kind == Kind::Punct && !nested[k] &&
-                           (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl);
+                    if (nodes[k].kind != Kind::Punct || nested[k]) return false;
+                    if (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl) return true;
+                    if (nodes[k].punct != Punct::ellipsis || k == 0) return false;
+                    const Node& p = nodes[k - 1];
+                    return p.kind == Kind::V && p.ctype == CType::final_ && (p.was == Level::hapsyo || p.was == Level::haeyo);
                 };
                 // the translation's sentences (a run of marks ends one) must be the source's, one for one
                 // (a run of marks before any word, 「！？　…, ends none)
@@ -995,7 +1160,19 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     if (n.mood == Mood::prop || (n.modal == "gess" && n.mood != Mood::q)) return true;
                     if (sentenceOf[q] < jaEnds.size() && ExplanatoryEnd(jaEnds[sentenceOf[q]])) return false;
                     const std::string pos = !n.vpos.empty() ? n.vpos : LookupPredicate(t, n.lemma).pos;
-                    return n.mood == Mood::decl && n.tense == Tense::nonpast && pos == "V" && n.kcls != "EXIST";
+                    if (n.mood != Mood::decl || n.tense != Tense::nonpast || pos != "V" || n.kcls == "EXIST") return false;
+                    // no will: a verb of state or cognition (모르다, 되다), an obligation (-아야 하다)
+                    for (const auto& w : Split(t.G("lower.not-will"), '|'))
+                        if (n.lemma == w) return false;
+                    for (std::size_t k = q; k-- > 0;) {
+                        if (nodes[k].kind == Kind::Punct) continue;
+                        if (nodes[k].kind == Kind::V && nodes[k].ctype == CType::conn && EndsWithAny(nodes[k].eomi, t.G("lower.obligation")))
+                            return false;
+                        break;
+                    }
+                    // an event with a subject other than the speaker (雨が降ります 비가 와요)
+                    const std::size_t s = sentenceOf[q];
+                    return !(s < jaSents.size() && !firstPerson[s] && OtherSubject(jaSents[s]));
                 };
                 const auto keepEomi = [&](const std::string& e) {
                     const auto keep = Split(t.G("lower.keep-eomi"), '|');
@@ -1007,19 +1184,35 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                         const Node& n = nodes[q];
                         if (n.kind != Kind::V || n.ctype != CType::final_ || nested[q] || thinkOf(q) || n.to <= n.from) continue;
                         bool end = true;  // the sentence's last word
-                        for (std::size_t k = q + 1; k < nodes.size() && !boundary(k); ++k)
+                        bool laterV = false;  // a predicate after it in the sentence
+                        for (std::size_t k = q + 1; k < nodes.size() && !boundary(k); ++k) {
                             if (nodes[k].kind != Kind::Punct) end = false;
-                        if (!end || sentenceOf[q] >= pend.size() || !pend[sentenceOf[q]] || n.was != Level::hapsyo) continue;
+                            if (nodes[k].kind == Kind::V) laterV = true;
+                        }
+                        // or the last predicate, an afterthought without one after a comma (즐거웠어요, 정말)
+                        const bool afterthought = !end && !laterV && q + 1 < nodes.size() && nodes[q + 1].kind == Kind::Punct &&
+                                                  nodes[q + 1].punct == Punct::comma && sentenceOf[q] < pend.size() &&
+                                                  pendBeforeTail[sentenceOf[q]];
+                        if (!(end || afterthought) || sentenceOf[q] >= pend.size() || !(pend[sentenceOf[q]] || afterthought) ||
+                            n.was != Level::hapsyo)
+                            continue;
                         // one level in a sentence: another word in it written in 합쇼체 (뛰어나고 있습니다만, …) keeps its end
                         bool other = false;
                         for (std::size_t k = 0; k < nodes.size(); ++k)
                             if (k != q && sentenceOf[k] == sentenceOf[q] && nodes[k].kind != Kind::Punct && nodes[k].to > nodes[k].from &&
                                 HoldsHapsyo(out32.substr(nodes[k].from, nodes[k].to - nodes[k].from), t.G("mixed.hapsyo")))
                                 other = true;
-                        if (!other && !keepEomi(n.wasEomi) && !willed(q)) lower[q] = true;
+                        if (!other && !keepEomi(n.wasEomi) && !willed(q)) {
+                            lower[q] = true;
+                            if (afterthought) {
+                                tailEnd[q] = true;
+                                if (lastEnd[quoteOf[q]] >= nodes.size() || lastEnd[quoteOf[q]] < q) lastEnd[quoteOf[q]] = q;
+                            }
+                        }
                     }
                 }
             }
+            lowered = lower;
             // a predicate written with -시- for the listener keeps it (하십시오 → 하세요, 하시겠습니까 → 하실래요)
             for (auto& g : reg)
                 for (std::size_t q = 0; q < nodes.size(); ++q)
@@ -1098,7 +1291,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 if (nodes[q].kind != Kind::V) continue;
                 const Level was = nodes[q].was;
                 // a final ending inside the sentence (놀다니, 저희들…) keeps its level: no 요 mid-sentence
-                const bool inner = nodes[q].ctype == CType::final_ && q + 2 < nodes.size() &&
+                const bool inner = !tailEnd[q] && nodes[q].ctype == CType::final_ && q + 2 < nodes.size() &&
                                    nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
                 // in a caption scene a plain command written as -어라 (来い → 와라) stays one
                 const bool command = nodes[q].mood == Mood::imp && was == Level::haera;
@@ -1243,7 +1436,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 for (const auto& g : reg)
                     if (g.node == n.id) now = g.level;
                 if (now == Level::none) continue;
-                const bool inner = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
+                const bool inner = !tailEnd[q] && q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
                 if (!inner && n.was != Level::none && n.was != now) lastChanged = true;
                 if (inner) {
                     if (now == Level::haeyo || now == Level::hapsyo) innerPolite.push_back(now);
@@ -1257,7 +1450,14 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 if (end != Level::none && l != end) mixedLevels = true;
             // REG-12: the quote's last word must be that sentence end; a later word (그래서?, 사실이야? 유필리아, a
             // word not taken apart, a connective) ends it at a level not known here
-            for (std::size_t q = nodes.size(); q-- > 0;) {
+            // REG-25: but an afterthought of nouns after a lowered last predicate (즐거웠어요. 정말) is no sentence end
+            const std::size_t lastV = qi < lastEnd.size() ? lastEnd[qi] : nodes.size();
+            bool afterthought = lastV < nodes.size() && lowered[lastV];
+            for (std::size_t k = lastV + 1; afterthought && k < nodes.size(); ++k)
+                if (quoteOf[k] == qi && nodes[k].kind != Kind::Punct &&
+                    ((nodes[k].kind != Kind::N && nodes[k].kind != Kind::P) || EndsWithAny(nodes[k].lemma, "다|까|요|죠")))
+                    afterthought = false;
+            for (std::size_t q = nodes.size(); q-- > 0 && !afterthought;) {
                 if (quoteOf[q] != qi || nodes[q].kind == Kind::Punct) continue;
                 if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) lastChanged = false;
                 break;

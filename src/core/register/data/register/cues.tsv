@@ -297,3 +297,61 @@ polite	end	デス		デース (ー between kana is dropped)
 polite	end	マス
 polite	end-after	どうぞ		お先にどうぞ, これどうぞ: a polite offer (먼저 하세요); どうぞ alone is any level
 polite	end	ごゆっくり		ごゆっくりどうぞ, ごゆっくり: a polite wish
+keigo	any	お見え		REG-26: keigo the rows above miss	
+keigo	any	承りま		REG-26: keigo the rows above miss	
+keigo	any	うけたまわりま		REG-26: keigo the rows above miss	
+keigo	any	承っ		REG-26: keigo the rows above miss	
+keigo	any	おいでにな		REG-26: keigo the rows above miss	
+keigo	any	お出でにな		REG-26: keigo the rows above miss	
+keigo	any	お手数		REG-26: keigo the rows above miss	
+keigo	any	恐れ入り		REG-26: keigo the rows above miss	
+keigo	any	恐縮		REG-26: keigo the rows above miss	
+keigo	any	ゴザイマ		REG-26: keigo the rows above miss	
+set	any	しょうちしま		REG-26: a set phrase or service phrase	
+set	any	しょうちいた		REG-26: a set phrase or service phrase	
+set	any	お世話になりま		REG-26: a set phrase or service phrase	
+set	any	おせわになりま		REG-26: a set phrase or service phrase	
+set	any	ごきげんよう		REG-26: a set phrase or service phrase	
+set	any	ご機嫌よう		REG-26: a set phrase or service phrase	
+set	any	オハヨウゴザ		REG-26: a set phrase or service phrase	
+set	any	いっただき		REG-26: a set phrase or service phrase	
+set	any	ただいま戻り		REG-26: a set phrase or service phrase	
+set	any	ただ今戻り		REG-26: a set phrase or service phrase	
+set	any	ただいま帰りま		REG-26: a set phrase or service phrase	
+set	any	ただ今帰りま		REG-26: a set phrase or service phrase	
+set	any	お疲れ様		REG-26: a set phrase or service phrase	
+set	any	お疲れさま		REG-26: a set phrase or service phrase	
+set	any	おつかれさま		REG-26: a set phrase or service phrase	
+set	any	お邪魔しま		REG-26: a set phrase or service phrase	
+set	any	お邪魔いた		REG-26: a set phrase or service phrase	
+set	any	ごちそうさま		REG-26: a set phrase or service phrase	
+set	any	ご馳走様		REG-26: a set phrase or service phrase	
+set	any	ご馳走さま		REG-26: a set phrase or service phrase	
+set	any	御馳走様		REG-26: a set phrase or service phrase	
+set	any	行ってきま		REG-26: a set phrase or service phrase	
+set	any	いってきま		REG-26: a set phrase or service phrase	
+set	any	行って来ま		REG-26: a set phrase or service phrase	
+set	any	よろしければ		REG-26: a set phrase or service phrase	
+set	any	よろしかったら		REG-26: a set phrase or service phrase	
+set	any	はい、こちら		REG-26: a set phrase or service phrase	
+set	end	了解		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	了解です		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	了解しました		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	完了しました		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	完了です		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	確保しました		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	発見しました		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	報告します		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	以上です		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	出撃します		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+set	end	抜錨します		REG-26: a report at a sentence end (not the noun 了解 inside one)	
+archaic	end	ですぞ		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ますぞ		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	でしたぞ		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ましたぞ		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ですかな		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ますかな		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ですな		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ますな		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	でしたな		REG-26: an old man's or a retainer's tic at a sentence end	
+archaic	end	ましたな		REG-26: an old man's or a retainer's tic at a sentence end	

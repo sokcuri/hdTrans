@@ -169,6 +169,7 @@ std::vector<std::string> SplitQuotes(const std::string& ja) {
 }
 
 struct Cues {
+    bool keigoOthers = false;  // REG-26: a keigo row about a titled person (KeigoOfOthers)
     bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
     bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
     bool lastKa = false;      // the last sentence ends in the question particle か
@@ -323,7 +324,12 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         } else {
             for (std::size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
                 if (before(u.text, i)) continue;
-                if (r.cue == "keigo" && KeigoOfOthers(u.text, i)) continue;
+                if (r.cue == "keigo" && KeigoOfOthers(u.text, i)) {
+                    // REG-26: keigo about a titled person (社長はおられますか) still sets a formal quote's level
+                    const std::u32string_view b = std::u32string_view(u.text).substr(0, i);
+                    if (!b.ends_with(U"嘘") && !b.ends_with(U"冗談")) c.keigoOthers = true;
+                    continue;
+                }
                 const bool followed = std::any_of(r.notBefore.begin(), r.notBefore.end(), [&](const std::u32string& w) {
                     return StartsAt(u.text, i + r.text.size(), w);
                 });
@@ -613,7 +619,7 @@ std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(
 
 SentenceCues CuesOfSentence(const RegisterTables& t, const std::string& ja) {
     const Cues c = Scan(t, ja);
-    return {c.pend, c.set, c.keigo, c.arch, c.stiff};
+    return {c.pend, c.set, c.keigo || c.keigoOthers, c.arch, c.stiff, !c.first.empty()};
 }
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines) {

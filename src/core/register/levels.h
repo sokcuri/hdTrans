@@ -55,9 +55,9 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
 std::string CueKey(const RegisterTables& t, const std::string& ja);
 
 // REG-25: the cues of one sentence of a quote: a polite end (REG-3), a set greeting, keigo (cues.tsv), old or
-// stiff speech.
+// stiff speech, a first-person pronoun.
 struct SentenceCues {
-    bool pend = false, set = false, keigo = false, arch = false, stiff = false;
+    bool pend = false, set = false, keigo = false, arch = false, stiff = false, first = false;
 };
 SentenceCues CuesOfSentence(const RegisterTables& t, const std::string& ja);
 // REG-16: -시- on the V nodes of a polite utterance whose subject is the addressee, only where a request or
