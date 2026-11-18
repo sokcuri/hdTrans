@@ -195,8 +195,8 @@ bool Item::StartsSentence() const {
 }
 
 bool Item::InQuote() const {
-    const int depth = w != nullptr ? w->QuoteDepth(tokenIndex) : 0;
-    return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
+    if (w != nullptr) return w->QuoteDepthAt(tokenIndex, text, start) > 0;
+    return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), 0) > 0;
 }
 
 bool Item::KoreanSpan() const {
@@ -267,8 +267,53 @@ bool Item::EndingAsks() const {
     return tail.ends_with("か");
 }
 
-bool Item::AfterQuestionWord(bool clause) const {
-    for (const Item* x = this; x != nullptr; x = x->prev) {
+namespace {
+
+// Whether AfterQuestionWord must test x on its walk back: x may end the walk (a sentence end, a comma
+// within a clause, a question closed by か) or be a question word (it starts like one). Read from the
+// surface and the span only, which no action of a construction pass changes.
+bool QuestionNotable(const Item* x, bool clause) {
+    const std::string_view s = x->group->surface;
+    if (s == "。" || s == "？" || s == "?" || s == "！" || s == "!" || s == "か") return true;
+    if (clause && dict::InClass(HDTRANS_CLASS("mark.comma"), s)) return true;
+    // EndingAsks needs the text after the stem to close with か.
+    const int stem = static_cast<int>(s.size());
+    const std::string_view tail = From(x->text, x->start + stem);
+    if (tail.substr(0, static_cast<std::size_t>(std::max(0, x->length - stem))).ends_with("か")) return true;
+    for (const std::string_view wonder : dict::ClassMembers(HDTRANS_CLASS("question.wonder"))) {
+        if (s.starts_with(wonder)) return true;
+    }
+    return false;
+}
+
+// The nearest word at or before x that QuestionNotable holds for, or null. Within one construction
+// pass each word is walked once: the walk stops at a word already walked and leaves its result on
+// every word it passed.
+const Item* NextQuestionNotable(const Item* x, bool clause, uint64_t pass) {
+    const int k = clause ? 1 : 0;
+    const Item* found = x;
+    for (; found != nullptr; found = found->prev) {
+        if (const Item::QuestionSkip& m = found->questionSkips[k]; m.epoch == pass) {
+            found = m.notable;
+            break;
+        }
+        if (QuestionNotable(found, clause)) {
+            found->questionSkips[k] = {pass, found};
+            break;
+        }
+    }
+    for (const Item* p = x; p != nullptr && p->questionSkips[k].epoch != pass; p = p->prev) {
+        p->questionSkips[k] = {pass, found};
+    }
+    return found;
+}
+
+}  // namespace
+
+bool Item::AfterQuestionWord(bool clause, uint64_t pass) const {
+    // Within a construction pass the walk goes from one word it must test to the next (the others
+    // neither end it nor ask); elsewhere it goes word by word.
+    for (const Item* x = this; x != nullptr; x = pass == 0 ? x->prev : NextQuestionNotable(x->prev, clause, pass)) {
         const std::string_view s = x->group->surface;
         if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
         if (clause && x != this && dict::InClass(HDTRANS_CLASS("mark.comma"), s)) break;
