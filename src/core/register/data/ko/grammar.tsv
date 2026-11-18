@@ -52,3 +52,4 @@ source.address-notbefore	しすさせ	REG-26: kana after an address term that ma
 source.address-title	王|殿|様|さま	REG-26: a title right after a name used as a call, before 、！？… or the quote's end (ロウリア王、, 穂積殿。): not 魔王は, 王国, 神殿に
 lower.not-will	모르다|생각하다|알다|되다|이르다|보이다|들리다|생기다|남다|걸리다|어울리다|맞다|틀리다|모자라다	REG-27: verbs of state or cognition: their present 합쇼체 statement states no will and is lowered (모릅니다 → 몰라요, 됩니다 → 돼요)
 lower.obligation	-어야|-아야|-여야	REG-27: the connective of an obligation (본받아야 합니다 → 해야 해요): the 하다 after it states no will
+lower.we	我等|我ら|我々|われら|われわれ|うちら|あたしら|自分ら	REG-27: a first person (plural) the first-person cues miss: its が is the speaker's (我等が証言します 우리들이 증언합니다)

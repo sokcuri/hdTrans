@@ -812,7 +812,7 @@ std::vector<std::u32string> PoliteSentences(const RegisterTables& rt, const std:
 
 // REG-27: whether the main clause of a source sentence (after its last 、, ので, から) has a subject marked with が
 // after a noun (雨が降ります, 誰が; not ですが, ながら, nor 用があるので、帰ります).
-bool OtherSubject(std::u32string_view s) {
+bool OtherSubject(std::u32string_view s, const std::string& we) {
     std::size_t from = 1;
     for (const std::u32string_view b : {std::u32string_view(U"、"), std::u32string_view(U"，"), std::u32string_view(U"ので"),
                                          std::u32string_view(U"から")}) {
@@ -825,7 +825,10 @@ bool OtherSubject(std::u32string_view s) {
         const bool kanji = (p >= U'一' && p <= U'鿿') || p == U'々';
         const bool katakana = (p >= U'ァ' && p <= U'ヺ') || p == U'ー';
         const bool pronoun = p == U'れ' && i >= 2 && std::u32string_view(U"こそあど").find(s[i - 2]) != std::u32string_view::npos;
-        if (kanji || katakana || pronoun) return true;
+        bool speaker = false;
+        for (const auto& w : Split(we, '|'))
+            if (!w.empty() && s.substr(0, i).ends_with(ToU32(w))) speaker = true;
+        if ((kanji || katakana || pronoun) && !speaker) return true;
     }
     return false;
 }
@@ -1191,7 +1194,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     }
                     // an event with a subject other than the speaker (雨が降ります 비가 와요)
                     const std::size_t s = sentenceOf[q];
-                    return !(s < jaSents.size() && !firstPerson[s] && OtherSubject(jaSents[s]));
+                    return !(s < jaSents.size() && !firstPerson[s] && OtherSubject(jaSents[s], t.G("lower.we")));
                 };
                 const auto keepEomi = [&](const std::string& e) {
                     const auto keep = Split(t.G("lower.keep-eomi"), '|');

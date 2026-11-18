@@ -90,3 +90,4 @@ register:REG-27	「みんなの気持ちは分かると思います」	「모두
 register:REG-27	「用があるので、帰ります」	「용무가 있으므로, 돌아갑니다」	keep	register
 register:REG-27	「じゃ、私も戻ります」	「그러면, 저도 돌아옵니다」	keep	register
 register:REG-27	「あなたは、無謀な指揮官ではないと考えていました」	has:생각하고 있었습니다	keep	register
+register:REG-27	「我々が行きます」	「우리가 갑니다」	keep	register

@@ -21,7 +21,7 @@ grammar:書くように前へ出た	柴田先輩の言葉を守り、コロ太�
 pack:clause-patterns:1	「あまり会われていないヤルド様とセスト様のお名前までご存知なのですか？」	has:만나시지 않은	fix	packs
 pack:clause-patterns:1	「このマーメイドの国の女王様よ。是非一度会われるといいわ」	has:만나시면	fix	packs
 pack:clause-patterns:1	「だったら、今度会われたときに」	has:만나셨을 때	fix	packs
-pack:clause-patterns:1	「アレン様、本当に会われるのですか？」	has:만나세요	keep	packs
+pack:clause-patterns:1	「アレン様、本当に会われるのですか？」	has:만나십니까	keep	packs
 pack:clause-patterns:1	「会われますか？呼びますよ」	has:만나시겠어요	keep	packs
 pack:clause-patterns:1	会合ではアジアの分割について話しあわれてイギリスは東進をしないことを約束し、	!rule:pack:clause-patterns:1	keep	packs
 grammar:書きおったか	「おお、来おったか」	has:왔는가	fix	lookup
