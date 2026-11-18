@@ -587,6 +587,7 @@ private:
     bool GoesOnAt(size_t e) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
+    bool NamedAfterTte(size_t i) const;
     size_t PausedTo(size_t i) const;
     size_t QuotedBy(const SoundMatch& m, size_t p, bool* say = nullptr) const;
     size_t EchoedBy(const SoundMatch& m, size_t p) const;
@@ -1789,8 +1790,31 @@ size_t SoundText::Adverbial(size_t i) const {
     if (i >= rs.size()) return 0;
     if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
+    if (rs[i] == U'て' && NamedAfterTte(i + 1)) return 0;
     if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], kSuruKana)) return 1;
     return StartsLongerWord(i) ? 0 : 1;
+}
+
+// Whether the って that ends before character i names or quotes the sound before it rather than
+// saying how something is done: a noun that a quotation in って modifies (noun.quoted) or a word of
+// sound.tte-named starts there, and none of sound.tte-named-not (ドキドキって言葉 두근두근이라는 말,
+// ペコってなんですか 꾸벅이 뭡니까, シャキってのが 아삭이라는 것이; not ぐしゃぐしゃって何か踏んだ or
+// フワ～って感じて). Not where the word starts a longer word or a name (ぎゅって音羽を, ペコって何子ちゃんが).
+bool SoundText::NamedAfterTte(size_t i) const {
+    if (i >= rs_.size()) return false;
+    const std::string_view at = text_.substr(offsets_[i]);
+    const size_t n = std::max(dict::StartsWithMember(HDTRANS_CLASS("noun.quoted"), at), dict::StartsWithMember(HDTRANS_CLASS("sound.tte-named"), at));
+    if (n == 0 || dict::StartsWithMember(HDTRANS_CLASS("sound.tte-named-not"), at) > 0) return false;
+    // A kanji right after a word in kanji makes it the head of a longer word or of a name (音羽, 子供,
+    // 意味不明), and so does a name or a noun that runs past it (ことり).
+    const size_t member = text::RuneCount(at.substr(0, n));
+    if (i + member < rs_.size() && IsKanjiRune(rs_[i + member]) && IsKanjiRune(rs_[i + member - 1])) return false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup).list) {
+        const bool noun = (c.user != nullptr && c.user->nameLayer) ||
+                          (c.codes != nullptr && (c.codes->sem.Contains("QPN") || c.codes->partText.starts_with("N")));
+        if (noun && text::RuneCount(c.source) > member) return false;
+    }
+    return true;
 }
 
 // Whether a dictionary word of two or more characters starts at the particle at character
@@ -2643,6 +2667,16 @@ std::string SoundText::Write() {
                 b += FinalConsonant(b) ? "이라니" : "라니";
                 next = echoed;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (!chain.back().intj && next < rs.size() && rs[next] == U'て' && In(rs[next - 1], U"っッ") &&
+                       NamedAfterTte(next + 1)) {
+                // The って that names or quotes a mimetic goes on to the later stages, which read it after
+                // the Korean (ドキドキって言葉 두근두근이라는 말, スパって何だ 싹둑이 뭐야); a ッ the sound took is
+                // the っ of that って (ドキッて何 철렁이 뭐), and a stretch mark before it is not written
+                // (ドキーンって音 철렁이라는 소리).
+                dropTsu();
+                while (EndsLengthened(b)) b.resize(b.size() - (b.ends_with('~') ? 1 : kLengthenText.size()));
+                b += "って";
+                next++;
             } else if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
                 // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
                 b += Bytes(next, to - 1);

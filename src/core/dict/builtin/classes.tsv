@@ -498,6 +498,8 @@
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
 //= sound.quoted-say	Starts of the verbs of saying (言, いう): after a laugh or an interjection and って they take what was said, which the later stages quote with 라고 (えへへって言った 에헤헤라고 말했다), not the 하고 of the sound (laughing, crying out and nodding keep 하고).
 //= sound.echoed-by	Starts of the text after a sound and って where the sound is said back, read 라니 (えへへって何 에헤헤라니 뭐): the question word 何 in its spellings.
+//= sound.tte-named	Starts of the text after a mimetic and って, besides the nouns of noun.quoted (ドキドキって言葉 두근두근이라는 말, シャキってのが 아삭이라는 것이), where the って names or quotes the sound, so it is no adverb of a verb: the question word 何 (ペコってなんですか 꾸벅이 뭡니까) and verbs of calling or of being told (ドキドキって呼んでる, ドキドキって言われた). The later stages read the って after the Korean.
+//= sound.tte-named-not	Starts of the text after a mimetic and って that begin with a word of sound.tte-named or noun.quoted but go on as another word, where the って stays the adverb: indefinites and adverbs in 何 (ぐしゃぐしゃって何か踏んだ, ふわってなんだか), the verb 感じる (フワ～って感じて), ものすごい, and the set phrase 音を立てる, one word for the later stages (ドキドキって音を立てた 두근두근 소리를 냈다).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
@@ -5976,6 +5978,16 @@ noun.quoted	子
 noun.quoted	娘
 noun.quoted	噂
 noun.quoted	もん
+noun.quoted	音
+noun.quoted	声
+noun.quoted	響き
+noun.quoted	擬音
+noun.quoted	意味
+noun.quoted	名前
+noun.quoted	ことば
+noun.quoted	音が
+noun.quoted	音も
+noun.quoted	声が
 noun.quoted-clause	こと	GRM-80
 noun.quoted-clause	事	GRM-80
 noun.quoted-clause	もの	GRM-80
@@ -10313,6 +10325,48 @@ sound.quoted-say	いわ
 sound.echoed-by	何
 sound.echoed-by	なに
 sound.echoed-by	なん
+sound.tte-named	何
+sound.tte-named	なに
+sound.tte-named	なん
+sound.tte-named	呼
+sound.tte-named	よば
+sound.tte-named	よん
+sound.tte-named	よぶ
+sound.tte-named	言われ
+sound.tte-named	いわれ
+sound.tte-named	名付
+sound.tte-named	どういう
+sound.tte-named	どんな
+sound.tte-named-not	何か
+sound.tte-named-not	何も
+sound.tte-named-not	何度
+sound.tte-named-not	何回
+sound.tte-named-not	何と
+sound.tte-named-not	何だか
+sound.tte-named-not	なにか
+sound.tte-named-not	なにも
+sound.tte-named-not	なんか
+sound.tte-named-not	なんて
+sound.tte-named-not	なんと
+sound.tte-named-not	なんだか
+sound.tte-named-not	なんにも
+sound.tte-named-not	感じて
+sound.tte-named-not	感じた
+sound.tte-named-not	感じる
+sound.tte-named-not	感じま
+sound.tte-named-not	感じな
+sound.tte-named-not	感じら
+sound.tte-named-not	感じさ
+sound.tte-named-not	感じれ
+sound.tte-named-not	感じろ
+sound.tte-named-not	感じず
+sound.tte-named-not	感じと
+sound.tte-named-not	かんじて
+sound.tte-named-not	かんじた
+sound.tte-named-not	かんじる
+sound.tte-named-not	ものすご
+sound.tte-named-not	ものの
+sound.tte-named-not	音を立て
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ

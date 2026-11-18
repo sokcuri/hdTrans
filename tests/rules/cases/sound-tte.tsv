@@ -1,0 +1,38 @@
+# 규칙: LEX-6120
+rule	input	expected	kind	layer
+sound:tte-named	ドキドキって言葉	두근두근이라는 말	fix	sound
+sound:tte-named	ドキドキって何？	두근두근이 뭐야?	fix	sound
+sound:tte-named	「スパって何だ？」	has:싹둑은 뭐야	fix	sound
+sound:tte-named	「ダメですよ！　それにペコってなんですか？」	has:꾸벅은 뭡니까	fix	sound
+sound:tte-named	どきどきってなに？	has:두근두근이 뭐	fix	sound
+sound:tte-named	ドキッて何？	has:철렁이 뭐	fix	sound
+sound:tte-named	ドキドキってなんなの？	has:두근두근은 뭐야	fix	sound
+sound:tte-named	ドキドキって感じ。	has:두근두근이라는 느낌	fix	sound
+sound:tte-named	キュンキュンって感じ	has:이라는 느낌	fix	sound
+sound:tte-named	れんこんの このシャキってのがもう大好きで	has:싹둑이라는 것이	fix	sound
+sound:tte-named	ドキドキってのは恋だよ	has:두근두근이라는 것은	fix	sound
+sound:tte-named	「どどーんってやつを触ったら」	has:두두둥이라는 녀석을	fix	sound
+sound:tte-named	ワクワクって音がした。	has:이라는 소리가 났다	fix	sound
+sound:tte-named	ドンって音	쾅이라는 소리	fix	sound
+sound:tte-named	ドキーンって音がした	has:철렁이라는 소리	fix	sound
+sound:tte-named	ドキドキーって言葉	has:두근두근이라는 말	fix	sound
+sound:tte-named	ドキドキって名前	has:두근두근이라는 이름	fix	sound
+sound:tte-named	ドキドキって呼ばれた	has:두근두근이라고 불렸다	fix	sound
+sound:tte-named	みんなはドキドキって呼んでいます	has:두근두근이라고 부르고	fix	sound
+sound:tte-named	ドキドキって言われて困った	has:두근두근이라는 말을 들어	fix	sound
+sound:tte-named	「南西の風って意味よ」	has:바람이라는 의미야	fix	sound
+sound:tte-named	「余り物って意味」	has:여분이라는 의미	fix	sound
+sound:tte-named	「……ほんと、男って意味不明よね」	has:남자는 의미 불명하지	keep	sound
+sound:tte-named	意味不明な言葉	의미 불명한 말	keep	sound
+sound:tte-named	「ぐしゃぐしゃって何か踏んづけてるみてえですね。」	has:엉망진창 뭔가	keep	sound
+sound:tte-named	フワ～って感じて おいしいです。	has:두둥실~ 느껴	keep	sound
+sound:tte-named	ドキドキって音を立てた	두근두근 소리를 냈다	keep	sound
+sound:tte-named	キラキラって光った。	반짝반짝 빛났다.	keep	sound
+sound:tte-named	ガツンって当たって	has:쾅 맞아	keep	sound
+sound:tte-named	えへへって何？	has:에헤헤라니 뭐	keep	sound
+sound:tte-named	えへへって言った	has:에헤헤라고 말했다	keep	sound
+sound:tte-named	うふふって笑った	has:우후후 하고 웃었다	keep	sound
+sound:tte-named	ぎゅって音羽を抱きしめた	has:꽉 오토와를	keep	sound
+sound:tte-named	ぎゅって呼子を抱いた	has:꽉 요부코를	keep	sound
+sound:tte-named	ドキドキって声也くん	has:두근두근 세이야	keep	sound
+sound:tte-named	ぎゅってことりを抱いた	lacks:꽉은	keep	sound
