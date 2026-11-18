@@ -42,7 +42,7 @@ sound:stutter	た、拓也	타, 타쿠야	keep	sound
 sound:stutter	なな、ななみちゃん	has:나나미	keep	sound
 sound:stutter	もも、桃子さん	has:모모코	keep	sound
 dict:w:36080	むりです	무리입니다	fix	local
-dict:w:36080	「むりです」	「무리입니다」	fix	local
+dict:w:36080	「むりです」	「무리예요」	fix	local
 dict:w:36080	むりだよ	무리야	fix	local
 dict:w:36080	むりでした	무리였습니다	fix	local
 dict:w:36080	むりな話だ	무리한 이야기다	fix	local

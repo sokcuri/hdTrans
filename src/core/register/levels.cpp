@@ -169,6 +169,7 @@ std::vector<std::string> SplitQuotes(const std::string& ja) {
 }
 
 struct Cues {
+    bool report = false;       // REG-26: a report at a sentence end (了解です)
     bool keigoOthers = false;  // REG-26: a keigo row about a titled person (KeigoOfOthers)
     bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
     bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
@@ -353,6 +354,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         else if (r.cue == "set") c.set = true;
         else if (r.cue == "archaic") c.arch = true;
         else if (r.cue == "stiff") c.stiff = true;
+        else if (r.cue == "report") c.report = true;
         else if (r.cue == "casual") casualEnd = true;
         else if (r.cue == "casual-mark") c.casualMark = true;
         else if (r.cue.starts_with("first:") && c.first.empty()) c.first = r.cue.substr(6);
@@ -619,7 +621,7 @@ std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(
 
 SentenceCues CuesOfSentence(const RegisterTables& t, const std::string& ja) {
     const Cues c = Scan(t, ja);
-    return {c.pend, c.set, c.keigo || c.keigoOthers, c.arch, c.stiff, !c.first.empty()};
+    return {c.pend, c.set || c.report, c.keigo || c.keigoOthers, c.arch, c.stiff, !c.first.empty()};
 }
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines) {

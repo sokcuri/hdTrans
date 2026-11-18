@@ -62,7 +62,7 @@ dict:w:35912	「死んだわけないよ」	has:죽었을 리가 없	fix	local-e
 dict:w:35912	「行ったわけもないし」	has:갔을 리도 없	fix	local-ending
 dict:w:35913	「行くわけもないし」	has:갈 리도 없	fix	local-ending
 dict:w:35913	「来るわけはないよ」	has:올 리는 없	fix	local-ending
-pattern:書くわけありません	「勝てるわけありません」	has:리가 없습니다	fix	lookup
+pattern:書くわけありません	「勝てるわけありません」	has:리가 없어요	fix	lookup
 cx:wake-nai:40	「わかるわけない」	has:알 리가 없	keep	rewrites
 dict:w:35911	「そんなわけないでしょ」	has:리 없	keep	defaults
 dict:w:35910	「そんなの訳ないよ」	has:쉬워	keep	defaults

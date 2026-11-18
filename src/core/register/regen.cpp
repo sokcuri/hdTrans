@@ -636,6 +636,8 @@ void ReadHapsyoFinals(Words& r, const Tables& t, std::vector<Node>& nodes) {
         if (stem.size() >= 2 && (stem.back() == U'았' || stem.back() == U'었' || stem.back() == U'였')) stem.pop_back();
         std::vector<Bundle> found;
         std::string lemma = ToU8(stem) + "다", pos, cls;
+        // the copula alone after a comma or a pause (어머님, 입니다) has no host to be read with
+        if (lemma == t.G("lemma.cop")) continue;
         if (!stem.empty() && (t.stems.contains(lemma) || t.lemmaPos.contains(lemma))) {
             ItemPosClass(t, lemma, pos, cls);
             found = r.Find(lemma, pos, cls, surface, h);
@@ -808,9 +810,16 @@ std::vector<std::u32string> PoliteSentences(const RegisterTables& rt, const std:
     return out;
 }
 
-// REG-27: whether a source sentence has a subject marked with が after a noun (雨が, 誰が; not ですが, ながら).
+// REG-27: whether the main clause of a source sentence (after its last 、, ので, から) has a subject marked with が
+// after a noun (雨が降ります, 誰が; not ですが, ながら, nor 用があるので、帰ります).
 bool OtherSubject(std::u32string_view s) {
-    for (std::size_t i = 1; i < s.size(); ++i) {
+    std::size_t from = 1;
+    for (const std::u32string_view b : {std::u32string_view(U"、"), std::u32string_view(U"，"), std::u32string_view(U"ので"),
+                                         std::u32string_view(U"から")}) {
+        const std::size_t at = s.rfind(b);
+        if (at != std::u32string_view::npos) from = std::max(from, at + b.size() + 1);
+    }
+    for (std::size_t i = from; i < s.size(); ++i) {
         if (s[i] != U'が') continue;
         const char32_t p = s[i - 1];
         const bool kanji = (p >= U'一' && p <= U'鿿') || p == U'々';
