@@ -1,0 +1,70 @@
+# 규칙: LEX-6600
+# 규칙: LEX-6601
+# 규칙: LEX-6602
+# 규칙: LEX-6603
+rule	input	expected	kind	layer
+sound:short-word-stretch	う～そ！	has:거짓말	fix	sound
+sound:short-word-stretch	う〜そ！	has:거짓말	fix	sound
+sound:short-word-stretch	「う～そ、本当に？」	has:거짓말	fix	sound
+sound:short-word-stretch	い～な、それ。	has:좋	fix	sound
+sound:short-word-stretch	い〜な、それ。	has:좋	fix	sound
+sound:short-word-stretch	「い～なぁ」	has:좋	fix	sound
+sound:short-word-stretch	い～や、違う。	has:아니	fix	sound
+sound:short-word-stretch	い〜や、違うよ。	has:아니	fix	sound
+sound:short-word-stretch	か～さん	has:어머니	keep	sound
+sound:short-word-stretch	あ～そこ	has:아~거기	keep	sound
+sound:short-word-stretch	あ～あ、疲れた。	has:아~아	keep	sound
+sound:short-word-stretch	う～ん、そう。	has:으음	keep	sound
+sound:short-word-stretch	お～い、待って	has:어이	keep	sound
+sound:short-word-stretch	ど～しよう	has:어떻게 하지	keep	sound
+sound:short-word-stretch	ほ～んと？	has:정말	keep	sound
+sound:short-word-stretch	す～ごい	has:대단	keep	sound
+sound:short-word-stretch	うそ！	has:거짓말	keep	sound
+sound:interjection-rows	「うお、なんか改まって言われると、ちょっと恥ずかしいな……」	has:「우와,	fix	sound
+sound:interjection-rows	うお、すげえ！	has:우와	fix	sound
+sound:interjection-rows	うおの目が痛い。	has:티눈	keep	sound
+sound:interjection-rows	うお座の生まれ。	has:물고기자리	keep	sound
+sound:interjection-rows	魚が泳ぐ。うおっ！	has:우옷	keep	sound
+sound:interjection-rows	(ユウタロウ)うぃ〜 おめでとう！	has:위~	fix	sound
+sound:interjection-rows	うぃ、うぃー	has:위, 위	fix	sound
+sound:interjection-rows	うぃーす	lacks:괴롭	keep	sound
+sound:interjection-rows	よっこいしょ	영차	fix	sound
+sound:interjection-rows	よっこいしょ、と腰を上げた。	has:영차	fix	sound
+sound:interjection-rows	よっこらしょ	영차	fix	sound
+sound:interjection-rows	よいしょ	영차	keep	sound
+sound:interjection-rows	ポチポチって言われた	has:딸깍딸깍	fix	sound
+sound:interjection-rows	ボタンをポチポチと押す。	has:딸깍딸깍	fix	sound
+sound:interjection-rows	水結が、とととっと、足をもつれさせながら近寄ってくる。	has:총총총	fix	sound
+sound:interjection-rows	いえいえ、そんな	has:아니에요	keep	sound
+katakana:long-u	グーグル・クラウド・ジャパン	has:구글 클라우드	fix	names
+katakana:long-u	ズーガルさん	has:주갈	fix	names
+katakana:long-u	グーグル	구글	keep	lookup
+katakana:long-u	ルール	룰	keep	lookup
+katakana:long-u	スープを飲む。	has:스프	keep	lookup
+katakana:long-u	「スーイカワリー」という武道	has:스이카와리	keep	lookup
+katakana:long-u	「オープーーン！」	lacks:오푸	keep	lookup
+katakana:long-u	セツブーン！	has:세츠분	fix	lookup
+katakana:long-u	ブーゲンビルで	has:부겐빌	fix	lookup
+katakana:long-u	ブーツを履く。	has:부츠	keep	lookup
+katakana:long-u	ゲームを買った。	has:게임	keep	lookup
+katakana:long-u	グラスを割った。	has:잔을	keep	lookup
+dict:brand-rows	オリックス系ファンド、リクルートの学習事業買収　「スタディサプリ」など	has:「스터디사프리」	fix	lookup
+dict:brand-rows	近年は「スタディサプリ」が全国約２５００の高校などに導入され、	has:「스터디사프리」가	fix	lookup
+dict:brand-rows	サプリを飲む。	has:영양제	keep	lookup
+dict:brand-rows	「昨日からＳクラス所属になったツンデレ中のツンデレよ」	lacks:메르세데스	fix	lookup
+dict:brand-rows	「Ｓクラス……？」	has:S클래스	fix	lookup
+dict:brand-rows	Ａクラスの生徒	lacks:메르세데스	keep	lookup
+number:kazu-counter	それは数桁の数字。	has:몇 자리	fix	senses
+number:kazu-counter	数曲歌った。	has:몇 곡	fix	senses
+number:kazu-counter	数席空いた。	has:몇 석	fix	senses
+number:kazu-counter	数組の夫婦。	has:몇 조	fix	senses
+number:kazu-counter	数機の戦闘機。	has:몇 기	fix	senses
+number:kazu-counter	数滴の血。	has:몇 방울	fix	senses
+number:kazu-counter	数台の車。	has:몇 대	keep	senses
+number:kazu-counter	数匹の猫。	has:몇 마리	keep	senses
+number:kazu-counter	数枚の紙。	has:몇 장	keep	senses
+number:kazu-counter	数日後。	has:며칠	keep	senses
+number:kazu-counter	数年前。	has:년 전	keep	senses
+number:kazu-counter	数十人。	has:수십	keep	senses
+number:kazu-counter	数値を測る。	has:수치	keep	senses
+number:kazu-counter	数字の桁	has:숫자	keep	senses

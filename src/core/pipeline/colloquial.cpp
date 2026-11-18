@@ -2355,6 +2355,22 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
                 best = reach(m, 3);
                 if (best < k + 3) best = 0;
             }
+            // A short word whose bare first vowel the mark draws out (い～な いいな, い～や いいや, う～そ うそ):
+            // after い the long vowel spelled out, after う the mark dropped, makes a dictionary key from the
+            // vowel past the mark. The vowel opens its word (no kanji or kana before it), and the kana after
+            // the mark start no word of two kana or more, or the key takes that word in too.
+            if (best == 0 && (prev == U'い' || prev == U'う') && (k == 1 || !inWord(rs[k - 2])) && next != U'ん') {
+                const std::u32string_view vowel = prev == U'い' ? U"い" : U"";
+                const std::u32string t = Spliced(rs, k, vowel, end);
+                const size_t key = e.LongestKey(std::u32string_view(t).substr(k - 1));
+                const size_t own = e.LongestKey(std::u32string_view(rs).substr(end));
+                const size_t past = k - 1 + key;  // the end of the key in t
+                const size_t after = k + vowel.size();  // where the kana after the mark start in t
+                if (key >= 2 && past >= after + (vowel.empty() ? 1 : 0) && (own < 2 || past >= after + own)) {
+                    m = t;
+                    best = past;
+                }
+            }
         }
         if (best == 0) {
             k = end - 1;
