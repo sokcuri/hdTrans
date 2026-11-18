@@ -151,6 +151,14 @@ bool SenseTriggers(const Item* x, const Item* it, const userdict::Sense& sense) 
     return false;
 }
 
+// Whether verb item it holds a (ら)れ right after its stem within the word (ending.rare-voice: 連れられる).
+bool VoicedVerb(const Item* it) {
+    if (it->selected < 0 || At(it->Code(it->selected), 0) != '4' || static_cast<int>(it->group->surface.size()) >= it->length) return false;
+    const std::string_view text(it->text);
+    const std::size_t from = std::min(text.size(), static_cast<std::size_t>(it->start) + it->group->surface.size());
+    return dict::StartsWithMember(HDTRANS_CLASS("ending.rare-voice"), text.substr(from)) > 0;
+}
+
 // Whether a trigger of sense s stands on its side of it: for Before and After within the
 // window (a quotation mark, a bracketed aside before it, or a comma between nouns, counts but does not stop it), with
 // no clause boundary and no other predicate in between. A sense with no triggers applies always, but for a one-kanji
@@ -198,6 +206,9 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
             }
         }
         if (x == nullptr || x->selected < 0) return false;
+        // A verb after a verb that chooses its sense makes one act with it (連れて歩く 데리고 걷다); a passive
+        // or potential within the word is no part of such an act (連れられるまま歩いた 이끌리는 대로; ending.rare-voice).
+        if (s.side == userdict::Side::After && At(x->Code(x->selected), 0) == '4' && VoicedVerb(it)) return false;
         if (SenseTriggers(x, it, s)) return true;
         // A word right after a numeral is its counter (この後11時): the words before the numeral
         // do not choose its sense.

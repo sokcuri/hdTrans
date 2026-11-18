@@ -14687,3 +14687,71 @@ question.kansai-yanen	何	だよ
 question.kansai-yanen	なん	だよ
 question.kansai-yanen	なに	だよ
 question.kansai-yanen	どう	なんだよ
+verb.intransitive-godan	着かれ
+verb.intransitive-godan	泣かれ
+verb.passive-after-object	なめ
+verb.passive-after-object	ナメ
+//= verb.thing-object	The (ら)れ stems of verbs whose object is a thing, words, a plan, a task or a post and never a person (書かれ, 述べられ, 決められ, 辞められ, 始められ): an honoured subject with no object before one did the act, respectful (部長が辞められた 그만두셨다, 先生の書かれた本 쓰신 책; spec GRM-4250). A verb not here keeps the passive there (先生が叱られた, 社長が突き飛ばされた), and an ichidan negative stays the potential (社長は決められない 결정할 수 없다).
+verb.thing-object	書かれ
+verb.thing-object	描かれ
+verb.thing-object	記され
+verb.thing-object	読まれ
+verb.thing-object	よまれ
+verb.thing-object	述べられ
+verb.thing-object	のべられ
+verb.thing-object	語られ
+verb.thing-object	かたられ
+verb.thing-object	決められ
+verb.thing-object	きめられ
+verb.thing-object	定められ
+verb.thing-object	さだめられ
+verb.thing-object	辞められ
+verb.thing-object	やめられ
+verb.thing-object	始められ
+verb.thing-object	はじめられ
+verb.thing-object	終えられ
+verb.thing-object	おえられ
+verb.thing-object	使われ
+verb.thing-object	つかわれ
+verb.thing-object	作られ
+verb.thing-object	つくられ
+verb.thing-object	建てられ
+verb.thing-object	開かれ
+//= ending.rare-te-leave	Forms after られ that start with the て of ending.rare-passive but are て and another word, a leave or a gladness, no ている (食べられていい 먹을 수 있어서 좋다; spec GRM-4252).
+ending.rare-te-leave	ていい
+//= ending.done-to-passive	Forms after られ of a manner clause, going along with what is done (られるまま, られるがまま): passive for a verb of an act done to someone (DoneToSomeone, verb.led-passive: 連れられるまま 이끌리는 대로), the potential for any other (食べられるままに 먹을 수 있는 대로; spec GRM-4252).
+ending.done-to-passive	るまま
+ending.done-to-passive	るがまま
+//= verb.led-passive	Ichidan stems of leading, holding or handling someone whose られるまま is being led or held along (連れられるまま 이끌리는 대로, 抱きしめられるがまま 안기는 대로; spec GRM-4252).
+verb.led-passive	連れ
+verb.led-passive	引き連れ
+verb.led-passive	抱きしめ
+verb.led-passive	抱き締め
+verb.led-passive	抱き寄せ
+verb.led-passive	勧め
+//= ending.reported-past	Forms after the られ of an ichidan verb in a report, the polite past (ました): GRM-4251 reads it respectful when nothing else decides; ending.reported-past-not lists the forms that start alike and are not it.
+ending.reported-past	ました
+//= ending.reported-past-not	Forms that start like ending.reported-past and are a condition, not a report (ましたら).
+ending.reported-past-not	ましたら
+//= adverb.managed	Words of getting something done in the end or thanks to help (なんとか, どうにか, 無事, おかげで): a られました after one in its sentence is what one could do, the potential (なんとか宿題を終えられました 끝낼 수 있었습니다; spec GRM-4251).
+adverb.managed	なんとか
+adverb.managed	何とか
+adverb.managed	どうにか
+adverb.managed	どうにかこうにか
+adverb.managed	無事
+adverb.managed	無事に
+adverb.managed	おかげ
+adverb.managed	お陰
+adverb.managed	お蔭
+adverb.managed	おかげさま
+adverb.managed	お陰様
+adverb.managed	おかげで
+adverb.managed	お陰で
+adverb.managed	お蔭で
+adverb.managed	おかげさまで
+adverb.managed	お陰様で
+//= ending.rare-voice	The られ that follows an ichidan stem within its word: a verb sense whose triggers follow the verb (連れて歩く 데리고 걷다) is not of its passive or potential (連れられるまま歩いた 이끌리는 대로).
+ending.rare-voice	られ
+//= verb.belittle-passive	The kana stems of なめる, ナメる, which mostly belittle: their られ with no object in its clause is being looked down on in the negative and the condition too (ナメられたら 얕보이면; spec GRM-4252). The kanji 舐め mostly licks and is not here (そんなに舐められたら).
+verb.belittle-passive	なめ
+verb.belittle-passive	ナメ
