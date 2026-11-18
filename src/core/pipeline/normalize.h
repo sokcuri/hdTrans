@@ -38,6 +38,9 @@ struct RunLookup {
     // The length in bytes of the longest key of the dictionary that text starts with (NormalizeForms: が of
     // か゛んばれ against か); null for none.
     size_t (*keyReach)(const void* context, std::string_view text) = nullptr;
+    // Whether form, whole, is the dictionary form of an ichidan verb of the dictionary (DialectForms: 見とられん,
+    // not 足とられん); null for none.
+    bool (*ichidanVerb)(const void* context, std::string_view form) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

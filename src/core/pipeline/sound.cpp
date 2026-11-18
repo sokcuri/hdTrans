@@ -4144,6 +4144,10 @@ bool IsDictionaryVerb(std::string_view form, const LineContext& ctx, const dict:
     return VerbFormIs(form, kDictionaryForm, AnyKind, ctx, snap);
 }
 
+bool IsDictionaryIchidan(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap) {
+    return VerbFormIs(form, kDictionaryForm, IchidanKind, ctx, snap);
+}
+
 bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict) {
     // the hiragana that end text: the okurigana of a verb in kanji or katakana, or a verb in kana
     constexpr int kLongestKanaRun = 8;  // runes
