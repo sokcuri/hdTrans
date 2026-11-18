@@ -138,3 +138,6 @@ lemma	pos	class	flags	note
 비다	V	NC		비어 (벼 is not used)
 꼬시다	V	REG	whole	시 is the stem (꼬셔요), not the honorific
 적시다	V	REG	whole	시 is the stem (적셔요), not the honorific
+# adjectives the generated lemma list gives as verbs: a state, not a will (REG-27)
+혼란하다	A	HA	whole	혼란해요 (chaotic)
+곤란하다	A	HA	whole	곤란해요 (troubled)

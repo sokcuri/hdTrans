@@ -15,7 +15,7 @@ lexical:audit-game-gloss	口の中で飴を転がしながら喋る。	has:사�
 lexical:audit-game-gloss	「お待たせしましたー」	has:오래 기다리셨습니다	fix	lookup
 lexical:audit-game-gloss	「人前だってのに」	has:사람들 앞	fix	local
 lexical:audit-game-gloss	「でも、この間言われたんです……」	has:얼마 전	fix	lookup
-lexical:audit-game-gloss	「私こそすみませんでした」	has:죄송합니다	fix	lookup
+lexical:audit-game-gloss	「私こそすみませんでした」	has:죄송	fix	lookup
 lexical:audit-game-gloss	無茶振りだ。	has:무리한 요구	fix	lookup
 lexical:audit-game-gloss	でも……人影は……ない。	has:사람 그림자	fix	lookup
 lexical:audit-game-gloss	「今週の土日って空いてます？」	has:주말	fix	lookup

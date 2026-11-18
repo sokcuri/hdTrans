@@ -151,6 +151,7 @@ char EndSound(std::u32string_view w) {
         return DigitSound(d);
     }
     if ((c >= U'A' && c <= U'Z') || (c >= U'a' && c <= U'z')) return LatinSound(w);
+    if (c == U'%' || c == U'％') return 'V';  // 퍼센트, as the particles read it (output/particle.h)
     return 0;
 }
 

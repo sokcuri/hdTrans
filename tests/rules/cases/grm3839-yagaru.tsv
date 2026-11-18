@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:yagaru	小太刀が完全に遊んでいやがる。	작은 칼이 완전히 놀고 있다.	fix	normalize
 normalize:yagaru	あいつ、笑っていやがる	저 녀석, 웃고 있다	fix	normalize
-normalize:yagaru	「覚えていやがりましたか」	「기억했습니까」	fix	normalize
+normalize:yagaru	「覚えていやがりましたか」	「기억했어요?」	fix	normalize
 normalize:yagaru	本当で勝てるつもりでいやがるッ！！！	사실로 이길 수 있을 생각으로 싫어하는!!!	keep	normalize
 normalize:yagaru	おおお…二人とも、良い子でやがりますな！	오오오…두 사람 모두, 좋은 아이입니다!	fix	normalize
 normalize:yagaru	あ、兄上は関係ないでやがりますよ。	아, 형님은 관계없어요.	fix	normalize

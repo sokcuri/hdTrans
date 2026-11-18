@@ -3,7 +3,7 @@ dict:gram:iku:masu	「さ、いきましょ」	「자, 갑시다」	fix	local
 dict:gram:iku:masu	「地道にいきましょ、千里」	「착실하게 갑시다, 치사토」	fix	local
 dict:gram:iku:masu	強くいきる。	강하게 산다.	keep	local
 dict:gram:iku:masu	いきろ！	살아라!	keep	local
-dict:jisjk:363740	「マスターに危害を加える気ですね。そうはいきません！」	「마스터에 해를 끼칠 생각이군요. 그렇게는 되지 않습니다!」	fix	local
+dict:jisjk:363740	「マスターに危害を加える気ですね。そうはいきません！」	「마스터에 해를 끼칠 생각이군요. 그렇게는 되지 않아요!」	fix	local
 dict:gram:iku:neg-manner:いかな	羊飼いを増やせればいいが、そうもいかない実情がある。	양치기를 늘릴 수 있으면 좋지만, 그렇게도 되지 않는 실정이 있다.	fix	local
 dict:gram:iku:neg-manner:いかな	……が、事はそう単純にはいかなかった。	……하지만, 일은 그렇게 단순하게는 되지 않았다.	fix	local
 dict:gram:iku:neg-manner:いかな	学校にはいかない。	학교에는 가지 않는다.	keep	local

@@ -477,6 +477,7 @@
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
 //= pronoun.humble-first-person	First-person pronouns, and their のこと read as the pronoun, read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다, 私のこともお見知りおきを 저도).
+//= pronoun.humble-singular	Members of pronoun.humble-first-person whose 우리 reading is a group or a home, not the speaker (うちの学園 우리 학원): only their 나 and 내 readings are humbled (うちがやります 제가).
 //= pronoun.rough-second-person	Second-person pronouns of rough or scornful speech, alone and plural (お前, 貴様, てめえ, あんた): the subject of a quotation before a sentence-final 思うな, which then forbids (お前が勝てると思うな 네가 이길 수 있다고 생각하지 마).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
@@ -6693,6 +6694,8 @@ pronoun.humble-first-person	私のこと
 pronoun.humble-first-person	わたしのこと
 pronoun.humble-first-person	僕のこと
 pronoun.humble-first-person	おいら
+pronoun.humble-first-person	うち
+pronoun.humble-singular	うち
 pronoun.humble-first-person	オイラ
 
 pronoun.second-person-genitive	君

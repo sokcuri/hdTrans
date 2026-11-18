@@ -11135,7 +11135,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 置所	놓아 둔 장소	I110	VPl		GN							jisjk:86911
 置きどころ	놓아 둔 장소	I110	VPl		GN							jisjk:86911
 置屋	기생집	N110	VBl		GN							jisjk:165103
-左様	그와 같이	E300			GN							jisjk:123151
+左様	그%C5@	G8U0			GN							jisjk:123151
 佐様	그와 같이	E300			GN							jisjk:123151
 差し引き勘定	차감 잔액 계산	I110			GN							jisjk:108969
 差し向い	마주 보고 앉음	N110			GN							jisjk:185200

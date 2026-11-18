@@ -799,7 +799,9 @@ std::vector<std::u32string> PoliteSentences(const RegisterTables& rt, const std:
             if (s[i] != U'…' && s[i] != U'‥') continue;
             std::size_t j = i;
             while (j < s.size() && (s[j] == U'…' || s[j] == U'‥')) ++j;
-            if (i > start && j < s.size() && CuesOfSentence(rt, "「" + ToU8(s.substr(start, i - start)) + "」").pend) {
+            // a rest of marks and a lone small っ (無理です……っ) is no sentence of its own
+            const bool rest = s.substr(j).find_first_not_of(U"っッー〜～！!？?。、…‥・ 　") != std::u32string::npos;
+            if (i > start && rest && CuesOfSentence(rt, "「" + ToU8(s.substr(start, i - start)) + "」").pend) {
                 out.push_back(s.substr(start, i - start));
                 start = j;
             }
@@ -810,47 +812,96 @@ std::vector<std::u32string> PoliteSentences(const RegisterTables& rt, const std:
     return out;
 }
 
-// REG-27: whether the main clause of a source sentence (after its last 、, ので, から) has a subject marked with が
-// after a noun (雨が降ります, 誰が; not ですが, ながら, nor 用があるので、帰ります).
-bool OtherSubject(std::u32string_view s, const std::string& we) {
+// REG-27: a source sentence without its closing marks, small っ and sentence-final particles (行きますよっ！ → 行きます).
+std::u32string BareEnd(std::u32string_view s) {
+    std::u32string e(s);
+    for (bool cut = true; cut;) {
+        cut = false;
+        while (!e.empty() && std::u32string_view(U"ー〜～っッ…‥・ 　！!？?。、」』").find(e.back()) != std::u32string_view::npos) {
+            e.pop_back();
+            cut = true;
+        }
+        for (const std::u32string_view tail : {std::u32string_view(U"よ"), std::u32string_view(U"ね"), std::u32string_view(U"わ")})
+            if (e.size() > 3 && std::u32string_view(e).ends_with(tail)) {
+                e.pop_back();
+                cut = true;
+            }
+    }
+    return e;
+}
+
+// REG-27: whether a source sentence ends in an event its subject does not do: the intransitive of a pair in -aru written
+// with a kanji before its kana (始まります, 決まります, 変わります, 助かります: lower.event-okuri, but not
+// lower.event-not) or a verb of lower.event (届きます, 沸騰します).
+bool EventEnd(std::u32string_view s, const Tables& t) {
+    std::u32string e = BareEnd(s);
+    if (!std::u32string_view(e).ends_with(U"ます") && !std::u32string_view(e).ends_with(U"マス")) return false;
+    e.resize(e.size() - 2);
+    for (const auto& w : Split(t.G("lower.event-not"), '|'))
+        if (!w.empty() && std::u32string_view(e).ends_with(ToU32(w))) return false;
+    for (const auto& w : Split(t.G("lower.event"), '|'))
+        if (!w.empty() && std::u32string_view(e).ends_with(ToU32(w))) return true;
+    for (const auto& w : Split(t.G("lower.event-okuri"), '|')) {
+        const std::u32string k = ToU32(w);
+        if (k.empty() || e.size() <= k.size() || !std::u32string_view(e).ends_with(k)) continue;
+        const char32_t c = e[e.size() - k.size() - 1];
+        if ((c >= U'一' && c <= U'鿿') || c == U'々') return true;
+    }
+    return false;
+}
+
+// REG-27: whether the main clause of a source sentence (after its last 、, ので or から) has a subject marked with が
+// after a noun (雨が降ります, 誰が, 田中さんが, あいつが; not ですが, ながら, nor 用があるので、帰ります).
+bool OtherSubject(std::u32string_view s, const Tables& t) {
     std::size_t from = 1;
-    for (const std::u32string_view b : {std::u32string_view(U"、"), std::u32string_view(U"，"), std::u32string_view(U"ので"),
-                                         std::u32string_view(U"から")}) {
+    std::vector<std::u32string> ends = {U"、", U"，", U"ので", U"から"};
+    for (const auto& b : ends) {
         const std::size_t at = s.rfind(b);
         if (at != std::u32string_view::npos) from = std::max(from, at + b.size() + 1);
     }
+    const auto kanaSubject = Split(t.G("other.kana-subject"), '|');
+    const std::string we = t.G("lower.we");
     for (std::size_t i = from; i < s.size(); ++i) {
         if (s[i] != U'が') continue;
         const char32_t p = s[i - 1];
         const bool kanji = (p >= U'一' && p <= U'鿿') || p == U'々';
         const bool katakana = (p >= U'ァ' && p <= U'ヺ') || p == U'ー';
         const bool pronoun = p == U'れ' && i >= 2 && std::u32string_view(U"こそあど").find(s[i - 2]) != std::u32string_view::npos;
-        bool speaker = false;
+        bool speaker = false, kana = false;
         for (const auto& w : Split(we, '|'))
             if (!w.empty() && s.substr(0, i).ends_with(ToU32(w))) speaker = true;
-        if ((kanji || katakana || pronoun) && !speaker) return true;
+        for (const auto& w : kanaSubject)
+            if (!w.empty() && s.substr(0, i).ends_with(ToU32(w))) kana = true;
+        if ((kanji || katakana || pronoun || kana) && !speaker) return true;
     }
     return false;
 }
 
-// REG-26: whether the quote addresses an audience, a master or royalty (source.address), each term matched as a
-// word: not inside a longer katakana word or before the stem of a verb (マスターする, マスターズ).
+// REG-26, REG-38: whether the quote addresses the audience or the listener (source.address: 皆さん, あなた, anywhere) or
+// calls a master or royalty (source.address-call: the term before a mark that ends the call, 師匠、, …ですね、マスター」,
+// not a mention, 師匠の家に, 王様は); a term is not inside a longer katakana word or before the stem of a verb
+// (マスターする, マスターズ).
 bool Addressed(const std::string& ja, const Tables& t) {
     const std::u32string u = ToU32(ja);
     const std::u32string notBefore = ToU32(t.G("source.address-notbefore"));
-    for (const auto& w : Split(t.G("source.address"), '|')) {
+    const std::u32string_view calls = U"、，,！!？?…‥。」』 　";
+    for (const auto& w : Split(t.G("source.address-any"), '|'))
+        if (!w.empty() && u.find(ToU32(w)) != std::u32string::npos) return true;
+    for (const char* key : {"source.address", "source.address-call"})
+    for (const auto& w : Split(t.G(key), '|')) {
         const std::u32string e = ToU32(w);
         if (e.empty()) continue;
+        const bool call = std::string_view(key) == "source.address-call";
         const bool kata = (e.back() >= U'ァ' && e.back() <= U'ヺ') || e.back() == U'ー';
         for (std::size_t at = u.find(e); at != std::u32string::npos; at = u.find(e, at + 1)) {
             const std::size_t n = at + e.size();
             if (n < u.size() && notBefore.find(u[n]) != std::u32string::npos) continue;
             if (kata && n < u.size() && ((u[n] >= U'ァ' && u[n] <= U'ヺ') || u[n] == U'ー')) continue;
+            if (call && n < u.size() && calls.find(u[n]) == std::u32string_view::npos) continue;
             return true;
         }
     }
     // a title called with a name (ロウリア王、, 穂積殿。): before a mark that ends the call
-    const std::u32string_view calls = U"、，,！!？?…‥。」』";
     for (const auto& w : Split(t.G("source.address-title"), '|')) {
         const std::u32string e = ToU32(w);
         if (e.empty()) continue;
@@ -879,7 +930,7 @@ std::vector<std::pair<std::size_t, std::size_t>> NodeTexts(std::size_t count, co
 // the old text (the reading is sure); otherwise, or when nothing can be placed, ok turns false.
 std::string Splice(const Tables& t, const std::string& before, const std::vector<Node>& nodes, const std::vector<Reg>& reg,
                    const UttLevel& u, const std::string& g, const std::vector<OutSpan>& spans,
-                   const std::vector<bool>& nested, bool& ok) {
+                   const std::vector<bool>& nested, const std::vector<bool>& asked, bool& ok) {
     const std::u32string o = ToU32(before);
     const auto texts = NodeTexts(nodes.size(), spans);
     const auto newText = [&](uint32_t id) {
@@ -982,6 +1033,21 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
                 ok = false;
                 return before;
             }
+        }
+        // REG-37: a lowered question asked by its ending alone: ? for a period or a comma after it, or before another
+        // mark (정말이에요?, 아니에요? 바보, 어때요?……)
+        if (gr->last < asked.size() && asked[gr->last] && levelOf(nodes[gr->last].id) == Level::haeyo) {
+            // after a stretch (그랬어요~?, 어때요~?)
+            std::size_t k = gr->last + 1, at = to;
+            while (k < nodes.size() && nodes[k].kind == Kind::Punct && nodes[k].to > nodes[k].from &&
+                   result.substr(nodes[k].from, nodes[k].to - nodes[k].from).find_first_not_of(U"~～") == std::u32string::npos)
+                at = nodes[k++].to;
+            const bool mark = k < nodes.size() && nodes[k].kind == Kind::Punct && nodes[k].to == nodes[k].from + 1 &&
+                              (nodes[k].punct == Punct::end || nodes[k].punct == Punct::comma);
+            if (mark)
+                result.replace(nodes[k].from, 1, U"?");
+            else if (k >= nodes.size() || nodes[k].kind == Kind::Punct)
+                result.insert(at, U"?");
         }
         result.replace(from, to - from, ToU32(regenAt(texts, g, gr->first, gr->last)));
     }
@@ -1096,6 +1162,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         // the last sentence end of each quote (a final V node, not nested, not -ㄹ까 하다, not before a comma)
         std::vector<std::size_t> lastEnd(nodes.empty() ? 1 : quoteOf.back() + 1, nodes.size());
         std::vector<bool> lowered(nodes.size(), false);  // REG-25: the sentence ends lowered to 해요체
+        std::vector<bool> asked(nodes.size(), false);    // REG-25: of them, a question asked by its ending alone (정말입니까.)
         std::vector<bool> tailEnd(nodes.size(), false);  // REG-25: of them, a last predicate before an afterthought (즐거웠어요, 정말)
         for (std::size_t q = 0; q < nodes.size(); ++q) {
             const bool comma = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
@@ -1183,9 +1250,16 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     if (sentenceOf[q] < jaEnds.size() && ExplanatoryEnd(jaEnds[sentenceOf[q]])) return false;
                     const std::string pos = !n.vpos.empty() ? n.vpos : LookupPredicate(t, n.lemma).pos;
                     if (n.mood != Mood::decl || n.tense != Tense::nonpast || pos != "V" || n.kcls == "EXIST") return false;
-                    // no will: a verb of state or cognition (모르다, 되다), an obligation (-아야 하다)
+                    // a state the source writes as a verb (混乱します 혼란해요): the Korean tables give an adjective
+                    if (LookupPredicate(t, n.lemma).pos == "A") return false;
+                    const std::size_t s = sentenceOf[q];
+                    // no will: a verb of state, feeling or cognition (모르다, 믿다), a passive or a change (정해지다, 시작되다),
+                    // an event the speaker does not do (始まります, 届きます), an obligation (-아야 하다)
                     for (const auto& w : Split(t.G("lower.not-will"), '|'))
                         if (n.lemma == w) return false;
+                    for (const auto& w : Split(t.G("lower.not-will-shape"), '|'))
+                        if (!w.empty() && n.lemma.size() > w.size() && n.lemma.ends_with(w)) return false;
+                    if (s < jaSents.size() && EventEnd(jaSents[s], t)) return false;
                     for (std::size_t k = q; k-- > 0;) {
                         if (nodes[k].kind == Kind::Punct) continue;
                         if (nodes[k].kind == Kind::V && nodes[k].ctype == CType::conn && EndsWithAny(nodes[k].eomi, t.G("lower.obligation")))
@@ -1193,8 +1267,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                         break;
                     }
                     // an event with a subject other than the speaker (雨が降ります 비가 와요)
-                    const std::size_t s = sentenceOf[q];
-                    return !(s < jaSents.size() && !firstPerson[s] && OtherSubject(jaSents[s], t.G("lower.we")));
+                    return !(s < jaSents.size() && !firstPerson[s] && OtherSubject(jaSents[s], t));
                 };
                 const auto keepEomi = [&](const std::string& e) {
                     const auto keep = Split(t.G("lower.keep-eomi"), '|');
@@ -1226,6 +1299,21 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                                 other = true;
                         if (!other && !keepEomi(n.wasEomi) && !willed(q)) {
                             lower[q] = true;
+                            // REG-37: a question asked by its ending may take ? if the source asks with ですか, ますか,
+                            // ませんか, ましたか (not でしょうか) and no pause or ! follows (そうだったんですか…… muses, ですか！ exclaims).
+                            // Not a musing ね after it (ですかね), a negative copula that asserts (ではありませんか: asked.not), nor the
+                            // copula itself (やはりですか, わけですか confirm more than ask: 합쇼체 as before)
+                            std::u32string_view e = jaSents[sentenceOf[q]];
+                            while (!e.empty() && std::u32string_view(U"ー〜～っッ…‥・ 　、」』").find(e.back()) != std::u32string_view::npos)
+                                e.remove_suffix(1);
+                            std::size_t k = q + 1;  // the mark after it, past a stretch (그렇습니까~……)
+                            while (k < nodes.size() && nodes[k].kind == Kind::Punct && nodes[k].to > nodes[k].from &&
+                                   out32.substr(nodes[k].from, nodes[k].to - nodes[k].from).find_first_not_of(U"~～") == std::u32string::npos)
+                                ++k;
+                            const bool pause = k < nodes.size() && nodes[k].kind == Kind::Punct &&
+                                               (nodes[k].punct == Punct::ellipsis || nodes[k].punct == Punct::excl);
+                            asked[q] = !pause && nodes[q].kcls != "COP" && nodes[q].vpos != "C" && (e.ends_with(U"すか") || e.ends_with(U"せんか") || e.ends_with(U"したか")) &&
+                                       !EndsWithAny(ToU8(e), t.G("asked.not"));
                             if (afterthought) {
                                 tailEnd[q] = true;
                                 if (lastEnd[quoteOf[q]] >= nodes.size() || lastEnd[quoteOf[q]] < q) lastEnd[quoteOf[q]] = q;
@@ -1364,6 +1452,11 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 const bool give = (nodes[q].lemma == "주다" || auxSee) && nodes[q].ctype == CType::final_ &&
                                   nodes[q].mood == Mood::decl && nodes[q].tense == Tense::nonpast && was == Level::haera &&
                                   nodes[q].eomi.empty() && lastWord && target == Level::hae;
+                // REG-25: a lowered question asked by its ending alone (本当ですか。 정말입니까.) is written with ? (정말이에요?)
+                if (askedByEnding && asked[q] && lower[q] && was == Level::hapsyo && target == Level::haeyo && !keigo && !mixed && !inner)
+                    askedByEnding = false;
+                else
+                    asked[q] = false;
                 const bool held = mixed || (mixedHaeyo && !(lower[q] && target == Level::haeyo)) || inner || keep || keigo ||
                                   askedByEnding || hapsyo || raise || jaCommand ||
                                   (command && dec.key.starts_with("scene-speech")) || (give && !dec.giveDecl);
@@ -1495,7 +1588,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
         }
         std::vector<OutSpan> spans;
         std::string g = Generate(t, nodes, reg, u, &spans);
-        const std::string spliced = lineOk ? Splice(t, line.out, nodes, reg, u, g, spans, nested, lineOk) : line.out;
+        const std::string spliced = lineOk ? Splice(t, line.out, nodes, reg, u, g, spans, nested, asked, lineOk) : line.out;
         // a stutter (ど、どういう) repeats the first syllable of the next word: \x01, 어떤 → 어, 어떤
         for (std::size_t pos = g.find('\x01'); pos != std::string::npos; pos = g.find('\x01')) {
             std::size_t q = pos + 1;
