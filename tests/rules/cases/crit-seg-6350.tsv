@@ -1,0 +1,50 @@
+# 규칙: LEX-6350, LEX-6351, LEX-6352
+rule	input	expected	kind	layer
+segmentation:loose-kanji	黒山羊を見た。	흑염소를 보았다.	fix	lookup
+segmentation:loose-kanji	「黒山羊のことは、君に任せているんだ」	has:흑염소는	fix	lookup
+segmentation:loose-kanji	皆無事だった。	모두 무사했다.	fix	lookup
+segmentation:loose-kanji	同意見です。	동의견입니다.	fix	lookup
+segmentation:loose-kanji	地下水路の入口だ。	has:지하 수로	fix	lookup
+segmentation:loose-kanji	事務処理能力が高い。	사무 처리 능력이 높다.	fix	lookup
+segmentation:loose-kanji	高校生活が始まる。	has:생활이 시작된다	fix	lookup
+segmentation:loose-kanji	新兵装を試す。	신무장을 시험한다.	fix	lookup
+segmentation:loose-kanji	選挙戦略を立てる。	선거 전략을 세운다.	fix	lookup
+segmentation:loose-kanji	横浜軍事法廷で	has:군사 법정	fix	lookup
+segmentation:loose-kanji	想定問答集を読んだ。	예상질문집을 읽었다.	keep	lookup
+segmentation:loose-kanji	最大船速！	최대선속!	keep	lookup
+segmentation:loose-kanji	「日向改二」	「휴가 개2」	keep	lookup
+segmentation:loose-kanji	「紫電改二」三つ	「시덴카이2」 세 개	keep	lookup
+segmentation:loose-kanji	比較的非行政	비교적 비행정	keep	lookup
+segmentation:loose-kanji	現役最多安打数を誇る	현역 최다 안타수를 자랑한다	keep	lookup
+segmentation:loose-kanji	子守役もやっている	보모역도 하고 있다	keep	lookup
+segmentation:loose-kanji	防暑用軽装備か	방서용 경장비인가	keep	lookup
+segmentation:loose-kanji	ダイエット大公開！	다이어트 대공개!	keep	lookup
+segmentation:loose-kanji	特定商取引法に基づく	has:특정 상거래법	keep	lookup
+segmentation:loose-kanji	本願寺第十一世宗主	혼간지 제11세종주	keep	lookup
+segmentation:loose-kanji	十六番艦の朝霜	16번함의 아사시모	keep	lookup
+segmentation:loose-kanji	訪日外国人数	방일 외국인수	keep	lookup
+segmentation:loose-kanji	「生徒会報でも出したらどう？」	has:학생회보라도 내면	keep	lookup
+segmentation:loose-kanji	東京都に住む	도쿄도에 산다	keep	lookup
+segmentation:loose-kanji	甲斐国主となる	가이국주가 된다	keep	lookup
+segmentation:loose-kanji	毎朝雨だ	매일 아침 비다	keep	lookup
+segmentation:loose-kanji	今日昼に会おう	오늘 낮에 만나자	keep	lookup
+segmentation:loose-kanji	直接触ってみて	직접 만져 봐	keep	lookup
+segmentation:particle-kana-verb	国民からはまるで	국민에게서는 마치	fix	lookup
+segmentation:particle-kana-verb	昨日までは元気だった	어제까지는 건강했다	keep	lookup
+segmentation:particle-kana-verb	30位になる	30위가 된다	keep	lookup
+segmentation:particle-kana-verb	関西にある組織	칸사이에 있는 조직	keep	lookup
+segmentation:particle-kana-verb	自作であるかぎり	자작인 한	keep	lookup
+segmentation:particle-kana-verb	犯罪者にしない	범죄자로 하지 않는다	keep	lookup
+segmentation:particle-kana-verb	部屋にはいる	방에 들어간다	keep	lookup
+sense:dasu-send	会報を出した	회보를 냈다	fix	senses
+sense:dasu-send	新聞を出している	신문을 내고 있다	fix	senses
+sense:dasu-send	週報を出さない	주보를 내지 않는다	fix	senses
+sense:dasu-send	原稿を出せば	원고를 내면	fix	senses
+sense:dasu-send	手紙を出した	편지를 보냈다	keep	senses
+sense:dasu-send	葉書を出す	엽서를 보낸다	keep	senses
+sense:dasu-send	メールを出してください	메일을 보내 주세요	keep	senses
+sense:dasu-send	年賀状を出したら	연하장을 보내면	keep	senses
+sense:dasu-send	招待状を出した	초대장을 보냈다	keep	senses
+sense:dasu-send	声を出した	소리를 냈다	keep	senses
+segmentation:loose-kanji	記念式典を開催します	기념식을 개최합니다	fix	lookup
+segmentation:loose-kanji	式典に出席した	has:행사에 출석했다	fix	lookup

@@ -1,6 +1,6 @@
 # 규칙: GRM-123
 rule	input	expected	kind	layer
-cx:lc2b-mononara:10	「だから、国に意見書でも出そうものなら……許しませんよ」	has:보냈다가는	fix	rewrites
+cx:lc2b-mononara:10	「だから、国に意見書でも出そうものなら……許しませんよ」	has:의견서라도 냈다가는	fix	rewrites
 cx:lc2b-mononara:10	この波止まろうものなら、我が魂の律動も止まるのか？	has:멈추었다가는	fix	rewrites
 cx:lc2b-mononara:10	音でも立てようものなら、次は自分がやられる。	has:냈다가는	fix	rewrites
 cx:lc2b-mononara:10	そもそも聖から逃げようものなら恐ろしいことになる。	has:도망쳤다가는	fix	rewrites

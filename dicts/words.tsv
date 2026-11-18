@@ -28653,3 +28653,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ひとたまり	버틸 재간	N110			GN							w:36402
 お手手	손	N110			GN							w:36403
 おちょくり	놀림	N110			GN				replace			w:36404
+黒山羊	흑염소	N110	VAm		GN						くろやぎ	w:36300
+記念式典	기념식	N110			GN						きねんしきてん	w:36301
+授賞式典	시상식	N110			GN						じゅしょうしきてん	w:36302

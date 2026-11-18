@@ -1,6 +1,7 @@
 // The per-token step: segmentation of a token into dictionary words, candidate groups
 // and the record of words the dictionary does not know.
 #include <algorithm>
+#include <array>
 #include <bit>
 #include <cstdint>
 #include <vector>
@@ -776,7 +777,15 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
 // LEX-5106: where the longest word at a point of a kanji run ends inside the run and the rest of the
 // run, read word by word, takes more words than a cover that starts with a shorter word (米中 + 間選 +
 // 挙 against 米 + 中間選挙; 敵機 + 動 + 部隊 against 敵 + 機動部隊), the first word of the cover with the
-// fewest words goes first; of those covers the one whose first word is longest. A piece is a dictionary
+// fewest words goes first; of those covers the one whose first word is longest. LEX-6350: of covers with
+// as few words, the longest word gives up its last kanji where that leaves no loose kanji (同 + 意見
+// against 同意 + 見, 地下 + 水路 against 地下水 + 路); it keeps two or more (想定問答 + 集) and stays where a
+// kanji stays loose either way (最大 + 船 + 速). A piece of one kanji is loose unless it binds to the piece
+// beside it: at the start of the run before another piece a kanji the dictionary reads as a prefix (Z6),
+// an adverb or a pronoun and not as a suffix, after another piece a kanji it reads as a
+// suffix (Z7, or class suffix.kanji-noun) or a kanji numeral, and the last kanji of the run where a verb
+// or adjective reads it with the kana after it (直接 + 触って); a kanji after a word of time or an adverb
+// is not loose either (今日 + 昼). A piece is a dictionary
 // key of two or more kanji found at a point of the run, or one kanji; a piece that starts with 々 counts
 // as two, as 々 repeats the kanji before it (江戸 + 家 + 代々, not 家代 + 々), and so does a piece with 々
 // that the dictionary reads only as a name (親睦会 + 々 + 場, not 親睦 + the name 会々 + 場). A run from a
@@ -784,6 +793,11 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
 // does every word of a run longer than 16 kanji. A first word of one kanji is also read as that kanji
 // where its rows do not read there (軽 of 軽乗用車, an adjective stem). records holds the words at
 // full[cursor:], longest first.
+// Whether codes read a word as an adverb or a word of time (今, 今日, 今後).
+bool Adverbial(const dict::Codes& codes) {
+    return codes.partText.starts_with("N3") || codes.partText.starts_with("E3") || codes.sem.HasCode("UMe");
+}
+
 Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, std::size_t cursor, int token) {
     constexpr std::size_t kMaxRun = 16;
     if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
@@ -807,22 +821,57 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
         return records;
     }
     // ends[i]: the indexes in bounds of the ends of the pieces at bounds[i]; names: i * n + j of the
-    // pieces from bounds[i] to bounds[j] that the dictionary reads only as a name (N130).
+    // pieces from bounds[i] to bounds[j] that the dictionary reads only as a name (N130). strict[i], prefix[i],
+    // bound[i], suffix[i]: whether the kanji at bounds[i] reads as a prefix (Z6); as an adverb or a pronoun; as a suffix by its code (Z7); as a suffix by its code or class. runStart: whether the run starts
+    // at cursor, after no kanji or katakana.
     std::vector<std::vector<std::size_t>> ends(n);
-    std::vector<std::size_t> names;
+    std::vector<std::size_t> names, timed;
+    std::vector<char> prefix(n, 0), suffix(n, 0), bound(n, 0), strict(n, 0);
+    const std::string_view lead = cursor == 0 ? std::string_view() : LastChar(full.substr(0, cursor));
+    const bool runStart = lead.empty() || (NameClassOf(lead) != kClassKanji && NameClassOf(lead) != kClassKatakana);
     for (std::size_t i = 0; i + 1 < n; i++) {
         ends[i].push_back(i + 1);
-        if (i + 2 >= n) continue;
         const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
+        for (const dict::Candidate& c : found.list) {
+            if (c.source.size() != bounds[i + 1] - bounds[i] || c.codes == nullptr) continue;
+            const std::string_view part = c.codes->partText;
+            strict[i] = strict[i] || c.codes->gram.HasCode("Z6");
+            prefix[i] = prefix[i] || part.starts_with("N3") || part.starts_with("N12");
+            bound[i] = bound[i] || c.codes->gram.HasCode("Z7");
+            suffix[i] = suffix[i] || c.codes->gram.HasCode("Z7") || dict::InClass(HDTRANS_CLASS("suffix.kanji-noun"), c.source);
+            if (Adverbial(*c.codes) && i + 1 < n) timed.push_back(i * n + i + 1);
+        }
+        if (i + 2 >= n) continue;
         for (std::size_t j = i + 2; j < n; j++) {
-            bool any = false, name = true;
+            bool any = false, name = true, when = false;
             for (const dict::Candidate& c : found.list) {
                 if (c.source.size() != bounds[j] - bounds[i] || c.codes == nullptr) continue;
                 any = true;
                 name = name && c.codes->partText == "N130";
+                when = when || Adverbial(*c.codes);
             }
             if (any) ends[i].push_back(j);
             if (any && name) names.push_back(i * n + j);
+            if (when) timed.push_back(i * n + j);
+        }
+    }
+    // The last kanji of the run that a word reads with the kana after it (半ば, 沿い), or a verb or an adjective (触って,
+    // 見せ, 決まり), ends the run as a word, bound like a suffix.
+    if (n >= 2 && bounds.back() < text.size()) {
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[n - 2]), kModeGeneral);
+        for (const dict::Candidate& c : found.list) {
+            if (c.codes != nullptr && bounds[n - 2] + c.source.size() > bounds.back()) suffix[n - 2] = 1;
+        }
+        const int at = static_cast<int>(cursor + bounds[n - 2]);
+        const Lookup l = worker.DoLookup(full.substr(static_cast<std::size_t>(at)), kModeGeneral);
+        for (Record* v = l.count == 0 ? nullptr : l.records; v != nullptr && !suffix[n - 2]; v = v->child) {
+            const std::size_t kanji = bounds[n - 1] - bounds[n - 2];
+            if (v->source.size() < kanji || !(v->partCode.starts_with("M") || v->partCode.starts_with("H"))) continue;
+            Record* const next = v->child;
+            v->child = nullptr;
+            const Item* w = worker.InsertLateCandidate(full, at, token, v);
+            v->child = next;
+            suffix[n - 2] = w != nullptr && w->detail != nullptr && w->detail->cls != kDetailInfo && w->length > static_cast<int>(kanji);
         }
     }
     // A piece costs one; one that starts with 々, or a name with 々 in it, costs two.
@@ -831,19 +880,58 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
         const bool name = Has(piece, "々") && std::find(names.begin(), names.end(), i * n + j) != names.end();
         return piece.starts_with("々") || name ? 2 : 1;
     };
-    // fewest[i]: the fewest pieces, by cost, of a cover of the run from bounds[i].
+    // The loose kanji of a piece from bounds[i] to bounds[j] after a piece that reads as an adverb or a word of time
+    // (after): one for a piece of one kanji that binds to no piece beside it; a word of time or an adverb stands
+    // before the word after it (今日 + 昼, 今後 + 考), and a kanji numeral after a piece numbers it (日向改 + 二).
+    // A prefix, adverb or pronoun binds only where it starts the run (not 比較的 + 非, 最多 + 安,
+    // ダイエット + 大), only before a word that is no name (長 + 谷岡 is loose), and never where the dictionary
+    // also reads it as a suffix (子, 上, 大, 金). 々 is counted by cost. A cover that cuts a word the dictionary reads only as a name never wins
+    // on loose kanji (善光 + 寺平), and neither does one against a longest word read only as a name (長谷 + 岡,
+    // 大川 + 沿い, 今宿 + 敵 stay).
+    constexpr int kNamed = 1 << 10;
+    auto named = [&](std::size_t i, std::size_t j) { return std::find(names.begin(), names.end(), i * n + j) != names.end(); };
+    auto loose = [&](std::size_t i, std::size_t j, bool after) {
+        if (j > i + 1) return named(i, j) ? kNamed : 0;
+        const std::string_view one = text.substr(bounds[i], bounds[i + 1] - bounds[i]);
+        if (one == "々" || (i > 0 && (IsNumeral(one) || Has(kNumeralOrder, one)))) return 0;
+        const bool common = j + 1 < n && std::any_of(ends[j].begin(), ends[j].end(), [&](std::size_t k) { return k > j + 1 && !named(j, k); });
+        const bool before = i == 0 && runStart && (strict[i] || prefix[i]) && !bound[i];
+        return !(j + 1 < n && before && common) && !(i > 0 && (suffix[i] || after)) ? 1 : 0;
+    };
+    auto adverbial = [&](std::size_t i, std::size_t j) { return std::find(timed.begin(), timed.end(), i * n + j) != timed.end(); };
+    // fewest[i][t]: the fewest pieces, by cost, of a cover of the run from bounds[i], then its fewest loose kanji,
+    // where the piece before bounds[i] reads as an adverb or a word of time (t = 1) or not.
     constexpr int kNone = 1 << 20;
-    std::vector<int> fewest(n, kNone);
-    fewest[n - 1] = 0;
+    using Score = std::pair<int, int>;
+    std::vector<std::array<Score, 2>> fewest(n, {Score{kNone, kNone}, Score{kNone, kNone}});
+    fewest[n - 1] = {Score{0, 0}, Score{0, 0}};
+    auto score = [&](std::size_t i, std::size_t j, bool after) {
+        const Score& rest = fewest[j][adverbial(i, j) ? 1 : 0];
+        return Score{rest.first + cost(i, j), rest.second + loose(i, j, after)};
+    };
     for (std::size_t i = n - 1; i-- > 0;) {
-        for (const std::size_t j : ends[i]) fewest[i] = std::min(fewest[i], fewest[j] + cost(i, j));
+        for (int t = 0; t < 2; t++) {
+            for (const std::size_t j : ends[i]) fewest[i][t] = std::min(fewest[i][t], score(i, j, t == 1));
+        }
     }
     std::size_t greedyEnd = 0;
     while (bounds[greedyEnd] != greedy) greedyEnd++;
-    if (fewest[greedyEnd] + cost(0, greedyEnd) <= fewest[0]) return records;
+    const Score greedyScore = score(0, greedyEnd, false);
+    if (greedyScore <= fewest[0][0] || (greedyScore.first == fewest[0][0].first && named(0, greedyEnd))) return records;
     std::size_t chosen = 0;
-    for (const std::size_t j : ends[0]) {
-        if (fewest[j] + cost(0, j) == fewest[0]) chosen = std::max(chosen, bounds[j]);
+    if (greedyScore.first == fewest[0][0].first) {
+        // On loose kanji alone, the longest word gives up only its last kanji, and only to a cover that leaves no
+        // kanji loose: 想定問答 + 集 stays (想定 + 問答集 would break a compound the dictionary lists whole), and so
+        // does 最大 + 船 + 速 (最 + 大船 + 速 still leaves 速 loose).
+        const std::size_t j = greedyEnd - 1;
+        if (j == 0 || std::find(ends[0].begin(), ends[0].end(), j) == ends[0].end()) return records;
+        const Score shorter = score(0, j, false);
+        if (shorter.first != greedyScore.first || shorter.second != 0) return records;
+        chosen = bounds[j];
+    } else {
+        for (const std::size_t j : ends[0]) {
+            if (score(0, j, false) == fewest[0][0]) chosen = std::max(chosen, bounds[j]);
+        }
     }
     Record* front = nullptr;
     Record* back = nullptr;
@@ -2674,9 +2762,7 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
 // its ending (に + くもが 구름이, も + うなずいた 끄덕였다, に + くわしく 자세히). A reading that the word after the
 // particle does not run past keeps its place (雨もよう, 金もうけ).
 Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent) {
-    if (parent == nullptr || parent->group == nullptr || c.group == nullptr || c.detail == nullptr || c.detail->cls == kDetailVerb) {
-        return nullptr;
-    }
+    if (parent == nullptr || parent->group == nullptr || c.group == nullptr || c.detail == nullptr) return nullptr;
     const std::string_view text = From(full, cursor);
     const std::string_view source = text.substr(0, static_cast<std::size_t>(c.length));
     const std::string_view particle = FirstChar(source);
@@ -2686,10 +2772,13 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     // に + ものすごく, 友達とで + かけた: と + でかけた); never には, とは, whose は stays the particle (医者にはなれない; LEX-5922).
     const bool compound = first != nullptr && first->cls == 'P' && text::RuneCount(source) == 2 && Has("にとへ", particle) &&
                           Has("もで", source.substr(particle.size()));
-    // A plain noun or adverb, not a phrase (というもの) or an adjectival reading (でさえない).
-    if (first == nullptr || (!compound && ((first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))))) {
+    // A plain noun or adverb, not a phrase (というもの) or an adjectival reading (でさえない), or a verb (LEX-6351: はまる
+    // of からはまるで, はやる of はやる気).
+    const bool verb = first != nullptr && c.detail->cls == kDetailVerb && first->cls == 'M';
+    if (first == nullptr || (!compound && !verb && ((first->cls != 'N' && first->cls != 'E') || !AnyOf("13", At(c.Code(0), 0))))) {
         return nullptr;
     }
+    if (!verb && c.detail->cls == kDetailVerb) return nullptr;
     const std::string_view before = LastChar(full.substr(0, static_cast<std::size_t>(cursor)));
     const std::string_view host = parent->group->surface;
     // A noun in kanji or katakana, or one that ends in a title of persons in hiragana (千里ちゃん, お母さん).
@@ -2705,7 +2794,10 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     };
     const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana || titled()) &&
                            (parent->detail == nullptr || parent->detail->cls != kDetailVerb) && At(parent->Code(0), 0) == '1';
-    const bool afterParticle = particle == "も" && first->cls == 'N' && (host == "に" || host == "で" || host == "と" || host == "へ");
+    // After a case particle the particle も or は (LEX-6351: からは + まるで, からは + ちやほや).
+    const bool afterParticle = (particle == "も" || particle == "は") && (first->cls == 'N' || verb) &&
+                               (host == "に" || host == "で" || host == "と" || host == "へ" || host == "から" || host == "まで" ||
+                                host == "より");
     if (!afterNoun && !afterParticle) return nullptr;
     const int at = cursor + static_cast<int>(particle.size());
     const std::string_view rest = From(full, at);
@@ -2713,24 +2805,54 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
         while (r != nullptr && r->source.empty()) r = r->child;
         return r;
     };
-    // Some reading of the word after the particle, each record tried (くわ before くわしく).
+    // How far a reading at the particle reaches past the word w after the particle must run: its end; for a verb before a
+    // word that does not conjugate, the end of its plain form, as an ending the word covers is no ending (はまる + で of
+    // はまるで against は + まるで; にげ + た stays, as げた ends with it).
+    auto limit = [&](const Item& reading, const Item* w) {
+        const bool conjugates = reading.detail != nullptr && reading.detail->cls == kDetailVerb && reading.group != nullptr;
+        if (!conjugates || w == nullptr || w->detail == nullptr || w->detail->cls != kDetailInfo) return reading.length;
+        return std::min(reading.length, static_cast<int>(reading.group->surface.size() +
+                                                         FirstChar(text.substr(std::min(text.size(), reading.group->surface.size()))).size()));
+    };
+    // Some reading of the word after the particle, each record tried (くわ before くわしく). After a verb reading it is a
+    // word that does not conjugate and starts with two hiragana (まるで, やる気 of はやる気); a verb after the particle
+    // keeps the verb of the particle (になる, である, があり).
     auto ends = [&](const Item* w, const Record& r) {
-        if (w == nullptr || w->detail == nullptr || at + w->length <= cursor + c.length || AnyOf("256", At(w->Code(0), 0))) return false;
+        if (w == nullptr || w->detail == nullptr || at + w->length <= cursor + limit(c, w) || AnyOf("256", At(w->Code(0), 0))) return false;
+        if (verb && w->detail->cls != kDetailInfo) return false;
         const std::string_view spelled = rest.substr(0, static_cast<std::size_t>(w->length));
-        if (!AllHiragana(spelled) || text::RuneCount(spelled) < 2) return false;
+        const std::size_t one = FirstChar(spelled).size();
+        const std::string_view lead = spelled.substr(0, one + FirstChar(spelled.substr(one)).size());
+        if (!(verb ? AllHiragana(lead) : AllHiragana(spelled)) || text::RuneCount(lead) < 2) return false;
         if (w->detail->cls != kDetailInfo) return w->length > static_cast<int>(r.source.size());
         return At(w->Code(0), 0) == '3' || NounEnd(rest.substr(spelled.size()));
     };
     const Lookup l = DoLookup(rest, kModeGeneral);
+    // A verb reading is the particle and a verb where a verb row read on its own after the particle reaches the end of
+    // its plain form (に + なる, に + する, で + ある, が + ある); it keeps its place.
+    if (verb) {
+        const int plain = cursor + static_cast<int>(c.group->surface.size() +
+                                                    FirstChar(text.substr(std::min(text.size(), c.group->surface.size()))).size());
+        for (Record* v = l.count == 0 ? nullptr : l.records; v != nullptr; v = v->child) {
+            if (v->source.empty() || !v->partCode.starts_with("M")) continue;
+            Record* const next = v->child;
+            v->child = nullptr;
+            const Item* w = InsertLateCandidate(full, at, token, v);
+            v->child = next;
+            if (w != nullptr && w->detail != nullptr && w->detail->cls == kDetailVerb && at + w->length >= plain) return nullptr;
+        }
+    }
     bool found = false;
     bool verbAfter = false;
     std::size_t reached = 0;
+    const Item* word = nullptr;
     Record* from = l.count == 0 ? nullptr : after(l.records);
     for (int tries = 0; from != nullptr && tries < 64 && !found; tries++, from = after(from->child)) {
         const Item* w = InsertLateCandidate(full, at, token, from);
         found = ends(w, *from);
         if (found) reached = static_cast<std::size_t>(w->length);
         if (found) verbAfter = w->detail->cls != kDetailInfo;
+        if (found) word = w;
     }
     if (!found) return nullptr;
     // Whether some reading at start reaches at least to end.
@@ -2755,7 +2877,7 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     for (int tries = 0; other != nullptr && tries < 64; tries++, other = after(other->child)) {
         const Item* w = InsertLateCandidate(full, cursor, token, other);
         if (w == nullptr) continue;
-        if (w->length >= reach) return nullptr;
+        if (limit(*w, word) >= reach) return nullptr;
         const Entry* e = w->group == nullptr ? nullptr : w->group->At(0);
         if (e != nullptr && e->cls == 'P' && w->length > at - cursor && reaches(cursor + w->length, cursor + reach)) {
             return nullptr;
