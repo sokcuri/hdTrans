@@ -62,9 +62,6 @@ dict:crit-lex-rows	衛星は３日に打ち上げられた。	has:3일에 발사
 dict:crit-lex-rows	死体が浜に打ち上げられた。	has:바닷가에 밀려왔다	keep	lookup
 dict:crit-lex-rows	すっかり調子を取り戻した。	has:컨디션을 되찾았다	fix	lookup
 dict:crit-lex-rows	調子を取り戻したのが、ソフィーは軽い返事をする。	has:컨디션을 되찾았던	fix	lookup
-dict:crit-lex-rows	携帯に出ない。	has:휴대폰을 받지 않는다	fix	lookup
-dict:crit-lex-rows	さっと携帯に出る。	has:휴대폰을 받는다	fix	lookup
-dict:crit-lex-rows	佳奈が全然携帯に出てくれないから	has:휴대폰을 받아 주지	fix	lookup
 dict:crit-lex-rows	電話に出なかった。	has:전화를 받지 않았다	keep	lookup
 dict:crit-lex-rows	周辺の地図をスマホに出したわ	has:스마트폰에 냈어	keep	lookup
 dict:crit-lex-rows	道を曲って	has:길을 돌아	fix	lookup
@@ -96,7 +93,6 @@ pack:crit-lex:14	彼女は顔を胸に押しつけた。	has:얼굴을 가슴에
 pack:crit-lex:14	レナは震えながら背中を壁に押しつけていた。	has:등을 벽에 갖다 대고	fix	packs
 pack:crit-lex:14	仕事を押しつけるな。	has:일을 강요하지 마	keep	packs
 pack:crit-lex:3	NASAのプロジェクトに助言する重要なポストに就いている。	has:중요한 직책을 맡고 있다	fix	packs
-pack:crit-lex:4	電話出ますね。	has:전화를 받네요	fix	packs
 pack:crit-lex:6	もういい年だ	has:이제 적지 않은 나이다	fix	packs
 pack:crit-lex:6	いい年になりますように	has:좋은 해가 되기를	keep	packs
 pack:crit-lex:2	煙幕で稼げる時間などたかが知れている。	has:뻔하다	fix	packs
@@ -143,19 +139,10 @@ dict:crit-lex-rows	幾子は笑った。	has:이쿠코는	keep	lookup
 dict:crit-lex-rows	幾田さんが来た。	has:이쿠타 씨가	keep	lookup
 dict:crit-lex-rows	幾多の困難。	has:무수한	keep	lookup
 dict:crit-lex-rows	幾ら払った？	has:얼마	keep	lookup
-pack:crit-lex:4	スマホに出た。	has:스마트폰을 받았다	fix	packs
-pack:crit-lex:4	携帯に出ろ！	has:휴대폰을 받아라	fix	packs
-dict:crit-lex-rows	携帯電話に出なかった。	has:핸드폰을 받지 않았다	fix	lookup
-dict:crit-lex-rows	電話出ない。	has:전화를 받지 않는다	fix	lookup
-pack:crit-lex:28	電話出た？	has:전화를 받았어	fix	packs
-pack:crit-lex:28	電話出てよ。	has:전화를 받아	fix	packs
-dict:crit-lex-rows	スマホ出ない。	has:스마트폰을 받지	fix	lookup
-dict:crit-lex-rows	ケータイ出なかった。	has:휴대폰을 받지	fix	lookup
-pack:crit-lex:4	携帯電話に出ます。	has:핸드폰을 받습니다	fix	packs
-pack:crit-lex:4	携帯に出した。	has:휴대폰에 냈다	keep	packs
-pack:crit-lex:4	画面をスマホに出す。	has:스마트폰에 낸다	keep	packs
-pack:crit-lex:4	小嶺さん……お願いだから電話に出て……	has:전화를 받아	keep	packs
-pack:crit-lex:4	スマホに出てくる画面。	has:스마트폰에 나오는	keep	packs
+dict:crit-lex-rows	携帯に出した。	has:휴대폰에 냈다	keep	packs
+dict:crit-lex-rows	画面をスマホに出す。	has:스마트폰에 낸다	keep	packs
+dict:crit-lex-rows	小嶺さん……お願いだから電話に出て……	has:전화를 받아	keep	packs
+dict:crit-lex-rows	スマホに出てくる画面。	has:스마트폰에 나오는	keep	packs
 dict:crit-lex-rows	来年に打ち上げられる予定だ。	has:발사될	fix	local
 dict:crit-lex-rows	衛星は宇宙に打ち上げられた。	has:우주에 발사되었다	fix	local
 dict:crit-lex-rows	ロケットが軌道に打ち上げられた。	has:궤도에 발사	fix	local
@@ -176,6 +163,18 @@ pack:crit-lex:18	実力はたかが知れています。	has:뻔합니다	fix	pa
 pack:crit-lex:2	たかが知れてるから。	lacks:알려져	fix	packs
 dict:words	知れてる。	has:알려져	keep	lookup
 dict:words	名が知れてる。	has:이름이 알려져	keep	lookup
-dict:crit-lex-rows	携帯に出てくれ。	has:휴대폰을 받아 줘	fix	lookup
-dict:crit-lex-rows	スマホに出てくれた。	has:스마트폰을 받아 주었다	fix	lookup
-pack:crit-lex:4	スマホに出てくる画面を見た。	has:스마트폰에 나오는	keep	packs
+dict:crit-lex-rows	スマホに出てくる画面を見た。	has:스마트폰에 나오는	keep	packs
+dict:crit-lex-rows	練習に持ってこいなんだ。	lacks:안성맞춤인 이	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなんです。	has:안성맞춤입니다	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなので行く。	lacks:것으로	keep	lookup
+dict:crit-lex-rows	練習に持ってこいなのに。	has:안성맞춤인데	keep	lookup
+dict:crit-lex-rows	練習に持ってこいかもしれない。	has:안성맞춤일지도	keep	lookup
+dict:crit-lex-rows	練習に持ってこいかな。	has:안성맞춤일까	keep	lookup
+dict:crit-lex-rows	練習に持ってこいらしい。	has:안성맞춤	keep	lookup
+dict:crit-lex-rows	持って来い！	has:가져와라	fix	lookup
+dict:crit-lex-rows	もってこい……	has:가져와라	fix	lookup
+dict:crit-lex-rows	早く持ってこいね。	has:가져와	fix	lookup
+dict:crit-lex-rows	地図がスマホに出た。	lacks:받았	keep	lookup
+dict:crit-lex-rows	携帯に出る広告。	lacks:받는	keep	lookup
+dict:crit-lex-rows	スマホに出せる。	lacks:받을	keep	lookup
+dict:crit-lex-rows	名前が携帯に出ない。	lacks:받지	keep	lookup

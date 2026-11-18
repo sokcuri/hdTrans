@@ -3,8 +3,6 @@
 id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 crit-lex:2	sense	知れる	v1	colloc	たかが知れる		뻔하다	70	LEX-6652	crit	たかが知れている 뻔하다
 crit-lex:3	sense	就く|つく	v5	colloc	ポストに就く|ポストにつく		직책을 맡다	70	LEX-6652	crit	重要なポストに就く 중요한 직책을 맡다
-crit-lex:4	sense	出る	v1	colloc	{X:@phone}に出る	ending=る|た|て|ま|ろ|よ|ら|れ|ず|ぬ|ん|ち|と|ね|ば	{X}을 받다	70	LEX-6652	crit	スマホに出た 스마트폰을 받았다 (出す의 꼴 し す せ さ そ는 맞지 않음)
-crit-lex:28	sense	出る	v1	colloc	{X:@phone}出る	ending=る|た|て|ま|ろ|よ|ら|れ|ず|ぬ|ん|ち|と|ね|ば	{X}을 받다	70	LEX-6652	crit	電話出ます 전화를 받습니다
 crit-lex:6	sense	年	n	colloc	もういい年		이제 적지 않은 나이	70	LEX-6652	crit	もういい年だ 이제 적지 않은 나이다
 crit-lex:7	sense	前	n	frame	next=を after=、|。|「|『|（|…|は|も|が|に|で|と|て|ば|ら|から|まで|として|では|には|とは		앞		LEX-6652	crit	前を歩く人 앞을 걷는 사람
 crit-lex:8	sense	前	n	frame	next=を pred=上回る|下回る|超える|越える		-		LEX-6652	crit	前を上回る 전을 웃돈다
