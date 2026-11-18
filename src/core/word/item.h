@@ -146,6 +146,13 @@ public:
         int steps = 0;
     };
     mutable CopyRun copyRuns[2];
+    // The nearest word at or before this one that AfterQuestionWord must test, within its sentence
+    // ([0]) or clause ([1]), or null: a memo valid for the construction pass whose epoch it holds.
+    struct QuestionSkip {
+        uint64_t epoch = 0;
+        const Item* notable = nullptr;
+    };
+    mutable QuestionSkip questionSkips[2];
     std::string_view text;  // the token text the word was found in
     int length = 0;         // bytes consumed, the conjugation ending included
     int selected = -1;
@@ -253,8 +260,11 @@ public:
     // before the word, spaces between them aside (でしょ。と、, 行く……と、, そう――と).
     bool AfterPause(bool sentenceEnd) const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
-    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
-    bool AfterQuestionWord(bool clause = false) const;
+    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까). pass is the epoch of the
+    // construction pass the call runs in (0 outside one): within a pass, whose actions change no
+    // surface, span or link of the chain, the walk back skips the words that can neither end it nor
+    // be a question word, found once per pass (questionSkips).
+    bool AfterQuestionWord(bool clause = false, uint64_t pass = 0) const;
     // Whether the conjugation ending closes with the question particle か (行くか, どうなるか), not
     // with the kana of a verb form that ends in か (行かない).
     bool EndingAsks() const;

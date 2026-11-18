@@ -1,6 +1,7 @@
 #include "core/word/worker.h"
 
 #include <algorithm>
+#include <iterator>
 
 #include "core/dict/classes.h"
 #include "core/output/pieces.h"
@@ -47,15 +48,43 @@ int Worker::RubyPart(int j) {
 int Worker::QuoteDepth(int j) {
     if (quoteDepths_.empty()) {
         quoteDepths_.reserve(tokens.size() + 1);
+        quoteMarkFirst_.reserve(tokens.size() + 1);
         int depth = settings.quoteDepth;
         for (std::size_t i = 0; i < tokens.size(); i++) {
             quoteDepths_.push_back(depth);
-            depth = QuoteDepthAfter(tokens.Raw(i), depth);
+            quoteMarkFirst_.push_back(static_cast<uint32_t>(quoteMarks_.size()));
+            // QuoteDepthAfter(tokens.Raw(i), depth), keeping where each mark ends.
+            const std::string_view raw = tokens.Raw(i);
+            for (std::size_t at = 0; at < raw.size();) {
+                const text::Rune r = text::DecodeRune(raw.substr(at));
+                if (r.size == 0) break;
+                at += r.size;
+                if (r.cp != U'「' && r.cp != U'『' && r.cp != U'」' && r.cp != U'』') continue;
+                depth = QuoteDepthAfter(raw.substr(at - r.size, r.size), depth);
+                quoteMarks_.push_back({static_cast<int>(at), depth});
+            }
         }
         quoteDepths_.push_back(depth);
+        quoteMarkFirst_.push_back(static_cast<uint32_t>(quoteMarks_.size()));
     }
     if (j < 0) return settings.quoteDepth;
     return quoteDepths_[std::min(static_cast<std::size_t>(j), quoteDepths_.size() - 1)];
+}
+
+int Worker::QuoteDepthAt(int j, std::string_view text, int start) {
+    const int depth = QuoteDepth(j);
+    const std::string_view head = text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0))));
+    const std::size_t t = static_cast<std::size_t>(j);
+    if (j < 0 || t >= tokens.size() || t + 1 >= quoteMarkFirst_.size() || text.data() != tokens.Raw(t).data() ||
+        text.size() != tokens.Raw(t).size()) {
+        return QuoteDepthAfter(head, depth);
+    }
+    // A mark the head cuts short is no mark in it either.
+    const auto first = quoteMarks_.begin() + quoteMarkFirst_[t], last = quoteMarks_.begin() + quoteMarkFirst_[t + 1];
+    const auto after = std::upper_bound(first, last, head.size(), [](std::size_t at, const QuoteMark& m) {
+        return at < static_cast<std::size_t>(m.end);
+    });
+    return after == first ? depth : std::prev(after)->depth;
 }
 
 OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open) {

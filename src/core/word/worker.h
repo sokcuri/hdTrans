@@ -121,6 +121,10 @@ public:
     // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
     // and the raw text of the tokens before it; computed once for all tokens.
     int QuoteDepth(int j);
+    // The depth of quotes open before byte start of text, the text a word of token j was found
+    // in: QuoteDepth(j) and the 「」『』 of text before start. When text is the raw text of token j,
+    // its marks are found with QuoteDepth, once for all tokens.
+    int QuoteDepthAt(int j, std::string_view text, int start);
     // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
     // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
     int RubyPart(int j);
@@ -180,6 +184,14 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+    // The quote marks of the raw text of all tokens in order (byte end in the token, depth after
+    // it), and by token the first of them (one more for the end); filled with quoteDepths_.
+    struct QuoteMark {
+        int end;
+        int depth;
+    };
+    std::vector<QuoteMark> quoteMarks_;
+    std::vector<uint32_t> quoteMarkFirst_;
     std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
     std::vector<OpenMarks> openMarks_;  // OpenMarksAt by token and after the last, empty until first asked
 
