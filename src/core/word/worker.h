@@ -244,6 +244,8 @@ private:
     // of a longer word (ConstraintContext::ParticleSplit).
     bool ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
                        const std::vector<dict::Candidate>& list);
+    // Whether rest, the text after a て form's って, starts the ている aspect (ConstraintContext::BeforeTopicTte).
+    bool TeAspectAt(std::string_view rest);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);

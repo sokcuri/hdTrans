@@ -117,3 +117,37 @@ names:names.479247	春子は来た	하루코는 왔다	keep	lookup
 names:names.479247	みなこは来た	미나코는 왔다	keep	lookup
 names:names.479247	南ちゃん	미나미짱	keep	lookup
 names:names.479247	南は来た	남쪽은 왔다	keep	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく分からない	has:이제 잘 모른다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく寝た	has:잘 잤다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく知ってる	has:잘 알고	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく頑張った	lacks:되게	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく覚えてない	has:잘 기억	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよくなった	has:좋아졌다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよい子は寝る時間	has:좋은 아이는	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよい人	has:좋은 사람	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよいって	has:이제 되었다니까	keep	lookup
+constraint:mouyoi-kana-not-before-ii	もうよいです	has:이제 되었습니다	keep	lookup
+constraint:mouyoi-not-before-ii	もう良く分からない	has:이제 잘 모른다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良く見て	has:잘 봐	fix	lookup
+constraint:mouyoi-not-before-ii	もう良くなった	has:좋아졌다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良かった	has:좋았다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良い子は寝る時間	has:좋은 아이는	fix	lookup
+constraint:mouyoi-not-before-ii	もう良い人だ	has:좋은 사람이다	fix	lookup
+constraint:mouyoi-not-before-ii	「もう良い」	has:이제 됐다	keep	lookup
+constraint:mouyoi-not-before-ii	もう良いけど	has:이제 되었는데	keep	lookup
+constraint:moui-not-before-ii	もういい弁護士を通して連絡する	has:이제 되었다	keep	lookup
+constraint:moui-not-before-ii	もういいよ	has:이제 됐어	keep	lookup
+constraint:kyoku-before-tte	道を曲って	lacks:곡	fix	lookup
+constraint:kyoku-before-tte	道を曲っていく	lacks:곡	keep	lookup
+constraint:kyoku-before-tte	腰の曲ってる老人	lacks:곡	fix	lookup
+constraint:kyoku-before-tte	腰の曲っている老人	lacks:곡	keep	lookup
+constraint:kyoku-before-tte	この曲ってたしか昔の	has:이 곡은	fix	lookup
+constraint:kyoku-before-tte	この曲っていろいろある	has:이 곡은	fix	lookup
+constraint:nande-dekite-before-negative	何でできてないの？	has:왜 하지 못한 거야	fix	lookup
+constraint:nande-dekite-before-negative	宿題、何でできてないの？	has:왜 하지 못한 거야	fix	lookup
+constraint:nande-dekite-before-negative	何でできてなかった	has:왜 하지 못했다	fix	lookup
+constraint:nande-dekite-before-negative	何でできていないの？	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-before-negative	何でできてねえんだよ	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-kanji-before-negative	何で出来てないんだ	lacks:무엇으로	fix	lookup
+constraint:nande-dekitei-kanji-before-negative	何で出来ていない	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-before-negative	これは何でできてるの？	has:무엇으로 되어 있는 거야	keep	lookup

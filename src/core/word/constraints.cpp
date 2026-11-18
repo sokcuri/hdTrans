@@ -112,6 +112,10 @@ constexpr ConstraintRule kRules[] = {
      "っかり, っくり 앞에서 し로 끝나는 낱말(もし, 부사와 する)은 쓰지 않고 し를 しっかり, しっくり에 남김 (時もしっかり 때 만약 빌리고 → 때도 확실히, それでもしっかり 그래도 해 빌리고 → 그래도 확실히)", {}},
     {"moui-not-before-ii", ConstraintWord::Source, "もうい", ConstraintContext::NotBeforeIi, ConstraintReject::Word,
      "い가 이어지지 않는 もうい는 もういい가 아니라 もう와 뒤 낱말의 첫 글자 (もういない 이제 된 있고 → 이제 없다). もういい는 그대로", {}},
+    {"mouyoi-not-before-ii", ConstraintWord::Source, "もう良", ConstraintContext::NotBeforeIiPredicate, ConstraintReject::Word,
+     "い가 이어지지 않는 もう良는 もう良い가 아니라 もう와 良く, 良かっ (もう良くなった 이제 되어졌다 → 이제 좋아졌다), 명사 앞 관형형도 もう와 良い (もう良い人 → 이제 좋은 사람). もう良いって는 그대로", {}},
+    {"mouyoi-kana-not-before-ii", ConstraintWord::Source, "もうよ", ConstraintContext::NotBeforeIiPredicate, ConstraintReject::Word,
+     "い가 이어지지 않는 もうよ는 もうよい가 아니라 もう와 よく, よせ (もうよく分からない 이제 되고 모른다 → 이제 잘 모른다), 명사 앞 관형형도 もう와 よい (もうよい子は → 이제 좋은 아이는). もうよいって는 그대로", {}},
     {"dea-before-aitsu", ConstraintWord::Source, "であ", ConstraintContext::BeforeAitsu, ConstraintReject::Word,
      "いつ 앞의 であ는 出会う나 である가 아니라 で와 あいつ (俺たちであいつを 우리에서 만나며 개를 → 우리로 저 녀석을)", {}},
     {"de-before-final-na", ConstraintWord::Source, "で", ConstraintContext::AfterNounBeforeListed, ConstraintReject::Target,
@@ -192,8 +196,16 @@ constexpr ConstraintRule kRules[] = {
      "でみ도 같다 (読んでみんなに聞かせる)", {}, "んな"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
-    {"kyoku-before-tte", ConstraintWord::Source, "曲", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
-     "って 앞의 曲는 送り仮名 없는 曲る의 て형이 아니라 명사 곡 (この曲って音がきれい 이 구불거려 → 이 곡은). 曲がって, 曲げて, 曲った는 그대로", {}, "って"},
+    {"kyoku-before-tte", ConstraintWord::Source, "曲", ConstraintContext::BeforeTopicTte, ConstraintReject::Verbs,
+     "って 앞의 曲는 送り仮名 없는 曲る의 て형이 아니라 명사 곡 (この曲って音がきれい 이 구불거려 → 이 곡은). 曲がって, 曲げて, 曲った, を 뒤(道を曲って), ている 앞(腰の曲ってる老人)은 그대로", {}},
+    {"nande-dekite-before-negative", ConstraintWord::Source, "何でできて", ConstraintContext::BeforeListed, ConstraintReject::AllVerbs,
+     "부정 앞의 何でできて는 何でできている(무엇으로 되어 있다)의 활용이 아니라 何で(왜)와 できて (何でできてないの 무엇으로 되어 있지 않은 거야 → 왜 하지 못한 거야). 긍정 何でできてる는 그대로", {}, "ない|なかっ|なく|なけれ|なきゃ|ません|ねえ|ねぇ|ねー|ず|いな|いません|いねえ|いねぇ"},
+    {"nande-dekitei-before-negative", ConstraintWord::Source, "何でできてい", ConstraintContext::BeforeListed, ConstraintReject::AllVerbs,
+     "부정 앞의 何でできてい는 何でできている(무엇으로 되어 있다)의 활용이 아니라 何で(왜)와 できて (何でできてないの 무엇으로 되어 있지 않은 거야 → 왜 하지 못한 거야). 긍정 何でできてる는 그대로", {}, "ない|なかっ|なく|なけれ|なきゃ|ません|ねえ|ねぇ|ねー|ず"},
+    {"nande-dekite-kanji-before-negative", ConstraintWord::Source, "何で出来て", ConstraintContext::BeforeListed, ConstraintReject::AllVerbs,
+     "부정 앞의 何で出来て는 何でできている(무엇으로 되어 있다)의 활용이 아니라 何で(왜)와 できて (何でできてないの 무엇으로 되어 있지 않은 거야 → 왜 하지 못한 거야). 긍정 何でできてる는 그대로", {}, "ない|なかっ|なく|なけれ|なきゃ|ません|ねえ|ねぇ|ねー|ず|いな|いません|いねえ|いねぇ"},
+    {"nande-dekitei-kanji-before-negative", ConstraintWord::Source, "何で出来てい", ConstraintContext::BeforeListed, ConstraintReject::AllVerbs,
+     "부정 앞의 何で出来てい는 何でできている(무엇으로 되어 있다)의 활용이 아니라 何で(왜)와 できて (何でできてないの 무엇으로 되어 있지 않은 거야 → 왜 하지 못한 거야). 긍정 何でできてる는 그대로", {}, "ない|なかっ|なく|なけれ|なきゃ|ません|ねえ|ねぇ|ねー|ず"},
     {"shi-before-nitsuite", ConstraintWord::Source, "死", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
      "について 앞의 死는 死ぬ의 연용형이 아니라 명사 죽음 (死について 죽어 붙어 → 죽음에 대해)", {}, "について"},
     {"chikatte-before-ending", ConstraintWord::Source, "誓って", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -543,10 +555,15 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         static constexpr std::string_view kShiTsu[] = {"っかり", "っかと", "っくり", "っとり"};
         return StartsWithAny(after, kShiTsu);
     }
-    case ConstraintContext::NotBeforeIi: {
+    case ConstraintContext::NotBeforeIi:
+    case ConstraintContext::NotBeforeIiPredicate: {
         if (after.empty()) return false;
         const char32_t next = text::DecodeRune(after).cp;
-        return std::u32string_view(U"いぃー～〜っッ").find(next) == std::u32string_view::npos;
+        if (std::u32string_view(U"いぃー～〜っッ").find(next) == std::u32string_view::npos) return true;
+        if (rule.context == ConstraintContext::NotBeforeIi) return false;
+        // The attributive before a noun (もういい子, もうよい人).
+        const int noun = NameClassOf(FirstChar(after.substr(FirstChar(after).size())));
+        return noun == kClassKanji || noun == kClassKatakana;
     }
     case ConstraintContext::BeforeAitsu:
         return after.starts_with("いつ") && !after.starts_with("いつつ");
@@ -598,6 +615,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                    return c.source.size() < source.size() && source.starts_with(c.source) && c.codes != nullptr &&
                           c.codes->gram.HasCode("Ct");
                });
+    case ConstraintContext::BeforeTopicTte:  // and Worker::TeAspectAt, in ApplyConstraints
+        return after.starts_with("って") && adjacent != "を";
     case ConstraintContext::BeforeListed:
     case ConstraintContext::AfterNounBeforeListed:  // and Worker::NotAfterNoun, in ApplyConstraints
         for (std::string_view rest = rule.follows; !rest.empty();) {
@@ -953,6 +972,25 @@ bool Worker::AfterNoun(std::string_view lead) {
     return NameClassOf(last) == kClassKatakana || text::IsKanji(text::DecodeRune(last).cp);
 }
 
+bool Worker::TeAspectAt(std::string_view rest) {
+    const std::string_view i = FirstChar(rest);
+    const std::size_t start = i == "い" ? i.size() : 0;
+    const std::size_t member = dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iru"), rest.substr(start));
+    if (member == 0) return false;
+    // Not a longer kana word that starts there (たしか, いろいろ).
+    const std::size_t aspect = start + member;
+    std::size_t end = 0;
+    for (int k = 0; k < 6 && end < rest.size(); k++) end += FirstChar(rest.substr(end)).size();
+    for (; end > aspect; end -= LastChar(rest.substr(0, end)).size()) {
+        const std::string_view word = rest.substr(0, end);
+        if (!AllOfClass(word, kClassHiragana)) continue;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            if (c.source == word) return false;
+        }
+    }
+    return true;
+}
+
 bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
                            const std::vector<dict::Candidate>& list) {
     if (head.empty() || text::RuneCount(source) < 2 || !AllOfClass(source, kClassHiragana)) return false;
@@ -1026,6 +1064,9 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             if (!first ||
                 (rule.context == ConstraintContext::NotAfterNoun       ? !NotAfterNoun(head)
                  : rule.context == ConstraintContext::ParticleSplit    ? !ParticleSplit(head, source, query, list)
+                 : rule.context == ConstraintContext::BeforeTopicTte
+                     ? !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead) ||
+                           TeAspectAt(after.substr(std::string_view("って").size()))
                  : rule.context == ConstraintContext::AfterNounBeforeListed
                      ? !AfterNoun(lead) ||
                            !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)
