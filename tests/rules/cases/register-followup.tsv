@@ -1,0 +1,117 @@
+# 규칙: REG-35, REG-36, REG-37, REG-38, LEX-6180, LEX-6181, LEX-6182, LEX-6183, LEX-6185
+rule	input	expected	kind	layer
+register:REG-35	「好きです……ずっと前から」	「좋아해요……훨씬 전부터」	fix	register
+register:REG-35	「大好きです！」	「정말 좋아해요!」	fix	register
+register:REG-38	「あなたのことが好きです」	「당신을 좋아합니다」	keep	register
+register:REG-38	「あなたを信じます」	「당신을 믿습니다」	keep	register
+register:REG-35	「そう感じます」	「그렇게 느껴요」	fix	register
+register:REG-35	「平和を願います」	「평화를 바라요」	fix	register
+register:REG-35	「三時に始まります」	「3시에 시작해요」	fix	register
+register:REG-35	「試合は三時に始まります」	「시합은 3시에 시작해요」	fix	register
+register:REG-35	「明日決まります」	「내일 정해져요」	fix	register
+register:REG-35	「明日届きます」	「내일 닿아요」	fix	register
+register:REG-35	「もうすぐ終わります」	「이제 곧 끝나요」	fix	register
+register:REG-35	「すぐ戻ります」	「바로 돌아옵니다」	keep	register
+register:REG-35	「絶対入れます」	「절대 넣습니다」	keep	register
+register:REG-35	「明日行きます」	「내일 갑니다」	keep	register
+register:REG-35	「頑張ります」	「노력하겠습니다」	keep	register
+register:REG-35	「会議を始めます」	「회의를 시작합니다」	keep	register
+register:REG-35	「私が決めます」	「제가 결정합니다」	keep	register
+register:REG-35	「明日泊まります」	「내일 묵습니다」	keep	register
+register:REG-35	「荷物を預かります」	「짐을 맡습니다」	keep	register
+register:REG-35	「ハッ！　こちらをどうぞ」	「헉! 이쪽을 부탁합니다」	keep	register
+register:REG-35	「ごめんくださーい！」	「실례합니다~!」	keep	register
+register:REG-35	「もし火器をアジトに運んでいるとすれば、さらに数名いるものと思われます」	「만약 화기를 아지트에 옮기고 있다고 하면, 게다가 몇 명 있는 것이라고 생각됩니다」	keep	register
+register:REG-36	「田中さんが払います」	「타나카 씨가 지불해요」	fix	register
+register:REG-36	「あいつが来ます」	「저 녀석이 와요」	fix	register
+register:REG-36	「みんなが行きます」	「모두가 가요」	fix	register
+register:REG-36	「健也さんが払います」	「켄야 씨가 지불해요」	fix	register
+register:REG-36	「ゆうこちゃんが来ます」	「유코짱이 와요」	fix	register
+register:REG-36	「自分がやります！」	「자신이 합니다!」	keep	register
+register:REG-36	「自分が行きます」	「자신이 갑니다」	keep	register
+register:REG-36	「私が払います」	「제가 지불합니다」	keep	register
+register:REG-36	「もうすぐ雨が降ります」	「이제 곧 비가 와요」	keep	register
+register:REG-36	「タロウが来ます」	「타로우가 와요」	keep	register
+register:REG-37	「本当ですか。」	lacks:?	keep	register
+register:REG-37	「本当ですか！」	lacks:?	keep	register
+register:REG-37	「本当ですか」	lacks:?	keep	register
+register:REG-37	「そうですか。」	「그래요?」	fix	register
+register:REG-37	「どうですか。」	「어때요?」	fix	register
+register:REG-37	「どうですか！」	lacks:?	keep	register
+register:REG-37	「行きますか。」	「가요?」	fix	register
+register:REG-37	「大丈夫ですか」	「괜찮아요?」	fix	register
+register:REG-37	「覚えましたか」	「기억했어요?」	fix	register
+register:REG-37	「どこへ行かれますか」	「어디에 가세요?」	fix	register
+register:REG-37	「無理です……っ」	「무리예요……」	fix	register
+register:REG-37	「嬉しいです……っ！」	「기뻐요……!」	fix	register
+register:REG-37	「本当ですか？」	「정말이에요?」	keep	register
+register:REG-37	「本当ですか……」	「정말입니까……」	keep	register
+register:REG-37	「そうだったんですか……」	「그랬습니까……」	keep	register
+register:REG-37	「それで先生、俺にどんなご用でしょうか」	「그래서 선생님, 나에게 어떤 용건입니까」	keep	register
+register:REG-37	「社長はおられますか。」	「사장은 계십니까.」	keep	register
+register:REG-38	「師匠の家に行きました」	「스승의 집에 갔어요」	fix	register
+register:REG-38	「王様は来ました」	「임금님은 왔어요」	fix	register
+register:REG-38	「マスター、分かれ道です」	「마스터, 갈림길입니다」	keep	register
+register:REG-38	「分かりました、師匠」	「알겠습니다, 스승」	keep	register
+register:REG-38	「師匠、行きました」	「스승, 갔습니다」	keep	register
+register:REG-38	「王様、準備ができました」	「임금님, 준비가 됐습니다」	keep	register
+register:REG-38	「皆さんが待っていました」	「여러분이 기다리고 있었습니다」	keep	register
+register:REG-38	「……あなたには、失望しました」	「……당신에게는, 실망했습니다」	keep	register
+register:REG-38	「お客様は何名様ですか」	「손님은 몇 분입니까」	keep	register
+register:REG-38	「ロウリア王、準備はすべて整いました」	「로우리아왕, 준비는 모두 갖추어졌습니다」	keep	register
+lexical:kasu-verb	「彼に本を貸しました」	「그에게 책을 빌려 줬어요」	fix	defaults
+lexical:kasu-verb	「お金を貸します」	「돈을 빌려 줍니다」	fix	defaults
+lexical:kasu-verb	「お金は貸しません」	「돈은 빌려 주지 않습니다」	fix	defaults
+lexical:kasu-verb	「傘を貸しましょうか」	「우산을 빌려 줄까요」	fix	defaults
+lexical:kasu-verb	「貸間を探しています」	「셋방을 찾고 있어요」	keep	defaults
+lexical:kasu-verb	「やっと晴れました」	「드디어 개었습니다」	keep	defaults
+lexical:kasu-verb	「笑いが絶えません」	「웃음이 끊어지지 않아요」	keep	defaults
+dict:jisjk:263824	「寒いです、今日は」	「추워요, 오늘은」	fix	defaults
+dict:jisjk:263824	「暑いですね、今日は」	「덥네요, 오늘은」	fix	defaults
+dict:jisjk:263824	「疲れた、今日は」	has:오늘은	fix	defaults
+dict:jisjk:263824	「今日は」	「안녕하세요」	keep	local
+dict:jisjk:263824	「あ、今日は」	「아, 안녕하세요」	keep	local
+dict:jisjk:263824	「はい、今日は」	「네, 안녕하세요」	keep	local
+dict:jisjk:263824	「今日はいい天気です」	「오늘은 좋은 날씨예요」	keep	defaults
+dict:jisjk:357659	「同様です」	「마찬가지예요」	fix	local
+dict:jisjk:357659	「同様だ」	「마찬가지다」	fix	local
+dict:jisjk:357659	「同様でした」	「마찬가지였어요」	fix	local
+dict:jisjk:357659	「私も同様です」	「저도 마찬가지예요」	keep	local
+dict:jisjk:123151	「左様です」	「그렇습니다」	fix	defaults
+dict:jisjk:123151	「左様か」	「그런가」	fix	defaults
+dict:jisjk:123151	「左様なことはない」	「그런 건 없다」	fix	defaults
+dict:jisjk:123151	「左様でございます」	「그렇습니다」	keep	defaults
+dict:w:36100	「うちがやります」	「제가 합니다」	fix	local
+dict:w:36100	「うちが行く」	「내가 갈게」	fix	local
+dict:w:36100	「うちがするわ」	「내가 할게」	fix	local
+dict:w:36100	「うちが責任を持ってやります」	「제가 책임을 지고 합니다」	fix	local
+dict:w:36100	「うちが近い」	「집이 가깝다」	keep	local
+dict:w:36100	「うちに帰ります」	「집에 돌아갑니다」	keep	local
+dict:w:36100	「うちの猫です」	「우리 고양이예요」	keep	local
+dict:w:36100	「ほら、うちの学園って夏祭りが有名じゃないですか」	「자, 우리 학원은 여름축제가 유명하잖아요」	keep	local
+dict:w:36100	「うちの千莉をそういう目で見ないで下さいよっ」	「우리 천리를 그런 눈으로 보지 말아 주세요」	keep	local
+cx:know-unless:10	「行ってみないと分かりません」	「가 보지 않으면 몰라요」	fix	rewrites
+cx:know-unless:10	「聞いてみないと分かりません」	「물어 보지 않으면 몰라요」	fix	rewrites
+cx:know-unless:10	「行かないと分かりません」	「가지 않으면 몰라요」	fix	rewrites
+cx:know-unless:10	「彼が来ないと知った」	「그가 오지 않는다는 걸 알았어」	keep	rewrites
+cx:know-unless:10	「来ないと分かった」	「오지 않는다는 걸 알았어」	keep	rewrites
+cx:know-unless:10	「やってみないとわからない」	「해 보지 않으면 몰라」	keep	rewrites
+register:REG-37	「やってくれますかね」	lacks:?	keep	register
+register:REG-37	「ははは、ライブの余韻ですかね」	lacks:?	keep	register
+register:REG-37	「そうですかねえ」	lacks:?	keep	register
+register:REG-37	「本当ですかー」	lacks:?	keep	register
+register:REG-37	「カメラのモニタリングはどうですかー」	has:어때요~?」	fix	register
+register:REG-37	「奥の席の方、聞こえてますかーっ」	has:들려요~?」	fix	register
+register:REG-37	「そ、そうですかー……」	lacks:?	keep	register
+register:REG-37	「えっ！？　二人でピロートークですかー！　やったー！」	lacks:?~	keep	register
+register:REG-37	「どちらさ……およよ、おおしま氏ではありませんか！」	lacks:?	keep	register
+register:REG-37	「受けて立とうではありませんかっ！！」	lacks:?	keep	register
+register:REG-37	「我々は、候補者仲間ではありませんか」	has:아닙니까」	keep	register
+register:REG-37	「それ、私のせいじゃないですか」	lacks:?	keep	register
+register:REG-37	「次は、２８票、得票率２８％ですか」	lacks:?	keep	register
+register:REG-37	「全部で３本ですか」	lacks:?	keep	register
+register:REG-37	「値段は１００円ですか」	lacks:?	keep	register
+register:REG-25	「得票率は２８％です」	has:28%예요」	fix	register
+register:REG-35	「同じ役職の人が二人いたら混乱します」	has:혼란해요」	fix	register
+register:REG-35	「それは困ります」	has:곤란해요」	keep	register
+dict:jisjk:357659	「ええ、同様です」	has:마찬가지예요	fix	local

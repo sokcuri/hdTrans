@@ -10,7 +10,7 @@ cx:s4k-yoroshikunai:10	まあ、ゲーム内でもラビッターの扱いは確
 cx:s4k-yoroshikunai:10	どうやらこの二人、相性がよろしくないらしい。	has:궁합이 좋지 않은 것 같다.	fix	rewrites
 cx:s4k-yoroshikunai:10	ジャンプでの回避はあまりよろしくない。	has:그다지 좋지 않다.	fix	rewrites
 cx:s4k-yoroshikunai:10	背筋によろしくない痛みが走るけれど、	has:등에 좋지 않은 아픔	fix	rewrites
-cx:s4k-yoroshikunai:10	「我が君、どこかお体の具合がよろしくないのですか」	has:상태가 좋지 않습니까」	fix	rewrites
+cx:s4k-yoroshikunai:10	「我が君、どこかお体の具合がよろしくないのですか」	has:상태가 좋지 않아요?」	fix	rewrites
 cx:s4k-yoroshikunai:10	本人達の主張を聞いてやらないのはよろしくないし、	has:좋지 않고,	fix	rewrites
 cx:s4k-yoroshikunai:10	「ちょっと待ってよ。全然よろしくないから。	has:전혀 좋지 않으니까.	fix	rewrites
 cx:s4k-yoroshikunai:10	「これからよろしくね」	!rule:cx:s4k-yoroshikunai:10	keep	rewrites

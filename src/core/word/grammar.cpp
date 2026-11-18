@@ -4777,6 +4777,8 @@ void HumbleFirstPerson(Flusher& f) {
         else if (lemma == "우리") target = "저희";
         else if (lemma == "우리들") target = "저희들";
         else continue;
+        // a word whose 우리 is a group or a home (うちの学園 우리 학원) is humbled only where it reads the speaker
+        if (target.starts_with("저희") && dict::InClass(HDTRANS_CLASS("pronoun.humble-singular"), it->group->surface)) continue;
         if (!PoliteAfter(it)) continue;
         if (target == "저" && it->After() != nullptr && it->After()->selected >= 0 &&
             ItemLemma(f, it->After(), it->After()->selected).starts_with("(이)가")) {

@@ -15,7 +15,7 @@ dict:gram:de-ii:1	「雨も小降りになったし、ここでいいよ」	「�
 dict:gram:de-ii:1	「ハノン。ここでいいのか？」	「하논. 여기면 되는 거야?」	fix	local
 dict:gram:de-ii:1	「ここでいい？」	「여기면 돼?」	fix	local
 dict:gram:de-ii:1	うん、ここでいいだろう。	응, 여기면 될 것이다.	fix	local
-dict:gram:de-ii:1	「親分、あれでいいんですか。」	「두목, 저거면 됩니까.」	fix	local
+dict:gram:de-ii:1	「親分、あれでいいんですか。」	「두목, 저거면 돼요?」	fix	local
 dict:gram:de-ii:1	もう、あれでいいんだ。	이제, 저거면 된다.	fix	local
 dict:gram:de-ii:3	それで良いのか？	그거면 되는 건가?	fix	local
 dict:gram:de-ii:3	「……もうそれで良いからよこせ」	has:그거면 되니까	fix	local
