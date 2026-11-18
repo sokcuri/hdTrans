@@ -172,7 +172,9 @@ argument-senses:5194	掴む|つかむ	v5	sense	obj=詳細|実態|状況|全容|�
 argument-senses:5195	吹き出す|噴き出す|ふきだす	v5	sense	obj=茶|お茶|水|コーヒー|ジュース|酒|紅茶|味噌汁|牛乳|麦茶	뿜다	LEX-5231		茶を吹き出した 차를 뿜었다			
 argument-senses:5196	纏める|まとめる	v1	sense	obj=@hair|髪|髪の毛|前髪|後ろ髪|長髪	묶다	LEX-5231		髪を纏め終えた 머리를 다 묶었다			
 argument-senses:5197	就く|つく|即く	v5	sense	dat=王位|皇位|帝位|玉座|帝座|王座	오르다	LEX-5231		王位についてから 왕위에 오르고 나서			
+argument-senses:15501	就く|つく|即く	v5	sense	dat=王位|皇位|帝位|玉座|帝座|王座 next=@about-topic form=te	대하다	LEX-6500		王位について語る 왕위에 대해 말한다			
 argument-senses:5198	就く|つく	v5	sense	dat=軍務|任務|職務|役職|公務|兵役|職|任	종사하다	LEX-5231		軍務に就いた 군무에 종사했다			
+argument-senses:15500	就く|つく	v5	sense	dat=軍務|任務|職務|役職|公務|兵役|職|任 next=@about-topic form=te	대하다	LEX-6500		任務について話す 임무에 대해 이야기한다			
 argument-senses:5199	すする|啜る	v5:규칙	sense	obj=茶|お茶|紅茶|コーヒー|スープ|酒|汁|味噌汁|白湯	홀짝이다	LEX-5231		お茶をすすった 차를 홀짝였다			
 argument-senses:5200	挽く|ひく	v5	sense	obj=豆|コーヒー|コーヒー豆|小麦|麦|穀物|胡椒|蕎麦|そば粉|粉	갈다	LEX-5231		コーヒー豆を挽いて 커피콩을 갈아			
 argument-senses:5201	伺う|うかがう|窺う	v5	sense	obj=様子|顔色|動向|気配|機嫌|反応	살피다	LEX-5231		様子をうかがっていた 모습을 살피고 있었다			
