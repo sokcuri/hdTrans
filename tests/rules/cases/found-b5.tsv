@@ -1,0 +1,153 @@
+rule	input	expected	kind	layer
+cx:settled-enough:10	「いや、別にもういいって」	has:이제 됐다니까	fix	rewrites
+cx:settled-enough:10	もういいって！	has:이제 되었다니까!	fix	rewrites
+cx:settled-enough:10	「もういいってば」	has:이제 됐다니까	fix	rewrites
+cx:settled-enough:10	もういいってば。	has:이제 되었다니까.	fix	rewrites
+cx:settled-enough:10	「もういいって言っただろ」	has:이제 됐다고 말했지	fix	rewrites
+cx:settled-enough:10	もういいって言った	has:이제 되었다고 말했다	fix	rewrites
+cx:settled-enough:10	「もういいってこと？」	has:이제 됐다는 거야	fix	rewrites
+cx:settled-enough:10	もういいっての	has:이제 되었다니까	fix	rewrites
+cx:settled-enough:10	もういいってのに	has:이제 되었다는데	fix	rewrites
+cx:settled-enough:10	「もういいんだ」	has:이제 됐어	fix	rewrites
+cx:settled-enough:10	「それは……もういいんだ……」	has:이제 됐어	fix	rewrites
+cx:settled-enough:30	もういいけど	has:이제 되었는데	fix	rewrites
+cx:settled-enough:10	「もういいっ！」	has:이제 됐어!	fix	rewrites
+cx:settled-enough:20	もういいってさ	has:이제 되었대	fix	rewrites
+cx:settled-enough:10	もういいよね	has:이제 되지	keep	rewrites
+cx:settled-enough:10	もういいかな	has:이제 될까	keep	rewrites
+cx:settled-enough:10	もういいから	has:이제 되니까	keep	rewrites
+cx:settled-enough:10	いいって言った	좋다고 말했다	keep	rewrites
+cx:settled-enough:10	いいって思う	좋다고 생각한다	keep	rewrites
+cx:settled-enough:10	いいってば	좋다니까	keep	rewrites
+cx:settled-enough:10	それでいいって	그거면 된다고	keep	rewrites
+cx:settled-enough:10	「もういい」	has:이제 됐	keep	rewrites
+cx:settled-enough:20	いいってさ	좋대	keep	rewrites
+cx:settled-enough:30	いいけど	좋은데	keep	rewrites
+cx:settled-enough:30	それでいいけど	그거면 되는데	keep	rewrites
+cx:settled-enough:10	「もう良いって」	has:이제 됐다니까	fix	rewrites
+cx:settled-enough:10	「もうよいってば」	has:이제 됐다니까	fix	rewrites
+cx:settled-enough:10	「もう良いって言っただろ」	has:이제 됐다고 말했지	fix	rewrites
+cx:settled-enough:10	もう良いって顔	has:이제 되었다는 얼굴	fix	rewrites
+cx:settled-enough:20	もう良いってさ	has:이제 되었대	fix	rewrites
+cx:settled-enough:30	もうよいけど	has:이제 되었는데	fix	rewrites
+dict:w:36065	もう良いよ	has:이제 됐어	keep	local
+dict:w:36065	もう良いですよ	has:이제 됐어요	fix	local
+dict:w:36066	もうよいです	has:이제 되었습니다	fix	local
+dict:w:36066	もうよい？	has:이제 됐어?	fix	local
+constraint:kyoku-before-tte	この曲って音がきれい	has:이 곡은 소리가	fix	lookup
+constraint:kyoku-before-tte	この曲って	이 곡은	fix	lookup
+constraint:kyoku-before-tte	その曲ってさ、いいよね	has:그 곡은	fix	lookup
+constraint:kyoku-before-tte	あの曲って誰の？	has:그 곡은 누구	fix	lookup
+constraint:kyoku-before-tte	私の曲って地味かな	has:내 곡은	fix	lookup
+constraint:kyoku-before-tte	この曲って、	has:이 곡은,	fix	lookup
+constraint:kyoku-before-tte	この曲ってば最高	has:이 곡은	fix	lookup
+constraint:kyoku-before-tte	この曲っていいよね	has:이 곡	fix	lookup
+constraint:kyoku-before-tte	この曲ってちょっと地味	has:이 곡	fix	lookup
+constraint:kyoku-before-tte	この曲ってもしかして	has:이 곡	fix	lookup
+constraint:kyoku-before-tte	この光ってる石	has:빛나고 있는 돌	keep	lookup
+constraint:kyoku-before-tte	星の光っている夜	has:빛나고 있는 밤	keep	lookup
+constraint:kyoku-before-tte	一般人の入って来る場所じゃない	has:들어오는 장소	keep	lookup
+constraint:kyoku-before-tte	角の折ってあるメモ	lacks:모서리의	keep	lookup
+constraint:kyoku-before-tte	星の光って見える	has:빛나 보인다	keep	lookup
+constraint:kyoku-before-tte	離婚したの知ってんの	has:알고 있	keep	lookup
+constraint:kyoku-before-tte	曲がった	구부러졌다	keep	lookup
+constraint:kyoku-before-tte	曲げてください	굽혀 주세요	keep	lookup
+constraint:kyoku-before-tte	この曲が好き	이 곡을 좋아해	keep	lookup
+constraint:kyoku-before-tte	曲った道	구불거린 길	keep	lookup
+dict:w:36061	ぐるぐるって何周も回った	has:몇 바퀴나 돌았다	fix	local
+dict:w:36062	何周目？	몇 바퀴째?	fix	local
+dict:w:36062	今何周目だ	has:몇 바퀴째	fix	local
+dict:w:36055	グラウンドを何周走った	has:몇 바퀴 달렸다	fix	local
+dict:w:36055	何周回った	몇 바퀴 돌았다	fix	local
+dict:w:36055	何周かした	has:몇 바퀴	fix	local
+dict:w:36055	何周した？	has:몇 바퀴	fix	local
+dict:w:36055	何周して疲れた	has:몇 바퀴	fix	local
+dict:w:36056	何粒も食べた	has:몇 알이나	fix	local
+dict:w:36056	何粒	몇 알	fix	local
+dict:w:36057	何ページ目	몇 페이지째	fix	local
+dict:w:36057	何ページも読んだ	has:몇 페이지나	fix	local
+dict:w:36059	何周期	몇 주기	fix	local
+dict:w:36060	何周年	몇 주년	fix	local
+dict:w:36055	一周	일주	keep	local
+dict:w:36055	世界一周	세계일주	keep	local
+dict:w:36056	一粒の涙	한 알의 눈물	keep	local
+dict:w:36057	ページをめくる	페이지를 넘긴다	keep	local
+dict:w:36059	周期的に	주기적으로	keep	local
+dict:w:36055	何をした？	뭘 했어?	keep	local
+dict:w:36055	何が周りに	has:무엇이 주위에	keep	local
+dict:w:36055	周さん	아마네 씨	keep	local
+dict:w:36055	藤宮周が来た。一人暮らしを始めた周が住む部屋	has:시작한 아마네가	keep	local
+dict:w:36055	何周目の世界だ	has:몇 바퀴째의	fix	local
+dict:w:36063	ぐるぐると何周りもして、ようやく１階についた。	has:몇 바퀴나	fix	local
+dict:w:36063	何周りか走った	has:몇 바퀴인가 달렸다	fix	local
+dict:w:36063	周りを見た	주위를 보았다	keep	local
+dict:w:36055	これが何周目か、もう覚えていない。	has:몇 바퀴째인가	fix	local
+dict:w:36055	グラウンドを何周走った？	has:몇 바퀴 달렸어	fix	local
+phrase:nande-dekiteru	ふわふわって何でできてるの？	has:무엇으로 되어 있는 거야	fix	phrases
+phrase:nande-dekiteru	これ、何でできてる？	has:무엇으로 되어 있어	fix	phrases
+phrase:nande-dekiteru	何でできているの	무엇으로 되어 있어	fix	phrases
+phrase:nande-dekiteru	何でできていますか	무엇으로 되어 있습니까	fix	phrases
+phrase:nande-dekiteru	何でできていた	무엇으로 되어 있었다	fix	phrases
+phrase:nande-dekiteru	「この体は何でできてるんだ」	has:무엇으로 돼 있는 거야	fix	phrases
+phrase:nande-dekiteru	何で出来てるの？	무엇으로 되어 있는 거야?	fix	phrases
+phrase:nande-dekiteru	何で出来ている	무엇으로 되어 있다	fix	phrases
+phrase:nande-dekiteru	「これ、何でできてるか知ってる？」	has:무엇으로 돼 있는지	fix	phrases
+phrase:nande-dekiteru	何でできてんの？	무엇으로 되어 있는 거야?	fix	phrases
+phrase:nande-dekiteru	何でできてんだよ	has:무엇으로 되어 있는 거야	fix	phrases
+phrase:nande-dekiteru	これ何でできてんのか分からない	has:무엇으로 되어 있는지 모른다	fix	phrases
+phrase:nande-dekiteru	何でできないの	왜 할 수 없어	keep	phrases
+phrase:nande-dekiteru	なんでできないの？	has:왜 할 수 없는	keep	phrases
+phrase:nande-dekiteru	何でできるの？	has:왜 할 수 있는	keep	phrases
+phrase:nande-dekiteru	何で作ったの？	왜 만들었어?	keep	phrases
+phrase:nande-dekiteru	何で来た	왜 왔다	keep	phrases
+phrase:nande-dekiteru	何でここに	왜 여기에	keep	phrases
+dict:jisjk:264976	ナンが好きです	난을 좋아합니다	fix	lookup
+dict:jisjk:264976	カレーとナン	카레와 난	fix	lookup
+dict:jisjk:264976	ナンを食べる	난을 먹는다	fix	lookup
+dict:jisjk:264976	ナン！	난!	fix	lookup
+dict:jisjk:264976	ナンさんが来た	난 씨가 왔다	keep	lookup
+names:names.479247	南子は何なのですか？	has:미나코는	fix	lookup
+names:names.479247	南子	미나코	fix	lookup
+names:names.479247	南子、行こう	미나코, 가자	fix	lookup
+names:names.479247	南子さん	미나코 씨	fix	lookup
+names:names.479247	南子が言った	미나코가 말했다	fix	lookup
+names:names.479247	南子先輩	미나코 선배	fix	lookup
+names:names.479247	南子ちゃんと遊ぶ	has:미나코짱	fix	lookup
+names:names.479247	春子は来た	하루코는 왔다	keep	lookup
+names:names.479247	みなこは来た	미나코는 왔다	keep	lookup
+names:names.479247	南ちゃん	미나미짱	keep	lookup
+names:names.479247	南は来た	남쪽은 왔다	keep	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく分からない	has:이제 잘 모른다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく寝た	has:잘 잤다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく知ってる	has:잘 알고	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく頑張った	lacks:되게	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよく覚えてない	has:잘 기억	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよくなった	has:좋아졌다	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよい子は寝る時間	has:좋은 아이는	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよい人	has:좋은 사람	fix	lookup
+constraint:mouyoi-kana-not-before-ii	もうよいって	has:이제 되었다니까	keep	lookup
+constraint:mouyoi-kana-not-before-ii	もうよいです	has:이제 되었습니다	keep	lookup
+constraint:mouyoi-not-before-ii	もう良く分からない	has:이제 잘 모른다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良く見て	has:잘 봐	fix	lookup
+constraint:mouyoi-not-before-ii	もう良くなった	has:좋아졌다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良かった	has:좋았다	fix	lookup
+constraint:mouyoi-not-before-ii	もう良い子は寝る時間	has:좋은 아이는	fix	lookup
+constraint:mouyoi-not-before-ii	もう良い人だ	has:좋은 사람이다	fix	lookup
+constraint:mouyoi-not-before-ii	「もう良い」	has:이제 됐다	keep	lookup
+constraint:mouyoi-not-before-ii	もう良いけど	has:이제 되었는데	keep	lookup
+constraint:moui-not-before-ii	もういい弁護士を通して連絡する	has:이제 되었다	keep	lookup
+constraint:moui-not-before-ii	もういいよ	has:이제 됐어	keep	lookup
+constraint:kyoku-before-tte	道を曲って	lacks:곡	fix	lookup
+constraint:kyoku-before-tte	道を曲っていく	lacks:곡	keep	lookup
+constraint:kyoku-before-tte	腰の曲ってる老人	lacks:곡	fix	lookup
+constraint:kyoku-before-tte	腰の曲っている老人	lacks:곡	keep	lookup
+constraint:kyoku-before-tte	この曲ってたしか昔の	has:이 곡은	fix	lookup
+constraint:kyoku-before-tte	この曲っていろいろある	has:이 곡은	fix	lookup
+constraint:nande-dekite-before-negative	何でできてないの？	has:왜 하지 못한 거야	fix	lookup
+constraint:nande-dekite-before-negative	宿題、何でできてないの？	has:왜 하지 못한 거야	fix	lookup
+constraint:nande-dekite-before-negative	何でできてなかった	has:왜 하지 못했다	fix	lookup
+constraint:nande-dekite-before-negative	何でできていないの？	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-before-negative	何でできてねえんだよ	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-kanji-before-negative	何で出来てないんだ	lacks:무엇으로	fix	lookup
+constraint:nande-dekitei-kanji-before-negative	何で出来ていない	lacks:무엇으로	fix	lookup
+constraint:nande-dekite-before-negative	これは何でできてるの？	has:무엇으로 되어 있는 거야	keep	lookup
