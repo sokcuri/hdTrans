@@ -65,3 +65,18 @@ cx:lc3h-nanodesuka:05	なんなのですかこれは	무엇입니까 이것은	f
 cx:lc3h-nanodesuka:05	「アラタ、マジでなんなんですかこの野蛮な生き物……」	has:뭡니까 이	keep	rewrites
 cx:lc3h-nanodesuka:10	誰なのですか？	누구입니까?	keep	rewrites
 cx:lc3h-nanodesuka:10	なんなのですか、これ	무엇입니까, 이것	keep	rewrites
+normalize:nsu	何なのっすか	무엇입니까	fix	normalize
+normalize:nsu	なんなのっすか	무엇입니까	fix	normalize
+normalize:nsu	「何なのっすか！」	「뭡니까!」	fix	normalize
+normalize:nsu	何なのッスか	무엇입니까	fix	normalize
+normalize:nsu	これ何なのっすか	이것 무엇입니까	fix	normalize
+normalize:nsu	それ、何なのっすか、先輩	그것, 무엇입니까, 선배	fix	normalize
+normalize:nsu	誰なのっすか	누구입니까	fix	normalize
+normalize:nsu	学生なのっすか	학생입니까	fix	normalize
+normalize:nsu	本当なのっすか	사실입니까	fix	normalize
+normalize:nsu	そうなのっすか	그렇습니까	fix	normalize
+normalize:nsu	マジなのっすか	진짜입니까	fix	normalize
+normalize:nsu	嫌いなのっす」	싫습니다」	fix	normalize
+normalize:nsu	何なのっすかね	lacks:입니다	fix	normalize
+normalize:nsu	ひなのっすか	has:히나노	keep	normalize
+normalize:nsu	それ、ひなのっすか？	has:히나노	keep	normalize
