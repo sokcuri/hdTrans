@@ -502,8 +502,8 @@ bool Run(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// ([るたなういくすつぬむぶぐてでだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
-// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ that end the sentence after
+// ([るたなういくすつぬむぶぐてでだ])んっ?[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
+// んです (行くんすか, 苦手なんスけど, 何なんっすか), but not ないんすか, ないんすよ that end the sentence after
 // a verb, which the end rows read (書かないんすか 쓰지 않나요). Without contracted forms read, not
 // after で, and not ないんすか or ないんすよ anywhere.
 template <bool kContracted>
@@ -519,7 +519,9 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
         if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー')) return false;
     }
     m.group[1] = Span(s, pos, p);
-    if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
+    if (!Lit(s, p, "ん")) return false;
+    Lit(s, p, "っ");  // んっす, spelled with the small っ of っす (何なんっすか).
+    if (!OneOf(s, p, U"すス")) return false;
     // The end rows of ないんすか and ないんすよ read a verb's ない at the end of a sentence; the ない
     // of a noun or a particle (問題ないんすか, 何にもないんすか) and one the sentence goes on after
     // (じゃないんすかね) are read as ないんです.

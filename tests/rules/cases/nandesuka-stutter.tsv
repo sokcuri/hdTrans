@@ -4,7 +4,7 @@ cx:nan-copula-pause:10	「は、はい……な、なんでしょう？」	has:�
 cx:nan-copula-pause:10	あーっ、え…なんでしょう…	has:어…무엇이죠…	fix	rewrites
 cx:nan-copula-pause:10	フリッツ…フリッツX…なんでしょう、頭の中に湧き起こるこの言葉は	has:X…무엇이죠,	fix	rewrites
 cx:nan-copula-pause:10	「ズッキューン…………なんでしょう今の感じ。」	has:…뭐죠 지금의 느낌	fix	rewrites
-cx:nan-copula-pause:20	「それ……なんでしょうか？」	has:그거……뭐죠?	fix	rewrites
+cx:nan-copula-pause:20	「え……なんでしょうか？」	has:……뭐죠?	fix	rewrites
 restore:stutter-comma	「な、なんでしょう？」	「뭐, 뭐죠?」	fix	restore
 restore:stutter-comma	「はい？　な、なんでしょう」	has:뭐, 뭐죠	fix	restore
 restore:stutter-comma	「疑問……ですか？　な、なんでしょう？」	has:뭐, 뭐죠?	fix	restore
@@ -27,3 +27,13 @@ cx:nan-copula-pause:10	先生なんでしょう？	선생님이죠?	keep	rewrite
 cx:nan-copula-pause:20	これは本なんでしょうか	has:책	keep	rewrites
 attr:pause-stutter	「すごい……たくさんかかって」	「대단해……많이 걸려」	keep	local
 attr:pause-stutter	「あ、あの」	「저, 저기」	keep	local
+cx:nan-copula-pause:10	「あーっ、え…なんでしょう…」	has:어…뭐죠…	fix	rewrites
+cx:nan-copula-pause:20	ええと……なんでしょうか	음……무엇이지요	fix	rewrites
+cx:nan-copula-pause:10	うーん……なんでしょうね	lacks:……이지요	fix	rewrites
+cx:nan-copula-pause:10	「フリッツ…フリッツX…なんでしょう、頭の中に湧き起こるこの不思議な言葉は」	has:X…뭐죠, 머릿속에	fix	rewrites
+cx:nan-copula-pause:20	そう……なんでしょうか	lacks:무엇	keep	rewrites
+cx:nan-copula-pause:10	好き……なんでしょう	lacks:무엇	keep	rewrites
+cx:nan-copula-pause:20	彼が犯人――なんでしょうか	lacks:무엇	keep	rewrites
+cx:nan-copula-pause:10	先生……なんでしょう？	lacks:무엇	keep	rewrites
+cx:nan-copula-pause:20	あなた……なんでしょうか	lacks:무엇	keep	rewrites
+compose:stutter-spoken	「何でも謙遜すりゃいいってもんじゃない。お前が一番なんだ、玉藻」	lacks:게 게	keep	compose

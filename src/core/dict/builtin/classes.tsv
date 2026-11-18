@@ -272,6 +272,7 @@
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
+//= ko.pause-filler	The Korean the word and sound stages write for a hesitation filler (えっ 어, ええと 음, うーん 으음, えー 에에): a なんでしょう after one and a pause opens a new question, 무엇 (え……なんでしょう？ 어……뭐죠?).
 //= ko.determiner	Korean determiners that the dictionary writes for Japanese nouns (何の 무슨, とある 어떤, あらゆる 모든): one is written apart from the noun it modifies (何の音 무슨 소리, とある村 어떤 마을).
 //= ko.adverb-noun	Korean adverbs that the dictionary writes for Japanese nouns without the code Nn (結局 결국, 初めて 처음, 日々 날마다): one is written apart from the noun after it, with which it forms no compound (結局昼 결국 낮, 毎日猫 매일 고양이; spec LAY-19).
 //= ko.time-noun	Korean time nouns that also stand as adverbs (明日 내일, 今年 올해, 今 지금, 今夜 오늘 밤): one is written apart from the noun after it (明日雨 내일 비, 今年夏 올해 여름) but joins a suffix (今日用 오늘용, 今年産 올해산; spec LAY-19).
@@ -4020,6 +4021,12 @@ ko-verb.sequence	숙제하다
 ko-verb.sequence	운동하다
 ko-verb.sequence	산책하다
 ko.recall-interjection	앗
+ko.pause-filler	어
+ko.pause-filler	에
+ko.pause-filler	에에
+ko.pause-filler	음
+ko.pause-filler	으음
+ko.pause-filler	저기
 ko.determiner	무슨
 ko.determiner	어떤
 ko.determiner	어떠한
