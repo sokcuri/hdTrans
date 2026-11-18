@@ -2105,6 +2105,9 @@ cx:yatta-achieve:10	LEX-56	&&5 S+0== "や" !1 I+0== "Lやったよう" :yatta-st
 cx:yatta-achieve:20	LEX-56	&&5 S+0== "や" ||2 S-1== "よく" S-1== "良く" ||2 F-1== "opens-line" S-2== "00「『（(“、，," ||3 F+0== "sentence-end" F+0== "quote-end" S+1== "00、，,…‥" I+0== "Lやった"	set-target "잘&AV@" set-target@-1 ""	よくやった 잘했다
 //= nandesu-what	after OfferPromise 390	A なんです that opens an utterance (a line, a quote, or after a comma) and asks, right before ？, has no noun before it: its なん is 何, 뭡니다 (なんです？ 뭡니까?).
 cx:nandesu-what:10	SPC-16	&&4 S+0== "なんです" D+0== "입니다" ||2 F+0== "opens-line" S-1== "00「『（(“、，," S+1== "00？?"	set-target "뭡니다"	なんです？ 뭡니까?
+//= nan-copula-pause	after OfferPromise 391	A なんでしょう or なんでしょうか right after a pause (…, ―) opens an utterance: no noun before the pause takes it as a copula, so its なん is 何, 무엇 (はい……なんでしょう？ 네……뭐죠?), not 이지요 or 입니까 with the 何 dropped (なんですか there is read 뭔가요 before this pass).
+cx:nan-copula-pause:10	LEX-6101	&&3 S+0== "なんでしょう" D+0== "이지요" F+0== "after-pause"	set-target "무엇이지요"	はい……なんでしょう？ 네……뭐죠?
+cx:nan-copula-pause:20	LEX-6101	&&3 S+0== "なんでしょうか" D+0== "입니까" F+0== "after-pause"	set-target "무엇이지요"	それ……なんでしょうか 그거……무엇이지요
 //= nante-said	after OfferPromise 400	A なんて right after 今, いま or さっき and before 言 asks what was said: 뭐라고 (今なんて言った？ 지금 뭐라고 했어?).
 cx:nante-said:10	LEX-58	&&3 S+0== "なんて" ||3 S-1== "今" S-1== "いま" S-1== "さっき" S+1== "L言"	set-target " 뭐라고"	今なんて言った？ 지금 뭐라고 했어?
 //= tokoro-kanji	after OfferPromise 410	The 所 after a past progressive verb before だった or でした is the moment, like the formal noun ところ: 참 (見ていた所だった 보고 있던 참이었다). After a condition in たら in its sentence it is what nearly happened, -ㄹ 뻔했다 (壊れてたら泣きを見ていた所だった 망가져 있으면 낭패를 볼 뻔했다).
@@ -3465,8 +3468,8 @@ cx:lc3h-toiunoni:28	GRM-196	&&8 :lc3h-noni-say S+0== "とい" D+0== "(이)라고
 cx:lc3h-toiunoni:30	GRM-196	&&7 :lc3h-noni-say S+0== "とい" D+0== "(이)라고 &AV@" !1 F-1== "conjugating" !1 S-1== "Rん" !1 D-1== "R돼" ||2 S+1== "、" F+0== "utterance-end"	set-target "" set-ending "" append-target@-1 "인데도"	朝早くというのに、 아침 일찍인데도,
 cx:lc3h-toiunoni:40	GRM-196	&&3 S+0== "だというのに" D+0== "인데" !1 :lc3h-noni-nominal	set-target "인데도"	夏だというのに 여름인데도
 //= lc3h-nanodesuka	after OfferPromise 1431	guard S+0== "なのです"	A noun or a clause ending in a noun before なのですか, read 인 것입니다 + 인가, asks politely what it is (spec GRM-197): 입니까 (一体誰なのですか 도대체 누구입니까, どの程度なのですか 어느 정도입니까), and before かな, かね, かしら 일까요; not 누구인 것입니다인가. そうなのですか, どうなのですか and なのですから stay.
-cx:lc3h-nanodesuka:10	GRM-197	&&7 ||2 D+0== "인 것입니다" D+0== "입니다" S+1== "か" !1 Y-1== "L1" !1 S-1== "なん" !1 S-1== "00、…―‥" !1 S-1== "いかが" !1 S-1== "どう"	set-target "입니까" set-target@+1 ""	どの程度なのですか 어느 정도입니까
-cx:lc3h-nanodesuka:20	GRM-197	&&7 ||2 D+0== "인 것입니다" D+0== "입니다" ||3 S+1== "かな" S+1== "かね" S+1== "かしら" !1 Y-1== "L1" !1 S-1== "なん" !1 S-1== "00、…―‥" !1 S-1== "いかが" !1 S-1== "どう"	set-target "일까요" set-target@+1 ""	いかがなのですかな 어떨까요
+cx:lc3h-nanodesuka:10	GRM-197	&&6 ||2 D+0== "인 것입니다" D+0== "입니다" S+1== "か" !1 Y-1== "L1" !1 S-1== "00、…―‥" !1 S-1== "いかが" !1 S-1== "どう"	set-target "입니까" set-target@+1 ""	どの程度なのですか 어느 정도입니까
+cx:lc3h-nanodesuka:20	GRM-197	&&6 ||2 D+0== "인 것입니다" D+0== "입니다" ||3 S+1== "かな" S+1== "かね" S+1== "かしら" !1 Y-1== "L1" !1 S-1== "00、…―‥" !1 S-1== "いかが" !1 S-1== "どう"	set-target "일까요" set-target@+1 ""	いかがなのですかな 어떨까요
 //= lc3h-soumitai	after OfferPromise 1441	guard S+0== "みたい"	そう before みたい, read 그렇게 + 같다, is that it seems so (spec GRM-198): 그런 것 같다 in the form of みたい (そうみたいだな 그런 것 같네, そうみたいです 그런 것 같습니다), not 그렇게 같다. The そう of appearance after a noun or adjective (元気そうみたい, 大丈夫そうみたい) stays.
 cx:lc3h-soumitai:10	GRM-198	&&4 S-1== "そう" ||2 D-1== "그렇게" D-1== "그래" D+0== "%B3@" !1 &&2 F-1== "touches-prev" ||5 P-2== "1" P-2== "8" P-2== "9" F-2== "conjugating" D-2== "~@"	set-target@-1 "그런 것"	そうみたいだな 그런 것 같네
 //~ lc3h-anira	라고=다고 라면=다면 라서=어서 란=단	The endings of 아니다 written for 없다 when もんじゃない becomes 수 없다 (GRM-199).

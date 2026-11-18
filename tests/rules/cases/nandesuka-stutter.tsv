@@ -1,0 +1,29 @@
+# 규칙: LEX-6101
+rule	input	expected	kind	layer
+cx:nan-copula-pause:10	「は、はい……な、なんでしょう？」	has:네……뭐, 뭐죠?	fix	rewrites
+cx:nan-copula-pause:10	あーっ、え…なんでしょう…	has:어…무엇이죠…	fix	rewrites
+cx:nan-copula-pause:10	フリッツ…フリッツX…なんでしょう、頭の中に湧き起こるこの言葉は	has:X…무엇이죠,	fix	rewrites
+cx:nan-copula-pause:10	「ズッキューン…………なんでしょう今の感じ。」	has:…뭐죠 지금의 느낌	fix	rewrites
+cx:nan-copula-pause:20	「それ……なんでしょうか？」	has:그거……뭐죠?	fix	rewrites
+restore:stutter-comma	「な、なんでしょう？」	「뭐, 뭐죠?」	fix	restore
+restore:stutter-comma	「はい？　な、なんでしょう」	has:뭐, 뭐죠	fix	restore
+restore:stutter-comma	「疑問……ですか？　な、なんでしょう？」	has:뭐, 뭐죠?	fix	restore
+restore:stutter-comma	な、なんでしょう？	무, 무엇이죠?	fix	restore
+compose:stutter-spoken	「な、何ですか？」	「뭐, 뭡니까?」	fix	compose
+compose:stutter-spoken	「な、何を根拠に」	has:뭐, 뭘 근거로	fix	compose
+compose:stutter-spoken	「な……なにを……」	「뭐……뭘……」	fix	compose
+compose:stutter-spoken	「な、なんだろうなぁ」	has:뭐, 뭘까	fix	compose
+compose:stutter-spoken	「な、な、なんでしょうか？」	has:뭐, 뭐, 뭐죠?	fix	compose
+compose:stutter-spoken	「うっ……な、何がですか？」	has:뭐, 뭐가	fix	compose
+attr:pause-stutter	「あ……ち、違う……」	has:아, 아니야	fix	local
+attr:pause-stutter	「ぅ……だ、だから、それがダメなんですよ！」	has:그, 그러니까	fix	local
+attr:pause-stutter	「すごい……た、たくさんかかって」	has:대단해……	fix	local
+attr:pause-stutter	や、やられました…ま…まだ、任務は続行出来ます。	has:당했습니다…	fix	local
+attr:pause-stutter	天城、本当にびっくりしました…べっ、別に怖くはないです…	has:놀랐습니다…	fix	local
+compose:stutter-spoken	「む、無理だよ」	has:무, 무리	keep	compose
+compose:stutter-spoken	「な、何だ？」	「뭐, 뭐야?」	keep	compose
+cx:nan-copula-pause:10	「はい、なんでしょう？」	「네, 뭐죠?」	keep	rewrites
+cx:nan-copula-pause:10	先生なんでしょう？	선생님이죠?	keep	rewrites
+cx:nan-copula-pause:20	これは本なんでしょうか	has:책	keep	rewrites
+attr:pause-stutter	「すごい……たくさんかかって」	「대단해……많이 걸려」	keep	local
+attr:pause-stutter	「あ、あの」	「저, 저기」	keep	local

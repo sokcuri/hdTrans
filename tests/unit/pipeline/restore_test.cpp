@@ -175,8 +175,8 @@ HD_TEST(pipeline_write_stutters) {
         {"「 \uE000，이봐」", "「이, 이봐」"},
         {"  \uE000…어…", "어…어…"},
         {"그 \uE000‥‥가다", "그 가‥‥가다"},
-        {"아 \uE000、 각", "아 가,  각"},
-        {"\uE000、 \uE000、아", "아,  아, 아"},
+        {"아 \uE000、 각", "아 가, 각"},
+        {"\uE000、 \uE000、아", "아, 아, 아"},
         {"\uE000・・어", "어・・어"},
         // A single ・ is no separator; a mark with no syllable after it goes.
         {"\uE000・어", "・어"},

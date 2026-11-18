@@ -122,6 +122,37 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
     return {};
 }
 
+// A stutter copied from the first syllable of 무엇 (무, 무엇이지요) before the word whose spoken
+// form replaces it: the copies take the first syllable of that form without its final (뭐, 뭐죠).
+void RespellStutter(std::string& out, std::string_view written, std::string_view spoken) {
+    if (!written.starts_with("무엇")) return;
+    const char32_t head = text::DecodeRune(spoken).cp;
+    const auto syllable = text::Split(head);
+    if (!syllable) return;
+    constexpr std::string_view kCopied = "무";
+    std::string copy;
+    text::AppendRune(copy, head - static_cast<char32_t>(syllable->final));
+    if (copy == kCopied) return;
+    for (std::size_t end = out.size();;) {
+        std::size_t k = end;
+        while (k > 0) {
+            const std::string_view upto = std::string_view(out).substr(0, k);
+            const std::string_view rest = WithoutLast(upto);
+            if (std::u32string_view(U" ,、…‥~～-").find(text::DecodeRune(upto.substr(rest.size())).cp) ==
+                std::u32string_view::npos) {
+                break;
+            }
+            k = rest.size();
+        }
+        if (k == end || !std::string_view(out).substr(0, k).ends_with(kCopied)) return;
+        const std::size_t at = k - kCopied.size();
+        const std::string_view before = std::string_view(out).substr(0, at);
+        if (!before.empty() && !WordEnds(before.substr(WithoutLast(before).size()))) return;
+        out.replace(at, kCopied.size(), copy);
+        end = at;
+    }
+}
+
 // Whether s ends with the 아/어 form of a verb, maybe followed by one space (와, 보여 , 해 ):
 // the form an auxiliary 주다 or 두다 follows.
 bool AfterInfinitive(std::string_view s) {
@@ -202,6 +233,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (start || pronoun) {
                 const auto [spoken, length] = SpokenWord(line.substr(at), !start);
                 if (length > 0) {
+                    RespellStutter(out, line.substr(at, length), spoken);
                     out += spoken;
                     at += length;
                     continue;
