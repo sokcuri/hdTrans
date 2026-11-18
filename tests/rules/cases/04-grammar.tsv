@@ -26,7 +26,7 @@ dict:jisjk:6120	雨だが、行く。	!rule:dict:jisjk:6120	keep	local
 dict:jisjk:374208	どうか静かに。	rule:dict:jisjk:374208=제발	keep	local
 dict:jisjk:374208	どうか静かに。	제발 조용하게.	fix	local
 dict:jisjk:374208	どうか助けてください。	제발 도와 주세요.	fix	local
-dict:jisjk:367255	はるかさんが来た。	하루카씨가 왔다.	fix	local
+dict:jisjk:367255	はるかさんが来た。	하루카 씨가 왔다.	fix	local
 dict:jisjk:367255	はるか遠くに見える。	!rule:dict:jisjk:367255	keep	local
 dict:jisjk:31546	一体何匹来た。	도대체 몇 마리 왔다.	fix	local
 dict:jisjk:31546	一体何人来た。	도대체 몇 사람 왔다.	fix	local

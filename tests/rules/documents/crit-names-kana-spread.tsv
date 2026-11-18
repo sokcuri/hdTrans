@@ -1,0 +1,97 @@
+# 규칙: LEX-6300, LEX-6301
+rule	input	expected	kind	layer
+names:bare-spread	なぎささんが来た。\nなぎさ、こっちだよ。	has:나기사, 이쪽	fix	fixed
+names:bare-spread	なぎさちゃん、おはよう。\n「なぎさ！」	has:「나기사!」	fix	fixed
+names:bare-spread	なぎさちゃん、おはよう。\nなぎさが来た。	has:나기사가 왔다	fix	fixed
+names:bare-spread	なぎさちゃん、おはよう。\nなぎさも行く？	has:나기사도	fix	fixed
+names:bare-spread	なぎさちゃん、おはよう。\nなぎさって、優しいね。	has:나기사는	fix	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみ、こっちだよ。	has:노조미, 이쪽	fix	fixed
+names:bare-spread	ひなたくん、待って。\nひなた……どこ？	has:히나타……	fix	fixed
+names:bare-spread	めぐみさん、こんにちは。\n「めぐみ、来て」	has:「메구미, 와」	fix	fixed
+names:bare-spread	はるかさんが来た。\nはるか、こっちだよ。	has:하루카, 이쪽	fix	fixed
+names:bare-spread	あかねさんが来た。\nあかね、こっちだよ。	has:아카네, 이쪽	fix	fixed
+names:bare-spread	しずくさんが来た。\nしずく、こっちだよ。	has:시즈쿠, 이쪽	fix	fixed
+names:bare-spread	なぎさちゃん、おはよう。\nなぎさを歩いた。	has:물가를	keep	fixed
+names:bare-spread	なぎさちゃん、おはよう。\nなぎさで遊んだ。	has:물가	keep	fixed
+names:bare-spread	ひなたくん、待って。\nひなたで寝る猫。	has:양지	keep	fixed
+names:bare-spread	めぐみさん、こんにちは。\n神のめぐみに感謝した。	has:신의 은혜	keep	fixed
+names:bare-spread	のぞみさん、おはよう。\n最後ののぞみだ。	has:마지막 희망	keep	fixed
+names:bare-spread	はるかさんが来た。\nはるか遠くに見える。	lacks:하루카 멀리	keep	fixed
+names:bare-spread	はるかさんが来た。\nはるかに大きい。	has:훨씬 크다	keep	fixed
+names:called-word	つきさん、おはよう。	has:츠키 씨	fix	fixed
+names:called-word	つきさん、おはよう。\nつき、まって！	has:츠키, 기다려	fix	fixed
+names:called-word	つき君は優しい。	has:츠키 군은	fix	fixed
+names:called-word	ひさしさん、こんにちは。	has:히사시 씨	fix	fixed
+names:called-word	うちださんがやります	has:우치다 씨가	fix	fixed
+names:called-word	「うちださんが来ます」	has:「우치다 씨가 와요」	fix	fixed
+names:called-word	つきさん、おはよう。\n力がつきた。	has:힘이 다했다	keep	fixed
+names:called-word	ひさしさん、こんにちは。\n家のひさしが壊れた。	lacks:히사시가	keep	fixed
+names:called-word	たくさん食べた。	has:많이	keep	fixed
+names:called-word	みなさん、こんにちは。	has:여러분	keep	fixed
+names:called-word	だからちゃんと出せよ。	has:그러니까 잘	keep	fixed
+names:called-word	しろちゃんと。	has:제대로	keep	fixed
+names:called-word	ありがとちゃーん！	has:고마워	keep	fixed
+names:called-word	すまんちゃーん	has:미안	keep	fixed
+names:called-word	くまさんがいた。	has:곰이	keep	fixed
+names:called-word	おばさんが来た。	has:아줌마	keep	fixed
+names:place-row	「井の頭公園の――」	has:이노카시라 공원의	fix	fixed
+names:called-word	「おい、ついてくんなって言ってるだろ！」	has:따라오지 말라고	keep	fixed
+names:called-word	「ま、いい意味での『うっかりさん』です」	lacks:웃카리	keep	fixed
+names:bare-spread	のぼるさんが来た。\nのぼるは寝た。	has:노보루는	fix	fixed
+names:bare-spread	のぼるさんが来た。\n「のぼる！」	has:노보루!	fix	fixed
+names:bare-spread	のぼるさんが来た。\nのぼる、待って。	has:노보루, 기다려	fix	fixed
+names:bare-spread	ひかるちゃん、おはよう。\nひかるは笑った。	has:히카루는	fix	fixed
+names:bare-spread	わたるさんが来た。\nわたる、こっちだよ。	has:와타루, 이쪽	fix	fixed
+names:bare-spread	しのぶさんが来た。\nしのぶ、こっちだよ。	has:시노부, 이쪽	fix	fixed
+names:bare-spread	はるかさんが来た。\nはるかは笑った。	has:하루카는	fix	fixed
+names:bare-spread	ひさしさんが来た。\nひさしは黙った。	has:히사시는	fix	fixed
+names:bare-spread	のぼるさんが来た。\n山にのぼる。	has:산에 오른다	keep	fixed
+names:bare-spread	のぼるさんが来た。\n階段をのぼるのが好きだ。	has:계단을 오르는	keep	fixed
+names:bare-spread	ひかるちゃん、おはよう。\n星がひかる夜だった。	has:빛나는 밤	keep	fixed
+names:bare-spread	わたるさん、ありがとう。\n橋をわたるときは気をつけて。	has:다리를 건널	keep	fixed
+names:bare-spread	しげるさんのお宅です。\n草がしげる庭。	has:무성한	keep	fixed
+names:bare-spread	ひさしさんが来た。\nひさしぶりだね。	has:오랜만	keep	fixed
+names:called-word	さとるさんは知っている。	has:사토루 씨	fix	fixed
+names:called-word	はるかさん、おはよう。	has:하루카 씨	fix	fixed
+names:called-word	のんびりさん、起きて。	lacks:논비리	keep	fixed
+names:called-word	たっくさん食べた。	has:많이 먹었다	keep	fixed
+names:called-word	みなさん、おはよう。	has:여러분	keep	fixed
+names:same-line	ひかるちゃん、星がひかるよ。	has:별이 빛나	keep	fixed
+names:same-line	ひかるちゃん、目がひかるね。	has:히카루짱	keep	fixed
+names:same-line	ひかるちゃん、目がひかるね。	has:눈이 빛나	keep	fixed
+names:same-line	のぼるさん、見て。日がのぼるよ。	has:노보루 씨	keep	fixed
+names:same-line	のぼるさん、見て。日がのぼるよ。	lacks:날이 노보루	keep	fixed
+names:same-line	わたるさん、風がわたるね。	has:와타루 씨	keep	fixed
+names:same-line	わたるさん、風がわたるね。	lacks:바람이 와타루	keep	fixed
+names:same-line	しげるさん、草がしげるね。	has:무성	keep	fixed
+names:same-line	あゆむくん、一緒にあゆむよ。	has:아유무 군	keep	fixed
+names:same-line	あゆむくん、一緒にあゆむよ。	lacks:함께 아유무	keep	fixed
+names:same-line	のぞみさん、最後ののぞみだ。	has:노조미 씨	fix	fixed
+names:same-line	のぞみさん、最後ののぞみだ。	has:마지막 희망	fix	fixed
+names:same-line	うみちゃん、うみは広いね。	has:우미짱	keep	fixed
+names:same-line	うみちゃん、うみは広いね。	has:바다는	keep	fixed
+names:same-line	【つき】「つきが出てるよ」\n【のぞみ】「つきさん、きれい」	has:【츠키】	fix	fixed
+names:same-line	【つき】「つきが出てるよ」\n【のぞみ】「つきさん、きれい」	has:츠키 씨	fix	fixed
+names:call-to	わたるさんと会った。\n「わたる、遅いよ」	has:「와타루,	fix	fixed
+names:call-to	わたるくんと会った。\nわたるは来なかった。	has:와타루는	fix	fixed
+names:call-to	のぞみ君と会った。\n「のぞみ、遅いよ」	has:「노조미,	fix	fixed
+names:call-to	だからちゃんと言ったのに。	lacks:짱	keep	fixed
+names:thing-predicate	のぞみさんが来た。\nのぞみは叶う。	has:희망	keep	fixed
+names:thing-predicate	のぞみさんが来た。\nのぞみが叶った。\nのぞみは笑った。	has:희망이	keep	fixed
+names:thing-predicate	のぞみさんが来た。\nのぞみが叶った。\nのぞみは笑った。	has:노조미는	keep	fixed
+names:thing-predicate	なぎささんが来た。\nなぎさが遠くまで続いていた。	has:물가	keep	fixed
+names:thing-predicate	ひかりさんが来た。\nひかりが差し込んだ。	has:빛이	keep	fixed
+names:thing-predicate	めぐみさんが来た。\nめぐみが降り注ぐ。	has:은혜	keep	fixed
+names:thing-predicate	ひなたさんが来た。\nひなたはぽかぽかと暖かい。	has:양지	keep	fixed
+names:thing-predicate	うみちゃんが来た。\nうみは広い。	has:바다는	keep	fixed
+names:person-predicate	なぎささん、おはよう。\nなぎさが来た。	has:나기사가	fix	fixed
+names:person-predicate	ひなたくん、おはよう。\nひなたも行く？	has:히나타도	fix	fixed
+names:person-predicate	のぞみさんと出かけた。\nでも、のぞみは来なかった。	has:노조미는	fix	fixed
+names:person-predicate	ひなたさんがいる。\n「ひなたは？」	has:히나타는	fix	fixed
+names:called-place	さきさんが来た。	has:사키 씨	fix	fixed
+names:called-place	さきさんが来た。\nさきに行くね。	has:사키 씨	keep	fixed
+names:called-place	さきさんが来た。\nさきに行くね。	has:먼저	keep	fixed
+names:park	井ノ頭公園を散歩した。	has:이노카시라 공원	fix	fixed
+names:park	井之頭公園のボート。	has:이노카시라 공원	fix	fixed
+names:park	井乃頭池の水。	has:이노카시라 연못	fix	fixed
+names:park	井之頭池の水。	has:이노카시라 연못	fix	fixed

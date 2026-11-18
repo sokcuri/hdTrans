@@ -14860,3 +14860,40 @@ noun.issue-over	起用
 noun.issue-over	去就
 noun.issue-over	進退
 noun.issue-over	采配
+
+//= name.bare-particle	Particles after a kana name the document gives only before an honorific that make its bare use at a clause start the name too (なぎささん … なぎさが来た, なぎさは, なぎさって; not なぎさを歩いた; spec LEX-6300).
+//= name.bare-particle-predicate	The particles of name.bare-particle that no plain predicate form takes, the only ones after such a name that is also a verb or adjective form (のぼるさん … のぼるは; not ひかると, のぼるのが; spec LEX-6300).
+//= honorific.kana-call	Honorifics of a call after which a whole run of two to four kana that is a common word or a verb form is a person's name (つきさん, かなえちゃん, ひさしくん; spec LEX-6301).
+name.bare-particle	は
+name.bare-particle	が
+name.bare-particle	も
+name.bare-particle	と
+name.bare-particle	って
+name.bare-particle-predicate	は
+honorific.kana-call	さん
+honorific.kana-call	ちゃん
+honorific.kana-call	くん
+honorific.kana-call	君
+//= name.bare-person-move	Starts of a coming or going after the particle of a kana name the document gives before an honorific that make the bare name the person who comes or goes, as no common word it spells does (なぎさが来た, ひなたも行く, のぞみは来なかった; not のぞみが叶った; spec LEX-6300).
+name.bare-person-move	来た
+name.bare-person-move	来て
+name.bare-person-move	来る
+name.bare-person-move	来な
+name.bare-person-move	来ま
+name.bare-person-move	来よ
+name.bare-person-move	来ず
+name.bare-person-move	きた
+name.bare-person-move	きて
+name.bare-person-move	くる
+name.bare-person-move	こな
+name.bare-person-move	きま
+name.bare-person-move	行く
+name.bare-person-move	行っ
+name.bare-person-move	行か
+name.bare-person-move	行き
+name.bare-person-move	行こ
+name.bare-person-move	いく
+name.bare-person-move	いっ
+name.bare-person-move	いか
+name.bare-person-move	いき
+name.bare-person-move	いこ

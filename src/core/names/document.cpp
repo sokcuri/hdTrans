@@ -733,11 +733,26 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.text = r.ReadBoxNames(facts.text);
     const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
+    std::vector<std::pair<std::size_t, std::size_t>> held;  // the spans of the line's name occurrences read as names
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
         if (o.noun) {
             guarded.insert(o.surface);
         } else {
             plain.insert(o.surface);
+            held.emplace_back(o.start, o.end);
+        }
+    }
+    // A kana name is the name at the occurrences that hold, not elsewhere in the line: the verb or word it
+    // also spells keeps its reading there (ひかるちゃん、星がひかるよ 별이 빛나; spec LEX-6300).
+    std::vector<std::string> mixed;
+    for (const std::string& t : plain) {
+        if (!names::internal::AllRunes(t, names::internal::IsHiragana)) continue;
+        for (std::size_t at = facts.text.find(t); at != std::string::npos; at = facts.text.find(t, at + t.size())) {
+            const bool inside = std::any_of(held.begin(), held.end(), [&](const auto& h) { return h.first <= at && at + t.size() <= h.second; });
+            if (!inside) {
+                mixed.push_back(t);
+                break;
+            }
         }
     }
     // A name only before an honorific takes part where an honorific follows it in the line.
@@ -821,12 +836,41 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         facts.skip.push_back(k);
         facts.uncued.push_back(k);
     }
+    // Such a name is written as the name at those occurrences, before an honorific too, and is no name of the
+    // line elsewhere: its entry and the line's cues of it stay out (【つき】「つきが出てるよ」, のぞみさん、
+    // 最後ののぞみだ 노조미 씨, 마지막 희망이다).
+    std::map<std::string, std::string> spelled;
+    if (!facts.wholeLine) {
+        for (const std::string& t : mixed) {
+            const auto e = std::find_if(doc.extra.begin(), doc.extra.end(), [&](const dict::UserEntry& u) {
+                return u.key == t && !u.honorific && names::internal::IsHangulText(u.target);
+            });
+            if (e == doc.extra.end()) continue;
+            spelled.emplace(t, e->target);
+            facts.skip.push_back(t);
+            facts.uncued.push_back(t);
+        }
+    }
     std::sort(facts.skip.begin(), facts.skip.end());
     facts.skip.erase(std::unique(facts.skip.begin(), facts.skip.end()), facts.skip.end());
     // Nor is a skipped word a person of its place spelling there (朝日 아사히 as a place).
     std::erase_if(facts.persons, [&](const std::string& t) { return std::binary_search(facts.skip.begin(), facts.skip.end(), t); });
     std::sort(facts.cued.begin(), facts.cued.end());
     facts.cued.erase(std::unique(facts.cued.begin(), facts.cued.end()), facts.cued.end());
+    if (!spelled.empty()) {
+        std::sort(held.begin(), held.end());
+        std::string out;
+        std::size_t at = 0;
+        for (const auto& [a, b] : held) {
+            if (a < at) continue;
+            const auto w = spelled.find(facts.text.substr(a, b - a));
+            if (w == spelled.end()) continue;
+            out.append(facts.text, at, a - at);
+            out.append(w->second);
+            at = b;
+        }
+        facts.text = out + facts.text.substr(at);
+    }
     return facts;
 }
 
@@ -841,8 +885,16 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     auto found = doc.plainByKey.find(key);
     if (found == doc.plainByKey.end()) {
         std::vector<dict::UserEntry> entries;
+        // A kana name given before an honorific that is also a word of the dictionary (のぼる, はるか) holds where
+        // the line does not skip it: where an honorific follows it or it stands bare where a name stands
+        // (Registry::BareNameSlot; spec LEX-6300).
+        const std::vector<std::string> honorificOnly = doc.registry->HonorificOnlyNames();
+        const auto hon = [&](const std::string& k) {
+            return names::internal::AllRunes(k, names::internal::IsHiragana) &&
+                   std::binary_search(honorificOnly.begin(), honorificOnly.end(), k);
+        };
         for (const dict::UserEntry& e : doc.extra) {
-            if ((e.file == kListedFile || !doc.data->dictKeys.contains(e.key)) &&
+            if ((e.file == kListedFile || !doc.data->dictKeys.contains(e.key) || hon(e.key)) &&
                 !std::binary_search(facts.skip.begin(), facts.skip.end(), e.key)) entries.push_back(e);
         }
         DocumentContext::CachedLookup cached;
