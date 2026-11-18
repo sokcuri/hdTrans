@@ -564,6 +564,10 @@
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
 //= verb.self-moving	Dictionary forms of verbs that take no object, of something that comes, rises, falls, sounds or happens by itself (来る, 上がる, 降る, 沸く, 着く), not verbs of going somewhere that a speaker says of their own move with a bare place (お風呂行くね 목욕 갈게), and no kana spelling whose stem is one kana (やむ, なく): a noun right before one with no particle, or with only an adverb between, is its subject, so with ね it is observed, not promised by the speaker (バス来ますね 버스 오네요; spec SPC-5).
 //= verb.open-shut	Dictionary forms of verbs of opening and shutting a door, a window or a lid, before which a rattling mimetic is the sound of the sliding, 드르륵 (戸をガラガラ開ける 문을 드르륵 연다; LEX-6086).
+//= noun.sliding-door	Ends of nouns of a door, a window or a shutter that slides, after which a rattling mimetic before 引く is the sound of the sliding, 드르륵 (引き戸をガラガラと引いた 미닫이를 드르륵 당겼다; LEX-6086).
+//= noun.thin-thing	Ends of nouns of paper, cloth and other flat things that can be thin, before which ぺらぺらの and ぺらぺらな say thin, 얇은 (ぺらぺらの紙 얇은 종이), where elsewhere they say fluent, 유창한 (LEX-6080).
+//= noun.rough-surface	Ends of nouns of a road, a floor or another surface, before which ぼこぼこの and ぼこぼこな say bumpy, 울퉁불퉁한 (ぼこぼこの道 울퉁불퉁한 길), where elsewhere they say beaten up, 만신창이가 된 (LEX-6080).
+//= noun.boiling-liquid	Ends of nouns of water, soup or a pot that boils, before which ぼこぼこの says boiling, 부글부글 끓는 (ボコボコのお湯 부글부글 끓는 물; LEX-6080).
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
 //= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
@@ -8021,6 +8025,73 @@ verb.open-shut	あく
 verb.open-shut	しめる
 verb.open-shut	しまる
 verb.open-shut	開け閉め
+verb.open-shut	戸を開ける
+verb.open-shut	蓋を閉める
+verb.open-shut	ふたを閉める
+verb.open-shut	ふたを開ける
+noun.sliding-door	戸
+noun.sliding-door	扉
+noun.sliding-door	窓
+noun.sliding-door	障子
+noun.sliding-door	襖
+noun.sliding-door	ふすま
+noun.sliding-door	ドア
+noun.sliding-door	シャッター
+noun.sliding-door	門
+noun.thin-thing	紙
+noun.thin-thing	生地
+noun.thin-thing	布
+noun.thin-thing	服
+noun.thin-thing	シャツ
+noun.thin-thing	布団
+noun.thin-thing	毛布
+noun.thin-thing	カーテン
+noun.thin-thing	袋
+noun.thin-thing	ビニール
+noun.thin-thing	封筒
+noun.thin-thing	板
+noun.thin-thing	壁
+noun.thin-thing	財布
+noun.thin-thing	素材
+noun.thin-thing	本
+noun.thin-thing	雑誌
+noun.thin-thing	ノート
+noun.thin-thing	マット
+noun.thin-thing	パンフレット
+noun.thin-thing	チラシ
+noun.thin-thing	タオル
+noun.thin-thing	シーツ
+noun.thin-thing	ジャケット
+noun.thin-thing	スカート
+noun.thin-thing	ドレス
+noun.thin-thing	衣装
+noun.rough-surface	道
+noun.rough-surface	道路
+noun.rough-surface	路面
+noun.rough-surface	地面
+noun.rough-surface	床
+noun.rough-surface	壁
+noun.rough-surface	表面
+noun.rough-surface	舗装
+noun.rough-surface	坂
+noun.rough-surface	山道
+noun.rough-surface	砂利道
+noun.rough-surface	畑
+noun.rough-surface	肌
+noun.rough-surface	グラウンド
+noun.rough-surface	アスファルト
+noun.rough-surface	板
+noun.rough-surface	コンクリート
+noun.rough-surface	石畳
+noun.rough-surface	岩
+noun.rough-surface	岩肌
+noun.boiling-liquid	湯
+noun.boiling-liquid	スープ
+noun.boiling-liquid	鍋
+noun.boiling-liquid	熱湯
+noun.boiling-liquid	汁
+noun.boiling-liquid	油
+noun.boiling-liquid	お茶
 verb.janai-state	あ
 verb.janai-state	有
 verb.janai-state	在

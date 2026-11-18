@@ -1773,11 +1773,7 @@ bool SoundText::StartsLongerWord(size_t i) const {
     if (base <= 1) return false;
     size_t nextBase = 0, nextUser = 0, nextName = 0;
     LongestKeys(i + 1, nextBase, nextUser, nextName);
-    const size_t next = std::max(nextBase, nextUser);
-    // A verb phrase of the quoting と and the verb in kanji after it (と頭を下げ) is that verb: the と
-    // is the sound's (ペコペコと頭を下げた 굽실굽실 고개를 숙였다).
-    if (base == 1 + next && IsKanjiRune(rs_[i + 1]) && StartsVerb(i) && StartsVerb(i + 1)) return false;
-    return base >= 1 + next;
+    return base >= 1 + std::max(nextBase, nextUser);
 }
 
 // The character after the と that a sound ending at character i takes across a pause: a
