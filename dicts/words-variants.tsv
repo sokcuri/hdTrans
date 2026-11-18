@@ -10871,8 +10871,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 待針	시침바늘	N110			GN							jisjk:251779
 もち合わせ	가&AL@	M447			GN							jisjk:264946
 持合わせ	가&AL@	M447			GN							jisjk:264946
-もって来い	안성마춤	A110			GN	542	||1 &&3 S-1== "に" P+1== "2**" ||5 S+1== "の" S+1== "だ" S+1== "です" S+1== "だった" S+1== "でした"	に 뒤의 持って来い는 の나 계사 だ·です·だった·でした가 이어지는 적합성 구문에서 안성마춤으로 고른다. 인용된 가져오라는 명령에는 적용하지 않는다.				jisjk:90306
-もって来い	가져와	A110	XXX		GN							jisjk:266110
 持逃げ	들고 도망	N110		Hd	GN				llm			w:17028
 持逃	들고 도망	N110		Hd	GN				llm			w:17028
 持ちゴマ	예비 선수	N110	VHnVRw		GN							jisjk:253746
@@ -11008,7 +11006,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 金床	모루	N110			GN							jisjk:229050
 鉄砧	모루	N110			GN							jisjk:229050
 鉄くず	철조각	N110			GN							jisjk:35666
-いく重	겹겹	N110			GN							jisjk:17699
+いく重にも	겹겹이	E311			GN							jisjk:17699
 いく程	얼마	N110			GN							jisjk:17698
 幾ほど	얼마	N110			GN							jisjk:17698
 礒釣り	바닷가 낚시	N110		Hd	GN							jisjk:125528

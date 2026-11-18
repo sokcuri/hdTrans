@@ -53,7 +53,7 @@ constraint:kyoku-before-tte	離婚したの知ってんの	has:알고 있	keep	l
 constraint:kyoku-before-tte	曲がった	구부러졌다	keep	lookup
 constraint:kyoku-before-tte	曲げてください	굽혀 주세요	keep	lookup
 constraint:kyoku-before-tte	この曲が好き	이 곡을 좋아해	keep	lookup
-constraint:kyoku-before-tte	曲った道	구불거린 길	keep	lookup
+constraint:kyoku-before-tte	曲った道	구부러진 길	keep	lookup
 dict:w:36061	ぐるぐるって何周も回った	has:몇 바퀴나 돌았다	fix	local
 dict:w:36062	何周目？	몇 바퀴째?	fix	local
 dict:w:36062	今何周目だ	has:몇 바퀴째	fix	local

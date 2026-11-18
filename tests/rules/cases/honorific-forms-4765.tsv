@@ -117,7 +117,7 @@ normalize:favour-moraenai	「どうでもいいものじゃ、いくらタダで
 normalize:favour-moraenai	森下さんは、全然受け取ってもらえない。	모리시타 씨는, 전혀 받아 주지 않는다.	fix	normalize
 normalize:favour-moraenai	「自分たちでビラを配っても、なかなか受け取ってもらえないらしい」	「자신들로 전단을 나눠줘도, 좀처럼 받아 주지 않는 것 같아」	fix	normalize
 normalize:favour-moraenai	「母が過保護で、包丁持たせてもらえませんでした……」	「어머니가 과보호로, 부엌칼 갖게해 주지 않았어요……」	fix	normalize
-normalize:favour-moraenai	お母様は、お父様に相談しても「大げさだ」と取り合ってもらえない日々の中で、ただ泣き寝入りしていたわけではなかった。	어머님은, 아버님에게 상담해도 「과장되다」라고 서로 빼앗아 주지 않는 나날의 안에서, 다만 단념하고 있던 것은 아니었다.	fix	normalize
+normalize:favour-moraenai	お母様は、お父様に相談しても「大げさだ」と取り合ってもらえない日々の中で、ただ泣き寝入りしていたわけではなかった。	어머님은, 아버님에게 상담해도 「과장되다」라고 서로 빼앗아 주지 않는 나날의 안에서, 다만 억울함을 삼키고 있던 것은 아니었다.	fix	normalize
 normalize:favour-moraenai	「一度も見せてもらえませんでした。	「한 번도 보여 주지 않았습니다.	fix	normalize
 normalize:favour-moraenai	見てもらえない可能性も高い｡	봐 주지 않을 가능성도 높다.	fix	normalize
 normalize:favour-moraenai	か、構ってもらえなくて、寂しかったの？	사, 상관하고 주지 않아, 외로웠어?	fix	normalize
