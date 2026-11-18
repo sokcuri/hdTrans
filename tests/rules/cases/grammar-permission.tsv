@@ -2,13 +2,13 @@
 rule	input	expected	kind	layer
 dict:permission:3	じゃあ 注文していい？	그럼 주문해도 돼?	fix	local
 dict:permission:3	「やっていいぞ」	「해도 돼」	fix	local
-dict:permission:3	「ないていいんです」	「울어도 됩니다」	fix	local
+dict:permission:3	「ないていいんです」	「울어도 돼요」	fix	local
 dict:permission:3	そう思っていいだろう。	그렇게 생각해도 될 것이다.	fix	local
 dict:permission:3	「好きなだけ食べていいぞ」	「원하는 만큼 먹어도 돼」	fix	local
 dict:permission:3	「え？　もらっていいの？」	「어? 받아도 되는 거야?」	fix	local
 dict:permission:3	「だから安心していいわよ」	「그러니까 안심해도 돼」	fix	local
 dict:permission:3	「……ふたりとも、私のことは忘れていいんだよ」	「……둘 다, 나는 잊어도 돼」	fix	local
-dict:permission:3	「私も貰っていいですか？」	「저도 받아도 됩니까?」	fix	local
+dict:permission:3	「私も貰っていいですか？」	「저도 받아도 돼요?」	fix	local
 dict:permission:3	そんな簡単に情報を明かしていいのだろうか？	그런 간단하게 정보를 밝혀도 되는 걸까?	fix	local
 dict:permission:3	「なあ、俺もちょっと休憩していいか？」	「저기, 나도 조금 쉬어도 돼?」	fix	local
 dict:permission:3	「そういうのは言わなくていいの」	「그런 건 말하지 않아도 돼」	fix	local
@@ -19,9 +19,9 @@ dict:permission:3	「お礼なんてなくていいのに……」	「감사 인
 dict:permission:3	「それ以上は何も知らなくていいわ。」	「그 이상은 아무것도 몰라도 돼.」	fix	local
 dict:permission:3	謝らなくていい人は、とても明るい人で、	사과하지 않아도 되는 사람은, 무척 밝은 사람으로,	fix	local
 dict:permission:6	「一つ、お聞きしてもよろしいでしょうか」	「하나, 물어도 될까요」	fix	local
-dict:permission:6	「は、入ってもよろしいですか？」	「드, 들어가도 됩니까?」	fix	local
+dict:permission:6	「は、入ってもよろしいですか？」	「드, 들어가도 돼요?」	fix	local
 dict:permission:6	一点だけ確認させていただいてもよろしいでしょうか。	한 점만 확인해도 될까요.	fix	local
-dict:permission:6	「会長、着替えをしなくてよろしいんですか？」	「회장, 갈아입음을 하지 않아도 됩니까?」	fix	local
+dict:permission:6	「会長、着替えをしなくてよろしいんですか？」	「회장, 갈아입음을 하지 않아도 돼요?」	fix	local
 dict:permission:5	「後で見ておこう。下がってよいぞ。」	!rule:dict:permission:5	keep	local
 dict:permission:5	諦めてよい。	포기해도 좋다.	keep	local
 dict:permission:5	「別に急がなくてもよかったのに」	「딱히 서두르지 않아도 됐을텐데」	fix	local
@@ -81,6 +81,6 @@ dict:permission:3	「なぁ、真央って呼んでいい？」	has:불러도 �
 dict:permission:3	「『レオン』って呼んでいい？」	has:이라고 불러도 돼?	fix	local
 dict:permission:1	大好きなおねえちゃんがいなくならなくてよかったのです。	has:없어지지 않아서 다행이었습니다.	fix	local
 dict:permission:1	けがしなくてよかったので、すぐ帰った。	has:다치지 않아서 다행이었기 때문에	fix	local
-dict:permission:1	「ともかくあれ以上犠牲が出なくてよかったです。」	has:나오지 않아서 다행입니다.	fix	local
+dict:permission:1	「ともかくあれ以上犠牲が出なくてよかったです。」	has:나오지 않아서 다행이에요.	fix	local
 dict:permission:1	アンキさんに火がつかなくてよかったですね	has:붙지 않아서 다행이었지요	fix	local
 dict:permission:5	「エルレイさん、治療しなくてよかったのでしょうか？」	has:치료하지 않아도 됐을까요?	fix	local

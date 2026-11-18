@@ -20,14 +20,17 @@ host	next	result	mode	example
 이것	subj	이게	replace	이것이 → 이게
 이것	top	이건	replace	이것은 → 이건
 이것	obj	이걸	replace	이것을 → 이걸
+이것	COP	이거	fuse	이것이에요 → 이거예요 (REG-19, REG-25)
 이것	-	이거	replace	이것 → 이거
 그것	subj	그게	replace	그것이 → 그게
 그것	top	그건	replace	그것은 → 그건
 그것	obj	그걸	replace	그것을 → 그걸
+그것	COP	그거	fuse	그것이에요 → 그거예요 (REG-19, REG-25)
 그것	-	그거	replace	그것 → 그거
 저것	subj	저게	replace	저것이 → 저게
 저것	top	저건	replace	저것은 → 저건
 저것	obj	저걸	replace	저것을 → 저걸
+저것	COP	저거	fuse	저것이에요 → 저거예요 (REG-19, REG-25)
 저것	-	저거	replace	저것 → 저거
 이거	subj	이게	replace	이거가 → 이게
 이거	top	이건	replace	이거는 → 이건

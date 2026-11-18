@@ -123,7 +123,7 @@ analysis:can-tehairu	まだ何も分かってはいないよ！	has:알지는 �
 analysis:can-tehairu	「ええまあ。つっても俺も良く分かっちゃいないんですがね。	has:알지는 못한다	fix	analysis
 analysis:can-tehairu	まだ何も分かってはいるが	has:알고는 있지만	keep	analysis
 analysis:can-tehairu	まだ何も見えてはいません。	has:보이지는 않습니다	fix	analysis
-analysis:can-tehairu	「仕事に疲れ、人間関係に疲れ、もう生きていく希望がない……。そんなふうに苦しんではいませんか？」	has:괴로워하고는 있지 않습니까	keep	analysis
+analysis:can-tehairu	「仕事に疲れ、人間関係に疲れ、もう生きていく希望がない……。そんなふうに苦しんではいませんか？」	has:괴로워하고는 있지 않아요	keep	analysis
 analysis:can-tehairu	分からない	has:모른다	keep	analysis
 analysis:can-tehairu	何わけわかんねえこと言ってんだ	has:알지 않는	keep	analysis
 dict:w:35127	男共が騒いでいる	has:남자들이	fix	local

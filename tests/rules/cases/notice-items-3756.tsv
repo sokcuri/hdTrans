@@ -26,7 +26,7 @@ cx:notice-words-1:96	分からなくて困っている。	몰라서 곤란해한
 cx:notice-words-1:96	彼は道が分からなくて困っている。	그는 길을 몰라서 곤란해한다.	keep	rewrites
 cx:notice-words-1:96	店員が分からなくて困っていた。	!rule:cx:notice-words-1:96	keep	rewrites
 cx:notice-words-1:96	困っている人を助ける。	!rule:cx:notice-words-1:96	keep	rewrites
-cx:notice-words-1:96	「でも、最近、少し困っているのです」	has:조금 곤란합니다	fix	rewrites
+cx:notice-words-1:96	「でも、最近、少し困っているのです」	has:조금 곤란해요	fix	rewrites
 cx:notice-words-1:96	「飛び出したってどうにかなるよ。困っているあなたを助けてくれる人もいるだろうし」	has:곤란해하는 당신을	keep	rewrites
 cx:notice-words-1:96	「恋人が困っている時に、それを放り投げるような男に見えるか？」	has:애인이 곤란해할 때	keep	rewrites
 cx:notice-words-1:96	「彼は分からなくて困っている」	has:곤란해해	keep	rewrites

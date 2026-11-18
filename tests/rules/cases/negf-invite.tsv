@@ -46,7 +46,7 @@ cx:neg-final-invite:40	「あの、もしよかったら一緒に練習しませ
 cx:neg-final-invite:40	「え、ええと……学校まで、一緒に行きませんか？」	has:가지 않을래요?	fix	rewrites
 cx:neg-final-invite:40	そうだ、今晩はお鍋にしませんか？	has:하지 않을래요?	fix	rewrites
 cx:neg-final-invite:40	「そんなことより、なにか飲みませんか？」	has:마시지 않을래요?	fix	rewrites
-cx:neg-final-invite:40	「時間ありませんか？」	「시간 없습니까?」	keep	rewrites
+cx:neg-final-invite:40	「時間ありませんか？」	「시간 없어요?」	keep	rewrites
 cx:neg-final-invite:40	「なんとかなりませんか？」	!rule:cx:neg-final-invite:40	keep	rewrites
 cx:neg-final-invite:40	増えた特待生の学力レベルは下がりませんか？	!rule:cx:neg-final-invite:40	keep	rewrites
 cx:neg-final-invite:36	お話を聞いていただけませんか？	rule:cx:neg-final-invite:36=1지 않겠습니까	fix	rewrites

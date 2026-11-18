@@ -1,8 +1,8 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
 normalize:nsu	「写真てのは被写体に断ってから撮るのが礼儀なんじゃないんすかね。」	has:예의가 아닙니까	fix	normalize
-normalize:nsu	「そこまで親密になっといてまだなんにもないんすか！？」	has:아직 아무것도 없습니까!?	fix	normalize
-normalize:nsu	「なにしてんすか？」	「뭐 합니까?」	fix	normalize
+normalize:nsu	「そこまで親密になっといてまだなんにもないんすか！？」	has:아직 아무것도 없어요	fix	normalize
+normalize:nsu	「なにしてんすか？」	「뭐 해요?」	fix	normalize
 normalize:nsu	（橋本）しょうがないんスよね	(하시모토) 어쩔 수 없지요	fix	normalize
 normalize:nsu	（橋本）18からデコトラやってんスね	(하시모토) 18부터 데코토라 하고 있어요	fix	normalize
 normalize:nsu	あんまりよくないんスよ芸人として	별로 좋지 않아요 연예인으로서	fix	normalize

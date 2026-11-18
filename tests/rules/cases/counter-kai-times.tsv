@@ -9,7 +9,7 @@ dict:jisjk:115519	「初めてなのに２回も３回もしただろ？」	「�
 dict:jisjk:115519	「あんたなんか百回でも千回でもボコボコにしてやるわ！」	rule:dict:jisjk:115519=번	fix	local
 dict:jisjk:115519	「なんで２回言ったぁ！？」	「왜 2번 말했어!?」	fix	local
 dict:jisjk:115519	「ふたりでいるところに２回くらい出会ったじゃない？」	「둘이서 있는 곳에 2번 정도 만났잖아?」	fix	local
-dict:jisjk:115519	「冒頭が全然決まらなくて、もう１０回は書き直してます」	「서두가 전혀 정해지지 않아서, 이제 10번은 고쳐 쓰고 있습니다」	fix	local
+dict:jisjk:115519	「冒頭が全然決まらなくて、もう１０回は書き直してます」	「서두가 전혀 정해지지 않아서, 이제 10번은 고쳐 쓰고 있어요」	fix	local
 dict:jisjk:115519	「ゴルフクラブでゾンビの頭を１８回ぶん殴るだけです」	「골프채로 좀비의 머리를 18번 후려칠 뿐입니다」	fix	local
 dict:jisjk:115519	「このような大規模テロを、あと６回起こすつもりでしょうか」	「이러한 대규모 테러를, 앞으로 6번 일으킬 생각입니까」	fix	local
 dict:jisjk:344600	「ま、誰でも１回は考えるよな」	「뭐, 누구나 1번은 생각하지」	fix	local
@@ -27,7 +27,7 @@ dict:jisjk:115519	計５回行ったイベントの入場者は	!rule:dict:jisjk
 dict:jisjk:115519	「第１０回、納涼カラオケ大会！」	「제10회, 납량 가라오케 대회!」	keep	global-stem
 dict:jisjk:344600	『第１回チキチキ、いったい誰の真似なのよ？』	『제1회 치키치키, 도대체 누구의 흉내야?』	keep	defaults
 dict:jisjk:344600	「1回戦で負けちまったのさ」	「1회전에서 져버렸어」	keep	defaults
-dict:jisjk:344600	「１回２錠で１０回分あります。」	「1회 2정으로 10회분 있습니다.」	keep	defaults
+dict:jisjk:344600	「１回２錠で１０回分あります。」	「1회 2정으로 10회분 있어요.」	keep	defaults
 dict:jisjk:344600	「部内で行うだけでなく、年に１回は近くの学校と合同で行う。」	「부내에서 실시할 뿐만 아니라, 1년에 한 번은 근처 학교와 합동으로 실시해.」	keep	compose
 dict:jisjk:344600	「１回も勝てなかった」	!rule:dict:jisjk:344600	keep	local
 compose:native-count	実際、会うのはこれで2回目なんすけど	실제, 만나는 것은 이것으로 2번째인데요	keep	compose

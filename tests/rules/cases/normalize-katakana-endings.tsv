@@ -1,6 +1,6 @@
 # 규칙: LEX-5
 rule	input	expected	kind	layer
-normalize:katakana-endings	「や、大丈夫デス」	「야, 괜찮습니다」	fix	normalize
+normalize:katakana-endings	「や、大丈夫デス」	「야, 괜찮아요」	fix	normalize
 normalize:katakana-endings	暗号通信を受信シマシタ…見る？	암호 통신을 수신했습니다…봐?	fix	normalize
 normalize:katakana-endings	やっと本当の私になれた気がシマース。	드디어 진정한 제가 될 수 있던 것 같습니다~.	fix	normalize
 normalize:katakana-endings	無理が祟ったみたいデース…	무리가 탈이 난 것 같습니다~…	fix	normalize

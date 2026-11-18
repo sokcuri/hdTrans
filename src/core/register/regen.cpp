@@ -672,6 +672,32 @@ std::vector<std::u32string> SourceSentenceEnds(const std::string& ja) {
     return out;
 }
 
+// REG-27: whether s holds one of the |-separated 합쇼체 endings of list (니다, 니까) after a syllable closed with ㅂ
+// (있습니다만, 합니까), not the -니까 of a reason or a conjunction (곤란하니까, 그러니까).
+bool HoldsHapsyo(const std::u32string& s, const std::string& list) {
+    for (const auto& w : Split(list, '|')) {
+        const std::u32string e = ToU32(w);
+        if (e.empty()) continue;
+        for (std::size_t at = s.find(e); at != std::u32string::npos; at = s.find(e, at + 1))
+            if (at > 0 && hangul::IsSyllable(s[at - 1]) && (s[at - 1] - 0xAC00) % 28 == 17) return true;
+    }
+    return false;
+}
+
+// REG-23, REG-27: whether a source sentence end is the explanatory んです after the plain form of a predicate
+// (来たんです, いるんです, 好きなんです, 行くんです, 遊ぶんです), not a noun in ん (おばあちゃんです, ハヤテさんです,
+// イチくんです, じゅうぶんです): く not after katakana, ぶ only after a kanji.
+bool ExplanatoryEnd(std::u32string_view e) {
+    if (!e.ends_with(U"んです") || e.size() < 4) return false;
+    const char32_t c = e[e.size() - 4];
+    const char32_t before = e.size() >= 5 ? e[e.size() - 5] : U'\0';
+    const bool katakana = before >= U'ァ' && before <= U'ヿ';
+    const bool kanji = (before >= U'一' && before <= U'鿿') || before == U'々';
+    if (c == U'く') return !katakana;
+    if (c == U'ぶ') return kanji;
+    return std::u32string_view(U"るただいなうすつぬむぐ").find(c) != std::u32string_view::npos;
+}
+
 // The text Generate wrote for each node, by node id (bytes; the spaces between a node's pieces included).
 std::vector<std::pair<std::size_t, std::size_t>> NodeTexts(std::size_t count, const std::vector<OutSpan>& spans) {
     std::vector<std::pair<std::size_t, std::size_t>> out(count + 1, {std::string::npos, 0});
@@ -961,10 +987,13 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                 }
                 // the speaker's will or an announcement keeps 합쇼체: a statement of an action verb in the present
                 // (気をつけます 조심합니다, not 조심해요, which asks; the promise -ㄹ게요 is another reading), with -겠-
-                // (頑張ります 노력하겠습니다), and a proposal (頑張りましょう 힘냅시다)
+                // (頑張ります 노력하겠습니다), and a proposal (頑張りましょう 힘냅시다). The explanatory んです tells
+                // circumstances, not a will (REG-23: 行くんです 가요), so its action verb is lowered.
+                const std::vector<std::u32string> jaEnds = SourceSentenceEnds(line.ja);
                 const auto willed = [&](std::size_t q) {
                     const Node& n = nodes[q];
                     if (n.mood == Mood::prop || (n.modal == "gess" && n.mood != Mood::q)) return true;
+                    if (sentenceOf[q] < jaEnds.size() && ExplanatoryEnd(jaEnds[sentenceOf[q]])) return false;
                     const std::string pos = !n.vpos.empty() ? n.vpos : LookupPredicate(t, n.lemma).pos;
                     return n.mood == Mood::decl && n.tense == Tense::nonpast && pos == "V" && n.kcls != "EXIST";
                 };
@@ -985,7 +1014,7 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                         bool other = false;
                         for (std::size_t k = 0; k < nodes.size(); ++k)
                             if (k != q && sentenceOf[k] == sentenceOf[q] && nodes[k].kind != Kind::Punct && nodes[k].to > nodes[k].from &&
-                                ContainsAny(ToU8(out32.substr(nodes[k].from, nodes[k].to - nodes[k].from)), t.G("mixed.hapsyo")))
+                                HoldsHapsyo(out32.substr(nodes[k].from, nodes[k].to - nodes[k].from), t.G("mixed.hapsyo")))
                                 other = true;
                         if (!other && !keepEomi(n.wasEomi) && !willed(q)) lower[q] = true;
                     }
@@ -1041,10 +1070,19 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                        !sourceEndIs(q, "source.inner-keep");
             };
             // only where the last sentence end is already at the quote's level: when it changes too, the whole quote
-            // changes as before
+            // changes as before. A 합쇼체 end lowered by REG-25 counts only after a sentence end of the quote already
+            // written in 해요체 (무리해요. … 많다. … 아니에요 → 많아요, REG-23); else the plain sentences before it keep
+            // their ends and so the quote (바꾸어 본다. 그거면 된다고 생각합니다, not 바꾸어 봐요)
             const auto lastChanges = [&](std::size_t q) {
                 const std::size_t last = lastEnd[quoteOf[q]];
                 if (last >= nodes.size()) return false;
+                if (lower[last]) {
+                    for (std::size_t k = 0; k < last; ++k)
+                        if (quoteOf[k] == quoteOf[last] && nodes[k].kind == Kind::V && nodes[k].ctype == CType::final_ &&
+                            nodes[k].was == Level::haeyo)
+                            return true;
+                    return false;
+                }
                 for (const auto& g : reg)
                     if (g.node == nodes[last].id) return g.level != nodes[last].was;
                 return false;
