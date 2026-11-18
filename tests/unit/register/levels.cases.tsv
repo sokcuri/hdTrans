@@ -133,6 +133,8 @@ r6-14	REG-6	fix	d111		yes	「じゃが、それは困る」	hae	-
 r3-10	REG-3	keep	d112		yes	「これは……ますます」	hae	-
 r15-5	REG-15	fix	d113	筧	yes	【筧】「行くぞ」「了解です」	haeyo	-
 r16-9	REG-16	fix	d114		yes	「彼がくれますか？」	haeyo	no
+r16-10	REG-16	keep	d315		yes	「教えてくださいますか？」	haeyo	yes
+r16-11	REG-16	keep	d316		yes	「来てくれたんですか？」	haeyo	yes
 r18-7	REG-18	keep	d115		yes	「じゃあ、またな」	hae	-
 r14-15	REG-14	keep	d116	甲	yes	「その話は疑わしいね」	-	-
 r14-16	REG-14	keep	d116	甲	yes	「明日の朝はみんなで学校に行くんだ」	hae	-

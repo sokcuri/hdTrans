@@ -133,6 +133,7 @@ struct Reader {
     std::map<std::u32string, std::pair<std::string, std::u32string>> punctKo;  // Korean mark → kind, mark
     std::set<char32_t> sym;
     std::set<std::u32string> jaParticles, copulaNot, deps, glueLemmas, impEnds, partAlts;
+    std::set<std::u32string> jaFocus;  // focus words an item joins to が or は (なんかが)
     std::set<char32_t> impTail, impClose;
     char32_t stutterMark = 0;
     std::u32string copulaAlt, copulaLemma, lemmaEnd;
