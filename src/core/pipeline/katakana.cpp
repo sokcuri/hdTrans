@@ -1128,8 +1128,13 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             ok = follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective"), rest)) ||
                  ((word.ends_with("イ") || !kw->as.empty()) && follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-final"), rest))) ||
                  (!kw->as.empty() && follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-verb"), rest)));
+            // An adjective drawn out at the end (スゴイ～！ 대단해~!).
+            std::string_view undrawn = rest;
+            while (undrawn.starts_with("～") || undrawn.starts_with("〜")) undrawn.remove_prefix(std::string_view("～").size());
+            const char32_t afterDrawn = text::DecodeRune(undrawn).cp;
+            const bool drawnEnd = undrawn.size() < rest.size() && (undrawn.empty() || afterDrawn == U'\n' || RuneIn(afterDrawn, kSentenceEnd));
             ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd) ||
-                 (tsu && RuneIn(next, kClippedEnd));
+                 (tsu && RuneIn(next, kClippedEnd)) || (word.ends_with("イ") && drawnEnd);
         } else {
             ok = follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-pronoun"), rest));
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));

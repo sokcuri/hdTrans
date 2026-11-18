@@ -449,6 +449,14 @@ size_t internal::StutterSeparator(std::u32string_view rs, size_t i) {
     }
 }
 
+size_t internal::MarkedStutterSeparator(std::u32string_view rs, size_t i) {
+    size_t n = StutterSeparator(rs, i);
+    if (n == 0) {
+        while (i + n < rs.size() && Contains(U"~～〜", rs[i + n])) n++;
+    }
+    return n;
+}
+
 std::string WriteStutters(std::string_view s) {
     const std::u32string rs = Runes(s);
     if (!Contains(rs, kStutterMark) && !Contains(rs, kStutterRest)) return std::string(s);
@@ -466,11 +474,8 @@ std::string WriteStutters(std::string_view s) {
         while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
         while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
         i += marks + rest - 1;
-        size_t k = internal::StutterSeparator(rs, i + 1);
         // A ～ the sound stage took as the separator (そ～そんな 그~그런) is written as one ~.
-        if (k == 0) {
-            while (i + 1 + k < rs.size() && Contains(U"~～〜", rs[i + 1 + k])) k++;
-        }
+        size_t k = internal::MarkedStutterSeparator(rs, i + 1);
         std::u32string sep = rs.substr(i + 1, k);
         const bool tilde = !sep.empty() && Contains(U"~～〜", sep[0]);
         if (tilde) sep = U"~";

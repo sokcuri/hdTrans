@@ -54,3 +54,47 @@ sound:heard-vu	ゔー	lacks:ゔ	fix	sound
 sound:heard-vu	ゔぁいおりんを弾く	has:바이올린	keep	sound
 sound:heard-vu	ゔぉーかる	has:보컬	keep	sound
 sound:laugh-tte	……鍵はこうやって、ああって！？	lacks:아아라니	keep	sound
+sound:tilde-stutter	そ～そう！	has:그~그래	fix	sound
+sound:tilde-stutter	う～うそでしょ？	has:거~거짓말	fix	sound
+sound:tilde-stutter	う～うそ！	has:거~거짓말	fix	sound
+sound:tilde-stutter	お～お前！	has:너~너	fix	sound
+sound:tilde-stutter	い～いいよ。	has:조~좋아	fix	sound
+sound:tilde-stutter	う～うるさい！	has:시~시끄러워	fix	sound
+sound:tilde-stutter	し～知らない！	has:모~몰라	fix	sound
+sound:tilde-stutter	た～助けて！	has:도~도와	fix	sound
+sound:tilde-stutter	た～拓也くん！	has:타~타쿠야	fix	sound
+sound:tilde-stutter	け～健太！	has:케~켄타	fix	sound
+sound:tilde-stutter	み～美咲さん。	has:미~미사키	fix	sound
+sound:tilde-stutter	は～春香！	has:하~하루카	fix	sound
+sound:tilde-stutter	い～いね！	좋네!	keep	sound
+sound:tilde-stutter	い～いな。	좋네.	keep	sound
+sound:tilde-stutter	あ～明日か。	has:아~내일	keep	sound
+sound:first-kana-stretch	す～ごかった！	has:대단했	fix	sound
+sound:first-kana-stretch	す～ごくない？	has:대단하지 않	fix	sound
+sound:first-kana-stretch	う～まかった！	has:맛있었	fix	sound
+sound:first-kana-stretch	う～まそう！	lacks:그렇게	fix	sound
+sound:first-kana-stretch	さ～むかった	has:추웠	fix	sound
+sound:first-kana-stretch	ス～ゴイ！	has:대단해	fix	sound
+sound:first-kana-stretch	スゴイ～！	has:대단해	fix	katakana
+sound:first-kana-stretch	アライ～！	has:아라이	keep	katakana
+sound:comma-spelled	ま、こ、と。	has:마, 코, 토	fix	sound
+sound:comma-spelled	私は、あ、の、ね、って言った。	has:아, 노, 네	fix	sound
+sound:comma-spelled	た、く、や！	has:타, 쿠, 야	fix	sound
+sound:laugh-tte	えへへって言った。	has:에헤헤라고	fix	sound
+sound:laugh-tte	えへへって照れた。	has:에헤헤 하고	fix	sound
+sound:laugh-tte	うふふって言われた。	lacks:거절	fix	sound
+sound:laugh-tte	うふふっていう笑い方。	lacks:거절	fix	sound
+sound:laugh-tte	「だからうふふって……」	has:우후후라니	fix	sound
+sound:laugh-tte	うふふって、笑った。	has:우후후 하고	fix	sound
+sound:laugh-tte	はははって、笑ってた。	has:하하하 하고	fix	sound
+sound:laugh-tte	えへへって小さく言った。	has:에헤헤라고 작게	fix	sound
+sound:laugh-tte	へへって言った。	has:헤헤라고	fix	sound
+sound:laugh-tte	まあふふって感じ	has:후후라는	keep	sound
+sound:heard-vu	ゔぃーな	has:비나	fix	sound
+sound:heard-vu	ゔぃーなちゃん！	has:비나짱	fix	sound
+sound:heard-vu	ゔゔゔ	has:으으으	fix	sound
+sound:heard-vu	ゔゔ……	has:으으	fix	sound
+sound:laugh-tte	食事はいいって	has:좋다고	keep	sound
+sound:laugh-tte	猫っぽいって言われてる	has:같다고	keep	sound
+sound:tilde-stutter	ま～真琴、待って	has:마~마코토	fix	sound
+sound:tilde-stutter	あ～明日香！	has:아~아스카	keep	sound

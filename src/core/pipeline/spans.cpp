@@ -118,7 +118,7 @@ Match StutterSpan(std::string_view s) {
         w.remove_prefix(r.size);
     }
     size_t n = 0;
-    while (n < cps.size() && (cps[n] == kStutterMark || cps[n] == kStutterRest)) n += 1 + StutterSeparator(cps, n + 1);
+    while (n < cps.size() && (cps[n] == kStutterMark || cps[n] == kStutterRest)) n += 1 + MarkedStutterSeparator(cps, n + 1);
     size_t bytes = 0;
     for (size_t k = 0; k < n && k < sizes.size(); k++) bytes += sizes[k];
     return {bytes, output::SpanOpen};
