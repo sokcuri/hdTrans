@@ -379,12 +379,13 @@ bool SplitPausedCopula(std::string_view s, size_t pos, Match& m) {
     };
     if (!Take(s, p, wordChar)) return false;
     const size_t word = p;
-    if (!PredicateBefore(s.substr(0, word))) return false;
     while (OneOf(s, p, U"…‥・―─")) continue;
     if (!DrawlMarks(Span(s, word, p))) return false;
+    // The marks and the copula first: PredicateBefore scans back over the kana before them.
     for (std::string_view w : {"です", "でした", "でしょう"}) {
         size_t r = p, e = 0, t = 0;
         if (!Lit(s, r, w) || !EndingEnd(s, r, true, e, t)) continue;
+        if (!PredicateBefore(s.substr(0, word))) return false;
         m.group[1] = Span(s, pos, word);
         m.group[2] = Span(s, p, r);
         m.group[3] = Span(s, e, t);

@@ -230,6 +230,17 @@ bool YaFollows(std::string_view head) {
 bool JaFollows(std::string_view head) { return CopulaFollows(head) && !EndsWithAny(head, kJaNotCopula); }
 
 // The forms of や that also follow a verb or an adjective in Kansai speech (食うとるやないか, すごいやないかい).
+// Whether s at pos starts with the written spelling of one of forms. A pattern whose every match
+// starts with one tests this first: the tests on the text before pos scan back over it, and
+// ReplaceAll tries the pattern at every position of the line.
+bool StartsWithForm(std::string_view s, size_t pos, std::span<const Form> forms) {
+    const std::string_view rest = s.substr(pos);
+    for (const Form& f : forms) {
+        if (rest.starts_with(f.written)) return true;
+    }
+    return false;
+}
+
 constexpr Form kYaAfterPredicate[] = {
     {"やないかい", "じゃないか", Where::Any}, {"やないか", "じゃないか", Where::Any}, {"やんけ", "じゃないか", Where::Final},
     {"やんか", "じゃないか", Where::Final},   {"やんね", "よね", Where::Final},       {"やんな", "よな", Where::Final},
@@ -355,6 +366,11 @@ bool YaPast(std::string_view s, size_t pos, Match& m) {
 }
 
 bool YaCopula(std::string_view s, size_t pos, Match& m) {
+    // Every match starts with one of its forms, やと, or the やし and やった of YaPast.
+    if (const std::string_view rest = s.substr(pos); !StartsWithForm(s, pos, kYaAfterPredicate) && !StartsWithForm(s, pos, kYaForms) &&
+                                                     !rest.starts_with("やと") && !rest.starts_with("やし") && !rest.starts_with("やった")) {
+        return false;
+    }
     const std::string_view head = s.substr(0, pos);
     if (PredicateEnds(head) && !EndsWithAny(head, kKanaNouns) && !head.ends_with("ん") && CopulaForm(s, pos, m, kYaAfterPredicate, PredicateEnds)) {
         return true;
@@ -406,6 +422,7 @@ bool YaCopula(std::string_view s, size_t pos, Match& m) {
 bool JaCopula(std::string_view s, size_t pos, Match& m) { return CopulaForm(s, pos, m, kJaForms, JaFollows); }
 
 bool CauseParticle(std::string_view s, size_t pos, Match& m) {
+    if (!StartsWithForm(s, pos, kCauseForms)) return false;  // every match starts with one of its forms
     const std::string_view head = s.substr(0, pos);
     if (s.substr(pos).starts_with("だけん") || s.substr(pos).starts_with("だけんど")) {
         if (!CopulaFollows(head)) return false;
@@ -724,6 +741,14 @@ bool ImperativeEnds(std::string_view s, size_t pos) {
 // 見んといてや, 食えや, 上がってくれや, 下りろや): よ. A drawn ぇ or え after the て falls away and drawn marks around the
 // や go after the よ (信じてぇ～や 信じてよ～). ましてや and its like go on before a comma and are no end.
 bool RequestYa(std::string_view s, size_t pos, Match& m) {
+    // Every match is や after an optional ぇ or え and drawn marks.
+    {
+        size_t p = pos;
+        OneOf(s, p, U"ぇえ");
+        while (OneOf(s, p, U"ー～〜")) {
+        }
+        if (!Lit(s, p, "や")) return false;
+    }
     const std::string_view head = s.substr(0, pos);
     if (head.empty() || !IsHiraganaClass(LastRune(head).cp)) return false;
     bool te = TeFormEnds(head);
@@ -1234,6 +1259,12 @@ bool KansaiSuru(std::string_view s, size_t pos, Match& m) {
 // and in なん after a noun (そうなんね そうなのね, 誰が守るんよ 誰が守るのよ); before a よ that tells it is the plain
 // predicate after an adjective, ない or てる (決まってるんよ 決まってるよ, 得意なんよ 得意だよ) (spec LEX-5993). Not the negative ん of a verb (知らんよ, 行かんね), which no predicate ends before.
 bool WesternNoEnd(std::string_view s, size_t pos, Match& m) {
+    // Every match is なん or ん, then よ or ね where the sentence ends.
+    {
+        size_t q = pos;
+        if (!Lit(s, q, "なん") && !Lit(s, q, "ん")) return false;
+        if (!(Lit(s, q, "よ") || Lit(s, q, "ね")) || !EndAt(s, q) || (q < s.size() && In(At(s, q).cp, U"、，,"))) return false;
+    }
     size_t p = pos;
     const std::string_view head = s.substr(0, pos);
     std::string_view plain;
