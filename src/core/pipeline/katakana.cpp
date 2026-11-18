@@ -1472,7 +1472,16 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const d
 bool ReadsAsWords(std::string_view lead, const dict::Snapshot& snap) {
     while (!lead.empty()) {
         size_t take = 0;
-        for (size_t e = lead.size(); e > 0 && take == 0;) {
+        if (snap.Healthy()) {
+            // One walk of the keys that start lead, shortest first, as the lookup of each length.
+            snap.Base().Prefixes(lead, [&](int k, size_t length) {
+                if (CountRunes(lead.substr(0, length), [](char32_t) { return true; }) < 2) return;
+                bool records = false;
+                snap.Base().EachRecord(k, [&records](const dict::Record&) { return !(records = true); });
+                if (records) take = length;
+            });
+        }
+        for (size_t e = lead.size(); e > 0 && take == 0 && !snap.Healthy();) {
             const std::string_view w = lead.substr(0, e);
             if (CountRunes(w, [](char32_t) { return true; }) < 2) break;
             if (!snap.RetrieveRecords(w, dict::LookupMode::General).empty()) take = e;
@@ -1714,7 +1723,7 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
                     for (size_t s = i; s < baseEnd && start == std::string_view::npos;
                          s += std::max<size_t>(1, text::DecodeRune(text.substr(s)).size)) {
                         const std::string_view named = text.substr(s, baseEnd - s);
-                        if (CountRunes(named, [](char32_t) { return true; }) < 2) break;
+                        if (text::DecodeRune(named).size >= named.size()) break;  // fewer than two runes
                         if (s == i ? afterKanji : (afterKanji || !ReadsAsWords(text.substr(i, s - i), snap))) continue;
                         if (PersonNotWord(named, ctx, snap)) start = s;
                     }
@@ -1722,11 +1731,15 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
                     // The run up to the end of the nickname reads as no words, and no word of three kana or
                     // more of the lead runs into the name (もちろん, なんかごめん; not それがちはやん).
                     bool crossed = ReadsAsWords(text.substr(i, name.size()), snap);
-                    for (size_t p = i; p < start && !crossed; p += std::max<size_t>(1, text::DecodeRune(text.substr(p)).size)) {
+                    // leadRunes: the runes from p to the start of the name.
+                    size_t leadRunes = static_cast<size_t>(CountRunes(text.substr(i, start - i), [](char32_t) { return true; }));
+                    for (size_t p = i; p < start && !crossed; p += std::max<size_t>(1, text::DecodeRune(text.substr(p)).size), leadRunes--) {
+                        size_t runes = leadRunes;
                         for (size_t e = start; e < i + name.size() && !crossed;) {
                             e += std::max<size_t>(1, text::DecodeRune(text.substr(e)).size);
+                            runes++;
                             const std::string_view w = text.substr(p, e - p);
-                            crossed = CountRunes(w, [](char32_t) { return true; }) >= 3 && !KeyTags(w, ctx, snap).empty();
+                            crossed = runes >= 3 && !KeyTags(w, ctx, snap).empty();
                         }
                     }
                     if (crossed) continue;
