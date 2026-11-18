@@ -15,7 +15,7 @@ cx:lc3h-nanodesuka:10	「これが家なのですか！？」	has:집이에요	f
 cx:lc3h-nanodesuka:10	「そう言うものなのですか」	has:것입니까	fix	rewrites
 cx:lc3h-nanodesuka:10	「あなたは不良なのですか？」	has:불량입니까	fix	rewrites
 cx:lc3h-nanodesuka:10	「何が『そう』なのですか？」	has:그래』입니까	fix	rewrites
-cx:lc3h-nanodesuka:10	「何がさすがになのですか？」	has:아무래도예요	fix	rewrites
+cx:lc3h-nanodesuka:10	「何がさすがになのですか？」	has:「뭐가 	fix	rewrites
 cx:lc3h-nanodesuka:10	「私は……罪人なのですか？」	has:죄인이에요	fix	rewrites
 cx:lc3h-nanodesuka:10	「今日はお祭りの日なのですか？」	has:날이에요	fix	rewrites
 cx:lc3h-nanodesuka:10	「え、そうなのですか？」	!rule:cx:lc3h-nanodesuka:10	keep	rewrites
