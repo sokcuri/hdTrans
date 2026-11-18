@@ -498,6 +498,12 @@
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
 //= sound.quoted-say	Starts of the verbs of saying (言, いう): after a laugh or an interjection and って they take what was said, which the later stages quote with 라고 (えへへって言った 에헤헤라고 말했다), not the 하고 of the sound (laughing, crying out and nodding keep 하고).
 //= sound.echoed-by	Starts of the text after a sound and って where the sound is said back, read 라니 (えへへって何 에헤헤라니 뭐): the question word 何 in its spellings.
+//= sound.tte-named	Nouns after a mimetic or a cry and って that name the sound, so the って is no adverb of a verb: what is said or heard and the nouns a quotation modifies (ドキドキって言葉 두근두근이라는 말, ガタンって音 덜컹이라는 소리, シャキってのが 아삭이라는 것이). The sound stage writes (이)라는 before them, and leaves the って to the later stages before the nominalizer の. Not where a dictionary word starts there and runs past the noun, or the noun is the stem of a verb that conjugates there (ゴーンって響き渡った, ドキドキって感じちゃう stay adverbs).
+//= sound.tte-called	Starts of the text after a mimetic and って that ask about the sound or say it is called so: the question word 何 (ペコってなんですか 꾸벅이 뭡니까, ドキドキって何？ 두근두근이 뭐야) and verbs of calling or of being told (ドキドキって呼んでる, ドキドキって言われた). The later stages read the って after the Korean. Not where a dictionary word other than a verb starts there and runs past the member (ぐしゃぐしゃって何か踏んだ, ポンってなにげなく置いた, ふわってなんだか). A verb of calling counts in all its stems (呼び, よべ, よぼう; in kana the stem よび only with the ending after it, よびます, よびたい, as よびこ is also a name). The question word goes on in a copula form of sound.tte-asked-copula whatever word starts there; the set phrases of 何 and どういう before a noun (なんの, どういう意味) are members.
+//= sound.tte-noise	Nouns of sound.tte-named that name a noise: before を they are the noise the sound makes, and the って stays the adverb (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた); after a cry the sound stage writes 하는 before them, not (이)라는 (うふふって声が漏れた 우후후 하는 소리가 새어 나왔다).
+//= sound.tte-asked-copula	Copula forms after the question word of sound.tte-called that make the text after a mimetic and って a question about the sound, whatever dictionary word starts at the question word (ドキドキってなんだろう 두근두근이 뭘까, なんだっけ, なんです？, なんでしょうね, 何なんだ).
+//= sound.tte-asked-indefinite	Forms of sound.tte-asked-copula that make the question word an indefinite, not a question: the って after a mimetic stays the adverb (ふわってなんだか 왠지).
+//= sound.tte-asked	The bare question words of sound.tte-called: after a mimetic and って they ask about the sound only where the question ends after them, at the end, before a sentence mark or a closing bracket, or before の (ドキドキって何？ 두근두근이 뭐야?), or before a copula form of sound.tte-asked-copula; before a verb or を they are its object and the って stays the adverb (ガタガタってなにやってるの？, ドンって何してるの？).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
@@ -10313,6 +10319,57 @@ sound.quoted-say	いわ
 sound.echoed-by	何
 sound.echoed-by	なに
 sound.echoed-by	なん
+sound.tte-named	言葉
+sound.tte-named	ことば
+sound.tte-named	音
+sound.tte-named	声
+sound.tte-named	響き
+sound.tte-named	擬音
+sound.tte-named	意味
+sound.tte-named	名前
+sound.tte-named	感じ
+sound.tte-named	奴
+sound.tte-named	やつ
+sound.tte-named	ヤツ
+sound.tte-named	のが
+sound.tte-named	のは
+sound.tte-called	なんの
+sound.tte-called	何の
+sound.tte-called	どういう意味
+sound.tte-called	どういうこと
+sound.tte-called	何
+sound.tte-called	なに
+sound.tte-called	なん
+sound.tte-called	どういう
+sound.tte-called	どんな
+sound.tte-called	呼び
+sound.tte-called	呼
+sound.tte-called	よびま
+sound.tte-called	よびた
+sound.tte-called	よべ
+sound.tte-called	よぼう
+sound.tte-called	よばれ
+sound.tte-called	よばな
+sound.tte-called	よんで
+sound.tte-called	よんだ
+sound.tte-called	よぶ
+sound.tte-called	言われ
+sound.tte-called	いわれ
+sound.tte-called	名付
+sound.tte-noise	音
+sound.tte-noise	声
+sound.tte-noise	響き
+sound.tte-asked-copula	です
+sound.tte-asked-copula	でしょ
+sound.tte-asked-copula	だ
+sound.tte-asked-copula	なの
+sound.tte-asked-copula	なん
+sound.tte-asked-copula	じゃ
+sound.tte-asked-copula	っけ
+sound.tte-asked-indefinite	だか
+sound.tte-asked	何
+sound.tte-asked	なに
+sound.tte-asked	なん
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ
