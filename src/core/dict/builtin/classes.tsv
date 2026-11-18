@@ -495,9 +495,11 @@
 //= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
+//= sound.quoted-say	Starts of the verbs of saying (言, いう): after a laugh or an interjection and って they take what was said, which the later stages quote with 라고 (えへへって言った 에헤헤라고 말했다), not the 하고 of the sound (laughing, crying out and nodding keep 하고).
+//= sound.echoed-by	Starts of the text after a sound and って where the sound is said back, read 라니 (えへへって何 에헤헤라니 뭐): the question word 何 in its spellings.
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
-//= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
+//= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
 //= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
 //= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
@@ -10282,13 +10284,28 @@ sound.quoted-by	洩ら
 sound.quoted-by	喉
 sound.quoted-by	鼻
 sound.quoted-by	苦笑
-sound.quoted-by	照れ笑
+sound.quoted-by	照れ
+sound.quoted-by	てれ
 sound.quoted-by	失笑
 sound.quoted-by	嘲笑
 sound.quoted-by	高笑
 sound.quoted-by	大笑
 sound.quoted-by	感心
 sound.quoted-by	歓声
+sound.quoted-say	言
+sound.quoted-say	呟
+sound.quoted-say	つぶや
+sound.quoted-say	囁
+sound.quoted-say	ささや
+sound.quoted-say	答え
+sound.quoted-say	応え
+sound.quoted-say	返
+sound.quoted-say	いう
+sound.quoted-say	いっ
+sound.quoted-say	いわ
+sound.echoed-by	何
+sound.echoed-by	なに
+sound.echoed-by	なん
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ
@@ -10667,6 +10684,12 @@ sound.stutter-head	ダ出し
 sound.stutter-head	ダ出す
 sound.stutter-head	ダ出せ
 sound.stutter-head	ダ出そ
+sound.stutter-head	キ君
+sound.stutter-head	カ可愛
+sound.stutter-head	ス凄
+sound.stutter-head	ス好
+sound.stutter-head	シ知
+sound.stutter-head	タ助
 word.confirm-action	上書き
 word.confirm-action	保存
 word.confirm-action	セーブ
