@@ -587,7 +587,8 @@ private:
     bool GoesOnAt(size_t e) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
-    bool NamedAfterTte(size_t i) const;
+    enum class TteNamed { None, Called, Quoted, Noun };
+    TteNamed NamedAfterTte(size_t i) const;
     size_t PausedTo(size_t i) const;
     size_t QuotedBy(const SoundMatch& m, size_t p, bool* say = nullptr) const;
     size_t EchoedBy(const SoundMatch& m, size_t p) const;
@@ -1790,31 +1791,61 @@ size_t SoundText::Adverbial(size_t i) const {
     if (i >= rs.size()) return 0;
     if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
-    if (rs[i] == U'て' && NamedAfterTte(i + 1)) return 0;
+    if (rs[i] == U'て' && NamedAfterTte(i + 1) != TteNamed::None) return 0;
     if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], kSuruKana)) return 1;
     return StartsLongerWord(i) ? 0 : 1;
 }
 
-// Whether the って that ends before character i names or quotes the sound before it rather than
-// saying how something is done: a noun that a quotation in って modifies (noun.quoted) or a word of
-// sound.tte-named starts there, and none of sound.tte-named-not (ドキドキって言葉 두근두근이라는 말,
-// ペコってなんですか 꾸벅이 뭡니까, シャキってのが 아삭이라는 것이; not ぐしゃぐしゃって何か踏んだ or
-// フワ～って感じて). Not where the word starts a longer word or a name (ぎゅって音羽を, ペコって何子ちゃんが).
-bool SoundText::NamedAfterTte(size_t i) const {
-    if (i >= rs_.size()) return false;
+// How the って that ends before character i names or asks about the sound before it rather than
+// saying how something is done (TteNamed::None where it is the adverb):
+// - a noun of sound.tte-named starts there: the sound stage writes (이)라는 (TteNamed::Noun: ドキドキって音
+//   두근두근이라는 소리, ドキドキって言葉の意味 두근두근이라는 말의 뜻), but the nominalizer の takes the って to the
+//   later stages, which read it (TteNamed::Quoted: シャキってのが 아삭이라는 것이);
+// - a word of sound.tte-called starts there (TteNamed::Called), the question word 何 or a verb of calling (ペコってなんですか
+//   꾸벅이 뭡니까, ドキドキって呼んでる), which the later stages read after the Korean.
+// Not where a dictionary word of any part of speech or a name starts there and runs past the member,
+// but for a noun before a particle (ゴーンって響き渡った, ぐしゃぐしゃって何か踏んだ, ポンってなにげなく, ぎゅって音羽を), where the word in kanji
+// heads a longer one (意味不明, 何度, ヤツオ), where the noun is the stem of a verb that conjugates there
+// (ドキドキって感じちゃう), or where a noun of sound.tte-noise takes を: the noise the sound makes
+// (ガタンって音を鳴らした 덜컹 소리를 울렸다, ぎゃーって声を上げた).
+SoundText::TteNamed SoundText::NamedAfterTte(size_t i) const {
+    if (i >= rs_.size()) return TteNamed::None;
     const std::string_view at = text_.substr(offsets_[i]);
-    const size_t n = std::max(dict::StartsWithMember(HDTRANS_CLASS("noun.quoted"), at), dict::StartsWithMember(HDTRANS_CLASS("sound.tte-named"), at));
-    if (n == 0 || dict::StartsWithMember(HDTRANS_CLASS("sound.tte-named-not"), at) > 0) return false;
-    // A kanji right after a word in kanji makes it the head of a longer word or of a name (音羽, 子供,
-    // 意味不明), and so does a name or a noun that runs past it (ことり).
+    const size_t nounBytes = dict::StartsWithMember(HDTRANS_CLASS("sound.tte-named"), at);
+    const size_t n = std::max(nounBytes, dict::StartsWithMember(HDTRANS_CLASS("sound.tte-called"), at));
+    if (n == 0) return TteNamed::None;
+    const bool noun = nounBytes == n;
     const size_t member = text::RuneCount(at.substr(0, n));
-    if (i + member < rs_.size() && IsKanjiRune(rs_[i + member]) && IsKanjiRune(rs_[i + member - 1])) return false;
-    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup).list) {
-        const bool noun = (c.user != nullptr && c.user->nameLayer) ||
-                          (c.codes != nullptr && (c.codes->sem.Contains("QPN") || c.codes->partText.starts_with("N")));
-        if (noun && text::RuneCount(c.source) > member) return false;
+    const size_t after = i + member;
+    // A kanji after a word in kanji, or katakana after one in katakana, makes it the head of a longer
+    // word or of a name (意味不明, 何度, ヤツオ).
+    if (after < rs_.size() && ((IsKanjiRune(rs_[after]) && IsKanjiRune(rs_[after - 1])) ||
+                               (IsKatakanaRune(rs_[after]) && IsKatakanaRune(rs_[after - 1]) && !Lengthens(rs_[after], rs_[after - 1])))) {
+        return TteNamed::None;
     }
-    return true;
+    if (noun && after < rs_.size() && rs_[after] == U'を' && dict::StartsWithMember(HDTRANS_CLASS("sound.tte-noise"), at) == n) {
+        return TteNamed::None;
+    }
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(i, std::min(rs_.size(), i + 24)), dict::LookupMode::General, ctx_.lookup).list) {
+        const size_t len = text::RuneCount(c.source);
+        const bool verb = c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'M';
+        const bool name = c.user != nullptr && c.user->nameLayer;
+        // A noun before a particle and a verb, or before the copula, is a word of its own where a set
+        // phrase goes on from it (音がする, 声が聞こえる, やつだ; not 声もなく or a name); a set phrase
+        // in を is the noise rule above. A verb of calling goes on in its own stems (呼ばれ, 呼んで).
+        if (len > member && !name && noun && after < rs_.size() &&
+            (rs_[after] == U'だ' || (verb && In(rs_[after], kParticles)))) {
+            continue;
+        }
+        if (len > member && !name && !noun && verb) continue;
+        if (len > member) return TteNamed::None;
+        if (noun && verb && len == member && after < rs_.size() && IsHiraganaRune(rs_[after]) &&
+            rs_[after] != U'だ' && (rs_[after] == U'て' || !In(rs_[after], kParticles))) {
+            return TteNamed::None;
+        }
+    }
+    if (!noun) return TteNamed::Called;
+    return rs_[i] == U'の' ? TteNamed::Quoted : TteNamed::Noun;
 }
 
 // Whether a dictionary word of two or more characters starts at the particle at character
@@ -2648,8 +2679,32 @@ std::string SoundText::Write() {
                 const size_t e = chain.back().end;
                 if (e < rs.size() && rs[e] == U'て' && rs[e - 1] == U'っ') b = DropFinalS(std::move(b));
             };
+            // A mimetic or a cry named by a noun after って (TteNamed): a ッ the sound took is the っ of that
+            // って (ドキッて何 철렁이 뭐), and a stretch mark before it is not written (ドキーンって音 철렁이라는 소리).
+            const TteNamed named = next < rs.size() && rs[next] == U'て' && In(rs[next - 1], U"っッ") ? NamedAfterTte(next + 1) : TteNamed::None;
+            const auto nameTte = [&] {
+                dropTsu();
+                while (EndsLengthened(b)) b.resize(b.size() - (b.ends_with('~') ? 1 : kLengthenText.size()));
+                b += "って";
+                next++;
+            };
             bool say = false;
-            if (const size_t said = QuotedBy(chain.back(), chain.front().start, &say); said > 0 && say) {
+            if (named == TteNamed::Noun) {
+                // The noun that names the sound takes it with (이)라는 (ドキドキって言葉 두근두근이라는 말,
+                // ガタンって音 덜컹이라는 소리), also before a verb a cry would otherwise quote; a noise after a cry
+                // is the one it makes, 하는 (うふふって声が漏れた 우후후 하는 소리가 새어 나왔다).
+                const size_t at = next + 1;
+                nameTte();
+                b.resize(b.size() - std::string_view("って").size());
+                if (chain.back().intj && dict::StartsWithMember(HDTRANS_CLASS("sound.tte-noise"), text_.substr(offsets_[at])) > 0) {
+                    b += " 하는 ";
+                } else {
+                    b += FinalConsonant(b) ? "이라는 " : "라는 ";
+                }
+            } else if (named == TteNamed::Quoted) {
+                // The nominalizer の takes the って to the later stages (シャキってのが 아삭이라는 것이).
+                nameTte();
+            } else if (const size_t said = QuotedBy(chain.back(), chain.front().start, &say); said > 0 && say) {
                 // The って right before a verb of saying goes on to the later stages (에헤헤라고 말했다);
                 // before a comma or other words it is the quote (우후후라고, 말했다).
                 dropTsu();
@@ -2667,16 +2722,10 @@ std::string SoundText::Write() {
                 b += FinalConsonant(b) ? "이라니" : "라니";
                 next = echoed;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
-            } else if (!chain.back().intj && next < rs.size() && rs[next] == U'て' && In(rs[next - 1], U"っッ") &&
-                       NamedAfterTte(next + 1)) {
-                // The って that names or quotes a mimetic goes on to the later stages, which read it after
-                // the Korean (ドキドキって言葉 두근두근이라는 말, スパって何だ 싹둑이 뭐야); a ッ the sound took is
-                // the っ of that って (ドキッて何 철렁이 뭐), and a stretch mark before it is not written
-                // (ドキーンって音 철렁이라는 소리).
-                dropTsu();
-                while (EndsLengthened(b)) b.resize(b.size() - (b.ends_with('~') ? 1 : kLengthenText.size()));
-                b += "って";
-                next++;
+            } else if (named == TteNamed::Called && !chain.back().intj) {
+                // The って that asks about a mimetic or says it is called so goes on to the later stages,
+                // which read it after the Korean (スパって何だ 싹둑이 뭐야, ドキドキって呼んでる 두근두근이라고 부르고 있다).
+                nameTte();
             } else if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
                 // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
                 b += Bytes(next, to - 1);
