@@ -563,6 +563,7 @@
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
 //= verb.self-moving	Dictionary forms of verbs that take no object, of something that comes, rises, falls, sounds or happens by itself (来る, 上がる, 降る, 沸く, 着く), not verbs of going somewhere that a speaker says of their own move with a bare place (お風呂行くね 목욕 갈게), and no kana spelling whose stem is one kana (やむ, なく): a noun right before one with no particle, or with only an adverb between, is its subject, so with ね it is observed, not promised by the speaker (バス来ますね 버스 오네요; spec SPC-5).
+//= verb.open-shut	Dictionary forms of verbs of opening and shutting a door, a window or a lid, before which a rattling mimetic is the sound of the sliding, 드르륵 (戸をガラガラ開ける 문을 드르륵 연다; LEX-6086).
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
 //= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
@@ -8010,6 +8011,16 @@ verb.self-moving	あつまる
 verb.self-moving	ふえる
 verb.self-moving	うまれる
 verb.self-moving	とける
+verb.open-shut	開ける
+verb.open-shut	開く
+verb.open-shut	閉める
+verb.open-shut	閉まる
+verb.open-shut	開け放つ
+verb.open-shut	あける
+verb.open-shut	あく
+verb.open-shut	しめる
+verb.open-shut	しまる
+verb.open-shut	開け閉め
 verb.janai-state	あ
 verb.janai-state	有
 verb.janai-state	在

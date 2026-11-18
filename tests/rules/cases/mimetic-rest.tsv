@@ -1,0 +1,40 @@
+# 규칙: LEX-6080, LEX-6084, LEX-6085, LEX-6086
+rule	input	expected	kind	layer
+words:mimetic-state	ボコボコの道。	has:울퉁불퉁한 길	fix	words
+words:mimetic-state	ぼこぼこの地面を歩く。	has:울퉁불퉁한	fix	words
+words:mimetic-state	ボコボコに殴られた。	has:흠씬	keep	words
+words:mimetic-state	びっしょりの服。	has:흠뻑 젖은 옷	fix	words
+words:mimetic-state	壁までびっしょりと濡れている。	has:흠뻑 젖어	keep	words
+words:mimetic-state	くたくたの体を引きずる。	has:녹초가 된	fix	words
+cx:mimetic-cues:208	クタクタのシャツを着ている。	has:후줄근한 셔츠	fix	words
+cx:mimetic-cues:208	くたくたの服。	has:후줄근한 옷	fix	words
+words:mimetic-state	もうクタクタになった。	has:녹초가	keep	words
+words:mimetic-state	ペラペラの紙	has:얇은 종이	fix	words
+words:mimetic-state	ぺらぺらのシャツ。	has:얇은 셔츠	fix	words
+cx:mimetic-cues:210	英語ペラペラの人	has:유창한	fix	words
+cx:mimetic-cues:210	日本語がペラペラの人	has:유창한	keep	words
+words:mimetic-state	ペラペラしゃべる。	has:나불나불	keep	words
+words:mimetic-state	腹ペコペコ。	has:배가 고프	fix	words
+words:mimetic-state	腹ぺこぺこだ。	has:배가 고프	fix	words
+words:mimetic-state	みんなにちやほやされる。	has:떠받들린다	fix	words
+words:mimetic-state	やっぱり、ちやほやされたいです。	has:떠받들리고 싶	fix	words
+words:mimetic-state	TVでちやほやされた経験がある。	has:떠받들린 경험	fix	words
+words:mimetic-state	チヤホヤされて育った。	has:떠받들려	fix	words
+words:mimetic-state	彼をちやほやする。	has:오냐오냐	keep	words
+cx:mimetic-cues:200	戸をガラガラ開ける。	has:드르륵	fix	words
+cx:mimetic-cues:200	シャッターをガラガラと閉めた。	has:드르륵	fix	words
+cx:mimetic-cues:200	ガラガラって開けて落としちゃえばいい	has:드르륵	fix	words
+cx:mimetic-cues:200	理性がガラガラと崩れていく。	has:와르르	keep	words
+cx:mimetic-cues:202	赤ちゃんがガラガラを振る。	has:딸랑이	fix	words
+cx:mimetic-cues:204	お湯がボコボコと沸いた。	has:보글보글	fix	words
+cx:mimetic-cues:204	鍋がぼこぼこ煮立っている。	has:보글보글	fix	words
+cx:mimetic-cues:206	ガリガリ勉強した。	has:악착같이 공부	fix	words
+cx:mimetic-cues:206	ガリガリ食べる。	lacks:악착	keep	words
+sound:mimetic-to	ペコペコと頭を下げた。	굽실굽실 고개를 숙였다.	fix	sound
+sound:mimetic-to	ニコニコと頭を下げた。	lacks:이라고	fix	sound
+sound:mimetic-to	異論はないと頭を下げた。	has:없다고	keep	sound
+sound:mimetic-to	ペコペコ頭を下げた。	has:굽실굽실 고개를	keep	sound
+cx:mimetic-cues:202	ガラガラと音を立てた。	has:와르르	keep	words
+cx:mimetic-cues:204	ボコボコに殴られた。	has:흠씬	keep	words
+cx:mimetic-cues:204	ボコボコと泡が出る。	has:보글보글	fix	words
+cx:mimetic-cues:208	くたくたの体を引きずる。	has:녹초가 된	keep	words
