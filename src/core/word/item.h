@@ -137,6 +137,15 @@ public:
     Detail* detail = nullptr;
     int tokenIndex = 0;
     int start = 0;          // byte offset of the word in text
+    // The end of the run of copies that the word starts or goes on, forward ([1]) and back ([0]),
+    // and the number of copies to it: a memo of the construction features, valid for the one
+    // RunConstructions call whose epoch it holds (its actions change no link of the chain).
+    struct CopyRun {
+        uint64_t epoch = 0;
+        const Item* end = nullptr;
+        int steps = 0;
+    };
+    mutable CopyRun copyRuns[2];
     std::string_view text;  // the token text the word was found in
     int length = 0;         // bytes consumed, the conjugation ending included
     int selected = -1;
