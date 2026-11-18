@@ -477,6 +477,8 @@ constexpr NamedFeature kFeatures[] = {
                   dict::InClass(HDTRANS_CLASS("word.pause-filler"), it->group->surface)));
      }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
+    // The chosen candidate reads the word as a count, as the rule code Nq (三, 三人, 半分, 十日).
+    {"count", [](Flusher&, const Item* it) { return it->ReadsCount(it->selected); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
     {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},

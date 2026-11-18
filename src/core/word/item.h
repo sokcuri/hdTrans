@@ -261,7 +261,7 @@ public:
     // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時
     // after a number name a month or an hour (五月, 三時), and a word read otherwise is no
     // count (一番 제일).
-    bool ReadsCount(int i);
+    bool ReadsCount(int i) const;
     // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
     // word or only punctuation follows.
     bool ClosingTsu() const;

@@ -309,7 +309,7 @@ bool Item::ClosingTsu() const {
     return !text::IsLetter(c) && !text::IsDigit(c);
 }
 
-bool Item::ReadsCount(int i) {
+bool Item::ReadsCount(int i) const {
     const std::string_view s = group->surface;
     std::size_t k = 0;
     bool numeral = false;
