@@ -557,6 +557,7 @@
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
+//= suffix.kanji-noun	Kanji that end a compound noun as a suffix where the dictionary gives them no suffix code Z7 (同僚 + 艦, 珊瑚 + 諸島, 清流 + 線, 高層 + 階, 白金 + 色, 地中海 + 風, 島 + 沖, 同盟国 + 軍, 甲斐国 + 主, 善人 + 面, 外国人 + 数, 生徒会 + 報): in a run of kanji the cover of fewest loose kanji reads them bound to the word before (spec LEX-6350).
 //= suffix.label-parent	Ends of a speaker label Xの父 that name a relative of the name X (アリスの母).
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
@@ -14755,3 +14756,15 @@ ending.rare-voice	られ
 //= verb.belittle-passive	The kana stems of なめる, ナメる, which mostly belittle: their られ with no object in its clause is being looked down on in the negative and the condition too (ナメられたら 얕보이면; spec GRM-4252). The kanji 舐め mostly licks and is not here (そんなに舐められたら).
 verb.belittle-passive	なめ
 verb.belittle-passive	ナメ
+suffix.kanji-noun	艦
+suffix.kanji-noun	島
+suffix.kanji-noun	線
+suffix.kanji-noun	階
+suffix.kanji-noun	色
+suffix.kanji-noun	風
+suffix.kanji-noun	沖
+suffix.kanji-noun	軍
+suffix.kanji-noun	主
+suffix.kanji-noun	面
+suffix.kanji-noun	数
+suffix.kanji-noun	報
