@@ -1,8 +1,8 @@
 #!/bin/sh
 # Long lines translate in time linear in their length: drawn honorifics and drawn sounds, a long run
-# of one kana before a nickname ending, random hiragana, one kanji said again and again (ctest
-# sound.long-line has a time limit; work per honorific, per start of a run or per word over the whole
-# line takes minutes).
+# of one kana before a nickname ending or before the forms of western speech, random hiragana, one
+# kanji said again and again (ctest sound.long-line has a time limit; work per honorific, per position
+# or per word over the whole line takes minutes).
 set -eu
 export HDTRANS_CACHE_DIR=off
 cli=$1
@@ -44,6 +44,15 @@ while [ $i -lt 8000 ]; do
     i=$((i + 1))
 done
 printf '%s\n' "$line" >> "$tmp/input"
+# One clause of kana before the forms of western speech (や, けん, んね): the normalize patterns
+# that look back over the clause are tried at every position of the line.
+i=0
+line=
+while [ $i -lt 6000 ]; do
+    line=${line}そ
+    i=$((i + 1))
+done
+printf '%sやけんね\n' "$line" >> "$tmp/input"
 "$cli" -dicts "$dicts" -userdict '' -in "$tmp/input" > "$tmp/output"
 [ "$(wc -l < "$tmp/output")" -eq "$(wc -l < "$tmp/input")" ]
 printf 'PASS long lines\n'
