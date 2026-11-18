@@ -68,6 +68,7 @@ struct PreItem {
     std::string p;                       // Punct: the mark's kind (comma, end, q …)
     std::string lemma, pos, cls, rest;  // V: the lemma, V A X C, the class, the ending's text after its row
     bool gap = false;                    // a mark of the source the word stage did not write as a word
+    std::string kase;                    // N: the case the source item ends in after a focus word (なんかが: subj)
 };
 
 // A line as the regeneration reads it.

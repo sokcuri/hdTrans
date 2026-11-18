@@ -1,0 +1,29 @@
+# 규칙: REG-16
+rule	input	expected	kind	layer
+register:REG-16	「寮母さんなんかが面倒見てくれるんじゃないですか？」	has:돌봐 주지 않아요?」	fix	register
+register:REG-16	「寮母さんなんかが面倒を見てくれますか？」	has:돌봐 주겠어요?」	fix	register
+register:REG-16	「寮母さんなんかが面倒見てくれましたか？」	has:돌봐 줬어요?」	fix	register
+register:REG-16	「寮母さんなんかが、面倒見てくれますか？」	lacks:주시	fix	register
+register:REG-16	「お母さんなんかが来てくれるんですか？」	lacks:주실	fix	register
+register:REG-16	「お袋なんかが来てくれたんですか？」	has:와 줬어요?」	fix	register
+register:REG-16	「先生なんかが教えてくれるんですか？」	lacks:주실	fix	register
+register:REG-16	「親なんかが許してくれますか？」	「부모 같은 게 용서해 주겠어요?」	fix	register
+register:REG-16	「部長などが手伝ってくれるんですか？」	lacks:주실	fix	register
+register:REG-16	「先輩などは待ってくれますか？」	「선배 등은 기다려 주겠어요?」	fix	register
+register:REG-16	「警察なんかが動いてくれるんですか？」	lacks:주실	fix	register
+register:REG-16	「健太なんかが来てくれたんですか？」	has:와 줬어요?」	fix	register
+register:REG-16	「マリなんかが手伝ってくれますか？」	has:도와 주겠어요?」	fix	register
+register:REG-16	「来てくれましたか？」	「와 주셨어요?」	keep	register
+register:REG-16	「待ってくれますか？」	「기다려 주시겠어요?」	keep	register
+register:REG-16	「教えてくれませんか？」	「가르쳐 주지 않으시겠어요?」	keep	register
+register:REG-16	「来てくれたんですか？」	「와 주셨어요?」	keep	register
+register:REG-16	「先輩、来てくれたんですか？」	「선배, 와 주셨어요?」	keep	register
+register:REG-16	「御園さん、この歌を歌ってくれませんか？」	has:불러 주지 않으시겠어요?」	keep	register
+register:REG-16	「本当に来てくれたんですか？　嬉しいです」	「정말 와 주셨어요? 기뻐요」	keep	register
+register:REG-16	「なんか手伝ってくれますか？」	has:도와 주시겠어요?」	keep	register
+register:REG-16	「寮母さんなんかを呼んでくれますか？」	has:불러 주시겠어요?」	keep	register
+register:REG-16	「田中さんが来てくれたんですか？」	has:와 줬어요?」	keep	register
+register:REG-16	「僕なんかが行ってもいいんですか？」	has:가도 괜찮아요?」	keep	register
+register:REG-16	「手伝ってくださいますか？」	「도와 주시겠습니까?」	keep	register
+register:REG-16	「来てくださったんですか？」	「와 주셨습니까?」	keep	register
+register:REG-16	「先生はいらっしゃいますか？」	「선생님은 계십니까?」	keep	register

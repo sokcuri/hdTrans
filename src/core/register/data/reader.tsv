@@ -93,6 +93,21 @@ ja-particle	について
 ja-particle	によって
 ja-particle	として
 ja-particle	にとって
+# A focus word that one item of the word stage joins to が or は (なんかが 같은 게, などは 등은): the last word of the
+# item is the subject or the topic (REG-16 reads a giver named so as a third person).
+ja-focus	なんか
+ja-focus	なんて
+ja-focus	など
+ja-focus	だけ
+ja-focus	ばかり
+ja-focus	まで
+ja-focus	とか
+ja-focus	くらい
+ja-focus	ぐらい
+ja-focus	こそ
+ja-focus	さえ
+ja-focus	すら
+ja-focus	のみ
 copula-not	(이)가
 copula-not	(이)나
 copula-not	(이)랑

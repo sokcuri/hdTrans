@@ -397,6 +397,7 @@ bool LoadReader(Reader& d, std::string& err) {
         else if (kind == "punct-ko" && c.size() >= 4) d.punctKo[c[1]] = {ToU8(c[2]), c[3] == U"-" ? std::u32string() : c[3]};
         else if (kind == "sym") d.sym.insert(c[1][0]);
         else if (kind == "ja-particle") d.jaParticles.insert(c[1]);
+        else if (kind == "ja-focus") d.jaFocus.insert(c[1]);
         else if (kind == "copula-not") d.copulaNot.insert(c[1]);
         else if (kind == "dep") d.deps.insert(c[1]);
         else if (kind == "glue-lemma") d.glueLemmas.insert(c[1]);

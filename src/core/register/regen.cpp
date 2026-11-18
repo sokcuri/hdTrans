@@ -500,6 +500,13 @@ bool BuildAligned(Words& r, const PreLine& line, std::vector<Node>& nodes) {
                     lit.to = nodes.back().to;
                     nodes.back() = lit;
                 }
+                // the source marks the word as the subject or topic (なんかが): a particle node with no text of its own
+                if (!it.kase.empty() && nodes.back().kind == Kind::N) {
+                    Node p = MakeNode(Kind::P, "");
+                    p.kase = it.kase;
+                    p.from = p.to = nodes.back().to;
+                    nodes.push_back(p);
+                }
             }
         } else if (it.kind == PreItem::Kind::P) {
             const auto pk = r.rw.particleKase.find(it.t);
