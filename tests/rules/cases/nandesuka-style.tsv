@@ -125,3 +125,7 @@ cx:nandesuka-style:42	「わかっています……では、森下さんの趣�
 cx:nandesuka-style:13	「わかっています。趣味は何ですか？」	has:「알고 있어요. 취미는 뭐예요?」	fix	rewrites
 cx:nandesuka-style:13	「わかっています。何ですか？」	has:알고 있어요.	fix	rewrites
 cx:nandesuka-style:13	「これは何ですか？　わかっています。」	has:「이건 뭐예요? 알고 있어요.」	keep	rewrites
+cx:nandesuka-style:10	「はい、何ですか、その顔は」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「え？　何ですか、この匂い」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「提督、なんですか、その目は」	!rule:cx:nandesuka-style:10	keep	rewrites
+cx:nandesuka-style:10	「はい、何ですか、あの音」	!rule:cx:nandesuka-style:10	keep	rewrites
