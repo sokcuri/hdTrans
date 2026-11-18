@@ -481,8 +481,9 @@ std::string WriteStutters(std::string_view s) {
         if (tilde) sep = U"~";
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
-        // The word goes on right after the ~ (な～なんで 왜~왜).
-        while (tilde && i + 1 < rs.size() && rs[i + 1] == U' ') i++;
+        // The word goes on right after the ~ (な～なんで 왜~왜), and after the one space of a comma
+        // even when its own Korean starts with a space (な、なんでしょう 무, 무엇이지요).
+        while ((tilde || sep == U", ") && i + 1 < rs.size() && rs[i + 1] == U' ') i++;
         size_t j = i + 1;
         while (j < rs.size()) {
             if (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest) {

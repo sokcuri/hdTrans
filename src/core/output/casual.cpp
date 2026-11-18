@@ -122,6 +122,47 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
     return {};
 }
 
+// The first syllable of s without its final consonant (무엇 → 무, 뭡니까 → 뭐); empty if s does not
+// start with a Hangul syllable.
+std::string OpenFirstSyllable(std::string_view s) {
+    if (s.empty()) return {};
+    const char32_t head = text::DecodeRune(s).cp;
+    const auto syllable = text::Split(head);
+    if (!syllable) return {};
+    std::string open;
+    text::AppendRune(open, head - static_cast<char32_t>(syllable->final));
+    return open;
+}
+
+// A stutter copied from the first syllable of the written word (무, 무엇이지요) before the word
+// whose spoken form replaces it: the copies take the first syllable of the spoken form without its
+// final instead (뭐, 뭐죠). A copy is set off by a stutter mark (a comma, an ellipsis, a wave or a
+// hyphen), not by a space alone (하는 거 게 is no stutter).
+void RespellStutter(std::string& out, std::string_view written, std::string_view spoken) {
+    const std::string copied = OpenFirstSyllable(written);
+    const std::string copy = OpenFirstSyllable(spoken);
+    if (copied.empty() || copy.empty() || copy == copied) return;
+    const std::string_view kCopied = copied;
+    for (std::size_t end = out.size();;) {
+        std::size_t k = end;
+        bool marked = false;
+        while (k > 0) {
+            const std::string_view upto = std::string_view(out).substr(0, k);
+            const std::string_view rest = WithoutLast(upto);
+            const char32_t c = text::DecodeRune(upto.substr(rest.size())).cp;
+            if (std::u32string_view(U" ,、…‥~～-").find(c) == std::u32string_view::npos) break;
+            marked = marked || c != U' ';
+            k = rest.size();
+        }
+        if (!marked || !std::string_view(out).substr(0, k).ends_with(kCopied)) return;
+        const std::size_t at = k - kCopied.size();
+        const std::string_view before = std::string_view(out).substr(0, at);
+        if (!before.empty() && !WordEnds(before.substr(WithoutLast(before).size()))) return;
+        out.replace(at, kCopied.size(), copy);
+        end = at;
+    }
+}
+
 // Whether s ends with the 아/어 form of a verb, maybe followed by one space (와, 보여 , 해 ):
 // the form an auxiliary 주다 or 두다 follows.
 bool AfterInfinitive(std::string_view s) {
@@ -202,6 +243,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (start || pronoun) {
                 const auto [spoken, length] = SpokenWord(line.substr(at), !start);
                 if (length > 0) {
+                    RespellStutter(out, line.substr(at, length), spoken);
                     out += spoken;
                     at += length;
                     continue;

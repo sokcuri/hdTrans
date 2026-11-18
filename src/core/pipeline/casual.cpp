@@ -502,8 +502,8 @@ bool Run(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// ([るたなういくすつぬむぶぐてでだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
-// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ that end the sentence after
+// ([るたなういくすつぬむぶぐてでだ])んっ?[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
+// んです (行くんすか, 苦手なんスけど, 何なんっすか) and なのです (何なのっすか), but not ないんすか, ないんすよ that end the sentence after
 // a verb, which the end rows read (書かないんすか 쓰지 않나요). Without contracted forms read, not
 // after で, and not ないんすか or ないんすよ anywhere.
 template <bool kContracted>
@@ -519,7 +519,16 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
         if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー')) return false;
     }
     m.group[1] = Span(s, pos, p);
-    if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
+    if (Lit(s, p, "ん")) {
+        Lit(s, p, "っ");  // んっす, spelled with the small っ of っす (何なんっすか).
+    } else if (m.group[1] == "な" && Lit(s, p, "のっ")) {
+        // なのっす is なのです (何なのっすか, 嫌いなのっす); group 1 keeps the の, so that a name
+        // ending in なの (ひなのっすか) stays one word.
+        m.group[1] = Span(s, pos, p - std::string_view("っ").size());
+    } else {
+        return false;
+    }
+    if (!OneOf(s, p, U"すス")) return false;
     // The end rows of ないんすか and ないんすよ read a verb's ない at the end of a sentence; the ない
     // of a noun or a particle (問題ないんすか, 何にもないんすか) and one the sentence goes on after
     // (じゃないんすかね) are read as ないんです.
@@ -2173,7 +2182,8 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     // てんす and でんす are the contracted ている before it (言ってんすか 言ってるんですか).
     text = ReplaceAll(text, contracted ? Nsu<true> : Nsu<false>, [contracted](const Match& m) {
         const bool te = contracted && (m.group[1] == "て" || m.group[1] == "で");
-        return Cat({m.group[1], te ? "るんです" : "んです", m.group[2]});
+        const bool no = m.group[1].ends_with("の");
+        return Cat({m.group[1], te ? "るんです" : no ? "です" : "んです", m.group[2]});
     });
     text = ReplaceAll(text, KonnaN, [](const Match& m) { return Cat({m.group[1], "の"}); });
     text = ReplaceAll(text, QuestionKai, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
