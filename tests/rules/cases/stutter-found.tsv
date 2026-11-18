@@ -88,3 +88,40 @@ sound:stutter	「んっ、ああ、あぅっ……あっ、んっ……」	has:�
 sound:stutter	えぃ、えい！	lacks:에, 에잇	keep	sound
 sound:stutter	しぇ、シェフ	셰, 셰프	fix	sound
 sound:stutter	うぃ、ウィンドウ	위, 윈도우	fix	sound
+normalize:question-n	なんなんそれ	뭐야 그것	fix	normalize
+normalize:question-n	なんなんそれ？	뭐야 그것?	fix	normalize
+normalize:question-n	なんなんそれ！	뭐야 그것!	fix	normalize
+normalize:question-n	なんなん、それ	뭐야, 그것	fix	normalize
+normalize:question-n	なんなんこれ	뭐야 이것	fix	normalize
+normalize:question-n	なんなん、これ	뭐야, 이것	fix	normalize
+normalize:question-n	な、なんなんそれ	뭐, 뭐야 그것	fix	normalize
+normalize:question-n	「なんなんそれ」	「뭐야 그거」	fix	normalize
+normalize:question-n	なんなんあんた	뭐야 너	fix	normalize
+normalize:question-n	いや、なんなんお前ら	has:뭐야 너희들	fix	normalize
+normalize:question-n	なんなんこいつ	뭐야 이 녀석	fix	normalize
+normalize:question-n	一体なんなんそれ	has:뭐야 그것	fix	normalize
+normalize:question-n	何なんそれ	뭐야 그것	fix	normalize
+normalize:question-n	なんなん！	뭐야!	fix	normalize
+normalize:question-n	あんたなんなん？	너 뭐야?	fix	normalize
+normalize:question-n	あんたなんなん	너 뭐야	fix	normalize
+normalize:question-n	これ、なんなん	이것, 뭐야	fix	normalize
+normalize:question-n	なんなん拓也	has:타쿠야	keep	normalize
+normalize:question-n	なんなん、ななみ	has:나나미	keep	normalize
+normalize:question-n	なんなんだよ	뭐야	keep	normalize
+normalize:question-n	なんなんすか	무엇입니까	keep	normalize
+normalize:question-n	なんなんか？	무엇인가?	keep	normalize
+normalize:question-n	そんなん	그런	keep	normalize
+normalize:question-n	なんなんとう	남남동	keep	normalize
+local:1810	なんなんあれ	뭐야 저것	fix	local
+local:1810	何なのあれ？	has:뭐야 저것	fix	local
+local:1810	なんだあれ	뭐야 저게	keep	local
+cx:web-fixes-j:126	……な、なんて	……뭐, 뭐라고	fix	rewrites
+cx:web-fixes-j:126	……な、なんて！	……뭐, 뭐라고!	fix	rewrites
+cx:web-fixes-j:126	……なんて！	……뭐라고!	fix	rewrites
+cx:web-fixes-j:126	……なんてね	……농담이야	keep	rewrites
+sound:stutter	ふぁ、ふぁいと	파, 파이팅	fix	sound
+sound:stutter	ふぁ、ふぁいとー	파, 파이팅~	fix	sound
+sound:stutter	ふぁ、ふぁん	패, 팬	fix	sound
+sound:stutter	てぃ、てぃっしゅ	티, 티슈	fix	sound
+sound:stutter	ふぁ、ふぁ	후아, 후아	keep	sound
+sound:stutter	ふぁいと	파이팅	keep	sound

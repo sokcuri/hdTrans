@@ -2012,9 +2012,10 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const auto rows = SoundRows(x[0], ctx_.extraBuiltin);
     if (n > 1 && std::any_of(rows.begin(), rows.end(), [&](const SoundRow& s) { return s.key == x && !s.phrase && !s.lead; })) {
         // A syllable with a small vowel said again before a longer word it starts stutters that
-        // word (ふぁ、ファイト 파, 파이팅), not a sound said twice (ふぁ、ふぁ).
+        // word (ふぁ、ファイト 파, 파이팅; ふぁ、ふぁいと, a loanword in hiragana), not a sound said twice (ふぁ、ふぁ).
         const size_t k = SpacedStutterSeparator(rs, p + n);
-        if (!smallVowel || k == 0 || p + n + k >= rs.size() || f.substr(p + n + k, n) != x || WordLen(p + n + k) <= n) return 0;
+        if (!smallVowel || k == 0 || p + n + k >= rs.size() || f.substr(p + n + k, n) != x) return 0;
+        if (std::max(WordLen(p + n + k), internal::HiraganaLoanwordLen(rs, p + n + k, ctx_, snap_)) <= n) return 0;
     }
     // A syllable said three or more times straight into the word it starts (つつつついに,
     // どどどどうしよう, ぼぼぼボク) or before a word in kanji (けけけ圭一): a piece without a

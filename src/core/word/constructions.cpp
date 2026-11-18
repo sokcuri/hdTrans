@@ -436,7 +436,7 @@ constexpr NamedFeature kFeatures[] = {
          return false;
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
-    // Nothing but spaces and a stutter of the word stands before it on its line (StartsLine).
+    // Nothing but spaces, ……-like marks and a stutter of the word stands before it on its line (StartsLine).
     {"starts-line", [](Flusher& f, const Item* it) { return StartsLine(f.w, it); }},
     // The line uses the tic ぽい (PoiLine).
     {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},

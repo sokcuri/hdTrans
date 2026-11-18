@@ -95,7 +95,8 @@ bool CutStutter(std::string_view& s);
 // Whether nothing but spaces stands before the item on its line, or a sentence end does; a stutter
 // of the item (や、やばい, な、な、なんて) is part of it (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
-// Whether nothing but spaces and a stutter of the item stands before it on its line (grammar.cpp).
+// Whether nothing but spaces, marks of mark.restart and a stutter of the item stands before it on
+// its line (……な、なんて) (grammar.cpp).
 bool StartsLine(const Worker& w, const Item* it);
 // Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
 // item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
