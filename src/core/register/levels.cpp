@@ -611,6 +611,11 @@ Persona VoiceOf(const RegisterTables& t, const std::string& ja) {
 
 std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(Scan(t, ja)); }
 
+SentenceCues CuesOfSentence(const RegisterTables& t, const std::string& ja) {
+    const Cues c = Scan(t, ja);
+    return {c.pend, c.set, c.keigo, c.arch, c.stiff};
+}
+
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines) {
     std::vector<RegDecision> out(lines.size());
     // the cues of each line, read once
