@@ -1,0 +1,136 @@
+# senses by argument: names as @person, subject across a te verb, セットする, 打ち込む, kana はなす/おこる/ひく, collocations (LEX-6040–6043)
+rule	input	expected	kind	layer
+pack:argument-senses:1	葵を起こした。	has:아오이를 깨웠다	fix	packs
+pack:argument-senses:1	アリスがため息をついた。アリスを起こした。	has:앨리스를 깨웠다	fix	packs
+pack:argument-senses:1	ミナを起こしてきて。	has:깨워	fix	packs
+pack:argument-senses:1	葵を起こさないように部屋を出た。	has:깨우지	fix	packs
+pack:argument-senses:14700	倒れたまま眠る子を起こした。	has:자는 아이를 깨웠다	fix	packs
+pack:argument-senses:1	寝ている葵を起こした。	has:깨웠다	fix	packs
+pack:argument-senses:5043	倒れた葵を起こした。	has:일으켰다	keep	packs
+pack:argument-senses:1	事故を起こした。	has:사고를 냈다	keep	packs
+pack:argument-senses:4	嬉野が下がった。	has:우레시노가 물러났다	fix	packs
+pack:argument-senses:4	少女が慌てて下がる。	has:소녀가 황급히 물러난다	fix	packs
+pack:argument-senses:4	兵士が驚いて下がった。	has:물러났다	fix	packs
+pack:argument-senses:4	熱が下がった。	has:열이 내려갔다	keep	packs
+pack:argument-senses:4	気温が急に下がった。	has:내려갔다	keep	packs
+pack:止める/とめる/v1#3	パンチを止めた。	lacks:막았	keep	packs
+pack:止める/とめる/v1#6	ワゴンを止めた。	has:세웠다	keep	packs
+cx:set-timer:30	髪をセットした。	has:세팅했다	fix	rewrites
+cx:set-timer:30	前髪をセットする。	has:세팅한다	fix	rewrites
+cx:set-timer:40	爆弾をセットした。	has:폭탄을 설치했다	fix	rewrites
+cx:set-timer:40	罠をセットしておいた。	has:설치해	fix	rewrites
+cx:set-timer:12	目覚ましセットした。	has:맞추었다	fix	rewrites
+cx:set-timer:22	アラームセットしといた。	has:알람 맞춰	fix	rewrites
+cx:set-timer:10	目覚ましをセットした。	has:자명종을 맞추었다	keep	rewrites
+cx:set-timer:30	テーブルをセットした。	lacks:세팅	keep	rewrites
+pack:verb-object-senses:814-107	サーブを打ち込む。	has:서브를 꽂아 넣는다	fix	packs
+pack:verb-object-senses:814-107	スマッシュを打ち込んだ。	has:꽂아 넣었다	fix	packs
+dict:w:35960	拳を打ち込む。	has:주먹을 꽂아 넣는다	fix	local
+pack:verb-object-senses:814-110	文字を打ち込む。	has:문자를 입력한다	keep	packs
+pack:kana-verb-senses:14720	手をはなして！	has:손을 놓아	fix	packs
+pack:kana-verb-senses:14720	彼女の手をはなさないで。	has:손을 놓지	fix	packs
+pack:kana-verb-senses:14720	友達とはなした。	has:이야기했다	keep	packs
+pack:kana-verb-senses:14722	おこらないで。	has:화내지 마	fix	packs
+pack:kana-verb-senses:14721	母がおこった。	has:어머니가 화냈다	fix	packs
+pack:kana-verb-senses:14722	おこさないで。	has:일으키지	keep	packs
+pack:kana-verb-senses:14722	穂波がおこした火。	lacks:화낸	keep	packs
+pack:kana-verb-senses:14721	事件がおこった。	has:사건이 일어났다	keep	packs
+pack:kana-verb-senses:14723	車で人をひいてしまった。	has:사람을 쳐	fix	packs
+pack:kana-verb-senses:14723	猫をひいた。	has:고양이를 쳤다	fix	packs
+pack:kana-verb-senses:14723	風邪をひいた。	has:감기에 걸렸다	keep	packs
+pack:argument-senses:14701	マッチを擦った。	has:성냥을 그었다	fix	packs
+pack:argument-senses:14705	薬が切れた。	has:약이 떨어졌다	fix	packs
+pack:argument-senses:14706	麻酔が切れた。	has:마취가 풀렸다	fix	packs
+pack:argument-senses:14707	提案をはねのけた。	has:제안을 거절했다	fix	packs
+pack:argument-senses:14708	舞台にあがった。	has:무대에 올랐다	fix	packs
+pack:argument-senses:14708	ステージにあがると、会場が静まった。	has:스테이지에 오르니	fix	packs
+pack:argument-senses:14709	窓のそばからパンを取った。	has:빵을 집었다	fix	packs
+pack:argument-senses:14712	棚から本を取ってくる。	has:가져온다	keep	packs
+pack:argument-senses:14710	そばが好きだ	has:메밀국수를 좋아한다	fix	packs
+pack:argument-senses:14710	そばにいて。	has:곁에 있어	keep	packs
+dict:w:19101	海苔で巻いてある。	has:김으로	fix	local
+dict:w:19101	おにぎりに海苔を巻く。	has:김을	fix	local
+dict:w:19101	焼き海苔。	has:김	keep	local
+dict:w:19101	海苔巻きを食べた。	has:김밥을 먹었다	keep	local
+cx:set-timer:12	セットした。	!rule:cx:set-timer:12	keep	rewrites
+cx:set-timer:22	セットしといた。	!rule:cx:set-timer:22	keep	rewrites
+cx:set-timer:40	カメラをセットした。	!rule:cx:set-timer:40	keep	rewrites
+pack:止める/とめる/v1#3	ダイヤを止めた。	lacks:막았	keep	packs
+pack:argument-senses:1	精神破壊を起こしてる。	has:일으키고	keep	packs
+pack:argument-senses:1	ミナを起こした。	has:미나를 깨웠다	fix	packs
+pack:argument-senses:14714	ガスの効果が切れたら、襲ってくる。	has:효과가 다하면	fix	packs
+pack:argument-senses:14715	目だけは強い輝きを宿らせて。	has:빛을 품게 해	fix	packs
+pack:argument-senses:14715	光が宿る。	lacks:품	keep	packs
+pack:kana-verb-senses:14722	おこらないでください。	has:화내지 마세요	fix	packs
+pack:kana-verb-senses:14722	そんなにおこらないでよ！	has:화내지 마	fix	packs
+pack:kana-verb-senses:14722	はなこ、おこらないで。	has:화내지 마	fix	packs
+pack:kana-verb-senses:14722	またおこった。	has:또 일어났다	keep	packs
+pack:kana-verb-senses:14722	何がおこったの？	has:일어났어	keep	packs
+pack:argument-senses:14724	御園をコートの中に入れた。	has:코트 안에 넣었다	keep	packs
+pack:argument-senses:14724	御園をコートの中に入れて、抱きしめた。	has:코트 안에 넣어	keep	packs
+pack:argument-senses:14724	猫を箱の中に入れた。	has:상자 안에 넣었다	keep	packs
+pack:argument-senses:14724	財布をバッグの中に入れた。	has:가방 안에 넣었다	keep	packs
+pack:argument-senses:14725	葵を屋敷の中に入れた。	has:저택 안에 들였다	fix	packs
+pack:argument-senses:14725	葵を部屋の中に入れた。	has:방 안에 들였다	fix	packs
+pack:argument-senses:14725	美也子を車の中に入れた。	has:차 안에 들였다	keep	packs
+pack:argument-senses:14725	客を店の中に入れた。	has:가게 안에 들였다	keep	packs
+pack:argument-senses:23	少女を中に入れた。	has:안에 들였다	keep	packs
+pack:argument-senses:23	ミナを中に入れました。	has:안에 들였습니다	fix	packs
+pack:argument-senses:23	傘を開き、白崎を中に入れた。	has:시라사키를 안에 들였다	fix	packs
+pack:argument-senses:14709	冷蔵庫からビールを取った。	has:맥주를 집었다	fix	packs
+pack:argument-senses:14709	袋からパンを取ろうとした。	has:빵을 집으려고	fix	packs
+pack:argument-senses:14709	床から紙を取った。	has:종이를 집었다	fix	packs
+pack:argument-senses:14709	車からアレ取って。	has:집어	fix	packs
+pack:argument-senses:14716	後ろから両手を取って	has:잡아	keep	packs
+pack:argument-senses:14716	後ろから両手を取って	lacks:집어	keep	packs
+pack:argument-senses:14716	後ろから肩を取った。	has:잡았	keep	packs
+pack:argument-senses:14716	後ろから肩を取った。	lacks:집었	keep	packs
+pack:argument-senses:14709	敵から城を取った。	lacks:집었	keep	packs
+pack:argument-senses:14709	相手からボールを取った。	lacks:집었	keep	packs
+pack:argument-senses:14709	町から税を取った。	has:걷었다	keep	packs
+pack:argument-senses:14701	マッチをこすった。	has:그었	fix	packs
+pack:argument-senses:14701	マッチをこすって火をつけた。	has:그어	fix	packs
+pack:argument-senses:14701	目をこすった。	has:비볐다	keep	packs
+pack:argument-senses:5199	お茶をすすった。	has:홀짝였다	fix	packs
+dict:w:35961	拳を打ちこんだ。	has:주먹	fix	lookup
+dict:w:35961	拳を打ちこんだ。	lacks:가위바위보	fix	lookup
+pack:argument-senses:1	カズヤを起こした。	has:카즈야를 깨웠	fix	packs
+pack:argument-senses:1	妹をおこした。	has:깨웠	fix	packs
+pack:argument-senses:1	葵をおこしてきて。	has:깨워	fix	packs
+pack:argument-senses:1	葵をおこしてきて。	lacks:부흥	fix	packs
+pack:argument-senses:1	姉をおこしに行った。	has:깨우러	fix	packs
+pack:argument-senses:1	姉をおこしに行った。	lacks:부흥	fix	packs
+pack:argument-senses:1	母をおこさないでね。	has:깨우지	fix	packs
+pack:argument-senses:5043	倒れた馬をおこした。	has:일으켰다	keep	packs
+pack:argument-senses:50	事件をおこした。	has:일으켰다	keep	packs
+dict:jisjk:106662	またのおこしをお待ちしております。	has:방문	fix	lookup
+pack:argument-senses:14717	薬切れた。	has:떨어졌	fix	packs
+pack:argument-senses:14718	麻酔切れた。	has:풀렸	fix	packs
+pack:argument-senses:14705	糸切れた。	lacks:떨어졌	keep	packs
+cx:set-timer:14	目覚ましをセットしなきゃ。	has:맞춰야	fix	rewrites
+cx:set-timer:16	目覚ましセットしてなかった。	has:맞추지	fix	rewrites
+cx:set-timer:16	アラームをセットしなかった。	has:맞추지 않았다	fix	rewrites
+cx:set-timer:18	目覚ましがセットされていた。	has:맞춰지	fix	rewrites
+cx:set-timer:12	目覚まし、セットした？	has:맞췄	fix	rewrites
+cx:set-timer:12	目覚ましはセットした。	has:맞추었다	fix	rewrites
+cx:set-timer:30	髪セットしなきゃ。	has:세팅	fix	rewrites
+cx:set-timer:30	髪をセットしないで出かけた。	has:세팅하지	fix	rewrites
+cx:set-timer:40	爆弾がセットされていた。	has:설치	fix	rewrites
+cx:set-timer:40	罠がセットされている。	has:설치	fix	rewrites
+cx:set-timer:40	罠をセットしないで。	has:설치하지	fix	rewrites
+cx:set-timer:40	ステージがセットされた。	lacks:설치	keep	rewrites
+pack:kana-verb-senses:14720	その手をはなせ！	has:놓아	fix	packs
+pack:kana-verb-senses:14719	彼女をはなせ！	has:놓아라	fix	packs
+pack:kana-verb-senses:14726	犬をはなした。	has:놓아주었다	fix	packs
+pack:kana-verb-senses:14726	鳥をはなしてやった。	has:놓아주	fix	packs
+pack:kana-verb-senses:14719	彼女のことをはなした。	has:이야기했다	keep	packs
+pack:kana-verb-senses:14727	そんなにおこるなよ。	has:화내지	fix	packs
+pack:kana-verb-senses:14727	おこるな！	has:화내지 마	fix	packs
+pack:kana-verb-senses:14728	何もおこらなかった。	has:일어나지 않았다	keep	packs
+pack:kana-verb-senses:14729	事件がおこるなんて。	has:일어나다니	keep	packs
+pack:argument-senses:23	とかげを部屋に入れた。	lacks:들였	keep	packs
+cx:set-timer:14	テーブルをセットしなきゃ。	lacks:맞춰	keep	rewrites
+cx:set-timer:16	テーブルをセットしなかった。	lacks:맞추지	keep	rewrites
+cx:set-timer:18	ステージがセットされていた。	lacks:맞춰지	keep	rewrites
+dict:w:35962	創立100年の里おこしベンチャー企業	has:마을 부흥	keep	lookup
+dict:w:35963	町おこしに力を入れる。	has:마을 부흥	keep	lookup

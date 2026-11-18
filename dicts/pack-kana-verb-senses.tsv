@@ -5,3 +5,12 @@ kana-verb-senses:1	ととのえる	v1	sense	obj=息|呼吸|息遣い	고르다	L
 kana-verb-senses:2	ととのえる	v1	sense	obj=身なり|身だしなみ|身支度|服装|髪|体勢|態勢|姿勢|居住まい	가다듬다	LEX-3702		身だしなみをととのえる 몸가짐을 가다듬다		
 kana-verb-senses:3	ととのえる	v1	sense	obj=準備|用意|手筈|手はず|環境|条件|態勢	갖추다	LEX-3702		準備をととのえる 준비를 갖추다		
 kana-verb-senses:4	ととのえる	v1	sense	obj=味	맞추다	LEX-3702		味をととのえる 맛을 맞추다		
+kana-verb-senses:14720	はなす	v5	sense	obj=手|その手|この手|両手|片手|腕|指|手綱|ハンドル|紐|ひも|ロープ|袖|裾|手首	놓다	LEX-6042		手をはなして 손을 놓아		
+kana-verb-senses:14719	はなす	v5	sense	obj=@person	놓다	LEX-6042		彼女をはなせ 그녀를 놓아라		
+kana-verb-senses:14726	はなす	v5	sense	obj=@animal	놓아주다	LEX-6042		犬をはなした 개를 놓아주었다		
+kana-verb-senses:14721	おこる	v5	sense	subj=@person	화내다	LEX-6042		母がおこった 어머니가 화냈다		
+kana-verb-senses:14722	おこる	v5	sense	subj=- ending=ないで form=neg	화내다	LEX-6042		おこらないで 화내지 마, おこるな 화내지 마(주어 없는 금지만)		10
+kana-verb-senses:14727	おこる	v5	sense	subj=- ending=な	화내다	LEX-6042		おこるな 화내지 마(주어 없는 금지만)		
+kana-verb-senses:14728	おこる	v5	sense	subj=- ending=な form=neg	-	LEX-6042		何もおこらない(그대로)		
+kana-verb-senses:14729	おこる	v5	sense	subj=- ending=なんて|など|なら|なり|なあ|なぁ	-	LEX-6042		おこるなんて(그대로)		10
+kana-verb-senses:14723	ひく	v5	sense	obj=@person|@animal	치다	LEX-6042		車で人をひいてしまった 차로 사람을 쳐 버렸다		

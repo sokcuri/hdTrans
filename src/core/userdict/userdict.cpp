@@ -118,7 +118,8 @@ std::string VerbKind(std::string_view jp, std::string_view pos, const dict::Dict
         return std::string();
     };
     const auto without2 = [&] { return Utf8(std::u32string_view(r).substr(0, n - 2)); };
-    if (jp.ends_with("する") && n > 2) return set(without2(), '9');
+    // a godan verb given as v5 that ends in する (こする, すする) is no suru verb
+    if (jp.ends_with("する") && n > 2 && !pos.starts_with("v5")) return set(without2(), '9');
     if (jp.ends_with("ずる") && n > 2 && IsKanji(r[n - 3])) return set(without2(), ':');
     // 来ない, 来た, 来て, 来よう conjugate like an ichidan verb on 来; 出来る is できる.
     if (jp == "来る" || jp.ends_with("出来る")) return set(stem, '7');
