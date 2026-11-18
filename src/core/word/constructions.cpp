@@ -1,9 +1,11 @@
 #include "core/word/constructions.h"
 
 #include <algorithm>
+#include <atomic>
 #include <span>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
@@ -115,6 +117,9 @@ const Item* CopyBefore(const Item* it) {
 
 }  // namespace
 
+// A new epoch for the copy-run memo (CopyRunOf) at the start of a RunConstructions call.
+void BeginCopyRuns();
+
 // The word after it that repeats it.
 const Item* CopyAfter(const Item* it) {
     const Item* n = it->next;
@@ -125,12 +130,55 @@ const Item* CopyAfter(const Item* it) {
 
 namespace {
 
-// The last copy of the run that it starts or goes on.
-const Item* LastCopy(const Item* it) {
-    const Item* last = it;
-    while (const Item* n = CopyAfter(last)) last = n;
-    return last;
+std::atomic<uint64_t> copyEpochs{0};
+thread_local uint64_t copyEpoch = 0;  // of the RunConstructions call running on this thread
+
+// The run of copies from it, forward through CopyAfter or back through CopyBefore: its end and
+// the number of steps to it. Within one RunConstructions call each word is walked once: the walk
+// stops at a word already walked and leaves its result on every word it passed.
+Item::CopyRun CopyRunOf(const Item* it, bool forward) {
+    auto step = [forward](const Item* x) { return forward ? CopyAfter(x) : CopyBefore(x); };
+    const uint64_t epoch = copyEpoch;
+    if (epoch == 0) {
+        Item::CopyRun run{0, it, 0};
+        while (const Item* n = step(run.end)) {
+            run.end = n;
+            run.steps++;
+        }
+        return run;
+    }
+    thread_local std::vector<const Item*> path;
+    path.clear();
+    Item::CopyRun run;
+    for (const Item* x = it;;) {
+        if (const Item::CopyRun& m = x->copyRuns[forward ? 1 : 0]; m.epoch == epoch) {
+            run = m;
+            break;
+        }
+        const Item* n = step(x);
+        if (n == nullptr) {
+            run = {epoch, x, 0};
+            x->copyRuns[forward ? 1 : 0] = run;
+            break;
+        }
+        path.push_back(x);
+        x = n;
+    }
+    for (auto p = path.rbegin(); p != path.rend(); ++p) {
+        run.steps++;
+        (*p)->copyRuns[forward ? 1 : 0] = run;
+    }
+    return it->copyRuns[forward ? 1 : 0];
 }
+
+// The last copy of the run that it starts or goes on.
+const Item* LastCopy(const Item* it) { return CopyRunOf(it, true).end; }
+
+}  // namespace
+
+void BeginCopyRuns() { copyEpoch = copyEpochs.fetch_add(1, std::memory_order_relaxed) + 1; }
+
+namespace {
 
 // Whether the copy after it follows it with no pause between, or only its clipping っ
 // (いやだいやだ, だめっだめっ, not 好き、好き).
@@ -162,11 +210,7 @@ bool ConnectiveCopies(const Item* it) {
 }
 
 // The first copy of the run that it ends or goes on.
-const Item* FirstCopy(const Item* it) {
-    const Item* first = it;
-    while (const Item* p = CopyBefore(first)) first = p;
-    return first;
-}
+const Item* FirstCopy(const Item* it) { return CopyRunOf(it, false).end; }
 
 // Whether it is a copy of a run of an adjective or an adjectival noun said again whose last
 // copy ends bare in い or だ, read 1다 or the exclamative 6 (痛い痛い, いやだいやだ, すごいすごい).
@@ -200,8 +244,7 @@ bool Clipped(const Item* it) {
 // Whether its run of copies is a cry whatever the words: three copies or more, or a mark of
 // mark.cry right after the last copy (寒い寒い寒い, 寒い寒いっ, 寒い寒い！, 寒い寒い……).
 bool CriedCopies(const Item* it) {
-    int copies = 1;
-    for (const Item* c = FirstCopy(it); (c = CopyAfter(c)) != nullptr;) copies++;
+    const int copies = 1 + CopyRunOf(FirstCopy(it), true).steps;
     if (copies >= 3) return true;
     const std::string_view rest = TextAfter(LastCopy(it));
     const std::string_view mark = rest.substr(0, text::DecodeRune(rest).size);
@@ -1861,6 +1904,7 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
     }
     if (t.afterPass[pass].empty()) return;
     // The actions change no surface and no link of the chain.
+    internal::BeginCopyRuns();
     Flusher::Constructions& c = f.constructions;
     if (c.slots.size() < t.slots) c.slots.resize(t.slots);
     constexpr uint32_t kNoSurface = UINT32_MAX;

@@ -1,7 +1,8 @@
 #!/bin/sh
 # Long lines translate in time linear in their length: drawn honorifics and drawn sounds, a long run
-# of one kana before a nickname ending, random hiragana (ctest sound.long-line has a time limit; work
-# per honorific, per start of a run or per word over the whole line takes minutes).
+# of one kana before a nickname ending, random hiragana, one kanji said again and again (ctest
+# sound.long-line has a time limit; work per honorific, per start of a run or per word over the whole
+# line takes minutes).
 set -eu
 export HDTRANS_CACHE_DIR=off
 cli=$1
@@ -35,6 +36,14 @@ awk 'BEGIN {
     for (i = 0; i < 4000; i++) printf "%s", k[int(rand() * n) + 1]
     printf "\n"
 }' >> "$tmp/input"
+# One kanji said again and again: each word is a copy, and its run of copies is the whole line.
+i=0
+line=
+while [ $i -lt 8000 ]; do
+    line=${line}日
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 "$cli" -dicts "$dicts" -userdict '' -in "$tmp/input" > "$tmp/output"
 [ "$(wc -l < "$tmp/output")" -eq "$(wc -l < "$tmp/input")" ]
 printf 'PASS long lines\n'
