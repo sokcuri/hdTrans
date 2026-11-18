@@ -58,8 +58,35 @@ register:REG-27	「あの子はいろいろとすごいんですのよ。」	has
 register:REG-27	「自分が得をするために、意識を少し変えてみる。それでいいと思うんです」	has:바꾸어 본다. 그거면 된다고 생각합니다」	keep	register
 register:REG-27	「ただ、その法則性を知らず、人の姿をしたクイーンに惑わされるから変則的に感じる。ですが、逆に法則性を見抜いてしまえば対処はできます」	has:변칙적으로 느낀다.	keep	register
 register:REG-27	「シュウさんって頑固ですね。だから引っ越しも進まないんです」	has:그러니까 이사도 나아가지 않아요」	keep	register
-register:REG-27	「私、むしろ、嫌われてるのはこっちだと思ってます」	has:이쪽이라고 생각합니다」	keep	register
+register:REG-27	「私、むしろ、嫌われてるのはこっちだと思ってます」	has:이쪽이라고 생각해요」	fix	register
 register:REG-27	「……森下さん……でしたね、頑張りましょう」	has:힘냅시다」	keep	register
 register:REG-27	「本気でそう認めてもらえるよう、頑張ります」	has:노력하겠습니다」	keep	register
 register:REG-26	「お客様は何名様でしょうか？」	has:몇 분입니까?」	keep	register
 register:REG-26	「ただいま帰りました」	「다녀왔습니다」	keep	register
+register:REG-26	「ロウリア王、準備はすべて整いました」	has:갖추어졌습니다	keep	register
+register:REG-26	「あーあぁまったく、シスコンじゃない穂積殿。どうするおつもりですか？」	lacks:생각이에요	keep	register
+register:REG-26	「社長はおられますか？」	「사장은 계십니까?」	keep	register
+register:REG-26	「了解です。すぐ向かいます」	「알겠습니다. 바로 향합니다」	keep	register
+register:REG-25	「魔王はもう倒しました」	「마왕은 벌써 쓰러뜨렸어요」	fix	register
+register:REG-25	「この国の王子です」	「이 나라의 왕자예요」	fix	register
+register:REG-25	「神殿に行きました」	「신전에 갔어요」	fix	register
+register:REG-25	「ゲームはもうマスターしました」	「게임은 이제 마스터했어요」	fix	register
+register:REG-25	「先生の了解はもらいました」	has:받았어요	fix	register
+register:REG-25	「楽しかったです……本当に楽しかったです」	「즐거웠어요……정말 즐거웠어요」	fix	register
+register:REG-25	「そうです……楽しかったです」	「그래요……즐거웠어요」	fix	register
+register:REG-25	「楽しかったです。本当に」	「즐거웠어요. 정말」	fix	register
+register:REG-25	「楽しかったです、本当に」	「즐거웠어요, 정말」	fix	register
+register:REG-25	「本当ですか？」	「정말이에요?」	fix	register
+register:REG-25	「今日は晴れです。明日はどうですか？」	has:내일은 어때요?	fix	register
+register:REG-25	「映画を見ました」	「영화를 봤어요」	fix	register
+register:REG-25	「夢を見ました」	「꿈을 꿨어요」	fix	register
+register:REG-25	「痴女扱いされても我慢できます」	has:참을 수 있어요	fix	register
+register:REG-27	「よく分かりません」	「잘 몰라요」	fix	register
+register:REG-27	「明日は雨かもしれません」	「내일은 비일지도 몰라요」	fix	register
+register:REG-27	「私も見習わなくてはなりません」	「저도 본받아야 해요」	fix	register
+register:REG-27	「それでいいです」	「그거면 돼요」	fix	register
+register:REG-27	「もうすぐ雨が降ります」	「이제 곧 비가 와요」	fix	register
+register:REG-27	「みんなの気持ちは分かると思います」	「모두의 마음은 안다고 생각해요」	fix	register
+register:REG-27	「用があるので、帰ります」	「용무가 있으므로, 돌아갑니다」	keep	register
+register:REG-27	「じゃ、私も戻ります」	「그러면, 저도 돌아옵니다」	keep	register
+register:REG-27	「あなたは、無謀な指揮官ではないと考えていました」	has:생각하고 있었습니다	keep	register

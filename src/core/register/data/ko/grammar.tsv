@@ -49,5 +49,6 @@ source.musing	かな	REG-3: a plain end of musing in a lady's polite quote stays
 lower.keep-eomi	dae|sseumnidayo	REG-25: endings kept at 합쇼체: the 해요체 form of 답니다 (대요, 래요) reads as hearsay (거랍니다 is no 거래요); 습니다요 renders the ますです tic
 source.address	皆さん|みなさん|皆様|皆さま|おふたり|お二人|マスター|師匠|陛下|閣下|殿下|王様|あなた|貴方|貴殿|貴公|お客様|お客さま	REG-26: a quote addressing an audience, a master, a lord or royalty, a customer, or the distant あなた (당신) keeps its levels; each term is matched as a word (source.address-notbefore; not inside a longer katakana word: マスターする, マスターズ)
 source.address-notbefore	しすさせ	REG-26: kana after an address term that make it the stem of a verb (マスターした)
-lower.not-will	모르다|알다|되다|이르다|보이다|들리다|생기다|남다|걸리다|어울리다|맞다|틀리다|모자라다	REG-27: verbs of state or cognition: their present 합쇼체 statement states no will and is lowered (모릅니다 → 몰라요, 됩니다 → 돼요)
+source.address-title	王|殿|様|さま	REG-26: a title right after a name used as a call, before 、！？… or the quote's end (ロウリア王、, 穂積殿。): not 魔王は, 王国, 神殿に
+lower.not-will	모르다|생각하다|알다|되다|이르다|보이다|들리다|생기다|남다|걸리다|어울리다|맞다|틀리다|모자라다	REG-27: verbs of state or cognition: their present 합쇼체 statement states no will and is lowered (모릅니다 → 몰라요, 됩니다 → 돼요)
 lower.obligation	-어야|-아야|-여야	REG-27: the connective of an obligation (본받아야 합니다 → 해야 해요): the 하다 after it states no will

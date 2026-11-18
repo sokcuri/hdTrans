@@ -846,6 +846,16 @@ bool Addressed(const std::string& ja, const Tables& t) {
             return true;
         }
     }
+    // a title called with a name (ロウリア王、, 穂積殿。): before a mark that ends the call
+    const std::u32string_view calls = U"、，,！!？?…‥。」』";
+    for (const auto& w : Split(t.G("source.address-title"), '|')) {
+        const std::u32string e = ToU32(w);
+        if (e.empty()) continue;
+        for (std::size_t at = u.find(e); at != std::u32string::npos; at = u.find(e, at + 1)) {
+            const std::size_t n = at + e.size();
+            if (at > 0 && u[at - 1] != U'「' && (n >= u.size() || calls.find(u[n]) != std::u32string_view::npos)) return true;
+        }
+    }
     return false;
 }
 
