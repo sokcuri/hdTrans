@@ -1623,7 +1623,8 @@ bool TopicWa(std::string_view s, size_t pos, Match& m) {
 // A word, then ([たるうすつむぐぬだな])ん(か)?[？?]: the spoken の of a question after a
 // predicate (落ちたん？ 落ちたの？, 言うんか？ 言うのか？). Group 1 the predicate's last
 // kana, group 2 か. うん？, ううん？ and ふうん？ stay, and so do くん and ぶん (コウジくん？,
-// たぶん？) and たん after katakana (ミクたん？); すん after どう or 何 is する (どうするの？).
+// たぶん？) and たん after katakana (ミクたん？); すん after どう or 何 is する (どうするの？). なんなん asks
+// without the ？ before a mark or the end.
 bool QuestionN(std::string_view s, size_t pos, Match& m) {
     if (pos == 0) return false;
     const char32_t before = LastRune(s.substr(0, pos)).cp;
@@ -1643,7 +1644,15 @@ bool QuestionN(std::string_view s, size_t pos, Match& m) {
     Lit(s, p, "か");
     m.group[2] = Span(s, k, p);
     size_t q = p;
-    if (!OneOf(s, q, U"？?")) return false;
+    if (!OneOf(s, q, U"？?")) {
+        // なんなん and 何なん ask without the ？ too, before a mark or the end (これなんなん 이거 뭐야); the なん of
+        // そんなん or あんなん is no question word.
+        const std::string_view head = s.substr(0, pos);
+        const bool asks = m.group[1] == "な" && m.group[2].empty() &&
+                          ((head.ends_with("なん") && !head.ends_with("んなん")) || head.ends_with("何"));
+        q = p;
+        if (!asks || (p != s.size() && !OneOf(s, q, U"！!。．、…‥」』）)～〜 　"))) return false;
+    }
     m.end = p;
     return true;
 }

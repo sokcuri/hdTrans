@@ -552,9 +552,25 @@ std::string_view TextBefore(const Worker& w, const Item* it, int& token) {
     }
 }
 
-bool OpensLine(const Worker& w, const Item* it) {
+namespace {
+
+// TextBefore without the stutter of the item (や、 of や、やばい, な、な、 of な、な、なんて).
+std::string_view TextBeforeStutter(const Worker& w, const Item* it) {
     int token = 0;
-    const std::string_view before = TextBefore(w, it, token);
+    std::string_view before = TextBefore(w, it, token);
+    while (CutStutter(before)) {
+        before = TrimSpace(before);
+        while (before.empty() && token > 0) before = TrimSpace(w.Tok(--token).text);
+    }
+    return before;
+}
+
+}  // namespace
+
+bool StartsLine(const Worker& w, const Item* it) { return TextBeforeStutter(w, it).empty(); }
+
+bool OpensLine(const Worker& w, const Item* it) {
+    const std::string_view before = TextBeforeStutter(w, it);
     return before.empty() || RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
 }
 
