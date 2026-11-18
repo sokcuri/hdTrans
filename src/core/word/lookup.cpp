@@ -8,6 +8,7 @@
 #include "core/tokenizer/classify.h"
 #include "core/word/validity_rules.h"
 #include "core/word/conjugation.h"
+#include "core/word/constraint_rules.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
 #include "core/word/worker.h"
@@ -644,7 +645,7 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
         // An adjectival noun of three letters or more takes its adnominal な (まことしやかな噂; LEX-5116).
         if (next == "な" && pc.size() > 1 && pc[1] == '8' && text::RuneCount(u.key) >= 3 && !rest.starts_with("なが")) return true;
-        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
+        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest) || KanaBeforeSuru(u, rest);
     case kClassKanji:
         return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
@@ -678,6 +679,22 @@ bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const
         if (vp.size() == 4 && vp[1] == '4' && Has(rows, vp.substr(3, 1))) return false;
     }
     return true;
+}
+
+// LEX-6403: whether the kana spelling u, a verbal noun (a noun row with Hd) of three letters or more that the name
+// layer does not hold as a person, is followed by its する: し and a form of する (あやとりしよう 실뜨기를 하자,
+// れんしゅうしてる 연습하고 있다), or する and すれ (あやとりするの). The さ, せ and す of other words stay theirs
+// (ねんどさん, ねんどすき).
+bool Worker::KanaBeforeSuru(const dict::UserEntry& u, std::string_view rest) const {
+    const std::string_view pc = u.codes->partText;
+    if (text::RuneCount(u.key) < 3 || pc.size() < 2 || pc[1] != '1' || !u.codes->gram.HasCode("Hd") ||
+        snapshot.NamePerson(u.key) || ProvenName(u.key)) {
+        return false;
+    }
+    if (rest.starts_with("する") || rest.starts_with("すれ")) return true;
+    if (!rest.starts_with("し")) return false;
+    const std::string_view after = rest.substr(std::string_view("し").size());
+    return SuruFormAfterShi(after) || dict::StartsWithMember(HDTRANS_CLASS("suru.tail"), after) > 0;
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name
