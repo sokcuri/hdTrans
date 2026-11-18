@@ -127,6 +127,16 @@ namespace internal {
 // (아・이・우, あ・ー 아・ー).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// Each hiragana ゔ that no dictionary key holds in katakana (ゔぁいおりん is ヴァイオリン) written as the
+// kana Korean hears: ゔぁ ゔぃ ゔ ゔぇ ゔぉ as ば び ぶ べ ぼ (しゔぁるみゃー しばるみゃー 시바루먀~), and a ゔ
+// alone or before ー, っ, ん or u as the groan う (ゔー 으~). The character set of the dictionary has no ゔ.
+std::string ReadUnheldVu(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Each word spelled out with 、 between its kana (お、は、よ, あ、り、が、と) written as heard, kana by kana
+// with the commas kept (오, 하, 요): three or more pieces of one plain kana each, not next to other kana,
+// kanji or ・, no kana said twice in a row, when the dictionary reads the kana joined as words.
+std::string ReadCommaSpelled(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // Each word spaced out character by character (お　と　な　の, こ ろ し て や る) joined: three or
 // more pieces of JoinSpelledOut with one space or ideographic space between them, not next to
 // other kana or kanji but for a copula or particle after it, when the dictionary or the sound

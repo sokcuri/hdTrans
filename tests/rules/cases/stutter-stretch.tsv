@@ -1,0 +1,56 @@
+# 규칙: LEX-6090, LEX-6091, LEX-6092, LEX-6093, LEX-6094
+rule	input	expected	kind	layer
+sound:tilde-stutter	そ～そんなこと言わないで	has:그~그런	fix	sound
+sound:tilde-stutter	そ～そこまで言うなら	has:거~거기까지	fix	sound
+sound:tilde-stutter	き～きみは誰？	has:너~너는	fix	sound
+sound:tilde-stutter	か～かわいい！	has:귀~귀여	fix	sound
+sound:tilde-stutter	な～なんで？	has:왜~왜	fix	sound
+sound:tilde-stutter	ど～どうしよう	has:어~어떻게	fix	sound
+sound:tilde-stutter	そ〜そんな	has:그~그런	fix	sound
+sound:tilde-stutter	ま～待って！	has:기~기다려	fix	sound
+sound:tilde-stutter	き～君は	has:너~너는	fix	sound
+sound:tilde-stutter	い～一回だけ	has:하~한 번	fix	sound
+sound:tilde-stutter	あ～あいつか。	has:아~저 녀석	keep	sound
+sound:tilde-stutter	い～いねえ～。	has:좋구나	keep	sound
+sound:tilde-stutter	あ～あ	아~아	keep	sound
+sound:tilde-stutter	お～い！	has:어이	keep	sound
+sound:tilde-stutter	あ～そこか	has:아~거기	keep	sound
+sound:tilde-stutter	そ、そんなこと	그, 그런 일	keep	sound
+sound:tilde-stutter	1～3個	has:1~3	keep	sound
+sound:tilde-stutter	東京～大阪	has:도쿄~오사카	keep	sound
+sound:first-kana-stretch	す～ごい	has:대단해~	fix	sound
+sound:first-kana-stretch	す～ごい！	has:대단해~!	fix	sound
+sound:first-kana-stretch	う～まい！	has:맛있어~	fix	sound
+sound:first-kana-stretch	ひ～どい	has:심해~	fix	sound
+sound:first-kana-stretch	こ～わい	has:무서워~	fix	sound
+sound:first-kana-stretch	か～らいぞ～	has:매워	fix	sound
+sound:first-kana-stretch	お～いしい	has:맛있	keep	sound
+sound:first-kana-stretch	す～ごいね	has:대단하네	keep	sound
+sound:first-kana-stretch	や～だ	has:싫어~	keep	sound
+sound:comma-spelled	「木場さん、おおしまくん、お、は、よ」	has:오, 하, 요	fix	sound
+sound:comma-spelled	お、は、よ！	has:오, 하, 요!	fix	sound
+sound:comma-spelled	あ、り、が、と	has:아, 리, 가, 토	fix	sound
+sound:comma-spelled	だ、い、す、き	has:다, 이, 스, 키	fix	sound
+sound:comma-spelled	あ、い、う、え、お	has:아, 이, 우, 에, 오	fix	sound
+sound:comma-spelled	「えっ？　あ、す、す、すみませーんっ！！」	has:죄, 죄, 죄송	keep	sound
+sound:comma-spelled	う、う、う	으, 으, 으	keep	sound
+sound:laugh-tte	「うふふって……別にあたしは……」	has:우후후라니	fix	sound
+sound:laugh-tte	うふふってなによ	has:우후후라니	fix	sound
+sound:laugh-tte	えへへって笑った	has:에헤헤 하고 웃었	fix	sound
+sound:laugh-tte	あははって笑った	has:아하하 하고 웃었	fix	sound
+sound:laugh-tte	ふふって笑った	has:후후 하고	fix	sound
+sound:laugh-tte	ふふふって笑ってた	has:후후후 하고	fix	sound
+sound:laugh-tte	ははって	has:하하라니	fix	sound
+sound:laugh-tte	はいって……	has:들어가	keep	sound
+sound:laugh-tte	いやって言った	has:싫다고	keep	sound
+sound:laugh-tte	ふって	lacks:후라니	keep	sound
+sound:laugh-tte	くって	lacks:큭	keep	sound
+sound:laugh-tte	きゃーーーーって言ってる！	has:라고 말하	keep	sound
+sound:heard-vu	しゔぁるみゃー	has:시바루먀	fix	sound
+sound:heard-vu	しう゛ぁるみゃー	has:시바루먀	fix	sound
+sound:heard-vu	ゔぁ！	바!	fix	sound
+sound:heard-vu	ゔぇ	lacks:ゔ	fix	sound
+sound:heard-vu	ゔー	lacks:ゔ	fix	sound
+sound:heard-vu	ゔぁいおりんを弾く	has:바이올린	keep	sound
+sound:heard-vu	ゔぉーかる	has:보컬	keep	sound
+sound:laugh-tte	……鍵はこうやって、ああって！？	lacks:아아라니	keep	sound

@@ -137,6 +137,22 @@ char32_t WeakU(char32_t r) {
 }
 
 // The vowel that lengthens a vowel (ㅑ ㅏ, ㅘ ㅏ, ㅟ ㅣ).
+// b with the final ㅅ of its last Hangul syllable dropped (아하핫 아하하).
+std::string DropFinalS(std::string b) {
+    std::u32string rs = DecodeText(b);
+    if (!rs.empty() && rs.back() >= text::kBase && rs.back() <= text::kLast && (rs.back() - text::kBase) % 28 == 19) {
+        rs.back() -= 19;
+        return EncodeText(rs);
+    }
+    return b;
+}
+
+// Whether the last Hangul syllable of b has a final consonant.
+bool FinalConsonant(std::string_view b) {
+    const std::u32string rs = DecodeText(b);
+    return !rs.empty() && rs.back() >= text::kBase && rs.back() <= text::kLast && (rs.back() - text::kBase) % 28 != 0;
+}
+
 constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
 
 // The particles that may stand before an ono row inside a hiragana run.
@@ -573,6 +589,8 @@ private:
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
     size_t QuotedBy(const SoundMatch& m, size_t p) const;
+    size_t EchoedBy(const SoundMatch& m, size_t p) const;
+    bool EchoLength(const SoundMatch& m, size_t i) const;
     size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
     size_t Cry(size_t p, std::string& korean) const;
@@ -1489,7 +1507,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
             last.end = end + FinalParticleAt(end);
             return chain;
         }
-        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") || QuotedBy(last, p) > 0 ||
+        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") || QuotedBy(last, p) > 0 || EchoedBy(last, p) > 0 ||
             (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry || (chain.size() == 1 && last.intj && !last.open && DrawnBeforeWord(last.start, last.end)) ||
             (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
@@ -1806,15 +1824,24 @@ size_t SoundText::PausedTo(size_t i) const {
 // where a dictionary word read from p takes the と (うんと, はっと).
 size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
     const std::u32string_view rs = rs_;
-    const size_t i = m.end;
-    // と, or って (ヤダって感じる; spec LEX-4825).
+    // と, or って (ヤダって感じる; spec LEX-4825), whose っ a laugh may have taken (あははって笑った).
+    const size_t i = m.end > m.start + 1 && m.end + 1 < rs.size() && rs[m.end] == U'て' && rs[m.end - 1] == U'っ' ? m.end - 1 : m.end;
     const bool tte = i + 2 < rs.size() && rs[i] == U'っ' && rs[i + 1] == U'て';
     if (!m.intj || (m.phrase && !m.cry) || m.lead || m.open || i + 1 >= rs.size() || (rs[i] != U'と' && !tte) ||
         (!tte && In(rs[i + 1], U"とトしすさせ、，…‥"))) {
         return 0;
     }
-    if (StartsLongerWord(i)) return 0;
     size_t base = 0, user = 0, name = 0;
+    if (tte) {
+        if (!EchoLength(m, i)) return 0;
+        // って itself is a key; only a longer word that starts with it takes it (ってば).
+        size_t nextBase = 0, nextUser = 0, nextName = 0;
+        LongestKeys(i, base, user, name);
+        LongestKeys(i + 2, nextBase, nextUser, nextName);
+        if (base > 2 && base >= 2 + std::max(nextBase, nextUser)) return 0;
+    } else if (StartsLongerWord(i)) {
+        return 0;
+    }
     LongestKeys(p, base, user, name);
     if (p + std::max(base, user) > i) return 0;
     for (size_t k = i + (tte ? 2 : 1); k < rs.size() && k <= i + 8; k++) {
@@ -1823,10 +1850,46 @@ size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
         const std::string_view at = text_.substr(offsets_[k]);
         if (dict::StartsWithMember(HDTRANS_CLASS("sound.quoted-by"), at) > 0) {
             // Xと言わせる is a set phrase (ギャフンと言わせる 꼼짝 못하게 만들다, アッと言わせる).
+            // Before a verb of saying って quotes the words (きゃーって言ってる 꺄~라고 말하고 있어).
+            if (tte && (at.starts_with("言") || at.starts_with("呟") || at.starts_with("つぶや") || at.starts_with("囁") || at.starts_with("ささや") ||
+                        at.starts_with("答え") || at.starts_with("応え") || at.starts_with("返"))) {
+                return 0;
+            }
             return at.starts_with("言わせ") || at.starts_with("いわせ") ? 0 : i + (tte ? 2 : 1);
         }
     }
     return 0;
+}
+
+// Whether the sound m, before the って at character i, may take it: three kana or more before
+// the って, or a laugh of one kana other than a vowel said twice (ふふって, ははって; not the ああ of
+// こうやって、ああって); a sound of one or two kana other than that may be a verb's te form (はいって,
+// いやって言った, ふって, やって).
+bool SoundText::EchoLength(const SoundMatch& m, size_t i) const {
+    return i >= m.start + 3 || (i == m.start + 2 && f_[m.start] == f_[m.start + 1] && !In(f_[m.start], U"アイウエオ"));
+}
+
+// The character after the って that echoes the interjection m, whose chain starts at character p,
+// right after it (its っ may be the laugh's own: うふふって): before the end of the text, a pause, a
+// closing bracket or 何 (うふふって…… 우후후라니……, えへへって何 에헤헤라니 뭐), where the sound is said
+// back; 0 otherwise, where a longer word takes the って (ってば), or where a dictionary word read from p
+// takes it.
+size_t SoundText::EchoedBy(const SoundMatch& m, size_t p) const {
+    const std::u32string_view rs = rs_;
+    const size_t i = m.end > m.start + 1 && m.end < rs.size() && rs[m.end] == U'て' && rs[m.end - 1] == U'っ' ? m.end - 1 : m.end;
+    if (!m.intj || (m.phrase && !m.cry) || m.lead || m.open || !EchoLength(m, i) || i + 1 >= rs.size() || rs[i] != U'っ' || rs[i + 1] != U'て') {
+        return 0;
+    }
+    const size_t after = i + 2;
+    size_t base = 0, user = 0, name = 0, nextBase = 0, nextUser = 0, nextName = 0;
+    LongestKeys(i, base, user, name);
+    if (after < rs.size()) LongestKeys(after, nextBase, nextUser, nextName);
+    if (base > 2 && base >= 2 + std::max(nextBase, nextUser)) return 0;
+    LongestKeys(p, base, user, name);
+    if (p + std::max(base, user) > i) return 0;
+    if (after == rs.size() || In(rs[after], U"、，。．！？!?…‥」』）)\n")) return after;
+    const std::u32string_view rest = rs.substr(after);
+    return rest.starts_with(U"何") || rest.starts_with(U"なに") || rest.starts_with(U"なん") ? after : 0;
 }
 
 // The end of the stutter at character p and its pieces, or 0: a kana syllable (with
@@ -1902,9 +1965,22 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
             }
         }
     }
+    // A ～ or 〜 run separates a syllable said again only before a word that starts with it: a
+    // kana word of more than the syllable (そ～そんな 그~그런, き～きみ) or a word in kanji whose
+    // reading it starts (き～君 너~너); a drawn syllable before another word stays a sound (あ～あ, お～い).
+    const auto tildeSeparator = [&](size_t j) -> size_t {
+        size_t e = j;
+        while (e < rs.size() && In(rs[e], U"～〜")) e++;
+        if (e == j || e >= rs.size() || smallOf != 0) return 0;
+        // A vowel drawn out before a kana word is a cry (あ～あいつか 아~저 녀석인가, い～いね 좋구나).
+        if (f.substr(e, n) == x && WordLen(e) > n && !In(x[0], U"アイウエオ")) return e - j;
+        if (IsKanjiRune(rs[e]) && StutterHeadMora(rs, e, true) == x) return e - j;
+        return 0;
+    };
     size_t i = p;
     while (f.substr(i, n) == x) {
-        const size_t k = SpacedStutterSeparator(rs, i + n);
+        size_t k = SpacedStutterSeparator(rs, i + n);
+        if (k == 0) k = tildeSeparator(i + n);
         if (k == 0) break;
         pieces.push_back({rs.substr(i + n, k)});
         i += n + k;
@@ -2470,9 +2546,21 @@ std::string SoundText::Write() {
             }
             lastCry = chain.back();
             // A と right after an interjection quotes it before a word of sound.quoted-by (ふふふと笑った 후후후 하고 웃었다).
+            // A laugh that took the っ of って is said without it (あははって 아하하 하고, not 아하핫).
+            const auto dropTsu = [&] {
+                const size_t e = chain.back().end;
+                if (e < rs.size() && rs[e] == U'て' && rs[e - 1] == U'っ') b = DropFinalS(std::move(b));
+            };
             if (const size_t said = QuotedBy(chain.back(), chain.front().start); said > 0) {
+                dropTsu();
                 b += " 하고";
                 next = said;
+                if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (const size_t echoed = EchoedBy(chain.back(), chain.front().start); echoed > 0) {
+                // The sound said back with って (うふふって…… 우후후라니……).
+                dropTsu();
+                b += FinalConsonant(b) ? "이라니" : "라니";
+                next = echoed;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
             } else if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
                 // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
@@ -4204,7 +4292,7 @@ std::string PlainSpaces(std::string text) {
 
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::ReadCommaSpelled(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(
@@ -4220,6 +4308,10 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
     // What the sound passes leave in an unusual spelling (spec LEX-4822).
     if (std::string respelled = internal::RewriteSpellingVariants(sounded, ctx, snap); respelled != sounded) {
         sounded = internal::WriteSounds(respelled, ctx, snap);
+    }
+    // A ゔ that no pass has read as a key in katakana is heard (しゔぁるみゃー 시바루먀~).
+    if (std::string heard = internal::ReadUnheldVu(sounded, ctx, snap); heard != sounded) {
+        sounded = internal::WriteSounds(heard, ctx, snap);
     }
     return PlainSpaces(internal::WriteCries(sounded, ctx, snap));
 }

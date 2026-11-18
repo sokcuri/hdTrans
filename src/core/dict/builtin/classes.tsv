@@ -497,7 +497,7 @@
 //= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
-//= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
+//= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
 //= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
 //= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
@@ -10667,6 +10667,10 @@ sound.stutter-head	ダ出し
 sound.stutter-head	ダ出す
 sound.stutter-head	ダ出せ
 sound.stutter-head	ダ出そ
+sound.stutter-head	キ君
+sound.stutter-head	カ可愛
+sound.stutter-head	ス凄
+sound.stutter-head	ス好
 word.confirm-action	上書き
 word.confirm-action	保存
 word.confirm-action	セーブ

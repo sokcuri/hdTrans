@@ -2291,8 +2291,10 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
             for (size_t j = from; j < k; j++) {
                 const std::string text = EncodeText(std::u32string_view(t).substr(j, std::min(t.size() - j, kMaxKeyRunes)));
                 for (const dict::Candidate& cand : snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup).list) {
-                    const size_t n = text::RuneCount(cand.source);
                     const std::string_view part = cand.codes != nullptr ? cand.codes->partText : std::string_view();
+                    // An adjective stem counts with its い (すご|い of す～ごい).
+                    size_t n = text::RuneCount(cand.source);
+                    if (!part.empty() && part[0] == 'H' && j + n < t.size() && t[j + n] == U'い') n++;
                     if (n < minLen || j + n <= k || part.size() < 3 || !In(part[0], U"NIMHG") || part[2] == '3') continue;
                     best = std::max(best, j + n);
                 }
@@ -2338,7 +2340,8 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
                 // own (あ～そこ 아~거기).
                 m = rs.substr(0, k) + rs.substr(end);
                 best = reach(m, 3);
-                if (best < k + 2 || e.Tags(std::u32string_view(m).substr(k - 1, best - k + 1)).find('H') == std::string::npos) best = 0;
+                const auto adjective = [&](size_t len) { return e.Tags(std::u32string_view(m).substr(k - 1, len)).find('H') != std::string::npos; };
+                if (best < k + 2 || !(adjective(best - k + 1) || (m[best - 1] == U'い' && adjective(best - k)))) best = 0;
             }
             if (best == 0 && (v == 3 || v == 4) && starts && next != U'っ' && next != U'ん') {
                 m = Spliced(rs, k, v == 3 ? U"い" : U"う", end);
@@ -3207,6 +3210,93 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
     if (!changed) return std::string(text);
     out.append(rs, at, std::u32string::npos);
     return EncodeText(out);
+}
+
+std::string ReadUnheldVu(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find("ゔ") == std::string_view::npos && text.find("う゛") == std::string_view::npos &&
+        text.find("う\u3099") == std::string_view::npos) {
+        return std::string(text);
+    }
+    std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    bool changed = false;
+    for (size_t i = 0; i < rs.size(); i++) {
+        // The mark that the normalize stage left apart (しう゛ぁるみゃー) is the same ゔ.
+        if (rs[i] == U'う' && i + 1 < rs.size() && In(rs[i + 1], U"゛\u3099")) {
+            rs = Spliced(rs, i, U"ゔ", i + 2);
+            changed = true;
+        }
+        if (rs[i] != U'ゔ') continue;
+        size_t a = i, z = i + 1;
+        while (a > 0 && IsHiraganaRune(rs[a - 1])) a--;
+        while (z < rs.size() && IsHiraganaRune(rs[z])) z++;
+        const std::u32string kata = ToKatakana(rs.substr(a, z - a));
+        bool held = false;
+        for (size_t j = a; j <= i && !held; j++) held = j + e.LongestKey(std::u32string_view(kata).substr(j - a)) > i;
+        if (held) continue;
+        const char32_t next = i + 1 < rs.size() ? rs[i + 1] : 0;
+        std::u32string heard;
+        size_t end = i + 1;
+        switch (next) {
+            case U'ぁ': heard = U"ば"; end++; break;
+            case U'ぃ': heard = U"び"; end++; break;
+            case U'ぇ': heard = U"べ"; end++; break;
+            case U'ぉ': heard = U"ぼ"; end++; break;
+            case U'ゃ': heard = U"びゃ"; end++; break;
+            case U'ゅ': heard = U"びゅ"; end++; break;
+            case U'ょ': heard = U"びょ"; end++; break;
+            default:
+                // Before a lengthening, っ, ん or another u, or alone, it is a groan in u (ゔー 으~).
+                heard = next == 0 || !IsJapaneseRune(next) || In(next, U"ーっんぅう～") ? U"う" : U"ぶ";
+        }
+        rs = Spliced(rs, i, heard, end);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
+std::string ReadCommaSpelled(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find("、") == std::string_view::npos) return std::string(text);
+    std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    const auto plainKana = [](char32_t r) {
+        return (IsHiraganaRune(r) || IsKatakanaRune(r)) && !IsSmallVowel(r) &&
+               !In(r, U"ーっッゃゅょャュョゎヮぁぃぅぇぉァィゥェォ");
+    };
+    bool changed = false;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if ((i > 0 && IsWordRune(rs[i - 1])) || !plainKana(rs[i])) continue;
+        size_t end = i + 1, pieces = 1;
+        while (end + 1 < rs.size() && rs[end] == U'、' && plainKana(rs[end + 1]) && (end + 2 >= rs.size() || !IsWordRune(rs[end + 2]))) {
+            end += 2;
+            pieces++;
+        }
+        // Not a run that goes on into a word after another comma (す、す、すみません).
+        if (pieces < 3 || (end < rs.size() && (IsWordRune(rs[end]) || rs[end] == U'、'))) {
+            i = end - 1;
+            continue;
+        }
+        std::u32string joined;
+        bool same = false;  // a kana said again is a stutter (す、す), not a spelling
+        for (size_t k = i; k < end; k += 2) {
+            joined.push_back(rs[k]);
+            same = same || (k > i && rs[k] == rs[k - 2]);
+        }
+        const std::u32string core = ToHiragana(joined);
+        if (same || !e.ReadsAll(core) || (e.NameKey(core, true) && !e.WordKey(core))) {
+            i = end - 1;
+            continue;
+        }
+        std::u32string heard;
+        for (size_t k = i; k < end; k += 2) {
+            if (k > i) heard.push_back(U'、');
+            heard += DecodeText(ReadKana(EncodeText(ToHiragana(std::u32string(1, rs[k])))));
+        }
+        rs = Spliced(rs, i, heard, end);
+        i += heard.size() - 1;
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
 }
 
 // Whether w is one word of the dictionary: a key, kana spellings included, alone or before a

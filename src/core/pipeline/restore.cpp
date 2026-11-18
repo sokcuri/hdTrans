@@ -466,10 +466,18 @@ std::string WriteStutters(std::string_view s) {
         while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
         while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
         i += marks + rest - 1;
-        const size_t k = internal::StutterSeparator(rs, i + 1);
+        size_t k = internal::StutterSeparator(rs, i + 1);
+        // A ～ the sound stage took as the separator (そ～そんな 그~그런) is written as one ~.
+        if (k == 0) {
+            while (i + 1 + k < rs.size() && Contains(U"~～〜", rs[i + 1 + k])) k++;
+        }
         std::u32string sep = rs.substr(i + 1, k);
+        const bool tilde = !sep.empty() && Contains(U"~～〜", sep[0]);
+        if (tilde) sep = U"~";
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
+        // The word goes on right after the ~ (な～なんで 왜~왜).
+        while (tilde && i + 1 < rs.size() && rs[i + 1] == U' ') i++;
         size_t j = i + 1;
         while (j < rs.size()) {
             if (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest) {
