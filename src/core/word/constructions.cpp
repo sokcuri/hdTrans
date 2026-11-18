@@ -1184,6 +1184,326 @@ void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
         if (!in(c.shared, a)) c.shared.push_back(a);
 }
 
+// Whether the atoms of field read only what no action changes: the text of the words, whose surfaces
+// and links stay as they are (Apply).
+bool FixedField(CxField field) {
+    return field == CxField::Surface || field == CxField::Text || field == CxField::Head || field == CxField::Tail;
+}
+
+// Whether the atoms of field compare one value of the word, which an index of the values can find
+// (Holds, FieldValue).
+bool IndexedField(CxField field) {
+    return field == CxField::Surface || field == CxField::Text || field == CxField::Lemma || field == CxField::Target ||
+           field == CxField::EndingSurface || field == CxField::EndingTarget;
+}
+
+// How a literal v compares a value as MatchesLiteral and rules::MatchRuleSurface read it: equal to,
+// starting with, ending with or holding key; false for 00 (the value is part of the literal).
+bool LiteralProbe(std::string_view v, CxProbe& probe, std::string_view& key) {
+    probe = CxProbe::Exact;
+    if (v.size() > 1 && v[0] == '~') {
+        probe = CxProbe::Contains;
+        v.remove_prefix(1);
+    } else if (v.starts_with("L") || v.starts_with("R")) {
+        probe = v[0] == 'L' ? CxProbe::Prefix : CxProbe::Suffix;
+        v.remove_prefix(1);
+    } else if (v.starts_with("11") || v.starts_with("22")) {
+        probe = v[0] == '1' ? CxProbe::Prefix : CxProbe::Suffix;
+        v.remove_prefix(2);
+    } else if (v.starts_with("00")) {
+        return false;
+    } else if (v.starts_with("99")) {
+        v.remove_prefix(2);
+    }
+    key = v;
+    return true;
+}
+
+// How an index of the values of field finds the words where atom a may hold: those whose value equals,
+// starts with, ends with, is the start of or holds one of strings (MatchesValue: a class, or a literal
+// with the surface markers of the rules but 00). A word (B) needs its surface to be the start of the
+// word or of a class member (IsWord), and is found among the surfaces. False for another atom.
+bool ProbeOf(const CxAtom& a, CxField& field, CxProbe& probe, std::vector<std::string_view>& strings) {
+    if (a.negated) return false;
+    field = a.field;
+    if (a.field == CxField::Word) {
+        field = CxField::Surface;
+        probe = CxProbe::Within;
+        if (a.set == nullptr) {
+            strings.push_back(a.value);
+        } else {
+            strings.insert(strings.end(), a.set->members.begin(), a.set->members.end());
+        }
+        return true;
+    }
+    if (!IndexedField(a.field)) return false;
+    switch (a.match) {
+        case CxMatch::Member: probe = CxProbe::Exact; break;
+        case CxMatch::MemberStart: probe = CxProbe::Prefix; break;
+        case CxMatch::MemberEnd: probe = CxProbe::Suffix; break;
+        case CxMatch::Literal: {
+            std::string_view key;
+            if (!LiteralProbe(a.value, probe, key)) return false;
+            strings.push_back(key);
+            return true;
+        }
+        case CxMatch::Feature: return false;
+    }
+    strings.insert(strings.end(), a.set->members.begin(), a.set->members.end());
+    return true;
+}
+
+// Whether the words where atom a may hold are found once a run of the families: by an index of a
+// field, or by the atom, that reads only what no action changes (a word, B, among the surfaces).
+bool AnchorFixed(const CxAtom& a) { return a.field == CxField::Word || FixedField(a.field); }
+
+// The most members of a word class whose surfaces count as exact surfaces in AnchorCost.
+constexpr std::size_t kMostKeyMembers = 8;
+
+// About how many words an anchor lets through, relative to an exact surface: an atom that tests the
+// text of the word otherwise (a start, an end, a large class) a few more; one that compares a value
+// of the chosen reading (D, L, Y, U, B, C, O) a few more again; one of a category many words share (a
+// part of speech, a meaning, a class, a grammar code or a feature) many more.
+std::size_t AnchorCost(const CxAtom& a) {
+    CxProbe probe = CxProbe::Exact;
+    std::string_view key;
+    if (a.field == CxField::Surface && !a.negated &&
+        ((a.match == CxMatch::Member && a.set->members.size() <= kMostKeyMembers) ||
+         (a.match == CxMatch::Literal && LiteralProbe(a.value, probe, key) && probe == CxProbe::Exact))) {
+        return 1;
+    }
+    if (FixedField(a.field)) return 3;
+    switch (a.field) {
+        case CxField::Part:
+        case CxField::Sem:
+        case CxField::Class:
+        case CxField::Gram:
+        case CxField::Feature: return 16;
+        default: return 4;
+    }
+}
+
+std::size_t AnchorCost(const ConstructionTable& t, const std::vector<uint32_t>& atoms) {
+    std::vector<uint32_t> seen;
+    std::size_t cost = 0;
+    for (const uint32_t a : atoms) {
+        if (std::ranges::find(seen, t.atoms[a].slot) != seen.end()) continue;
+        seen.push_back(t.atoms[a].slot);
+        cost += AnchorCost(t.atoms[a]);
+    }
+    return cost;
+}
+
+// Adds to clauses the clauses of the condition at node i: lists of atoms, one of each of which must
+// hold at the word for the condition to hold; false when it adds none. An atom (not one written with
+// !=, which holds on most words) is a clause; a list && or & has the clauses of its operands; a list
+// || of operands that each have one has one, the cheapest of each (AnchorCost). Atoms under a scan
+// or a ! are read at other words or negated, and give none.
+bool AnchorClauses(const ConstructionTable& t, uint32_t i, std::vector<std::vector<uint32_t>>& clauses) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) {
+        if (t.atoms[n.count].negated) return false;
+        clauses.push_back({n.count});
+        return true;
+    }
+    if (n.kind != rules::BodyKind::Or && n.kind != rules::BodyKind::And && n.kind != rules::BodyKind::AndAll) return false;
+    bool found = false;
+    std::vector<uint32_t> any;
+    std::vector<std::vector<uint32_t>> own;
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) {
+        if (n.kind != rules::BodyKind::Or) {
+            found = AnchorClauses(t, child, clauses) || found;
+            continue;
+        }
+        own.clear();
+        if (!AnchorClauses(t, child, own)) return false;
+        const auto cheapest = std::ranges::min_element(own, {}, [&t](const auto& c) { return AnchorCost(t, c); });
+        any.insert(any.end(), cheapest->begin(), cheapest->end());
+    }
+    if (n.kind == rules::BodyKind::Or) {
+        clauses.push_back(std::move(any));
+        return true;
+    }
+    return found;
+}
+
+// Fills anchors from the cheapest of clauses (AnchorCost), one atom of each slot.
+void FillAnchors(const ConstructionTable& t, const std::vector<std::vector<uint32_t>>& clauses, CxAnchors& anchors) {
+    anchors = CxAnchors{};
+    if (clauses.empty()) return;
+    anchors.atoms = *std::ranges::min_element(clauses, {}, [&t](const auto& c) { return AnchorCost(t, c); });
+    const auto slotOf = [&t](uint32_t a) { return t.atoms[a].slot; };
+    std::ranges::sort(anchors.atoms, {}, slotOf);
+    const auto [first, last] = std::ranges::unique(anchors.atoms, {}, slotOf);
+    anchors.atoms.erase(first, last);
+    anchors.found = true;
+    for (const uint32_t a : anchors.atoms) {
+        if (!AnchorFixed(t.atoms[a])) anchors.changing.push_back(a);
+    }
+}
+
+// Fills the anchors of family c, once the atoms have slots: the cheapest of the clauses of its guard,
+// the clause with the cheapest clause of each row, and the clauses every row has.
+void AnchorFamily(const ConstructionTable& t, CxFamily& c) {
+    std::vector<std::vector<uint32_t>> all, common, own;
+    if (c.guard != kNoGuard) AnchorClauses(t, c.guard, all);
+    // The slots of a clause, sorted: two clauses with the same are one.
+    const auto slots = [&t](const std::vector<uint32_t>& clause) {
+        std::vector<uint32_t> v;
+        for (const uint32_t a : clause) v.push_back(t.atoms[a].slot);
+        std::ranges::sort(v);
+        const auto [first, last] = std::ranges::unique(v);
+        v.erase(first, last);
+        return v;
+    };
+    std::vector<std::vector<uint32_t>> commonSlots, ownSlots;
+    std::vector<uint32_t> any;
+    bool each = !c.rows.empty();
+    for (std::size_t k = 0; k < c.rows.size(); k++) {
+        own.clear();
+        if (!AnchorClauses(t, t.rows[static_cast<std::size_t>(c.rows[k])].root, own)) {
+            each = false;
+            common.clear();
+            break;
+        }
+        ownSlots.clear();
+        for (const auto& clause : own) ownSlots.push_back(slots(clause));
+        if (k == 0) {
+            common = own;
+            commonSlots = ownSlots;
+        } else {
+            for (std::size_t j = common.size(); j-- > 0;) {
+                if (std::ranges::find(ownSlots, commonSlots[j]) != ownSlots.end()) continue;
+                common.erase(common.begin() + static_cast<std::ptrdiff_t>(j));
+                commonSlots.erase(commonSlots.begin() + static_cast<std::ptrdiff_t>(j));
+            }
+        }
+        const auto cheapest = std::ranges::min_element(own, {}, [&t](const auto& o) { return AnchorCost(t, o); });
+        any.insert(any.end(), cheapest->begin(), cheapest->end());
+    }
+    if (each) all.push_back(std::move(any));
+    all.insert(all.end(), common.begin(), common.end());
+    FillAnchors(t, all, c.anchors);
+}
+
+// A CxTrie being filled: the children of each node by byte, and the families of its keys.
+struct TrieBuilder {
+    std::vector<std::vector<std::pair<uint8_t, uint32_t>>> children{1};
+    std::vector<std::vector<uint32_t>> whole{1}, part{1}, within{1};
+
+    // Adds key, read backward when reversed, for family: whole, as a start, end or part (part), or
+    // as what the value may start (within: on each node of its path).
+    void Add(std::string_view key, bool reversed, CxProbe probe, uint32_t family) {
+        const auto list = [&](std::vector<uint32_t>& families) {
+            if (std::ranges::find(families, family) == families.end()) families.push_back(family);
+        };
+        uint32_t node = 0;
+        if (probe == CxProbe::Within) list(within[0]);
+        for (std::size_t k = 0; k < key.size(); k++) {
+            const auto byte = static_cast<uint8_t>(key[reversed ? key.size() - 1 - k : k]);
+            auto& edges = children[node];
+            const auto found = std::ranges::find(edges, byte, [](const auto& e) { return e.first; });
+            if (found != edges.end()) {
+                node = found->second;
+                if (probe == CxProbe::Within) list(within[node]);
+                continue;
+            }
+            const auto child = static_cast<uint32_t>(children.size());
+            edges.emplace_back(byte, child);
+            children.emplace_back();
+            whole.emplace_back();
+            part.emplace_back();
+            within.emplace_back();
+            node = child;
+            if (probe == CxProbe::Within) list(within[node]);
+        }
+        if (probe == CxProbe::Exact) list(whole[node]);
+        if (probe != CxProbe::Exact && probe != CxProbe::Within) list(part[node]);
+    }
+
+    CxTrie Build() {
+        CxTrie t;
+        for (std::size_t n = 0; n < children.size(); n++) {
+            CxTrie::Node node;
+            std::ranges::sort(children[n]);
+            node.edges = static_cast<uint32_t>(t.edges.size());
+            node.edgeCount = static_cast<uint32_t>(children[n].size());
+            t.edges.insert(t.edges.end(), children[n].begin(), children[n].end());
+            node.whole = static_cast<uint32_t>(t.families.size());
+            node.wholeCount = static_cast<uint32_t>(whole[n].size());
+            t.families.insert(t.families.end(), whole[n].begin(), whole[n].end());
+            node.part = static_cast<uint32_t>(t.families.size());
+            node.partCount = static_cast<uint32_t>(part[n].size());
+            t.families.insert(t.families.end(), part[n].begin(), part[n].end());
+            node.within = static_cast<uint32_t>(t.families.size());
+            node.withinCount = static_cast<uint32_t>(within[n].size());
+            t.families.insert(t.families.end(), within[n].begin(), within[n].end());
+            t.nodes.push_back(node);
+        }
+        return t;
+    }
+};
+
+// Fills the index of the families after each pass by their anchors (CxPassIndex).
+void IndexPasses(ConstructionTable& t) {
+    t.passIndex.assign(t.afterPass.size(), {});
+    std::vector<std::string_view> strings;
+    // The anchors that are tried on each word, numbered by slot.
+    std::unordered_map<uint32_t, uint32_t> numbers;
+    const auto number = [&](uint32_t atom) {
+        const auto [found, added] = numbers.try_emplace(t.atoms[atom].slot, static_cast<uint32_t>(t.anchorAtoms.size()));
+        if (added) t.anchorAtoms.push_back(atom);
+        return found->second;
+    };
+    for (std::size_t pass = 0; pass < t.afterPass.size(); pass++) {
+        CxPassIndex& index = t.passIndex[pass];
+        std::vector<std::tuple<TrieBuilder, TrieBuilder, TrieBuilder>> builders;
+        for (std::size_t place = 0; place < t.afterPass[pass].size(); place++) {
+            const auto family = static_cast<uint32_t>(place);
+            const CxAnchors& anchors = t.families[static_cast<std::size_t>(t.afterPass[pass][place])].anchors;
+            if (!anchors.found) index.open.push_back(family);
+            if (!anchors.changing.empty()) index.changers.push_back(family);
+            for (const uint32_t i : anchors.atoms) {
+                const CxAtom& a = t.atoms[i];
+                CxField field = a.field;
+                CxProbe probe = CxProbe::Exact;
+                strings.clear();
+                if (!ProbeOf(a, field, probe, strings)) {
+                    (FixedField(a.field) ? index.slots : index.changing).emplace_back(number(i), family);
+                    continue;
+                }
+                auto values = std::ranges::find_if(index.values, [&](const CxValueIndex& v) { return v.field == field && v.delta == a.delta; });
+                if (values == index.values.end()) {
+                    values = index.values.insert(index.values.end(), CxValueIndex{});
+                    values->field = field;
+                    values->delta = a.delta;
+                    values->fixed = FixedField(field);
+                    builders.emplace_back();
+                }
+                auto& [forward, backward, inner] = builders[static_cast<std::size_t>(values - index.values.begin())];
+                for (const std::string_view key : strings) {
+                    if (probe == CxProbe::Suffix) {
+                        backward.Add(key, true, probe, family);
+                    } else if (probe == CxProbe::Contains) {
+                        inner.Add(key, false, probe, family);
+                    } else {
+                        forward.Add(key, false, probe, family);
+                    }
+                }
+            }
+        }
+        for (std::size_t k = 0; k < index.values.size(); k++) {
+            index.values[k].forward = std::get<0>(builders[k]).Build();
+            index.values[k].backward = std::get<1>(builders[k]).Build();
+            index.values[k].inner = std::get<2>(builders[k]).Build();
+        }
+        std::ranges::sort(index.slots);
+        std::ranges::sort(index.changing);
+        index.changes = !index.changing.empty() || std::ranges::any_of(index.values, [](const CxValueIndex& v) { return !v.fixed; });
+    }
+}
+
 }  // namespace
 
 namespace {
@@ -1450,6 +1770,8 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             same.push_back(i);
         }
     }
+    for (CxFamily& c : t.families) AnchorFamily(t, c);
+    IndexPasses(t);
     return t;
 }
 
@@ -1573,6 +1895,31 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
         }
     }
     return v != a.negated;
+}
+
+// The value of field on the word x as Holds reads it, into v (own holds a value made for it); false
+// when the word has none.
+bool FieldValue(Flusher& f, const Item* x, CxField field, std::string& own, std::string_view& v) {
+    switch (field) {
+        case CxField::Surface: v = x->group->surface; return true;
+        case CxField::Text: v = Slice(x->text, x->start, x->length); return true;
+        case CxField::Lemma:
+            own = ItemLemma(f, x, x->selected);
+            v = own;
+            return true;
+        case CxField::Target: v = x->EntryText(x->selected); return true;
+        case CxField::EndingSurface:
+            if (x->DirectIndex() < 0) return false;
+            v = x->DirectSurface();
+            return true;
+        case CxField::EndingTarget: {
+            const Entry* e = x->DirectEntry(x->DirectIndex());
+            if (e == nullptr) return false;
+            v = e->dst;
+            return true;
+        }
+        default: return false;
+    }
 }
 
 // Holds, remembered on the word being tried (Flusher::constructions), where nothing changes until a
@@ -1909,19 +2256,142 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
     if (c.slots.size() < t.slots) c.slots.resize(t.slots);
     constexpr uint32_t kNoSurface = UINT32_MAX;
     c.surfaces.clear();
-    for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+    c.items.clear();
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const auto found = t.surfaces.find(std::string_view(it->group->surface));
         c.surfaces.push_back(found != t.surfaces.end() ? found->second : kNoSurface);
+        c.items.push_back(it);
     }
-    for (const int k : t.afterPass[pass]) {
-        const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
+    // The epochs: the stretches of this run between rows that fire. The places where the atoms of a
+    // slot hold are found once in an epoch, or once in the run for a slot whose atoms read what no
+    // action changes (FixedField).
+    if (c.slotEpochs.size() < t.anchorAtoms.size()) {
+        c.slotEpochs.resize(t.anchorAtoms.size());
+        c.slotPlaces.resize(t.anchorAtoms.size());
+    }
+    const auto nextEpoch = [&c] {
+        if (++c.epoch == UINT32_MAX) {
+            std::ranges::fill(c.slotEpochs, 0);
+            c.epoch = 1;
+            c.epochStart = 1;
+            c.changedEpoch = 0;
+        }
+    };
+    nextEpoch();
+    c.epochStart = c.epoch;
+    const auto slotPlaces = [&](uint32_t slot) -> const std::vector<uint32_t>& {
+        std::vector<uint32_t>& places = c.slotPlaces[slot];
+        const CxAtom& a = t.atoms[t.anchorAtoms[slot]];
+        if (c.slotEpochs[slot] < (FixedField(a.field) ? c.epochStart : c.epoch)) {
+            places.clear();
+            for (std::size_t at = 0; at < c.items.size(); at++) {
+                if (Holds(f, c.items[at], a)) places.push_back(static_cast<uint32_t>(at));
+            }
+            c.slotEpochs[slot] = c.epoch;
+        }
+        return places;
+    };
+    // Adds to out the families from on after the pass, with the places of the words, where an anchor
+    // of values holds.
+    const internal::CxPassIndex& index = t.passIndex[pass];
+    const auto probe = [&](const internal::CxValueIndex& values, uint32_t from, std::vector<std::pair<uint32_t, uint32_t>>& out) {
+        for (std::size_t at = 0; at < c.items.size(); at++) {
+            const Item* x = Neighbour(static_cast<const Item*>(c.items[at]), values.delta);
+            std::string_view v;
+            if (x == nullptr || !FieldValue(f, x, values.field, c.lemma, v)) continue;
+            const auto add = [&](const internal::CxTrie& trie, uint32_t first, uint32_t count) {
+                for (uint32_t k = first; k < first + count; k++) {
+                    if (const uint32_t family = trie.families[k]; family >= from) out.emplace_back(family, static_cast<uint32_t>(at));
+                }
+            };
+            // From the start: the keys v starts with, then those it equals or starts; from the end:
+            // those it ends with; from each byte: those it holds.
+            const auto walk = [&](const internal::CxTrie& trie, std::size_t start, bool reversed) {
+                uint32_t node = 0;
+                for (std::size_t k = start;; k++) {
+                    const internal::CxTrie::Node& n = trie.nodes[node];
+                    add(trie, n.part, n.partCount);
+                    if (k == v.size()) {
+                        add(trie, n.whole, n.wholeCount);
+                        add(trie, n.within, n.withinCount);
+                        return;
+                    }
+                    const auto byte = static_cast<uint8_t>(v[reversed ? v.size() - 1 - k : k]);
+                    const auto edges = std::span(trie.edges).subspan(n.edges, n.edgeCount);
+                    const auto edge = std::ranges::lower_bound(edges, byte, {}, [](const auto& e) { return e.first; });
+                    if (edge == edges.end() || edge->first != byte) return;
+                    node = edge->second;
+                }
+            };
+            if (!values.forward.families.empty()) walk(values.forward, 0, false);
+            if (!values.backward.families.empty()) walk(values.backward, 0, true);
+            if (!values.inner.families.empty()) {
+                for (std::size_t start = 0; start <= v.size(); start++) walk(values.inner, start, false);
+            }
+        }
+    };
+    const auto settle = [](std::vector<std::pair<uint32_t, uint32_t>>& v) {
+        std::ranges::sort(v);
+        const auto [first, last] = std::ranges::unique(v);
+        v.erase(first, last);
+    };
+    // The candidates of the anchors no action changes, once a run.
+    c.candidates.clear();
+    if (tally == nullptr) {
+        for (const internal::CxValueIndex& values : index.values) {
+            if (values.fixed) probe(values, 0, c.candidates);
+        }
+        for (const auto& [slot, family] : index.slots) {
+            for (const uint32_t at : slotPlaces(slot)) c.candidates.emplace_back(family, at);
+        }
+        settle(c.candidates);
+    }
+    // The candidates of the other anchors, while no row of this run has fired (then a family tries
+    // them on each word: finding them anew for the whole chain after each row that fires would take
+    // time in the square of its length where rows fire often).
+    const auto changed = [&] {
+        if (c.changedEpoch == c.epoch) return;
+        c.changed.clear();
+        for (const internal::CxValueIndex& values : index.values) {
+            if (!values.fixed) probe(values, 0, c.changed);
+        }
+        for (const auto& [slot, family] : index.changing) {
+            for (const uint32_t at : slotPlaces(slot)) c.changed.emplace_back(family, at);
+        }
+        settle(c.changed);
+        c.changedEpoch = c.epoch;
+    };
+    // The families in order, each from the next that has a candidate, no anchors or, once a row has
+    // fired, anchors a row may change (rule counts: each).
+    const std::size_t count = t.afterPass[pass].size();
+    auto next = c.candidates.begin();
+    std::size_t open = 0, changer = 0;  // into index.open and index.changers
+    for (std::size_t place = 0; place < count; place++) {
+        if (tally == nullptr) {
+            std::size_t ahead = next != c.candidates.end() ? next->first : count;
+            while (open < index.open.size() && index.open[open] < place) open++;
+            if (open < index.open.size()) ahead = std::min<std::size_t>(ahead, index.open[open]);
+            if (c.epoch != c.epochStart) {
+                while (changer < index.changers.size() && index.changers[changer] < place) changer++;
+                if (changer < index.changers.size()) ahead = std::min<std::size_t>(ahead, index.changers[changer]);
+            } else if (index.changes) {
+                changed();
+                const auto e = std::ranges::lower_bound(c.changed, std::pair(static_cast<uint32_t>(place), uint32_t{0}));
+                if (e != c.changed.end()) ahead = std::min<std::size_t>(ahead, e->first);
+            }
+            if (ahead >= count) break;
+            place = ahead;
+        }
+        const internal::CxFamily& family = t.families[static_cast<std::size_t>(t.afterPass[pass][place])];
+        const auto first = next;
+        while (next != c.candidates.end() && next->first == place) ++next;
         if (skip != nullptr && skip(family.name)) continue;
-        std::size_t at = 0;
-        for (Item* it = f.w.chain.head; it != nullptr; it = it->next, at++) {
+        const auto tryAt = [&](std::size_t at) {
+            Item* it = c.items[at];
             const uint32_t surface = c.surfaces[at];
-            if (family.guardKeyed && !std::ranges::binary_search(family.guardSurfaces, surface)) continue;
+            if (family.guardKeyed && !std::ranges::binary_search(family.guardSurfaces, surface)) return;
             Try(f, it);
-            if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) continue;
+            if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) return;
             // Rule counts try every row.
             const std::vector<int>* rows = &family.rows;
             if (family.indexed && tally == nullptr) {
@@ -1931,12 +2401,12 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
                         std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
                     if (found != family.bySurface.end() && found->first == surface) rows = &found->second;
                 }
-                if (rows->empty()) continue;
+                if (rows->empty()) return;
             }
             // An atom all rows need that is false here: none fires (rule counts try every row).
             if (tally == nullptr &&
                 !std::ranges::all_of(family.shared, [&](uint32_t a) { return Held(f, it, t.atoms[a]); }))
-                continue;
+                return;
             for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
                 if (skip != nullptr && skip(row.id)) continue;
@@ -1949,6 +2419,52 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
                 // The chain is the flusher's; the conditions read it through const pointers.
                 Item* found = row.scans ? const_cast<Item*>(Scanned(f, t, row.root, it)) : nullptr;
                 for (const internal::CxAction& a : row.actions) Apply(f, t, it, found, a, {Provenance::Rewrite, r});
+                nextEpoch();
+                break;
+            }
+        };
+        // A word tries the family only where an anchor holds (rule counts try every row, and every word).
+        const internal::CxAnchors& anchors = family.anchors;
+        if (tally != nullptr || !anchors.found) {
+            for (std::size_t at = 0; at < c.items.size(); at++) tryAt(at);
+            continue;
+        }
+        // The candidates, with those of the anchors a row may change: found once, until a row fires in
+        // this run; then tried on each word as the family reaches it.
+        const auto family32 = static_cast<uint32_t>(place);
+        if (!anchors.changing.empty() && c.epoch != c.epochStart) {
+            auto fixed = first;
+            for (std::size_t at = 0; at < c.items.size(); at++) {
+                bool hit = fixed != next && fixed->second == at;
+                if (hit) ++fixed;
+                hit = hit || std::ranges::any_of(anchors.changing, [&](uint32_t a) { return Holds(f, c.items[at], t.atoms[a]); });
+                if (hit) tryAt(at);
+            }
+            continue;
+        }
+        c.visit.clear();
+        for (auto e = first; e != next; ++e) c.visit.push_back(e->second);
+        if (!anchors.changing.empty()) {
+            changed();
+            const auto low = std::ranges::lower_bound(c.changed, std::pair(family32, uint32_t{0}));
+            const auto high = std::ranges::lower_bound(c.changed, std::pair(family32 + 1, uint32_t{0}));
+            for (auto e = low; e != high; ++e) c.visit.push_back(e->second);
+            std::ranges::sort(c.visit);
+            const auto [dup, end] = std::ranges::unique(c.visit);
+            c.visit.erase(dup, end);
+        }
+        const uint32_t epoch = c.epoch;
+        for (std::size_t k = 0; k < c.visit.size(); k++) {
+            tryAt(c.visit[k]);
+            // A row fired: the anchors a row may change are tried on each word after this one.
+            if (!anchors.changing.empty() && c.epoch != epoch) {
+                auto fixed = std::lower_bound(first, next, std::pair(family32, c.visit[k] + 1));
+                for (std::size_t at = c.visit[k] + 1; at < c.items.size(); at++) {
+                    bool hit = fixed != next && fixed->second == at;
+                    if (hit) ++fixed;
+                    hit = hit || std::ranges::any_of(anchors.changing, [&](uint32_t a) { return Holds(f, c.items[at], t.atoms[a]); });
+                    if (hit) tryAt(at);
+                }
                 break;
             }
         }
