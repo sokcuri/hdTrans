@@ -1900,4 +1900,17 @@ std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snap
     return tags;
 }
 
+std::size_t KeyReach(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!snap.Healthy()) return s.size();
+    std::size_t reach = 0;
+    snap.Base().Prefixes(s, [&reach](int, std::size_t length) { reach = length; });
+    if (ctx.lookup.plain != nullptr) {
+        for (const dict::LookupMode mode : kAllModes) {
+            for (const dict::UserEntry* e : ctx.lookup.plain->Search(s, mode)) reach = std::max(reach, e->key.size());
+        }
+    }
+    // A walk cut short by a bad read leaves the fallback to RetrieveRecords.
+    return snap.Healthy() ? reach : s.size();
+}
+
 }  // namespace hdTrans::pipeline::internal

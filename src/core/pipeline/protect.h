@@ -119,6 +119,9 @@ std::string_view TextOf(const output::Piece& p);
 // entries stored under exactly s, kana spellings left out, and end rows too when endRows is
 // false; "" when s is no key.
 std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows = true);
+// The bytes of the longest key, base or plain, that is a prefix of s: KeyTags is "" for every longer
+// prefix. All of s when the snapshot is not healthy, as its fallback may hold other keys.
+std::size_t KeyReach(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap);
 
 }  // namespace internal
 
