@@ -98,3 +98,12 @@ sound:laugh-tte	食事はいいって	has:좋다고	keep	sound
 sound:laugh-tte	猫っぽいって言われてる	has:같다고	keep	sound
 sound:tilde-stutter	ま～真琴、待って	has:마~마코토	fix	sound
 sound:tilde-stutter	あ～明日香！	has:아~아스카	keep	sound
+sound:tilde-stutter	ま～正直に言うと	lacks:소~	keep	sound
+sound:tilde-stutter	ま～誠に申し訳ない	lacks:저~	keep	sound
+sound:tilde-stutter	ゆ～勇気を出して	lacks:요~	keep	sound
+sound:tilde-stutter	ゆ～勇気がない。	lacks:요~	keep	sound
+sound:tilde-stutter	ゆ～勇気くん、こっち！	has:유~유우키 군	fix	sound
+sound:tilde-stutter	ま～誠くん、ありがとう。	has:마~마코토 군	fix	sound
+sound:tilde-stutter	な～直人さん……	has:나~나오토 씨	fix	sound
+sound:tilde-stutter	は～春香、来てくれたの？	has:하~하루카	fix	sound
+sound:tilde-stutter	け～健太は来ない。	has:케~켄타는	fix	sound

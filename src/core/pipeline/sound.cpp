@@ -1889,7 +1889,7 @@ size_t SoundText::QuotedBy(const SoundMatch& m, size_t p, bool* say) const {
 
 // Whether a person's name of the name layer starts at character p whose Korean starts with the
 // sound of mora, in katakana (拓也 타쿠야 after タ, 健太 켄타 after ケ): the same first consonant,
-// voiced or not, and vowel.
+// voiced or not, and vowel; the name is the longest word that starts at p.
 bool SoundText::NameSoundsLike(size_t p, std::u32string_view mora) const {
     const std::u32string heard = DecodeText(ReadKana(EncodeText(mora)));
     if (heard.empty() || heard[0] < text::kBase || heard[0] > text::kLast) return false;
@@ -1900,13 +1900,20 @@ bool SoundText::NameSoundsLike(size_t p, std::u32string_view mora) const {
         return kPlain[lead] * 21 + static_cast<int>(syllable - text::kBase) % 588 / 28;
     };
     const size_t end = std::min(rs_.size(), p + 24);
+    size_t name = 0, other = 0;
     for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup).list) {
+        if (c.user != nullptr && (c.user->kana || c.user->end)) continue;
+        const size_t n = text::RuneCount(c.source);
         const bool person = (c.user != nullptr && c.user->nameLayer) || (c.codes != nullptr && c.codes->sem.Contains("QPN"));
-        if (!person || c.target.empty()) continue;
+        if (!person) {
+            other = std::max(other, n);
+            continue;
+        }
+        if (c.target.empty()) continue;
         const char32_t first = text::DecodeRune(c.target).cp;
-        if (first >= text::kBase && first <= text::kLast && onset(first) == onset(heard[0])) return true;
+        if (first >= text::kBase && first <= text::kLast && onset(first) == onset(heard[0])) name = std::max(name, n);
     }
-    return false;
+    return name > 0 && name >= other;
 }
 
 // Whether the sound m, before the って at character i, may take it: three kana or more before
