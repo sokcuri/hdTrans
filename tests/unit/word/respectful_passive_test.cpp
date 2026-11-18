@@ -30,7 +30,10 @@ std::string Translate(std::string_view text) {
                                             "逮捕\t체포\tN110\t\tHd\tGN\t0\t17\n"
                                             "到着\t도착\tN110\t\tHdHi\tGN\t0\t18\n"
                                             "の\t의\tP200\t\t\tGN\t0\t19\n"
-                                            "言われ\t&J6@\tM427\t\t\tGN\t0\t20\n"}});
+                                            "言われ\t&J6@\tM427\t\t\tGN\t0\t20\n"
+                                            "殴\t때&AA@\tM448\t\t\tGN\t0\t21\n"
+                                            "辞め\t그만&C7@\tM437\t\t\tGN\t0\t22\n"
+                                            "部長\t부장\tN110\tVHn\t\tGN\t0\t23\n"}});
     HD_CHECK(loaded.errors.empty());
     if (loaded.snapshot == nullptr) return {};
     const auto generated = internal::NewGenerated(*loaded.snapshot);
@@ -48,10 +51,16 @@ HD_TEST(word_respectful_passive_of_an_honoured_subject) {
 }
 
 HD_TEST(word_respectful_passive_keeps_the_passive) {
-    // An agent, a subject that is no title, or a transitive verb without its object.
+    // An agent, a subject that is no title, or a verb whose object is a person without its object.
     HD_CHECK_EQ(Translate("陛下が彼に手紙を書かれた。"), "폐하가 그에게 편지를 써졌다.");
     HD_CHECK_EQ(Translate("彼が手紙を書かれた。"), "그가 편지를 써졌다.");
-    HD_CHECK_EQ(Translate("陛下が書かれた。"), "폐하가 써졌다.");
+    HD_CHECK(Translate("陛下が殴られた。").find("셨") == std::string::npos);
+}
+
+HD_TEST(word_respectful_transitive_without_a_person_object) {
+    // A transitive verb whose object is no person cannot be done to an honoured subject (GRM-4250).
+    HD_CHECK_EQ(Translate("陛下が書かれた。"), "폐하가 쓰셨다.");
+    HD_CHECK_EQ(Translate("部長が辞められた。"), "부장이 그만두셨다.");
 }
 
 HD_TEST(word_passive_conditional_after_an_object) {

@@ -1,0 +1,53 @@
+# 규칙: GRM-4250, GRM-4251, GRM-4252
+rule	input	expected	kind	layer
+voice:honoured-subject	部長が辞められた。	has:그만두셨다	fix	voice
+voice:honoured-subject	先生が辞められて、寂しい。	has:그만두셔서	fix	voice
+voice:honoured-subject	先生が辞められました。	has:그만두셨습니다	fix	voice
+voice:honoured-subject	先生が辞められるなら仕方ない。	has:그만두신다면	fix	voice
+voice:honoured-subject	先生は泣かれた。	has:우셨다	fix	voice
+voice:honoured-subject	王様が泣かれて困った。	has:우셔	fix	voice
+voice:honoured-subject	「そうですわね。お祖父様が決められたことですので」	has:결정하신	fix	voice
+voice:honoured-subject	社長が決められた方針に従う。	has:결정하신 방침	fix	voice
+voice:honoured-subject	陛下が決められました。	has:결정하셨습니다	fix	voice
+voice:honoured-subject	お祖父様が建てられた家。	has:세우신 집	fix	voice
+voice:honoured-subject	先生が書かれている本。	lacks:쓰여져	fix	voice
+voice:honoured-subject	先生が辞められない理由。	has:그만둘 수 없는	keep	voice
+voice:honoured-subject	先生が叱られた。	lacks:셨다	keep	voice
+voice:honoured-subject	先生が殴られた。	has:맞았다	keep	voice
+voice:honoured-subject	陛下が襲われた。	has:습격당했다	keep	voice
+voice:honoured-subject	国王様が殺された。	has:살해당했다	keep	voice
+voice:honoured-subject	王子様が呼ばれた。	has:불렸다	keep	voice
+voice:honoured-subject	先生は呼ばれた。	has:불렸다	keep	voice
+voice:honoured-subject	姫様が助けられた。	lacks:셨다	keep	voice
+voice:honoured-subject	先生は書かれている名前を読み上げた。	lacks:계시는	keep	voice
+voice:honoured-subject	模様が描かれた箱。	has:그려진 상자	keep	voice
+voice:honoured-subject	歴代の教母様とアヴェの国王様がまつられているんだ。	lacks:계시는	keep	voice
+voice:honoured-subject	階段教室に俺と多岐川さんが残された。	has:남겨졌다	keep	voice
+voice:honoured-subject	彼が辞められた。	lacks:셨다	keep	voice
+voice:honoured-subject	先生は手紙を書かれた。	has:쓰셨다	keep	voice
+voice:honoured-subject	駅に着かれました。	has:도착하셨습니다	fix	voice
+voice:honoured-subject	荷物が着かれた。	lacks:셨다	keep	voice
+voice:reported-respectful	歓迎に対して英語で感謝の意を述べられました。	has:말씀하셨습니다	fix	voice
+voice:reported-respectful	記者会見で今後の抱負を述べられました。	has:말씀하셨습니다	fix	voice
+voice:reported-respectful	やっと感想を述べられました。	has:수 있었습니다	keep	voice
+voice:reported-respectful	感想を伝えられました。	has:수 있었습니다	keep	voice
+voice:reported-respectful	声を掛けられました。	lacks:셨습니다	keep	voice
+voice:reported-respectful	感情を殺すよう教えられました。	lacks:셨습니다	keep	voice
+voice:reported-respectful	足を踏みつけられました。	lacks:셨습니다	keep	voice
+voice:reported-respectful	意見を述べられますか？	has:수 있습니까	keep	voice
+voice:reported-respectful	意見を述べられませんでした。	has:수 없었습니다	keep	voice
+voice:reported-respectful	陛下はお言葉を述べられた。	has:셨다	keep	voice
+voice:passive-cue	なんか、なめられたもんだなって思っちゃいましたね。	lacks:수 있었	fix	voice
+voice:passive-cue	ナメられたままじゃ終われない。	has:얕봐진 채로	fix	voice
+voice:passive-cue	そこまでなめられたくはないわね。	has:얕봐지고 싶지	fix	voice
+voice:passive-cue	あいつになめられた。	has:에게 얕봐졌다	fix	voice
+voice:passive-cue	「ナメられてるだけだって」	lacks:볼 수 있을	fix	voice
+voice:passive-cue	紙なんか舐められるか。	has:핥을 수 있을까	keep	voice
+voice:passive-cue	舐められたくない。	has:얕보이고 싶지 않다	keep	voice
+voice:passive-cue	連れられるまま、俺は会議室のドアに入った。	has:이끌리는 대로	fix	voice
+voice:passive-cue	流されるがままに生きてきた。	has:떠밀리는 대로	keep	voice
+voice:passive-cue	連れられた子供。	has:이끌린 아이	keep	voice
+voice:passive-cue	おいしいもの食べられていいじゃないですか。	has:먹을 수 있어	fix	voice
+voice:passive-cue	避けられていいのか。	has:피할 수 있어도	keep	voice
+voice:passive-cue	食べられている。	has:먹히고 있다	keep	voice
+voice:passive-cue	「エルです。……それ以上の素性を明かす権限を与えられていません」	lacks:줄 수 있지	fix	voice

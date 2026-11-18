@@ -246,8 +246,10 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
     if (dict::InClass(HDTRANS_CLASS("verb.suffered-act"), PhraseVerb(it->group->surface)) && !RecipientInClause(it)) return true;
     const bool listed = dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), PhraseVerb(it->group->surface)) ||
                         CompoundAction(it->group->surface);
-    if (!listed && !Transitive(it) && !it->detail->syntheticCausative) return false;
-    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0) return true;
+    // A verb of an act done to someone takes an object, whatever the code of its chosen reading (なめられた).
+    if (!listed && !Transitive(it) && !DoneToSomeone(it, {}) && !it->detail->syntheticCausative) return false;
+    // ていい is て and いい, a leave or a gladness (食べられていい 먹을 수 있어서 좋다), no ている.
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0 && !rest.starts_with("ていい")) return true;
     const Item* subject = nullptr;
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
@@ -739,6 +741,20 @@ bool DescribesHonoured(const Item* it) {
     return HonouredPerson(n) && Animate(n->Attr(std::max(n->selected, 0)));
 }
 
+// Whether noun item n before a subject particle names someone honoured who can do an act: n names
+// one (HonouredPerson) and is a person or an animal, or is the honorific alone right after a person
+// (お祖父様); not a thing in 様 (模様, 文様). A name with さん is no such subject: さん is said of
+// peers as well (多岐川さんが取り残された stays passive).
+bool HonouredDoer(const Item* n) {
+    if (n == nullptr || n->detail->Yougo() || n->group->entries.empty()) return false;
+    const std::string_view s = n->group->surface;
+    if (!HonouredPerson(n)) return false;
+    if (Animate(n->Attr(std::max(n->selected, 0)))) return true;
+    const Item* a = n->prev;
+    return dict::InClass(HDTRANS_CLASS("honorific.honoured-person"), s) && a != nullptr && !a->detail->Yougo() &&
+           !a->group->entries.empty() && a->start + a->length == n->start && Person(a->Attr(std::max(a->selected, 0)));
+}
+
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
@@ -746,13 +762,15 @@ bool DescribesHonoured(const Item* it) {
 // such a noun before ご自身 with no predicate between (先生ご自身で料理を振る舞われる), and so does
 // a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
-// the act is done to (陛下が幽閉された, 姫様は許された).
+// the act is done to (陛下が幽閉された, 姫様は許された). That holds for a verb whose object is a person
+// (personObject); a verb whose object is no person cannot be done to its honoured subject, so the
+// subject did it (部長が辞められた 그만두셨다, お祖父様が決められた 정하신; spec GRM-4250).
 // With no subject or agent, a noun after it that names someone honoured decides (DescribesHonoured).
 // An intransitive verb (intransitive: a godan verb of verb.intransitive-godan, a verbal noun tagged Hi) has
 // no passive of its own without an agent, so there its (ら)れ is respectful with no subject in the
 // clause (じき戻られます, 留学されていた), and so it is with a subject called with さん (下村さんは
 // 引っ越されてきた; spec GRM-3873).
-bool RespectfulReading(const Item* it, bool transitive, bool intransitive = false) {
+bool RespectfulReading(const Item* it, bool transitive, bool intransitive = false, bool personObject = true) {
     bool object = false;
     bool predicate = false;  // a predicate stands between: ご自身 is of another clause
     for (const Item* p = it->prev; p != nullptr; predicate = predicate || p->detail->Yougo(), p = p->prev) {
@@ -781,7 +799,9 @@ bool RespectfulReading(const Item* it, bool transitive, bool intransitive = fals
         } else if (s == "の" && p == it->prev && !transitive && !Has(it->group->surface, "を")) {
             return HonouredPerson(p->prev);
         } else if (transitive && !object && (s == "は" || s == "が" || s == "も")) {
-            return false;
+            // A topic before a verb that describes a noun after it is another verb's subject (先生は書かれている名前を).
+            if (personObject || (s == "は" && ModifiesNoun(it))) return false;
+            return HonouredDoer(p->prev);
         } else if (s == "は" || s == "が" || s == "も") {
             // A topic that is no noun (今までは) is no subject of an intransitive verb.
             if (intransitive && s == "は" && p->prev != nullptr && !p->prev->detail->Yougo() && !p->prev->group->entries.empty() &&
@@ -1400,6 +1420,46 @@ bool LexicalPassive(Flusher& f, const Item* it) {
     return PassiveTarget(f, it->group->surface, target) || SayPassiveApplies(it);
 }
 
+// Whether the (ら)れ verb item it is one whose object is mostly a person, so that a subject before it
+// with no object is the one the act is done to (先生が叱られた, 陛下が襲われた): verb.person-object,
+// matched on the text from the verb, verb.suffered-act and the compound actions on someone.
+bool PersonObjectVerb(const Item* it, std::string_view stem) {
+    std::string_view text = From(it->text, it->start);
+    for (const std::string_view particle : {"に", "へ", "を", "で", "と", "は", "が", "も"}) {
+        if (it->group->surface.starts_with(particle) && it->group->surface.size() > particle.size()) text.remove_prefix(particle.size());
+    }
+    return dict::StartsWithMember(HDTRANS_CLASS("verb.person-object"), text) > 0 ||
+           dict::InClass(HDTRANS_CLASS("verb.suffered-act"), PhraseVerb(stem.empty() ? std::string_view(it->group->surface) : stem)) ||
+           CompoundAction(it->group->surface);
+}
+
+// Whether the られ of ichidan verb item it reads as the respectful act of someone the report speaks of,
+// whom the sentence does not name (感謝の意を述べられました 감사의 뜻을 말씀하셨습니다, 耳を傾けられました):
+// the polite past right after it, its object in the clause with no pause, no subject, recipient or agent
+// (は, が, も, に, から, によって, により) in its sentence, and a verb that is not done to someone (verb.person-object,
+// verb.passive-after-object, verb.passive-any-object, verb.suffered-act), not given or told to
+// someone (verb.to-person, matched on the stem) and not one whose affirmative られた is mostly the
+// potential (verb.potential-rareta), nor an object that is the body or what one wears (足を踏みつけられました,
+// which befell the speaker), and no cue of the potential (adverb.at-last, AbilityScope; spec GRM-4251).
+bool ReportedRespectful(const Item* it, std::string_view stem, std::string_view rest) {
+    if (!rest.starts_with("ました") || rest.starts_with("ましたら") || !ActedObjectBefore(it) || AbilityScope(it, rest)) return false;
+    std::string_view verb = PhraseVerb(stem.empty() ? std::string_view(it->group->surface) : stem);
+    if (verb.ends_with("られ")) verb.remove_suffix(std::string_view("られ").size());
+    if (PersonObjectVerb(it, stem) || DoneToSomeone(it, stem) || dict::InClass(HDTRANS_CLASS("verb.potential-rareta"), verb) ||
+        dict::InClass(HDTRANS_CLASS("verb.to-person"), std::string(verb) + "る")) {
+        return false;
+    }
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || Has("。！？「」『』!?", s)) break;
+        if (s == "は" || s == "が" || s == "も" || s == "に" || s == "には" || s == "から" || s.starts_with("によ")) return false;
+        if (s == "を" && BodyObject(p->prev)) return false;
+        // What is reached at last is what one could do (やっと感想を述べられました 말할 수 있었습니다).
+        if (dict::InClass(HDTRANS_CLASS("adverb.at-last"), s)) return false;
+    }
+    return true;
+}
+
 // The respectful reading of the (ら)れ of verb item it of the given form (RespectfulReading): not
 // for a verb whose (ら)れ is the passive by itself, a potential before a negative or a condition, or
 // a passive that a Korean word of its own reads; a dictionary word needs a candidate in 시 or a
@@ -1422,13 +1482,16 @@ bool Respectful(Flusher& f, const Item* it, VoiceForm form, std::string_view ste
         const int slot = DefaultSlot(it);
         const bool transitive = TakesObject(it->Code(slot), it->Attr(slot));
         const bool intransitive = form == VoiceForm::Godan && IntransitiveGodan(it);
-        return RespectfulReading(it, transitive, intransitive) || (form == VoiceForm::Godan && ListenerQuestion(it, rest, transitive));
+        return RespectfulReading(it, transitive, intransitive, PersonObjectVerb(it, stem)) ||
+               (form == VoiceForm::Godan && ListenerQuestion(it, rest, transitive)) ||
+               (form == VoiceForm::Rare && !passive && ReportedRespectful(it, stem, rest));
     }
     // The られ of an ichidan or くる word asks for what the listener can do as well (来られますか), so
     // only a subject makes it respectful. Without an object a verb reads respectful in the most
     // clauses; no lookup when not even then.
     const bool asks = !ichidan && ListenerQuestion(it, rest, false);
-    if (!RespectfulReading(it, false, true) && !asks) return false;
+    const bool reported = ichidan && ReportedRespectful(it, stem, rest);
+    if (!RespectfulReading(it, false, true) && !asks && !reported) return false;
     bool transitive = false;
     const int count = static_cast<int>(it->group->entries.size());
     bool honorific = false;
@@ -1441,7 +1504,8 @@ bool Respectful(Flusher& f, const Item* it, VoiceForm form, std::string_view ste
     }
     // A verbal noun tagged Hi before され, or a word made from a verb of verb.intransitive-godan (行かれ).
     const bool intransitive = honorific && stem.empty() ? IntransitiveNoun(it->prev) : !ichidan && IntransitiveGodan(it);
-    return RespectfulReading(it, transitive, intransitive) || (asks && ListenerQuestion(it, rest, transitive));
+    return RespectfulReading(it, transitive, intransitive, honorific || PersonObjectVerb(it, stem)) || (asks && ListenerQuestion(it, rest, transitive)) ||
+           (reported && transitive);
 }
 
 // A forcing adverb in the same clause names a forced act, even when its predicate is negative.
@@ -1589,7 +1653,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     const std::string_view surface = it->group->surface;
     const bool synthetic = it->detail->record == 5 && it->detail->syntheticCausative;
     const bool object = synthetic || form != VoiceForm::Rare || dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), surface) ||
-                        CompoundAction(surface) || Transitive(it) || ObjectBefore(it) || Has(surface, "を");
+                        CompoundAction(surface) || Transitive(it) || DoneToSomeone(it, stem) || ObjectBefore(it) || Has(surface, "を");
     if ((synthetic && ForcingInClause(it)) || (agent != nullptr && object)) return Voice::Passive;
     if (synthetic && !CausativePotentialEnding(rest) &&
         (NarrativePassive(it, rest) || rest.starts_with("ちゃ") || rest.starts_with("ちま"))) {
