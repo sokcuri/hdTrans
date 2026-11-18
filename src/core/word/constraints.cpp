@@ -192,6 +192,8 @@ constexpr ConstraintRule kRules[] = {
      "でみ도 같다 (読んでみんなに聞かせる)", {}, "んな"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
+    {"kyoku-before-tte", ConstraintWord::Source, "曲", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
+     "って 앞의 曲는 送り仮名 없는 曲る의 て형이 아니라 명사 곡 (この曲って音がきれい 이 구불거려 → 이 곡은). 曲がって, 曲げて, 曲った는 그대로", {}, "って"},
     {"shi-before-nitsuite", ConstraintWord::Source, "死", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
      "について 앞의 死는 死ぬ의 연용형이 아니라 명사 죽음 (死について 죽어 붙어 → 죽음에 대해)", {}, "について"},
     {"chikatte-before-ending", ConstraintWord::Source, "誓って", ConstraintContext::BeforeListed, ConstraintReject::Word,
