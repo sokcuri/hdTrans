@@ -688,14 +688,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                dict::StartsWithMember(HDTRANS_CLASS("suffix.continuative"), after) == 0;
     }
     case ConstraintContext::BeforeSuruForm:
-        // した, but not たくさん: the past ends there or a particle or mark follows it.
-        if (after.starts_with("たくさん")) return false;
-        if (after.starts_with("た") && !after.starts_with("たく")) {
-            const std::string_view rest = after.substr(std::string_view("た").size());
-            const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
-            return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
-        }
-        return dict::StartsWithMember(HDTRANS_CLASS("suru.tail"), after) > 0;
+        return SuruFormAfterShi(after);
     case ConstraintContext::BeforeAru:
         // A noun fused with で (歳で), not a particle in で (まである).
         return dict::StartsWithMember(HDTRANS_CLASS("aru.after-de"), after) > 0 &&
@@ -928,6 +921,17 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
 }  // namespace
 
 std::span<const ConstraintRule> ConstraintRules() { return kRules; }
+
+bool SuruFormAfterShi(std::string_view after) {
+    // した, but not たくさん: the past ends there or a particle or mark follows it.
+    if (after.starts_with("たくさん")) return false;
+    if (after.starts_with("た") && !after.starts_with("たく")) {
+        const std::string_view rest = after.substr(std::string_view("た").size());
+        const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+        return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
+    }
+    return dict::StartsWithMember(HDTRANS_CLASS("suru.tail"), after) > 0;
+}
 
 bool Worker::NotAfterNoun(std::string_view head) {
     if (head.empty()) return false;

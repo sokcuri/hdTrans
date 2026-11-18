@@ -189,4 +189,8 @@ struct ConstraintRule {
 // In table order; each rule runs on the candidates the earlier ones left.
 std::span<const ConstraintRule> ConstraintRules();
 
+// Whether after, the text after a し, goes on as a form of する: the past that ends there or before a particle or a
+// mark (した。, したの), or a member of suru.tail (しない, してる, しよう); not たくさん.
+bool SuruFormAfterShi(std::string_view after);
+
 }  // namespace hdTrans::word

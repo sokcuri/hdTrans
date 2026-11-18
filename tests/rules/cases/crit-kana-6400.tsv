@@ -1,0 +1,59 @@
+# 규칙: LEX-6400, LEX-6401, LEX-6402, LEX-6403
+rule	input	expected	kind	layer
+lookup:kana-word	みんなを中心に笑ったりおちょくったりしてるじゃないか。	has:놀리거나	fix	lookup
+lookup:kana-word	それをあの子におちょくられて、追い詰められて。	lacks:오쵸쿠	fix	lookup
+lookup:kana-word	俺をおちょくってるのか？	나를 놀리고 있는 거야?	fix	lookup
+lookup:kana-word	そんなにおちょくらないでください。	그렇게 놀리지 마세요.	fix	lookup
+lookup:kana-word	じたばたと手足をばたつかせる。	has:손발을 파닥거린다	fix	lookup
+lookup:kana-word	左手で、着物の裾をそっとつまみあげた。	has:살며시 집어 올렸다	fix	lookup
+lookup:kana-word	不運をなげいた。	불운을 한탄했다.	fix	lookup
+lookup:kana-word	おててつないで歩こう。	has:손을 잡아	fix	lookup
+lookup:kana-word	心配する声がそこらここらで聞こえる。	has:여기저기에서 들린다	fix	lookup
+lookup:kana-word	先輩とて ひとたまりも…。	has:버틸 재간도	fix	lookup
+lookup:kana-word	あやとりをした。	실뜨기를 했다.	fix	lookup
+lookup:kana-word	ぱんつが見えた。	has:팬티가	fix	lookup
+lookup:kana-word	おててをあらって。	has:손을	fix	lookup
+lookup:kana-word	観光客からぼったくった。	has:바가지를 씌웠다	fix	lookup
+lookup:kana-word	ねんどをこねる。	점토를 반죽한다.	fix	lookup
+lookup:kana-word	きれいな花。	예쁜 꽃.	keep	lookup
+lookup:kana-word	ありったけの力で叫んだ。	has:힘으로 외쳤다	keep	lookup
+lookup:kana-word	ねんど遊びが好き。	has:점토 놀이	fix	lookup
+lookup:kana-word	ぱんつ一丁で走る。	has:팬티	fix	lookup
+lookup:kana-word	あやとりが得意だ。	has:실뜨기가	fix	lookup
+lookup:kana-word	つまみ上げた。	집어 올렸다.	fix	lookup
+lookup:kana-word	摘み上げた。	집어 올렸다.	fix	lookup
+lookup:kana-word	おちょくりはやめろ。	has:놀림은	fix	lookup
+lookup:kana-word	あやとりかが来た。	has:아야와 리카	keep	lookup
+lookup:kana-word	あやとりなとみゆき。	has:아야와 리나	keep	lookup
+lookup:kana-word	大蛇が蜷局を巻いていた。	has:똬리를 틀고	fix	lookup
+lookup:kana-word	とぐろさんが来た。	토구로 씨가 왔다.	keep	lookup
+lookup:kana-word	とぐろが笑った。	토구로가 웃었다.	keep	lookup
+lookup:kana-word	おててさんが来た。	has:오테테 씨	keep	lookup
+lookup:kana-word	ぱんつくった。	lacks:팬티	keep	lookup
+lookup:kana-word	ねんどさん、こんにちは。	넨도 씨, 안녕하세요.	keep	lookup
+sense:kana-hiku	カードをひいた。	카드를 뽑았다.	fix	packs
+sense:kana-hiku	線をひいた。	선을 그었다.	fix	packs
+sense:kana-hiku	カーテンをひいた。	커튼을 쳤다.	fix	packs
+sense:kana-hiku	熱がひいた。	열이 내렸다.	fix	packs
+sense:kana-hiku	腫れがひいた。	붓기가 빠졌다.	fix	packs
+sense:kana-hiku	風邪をひいた。	감기에 걸렸다.	keep	packs
+sense:kana-hiku	ピアノをひいた。	피아노를 쳤다.	keep	packs
+sense:kana-hiku	辞書をひく。	사전을 찾는다.	keep	packs
+sense:kana-hiku	血の気がひいた。	핏기가 가셨다.	fix	packs
+sense:kana-hiku	顔から血の気がひいていく。	has:핏기가 가셔	fix	packs
+sense:kana-hiku	汗がひいた。	땀이 가셨다.	fix	packs
+word:uchi-ni-motion	「うちに来ませんか」	「집에 오지 않을래요」	fix	word
+word:uchi-ni-motion	うちに行ってもいい？	집에 가도 괜찮아?	fix	word
+word:uchi-ni-motion	明日うちに来てね。	has:집에 와	fix	word
+word:uchi-ni-motion	知らないうちに来ていた。	모르는 사이에 와 있었다.	keep	word
+word:uchi-ni-motion	うちに帰ろう。	집에 돌아가자.	keep	word
+word:uchi-ni-motion	くぎをうちに来た。	has:치러	keep	word
+word:uchi-ni-motion	ゴルフをうちに行く。	has:치러	keep	word
+lookup:kana-suru-noun	「あやとりしよう」	「실뜨기하자」	fix	lookup
+lookup:kana-suru-noun	あやとりして遊んだ。	실뜨기해 놀았다.	fix	lookup
+lookup:kana-suru-noun	あやとりしたい。	has:실뜨기하고 싶다	fix	lookup
+lookup:kana-suru-noun	れんしゅうしよう。	연습하자.	fix	lookup
+lookup:kana-suru-noun	れんしゅうしてる。	has:연습하고 있다	fix	lookup
+lookup:kana-suru-noun	りかいしたくない。	has:이해하고 싶지	fix	lookup
+lookup:kana-suru-noun	あやとりさんが来た。	has:아야토리 씨	keep	lookup
+lookup:kana-suru-noun	けっこんしよう。	결혼하자.	keep	lookup
