@@ -1,0 +1,29 @@
+# 규칙: LEX-6452
+rule	input	expected	kind	layer
+normalize:drawn-ja-negative	すでに、人間じゃあなくなって来ちまったんだよ。	has:아니게	fix	normalize
+normalize:drawn-ja-negative	本気じゃあねえよ。	has:진심이 아니야	fix	normalize
+normalize:drawn-ja-negative	嘘じゃあありません。	has:거짓말이 아닙니다	fix	normalize
+normalize:drawn-ja-negative	人間じゃあない。	has:인간이 아니다	fix	normalize
+normalize:drawn-ja-negative	それじゃあな！	has:그럼	keep	normalize
+normalize:drawn-ja-negative	じゃあな、また明日。	has:그럼	keep	normalize
+normalize:shimawa-nai	遊んでて落ちちゃわないのか？	has:떨어져버리지 않는	fix	normalize
+normalize:shimawa-nai	死んじゃわないでね。	has:죽어버리지 마	fix	normalize
+normalize:shimawa-nai	忘れちまわないうちに。	has:잊어버리	fix	normalize
+normalize:shimawa-nai	壊れちゃわないか。	has:망가져버리지 않	fix	normalize
+normalize:adjective-kune	これヤバくね？	has:위험하지 않아	fix	normalize
+normalize:adjective-kune	寒くね?	has:춥지 않아	fix	normalize
+normalize:adjective-kune	すごくね？	has:대단하지 않아	fix	normalize
+normalize:adjective-kune	早くね！	has:빨리	keep	normalize
+normalize:adjective-kune	書くね？	lacks:않아	keep	normalize
+normalize:dialect-word	あんときは 崖の上送りにしてくれて	has:그때는	fix	normalize
+normalize:dialect-word	そんとき、俺は見た。	has:그때	fix	normalize
+normalize:dialect-word	こんときに限って。	has:이때	fix	normalize
+normalize:dialect-word	そないに怒らんでも。	has:그렇게 화내지	fix	normalize
+normalize:dialect-word	どないにしてもええ。	has:어떻게 해도	fix	normalize
+normalize:dialect-word	こがんことには…忘れられたらいいとに。	has:이런 일에는	fix	normalize
+normalize:dialect-word	あほんたれ、誰が言うた！	has:멍청이	fix	normalize
+normalize:dialect-word	このくそったれ！	has:빌어먹을	fix	normalize
+normalize:adjective-kune	これからも宜しくね？	has:잘 부탁해	keep	normalize
+normalize:adjective-kune	はあ。多くね？	has:많지 않아	fix	normalize
+normalize:fused-tokiwa	あんときゃもう今にも死にそうな顔してたし	has:그때는	fix	normalize
+normalize:fused-tokiwa	そんときゃ頼む。	has:그때는	fix	normalize

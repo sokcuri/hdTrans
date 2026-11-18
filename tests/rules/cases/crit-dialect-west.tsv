@@ -1,0 +1,41 @@
+# 규칙: LEX-6450
+rule	input	expected	kind	layer
+normalize:dialect-chau	それはちゃう。	has:아니다	fix	normalize
+normalize:dialect-chau	ちゃうちゃう、そうやない。	has:아니 아니	fix	normalize
+normalize:dialect-chau	ちゃいますよ。	has:아니에요	fix	normalize
+normalize:dialect-chau	ちゃうんか？	has:아닌	fix	normalize
+normalize:dialect-chau	食べちゃう。	has:먹어버린다	keep	normalize
+normalize:dialect-chau	行っちゃうよ。	has:가버릴	keep	normalize
+normalize:dialect-dekiru	もう憎まれ役しかでけん。	has:할 수 없다	fix	normalize
+normalize:dialect-dekiru	そんなんでけへんわ。	has:할 수 없어	fix	normalize
+normalize:dialect-dekiru	でけえ犬だな。	has:큰 개	keep	normalize
+normalize:dialect-tare	外の風を迎え入れたれな。	has:맞아들여 줘	fix	normalize
+normalize:dialect-tare	新しい風を、村に招き入れたれ。	has:넣어 주어라	fix	normalize
+normalize:dialect-tare	金を貸したれや。	has:빌려 줘	fix	normalize
+normalize:dialect-tare	手伝うたれ。	has:도와 주어라	fix	normalize
+normalize:dialect-tare	書いたれ。	has:써 주어라	fix	normalize
+normalize:dialect-tare	甘ったれ。	has:응석꾸러기	keep	normalize
+normalize:dialect-tare	よだれを垂れ流し。	has:흘려	keep	normalize
+normalize:dialect-teiru-yaro	だから 終わった言うてるやろ！	has:말하고 있지	fix	normalize
+normalize:dialect-teiru-yaro	知ってたやろ？	has:알고 있었지	fix	normalize
+normalize:dialect-teiru-yaro	見とるやろ。	has:보고 있지	fix	normalize
+normalize:dialect-teiru-yaro	宿題やろ。	has:숙제지	keep	normalize
+normalize:dialect-toru-potential	もうやっとられん。	has:할 수 없다	fix	normalize
+normalize:dialect-toru-potential	読んどられへん。	has:읽고 있을 수 없다	fix	normalize
+normalize:dialect-word	こないに荒れるんやったら	has:이렇게	fix	normalize
+normalize:dialect-word	バスがこないに決まってる。	has:오지 않을 게 뻔하다	keep	normalize
+normalize:dialect-adj	ちょうどよかところに！	has:마침 좋은 곳에	fix	normalize
+normalize:dialect-adj	それはよかことたい。	has:좋은 일	fix	normalize
+normalize:dialect-naka	それ 急ぎじゃなかけん中断していいって。	has:아니니까	fix	normalize
+normalize:dialect-naka	そげん悪くなかよ。	has:나쁘지 않아	fix	normalize
+normalize:dialect-naka	なかなか良い。	has:꽤 좋다	keep	normalize
+normalize:dialect-orasu	まだ ろくろ部屋におらすけん。	has:계시니까	fix	normalize
+normalize:dialect-orasu	先生はおらすと？	has:계신다고	fix	normalize
+normalize:dialect-chau	こっちのＭ！ＬＫ ちゃうで。	has:아니야	keep	normalize
+normalize:dialect-dekiru	金髪でけんかっ早い性格ですが	has:싸움	keep	normalize
+normalize:dialect-dekiru	耳元でけたたましい音が鳴り続けている。	has:소란스러운	keep	normalize
+normalize:dialect-tare	ドアが開け放たれ、見覚えのある荷物が廊下に出ていた。	lacks:주어라	keep	normalize
+normalize:dialect-tare	当たれー！！	has:맞아라	keep	normalize
+normalize:dialect-tare	打たれ、倒れた。	has:맞아	keep	normalize
+normalize:dialect-naka	列席者がざわめくなか、千里がくるっと前を向いた。	has:가운데	keep	normalize
+normalize:dialect-dekiru	それがでけたら苦労せんわ。	has:할 수 있으면	fix	normalize

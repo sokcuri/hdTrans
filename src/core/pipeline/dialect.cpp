@@ -538,6 +538,13 @@ bool KyushuAdjective(std::string_view s, size_t pos, Match& m) {
         const std::string_view before = s.substr(0, start);
         if (!before.empty() && IsKatakanaRune(LastRune(before).cp)) return false;
         stem = s.substr(start, pos - start);
+        // よ after a word of the dictionary or a particle that ends the kana before it (ちょうどよかところ ちょうどよいところ,
+        // それはよかこと)
+        if (const std::string_view word = stem.substr(0, stem.size() - std::min(stem.size(), std::string_view("よ").size()));
+            !word.empty() && stem.ends_with("よ") && (IsWord(word) || In(LastRune(word).cp, U"はがもに")) &&
+            !VerbIs(Cat({word, "る"}))) {
+            stem = stem.substr(stem.size() - std::string_view("よ").size());
+        }
         if (stem.empty() || (stem != "よ" && (text::RuneCount(stem) < 2 || !AdjectiveIs(stem)))) return false;
         // A past or a verb form before the か of a question (きたか, したか) is no adjective stem.
         if (In(LastRune(stem).cp, U"ただてでるうくすつぬむぶぐ")) return false;
@@ -555,7 +562,9 @@ bool KyushuAdjective(std::string_view s, size_t pos, Match& m) {
     }
     // What follows: a noun (kanji, katakana), the copula, a particle of the end or the end.
     const char32_t next = p < s.size() ? At(s, p).cp : 0;
-    const bool ok = EndAt(s, p) || IsKanjiClass(next) || IsKatakanaRune(next) || s.substr(p).starts_with("でしょ") ||
+    bool kanaNoun = false;
+    for (const std::string_view w : kKanaNouns) kanaNoun = kanaNoun || (IsHiraganaClass(next) && w.size() > 3 && s.substr(p).starts_with(w));
+    const bool ok = EndAt(s, p) || IsKanjiClass(next) || IsKatakanaRune(next) || kanaNoun || s.substr(p).starts_with("でしょ") ||
                     s.substr(p).starts_with("です") || s.substr(p).starts_with("ね") || s.substr(p).starts_with("よ") ||
                     s.substr(p).starts_with("ばい") || s.substr(p).starts_with("と") || s.substr(p).starts_with("の");
     if (!ok) return false;
@@ -1007,18 +1016,40 @@ bool RegionalWord(std::string_view s, size_t pos, Match& m) {
     const bool afterKanji = IsKanjiClass(b);
     struct Word {
         std::string_view written, plain;
-        int where;  // 0 any word start, 1 sentence start, 2 before a particle, 3 before a verb, 4 before a noun
+        // 0 any word start, 1 sentence start, 2 before a particle, 3 before a verb, 4 before a noun, 5 not before 決まる
+        // or 違い, with which the negative before に makes a judgement (こないに決まってる 来ないに決まってる), 6 before a
+        // noun in kanji, katakana or kana (こがんこと こんなこと; elsewhere the next row reads it as a manner, そがん見える そう; どがん is a word)
+        int where;
     };
     static constexpr Word kWords[] = {
         {"ほんなら", "それなら", 1}, {"ほんで", "それで", 1},     {"こげん", "こんな", 0}, {"そげん", "そんな", 0},
         {"あげん", "あんな", 0},     {"どげん", "どんな", 0},     {"ゆんべ", "夕べ", 0},   {"じゃかあしい", "やかましい", 0},
         {"じゃかましい", "やかましい", 0}, {"あんさん", "あなた", 0}, {"はよ", "早く", 3},    {"わい", "わし", 2},
-        {"おら", "俺", 2},         {"ええ", "いい", 4},
+        {"おら", "俺", 2},         {"ええ", "いい", 4},       {"されば", "だから", 1}, {"なれど", "だが", 1},
+        {"こないに", "こんなに", 5}, {"こがん", "こんな", 6},     {"こがん", "こう", 0},   {"そがん", "そんな", 6},
+        {"そがん", "そう", 0},
     };
     for (const Word& w : kWords) {
         size_t p = pos;
         if (!Lit(s, p, w.written)) continue;
         if (w.where == 1 && !sentenceStart) continue;
+        if (w.where == 6) {
+            const char32_t n = p < s.size() ? At(s, p).cp : 0;
+            bool noun = IsKanjiClass(n) || (IsKatakanaRune(n) && !In(n, U"ーッァィゥェォャュョ"));
+            for (const std::string_view k : kKanaNouns) noun = noun || (k.size() > 3 && s.substr(p).starts_with(k));
+            if (!noun) continue;
+            // a verb in kanji after it is described (こがん見える こう見える): a kanji followed by the kana of a verb
+            if (IsKanjiClass(n)) {
+                size_t q = p + text::DecodeRune(s.substr(p)).size;
+                const char32_t k2 = q < s.size() ? At(s, q).cp : 0;
+                if (In(k2, U"えけげせてねべめれきぎしちにびみりいうくぐすつぬぶむるっんわらまさかがたなばや")) continue;
+            }
+        }
+        if (w.where == 5) {
+            bool judgement = false;
+            for (const std::string_view n : {"決ま", "きま", "違い", "ちがい"}) judgement = judgement || s.substr(p).starts_with(n);
+            if (judgement) continue;
+        }
         if ((w.where == 2 || w.where == 3 || w.where == 4) && afterKanji) continue;
         if (w.where == 2) {
             bool particle = false;
@@ -1729,10 +1760,302 @@ bool HonouredStemRequest(std::string_view s, size_t pos, Match& m) {
 }
 }  // namespace
 
+// The Kansai ちゃう of denial, 違う, where nothing stands before it that a verb stem could end in: the start of a
+// sentence, a mark, a space or the particle は, が or も (それはちゃう 그건 아니야, それ、ちゃうやん, 俺がちゃう
+// ねん), before the end, a sentence particle or what Kansai speech says after it (ちゃうやん, ちゃうか, ちゃうん
+// や; ちゃうちゃう and ちゃうで are read by the dictionary), and its polite ちゃいます (違います). After a verb stem ちゃう is てしまう (食べちゃう) and is read elsewhere.
+bool KansaiChau(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (!head.empty()) {
+        const char32_t b = LastRune(head).cp;
+        const bool mark = In(b, U"。｡！!？?「『（(、，, 　…‥―ー");
+        // は, が or も after more kana: not the を-less stem of a verb (おもちゃう is no word, but take no chance with kana
+        // before a particle that ends in a kana a stem ends in: only は, が, も).
+        const bool particle = In(b, U"はがも") && head.size() > LastRune(head).size;
+        // ちゃう again (ちゃうちゃう)
+        if (!mark && !particle) return false;
+    }
+    // ちゃうちゃう is a word of the dictionary (아니 아니)
+    if (s.substr(pos).starts_with("ちゃうちゃう")) return false;
+    size_t p = pos;
+    std::string_view plain;
+    if (Lit(s, p, "ちゃいます")) {
+        plain = "違います";
+    } else if (Lit(s, p = pos, "ちゃう")) {
+        plain = "違う";
+    } else {
+        return false;
+    }
+    bool goes = EndAt(s, p) || FinalParticleEnd(s, p) != std::string_view::npos;
+    // ちゃうで is read by the dictionary (아니야)
+    if (s.substr(p).starts_with("で")) return false;
+    for (const std::string_view w : {"やん", "やろ", "ねん", "か", "ん", "の", "って", "ちゃう", "し", "けど", "から"}) {
+        goes = goes || s.substr(p).starts_with(w);
+    }
+    if (!goes) return false;
+    m.group[1] = plain;
+    m.end = p;
+    return true;
+}
+
+// The drawn じゃあ of では after a noun before the negative (人間じゃあない 인간이 아니다, 人間じゃあなくなって,
+// 本気じゃあねえ, 嘘じゃあありません): じゃ, which the word stage reads with it. Not the じゃあ of then, which opens a
+// sentence or follows それ (それじゃあな), nor the farewell じゃあな.
+bool DrawnJaNegative(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (!JaFollows(head)) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "じゃあ")) return false;
+    bool negative = false;
+    for (const std::string_view w : {"ない", "なく", "なかっ", "なけれ", "ねえ", "ねぇ", "ねー", "ありま", "あるまい"}) {
+        negative = negative || s.substr(p).starts_with(w);
+    }
+    if (!negative) return false;
+    m.group[1] = "じゃ";
+    m.end = p;
+    return true;
+}
+
+// The negative of the contracted てしまう said ちゃわ, じゃわ, ちまわ or じまわ before ない and its forms (落ちちゃわないのか
+// 떨어져 버리지 않아?, 死んじゃわない, 忘れちまわないうちに): てしまわ, でしまわ after a verb stem. Not ちゃわん (茶碗).
+bool ContractedShimawaNai(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (head.empty()) return false;
+    const char32_t b = LastRune(head).cp;
+    if (!(IsKanjiClass(b) || IsHiraganaClass(b))) return false;
+    for (const auto& [written, plain] : {std::pair<std::string_view, std::string_view>{"ちゃわな", "てしまわな"},
+                                         {"じゃわな", "でしまわな"},
+                                         {"ちまわな", "てしまわな"},
+                                         {"じまわな", "でしまわな"}}) {
+        size_t p = pos;
+        if (!Lit(s, p, written)) continue;
+        // で after ん or い only (死んじゃわない, 泳いじゃわない); て after っ, a kanji or the stem of a verb
+        if (plain.starts_with("で") ? !In(b, U"んい") : In(b, U"んをはがもにへとやの")) return false;
+        m.group[1] = plain;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
+// The question くね of an adjective in い, its negative ない cut short (ヤバくね？ 위험하지 않아?, 寒くね?, すごくね？): くない,
+// before a question mark only (早くね！ is 빨리, 응). The stem is a kanji stem or a katakana or kana run of two or more that
+// the dictionary has as the stem of an adjective.
+bool AdjectiveKune(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "くね")) return false;
+    {
+        size_t q = p;
+        Lit(s, q, "ー");
+        if (!OneOf(s, q, U"？?")) return false;
+    }
+    const std::string_view head = s.substr(0, pos);
+    bool adjective = false;
+    std::string_view found;
+    if (const std::string_view stem = StemBefore(s, pos); !stem.empty()) {
+        adjective = AdjectiveIs(stem);
+        found = stem;
+    } else {
+        // a kana run before くね: its last two to four characters
+        size_t at = pos;
+        for (int n = 1; n <= 4 && at > 0 && !adjective; n++) {
+            const text::Rune r = LastRune(head.substr(0, at));
+            if (!(IsHiraganaClass(r.cp) || IsKatakanaRune(r.cp))) break;
+            at -= r.size;
+            if (n >= 2 && AdjectiveIs(head.substr(at))) {
+                adjective = true;
+                found = head.substr(at);
+            }
+        }
+    }
+    // not a く form of a greeting, said with ね (宜しくね？, よろしくね？)
+    if (adjective && dict::InClass(HDTRANS_CLASS("adjective.ku-greeting"), Cat({found, "く"}))) return false;
+    if (!adjective) return false;
+    m.group[1] = "くない";
+    m.end = p;
+    return true;
+}
+
+// The Kansai でけ of できる (でけん できん, でけへん できへん, でけた できた, でけます): でき, where it starts a word: after a
+// mark, the particle しか, は, が, も, を, に or と, or the なん of そんなん. After a kanji or katakana で is the particle
+// (金髪でけんか, 耳元でけたたましい). Not でけえ, でけぇ (でかい, big).
+bool KansaiDekiru(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "でけ")) return false;
+    bool form = false;
+    for (const std::string_view w : {"ん", "へん", "ひん", "た", "て", "る", "ま"}) form = form || s.substr(p).starts_with(w);
+    if (!form) return false;
+    // not でけんか of 喧嘩 (でけんかった is the past) nor でけたたましい
+    if ((s.substr(p).starts_with("んか") && !s.substr(p).starts_with("んかっ")) || s.substr(p).starts_with("たた")) return false;
+    const std::string_view head = s.substr(0, pos);
+    if (!head.empty() && !In(LastRune(head).cp, U"。｡！!？?「『（(、，, 　…‥")) {
+        bool particle = false;
+        for (const std::string_view w : {"しか", "は", "が", "も", "を", "に", "と", "なん"}) particle = particle || head.ends_with(w);
+        if (!particle) return false;
+    }
+    m.group[1] = "でき";
+    m.end = p;
+    return true;
+}
+
+// The Kansai やろ of a guess after the contracted ている or ていた (言うてるやろ 言ってるだろ 말하고 있잖아, 知ってたやろ？):
+// だろ, which the word stage reads on the verb; read as it is, やろ took the contracted form for a noun.
+bool ContractedTeiruYaro(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    bool contracted = false;
+    for (const std::string_view w : {"てる", "でる", "てた", "でた", "とる", "どる", "とった", "どった"}) contracted = contracted || head.ends_with(w);
+    if (!contracted) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "やろ")) return false;
+    m.group[1] = "だろ";
+    m.end = p;
+    return true;
+}
+
+// The ておられん of western speech said っとられん or んどられん (もうやっとられん 더는 못 해먹겠다, 読んどられへん):
+// ってられ, んでられ, the potential of the contracted ている before its negative ん, へん, ひん or ない.
+bool ToruPotentialNegative(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    std::string_view plain;
+    if (Lit(s, p, "っとられ")) {
+        plain = "ってられ";
+    } else if (Lit(s, p = pos, "んどられ")) {
+        plain = "んでられ";
+    } else {
+        return false;
+    }
+    bool negative = false;
+    for (const std::string_view w : {"ん", "へん", "ひん", "ない", "なかっ"}) negative = negative || s.substr(p).starts_with(w);
+    if (!negative || pos == 0) return false;
+    // the Kansai へん, ひん after it: the whole negative (読んどられへん 読んでられない)
+    size_t q = p;
+    const bool kansai = Lit(s, q, "へん") || Lit(s, q = p, "ひん");
+    // after a kanji or the kana of a verb stem (やっ, 待っ, 読ん), not the adverbs ちょっと, ずっと, もっと, きっと, ほっと
+    const std::string_view head = s.substr(0, pos);
+    for (const std::string_view w : {"ちょ", "ず", "も", "き", "ほ", "そ", "じ"}) {
+        if (head.ends_with(w) && plain.starts_with("っ")) return false;
+    }
+    m.group[1] = plain;
+    m.end = p;
+    if (kansai) {
+        m.group[1] = plain.starts_with("っ") ? "ってられない" : "んでられない";
+        m.end = q;
+    }
+    return true;
+}
+
+// The Kansai たれ of an order to do something for someone, the imperative of the contracted てやる (迎え入れたれ 맞이해 줘라,
+// 貸したれや, 言うたれ, 見たれよ): てやれ, before the end, や, よ, な or a comma. The stem is a verb of the dictionary:
+// an ichidan stem (入れ of 入れる), the し of a verb in す or a noun of する, a godan stem said い or っ (書い, 言っ), or a godan
+// verb in う said whole (言う). Not the nouns in ったれ (くそったれ, 甘ったれ), whose stem is no verb, nor 来たれ.
+bool KansaiTare(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "たれ")) return false;
+    {
+        size_t q = p;
+        // not before a comma, where たれ is the stem of a passive that goes on (打たれ、)
+        const bool ends = (EndAt(s, p) && !OneOf(s, q, U"、，,")) || Lit(s, q = p, "や") || Lit(s, q = p, "よ") || Lit(s, q = p, "な");
+        if (!ends) return false;
+        // たれな, たれよ end the sentence there (迎え入れたれな), not the noun たれ before more (垂れ流し)
+        if (!EndAt(s, p) && !EndAt(s, q) && FinalParticleEnd(s, p) == std::string_view::npos) return false;
+    }
+    const std::string_view head = s.substr(0, pos);
+    if (head.empty() || head.ends_with("来")) return false;
+    const std::string_view stem = StemBefore(s, pos);
+    if (stem.empty()) return false;
+    // the passive or imperative of a godan verb in つ or たる (開け放たれ, 打たれ, 当たれ) after its kanji
+    if (VerbIs(Cat({stem, "つ"})) || VerbIs(Cat({stem, "たる"})) || VerbIs(Cat({stem, "たれる"}))) return false;
+    const auto cut = [&](std::string_view last) { return stem.substr(0, stem.size() - last.size()); };
+    bool verb = false;
+    if (stem.ends_with("っ")) {
+        for (const std::string_view u : {"う", "つ", "る"}) verb = verb || (!cut("っ").empty() && VerbIs(Cat({cut("っ"), u})));
+    } else if (stem.ends_with("う")) {
+        verb = VerbIs(stem);  // 言うたれ, 手伝うたれ: the う before た of a godan verb in う, said whole
+    } else if (stem.ends_with("い")) {
+        verb = !cut("い").empty() && VerbIs(Cat({cut("い"), "く"}));
+    } else if (stem.ends_with("し")) {
+        verb = !cut("し").empty() && (VerbIs(Cat({cut("し"), "す"})) || IsKanjiClass(LastRune(cut("し")).cp));
+    }
+    verb = verb || VerbIs(Cat({stem, "る"}));
+    if (!verb) return false;
+    m.group[1] = "てやれ";
+    m.end = p;
+    // the な after the order softens it like よ (迎え入れたれな 맞이해 줘라); read as it is, てやれな is a potential
+    if (size_t q = p; Lit(s, q, "な") && EndAt(s, q)) {
+        m.group[1] = "てやれよ";
+        m.end = q;
+    }
+    return true;
+}
+
+// The なか of Kyushu speech, ない, after じゃ or では (急ぎじゃなかけん 급한 게 아니니까, 白じゃなかと？; after く it is 中,
+// ざわめくなか),
+// before the から of its speech (けん, けえ), a sentence particle or the end: ない, with けん read as から here, where the
+// い before it would leave it to いけん.
+bool KyushuNaka(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (!(head.ends_with("じゃ") || head.ends_with("では"))) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "なか")) return false;
+    for (const std::string_view w : {"けん", "けえ", "けぇ"}) {
+        size_t q = p;
+        if (Lit(s, q, w)) {
+            m.group[1] = "ないから";
+            m.end = q;
+            return true;
+        }
+    }
+    if (FinalParticleEnd(s, p) == std::string_view::npos && !s.substr(p).starts_with("ばい") && !s.substr(p).starts_with("と")) return false;
+    m.group[1] = "ない";
+    m.end = p;
+    return true;
+}
+
+// The おらす of Kyushu speech, the honoured いる (ろくろ部屋におらすけん 있으니까, 先生はおらすと？): おられる, and
+// with the けん of its speech おられるから, where a word starts: after a mark, a kanji, katakana or a particle.
+bool KyushuOrasu(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (!head.empty()) {
+        const char32_t b = LastRune(head).cp;
+        if (IsHiraganaClass(b) && !In(b, U"にでがはもと")) return false;
+    }
+    size_t p = pos;
+    if (!Lit(s, p, "おらす")) return false;
+    for (const std::string_view w : {"けん", "けえ", "けぇ"}) {
+        size_t q = p;
+        if (Lit(s, q, w)) {
+            m.group[1] = "おられるから";
+            m.end = q;
+            return true;
+        }
+    }
+    if (FinalParticleEnd(s, p) == std::string_view::npos && !s.substr(p).starts_with("と") && !s.substr(p).starts_with("ばい")) return false;
+    m.group[1] = "おられる";
+    m.end = p;
+    return true;
+}
+
+// The ときゃ of spoken speech, ときは with は fused (あんときゃ 그때는, そんときゃ, 子供のときゃ): ときは, after ん, の or a kanji.
+bool FusedTokiwa(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (head.empty() || !(head.ends_with("ん") || head.ends_with("の") || IsKanjiClass(LastRune(head).cp))) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ときゃ")) return false;
+    m.group[1] = "ときは";
+    m.end = p;
+    return true;
+}
+
 std::string DialectForms(std::string_view in, const RunLookup& runs) {
     gRuns = &runs;
     std::string text(in);
     const auto group1 = [](const Match& m) { return std::string(m.group[1]); };
+    if (text.find("ちゃ") != std::string::npos) text = ReplaceAll(text, KansaiChau, group1);
+    if (text.find("ときゃ") != std::string::npos) text = ReplaceAll(text, FusedTokiwa, group1);
+    if (text.find("じゃあ") != std::string::npos) text = ReplaceAll(text, DrawnJaNegative, group1);
+    if (text.find("わな") != std::string::npos) text = ReplaceAll(text, ContractedShimawaNai, group1);
+    if (text.find("くね") != std::string::npos) text = ReplaceAll(text, AdjectiveKune, group1);
+    if (text.find("でけ") != std::string::npos) text = ReplaceAll(text, KansaiDekiru, group1);
     if (text.find("てま") != std::string::npos || text.find("でま") != std::string::npos) text = ReplaceAll(text, KansaiMau, group1);
     if (text.find("すん") != std::string::npos) text = ReplaceAll(text, KansaiSuru, group1);
     if (text.find("んや") != std::string::npos) {
@@ -1746,10 +2069,15 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     if (text.find("ずら") != std::string::npos || text.find("だべ") != std::string::npos || text.find("ばい") != std::string::npos) {
         text = ReplaceAll(text, EndConjecture, group1);
     }
+    if (text.find("たれ") != std::string::npos) text = ReplaceAll(text, KansaiTare, group1);
     if (text.find("う") != std::string::npos) {
         text = ReplaceAll(text, OnbinVerb, group1);
         text = ReplaceAll(text, OnbinAdjective, group1);
     }
+    if (text.find("やろ") != std::string::npos) text = ReplaceAll(text, ContractedTeiruYaro, group1);
+    if (text.find("られ") != std::string::npos) text = ReplaceAll(text, ToruPotentialNegative, group1);
+    if (text.find("なか") != std::string::npos) text = ReplaceAll(text, KyushuNaka, group1);
+    if (text.find("おらす") != std::string::npos) text = ReplaceAll(text, KyushuOrasu, group1);
     if (text.find("か") != std::string::npos) text = ReplaceAll(text, KyushuAdjective, group1);
     if (text.find("ちょ") != std::string::npos) {
         text = ReplaceAll(text, WesternChoru, [](const Match& m) {

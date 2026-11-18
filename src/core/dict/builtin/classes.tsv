@@ -302,6 +302,7 @@
 //= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
 //= adjective.character	Stems of adjectives and adjectival nouns of a trait or an attitude of a person, after which ところ is a side of that person, 면 (傲慢なところ 오만한 면, 優しいところ 다정한 면).
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
+//= adjective.ku-greeting	く forms of adjectives that are a greeting or a request of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?; ヤバくね？ 위험하지 않아?).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
@@ -14768,3 +14769,5 @@ suffix.kanji-noun	主
 suffix.kanji-noun	面
 suffix.kanji-noun	数
 suffix.kanji-noun	報
+adjective.ku-greeting	よろしく
+adjective.ku-greeting	宜しく

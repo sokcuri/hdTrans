@@ -1,0 +1,17 @@
+# 규칙: LEX-6451
+rule	input	expected	kind	layer
+normalize:dialect-word	なれど、まあ、このままで済ませるつもりもない。	has:하지만	fix	normalize
+normalize:dialect-word	大人になれど、変わらぬ。	lacks:하지만	keep	normalize
+normalize:dialect-word	されば、あらためて談合いたす。	has:그러니까	fix	normalize
+normalize:dialect-word	されば、行こう。	has:그러니까	fix	normalize
+normalize:dialect-word	攻撃されば負ける。	lacks:그러니	keep	normalize
+normalize:dialect-word	お休みなされば良い。	lacks:그러니	keep	normalize
+normalize:dialect-word	「されば、それがしが参ろう」	has:그러니까	fix	normalize
+normalize:dialect-word	敵は退いた。されば、追うまでもない。	has:그러니까, 쫓을	fix	normalize
+normalize:dialect-word	……されば、いずれに仕えるか。	has:그러니까	fix	normalize
+normalize:dialect-word	されば。	has:그러니까	fix	normalize
+normalize:dialect-word	「なれど、それは叶わぬ」	has:하지만	fix	normalize
+normalize:dialect-word	勝った。なれど、多くを失った。	has:하지만, 대부분을	fix	normalize
+normalize:dialect-word	……なれど、まだ早い。	has:하지만	fix	normalize
+normalize:dialect-word	許されば行く。	lacks:그러니	keep	normalize
+normalize:dialect-word	御覧なされば分かる。	lacks:그러니	keep	normalize
