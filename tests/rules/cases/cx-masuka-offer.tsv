@@ -15,14 +15,14 @@ cx:masuka-offer:10	そろそろお仕事しますか。	슬슬 일할까요.	fix
 cx:masuka-offer:5	「少しお休みになりますか？」	「조금 쉬시겠습니까?」	fix	rewrites
 cx:masuka-offer:5	「お茶を召し上がりますか？」	「차를 드시겠습니까?」	fix	rewrites
 cx:masuka-offer:5	いかがあそばしますか。	어떻게 하시겠습니까.	fix	rewrites
-cx:masuka-offer:10	「どこに行きますか？」	「어디에 갑니까?」	keep	rewrites
-cx:masuka-offer:10	「何を食べますか？」	「뭘 먹습니까?」	keep	rewrites
-cx:masuka-offer:10	「今の話、筧君はどう思いますか？」	「지금의 이야기, 카케이 군은 어떻게 생각합니까?」	keep	rewrites
+cx:masuka-offer:10	「どこに行きますか？」	「어디에 가요?」	keep	rewrites
+cx:masuka-offer:10	「何を食べますか？」	「뭘 먹어요?」	keep	rewrites
+cx:masuka-offer:10	「今の話、筧君はどう思いますか？」	「지금의 이야기, 카케이 군은 어떻게 생각해요?」	keep	rewrites
 cx:masuka-offer:10	「マスター、指示はありますか？」	「마스터, 지시는 있습니까?」	keep	rewrites
-cx:masuka-offer:10	「このメモの暗号、解読できますか？」	「이 메모의 암호, 해독할 수 있습니까?」	keep	rewrites
+cx:masuka-offer:10	「このメモの暗号、解読できますか？」	「이 메모의 암호, 해독할 수 있어요?」	keep	rewrites
 cx:masuka-offer:10	「その大仕事の内容、教えてもらえますか？」	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	「明日の予定は決めてますか？」	!rule:cx:masuka-offer:10	keep	rewrites
-cx:masuka-offer:10	「時間ありますか？」	「시간 있습니까?」	keep	rewrites
+cx:masuka-offer:10	「時間ありますか？」	「시간 있어요?」	keep	rewrites
 cx:masuka-offer:5	「お持ちでいらっしゃいますか？」	!rule:cx:masuka-offer:5	keep	rewrites
 cx:masuka-offer:10	「私の胸の鼓動、感じますか」	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	「一緒に行きませんか？」	「함께 가지 않을래요?」	keep	rewrites
@@ -49,7 +49,7 @@ cx:masuka-offer:10	待ち伏せますか？！	!rule:cx:masuka-offer:10	keep	rew
 cx:masuka-offer:10	「一生懸命働いた人たちは、それで満足しますか？　納得してくれますか？」	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	日本語を話しますか？	일본어를 합니까?	keep	rewrites
 cx:masuka-offer:10	タバコを吸いますか？	담배를 피웁니까?	keep	rewrites
-cx:masuka-offer:10	「本当に死にますか？」	「정말 죽습니까?」	keep	rewrites
+cx:masuka-offer:10	「本当に死にますか？」	「정말 죽어요?」	keep	rewrites
 cx:masuka-offer:10	よし、行きますか	좋아, 갈까요	fix	rewrites
 cx:masuka-offer:10	お風呂にしますか	rule:cx:masuka-offer:10=3까요	fix	rewrites
 cx:masuka-offer:10	触ってみますか	만져 볼까요	fix	rewrites

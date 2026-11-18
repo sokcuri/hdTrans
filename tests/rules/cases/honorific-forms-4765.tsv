@@ -110,13 +110,13 @@ normalize:honorific-ikare	山田さん１枚持ってって｡ >>また持って
 normalize:honorific-ikare	シキ君と和服の子 労働区へ連れていかれちゃったのね	시키 군과 기모노의 아이 노동구에 끌려가버렸어	keep	normalize
 normalize:honorific-ikare	置いていかれなかった。	남겨지지 않았다.	keep	normalize
 normalize:honorific-ikare	お父が… 連れていかれた。	아버지가… 끌려갔다.	keep	normalize
-normalize:favour-moraenai	「一度も見せてもらえませんでした。ユリアン様は、ターニャ様を疑うこと自体が残酷だと」	「한 번도 보여 주지 않았습니다. 유리안 님은, 타냐 님을 의심하는 거 자체가 잔혹하다고」	fix	normalize
+normalize:favour-moraenai	「一度も見せてもらえませんでした。ユリアン様は、ターニャ様を疑うこと自体が残酷だと」	「한 번도 보여 주지 않았어요. 유리안 님은, 타냐 님을 의심하는 거 자체가 잔혹하다고요」	fix	normalize
 normalize:favour-moraenai	それを憎まれ口をたたくなんて、あなたみたいな非常識な人はどこも雇ってもらえないわよ！	그것을 밉살스러운 말을 치다니, 당신 같은 비상식적인 사람은 어디도 고용해 주지 않아!	fix	normalize
 normalize:favour-moraenai	マイクロフトはあなたがつけたはず なのに一生 呼んでもらえないのかな ホームズさん	마이크로후트는 당신이 붙였을 텐데 평생 불러 주지 않는 건지 홈스 씨	fix	normalize
 normalize:favour-moraenai	「どうでもいいものじゃ、いくらタダでも受け取ってもらえないだろうし……」	「아무래도 좋은 것은, 아무리 공짜라도 받아 주지 않을 테고……」	fix	normalize
 normalize:favour-moraenai	森下さんは、全然受け取ってもらえない。	모리시타 씨는, 전혀 받아 주지 않는다.	fix	normalize
 normalize:favour-moraenai	「自分たちでビラを配っても、なかなか受け取ってもらえないらしい」	「자신들로 전단을 나눠줘도, 좀처럼 받아 주지 않는 것 같아」	fix	normalize
-normalize:favour-moraenai	「母が過保護で、包丁持たせてもらえませんでした……」	「어머니가 과보호로, 부엌칼 갖게해 주지 않았습니다……」	fix	normalize
+normalize:favour-moraenai	「母が過保護で、包丁持たせてもらえませんでした……」	「어머니가 과보호로, 부엌칼 갖게해 주지 않았어요……」	fix	normalize
 normalize:favour-moraenai	お母様は、お父様に相談しても「大げさだ」と取り合ってもらえない日々の中で、ただ泣き寝入りしていたわけではなかった。	어머님은, 아버님에게 상담해도 「과장되다」라고 서로 빼앗아 주지 않는 나날의 안에서, 다만 단념하고 있던 것은 아니었다.	fix	normalize
 normalize:favour-moraenai	「一度も見せてもらえませんでした。	「한 번도 보여 주지 않았습니다.	fix	normalize
 normalize:favour-moraenai	見てもらえない可能性も高い｡	봐 주지 않을 가능성도 높다.	fix	normalize
@@ -145,12 +145,12 @@ normalize:honorific-stem	司令、野分に何かお求めですか？	사령관
 normalize:honorific-stem	「……なにか、お悩みですか？	「……뭔가, 고민하십니까?	fix	normalize
 normalize:honorific-stem	「王妃様がお探しです。	「왕비님이 찾으십니다.	fix	normalize
 normalize:honorific-stem	あたしが軽はずみの好色の念からあなたに言い寄ったとでもお思いなの？	내가 경솔의 호색 생각에서 당신에게 구애했다고라도 생각하시는 거야?	fix	normalize
-normalize:honorific-stem	「お揃いです」	「세트입니다」	keep	normalize
+normalize:honorific-stem	「お揃いです」	「세트예요」	keep	normalize
 normalize:honorific-stem	「将棋、お好きなんですか？	「쇼기, 좋아합니까?	keep	normalize
 normalize:honorific-stem	このくらい、綾那にお任せなのですっ！	has:맡겨 줘	keep	normalize
 normalize:honorific-stem	お似合いですね?	어울리네요?	keep	normalize
 normalize:honorific-stem	「先生はあんな田舎の方がお好きですか」	「선생님은 저런 시골이 좋아합니까」	keep	normalize
-normalize:honorific-stem	「お仕置きです」	「벌입니다」	keep	normalize
+normalize:honorific-stem	「お仕置きです」	「벌이에요」	keep	normalize
 normalize:honorific-stem	お疲れだったようですね	피곤했던 것 같네요	keep	normalize
 normalize:honorific-stem	「叔母さんのお使いで、どうもすみません。	「숙모의 심부름 있고로, 정말 죄송합니다.	keep	normalize
 normalize:honorific-ikare	先生が帰っていかれる。	선생님이 돌아가신다.	fix	normalize

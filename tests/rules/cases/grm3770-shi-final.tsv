@@ -10,7 +10,7 @@ cx:narration-style-1:5	「そしたら、気兼ねなくデートもできます
 cx:narration-style-1:5	「やると言ったからにはやりますよ。勝てば今日の借りもなくなりますしね」	「한다고 한 이상에는 해요. 이기면 오늘의 빚도 없어지잖아요」	fix	rewrites
 cx:narration-style-1:5	そしたら、気兼ねなくデートもできますしね。	그랬더니, 거리낌없게 데이트도 할 수 있고.	keep	rewrites
 cx:narration-style-1:7	「いえ、流石に遠慮しておきます。従業員がテーブルで食べる訳にはいきませんし」	「아뇨, 역시 사양해 둡니다. 종업원이 테이블로 먹을 수는 없거든요」	fix	rewrites
-cx:narration-style-1:7	「いえ、結構です。遊びに来たわけじゃありませんし」	「아뇨, 좋습니다. 놀러 온 게 아니거든요」	fix	rewrites
+cx:narration-style-1:7	「いえ、結構です。遊びに来たわけじゃありませんし」	「아뇨, 좋아요. 놀러 온 게 아니거든요」	fix	rewrites
 cx:narration-style-1:7	いえ、流石に遠慮しておきます。従業員がテーブルで食べる訳にはいきませんし。	아뇨, 역시 사양해 둡니다. 종업원이 테이블로 먹을 수는 없고.	keep	rewrites
 cx:narration-style-1:8	「せっかく塗ったオイルが無駄になってしまいましたし」	「모처럼 바른 오일이 쓸데없게 돼버렸거든요」	fix	rewrites
 cx:narration-style-1:8	「芸能人のライブなんかもありましたし」	「연예인의 라이브도 있었거든요」	fix	rewrites

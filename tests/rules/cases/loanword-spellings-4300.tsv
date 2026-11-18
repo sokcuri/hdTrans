@@ -64,7 +64,7 @@ dict:w:31546	ネットハック	has:넷핵	fix	lookup
 dict:w:31546	ネットハックをする。	넷핵을 한다.	fix	lookup
 dict:jisjk:49169	ストレッチ素材のパンツ	has:스트레치 소재	fix	lookup
 dict:w:2941	カチューシャの歌	has:카츄샤의 노래	fix	lookup
-lex:ネット	「あ、私がネットで拾ったんです」	has:넷에서 주웠습니다	keep	lookup
+lex:ネット	「あ、私がネットで拾ったんです」	has:넷에서 주웠어요	keep	lookup
 lex:ネット	ネットで評判の墓場てのがあって	has:넷에서 평판의	keep	lookup
 lex:ゴールネット	ゴールネットを揺らした。	has:골네트를	keep	lookup
 lex:ポケット	ポケットから携帯を取り出して、じっと見つめる。	has:포켓에서	keep	lookup

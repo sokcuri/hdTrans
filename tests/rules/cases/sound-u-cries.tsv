@@ -1,7 +1,7 @@
 # 규칙: SND-4
 rule	input	expected	kind	layer
 sound:u-cry	「うう、すみません」	「으으, 죄송합니다」	fix	sound
-sound:u-cry	「うう……恥ずかしいです……」	「으으……부끄럽습니다……」	fix	sound
+sound:u-cry	「うう……恥ずかしいです……」	「으으……부끄러워요……」	fix	sound
 sound:u-cry	「ううぅ……そんな……」	「으으으……그런……」	fix	sound
 sound:u-cry	「うぅ……でもぉ」	「으으……하지만」	fix	sound
 sound:u-cry	「わたしぃ……うっ……ううっ……」	「나……윽……으읏……」	fix	sound
@@ -44,7 +44,7 @@ sound:u-cry	ふああ…ううっ、ごめんなさい。	후아아…으읏, �
 sound:u-cry	熱っ！ううっ、すみません……	뜨겁다! 으읏, 죄송합니다……	fix	sound
 sound:u-cry	ううっ、オレのサイフ……。	으읏, 내 지갑…….	fix	sound
 sound:u-cry	くっ、ううっ……！？	큭, 으읏……!?	fix	sound
-sound:u-cry	「ううっ……は、恥ずかしいです……」	「으읏……부, 부끄럽습니다……」	fix	sound
+sound:u-cry	「ううっ……は、恥ずかしいです……」	「으읏……부, 부끄러워요……」	fix	sound
 sound:u-cry	「いやあっ、うううっ……と、止まらないっ……」	「싫엇, 으으읏……머, 멈추지 않아……」	fix	sound
 sound:u-cry	「くっ……う、ううっ……！」	「큭……으, 으읏……!」	fix	sound
 sound:u-cry	「……うぅっ……それは言っちゃダメ……」	「……으읏……그건 말하면 안 돼……」	fix	sound

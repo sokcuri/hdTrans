@@ -62,7 +62,7 @@ dict:w:35912	「死んだわけないよ」	has:죽었을 리가 없	fix	local-e
 dict:w:35912	「行ったわけもないし」	has:갔을 리도 없	fix	local-ending
 dict:w:35913	「行くわけもないし」	has:갈 리도 없	fix	local-ending
 dict:w:35913	「来るわけはないよ」	has:올 리는 없	fix	local-ending
-pattern:書くわけありません	「勝てるわけありません」	has:리가 없습니다	fix	lookup
+pattern:書くわけありません	「勝てるわけありません」	has:리가 없어요	fix	lookup
 cx:wake-nai:40	「わかるわけない」	has:알 리가 없	keep	rewrites
 dict:w:35911	「そんなわけないでしょ」	has:리 없	keep	defaults
 dict:w:35910	「そんなの訳ないよ」	has:쉬워	keep	defaults
@@ -114,7 +114,7 @@ cx:wake-nai:45	「わかる、わけを話す」	has:이유를	keep	rewrites
 cx:wake-nai:47	「見た、わけを話す」	lacks:봤을	keep	rewrites
 cx:wake-nai:5	「行く訳ない」	has:갈 리가 없어	fix	rewrites
 cx:wake-nai:5	「来る訳ないよ」	has:올 리가 없어	keep	rewrites
-dict:w:35911	「寝てるわけないです」	has:자고 있을 리가 없습니다	fix	local
+dict:w:35911	「寝てるわけないです」	has:자고 있을 리가 없어요	fix	local
 dict:w:35911	「なわけないじゃん」	has:그럴 리가 없	fix	local
 dict:w:35910	「こんな仕事、わけない」	has:수월	keep	defaults
 dict:w:35910	「わけないよ」	has:수월	keep	defaults

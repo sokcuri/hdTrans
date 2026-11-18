@@ -169,6 +169,8 @@ std::vector<std::string> SplitQuotes(const std::string& ja) {
 }
 
 struct Cues {
+    bool report = false;       // REG-26: a report at a sentence end (了解です)
+    bool keigoOthers = false;  // REG-26: a keigo row about a titled person (KeigoOfOthers)
     bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
     bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
     bool lastKa = false;      // the last sentence ends in the question particle か
@@ -323,7 +325,12 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         } else {
             for (std::size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
                 if (before(u.text, i)) continue;
-                if (r.cue == "keigo" && KeigoOfOthers(u.text, i)) continue;
+                if (r.cue == "keigo" && KeigoOfOthers(u.text, i)) {
+                    // REG-26: keigo about a titled person (社長はおられますか) still sets a formal quote's level
+                    const std::u32string_view b = std::u32string_view(u.text).substr(0, i);
+                    if (!b.ends_with(U"嘘") && !b.ends_with(U"冗談")) c.keigoOthers = true;
+                    continue;
+                }
                 const bool followed = std::any_of(r.notBefore.begin(), r.notBefore.end(), [&](const std::u32string& w) {
                     return StartsAt(u.text, i + r.text.size(), w);
                 });
@@ -347,6 +354,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         else if (r.cue == "set") c.set = true;
         else if (r.cue == "archaic") c.arch = true;
         else if (r.cue == "stiff") c.stiff = true;
+        else if (r.cue == "report") c.report = true;
         else if (r.cue == "casual") casualEnd = true;
         else if (r.cue == "casual-mark") c.casualMark = true;
         else if (r.cue.starts_with("first:") && c.first.empty()) c.first = r.cue.substr(6);
@@ -610,6 +618,11 @@ Persona VoiceOf(const RegisterTables& t, const std::string& ja) {
 }  // namespace
 
 std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(Scan(t, ja)); }
+
+SentenceCues CuesOfSentence(const RegisterTables& t, const std::string& ja) {
+    const Cues c = Scan(t, ja);
+    return {c.pend, c.set || c.report, c.keigo || c.keigoOthers, c.arch, c.stiff, !c.first.empty()};
+}
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines) {
     std::vector<RegDecision> out(lines.size());

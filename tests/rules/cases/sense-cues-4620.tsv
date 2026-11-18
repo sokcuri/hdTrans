@@ -1,7 +1,7 @@
 # 규칙: LEX-4620
 rule	input	expected	kind	layer
 cx:sense-cues-1:210	そうなの？言われてみれば、仲はまったく進展してなかったわね	그래? 듣고 보니, 사이는 전혀 진전하고 있지 않았네	fix	rewrites
-cx:sense-cues-1:210	「しかも、思い切ってスマホにしてみました。まったく使い方がわかりませんけど」	「게다가, 과감히 스마트폰으로 해 보았습니다. 전혀 사용법을 모르지만」	fix	rewrites
+cx:sense-cues-1:210	「しかも、思い切ってスマホにしてみました。まったく使い方がわかりませんけど」	「게다가, 과감히 스마트폰으로 해 봤어요. 전혀 사용법을 모르지만요」	fix	rewrites
 cx:sense-cues-1:210	まったく強大で迷惑極まりない結婚活動	완전히 강대해 민폐 짝이 없는 결혼 활동	keep	rewrites
 cx:sense-cues-1:210	彼は我々とはまったく違った	그는 우리와는 완전히 달랐다	keep	rewrites
 cx:sense-cues-1:212	まったくもうっ！	정말이지 이제!	fix	rewrites

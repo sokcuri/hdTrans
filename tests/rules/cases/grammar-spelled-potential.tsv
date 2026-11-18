@@ -8,7 +8,7 @@ voice:spelled-potential	ここで写真を撮れますか？	여기서 사진을
 voice:spelled-potential	写真がよく撮れた。	사진이 잘 찍혔다.	keep	voice
 voice:spelled-potential	「うん、ちゃんと撮れた」	「응, 제대로 찍혔어」	keep	voice
 voice:spelled-potential	「こんな感じに撮れたよ♪」	has:찍혔어	keep	voice
-voice:spelled-potential	「いいネコ写真が撮れましたか？」	has:찍혔습니까	keep	voice
+voice:spelled-potential	「いいネコ写真が撮れましたか？」	has:찍혔어요	keep	voice
 voice:spelled-potential	「意外と綺麗に撮れるものなんですね」	has:찍히는	keep	voice
 voice:spelled-potential	「でも、売れないんだよなぁ……」	has:팔리지 않는	keep	voice
 voice:spelled-potential	「売れたねえ」	「팔렸네」	keep	voice

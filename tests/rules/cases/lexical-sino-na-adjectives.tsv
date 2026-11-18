@@ -31,7 +31,7 @@ G365	皆無に等しい。	전무에 다름없다.	fix	global-stem
 G365	攻撃を発射後に避けるのは実質的には不可能に近い。	공격을 발사 후에 피하는 것은 실질적으로는 불가능에 가깝다.	fix	global-stem
 G365	静かに近づいてきた。	조용하게 다가왔다.	keep	global-stem
 G365	強引に近づく。	억지로 가까워진다.	keep	global-stem
-lexical:na-adjective	「動機が不純です」	「동기가 불순합니다」	fix	lookup
+lexical:na-adjective	「動機が不純です」	「동기가 불순해요」	fix	lookup
 G365	このゲームのアバターは極めてリアルに近い動き	이 게임의 아바타는 지극히 리얼에 가까운 움직임	fix	global-stem
 G365	完璧に近い出来だ。	완벽에 가까운 성과다.	fix	global-stem
 G365	無限に近い時間	무한에 가까운 시간	fix	global-stem

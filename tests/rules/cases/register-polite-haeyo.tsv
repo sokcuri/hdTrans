@@ -1,0 +1,93 @@
+# 규칙: REG-25, REG-26, REG-27
+rule	input	expected	kind	layer
+register:REG-25	「はい、大丈夫です。どうしました？」	「네, 괜찮아요. 무슨 일이에요?」	fix	register
+register:REG-25	「なにしてんすか？」	「뭐 해요?」	fix	register
+register:REG-25	「いいんですか？」	「좋아요?」	fix	register
+register:REG-25	「……まだこんなに飲むんですか？」	「……아직 이렇게 마셔요?」	fix	register
+register:REG-25	「そっ……そうなんですか……？」	「그……그래요……?」	fix	register
+register:REG-25	「えぇっ！？　そうなんですか？！」	「에엣!? 그래요?!」	fix	register
+register:REG-25	「料理部とのコラボキャンペーン開催でーす」	「요리부와의 콜라보 캠페인 개최예요~」	fix	register
+register:REG-25	「もう……先輩、エッチです……」	has:선배, 야해요……」	fix	register
+register:REG-25	「え、と……俺、走ってました？」	has:달리고 있었어요?」	fix	register
+register:REG-25	「なんだか気を遣わせてしまってすみません」	has:미안해요」	fix	register
+register:REG-25	「あれは、爆弾処理班が必要なくらい危険なものなんです」	has:위험한 거예요」	fix	register
+register:REG-25	「嫌そうに見えましたか？」	has:보였어요?」	fix	register
+register:REG-25	「模擬戦でセリカにも勝ちました！」	has:이겼어요!」	fix	register
+register:REG-25	「昨日は行きませんでした」	has:않았어요」	fix	register
+register:REG-25	「それは知りませんでした」	has:몰랐어요」	fix	register
+register:REG-25	「保安官が本業です。外交官は副業ですね」	has:본업이에요.	fix	register
+register:REG-25	「……し、支持してます」	has:지지하고 있어요」	keep	register
+register:REG-25	「そんなにたくさんの卵……どうされるんですか？」	has:어떻게 하세요?」	fix	register
+register:REG-25	「では、お名前だけ教えてくれませんか？」	has:가르쳐 주지 않으시겠어요?」	fix	register
+register:REG-25	「これです！　どこにあったんですか！？」	has:「이거예요!	fix	register
+register:REG-25	「えぇっ！？　それです！？」	has:그거예요!?」	fix	register
+register:REG-25	「俺は朝番ですよ。先輩と交代で配達に行くんです」	has:배달하러 가요」	keep	register
+register:REG-25	「無茶ですよ。相手は公人ですし、目撃者も多い。言い逃れができる状態ではないんです」	has:목격자도 많아요. 	keep	register
+register:REG-26	「ありがとうございます。頼りになりますね」	has:감사합니다.	keep	register
+register:REG-26	「申し訳ありません。すぐに戻ります」	has:죄송합니다.	keep	register
+register:REG-26	「それでは、失礼します」	has:실례합니다」	keep	register
+register:REG-26	「粗茶でございます」	has:차입니다」	keep	register
+register:REG-26	「お言葉だけでも恐縮です…！」	has:황송합니다	keep	register
+register:REG-26	『恐れ入りますが。アニメはこちらです。』	has:이쪽입니다.』	keep	register
+register:REG-26	「師匠、ご無事で何よりです」	has:다행입니다」	keep	register
+register:REG-26	「爆破スイッチ、確保しました」	has:확보했습니다」	keep	register
+register:REG-26	「了解です。すぐに向かいます」	has:알겠습니다.	keep	register
+register:REG-26	「先生がおられます」	lacks:어요	keep	register
+register:REG-26	「承りました。」	「알았습니다.」	keep	register
+register:REG-26	「しょうちしました」	「알았습니다」	keep	register
+register:REG-26	「長い間お世話になりました。ごきげんよう」	has:신세를 졌습니다.	keep	register
+register:REG-26	「モーニング・コートを着ておいでになりました」	has:계셨습니다」	keep	register
+register:REG-26	「おやおや、ふたりとも私のときと違って、ずいぶん長い握手ですな」	has:악수입니다」	keep	register
+register:REG-26	「ほほぉ、さすがはおおしま氏。みなの期待を背負っての出馬ですな……」	has:출마입니다……」	keep	register
+register:REG-26	「だからおしまい。わかりますな？」	has:압니까?」	keep	register
+register:REG-26	『チュートリアルを行いますか？』	has:실시하시겠습니까?』	keep	register
+register:REG-26	「皆さんのおかげで、とても楽しくなってました」	has:즐거워지고 있었습니다」	keep	register
+register:REG-26	「マスター、分かれ道です」	has:갈림길입니다」	keep	register
+register:REG-26	「マスター、有間さんの部屋に潜入しました」	has:잠입했습니다」	keep	register
+register:REG-26	「皆さんが目立つように、私はあえて一歩引いてるんです」	has:물러나고 있습니다」	keep	register
+register:REG-27	「じゃ、私も戻ります」	has:돌아옵니다」	keep	register
+register:REG-27	「後日、改めてお誘いに来ます」	has:권하러 옵니다」	keep	register
+register:REG-27	「は、はい、絶対入れます」	has:절대 넣습니다」	keep	register
+register:REG-27	「わかりました、できる限りやってみます」	has:해 보겠습니다」	keep	register
+register:REG-27	「もうちょっと頑張ります」	has:노력하겠습니다」	keep	register
+register:REG-27	「ま、そうならないように、頑張ります」	has:노력하겠습니다」	keep	register
+register:REG-27	「よし、じゃあテイクツー行きましょう」	has:갑시다」	keep	register
+register:REG-27	「では、そうしましょう」	has:그렇게 합시다」	keep	register
+register:REG-27	「占いなんてつまらないですね、今日の活動に戻りましょう」	has:돌아갑시다」	keep	register
+register:REG-27	「あの子はいろいろとすごいんですのよ。」	has:거랍니다	keep	register
+register:REG-27	「自分が得をするために、意識を少し変えてみる。それでいいと思うんです」	has:바꾸어 본다. 그거면 된다고 생각합니다」	keep	register
+register:REG-27	「ただ、その法則性を知らず、人の姿をしたクイーンに惑わされるから変則的に感じる。ですが、逆に法則性を見抜いてしまえば対処はできます」	has:변칙적으로 느낀다.	keep	register
+register:REG-27	「シュウさんって頑固ですね。だから引っ越しも進まないんです」	has:그러니까 이사도 나아가지 않아요」	keep	register
+register:REG-27	「私、むしろ、嫌われてるのはこっちだと思ってます」	has:이쪽이라고 생각해요」	fix	register
+register:REG-27	「……森下さん……でしたね、頑張りましょう」	has:힘냅시다」	keep	register
+register:REG-27	「本気でそう認めてもらえるよう、頑張ります」	has:노력하겠습니다」	keep	register
+register:REG-26	「お客様は何名様でしょうか？」	has:몇 분입니까?」	keep	register
+register:REG-26	「ただいま帰りました」	「다녀왔습니다」	keep	register
+register:REG-26	「ロウリア王、準備はすべて整いました」	has:갖추어졌습니다	keep	register
+register:REG-26	「あーあぁまったく、シスコンじゃない穂積殿。どうするおつもりですか？」	lacks:생각이에요	keep	register
+register:REG-26	「社長はおられますか？」	「사장은 계십니까?」	keep	register
+register:REG-26	「了解です。すぐ向かいます」	「알겠습니다. 바로 향합니다」	keep	register
+register:REG-25	「魔王はもう倒しました」	「마왕은 벌써 쓰러뜨렸어요」	fix	register
+register:REG-25	「この国の王子です」	「이 나라의 왕자예요」	fix	register
+register:REG-25	「神殿に行きました」	「신전에 갔어요」	fix	register
+register:REG-25	「ゲームはもうマスターしました」	「게임은 이제 마스터했어요」	fix	register
+register:REG-25	「先生の了解はもらいました」	has:받았어요	fix	register
+register:REG-25	「楽しかったです……本当に楽しかったです」	「즐거웠어요……정말 즐거웠어요」	fix	register
+register:REG-25	「そうです……楽しかったです」	「그래요……즐거웠어요」	fix	register
+register:REG-25	「楽しかったです。本当に」	「즐거웠어요. 정말」	fix	register
+register:REG-25	「楽しかったです、本当に」	「즐거웠어요, 정말」	fix	register
+register:REG-25	「本当ですか？」	「정말이에요?」	fix	register
+register:REG-25	「今日は晴れです。明日はどうですか？」	has:내일은 어때요?	fix	register
+register:REG-25	「映画を見ました」	「영화를 봤어요」	fix	register
+register:REG-25	「夢を見ました」	「꿈을 꿨어요」	fix	register
+register:REG-25	「痴女扱いされても我慢できます」	has:참을 수 있어요	fix	register
+register:REG-27	「よく分かりません」	「잘 몰라요」	fix	register
+register:REG-27	「明日は雨かもしれません」	「내일은 비일지도 몰라요」	fix	register
+register:REG-27	「私も見習わなくてはなりません」	「저도 본받아야 해요」	fix	register
+register:REG-27	「それでいいです」	「그거면 돼요」	fix	register
+register:REG-27	「もうすぐ雨が降ります」	「이제 곧 비가 와요」	fix	register
+register:REG-27	「みんなの気持ちは分かると思います」	「모두의 마음은 안다고 생각해요」	fix	register
+register:REG-27	「用があるので、帰ります」	「용무가 있으므로, 돌아갑니다」	keep	register
+register:REG-27	「じゃ、私も戻ります」	「그러면, 저도 돌아옵니다」	keep	register
+register:REG-27	「あなたは、無謀な指揮官ではないと考えていました」	has:생각하고 있었습니다	keep	register
+register:REG-27	「我々が行きます」	「우리가 갑니다」	keep	register

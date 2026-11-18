@@ -27,7 +27,7 @@ rewrite:result-state	激しく動揺してます……どうしていいか…�
 rewrite:result-state	「お互い相手のことを気にして、前に進めなくなっていたわけですよね」	has:없게 돼	fix	rewrites
 rewrite:result-state	調べきるのに時間が掛かりそうね……≫	다 조사하는데 시간이 걸릴 것 같네……≫	keep	rewrites
 rewrite:result-state	それを調べるのが、お前たちの課題だ。	그것을 조사하는 것이, 너희의 과제다.	keep	rewrites
-rewrite:result-state	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	rewrites
+rewrite:result-state	「そんな事まで調べてるんですか！？」	「그런 일까지 조사해요!?」	keep	rewrites
 rewrite:result-state	「ね、とけてなくなっちゃうでしょ？」	「저기, 녹아 없어져버리잖아?」	keep	rewrites
 rewrite:result-state	よくいなくなるイスカに困ってるのと、	has:이스카 때문에	keep	rewrites
 rewrite:result-state	「部室がなくなったら困りますしねえ」	「동아리방이 없어지면 곤란하고 응」	keep	rewrites

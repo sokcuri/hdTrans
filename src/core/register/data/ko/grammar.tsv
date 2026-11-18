@@ -36,6 +36,7 @@ caus.ha	시키다	causative of a 하다 verb: 공부하다 → 공부시키다
 caus.aux	하다	causative: -게 하다
 conn.caus	-게
 lit.ends	다요까죠	last syllables of a word that the word stage wrote literally and the retrofit reads as a predicate
+listener.hon	세요|셔요|십시오|십니다|십니까|시죠|시지요|셨어요|셨습니|시네요|실래요|실까요|시겠|세용	REG-10, REG-25: a polite predicate written with -시- for the listener (주세요, 계십니까): never lowered to 반말; lowered to 해요체 it keeps -시-
 mixed.hapsyo	니다|니까	words the retrofit could not read that carry 합쇼체; the line then keeps the word stage's levels
 mixed.haeyo	요|죠	same for 해요체
 mixed.word	어요|아요|에요|예요|해요|세요|까요|네요|데요|군요|래요|게요|나요|가요|지요|죠	해요체 ends of a Hangul word the reader kept whole (not 필요, 중요)
@@ -45,3 +46,10 @@ source.inner-keep	すまない|済まない|すまなかった|済まなかっ�
 source.casual-guess	でしょう	REG-12: a guess that is the casual 겠지 in a casual quote
 source.musing	かな	REG-3: a plain end of musing in a lady's polite quote stays plain
 
+lower.keep-eomi	dae|sseumnidayo	REG-25: endings kept at 합쇼체: the 해요체 form of 답니다 (대요, 래요) reads as hearsay (거랍니다 is no 거래요); 습니다요 renders the ますです tic
+source.address	皆さん|みなさん|皆様|皆さま|おふたり|お二人|マスター|師匠|陛下|閣下|殿下|王様|あなた|貴方|貴殿|貴公|お客様|お客さま	REG-26: a quote addressing an audience, a master, a lord or royalty, a customer, or the distant あなた (당신) keeps its levels; each term is matched as a word (source.address-notbefore; not inside a longer katakana word: マスターする, マスターズ)
+source.address-notbefore	しすさせ	REG-26: kana after an address term that make it the stem of a verb (マスターした)
+source.address-title	王|殿|様|さま	REG-26: a title right after a name used as a call, before 、！？… or the quote's end (ロウリア王、, 穂積殿。): not 魔王は, 王国, 神殿に
+lower.not-will	모르다|생각하다|알다|되다|이르다|보이다|들리다|생기다|남다|걸리다|어울리다|맞다|틀리다|모자라다	REG-27: verbs of state or cognition: their present 합쇼체 statement states no will and is lowered (모릅니다 → 몰라요, 됩니다 → 돼요)
+lower.obligation	-어야|-아야|-여야	REG-27: the connective of an obligation (본받아야 합니다 → 해야 해요): the 하다 after it states no will
+lower.we	我等|我ら|我々|われら|われわれ|うちら|あたしら|自分ら	REG-27: a first person (plural) the first-person cues miss: its が is the speaker's (我等が証言します 우리들이 증언합니다)

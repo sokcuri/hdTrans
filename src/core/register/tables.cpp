@@ -256,7 +256,7 @@ bool LoadKo(Tables& t, std::string& err) {
         for (const char* need :
              {"conn.aux", "aux.neg", "aux.neg-mot", "aux.prohib", "aux.give", "conn.neg", "family.jima", "nom.geot", "conn.default",
               "final.fallback", "pre.hon", "pre.past", "pre.gess", "lemma.cop", "lemma.negcop", "voice.aux", "lit.ends",
-              "mixed.hapsyo", "mixed.haeyo", "mixed.word"})
+              "mixed.hapsyo", "mixed.haeyo", "mixed.word", "listener.hon"})
             if (!t.grammar.contains(need)) {
                 err = std::string("grammar.tsv: missing ") + need;
                 return false;
