@@ -1239,7 +1239,9 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
     const bool afterParticle = !before.empty() && Has("はがものをにでとへ", LastChar(before));
     // A lead for a word of word.te-alone: a noun right before it (発艦はじめて！) or a start of lead.te-request at
     // the start of its clause (さあ、はじめて！, はやくおうちにかえって！).
-    const bool lead = [before, previousToken] {
+    // Found once when first asked: the clause may be all of a long line before the word.
+    int leadFound = -1;
+    const auto findLead = [before, previousToken] {
         if (!before.empty() && NameClassOf(LastChar(before)) == kClassKanji) return true;
         const std::string joined = std::string(previousToken) + std::string(before);
         std::string_view clause = joined;
@@ -1248,11 +1250,15 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
         }
         while (!clause.empty() && Has(" 　", FirstChar(clause))) clause.remove_prefix(FirstChar(clause).size());
         return dict::StartsWithMember(HDTRANS_CLASS("lead.te-request"), clause) > 0;
-    }();
+    };
+    const auto lead = [&leadFound, &findLead] {
+        if (leadFound < 0) leadFound = findLead() ? 1 : 0;
+        return leadFound == 1;
+    };
     const Record* verb = nullptr;
     for (const Record* w = records; w != nullptr && verb == nullptr; w = w->child) {
         if (verbOf(*w) || named(*w) || !AllHiragana(w->source) || !text.starts_with(w->source)) continue;
-        if (At(w->partCode, 1) == '1' && ((afterParticle && !lead) || Has(w->semantic, "UMe"))) continue;
+        if (At(w->partCode, 1) == '1' && ((afterParticle && !lead()) || Has(w->semantic, "UMe"))) continue;
         for (const Record* v = records; v != nullptr; v = v->child) {
             if (!verbOf(*v) || v->source.empty() || v->source.size() >= w->source.size() || !w->source.starts_with(v->source)) {
                 continue;
@@ -1281,9 +1287,9 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
                 return dict::StartsWithMember(HDTRANS_CLASS("follower.te-request"), rest.empty() ? nextToken : rest) > 0;
             };
             const bool teForm = w->source.size() - v->source.size() == te.size() && form.starts_with(te) &&
-                                (alone    ? asked(after) || (lead && verbContext(after))
-                                 : adverb ? goesOn(after) || (lead && verbContext(after))
-                                          : verbContext(after) || (lead && after.starts_with("、")));
+                                (alone    ? asked(after) || (lead() && verbContext(after))
+                                 : adverb ? goesOn(after) || (lead() && verbContext(after))
+                                          : verbContext(after) || (lead() && after.starts_with("、")));
             // A ないで asks only at the end or before a giving auxiliary (こないでください); before いる it is a state
             // (集中できないでいる).
             const std::string_view afterNegative = form.substr(std::min(form.size(), negative.size()));
@@ -2036,6 +2042,20 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
 
 void Worker::CoverSurface(int token, std::string_view full, int cursor, Item* parent) {
     const int size = static_cast<int>(full.size());
+    // The runs of copies of full (CopyEnd), kept while it is read; a nested read keeps its own.
+    struct CopyChainScope {
+        Worker& w;
+        CopyChains saved;
+        CopyChainScope(Worker& worker, std::string_view text) : w(worker), saved(std::move(worker.copyChains)) {
+            w.copyChains = {};
+            w.copyChains.text = text.data();
+            w.copyChains.size = text.size();
+        }
+        ~CopyChainScope() { w.copyChains = std::move(saved); }
+        CopyChainScope(const CopyChainScope&) = delete;
+        CopyChainScope& operator=(const CopyChainScope&) = delete;
+    };
+    const CopyChainScope chains(*this, full);
     // Where a search that reached kMaxWordDepth stopped: the search goes on there.
     int retries = 0;
     auto resumed = [&] {
@@ -2312,7 +2332,8 @@ bool AfterCopy(std::string_view before, std::string_view unit) {
     return false;
 }
 
-Copies CopiesAt(std::string_view text) {
+// start is where text starts in the text that chains, when not null, holds the runs walked last of.
+Copies CopiesAt(std::string_view text, Worker::CopyChains* chains, std::size_t start) {
     constexpr int kMaxUnit = 10;
     std::size_t unit = 0;
     char32_t first = 0;
@@ -2327,13 +2348,32 @@ Copies CopiesAt(std::string_view text) {
         const std::string_view u = text.substr(0, unit);
         const std::size_t separator = CopyPauseAt(text.substr(unit));
         if (!text.substr(unit + separator).starts_with(u)) continue;
+        // A copy of a run of u walked before, not its last copy: the walk from here is the rest of
+        // that walk.
+        for (std::size_t n = 0; chains != nullptr && n < std::size(chains->runs); n++) {
+            const Worker::CopyChain& run = chains->runs[n];
+            if (run.unit != u) continue;
+            const auto it = std::lower_bound(run.starts.begin(), run.starts.end(), start);
+            if (it != run.starts.end() && *it == start && it + 1 != run.starts.end()) {
+                return {unit, separator, static_cast<int>(run.starts.end() - it), run.end - start};
+            }
+        }
         Copies c{unit, separator, 1, unit};
+        std::vector<std::size_t> starts{start};
         for (std::size_t at = unit;;) {
             const std::size_t s = CopyPauseAt(text.substr(at));
             if (!text.substr(at + s).starts_with(u)) break;
             c.count++;
+            starts.push_back(start + at + s);
             at += s + unit;
             c.end = at;
+        }
+        if (chains != nullptr) {
+            Worker::CopyChain& run = chains->runs[chains->next];
+            chains->next = (chains->next + 1) % std::size(chains->runs);
+            run.unit = std::string(u);
+            run.starts = std::move(starts);
+            run.end = start + c.end;
         }
         return c;
     }
@@ -2356,7 +2396,10 @@ struct DepthScope {
 // A dictionary word that spells all the copies keeps them (いろいろ, はいはい); one that
 // spells only some of them does not (はい|はい|はい).
 std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
-    Copies c = CopiesAt(text);
+    Worker::CopyChains* runs = copyChains.text != nullptr && copyChains.text == before.data() && copyChains.size == before.size() + text.size()
+                                   ? &copyChains
+                                   : nullptr;
+    Copies c = CopiesAt(text, runs, before.size());
     // Copies written apart are the pieces between the source spaces (もしもし もしもし, not もし four times).
     if (const std::size_t unit = CopyUnit(text); unit > c.unit && unit <= text.size()) {
         c = {unit, 0, 1, unit};

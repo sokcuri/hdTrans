@@ -556,8 +556,10 @@ size_t SoundCoverEnd(const Emphasis& e, std::u32string_view rs, size_t from, siz
         }
         if (inStem) continue;
         for (const SoundRow& s : SoundRows(f[j], extra)) {
+            // Only a key that holds the mark counts: test it before matching, which may walk a long run.
+            if (s.key.find(f[i]) == std::u32string::npos) continue;
             size_t end = 0;
-            if (MatchSound(s, f, j, end, units) && end > i + 1 && s.key.find(f[i]) != std::u32string::npos &&
+            if (MatchSound(s, f, j, end, units) && end > i + 1 &&
                 !(s.final && end < f.size() && (IsKatakanaRune(f[end]) || IsKanjiRune(f[end])))) {
                 far = std::max(far, end);
             }

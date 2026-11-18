@@ -1,8 +1,8 @@
 #!/bin/sh
 # Long lines translate in time linear in their length: drawn honorifics and drawn sounds, a long run
 # of one kana before a nickname ending or before the forms of western speech, random hiragana, one
-# kanji said again and again (ctest sound.long-line has a time limit; work per honorific, per position
-# or per word over the whole line takes minutes).
+# kanji or one drawn sound said again and again (ctest sound.long-line has a time limit; work per
+# honorific, per position or per word over the whole line takes minutes).
 set -eu
 export HDTRANS_CACHE_DIR=off
 cli=$1
@@ -53,6 +53,15 @@ while [ $i -lt 6000 ]; do
     i=$((i + 1))
 done
 printf '%sやけんね\n' "$line" >> "$tmp/input"
+# A drawn sound said again and again (あー): the sound rewrites and the copies of a unit walk the run
+# once, not again from each mark or word of it.
+i=0
+line=
+while [ $i -lt 5000 ]; do
+    line=${line}あー
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 "$cli" -dicts "$dicts" -userdict '' -in "$tmp/input" > "$tmp/output"
 [ "$(wc -l < "$tmp/output")" -eq "$(wc -l < "$tmp/input")" ]
 printf 'PASS long lines\n'

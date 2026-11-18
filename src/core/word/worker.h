@@ -72,6 +72,22 @@ public:
         MarkRuns runs[4];
     };
     mutable MarkRunMemo markRuns;
+    // The runs of copies that CopyEnd walked last while CoverSurface reads one text, which stays put
+    // then: where each copy of a run starts in the text and where its last ends, so that a word at
+    // each later copy costs no walk of the rest of the run (a unit said thousands of times, read
+    // from the start of each copy and from inside it: あー and ーあ).
+    struct CopyChain {
+        std::string unit;
+        std::vector<std::size_t> starts;
+        std::size_t end = 0;
+    };
+    struct CopyChains {
+        const char* text = nullptr;  // the text CoverSurface reads; null outside it
+        std::size_t size = 0;
+        std::size_t next = 0;
+        CopyChain runs[4];
+    };
+    CopyChains copyChains;
     int insertedLength = 0;
     int candidateRetryCount = 0;
     // While set, a verb takes only an ending shorter than this one, which left text that no

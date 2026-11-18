@@ -311,9 +311,13 @@ bool ReadsAsKeys(std::u32string_view s, const LineContext& ctx, const dict::Snap
 // Whether a native word starts h: a key of two kana or more not ending in a small tsu (しゃべる,
 // かっこいい, ほっとく, くそったれ).
 bool NativeStart(std::u32string_view h, const LineContext& ctx, const dict::Snapshot& snap) {
-    for (size_t e = 2; e < h.size(); e++) {
+    // One encoding of h, whose prefixes are the keys tried, up to the longest key that starts it.
+    const std::string text = EncodeText(h);
+    const std::vector<size_t> at = EncodedOffsets(h);
+    const size_t reach = KeyReach(text, ctx, snap);
+    for (size_t e = 2; e < h.size() && at[e] <= reach; e++) {
         if (h[e - 1] == U'っ') continue;
-        if (!KeyTags(EncodeText(h.substr(0, e)), ctx, snap).empty()) return true;
+        if (!KeyTags(std::string_view(text).substr(0, at[e]), ctx, snap).empty()) return true;
     }
     return false;
 }
