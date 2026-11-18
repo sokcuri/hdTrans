@@ -1,8 +1,9 @@
 #!/bin/sh
 # Long lines translate in time linear in their length: drawn honorifics and drawn sounds, a long run
 # of one kana before a nickname ending or before the forms of western speech, random hiragana, one
-# kanji or one drawn sound said again and again (ctest sound.long-line has a time limit; work per
-# honorific, per position or per word over the whole line takes minutes).
+# kanji or one drawn sound said again and again, one clause of short questions with no mark (ctest
+# sound.long-line has a time limit; work per honorific, per position or per word over the whole line
+# takes minutes).
 set -eu
 export HDTRANS_CACHE_DIR=off
 cli=$1
@@ -59,6 +60,15 @@ i=0
 line=
 while [ $i -lt 5000 ]; do
     line=${line}あー
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
+# One clause of short questions with no mark (彼が行くか): the packs layer reads the end of the
+# sentence after each verb only as far as a final= value reaches, and the chain's polite test once.
+i=0
+line=
+while [ $i -lt 4000 ]; do
+    line=${line}彼が行くか
     i=$((i + 1))
 done
 printf '%s\n' "$line" >> "$tmp/input"
