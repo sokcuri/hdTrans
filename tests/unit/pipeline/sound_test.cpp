@@ -268,7 +268,7 @@ HD_TEST(pipeline_sound) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
+        {"なんだそりゃああぁあッ？", "뭐야 그거어어언？"},
         // A drawn よ after a て form at the start of the text: no character before the て.
         {"てよー", "てよ～"},
         {"でよーーー。聞いてるの？", "でよ～\uE00A\uE00A\uE00A。聞いてるの？"},

@@ -12,6 +12,7 @@
 #include "core/text/utf8.h"
 #include "core/tokenizer/token.h"
 #include "core/word/conjugation.h"
+#include "core/word/flush.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
 #include "core/word/util.h"
@@ -29,9 +30,8 @@ std::string_view Chunk(std::string_view s, std::size_t i, std::size_t n) {
 
 int Count(const Item& it) { return static_cast<int>(it.group->entries.size()); }
 
+}  // namespace
 
-// s without a stutter at its end (はい……な、 of はい……な、なんでしょう: the sound stage's marks and
-// the separator after them), and whether it had one.
 bool CutStutter(std::string_view& s) {
     std::string_view rest = s;
     while (!rest.empty()) {
@@ -49,8 +49,6 @@ bool CutStutter(std::string_view& s) {
     }
     return false;
 }
-
-}  // namespace
 
 bool Item::CheckSrc(std::string_view s) { return rules::MatchRuleSurface(group->surface, s); }
 
@@ -224,7 +222,7 @@ bool Item::AfterPause(bool sentenceEnd) const {
     // (はい……な、なんでしょう).
     auto unstuttered = [&unspaced](std::string_view s) {
         s = unspaced(s);
-        if (CutStutter(s)) s = unspaced(s);
+        while (CutStutter(s)) s = unspaced(s);
         return s;
     };
     std::string_view before = unstuttered(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));

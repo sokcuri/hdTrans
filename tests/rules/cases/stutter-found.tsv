@@ -1,0 +1,127 @@
+# 규칙: LEX-6160, LEX-6161, LEX-6162, LEX-6163, LEX-6164
+rule	input	expected	kind	layer
+cx:web-fixes-j:126	な、なんて	뭐, 뭐라고	fix	rewrites
+cx:web-fixes-j:126	なんて	뭐라고	fix	rewrites
+cx:web-fixes-j:126	なんて！	뭐라고!	fix	rewrites
+cx:web-fixes-j:126	なんて……	뭐라고……	fix	rewrites
+cx:web-fixes-j:126	「なんて」	「뭐라고」	fix	rewrites
+cx:web-fixes-j:126	「な、なんて……」	has:뭐, 뭐라고……	fix	rewrites
+cx:web-fixes-j:126	「なんて！　嘘でしょ」	has:뭐라고!	fix	rewrites
+cx:web-fixes-j:126	な、な、なんて？	has:뭐, 뭐, 뭐라고?	fix	rewrites
+cx:web-fixes-j:126	なんて綺麗！	has:정말 예뻐	keep	rewrites
+cx:web-fixes-j:126	なんて奴だ！	lacks:뭐라고	keep	rewrites
+cx:web-fixes-j:126	なんて言った？	has:뭐라고 말했어	keep	rewrites
+cx:web-fixes-j:126	なんて、えへへっ	lacks:뭐라고	keep	rewrites
+cx:web-fixes-j:126	「なんて……ずっと思ってたけど……」	lacks:뭐라고	keep	rewrites
+cx:web-fixes-j:126	「なっ……！　なんて、うらやましい」	lacks:뭐라고	keep	rewrites
+lexical:nante-na	「なんてな」	「농담이야」	fix	lexical
+lexical:nante-na	……でも、ちょっとわざとだったりして…なんてなっ！	has:농담이얏!	fix	lexical
+lexical:nante-na	なんてね	농담이야	keep	lexical
+sound:stutter	ふぁ、ファイト	파, 파이팅	fix	sound
+sound:stutter	ファ、ファイト！	파, 파이팅!	fix	sound
+sound:stutter	てぃ、ティナ	티, 티나	fix	sound
+sound:stutter	フィ、フィーナさん	has:피, 피나	keep	sound
+sound:stutter	ふぁ……眠い	lacks:파	keep	sound
+sound:stutter	や、やばい	크, 큰일이다	fix	sound
+sound:stutter	や、やばい！	크, 큰일이야!	fix	sound
+sound:stutter	……や、やばい	……크, 큰일이다	keep	sound
+sound:stutter	やばい、遅刻する	has:큰일이다	keep	sound
+sound:stutter	これはやばい	lacks:큰일	keep	sound
+sound:stutter	だだ、だって仕方なかったんだもん	has:그그, 그	fix	sound
+sound:stutter	そそ、そんなこと……	has:그그, 그런 일	fix	sound
+sound:stutter	よよ、よっつですね	has:네네, 네 개	fix	sound
+sound:stutter	むむ、むりです	has:무무, 무리	fix	sound
+sound:stutter	ささ、さやかちゃん？	has:사사, 사야카	fix	sound
+sound:stutter	ここ、こう行って	has:여기, 이렇게	keep	sound
+sound:stutter	やや、やだよ	has:약간	keep	sound
+sound:stutter	はは、ははは……	has:하하, 하하하	keep	sound
+sound:stutter	ふふ、ふふふっ	has:후후, 후후훗	keep	sound
+sound:stutter	うう、うぅ……	has:으으	keep	sound
+sound:stutter	むむ……	음음……	keep	sound
+sound:stutter	た、拓也	타, 타쿠야	keep	sound
+sound:stutter	なな、ななみちゃん	has:나나미	keep	sound
+sound:stutter	もも、桃子さん	has:모모코	keep	sound
+dict:w:36080	むりです	무리입니다	fix	local
+dict:w:36080	「むりです」	「무리입니다」	fix	local
+dict:w:36080	むりだよ	무리야	fix	local
+dict:w:36080	むりでした	무리였습니다	fix	local
+dict:w:36080	むりな話だ	무리한 이야기다	fix	local
+dict:w:36080	むりかも	무리일지도	fix	local
+dict:w:36081	もうむり	이제 무리	fix	local
+dict:w:36080	それはむりです	그것은 무리입니다	fix	local
+dict:w:36082	むりに笑う	무리하게 웃는다	keep	local
+dict:w:36084	むりにでも	무리해서라도	fix	local
+dict:w:36085	むりを言う	has:무리한 말을	fix	local
+dict:w:36080	むりして	무리해	keep	local
+dict:w:36080	むりしないで	무리하지 마	keep	local
+dict:w:36080	無理です	무리입니다	keep	local
+lexical:inverted-what	な、何だありゃ	뭐, 뭐야 저건	fix	lexical
+lexical:inverted-what	なんだありゃ。	뭐야 저건.	fix	lexical
+lexical:inverted-what	………って、何だありゃ。	has:뭐야 저건.	fix	lexical
+lexical:inverted-what	「何だそりゃ。漫画の読みすぎだろ。」	has:뭐야 그건.	fix	lexical
+lexical:inverted-what	「ん？　なんだそりゃ？」	has:뭐야 그건?	fix	lexical
+lexical:inverted-what	「なんじゃこりゃ？　スパムか？」	has:뭐야 이건?	fix	lexical
+lexical:inverted-what	何じゃありゃ	뭐야 저건	fix	lexical
+lexical:inverted-what	「うわぁ！？　な、なんだこりゃあ！！？」	has:뭐, 뭐야 이건!!?	fix	lexical
+lexical:inverted-what	何だこりゃ	이게 뭐야	keep	lexical
+lexical:inverted-what	何だあれ	뭐야 저게	keep	lexical
+lexical:inverted-what	ありゃ、いけない	has:어라	keep	lexical
+normalize:question-n	なんなん	뭐야	fix	normalize
+normalize:question-n	何なん……	뭐야……	fix	normalize
+normalize:question-n	「なんなん」	「뭐야」	fix	normalize
+normalize:question-n	これなんなん？	has:뭐야?	fix	normalize
+normalize:question-n	これなんなん	has:뭐야	fix	normalize
+normalize:question-n	なんなん？	뭐야?	keep	normalize
+normalize:question-n	なんなんだ	뭐야	keep	normalize
+normalize:question-n	なんなんですか	무엇입니까	keep	normalize
+dict:nan-copula	これなんなの？	has:뭐야?	fix	local
+dict:nan-copula	「ええ……なんなの……？」	has:뭐야……?	fix	local
+dict:nan-copula	「アンタ……なんなのよ……」	has:뭐야	fix	local
+dict:nan-copula	学生なんだ	학생이야	keep	local
+dict:nan-copula	本当なんです	사실입니다	keep	local
+cx:web-fixes-j:126	「こんな日は、彼氏と街を歩きたいな。なーんて」	lacks:뭐라고	keep	rewrites
+sound:stutter	「……ほぅ、農作物か」	has:후, 농작물	keep	sound
+sound:stutter	「おぅ、お待たせ！」	has:오우, 기다렸지	keep	sound
+sound:stutter	朝の4時ぃ～？ もぅ、冗談でしょ。	has:정말, 농담이지	keep	sound
+sound:stutter	「おぅ、意識した途端に私のお腹もグーなのよ？」	has:오우, 의식	keep	sound
+sound:stutter	「んっ、ああ、あぅっ……あっ、んっ……」	has:아읏	keep	sound
+sound:stutter	えぃ、えい！	lacks:에, 에잇	keep	sound
+sound:stutter	しぇ、シェフ	셰, 셰프	fix	sound
+sound:stutter	うぃ、ウィンドウ	위, 윈도우	fix	sound
+normalize:question-n	なんなんそれ	뭐야 그것	fix	normalize
+normalize:question-n	なんなんそれ？	뭐야 그것?	fix	normalize
+normalize:question-n	なんなんそれ！	뭐야 그것!	fix	normalize
+normalize:question-n	なんなん、それ	뭐야, 그것	fix	normalize
+normalize:question-n	なんなんこれ	뭐야 이것	fix	normalize
+normalize:question-n	なんなん、これ	뭐야, 이것	fix	normalize
+normalize:question-n	な、なんなんそれ	뭐, 뭐야 그것	fix	normalize
+normalize:question-n	「なんなんそれ」	「뭐야 그거」	fix	normalize
+normalize:question-n	なんなんあんた	뭐야 너	fix	normalize
+normalize:question-n	いや、なんなんお前ら	has:뭐야 너희들	fix	normalize
+normalize:question-n	なんなんこいつ	뭐야 이 녀석	fix	normalize
+normalize:question-n	一体なんなんそれ	has:뭐야 그것	fix	normalize
+normalize:question-n	何なんそれ	뭐야 그것	fix	normalize
+normalize:question-n	なんなん！	뭐야!	fix	normalize
+normalize:question-n	あんたなんなん？	너 뭐야?	fix	normalize
+normalize:question-n	あんたなんなん	너 뭐야	fix	normalize
+normalize:question-n	これ、なんなん	이것, 뭐야	fix	normalize
+normalize:question-n	なんなん拓也	has:타쿠야	keep	normalize
+normalize:question-n	なんなん、ななみ	has:나나미	keep	normalize
+normalize:question-n	なんなんだよ	뭐야	keep	normalize
+normalize:question-n	なんなんすか	무엇입니까	keep	normalize
+normalize:question-n	なんなんか？	무엇인가?	keep	normalize
+normalize:question-n	そんなん	그런	keep	normalize
+normalize:question-n	なんなんとう	남남동	keep	normalize
+local:1810	なんなんあれ	뭐야 저것	fix	local
+local:1810	何なのあれ？	has:뭐야 저것	fix	local
+local:1810	なんだあれ	뭐야 저게	keep	local
+cx:web-fixes-j:126	……な、なんて	……뭐, 뭐라고	fix	rewrites
+cx:web-fixes-j:126	……な、なんて！	……뭐, 뭐라고!	fix	rewrites
+cx:web-fixes-j:126	……なんて！	……뭐라고!	fix	rewrites
+cx:web-fixes-j:126	……なんてね	……농담이야	keep	rewrites
+sound:stutter	ふぁ、ふぁいと	파, 파이팅	fix	sound
+sound:stutter	ふぁ、ふぁいとー	파, 파이팅~	fix	sound
+sound:stutter	ふぁ、ふぁん	패, 팬	fix	sound
+sound:stutter	てぃ、てぃっしゅ	티, 티슈	fix	sound
+sound:stutter	ふぁ、ふぁ	후아, 후아	keep	sound
+sound:stutter	ふぁいと	파이팅	keep	sound

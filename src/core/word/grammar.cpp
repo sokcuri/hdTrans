@@ -552,9 +552,35 @@ std::string_view TextBefore(const Worker& w, const Item* it, int& token) {
     }
 }
 
-bool OpensLine(const Worker& w, const Item* it) {
+namespace {
+
+// TextBefore without the stutter of the item (や、 of や、やばい, な、な、 of な、な、なんて), and
+// without marks of mark.restart before it where restart is set (……な、なんて).
+std::string_view TextBeforeStutter(const Worker& w, const Item* it, bool restart = false) {
     int token = 0;
-    const std::string_view before = TextBefore(w, it, token);
+    std::string_view before = TextBefore(w, it, token);
+    const auto cut = [&](std::string_view& s) {
+        bool any = CutStutter(s);
+        if (!restart) return any;
+        while (const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("mark.restart"), s)) {
+            s.remove_suffix(n);
+            any = true;
+        }
+        return any;
+    };
+    while (cut(before)) {
+        before = TrimSpace(before);
+        while (before.empty() && token > 0) before = TrimSpace(w.Tok(--token).text);
+    }
+    return before;
+}
+
+}  // namespace
+
+bool StartsLine(const Worker& w, const Item* it) { return TextBeforeStutter(w, it, true).empty(); }
+
+bool OpensLine(const Worker& w, const Item* it) {
+    const std::string_view before = TextBeforeStutter(w, it);
     return before.empty() || RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
 }
 

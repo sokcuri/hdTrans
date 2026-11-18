@@ -89,8 +89,15 @@ bool PauseOrEnd(const Item* it);
 // before it, or else the nearest earlier token that is not only spaces; empty at the line start.
 // token receives the index of the token the text is from (grammar.cpp).
 std::string_view TextBefore(const Worker& w, const Item* it, int& token);
-// Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
+// s without a stutter at its end (はい……な、 of はい……な、なんでしょう: the sound stage's marks and
+// the separator after them), and whether it had one (attr.cpp).
+bool CutStutter(std::string_view& s);
+// Whether nothing but spaces stands before the item on its line, or a sentence end does; a stutter
+// of the item (や、やばい, な、な、なんて) is part of it (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
+// Whether nothing but spaces, marks of mark.restart and a stutter of the item stands before it on
+// its line (……な、なんて) (grammar.cpp).
+bool StartsLine(const Worker& w, const Item* it);
 // Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
 // item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
 bool AfterRestart(const Worker& w, const Item* it);

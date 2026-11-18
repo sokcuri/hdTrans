@@ -277,6 +277,9 @@ std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap
 // words (いーから, しょーに合わない) and loanwords written in hiragana (ちょこれいと チョコレート), spelled
 // as the dictionary keys them where only the respelling reads as words (spec LEX-4822).
 std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+// The length of the loanword in hiragana that RewriteSpellingVariants spells in katakana at character i of
+// rs (ふぁいと of ふぁいとー ファイト), 0 where none starts there.
+size_t HiraganaLoanwordLen(std::u32string_view rs, size_t i, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The pause comma inside a unit dropped: between a predicate and a final particle that ends the
 // utterance (ない、よ？), a word and さま (ご主人、さま) and the halves of a katakana word

@@ -1648,6 +1648,22 @@ bool QuestionN(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// (なんなん|何なん) asking 何なの: before a mark or the end (これなんなん 이거 뭐야), or before the word it
+// asks about, said after it (なんなんそれ 뭐야 그거, なんなんあんた), where no copula, particle or ending
+// goes on (なんなんだ, なんなんですか, なんなんや stay). The なん of そんなん or あんなん is no question word.
+bool AskingNannan(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && LastRune(s.substr(0, pos)).cp == U'ん') return false;
+    size_t p = pos;
+    if (!Lit(s, p, "なんなん") && !Lit(s, p, "何なん")) return false;
+    if (p < s.size()) {
+        const char32_t next = At(s, p).cp;
+        if (IsHiraganaClass(next) && In(next, U"だでじやすかよねさなのってとがはもをにへわぞぜけぁぃぅぇぉゃゅょゎん")) return false;
+        if (next == U'ー' || next == U'～' || next == U'〜') return false;
+    }
+    m.end = p;
+    return true;
+}
+
 // (なんて|何て|なんという|何という)こと(だ)? standing as an exclamation: before a mark or
 // the end, after a mark, a space or the start (なんてこと！, 「なんということだ」). It is
 // written as なんてこった, the interjection 이럴 수가.
@@ -2021,6 +2037,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     }
     if (dialectForms && Contains(text, "こと")) {
         text = ReplaceAll(text, WhatAThing, [](const Match&) { return std::string("なんてこった"); });
+    }
+    if (dialectForms && Contains(text, "なん")) {
+        text = ReplaceAll(text, AskingNannan, [](const Match&) { return std::string("何なの"); });
     }
     if (dialectForms && Contains(text, "ん")) {
         text = ReplaceAll(text, QuestionN, [](const Match& m) { return Cat({m.group[1], "の", m.group[2]}); });

@@ -2069,6 +2069,18 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : f[p] == U'ヮ' ? U'ワ' : 0;
     size_t n = 1;
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
+    // A small vowel makes one syllable with the kana where loanwords write one: after a kana in u (ふぁ, うぃ,
+    // つぁ), テ or デ before ィ or ュ (てぃ), ト or ド before ゥ, a kana in i before ェ (しぇ, ちぇ). After
+    // other kana it draws out a sound (おぅ, もぅ, あぅ, えぃ).
+    if (n == 1 && smallOf == 0 && p + n < rs.size() && In(f[p + n], U"ァィゥェォ") && !Lengthens(f[p + n], f[p])) {
+        const char32_t small = f[p + n];
+        const int vowel = VowelOf(f[p]);
+        if (vowel == 2 || (In(f[p], U"テデ") && In(small, U"ィュ")) || (In(f[p], U"トド") && small == U'ゥ') ||
+            (vowel == 1 && small == U'ェ')) {
+            n++;
+        }
+    }
+    const bool smallVowel = n == 2 && In(f[p + 1], U"ァィゥェォ");
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
     if (f[p + n - 1] == U'ッ' && p + n < rs.size() && IsKanjiRune(rs[p + n]) && !In(f[p], kSoundsBeforeKanji)) {
         pieces.push_back({U" "});  // the source writes no comma there (ちょっ待て 기 기다려)
@@ -2079,7 +2091,11 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // stutters (ちょ、ちょっと).
     const auto rows = SoundRows(x[0], ctx_.extraBuiltin);
     if (n > 1 && std::any_of(rows.begin(), rows.end(), [&](const SoundRow& s) { return s.key == x && !s.phrase && !s.lead; })) {
-        return 0;
+        // A syllable with a small vowel said again before a longer word it starts stutters that
+        // word (ふぁ、ファイト 파, 파이팅; ふぁ、ふぁいと, a loanword in hiragana), not a sound said twice (ふぁ、ふぁ).
+        const size_t k = SpacedStutterSeparator(rs, p + n);
+        if (!smallVowel || k == 0 || p + n + k >= rs.size() || f.substr(p + n + k, n) != x) return 0;
+        if (std::max(WordLen(p + n + k), internal::HiraganaLoanwordLen(rs, p + n + k, ctx_, snap_)) <= n) return 0;
     }
     // A syllable said three or more times straight into the word it starts (つつつついに,
     // どどどどうしよう, ぼぼぼボク) or before a word in kanji (けけけ圭一): a piece without a
@@ -2124,6 +2140,24 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         return 0;
     };
     size_t i = p;
+    // A syllable said twice before a separator and a longer kana word that starts with it once (だだ、だって
+    // 그그, 그래도; むむ、むりです): the first copy is a piece without a separator. A pair that a word reads
+    // standing alone (ここ、こう, やや, もも; not the verb stems ささ, そそ) and a sound going on in the word
+    // after (はは、ははは) are no stutter; a vowel said twice is a cry (ああ、あれ).
+    if (n == 1 && smallOf == 0 && !In(f[p], U"アイウエオ") && p + 2 < rs.size() && f[p + 1] == f[p] && IsKana(rs[p + 1])) {
+        const size_t k = SpacedStutterSeparator(rs, p + 2);
+        const size_t a = p + 2 + k;
+        bool word = false;
+        const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + 2), dict::LookupMode::General, ctx_.lookup);
+        for (const dict::Candidate& c : rd.list) {
+            if (text::RuneCount(c.source) != 2 || c.codes == nullptr || (c.user != nullptr && c.user->kana)) continue;
+            word = word || !c.codes->part.TagIn("MHPS");
+        }
+        if (k > 0 && !word && a + 1 < rs.size() && f[a] == f[p] && f[a + 1] != f[p] && IsKana(rs[a + 1]) && WordLen(a) > 1) {
+            pieces.push_back({});
+            i = p + 1;
+        }
+    }
     while (f.substr(i, n) == x) {
         size_t k = SpacedStutterSeparator(rs, i + n);
         if (k == 0) k = tildeSeparator(i + n);

@@ -1773,6 +1773,7 @@ cx:web-fixes-j:110	LEX-4535	&&3 S+0== "やって" D+0== "&AH@" S-1== "を"	set-t
 cx:web-fixes-j:115	LEX-4535	&&3 S+0== "に改め" Y+0== "6" ||2 Y-1== "R무렵" Y-1== "R때"	replace-ending-tail@-1 "무렵" "무렵에 다시" replace-ending-tail@-1 "때" "때 다시" set-target "" set-ending ""	優れた頃に改めて 좋았을 무렵에 다시
 cx:web-fixes-j:120	LEX-4535	&&2 S+0== "に" Y-1== "R끝에"	set-target " "	名乗った挙げ句に 자칭한 끝에
 cx:web-fixes-j:125	GRM-3685	&&3 ||2 S+0== "なんて" S+0== "なんだって" F+0== "question-after" ||4 F+0== "first" S-1== "「" S-1== "、" F-1== "boundary"	set-target "뭐라고"	今、なんて？ 지금, 뭐라고?
+cx:web-fixes-j:126	LEX-6160	&&4 S+0== "なんて" F+0== "sentence-end" ||3 S+1== "00！？!?" F+0== "exclaimed" !1 F+0== "speech-goes-on" ||2 F+0== "starts-line" S-1== "「"	set-target "뭐라고"	な、なんて！ 뭐, 뭐라고!
 cx:web-fixes-j:127	GRM-3685	&&3 S+0== "なんて" F+0== "question-after" S-1== "は"	set-target " 뭐래"	嬉野さんはなんて？ 우레시노 씨는 뭐래?
 cx:web-fixes-j:135	GRM-3685	&&4 S+0== "だって" D+0== "도" P-1== "1" F+0== "question-after"	set-target "(이)라고"	誰と誰が婚約だって？ 누구와 누가 약혼이라고?
 cx:web-fixes-j:140	GRM-3686	&&3 S+0== "でな" D+0== "(이)가 아$A3@" S-1== "、"	set-target "그렇지 $D7@"	そうよね、でなければ 그렇지, 그렇지 않으면
