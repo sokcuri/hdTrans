@@ -1,0 +1,37 @@
+# 규칙: LEX-6500, LEX-6501, LEX-6502
+rule	input	expected	kind	layer
+pack:argument-senses:15500	任務について話す。	has:임무에 대해 이야기한다	fix	packs
+pack:argument-senses:15500	軍務について考えた。	has:군무에 대해 생각했다	fix	packs
+pack:argument-senses:15500	役職について聞いた。	has:직책에 대해 들었다	fix	packs
+pack:argument-senses:15500	兵役について語る。	has:병역에 대해	fix	packs
+pack:argument-senses:15500	職務について説明します。	has:직무에 대해 설명합니다	fix	packs
+pack:argument-senses:15500	彼は任務について三年になる。	has:종사해	keep	packs
+pack:argument-senses:15500	任務についての説明。	has:임무에 대한 설명	keep	packs
+pack:argument-senses:15500	席について話を聞いた。	has:자리에 앉아	keep	packs
+cx:x5b-cx:5	同町内の一部について１２月２１日午前９時に避難指示を解除することで合意した。	has:일부에 대해	fix	rewrites
+cx:x5b-cx:5	一部について説明した。	has:일부에 대해 설명했다	fix	rewrites
+cx:x5b-cx:5	一部で話題になった。	has:일부에서 화제가 되었다	keep	rewrites
+cx:x5b-cx:5	町の一部に住む。	has:마을의 일부에 산다	keep	rewrites
+cx:x5b-cx:10	「特定帰還居住区域」を巡り、政府と福島県が合意した。	has:」을 둘러싸고,	fix	rewrites
+cx:x5b-cx:10	『島』を巡って争った。	has:』을 둘러싸고 싸웠다	fix	rewrites
+cx:x5b-cx:12	「新案」を巡る議論。	has:」을 둘러싼 논의	fix	rewrites
+cx:x5b-cx:20	クックＦＲＢ理事、聴聞会拒否へ　解任巡り「結論ありき」―報道	has:해임을 둘러싸고	fix	rewrites
+cx:x5b-cx:20	人事巡り　対立	has:인사를 둘러싸고	fix	rewrites
+cx:x5b-cx:22	関税巡り、米中が対立	has:관세를 둘러싸고,	fix	rewrites
+cx:x5b-cx:20	温泉巡り「最高」	has:온천 순회	keep	rewrites
+cx:x5b-cx:20	寺巡りの旅	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:22	島巡り、楽しかった。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:30	幼い頃に父親が亡くなって母親と暮らしてきたそう。	has:살아 왔다고 한다.	fix	rewrites
+cx:x5b-cx:32	母親と暮らしてきたそうだ。	has:살아 왔다고 한다.	fix	rewrites
+cx:x5b-cx:28	ずっと頑張ってきたそうです。	has:노력해 왔다고 합니다.	fix	rewrites
+cx:x5b-cx:34	彼は東京に行ったそう。	has:도쿄에 갔다고 한다.	fix	rewrites
+cx:x5b-cx:34	彼は話したそう。	has:이야기했다고 한다.	fix	rewrites
+cx:x5b-cx:34	「彼は死んだそう」	has:죽었다고 한다」	fix	rewrites
+cx:x5b-cx:34	彼女は帰ってきたそうだ。	has:돌아왔다고 한다.	keep	rewrites
+cx:x5b-cx:34	今にも落ちそうだ。	has:떨어질 것 같다	keep	rewrites
+cx:x5b-cx:34	雨が降るそうだ。	has:온다고 한다	keep	rewrites
+cx:x5b-cx:10	島を巡り、旅をした。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:12	「東京」を巡る旅に出た。	lacks:둘러싼	keep	rewrites
+cx:x5b-cx:30	母親と暮らしてきた。	has:살아왔다.	keep	rewrites
+cx:x5b-cx:32	彼女は帰ってきたそうだ。	has:돌아왔다고 한다.	keep	rewrites
+cx:x5b-cx:28	ずっと頑張ってきました。	lacks:싶	keep	rewrites

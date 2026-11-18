@@ -14805,3 +14805,16 @@ tail.negative-ni	にせよ
 tail.negative-ni	にしろ
 tail.negative-ni	に限る
 tail.negative-ni	にかぎる
+//= noun.part-of	Nouns of a part or share of something, matched whole, that are no place one arrives at, so a について after them is 대해 (同町内の一部について解除する 같은 마을 안의 일부에 대해 해제한다; spec LEX-6500).
+noun.part-of	一部
+noun.part-of	一部分
+noun.part-of	部分
+noun.part-of	大部分
+noun.part-of	半分
+noun.part-of	大半
+noun.part-of	全部
+noun.part-of	全体
+noun.part-of	残り
+noun.part-of	一角
+noun.part-of	一端
+noun.part-of	一環
