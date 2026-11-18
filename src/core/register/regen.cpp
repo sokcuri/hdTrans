@@ -835,8 +835,8 @@ std::u32string BareEnd(std::u32string_view s) {
 // lower.event-not) or a verb of lower.event (届きます, 沸騰します).
 bool EventEnd(std::u32string_view s, const Tables& t) {
     std::u32string e = BareEnd(s);
-    if (!std::u32string_view(e).ends_with(U"ます") && !std::u32string_view(e).ends_with(U"マス")) return false;
-    e.resize(e.size() - 2);
+    if (e.size() < 2 || (!std::u32string_view(e).ends_with(U"ます") && !std::u32string_view(e).ends_with(U"マス"))) return false;
+    e.erase(e.size() - 2);
     for (const auto& w : Split(t.G("lower.event-not"), '|'))
         if (!w.empty() && std::u32string_view(e).ends_with(ToU32(w))) return false;
     for (const auto& w : Split(t.G("lower.event"), '|'))
