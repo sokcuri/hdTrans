@@ -34,6 +34,6 @@ names:learned-kana	真央さん、どうも。\nまおうさまが来た。	has:
 names:learned-kana	真央さん、どうも。\nまおうさま、お待ちください。	has:마왕	keep	fixed
 names:learned-kana	佳奈さん、おはよう。\nかなさん、行こう。	has:카나 씨, 가자	fix	fixed
 names:name-box	【幸】「何？」\n幸ちゃん、待って。	has:【사치】	fix	fixed
-names:name-box	【月】「おはよう」\n月が出た。	has:【달】	keep	fixed
+names:name-box	【月】「おはよう」\n月が出た。	has:달이	keep	fixed
 names:name-box	【中】「おはよう」\n中に入った。	lacks:나카	keep	fixed
-names:name-box	【心】「どうしよう」\n心が痛い。	has:【마음】	keep	fixed
+names:name-box	【心】「どうしよう」\n心が痛い。	has:마음이	keep	fixed

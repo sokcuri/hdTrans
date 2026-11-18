@@ -629,7 +629,7 @@ bool CaptionCall(std::string_view after) {
 
 // Whether text before and after a word frame it as a person's name: a self-introduction (私は_です,
 // 俺は_だ, _と申します, _っていいます), a greeting or a call before the name at the end of an utterance
-// (ただいま、_, おはよう、_！), a speaker label at the line start (_「), or a caption call.
+// (ただいま、_, おはよう、_！), a speaker label at the line start (_「) or in a name box (【_】「), or a caption call.
 bool PersonFrame(std::string_view run, std::string_view before, std::string_view after) {
     std::string_view b = before;
     while (b.ends_with(" ") || b.ends_with("　")) b.remove_suffix(b.ends_with(" ") ? 1 : std::string_view("　").size());
@@ -671,7 +671,8 @@ bool PersonFrame(std::string_view run, std::string_view before, std::string_view
         const std::string_view word = b.substr(k);
         if (dict::InClass(HDTRANS_CLASS("name.call-word"), word)) return true;
     }
-    return t.empty() && after.starts_with("「");
+    // A name box before speech (【衣更】「おはよう」) labels the speaker as a speaker line does.
+    return (t.empty() && after.starts_with("「")) || internal::NameBoxAt(before, after);
 }
 
 }  // namespace
@@ -803,6 +804,9 @@ void Registry::Add(std::string_view rawLine) {
             if (const std::size_t n = RuneCount(run.text); !honorificEnd && n >= 2 && n <= 3 && PersonFrame(run.text, std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
                 count(framed_, std::string(run.text));
                 honGuess_.insert(std::string(run.text));
+                if (internal::NameBoxAt(std::string_view(line).substr(0, run.start), std::string_view(line).substr(run.end))) {
+                    boxGuess_.insert(std::string(run.text));
+                }
             }
             // A name written with a kanji honorific in the same run (甲児君, 夢結様) is written there
             // too (spec LEX-4827). Not 殿, 嬢 or the titles, which also end words (大魔殿, 令嬢).
@@ -1051,13 +1055,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
         // A kanji name no dictionary has stands for the person after one honorific, as it is no
         // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
-        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !OldFormWord(t) && !internal::GuessedName(t, GuessFallback(t)).empty()) n.score += 1;
+        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !OldFormWord(t) && !internal::GuessedName(t, GuessFallback(t), boxGuess_.count(t) != 0).empty()) n.score += 1;
         n.person = true;
     }
     // A kanji name no dictionary has, in a person frame, is a name its kanji's readings give (LEX-4833).
     for (const auto& [t, c] : framed_) {
         (void)c;
-        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || OldFormWord(t) || internal::GuessedName(t, GuessFallback(t)).empty()) continue;
+        if (Flags(t).records > 0 || !AllRunes(t, IsKanji) || GuessedNameBlocked(t) || OldFormWord(t) || internal::GuessedName(t, GuessFallback(t), boxGuess_.count(t) != 0).empty()) continue;
         Name& n = all[t];
         n.score = std::max(n.score, kThreshold);
         n.person = true;

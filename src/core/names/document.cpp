@@ -730,6 +730,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     const std::string kin = pipeline::internal::WriteKinTerms(line, doc.female, KanjiWordHolds, doc.snap);
     facts.text = r.DropReadings(names::StripRuby(kin), &cueText, &facts.cued);
     facts.text = r.ReadKanaLabels(facts.text);
+    facts.text = r.ReadBoxNames(facts.text);
     const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {

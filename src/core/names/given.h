@@ -40,8 +40,9 @@ std::string_view OnReading(char32_t kanji);
 // two-kanji name (name_kana.tsv: 千 ち, 莉 り); "" for none.
 std::string_view NameKana(char32_t kanji, bool tail);
 // The Korean guessed for a two-kanji name no dictionary reads, from NameKana (千莉 치리); "" when
-// either kanji has no reading there (spec LEX-4827).
-std::string GuessedName(std::string_view kanji, bool fallback = false);
+// either kanji has no reading there (spec LEX-4827). boxed: the run stands alone in a name box, so its last
+// kanji may take a reading names start with or its on reading (綺衣 키이; spec LEX-6060).
+std::string GuessedName(std::string_view kanji, bool fallback = false, bool boxed = false);
 
 }  // namespace internal
 

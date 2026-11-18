@@ -1,0 +1,12 @@
+# 규칙: LEX-6060
+rule	input	expected	kind	layer
+names:name-box	【愛】「愛してる」\n愛がすべてだ。\n【愛】「ふふ」	has:사랑이	keep	fixed
+names:name-box	【愛】「愛してる」\n愛がすべてだ。\n【愛】「ふふ」	has:【아이】「후후」	fix	fixed
+names:name-box	【幸】「ねえ」\n幸いなことに、雨はやんだ。	has:다행	keep	fixed
+names:name-box	【雪】「寒いね」\n雪が降ってきた。	has:눈이	keep	fixed
+names:name-box	【衣更】「おはよう」\n「あっ、衣更、久しぶりっ！」	lacks:의갱	fix	fixed
+names:name-box	【蒔菜】「うん」\n蒔菜が来た。	has:마키나가	fix	fixed
+names:name-box	【采】「おはよう」\n采を振る。	lacks:아야를	keep	fixed
+names:name-box	【月】「おはよう」\n月がきれいだ。\n月さんはどこ？	has:츠키 씨	fix	fixed
+names:name-box	【月】「おはよう」\n月がきれいだ。\n月さんはどこ？	has:달이	keep	fixed
+names:name-box	【萬平】「おはよう」\n萬平さんは来た。	lacks:반히라	keep	fixed

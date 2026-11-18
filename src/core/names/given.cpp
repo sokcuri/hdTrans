@@ -140,7 +140,7 @@ std::string_view NameKana(char32_t kanji, bool tail) {
 
 std::string_view OnReading(char32_t kanji);
 
-std::string GuessedName(std::string_view kanji, bool fallback) {
+std::string GuessedName(std::string_view kanji, bool fallback, bool boxed) {
     if (text::RuneCount(kanji) != 2) return {};
     const text::Rune a = text::DecodeRune(kanji);
     const text::Rune b = text::DecodeRune(kanji.substr(a.size));
@@ -152,6 +152,10 @@ std::string GuessedName(std::string_view kanji, bool fallback) {
     // A head reading of one kana says little (兎 う); the on reading comes before it.
     if (fallback && head.empty() && text::RuneCount(HeadReading(a.cp)) >= 2) head = HeadReading(a.cp);
     if (fallback && head.empty()) head = OnReading(a.cp);
+    // In a name box, which holds a name whole, a last kanji that ends no two-kanji name of the dictionaries
+    // takes the reading names start it with, and then its on reading (綺衣 きい; spec LEX-6060).
+    if (fallback && boxed && tail.empty()) tail = NameKana(b.cp, false);
+    if (fallback && boxed && tail.empty()) tail = OnReading(b.cp);
     if (head.empty() || tail.empty()) return {};
     return text::FromKana(std::string(head) + std::string(tail), text::Preset::FanShort, true);
 }
