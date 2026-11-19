@@ -14471,7 +14471,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 外毒素	외독소	N110	UTi		GN						がいどくそ	w:14397
 外温動物	외온동물	N110			GN						がいおんどうぶつ	w:14398
 外燃機関	외연기관	N110			GN						がいねんきかん	w:14399
-外相	외무장관	N110			GN				xxx llm	1		w:14400
+外相	외무장관	N110	UAqVHn		GN				xxx llm	1		w:14400
 外省人	외성인	N110	VHn		GN						がいしょうじん	w:14401
 外積	외적	N110			GN						がいせき	w:14402
 外米	외국쌀	N110			GN				xxx llm	1		w:14403
@@ -28756,3 +28756,20 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本学生	일본 학생	N110	VHn		GN						にほんがくせい	w:37578
 嘶	&LC@	M421			GN			LEX-7242			いななく	w:38274
 おさんぽ	산책	N110		Hd	GN							w:37000
+文部科学相	문부과학상	N110	UAqVHn		GN							w:37200
+経済産業相	경제산업상	N110	UAqVHn		GN							w:37201
+厚生労働相	후생노동상	N110	UAqVHn		GN							w:37202
+国土交通相	국토교통상	N110	UAqVHn		GN							w:37203
+国交相	국토교통상	N110	UAqVHn		GN							w:37204
+農林水産相	농림수산상	N110	UAqVHn		GN							w:37205
+総務相	총무상	N110	UAqVHn		GN							w:37206
+外務相	외무상	N110	UAqVHn		GN							w:37207
+法務相	법무상	N110	UAqVHn		GN							w:37208
+経済再生相	경제재생상	N110	UAqVHn		GN							w:37209
+経済財政相	경제재정상	N110	UAqVHn		GN							w:37210
+復興相	부흥상	N110	UAqVHn		GN							w:37211
+デジタル相	디지털상	N110	UAqVHn		GN							w:37212
+防災相	방재상	N110	UAqVHn		GN							w:37213
+経済安保相	경제안보상	N110	UAqVHn		GN							w:37214
+地方創生相	지방창생상	N110	UAqVHn		GN							w:37215
+担当相	담당상	N110	UAqVHn		GN							w:37216

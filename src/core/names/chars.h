@@ -85,6 +85,18 @@ inline std::string ToHiragana(std::string_view s) {
     return out;
 }
 
+// s with its hiragana ぁ to ゖ written in katakana; other characters (ー, kanji) are kept.
+inline std::string ToKatakana(std::string_view s) {
+    std::string out;
+    for (std::size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        if (r.size == 0) break;
+        i += r.size;
+        text::AppendRune(out, r.cp >= 0x3041 && r.cp <= 0x3096 ? r.cp + 0x60 : r.cp);
+    }
+    return out;
+}
+
 inline bool IsKanaText(std::string_view s) {
     return AllRunes(s, [](char32_t c) { return IsHiragana(c) || IsKatakana(c); });
 }

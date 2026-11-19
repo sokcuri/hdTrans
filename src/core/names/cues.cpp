@@ -795,9 +795,31 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
                 break;
             }
         }
+        // A title of a person in the same kanji run (関芳弘文部科学相, 山田一郎容疑者), and a 元, 前 or 現 before it
+        // (安倍晋三元首相): the run before them is the person, unless it is a common word (日本選手, 地元議員; spec
+        // LEX-6901).
+        bool titled = false;
+        if (h.empty() && run.kanji) {
+            for (const std::string_view k : dict::ClassMembers(HDTRANS_CLASS("name.title-after"))) {
+                if (k.size() > h.size() && t.size() > k.size() && AllRunes(k, IsKanji) && std::string_view(t).ends_with(k)) h = k;
+            }
+            titled = !h.empty();
+        }
         if (h.empty() || Flags(t).records > 0) return "";
         t.erase(t.size() - h.size());
         end -= h.size();
+        if (titled) {
+            const std::size_t p = dict::EndsWithMember(HDTRANS_CLASS("name.title-prefix"), t);
+            if (p > 0 && p < t.size()) {
+                t.erase(t.size() - p);
+                end -= p;
+            }
+            const DictFlags ft = Flags(t);
+            if (RuneCount(t) < 2 || (ft.records > 0 && !ft.person)) return "";
+            // A full name of the name layer, or a surname and a given name, before a title is the person after one
+            // title.
+            if (LayerPerson(t) || !GivenSplit(t).second.empty()) titled_.insert(t);
+        }
         rest = line.substr(end);
     }
     if (start > 0) {
