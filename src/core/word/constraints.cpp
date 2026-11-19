@@ -158,6 +158,8 @@ constexpr ConstraintRule kRules[] = {
      "줄 첫머리의 と言うことで、는 동사 と言う + ことで가 아니라 연결 표현 그래서 (이렇게 말하는 것으로, → 그래서,)", {}},
     {"de-before-aru", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeAru, ConstraintReject::Word,
      "ある의 활용 앞에서 で로 끝나는 단어는 쓰지 않고 で를 계사 である에 남김 (十四歳であり 14세에 있어 → 14세이며)", {}},
+    {"noun-before-continuative-only", ConstraintWord::Any, "", ConstraintContext::BeforeContinuativeOnly, ConstraintReject::Word,
+     "LEX-7485: 연용형만 받는 말(たい, そう, ながら, やすい) 앞에서 5단 동사의 연용형과 같은 일반 명사는 쓰지 않고 동사로 읽음 (つまずきそう 좌절 그렇게 → 걸려 넘어질 것 같다, さわりたい 감촉 싶다 → 만지고 싶다)", {}},
     {"amari-before-predicate", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::Verbs,
      "술어가 바로 이어지는 余り는 余る의 연용형이 아니라 부사 (余り伸びなかった 남아 자라지 → 별로 자라지). 余りの, 余りに는 그대로", {}},
     {"amari-adverb", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::OtherTargets,
@@ -689,6 +691,23 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     }
     case ConstraintContext::BeforeSuruForm:
         return SuruFormAfterShi(after);
+    case ConstraintContext::BeforeContinuativeOnly: {
+        if (dict::StartsWithMember(HDTRANS_CLASS("follower.continuative-only"), after) == 0) return false;
+        bool noun = false, verb = false;
+        for (const dict::Candidate& c : list) {
+            if (c.codes == nullptr) continue;
+            const dict::PartCode& p = c.codes->part;
+            if (c.source == source) {
+                if ((p.Tag() != 'N' && p.Tag() != 'I') || p.ClassDigit() != '1' || p.At(2) != '1' || NameSense(*c.codes)) return false;
+                noun = true;
+            } else if (!verb && p.Tag() == 'M' && p.ClassDigit() == '4' && c.source.size() < source.size() && source.starts_with(c.source)) {
+                const int kind = p.At(3) - '0';
+                verb = kind != 7 && kind >= 0 && Conjugation(kind, 10).size() == source.size() - c.source.size() &&
+                       source.ends_with(Conjugation(kind, 10));
+            }
+        }
+        return noun && verb;
+    }
     case ConstraintContext::BeforeAru:
         // A noun fused with で (歳で), not a particle in で (まである).
         return dict::StartsWithMember(HDTRANS_CLASS("aru.after-de"), after) > 0 &&

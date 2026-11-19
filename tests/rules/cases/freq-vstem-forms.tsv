@@ -1,0 +1,116 @@
+# 규칙: LEX-7482, LEX-7483, LEX-7484, LEX-7485, LEX-7487
+rule	input	expected	kind	layer
+dict:freq-vstem	彼が来たそうだ。	has:왔다고 한다	fix	lookup
+dict:freq-vstem	彼が来たそうです。	has:왔다고 합니다	fix	lookup
+dict:freq-vstem	昨日来たそうで、	has:왔다고 해	fix	lookup
+dict:freq-vstem	彼も来たそうじゃないか。	has:왔다고 하잖아	fix	lookup
+dict:freq-vstem	専門学校に入るべく東京に出て来たそうだ。	has:나왔다고 한다	fix	lookup
+dict:freq-vstem	彼が来たし、私も来た。	has:왔고	fix	lookup
+dict:freq-vstem	彼も来たしね。	has:왔고	fix	lookup
+dict:freq-vstem	でも、せっかくここまで来たし、部屋でも見ておこうかな。	has:여기까지 왔고	fix	lookup
+dict:freq-vstem	私はずっと周りをケダモノだと思って生きて来たし、だからこそ生きてこられた	has:살아왔고	fix	lookup
+dict:freq-vstem	こう見えても十戦隊で結構頑張って来たし！	lacks:초래	fix	lookup
+dict:freq-vstem	さっきもいたし	has:있었고	fix	lookup
+dict:freq-vstem	でも、昨日も一昨日もいたしなぁ……	has:있었고	fix	lookup
+dict:freq-vstem	彼もいたし、私もいた。	has:그도 있었고	fix	lookup
+dict:freq-vstem	小太刀は半分合格したような気でいたし、なかなか言いにくいだろう。	has:기분으로 있었고	fix	lookup
+dict:freq-vstem	映画をみたそうだ。	has:보았다고 한다	fix	lookup
+dict:freq-vstem	業務に支障を来たす。	has:지장을 초래한다	keep	lookup
+dict:freq-vstem	混乱を来たした。	has:혼란을 초래했다	keep	lookup
+dict:freq-vstem	支障を来たし、計画が遅れた。	has:지장을 초래해	keep	lookup
+dict:freq-vstem	体調に異常を来たしている。	has:초래하고 있다	keep	lookup
+dict:freq-vstem	変調を来たさないように。	has:초래하지 않도록	keep	lookup
+dict:freq-vstem	失礼いたしました。	has:실례했습니다	keep	lookup
+dict:freq-vstem	よろしくお願いいたします。	has:부탁드립니다	keep	lookup
+dict:freq-vstem	条件を満たし、合格した。	has:조건을 충족해	keep	lookup
+dict:freq-vstem	条件を満たそう。	has:충족하자	keep	lookup
+dict:freq-vstem	責任を果たし、帰った。	has:책임을 다해	keep	lookup
+dict:freq-vstem	約束を果たそう。	has:완수하자	keep	lookup
+dict:freq-vstem	映画を見たし、本も読んだ。	has:보았고	keep	lookup
+dict:freq-vstem	いい仕事が出来たし、満足だ。	has:할 수 있었고	keep	lookup
+dict:freq-vstem	転んでつまずきそうになった。	has:걸려 넘어질 뻔했다	fix	lookup
+dict:freq-vstem	石につまずきそうだ。	has:걸려 넘어질 것 같다	fix	lookup
+dict:freq-vstem	ちょっとさわりたい。	lacks:감촉	fix	lookup
+dict:freq-vstem	髪にさわりたくなる。	lacks:감촉	fix	lookup
+dict:freq-vstem	う〜ん 色はきれいですわよお子さんが喜びそう。	has:기뻐할 것 같다	fix	lookup
+dict:freq-vstem	みんながきゃっきゃと喜びながら拍手する。	has:기뻐하면서	fix	lookup
+dict:freq-vstem	耳元でささやきながら、指を動かす。	has:속삭이면서	fix	lookup
+dict:freq-vstem	恐い顔で睨みながらフランたちを囲んでしまった。	has:노려보면서	fix	lookup
+dict:freq-vstem	俺の席へ来て、どもりながら何かを言おうとしている。	has:더듬으면서	fix	lookup
+dict:freq-vstem	サルたちがここまできてくれたことを、素直に喜びたい。	has:기뻐하고 싶다	fix	lookup
+dict:freq-vstem	小腹が空いたら夜につまみたい	has:집고 싶	fix	lookup
+dict:freq-vstem	大人の事情を察しながら通学路を進むと	has:헤아리면서	fix	lookup
+dict:freq-vstem	つまずくことばかりだろうけど、見守ってくれる人がいるのだ。	has:걸려 넘어지는	fix	lookup
+dict:freq-vstem	「選曲の段階でつまずいてるからな」	has:걸려 넘어지고	fix	lookup
+dict:freq-vstem	つまずきを乗り越える	has:좌절	keep	lookup
+dict:freq-vstem	小さなつまずき	has:좌절	keep	lookup
+dict:freq-vstem	さわりの部分	has:감촉	keep	lookup
+dict:freq-vstem	動きたい。	has:움직이고 싶다	keep	lookup
+dict:freq-vstem	休みたい。	has:쉬고 싶다	keep	lookup
+dict:freq-vstem	ひかりたい。	has:빛나고 싶다	keep	lookup
+dict:freq-vstem	水がながれる。	has:흐른다	keep	lookup
+dict:freq-vstem	涙がながれた。	has:흘렀다	keep	lookup
+dict:freq-vstem	道をおしえて。	has:가르쳐	keep	lookup
+dict:freq-vstem	答えをおしえない。	has:가르치지 않는다	keep	lookup
+dict:freq-vstem	ながれさん、こんにちは。	has:나가레 씨	keep	lookup
+dict:freq-vstem	俺と佳奈すけの間の距離が詰まり、３０センチの距離で見つめ合う。	has:거리가 좁혀져	fix	pack
+dict:freq-vstem	柵の間隔は詰まっているが、見えないこともない。	has:간격은 좁혀져	fix	pack
+dict:freq-vstem	排水管の詰まりを直した。	has:배수관의 막힘을	fix	lookup
+dict:freq-vstem	鼻の詰まりがひどい。	has:막힘이	fix	lookup
+dict:freq-vstem	話が詰まり、言葉が出ない。	has:막혀	fix	pack
+cx:sense-cues-1:367	詰まり、そういうことだ。	has:즉, 그런	fix	rewrites
+cx:sense-cues-1:367	「詰まり、君は来ないのか」	has:즉, 너는	keep	rewrites
+dict:freq-vstem	これで手詰まりだ。	has:막다른	keep	lookup
+dict:freq-vstem	息が詰まりそうになった。	has:숨이 막힐	keep	lookup
+dict:freq-vstem	つまり、そういうことだ。	has:즉,	keep	lookup
+cx:sense-cues-1:369	１日当たり延べ５万４０００人ほどが利用	has:연 5만 4000명	fix	rewrites
+cx:sense-cues-1:369	各艦に延べ15回以上の補給を実施しよう！	has:연 15회	fix	rewrites
+cx:sense-cues-1:369	延べ541人が参加した。	has:연 541명	fix	rewrites
+cx:sense-cues-1:369	延べ１０００万人を超えた。	has:연 1000만	fix	rewrites
+cx:sense-cues-1:369	期限を延べた。	lacks:연 	keep	rewrites
+cx:sense-cues-1:369	延べ棒を買った。	lacks:연 	keep	rewrites
+cx:sense-cues-1:371	カフェめぐりを楽しむ。	has:카페 순례	fix	rewrites
+cx:sense-cues-1:371	立候補に、会長に、クラブめぐり……	has:클럽 순례	fix	rewrites
+cx:sense-cues-1:371	めぐりが来た。	has:메구리가	keep	rewrites
+cx:sense-cues-1:371	めぐりちゃん、おはよう。	has:메구리	keep	rewrites
+cx:sense-cues-1:371	めぐりと一緒に帰った。	has:메구리와	keep	rewrites
+cx:sense-cues-1:371	めぐり、待って！	has:메구리,	keep	rewrites
+dict:freq-vstem	業務に支障を来たす恐れがある。	has:지장을 초래할	keep	lookup
+dict:freq-vstem	支障を来たしかねない。	has:초래할 수도	keep	lookup
+dict:freq-vstem	体に変調を来たしそうだ。	has:초래할 것 같다	keep	lookup
+dict:freq-vstem	混乱も来たし、収拾がつかない。	has:혼란도 초래해	keep	lookup
+dict:freq-vstem	混乱さえ来たした。	has:혼란마저 초래했다	keep	lookup
+dict:freq-vstem	財政難を来たした。	has:재정난을 초래했다	keep	lookup
+dict:freq-vstem	彼女は来たし、もういいだろう。	has:그녀는 왔고	fix	lookup
+dict:freq-vstem	友達も来たし、始めよう。	has:친구도 왔고	fix	lookup
+dict:freq-vstem	ここまで来たし、帰ろう。	has:여기까지 왔고	fix	lookup
+dict:freq-vstem	もう来たしな。	has:왔고	fix	lookup
+dict:freq-vstem	昨日ここに来たそうです。	has:왔다고 합니다	fix	lookup
+dict:freq-vstem	みたそうですね。	has:보았다고	fix	lookup
+dict:freq-vstem	お待たせいたしまして申し訳ありません。	has:기다리게 해서 죄송합니다	keep	lookup
+dict:freq-vstem	私がいたします。	has:제가 하겠습니다	keep	lookup
+dict:freq-vstem	いたそうだな、その傷。	has:아픈 것 같다	keep	lookup
+dict:freq-vstem	喜びながら走った。	has:기뻐하면서	fix	lookup
+dict:freq-vstem	喜びの声が上がった。	has:기쁨의 목소리	keep	lookup
+dict:freq-vstem	休みの日に出かけた。	has:휴일에	keep	lookup
+dict:freq-vstem	動きが速い。	has:움직임이 빠르다	keep	lookup
+dict:freq-vstem	昔ながらの味。	has:옛날 그대로의 맛	keep	lookup
+dict:freq-vstem	残念ながら負けた。	has:유감스럽지만	keep	lookup
+dict:freq-vstem	生まれながらの天才。	has:타고난 천재	keep	lookup
+dict:freq-vstem	神のおしえが正しい。	lacks:누를	keep	lookup
+dict:freq-vstem	母のおしえを守った。	lacks:누를	keep	lookup
+cx:sense-cues-1:367	それは詰まり、君が悪いということだ。	has:그것은 즉, 네가	keep	rewrites
+cx:sense-cues-1:367	要は詰まり、金の問題だ。	has:요점은 즉, 돈의	keep	rewrites
+cx:sense-cues-1:367	これは、詰まり、罠だ。	has:이것은, 즉, 함정	keep	rewrites
+dict:freq-vstem	鼻は詰まり、喉は痛い。	has:코는 막혀	fix	lookup
+dict:freq-vstem	パイプが詰まり、水があふれた。	has:파이프가 막혀	fix	lookup
+dict:freq-vstem	詰まりそうな管を掃除した。	lacks:즉	fix	lookup
+cx:sense-cues-1:369	延べ２００人が参加。	has:연 200명	fix	rewrites
+dict:freq-vstem	延べ面積が広い。	has:연면적	keep	lookup
+dict:freq-vstem	延べにして百人だ。	lacks:연 	keep	lookup
+dict:freq-vstem	延べ時間は３時間。	lacks:연 	keep	lookup
+dict:freq-vstem	めぐり先輩、おはようございます。	has:메구리 선배	keep	lookup
+dict:freq-vstem	妹のめぐりが来た。	has:메구리가	keep	lookup
+dict:freq-vstem	血のめぐりが悪い。	has:혈액 순환	keep	lookup
+dict:freq-vstem	「めぐり！」	has:메구리	keep	lookup
+dict:freq-vstem	めぐりさんは優しい。	has:메구리 씨	keep	lookup
