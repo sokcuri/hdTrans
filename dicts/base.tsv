@@ -29761,7 +29761,7 @@ ttt	ttt	K110			GN				jisjk:201744
 その間	그 사이	N110	UMe		GN				jisjk:200899		
 その間隔	그 틈	N110	VPl		GN				jisjk:164726		
 その間隔	그 틈	N110	VPl		GN				jisjk:164727		
-その限りではな	예위로 $AB@	E7U0		Av	GN				jisjk:362323		
+その限りではな	그렇지 $D7@	E7U0		Av	GN				jisjk:362323		
 その際	그 때	N120	UMe		GN				jisjk:6527		
 そば	곁	N110	VPl		GN				jisjk:13898		
 そば	메밀국수	N110	VFd		GN	417	||5 &&3 P+1== "2**" S+2== "打" P+2== "4**" &&2 S+1== "を" ||2 S+2== "L食" S+2== "L啜" &&2 ||2 S+1== "と" S+1== "や" A+2== "VFd" &&3 S+1== "から" A+2== "VFd" S+3== "まで" &&2 ||2 S-1== "と" S-1== "や" A-2== "VFd"	조사 뒤에 打 동사나 먹는 동사가 이어지거나(そばを食べる), と, や로 음식과 이어지거나(うどんとそば, そばと天ぷら), から … まで로 음식과 이어지면(そばからうどんまで) そば를 메밀국수로 고른다. 앞의 음식 명사와 を, で만으로는 고르지 않는다(パンをそばに置いた 곁에).	jisjk:13899		
@@ -42754,8 +42754,8 @@ ttt	ttt	K110			GN				jisjk:201744
 もみぬか	겉겨	I110			GN				jisjk:112765		
 もみの木台	모미노키다이	I130	QCTVPl		GN				jisjk:334809		
 もみ上げ	귀밑털	N110	QHPVBp		GN				jisjk:155722		
-もみ合	엎치락 뒷치락&AV@	M420			GN				jisjk:116886		
-もみ合い	엎치락 뒤치락	N110			GN				jisjk:362177		
+もみ合	몸싸움&AV@	M420			GN				jisjk:116886		
+もみ合い	몸싸움	N110			GN				jisjk:362177		
 もみ殻	왕겨	N110	VPt		GN				jisjk:155724		
 もみ治療	안마치료	I110			GN				jisjk:112766		
 もみ消	은폐&AV@	M433			GN				jisjk:91527		
@@ -80951,7 +80951,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ブッフォン	부폰	N130	QPN		GN				jisjk:367273		
 ブッフバルト	부후발트	N130	QPN		GN				jisjk:369450		
 ブッ飛びの	굉장한	E0H0			GN				jisjk:150179		
-ブツ	부츠	N110	VCp		GN				jisjk:268300		
+ブツ	물건	N110	VCp		GN				jisjk:268300		
 ブツブツ	투덜투덜	E301			GN				jisjk:117593		
 ブティック	부띠크	N110	VPl		GN				jisjk:55641		
 ブティックサンプチ	부티크상푸치	N110	VPl		GN				jisjk:55642		
@@ -187987,7 +187987,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小紫蝶	오색나비	N110	VAm		GN				jisjk:231455		
 小細工	세공	I110			GN				jisjk:106165		
 小細工を弄	잔꾀를 부&AA@	M429			GN				jisjk:119426		
-小結	코유이	N130	QCTVPl		GN				jisjk:294327		
+小結	코무스비	N110			GN				jisjk:294327		
 小結棚町	코무스비다나쵸	I130	QCTVPl		GN				jisjk:294122		
 小絲源太郎	고이토 겐타로	N130	VHn		GN				jisjk:214780		
 小絹	코키누	N130	QCTVPl		GN				jisjk:293062		
@@ -230394,7 +230394,6 @@ ttt	ttt	K110			GN				jisjk:201744
 最手	오오제키	N110	VHnVRw		GN				jisjk:251051		
 最敬礼	최경례	N110		Hd	GN				jisjk:184225		
 最新	최신	N110	UMe		GN				jisjk:36107		
-最新世	홍적세	N110	VPl		GN				jisjk:232037		
 最新作	최신작	I110	VMa		GN				jisjk:86500		
 最新式	최신식	I110			GN				jisjk:86499		
 最新版	최신판	I110	VSw		GN				jisjk:86501		
@@ -292058,7 +292057,7 @@ ttt	ttt	K110			GN				jisjk:201744
 空腸	공장	N110	VBp		GN				jisjk:175758		
 空腹	공복	N110			GN				jisjk:16189		
 空臑	드러난 정강이	N110	VBp		GN				jisjk:169612		
-空自	타카시	N130	QPN		GN				jisjk:96846		
+空自	항공자위대	N110			GN				jisjk:96846		
 空船	빈배	N110	VTp		GN				jisjk:16195		
 空色	하늘색	N110	UCl		GN				jisjk:16193		
 空茶	차 마시기	N110			GN				jisjk:16221		

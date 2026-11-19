@@ -1,0 +1,8 @@
+#! layer=pack
+# 허가가 나다: 許可が取れる (LEX-7244)
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+freq-gloss-c:1	sense	取れる	v1	colloc	許可が取れる		허가가 나다		LEX-7244	freq	許可が取れた 허가가 났다
+freq-gloss-c:2	sense	詰める	v1	frame	obj=間合い|その間合い|この間合い		좁히다		LEX-7244	freq	間合いを詰める 간격을 좁히다
+freq-gloss-c:3	sense	つける	v1	colloc	好位置につける|好位置に付ける		좋은 위치에 오르다		LEX-7244	freq	好位置につける 좋은 위치에 오르다
+freq-gloss-c:4	sense	取れる	v1	colloc	確認が取れる		확인이 되다		LEX-7244	freq	確認が取れた 확인이 되었다
+freq-gloss-c:5	sense	浮かべる	v1:ㅅ	frame	obj=作り笑顔		짓다		LEX-7241	freq	作り笑顔を浮かべる 억지웃음을 짓다
