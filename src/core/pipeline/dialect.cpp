@@ -288,6 +288,30 @@ bool NegativeBeforeYa(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The negative ん of a godan verb with a stem in kanji before の, のに and a formal noun (分からんのに 分からないのに,
+// 読まんのは 読まないのは, 気に入らんやつ 気に入らないやつ, 言わんこと; not the のう that ends a sentence): ない. Only a stem the dictionary has as a verb with
+// the kana of the u row (分から 分かる, 聞か 聞く); not before a kanji noun, where 知らん顔 is a phrase of its own. The match
+// starts at the ん.
+bool NegativeBeforeNoun(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ん")) return false;
+    const std::string_view head = s.substr(0, pos);
+    static constexpr std::u32string_view kA = U"かがさたなばまらわ";
+    static constexpr std::string_view kU[] = {"く", "ぐ", "す", "つ", "ぬ", "ぶ", "む", "る", "う"};
+    const size_t a = kA.find(LastRune(head).cp);
+    if (a == std::u32string_view::npos) return false;
+    const std::string_view stem = StemBefore(s, pos - LastRune(head).size);
+    if (stem.empty() || !VerbIs(Cat({stem, kU[a]}))) return false;
+    bool tail = false;
+    for (const std::string_view t : {"の", "やつ", "奴", "こと", "もの"}) tail = tail || s.substr(p).starts_with(t);
+    // のか reads well as written (聞かんのか 듣지 않는가); のう ends the sentence (変わらんのう)
+    if (!tail || s.substr(p).starts_with("のか") || s.substr(p).starts_with("のう")) return false;
+    m.group[1] = "ない";
+    m.end = p;
+    return true;
+}
+
 // Whether a question word comes before pos in its sentence: the や of a question is read by the word
 // stage and the old-speech rows (どこや 어디야, どう行くもんや).
 bool QuestionBefore(std::string_view s, size_t pos) {
@@ -1252,10 +1276,28 @@ bool PlainBeforeYo(std::string_view head) {
 // end stays: its 습니다요 keeps the habit.
 bool CharacterTic(std::string_view s, size_t pos, Match& m) {
     static constexpr std::string_view kTics[][2] = {{"のよさ", "よ"},           {"ですぞ", "です"},         {"でしたぞ", "でした"},
-                                                     {"ませんです", "ません"}, {"でしたです", "でした"}, {"ますですか", "ますか"}};
+                                                     {"ませんです", "ません"}, {"でしたです", "でした"}, {"ますですか", "ますか"},
+                                                     {"ましたですか", "ましたか"}, {"ませんのです", "ません"}, {"ましたのです", "ました"},
+                                                     {"ますのです", "ます"},     {"でしゅ", "でちゅ"},       {"でつ", "でちゅ"},
+                                                     {"まちゅ", "ます"},         {"ましゅ", "ます"}};
     for (const auto& t : kTics) {
         size_t p = pos;
         if (!Lit(s, p, t[0])) continue;
+        // The のです of a polite ending and the です and ます of baby talk end the same before a sentence particle, which
+        // stays (いけませんのですか いけませんか, 大丈夫でつか). でしゅ and でつ are the でちゅ the ending table reads
+        // (大丈夫でつ 괜찮아요); まちゅ and ましゅ are ます.
+        size_t end = p;
+        // the emphatic よ goes with the のです it follows (担ってまいりましたのですよ 担ってまいりました); ね and か stay
+        if (t[0].ends_with("のです") && s.substr(p).starts_with("よ")) end += std::string_view("よ").size();
+        const bool baby = t[0] == "でしゅ" || t[0] == "でつ" || t[0] == "まちゅ" || t[0] == "ましゅ";
+        const bool particle = baby || t[0].ends_with("のです");
+        if (particle) {
+            while (p < s.size() && In(At(s, p).cp, U"よねかわ")) p += At(s, p).size;
+            // drawn baby talk is read by the ending table (えらいでちゅねーっ 대단하네요)
+            if (baby && p < s.size() && In(At(s, p).cp, U"ー～〜っッぇ")) return false;
+            // baby talk after what the copula or ます follows: a word, not a particle (手でつかむ, 家でつ is rare)
+            if (baby && (pos == 0 || In(LastRune(s.substr(0, pos)).cp, U"、。！？「 　"))) return false;
+        }
         // ですぞ drawn or cut short (ですぞっ！, ですぞぉ, ですぞー) and before a closing 》 ends the same.
         if (t[0].ends_with("ぞ")) {
             while (p < s.size() && In(At(s, p).cp, U"っッぉォ")) p += At(s, p).size;
@@ -1284,7 +1326,7 @@ bool CharacterTic(std::string_view s, size_t pos, Match& m) {
             return true;
         }
         m.group[1] = t[1];
-        m.end = p;
+        m.end = particle ? end : p;
         return true;
     }
     return false;
@@ -2619,6 +2661,7 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     if (text.find("んや") != std::string::npos) {
         text = ReplaceAll(text, NegativeBeforeYa, [](const Match& m) { return Cat({m.group[2], m.group[1]}); });
     }
+    if (text.find("ん") != std::string::npos) text = ReplaceAll(text, NegativeBeforeNoun, group1);
     if (text.find("や") != std::string::npos) text = ReplaceAll(text, YaCopula, group1);
     if (text.find("じゃ") != std::string::npos) text = ReplaceAll(text, JaCopula, group1);
     if (text.find("け") != std::string::npos || text.find("さかい") != std::string::npos) {
@@ -2669,7 +2712,9 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     if (text.find("す") != std::string::npos) text = ReplaceAll(text, OldPolite, group1);
     if (text.find("也") != std::string::npos) text = ReplaceAll(text, ArchaicNari, group1);
     if (text.find("のよさ") != std::string::npos || text.find("したぞ") != std::string::npos || text.find("すぞ") != std::string::npos ||
-        text.find("すです") != std::string::npos || text.find("んです") != std::string::npos || text.find("たです") != std::string::npos) {
+        text.find("すです") != std::string::npos || text.find("んです") != std::string::npos || text.find("たです") != std::string::npos ||
+        text.find("のです") != std::string::npos || text.find("でしゅ") != std::string::npos ||
+        text.find("でつ") != std::string::npos || text.find("まちゅ") != std::string::npos || text.find("ましゅ") != std::string::npos) {
         text = ReplaceAll(text, CharacterTic, group1);
     }
     if (text.find("んよ") != std::string::npos || text.find("んね") != std::string::npos) text = ReplaceAll(text, WesternNoEnd, group1);
