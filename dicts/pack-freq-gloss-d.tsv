@@ -1,0 +1,36 @@
+#! layer=pack
+# 술어, 이웃 낱말, 논항으로 뜻을 고르는 많이 쓰는 낱말 (LEX-7261, LEX-7262)
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note	agent
+freq-gloss-d:1	sense	無駄	n	frame	pred=-		헛수고	60	LEX-7261	audit	どこに逃げたって無駄 어디에 도망쳐도 헛수고 (술어 자리)	
+freq-gloss-d:2	sense	地元	n	frame	next=住民|企業|経済|選出|議員|出身|産|商店街|自治会|業者|農家|漁協|有権者|団体		지역	60	LEX-7261	audit	地元住民 지역 주민	
+freq-gloss-d:3	sense	地元	n	frame	pred=貢献|還元|密着|根ざす|根差す|活性化|振興		지역	60	LEX-7261	audit	地元への貢献 지역에 대한 공헌	
+freq-gloss-d:4	sense	地元	n	frame	pred=帰る|戻る|離れる|帰省|帰省する		고향	60	LEX-7261	audit	地元を離れて 고향을 떠나	
+freq-gloss-d:5	sense	今度	n	frame	next=また		다음에	60	LEX-7261	audit	今度また現れたら 다음에 또 나타나면	
+freq-gloss-d:6	sense	調子	n	frame	next=で pred=言う|話す|述べる		어조	60	LEX-7261	audit	真剣な調子で言った 진지한 어조로 말했다	
+freq-gloss-d:7	sense	角	n	frame	pred=丸める|削る|ぶつける|ぶつかる|面取り		모서리	60	LEX-7261	audit	角を丸めて 모서리를 둥글게 해	
+freq-gloss-d:8	sense	角	n	frame	pred=生える|生やす|突き出る		뿔	60	LEX-7261	audit	角がにょっきりと生えて 뿔이 쑥 나	
+freq-gloss-d:9	sense	左手	n	frame	next=に|には pred=見える|ある|建つ|位置する|広がる|そびえる|並ぶ		왼쪽	60	LEX-7261	audit	本殿の左手に建つ 본전의 왼쪽에 세워진	
+freq-gloss-d:10	sense	右手	n	frame	next=に|には pred=見える|ある|建つ|位置する|広がる|そびえる|並ぶ		오른쪽	60	LEX-7261	audit	右手に見える 오른쪽에 보이는	
+freq-gloss-d:11	sense	そば	n	frame	pred=食べる|食う|打つ|すする|啜る|茹でる|ゆでる		메밀국수	60	LEX-7261	audit	そばを食べる 메밀국수를 먹다	
+freq-gloss-d:12	sense	どちら	n	frame	next=へ|まで		어디	60	LEX-7261	audit	どちらへ 어디로	
+freq-gloss-d:13	sense	生地	n	frame	pred=焼く|焼ける|焼き上げる|延ばす|伸ばす|こねる|捏ねる|練る|寝かせる|膨らむ|混ぜる|流す|流し込む|丸める		반죽	60	LEX-7261	audit	生地を延ばし 반죽을 밀어	
+freq-gloss-d:14	sense	わっぱ	n	frame	next=弁当|弁当箱|調|風|製|飯		왓파	60	LEX-7261	audit	わっぱ風の弁当箱 나무 도시락풍의 도시락통	
+freq-gloss-d:20	sense	伸びる|のびる	v1	frame	subj=@figure|人数|量|数量|規模		늘다	60	LEX-7262	audit	融資が伸びた 융자가 늘었다	
+freq-gloss-d:21	sense	伸びる|のびる	v1	frame	subj=@road|線|線路|レール|光|光線|枝|根|山脈|尾根|滑走路|トンネル|ケーブル		뻗다	60	LEX-7262	audit	道が伸びる 길이 뻗다	
+freq-gloss-d:22	sense	伸びる|のびる	v1	frame	head=@road|線|線路|レール|光|光線|枝|根|山脈|尾根|滑走路|トンネル|ケーブル		뻗다	60	LEX-7262	audit	海を越えて伸びる橋 바다를 넘어 뻗은 다리	
+freq-gloss-d:23	sense	絡む|からむ	v5	frame	dat=@person		시비를 걸다	60	LEX-7262	audit	あの人に絡んじゃダメ 그 사람에게 시비를 걸면 안 돼	
+freq-gloss-d:24	sense	絡む|からむ	v5	frame	subj=@person dat=- obj=- next=来る|くる		시비를 걸다	60	LEX-7262	audit	酔った彼が絡んで来た 술 취한 그가 시비를 걸어 왔다	
+freq-gloss-d:25	sense	溢れる|あふれる	v1	frame	loc=* subj=@place|@facility|@room|@town|@building|世の中|世界|街|部屋|店内|会場|通り|教室|心|胸|頭|道|駅		넘쳐나다	60	LEX-7262	audit	この言葉で溢れている 이 말로 넘쳐나고 있다	
+freq-gloss-d:26	sense	溢れる|あふれる	v1	frame	subj=人|人々|人たち|生徒|客|観光客|群衆|若者|子供|子ども|学生|ファン dat=-		넘쳐나다	60	LEX-7262	audit	悲しい人が溢れていた 슬픈 사람이 넘쳐나고 있었다	
+freq-gloss-d:27	sense	整う|ととのう	v5	frame	head=@looks form=ta		반듯하다	60	LEX-7262	audit	整った顔 반듯한 얼굴	
+freq-gloss-d:29	sense	滲む|にじむ	v5	frame	head=目|瞳|眼		흐릿해지다	60	LEX-7262	audit	にじむ目をこすって 글썽이는 눈을 비비며	
+freq-gloss-d:30	sense	滲む|にじむ	v5	frame	subj=視界|景色		흐려지다	60	LEX-7262	audit	視界がにじむ 시야가 흐려지다	
+freq-gloss-d:31	sense	滲む|にじむ	v5	frame	head=視界|景色		흐려지다	60	LEX-7262	audit	にじむ視界 흐려지는 시야	
+freq-gloss-d:33	sense	買う|かう	v5	frame	obj=役|役目|役割		맡다	60	LEX-7262	audit	ブレーキ役を買ってくれる 브레이크 역을 맡아 준다	
+freq-gloss-d:34	voice	聞く|きく	v5	frame	subj=会話|話|声|内容|独り言|秘密|悪口|陰口|噂		passive:들리다	60	LEX-7262	audit	会話は聞かれてない 대화는 들리지 않았다	
+freq-gloss-d:17	sense	調子	n	frame	next=で pred=答える|返す|呟く|つぶやく|続ける|告げる|叫ぶ|囁く|ささやく|尋ねる|問う|語る|喋る|しゃべる|話しかける|言い放つ		어조	60	LEX-7261	audit	軽い調子で答える 가벼운 어조로 대답하다	
+freq-gloss-d:18	sense	丸める|まるめる	v1	frame	obj=角|角っこ|端|縁		둥글리다	60	LEX-7261	audit	角を丸めて 모서리를 둥글려	
+freq-gloss-d:32	sense	に乗り込む|に乗りこむ|にのりこむ	v5	frame	after=@facility|@building|@organization|@house|@room|@town|敵陣|本陣|本拠地|アジト		에 쳐들어가다	60	LEX-7262	audit	相談所に乗り込む 상담소에 쳐들어가다	
+freq-gloss-d:19	sense	無駄	n	frame	pred=- after=の		-	60	LEX-7261	audit	全くの無駄。 완전한 낭비. (꾸밈을 받으면 낭비 그대로)	
+freq-gloss-d:36	sense	に乗り込む|に乗りこむ|にのりこむ	v5	frame	after=@facility|@building|@organization|@house|@room|@town|敵陣|本陣|本拠地|アジト next=来る|くる|来|き|きて|こ		에 쳐들어오다	70	LEX-7262	audit	部室に乗り込んできて 동아리방에 쳐들어와	
+freq-gloss-d:37	sense	滲む|にじむ	v5:규칙	frame	subj=涙 head=目|瞳|眼		글썽이다	60	LEX-7262	audit	涙がにじんだ目 눈물이 글썽인 눈 (눈물이 주어)	

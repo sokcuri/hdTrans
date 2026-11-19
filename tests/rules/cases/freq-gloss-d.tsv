@@ -1,0 +1,102 @@
+# 규칙: LEX-7260, LEX-7261, LEX-7262, LEX-7263
+rule	input	expected	kind	layer
+dict:freq-gloss-d	事業に無駄がないかを検証する。	has:낭비가 없는가	fix	lookup
+dict:freq-gloss-d	無駄を省くことが大事だ。	has:낭비를	fix	lookup
+dict:freq-gloss-d	「だから、経費削減よ！　無駄を減らすのよ！」	has:낭비를 줄여	fix	lookup
+dict:freq-gloss-d	動きに無駄がなく、狙うまでが早い。	has:낭비가 없고	fix	lookup
+dict:freq-gloss-d	税金の無駄。	has:낭비	fix	lookup
+dict:freq-gloss-d	ここに予算の無駄がある。	has:예산 낭비가	fix	lookup
+dict:freq-gloss-d	「綺麗な文章だと思う、無駄もないし」	has:낭비도 없	fix	lookup
+dict:freq-gloss-d	どこに逃げたって無駄。	어디에 도망쳐도 헛수고.	fix	pack
+dict:freq-gloss-d	「自分で考えつかん奴は、どうせやっても無駄」	has:해도 헛수고	fix	pack
+dict:freq-gloss-d	「そんなことをしても無駄。」	has:해도 헛수고	fix	pack
+dict:freq-gloss-d	無駄無駄無駄ぁ～！	lacks:헛됨	fix	pack
+dict:freq-gloss-d	時間の無駄だと思うよ。	has:시간 낭비	keep	lookup
+dict:freq-gloss-d	何をやっても無駄よ。	has:쓸데없어	keep	lookup
+dict:freq-gloss-d	無駄な抵抗を。	쓸데없는 저항을.	keep	lookup
+dict:freq-gloss-d	無駄無駄ラッシュ！	has:무다무다	keep	lookup
+dict:freq-gloss-d	町村会の代表との会合。	has:정촌회	fix	lookup
+dict:freq-gloss-d	市町村に協力を呼びかけた。	has:시정촌에	keep	lookup
+dict:freq-gloss-d	町村信孝が会見した。	has:마치무라 노부타카	keep	lookup
+dict:freq-gloss-d	町村さん、こんにちは。	has:마치무라 씨	keep	lookup
+dict:freq-gloss-d	この町の町長と会談した。	has:촌장	keep	lookup
+dict:freq-gloss-d	地元への貢献に意欲を示した。	has:지역에 대한 공헌	fix	pack
+dict:freq-gloss-d	地元住民で構成される。	has:지역 주민	fix	pack
+dict:freq-gloss-d	来春からは地元を離れて大学進学を考えている。	has:고향을	fix	pack
+dict:freq-gloss-d	地元に帰ろう	has:고향에 돌아가자	fix	pack
+dict:freq-gloss-d	「その後は、地元に戻って政治家になってほしいそうだ」	has:고향으로 돌아가	fix	pack
+dict:freq-gloss-d	地元メディアが伝えた。	has:현지 미디어	keep	pack
+dict:freq-gloss-d	地元自治体が存続を求めた。	has:현지 자치체	keep	pack
+dict:freq-gloss-d	地元の友達と会った。	has:동네의 친구	keep	pack
+dict:freq-gloss-d	今度 また 私の前に現れたら	has:다음에 또	fix	pack
+dict:freq-gloss-d	今度また作りますね。	has:다음에 또 만들게요	fix	pack
+dict:freq-gloss-d	「じゃあ、今度また、海外ドラマ見に行っていい？」	has:다음에 또	fix	pack
+dict:freq-gloss-d	今度は私が聞く番だ。	has:이번에는	keep	pack
+dict:freq-gloss-d	今度こそ勝つ。	has:이번에야말로	keep	pack
+dict:freq-gloss-d	また今度。	has:다음에 또	keep	pack
+dict:freq-gloss-d	真剣な調子で言った。	has:진지한 어조로	fix	pack
+dict:freq-gloss-d	白崎が強い調子で言う。	has:강한 어조로	fix	pack
+dict:freq-gloss-d	軽い調子で答える。	has:가벼운 어조로	fix	pack
+dict:freq-gloss-d	この調子で、いけば……俺は勝てる！	has:이 상태로	keep	pack
+dict:freq-gloss-d	いい調子で乗っていけたらいい。	has:좋은 상태로	keep	pack
+dict:freq-gloss-d	いつもの調子でいてちょうだい。	lacks:어조	keep	pack
+dict:freq-gloss-d	調子が良くないみたいだ。	has:상태가	keep	pack
+dict:freq-gloss-d	もう少し角を丸めてもらいたかった。	has:모서리를 둥글려	fix	pack
+dict:freq-gloss-d	頭に角がにょっきりと生えている。	has:뿔이 쑥 나	fix	pack
+dict:freq-gloss-d	「角の折ってあるメモ」	lacks:뿔	keep	pack
+dict:freq-gloss-d	その角を曲がると駅だ。	has:모퉁이를 돌면	keep	pack
+dict:freq-gloss-d	机の角にぶつけた。	has:모서리에	keep	pack
+dict:freq-gloss-d	本殿の左手に建つ社。	has:왼쪽에	fix	pack
+dict:freq-gloss-d	左手でぎゅっと押さえている。	has:왼손으로	keep	pack
+dict:freq-gloss-d	左手に剣を持つ。	has:왼손에	keep	pack
+dict:freq-gloss-d	どちらまで行かれますか。	has:어디까지	fix	pack
+dict:freq-gloss-d	どちらが正しいか。	has:어느 쪽이	keep	pack
+dict:freq-gloss-d	どちらにしても無理だ。	has:어느 쪽이든	keep	pack
+dict:freq-gloss-d	生地を延ばし専用の包丁で切る。	has:반죽을	fix	pack
+dict:freq-gloss-d	手芸店で生地を買った。	has:옷감을	keep	pack
+dict:freq-gloss-d	わっぱ風の弁当箱。	has:왓파풍	fix	pack
+dict:freq-gloss-d	曲げわっぱのお弁当。	has:마게왓파	fix	lookup
+dict:freq-gloss-d	そばにいてくれ。	has:곁에	keep	pack
+dict:freq-gloss-d	そばを食べに行こう。	has:메밀국수를	keep	pack
+dict:freq-gloss-d	融資が伸びた。	융자가 늘었다.	fix	pack
+dict:freq-gloss-d	能力が飛躍的に伸びるとか言われていた。	has:비약적으로 자란다	keep	pack
+dict:freq-gloss-d	海を越えて伸びる橋。	has:뻗는 다리	fix	pack
+dict:freq-gloss-d	売上が伸びなかった。	has:늘지 않았다	keep	pack
+dict:freq-gloss-d	背が伸びた。	키가 자랐다.	keep	pack
+dict:freq-gloss-d	髪が伸びたね。	has:자랐네	keep	pack
+dict:freq-gloss-d	酔った中津川が絡んで来た。	has:시비를 걸어 왔다	fix	pack
+dict:freq-gloss-d	なにかあるたびにコゼットにこうして絡んでくる相手だった。	has:시비를 걸어 오는	fix	pack
+dict:freq-gloss-d	あの男に絡むな。	has:시비를 걸지 마	fix	pack
+dict:freq-gloss-d	事件に絡む疑惑。	has:관련되는 의혹	keep	pack
+dict:freq-gloss-d	怖い男に絡まれていた。	has:시비를 당하고	keep	pack
+dict:freq-gloss-d	俺の舌に応えるように、つぐみが自らの舌を絡ませてくる。	lacks:시비	keep	pack
+dict:freq-gloss-d	世の中はこの言葉で溢れている。	has:넘쳐나고 있다	fix	pack
+dict:freq-gloss-d	通りには生徒が溢れている。	has:넘쳐나고 있다	fix	pack
+dict:freq-gloss-d	日本中に辛い人や悲しい人が溢れていた。	has:넘쳐나고 있었다	fix	pack
+dict:freq-gloss-d	気品に溢れた美しい少女だった。	has:기품이 넘친	keep	pack
+dict:freq-gloss-d	涙が溢れた。	has:흘러넘쳤다	keep	pack
+dict:freq-gloss-d	思わず本音が溢れる。	has:새어 나온다	keep	pack
+dict:freq-gloss-d	整った顔は理想そのものだ。	has:반듯한 얼굴	fix	pack
+dict:freq-gloss-d	整った鼻筋を持つ。	has:반듯한 콧날	fix	pack
+dict:freq-gloss-d	準備は整った。	has:갖추어졌다	keep	pack
+dict:freq-gloss-d	設備が整っていない。	has:갖추어지지 않았다	keep	pack
+dict:freq-gloss-d	にじむ目をこすっていると。	has:흐릿해지는 눈	fix	pack
+dict:freq-gloss-d	涙がにじんだ目で謝られた。	has:글썽인 눈으로	fix	pack
+dict:freq-gloss-d	視界がにじむ。	has:시야가 흐려진다	fix	pack
+dict:freq-gloss-d	窓から滲む月光。	has:번지는 달빛	keep	pack
+dict:freq-gloss-d	血がにじんでいる指。	lacks:글썽	keep	pack
+dict:freq-gloss-d	城に乗り込んだ。	has:성에 쳐들어갔다	fix	pack
+dict:freq-gloss-d	たまには部室に乗り込んできてくれないと。	has:동아리방에 쳐들어와	fix	pack
+dict:freq-gloss-d	運転席に乗り込んだ。	has:운전석에 탑승했다	keep	pack
+dict:freq-gloss-d	車に乗り込む。	has:차에 탑승한다	keep	pack
+dict:freq-gloss-d	ブレーキ役を買ってくれる。	has:역을 맡아 준다	fix	pack
+dict:freq-gloss-d	憎まれ役を買って出た。	has:자청했다	keep	pack
+dict:freq-gloss-d	本を買ってくれる。	has:책을 사 준다	keep	pack
+dict:freq-gloss-d	ここでの会話は、あいつ等には聞かれてないわよ。	has:들리지 않아	fix	pack
+dict:freq-gloss-d	こちらの会話はむこうに聞かれていないと確信した。	has:들리지 않	fix	pack
+dict:freq-gloss-d	理由を聞かれ、答えた。	lacks:들리	keep	pack
+dict:freq-gloss-d	……ただの無駄死にと決まったのだった…。	has:개죽음으로	fix	lookup
+dict:freq-gloss-d	無駄毛の処理は私が行います。	has:잔털 처리	fix	lookup
+dict:freq-gloss-d	無駄撃ちするなと教えたはずだ。	has:탄 낭비하지 말라고	fix	lookup
+dict:freq-gloss-d	輸入が伸び、輸出も伸びている。	has:수입이 늘어	fix	pack
+dict:freq-gloss-d	安定収益が順調に伸びて全５社が増益となった。	has:순조롭게 늘어	fix	pack
