@@ -1,0 +1,100 @@
+rule	input	expected	kind	layer
+normalize:exclamation-na	命が惜しければ動くな。	has:움직이지 마	fix	normalize
+normalize:exclamation-na	文句があるなら食べるな。	has:먹지 마	fix	normalize
+normalize:exclamation-na	雨が降ったら動くな。	has:움직이지 마	fix	normalize
+normalize:exclamation-na	「だから父親の無実を証明できる可能性があるなら諦めるな」	has:포기하지 마	fix	normalize
+normalize:exclamation-na	お金が足りなくても諦めるな。	has:포기하지 마	fix	normalize
+normalize:exclamation-na	「ベルが鳴っても動くな」	has:움직이지 마	fix	normalize
+normalize:exclamation-na	命が惜しかったら逃げるな。	has:도망치지 마	fix	normalize
+normalize:exclamation-na	気が向いたら来るな。	lacks:구나	fix	normalize
+normalize:exclamation-na	時間がかかるなぁ。	has:걸리는구나	keep	normalize
+normalize:exclamation-na	「ん？　なんかすぐそばで携帯が鳴ってるな」	has:울리고 있구나	keep	normalize
+normalize:exclamation-na	彼がよく食べるな。	has:먹는구나	keep	normalize
+normalize:exclamation-na	レナがいるなぁ。	has:있구나	keep	normalize
+normalize:exclamation-na	お前が言うな。	lacks:말하는구나	keep	normalize
+normalize:exclamation-na	死にたくなければ近づくな！	has:다가가지 마	keep	normalize
+normalize:exclamation-na	鳴ったら動くな。	has:움직이지 마	keep	normalize
+cx:na-observed:60	「来るなぁ！」	「오지 마!」	fix	rewrites
+cx:na-observed:60	ふっざけるなぁ！	has:장난치지 마	fix	rewrites
+cx:na-observed:60	んだよぉ…！舐めるなぁ！	has:얕보지 마	fix	rewrites
+cx:na-observed:60	えと、まつ、遅れるなぁ！	has:늦지 마	fix	rewrites
+cx:na-observed:60	艦長！ 速度を上げすぎるな！	has:올리지 마	fix	rewrites
+cx:na-observed:60	困るなぁ！	!rule:cx:na-observed:60	keep	rewrites
+cx:na-observed:60	いいねぇ、みなぎるなぁ。	!rule:cx:na-observed:60	keep	rewrites
+cx:na-observed:62	「ふざっけんな……おまえなんか大嫌いだ……！」	has:장난치지 마	fix	rewrites
+cx:na-observed:62	「無茶すんなぁ……」	!rule:cx:na-observed:62	keep	rewrites
+cx:na-observed:64	「いいか。逆らったらどうなるか？　わかるな？」	has:알지?	fix	rewrites
+cx:na-observed:64	「潜入前に渡した盗聴器は持っているな？」	has:가지고 있지?	fix	rewrites
+cx:na-observed:64	大発、エンジンに火は入っているな？	has:들어가 있지?	fix	rewrites
+cx:na-observed:67	「あ、わかるなぁ、その気持ち」	has:알겠네	fix	rewrites
+cx:na-observed:67	人気なのもわかるなぁ。	has:알겠네	fix	rewrites
+cx:na-observed:67	「わかるな？」	!rule:cx:na-observed:67	keep	rewrites
+cx:na-observed:68	「そのような言い方をするな……私は、ただ娘の幸せを……」	has:말투를 하지 마	fix	rewrites
+cx:na-observed:68	敵を、敵を近づけるな……お願い！	has:지 마	fix	rewrites
+cx:na-observed:68	逃がすな……撃てっ！	has:놓치지 마	fix	rewrites
+cx:na-observed:68	「ビビるな……ビビるなッス……」	has:겁먹지 마	fix	rewrites
+cx:na-observed:68	「車でも使われたら、確実に追いつけなくなるな……くそ……」	lacks:되지 마	keep	rewrites
+cx:na-observed:68	「何というか……少し、拍子抜けでは、あるな……」	lacks:지 마	keep	rewrites
+cx:na-observed:68	ヒトナナマルマル。泣けてくるなぁ…ちくしょう…。	lacks:지 마	keep	rewrites
+cx:na-observed:70	いいねぇ、みなぎるなぁ。	has:넘치네	fix	rewrites
+cx:na-observed:70	真面目にやると何気に腹減るなぁ。	has:배고프네	fix	rewrites
+cx:na-observed:70	この季節はちょっち何か落ち込むなぁ。	has:낙담하네	fix	rewrites
+cx:na-observed:70	いきなり甘えてくるなぁ。	has:오네	fix	rewrites
+cx:na-observed:70	「難しいこと言うなぁ」	has:말 하네	fix	rewrites
+cx:na-observed:70	「みんないるな」	has:모두 있네	fix	rewrites
+cx:na-observed:70	「ちょっと過激すぎるな」	has:과격하네	fix	rewrites
+cx:na-observed:70	「照れるなぁ」	has:쑥스러워하네	fix	rewrites
+cx:na-observed:70	「んー、紅茶と合うなぁ」	has:맞네	fix	rewrites
+cx:na-observed:70	「やっぱ首都バスは遅れるなぁ……」	has:늦네	fix	rewrites
+cx:na-observed:70	「気にするな」	has:신경 쓰지 마	keep	rewrites
+cx:na-observed:70	動くな。	has:움직이지 마	keep	rewrites
+cx:na-observed:70	時間がかかるなぁ。	!rule:cx:na-observed:70	keep	rewrites
+cx:na-observed:64	「明日も来るな？」	has:오지?	fix	rewrites
+cx:na-observed:64	「え、油断するな？」	lacks:방심한데	fix	rewrites
+cx:na-observed:64	「わかるなぁ」	!rule:cx:na-observed:64	keep	rewrites
+cx:na-observed:68	ヒトナナ、マルマル！ 夕日落ちるな……きれいだな。	lacks:지 마	keep	rewrites
+cx:na-observed:60	よく食べるなぁ！	lacks:먹지 마	keep	rewrites
+normalize:exclamation-na	彼がとても喜ぶな。	has:기뻐하는구나	keep	normalize
+normalize:exclamation-na	子供がとても喜ぶなぁ。	has:기뻐하는구나	keep	normalize
+normalize:exclamation-na	彼がとっても喜ぶなぁ。	has:기뻐하는구나	keep	normalize
+normalize:exclamation-na	彼女が何でも食べるな。	has:먹는구나	keep	normalize
+normalize:exclamation-na	彼女がなんでも食べるな。	has:먹는구나	keep	normalize
+normalize:exclamation-na	あいつがやたら笑うな。	has:웃는구나	keep	normalize
+normalize:exclamation-na	あいつがいつでも来るな。	has:오는구나	keep	normalize
+normalize:exclamation-na	彼が例えば走るな。	has:달리는구나	keep	normalize
+normalize:exclamation-na	彼がたとえば走るな。	has:달리는구나	keep	normalize
+normalize:exclamation-na	誰が見ても騒ぐな。	has:떠들지 마	fix	normalize
+normalize:exclamation-na	彼が死んだら泣くな。	has:울지 마	fix	normalize
+normalize:exclamation-na	母が呼んでも行くな。	has:가지 마	fix	normalize
+normalize:exclamation-na	ご飯が冷めても食べるな。	has:먹지 마	fix	normalize
+normalize:exclamation-na	金が無くても泣くな。	has:울지 마	fix	normalize
+cx:na-observed:70	ワクワクするなぁ！	has:두근두근하네!	fix	rewrites
+cx:na-observed:70	わくわくするなぁ！	has:두근두근하네!	fix	rewrites
+cx:na-observed:70	ドキドキするなぁ！	has:두근두근하네!	fix	rewrites
+cx:na-observed:70	ゾクゾクするなぁ！	has:오싹오싹하네!	fix	rewrites
+cx:na-observed:70	緊張するなぁ！	has:긴장하네!	fix	rewrites
+cx:na-observed:70	感動するなぁ！	has:감동하네!	fix	rewrites
+cx:na-observed:70	いやあ、照れるなぁ！	has:쑥스러워하네!	fix	rewrites
+cx:na-observed:70	てれるなぁ！	has:쑥스러워하네!	fix	rewrites
+cx:na-observed:70	久しぶりに会うなぁ！	has:오랜만에 만나네!	fix	rewrites
+cx:na-observed:70	ひさしぶりに会うなぁ！	has:만나네!	fix	rewrites
+cx:na-observed:61	ぞくぞくするなー！	has:오싹오싹하네	fix	rewrites
+cx:na-observed:60	緊張するな！	has:긴장하지 마!	keep	rewrites
+cx:na-observed:60	照れるな！	has:쑥스러워하지 마!	keep	rewrites
+cx:na-observed:60	笑うなぁ！	has:웃지 마!	keep	rewrites
+cx:na-observed:66	できるな？	has:할 수 있지?	fix	rewrites
+cx:na-observed:66	「できるな？」	has:할 수 있지?	fix	rewrites
+cx:na-observed:66	行けるな？	has:갈 수 있지?	fix	rewrites
+cx:na-observed:65	ここで待ってるな？	has:기다리고 있지?	fix	rewrites
+cx:na-observed:65	知ってるな？	has:알고 있지?	fix	rewrites
+cx:na-observed:65	分かってるな？	has:알고 있지?	fix	rewrites
+cx:na-observed:66	できるな。	has:할 수 있군.	keep	rewrites
+cx:na-observed:65	待ってるな。	has:기다리고 있구나.	keep	rewrites
+cx:na-observed:69	意外と見てるな、白崎。	has:보고 있네, 시라사키	fix	rewrites
+cx:na-observed:69	寝てるな、こいつ。	has:자고 있네, 이 녀석	fix	rewrites
+cx:na-observed:69	見てるな！	has:보고 있구나!	keep	rewrites
+cx:na-observed:61	来るなー！	has:오지 마	keep	rewrites
+cx:na-observed:61	動くなー！	has:움직이지 마	keep	rewrites
+cx:na-observed:61	照れるなー！	has:쑥스러워하네	fix	rewrites
+cx:na-observed:66	この兄ちゃん、…残るカードの配置を暗記できてるな？！	lacks:있지?!	keep	rewrites
+cx:na-observed:66	できるな？！	has:할 수 있군?!	keep	rewrites

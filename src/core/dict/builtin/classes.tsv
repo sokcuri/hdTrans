@@ -129,6 +129,11 @@
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
 //= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
+//= ending.conditional-in-clause	Ends of a conditional clause in the run between a が and a final な (惜しければ, あるなら, 読んだら, 泳いでも; a voiced でも or だら carries its joint ん or い, so 何でも and いつでも are none): the が is the subject of that clause, so the な of the verb after it keeps the prohibition and the normalizer makes no exclamation なあ of it (命が惜しければ動くな 움직이지 마).
+//= ending.conditional-after-joint	Ends of a conditional clause that count in the run between a が and a final な only after a conjugation joint, a kanji or a kana of the i or e row, っ or the く of an adjective (降ったら, 見ても, 食べたら, 高くても; not とても or やたら).
+//= ending.conditional-lookalike	Words inside the run between a が and a final な that hold the end of a conditional clause at a joint but are not one (例えば, なんでも, とっても): the run skips them.
+//= word.felt-before-na	Verbs of a feeling or a reaction (照れる), the mimetic words and verbal nouns before their する (ワクワク, 緊張, 感動) and 久しぶり before a verb: a lengthened なぁ before ！ after them voices what the speaker feels (ワクワクするなぁ！ 두근두근하네!, 久しぶりに会うなぁ！ 오랜만에 만나네!), not a prohibition; a plain な！ stays one (緊張するな！ 긴장하지 마!).
+//= ko-root.felt-mimetic	Korean mimetic words of a feeling that the sound stage writes for a Japanese one before する (ワクワク, ドキドキ 두근두근, ゾクゾク 오싹오싹): the word.felt-before-na rule for a lengthened なぁ！ after them.
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった), ながら and たまま, said of what is done to one while or after (見られながら 보이면서, 着せられたまま); spec LEX-6021).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.rare-negative	The negative forms after られ, which make a dictionary word in the られ of くる the potential (連れてこられない, 連れてこられません).
@@ -11359,6 +11364,53 @@ ending.no-exclamation-na	よう
 ending.no-exclamation-na	そう
 ending.no-exclamation-na	です
 ending.no-exclamation-na	ます
+ending.conditional-in-clause	れば
+ending.conditional-in-clause	えば
+ending.conditional-in-clause	けば
+ending.conditional-in-clause	げば
+ending.conditional-in-clause	せば
+ending.conditional-in-clause	てば
+ending.conditional-in-clause	ねば
+ending.conditional-in-clause	べば
+ending.conditional-in-clause	めば
+ending.conditional-in-clause	ければ
+ending.conditional-in-clause	んだら
+ending.conditional-in-clause	いだら
+ending.conditional-in-clause	なら
+ending.conditional-in-clause	んでも
+ending.conditional-in-clause	いでも
+ending.conditional-after-joint	たら
+ending.conditional-after-joint	ても
+ending.conditional-lookalike	例えば
+ending.conditional-lookalike	たとえば
+ending.conditional-lookalike	なんでも
+ending.conditional-lookalike	とんでも
+ending.conditional-lookalike	とっても
+word.felt-before-na	照れる
+word.felt-before-na	てれる
+word.felt-before-na	テレる
+word.felt-before-na	ワクワク
+word.felt-before-na	わくわく
+word.felt-before-na	ドキドキ
+word.felt-before-na	どきどき
+word.felt-before-na	ゾクゾク
+word.felt-before-na	ぞくぞく
+word.felt-before-na	ウキウキ
+word.felt-before-na	うきうき
+word.felt-before-na	ハラハラ
+word.felt-before-na	はらはら
+word.felt-before-na	ヒヤヒヤ
+word.felt-before-na	ひやひや
+word.felt-before-na	緊張
+word.felt-before-na	感動
+word.felt-before-na	興奮
+word.felt-before-na	久しぶり
+word.felt-before-na	ひさしぶり
+word.felt-before-na	久し振り
+word.felt-before-na	久々
+ko-root.felt-mimetic	두근두근
+ko-root.felt-mimetic	오싹오싹
+ko-root.felt-mimetic	조마조마
 ending.nominal	さ=8
 ending.nominal	み=8
 adverb.negative-polarity	二度と
