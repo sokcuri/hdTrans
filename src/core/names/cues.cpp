@@ -818,7 +818,15 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
             if (RuneCount(t) < 2 || (ft.records > 0 && !ft.person)) return "";
             // A full name of the name layer, or a surname and a given name, before a title is the person after one
             // title.
-            if (LayerPerson(t) || !GivenSplit(t).second.empty()) titled_.insert(t);
+            const bool split = LayerPerson(t) || !GivenSplit(t).second.empty();
+            if (split) titled_.insert(t);
+            // A surname of one kanji and a given name, which GivenSplit does not split, keep the reading of their
+            // words (菅勝選手 칸 마사루, not 칸카츠 as one name).
+            if (!split) {
+                const std::size_t one = RuneAt(t, 0).size;
+                const DictFlags fx = Flags(std::string_view(t).substr(0, one)), fy = Flags(std::string_view(t).substr(one));
+                if ((fx.surname || fx.layerSurname) && (fy.given || fy.layerGiven) && !fy.role) return "";
+            }
         }
         rest = line.substr(end);
     }
