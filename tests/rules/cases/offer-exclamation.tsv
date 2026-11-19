@@ -1,7 +1,7 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
 rewrite:offer-promise	さあ、改装された五十鈴の力、存分に見せてあげる！	자, 개장된 이스즈의 힘, 마음껏 보여 줄게!	fix	rewrites
-rewrite:offer-promise	あたし、長鯨がしっかり秘書艦を努めてあげる！	나, 초게이가 확실히 비서함을 노력해 줄게!	fix	rewrites
+rewrite:offer-promise	あたし、長鯨がしっかり秘書艦を努めてあげる！	나, 초게이가 확실히 비서함을 맡아 줄게!	fix	rewrites
 rewrite:offer-promise	私をたっぷりと教えてあげる！	나를 듬뿍 가르쳐 줄게!	fix	rewrites
 rewrite:offer-promise	じゃあ、秋雲が提督の絵書いてあげる！	그럼, 아키구모가 제독의 그림 써 줄게!	fix	rewrites
 rewrite:offer-promise	あたしが、いれてあげる！	내가, 넣어 줄게!	fix	rewrites

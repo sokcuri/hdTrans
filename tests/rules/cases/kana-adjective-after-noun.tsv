@@ -7,7 +7,7 @@ segmentation:kana-adjective-after-noun	「キャンベルかわいいじゃん�
 segmentation:kana-adjective-after-noun	「部内で一番かわいいのは白崎だ」	「부내에서 제일 귀여운 건 시라사키야」	fix	lookup
 segmentation:kana-adjective-after-noun	俺の彼女は、世界一かわいい。	내 여자친구는, 세계 제일 귀엽다.	fix	lookup
 segmentation:kana-adjective-after-noun	「佳奈、よかったよ。最高にかわいかった」	「카나, 좋았어. 최고로 귀여웠어」	fix	lookup
-segmentation:kana-adjective-after-noun	やっぱり、青海さんの笑顔はとびきりかわいい。	역시, 아오미 씨의 웃는 얼굴은 특출 귀엽다.	fix	lookup
+segmentation:kana-adjective-after-noun	やっぱり、青海さんの笑顔はとびきりかわいい。	역시, 아오미 씨의 웃는 얼굴은 최고 귀엽다.	fix	lookup
 segmentation:kana-adjective-after-noun	「見て、このマグカップかわいくない？　猫の耳ついてる」	「봐, 이 머그 컵 귀엽지 않아? 고양이의 귀 도착하고 있어」	fix	lookup
 segmentation:kana-adjective-after-noun	どお？清霜かっこいい？強い？	어때? 키요시모 근사해? 강해?	fix	lookup
 segmentation:kana-adjective-after-noun	でも、それはかなわない。	하지만, 그것은 이길 수 없다.	keep	lookup

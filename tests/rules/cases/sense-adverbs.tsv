@@ -11,7 +11,7 @@ dict:jisjk:263983	これでずっと楽だ。	이것으로 훨씬 편하다.	fix
 dict:jisjk:263983	ここでずっと静かに暮らす。	여기서 계속 조용하게 산다.	keep	local
 dict:jisjk:263983	これでずっと幸せだ。	이것으로 계속 행복하다.	keep	local
 dict:とびっきり	とびっきり美しい。	대단히 아름답다.	fix	defaults
-dict:とびっきり	とびきりの美人だ。	특출의 미인이다.	keep	defaults
+dict:とびっきり	とびきりの美人だ。	최고의 미인이다.	keep	defaults
 dict:ボタッボタ	血がボタッボタと落ちた。	피가 뚝뚝 떨어졌다.	fix	defaults
 dict:ボタッボタ	血がぽたぽたと落ちた。	피가 똑똑 떨어졌다.	keep	defaults
 dict:生憎	生憎、雨だ。	공교롭게도, 비다.	fix	defaults
