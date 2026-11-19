@@ -14,7 +14,6 @@ freq-gloss-b:9	sense	埋める	v1	frame	obj=寂しさ|寂し|穴|差|点差|空�
 freq-gloss-b:10	sense	届く	v5	frame	subj=@sound|言葉|想い|思い|気持ち|願い|祈り|叫び|歌		닿다		LEX-7201	freq	声が届く 목소리가 닿다
 freq-gloss-b:11	sense	届く	v5	frame	dat=心|耳|胸|手|空|天井|天		닿다		LEX-7201	freq	心に届く 마음에 닿다
 freq-gloss-b:12	sense	溜まる	v5:규칙	frame	subj=@liquid|涙|雨水|血|汗|唾|水たまり		고이다		LEX-7201	freq	目に溜まった涙 눈에 고인 눈물
-freq-gloss-b:13	sense	覗かせる	v1	frame	obj=顔|姿|本音|一面|素顔|笑顔|白い歯|歯|本性|片鱗|才能|頭		드러내다		LEX-7201	freq	朝日が顔を覗かせる 아침 해가 얼굴을 드러낸다
 freq-gloss-b:14	sense	滲ませる	v1	frame	obj=悔しさ|怒り|喜び|決意|不満|苛立ち|焦り|疲れ|悲しみ|自信|覚悟|不安|無念さ		내비치다		LEX-7201	freq	悔しさを滲ませる 분함을 내비치다
 freq-gloss-b:15	sense	はかる|測る|計る|量る	v5	frame	obj=長さ|時間|体重|重さ|画面|サイズ|距離|身長|温度|体温|血圧|深さ|高さ|速さ|面積|容量|脈		재다		LEX-7201	freq	画面をはかる 화면을 재다
 freq-gloss-b:16	sense	振る	v5	frame	obj=@weapon|鞭|腕|バット|ラケット|棒|杖|竿|ハンマー|斧		휘두르다		LEX-7201	freq	鞭を振った 채찍을 휘둘렀다
@@ -60,3 +59,10 @@ freq-gloss-b:50	sense	気配	n	frame	mod=* next=ゼロ|ない|無い|なし|無�
 freq-gloss-b:52	sense	気配	n	colloc	雨の気配		비 기운	70	LEX-7201	freq	雨の気配 비 기운
 freq-gloss-b:53	sense	大勢	n	frame	pred=決する|決まる|判明する		대세		LEX-7201	freq	選挙の大勢は決した 선거의 대세는 결정되었다
 freq-gloss-b:54	sense	淵	n	frame	mod=*		못		LEX-7201	freq	恐ろしい淵 무서운 못
+freq-gloss-b:62	sense	村中	n	frame	next=みんな|皆|皆さん|全体|全部|総出|全員|一同|一丸|じゅう|中		온 마을		LEX-7201	freq	村中みんなが歓迎する 온 마을 모두가 환영한다
+freq-gloss-b:63	sense	村中	n	frame	next=の pred=人|人々|者|者たち|皆|みんな|皆さん|連中|衆|住人|住民|村人|村民|子供|子供たち|子ども|大人|大人たち|若者|年寄り|老人|女たち|男たち|女衆|男衆|噂|うわさ|評判|話題|騒ぎ|家々|祭り|誰も|誰もが		온 마을		LEX-7201	freq	村中の人が集まった 온 마을 사람이 모였다
+freq-gloss-b:64	sense	村中	n	frame	next=を pred=駆け回る|走り回る|歩き回る|探し回る|駆けずり回る|飛び回る|引き回す|連れ回す|練り歩く|見回る|巡る|回る|一周する		온 마을		LEX-7201	freq	村中を駆け回った 온 마을을 이리저리 다녔다
+freq-gloss-b:65	sense	村中	n	frame	next=に pred=広まる|広がる|知れ渡る|響く|響き渡る|伝わる|蔓延|蔓延する|蔓延る|はびこる|轟く|触れ回る|行き渡る|満ちる		온 마을		LEX-7201	freq	噂は村中に広まった 소문은 온 마을에 퍼졌다
+freq-gloss-b:66	sense	村中	n	frame	next=が pred=騒ぐ|大騒ぎ|騒然|沸く|沸き立つ|総出|もちきり|持ち切り|お祭り騒ぎ|喪に服す		온 마을		LEX-7201	freq	村中が騒いでいる 온 마을이 떠들고 있다
+freq-gloss-b:67	sense	村中	n	frame	next=で pred=殺し合い|騒ぎ|大騒ぎ|噂|評判|話題|もちきり|持ち切り|有名|祭り|お祭り|祝う|騒ぐ|噂する|探す|探し回る|起こる|起きる|助け合う|守る|育てる|迎える|歓迎する		온 마을		LEX-7201	freq	村中で殺し合いが起こる 온 마을에서 서로 죽이기가 일어난다
+freq-gloss-b:68	sense	で	p	frame	after=村中 next=殺し合い|騒ぎ|大騒ぎ|噂|評判|話題|もちきり|持ち切り|有名|祭り|お祭り|祝う|騒ぐ|噂する|探す|探し回る|起こる|起きる|助け合う|守る|育てる|迎える|歓迎する		에서		LEX-7201	freq	村中で殺し合いが起こる 온 마을에서 서로 죽이기가 일어난다

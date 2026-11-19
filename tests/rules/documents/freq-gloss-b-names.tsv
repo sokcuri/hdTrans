@@ -1,0 +1,8 @@
+# 규칙: LEX-7201
+rule	input	expected	kind	layer
+dict:freq-gloss-b	村中さんが来た。\n村中の噂になった。	has:무라나카의 소문	keep	lookup
+dict:freq-gloss-b	村中さんが来た。\n村中が騒いでいる。	has:무라나카가 떠들	keep	lookup
+dict:freq-gloss-b	村中さんが来た。\n村中を駆け回った。	has:무라나카를	keep	lookup
+dict:freq-gloss-b	「村中くん、ちょっと来て」\n村中の家に行った。	has:무라나카의 집	keep	lookup
+dict:freq-gloss-b	ここは小さな村だ。\n噂は村中に広まった。	has:온 마을에 퍼졌다	fix	lookup
+dict:freq-gloss-b	ここは小さな村だ。\n村中の人が集まった。	has:온 마을의 사람	fix	lookup

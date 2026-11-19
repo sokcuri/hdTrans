@@ -157,6 +157,9 @@ struct LookupContext {
     std::string_view priorDict;
     // Name-layer keys confirmed for the text: their name senses take part.
     const KeySet* confirmed = nullptr;
+    // The surfaces the document shows to be names (pipeline::LineContext::named): a person name
+    // among them keeps its name against the packs' sense rows. Null without a document.
+    const KeySet* named = nullptr;
     // Respelled place keys that the text shows to be persons: their senses of the
     // person spelling's sound take it.
     const KeySet* persons = nullptr;

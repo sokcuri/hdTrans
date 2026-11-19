@@ -10,6 +10,38 @@ dict:freq-gloss-b	一人が怪死し、一人が失踪する。	has:의문사	fi
 dict:freq-gloss-b	死の淵から生還した。	has:죽음의 문턱	fix	lookup
 dict:freq-gloss-b	淵さんが来た。	has:후치 씨가	keep	lookup
 dict:freq-gloss-b	村中を駆け回った。	has:온 마을을	fix	lookup
+dict:freq-gloss-b	村中みんなが新しい仲間を歓迎してくれてるの。	has:온 마을 모두가	fix	lookup
+dict:freq-gloss-b	恥ずかしいカッコのまま村中を引き回して	has:온 마을을 끌고	fix	lookup
+dict:freq-gloss-b	村中が総出でやってきて	has:온 마을이 총출동	fix	lookup
+dict:freq-gloss-b	その恐ろしさが村中に蔓延し	has:온 마을에 만연	fix	lookup
+dict:freq-gloss-b	村中全体が囚われてるとも言えるわね。	has:온 마을 전체가	fix	lookup
+dict:freq-gloss-b	村中で殺し合いが起こる。	has:온 마을에서 서로	fix	lookup
+dict:freq-gloss-b	村中を走り回っている間に落とした。	has:온 마을을 뛰어다니	fix	lookup
+dict:freq-gloss-b	噂は村中に広まった。	has:온 마을에 퍼졌다	fix	lookup
+dict:freq-gloss-b	村中の人が集まった。	has:온 마을의 사람이	fix	lookup
+dict:freq-gloss-b	村中の子供たちが遊んでいる。	has:온 마을의 아이들이	fix	lookup
+dict:freq-gloss-b	村中の噂になった。	has:온 마을의 소문이	fix	lookup
+dict:freq-gloss-b	村中が大騒ぎになった。	has:온 마을이 큰 소동	fix	lookup
+dict:freq-gloss-b	村中が騒いでいる。	has:온 마을이 떠들	fix	lookup
+dict:freq-gloss-b	村中で探した。	has:온 마을에서 찾았다	fix	lookup
+dict:freq-gloss-b	それは村中で有名な話だ。	has:온 마을에서 유명한	fix	lookup
+dict:freq-gloss-b	村中！	has:무라나카!	keep	lookup
+dict:freq-gloss-b	おい、村中！	has:어이, 무라나카!	keep	lookup
+dict:freq-gloss-b	村中、お前もか！	has:무라나카, 너도	keep	lookup
+dict:freq-gloss-b	村中？	has:무라나카?	keep	lookup
+dict:freq-gloss-b	「村中！」	has:「무라나카!」	keep	lookup
+dict:freq-gloss-b	村中が来た。	has:무라나카가 왔다	keep	lookup
+dict:freq-gloss-b	村中駅で降りた。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中町に住む。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中が走り回っている。	has:무라나카가 뛰어다니	keep	lookup
+dict:freq-gloss-b	村中が人を集めた。	has:무라나카가 사람을	keep	lookup
+dict:freq-gloss-b	村中を探した。	has:무라나카를 찾았다	keep	lookup
+dict:freq-gloss-b	村中に会った。	has:무라나카를 만났다	keep	lookup
+dict:freq-gloss-b	村中に伝えてくれ。	has:무라나카에게 전해	keep	lookup
+dict:freq-gloss-b	村中の家に行った。	has:무라나카의 집에	keep	lookup
+dict:freq-gloss-b	村中でいいよ。	has:무라나카면	keep	lookup
+dict:freq-gloss-b	村中では無理だ。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中は笑った。	has:무라나카는 웃었다	keep	lookup
 dict:freq-gloss-b	村中さんは知っている。	has:무라나카 씨는	keep	lookup
 dict:freq-gloss-b	逆転本塁打を放つ。	has:역전 홈런을	fix	lookup
 dict:freq-gloss-b	今場所は好調だ。	has:이번 대회는	fix	lookup

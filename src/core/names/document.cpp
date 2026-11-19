@@ -930,6 +930,7 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     ctx.lookup.persons = &lookup.persons;
     ctx.lookup.cued = &lookup.cued;
     ctx.named = &doc.named;
+    ctx.lookup.named = &doc.named;
     ctx.prose = &doc.prose;
     ctx.lineProse = &lookup.prose;
     if (doc.names != nullptr && !doc.names->persons.empty()) ctx.listed = &doc.names->persons;
