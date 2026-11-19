@@ -637,9 +637,6 @@ Record* AdjectiveOverKanaNoun(Record* records, std::string_view before, std::str
 
 bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
 
-// A kana that belongs to the kana before it: ー, ン or a small kana.
-bool BoundKana(char32_t r) { return r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos; }
-
 // LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
 // words, a stray piece: a word the dictionary reads only as a person's name, or kana no dictionary
 // word starts at, read by their sound (フリースリーカード: フリース, リー, カード; アイスミルクティー:
@@ -2132,6 +2129,7 @@ bool Worker::Dispatch(int i, int& last) {
     const std::string_view merged = tokens.Merged(static_cast<std::size_t>(i));
     const int type = tokens.TypeAfter(static_cast<std::size_t>(i));
     const std::string_view left = tokens.Canonical(static_cast<std::size_t>(i));
+    segDecided_.clear();
     switch (type) {
     case tokenizer::kTypeNumber: case 15: case tokenizer::kTypeAlpha: case 16:
         BuildTokenTransformText(i);
@@ -3895,8 +3893,13 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text) records = KanaNounOverOneKanaStem(full, cursor, token, records);
     if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
-    if (settings.text) records = KatakanaRunWhole(*this, records, full, static_cast<std::size_t>(cursor), token);
-    if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+    if (settings.text) {
+        // LEX-6723: where neither katakana reorder moved the first record (the order is the lookup's).
+        const Record* const incoming = records;
+        records = KatakanaRunWhole(*this, records, full, static_cast<std::size_t>(cursor), token);
+        records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+        if (records == incoming && snapshot.SegCostTable().loaded) records = LatticeKatakana(records, full, cursor, token);
+    }
     if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);

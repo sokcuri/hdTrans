@@ -5,9 +5,11 @@
 // (InsertLateCandidate on the record alone), a run of Latin letters as one word, and fallback edges
 // for unknown text. Every edge costs a sum of named, hand-set terms from the dictionary file of the
 // layer seg-costs (dict/seg_costs.h); the cheapest path wins, and a tie keeps the order of the search.
-// The lattice reads only; the search alone splits the token.
+// The lattice reads, and decides only one thing (LatticeKatakana): at the start of a katakana run
+// where every reading by words has a stray piece, the run read whole by its sound goes first when
+// the lattice reads it so more cheaply.
 //
-// Two uses:
+// Also:
 // - SegReport with --why: per token the path the search took with the cost terms of each edge, and
 //   the best path with another split.
 // - SegReport with HDTRANS_SEG_SHADOW=<file>: writes <file>.<pid>, one row per window where the
@@ -50,6 +52,7 @@ struct SegEdge {
     const dict::UserEntry* user = nullptr;
     bool word = false;                  // a dictionary word (not unknown text read by sound)
     bool particle = false;              // a particle spelled in kana
+    bool joined = false;                // a katakana word with the single kana that ends the run (ジャーニー|ズ)
     // For --why and the shadow only: the start of the span, the code, layer and gloss of the edge,
     // and its cost terms, formatted by EdgeLabel; label is set where it is formatted already.
     int from = 0;
@@ -406,6 +409,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         if (joins) {
             SegEdge j = e;
             j.end = end + CharLen(s, end);
+            j.joined = true;
             if (detail) AddTerm(j, "+kana");
             out.push_back(std::move(j));
         }
@@ -431,8 +435,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
     }
     // From the start of the run, or from a kana inside it that can start a word (no ー, ン or small
     // kana): the rest of a run after a word is read whole by its sound (ドクター|ゴフマン).
-    static constexpr std::u32string_view kBound = U"ーンァィゥェォッャュョヮヵヶ";
-    if (KataRune(r) && (!KataRune(before) || kBound.find(r) == std::u32string_view::npos)) {
+    if (KataRune(r) && (!KataRune(before) || !BoundKana(r))) {
         // The end of the run and the kana from p to it, from the memo of the run.
         if (segRun_ == nullptr) segRun_ = std::make_shared<SegRunMemo>();
         SegRunMemo& m = *segRun_;
@@ -455,6 +458,168 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
             out.push_back(std::move(e));
         }
     }
+}
+
+// The lattice of a katakana run: edges from every character of the run, and from the end of the run
+// up to the furthest end of those edges (keeping the edges that end there), with the cost of the best
+// path from each character to that end. Built at each visit of a run start (the search may come back to it); its size is that of the run and
+// the words that leave it.
+struct SegWindow {
+    int start = 0, end = 0, limit = 0;
+    std::vector<std::vector<SegEdge>> edges;  // by offset from start
+    std::vector<int> suffix;               // by offset from start; kInf where no path reaches limit
+};
+
+const SegWindow& Worker::SegWindowFor(std::string_view s, int start, int end, int token) {
+    if (segWindow_ == nullptr) segWindow_ = std::make_shared<SegWindow>();
+    SegWindow& w = *segWindow_;
+    if (segRun_ != nullptr) segRun_->text = {};
+    w.start = start;
+    w.end = end;
+    w.edges.assign(static_cast<std::size_t>(end - start) + 1, {});
+    int limit = end;
+    std::vector<SegEdge> out;
+    for (int p = start; p < limit; p += CharLen(s, p)) {
+        out.clear();
+        SegEdgesAt(s, p, token, false, out);
+        if (p >= end) std::erase_if(out, [&](const SegEdge& e) { return e.end > limit; });
+        for (const SegEdge& e : out) limit = std::max(limit, e.end);
+        if (w.edges.size() < static_cast<std::size_t>(limit - start) + 1) w.edges.resize(static_cast<std::size_t>(limit - start) + 1);
+        w.edges[static_cast<std::size_t>(p - start)] = std::move(out);
+        out = {};
+    }
+    w.limit = limit;
+    w.edges.resize(static_cast<std::size_t>(limit - start) + 1);
+    AddSeams(s, w.edges, start, start, limit, false);
+    w.suffix.assign(static_cast<std::size_t>(limit - start) + 1, kInf);
+    w.suffix.back() = 0;
+    for (int p = limit; p-- > start;) {
+        if ((static_cast<unsigned char>(s[static_cast<std::size_t>(p)]) & 0xC0) == 0x80) continue;
+        int best = kInf;
+        for (const SegEdge& e : w.edges[static_cast<std::size_t>(p - start)]) {
+            const int rest = w.suffix[static_cast<std::size_t>(e.end - start)];
+            if (rest < kInf) best = std::min(best, e.cost + rest);
+        }
+        w.suffix[static_cast<std::size_t>(p - start)] = best;
+    }
+    return w;
+}
+
+// LEX-6723: at the start of a katakana run of 3 to 24 kana that no record reads whole, the run
+// read whole by its sound goes first where the lattice reads it so more cheaply than any path from
+// the search's first record, and only where every reading of the run by dictionary words has a stray
+// piece: one kana (not ー) read alone, a word with the single kana that ends the run, or a kana no
+// word covers. A kana after a word that the dictionary reads in hiragana as a particle is no stray
+// piece, at the end of the run too (ボク|ハ|マリオ, コレ|ハ: LEX-6724). The lattice does not choose between readings by words: their order is the
+// search's. records holds the records of the lookup in its order.
+Record* Worker::LatticeKatakana(Record* records, std::string_view full, int cursor, int token) {
+    const SegCosts& t = snapshot.SegCostTable();
+    if (!t.loaded || records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    const int size = static_cast<int>(full.size());
+    if (cursor < 0 || cursor >= size || !KataRune(RuneAt(full, cursor))) return records;
+    if (cursor > 0 && KataRune(RuneAt(full, RuneBefore(full, cursor)))) return records;  // not the start of a run
+    const int start = cursor;
+    int end = start, kana = 0;
+    while (end < size && KataRune(RuneAt(full, end)) && kana <= static_cast<int>(kKatakanaRunMax)) {
+        end += CharLen(full, end);
+        kana++;
+    }
+    if (kana < 3 || kana > static_cast<int>(kKatakanaRunMax)) return records;
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() >= static_cast<std::size_t>(end - start)) return records;
+    }
+    const SegWindow& w = SegWindowFor(full, start, end, token);
+    auto rest = [&](int at) { return at >= start && at <= w.limit ? w.suffix[static_cast<std::size_t>(at - start)] : kInf; };
+    // Whether the edge e from at is a stray piece of a reading of the run by words.
+    auto stray = [&](const SegEdge& e, int at) {
+        const bool one = e.end - at == CharLen(full, at);
+        const char32_t r = RuneAt(full, at);
+        if (one && r == U'ー') return false;  // a mark, read or not
+        if (!e.word || e.joined) return true;
+        if (!one || !KataRune(r)) return false;
+        if (at == start) return true;
+        const char32_t next = RuneAt(full, e.end);
+        if (BoundKana(next) || r < U'ァ' || r > U'ヶ') return true;
+        std::string hira;
+        text::AppendRune(hira, static_cast<char32_t>(r - 0x60));
+        for (const dict::Candidate& c : WordInfo(hira, kModeGeneral).list) {
+            const dict::Codes* codes = c.codes != nullptr ? c.codes : c.user != nullptr ? c.user->codes : nullptr;
+            if (c.source.size() == hira.size() && codes != nullptr && codes->partText.size() == 4 && codes->partText[0] == 'P' &&
+                codes->partText[1] == '2') {
+                return false;
+            }
+        }
+        return true;
+    };
+    // clean[i]: a reading by words with no stray piece runs from start + i to the end of the run.
+    std::vector<char> clean(static_cast<std::size_t>(end - start) + 1, 0);
+    clean.back() = 1;
+    for (int at = end; at-- > start;) {
+        if ((static_cast<unsigned char>(full[static_cast<std::size_t>(at)]) & 0xC0) == 0x80) continue;
+        for (const SegEdge& e : w.edges[static_cast<std::size_t>(at - start)]) {
+            if (!stray(e, at) && (e.end >= end || clean[static_cast<std::size_t>(e.end - start)] != 0)) {
+                clean[static_cast<std::size_t>(at - start)] = 1;
+                break;
+            }
+        }
+    }
+    if (clean.front() != 0) return records;
+    // kanaAt[i]: the kana from start to start + i. A stray prefix of two or more kana holding a word before a dictionary word
+    // that takes two or more kana of the run and ends at its end or crosses it is a name before a word (ヨンホ|コーヒー,
+    // ハリホ|パン, ホロ|スクリーン, トラジャ|モー娘): the run is not one sound. Nor is a run whose reading by words starts
+    // with words that end at a kana the dictionary reads in hiragana as a particle (ボク|ハ|ヨンホ): it is speech.
+    std::vector<int> kanaAt(static_cast<std::size_t>(end - start) + 1, 0);
+    for (int at = start, k = 0; at <= end; at += at < end ? CharLen(full, at) : 1) kanaAt[static_cast<std::size_t>(at - start)] = k++;
+    // The word at the end is the longest dictionary word that takes two or more kana of the run and ends at its end
+    // or crosses it (ハピ|ライン, not ハピラ|イン). Not a proper noun of two kana inside the run: the costs read it as a
+    // piece cut by chance (short-kata-piece). The prefix before it holds a name only where a dictionary word of two
+    // or more kana lies inside it (ヨン|ホ, ハリ|ホ); lone strays (ハ|ピ) are sound.
+    int last = end;
+    for (int at = start; at < end && last == end; at += CharLen(full, at)) {
+        const std::size_t i = static_cast<std::size_t>(at - start);
+        if (kana - kanaAt[i] < 2) break;
+        for (const SegEdge& e : w.edges[i]) {
+            const bool piece = e.part == "N130" && e.end <= end && kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[i] == 2;
+            if (e.word && !e.joined && e.end >= end && !stray(e, at) && !piece) last = at;
+        }
+    }
+    if (last < end && kanaAt[static_cast<std::size_t>(last - start)] >= 2) {
+        for (int at = start; at < last; at += CharLen(full, at)) {
+            for (const SegEdge& e : w.edges[static_cast<std::size_t>(at - start)]) {
+                if (e.word && !e.joined && e.end <= last &&
+                    kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[static_cast<std::size_t>(at - start)] >= 2) {
+                    return records;
+                }
+            }
+        }
+    }
+    std::vector<char> words(static_cast<std::size_t>(end - start) + 1, 0);  // a reading by words with no stray piece runs from start to start + i
+    words.front() = 1;
+    for (int at = start; at < end; at += CharLen(full, at)) {
+        const std::size_t i = static_cast<std::size_t>(at - start);
+        if (words[i] == 0) continue;
+        for (const SegEdge& e : w.edges[i]) {
+            if (stray(e, at) || e.end > end) continue;
+            words[static_cast<std::size_t>(e.end - start)] = 1;
+            const bool particle = at > start && e.end - at == CharLen(full, at) && e.end < end;
+            if (particle && kanaAt[static_cast<std::size_t>(e.end - start)] >= 2) return records;
+        }
+    }
+    // The cheapest path from the search's first record; a record the lattice cannot price stands.
+    const int key = static_cast<int>(records->source.size());
+    int first = kInf;
+    for (const SegEdge& e : w.edges[0]) {
+        if (e.word && !e.joined && e.key == key && e.part == records->partCode && e.user == records->user && rest(e.end) < kInf) {
+            first = std::min(first, e.cost + rest(e.end));
+        }
+    }
+    if (first >= kInf) return records;
+    const int sound = SoundRunCost(t, kana, nullptr) + rest(end);
+    if (sound >= first) return records;
+    segDecided_.emplace_back(start, end);
+    Record* read = CreateSyntheticRecord(token, full.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(end - start)), false);
+    read->child = records;
+    return read;
 }
 
 // The edges of the whole token for --why and the shadow, the search's own items among them, and
@@ -608,6 +773,11 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
     if (!t.loaded || surface.empty() || (sink.f == nullptr && !why)) return;
     SegTokenPaths paths;
     if (!SegTokenLattice(token, surface, mark, paths)) return;
+    bool decided = false;
+    for (std::size_t k = 0; k + 1 < paths.bounds.size() && !decided; k++) {
+        const std::pair<int, int> span(paths.bounds[k], paths.bounds[k + 1]);
+        decided = std::find(segDecided_.begin(), segDecided_.end(), span) != segDecided_.end();
+    }
     const auto [first, second] = TwoBest(surface, paths.edges);
     int oldCost = 0;
     for (const int c : paths.costs) oldCost += c;
@@ -615,7 +785,7 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
         // The path the search took, and the best path that splits otherwise.
         const Path& other = first.bounds == paths.bounds ? second : first;
         std::string note(surface);
-        note += "\tsearch ";
+        note += decided ? "\tlattice " : "\tsearch ";
         note += std::to_string(oldCost) + ": " + Joined(paths.labels, 0, paths.labels.size());
         if (other.cost < kInf) {
             std::vector<std::string> labels;

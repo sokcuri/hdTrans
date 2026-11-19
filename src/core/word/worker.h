@@ -50,6 +50,7 @@ inline constexpr std::size_t kKatakanaRunMax = 24;
 struct SegEdge;
 struct SegRunMemo;
 struct SegTokenPaths;
+struct SegWindow;
 
 class Worker {
 public:
@@ -231,6 +232,14 @@ private:
     bool SegTokenLattice(int token, std::string_view surface, const Item* mark, SegTokenPaths& out);
     // The end and the kana counts of the katakana run SegEdgesAt reads last.
     std::shared_ptr<SegRunMemo> segRun_;
+    // The lattice of the katakana run LatticeKatakana reads (one at a time).
+    const SegWindow& SegWindowFor(std::string_view s, int start, int end, int token);
+    std::shared_ptr<SegWindow> segWindow_;
+    // At the start of a katakana run: the run read whole by its sound first, where the lattice says so.
+    Record* LatticeKatakana(Record* records, std::string_view full, int cursor, int token);
+    // The spans of the current token whose record LatticeKatakana put first; SegReport says "lattice"
+    // where the search's path keeps one of them as a word.
+    std::vector<std::pair<int, int>> segDecided_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
