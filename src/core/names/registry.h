@@ -213,6 +213,7 @@ private:
     bool HiraganaWord(std::string_view s);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
+    bool PersonSaidAt(std::string_view said, bool topic);
     bool LayerReading(std::string_view t);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);

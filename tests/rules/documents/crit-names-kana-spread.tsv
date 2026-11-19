@@ -95,3 +95,27 @@ names:park	井ノ頭公園を散歩した。	has:이노카시라 공원	fix	fixe
 names:park	井之頭公園のボート。	has:이노카시라 공원	fix	fixed
 names:park	井乃頭池の水。	has:이노카시라 연못	fix	fixed
 names:park	井之頭池の水。	has:이노카시라 연못	fix	fixed
+names:bare-spread	うみさんが来た。\nうみはきたない。	has:바다는 더럽다	keep	fixed
+names:bare-spread	めぐみさんが来た。\nめぐみがいっぱいだ。	has:은혜가 가득	keep	fixed
+names:bare-spread	なぎささんが来た。\nなぎさはいきなり消えた。	has:물가는 갑자기	keep	fixed
+names:bare-spread	ひかりさんが来た。\nひかりがくるくる回る。	has:빛이 빙글빙글	keep	fixed
+names:bare-spread	ひかりさんが来た。\nひかりが鈍く光った。	has:빛이 흐릿하게	keep	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみはいったい何だ。	has:희망은 도대체	keep	fixed
+names:bare-spread	ひかりさんが来た。\nひかりは優しさに満ちていた。	has:빛은 다정함	keep	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみは誰にも渡さない。	has:희망은 누구에게도	keep	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみは誰でも持てる。	has:희망은 누구나	keep	fixed
+names:bare-spread	ひかりさんが来た。\nひかりは誰だって持っている。	has:빛은 누구라도	keep	fixed
+names:bare-spread	うみさんが来た。\nうみがいったよ。	has:우미가 말했어	fix	fixed
+names:bare-spread	うみさんが来た。\nうみはいっちゃった。	has:우미는 가버렸다	fix	fixed
+names:bare-spread	ひかりさんが来た。\nひかりがくるまで待つ。	has:히카리가 올 때까지	fix	fixed
+names:bare-spread	ひかりさんが来た。\nひかりは鈍い。	has:히카리는 둔하다	fix	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみは優しくなった。	has:노조미는 다정해졌다	fix	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみは素直になった。	has:노조미는 솔직해졌다	fix	fixed
+names:bare-spread	のぞみさんが来た。\nのぞみって誰？	has:노조미는 누구	fix	fixed
+names:bare-spread	ひかりさんが来た。\nひかりは誰？	has:히카리는 누구	fix	fixed
+names:bare-spread	ひなたさんが来た。\nひなたは誰なの？	has:히나타는 누구야	fix	fixed
+names:bare-spread	うみさんが来た。\nうみはどなたですか。	has:우미는 어떤 분	fix	fixed
+names:bare-spread	めぐみさんが来た。\nめぐみって誰だよ。	has:메구미는 누구	fix	fixed
+names:bare-spread	なぎささんが来た。\nなぎさは誰だ。	has:나기사는 누구	fix	fixed
+names:bare-spread	だからちゃんと見て。	has:제대로 봐	keep	fixed
+names:bare-spread	たけるくんと帰った。	has:타케루 군과	keep	fixed

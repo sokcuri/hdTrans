@@ -14897,3 +14897,11 @@ name.bare-person-move	いっ
 name.bare-person-move	いか
 name.bare-person-move	いき
 name.bare-person-move	いこ
+//= name.person-question	Question words that ask for a person, which after the は or って of a kana name the document gives before an honorific make the bare name that person where they end the clause (なぎさって誰？, のぞみは誰なの; not 誰だって, 誰でも; spec LEX-6300).
+name.person-question	誰
+name.person-question	だれ
+name.person-question	どなた
+name.person-question	どちら様
+name.person-question	どちらさま
+//= honorific.and-word	An honorific with と after it that spells another word, so that と after the honorific is no particle there (だからちゃんと; not わたるさんと会った; spec LEX-6300).
+honorific.and-word	ちゃんと

@@ -1927,11 +1927,11 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
             // って marks the topic as は does (なぎさって、優しいね).
             const std::string topic = rest.starts_with("って") ? "は" + std::string(rest.substr(std::string_view("って").size())) : std::string(rest);
             if (PersonSlotAt(*snap_, found, line.substr(0, a), topic)) return true;
-            // A coming or going, or a trait of a person (adjective.character: なぎさって、優しいね) said of it.
+            // A coming or going, a trait of a person (なぎさって、優しいね) or a question for a person
+            // (なぎさって誰？) said of it (PersonSaidAt).
             std::string_view said = std::string_view(topic).substr(FirstRune(topic).size);
             if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
-            return InRunes(FirstRune(topic).cp, "がはも") && (dict::StartsWithMember(HDTRANS_CLASS("name.bare-person-move"), said) > 0 ||
-                                                         dict::StartsWithMember(HDTRANS_CLASS("adjective.character"), said) > 0);
+            return InRunes(FirstRune(topic).cp, "がはも") && PersonSaidAt(said, FirstRune(topic).cp == U'は');
         };
         const bool bare = acc.at(found).honorificOnly && !honorific && (listed_.count(found) > 0 || !bareSlot());
         if (ok) {
