@@ -299110,7 +299110,7 @@ ttt	ttt	K110			GN				jisjk:201744
 終了次第	종료하는 대로	E300			GN				jisjk:123203		
 終価	종가	N110	VMo		GN				jisjk:33872		
 終値	종가	N110	VMo		BZ				jisjk:33903		
-終値比	종치비	N110			GN				jisjk:189433		
+終値比	종가 대비	N110			GN				jisjk:189433		
 終刊	종간	N110			GN				jisjk:33873		
 終列車	막차	I110	VTp		GN				jisjk:83869		
 終助詞	종조사	N110	UTs		GN				jisjk:189359		

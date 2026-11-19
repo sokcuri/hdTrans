@@ -3900,7 +3900,12 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
         if (records == incoming && snapshot.SegCostTable().loaded) records = LatticeKatakana(records, full, cursor, token);
     }
-    if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
+    if (settings.text) {
+        // LEX-6725: where KanjiCoverFirst did not move the first record.
+        const Record* const incoming = records;
+        records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
+        if (records == incoming && snapshot.SegCostTable().loaded) records = LatticeKanji(records, full, cursor, token);
+    }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;

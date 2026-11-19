@@ -573,7 +573,7 @@
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
-//= suffix.kanji-noun	Kanji that end a compound noun as a suffix where the dictionary gives them no suffix code Z7 (同僚 + 艦, 珊瑚 + 諸島, 清流 + 線, 高層 + 階, 白金 + 色, 地中海 + 風, 島 + 沖, 同盟国 + 軍, 甲斐国 + 主, 善人 + 面, 外国人 + 数, 生徒会 + 報): in a run of kanji the cover of fewest loose kanji reads them bound to the word before (spec LEX-6350), also where the run goes on after a kanji word read before them (同志 + 国 + 連携; LEX-7051).
+//= suffix.kanji-noun	Kanji that end a compound noun as a suffix where the dictionary gives them no suffix code Z7 (同僚 + 艦, 珊瑚 + 諸島, 清流 + 線, 高層 + 階, 冠水 + 路, 白金 + 色, 地中海 + 風, 島 + 沖, 同盟国 + 軍, 甲斐国 + 主, 善人 + 面, 外国人 + 数, 生徒会 + 報): in a run of kanji the cover of fewest loose kanji reads them bound to the word before (spec LEX-6350), also where the run goes on after a kanji word read before them (同志 + 国 + 連携; LEX-7051).
 //= suffix.label-parent	Ends of a speaker label Xの父 that name a relative of the name X (アリスの母).
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
@@ -15077,6 +15077,7 @@ suffix.kanji-noun	面
 suffix.kanji-noun	数
 suffix.kanji-noun	報
 suffix.kanji-noun	国
+suffix.kanji-noun	路
 adjective.ku-greeting	よろしく
 adjective.ku-greeting	宜しく
 adjective.ku-request	優しく

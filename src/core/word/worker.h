@@ -237,8 +237,10 @@ private:
     std::shared_ptr<SegWindow> segWindow_;
     // At the start of a katakana run: the run read whole by its sound first, where the lattice says so.
     Record* LatticeKatakana(Record* records, std::string_view full, int cursor, int token);
-    // The spans of the current token whose record LatticeKatakana put first; SegReport says "lattice"
-    // where the search's path keeps one of them as a word.
+    // Inside a kanji run: the first word of the lattice's path first, where the lattice says so.
+    Record* LatticeKanji(Record* records, std::string_view full, int cursor, int token);
+    // The spans of the current token whose record LatticeKatakana or LatticeKanji put first; SegReport says
+    // "lattice" where the search's path keeps one of them as a word.
     std::vector<std::pair<int, int>> segDecided_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
