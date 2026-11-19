@@ -25,3 +25,13 @@ segmentation:lattice-kata	「ママーーー！」	has:엄마	keep	lookup
 segmentation:lattice-kata	ビザー米を取る。	has:비자	keep	lookup
 segmentation:lattice-kata	ドクターゴフマンが来た。	has:닥터	keep	lookup
 segmentation:lattice-kata	「コ、コレハ……ナミ、ダ……」	lacks:코레하	keep	lookup
+segmentation:lattice-kata	ザクリン	has:자크린	fix	lookup
+segmentation:lattice-kata	ミクリン	has:미크린	fix	lookup
+segmentation:lattice-kata	ヨンホコーヒー	has:커피	keep	lookup
+segmentation:lattice-kata	ハリホパン	has:빵	keep	lookup
+segmentation:lattice-kata	ヨンホバス停で待つ。	has:버스정류장	keep	lookup
+segmentation:lattice-kata	ハリホゴム製	has:고무	keep	lookup
+segmentation:lattice-kata	ホロスクリーンを見た。	lacks:스크리를	keep	lookup
+segmentation:lattice-kata	<トラジャモー娘。 日向坂>	lacks:딸	keep	lookup
+segmentation:lattice-kata	ボクハヨンホ	lacks:보크	keep	lookup
+segmentation:lattice-kata	♬「ハキリ ハキリ ハキリアリ」	has:하키리 하키리	keep	lookup

@@ -435,8 +435,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
     }
     // From the start of the run, or from a kana inside it that can start a word (no ー, ン or small
     // kana): the rest of a run after a word is read whole by its sound (ドクター|ゴフマン).
-    static constexpr std::u32string_view kBound = U"ーンァィゥェォッャュョヮヵヶ";
-    if (KataRune(r) && (!KataRune(before) || kBound.find(r) == std::u32string_view::npos)) {
+    if (KataRune(r) && (!KataRune(before) || !BoundKana(r))) {
         // The end of the run and the kana from p to it, from the memo of the run.
         if (segRun_ == nullptr) segRun_ = std::make_shared<SegRunMemo>();
         SegRunMemo& m = *segRun_;
@@ -463,7 +462,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
 
 // The lattice of a katakana run: edges from every character of the run, and from the end of the run
 // up to the furthest end of those edges (keeping the edges that end there), with the cost of the best
-// path from each character to that end. Built once per run start; its size is that of the run and
+// path from each character to that end. Built at each visit of a run start (the search may come back to it); its size is that of the run and
 // the words that leave it.
 struct SegWindow {
     int start = 0, end = 0, limit = 0;
@@ -527,7 +526,7 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
     }
     if (kana < 3 || kana > static_cast<int>(kKatakanaRunMax)) return records;
     for (const Record* r = records; r != nullptr; r = r->child) {
-        if (r->source.size() == static_cast<std::size_t>(end - start)) return records;
+        if (r->source.size() >= static_cast<std::size_t>(end - start)) return records;
     }
     const SegWindow& w = SegWindowFor(full, start, end, token);
     auto rest = [&](int at) { return at >= start && at <= w.limit ? w.suffix[static_cast<std::size_t>(at - start)] : kInf; };
@@ -540,8 +539,7 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
         if (!one || !KataRune(r)) return false;
         if (at == start) return true;
         const char32_t next = RuneAt(full, e.end);
-        static constexpr std::u32string_view kBound = U"ーンァィゥェォッャュョヮヵヶ";
-        if (kBound.find(next) != std::u32string_view::npos || r < U'ァ' || r > U'ヶ') return true;
+        if (BoundKana(next) || r < U'ァ' || r > U'ヶ') return true;
         std::string hira;
         text::AppendRune(hira, static_cast<char32_t>(r - 0x60));
         for (const dict::Candidate& c : WordInfo(hira, kModeGeneral).list) {
@@ -566,6 +564,31 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
         }
     }
     if (clean.front() != 0) return records;
+    // kanaAt[i]: the kana from start to start + i. A stray prefix of two or more kana before a dictionary word
+    // that takes two or more kana of the run and ends at its end or crosses it is a name before a word (ヨンホ|コーヒー,
+    // ハリホ|パン, ホロ|スクリーン, トラジャ|モー娘): the run is not one sound. Nor is a run whose reading by words starts
+    // with words that end at a kana the dictionary reads in hiragana as a particle (ボク|ハ|ヨンホ): it is speech.
+    std::vector<int> kanaAt(static_cast<std::size_t>(end - start) + 1, 0);
+    for (int at = start, k = 0; at <= end; at += at < end ? CharLen(full, at) : 1) kanaAt[static_cast<std::size_t>(at - start)] = k++;
+    std::vector<char> words(static_cast<std::size_t>(end - start) + 1, 0);  // a reading by words with no stray piece runs from start to start + i
+    words.front() = 1;
+    for (int at = start; at < end; at += CharLen(full, at)) {
+        const std::size_t i = static_cast<std::size_t>(at - start);
+        if (at > start && kanaAt[i] >= 2 && kana - kanaAt[i] >= 2) {
+            for (const SegEdge& e : w.edges[i]) {
+                // Not a proper noun of two kana inside the run: the costs read it as a piece cut by chance (short-kata-piece).
+                const bool piece = e.part == "N130" && e.end <= end && kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[i] == 2;
+                if (e.word && !e.joined && e.end >= end && !stray(e, at) && !piece) return records;
+            }
+        }
+        if (words[i] == 0) continue;
+        for (const SegEdge& e : w.edges[i]) {
+            if (stray(e, at) || e.end > end) continue;
+            words[static_cast<std::size_t>(e.end - start)] = 1;
+            const bool particle = at > start && e.end - at == CharLen(full, at) && e.end < end;
+            if (particle && kanaAt[static_cast<std::size_t>(e.end - start)] >= 2) return records;
+        }
+    }
     // The cheapest path from the search's first record; a record the lattice cannot price stands.
     const int key = static_cast<int>(records->source.size());
     int first = kInf;
@@ -577,7 +600,7 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
     if (first >= kInf) return records;
     const int sound = SoundRunCost(t, kana, nullptr) + rest(end);
     if (sound >= first) return records;
-    segDecided_ = true;
+    segDecided_.emplace_back(start, end);
     Record* read = CreateSyntheticRecord(token, full.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(end - start)), false);
     read->child = records;
     return read;
@@ -729,13 +752,16 @@ std::string Joined(const std::vector<std::string>& v, std::size_t a, std::size_t
 
 void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
     const SegCosts& t = snapshot.SegCostTable();
-    const bool decided = segDecided_;
-    segDecided_ = false;
     Sink& sink = TheSink();
     const bool why = settings.splitWhy;
     if (!t.loaded || surface.empty() || (sink.f == nullptr && !why)) return;
     SegTokenPaths paths;
     if (!SegTokenLattice(token, surface, mark, paths)) return;
+    bool decided = false;
+    for (std::size_t k = 0; k + 1 < paths.bounds.size() && !decided; k++) {
+        const std::pair<int, int> span(paths.bounds[k], paths.bounds[k + 1]);
+        decided = std::find(segDecided_.begin(), segDecided_.end(), span) != segDecided_.end();
+    }
     const auto [first, second] = TwoBest(surface, paths.edges);
     int oldCost = 0;
     for (const int c : paths.costs) oldCost += c;

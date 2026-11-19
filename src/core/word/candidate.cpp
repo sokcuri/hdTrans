@@ -637,9 +637,6 @@ Record* AdjectiveOverKanaNoun(Record* records, std::string_view before, std::str
 
 bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
 
-// A kana that belongs to the kana before it: ー, ン or a small kana.
-bool BoundKana(char32_t r) { return r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos; }
-
 // LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
 // words, a stray piece: a word the dictionary reads only as a person's name, or kana no dictionary
 // word starts at, read by their sound (フリースリーカード: フリース, リー, カード; アイスミルクティー:
@@ -2132,6 +2129,7 @@ bool Worker::Dispatch(int i, int& last) {
     const std::string_view merged = tokens.Merged(static_cast<std::size_t>(i));
     const int type = tokens.TypeAfter(static_cast<std::size_t>(i));
     const std::string_view left = tokens.Canonical(static_cast<std::size_t>(i));
+    segDecided_.clear();
     switch (type) {
     case tokenizer::kTypeNumber: case 15: case tokenizer::kTypeAlpha: case 16:
         BuildTokenTransformText(i);
@@ -2143,7 +2141,6 @@ bool Worker::Dispatch(int i, int& last) {
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
         else {
             const Item* const mark = chain.tail;
-            segDecided_ = false;
             BuildSurfaceTransform(i, left);
             if (SegShadowOn() || settings.splitWhy) SegReport(i, left, mark);
         }
