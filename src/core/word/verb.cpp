@@ -567,8 +567,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // LEX-7483: a す-verb whose stem ends in the past た of a verb (来た of 来たす: 来る, いた of いたす: いる, みた of みたす: 見る)
     // is that past where the form cannot be the す-verb: its volitional そう before a copula is the hearsay そうだ (来たそうだ
     // 왔다고 한다: follower.copula-after-past-sou), and its bare continuative し before a mark, the end or a sentence particle
-    // (follower.listing-shi) is the し that lists a reason (ここまで来たし、 왔고, ここにいたしな 있었고), unless the す-verb's
-    // object stands right before it: を, or a verbal noun, also behind a focus particle (支障を来たし、, 混乱も来たし、, 失礼いたし、).
+    // (follower.listing-shi) is the し that lists a reason (ここまで来たし、 왔고, さっきもいたしな 있었고), unless the す-verb's
+    // object stands right before it: を, a verbal noun, also behind a focus particle (支障を来たし、, 混乱も来たし、, 失礼いたし、), or a
+    // verb's continuative glued to it (お引き受けいたし、).
     if (!matched && base.patternKind == 3 && (base.kind == 5 || base.kind == 10) && surface.ends_with("た") &&
         surface.size() > std::string_view("た").size()) {
         const std::string_view head = std::string_view(surface).substr(0, surface.size() - std::string_view("た").size());
@@ -597,6 +598,28 @@ bool Item::AcceptVerbContinuation(Record* following) {
             if (base.kind == 5) return false;
             std::string_view before = std::string_view(text).substr(0, static_cast<std::size_t>(std::max(start, 0)));
             if (before.ends_with("を")) return true;
+            // A verb's continuative after the humble お or ご, glued to the stem (お引き受けいたし, おかけいたし, お待ちいたし):
+            // いる needs て after a continuative, so this is the humble す-verb. The continuative is a verb stem of the
+            // dictionary and its continuative ending (branch 10: none for ichidan, き for く).
+            auto continuative = [&](std::string_view key) {
+                for (const std::size_t cut : {key.size(), key.size() - LastChar(key).size()}) {
+                    const std::string_view stem = key.substr(0, cut);
+                    if (stem.empty()) continue;
+                    for (const Record* r = w->DoLookup(stem, kModeGeneral).records; r != nullptr; r = r->child) {
+                        if (r->source != stem || r->partCode.size() != 4 || !r->partCode.starts_with("M4")) continue;
+                        const int kind = r->partCode[3] - '0';
+                        if (kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 10) == key.substr(cut)) return true;
+                    }
+                }
+                return false;
+            };
+            for (std::size_t end = before.size(), n = 0; n < 4 && end > 0; n++) {
+                end -= LastChar(before.substr(0, end)).size();
+                if (dict::EndsWithMember(HDTRANS_CLASS("prefix.humble"), before.substr(0, end)) > 0 &&
+                    continuative(before.substr(end))) {
+                    return true;
+                }
+            }
             // A focus particle may stand between the verbal noun and the verb (混乱も来たし).
             if (const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("particle.focus-object"), before); n > 0) {
                 before = before.substr(0, before.size() - n);

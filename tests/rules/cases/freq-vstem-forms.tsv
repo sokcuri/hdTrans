@@ -114,3 +114,43 @@ dict:freq-vstem	妹のめぐりが来た。	has:메구리가	keep	lookup
 dict:freq-vstem	血のめぐりが悪い。	has:혈액 순환	keep	lookup
 dict:freq-vstem	「めぐり！」	has:메구리	keep	lookup
 dict:freq-vstem	めぐりさんは優しい。	has:메구리 씨	keep	lookup
+cx:sense-cues-1:367	詰まり彼が犯人だ。	has:즉 그가 범인	keep	rewrites
+cx:sense-cues-1:367	それは詰まり愛ということだ。	has:그것은 즉 사랑	keep	rewrites
+cx:sense-cues-1:367	詰まり俺は負けたのか。	has:즉 나는	keep	rewrites
+cx:sense-cues-1:367	詰まりこういうことか。	has:즉 이런	keep	rewrites
+cx:sense-cues-1:367	これは詰まり罠だ。	has:이것은 즉 함정	keep	rewrites
+cx:sense-cues-1:367	要は詰まり金だ。	has:요점은 즉 돈	keep	rewrites
+cx:sense-cues-1:367	そうか。詰まり彼は嘘をついた。	has:그런가. 즉 그는	keep	rewrites
+cx:sense-cues-1:367	……詰まり、どういうこと？	has:즉,	keep	rewrites
+cx:sense-cues-1:367	詰まりやすい。	lacks:즉	keep	rewrites
+cx:sense-cues-1:367	詰まりかけた。	lacks:즉	keep	rewrites
+cx:sense-cues-1:367	詰まりました。	lacks:즉	keep	rewrites
+cx:sense-cues-1:367	詰まりそう。	lacks:즉	keep	rewrites
+cx:sense-cues-1:367	詰まりながら話した。	lacks:즉	keep	rewrites
+cx:sense-cues-1:367	詰まりがひどい。	has:막힘이	keep	rewrites
+cx:sense-cues-1:367	詰まりを取る。	lacks:즉	keep	rewrites
+cx:sense-cues-1:372	詰まりは金の問題だ。	has:결국은 돈의	fix	rewrites
+dict:freq-vstem	お引き受けいたし、	lacks:있었	keep	lookup
+dict:freq-vstem	ご迷惑もおかけいたし、	lacks:있었	keep	lookup
+dict:freq-vstem	ご迷惑をおかけいたし、申し訳ありません。	lacks:있었	keep	lookup
+dict:freq-vstem	お待ちいたし、	lacks:있었	keep	lookup
+dict:freq-vstem	お知らせいたし、	lacks:있었	keep	lookup
+dict:freq-vstem	お引き受けいたします。	has:맡겠습니다	keep	lookup
+dict:freq-vstem	お引き受けいたしました。	has:맡았습니다	keep	lookup
+dict:freq-vstem	お引き受けいたしまして、	has:맡아서	keep	lookup
+dict:freq-vstem	お送りいたしました。	has:보냈습니다	keep	lookup
+dict:freq-vstem	ここまで来たし、	has:여기까지 왔고	fix	lookup
+dict:freq-vstem	一人でいたし、	has:혼자서 있었고	fix	lookup
+dict:freq-vstem	いたしかたない。	has:어쩔 수 없다	fix	lookup
+dict:freq-vstem	いたしかたなく引き受けた。	has:어쩔 수 없이	fix	lookup
+dict:freq-vstem	いたし方ない。	has:어쩔 수 없다	fix	lookup
+cx:sense-cues-1:371	名所めぐり	has:명소 순례	fix	rewrites
+cx:sense-cues-1:371	美術館めぐり。	has:미술관 순례	fix	rewrites
+cx:sense-cues-1:371	ラーメン屋めぐり	has:라면집 순례	fix	rewrites
+cx:sense-cues-1:371	四国の霊場めぐり	has:순례	fix	rewrites
+cx:sense-cues-1:371	島をめぐり、	has:섬을 둘러싸고	keep	rewrites
+cx:sense-cues-1:371	温泉をめぐる旅。	has:둘러싼	keep	rewrites
+cx:sense-cues-1:371	権力をめぐり争う。	has:권력을 둘러싸고	keep	rewrites
+cx:sense-cues-1:371	アリスめぐりが来た。	lacks:순례	keep	rewrites
+cx:sense-cues-1:371	めぐりさん、こんにちは。	has:메구리 씨	keep	rewrites
+cx:sense-cues-1:372	鼻の詰まりはもう治った。	lacks:결국	keep	rewrites
