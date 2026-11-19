@@ -91,7 +91,7 @@ pack:crit-lex:13	エルはとっくにクイーンの攻撃を見切っていた
 pack:crit-lex:13	彼を見切った。	has:그를 단념했다	keep	packs
 pack:crit-lex:14	彼女は顔を胸に押しつけた。	has:얼굴을 가슴에 갖다 대었다	fix	packs
 pack:crit-lex:14	レナは震えながら背中を壁に押しつけていた。	has:등을 벽에 갖다 대고	fix	packs
-pack:crit-lex:14	仕事を押しつけるな。	has:일을 강요하지 마	keep	packs
+pack:crit-lex:14	仕事を押しつけるな。	has:일을 떠넘기지 마	keep	packs
 pack:crit-lex:3	NASAのプロジェクトに助言する重要なポストに就いている。	has:중요한 직책을 맡고 있다	fix	packs
 pack:crit-lex:6	もういい年だ	has:이제 적지 않은 나이다	fix	packs
 pack:crit-lex:6	いい年になりますように	has:좋은 해가 되기를	keep	packs

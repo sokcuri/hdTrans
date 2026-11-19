@@ -54,7 +54,7 @@ dict:brand-rows	サプリを飲む。	has:영양제	keep	lookup
 dict:brand-rows	「昨日からＳクラス所属になったツンデレ中のツンデレよ」	lacks:메르세데스	fix	lookup
 dict:brand-rows	「Ｓクラス……？」	has:S클래스	fix	lookup
 dict:brand-rows	Ａクラスの生徒	lacks:메르세데스	keep	lookup
-number:kazu-counter	それは数桁の数字。	has:몇 자리	fix	senses
+number:kazu-counter	それは数桁の数字。	has:몇 자릿	fix	senses
 number:kazu-counter	数曲歌った。	has:몇 곡	fix	senses
 number:kazu-counter	数席空いた。	has:몇 석	fix	senses
 number:kazu-counter	数組の夫婦。	has:몇 조	fix	senses

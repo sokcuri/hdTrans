@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:147422	予感が当たる	예감이 맞는다	fix	lookup
 dict:jisjk:147422	予感が当たった	예감이 맞았다	fix	lookup
-dict:jisjk:140965	いなす	돌려보낸다	fix	lookup
+dict:jisjk:140965	いなす	받아넘긴다	fix	lookup
 dict:jisjk:144900	うろぬく	솎아 낸다	fix	lookup
 dict:jisjk:144899	疎抜く	솎아 낸다	fix	lookup
 dict:jisjk:142278	見い出す	찾아낸다	fix	lookup

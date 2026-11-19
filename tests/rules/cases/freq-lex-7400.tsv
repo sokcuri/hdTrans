@@ -1,0 +1,110 @@
+# 규칙: LEX-7400, LEX-7401, LEX-7402, LEX-7403, LEX-7404, LEX-7405, LEX-7406, LEX-7407
+rule	input	expected	kind	layer
+dict:freq-lex	排出削減、途上国資金焦点に	has:개발도상국 자금	fix	lookup
+dict:freq-lex	ただ、道のりは険しい。	has:길은 험하다	fix	lookup
+dict:freq-lex	徒歩５分程度の道のりだ。	has:5분 정도의 길이다	fix	lookup
+dict:freq-lex	核兵器の廃絶を訴えた。	has:핵무기	fix	lookup
+dict:freq-lex	審査員たちは様々なカレーを食べた。	has:심사위원들은	fix	lookup
+dict:freq-lex	彼女はとびきりの笑顔で答えた。	has:최고의 웃는 얼굴	fix	lookup
+dict:freq-lex	昇降口の下駄箱で待っていた。	has:신발장	keep	lookup
+dict:freq-lex	１桁の気温だった。	has:자릿수	fix	lookup
+dict:freq-lex	合同社葬が行われた。	has:합동 회사장	fix	lookup
+dict:freq-lex	危機感を募らせています。	has:위기감을 키워	fix	lookup
+dict:freq-lex	不安を募らせた。	has:불안을 키워	fix	lookup
+dict:freq-lex	われわれを介して連絡する。	has:우리를 통해	fix	lookup
+dict:freq-lex	異空間を介した空間移動	has:이공간을 통한	fix	lookup
+dict:freq-lex	彼は意に介さない。	has:개의치 않	keep	lookup
+dict:freq-lex	兼ねてから願っていたことだ。	has:전부터 바라	fix	lookup
+dict:freq-lex	かねてから計画していた。	has:전부터 계획	fix	lookup
+dict:freq-lex	儲けもんじゃないですか。	has:횡재	fix	lookup
+dict:freq-lex	五穀豊穣を願います。	has:오곡풍년	fix	lookup
+dict:freq-lex	うちの統領がうんと言うかな？	has:우리 우두머리	fix	lookup
+dict:freq-lex	大統領と会談する。	has:대통령과	keep	lookup
+dict:freq-lex	実況≫ここにきて優勝争い	has:우승 경쟁	fix	lookup
+dict:freq-lex	５種類の具材とスープが鍋状のトレーに入っている。	has:냄비 모양의 트레이	fix	lookup
+dict:freq-lex	自分の太刀筋を見せた。	has:칼솜씨	fix	lookup
+dict:freq-lex	いくらを払った？	lacks:연어알	keep	lookup
+dict:freq-lex	いくら丼が好きだ。	has:연어알 덮밥	fix	lookup
+dict:freq-lex	いくらの醤油漬けを作った。	has:연어알 간장 절임	fix	lookup
+dict:freq-lex	いくら頑張っても無駄だ。	has:아무리 노력해도	keep	lookup
+dict:freq-lex	これはいくらですか？	has:얼마입니까	keep	lookup
+dict:freq-lex	五分での折り返しとなった。	has:반환점이 되었다	fix	lookup
+dict:freq-lex	前半の折り返しを過ぎた。	has:전반의 반환점을	fix	lookup
+dict:freq-lex	折り返し地点に到着した。	has:반환점에 도착	fix	lookup
+dict:freq-lex	五分で折り返しとなる。	has:반환점이 된다	fix	lookup
+dict:freq-lex	折り返し電話します。	has:즉시 전화	keep	lookup
+dict:freq-lex	折り返しご連絡いたします。	has:즉시 연락	keep	lookup
+dict:freq-lex	社長から申し付かりました。	has:분부받았습니다	fix	lookup
+dict:freq-lex	留守番を申しつかった。	has:분부받았다	fix	lookup
+dict:freq-lex	押し返して、はたき込んで勝った。	has:쳐내려 이겼다	fix	lookup
+dict:freq-lex	決まり手は、はたき込み。	has:하타키코미	fix	lookup
+dict:freq-lex	当たっていなした後、攻め込まれた。	has:받아넘긴 후	fix	lookup
+dict:freq-lex	相手の攻撃を軽くいなす。	has:가볍게 받아넘긴다	fix	lookup
+dict:freq-lex	彼は質問を笑っていなした。	has:웃어 받아넘겼다	fix	lookup
+dict:freq-lex	押し返した。	has:밀어냈다	keep	lookup
+dict:freq-lex	……あの巨大なぬいぐるみはなくなっていた。	has:봉제인형은 없어져	fix	lookup
+dict:freq-lex	死体がなくなっていた。	has:시체가 없어져	fix	lookup
+dict:freq-lex	人形がなくなりました。	has:인형이 없어졌습니다	fix	lookup
+dict:freq-lex	ロボットが無くなった。	has:로봇이 없어졌다	fix	lookup
+dict:freq-lex	財布がなくなった。	has:지갑이 없어졌다	keep	lookup
+dict:freq-lex	おじいちゃんがなくなった。	has:돌아가셨다	keep	lookup
+dict:freq-lex	祖母が亡くなった。	has:돌아가셨다	keep	lookup
+dict:freq-lex	先生がなくなったのは去年だ。	has:돌아가신	keep	lookup
+dict:freq-lex	稲垣さんがなくなった。	has:이나가키 씨가 돌아가셨다	keep	lookup
+dict:freq-lex	騎士様はその名声ゆえに、死体でも価値は	has:시체라도 가치는	keep	lookup
+dict:freq-lex	私の補佐を努めてくれている。	has:보좌를 맡아	fix	lookup
+dict:freq-lex	解決に努める。	has:해결에 노력	keep	lookup
+dict:freq-lex	大理石を思わせるような床だ。	has:대리석을 연상시키는	fix	lookup
+dict:freq-lex	サッカーを楽しいなと思わせてくれる監督。	has:생각하게 해 주는	keep	lookup
+dict:freq-lex	洗濯物を取り入れる。	has:세탁물을 걷는다	fix	lookup
+dict:freq-lex	新しい技術を取り入れた。	has:받아들였다	keep	lookup
+dict:freq-lex	家事を押し付け合っていた。	has:서로 떠넘기고	fix	lookup
+dict:freq-lex	壁に体を押し付けた。	lacks:떠넘	keep	lookup
+dict:freq-lex	デビューを控える。	has:데뷔를 앞둔다	fix	lookup
+dict:freq-lex	試合を控えた選手	has:경기를 앞둔 선수	fix	lookup
+dict:freq-lex	タバコを控える。	lacks:앞두	keep	lookup
+dict:freq-lex	証拠を押さえた。	has:증거를 확보했다	fix	lookup
+dict:freq-lex	傷口を押さえた。	has:상처를 눌렀다	keep	lookup
+dict:freq-lex	口にくわえていたキャンディを	has:입에 물고 있던 캔디	fix	lookup
+dict:freq-lex	タバコをくわえた。	has:담배를 입에 물었다	keep	lookup
+dict:freq-lex	ドアを破る。	has:문을 부순다	fix	lookup
+dict:freq-lex	窓を破って侵入した。	has:창을 부수어	fix	lookup
+dict:freq-lex	約束を破る。	has:약속을 어긴다	keep	lookup
+dict:freq-lex	額に入った絵。	has:액자에	fix	lookup
+dict:freq-lex	額に入れて飾った。	has:액자에	fix	lookup
+dict:freq-lex	額に汗して働く。	lacks:액자	keep	lookup
+dict:freq-lex	額に手を当てた。	has:이마에 손을	keep	lookup
+dict:freq-lex	競合の米半導体大手	has:미 반도체	fix	lookup
+dict:freq-lex	アメリカの米企業が参入した。	has:미 기업	fix	lookup
+dict:freq-lex	日本の米はおいしい。	has:일본의 쌀은	keep	lookup
+dict:freq-lex	今年の米の価格が上がった。	has:쌀의 가격	keep	lookup
+dict:freq-lex	新潟の米を買った。	has:쌀을 샀다	keep	lookup
+dict:freq-lex	米を炊く。	has:쌀을	keep	lookup
+dict:freq-lex	米さん、こんにちは。	has:요네 씨	keep	lookup
+dict:freq-lex	米田さんの家に行った。	has:요네다 씨	keep	lookup
+dict:freq-lex	俺のうちに来いよ。	has:나의 집에 와라	fix	lookup
+dict:freq-lex	私のうちに遊びに来る？	has:나의 집에 놀러	fix	lookup
+dict:freq-lex	彼のうちに行った。	has:그의 집에 갔다	fix	lookup
+dict:freq-lex	友達のうちに泊まる。	has:친구의 집에 묵는다	fix	lookup
+dict:freq-lex	内田さんのうちに行った。	has:우치다 씨의 집에	fix	lookup
+dict:freq-lex	うちに入って。	has:집에	fix	lookup
+dict:freq-lex	うちに来る？	has:집에 와	keep	lookup
+dict:freq-lex	三人のうちに一人は嘘つきだ。	has:세 명 가운데 한 사람	fix	lookup
+dict:freq-lex	彼らのうちに裏切り者がいる。	has:그들 가운데 배신자	fix	lookup
+dict:freq-lex	三人のうちに入る。	lacks:집에	keep	lookup
+dict:freq-lex	知らないうちに眠っていた。	has:모르는 사이에	keep	lookup
+dict:freq-lex	若いうちに旅をしろ。	lacks:집	keep	lookup
+dict:freq-lex	同航路の安全確保に努めよ！	has:확보에 노력해라	keep	lookup
+dict:freq-lex	慈善事業に努めてたパパが邪魔だったのね。	lacks:맡던	keep	lookup
+dict:freq-lex	救助に努めた後、各戦域を転戦しました。	lacks:맡은	keep	lookup
+dict:freq-lex	私がステージのＭＣを努めることになりました。	has:MC를 맡게	fix	lookup
+dict:freq-lex	信長に「手放すには惜しい」と思わせる必要がある。	has:생각하게 할 필요	keep	lookup
+dict:freq-lex	受け手に、当たっていると思わせるためのテクニックかもしれない。	has:생각하게 하기 위한	keep	lookup
+dict:freq-lex	猫が獲物をいたぶっている様子を思わせる。	has:모습을 연상시킨다	fix	lookup
+dict:freq-lex	臨時の折り返し設備の撤去作業が行われた。	lacks:반환점	keep	lookup
+dict:freq-lex	選挙戦の折り返し地点として、重要な意味を持つ。	has:선거전의 반환점	fix	lookup
+dict:freq-lex	せっかく筧くんのうちに招待してもらったのに。	has:군의 집에 초대	fix	lookup
+dict:freq-lex	ほとんど無意識のうちに、言葉となって出ていた。	lacks:집	keep	lookup
+dict:freq-lex	しぶとく押し返してはたき込んだ。	has:쳐내렸다	fix	lookup
+dict:freq-lex	新潟の米農家を訪ねた。	has:쌀농가	keep	lookup
+dict:freq-lex	今のうちに帰ろう。	lacks:집	keep	lookup

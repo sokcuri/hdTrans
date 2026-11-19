@@ -1,0 +1,8 @@
+#! layer=pack-classes
+# 없어지다로 읽는 なくなる의 사물 주어: 사람 의미 코드를 가진 사물 명사 (LEX-7403)
+lemma	classes
+ぬいぐるみ	@thing
+縫いぐるみ	@thing
+死体	@thing
+遺体	@thing
+死骸	@thing

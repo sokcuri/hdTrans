@@ -22,7 +22,7 @@ dict:碌な	碌に眠れない。	변변히 잘 수 없다.	keep	defaults
 dict:真っ黒の	真っ黒の服だ。	새까만 옷이다.	fix	defaults
 dict:真っ黒の	真っ黒な服だ。	새까만 옷이다.	keep	defaults
 dict:とびっきりの	とびっきりの美人だ。	대단한 미인이다.	fix	defaults
-dict:とびっきりの	とびきりの美人だ。	특출의 미인이다.	keep	defaults
+dict:とびっきりの	とびきりの美人だ。	최고의 미인이다.	keep	defaults
 dict:誇り高	誇り高い人だ。	긍지 높은 사람이다.	fix	defaults
 dict:誇り高	山は高い。	산은 높다.	keep	defaults
 dict:お見えです	お客様がお見えです。	손님이 오셨습니다.	fix	defaults
