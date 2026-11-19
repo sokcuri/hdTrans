@@ -3983,14 +3983,24 @@ cx:freq-cx:10	GRM-4300	&&2 ||3 S+0== "な" S+0== "無" S+0== "無かっ" ||2 U-1
 cx:freq-cx:12	GRM-4300	&&2 ||2 S+0== "あ" S+0== "有" ||2 U-1== "Rいるしか" U-1== "Rるしか"	set-target "&M9@" replace-ending-tail "1지 않았습니다" "5었습니다" replace-ending-tail "1지 않습니다" "7니다" set-ending@-1 "1고 있을 수밖에"	寝ているしかありません 자고 있을 수밖에 없습니다
 cx:freq-cx:14	GRM-4300	&&3 ||3 S+0== "な" S+0== "無" S+0== "無かっ" U-1== "Rしか" D+0== "$D7@"	select-target "$FA@"	ここにいるしかない 여기에 있을 수밖에 없다
 cx:freq-cx:20	GRM-4303	&&2 D+0== "&LS@" Y+0== "1지 않기를"	set-target "&K6@" set-ending "1지 못하기를"	分かりませんように 알지 못하기를
+cx:freq-cx:22	GRM-4303	&&3 S+0== "と" D+0== "(와)과" ||2 Y-1== "1기를" Y-1== "1지 않기를"	set-target " "	晴れますようにと祈った 개기를 빌었다
 cx:freq-cx:30	GRM-4302	&&5 S+0== "しな" P+0== "7**" U+0== "いで" ||2 S+1== "あげ" S+1== "上げ" I+1== "Rて"	set-target "$Kz@" set-ending "1지 말아"	心配しないであげて 걱정하지 말아 줘
 cx:freq-cx:32	GRM-4302	&&4 S+0== "しな" P+0== "7**" U+0== "いで" ||2 &&2 S+1== "や" ||2 I+1== "Rって" I+1== "Rってよ" S+1== "Lやってくれ"	set-target "$Kz@" set-ending "1지 말아" set-target@+1 "&CJ@"	誤解しないでやってくれ 오해하지 말아 줘
 cx:freq-cx:33	GRM-4302	&&5 S+0== "や" S-1== "しな" U-1== "いで" ||2 I+0== "Rって" I+0== "Rってよ" ||3 F+0== "sentence-end" F+0== "quote-end" I+0== "Rってよ"	set-ending "C"	誤解しないでやって 오해하지 말아 줘
 cx:freq-cx:34	GRM-4302	&&5 I+0== "Rないで" Y+0== "1고" D+0== "R$DH@" ||2 S+1== "あげ" S+1== "上げ" !1 I+1== "Rて"	set-target@+1 "&C7@"	邪魔しないであげよう 방해하지 않고 두자
-cx:freq-cx:35	GRM-4302	&&5 I+0== "Rないで" Y+0== "1고" !1 D+0== "R$DH@" ||2 S+1== "あげ" S+1== "上げ" !1 I+1== "Rて"	set-ending "1지 않고" set-target@+1 "&C7@"	起こさないであげたいところです 깨우지 않고 두고 싶습니다
+cx:freq-cx:35	GRM-4302	&&5 I+0== "Rないで" ||3 Y+0== "1고" Y+0== "1지 않고" Y+0== "1지 말고" !1 D+0== "R$DH@" ||2 S+1== "あげ" S+1== "上げ" !1 ||3 I+1== "Rて" I+1== "Rてね" I+1== "Rてよ"	set-ending "1지 않고" set-target@+1 "&C7@"	起こさないであげたいところです 깨우지 않고 두고 싶습니다
+//: nai-neg	&&2 I+0== "Rないで" ||2 Y+0== "1지 않고" Y+0== "1지 말고"	A verb whose ないで is the negative (its ending was read 지 않고 or 지 말고), not the te-form of つなぐ or 泳ぐ.
+cx:freq-cx:36	GRM-4302	&&3 :nai-neg ||2 S+1== "あげ" S+1== "上げ" ||3 I+1== "Rてね" I+1== "Rてよ" &&2 I+1== "Rて" ||15 F+1== "sentence-end" F+1== "quote-end" B+2== "くれる" S+2== "Lくれ" S+2== "Lくださ" S+2== "L下さ" B+2== "もらう" S+2== "Lもら" S+2== "L貰" S+2== "Lちょうだい" S+2== "Lね" S+2== "よ" S+2== "Lほし" S+2== "L欲し" S+2== "L頂"	set-ending "1지 말아"	叱らないであげてくれませんか 꾸짖지 말아 주지 않겠습니까
+cx:freq-cx:37	GRM-4302	&&3 :nai-neg S+1== "や" ||2 I+1== "Rってよ" &&2 I+1== "Rって" ||4 F+1== "sentence-end" F+1== "quote-end" S+2== "よ" S+2== "Lね"	set-ending "1지 말아" set-target@+1 "&CJ@" set-ending@+1 "C"	笑わないでやって 웃지 말아 줘
+cx:freq-cx:38	GRM-4302	&&2 :nai-neg ||2 S+1== "Lやってくれ" &&3 S+1== "や" I+1== "Rって" ||8 B+2== "くれる" S+2== "Lくれ" S+2== "Lくださ" S+2== "L下さ" B+2== "もらう" S+2== "Lもら" S+2== "L貰" S+2== "Lちょうだい"	set-ending "1지 말아" set-target@+1 "&CJ@"	叱らないでやってくれませんか 꾸짖지 말아 주지 않겠습니까
+cx:freq-cx:39	GRM-4302	&&4 :nai-neg S+1== "や" I+1== "Rって" ||2 S+2== "Lほし" S+2== "L欲し"	set-ending "1지 말아" set-target@+1 "&CJ@" set-ending@+1 "5으면"	責めないでやってほしい 탓하지 말아 주었으면 좋겠다
+cx:freq-cx:40	GRM-4302	&&4 ||2 S+0== "あげ" S+0== "上げ" I+0== "Rて" Y-1== "1지 말아" ||5 B+1== "くれる" S+1== "Lくれ" B+1== "もらう" S+1== "Lもら" S+1== "L貰"	set-target "" set-ending ""	責めないであげてくれ 탓하지 말아 줘
+cx:freq-cx:41	GRM-4302	&&4 :nai-neg S+1== "や" D+1== "&AV@" !1 ||2 I+1== "Rって" I+1== "Rってよ"	set-target@+1 " &AV@"	許さないでやる 용서하지 않고 한다
+cx:freq-cx:42	GRM-4302	&&3 S+0== "やってくれ" I+0== "Rくれる" ||2 S+1== "L？" S+1== "L?"	set-ending "3래"	叱らないでやってくれる？ 꾸짖지 말아 줄래?
 //= freq-nanka	after Select 291	guard S+0== "なんか"	A なんか right after a noun, or after a verb whose ending ends in a noun (事, こと, はず, わけ, もの), is the particle that belittles the noun, never the 왠지, 뭔가 or 무슨 of a なんか that opens a clause: before a negative of existence 같은 건 (使った事なんかない 쓴 것 같은 건 없다), before じゃない, ではない or より 같은 것 (冗談なんかじゃない 농담 같은 것이 아니다), and before の and a noun 같은 (核なんかの事柄 핵 같은 사항), 같은 사람의 after a person (私なんかの歌 나 같은 사람의 노래).
 //: nanka-after-noun	&&2 ||3 D+0== "왠지" D+0== "무슨" D+0== "뭔가" ||2 P-1== "1**" &&2 P-1== "4**" ||6 U-1== "R事" U-1== "Rこと" U-1== "Rはず" U-1== "R筈" U-1== "Rわけ" U-1== "Rもの"	A なんか after a noun or a nominal ending, read as the adverb.
-cx:freq-nanka:10	LEX-6950	&&2 :nanka-after-noun ||3 &&2 ||2 S+1== "な" S+1== "無" P+1== "7**" S+1== "ない" S+1== "無い"	set-target " 같은 건"	使った事なんかない 쓴 것 같은 건 없다
+cx:freq-nanka:9	LEX-6950	&&4 :nanka-after-noun Y-1== "R것" ||4 I-1== "Rた事" I-1== "Rだ事" I-1== "Rたこと" I-1== "Rだこと" ||5 &&2 ||2 S+1== "な" S+1== "無" P+1== "7**" S+1== "ない" S+1== "無い" I+1== "Lありません" I+1== "L有りません"	set-target " 같은 건" replace-ending-tail@-1 " 것" " 적"	使った事なんかない 쓴 적 같은 건 없다
+cx:freq-nanka:10	LEX-6950	&&2 :nanka-after-noun ||5 &&2 ||2 S+1== "な" S+1== "無" P+1== "7**" S+1== "ない" S+1== "無い" I+1== "Lありません" I+1== "L有りません"	set-target " 같은 건"	恋なんかない 사랑 같은 건 없다
 cx:freq-nanka:20	LEX-6950	&&2 ||2 :nanka-after-noun &&2 D+0== "(은)는" P-1== "1**" ||3 S+1== "Lじゃ" S+1== "Lでは" S+1== "Lでも"	set-target " 같은 것"	嘘なんかじゃありません 거짓말 같은 것이 아닙니다
 cx:freq-nanka:22	LEX-6950	&&2 P-1== "1**" S+1== "より"	set-target " 같은 것보다" set-target@+1 ""	猫なんかより犬がいい 고양이 같은 것보다 개가 좋다
 cx:freq-nanka:24	LEX-6950	&&2 P-1== "1**" S+1== "よりも"	set-target " 같은 것"	俺なんかよりも大人だ 나 같은 것보다 어른이다

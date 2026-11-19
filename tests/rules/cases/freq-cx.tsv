@@ -8,9 +8,9 @@ cx:freq-cx:10	見てるしかなくて、困った。	보고 있을 수밖에 �
 cx:freq-cx:10	今は耐えているしかないんだ。	지금은 참고 있을 수밖에 없다.	fix	rewrites
 cx:freq-cx:10	黙っているしかないです。	입을 다물고 있을 수밖에 없습니다.	fix	rewrites
 cx:freq-cx:8	見てるしかないよ	보고 있을 수밖에 없어	fix	rewrites
-dict:w:37300	見てるしかないよ	has:보고 있을 수밖에	fix	local
+dict:w:37300	ただ見てるしかできなかった。	has:보고 있는 것밖에 할 수 없었다	fix	ending-defaults
 cx:freq-cx:12	寝ているしかありません。	자고 있을 수밖에 없습니다.	fix	rewrites
-dict:w:37301	寝ているしかありません。	has:자고 있을 수밖에	fix	local
+dict:w:37301	ただ見ているしかできなかった。	다만 보고 있는 것밖에 할 수 없었다.	fix	ending-defaults
 cx:freq-cx:12	ここで待っているしかありませんでした。	여기서 기다리고 있을 수밖에 없었습니다.	fix	rewrites
 cx:freq-cx:14	ここにいるしかない。	여기에 있을 수밖에 없다.	fix	rewrites
 cx:freq-cx:10	行くしかない。	갈 수밖에 없다.	keep	rewrites
@@ -35,14 +35,14 @@ builtin-pattern:書いてたまるものか	渡してたまるか。	건네줄 �
 builtin-pattern:書いてたまるものか	嬉しくてたまらない。	기뻐서 견딜 수 없다.	keep	builtin-pattern
 builtin-pattern:書いてたまるものか	可愛くてたまらないんだ。	귀여워서 견딜 수 없다.	keep	builtin-pattern
 builtin-pattern:書いてたまるものか	疲れがたまるものだ。	피로가 쌓이는 것이다.	keep	builtin-pattern
-builtin-pattern:書かないであげて下さい	「その辺でいいじゃないですか。あんまりいじめないであげて下さい」	has:괴롭히지 말아 주세요	fix	builtin-pattern
-builtin-pattern:書かないでやってくれ	「ともかく、御園を責めないでやってくれ」	has:탓하지 말아 줘	fix	builtin-pattern
-builtin-pattern:書かないでやってほしい	「彼らも任務なのでね。恨まないでやってほしい」	has:원망하지 말아 줬으면 좋겠어	fix	builtin-pattern
-builtin-pattern:書かないであげてください	怒らないであげてください。	화내지 말아 주세요.	fix	builtin-pattern
-builtin-pattern:書かないであげよう	そっとしておいて、起こさないであげよう。	has:깨우지 않고 두자.	fix	builtin-pattern
-builtin-pattern:書かないであげた	彼のことは言わないであげた。	has:말하지 않고 두었다.	fix	builtin-pattern
-builtin-pattern:書かないであげたい	今は叱らないであげたい。	지금은 꾸짖지 않고 두고 싶다.	fix	builtin-pattern
-builtin-pattern:書かないであげる	食べないであげる。	먹지 않고 둔다.	fix	builtin-pattern
+cx:freq-cx:36	「その辺でいいじゃないですか。あんまりいじめないであげて下さい」	has:괴롭히지 말아 주세요	fix	rewrites
+cx:freq-cx:38	「ともかく、御園を責めないでやってくれ」	has:탓하지 말아 줘	fix	rewrites
+cx:freq-cx:39	「彼らも任務なのでね。恨まないでやってほしい」	has:원망하지 말아 줬으면 좋겠어	fix	rewrites
+cx:freq-cx:36	怒らないであげてください。	화내지 말아 주세요.	fix	rewrites
+cx:freq-cx:35	そっとしておいて、起こさないであげよう。	has:깨우지 않고 두자.	fix	rewrites
+cx:freq-cx:35	彼のことは言わないであげた。	has:말하지 않고 두었다.	fix	rewrites
+cx:freq-cx:35	見ないであげたい。	보지 않고 두고 싶다.	fix	rewrites
+cx:freq-cx:35	食べないであげる。	먹지 않고 둔다.	fix	rewrites
 cx:freq-cx:30	心配しないであげて。	걱정하지 말아 줘.	fix	rewrites
 cx:freq-cx:32	「ともかく、あいつの善意だけは誤解しないでやってくれ」	has:오해하지 말아 줘	fix	rewrites
 cx:freq-cx:32	「白崎を誤解しないでやってほしい」	has:오해하지 말아	fix	rewrites
@@ -80,3 +80,35 @@ cx:freq-cx:33	心配してやって。	걱정해 줘.	keep	rewrites
 cx:freq-cx:35	できれば起こさないであげたいところです。	has:깨우지 않고 두고 싶습니다.	fix	rewrites
 cx:freq-cx:35	今は叱らないであげたい。	지금은 꾸짖지 않고 두고 싶다.	fix	rewrites
 cx:freq-cx:35	起こしてあげたい。	깨워 주고 싶다.	keep	rewrites
+cx:freq-cx:10	寝ているしかめっ面の男。	lacks:수밖에	keep	rewrites
+cx:freq-cx:40	責めないであげてくれ。	탓하지 말아 줘.	fix	rewrites
+cx:freq-cx:40	叱らないであげてくれませんか。	꾸짖지 말아 주지 않겠습니까.	fix	rewrites
+cx:freq-cx:40	言わないであげてもらえますか。	has:말하지 말아 줄 수 있습니까	fix	rewrites
+cx:freq-cx:36	忘れないであげてくれる？	잊지 말아 줄래?	fix	rewrites
+cx:freq-cx:36	読まないであげてね。	읽지 말아 줘.	fix	rewrites
+cx:freq-cx:36	呼ばないであげてよ。	부르지 말아 줘.	fix	rewrites
+cx:freq-cx:36	急がないであげてほしいんです。	has:서두르지 말아 주었으면	fix	rewrites
+cx:freq-cx:38	書かないでやってくれませんか。	쓰지 말아 주지 않겠습니까.	fix	rewrites
+cx:freq-cx:38	見ないでやってくれませんか。	보지 말아 주지 않겠습니까.	fix	rewrites
+cx:freq-cx:38	彼を怒らないでやってくれませんか。	그를 화내지 말아 주지 않겠습니까.	fix	rewrites
+cx:freq-cx:42	叱らないでやってくれる？	꾸짖지 말아 줄래?	fix	rewrites
+cx:freq-cx:42	書いてやってくれる？	써 줄래?	fix	rewrites
+cx:freq-cx:37	あいつを笑わないでやって。	has:웃지 말아 줘	fix	rewrites
+cx:freq-cx:37	書かないでやって。	쓰지 말아 줘.	fix	rewrites
+cx:freq-cx:35	怒らないであげましょう。	화내지 않고 둡시다.	fix	rewrites
+cx:freq-cx:35	書かないであげます。	쓰지 않고 둡니다.	fix	rewrites
+cx:freq-cx:41	彼を許さないでやる。	그를 용서하지 않고 한다.	fix	rewrites
+cx:freq-cx:41	勉強しないでやる。	공부하지 않고 한다.	fix	rewrites
+cx:freq-cx:36	つないであげてください。	이어 주세요.	keep	rewrites
+cx:freq-cx:36	泳いであげて。	헤엄쳐 줘.	keep	rewrites
+cx:freq-cx:36	叱らないであげて、部屋を出た。	lacks:말아	keep	rewrites
+cx:freq-cx:22	明日晴れますようにと祈った。	내일 개기를 빌었다.	fix	rewrites
+cx:freq-cx:22	合格しますようにと手を合わせた。	has:합격하기를 손을	fix	rewrites
+cx:freq-cx:22	友達と遊んだ。	친구와 놀았다.	keep	rewrites
+cx:freq-cx:37	見ないでやってみる。	보지 않고 해 본다.	keep	rewrites
+cx:freq-cx:38	書いてやってくれ。	써 줘.	keep	rewrites
+cx:freq-cx:39	書いてやってほしい。	써 주었으면 좋겠다.	keep	rewrites
+cx:freq-cx:40	書いてあげてくれませんか。	써 주지 않겠습니까.	keep	rewrites
+cx:freq-cx:41	見ないでやり過ごした。	보지 않고 넘겼다.	keep	rewrites
+cx:freq-cx:41	見ないでやった。	보지 않고 했다.	keep	rewrites
+cx:freq-cx:42	書いてやってくれる。	써 준다.	keep	rewrites

@@ -1,7 +1,7 @@
 # 규칙: LEX-6950
 rule	input	expected	kind	layer
-cx:freq-nanka:10	第一、俺は今まで鉈を使った事なんかない。	has:쓴 것 같은 건 없다.	fix	rewrites
-cx:freq-nanka:10	少なくとも、青海さんがわがまま言ってるところを見たことなんかない。	has:본 것 같은 건 없다.	fix	rewrites
+cx:freq-nanka:9	第一、俺は今まで鉈を使った事なんかない。	has:쓴 적 같은 건 없다.	fix	rewrites
+cx:freq-nanka:9	少なくとも、青海さんがわがまま言ってるところを見たことなんかない。	has:본 적 같은 건 없다.	fix	rewrites
 cx:freq-nanka:10	負けても失うものなんかないんだ？	has:잃는 것 같은 건 없	fix	rewrites
 cx:freq-nanka:10	お金なんかいらない。	돈 같은 건 필요 없다.	keep	rewrites
 cx:freq-nanka:30	頭痛や吐き気なんかの症状は出ていませんか？	has:구역질 같은 증상	fix	rewrites
@@ -28,3 +28,11 @@ cx:freq-nanka:20	冗談なんかじゃない。	농담 같은 것이 아니다.	
 cx:freq-nanka:22	猫より犬がいい。	고양이보다 개가 좋다.	keep	rewrites
 cx:freq-nanka:24	猫よりも犬がいい。	고양이보다 개가 좋다.	keep	rewrites
 cx:freq-nanka:28	なんかの歌を歌って。	lacks:같은	keep	rewrites
+cx:freq-nanka:9	聞いたことなんかなかった。	들은 적 같은 건 없었다.	fix	rewrites
+cx:freq-nanka:9	泣いたことなんかないよ。	운 적 같은 건 없어.	fix	rewrites
+cx:freq-nanka:9	「会ったことなんかない」	「만난 적 같은 건 없어」	fix	rewrites
+cx:freq-nanka:9	読んだ事なんかありません。	읽은 적 같은 건 없습니다.	fix	rewrites
+cx:freq-nanka:10	嘘なんかありません。	거짓말 같은 건 없습니다.	fix	rewrites
+cx:freq-nanka:10	時間なんかありませんでした。	시간 같은 건 없었습니다.	fix	rewrites
+cx:freq-nanka:9	使う事なんかない。	lacks:적	keep	rewrites
+cx:freq-nanka:9	恋なんかない。	lacks:적	keep	rewrites
