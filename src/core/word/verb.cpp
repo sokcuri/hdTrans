@@ -804,7 +804,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
 
     // LEX-7452: a bare verb form in kana before を, が or の that spells a noun key of the dictionary is that noun, as a
     // godan continuative there is: the stem of an ichidan verb, a godan potential or a godan imperative (たすけを
-    // 도움을, ふるえが 떨림이, not ふるう; つかれの色 피로의, not つかる; GRM-4044 for a stem without a noun row).
+    // 도움을, ふるえが 떨림이, not ふるう; つかれの色 피로의, not つかる). A kana stem without a noun row stays the verb.
     // がる, がち, がた and のかた stay on the verb. A form with kanji already reads as its noun row there.
     if (!matched && (base.kind == 8 || base.kind == 10 || base.kind == 11) &&
         (two == kJaWo || (two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) ||
