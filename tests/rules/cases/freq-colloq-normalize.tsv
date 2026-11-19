@@ -93,3 +93,33 @@ normalize:toku-kana-stem	一応直掩機飛ばしとく？	has:날려 둬	fix	no
 normalize:polite-noda-tic	マリアでつ！	has:마리아예요	fix	normalize
 normalize:polite-noda-tic	ミキでちゅ。	has:미키예요	keep	normalize
 normalize:polite-noda-tic	先王陛下の御代から担ってまいりましたのですよ	has:담당해왔습니다	fix	normalize
+normalize:toku-kana-stem	きっときますよ。	has:분명 와	keep	normalize
+normalize:toku-kana-stem	彼はきっときます。	has:분명 옵니다	keep	normalize
+normalize:toku-kana-stem	きっときました。	has:분명 왔습니다	keep	normalize
+normalize:toku-kana-stem	きっときませんでした。	has:분명 오지 않았	keep	normalize
+normalize:toku-kana-stem	もっときますね。	has:좀 더 올게	keep	normalize
+normalize:toku-kana-stem	さっときました。	has:휙 왔	keep	normalize
+normalize:toku-kana-stem	ずっときませんでした。	has:계속 오지	keep	normalize
+normalize:toku-kana-stem	そっときます。	has:살며시 옵니다	keep	normalize
+normalize:toku-kana-stem	ちょっときますね。	has:조금 올게	keep	normalize
+normalize:toku-kana-stem	もっとくわしく教えて。	has:자세하게	keep	normalize
+normalize:toku-kana-stem	もっとくわしく。	has:좀 더 자세하게	keep	normalize
+normalize:toku-kana-stem	きっとくよくよしてる。	has:분명 끙끙	keep	normalize
+normalize:toku-kana-stem	ずっとくよくよしてる。	has:계속 끙끙	keep	normalize
+normalize:toku-kana-stem	そっとくわえた。	has:살며시 입에 물었다	keep	normalize
+normalize:toku-kana-stem	もっとくねらせて。	has:좀 더	keep	normalize
+normalize:toku-kana-stem	さっとくぐった。	has:휙 빠져	keep	normalize
+normalize:toku-kana-stem	ほっといて！	has:내버려 두	keep	normalize
+normalize:toku-kana-stem	ほっときゃいい。	has:내버려 두면	keep	normalize
+normalize:toku-kana-stem	ひろしときゃ大丈夫。	lacks:두면	keep	normalize
+normalize:toku-kana-stem	ひろしときました。	lacks:일어났	keep	normalize
+normalize:toku-kana-stem	わたしときますか？	lacks:일어납	keep	normalize
+normalize:toku-kana-stem	ふりしときゃいい。	has:척 해 두면	fix	normalize
+normalize:chai-mashite	猫がめっちゃいまして。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	人がめっちゃいまして、大変でした。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	めっちゃいまして。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	すっごいめっちゃいまして。	has:있어서	keep	normalize
+normalize:chai-mashite	めちゃいまして、困りました。	lacks:끝내서	keep	normalize
+normalize:chai-mashite	食べちゃいまして。	has:먹어버려서	fix	normalize
+normalize:chai-mashite	のんじゃいまして。	has:마셔버려서	fix	normalize
+normalize:chai-mashite	わすれちゃいまして。	has:잊어버려서	fix	normalize

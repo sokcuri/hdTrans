@@ -1158,8 +1158,9 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
 // Whether the hiragana from pos to the と or ど at p is a て stem the dictionary has (casualRuns), where pos starts the
 // word: the stem of an ichidan verb of two kana or more (なめ, つけ, あげ), the い, っ or ん said for the ending of a godan
 // verb (いただい いただく, いっ 言う, よん 読む), or し after a noun in kana of two kana or more (ふりしときゃ; not よしとく).
-// Not an adjective in い before it (ないとき, おいしいとこ) or after it (しんどく), nor the end of a longer word (しっかり). With noun set when the stem is also a word of the dictionary (わたし of わたしといた).
-bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adverb) {
+// Not an adjective in い before it (ないとき, おいしいとこ) or after it (しんどく), nor the end of a longer word (しっかり). With noun set when the stem is also a word of the dictionary (わたし of わたしといた),
+// and shiNoun when a stem in し is a word that ends with the し (ひろし, わたし; not ふりし).
+bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adverb, bool& shiNoun) {
     if (casualRuns == nullptr || casualRuns->verbForm == nullptr) return false;
     const RunLookup& runs = *casualRuns;
     const auto adjective = [&](std::string_view stem) { return runs.adjectiveStem != nullptr && runs.adjectiveStem(runs.context, stem); };
@@ -1179,8 +1180,15 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
             noun = noun || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
                    (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
         }
-        // the stem with the と is a word of its own (もっと, ずっと, そっと)
-        adverb = runs.word != nullptr && runs.word(runs.context, Span(s, pos, q + kKana));
+        // a stem in っ that with the と, or whose last two kana or more with it, make a word of their own other than a
+        // name: the adverb in っと (もっと, ずっと, そっと; the きっと of ときっと after a particle と, マリアときっときます);
+        // not kana that go on from a kanji before them (the かっ of 預かっとく)
+        adverb = false;
+        const bool afterKanji = pos > 0 && IsKanjiClass(LastRune(s.substr(0, pos)).cp);
+        for (size_t j = pos; c == U'っ' && !afterKanji && runs.word != nullptr && runs.keyReach != nullptr && !adverb && (j == pos || j + kKana < q);
+             j += kKana) {
+            adverb = runs.word(runs.context, Span(s, j, q + kKana)) && runs.keyReach(runs.context, s.substr(j)) >= q + kKana - j;
+        }
         // The と or ど goes on with an adjective stem (しんどく), or the stem ends a longer word that starts before it in
         // the run (しっかり of しっかりとくわえる): no stem here.
         bool inWord = false;
@@ -1207,10 +1215,12 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
         if (t == U'と' && n >= 3 && c == U'し' && runs.word != nullptr && runs.word(runs.context, Span(s, pos, q - kKana))) {
             // し after a noun in kana: a key that ends with the し from inside the run is a noun of its own (はわたしといた)
             noun = true;  // a name or noun in し before と and いる (さとしといた, ひろしといて)
+            bool key = false;
             for (size_t j = pos; j + kKana < q; j += kKana) {
-                noun = noun || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
-                       (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
+                key = key || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
+                      (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
             }
+            shiNoun = key;
             p = q;
             return true;
         }
@@ -1224,12 +1234,14 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
 
 // The forms of おく a stem in kana takes (KanaTeStem): not the bare き and こ, which are the とき and とこ of a noun after
 // it (ないとき, いいとこ), nor きな, whose な the later stages read as an explanation (やめときな); after a stem that is
-// also a noun not いて, いた or いで (わたしといた, これといて); after a stem that makes a word with the と, also not こう
-// (もっとこう, ずっといた).
-bool KanaTokuForm(std::string_view w, bool noun, bool adverb) {
+// also a noun not いて, いた or いで (わたしといた, これといて); after a noun or name in し, also no form in き, the と and
+// 来る (ひろしときました, わたしときます); after a stem that makes a word with the と, no form at all: that is the word
+// and what follows it (きっときますよ, もっとくわしく, ずっといた).
+bool KanaTokuForm(std::string_view w, bool noun, bool adverb, bool shiNoun) {
+    if (adverb) return false;
     if (w == "き" || w == "こ" || w == "きな") return false;
-    if (adverb && w == "こう") return false;
-    return !(noun || adverb) || (w != "いて" && w != "いた" && w != "いで");
+    if (shiNoun && w.starts_with("き")) return false;
+    return !noun || (w != "いて" && w != "いた" && w != "いで");
 }
 
 // ([一-龥々](?:[っしいえけげせぜてねべめれん])?|[一-龥々][かさたなまらわがば]せ|もらっ|まかし|やっ|[にく]なっ|^し|[^ぁ-ゖ]し|[にをう]し)(と|ど)
@@ -1312,10 +1324,10 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     if (OneOf(s, p, U"にをう") && Lit(s, p, "し") && after(p, true)) return true;  // ようにしとけ, こうしといたら
     p = pos;
     if (Take(s, p, [](char32_t c) { return !IsHiraganaClass(c); }) && Lit(s, p, "し") && after(p)) return true;
-    bool noun = false, adverb = false;
-    if (!KanaTeStem(s, pos, p, noun, adverb)) return false;
+    bool noun = false, adverb = false, shiNoun = false;
+    if (!KanaTeStem(s, pos, p, noun, adverb, shiNoun)) return false;
     kanaStem = true;
-    return after(p) && KanaTokuForm(m.group[3], noun, adverb);
+    return after(p) && KanaTokuForm(m.group[3], noun, adverb, shiNoun);
 }
 
 // The ちゃい and じゃい of てしまい said short before まして, where the adverb まして would take it (思っちゃいまして,
@@ -1325,6 +1337,21 @@ bool ChaiMashite(std::string_view s, size_t pos, Match& m) {
     if (pos == 0) return false;
     const char32_t b = LastRune(s.substr(0, pos)).cp;
     if (!IsHiraganaClass(b) && !IsKanjiClass(b) && !IsKatakanaRune(b)) return false;
+    // Not where the kana before it and the ちゃ or じゃ spell a word of the dictionary that starts the run (めっちゃ,
+    // めちゃ): that is the word and いまして after it (めっちゃいまして).
+    if (casualRuns != nullptr && IsHiraganaClass(b)) {
+        const RunLookup& runs = *casualRuns;
+        constexpr size_t kKana = 3;  // a hiragana is three bytes long
+        const size_t end = pos + kKana * 2;
+        for (size_t j = pos, n = 0; j > 0 && n < 4 && IsHiraganaClass(LastRune(s.substr(0, j)).cp); n++) {
+            j -= LastRune(s.substr(0, j)).size;
+            if (j > 0 && IsKanjiClass(LastRune(s.substr(0, j)).cp)) break;  // the okurigana of a verb (食べちゃ)
+            if ((runs.word != nullptr && runs.word(runs.context, Span(s, j, end))) ||
+                (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) >= end - j)) {
+                return false;
+            }
+        }
+    }
     size_t p = pos;
     if (Lit(s, p, "ちゃいまして")) {
         m.group[1] = "てしまいまして";
@@ -2338,10 +2365,13 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, AruN, [](const Match& m) { return ContractedRu("あ", m.group[2]); });
     text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
     text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
-    if (text.find("ゃいまして") != std::string::npos) text = ReplaceAll(text, ChaiMashite, [](const Match& m) { return std::string(m.group[1]); });
     casualRuns = &runs;
+    if (text.find("ゃいまして") != std::string::npos) text = ReplaceAll(text, ChaiMashite, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, TokuInText, [&](const Match& m) {
-        const Match g = Rematch(m, Toku);
+        // the groups of the match alone, whose end closes the form (書いときな of 書いときなさい); where the match alone
+        // is no form, because the stem needs the kanji before it (the かっ of 預かっとく), those of the whole text
+        Match g = Rematch(m, Toku);
+        if (g.group[0].empty()) g = m;
         const size_t formEnd = static_cast<size_t>(g.group[3].data() + g.group[3].size() - text.data());
         if (runs.holds != nullptr && runs.holds(runs.context, text, m.begin, formEnd)) return std::string(m.group[0]);
         const std::string_view stem = g.group[1];
