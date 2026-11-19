@@ -1645,17 +1645,6 @@ lemma	classes
 子犬	@animal
 子猫	@animal
 野良犬	@animal
-あなた	@person
-あんた	@person
-貴女	@person
-きみ	@person
-てめえ	@person
-おれ	@person
-ぼく	@person
-あたし	@person
-わたし	@person
-お主	@person
-そなた	@person
 法案	@proposal
 改正案	@proposal
 予算案	@proposal
