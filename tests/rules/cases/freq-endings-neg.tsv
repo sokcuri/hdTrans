@@ -1,0 +1,32 @@
+# 규칙: LEX-7502, LEX-7507
+rule	input	expected	kind	layer
+cx:zushite:10	意識せずして自宅内にゴミを溜め込んだ。	has:의식하지 않고 자택	fix	rewrites
+cx:zushite:10	戦わずして勝つ。	싸우지 않고 이긴다.	fix	rewrites
+cx:zushite:10	「競わずして、人は成長しません」	has:겨루지 않고,	fix	rewrites
+cx:zushite:10	言わずして伝わる。	has:말하지 않고 전해진다	fix	rewrites
+cx:zushite:10	知らずして罪を犯した。	has:알지 못하고 죄를	fix	rewrites
+cx:zushite:10	休まずして	쉬지 않고	fix	rewrites
+cx:zushite:10	何もせずして	아무것도 하지 않고	fix	rewrites
+cx:zushite:10	来ずして	오지 않고	fix	rewrites
+cx:zushite:10	労せずして手に入れた。	has:힘들이지 않고 손에	keep	rewrites
+cx:zushite:10	期せずして出会った。	has:우연히 만났다	keep	rewrites
+cx:zushite:10	修正してー	수정해―	keep	rewrites
+cx:zushite:10	休まずに走った。	lacks:해	keep	rewrites
+dict:jisjk:263799	核兵器の使用判断を狂わせかねない。	has:미치게 할 수도 있다	fix	lookup
+dict:jisjk:263799	争いを起こさせかねない。	has:일으키게 할 수도 있다	fix	lookup
+dict:jisjk:263799	待たせかねない。	has:기다리게 할 수도 있다	fix	lookup
+dict:jisjk:263799	迷わせかねない。	has:헤매게 할 수도 있다	fix	lookup
+dict:jisjk:263799	また車に轢かれかねないからね	has:쳐질 수도 있으니까	fix	lookup
+dict:jisjk:264650	狂わせかねません。	has:미치게 할 수도 있습니다	fix	lookup
+dict:jisjk:264650	国家イメージを大きく損ないかねません。	has:해칠 수도 있습니다	fix	lookup
+dict:jisjk:264650	下手をすると大量虐殺に発展しかねません	has:발전할 수도 있습니다	fix	lookup
+dict:jisjk:264650	差別問題に影響が出かねませんが？	has:나타날 수도 있습니다	fix	lookup
+dict:jisjk:264650	事故になりかねません。	has:될 수도 있습니다	fix	lookup
+dict:w:39340	命を落としかねなかった。	has:잃을 수도 있었다	fix	lookup
+dict:w:39340	狂わせかねなかった	has:미치게 할 수도 있었다	fix	lookup
+dict:jisjk:263799	誤解を招きかねない。	오해를 부를 수도 있다.	keep	lookup
+dict:jisjk:263799	彼ならやりかねない。	그라면 할 수도 있다.	keep	lookup
+dict:jisjk:263799	誤解されかねない発言だ。	has:받을 수도 있는 발언	keep	lookup
+dict:jisjk:263799	食べさせかねない	has:수도 있다	keep	lookup
+dict:jisjk:263801	死にかねない状況	has:죽을 수도 있는 상황	keep	lookup
+dict:jisjk:263799	狂わせやすい。	has:미치게 하기 쉽다	keep	lookup

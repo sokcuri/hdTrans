@@ -1,0 +1,37 @@
+# 규칙: LEX-7504, LEX-7505
+rule	input	expected	kind	layer
+dict:w:39303	やってくれましたなぁ。	has:해 주었군요	fix	lookup
+dict:w:39303	日が暮れましたな。	has:해가 졌군요	fix	lookup
+dict:w:39303	「それは困りましたな。どうしたものか」	has:곤란했군요	fix	lookup
+dict:w:39303	来ましたなぁ～秋がぁ…。	has:왔군요	fix	lookup
+dict:w:39303	昨日そちらへうかがったときにおられましたな！	has:계셨군요	fix	lookup
+dict:w:39303	殿下はよくつまみ食いにこられてましたなあ。	has:있었군요	fix	lookup
+dict:w:39304	よく来てましたな	has:오고 있었군요	fix	lookup
+dict:w:39305	始まってましたな	has:시작되어 있었군요	fix	lookup
+dict:w:39350	賞品が俺の勝負をすることになりましたなんて言ったら	has:되었다고는 말하면	fix	lookup
+dict:w:39351	家で絵を描いてましたなんて言いにくいだろう？	has:그리고 있었다고는 말하기	fix	lookup
+dict:w:39308	来ましたなら教えて	has:왔다면	fix	lookup
+dict:w:39309	見てましたなら言ってよ	has:보고 있었다면	fix	lookup
+dict:w:39342	そうでしたな。	has:그랬군요	fix	lookup
+dict:w:39342	雨でしたな	has:비였군요	fix	lookup
+dict:w:39343	静かでしたな	has:조용했군요	fix	lookup
+dict:w:39344	雨でしたなら中止だ	has:비였다면	fix	lookup
+dict:w:39346	雨でしたなんて	has:비였다니	fix	lookup
+dict:w:39306	あの人が来ましたなんて嘘だ	has:왔다니 거짓말이다	fix	lookup
+dict:w:39306	来ましたなんてすごい	has:왔다니	fix	lookup
+dict:w:39352	雨でしたなんて言えない	has:비였다고는 말할 수 없다	fix	lookup
+dict:w:39301	って知ってましたか〜？	has:알고 있었습니까	fix	lookup
+dict:w:39301	え、見てましたか？	has:보고 있었습니까	fix	lookup
+dict:w:39301	俺、うまくできてましたか？	has:할 수 있었습니까	fix	lookup
+dict:w:39301	芸能人オーラでも出てましたか？	has:나오고 있었습니까	fix	lookup
+dict:w:39301	あ、もう気づいてましたか。	has:눈치채고 있었습니까	fix	lookup
+dict:w:39301	知ってましたか、先輩。	has:알고 있었습니까,	fix	lookup
+dict:w:39301	そんなに大きな声出してましたか……？	has:내고 있었습니까	fix	lookup
+dict:w:39301	聞いてましたかっ。	has:듣고 있었습니까	fix	lookup
+dict:w:39302	あ、もう始まってましたか	has:시작되어 있었습니까	fix	lookup
+dict:w:39301	寝てましたか。	lacks:인가	fix	lookup
+dict:jisjk:4417	見ましたか？	보았습니까?	keep	lookup
+dict:jisjk:4417	お役に立てましたか？	도움이 될 수 있었습니까?	keep	lookup
+dict:jisjk:4417	もう食べましたか。	lacks:던	keep	lookup
+dict:jisjk:4417	言ってましたから。	has:말했으니까요	keep	lookup
+dict:jisjk:4417	いい天気ですな。	좋은 날씨입니다.	keep	lookup
