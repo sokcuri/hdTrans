@@ -822,11 +822,11 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
     }
     // ends[i]: the indexes in bounds of the ends of the pieces at bounds[i]; names: i * n + j of the
     // pieces from bounds[i] to bounds[j] that the dictionary reads only as a name (N130). strict[i], prefix[i],
-    // bound[i], suffix[i]: whether the kanji at bounds[i] reads as a prefix (Z6); as an adverb or a pronoun; as a suffix by its code (Z7); as a suffix by its code or class. runStart: whether the run starts
-    // at cursor, after no kanji or katakana.
+    // bound[i], suffix[i]: whether the kanji at bounds[i] reads as a prefix (Z6); as an adverb or a pronoun; as a suffix by its code (Z7); as a suffix by its code or class; listed: as a suffix by class
+    // suffix.kanji-noun. runStart: whether the run starts at cursor, after no kanji or katakana.
     std::vector<std::vector<std::size_t>> ends(n);
     std::vector<std::size_t> names, timed;
-    std::vector<char> prefix(n, 0), suffix(n, 0), bound(n, 0), strict(n, 0);
+    std::vector<char> prefix(n, 0), suffix(n, 0), bound(n, 0), strict(n, 0), listed(n, 0);
     const std::string_view lead = cursor == 0 ? std::string_view() : LastChar(full.substr(0, cursor));
     const bool runStart = lead.empty() || (NameClassOf(lead) != kClassKanji && NameClassOf(lead) != kClassKatakana);
     for (std::size_t i = 0; i + 1 < n; i++) {
@@ -838,7 +838,8 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
             strict[i] = strict[i] || c.codes->gram.HasCode("Z6");
             prefix[i] = prefix[i] || part.starts_with("N3") || part.starts_with("N12");
             bound[i] = bound[i] || c.codes->gram.HasCode("Z7");
-            suffix[i] = suffix[i] || c.codes->gram.HasCode("Z7") || dict::InClass(HDTRANS_CLASS("suffix.kanji-noun"), c.source);
+            listed[i] = listed[i] || dict::InClass(HDTRANS_CLASS("suffix.kanji-noun"), c.source);
+            suffix[i] = suffix[i] || c.codes->gram.HasCode("Z7") || listed[i];
             if (Adverbial(*c.codes) && i + 1 < n) timed.push_back(i * n + i + 1);
         }
         if (i + 2 >= n) continue;
@@ -860,7 +861,11 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
     if (n >= 2 && bounds.back() < text.size()) {
         const dict::Candidates found = worker.WordInfo(text.substr(bounds[n - 2]), kModeGeneral);
         for (const dict::Candidate& c : found.list) {
-            if (c.codes != nullptr && bounds[n - 2] + c.source.size() > bounds.back()) suffix[n - 2] = 1;
+            // A verb or adjective stem binds only as a form the loop below builds (not 見だ of 見だす before the copula; LEX-7052).
+            const std::string_view part = c.codes == nullptr ? std::string_view() : c.codes->partText;
+            if (c.codes != nullptr && !part.starts_with("M") && !part.starts_with("H") && bounds[n - 2] + c.source.size() > bounds.back()) {
+                suffix[n - 2] = 1;
+            }
         }
         const int at = static_cast<int>(cursor + bounds[n - 2]);
         const Lookup l = worker.DoLookup(full.substr(static_cast<std::size_t>(at)), kModeGeneral);
@@ -885,7 +890,8 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
     // before the word after it (今日 + 昼, 今後 + 考), and a kanji numeral after a piece numbers it (日向改 + 二).
     // A prefix, adverb or pronoun binds only where it starts the run (not 比較的 + 非, 最多 + 安,
     // ダイエット + 大), only before a word that is no name (長 + 谷岡 is loose), and never where the dictionary
-    // also reads it as a suffix (子, 上, 大, 金). 々 is counted by cost. A cover that cuts a word the dictionary reads only as a name never wins
+    // also reads it as a suffix (子, 上, 大, 金). A first kanji of the class suffix.kanji-noun where the run goes on from a kanji
+    // before cursor binds to the word before it (同志 + 国 + 連携; LEX-7051), but not one with only the code Z7 (精鋭 + 日英). 々 is counted by cost. A cover that cuts a word the dictionary reads only as a name never wins
     // on loose kanji (善光 + 寺平), and neither does one against a longest word read only as a name (長谷 + 岡,
     // 大川 + 沿い, 今宿 + 敵 stay).
     constexpr int kNamed = 1 << 10;
@@ -896,7 +902,7 @@ Record* KanjiCoverFirst(Worker& worker, Record* records, std::string_view full, 
         if (one == "々" || (i > 0 && (IsNumeral(one) || Has(kNumeralOrder, one)))) return 0;
         const bool common = j + 1 < n && std::any_of(ends[j].begin(), ends[j].end(), [&](std::size_t k) { return k > j + 1 && !named(j, k); });
         const bool before = i == 0 && runStart && (strict[i] || prefix[i]) && !bound[i];
-        return !(j + 1 < n && before && common) && !(i > 0 && (suffix[i] || after)) ? 1 : 0;
+        return !(j + 1 < n && before && common) && !(i > 0 && (suffix[i] || after)) && !(i == 0 && !runStart && listed[0]) ? 1 : 0;
     };
     auto adverbial = [&](std::size_t i, std::size_t j) { return std::find(timed.begin(), timed.end(), i * n + j) != timed.end(); };
     // fewest[i][t]: the fewest pieces, by cost, of a cover of the run from bounds[i], then its fewest loose kanji,
@@ -2837,10 +2843,11 @@ Record* Worker::OverParticleKanaWord(std::string_view full, int cursor, int toke
     };
     const bool afterNoun = (NameClassOf(before) == kClassKanji || NameClassOf(before) == kClassKatakana || titled()) &&
                            (parent->detail == nullptr || parent->detail->cls != kDetailVerb) && At(parent->Code(0), 0) == '1';
-    // After a case particle the particle も or は (LEX-6351: からは + まるで, からは + ちやほや).
+    // After a case particle the particle も or は (LEX-6351: からは + まるで, からは + ちやほや); から, まで and より also
+    // where a word ends in them (最初から, それから, 前より, 今まで + は + まるで; LEX-7050).
     const bool afterParticle = (particle == "も" || particle == "は") && (first->cls == 'N' || verb) &&
-                               (host == "に" || host == "で" || host == "と" || host == "へ" || host == "から" || host == "まで" ||
-                                host == "より");
+                               (host == "に" || host == "で" || host == "と" || host == "へ" || host.ends_with("から") ||
+                                host.ends_with("まで") || host.ends_with("より"));
     if (!afterNoun && !afterParticle) return nullptr;
     const int at = cursor + static_cast<int>(particle.size());
     const std::string_view rest = From(full, at);
