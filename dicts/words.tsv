@@ -14812,7 +14812,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奇天烈	괴상%A1@	G8U0			GN				llm		キテレツ	w:14739
 奇形腫	기형종	N110			GN						きけいしゅ	w:14740
 奇怪	기괴	N110			GN				xxx	1	きかい	w:14741
-奇特	특이%A1@	G8U0			GN				xxx llm	1		w:14742
+奇特	기특%A1@	G8U0			GN				xxx llm	1		w:14742
 奇病	기이한 병	N110			GN				xxx llm	1		w:14743
 奇禍	뜻밖의 재앙	N110			GN				xxx llm	1		w:14744
 奇術	마술	N110			GN				xxx llm	1		w:14745
