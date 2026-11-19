@@ -1,0 +1,5 @@
+#! layer=pack-classes
+# 많이 쓰는 낱말의 뜻을 고르는 부류: 늘고 주는 경제 수치, 얼굴 생김새 (LEX-7261, LEX-7262)
+class	parent
+@figure	
+@looks	
