@@ -168,6 +168,7 @@
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= follower.continuative-only	What follows a verb's continuative and no noun without a particle, beside suffix.continuative: そう of seeming, ながら, やすい, にくい, づらい and たい (雨降りそう 비가 올 것 같다; spec LEX-5810).
 //= follower.compound-second	Starts of the second verb of a compound that a verb's continuative runs into without a particle, beside follower.continuative-only, suffix.continuative and suffix.compound-action (縫い + 込んだ, 呼び + 合う, 摘み + 取る, 誘き + 寄せる, 書き + 出す, 使い + 切る): after an adjective the continuative stays the verb, not the noun the adjective describes (すごい呼び合う; spec GRM-4350).
+//= follower.copula-after-sou	What follows the そう after a kana stem in だ whose continuative is a noun and makes it the hearsay そうだ after the copula, not a volitional (彼の考えだそうだ 그의 생각이라고 한다, 流れだそうです; spec LEX-7480).
 //= follower.weather-continuative	Starts of the second verb of a compound after the continuative of a weather noun (雨降り + 出した, 雪降り + 続いてる, 雨降り + やまない, 雨降り + しきる): the noun is the subject and the compound its verb (雨 + 降り出した 비가 내리기 시작했다; spec LEX-5810).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.te-verb	Starts of the text after the て form or the ないで of a verb spelled in hiragana that ask someone to act or go on as the verb, before which a longer word that spells that form gives way to the verb (おきてください, かえってきた, こないでね; LEX-5921). A past or a progressive counts only before a mark (かえってた。, but かえってたいへん).
@@ -470,6 +471,7 @@
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.after-space	Sentence-final particles that a single space may set apart from the predicate they end, before a mark or the end of the line (そうだ ね……, いい ね――): that space parts no words.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
+//= particle.before-kana-compound	Particles of a verb's argument, and the く of an adverb, right before a kana stem in だ whose continuative is a noun, after which its bare し is the verb (体を乗りだし、 몸을 내밀고), not the し after a copula (いい考えだし 좋은 생각이고; spec LEX-7480).
 //= particle.before-verdict	Particles after which あり and なし of word.copula-verdict before a copula are a verdict, 괜찮다 and 안 되다, not a label of the word before (それもありだな, それってありなの, それはそれでありだな; spec LEX-5112).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
@@ -2167,6 +2169,71 @@ follower.compound-second	渡り
 follower.compound-second	入れ
 follower.compound-second	入る
 follower.compound-second	入っ
+follower.compound-second	ださ
+follower.compound-second	だす
+follower.compound-second	だせ
+follower.compound-second	だした
+follower.compound-second	だして
+follower.compound-second	だしま
+follower.compound-second	だしちゃ
+follower.compound-second	だしそう
+follower.compound-second	だしなが
+follower.compound-second	だしかけ
+follower.compound-second	だしはじ
+follower.compound-second	かえさ
+follower.compound-second	かえし
+follower.compound-second	かえす
+follower.compound-second	かえせ
+follower.compound-second	かえそ
+follower.compound-second	かえっ
+follower.compound-second	かえら
+follower.compound-second	かえり
+follower.compound-second	かえる
+follower.compound-second	かえれ
+follower.compound-second	かえて
+follower.compound-second	かえた
+follower.compound-second	かえな
+follower.compound-second	かえま
+follower.compound-second	とばさ
+follower.compound-second	とばし
+follower.compound-second	とばす
+follower.compound-second	とばせ
+follower.compound-second	とばそ
+follower.compound-second	とった
+follower.compound-second	とって
+follower.compound-second	とっちゃ
+follower.compound-second	とらな
+follower.compound-second	とらず
+follower.compound-second	とらせ
+follower.compound-second	とられ
+follower.compound-second	とりま
+follower.compound-second	とりた
+follower.compound-second	とりそう
+follower.compound-second	とりなが
+follower.compound-second	とりかけ
+follower.compound-second	とりはじ
+follower.compound-second	とる
+follower.compound-second	とれる
+follower.compound-second	とれな
+follower.compound-second	とれず
+follower.compound-second	とれた
+follower.compound-second	とれて
+follower.compound-second	とれば
+follower.compound-second	とれま
+follower.compound-second	もどさ
+follower.compound-second	もどし
+follower.compound-second	もどす
+follower.compound-second	もどせ
+follower.compound-second	もどそ
+follower.compound-second	もどっ
+follower.compound-second	もどら
+follower.compound-second	もどり
+follower.compound-second	もどる
+follower.compound-second	もどれ
+follower.copula-after-sou	だ
+follower.copula-after-sou	で
+follower.copula-after-sou	な
+follower.copula-after-sou	じゃ
 follower.weather-continuative	出
 follower.weather-continuative	だし
 follower.weather-continuative	だす
@@ -6637,6 +6704,16 @@ particle.before-predicate	の
 particle.before-predicate	は
 particle.before-predicate	が
 particle.before-predicate	も
+particle.before-kana-compound	を
+particle.before-kana-compound	が
+particle.before-kana-compound	に
+particle.before-kana-compound	へ
+particle.before-kana-compound	と
+particle.before-kana-compound	て
+particle.before-kana-compound	から
+particle.before-kana-compound	まで
+particle.before-kana-compound	より
+particle.before-kana-compound	く
 
 particle.case-before-stem	を
 particle.case-before-stem	に
@@ -14949,6 +15026,12 @@ adverb.managed	おかげさまで
 adverb.managed	お陰様で
 //= ending.rare-voice	The られ that follows an ichidan stem within its word: a verb sense whose triggers follow the verb (連れて歩く 데리고 걷다) is not of its passive or potential (連れられるまま歩いた 이끌리는 대로).
 ending.rare-voice	られ
+//= ending.noun-slot	What ends the text right before a kana stem in だ whose first reading is a -기 시작하다 and makes the stem a noun before the copula: の, the attributive い and な, and the prefixes お and ご (ただの笑いだし 그냥 웃음이고; not 彼は笑いだし 웃기 시작해; spec LEX-7480).
+ending.noun-slot	の
+ending.noun-slot	い
+ending.noun-slot	な
+ending.noun-slot	お
+ending.noun-slot	ご
 //= verb.belittle-passive	The kana stems of なめる, ナメる, which mostly belittle: their られ with no object in its clause is being looked down on in the negative and the condition too (ナメられたら 얕보이면; spec GRM-4252). The kanji 舐め mostly licks and is not here (そんなに舐められたら).
 verb.belittle-passive	なめ
 verb.belittle-passive	ナメ

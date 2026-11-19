@@ -639,7 +639,23 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
     }
-    if (!matched && base.kind == 10 &&
+    // LEX-7450: a kana second verb that starts like a particle or the copula (狂いだした, 笑いかえした, 取りもどす: follower.compound-second)
+    // keeps the continuative a verb, unless a word of the dictionary from inside the stem reaches past the continuative (握りかえした
+    // 마주 잡았다, 寄りかかる).
+    auto secondVerb = [&]() {
+        if (dict::StartsWithMember(HDTRANS_CLASS("follower.compound-second"), after()) == 0) return false;
+        // From each character of the stem (手を握 + りかえした: 握りかえ).
+        const std::string_view word = From(text, start);
+        const std::size_t reach = static_cast<std::size_t>(sourceLength) + static_cast<std::size_t>(pattern());
+        for (std::size_t i = 0; i < static_cast<std::size_t>(sourceLength) && i < word.size(); i += text::DecodeRune(word.substr(i)).size) {
+            const std::string_view at = word.substr(i);
+            for (const Record* r = w->DoLookup(at, kModeGeneral).records; r != nullptr; r = r->child) {
+                if (i + r->source.size() > reach && at.starts_with(r->source)) return false;
+            }
+        }
+        return true;
+    };
+    if (!matched && base.kind == 10 && !secondVerb() &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji) && !stressedNegative()) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
@@ -657,6 +673,53 @@ bool Item::AcceptVerbContinuation(Record* following) {
         for (const std::string_view shimau : {"まう", "まっ", "まわ", "まえ", "まお"}) {
             if (rest.starts_with(shimau) && !rest.starts_with("まっす")) return false;
         }
+    }
+    // LEX-7480: the kana stem in だ of a compound whose continuative is a noun of the dictionary (考えだ of 考えだす: 考え,
+    // 手探り of 探りだ) leaves the だ to the copula where the copula reads. The volitional そう before a copula
+    // (follower.copula-after-sou) is the hearsay そうだ (彼の考えだそうだ 그의 생각이라고 한다). The bare し that no form of the
+    // second verb goes on from (follower.compound-second: だした, だして) is the し after a copula (いい考えだし 좋은 생각이고)
+    // unless a particle of the verb's argument or an adverb in く stands right before the stem (体を乗りだし、:
+    // particle.before-kana-compound); where the verb's first reading is a -기 시작하다 that takes a subject (笑いだす,
+    // 泣きだす), only a noun slot makes it the copula: the line start, ただの, いい, お before the stem (ending.noun-slot),
+    // or a noun of the dictionary that ends with the continuative (手探り).
+    if (!matched && w->settings.text && surface.ends_with("だ") && (tail.starts_with("そう") || tail.starts_with("し"))) {
+        const bool hearsay = tail.starts_with("そう") &&
+                             dict::StartsWithMember(HDTRANS_CLASS("follower.copula-after-sou"), tail.substr(std::string_view("そう").size())) > 0;
+        const std::string_view before = std::string_view(text).substr(0, static_cast<std::size_t>(std::max(start, 0)));
+        const bool inchoative = EntryText(0).find("기 시작") != std::string_view::npos;
+        const bool bare = tail.starts_with("し") &&
+                          dict::StartsWithMember(HDTRANS_CLASS("follower.compound-second"), "だ" + std::string(tail)) == 0 &&
+                          dict::EndsWithMember(HDTRANS_CLASS("particle.before-kana-compound"), before) == 0;
+        if (hearsay || bare) {
+            const std::string_view head = std::string_view(surface).substr(0, surface.size() - std::string_view("だ").size());
+            // The noun is the continuative itself or a noun of the dictionary that ends with it (手 + 探り: 手探り).
+            auto noun = [&](std::string_view key) {
+                for (const Record* r = w->DoLookup(w->arena.Keep(std::string(key)), kModeGeneral).records; r != nullptr; r = r->child) {
+                    if (r->source == key && At(r->partCode, 0) == 'N') return true;
+                }
+                return false;
+            };
+            bool compound = false;
+            std::size_t back = before.size();
+            for (int n = 0; !compound && n < 3 && back > 0; n++) {
+                back -= LastChar(before.substr(0, back)).size();
+                compound = noun(std::string(before.substr(back)) + std::string(head));
+            }
+            // The line start counts as a noun slot; a token before the word (a sound word read apart: ケラケラと) does not.
+            bool lineStart = start == 0;
+            for (int t = tokenIndex - 1; lineStart && t >= 0; t--) {
+                const std::string_view typed = w->Typed(t);
+                lineStart = typed.empty() || typed == "「" || typed == "『" || typed == "（" || typed == "(";
+            }
+            const bool slot = compound || lineStart || dict::EndsWithMember(HDTRANS_CLASS("ending.noun-slot"), before) > 0;
+            if ((hearsay || !inchoative || slot) && (compound || (!head.empty() && noun(head)))) return false;
+        }
+    }
+    // LEX-7481: a bare ichidan stem in たて (振りたて of 振りたてる) before の is no verb, as a continuative takes no の:
+    // the たて of what is freshly done goes on from the verb before it (振りたてのコーラ 갓 흔든 콜라, as 焼きたての).
+    if (!matched && w->settings.text && base.patternKind == 7 && Conjugation(7, base.kind).empty() && tail.starts_with("の") &&
+        surface.ends_with("たて") && surface.size() > std::string_view("たて").size()) {
+        return false;
     }
 
     bool adjusted = false, desire = false, suVerbPlain = false;
