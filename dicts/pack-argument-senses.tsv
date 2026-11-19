@@ -224,3 +224,5 @@ argument-senses:14713	取る	v5	sense	from=@room|@position|@container|@furniture
 argument-senses:14710	そば	n	sense	pred=好き|大好き|嫌い|食べる|すする|啜る|茹でる|ゆでる|打つ|注文する|頼む|食う	메밀국수	LEX-6040		そばが好きだ 메밀국수를 좋아한다			
 argument-senses:14711	下がる	v5	sense	subj=@person from=* next=くる|来る	-	LEX-6040		教卓から下がってくる 교탁에서 내려온다(그대로)			
 argument-senses:14715	宿る	v5	sense	obj=光|輝き|力|魔力|炎|意志|決意|怒り|闘志|殺意|熱|感情|魂|覚悟|希望|闇|光り|灯	품다	LEX-6040		目に強い輝きを宿らせて 눈에 강한 빛을 품게 해			
+argument-senses:17300	詰まる|つまる	v5	sense	subj=距離|間合い|差|間隔|車間距離|点差	좁혀지다	LEX-7484		距離が詰まり 거리가 좁혀지고			
+argument-senses:17301	詰まる|つまる	v5	sense	subj=息|言葉|話|喉|のど|鼻|胸|パイプ|排水管|配管|トイレ|管|ノズル	막히다	LEX-7484		息が詰まり 숨이 막혀			

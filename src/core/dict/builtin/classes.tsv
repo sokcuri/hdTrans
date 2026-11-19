@@ -15321,3 +15321,25 @@ name.kana-given-particle	だけ
 name.kana-given-particle	ほど
 name.kana-given-particle	など
 name.kana-given-particle	しか
+//= follower.copula-after-past-sou	What follows the そう after a す-verb stem that ends in the past た of a verb and makes it that past and the hearsay そうだ, not the volitional of the す-verb (来たそうだ 왔다고 한다, 来たそうです 왔다고 합니다; spec LEX-7483).
+follower.copula-after-past-sou	だ
+follower.copula-after-past-sou	で
+follower.copula-after-past-sou	じゃ
+follower.copula-after-past-sou	な
+//= follower.listing-shi	Sentence particles after the bare continuative し of a す-verb stem that ends in the past た of a verb, after which the し lists a reason after that past (来たしね 왔고, ここにいたしな; spec LEX-7483). A mark or the end of the text does the same.
+follower.listing-shi	ね
+follower.listing-shi	な
+follower.listing-shi	よ
+follower.listing-shi	さ
+follower.listing-shi	わ
+//= prefix.humble	The humble prefixes before a verb's continuative that make it the object of the humble す-verb いたす (お引き受けいたし、 맡아, not 있었고; お待ちいたし、; spec LEX-7483).
+prefix.humble	お
+prefix.humble	ご
+prefix.humble	御
+//= particle.focus-object	Focus particles that may stand between a verbal noun and the す-verb it is the object of, where the verbal noun still makes the stem that verb, not the past before a listing し (混乱も来たし 혼란도 초래해, not 왔고; spec LEX-7483).
+particle.focus-object	も
+particle.focus-object	は
+particle.focus-object	さえ
+particle.focus-object	すら
+particle.focus-object	こそ
+particle.focus-object	まで

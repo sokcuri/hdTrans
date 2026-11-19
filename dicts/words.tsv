@@ -23661,8 +23661,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 詰まり	막힘	N110			GN				xxx llm		つまり	w:23585
 詰まり	수축	N110			GN				llm		つまり	w:23586
 詰まり	끝	N110			GN				llm		つまり	w:23587
-詰まり	즉	E300			GN				xxx		つまり	w:23588
-詰まり	요컨대	E300			GN						つまり	w:23589
 詰まる所	결국	E300			GN				llm		つまるところ	w:23590
 詰み	외통수	N110			GN				llm		つみ	w:23591
 詰め合わせ	세트	N110			GN				llm		つめあわせ	w:23592
@@ -28800,3 +28798,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お地蔵さん	지장보살	N110			GN						おじぞうさん	w:39511
 じぞうさま	지장보살	N110			GN							w:39512
 おじぞうさま	지장보살	N110			GN							w:39513
+つまず	걸려 넘어&AL@	M421			GN			LEX-7485: 躓 w:24146와 같은 가나 행	xxx	1		w:39700
