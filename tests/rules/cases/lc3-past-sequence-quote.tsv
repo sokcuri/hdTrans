@@ -9,7 +9,7 @@ rewrite:past-sequence	無理に起こすのは危険だと察知した佑は、�
 rewrite:past-sequence	ライカなら気配で只者ではないと察知できそうだ。	has:아니라고 감지	fix	rewrites
 rewrite:past-sequence	一定時間経ったら一人は御者台、もう一人は荷台で休むと決められた。	has:쉰다고 결정	fix	rewrites
 rewrite:past-sequence	居間では三人の弁護士で対応すると決められた。	has:대응한다고 결정	fix	rewrites
-rewrite:past-sequence	私が、自分が他と違うと気付き始めたのは幼稚園の頃だった。	has:다르다고	fix	rewrites
+rewrite:past-sequence	私が、自分が他と違うと気付き始めたのは幼稚園の頃だった。	has:다르다	fix	rewrites
 rewrite:past-sequence	乙女ゲームの世界に転生していると気付き、様々整理した。	has:있다고	fix	rewrites
 rewrite:past-sequence	でも考えて考えて、強くなるしかないと悟った。	has:없다고	keep	rewrites
 rewrite:past-sequence	ソウマは昨日していたことがばれていると悟り、黙り込む。	has:있다고	fix	rewrites

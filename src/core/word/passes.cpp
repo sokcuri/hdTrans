@@ -131,6 +131,19 @@ bool CoversVerb(const Worker& w, const Item* verb, std::string_view noun) {
     return !w.settings.text || static_cast<int>(noun.size()) == verb->length;
 }
 
+// GRM-4350: whether the text right after verb item it starts a second verb or an auxiliary that a verb's
+// continuative runs into without a particle (やすい, 始める, 込む, 合う, かける, 取る).
+bool ContinuativeRunsOn(const Item& it) {
+    const std::size_t end = static_cast<std::size_t>(it.start) + static_cast<std::size_t>(it.length);
+    if (end >= it.text.size()) return false;
+    const std::string_view after = it.text.substr(end);
+    for (const dict::ClassId c : {HDTRANS_CLASS("follower.continuative-only"), HDTRANS_CLASS("suffix.continuative"),
+                                  HDTRANS_CLASS("suffix.compound-action"), HDTRANS_CLASS("follower.compound-second")}) {
+        if (dict::StartsWithMember(c, after) > 0) return true;
+    }
+    return false;
+}
+
 bool KanjiIn(std::string_view s) {
     for (std::string_view t = s; !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
@@ -292,6 +305,9 @@ Phrase FindPhrase(Flusher& f) {
             case 2: {
                 Item* next = it->After();
                 if (next == nullptr || !next->detail->Yougo()) break;
+                // GRM-4350: a continuative with kanji that runs into a second verb or an auxiliary adjective is the first half
+                // of a verb chain (すごい撮りやすい 엄청 찍기 쉽다, 縫い込まれている), not the noun the adjective describes.
+                if (KanjiIn(next->group->surface) && ContinuativeRunsOn(*next)) break;
                 const std::string combined = next->group->surface + std::string(next->DirectSurface());
                 const bool covers = CoversVerb(w, next, combined);
                 Record* record = next->group->records;
