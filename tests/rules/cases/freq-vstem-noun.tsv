@@ -1,0 +1,33 @@
+# 규칙: LEX-7452
+rule	input	expected	kind	layer
+lookup:kana-stem-noun	手袋越しの少女の手にはおびえがあった。	has:두려움이 있었다	fix	lookup
+lookup:kana-stem-noun	目に怯えが浮かんでいた。	has:두려움이	fix	lookup
+lookup:kana-stem-noun	しかし、空腹とつかれが、彼から思慮を奪った。	has:피로가	fix	lookup
+lookup:kana-stem-noun	今日のつかれが癒されていくようだ。	has:피로가	fix	lookup
+lookup:kana-stem-noun	つかれの色が見えた。	has:피로의 색	fix	lookup
+lookup:kana-stem-noun	つかれのせいだ。	has:피로 탓	fix	lookup
+lookup:kana-stem-noun	先輩ウェイトレスにたすけを求めるが、首を振るだけだ。	has:도움을	fix	lookup
+lookup:kana-stem-noun	魅音みたいな、力強い人のたすけがいるんだよ。	has:도움이	fix	lookup
+lookup:kana-stem-noun	ささえを無くしたかのように倒れた。	has:버팀목을	fix	lookup
+lookup:kana-stem-noun	ささえの柱。	has:버팀목의	fix	lookup
+lookup:kana-stem-noun	ふるえが止まらない。	has:떨림이	fix	lookup
+lookup:kana-stem-noun	声のふるえを抑えた。	has:떨림을	fix	lookup
+lookup:kana-stem-noun	今日もいろいろあったね、つかれた～。	has:지쳤	keep	lookup
+lookup:kana-stem-noun	司令官、おつかれさま！	lacks:피로	keep	lookup
+lookup:kana-stem-noun	ただ、追いつかれた。	lacks:피로	keep	lookup
+lookup:kana-stem-noun	たすけてくれた。	has:살려 주었다	keep	lookup
+lookup:kana-stem-noun	その白い勾玉が見つかれば、何とかしてくれるんだね…？	lacks:피로	keep	lookup
+lookup:kana-stem-noun	って、そんなくっつかれても…！	lacks:피로	keep	lookup
+lookup:kana-stem-noun	手がふるえた。	has:떨렸다	keep	lookup
+lookup:kana-stem-noun	ふるえる指で触れた。	has:떨리는	keep	lookup
+lookup:kana-stem-noun	彼をささえた。	has:떠받쳤다	keep	lookup
+lookup:kana-stem-noun	はなれた場所。	has:떠난	keep	lookup
+lookup:kana-stem-noun	描きかけの絵が見えた。	has:그리다 만	keep	lookup
+lookup:kana-stem-noun	崩れかけの壁	has:무너져 가는	keep	lookup
+lookup:kana-stem-noun	私は ヒーローなんかにはなれません。	lacks:별채	keep	lookup
+lookup:kana-stem-noun	可愛いお嫁さんなんかにはなれないよね…。	lacks:별채	keep	lookup
+lookup:kana-stem-noun	彼女はおびえている。	has:무서워하고	keep	lookup
+lookup:kana-stem-noun	かえるのが遅い。	has:돌아가는 것이	keep	lookup
+lookup:kana-stem-noun	見るのが好き。	has:보는 것이	keep	lookup
+lookup:kana-stem-noun	こたえがわからない。	has:대답을	keep	lookup
+lookup:kana-stem-noun	こうするとしつけの悪い猫みたいだな。	has:교육이 나쁜	keep	lookup
