@@ -415,8 +415,9 @@ void Run::Transliterate() {
                 ApplyFinal(cursor, 10);
             }
             // A ン after the last syllable, or after the long mark it drops, is its final ㄴ
-            // (ヴァン 반, ティーン 틴, ザクリン 자크린).
+            // (ヴァン 반, ティーン 틴, ザクリン 자크린, ザクリーン 자크린).
             const long last = cursor + static_cast<long>(text::RuneCount(value)) - 1;
+            if (!value.empty() && At(last + 1) == kLongVowel && Has(last + 2, kMarkN)) Replace(last + 1, kLongVowel, "");  // ザクリーン 자크린
             if (!value.empty() && Has(last + 1, kMarkN)) AddFinalN(last);
             direct = true;
             break;

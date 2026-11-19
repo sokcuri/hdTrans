@@ -564,23 +564,39 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
         }
     }
     if (clean.front() != 0) return records;
-    // kanaAt[i]: the kana from start to start + i. A stray prefix of two or more kana before a dictionary word
+    // kanaAt[i]: the kana from start to start + i. A stray prefix of two or more kana holding a word before a dictionary word
     // that takes two or more kana of the run and ends at its end or crosses it is a name before a word (ヨンホ|コーヒー,
     // ハリホ|パン, ホロ|スクリーン, トラジャ|モー娘): the run is not one sound. Nor is a run whose reading by words starts
     // with words that end at a kana the dictionary reads in hiragana as a particle (ボク|ハ|ヨンホ): it is speech.
     std::vector<int> kanaAt(static_cast<std::size_t>(end - start) + 1, 0);
     for (int at = start, k = 0; at <= end; at += at < end ? CharLen(full, at) : 1) kanaAt[static_cast<std::size_t>(at - start)] = k++;
+    // The word at the end is the longest dictionary word that takes two or more kana of the run and ends at its end
+    // or crosses it (ハピ|ライン, not ハピラ|イン). Not a proper noun of two kana inside the run: the costs read it as a
+    // piece cut by chance (short-kata-piece). The prefix before it holds a name only where a dictionary word of two
+    // or more kana lies inside it (ヨン|ホ, ハリ|ホ); lone strays (ハ|ピ) are sound.
+    int last = end;
+    for (int at = start; at < end && last == end; at += CharLen(full, at)) {
+        const std::size_t i = static_cast<std::size_t>(at - start);
+        if (kana - kanaAt[i] < 2) break;
+        for (const SegEdge& e : w.edges[i]) {
+            const bool piece = e.part == "N130" && e.end <= end && kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[i] == 2;
+            if (e.word && !e.joined && e.end >= end && !stray(e, at) && !piece) last = at;
+        }
+    }
+    if (last < end && kanaAt[static_cast<std::size_t>(last - start)] >= 2) {
+        for (int at = start; at < last; at += CharLen(full, at)) {
+            for (const SegEdge& e : w.edges[static_cast<std::size_t>(at - start)]) {
+                if (e.word && !e.joined && e.end <= last &&
+                    kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[static_cast<std::size_t>(at - start)] >= 2) {
+                    return records;
+                }
+            }
+        }
+    }
     std::vector<char> words(static_cast<std::size_t>(end - start) + 1, 0);  // a reading by words with no stray piece runs from start to start + i
     words.front() = 1;
     for (int at = start; at < end; at += CharLen(full, at)) {
         const std::size_t i = static_cast<std::size_t>(at - start);
-        if (at > start && kanaAt[i] >= 2 && kana - kanaAt[i] >= 2) {
-            for (const SegEdge& e : w.edges[i]) {
-                // Not a proper noun of two kana inside the run: the costs read it as a piece cut by chance (short-kata-piece).
-                const bool piece = e.part == "N130" && e.end <= end && kanaAt[static_cast<std::size_t>(e.end - start)] - kanaAt[i] == 2;
-                if (e.word && !e.joined && e.end >= end && !stray(e, at) && !piece) return records;
-            }
-        }
         if (words[i] == 0) continue;
         for (const SegEdge& e : w.edges[i]) {
             if (stray(e, at) || e.end > end) continue;

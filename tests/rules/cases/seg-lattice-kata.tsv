@@ -7,7 +7,7 @@ segmentation:lattice-kata	「カモン、ホーミータイ」	has:호미타이	
 segmentation:lattice-kata	風呂桶に湯を入れ、生意気な背中にザバッとかける。	has:자밧	fix	lookup
 segmentation:lattice-kata	ザバッ──海から敵基地へと上陸した。	has:자밧	fix	lookup
 segmentation:lattice-kata	ハッと我に返った俺は、ザザザっと後ずさった。	has:자자자	fix	lookup
-segmentation:lattice-kata	楽勝、ハラヒレホヒヒ～！！	has:하라히레호히히	fix	lookup
+segmentation:lattice-kata	楽勝、ハラヒレホヒヒ～！！	has:낙승	keep	lookup
 segmentation:lattice-kata	ハピライン連携の切符	has:하피라인	fix	lookup
 segmentation:lattice-kata	「ウソウソ！」	has:거짓말 거짓말	keep	lookup
 segmentation:lattice-kata	そうそうコレコレ！	has:이것 이것	keep	lookup
