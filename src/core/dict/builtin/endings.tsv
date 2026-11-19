@@ -885,3 +885,7 @@
 書いているなよ	쓰지 마	end	prio=-1
 書くんじゃない	쓰는 거 아니야	end	stative prio=-1
 書くんじゃない	쓰지 않아	end	prio=-1
+// A sentence that ends in ますように or ませんように is a wish: -기를, -지 않기를 (雨が降りませんように 비가 오지 않기를;
+// GRM-4303). Inside a sentence ように stays the purpose -도록 (忘れませんように注意して 잊지 않도록 주의해).
+書きますように	쓰기를	end	prio=1
+書きませんように	쓰지 않기를	end	prio=1
