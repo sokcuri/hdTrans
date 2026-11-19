@@ -1677,6 +1677,45 @@ Record* KanaVerbOverWord(Record* records, std::string_view before, std::string_v
     return verbs;
 }
 
+// LEX-7450, text path: after a verb's bare continuative, the verb records move ahead of the other records where the
+// text starts a kana second verb of follower.compound-second (狂い + だして 미치기 시작해서, not the copula だし 이고):
+// no copula or particle follows a bare continuative. Plain-dictionary records stay in front.
+Record* SecondVerbAfterContinuative(const Item& parent, Record* records, std::string_view text) {
+    const Detail* d = parent.detail;
+    if (d == nullptr || d->cls != kDetailVerb || (d->kind != 8 && d->kind != 10) || (d->group != nullptr && d->group->length > 0) ||
+        dict::StartsWithMember(HDTRANS_CLASS("follower.compound-second"), text) == 0) {
+        return records;
+    }
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 1) == '4') return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = At(r->partCode, 1) == '4' ? verbTail : restTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    if (verbs == nullptr) {
+        if (owned == nullptr) return rest;
+        owned->child = rest;
+        return records;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
+    return records;
+}
+
 // Text path: after a case particle or a comma, the verb records of the kana stem か (かく) whose
 // past or て form the text spells move ahead of the other records: no particle か follows there
 // (汗もかいた 땀도 흘렸다, 手紙をかいて 편지를 써서; but 何匹かいた, 誰かいた after a noun). A word that
@@ -3850,6 +3889,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
         if (settings.text) records = KanaVerbAfterParticle(*parent, records, From(full, cursor));
+        if (settings.text) records = SecondVerbAfterContinuative(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }

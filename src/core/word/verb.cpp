@@ -639,7 +639,23 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
     }
-    if (!matched && base.kind == 10 &&
+    // LEX-7450: a kana second verb that starts like a particle or the copula (狂いだした, 笑いかえした, 取りもどす: follower.compound-second)
+    // keeps the continuative a verb, unless a word of the dictionary from inside the stem reaches past the continuative (握りかえした
+    // 마주 잡았다, 寄りかかる).
+    auto secondVerb = [&]() {
+        if (dict::StartsWithMember(HDTRANS_CLASS("follower.compound-second"), after()) == 0) return false;
+        // From each character of the stem (手を握 + りかえした: 握りかえ).
+        const std::string_view word = From(text, start);
+        const std::size_t reach = static_cast<std::size_t>(sourceLength) + static_cast<std::size_t>(pattern());
+        for (std::size_t i = 0; i < static_cast<std::size_t>(sourceLength) && i < word.size(); i += text::DecodeRune(word.substr(i)).size) {
+            const std::string_view at = word.substr(i);
+            for (const Record* r = w->DoLookup(at, kModeGeneral).records; r != nullptr; r = r->child) {
+                if (i + r->source.size() > reach && at.starts_with(r->source)) return false;
+            }
+        }
+        return true;
+    };
+    if (!matched && base.kind == 10 && !secondVerb() &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji) && !stressedNegative()) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||

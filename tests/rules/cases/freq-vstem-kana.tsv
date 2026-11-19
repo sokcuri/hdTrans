@@ -1,0 +1,47 @@
+# 규칙: LEX-7450, LEX-7451
+rule	input	expected	kind	layer
+lookup:kana-second-verb	全ては狂いだした。	모든 것은 미치기 시작했다.	fix	lookup
+lookup:kana-second-verb	全ては狂いださなかったかもしれない。	모든 것은 미치기 시작하지 않았던 걸지도 모른다.	fix	lookup
+lookup:kana-second-verb	世界が狂いだす根本的なきっかけ。	has:미치기 시작하는	fix	lookup
+lookup:kana-second-verb	彼は戦いだして、止まらない。	그는 싸우기 시작해, 멈추지 않는다.	fix	lookup
+lookup:kana-second-verb	すべてが狂いだしそうだ。	모든 것이 미치기 시작할 것 같다.	fix	lookup
+lookup:kana-second-verb	いきなり悩みだした。	갑자기 고민하기 시작했다.	fix	lookup
+lookup:kana-second-verb	佳奈すけが、腕を組んで悩みだす。	카나스케가, 팔짱을 껴 고민하기 시작한다.	fix	lookup
+lookup:kana-second-verb	聞いてもいないのに喋りだした。	듣지도 않았는데 말하기 시작했다.	fix	lookup
+lookup:kana-second-verb	誰かが携帯を触りだしたら、会議はもう駄目だ。	누군가가 휴대폰을 만지기 시작하면, 회의는 이제 안 된다.	fix	lookup
+lookup:kana-second-verb	千莉の目が三角に尖りだした。	천리의 눈이 삼각에 뾰족해지기 시작했다.	fix	lookup
+lookup:kana-second-verb	早くも佳奈の頬が、火照りだす。	벌써 카나의 뺨이, 달아오르기 시작한다.	fix	lookup
+lookup:kana-second-verb	大粒の涙が、頬を伝いだした。	굵은 눈물이, 뺨을 타고 흐르기 시작했다.	fix	lookup
+lookup:kana-second-verb	すぐさまクローゼットを漁りだした。	곧 바로 옷장을 뒤지기 시작했다.	fix	lookup
+dict:w:39126	ああ、かならず助けだすよ！	아, 반드시 구해 내!	fix	words
+dict:w:39111	仕方なく体を乗りだし、フォークを受け取る。	has:몸을 나서고	fix	words
+lookup:kana-second-verb	スープにも味が染みだしていていいでしょ？	has:배어 나오고 있고	fix	words
+dict:w:39105	「連れ出すってより引き摺り出すって感じだなッ！！」	「데리고 나간다고보다 끌어낸다는 느낌이네!!」	fix	words
+dict:jisjk:142553	脚を引き摺りながら路地裏の奥に逃げる。	다리를 질질 끄면서 뒷골목 안쪽에 도망친다.	fix	words
+dict:compound-v2	喉の裂け目をめくり返して見せた。	목의 갈라진 곳을 뒤집어 보였다.	fix	words
+dict:compound-v2	みんな全員わめきたてている。	모두 전원 악을 쓰고 있다.	fix	words
+dict:w:39101	根性を叩き直した方が手っ取り早い。	근성을 뜯어고치는 것이 빠르다.	fix	words
+dict:w:39100	ガラガラと窓を開け放った。	드르륵 창을 활짝 열었다.	fix	words
+dict:w:39104	手をもみ合わせた。	손을 비볐다.	fix	words
+lookup:kana-second-verb	本当に持ちかえりそうだ。	정말 가져 돌아갈 것 같다.	fix	words
+dict:w:39115	行動ポイントを使いきらない場合があります。	행동 포인트를 다 사용하지 않는 경우가 있습니다.	fix	words
+dict:w:39179	一気に押しきることが出来そうです。	단번에 밀어붙일 수가 있을 것 같습니다.	fix	words
+lookup:kana-second-verb	これは戦いだ。	이것은 싸움이다.	keep	lookup
+lookup:kana-second-verb	これは戦いだし、仕方ない。	이것은 싸움이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-second-verb	戦いだそうです。	싸움이라고 합니다.	keep	lookup
+lookup:kana-second-verb	あれは笑いだよ。	저것은 웃음이야.	keep	lookup
+lookup:kana-second-verb	それが狂いだと思う。	그것이 이상이라고 생각한다.	keep	lookup
+lookup:kana-second-verb	戦いとは何か。	싸움이란 무엇인가.	keep	lookup
+lookup:kana-second-verb	戦いもどこか遠い。	싸움도 어딘가 멀다.	keep	lookup
+lookup:kana-second-verb	戦いより平和だ。	싸움보다 평화롭다.	keep	lookup
+lookup:kana-second-verb	戦いかえ？	싸움이나?	keep	lookup
+lookup:kana-second-verb	壁に寄りかかっていた。	벽에 기대고 있었다.	keep	lookup
+lookup:kana-second-verb	俺ひとりじゃ食いきれない。	나 혼자는 먹을 수 없다.	keep	lookup
+lookup:kana-second-verb	雨が降りやんだ。	비가 그쳤다.	keep	lookup
+lookup:kana-second-verb	焼きたてのパンを買った。	갓 구운 빵을 샀다.	keep	lookup
+lookup:kana-second-verb	塗りたてのペンキに触るな。	갓 칠한 페인트에 만지지 마.	keep	lookup
+lookup:kana-second-verb	洗いたてのシャツ。	갓 빤 셔츠.	keep	lookup
+lookup:kana-second-verb	彼は暴れだした。	그는 날뛰기 시작했다.	keep	lookup
+lookup:kana-second-verb	雨が降りだした。	has:시작했다	keep	words
+lookup:kana-second-verb	祈りとりんごの木。	기도와 사과의 나무.	keep	lookup
+lookup:kana-second-verb	踊りとろうそくの火。	춤과 양초의 불.	keep	lookup
