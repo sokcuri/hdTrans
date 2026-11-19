@@ -100,3 +100,39 @@ dict:freq-gloss-d	無駄毛の処理は私が行います。	has:잔털 처리	f
 dict:freq-gloss-d	無駄撃ちするなと教えたはずだ。	has:탄 낭비하지 말라고	fix	lookup
 dict:freq-gloss-d	輸入が伸び、輸出も伸びている。	has:수입이 늘어	fix	pack
 dict:freq-gloss-d	安定収益が順調に伸びて全５社が増益となった。	has:순조롭게 늘어	fix	pack
+dict:freq-gloss-d	この調子で続けよう。	lacks:어조	keep	pack
+dict:freq-gloss-d	その調子で続けて。	has:그 상태로	keep	pack
+dict:freq-gloss-d	その調子で続けろ！	lacks:어조	keep	pack
+dict:freq-gloss-d	同じ調子で続けた。	lacks:어조	keep	pack
+dict:freq-gloss-d	いい調子で続けています。	lacks:어조	keep	pack
+dict:freq-gloss-d	「わかった」と明るい調子で続けた。	has:밝은 어조로	fix	pack
+dict:freq-gloss-d	強い調子で非難した。	has:강한 어조로	fix	pack
+dict:freq-gloss-d	角でぶつかった。	has:모퉁이에서	keep	pack
+dict:freq-gloss-d	パンをくわえて角でぶつかる。	has:모퉁이에서	keep	pack
+dict:freq-gloss-d	曲がり角の角でぶつかりそうになった。	lacks:모서리	keep	pack
+dict:freq-gloss-d	角に小指をぶつけた。	has:모서리에	fix	pack
+dict:freq-gloss-d	机の角に頭ぶつけて痛い。	has:모서리에	fix	pack
+dict:freq-gloss-d	机の角にぶつけた。	has:모서리에	fix	pack
+dict:freq-gloss-d	次の角を右に曲がって。	has:모퉁이를	keep	pack
+dict:freq-gloss-d	右手に海が広がる。	has:오른쪽에 바다가	fix	pack
+dict:freq-gloss-d	右手には山がそびえる。	has:오른쪽에는 산이	fix	pack
+dict:freq-gloss-d	左手に見えるのが本殿です。	has:왼쪽에 보이는	fix	pack
+dict:freq-gloss-d	右手に見えるのは富士山です。	has:오른쪽에 보이는	fix	pack
+dict:freq-gloss-d	道の右手に寺がある。	has:오른쪽에 절이	fix	pack
+dict:freq-gloss-d	進行方向右手に城が見えます。	has:오른쪽에 성이	fix	pack
+dict:freq-gloss-d	左手には川が流れている。	has:왼쪽에는 강이	fix	pack
+dict:freq-gloss-d	右手に指輪がある。	has:오른손에	keep	pack
+dict:freq-gloss-d	左手に剣がある。	has:왼손에	keep	pack
+dict:freq-gloss-d	右手に傷があった。	has:오른손에	keep	pack
+dict:freq-gloss-d	右手に剣を握る。	has:오른손에	keep	pack
+dict:freq-gloss-d	無駄がある。	has:낭비가 있다	fix	pack
+dict:freq-gloss-d	無駄があります。	has:낭비가 있습니다	fix	pack
+dict:freq-gloss-d	全くの無駄。	has:완전한 낭비	fix	pack
+dict:freq-gloss-d	どこに逃げたって無駄。	has:헛수고	keep	pack
+dict:freq-gloss-d	地元に戻ってきた。	has:고향으로	fix	pack
+dict:freq-gloss-d	地元に帰ってきた。	has:고향에	fix	pack
+dict:freq-gloss-d	今度またね。	has:다음에 또	fix	pack
+dict:freq-gloss-d	今度またね！	has:다음에 또	fix	pack
+dict:freq-gloss-d	顔が整った男。	has:반듯한 남자	fix	pack
+dict:freq-gloss-d	顔が整っている。	lacks:갖추어	fix	pack
+dict:freq-gloss-d	準備が整っている。	has:갖추어져	keep	pack
