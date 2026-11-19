@@ -3137,7 +3137,13 @@ Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, 
         return nullptr;
     }
     for (const std::string_view whole : {"とか", "でさえ", "さえ", "でも", "には", "では", "とは", "にも", "ても", "とも", "から", "まで", "より", "しか", "こそ", "など", "ばかり", "だけ", "って", "とかって", "とかは", "とかも", "との", "での", "への", "からの", "までの", "にて", "にの"}) {
-        if (source == whole) return nullptr;
+        if (source != whole) continue;
+        // には, にも, では and とは also yield to their first kana where a word in hiragana after it covers more than the
+        // whole particle and the word after it (風に + はためいた, みんなに + もてはやされた); where both cover as much
+        // the particle stays (医者には + なれない, 部屋には + いる).
+        const bool open = (whole == "には" || whole == "にも" || whole == "では" || whole == "とは") &&
+                          NameClassOf(FirstChar(From(full, cursor + c.length))) == kClassHiragana;
+        if (!open) return nullptr;
     }
     auto after = [](Record* r) {
         while (r != nullptr && r->source.empty()) r = r->child;

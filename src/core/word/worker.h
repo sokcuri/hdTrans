@@ -263,6 +263,7 @@ private:
     bool KanaAfterWord(const dict::UserEntry& u, std::string_view query) const;
     bool DoubledSoundBefore(std::string_view query) const;
     bool KanaModifierBefore(std::string_view query) const;
+    bool KanaBeforeParticle(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
     bool KanaBeforeSuru(const dict::UserEntry& u, std::string_view rest) const;

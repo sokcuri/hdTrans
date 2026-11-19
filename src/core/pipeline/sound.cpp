@@ -3729,6 +3729,15 @@ bool PlainVerbOver(std::string_view s, size_t byte, size_t at, const LineContext
     return false;
 }
 
+// Whether the stem from..i of hiragana is the end of a particle of particle.kana-word-after that starts before it, after
+// which a word in kana starts: the で of まで (朝までれんしゅう 아침까지 연습, not 朝ま + 出られ).
+bool StemEndsParticle(std::string_view s, const std::u32string& rs, const std::vector<size_t>& byte, size_t from, size_t i) {
+    for (size_t k = from; k < i; k++) {
+        if (!IsHiraganaRune(rs[k])) return false;
+    }
+    return dict::EndsWithMember(HDTRANS_CLASS("particle.kana-word-after"), s.substr(0, byte[i])) > byte[i] - byte[from];
+}
+
 // Whether head, the text of a sentence before a verb, has a subject は, が or も after a person the
 // speaker honours (honorific.honoured-person: 社長は, 王子様が), as the word stage reads the respect of
 // られる (grammar.cpp RespectfulReading).
@@ -3772,7 +3781,7 @@ std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, 
             if (WordReaches(s, byte[from], byte[i + 1], ctx, snap)) break;
             const std::string stem = s.substr(byte[from], byte[i] - byte[from]);
             if (VerbStem(stem, kRu, ctx, snap)) {
-                found = !PlainVerbOver(s, byte[from], byte[i + 1], ctx, snap);
+                found = !PlainVerbOver(s, byte[from], byte[i + 1], ctx, snap) && !StemEndsParticle(s, rs, byte, from, i);
                 break;
             }
         }
