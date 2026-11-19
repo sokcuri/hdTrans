@@ -36,7 +36,7 @@ cx:kanenai-passive:10	こんな真似を母に知られたら、それこそ殺�
 cx:kanenai-passive:10	壊しかねない。	부술 수도 있다.	keep	rewrites
 cx:sono-ue-place:10	その上をいく。	그 위를 간다.	fix	rewrites
 cx:sono-ue-place:10	私は注意深くその上を歩きつつ、風景を眺めた。	나는 유심히 그 위를 걸으면서, 풍경을 바라보았다.	fix	rewrites
-cx:sono-ue-place:10	その上から砂がたまり、あたりは荒れ地と化していた。	그 위로부터 모래가 모여, 근처는 황무지화하고 있었다.	fix	rewrites
+cx:sono-ue-place:10	その上から砂がたまり、あたりは荒れ地と化していた。	그 위로부터 모래가 모여, 근처는 황무지로 변하고 있었다.	fix	rewrites
 cx:sono-ue-place:10	その上が三階の天井まで吹き抜けになっている。	그 위가 3층의 천장까지 부가 되어 있다.	fix	rewrites
 cx:sono-ue-place:10	その上、彼は強い。	게다가, 그는 강하다.	keep	rewrites
 cx:sono-ue-place:10	その上で話そう。	그런 다음에 이야기하자.	keep	rewrites

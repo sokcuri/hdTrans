@@ -1070,7 +1070,7 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     if (noun->group == nullptr || noun->selected < 0 || ClassOf(noun) != '1' || Segment(noun) != c.noun) return false;
     std::size_t j = i + 1;
     if (j >= items.size()) return false;
-    bool omitted = false;
+    bool omitted = false, nominal = false;
     m.seen = {};
     if (ClassOf(items[j]) == '2' && IdiomParticle(c.idiomParticle, items[j]->group->surface)) {
         if (items[j]->group->surface != c.idiomParticle) {
@@ -1079,6 +1079,11 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
             // reads past what the particle adds (気にもなる, 話はなんとなくわかった)
             if (IdiomTopic(c.headRaw, m.seen.substr(m.seen.size() - std::string_view("は").size()), c.idiomParticle) == c.headRaw) return false;
         }
+        j++;
+    } else if ((c.idiomParticle == "を" || c.idiomParticle == "が") && ClassOf(items[j]) == '2' &&
+               items[j]->group->surface == "の") {
+        // the idiom said as a noun of manner, its particle as の (気の利かせ方, ハメの外しよう): checked at the verb
+        nominal = true;
         j++;
     } else if (c.idiomParticle == "を" || c.idiomParticle == "が") {
         omitted = true;
@@ -1098,7 +1103,7 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // an adverb in letters (すごく, とても); not a mark (…) or a word of another class
         const char32_t first = text::DecodeRune(x->group->surface).cp;
         const bool letters = (first >= 0x3041 && first <= 0x30FF) || (first >= 0x4E00 && first <= 0x9FFF);
-        if (omitted || ClassOf(x) != '3' || !letters || c.idiomParticle == "に" || (c.idiomParticle == "を" && !m.seen.empty())) break;
+        if (omitted || nominal || ClassOf(x) != '3' || !letters || c.idiomParticle == "に" || (c.idiomParticle == "を" && !m.seen.empty())) break;
         m.kept.push_back(j);
         j++;
     }
@@ -1116,6 +1121,21 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
             if (end == e && k.find(kind) == std::string_view::npos && !c.verb.ends_with("する")) return false;
         }
         if (verb->detail != nullptr && (verb->detail->record != 0 || verb->detail->voice != Voice::None)) return false;
+    }
+    // After の the verb is its stem with 方 or よう right after it (利かせ方, 外しよう; not 外そう).
+    if (nominal) {
+        const std::string_view whole = Slice(verb->text, verb->start, verb->length), stem = verb->group->surface;
+        if (!whole.starts_with(stem)) return false;
+        std::string_view rest = whole.substr(stem.size());
+        // a godan verb's stem kana (外し, 取り) comes first: the い row of its last kana, し for する
+        static constexpr std::pair<std::string_view, std::string_view> kStemKana[] = {
+            {"う", "い"}, {"く", "き"}, {"ぐ", "ぎ"}, {"す", "し"}, {"つ", "ち"}, {"ぬ", "に"}, {"ぶ", "び"}, {"む", "み"}, {"る", "り"}};
+        const std::string_view verbText = c.verb, last = verbText.substr(verbText.size() - DecodeLastRune(verbText).size);
+        for (const auto& [e, k] : kStemKana) {
+            if (last == e && rest.starts_with(k)) rest.remove_prefix(k.size());
+        }
+        if (!rest.starts_with("方") && !rest.starts_with("よう")) return false;
+        if (verb->tokenIndex != items[j - 1]->tokenIndex || j != i + 2) return false;
     }
     // Between the words only spaces: a mark (…, 、) or other text in a token of its own breaks the idiom.
     for (int t = noun->tokenIndex + 1; t < verb->tokenIndex; t++) {
@@ -1140,14 +1160,15 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     }
     // The words as the dictionary writes them, side by side, are the word stage's to read (蓋を開ける
     // 뚜껑을 열다 where it chose so); the idiom row reads only what that stage could not see as one.
-    if (m.seen.empty() && !omitted && !spaced && m.kept.empty()) return false;
+    if (m.seen.empty() && !omitted && !nominal && !spaced && m.kept.empty()) return false;
     // A noun pointed at or owned (そんな手に, 女房の鼻を) belongs to the phrase before it, not to the idiom.
     if (i > 0) {
         const std::string_view prev = items[i - 1]->group->surface;
         const bool together = items[i - 1]->tokenIndex == noun->tokenIndex;
         // An idiom whose noun takes a describing word takes one of kind too (こんなドジ踏む 이런 실수를 하다).
         for (const std::string_view mod : {"の", "そんな", "こんな", "あんな", "その", "この", "あの", "どんな"}) {
-            if (prev == mod && together && !(c.modified && mod.ends_with("んな"))) return false;
+            // the doer of a noun of manner takes の (老人たちのハメの外しよう)
+            if (prev == mod && together && !(c.modified && mod.ends_with("んな")) && !(nominal && mod == "の")) return false;
         }
         // Nor a noun with a word that describes it or a noun it ends (大いなる力を 借りる, 欲しい物 言う,
         // 伯爵家継ぐ): the idiom's noun stands bare.
@@ -1158,8 +1179,9 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
         // An opening bracket before it (「ドジ踏んだ」) describes nothing.
         const bool opens = pc == '6' && dict::InClass(HDTRANS_CLASS("mark.open-bracket"), items[i - 1]->group->surface);
+        // Before a noun of manner it describes the manner (正しい気の利かせ方).
         if (together && !opens &&
-            ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
+            ((describes && !c.modified && !nominal) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
             return false;
         }
     }
