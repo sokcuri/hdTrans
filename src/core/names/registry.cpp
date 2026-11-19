@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cctype>
 #include <initializer_list>
 #include <optional>
 #include <set>
@@ -15,6 +16,7 @@
 #include "core/names/chars.h"
 #include "core/text/utf8.h"
 #include "core/names/labels.h"
+#include "core/names/name_cues.h"
 #include "core/names/readings.h"
 #include "core/names/ruby.h"
 #include "core/text/hangul.h"
@@ -267,6 +269,20 @@ namespace {
 constexpr unsigned kNounClass = 1, kVerbClass = 2, kAdjectiveClass = 4, kAdjectivalNounClass = 8;
 
 }  // namespace
+
+// Whether s is a noun or a verb of the dictionaries, the words a call before an honorific makes a name of: no
+// adjectival noun (せっかち) and no stem of a する verb (うっかりする, のんびりする), the manner or act a person is
+// called by as a trait (うっかりさん; spec LEX-6301).
+bool Registry::CalledWordClass(std::string_view s) {
+    const unsigned c = WordClasses(s);
+    if ((c & (kNounClass | kVerbClass)) == 0 || (c & kAdjectivalNounClass) != 0) return false;
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(s, dict::LookupMode::General)) {
+        if (rec.codes == nullptr || rec.source != s) continue;
+        const std::string_view part = rec.codes->partText;
+        if (part.size() == 4 && part.starts_with("M4") && part[3] == '9') return false;
+    }
+    return true;
+}
 
 // The content-word classes of the words written s: noun, verb, adjective and adjectival
 // noun (N11, N12 and I11, M4, H7, G8), names and places left out.
@@ -1814,6 +1830,26 @@ bool Registry::JoinedAt(std::string_view line, std::size_t a, std::size_t b, con
     return false;
 }
 
+bool Registry::BareNameSlot(std::string_view line, std::size_t a, std::size_t b, const std::string& t) {
+    if (!AllRunes(t, IsHiragana)) return false;
+    // A mark: no kana, kanji, long mark, letter or digit.
+    const auto mark = [](char32_t c) {
+        return !IsHiragana(c) && !IsKatakana(c) && !IsKanji(c) && c != U'ー' && c != U'〜' && c != U'～' &&
+               !(c < 0x80 && std::isalnum(static_cast<unsigned char>(c))) && !(c >= U'０' && c <= U'ｚ');
+    };
+    if (a > 0 && !mark(internal::RuneBefore(line, a).cp)) return false;
+    std::string_view rest = line.substr(b);
+    // A call drawn out (ひかるー！) is a call.
+    while (!rest.empty() && InRunes(FirstRune(rest).cp, "ー〜～")) rest.remove_prefix(FirstRune(rest).size);
+    if (rest.empty() || mark(FirstRune(rest).cp)) return true;
+    const bool predicate = PredicateForm(t);
+    const auto particles = dict::ClassMembers(predicate ? HDTRANS_CLASS("name.bare-particle-predicate") : HDTRANS_CLASS("name.bare-particle"));
+    for (const std::string_view p : particles) {
+        if (rest.starts_with(p)) return true;
+    }
+    return false;
+}
+
 std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
     const std::map<std::string, Name>& acc = Accepted();
     std::vector<Occurrence> out;
@@ -1871,7 +1907,33 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         if (AllRunes(found, IsHiragana)) {
             ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing) || joined;
         }
-        const bool bare = acc.at(found).honorificOnly && !honorific;
+        // A name the document gives only before an honorific stands for the person bare too where a name
+        // stands: as the whole clause start before a mark or the line end, or before a particle of
+        // name.bare-particle; a predicate form (のぼる, ひかる) only before one of
+        // name.bare-particle-predicate, which no plain predicate form takes. A listed hon name stays one (spec LEX-6300).
+        // One that is also a common word (のぞみ, うみ, ひかり) is the person before a particle only where a
+        // person stands (PersonSlotAt: the subject or topic of what a person does; or of a coming or going,
+        // name.bare-person-move; or a trait of a person, adjective.character) or where no predicate follows (ひなたは？),
+        // and the word where the predicate takes a thing
+        // (のぞみが叶った, うみは広い; spec LEX-5175).
+        const auto bareSlot = [&] {
+            if (!BareNameSlot(line, a, b, found)) return false;
+            if (snap_ == nullptr || !Flags(found).common) return true;
+            std::string_view rest = line.substr(b);
+            while (!rest.empty() && InRunes(FirstRune(rest).cp, "ー〜～")) rest.remove_prefix(FirstRune(rest).size);
+            if (rest.empty() || !IsHiragana(FirstRune(rest).cp)) return true;
+            const std::string_view tail = rest.substr(FirstRune(rest).size);
+            if (tail.empty() || InRunes(FirstRune(tail).cp, "？?！!。」』）)…")) return true;
+            // って marks the topic as は does (なぎさって、優しいね).
+            const std::string topic = rest.starts_with("って") ? "は" + std::string(rest.substr(std::string_view("って").size())) : std::string(rest);
+            if (PersonSlotAt(*snap_, found, line.substr(0, a), topic)) return true;
+            // A coming or going, a trait of a person (なぎさって、優しいね) or a question for a person
+            // (なぎさって誰？) said of it (PersonSaidAt).
+            std::string_view said = std::string_view(topic).substr(FirstRune(topic).size);
+            if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
+            return InRunes(FirstRune(topic).cp, "がはも") && PersonSaidAt(said, FirstRune(topic).cp == U'は');
+        };
+        const bool bare = acc.at(found).honorificOnly && !honorific && (listed_.count(found) > 0 || !bareSlot());
         if (ok) {
             out.push_back(Occurrence{a, b, found, bare || (!joined && Guarded(line, a, b))});
         } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {

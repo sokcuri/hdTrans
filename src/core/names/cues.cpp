@@ -3,6 +3,7 @@
 // 名「」, 名：), the speaker cues of a line and the name runs of a line.
 #include <algorithm>
 #include <array>
+#include <initializer_list>
 #include <span>
 #include <string>
 #include <string_view>
@@ -895,6 +896,63 @@ bool Registry::PredicateForm(std::string_view run) {
     return found;
 }
 
+// Whether said, the rest of the clause after the particle of a bare common-word name, starts with what
+// is said of a person as a word of its own: a coming or going (name.bare-person-move), a trait of a
+// person (adjective.character) or, after は (topic), a question for a person that ends the clause
+// (name.person-question: なぎさって誰？). A member that starts a longer dictionary word of another
+// class is none (きたない, いっぱい, いきなり, くるくる; 優しさ), nor is a trait in its adverb form before
+// another predicate, which tells how that one goes (鈍く光った, 素直に頷いた; spec LEX-6300).
+bool Registry::PersonSaidAt(std::string_view said, bool topic) {
+    if (snap_ == nullptr) return false;
+    const auto ownWord = [&](std::size_t n, std::initializer_list<dict::WordClass> classes) {
+        const dict::Dict& base = snap_->Base();
+        int key = -1;
+        std::size_t longest = 0;
+        base.Prefixes(said, [&](int k, std::size_t m) {
+            if (m > longest) {
+                longest = m;
+                key = k;
+            }
+        });
+        if (longest <= n) return true;
+        bool kept = false;
+        base.EachRecord(key, [&](const dict::Record& rec) {
+            kept = rec.codes != nullptr && std::find(classes.begin(), classes.end(), rec.codes->part.Class()) != classes.end();
+            return !kept;
+        });
+        return kept;
+    };
+    using C = dict::WordClass;
+    if (const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.bare-person-move"), said); n > 0 && ownWord(n, {C::Verb, C::Ending})) {
+        return true;
+    }
+    if (const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("adjective.character"), said);
+        n > 0 && ownWord(n, {C::Verb, C::Ending, C::Adjective, C::AdjectivalNoun})) {
+        const std::string_view tail = said.substr(n);
+        for (const std::string_view adverb : {std::string_view("く"), std::string_view("に")}) {
+            if (!tail.starts_with(adverb)) continue;
+            // Not く or に before なる or ない, or く before て (優しくなった, 優しくない, 素直になって, 優しくて).
+            const std::string_view next = tail.substr(adverb.size());
+            if (!next.empty() && !next.starts_with("な") && !(adverb == "く" && next.starts_with("て")) &&
+                !InRunes(FirstRune(next).cp, "、。！？!?…‥」』）)")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    if (!topic) return false;
+    const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("name.person-question"), said);
+    if (n == 0) return false;
+    // The question ends the clause, or a copula or a final particle follows, but not 誰だって, 誰でも (anyone)
+    // nor 誰か before a particle (someone).
+    const std::string_view next = said.substr(n);
+    const auto end = [](std::string_view s) { return s.empty() || InRunes(FirstRune(s).cp, "、。！？!?…‥」』）)ー〜"); };
+    if (end(next)) return true;
+    if (next.starts_with("だって") || next.starts_with("でも")) return false;
+    if (next.starts_with("か")) return end(next.substr(std::string_view("か").size()));
+    return InRunes(FirstRune(next).cp, "だでなよじ");
+}
+
 namespace {
 
 // The vowel row (0..4) of a hiragana, -1 for none.
@@ -1497,12 +1555,57 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             if (withHonorific.size() % 2 == 0 && withHonorific.substr(0, withHonorific.size() / 2) == withHonorific.substr(withHonorific.size() / 2)) {
                 return false;
             }
-            // No word ends in the honorific from inside the run (をたくさん: たくさん).
+            // No word ends in the honorific from inside the run (をたくさん: たくさん); one kana with the honorific
+            // (さきさん: きさん) is such a word only after お or ご (spec LEX-6301).
             for (std::size_t b = 0; b < t.size(); b += RuneAt(t, b).size) {
+                const std::string_view tail = t.substr(b);
+                if (b > 0 && RuneCount(tail) == 1 && !InRunes(FirstRune(tail).cp, "おご")) continue;
                 if (Flags(std::string_view(withHonorific).substr(b)).records > 0) return false;
             }
             for (std::size_t e = RuneAt(t, 0).size; e < t.size(); e += RuneAt(t, e).size) {
                 if (e >= RuneAt(t, 0).size * 2 && Flags(t.substr(0, e)).records > 0) return false;
+            }
+            return true;
+        };
+        auto calledWord = [&](std::string_view t) {
+            const char32_t first = FirstRune(t).cp;
+            // No small っ, which drawn-out words take (たっくさん) and no name of this kind does.
+            if (first == U'お' || first == U'ご' || !AllRunes(t, IsHiragana) || RoleLike(t) ||
+                t.find("っ") != std::string_view::npos || dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), t)) {
+                return false;
+            }
+            // A verb in its dictionary form, which given names take (のぼる, ひかる, しげる), but no adjective's
+            // (えらいさん).
+            const bool verbForm = !t.ends_with("い") && PredicateForm(t);
+            const DictFlags f = Flags(t);
+            // A place noun only where the name layer has it too (さきさん 사키 씨; not うちさん).
+            if ((f.records == 0 && !verbForm) || f.role || f.thing || f.pronoun || f.human ||
+                (f.place && !f.layerGiven && !f.layerSurname) ||
+                !(verbForm || CalledWordClass(t))) {
+                return false;
+            }
+            // The honorific as written, not drawn out (ありがとちゃーん), and then a mark or a case particle: not ちゃんと
+            // (だからちゃんと) or くんな, くんだ, くんの, which also spell 来るな (ついてくんな). と after an honorific
+            // is the particle (わたるさんと会った) unless the two spell a word of honorific.and-word.
+            const std::string_view after = line.substr(pos);
+            if (!after.starts_with(h)) return false;
+            const std::string_view next = after.substr(h.size());
+            if (!next.empty() && IsHiragana(FirstRune(next).cp) && !InRunes(FirstRune(next).cp, "がはもをにへや") &&
+                !(FirstRune(next).cp == U'と' && !dict::InClass(HDTRANS_CLASS("honorific.and-word"), std::string(h) + "と"))) {
+                return false;
+            }
+            // Nor the whole run with the honorific a word, nor a word of two or more kana of the run's end with it
+            // (はたくさん: たくさん); one kana with the honorific (さきさん: きさん) belongs to the honorific only
+            // after お or ご, which make a word of it.
+            const std::string withHonorific = std::string(t) + std::string(h);
+            for (std::size_t b = 0; b < t.size(); b += RuneAt(t, b).size) {
+                const std::string_view tail = t.substr(b);
+                if (b > 0 && RuneCount(tail) == 1 && !InRunes(FirstRune(tail).cp, "おご")) continue;
+                if (Flags(std::string_view(withHonorific).substr(b)).records > 0) return false;
+            }
+            for (std::size_t b = 0; b < t.size(); b += RuneAt(t, b).size) {
+                if (InRunes(RuneAt(t, b).cp, "ぁぃぅぇぉゎ")) return false;
+                if (b > 0 && RuneAt(t, b).cp == RuneBefore(t, b).cp) return false;
             }
             return true;
         };
@@ -1527,6 +1630,15 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             const std::size_t n = RuneCount(run);
             if (n >= 2 && n <= 4 && unknown(run)) {
                 out.emplace_back(run);
+                continue;
+            }
+            // A common word or a verb form of two to four kana standing as the whole run before an
+            // honorific of a call (つきさん, のぼるさん, ひさしさん, うちださん): the name of a person there,
+            // not a person, role, creature, food or adverb word, a pronoun or a kin term, and no word with
+            // the honorific (みなさん) or ending in it (たくさん; spec LEX-6301).
+            if (n >= 2 && n <= 4 && dict::InClass(HDTRANS_CLASS("honorific.kana-call"), h) && calledWord(run)) {
+                out.emplace_back(run);
+                calledWords_.emplace(run);
                 continue;
             }
         }
@@ -1597,15 +1709,18 @@ bool Registry::Guarded(std::string_view line, std::size_t a, std::size_t b) {
         tail = tail.substr(0, k);
     }
     const char32_t next = FirstRune(rest).cp;
+    // A verb or adjective stem before an honorific is the name it calls (つきさん, さとるさん; spec LEX-6301).
+    const bool called = calledWords_.contains(t) && !KanaHonorificAt(rest).empty();
     dict::LookupContext ctx;
     ctx.plain = &snap_->Plain();  // Lexical guards use base rows, never additional plain endings.
     const dict::Candidates cands = snap_->GetWordInfo(tail, dict::LookupMode::General, ctx);
     for (const dict::Candidate& c : cands.list) {
         if (c.user != nullptr || c.codes == nullptr) continue;
         const bool person = c.codes->sem.Text().starts_with("QPN");
-        if (c.source.size() > t.size() && !person) return true;
+        const bool verb = !c.codes->part.Empty() && (c.codes->part.Tag() == 'M' || c.codes->part.Tag() == 'H');
+        if (c.source.size() > t.size() && !person && !(called && verb)) return true;
         if (c.source.size() == t.size() && !c.codes->part.Empty() &&
-            (c.codes->part.Tag() == 'M' || c.codes->part.Tag() == 'H') && IsHiragana(next) && !IsParticleRune(next)) {
+            (c.codes->part.Tag() == 'M' || c.codes->part.Tag() == 'H') && IsHiragana(next) && !IsParticleRune(next) && !called) {
             return true;
         }
     }
