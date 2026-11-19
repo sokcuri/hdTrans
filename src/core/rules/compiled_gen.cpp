@@ -162,12 +162,12 @@ bool RuleG220([[maybe_unused]] Item* p) {
 }
 
 // global 3 stem pos 4 prio 230
-//     (src == "あが" or src == "上が" or src == "あげ" or src == "上げ") and pos[-1] is 4** and end.pos[-1] is 58*|5:0 and sem[-1] lacks UMv and ko := "" and end.ko[-1] := end.ko
+//     (src == "あが" or src == "上が" or src == "あげ" or src == "上げ") and pos[-1] is 4** and end.pos[-1] is 58*|5:0 and sem[-1] lacks UMv and end.src[-1] not ends "ないで" and ko := "" and end.ko[-1] := end.ko
 bool RuleG230([[maybe_unused]] Item* p) {
     return ((SrcEq(p, 0, "あが"sv) ||
            SrcEq(p, 0, "上が"sv) ||
            SrcEq(p, 0, "あげ"sv) ||
-           SrcEq(p, 0, "上げ"sv)) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "58*5:0"sv) && AttrNe(p, -1, "UMv"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
+           SrcEq(p, 0, "上げ"sv)) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "58*5:0"sv) && AttrNe(p, -1, "UMv"sv) && GobiSrcNe(p, -1, "Rないで"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
 }
 
 // global 4 stem pos 4 prio 240
@@ -288,7 +288,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG200, 0x6b080de836eac7c3ull},
     {RuleG210, 0xb3957b1b2f2f5f2bull},
     {RuleG220, 0x2608949cebf02116ull},
-    {RuleG230, 0xac898bb258de8875ull},
+    {RuleG230, 0xd27f55c5d8b85746ull},
     {RuleG240, 0xa1900d31f3906c8bull},
     {RuleG250, 0x8266a0032983f64eull},
     {RuleG260, 0xec2ce21adb66f2fbull},

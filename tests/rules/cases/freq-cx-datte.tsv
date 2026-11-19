@@ -1,0 +1,33 @@
+# 규칙: GRM-4304
+rule	input	expected	kind	layer
+cx:freq-datte:22	「……それが勘違いなんだって」	has:착각이래	fix	rewrites
+cx:freq-datte:22	「それ、沖縄発祥なんだって」	has:발상이래	fix	rewrites
+cx:freq-datte:22	あるやさいの名前なんだって。	어느 야채의 이름이래.	fix	rewrites
+cx:freq-datte:22	結局、未解決なんだって。	결국, 미해결이래.	fix	rewrites
+cx:freq-datte:22	ナスのサラダっていう意味なんだって。	가지의 샐러드라는 의미래.	fix	rewrites
+cx:freq-datte:22	気分転換を図るのが一番なんだってさ。」	has:제일이래.	fix	rewrites
+cx:freq-datte:22	「だから、難しくない手術なんだって……」	has:수술이래……	fix	rewrites
+cx:freq-datte:22	今日は雨なんだって。	오늘은 비래.	fix	rewrites
+cx:freq-datte:22	提督なんだって。	제독이래.	fix	rewrites
+cx:freq-datte:22	美咲なんだって？	미사키래?	fix	rewrites
+cx:freq-datte:20	「蒼くんには、必要な時間なんだって……思ってたわ……」	has:시간이라고……생각했어	fix	rewrites
+cx:freq-datte:20	「いや……大変な世界なんだって思ったよ」	has:세계라고 생각했어	fix	rewrites
+cx:freq-datte:10	…わからないから…聞いてるんだって……。	has:듣고 있다고	fix	rewrites
+cx:freq-datte:10	「最近さ、マキナがフィジカルトレーニング頑張ってるんだって」	has:노력하고 있다고	fix	rewrites
+cx:freq-datte:10	「佳奈ちゃんの家で原稿書いてるんだって」	has:쓰고 있다고	fix	rewrites
+cx:freq-datte:10	手口は、恐ろしいほどに高度だったんだって。	lacks:었어는	fix	rewrites
+cx:freq-datte:32	「あ、足を引っ掛けてだって？！」	has:걸어서라고?!	fix	rewrites
+cx:freq-datte:30	帰っただって？	돌아갔다고?	fix	rewrites
+cx:freq-datte:40	確定だってんで、準備を始めた。	확정이라고 해서, 준비를 시작했다.	fix	rewrites
+cx:freq-datte:22	なんだって？	뭐라고?	keep	rewrites
+cx:freq-datte:22	なんだって!?	뭐라고!?	keep	rewrites
+cx:freq-datte:30	「初めてだって」	「처음이래」	keep	rewrites
+cx:freq-datte:30	私だって知ってる。	lacks:라고	keep	rewrites
+cx:freq-datte:30	子供だってできる。	아이라도 할 수 있다.	keep	rewrites
+cx:freq-datte:30	だって、仕方ないじゃない。	그치만, 어쩔 수 없잖아.	keep	rewrites
+cx:freq-datte:10	聞いてるって。	듣고 있다고.	keep	rewrites
+cx:freq-datte:20	なんだって言うの？	lacks:이라고	keep	rewrites
+cx:freq-datte:32	足を引っ掛けて転んだ。	발을 걸어 넘어졌다.	keep	rewrites
+cx:freq-datte:40	確定だって聞いた。	확정이라고 들었다.	keep	rewrites
+cx:freq-datte:20	本当に大切なことを打ち明けられる重要な存在なんだって、……あはは	has:존재라고, ……	fix	rewrites
+cx:freq-datte:20	ミサキなんだって、知らなかった。	has:미사키라고,	fix	rewrites
