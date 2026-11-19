@@ -44,6 +44,9 @@ struct RunLookup {
     // Whether stem, whole, is the stem (連用形) of an ichidan verb or of くる of the dictionary, the form that
     // ます follows (DialectForms: 見よる, 来やした, 持ってきやしょう); null for none.
     bool (*vowelStem)(const void* context, std::string_view stem) = nullptr;
+    // Whether stem, whole, is an adjectival noun of the dictionary and no noun, which the copula follows and
+    // a verb takes as no object (DialectForms: 大丈夫やった, 静かやった; not 一杯やろう); null for none.
+    bool (*naStem)(const void* context, std::string_view stem) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

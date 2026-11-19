@@ -2268,13 +2268,51 @@ constexpr std::u32string_view kAfterNounStarts = U"だでじよねなわ";
 // The kana that start a particle or the copula after a word.
 constexpr std::u32string_view kParticleStarts = U"だでじよねなわかのをがにはもとへや";
 
+// A small vowel kana of the vowel of the hiragana before it, at k, inside a run of kana that goes on after it
+// (こわぁい, 眠くなぁい, かぁわいそう, なぁるほど, まぁた回す): where the text m read without it reads a key from from..k-1 past
+// it, the end of the longest such key in m, else 0. Not before ん (うぅん, ねぇん), the plain kana of the vowel (ああぁ: a
+// cry) or a familiar honorific (しぃちゃん: a nickname); two or more small vowels are drawn marks (いたぁぁぁい). Where the
+// key starts inside the kana (the なぁ of だなぁいいね), the kana after the small vowel start no word of two kana or more
+// that the key does not take in. Where the key starts at the drawn kana and that starts a word, at the start of the
+// kana or after a whole word (the まぁ of まぁね, the か of これかぁなんだ, the なぁ of それなぁに), the key goes on past such
+// a word, and a key of one kana past the mark ends before a kanji or katakana (まぁた回す また; not まぁね 뭐 그렇지).
+size_t DrawnKanaEnd(const Emphasis& e, std::u32string_view rs, std::u32string_view m, size_t from, size_t k, size_t end) {
+    const int v = HiraganaVowel(rs[k - 1]);
+    if (v < 0 || end != k + 1 || rs[k] != kEmphasisVowels[v][0] || rs[end] == U'ん' || rs[end] == kEmphasisVowels[v][1] ||
+        Nickname(rs.substr(end))) {
+        return 0;
+    }
+    size_t best = 0, start = 0;
+    for (size_t j = from; j < k; j++) {
+        size_t n = e.LongestKey(m.substr(j));
+        // An adjective stem counts with the first kana of its ending (こわ|い of こわぁい).
+        if (j + n <= k && In(m[k], kAdjectiveEndingStarts) && e.Tags(m.substr(j, k - j)).find('H') != std::string::npos) n = k + 1 - j;
+        if (j + n > k && j + n > best) {
+            best = j + n;
+            start = j;
+        }
+    }
+    if (best == 0) return 0;
+    size_t word = start;  // the start of the run of kana and kanji
+    while (word > 0 && start - word < 6 && (IsHiraganaRune(rs[word - 1]) || IsKanjiRune(rs[word - 1]))) word--;
+    const bool inside = start > word && IsHiraganaRune(rs[start - 1]);
+    const bool spoken = start == k - 1 && (start == word || !e.Tags(rs.substr(word, start - word)).empty());
+    if (!inside && !spoken) return best;
+    size_t kana = end;
+    while (kana < rs.size() && IsHiraganaRune(rs[kana])) kana++;
+    const size_t own = e.LongestKey(rs.substr(end, kana - end));
+    if (own >= 2 && (spoken ? best <= k + own : best < k + own)) return 0;
+    if (spoken && best == k + 1 && (best >= m.size() || !(IsKanjiRune(m[best]) || IsKatakanaRune(m[best])))) return 0;
+    return best;
+}
+
 bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ctx, const dict::Snapshot& snap) {
     bool changed = false;
     const auto inWord = [](char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r); };
     for (size_t k = 1; k < rs.size(); k++) {
         const char32_t c = rs[k];
         const bool tilde = c == U'～' || c == U'〜';
-        const bool small = IsSmallVowel(c) && IsKanjiRune(rs[k - 1]);
+        const bool small = IsSmallVowel(c) && (IsKanjiRune(rs[k - 1]) || IsHiraganaRune(rs[k - 1]));
         if (!tilde && !small) continue;
         size_t end = k;
         while (end < rs.size() && rs[end] == c) end++;
@@ -2288,6 +2326,13 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
         // A kana said again before a word that starts with it is a stutter (お～お前, あ～あなた), no word
         // drawn out.
         const bool goodStem = next == U'い' && e.Tags(std::u32string_view(&prev, 1)).find('H') != std::string::npos;  // い～い
+        // い～い draws out いい; where a phrase starts and the whole いい follows, the い is said again, a
+        // stutter written with the comma that stutters say (い～いいね い、いいね 조, 좋네).
+        if (goodStem && end + 1 < rs.size() && rs[end + 1] == U'い' && (k == 1 || !inWord(rs[k - 2]))) {
+            rs.replace(k, end - k, U"、");
+            changed = true;
+            continue;
+        }
         if (prev == next && !goodStem && e.LongestKey(std::u32string_view(rs).substr(end)) >= 2) {
             k = end - 1;
             continue;
@@ -2315,9 +2360,13 @@ bool MidWordStretch(std::u32string& rs, const Emphasis& e, const LineContext& ct
         size_t best = 0;
         if (small) {
             m = rs.substr(0, k) + rs.substr(end);
-            if (m[k] == U'い') {
+            if (IsHiraganaRune(prev)) {
+                best = DrawnKanaEnd(e, rs, m, from, k, end);
+            } else if (m[k] == U'い') {
+                // An adjective stem, or a kanji the dictionary conjugates with the い (重ぉい 重い).
                 for (size_t j = from; j < k && best == 0; j++) {
-                    if (e.Tags(std::u32string_view(m).substr(j, k - j)).find('H') != std::string::npos) best = k + 1;
+                    const std::u32string_view stem = std::u32string_view(m).substr(j, k - j);
+                    if (e.Tags(stem).find('H') != std::string::npos || ConjugatesFrom(snap, stem, std::u32string_view(m).substr(k)) == 2) best = k + 1;
                 }
             }
         } else if (IsKatakanaRune(prev)) {
@@ -3381,6 +3430,26 @@ bool SpacedWord(const Emphasis& e, std::u32string_view w) {
     if (n == 0) return false;
     if (n == w.size() || (n >= 2 && SpelledTail(w.substr(n)) && w.size() - n <= 3)) return true;
     return stem && std::all_of(w.begin() + n, w.end(), [](char32_t c) { return In(c, U"てでたっまします んだいうかよねなのわぞさければ"); });
+}
+
+std::string WriteSpacedStutters(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find(' ') == std::string_view::npos && text.find("　") == std::string_view::npos) return std::string(text);
+    std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    const auto space = [](char32_t r) { return r == U' ' || r == U'　'; };
+    bool changed = false;
+    for (size_t i = 0; i + 3 < rs.size(); i++) {
+        if (!IsHiraganaRune(rs[i]) || In(rs[i], U"ぁぃぅぇぉゃゅょゎっん") || !space(rs[i + 1]) || rs[i + 2] != rs[i]) continue;
+        // An interjection stays a cry before the word (あ あなた 아 당신).
+        if (dict::InClass(HDTRANS_CLASS("sound.stutter-interjection"), EncodeText(ToKatakana(std::u32string_view(rs).substr(i, 1))))) continue;
+        if (i > 0 && !In(rs[i - 1], U"\n「『（(“‘〈《【。、，！？!?…‥―─—）)」』")) continue;
+        size_t kana = i + 2;
+        while (kana < rs.size() && IsHiraganaRune(rs[kana])) kana++;
+        if (e.LongestKey(std::u32string_view(rs).substr(i + 2, kana - i - 2)) < 2) continue;
+        rs.erase(i, 2);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
 }
 
 std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {

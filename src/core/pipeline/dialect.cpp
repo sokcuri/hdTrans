@@ -69,6 +69,8 @@ bool VowelStemIs(std::string_view stem) { return gRuns != nullptr && gRuns->vowe
 
 bool IsWord(std::string_view text) { return gRuns != nullptr && gRuns->word != nullptr && gRuns->word(gRuns->context, text); }
 
+bool NaStemIs(std::string_view stem) { return gRuns != nullptr && gRuns->naStem != nullptr && gRuns->naStem(gRuns->context, stem); }
+
 bool AdjectiveIs(std::string_view stem) {
     return gRuns != nullptr && gRuns->adjectiveStem != nullptr && gRuns->adjectiveStem(gRuns->context, stem);
 }
@@ -349,10 +351,13 @@ size_t KanaNounEnd(std::string_view head) {
 // in kana of class copula.kansai-past-noun (ほんまやった, そうやった) or before the Kansai んか, んや and やん.
 bool YaPast(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
-    if (!YaFollows(head) || head.ends_with("こう") || head.ends_with("ああ")) return false;
-    size_t p = pos;
     // Not the stem of a verb in やす (冷やし, 費やし, 燃やし).
     const std::string_view stem = StemBefore(s, pos);
+    // An adjectival noun in kanji that is no noun is no object of やる either (大丈夫やった 괜찮았다, 静かやったら; not
+    // 一杯やった, a drink).
+    const bool adjectival = !stem.empty() && NaStemIs(stem);
+    if ((!YaFollows(head) && !adjectival) || head.ends_with("こう") || head.ends_with("ああ")) return false;
+    size_t p = pos;
     if (s.substr(pos).starts_with("やし") && VerbIs(Cat({stem.empty() ? head.substr(head.size() - LastRune(head).size) : stem, "やす"}))) return false;
     if (Lit(s, p, "やし")) {
         size_t q = p;
@@ -370,7 +375,7 @@ bool YaPast(std::string_view s, size_t pos, Match& m) {
     p = pos;
     if (!Lit(s, p, "やった")) return false;
     const bool kansai = s.substr(p).starts_with("んか") || s.substr(p).starts_with("んや") || s.substr(p).starts_with("やん");
-    if (!kana && !kansai) return false;
+    if (!kana && !adjectival && !kansai) return false;
     // What follows is a conditional, an explanation, a conjunction or a sentence particle (not やったげる, やってあげる).
     {
         bool goes = EndAt(s, p) || FinalParticleEnd(s, p) != std::string_view::npos;
@@ -396,9 +401,10 @@ bool YaPast(std::string_view s, size_t pos, Match& m) {
 }
 
 bool YaCopula(std::string_view s, size_t pos, Match& m) {
-    // Every match starts with one of its forms, やと, or the やし and やった of YaPast.
+    // Every match starts with one of its forms, やと, the やし and やった of YaPast, or やろう after an adjectival noun.
     if (const std::string_view rest = s.substr(pos); !StartsWithForm(s, pos, kYaAfterPredicate) && !StartsWithForm(s, pos, kYaForms) &&
-                                                     !rest.starts_with("やと") && !rest.starts_with("やし") && !rest.starts_with("やった")) {
+                                                     !rest.starts_with("やと") && !rest.starts_with("やし") && !rest.starts_with("やった") &&
+                                                     !rest.starts_with("やろう")) {
         return false;
     }
     const std::string_view head = s.substr(0, pos);
@@ -439,6 +445,12 @@ bool YaCopula(std::string_view s, size_t pos, Match& m) {
     }
     if (s.substr(pos).starts_with("やけど") && (s.substr(0, pos).ends_with("大") || s.substr(0, pos).ends_with("火"))) return false;
     if (YaPast(s, pos, m)) return true;
+    // After an adjectival noun in kanji やろう is the guess だろう (大丈夫やろう 괜찮겠지), not the volitional of やる.
+    if (const std::string_view stem = StemBefore(s, pos); !stem.empty() && NaStemIs(stem) && s.substr(pos).starts_with("やろう")) {
+        m.group[1] = "だろう";
+        m.end = pos + std::string_view("やろう").size();
+        return true;
+    }
     // Forms the spoken forms already read: やろ, やねん.
     for (const std::string_view w : {"やろ", "やし", "やねん", "やや"}) {
         if (s.substr(pos).starts_with(w)) return false;
