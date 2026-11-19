@@ -1488,20 +1488,41 @@ bool ExclamationNa(std::string_view s, size_t pos, Match& m) {
         });
     };
     constexpr std::u32string_view excluded = U"\t\n\f\r 、。！？!?…‥「」『』";
-    auto afterRun = [&](size_t p, size_t min, size_t max) {
+    // Whether s[from, to) holds the end of a conditional clause (ending.conditional-in-clause: 惜しければ, 読んだら,
+    // あるなら): the が before it is the subject of that clause, and the な of the verb after it is a
+    // prohibition (命が惜しければ動くな), not the exclamation. A bare たら or ても (ending.conditional-after-joint)
+    // counts only at a conjugation joint: after a kanji, a kana of the i or e row, っ or く (降ったら, 食べても,
+    // 高くても), not inside とても or やたら. Words of ending.conditional-lookalike (例えば, なんでも) are skipped.
+    auto conditionalIn = [&](size_t from, size_t to) {
+        for (size_t i = from; i < to; ++i) {
+            const std::string_view tail = s.substr(i, to - i);
+            if (const size_t n = dict::StartsWithMember(HDTRANS_CLASS("ending.conditional-lookalike"), tail); n > 0) {
+                i += n - 1;
+                continue;
+            }
+            if (dict::StartsWithMember(HDTRANS_CLASS("ending.conditional-in-clause"), tail) > 0) return true;
+            if (i > from && dict::StartsWithMember(HDTRANS_CLASS("ending.conditional-after-joint"), tail) > 0) {
+                const char32_t b = LastRune(s.substr(from, i - from)).cp;
+                if (IsKanjiClass(b) || In(b, U"いきぎしじちにひびみりえけげせぜてでねへべめれっく")) return true;
+            }
+        }
+        return false;
+    };
+    auto afterRun = [&](size_t p, size_t min, size_t max, bool clause) {
         // Try shorter rune runs before longer ones.
+        const size_t start = p;
         for (size_t count = 0;; ++count) {
             if (count >= min) {
                 size_t q = p;
-                if (OneOf(s, q, U"うくぐすつぬぶむる") && rest(q)) return true;
+                if (OneOf(s, q, U"うくぐすつぬぶむる") && !(clause && conditionalIn(start, p)) && rest(q)) return true;
             }
             if (count == max || !NoneOf(s, p, excluded)) return false;
         }
     };
     size_t p = pos;
-    if (NoneOf(s, p, U"\t\n\f\r 、。！？!?…‥「」『』（") && Lit(s, p, "が") && afterRun(p, 1, 8)) return true;
+    if (NoneOf(s, p, U"\t\n\f\r 、。！？!?…‥「」『』（") && Lit(s, p, "が") && afterRun(p, 1, 8, true)) return true;
     p = pos;
-    if (Lit(s, p, "よく") && afterRun(p, 0, 4)) return true;
+    if (Lit(s, p, "よく") && afterRun(p, 0, 4, false)) return true;
     for (std::string_view stem : kExclamationNaStems) {
         p = pos;
         if (Lit(s, p, stem) && rest(p)) return true;
