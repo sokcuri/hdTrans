@@ -41,6 +41,11 @@ std::string ReplaceAll(std::string_view s, Pattern p, Replace replace) {
     return out;
 }
 
+// The start of the run of runes for which in holds that ends at pos in s. While a Find runs over a text
+// that s starts (s is the text or a start of it), the run found last for in is remembered, so asking
+// at places that only grow walks the text once instead of once per place.
+size_t RunStartBefore(std::string_view s, size_t pos, bool (*in)(char32_t));
+
 // The groups of the leftmost match of p in the matched text m alone.
 Match Rematch(const Match& m, Pattern p);
 

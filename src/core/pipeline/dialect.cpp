@@ -77,10 +77,9 @@ bool AdjectiveIs(std::string_view stem) {
 
 // The stem of a verb or adjective in kanji before pos: the kanji run and the kana after it up to pos.
 std::string_view StemBefore(std::string_view s, size_t pos) {
-    size_t start = pos;
-    while (start > 0 && IsHiraganaClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
+    size_t start = RunStartBefore(s, pos, IsHiraganaClass);
     if (start == 0 || !IsKanjiClass(LastRune(s.substr(0, start)).cp)) return {};
-    while (start > 0 && IsKanjiClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
+    start = RunStartBefore(s, start, IsKanjiClass);
     return s.substr(start, pos - start);
 }
 
@@ -576,8 +575,7 @@ bool KyushuAdjective(std::string_view s, size_t pos, Match& m) {
     std::string_view stem = StemBefore(s, pos);
     if (stem.empty()) {
         // A stem in kana after a mark, a space or the start of the sentence (よか声 よい声, つらかでしょう).
-        size_t start = pos;
-        while (start > 0 && IsHiraganaClass(LastRune(s.substr(0, start)).cp)) start -= LastRune(s.substr(0, start)).size;
+        const size_t start = RunStartBefore(s, pos, IsHiraganaClass);
         const std::string_view before = s.substr(0, start);
         if (!before.empty() && IsKatakanaRune(LastRune(before).cp)) return false;
         stem = s.substr(start, pos - start);
@@ -588,7 +586,7 @@ bool KyushuAdjective(std::string_view s, size_t pos, Match& m) {
             !VerbIs(Cat({word, "る"}))) {
             stem = stem.substr(stem.size() - std::string_view("よ").size());
         }
-        if (stem.empty() || (stem != "よ" && (text::RuneCount(stem) < 2 || !AdjectiveIs(stem)))) return false;
+        if (stem.empty() || (stem != "よ" && (stem.size() <= text::DecodeRune(stem).size || !AdjectiveIs(stem)))) return false;
         // A past or a verb form before the か of a question (きたか, したか) is no adjective stem.
         if (In(LastRune(stem).cp, U"ただてでるうくすつぬむぶぐ")) return false;
     } else if (const std::string_view word = stem.substr(0, stem.size() - std::min(stem.size(), std::string_view("よ").size()));
