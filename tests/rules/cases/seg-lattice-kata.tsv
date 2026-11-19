@@ -1,0 +1,27 @@
+rule	input	expected	kind	layer
+segmentation:lattice-kata	定期券 (ハレカ定期券)	has:하레카	fix	lookup
+segmentation:lattice-kata	ヨンホは、イ・ソヨンの兄だ。	has:욘호는	fix	lookup
+segmentation:lattice-kata	「魔法少女がハリホのお悩みを解決してあげればいいんだよ！！」	has:하리호의	fix	lookup
+segmentation:lattice-kata	ハリホが笑った。	has:하리호가	fix	lookup
+segmentation:lattice-kata	「カモン、ホーミータイ」	has:호미타이	fix	lookup
+segmentation:lattice-kata	風呂桶に湯を入れ、生意気な背中にザバッとかける。	has:자밧	fix	lookup
+segmentation:lattice-kata	ザバッ──海から敵基地へと上陸した。	has:자밧	fix	lookup
+segmentation:lattice-kata	ハッと我に返った俺は、ザザザっと後ずさった。	has:자자자	fix	lookup
+segmentation:lattice-kata	楽勝、ハラヒレホヒヒ～！！	has:하라히레호히히	fix	lookup
+segmentation:lattice-kata	ハピライン連携の切符	has:하피라인	fix	lookup
+segmentation:lattice-kata	「ウソウソ！」	has:거짓말 거짓말	keep	lookup
+segmentation:lattice-kata	そうそうコレコレ！	has:이것 이것	keep	lookup
+segmentation:lattice-kata	ダメダメ	has:안 돼 안 돼	keep	lookup
+segmentation:lattice-kata	メモメモ	has:메모 메모	keep	lookup
+segmentation:lattice-kata	ボスッス	lacks:보숫스	keep	lookup
+segmentation:lattice-kata	ボクハマリオ	lacks:보크	keep	lookup
+segmentation:lattice-kata	ジャーニーズクラブの若手のアイドル	lacks:전기밥통	keep	lookup
+segmentation:lattice-kata	ゴールドアーキッドの花。	lacks:도아	keep	lookup
+segmentation:lattice-kata	フルーティング城砦をよくぞ守ってくれた	lacks:프루 팅	keep	lookup
+segmentation:lattice-kata	マイクロフトはあなたがつけたはず	lacks:마이크 로프트	keep	lookup
+segmentation:lattice-kata	「光魔法………サウザンドホワイトレイ！！」	lacks:WHY	keep	lookup
+segmentation:lattice-kata	私が考えたルイザの設定が、バートラムおじさんの同意を得られたみたいだった。	lacks:바 트램	keep	lookup
+segmentation:lattice-kata	「ママーーー！」	has:엄마	keep	lookup
+segmentation:lattice-kata	ビザー米を取る。	has:비자	keep	lookup
+segmentation:lattice-kata	ドクターゴフマンが来た。	has:닥터	keep	lookup
+segmentation:lattice-kata	「コ、コレハ……ナミ、ダ……」	lacks:코레하	keep	lookup

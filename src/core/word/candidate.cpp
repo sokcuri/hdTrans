@@ -2143,6 +2143,7 @@ bool Worker::Dispatch(int i, int& last) {
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
         else {
             const Item* const mark = chain.tail;
+            segDecided_ = false;
             BuildSurfaceTransform(i, left);
             if (SegShadowOn() || settings.splitWhy) SegReport(i, left, mark);
         }
@@ -3895,8 +3896,13 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text) records = KanaNounOverOneKanaStem(full, cursor, token, records);
     if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
-    if (settings.text) records = KatakanaRunWhole(*this, records, full, static_cast<std::size_t>(cursor), token);
-    if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+    if (settings.text) {
+        // LEX-6723: where neither katakana reorder moved the first record (the order is the lookup's).
+        const Record* const incoming = records;
+        records = KatakanaRunWhole(*this, records, full, static_cast<std::size_t>(cursor), token);
+        records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
+        if (records == incoming && snapshot.SegCostTable().loaded) records = LatticeKatakana(records, full, cursor, token);
+    }
     if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
