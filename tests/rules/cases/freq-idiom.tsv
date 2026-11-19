@@ -1,0 +1,124 @@
+# 규칙: LEX-7350, LEX-7351, LEX-7352
+rule	input	expected	kind	layer
+dict:freq-idiom	体内深くに潜んでいた『何か』が、凶悪な産声を上げた。	has:흉악한 첫울음을 터뜨렸다	fix	lookup
+dict:freq-idiom	赤ん坊が元気な産声をあげた。	has:첫울음을 터뜨렸다	fix	lookup
+dict:freq-idiom	新しい時代が産声を上げる。	has:첫울음을 터뜨린다	fix	lookup
+dict:freq-idiom	産声を 上げる。	has:첫울음을 터뜨린다	fix	pack
+dict:freq-idiom	その産声は小さかった。	has:첫 울음소리는	keep	lookup
+dict:freq-idiom	ひくっと喉が鳴った。	has:목에서 소리가 났다	fix	lookup
+dict:freq-idiom	猫が喉を鳴らしている。	has:목을 울리고	fix	lookup
+dict:freq-idiom	顎が外れた。	has:턱이 빠졌다	fix	lookup
+dict:freq-idiom	あごが外れそうになる。	has:턱이 빠질	fix	lookup
+dict:freq-idiom	顎が 外れそうだった。	has:턱이 빠질 것 같았다	fix	pack
+dict:freq-idiom	蛇がとぐろを巻いている。	has:똬리를 틀고 있다	fix	lookup
+dict:freq-idiom	とぐろを 巻いていた。	has:똬리를 틀고 있었다	fix	pack
+dict:freq-idiom	やけになるな。	has:자포자기하지 마	fix	lookup
+dict:freq-idiom	やけになって酒を飲んだ。	has:자포자기해	fix	lookup
+dict:freq-idiom	猫がやけになついている。	has:유난히 따르고	keep	lookup
+dict:freq-idiom	今日はやけに暑い。	has:유난히 덥다	keep	lookup
+dict:freq-idiom	この程度の敵など物の数ではない。	has:대수롭지 않다	fix	lookup
+dict:freq-idiom	物の数じゃないよ。	has:대수롭지 않아	fix	lookup
+dict:freq-idiom	物の数を数える。	has:물건의 수를	keep	lookup
+dict:freq-idiom	彼は灰と化した。	has:재로 변했다	fix	lookup
+dict:freq-idiom	街は廃墟と化していた。	has:폐허로 변하고	fix	lookup
+dict:freq-idiom	渾身の力で、肉塊と化した身体を這わせる。	has:살덩이로 변한	fix	lookup
+dict:freq-idiom	焦土と化した。	has:불바다가 되었다	keep	lookup
+dict:freq-idiom	文化と歴史。	has:문화와 역사	keep	lookup
+dict:freq-idiom	彼の言葉を当てにしてはいけない。	has:믿어선 안 된다	fix	lookup
+dict:freq-idiom	人をあてにするな。	has:믿지 마	fix	lookup
+dict:freq-idiom	あいつはあてにならない。	lacks:목표	keep	lookup
+dict:freq-idiom	初対面の相手だとガン付けたりする。	has:노려보거나	fix	lookup
+dict:freq-idiom	ガンを 付けてきた。	has:노려봐	fix	pack
+dict:freq-idiom	レールガンを撃つ。	has:레일건을 쏜다	keep	lookup
+dict:freq-idiom	不同意性交の罪に問われた被告。	has:비동의 성교의 죄를 추궁받은 피고	fix	lookup
+dict:freq-idiom	罪に問われることはない。	has:죄를 추궁받을	fix	lookup
+dict:freq-idiom	彼を罪に問うことはできない。	has:죄를 물을 수 없다	keep	lookup
+dict:freq-idiom	レッテルを貼られた。	has:딱지가 붙었다	fix	lookup
+dict:freq-idiom	彼に無能のレッテルを貼る。	has:무능의 딱지를 붙인다	fix	lookup
+dict:freq-idiom	国に身を捧げる。	has:몸을 바친다	fix	lookup
+dict:freq-idiom	運命に身を委ねた。	has:몸을 맡겼다	fix	lookup
+dict:freq-idiom	身を すっかり委ねた。	has:몸을 완전히 맡겼다	fix	pack
+dict:freq-idiom	提灯を持って歩く。	has:초롱을 들어	fix	lookup
+dict:freq-idiom	腹を切って詫びる。	has:배를 갈라	fix	lookup
+dict:freq-idiom	寸暇を惜しんで勉強した。	has:촌음을 아껴	fix	lookup
+dict:freq-idiom	疑念が頭をもたげる。	has:고개를 든다	fix	lookup
+dict:freq-idiom	人を顎で使うな。	has:턱으로 부리지 마	fix	lookup
+dict:freq-idiom	技術が身に付く。	has:몸에 밴다	fix	lookup
+dict:freq-idiom	習慣が身についた。	has:몸에 배었다	fix	lookup
+dict:freq-idiom	癖が強い。	has:버릇이 강하다	keep	lookup
+dict:freq-idiom	足元を見ると水たまりがあった。	has:발밑을 보니	fix	lookup
+dict:freq-idiom	足元を見られた。	has:약점을 잡혔다	keep	lookup
+dict:freq-idiom	足元に気をつけて。	has:발밑을 조심해	keep	lookup
+dict:freq-idiom	泡を吹いて倒れた。	has:거품을 물어 쓰러졌다	fix	lookup
+dict:freq-idiom	泡を立てる。	has:거품을 낸다	keep	lookup
+dict:freq-idiom	心に火が付いた。	has:마음에 불이 붙었다	fix	lookup
+dict:freq-idiom	時を見て話す。	has:때를 봐	fix	lookup
+dict:freq-idiom	お世辞にも上手いとは言えない。	has:빈말로도	fix	lookup
+dict:freq-idiom	よし！お先です！	has:먼저 실례합니다	fix	lookup
+dict:freq-idiom	お先に失礼します。	has:먼저 실례하겠습니다	keep	lookup
+dict:freq-idiom	お先真っ暗だ。	has:앞날이 캄캄하다	fix	lookup
+dict:freq-idiom	僕 お燗が好きだから お燗酒で	has:데운 술을 좋아하니까	fix	lookup
+dict:freq-idiom	お燗をつけてくれ。	has:술을 데워 줘	keep	lookup
+dict:freq-idiom	熱燗を一本。	has:데운 술을	keep	lookup
+dict:freq-idiom	お見送りまでしてくれてありがとう！	has:배웅까지	fix	lookup
+dict:freq-idiom	計画は見送りになった。	has:보류되었다	keep	lookup
+dict:freq-idiom	お手ごろ価格でいただけ、家族で楽しめる。	has:적당한 가격	fix	lookup
+dict:freq-idiom	主人公のお役御免！	has:임무 해제	fix	lookup
+dict:freq-idiom	やっぱり いい子！お近づきのしるしに これを。	has:알게 된 기념	fix	lookup
+dict:freq-idiom	お近づきになりたい。	has:친해지고 싶다	fix	lookup
+dict:freq-idiom	お人形さんを作る。	lacks:분형	keep	lookup
+dict:freq-idiom	お人好しだね。	has:호인이구나	keep	lookup
+dict:freq-idiom	お金がない。	has:돈이 없다	keep	lookup
+dict:freq-idiom	お前の顔を見た。	has:네 얼굴을	keep	lookup
+dict:freq-idiom	お茶を飲む。	has:차를 마신다	keep	lookup
+dict:freq-idiom	お座りください。	has:앉아 주세요	keep	lookup
+dict:freq-idiom	お手上げだ。	has:포기다	keep	lookup
+dict:freq-idiom	ならばせめて、正しい気の利かせ方なのかもしれない。	has:올바른 배려하는 방법	fix	pack
+dict:freq-idiom	気の利かせ方を学ぶ。	has:배려하는 방법을 배운다	fix	pack
+dict:freq-idiom	ハメの外し方を知らない若者。	has:도를 넘는 방법	fix	pack
+dict:freq-idiom	羽目の外し方。	has:도가 지나치는 방법	fix	pack
+dict:freq-idiom	気の遣い方がうまい。	has:배려를 하는 방법	fix	pack
+dict:freq-idiom	頭の下げ方がなってない。	has:고개를 숙이는 방법	fix	pack
+dict:freq-idiom	声の掛け方が上手い。	has:말을 거는 방법	keep	pack
+dict:freq-idiom	眼鏡の外し方がわからない。	lacks:도를	keep	pack
+dict:freq-idiom	本の読み方。	lacks:방법의	keep	pack
+dict:freq-idiom	口の利き方に気をつけろ。	has:말버릇을 조심해라	keep	pack
+dict:freq-idiom	とぐろさんが来た。	has:토구로 씨가	keep	lookup
+dict:freq-idiom	骨格や肉の付き方でも変わります	has:살이 붙는 방법	fix	pack
+dict:freq-idiom	仕方ありません。お力添えましょう。	lacks:곁들	keep	lookup
+dict:freq-idiom	爪を噛む癖がない。	has:버릇이 없다	keep	lookup
+dict:freq-idiom	お見送りします。	has:배웅해 드리	keep	lookup
+dict:freq-idiom	お見送りいたします。	has:배웅해 드리	keep	lookup
+dict:freq-idiom	お見送りしましょう。	has:배웅해 드릴	keep	lookup
+dict:freq-idiom	お見送りに来てくれた。	has:배웅하러	keep	lookup
+dict:freq-idiom	駅までお見送りに行きます。	has:배웅하러 갑니다	keep	lookup
+dict:freq-idiom	社長をお見送りする。	has:사장을 배웅한다	keep	lookup
+dict:freq-idiom	お見送りの際に	has:배웅 시에	fix	lookup
+dict:freq-idiom	皆様のお見送りを受けて出発した。	has:배웅을 받아	fix	lookup
+dict:freq-idiom	空港での見送りは寂しい。	has:배웅은	fix	lookup
+dict:freq-idiom	今回の件は見送りとなった。	has:보류가 되었다	keep	lookup
+dict:freq-idiom	足の洗い方を教える。	lacks:손을 떼	keep	pack
+dict:freq-idiom	油の搾り方が昔と違う。	lacks:족치	keep	pack
+dict:freq-idiom	水の差し方にコツがある。	lacks:찬물	keep	pack
+dict:freq-idiom	首の切り方	lacks:파면	keep	pack
+dict:freq-idiom	骨の折り方	lacks:애쓰	keep	pack
+dict:freq-idiom	子供の尻の叩き方	lacks:격려	keep	pack
+dict:freq-idiom	袋の口の切り方が分からない。	lacks:말문	keep	pack
+dict:freq-idiom	電気の付け方が分からない。	lacks:조심	keep	pack
+dict:freq-idiom	空気の入れ方を教えて。	lacks:정성	keep	pack
+dict:freq-idiom	気の利かせようがない。	lacks:배려하자	keep	pack
+dict:freq-idiom	腹の据え方が違う。	has:각오하는 방법	fix	pack
+dict:freq-idiom	口の挟みようがない。	has:말참견할 수가	fix	pack
+dict:freq-idiom	喉の鳴らし方が猫みたいだ。	has:목을 울리는 방법	fix	pack
+dict:freq-idiom	声の掛け方が上手い。	has:말을 거는 방법	fix	pack
+dict:freq-idiom	気の配り方を学ぶ。	has:배려하는 방법	fix	pack
+dict:freq-idiom	気の使い方	has:신경 쓰는 방법	fix	lookup
+dict:freq-idiom	レッテルを張られた。	has:딱지가 붙었다	fix	lookup
+dict:freq-idiom	レッテルを張る。	has:딱지를 붙인다	fix	lookup
+dict:freq-idiom	お近づきの印に、これを。	has:알게 된 기념으로	fix	lookup
+dict:freq-idiom	お近づきのしるしに、これを。	has:알게 된 기념으로	fix	lookup
+dict:freq-idiom	のどを鳴らした。	has:목을 울렸다	fix	lookup
+dict:freq-idiom	喉をならした。	has:목을 울렸다	fix	lookup
+dict:freq-idiom	のどを ゴクリと鳴らした。	has:목을 꿀꺽 울렸다	fix	pack
+dict:freq-idiom	燗太が笑った。	lacks:데운 술	keep	lookup
+dict:freq-idiom	お金がない。	has:돈이 없다	keep	lookup

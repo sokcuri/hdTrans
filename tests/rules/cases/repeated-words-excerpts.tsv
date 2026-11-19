@@ -49,7 +49,7 @@ lookup:copies-interjection	とうとう俺の夢はここまできて	드디어 
 lookup:copies-interjection	はいはい、いいから遅刻しちゃ	네네, 됐으니까 지각하면	keep	lookup
 lookup:copies-interjection	まあまあ。	자자.	keep	lookup
 lookup:copies-interjection	じゃ、じゃあ、また明日ね	그, 그럼, 내일 보자	keep	lookup
-lookup:copies-interjection	と化した食堂は、わいわいといつになく騒がしい。	화한 식당은, 와글와글 평소와 다르게 소란스럽다.	keep	lookup
+lookup:copies-interjection	と化した食堂は、わいわいといつになく騒がしい。	has:와글와글 평소와 다르게 소란스럽다.	keep	lookup
 lookup:copies-interjection	なかなか興味深い展開でしたね。	꽤 흥미로운 전개였죠.	keep	lookup
 lookup:copies-conjunction	でも、でも……あああ、おケガは	하지만, 하지만……아아아, 상처는	keep	lookup
 lookup:copies-conjunction	でもでも、みんなに言うのって	하지만 하지만, 모두에게 말하는 것은	fix	rewrites
