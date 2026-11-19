@@ -110,12 +110,13 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     }
     p = pos;
     if (OneOf(s, p, U"見来出居寝似着") && tail(p, true, false)) return true;
-    // いる in kana where a line starts or after the particle も, は, が, に, しか or the adverbs もう, まだ
-    // (誰もいねぇ、, ここにはいねー, もういねえよ; not the 稲 of いね), also before a mark.
+    // いる in kana where a line starts, after the particle も, は, が, に, しか or the adverbs もう, まだ, or after a て form
+    // (誰もいねぇ、, ここにはいねー, もういねえよ, 入っていねえ; not the 稲 of いね), also before a mark.
     p = pos;
     if (const std::string_view before = s.substr(0, pos);
         (pos == 0 || before.ends_with("も") || before.ends_with("は") || before.ends_with("が") || before.ends_with("に") ||
-         before.ends_with("しか") || before.ends_with("もう") || before.ends_with("まだ")) &&
+         before.ends_with("しか") || before.ends_with("もう") || before.ends_with("まだ") || before.ends_with("て") ||
+         before.ends_with("で")) &&
         Lit(s, p, "い")) {
         m.group[1] = Span(s, pos, p);
         if (Lit(s, p, "ね") && OneOf(s, p, U"ぇえー") &&

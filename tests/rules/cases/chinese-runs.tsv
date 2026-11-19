@@ -60,7 +60,7 @@ protect:chinese-run	また実現を目指して政治的意思決定のために
 protect:chinese-run	敵に積極的意思があれば	적에게 적극적 의사가 있으면	keep	protect
 protect:chinese-run	政治的意思があれば 解決できる	정치적 의사가 있으면 해결할 수 있다	keep	protect
 protect:chinese-run	あんな途中登場して 何もせんて珍しいよ	저런 도중 등장해 아무것도 라고 드물어	keep	protect
-protect:chinese-run	羽香里と唐音同士もキスすることになっちゃうんだよ	날개 고리와 당음끼리도 키스하게 되어버리는 이야	keep	protect
+protect:chinese-run	羽香里と唐音同士もキスすることになっちゃうんだよ	has:날개 고리와 당음끼리도	keep	protect
 protect:chinese-run	しかし 雑音同様です 聞いた事が有りますか?	has:들었던 것이 있습니까?	keep	protect
 protect:chinese-run	彼らは自己的な情報で 出来るだけコピーされます	그들은 자기적인 정보로 가능한 한 복사 됩니다	keep	protect
 protect:chinese-run	全て 音同士の数学的比率で表される	모두 소리끼리의 수학적 비율로 나타내진다	keep	protect

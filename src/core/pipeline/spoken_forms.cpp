@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <span>
 #include <utility>
 
@@ -223,6 +224,22 @@ bool ContractedTeru(std::string_view s, size_t pos, Match& m) {
 // 何ってんだ, どうしたってんだ, 魔女だってんだろ), as group 1 the word after ん and as group 2 a copula だ before って, after
 // a word. Whether a word before って quotes or is a verb whose て form the っ makes is left to the replacement, which has
 // the dictionary (GodanTeStem).
+// The ん of a contracted ている or of んだ written in katakana after a て form, for stress in rough speech (何やってンだ,
+// 知ってンのか, ふざけてンじゃねえ, 殺しちまってンだぞ): ん, which the forms of てん read.
+bool KataTeN(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    const size_t at = p;
+    if (!Lit(s, p, "ン")) return false;
+    for (const std::string_view w : {"だ", "の", "じゃ", "です", "でしょ", "す"}) {
+        if (!s.substr(p).starts_with(w)) continue;
+        m.group[1] = Span(s, pos, at);
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 bool QuoteTten(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (pos == 0) return false;
@@ -502,6 +519,19 @@ bool NegativeNEnd(std::string_view s, size_t p, bool de, Match& m) {
         m.group[3] = t.negative;
         m.end = p + t.length;
         return true;
+    }
+    // the か of a question (わからんか 모르는가, 来んか) and the かっ of the past (聞かんかったら 듣지 않았다면), but not
+    // the かい, かな of a noun (茶わんかな is left to the stem test of the replacement)
+    if (s.substr(p).starts_with("かっ")) {
+        m.group[2] = s.substr(p, std::string_view("かっ").size());
+        m.end = p + m.group[2].size();
+        return true;
+    }
+    if (s.substr(p).starts_with("か")) {
+        // before a mark that asks or ends, the end, かい or かな (わからんか？, 来んかい, わからんかな); not かのう, かも or
+        // か！ that the rows read with the ん
+        size_t q = p + std::string_view("か").size();
+        if (q == s.size() || OneOf(s, q, U"？?。、…‥」』いな")) return EndGroup(s, p, U"か", m);
     }
     return EndGroup(s, p, kNegativeEnd, m);
 }
@@ -1954,6 +1984,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     }
     if (dialectForms && (Contains(text, "と") || Contains(text, "ど")))
         text = ReplaceAll(text, ContractedToru, ReplaceContractedToru);
+    if (Contains(text, "てン") || Contains(text, "でン")) text = ReplaceAll(text, KataTeN, [](const Match& m) { return Group1Plus(m, "ん"); });
     if (Contains(text, "ん")) {
         if (runs.verbForm != nullptr && Contains(text, "ってん")) {
             // After a word that is no godan verb the って quotes, っていうんだ said short: N(이)라는 거야 (何ってんだ), and
@@ -2026,12 +2057,34 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (Contains(text, "ん")) {
         // A tail of KansaiNegativeTail after the negative reads with it in dialect forms (知らんがな 知らないよ).
         const auto negative = [&](const Match& m) {
+            if (m.group[2] == "かっ") return Cat({m.group[1], "なかっ"});  // the past (信じられんかった 信じられなかった)
             if (m.group[3].empty()) return Group1Plus(m, "ない");
             if (dialectForms) return Cat({m.group[1], m.group[3]});
             if (m.group[2] == "がな") return Cat({m.group[1], "ないがな"});
             return std::string(m.group[0]);
         };
-        text = ReplaceAll(text, NegativeN, negative);
+        // A kanji and the kana of the a row before ん must be the negative stem of a godan verb of the dictionary (聞かん 聞く,
+        // 止まらん 止まる); else the ん belongs to a noun (胃がん 위암, 茶わん 밥공기) and stays.
+        const auto negativeN = [&](const Match& m) {
+            const std::string_view stem = m.group[1];
+            if (runs.verbForm != nullptr && !stem.empty() && IsKanjiClass(text::DecodeRune(stem).cp)) {
+                static constexpr std::array<std::pair<std::u32string_view, std::string_view>, 8> kRowU = {{{U"ら", "る"},
+                                                                                                         {U"わ", "う"},
+                                                                                                         {U"か", "く"},
+                                                                                                         {U"が", "ぐ"},
+                                                                                                         {U"ま", "む"},
+                                                                                                         {U"ば", "ぶ"},
+                                                                                                         {U"さ", "す"},
+                                                                                                         {U"た", "つ"}}};
+                const text::Rune last = LastRune(stem);
+                for (const auto& [a, u] : kRowU) {
+                    if (last.cp != a[0]) continue;
+                    if (!runs.verbForm(runs.context, Cat({stem.substr(0, stem.size() - last.size), u}))) return std::string(m.group[0]);
+                }
+            }
+            return negative(m);
+        };
+        text = ReplaceAll(text, NegativeN, negativeN);
         text = ReplaceAll(text, NegativeE, negative);
         text = ReplaceAll(text, NegativeConjecture, [](const Match& m) { return std::string(m.group[1]); });
     }
