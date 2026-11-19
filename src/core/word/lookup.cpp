@@ -572,6 +572,84 @@ bool Worker::KanaModifierBefore(std::string_view query) const {
     return false;
 }
 
+// Whether the word the search read before query ends a word there, so that the kana spelling u may start one
+// after a character that kKanaBefore does not hold: a particle of particle.kana-word-after (口からもんくを 입에서 불평을), or a
+// common noun written in kanji whose kanji and the kana of u after them start no key of the dictionary (水しげん;
+// not 分かんねん, whose 分か is the stem of 分かる; LEX-6801).
+bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) const {
+    const Item* p = kanaAfter;
+    if (p == nullptr || query.data() != kanaAfterAt || p->group == nullptr || p->detail == nullptr || p->detail->Yougo()) {
+        return false;
+    }
+    const std::string_view s = p->group->surface;
+    const std::string_view surface = transformSurface;
+    if (s.empty() || p->length != static_cast<int>(s.size()) || !surface.ends_with(query) ||
+        !surface.substr(0, surface.size() - query.size()).ends_with(s)) {
+        return false;
+    }
+    bool hiragana = true;
+    bool kanji = true;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (r.size == 0) return false;
+        hiragana = hiragana && r.cp >= U'ぁ' && r.cp <= U'ゖ';
+        kanji = kanji && text::IsKanji(r.cp);
+        k += r.size;
+    }
+    // After a verbal noun in kanji a stem of する starts its verb (立候補させんの, 説明しかけた: not 左遷, not しか + 桁).
+    const std::string_view head = surface.substr(0, surface.size() - query.size() - (kanji ? 0 : s.size()));
+    const std::string_view lead = kanji ? FirstChar(query) : FirstChar(s);
+    if (lead == "さ" || lead == "し" || lead == "す" || lead == "せ") {
+        std::size_t start = head.size();
+        while (start > 0) {
+            const std::string_view c = LastChar(head.substr(0, start));
+            if (c.empty() || !text::IsKanji(text::DecodeRune(c).cp)) break;
+            start -= c.size();
+        }
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(head.substr(start), dict::LookupMode::General)) {
+            if (start < head.size() && c.codes != nullptr && c.codes->gram.HasCode("Hd")) return false;
+        }
+    }
+    const char part = p->Code(0).empty() ? 0 : p->Code(0)[0];
+    // A particle whose kana and the kana of u after it start a verb or adjective key is that word's stem
+    // (納得しかけた: しかけ, not しか + 桁).
+    if (part == '2') {
+        if (!hiragana || !dict::InClass(HDTRANS_CLASS("particle.kana-word-after"), s)) return false;
+        std::string key(s);
+        for (std::size_t k = 0; k < u.key.size() && k < query.size();) {
+            const std::size_t n = FirstChar(query.substr(k)).size();
+            if (n == 0) break;
+            key.append(query.substr(k, n));
+            k += n;
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                const std::string_view pt = c.codes == nullptr ? std::string_view() : c.codes->partText;
+                if (pt.size() > 1 && (pt[1] == '4' || pt[1] == '7')) return false;
+            }
+        }
+        return true;
+    }
+    // Not after a proper noun (阿部かれん, a name and its given name), nor where u starts with an honorific (那珂さんか)
+    // or a particle (金にもの), which follow a noun far more often than a word spelled in kana.
+    const std::string_view code = p->Code(0);
+    // Nor after a question word, which a quote or a question in kana follows (何つうか, not 何 + 通過).
+    if (part != '1' || code.size() < 2 || code[1] == '3' || !kanji || StartsWithHonorific(query) ||
+        dict::InClass(HDTRANS_CLASS("word.wh-ask"), s)) {
+        return false;
+    }
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(FirstChar(query), dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.Tag() == 'P') return false;
+    }
+    std::string key(s);
+    for (std::size_t k = 0; k < u.key.size() && k < query.size();) {
+        const std::size_t n = FirstChar(query.substr(k)).size();
+        if (n == 0) break;
+        key.append(query.substr(k, n));
+        k += n;
+        if (!snapshot.RetrieveRecords(key, dict::LookupMode::General).empty()) return false;
+    }
+    return true;
+}
+
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
@@ -598,7 +676,8 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassKanji:
     case kClassKatakana:
         if (!Has(kKanaBefore, prev) && !adnominal &&
-            !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query)))) {
+            !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query))) &&
+            !KanaAfterWord(u, query)) {
             return false;
         }
     }

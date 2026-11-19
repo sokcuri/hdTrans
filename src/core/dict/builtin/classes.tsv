@@ -15000,3 +15000,18 @@ name.person-question	どちら様
 name.person-question	どちらさま
 //= honorific.and-word	An honorific with と after it that spells another word, so that と after the honorific is no particle there (だからちゃんと; not わたるさんと会った; spec LEX-6300).
 honorific.and-word	ちゃんと
+//= particle.kana-word-after	Particles of two kana or more after which a word spelled in kana starts as its own word, where the kana before them is no particle of kKanaBefore (口からもんくを, 持ちながられいせいな; spec LEX-6801): not なんか or だい, which are as often words of their own.
+particle.kana-word-after	から
+particle.kana-word-after	まで
+particle.kana-word-after	より
+particle.kana-word-after	ながら
+particle.kana-word-after	ほど
+particle.kana-word-after	など
+particle.kana-word-after	こそ
+particle.kana-word-after	さえ
+particle.kana-word-after	すら
+particle.kana-word-after	だけ
+particle.kana-word-after	しか
+particle.kana-word-after	ばかり
+particle.kana-word-after	くらい
+particle.kana-word-after	ぐらい

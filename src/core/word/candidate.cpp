@@ -2546,6 +2546,18 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
             }
         }
     }
+    // The kana layer reads a word after the word before (KanaAfterWord) only in this search's own lookup of text.
+    struct KanaAfterScope {
+        Worker& w;
+        const Item* item;
+        const char* at;
+        ~KanaAfterScope() {
+            w.kanaAfter = item;
+            w.kanaAfterAt = at;
+        }
+    } kanaAfterScope{*this, kanaAfter, kanaAfterAt};
+    kanaAfter = parent;
+    kanaAfterAt = text.data();
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         // Before a unit name the kanji number is its digits, not a word that starts with it or
         // the Sino-Korean reading of 一 (一航戦 1항전, 二水戦 2수전).
@@ -2568,6 +2580,8 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     } else {
         found = DoLookup(text, kModeGeneral);
     }
+    kanaAfter = kanaAfterScope.item;
+    kanaAfterAt = kanaAfterScope.at;
     if (found.count != 0 && settings.text) {
         found.records = DropStraySuffixes(found.records, full, cursor, token, parent);
         if (found.records == nullptr) found.count = 0;
@@ -3347,6 +3361,68 @@ Record* Worker::KanaWordFirst(std::string_view full, int cursor, int token, Reco
     return records;
 }
 
+// A verb of one hiragana stem whose ending runs on through kana (こ + んだて of こんだて作り) yields to a noun row of four
+// hiragana or more that spells just as much, ends a word there (before a particle, a mark, a character other than
+// hiragana or the end) and reads as one word: the stem and ending are a chance split (LEX-6802). Shorter nouns
+// (いたい, しない, きたい) and rows that gloss a phrase (きてください 와 주십시오, いたのですが of code Nn) keep their place
+// behind the verb.
+Record* Worker::KanaNounOverOneKanaStem(std::string_view full, int cursor, int token, Record* records) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 1) != '4' || text::RuneCount(first->source) != 1 || !AllHiragana(first->source)) {
+        return records;
+    }
+    const std::string_view text = From(full, cursor);
+    // A row of grammar code Nn reads as a phrase, not a bare noun (いたのですが 있었습니다만).
+    auto phrase = [](const Record& r) {
+        const std::string_view g = r.attr;
+        for (std::size_t k = 0; k + 1 < g.size(); k += 2) {
+            if (g.substr(k, 2) == "Nn") return true;
+        }
+        return false;
+    };
+    std::string_view noun;
+    for (const Record* r = first->child; r != nullptr; r = r->child) {
+        if (!NounRow(*r) || At(r->partCode, 2) == '3' || r->source.size() <= noun.size() || !text.starts_with(r->source) ||
+            text::RuneCount(r->source) < 4 || !AllHiragana(r->source) || r->target.empty() || Has(r->target, " ") ||
+            phrase(*r)) {
+            continue;
+        }
+        const std::string_view after = text.substr(r->source.size());
+        if (NameClassOf(FirstChar(after)) == kClassHiragana && !NounEnd(after)) continue;
+        noun = r->source;
+    }
+    if (noun.empty()) return records;
+    const Item* verb = InsertLateCandidate(full, cursor, token, first);
+    if (verb == nullptr || verb->detail == nullptr || verb->detail->cls != kDetailVerb || verb->length != static_cast<int>(noun.size())) {
+        return records;
+    }
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (NounRow(*r) && r->source == noun) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
 // LEX-4984: at the end of the retry budget, where a word starts at cursor (no reading from before it runs past it) and
 // the reading that failed is no verb, the longest reading among the records left at cursor after c's group that is
 // longer than c and ends at the end of the token or where a word of two or more characters, or one that starts with
@@ -3420,6 +3496,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
+    if (settings.text) records = KanaNounOverOneKanaStem(full, cursor, token, records);
     if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
     if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
     if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);

@@ -107,6 +107,9 @@ public:
     Item* resumeParent = nullptr;
     int resumeRetries = 0;
     std::string_view transformSurface;
+    // The word read before the text at kanaAfterAt while the word search looks that text up (KanaAfterWord).
+    const Item* kanaAfter = nullptr;
+    const char* kanaAfterAt = nullptr;
     bool fault = false;
 
     // Token j as the token loop sees it while processing current.
@@ -215,6 +218,7 @@ private:
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     const Record* ReadingLead(std::string_view full, int cursor, int token, Record* records);
     Record* KanaWordFirst(std::string_view full, int cursor, int token, Record* records, const Item* parent);
+    Record* KanaNounOverOneKanaStem(std::string_view full, int cursor, int token, Record* records);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
     // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana
@@ -256,6 +260,7 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaAfterWord(const dict::UserEntry& u, std::string_view query) const;
     bool DoubledSoundBefore(std::string_view query) const;
     bool KanaModifierBefore(std::string_view query) const;
     bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;

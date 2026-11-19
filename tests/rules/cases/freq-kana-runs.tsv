@@ -1,4 +1,4 @@
-# 규칙: LEX-6800
+# 규칙: LEX-6800, LEX-6801, LEX-6802, LEX-6803
 rule	input	expected	kind	layer
 pre-select:unplaced-lone-run	クイズで あそぼ！	has:아소보	fix	pre-select
 pre-select:unplaced-lone-run	ぼくの名前は ぱち。	has:파치	fix	pre-select
@@ -13,3 +13,61 @@ pre-select:unplaced-lone-run	雨が ふった。	has:내렸다	keep	pre-select
 pre-select:unplaced-lone-run	よし、たべよう！	has:먹자	keep	pre-select
 pre-select:unplaced-lone-run	まあ いいか。	lacks:마아	keep	pre-select
 pre-select:unplaced-lone-run	「あそぼ」	has:아소보	keep	pre-select
+lookup:kana-after-word	口からもんくを言う	has:불평을	fix	lookup
+lookup:kana-after-word	朝からもんくばかり	has:아침부터	keep	lookup
+lookup:kana-after-word	水しげんを守る	has:자원을	fix	lookup
+lookup:kana-after-word	あつさを持ちながられいせいな一面もある	has:냉정한	fix	lookup
+lookup:kana-after-word	はやくここからはなれましょう。	has:떠납시다	fix	lookup
+lookup:kana-after-word	ねぐせ写真大ぼしゅうしまーす。	has:모집	fix	lookup
+lookup:kana-after-word	最近は、停滞ぎみです	has:기미	fix	lookup
+lookup:kana-after-word	苦笑ぎみに口元を緩めた。	has:기미	fix	lookup
+lookup:kana-after-word	「一生ぶらさがってろ」	has:매달려	fix	lookup
+lookup:kana-after-word	ふくらはぎからふとももへ向かって	has:허벅지	fix	lookup
+lookup:kana-after-word	分かんねん	lacks:관념	keep	lookup
+lookup:kana-after-word	楽しみにしてる	has:기대	keep	lookup
+lookup:kana-after-word	疲れているからだ	has:때문	keep	lookup
+lookup:kana-after-word	立候補させんの？	lacks:좌천	keep	lookup
+lookup:kana-after-word	小太刀が説明しかけたところで	lacks:자릿수	keep	lookup
+lookup:kana-after-word	那珂さんか？	lacks:참가	keep	lookup
+lookup:kana-after-word	敵さんかーい？	lacks:참가	keep	lookup
+lookup:kana-after-word	はい 阿部かれんです	lacks:가련	keep	lookup
+lookup:kana-after-word	金にものを言わせよう	lacks:조림	keep	lookup
+lookup:kana-after-word	説明しかできない	has:설명밖에	keep	lookup
+lookup:kana-after-word	家からでかける	has:나간다	keep	lookup
+lookup:kana-noun-over-stem	こんだて作り	has:식단 만들기	fix	lookup
+lookup:kana-noun-over-stem	こんだてを考える	has:식단을	fix	lookup
+lookup:kana-noun-over-stem	今日のこんだて。	has:식단	fix	lookup
+lookup:kana-noun-over-stem	こんだてが決まらない	has:식단이	fix	lookup
+lookup:kana-noun-over-stem	ここにいたい。	has:있고 싶다	keep	lookup
+lookup:kana-noun-over-stem	男二人に何かあったとき	has:있었을 때	keep	lookup
+lookup:kana-noun-over-stem	ずっと探していたのですが	has:찾고 있었습니다만	keep	lookup
+lookup:kana-noun-over-stem	説得してきてください	has:와 주세요	keep	lookup
+lookup:kana-noun-over-stem	本を読んでいたのが間違いだった。	has:읽고 있었던	keep	lookup
+lookup:kana-noun-over-stem	国民の反感をかいたくはない	lacks:개척	keep	lookup
+lookup:kana-noun-over-stem	しないでください	has:하지 마세요	keep	lookup
+lexical:kana-only-words	はためいている	has:펄럭이고	fix	lookup
+lexical:kana-only-words	旗がはためく	has:펄럭인다	fix	lookup
+lexical:kana-only-words	旗がはためいた	has:펄럭였다	fix	lookup
+lexical:kana-only-words	むずがっている子らを	has:보채고	fix	lookup
+lexical:kana-only-words	始めこそむずがっていた	has:보채고	fix	lookup
+lexical:kana-only-words	赤ん坊がむずがる	has:보챈다	fix	lookup
+lexical:kana-only-words	へたれこんだ	has:주저앉았다	fix	lookup
+lexical:kana-only-words	その場にへたりこむ	has:주저앉는다	fix	lookup
+lexical:kana-only-words	床にへたりこんで	has:주저앉아	fix	lookup
+lexical:kana-only-words	襖がかぶさる	has:덮인다	fix	lookup
+lexical:kana-only-words	母がかぶさり	has:덮여	fix	lookup
+lexical:kana-only-words	布団がかぶさって	has:덮여	fix	lookup
+lexical:kana-only-words	いたいけな少女	has:가련한	fix	lookup
+lexical:kana-only-words	いたいけな	has:가련한	fix	lookup
+lexical:kana-only-words	なやみがある	has:고민이	fix	lookup
+lexical:kana-only-words	なやみ	has:고민	fix	lookup
+lexical:kana-only-words	やさしさに触れる	has:상냥함	fix	lookup
+lexical:kana-only-words	彼のやさしさ。	has:상냥함	fix	lookup
+lexical:kana-only-words	なやみのたね	lacks:어둠	keep	lookup
+lexical:kana-only-words	あそぶ	has:논다	keep	lookup
+lookup:kana-noun-over-stem	こんだて表を作る	has:식단	fix	lookup
+lookup:kana-noun-over-stem	こんだても決めた	has:식단도	fix	lookup
+lookup:kana-noun-over-stem	バスがこんでいた	lacks:식단	keep	lookup
+lookup:kana-noun-over-stem	電車がこんだ。	lacks:식단	keep	lookup
+lookup:kana-noun-over-stem	ここにきました	has:왔습니다	keep	lookup
+lookup:kana-after-word	「……なんかへんか？」	lacks:변화	keep	lookup
