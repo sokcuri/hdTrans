@@ -1,0 +1,99 @@
+# 규칙: LEX-6803, LEX-6804, LEX-6805, LEX-6806, LEX-6807
+rule	input	expected	kind	layer
+lookup:kana-after-word-end	笑いながらなやみを話した。	has:고민	fix	lookup
+lookup:kana-after-word-end	歩きながらなやみを話す。	has:고민	fix	lookup
+lookup:kana-after-word-end	泣きながらもんくを言った。	has:불평	fix	lookup
+lookup:kana-after-word-end	死ぬほどなやみが多い。	has:고민	fix	lookup
+lookup:kana-after-word-end	死ぬほどやさしさがほしい。	has:상냥함	fix	lookup
+lookup:kana-after-word-end	それほどもんくはない。	has:불평	fix	lookup
+lookup:kana-after-word-end	今こそやさしさを見せる時だ。	has:상냥함	fix	lookup
+lookup:kana-after-word-end	今こそなやみを打ち明けよう。	has:고민	fix	lookup
+lookup:kana-after-word-end	これからなやみを話そう。	has:고민	fix	lookup
+lookup:kana-after-word-end	それからもんくを言った。	has:불평	fix	lookup
+lookup:kana-after-word-end	これだけもんくを言われた。	has:불평	fix	lookup
+lookup:kana-after-word-end	これからあやとりしよう。	has:실뜨기	fix	lookup
+lookup:kana-after-word-end	彼にさえなやみがある。	has:고민	fix	lookup
+lookup:kana-after-word-end	私しかなやみを知らない。	has:고민	fix	lookup
+lookup:kana-after-word-end	上からかぶさってきた。	has:덮여	fix	lookup
+lookup:kana-after-word-end	一回ぐらいもんくを言わせろ。	has:불평	fix	lookup
+lookup:kana-after-word-end	一日ぐらいなやみを忘れたい。	has:고민	fix	lookup
+lookup:kana-after-word-end	これくらいなやみではない。	has:고민	fix	lookup
+lookup:kana-after-word-end	説明しかけた。	lacks:밖에	keep	lookup
+lookup:kana-after-word-end	納得しかけた。	lacks:밖에	keep	lookup
+normalize:raless-particle-end	朝までれんしゅうした。	has:연습	fix	normalize
+normalize:raless-particle-end	今までれんらくがなかった。	has:지금까지 연락	fix	normalize
+normalize:raless-particle-end	それまでれんしゅうした。	has:연습했다	fix	normalize
+normalize:raless-particle-end	朝までれいぞうこに入れた。	has:냉장고	fix	normalize
+normalize:raless-particle-end	外にでれない。	has:나올 수 없다	keep	normalize
+normalize:raless-particle-end	もうでれる。	has:나올 수 있다	keep	normalize
+normalize:raless-particle-end	今日はでれます。	has:나올 수 있습니다	keep	normalize
+normalize:raless-particle-end	家からでれる？	has:나올 수 있어	keep	normalize
+normalize:raless-particle-end	テレビがみれる。	has:볼 수 있다	keep	normalize
+normalize:raless-particle-end	ここからでれない。	has:나올 수 없다	keep	normalize
+normalize:raless-particle-end	まだでれない。	has:나올 수 없다	keep	normalize
+normalize:raless-particle-end	朝起きれない。	has:일어날 수 없다	keep	normalize
+lookup:kana-before-particle	口からもんくばかり出る。	has:불평만	fix	lookup
+lookup:kana-before-particle	もんくばかり言う。	has:불평만	fix	lookup
+lookup:kana-before-particle	やさしさしかない。	has:상냥함밖에	fix	lookup
+lookup:kana-before-particle	ゆめまで見た。	has:꿈까지	fix	lookup
+lookup:kana-before-particle	かなしかった。	has:슬펐다	keep	lookup
+lookup:kana-before-particle	うれしかった。	has:기뻤다	keep	lookup
+lookup:kana-before-particle	何のことかわからない。	has:모른다	keep	lookup
+lookup:kana-before-particle	ことばかりだ。	has:일뿐이다	keep	lookup
+lookup:kana-before-particle	それはうそばかり。	has:거짓말만	keep	lookup
+lookup:kana-before-particle	いまからいく。	has:지금부터 간다	keep	lookup
+lookup:kana-before-particle	なやみだけが残った。	has:고민만이	keep	lookup
+lookup:kana-before-particle	あしたからがんばる。	has:내일부터	keep	lookup
+lookup:kana-before-particle	ひとりだけ来た。	has:혼자만	keep	lookup
+lookup:kana-before-particle	こわいほどしずかだ。	has:무서울 정도로	keep	lookup
+lookup:kana-before-particle	かなしさばかり	has:슬픔만	keep	lookup
+lookup:kana-verb-after-te	つかれてうごけない。	has:움직일 수 없다	fix	lookup
+lookup:kana-verb-after-te	おなかがすいてうごけない。	has:움직일 수 없다	fix	lookup
+lookup:kana-verb-after-te	走ってにげた。	has:도망쳤다	fix	lookup
+lookup:kana-verb-after-te	ころんでうごけなかった。	has:움직일 수 없었다	fix	lookup
+lookup:kana-verb-after-te	こわくてにげだした。	has:도망	fix	lookup
+lookup:kana-verb-after-te	食べてみる。	has:먹어 본다	keep	lookup
+lookup:kana-verb-after-te	見ていた。	has:보고 있었다	keep	lookup
+lookup:kana-verb-after-te	書いておく。	has:써 둔다	keep	lookup
+lookup:kana-verb-after-te	行ってしまった。	has:가버렸다	keep	lookup
+lookup:kana-verb-after-te	持ってくる。	has:가져온다	keep	lookup
+lookup:kana-verb-after-te	買ってあげる。	has:사 준다	keep	lookup
+lookup:kana-verb-after-te	教えてくれた。	has:가르쳐 주었다	keep	lookup
+lookup:kana-verb-after-te	やってみよう。	has:해 보자	keep	lookup
+lookup:kana-verb-after-te	泣いてあやまった。	has:사과했다	keep	lookup
+lookup:kana-verb-after-te	持っていける。	has:가져갈 수 있다	keep	lookup
+lookup:compound-particle-first-kana	みんなにもてはやされた。	has:칭찬받았다	fix	lookup
+lookup:compound-particle-first-kana	風にはためいた。	has:펄럭였다	fix	lookup
+lookup:compound-particle-first-kana	旗が風にはためいていた。	has:펄럭이고	fix	lookup
+lookup:compound-particle-first-kana	子供みたいにはしゃぐのやめてよ	has:떠드는	fix	lookup
+lookup:compound-particle-first-kana	ベッドにもぐりこみ瞼を閉じる。	has:침대에 기어들어	fix	lookup
+lookup:compound-particle-first-kana	先生にもてあそばれて	has:가지고 놀아져	fix	lookup
+lookup:compound-particle-first-kana	車が対向車線にはみ出した。	has:차선에 삐져나	fix	lookup
+lookup:compound-particle-first-kana	少女は顔ではにかんだ。	has:수줍어	fix	lookup
+lookup:compound-particle-first-kana	先生にはやし立てられた。	lacks:야자	fix	lookup
+lookup:compound-particle-first-kana	ボールが外にはじき出された。	has:튕겨	fix	lookup
+lookup:compound-particle-first-kana	利害のはじき出し方が違う。	has:산출	keep	lookup
+lookup:compound-particle-first-kana	列からはじき出された。	has:튕겨	fix	lookup
+lookup:compound-particle-first-kana	医者にはなれない。	has:의사는 될 수 없다	keep	lookup
+lookup:compound-particle-first-kana	部屋にはいる。	has:방에 들어간다	keep	lookup
+lookup:compound-particle-first-kana	ここにはなにもない。	has:여기에는 아무것도 없다	keep	lookup
+lookup:compound-particle-first-kana	家では楽しい。	has:집에서는 즐겁다	keep	lookup
+lookup:compound-particle-first-kana	私にはわからない。	has:나는 모른다	keep	lookup
+lookup:compound-particle-first-kana	彼にもわかる。	has:그도 안다	keep	lookup
+lookup:compound-particle-first-kana	君にはむりだ。	has:너에게는 무리다	keep	lookup
+lookup:compound-particle-first-kana	家ではたらく。	has:집에서 일한다	keep	lookup
+lookup:compound-particle-first-kana	夜にはねむい。	has:밤에는 졸리다	keep	lookup
+lexical:kana-only-words	なやむ。	has:고민한다	fix	lexical
+lexical:kana-only-words	ずっとなやんでいる。	has:고민하고	fix	lexical
+lexical:kana-only-words	なやんだ末に決めた。	has:고민한	fix	lexical
+lexical:kana-only-words	なやまないで。	has:고민하지	fix	lexical
+lexical:kana-only-words	なやみながら歩いた。	has:고민	fix	lexical
+lexical:kana-only-words	なやみます。	has:고민합니다	fix	lexical
+lexical:kana-only-words	なやもう。	has:고민하자	fix	lexical
+lexical:kana-only-words	家からおさんぽした。	has:집에서 산책	fix	lexical
+lexical:kana-only-words	公園でおさんぽ	has:공원에서 산책	fix	lexical
+lexical:kana-only-words	犬とおさんぽする。	has:개와 산책	fix	lexical
+lexical:kana-only-words	そんなやつはいない。	has:그런 녀석은	keep	lexical
+lexical:kana-only-words	みんなやってる。	has:모두 하고 있다	keep	lexical
+lexical:kana-only-words	彼はなやましい顔をした。	has:괴로운	keep	lexical
+lexical:kana-only-words	おさんが来た。	lacks:산책	keep	lexical
