@@ -85,3 +85,51 @@ dict:freq-gloss	そいつの額にある目を見る。	has:이마에	keep	pack
 dict:freq-gloss	彼女は薄く目を開けた。	has:가늘게 눈을 떴다	fix	pack
 dict:freq-gloss	薄く笑った。	has:엷게 웃었다	fix	pack
 dict:freq-gloss	紙を薄く切る。	has:얇게 자른다	keep	pack
+dict:freq-gloss	君はあまいな。	has:무르네	fix	pack
+dict:freq-gloss	お前はあますぎるよ。	has:너무 물러	fix	pack
+dict:freq-gloss	お前は甘くて困る。	has:물러서	fix	pack
+dict:freq-gloss	お前はあまくて困る。	has:물러서	fix	pack
+dict:freq-gloss	お前が甘ければ負ける。	has:무르면	fix	pack
+dict:freq-gloss	お前が甘けりゃ負ける。	has:무르면	fix	pack
+dict:freq-gloss	俺も甘くなったものだ。	has:물러진	fix	pack
+dict:freq-gloss	彼は甘くなる。	has:물러진다	fix	pack
+dict:freq-gloss	「お前は甘い」と言った。	has:무르다」	fix	pack
+dict:freq-gloss	「お前は甘い」って言われた。	has:무르다」	fix	pack
+dict:freq-gloss	「筧は、小太刀に甘いな」	has:무르네	fix	pack
+dict:freq-gloss	「私が甘かったんですよ」	has:물렀어요	fix	pack
+dict:freq-gloss	私は甘くないコーヒーが好きだ。	has:달지 않은 커피	keep	pack
+dict:freq-gloss	彼は甘すぎるケーキを食べた。	has:너무 단 케이크	keep	pack
+dict:freq-gloss	彼女に甘いお菓子を渡した。	has:단 과자	keep	pack
+dict:freq-gloss	母は私に甘いお菓子をくれた。	has:단 과자	keep	pack
+dict:freq-gloss	花子は甘くないケーキを食べた。	has:달지 않은 케이크	keep	pack
+dict:freq-gloss	「このケーキは甘い」と言った。	has:달다」	keep	pack
+dict:freq-gloss	このコーヒーは甘すぎる。	이 커피는 너무 달다.	keep	pack
+dict:freq-gloss	彼女の声は甘くなった。	has:달콤해졌다	keep	pack
+dict:freq-gloss	蜜のように甘い声がした。	has:단 목소리	keep	pack
+dict:freq-gloss	甘い声で囁いた。	달콤한 목소리로 속삭였다.	keep	pack
+dict:freq-gloss	出撃だぁ！ボクの後に着いてきて！	has:뒤를 따라와	fix	lookup
+dict:freq-gloss	私の後に着いて来て。	has:뒤를 따라와	fix	lookup
+dict:freq-gloss	私の後ろに着いて来て。	has:뒤를 따라와	fix	lookup
+dict:freq-gloss	彼の後に着いて行った。	has:뒤를 따라갔다	fix	lookup
+dict:freq-gloss	先生の後に着いて行った。	has:뒤를 따라갔다	fix	lookup
+dict:freq-gloss	後に着いて来い。	has:뒤를 따라와라	fix	lookup
+dict:freq-gloss	あとに着いていく。	has:뒤를 따라간다	fix	lookup
+dict:freq-gloss	試合の後に着いて来た。	lacks:따라	keep	lookup
+dict:freq-gloss	食事のあとに着いていく。	lacks:뒤를	keep	lookup
+dict:freq-gloss	彼の後に着いた。	has:도착했다	keep	lookup
+dict:freq-gloss	元同社社員が語った。	has:이 회사 전 사원	fix	lookup
+dict:freq-gloss	同社長は辞任した。	has:이 회사 사장은	fix	lookup
+dict:freq-gloss	同社会長が来日した。	has:이 회사 회장	fix	lookup
+dict:freq-gloss	同社会の会員になった。	has:같은 사회의	fix	lookup
+dict:freq-gloss	同社会見で発表した。	has:이 회사 회견	keep	lookup
+dict:freq-gloss	同社社長は辞任した。	has:이 회사 사장은	keep	lookup
+dict:freq-gloss	試合を投げた。	has:경기를 포기했다	fix	lookup
+dict:freq-gloss	試合を挑む。	has:경기를	fix	lookup
+dict:freq-gloss	試合を運んだ。	has:경기를	fix	lookup
+dict:freq-gloss	試合をひかえて緊張する。	has:경기를 앞두	fix	lookup
+dict:freq-gloss	試合をひっくり返します。	has:경기를 뒤집	fix	lookup
+dict:freq-gloss	意見を取る。	has:의견을 취한다	keep	pack
+dict:freq-gloss	提案を取る。	has:제안을 취한다	keep	pack
+dict:freq-gloss	企画を取った。	has:기획을 취했다	keep	pack
+dict:freq-gloss	改正案が通った。	has:통과	keep	pack
+dict:freq-gloss	鍵を取る。	has:열쇠를 집는다	keep	pack

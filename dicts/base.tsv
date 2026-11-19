@@ -127669,7 +127669,7 @@ ttt	ttt	K110			GN				jisjk:201744
 元吉田町	모토요시다쵸	I130	QCTVPl		GN				jisjk:334742		
 元吉町	모토요시쵸	N130	QCTVPl		GN				jisjk:334743		
 元吉麗子	모토요시 레이코	N130	VHn		GN				jisjk:226369		
-元同社	이전 동사	N110	VBl		GN				jisjk:159513		
+元同社	이 회사 전	N110	VBl		GN				jisjk:159513		
 元名	모토나	N130	QCTVPl		GN				jisjk:334627		
 元和	겐나	N110	UMe		GN				jisjk:179489		
 元和泉	모토이즈미	N130	QCTVPl		GN				jisjk:334481		
@@ -325651,11 +325651,11 @@ ttt	ttt	K110			GN				jisjk:201744
 試写	시사	N110		Hd	GN				jisjk:27828		
 試写会	시사회	N110	VBlUAr		GN				jisjk:187262		
 試合	경기	N110	VRw	Hd	GN	471	||1 &&2 S-1== "何" D-1= "몇"	試合 바로 앞에 何가 오면 何를 몇으로 바꾼다. (미발동: rare-context)	jisjk:27836		
-試合であますところなく	시합에서 남김없이	N110		Nn	GN				jisjk:151149		
-試合をひかえ	시합을 앞&C7@	M427	UMe		GN				jisjk:120880		
-試合を投げ	시합을 포기&AV@	M427		Pn	GN				jisjk:265665		
-試合を挑	시합을 &L1@	M445	VRw		GN				jisjk:120877		
-試合を運	시합을 진행시&AQ@	M426	VRw		GN				jisjk:120879		
+試合であますところなく	경기에서 남김없이	N110		Nn	GN				jisjk:151149		
+試合をひかえ	경기를 앞&C7@	M427	UMe		GN				jisjk:120880		
+試合を投げ	경기를 포기&AV@	M427		Pn	GN				jisjk:265665		
+試合を挑	경기를 &L1@	M445	VRw		GN				jisjk:120877		
+試合を運	경기를 진행시&AQ@	M426	VRw		GN				jisjk:120879		
 試問	시문	N110		Hd	GN				jisjk:101349		
 試図	시도	N110			GN				jisjk:27822		
 試売	시험 판매	N110		Hd	GN				jisjk:27827		

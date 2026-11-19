@@ -226,9 +226,16 @@ Context ContextOf(Flusher& f, const Item* it, std::size_t finalLongest) {
         }
         const Item* last = it;
         const Item* next = c.next;
-        for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && ClassOf(next) == '4' && teForm(last) &&
-                        dict::InClass(HDTRANS_CLASS("aux.te-through"), next->group->surface);
-             k++) {
+        // so it does through its negative auxiliary (甘くないコーヒー) and a bound auxiliary written right after
+        // the stem (aux.head-through: 甘すぎるケーキ)
+        const auto through = [&](const Item* prev, const Item* aux) {
+            if (ClassOf(aux) == '4' && teForm(prev) && dict::InClass(HDTRANS_CLASS("aux.te-through"), aux->group->surface))
+                return true;
+            if (aux == NegativeAux(prev)) return true;
+            return prev == it && aux->start == prev->start + prev->length &&
+                   dict::InClass(HDTRANS_CLASS("aux.head-through"), aux->group->surface);
+        };
+        for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && through(last, next); k++) {
             last = next;
             next = next->After();
         }

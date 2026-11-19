@@ -1,13 +1,16 @@
 #! layer=pack
 # 주어, 목적어, 앞뒤 말로 뜻을 고르는 많이 쓰는 낱말 (LEX-7151)
 id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
-freq-gloss:1	sense	甘い	adj:르	frame	subj=@person head=- next=-		무르다	60	LEX-7151	audit	君は甘いな 너는 무르네 (문장 끝의 서술어, 꾸미는 명사 없음)
-freq-gloss:2	sense	甘い	adj:르	frame	subj=@person form=neg		무르다	60	LEX-7151	audit	わしは甘くないぞ 나는 무르지 않아
-freq-gloss:3	sense	甘い	adj:르	frame	subj=@person next=すぎる|過ぎる		무르다	60	LEX-7151	audit	お前は甘すぎる 너는 너무 무르다
-freq-gloss:4	sense	甘い	adj:르	frame	subj=@person ending=いから|いけど|いけれど|いし|いので|いのに|いと		무르다	75	LEX-7151	audit	彼は甘いから 그는 무르니까 (이어지는 서술어)
-freq-gloss:5	sense	甘い	adj:르	frame	dat=@person		무르다	60	LEX-7151	audit	自分に甘い人 자신에게 무른 사람 (사람에게 甘い)
-freq-gloss:6	sense	甘い	adj	frame	subj=@person ending=いの|め		-	70	LEX-7151	audit	多岐川さんは甘いのが好きだった (그대로: 단 것)
-freq-gloss:7	sense	甘い	adj:르	frame	subj=@person ending=かった head=-		무르다	60	LEX-7151	audit	私が甘かったから 내가 물렀으니까
+freq-gloss:1	sense	甘い|あまい	adj:르	frame	subj=@person head=- next=-		무르다	60	LEX-7151	audit	君は甘いな 너는 무르네 (문장 끝의 서술어, 꾸미는 명사 없음)
+freq-gloss:2	sense	甘い|あまい	adj:르	frame	subj=@person form=neg head=-		무르다	60	LEX-7151	audit	わしは甘くないぞ 나는 무르지 않아
+freq-gloss:3	sense	甘い|あまい	adj:르	frame	subj=@person next=すぎる|過ぎる head=-		무르다	60	LEX-7151	audit	お前は甘すぎる 너는 너무 무르다
+freq-gloss:4	sense	甘い|あまい	adj:르	frame	subj=@person ending=いから|いけど|いけれど|いし|いので|いのに|いと|くて|ければ|けりゃ|けれ		무르다	75	LEX-7151	audit	彼は甘いから 그는 무르니까 (이어지는 서술어)
+freq-gloss:5	sense	甘い|あまい	adj:르	frame	dat=@person head=-		무르다	60	LEX-7151	audit	自分に甘い人 자신에게 무른 사람 (사람에게 甘い)
+freq-gloss:6	sense	甘い|あまい	adj	frame	subj=@person ending=いの|め		-	70	LEX-7151	audit	多岐川さんは甘いのが好きだった (그대로: 단 것)
+freq-gloss:7	sense	甘い|あまい	adj:르	frame	subj=@person ending=かった head=-		무르다	60	LEX-7151	audit	私が甘かったから 내가 물렀으니까
+freq-gloss:26	sense	甘い|あまい	adj:르	frame	dat=@person head=@person		무르다	60	LEX-7151	audit	自分に甘い人 자신에게 무른 사람 (사람을 꾸밈)
+freq-gloss:27	sense	甘い|あまい	adj:르	frame	subj=@person ending=く next=なる|成る|成		무르다	60	LEX-7151	audit	俺も甘くなったものだ 나도 물러진 것이다
+freq-gloss:28	sense	甘い|あまい	adj:르	frame	subj=@person head=- next=」|』|」と|』と|」って		무르다	60	LEX-7151	audit	「お前は甘い」と言った 「너는 무르다」라고 말했다 (닫는 괄호 앞의 서술어)
 freq-gloss:8	sense	組む	v5	frame	obj=手|両手|指		깍지 끼다	60	LEX-7155	audit	両手を頭の後ろで組み 양손을 머리 뒤에서 깍지 끼고
 freq-gloss:9	sense	組む	v5	colloc	腕を組む		팔짱을 끼다	70	LEX-7155	audit	腕を組んだ 팔짱을 꼈다
 freq-gloss:10	sense	組む	v5	colloc	足を組む|脚を組む		다리를 꼬다	70	LEX-7155	audit	足を組んで座る 다리를 꼬고 앉다
