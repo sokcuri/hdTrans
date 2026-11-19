@@ -15,15 +15,15 @@ dict:freq-gloss-b	逆転本塁打を放つ。	has:역전 홈런을	fix	lookup
 dict:freq-gloss-b	今場所は好調だ。	has:이번 대회는	fix	lookup
 dict:freq-gloss-b	大勢の人が集まった。	has:많은 사람이	fix	lookup
 dict:freq-gloss-b	人は大勢いるから大丈夫。	has:많이 있으니까	fix	lookup
-dict:freq-gloss-b	御三家を敵に回した。	has:3대 명가를	fix	lookup
+dict:freq-gloss-b	御三家を敵に回した。	has:빅3를	fix	lookup
 dict:freq-gloss-b	来季のコーチ陣を発表。	has:다음 시즌의	fix	lookup
 dict:freq-gloss-b	政治的見せ物だと批判した。	has:구경거리	fix	lookup
 dict:freq-gloss-b	追加を先送りしてきた。	has:연기해 왔다	fix	lookup
-dict:freq-gloss-b	生酒だ大吟醸だというよりも。	has:생주다	fix	lookup
+dict:freq-gloss-b	生酒だ大吟醸だというよりも。	has:나마자케다	fix	lookup
 dict:freq-gloss-b	地元紙パリジャンのインタビュー。	has:파리지앵의	fix	lookup
 dict:freq-gloss-b	魔法が栄えると機械は栄えず。	lacks:돋보	fix	lookup
 dict:freq-gloss-b	もちろん知ってますよと取り繕った。	has:둘러대었다	fix	lookup
-dict:freq-gloss-b	体裁を取り繕う。	has:꾸민다	keep	lookup
+dict:freq-gloss-b	体裁を取り繕う。	has:체면을 차린다	fix	lookup
 dict:freq-gloss-b	上位貴族たちから爪弾きにされるのは辛い。	has:따돌림을 당하는	fix	lookup
 dict:freq-gloss-b	俺は思わず顎を外しそうになった。	has:턱이 빠질 뻔했다	fix	lookup
 dict:freq-gloss-b	後輩たちが指示を受け辺りに散る。	has:흩어진다	fix	lookup
@@ -105,3 +105,6 @@ dict:freq-gloss-b	選挙の大勢は決したと言っていい。	has:선거의
 dict:freq-gloss-b	起きる気配ゼロだ。	has:기미 제로다	fix	lookup
 dict:freq-gloss-b	空は赤く燃え、雨の気配はゼロだ。	has:비 기운은	fix	lookup
 dict:freq-gloss-b	村中恭兵が登板した。	has:무라나카 쿄우헤이가	keep	lookup
+dict:freq-gloss-b	徳川御三家の一つだ。	has:토쿠가와 3대 명가	keep	lookup
+dict:freq-gloss-b	関係を取繕う。	has:관계를 수습한다	fix	pack
+dict:freq-gloss-b	見栄を取り繕った。	has:꾸몄다	keep	pack

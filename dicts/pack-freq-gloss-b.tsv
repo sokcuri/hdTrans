@@ -4,7 +4,8 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 freq-gloss-b:1	sense	淵	n	colloc	死の淵		죽음의 문턱	70	LEX-7201	freq	死の淵 죽음의 문턱
 freq-gloss-b:2	name	淵	n	frame	next=さん|くん|君|ちゃん|様|氏|先生|先輩		후치		LEX-7201	freq	淵さん 후치 씨
 freq-gloss-b:3	sense	大勢	n	frame	next=いる|居る|集まる|来る|来てい|来てる|押し寄せる|集う|出入り|詰めかける|押しかける|並ぶ|残る|死ぬ|亡くなる|訪れる|住む|働く|待つ|集める		많이		LEX-7201	freq	大勢いる 많이 있다
-freq-gloss-b:4	sense	取り繕う|取繕う	v5	frame	obj=体裁|外見|表面|上辺|うわべ|見栄|見かけ|格好|恰好|形		꾸미다		LEX-7201	freq	体裁を取り繕う 체면을 꾸미다
+freq-gloss-b:4	sense	取り繕う|取繕う	v5	frame	obj=外見|表面|上辺|うわべ|見栄|見かけ|格好|恰好|形		꾸미다		LEX-7201	freq	外見を取り繕う 겉모습을 꾸미다
+freq-gloss-b:55	sense	取り繕う|取繕う	v5	frame	obj=体裁		차리다		LEX-7201	freq	体裁を取り繕う 체면을 차리다
 freq-gloss-b:5	sense	取り繕う|取繕う	v5	frame	obj=@clothing		수선하다		LEX-7201	freq	服を取り繕う 옷을 수선하다
 freq-gloss-b:6	sense	取り繕う|取繕う	v5	frame	obj.of=@clothing		수선하다		LEX-7201	freq	服のほころびを取り繕う 옷의 터진 데를 수선하다
 freq-gloss-b:7	sense	挙げる	v1	frame	obj=得点|点数|ゴール|ホームラン|本塁打|安打|追加点|先制点|決勝点|成果|白星|勝利|収益|利益|実績|戦果|勝ち星		올리다		LEX-7201	freq	追加点を挙げた 추가점을 올렸다
@@ -43,7 +44,7 @@ freq-gloss-b:39	sense	気配	n	colloc	秋の気配		가을 기운	70	LEX-7201	fr
 freq-gloss-b:40	sense	気配	n	colloc	冬の気配		겨울 기운	70	LEX-7201	freq	冬の気配 겨울 기운
 freq-gloss-b:41	sense	取り繕う|取繕う	v5	frame	ending=ように		둘러대다		LEX-7201	freq	取り繕うように言った 둘러대듯이 말했다
 freq-gloss-b:42	sense	取り繕う|取繕う	v5	frame	after=と		둘러대다		LEX-7201	freq	と取り繕った 하고 둘러대었다
-freq-gloss-b:43	sense	取り繕う|取繕う	v5	frame	obj=場|その場		수습하다		LEX-7201	freq	その場を取り繕う 그 자리를 수습하다
+freq-gloss-b:43	sense	取り繕う|取繕う	v5	frame	obj=場|その場|関係|仲		수습하다		LEX-7201	freq	その場を取り繕う 그 자리를 수습하다
 freq-gloss-b:44	sense	見据える|見すえる	v1	frame	obj=先|将来|未来|今後|行く末|先行き|次|来年|来季|来春|本番|選挙|大会|五輪|オリンピック|決勝|試合|世界|頂点|目標|復帰		내다보다		LEX-7201	freq	将来を見据える 장래를 내다보다
 freq-gloss-b:45	sense	挙げる	v1	colloc	追加点を挙げる		추가점을 올리다	70	LEX-7201	freq	追加点を挙げた 추가점을 올렸다
 freq-gloss-b:46	sense	挙げる	v1	colloc	先制点を挙げる		선제점을 올리다	70	LEX-7201	freq	先制点を挙げた 선제점을 올렸다
