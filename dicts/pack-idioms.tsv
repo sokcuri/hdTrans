@@ -214,12 +214,12 @@ idiom:口が滑べる	滑べる	v5:하다	sense	idiom	口 が 滑べる	까딱 �
 idiom:口が過ぎる	過ぎる	v1:규칙	sense	idiom	口 が 過ぎる	말이 지나치다	50	LEX-4760	dict	base.tsv
 idiom:口に出す	出す	v5:하다	sense	idiom	口 に 出す	말하다	50	LEX-4760	dict	base.tsv
 idiom:口をとざす	とざす	v5:하다	sense	idiom	口 を とざす	침묵하다	50	LEX-4760	dict	base.tsv
-idiom:口をはさむ	はさむ	v5:하다	sense	idiom	口 を はさむ	말참견하다	50	LEX-4760	dict	base.tsv
+idiom:口をはさむ	はさむ	v5:하다	sense	idiom	口 を はさむ +nom	말참견하다	50	LEX-4760	dict	base.tsv
 idiom:口を出す	出す	v5:하다	sense	idiom	口 を 出す	참견하다	50	LEX-4760	dict	base.tsv
 idiom:口を切る	切る	v5:ㄹ	sense	idiom	口 を 切る	말문을 열다	50	LEX-4760	dict	base.tsv
 idiom:口を割る	割る	v5:하다	sense	idiom	口 を 割る	자백하다	50	LEX-4760	dict	base.tsv
 idiom:口を拭う	拭う	v5:규칙	sense	idiom	口 を 拭う	시치미를 떼다	50	LEX-4760	dict	base.tsv
-idiom:口を挟む	挟む	v5:하다	sense	idiom	口 を 挟む	말참견하다	50	LEX-4760	dict	base.tsv
+idiom:口を挟む	挟む	v5:하다	sense	idiom	口 を 挟む +nom	말참견하다	50	LEX-4760	dict	base.tsv
 idiom:口を消す	消す	v5:규칙	sense	idiom	口 を 消す	다짐을 주다	50	LEX-4760	dict	base.tsv
 idiom:口を濡らす	濡らす	v5:규칙	sense	idiom	口 を 濡らす	겨우 살아가다	50	LEX-4760	dict	base.tsv
 idiom:口を糊する	糊する	v:규칙	sense	idiom	口 を 糊する	겨우 살아가다	50	LEX-4760	dict	base.tsv
@@ -255,7 +255,7 @@ idiom:咽喉を扼する	扼する	v:르	sense	idiom	咽喉 を 扼する	목을
 idiom:哀感をそそる	そそる	v5:규칙	sense	idiom	哀感 を そそる	서글픈 느낌을 자아내다	50	LEX-4760	dict	base.tsv
 idiom:品を落とす	落とす	v5:규칙	sense	idiom	品 を 落とす	품질을 떨어뜨리다	50	LEX-4760	dict	base.tsv
 idiom:喉が鳴る	鳴る	v5:규칙	sense	idiom	喉 が 鳴る	목에서 소리가 나다	50	LEX-4760	dict	base.tsv
-idiom:喉を鳴らす	鳴らす	v5:규칙	sense	idiom	喉 を 鳴らす	목을 울리다	50	LEX-4760	dict	base.tsv
+idiom:喉を鳴らす	鳴らす	v5:규칙	sense	idiom	喉 を 鳴らす +nom	목을 울리다	50	LEX-4760	dict	base.tsv
 idiom:嘆息をもらす	もらす	v5:ㅅ	sense	idiom	嘆息 を もらす	한숨짓다	50	LEX-4760	dict	base.tsv
 idiom:四苦八苦に苦しむ	苦しむ	v5:하다	sense	idiom	四苦八苦 に 苦しむ	대단히 괴로워하다	50	LEX-4760	dict	base.tsv
 idiom:因果を含める	含める	v1:하다	sense	idiom	因果 を 含める	체념토록 설득하다	50	LEX-4760	dict	base.tsv
@@ -303,7 +303,7 @@ idiom:声をだす	だす	v5:규칙	sense	idiom	声 を だす	소리를 내다	
 idiom:声を上げる	上げる	v1:규칙	sense	idiom	声 を 上げる	소리를 높이다	50	LEX-4760	dict	base.tsv
 idiom:声を出す	出す	v5:규칙	sense	idiom	声 を 出す +mod	소리를 내다	50	LEX-4763	dict	base.tsv
 idiom:声を張る	張る	v5:르	sense	idiom	声 を 張る	소리를 지르다	50	LEX-4760	dict	base.tsv
-idiom:声を掛ける	掛ける	v1:ㄹ	sense	idiom	声 を 掛ける	말을 걸다	50	LEX-4760	dict	base.tsv
+idiom:声を掛ける	掛ける	v1:ㄹ	sense	idiom	声 を 掛ける +nom	말을 걸다	50	LEX-4760	dict	base.tsv
 idiom:声を立てる	立てる	v1:르	sense	idiom	声 を 立てる	소리를 지르다	50	LEX-4760	dict	base.tsv
 idiom:声を詰まらせる	詰まらせる	v1:규칙	sense	idiom	声 を 詰まらせる	목이 메이다	50	LEX-4760	dict	base.tsv
 idiom:壷を押える	押える	v1:르	sense	idiom	壷 を 押える	급소를 누르다	50	LEX-4760	dict	base.tsv
@@ -734,22 +734,22 @@ idiom:気に病む	病む	v5:하다	sense	idiom	気 に 病む	걱정하다	50	L
 idiom:気に障る	障る	v5:규칙	sense	idiom	気 に 障る	비위에 거슬리다	50	LEX-4760	dict	base.tsv
 idiom:気に食う	食う	v5:ㄹ	sense	idiom	気 に 食う	마음에 들다	50	LEX-4760	dict	base.tsv
 idiom:気をつく	つく	v5:하다	sense	idiom	気 を つく	주의하다	50	LEX-4760	dict	base.tsv
-idiom:気をつかう	つかう	v5:으	sense	idiom	気 を つかう	신경 쓰다	50	LEX-4760	dict	base.tsv
-idiom:気をとられる	とられる	v1:규칙	sense	idiom	気 を とられる	정신을 빼앗기다	50	LEX-4760	dict	base.tsv
-idiom:気をもむ	もむ	v5:규칙	sense	idiom	気 を もむ	마음을 졸이다	50	LEX-4760	dict	base.tsv
-idiom:気を付ける	付ける	v1:하다	sense	idiom	気 を 付ける	조심하다	50	LEX-4760	dict	base.tsv
-idiom:気を使う	使う	v5:으	sense	idiom	気 を 使う	신경을 쓰다	50	LEX-4760	dict	base.tsv
-idiom:気を利かせる	利かせる	v1:하다	sense	idiom	気 を 利かせる	배려하다	50	LEX-4760	dict	base.tsv
-idiom:気を取られる	取られる	v1:규칙	sense	idiom	気 を 取られる	정신을 빼앗기다	50	LEX-4760	dict	base.tsv
-idiom:気を失う	失う	v5:규칙	sense	idiom	気 を 失う	정신을 잃다	50	LEX-4760	dict	base.tsv
+idiom:気をつかう	つかう	v5:으	sense	idiom	気 を つかう +nom	신경 쓰다	50	LEX-4760	dict	base.tsv
+idiom:気をとられる	とられる	v1:규칙	sense	idiom	気 を とられる +nom	정신을 빼앗기다	50	LEX-4760	dict	base.tsv
+idiom:気をもむ	もむ	v5:규칙	sense	idiom	気 を もむ +nom	마음을 졸이다	50	LEX-4760	dict	base.tsv
+idiom:気を付ける	付ける	v1:하다	sense	idiom	気 を 付ける +nom	조심하다	50	LEX-4760	dict	base.tsv
+idiom:気を使う	使う	v5:으	sense	idiom	気 を 使う +nom	신경을 쓰다	50	LEX-4760	dict	base.tsv
+idiom:気を利かせる	利かせる	v1:하다	sense	idiom	気 を 利かせる +nom	배려하다	50	LEX-4760	dict	base.tsv
+idiom:気を取られる	取られる	v1:규칙	sense	idiom	気 を 取られる +nom	정신을 빼앗기다	50	LEX-4760	dict	base.tsv
+idiom:気を失う	失う	v5:규칙	sense	idiom	気 を 失う +nom	정신을 잃다	50	LEX-4760	dict	base.tsv
 idiom:気を張る	張る	v5:규칙	sense	idiom	気 を 張る	긴장시키다	50	LEX-4760	dict	base.tsv
-idiom:気を悪くする	悪くする	v:규칙	sense	idiom	気 を 悪くする	감정을 해치다	50	LEX-4760	dict	base.tsv
+idiom:気を悪くする	悪くする	v:규칙	sense	idiom	気 を 悪くする +nom	감정을 해치다	50	LEX-4760	dict	base.tsv
 idiom:気を抜く	抜く	v5:하다	sense	idiom	気 を 抜く	놀라게 하다	50	LEX-4760	dict	base.tsv
 idiom:気を持たせる	持たせる	v1:하다	sense	idiom	気 を 持たせる	마음을 들뜨게하다	50	LEX-4760	dict	base.tsv
-idiom:気を落とす	落とす	v5:하다	sense	idiom	気 を 落とす	낙심하다	50	LEX-4760	dict	base.tsv
-idiom:気を遣う	遣う	v5:하다	sense	idiom	気 を 遣う	배려를 하다	50	LEX-4760	dict	base.tsv
-idiom:気を配る	配る	v5:하다	sense	idiom	気 を 配る	배려하다	50	LEX-4760	dict	base.tsv
-idiom:気を重くする	重くする	v:하다	sense	idiom	気 を 重くする	염려하다	50	LEX-4760	dict	base.tsv
+idiom:気を落とす	落とす	v5:하다	sense	idiom	気 を 落とす +nom	낙심하다	50	LEX-4760	dict	base.tsv
+idiom:気を遣う	遣う	v5:하다	sense	idiom	気 を 遣う +nom	배려를 하다	50	LEX-4760	dict	base.tsv
+idiom:気を配る	配る	v5:하다	sense	idiom	気 を 配る +nom	배려하다	50	LEX-4760	dict	base.tsv
+idiom:気を重くする	重くする	v:하다	sense	idiom	気 を 重くする +nom	염려하다	50	LEX-4760	dict	base.tsv
 idiom:気合が合う	合う	v5:규칙	sense	idiom	気合 が 合う	서로 호흡이 맞다	50	LEX-4760	dict	base.tsv
 idiom:水があける	あける	v1:규칙	sense	idiom	水 が あける	큰 차가 생기다	50	LEX-4760	dict	base.tsv
 idiom:水がたまる	たまる	v5:규칙	sense	idiom	水 が たまる	물이 고이다	50	LEX-4760	dict	base.tsv
@@ -963,8 +963,8 @@ idiom:縦覧に供する	供する	v:하다	sense	idiom	縦覧 に 供する	마
 idiom:繋がれちゃう	れちゃう	v5:규칙	sense	idiom	繋 が れちゃう	연결되어버리다	50	LEX-4760	dict	base.tsv
 idiom:罰が当たる	当たる	v5:규칙	sense	idiom	罰 が 当たる	벌을 받다	50	LEX-4760	dict	base.tsv
 idiom:群を抜く	抜く	v5:규칙	sense	idiom	群 を 抜く	무리를 앞서다	50	LEX-4760	dict	base.tsv
-idiom:羽目をはずす	はずす	v5:규칙	sense	idiom	羽目 を はずす	도가 지나치다	50	LEX-4760	dict	base.tsv
-idiom:羽目を外す	外す	v5:규칙	sense	idiom	羽目 を 外す	도가 지나치다	50	LEX-4760	dict	base.tsv
+idiom:羽目をはずす	はずす	v5:규칙	sense	idiom	羽目 を はずす +nom	도가 지나치다	50	LEX-4760	dict	base.tsv
+idiom:羽目を外す	外す	v5:규칙	sense	idiom	羽目 を 外す +nom	도가 지나치다	50	LEX-4760	dict	base.tsv
 idiom:耳が肥える	肥える	v1:ㄹ	sense	idiom	耳 が 肥える	들을 줄 알다	50	LEX-4760	dict	base.tsv
 idiom:耳につく	つく	v5:ㄹ	sense	idiom	耳 に つく	귓전을 맴돌다	50	LEX-4760	dict	base.tsv
 idiom:耳に挟む	挟む	v5:ㄷ	sense	idiom	耳 に 挟む	무심결에 듣다	50	LEX-4760	dict	base.tsv
@@ -1041,10 +1041,10 @@ idiom:腹が決まる	決まる	v5:규칙	sense	idiom	腹 が 決まる	결심�
 idiom:腹が煮える	煮える	v1:규칙	sense	idiom	腹 が 煮える	화가 나서 속이 부글부글 끓다	50	LEX-4760	dict	base.tsv
 idiom:腹が立つ	立つ	v5:규칙	sense	idiom	腹 が 立つ	화가 나다	50	LEX-4760	dict	base.tsv
 idiom:腹に収める	収める	v1:규칙	sense	idiom	腹 に 収める	마음에 새겨 두다	50	LEX-4760	dict	base.tsv
-idiom:腹をすえる	すえる	v1:하다	sense	idiom	腹 を すえる	각오하다	50	LEX-4760	dict	base.tsv
+idiom:腹をすえる	すえる	v1:하다	sense	idiom	腹 を すえる +nom	각오하다	50	LEX-4760	dict	base.tsv
 idiom:腹を切る	切る	v5:르	sense	idiom	腹 を 切る	배를 가르다	50	LEX-4760	dict	base.tsv
 idiom:腹を割る	割る	v5:규칙	sense	idiom	腹 を 割る	본심을 털어놓다	50	LEX-4760	dict	base.tsv
-idiom:腹を据える	据える	v1:하다	sense	idiom	腹 を 据える	각오하다	50	LEX-4760	dict	base.tsv
+idiom:腹を据える	据える	v1:하다	sense	idiom	腹 を 据える +nom	각오하다	50	LEX-4760	dict	base.tsv
 idiom:腹を探る	探る	v5:하다	sense	idiom	腹 を 探る	탐색하다	50	LEX-4760	dict	base.tsv
 idiom:腹を決める	決める	v1:하다	sense	idiom	腹 を 決める	작정하다	50	LEX-4760	dict	base.tsv
 idiom:腹を立てる	立てる	v1:규칙	sense	idiom	腹 を 立てる	화를 내다	50	LEX-4760	dict	base.tsv
@@ -1298,7 +1298,7 @@ idiom:頭に血がのぼる	血がのぼる	v5:ㄹ	sense	idiom	頭 に 血がの
 idiom:頭をかかえる	かかえる	v1:하다	sense	idiom	頭 を かかえる	고민하다	50	LEX-4760	dict	base.tsv
 idiom:頭をはねる	はねる	v1:규칙	sense	idiom	頭 を はねる	이익을 가로채다	50	LEX-4760	dict	base.tsv
 idiom:頭をもたげる	もたげる	v1:ㄹ	sense	idiom	頭 を もたげる	고개를 들다	50	LEX-4760	dict	base.tsv
-idiom:頭を下げる	下げる	v1:규칙	sense	idiom	頭 を 下げる	고개를 숙이다	50	LEX-4760	dict	base.tsv
+idiom:頭を下げる	下げる	v1:규칙	sense	idiom	頭 を 下げる +nom	고개를 숙이다	50	LEX-4760	dict	base.tsv
 idiom:頭を抑える	抑える	v1:하다	sense	idiom	頭 を 抑える	억압하다	50	LEX-4760	dict	base.tsv
 idiom:頭を痛める	痛める	v1:규칙	sense	idiom	頭 を 痛める	골치를 썩이다	50	LEX-4760	dict	base.tsv
 idiom:頭を集める	集める	v1:으	sense	idiom	頭 を 集める	사람들을 모으다	50	LEX-4760	dict	base.tsv
@@ -1388,8 +1388,8 @@ idiom:丸裸になる	なる	v5:규칙	sense	idiom	丸裸 に なる	알몸이 �
 idiom:気が立つ	立つ	v5:규칙	sense	idiom	気 が 立つ	신경이 곤두서다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気がたつ	たつ	v5:규칙	sense	idiom	気 が たつ	신경이 곤두서다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気にいる	いる	v5:ㄹ	sense	idiom	気 に いる	마음에 들다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を許す	許す	v5:규칙	sense	idiom	気 を 許す	곁을 주다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を取りなおす	取りなおす	v5:규칙	sense	idiom	気 を 取りなおす	마음을 다잡다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を許す	許す	v5:규칙	sense	idiom	気 を 許す +nom	곁을 주다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を取りなおす	取りなおす	v5:규칙	sense	idiom	気 を 取りなおす +nom	마음을 다잡다	50	LEX-4760	dict	words-idioms.tsv
 idiom:金を遣う	遣う	v5:으	sense	idiom	金 を 遣う	돈을 쓰다	50	LEX-4760	dict	words-idioms.tsv
 idiom:金を使う	使う	v5:으	sense	idiom	金 を 使う	돈을 쓰다	50	LEX-4760	dict	words-idioms.tsv
 idiom:剣を抜く	抜く	v5:규칙	sense	idiom	剣 を 抜く	검을 뽑다	50	LEX-4760	dict	words-idioms.tsv
@@ -1516,9 +1516,9 @@ idiom:経を念じる	念じる	v1:규칙	sense	idiom	経 を 念じる	경을 �
 idiom:局に当たる	当たる	v5:규칙	sense	idiom	局 に 当たる	사태를 맡다	50	LEX-4760	dict	words-idioms.tsv
 idiom:居を構える	構える	v1:하다	sense	idiom	居 を 構える	거처를 마련하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:木を伐る	伐る	v5:규칙	sense	idiom	木 を 伐る	나무를 베다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を腐らす	腐らす	v5:규칙	sense	idiom	気 を 腐らす	의기소침해지다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を静める	静める	v1:규칙	sense	idiom	気 を 静める	마음을 가라앉히다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を散らす	散らす	v5:규칙	sense	idiom	気 を 散らす	주의를 흩뜨리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を腐らす	腐らす	v5:규칙	sense	idiom	気 を 腐らす +nom	의기소침해지다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を静める	静める	v1:규칙	sense	idiom	気 を 静める +nom	마음을 가라앉히다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を散らす	散らす	v5:규칙	sense	idiom	気 を 散らす +nom	주의를 흩뜨리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:奇をてらう	てらう	v5:하다	sense	idiom	奇 を てらう	기발함을 과시하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:奇を衒う	衒う	v5:하다	sense	idiom	奇 を 衒う	기발함을 과시하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:行儀を直す	直す	v5:규칙	sense	idiom	行儀 を 直す	예절을 바로잡다	50	LEX-4760	dict	words-idioms.tsv
@@ -1748,9 +1748,9 @@ idiom:灰汁を取る	取る	v5:규칙	sense	idiom	灰汁 を 取る	거품을 �
 idiom:鼻に掛ける	掛ける	v1:규칙	sense	idiom	鼻 に 掛ける	자랑으로 삼다	50	LEX-4760	dict	words-idioms.tsv
 idiom:酷がある	ある	v5:규칙	sense	idiom	酷 が ある	깊은 맛이 있다	50	LEX-4760	dict	words-idioms.tsv
 idiom:濃がある	ある	v5:규칙	sense	idiom	濃 が ある	깊은 맛이 있다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を引く	引く	v5:ㄹ	sense	idiom	気 を 引く	관심을 끌다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をひく	ひく	v5:ㄹ	sense	idiom	気 を ひく	관심을 끌다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を入れる	入れる	v1:규칙	sense	idiom	気 を 入れる	정성을 쏟다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を引く	引く	v5:ㄹ	sense	idiom	気 を 引く +nom	관심을 끌다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をひく	ひく	v5:ㄹ	sense	idiom	気 を ひく +nom	관심을 끌다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を入れる	入れる	v1:규칙	sense	idiom	気 を 入れる +nom	정성을 쏟다	50	LEX-4760	dict	words-idioms.tsv
 idiom:耳にすう	すう	v5:ㄷ	sense	idiom	耳 に すう	듣다	50	LEX-4760	dict	words-idioms.tsv
 idiom:臍を噛む	噛む	v5:하다	sense	idiom	臍 を 噛む	후회하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:臍を固める	固める	v1:규칙	sense	idiom	臍 を 固める	결심을 굳히다	50	LEX-4760	dict	words-idioms.tsv
@@ -1822,8 +1822,8 @@ idiom:種をまく	まく	v5:규칙	sense	idiom	種 を まく	씨를 뿌리다	
 idiom:種を蒔く	蒔く	v5:규칙	sense	idiom	種 を 蒔く	씨를 뿌리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:尻に敷く	敷く	v5:ㄹ	sense	idiom	尻 に 敷く	쥐고 흔들다	50	LEX-4760	dict	words-idioms.tsv
 idiom:尻にしく	しく	v5:ㄹ	sense	idiom	尻 に しく	쥐고 흔들다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を持たす	持たす	v5:ㄹ	sense	idiom	気 を 持たす	기대하게 만들다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を休める	休める	v1:규칙	sense	idiom	気 を 休める	마음을 놓다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を持たす	持たす	v5:ㄹ	sense	idiom	気 を 持たす +nom	기대하게 만들다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を休める	休める	v1:규칙	sense	idiom	気 を 休める +nom	마음을 놓다	50	LEX-4760	dict	words-idioms.tsv
 idiom:寝首をかく	かく	v5:규칙	sense	idiom	寝首 を かく	뒤통수를 치다	50	LEX-4760	dict	words-idioms.tsv
 idiom:寝首を掻く	掻く	v5:규칙	sense	idiom	寝首 を 掻く	뒤통수를 치다	50	LEX-4760	dict	words-idioms.tsv
 idiom:風雲急を告げる	告げる	v1:규칙	sense	idiom	風雲急 を 告げる	정세가 급박해지다	50	LEX-4760	dict	words-idioms.tsv
@@ -1901,8 +1901,8 @@ idiom:尻を上げる	上げる	v1:규칙	sense	idiom	尻 を 上げる	자리�
 idiom:袖を通す	通す	v5:규칙	sense	idiom	袖 を 通す	옷을 입다	50	LEX-4760	dict	words-idioms.tsv
 idiom:見に出かける	出かける	v1:규칙	sense	idiom	見 に 出かける	보러 나가다	50	LEX-4760	dict	words-idioms.tsv
 idiom:様に言う	言う	v5:하다	sense	idiom	様 に 言う	하도록 말하다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をそらす	そらす	v5:규칙	sense	idiom	気 を そらす	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を逸らす	逸らす	v5:규칙	sense	idiom	気 を 逸らす	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をそらす	そらす	v5:규칙	sense	idiom	気 を そらす +nom	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を逸らす	逸らす	v5:규칙	sense	idiom	気 を 逸らす +nom	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:話をそらす	そらす	v5:규칙	sense	idiom	話 を そらす	화제를 돌리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:話を逸らす	逸らす	v5:규칙	sense	idiom	話 を 逸らす	화제를 돌리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:神経を尖らせる	尖らせる	v1:규칙	sense	idiom	神経 を 尖らせる	촉각을 곤두세우다	50	LEX-4760	dict	words-idioms.tsv
@@ -1915,7 +1915,7 @@ idiom:主眼を置く	置く	v5:규칙	sense	idiom	主眼 を 置く	주안을 �
 idiom:主眼をおく	おく	v5:규칙	sense	idiom	主眼 を おく	주안을 두다	50	LEX-4760	dict	words-idioms.tsv
 idiom:癇に障る	障る	v5:규칙	sense	idiom	癇 に 障る	부아가 뒤집히다	50	LEX-4760	dict	words-idioms.tsv
 idiom:癇にさわる	さわる	v5:규칙	sense	idiom	癇 に さわる	화를 돋우다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を病む	病む	v5:하다	sense	idiom	気 を 病む	걱정하다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を病む	病む	v5:하다	sense	idiom	気 を 病む +nom	걱정하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:スタートを切る	切る	v5:하다	sense	idiom	スタート を 切る	출발하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:眼鏡にかなう	かなう	v5:ㄹ	sense	idiom	眼鏡 に かなう	눈에 들다	50	LEX-4760	dict	words-idioms.tsv
 idiom:眼鏡に適う	適う	v5:ㄹ	sense	idiom	眼鏡 に 適う	눈에 들다	50	LEX-4760	dict	words-idioms.tsv
@@ -1980,7 +1980,7 @@ idiom:目処が立つ	立つ	v5:규칙	sense	idiom	目処 が 立つ	전망이 �
 idiom:裏がある	ある	v5:규칙	sense	idiom	裏 が ある	속사정이 있다	50	LEX-4760	dict	words-idioms.tsv
 idiom:ボタンを掛ける	掛ける	v1:규칙	sense	idiom	ボタン を 掛ける	단추를 채우다	50	LEX-4760	dict	words-idioms.tsv
 idiom:燗をつける	つける	v1:규칙	sense	idiom	燗 を つける	술을 데우다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を奪われる	奪われる	v1:규칙	sense	idiom	気 を 奪われる	넋을 빼앗기다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を奪われる	奪われる	v1:규칙	sense	idiom	気 を 奪われる +nom	넋을 빼앗기다	50	LEX-4760	dict	words-idioms.tsv
 idiom:牛耳を執る	執る	v5:규칙	sense	idiom	牛耳 を 執る	주도권을 잡다	50	LEX-4760	dict	words-idioms.tsv
 idiom:キャリアを積む	積む	v5:규칙	sense	idiom	キャリア を 積む	경력을 쌓다	50	LEX-4760	dict	words-idioms.tsv
 idiom:技神に入る	入る	v5:러	sense	idiom	技神 に 入る	신의 경지에 이르다	50	LEX-4760	dict	words-idioms.tsv
@@ -1996,11 +1996,11 @@ idiom:皮を剥く	剥く	v5:규칙	sense	idiom	皮 を 剥く	껍질을 벗기�
 idiom:歯を抜く	抜く	v5:규칙	sense	idiom	歯 を 抜く	이를 뽑다	50	LEX-4760	dict	words-idioms.tsv
 idiom:根性が曲がる	曲がる	v5:규칙	sense	idiom	根性 が 曲がる	심보가 비뚤어지다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気に染む	染む	v5:ㄹ	sense	idiom	気 に 染む	마음에 들다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をのまれる	のまれる	v1:규칙	sense	idiom	気 を のまれる	기세에 눌리다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を呑まれる	呑まれる	v1:규칙	sense	idiom	気 を 呑まれる	기세에 눌리다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を吐く	吐く	v5:하다	sense	idiom	気 を 吐く	기염을 토하다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を緩める	緩める	v1:규칙	sense	idiom	気 を 緩める	긴장을 늦추다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をゆるめる	ゆるめる	v1:규칙	sense	idiom	気 を ゆるめる	긴장을 늦추다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をのまれる	のまれる	v1:규칙	sense	idiom	気 を のまれる +nom	기세에 눌리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を呑まれる	呑まれる	v1:규칙	sense	idiom	気 を 呑まれる +nom	기세에 눌리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を吐く	吐く	v5:하다	sense	idiom	気 を 吐く +nom	기염을 토하다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を緩める	緩める	v1:규칙	sense	idiom	気 を 緩める +nom	긴장을 늦추다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をゆるめる	ゆるめる	v1:규칙	sense	idiom	気 を ゆるめる +nom	긴장을 늦추다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気が強くなる	強くなる	v5:규칙	sense	idiom	気 が 強くなる	자신감이 생기다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気が変になる	変になる	v5:규칙	sense	idiom	気 が 変になる	정신이 이상해지다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気が詰まる	詰まる	v5:규칙	sense	idiom	気 が 詰まる	숨이 막히다	50	LEX-4760	dict	words-idioms.tsv
@@ -2018,7 +2018,7 @@ idiom:山を張る	張る	v5:규칙	sense	idiom	山 を 張る	찍다	50	LEX-476
 idiom:足を崩す	崩す	v5:하다	sense	idiom	足 を 崩す	자세를 편하게 하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:ボロクソに言う	言う	v5:규칙	sense	idiom	ボロクソ に 言う	형편없이 깎아내리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:舵を切る	切る	v5:ㄹ	sense	idiom	舵 を 切る	방향을 틀다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を散じる	散じる	v1:규칙	sense	idiom	気 を 散じる	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を散じる	散じる	v1:규칙	sense	idiom	気 を 散じる +nom	주의를 돌리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:前を開く	開く	v5:ㄹ	sense	idiom	前 を 開く	앞섶을 열다	50	LEX-4760	dict	words-idioms.tsv
 idiom:羽根を伸ばす	伸ばす	v5:규칙	sense	idiom	羽根 を 伸ばす	마음껏 즐기다	50	LEX-4760	dict	words-idioms.tsv
 idiom:危害を加える	加える	v1:규칙	sense	idiom	危害 を 加える	해를 끼치다	50	LEX-4760	dict	words-idioms.tsv
@@ -2274,8 +2274,8 @@ idiom:心に思う	思う	v5:하다	sense	idiom	心 に 思う	속으로 생각�
 idiom:頬が緩む	緩む	v5:규칙	sense	idiom	頬 が 緩む	표정이 풀어지다	50	LEX-4760	dict	words-idioms.tsv
 idiom:頬がゆるむ	ゆるむ	v5:규칙	sense	idiom	頬 が ゆるむ	표정이 풀어지다	50	LEX-4760	dict	words-idioms.tsv
 idiom:親交を深める	深める	v1:하다	sense	idiom	親交 を 深める	친분을 깊게 하다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を利かす	利かす	v5:하다	sense	idiom	気 を 利かす	눈치 있게 행동하다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をきかす	きかす	v5:하다	sense	idiom	気 を きかす	눈치 있게 행동하다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を利かす	利かす	v5:하다	sense	idiom	気 を 利かす +nom	눈치 있게 행동하다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をきかす	きかす	v5:하다	sense	idiom	気 を きかす +nom	눈치 있게 행동하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:両手を突く	突く	v5:규칙	sense	idiom	両手 を 突く	두 손을 짚다	50	LEX-4760	dict	words-idioms.tsv
 idiom:両手をつく	つく	v5:규칙	sense	idiom	両手 を つく	두 손을 짚다	50	LEX-4760	dict	words-idioms.tsv
 idiom:御馳走になる	なる	v5:규칙	sense	idiom	御馳走 に なる	대접받다	50	LEX-4760	dict	words-idioms.tsv
@@ -2376,7 +2376,7 @@ idiom:チャンスを覗う	覗う	v5:규칙	sense	idiom	チャンス を 覗う
 idiom:軸足を置く	置く	v5:규칙	sense	idiom	軸足 を 置く	중점을 두다	50	LEX-4760	dict	words-idioms.tsv
 idiom:机を並べる	並べる	v1:하다	sense	idiom	机 を 並べる	나란히 일하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:腹に落ちる	落ちる	v1:규칙	sense	idiom	腹 に 落ちる	납득이 가다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を確かにもつ	確かにもつ	v5:규칙	sense	idiom	気 を 確かにもつ	정신을 똑바로 차리다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を確かにもつ	確かにもつ	v5:규칙	sense	idiom	気 を 確かにもつ +nom	정신을 똑바로 차리다	50	LEX-4760	dict	words-idioms.tsv
 idiom:眼光紙背に徹す	徹す	v5:규칙	sense	idiom	眼光紙背 に 徹す	행간을 읽다	50	LEX-4760	dict	words-idioms.tsv
 idiom:主になる	なる	v5:하다	sense	idiom	主 に なる	주도하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:帳尻が合う	合う	v5:규칙	sense	idiom	帳尻 が 合う	수지가 맞다	50	LEX-4760	dict	words-idioms.tsv
@@ -2392,7 +2392,7 @@ idiom:盾に取る	取る	v5:하다	sense	idiom	盾 に 取る	빙자하다	50	L
 idiom:機を織る	織る	v5:규칙	sense	idiom	機 を 織る	베를 짜다	50	LEX-4760	dict	words-idioms.tsv
 idiom:立直をかける	かける	v1:ㄹ	sense	idiom	立直 を かける	리치를 걸다	50	LEX-4760	dict	words-idioms.tsv
 idiom:指示器を出す	出す	v5:규칙	sense	idiom	指示器 を 出す	방향지시등을 켜다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をそそる	そそる	v5:하다	sense	idiom	気 を そそる	흥미를 자극하다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をそそる	そそる	v5:하다	sense	idiom	気 を そそる +nom	흥미를 자극하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:力を借りる	借りる	v1:규칙	sense	idiom	力 を 借りる	도움을 받다	50	LEX-4760	dict	words-idioms.tsv
 idiom:火を吐く	吐く	v5:규칙	sense	idiom	火 を 吐く	불을 뿜다	50	LEX-4760	dict	words-idioms.tsv
 idiom:命を拾う	拾う	v5:규칙	sense	idiom	命 を 拾う	목숨을 건지다	50	LEX-4760	dict	words-idioms.tsv
@@ -2459,8 +2459,8 @@ idiom:忌諱に触れる	触れる	v1:규칙	sense	idiom	忌諱 に 触れる	�
 idiom:無になる	なる	v5:규칙	sense	idiom	無 に なる	물거품이 되다	50	LEX-4760	dict	words-idioms.tsv
 idiom:言外に仄めかす	仄めかす	v5:하다	sense	idiom	言外 に 仄めかす	넌지시 암시하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:後手を踏む	踏む	v5:규칙	sense	idiom	後手 を 踏む	뒤처지다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気をそぐ	そぐ	v5:규칙	sense	idiom	気 を そぐ	의욕을 꺾다	50	LEX-4760	dict	words-idioms.tsv
-idiom:気を削ぐ	削ぐ	v5:규칙	sense	idiom	気 を 削ぐ	의욕을 꺾다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気をそぐ	そぐ	v5:규칙	sense	idiom	気 を そぐ +nom	의욕을 꺾다	50	LEX-4760	dict	words-idioms.tsv
+idiom:気を削ぐ	削ぐ	v5:규칙	sense	idiom	気 を 削ぐ +nom	의욕을 꺾다	50	LEX-4760	dict	words-idioms.tsv
 idiom:前後を忘れる	忘れる	v1:하다	sense	idiom	前後 を 忘れる	앞뒤를 분간하지 못하다	50	LEX-4760	dict	words-idioms.tsv
 idiom:気合が入る	入る	v5:규칙	sense	idiom	気合 が 入る	의욕이 넘치다	50	LEX-4760	dict	words-idioms.tsv
 idiom:小腹が減る	減る	v5:하다	sense	idiom	小腹 が 減る	출출하다	50	LEX-4760	dict	words-idioms.tsv
@@ -2644,7 +2644,7 @@ idiom:迷惑を掛ける	掛ける	v1:규칙	sense	idiom	迷惑 を 掛ける	�
 idiom:襤褸を出す	出す	v5:규칙	sense	idiom	襤褸 を 出す	결점을 드러내다	50	LEX-4760	dict	words-variants.tsv
 idiom:縁に繋がる	繋がる	v5:규칙	sense	idiom	縁 に 繋がる	혈연관계가 되다	50	LEX-4760	dict	words-variants.tsv
 idiom:世話がやける	やける	v1:규칙	sense	idiom	世話 が やける	치다꺼리에 애가 쓰이다	50	LEX-4760	dict	words-variants.tsv
-idiom:気をくばる	くばる	v5:하다	sense	idiom	気 を くばる	배려하다	50	LEX-4760	dict	words-variants.tsv
+idiom:気をくばる	くばる	v5:하다	sense	idiom	気 を くばる +nom	배려하다	50	LEX-4760	dict	words-variants.tsv
 idiom:尻馬にのる	のる	v5:하다	sense	idiom	尻馬 に のる	편승하다	50	LEX-4760	dict	words-variants.tsv
 idiom:首をつっこむ	つっこむ	v5:하다	sense	idiom	首 を つっこむ	깊이 관여하다	50	LEX-4760	dict	words-variants.tsv
 idiom:首を突っこむ	突っこむ	v5:하다	sense	idiom	首 を 突っこむ	깊이 관여하다	50	LEX-4760	dict	words-variants.tsv
@@ -2787,7 +2787,7 @@ idiom:茹であがる	あがる	v5:규칙	sense	idiom	茹 で あがる	익다	5
 idiom:年をくう	くう	v5:규칙	sense	idiom	年 を くう	나이를 먹다	50	LEX-4760	dict	words-variants.tsv
 idiom:年を喰う	喰う	v5:규칙	sense	idiom	年 を 喰う	나이를 먹다	50	LEX-4760	dict	words-variants.tsv
 idiom:丹精を込める	込める	v1:규칙	sense	idiom	丹精 を 込める	정성들이다	50	LEX-4760	dict	words-variants.tsv
-idiom:喉をならす	ならす	v5:ㄹ	sense	idiom	喉 を ならす	군침이 돌다	50	LEX-4760	dict	words-variants.tsv
+idiom:喉をならす	ならす	v5:ㄹ	sense	idiom	喉 を ならす +nom	목을 울리다	50	LEX-4760	dict	words-variants.tsv
 idiom:咽喉を鳴らす	鳴らす	v5:ㄹ	sense	idiom	咽喉 を 鳴らす	군침이 돌다	50	LEX-4760	dict	words-variants.tsv
 idiom:行方をくらます	くらます	v5:하다	sense	idiom	行方 を くらます	잠적하다	50	LEX-4760	dict	words-variants.tsv
 idiom:行方を暗ます	暗ます	v5:하다	sense	idiom	行方 を 暗ます	잠적하다	50	LEX-4760	dict	words-variants.tsv
@@ -2826,7 +2826,7 @@ idiom:生彩を欠く	欠く	v5:규칙	sense	idiom	生彩 を 欠く	생동감�
 idiom:トドメを刺す	刺す	v5:규칙	sense	idiom	トドメ を 刺す	결정타를 날리다	50	LEX-4760	dict	words-variants.tsv
 idiom:イビキをかく	かく	v5:ㄹ	sense	idiom	イビキ を かく	골다	50	LEX-4760	dict	words.tsv
 idiom:シラを切る	切る	v5:규칙	sense	idiom	シラ を 切る	시치미를 떼다	50	LEX-4760	dict	words.tsv
-idiom:ハメを外す	外す	v5:규칙	sense	idiom	ハメ を 外す	도를 넘다	50	LEX-4760	dict	words.tsv
+idiom:ハメを外す	外す	v5:규칙	sense	idiom	ハメ を 外す +nom	도를 넘다	50	LEX-4760	dict	words.tsv
 idiom:バカを言う	言う	v5:하다	sense	idiom	バカ を 言う	말도 안 되는 소리를 하다	50	LEX-4760	dict	words.tsv
 idiom:ペアを組む	組む	v5:ㅅ	sense	idiom	ペア を 組む	짝짓다	50	LEX-4760	dict	words.tsv
 idiom:ホラを吹く	吹く	v5:규칙	sense	idiom	ホラ を 吹く	떠벌리다	50	LEX-4760	dict	words.tsv
@@ -2858,7 +2858,7 @@ idiom:歳を取る	取る	v5:규칙	sense	idiom	歳 を 取る	늙다	50	LEX-476
 idiom:死に損ねる	損ねる	v1:하다	sense	idiom	死 に 損ねる	죽지 못하다	50	LEX-4760	dict	words.tsv
 idiom:気が乗る	乗る	v5:규칙	sense	idiom	気 が 乗る	내키다	50	LEX-4760	dict	words.tsv
 idiom:気が違う	違う	v5:규칙	sense	idiom	気 が 違う	미치다	50	LEX-4760	dict	words.tsv
-idiom:気を揉む	揉む	v5:규칙	sense	idiom	気 を 揉む	애태우다	50	LEX-4760	dict	words.tsv
+idiom:気を揉む	揉む	v5:규칙	sense	idiom	気 を 揉む +nom	애태우다	50	LEX-4760	dict	words.tsv
 idiom:法螺を吹く	吹く	v5:규칙	sense	idiom	法螺 を 吹く	떠벌리다	50	LEX-4760	dict	words.tsv
 idiom:火が点く	点く	v5:규칙	sense	idiom	火 が 点く	불붙다	50	LEX-4760	dict	words.tsv
 idiom:火が迫る	迫る	v5:규칙	sense	idiom	火 が 迫る	불길이 다가오다	50	LEX-4760	dict	words.tsv
@@ -2871,7 +2871,7 @@ idiom:目に遭う	遭う	v5:하다	sense	idiom	目 に 遭う +mod	변을 당�
 idiom:空になる	なる	v5:규칙	sense	idiom	空 に なる	비다	50	LEX-4760	dict	words.tsv
 idiom:素に戻る	戻る	v5:규칙	sense	idiom	素 に 戻る	본래 모습으로 돌아오다	50	LEX-4760	dict	words.tsv
 idiom:総スカンを食う	食う	v5:하다	sense	idiom	総スカン を 食う	외면당하다	50	LEX-4760	dict	words.tsv
-idiom:肉が付く	付く	v5:규칙	sense	idiom	肉 が 付く	살이 붙다	50	LEX-4760	dict	words.tsv
+idiom:肉が付く	付く	v5:규칙	sense	idiom	肉 が 付く +nom	살이 붙다	50	LEX-4760	dict	words.tsv
 idiom:胸襟を開く	開く	v5:규칙	sense	idiom	胸襟 を 開く	터놓다	50	LEX-4760	dict	words.tsv
 idiom:腕を奮う	奮う	v5:하다	sense	idiom	腕 を 奮う	솜씨를 발휘하다	50	LEX-4760	dict	words.tsv
 idiom:腰をおとす	おとす	v5:규칙	sense	idiom	腰 を おとす	몸을 낮추다	50	LEX-4760	dict	words.tsv

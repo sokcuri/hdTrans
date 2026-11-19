@@ -1080,9 +1080,8 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
             if (IdiomTopic(c.headRaw, m.seen.substr(m.seen.size() - std::string_view("は").size()), c.idiomParticle) == c.headRaw) return false;
         }
         j++;
-    } else if ((c.idiomParticle == "を" || c.idiomParticle == "が") && ClassOf(items[j]) == '2' &&
-               items[j]->group->surface == "の") {
-        // the idiom said as a noun of manner, its particle as の (気の利かせ方, ハメの外しよう): checked at the verb
+    } else if (c.nominal && ClassOf(items[j]) == '2' && items[j]->group->surface == "の") {
+        // the idiom said as a noun of manner, its particle as の (気の利かせ方, ハメの外しよう; row +nom): checked at the verb
         nominal = true;
         j++;
     } else if (c.idiomParticle == "を" || c.idiomParticle == "が") {
@@ -1122,7 +1121,8 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         }
         if (verb->detail != nullptr && (verb->detail->record != 0 || verb->detail->voice != Voice::None)) return false;
     }
-    // After の the verb is its stem with 方 or よう right after it (利かせ方, 外しよう; not 外そう).
+    // After の the verb is its stem with 方 right after it (利かせ方, 外し方), or よう after a godan stem
+    // (外しよう; not 外そう). An ichidan stem with よう is its volitional (気の利かせよう 배려하자): not read.
     if (nominal) {
         const std::string_view whole = Slice(verb->text, verb->start, verb->length), stem = verb->group->surface;
         if (!whole.starts_with(stem)) return false;
@@ -1134,7 +1134,7 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         for (const auto& [e, k] : kStemKana) {
             if (last == e && rest.starts_with(k)) rest.remove_prefix(k.size());
         }
-        if (!rest.starts_with("方") && !rest.starts_with("よう")) return false;
+        if (!rest.starts_with("方") && !(c.mannerYou && rest.size() < whole.size() - stem.size() && rest.starts_with("よう"))) return false;
         if (verb->tokenIndex != items[j - 1]->tokenIndex || j != i + 2) return false;
     }
     // Between the words only spaces: a mark (…, 、) or other text in a token of its own breaks the idiom.

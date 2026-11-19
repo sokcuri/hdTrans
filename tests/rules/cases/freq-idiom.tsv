@@ -87,3 +87,38 @@ dict:freq-idiom	とぐろさんが来た。	has:토구로 씨가	keep	lookup
 dict:freq-idiom	骨格や肉の付き方でも変わります	has:살이 붙는 방법	fix	pack
 dict:freq-idiom	仕方ありません。お力添えましょう。	lacks:곁들	keep	lookup
 dict:freq-idiom	爪を噛む癖がない。	has:버릇이 없다	keep	lookup
+dict:freq-idiom	お見送りします。	has:배웅해 드리	keep	lookup
+dict:freq-idiom	お見送りいたします。	has:배웅해 드리	keep	lookup
+dict:freq-idiom	お見送りしましょう。	has:배웅해 드릴	keep	lookup
+dict:freq-idiom	お見送りに来てくれた。	has:배웅하러	keep	lookup
+dict:freq-idiom	駅までお見送りに行きます。	has:배웅하러 갑니다	keep	lookup
+dict:freq-idiom	社長をお見送りする。	has:사장을 배웅한다	keep	lookup
+dict:freq-idiom	お見送りの際に	has:배웅 시에	fix	lookup
+dict:freq-idiom	皆様のお見送りを受けて出発した。	has:배웅을 받아	fix	lookup
+dict:freq-idiom	空港での見送りは寂しい。	has:배웅은	fix	lookup
+dict:freq-idiom	今回の件は見送りとなった。	has:보류가 되었다	keep	lookup
+dict:freq-idiom	足の洗い方を教える。	lacks:손을 떼	keep	pack
+dict:freq-idiom	油の搾り方が昔と違う。	lacks:족치	keep	pack
+dict:freq-idiom	水の差し方にコツがある。	lacks:찬물	keep	pack
+dict:freq-idiom	首の切り方	lacks:파면	keep	pack
+dict:freq-idiom	骨の折り方	lacks:애쓰	keep	pack
+dict:freq-idiom	子供の尻の叩き方	lacks:격려	keep	pack
+dict:freq-idiom	袋の口の切り方が分からない。	lacks:말문	keep	pack
+dict:freq-idiom	電気の付け方が分からない。	lacks:조심	keep	pack
+dict:freq-idiom	空気の入れ方を教えて。	lacks:정성	keep	pack
+dict:freq-idiom	気の利かせようがない。	lacks:배려하자	keep	pack
+dict:freq-idiom	腹の据え方が違う。	has:각오하는 방법	fix	pack
+dict:freq-idiom	口の挟みようがない。	has:말참견할 수가	fix	pack
+dict:freq-idiom	喉の鳴らし方が猫みたいだ。	has:목을 울리는 방법	fix	pack
+dict:freq-idiom	声の掛け方が上手い。	has:말을 거는 방법	fix	pack
+dict:freq-idiom	気の配り方を学ぶ。	has:배려하는 방법	fix	pack
+dict:freq-idiom	気の使い方	has:신경 쓰는 방법	fix	lookup
+dict:freq-idiom	レッテルを張られた。	has:딱지가 붙었다	fix	lookup
+dict:freq-idiom	レッテルを張る。	has:딱지를 붙인다	fix	lookup
+dict:freq-idiom	お近づきの印に、これを。	has:알게 된 기념으로	fix	lookup
+dict:freq-idiom	お近づきのしるしに、これを。	has:알게 된 기념으로	fix	lookup
+dict:freq-idiom	のどを鳴らした。	has:목을 울렸다	fix	lookup
+dict:freq-idiom	喉をならした。	has:목을 울렸다	fix	lookup
+dict:freq-idiom	のどを ゴクリと鳴らした。	has:목을 꿀꺽 울렸다	fix	pack
+dict:freq-idiom	燗太が笑った。	lacks:데운 술	keep	lookup
+dict:freq-idiom	お金がない。	has:돈이 없다	keep	lookup

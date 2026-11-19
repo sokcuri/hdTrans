@@ -91,6 +91,10 @@ struct Colloc {
     bool anchored = false;
     std::string noun, idiomParticle, verb;
     bool modified = false;  // the idiom's noun may take a word that describes it (酷い目に遭う; cond … +mod)
+    // the idiom said as a noun of manner, its particle as の (気の利かせ方; cond … +nom): only where the
+    // noun has no literal reading with the verb (not 足の洗い方)
+    bool nominal = false;
+    bool mannerYou = false;  // +nom of a godan verb: its stem with よう is a noun of manner too (外しよう)
 };
 
 struct PackTable {

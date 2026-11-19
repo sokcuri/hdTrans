@@ -6,3 +6,5 @@ freq-idiom:2	付ける	v1:규칙	sense	idiom	ガン を 付ける	노려보다	5
 freq-idiom:3	つける	v1:규칙	sense	idiom	ガン を つける	노려보다	50	LEX-7350	freq	ガン つけてきた 노려봤다
 freq-idiom:4	委ねる	v1:규칙	sense	idiom	身 を 委ねる	몸을 맡기다	50	LEX-7350	freq	身を すっかり委ねた 몸을 완전히 맡겼다
 freq-idiom:5	惜しむ	v5:규칙	sense	idiom	寸暇 を 惜しむ	촌음을 아끼다	50	LEX-7350	freq	寸暇を 惜しんで 촌음을 아껴
+freq-idiom:6	張る	v5:규칙	sense	idiom	レッテル を 張る	딱지를 붙이다	50	LEX-7350	freq	レッテルを 張られた 딱지가 붙었다
+freq-idiom:7	鳴らす	v5:규칙	sense	idiom	のど を 鳴らす +nom	목을 울리다	50	LEX-7350	freq	のどを ゴクリと鳴らした 목을 꿀꺽 울렸다
