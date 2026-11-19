@@ -138,7 +138,7 @@ dict:freq-lex	お電話の折り返しをお待ちしております。	has:전�
 dict:freq-lex	今朝の電話での折り返しが遅れた。	has:전화 회신이	fix	lookup
 dict:freq-lex	メールの折り返しを待つ。	has:메일 회신을	fix	lookup
 dict:freq-lex	連絡の折り返しが来ない。	has:연락 회신이	fix	lookup
-dict:freq-lex	袖の折り返しがほつれた。	has:소매 접단	fix	lookup
+dict:freq-lex	袖の折り返しが汚れていた。	has:소매 접단이 더러워져	fix	lookup
 dict:freq-lex	ズボンの折り返しを直した。	has:바지 접단을 고쳤다	fix	lookup
 dict:freq-lex	コースの折り返しまで走った。	has:반환점까지	keep	lookup
 dict:freq-lex	氏名の公開を控える。	has:공개를 삼간다	keep	lookup
