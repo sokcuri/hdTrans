@@ -2142,7 +2142,7 @@ bool Worker::Dispatch(int i, int& last) {
         else {
             const Item* const mark = chain.tail;
             BuildSurfaceTransform(i, left);
-            if (SegShadowOn() || settings.splitWhy) SegReport(i, left, mark);
+            if (settings.splitWhy) SegReport(i, left, mark);
         }
         if (const Item* tail = chain.tail) {
             for (int e = 0; e < static_cast<int>(tail->group->entries.size()); e++) {
