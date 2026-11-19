@@ -351,13 +351,17 @@ bool Item::StandsAlone() const {
         return false;
     }
     if (start + group->length != static_cast<int>(text.size())) return false;
-    // The end of the text, unless lines may break mid-sentence, or an ellipsis that the stem's ending
-    // does not follow ends the sentence too (すてき, かわいそう…; not おいし…い, すてき…な人).
+    // The end of the text, unless lines may break mid-sentence, or an ellipsis or a drawn-out wave dash that
+    // the stem's ending does not follow ends the sentence too (すてき, かわいそう…, なめらか〜。; not おいし…い,
+    // すてき…な人, なめらか〜な肌).
     const int n = detail->nextType;
     bool closed = n == tokenizer::kTypeEnd && !w->settings.wrapped;
-    if (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥"))) {
+    const auto drawn = [](std::string_view s) {
+        return s.starts_with("…") || s.starts_with("‥") || s.starts_with("〜") || s.starts_with("～") || s.starts_with("ー");
+    };
+    if ((n == tokenizer::kTypeSymbol || n == tokenizer::kTypeSentenceEnd) && drawn(detail->nextText)) {
         std::string_view after = detail->nextText;
-        while (after.starts_with("…") || after.starts_with("‥") || after.starts_with("　")) after.remove_prefix(std::string_view("…").size());
+        while (drawn(after) || after.starts_with("　")) after.remove_prefix(std::string_view("…").size());
         while (after.starts_with(" ")) after.remove_prefix(1);
         for (int k = tokenIndex + 2; after.empty() && k < w->TokenCount(); k++) {
             const tokenizer::TokenView token = w->Tok(k);

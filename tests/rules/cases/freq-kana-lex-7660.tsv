@@ -1,0 +1,33 @@
+# 규칙: LEX-7660, LEX-7661, LEX-7662, LEX-7663
+rule	input	expected	kind	layer
+lookup:kana-spelling	はなが咲く。	has:꽃이 핀다	fix	lookup
+lookup:kana-spelling	はながさいて	has:꽃이	fix	lookup
+lookup:kana-spelling	そらが青い。	has:하늘이 푸르다	fix	lookup
+lookup:kana-spelling	そらをみあげた	has:하늘을	fix	lookup
+lookup:kana-spelling	カニの女王 ずわいがにが丸ごと１尾！	has:대게가	fix	lookup
+lookup:kana-spelling	いなりずしを食べた。	has:유부초밥을	fix	lookup
+lookup:kana-spelling	おひさしぶり！	lacks:꺼려	fix	lookup
+lookup:kana-spelling	ことはなにも考えられない。	lacks:꽃	keep	lookup
+lookup:kana-spelling	「はなから生きてますから！」	lacks:꽃	keep	lookup
+lookup:kana-spelling	それはないよ。	has:그것은 아니야	keep	lookup
+lookup:kana-spelling	「ね、さっきの『あ』はなによ？」	lacks:꽃	keep	lookup
+lookup:kana-spelling	はなさんが来た。はなが笑った。	has:하나가 웃었다	keep	lookup
+lookup:kana-spelling	そらちゃんが来た。そらが笑った。	has:소라가 웃었다	keep	lookup
+lookup:kana-spelling	ひさしは笑った。	has:히사시는	keep	lookup
+lookup:kana-spelling	やすみ、こっちに来て。	has:야스미	keep	lookup
+lookup:kana-spelling	ひとやすみしよう。	has:잠깐 쉬자	keep	lookup
+pack:kana-spelling	薬がきれた。	has:약이 떨어졌다	fix	packs
+pack:kana-spelling	麻酔がきれた。	has:마취가 풀렸다	fix	packs
+pack:kana-spelling	薬がきれそうだ。	has:떨어질 것 같다	fix	packs
+pack:kana-spelling	ひもがきれた。	has:끊어졌다	fix	lookup
+pack:kana-spelling	食べきれない。	has:다 먹을 수 없다	keep	local
+lookup:kuma-default	くまが出た。	has:곰이 나왔다	fix	defaults
+lookup:kuma-default	森でくまに会った。	has:곰을 만났다	fix	defaults
+lookup:kuma-default	机の下にくまがいた。	has:곰이	fix	defaults
+lookup:kuma-default	目の下にくまができている。	has:기미가	keep	local
+lookup:kuma-default	目元のくまが消えた。	has:기미가	keep	local
+lookup:adjective-drawn	なめらか〜。	has:매끈매끈해~	fix	lookup
+lookup:adjective-drawn	しずか〜。	has:조용해~	fix	lookup
+lookup:adjective-drawn	「ひゅー、すてきー」	has:멋져~	fix	lookup
+lookup:adjective-drawn	なめらかだ。	has:매끈매끈하다	keep	lookup
+lookup:adjective-drawn	良さそう。	has:좋을 것 같다	keep	lookup

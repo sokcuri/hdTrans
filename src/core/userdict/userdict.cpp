@@ -461,6 +461,7 @@ std::vector<dict::UserEntry> KanaSpellings(std::string_view text, const dict::Di
             e.file = -2;
             e.line = n;
             e.kana = true;
+            e.kanaOf = f[1];
             out.push_back(std::move(e));
         }
     }

@@ -1445,6 +1445,12 @@ void ApplyPacks(Flusher& f) {
             // a sense row, which writes the verb in the active, does not replace it.
             if (slot == dict::PackSlot::Sense && !it->packLexeme.empty() && cls == '4') continue;
             const dict::PackRow* best = DecidingRow(f, it, it->group->surface, slot, !nameOnly || nameLayer);
+            // A kana spelling takes the rows of the word it spells where none of its own holds (薬がきれた: the rows of
+            // 切れる); a name the document learned keeps its kana key (はなちゃん … はなが).
+            if (best == nullptr && slot != dict::PackSlot::Name && chosen->user != nullptr && chosen->user->kana &&
+                !chosen->user->kanaOf.empty()) {
+                best = DecidingRow(f, it, chosen->user->kanaOf, slot, !nameOnly || nameLayer);
+            }
             if (best == nullptr) continue;
             const dict::PackRow& r = *best;
             const Selection source{Provenance::Pack, r.global};
