@@ -1,0 +1,28 @@
+# 규칙: SPC-21
+rule	input	expected	kind	layer
+cx:stype-wh:40	どうぐやさんが来た。	has:도구점이 왔다.	fix	rewrites
+cx:stype-wh:40	どうぐやさんは店を閉めた。	lacks:닫았나	fix	rewrites
+cx:stype-wh:40	どうぐやさんで剣を買った。	lacks:샀나	fix	rewrites
+cx:stype-wh:40	どうぐやさんが言った。	lacks:말했나	fix	rewrites
+cx:stype-wh:30	どうぐやさんで買う。	lacks:사나	fix	rewrites
+cx:stype-wh:40	どうぐやが来た。	lacks:왔나	fix	rewrites
+cx:stype-wh:40	どうろを歩いた。	has:걸었다.	fix	rewrites
+cx:stype-wh:40	どうぶつが走った。	has:달렸다.	fix	rewrites
+cx:stype-wh:40	どうくつに入った。	has:들어갔다.	fix	rewrites
+cx:stype-wh:40	いつきさんが来た。	lacks:왔나	fix	rewrites
+cx:stype-wh:40	なにわは店を閉めた。	lacks:닫았나	fix	rewrites
+cx:stype-wh:40	どうじまが来た。	lacks:왔나	fix	rewrites
+attr:question-word-inside	「かといって、情報が何一つ出ていない中で証拠を掴むのは難しいだろう」	lacks:어려울까	fix	rewrites
+attr:question-word-inside	俺が口先でどうこう言ったところで、いきなり解決とはならないだろう。	lacks:않을까	fix	rewrites
+attr:question-word-inside	トラのようにどう猛な姿が隠れてるかもしれないよ	lacks:있는지도	fix	rewrites
+cx:stype-wh:40	どうした。	has:무슨 일	keep	rewrites
+cx:stype-wh:30	どう思う。	has:생각하나	keep	rewrites
+cx:stype-wh:40	何度言った。	has:몇 번 말했나	keep	rewrites
+cx:stype-wh:40	なんど言った。	has:말했나	keep	rewrites
+cx:stype-wh:40	何人来た。	has:왔나	keep	rewrites
+cx:stype-wh:40	何時に来た。	has:왔나	keep	rewrites
+cx:stype-wh:40	いつ頃来た。	has:언제쯤 왔나	keep	rewrites
+cx:stype-wh:30	どこら辺にいる。	has:있나	keep	rewrites
+cx:stype-wh:20	どういうことなの。	has:무슨 뜻이야	keep	rewrites
+cx:stype-wh:20	何よ、これ。	has:뭐야	keep	rewrites
+attr:question-word-inside	どうぐらい？	has:?	keep	rewrites

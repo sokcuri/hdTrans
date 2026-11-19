@@ -245,12 +245,19 @@ bool Item::IsQuestionWord() const {
         if (s.starts_with(n) && !(n.ends_with("か") && s.substr(n.size()).starts_with("ら"))) return false;
     }
     const char cls = At(Code(std::max(selected, 0)), 0);
+    // A dictionary word longer than the question word it starts with asks only where its Korean
+    // reading asks (何度 몇 번, どういうこと 무슨 뜻): not a word the question word only starts by
+    // its sound or spelling (どうぐや 고물상, どうろ 도로, いくら丼 연어알 덮밥, 何一つ 아무것도), nor a name.
+    const std::string_view ko = EntryText(std::max(selected, 0));
+    const bool koAsks = ko.empty() || std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("question.ko")),
+                                                          [&](std::string_view q) { return ko.find(q) != std::string_view::npos; });
     for (const std::string_view wonder : dict::ClassMembers(HDTRANS_CLASS("question.wonder"))) {
         if (!s.starts_with(wonder)) continue;
         const std::string_view rest = s.substr(wonder.size());
-        if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
+        if (rest.empty()) return true;
+        if (text::IsKanji(text::DecodeRune(rest).cp)) return koAsks;
         if (dict::StartsWithMember(HDTRANS_CLASS("particle.wonder"), rest) > 0) return true;
-        if (cls != '0' && cls != '3') return true;
+        if (cls != '0' && cls != '3') return koAsks;
     }
     return false;
 }

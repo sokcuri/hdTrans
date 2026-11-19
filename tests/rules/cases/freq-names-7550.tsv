@@ -1,0 +1,37 @@
+# 규칙: LEX-7550
+rule	input	expected	kind	layer
+names:san-frame	きくちさんが来た。／きくち！	has:키쿠치!	fix	lookup
+names:san-frame	島田さんが来た。	has:시마다 씨	fix	lookup
+names:san-frame	日向坂のライブに行った。	has:히나타자카	fix	lookup
+names:san-frame	欅坂46のメンバー	has:케야키자카	fix	lookup
+names:san-frame	櫻坂46の新曲	has:사쿠라자카	fix	lookup
+names:san-frame	吉本坂46が歌う。	has:요시모토자카	fix	lookup
+names:san-frame	ぞうさんのお鼻。	has:코끼리	fix	lookup
+names:san-frame	となりさんが来た。	has:이웃	fix	lookup
+names:san-frame	どうぐやさんにいこう。	has:도구점	fix	lookup
+names:san-frame	あいは大切だ。	has:사랑은	keep	lookup
+names:san-frame	入江で釣りをした。	lacks:이리에	keep	lookup
+names:san-frame	くまさんがいた。	has:곰	keep	lookup
+names:san-frame	たくさん食べた。	has:많이	keep	lookup
+names:san-frame	みなさん、こんにちは。	has:여러분	keep	lookup
+names:san-frame	下り坂を歩く。	has:내리막	keep	lookup
+names:san-frame	坂を上る。	has:비탈	keep	lookup
+names:san-frame	赤坂に行く。	has:아카사카	keep	lookup
+names:san-frame	乃木坂46のライブ	has:노기자카	keep	lookup
+names:san-frame	ねこさんが来た。	has:고양이	keep	lookup
+names:san-frame	あとは君次第だ。	has:너	keep	lookup
+names:san-frame	まだあるくんだ。	lacks:군	keep	lookup
+names:san-frame	たっくさん食べた。	has:많이	keep	lookup
+names:san-frame	神戸さんが来た。	has:고베 씨가	fix	lookup
+names:san-frame	神戸さん、神戸に行くの？	has:고베에	keep	lookup
+names:san-frame	神戸牛を食べた。	has:고베규	keep	lookup
+names:san-frame	おじぞうさんにお参りした。	has:지장보살에	fix	lookup
+names:san-frame	じぞうさんが立っている。	has:지장보살이	fix	lookup
+names:san-frame	お地蔵さんに手を合わせた。	has:지장보살에	fix	lookup
+names:san-frame	地蔵さんの前で待つ。	has:지장보살 앞	fix	lookup
+names:san-frame	おじぞうさまに祈った。	has:지장보살에	fix	lookup
+names:san-frame	じぞうさまが立っている。	has:지장보살이	fix	lookup
+names:san-frame	ぞうさんが好き。	has:코끼리	keep	lookup
+names:san-frame	赤松林を抜けた。	has:소나무 숲을	fix	lookup
+names:san-frame	赤松の林を歩く。	has:소나무의 숲	keep	lookup
+names:san-frame	植木に水をやる。	has:식목에 물을	keep	lookup

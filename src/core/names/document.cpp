@@ -490,10 +490,10 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         }
     }
     for (const std::string& t : doc->cued) {
-        if (names::CommonWord(snap, t)) doc->common.insert(t);
+        if (names::CommonWord(snap, t) || names::WordContextKey(t)) doc->common.insert(t);
     }
     for (const std::string& t : doc->accepted) {
-        if (names::CommonWord(snap, t)) doc->common.insert(t);
+        if (names::CommonWord(snap, t) || names::WordContextKey(t)) doc->common.insert(t);
     }
     if (!doc->slotted.empty()) {
         doc->key += std::string("\0slotted", 8);
@@ -814,7 +814,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         }
     }
     // A common word the document names stays the word in a line that writes it only as the field of a status
-    // window or before name.common-after (力：35, 朝日を浴びて); a line that also names it keeps the name.
+    // window, before name.common-after or before a row of name.common-word-context for it (力：35, 朝日を浴びて,
+    // 植木に水をやる; spec LEX-7550); a line that also names it keeps the name.
     for (const std::string& k : doc.common) {
         bool common = false, other = false;
         for (std::size_t at = cues.find(k); at != std::string_view::npos; at = cues.find(k, at + k.size())) {
@@ -825,7 +826,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
             // An adnominal before it makes it the word unless a person act or call after it makes it the person
             // (大きな樹を見上げた; 大きな樹くん).
             // A number before it counts the word (3千里); a predicate of a plant keeps a plant (岩に玉藻がからみつく).
-            if (names::CommonSenseAt(after) || NumberBefore(cues.substr(0, at)) || names::PlantSenseAt(*doc.snap, k, after) ||
+            if (names::CommonSenseAt(after) || names::WordContextAt(k, cues.substr(at)) || NumberBefore(cues.substr(0, at)) ||
+                names::PlantSenseAt(*doc.snap, k, after) ||
                 (names::WordBeforeAt(cues.substr(0, at)) && !names::PersonSlotAt(*doc.snap, k, cues.substr(0, at), after))) {
                 common = true;
             } else {

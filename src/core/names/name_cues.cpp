@@ -1585,6 +1585,20 @@ bool CommonSenseAt(std::string_view after) {
     return false;
 }
 
+bool WordContextAt(std::string_view key, std::string_view at) {
+    const auto contexts = dict::ClassMembers(HDTRANS_CLASS("name.common-word-context"));
+    const auto words = dict::ClassNotes(HDTRANS_CLASS("name.common-word-context"));
+    for (std::size_t k = 0; k < contexts.size() && k < words.size(); k++) {
+        if (words[k] == key && at.starts_with(contexts[k])) return true;
+    }
+    return false;
+}
+
+bool WordContextKey(std::string_view key) {
+    const auto words = dict::ClassNotes(HDTRANS_CLASS("name.common-word-context"));
+    return std::find(words.begin(), words.end(), key) != words.end();
+}
+
 bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after) {
     if (dict::StartsWithMember(HDTRANS_CLASS("name.plant-after"), after) == 0) return false;
     for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
