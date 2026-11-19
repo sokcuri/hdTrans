@@ -82,6 +82,15 @@ while [ $i -lt 5000 ]; do
     i=$((i + 1))
 done
 printf '%s\n' "$line" >> "$tmp/input"
+# A long run of one kana before さん, whose ん is a nickname ending: each start of the name is tested as
+# a person before the kana before it are read as words.
+i=0
+line=
+while [ $i -lt 8000 ]; do
+    line=${line}そ
+    i=$((i + 1))
+done
+printf '%sさん\n' "$line" >> "$tmp/input"
 "$cli" -dicts "$dicts" -userdict '' -in "$tmp/input" > "$tmp/output"
 [ "$(wc -l < "$tmp/output")" -eq "$(wc -l < "$tmp/input")" ]
 printf 'PASS long lines\n'

@@ -1724,8 +1724,10 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
                          s += std::max<size_t>(1, text::DecodeRune(text.substr(s)).size)) {
                         const std::string_view named = text.substr(s, baseEnd - s);
                         if (text::DecodeRune(named).size >= named.size()) break;  // fewer than two runes
+                        // the person test first: a walk of the kana before every start of a long run is quadratic
+                        if (!PersonNotWord(named, ctx, snap)) continue;
                         if (s == i ? afterKanji : (afterKanji || !ReadsAsWords(text.substr(i, s - i), snap))) continue;
-                        if (PersonNotWord(named, ctx, snap)) start = s;
+                        start = s;
                     }
                     if (start == std::string_view::npos) continue;
                     // The run up to the end of the nickname reads as no words, and no word of three kana or
