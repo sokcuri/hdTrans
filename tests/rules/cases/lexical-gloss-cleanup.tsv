@@ -153,7 +153,7 @@ dict:jisjk:103359	ワールドカップで優勝した。	월드컵에서 우승
 dict:jisjk:103359	W杯の予選。	월드컵의 예선.	fix	defaults
 dict:jisjk:103359	今年のW杯。	올해의 월드컵.	fix	defaults
 dict:jisjk:103359	サッカーのW杯。	축구의 월드컵.	fix	defaults
-dict:jisjk:103359	W杯の試合。	월드컵의 시합.	fix	defaults
+dict:jisjk:103359	W杯の試合。	월드컵의 경기.	fix	defaults
 dict:jisjk:103359	ワールドカップを観戦する。	월드컵을 관전한다.	keep	defaults
 dict:jisjk:103359	Ｗ杯の決勝。	월드컵의 결승.	fix	defaults
 dict:jisjk:198735	せみしぐれが聞こえる。	매미 떼의 울음소리가 들린다.	fix	lookup

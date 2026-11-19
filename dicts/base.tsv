@@ -154119,7 +154119,7 @@ ttt	ttt	K110			GN				jisjk:201744
 同盟罷業	동맹 파업	I110			GN				jisjk:66300		
 同盟通信社	동맹 통신사	N110	VBl		GN				jisjk:246539		
 同着	동시착	N110		Hd	GN				jisjk:19649		
-同社	동사	N110	VGt		GN				jisjk:19613		
+同社	이 회사	N110	VGt		GN				jisjk:19613		
 同秋	같은해 가을	N110			GN				jisjk:103241		
 同程度	동일한 정도	N110			GN				jisjk:160507		
 同種	동종	N110			GN				jisjk:19644		
@@ -189982,7 +189982,7 @@ ttt	ttt	K110			GN				jisjk:201744
 屋鈍	야돈	N130	QCTVPl		GN				jisjk:335806		
 屋鋪	야시키	N130	QPN	Wa	GN				jisjk:350236		
 屋頭	야가시라	N130	QCTVPl		GN				jisjk:335198		
-屍	시체	N110	VHn		GN				jisjk:115769		
+屍	시체	N110			GN				jisjk:115769		
 屍	시	N110		On	GN				jisjk:258878		
 屍姦	시간	N110			GN				jisjk:233517		
 屍室	시체실	N110	VPl		GN				jisjk:27703		
@@ -251580,7 +251580,7 @@ ttt	ttt	K110			GN				jisjk:201744
 死亡通知	사망 통지	N110			GN				jisjk:188416		
 死人	죽은 사람	N110	VHn		GN				jisjk:25158		
 死人花	석산	N110	VPt		GN				jisjk:234245		
-死体	시체	N110	VHn		GN				jisjk:25166		
+死体	시체	N110			GN				jisjk:25166		
 死体検案書	시체검안서	N110	QHP		GN				jisjk:233930		
 死体現象	사체 현상	N110			GN				jisjk:233931		
 死体硬直	시체 경직	N110			GN				jisjk:233932		
@@ -251733,7 +251733,7 @@ ttt	ttt	K110			GN				jisjk:201744
 残り滓	찌꺼기	N110			GN				jisjk:248973		
 残り火	남은 불	I110			GN				jisjk:82193		
 残り物	남은 것	I110			GN				jisjk:82190		
-残り試合	남은 시합	N110			GN				jisjk:365632		
+残り試合	남은 경기	N110			GN				jisjk:365632		
 残り部分	남은 부분	N110	VBl		GN				jisjk:151655		
 残り香	잔향	I110	UYa		GN				jisjk:82192		
 残んの月	잔월	N110	VSs		GN				jisjk:248976		
@@ -325650,7 +325650,7 @@ ttt	ttt	K110			GN				jisjk:201744
 試供品	시공품	I110			GN				jisjk:76359		
 試写	시사	N110		Hd	GN				jisjk:27828		
 試写会	시사회	N110	VBlUAr		GN				jisjk:187262		
-試合	시합	N110	VRw	Hd	GN	471	||1 &&2 S-1== "何" D-1= "몇"	試合 바로 앞에 何가 오면 何를 몇으로 바꾼다. (미발동: rare-context)	jisjk:27836		
+試合	경기	N110	VRw	Hd	GN	471	||1 &&2 S-1== "何" D-1= "몇"	試合 바로 앞에 何가 오면 何를 몇으로 바꾼다. (미발동: rare-context)	jisjk:27836		
 試合であますところなく	시합에서 남김없이	N110		Nn	GN				jisjk:151149		
 試合をひかえ	시합을 앞&C7@	M427	UMe		GN				jisjk:120880		
 試合を投げ	시합을 포기&AV@	M427		Pn	GN				jisjk:265665		

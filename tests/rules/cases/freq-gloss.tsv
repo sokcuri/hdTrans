@@ -1,0 +1,88 @@
+# 규칙: LEX-7150, LEX-7151, LEX-7153, LEX-7155, SND-22
+rule	input	expected	kind	layer
+dict:freq-gloss	「あの死体がなくなっていたのは、確かに掘り返したからだ。」	has:시체가 없어져	fix	lookup
+dict:freq-gloss	屍がなくなっていた。	has:없어져	fix	lookup
+dict:freq-gloss	遺体がなくなっていた。	has:없어져	keep	lookup
+dict:freq-gloss	財布がなくなった。	지갑이 없어졌다.	keep	lookup
+dict:freq-gloss	祖父がなくなった。	has:돌아가셨다	keep	lookup
+dict:freq-gloss	おじいさんがなくなってから三年が経った。	has:돌아가시고	keep	lookup
+dict:freq-gloss	死体が発見された。	시체가 발견되었다.	keep	lookup
+dict:freq-gloss	「お兄様は甘いんだから」	has:무르	fix	pack
+dict:freq-gloss	君は甘いな。	has:무르	fix	pack
+dict:freq-gloss	お前は甘すぎる。	has:너무 무르다	fix	pack
+dict:freq-gloss	彼は甘かった。	has:물렀다	fix	pack
+dict:freq-gloss	自分に甘い人。	has:무른 사람	fix	pack
+dict:freq-gloss	このケーキは甘い。	이 케이크는 달다.	keep	pack
+dict:freq-gloss	彼は甘いものが好きだ。	has:단 것을	keep	pack
+dict:freq-gloss	考えが甘かった。	has:안이했다	keep	pack
+dict:freq-gloss	世の中は甘くない。	has:만만하지 않다	keep	pack
+dict:freq-gloss	創業１２７年を迎える老舗そば店。	has:메밀국숫집	fix	lookup
+dict:freq-gloss	蕎麦処に寄る。	has:메밀국숫집에	fix	lookup
+dict:freq-gloss	私のそばにいて。	has:곁에	keep	lookup
+dict:freq-gloss	そば粉で作った。	has:메밀가루	keep	lookup
+dict:freq-gloss	昆布でだしを取った。	has:국물을 냈다	fix	lookup
+dict:freq-gloss	だし汁を作る。	has:국물을	fix	lookup
+dict:freq-gloss	今日は休みだし。	has:휴일이고	keep	lookup
+dict:freq-gloss	雨だし、帰ろう。	has:비이고	keep	lookup
+sound:mii-final	「……みー。ここにちゃんといますですよ。」	has:미~.	fix	sound
+sound:mii-final	「…………………みー……。」	has:미~	fix	sound
+sound:mii-final	うん、みー…	응, 미~…	fix	sound
+sound:mii-final	みーっ！	미~!	fix	sound
+sound:mii-final	なあ、みーちゃん。	has:미짱	keep	sound
+sound:mii-final	自然的に出た笑みーーーー。	has:미소	keep	sound
+dict:freq-gloss	筧は小太刀に甘いな。	has:무르네	fix	pack
+dict:freq-gloss	わしは甘くないぞ。	has:무르지 않아	fix	pack
+dict:freq-gloss	私が甘かった。	has:물렀다	fix	pack
+dict:freq-gloss	彼は甘いから、すぐ許す。	has:무르니까	fix	pack
+dict:freq-gloss	あなたは甘すぎます。	has:너무 무릅니다	fix	pack
+dict:freq-gloss	父は娘に甘い。	has:딸에게 무르다	fix	pack
+dict:freq-gloss	みいちゃんは甘い声をあげた。	lacks:무른	keep	pack
+dict:freq-gloss	恋人の首筋から香る甘い女子の匂い。	lacks:무른	keep	pack
+dict:freq-gloss	彼女は甘い嬌声をあげた。	lacks:무른	keep	pack
+dict:freq-gloss	今日のはまだ甘い方だ。	lacks:무른	keep	pack
+dict:freq-gloss	彼女は甘い香りがした。	lacks:무른	keep	pack
+dict:freq-gloss	「イ班、着いて来い。他は待機」	has:따라와라	fix	lookup
+dict:freq-gloss	俺に着いて来い。	has:나를 따라와라	fix	lookup
+dict:freq-gloss	先生に着いてくる。	has:선생님을 따라온다	fix	lookup
+dict:freq-gloss	彼女に着いて行った。	has:그녀를 따라갔다	fix	lookup
+dict:freq-gloss	着いていけない。	has:따라갈 수 없다	fix	lookup
+dict:freq-gloss	駅に着いて来た。	has:역에 도착해 왔다	keep	lookup
+dict:freq-gloss	駅に着いて電話した。	has:역에 도착해	keep	lookup
+dict:freq-gloss	学校に着いて行った。	has:학교에 도착해 갔다	keep	lookup
+dict:freq-gloss	駅に着いていた。	has:역에 도착해 있었다	keep	lookup
+dict:freq-gloss	ライアンはアゼルの肩甲骨の下あたりの傷に口づけた。	has:아래 근처	fix	lookup
+dict:freq-gloss	首の下辺りが痛い。	has:아래 근처가	fix	lookup
+dict:freq-gloss	高市首相、供給網強化―ＡＺＥＣ首脳会合	has:정상회의	fix	lookup
+dict:freq-gloss	実行役男に無期懲役求刑	has:실행책	fix	lookup
+dict:freq-gloss	玉座の間に入った直後、	has:옥좌의 방에	fix	lookup
+dict:freq-gloss	最後は力なく土俵を割った。	has:씨름판 밖으로 밀려났다	fix	lookup
+dict:freq-gloss	少女は呆れて物も言えず、話題を転換した。	has:말도 하지 못하고	fix	lookup
+dict:freq-gloss	…………名前負け、という言葉が相応しい少女だった。	has:이름값을 못함	fix	lookup
+dict:freq-gloss	そうなると食が細くなって…。	has:입이 짧아져	fix	lookup
+dict:freq-gloss	同社は社内調査の開始を発表した。	has:이 회사는	fix	lookup
+dict:freq-gloss	リーグ戦１０試合を終えて最下位。	has:10경기를	fix	lookup
+dict:freq-gloss	リズは両手を頭の後ろで組み、膝をついていた。	has:깍지 껴	fix	pack
+dict:freq-gloss	彼は腕を組んだ。	has:팔짱을 꼈다	fix	pack
+dict:freq-gloss	足を組んで座る。	has:다리를 꼬아	fix	pack
+dict:freq-gloss	チームを組む。	has:팀을 짠다	keep	pack
+dict:freq-gloss	青年は、再び彼女と視線を重ねた。	has:시선을 맞추었다	fix	pack
+dict:freq-gloss	これまで重ねた鍛錬を信じて。	has:거듭한	keep	pack
+dict:freq-gloss	四季が心を弾ませて言うと、	has:마음을 들뜨게 해	fix	pack
+dict:freq-gloss	胸が弾む。	has:가슴이 들뜬다	fix	pack
+dict:freq-gloss	ボールが弾む。	has:공이 튄다	keep	pack
+dict:freq-gloss	彼はゆっくりとキスを落とした。	has:천천히 키스했다	fix	pack
+dict:freq-gloss	財布を落とした。	lacks:키스	keep	pack
+dict:freq-gloss	改正案が通ったとき、	has:개정안이 통과했을 때	fix	pack
+dict:freq-gloss	この道を通って帰る。	has:이 길을 지나	keep	pack
+dict:freq-gloss	3時間で報酬は全部取ったよ。	has:보수는 전부 받았어	fix	pack
+dict:freq-gloss	高い料金を取る店だ。	has:요금을 받는	fix	pack
+dict:freq-gloss	金を取られた。	has:빼앗겼다	keep	pack
+dict:freq-gloss	それを知っている身として、黙っているのは反します。	has:알고 있는 입장으로서	fix	pack
+dict:freq-gloss	アレンは思わず身を固くした。	has:몸을	keep	pack
+dict:freq-gloss	「君は、一人の部屋が好きかい?」	has:혼자만의 방을	fix	pack
+dict:freq-gloss	今日は砂場に少年が一人。	has:한 사람	keep	pack
+dict:freq-gloss	って額です。	has:라는 액수입니다	fix	pack
+dict:freq-gloss	そいつの額にある目を見る。	has:이마에	keep	pack
+dict:freq-gloss	彼女は薄く目を開けた。	has:가늘게 눈을 떴다	fix	pack
+dict:freq-gloss	薄く笑った。	has:엷게 웃었다	fix	pack
+dict:freq-gloss	紙を薄く切る。	has:얇게 자른다	keep	pack

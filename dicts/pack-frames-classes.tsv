@@ -115,3 +115,5 @@ class	parent
 @spike	@tool
 @amount	@abstract
 @manner	@abstract
+@proposal	@document
+@fee	@money

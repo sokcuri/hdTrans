@@ -38,17 +38,17 @@ cx:corpus-fixes-1:107	彼はまだ作業を完了していない。	!rule:cx:cor
 cx:corpus-fixes-1:100	作業は開始してください。	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	作業は開始してください。	has:작업은 개시해 주세요	keep	rewrites
 cx:corpus-fixes-1:100	試合は延期しましょう。	!rule:cx:corpus-fixes-1:100	keep	rewrites
-cx:corpus-fixes-1:100	試合は延期しましょう。	has:시합은 연기합시다	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期しましょう。	has:경기는 연기합시다	keep	rewrites
 cx:corpus-fixes-1:100	計画は中止しようか。	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	計画は中止しようか。	has:계획은 중지할까	keep	rewrites
 cx:corpus-fixes-1:100	試合は延期するな。	!rule:cx:corpus-fixes-1:100	keep	rewrites
-cx:corpus-fixes-1:100	試合は延期するな。	has:시합은 연기하지 마	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期するな。	has:경기는 연기하지 마	keep	rewrites
 cx:corpus-fixes-1:100	作業は開始しても良い。	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	作業は開始しても良い。	has:작업은 개시해도 좋다	keep	rewrites
 cx:corpus-fixes-1:100	予約は確定しますか？	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	予約は確定しますか？	has:예약은 확정합니까	keep	rewrites
 cx:corpus-fixes-1:100	試合が終了したら帰る。	!rule:cx:corpus-fixes-1:100	keep	rewrites
-cx:corpus-fixes-1:100	試合が終了したら帰る。	has:시합이 종료하면	keep	rewrites
+cx:corpus-fixes-1:100	試合が終了したら帰る。	has:경기가 종료하면	keep	rewrites
 cx:corpus-fixes-1:100	提督、新造艦が完成したようですよ？	!rule:cx:corpus-fixes-1:100	keep	rewrites
 cx:corpus-fixes-1:100	提督、新造艦が完成したようですよ？	has:완성한 것 같아요	keep	rewrites
 cx:corpus-fixes-1:100	作戦が完了する。	has:작전이 완료된다	fix	rewrites

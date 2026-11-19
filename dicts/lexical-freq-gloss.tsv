@@ -1,0 +1,18 @@
+#! layer=base
+# 많이 쓰는 낱말 가운데 사전에 없거나 뜻을 잘못 옮기던 말 (LEX-7150)
+そば店	메밀국숫집	n	attr=VFdVMo	// LEX-7150
+蕎麦店	메밀국숫집	n	attr=VFdVMo	// LEX-7150
+そば処	메밀국숫집	n	attr=VFdVMo	// LEX-7150
+蕎麦処	메밀국숫집	n	attr=VFdVMo	// LEX-7150
+だし汁	국물	n	attr=VFd	// LEX-7150
+出汁を取る	국물을 내다	v5	// LEX-7150
+だしを取る	국물을 내다	v5	// LEX-7150
+下あたり	아래 근처	n	// LEX-7150
+下辺り	아래 근처	n	// LEX-7150
+首脳会合	정상회의	n	// LEX-7150
+実行役	실행책	n	attr=VHn	// LEX-7150
+玉座の間	옥좌의 방	n	attr=VPl	// LEX-7150
+土俵を割る	씨름판 밖으로 밀려나다	v5	// LEX-7150
+物も言う	말도 하다	v5	// LEX-7150
+名前負け	이름값을 못함	n	// LEX-7150
+食が細い	입이 짧다	adj	// LEX-7150

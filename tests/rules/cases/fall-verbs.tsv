@@ -122,7 +122,7 @@ pack:fall-verbs:8	ほのかに甘い香りが彼を包んだ。	has:달콤한 �
 pack:fall-verbs:8	スズランの甘い香りだ。	!rule:pack:fall-verbs:8	keep	packs
 pack:fall-verbs:9	こうして、戦いの火蓋が切られた。	has:싸움의 막이 올랐다	fix	packs
 pack:fall-verbs:9	海の上を舞台に、決戦の火蓋が切られた。	has:결전의 막이 올랐다	fix	packs
-pack:fall-verbs:9	審判が手を振り下ろし試合の火蓋が切られる。	has:시합의 막이 오른다	fix	packs
+pack:fall-verbs:9	審判が手を振り下ろし試合の火蓋が切られる。	has:경기의 막이 오른다	fix	packs
 pack:fall-verbs:9	Ａランク指定という未知との戦闘の火蓋が切られる。	has:전투의 막이 오른다	fix	packs
 pack:fall-verbs:9	そして姉妹喧嘩の火蓋が切られた。	has:자매 싸움의 막이	fix	packs
 pack:fall-verbs:10	戦争の火蓋を切ったのが原因だ。	has:전쟁의 포문을 열	fix	packs
