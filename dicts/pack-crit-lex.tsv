@@ -20,3 +20,5 @@ crit-lex:21	sense	額	n	frame	pred=足りる|足りない|不足|増える|減�
 crit-lex:23	sense	たたえる|湛える	v1	colloc	微笑みをたたえる|微笑をたたえる|笑みをたたえる|微笑みを湛える|微笑を湛える|笑みを湛える		미소를 머금다	70	LEX-6652	crit	微笑みをたたえる 미소를 머금다
 crit-lex:24	sense	たたえる|湛える	v1	colloc	涙をたたえる|涙を湛える		눈물을 머금다	70	LEX-6652	crit	涙をたたえる 눈물을 머금다
 crit-lex:27	sense	打ち上げる	v1	frame	after=と obj=-		뒤풀이하다		LEX-6652	crit	スタッフと打ち上げに行った 스태프와 뒤풀이하러 갔다
+kanalex:7664-1	sense	はれ	n	frame	pred=引く|ひく|引ける|ひける|収まる|おさまる|治まる|ひどい|残る|酷い|冷やす|ひやす		부기		LEX-7664	hand	はれが引く 부기가 빠지다
+kanalex:7664-2	sense	はれ	n	frame	mod=足|顔|目|頬|腕|手|指|膝|唇|まぶた|喉|首|肩|歯茎|足首|手首|患部		부기		LEX-7664	hand	足のはれ 다리의 부기
