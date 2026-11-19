@@ -17,7 +17,7 @@ pack:utterance	何って 別に 俺たち 何も リトのために 料理を作
 pack:utterance	　……これじゃあ、付き合ってる以上のなにかみたいだ。	 ……이래서야, 사귀는 이상의 뭔가 같다.	fix	packs
 pack:utterance	「{k=-5.0}―――{/k} 今ね、蒼くんが来てるのよ」	「{k=-5.0}―――{/k} 지금 말이야, 아오이 군이 와」	fix	packs
 pack:utterance	ち、ちょっと！何すんだよー…！	자, 잠깐! 무슨 짓이야~…!	fix	packs
-pack:utterance	「おーこわ。なんなのあれ」	「-무서워. 뭐인 거 어」	fix	packs
+pack:utterance	「おーこわ。なんなのあれ」	has:무서워. 뭐야	fix	packs
 pack:utterance	ようし、まだまだこれから。バリバリ行こうぜ！？	좋아, 아직도 지금부터. 열심히 가자구!?	fix	packs
 pack:utterance	……よお。	……여어.	fix	packs
 pack:utterance	ウッ… 痛(いて)え！ 何すんだよ いきなり！	윽… 아프다! 무슨 짓이야 갑자기!	fix	packs

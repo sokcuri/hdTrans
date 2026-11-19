@@ -1,7 +1,7 @@
 # 규칙: LEX-4619
 rule	input	expected	kind	layer
 normalize:kin-terms	「あたしも行くわよ」\n……あ、兄貴ぃー。	「나도 갈 거야」\n……아, 형~.	fix	normalize
-normalize:kin-terms	「あたしも行くわよ」\nあ、あのぅ……、兄貴……そいつはちょっと無理なんじゃ……	「나도 갈 거야」\n그, 그……, 형……그 녀석은 조금 무리라면……	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nあ、あのぅ……、兄貴……そいつはちょっと無理なんじゃ……	「나도 갈 거야」\n그, 그……, 형……그 녀석은 조금 무리지……	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\nあっ、兄貴！やめましょうよー。いくら何でもそればっかりは。	「나도 갈 거야」\n앗, 형! 그만둡시다~. 아무리 그래도 그것뿐은.	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\nようやく兄を引き離して一人になれた時間。	「나도 갈 거야」\n드디어 형을 갈라 놓아 혼자가 될 수 있었던 시간.	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\nイカれた兄貴を 鎖でつないでろ	「나도 갈 거야」\n고장 난 형을 쇠사슬로 이어라	fix	normalize

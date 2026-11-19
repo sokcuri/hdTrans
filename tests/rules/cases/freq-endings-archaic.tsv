@@ -1,0 +1,17 @@
+# 규칙: LEX-7506
+rule	input	expected	kind	layer
+phrase:時すでにおそし	時すでにおそし。	이미 때는 늦었다.	fix	fixed
+phrase:時既に遅し	時既に遅し。	이미 때는 늦었다.	fix	fixed
+phrase:時既におそし	時既におそし。	이미 때는 늦었다.	fix	fixed
+phrase:時すでに遅し	様が慌てて諫めたが、時すでに遅し。	has:이미 때는 늦었다	keep	fixed
+dict:w:39331	そう、それはまごうことなき事実だった。	has:틀림없는 사실이었다	fix	lookup
+dict:w:39332	紛うことなき現実だった。	has:틀림없는 현실	fix	lookup
+dict:w:39333	まごう事なき真実	has:틀림없는 진실	fix	lookup
+dict:w:39334	是非もなきことなり。	어쩔 수 없는 일이다.	fix	lookup
+dict:w:39330	是非もなき仕儀	has:어쩔 수 없는	fix	lookup
+dict:w:39330	是非もない。	어쩔 수 없다.	keep	lookup
+dict:w:39331	名もなき花	이름 없는 꽃	keep	lookup
+dict:w:39331	声なき声が聞こえた。	소리 없는 목소리가 들렸다.	keep	lookup
+dict:w:39331	言われなき差別を受けた	has:이유 없는 차별	keep	lookup
+dict:w:39331	比類なき挑戦者	has:비할 데 없는 도전자	keep	lookup
+dict:w:39331	紛う事なき現実だっ	has:틀림없는 현실	keep	lookup

@@ -142,7 +142,7 @@
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= ending.voice-condition	Conditions and concessions after (ら)れ: when the main clause is a trouble of stem.adverse-outcome the (ら)れ is the passive (見られたら困る), and a word of word.ability-scope before one makes no potential (誰だってそう言われたら).
 //= ending.voice-desire	Forms of wanting after (ら)れ, which only the passive takes (褒められたい, 見られたくない).
-//= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる).
+//= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる), and かね of what may well happen after (ら)れ or せ (誤解されかねない, 狂わせかねない -게 할 수도 있다; LEX-7507).
 //= ending.voice-polite	Polite forms after (ら)れ; in a question with no subject they ask the listener, whose act the (ら)れ honours (何を読まれているんですか 무엇을 읽고 계십니까).
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
@@ -1854,6 +1854,7 @@ ending.voice-readily	過ぎ
 ending.voice-readily	づら
 ending.voice-readily	続け
 ending.voice-readily	つづけ
+ending.voice-readily	かね
 
 ending.voice-polite	ます
 ending.voice-polite	まし

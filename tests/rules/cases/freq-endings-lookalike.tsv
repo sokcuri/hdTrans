@@ -1,0 +1,80 @@
+# 규칙: LEX-7502, LEX-7503, LEX-7504, LEX-7505, LEX-7507
+rule	input	expected	kind	layer
+cx:zushite:10	宿題を必ずして来なさい。	has:반드시 해	keep	rewrites
+cx:zushite:10	必ずしてください。	has:반드시 해 주세요	keep	rewrites
+cx:zushite:10	必ずして来い。	has:반드시 해 와	keep	rewrites
+cx:zushite:10	宿題を必ずして、提出する。	has:반드시 해,	keep	rewrites
+cx:zushite:10	まずして見せる。	has:우선 해 보인다	keep	rewrites
+cx:zushite:10	とりあえずして、それから考える。	has:우선 해,	keep	rewrites
+cx:zushite:10	あいつ、絶えずして来るな。	has:끊임없이 해	keep	rewrites
+cx:zushite:10	構わずしてください。	has:해 주세요	keep	rewrites
+cx:zushite:10	血を流さずして勝つ。	has:흘리지 않고 이긴다	fix	rewrites
+cx:zushite:10	手を汚さずして、	has:하지 않고,	fix	rewrites
+dict:w:39355	見てましたかしら。	has:보고 있었을까요	fix	lookup
+dict:w:39355	知ってましたかしら。	has:알고 있었을까요	fix	lookup
+dict:w:39355	寝てましたかしら？	has:자고 있었을까요?	fix	lookup
+dict:w:39384	見てましたかも。	has:보고 있었을지도 모릅니다.	fix	lookup
+dict:w:39358	知ってましたかもしれません。	has:알고 있었을지도 모릅니다	fix	lookup
+dict:w:39356	始まってましたかしら。	has:시작되어 있었을까요	fix	lookup
+dict:w:39383	始まってましたかも。	has:시작되어 있었을지도 모릅니다.	fix	lookup
+dict:w:39354	来ましたかしら。	has:왔을까요	fix	lookup
+dict:w:39357	来ましたかもしれません。	has:왔을지도 모릅니다	fix	lookup
+dict:w:39382	分かりましたかも。	has:알았을지도 모릅니다.	fix	lookup
+dict:w:39361	見てましたかい？	has:보고 있었습니까?	fix	lookup
+dict:w:39360	行きましたかい？	has:갔습니까?	fix	lookup
+dict:w:39301	見てましたかね。	has:보고 있었습니까	keep	lookup
+dict:w:39301	見てましたかと聞いた。	has:보고 있었습니까라고	keep	lookup
+cx:kanenakatta:10	命を落としかねなかったので。	has:잃을 수도 있었기 때문에	fix	rewrites
+cx:kanenakatta:10	命を落としかねなかったけど、助かった。	has:잃을 수도 있었지만, 살았다	fix	rewrites
+cx:kanenakatta:10	命を落としかねなかったが、助かった。	has:잃을 수도 있었지만	fix	rewrites
+cx:kanenakatta:10	命を落としかねなかったのに。	has:잃을 수도 있었는데	fix	rewrites
+cx:kanenakatta:10	命を落としかねなかったんだ。	has:잃을 수도 있었다	fix	rewrites
+cx:kanenakatta:10	命を落としかねなかったです。	has:잃을 수도 있었습니다	fix	rewrites
+cx:kanenakatta:10	世界を滅ぼしかねなかった力。	has:멸할 수도 있었던 힘	fix	rewrites
+cx:kanenakatta:10	壊されかねなかったので。	has:부수어질 수도 있었기 때문에	fix	rewrites
+cx:kanenakatta:10	やりかねなかった。	has:할 수도 있었다	fix	rewrites
+cx:kanenakatta:25	あいつなら言いかねない。	has:말할 수도 있다	fix	rewrites
+cx:kanenakatta:26	言いかねないと思った。	has:말할 수도 있다고	fix	rewrites
+cx:kanenakatta:20	彼なら言いかねないので。	has:말할 수도 있기 때문에	fix	rewrites
+cx:kanenakatta:20	言いかねなかった。	has:말할 수도 있었다	fix	rewrites
+cx:kanenakatta:30	言いかねません。	has:말할 수도 있습니다	fix	rewrites
+cx:kanenakatta:30	言いかねませんよ。	has:말할 수도 있어요	fix	rewrites
+cx:kanenakatta:10	言いかねて黙った。	has:말하기 곤란해	keep	rewrites
+cx:kanenakatta:10	お金がなかったので。	has:돈이 없었기 때문에	keep	rewrites
+dict:w:39369	誤解を招きかねませんでした。	has:부를 수도 있었습니다.	fix	lookup
+dict:w:39371	誤解を招きかねませんでしたので、	has:부를 수도 있었으므로,	fix	lookup
+dict:w:39373	誤解を招きかねませんので。	has:부를 수도 있으므로	fix	lookup
+dict:w:39374	誤解を招きかねませんが、	has:부를 수도 있습니다만,	fix	lookup
+dict:w:39375	あいつならやりかねん。	has:할 수도 있다	fix	lookup
+dict:w:39378	やりかねんぞ。	has:할 수도 있어	fix	lookup
+dict:w:39363	来ませんでしたな。	has:오지 않았군요	fix	lookup
+dict:w:39364	知りませんでしたな。	has:몰랐군요	fix	lookup
+dict:w:39365	来ませんでしたなら	has:오지 않았다면	fix	lookup
+dict:w:39377	来ませんでしたならば	has:오지 않았다면	fix	lookup
+dict:w:39367	来ませんでしたなんて	has:오지 않았다니	fix	lookup
+dict:w:39380	来ましたならば	has:왔다면	fix	lookup
+dict:w:39381	言いましたなど	has:말했다는 등	fix	lookup
+dict:jisjk:4368	なんなのあの態度。	has:뭐야 그 태도	fix	lookup
+dict:jisjk:4368	なんなの、もう帰る。	has:뭐야,	fix	lookup
+dict:jisjk:4368	なんなのこの野郎。	has:뭐야 이	fix	lookup
+dict:jisjk:4368	なんなのか分からない。	lacks:뭐야	keep	lookup
+cx:nanja-final:30	何じゃそれ。	has:뭐냐 그것	fix	rewrites
+cx:nanja-final:30	何じゃ、騒がしい。	has:뭐냐,	fix	rewrites
+cx:nanja-final:30	「何じゃそれ」	has:뭐냐 그거	fix	rewrites
+cx:nanja-final:30	何じゃないよ。	lacks:뭐냐	keep	rewrites
+dict:w:39376	そうなんだい？	그런 거야?	fix	lookup
+dict:w:39320	それってなんだい、拓也。	has:그게 뭐야, 타쿠야	fix	lookup
+dict:w:39320	これはなんだいね。	has:이것은 뭐야	fix	lookup
+dict:w:39310	それはなんじゃ、拓也。	has:그것은 뭐냐, 타쿠야	fix	lookup
+pack:utt:なんじゃと	なんじゃと？	뭐라고?	fix	packs
+pack:utt:なんじゃい	なんじゃい！	뭐냐!	fix	packs
+cx:kanenakatta:27	言いかねないならば	has:말할 수도 있다면	fix	rewrites
+cx:kanenakatta:20	言いかねる。	has:말하기 곤란	keep	rewrites
+cx:kanenakatta:25	言いかねます。	has:말하기 곤란합니다	keep	rewrites
+cx:kanenakatta:26	言い出せない。	lacks:수도	keep	rewrites
+cx:kanenakatta:27	言いかねて黙った。	has:말하기 곤란해	keep	rewrites
+cx:kanenakatta:30	言いかねますが、	lacks:수도	keep	rewrites
+dict:w:39358	見てましたかもね。	has:보고 있었을지도	fix	lookup
+dict:w:39359	始まってましたかもしれません。	has:시작되어 있었을지도 모릅니다	fix	lookup
+cx:nanja-final:30	何じゃなかった。	lacks:뭐냐	keep	rewrites
+cx:nanja-final:30	何じゃなくて誰だ。	lacks:뭐냐	keep	rewrites
