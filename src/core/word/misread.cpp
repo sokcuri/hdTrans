@@ -2,6 +2,8 @@
 #include "core/word/misread.h"
 
 #include <algorithm>
+#include <unordered_map>
+#include <vector>
 
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
@@ -96,13 +98,38 @@ char ClassDigit(const Item* it) {
 }
 
 // The nearest item before or after it that is not punctuation or a symbol and whose class
-// digit is not in skip, or null.
-const Item* NearestWord(const Item* it, bool forward, std::string_view skip) {
-    for (const Item* n = forward ? it->After() : it->prev; n != nullptr; n = forward ? n->next : n->prev) {
-        if (ScriptOf(n->group->surface) != 'P' && !AnyOf(skip, ClassDigit(n))) return n;
+// digit is not in skip (none or "25"), or null. The nearest word from each item a long walk passes is
+// remembered for the chain, so a run of punctuation or particles is walked once, not once per item.
+class NearestWords {
+  public:
+    const Item* Of(const Item* it, bool forward, std::string_view skip) {
+        const Item* n = forward ? it->After() : it->prev;
+        // Most words are a step or two away: walk without the memo first.
+        for (int step = 0; step < 8; step++, n = forward ? n->next : n->prev) {
+            if (n == nullptr || Word(n, skip)) return n;
+        }
+        std::unordered_map<const Item*, const Item*>& memo = memo_[(forward ? 2 : 0) + (skip.empty() ? 0 : 1)];
+        std::vector<const Item*> walked;
+        const Item* found = nullptr;
+        for (; n != nullptr; n = forward ? n->next : n->prev) {
+            if (const auto known = memo.find(n); known != memo.end()) {
+                found = known->second;
+                break;
+            }
+            walked.push_back(n);
+            if (Word(n, skip)) {
+                found = n;
+                break;
+            }
+        }
+        for (const Item* w : walked) memo[w] = found;
+        return found;
     }
-    return nullptr;
-}
+
+  private:
+    static bool Word(const Item* n, std::string_view skip) { return ScriptOf(n->group->surface) != 'P' && !AnyOf(skip, ClassDigit(n)); }
+    std::unordered_map<const Item*, const Item*> memo_[4];
+};
 
 std::string_view SurfaceOf(const Item* it) { return it == nullptr ? std::string_view("_") : std::string_view(it->group->surface); }
 
@@ -119,7 +146,7 @@ std::string RunesValue(std::string_view s) {
 }
 
 // The features every candidate of the decision shares.
-void ItemFeatures(const MisreadDecision& d, std::vector<std::string>& out) {
+void ItemFeatures(const MisreadDecision& d, NearestWords& nearest, std::vector<std::string>& out) {
     const Item& it = *d.item;
     const MisreadContext& c = d.context;
     const std::string_view surface = it.group->surface;
@@ -144,9 +171,9 @@ void ItemFeatures(const MisreadDecision& d, std::vector<std::string>& out) {
     out.push_back("np=" + NeighbourPart(it.next));
     out.push_back("ps=" + std::string(SurfaceOf(it.prev)));
     out.push_back("ns=" + std::string(SurfaceOf(it.next)));
-    out.push_back("pw=" + std::string(SurfaceOf(NearestWord(&it, false, ""))));
-    out.push_back("nw=" + std::string(SurfaceOf(NearestWord(&it, true, ""))));
-    const std::string pk(SurfaceOf(NearestWord(&it, false, "25"))), nk(SurfaceOf(NearestWord(&it, true, "25")));
+    out.push_back("pw=" + std::string(SurfaceOf(nearest.Of(&it, false, ""))));
+    out.push_back("nw=" + std::string(SurfaceOf(nearest.Of(&it, true, ""))));
+    const std::string pk(SurfaceOf(nearest.Of(&it, false, "25"))), nk(SurfaceOf(nearest.Of(&it, true, "25")));
     out.push_back("pk=" + pk);
     out.push_back("nk=" + nk);
     out.push_back("s|pk=" + std::string(surface) + "|" + pk);
@@ -285,9 +312,10 @@ std::vector<MisreadDecision> MisreadDecisions(const Chain& chain, const MisreadM
         AddWordDecision(it, c, out);
         AddEndingDecision(it, c, out);
     }
+    NearestWords nearest;
     for (MisreadDecision& d : out) {
         std::vector<std::string> shared;
-        ItemFeatures(d, shared);
+        ItemFeatures(d, nearest, shared);
         for (MisreadCandidate& cand : d.candidates) {
             const Entry* e = cand.slot < 0 ? nullptr
                              : d.kind == MisreadDecisionKind::Word ? d.item->group->At(cand.slot)
