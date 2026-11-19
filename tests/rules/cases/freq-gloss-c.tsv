@@ -95,3 +95,39 @@ dict:freq-gloss-c	首位と２打差の好位置につけた。	has:좋은 위�
 dict:freq-gloss-c	吉田優利、２勝目へ好位置　米女子ゴルフ	has:좋은 위치	fix	lookup
 dict:freq-gloss-c	「えっと、何かの間違いかと思ったんです！」	has:뭔가 착오인 줄	fix	lookup
 dict:freq-gloss-c	それは私の間違いだった。	has:내 실수였다	keep	lookup
+dict:freq-gloss-c	重い荷物持ちながら歩いた。	has:짐 들면서	keep	lookup
+dict:freq-gloss-c	荷物持ちたいです。	has:짐 들고 싶	keep	lookup
+dict:freq-gloss-c	荷物持ちます。	has:짐 듭니다	keep	lookup
+dict:freq-gloss-c	彼は荷物持ちだ。	has:짐꾼이다	fix	lookup
+dict:freq-gloss-c	傘立てておいて。	has:우산 세워 두어	keep	lookup
+dict:freq-gloss-c	傘を傘立てに。	has:우산꽂이에	fix	lookup
+dict:freq-gloss-c	ひとつききたいことがある。	has:하나 묻고 싶은	keep	lookup
+dict:freq-gloss-c	ひとつきいていい？	has:하나 물어	keep	lookup
+dict:freq-gloss-c	ひとつきかせてくれ。	lacks:한 달	keep	lookup
+dict:freq-gloss-c	ひとつきめたことがある。	has:하나 결정	keep	lookup
+dict:freq-gloss-c	ひとつきぶりに帰った。	has:한 달 만에	fix	lookup
+dict:freq-gloss-c	ひとつき後に戻る。	has:한 달 후에	fix	lookup
+dict:freq-gloss-c	ひとつきほど前に会った。	has:한 달 정도 전	fix	lookup
+dict:freq-gloss-c	きらめきながら落ちた。	has:반짝이면서	fix	lookup
+dict:freq-gloss-c	星がきらめいている。	has:반짝이고 있다	fix	lookup
+dict:freq-gloss-c	きらめく宝石。	has:반짝이는 보석	fix	lookup
+dict:freq-gloss-c	きらめき☆プロジェクトが始まる。	has:반짝임☆	fix	lookup
+dict:freq-gloss-c	一瞬の煌めき。	has:반짝임	fix	lookup
+dict:freq-gloss-c	煌めきながら消えた。	has:반짝대면서	keep	lookup
+dict:freq-gloss-c	あきらめきれません。	has:포기할 수 없습니다	keep	lookup
+dict:freq-gloss-c	あきらめて、壁を見た。	has:포기해	keep	lookup
+dict:freq-gloss-c	馬がいななく。	has:말이 운다	fix	lookup
+dict:freq-gloss-c	馬がいなないた。	has:말이 울었다	fix	lookup
+dict:freq-gloss-c	馬がいななきながら走った。	has:울면서	fix	lookup
+dict:freq-gloss-c	馬が嘶きながら倒れた。	has:울면서	fix	lookup
+dict:freq-gloss-c	漏れ聞くところによると、彼は辞めたらしい。	has:얼핏 듣자 하니	fix	lookup
+dict:freq-gloss-c	噂を漏れ聞いた。	has:소문을 얼핏 들었다	fix	lookup
+dict:freq-gloss-c	聞くところによると、彼は辞めた。	has:듣자 하니	keep	lookup
+dict:freq-gloss-c	漏れ聞こえる会話に、	has:새어 들리는	keep	lookup
+dict:freq-gloss-c	空自さん、こんにちは。	has:타카시 씨	keep	lookup
+dict:freq-gloss-c	空自くん！	has:타카시 군	keep	lookup
+dict:freq-gloss-c	空自先輩が来た。	has:타카시 선배	keep	lookup
+dict:freq-gloss-c	陸自と空自の合同訓練	has:항공자위대	fix	lookup
+dict:freq-gloss-c	空自は発表した。	has:항공자위대는	fix	lookup
+dict:freq-gloss-c	いななきさん	has:이나나키 씨	keep	lookup
+dict:freq-gloss-c	きらめきさん	has:키라메키 씨	keep	lookup
