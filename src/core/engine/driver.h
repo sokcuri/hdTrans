@@ -111,6 +111,7 @@ struct TranslationOptions {
     std::span<const word::Scorer> scorers;
     std::span<const word::Scorer> shadowScorers;
     bool selectShadow = false;
+    bool splitWhy = false;  // word::Settings::splitWhy
     bool selectRules = false;
     const word::MisreadModel* misreadModel = nullptr;  // null: the built-in model
     rules::Tally* ruleTally = nullptr;  // counts the runs of the selection rules when set

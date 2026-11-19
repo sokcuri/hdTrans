@@ -16,6 +16,7 @@ void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, co
     arena.Reset();
     out.sentences.clear();
     out.fault = false;
+    out.splits.clear();
     out.worker = std::make_unique<Worker>(tokens, snapshot, lookup, settings, arena, observer);
     Worker& w = *out.worker;
     const auto& markers = tokens.markers;
@@ -43,6 +44,7 @@ void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, co
         i = last;
     }
     out.spaced = w.spaced;
+    out.splits = std::move(w.splitNotes);
 }
 
 bool LineHolds(std::string_view line, std::span<const std::string_view> cues, std::span<const std::string_view> skip) {

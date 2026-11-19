@@ -918,6 +918,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
         s.scorers = options.scorers;
         s.shadowScorers = options.shadowScorers;
         s.selectShadow = options.selectShadow;
+        s.splitWhy = options.splitWhy;
         s.selectRules = options.selectRules;
         s.misreadModel = options.misreadModel;
     }
