@@ -1316,7 +1316,11 @@ bool CharacterTic(std::string_view s, size_t pos, Match& m) {
             // A playful wave after it (こいみたいですぞ〜) keeps the reading of the word stage.
             if (p < s.size() && In(At(s, p).cp, U"〜～")) return false;
         }
-        if (!EndAt(s, p) && !(p < s.size() && In(At(s, p).cp, U"》≫〉>"))) return false;
+        // Before a conjunction the のです goes the same (存じませんのですが 存じませんが, しますのですけど).
+        const std::string_view rest = s.substr(p);
+        const bool conjunction = t[0].ends_with("のです") && p == end &&
+                                 (rest.starts_with("が") || rest.starts_with("けど") || rest.starts_with("けれど"));
+        if (!conjunction && !EndAt(s, p) && !(p < s.size() && In(At(s, p).cp, U"》≫〉>"))) return false;
         // のよさ follows a predicate or the な of the copula; after a noun it is の and the noun よさ (質のよさ).
         if (t[0] == "のよさ" && (pos == 0 || !In(LastRune(s.substr(0, pos)).cp, U"うくすぬむるぐぶたいな"))) return false;
         if (t[0] == "のよさ" && s.substr(0, pos).ends_with("な") &&

@@ -2282,6 +2282,16 @@ size_t DrawnKanaEnd(const Emphasis& e, std::u32string_view rs, std::u32string_vi
         Nickname(rs.substr(end))) {
         return 0;
     }
+    // A word written with marks in more than one place is a drawn word (かぁいぃよぅ), read by the drawn path.
+    for (size_t q = from; q < rs.size() && (q < k || IsHiraganaRune(rs[q])); q++) {
+        if (q != k && IsSmallVowel(rs[q])) return 0;
+    }
+    // A word written with the mark is read as it is (かぁいい, てめぇ, なぁに); the drawn kana with the mark alone
+    // (なぁ, まぁ) is the cry the mark may be dropped from.
+    for (size_t j = from; j < k; j++) {
+        const size_t n = e.LongestKey(rs.substr(j));
+        if (j + n > k && (j + 1 < k || j + n > end)) return 0;
+    }
     size_t best = 0, start = 0;
     for (size_t j = from; j < k; j++) {
         size_t n = e.LongestKey(m.substr(j));
@@ -2296,11 +2306,13 @@ size_t DrawnKanaEnd(const Emphasis& e, std::u32string_view rs, std::u32string_vi
     size_t word = start;  // the start of the run of kana and kanji
     while (word > 0 && start - word < 6 && (IsHiraganaRune(rs[word - 1]) || IsKanjiRune(rs[word - 1]))) word--;
     const bool inside = start > word && IsHiraganaRune(rs[start - 1]);
-    const bool spoken = start == k - 1 && (start == word || !e.Tags(rs.substr(word, start - word)).empty());
+    // A particle after a word ends the phrase before the drawn kana too (あれは|なぁに).
+    const bool afterParticle = start >= 2 && In(rs[start - 1], U"はをもへのにと") &&
+                               (IsHiraganaRune(rs[start - 2]) || IsKanjiRune(rs[start - 2]) || IsKatakanaRune(rs[start - 2]) || rs[start - 2] == U'ー');
+    const bool spoken = start == k - 1 && (start == word || afterParticle || !e.Tags(rs.substr(word, start - word)).empty());
     if (!inside && !spoken) return best;
-    size_t kana = end;
-    while (kana < rs.size() && IsHiraganaRune(rs[kana])) kana++;
-    const size_t own = e.LongestKey(rs.substr(end, kana - end));
+    // The word that starts after the mark, kanji included (the お前 of なぁお前).
+    const size_t own = e.LongestKey(rs.substr(end));
     if (own >= 2 && (spoken ? best <= k + own : best < k + own)) return 0;
     if (spoken && best == k + 1 && (best >= m.size() || !(IsKanjiRune(m[best]) || IsKatakanaRune(m[best])))) return 0;
     return best;

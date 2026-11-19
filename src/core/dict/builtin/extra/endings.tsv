@@ -409,6 +409,14 @@
 高いでち	높아요	end	prio=-1
 高いでちゅ	높아요	end	prio=-1
 高いでちゅね	높네요	end	prio=-1
+静かでちゅよ	조용해요	end	prio=-1
+書くでちゅよ	써요	end	prio=-1
+書いたでちゅよ	썼어요	end	prio=-1
+書いてるでちゅよ	쓰고 있어요	end	prio=-1
+高いでちゅよ	높아요	end	prio=-1
+高かったでちゅ	높았어요	end	prio=-1
+高かったでちゅよ	높았어요	end	prio=-1
+高かったでちゅね	높았네요	end	prio=-1
 書かないでち	쓰지 않아요	end	prio=-1
 学生っしゅ	학생이에요	end	prio=-1
 学生っしゅね	학생이네요	end	prio=-1
