@@ -46,6 +46,7 @@ constexpr std::string_view kHiatusBefore = "アカサタナハマヤラワガザ
 // ム, ヌ and ス before ール: an English long u with l (tool, pool, rule) does not follow m, n
 // or s, so these are not the ㄹ of English words (アムール 아무르, ヌール 누르, マンスール 만수르).
 constexpr std::string_view kNonEnglishLongU = "ムヌス";
+constexpr std::string_view kSaidAfterU = "アイエオ";
 
 // The characters of s as cells; an invalid byte is the cell U+FFFD.
 void AppendCells(std::vector<std::string_view>& out, std::string_view s) {
@@ -355,6 +356,11 @@ void Run::Matrix(long cursor) {
                 ApplyFinal(cursor, row);
             }
         }
+    } else if (search == kMarkRu && !next.empty() && kSaidAfterU.find(next) != std::string_view::npos) {
+        // ル before a full vowel kana other than ウ is said with its vowel, ㅜ as in a Japanese reading
+        // (ルイ 루이, マルイシ 마루이시). Other kana of the u column keep ㅡ there: before a vowel they
+        // mostly end an English word (ワープアイテム 워프아이템, ブイ 브이).
+        Replace(cursor, search, kLongRu);
     } else if (cursor >= Size() - 2 && next == kMarkRu) {
         // A u written with ㅡ keeps it before the final ㄹ (テーブル 테이블, シンプル 심플); ルル
         // stays 룰 (アルル 아룰).
