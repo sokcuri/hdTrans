@@ -66,6 +66,9 @@ struct Name {
     // alone: a name only where an honorific follows it.
     bool honorificOnly = false;
     std::vector<std::string> parts;
+    // A person of the name layer before a title: the Korean of its row, which the reading of the parts must
+    // sound like to replace it, or which a name of one part reads (spec LEX-6901).
+    std::string layer;
 };
 
 class Registry {
@@ -322,6 +325,8 @@ private:
     std::map<std::string, int> ended_;                  // kanji runs before a particle, an honorific or no hiragana
     std::map<std::string, int> kana_;                   // katakana runs
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
+    std::set<std::string> titled_;  // full names before a kanji title in their run (spec LEX-6901)
+    std::map<std::pair<std::string, std::string>, int> kanaGiven_;  // a surname and a hiragana given name before a title
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
     std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
     std::set<std::string> kataRuns_;                    // the katakana runs of the document (CompoundSpelling)
