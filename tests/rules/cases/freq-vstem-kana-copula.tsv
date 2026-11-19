@@ -1,0 +1,64 @@
+# 규칙: LEX-7480, LEX-7481, LEX-7451
+rule	input	expected	kind	layer
+lookup:kana-da-stem-copula	それはいい考えだし、やってみよう。	그것은 좋은 생각이고, 해 보자.	keep	lookup
+lookup:kana-da-stem-copula	彼の考えだそうだ。	그의 생각이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	いい考えだそうで、採用された。	좋은 생각이라고 해, 채용되었다.	keep	lookup
+lookup:kana-da-stem-copula	それも一つの考えだし。	그것도 하나의 생각이고.	keep	lookup
+lookup:kana-da-stem-copula	「いい考えだし、乗った」	「좋은 생각이고, 탔어」	keep	lookup
+lookup:kana-da-stem-copula	せめてもの救いだし、良かった。	has:구원이고	keep	lookup
+lookup:kana-da-stem-copula	それは彼なりの救いだしね。	그것은 그나름의 구원이고.	keep	lookup
+lookup:kana-da-stem-copula	自然な流れだそうです。	자연스러운 흐름이라고 합니다.	keep	lookup
+lookup:kana-da-stem-copula	これで貸しだし、文句はないな。	has:대여이고	keep	lookup
+lookup:kana-da-stem-copula	今日は釣りだし、早く寝る。	오늘은 낚시이고, 빨리 잔다.	keep	lookup
+lookup:kana-da-stem-copula	お誘いだし、行ってみよう。	권유이고, 가 보자.	keep	lookup
+lookup:kana-da-stem-copula	ただの借りだしな。	그냥 빚이고.	keep	lookup
+lookup:kana-da-stem-copula	あれは借りだそうだ。	저것은 빚이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは助けだそうだ。	저것은 도움이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの想いだし、仕方ない。	그것은 그냥 마음이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの稼ぎだし、仕方ない。	그것은 그냥 돈벌이이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	あれは送りだそうだ。	저것은 배웅이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは盗みだそうだ。	저것은 도둑질이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは逃げだそうだ。	저것은 도망이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの狩りだし、仕方ない。	그것은 그냥 사냥이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	あれは運びだそうだ。	저것은 운반이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの払いだし、仕方ない。	그것은 그냥 지불이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	あれは打ちだそうだ。	lacks:내세우	keep	lookup
+lookup:kana-da-stem-copula	それはただの投げだし、仕方ない。	그것은 그냥 던지기이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの抜けだし、仕方ない。	그것은 그냥 누락이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	あれは並びだそうだ。	저것은 배열이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	それはただの押しだし、仕方ない。	그것은 그냥 밀기이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	お前のせいだし、仕方ない。	네 탓이고, 어쩔 수 없다.	fix	lookup
+lookup:kana-da-stem-copula	楽しみのうちだし。	즐거움 가운데이고.	fix	lookup
+lookup:kana-da-stem-copula	「明らかに裏切りだし、許せない」	「분명하게 배반이고, 용서할 수 없어」	keep	lookup
+lookup:kana-da-stem-copula	全部手探りだし。	전부 모색이고.	keep	lookup
+lookup:kana-da-stem-copula	仕方なく体を乗りだし、フォークを取った。	lacks:타기이고	fix	lookup
+lookup:kana-da-stem-copula	そこから抜けだし、なおもじゃれる。	거기에서 빠져 나와, 여전히 장난한다.	fix	lookup
+lookup:kana-da-stem-copula	ダメなら昔のことを持ちだそう。	안 되면 옛일을 꺼내자.	fix	lookup
+lookup:kana-da-stem-copula	答えを割りだそう。	대답을 산출하자.	fix	lookup
+lookup:kana-da-stem-copula	彼の顔を思いだし、涙が出た。	그의 얼굴을 떠올리고, 눈물이 나왔다.	keep	lookup
+lookup:kana-da-stem-copula	涙が流れだし、止まらない。	눈물이 흐르기 시작해, 멈추지 않는다.	fix	lookup
+lookup:kana-da-stem-copula	走りだそうとする俺の袖を掴んだ。	달리기 시작하려고 하는 내 소매를 잡았다.	keep	lookup
+lookup:kana-da-stem-copula	新しい方法を考えだした。	새로운 방법을 생각해 냈다.	fix	lookup
+lookup:kana-tate-stem	振りたてのコーラを開けた。	갓 흔든 콜라를 열었다.	keep	lookup
+lookup:kana-tate-stem	飾りたてのツリーがきれいだ。	갓 장식한 트리가 예쁘다.	keep	lookup
+lookup:kana-tate-stem	追いたての羊。	has:갓 쫓은	keep	lookup
+lookup:kana-tate-stem	駆りたての馬。	has:갓 몬	keep	lookup
+lookup:kana-tate-stem	口説きたての女。	has:갓 꼬신	keep	lookup
+lookup:kana-compound-variant	彼を追いたてた。	그를 몰아냈다.	fix	lookup
+lookup:kana-compound-variant	不安を掻きたてる。	불안을 일으킨다.	fix	lookup
+lookup:kana-compound-variant	部屋を飾りたてた。	방을 화려하게 꾸몄다.	fix	lookup
+lookup:kana-compound-variant	部屋を飾り立てた。	방을 화려하게 꾸몄다.	fix	lookup
+lookup:kana-compound-variant	商品は売りきれた。	상품은 품절되었다.	fix	lookup
+lookup:kana-compound-variant	売りきれの商品。	품절의 상품.	fix	lookup
+lookup:kana-compound-variant	彼はすぐに舞いもどった。	그는 곧바로 되돌아왔다.	fix	lookup
+lookup:kana-compound-variant	帽子が吹きとばされた。	has:날려	fix	lookup
+lookup:kana-da-stem-copula	侑李は笑いだし、ベッドに腰掛けた。	유리는 웃기 시작해, 침대에 앉았다.	keep	lookup
+lookup:kana-da-stem-copula	アールが急にケラケラと笑いだし、銃を納めた。	아르가 갑자기 깔깔 웃기 시작해, 총을 납부했다.	keep	lookup
+lookup:kana-da-stem-copula	皇太子はすぐに大きな声で笑いだし、言った。	has:웃기 시작해	keep	lookup
+lookup:kana-da-stem-copula	彼女は泣きだし、部屋を出た。	그녀는 울기 시작해, 방을 나왔다.	keep	lookup
+lookup:kana-da-stem-copula	彼は走りだし、振り返った。	그는 달리기 시작해, 돌아보았다.	keep	lookup
+lookup:kana-da-stem-copula	しばらくして動きだし、去った。	잠시 후 움직이기 시작해, 떠났다.	keep	lookup
+lookup:kana-da-stem-copula	ようやく思いだし、頷いた。	드디어 떠올려, 끄덕였다.	keep	lookup
+lookup:kana-da-stem-copula	ただの笑いだし、気にするな。	그냥 웃음이고, 신경 쓰지 마.	fix	lookup
+lookup:kana-da-stem-copula	流れだし、仕方ない。	흐름이고, 어쩔 수 없다.	keep	lookup
+lookup:kana-da-stem-copula	もともと厳しい戦いだし、無理もない。	원래 어려운 싸움이고, 무리도 아니다.	keep	lookup

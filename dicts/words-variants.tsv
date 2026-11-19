@@ -20812,7 +20812,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 食べき	다 &HU@	M428			GN							w:39256
 食みだ	넘&AO@	M413		Ct	GN							w:39257
 食みだ	밀려&A5@	M413			GN							w:39258
-飾りたて	성장&AV@	M437			GN							w:39259
+飾りたて	화려하게 꾸&AB@	M437			GN							w:39259
 駆けだ	달리기 시작&AV@	M423			GN							w:39260
 駆りだ	끌어&A6@	M433			GN							w:39261
 駆りたて	몰아&A6@	M437			GN							w:39262
@@ -20853,4 +20853,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成りき	흉내 &A6@	M428			GN			LEX-4700: 成り切る 흉내 내다			なりきる	w:39297
 染みだ	배어 나&AH@	M433			GN			GRM-4009: 染み出してくる 배어 나온다				w:39298
 滲みだ	배어 나&AH@	M433			GN			GRM-4009				w:39299
+売りきれ	품절	N110			GN							jisjk:68533
+売りきれ	품절&C6@	M417	VMo		GN							jisjk:144654
+売りきれ	매진&C6@	M417			GN							jisjk:263780
+舞いもど	되돌아&AH@	M418			GN							w:39106
+吹きとば	날려버&AA@	M423			GN							w:39107
 引き摺り出	끌어&A6@	M433			GN							w:39105
