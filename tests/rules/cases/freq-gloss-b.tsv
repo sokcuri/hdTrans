@@ -1,0 +1,151 @@
+# 규칙: LEX-7200, LEX-7201
+rule	input	expected	kind	layer
+dict:freq-gloss-b	近所を歩くことで危険な場所が分かる。	has:동네를 걸	fix	lookup
+dict:freq-gloss-b	駅の近所に住む。	has:역의 부근에	keep	lookup
+dict:freq-gloss-b	空から何かの気配がした。	has:기척	fix	lookup
+dict:freq-gloss-b	形式の枠を超えない。	has:틀을	fix	lookup
+dict:freq-gloss-b	あまりの暑さに倒れた。	has:지나친 더위에	keep	lookup
+dict:freq-gloss-b	急性発症の可能性は？	has:급성 발병의	fix	lookup
+dict:freq-gloss-b	一人が怪死し、一人が失踪する。	has:의문사	fix	lookup
+dict:freq-gloss-b	死の淵から生還した。	has:죽음의 문턱	fix	lookup
+dict:freq-gloss-b	淵さんが来た。	has:후치 씨가	keep	lookup
+dict:freq-gloss-b	村中を駆け回った。	has:온 마을을	fix	lookup
+dict:freq-gloss-b	村中みんなが新しい仲間を歓迎してくれてるの。	has:온 마을 모두가	fix	lookup
+dict:freq-gloss-b	恥ずかしいカッコのまま村中を引き回して	has:온 마을을 끌고	fix	lookup
+dict:freq-gloss-b	村中が総出でやってきて	has:온 마을이 총출동	fix	lookup
+dict:freq-gloss-b	その恐ろしさが村中に蔓延し	has:온 마을에 만연	fix	lookup
+dict:freq-gloss-b	村中全体が囚われてるとも言えるわね。	has:온 마을 전체가	fix	lookup
+dict:freq-gloss-b	村中で殺し合いが起こる。	has:온 마을에서 서로	fix	lookup
+dict:freq-gloss-b	村中を走り回っている間に落とした。	has:온 마을을 뛰어다니	fix	lookup
+dict:freq-gloss-b	噂は村中に広まった。	has:온 마을에 퍼졌다	fix	lookup
+dict:freq-gloss-b	村中の人が集まった。	has:온 마을의 사람이	fix	lookup
+dict:freq-gloss-b	村中の子供たちが遊んでいる。	has:온 마을의 아이들이	fix	lookup
+dict:freq-gloss-b	村中の噂になった。	has:온 마을의 소문이	fix	lookup
+dict:freq-gloss-b	村中が大騒ぎになった。	has:온 마을이 큰 소동	fix	lookup
+dict:freq-gloss-b	村中が騒いでいる。	has:온 마을이 떠들	fix	lookup
+dict:freq-gloss-b	村中で探した。	has:온 마을에서 찾았다	fix	lookup
+dict:freq-gloss-b	それは村中で有名な話だ。	has:온 마을에서 유명한	fix	lookup
+dict:freq-gloss-b	村中！	has:무라나카!	keep	lookup
+dict:freq-gloss-b	おい、村中！	has:어이, 무라나카!	keep	lookup
+dict:freq-gloss-b	村中、お前もか！	has:무라나카, 너도	keep	lookup
+dict:freq-gloss-b	村中？	has:무라나카?	keep	lookup
+dict:freq-gloss-b	「村中！」	has:「무라나카!」	keep	lookup
+dict:freq-gloss-b	村中が来た。	has:무라나카가 왔다	keep	lookup
+dict:freq-gloss-b	村中駅で降りた。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中町に住む。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中が走り回っている。	has:무라나카가 뛰어다니	keep	lookup
+dict:freq-gloss-b	村中が人を集めた。	has:무라나카가 사람을	keep	lookup
+dict:freq-gloss-b	村中を探した。	has:무라나카를 찾았다	keep	lookup
+dict:freq-gloss-b	村中に会った。	has:무라나카를 만났다	keep	lookup
+dict:freq-gloss-b	村中に伝えてくれ。	has:무라나카에게 전해	keep	lookup
+dict:freq-gloss-b	村中の家に行った。	has:무라나카의 집에	keep	lookup
+dict:freq-gloss-b	村中でいいよ。	has:무라나카면	keep	lookup
+dict:freq-gloss-b	村中では無理だ。	has:무라나카	keep	lookup
+dict:freq-gloss-b	村中は笑った。	has:무라나카는 웃었다	keep	lookup
+dict:freq-gloss-b	村中さんは知っている。	has:무라나카 씨는	keep	lookup
+dict:freq-gloss-b	逆転本塁打を放つ。	has:역전 홈런을	fix	lookup
+dict:freq-gloss-b	今場所は好調だ。	has:이번 대회는	fix	lookup
+dict:freq-gloss-b	大勢の人が集まった。	has:많은 사람이	fix	lookup
+dict:freq-gloss-b	人は大勢いるから大丈夫。	has:많이 있으니까	fix	lookup
+dict:freq-gloss-b	御三家を敵に回した。	has:빅3	fix	lookup
+dict:freq-gloss-b	来季のコーチ陣を発表。	has:다음 시즌의	fix	lookup
+dict:freq-gloss-b	政治的見せ物だと批判した。	has:구경거리	fix	lookup
+dict:freq-gloss-b	追加を先送りしてきた。	has:연기해 왔다	fix	lookup
+dict:freq-gloss-b	生酒だ大吟醸だというよりも。	has:나마자케다	fix	lookup
+dict:freq-gloss-b	地元紙パリジャンのインタビュー。	has:파리지앵의	fix	lookup
+dict:freq-gloss-b	魔法が栄えると機械は栄えず。	lacks:돋보	fix	lookup
+dict:freq-gloss-b	もちろん知ってますよと取り繕った。	has:둘러대었다	fix	lookup
+dict:freq-gloss-b	体裁を取り繕う。	has:체면을 차린다	fix	lookup
+dict:freq-gloss-b	上位貴族たちから爪弾きにされるのは辛い。	has:따돌림을 당하는	fix	lookup
+dict:freq-gloss-b	俺は思わず顎を外しそうになった。	has:턱이 빠질 뻔했다	fix	lookup
+dict:freq-gloss-b	後輩たちが指示を受け辺りに散る。	has:흩어진다	fix	lookup
+dict:freq-gloss-b	桜が散った。	has:졌다	keep	lookup
+dict:freq-gloss-b	冷静に先を見据えている。	has:앞을 내다보고 있다	fix	lookup
+dict:freq-gloss-b	じっと相手を見据えた。	has:응시했다	keep	lookup
+dict:freq-gloss-b	リンゴにすっかり夢中の女の子でした。	has:푹 빠진 여자아이	fix	lookup
+dict:freq-gloss-b	ゲームに夢中になる。	has:열중한다	keep	lookup
+dict:freq-gloss-b	神を祭る。	has:제사 지낸다	keep	lookup
+dict:freq-gloss-b	貴重な追加点を挙げた。	has:추가점을 올렸다	fix	lookup
+dict:freq-gloss-b	例を挙げる。	has:예를 든다	keep	lookup
+dict:freq-gloss-b	光はその輝きを増した。	has:더했다	fix	lookup
+dict:freq-gloss-b	点差を埋めた。	has:메웠다	fix	lookup
+dict:freq-gloss-b	母の胸に顔を埋めている。	has:얼굴을 묻고	keep	lookup
+dict:freq-gloss-b	私の言葉が全く心に届いていない。	has:마음에 닿아 있지 않다	fix	lookup
+dict:freq-gloss-b	声が届かない。	has:닿지 않는다	fix	lookup
+dict:freq-gloss-b	荷物が届いた。	has:도착했다	keep	lookup
+dict:freq-gloss-b	目に溜まった涙がこぼれる。	has:고인 눈물	fix	lookup
+dict:freq-gloss-b	鬱憤が溜まった先輩。	has:쌓인	keep	lookup
+dict:freq-gloss-b	怒りを滲ませた。	has:분노를 내비쳤다	fix	lookup
+dict:freq-gloss-b	テレビの画面をはかってみます。	has:화면을 재어	fix	lookup
+dict:freq-gloss-b	手を振った。	has:손을 흔들었다	keep	lookup
+dict:freq-gloss-b	壁にポスターを張る。	has:포스터를 붙인다	fix	lookup
+dict:freq-gloss-b	テントを張る。	has:텐트를 치	keep	lookup
+dict:freq-gloss-b	２新人を破る。	has:신인을 꺾는다	fix	lookup
+dict:freq-gloss-b	約束を破った。	has:약속을 어겼다	keep	lookup
+dict:freq-gloss-b	新人対決を制す。	has:대결을 제압한다	fix	lookup
+dict:freq-gloss-b	風がきつい。	has:바람이 세다	fix	lookup
+dict:freq-gloss-b	この仕事はきつい。	has:힘들다	keep	lookup
+dict:freq-gloss-b	看護婦さんの格好をして行けば。	has:차림을 하고	fix	lookup
+dict:freq-gloss-b	格好はともかく。	has:모습은	keep	lookup
+dict:freq-gloss-b	日々が本当に楽しくて。	has:나날이	fix	lookup
+dict:freq-gloss-b	日々練習する。	has:날마다 연습한다	keep	lookup
+dict:freq-gloss-b	回答を迫る。	has:답변을 요구한다	fix	lookup
+dict:freq-gloss-b	期限が迫る。	has:다가온다	keep	lookup
+dict:freq-gloss-b	多くの尊い命が失われ。	has:희생되고	fix	lookup
+dict:freq-gloss-b	文化が失われつつある。	lacks:희생	keep	lookup
+dict:freq-gloss-b	魔女殿！	has:마녀님	fix	lookup
+dict:freq-gloss-b	警部殿もよろしければどうぞ。	has:경감님도	fix	lookup
+dict:freq-gloss-b	祭具殿の中に入る。	has:제구전	keep	lookup
+dict:freq-gloss-b	豊かな自然に囲まれた農園。	has:자연에 둘러싸인	fix	lookup
+dict:freq-gloss-b	自然に笑った。	has:자연스럽게 웃었다	keep	lookup
+dict:freq-gloss-b	先端半導体の対中輸出。	has:첨단 반도체	fix	lookup
+dict:freq-gloss-b	棒の先端が尖っている。	has:끝이	keep	lookup
+dict:freq-gloss-b	７回防衛の時ですか。	has:7회 방어	fix	lookup
+dict:freq-gloss-b	日本の防衛力強化。	has:방위력	keep	lookup
+dict:freq-gloss-b	何人たりとも通さない。	has:그 누구도	fix	lookup
+dict:freq-gloss-b	２０２２年以来の米ツアー通算２勝目。	has:미국 투어	fix	lookup
+dict:freq-gloss-b	近所の騒音に迷惑している	has:이웃의 소음	keep	lookup
+dict:freq-gloss-b	近所の公園に行った。	has:동네의 공원	fix	lookup
+dict:freq-gloss-b	この近所に住んでいる。	has:이 근처에	fix	lookup
+dict:freq-gloss-b	たまたま家が近所だったってだけで	has:집이 근처였다	fix	lookup
+dict:freq-gloss-b	ご近所さんからもらった。	has:이웃	keep	lookup
+dict:freq-gloss-b	全く起きる気配はない。	has:기미는 없다	fix	lookup
+dict:freq-gloss-b	真帆は帰る気配を見せない。	has:기미를 보이지 않는다	fix	lookup
+dict:freq-gloss-b	ほっとした気配が伝わってきた。	has:안심한 기색	keep	lookup
+dict:freq-gloss-b	微かに秋の気配を感じた。	has:가을 기운을	fix	lookup
+dict:freq-gloss-b	取り繕うように咳払いをする。	has:둘러대	fix	lookup
+dict:freq-gloss-b	取り繕った様な笑みが、顔から零れる。	has:꾸민 것 같은 미소	keep	lookup
+dict:freq-gloss-b	取り繕う余裕もなかった。	has:꾸밀 여유	keep	lookup
+dict:freq-gloss-b	その場を取り繕う。	has:그 자리를 수습한다	fix	lookup
+dict:freq-gloss-b	はたと御園に見据えられ、白崎は目をそらす。	has:응시되어	fix	lookup
+dict:freq-gloss-b	将来を見据えて準備する。	has:장래를 내다봐	fix	lookup
+dict:freq-gloss-b	その彼らの大半が戦場に散った。	has:전장에 스러졌다	fix	lookup
+dict:freq-gloss-b	加えて良い点を挙げるなら、賃料が安いことだろう。	has:좋은 점을 든다면	keep	lookup
+dict:freq-gloss-b	千里に、酷な選択を迫っているのは分かってる。	has:선택을 강요하고	keep	lookup
+dict:freq-gloss-b	客が大勢来ている。	has:많이 와 있다	fix	lookup
+dict:freq-gloss-b	大勢に取り囲まれる。	has:많은 사람에게	fix	lookup
+dict:freq-gloss-b	銀の枠の眼鏡に変わった。	has:은의 테의 안경	fix	lookup
+dict:freq-gloss-b	猿ヶ淵に行く。	lacks:못	keep	lookup
+dict:freq-gloss-b	先生殿、コスプレって好き？	lacks:선생님님	keep	lookup
+dict:freq-gloss-b	シグルド殿は中でお待ちです。	has:시굴드님은	fix	lookup
+dict:freq-gloss-b	同じクラスだ。	has:같은 반이다	keep	lookup
+dict:freq-gloss-b	汐美祭の準備をする。	has:시오미제	keep	lookup
+dict:freq-gloss-b	深い淵に沈む。	has:깊은 못에	fix	lookup
+dict:freq-gloss-b	淵かさねさんは歌手だ。	has:후치 카사네 씨	keep	lookup
+dict:freq-gloss-b	選挙の大勢は決したと言っていい。	has:선거의 대세는	fix	lookup
+dict:freq-gloss-b	起きる気配ゼロだ。	has:기미 제로다	fix	lookup
+dict:freq-gloss-b	空は赤く燃え、雨の気配はゼロだ。	has:비 기운은	fix	lookup
+dict:freq-gloss-b	村中恭兵が登板した。	has:무라나카 쿄우헤이가	keep	lookup
+dict:freq-gloss-b	徳川御三家の一つだ。	has:토쿠가와 3대 명가	keep	lookup
+dict:freq-gloss-b	関係を取繕う。	has:관계를 수습한다	fix	pack
+dict:freq-gloss-b	見栄を取り繕った。	has:꾸몄다	keep	pack
+dict:freq-gloss-b	気配を完全に消していた。	has:기척을 완전히	fix	pack
+dict:freq-gloss-b	私の気配を察するとは。	has:기척을 헤아리	fix	pack
+dict:freq-gloss-b	ドアの外の気配を窺ってみる。	has:기척을 살피	fix	pack
+dict:freq-gloss-b	周囲に誰の気配もない。	has:누구의 기척도	fix	pack
+dict:freq-gloss-b	何者かの気配を感じる。	has:누군가의 기척을	fix	pack
+dict:freq-gloss-b	裏で何かが動いている気配はある。	has:기색은 있다	keep	lookup
+dict:freq-gloss-b	なんか気配が変わった。	has:기색이 바뀌었다	keep	lookup
+dict:freq-gloss-b	そんな気配など欠片もなかった。	has:그런 기색	keep	lookup
+dict:freq-gloss-b	肩身が狭そうな気配を出し始めた。	has:기색을 내기	keep	lookup
+dict:freq-gloss-b	フランのあまりの無防備さに驚いた。	has:지나친 무방비	keep	lookup

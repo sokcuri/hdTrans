@@ -78,7 +78,7 @@ cx:novel-fixes-2:1680	……いや、なんかやたら間抜け面で描かれ�
 cx:novel-fixes-2:1680	公園で遊ぶ。	!rule:cx:novel-fixes-2:1680	keep	rewrites
 cx:novel-fixes-2:1690	このヤロウ……誰のせいだと思ってやがる。	has:이 자식……	fix	rewrites
 cx:novel-fixes-2:1690	フタタビ…アノアクムヲ…ミセテヤロウ…イマ…ココデッ！	!rule:cx:novel-fixes-2:1690	keep	rewrites
-dict:w:31079	声に苛立ちを滲ませた。	has:짜증을 드러냈다	fix	lookup
+dict:w:31079	声に苛立ちを滲ませた。	has:짜증을 내비쳤다	fix	lookup
 dict:w:31080	アーリャは視線を前に向け直しながらボソッと言った。	has:앞으로 다시 돌리면서	fix	lookup
 dict:w:31081	突如として響き渡ったロシア語に、私は目を瞬かせた。	has:눈을 깜박였다	fix	lookup
 dict:w:31082	日本でお世話になった人達に、満足にお別れを告げることも出来なかった。	has:제대로 작별을	fix	lookup

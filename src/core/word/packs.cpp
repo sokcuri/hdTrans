@@ -1395,6 +1395,11 @@ void ApplyPacks(Flusher& f) {
         const bool nameLayer = chosen->user != nullptr && chosen->user->nameLayer;
         if (nameOnly && !nameLayer && (chosen->user == nullptr || f.w.settings.documentPacks == nullptr)) continue;
         const char cls = ClassOf(it);
+        // A person name the document shows to be a name (村中さんが来た。… 村中の噂) keeps the name: sense
+        // rows, which read the word's common meaning, do not replace it.
+        const dict::KeySet* named = f.w.lookupContext.named;
+        const bool provenName =
+            named != nullptr && named->contains(it->group->surface) && dict::SemCodes(chosen->attr).HasCode("QPN");
         // A voice row's agent particle and Korean verb hold against the passes after the voice layer.
         if (Item* p = it->packAgent; !head && p != nullptr && p->selected >= 0 &&
                                      p->selected < static_cast<int>(p->group->entries.size()) && !p->Fixed() &&
@@ -1412,6 +1417,7 @@ void ApplyPacks(Flusher& f) {
         for (const dict::PackSlot slot :
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
+            if (provenName && slot == dict::PackSlot::Sense) continue;
             if (head && (slot == dict::PackSlot::Sense || slot == dict::PackSlot::Name)) continue;
             // The Korean verb of a voice row is the word's sense in that voice (紅茶を振る舞われた 대접받았다):
             // a sense row, which writes the verb in the active, does not replace it.

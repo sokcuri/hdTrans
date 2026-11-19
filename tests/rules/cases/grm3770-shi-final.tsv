@@ -48,8 +48,8 @@ cx:narration-style-1:30	「……やっぱやめようかな。怖いもんな�
 cx:narration-style-1:30	……まぁ真面目な話、退院祝いをしなくちゃだしな。	……뭐 진지한 이야기, 퇴원 축하를 하지 않으면이고.	keep	rewrites
 cx:narration-style-1:31	「それに、ＧＷまで様子を見てから、やめるか続けるか決めてＯＫってことだったし」	「게다가, GW까지 상태를 보고 나서, 그만둘까 계속할까 결정해 OK라는 것이었거든」	fix	rewrites
 cx:narration-style-1:31	それに、ＧＷまで様子を見てから、やめるか続けるか決めてＯＫってことだったし。	게다가, GW까지 상태를 보고 나서, 그만둘까 계속할까 결정해 OK라는 것이었고.	keep	rewrites
-cx:narration-style-1:39	「そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし」	「그렇습니까, 라면 그다지 큰 소동은 하지 않는 게……자고 있는 아이도 여럿 있을 테니까요」	fix	rewrites
-cx:narration-style-1:39	そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし。	그렇습니까, 라면 그다지 큰 소동은 하지 않는 것이……자고 있는 아이도 여럿 있을 테고.	keep	rewrites
+cx:narration-style-1:39	「そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし」	「그렇습니까, 라면 그다지 큰 소동은 하지 않는 게……자고 있는 아이도 많이 있을 테니까요」	fix	rewrites
+cx:narration-style-1:39	そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし。	그렇습니까, 라면 그다지 큰 소동은 하지 않는 것이……자고 있는 아이도 많이 있을 테고.	keep	rewrites
 cx:narration-style-1:40	「それに、今から食材を買いに行かなければならないだろうし」	「게다가, 지금부터 식재료를 사러 가야 할 테니까」	fix	rewrites
 cx:narration-style-1:40	「だからきっと相手になんてされないだろうしね」	「그러니까 분명 상대 따위가 되지 않을 테니까」	fix	rewrites
 cx:narration-style-1:40	それに、今から食材を買いに行かなければならないだろうし。	게다가, 지금부터 식재료를 사러 가야 할 테고.	keep	rewrites
@@ -70,7 +70,7 @@ cx:shi-list:29	「生徒主導なんですし」	「학생 주도이거든요」
 cx:shi-list:29	生徒主導なんですし。	학생 주도이고요.	keep	rewrites
 rewrite:sentence-final-shi	「まだよく知りませんし」	「아직 잘 모르거든요」	fix	rewrites
 rewrite:sentence-final-shi	「無駄になってしまいましたし」	「쓸데없게 돼버렸거든요」	fix	rewrites
-rewrite:sentence-final-shi	「寝ている子も大勢いるでしょうし」	「자고 있는 아이도 여럿 있을 테니까요」	fix	rewrites
+rewrite:sentence-final-shi	「寝ている子も大勢いるでしょうし」	「자고 있는 아이도 많이 있을 테니까요」	fix	rewrites
 rewrite:sentence-final-shi	「難しいでしょうし！」	「어려울 테니까요!」	fix	rewrites
 rewrite:sentence-final-shi	「来るかもしれませんしね」	「올지도 모르고」	keep	rewrites
 rewrite:sentence-final-shi	「変わらなそうですし」	「변함없어 보이고」	keep	rewrites

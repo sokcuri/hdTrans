@@ -4500,7 +4500,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 見あげ	올려&AY@	M437			GN							jisjk:91812
 見あげ	올려다&AY@	M427			GN				xxx llm	1		w:23460
 見すえ	응시&AV@	M437			GN							jisjk:91786
-見すえ	확인&AV@	M437	VPlVTpUDr		GN							jisjk:91787
+見すえ	응시&AV@	M437	VPlVTpUDr		GN							jisjk:91787
 見すえ	응시&AV@	M427			GN				xxx llm	1		w:23473
 見はらし	전망	N110			GN							jisjk:6794
 見しらぬ	낯선	C0D1			GN							jisjk:4638

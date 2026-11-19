@@ -135,7 +135,7 @@ dict:jisjk:178143	けんおんする。	체온 측정한다.	fix	defaults
 dict:jisjk:178143	けんおんの時間。	체온 측정의 시간.	fix	defaults
 dict:jisjk:178143	朝のけんおん。	아침의 체온 측정.	fix	defaults
 dict:jisjk:178143	けんおんきで測る。	체온계로 측정한다.	keep	defaults
-dict:jisjk:178143	体温を測る。	체온을 측정한다.	keep	defaults
+dict:jisjk:178143	体温を測る。	체온을 잰다.	keep	defaults
 dict:jisjk:90743	椅子をけ倒す。	의자를 차서 넘어뜨린다.	fix	defaults
 dict:jisjk:90743	椅子をけ倒した。	의자를 차서 넘어뜨렸다.	fix	defaults
 dict:jisjk:90743	椅子をけ倒して逃げた。	의자를 차서 넘어뜨려 도망쳤다.	fix	defaults
