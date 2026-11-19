@@ -31,6 +31,7 @@ struct UserEntry {
     // A kana spelling of a word of the base dictionary, read only where the kana run
     // is bounded like a word.
     bool kana = false;
+    std::string kanaOf;  // the key of the base word a kana spelling reads as (かわ: 川)
     bool force = false;   // ahead of every base candidate, even a longer one
     bool hidden = false;  // parsed but not loaded
     char finalClass = 0;  // josa class of target: 0 auto, 'v' vowel, 'c' consonant, 'l' ㄹ

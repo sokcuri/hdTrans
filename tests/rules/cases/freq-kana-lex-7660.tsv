@@ -1,0 +1,66 @@
+# 규칙: LEX-7660, LEX-7661, LEX-7662, LEX-7663, LEX-7664
+rule	input	expected	kind	layer
+lookup:kana-spelling	はなが咲く。	has:꽃이 핀다	fix	lookup
+lookup:kana-spelling	はながさいて	has:꽃이	fix	lookup
+lookup:kana-spelling	そらが青い。	has:하늘이 푸르다	fix	lookup
+lookup:kana-spelling	そらをみあげた	has:하늘을	fix	lookup
+lookup:kana-spelling	カニの女王 ずわいがにが丸ごと１尾！	has:대게가	fix	lookup
+lookup:kana-spelling	いなりずしを食べた。	has:유부초밥을	fix	lookup
+lookup:kana-spelling	おひさしぶり！	lacks:꺼려	fix	lookup
+lookup:kana-spelling	ことはなにも考えられない。	lacks:꽃	keep	lookup
+lookup:kana-spelling	「はなから生きてますから！」	lacks:꽃	keep	lookup
+lookup:kana-spelling	それはないよ。	has:그것은 아니야	keep	lookup
+lookup:kana-spelling	「ね、さっきの『あ』はなによ？」	lacks:꽃	keep	lookup
+lookup:kana-spelling	はなさんが来た。はなが笑った。	has:하나가 웃었다	keep	lookup
+lookup:kana-spelling	そらちゃんが来た。そらが笑った。	has:소라가 웃었다	keep	lookup
+lookup:kana-spelling	ひさしは笑った。	has:히사시는	keep	lookup
+lookup:kana-spelling	やすみ、こっちに来て。	has:야스미	keep	lookup
+lookup:kana-spelling	ひとやすみしよう。	has:잠깐 쉬자	keep	lookup
+pack:kana-spelling	薬がきれた。	has:약이 떨어졌다	fix	packs
+pack:kana-spelling	麻酔がきれた。	has:마취가 풀렸다	fix	packs
+pack:kana-spelling	薬がきれそうだ。	has:떨어질 것 같다	fix	packs
+pack:kana-spelling	ひもがきれた。	has:끊어졌다	fix	lookup
+pack:kana-spelling	食べきれない。	has:다 먹을 수 없다	keep	local
+lookup:kuma-default	くまが出た。	has:곰이 나왔다	fix	defaults
+lookup:kuma-default	森でくまに会った。	has:곰을 만났다	fix	defaults
+lookup:kuma-default	机の下にくまがいた。	has:곰이	fix	defaults
+lookup:kuma-default	目の下にくまができている。	has:다크서클이	fix	local
+lookup:kuma-default	目元のくまが消えた。	has:다크서클이	fix	local
+lookup:adjective-drawn	なめらか〜。	has:매끈매끈해~	fix	lookup
+lookup:adjective-drawn	しずか〜。	has:조용해~	fix	lookup
+lookup:adjective-drawn	「ひゅー、すてきー」	has:멋져~	fix	lookup
+lookup:adjective-drawn	なめらかだ。	has:매끈매끈하다	keep	lookup
+lookup:adjective-drawn	良さそう。	has:좋을 것 같다	keep	lookup
+lookup:kana-ha-noun	それにはながい時間がかかる。	has:긴 시간	keep	lookup
+lookup:kana-ha-noun	それにはながい年月が必要だ。	has:긴 세월	keep	lookup
+lookup:kana-ha-noun	それにはながい話がある。	has:긴 이야기	keep	lookup
+lookup:kana-ha-noun	ほかにはながい列もある。	has:긴	keep	lookup
+lookup:kana-ha-noun	花にはながい茎がある。	has:긴 줄기	keep	lookup
+lookup:kana-ha-noun	そのはなが好きだ。	has:그 꽃을	fix	lookup
+lookup:kana-ha-noun	あのはなを見て。	has:그 꽃을	fix	lookup
+lookup:kana-ha-noun	はなさんが来た。はなが言った。	has:하나가 말했다	keep	lookup
+lookup:kuma-default	目の下にひどいくまがある。	has:다크서클	fix	local
+lookup:kuma-default	目の下の濃いくま。	has:다크서클	fix	local
+lookup:kuma-default	目の下にうっすらくまがある。	has:다크서클	fix	local
+lookup:kuma-default	くまができてるよ。	has:다크서클	fix	local
+lookup:kuma-default	寝不足でくまがひどい。	has:다크서클	fix	local
+lookup:kuma-default	目のくまが消えない。	has:다크서클	keep	local
+lookup:kuma-default	くまを作って出社した。	has:다크서클을	fix	local
+lookup:kuma-default	目の下、くまできてるよ？	has:다크서클	fix	local
+lookup:kuma-default	くまのぬいぐるみ。	has:곰	keep	local
+lookup:kuma-default	目の前にくまがいた。	has:곰이	keep	local
+lookup:kuma-default	大きなくまが歩いている。	has:곰이	keep	local
+lookup:kana-phrase	はなをかむ。	has:코를 푼다	fix	lookup
+lookup:kana-phrase	はなをかんでから寝た。	has:코를 풀고	fix	lookup
+lookup:kana-phrase	はながたかい。	has:콧대가 높다	fix	lookup
+lookup:kana-phrase	はなが高かった。	has:콧대가 높았다	fix	lookup
+lookup:kana-phrase	息がきれた。	has:숨이 찼다	fix	lookup
+lookup:kana-phrase	息がきれて走れない。	has:숨이 차	fix	lookup
+lookup:kana-phrase	はなみずが出る。	has:콧물이	keep	lookup
+lookup:kana-phrase	はなをつまむ。	has:코를	keep	lookup
+pack:kana-hare-swelling	はれがひどい。	has:부기가	fix	packs
+pack:kana-hare-swelling	足のはれがひいた。	has:부기가	fix	packs
+pack:kana-hare-swelling	はれがおさまった。	has:부기가	fix	packs
+pack:kana-hare-swelling	明日ははれでしょう。	has:맑음	keep	packs
+pack:kana-hare-swelling	空がはれた。	has:개었	keep	packs
+pack:kana-hare-swelling	足がはれてきた。	has:부어	keep	packs

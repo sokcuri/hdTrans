@@ -760,7 +760,13 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     // After an adnominal that only a noun follows it is the noun (そのかえるは 그 개구리는, あのつきは 저 달은) before a
     // particle, a mark or the end; before a kanji or katakana noun it is the verb of a relative clause (このかえる道
     // 이 돌아가는 길).
-    if (pc.size() > 1 && pc[1] == '1' && VerbFormSpelling(u.key)) {
+    // So does a noun of two kana whose first is the particle は: elsewhere it is は and the word after (ことはなにも,
+    // はなから; はなが咲く 꽃이 핀다).
+    if (pc.size() > 1 && pc[1] == '1' &&
+        (VerbFormSpelling(u.key) || (text::RuneCount(u.key) == 2 && u.key.starts_with("は")))) {
+        // After に, と, へ or の the は is the particle of には, とは, へは or のは, as for the verb spellings above
+        // (それにはながい時間 그러기에는 긴 시간); an adnominal before it keeps the noun (そのはなが 그 꽃이).
+        if (!VerbFormSpelling(u.key) && !prev.empty() && Has("にとへの", prev) && !adnominal) return false;
         // After the adnominal the key and the kana after it may be a word of their own, whose rules read the key
         // (このつきの光: つきの 付きの, whose rule gives 달).
         return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest) ||
