@@ -7,6 +7,7 @@
 #include <initializer_list>
 #include <optional>
 #include <set>
+#include <span>
 #include <utility>
 #include <string>
 #include <string_view>
@@ -62,28 +63,58 @@ bool NamingCue(std::string_view after) {
     return false;
 }
 
-// Whether the text after a word makes it the doer of a favour in its clause: に with
-// てもらう or 頼む and no other に before it (Xに作ってもらった, Xに頼んで), or が with てくれる
-// (Xが作ってくれた).
-bool AgentCue(std::string_view after) {
-    std::string_view clause = after;
-    for (const std::string_view end : {"。", "！", "？", "」", "『", "「", "、"}) {
-        const std::size_t at = clause.find(end);
-        if (at != std::string_view::npos) clause = clause.substr(0, at);
-    }
-    auto has = [&](std::string_view rest, std::initializer_list<std::string_view> list) {
-        for (const std::string_view w : list) {
-            if (rest.find(w) != std::string_view::npos) return true;
+// The first place at or after pos where w occurs in s. The search resumes only once pos passes the place
+// found last, so asking at places that only grow scans s once (AgentCue at each run of a line).
+class NextOf {
+  public:
+    NextOf(std::string_view s, std::string_view w) : s_(s), w_(w) {}
+    std::size_t At(std::size_t pos) {
+        if (pos < from_ || (found_ != std::string_view::npos && found_ < pos)) {
+            found_ = s_.find(w_, pos);
+            from_ = pos;
         }
-        return false;
-    };
-    if (clause.starts_with("に")) {
-        std::string_view rest = clause.substr(std::string_view("に").size());
-        rest = rest.substr(0, rest.find("に"));
-        return has(rest, {"てもら", "でもら", "頼"});
+        return found_;
     }
-    if (clause.starts_with("が")) return has(clause, {"てくれ", "でくれ"});
-    return false;
+    // Whether w occurs whole in [from, to).
+    bool Within(std::size_t from, std::size_t to) {
+        const std::size_t found = At(from);
+        return found != std::string_view::npos && found + w_.size() <= to;
+    }
+
+  private:
+    std::string_view s_, w_;
+    std::size_t from_ = std::string_view::npos;
+    std::size_t found_ = std::string_view::npos;
+};
+
+// The words AgentCue looks for in one line.
+struct AgentWords {
+    explicit AgentWords(std::string_view line)
+        : ends{NextOf(line, "。"), NextOf(line, "！"), NextOf(line, "？"), NextOf(line, "」"), NextOf(line, "『"), NextOf(line, "「"), NextOf(line, "、")},
+          ni(line, "に"), asked{NextOf(line, "てもら"), NextOf(line, "でもら"), NextOf(line, "頼")}, given{NextOf(line, "てくれ"), NextOf(line, "でくれ")} {}
+    std::array<NextOf, 7> ends;
+    NextOf ni;
+    std::array<NextOf, 3> asked;
+    std::array<NextOf, 2> given;
+};
+
+// Whether the text of line after at makes the word before it the doer of a favour in its clause: に with
+// てもらう or 頼む and no other に before it (Xに作ってもらった, Xに頼んで), or が with てくれる
+// (Xが作ってくれた). The clause ends at the first mark of the end of a clause or a quote.
+bool AgentCue(std::string_view line, std::size_t at, AgentWords& words) {
+    const std::string_view after = line.substr(at);
+    const bool ni = after.starts_with("に");
+    if (!ni && !after.starts_with("が")) return false;
+    std::size_t end = line.size();
+    for (NextOf& e : words.ends) end = std::min(end, e.At(at));
+    auto has = [](std::span<NextOf> list, std::size_t from, std::size_t to) {
+        return std::any_of(list.begin(), list.end(), [&](NextOf& w) { return w.Within(from, to); });
+    };
+    if (ni) {
+        const std::size_t from = at + std::string_view("に").size();
+        return has(words.asked, from, std::min(end, words.ni.At(from)));
+    }
+    return has(words.given, at, end);
 }
 
 // Whether text ends with suffix as a whole string with a non-empty head.
@@ -808,6 +839,7 @@ void Registry::Add(std::string_view rawLine) {
         if (dict::StartsWithMember(HDTRANS_CLASS("name.katakana-place-after"), after) > 0) count(kataPlace_, std::string(r.text));
     }
     std::size_t chain = 0;  // first run of the current katakana chain
+    AgentWords agentWords(line);
     for (std::size_t i = 0; i < runs.size(); i++) {
         const Run& run = runs[i];
         if (run.kanji) {
@@ -832,7 +864,7 @@ void Registry::Add(std::string_view rawLine) {
                     break;
                 }
             }
-            if (NameEnd(line.substr(run.end))) count(ended_, std::string(run.text));
+            if (NameEnd(std::string_view(line).substr(run.end))) count(ended_, std::string(run.text));
         } else {
             count(kana_, std::string(run.text));
         }
@@ -872,7 +904,7 @@ void Registry::Add(std::string_view rawLine) {
                                 !AdjectiveKanji(t.substr(t.size() - last.size));  // 咲太くん: 太く is an adjective's
             if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま") && !verbKu) honGuess_.insert(t);
         }
-        if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
+        if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(line, run.end, agentWords)) {
             count(agents_, std::string(run.text));
         }
         if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
