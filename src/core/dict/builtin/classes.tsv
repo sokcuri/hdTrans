@@ -176,6 +176,8 @@
 //= word.te-alone	Words that spell the て form of a verb in hiragana and close an utterance as themselves (はじめて！ 처음, 「はじめて」): they give way to the verb only before a start of follower.te-request or after a lead of lead.te-request or a noun (さあ、はじめて！, 発艦はじめて！; LEX-5923).
 //= lead.te-request	Words at the start of a clause that urge the listener (さあ, ほら, はやく): a word of word.te-alone at the end of that clause is the verb asked for (さあ、はじめて！ 자, 시작해!; LEX-5923).
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
+//= stem.taru-final	Last characters of an adjectival-noun stem whose と is the と of manner before any verb, not a quote (飄々と歩いた, 汲々と働く, 漂然と現れた; spec LEX-7600).
+//= follower.taru-to	What follows the と of an adjectival-noun stem that is not a quote but the stem's own と before する or なる (飄々とした, 切実となって): the kana that start their forms (spec LEX-7600).
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
 //= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん; not たまごっち, 顔合わせたんだ, 母たんこぶ).
@@ -2420,6 +2422,13 @@ follower.verbal-noun	も
 follower.verbal-noun	で
 follower.verbal-noun	と
 follower.verbal-noun	へ
+follower.taru-to	し
+follower.taru-to	す
+follower.taru-to	さ
+follower.taru-to	せ
+follower.taru-to	な
+stem.taru-final	々
+stem.taru-final	然
 
 honorific.candidate	さん
 honorific.candidate	様
