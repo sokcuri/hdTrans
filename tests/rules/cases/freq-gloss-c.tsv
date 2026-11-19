@@ -1,0 +1,133 @@
+# 규칙: LEX-7240, LEX-7241, LEX-7242, LEX-7243, LEX-7244
+rule	input	expected	kind	layer
+dict:freq-gloss-c	国連気候変動枠組み条約第３１回締約国会議（ＣＯＰ３１）で表明する。	has:유엔 기후변화협약 제31회	fix	lookup
+dict:freq-gloss-c	気候変動枠組条約の締約国。	has:기후변화협약	fix	lookup
+dict:freq-gloss-c	新しい枠組みを作る。	새로운 틀을 만든다.	keep	lookup
+dict:freq-gloss-c	勝ち点１２とし、同組２位以内が確定。	has:같은 조 2위	fix	lookup
+dict:freq-gloss-c	世界ランキング１位の選手と初めて同組でラウンド。	has:같은 조로 라운드	fix	lookup
+dict:freq-gloss-c	同組合の会議。	has:같은 조합	keep	lookup
+dict:freq-gloss-c	フリーも自己新を狙う。	has:개인 최고 기록을 노린다	fix	lookup
+dict:freq-gloss-c	自己新記録を出した。	개인 최고 기록을 냈다.	fix	lookup
+dict:freq-gloss-c	同盟・同志国連携、不安多く	has:동지국 연계	fix	lookup
+dict:freq-gloss-c	国連の会議。	유엔의 회의.	keep	lookup
+dict:freq-gloss-c	今月３日投開票の米中間選挙で野党民主党が圧勝。	has:미 중간 선거에서	fix	lookup
+dict:freq-gloss-c	米中関係が悪化した。	has:관계가 악화	keep	lookup
+dict:freq-gloss-c	女子ゴルフの最新世界ランキングが発表された。	has:최신 세계 랭킹	fix	lookup
+dict:freq-gloss-c	最新世代の量産を行う。	has:최신 세대	fix	lookup
+dict:freq-gloss-c	ご当所で、たくさんの声援をもらった	has:현지에서, 많은 성원	fix	lookup
+dict:freq-gloss-c	日本三大曳山祭りの1つです。	has:히키야마 축제	fix	lookup
+dict:freq-gloss-c	熱海富士が横綱を撃破し、９日目で給金を直した。	has:승리 과반을 확정했다	fix	lookup
+dict:freq-gloss-c	給金が上がった。	급료가 올랐다.	keep	lookup
+dict:freq-gloss-c	作り笑顔のまま言い切った。	has:억지웃음인 채	fix	lookup
+dict:freq-gloss-c	作り笑顔を浮かべた。	억지웃음을 지었다.	fix	pack
+dict:freq-gloss-c	雑誌作りを指揮。	has:잡지 만들기	keep	lookup
+dict:freq-gloss-c	夏冬対応の家電	has:여름 겨울 대응	fix	lookup
+dict:freq-gloss-c	最初期の作品。	초창기의 작품.	fix	lookup
+dict:freq-gloss-c	黒縁メガネを投げ捨てた。	has:검은 테 안경	fix	lookup
+dict:freq-gloss-c	誰かが一歩、その間合いを詰めた。	has:그 간격을 좁혔다	fix	pack
+dict:freq-gloss-c	一瞬で間合いを詰める。	has:간격을 좁힌다	fix	pack
+dict:freq-gloss-c	この間会ったね。	has:얼마 전 만났네	keep	lookup
+dict:freq-gloss-c	リンゴを詰めると	has:사과를 채우면	keep	pack
+dict:freq-gloss-c	もう心の中は万々歳だ。	has:만만세다	fix	lookup
+dict:freq-gloss-c	巨大な石積みの壁が続いていた。	has:석축의 벽	fix	lookup
+dict:freq-gloss-c	石積さんが来た。	이시즈모리 씨가 왔다.	keep	lookup
+dict:freq-gloss-c	言葉の織り手	말의 직조자	fix	lookup
+dict:freq-gloss-c	「興味本位で来る大馬鹿者がいるとはな」	has:천하의 바보가	fix	lookup
+dict:freq-gloss-c	傘立てがなかったらどうしよう？	has:우산꽂이가	fix	lookup
+dict:freq-gloss-c	もと来た道を走って引き返した。	has:왔던 길을	fix	lookup
+dict:freq-gloss-c	元来たくましい男だ。	has:원래	keep	lookup
+dict:freq-gloss-c	極めつけはこれ。	압권은 이것.	fix	lookup
+dict:freq-gloss-c	極めつけに、雨まで降った。	has:결정적으로	keep	lookup
+dict:freq-gloss-c	ひとつきくらい前だと思う。	has:한 달 정도 전	fix	lookup
+dict:freq-gloss-c	ひとつは彼の証言。	has:하나는	keep	lookup
+dict:freq-gloss-c	インドネシアでは例年野焼きなどによる森林火災が発生する。	has:들불 놓기 등에 의한	fix	lookup
+dict:freq-gloss-c	馬のいななきが聞こえる。	말의 울음소리가 들린다.	fix	lookup
+dict:freq-gloss-c	馬が嘶いた。	말이 울었다.	fix	lookup
+dict:freq-gloss-c	きらめきが風を切り裂いた。	반짝임이 바람을 찢었다.	fix	lookup
+dict:freq-gloss-c	星がきらめいた。	별이 반짝였다.	fix	lookup
+dict:freq-gloss-c	「では、一度遠乗りに出掛けませんか？」	has:먼 나들이에	fix	lookup
+dict:freq-gloss-c	所沢市には、ゆり園があります。	has:백합 정원이	fix	lookup
+dict:freq-gloss-c	ゆりさんが来た。	유리 씨가 왔다.	keep	lookup
+dict:freq-gloss-c	父のあれらの行為は、症状に過ぎない。	has:그것들의 행위	fix	lookup
+dict:freq-gloss-c	鍋底が危険な温度になると	has:냄비 바닥이	fix	lookup
+dict:freq-gloss-c	荒っぽいぶつかり合いを繰り広げます。	has:맞부딪침을	fix	lookup
+dict:freq-gloss-c	お互いにぶつかり合いながらも	has:부딪치면서도	keep	lookup
+dict:freq-gloss-c	数回剣がぶつかり合い、相手が突いてきた。	has:서로 부딪쳐,	keep	lookup
+dict:freq-gloss-c	後でちゃんと届けないとネコババになっちゃいますねぇ。	has:착복이	fix	lookup
+dict:freq-gloss-c	拾った財布をねこばばした。	has:착복했다	fix	lookup
+dict:freq-gloss-c	肉巻きを作る。	고기말이를 만든다.	fix	lookup
+dict:freq-gloss-c	北海道産天然ほたて。	has:천연 가리비	fix	lookup
+dict:freq-gloss-c	荷物持ちとして同行した。	has:짐꾼으로서	fix	lookup
+dict:freq-gloss-c	結局、また一騒ぎしてしまうのであった。	has:한바탕 소동을 벌여	fix	lookup
+dict:freq-gloss-c	一騒ぎだ。	한바탕 소동이다.	fix	lookup
+dict:freq-gloss-c	来世も俺は俺になってお前を殺してやる！	has:내세도 나는	fix	lookup
+dict:freq-gloss-c	来世で会おう。	has:내세에서	fix	lookup
+dict:freq-gloss-c	来世紀には実現する。	has:차세기	keep	lookup
+dict:freq-gloss-c	剣で空間を凪払った。	has:베어 넘겼다	fix	lookup
+dict:freq-gloss-c	魔物の群れを薙ぎ払う。	has:베어 넘긴다	keep	lookup
+dict:freq-gloss-c	「漏れ聞いた？」	「얼핏 들었어?」	fix	lookup
+dict:freq-gloss-c	そんな話を洩れ聞いた。	has:얼핏 들었다	fix	lookup
+dict:freq-gloss-c	声が漏れ聞こえてきた。	has:새어 들려왔다	keep	lookup
+dict:freq-gloss-c	差し出された手を取って、彼は立上がった。	has:일어섰다	fix	lookup
+dict:freq-gloss-c	試合の立上がりに失点した。	has:시작에	keep	lookup
+dict:freq-gloss-c	くるりと教卓へ引きかえす。	has:되돌아간다	fix	lookup
+dict:freq-gloss-c	それと引きかえに命を差し出す。	has:교환	keep	lookup
+dict:freq-gloss-c	頭の中でその声だけが響きわたる。	has:울려 퍼진다	fix	lookup
+dict:freq-gloss-c	そんな言葉が喉の奥まで競り上がってくる。	has:치밀어 올라온다	fix	lookup
+dict:freq-gloss-c	自らの首に這い寄った。	has:기어 다가갔다	fix	lookup
+dict:freq-gloss-c	投資家に出資を持ち掛けていた。	has:출자를 제안하고 있었다	fix	lookup
+dict:freq-gloss-c	激を飛ばす。が、その声はかすれてしまっている。	has:분발을 촉구한다	fix	lookup
+dict:freq-gloss-c	監督が選手に檄を飛ばした。	has:분발을 촉구했다	fix	lookup
+dict:freq-gloss-c	敬礼してからブツを受け取った。	has:물건을 받았다	fix	lookup
+dict:freq-gloss-c	他の艦とよくブツかっちゃう。	has:부딪쳐	keep	lookup
+dict:freq-gloss-c	ブツブツ言うな。	투덜투덜 말하지 마.	keep	lookup
+dict:freq-gloss-c	新小結の場所は負け越しが決まる。	has:코무스비의	fix	lookup
+dict:freq-gloss-c	空自機が無線で警告した。	항공자위대기가 무선으로 경고했다.	fix	lookup
+dict:freq-gloss-c	「ただし、私に敵対行為を働いた場合はその限りではないわ」	has:경우는 그렇지 않아」	fix	lookup
+dict:freq-gloss-c	その限りではありません。	그렇지 않습니다.	fix	lookup
+dict:freq-gloss-c	その限りでない。	그렇지 않다.	fix	lookup
+dict:freq-gloss-c	<許可が取れたエレボタを見せてもらう>	has:허가가 난	fix	pack
+dict:freq-gloss-c	撮影の許可が取れました。	has:허가가 났습니다	fix	pack
+dict:freq-gloss-c	許可を取った。	허가를 받았다.	keep	pack
+dict:freq-gloss-c	「わかった、確認が取れた。」	has:확인이 됐다	fix	pack
+dict:freq-gloss-c	連絡が取れない。	연락이 되지 않는다.	keep	pack
+dict:freq-gloss-c	首位と２打差の好位置につけた。	has:좋은 위치에 올랐다	fix	pack
+dict:freq-gloss-c	吉田優利、２勝目へ好位置　米女子ゴルフ	has:좋은 위치	fix	lookup
+dict:freq-gloss-c	「えっと、何かの間違いかと思ったんです！」	has:뭔가 착오인 줄	fix	lookup
+dict:freq-gloss-c	それは私の間違いだった。	has:내 실수였다	keep	lookup
+dict:freq-gloss-c	重い荷物持ちながら歩いた。	has:짐 들면서	keep	lookup
+dict:freq-gloss-c	荷物持ちたいです。	has:짐 들고 싶	keep	lookup
+dict:freq-gloss-c	荷物持ちます。	has:짐 듭니다	keep	lookup
+dict:freq-gloss-c	彼は荷物持ちだ。	has:짐꾼이다	fix	lookup
+dict:freq-gloss-c	傘立てておいて。	has:우산 세워 두어	keep	lookup
+dict:freq-gloss-c	傘を傘立てに。	has:우산꽂이에	fix	lookup
+dict:freq-gloss-c	ひとつききたいことがある。	has:하나 묻고 싶은	keep	lookup
+dict:freq-gloss-c	ひとつきいていい？	has:하나 물어	keep	lookup
+dict:freq-gloss-c	ひとつきかせてくれ。	lacks:한 달	keep	lookup
+dict:freq-gloss-c	ひとつきめたことがある。	has:하나 결정	keep	lookup
+dict:freq-gloss-c	ひとつきぶりに帰った。	has:한 달 만에	fix	lookup
+dict:freq-gloss-c	ひとつき後に戻る。	has:한 달 후에	fix	lookup
+dict:freq-gloss-c	ひとつきほど前に会った。	has:한 달 정도 전	fix	lookup
+dict:freq-gloss-c	きらめきながら落ちた。	has:반짝이면서	fix	lookup
+dict:freq-gloss-c	星がきらめいている。	has:반짝이고 있다	fix	lookup
+dict:freq-gloss-c	きらめく宝石。	has:반짝이는 보석	fix	lookup
+dict:freq-gloss-c	きらめき☆プロジェクトが始まる。	has:반짝임☆	fix	lookup
+dict:freq-gloss-c	一瞬の煌めき。	has:반짝임	fix	lookup
+dict:freq-gloss-c	煌めきながら消えた。	has:반짝대면서	keep	lookup
+dict:freq-gloss-c	あきらめきれません。	has:포기할 수 없습니다	keep	lookup
+dict:freq-gloss-c	あきらめて、壁を見た。	has:포기해	keep	lookup
+dict:freq-gloss-c	馬がいななく。	has:말이 운다	fix	lookup
+dict:freq-gloss-c	馬がいなないた。	has:말이 울었다	fix	lookup
+dict:freq-gloss-c	馬がいななきながら走った。	has:울면서	fix	lookup
+dict:freq-gloss-c	馬が嘶きながら倒れた。	has:울면서	fix	lookup
+dict:freq-gloss-c	漏れ聞くところによると、彼は辞めたらしい。	has:얼핏 듣자 하니	fix	lookup
+dict:freq-gloss-c	噂を漏れ聞いた。	has:소문을 얼핏 들었다	fix	lookup
+dict:freq-gloss-c	聞くところによると、彼は辞めた。	has:듣자 하니	keep	lookup
+dict:freq-gloss-c	漏れ聞こえる会話に、	has:새어 들리는	keep	lookup
+dict:freq-gloss-c	空自さん、こんにちは。	has:타카시 씨	keep	lookup
+dict:freq-gloss-c	空自くん！	has:타카시 군	keep	lookup
+dict:freq-gloss-c	空自先輩が来た。	has:타카시 선배	keep	lookup
+dict:freq-gloss-c	陸自と空自の合同訓練	has:항공자위대	fix	lookup
+dict:freq-gloss-c	空自は発表した。	has:항공자위대는	fix	lookup
+dict:freq-gloss-c	いななきさん	has:이나나키 씨	keep	lookup
+dict:freq-gloss-c	きらめきさん	has:키라메키 씨	keep	lookup
