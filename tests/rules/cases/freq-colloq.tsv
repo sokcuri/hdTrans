@@ -1,0 +1,82 @@
+# 규칙: LEX-6850
+rule	input	expected	kind	layer
+normalize:shimau-n	もう少しで消えちゃうんだね。	lacks:이구나	fix	normalize
+normalize:shimau-n	ここで死んじゃうんだよ。	has:죽어버려	fix	normalize
+normalize:shimau-n	明日の朝にはバレちまうんだ。	has:들켜버리는 거야	fix	normalize
+normalize:shimau-n	どうしてそんなこと言っちゃうんですか？	has:해버립니까	fix	normalize
+normalize:shimau-n	年齢制限入っちゃうんでやめて下さい。	has:들어가버리기 때문에	fix	normalize
+normalize:shimau-n	悪を退治しちゃうんだから！	has:퇴치해버리니까	keep	normalize
+normalize:shimau-n	時報とかもしちゃうんだぜ。	lacks:만약	keep	normalize
+normalize:shimau-n	それはちゃうん？	has:다른 거야	keep	normalize
+normalize:shimau-n	バナナ食べちゃうの？	has:먹어버리는 거야	keep	normalize
+normalize:drawn-ja-predicate	悪くはないじゃあないか。	has:나쁘지는 않잖아	fix	normalize
+normalize:drawn-ja-predicate	そこまでやらなくても、いいんじゃあないかなぁ…。	lacks:구멍	fix	normalize
+normalize:drawn-ja-predicate	まぁまぁ。どっちを選んだっていいじゃあないですか。	lacks:구멍	fix	normalize
+normalize:drawn-ja-predicate	それじゃあな！	has:그럼	keep	normalize
+normalize:te-inee	針なんて絶対に入っていねえ。	has:들어가 있지 않다	fix	normalize
+normalize:te-inee	まだ読んでいねえよ。	has:읽지 않아	fix	normalize
+normalize:te-inee	丁寧に書いてある。	has:정중하게	keep	normalize
+normalize:request-kunne	消してくんね？	has:지워 주지 않	fix	normalize
+normalize:request-kunne	貸してくんね?	has:빌려 주지 않을래	fix	normalize
+normalize:request-kunne	健太くんね？	has:켄타 군	keep	normalize
+normalize:rough-polite-yasu	急いで戻りやした。	has:돌아왔습니다	fix	normalize
+normalize:rough-polite-yasu	そう思いやせんか、兄貴？	has:생각하지 않습니까	fix	normalize
+normalize:rough-polite-yasu	これは置いときやしょう。	has:둡시다	fix	normalize
+normalize:rough-polite-yasu	宿舎に戻りやすか？	has:돌아갑니까	fix	normalize
+normalize:rough-polite-yasu	飲みやすいね。	has:마시기 좋	keep	normalize
+normalize:rough-polite-yasu	頭を冷やした。	has:식혔다	keep	normalize
+normalize:rough-polite-yasu	この本は読みやすかった。	has:읽기 쉬웠다	keep	normalize
+dialect:western-yoru	祖父さんが渋りよった。	has:꺼리고 있었다	fix	normalize
+dialect:western-yoru	雨が降りよる。	has:비가 오고 있다	fix	normalize
+dialect:western-yoru	今日も助かりよんよ。	has:도움이 되고 있	fix	normalize
+dialect:western-yoru	立ちよった店で。	has:들른 가게	keep	normalize
+dialect:western-yoru	わたしよんだ？	lacks:있어	keep	normalize
+dialect:western-yoru	それよん、ガスをどうするんね！	has:그거야	keep	normalize
+normalize:kata-te-n	何やってンだ。	has:뭐 하는 거야	fix	normalize
+normalize:kata-te-n	知ってンのか？	has:알고 있는 거야	fix	normalize
+normalize:negative-n	見てわからんか？	lacks:몰라인가	fix	normalize
+normalize:negative-n	言うこと聞かんかったら、許さんぞ。	has:듣지 않았으면	fix	normalize
+normalize:negative-n	胃がん。	has:위암	fix	normalize
+normalize:negative-n	肉まん、まるで先輩みたいですね。	has:고기만두	fix	normalize
+normalize:negative-n	千里がわんわん声をあげて泣き出した。	has:멍멍	fix	normalize
+normalize:negative-n	お茶わんか。	has:밥그릇	keep	normalize
+dialect:western-yoru	足元にすりよった。	has:다가왔다	keep	normalize
+dialect:western-yoru	彼女の足元にすりよる。	has:다가온다	keep	normalize
+dialect:western-yoru	あしもとにすりよった。	has:다가왔다	keep	normalize
+dialect:western-yoru	何見よる？	has:보고 있	fix	normalize
+dialect:western-yoru	テレビ見よった。	has:보고 있었다	fix	normalize
+dialect:western-yoru	あいつ、また来よる。	has:와 있	fix	normalize
+dialect:western-yoru	あいつが来よった。	has:와 있었다	fix	normalize
+dialect:western-yoru	もう寝よる。	has:자고 있	fix	normalize
+dialect:western-yoru	走りよんよ。	has:달리고 있	fix	normalize
+dialect:western-yoru	降りよんよ。	has:내리고 있	fix	normalize
+dialect:western-yoru	将来よく考えて。	has:장래 잘	keep	normalize
+dialect:western-yoru	一緒に見よう。	has:보자	keep	normalize
+normalize:rough-polite-yasu	こっちへ来やした。	has:왔습니다	fix	normalize
+normalize:rough-polite-yasu	いっちょシメてきやしょうか。	lacks:짊어	fix	normalize
+normalize:rough-polite-yasu	酒を持ってきやした。	has:가져왔습니다	fix	normalize
+normalize:rough-polite-yasu	そんなことはしやせんでした。	has:하지 않았습니다	fix	normalize
+normalize:rough-polite-yasu	わかりやせんでした。	has:몰랐습니다	fix	normalize
+normalize:rough-polite-yasu	誰も来やせん。	has:오지 않습니다	fix	normalize
+normalize:rough-polite-yasu	ここは来やすい。	has:오기 쉽다	keep	normalize
+normalize:rough-polite-yasu	この字は見やすかった。	has:보기 쉬웠다	keep	normalize
+normalize:negative-n	早くせんか？	has:하지 않	fix	normalize
+normalize:negative-n	早くせんか！	lacks:전과	fix	normalize
+normalize:negative-n	まだせんかった。	has:하지 않았다	fix	normalize
+normalize:negative-n	あいつは来んかった。	has:오지 않았	fix	normalize
+normalize:negative-n	あいつは来ん。	has:오지 않	fix	normalize
+normalize:negative-n	すまんかった。	has:미안했	fix	normalize
+normalize:negative-n	本当にすまんかった。	has:미안했	fix	normalize
+normalize:negative-n	みかんかった。	has:귤	keep	normalize
+normalize:negative-n	見せんか？	has:보이지	keep	normalize
+normalize:negative-n	しませんか？	has:하지 않을래요	keep	normalize
+normalize:negative-n	彼はせんしゅだ。	has:선수	keep	normalize
+normalize:negative-n	将来んとこ。	has:장래	keep	normalize
+normalize:request-kunne	持ってくんねぇか？	has:주지 않	fix	normalize
+normalize:request-kunne	教えてくんねか？	has:주지 않	fix	normalize
+normalize:request-kunne	持ってくんねえかな。	has:주지 않	fix	normalize
+normalize:request-kunne	行ってくんね。	lacks:주지 않	keep	normalize
+normalize:negative-n	後ろから3隻ズンズン来んよ。	lacks:오지 않	keep	normalize
+normalize:negative-n	明日来ん？	lacks:오지 않	keep	normalize
+normalize:negative-n	せんかちゃんが来た。せんか、すまんかった。	has:센카,	keep	normalize
+normalize:negative-n	さっさとせんか！	lacks:전과	fix	normalize

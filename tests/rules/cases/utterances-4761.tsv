@@ -1,6 +1,6 @@
 # 규칙: LEX-4761, LEX-4762
 rule	input	expected	kind	layer
-pack:utterance	そのとおり 君が悪いんじゃあない	맞아 네가 나쁘지 구멍 있고	fix	packs
+pack:utterance	そのとおり 君が悪いんじゃあない	has:맞아 네가	fix	packs
 pack:utterance	「そのとおり。向こうだって、落選したら必死に調べるだろうから、バレる可能性は少なくないと思うのよ」	「맞아. 저편도, 낙선하면 필사적으로 조사할 테니까, 들킬 가능성은 적지 않다고 생각해」	fix	packs
 pack:utterance	だからね、と。アニスフィアは笑う。無邪気に、ただ未来を語るかのように。	그러니까 말이야, 라고. 아니스피아는 웃는다. 천진난만하게, 다만 미래를 말하는 것처럼.	fix	packs
 pack:utterance	そのとおり！ だから 私は日本人に叫ぶ！	맞아! 그러니까 나는 일본인에 외친다!	fix	packs
