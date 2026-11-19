@@ -802,6 +802,33 @@ bool Item::AcceptVerbContinuation(Record* following) {
         voiceStem = true;
     }
 
+    // LEX-7452: a bare verb form in kana before を, が or の that spells a noun key of the dictionary is that noun, as a
+    // godan continuative there is: the stem of an ichidan verb, a godan potential or a godan imperative (たすけを
+    // 도움을, ふるえが 떨림이, not ふるう; つかれの色 피로의, not つかる). A kana stem without a noun row stays the verb.
+    // がる, がち, がた and のかた stay on the verb. A form with kanji already reads as its noun row there.
+    if (!matched && (base.kind == 8 || base.kind == 10 || base.kind == 11) &&
+        (two == kJaWo || (two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) ||
+         (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)))) {
+        // The whole form up to the particle (ふる + え of the potential).
+        const std::string_view whole = From(text, start);
+        const std::string_view form = whole.substr(0, whole.size() >= after().size() ? whole.size() - after().size() : 0);
+        // It starts a word: at the token start, after a mark, or after a particle of particle.verb-boundary; a stem
+        // glued to the stem of another verb is its auxiliary (描きかけの 그리다 만, not 내기).
+        const std::string_view before = std::string_view(text).substr(0, static_cast<std::size_t>(std::max(start, 0)));
+        const int beforeClass = before.empty() ? kClassOther : NameClassOf(LastChar(before));
+        // A と after kana is mostly the conditional or the quote of a predicate (すると, 閉じると), where a split
+        // through it can win once the verb is gone (こうするとしつけの 교육의, not するとし + つけ); the verb stays there.
+        const std::string_view beforeTo = before.ends_with(kJaTo) ? before.substr(0, before.size() - kJaTo.size()) : std::string_view();
+        const bool predicateTo = !beforeTo.empty() && NameClassOf(LastChar(beforeTo)) == kClassHiragana;
+        const bool wordStart = (beforeClass != kClassHiragana && beforeClass != kClassKanji) ||
+                               (beforeClass == kClassHiragana && !predicateTo &&
+                                dict::EndsWithMember(HDTRANS_CLASS("particle.verb-boundary"), before) > 0);
+        if (wordStart && !form.empty() && !HasKanji(form)) {
+            for (const Record* r = w->DoLookup(w->arena.Keep(std::string(form)), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source == form && At(r->partCode, 0) == 'N') return false;
+            }
+        }
+    }
     if ((!matched && base.patternKind == 7 && base.kind == 10) ||
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||

@@ -28773,3 +28773,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 経済安保相	경제안보상	N110	UAqVHn		GN							w:37214
 地方創生相	지방창생상	N110	UAqVHn		GN							w:37215
 担当相	담당상	N110	UAqVHn		GN							w:37216
+# 조사 앞 하1단 연용형의 명사(LEX-7452): 가나 표기는 한자 명사 행과 같은 뜻
+ふるえ	떨림	N110			GN							w:39106
+つかれ	피로	N110			GN							w:39107
+ささえ	버팀목	N110			GN							w:39108
+おびえ	두려움	N110			GN							w:39109
+怯え	두려움	N110			GN							w:39220

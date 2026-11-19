@@ -148,7 +148,7 @@ normalize:dialect-word	わいの芝居 そんなに下手か？	나의 연극 �
 normalize:dialect-word	そげん でかい声出さんでも聞こえとる！	그렇게 큰 소리를 내지 않아도 들려!	fix	normalize
 normalize:dialect-word	さあ おらに付いて来るだ	자 나를 따라오는이다	fix	normalize
 normalize:dialect-word	そこは わいの机やで	거기는 나의 책상이야	fix	normalize
-normalize:dialect-word	そんな ええ犬なら おれのところへも一日 貸せ！	그렇게 좋은 개라면 나 에도 하루 빌려 주어라!	fix	normalize
+normalize:dialect-word	そんな ええ犬なら おれのところへも一日 貸せ！	그렇게 좋은 개라면 나에게도 하루 빌려 주어라!	fix	normalize
 normalize:dialect-word	これが 騒がずにおられるか ホントに これ見てみい ええ？	이것이 떠들지 않고 계실까 정말로 이것 봐라 네?	fix	normalize
 normalize:dialect-word	わいの妹はな 身も心もきれいな…	나의 여동생은몸도 마음도 예쁘네…	fix	normalize
 normalize:dialect-word	ほんで ある日	그래서 어느 날	fix	normalize
