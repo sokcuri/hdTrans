@@ -30,6 +30,24 @@ while [ $i -lt 2000 ]; do
     i=$((i + 1))
 done
 printf '%sいいじゃん\n' "$line" >> "$tmp/input"
+# Katakana names before が all along one line: the favour cue after each run reads its clause once, not
+# again to the end of the line from each run.
+i=0
+line=
+while [ $i -lt 3000 ]; do
+    line=${line}ヨンホが
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
+line=そらと
+# A long kana run after a kana word and と: the longest word that starts the run is found once, not by
+# a lookup of every end of the run.
+i=0
+while [ $i -lt 8000 ]; do
+    line=${line}ね
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 # Random hiragana: short words all along one token, each placed among the words before it.
 awk 'BEGIN {
     n = split("あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も や ゆ よ ら り る れ ろ わ ん", k, " ")
