@@ -98,7 +98,9 @@ public:
         const char* text = nullptr;  // the text CoverSurface reads; null outside it
         std::size_t size = 0;
         std::size_t next = 0;
-        CopyChain runs[4];
+        // One run per start inside a unit: a periodic run of a unit of up to ten characters is read from
+        // up to ten places in a copy (漢字研究 from 漢 and from 研), each with its own shortest unit.
+        CopyChain runs[10];
     };
     CopyChains copyChains;
     int insertedLength = 0;

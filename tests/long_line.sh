@@ -106,6 +106,15 @@ while [ $i -lt 5000 ]; do
     i=$((i + 1))
 done
 printf '%s\n' "$line" >> "$tmp/input"
+# One kanji token of a unit said again and again: each word of a copy is read from a start inside the
+# unit, and the copies after it are remembered for each start.
+i=0
+line=
+while [ $i -lt 1000 ]; do
+    line=${line}漢字研究部品作業時間
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 # One clause of short questions with no mark (彼が行くか): the packs layer reads the end of the
 # sentence after each verb only as far as a final= value reaches, and the chain's polite test once;
 # whether a word stands in a quote is read from the marks of its token, not from its text again.
