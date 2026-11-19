@@ -4,6 +4,7 @@
 #include <array>
 #include <bit>
 #include <cstdint>
+#include <limits>
 #include <vector>
 
 #include "core/dict/char_readings.h"
@@ -772,6 +773,196 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     if (front == nullptr) return records;
     *frontTail = back;
     return front;
+}
+
+// The Hangul syllables of s with spaces dropped.
+std::string HangulOnly(std::string_view s) {
+    std::string out;
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (text::Split(r.cp)) out.append(t.substr(0, r.size));
+        t.remove_prefix(r.size);
+    }
+    return out;
+}
+
+// Whether the Korean gloss of a katakana word reads its sound: written in Hangul and spaces alone, its
+// syllables start with the consonants of the kana spelled syllable by syllable (spelled), plain, tense
+// and aspirated alike, where one may hold a syllable more at its end (ジャック 잭 for 작크, マン 맨,
+// スロー 슬로우; not ビア 맥주, デブ 뚱뚱이).
+bool SoundsAlike(std::string_view gloss, std::string_view spelled) {
+    // The consonant class of the first sound of each syllable, or none for text that is no Hangul.
+    auto onsets = [](std::string_view s, std::string& out) {
+        static constexpr char kClass[] = "KKNTTRMPPSSOCCCKTPH";
+        for (std::string_view t = s; !t.empty();) {
+            const text::Rune r = text::DecodeRune(t);
+            t.remove_prefix(r.size);
+            if (r.cp == U' ') continue;
+            const auto syllable = text::Split(r.cp);
+            if (!syllable) return false;
+            out.push_back(kClass[syllable->initial]);
+        }
+        return !out.empty();
+    };
+    std::string a, b;
+    if (!onsets(gloss, a) || !onsets(spelled, b)) return false;
+    if (a.size() > b.size()) std::swap(a, b);
+    return b.size() - a.size() <= 1 && b.compare(0, a.size(), a) == 0;
+}
+
+// LEX-7100: a katakana run that no dictionary word reads whole is read whole by its sound (ゴフマン,
+// エヌディビア, バベルマンデブ) where every way to read it word by word takes a word the dictionary reads
+// only as a person's name beside a word that is no name, or kana no such word covers: the run is a
+// foreign name or word the dictionary lacks, and the words inside it are not glossed (not 고흐 맨, N디
+// 맥주, 바벨 맨 뚱뚱이). Words are dictionary keys of two or more kana inside the run; a single kana
+// that is ー, ン or a small kana, or the last kana of the run, belongs to the word before it. A run
+// that words with no person's name read through (ゲームセンター, スケートアメリカ) stays, and so does a
+// run that names alone read through (a full name, ジョーハーマン). Only from the start of a run of
+// three to 24 kana, never over a plain word with force; records holds the words at full[cursor:],
+// longest first.
+Record* KatakanaRunWhole(Worker& worker, Record* records, std::string_view full, std::size_t cursor, int token) {
+    constexpr std::size_t kMaxRun = 24;
+    if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    cursor = std::min(cursor, full.size());
+    const std::string_view text = full.substr(cursor);
+    if (text.empty() || !KatakanaWordRune(text::DecodeRune(text).cp)) return records;
+    if (cursor > 0 && KatakanaWordRune(DecodeLastRune(full.substr(0, cursor)).cp)) return records;
+    std::vector<std::size_t> bounds{0};
+    for (std::string_view s = text; !s.empty() && bounds.size() <= kMaxRun + 1;) {
+        const text::Rune r = text::DecodeRune(s);
+        if (!KatakanaWordRune(r.cp)) break;
+        bounds.push_back(bounds.back() + r.size);
+        s.remove_prefix(r.size);
+    }
+    const std::size_t n = bounds.size();
+    const std::size_t run = bounds.back();
+    if (n < 4 || n > kMaxRun + 1) return records;
+    if (const std::string_view rest = text.substr(run); !rest.empty() && KatakanaWordRune(text::DecodeRune(rest).cp)) {
+        return records;
+    }
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() >= run) return records;
+    }
+    // The ways to read the run from its start up to bounds[i], as a set of states: bit 6 for names
+    // alone, bit p * 3 + c for a reading with a person's name in it (p) and c pieces that may match by
+    // chance (a person's name or a word of two kana or fewer; 2 for two or more).
+    std::vector<unsigned> ways(n, 0);
+    ways[0] = 1u | (1u << 6);
+    struct Piece {
+        std::size_t from, to;
+        std::string sound;  // the Korean of a row that reads the piece by its sound, or empty
+        bool name;          // read only as a name
+    };
+    std::vector<Piece> pieces;
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        if (ways[i] == 0) continue;
+        const char32_t r = text::DecodeRune(text.substr(bounds[i])).cp;
+        if (i > 0 && (i + 2 == n || r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos)) {
+            ways[i + 1] |= ways[i];
+        }
+        if (i + 2 >= n) continue;
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
+        for (std::size_t j = i + 2; j < n; j++) {
+            const std::size_t length = bounds[j] - bounds[i];
+            bool any = false, person = true, name = true;
+            std::string sound;
+            std::string spelled;
+            if (!worker.Transliterate(text.substr(bounds[i], length), spelled)) spelled.clear();
+            for (const dict::Candidate& c : found.list) {
+                // A sense of the name layer holds its codes in its entry.
+                const dict::Codes* codes = c.codes != nullptr ? c.codes : c.user != nullptr ? c.user->codes : nullptr;
+                if (c.source.size() != length || codes == nullptr) continue;
+                any = true;
+                person = person && codes->partText == "N130" && codes->sem.Text().find("QPN") != std::string_view::npos;
+                name = name && codes->partText == "N130";
+                if (sound.empty() && SoundsAlike(c.target, spelled)) sound = HangulOnly(c.target);
+            }
+            if (!any) continue;
+            pieces.push_back({i, j, sound, name});
+            const bool chance = person || j - i <= 2;
+            for (unsigned p = 0; p < 2; p++) {
+                for (unsigned c = 0; c < 3; c++) {
+                    if ((ways[i] & (1u << (p * 3 + c))) == 0) continue;
+                    ways[j] |= 1u << ((p | (person ? 1u : 0u)) * 3 + std::min(2u, c + (chance ? 1u : 0u)));
+                }
+            }
+            if (name && (ways[i] & (1u << 6)) != 0) ways[j] |= 1u << 6;
+        }
+    }
+    // Read whole only where every reading word by word holds a person's name and one more piece that
+    // may match by chance, and names alone read none through.
+    if ((ways[n - 1] & ~(1u << 5)) != 0 || ways[n - 1] == 0) return records;
+    // The run is one word: of the readings word by word, the one with the fewest pieces (a single
+    // kana that belongs to the word before it joins that word) is written without spaces, each piece by
+    // a row that reads it by its sound (ジャック 잭, バベル 바벨; not ビア 맥주) or else by its kana.
+    constexpr std::size_t kFar = std::numeric_limits<std::size_t>::max();
+    std::vector<std::size_t> fewest(n, kFar), from(n, kFar), piece(n, kFar);
+    fewest[0] = 0;
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        if (fewest[i] == kFar) continue;
+        const char32_t r = text::DecodeRune(text.substr(bounds[i])).cp;
+        if (i > 0 && (i + 2 == n || r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos) &&
+            fewest[i] < fewest[i + 1]) {
+            fewest[i + 1] = fewest[i];
+            from[i + 1] = i;
+            piece[i + 1] = kFar;
+        }
+        for (std::size_t k = 0; k < pieces.size(); k++) {
+            const Piece& p = pieces[k];
+            if (p.from != i || fewest[i] + 1 >= fewest[p.to]) continue;
+            fewest[p.to] = fewest[i] + 1;
+            from[p.to] = i;
+            piece[p.to] = k;
+        }
+    }
+    if (fewest[n - 1] == kFar) return records;
+    // The pieces from the end, a single kana joined to the piece before it.
+    std::vector<std::pair<std::size_t, std::size_t>> spans;  // [from, to) in bounds, and whether a row reads it
+    std::vector<const std::string*> sounds;
+    for (std::size_t at = n - 1; at > 0;) {
+        const std::size_t start = from[at];
+        if (piece[at] == kFar) {
+            std::size_t back = start;
+            while (piece[back] == kFar && back > 0) back = from[back];
+            const std::size_t first = from[back];
+            spans.emplace_back(first, at);
+            sounds.push_back(nullptr);
+            at = first;
+            continue;
+        }
+        spans.emplace_back(start, at);
+        const Piece& p = pieces[piece[at]];
+        // A name is a word of the run only at its start; inside the run it may be a piece cut by chance
+        // (スハルト of クリスハルト).
+        sounds.push_back(p.sound.empty() || (p.name && start != 0) ? nullptr : &p.sound);
+        at = start;
+    }
+    // Pieces of two kana or fewer but the last (マン of ジャックマン 잭맨), names inside the run and pieces
+    // no row reads by sound are spelled together by their kana.
+    std::string target;
+    std::size_t spell = kFar;  // the start, in bounds, of the kana not yet spelled
+    auto flush = [&](std::size_t to) {
+        if (spell == kFar) return true;
+        std::string spelled;
+        if (!worker.Transliterate(text.substr(bounds[spell], bounds[to] - bounds[spell]), spelled)) return false;
+        target += spelled;
+        spell = kFar;
+        return true;
+    };
+    for (std::size_t k = spans.size(); k-- > 0;) {
+        const auto [a, b] = spans[k];
+        if (sounds[k] != nullptr && (b - a >= 3 || b == n - 1)) {
+            if (!flush(a)) return records;
+            target += *sounds[k];
+        } else if (spell == kFar) {
+            spell = a;
+        }
+    }
+    if (!flush(n - 1)) return records;
+    Record* whole = worker.CreateSyntheticRecord(token, text.substr(0, run), false);
+    if (!target.empty()) whole->target = std::move(target);
+    whole->child = records;
+    return whole;
 }
 
 // LEX-5106: where the longest word at a point of a kanji run ends inside the run and the rest of the
@@ -3498,6 +3689,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text) records = KanaNounOverOneKanaStem(full, cursor, token, records);
     if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
+    if (settings.text) records = KatakanaRunWhole(*this, records, full, static_cast<std::size_t>(cursor), token);
     if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
     if (settings.text) records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
     const std::string_view text = From(full, cursor);
