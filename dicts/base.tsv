@@ -251580,7 +251580,7 @@ ttt	ttt	K110			GN				jisjk:201744
 死亡通知	사망 통지	N110			GN				jisjk:188416		
 死人	죽은 사람	N110	VHn		GN				jisjk:25158		
 死人花	석산	N110	VPt		GN				jisjk:234245		
-死体	시체	N110			GN				jisjk:25166		
+死体	시체	N110	VHn		GN				jisjk:25166		
 死体検案書	시체검안서	N110	QHP		GN				jisjk:233930		
 死体現象	사체 현상	N110			GN				jisjk:233931		
 死体硬直	시체 경직	N110			GN				jisjk:233932		

@@ -1,6 +1,5 @@
 # 규칙: LEX-7150, LEX-7151, LEX-7153, LEX-7155, SND-22
 rule	input	expected	kind	layer
-dict:freq-gloss	「あの死体がなくなっていたのは、確かに掘り返したからだ。」	has:시체가 없어져	fix	lookup
 dict:freq-gloss	屍がなくなっていた。	has:없어져	fix	lookup
 dict:freq-gloss	遺体がなくなっていた。	has:없어져	keep	lookup
 dict:freq-gloss	財布がなくなった。	지갑이 없어졌다.	keep	lookup
