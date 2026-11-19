@@ -108,3 +108,53 @@ dict:freq-lex	ほとんど無意識のうちに、言葉となって出ていた
 dict:freq-lex	しぶとく押し返してはたき込んだ。	has:쳐내렸다	fix	lookup
 dict:freq-lex	新潟の米農家を訪ねた。	has:쌀농가	keep	lookup
 dict:freq-lex	今のうちに帰ろう。	lacks:집	keep	lookup
+dict:freq-lex	日本の米消費が減った。	has:쌀소비	keep	lookup
+dict:freq-lex	国内の米生産量。	has:쌀생산량	keep	lookup
+dict:freq-lex	農家の米出荷が始まった。	has:쌀출하	keep	lookup
+dict:freq-lex	日本の米倉庫。	has:쌀창고	keep	lookup
+dict:freq-lex	自慢の米料理。	has:쌀요리	keep	lookup
+dict:freq-lex	日本の米輸出が増えた。	has:쌀수출	keep	lookup
+dict:freq-lex	日本の米が好きだ。	has:쌀을	keep	lookup
+dict:freq-lex	日本の米、中国の麦。	has:일본의 쌀,	keep	lookup
+dict:freq-lex	日本の米大使館に連絡した。	has:미 대사관	fix	lookup
+dict:freq-lex	各国の米大使館。	has:미 대사관	fix	lookup
+dict:freq-lex	両国の米関係。	has:미 관계	fix	lookup
+dict:freq-lex	親会社の米企業に売却した。	has:미 기업에	fix	lookup
+dict:freq-lex	中国の米国債。	has:미 국채	fix	lookup
+dict:freq-lex	同盟国の米政府に抗議した。	has:미 정부에	fix	lookup
+dict:freq-lex	米田、来い！	has:요네다,	keep	lookup
+dict:freq-lex	米倉さん、こんにちは！	has:요네쿠라 씨	keep	lookup
+dict:freq-lex	米子に行く。	has:요나고에	keep	lookup
+dict:freq-lex	いくらの醤油漬けを作った。	has:만들었다	fix	lookup
+dict:freq-lex	いくら醤油漬けを作った。	has:연어알 간장 절임을 만들었다	fix	lookup
+dict:freq-lex	いくらの醤油漬けを食べた。	has:먹었다	fix	lookup
+dict:freq-lex	いくら丼を食べた。	has:연어알 덮밥을 먹었다	fix	lookup
+dict:freq-lex	いくら丼が来た。	has:연어알 덮밥이 왔다	fix	lookup
+dict:freq-lex	いくら丼！	has:연어알 덮밥!	fix	lookup
+dict:freq-lex	いくら丼はいくらですか？	has:얼마입니까	keep	lookup
+dict:freq-lex	いくらでも食べる。	has:얼마든지	keep	lookup
+dict:freq-lex	電話の折り返しを待っている。	has:전화 회신을 기다리고	fix	lookup
+dict:freq-lex	お電話の折り返しをお待ちしております。	has:전화 회신을	fix	lookup
+dict:freq-lex	今朝の電話での折り返しが遅れた。	has:전화 회신이	fix	lookup
+dict:freq-lex	メールの折り返しを待つ。	has:메일 회신을	fix	lookup
+dict:freq-lex	連絡の折り返しが来ない。	has:연락 회신이	fix	lookup
+dict:freq-lex	袖の折り返しがほつれた。	has:소매 접단	fix	lookup
+dict:freq-lex	ズボンの折り返しを直した。	has:바지 접단을 고쳤다	fix	lookup
+dict:freq-lex	コースの折り返しまで走った。	has:반환점까지	keep	lookup
+dict:freq-lex	氏名の公開を控える。	has:공개를 삼간다	keep	lookup
+dict:freq-lex	実名の公開を控えた。	has:공개를 삼갔다	keep	lookup
+dict:freq-lex	詳細の公開を控える。	lacks:앞둔	keep	lookup
+dict:freq-lex	発言を控える。	has:발언을 삼간다	keep	lookup
+dict:freq-lex	デビューを控えた新人。	has:데뷔를 앞둔 신인	keep	lookup
+dict:freq-lex	扉を破られた。	has:문이 부서졌다	fix	lookup
+dict:freq-lex	ドアを破られた。	has:문이 부서졌다	fix	lookup
+dict:freq-lex	窓を破られた。	has:창이 부서졌다	fix	lookup
+dict:freq-lex	ドアを破られる前に逃げろ。	has:부서지기 전에	fix	lookup
+dict:freq-lex	ドアを破った。	has:문을 부수었다	keep	lookup
+dict:freq-lex	障子を破った。	has:찢었다	keep	lookup
+dict:freq-lex	襖を破ってしまった。	has:찢어	keep	lookup
+dict:freq-lex	障子を破られた。	has:찢겼다	keep	lookup
+dict:freq-lex	田中さんのうちに遊びに行った。	has:씨의 집에 놀러 갔다	fix	lookup
+dict:freq-lex	友達のうちに遊びに行く。	has:친구의 집에 놀러	fix	lookup
+dict:freq-lex	三人のうちに遊びに行く者はいない。	has:세 명 가운데	keep	lookup
+dict:freq-lex	今日のうちに遊びに行く。	lacks:집에	keep	lookup
