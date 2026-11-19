@@ -42,8 +42,13 @@ OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open);
 // Whether the shadow segmentation scorer runs (HDTRANS_SEG_SHADOW).
 bool SegShadowOn();
 
+// The longest katakana run the katakana reorders read whole or cover (candidate.cpp) and the
+// segmentation lattice counts as one (segcost.cpp).
+inline constexpr std::size_t kKatakanaRunMax = 24;
+
 // The segmentation lattice (segcost.cpp).
 struct SegEdge;
+struct SegRunMemo;
 struct SegTokenPaths;
 
 class Worker {
@@ -224,7 +229,8 @@ private:
     void SegReport(int token, std::string_view surface, const Item* mark);
     void SegEdgesAt(std::string_view s, int p, int token, bool detail, std::vector<SegEdge>& out);
     bool SegTokenLattice(int token, std::string_view surface, const Item* mark, SegTokenPaths& out);
-    bool segDecided_ = false;  // the lattice changed the order of records in the current token
+    // The end and the kana counts of the katakana run SegEdgesAt reads last.
+    std::shared_ptr<SegRunMemo> segRun_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);

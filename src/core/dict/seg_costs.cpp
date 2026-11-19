@@ -1,6 +1,7 @@
 #include "core/dict/seg_costs.h"
 
 #include <charconv>
+#include <string>
 
 namespace hdTrans::dict {
 
@@ -32,8 +33,10 @@ std::vector<std::pair<int, std::string>> ParseSegCosts(std::string_view text, Se
         }
         int v = 0;
         const auto [end, ec] = std::from_chars(value.data(), value.data() + value.size(), v);
-        if (ec != std::errc() || end != value.data() + value.size() || v < 0 || row.size() == t2 + 1) {
-            errors.emplace_back(line, "the value of " + std::string(name) + " is no whole number, or the reason is missing");
+        if (ec != std::errc() || end != value.data() + value.size() || v < 0 || v > kSegCostMax || row.size() == t2 + 1) {
+            errors.emplace_back(line, "the value of " + std::string(name) + " is no whole number from 0 to " + std::to_string(kSegCostMax) +
+                                          ", or the reason is missing");
+            seen[k] = true;  // reported here, not again as missing
             continue;
         }
         if (seen[k]) errors.emplace_back(line, "the seg cost " + std::string(name) + " comes twice");

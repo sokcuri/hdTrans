@@ -31,7 +31,7 @@
 //     base words (userdict::KanaSpellings), of the layers prefilter and postfilter
 //     filter rows (filter.h), and the base files plain dictionaries (userdict::Parse),
 //     numbered in order from 0; a plain line that does not compile fails the load. The
-//     layers kana, readings, prefilter and postfilter are for plain files only, the
+//     layers kana, readings, prefilter, postfilter and seg-costs are for plain files only, the
 //     others but base for column files only.
 //   - The user dictionary file, when given and present, loads after the folders.
 //     Its dictionary header, if any, is "#! layer=user": as a column file it joins
@@ -45,6 +45,8 @@
 //     senses.tsv is compiled into the sense table (userdict::ParseSenses).
 //   - Plain files of the layers pack and pack-classes make the pack table (pack.h), compiled
 //     after the sense table, so a folder without them numbers the marker families as before.
+//   - The plain file of the layer seg-costs holds the edge costs of the segmentation
+//     lattice (seg_costs.h); without it the lattice is off.
 #include <cstddef>
 #include <cstdint>
 #include <memory>

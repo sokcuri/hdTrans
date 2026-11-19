@@ -649,7 +649,7 @@ bool BoundKana(char32_t r) { return r == U'ー' || std::u32string_view(U"ンァ�
 // stage finds them. A plain word with force keeps its place, and so does every word of a run longer
 // than 24 kana. records holds the words at full[cursor:], longest first.
 Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_view full, std::size_t cursor) {
-    constexpr std::size_t kMaxRun = 24;
+    constexpr std::size_t kMaxRun = kKatakanaRunMax;
     if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
     cursor = std::min(cursor, full.size());
     if (cursor == full.size() || !KatakanaWordRune(text::DecodeRune(full.substr(cursor)).cp)) return records;
@@ -845,7 +845,7 @@ bool SoundsAlike(std::string_view gloss, std::string_view spelled) {
 // such a common word that starts it, never over a plain word with force; records holds the words at
 // full[cursor:], longest first.
 Record* KatakanaRunWhole(Worker& worker, Record* records, std::string_view full, std::size_t cursor, int token) {
-    constexpr std::size_t kMaxRun = 24;
+    constexpr std::size_t kMaxRun = kKatakanaRunMax;
     if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
     cursor = std::min(cursor, full.size());
     if (cursor == full.size() || !KatakanaWordRune(text::DecodeRune(full.substr(cursor)).cp)) return records;
@@ -2104,7 +2104,6 @@ bool Worker::Dispatch(int i, int& last) {
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
         else {
             const Item* const mark = chain.tail;
-            segDecided_ = false;
             BuildSurfaceTransform(i, left);
             if (SegShadowOn() || settings.splitWhy) SegReport(i, left, mark);
         }

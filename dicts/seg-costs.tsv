@@ -6,7 +6,7 @@ particle	0	a particle spelled in kana costs nothing more than its word
 lone-kanji	30	a word of one kanji is often a loose kanji of a compound
 lone-kana	60	a content word of one hiragana is often a piece of a kana word
 kata-loan	40	a dictionary word of three or more katakana, in place of word: a loan word is one word
-short-kata-piece	80	a dictionary word of one or two katakana inside a longer katakana run is often a piece cut by chance
+short-kata-piece	80	a dictionary word of one katakana, or a proper noun of two, inside a longer katakana run is often a piece cut by chance
 kata-sound	100	one katakana no word covers, read by its sound
 proper	25	a proper noun row of the base dictionary not in katakana reads a name by chance
 name-row	25	a reading of the name layer reads a name by chance

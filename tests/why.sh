@@ -39,4 +39,11 @@ cmp "$tmp/kana-bare" "$tmp/kana-why"
 [ ! -s "$tmp/kana-plain-logs" ]
 [ "$(grep -c '^WHY-SPLIT' "$tmp/kana-logs")" = 1 ]
 grep '^WHY-SPLIT	1	0	ビザー	search [0-9]*: ビザ/N110=비자 (word [0-9]*) | ー/' "$tmp/kana-logs" > /dev/null
+# A gloss longer than the note shows is cut at a character: the line stays UTF-8.
+printf 'ロングワード\tx가나다라마바사아자차카타\tN110\t\t\tGN\t0\t3\n' >> "$tmp/dicts/base.tsv"
+printf 'ロングワード' > "$tmp/long"
+"$cli" -dicts "$tmp/dicts" -userdict '' -ehnd '' -why -in "$tmp/long" > "$tmp/long-why" 2> "$tmp/long-logs"
+grep '^WHY-SPLIT' "$tmp/long-logs" > "$tmp/long-notes"
+iconv -f UTF-8 -t UTF-8 "$tmp/long-notes" > /dev/null
+grep -F 'ロングワード/N110=x가나다라마바사 (' "$tmp/long-notes" > /dev/null
 printf 'PASS CLI -why filter logs, split notes and unchanged stdout\n'

@@ -16,7 +16,7 @@ enum SegCost : int {
     kSegLoneKanji,       // a word of one kanji
     kSegLoneKana,        // a content word of one hiragana
     kSegKataLoan,        // a dictionary word of three or more katakana, in place of word
-    kSegShortKataPiece,  // a dictionary word of one or two katakana inside a longer katakana run
+    kSegShortKataPiece,  // a dictionary word of one katakana, or a proper noun of two, inside a longer katakana run
     kSegKataSound,       // one katakana no word covers
     kSegProper,          // a proper noun row of the base dictionary not in katakana
     kSegNameRow,         // a reading of the name layer
@@ -31,6 +31,10 @@ enum SegCost : int {
 };
 
 // The names of the costs in the file, in the order of SegCost.
+// The largest value a seg cost may take: a path of a long token sums many edges, and stays far
+// below the lattice's infinity (INT_MAX / 4) with every value at most this.
+inline constexpr int kSegCostMax = 10000;
+
 inline constexpr std::array<std::string_view, kSegCostCount> kSegCostNames = {
     "word",       "particle",  "lone-kanji",   "lone-kana", "kata-loan",
     "short-kata-piece", "kata-sound", "proper", "name-row", "kana-row", "stem-only",

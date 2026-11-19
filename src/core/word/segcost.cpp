@@ -1,20 +1,21 @@
-// The segmentation lattice (LEX-6720..6739, spec/words.md).
+// The segmentation lattice (LEX-6720..6722, spec/words.md).
 //
-// A token read as one best path over a lattice: an edge for every dictionary candidate the word
-// search itself sees at every character (Worker::WordInfo, the same name and kana gates), conjugated
-// verbs and adjectives spanning their ending (InsertLateCandidate on the record alone), a run of
-// Latin letters as one word, and fallback edges for unknown text. Every edge costs a sum of named,
-// hand-set terms from the dictionary file of the layer seg-costs (dict/seg_costs.h); the cheapest path
-// wins, and a tie keeps the order of the word search.
+// A token read again as one best path over a lattice: an edge for every dictionary candidate
+// Worker::WordInfo returns at every character, conjugated verbs and adjectives spanning their ending
+// (InsertLateCandidate on the record alone), a run of Latin letters as one word, and fallback edges
+// for unknown text. Every edge costs a sum of named, hand-set terms from the dictionary file of the
+// layer seg-costs (dict/seg_costs.h); the cheapest path wins, and a tie keeps the order of the search.
+// The lattice reads only; the search alone splits the token.
 //
-// Three uses:
-// - LatticeKatakana: at a cursor inside a katakana run of 3 to 24 kana, the lattice of the run picks
-//   the span the search reads first (in place of the order KatakanaRunWhole and KatakanaCoverFirst
-//   give); elsewhere the search decides alone.
-// - SplitNote (--why): per token the path the search took with the cost terms of each edge, and the
-//   best path with another split.
-// - ShadowSegment (HDTRANS_SEG_SHADOW=<file>): writes <file>.<pid>, one row per window where the
-//   lattice splits more cheaply than the search, with the family of the window; reads only.
+// Two uses:
+// - SegReport with --why: per token the path the search took with the cost terms of each edge, and
+//   the best path with another split.
+// - SegReport with HDTRANS_SEG_SHADOW=<file>: writes <file>.<pid>, one row per window where the
+//   lattice splits more cheaply than the search, with the family of the window.
+//
+// The work is linear in the length of the token: the edges at a character are the lookup's, the
+// sound edge of a katakana run reads its end and length from a memo of the run, and labels are
+// formatted only for the paths printed.
 
 #include <algorithm>
 #include <atomic>
@@ -23,10 +24,14 @@
 #include <limits>
 #include <memory>
 #include <string>
-#include <unistd.h>
 #include <vector>
 
 #include "core/text/unicode.h"
+#if defined(_WIN32) && !defined(__EMSCRIPTEN__)
+#include <process.h>
+#else
+#include <unistd.h>
+#endif
 #include "core/word/strings.h"
 #include "core/word/util.h"
 #include "core/word/worker.h"
@@ -45,7 +50,19 @@ struct SegEdge {
     const dict::UserEntry* user = nullptr;
     bool word = false;                  // a dictionary word (not unknown text read by sound)
     bool particle = false;              // a particle spelled in kana
-    std::string label;                  // span/code=gloss with the cost terms, only for --why and the shadow
+    // For --why and the shadow only: the start of the span, the code, layer and gloss of the edge,
+    // and its cost terms, formatted by EdgeLabel; label is set where it is formatted already.
+    int from = 0;
+    std::string code, gloss, terms, label;
+    char layer = 0;
+};
+
+// The katakana run SegEdgesAt read last: text, the byte offsets [start, end) from where it was
+// read to its end, and per byte offset from start the kana from there to end.
+struct SegRunMemo {
+    std::string_view text;
+    int start = 0, end = 0;
+    std::vector<int> chars;
 };
 
 // The lattice of a whole token and the search's path through it (SegTokenLattice).
@@ -60,7 +77,6 @@ struct SegTokenPaths {
 namespace {
 
 constexpr int kInf = std::numeric_limits<int>::max() / 4;
-constexpr int kMaxRun = 24;  // the longest katakana run the lattice decides, as the katakana reorders
 
 int CharLen(std::string_view s, int p) {
     const int n = static_cast<int>(FirstChar(s.substr(static_cast<std::size_t>(p))).size());
@@ -179,10 +195,10 @@ int WordCost(const SegCosts& t, std::string_view s, int p, int end, char tag, bo
     return c.Total();
 }
 
-int SoundRunCost(const SegCosts& t, std::string_view span, std::string* terms) {
+int SoundRunCost(const SegCosts& t, int chars, std::string* terms) {
     Cost c(t, terms);
     c.Add(dict::kSegSoundRun);
-    c.Add(dict::kSegSoundChar, Chars(span));
+    c.Add(dict::kSegSoundChar, chars);
     return c.Total();
 }
 
@@ -200,7 +216,7 @@ int UnreadCost(const SegCosts& t, std::string_view span, std::string* terms) {
         return c.Total();
     }
     if (Chars(span) == 1) return UnknownCost(t, span, terms);
-    if (AllOf(span, KataRune)) return SoundRunCost(t, span, terms);
+    if (AllOf(span, KataRune)) return SoundRunCost(t, Chars(span), terms);
     Cost c(t, terms);
     c.Add(dict::kSegUnknownChar, Chars(span));
     return c.Total();
@@ -212,7 +228,14 @@ std::string Label(std::string_view span, std::string_view code, char layer, std:
     s += code;
     if (layer != 0) s += layer;
     s += '=';
-    s += gloss.substr(0, 24);
+    // The gloss up to 24 bytes, cut at a character.
+    std::size_t cut = 0;
+    while (cut < gloss.size()) {
+        const std::size_t n = std::max<std::size_t>(1, FirstChar(gloss.substr(cut)).size());
+        if (cut + n > 24) break;
+        cut += n;
+    }
+    s += gloss.substr(0, cut);
     s += " (";
     s += terms;
     s += ')';
@@ -220,6 +243,30 @@ std::string Label(std::string_view span, std::string_view code, char layer, std:
         if (ch == '\t' || ch == '\n') ch = ' ';
     }
     return s;
+}
+
+std::string EdgeLabel(std::string_view s, const SegEdge& e) {
+    if (!e.label.empty()) return e.label;
+    return Label(s.substr(static_cast<std::size_t>(e.from), static_cast<std::size_t>(e.end - e.from)), e.code, e.layer, e.gloss, e.terms);
+}
+
+// Adds a cost term to the label of e.
+void AddTerm(SegEdge& e, std::string_view term) {
+    if (!e.label.empty()) {
+        e.label.insert(e.label.size() - 1, std::string(" ") + std::string(term));
+    } else {
+        if (!e.terms.empty()) e.terms += ' ';
+        e.terms += term;
+    }
+}
+
+// The fields of the label of e.
+void SetLabel(SegEdge& e, int from, std::string_view code, char layer, std::string_view gloss, std::string terms) {
+    e.from = from;
+    e.code = code;
+    e.layer = layer;
+    e.gloss = gloss.substr(0, std::min<std::size_t>(gloss.size(), 32));
+    e.terms = std::move(terms);
 }
 
 // A word whose span the lattice also reads as word + kana particle (+ word), or particle + word,
@@ -268,7 +315,7 @@ void AddSeams(std::string_view s, std::vector<std::vector<SegEdge>>& edges, int 
     }
     for (auto& [x, pieces] : seams) {
         if (pieces >= kInf || pieces <= x->cost) continue;
-        if (detail) x->label.insert(x->label.size() - 1, " particle-seam " + std::to_string(pieces - x->cost));
+        if (detail) AddTerm(*x, "particle-seam " + std::to_string(pieces - x->cost));
         x->cost = pieces;
     }
 }
@@ -279,7 +326,11 @@ struct Sink {
     Sink() {
         const char* path = std::getenv("HDTRANS_SEG_SHADOW");
         if (path == nullptr || *path == '\0') return;
+#if defined(_WIN32) && !defined(__EMSCRIPTEN__)
+        const std::string p = std::string(path) + "." + std::to_string(_getpid());
+#else
         const std::string p = std::string(path) + "." + std::to_string(::getpid());
+#endif
         f = std::fopen(p.c_str(), "w");
     }
     ~Sink() {
@@ -347,7 +398,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         e.user = c.user;
         e.word = true;
         e.particle = part[0] == 'P' && AllHiragana(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(end - p)));
-        if (detail) e.label = Label(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(end - p)), part, nameRow ? 'n' : kanaRow ? 'k' : 0, c.target, terms);
+        if (detail) SetLabel(e, p, part, nameRow ? 'n' : kanaRow ? 'k' : 0, c.target, terms);
         // A single kana that ends the run after a katakana word belongs to that word (ジャーニー|ズ,
         // LEX-95): the word with it costs what the word costs.
         const bool joins = end < size && KataRune(RuneAt(s, end)) && AllOf(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(end - p)), KataRune) &&
@@ -355,7 +406,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         if (joins) {
             SegEdge j = e;
             j.end = end + CharLen(s, end);
-            if (detail) j.label.insert(j.label.size() - 1, " +kana");
+            if (detail) AddTerm(j, "+kana");
             out.push_back(std::move(j));
         }
         out.push_back(std::move(e));
@@ -365,7 +416,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
     terms.clear();
     {
         SegEdge e(p + one, UnknownCost(t, ch, tp));
-        if (detail) e.label = Label(ch, "unk", 0, "", terms);
+        if (detail) SetLabel(e, p, "unk", 0, "", terms);
         out.push_back(std::move(e));
     }
     const char32_t r = RuneAt(s, p);
@@ -375,19 +426,32 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         while (q < size && LatinRune(RuneAt(s, q))) q += CharLen(s, q);
         terms.clear();
         SegEdge e(q, UnreadCost(t, rest.substr(0, static_cast<std::size_t>(q - p)), tp));
-        if (detail) e.label = Label(rest.substr(0, static_cast<std::size_t>(q - p)), "lat", 0, "", terms);
+        if (detail) SetLabel(e, p, "lat", 0, "", terms);
         out.push_back(std::move(e));
     }
     // From the start of the run, or from a kana inside it that can start a word (no ー, ン or small
     // kana): the rest of a run after a word is read whole by its sound (ドクター|ゴフマン).
     static constexpr std::u32string_view kBound = U"ーンァィゥェォッャュョヮヵヶ";
     if (KataRune(r) && (!KataRune(before) || kBound.find(r) == std::u32string_view::npos)) {
-        int q = p;
-        while (q < size && KataRune(RuneAt(s, q))) q += CharLen(s, q);
+        // The end of the run and the kana from p to it, from the memo of the run.
+        if (segRun_ == nullptr) segRun_ = std::make_shared<SegRunMemo>();
+        SegRunMemo& m = *segRun_;
+        if (m.text.data() != s.data() || m.text.size() != s.size() || p < m.start || p >= m.end) {
+            m.text = s;
+            m.start = p;
+            m.end = p;
+            while (m.end < size && KataRune(RuneAt(s, m.end))) m.end += CharLen(s, m.end);
+            m.chars.assign(static_cast<std::size_t>(m.end - p) + 1, 0);
+            for (int at = m.end; at-- > p;) {
+                const bool lead = (static_cast<unsigned char>(s[static_cast<std::size_t>(at)]) & 0xC0) != 0x80;
+                m.chars[static_cast<std::size_t>(at - p)] = m.chars[static_cast<std::size_t>(at - p) + 1] + (lead ? 1 : 0);
+            }
+        }
+        const int q = m.end;
         if (q - p > one) {
             terms.clear();
-            SegEdge e(q, SoundRunCost(t, rest.substr(0, static_cast<std::size_t>(q - p)), tp));
-            if (detail) e.label = Label(rest.substr(0, static_cast<std::size_t>(q - p)), "snd", 0, "", terms);
+            SegEdge e(q, SoundRunCost(t, m.chars[static_cast<std::size_t>(p - m.start)], tp));
+            if (detail) SetLabel(e, p, "snd", 0, "", terms);
             out.push_back(std::move(e));
         }
     }
@@ -400,6 +464,7 @@ bool Worker::SegTokenLattice(int token, std::string_view surface, const Item* ma
     const int size = static_cast<int>(surface.size());
     auto& edges = out.edges;
     edges.assign(static_cast<std::size_t>(size) + 1, {});
+    if (segRun_ != nullptr) segRun_->text = {};
     out.bounds = {0};
     out.costs.clear();
     out.labels.clear();
@@ -459,7 +524,7 @@ bool Worker::SegTokenLattice(int token, std::string_view surface, const Item* ma
         if (out.refs[k].first < 0) continue;
         const SegEdge& x = edges[static_cast<std::size_t>(out.refs[k].first)][static_cast<std::size_t>(out.refs[k].second)];
         out.costs[k] = x.cost;
-        out.labels[k] = x.label;
+        out.labels[k] = EdgeLabel(surface, x);
     }
     return true;
 }
@@ -482,16 +547,17 @@ std::pair<Path, Path> TwoBest(std::string_view s, const std::vector<std::vector<
     };
     std::vector<std::array<Back, 2>> best(static_cast<std::size_t>(size) + 1);
     best[0][0].cost = 0;
+    std::vector<const SegEdge*> from;
     for (int p = 0; p < size; p++) {
-        // The cheapest edge of each end from p.
-        std::vector<const SegEdge*> cheapest(static_cast<std::size_t>(size) + 1, nullptr);
-        for (const SegEdge& e : edges[static_cast<std::size_t>(p)]) {
-            const SegEdge*& c = cheapest[static_cast<std::size_t>(e.end)];
-            if (c == nullptr || e.cost < c->cost) c = &e;
-        }
-        for (int e = p + 1; e <= size; e++) {
-            const SegEdge* x = cheapest[static_cast<std::size_t>(e)];
-            if (x == nullptr) continue;
+        // The cheapest edge of each end from p (the first of equal ones), by end.
+        from.clear();
+        for (const SegEdge& e : edges[static_cast<std::size_t>(p)]) from.push_back(&e);
+        std::stable_sort(from.begin(), from.end(), [](const SegEdge* a, const SegEdge* b) { return a->end != b->end ? a->end < b->end : a->cost < b->cost; });
+        for (std::size_t i = 0; i < from.size(); i++) {
+            const SegEdge* x = from[i];
+            if (i > 0 && from[i - 1]->end == x->end) continue;
+            const int e = x->end;
+            if (e <= p || e > size) continue;
             for (int k = 0; k < 2; k++) {
                 const Back& b = best[static_cast<std::size_t>(p)][static_cast<std::size_t>(k)];
                 if (b.cost >= kInf) continue;
@@ -537,8 +603,6 @@ std::string Joined(const std::vector<std::string>& v, std::size_t a, std::size_t
 
 void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
     const SegCosts& t = snapshot.SegCostTable();
-    const bool decided = segDecided_;
-    segDecided_ = false;
     Sink& sink = TheSink();
     const bool why = settings.splitWhy;
     if (!t.loaded || surface.empty() || (sink.f == nullptr && !why)) return;
@@ -551,11 +615,11 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
         // The path the search took, and the best path that splits otherwise.
         const Path& other = first.bounds == paths.bounds ? second : first;
         std::string note(surface);
-        note += decided ? "\tlattice " : "\tsearch ";
+        note += "\tsearch ";
         note += std::to_string(oldCost) + ": " + Joined(paths.labels, 0, paths.labels.size());
         if (other.cost < kInf) {
             std::vector<std::string> labels;
-            for (const SegEdge* e : other.edges) labels.push_back(e->label);
+            for (const SegEdge* e : other.edges) labels.push_back(EdgeLabel(surface, *e));
             note += other.cost < oldCost ? "\tcheaper " : "\trejected ";
             note += std::to_string(other.cost) + ": " + Joined(labels, 0, labels.size());
         }
@@ -568,7 +632,7 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
     std::vector<std::string> newLabels;
     for (const SegEdge* e : first.edges) {
         newCosts.push_back(e->cost);
-        newLabels.push_back(e->label);
+        newLabels.push_back(EdgeLabel(surface, *e));
     }
     const auto& oldBounds = paths.bounds;
     const auto& newBounds = first.bounds;
@@ -588,11 +652,15 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
         if (i - i0 == 1 && j - j0 == 1) continue;  // the same span, perhaps another reading of it
         // The family: a window that touches a katakana run of 3 to 24 kana.
         bool kata = false;
-        for (int p = oldBounds[i0]; p < oldBounds[i] && !kata; p += CharLen(surface, p)) {
-            if (!KataRune(RuneAt(surface, p))) continue;
+        for (int p = oldBounds[i0]; p < oldBounds[i] && !kata;) {
+            if (!KataRune(RuneAt(surface, p))) {
+                p += CharLen(surface, p);
+                continue;
+            }
             const auto [a, b] = KataRunAt(surface, p);
             const int n = Chars(surface.substr(static_cast<std::size_t>(a), static_cast<std::size_t>(b - a)));
-            kata = n >= 3 && n <= kMaxRun;
+            kata = n >= 3 && n <= static_cast<int>(kKatakanaRunMax);
+            p = b;
         }
         if (nc >= oc) {
             sink.ties++;
@@ -609,7 +677,17 @@ void Worker::SegReport(int token, std::string_view surface, const Item* mark) {
             }
         }
         const std::string_view window = surface.substr(static_cast<std::size_t>(oldBounds[i0]), static_cast<std::size_t>(oldBounds[i] - oldBounds[i0]));
-        std::fprintf(sink.f, "%s\t%.*s\t%.*s\t%d\t%s\t%d\t%s\t%s\n", chunk.c_str(), static_cast<int>(surface.size()), surface.data(),
+        // The line and the token for context; past 512 bytes the window with 20 characters on each
+        // side (the token's own), so a row stays short on a long line.
+        std::string_view piece = surface;
+        if (surface.size() > 512) {
+            int a = oldBounds[i0], b = oldBounds[i];
+            for (int k = 0; k < 20 && a > 0; k++) a = RuneBefore(surface, a);
+            for (int k = 0; k < 20 && b < static_cast<int>(surface.size()); k++) b += CharLen(surface, b);
+            piece = surface.substr(static_cast<std::size_t>(a), static_cast<std::size_t>(b - a));
+        }
+        const std::string_view context = chunk.size() > 512 ? piece : std::string_view(chunk);
+        std::fprintf(sink.f, "%.*s\t%.*s\t%.*s\t%d\t%s\t%d\t%s\t%s\n", static_cast<int>(context.size()), context.data(), static_cast<int>(piece.size()), piece.data(),
                      static_cast<int>(window.size()), window.data(), oc, Joined(paths.labels, i0, i).c_str(), nc,
                      Joined(newLabels, j0, j).c_str(), kata ? "kata" : "-");
     }
