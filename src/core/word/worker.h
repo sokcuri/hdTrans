@@ -1,6 +1,7 @@
 #pragma once
 // The state of the word stage over one chunk: the tokens, the lookup context the
 // lookups carry from token to token, and the chain of the current sentence.
+#include <memory>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -38,6 +39,16 @@ struct OpenMarks {
 // The marks open after s when open were open before it.
 OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open);
 
+// The longest katakana run the katakana reorders read whole or cover (candidate.cpp) and the
+// segmentation lattice counts as one (segcost.cpp).
+inline constexpr std::size_t kKatakanaRunMax = 24;
+
+// The segmentation lattice (segcost.cpp).
+struct SegEdge;
+struct SegRunMemo;
+struct SegTokenPaths;
+struct SegWindow;
+
 class Worker {
 public:
     Worker(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, const dict::LookupContext& lookup,
@@ -47,6 +58,8 @@ public:
     const dict::Snapshot& snapshot;
     dict::LookupContext lookupContext;
     Settings settings;
+    // With settings.splitWhy, one note per Japanese token: how it was split and the best other split.
+    std::vector<std::string> splitNotes;
     Arena& arena;
     LookupObserver observer;
 
@@ -72,6 +85,22 @@ public:
         MarkRuns runs[4];
     };
     mutable MarkRunMemo markRuns;
+    // The runs of copies that CopyEnd walked last while CoverSurface reads one text, which stays put
+    // then: where each copy of a run starts in the text and where its last ends, so that a word at
+    // each later copy costs no walk of the rest of the run (a unit said thousands of times, read
+    // from the start of each copy and from inside it: あー and ーあ).
+    struct CopyChain {
+        std::string unit;
+        std::vector<std::size_t> starts;
+        std::size_t end = 0;
+    };
+    struct CopyChains {
+        const char* text = nullptr;  // the text CoverSurface reads; null outside it
+        std::size_t size = 0;
+        std::size_t next = 0;
+        CopyChain runs[4];
+    };
+    CopyChains copyChains;
     int insertedLength = 0;
     int candidateRetryCount = 0;
     // While set, a verb takes only an ending shorter than this one, which left text that no
@@ -91,6 +120,9 @@ public:
     Item* resumeParent = nullptr;
     int resumeRetries = 0;
     std::string_view transformSurface;
+    // The word read before the text at kanaAfterAt while the word search looks that text up (KanaAfterWord).
+    const Item* kanaAfter = nullptr;
+    const char* kanaAfterAt = nullptr;
     bool fault = false;
 
     // Token j as the token loop sees it while processing current.
@@ -105,6 +137,10 @@ public:
     // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
     // and the raw text of the tokens before it; computed once for all tokens.
     int QuoteDepth(int j);
+    // The depth of quotes open before byte start of text, the text a word of token j was found
+    // in: QuoteDepth(j) and the 「」『』 of text before start. When text is the raw text of token j,
+    // its marks are found with QuoteDepth, once for all tokens.
+    int QuoteDepthAt(int j, std::string_view text, int start);
     // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
     // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
     int RubyPart(int j);
@@ -164,6 +200,14 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+    // The quote marks of the raw text of all tokens in order (byte end in the token, depth after
+    // it), and by token the first of them (one more for the end); filled with quoteDepths_.
+    struct QuoteMark {
+        int end;
+        int depth;
+    };
+    std::vector<QuoteMark> quoteMarks_;
+    std::vector<uint32_t> quoteMarkFirst_;
     std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
     std::vector<OpenMarks> openMarks_;  // OpenMarksAt by token and after the last, empty until first asked
 
@@ -177,6 +221,23 @@ private:
     // afterMyriad: the text before source ends with 万 or 億.
     Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
+    // The segmentation lattice (segcost.cpp). SegReport reads token again as one best path: with
+    // settings.splitWhy it adds the token's split note.
+    void SegReport(int token, std::string_view surface, const Item* mark);
+    void SegEdgesAt(std::string_view s, int p, int token, bool detail, std::vector<SegEdge>& out);
+    bool SegTokenLattice(int token, std::string_view surface, const Item* mark, SegTokenPaths& out);
+    // The end and the kana counts of the katakana run SegEdgesAt reads last.
+    std::shared_ptr<SegRunMemo> segRun_;
+    // The lattice of the katakana run LatticeKatakana reads (one at a time).
+    const SegWindow& SegWindowFor(std::string_view s, int start, int end, int token);
+    std::shared_ptr<SegWindow> segWindow_;
+    // At the start of a katakana run: the run read whole by its sound first, where the lattice says so.
+    Record* LatticeKatakana(Record* records, std::string_view full, int cursor, int token);
+    // Inside a kanji run: the first word of the lattice's path first, where the lattice says so.
+    Record* LatticeKanji(Record* records, std::string_view full, int cursor, int token);
+    // The spans of the current token whose record LatticeKatakana or LatticeKanji put first; SegReport says
+    // "lattice" where the search's path keeps one of them as a word.
+    std::vector<std::pair<int, int>> segDecided_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
@@ -187,6 +248,7 @@ private:
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     const Record* ReadingLead(std::string_view full, int cursor, int token, Record* records);
     Record* KanaWordFirst(std::string_view full, int cursor, int token, Record* records, const Item* parent);
+    Record* KanaNounOverOneKanaStem(std::string_view full, int cursor, int token, Record* records);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
     // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana
@@ -228,10 +290,13 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaAfterWord(const dict::UserEntry& u, std::string_view query) const;
     bool DoubledSoundBefore(std::string_view query) const;
     bool KanaModifierBefore(std::string_view query) const;
+    bool KanaBeforeParticle(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaBeforeSuru(const dict::UserEntry& u, std::string_view rest) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
     void ReadGivenNames(dict::Candidates& found, std::string_view query);
     // Whether the text head that a word follows in its token ends in something other than a noun

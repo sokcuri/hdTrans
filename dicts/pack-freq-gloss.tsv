@@ -1,0 +1,29 @@
+#! layer=pack
+# 주어, 목적어, 앞뒤 말로 뜻을 고르는 많이 쓰는 낱말 (LEX-7151)
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+freq-gloss:1	sense	甘い|あまい	adj:르	frame	subj=@person head=- next=-		무르다	60	LEX-7151	audit	君は甘いな 너는 무르네 (문장 끝의 서술어, 꾸미는 명사 없음)
+freq-gloss:2	sense	甘い|あまい	adj:르	frame	subj=@person form=neg head=-		무르다	60	LEX-7151	audit	わしは甘くないぞ 나는 무르지 않아
+freq-gloss:3	sense	甘い|あまい	adj:르	frame	subj=@person next=すぎる|過ぎる head=-		무르다	60	LEX-7151	audit	お前は甘すぎる 너는 너무 무르다
+freq-gloss:4	sense	甘い|あまい	adj:르	frame	subj=@person ending=いから|いけど|いけれど|いし|いので|いのに|いと|くて|ければ|けりゃ|けれ		무르다	75	LEX-7151	audit	彼は甘いから 그는 무르니까 (이어지는 서술어)
+freq-gloss:5	sense	甘い|あまい	adj:르	frame	dat=@person head=-		무르다	60	LEX-7151	audit	自分に甘い人 자신에게 무른 사람 (사람에게 甘い)
+freq-gloss:6	sense	甘い|あまい	adj	frame	subj=@person ending=いの|め		-	70	LEX-7151	audit	多岐川さんは甘いのが好きだった (그대로: 단 것)
+freq-gloss:7	sense	甘い|あまい	adj:르	frame	subj=@person ending=かった head=-		무르다	60	LEX-7151	audit	私が甘かったから 내가 물렀으니까
+freq-gloss:26	sense	甘い|あまい	adj:르	frame	dat=@person head=@person		무르다	60	LEX-7151	audit	自分に甘い人 자신에게 무른 사람 (사람을 꾸밈)
+freq-gloss:27	sense	甘い|あまい	adj:르	frame	subj=@person ending=く next=なる|成る|成		무르다	60	LEX-7151	audit	俺も甘くなったものだ 나도 물러진 것이다
+freq-gloss:28	sense	甘い|あまい	adj:르	frame	subj=@person head=- next=」|』|」と|』と|」って		무르다	60	LEX-7151	audit	「お前は甘い」と言った 「너는 무르다」라고 말했다 (닫는 괄호 앞의 서술어)
+freq-gloss:8	sense	組む	v5	frame	obj=手|両手|指		깍지 끼다	60	LEX-7155	audit	両手を頭の後ろで組み 양손을 머리 뒤에서 깍지 끼고
+freq-gloss:9	sense	組む	v5	colloc	腕を組む		팔짱을 끼다	70	LEX-7155	audit	腕を組んだ 팔짱을 꼈다
+freq-gloss:10	sense	組む	v5	colloc	足を組む|脚を組む		다리를 꼬다	70	LEX-7155	audit	足を組んで座る 다리를 꼬고 앉다
+freq-gloss:11	sense	重ねる	v1	frame	obj=視線|目線		맞추다	60	LEX-7155	audit	彼女と視線を重ねた 그녀와 시선을 맞췄다
+freq-gloss:12	sense	弾む	v5	frame	obj=心|胸|気持ち		들뜨다	60	LEX-7155	audit	心を弾ませて 마음을 들뜨게 해
+freq-gloss:13	sense	弾む	v5	frame	subj=心|胸|気持ち		들뜨다	60	LEX-7155	audit	胸が弾む 가슴이 들뜨다
+freq-gloss:14	sense	落とす	v5	colloc	キスを落とす		키스하다	70	LEX-7155	audit	キスを落とした 키스했다
+freq-gloss:15	sense	落とす	v5	colloc	口づけを落とす|口付けを落とす		입맞춤하다	70	LEX-7155	audit	口づけを落とす 입맞춤하다
+freq-gloss:16	sense	通る	v5	frame	subj=@proposal		통과하다	60	LEX-7155	audit	改正案が通った 개정안이 통과되었다
+freq-gloss:17	sense	取る	v5	frame	obj=@fee		받다	60	LEX-7155	audit	報酬を取る 보수를 받다
+freq-gloss:18	sense	取る	v5	frame	subj=@fee		받다	60	LEX-7155	audit	報酬は全部取った 보수는 전부 받았다
+freq-gloss:19	sense	身	n	frame	mod=* next=として|として、|としては|としては、|としても		입장	60	LEX-7155	audit	知っている身として 알고 있는 입장으로서
+freq-gloss:21	sense	一人	n	frame	next=の pred=@room|時間		혼자만	60	LEX-7155	audit	一人の部屋 혼자만의 방
+freq-gloss:22	sense	額	n	frame	after=って|という		액수	60	LEX-7155	audit	って額です 라는 액수입니다
+freq-gloss:24	sense	薄い	adj	frame	form=adv next=目を開け|目を開|目を開き|目を開ける|目を開く		가늘다	60	LEX-7155	audit	薄く目を開く 가늘게 눈을 뜨다
+freq-gloss:25	sense	薄い	adj	frame	form=adv next=笑う|微笑む|笑		엷다	60	LEX-7155	audit	薄く笑った 엷게 웃었다

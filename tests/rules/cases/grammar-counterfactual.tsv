@@ -1,6 +1,6 @@
 # 규칙: GRM-7
 rule	input	expected	kind	layer
-cx:counterfactual-past:10	雨が降っていなければ、試合は中止にならなかった。	비가 오지 않았더라면, 시합은 중지가 되지 않았다.	fix	rewrites
+cx:counterfactual-past:10	雨が降っていなければ、試合は中止にならなかった。	비가 오지 않았더라면, 경기는 중지가 되지 않았다.	fix	rewrites
 cx:counterfactual-past:10	もっと正確に計算出来てれば、また別のことも考えられたのに……	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
 cx:counterfactual-past:10	たしかに、あそこでみんながバラバラになってなければ、もっと有利な展開だったかもしれない。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
 cx:counterfactual-past:10	もし貫通力の高い弾丸を使っていれば命はなかった。	만약 관통력이 높은 탄환을 썼더라면 생명은 없었다.	fix	rewrites

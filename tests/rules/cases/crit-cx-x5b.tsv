@@ -1,0 +1,92 @@
+# 규칙: LEX-6500, LEX-6501, LEX-6502
+rule	input	expected	kind	layer
+pack:argument-senses:15500	任務について話す。	has:임무에 대해 이야기한다	fix	packs
+pack:argument-senses:15500	軍務について考えた。	has:군무에 대해 생각했다	fix	packs
+pack:argument-senses:15500	役職について聞いた。	has:직책에 대해 들었다	fix	packs
+pack:argument-senses:15500	兵役について語る。	has:병역에 대해	fix	packs
+pack:argument-senses:15500	職務について説明します。	has:직무에 대해 설명합니다	fix	packs
+pack:argument-senses:15500	彼は任務について三年になる。	has:종사해	keep	packs
+pack:argument-senses:15500	任務についての説明。	has:임무에 대한 설명	keep	packs
+pack:argument-senses:15500	席について話を聞いた。	has:자리에 앉아	keep	packs
+cx:x5b-cx:5	同町内の一部について１２月２１日午前９時に避難指示を解除することで合意した。	has:일부에 대해	fix	rewrites
+cx:x5b-cx:5	一部について説明した。	has:일부에 대해 설명했다	fix	rewrites
+cx:x5b-cx:5	一部で話題になった。	has:일부에서 화제가 되었다	keep	rewrites
+cx:x5b-cx:5	町の一部に住む。	has:마을의 일부에 산다	keep	rewrites
+cx:x5b-cx:12	「新案」を巡る議論。	has:」을 둘러싼 논의	fix	rewrites
+cx:x5b-cx:20	クックＦＲＢ理事、聴聞会拒否へ　解任巡り「結論ありき」―報道	has:해임을 둘러싸고	fix	rewrites
+cx:x5b-cx:20	人事巡り　対立	has:인사를 둘러싸고	fix	rewrites
+cx:x5b-cx:22	関税巡り、米中が対立	has:관세를 둘러싸고,	fix	rewrites
+cx:x5b-cx:20	温泉巡り「最高」	has:온천 순회	keep	rewrites
+cx:x5b-cx:20	寺巡りの旅	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:22	島巡り、楽しかった。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:30	幼い頃に父親が亡くなって母親と暮らしてきたそう。	has:살아 왔다고 한다.	fix	rewrites
+cx:x5b-cx:31	母親と暮らしてきたそうだ。	has:살아 왔다고 한다.	fix	rewrites
+cx:x5b-cx:40	ずっと頑張ってきたそうです。	has:노력해 왔다고 합니다.	fix	rewrites
+cx:x5b-cx:34	彼は東京に行ったそう。	has:도쿄에 갔다고 한다.	fix	rewrites
+cx:x5b-cx:34	彼は話したそう。	has:이야기했다고 한다.	fix	rewrites
+cx:x5b-cx:34	「彼は死んだそう」	has:죽었다고 한다」	fix	rewrites
+cx:x5b-cx:34	彼女は帰ってきたそうだ。	has:돌아왔다고 한다.	keep	rewrites
+cx:x5b-cx:34	今にも落ちそうだ。	has:떨어질 것 같다	keep	rewrites
+cx:x5b-cx:34	雨が降るそうだ。	has:온다고 한다	keep	rewrites
+cx:x5b-cx:10	島を巡り、旅をした。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:12	「東京」を巡る旅に出た。	lacks:둘러싼	keep	rewrites
+cx:x5b-cx:30	母親と暮らしてきた。	has:살아왔다.	keep	rewrites
+cx:x5b-cx:31	彼女は帰ってきたそうだ。	has:돌아왔다고 한다.	keep	rewrites
+cx:x5b-cx:40	ずっと頑張ってきました。	lacks:싶	keep	rewrites
+pack:argument-senses:15500	改めて 今回の任務について説明しておく。	has:임무에 대해 설명해 둔다	fix	packs
+pack:argument-senses:15500	任務についてお話しします。	has:임무에 대해 이야기해 드리겠습니다	fix	packs
+pack:argument-senses:15500	職務について知っておく。	has:직무에 대해 알아 둔다	fix	packs
+pack:argument-senses:15500	任務について三年が経った。	has:임무에 종사해	keep	packs
+pack:argument-senses:15501	王位について書かれた本。	has:왕위에 대해 쓰여진 책	fix	packs
+pack:argument-senses:15501	王位について知られている話。	has:왕위에 대해 알려져	fix	packs
+pack:argument-senses:15501	王位についてから話した。	has:왕위에 오르고 나서	keep	packs
+pack:argument-senses:15501	王位について十年。	has:왕위에 올라	keep	packs
+cx:x5b-cx:10	「関税」を巡り、対立が続く。	has:」를 둘러싸고,	fix	rewrites
+cx:x5b-cx:10	「聖地」を巡り、写真を撮った。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:12	「真相」を巡る旅	lacks:둘러싼	keep	rewrites
+cx:x5b-cx:20	佐藤巡り「真相」	has:사토를 둘러싸고	fix	rewrites
+cx:x5b-cx:20	桜巡り	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:20	御朱印巡り	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:22	発言巡り、首相が陳謝	has:발언을 둘러싸고,	fix	rewrites
+cx:x5b-cx:22	花巡り、楽しかった。	lacks:둘러싸	keep	rewrites
+cx:x5b-cx:40	頑張ってきたそうなんですが、	has:노력해 왔다고 합니다만,	fix	rewrites
+cx:x5b-cx:40	頑張ってきたそうなんですけど、	has:왔다고 하는데요	fix	rewrites
+cx:x5b-cx:40	帰ってきたそうなんですけど	has:돌아왔다고 하는데	keep	rewrites
+cx:x5b-cx:40	信奉してきたそうなんですけれども	has:신봉해 왔다고 합니다만	fix	rewrites
+cx:x5b-cx:40	頑張ってきたそうなんですけれども、	has:노력해 왔다고 합니다만	fix	rewrites
+cx:x5b-cx:40	帰ってきたそうなんです。	has:돌아왔다고 합니다.	keep	rewrites
+cx:x5b-cx:40	頑張ってきたそうなんです。	has:노력해 왔다고 합니다.	fix	rewrites
+cx:x5b-cx:40	頑張ってきたんです。	lacks:한다고	keep	rewrites
+cx:x5b-cx:40	一人で逃げ帰ってきたそうじゃねぇか。	has:왔다고 하잖아.	fix	rewrites
+cx:x5b-cx:40	頑張ってきたそうじゃん。	has:노력해 왔다고 하잖아.	fix	rewrites
+cx:x5b-cx:40	行ったそうじゃないか。	has:갔다고 하잖아.	keep	rewrites
+cx:x5b-cx:36	彼は東京に行かなかったそう。	has:가지 않았다고 한다.	fix	rewrites
+cx:x5b-cx:36	試合は面白かったそう。	has:재미있었다고 한다.	fix	rewrites
+cx:x5b-cx:36	静かだったそう！	has:조용했다고 한다!	fix	rewrites
+cx:x5b-cx:36	本を読んでいたそう。	has:읽고 있었다고 한다.	fix	rewrites
+cx:x5b-cx:36	面白そう。	has:재미있을 것 같다.	keep	rewrites
+cx:x5b-cx:36	行かなかったそうですね。	has:가지 않았다고 하네요.	keep	rewrites
+cx:x5b-cx:38	彼は医者だったそう。	has:의사였다고 한다.	fix	rewrites
+cx:x5b-cx:38	「雨だったそう」	has:비였다고 한다」	fix	rewrites
+cx:x5b-cx:38	医者だったそうです。	has:의사였다고 합니다.	keep	rewrites
+cx:x5b-cx:38	学生だった。	has:학생이었다.	keep	rewrites
+cx:x5b-cx:40	ずっと頑張ってきたそうですね。	has:노력해 왔다고 하네요.	fix	rewrites
+cx:x5b-cx:40	ずっと頑張ってきたそうだね。	has:노력해 왔다고 하네.	fix	rewrites
+cx:x5b-cx:40	一人で暮らしてきたそうなんですよ。	has:살아 왔다고 해요.	fix	rewrites
+cx:x5b-cx:40	ずっと頑張ってきたそうで、今は元気だ。	has:노력해 왔다고 해,	fix	rewrites
+cx:x5b-cx:40	ずっと頑張ってきたそうじゃないですか。	has:노력해 왔다고 하잖아요.	fix	rewrites
+cx:x5b-cx:40	本を読んできたそうですよね。	has:읽어 왔다고 하네요.	fix	rewrites
+cx:x5b-cx:40	彼女は泳いできたそうですか？	has:헤엄쳐 왔다고 합니까?	fix	rewrites
+cx:x5b-cx:40	走ってきたそうなのよ。	has:달려 왔다고 해.	fix	rewrites
+cx:x5b-cx:31	「走ってきたそうだ」と彼は言った。	has:달려 왔다고 한다」	fix	rewrites
+cx:x5b-cx:31	走ってきたそうだって。	has:달려 왔다고 한다고.	fix	rewrites
+cx:x5b-cx:33	ずっと頑張ってきたそうよ。	has:노력해 왔대.	fix	rewrites
+cx:x5b-cx:33	ずっと頑張ってきたそうなんだ。	has:노력해 왔대.	fix	rewrites
+cx:x5b-cx:33	走ってきたそうよね。	has:달려 왔대.	fix	rewrites
+cx:x5b-cx:40	頑張ってきたそうな顔だ。	has:오고 싶어 보이는 얼굴	keep	rewrites
+cx:x5b-cx:40	頑張ってきたそうにうなずいた。	lacks:왔다고	keep	rewrites
+cx:x5b-cx:40	頑張ってきたそうだった。	lacks:왔다고	keep	rewrites
+cx:x5b-cx:40	走ってきたそうめんの屋台。	lacks:왔다고	keep	rewrites
+cx:x5b-cx:40	走ってきたそうすけ君だ。	lacks:왔다고	keep	rewrites
+cx:x5b-cx:40	雨が降ってきそうだ。	has:올 것 같다.	keep	rewrites
+cx:x5b-cx:33	走ってきたそうなんだって。	lacks:왔대	keep	rewrites

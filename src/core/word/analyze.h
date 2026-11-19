@@ -131,6 +131,7 @@ struct Settings {
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set
     bool selectShadow = false;
+    bool splitWhy = false;  // the word search writes a split note per token (Analysis::splits)
     bool selectRules = false;  // scorers may override context or rule choices, never sense rows
     const MisreadModel* misreadModel = nullptr;  // the misread filter's model; null for the built-in one
     rules::Tally* ruleTally = nullptr;  // counts the runs of the selection rules when set
@@ -180,6 +181,9 @@ struct Analysis {
     // A katakana transliteration fault ended the chunk in the sentence after the
     // last one; the output of the chunk is that of the sentences before.
     bool fault = false;
+    // With Settings::splitWhy, per Japanese token: its text, who decided the split (search or lattice),
+    // the cost and edges of the split taken, and the best other split, tab-separated.
+    std::vector<std::string> splits;
     // The state the items refer to (tokens, settings, lookups), which the sentence
     // passes continue with.
     std::unique_ptr<Worker> worker;

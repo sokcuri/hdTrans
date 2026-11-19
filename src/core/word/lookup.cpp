@@ -8,6 +8,7 @@
 #include "core/tokenizer/classify.h"
 #include "core/word/validity_rules.h"
 #include "core/word/conjugation.h"
+#include "core/word/constraint_rules.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
 #include "core/word/worker.h"
@@ -50,6 +51,24 @@ bool PhraseTitle(const dict::UserEntry& u) {
 }
 
 // s without the leading characters of set.
+// Whether the verb or adjective of record c, whose key ends where after starts, takes after as its ending: an
+// adjective stem one of kana.adjective-ending (さえな + い, not さえな + やみ), a godan stem a cell of its row of
+// conjugation (からか + う, not からか + ぶさって); an ichidan stem, bare as its continuative, and a row of another
+// shape always.
+bool StemTakes(const dict::Candidate& c, std::string_view after) {
+    const std::string_view pt = c.codes == nullptr ? std::string_view() : c.codes->partText;
+    if (after.empty() || pt.size() < 2) return true;
+    if (pt[1] == '7') return dict::InClass(HDTRANS_CLASS("kana.adjective-ending"), FirstChar(after));
+    if (pt.size() != 4) return true;
+    const int kind = pt[3] - '0';
+    if (kind == 7 || ((kind < 0 || kind >= kConjugationKinds) && kind != kKindIku)) return true;
+    for (int b = 0; b < kConjugationBranches; b++) {
+        const std::string_view cell = Conjugation(kind, b);
+        if (!cell.empty() && cell[0] != '(' && cell != "XX" && after.starts_with(cell)) return true;
+    }
+    return false;
+}
+
 std::string_view TrimLeftChars(std::string_view s, std::string_view set) {
     while (!s.empty()) {
         const text::Rune r = text::DecodeRune(s);
@@ -571,6 +590,116 @@ bool Worker::KanaModifierBefore(std::string_view query) const {
     return false;
 }
 
+// Whether the word the search read before query ends a word there, so that the kana spelling u may start one
+// after a character that kKanaBefore does not hold: a particle of particle.kana-word-after (口からもんくを 입에서 불평을),
+// also as the end of the word before (これから, 今こそ, 死ぬほど, 笑いながら + なやみ), or a common noun written in kanji
+// whose kanji and the kana of u after them, kana by kana, are no key of the dictionary (水しげん; not 分かんねん, whose 分か is the
+// stem of 分かる; LEX-6801).
+bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) const {
+    const Item* p = kanaAfter;
+    if (p == nullptr || query.data() != kanaAfterAt || p->group == nullptr || p->detail == nullptr) return false;
+    std::string_view s = p->group->surface;
+    const std::string_view surface = transformSurface;
+    if (s.empty() || p->length <= 0 || !surface.ends_with(query)) return false;
+    const std::string_view before = surface.substr(0, surface.size() - query.size());
+    const std::size_t length = static_cast<std::size_t>(p->length);
+    if (before.size() < length) return false;
+    const std::string_view spelled = before.substr(before.size() - length);
+    // A verb or adjective of two kana or more in its stem after the て form of a verb or adjective, whose ending stops
+    // there (つかれてうごけない 지쳐 움직일 수 없다); a stem of one kana may be an auxiliary (てみる, ている).
+    const std::string_view pc = u.codes == nullptr ? std::string_view() : u.codes->partText;
+    if (p->detail->Yougo() && spelled.size() > p->group->surface.size() && (spelled.ends_with("て") || spelled.ends_with("で")) &&
+        pc.size() > 1 && (pc[1] == '4' || pc[1] == '7') && text::RuneCount(u.key) >= 2) {
+        return true;
+    }
+    // A particle of the class that ends the word before: inside the ending of a verb (笑いながら) or after a word whose
+    // head is not hiragana or holds two kana or more (今こそ, 死ぬほど, これから); not ちから, たしか or おさえ, whose
+    // one kana before is no word.
+    bool tail = false;
+    if (const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("particle.kana-word-after"), spelled);
+        n > 0 && n < spelled.size()) {
+        const std::string_view head = spelled.substr(0, spelled.size() - n);
+        bool headKana = true;
+        for (std::size_t k = 0; k < head.size();) {
+            const text::Rune r = text::DecodeRune(head.substr(k));
+            if (r.size == 0) return false;
+            headKana = headKana && r.cp >= U'ぁ' && r.cp <= U'ゖ';
+            k += r.size;
+        }
+        tail = spelled.starts_with(s) && (spelled.size() > s.size() ? head.size() >= s.size()
+                                                                     : !headKana || text::RuneCount(head) >= 2);
+        if (tail) s = spelled.substr(head.size());
+    }
+    // A verb or adjective only with the particle in its ending (笑いながら).
+    if ((!tail && spelled != s) || (p->detail->Yougo() && (!tail || s.size() > spelled.size() - p->group->surface.size()))) {
+        return false;
+    }
+    bool hiragana = true;
+    bool kanji = true;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (r.size == 0) return false;
+        hiragana = hiragana && r.cp >= U'ぁ' && r.cp <= U'ゖ';
+        kanji = kanji && text::IsKanji(r.cp);
+        k += r.size;
+    }
+    // After a verbal noun in kanji a stem of する starts its verb (立候補させんの, 説明しかけた: not 左遷, not しか + 桁).
+    const std::string_view head = surface.substr(0, surface.size() - query.size() - (kanji ? 0 : s.size()));
+    const std::string_view lead = kanji ? FirstChar(query) : FirstChar(s);
+    if (lead == "さ" || lead == "し" || lead == "す" || lead == "せ") {
+        std::size_t start = head.size();
+        while (start > 0) {
+            const std::string_view c = LastChar(head.substr(0, start));
+            if (c.empty() || !text::IsKanji(text::DecodeRune(c).cp)) break;
+            start -= c.size();
+        }
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(head.substr(start), dict::LookupMode::General)) {
+            if (start < head.size() && c.codes != nullptr && c.codes->gram.HasCode("Hd")) return false;
+        }
+    }
+    const char part = p->Code(0).empty() ? 0 : p->Code(0)[0];
+    // A particle whose kana and the kana of u after it are the stem of a verb or adjective that takes the text after
+    // as its ending is that word (納得しかけた: しかけ + た, not しか + 桁); one whose ending the text does not go on with
+    // stays the particle (私しかなやみ: not しかな + い, 上からかぶさって: not からか + う).
+    // A member of the class spelled alone is the particle whatever the part code of its row (ぐらい, read as 정도).
+    const bool member = hiragana && dict::InClass(HDTRANS_CLASS("particle.kana-word-after"), s);
+    if (tail || part == '2' || member) {
+        if (!member) return false;
+        std::string key(s);
+        for (std::size_t k = 0; k < u.key.size() && k < query.size();) {
+            const std::size_t n = FirstChar(query.substr(k)).size();
+            if (n == 0) break;
+            key.append(query.substr(k, n));
+            k += n;
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                const std::string_view pt = c.codes == nullptr ? std::string_view() : c.codes->partText;
+                if (pt.size() > 1 && (pt[1] == '4' || pt[1] == '7') && StemTakes(c, query.substr(k))) return false;
+            }
+        }
+        return true;
+    }
+    // Not after a proper noun (阿部かれん, a name and its given name), nor where u starts with an honorific (那珂さんか)
+    // or a particle (金にもの), which follow a noun far more often than a word spelled in kana.
+    const std::string_view code = p->Code(0);
+    // Nor after a question word, which a quote or a question in kana follows (何つうか, not 何 + 通過).
+    if (part != '1' || code.size() < 2 || code[1] == '3' || !kanji || StartsWithHonorific(query) ||
+        dict::InClass(HDTRANS_CLASS("word.wh-ask"), s)) {
+        return false;
+    }
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(FirstChar(query), dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.Tag() == 'P') return false;
+    }
+    std::string key(s);
+    for (std::size_t k = 0; k < u.key.size() && k < query.size();) {
+        const std::size_t n = FirstChar(query.substr(k)).size();
+        if (n == 0) break;
+        key.append(query.substr(k, n));
+        k += n;
+        if (!snapshot.RetrieveRecords(key, dict::LookupMode::General).empty()) return false;
+    }
+    return true;
+}
+
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
@@ -597,7 +726,8 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassKanji:
     case kClassKatakana:
         if (!Has(kKanaBefore, prev) && !adnominal &&
-            !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query)))) {
+            !(pc.size() > 1 && pc[1] == '4' && (DoubledSoundBefore(query) || KanaModifierBefore(query))) &&
+            !KanaAfterWord(u, query)) {
             return false;
         }
     }
@@ -630,7 +760,13 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     // After an adnominal that only a noun follows it is the noun (そのかえるは 그 개구리는, あのつきは 저 달은) before a
     // particle, a mark or the end; before a kanji or katakana noun it is the verb of a relative clause (このかえる道
     // 이 돌아가는 길).
-    if (pc.size() > 1 && pc[1] == '1' && VerbFormSpelling(u.key)) {
+    // So does a noun of two kana whose first is the particle は: elsewhere it is は and the word after (ことはなにも,
+    // はなから; はなが咲く 꽃이 핀다).
+    if (pc.size() > 1 && pc[1] == '1' &&
+        (VerbFormSpelling(u.key) || (text::RuneCount(u.key) == 2 && u.key.starts_with("は")))) {
+        // After に, と, へ or の the は is the particle of には, とは, へは or のは, as for the verb spellings above
+        // (それにはながい時間 그러기에는 긴 시간); an adnominal before it keeps the noun (そのはなが 그 꽃이).
+        if (!VerbFormSpelling(u.key) && !prev.empty() && Has("にとへの", prev) && !adnominal) return false;
         // After the adnominal the key and the kana after it may be a word of their own, whose rules read the key
         // (このつきの光: つきの 付きの, whose rule gives 달).
         return next == "が" || next == "を" || next == "や" || KanaBeforeDe(u, rest) ||
@@ -644,11 +780,38 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
         // An adjectival noun of three letters or more takes its adnominal な (まことしやかな噂; LEX-5116).
         if (next == "な" && pc.size() > 1 && pc[1] == '8' && text::RuneCount(u.key) >= 3 && !rest.starts_with("なが")) return true;
-        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
+        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest) || KanaBeforeSuru(u, rest) ||
+               KanaBeforeParticle(u, rest);
     case kClassKanji:
         return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
     return text::RuneCount(u.key) >= 3;
+}
+
+// Whether the kana spelling u, a noun of two letters or more, stands before a particle of particle.kana-word-after
+// (もんくばかり 불평만, なやみだけ 고민만): not where the key and the kana after it are the stem of a verb or adjective
+// that takes the text after as its ending (かな + しかった is かなしかった, かわ + からない is か + わからない).
+bool Worker::KanaBeforeParticle(const dict::UserEntry& u, std::string_view rest) const {
+    const std::string_view pc = u.codes->partText;
+    if (pc.size() < 2 || pc[1] != '1' || text::RuneCount(u.key) < 2 ||
+        dict::StartsWithMember(HDTRANS_CLASS("particle.kana-word-after"), rest) == 0) {
+        return false;
+    }
+    // The stem may also start inside the key (ことかわからない: わか + らない, not かわ + から).
+    for (std::size_t start = 0; start < u.key.size(); start += FirstChar(std::string_view(u.key).substr(start)).size()) {
+        std::string key = u.key.substr(start);
+        for (std::size_t k = 0; k < rest.size();) {
+            const std::size_t n = FirstChar(rest.substr(k)).size();
+            if (n == 0 || NameClassOf(rest.substr(k, n)) != kClassHiragana) break;
+            key.append(rest.substr(k, n));
+            k += n;
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                const std::string_view pt = c.codes == nullptr ? std::string_view() : c.codes->partText;
+                if (pt.size() > 1 && (pt[1] == '4' || pt[1] == '7') && StemTakes(c, rest.substr(k))) return false;
+            }
+        }
+    }
+    return true;
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of two letters or more that the name layer
@@ -678,6 +841,22 @@ bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const
         if (vp.size() == 4 && vp[1] == '4' && Has(rows, vp.substr(3, 1))) return false;
     }
     return true;
+}
+
+// LEX-6403: whether the kana spelling u, a verbal noun (a noun row with Hd) of three letters or more that the name
+// layer does not hold as a person, is followed by its する: し and a form of する (あやとりしよう 실뜨기를 하자,
+// れんしゅうしてる 연습하고 있다), or する and すれ (あやとりするの). The さ, せ and す of other words stay theirs
+// (ねんどさん, ねんどすき).
+bool Worker::KanaBeforeSuru(const dict::UserEntry& u, std::string_view rest) const {
+    const std::string_view pc = u.codes->partText;
+    if (text::RuneCount(u.key) < 3 || pc.size() < 2 || pc[1] != '1' || !u.codes->gram.HasCode("Hd") ||
+        snapshot.NamePerson(u.key) || ProvenName(u.key)) {
+        return false;
+    }
+    if (rest.starts_with("する") || rest.starts_with("すれ")) return true;
+    if (!rest.starts_with("し")) return false;
+    const std::string_view after = rest.substr(std::string_view("し").size());
+    return SuruFormAfterShi(after) || dict::StartsWithMember(HDTRANS_CLASS("suru.tail"), after) > 0;
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name

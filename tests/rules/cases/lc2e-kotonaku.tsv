@@ -10,7 +10,7 @@ cx:lc2e-kotonaku:10	互いに労う事なく軽口を叩く。	has:위로하는 
 dict:everyday-sense-glosses:20	ユリは迷う事なく返事をした。	has:망설임 없이	fix	defaults
 cx:lc2e-kotonaku:10	『忌み子』の命は未だ果てる事なく、	has:끝나는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	付け加えて余す事無くレアに伝えた。	has:남기는 일 없이	fix	rewrites
-cx:lc2e-kotonaku:10	薄紅の願いは月に届く事無く、消えた。	has:도착하는 일 없이	fix	rewrites
+cx:lc2e-kotonaku:10	薄紅の願いは月に届く事無く、消えた。	has:닿는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	今度は逃す事無くその腕を強く掴んだ。	has:놓치는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	残念ながら外出禁止は解かれる事なく、	has:풀리는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	まるで、何事も無かったかのように。	!rule:cx:lc2e-kotonaku:10	keep	rewrites

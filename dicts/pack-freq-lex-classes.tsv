@@ -1,0 +1,4 @@
+#! layer=pack-classes
+# の 뒤 米를 미(미국)로 읽게 하는 나라, 기관 명사 (LEX-7406)
+class	parent
+@state-body	

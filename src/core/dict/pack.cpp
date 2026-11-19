@@ -253,6 +253,7 @@ bool PackTable::Member(std::string_view lemma, std::string_view cls) const {
 
 void ParsePackRows(std::string_view file, std::string_view text, const Dict* base, userdict::Families& families,
                    PackTable& table, std::vector<PackError>& errors) {
+    const std::size_t firstRow = table.rows.size();
     std::vector<std::string> head;
     const std::set<std::string, std::less<>> castOff = CastOffNames();
     auto col = [&](const std::vector<std::string_view>& f, std::string_view name) -> std::string_view {
@@ -386,10 +387,20 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             std::string joined(cond);
             if (idiom) {
                 const std::vector<std::string_view> parts = Split(cond, ' ');
-                const bool modified = parts.size() == 4 && parts[3] == "+mod";
-                if ((parts.size() != 3 && !modified) || parts[0].empty() || parts[1].empty() || parts[2].empty())
-                    return fail("an idiom pattern is a noun, a particle and a verb apart by spaces (and +mod), not " + userdict::internal::Quote(cond));
+                // flags after the verb: +mod (the noun may be described), +nom (the noun of manner, 気の利かせ方)
+                bool modified = false, nominal = false, flagsOk = parts.size() >= 3 && parts.size() <= 5;
+                for (std::size_t k = 3; flagsOk && k < parts.size(); k++) {
+                    bool& flag = parts[k] == "+mod" ? modified : nominal;
+                    if ((parts[k] != "+mod" && parts[k] != "+nom") || flag) flagsOk = false;
+                    flag = true;
+                }
+                if (!flagsOk || parts[0].empty() || parts[1].empty() || parts[2].empty())
+                    return fail("an idiom pattern is a noun, a particle and a verb apart by spaces (and +mod, +nom), not " + userdict::internal::Quote(cond));
+                if (nominal && parts[1] != "を" && parts[1] != "が")
+                    return fail("+nom is for an idiom with を or が, not " + userdict::internal::Quote(cond));
                 c.modified = modified;
+                c.nominal = nominal;
+                c.mannerYou = nominal && std::string_view(pos).starts_with("v5");
                 c.loose = true;
                 c.noun = parts[0];
                 c.idiomParticle = parts[1];
@@ -452,6 +463,11 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             table.rows.push_back(std::move(one));
         }
     });
+    for (std::size_t i = firstRow; i < table.rows.size(); i++)
+        for (const PackAtom& a : table.rows[i].atoms)
+            if (a.slot == "final")
+                for (const std::string& v : a.values)
+                    if (v != "-") table.finalLongest = std::max(table.finalLongest, v.size());
 }
 
 void ParsePackClasses(std::string_view file, std::string_view text, PackTable& table, std::vector<PackError>& errors) {

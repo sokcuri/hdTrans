@@ -44,7 +44,7 @@ cx:kimi-suffix:80	すでにキレ気味だった。	이미 이성을 잃는 기�
 cx:kimi-suffix:80	うーん スケジュールどれも遅れ気味だ	has:늦는 기미가 있다	fix	rewrites
 cx:kimi-suffix:80	平次は少しからかい気味です。	헤이지는 조금 놀리는 기미가 있습니다.	fix	rewrites
 cx:kimi-suffix:80	彼は風邪気味だ。	!rule:cx:kimi-suffix:80	keep	rewrites
-cx:kimi-suffix:20	少し疲れ気味の顔。	has:피로 기미가 있는 얼굴	fix	rewrites
+cx:kimi-suffix:20	少し疲れ気味の顔。	has:피곤한 것 같은 얼굴	fix	rewrites
 cx:kimi-suffix:20	すでにグロッキー気味の俺たちの前に立ちはだかったのは……	has:그로기 기미가 있는 우리	fix	rewrites
 cx:kimi-suffix:5	健忘症気味のヒーロー	!rule:cx:kimi-suffix:5	keep	rewrites
 cx:kimi-suffix:5	興奮気味の男は、それをひったくるように奪い取る。	has:흥분한 듯한 남자는	fix	rewrites

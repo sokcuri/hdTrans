@@ -64,12 +64,12 @@ dict:jisjk:201711	彼の努力は才能にまさる。	has:재능보다 앞선�
 dict:jisjk:201711	努力にまされば勝てる。	has:노력보다 앞서면	fix	local
 dict:jisjk:93766	選挙に勝ったら減税する。	has:선거에 이기면	keep	local
 dict:jisjk:93766	ゲームに勝ったらおやつね。	has:게임에 이기면	keep	local
-dict:jisjk:93766	試合に勝ってる。	has:시합에 이기고 있다	keep	local
-dict:jisjk:93766	試合に勝とう！	has:시합에 이기자	keep	local
-dict:jisjk:93766	試合に勝たないと意味がない。	has:시합에 이기지 않으면	keep	local
-dict:jisjk:93766	試合に勝てば優勝だ。	has:시합에 이기면	keep	local
+dict:jisjk:93766	試合に勝ってる。	has:경기에 이기고 있다	keep	local
+dict:jisjk:93766	試合に勝とう！	has:경기에 이기자	keep	local
+dict:jisjk:93766	試合に勝たないと意味がない。	has:경기에 이기지 않으면	keep	local
+dict:jisjk:93766	試合に勝てば優勝だ。	has:경기에 이기면	keep	local
 dict:jisjk:93766	敵に勝っちゃった。	has:적을 이겨버렸다	keep	local
-dict:jisjk:93766	試合に勝つために練習した。	has:시합에 이기기 위해	keep	local
+dict:jisjk:93766	試合に勝つために練習した。	has:경기에 이기기 위해	keep	local
 pack:勝る#3a	健康に勝るものはない。	has:건강보다 앞서는 것은 없다	fix	packs
 pack:勝る#6	聞きしに勝る美しさだ。	has:듣던 것 이상인 아름다움	fix	packs
 pack:勝る#4	田中少将の指揮に勝るとも劣らないね。	has:지휘에 뒤지지 않네	fix	packs
@@ -77,7 +77,7 @@ pack:勝る#5	勝るとも劣らない。	has:뒤지지 않는다	fix	packs
 dict:jisjk:93767	実力では彼が勝る。	실력으로는 그가 우수하다.	keep	local
 dict:jisjk:93767	数で勝る敵に挑む。	has:수로 우수한 적	keep	local
 dict:jisjk:93766	彼に勝った。	그를 이겼다.	keep	local
-dict:jisjk:93766	試合に勝つ。	has:시합에 이긴다	keep	local
+dict:jisjk:93766	試合に勝つ。	has:경기에 이긴다	keep	local
 dict:jisjk:374562	彼の方が速い。	has:그가 빠르다	fix	lookup
 dict:jisjk:374562	彼の方が先に来た。	has:그가 먼저 왔다	fix	lookup
 dict:jisjk:4209	僕より彼の方が上手だ。	has:나보다 그가	fix	lookup

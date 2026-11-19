@@ -170,7 +170,21 @@ void AttachedContext(const Flusher::Attached& a, const Item* it, Context& c) {
         }
 }
 
-Context ContextOf(Flusher& f, const Item* it) {
+// Whether a word of the chain is in a polite form: an ending in ます, です, でしょう or the copula です.
+bool ChainPolite(const Flusher& f) {
+    for (const Item* x = f.w.chain.head; x != nullptr; x = x->next) {
+        if (x->group == nullptr) continue;
+        const std::string_view e = x->DirectSurface(), s = x->group->surface;
+        if (e.find("ます") != std::string_view::npos || e.find("まし") != std::string_view::npos ||
+            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos ||
+            e.find("でしょう") != std::string_view::npos || s == "です" ||
+            s == "でした" || s == "でしょう")
+            return true;
+    }
+    return false;
+}
+
+Context ContextOf(Flusher& f, const Item* it, std::size_t finalLongest) {
     Context c;
     c.snapshot = &f.w.snapshot;
     const char cls = ClassOf(it);
@@ -212,9 +226,16 @@ Context ContextOf(Flusher& f, const Item* it) {
         }
         const Item* last = it;
         const Item* next = c.next;
-        for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && ClassOf(next) == '4' && teForm(last) &&
-                        dict::InClass(HDTRANS_CLASS("aux.te-through"), next->group->surface);
-             k++) {
+        // so it does through its negative auxiliary (甘くないコーヒー) and a bound auxiliary written right after
+        // the stem (aux.head-through: 甘すぎるケーキ)
+        const auto through = [&](const Item* prev, const Item* aux) {
+            if (ClassOf(aux) == '4' && teForm(prev) && dict::InClass(HDTRANS_CLASS("aux.te-through"), aux->group->surface))
+                return true;
+            if (aux == NegativeAux(prev)) return true;
+            return prev == it && aux->start == prev->start + prev->length &&
+                   dict::InClass(HDTRANS_CLASS("aux.head-through"), aux->group->surface);
+        };
+        for (int k = 0; k < 3 && next != nullptr && next->group != nullptr && through(last, next); k++) {
             last = next;
             next = next->After();
         }
@@ -313,7 +334,9 @@ Context ContextOf(Flusher& f, const Item* it) {
         rest.remove_prefix(size);
     }
     const Item* last = NegativeAux(it) != nullptr ? NegativeAux(it) : it;
-    bool stop = false, blank = false;
+    // final is only compared whole with the values of final= atoms: past the longest of them it matches none
+    // and stays so, so the walk stops there and does not cross the rest of a long line for every word
+    bool stop = c.final.size() > finalLongest, blank = false;
     const auto take = [&](std::string_view rest) {
         while (!rest.empty() && !stop) {
             const std::size_t size = text::DecodeRune(rest).size;
@@ -333,6 +356,7 @@ Context ContextOf(Flusher& f, const Item* it) {
             } else if (!Faint(rune)) {
                 c.final += rune;
             }
+            stop = stop || c.final.size() > finalLongest;
         }
     };
     // the rest of the word's token, then the tokens after it as typed
@@ -387,17 +411,8 @@ Context ContextOf(Flusher& f, const Item* it) {
     }
     if (cls == '8' && ending.starts_with("な")) c.forms.insert("attr");
     if (cls == '7' && ending.ends_with("く") && c.next != nullptr && Predicate(ClassOf(c.next))) c.forms.insert("adv");
-    for (const Item* x = f.w.chain.head; x != nullptr; x = x->next) {
-        if (x->group == nullptr) continue;
-        const std::string_view e = x->DirectSurface(), s = x->group->surface;
-        if (e.find("ます") != std::string_view::npos || e.find("まし") != std::string_view::npos ||
-            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos ||
-            e.find("でしょう") != std::string_view::npos || s == "です" ||
-            s == "でした" || s == "でしょう") {
-            c.polite = true;
-            break;
-        }
-    }
+    if (f.polite == -2) f.polite = ChainPolite(f) ? 1 : 0;
+    c.polite = f.polite >= 0 ? f.polite == 1 : ChainPolite(f);
     if (const Flusher::Attached* a = AttachedOf(f)) AttachedContext(*a, it, c);
     return c;
 }
@@ -641,7 +656,7 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
         any = any || (r.slot == slot && r.classDigit == cls);
     }
     if (!any) return -1;
-    Context c = ContextOf(f, it);
+    Context c = ContextOf(f, it, t.finalLongest);
     // polarity and tense rows read the reading of (ら)れ the voice layer decided, and a potential of the dictionary
     c.voice = voice;
     if (voice.empty() && it->detail != nullptr) {
@@ -1055,7 +1070,7 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     if (noun->group == nullptr || noun->selected < 0 || ClassOf(noun) != '1' || Segment(noun) != c.noun) return false;
     std::size_t j = i + 1;
     if (j >= items.size()) return false;
-    bool omitted = false;
+    bool omitted = false, nominal = false;
     m.seen = {};
     if (ClassOf(items[j]) == '2' && IdiomParticle(c.idiomParticle, items[j]->group->surface)) {
         if (items[j]->group->surface != c.idiomParticle) {
@@ -1064,6 +1079,10 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
             // reads past what the particle adds (気にもなる, 話はなんとなくわかった)
             if (IdiomTopic(c.headRaw, m.seen.substr(m.seen.size() - std::string_view("は").size()), c.idiomParticle) == c.headRaw) return false;
         }
+        j++;
+    } else if (c.nominal && ClassOf(items[j]) == '2' && items[j]->group->surface == "の") {
+        // the idiom said as a noun of manner, its particle as の (気の利かせ方, ハメの外しよう; row +nom): checked at the verb
+        nominal = true;
         j++;
     } else if (c.idiomParticle == "を" || c.idiomParticle == "が") {
         omitted = true;
@@ -1083,7 +1102,7 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // an adverb in letters (すごく, とても); not a mark (…) or a word of another class
         const char32_t first = text::DecodeRune(x->group->surface).cp;
         const bool letters = (first >= 0x3041 && first <= 0x30FF) || (first >= 0x4E00 && first <= 0x9FFF);
-        if (omitted || ClassOf(x) != '3' || !letters || c.idiomParticle == "に" || (c.idiomParticle == "を" && !m.seen.empty())) break;
+        if (omitted || nominal || ClassOf(x) != '3' || !letters || c.idiomParticle == "に" || (c.idiomParticle == "を" && !m.seen.empty())) break;
         m.kept.push_back(j);
         j++;
     }
@@ -1101,6 +1120,22 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
             if (end == e && k.find(kind) == std::string_view::npos && !c.verb.ends_with("する")) return false;
         }
         if (verb->detail != nullptr && (verb->detail->record != 0 || verb->detail->voice != Voice::None)) return false;
+    }
+    // After の the verb is its stem with 方 right after it (利かせ方, 外し方), or よう after a godan stem
+    // (外しよう; not 外そう). An ichidan stem with よう is its volitional (気の利かせよう 배려하자): not read.
+    if (nominal) {
+        const std::string_view whole = Slice(verb->text, verb->start, verb->length), stem = verb->group->surface;
+        if (!whole.starts_with(stem)) return false;
+        std::string_view rest = whole.substr(stem.size());
+        // a godan verb's stem kana (外し, 取り) comes first: the い row of its last kana, し for する
+        static constexpr std::pair<std::string_view, std::string_view> kStemKana[] = {
+            {"う", "い"}, {"く", "き"}, {"ぐ", "ぎ"}, {"す", "し"}, {"つ", "ち"}, {"ぬ", "に"}, {"ぶ", "び"}, {"む", "み"}, {"る", "り"}};
+        const std::string_view verbText = c.verb, last = verbText.substr(verbText.size() - DecodeLastRune(verbText).size);
+        for (const auto& [e, k] : kStemKana) {
+            if (last == e && rest.starts_with(k)) rest.remove_prefix(k.size());
+        }
+        if (!rest.starts_with("方") && !(c.mannerYou && rest.size() < whole.size() - stem.size() && rest.starts_with("よう"))) return false;
+        if (verb->tokenIndex != items[j - 1]->tokenIndex || j != i + 2) return false;
     }
     // Between the words only spaces: a mark (…, 、) or other text in a token of its own breaks the idiom.
     for (int t = noun->tokenIndex + 1; t < verb->tokenIndex; t++) {
@@ -1125,14 +1160,15 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
     }
     // The words as the dictionary writes them, side by side, are the word stage's to read (蓋を開ける
     // 뚜껑을 열다 where it chose so); the idiom row reads only what that stage could not see as one.
-    if (m.seen.empty() && !omitted && !spaced && m.kept.empty()) return false;
+    if (m.seen.empty() && !omitted && !nominal && !spaced && m.kept.empty()) return false;
     // A noun pointed at or owned (そんな手に, 女房の鼻を) belongs to the phrase before it, not to the idiom.
     if (i > 0) {
         const std::string_view prev = items[i - 1]->group->surface;
         const bool together = items[i - 1]->tokenIndex == noun->tokenIndex;
         // An idiom whose noun takes a describing word takes one of kind too (こんなドジ踏む 이런 실수를 하다).
         for (const std::string_view mod : {"の", "そんな", "こんな", "あんな", "その", "この", "あの", "どんな"}) {
-            if (prev == mod && together && !(c.modified && mod.ends_with("んな"))) return false;
+            // the doer of a noun of manner takes の (老人たちのハメの外しよう)
+            if (prev == mod && together && !(c.modified && mod.ends_with("んな")) && !(nominal && mod == "の")) return false;
         }
         // Nor a noun with a word that describes it or a noun it ends (大いなる力を 借りる, 欲しい物 言う,
         // 伯爵家継ぐ): the idiom's noun stands bare.
@@ -1143,8 +1179,9 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         const bool describes = pc == '0' || pc == '4' || pc == '7' || pc == '8';
         // An opening bracket before it (「ドジ踏んだ」) describes nothing.
         const bool opens = pc == '6' && dict::InClass(HDTRANS_CLASS("mark.open-bracket"), items[i - 1]->group->surface);
+        // Before a noun of manner it describes the manner (正しい気の利かせ方).
         if (together && !opens &&
-            ((describes && !c.modified) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
+            ((describes && !c.modified && !nominal) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
             return false;
         }
     }
@@ -1180,7 +1217,7 @@ bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& 
     // the row's cue atoms hold for the last word of the span (head=- : it modifies no noun)
     if (const dict::PackRow& r = t.rows[static_cast<std::size_t>(c.row)]; !r.atoms.empty()) {
         std::array<int, 5> spec{};
-        if (!Holds(t, r, ContextOf(f, items[m.end - 1]), spec)) return false;
+        if (!Holds(t, r, ContextOf(f, items[m.end - 1], t.finalLongest), spec)) return false;
     }
     for (std::size_t k = i; k < m.end; k++) {
         const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
@@ -1363,6 +1400,7 @@ void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty() && f.w.settings.documentPacks == nullptr) return;
     f.attached.asked = false;  // the chain may have changed since the voice layer asked
+    f.polite = -2;
     std::set<const Item*> taken, heads;
     if (!t.collocs.empty()) ApplyCollocs(f, t, taken, heads);
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -1379,6 +1417,11 @@ void ApplyPacks(Flusher& f) {
         const bool nameLayer = chosen->user != nullptr && chosen->user->nameLayer;
         if (nameOnly && !nameLayer && (chosen->user == nullptr || f.w.settings.documentPacks == nullptr)) continue;
         const char cls = ClassOf(it);
+        // A person name the document shows to be a name (村中さんが来た。… 村中の噂) keeps the name: sense
+        // rows, which read the word's common meaning, do not replace it.
+        const dict::KeySet* named = f.w.lookupContext.named;
+        const bool provenName =
+            named != nullptr && named->contains(it->group->surface) && dict::SemCodes(chosen->attr).HasCode("QPN");
         // A voice row's agent particle and Korean verb hold against the passes after the voice layer.
         if (Item* p = it->packAgent; !head && p != nullptr && p->selected >= 0 &&
                                      p->selected < static_cast<int>(p->group->entries.size()) && !p->Fixed() &&
@@ -1396,11 +1439,18 @@ void ApplyPacks(Flusher& f) {
         for (const dict::PackSlot slot :
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
+            if (provenName && slot == dict::PackSlot::Sense) continue;
             if (head && (slot == dict::PackSlot::Sense || slot == dict::PackSlot::Name)) continue;
             // The Korean verb of a voice row is the word's sense in that voice (紅茶を振る舞われた 대접받았다):
             // a sense row, which writes the verb in the active, does not replace it.
             if (slot == dict::PackSlot::Sense && !it->packLexeme.empty() && cls == '4') continue;
             const dict::PackRow* best = DecidingRow(f, it, it->group->surface, slot, !nameOnly || nameLayer);
+            // A kana spelling takes the rows of the word it spells where none of its own holds (薬がきれた: the rows of
+            // 切れる); a name the document learned keeps its kana key (はなさん … はなが 하나가).
+            if (best == nullptr && slot != dict::PackSlot::Name && chosen->user != nullptr && chosen->user->kana &&
+                !chosen->user->kanaOf.empty()) {
+                best = DecidingRow(f, it, chosen->user->kanaOf, slot, !nameOnly || nameLayer);
+            }
             if (best == nullptr) continue;
             const dict::PackRow& r = *best;
             const Selection source{Provenance::Pack, r.global};
@@ -1439,6 +1489,7 @@ void ApplyPacks(Flusher& f) {
             it->packRows.push_back(r.global);
         }
     }
+    f.polite = -1;
 }
 
 }  // namespace hdTrans::word

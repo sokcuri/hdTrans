@@ -1,0 +1,32 @@
+#! layer=pack-classes
+# 없어지다로 읽는 なくなる의 사물 주어: 사람 의미 코드를 가진 사물 명사 (LEX-7403)
+lemma	classes
+ぬいぐるみ	@thing
+縫いぐるみ	@thing
+死体	@thing
+遺体	@thing
+死骸	@thing
+# の 뒤 米를 미(미국)로 읽게 하는 나라, 기관 명사 (LEX-7406)
+政府	@state-body
+政権	@state-body
+大使館	@state-body
+領事館	@state-body
+軍	@state-body
+当局	@state-body
+当局者	@state-body
+大統領	@state-body
+国債	@state-body
+企業	@state-body
+子会社	@state-body
+半導体	@state-body
+関係者	@state-body
+関係筋	@state-body
+関係当局	@state-body
+議会	@state-body
+高官	@state-body
+国務省	@state-body
+国防総省	@state-body
+財務省	@state-body
+司法省	@state-body
+連邦	@state-body
+中間選挙	@state-body

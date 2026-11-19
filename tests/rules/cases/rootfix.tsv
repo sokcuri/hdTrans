@@ -33,7 +33,7 @@ dict:reading	最近は読書漬けです。	최근에는 독서 삼매경입니�
 dict:reading	豆を水に漬けた。	콩을 물에 담그었다.	keep	lookup
 dict:reading	漬け物を食べた。	절임을 먹었다.	keep	lookup
 dict:hortative	明日の練習も頑張ろっ！	내일 연습도 힘내자!	fix	lookup
-dict:hortative	次の試合も頑張ろっ。	다음 시합도 힘내자.	fix	lookup
+dict:hortative	次の試合も頑張ろっ。	다음 경기도 힘내자.	fix	lookup
 dict:hortative	明日も頑張る。	내일도 노력한다.	keep	lookup
 dict:hortative	頑張れ！	힘내라!	keep	lookup
 dict:hortative	がんばろ！	힘내자!	keep	lookup

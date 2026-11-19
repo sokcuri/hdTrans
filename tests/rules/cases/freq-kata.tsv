@@ -1,0 +1,69 @@
+# 규칙: LEX-7100
+rule	input	expected	kind	layer
+segmentation:katakana-run-whole	エヌディビアのフアンＣＥＯを巡っては	lacks:맥주	fix	lookup
+segmentation:katakana-run-whole	アームに入社する前にエヌディビアで７年ほど勤務していました。	lacks:맥주	fix	lookup
+segmentation:katakana-run-whole	フアンＣＥＯがエヌディビアの	lacks:N디	fix	lookup
+segmentation:katakana-run-whole	ゴフマン氏はイラン再攻撃をもくろむイスラエルのネタニヤフ暫定首相の側近。	lacks:고흐	fix	lookup
+segmentation:katakana-run-whole	モサドのゴフマン長官がワシントン入りし	lacks:고흐 맨	fix	lookup
+segmentation:katakana-run-whole	「ゴフマン」	lacks:고흐	fix	lookup
+segmentation:katakana-run-whole	要衝バベルマンデブ海峡周辺の掌握を進め	has:바벨만데브 해협	fix	lookup
+segmentation:katakana-run-whole	ラガルド現総裁は先月、任期を前倒しして	has:라가르드	fix	lookup
+segmentation:katakana-run-whole	昨日、４安打のチョリオから始まります。	has:초리오부터	fix	lookup
+segmentation:katakana-run-whole	当たっているチョリオをここは三振に打ち取った	has:초리오를	fix	lookup
+segmentation:katakana-run-whole	ルーキスを推進してまいりました。	has:루키스를	fix	lookup
+segmentation:katakana-run-whole	「クリニカ」には全部 入っています	has:크리니카	fix	lookup
+segmentation:katakana-run-whole	「どこからどう見てもヨンバーですね」	lacks:욘 바	fix	lookup
+segmentation:katakana-run-whole	「ヨンバーの荷台から落とされたこと、絶対に忘れない」	lacks:욘 바의	fix	lookup
+segmentation:katakana-run-whole	まだＤ組のリーサルウェポン、えるるんがいるのだ！	lacks:원숭이	fix	lookup
+segmentation:katakana-run-whole	……ドミニア……って？	lacks:도미 니어	fix	lookup
+segmentation:katakana-run-whole	アイリスフィアの姿が完全に見えなくなると、アレクヴァンディが声をかけてくる。	lacks:밴 디	fix	lookup
+segmentation:katakana-run-whole	「わかった。ルイベル、お願い！」	has:루이벨	fix	lookup
+segmentation:katakana-run-whole	ルイベルがそう言い捨てると、彼は自らキマイラに近づいた。	has:루이벨이	fix	lookup
+segmentation:katakana-run-whole	お金がない僕は、映画を観に行くことも、ゲームセンターで遊ぶこともできなかった。	has:게임센터	keep	lookup
+segmentation:katakana-run-whole	日本代表は クラブチームでプレーする社会人や大学生からの選抜チームだ。	has:클럽 팀	keep	lookup
+segmentation:katakana-run-whole	ロケバス車内で共演者の女性に	has:로케 버스	keep	lookup
+segmentation:katakana-run-whole	「中央コントロールセンターを回復させるには、ワクチンソフトが必要だ。	has:컨트롤 센터	keep	lookup
+segmentation:katakana-run-whole	マイケルジャクソンの曲	has:마이클 잭슨	keep	lookup
+segmentation:katakana-run-whole	ルイ・ベルが来た	has:루이·벨	keep	lookup
+segmentation:katakana-run-whole	ジョーハーマン山脈アルカ山、山頂。	lacks:조하	keep	lookup
+segmentation:katakana-run-whole	ルイサマ、こっちです	has:루이 님	keep	lookup
+segmentation:katakana-run-whole	ジャックサンが来た	has:잭 씨	keep	lookup
+segmentation:katakana-run-whole	「久しぶり、クリスハルト。元気だった？」	has:크리스하르트	keep	lookup
+segmentation:katakana-run-whole	ドクターゴフマンは言った。	has:닥터 고후맨	fix	lookup
+segmentation:katakana-run-whole	「ドクターゴフマン！」	has:닥터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンさん、こんにちは。	has:닥터 고후맨 씨	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンの発明	has:닥터 고후맨의	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンとプロフェッサーゴフマン	has:교수 고후맨	fix	lookup
+segmentation:katakana-run-whole	プロフェッサーゴフマンの研究室	has:교수 고후맨의	fix	lookup
+segmentation:katakana-run-whole	キャプテンゴフマン、出撃だ！	has:캡틴 고후맨	fix	lookup
+segmentation:katakana-run-whole	キャプテンゴフマンは笑った。	has:캡틴 고후맨은	fix	lookup
+segmentation:katakana-run-whole	ミスターゴフマンと会った	has:미스터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ミセスゴフマン	has:미세스 고후맨	fix	lookup
+segmentation:katakana-run-whole	マスターゴフマンの店	has:마스터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ジェネラルゴフマン	has:제너럴 고후맨	fix	lookup
+segmentation:katakana-run-whole	ドクタージャックマン	has:닥터 잭맨	fix	lookup
+segmentation:katakana-run-whole	ゴフマンタワーの屋上	has:고후맨 타워	fix	lookup
+segmentation:katakana-run-whole	ゴフマンホテルの部屋	has:고후맨 호텔	fix	lookup
+segmentation:katakana-run-whole	ゴフマンシティへようこそ	has:고후맨 시티	fix	lookup
+segmentation:katakana-run-whole	『大学受験』という最後のダンジョンラスダンを越えて	has:던전 라스단	fix	lookup
+segmentation:katakana-run-whole	「アップルシナモンティー。疲れを癒やしてくれるみたい」	has:애플 시나몬티	fix	lookup
+segmentation:katakana-run-whole	ドクタースミス	has:닥터 스미스	keep	lookup
+segmentation:katakana-run-whole	ドクターストレンジ	has:닥터 스트레인지	keep	lookup
+segmentation:katakana-run-whole	ドクターグレゴリーハウス	has:닥터 그레고리 하우스	keep	lookup
+segmentation:katakana-run-whole	キャプテンアメリカ	has:캡틴 아메리카	keep	lookup
+segmentation:katakana-run-whole	ミスタードーナツ	has:미스터도넛	keep	lookup
+segmentation:katakana-run-whole	「スローリー、モアスローリー」	has:모어	keep	lookup
+segmentation:katakana-run-whole	ボクハマリオ	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	「ボクハマリオ、ヨロシクネ」	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	ロボットは「ボクハマリオ」と答えた。	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	「ボクハマリオダ！」	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	ボクハケン	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	ボクハケン。ヨロシク。	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	「ボクハケンデス」	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	オレハケン	lacks:오레하켄	keep	lookup
+segmentation:katakana-run-whole	アキノムシ	has:벌레	keep	lookup
+segmentation:katakana-run-whole	秋の夜、アキノムシが鳴いている。	has:벌레	keep	lookup
+segmentation:katakana-run-whole	アキノムシの声	has:벌레	keep	lookup
+segmentation:katakana-run-whole	「ワタシハアリス」と彼女は言った。	has:앨리스	keep	lookup
+segmentation:katakana-run-whole	アナタハアリス？	has:앨리스	keep	lookup
+segmentation:katakana-run-whole	キミノナマエハ？	has:이름	keep	lookup

@@ -37,7 +37,7 @@ lex:今年度	今年度の予算を決める。	has:금년도 예산을	keep	loo
 lex:今年中	今年中に終わらせる。	has:올해 안에	keep	lookup
 lex:沖縄	沖縄に行く。	has:오키나와에	keep	lookup
 lex:沖田	沖田さんが来た。	has:오키타 씨가	keep	lookup
-lex:気配	「全く夢が覚める気配がない」	has:깨는 기색이 없어	keep	lookup
+lex:気配	「全く夢が覚める気配がない」	has:깨는 기미가 없어	keep	lookup
 lex:押し倒す	「真帆を押し倒す」	has:밀어 넘어뜨려	keep	lookup
 lex:倒れ	木が倒れた。	나무가 쓰러졌다.	keep	lookup
 lex:無茶苦茶	無茶苦茶だ。	터무니없다.	keep	lookup

@@ -91,6 +91,10 @@ struct Colloc {
     bool anchored = false;
     std::string noun, idiomParticle, verb;
     bool modified = false;  // the idiom's noun may take a word that describes it (酷い目に遭う; cond … +mod)
+    // the idiom said as a noun of manner, its particle as の (気の利かせ方; cond … +nom): only where the
+    // noun has no literal reading with the verb (not 足の洗い方)
+    bool nominal = false;
+    bool mannerYou = false;  // +nom of a godan verb: its stem with よう is a noun of manner too (外しよう)
 };
 
 struct PackTable {
@@ -108,6 +112,8 @@ struct PackTable {
     std::vector<std::pair<int, int>> collocPatterns;
     std::unordered_map<std::string, std::vector<int>, StringHash, std::equal_to<>> collocsByLead;
     std::vector<int> collocsSlotFirst;
+    // The byte length of the longest value of a final= cue atom ("-" aside): a longer final matches no row.
+    std::size_t finalLongest = 0;
 
     bool Empty() const { return rows.empty(); }
     // The depth of a class (a root is 1); 0 for an unknown class.

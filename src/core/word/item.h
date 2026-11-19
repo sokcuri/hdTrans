@@ -137,6 +137,22 @@ public:
     Detail* detail = nullptr;
     int tokenIndex = 0;
     int start = 0;          // byte offset of the word in text
+    // The end of the run of copies that the word starts or goes on, forward ([1]) and back ([0]),
+    // and the number of copies to it: a memo of the construction features, valid for the one
+    // RunConstructions call whose epoch it holds (its actions change no link of the chain).
+    struct CopyRun {
+        uint64_t epoch = 0;
+        const Item* end = nullptr;
+        int steps = 0;
+    };
+    mutable CopyRun copyRuns[2];
+    // The nearest word at or before this one that AfterQuestionWord must test, within its sentence
+    // ([0]) or clause ([1]), or null: a memo valid for the construction pass whose epoch it holds.
+    struct QuestionSkip {
+        uint64_t epoch = 0;
+        const Item* notable = nullptr;
+    };
+    mutable QuestionSkip questionSkips[2];
     std::string_view text;  // the token text the word was found in
     int length = 0;         // bytes consumed, the conjugation ending included
     int selected = -1;
@@ -244,8 +260,11 @@ public:
     // before the word, spaces between them aside (でしょ。と、, 行く……と、, そう――と).
     bool AfterPause(bool sentenceEnd) const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
-    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
-    bool AfterQuestionWord(bool clause = false) const;
+    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까). pass is the epoch of the
+    // construction pass the call runs in (0 outside one): within a pass, whose actions change no
+    // surface, span or link of the chain, the walk back skips the words that can neither end it nor
+    // be a question word, found once per pass (questionSkips).
+    bool AfterQuestionWord(bool clause = false, uint64_t pass = 0) const;
     // Whether the conjugation ending closes with the question particle か (行くか, どうなるか), not
     // with the kana of a verb form that ends in か (行かない).
     bool EndingAsks() const;
@@ -261,7 +280,7 @@ public:
     // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時
     // after a number name a month or an hour (五月, 三時), and a word read otherwise is no
     // count (一番 제일).
-    bool ReadsCount(int i);
+    bool ReadsCount(int i) const;
     // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
     // word or only punctuation follows.
     bool ClosingTsu() const;
@@ -312,6 +331,13 @@ struct Chain {
     // (or, of a later token, whose predecessor has its CrossEnd before it or, on the text
     // path, is of an earlier token).
     int Insert(Item* item, bool overlapping);
+
+private:
+    // Whether the chain is in order of token and then of end, as long as every insert kept it so;
+    // Insert then works from the tail instead of scanning the whole chain.
+    bool sorted = true;
+    void Link(Item* item, Item* before);
+    int InsertSorted(Item* item);
 };
 
 // Objects of one kind, allocated in blocks that are kept for reuse.

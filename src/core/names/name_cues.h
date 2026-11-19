@@ -65,6 +65,12 @@ bool StatusValueAt(std::string_view rest);
 // (敏捷が特筆して高い; spec LEX-5175).
 bool CommonSenseAt(std::string_view after);
 
+// Whether at, the text from key on, starts with a row of name.common-word-context for key, which keeps the
+// common word (桜が咲いた, 植木に水をやる; spec LEX-7550).
+bool WordContextAt(std::string_view key, std::string_view at);
+// Whether key has a row of name.common-word-context: a common word too, also one of a place (入江 후미).
+bool WordContextKey(std::string_view key);
+
 // Whether key has a common sense of a plant (玉藻 말) and after starts with name.plant-after, which keeps the
 // plant (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
 bool PlantSenseAt(const dict::Snapshot& snap, std::string_view key, std::string_view after);

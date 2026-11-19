@@ -100,6 +100,15 @@ struct CxSurfaceHash {
 
 inline constexpr uint32_t kNoGuard = UINT32_MAX;
 
+// What must hold at a word for a family to fire there, so that the words where it does not are not
+// tried: one of atoms, into ConstructionTable::atoms (one of each slot), holds wherever the guard or a
+// row does.
+struct CxAnchors {
+    std::vector<uint32_t> atoms;
+    std::vector<uint32_t> changing;  // those whose words a row that fires may change (AnchorFixed)
+    bool found = false;              // none: every word is tried
+};
+
 struct CxFamily {
     std::string name;
     std::string after;      // the text pass it runs after
@@ -121,6 +130,7 @@ struct CxFamily {
     std::vector<std::pair<uint32_t, std::vector<int>>> bySurface;
     std::vector<int> open;
     bool indexed = false;  // some row has surfaces
+    CxAnchors anchors;
     // The atoms every row needs to hold (itself, or an operand of its && or &&n at any depth), into
     // atoms: a word on which one is false fires none of the rows.
     std::vector<uint32_t> shared;
@@ -129,6 +139,44 @@ struct CxFamily {
 struct CxError {
     int line = 0;
     std::string message;
+};
+
+// How a value index finds an anchor: the words whose value equals, starts with, ends with, starts or
+// holds one of its strings.
+enum class CxProbe : uint8_t { Exact, Prefix, Suffix, Within, Contains };
+
+// The keys of a value index as a byte trie, walked over a value from its start (keys it equals, starts
+// with or starts), from its end (keys it ends with, stored reversed) or from each byte (keys it holds).
+// A node lists the families of the keys that end at it, whole (the value equals the key) and part (the
+// value starts, ends with or holds it), and of those whose path passes it (within: the value starts
+// the key).
+struct CxTrie {
+    struct Node {
+        uint32_t edges = 0, edgeCount = 0;  // into edges, sorted by byte
+        uint32_t whole = 0, wholeCount = 0, part = 0, partCount = 0, within = 0, withinCount = 0;  // into families
+    };
+    std::vector<Node> nodes;  // the root first
+    std::vector<std::pair<uint8_t, uint32_t>> edges;  // byte, node
+    std::vector<uint32_t> families;
+};
+
+// The anchors of the families after a pass on one field of the word delta words away.
+struct CxValueIndex {
+    CxField field = CxField::Surface;
+    int delta = 0;
+    bool fixed = true;  // the field reads only what no action changes
+    CxTrie forward, backward, inner;  // exact, prefix and within keys; suffix keys; contained keys
+};
+
+// The anchors of the families after a pass (a family is its place in ConstructionTable::afterPass):
+// those a value index finds; the others by anchor (numbered in ConstructionTable::anchorAtoms), of
+// atoms that read only what no action changes (slots) and of others (changing), sorted; the families
+// with no anchors, which try every word, and with anchors a row may change.
+struct CxPassIndex {
+    std::vector<CxValueIndex> values;
+    std::vector<std::pair<uint32_t, uint32_t>> slots, changing;  // anchor, family
+    bool changes = false;  // some anchor is changing or in a value index of a field that is not fixed
+    std::vector<uint32_t> open, changers;  // the families with no anchors, and with changing ones
 };
 
 struct ConstructionTable {
@@ -140,6 +188,9 @@ struct ConstructionTable {
     // The surfaces the families are indexed by, numbered.
     std::unordered_map<std::string, uint32_t, CxSurfaceHash, std::equal_to<>> surfaces;
     uint32_t slots = 0;  // of the atoms
+    // The anchors no value index finds (CxPassIndex slots and changing), numbered: an atom of each.
+    std::vector<uint32_t> anchorAtoms;
+    std::vector<CxPassIndex> passIndex;  // by pass
     std::vector<std::vector<int>> afterPass;  // the families after each pass, by stage
     std::vector<CxError> errors;
 };

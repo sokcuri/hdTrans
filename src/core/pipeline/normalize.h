@@ -38,6 +38,15 @@ struct RunLookup {
     // The length in bytes of the longest key of the dictionary that text starts with (NormalizeForms: が of
     // か゛んばれ against か); null for none.
     size_t (*keyReach)(const void* context, std::string_view text) = nullptr;
+    // Whether form, whole, is the dictionary form of an ichidan verb of the dictionary (DialectForms: 見とられん,
+    // not 足とられん); null for none.
+    bool (*ichidanVerb)(const void* context, std::string_view form) = nullptr;
+    // Whether stem, whole, is the stem (連用形) of an ichidan verb or of くる of the dictionary, the form that
+    // ます follows (DialectForms: 見よる, 来やした, 持ってきやしょう); null for none.
+    bool (*vowelStem)(const void* context, std::string_view stem) = nullptr;
+    // Whether stem, whole, is an adjectival noun of the dictionary and no noun or adverb, which the copula follows and
+    // a verb takes as no object (DialectForms: 大丈夫やった, 静かやった; not 一杯やろう, 一生懸命やった); null for none.
+    bool (*naStem)(const void* context, std::string_view stem) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is

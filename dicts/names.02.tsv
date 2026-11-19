@@ -69919,7 +69919,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 菅佐原英一	스가사와라 에이이치	N130	QPNVHn		GN							names.697499
 菅佐原隆幸	스가사와라 타카유키	N130	QPNVHn		GN							names.697500
 菅俊哉	스가 토시야	N130	QPNVHn		GN							names.697501
-菅光	스가 코	N130	QPNVHn	Wa	GN						すがこう	names.697502
 菅光輝	스가 코우키	N130	QPNVHn		GN							names.697503
 菅円吉	간 엔키치	N130	QPNVHn		GN							names.697505
 菅博	스가 히로시	N130	QPNVHn		GN							names.697506
@@ -76767,7 +76766,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 藤盛由果	후지모리 유카	N130	QPNVHn		GN							names.704392
 藤目	후지메	N130	QPNVHn	Wa	GN							names.704393
 藤目ゆき	후지메 유키	N130	QPNVHn		GN							names.704394
-藤直	후지 나오	N130	QPNVHn	Wa	GN						ふじなお	names.704395
 藤直也	후지 나오야	N130	QPNVHn		GN							names.704396
 藤県	텅현	N130	QCTVPl		GN							names.704397
 藤真	도마	N130	QPNVHn	Wa	GN						とうま	names.704398
@@ -80939,7 +80937,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 西所村	사이쇼촌	N130	QCTVPl		GN							names.708635
 西押立村	니시오시타테촌	N130	QCTVPl		GN							names.708636
 西播朝鮮初中級学校	세이방조선초중급학교	N130	VGt		GN							names.708637
-西政	니시 마사	N130	QPNVHn	Wa	GN						にしまさ	names.708638
 西政治	니시 마사하루	N130	QPNVHn		GN							names.708639
 西新井大師	니시아라이다이시	N110			GN						にしあらいたいし	names.708640
 西新井大師西	니시아라이다이시 니시	N130	QPNVHn		GN						にしあらいだいし にし	names.708641
@@ -91876,7 +91873,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 辻斬りカオル	츠지기리 카오루	N130	QPNVHn		GN						つじぎりかおる	names.719780
 辻斬りナギリ	츠지기리 나기리	N130	QPNVHn		GN						つじぎり なぎり	names.719781
 辻斬四姉妹	츠지기리 사자매	N130	QPNVHn		GN						つじぎりよんしまい	names.719782
-辻新	츠지 신	N130	QPNVHn	Wa	GN						つじしん	names.719783
 辻新八	츠지 신파치	N130	QPNVHn		GN							names.719784
 辻新次	츠지 신지	N130	QPNVHn		GN							names.719785
 辻昌子	츠지 마사코	N130	QPNVHn		GN							names.719786
@@ -91929,7 +91925,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 辻横	츠지요코	N130	QPNVHn	Wa	GN							names.719833
 辻横由佳	츠지요코 유카	N130	QPNVHn		GN							names.719834
 辻正男	츠지 마사오	N130	QPNVHn		GN							names.719835
-辻武	츠지 타케	N130	QPNVHn	Wa	GN						つじたけ	names.719836
 辻武寿	츠지 타케히사	N130	QPNVHn		GN							names.719837
 辻殿	츠지도노	N130	QPNVHn	Wb	GN							names.719838
 辻沢響江	츠지사와 쿄코	N130	QPNVHn		GN							names.719839
@@ -111544,7 +111539,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 関海哉	세키 가이야	N130	QPNVHn		GN							names.739673
 関清英	세키 기요히데	N130	QPNVHn		GN							names.739674
 関渡駅	관두 역	N130	QCTVPl		GN							names.739675
-関満	세키 미츠	N130	QPNVHn	Wa	GN						せきみつ	names.739676
 関満博	세키 미츠히로	N130	QPNVHn		GN							names.739677
 関漢卿	관한경	N130	QPNVHn	Wb	GN							names.739678
 関澤祐美	세키자와 유미	N130	QPNVHn		GN						せきざわゆみ	names.739679
@@ -111598,7 +111592,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 関航太郎	세키 고타로	N130	QPNVHn		GN							names.739727
 関良平	세키 료헤이	N130	QPNVHn		GN						せき りょうへい	names.739728
 関良徳	세키 요시노리	N130	QPNVHn		GN							names.739729
-関芳	세키 요시	N130	QPNVHn	Wa	GN						せきよし	names.739730
 関芳弘	세키 요시히로	N130	QPNVHn		GN							names.739731
 関英男	세키 히데오	N130	QPNVHn		GN							names.739732
 関英雄	세키 히데오	N130	QPNVHn		GN							names.739733
@@ -123004,7 +122997,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 飛永翼	츠바사 도비나가	N130	QPNVHn		GN							names.751344
 飛沢陽平	토비사와 요헤이	N130	QPNVHn		GN						とびさわ ようへい	names.751345
 飛流燕	히류 츠바메	N130	QPNVHn		GN						ひりゅう つばめ	names.751346
-飛浩	도비 히로	N130	QPNVHn	Wa	GN						とびひろ	names.751347
 飛浩隆	도비 히로타카	N130	QPNVHn		GN							names.751348
 飛淡出雲	히탄 이즈모	N130	QPNVHn		GN						ひたんいずも	names.751349
 飛燕	히엔	N130	QPNVHn	Wb	GN						ひえん	names.751350

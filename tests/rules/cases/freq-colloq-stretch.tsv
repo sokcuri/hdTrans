@@ -1,0 +1,107 @@
+# 규칙: LEX-7301, LEX-7302, LEX-7303, LEX-7300
+rule	input	expected	kind	layer
+normalize:small-vowel-stretch	こわぁい。	has:무섭다	fix	normalize
+normalize:small-vowel-stretch	こわぁかった。	has:무서웠다	fix	normalize
+normalize:small-vowel-stretch	寒くなぁい？	has:춥지 않아	fix	normalize
+normalize:small-vowel-stretch	おやすみなさぁい。	has:안녕히 주무세요	fix	normalize
+normalize:small-vowel-stretch	かぁわいそうに。	has:불쌍	fix	normalize
+normalize:small-vowel-stretch	なぁるほど！	has:그렇구나	fix	normalize
+normalize:small-vowel-stretch	まぁた失敗した	has:또 실패	fix	normalize
+normalize:small-vowel-stretch	まぁだ覚えてないの？	has:아직	fix	normalize
+normalize:small-vowel-stretch	重ぉい石臼。	has:무거운	fix	normalize
+normalize:small-vowel-stretch	やだぁ、行かなぁいもん。	has:가지 않는걸	fix	normalize
+normalize:small-vowel-stretch	い～いいね	has:좋네	fix	normalize
+normalize:small-vowel-stretch	まぁね	has:뭐 그렇지	keep	normalize
+normalize:small-vowel-stretch	まぁ、いいか	has:뭐,	keep	normalize
+normalize:small-vowel-stretch	まぁだからって、それはないよ	lacks:아직	keep	normalize
+normalize:small-vowel-stretch	なぁお前、本気か	lacks:또한	keep	normalize
+normalize:small-vowel-stretch	あれはなぁに？	has:뭐야	keep	normalize
+normalize:small-vowel-stretch	それなぁに？	has:뭐야	keep	normalize
+normalize:small-vowel-stretch	ねぇちゃんと聞いてよ	has:제대로	keep	normalize
+normalize:small-vowel-stretch	「だってかぁいいんだもん」	has:귀여운걸	keep	normalize
+normalize:small-vowel-stretch	か、かぁいぃよぅ…	has:귀엽	keep	normalize
+normalize:small-vowel-stretch	てめぇの仕業か	has:네놈	keep	normalize
+normalize:small-vowel-stretch	うぅん、違う	has:아니	keep	normalize
+normalize:small-vowel-stretch	いたぁぁぁい	has:아파	keep	normalize
+normalize:spaced-stammer	い いえ、違います	has:아뇨	fix	normalize
+normalize:spaced-stammer	は はい！	lacks:는 네	fix	normalize
+normalize:spaced-stammer	わ わたし？	lacks:와 나	fix	normalize
+normalize:spaced-stammer	ほ ほら、見て	lacks:호 자	fix	normalize
+normalize:spaced-stammer	だ だって	has:그치만	fix	normalize
+normalize:spaced-stammer	て てめえ	lacks:라고	fix	normalize
+normalize:spaced-stammer	「い いや…」	lacks:있고	fix	normalize
+normalize:spaced-stammer	あの、は はい	lacks:는 네	fix	normalize
+normalize:spaced-stammer	も もしもし	lacks:도 여보	fix	normalize
+normalize:spaced-stammer	私 は はなこ	has:나는 하나코	keep	normalize
+normalize:spaced-stammer	今日 は はれ	has:오늘은	keep	normalize
+normalize:spaced-stammer	ここ と そこ	has:여기와 거기	keep	normalize
+normalize:spaced-stammer	た た か う	has:싸운다	keep	normalize
+normalize:spaced-stammer	あ あなた	has:아 당신	keep	normalize
+normalize:spaced-stammer	え ええ	has:네 네	keep	normalize
+normalize:kansai-ya-adjectival	大丈夫やった？	has:괜찮았어	fix	normalize
+normalize:kansai-ya-adjectival	静かやったな	has:조용했	fix	normalize
+normalize:kansai-ya-adjectival	綺麗やった	has:예뻤다	fix	normalize
+normalize:kansai-ya-adjectival	嫌やった	has:싫었다	fix	normalize
+normalize:kansai-ya-adjectival	大丈夫やろう	has:괜찮을 것이다	fix	normalize
+normalize:kansai-ya-adjectival	静かやろうな	has:조용하겠지	fix	normalize
+normalize:kansai-ya-adjectival	宿題やった？	has:숙제 했어	keep	normalize
+normalize:kansai-ya-adjectival	野球やったことある？	has:야구 한 적	keep	normalize
+normalize:kansai-ya-adjectival	犬に餌やった	has:먹이 주었다	keep	normalize
+normalize:kansai-ya-adjectival	花に水やった	has:물 주었다	keep	normalize
+normalize:kansai-ya-adjectival	一杯やろう	has:한잔 하자	keep	normalize
+normalize:kansai-ya-adjectival	一生懸命やった	has:열심히 했다	keep	normalize
+normalize:kansai-ya-adjectival	一生懸命やろう	has:열심히 하자	keep	normalize
+normalize:kansai-ya-adjectival	一緒やった	has:함께 했다	keep	normalize
+normalize:kansai-ya-adjectival	色々やった	has:여러 가지 했다	keep	normalize
+normalize:rough-kora	なんだごらぁ！	has:이봐	fix	normalize
+normalize:rough-kora	おいごら	lacks:등	fix	normalize
+normalize:rough-kora	何見てんだごらぁ	has:이봐	fix	normalize
+normalize:rough-kora	ごらぁ、待ちやがれ	has:기다려라	fix	normalize
+normalize:rough-kora	何言ってんだらぁ	has:하는 거지	fix	normalize
+normalize:rough-kora	何やってんだらぁ！	has:하는 거지	fix	normalize
+normalize:rough-kora	見てごらん	has:보렴	keep	normalize
+normalize:rough-kora	今日はおごらない	has:한턱 내지 않는다	keep	normalize
+normalize:rough-kora	おごらせてよ	has:한턱 내게	keep	normalize
+normalize:rough-kora	こら、待て	has:이봐, 기다려	keep	normalize
+normalize:rough-kora	知ってんだろ	has:아는 거지	keep	normalize
+normalize:chatten	何言っちゃってんの？	has:해버리고 있는	fix	normalize
+normalize:chatten	なにやっちゃってんだ	has:해버리고 있는	fix	normalize
+normalize:chatten	死んじゃってんの？	has:죽어버리	fix	normalize
+normalize:chatten	飲んじゃってんだ	has:마셔버리고 있는	fix	normalize
+normalize:chatten	なっちゃってんだね	has:되어버리고 있는	fix	normalize
+normalize:chatten	やっちまってんの	has:해버리고 있어	fix	normalize
+normalize:chatten	完全に忘れちゃってんで	has:잊어버리고 있	fix	normalize
+normalize:chatten	いいじゃん	has:좋잖아	keep	normalize
+normalize:chatten	めちゃくちゃだ	has:엉망진창	keep	normalize
+normalize:chatten	どうしちゃったの	has:왜 그래	keep	normalize
+normalize:chatten	言うてんねん	has:말하거든	keep	normalize
+normalize:chatten	何してんの	has:뭐하고 있어	keep	normalize
+normalize:polite-noda-tic	存じませんのですが、どなたですか。	has:모릅니다만	fix	normalize
+normalize:polite-noda-tic	わかりませんのですが	has:모릅니다만	fix	normalize
+normalize:polite-noda-tic	行きますのですが、いいですか	has:갑니다만	fix	normalize
+normalize:polite-noda-tic	しましたのですが、だめでした	has:했습니다만	fix	normalize
+normalize:polite-noda-tic	ありませんのですがね	has:없습니다만	fix	normalize
+normalize:polite-noda-tic	彼のですが	has:그의 것입니다만	keep	normalize
+normalize:polite-noda-tic	いいのですが	has:좋습니다만	keep	normalize
+normalize:polite-noda-tic	行くのですが	has:갑니다만	keep	normalize
+normalize:polite-noda-tic	眠いでつよ。	has:졸려요	fix	normalize
+normalize:polite-noda-tic	寒いでちゅよ	has:추워요	fix	normalize
+normalize:polite-noda-tic	痛いでしゅよ	has:아파요	fix	normalize
+normalize:polite-noda-tic	眠かったでちゅよ	has:졸렸어요	fix	normalize
+normalize:polite-noda-tic	寒かったでちゅ	has:추웠어요	fix	normalize
+normalize:polite-noda-tic	楽しかったでつね	has:즐거웠네요	fix	normalize
+normalize:polite-noda-tic	静かでちゅよ	has:조용해요	fix	normalize
+normalize:polite-noda-tic	行くでちゅよ	has:가요	fix	normalize
+normalize:polite-noda-tic	手でつかむ	has:손으로 잡는다	keep	normalize
+normalize:polite-noda-tic	眠いでつね	has:졸리네요	keep	normalize
+normalize:polite-noda-tic	学生でちゅよ	has:학생이에요	keep	normalize
+normalize:chatten	しちゃってんの	has:해버리고 있어	fix	normalize
+normalize:chatten	読んじゃってんの	has:읽어버리고 있어	fix	normalize
+normalize:chatten	かぼちゃってんだ	has:호박	keep	normalize
+normalize:chatten	めっちゃいい	has:엄청 좋다	keep	normalize
+normalize:chatten	すごいじゃん	has:대단하잖아	keep	normalize
+normalize:rough-kora	ふざけんなごら	lacks:등	fix	normalize
+normalize:rough-kora	てめぇごらぁ	has:네놈 이봐	fix	normalize
+normalize:rough-kora	わかってんだらぁ	has:아는 거지	fix	normalize
+normalize:rough-kora	ごらんなさい	has:봐	keep	normalize
+normalize:rough-kora	おごられた	has:한턱	keep	normalize

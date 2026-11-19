@@ -1,0 +1,125 @@
+# 규칙: LEX-7300
+rule	input	expected	kind	layer
+normalize:toku-kana-stem	ま、ありがたくいただいとくよ。	has:받아 둬	fix	normalize
+normalize:toku-kana-stem	いただいといた。	has:받아 두었다	fix	normalize
+normalize:toku-kana-stem	いただいときます。	has:받아 둡니다	fix	normalize
+normalize:toku-kana-stem	なめときゃ治るだろ	has:두면 낫지	fix	normalize
+normalize:toku-kana-stem	しときゃいい。	has:해 두면 된다	fix	normalize
+normalize:toku-kana-stem	いないふりしときゃ大丈夫だ。	has:해 두면 괜찮다	fix	normalize
+normalize:toku-kana-stem	置いときゃいい。	has:두면 된다	fix	normalize
+normalize:toku-kana-stem	おいときゃいいよ。	has:두면 돼	fix	normalize
+normalize:toku-kana-stem	アタリをつけときます。	has:붙여 둡니다	fix	normalize
+normalize:toku-kana-stem	あげとくね。	has:둘게	fix	normalize
+normalize:toku-kana-stem	いっとくけど、俺は行かない。	has:말해 두지만	fix	normalize
+normalize:toku-kana-stem	いっといた。	has:말해 두었다	fix	normalize
+normalize:toku-kana-stem	よんどく。	has:읽어 둔다	fix	normalize
+normalize:toku-kana-stem	いいときも悪いときもある。	has:나쁠 때도	fix	normalize
+normalize:toku-kana-stem	ちゃんとやっときゃよかった。	has:해 둘 걸	keep	normalize
+normalize:toku-kana-stem	あの人はわたしといた。	lacks:두었다	keep	normalize
+normalize:toku-kana-stem	いいとこだね。	has:좋은 데	keep	normalize
+normalize:toku-kana-stem	ないときは来て。	has:없을 때는	keep	normalize
+normalize:toku-kana-stem	もっとくれよ。	has:좀 더 줘	keep	normalize
+normalize:toku-kana-stem	ちょっとくらい。	has:조금 정도	keep	normalize
+normalize:toku-kana-stem	きっとこの辺だ。	has:분명 이 근처	keep	normalize
+normalize:toku-kana-stem	もっとこう近くに来て。	has:좀 더	keep	normalize
+normalize:toku-kana-stem	ずっといたんだ。	has:계속 있었	keep	normalize
+normalize:toku-kana-stem	若いときゃ無茶をした。	has:젊을 때는	keep	normalize
+normalize:chai-mashite	それでてっきり待ち合わせかなって思っちゃいまして。	has:생각해버려서	fix	normalize
+normalize:chai-mashite	衣装がかぶっちゃいまして。	lacks:하물며	fix	normalize
+normalize:chai-mashite	忘れちゃいましてね。	has:잊어버려서	fix	normalize
+normalize:chai-mashite	飲んじゃいまして、すみません。	has:마셔버려서	fix	normalize
+normalize:chai-mashite	泳いじゃいまして。	has:헤엄쳐버려서	fix	normalize
+normalize:chai-mashite	寝坊しちゃいまして。	has:늦잠자버려서	fix	normalize
+normalize:chai-mashite	遅れちゃいまして、申し訳ありません。	has:늦어버려서	fix	normalize
+normalize:chai-mashite	なくしちゃいましてね。	has:없애버려서	fix	normalize
+normalize:chai-mashite	電話番号を忘れちゃいまして。	has:잊어버려서	fix	normalize
+normalize:chai-mashite	財布を落としちゃいまして。	lacks:하물며	fix	normalize
+normalize:chai-mashite	道に迷っちゃいまして。	has:길을 잃어버려서	fix	normalize
+normalize:chai-mashite	読んじゃいまして。	has:읽어버려서	fix	normalize
+normalize:chai-mashite	行っちゃいました。	has:가버렸습니다	keep	normalize
+normalize:chai-mashite	まして子供なら無理だ。	has:하물며 아이라면	keep	normalize
+normalize:chai-mashite	吹き飛ばしちゃいましょう！	has:날려	keep	normalize
+normalize:polite-noda-tic	わかりませんのです。	has:모릅니다	fix	normalize
+normalize:polite-noda-tic	一番憎まれ口を叩いていますのですよ。	lacks:예요	fix	normalize
+normalize:polite-noda-tic	告白しちゃいましたのです！	has:고백해버렸습니다!	fix	normalize
+normalize:polite-noda-tic	いけませんのですか？	has:안 됩니까?	fix	normalize
+normalize:polite-noda-tic	攻撃が効くとは思えませんのです…。	has:생각되지 않습니다	fix	normalize
+normalize:polite-noda-tic	解決しないといけませんのです。	has:안 됩니다	fix	normalize
+normalize:polite-noda-tic	懐に持っていますのです！	has:가지고 있습니다	fix	normalize
+normalize:polite-noda-tic	大丈夫でつ！	has:괜찮아요	fix	normalize
+normalize:polite-noda-tic	ありがとうございまちゅ。	has:감사합니다	fix	normalize
+normalize:polite-noda-tic	いきましゅ！	has:갑니다	fix	normalize
+normalize:polite-noda-tic	聞きましたですか？	has:들었습니까	fix	normalize
+normalize:polite-noda-tic	かわいいでしゅね。	has:귀엽네요	keep	normalize
+normalize:polite-noda-tic	分かりませんです。	has:모릅니다	keep	normalize
+normalize:polite-noda-tic	手でつかむ。	has:손으로 잡는다	keep	normalize
+normalize:polite-noda-tic	家でつくる。	has:집에서 만든다	keep	normalize
+normalize:polite-noda-tic	もちろんですぞ！	has:물론입니다	keep	normalize
+normalize:polite-noda-tic	それは意外なのよさ。	has:뜻밖의 거야	keep	normalize
+normalize:polite-noda-tic	そうなのです。	has:그렇습니다	keep	normalize
+normalize:polite-noda-tic	知っているのです。	has:알고 있습니다	keep	normalize
+normalize:negative-n-noun	どんなもんか分からんのに	has:모르는데	fix	normalize
+normalize:negative-n-noun	人の気持ちの分からんやつだな	has:모르는 녀석	fix	normalize
+normalize:negative-n-noun	言わんこと聞かん奴だ。	has:듣지 않는 놈	fix	normalize
+normalize:negative-n-noun	行かんの？	has:가지 않는 거야	fix	normalize
+normalize:negative-n-noun	読まんのに買った。	has:읽지 않는데	fix	normalize
+normalize:negative-n-noun	何も分からんのは困る。	has:모르는 것은	fix	normalize
+normalize:negative-n-noun	気に入らんことがある。	has:들지 않는 것이	fix	normalize
+normalize:negative-n-noun	聞かんのは悪い。	has:듣지 않는 것은	keep	normalize
+normalize:negative-n-noun	使わんものは捨てる。	has:쓰지 않는 것은	keep	normalize
+normalize:negative-n-noun	言うこと聞かんやつは置いていく。	has:듣지 않는 녀석	keep	normalize
+normalize:negative-n-noun	知らん顔をする。	has:모른 척	keep	normalize
+normalize:negative-n-noun	知らんのか愚か者！！	has:모르는가	keep	normalize
+normalize:negative-n-noun	分からんやろ	has:모르지	keep	normalize
+normalize:negative-n-noun	みなさんの意見。	has:여러분의 의견	keep	normalize
+normalize:negative-n-noun	健さんの家。	has:켄 씨의 집	keep	normalize
+normalize:negative-n-noun	あかんのや。	has:안 되는	keep	normalize
+normalize:negative-n-noun	気に入らんやつだ。	has:마음에 들지 않는 녀석	keep	normalize
+normalize:negative-n-noun	今年も夏が来たのう。これは変わらんのう。	has:바뀌지 않는구나	keep	normalize
+normalize:negative-n-noun	何度目を通したって、残らんもんは残らん！	lacks:걸은	keep	normalize
+normalize:negative-n-noun	年齢たいして変わらんのに、なんでそうなんねん！	lacks:것에	fix	normalize
+normalize:negative-n-noun	本来護衛など要らんのだが、これも作戦の内。	has:필요하지 않는데	fix	normalize
+normalize:toku-kana-stem	本当にしんどくなったときは…。	has:힘들어졌을 때는	keep	normalize
+normalize:toku-kana-stem	俺のペニスをしっかりとくわえ込む。	lacks:두어	keep	normalize
+normalize:toku-kana-stem	「今日はよしとくよ」	lacks:둬	keep	normalize
+normalize:toku-kana-stem	「伝言あれば、預かっとくわよ」	has:맡아 둘 거야	fix	normalize
+normalize:toku-kana-stem	「じゃあ、ドアに鍵かけとこう」	has:잠가 두자	fix	normalize
+normalize:toku-kana-stem	「わかった、気をつけとく」	has:조심해 둬	fix	normalize
+normalize:toku-kana-stem	「ああ、声かけとくよ」	has:말을 걸어 둬	fix	normalize
+normalize:toku-kana-stem	まあもらっとくけど……	has:받아 두	fix	normalize
+normalize:chai-mashite	私の部屋の給湯器が壊れちゃいまして。	has:고장나버려서	fix	normalize
+normalize:chai-mashite	お化粧直しに時間をかけちゃいまして！	has:들여버려서	fix	normalize
+normalize:toku-kana-stem	一応直掩機飛ばしとく？	has:날려 둬	fix	normalize
+normalize:polite-noda-tic	マリアでつ！	has:마리아예요	fix	normalize
+normalize:polite-noda-tic	ミキでちゅ。	has:미키예요	keep	normalize
+normalize:polite-noda-tic	先王陛下の御代から担ってまいりましたのですよ	has:담당해왔습니다	fix	normalize
+normalize:toku-kana-stem	きっときますよ。	has:분명 와	keep	normalize
+normalize:toku-kana-stem	彼はきっときます。	has:분명 옵니다	keep	normalize
+normalize:toku-kana-stem	きっときました。	has:분명 왔습니다	keep	normalize
+normalize:toku-kana-stem	きっときませんでした。	has:분명 오지 않았	keep	normalize
+normalize:toku-kana-stem	もっときますね。	has:좀 더 올게	keep	normalize
+normalize:toku-kana-stem	さっときました。	has:휙 왔	keep	normalize
+normalize:toku-kana-stem	ずっときませんでした。	has:계속 오지	keep	normalize
+normalize:toku-kana-stem	そっときます。	has:살며시 옵니다	keep	normalize
+normalize:toku-kana-stem	ちょっときますね。	has:조금 올게	keep	normalize
+normalize:toku-kana-stem	もっとくわしく教えて。	has:자세하게	keep	normalize
+normalize:toku-kana-stem	もっとくわしく。	has:좀 더 자세하게	keep	normalize
+normalize:toku-kana-stem	きっとくよくよしてる。	has:분명 끙끙	keep	normalize
+normalize:toku-kana-stem	ずっとくよくよしてる。	has:계속 끙끙	keep	normalize
+normalize:toku-kana-stem	そっとくわえた。	has:살며시 입에 물었다	keep	normalize
+normalize:toku-kana-stem	もっとくねらせて。	has:좀 더	keep	normalize
+normalize:toku-kana-stem	さっとくぐった。	has:휙 빠져	keep	normalize
+normalize:toku-kana-stem	ほっといて！	has:내버려 두	keep	normalize
+normalize:toku-kana-stem	ほっときゃいい。	has:내버려 두면	keep	normalize
+normalize:toku-kana-stem	ひろしときゃ大丈夫。	lacks:두면	keep	normalize
+normalize:toku-kana-stem	ひろしときました。	lacks:일어났	keep	normalize
+normalize:toku-kana-stem	わたしときますか？	lacks:일어납	keep	normalize
+normalize:toku-kana-stem	ふりしときゃいい。	has:척 해 두면	fix	normalize
+normalize:chai-mashite	猫がめっちゃいまして。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	人がめっちゃいまして、大変でした。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	めっちゃいまして。	has:엄청 있어서	keep	normalize
+normalize:chai-mashite	すっごいめっちゃいまして。	has:있어서	keep	normalize
+normalize:chai-mashite	めちゃいまして、困りました。	lacks:끝내서	keep	normalize
+normalize:chai-mashite	食べちゃいまして。	has:먹어버려서	fix	normalize
+normalize:chai-mashite	のんじゃいまして。	has:마셔버려서	fix	normalize
+normalize:chai-mashite	わすれちゃいまして。	has:잊어버려서	fix	normalize

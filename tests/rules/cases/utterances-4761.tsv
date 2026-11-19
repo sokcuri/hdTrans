@@ -1,6 +1,6 @@
 # 규칙: LEX-4761, LEX-4762
 rule	input	expected	kind	layer
-pack:utterance	そのとおり 君が悪いんじゃあない	맞아 네가 나쁘지 구멍 있고	fix	packs
+pack:utterance	そのとおり 君が悪いんじゃあない	has:맞아 네가	fix	packs
 pack:utterance	「そのとおり。向こうだって、落選したら必死に調べるだろうから、バレる可能性は少なくないと思うのよ」	「맞아. 저편도, 낙선하면 필사적으로 조사할 테니까, 들킬 가능성은 적지 않다고 생각해」	fix	packs
 pack:utterance	だからね、と。アニスフィアは笑う。無邪気に、ただ未来を語るかのように。	그러니까 말이야, 라고. 아니스피아는 웃는다. 천진난만하게, 다만 미래를 말하는 것처럼.	fix	packs
 pack:utterance	そのとおり！ だから 私は日本人に叫ぶ！	맞아! 그러니까 나는 일본인에 외친다!	fix	packs
@@ -17,12 +17,12 @@ pack:utterance	何って 別に 俺たち 何も リトのために 料理を作
 pack:utterance	　……これじゃあ、付き合ってる以上のなにかみたいだ。	 ……이래서야, 사귀는 이상의 뭔가 같다.	fix	packs
 pack:utterance	「{k=-5.0}―――{/k} 今ね、蒼くんが来てるのよ」	「{k=-5.0}―――{/k} 지금 말이야, 아오이 군이 와」	fix	packs
 pack:utterance	ち、ちょっと！何すんだよー…！	자, 잠깐! 무슨 짓이야~…!	fix	packs
-pack:utterance	「おーこわ。なんなのあれ」	「-무서워. 뭐인 거 어」	fix	packs
+pack:utterance	「おーこわ。なんなのあれ」	has:무서워. 뭐야	fix	packs
 pack:utterance	ようし、まだまだこれから。バリバリ行こうぜ！？	좋아, 아직도 지금부터. 열심히 가자구!?	fix	packs
 pack:utterance	……よお。	……여어.	fix	packs
 pack:utterance	ウッ… 痛(いて)え！ 何すんだよ いきなり！	윽… 아프다! 무슨 짓이야 갑자기!	fix	packs
 pack:utterance	「よし、頼んだぞ」	「좋아, 부탁한다」	fix	packs
-pack:utterance	沙羅さん これさ 二桁は犯してるよね？ 法…。	사라 씨 이거 말이야 2자리수는 범하고 있지? 법….	fix	packs
+pack:utterance	沙羅さん これさ 二桁は犯してるよね？ 法…。	사라 씨 이거 말이야 2자릿수는 범하고 있지? 법….	fix	packs
 pack:utterance	こんなんで、どうよ！	이런 것으로, 어때!	fix	packs
 pack:utterance	かーっ！ったく、どいつもこいつも！知らねぇぞ、どうなっても！9	화악! 참나, 하나같이! 몰라, 어떻게 되어도! 9	fix	packs
 pack:utterance	どうしたテートク？疲れたのかい。ンだよ、だらしねえな。仕方ない、江風に寄っかかっていいぜ。ん？ほら、どうよ。	무슨 일이야 제독? 지친 거야. 야, 야무지지 못하네. 어쩔 수 없다, 카제에게 기 걸려도 돼. 응? 자, 어때.	fix	packs

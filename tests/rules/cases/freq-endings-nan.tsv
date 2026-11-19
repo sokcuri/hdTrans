@@ -1,0 +1,44 @@
+# 규칙: LEX-7503, SPC-13
+rule	input	expected	kind	layer
+dict:jisjk:4368	（親の欄が空白！　なんなのほんと）	has:뭐야 정말	fix	lookup
+dict:jisjk:4368	うぅっ……な、なんなのさ、一体…	has:뭐야, 도대체	fix	lookup
+dict:jisjk:4368	あのさぁ、なんなのさっきから。	has:뭐야 조금 전부터	fix	lookup
+dict:jisjk:4368	なんなの死にたいの？！	has:뭐야 죽고 싶은 거야	fix	lookup
+dict:jisjk:4368	寝ろ寝ろうっさいんだよねー、なんなのさー	has:뭐야	fix	lookup
+dict:jisjk:4368	マジ最悪……なんなのこいつ。	has:뭐야 이 녀석	fix	lookup
+dict:jisjk:4368	なんなのいったい……	has:뭐야 도대체	fix	lookup
+dict:jisjk:4368	手抜きってなんなのさ？	has:뭐야?	fix	lookup
+dict:jisjk:4368	一体、なんなのかって	lacks:뭐야	keep	lookup
+dict:jisjk:4368	なんなのか分からない	has:무엇인가	keep	lookup
+dict:jisjk:4368	なんなのよもう	has:뭐야	keep	lookup
+dict:w:39322	何をするつもりなんだい？	has:생각이야?	fix	lookup
+dict:w:39322	どういうことなんだい、先生。	has:무슨 뜻이야, 선생님	fix	lookup
+dict:w:39320	それで話ってなんだい？	has:이야기는 뭐야?	fix	lookup
+dict:w:39320	それってなんだい？	has:그게 뭐야?	fix	lookup
+dict:w:39323	それで、なにがどのくらい必要なんだい？	has:필요한 거야?	fix	lookup
+dict:w:39323	大変なんだい？	has:힘든 거야?	fix	lookup
+dict:w:39324	あれは何なんだい？	has:저것은 뭐야?	fix	lookup
+dict:w:39321	なんだいそのペッツって。	has:뭐야 그	fix	lookup
+dict:w:39322	誰なんだい？	lacks:있고	keep	lookup
+dict:w:39321	なんだい、それ	뭐야, 그것	keep	lookup
+dict:w:39321	どうしたんだい？	무슨 일이야?	keep	lookup
+dict:w:39310	ドキドキってなんじゃ？	has:두근두근은 뭐냐?	fix	lookup
+dict:w:39310	それはなんじゃ？	has:그것은 뭐냐?	fix	lookup
+dict:w:39311	なんじゃおまえは？	has:뭐냐 너는?	fix	lookup
+pack:utt:なんじゃって	なんじゃって？	뭐라고?	fix	packs
+cx:nanja-final:12	そいつはちょっと無理なんじゃ……	has:무리지……	fix	rewrites
+cx:nanja-final:12	無理な話なんじゃよ。	has:이야기지	fix	rewrites
+cx:nanja-final:12	子供なんじゃ無理だ	has:아이면	keep	rewrites
+cx:nanja-final:20	うち、好きなんじゃ♪	has:좋아하지♪	fix	rewrites
+cx:nanja-final:20	じゃけん提督は好きなんじゃ！	has:좋아하지!	fix	rewrites
+cx:nanja-final:20	むしろ、彼女の方が泣きそうなんじゃ……	has:울 것 같지……	fix	rewrites
+cx:nanja-final:20	コスプレとか好きなんじゃ？	has:좋아하지?	fix	rewrites
+cx:nanja-final:20	好きなんじゃ駄目なの？	has:좋아하면 안 돼	keep	rewrites
+cx:nanja-final:20	好きなんじゃないの？	좋아하는 거 아니야?	keep	rewrites
+cx:nanja-final:10	これが初めてなんじゃ。	has:처음이지	keep	rewrites
+dict:jisjk:353371	こんなんじゃ…沈まない。	has:이런 것은	keep	lookup
+dict:jisjk:353371	そんなんじゃダメよ！	has:그런 것은 안 돼	keep	lookup
+phrase:何でございますか	ご用件は何でございますか	has:용건은 무엇입니까	fix	fixed
+phrase:何でございますか	何でございますか	무엇입니까	fix	fixed
+phrase:なんでございましょう	なんでございましょう	무엇일까요	fix	fixed
+phrase:何でございますか	これは何ですか	이것은 뭐예요	keep	fixed

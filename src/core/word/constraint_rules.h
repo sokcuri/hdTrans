@@ -99,6 +99,9 @@ enum class ConstraintContext : uint8_t {
     NotCommonSense,     // no start of name.common-after follows, which keeps the common sense of
                         // weather, sky and sea words (時雨が降る, 雷が落ちた)
     BeforeChan,         // the word ends in ち and ゃん follows, the rest of ちゃん (夕立ち before ゃん), not ゃんと
+    BeforeContinuativeOnly,  // what only a verb's continuative takes follows (follower.continuative-only: たい, そう, ながら),
+                        // every sense of the word is a common noun, and a godan verb among the candidates reads the
+                        // word as its continuative (つまずき: つまず + き of つまずく)
     BeforeHiragana,     // a hiragana right after the word (ちゃうね; not ちゃう？)
     BeforeCopulaPredicate,  // the copula follows as the predicate (だ, です, でし, じゃ, だろ, でしょ; not だけ:
                             // 相変わらずだな), or な before a kanji or katakana (相変わらずな人)
@@ -188,5 +191,9 @@ struct ConstraintRule {
 
 // In table order; each rule runs on the candidates the earlier ones left.
 std::span<const ConstraintRule> ConstraintRules();
+
+// Whether after, the text after a し, goes on as a form of する: the past that ends there or before a particle or a
+// mark (した。, したの), or a member of suru.tail (しない, してる, しよう); not たくさん.
+bool SuruFormAfterShi(std::string_view after);
 
 }  // namespace hdTrans::word

@@ -3729,6 +3729,15 @@ bool PlainVerbOver(std::string_view s, size_t byte, size_t at, const LineContext
     return false;
 }
 
+// Whether the stem from..i of hiragana is the end of a particle of particle.kana-word-after that starts before it, after
+// which a word in kana starts: the で of まで (朝までれんしゅう 아침까지 연습, not 朝ま + 出られ).
+bool StemEndsParticle(std::string_view s, const std::u32string& rs, const std::vector<size_t>& byte, size_t from, size_t i) {
+    for (size_t k = from; k < i; k++) {
+        if (!IsHiraganaRune(rs[k])) return false;
+    }
+    return dict::EndsWithMember(HDTRANS_CLASS("particle.kana-word-after"), s.substr(0, byte[i])) > byte[i] - byte[from];
+}
+
 // Whether head, the text of a sentence before a verb, has a subject は, が or も after a person the
 // speaker honours (honorific.honoured-person: 社長は, 王子様が), as the word stage reads the respect of
 // られる (grammar.cpp RespectfulReading).
@@ -3772,7 +3781,7 @@ std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, 
             if (WordReaches(s, byte[from], byte[i + 1], ctx, snap)) break;
             const std::string stem = s.substr(byte[from], byte[i] - byte[from]);
             if (VerbStem(stem, kRu, ctx, snap)) {
-                found = !PlainVerbOver(s, byte[from], byte[i + 1], ctx, snap);
+                found = !PlainVerbOver(s, byte[from], byte[i + 1], ctx, snap) && !StemEndsParticle(s, rs, byte, from, i);
                 break;
             }
         }
@@ -3845,6 +3854,7 @@ bool AnyKind(int, const dict::Codes*) { return true; }
 bool IchidanKind(int kind, const dict::Codes*) { return kind == kIchidan; }
 bool RaGodanKind(int kind, const dict::Codes*) { return kind == kRaGodan; }
 bool IchidanOrKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuruKanji; }
+bool IchidanOrAnyKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuru || kind == kKuruKanji; }
 bool SuruKind(int kind, const dict::Codes*) { return kind == kSuru; }
 // Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), then an exclamation
 // mark (か！, かッ!!, かぁ！).
@@ -4142,6 +4152,14 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
 
 bool IsDictionaryVerb(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap) {
     return VerbFormIs(form, kDictionaryForm, AnyKind, ctx, snap);
+}
+
+bool IsDictionaryIchidan(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap) {
+    return VerbFormIs(form, kDictionaryForm, IchidanKind, ctx, snap);
+}
+
+bool IsDictionaryVowelStem(std::string_view stem, const LineContext& ctx, const dict::Snapshot& snap) {
+    return !stem.empty() && VerbFormIs(stem, kStemForm, IchidanOrAnyKuru, ctx, snap);
 }
 
 bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict) {
@@ -4515,7 +4533,7 @@ std::string PlainSpaces(std::string text) {
 
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::ReadCommaSpelled(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::ReadCommaSpelled(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::WriteSpacedStutters(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(

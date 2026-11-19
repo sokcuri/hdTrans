@@ -1,0 +1,17 @@
+# 규칙: LEX-7101
+rule	input	expected	kind	layer
+sound:katakana-said-u	マルイシさんという	has:마루이시	fix	lookup
+sound:katakana-said-u	<1950年創業 おでんの種屋マルイシ増英>	has:마루이시	fix	lookup
+sound:katakana-said-u	ハルエ・ルドマンを偽名？　に使っている。	has:하루에	fix	lookup
+sound:katakana-said-u	イタリア生まれの新鋭軽巡洋艦ルイージ・ディ・サヴォイアです。	has:루이지	fix	lookup
+sound:katakana-said-u	「ルイボスフルーツティー。飲んでみる？」	has:루이보스	fix	lookup
+sound:katakana-said-u	梅ソーダとルイボスフルーツティーのアイスをお願いします	has:루이보스	fix	lookup
+sound:katakana-said-u	ピルオネス・ヘンドリックス:帝国軍准将。	has:피루오네스	fix	lookup
+sound:katakana-said-u	侍女長・ベルエナ・エダラー	has:베루에나	fix	lookup
+sound:katakana-said-u	よろず屋 サンドルアなんでも そろいます！	has:산드루아	fix	lookup
+sound:katakana-said-u	「わかった。ルイベル、お願い！」	has:루이벨	fix	lookup
+sound:katakana-said-u	ルイハドコ？	has:루이	fix	lookup
+sound:katakana-said-u	スイハドコ？	has:스이	keep	lookup
+sound:katakana-said-u	グーグル・クラウド	has:구글 클라우드	keep	lookup
+sound:katakana-said-u	ルアーを投げた	has:루어	keep	lookup
+sound:katakana-said-u	一応すぐに逃げられるようにワープアイテムをショートカットには入れて。	has:워프아이템	keep	lookup

@@ -46,6 +46,7 @@ constexpr std::string_view kHiatusBefore = "アカサタナハマヤラワガザ
 // ム, ヌ and ス before ール: an English long u with l (tool, pool, rule) does not follow m, n
 // or s, so these are not the ㄹ of English words (アムール 아무르, ヌール 누르, マンスール 만수르).
 constexpr std::string_view kNonEnglishLongU = "ムヌス";
+constexpr std::string_view kSaidAfterU = "アイエオ";
 
 // The characters of s as cells; an invalid byte is the cell U+FFFD.
 void AppendCells(std::vector<std::string_view>& out, std::string_view s) {
@@ -333,10 +334,33 @@ void Run::Matrix(long cursor) {
             Replace(cursor + 1, kLongVowel, "");
             Replace(cursor + 1, kMarkRu, "");
         } else {
-            Replace(cursor, search, KanaCell(row, column));
-            Replace(cursor + 1, kLongVowel, "");
-            ApplyFinal(cursor, row);
+            // A long u inside the word is the vowel ㅜ, not the ㅡ of a u that only carries its consonant
+            // (グーグル 구글, ブーツ 부츠, セツブーン 세츠분). A mark that ends the run, a doubled mark of a drawn
+            // shout (オープーーン) and the long u of ム, ヌ or ス, read as in Japanese (スーイカ 스이카), keep ㅡ.
+            const std::string_view cell = KanaCell(row, column);
+            if (column == 2 && Vowel(cell) == kVowelEu && cursor + 2 < Size() && !Has(cursor + 2, kLongVowel) &&
+                kNonEnglishLongU.find(search) == std::string_view::npos) {
+                Replace(cursor, search, Keep(WithFinal(cell, kVowelU, 0)));
+                Replace(cursor + 1, kLongVowel, "");
+                // ン and ム close the syllable as after any other vowel (セツブーン 세츠분, カブーム 카붐),
+                // unless ー or a small vowel makes ム a syllable.
+                if (Has(cursor + 1, kMarkN)) {
+                    AddFinalN(cursor);
+                } else if (At(cursor + 1) == kMarkMu && !Has(cursor + 2, kLongVowel) &&
+                           (At(cursor + 2).empty() || kSmallVowels.find(At(cursor + 2)) == std::string_view::npos)) {
+                    AddFinal(cursor, 16, kMarkMu);
+                }
+            } else {
+                Replace(cursor, search, cell);
+                Replace(cursor + 1, kLongVowel, "");
+                ApplyFinal(cursor, row);
+            }
         }
+    } else if (search == kMarkRu && !next.empty() && kSaidAfterU.find(next) != std::string_view::npos) {
+        // ル before a full vowel kana other than ウ is said with its vowel, ㅜ as in a Japanese reading
+        // (ルイ 루이, マルイシ 마루이시). Other kana of the u column keep ㅡ there: before a vowel they
+        // mostly end an English word (ワープアイテム 워프아이템, ブイ 브이).
+        Replace(cursor, search, kLongRu);
     } else if (cursor >= Size() - 2 && next == kMarkRu) {
         // A u written with ㅡ keeps it before the final ㄹ (テーブル 테이블, シンプル 심플); ルル
         // stays 룰 (アルル 아룰).
@@ -390,9 +414,11 @@ void Run::Transliterate() {
             } else if (text::RuneCount(value) == 1 && At(cursor + 1) == kLongVowel) {
                 ApplyFinal(cursor, 10);
             }
-            // A ン after the syllable, or after the long mark it drops, is its final ㄴ
-            // (ヴァン 반, ティーン 틴).
-            if (Has(cursor + 1, kMarkN) && text::RuneCount(value) == 1) AddFinalN(cursor);
+            // A ン after the last syllable, or after the long mark it drops, is its final ㄴ
+            // (ヴァン 반, ティーン 틴, ザクリン 자크린, ザクリーン 자크린).
+            const long last = cursor + static_cast<long>(text::RuneCount(value)) - 1;
+            if (!value.empty() && At(last + 1) == kLongVowel && Has(last + 2, kMarkN)) Replace(last + 1, kLongVowel, "");  // ザクリーン 자크린
+            if (!value.empty() && Has(last + 1, kMarkN)) AddFinalN(last);
             direct = true;
             break;
         }

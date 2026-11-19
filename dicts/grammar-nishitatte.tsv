@@ -1,0 +1,4 @@
+#! layer=words
+# それにしたって: 양보의 접속사 `그렇다 해도`(GRM-4201)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+それにしたって	그렇다 해도	C300			GN			GRM-4201 それにしたって는 앞말을 받아 양보하는 그렇다 해도				x5:nishitatte:1

@@ -204,10 +204,10 @@ std::string RemapEndingClass(std::string_view suffix) {
     return out;
 }
 
-// The quoting endings 다고, 다는, 다면, 다니, 다며 and 다더 at the start of s, without
-// their 다, and the text after them.
+// The quoting endings 다고, 다는, 다면, 다니, 다며, 다더, 다든 and 다던 at the start of s, without
+// their 다, and the text after them (the copula takes 라 before them: 이라든가, 아니라던가).
 bool CutQuoting(std::string_view s, std::string_view& quoted, std::string_view& rest) {
-    for (const std::string_view q : {"다고", "다는", "다면", "다니", "다며", "다더"}) {
+    for (const std::string_view q : {"다고", "다는", "다면", "다니", "다며", "다더", "다든", "다던"}) {
         if (s.starts_with(q)) {
             quoted = q.substr(std::string_view("다").size());
             rest = s.substr(q.size());

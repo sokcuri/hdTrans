@@ -1,0 +1,24 @@
+#! layer=pack
+# 목적어, 앞뒤 말로 뜻을 고르는 한자 낱말과 연어 (LEX-6652)
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+crit-lex:2	sense	知れる	v1	colloc	たかが知れる		뻔하다	70	LEX-6652	crit	たかが知れている 뻔하다
+crit-lex:3	sense	就く|つく	v5	colloc	ポストに就く|ポストにつく		직책을 맡다	70	LEX-6652	crit	重要なポストに就く 중요한 직책을 맡다
+crit-lex:6	sense	年	n	colloc	もういい年		이제 적지 않은 나이	70	LEX-6652	crit	もういい年だ 이제 적지 않은 나이다
+crit-lex:7	sense	前	n	frame	next=を after=、|。|「|『|（|…|は|も|が|に|で|と|て|ば|ら|から|まで|として|では|には|とは		앞		LEX-6652	crit	前を歩く人 앞을 걷는 사람
+crit-lex:8	sense	前	n	frame	next=を pred=上回る|下回る|超える|越える		-		LEX-6652	crit	前を上回る 전을 웃돈다
+crit-lex:9	sense	額	n	frame	pred=足りる|足りない|不足|増える|減る|膨らむ|上回る|下回る|超える after=、|。|「|『|（|…|は|も|が|に|で|と|て|ば|ら|から|まで|として|では|には|とは|全体として|総じて|まだ|なお|少し|やや|かなり|大幅に|全然		액수		LEX-6652	crit	額が足りない 액수가 부족하다
+crit-lex:10	sense	打ち上げ	n	frame	after=と		뒤풀이		LEX-6652	crit	スタッフと打ち上げ 스태프와 뒤풀이
+crit-lex:11	sense	見舞う	v5:규칙	frame	obj=@blow|@fist|@weapon|キック|ビンタ|張り手|頭突き|肘打ち|膝蹴り|アッパー|一発|一太刀		날리다		LEX-6652	crit	パンチを見舞う 펀치를 날리다
+crit-lex:13	sense	見切る	v5	frame	obj=@blow|@weapon|攻撃|動き|太刀筋|剣筋|軌道|技|攻め|太刀|剣|拳		간파하다		LEX-6652	crit	パンチを見切る 펀치를 간파하다
+crit-lex:14	sense	押し付ける|押しつける	v1	frame	obj=@body		갖다 대다		LEX-6652	crit	顔を押しつける 얼굴을 갖다 대다
+crit-lex:15	sense	曲る	v5	frame	obj=道|角|交差点|通り|路地|十字路|カーブ head=-		돌다		LEX-6652	crit	道を曲る 길을 돌다
+crit-lex:16	sense	曲る	v5	frame	dat=右|左|角|路地|横道|脇道		돌다		LEX-6652	crit	右に曲る 오른쪽으로 돌다
+crit-lex:17	sense	見切る	v5	frame	subj=@blow|@weapon|攻撃|動き|太刀筋|剣筋|軌道|技|攻め|太刀|剣|拳		간파하다		LEX-6652	crit	パンチだけは見切れない 펀치만은 간파할 수 없다
+crit-lex:18	sense	いる	v1	colloc	たかが知れている		뻔하다	80	LEX-6652	crit	たかが知れている 뻔하다
+crit-lex:20	sense	前	n	frame	next=を after=-		앞		LEX-6652	crit	前を歩く人 앞을 걷는 사람
+crit-lex:21	sense	額	n	frame	pred=足りる|足りない|不足|増える|減る|膨らむ|上回る|下回る|超える after=-		액수		LEX-6652	crit	額が足りない 액수가 부족하다
+crit-lex:23	sense	たたえる|湛える	v1	colloc	微笑みをたたえる|微笑をたたえる|笑みをたたえる|微笑みを湛える|微笑を湛える|笑みを湛える		미소를 머금다	70	LEX-6652	crit	微笑みをたたえる 미소를 머금다
+crit-lex:24	sense	たたえる|湛える	v1	colloc	涙をたたえる|涙を湛える		눈물을 머금다	70	LEX-6652	crit	涙をたたえる 눈물을 머금다
+crit-lex:27	sense	打ち上げる	v1	frame	after=と obj=-		뒤풀이하다		LEX-6652	crit	スタッフと打ち上げに行った 스태프와 뒤풀이하러 갔다
+kanalex:7664-1	sense	はれ	n	frame	pred=引く|ひく|引ける|ひける|収まる|おさまる|治まる|ひどい|残る|酷い|冷やす|ひやす		부기		LEX-7664	hand	はれが引く 부기가 빠지다
+kanalex:7664-2	sense	はれ	n	frame	mod=足|顔|目|頬|腕|手|指|膝|唇|まぶた|喉|首|肩|歯茎|足首|手首|患部		부기		LEX-7664	hand	足のはれ 다리의 부기

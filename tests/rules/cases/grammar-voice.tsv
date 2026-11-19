@@ -39,7 +39,7 @@ voice:adverse	こんなところで商売できねえし訴えられたら困る
 voice:adverse	早く寝られたらいいな。	빨리 잘 수 있으면 좋겠다.	keep	voice
 voice:spontaneous	将来が案じられる。	장래가 염려된다.	fix	voice
 voice:spontaneous	彼の未来が案じられる。	그의 미래가 염려된다.	fix	voice
-voice:spontaneous	春の気配が感じられる。	봄의 기색이 느껴진다.	keep	voice
+voice:spontaneous	春の気配が感じられる。	봄기운이 느껴진다.	keep	voice
 voice:spontaneous	刺身は食べられない。	생선회는 먹을 수 없다.	keep	voice
 voice:listener	戦果をご確認されますか？	전과를 확인하시겠습니까?	fix	voice
 voice:listener	艦隊の運営状況を確認されますか？	함대의 운영 상황을 확인하시겠습니까?	fix	voice

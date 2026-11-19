@@ -62,7 +62,7 @@
 //= word.archaic-person	Words for oneself or the listener in old or role speech, as the analysis splits them (拙者, わらわ, 余は, お主, そなた): a line with one is old speech, where the word stage writes its sentence ends in 하오 or plain -다 forms (spec REG-24).
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
-//= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
+//= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다). Also kana spellings of nouns that head a compound with a kanji word (ねんど遊び 점토 놀이, ぱんつ一丁 팬티 바람).
 //= word.adnominal-before-noun	Adnominals that only a noun can follow: a kana noun spelled like a verb form reads as the noun after them (そのかえるは 그 개구리는, あのつきは 저 달은; LEX-5925).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
 //= noun.same-attribute	Nouns of an outcome or a view two people or things can share (結果, 気持ち, 意見), after which 一緒 with は, が or も is 마찬가지 (結果は一緒 결과는 마찬가지).
@@ -78,6 +78,7 @@
 //= aux.give-after-neg	Giving and request auxiliaries after a negative ないで (くれる, くださる, ちょうだい, いただける, もらえる, もらいたい): the ないで is a request not to act or what one does not do for someone (spec LEX-5050).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
+//= aux.head-through	Surfaces of the auxiliaries written right after a stem through which the predicate still modifies the noun after them (甘すぎるケーキ 너무 단 케이크, 高すぎる本; spec LEX-7151).
 //= aux.te-through	Surfaces of the auxiliaries after a て form through which the predicate still modifies the noun after them (伸びてくる指先 뻗어 오는 손끝, 伸びている指).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
@@ -128,6 +129,11 @@
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
 //= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
+//= ending.conditional-in-clause	Ends of a conditional clause in the run between a が and a final な (惜しければ, あるなら, 読んだら, 泳いでも; a voiced でも or だら carries its joint ん or い, so 何でも and いつでも are none): the が is the subject of that clause, so the な of the verb after it keeps the prohibition and the normalizer makes no exclamation なあ of it (命が惜しければ動くな 움직이지 마).
+//= ending.conditional-after-joint	Ends of a conditional clause that count in the run between a が and a final な only after a conjugation joint, a kanji or a kana of the i or e row, っ or the く of an adjective (降ったら, 見ても, 食べたら, 高くても; not とても or やたら).
+//= ending.conditional-lookalike	Words inside the run between a が and a final な that hold the end of a conditional clause at a joint but are not one (例えば, なんでも, とっても): the run skips them.
+//= word.felt-before-na	Verbs of a feeling or a reaction (照れる), the mimetic words and verbal nouns before their する (ワクワク, 緊張, 感動) and 久しぶり before a verb: a lengthened なぁ before ！ after them voices what the speaker feels (ワクワクするなぁ！ 두근두근하네!, 久しぶりに会うなぁ！ 오랜만에 만나네!), not a prohibition; a plain な！ stays one (緊張するな！ 긴장하지 마!).
+//= ko-root.felt-mimetic	Korean mimetic words of a feeling that the sound stage writes for a Japanese one before する (ワクワク, ドキドキ 두근두근, ゾクゾク 오싹오싹): the word.felt-before-na rule for a lengthened なぁ！ after them.
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった), ながら and たまま, said of what is done to one while or after (見られながら 보이면서, 着せられたまま); spec LEX-6021).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.rare-negative	The negative forms after られ, which make a dictionary word in the られ of くる the potential (連れてこられない, 連れてこられません).
@@ -136,7 +142,7 @@
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= ending.voice-condition	Conditions and concessions after (ら)れ: when the main clause is a trouble of stem.adverse-outcome the (ら)れ is the passive (見られたら困る), and a word of word.ability-scope before one makes no potential (誰だってそう言われたら).
 //= ending.voice-desire	Forms of wanting after (ら)れ, which only the passive takes (褒められたい, 見られたくない).
-//= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる).
+//= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる), and かね of what may well happen after (ら)れ or せ (誤解されかねない, 狂わせかねない -게 할 수도 있다; LEX-7507).
 //= ending.voice-polite	Polite forms after (ら)れ; in a question with no subject they ask the listener, whose act the (ら)れ honours (何を読まれているんですか 무엇을 읽고 계십니까).
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
@@ -161,6 +167,8 @@
 //= follower.quoting-to	The と that quotes the katakana run before it, which leaves the run a sound (メキメキという, ゴロゴロと言う).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= follower.continuative-only	What follows a verb's continuative and no noun without a particle, beside suffix.continuative: そう of seeming, ながら, やすい, にくい, づらい and たい (雨降りそう 비가 올 것 같다; spec LEX-5810).
+//= follower.compound-second	Starts of the second verb of a compound that a verb's continuative runs into without a particle, beside follower.continuative-only, suffix.continuative and suffix.compound-action (縫い + 込んだ, 呼び + 合う, 摘み + 取る, 誘き + 寄せる, 書き + 出す, 使い + 切る): after an adjective the continuative stays the verb, not the noun the adjective describes (すごい呼び合う; spec GRM-4350).
+//= follower.copula-after-sou	What follows the そう after a kana stem in だ whose continuative is a noun and makes it the hearsay そうだ after the copula, not a volitional (彼の考えだそうだ 그의 생각이라고 한다, 流れだそうです; spec LEX-7480).
 //= follower.weather-continuative	Starts of the second verb of a compound after the continuative of a weather noun (雨降り + 出した, 雪降り + 続いてる, 雨降り + やまない, 雨降り + しきる): the noun is the subject and the compound its verb (雨 + 降り出した 비가 내리기 시작했다; spec LEX-5810).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.te-verb	Starts of the text after the て form or the ないで of a verb spelled in hiragana that ask someone to act or go on as the verb, before which a longer word that spells that form gives way to the verb (おきてください, かえってきた, こないでね; LEX-5921). A past or a progressive counts only before a mark (かえってた。, but かえってたいへん).
@@ -168,6 +176,8 @@
 //= word.te-alone	Words that spell the て form of a verb in hiragana and close an utterance as themselves (はじめて！ 처음, 「はじめて」): they give way to the verb only before a start of follower.te-request or after a lead of lead.te-request or a noun (さあ、はじめて！, 発艦はじめて！; LEX-5923).
 //= lead.te-request	Words at the start of a clause that urge the listener (さあ, ほら, はやく): a word of word.te-alone at the end of that clause is the verb asked for (さあ、はじめて！ 자, 시작해!; LEX-5923).
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
+//= stem.taru-final	Last characters of an adjectival-noun stem whose と is the と of manner before any verb, not a quote (飄々と歩いた, 汲々と働く, 漂然と現れた; spec LEX-7600).
+//= follower.taru-to	What follows the と of an adjectival-noun stem that is not a quote but the stem's own と before する or なる (飄々とした, 切実となって): the kana that start their forms (spec LEX-7600).
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
 //= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん; not たまごっち, 顔合わせたんだ, 母たんこぶ).
@@ -205,6 +215,7 @@
 //= name.common-predicate	Predicates in the clause after a common word and が, は or も that keep its common sense though the document names the word: a measure or the light of the sun (敏捷が特筆して高い, 力が強い, 朝日が眩しい; spec LEX-5175).
 //= name.common-after	Starts of the text after a common word that keep its common sense though a cue or the document names the word: weather, the sky or the sea (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる), the light of the sun (朝日を浴びる) strength (力を込める, 力が抜ける), the parts and shade of a tree (樹の根本, 樹の下で休む), flowers in bloom (桜が咲いた), the ground (大地が揺れる), the top and foot of a mountain and the far end of a distance (高峰の頂, 千里の彼方), a distance run (千里を駆けた, 悪事千里を走る) and a crest (葵の紋; spec LEX-5175).
 //= name.plant-after	Starts of the text after a word whose common sense is a plant (玉藻 말, 撫子) that keep the plant though the document names the word: clinging, floating, drifting and growing (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
+//= name.common-word-context	A common word that is also a name (桜, 光, 空, ミルク) with the start of the text after it that keeps the common word, one row each, the word in the note (桜が咲いた, 空を見上げる, ミルクを飲む): no name there unless the line calls the word with an honorific or as a speaker label.
 //= name.family-after	Words of a house or a family after a kanji name of two characters or more that make it a family name, for the line and the document (園崎本家 소노자키 본가, 古手家, 竜宮家, 古手夫妻; spec LEX-4826).
 //= name.rank-after	Ranks of the police and the army and academic titles after a kanji name of two characters or more that make it a person's surname, for the line and the document (滝本警部 타키모토 경감, 高野警部; spec LEX-4831).
 //= name.person-belonging	What a person has or does, after a common word and の that the document names: the word is the person there (小太刀の家 코다치의 집, 樹の声; spec LEX-5175).
@@ -302,6 +313,11 @@
 //= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
 //= adjective.character	Stems of adjectives and adjectival nouns of a trait or an attitude of a person, after which ところ is a side of that person, 면 (傲慢なところ 오만한 면, 優しいところ 다정한 면).
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
+//= adjective.ku-greeting	く forms of adjectives that are a greeting of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?; ヤバくね？ 위험하지 않아?).
+//= adjective.ku-request	く forms of adjectives that make a request of their own with ね？ where no topic or subject comes before them in the sentence (そっと、優しくね？ 부드럽게 해?, みんなで楽しくね？); after one they are the cut negative くない (あいつ、優しくね？ 다정하지 않아?).
+//= adverb.western-kosoado	The western こ, そ, ど words in がん and げん, the note the plain adverb they stand for before the copula or a sentence particle that ends the sentence (そがんです 그래요, そがんね 그래, こげんか); before a verb or a noun the word stage reads them (そがん人 그런 사람).
+//= conjunction.archaic-start	Old conjunctions read only where they open a sentence or a quote, longest first, the note their plain form (されば、行こう 그러니까, 가자); inside a sentence they are verb forms and stay (攻撃されば, 大人になれど, お出で下されば).
+//= tail.negative-ni	Tails that begin with に after a negative in ない and make a construction of it (来ないに決まってる, 来ないにしても, 誰も来ないに越したことはない): こないに before them is 来ないに, not the Kansai こんなに (こないに大きい).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
@@ -457,6 +473,7 @@
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.after-space	Sentence-final particles that a single space may set apart from the predicate they end, before a mark or the end of the line (そうだ ね……, いい ね――): that space parts no words.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
+//= particle.before-kana-compound	Particles of a verb's argument, and the く of an adverb, right before a kana stem in だ whose continuative is a noun, after which its bare し is the verb (体を乗りだし、 몸을 내밀고), not the し after a copula (いい考えだし 좋은 생각이고; spec LEX-7480).
 //= particle.before-verdict	Particles after which あり and なし of word.copula-verdict before a copula are a verdict, 괜찮다 and 안 되다, not a label of the word before (それもありだな, それってありなの, それはそれでありだな; spec LEX-5112).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
@@ -487,6 +504,7 @@
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+//= question.ko	Korean question words. A dictionary word longer than the question word it starts with asks only where its Korean reading has one of them (何度 몇 번, どういうこと 무슨 뜻; not どうぐや 고물상, どうろ 도로, いくら丼, 何一つ 아무것도 or a name).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= script.chinese-particle	Sentence particles of Chinese that Japanese text never writes (嗎, 呢, 啊): a Han run holding one is Chinese (spec LAY-17).
 //= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 意思是, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
@@ -557,6 +575,7 @@
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
+//= suffix.kanji-noun	Kanji that end a compound noun as a suffix where the dictionary gives them no suffix code Z7 (同僚 + 艦, 珊瑚 + 諸島, 清流 + 線, 高層 + 階, 冠水 + 路, 白金 + 色, 地中海 + 風, 島 + 沖, 同盟国 + 軍, 甲斐国 + 主, 善人 + 面, 外国人 + 数, 生徒会 + 報): in a run of kanji the cover of fewest loose kanji reads them bound to the word before (spec LEX-6350), also where the run goes on after a kanji word read before them (同志 + 国 + 連携; LEX-7051).
 //= suffix.label-parent	Ends of a speaker label Xの父 that name a relative of the name X (アリスの母).
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
@@ -984,6 +1003,8 @@ aux.te-through	行く
 aux.te-through	お
 aux.te-through	おり
 aux.te-through	居
+aux.head-through	すぎ
+aux.head-through	過ぎ
 aux.te-kana-stem	い
 aux.te-kana-stem	み
 aux.te-kana-stem	き
@@ -1836,6 +1857,7 @@ ending.voice-readily	過ぎ
 ending.voice-readily	づら
 ending.voice-readily	続け
 ending.voice-readily	つづけ
+ending.voice-readily	かね
 
 ending.voice-polite	ます
 ending.voice-polite	まし
@@ -2058,6 +2080,164 @@ follower.continuative-only	づらかっ
 follower.continuative-only	たい
 follower.continuative-only	たく
 follower.continuative-only	たかっ
+follower.compound-second	込む
+follower.compound-second	込ん
+follower.compound-second	込ま
+follower.compound-second	込み
+follower.compound-second	込め
+follower.compound-second	込も
+follower.compound-second	こむ
+follower.compound-second	こんだ
+follower.compound-second	こんで
+follower.compound-second	こまれ
+follower.compound-second	こまな
+follower.compound-second	こみ
+follower.compound-second	こめ
+follower.compound-second	合う
+follower.compound-second	合っ
+follower.compound-second	合わ
+follower.compound-second	合い
+follower.compound-second	合え
+follower.compound-second	合お
+follower.compound-second	あう
+follower.compound-second	あった
+follower.compound-second	あって
+follower.compound-second	あわ
+follower.compound-second	あえ
+follower.compound-second	出す
+follower.compound-second	出し
+follower.compound-second	出さ
+follower.compound-second	出せ
+follower.compound-second	出そ
+follower.compound-second	取る
+follower.compound-second	取っ
+follower.compound-second	取ら
+follower.compound-second	取り
+follower.compound-second	取れ
+follower.compound-second	取ろ
+follower.compound-second	寄せ
+follower.compound-second	寄る
+follower.compound-second	寄っ
+follower.compound-second	寄ら
+follower.compound-second	切る
+follower.compound-second	切っ
+follower.compound-second	切ら
+follower.compound-second	切り
+follower.compound-second	切れ
+follower.compound-second	切ろ
+follower.compound-second	続く
+follower.compound-second	続い
+follower.compound-second	続か
+follower.compound-second	続き
+follower.compound-second	終わ
+follower.compound-second	終え
+follower.compound-second	直す
+follower.compound-second	直し
+follower.compound-second	直さ
+follower.compound-second	直せ
+follower.compound-second	返す
+follower.compound-second	返し
+follower.compound-second	返さ
+follower.compound-second	返せ
+follower.compound-second	抜く
+follower.compound-second	抜い
+follower.compound-second	抜か
+follower.compound-second	抜け
+follower.compound-second	抜き
+follower.compound-second	上げ
+follower.compound-second	上が
+follower.compound-second	回す
+follower.compound-second	回し
+follower.compound-second	回る
+follower.compound-second	回っ
+follower.compound-second	回ら
+follower.compound-second	回り
+follower.compound-second	忘れ
+follower.compound-second	損ね
+follower.compound-second	損な
+follower.compound-second	慣れ
+follower.compound-second	通す
+follower.compound-second	通し
+follower.compound-second	通さ
+follower.compound-second	尽く
+follower.compound-second	落と
+follower.compound-second	遅れ
+follower.compound-second	疲れ
+follower.compound-second	飽き
+follower.compound-second	渡す
+follower.compound-second	渡し
+follower.compound-second	渡っ
+follower.compound-second	渡ら
+follower.compound-second	渡る
+follower.compound-second	渡り
+follower.compound-second	入れ
+follower.compound-second	入る
+follower.compound-second	入っ
+follower.compound-second	ださ
+follower.compound-second	だす
+follower.compound-second	だせ
+follower.compound-second	だした
+follower.compound-second	だして
+follower.compound-second	だしま
+follower.compound-second	だしちゃ
+follower.compound-second	だしそう
+follower.compound-second	だしなが
+follower.compound-second	だしかけ
+follower.compound-second	だしはじ
+follower.compound-second	かえさ
+follower.compound-second	かえし
+follower.compound-second	かえす
+follower.compound-second	かえせ
+follower.compound-second	かえそ
+follower.compound-second	かえっ
+follower.compound-second	かえら
+follower.compound-second	かえり
+follower.compound-second	かえる
+follower.compound-second	かえれ
+follower.compound-second	かえて
+follower.compound-second	かえた
+follower.compound-second	かえな
+follower.compound-second	かえま
+follower.compound-second	とばさ
+follower.compound-second	とばし
+follower.compound-second	とばす
+follower.compound-second	とばせ
+follower.compound-second	とばそ
+follower.compound-second	とった
+follower.compound-second	とって
+follower.compound-second	とっちゃ
+follower.compound-second	とらな
+follower.compound-second	とらず
+follower.compound-second	とらせ
+follower.compound-second	とられ
+follower.compound-second	とりま
+follower.compound-second	とりた
+follower.compound-second	とりそう
+follower.compound-second	とりなが
+follower.compound-second	とりかけ
+follower.compound-second	とりはじ
+follower.compound-second	とる
+follower.compound-second	とれる
+follower.compound-second	とれな
+follower.compound-second	とれず
+follower.compound-second	とれた
+follower.compound-second	とれて
+follower.compound-second	とれば
+follower.compound-second	とれま
+follower.compound-second	もどさ
+follower.compound-second	もどし
+follower.compound-second	もどす
+follower.compound-second	もどせ
+follower.compound-second	もどそ
+follower.compound-second	もどっ
+follower.compound-second	もどら
+follower.compound-second	もどり
+follower.compound-second	もどる
+follower.compound-second	もどれ
+follower.copula-after-sou	だ
+follower.copula-after-sou	で
+follower.copula-after-sou	な
+follower.copula-after-sou	じゃ
 follower.weather-continuative	出
 follower.weather-continuative	だし
 follower.weather-continuative	だす
@@ -2242,6 +2422,13 @@ follower.verbal-noun	も
 follower.verbal-noun	で
 follower.verbal-noun	と
 follower.verbal-noun	へ
+follower.taru-to	し
+follower.taru-to	す
+follower.taru-to	さ
+follower.taru-to	せ
+follower.taru-to	な
+stem.taru-final	々
+stem.taru-final	然
 
 honorific.candidate	さん
 honorific.candidate	様
@@ -2769,6 +2956,48 @@ name.plant-after	が茂
 name.plant-after	の茂る
 name.plant-after	が枯れ
 name.plant-after	が芽吹
+name.common-word-context	桜の花	桜
+name.common-word-context	桜の木	桜
+name.common-word-context	桜が咲	桜
+name.common-word-context	桜が散	桜
+name.common-word-context	桜並木	桜
+name.common-word-context	桜吹雪	桜
+name.common-word-context	桜の季節	桜
+name.common-word-context	光が差	光
+name.common-word-context	光が射	光
+name.common-word-context	光を浴び	光
+name.common-word-context	光を放	光
+name.common-word-context	光が漏れ	光
+name.common-word-context	光の中	光
+name.common-word-context	空を見上げ	空
+name.common-word-context	空が青	空
+name.common-word-context	空は青	空
+name.common-word-context	空を飛	空
+name.common-word-context	空に浮か	空
+name.common-word-context	空が晴れ	空
+name.common-word-context	空が曇	空
+name.common-word-context	雪が降	雪
+name.common-word-context	雪が積も	雪
+name.common-word-context	雪が溶け	雪
+name.common-word-context	雨が降	雨
+name.common-word-context	雨が止	雨
+name.common-word-context	時雨が降	時雨
+name.common-word-context	小鳥のさえずり	小鳥
+name.common-word-context	小鳥たち	小鳥
+name.common-word-context	小鳥が鳴	小鳥
+name.common-word-context	ミルクを	ミルク
+name.common-word-context	ミルクティー	ミルク
+name.common-word-context	翼を広げ	翼
+name.common-word-context	翼が生え	翼
+name.common-word-context	花が咲	花
+name.common-word-context	花を摘	花
+name.common-word-context	月が出	月
+name.common-word-context	月が昇	月
+name.common-word-context	月明かり	月
+name.common-word-context	植木に水	植木
+name.common-word-context	植木の手入れ	植木
+name.common-word-context	入江に船	入江
+name.common-word-context	赤松の林	赤松
 name.person-hair	髪
 name.person-hair	前髪
 name.person-hair	髪の毛
@@ -6490,6 +6719,16 @@ particle.before-predicate	の
 particle.before-predicate	は
 particle.before-predicate	が
 particle.before-predicate	も
+particle.before-kana-compound	を
+particle.before-kana-compound	が
+particle.before-kana-compound	に
+particle.before-kana-compound	へ
+particle.before-kana-compound	と
+particle.before-kana-compound	て
+particle.before-kana-compound	から
+particle.before-kana-compound	まで
+particle.before-kana-compound	より
+particle.before-kana-compound	く
 
 particle.case-before-stem	を
 particle.case-before-stem	に
@@ -6825,6 +7064,29 @@ question.wonder	いったい
 question.wonder	いくつ
 question.wonder	いくら
 
+question.ko	뭐
+question.ko	뭣
+question.ko	무엇
+question.ko	무슨
+question.ko	몇
+question.ko	며칠
+question.ko	누구
+question.ko	누가
+question.ko	어디
+question.ko	언제
+question.ko	왜
+question.ko	웬
+question.ko	어느
+question.ko	어떤
+question.ko	어떻
+question.ko	어떠
+question.ko	어때
+question.ko	어땠
+question.ko	어떨
+question.ko	어째
+question.ko	어찌
+question.ko	얼마
+
 question.wonder-not	何か
 question.wonder-not	何も
 question.wonder-not	何でも
@@ -6893,6 +7155,9 @@ question.wonder-not	何度と無く
 question.wonder-not	どれでも
 question.wonder-not	いくらか
 question.wonder-not	いくらでも
+question.wonder-not	いくら丼	LEX-7401: salmon roe, no question
+question.wonder-not	いくら醤油	LEX-7401
+question.wonder-not	いくらの醤油	LEX-7401
 question.wonder-not	どうと言う事のない	LEX-4356: of no account, no question
 question.wonder-not	どうという事のない	LEX-4356
 question.wonder-not	どうということのない	LEX-4356
@@ -11217,6 +11482,53 @@ ending.no-exclamation-na	よう
 ending.no-exclamation-na	そう
 ending.no-exclamation-na	です
 ending.no-exclamation-na	ます
+ending.conditional-in-clause	れば
+ending.conditional-in-clause	えば
+ending.conditional-in-clause	けば
+ending.conditional-in-clause	げば
+ending.conditional-in-clause	せば
+ending.conditional-in-clause	てば
+ending.conditional-in-clause	ねば
+ending.conditional-in-clause	べば
+ending.conditional-in-clause	めば
+ending.conditional-in-clause	ければ
+ending.conditional-in-clause	んだら
+ending.conditional-in-clause	いだら
+ending.conditional-in-clause	なら
+ending.conditional-in-clause	んでも
+ending.conditional-in-clause	いでも
+ending.conditional-after-joint	たら
+ending.conditional-after-joint	ても
+ending.conditional-lookalike	例えば
+ending.conditional-lookalike	たとえば
+ending.conditional-lookalike	なんでも
+ending.conditional-lookalike	とんでも
+ending.conditional-lookalike	とっても
+word.felt-before-na	照れる
+word.felt-before-na	てれる
+word.felt-before-na	テレる
+word.felt-before-na	ワクワク
+word.felt-before-na	わくわく
+word.felt-before-na	ドキドキ
+word.felt-before-na	どきどき
+word.felt-before-na	ゾクゾク
+word.felt-before-na	ぞくぞく
+word.felt-before-na	ウキウキ
+word.felt-before-na	うきうき
+word.felt-before-na	ハラハラ
+word.felt-before-na	はらはら
+word.felt-before-na	ヒヤヒヤ
+word.felt-before-na	ひやひや
+word.felt-before-na	緊張
+word.felt-before-na	感動
+word.felt-before-na	興奮
+word.felt-before-na	久しぶり
+word.felt-before-na	ひさしぶり
+word.felt-before-na	久し振り
+word.felt-before-na	久々
+ko-root.felt-mimetic	두근두근
+ko-root.felt-mimetic	오싹오싹
+ko-root.felt-mimetic	조마조마
 ending.nominal	さ=8
 ending.nominal	み=8
 adverb.negative-polarity	二度と
@@ -11263,6 +11575,9 @@ word.scold	コラコラ
 word.scold	こらっ
 word.scold	コラッ
 word.kana-before-word	みな
+word.kana-before-word	ねんど
+word.kana-before-word	ぱんつ
+word.kana-before-word	あやとり
 word.adnominal-before-noun	この
 word.adnominal-before-noun	その
 word.adnominal-before-noun	あの
@@ -14684,3 +14999,356 @@ question.kansai-yanen	何	だよ
 question.kansai-yanen	なん	だよ
 question.kansai-yanen	なに	だよ
 question.kansai-yanen	どう	なんだよ
+verb.intransitive-godan	着かれ
+verb.intransitive-godan	泣かれ
+verb.passive-after-object	なめ
+verb.passive-after-object	ナメ
+//= verb.thing-object	The (ら)れ stems of verbs whose object is a thing, words, a plan, a task or a post and never a person (書かれ, 述べられ, 決められ, 辞められ, 始められ): an honoured subject with no object before one did the act, respectful (部長が辞められた 그만두셨다, 先生の書かれた本 쓰신 책; spec GRM-4250). A verb not here keeps the passive there (先生が叱られた, 社長が突き飛ばされた), and an ichidan negative stays the potential (社長は決められない 결정할 수 없다).
+verb.thing-object	書かれ
+verb.thing-object	描かれ
+verb.thing-object	記され
+verb.thing-object	読まれ
+verb.thing-object	よまれ
+verb.thing-object	述べられ
+verb.thing-object	のべられ
+verb.thing-object	語られ
+verb.thing-object	かたられ
+verb.thing-object	決められ
+verb.thing-object	きめられ
+verb.thing-object	定められ
+verb.thing-object	さだめられ
+verb.thing-object	辞められ
+verb.thing-object	やめられ
+verb.thing-object	始められ
+verb.thing-object	はじめられ
+verb.thing-object	終えられ
+verb.thing-object	おえられ
+verb.thing-object	使われ
+verb.thing-object	つかわれ
+verb.thing-object	作られ
+verb.thing-object	つくられ
+verb.thing-object	建てられ
+verb.thing-object	開かれ
+//= ending.rare-te-leave	Forms after られ that start with the て of ending.rare-passive but are て and another word, a leave or a gladness, no ている (食べられていい 먹을 수 있어서 좋다; spec GRM-4252).
+ending.rare-te-leave	ていい
+//= ending.done-to-passive	Forms after られ of a manner clause, going along with what is done (られるまま, られるがまま): passive for a verb of an act done to someone (DoneToSomeone, verb.led-passive: 連れられるまま 이끌리는 대로), the potential for any other (食べられるままに 먹을 수 있는 대로; spec GRM-4252).
+ending.done-to-passive	るまま
+ending.done-to-passive	るがまま
+//= verb.led-passive	Ichidan stems of leading, holding or handling someone whose られるまま is being led or held along (連れられるまま 이끌리는 대로, 抱きしめられるがまま 안기는 대로; spec GRM-4252).
+verb.led-passive	連れ
+verb.led-passive	引き連れ
+verb.led-passive	抱きしめ
+verb.led-passive	抱き締め
+verb.led-passive	抱き寄せ
+verb.led-passive	勧め
+//= ending.reported-past	Forms after the られ of an ichidan verb in a report, the polite past (ました): GRM-4251 reads it respectful when nothing else decides; ending.reported-past-not lists the forms that start alike and are not it.
+ending.reported-past	ました
+//= ending.reported-past-not	Forms that start like ending.reported-past and are a condition, not a report (ましたら).
+ending.reported-past-not	ましたら
+//= adverb.managed	Words of getting something done in the end or thanks to help (なんとか, どうにか, 無事, おかげで): a られました after one in its sentence is what one could do, the potential (なんとか宿題を終えられました 끝낼 수 있었습니다; spec GRM-4251).
+adverb.managed	なんとか
+adverb.managed	何とか
+adverb.managed	どうにか
+adverb.managed	どうにかこうにか
+adverb.managed	無事
+adverb.managed	無事に
+adverb.managed	おかげ
+adverb.managed	お陰
+adverb.managed	お蔭
+adverb.managed	おかげさま
+adverb.managed	お陰様
+adverb.managed	おかげで
+adverb.managed	お陰で
+adverb.managed	お蔭で
+adverb.managed	おかげさまで
+adverb.managed	お陰様で
+//= ending.rare-voice	The られ that follows an ichidan stem within its word: a verb sense whose triggers follow the verb (連れて歩く 데리고 걷다) is not of its passive or potential (連れられるまま歩いた 이끌리는 대로).
+ending.rare-voice	られ
+//= ending.noun-slot	What ends the text right before a kana stem in だ whose first reading is a -기 시작하다 and makes the stem a noun before the copula: の, the attributive い and な, and the prefixes お and ご (ただの笑いだし 그냥 웃음이고; not 彼は笑いだし 웃기 시작해; spec LEX-7480).
+ending.noun-slot	の
+ending.noun-slot	い
+ending.noun-slot	な
+ending.noun-slot	お
+ending.noun-slot	ご
+//= verb.belittle-passive	The kana stems of なめる, ナメる, which mostly belittle: their られ with no object in its clause is being looked down on in the negative and the condition too (ナメられたら 얕보이면; spec GRM-4252). The kanji 舐め mostly licks and is not here (そんなに舐められたら).
+verb.belittle-passive	なめ
+verb.belittle-passive	ナメ
+suffix.kanji-noun	艦
+suffix.kanji-noun	島
+suffix.kanji-noun	線
+suffix.kanji-noun	階
+suffix.kanji-noun	色
+suffix.kanji-noun	風
+suffix.kanji-noun	沖
+suffix.kanji-noun	軍
+suffix.kanji-noun	主
+suffix.kanji-noun	面
+suffix.kanji-noun	数
+suffix.kanji-noun	報
+suffix.kanji-noun	国
+suffix.kanji-noun	路
+adjective.ku-greeting	よろしく
+adjective.ku-greeting	宜しく
+adjective.ku-request	優しく
+adjective.ku-request	やさしく
+adjective.ku-request	楽しく
+adjective.ku-request	たのしく
+adjective.ku-request	仲良く
+adjective.ku-request	なかよく
+adjective.ku-request	大人しく
+adjective.ku-request	おとなしく
+adverb.western-kosoado	こがん	こう
+adverb.western-kosoado	そがん	そう
+adverb.western-kosoado	どがん	どう
+adverb.western-kosoado	こげん	こう
+adverb.western-kosoado	そげん	そう
+adverb.western-kosoado	どげん	どう
+conjunction.archaic-start	さればこそ	だからこそ
+conjunction.archaic-start	されば	だから
+conjunction.archaic-start	なれども	だが
+conjunction.archaic-start	なれど	だが
+tail.negative-ni	に決ま
+tail.negative-ni	にきま
+tail.negative-ni	に違い
+tail.negative-ni	にちがい
+tail.negative-ni	に越し
+tail.negative-ni	にこし
+tail.negative-ni	にしても
+tail.negative-ni	にしたって
+tail.negative-ni	にせよ
+tail.negative-ni	にしろ
+tail.negative-ni	に限る
+tail.negative-ni	にかぎる
+//= noun.part-of	Nouns of a part or share of something, matched whole, that are no place one arrives at, so a について after them is 대해 (同町内の一部について解除する 같은 마을 안의 일부에 대해 해제한다; spec LEX-6500).
+noun.part-of	一部
+noun.part-of	一部分
+noun.part-of	部分
+noun.part-of	大部分
+noun.part-of	半分
+noun.part-of	大半
+noun.part-of	全部
+noun.part-of	全体
+noun.part-of	残り
+noun.part-of	一角
+noun.part-of	一端
+noun.part-of	一環
+//= noun.round-trip-head	Starts of the nouns a 巡る describes when it is a trip round places, a route or a span of time (「聖地」を巡る旅), after which it stays 돌다 even after a quoted issue (spec LEX-6501).
+noun.round-trip-head	旅
+noun.round-trip-head	ツアー
+noun.round-trip-head	道
+noun.round-trip-head	コース
+noun.round-trip-head	ルート
+noun.round-trip-head	こと
+noun.round-trip-head	事
+noun.round-trip-head	間
+noun.issue-over	解任
+noun.issue-over	辞任
+noun.issue-over	関税
+noun.issue-over	改憲
+noun.issue-over	憲法
+noun.issue-over	発言
+noun.issue-over	失言
+noun.issue-over	選挙
+noun.issue-over	法案
+noun.issue-over	判決
+noun.issue-over	再編
+noun.issue-over	移転
+noun.issue-over	統合
+noun.issue-over	合併
+noun.issue-over	買収
+noun.issue-over	不正
+noun.issue-over	汚職
+noun.issue-over	献金
+noun.issue-over	不祥事
+noun.issue-over	規制
+noun.issue-over	賠償
+noun.issue-over	補償
+noun.issue-over	改正
+noun.issue-over	増税
+noun.issue-over	減税
+noun.issue-over	年金
+noun.issue-over	補助金
+noun.issue-over	給付金
+noun.issue-over	人選
+noun.issue-over	起用
+noun.issue-over	去就
+noun.issue-over	進退
+noun.issue-over	采配
+
+//= name.bare-particle	Particles after a kana name the document gives only before an honorific that make its bare use at a clause start the name too (なぎささん … なぎさが来た, なぎさは, なぎさって; not なぎさを歩いた; spec LEX-6300).
+//= name.bare-particle-predicate	The particles of name.bare-particle that no plain predicate form takes, the only ones after such a name that is also a verb or adjective form (のぼるさん … のぼるは; not ひかると, のぼるのが; spec LEX-6300).
+//= honorific.kana-call	Honorifics of a call after which a whole run of two to four kana that is a common word or a verb form is a person's name (つきさん, かなえちゃん, ひさしくん; spec LEX-6301).
+name.bare-particle	は
+name.bare-particle	が
+name.bare-particle	も
+name.bare-particle	と
+name.bare-particle	って
+name.bare-particle-predicate	は
+honorific.kana-call	さん
+honorific.kana-call	ちゃん
+honorific.kana-call	くん
+honorific.kana-call	君
+//= name.bare-person-move	Starts of a coming or going after the particle of a kana name the document gives before an honorific that make the bare name the person who comes or goes, as no common word it spells does (なぎさが来た, ひなたも行く, のぞみは来なかった; not のぞみが叶った; spec LEX-6300).
+name.bare-person-move	来た
+name.bare-person-move	来て
+name.bare-person-move	来る
+name.bare-person-move	来な
+name.bare-person-move	来ま
+name.bare-person-move	来よ
+name.bare-person-move	来ず
+name.bare-person-move	きた
+name.bare-person-move	きて
+name.bare-person-move	くる
+name.bare-person-move	こな
+name.bare-person-move	きま
+name.bare-person-move	行く
+name.bare-person-move	行っ
+name.bare-person-move	行か
+name.bare-person-move	行き
+name.bare-person-move	行こ
+name.bare-person-move	いく
+name.bare-person-move	いっ
+name.bare-person-move	いか
+name.bare-person-move	いき
+name.bare-person-move	いこ
+//= name.person-question	Question words that ask for a person, which after the は or って of a kana name the document gives before an honorific make the bare name that person where they end the clause (なぎさって誰？, のぞみは誰なの; not 誰だって, 誰でも; spec LEX-6300).
+name.person-question	誰
+name.person-question	だれ
+name.person-question	どなた
+name.person-question	どちら様
+name.person-question	どちらさま
+//= honorific.and-word	An honorific with と after it that spells another word, so that と after the honorific is no particle there (だからちゃんと; not わたるさんと会った; spec LEX-6300).
+honorific.and-word	ちゃんと
+//= particle.kana-word-after	Particles of two kana or more after which a word spelled in kana starts as its own word, where the kana before them is no particle of kKanaBefore (口からもんくを, 持ちながられいせいな; spec LEX-6801): not なんか or だい, which are as often words of their own.
+particle.kana-word-after	から
+particle.kana-word-after	まで
+particle.kana-word-after	より
+particle.kana-word-after	ながら
+particle.kana-word-after	ほど
+particle.kana-word-after	など
+particle.kana-word-after	こそ
+particle.kana-word-after	さえ
+particle.kana-word-after	すら
+particle.kana-word-after	だけ
+particle.kana-word-after	しか
+particle.kana-word-after	ばかり
+particle.kana-word-after	くらい
+particle.kana-word-after	ぐらい
+//= name.title-after	Honorifics, titles and roles written right after a full name (川端かな子さん, 川端かな子容疑者, 奥村みさ客員研究員, 森ゆうこ選手), which show a surname and a given name in hiragana before them to be one person (spec LEX-6900).
+name.title-after	さん
+name.title-after	ちゃん
+name.title-after	くん
+name.title-after	君
+name.title-after	様
+name.title-after	さま
+name.title-after	氏
+name.title-after	先生
+name.title-after	先輩
+name.title-after	殿
+name.title-after	容疑者
+name.title-after	被告
+name.title-after	被告人
+name.title-after	受刑者
+name.title-after	選手
+name.title-after	投手
+name.title-after	捕手
+name.title-after	内野手
+name.title-after	外野手
+name.title-after	主将
+name.title-after	監督
+name.title-after	コーチ
+name.title-after	議員
+name.title-after	衆院議員
+name.title-after	参院議員
+name.title-after	研究員
+name.title-after	客員
+name.title-after	教授
+name.title-after	准教授
+name.title-after	名誉教授
+name.title-after	講師
+name.title-after	助教
+name.title-after	記者
+name.title-after	弁護士
+name.title-after	医師
+name.title-after	アナウンサー
+name.title-after	元選手
+name.title-after	元議員
+name.title-after	首相
+name.title-after	外相
+name.title-after	法相
+name.title-after	財務相
+name.title-after	防衛相
+name.title-after	環境相
+name.title-after	文科相
+name.title-after	官房長官
+name.title-after	文部科学相
+name.title-after	経済産業相
+name.title-after	厚生労働相
+name.title-after	国土交通相
+name.title-after	国交相
+name.title-after	農林水産相
+name.title-after	総務相
+name.title-after	外務相
+name.title-after	法務相
+name.title-after	経済再生相
+name.title-after	経済財政相
+name.title-after	復興相
+name.title-after	デジタル相
+name.title-after	防災相
+name.title-after	経済安保相
+name.title-after	地方創生相
+name.title-after	担当相
+//= name.title-prefix	Words between a name and a title in the same kanji run that say when the person held it (安倍晋三元首相, 山田太郎前議員); spec LEX-6901.
+name.title-prefix	元
+name.title-prefix	前
+name.title-prefix	現
+name.title-prefix	新
+name.title-prefix	故
+//= name.kana-given-tail	One kanji that ends a given name written in hiragana before it (かな子, ゆり江, まゆ美), before name.title-after (spec LEX-6900).
+name.kana-given-tail	子
+name.kana-given-tail	美
+name.kana-given-tail	江
+name.kana-given-tail	代
+name.kana-given-tail	恵
+name.kana-given-tail	枝
+name.kana-given-tail	乃
+name.kana-given-tail	香
+name.kana-given-tail	奈
+name.kana-given-tail	菜
+name.kana-given-tail	実
+name.kana-given-tail	世
+name.kana-given-tail	里
+//= name.kana-given-particle	Particles that go on after a noun inside their clause (山本さえ選手には 마저, 田中とも選手と, 上田からは監督が): a hiragana run between a surname and a title that is one of them, alone or with one particle of particle.after-name after it, stays the particle even when it is also a given name; before an honorific of honorific.kana-call it is the name (spec LEX-6900).
+name.kana-given-particle	さえ
+name.kana-given-particle	とも
+name.kana-given-particle	すら
+name.kana-given-particle	こそ
+name.kana-given-particle	まで
+name.kana-given-particle	から
+name.kana-given-particle	より
+name.kana-given-particle	だけ
+name.kana-given-particle	ほど
+name.kana-given-particle	など
+name.kana-given-particle	しか
+//= follower.copula-after-past-sou	What follows the そう after a す-verb stem that ends in the past た of a verb and makes it that past and the hearsay そうだ, not the volitional of the す-verb (来たそうだ 왔다고 한다, 来たそうです 왔다고 합니다; spec LEX-7483).
+follower.copula-after-past-sou	だ
+follower.copula-after-past-sou	で
+follower.copula-after-past-sou	じゃ
+follower.copula-after-past-sou	な
+//= follower.listing-shi	Sentence particles after the bare continuative し of a す-verb stem that ends in the past た of a verb, after which the し lists a reason after that past (来たしね 왔고, ここにいたしな; spec LEX-7483). A mark or the end of the text does the same.
+follower.listing-shi	ね
+follower.listing-shi	な
+follower.listing-shi	よ
+follower.listing-shi	さ
+follower.listing-shi	わ
+//= prefix.humble	The humble prefixes before a verb's continuative that make it the object of the humble す-verb いたす (お引き受けいたし、 맡아, not 있었고; お待ちいたし、; spec LEX-7483).
+prefix.humble	お
+prefix.humble	ご
+prefix.humble	御
+//= particle.focus-object	Focus particles that may stand between a verbal noun and the す-verb it is the object of, where the verbal noun still makes the stem that verb, not the past before a listing し (混乱も来たし 혼란도 초래해, not 왔고; spec LEX-7483).
+particle.focus-object	も
+particle.focus-object	は
+particle.focus-object	さえ
+particle.focus-object	すら
+particle.focus-object	こそ
+particle.focus-object	まで

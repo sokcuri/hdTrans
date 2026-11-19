@@ -1,0 +1,68 @@
+#! layer=pack
+# 논항과 앞뒤 말로 뜻을 고르는 자주 쓰는 낱말 (LEX-7201)
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+freq-gloss-b:1	sense	淵	n	colloc	死の淵		죽음의 문턱	70	LEX-7201	freq	死の淵 죽음의 문턱
+freq-gloss-b:2	name	淵	n	frame	next=さん|くん|君|ちゃん|様|氏|先生|先輩		후치		LEX-7201	freq	淵さん 후치 씨
+freq-gloss-b:3	sense	大勢	n	frame	next=いる|居る|集まる|来る|来てい|来てる|押し寄せる|集う|出入り|詰めかける|押しかける|並ぶ|残る|死ぬ|亡くなる|訪れる|住む|働く|待つ|集める		많이		LEX-7201	freq	大勢いる 많이 있다
+freq-gloss-b:4	sense	取り繕う|取繕う	v5	frame	obj=外見|表面|上辺|うわべ|見栄|見かけ|格好|恰好|形		꾸미다		LEX-7201	freq	外見を取り繕う 겉모습을 꾸미다
+freq-gloss-b:55	sense	取り繕う|取繕う	v5	frame	obj=体裁		차리다		LEX-7201	freq	体裁を取り繕う 체면을 차리다
+freq-gloss-b:5	sense	取り繕う|取繕う	v5	frame	obj=@clothing		수선하다		LEX-7201	freq	服を取り繕う 옷을 수선하다
+freq-gloss-b:6	sense	取り繕う|取繕う	v5	frame	obj.of=@clothing		수선하다		LEX-7201	freq	服のほころびを取り繕う 옷의 터진 데를 수선하다
+freq-gloss-b:7	sense	挙げる	v1	frame	obj=得点|点数|ゴール|ホームラン|本塁打|安打|追加点|先制点|決勝点|成果|白星|勝利|収益|利益|実績|戦果|勝ち星		올리다		LEX-7201	freq	追加点を挙げた 추가점을 올렸다
+freq-gloss-b:8	sense	増す	v5	frame	obj=輝き|勢い|重み|深刻さ|激しさ|厳しさ|光|鋭さ|迫力|凄み|存在感|緊張感|輝度		더하다		LEX-7201	freq	輝きを増した 빛을 더했다
+freq-gloss-b:9	sense	埋める	v1	frame	obj=寂しさ|寂し|穴|差|点差|空白|隙間|溝|距離|欠員|赤字|不足|孤独|心の穴		메우다		LEX-7201	freq	寂しさを埋める 외로움을 메우다
+freq-gloss-b:10	sense	届く	v5	frame	subj=@sound|言葉|想い|思い|気持ち|願い|祈り|叫び|歌		닿다		LEX-7201	freq	声が届く 목소리가 닿다
+freq-gloss-b:11	sense	届く	v5	frame	dat=心|耳|胸|手|空|天井|天		닿다		LEX-7201	freq	心に届く 마음에 닿다
+freq-gloss-b:12	sense	溜まる	v5:규칙	frame	subj=@liquid|涙|雨水|血|汗|唾|水たまり		고이다		LEX-7201	freq	目に溜まった涙 눈에 고인 눈물
+freq-gloss-b:14	sense	滲ませる	v1	frame	obj=悔しさ|怒り|喜び|決意|不満|苛立ち|焦り|疲れ|悲しみ|自信|覚悟|不安|無念さ		내비치다		LEX-7201	freq	悔しさを滲ませる 분함을 내비치다
+freq-gloss-b:15	sense	はかる|測る|計る|量る	v5	frame	obj=長さ|時間|体重|重さ|画面|サイズ|距離|身長|温度|体温|血圧|深さ|高さ|速さ|面積|容量|脈		재다		LEX-7201	freq	画面をはかる 화면을 재다
+freq-gloss-b:16	sense	振る	v5	frame	obj=@weapon|鞭|腕|バット|ラケット|棒|杖|竿|ハンマー|斧		휘두르다		LEX-7201	freq	鞭を振った 채찍을 휘둘렀다
+freq-gloss-b:17	sense	張る	v5:규칙	frame	arg=広告|ポスター|貼り紙|張り紙|紙|チラシ|ステッカー|シール|お札|札|写真|ビラ		붙이다		LEX-7201	freq	電柱に張られた広告 전봇대에 붙은 광고
+freq-gloss-b:18	sense	破る	v5	frame	obj=相手|新人|現職|王者|強豪|チャンピオン|前回王者|ライバル		꺾다		LEX-7201	freq	新人を破る 신인을 꺾다
+freq-gloss-b:19	sense	制す	v5	frame	obj=対決|試合|選挙|レース|大会|激戦|接戦|決勝|混戦|熱戦|乱戦|戦い		제압하다		LEX-7201	freq	新人対決を制す 신인 대결을 제압하다
+freq-gloss-b:20	sense	きつい	adj	frame	subj=風|匂い|臭い|日差し|香り|味|酒|におい|臭み|陽射し		세다		LEX-7201	freq	風がきつい 바람이 세다
+freq-gloss-b:21	sense	格好	n	frame	next=を pred=する|して行|して行く|していく|してくる|して来る		차림		LEX-7201	freq	看護婦さんの格好をして 간호사 차림을 하고
+freq-gloss-b:22	sense	日々	n	frame	next=が|は|を|の|も|に		나날		LEX-7201	freq	日々が楽しい 나날이 즐겁다
+freq-gloss-b:23	sense	迫る	v5	frame	obj=回答|決断|判断|譲歩|辞任|退陣|対応|説明|謝罪|返答|返事|撤回|見直し		요구하다		LEX-7201	freq	回答を迫る 답변을 요구하다
+freq-gloss-b:24	sense	失われる	v1	frame	subj=命|生命|人命|尊い命|多くの命		희생되다		LEX-7201	freq	多くの命が失われた 많은 생명이 희생되었다
+freq-gloss-b:25	sense	張る	v5:규칙	frame	head=広告|ポスター|貼り紙|張り紙|紙|チラシ|ステッカー|シール|お札|札|写真|ビラ		붙이다		LEX-7201	freq	張られた広告 붙은 광고
+freq-gloss-b:26	sense	届いている	v1	frame	subj=@sound|言葉|想い|思い|気持ち|願い|祈り|叫び|歌		닿아 있다		LEX-7201	freq	言葉が届いていない 말이 닿아 있지 않다
+freq-gloss-b:27	sense	届いている	v1	frame	dat=心|耳|胸		닿아 있다		LEX-7201	freq	心に届いていない 마음에 닿아 있지 않다
+freq-gloss-b:28	sense	先端	n	frame	next=半導体|技術|医療|科学|分野|企業|素材|産業|研究|兵器|装備|材料|工学|設備|機器|領域|技術者|テクノロジー		첨단		LEX-7201	freq	先端半導体 첨단 반도체
+freq-gloss-b:29	sense	防衛	n	frame	after=回|度|連続|王座|タイトル|初|ベルト|王者		방어		LEX-7201	freq	7回防衛 7회 방어
+freq-gloss-b:30	sense	散る	v5	frame	dat=戦場|戦地|戦|戦火|異国|異郷		스러지다		LEX-7201	freq	戦場に散った 전장에 스러졌다
+freq-gloss-b:31	sense	近所	n	frame	next=の pred=@place		동네		LEX-7201	freq	近所の公園 동네 공원
+freq-gloss-b:32	sense	近所	n	frame	after=この|その|あの		근처		LEX-7201	freq	この近所 이 근처
+freq-gloss-b:33	sense	近所	n	frame	pred=歩く|散歩|散策|回る|歩き回る|うろつく		동네		LEX-7201	freq	近所を歩く 동네를 걷다
+freq-gloss-b:34	sense	近所	n	frame	form=cop		근처		LEX-7201	freq	家が近所だ 집이 근처다
+freq-gloss-b:56	sense	気配	n	frame	pred=消す|消し|消して|殺す|殺し|殺して|察する|察し|察知する|窺う|窺い|うかがう|探る|消える|消え|絶つ|潜める		기척		LEX-7201	freq	気配を消す 기척을 지우다
+freq-gloss-b:57	sense	気配	n	colloc	人の気配		사람의 기척	70	LEX-7201	freq	人の気配 사람의 기척
+freq-gloss-b:58	sense	気配	n	colloc	誰の気配		누구의 기척	70	LEX-7201	freq	誰の気配 누구의 기척
+freq-gloss-b:59	sense	気配	n	colloc	誰かの気配		누군가의 기척	70	LEX-7201	freq	誰かの気配 누군가의 기척
+freq-gloss-b:60	sense	気配	n	colloc	何者かの気配		누군가의 기척	70	LEX-7201	freq	何者かの気配 누군가의 기척
+freq-gloss-b:61	sense	気配	n	colloc	何かの気配		뭔가의 기척	70	LEX-7201	freq	何かの気配 뭔가의 기척
+freq-gloss-b:35	sense	気配	n	frame	mod=* pred=ない|無い|見え|見える|見えない|見せる|見せ|見せない		기미		LEX-7201	freq	起きる気配がない 일어날 기미가 없다
+freq-gloss-b:37	sense	気配	n	colloc	春の気配		봄기운	70	LEX-7201	freq	春の気配 봄기운
+freq-gloss-b:38	sense	気配	n	colloc	夏の気配		여름 기운	70	LEX-7201	freq	夏の気配 여름 기운
+freq-gloss-b:39	sense	気配	n	colloc	秋の気配		가을 기운	70	LEX-7201	freq	秋の気配 가을 기운
+freq-gloss-b:40	sense	気配	n	colloc	冬の気配		겨울 기운	70	LEX-7201	freq	冬の気配 겨울 기운
+freq-gloss-b:41	sense	取り繕う|取繕う	v5	frame	ending=ように		둘러대다		LEX-7201	freq	取り繕うように言った 둘러대듯이 말했다
+freq-gloss-b:42	sense	取り繕う|取繕う	v5	frame	after=と		둘러대다		LEX-7201	freq	と取り繕った 하고 둘러대었다
+freq-gloss-b:43	sense	取り繕う|取繕う	v5	frame	obj=場|その場|関係|仲		수습하다		LEX-7201	freq	その場を取り繕う 그 자리를 수습하다
+freq-gloss-b:44	sense	見据える|見すえる	v1	frame	obj=先|将来|未来|今後|行く末|先行き|次|来年|来季|来春|本番|選挙|大会|五輪|オリンピック|決勝|試合|世界|頂点|目標|復帰		내다보다		LEX-7201	freq	将来を見据える 장래를 내다보다
+freq-gloss-b:45	sense	挙げる	v1	colloc	追加点を挙げる		추가점을 올리다	70	LEX-7201	freq	追加点を挙げた 추가점을 올렸다
+freq-gloss-b:46	sense	挙げる	v1	colloc	先制点を挙げる		선제점을 올리다	70	LEX-7201	freq	先制点を挙げた 선제점을 올렸다
+freq-gloss-b:47	sense	挙げる	v1	colloc	決勝点を挙げる		결승점을 올리다	70	LEX-7201	freq	決勝点を挙げた 결승점을 올렸다
+freq-gloss-b:48	sense	枠	n	frame	next=の pred=眼鏡|メガネ|めがね		테		LEX-7201	freq	銀の枠の眼鏡 은테 안경
+freq-gloss-b:49	name	淵	n	frame	after=ヶ|ケ|が|ガ		후치		LEX-7201	freq	猿ヶ淵 지명
+freq-gloss-b:50	sense	気配	n	frame	mod=* next=ゼロ|ない|無い|なし|無し		기미		LEX-7201	freq	起きる気配ゼロだ 일어날 기미 제로다
+freq-gloss-b:52	sense	気配	n	colloc	雨の気配		비 기운	70	LEX-7201	freq	雨の気配 비 기운
+freq-gloss-b:53	sense	大勢	n	frame	pred=決する|決まる|判明する		대세		LEX-7201	freq	選挙の大勢は決した 선거의 대세는 결정되었다
+freq-gloss-b:54	sense	淵	n	frame	mod=*		못		LEX-7201	freq	恐ろしい淵 무서운 못
+freq-gloss-b:62	sense	村中	n	frame	next=みんな|皆|皆さん|全体|全部|総出|全員|一同|一丸|じゅう|中		온 마을		LEX-7201	freq	村中みんなが歓迎する 온 마을 모두가 환영한다
+freq-gloss-b:63	sense	村中	n	frame	next=の pred=人|人々|者|者たち|皆|みんな|皆さん|連中|衆|住人|住民|村人|村民|子供|子供たち|子ども|大人|大人たち|若者|年寄り|老人|女たち|男たち|女衆|男衆|噂|うわさ|評判|話題|騒ぎ|家々|祭り|誰も|誰もが		온 마을		LEX-7201	freq	村中の人が集まった 온 마을 사람이 모였다
+freq-gloss-b:64	sense	村中	n	frame	next=を pred=駆け回る|走り回る|歩き回る|探し回る|駆けずり回る|飛び回る|引き回す|連れ回す|練り歩く|見回る|巡る|回る|一周する		온 마을		LEX-7201	freq	村中を駆け回った 온 마을을 이리저리 다녔다
+freq-gloss-b:65	sense	村中	n	frame	next=に pred=広まる|広がる|知れ渡る|響く|響き渡る|伝わる|蔓延|蔓延する|蔓延る|はびこる|轟く|触れ回る|行き渡る|満ちる		온 마을		LEX-7201	freq	噂は村中に広まった 소문은 온 마을에 퍼졌다
+freq-gloss-b:66	sense	村中	n	frame	next=が pred=騒ぐ|大騒ぎ|騒然|沸く|沸き立つ|総出|もちきり|持ち切り|お祭り騒ぎ|喪に服す		온 마을		LEX-7201	freq	村中が騒いでいる 온 마을이 떠들고 있다
+freq-gloss-b:67	sense	村中	n	frame	next=で pred=殺し合い|騒ぎ|大騒ぎ|噂|評判|話題|もちきり|持ち切り|有名|祭り|お祭り|祝う|騒ぐ|噂する|探す|探し回る|起こる|起きる|助け合う|守る|育てる|迎える|歓迎する		온 마을		LEX-7201	freq	村中で殺し合いが起こる 온 마을에서 서로 죽이기가 일어난다
+freq-gloss-b:68	sense	で	p	frame	after=村中 next=殺し合い|騒ぎ|大騒ぎ|噂|評判|話題|もちきり|持ち切り|有名|祭り|お祭り|祝う|騒ぐ|噂する|探す|探し回る|起こる|起きる|助け合う|守る|育てる|迎える|歓迎する		에서		LEX-7201	freq	村中で殺し合いが起こる 온 마을에서 서로 죽이기가 일어난다

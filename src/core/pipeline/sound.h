@@ -137,6 +137,14 @@ std::string ReadUnheldVu(std::string_view text, const LineContext& ctx, const di
 // kanji or ・, no kana said twice in a row, when the dictionary reads the kana joined as words.
 std::string ReadCommaSpelled(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// A kana said alone where a phrase starts (at the start of the line or after an opening bracket or a
+// mark) and, after one space or ideographic space, again as the start of a kana word of two kana or more
+// (い いえ, は はい…, す すぐ) is a stammer the speaker restarts: the kana and the space are dropped, as the
+// rows read the spaced stammer (い いえ 아뇨). Not after a space (私 は はなこ: a particle in spaced text), before a
+// kanji word (で 大理石, あ 嫌に), before the kana alone (あ あ…) or after an interjection of
+// sound.stutter-interjection (あ あなた).
+std::string WriteSpacedStutters(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // Each word spaced out character by character (お　と　な　の, こ ろ し て や る) joined: three or
 // more pieces of JoinSpelledOut with one space or ideographic space between them, not next to
 // other kana or kanji but for a copula or particle after it, when the dictionary or the sound
@@ -305,6 +313,10 @@ bool HoldsCasualAdjective(std::string_view text, const LineContext& ctx, const d
 bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict = false);
 // Whether form, whole, is the dictionary form of a verb of the dictionary.
 bool IsDictionaryVerb(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap);
+// Whether form, whole, is the dictionary form of an ichidan verb of the dictionary (見る, 寝る; not 足る).
+bool IsDictionaryIchidan(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap);
+// Whether stem, whole, is the stem of an ichidan verb or of くる of the dictionary (見, 出来, 来, き).
+bool IsDictionaryVowelStem(std::string_view stem, const LineContext& ctx, const dict::Snapshot& snap);
 
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
 // katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,

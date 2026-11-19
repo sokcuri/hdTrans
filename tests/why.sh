@@ -25,4 +25,25 @@ grep -F '[POST] 마도구' "$tmp/logs" > /dev/null
 "$cli" -dicts "$tmp/dicts" -userdict '' -ehnd "$tmp/ehnd" -why -stages "$tmp/stages" -in "$tmp/input" > "$tmp/staged" 2> "$tmp/staged-logs"
 cmp "$tmp/plain" "$tmp/staged"
 grep -F 'PreFilter : [PreFilter_test.txt:0]' "$tmp/staged-logs" > /dev/null
-printf 'PASS CLI -why filter logs and unchanged stdout\n'
+# The split note (spec/words.md, LEX-6722): one WHY-SPLIT line per Japanese token with the
+# cost table, none without the table or without -why, and the same output either way.
+printf 'ビザ\t비자\tN110\t\t\tGN\t0\t2\n' >> "$tmp/dicts/base.tsv"
+printf 'ビザー' > "$tmp/kana"
+"$cli" -dicts "$tmp/dicts" -userdict '' -ehnd '' -why -in "$tmp/kana" > "$tmp/kana-bare" 2> "$tmp/kana-bare-logs"
+! grep -F 'WHY-SPLIT' "$tmp/kana-bare-logs" > /dev/null
+cp "$2" "$tmp/dicts/seg-costs.tsv"
+"$cli" -dicts "$tmp/dicts" -userdict '' -ehnd '' -in "$tmp/kana" > "$tmp/kana-plain" 2> "$tmp/kana-plain-logs"
+"$cli" -dicts "$tmp/dicts" -userdict '' -ehnd '' -why -in "$tmp/kana" > "$tmp/kana-why" 2> "$tmp/kana-logs"
+cmp "$tmp/kana-plain" "$tmp/kana-why"
+cmp "$tmp/kana-bare" "$tmp/kana-why"
+[ ! -s "$tmp/kana-plain-logs" ]
+[ "$(grep -c '^WHY-SPLIT' "$tmp/kana-logs")" = 1 ]
+grep '^WHY-SPLIT	1	0	ビザー	search [0-9]*: ビザ/N110=비자 (word [0-9]*) | ー/' "$tmp/kana-logs" > /dev/null
+# A gloss longer than the note shows is cut at a character: the line stays UTF-8.
+printf 'ロングワード\tx가나다라마바사아자차카타\tN110\t\t\tGN\t0\t3\n' >> "$tmp/dicts/base.tsv"
+printf 'ロングワード' > "$tmp/long"
+"$cli" -dicts "$tmp/dicts" -userdict '' -ehnd '' -why -in "$tmp/long" > "$tmp/long-why" 2> "$tmp/long-logs"
+grep '^WHY-SPLIT' "$tmp/long-logs" > "$tmp/long-notes"
+iconv -f UTF-8 -t UTF-8 "$tmp/long-notes" > /dev/null
+grep -F 'ロングワード/N110=x가나다라마바사 (' "$tmp/long-notes" > /dev/null
+printf 'PASS CLI -why filter logs, split notes and unchanged stdout\n'

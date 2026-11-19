@@ -28,7 +28,7 @@ constraint:tetai-stem-before-me	ためらわれた	망설여졌다	fix	lookup
 constraint:tai-stem-before-me	ためして	시험해	keep	lookup
 constraint:tai-stem-before-me	行きたい	가고 싶다	keep	lookup
 constraint:tai-stem-before-me	力をためた	힘을 모아 두었다	keep	lookup
-lexical:reading	試合でもこれがまかり通る。	시합에서도 이것이 버젓이 통한다.	fix	lookup
+lexical:reading	試合でもこれがまかり通る。	경기에서도 이것이 버젓이 통한다.	fix	lookup
 lexical:reading	天下の第四駆逐隊、まかり通る！ くらえっ！	has:버젓이 통한다	fix	lookup
 lexical:reading	子爵に任じられておるが、	has:임명되	fix	lookup
 lexical:reading	任を解く	임무를 푼다	keep	lookup

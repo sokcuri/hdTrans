@@ -131,6 +131,19 @@ bool CoversVerb(const Worker& w, const Item* verb, std::string_view noun) {
     return !w.settings.text || static_cast<int>(noun.size()) == verb->length;
 }
 
+// GRM-4350: whether the text right after verb item it starts a second verb or an auxiliary that a verb's
+// continuative runs into without a particle (やすい, 始める, 込む, 合う, かける, 取る).
+bool ContinuativeRunsOn(const Item& it) {
+    const std::size_t end = static_cast<std::size_t>(it.start) + static_cast<std::size_t>(it.length);
+    if (end >= it.text.size()) return false;
+    const std::string_view after = it.text.substr(end);
+    for (const dict::ClassId c : {HDTRANS_CLASS("follower.continuative-only"), HDTRANS_CLASS("suffix.continuative"),
+                                  HDTRANS_CLASS("suffix.compound-action"), HDTRANS_CLASS("follower.compound-second")}) {
+        if (dict::StartsWithMember(c, after) > 0) return true;
+    }
+    return false;
+}
+
 bool KanjiIn(std::string_view s) {
     for (std::string_view t = s; !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
@@ -292,6 +305,9 @@ Phrase FindPhrase(Flusher& f) {
             case 2: {
                 Item* next = it->After();
                 if (next == nullptr || !next->detail->Yougo()) break;
+                // GRM-4350: a continuative with kanji that runs into a second verb or an auxiliary adjective is the first half
+                // of a verb chain (すごい撮りやすい 엄청 찍기 쉽다, 縫い込まれている), not the noun the adjective describes.
+                if (KanjiIn(next->group->surface) && ContinuativeRunsOn(*next)) break;
                 const std::string combined = next->group->surface + std::string(next->DirectSurface());
                 const bool covers = CoversVerb(w, next, combined);
                 Record* record = next->group->records;
@@ -485,6 +501,24 @@ bool UnplacedKana(const Item* it) {
 
 constexpr std::string_view kCaseParticles[] = {"が", "を", "に", "は", "も", "で", "と", "へ", "や", "の"};
 
+// LEX-6800: whether the unread run s reads as one word by its sound: two voiced kana or more (no small kana, long
+// mark or ん), not starting on one of those, with no small vowel and no kana said twice in a row, which are sounds the
+// sound stage reads (はぁう, んにゃろ, ちちち), and not ending the way a verb, adjective or sentence does (ともる,
+// くらった), which is the tail of a word the analysis split.
+bool LoneKanaWord(std::string_view s) {
+    constexpr std::string_view kSilent = "ぁぃぅぇぉゃゅょゎっゕゖんー〜～";
+    if (s.empty() || Has(kSilent, FirstChar(s))) return false;
+    int voiced = 0;
+    std::string_view previous, last;
+    for (; !s.empty(); s.remove_prefix(FirstChar(s).size())) {
+        const std::string_view c = FirstChar(s);
+        if (Has("ぁぃぅぇぉ", c) || c == previous) return false;
+        voiced += !Has(kSilent, c);
+        previous = last = c;
+    }
+    return voiced >= 2 && !Has("るたすくぬつむぶぐうだばれろいぞぜ", last);
+}
+
 // Whether b starts where a ends in the same token.
 bool Adjacent(const Item* a, const Item* b) {
     return a != nullptr && b != nullptr && a->tokenIndex == b->tokenIndex && a->text.data() == b->text.data() &&
@@ -585,7 +619,23 @@ void ReadUnplacedHeads(Flusher& f) {
         // another word the later stages read it with its space (ごちゅごちゅ当たって).
         if (doubled && !ends && !Has("さしすせ", FirstChar(next->group->surface))) doubled = false;
         // The run after a noun is read where it ends the token; any run before a read particle or ending.
+        // LEX-6800: a run of two voiced kana or more that stands at a word boundary and ends its token
+        // (クイズで あそぼ！, 3年とらふぐ」) is one word the dictionary lacks, read whole by its sound.
         bool bound = (afterNoun && ends) || doubled;
+        // Not a word cut off or trailing off by an ellipsis (となりま…, ……でふ), and after kana only a case particle the
+        // analysis placed (俺は ぱち), not one it left unread, which may start the word (とうこ).
+        const std::string_view head = it->text.substr(0, static_cast<std::size_t>(it->start));
+        auto ellipsis = [](std::string_view c) { return !c.empty() && Has("…‥", c); };
+        const bool cut = ellipsis(FirstChar(tail)) || ellipsis(LastChar(head)) ||
+                         (tail.empty() && it->tokenIndex + 1 < w.TokenCount() &&
+                          ellipsis(FirstChar(w.tokens.Raw(static_cast<std::size_t>(it->tokenIndex + 1))))) ||
+                         (head.empty() && it->tokenIndex > 0 &&
+                          ellipsis(LastChar(w.tokens.Raw(static_cast<std::size_t>(it->tokenIndex - 1)))));
+        const bool alone = !bound && boundary && ends && !cut && LoneKanaWord(raw) &&
+                           (!Adjacent(prev, it) || Classify(LastChar(prev->group->surface)) != 13 ||
+                            (!UnplacedKana(prev) && std::find(std::begin(kCaseParticles), std::end(kCaseParticles),
+                                                              prev->group->surface) != std::end(kCaseParticles)));
+        bound = bound || alone;
         for (int slot = 0; !bound && !ends && slot < static_cast<int>(next->group->entries.size()); slot++) {
             const char part = At(next->Code(slot), 0);
             if ((part == '2' || part == '5') && !next->EntryText(slot).empty()) bound = true;
@@ -604,7 +654,8 @@ void ReadUnplacedHeads(Flusher& f) {
             if (!Has("ぁぃぅぇぉゃゅょゎっゕゖ", FirstChar(rest))) voiced = true;
         }
         if (!voiced || AfterFilterText(w, it)) continue;
-        const std::string target = TransliterateHiragana(raw);
+        // The lone run takes the reading the sound stage gives such runs (うっしゃ 웃샤).
+        const std::string target = alone ? text::FromKana(raw, text::Preset::Fan) : TransliterateHiragana(raw);
         if (target.empty()) continue;
         Record* record = w.CreateSyntheticRecord(it->tokenIndex, raw, true);
         record->target = target;

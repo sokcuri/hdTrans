@@ -499,6 +499,18 @@ bool DictionaryVerbIs(const void* context, std::string_view form) {
     return d.line != nullptr && pipeline::internal::IsDictionaryVerb(form, *d.line, d.snap);
 }
 
+// Whether form, whole, is an ichidan verb of the dictionary in its dictionary form (pipeline::RunLookup::ichidanVerb).
+bool DictionaryIchidanIs(const void* context, std::string_view form) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::IsDictionaryIchidan(form, *d.line, d.snap);
+}
+
+// Whether stem, whole, is the stem of an ichidan verb or of くる of the dictionary (pipeline::RunLookup::vowelStem).
+bool DictionaryVowelStemIs(const void* context, std::string_view stem) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::IsDictionaryVowelStem(stem, *d.line, d.snap);
+}
+
 // Whether text, whole, is a key of the dictionary (pipeline::RunLookup::word).
 bool WordIs(const void* context, std::string_view text) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -529,6 +541,20 @@ bool AdjectiveStemIs(const void* context, std::string_view stem) {
         if (c.source == stem && c.codes != nullptr && (c.codes->part.Tag() == 'H' || c.codes->part.Tag() == 'M') && c.codes->part.ClassDigit() == '7') return true;
     }
     return false;
+}
+
+// Whether stem, whole, is an adjectival noun of the dictionary and no noun, counter or adverb (一杯, 好き, 無理 are
+// nouns too; 一生懸命, 一緒 are adverbs that go with やる)
+// (pipeline::RunLookup::naStem).
+bool NaStemIs(const void* context, std::string_view stem) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    bool na = false;
+    for (const dict::Candidate& c : Find(d, stem).list) {
+        if (c.source != stem || c.codes == nullptr) continue;
+        if (c.codes->part.Tag() == 'N' || c.codes->part.Tag() == 'K' || c.codes->part.Tag() == 'E') return false;
+        na = na || (c.codes->part.Tag() == 'G' && c.codes->part.ClassDigit() == '8');
+    }
+    return na;
 }
 
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
@@ -906,6 +932,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
         s.scorers = options.scorers;
         s.shadowScorers = options.shadowScorers;
         s.selectShadow = options.selectShadow;
+        s.splitWhy = options.splitWhy;
         s.selectRules = options.selectRules;
         s.misreadModel = options.misreadModel;
     }
@@ -1257,7 +1284,9 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
-                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach}),
+                                 options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach,
+                                 options.reference ? nullptr : DictionaryIchidanIs, options.reference ? nullptr : DictionaryVowelStemIs,
+                                 options.reference ? nullptr : NaStemIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);

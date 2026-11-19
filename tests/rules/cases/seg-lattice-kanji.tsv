@@ -1,0 +1,31 @@
+rule	input	expected	kind	layer
+segmentation:lattice-kanji	全店舗を対象に調査を始めた。	has:전점포	fix	lookup
+segmentation:lattice-kanji	越生梅林は、関東三大梅林の1つ。	has:3대	fix	lookup
+segmentation:lattice-kanji	韓国の李在明大統領と会談する。	has:이재명대통령	fix	lookup
+segmentation:lattice-kanji	土木計画学研究委員会の委員長	has:연구 위원회	fix	lookup
+segmentation:lattice-kanji	戦艦、重巡航艦は抑えることが出来た。	lacks:양함항함	fix	lookup
+segmentation:lattice-kanji	前週末終値比７３９ドル安	has:종가 대비	fix	lookup
+segmentation:lattice-kanji	兪龍植大統領が来た。	has:대통령	fix	lookup
+segmentation:lattice-kanji	民明大統領が来た。	has:민명대통령	fix	lookup
+segmentation:lattice-kanji	小林勝大統領が来た。	has:대통령	fix	lookup
+segmentation:lattice-kanji	桑山村社長！	has:쿠와노야마	keep	lookup
+segmentation:lattice-kanji	桑山村市長	lacks:뽕	keep	lookup
+segmentation:lattice-kanji	桑山村議員と会う。	has:쿠와노야마	keep	lookup
+segmentation:lattice-kanji	福良港に着いた。	has:후쿠라항	keep	lookup
+segmentation:lattice-kanji	米国内の工場	has:미국내	keep	lookup
+segmentation:lattice-kanji	日本戦に勝った。	has:일본전	keep	lookup
+segmentation:lattice-kanji	中地区の住民	has:지구의	keep	lookup
+segmentation:lattice-kanji	国際連合の会議	has:국제연합	keep	lookup
+segmentation:lattice-kanji	大学病院の医師	has:대학병원	keep	lookup
+segmentation:lattice-kanji	自動車産業の動向	has:자동차 산업	keep	lookup
+segmentation:lattice-kanji	新型車両を導入した。	has:신형 차량	keep	lookup
+segmentation:lattice-kanji	最高裁判所の判断	has:최고재판소	keep	lookup
+segmentation:lattice-kanji	山田太郎社長が来た。	has:야마다 타로 사장	keep	lookup
+segmentation:lattice-kanji	田中真紀子外相	has:타나카 마키코	keep	lookup
+segmentation:lattice-kanji	想定問答集を読んだ。	has:예상질문집	keep	lookup
+segmentation:lattice-kanji	「紫電改二」三つ	has:시덴카이	keep	lookup
+segmentation:lattice-kanji	運転者過半数、冠水路を移動	has:침수로	keep	lookup
+segmentation:lattice-kanji	通学路で会った。	has:통학로	keep	lookup
+segmentation:lattice-kanji	ムハンマド首相兼外相や	has:총리 겸 외무장관	keep	lookup
+segmentation:lattice-kanji	常人並に静かになって	has:보통 사람	keep	lookup
+segmentation:lattice-kanji	津地検は追起訴した。	lacks:진지검	keep	lookup

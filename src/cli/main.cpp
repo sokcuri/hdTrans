@@ -34,6 +34,7 @@
 #include "core/engine/load_info.h"
 #include "frontend/load_info.h"
 #include "core/output/families.h"
+#include "core/word/analyze.h"
 #include "core/word/constructions.h"
 #include "core/word/select.h"
 #include "stage_records.h"
@@ -201,6 +202,17 @@ std::string Decided(const hdTrans::word::Selection& s, bool ending) {
     case Provenance::Pack: return "packs\tpack:" + hdTrans::dict::PackRowById(s.id).id;
     }
     return "\t";
+}
+
+// The split of each Japanese token (docs: --why): token, who decided (search or lattice), the
+// split taken with its cost and the cost terms of each word, and the best other split.
+void WhySplits(void* context, int chunk, const hdTrans::tokenizer::Tokens&, const hdTrans::word::Analysis& analysis) {
+    const auto& why = *static_cast<WhyContext*>(context);
+    for (const std::string& note : analysis.splits) {
+        std::fprintf(stderr, "WHY-SPLIT\t%zu\t%d\t", why.line, chunk);
+        std::fwrite(note.data(), 1, note.size(), stderr);
+        std::fputc('\n', stderr);
+    }
 }
 
 void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Chain& chain) {
@@ -731,6 +743,8 @@ int RunMain(int argc, char** argv) {
         observer.line = WhyLine;
         observer.resolved = WhyResolved;
         observer.filterLog = WhyFilterLog;
+        observer.analysis = WhySplits;
+        options.splitWhy = true;
     }
     hdTrans::internal::TraceCollector trace;
     if (json) observer = hdTrans::internal::TraceObserver(trace, observer);

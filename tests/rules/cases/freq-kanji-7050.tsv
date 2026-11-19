@@ -1,0 +1,44 @@
+# 규칙: LEX-7050, LEX-7051, LEX-7052, LEX-7053
+rule	input	expected	kind	layer
+segmentation:particle-kana-verb	最初からはまるで別人だ。	처음부터는 마치 딴사람이다.	fix	lookup
+segmentation:particle-kana-verb	最初からはまるで別人でした。	has:처음부터는 마치	fix	lookup
+segmentation:particle-kana-verb	前よりはまるで違う。	has:전보다는 전혀	fix	lookup
+segmentation:particle-kana-verb	それまではまるで興味がなかった。	has:그때까지는 전혀	fix	lookup
+segmentation:particle-kana-verb	私からはまるで見えない。	has:는 전혀 안 보인다	fix	lookup
+segmentation:particle-kana-verb	それからはまるで嵐のような日々だった。	has:는 마치	fix	lookup
+segmentation:particle-kana-verb	昨日まではまるで知らなかった。	어제까지는 전혀 몰랐다.	keep	lookup
+segmentation:particle-kana-verb	それからはまったく連絡がない。	has:전혀 연락이 없다	keep	lookup
+segmentation:particle-kana-verb	最初からはっきり言え。	처음부터 분명히 말해라.	keep	lookup
+segmentation:particle-kana-verb	前よりはましだ。	전보다는 낫다.	keep	lookup
+segmentation:particle-kana-verb	それよりはまだいい。	has:보다는 차라리 좋다	keep	lookup
+segmentation:particle-kana-verb	最初からもまるで違った。	처음부터도 전혀 달랐다.	keep	lookup
+segmentation:particle-kana-verb	何よりもまず休め。	무엇보다도 우선 쉬어라.	keep	lookup
+segmentation:loose-kanji	同志国連携を強化する。	동지국 연계를 강화한다.	fix	lookup
+segmentation:loose-kanji	同盟・同志国連携	has:동지국 연계	fix	lookup
+segmentation:loose-kanji	同盟国連合軍が来た。	동맹국 연합군이 왔다.	keep	lookup
+segmentation:loose-kanji	加盟国連携の枠組み。	has:회원국 연계	keep	lookup
+segmentation:loose-kanji	米国連邦政府	has:미국 연방	keep	lookup
+segmentation:loose-kanji	中国連合艦隊	has:중국 연합	keep	lookup
+segmentation:loose-kanji	国連携帯	has:유엔	keep	lookup
+segmentation:loose-kanji	先進国首脳会議	has:선진국	keep	lookup
+segmentation:loose-kanji	同盟国軍が上陸した。	동맹국군이 상륙했다.	keep	lookup
+segmentation:loose-kanji	日本学生野球協会は発表した。	has:일본 학생 야구	fix	lookup
+segmentation:loose-kanji	日本学を学ぶ。	has:일본학	keep	lookup
+segmentation:loose-kanji	俺も同意見だ。	나도 동의견이다.	fix	lookup
+segmentation:loose-kanji	俺も同意見だった。	나도 동의견이었다.	fix	lookup
+segmentation:loose-kanji	同意見だと思う。	has:동의견이라고	fix	lookup
+segmentation:loose-kanji	同意見です。	동의견입니다.	keep	lookup
+segmentation:loose-kanji	直接触って	직접 만져	keep	lookup
+segmentation:loose-kanji	見出だした	발견했다	keep	lookup
+lexical:kun-noun	長い睫が揺れた。	has:긴 속눈썹이	fix	lookup
+lexical:kun-noun	睫を伏せた。	has:속눈썹을	fix	lookup
+lexical:kun-noun	槌を握る。	has:망치를	fix	lookup
+lexical:kun-noun	銛を打ち込む。	has:작살을	fix	lookup
+lexical:kun-noun	馬の蹄の音で無い	has:말의 발굽	fix	lookup
+lexical:kun-noun	鰈の煮付け	has:가자미	fix	lookup
+lexical:kun-noun	鍬を担いで畑に出た。	has:괭이를	fix	lookup
+lexical:kun-noun	簪を挿した。	has:비녀를	fix	lookup
+lexical:kun-noun	鉄錐が落ちた。	has:철추	keep	lookup
+lexical:kun-noun	鉄槌を下す。	has:철퇴	keep	lookup
+lexical:kun-noun	鴉が言った。	has:카라스	keep	lookup
+lexical:kun-noun	焔さんが来た。	has:호무라	keep	lookup

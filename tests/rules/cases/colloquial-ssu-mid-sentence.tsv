@@ -22,7 +22,7 @@ normalize:ssu	犯人が伝えたい メッセージか何かっすかね？	범�
 normalize:ssu	どうっすかねぇ｡	어때요.	fix	normalize
 normalize:ssu	あれっすよね　男前っすよね。	저것이죠 미남자이죠.	fix	normalize
 normalize:ssu	数学はあまり自信ないっすけど はい	수학은 그다지 자신 없지만 네	fix	normalize
-normalize:ssu	彼氏じゃないっすけど寮母なんで…！	남자친구가 아니지만 요모이니까…!	fix	normalize
+normalize:ssu	彼氏じゃないっすけど寮母なんで…！	남자친구가 아니지만 사감이니까…!	fix	normalize
 normalize:ssu	（ ケンタ ） ああ じゃあ一緒っすね 。	(켄타 ) 아 그럼 함께네요 .	fix	normalize
 normalize:ssu	名前が左右対称。　シンメトリーっすね。	이름이 좌우 대칭. 시머트리네요.	fix	normalize
 normalize:ssu	今日の出費 安くないっすよね｡	오늘의 지출 싸지 않죠.	fix	normalize

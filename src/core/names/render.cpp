@@ -156,7 +156,7 @@ std::vector<Listed> Registry::Proposed() {
 
 std::string Registry::RenderName(std::string_view t, const Name& n) {
     if (const auto l = listed_.find(std::string(t)); l != listed_.end()) return l->second.ko;
-    if (!n.hasParts) return RenderPart(t, true);
+    if (!n.hasParts) return n.layer.empty() ? RenderPart(t, true) : n.layer;
     std::string out;
     for (std::size_t i = 0; i < n.parts.size(); i++) {
         // A common word that GivenSplit took for the surname is the person of the name layer there (氷室将嗣
@@ -168,6 +168,7 @@ std::string Registry::RenderName(std::string_view t, const Name& n) {
         if (i > 0) out += " ";
         out += part;
     }
+    if (!n.layer.empty() && (!text::SameSound(out, n.layer) || RuneCount(out) != RuneCount(n.layer))) return n.layer;
     return out;
 }
 

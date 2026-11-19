@@ -284,10 +284,80 @@ void Chain::Unlink(Item* it) {
     else tail = it->prev;
 }
 
+namespace {
+
+// Whether a comes no later than b in the order of a sorted chain: by token, then by end.
+bool InOrder(const Item* a, const Item* b) {
+    if (a->tokenIndex != b->tokenIndex) return a->tokenIndex < b->tokenIndex;
+    return a->start + a->length <= b->start + b->length;
+}
+
+}  // namespace
+
+void Chain::Link(Item* item, Item* before) {
+    if (before == nullptr) {
+        item->prev = tail;
+        if (tail != nullptr) tail->next = item;
+        else head = item;
+        tail = item;
+    } else {
+        item->next = before;
+        item->prev = before->prev;
+        if (before->prev != nullptr) before->prev->next = item;
+        else head = item;
+        before->prev = item;
+    }
+    if ((item->prev != nullptr && !InOrder(item->prev, item)) || (item->next != nullptr && !InOrder(item, item->next))) {
+        sorted = false;
+    }
+}
+
+// Insert on a sorted chain. The items of the token are one block whose ends do not fall, so the
+// items it replaces (ends inside the new item) and the first item that ends at or after it are
+// found by walking back from the tail over the items of later tokens and the block's last items;
+// the result is that of the scan from the head.
+int Chain::InsertSorted(Item* item) {
+    const int token = item->tokenIndex;
+    const int start = item->start;
+    const int end = start + item->length;
+    Item* scan = tail;
+    while (scan != nullptr && scan->tokenIndex > token) scan = scan->prev;
+    Item* const later = scan != nullptr ? scan->next : head;  // the first item of a later token
+    Item* before = nullptr;
+    int removed = 0;
+    for (; scan != nullptr && scan->tokenIndex == token;) {
+        Item* const prev = scan->prev;
+        const int e = scan->start + scan->length;
+        if (start < e && e <= end) {
+            removed -= scan->length;
+            Unlink(scan);
+        } else if (e >= end) {
+            before = scan;
+        } else {
+            break;
+        }
+        scan = prev;
+    }
+    removed += item->length;
+    if (head == nullptr) {
+        head = tail = item;
+        return removed;
+    }
+    if (before == nullptr) {
+        const bool text = item->w != nullptr && item->w->settings.text;
+        for (before = later; before != nullptr; before = before->next) {
+            if (Item* p = before->prev; p == nullptr || (text && p->tokenIndex < token) || p->CrossEnd() < end) break;
+        }
+    }
+    Link(item, before);
+    return removed;
+}
+
 int Chain::Insert(Item* item, bool overlapping) {
     if (item == nullptr) return 0;
     item->prev = nullptr;
     item->next = nullptr;
+    if (sorted && overlapping) return InsertSorted(item);
     int removed = 0;
     for (Item* scan = head; scan != nullptr;) {
         Item* next = scan->next;
@@ -322,17 +392,7 @@ int Chain::Insert(Item* item, bool overlapping) {
             break;
         }
     }
-    if (scan == nullptr) {
-        tail->next = item;
-        item->prev = tail;
-        tail = item;
-        return removed;
-    }
-    item->next = scan;
-    item->prev = scan->prev;
-    if (scan->prev != nullptr) scan->prev->next = item;
-    else head = item;
-    scan->prev = item;
+    Link(item, scan);
     return removed;
 }
 

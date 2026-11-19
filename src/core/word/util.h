@@ -10,8 +10,13 @@
 
 namespace hdTrans::word {
 
+// A kana that belongs to the kana before it: ー, ン or a small kana.
+inline bool BoundKana(char32_t r) { return r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos; }
+
 int Width(char32_t r);
 int WidthOf(std::string_view s);
+// WidthOf(s) >= n, reading no further into s than needed (s may be the rest of a long line).
+bool WidthAtLeast(std::string_view s, int n);
 
 // The byte offset of width unit n of s (s.size() past the end) and whether a
 // character boundary lies there; inside a character, the offset after it.

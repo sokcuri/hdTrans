@@ -66,6 +66,9 @@ struct Name {
     // alone: a name only where an honorific follows it.
     bool honorificOnly = false;
     std::vector<std::string> parts;
+    // A person of the name layer before a title: the Korean of its row, which the reading of the parts must
+    // sound like to replace it, or which a name of one part reads (spec LEX-6901).
+    std::string layer;
 };
 
 class Registry {
@@ -158,6 +161,8 @@ private:
     bool OrdinaryReading(std::string_view base, std::string_view reading);
     std::set<std::string_view> Words(std::string_view s);
     unsigned WordClasses(std::string_view s);
+    // Whether s is a noun or a verb, and no adjectival noun or stem of a する verb (spec LEX-6301).
+    bool CalledWordClass(std::string_view s);
     bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
     bool SameKind(std::string_view s, std::string_view t);
     bool NamedWithSound(std::string_view base, std::string_view reading);
@@ -211,6 +216,7 @@ private:
     bool HiraganaWord(std::string_view s);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
+    bool PersonSaidAt(std::string_view said, bool topic);
     bool LayerReading(std::string_view t);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
@@ -292,6 +298,10 @@ private:
     std::set<std::string> boxGuess_;                    // those alone in a name box before speech (【綺衣】「)
     std::map<std::string, int> framed_;                 // kanji runs in a person frame (PersonFrame)
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
+    // The common words and verb forms the document calls by name before an honorific (つきさん; spec LEX-6301).
+    std::set<std::string, std::less<>> calledWords_;
+    // The unknown kana names before a call honorific that start with a word (かおる: かお; spec LEX-7550).
+    std::set<std::string, std::less<>> kanaWordStart_;
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
     std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ
     struct Loose {
@@ -305,6 +315,9 @@ private:
     std::map<std::string, std::set<std::string>> kanaJoined_;   // kana words accepted as names -> the names joined to them
     // Whether the kana name t at line[a, b) stands joined to one of its names there (みゆきとそら, そらとみゆき).
     bool JoinedAt(std::string_view line, std::size_t a, std::size_t b, const std::string& t);
+    // Whether the hiragana name t at line[a, b) stands where a bare name does: at the line start or after a
+    // mark, and before a mark, the line end or a particle of name.bare-particle (spec LEX-6300).
+    bool BareNameSlot(std::string_view line, std::size_t a, std::size_t b, const std::string& t);
     // The name layer's spelling of the katakana name t that the Korean of a longer katakana word of the
     // document starting with t starts with (グリッドマン in グリッドマンユニバース 그리드맨 유니버스), or "".
     std::string CompoundSpelling(std::string_view t);
@@ -314,6 +327,8 @@ private:
     std::map<std::string, int> ended_;                  // kanji runs before a particle, an honorific or no hiragana
     std::map<std::string, int> kana_;                   // katakana runs
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
+    std::set<std::string> titled_;  // full names before a kanji title in their run (spec LEX-6901)
+    std::map<std::pair<std::string, std::string>, int> kanaGiven_;  // a surname and a hiragana given name before a title
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
     std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
     std::set<std::string> kataRuns_;                    // the katakana runs of the document (CompoundSpelling)

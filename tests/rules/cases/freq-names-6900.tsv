@@ -1,0 +1,77 @@
+# 규칙: LEX-6900, LEX-6901
+rule	input	expected	kind	layer
+names:kana-given	同居していた動画配信業川端かな子さん（３６）の顔	has:카와바타 카나코 씨(36)	fix	lookup
+names:kana-given	東洋大の奥村みさ客員研究員は話した。	도요 대학의 오쿠무라 미사 객원 연구원은 이야기했다.	fix	lookup
+names:kana-given	では 東海林るりさんは	그럼 쇼오지 루리 씨는	fix	lookup
+names:kana-given	斉藤るりさんですよね？	사이토 루리 씨군요?	fix	lookup
+names:kana-given	図書部部長の白崎つぐみさんです	has:츠구미 씨	fix	lookup
+names:kana-given	森ゆうこ氏が会見した。	모리 유우코 씨가 회견했다.	fix	lookup
+names:kana-given	山本さくら選手が優勝した。	야마모토 사쿠라 선수가 우승했다.	fix	lookup
+names:kana-given	田中ゆみ子容疑者を逮捕した。	타나카 유미코 용의자를 체포했다.	fix	lookup
+names:kana-given	佐藤ひかり議員は述べた。	사토 히카리 의원은 말했다.	fix	lookup
+names:kana-given	高橋あやさんは笑った。	타카하시 아야 씨는 웃었다.	fix	lookup
+names:kana-given	村田あおい被告に判決。	무라타 아오이 피고에게 판결.	fix	lookup
+names:kana-given	鈴木みゆきちゃんが来た。	스즈키 미유키짱이 왔다.	fix	lookup
+names:kana-given	木村みどり教授の講演	키무라 미도리 교수의 강연	fix	lookup
+names:kana-given	潮崎かずきさん	시오자키 카즈키 씨	keep	lookup
+names:kana-given	御園もこっちを見ていた。	미소노도 이쪽을 보고 있었다.	keep	lookup
+names:kana-given	上田からは監督が来た。	has:우에다에게서는	keep	lookup
+names:kana-given	山本さえ選手には勝てない。	has:야마모토마저	keep	lookup
+names:kana-given	森からさん付けで呼ばれた。	has:에서	keep	lookup
+names:kana-given	川端で遊んだ。	강가에서 놀았다.	keep	lookup
+names:kana-given	田中さんが来た。	타나카 씨가 왔다.	keep	lookup
+names:kana-given	中村もさんざん迷った。	나카무라도 실컷 헤매었다.	keep	lookup
+names:title-run	関芳弘文部科学相は１６日、辞任を否定した。	has:세키 요시히로 문부과학상은	fix	lookup
+names:title-run	続く５番、筒香選手もストレートで空振り三振。	has:츠츠카 선수도	fix	lookup
+names:title-run	汐浜記者、そちらの雰囲気はどのような感じでしょうか？	has:시오하마 기자,	fix	lookup
+names:title-run	長妻昭元厚生労働相らリベラル系	has:나가츠마 아키라 전 후생노동상	fix	lookup
+names:title-run	関芳弘容疑者は来た。	세키 요시히로 용의자는 왔다.	fix	lookup
+names:title-run	ジュビロ磐田 乾 貴士選手の素顔に迫っていきます。	has:이누이 타카시 선수	fix	lookup
+names:title-run	この指導を受けた草加勝投手に聞いてみました。	has:쿠사카 마사루 투수	fix	lookup
+names:title-run	大岩剛監督にバトンタッチすることを発表していました。	has:오이와 고 감독	fix	lookup
+names:title-run	安倍晋三元首相の国葬。	아베 신조 전 총리의 국장.	keep	lookup
+names:title-run	山田一郎容疑者を逮捕した。	야마다 이치로 용의자를 체포했다.	keep	lookup
+names:title-run	日本選手が優勝した。	일본 선수가 우승했다.	keep	lookup
+names:title-run	地元議員が反対した。	지역 의원이 반대했다.	keep	lookup
+names:title-run	大谷翔平選手が打った。	오타니 쇼헤이 선수가 쳤다.	keep	lookup
+names:title-run	茂木外相、８日から訪仏	has:모테기 외무장관	keep	lookup
+names:title-run	新人選手が入った。	신인 선수가 들어왔다.	keep	lookup
+names:title-run	担当記者が来た。	담당 기자가 왔다.	keep	lookup
+w:37200	文部科学相が会見した。	문부과학상이 회견했다.	fix	lookup
+w:37201	武藤容治経済産業相が訪米した。	무토 요지 경제산업상이 방미했다.	fix	lookup
+w:37202	福岡資麿厚生労働相は述べた。	후쿠오카 다카마로 후생노동상은 말했다.	fix	lookup
+w:37203	中野洋昌国土交通相が発表した。	나카노 히로마사 국토교통상이 발표했다.	fix	lookup
+w:37205	江藤拓農林水産相が辞任した。	에토 다쿠 농림수산상이 사임했다.	fix	lookup
+w:37206	村上誠一郎総務相は語った。	무라카미 세이이치로 총무상은 말했다.	fix	lookup
+w:37208	鈴木馨祐法務相が署名した。	스즈키 게이스케 법무상이 서명했다.	fix	lookup
+w:37212	自民党のデジタル相経験者	자민당의 디지털상 경험자	fix	lookup
+w:37205	簗和生・前農林水産相の発言	has:농림수산상	fix	lookup
+names:kana-given	川端かなさんが来た。	has:카와바타 카나 씨	fix	lookup
+names:kana-given	川端かな選手が出場した。	has:카와바타 카나 선수	fix	lookup
+names:kana-given	佐藤まいさんが来た。	has:사토 마이 씨	fix	lookup
+names:kana-given	田中ももさんが来た。	has:타나카 모모 씨	fix	lookup
+names:kana-given	鈴木はな記者が報告する。	has:스즈키 하나 기자	fix	lookup
+names:kana-given	山本さえさんが来た。	has:야마모토 사에 씨	fix	lookup
+names:kana-given	山本さえ選手には勝てない。	has:마저	keep	lookup
+names:kana-given	星たくさん見えた。	has:많이	keep	lookup
+names:kana-given	金たくさん持ってる。	lacks:타쿠	keep	lookup
+names:kana-given	田中とゆみさんが来た。	has:타나카와 유미 씨	keep	lookup
+names:kana-given	川端かな？	lacks:카나	keep	lookup
+names:titled	田中一郎外相が語った。	has:타나카 이치로 외무장관	keep	lookup
+names:titled	田中一郎容疑者が逮捕された。	has:타나카 이치로 용의자	keep	lookup
+names:titled	河野太郎外相が語った。	has:코노 타로 외무장관	keep	lookup
+names:titled	水野忠弘記者が伝えた。	has:미즈노 타다히로 기자	keep	lookup
+names:titled	茂木敏充外相は６日の記者会見で語った。	has:모테기 도시미츠 외무장관	keep	lookup
+names:titled	自民党の岩屋毅前外相は語った。	has:이와야 다케시	fix	lookup
+names:titled	長妻昭元厚生労働相が質問した。	has:나가츠마 아키라 전 후생노동상	keep	lookup
+names:given-tail	義恒さんが来た。	has:요시츠네 씨	keep	lookup
+names:given-tail	秀恒さんが来た。	lacks:헝	keep	lookup
+names:given-tail	光恒さんが来た。	lacks:헝	keep	lookup
+names:kana-given	上田からも監督が来た。	has:우에다에게서도	keep	lookup
+names:kana-given	山田までも選手が来た。	has:야마다까지도	keep	lookup
+names:kana-given	田中だけは選手だ。	has:타나카만은	keep	lookup
+names:kana-given	どうやら俺の勝ちの様だな」	lacks:치노	keep	lookup
+names:kana-given	アニメも大好きな様だ。	lacks:키나	keep	lookup
+names:titled	水野忠弘記者が伝えた。	has:미즈노 타다히로 기자	fix	lookup
+names:titled	河野太郎外相が語った。	has:코노 타로 외무장관	fix	lookup
+names:titled	菅勝選手が勝った。	has:칸 마사루 선수	keep	lookup

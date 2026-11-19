@@ -9308,7 +9308,7 @@ Sガンダム	S건담	N110			GN							names.9558
 Sガンダム	S건담	N110			GN							names.9559
 Sガンダム ディープ・ストライカー	S건담 딥 스트라이커	N110			GN							names.9560
 Sキラーマシン	S킬러머신	N110			GN							names.9561
-Sクラス	메르세데스-벤츠 S 클래스	N110			GN							names.9562
+Sクラス	S클래스	N110			GN							names.9562
 Sスネーク	S-스네이크	N130	QPNVHn	Wb	GN							names.9563
 Sタイプ	S타입	N110			GN							names.9564
 Sタンク	S전차	N110			GN							names.9565
@@ -18181,7 +18181,6 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 そーまっち	소마치	N130	QPNVHn	Wb	GN						そーまっち	names.19057
 そーりん	소린	N130	QPNVHn	Wb	GN							names.19058
 そーナンだー	소난다	N130	QPNVHn	Wb	GN						そーなんだー	names.19059
-ぞう	샹	N130	QPNVHn	Wb	GN						ぞう	names.19060
 ぞうさんのあくび	코끼리 아저씨의 하품	N130	QWK		GN						ぞうさんのあくび	names.19061
 ぞうさんパクパク	조상 파쿠파쿠	N130	QPNVHn		GN						ぞうさんぱくぱく	names.19062
 ぞうり	조리	N110			GN							names.19063
@@ -21517,6 +21516,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 はるうられ	하루우라레	N110			GN						はるうられ	names.22541
 はるえ	하루에	N130	QPNVHn	Wb	GN							names.22542
 はるお	하루오	N130	QPNVHn	Wb	GN						はるお	names.22543
+はるか	하루카	N130	QPNVHn	Wb	GN							names.767336
 はるか、ノスタルジィ	하루카, 노스탤지어	N130	QWK		GN							names.22544
 はるかぜっち	하루카제치	N130	QPNVHn	Wb	GN						はるかぜっち	names.22545
 はるかぜに告ぐ	하루카제니 츠구	N110			GN						はるかぜにつぐ	names.22546
@@ -21831,7 +21831,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ひさ	히사	N130	QPNVHn	Wb	GN							names.22859
 ひさうちみちお	히사우치 미치오	N130	QPNVHn		GN							names.22860
 ひさえ	히사에	N130	QPNVHn	Wb	GN							names.22861
-ひさし	히사시	N110			GN						ひさし	names.22862
+ひさし	히사시	N130	QPNVHn	Wb	GN						ひさし	names.22862
 ひさしぶりトランク	오랜만 트렁크	N130	QPNVHn		GN						ひさしぶりとらんく	names.22863
 ひさみ	히사미	N130	QPNVHn	Wb	GN							names.22864
 ひさプー	히사푸	N130	QPNVHn	Wb	GN						ひさぷー	names.22865
@@ -264512,7 +264512,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ハイセン	하이센	N130	QPNVHn	Wb	GN						はいせん	names.268539
 ハイセンス	하이센스	N110			GN						はいせんす	names.268540
 ハイセンス・アリーナ	멜버른 아레나	N130	QCTVPl		GN							names.268541
-ハイゼット	기아 타우너	N110			GN						ハイゼット	names.268542
+ハイゼット	하이젯	N110			GN						ハイゼット	names.268542
 ハイゼットキャディー	하이제트 캐디	N110			GN						ハイゼットキャディー	names.268543
 ハイゼットジャンボ	하이제트 점보	N110			GN						はいぜっとじゃんぼ	names.268544
 ハイゼラード級航宙戦艦	하이젤라드급 항주전함	N110			GN							names.268545

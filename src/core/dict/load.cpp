@@ -517,7 +517,7 @@ bool internal::ReadLayer(std::string_view text, FileLayer& layer) {
     if (!line.starts_with("layer=")) return false;
     line.remove_prefix(6);
     constexpr std::string_view kNames[] = {"base", "words", "names", "user", "kana", "readings", "prefilter", "postfilter",
-                                           "pack", "pack-classes"};
+                                           "pack", "pack-classes", "seg-costs"};
     for (std::size_t i = 0; i < std::size(kNames); i++) {
         if (line == kNames[i]) {
             layer = static_cast<FileLayer>(i);
@@ -637,14 +637,15 @@ bool SnapshotLoader::ReadLayers() {
             }
             if (!filter) f.layer = column ? FileLayer::User : FileLayer::Base;
         } else if (!internal::ReadLayer(f.text, f.layer)) {
-            message = "the first line is not #! layer=base|words|names|user|kana|readings|prefilter|postfilter|pack|pack-classes";
+            message = "the first line is not #! layer=base|words|names|user|kana|readings|prefilter|postfilter|pack|pack-classes|seg-costs";
         } else if (f.layer != FileLayer::Base) {
             const bool plainLayer = f.layer == FileLayer::Kana || f.layer == FileLayer::Readings ||
                                     f.layer == FileLayer::PreFilter || f.layer == FileLayer::PostFilter ||
-                                    f.layer == FileLayer::Pack || f.layer == FileLayer::PackClasses;
+                                    f.layer == FileLayer::Pack || f.layer == FileLayer::PackClasses ||
+                                    f.layer == FileLayer::SegCosts;
             const bool column = Column(f);
             if (column && plainLayer)
-                message = "a column file cannot be of the layer kana, readings, prefilter, postfilter, pack or pack-classes";
+                message = "a column file cannot be of the layer kana, readings, prefilter, postfilter, pack, pack-classes or seg-costs";
             if (!column && !plainLayer) message = "a plain file cannot be of the layer words, names or user";
         }
         if (message) {
@@ -682,6 +683,14 @@ bool SnapshotLoader::CompilePlain(const std::vector<std::size_t>& rest) {
         }
         if (files[i].layer == FileLayer::PreFilter || files[i].layer == FileLayer::PostFilter) continue;
         if (files[i].layer == FileLayer::Pack || files[i].layer == FileLayer::PackClasses) {
+            s.sourceInfo_.push_back({files[i].name, LoadFileKind::Shipped, {}});
+            continue;
+        }
+        if (files[i].layer == FileLayer::SegCosts) {
+            for (auto& [line, message] : ParseSegCosts(text, s.segCosts_)) {
+                errors.push_back({files[i].name, LoadErrorKind::Plain, line, TsvErrorKind::Read, std::move(message)});
+                ok = false;
+            }
             s.sourceInfo_.push_back({files[i].name, LoadFileKind::Shipped, {}});
             continue;
         }
