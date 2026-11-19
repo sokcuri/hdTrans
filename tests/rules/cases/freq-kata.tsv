@@ -29,3 +29,41 @@ segmentation:katakana-run-whole	ジョーハーマン山脈アルカ山、山頂
 segmentation:katakana-run-whole	ルイサマ、こっちです	has:루이 님	keep	lookup
 segmentation:katakana-run-whole	ジャックサンが来た	has:잭 씨	keep	lookup
 segmentation:katakana-run-whole	「久しぶり、クリスハルト。元気だった？」	has:크리스하르트	keep	lookup
+segmentation:katakana-run-whole	ドクターゴフマンは言った。	has:닥터 고후맨	fix	lookup
+segmentation:katakana-run-whole	「ドクターゴフマン！」	has:닥터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンさん、こんにちは。	has:닥터 고후맨 씨	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンの発明	has:닥터 고후맨의	fix	lookup
+segmentation:katakana-run-whole	ドクターゴフマンとプロフェッサーゴフマン	has:교수 고후맨	fix	lookup
+segmentation:katakana-run-whole	プロフェッサーゴフマンの研究室	has:교수 고후맨의	fix	lookup
+segmentation:katakana-run-whole	キャプテンゴフマン、出撃だ！	has:캡틴 고후맨	fix	lookup
+segmentation:katakana-run-whole	キャプテンゴフマンは笑った。	has:캡틴 고후맨은	fix	lookup
+segmentation:katakana-run-whole	ミスターゴフマンと会った	has:미스터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ミセスゴフマン	has:미세스 고후맨	fix	lookup
+segmentation:katakana-run-whole	マスターゴフマンの店	has:마스터 고후맨	fix	lookup
+segmentation:katakana-run-whole	ジェネラルゴフマン	has:제너럴 고후맨	fix	lookup
+segmentation:katakana-run-whole	ドクタージャックマン	has:닥터 잭맨	fix	lookup
+segmentation:katakana-run-whole	ゴフマンタワーの屋上	has:고후맨 타워	fix	lookup
+segmentation:katakana-run-whole	ゴフマンホテルの部屋	has:고후맨 호텔	fix	lookup
+segmentation:katakana-run-whole	ゴフマンシティへようこそ	has:고후맨 시티	fix	lookup
+segmentation:katakana-run-whole	『大学受験』という最後のダンジョンラスダンを越えて	has:던전 라스단	fix	lookup
+segmentation:katakana-run-whole	「アップルシナモンティー。疲れを癒やしてくれるみたい」	has:애플 시나몬티	fix	lookup
+segmentation:katakana-run-whole	ドクタースミス	has:닥터 스미스	keep	lookup
+segmentation:katakana-run-whole	ドクターストレンジ	has:닥터 스트레인지	keep	lookup
+segmentation:katakana-run-whole	ドクターグレゴリーハウス	has:닥터 그레고리 하우스	keep	lookup
+segmentation:katakana-run-whole	キャプテンアメリカ	has:캡틴 아메리카	keep	lookup
+segmentation:katakana-run-whole	ミスタードーナツ	has:미스터도넛	keep	lookup
+segmentation:katakana-run-whole	「スローリー、モアスローリー」	has:모어	keep	lookup
+segmentation:katakana-run-whole	ボクハマリオ	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	「ボクハマリオ、ヨロシクネ」	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	ロボットは「ボクハマリオ」と答えた。	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	「ボクハマリオダ！」	lacks:보크	keep	lookup
+segmentation:katakana-run-whole	ボクハケン	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	ボクハケン。ヨロシク。	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	「ボクハケンデス」	lacks:보크하켄	keep	lookup
+segmentation:katakana-run-whole	オレハケン	lacks:오레하켄	keep	lookup
+segmentation:katakana-run-whole	アキノムシ	has:벌레	keep	lookup
+segmentation:katakana-run-whole	秋の夜、アキノムシが鳴いている。	has:벌레	keep	lookup
+segmentation:katakana-run-whole	アキノムシの声	has:벌레	keep	lookup
+segmentation:katakana-run-whole	「ワタシハアリス」と彼女は言った。	has:앨리스	keep	lookup
+segmentation:katakana-run-whole	アナタハアリス？	has:앨리스	keep	lookup
+segmentation:katakana-run-whole	キミノナマエハ？	has:이름	keep	lookup
