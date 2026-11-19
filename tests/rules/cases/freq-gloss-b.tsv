@@ -4,7 +4,7 @@ dict:freq-gloss-b	近所を歩くことで危険な場所が分かる。	has:동
 dict:freq-gloss-b	駅の近所に住む。	has:역의 부근에	keep	lookup
 dict:freq-gloss-b	空から何かの気配がした。	has:기척	fix	lookup
 dict:freq-gloss-b	形式の枠を超えない。	has:틀을	fix	lookup
-dict:freq-gloss-b	あまりの暑さに倒れた。	has:엄청난 더위에	fix	lookup
+dict:freq-gloss-b	あまりの暑さに倒れた。	has:지나친 더위에	keep	lookup
 dict:freq-gloss-b	急性発症の可能性は？	has:급성 발병의	fix	lookup
 dict:freq-gloss-b	一人が怪死し、一人が失踪する。	has:의문사	fix	lookup
 dict:freq-gloss-b	死の淵から生還した。	has:죽음의 문턱	fix	lookup
@@ -77,7 +77,6 @@ dict:freq-gloss-b	近所の公園に行った。	has:동네의 공원	fix	lookup
 dict:freq-gloss-b	この近所に住んでいる。	has:이 근처에	fix	lookup
 dict:freq-gloss-b	たまたま家が近所だったってだけで	has:집이 근처였다	fix	lookup
 dict:freq-gloss-b	ご近所さんからもらった。	has:이웃	keep	lookup
-dict:freq-gloss-b	背後に気配を感じた。	has:기척을 느꼈다	fix	lookup
 dict:freq-gloss-b	全く起きる気配はない。	has:기미는 없다	fix	lookup
 dict:freq-gloss-b	真帆は帰る気配を見せない。	has:기미를 보이지 않는다	fix	lookup
 dict:freq-gloss-b	ほっとした気配が伝わってきた。	has:안심한 기색	keep	lookup
@@ -108,3 +107,13 @@ dict:freq-gloss-b	村中恭兵が登板した。	has:무라나카 쿄우헤이�
 dict:freq-gloss-b	徳川御三家の一つだ。	has:토쿠가와 3대 명가	keep	lookup
 dict:freq-gloss-b	関係を取繕う。	has:관계를 수습한다	fix	pack
 dict:freq-gloss-b	見栄を取り繕った。	has:꾸몄다	keep	pack
+dict:freq-gloss-b	気配を完全に消していた。	has:기척을 완전히	fix	pack
+dict:freq-gloss-b	私の気配を察するとは。	has:기척을 헤아리	fix	pack
+dict:freq-gloss-b	ドアの外の気配を窺ってみる。	has:기척을 살피	fix	pack
+dict:freq-gloss-b	周囲に誰の気配もない。	has:누구의 기척도	fix	pack
+dict:freq-gloss-b	何者かの気配を感じる。	has:누군가의 기척을	fix	pack
+dict:freq-gloss-b	裏で何かが動いている気配はある。	has:기색은 있다	keep	lookup
+dict:freq-gloss-b	なんか気配が変わった。	has:기색이 바뀌었다	keep	lookup
+dict:freq-gloss-b	そんな気配など欠片もなかった。	has:그런 기색	keep	lookup
+dict:freq-gloss-b	肩身が狭そうな気配を出し始めた。	has:기색을 내기	keep	lookup
+dict:freq-gloss-b	フランのあまりの無防備さに驚いた。	has:지나친 무방비	keep	lookup

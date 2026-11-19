@@ -36,8 +36,13 @@ freq-gloss-b:31	sense	近所	n	frame	next=の pred=@place		동네		LEX-7201	freq
 freq-gloss-b:32	sense	近所	n	frame	after=この|その|あの		근처		LEX-7201	freq	この近所 이 근처
 freq-gloss-b:33	sense	近所	n	frame	pred=歩く|散歩|散策|回る|歩き回る|うろつく		동네		LEX-7201	freq	近所を歩く 동네를 걷다
 freq-gloss-b:34	sense	近所	n	frame	form=cop		근처		LEX-7201	freq	家が近所だ 집이 근처다
+freq-gloss-b:56	sense	気配	n	frame	pred=消す|消し|消して|殺す|殺し|殺して|察する|察し|察知する|窺う|窺い|うかがう|探る|消える|消え|絶つ|潜める		기척		LEX-7201	freq	気配を消す 기척을 지우다
+freq-gloss-b:57	sense	気配	n	colloc	人の気配		사람의 기척	70	LEX-7201	freq	人の気配 사람의 기척
+freq-gloss-b:58	sense	気配	n	colloc	誰の気配		누구의 기척	70	LEX-7201	freq	誰の気配 누구의 기척
+freq-gloss-b:59	sense	気配	n	colloc	誰かの気配		누군가의 기척	70	LEX-7201	freq	誰かの気配 누군가의 기척
+freq-gloss-b:60	sense	気配	n	colloc	何者かの気配		누군가의 기척	70	LEX-7201	freq	何者かの気配 누군가의 기척
+freq-gloss-b:61	sense	気配	n	colloc	何かの気配		뭔가의 기척	70	LEX-7201	freq	何かの気配 뭔가의 기척
 freq-gloss-b:35	sense	気配	n	frame	mod=* pred=ない|無い|見え|見える|見えない|見せる|見せ|見せない		기미		LEX-7201	freq	起きる気配がない 일어날 기미가 없다
-freq-gloss-b:36	sense	気配	n	frame	mod=ほっとする|安堵する|安心する|戸惑う|困る|焦る|落胆する|動揺する|狼狽える|うろたえる|怯える|呆れる		기색		LEX-7201	freq	ほっとした気配 안심한 기색
 freq-gloss-b:37	sense	気配	n	colloc	春の気配		봄기운	70	LEX-7201	freq	春の気配 봄기운
 freq-gloss-b:38	sense	気配	n	colloc	夏の気配		여름 기운	70	LEX-7201	freq	夏の気配 여름 기운
 freq-gloss-b:39	sense	気配	n	colloc	秋の気配		가을 기운	70	LEX-7201	freq	秋の気配 가을 기운
@@ -52,7 +57,6 @@ freq-gloss-b:47	sense	挙げる	v1	colloc	決勝点を挙げる		결승점을 �
 freq-gloss-b:48	sense	枠	n	frame	next=の pred=眼鏡|メガネ|めがね		테		LEX-7201	freq	銀の枠の眼鏡 은테 안경
 freq-gloss-b:49	name	淵	n	frame	after=ヶ|ケ|が|ガ		후치		LEX-7201	freq	猿ヶ淵 지명
 freq-gloss-b:50	sense	気配	n	frame	mod=* next=ゼロ|ない|無い|なし|無し		기미		LEX-7201	freq	起きる気配ゼロだ 일어날 기미 제로다
-freq-gloss-b:51	sense	気配	n	frame	form=cop		기색		LEX-7201	freq	ヒートアップしそうな気配だ 과열될 것 같은 기색이다
 freq-gloss-b:52	sense	気配	n	colloc	雨の気配		비 기운	70	LEX-7201	freq	雨の気配 비 기운
 freq-gloss-b:53	sense	大勢	n	frame	pred=決する|決まる|判明する		대세		LEX-7201	freq	選挙の大勢は決した 선거의 대세는 결정되었다
 freq-gloss-b:54	sense	淵	n	frame	mod=*		못		LEX-7201	freq	恐ろしい淵 무서운 못
