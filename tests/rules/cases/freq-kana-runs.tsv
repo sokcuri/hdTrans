@@ -1,0 +1,15 @@
+# 규칙: LEX-6800
+rule	input	expected	kind	layer
+pre-select:unplaced-lone-run	クイズで あそぼ！	has:아소보	fix	pre-select
+pre-select:unplaced-lone-run	ぼくの名前は ぱち。	has:파치	fix	pre-select
+pre-select:unplaced-lone-run	さあ ぱち 何だと思いますか？	has:파치	fix	pre-select
+pre-select:unplaced-lone-run	「うっしゃ！ 飯にするか！」	has:웃샤	keep	pre-select
+pre-select:unplaced-lone-run	「はぁう、もう駄目……」	has:하아우	keep	pre-select
+pre-select:unplaced-lone-run	（陽）んにゃろ〜！	has:은냐로	keep	pre-select
+pre-select:unplaced-lone-run	ふぅむ、と腕を組む。	has:후우무	keep	pre-select
+pre-select:unplaced-lone-run	これは ねこ。	has:고양이	keep	pre-select
+pre-select:unplaced-lone-run	みんなで いこう！	has:가자	keep	pre-select
+pre-select:unplaced-lone-run	雨が ふった。	has:내렸다	keep	pre-select
+pre-select:unplaced-lone-run	よし、たべよう！	has:먹자	keep	pre-select
+pre-select:unplaced-lone-run	まあ いいか。	lacks:마아	keep	pre-select
+pre-select:unplaced-lone-run	「あそぼ」	has:아소보	keep	pre-select
