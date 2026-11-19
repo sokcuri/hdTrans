@@ -4533,7 +4533,7 @@ std::string PlainSpaces(std::string text) {
 
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::ReadCommaSpelled(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::ReadCommaSpelled(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::WriteSpacedStutters(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(

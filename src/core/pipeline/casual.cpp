@@ -642,6 +642,38 @@ bool Teeka(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The marks that draw out the last vowel of a rough shout (ごらぁ, だらぁあ, ごらー).
+constexpr std::u32string_view kShoutDrawl = U"ぁあァアー～〜";
+// The end of a phrase after a rough shout: a mark, a closing bracket, a space or the end.
+constexpr std::u32string_view kShoutEnd = U"！？!?ッっ…‥」』）)、。 　";
+
+// ごら drawn out or not before the end of a phrase (なんだごらぁ！, どけごらぁ, ンだごらぁあぁッ): the rough こら
+// said voiced, group 1 its drawl and group 2 the end. Not ごらん (見てごらん, ごらぁん), the ごら of a word going on
+// (おごらせる) or after て or で (見てごら).
+bool RoughKora(std::string_view s, size_t pos, Match& m) {
+    if (In(Before(s, pos), U"てでお")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ごら")) return false;
+    const size_t drawl = p;
+    while (OneOf(s, p, kShoutDrawl)) {}
+    m.group[1] = Span(s, drawl, p);
+    return CharOrEnd(s, p, kShoutEnd, m, 2);
+}
+
+// The rough だろ of a ている or でいる said short with ん, its ろ said ら and drawn out, before the end of a phrase
+// (つってんだらぁ？！, 何言ってんだらぁ！): group 1 the て or で and group 2 the end. Not the conditional だら of a
+// verb (読んだらぁ？ 읽으면?), which no てん or でん comes before.
+bool RoughDaro(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "んだら")) return false;
+    const size_t drawl = p;
+    while (OneOf(s, p, kShoutDrawl)) {}
+    if (p == drawl) return false;
+    return CharOrEnd(s, p, kShoutEnd, m, 2);
+}
+
 // すかい before [？?、。！!」』…‥ー～] or the end, and るかい before 、: a question in かい after
 // です, ます or a dictionary form, its い a softening particle (お仲間ですかい, 元気してるかい、).
 // Not after a noun (佐藤くんかい) nor のかい, which the end rows read.
@@ -2205,8 +2237,52 @@ bool NiNaru(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// ちゃってん or ちまってん after the て form stems of Chimau, and んじゃってん or んじまってん, before の, だ or で: the
+// てしまっている of a verb said short (言い出しちゃってんのかな, 殺っちまってんだぞ, 読んじゃってんだ), which the word stage
+// reads only in full; group 1 the て or で it stands for and group 2 the いる of ている with the ん of an explanation before
+// だ or で (てるんだ) or without it before の (てるの). Before the spoken forms, which read ってんだ as a quote. Not the Kansai
+// past てん that ends the sentence or goes on with けど or や (忘れちゃってん。), not before じゃん (壊れちゃってんじゃん reads
+// as it is), and not where a word of the dictionary ends at the ちゃ after other than っ (めちゃ) or with the し and the て it stands for
+// (どうしちゃってんの: どうして would take the て).
+bool ChatteN(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const bool te = In(Before(s, pos), U"っしえけげせぜてでねべめれきぎちにひみりびぴ見来寝着出居似煮");
+    if (te && (Lit(s, p, "ちゃってん") || (p = pos, Lit(s, p, "ちまってん")))) {
+        m.group[1] = "て";
+    } else if (p = pos; Before(s, pos) == U'ん' && (Lit(s, p, "じゃってん") || (p = pos, Lit(s, p, "じまってん")))) {
+        m.group[1] = "で";
+    } else {
+        return false;
+    }
+    size_t q = p;
+    if (!OneOf(s, q, U"のだで")) return false;
+    // A dictionary word that ends at pos with tail, from up to four kana or kanji before it.
+    const RunLookup* runs = ruContractionRuns;
+    const auto wordEnds = [&](std::string_view tail) {
+        if (runs == nullptr || runs->word == nullptr) return false;
+        size_t start = pos;
+        for (int k = 0; k < 4 && start > 0; k++) {
+            const text::Rune r = LastRune(s.substr(0, start));
+            if (!IsHiraganaClass(r.cp) && !IsKanjiClass(r.cp)) break;
+            start -= r.size;
+            if (runs->word(runs->context, Cat({s.substr(start, pos - start), tail}))) return true;
+        }
+        return false;
+    };
+    // After っ the ちゃ is always a て form (やっちゃ).
+    if ((Before(s, pos) != U'っ' && wordEnds(Span(s, pos, pos + std::string_view("ちゃ").size()))) || (Before(s, pos) == U'し' && wordEnds("て"))) {
+        return false;
+    }
+    m.group[2] = In(At(s, p).cp, U"だで") ? "いるん" : "いる";
+    m.end = p;
+    return true;
+}
+
 std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
-    std::string text = ReplaceAll(in, SpokenSpelling, [](const Match& m) { return std::string(m.group[1]); });
+    // The rough shouts give the plain forms that the spoken forms read (てんだろ).
+    std::string text = ReplaceAll(in, RoughKora, [](const Match& m) { return Cat({"こら", m.group[1], m.group[2]}); });
+    text = ReplaceAll(text, RoughDaro, [](const Match& m) { return Cat({m.group[1], "んだろ", m.group[2]}); });
+    text = ReplaceAll(text, SpokenSpelling, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, NakyaDa, [](const Match&) { return std::string("なきゃいけない"); });
     text = ReplaceAll(text, NiNaru, [](const Match& m) { return Cat({m.group[1], "に"}); });
     text = ReplaceAll(text, KanjiShikire, [](const Match& m) { return std::string(m.group[1]); });
@@ -2221,6 +2297,7 @@ std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
         Scope(const Scope&) = delete;
         Scope& operator=(const Scope&) = delete;
     } scope(&runs);
+    text = ReplaceAll(text, ChatteN, [](const Match& m) { return Cat({m.group[1], "しまって", m.group[2]}); });
     text = ReplaceAll(text, RuContraction, [](const Match& m) { return std::string(m.group[1]); });
     return ReplaceAll(text, SpokenVerbContraction, [](const Match& m) { return std::string(m.group[1]); });
 }
