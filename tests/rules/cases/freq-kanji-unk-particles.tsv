@@ -1,0 +1,115 @@
+# 규칙: LEX-7600, LEX-7601
+rule	input	expected	kind	layer
+lexical:adjectival-noun-particle	でも、どこのお守りは駄目とか、そういうのはない筈なのだけれど。	has:안 된다든가	fix	lookup
+lexical:adjectival-noun-particle	「姑息とか言うなっ」	lacks:고식이라든가	fix	lookup
+lexical:adjectival-noun-particle	水着だけに、綺麗とか似合っているという感情だけではすまない。	has:예쁘다든가	fix	lookup
+lexical:adjectival-noun-particle	静かとか言うな。	has:조용하다든가	fix	lookup
+lexical:adjectival-noun-particle	素敵とか言われても困る。	has:멋지다든가	fix	lookup
+lexical:adjectival-noun-particle	駄目など	has:안 된다는 등	fix	lookup
+lexical:adjectival-noun-particle	「駄目ということはないが……」	has:안 된다고	fix	lookup
+lexical:adjectival-noun-particle	状況はもう懲り懲りと口から飛び出そうだった	has:지긋지긋하다고	fix	lookup
+lexical:adjectival-noun-particle	「できるだけ穏便と言っても、既にパニック状態になってますね」	lacks:온편	fix	lookup
+lexical:adjectival-noun-particle	妖艶とも言える表情に興奮が高まる。	has:요염하다고도	fix	lookup
+lexical:adjectival-noun-particle	気丈を装っている彼女…。	has:다부짐을	fix	lookup
+lexical:adjectival-noun-particle	佳奈すけも、御園の不機嫌を察知したらしく話題を切り替える。	lacks:불기분	fix	lookup
+lexical:adjectival-noun-particle	根底には人嫌いがあるのだろうし	has:싫어함이	fix	lookup
+lexical:adjectival-noun-particle	「その程度で、嫌いはしないわ」	lacks:싫은은	fix	lookup
+lexical:adjectival-noun-particle	…見え見えのワナだな。	has:뻔한 함정	fix	lookup
+lexical:adjectival-noun-particle	学園長は一応しらばっくれるが、見え見えのウソだ。	has:뻔한 거짓말	fix	lookup
+lexical:adjectival-noun-particle	鳴りはじめた赤い毛むくじゃらの目覚まし	lacks:벗기는	fix	lookup
+lexical:adjectival-noun-particle	容姿端麗の水着女子２人が声を張り上げていた	lacks:단려의	fix	lookup
+lexical:adjectival-noun-particle	元気とか言うな。	has:건강이라든가	keep	lookup
+lexical:adjectival-noun-particle	無理とか言うな。	has:무리라든가	keep	lookup
+lexical:adjectival-noun-particle	嫌いとか好きとか、どうでもいい。	has:싫다든가	keep	lookup
+lexical:adjectival-noun-particle	駄目なんて言うな。	has:안 된다니	keep	lookup
+lexical:adjectival-noun-particle	駄目って言った。	has:안 된다고	keep	lookup
+lexical:adjectival-noun-particle	ダメとか言うな。	has:안 돼라든가	keep	lookup
+lexical:adjectival-noun-particle	今まで積み上げてきた好意に、ここ数日の言動が駄目を押した形だった。	has:다짐한	keep	lookup
+lexical:adjectival-noun-particle	御園は、飄々とした顔でギザの腹を触っている。	lacks:초연하다고	keep	lookup
+lexical:adjectival-noun-particle	先生の言葉は、切実となって、胸に入り込みました。	lacks:절실하다고	keep	lookup
+lexical:adjectival-noun-particle	「彼にとっては、それが不幸せの始まりだったんだ」	has:불행의 시작	keep	lookup
+lexical:adjectival-noun-particle	堂々と歩く。	has:당당히	keep	lookup
+lexical:adjectival-noun-particle	優美が来たのは昼過ぎだった。	lacks:우아함	keep	lookup
+lexical:adjectival-noun-particle	風雅さんは優しい。	has:후우가 씨	keep	lookup
+lexical:adjectival-noun-particle	広大を見かけた。	lacks:광대함	keep	lookup
+lexical:adjectival-noun-particle	飄々と歩いていく背中。	lacks:초연하다고	keep	lookup
+lexical:adjectival-noun-particle	彼は汲々と働いている。	lacks:급급하다고	keep	lookup
+lexical:adjectival-noun-particle	男は漂然と現れた。	has:표연하게	keep	lookup
+lexical:adjectival-noun-particle	遅々として進まない。	has:지지 부진	keep	lookup
+lexical:adjectival-noun-particle	飄々が持ち味だ。	has:초연함이	fix	lookup
+lexical:adjectival-noun-particle	平々凡々が一番。	has:아주 평범함이	fix	lookup
+lexical:adjectival-noun-particle	綺麗な人だった。	has:예쁜 사람	keep	lookup
+lexical:adjectival-noun-particle	本当に駄目だ。	has:안 된다	keep	lookup
+lexical:adjectival-noun-particle	静かにしろ。	has:조용하게	keep	lookup
+lexical:adjectival-noun-particle	駄目元で頼んでみた。	has:밑져야 본전	keep	lookup
+lexical:adjectival-noun-particle	親に心配をかけた。	has:걱정을 끼쳤다	keep	lookup
+lexical:adjectival-noun-particle	迷惑をかけてごめん。	has:폐를 끼쳐서	keep	lookup
+lexical:adjectival-noun-particle	大事を取って休んだ。	has:신중을 기해	keep	lookup
+lexical:adjectival-noun-particle	本気を出せ。	has:진심을	keep	lookup
+lexical:kanji-unk-rows	鱈腹食べた。	has:배불리 먹었다	fix	lookup
+lexical:kanji-unk-rows	鱈鍋を囲んだ。	has:대구 전골	fix	lookup
+lexical:kanji-unk-rows	ぎりぎりと歯軋りをする。	has:이갈이	fix	lookup
+lexical:kanji-unk-rows	歯軋りが聞こえる。	has:이갈이가	fix	lookup
+lexical:kanji-unk-rows	正かくに答えた。	has:정확하게	fix	lookup
+lexical:kanji-unk-rows	正かくな数字だ。	has:정확한	fix	lookup
+lexical:kanji-unk-rows	剪定ばさみで枝を切る。	has:전정가위	fix	lookup
+lexical:kanji-unk-rows	鱈が釣れた。	has:대구가	keep	lookup
+lexical:kanji-unk-rows	歯ぎしりがうるさい。	has:이갈이가	keep	lookup
+lexical:kanji-unk-rows	正確に答えた。	has:정확하게	keep	lookup
+lexical:kanji-unk-rows	彼は不幸せだ。	has:불행하다	keep	lookup
+lexical:kanji-unk-rows	不幸せな人生。	has:불행한	keep	lookup
+lexical:kanji-unk-rows	栞ちゃん、おはよう。	has:시오리	keep	lookup
+lexical:kanji-unk-rows	「栞！」	has:시오리	keep	lookup
+lexical:kanji-unk-rows	悔しくて歯軋りした。	has:이갈이	fix	lookup
+lexical:kanji-unk-rows	「そんな、滅相もありません」	has:당치도 않	fix	lookup
+lexical:kanji-unk-rows	滅相もない。	has:당치도 않	keep	lookup
+lexical:adjectival-noun-particle	論理的とか言うな。	has:논리적이라든가	fix	lookup
+lexical:adjectival-noun-particle	合理的とか非合理的とか。	lacks:적이다든가	fix	lookup
+lexical:adjectival-noun-particle	官能的とか言われた。	has:관능적이라든가	fix	lookup
+lexical:adjectival-noun-particle	高圧的とか言うな。	has:고압적이라든가	fix	lookup
+lexical:adjectival-noun-particle	一方通行的とか言うな。	lacks:적이다든가	fix	lookup
+lexical:adjectival-noun-particle	「姑息とか言うなっ」	lacks:이다든가	fix	lookup
+lexical:adjectival-noun-particle	姑息とか卑怯とか言うな。	lacks:이다든가	fix	lookup
+lexical:adjectival-noun-particle	官能的とかいう話。	has:하는 이야기	fix	lookup
+lexical:adjectival-noun-particle	論理的だとか言うな。	has:논리적이라던가	fix	lookup
+lexical:adjectival-noun-particle	学生だったとか言うな。	has:학생이었다든가	keep	lookup
+lexical:adjectival-noun-particle	本当だとか嘘だとか。	has:사실이라든가	keep	lookup
+lexical:adjectival-noun-particle	静かのようだ。	has:조용한 것 같	fix	lookup
+lexical:adjectival-noun-particle	綺麗のようです。	has:예쁜 것 같습니다	fix	lookup
+lexical:adjectival-noun-particle	見え見えのようだ。	has:뻔한 것 같	fix	lookup
+lexical:adjectival-noun-particle	一見不似合いのようだが、扱いは慣れている。	has:것 같지만	fix	lookup
+lexical:adjectival-noun-particle	静かのようで静かでない。	has:조용한 것 같고	fix	lookup
+lexical:adjectival-noun-particle	綺麗のような気がする。	has:예쁜 것 같다	fix	lookup
+lexical:adjectival-noun-particle	不似合いのような気がする。	lacks:어색한 같다	fix	lookup
+lexical:adjectival-noun-particle	駄目のはずがない。	has:안 될 리가 없	fix	lookup
+lexical:adjectival-noun-particle	綺麗のはずだ。	has:예쁠 것이다	fix	lookup
+lexical:adjectival-noun-particle	静かのはずなのに。	has:조용할 텐데	fix	lookup
+lexical:adjectival-noun-particle	綺麗のわけがない。	has:예쁠 리가 없	fix	lookup
+lexical:adjectival-noun-particle	駄目のわけない。	has:안 될 리가 없	fix	lookup
+lexical:adjectival-noun-particle	見え見えの嘘だ。	has:뻔한 거짓말	keep	lookup
+lexical:adjectival-noun-particle	綺麗のもの。	has:예쁜 것	keep	lookup
+lexical:adjectival-noun-particle	夢のような気がする。	has:꿈 같은 느낌이 든다	keep	lookup
+lexical:adjectival-noun-particle	優美のようだ。	lacks:우아	keep	lookup
+lexical:adjectival-noun-particle	静香のはずだ。	has:시즈카일 것	keep	lookup
+lexical:adjectival-noun-particle	学生のはずだ。	has:학생일 것	keep	lookup
+lexical:adjectival-noun-particle	冗談のわけがない。	has:농담일 리가 없	keep	lookup
+lexical:kanji-unk-rows	非効率とか。	has:비효율이라든	fix	lookup
+lexical:kanji-unk-rows	非効率が問題だ。	has:비효율이 	fix	lookup
+lexical:kanji-unk-rows	非効率を改善する。	has:비효율을 	fix	lookup
+lexical:kanji-unk-rows	「そうだな。こんな環境では非効率も甚だしい」	has:비효율도 	fix	lookup
+lexical:kanji-unk-rows	非効率な作業だ。	has:비효율적인 작업	keep	lookup
+lexical:kanji-unk-rows	非効率に思える。	has:비효율적으로	keep	lookup
+lexical:kanji-unk-rows	無頓着を装う。	has:무관심을	fix	lookup
+lexical:kanji-unk-rows	無頓着な人。	has:무관심한 사람	keep	lookup
+lexical:kanji-unk-rows	身なりに無頓着で。	has:무관심해	keep	lookup
+lexical:adjectival-noun-particle	「いや、わたしだから駄目という話じゃないから……」	has:안 된다는 이야기	fix	lookup
+lexical:adjectival-noun-particle	「駄目ということはないが……」	lacks:말할 일	fix	lookup
+lexical:adjectival-noun-particle	綺麗という人もいる。	has:예쁘다는 사람	fix	lookup
+lexical:adjectival-noun-particle	静かだという話。	has:조용하다는 이야기	keep	lookup
+lexical:adjectival-noun-particle	「図書委員会でもいろんな企画が出るらしいんだけど、図書委員らしくないとか、うちの仕事じゃないとか……」	has:아니라든가	fix	lookup
+lexical:kanji-unk-rows	奇特と思った。	has:기특하다고	fix	lookup
+lexical:kanji-unk-rows	奇特にも手伝ってくれた。	has:기특하게도	fix	lookup
+lexical:kanji-unk-rows	獰猛な獣。	has:사나운 짐승	fix	lookup
+lexical:kanji-unk-rows	獰猛など気にしない。	lacks:사사납	fix	lookup
+lexical:kanji-unk-rows	粗野な男。	has:조야한 남자	fix	lookup
+lexical:kanji-unk-rows	粗野と思った。	lacks:볼품없	fix	lookup

@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/dict/classes.h"
 #include "core/output/inflect.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/token.h"
@@ -256,6 +257,29 @@ bool Item::RunDakeiyoCase8Query() {
         base.group = nullptr;
         return false;
     }
+    // An ending of gram code Lo (a particle that wants a noun or a quote: とか, が, の) follows only a
+    // stem of two or more characters that starts with a kanji and reads as nothing else: its group
+    // has no row of another class for its spelling, the names have no person of that spelling
+    // (優美が来た, 風雅を), and no longer row starts with it here (駄目を押す 다짐하다). Such a stem
+    // would otherwise be read kanji by kanji (駄目とか 안 된다든가, 気丈を 다부짐을; but 元気とか
+    // stays the noun 건강이라든가). The quoting と is not the と of a stem before する or なる
+    // (飄々とした, 切実となって), nor the と of manner of a stem that ends in a member of
+    // stem.taru-final (飄々と歩いた, 汲々と働く; spec LEX-7600).
+    auto loBlocked = [&](std::string_view ending, std::string_view after) {
+        const text::Rune first = text::DecodeRune(groupText);
+        if (!text::IsKanji(first.cp) || first.size == groupText.size()) return true;
+        if (w->snapshot.NamePerson(groupText)) return true;
+        if (ending == "と" && (dict::StartsWithMember(HDTRANS_CLASS("follower.taru-to"), after) > 0 ||
+                               dict::EndsWithMember(HDTRANS_CLASS("stem.taru-final"), groupText) > 0)) {
+            return true;
+        }
+        const std::string_view here = From(text, start);
+        for (const Record* r = group->records; r != nullptr; r = r->child) {
+            if (r->source == groupText && At(r->partCode, 1) != '8' && At(r->partCode, 1) != '5') return true;
+            if (r->source.size() > groupText.size() && r->source.starts_with(groupText) && here.starts_with(r->source)) return true;
+        }
+        return false;
+    };
     Group* g = w->NewGroup(found.records, ' ');
     if (g->length <= 0) {
         base.ResetDirect(g->entries.size());
@@ -281,7 +305,7 @@ bool Item::RunDakeiyoCase8Query() {
                 continue;
             }
             if ((Has(e.gattr, "Sh") && Classify(tail) != 0) || At(e.code, 0) != '5' || Byte(At(e.code, 1)) != base.kind ||
-                !w->EndingApplies(e, after, tokenIndex) ||
+                (Has(e.gattr, "Lo") && loBlocked(g->surface, after)) || !w->EndingApplies(e, after, tokenIndex) ||
                 w->CutsWord(tail.substr(0, tail.size() - scanned.size()), scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
                 base.enabled[entry] = false;
                 continue;
