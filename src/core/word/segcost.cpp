@@ -25,9 +25,12 @@
 #include <cstdlib>
 #include <limits>
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 
+#include "core/dict/char_readings.h"
+#include "core/dict/classes.h"
 #include "core/text/unicode.h"
 #if defined(_WIN32) && !defined(__EMSCRIPTEN__)
 #include <process.h>
@@ -53,6 +56,7 @@ struct SegEdge {
     bool word = false;                  // a dictionary word (not unknown text read by sound)
     bool particle = false;              // a particle spelled in kana
     bool joined = false;                // a katakana word with the single kana that ends the run (ジャーニー|ズ)
+    bool stem = false;                  // a verb or adjective stem with no ending matched
     // For --why and the shadow only: the start of the span, the code, layer and gloss of the edge,
     // and its cost terms, formatted by EdgeLabel; label is set where it is formatted already.
     int from = 0;
@@ -400,6 +404,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         e.part = part;
         e.user = c.user;
         e.word = true;
+        e.stem = stem;
         e.particle = part[0] == 'P' && AllHiragana(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(end - p)));
         if (detail) SetLabel(e, p, part, nameRow ? 'n' : kanaRow ? 'k' : 0, c.target, terms);
         // A single kana that ends the run after a katakana word belongs to that word (ジャーニー|ズ,
@@ -620,6 +625,164 @@ Record* Worker::LatticeKatakana(Record* records, std::string_view full, int curs
     Record* read = CreateSyntheticRecord(token, full.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(end - start)), false);
     read->child = records;
     return read;
+}
+
+namespace {
+
+bool KanjiRune(char32_t r) { return text::IsKanji(r) || r == U'々'; }
+
+// Whether gloss reads span by the sounds of its kanji, one syllable each, spaces aside: 分岐 분기,
+// 米国 미국, 年度 연도 (an initial ㄴ, ㄹ or ㅇ may stand for another of them).
+bool ReadsBySound(std::string_view span, std::string_view gloss) {
+    std::u32string sound;
+    for (std::string_view s = span; !s.empty();) {
+        const text::Rune r = text::DecodeRune(s);
+        s.remove_prefix(r.size);
+        const std::optional<char32_t> w = r.cp == U'々' && !sound.empty() ? std::optional<char32_t>(sound.back()) : dict::Written(r.cp);
+        if (!w || *w < 0xAC00 || *w > 0xD7A3) return false;
+        sound.push_back(*w);
+    }
+    auto liquid = [](int initial) { return initial == 2 || initial == 5 || initial == 11; };
+    std::size_t k = 0;
+    for (std::string_view s = gloss; !s.empty();) {
+        const text::Rune r = text::DecodeRune(s);
+        s.remove_prefix(r.size);
+        if (r.cp == U' ') continue;
+        if (k >= sound.size() || r.cp < 0xAC00 || r.cp > 0xD7A3) return false;
+        const int a = static_cast<int>(r.cp) - 0xAC00, b = static_cast<int>(sound[k++]) - 0xAC00;
+        if (a != b && (a % 588 != b % 588 || !liquid(a / 588) || !liquid(b / 588))) return false;
+    }
+    return k == sound.size();
+}
+
+}  // namespace
+
+// LEX-6725: inside a run of 3 to 16 kanji, where the first record is a noun of two kanji
+// that ends inside the run and reads them otherwise than by their sounds (全店 가게 전체, 学研
+// 가켄, 明大 메이지대학), the first word of the lattice's path goes first where that path is cheaper
+// than any path from the record, cuts the record's end inside one of its words (全|店舗, 学|研究,
+// 明|大統領), and reads every kanji of the run by a dictionary word that is no proper noun, no reading
+// of the name layer and no bare stem. A record read by the sounds of its kanji stays: a kanji read by
+// its sound after it is a Sino-Korean compound (分岐|路 분기로, 米国|内 미국 내). records holds the records
+// of the lookup in the order the reorders left.
+Record* Worker::LatticeKanji(Record* records, std::string_view full, int cursor, int token) {
+    constexpr int kMaxRun = 16;
+    const SegCosts& t = snapshot.SegCostTable();
+    if (!t.loaded || records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    const int size = static_cast<int>(full.size());
+    if (cursor < 0 || cursor >= size || !text::IsKanji(RuneAt(full, cursor))) return records;
+    int end = cursor, n = 0;
+    while (end < size && KanjiRune(RuneAt(full, end)) && n <= kMaxRun) {
+        end += CharLen(full, end);
+        n++;
+    }
+    // A noun of the lookup that could lead: two kanji ending inside the run, not read by their sounds. Two kanji is
+    // the length a chance overlap takes (明大 of 李在明大統領); a longer noun is a compound by its length (想定問答|集).
+    auto leads = [&](const Record& r) {
+        return !r.partCode.empty() && r.partCode[0] == 'N' && static_cast<int>(r.source.size()) < end - cursor && Chars(r.source) == 2 &&
+               AllOf(r.source, KanjiRune) && !ReadsBySound(r.source, r.target);
+    };
+    if (n < 3 || n > kMaxRun) return records;
+    bool any = false;
+    for (const Record* r = records; r != nullptr && !any; r = r->child) any = leads(*r);
+    if (!any) return records;
+    const SegWindow& w = SegWindowFor(full, cursor, end, token);
+    auto rest = [&](int at) { return at >= cursor && at <= w.limit ? w.suffix[static_cast<std::size_t>(at - cursor)] : kInf; };
+    auto edgeOf = [&](const Record& r) -> const SegEdge* {
+        const int k = static_cast<int>(r.source.size());
+        for (const SegEdge& e : w.edges[0]) {
+            if (e.word && e.key == k && e.part == r.partCode && e.user == r.user) return &e;
+        }
+        return nullptr;
+    };
+    // The record the search takes: the first one, past verbs and adjectives whose ending does not match here
+    // (学 of 学ぶ, 重 of 重い before a kanji).
+    const Record* lead = records;
+    while (lead != nullptr && (lead->partCode.starts_with("M") || lead->partCode.starts_with("H"))) {
+        const SegEdge* e = edgeOf(*lead);
+        if (e == nullptr || !e->stem) break;
+        lead = lead->child;
+    }
+    if (lead == nullptr || !leads(*lead)) return records;
+    const int key = static_cast<int>(lead->source.size());
+    // A kanji the dictionary reads as a suffix binds to the word before it (福良|港, 中地|区, 冠水|路), as in KanjiCoverFirst.
+    const std::string_view after = full.substr(static_cast<std::size_t>(cursor + key), static_cast<std::size_t>(CharLen(full, cursor + key)));
+    // The class holds kanji with no row of their own too (冠水|路).
+    if (dict::InClass(HDTRANS_CLASS("suffix.kanji-noun"), after)) return records;
+    for (const dict::Candidate& c : WordInfo(full.substr(static_cast<std::size_t>(cursor + key)), kModeGeneral).list) {
+        if (c.source == after && c.codes != nullptr && c.codes->gram.HasCode("Z7")) return records;
+    }
+    // A proper noun that starts the run stands at its own boundary (津地|検); inside the run it may overlap the
+    // next word by chance (李在|明大|統領).
+    if (lead->partCode == "N130" && (cursor == 0 || !KanjiRune(RuneAt(full, RuneBefore(full, cursor))))) return records;
+    int first = kInf;
+    for (const SegEdge& e : w.edges[0]) {
+        if (e.word && e.end == cursor + key && e.key == key && e.part == lead->partCode && e.user == lead->user && rest(e.end) < kInf) {
+            first = std::min(first, e.cost + rest(e.end));
+        }
+    }
+    if (first >= kInf || rest(cursor) >= first) return records;
+    // The lattice's path through the run; a tie keeps the edge the lookup lists first.
+    const SegEdge* head = nullptr;
+    bool cuts = false;
+    for (int p = cursor; p < end;) {
+        const SegEdge* pick = nullptr;
+        for (const SegEdge& e : w.edges[static_cast<std::size_t>(p - cursor)]) {
+            if (rest(e.end) < kInf && e.cost + rest(e.end) == rest(p)) {
+                pick = &e;
+                break;
+            }
+        }
+        // Every word of the path lies inside the run: a word that goes on into kana (人並|に) is grammar, not a kanji cover.
+        if (pick == nullptr || !pick->word || pick->stem || pick->part == "N130" || (pick->user != nullptr && pick->user->nameLayer) ||
+            pick->end > end) {
+            return records;
+        }
+        cuts = cuts || (p < cursor + key && pick->end > cursor + key);
+        if (head == nullptr) head = pick;
+        p = pick->end;
+    }
+    if (head == nullptr || !cuts || head->end >= cursor + key) return records;
+    const std::size_t chosen = static_cast<std::size_t>(head->end - cursor);
+    // The record gives way only to a first word read by its kanji sound (全|店舗 전, 李在|明|大統領 명), never to
+    // the meaning of its first kanji (桑|山村 뽕, 首|相兼 목): a name read by sound is still the name.
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() == chosen && r->partCode == head->part && r->user == head->user) {
+            if (!ReadsBySound(r->source, r->target)) return records;
+            break;
+        }
+    }
+    // The record of the lattice's first edge, then the other records of its length, then the rest.
+    Record* exact = nullptr;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (exact == nullptr && r->source.size() == chosen && r->partCode == head->part && r->user == head->user) {
+            exact = r;
+        } else {
+            Record**& tail = r->source.size() == chosen ? frontTail : backTail;
+            *tail = r;
+            tail = &r->child;
+        }
+        r = next;
+    }
+    if (exact != nullptr) {
+        exact->child = front;
+        if (front == nullptr) frontTail = &exact->child;
+        front = exact;
+    }
+    if (front == nullptr) {
+        if (static_cast<int>(chosen) != CharLen(full, cursor)) return back;
+        front = CreateSyntheticRecord(token, full.substr(static_cast<std::size_t>(cursor), chosen), false);
+        frontTail = &front->child;
+    }
+    *frontTail = back;
+    segDecided_.emplace_back(cursor, cursor + static_cast<int>(chosen));
+    return front;
 }
 
 // The edges of the whole token for --why and the shadow, the search's own items among them, and
