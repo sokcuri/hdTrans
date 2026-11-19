@@ -1,6 +1,7 @@
 #pragma once
 // The state of the word stage over one chunk: the tokens, the lookup context the
 // lookups carry from token to token, and the chain of the current sentence.
+#include <memory>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -38,6 +39,13 @@ struct OpenMarks {
 // The marks open after s when open were open before it.
 OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open);
 
+// Whether the shadow segmentation scorer runs (HDTRANS_SEG_SHADOW).
+bool SegShadowOn();
+
+// The segmentation lattice (segcost.cpp).
+struct SegEdge;
+struct SegTokenPaths;
+
 class Worker {
 public:
     Worker(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, const dict::LookupContext& lookup,
@@ -47,6 +55,8 @@ public:
     const dict::Snapshot& snapshot;
     dict::LookupContext lookupContext;
     Settings settings;
+    // With settings.splitWhy, one note per Japanese token: how it was split and the best other split.
+    std::vector<std::string> splitNotes;
     Arena& arena;
     LookupObserver observer;
 
@@ -208,6 +218,13 @@ private:
     // afterMyriad: the text before source ends with 万 or 億.
     Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
+    // The segmentation lattice (segcost.cpp). SegReport reads token again as one best path: with
+    // settings.splitWhy it adds the token's split note, with HDTRANS_SEG_SHADOW it logs where the
+    // lattice splits more cheaply than the search.
+    void SegReport(int token, std::string_view surface, const Item* mark);
+    void SegEdgesAt(std::string_view s, int p, int token, bool detail, std::vector<SegEdge>& out);
+    bool SegTokenLattice(int token, std::string_view surface, const Item* mark, SegTokenPaths& out);
+    bool segDecided_ = false;  // the lattice changed the order of records in the current token
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);

@@ -229,7 +229,8 @@ if(NOT EMSCRIPTEN)
         -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
-        add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
+        add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>"
+            "${CMAKE_CURRENT_SOURCE_DIR}/dicts/seg-costs.tsv")
         add_test(NAME sound.long-line COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/long_line.sh" "$<TARGET_FILE:hdtrans_cli>"
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(sound.long-line PROPERTIES TIMEOUT 60)

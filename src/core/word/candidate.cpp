@@ -2102,7 +2102,12 @@ bool Worker::Dispatch(int i, int& last) {
         break;
     case tokenizer::kTypeJapanese:
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
-        else BuildSurfaceTransform(i, left);
+        else {
+            const Item* const mark = chain.tail;
+            segDecided_ = false;
+            BuildSurfaceTransform(i, left);
+            if (SegShadowOn() || settings.splitWhy) SegReport(i, left, mark);
+        }
         if (const Item* tail = chain.tail) {
             for (int e = 0; e < static_cast<int>(tail->group->entries.size()); e++) {
                 if (Has(tail->GAttr(e), "Wa") && i + 1 < TokenCount() && Tok(i + 1).type == tokenizer::kTypeWideSpace) {

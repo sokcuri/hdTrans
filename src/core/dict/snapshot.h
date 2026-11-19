@@ -56,6 +56,7 @@
 #include <vector>
 
 #include "core/dict/codes.h"
+#include "core/dict/seg_costs.h"
 #include "core/dict/dict.h"
 #include "core/dict/tsv.h"
 #include "core/dict/load_info.h"
@@ -77,7 +78,7 @@ namespace internal {
 class SnapshotFile;
 }
 
-enum class FileLayer : uint8_t { Base, Words, Names, User, Kana, Readings, PreFilter, PostFilter, Pack, PackClasses };
+enum class FileLayer : uint8_t { Base, Words, Names, User, Kana, Readings, PreFilter, PostFilter, Pack, PackClasses, SegCosts };
 
 // A *.tsv file of a dictionary folder.
 struct File {
@@ -269,6 +270,8 @@ public:
     const userdict::SenseTable& Senses() const { return senses_; }
     // The pack rows of the folders' pack files (pack.h), empty without any.
     const PackTable& Packs() const { return packs_; }
+    // The edge costs of the segmentation lattice (seg_costs.h); not loaded without a seg-costs file.
+    const SegCosts& SegCostTable() const { return segCosts_; }
     // The marker families that the conjugating plain entries and senses use beyond
     // the static ones.
     const userdict::Families& GeneratedFamilies() const { return families_; }
@@ -390,6 +393,7 @@ private:
     std::unique_ptr<const UserText> rawPlain_, textPlain_, rawExtraPlain_, textExtraPlain_;
     userdict::SenseTable senses_;
     PackTable packs_;
+    SegCosts segCosts_;
     mutable std::once_flag documentOnce_;
     mutable std::shared_ptr<const pipeline::DocumentData> documentData_;
 };

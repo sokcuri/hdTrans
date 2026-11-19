@@ -1,0 +1,19 @@
+#! layer=seg-costs
+# The edge costs of the segmentation lattice (spec/words.md, LEX-6720, LEX-6721). A path costs the sum of its edges; the cheapest path wins, and a tie keeps the order of the word search. Every value is set by hand.
+# name	value	reason
+word	100	every word: fewer words win
+particle	0	a particle spelled in kana costs nothing more than its word
+lone-kanji	30	a word of one kanji is often a loose kanji of a compound
+lone-kana	60	a content word of one hiragana is often a piece of a kana word
+kata-loan	40	a dictionary word of three or more katakana, in place of word: a loan word is one word
+short-kata-piece	80	a dictionary word of one or two katakana inside a longer katakana run is often a piece cut by chance
+kata-sound	100	one katakana no word covers, read by its sound
+proper	25	a proper noun row of the base dictionary not in katakana reads a name by chance
+name-row	25	a reading of the name layer reads a name by chance
+kana-row	0	a kana spelling of a kanji word is that word
+stem-only	20	a verb or adjective stem with no ending matched
+unknown-char	160	one character no word covers
+sound-run	100	a whole katakana run read by its sound is one word
+sound-char	20	and each katakana of it, so a long run read by sound costs more than its words
+latin-run	100	a run of Latin letters is one word and is not cut
+long-mark	0	a ー alone at the start or the end of a katakana run is a mark (a dash or a stretch), not a word
