@@ -28785,3 +28785,18 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 たたき直	뜯어고&AO@	M443			GN							w:39102
 揉み合わせ	비&Ad@	M437			GN							w:39103
 もみ合わせ	비&Ad@	M437			GN							w:39104
+
+日向坂	히나타자카	I130	QCTVPl		GN							w:39500
+欅坂	케야키자카	I130	QCTVPl		GN							w:39501
+櫻坂	사쿠라자카	I130	QCTVPl		GN							w:39502
+吉本坂	요시모토자카	I130	QCTVPl		GN							w:39503
+ぞうさん	코끼리 씨	N110	VAm		GN							w:39504
+となりさん	이웃	N110	VHn		GN							w:39505
+どうぐやさん	도구점	N110	VPl		GN							w:39506
+赤松林	소나무 숲	N110	QAL		GN						あかまつばやし	w:39507
+じぞうさん	지장보살	N110			GN							w:39508
+おじぞうさん	지장보살	N110			GN							w:39509
+地蔵さん	지장보살	N110			GN						じぞうさん	w:39510
+お地蔵さん	지장보살	N110			GN						おじぞうさん	w:39511
+じぞうさま	지장보살	N110			GN							w:39512
+おじぞうさま	지장보살	N110			GN							w:39513

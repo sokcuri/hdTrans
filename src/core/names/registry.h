@@ -300,6 +300,8 @@ private:
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     // The common words and verb forms the document calls by name before an honorific (つきさん; spec LEX-6301).
     std::set<std::string, std::less<>> calledWords_;
+    // The unknown kana names before a call honorific that start with a word (かおる: かお; spec LEX-7550).
+    std::set<std::string, std::less<>> kanaWordStart_;
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
     std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ
     struct Loose {

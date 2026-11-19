@@ -1,0 +1,43 @@
+# 규칙: LEX-7550
+rule	input	expected	kind	layer
+names:proven-bare	ゆいさんが来た。\nゆいは笑った。	has:유이는	fix	fixed
+names:proven-bare	あいさんが来た。\nあいは笑った。\n「あい、待って」	has:아이는	fix	fixed
+names:proven-bare	ななさんが来た。\nななは笑った。	has:나나는	fix	fixed
+names:proven-bare	かおるさんが来た。\nかおる、こっちだよ。	has:카오루,	fix	fixed
+names:proven-bare	なかしまさんが来た。\nなかしまは笑った。	has:나카시마는	fix	fixed
+names:proven-bare	なかねさん、どうぞ。\nなかねが来た。	has:나카네가	fix	fixed
+names:proven-bare	ゆいちゃん、こっち。\nゆいは寝た。	has:유이는	fix	fixed
+names:proven-bare	ゆいさんが来た。\nゆいが来た。	has:유이가	fix	fixed
+names:proven-bare	ゆいさんが来た。\nゆいは誰？	has:유이는	fix	fixed
+names:proven-bare	のんちゃん、おはよう。\nのんは笑った。	has:논은	fix	fixed
+names:proven-bare	ももちゃんが来た。\nもも、こっち！	has:모모,	fix	fixed
+names:proven-bare	入江さんが来た。\n入江は笑った。	has:이리에는	fix	fixed
+names:proven-bare	清水さん、おはよう。\n清水は笑った。	has:시미즈는	fix	fixed
+names:proven-bare	「入江先生、どうも」\n入江だけなのです。	has:이리에뿐	fix	fixed
+names:proven-bare	あいさんが来た。\nあいにく雨だ。	has:공교롭게	keep	fixed
+names:proven-bare	ななさんが来た。\nななめに切る。	has:대각선	keep	fixed
+names:proven-bare	かおるさんが来た。\nかおを洗う。	has:얼굴	keep	fixed
+names:proven-bare	なかしまさんが来た。\nなかなか来ない。	has:좀처럼	keep	fixed
+names:proven-bare	田中さんが来た。\n田中は笑った。	has:나카는	keep	fixed
+names:proven-bare	のぞみさんが来た。\nのぞみが叶った。	has:희망이	keep	fixed
+names:proven-bare	ゆいさん、おはよう。\nゆいいつの方法だ。	has:유일	keep	fixed
+names:proven-bare	あやちゃん、おはよう。\nあやが来た。	has:아야가	fix	fixed
+names:proven-bare	りおさんが来た。\nりお、待って！	has:리오,	fix	fixed
+names:proven-bare	ゆいさんが来た。\nゆいとあった。	has:유이	fix	fixed
+names:proven-bare	まなちゃんが来た。\nまなは寝た。	has:마나는	fix	fixed
+names:proven-bare	かおるさんが来た。\n私にはかおるしかないの。	lacks:카오루밖에	keep	fixed
+names:proven-bare	どうぐやさんが来た。\nどうぐやさんは笑った。	lacks:웃었나	fix	fixed
+names:proven-bare	神戸さんが来た。\n神戸に行く。	has:고베에 간다	keep	fixed
+names:proven-bare	神戸さんが来た。\n神戸は港町だ。\n神戸牛を食べた。	has:고베는 항구	keep	fixed
+names:proven-bare	神戸さんが来た。\n神戸は港町だ。\n神戸牛を食べた。	has:고베규를	keep	fixed
+names:proven-bare	神戸に住んでいる。\n神戸さんが来た。	has:고베에 살고	keep	fixed
+names:proven-bare	神戸さん、おはよう。\n神戸の夜景はきれいだ。	has:고베의 야경	keep	fixed
+names:proven-bare	「神戸さん」\n神戸に行く。	has:고베 씨	fix	fixed
+names:proven-bare	植木さんが来た。\n植木に水をやる。	has:식목에 물을	fix	fixed
+names:proven-bare	植木さんが来た。\n植木の手入れをした。	has:식목의 손질	fix	fixed
+names:proven-bare	入江さんが来た。\n入江に船が入った。	has:후미에 배가	fix	fixed
+names:proven-bare	赤松さんが来た。\n赤松の林を歩く。	has:소나무의 숲	fix	fixed
+names:proven-bare	赤松さんが来た。\n赤松林を抜けた。	has:소나무 숲을	fix	fixed
+names:proven-bare	植木さんが来た。\n植木は笑った。	has:우에키는	keep	fixed
+names:proven-bare	赤松さんが来た。\n赤松が言った。	has:아카마츠가	keep	fixed
+names:proven-bare	いつきさんが来た。\nいつきは笑った。	lacks:웃었나	fix	fixed

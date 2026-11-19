@@ -1564,6 +1564,16 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             return (f.layerGiven || f.layerSurname) && !f.role && !f.thing &&
                    Flags(std::string(t) + std::string(h)).records == 0;
         };
+        // さん or ちゃん as written, then a mark or a case particle, after a run with no small っ (spec LEX-7550).
+        auto wordStartCall = [&](std::string_view t) {
+            if ((h != "さん" && h != "ちゃん") || t.find("っ") != std::string_view::npos) return false;
+            const std::string_view after = line.substr(pos);
+            if (!after.starts_with(h)) return false;
+            const std::string_view next = after.substr(h.size());
+            return next.empty() || (!IsHiragana(FirstRune(next).cp) && !IsKatakana(FirstRune(next).cp) && !IsKanji(FirstRune(next).cp) &&
+                                    FirstRune(next).cp != U'ー' && FirstRune(next).cp != U'〜') ||
+                   InRunes(FirstRune(next).cp, "がはもをにへ");
+        };
         // Kana no dictionary has, standing as the whole run before the honorific, which no word of two
         // kana or more starts (みいちゃん, のんちゃん; spec LEX-4826): a name written as it is spelled.
         auto unknown = [&](std::string_view t) {
@@ -1592,8 +1602,14 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
                 if (b > 0 && RuneCount(tail) == 1 && !InRunes(FirstRune(tail).cp, "おご")) continue;
                 if (Flags(std::string_view(withHonorific).substr(b)).records > 0) return false;
             }
+            // A run that starts with a word of two kana or more (かおる: かお, なかしま: なか) is a name only before an
+            // honorific of a call, and then one that stands bare only where a name stands (spec LEX-7550).
             for (std::size_t e = RuneAt(t, 0).size; e < t.size(); e += RuneAt(t, e).size) {
-                if (e >= RuneAt(t, 0).size * 2 && Flags(t.substr(0, e)).records > 0) return false;
+                if (e >= RuneAt(t, 0).size * 2 && Flags(t.substr(0, e)).records > 0) {
+                    if (!wordStartCall(t)) return false;
+                    kanaWordStart_.emplace(t);
+                    return true;
+                }
             }
             return true;
         };
@@ -1675,7 +1691,9 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
         for (int k = 0; k < 2 && !run.empty(); k++) {
             const std::size_t n = RuneCount(run);
             const bool particle = IsParticleRune(FirstRune(run).cp);
-            if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && name(run)) {
+            // Two kana of the name layer only as the whole run before さん or ちゃん (ゆいさん, ななちゃん; spec LEX-7550).
+            const bool shortCall = n == 2 && k == 0 && !afterWord && wordStartCall(run);
+            if ((k == 1 || !particle || !afterWord) && (n >= 3 || shortCall) && n <= 4 && name(run)) {
                 out.emplace_back(run);
                 found = true;
                 break;
@@ -1709,11 +1727,7 @@ bool Registry::Addressed(std::string_view line, std::string_view t) {
 bool Registry::Guarded(std::string_view line, std::size_t a, std::size_t b) {
     const std::string_view t = line.substr(a, b - a), rest = line.substr(b), at = line.substr(a);
     // A common word with the start of the text after it that keeps the word (桜が咲いた, 空を見上げる).
-    const auto contexts = dict::ClassMembers(HDTRANS_CLASS("name.common-word-context"));
-    const auto words = dict::ClassNotes(HDTRANS_CLASS("name.common-word-context"));
-    for (std::size_t k = 0; k < contexts.size() && k < words.size(); k++) {
-        if (words[k] == t && at.starts_with(contexts[k]) && !Addressed(line, t)) return true;
-    }
+    if (WordContextAt(t, at) && !Addressed(line, t)) return true;
     if (snap_ == nullptr) return false;
     std::string_view tail = line.substr(a);
     if (tail.size() > 48) {

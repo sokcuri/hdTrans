@@ -1183,7 +1183,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         n.score += static_cast<double>(std::min(c, kHonorificCap));
         // Kana no dictionary has stand for the person after one honorific (みいちゃん … みいは; spec
         // LEX-4826): they are no word a bare use could mean.
-        if (Flags(t).records == 0) n.score += 1;
+        if (Flags(t).records == 0 && !kanaWordStart_.contains(t)) n.score += 1;
         n.person = true;
     }
     // Kana no dictionary has that the document writes three times or more where a name stands, before a

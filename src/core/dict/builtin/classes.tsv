@@ -502,6 +502,7 @@
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+//= question.ko	Korean question words. A dictionary word longer than the question word it starts with asks only where its Korean reading has one of them (何度 몇 번, どういうこと 무슨 뜻; not どうぐや 고물상, どうろ 도로, いくら丼, 何一つ 아무것도 or a name).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= script.chinese-particle	Sentence particles of Chinese that Japanese text never writes (嗎, 呢, 啊): a Han run holding one is Chinese (spec LAY-17).
 //= script.chinese-word	Words of Chinese prose and of the translator's notes in Chinese subtitles (這個, 意思是, 讀作, 日語中, 原文為) that Japanese text does not write, also in its old forms: a Han run holding one is Chinese (spec LAY-17).
@@ -2984,6 +2985,10 @@ name.common-word-context	花を摘	花
 name.common-word-context	月が出	月
 name.common-word-context	月が昇	月
 name.common-word-context	月明かり	月
+name.common-word-context	植木に水	植木
+name.common-word-context	植木の手入れ	植木
+name.common-word-context	入江に船	入江
+name.common-word-context	赤松の林	赤松
 name.person-hair	髪
 name.person-hair	前髪
 name.person-hair	髪の毛
@@ -7049,6 +7054,29 @@ question.wonder	一体
 question.wonder	いったい
 question.wonder	いくつ
 question.wonder	いくら
+
+question.ko	뭐
+question.ko	뭣
+question.ko	무엇
+question.ko	무슨
+question.ko	몇
+question.ko	며칠
+question.ko	누구
+question.ko	누가
+question.ko	어디
+question.ko	언제
+question.ko	왜
+question.ko	웬
+question.ko	어느
+question.ko	어떤
+question.ko	어떻
+question.ko	어떠
+question.ko	어때
+question.ko	어땠
+question.ko	어떨
+question.ko	어째
+question.ko	어찌
+question.ko	얼마
 
 question.wonder-not	何か
 question.wonder-not	何も
