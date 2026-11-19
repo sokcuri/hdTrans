@@ -2210,7 +2210,7 @@ bool FlowBefore(const Item* v) {
 Item* InwardVerb(Item* n) {
     Item* it = n->prev;
     if (it == nullptr || n->tokenIndex != it->tokenIndex || n->selected < 0 || n->DirectIndex() < 0 ||
-        n->detail->cls != kDetailVerb || n->detail->record != 0) {
+        n->detail->cls != kDetailVerb) {
         return nullptr;
     }
     const std::string_view surface = n->group->surface;
@@ -2706,6 +2706,8 @@ void InwardAuxiliary(Flusher& f) {
         const Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr || d->dst.empty()) continue;
         it->AssignDirectSlot(it->DirectIndex(), d->dst);
+        // GRM-4351: the voice of 込む (縫い込まれている, 詰め込ませる) is the voice of the verb that carries the action.
+        if (it->detail->record == 0) it->detail->record = n->detail->record;
         n->AssignEntrySurface(n->selected, "");
         n->AssignDirectSlot(n->DirectIndex(), "");
     }

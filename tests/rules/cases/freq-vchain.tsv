@@ -1,0 +1,62 @@
+# 규칙: GRM-4350, GRM-4351, GRM-4352
+rule	input	expected	kind	layer
+rewrite:stem-chain	すごい撮りやすくて。	대단히 찍기 쉬워서.	fix	rewrites
+rewrite:stem-chain	すごい歩きやすい靴	대단히 걷기 쉬운 신발	fix	rewrites
+rewrite:stem-chain	すごい洗いにくい	대단히 씻기 어렵다	fix	rewrites
+rewrite:stem-chain	すごい覚え始める	대단히 기억하기 시작한다	fix	rewrites
+rewrite:stem-chain	すごい呼び合う	대단히 서로 부른다	keep	rewrites
+rewrite:stem-chain	すごい書きかける	대단히 쓰려고 한다	fix	rewrites
+rewrite:stem-chain	すごい作り続ける	대단히 계속 만든다	keep	rewrites
+rewrite:stem-chain	すごい押し出す	대단히 밀어 낸다	keep	rewrites
+rewrite:stem-chain	すごい詰め込む	대단히 담는다	keep	rewrites
+rewrite:stem-chain	細かい縫いにくい布	세세한 꿰매기 어려운 천	fix	rewrites
+rewrite:stem-chain	返事はない……答えたくない、ってことなのかな？	대답은 없다……대답하고 싶지 않은, 라는 건가?	fix	rewrites
+rewrite:stem-chain	こんなところで死にたくない……帰りたいよ……	이런 곳에서 죽고 싶지 않다……돌아가고 싶어……	fix	rewrites
+rewrite:stem-chain	ふと、隣室にある描きかけの絵が見えた。	문득, 옆 방에 있는 그리다 만 그림이 보였다.	fix	rewrites
+rewrite:stem-chain	手近にあった読みかけの本を開く。	가까이에 있던 읽다 만 책을 편다.	fix	rewrites
+rewrite:stem-chain	少しずつだが、距離が縮まっていると思いたい。	조금씩이지만, 거리가 줄어들고 있다고 생각하고 싶다.	fix	rewrites
+rewrite:stem-chain	早い歩きで	빠른 걸음으로	keep	rewrites
+rewrite:stem-chain	楽しい歩き	즐거운 걸음	keep	rewrites
+rewrite:stem-chain	新しい呼び出しを	새로운 호출을	keep	rewrites
+rewrite:stem-chain	古い書き置き	낡은 메모	keep	rewrites
+rewrite:stem-chain	まだ寝たふり続けてるの？	아직 잔 체 계속해?	keep	rewrites
+rewrite:stem-chain	いい感じ、	좋은 느낌,	keep	rewrites
+rewrite:stem-chain	まだ寝たふり続けてるの？	lacks:거절	keep	rewrites
+rewrite:inward-auxiliary	厚手のコートには首回りにしっかりと毛皮が縫い込まれているし	두꺼운 코트에는 목주위에 제대로 모피가 꿰매어지고 있고	fix	rewrites
+rewrite:inward-auxiliary	毛皮が縫い込まれた	모피가 꿰매어졌다	fix	rewrites
+rewrite:inward-auxiliary	縫い込ませる	꿰매게 한다	fix	rewrites
+rewrite:inward-auxiliary	編み込まれた髪	짜인 머리카락	keep	rewrites
+rewrite:inward-auxiliary	彫り込まれた文字	조각해진 문자	fix	rewrites
+rewrite:inward-auxiliary	織り込まれた模様	lacks:붐비	keep	rewrites
+rewrite:inward-auxiliary	練り込まれた生地	lacks:붐비	keep	rewrites
+rewrite:inward-auxiliary	塗り込まれた	발라졌다	fix	rewrites
+rewrite:inward-auxiliary	惚れ込まれた	반해졌다	fix	rewrites
+rewrite:inward-auxiliary	縫い込んだ	꿰매었다	keep	rewrites
+rewrite:inward-auxiliary	詰め込まれた	담겼다	keep	rewrites
+rewrite:inward-auxiliary	押し込まれた	밀어넣어졌다	keep	rewrites
+rewrite:inward-auxiliary	巻き込まれた	말려 들어갔다	keep	rewrites
+rewrite:inward-auxiliary	老け込んだ	늙었다	keep	rewrites
+rewrite:inward-auxiliary	道が込んでいる	길이 붐비고 있다	keep	rewrites
+cx:stem-noun:20	雨の降り始め	비의 내리기 시작	fix	rewrites
+cx:stem-noun:20	降り始めの雨	내리기 시작의 비	fix	rewrites
+cx:stem-noun:20	歩き始めの子	걷기 시작의 아이	fix	rewrites
+cx:stem-noun:20	咲き始めの桜	has:피기 시작	keep	rewrites
+cx:stem-noun:20	付き合い始めの頃	사귀기 시작의 무렵	fix	rewrites
+cx:stem-noun:20	鳴き始めの蝉	울기 시작의 매미	fix	rewrites
+cx:stem-noun:20	書き始めは難しい	서두는 어렵다	keep	rewrites
+cx:stem-noun:20	年の始め	해의 시작	keep	rewrites
+cx:stem-noun:20	始めから	처음부터	keep	rewrites
+cx:stem-noun:20	降り始めた	내리기 시작했다	keep	rewrites
+cx:stem-noun:20	手始めに	시작으로	keep	rewrites
+cx:stem-noun:20	仕事始め	시무식	keep	rewrites
+dict:w:37400	見切れかけている	잘려 가고 있다	fix	local
+dict:w:37400	画面から見切れる	화면에서 잘린다	fix	local
+dict:w:37400	見切れた	잘렸다	fix	local
+dict:w:37400	見切った	단념했다	keep	local
+dict:w:37400	見切りをつける	단념한다	keep	local
+dict:w:37401	魚を誘き寄せる	물고기를 유인한다	fix	local
+dict:w:37401	敵を誘き寄せた	적을 유인했다	fix	local
+dict:w:37401	罠に誘き寄せられる	함정에 유인된다	fix	local
+dict:w:37401	誘き寄せて	유인해	fix	local
+dict:w:37401	おびき寄せる	유인한다	keep	local
+rewrite:stem-chain	私が、自分が他と違うと気付き始めたのは幼稚園の頃だった。	has:깨닫기 시작한	fix	rewrites
