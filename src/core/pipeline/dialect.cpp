@@ -64,6 +64,8 @@ bool WordCovers(std::string_view s, size_t at, size_t end) {
 
 // Whether text, whole, is a key of the dictionary (初めて).
 bool IchidanIs(std::string_view form) { return gRuns != nullptr && gRuns->ichidanVerb != nullptr && gRuns->ichidanVerb(gRuns->context, form); }
+// Whether stem, whole, is the stem of an ichidan verb or of くる of the dictionary (見, 出来, 来, き).
+bool VowelStemIs(std::string_view stem) { return gRuns != nullptr && gRuns->vowelStem != nullptr && gRuns->vowelStem(gRuns->context, stem); }
 
 bool IsWord(std::string_view text) { return gRuns != nullptr && gRuns->word != nullptr && gRuns->word(gRuns->context, text); }
 
@@ -2347,18 +2349,32 @@ static bool ContractedShimauN(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// The request くれない said くんね before a question mark after a て form (消してくんね？ 지워 주지 않을래?, 貸してくんね?):
-// くれない. Without the question mark くんね may be くるね said short (行ってくんね 다녀올게), so it stays; くんねえ and
-// くんない are read elsewhere.
+// The request くれない said くんね before a question mark after a て form (消してくんね？ 지워 주지 않을래?, 貸してくんね?),
+// also before the か of a question (持ってくんねぇか？, 教えてくんねか？), and drawn out before the end, a mark, か or a
+// sentence particle (持ってくんねえ。, 貸してくんねえかな): くれない. Bare くんね without the question mark may be くるね
+// said short (行ってくんね 다녀올게), so it stays; くんない is read elsewhere.
 static bool RequestKunne(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
     if (!head.ends_with("て") && !head.ends_with("で")) return false;
     size_t p = pos;
     if (!Lit(s, p, "くんね")) return false;
     size_t q = p;
-    if (!OneOf(s, q, U"？?")) return false;
+    if (OneOf(s, q, U"？?")) {
+        m.group[1] = "くれない";
+        m.end = p;
+        return true;
+    }
+    q = p;
+    const bool drawn = OneOf(s, q, U"えぇ");
+    const size_t end = q;
+    // drawn out also before the end, a mark or a sentence particle (持ってくんねえ。, 貸してくんねぇかな)
+    size_t r = q;
+    const bool question = Lit(s, r, "か") && OneOf(s, r, U"？?");
+    r = q;
+    const bool after = EndAt(s, q) || s.substr(q).starts_with("か") || OneOf(s, r, U"。、！!…‥」』よなぞ");
+    if (!question && !(drawn && after)) return false;
     m.group[1] = "くれない";
-    m.end = p;
+    m.end = end;
     return true;
 }
 
@@ -2366,11 +2382,17 @@ static bool RequestKunne(std::string_view s, size_t pos, Match& m) {
 // back, longest first: a godan verb in the u row of that kana or an ichidan verb in る (戻り 戻る, 笑い 笑う, おり おる, 降り
 // 降る, 見え 見える), and する after a kanji noun (失礼し する). Sets plain to its dictionary form, te to its て form (戻って,
 // 笑って, 行って, 見えて, して) and start to where the stem starts in head; false when no verb of the dictionary ends there.
+// A stem of three characters does not start at a particle kana after a kanji or katakana noun (足元にすり: すり, not にすり).
+// A run of one or two kanji that ends head, with no kanji before it, is the whole stem where the dictionary has it as the
+// stem of an ichidan verb or of 来る (見 見る, 寝 寝る, 出来 出来る, 来 来る; not 将来), and so is き after a て form, the
+// stem of くる (持ってき 持ってくる); these set vowel. し alone after a particle kana (not と, as in としよる) or where a word starts is
+// the stem of する (そんなことはしやせんでした).
 struct StemVerbForm {
     std::string plain, te;
     size_t start = 0;
     std::string_view teEnd;  // what the て form writes after the stem: for its last kana where keepLast is false (って)
     bool keepLast = false;   // the stem's last kana stays (見え+て, 失礼し+て)
+    bool vowel = false;      // a stem of one or two kanji, or き after a て form
 };
 static bool StemVerb(std::string_view head, StemVerbForm& v) {
     static constexpr std::array<std::array<std::string_view, 3>, 9> kGodan = {{{"い", "う", "って"},
@@ -2382,9 +2404,35 @@ static bool StemVerb(std::string_view head, StemVerbForm& v) {
                                                                               {"み", "む", "んで"},
                                                                               {"び", "ぶ", "んで"},
                                                                               {"に", "ぬ", "んで"}}};
-    if (head.empty() || !IsHiraganaClass(LastRune(head).cp)) return false;
+    if (head.empty()) return false;
+    const auto vowelStem = [&](size_t start) {
+        const std::string_view stem = head.substr(start);
+        if (!VowelStemIs(stem)) return false;
+        v.te = Cat({stem, "て"});
+        v.teEnd = "て";
+        v.keepLast = true;
+        v.vowel = true;
+        v.plain = Cat({stem, "る"});
+        v.start = start;
+        return true;
+    };
+    if (IsKanjiClass(LastRune(head).cp)) {
+        size_t at = head.size();
+        for (int k = 0; k < 3 && at > 0 && IsKanjiClass(LastRune(head.substr(0, at)).cp); k++) at -= LastRune(head.substr(0, at)).size;
+        if (at > 0 && IsKanjiClass(LastRune(head.substr(0, at)).cp)) return false;
+        if (head.size() - at > 2 * std::string_view("来").size()) return false;
+        if (vowelStem(at)) return true;
+        // the last kanji alone where the two are no word of the dictionary (何見よる: 見; not 将来, 以来)
+        const size_t last = head.size() - LastRune(head).size;
+        return last > at && !IsWord(head.substr(at)) && vowelStem(last);
+    }
+    if (!IsHiraganaClass(LastRune(head).cp)) return false;
     const size_t lastSize = LastRune(head).size;
     const std::string_view kana = head.substr(head.size() - lastSize);
+    if (kana == "き" && (head.substr(0, head.size() - lastSize).ends_with("て") || head.substr(0, head.size() - lastSize).ends_with("で")) &&
+        vowelStem(head.size() - lastSize)) {
+        return true;
+    }
     std::array<size_t, 2> starts{};
     size_t n = 0;
     for (size_t at = head.size() - lastSize; n < starts.size() && at > 0;) {
@@ -2396,6 +2444,10 @@ static bool StemVerb(std::string_view head, StemVerbForm& v) {
     for (size_t i = n; i-- > 0;) {
         const std::string_view stem = head.substr(starts[i]);
         const std::string_view lead = stem.substr(0, stem.size() - lastSize);
+        if (i > 0 && starts[i] > 0 && In(text::DecodeRune(stem).cp, U"をはがもにへとでの")) {
+            const char32_t before = LastRune(head.substr(0, starts[i])).cp;
+            if (IsKanjiClass(before) || IsKatakanaRune(before)) continue;
+        }
         for (const auto& g : kGodan) {
             if (kana != g[0]) continue;
             if (std::string plain = Cat({lead, g[1]}); VerbIs(plain)) {
@@ -2424,6 +2476,19 @@ static bool StemVerb(std::string_view head, StemVerbForm& v) {
             return true;
         }
     }
+    if (kana == "し") {
+        const size_t at = head.size() - lastSize;
+        const char32_t before = at == 0 ? U'\0' : LastRune(head.substr(0, at)).cp;
+        if (at == 0 || In(before, U"をはがもにへ") || !(IsKanjiClass(before) || IsHiraganaClass(before) || IsKatakanaRune(before))) {
+            v.te = "して";
+            v.teEnd = "て";
+            v.keepLast = true;
+            v.vowel = true;
+            v.plain = "する";
+            v.start = at;
+            return true;
+        }
+    }
     return false;
 }
 
@@ -2442,7 +2507,7 @@ static bool StartsWithAny(std::string_view s, size_t p, std::initializer_list<st
 // after a stem in kana, which spells a name (ゆきやす, のりやす).
 static bool RoughPoliteYasu(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
-    if (head.empty() || !In(LastRune(head).cp, U"いきぎしちにびみりえけげせてねべめれ")) return false;
+    if (head.empty() || !(In(LastRune(head).cp, U"いきぎしちにびみりえけげせてねべめれ") || IsKanjiClass(LastRune(head).cp))) return false;
     struct YasuForm {
         std::string_view written, plain;
         bool final;
@@ -2452,8 +2517,9 @@ static bool RoughPoliteYasu(std::string_view s, size_t pos, Match& m) {
     for (const YasuForm& f : kForms) {
         size_t p = pos;
         if (!Lit(s, p, f.written)) continue;
+        // the past ませんでした (しやせんでした)
         if (f.final && !EndAt(s, p) && FinalParticleEnd(s, p) == std::string_view::npos &&
-            !StartsWithAny(s, p, {"か", "が", "けど", "から", "ので", "ぜ", "ぞ"})) {
+            !StartsWithAny(s, p, {"か", "が", "けど", "から", "ので", "ぜ", "ぞ"}) && !(f.written == "やせん" && s.substr(p).starts_with("でした"))) {
             return false;
         }
         // やすか only as a question (ありやすか？, 行きやすかい): the Kyushu adjective in か of ease (読みやすか, 読みやすかった)
@@ -2479,12 +2545,13 @@ static bool RoughPoliteYasu(std::string_view s, size_t pos, Match& m) {
 // dictionary has (駆けよった 駆け寄った, 立ちよる, 擦りよる, 言いよる), nor the volitional よう. The match starts at the last
 // kana of the stem, which the て form rewrites (渋り 渋って).
 static bool WesternYoru(std::string_view s, size_t pos, Match& m) {
-    if (pos >= s.size() || !IsHiraganaClass(At(s, pos).cp)) return false;
+    if (pos >= s.size() || !(IsHiraganaClass(At(s, pos).cp) || IsKanjiClass(At(s, pos).cp))) return false;
     const size_t at = pos + At(s, pos).size;
     size_t p = at;
     if (!Lit(s, p, "よ")) return false;
     std::string_view tail;
     size_t q = p;
+    bool yon = false;  // よん, which is no form of 寄る
     if (Lit(s, q, "った")) {
         tail = "いた";
     } else if (q = p; Lit(s, q, "る")) {
@@ -2503,6 +2570,7 @@ static bool WesternYoru(std::string_view s, size_t pos, Match& m) {
         // may be より or よ said short (それよん、)
         if (size_t r = q; !OneOf(s, r, U"よ")) return false;
         tail = "いるの";
+        yon = true;
     } else {
         return false;
     }
@@ -2511,9 +2579,15 @@ static bool WesternYoru(std::string_view s, size_t pos, Match& m) {
     if (!StemVerb(head, v)) return false;
     const std::string_view stem = head.substr(v.start);
     // a stem in kana of two characters may be a word of its own (それ, あれ: 逸れる, 荒れる), so a kana stem takes three
-    if (!IsKanjiClass(text::DecodeRune(stem).cp) && stem.size() < 3 * std::string_view("あ").size()) return false;
-    // 寄る after the stem (駆け寄る), or a key of the dictionary over the stem and よる as written (言いよる)
-    if (VerbIs(Cat({stem, "寄る"})) || VerbIs(Cat({stem, "よる"})) || IsWord(Cat({stem, "よる"}))) return false;
+    if (!v.vowel && !IsKanjiClass(text::DecodeRune(stem).cp) && stem.size() < 3 * std::string_view("あ").size()) return false;
+    // 寄る after the stem or after its last two characters (駆け寄る, 足元にすりよった: すり寄る), or a key of the dictionary
+    // over them and よる as written (言いよる); not before よん
+    for (size_t b = v.start; !yon && b < head.size();) {
+        const std::string_view tailStem = head.substr(b);
+        if (b > v.start && text::RuneCount(tailStem) < 2) break;
+        if (VerbIs(Cat({tailStem, "寄る"})) || VerbIs(Cat({tailStem, "よる"})) || IsWord(Cat({tailStem, "よる"}))) return false;
+        b += text::DecodeRune(tailStem).size;
+    }
     m.group[1] = v.keepLast ? Span(s, pos, at) : std::string_view();
     m.group[2] = v.teEnd;
     m.group[3] = tail;

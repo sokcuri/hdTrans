@@ -583,6 +583,49 @@ bool NegativeN(std::string_view s, size_t pos, Match& m) {
     // A kana いか after casual.ikanai-after is いく (わけにはいかん), not the いかん of それはいかん.
     p = pos;
     if (Lit(s, p, "いか") && AfterIkanaiWord(s.substr(0, pos)) && rest(p, true)) return true;
+    const std::string_view head = s.substr(0, pos);
+    const char32_t before = head.empty() ? U'\0' : LastRune(head).cp;
+    // where a word starts: the start, a mark or a space, katakana, or a particle kana (本当にすまんかった, 何もせんか)
+    const bool wordStart = head.empty() || In(before, U"をはがもにへとでくだ") ||
+                           !(IsKanjiClass(before) || IsHiraganaClass(before) || before == U'ー');
+    const bool suruStart = In(before, U"をはがもにへとでくだ");
+    // The irregular negative stems of する and 来る before ん, the old せ of する after a particle kana, く or だ (早くせんか？
+    // 빨리 하지 않을래?, まだせんかった; not where the line starts or after a mark, where せんか may be a name) and 来 with
+    // no kanji before it (来んかった 오지 않았다; not 将来): group 1 し or 来.
+    p = pos;
+    // before か or かっ only: the word stage reads せん before other ends, where せんしゅ or せんが may be words
+    if (Lit(s, p, "せ") && suruStart && NegativeNEnd(s, p, false, m) && (m.group[2] == "か" || m.group[2] == "かっ")) {
+        m.group[1] = "し";
+        return true;
+    }
+    // and the か of a rebuke (早くせんか！)
+    if (p = pos; Lit(s, p, "せ") && suruStart && Lit(s, p, "んか")) {
+        if (size_t q = p; OneOf(s, q, U"！!")) {
+            m.group[1] = "し";
+            m.group[2] = "か";
+            m.group[3] = {};
+            m.end = p;
+            return true;
+        }
+    }
+    // 来 only before か, かっ, 。 or the end: before よ or ？ 来ん is as often 来るの said short (ズンズン来んよ, 明日来ん？)
+    p = pos;
+    if (Lit(s, p, "来") && !IsKanjiClass(before) && rest(p, false) &&
+        (m.group[2] == "か" || m.group[2] == "かっ" || m.group[2] == "。" || m.end == s.size())) {
+        return true;
+    }
+    // A godan stem in two or three kana where a word starts before the past かった (すまんかった 미안했다, いわんかった):
+    // group 5 marks it for the stem test of the replacement, which the dictionary makes (みかんかった stays).
+    for (int runes = 2; wordStart && runes <= 3; runes++) {
+        p = pos;
+        bool kana = true;
+        for (int k = 0; kana && k < runes; k++) kana = Take(s, p, [](char32_t c) { return IsHiraganaClass(c) && c != U'ん' && c != U'っ'; });
+        if (!kana || !In(LastRune(s.substr(0, p)).cp, U"らわかがまばさた") || !s.substr(p).starts_with("んかっ")) continue;
+        if (rest(p, false)) {
+            m.group[5] = m.group[1];
+            return true;
+        }
+    }
     return false;
 }
 
@@ -2067,7 +2110,8 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         // 止まらん 止まる); else the ん belongs to a noun (胃がん 위암, 茶わん 밥공기) and stays.
         const auto negativeN = [&](const Match& m) {
             const std::string_view stem = m.group[1];
-            if (runs.verbForm != nullptr && !stem.empty() && IsKanjiClass(text::DecodeRune(stem).cp)) {
+            if (!m.group[5].empty() && runs.verbForm == nullptr) return std::string(m.group[0]);
+            if (runs.verbForm != nullptr && !stem.empty() && (IsKanjiClass(text::DecodeRune(stem).cp) || !m.group[5].empty())) {
                 static constexpr std::array<std::pair<std::u32string_view, std::string_view>, 8> kRowU = {{{U"ら", "る"},
                                                                                                          {U"わ", "う"},
                                                                                                          {U"か", "く"},

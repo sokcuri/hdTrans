@@ -307,6 +307,8 @@ bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const d
 bool IsDictionaryVerb(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap);
 // Whether form, whole, is the dictionary form of an ichidan verb of the dictionary (見る, 寝る; not 足る).
 bool IsDictionaryIchidan(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap);
+// Whether stem, whole, is the stem of an ichidan verb or of くる of the dictionary (見, 出来, 来, き).
+bool IsDictionaryVowelStem(std::string_view stem, const LineContext& ctx, const dict::Snapshot& snap);
 
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
 // katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,

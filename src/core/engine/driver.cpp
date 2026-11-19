@@ -505,6 +505,12 @@ bool DictionaryIchidanIs(const void* context, std::string_view form) {
     return d.line != nullptr && pipeline::internal::IsDictionaryIchidan(form, *d.line, d.snap);
 }
 
+// Whether stem, whole, is the stem of an ichidan verb or of くる of the dictionary (pipeline::RunLookup::vowelStem).
+bool DictionaryVowelStemIs(const void* context, std::string_view stem) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::IsDictionaryVowelStem(stem, *d.line, d.snap);
+}
+
 // Whether text, whole, is a key of the dictionary (pipeline::RunLookup::word).
 bool WordIs(const void* context, std::string_view text) {
     const auto& d = *static_cast<const RespellLookup*>(context);
@@ -1264,7 +1270,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
                                  options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach,
-                                 options.reference ? nullptr : DictionaryIchidanIs}),
+                                 options.reference ? nullptr : DictionaryIchidanIs, options.reference ? nullptr : DictionaryVowelStemIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);

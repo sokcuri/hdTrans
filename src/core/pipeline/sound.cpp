@@ -3845,6 +3845,7 @@ bool AnyKind(int, const dict::Codes*) { return true; }
 bool IchidanKind(int kind, const dict::Codes*) { return kind == kIchidan; }
 bool RaGodanKind(int kind, const dict::Codes*) { return kind == kRaGodan; }
 bool IchidanOrKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuruKanji; }
+bool IchidanOrAnyKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuru || kind == kKuruKanji; }
 bool SuruKind(int kind, const dict::Codes*) { return kind == kSuru; }
 // Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), then an exclamation
 // mark (か！, かッ!!, かぁ！).
@@ -4146,6 +4147,10 @@ bool IsDictionaryVerb(std::string_view form, const LineContext& ctx, const dict:
 
 bool IsDictionaryIchidan(std::string_view form, const LineContext& ctx, const dict::Snapshot& snap) {
     return VerbFormIs(form, kDictionaryForm, IchidanKind, ctx, snap);
+}
+
+bool IsDictionaryVowelStem(std::string_view stem, const LineContext& ctx, const dict::Snapshot& snap) {
+    return !stem.empty() && VerbFormIs(stem, kStemForm, IchidanOrAnyKuru, ctx, snap);
 }
 
 bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict) {
