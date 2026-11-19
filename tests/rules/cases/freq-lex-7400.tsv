@@ -19,7 +19,17 @@ dict:freq-lex	かねてから計画していた。	has:전부터 계획	fix	look
 dict:freq-lex	儲けもんじゃないですか。	has:횡재	fix	lookup
 dict:freq-lex	五穀豊穣を願います。	has:오곡풍년	fix	lookup
 dict:freq-lex	うちの統領がうんと言うかな？	has:우리 우두머리	fix	lookup
+dict:freq-lex	うちの統領は強い。	우리 우두머리는 강하다.	fix	lookup
 dict:freq-lex	大統領と会談する。	has:대통령과	keep	lookup
+dict:freq-lex	李在明大統領が演説した。	has:이재명대통령	keep	lookup
+dict:freq-lex	習近平国家主席と李在明大統領	lacks:우두머리	keep	lookup
+dict:freq-lex	尹錫悦大統領が演説した。	has:윤석열 대통령이	keep	lookup
+dict:freq-lex	文在寅大統領は「対話」を求めた。	has:문재인 대통령은	keep	lookup
+dict:freq-lex	金大中大統領の時代	has:대통령의 시대	keep	lookup
+dict:freq-lex	盧武鉉元大統領	has:노무현 전 대통령	keep	lookup
+dict:freq-lex	マクロン大統領と会談する。	has:마크론 대통령과	keep	lookup
+dict:freq-lex	副大統領が来た。	has:부통령이	keep	lookup
+dict:freq-lex	統領が来た。	lacks:우두머리	keep	lookup
 dict:freq-lex	実況≫ここにきて優勝争い	has:우승 경쟁	fix	lookup
 dict:freq-lex	５種類の具材とスープが鍋状のトレーに入っている。	has:냄비 모양의 트레이	fix	lookup
 dict:freq-lex	自分の太刀筋を見せた。	has:칼솜씨	fix	lookup
