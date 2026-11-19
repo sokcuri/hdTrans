@@ -1,0 +1,4 @@
+#! layer=words
+# 활용 부류나 품사가 필요한 자주 쓰는 낱말 (LEX-7200)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+夢中の	푹 빠진	E0H0			GN			LEX-7200				w:38001

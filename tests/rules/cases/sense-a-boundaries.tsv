@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:sense-a-半周	半周の距離を測る。	반 바퀴의 거리를 측정한다.	fix	lookup
+dict:sense-a-半周	半周の距離を測る。	반 바퀴의 거리를 잰다.	fix	lookup
 dict:sense-a-半周	池を半周した。	연못을 반 바퀴 돌았다.	keep	lookup
 dict:sense-a-半周	半円の形だ。	반원의 형태다.	keep	lookup
 dict:sense-a-正体が割れる	友人の正体が割れた。	친구의 정체가 드러났다.	fix	lookup

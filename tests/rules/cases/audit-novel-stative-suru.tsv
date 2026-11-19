@@ -26,7 +26,7 @@ dict:jisjk:368666	人手が不足している。	has:일손이 부족하다	keep
 dict:jisjk:368666	書類を作成している。	has:작성하고 있다	fix	local
 dict:jisjk:368666	書類を作成していない。	has:작성하고 있지 않다	fix	local
 dict:lex:hw-suru	そんな時はノートに色々と書き綴って満足していた。	has:만족했다	keep	local
-dict:lex:hw-suru	充実した日々を送っている。	has:충실한 날들	keep	local
+dict:lex:hw-suru	充実した日々を送っている。	has:충실한 나날	keep	local
 dict:lex:hw-suru	装備を充実させる。	has:충실시킨다	keep	local
 dict:lex:hw-suru	彼女は緊張している。	has:긴장하고 있다	keep	local
 dict:lex:hw-suru	心身ともに充実して臨み、結果につなげた。	has:충실해	keep	local

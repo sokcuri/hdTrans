@@ -109,7 +109,7 @@ cx:nanyori:20	なによりも、ここには美味しいご飯が待っている
 cx:nanyori:10	そう、それはなによりね。	has:다행이네	fix	rewrites
 lexical:suki-katte	好き勝手なことを言う。	has:제멋대로인 것을	keep	lookup
 lexical:suki-katte	好き勝手な真似はさせない。	has:제멋대로인 흉내는	keep	lookup
-lexical:set-adverbials	常ならぬ気配がした。	has:범상치 않은 기색	fix	lookup
+lexical:set-adverbials	常ならぬ気配がした。	has:범상치 않은 기척	fix	lookup
 lexical:set-adverbials	常ならぬ気配がした。	lacks:평소라면	keep	lookup
 cx:nanyori:16	それは何よりだ。	has:그것은 다행이다	fix	rewrites
 cx:nanyori:14	無事で何よりです。	has:무사해서 다행입니다	fix	rewrites
