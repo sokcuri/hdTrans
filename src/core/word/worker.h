@@ -39,9 +39,6 @@ struct OpenMarks {
 // The marks open after s when open were open before it.
 OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open);
 
-// Whether the shadow segmentation scorer runs (HDTRANS_SEG_SHADOW).
-bool SegShadowOn();
-
 // The longest katakana run the katakana reorders read whole or cover (candidate.cpp) and the
 // segmentation lattice counts as one (segcost.cpp).
 inline constexpr std::size_t kKatakanaRunMax = 24;
@@ -225,8 +222,7 @@ private:
     Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
     // The segmentation lattice (segcost.cpp). SegReport reads token again as one best path: with
-    // settings.splitWhy it adds the token's split note, with HDTRANS_SEG_SHADOW it logs where the
-    // lattice splits more cheaply than the search.
+    // settings.splitWhy it adds the token's split note.
     void SegReport(int token, std::string_view surface, const Item* mark);
     void SegEdgesAt(std::string_view s, int p, int token, bool detail, std::vector<SegEdge>& out);
     bool SegTokenLattice(int token, std::string_view surface, const Item* mark, SegTokenPaths& out);
