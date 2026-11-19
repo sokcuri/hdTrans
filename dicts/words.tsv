@@ -12613,7 +12613,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 再訪	재방문	N110			GN				xxx llm	1		w:12537
 再評価	재평가	N110		Hd	GN						さいひょうか	w:12538
 再評価	재평가&AV@	M429			GN						さいひょうか	w:12539
-再試合	재시합	N110			GN						さいしあい	w:12540
+再試合	재경기	N110			GN						さいしあい	w:12540
 再販	재판매	N110			GN				xxx llm	1		w:12541
 再販売	재판매	N110			GN						さいはんばい	w:12542
 再配置	재배치	N110			GN				llm		さいはいち	w:12543

@@ -7,7 +7,7 @@ register:REG-38	「あなたを信じます」	「당신을 믿습니다」	keep
 register:REG-35	「そう感じます」	「그렇게 느껴요」	fix	register
 register:REG-35	「平和を願います」	「평화를 바라요」	fix	register
 register:REG-35	「三時に始まります」	「3시에 시작해요」	fix	register
-register:REG-35	「試合は三時に始まります」	「시합은 3시에 시작해요」	fix	register
+register:REG-35	「試合は三時に始まります」	「경기는 3시에 시작해요」	fix	register
 register:REG-35	「明日決まります」	「내일 정해져요」	fix	register
 register:REG-35	「明日届きます」	「내일 닿아요」	fix	register
 register:REG-35	「もうすぐ終わります」	「이제 곧 끝나요」	fix	register

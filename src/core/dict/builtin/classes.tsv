@@ -78,6 +78,7 @@
 //= aux.give-after-neg	Giving and request auxiliaries after a negative ないで (くれる, くださる, ちょうだい, いただける, もらえる, もらいたい): the ないで is a request not to act or what one does not do for someone (spec LEX-5050).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
+//= aux.head-through	Surfaces of the auxiliaries written right after a stem through which the predicate still modifies the noun after them (甘すぎるケーキ 너무 단 케이크, 高すぎる本; spec LEX-7151).
 //= aux.te-through	Surfaces of the auxiliaries after a て form through which the predicate still modifies the noun after them (伸びてくる指先 뻗어 오는 손끝, 伸びている指).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
@@ -991,6 +992,8 @@ aux.te-through	行く
 aux.te-through	お
 aux.te-through	おり
 aux.te-through	居
+aux.head-through	すぎ
+aux.head-through	過ぎ
 aux.te-kana-stem	い
 aux.te-kana-stem	み
 aux.te-kana-stem	き

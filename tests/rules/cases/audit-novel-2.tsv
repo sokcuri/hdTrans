@@ -86,7 +86,7 @@ dict:audit-novel-2	お相手つかまつろう。	has:상대해 드리리다	fix
 dict:audit-novel-2	お供つかまつる。	has:모시겠소	fix	lookup
 dict:audit-novel-2	ご無礼つかまつった。	has:무례를 범했소	fix	lookup
 dict:audit-novel-2	拝見つかまつる。	has:배견한다	keep	lookup
-dict:audit-novel-2	楽勝な試合だった。	has:만만한 시합	fix	lookup
+dict:audit-novel-2	楽勝な試合だった。	has:만만한 경기	fix	lookup
 dict:audit-novel-2	「実際、筧なら楽勝なんじゃないか？」	has:식은 죽 먹기인 게	keep	lookup
 dict:audit-novel-2	先生って物知りなんだよ	has:박식해	fix	lookup
 dict:audit-novel-2	物知りなんです。	has:박식합니다	fix	lookup
