@@ -1,8 +1,9 @@
 #! layer=pack
 # 논항이나 이웃 낱말이 가리는 낱말 뜻 (LEX-7401, LEX-7403, LEX-7404, LEX-7405)
-id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note	agent
 freq-lex:1	sense	なくなる|無くなる	v5	frame	subj=@thing		없어지다		LEX-7403	freq	ぬいぐるみがなくなった 봉제인형이 없어졌다
 freq-lex:2	sense	努める	v1	frame	obj=* dat=-		맡다		LEX-7404	freq	補佐を努める 보좌를 맡다 (を 목적어면 務める의 뜻)
+freq-lex:19	sense	努める	v1	frame	obj=平静|冷静|平常心		-		LEX-7404	freq	平静を努める 애써 유지하다의 뜻 (맡다 아님)	
 freq-lex:3	sense	思わせる	v1	frame	obj=*		연상시키다		LEX-7404	freq	大理石を思わせる 대리석을 연상시키는
 freq-lex:4	sense	取り入れる	v1:규칙	frame	obj=洗濯物|布団|洗濯		걷다		LEX-7404	freq	洗濯物を取り入れる 빨래를 걷다
 freq-lex:5	sense	押し付ける|押しつける	v1	frame	obj=@task|家事|責任|仕事|雑用|罪		떠넘기다		LEX-7404	freq	家事を押し付ける 집안일을 떠넘기다
@@ -11,7 +12,7 @@ freq-lex:7	sense	押さえる	v1	frame	obj=証拠		확보하다		LEX-7404	freq	�
 freq-lex:8	sense	くわえる|銜える|咥える	v1	frame	dat=口		물다		LEX-7404	freq	口にくわえる 입에 물다
 freq-lex:10	sense	破る	v5	frame	obj=@opening		부수다		LEX-7404	freq	ドアを破る 문을 부순다
 freq-lex:16	sense	破る	v5	frame	obj=障子|襖|ふすま		찢다		LEX-7404	freq	障子を破る 장지를 찢다 (종이 문은 찢는다)
-freq-lex:17	voice	破る	v5	frame	obj=@opening		passive:부서지다		LEX-7404	freq	扉を破られた 문이 부서졌다 (수동은 그대로)
+freq-lex:17	voice	破る	v5	frame	obj=@opening		passive:부서지다		LEX-7404	freq	扉を破られた 문이 부서졌다, 敵に破られた 적에 의해 (수동은 그대로)	에 의해
 freq-lex:18	voice	破る	v5	frame	obj=障子|襖|ふすま		passive:찢기다		LEX-7404	freq	障子を破られた 장지가 찢겼다
 freq-lex:11	sense	額	n	frame	pred=入る|入れる|飾る|収める		액자		LEX-7405	freq	額に入った絵 액자에 든 그림
 freq-lex:13	sense	折り返し	adv	frame	after=の|での next=を|が|は|に|で|の|も|まで|へ|、|。|-		반환점		LEX-7401	freq	前半の折り返しを過ぎた 전반의 반환점을 지났다

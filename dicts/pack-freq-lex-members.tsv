@@ -19,7 +19,9 @@ lemma	classes
 企業	@state-body
 子会社	@state-body
 半導体	@state-body
-関係	@state-body
+関係者	@state-body
+関係筋	@state-body
+関係当局	@state-body
 議会	@state-body
 高官	@state-body
 国務省	@state-body
