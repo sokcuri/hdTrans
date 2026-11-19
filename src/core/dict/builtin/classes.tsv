@@ -207,6 +207,7 @@
 //= name.common-predicate	Predicates in the clause after a common word and が, は or も that keep its common sense though the document names the word: a measure or the light of the sun (敏捷が特筆して高い, 力が強い, 朝日が眩しい; spec LEX-5175).
 //= name.common-after	Starts of the text after a common word that keep its common sense though a cue or the document names the word: weather, the sky or the sea (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる), the light of the sun (朝日を浴びる) strength (力を込める, 力が抜ける), the parts and shade of a tree (樹の根本, 樹の下で休む), flowers in bloom (桜が咲いた), the ground (大地が揺れる), the top and foot of a mountain and the far end of a distance (高峰の頂, 千里の彼方), a distance run (千里を駆けた, 悪事千里を走る) and a crest (葵の紋; spec LEX-5175).
 //= name.plant-after	Starts of the text after a word whose common sense is a plant (玉藻 말, 撫子) that keep the plant though the document names the word: clinging, floating, drifting and growing (岩に玉藻がからみつく, 玉藻の浮かぶ海; spec LEX-4820).
+//= name.common-word-context	A common word that is also a name (桜, 光, 空, ミルク) with the start of the text after it that keeps the common word, one row each, the word in the note (桜が咲いた, 空を見上げる, ミルクを飲む): no name there unless the line calls the word with an honorific or as a speaker label.
 //= name.family-after	Words of a house or a family after a kanji name of two characters or more that make it a family name, for the line and the document (園崎本家 소노자키 본가, 古手家, 竜宮家, 古手夫妻; spec LEX-4826).
 //= name.rank-after	Ranks of the police and the army and academic titles after a kanji name of two characters or more that make it a person's surname, for the line and the document (滝本警部 타키모토 경감, 高野警部; spec LEX-4831).
 //= name.person-belonging	What a person has or does, after a common word and の that the document names: the word is the person there (小太刀の家 코다치의 집, 樹の声; spec LEX-5175).
@@ -2872,6 +2873,44 @@ name.plant-after	が茂
 name.plant-after	の茂る
 name.plant-after	が枯れ
 name.plant-after	が芽吹
+name.common-word-context	桜の花	桜
+name.common-word-context	桜の木	桜
+name.common-word-context	桜が咲	桜
+name.common-word-context	桜が散	桜
+name.common-word-context	桜並木	桜
+name.common-word-context	桜吹雪	桜
+name.common-word-context	桜の季節	桜
+name.common-word-context	光が差	光
+name.common-word-context	光が射	光
+name.common-word-context	光を浴び	光
+name.common-word-context	光を放	光
+name.common-word-context	光が漏れ	光
+name.common-word-context	光の中	光
+name.common-word-context	空を見上げ	空
+name.common-word-context	空が青	空
+name.common-word-context	空は青	空
+name.common-word-context	空を飛	空
+name.common-word-context	空に浮か	空
+name.common-word-context	空が晴れ	空
+name.common-word-context	空が曇	空
+name.common-word-context	雪が降	雪
+name.common-word-context	雪が積も	雪
+name.common-word-context	雪が溶け	雪
+name.common-word-context	雨が降	雨
+name.common-word-context	雨が止	雨
+name.common-word-context	時雨が降	時雨
+name.common-word-context	小鳥のさえずり	小鳥
+name.common-word-context	小鳥たち	小鳥
+name.common-word-context	小鳥が鳴	小鳥
+name.common-word-context	ミルクを	ミルク
+name.common-word-context	ミルクティー	ミルク
+name.common-word-context	翼を広げ	翼
+name.common-word-context	翼が生え	翼
+name.common-word-context	花が咲	花
+name.common-word-context	花を摘	花
+name.common-word-context	月が出	月
+name.common-word-context	月が昇	月
+name.common-word-context	月明かり	月
 name.person-hair	髪
 name.person-hair	前髪
 name.person-hair	髪の毛

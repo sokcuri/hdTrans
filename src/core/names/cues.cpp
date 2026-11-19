@@ -1707,29 +1707,12 @@ bool Registry::Addressed(std::string_view line, std::string_view t) {
 }
 
 bool Registry::Guarded(std::string_view line, std::size_t a, std::size_t b) {
-    struct NounContext {
-        std::string_view surface;
-        std::vector<std::string_view> contexts;
-    };
-    static const std::vector<NounContext> kNounContexts = {
-        {"桜", {"の花", "の木", "が咲", "が散", "並木", "吹雪", "の季節"}},
-        {"光", {"が差", "が射", "を浴び", "を放", "が漏れ", "の中"}},
-        {"空", {"を見上げ", "が青", "は青", "を飛", "に浮か", "が晴れ", "が曇"}},
-        {"雪", {"が降", "が積も", "が溶け"}},
-        {"雨", {"が降", "が止"}},
-        {"時雨", {"が降"}},
-        {"小鳥", {"のさえずり", "たち", "が鳴"}},
-        {"ミルク", {"を", "ティー"}},
-        {"翼", {"を広げ", "が生え"}},
-        {"花", {"が咲", "を摘"}},
-        {"月", {"が出", "が昇", "明かり"}},
-    };
-    const std::string_view t = line.substr(a, b - a), rest = line.substr(b);
-    for (const NounContext& nc : kNounContexts) {
-        if (nc.surface != t) continue;
-        for (const std::string_view ctx : nc.contexts) {
-            if (rest.starts_with(ctx) && !Addressed(line, t)) return true;
-        }
+    const std::string_view t = line.substr(a, b - a), rest = line.substr(b), at = line.substr(a);
+    // A common word with the start of the text after it that keeps the word (桜が咲いた, 空を見上げる).
+    const auto contexts = dict::ClassMembers(HDTRANS_CLASS("name.common-word-context"));
+    const auto words = dict::ClassNotes(HDTRANS_CLASS("name.common-word-context"));
+    for (std::size_t k = 0; k < contexts.size() && k < words.size(); k++) {
+        if (words[k] == t && at.starts_with(contexts[k]) && !Addressed(line, t)) return true;
     }
     if (snap_ == nullptr) return false;
     std::string_view tail = line.substr(a);
