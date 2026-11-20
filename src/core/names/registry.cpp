@@ -2089,6 +2089,8 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         const bool joined = AllRunes(found, IsHiragana) && JoinedAt(line, a, b, found);
         if (AllRunes(found, IsHiragana)) {
             ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing) || joined;
+            // Nor the と that quotes a closed bracket, unless an honorific follows (」とし、 라고 해; spec LEX-7780).
+            ok = ok && (honorific || !QuotedToAt(line, a, b));
         }
         // A name the document gives only before an honorific stands for the person bare too where a name
         // stands: as the whole clause start before a mark or the line end, or before a particle of
