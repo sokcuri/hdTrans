@@ -1,0 +1,73 @@
+# 규칙: LEX-7980, LEX-7981, LEX-7982, LEX-7983
+rule	input	expected	kind	layer
+dict:freq-lex-98	指をねぶった。	has:핥았다	fix	lookup
+dict:freq-lex-98	飴をねぶる。	has:핥는다	fix	lookup
+dict:freq-lex-98	ねぶりながら笑う。	has:핥으면서	fix	lookup
+dict:freq-lex-98	大人気のゲームだ。	has:대인기	keep	lookup
+dict:freq-lex-98	大人気だった。	has:대인기였다	keep	lookup
+dict:freq-lex-98	飲酒運転ダメ絶対。	has:절대 안 돼	fix	lookup
+dict:freq-lex-98	がん治療薬を開発した。	has:암 치료약	fix	lookup
+dict:freq-lex-98	乳がんを公表した。	has:유방암	fix	lookup
+dict:freq-lex-98	がんばろう。	has:힘내자	keep	lookup
+dict:freq-lex-98	しゃがんで。	lacks:암	keep	lookup
+dict:freq-lex-98	上院選で勝った。	has:상원 선거	fix	lookup
+dict:freq-lex-98	州知事選に出馬した。	has:주지사 선거	fix	lookup
+dict:freq-lex-98	会長選出馬で抱負を語った。	has:회장 선거 출마	fix	lookup
+dict:freq-lex-98	公選法違反の疑い	has:공직선거법 위반	fix	lookup
+dict:freq-lex-98	立民の代表が述べた。	has:입헌민주당	fix	lookup
+dict:freq-lex-98	冬型の気圧配置が強まる。	has:겨울형	fix	lookup
+dict:freq-lex-98	日本株が下落した。	has:일본 주식	fix	lookup
+dict:freq-lex-98	同１２分、官邸着。	has:관저 도착	fix	lookup
+dict:freq-lex-98	同３８分、国会着。	has:국회 도착	fix	lookup
+dict:freq-lex-98	午前９時、羽田空港着。	has:하네다 공항 도착	fix	lookup
+dict:freq-lex-98	同２０分、自宅着、会議。	has:자택 도착	fix	lookup
+dict:freq-lex-98	上着を脱いだ。	has:윗도리	keep	lookup
+dict:freq-lex-98	コートを一着買う。	has:한 벌	keep	lookup
+dict:freq-lex-98	彼は官邸に着いた。	has:관저에 도착했다	keep	lookup
+dict:freq-lex-98	到着した。	has:도착했다	keep	lookup
+dict:freq-lex-98	中前適時打を放った。	has:중전 적시타	fix	lookup
+dict:freq-lex-98	左投げ左打ちの内野手	has:좌투좌타	fix	lookup
+dict:freq-lex-98	七回表、二死満塁。	has:7회초	fix	lookup
+dict:freq-lex-98	楽天は１９日、発表した。	has:라쿠텐은	fix	lookup
+dict:freq-lex-98	楽天的な性格だ。	has:낙천적	keep	lookup
+dict:freq-lex-98	ウィットコフ特使が合流した。	has:위트코프 특사	fix	lookup
+dict:freq-lex-98	ニーソックスを履いた。	has:니삭스	keep	lookup
+dict:freq-lex-98	デカデカと書いてある。	has:큼직큼직하게	keep	lookup
+dict:freq-lex-98	大人げないぞ。	has:점잖지 않아	keep	lookup
+dict:freq-lex-98	エナが来た。	has:에나가	fix	lookup
+dict:freq-lex-98	父は私服の下に海パンを履いていた。	has:수영 팬티	fix	lookup
+dict:freq-lex-98	選挙後の米株には期待できる。	has:미국 주식	fix	lookup
+dict:freq-lex-98	攻撃計画に関する情報を覚知したためだという。	has:인지했기	fix	lookup
+dict:freq-lex-98	英警察、二重国籍者を逮捕	has:영국 경찰	fix	lookup
+dict:freq-lex-98	裏目ったなぁ。	has:역효과가 났	fix	lookup
+dict:freq-lex-98	裏目に出た。	has:화근이 되었다	keep	lookup
+dict:freq-lex-98	空気が淀んだ気がする。	has:탁해진	fix	lookup
+dict:freq-lex-98	昨年は右肘の故障に苦しんだ。	has:오른쪽 팔꿈치	fix	lookup
+dict:freq-lex-98	とても食べ応えがあります。	has:먹는 맛이	fix	lookup
+dict:freq-lex-98	木々が芽吹き始めた。	has:싹이 트기 시작했다	fix	lookup
+dict:freq-lex-98	なんとかひっぺがした。	has:어떻게든 떼어 냈다	fix	lookup
+dict:freq-lex-98	租特について見直しを進める。	has:조세특별조치에 대해	fix	lookup
+dict:freq-lex-98	素晴らしき魅惑のハーモニー	has:멋진 매혹	fix	lookup
+dict:freq-lex-98	素晴らしかった。	has:훌륭했다	keep	lookup
+dict:freq-lex-98	真っ白けの二人が来た。	has:새하얀 두 사람	fix	lookup
+dict:freq-lex-98	後手に回った感は否めず、打撃は避けられない。	has:부정할 수 없고	fix	lookup
+dict:freq-lex-98	否めない。	has:부정할 수 없다	keep	lookup
+dict:freq-lex-98	多数派維持に躍起	has:안간힘	fix	lookup
+dict:freq-lex-98	躍起になって探した。	has:기를 써	keep	lookup
+dict:freq-lex-98	ニーキックを食らった。	has:니 킥	keep	lookup
+dict:freq-lex-98	トーキックでシュートした。	has:토 킥으로	keep	lookup
+dict:freq-lex-98	デフギアが壊れた。	has:데프 기어	keep	lookup
+dict:freq-lex-98	リアデフを交換した。	has:리어 데프	keep	lookup
+dict:freq-lex-98	ガレ場を登った。	has:너덜지대	fix	lookup
+dict:freq-lex-98	日本株価が下落した。	has:일본 주가	keep	lookup
+dict:freq-lex-98	欧州株価の動向	has:유럽 주가	keep	lookup
+dict:freq-lex-98	日本株高が続く。	has:일본 주가 상승	keep	lookup
+dict:freq-lex-98	日本株安	has:일본 주가 하락	keep	lookup
+dict:freq-lex-98	１回表に先制した。	has:1회초	fix	lookup
+dict:freq-lex-98	1回表に先制した。	has:1회초	fix	lookup
+dict:freq-lex-98	１回裏の攻撃	has:1회말	fix	lookup
+dict:freq-lex-98	今回表彰された。	lacks:회초	keep	lookup
+dict:freq-lex-98	躍起となって否定した。	has:기를 써	fix	lookup
+dict:freq-lex-98	共和党は巻き返しに躍起となっている。	has:기를 쓰고	fix	lookup
+dict:freq-lex-98	ハルが来た。	has:하루가	fix	lookup
+dict:freq-lex-98	日本株価指数が上がった。	has:일본 주가지수	keep	lookup
