@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <optional>
 
 #include "core/pipeline/runes.h"
 
@@ -10,11 +11,12 @@ namespace hdTrans::pipeline::internal {
 namespace {
 
 // The text of the Find that runs; id 0 outside a Find. A Find inside a pattern takes its own id and
-// gives the outer one back when it ends.
+// gives the outer one back when it ends, unless a ScanOf holds one for the same text.
 struct Scan {
     const char* data = nullptr;
     size_t size = 0;
     uint64_t id = 0;
+    bool pinned = false;  // a ScanOf: the Finds over the same text keep it
 };
 thread_local Scan gScan;
 thread_local uint64_t gScans = 0;
@@ -63,8 +65,15 @@ size_t RunStartBefore(std::string_view s, size_t pos, bool (*in)(char32_t)) {
     return start;
 }
 
+ScanOf::ScanOf(std::string_view s) : data_(gScan.data), size_(gScan.size), id_(gScan.id), pinned_(gScan.pinned) {
+    gScan = {s.data(), s.size(), ++gScans, true};
+}
+
+ScanOf::~ScanOf() { gScan = {data_, size_, id_, pinned_}; }
+
 bool Find(std::string_view s, size_t from, Pattern p, Match& m) {
-    const ScanScope scope(s);
+    std::optional<ScanScope> scope;
+    if (!gScan.pinned || gScan.data != s.data() || gScan.size != s.size()) scope.emplace(s);
     for (size_t pos = from; pos <= s.size();) {
         m = Match{};
         if (p(s, pos, m)) {

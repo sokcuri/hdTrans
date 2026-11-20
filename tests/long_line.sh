@@ -152,6 +152,15 @@ while [ $i -lt 8000 ]; do
     i=$((i + 1))
 done
 printf '%sさん\n' "$line" >> "$tmp/input"
+# よか said again and again: every match of a dialect form reads the kana run before it from where the
+# match before it stopped, not from the run start again.
+i=0
+line=
+while [ $i -lt 8000 ]; do
+    line=${line}よか
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 "$cli" -dicts "$dicts" -userdict '' -in "$tmp/input" > "$tmp/output"
 [ "$(wc -l < "$tmp/output")" -eq "$(wc -l < "$tmp/input")" ]
 printf 'PASS long lines\n'

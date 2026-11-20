@@ -26,9 +26,26 @@ using Pattern = bool (*)(std::string_view s, size_t pos, Match& m);
 // The leftmost match of p in s at or after from.
 bool Find(std::string_view s, size_t from, Pattern p, Match& m);
 
+// One scan of s for the Finds made over it while this lives: s must not change meanwhile, so what
+// RunStartBefore remembered in one Find holds in the next (each Find alone takes a new scan).
+class ScanOf {
+  public:
+    explicit ScanOf(std::string_view s);
+    ~ScanOf();
+    ScanOf(const ScanOf&) = delete;
+    ScanOf& operator=(const ScanOf&) = delete;
+
+  private:
+    const char* data_;
+    size_t size_;
+    unsigned long long id_;
+    bool pinned_;
+};
+
 // s with every match of p replaced by replace(m); the scan resumes at the end of a match.
 template <class Replace>
 std::string ReplaceAll(std::string_view s, Pattern p, Replace replace) {
+    const ScanOf scan(s);  // out is another buffer: s does not change
     std::string out;
     size_t at = 0;
     Match m;
