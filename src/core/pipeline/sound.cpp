@@ -1440,6 +1440,18 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         if (k == KatakanaEnd(rs, p)) return chain;
     }
     bool loose = false;  // the first sound took a ッ that the next sound starts from
+    // Whether the token before p keeps the chain that starts with first from being sounds (see below): quoted for a
+    // laugh that って quotes, teClosing for どうした after a て form, last for the last sound, or nullptr while the
+    // chain is still found (then a true answer holds for any last sound).
+    auto rejected = [&](const SoundMatch& first, bool quoted, bool teClosing, const SoundMatch* last) {
+        return (afterParticle && !teClosing && first.intj && (first.keyLen < 3 || (last != nullptr && QuotedBy(*last, p) == 0)) && !quoted) ||
+               (afterWord && (first.intj || first.keyLen < 3) && !quoted) ||
+               (runStart && InWord(prev) && !quoted && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
+                !MimeticAfterWord(first) && !StateAfterWord(first)) ||
+               // A particle after a closing bracket that a dictionary word goes on from past the first
+               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
+               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1));
+    };
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
         if (!MatchAt(i, m, i > p, afterParticle && i == p)) break;
@@ -1453,6 +1465,10 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         }
         i = m.end;
         chain.push_back(std::move(m));
+        // A chain of two sounds or more is no quoted laugh and no closing phrase, so the tests below that read only its
+        // first sound already tell when it is dropped; finding the rest to the end of the run (ねぇねぇ…ね after a word)
+        // would cost each later place of the run as much again.
+        if (chain.size() == 2 && !katakana && (teOnly || rejected(chain[0], false, false, nullptr))) return {};
     }
     if (chain.empty()) {
         // A run whose first sound ends in a ッ that the next sound starts from
@@ -1497,13 +1513,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         for (const SoundMatch& m : chain) {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
-    } else if ((afterParticle && !teClosing && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0) && !quoted) ||
-               (afterWord && (first.intj || first.keyLen < 3) && !quoted) ||
-               (runStart && InWord(prev) && !quoted && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
-                !MimeticAfterWord(first) && !StateAfterWord(first)) ||
-               // A particle after a closing bracket that a dictionary word goes on from past the first
-               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
-               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1))) {
+    } else if (rejected(first, quoted, teClosing, &chain.back())) {
         return {};
     }
     while (!chain.empty()) {
