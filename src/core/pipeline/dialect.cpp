@@ -2901,10 +2901,12 @@ static bool SpokenClassWord(std::string_view s, size_t pos, Match& m) {
     const bool start = SpokenWordStart(s, pos) || dict::EndsWithMember(HDTRANS_CLASS("dialect.predicate-word"), s.substr(0, pos)) != 0;
     // the pronouns and adverbs only after no kana or after を (はわいの is Hawaii's, どうしようもない stays), and after a kanji
     // only where no word of the dictionary takes the kanji with the kana (味わい)
-    const char32_t b = pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp;
-    const bool bare = pos == 0 || (!IsHiraganaClass(b) && !IsKanjiClass(b)) || b == U'を' ||
-                      (IsKanjiClass(b) && !WordCovers(s, pos - LastRune(s.substr(0, pos)).size, pos + At(s, pos).size));
-    if (!start && !bare) return false;
+    // (asked only where a pronoun or adverb starts: the dictionary test costs more than the class test)
+    const auto bare = [&] {
+        const char32_t b = pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp;
+        return pos == 0 || (!IsHiraganaClass(b) && !IsKanjiClass(b)) || b == U'を' ||
+               (IsKanjiClass(b) && !WordCovers(s, pos - LastRune(s.substr(0, pos)).size, pos + At(s, pos).size));
+    };
     std::string_view written, plain;
     size_t p = 0;
     bool fits = false;
@@ -2913,10 +2915,10 @@ static bool SpokenClassWord(std::string_view s, size_t pos, Match& m) {
         fits = EndAt(s, p) || FinalParticleEnd(s, p) != std::string_view::npos ||
                StartsWithAny(s, p, {"か", "って", "から", "けど", "の", "ん", "です", "べ"}) ||
                dict::StartsWithMember(HDTRANS_CLASS("dialect.predicate-word"), s.substr(p)) != 0;
-    } else if (bare && ClassFormAt(HDTRANS_CLASS("dialect.pronoun-before-particle"), s, pos, written, plain)) {
+    } else if (ClassFormAt(HDTRANS_CLASS("dialect.pronoun-before-particle"), s, pos, written, plain) && bare()) {
         p = pos + written.size();
         fits = StartsWithAny(s, p, {"の", "は", "が", "も", "や", "に", "を", "ら"}) && !s.substr(p).starts_with("のう");
-    } else if (bare && ClassFormAt(HDTRANS_CLASS("dialect.adverb-before-verb"), s, pos, written, plain)) {
+    } else if (ClassFormAt(HDTRANS_CLASS("dialect.adverb-before-verb"), s, pos, written, plain) && bare()) {
         p = pos + written.size();
         fits = p < s.size() && IsKanjiClass(At(s, p).cp);
     }
