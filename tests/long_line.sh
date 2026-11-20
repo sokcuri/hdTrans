@@ -125,6 +125,15 @@ while [ $i -lt 4000 ]; do
     i=$((i + 1))
 done
 printf '%s\n' "$line" >> "$tmp/input"
+# A clause with no mark and no word that ends a scan (じゃなかけん said again): a scan of a construction
+# row walks the clause once for all its words, not again from each word.
+i=0
+line=
+while [ $i -lt 3000 ]; do
+    line=${line}じゃなかけん
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 # One clause of short sentences with no mark (彼が行く): the walk back to a question word before a
 # word skips, within a construction pass, the words that can neither end it nor ask.
 i=0
