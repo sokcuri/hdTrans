@@ -1,0 +1,34 @@
+# 규칙: LEX-7701
+rule	input	expected	kind	layer
+katakana:speech-alone	コレハ	이것은	fix	protect
+katakana:speech-alone	コレハ？	이것은?	fix	protect
+katakana:speech-alone	「コ、コレハ……ナミ、ダ……」	has:이건	fix	protect
+katakana:speech-alone	ソレハ ダメ	그것은 안 돼	fix	protect
+katakana:speech-alone	キミハ、ダレ？	너는, 누구?	fix	protect
+katakana:speech-alone	オマエハ	너는	fix	protect
+katakana:speech-alone	コイツハ	has:녀석은	fix	protect
+katakana:speech-alone	ワタシモ	나도	fix	protect
+katakana:speech-alone	ワタシノ邪魔ハ…サセナイッ！	has:내 방해	fix	protect
+katakana:speech-alone	ドコニ	어디에	fix	protect
+katakana:speech-alone	ピアノデス	피아노입니다	fix	protect
+katakana:speech-alone	ホントウニ	정말로	fix	protect
+katakana:speech-alone	ホントウニ？	정말로?	fix	protect
+katakana:speech-alone	ダイジョウブ	괜찮아	fix	protect
+katakana:speech-alone	ダイジョウブ、ダイジョウブ	괜찮아, 괜찮아	fix	protect
+katakana:speech-alone	キサマラガ…コノワレニ……	has:네놈들이	fix	protect
+katakana:speech-alone	コレデ…沈めッ！	has:이것으로	fix	protect
+katakana:speech-alone	ナカニシ	나카니시	fix	protect
+katakana:speech-alone	トラジャモン	트라자몬	fix	protect
+katakana:speech-alone	ニノミヤユイ	니노미야유이	fix	protect
+katakana:speech-alone	ユキノ	유키노	keep	protect
+katakana:speech-alone	ココノエ	코코노에	keep	protect
+katakana:speech-alone	キミガヨ	키미가요	keep	protect
+katakana:speech-alone	ドコモ	도코모	keep	protect
+katakana:speech-alone	ハモニカ	하모니카	keep	protect
+katakana:speech-alone	デスノート	데스노트	keep	protect
+katakana:speech-alone	ナカニシが来た。	나카니시가 왔다.	keep	protect
+katakana:speech-alone	カナリがインカムの向こうで沈黙する。	has:카나리가	keep	protect
+katakana:speech-alone	ドカーン	콰광	keep	protect
+katakana:speech-alone	ワタシハ、ロボットデス。	저는, 로봇입니다.	keep	protect
+katakana:speech-alone	キミノヨゾラ哨戒班	has:키미노요조라	keep	protect
+katakana:speech-alone	キミノウタ	키미노우타	keep	protect

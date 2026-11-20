@@ -184,6 +184,9 @@ constexpr int kCostWord[4] = {12, 11, 10, 9};
 constexpr int kCostFunc[2] = {10, 8};
 constexpr int kCostConj = 5;
 constexpr int kCostKata = 17;
+// What a word adds that starts with a katakana word of three kana or more and ends inside it, not as a
+// stem: it cuts a loanword (ぴあ|のです of ピアノデス, not ピアノ|です).
+constexpr int kCostCutKata = 5;
 
 int Morae(std::u32string_view h) {
     int n = 0;
@@ -349,6 +352,18 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
         const size_t s = start(i);
         return s >= e || kana.substr(s, e - s).find(U'ー') == std::u32string_view::npos;
     };
+    // Whether kana of h[i:j] (two to kMaxKey) is a katakana word, at kataKey[i * kMaxKey + j - i - 1], and the
+    // end in h of the longest one of three kana or more that starts at h[i], or i.
+    std::vector<char> kataKey(n * kMaxKey, 0);
+    std::vector<size_t> kataEnd(n);
+    for (size_t i = 0; i < n; i++) {
+        kataEnd[i] = i;
+        for (size_t j = i + 2; j <= n && j - i <= kMaxKey; j++) {
+            if (KeyTags(Utf8(kana.substr(start(i), end(j) - start(i))), ctx, snap).empty()) continue;
+            kataKey[i * kMaxKey + j - i - 1] = 1;
+            if (end(j) - start(i) >= 3) kataEnd[i] = j;
+        }
+    }
     for (size_t i = 0; i < n; i++) {
         for (size_t s = 2 * i; s <= 2 * i + 1; s++) {
             const int c = best[s].cost;
@@ -357,8 +372,7 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
                 relax(2 * (i + 1), s, c + kCostConj, PieceKind::Conj, "");
             }
             for (size_t j = i + 1; j <= n && j - i <= kMaxKey; j++) {
-                if (j - i >= 2 && (i > 0 || j < n) &&
-                    !KeyTags(Utf8(kana.substr(start(i), end(j) - start(i))), ctx, snap).empty()) {
+                if (j - i >= 2 && (i > 0 || j < n) && kataKey[i * kMaxKey + j - i - 1]) {
                     relax(2 * j, s, c + kCostKata, PieceKind::Kata, "");
                 }
                 if (!plain(i, j)) continue;
@@ -379,8 +393,9 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
                         relax(2 * (j + 1), s, c + kCostWord[0] + kCostConj, PieceKind::Conj, "");
                     }
                 } else if (!tags.empty() && f == nullptr) {
+                    // A stem goes on into its conjugation, so it cuts no katakana word (かわ|ら|ない of カワラナイ).
                     const int cost = c + kCostWord[std::clamp(m, 1, 4) - 1];
-                    relax(2 * j, s, cost, PieceKind::Word, tags);
+                    relax(2 * j, s, cost + (j < kataEnd[i] ? kCostCutKata : 0), PieceKind::Word, tags);
                     if (HasTag(tags, "MH")) relax(2 * j + 1, s, cost, PieceKind::Word, tags);
                 }
             }
@@ -540,17 +555,88 @@ bool StemMisconjugated(const KataRun& r, const dict::Snapshot& snap) {
     return false;
 }
 
+// The particles that speech in katakana writes after a kanji word (依頼者ハ, 工場カラ).
+constexpr std::u32string_view kParticleRuns[] = {U"ハ",   U"ガ",   U"ヲ",   U"ニ",   U"ノ",   U"デ",   U"ト",
+                                                 U"モ",   U"ヘ",   U"カラ", U"ヨリ", U"マデ", U"ニハ", U"デハ",
+                                                 U"トハ", U"ニモ", U"デモ", U"ヘノ", U"カラハ"};
+
+// Whether the reading of a run has a func word of two or more morae after its first piece (ピアノ|デス,
+// ワカラ|ナイ), ends in a verb or adjective of three morae or more or in a stem and its one conjugating kana
+// (オマエ|ヲ|コロ|ス), or is one piece. A run that ends in a one-kana stem with its kana does not (ニノミヤ|ユイ
+// is a name).
+bool HasEnding(const KataRun& r) {
+    const std::vector<KataPiece>& p = r.pieces;
+    for (size_t i = 1; i < p.size(); i++) {
+        if (p[i].kind == PieceKind::Func && p[i].morae >= 2) return true;
+    }
+    const KataPiece& last = p.back();
+    return p.size() == 1 || (last.kind == PieceKind::Word && last.morae >= 3 && MostlyTags(last.tags, "MH")) ||
+           (last.kind == PieceKind::Conj && last.to - last.from == 1 && p[p.size() - 2].kind == PieceKind::Word);
+}
+
 // Whether a line with japanese Japanese characters is speech written in katakana: the
 // runs that read as words hold at least half of its Japanese characters and weigh at
-// least two in grammar.
-bool IsKataSpeech(int japanese, const std::vector<const KataRun*>& runs) {
-    int speech = 0, evidence = 0;
+// least two in grammar. A bare line, with no punctuation, whose only run that reads has no
+// func word of two morae (HasEnding) is not: it is a name, a label or an unknown word that
+// reads as words and particles (ナカ|ニ|シ, トラ|ジャ|モン).
+bool IsKataSpeech(int japanese, const std::vector<const KataRun*>& runs, bool bare) {
+    int speech = 0, evidence = 0, reading = 0;
+    bool ending = false;
     for (const KataRun* r : runs) {
         if (r->pieces.empty()) continue;
+        reading++;
         speech += static_cast<int>(r->kana.size());
         evidence += Evidence(*r);
+        ending = ending || HasEnding(*r);
     }
-    return evidence >= 2 && 2 * speech >= japanese;
+    return evidence >= 2 && 2 * speech >= japanese && !(bare && reading == 1 && !ending);
+}
+
+// The kana at the start of the run r that read as Japanese when the line is no speech in katakana
+// or r has no reading of its own: a pronoun of two to four kana and the particle of kParticleRuns
+// after it that ends the run (コレハ これは, ワタシモ わたしも; not キミノウタ, a title, nor ココノエ); or the
+// whole run when it reads as one
+// adverb or na-word of four morae or more (ホントウニ ほんとうに, ダイジョウブ だいじょうぶ). 0 for
+// none. A run with a katakana row, or a run or a pronoun that the name layer or the document reads as
+// a name (キミ), does not read so.
+size_t SpeechStart(const KataRun& r, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::u32string_view kana = r.kana;
+    const auto named = [&](std::u32string_view k) {
+        const std::string key = Utf8(k);
+        if (ctx.named != nullptr && ctx.named->contains(key)) return true;
+        for (const dict::Record& rec : snap.NameRecords(key)) {
+            if (rec.codes != nullptr && rec.codes->sem.HasPrefix("QP")) return true;
+        }
+        return false;
+    };
+    if (named(kana) || !KeyTags(Utf8(kana), ctx, snap).empty()) return 0;
+    const std::vector<KataPiece>& p = r.pieces;
+    if (p.size() == 1 && p[0].kind == PieceKind::Word && p[0].morae >= 4 && HasTag(p[0].tags, "EG")) return kana.size();
+    for (size_t n = std::min<size_t>(4, kana.size()); n >= 2; n--) {
+        size_t particle = 0;
+        for (const std::u32string_view x : kParticleRuns) {
+            if (kana.substr(n).starts_with(x)) particle = std::max(particle, x.size());
+        }
+        if (particle == 0 || n + particle != kana.size()) continue;
+        const std::u32string_view head = kana.substr(0, n);
+        // A pronoun row of the base dictionary, not a name's.
+        const auto pronoun = [&](const std::string& key) {
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                const std::string_view part = c.codes != nullptr ? c.codes->partText : std::string_view();
+                if (part.size() >= 3 && (part[0] == 'N' || part[0] == 'I') && part[1] == '1' && part[2] == '2' &&
+                    !c.codes->sem.HasPrefix("QP")) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        // A katakana pronoun row (カレ, コイツ) outweighs the name layer, not a name of the document.
+        const bool kataPronoun = pronoun(Utf8(head));
+        if (ctx.named != nullptr && ctx.named->contains(Utf8(head))) return 0;
+        if (!kataPronoun && named(head)) return 0;
+        if (kataPronoun || pronoun(ToHiragana(Utf8(head)))) return n + particle;
+    }
+    return 0;
 }
 
 // Whether a line written only in katakana and with the punctuation of speech (…、！？。)
@@ -594,11 +680,6 @@ bool IsPlainKataSpeech(const output::Pieces& line, const std::vector<const KataR
     }
     return words >= 2 || (words == 1 && sounds > 0 && evidence > 0);
 }
-
-// The particles that speech in katakana writes after a kanji word (依頼者ハ, 工場カラ).
-constexpr std::u32string_view kParticleRuns[] = {U"ハ",   U"ガ",   U"ヲ",   U"ニ",   U"ノ",   U"デ",   U"ト",
-                                                 U"モ",   U"ヘ",   U"カラ", U"ヨリ", U"マデ", U"ニハ", U"デハ",
-                                                 U"トハ", U"ニモ", U"デモ", U"ヘノ", U"カラハ"};
 
 // Whether a katakana run after a kanji is its okurigana or particle: a particle of
 // kParticleRuns, or a run without a dictionary sense that starts with a kana that
@@ -1294,13 +1375,21 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             if (names) continue;
             if (words == 1 && StemMisconjugated(*only, snap)) continue;
         }
-        bool okurigana = false;
-        if (IsKataSpeech(japanese, all)) {
+        bool okurigana = false, local = false;
+        bool bare = true;
+        for (const output::Piece& p : line) {
+            for (std::string_view t = TextOf(p); !t.empty() && bare;) {
+                const text::Rune r = text::DecodeRune(t);
+                bare = !RuneIn(r.cp, U"…‥、，。．！？!?,.");
+                t.remove_prefix(std::max<size_t>(1, r.size));
+            }
+        }
+        if (IsKataSpeech(japanese, all, bare)) {
         } else if (kata == japanese && IsPlainKataSpeech(line, all, snap)) {
         } else if (hira == 0 && IsOkuriganaSpeech(line, runs, ctx, snap)) {
             okurigana = true;
         } else {
-            continue;
+            local = true;
         }
         for (size_t k = 0; k < line.size(); k++) {
             std::string b;
@@ -1310,7 +1399,17 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
                 const std::string_view piece = TextOf(line[k]);
                 const bool afterKanji = IsKanjiRune(LastRune(piece.substr(0, r.start)).cp);
                 const bool honorific = (r.kana == U"オ" || r.kana == U"ゴ") && IsKanjiRune(text::DecodeRune(piece.substr(r.end)).cp);
-                if (!r.pieces.empty()) {
+                // The start of a run that reads as Japanese alone (SpeechStart), in a line that is no
+                // speech or a run with no reading of its own, not joined to another by ・ or ＝.
+                size_t alone = 0;
+                if (local || r.pieces.empty()) {
+                    const char32_t before = LastRune(piece.substr(0, r.start)).cp, after = text::DecodeRune(piece.substr(r.end)).cp;
+                    if (!RuneIn(before, U"・＝") && !RuneIn(after, U"・＝")) alone = SpeechStart(r, ctx, snap);
+                    if (local && alone == 0) continue;
+                }
+                if (alone > 0) {
+                    h = ToHiragana(Utf8(r.kana));
+                } else if (!r.pieces.empty()) {
                     h = RunHiragana(r);
                 } else if ((okurigana && KeyTags(Utf8(r.kana), ctx, snap).empty()) ||
                            (afterKanji && Okurigana(r, ctx, snap)) || honorific) {
