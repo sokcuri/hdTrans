@@ -197,6 +197,9 @@ private:
     // (BareNameSlot) and no longer dictionary word starts (spec LEX-7780).
     // pairs: the names of those runs joined to the next by と or や and the run after it that is such a person
     // before a particle of name.bare-particle or a mark (いのりとかえでが).
+    // Whether the run line[a, b) of LayerKanaNames, in the hiragana run that ends at end, is a word there and no
+    // name: a sound covers it, a base word goes on past it, or before a mark it is a kana word or said twice.
+    bool LayerWordAt(std::string_view line, std::size_t a, std::size_t b, std::size_t end);
     std::vector<std::string> LayerKanaNames(std::string_view line, std::vector<std::pair<std::string, std::string>>* pairs = nullptr);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);

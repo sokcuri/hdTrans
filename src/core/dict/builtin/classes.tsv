@@ -15256,12 +15256,14 @@ noun.issue-over	采配
 name.layer-slot-particle	が
 name.layer-slot-particle	は
 name.layer-slot-particle	も
-//= name.layer-slot-final	Last kana of such a run that also end a word or predicate form before them (いくよ, ここね, やくも): the run is the name only before が or は (spec LEX-7780).
+//= name.layer-slot-final	Last kana of such a run that also end a word or predicate form before them (いくよ, ここね, やくも, なると, そうや): the run is the name only before が or は (spec LEX-7780).
 name.layer-slot-final	よ
 name.layer-slot-final	ね
 name.layer-slot-final	わ
 name.layer-slot-final	ぞ
 name.layer-slot-final	ぜ
+name.layer-slot-final	と
+name.layer-slot-final	や
 name.layer-slot-final	さ
 name.layer-slot-final	な
 name.layer-slot-final	も

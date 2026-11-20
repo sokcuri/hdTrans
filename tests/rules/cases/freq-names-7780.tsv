@@ -46,3 +46,17 @@ names:san-noun	花屋さんで花を買った。	has:꽃	keep	lookup
 names:san-noun	日がさんさんと照る。	has:찬란히	keep	lookup
 names:san-noun	ゆいさん、来て。	has:유이 씨,	keep	fixed
 names:layer-slot	つぐみでありさえすれば、つぐみは来る。	has:츠구미이기만 하면, 츠구미는	keep	fixed
+names:layer-slot	青い双眸から、ぽろり、と涙が透明な雫となって頬を伝った。	lacks:포로리	keep	fixed
+names:layer-slot	にょき、とテーブルの端から姿を現す嬉野さん。	lacks:뇨키	keep	fixed
+names:layer-slot	「ええっ！？（くらり）」	lacks:쿠라리	keep	fixed
+names:layer-slot	もこもこのヒゲという特徴的な顔を見た。	lacks:모코	keep	fixed
+names:layer-slot	「ふぁぁ……ねむ……」	lacks:네무	keep	fixed
+names:layer-slot	やっと朝かー。あさあさ。ふふっ。	lacks:아사아사	keep	fixed
+names:layer-slot	そりゃあ そうや。	lacks:소우야	keep	fixed
+names:layer-slot	「と、なると、ますますやっかいね」	lacks:나루토	keep	fixed
+names:layer-slot	(女性たち)≪いこー！！≫	lacks:이코	keep	fixed
+names:layer-slot	ありながら	lacks:아리나	keep	fixed
+names:layer-slot	「あの、一応会議中なので、はしゃがないでほしいのですが」	lacks:하샤	keep	fixed
+names:layer-slot	「ふはー、きんもちいー……こんなに風呂がデカいとはな」	lacks:긴 가져	keep	fixed
+names:layer-slot	町を、人を、みとは守ります！	has:미토는	fix	fixed
+names:layer-slot	情報、みとがお持ちします！	has:미토가	fix	fixed
