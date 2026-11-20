@@ -1,0 +1,4 @@
+#! layer=words
+# LEX-7821..: 동사 연용형 명사, 가나 복합동사, 형용동사 어간 뒤 조사 (0.9.8 F5)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+のまま	4 채	U500		Lo	GN			LEX-7821 형용동사 어간 뒤 のまま도 なまま처럼 -ㄴ 채(綺麗のままだ 예쁜 채다)				w:40600

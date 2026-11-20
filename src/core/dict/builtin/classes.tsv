@@ -253,6 +253,9 @@
 //= ko-root.hada-adjective	Roots of Korean 하다 adjectives that a Japanese verb reads with the 하다 of a verb (はっきりする 확실하다, 落ち着く 침착하다): its と before the next act is -니, not -자 (spec GRM-40).
 //= ko-root.hada-state	Roots of Korean 하다 adjectives that the sound stage writes before する (しんと 고요): their している is the adjective (しんとしている 고요하다).
 //= ko-adjective.hada-state	Korean 하다 adjectives of a bearing or a state that the 하다 verb of a Japanese と word reads (堂々と 당당하다): their て form before いる is 하게, not 하고 (당당하게 있다).
+//= ko-root.hi-adverb	Roots of Korean 하다 adjectives whose adverb is the root with 히, not 하게 (의연히, 묵묵히, 분명히): the と after a タリ noun read with one of them (毅然と 의연히, 黙然と 묵묵히).
+//= ko-root.bare-adverb	Doubled Korean mimetic roots that are adverbs by themselves as well as the root of a 하다 adjective (반짝반짝, 초롱초롱): the と after a タリ noun read with one of them is nothing (爛々と光る 반짝반짝 빛나다).
+//= ko-root.hayeo-adverb	Roots of four-syllable Korean 하다 adjectives of a shock one is struck with, whose adverb is the root with 하여 (아연실색하여, 망연자실하여).
 //= ko-adverb.manner-only	Korean adverbs in 히 or 하게 whose 하다 adjective is no word or says something else, so a mimetic read as one keeps its した as an act (ゆっくりした 천천히 한, じっとした 가만히 한).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.cp-danghada	Korean nouns of what one undergoes whose causative-passive (させられる after the Japanese noun) is the noun with 당하다 (해고당하다, 퇴학당하다), not the act one is made to do.
@@ -3814,6 +3817,44 @@ ko-adjective.hada-state	태평하다
 ko-adjective.hada-state	평온하다
 ko-adjective.hada-state	막연하다
 ko-adjective.hada-state	정연하다
+ko-adjective.hada-state	분연하다
+ko-adjective.hada-state	초연하다
+ko-adjective.hada-state	분명하다
+ko-adjective.hada-state	냉담하다
+ko-adjective.hada-state	묵묵하다
+ko-adjective.hada-state	황홀하다
+ko-adjective.hada-state	희희낙락하다
+ko-adjective.hada-state	어수선하다
+ko-adjective.hada-state	요염하다
+ko-adjective.hada-state	청초하다
+ko-adjective.hada-state	우람하다
+ko-adjective.hada-state	반짝반짝하다
+
+ko-root.hi-adverb	의연
+ko-root.hi-adverb	막연
+ko-root.hi-adverb	정연
+ko-root.hi-adverb	태연
+ko-root.hi-adverb	숙연
+ko-root.hi-adverb	분연
+ko-root.hi-adverb	초연
+ko-root.hi-adverb	묵묵
+ko-root.hi-adverb	분명
+ko-root.hi-adverb	늠름
+ko-root.hi-adverb	엄연
+ko-root.hi-adverb	당당
+ko-root.hi-adverb	단호
+ko-root.hi-adverb	확고
+ko-root.hi-adverb	역력
+ko-root.hi-adverb	담담
+ko-root.hi-adverb	망연
+ko-root.hi-adverb	혼연
+
+ko-root.bare-adverb	반짝반짝
+ko-root.bare-adverb	초롱초롱
+ko-root.bare-adverb	번쩍번쩍
+
+ko-root.hayeo-adverb	아연실색
+ko-root.hayeo-adverb	망연자실
 
 ko-root.hada-adjective	확실
 ko-root.hada-adjective	침착

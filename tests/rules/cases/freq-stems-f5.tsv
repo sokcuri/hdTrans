@@ -1,0 +1,120 @@
+# 규칙: LEX-7820, LEX-7821, LEX-7822, LEX-7823, LEX-7824, LEX-7825
+rule	input	expected	kind	layer
+lexical:taru-adverb	漠然と歩く。	has:막연히 걷	fix	lookup
+lexical:taru-adverb	漠然とした不安がある。	has:막연한 불안	keep	lookup
+lexical:taru-adverb	漠然としている。	has:막연하다	keep	lookup
+lexical:taru-adverb	毅然と言い放った。	has:의연히 잘라	fix	lookup
+lexical:taru-adverb	彼は毅然とした態度で臨んだ。	has:의연한 태도	keep	lookup
+lexical:taru-adverb	毅然としていた。	has:의연했다	keep	lookup
+lexical:taru-adverb	整然と並ぶ。	has:정연히 늘어선다	fix	lookup
+lexical:taru-adverb	部屋は整然としている。	has:정연하다	keep	lookup
+lexical:taru-adverb	泰然と構える。	has:태연히	fix	lookup
+lexical:taru-adverb	粛然と頭を下げた。	has:숙연히 고개	fix	lookup
+lexical:taru-adverb	悠然と構える。	has:느긋하게	fix	lookup
+lexical:taru-adverb	高峰が悠然と語る。	has:느긋하게 말한다	fix	lookup
+lexical:taru-adverb	悠然としている。	has:느긋하다	fix	lookup
+lexical:taru-adverb	憤然と言った。	has:분연히 말했다	fix	lookup
+lexical:taru-adverb	御園は、飄々とした顔で	has:초연한 얼굴	fix	lookup
+lexical:taru-adverb	いつも飄々としている高峰だが	has:초연한	fix	lookup
+lexical:taru-adverb	自分の中でも判然としない。	has:분명하지	fix	lookup
+lexical:taru-adverb	冷然と言った。	has:냉담하게 말했다	fix	lookup
+lexical:taru-adverb	二人で、黙然とケーキとお茶に向かう。	has:묵묵히	fix	lookup
+lexical:taru-adverb	生徒会室では、二人の才媛が黙然としていた。	has:묵묵했다	fix	lookup
+lexical:taru-adverb	艶然とした笑みを浮かべる。	has:요염한 미소	fix	lookup
+lexical:taru-adverb	艶然と笑む。	has:요염하게	fix	lookup
+lexical:taru-adverb	嬉々としながら走る。	has:희희낙락하면서	fix	lookup
+lexical:taru-adverb	汚くはないけど雑然としてるよ	has:어수선해	fix	lookup
+lexical:taru-adverb	肉棒は、まだ隆々としていた。	has:우람했다	fix	lookup
+lexical:taru-adverb	爛々と目を輝かせる。	has:반짝반짝 눈	fix	lookup
+lexical:taru-adverb	目が爛々としていた。	has:반짝반짝했다	fix	lookup
+lexical:taru-adverb	どよめきから騒然という状態に発展した。	lacks:소란스럽게 말하는	keep	lookup
+lexical:taru-adverb	淡々と言う。	has:담담하게 말한다	keep	lookup
+lexical:taru-adverb	平然と言った。	has:태연하게 말했다	keep	lookup
+lexical:taru-adverb	呆然とつぶやいた。	has:멍하니	keep	lookup
+lexical:adjectival-noun-mama	綺麗のまま残す。	has:예쁜 채 남긴다	fix	lookup
+lexical:adjectival-noun-mama	部屋は綺麗のままだった。	has:예쁜 채였다	fix	lookup
+lexical:adjectival-noun-mama	綺麗のままでいて。	has:예쁜 채로 있어	fix	lookup
+lexical:adjectival-noun-mama	静かのままだった。	has:조용한 채였다	fix	lookup
+lexical:adjectival-noun-mama	駄目のままだ。	has:안 된 채다	fix	lookup
+lexical:adjectival-noun-mama	昔のままだ。	has:옛날 그대로다	keep	lookup
+lexical:adjectival-noun-mama	元気のままでいてね。	has:건강인 채로	keep	lookup
+lexical:adjectival-noun-mama	このままでいい。	has:이대로	keep	lookup
+lexical:adjectival-noun-mama	綺麗なまま残す。	has:예쁜 그대로	keep	lookup
+lexical:adjectival-noun-mama	綺麗の秘訣。	has:예쁜 비결	keep	lookup
+lexical:kana-compound-spelling	書きかえる必要がある。	has:고쳐 쓸 필요	fix	lookup
+lexical:kana-compound-spelling	書きかえた。	has:고쳐 썼다	fix	lookup
+lexical:kana-compound-spelling	着かえた。	has:갈아입었다	fix	lookup
+lexical:kana-compound-spelling	明日が締めきりだし、急がないと。	has:마감이고	fix	lookup
+lexical:kana-compound-spelling	締めきりは明日だ。	has:마감은	fix	lookup
+lexical:kana-compound-spelling	締めきった部屋。	has:마감한 방	keep	lookup
+lexical:kana-compound-spelling	踏みきりを渡った。	has:건널목을	fix	lookup
+lexical:kana-compound-spelling	踏みきった。	has:단행했다	keep	lookup
+lexical:kana-compound-spelling	朝の行きかえりに見かける。	has:왕복	fix	lookup
+lexical:kana-compound-spelling	跳ねとばされた。	has:튕겨	fix	lookup
+lexical:kana-compound-spelling	車に跳ねとばされた。	has:차에 튕겨	fix	lookup
+lexical:kana-compound-spelling	全部食いきった。	has:다 먹었다	keep	lookup
+lexical:kana-compound-spelling	口ごたえして言いかえした。	has:되받아쳤다	keep	lookup
+lexical:kana-compound-spelling	彼は言いかえさなかった。	has:되받아치지 않았다	keep	lookup
+lexical:kana-compound-spelling	みえを張る。	has:허세를 부린다	fix	lookup
+lexical:kana-noun-spelling	いきが切れる。	has:숨이 찬다	fix	lookup
+lexical:kana-noun-spelling	いきを吸う。	has:숨을	fix	lookup
+lexical:kana-noun-spelling	はじめの一歩。	has:처음의 한 걸음	fix	lookup
+lexical:kana-noun-spelling	はじめが肝心だ。	has:처음이 중요하다	fix	lookup
+lexical:kana-noun-spelling	はじめまして。	has:처음 뵙겠습니다	keep	lookup
+lexical:kana-noun-spelling	こいの季節だ。	has:사랑의 계절	fix	lookup
+lexical:kana-noun-spelling	初こいの人。	has:첫사랑	keep	lookup
+lexical:kana-noun-spelling	早くこい！	has:와라	keep	lookup
+lexical:kana-noun-spelling	こいつは誰だ。	has:이 녀석은	keep	lookup
+lexical:kana-noun-spelling	おい、待て。	has:어이, 기다려	keep	lookup
+cx:taru-adverb:5	ここは毅然とすべきだ。	has:의연해야	fix	rewrites
+cx:taru-adverb:5	漠然とすべきだ。	has:막연해야	fix	rewrites
+cx:taru-adverb:5	毅然とした態度をとるべきだ。	has:의연한 태도	keep	rewrites
+cx:taru-adverb:10	黙然と腕を組んだ。	has:묵묵히 팔짱	fix	rewrites
+cx:taru-adverb:10	人を黙然とさせる力。	lacks:묵묵히 시키	keep	rewrites
+cx:taru-adverb:10	人を憤然とさせる言葉。	lacks:분연히 시키	keep	rewrites
+cx:taru-adverb:15	爛々と光る目。	has:반짝반짝 빛나는	fix	rewrites
+cx:taru-adverb:15	爛々という目つき。	has:반짝반짝이라는	keep	rewrites
+cx:taru-adverb:20	愕然と立ち尽くした。	has:아연실색하여	fix	rewrites
+cx:taru-adverb:20	人を愕然とさせる知らせ。	lacks:아연실색하여 시키	keep	rewrites
+cx:taru-adverb:40	飄々と言った。	has:초연히 말했다	fix	rewrites
+cx:taru-adverb:40	毅然と言い放ちました。	has:의연히 잘라 말했습니다	fix	rewrites
+cx:taru-adverb:40	飄々という言葉が似合う男。	has:초연이라는 말	keep	rewrites
+cx:taru-adverb:42	愕然と思った。	has:아연실색하여 생각했다	fix	rewrites
+cx:taru-adverb:42	愕然という言葉しか出ない。	has:아연실색이라는 말	keep	rewrites
+cx:taru-adverb:44	冷然と言い放った。	has:냉담하게 잘라 말했다	fix	rewrites
+cx:taru-adverb:44	嘘だと言い放った。	!rule:cx:taru-adverb:44	keep	rewrites
+cx:taru-adverb:30	冷然として答えた。	has:냉담하게 대답했다	fix	rewrites
+cx:taru-adverb:30	悠然として答えた。	has:느긋하게 대답했다	fix	rewrites
+cx:taru-adverb:30	冷然としていた。	has:냉담했다	keep	rewrites
+lexical:taru-adverb	悠然という感じで歩いていく。	has:느긋이라는 느낌	keep	lookup
+lexical:taru-adverb	冷然という態度だった。	has:냉담이라는 태도	keep	lookup
+lexical:taru-adverb	悠然とか言われても困る。	has:느긋이라든지	keep	lookup
+lexical:taru-adverb	飄々とはこういうことだ。	lacks:초연히는	keep	lookup
+lexical:taru-adverb	事情を判然とさせる。	has:분명하게 시킨다	keep	lookup
+lexical:kana-noun-spelling	池にこいがいる。	has:잉어가 있다	keep	lookup
+lexical:kana-noun-spelling	こいを釣った。	has:잉어를	keep	lookup
+lexical:kana-noun-spelling	金色のこいが泳いでいる。	has:금빛 잉어가	keep	lookup
+lexical:kana-noun-spelling	はあはあと、いきが切れた。	has:숨이 찼다	fix	lookup
+lexical:kana-noun-spelling	いきが切れて走れない。	has:숨이 차	fix	lookup
+lexical:kana-compound-spelling	返事を書きかえした。	has:다시 썼다	fix	lookup
+lexical:kana-compound-spelling	書きかえしてきた。	has:다시 써 왔다	fix	lookup
+lexical:to-ii-compound	馬鹿と言い放った。	has:바보라고 잘라 말했다	fix	lookup
+lexical:to-ii-compound	無実と言い張った。	has:결백이라고 우겼다	fix	lookup
+lexical:to-ii-compound	無実と言い張っています。	has:결백이라고 우기고 있습니다	fix	lookup
+lexical:to-ii-compound	嫌と言い返した。	has:싫다고 되받아쳤다	fix	lookup
+lexical:to-ii-compound	馬鹿と言い捨てた。	has:바보라고 내뱉듯이 말했다	fix	lookup
+lexical:to-ii-compound	毅然と言い張った。	has:의연히 우겼다	fix	lookup
+lexical:to-ii-compound	彼女は冷然と言い放ち、去った。	has:냉담하게 잘라 말해	fix	lookup
+lexical:to-ii-compound	「無理だ」と言い放った。	has:라고 잘라 말했다	keep	lookup
+lexical:to-ii-compound	誤解だと言い張る師匠。	has:오해라고 우기는	keep	lookup
+lexical:to-ii-compound	無理と言い切った。	has:무리라고 단언했다	keep	lookup
+lexical:to-ii-compound	ぴしゃりと言い放つ。	has:찰싹 잘라 말한다	keep	lookup
+cx:taru-adverb:50	本が整然と並んでいた。	has:정연히 줄지어 있었다	fix	rewrites
+cx:taru-adverb:50	兄と並んで座った。	has:형과 함께 앉았다	keep	rewrites
+cx:taru-adverb:52	雑然と並んでいる。	has:어수선하게 줄지어	fix	rewrites
+cx:taru-adverb:52	彼と並んで歩く。	has:그와 함께 걷는다	keep	rewrites
+lexical:taru-adverb	王と並ぶ。	has:왕과 대등하다	keep	lookup
+lexical:taru-adverb	粛然と並んだ。	has:숙연히 늘어섰다	fix	lookup
+cx:taru-adverb:42	愕然として言葉を失う。	!rule:cx:taru-adverb:30	keep	rewrites
+lexical:taru-adverb	執事までが唖然として固まった。	has:아연실색해 굳어졌다	keep	lookup
+lexical:taru-adverb	愕然としていた。	has:아연실색하고 있었다	fix	lookup
