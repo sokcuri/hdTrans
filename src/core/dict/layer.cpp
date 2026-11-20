@@ -2,17 +2,24 @@
 
 #include <cstdint>
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <unordered_map>
 #include <unordered_set>
 
 #include "core/dict/runes.h"
 
+#if defined(_WIN32) && !defined(__EMSCRIPTEN__)
+#include <windows.h>
+#elif !defined(__EMSCRIPTEN__)
+#include <sys/mman.h>
+#endif
+
 namespace hdTrans::dict {
 
 // Writes the arrays of a Dict.
 struct DictBuilder {
-    static Dict Build(std::vector<internal::Row>& rows, const std::vector<int32_t>& first, const CodeTable& codes);
+    static Dict Build(internal::Rows& rows, const std::vector<int32_t>& first, const CodeTable& codes);
 };
 
 namespace {
@@ -43,6 +50,32 @@ struct KeyClassHash {
 }  // namespace
 
 namespace internal {
+
+void* AllocatePages(std::size_t bytes) {
+#if defined(_WIN32) && !defined(__EMSCRIPTEN__)
+    void* p = VirtualAlloc(nullptr, bytes, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    if (p == nullptr) std::abort();  // as a failed new does without exceptions
+    return p;
+#elif !defined(__EMSCRIPTEN__)
+    void* p = ::mmap(nullptr, bytes, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+    if (p == MAP_FAILED) std::abort();  // as a failed new does without exceptions
+    return p;
+#else
+    return ::operator new(bytes);
+#endif
+}
+
+void FreePages(void* p, std::size_t bytes) {
+#if defined(_WIN32) && !defined(__EMSCRIPTEN__)
+    static_cast<void>(bytes);
+    VirtualFree(p, 0, MEM_RELEASE);
+#elif !defined(__EMSCRIPTEN__)
+    ::munmap(p, bytes);
+#else
+    static_cast<void>(bytes);
+    ::operator delete(p);
+#endif
+}
 
 void Layer::Add(std::string_view key, std::string_view target, int32_t code, int32_t prio, int32_t rule, int32_t id) {
     std::string fixed;
@@ -231,9 +264,9 @@ Dict Layer::Build(const CodeTable& codes) {
 
 }  // namespace internal
 
-Dict DictBuilder::Build(std::vector<internal::Row>& rows, const std::vector<int32_t>& first, const CodeTable& codes) {
+Dict DictBuilder::Build(internal::Rows& rows, const std::vector<int32_t>& first, const CodeTable& codes) {
     struct Context {
-        const std::vector<internal::Row>* rows;
+        const internal::Rows* rows;
         const std::vector<int32_t>* first;
     } ctx{&rows, &first};
     const std::size_t count = first.size() - 1;
