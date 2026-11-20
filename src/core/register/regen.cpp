@@ -408,7 +408,8 @@ bool AlignPredicate(Words& r, Aligner& a, const PreItem& it, Want want, Mood moo
                     v.ctype = CType::conn;
                     v.eomi = t.G("conn.aux");
                     got.push_back(v);
-                    tail[0].glue = tail[0].lemma == t.G("voice.aux");
+                    // read inside one written word, so written onto it again (만들어졌다, and 가버렸다 of LAY-11)
+                    tail[0].glue = true;
                     for (auto& n : tail) got.push_back(n);
                 }
             }
@@ -1298,10 +1299,12 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                         if (!(end || afterthought) || sentenceOf[q] >= pend.size() || !(pend[sentenceOf[q]] || afterthought) ||
                             n.was != Level::hapsyo)
                             continue;
-                        // one level in a sentence: another word in it written in 합쇼체 (뛰어나고 있습니다만, …) keeps its end
+                        // one level in a sentence: another word in it written in 합쇼체 (뛰어나고 있습니다만, …) keeps its end;
+                        // a verb read from the same written word (말해 of 말해버렸습니다) is the end itself
                         bool other = false;
                         for (std::size_t k = 0; k < nodes.size(); ++k)
                             if (k != q && sentenceOf[k] == sentenceOf[q] && nodes[k].kind != Kind::Punct && nodes[k].to > nodes[k].from &&
+                                (nodes[k].from != n.from || nodes[k].to != n.to) &&
                                 HoldsHapsyo(out32.substr(nodes[k].from, nodes[k].to - nodes[k].from), t.G("mixed.hapsyo")))
                                 other = true;
                         if (!other && !keepEomi(n.wasEomi) && !willed(q)) {

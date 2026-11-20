@@ -18,4 +18,4 @@ normalize:casual-negative-nee	「って、ダレもいねぇ」	「라고, 아�
 normalize:casual-negative-nee	「魔物はいねぇな」	「마물은 없네」	fix	normalize
 normalize:casual-negative-nee	「…………忘れてはいねぇよ」	「…………잊지는 않아」	fix	normalize
 normalize:casual-negative-nee	リカはもういねえんだ。	리카는 이제 없다.	fix	normalize
-normalize:casual-negative-nee	「俺は、別に生きても死んでもどっちでも良いぜぇ。もう苦しみたくないだけだ。杏里もいねぇ、あんたを憎むのさえ、憎んでいるのかさえ分からなくなっちまった。」	「나는, 따로 살아도 죽어도 어느 쪽으로도 좋아. 이제 괴로워하고 싶지 않은 것뿐이다. 안리도 없는, 너를 미워하는 것조차, 미워하고 있는지 조차 모르게 돼버렸다.」	fix	normalize
+normalize:casual-negative-nee	「俺は、別に生きても死んでもどっちでも良いぜぇ。もう苦しみたくないだけだ。杏里もいねぇ、あんたを憎むのさえ、憎んでいるのかさえ分からなくなっちまった。」	has:안리도 없	fix	normalize
