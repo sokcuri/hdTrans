@@ -1811,6 +1811,43 @@ std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap
     return changed ? EncodeText(rs) : std::string(text);
 }
 
+// The ッ, long marks and small vowels that draw out the imperative of a godan verb before the quoting と
+// or って, written as if they were not there (跪けッと言った 跪けと言った, 跪けッて 跪けって, 跪けェって
+// 跪けって): the bare order before them quotes. The e-row kana after a kanji stem whose dictionary verb
+// has that order (跪 of 跪く); と that begins a ておく contraction (とく, とけ, とい) is no quote.
+std::string RewriteDrawnQuotedOrder(std::string_view text, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    bool changed = false;
+    constexpr std::u32string_view kERow = U"えけげせてねべめれ";
+    for (size_t i = 1; i + 2 < rs.size(); i++) {
+        const size_t e = kERow.find(rs[i]);
+        if (e == std::u32string_view::npos || !IsKanjiRune(rs[i - 1])) continue;
+        size_t j = i + 1;
+        while (j < rs.size() && In(rs[j], U"ッっーァィゥェォぇ") && !(j == i + 1 && rs[j] == U'っ')) j++;
+        if (j == i + 1 || j >= rs.size()) continue;
+        const std::u32string_view on = std::u32string_view(rs).substr(j);
+        const bool to = on.starts_with(U"と") && !on.starts_with(U"とく") && !on.starts_with(U"とけ") && !on.starts_with(U"とい") &&
+                        !on.starts_with(U"とか") && !on.starts_with(U"とこ") && !on.starts_with(U"とっ") && !on.starts_with(U"ときゃ");
+        const bool tte = on.starts_with(U"て") && In(rs[j - 1], U"っッ");
+        if (!to && !tte) continue;
+        size_t start = i - 1;
+        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        const std::string godan = EncodeText(std::u32string{U"おこごそとのぼもろ"[e], U'う'});
+        bool order = false;
+        for (size_t k = start; k < i && !order; k++) {
+            const std::string key = EncodeText(rs.substr(k, i - k));
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                order = order || (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                                  word::Conjugation(c.codes->partText[3] - '0', 5) == godan);
+            }
+        }
+        if (!order) continue;
+        rs = rs.substr(0, i + 1) + (tte ? std::u32string(U"っ") : std::u32string()) + rs.substr(j);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
 std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap) {
     const std::u32string rs = DecodeText(text);
     std::u32string out;
@@ -3114,7 +3151,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                             rs = Spliced(rs, keep, drawn, to);
                         } else {
                             size_t to = end;
-                            while (shoutTsu && to < rs.size() && rs[to] == U'っ') to++;  // だめーっ！ だめ～！
+                            while (shoutTsu && to < rs.size() && In(rs[to], kTsu)) to++;  // だめーっ！, 来たーッ！ だめ～！, 来た～！
                             rs = Spliced(rs, keep, U"～", to);
                         }
                         changed = true;

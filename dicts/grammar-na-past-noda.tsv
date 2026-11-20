@@ -1,0 +1,19 @@
+#! layer=base
+# 형용동사의 과거 だった 뒤 のでしょう, のです, のだろう 계열 (LEX-8143): かった 뒤의 같은 끝말과 같은 읽기
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+だったのでしょう	5겠지요	U500			GN				na-past-noda:1
+だったのでしょうか	5을까요	U500			GN				na-past-noda:2
+だったのです	5습니다	U500			GN				na-past-noda:3
+だったのです	5습니까	U500			GN				na-past-noda:4
+だったのですか	5습니까	U500			GN				na-past-noda:5
+だったのですから	5으니까요	U500			GN				na-past-noda:6
+だったのですね	5지요	U500			GN				na-past-noda:7
+だったんでしょう	5겠지요	U500			GN				na-past-noda:8
+だったんでしょうか	5을까요	U500			GN				na-past-noda:9
+だったのだろう	5을 것이다	U500			GN				na-past-noda:10
+だったのだろうか	5던 것일까	U500			GN				na-past-noda:11
+だったんだろう	5을 것이다	U500			GN				na-past-noda:12
+だったんだろうか	5던 것일까	U500			GN				na-past-noda:13
+だったのかしら	5던 걸까	U500			GN				na-past-noda:14
+だったのかも	5던 것일지도	U500			GN				na-past-noda:15
+だったのだから	5으니까	U500			GN				na-past-noda:16

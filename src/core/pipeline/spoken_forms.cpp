@@ -155,6 +155,9 @@ bool TakaNee(std::string_view s, size_t pos, Match& m) {
     const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
     // After っ or ん the た is a past (あったかないか).
     if (pos == 0 || !(IsHiraganaClass(b) || IsKanjiClass(b)) || In(b, U"っん")) return false;
+    // A wish follows a continuative, which ends in a kanji or an i-row or e-row kana: after another
+    // kana たか is the stem of a verb (たたかない 叩かない, またかない).
+    if (IsHiraganaClass(b) && !In(b, U"いきぎしじちぢにひびぴみりゐえけげせぜてでねへべぺめれゑ")) return false;
     size_t p = pos;
     if (!Lit(s, p, "たか")) return false;
     size_t q = p;

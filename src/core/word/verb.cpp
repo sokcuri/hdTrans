@@ -22,6 +22,42 @@ int Byte(char c) { return static_cast<unsigned char>(c); }
 
 bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 
+// text without the ッ, long marks and small vowels it starts with: the sound that draws out or
+// stops a word before it (跪けッ, 守れーッ, 死ねェ, 行けぇ). A hiragana っ counts inside such a run
+// (走れーっ, 追えーーっ); a run that starts with it is the clipped stop AcceptVerbContinuation reads (行けっ).
+std::string_view SkipSoundMarks(std::string_view text) {
+    const std::size_t whole = text.size();
+    for (bool more = true; more && !text.empty();) {
+        more = false;
+        for (const std::string_view k : {"ッ", "ー", "ァ", "ィ", "ゥ", "ェ", "ォ", "ぇ", "っ"}) {
+            if (k == "っ" && text.size() == whole) continue;
+            if (Starts(text, k)) {
+                text.remove_prefix(k.size());
+                more = true;
+            }
+        }
+    }
+    return text;
+}
+
+// Whether the sound marks before sound (rest without them) end a drawn-out e-row form that the quoting
+// と or って follows, as the bare form before them does (跪けッと言った, 跪けッて, 跪けェって).
+bool QuotesAfterMarks(std::string_view rest, std::string_view sound) {
+    if (sound.size() >= rest.size()) return false;
+    const std::string_view marks = rest.substr(0, rest.size() - sound.size());
+    return Starts(sound, "と") || (Starts(sound, "て") && (marks.ends_with("っ") || marks.ends_with("ッ")));
+}
+
+// Whether text starts with a mark after which a drawn-out e-row form is an order: a closing bracket,
+// 。, ！, an ellipsis or ASCII punctuation other than ? (撃てッ」, 跪けッ！). Before a question mark it
+// asks (わけぇ？ is the noun 訳).
+bool ClosesOrder(std::string_view text) {
+    for (const std::string_view m : {"」", "』", "）", "。", "…", "‥", "！"}) {
+        if (Starts(text, m)) return true;
+    }
+    return !text.empty() && Byte(text[0]) < 0x80 && IsPunct(text[0]) && text[0] != '?';
+}
+
 // たく of the desire after a stem (見たくない), not the た of the past before くせに or くらい
 // (見たくせに, 見たくらい).
 bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni) && !s.starts_with(kJaTakurai); }
@@ -307,6 +343,12 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
             // or に, except the だの, だと (だとか), だって or だなんて that quote an order, and only
             // an order takes の (背負えだとか, 帰れだと, 寝ろの一言). The imperative of いただく is
             // no order (待っていただけだと is いた and だけ).
+            // A katakana ッ, with the long marks and small vowels that draw an order out, is only its
+            // sound (跪けッ！, 守れーッ！, 死ねェ！): the mark after it decides, as if they were not written.
+            if (branch == 4) {
+                const std::string_view sound = SkipSoundMarks(rest);
+                if (sound.size() < rest.size() && (sound.empty() || ClosesOrder(sound) || QuotesAfterMarks(rest, sound))) continue;
+            }
             if (branch == 4 && (Starts(rest, "」") || Starts(rest, "』") || Starts(rest, "）") || Starts(rest, "。") ||
                                 Starts(rest, "…") || Starts(rest, "‥") || Starts(rest, "！") || Starts(rest, "？") ||
                                 Starts(rest, "って") || Starts(rest, "と"))) {
@@ -557,8 +599,15 @@ bool Item::AcceptVerbContinuation(Record* following) {
                     EntryText(0).find(" 수 ") == std::string_view::npos)) {
             tsu = false;
         }
+        // A drawn-out e-row form before a question mark asks (わけぇ？ is the noun 訳), as in ClosesOrder.
+        bool drawn = false;
+        if (!tsu) {
+            const std::string_view sound = SkipSoundMarks(ahead);
+            drawn = sound.size() < ahead.size();
+            if (drawn) ahead = sound.empty() && !tail.empty() ? std::string_view(base.nextText) : sound;
+        }
         if ((tsu || Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
-             Starts(ahead, "？") || (ahead.empty() && base.nextType == tokenizer::kTypeEnd && HasKanji(surface) && undergoes())) &&
+             (Starts(ahead, "？") && !drawn) || (ahead.empty() && base.nextType == tokenizer::kTypeEnd && HasKanji(surface) && undergoes())) &&
             w->GodanImperative(surface)) {
             return false;
         }
