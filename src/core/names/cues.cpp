@@ -1401,16 +1401,39 @@ std::vector<Registry::Coordination> Registry::CoordinatedKana(std::string_view l
         // A word starts the line or follows a mark or a space; kana after kanji or katakana are their
         // ending or particle (荷物をまとめると, サッちゃんや).
         const bool wordStart = i == 0 || !(IsKanji(u[i - 1]) || IsKatakana(u[i - 1]) || u[i - 1] == U'々');
-        // Whether a dictionary word starts at a and goes on past the と or や at k (あやとり, ひとりで).
-        const auto spans = [&](std::size_t a, std::size_t k) {
-            for (std::size_t b = k + 2; b <= e; b++) {
-                if (Flags(utf8(a, b)).records > 0) return true;
+        // The length in runes of the longest dictionary word that starts the run at i: of the keys of the base
+        // and plain dictionaries that start the run (each rune of the run takes three bytes), the longest
+        // with a record. A key of no word is looked up only when the snapshot cannot be read.
+        std::size_t reach = 0;
+        bool reached = false;
+        const auto longest = [&]() {
+            const std::string run = utf8(i, e);
+            std::vector<std::size_t> ends;
+            snap_->Base().Prefixes(run, [&](int, std::size_t n) { ends.push_back(n); });
+            for (const dict::UserEntry* x : snap_->TextPlain().Search(run, dict::LookupMode::General)) ends.push_back(x->key.size());
+            std::size_t n = 0;
+            for (const std::size_t end : ends) {
+                if (end % 3 == 0 && end / 3 > n && Flags(std::string_view(run).substr(0, end)).records > 0) n = end / 3;
             }
-            return false;
+            return n;
+        };
+        // Whether a dictionary word starts at i and goes on past the と or や at k (あやとり, ひとりで).
+        const auto spans = [&](std::size_t k) {
+            if (snap_ == nullptr || !snap_->Healthy()) {
+                for (std::size_t b = k + 2; b <= e; b++) {
+                    if (Flags(utf8(i, b)).records > 0) return true;
+                }
+                return false;
+            }
+            if (!reached) {
+                reach = longest();
+                reached = true;
+            }
+            return i + reach >= k + 2;
         };
         // The word first: そらとみゆきは, そらと美幸は.
         for (std::size_t l = 2; wordStart && l <= 4 && i + l < e; l++) {
-            if (!joins(i + l) || spans(i, i + l)) continue;
+            if (!joins(i + l) || spans(i + l)) continue;
             const std::string x = utf8(i, i + l);
             if (!word(x, u[i + l])) continue;
             const std::size_t j = i + l + 1;
@@ -1439,7 +1462,7 @@ std::vector<Registry::Coordination> Registry::CoordinatedKana(std::string_view l
             }
         };
         for (std::size_t m = 2; wordStart && m <= 5 && i + m < e; m++) {
-            if (joins(i + m) && !spans(i, i + m)) after(i + m + 1, utf8(i, i + m));
+            if (joins(i + m) && !spans(i + m)) after(i + m + 1, utf8(i, i + m));
         }
         if (i > 0 && joins(i) && (IsKanji(u[i - 1]) || IsKatakana(u[i - 1]))) {
             std::size_t k = i;
