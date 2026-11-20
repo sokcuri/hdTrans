@@ -65,6 +65,10 @@ size_t RunStartBefore(std::string_view s, size_t pos, bool (*in)(char32_t)) {
     return start;
 }
 
+unsigned long long ScanOver(std::string_view s) {
+    return gScan.id != 0 && s.data() == gScan.data && s.size() <= gScan.size ? gScan.id : 0;
+}
+
 ScanOf::ScanOf(std::string_view s) : data_(gScan.data), size_(gScan.size), id_(gScan.id), pinned_(gScan.pinned) {
     gScan = {s.data(), s.size(), ++gScans, true};
 }
