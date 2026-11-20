@@ -487,7 +487,7 @@ jobs:
       !cancelled() && needs.gate.outputs.run != 'false' && needs.gate.outputs.native != 'false' &&
       (github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'schedule')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     defaults:
       run:
         shell: bash
