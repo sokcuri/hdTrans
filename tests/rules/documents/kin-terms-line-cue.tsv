@@ -4,7 +4,7 @@ normalize:kin-terms	「あたしも行くわよ」\n……あ、兄貴ぃー。	
 normalize:kin-terms	「あたしも行くわよ」\nあ、あのぅ……、兄貴……そいつはちょっと無理なんじゃ……	「나도 갈 거야」\n그, 그……, 형……그 녀석은 조금 무리지……	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\nあっ、兄貴！やめましょうよー。いくら何でもそればっかりは。	「나도 갈 거야」\n앗, 형! 그만둡시다~. 아무리 그래도 그것뿐은.	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\nようやく兄を引き離して一人になれた時間。	「나도 갈 거야」\n드디어 형을 갈라 놓아 혼자가 될 수 있었던 시간.	fix	normalize
-normalize:kin-terms	「あたしも行くわよ」\nイカれた兄貴を 鎖でつないでろ	「나도 갈 거야」\n고장 난 형을 쇠사슬로 이어라	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nイカれた兄貴を 鎖でつないでろ	「나도 갈 거야」\n미친 형을 쇠사슬로 이어라	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\n両親と兄が明確な毒。兄は気持ち悪い。これを抑えておいてください。	「나도 갈 거야」\n부모님과 형이 명확한 독. 형은 기분 나쁘다. 이것을 억제해 둬 주세요.	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\n兄さん、お茶こぼしてる	「나도 갈 거야」\n형님, 차 흘리고 있다	fix	normalize
 normalize:kin-terms	「あたしも行くわよ」\n兄さんとは関係ない	「나도 갈 거야」\n형님과는 관계없다	fix	normalize
