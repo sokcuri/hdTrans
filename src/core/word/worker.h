@@ -123,6 +123,12 @@ public:
     Item* resumeParent = nullptr;
     int resumeRetries = 0;
     std::string_view transformSurface;
+    // Whether query ends transformSurface. A query is most often a view of the surface's own end, which needs no
+    // compare of the rest of a long token at each lookup.
+    bool EndsSurface(std::string_view query) const {
+        return (query.size() <= transformSurface.size() && query.data() + query.size() == transformSurface.data() + transformSurface.size()) ||
+               transformSurface.ends_with(query);
+    }
     // The word read before the text at kanaAfterAt while the word search looks that text up (KanaAfterWord).
     const Item* kanaAfter = nullptr;
     const char* kanaAfterAt = nullptr;
