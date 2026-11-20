@@ -28798,3 +28798,31 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 じぞうさま	지장보살	N110			GN							w:39512
 おじぞうさま	지장보살	N110			GN							w:39513
 つまず	걸려 넘어&AL@	M421			GN			LEX-7485: 躓 w:24146와 같은 가나 행	xxx	1		w:39700
+かおり	향기	N110			GN			LEX-7780				w:40402
+米袋	쌀 포대	N110			GN			LEX-7780				w:40405
+あんちゃん	형	N110	VHn		GN			LEX-7780				w:40406
+はなやさん	꽃집	N110	VPl		GN			LEX-7780				w:40407
+とこやさん	이발소	N110	VPl		GN			LEX-7780				w:40408
+すしやさん	초밥집	N110	VPl		GN			LEX-7780				w:40409
+ぱんやさん	빵집	N110	VPl		GN			LEX-7780				w:40410
+さかなやさん	생선가게	N110	VPl		GN			LEX-7780				w:40411
+ほんやさん	서점	N110	VPl		GN			LEX-7780				w:40412
+はいしゃさん	치과	N110	VPl		GN			LEX-7780				w:40413
+くすりやさん	약국	N110	VPl		GN			LEX-7780				w:40414
+くつやさん	신발가게	N110	VPl		GN			LEX-7780				w:40415
+にくやさん	정육점	N110	VPl		GN			LEX-7780				w:40416
+くだものやさん	과일 가게	N110	VPl		GN			LEX-7780				w:40417
+おかしやさん	과자 가게	N110	VPl		GN			LEX-7780				w:40418
+みんなさん	여러분	N120	VHn		GN			LEX-7780				w:40419
+おまえさん	너	N120	VHn		GN			LEX-7780				w:40420
+あんたさん	너	N120	VHn		GN			LEX-7780				w:40421
+あなたさん	당신	N120	VHn		GN			LEX-7780				w:40422
+あちらさん	저쪽	N120	VHn		GN			LEX-7780				w:40423
+こちらさん	이쪽	N120	VHn		GN			LEX-7780				w:40424
+そちらさん	그쪽	N120	VHn		GN			LEX-7780				w:40425
+いるかさん	돌고래 씨	N110	VAm		GN			LEX-7780				w:40426
+あおむしさん	애벌레 씨	N110	VAm		GN			LEX-7780				w:40429
+おてんとさん	해님	N110			GN			LEX-7780				w:40430
+おいなりさん	유부초밥	N110	VFd		GN			LEX-7780				w:40431
+きくの花	국화꽃	N110			GN			LEX-7780				w:40434
+津地裁	츠 지방법원	N110	VGt		GN			LEX-7780				w:40435

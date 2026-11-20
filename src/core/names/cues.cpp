@@ -1033,6 +1033,8 @@ std::string_view Registry::KanaHonorificAt(std::string_view s) {
             length = n;
         }
     }
+    // An honorific said twice is a word (さんさんと, ちゃんちゃんこ; spec LEX-7780).
+    if (!h.empty() && s.substr(length).starts_with(h)) return {};
     if (h != "ちゃん" || !s.substr(length).starts_with("と") || snap_ == nullptr) return h;
     const std::string_view after = s.substr(length + std::string_view("と").size());
     dict::LookupContext ctx;
@@ -1518,6 +1520,166 @@ std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
     return out;
 }
 
+bool Registry::LayerWordAt(std::string_view line, std::size_t a, std::size_t b, std::size_t end) {
+    const std::string_view t = line.substr(a, b - a);
+    // A sound of the sound lexicon that starts there and covers the run (ぽろり、 툭, もこもこの 몽실몽실한).
+    std::u32string katakana;
+    for (std::size_t i = a; i < end;) {
+        const text::Rune r = RuneAt(line, i);
+        katakana.push_back(r.cp + 0x60);
+        i += r.size;
+        if (i >= b && pipeline::internal::IsSoundKey(katakana)) return true;
+    }
+    // A word of the base dictionary that starts there and goes on past the run (ありながら, はしゃがない).
+    dict::LookupContext ctx;
+    ctx.plain = &snap_->Plain();
+    // Or a verb stem whose ending goes on past the run (はしゃ|がない).
+    const std::string_view run = line.substr(a, std::min<std::size_t>(end - a, 48));
+    for (const dict::Candidate& c : snap_->GetWordInfo(run, dict::LookupMode::General, ctx).list) {
+        if (c.user != nullptr || c.codes == nullptr || c.codes->sem.Text().starts_with("QPN")) continue;
+        if (c.source.size() > t.size()) return true;
+        if (c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+        const std::string_view tail = run.substr(c.source.size());
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(c.codes->partText[3] - '0', branch);
+            if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && tail.starts_with(conj) &&
+                c.source.size() + conj.size() > t.size()) {
+                return true;
+            }
+        }
+    }
+    // A particle of the base that starts inside the run and goes on past the kana after it (あり|ながら; not みと|は).
+    const std::size_t past = b < end ? b + RuneAt(line, b).size : b;
+    for (std::size_t p = a + RuneAt(line, a).size; p < b; p += RuneAt(line, p).size) {
+        for (const dict::Candidate& c : snap_->GetWordInfo(line.substr(p, std::min<std::size_t>(end - p, 48)), dict::LookupMode::General, ctx).list) {
+            if (c.user == nullptr && c.codes != nullptr && !c.codes->part.Empty() && c.codes->part.Tag() == 'P' && p + c.source.size() > past) return true;
+        }
+    }
+    // After が or も, a base word that starts at the particle and goes on in the run (ありな|がら, きん|もちいー):
+    // the kana is no particle there. Not は, which a topic often meets as the start of a word (つぐみはいつも).
+    if (b < end && InRunes(RuneAt(line, b).cp, "がも")) {
+        const std::string_view from = line.substr(b, std::min<std::size_t>(end - b, 48));
+        for (const dict::Candidate& c : snap_->GetWordInfo(from, dict::LookupMode::General, ctx).list) {
+            if (c.user == nullptr && c.codes != nullptr && c.source.size() > RuneAt(line, b).size && !c.codes->part.Empty() &&
+                c.codes->part.Tag() != 'P') {
+                return true;
+            }
+        }
+    }
+    // Before a mark or the line end, a kana word, sound or verb form reads as itself (そうや。, いこー！, ねむ……,
+    // と、なると…), and so does a run said twice (あさあさ。).
+    std::string_view rest = line.substr(b);
+    while (!rest.empty() && InRunes(FirstRune(rest).cp, "ー〜～")) rest.remove_prefix(FirstRune(rest).size);
+    if (!rest.empty() && IsHiragana(FirstRune(rest).cp)) return false;
+    const std::size_t half = t.size() / 2;
+    // A stem row of its own is no word there (かなえ？, 「たけ」): such stems are what the layer names spell.
+    bool stem = false;
+    for (const dict::Candidate& c : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
+        stem = stem || (c.codes != nullptr && c.source == t && !c.codes->part.Empty() && InRunes(static_cast<unsigned char>(c.codes->part.Tag()), "MH"));
+    }
+    // A verb form with its last う left out or drawn out (いこ, いこー 行こう).
+    const bool volitional = InRunes(RuneBefore(t, t.size()).cp, "こごそぞとどのぼぽもろよょ") && InflectedRun(std::string(t) + "う");
+    return (!stem && (KanaWordRun(t) || InflectedRun(t))) || volitional || (t.size() % 2 == 0 && RuneCount(t) % 2 == 0 && t.substr(0, half) == t.substr(half));
+}
+
+std::vector<std::string> Registry::LayerKanaNames(std::string_view line, std::vector<std::pair<std::string, std::string>>* pairs) {
+    std::vector<std::string> out;
+    if (snap_ == nullptr) return out;
+    // A person of the name layer and no word, person, city or place record of the dictionaries.
+    const auto layerOnly = [&](const std::string& t) {
+        if (InRunes(FirstRune(t).cp, "おご") || AnyRuneOf(t, [](char32_t c) { return InRunes(c, "ぁぃぅぇぉっゎー"); })) return false;
+        const DictFlags f = Flags(t);
+        if (!(f.layerGiven || f.layerSurname) || f.word || f.person || f.city || f.place || WordThenParticle(t) ||
+            dict::InClass(HDTRANS_CLASS("honorific.name"), t) || dict::InClass(HDTRANS_CLASS("honorific.kana-name"), t)) {
+            return false;
+        }
+        // Nor the kana spelling of a kanji word that is no stem (はな 花).
+        for (const dict::UserEntry* e : snap_->TextPlain().Search(t, dict::LookupMode::General)) {
+            if (e->kana && e->key == t &&
+                (e->codes == nullptr || !(e->codes->partText.starts_with("M4") || e->codes->partText.starts_with("H7")))) {
+                return false;
+            }
+        }
+        return true;
+    };
+    // The place after the run: the end, a mark or a particle of name.layer-slot-particle, or with joined, a kana of
+    // name.kana-coordinator before the next name. A run that is a word or predicate form and a kana of
+    // name.layer-slot-final (いくよ, ここね) is the name only before が or は. With と, which also quotes after a word
+    // or predicate (なるとは思わなかった, やみとは何か), only before が, or before は after a head that is no predicate
+    // form where a person's act or a question for a person follows or an object in を stands before (町を、みとは守ります).
+    const auto slot = [&](const std::string& t, std::string_view before, std::string_view rest, bool joined) {
+        while (!rest.empty() && InRunes(FirstRune(rest).cp, "ー〜～")) rest.remove_prefix(FirstRune(rest).size);
+        const text::Rune last = RuneBefore(t, t.size());
+        const std::string_view head = std::string_view(t).substr(0, t.size() - last.size);
+        if (dict::InClassRune(HDTRANS_CLASS("name.layer-slot-final"), last.cp) && (Flags(head).records > 0 || PredicateForm(head))) {
+            if (rest.starts_with("が")) return true;
+            if (!rest.starts_with("は")) return false;
+            if (last.cp != U'と') return true;
+            if (PredicateForm(head) || InflectedRun(head)) return false;
+            std::string_view said = rest.substr(std::string_view("は").size());
+            if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
+            if (PersonSlotAt(*snap_, t, before, rest) || PersonSaidAt(said, true)) return true;
+            // After the object of the verb (町を、人を、みとは守ります) the topic is the one who acts, unless a verb of saying
+            // or thinking takes the と as its quotation (それを、やみとは思わない).
+            std::string_view object = before;
+            if (object.ends_with("、")) object.remove_suffix(std::string_view("、").size());
+            if (!object.ends_with("を") || said.empty() || !IsKanji(FirstRune(said).cp) ||
+                dict::StartsWithMember(HDTRANS_CLASS("verb.quote-stem"), said) > 0) {
+                return false;
+            }
+            // A verb of saying or thinking in any form: the kanji of its stem and kana (思わない, 言えない).
+            for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("name.person-speak"))) {
+                if (IsKanji(FirstRune(m).cp) && said.starts_with(m.substr(0, FirstRune(m).size))) return false;
+            }
+            return true;
+        }
+        if (rest.empty() || !IsHiragana(FirstRune(rest).cp)) return true;
+        if (joined && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), FirstRune(rest).cp)) return true;
+        return dict::InClassRune(HDTRANS_CLASS("name.layer-slot-particle"), FirstRune(rest).cp);
+    };
+    for (std::size_t a = 0; a < line.size();) {
+        const text::Rune r = RuneAt(line, a);
+        if (!IsHiragana(r.cp) || (a > 0 && (IsHiragana(RuneBefore(line, a).cp) || RuneBefore(line, a).cp == U'ー'))) {
+            a += std::max<std::size_t>(1, r.size);
+            continue;
+        }
+        std::size_t end = a;
+        while (end < line.size() && IsHiragana(RuneAt(line, end).cp)) end += RuneAt(line, end).size;
+        std::size_t b = a;
+        for (std::size_t n = 1; b < end && n <= 5; n++) {
+            b += RuneAt(line, b).size;
+            if (n < 2) continue;
+            const std::string t(line.substr(a, b - a));
+            if (!layerOnly(t) || !BareNameSlot(line, a, b, t)) continue;
+            // No dictionary word goes on past the name (かなえる, はるなつ).
+            bool longer = false;
+            for (std::size_t e = b, m = n; !longer && e < end && m < 10; m++) {
+                e += RuneAt(line, e).size;
+                longer = Flags(line.substr(a, e - a)).records > 0;
+            }
+            if (longer || LayerWordAt(line, a, b, end)) continue;
+            // The next name after a kana of name.kana-coordinator (いのりとかえでが).
+            std::vector<std::string> joined;
+            const text::Rune j = RuneAt(line, b);
+            if (pairs != nullptr && b < end && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), j.cp) &&
+                slot(t, line.substr(0, a), line.substr(b), true)) {
+                std::size_t c = b + j.size;
+                for (std::size_t m = 1; c < end && m <= 5; m++) {
+                    c += RuneAt(line, c).size;
+                    if (m < 2) continue;
+                    const std::string u(line.substr(b + j.size, c - b - j.size));
+                    if (u != t && layerOnly(u) && slot(u, line.substr(0, b + j.size), line.substr(c), false)) joined.push_back(u);
+                }
+            }
+            if (joined.empty() && !slot(t, line.substr(0, a), line.substr(b), false)) continue;
+            out.push_back(t);
+            for (const std::string& u : joined) pairs->emplace_back(t, u);
+        }
+        a = end;
+    }
+    return out;
+}
+
 std::vector<Registry::LooseUse> Registry::LooseKanaUses(std::string_view line) {
     std::vector<LooseUse> out;
     std::vector<text::Rune> runes;
@@ -1570,7 +1732,8 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
     std::vector<std::string> out;
     for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
         const std::string_view h = KanaHonorificAt(line.substr(pos));
-        if (h.empty() || pos == 0) continue;
+        // Nor the second of an honorific said twice (さんさん).
+        if (h.empty() || pos == 0 || line.substr(0, pos).ends_with(h)) continue;
         std::size_t start = pos;
         while (start > 0) {
             const text::Rune r = RuneBefore(line, start);

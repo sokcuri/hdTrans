@@ -1,0 +1,8 @@
+# 규칙: LEX-7780
+rule	input	expected	kind	layer
+names:word-row	ももちゃんが来た。\nももは笑った。	has:모모는	keep	fixed
+names:word-row	栞ちゃんが来た。\n栞は笑った。	has:시오리는	keep	fixed
+names:layer-slot	ゆいさんが来た。\nゆいは笑った。	has:유이는	keep	fixed
+names:layer-slot	かおるさんが来た。\nかおを洗う。	has:얼굴을	keep	fixed
+names:layer-slot	かなえが来た。\n夢をかなえた。	has:카나에가	fix	fixed
+names:layer-slot	つぐみは来た。\nつぐみでありさえすれば。	has:츠구미이기만 하면	fix	fixed

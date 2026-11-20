@@ -756,8 +756,9 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         }
     }
     // A name only before an honorific takes part where an honorific follows it in the line.
+    // Not one proven where a bare name stands (LayerKanaNames): it holds as other proven names do.
     for (const std::string& t : r.HonorificOnlyNames()) {
-        if (plain.count(t) == 0) guarded.insert(t);
+        if (plain.count(t) == 0 && !r.LayerSlotName(t)) guarded.insert(t);
     }
     for (const std::string& t : guarded) {
         if (plain.count(t) == 0) facts.skip.push_back(t);
