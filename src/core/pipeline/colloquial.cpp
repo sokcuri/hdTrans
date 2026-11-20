@@ -1831,7 +1831,7 @@ std::string RewriteDrawnQuotedOrder(std::string_view text, const dict::Snapshot&
         const bool tte = on.starts_with(U"て") && In(rs[j - 1], U"っッ");
         if (!to && !tte) continue;
         size_t start = i - 1;
-        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        while (start > 0 && i - start < 4 && IsKanjiRune(rs[start - 1])) start--;
         const std::string godan = EncodeText(std::u32string{U"おこごそとのぼもろ"[e], U'う'});
         bool order = false;
         for (size_t k = start; k < i && !order; k++) {

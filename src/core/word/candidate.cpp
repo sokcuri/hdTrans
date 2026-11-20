@@ -3863,7 +3863,7 @@ Record* Worker::VerbOverNounBeforeTe(Record* records, std::string_view full, int
         return r.user == nullptr && r.partCode.size() == 4 && At(r.partCode, 0) == 'M' && At(r.partCode, 1) == '4' ? r.partCode[3] : '\0';
     };
     // A verb in front already reads the form.
-    if (records == nullptr || verbKind(*records) != '\0') return records;
+    if (records == nullptr || verbKind(*records) != '\0' || (records->user != nullptr && records->user->force)) return records;
     // The record of the longest key, no verb; a longer record of any kind (遅れて of 遅れてくる 늦게 오다) stands.
     const Record* word = nullptr;
     std::size_t longest = 0;
