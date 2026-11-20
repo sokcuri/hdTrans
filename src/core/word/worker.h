@@ -243,6 +243,10 @@ private:
     // The last lookup of the whole ending table (query "", kModeVerbEnding), which a verb
     // continuation makes at every verb; DoLookup gives it again when a new one equals it.
     Lookup endings_;
+    // The candidates endings_ was made from: the same candidates make the same records again (an empty query drops
+    // none by the text around), so DoLookup gives endings_ without making them.
+    std::vector<dict::Candidate> endingsFound_;
+    int endingsFoundCount_ = -1;
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
