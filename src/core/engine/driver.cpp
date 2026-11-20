@@ -543,18 +543,32 @@ bool AdjectiveStemIs(const void* context, std::string_view stem) {
     return false;
 }
 
-// Whether stem, whole, is an adjectival noun of the dictionary and no noun, counter or adverb (一杯, 好き, 無理 are
-// nouns too; 一生懸命, 一緒 are adverbs that go with やる)
-// (pipeline::RunLookup::naStem).
+// Whether stem, whole, is an adjectival noun of the dictionary, and no counter or adverb (一杯 is a counter too; 一生懸命,
+// 一緒 are adverbs that go with やる); a noun too is one (無理, 暇, 残念) (pipeline::RunLookup::naStem).
 bool NaStemIs(const void* context, std::string_view stem) {
     const auto& d = *static_cast<const RespellLookup*>(context);
     bool na = false;
     for (const dict::Candidate& c : Find(d, stem).list) {
         if (c.source != stem || c.codes == nullptr) continue;
-        if (c.codes->part.Tag() == 'N' || c.codes->part.Tag() == 'K' || c.codes->part.Tag() == 'E') return false;
+        if (c.codes->part.Tag() == 'K' || c.codes->part.Tag() == 'E') return false;
         na = na || (c.codes->part.Tag() == 'G' && c.codes->part.ClassDigit() == '8');
     }
     return na;
+}
+
+// Whether key, whole, is a person's name of the name layer (pipeline::RunLookup::personName).
+bool PersonNameIs(const void* context, std::string_view key) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return !key.empty() && d.snap.NamePerson(key);
+}
+
+// Whether key, whole, is a name the document proves: a person of its name list or a surface it writes where a name
+// stands (pipeline::RunLookup::documentName).
+bool DocumentNameIs(const void* context, std::string_view key) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    if (key.empty() || d.line == nullptr) return false;
+    return (d.line->named != nullptr && d.line->named->contains(std::string(key))) ||
+           (d.line->listed != nullptr && d.line->listed->contains(key));
 }
 
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
@@ -1286,7 +1300,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
                                  options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs,
                                  options.reference ? nullptr : WordIs, options.reference ? nullptr : KeyReach,
                                  options.reference ? nullptr : DictionaryIchidanIs, options.reference ? nullptr : DictionaryVowelStemIs,
-                                 options.reference ? nullptr : NaStemIs}),
+                                 options.reference ? nullptr : NaStemIs, options.reference ? nullptr : PersonNameIs,
+                                 options.reference ? nullptr : DocumentNameIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
