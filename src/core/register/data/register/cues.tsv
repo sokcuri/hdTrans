@@ -310,6 +310,7 @@ keigo	any	お手数		REG-26: keigo the rows above miss
 keigo	any	恐れ入り		REG-26: keigo the rows above miss	
 keigo	any	恐縮		REG-26: keigo the rows above miss	
 keigo	any	ゴザイマ		REG-26: keigo the rows above miss	
+keigo	any	おかけし		REG-26: humble お〜する with a kana stem (ご迷惑をおかけしました); keigo.tsv reads the kanji stems	
 set	any	しょうちしま		REG-26: a set phrase or service phrase	
 set	any	しょうちいた		REG-26: a set phrase or service phrase	
 set	any	お世話になりま		REG-26: a set phrase or service phrase	
@@ -324,6 +325,7 @@ set	any	ただいま帰りま		REG-26: a set phrase or service phrase
 set	any	ただ今帰りま		REG-26: a set phrase or service phrase	
 set	any	お疲れ様		REG-26: a set phrase or service phrase	
 set	any	お疲れさま		REG-26: a set phrase or service phrase	
+set	any	お疲れさん		REG-26: a set phrase or service phrase	
 set	any	おつかれさま		REG-26: a set phrase or service phrase	
 set	any	お邪魔しま		REG-26: a set phrase or service phrase	
 set	any	お邪魔いた		REG-26: a set phrase or service phrase	

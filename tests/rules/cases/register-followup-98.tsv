@@ -1,0 +1,103 @@
+# 규칙: REG-42, REG-43, REG-44, REG-45, REG-46
+rule	input	expected	kind	layer
+register:REG-42	「遅れちゃいますよ？」	「늦어버려요?」	fix	register
+register:REG-42	「怒られちゃいますよ？」	「혼나버려요?」	fix	register
+register:REG-42	「期待……しちゃいますよ……？」	「기대……해버려요……?」	fix	register
+register:REG-42	「ほらほら、もっとしっかりダンスしないと、沢山当たっちゃいますよ？」	has:많이 맞아버려요?」	fix	register
+register:REG-42	「わ、エッチな音がしちゃってますよ？」	has:나버리고 있어요?」	fix	register
+register:REG-42	「いえいえ、誰もそんな無体なことは言ってませんよ？」	has:말하지 않았어요?」	fix	register
+register:REG-42	「先に帰っちゃいますよ？」	「먼저 돌아가버려요?」	fix	register
+register:REG-42	「消えちゃいますよ…？」	「사라져버려요…?」	fix	register
+register:REG-42	「食べちゃいますよ？いいんですか？」	「먹어버려요? 좋아요?」	fix	register
+register:REG-42	「戻ります？」	「돌아와요?」	fix	register
+register:REG-42	「書いちゃいましたよ？」	「써버렸어요?」	fix	register
+register:REG-42	「遅れますよ？」	「늦어요?」	keep	register
+register:REG-42	「すぐ壊れますよ？」	「바로 망가져요?」	keep	register
+register:REG-42	「大丈夫ですよ？」	「괜찮아요?」	keep	register
+register:REG-42	「先に帰っちゃいますよ」	「먼저 돌아가버립니다」	keep	register
+register:REG-42	「すぐ戻ります」	「바로 돌아옵니다」	keep	register
+register:REG-42	「うん、深雪ちゃんと同級生だからね。将太くんと深雪ちゃんは幼馴染でしょう？　小さい頃から一緒に遊んでいたの？」	has:소꿉친구지? 어렸을 적부터 함께 놀고 있었어?」	keep	register
+register:REG-43	「お待たせしてしまいました」	「기다리게 해버렸습니다」	fix	register
+register:REG-43	「ご迷惑をおかけしてしまいました」	「폐를 끼쳐버렸습니다」	fix	register
+register:REG-43	「はい、ご迷惑をおかけしました」	「네, 폐를 끼쳤습니다」	fix	register
+register:REG-43	「選挙では、ご迷惑をおかけしました」	「선거에서는, 폐를 끼쳤습니다」	fix	register
+register:REG-43	「ご心配をおかけしました」	「걱정을 끼쳤습니다」	fix	register
+register:REG-43	「ご説明しました」	「설명했습니다」	fix	register
+register:REG-43	「ご連絡しました」	「연락했습니다」	fix	register
+register:REG-43	「ふふふ、そんな筧さんのためにナイスなものをご用意しました」	has:준비했습니다」	fix	register
+register:REG-43	「私もご一緒してもいいですか？」	has:괜찮습니까?」	fix	register
+register:REG-43	「ええ。お騒がせしました」	「네. 시끄럽게 했습니다」	fix	register
+register:REG-43	「お知らせしました」	「알렸습니다」	fix	register
+register:REG-43	「お届けしました」	「전달했습니다」	keep	register
+register:REG-43	「ご主人さまが来ました」	has:왔어요」	keep	register
+register:REG-43	「ご両親しか知りませんでした」	has:몰랐어요」	keep	register
+register:REG-43	「お勉強しました」	「공부했어요」	keep	register
+register:REG-43	「お掃除しました」	「청소했어요」	keep	register
+register:REG-43	「おかしいですね」	「이상하네요」	keep	register
+register:REG-43	「ご案内しました」	「안내했습니다」	fix	register
+register:REG-43	「ご案内しちゃいました」	「안내해버렸습니다」	fix	register
+register:REG-43	「ご案内すればいいですか？」	「안내하면 됩니까?」	fix	register
+register:REG-43	「ご案内されましたか？」	「안내됐습니까?」	fix	register
+register:REG-43	「ご案内せずに帰りました」	「안내하지 않고 돌아갔습니다」	fix	register
+register:REG-43	「ご案内する予定です」	「안내할 예정입니다」	fix	register
+register:REG-43	「ご案内いたしました」	「안내했습니다」	keep	register
+register:REG-43	「御案内致しました」	「안내했습니다」	keep	register
+register:REG-43	「ご飯さえあれば幸せです」	「밥만 있으면 행복해요」	keep	register
+register:REG-43	「ご両親さえ知りませんでした」	「부모님마저 몰랐어요」	keep	register
+register:REG-43	「ご両親さえいれば平気です」	「부모님만 있으면 괜찮아요」	keep	register
+register:REG-43	「ご家族全員さえ知りません」	「가족 전원마저 몰라요」	keep	register
+register:REG-43	「ご主人様すごいです」	「주인님 대단해요」	keep	register
+register:REG-43	「ご飯さ、美味しいです」	has:맛있어요」	keep	register
+register:REG-43	「いちご大福すきです」	has:좋아해요」	keep	register
+register:REG-43	「ご両親いたんですか？」	「부모님 있었어요?」	keep	register
+register:REG-43	「ご両親いたら困ります」	「부모님 있으면 곤란해요」	keep	register
+register:REG-43	「ご近所するどい人です」	has:사람이에요」	keep	register
+register:REG-44	「ちゃんと聞いただけです」	「제대로 들었을 뿐이에요」	fix	register
+register:REG-44	「少し歩いただけです」	「조금 걸었을 뿐이에요」	fix	register
+register:REG-44	「見ていただけです」	「보고 있었을 뿐이에요」	fix	register
+register:REG-44	「いえ、ただの散歩です。面白いなと思って、見ていただけです」	has:산책이에요. 재미있다고 생각해, 보고 있었을 뿐이에요」	fix	register
+register:REG-44	「彼は、自分の自由意思で授業を辞退して、この場所にいただけです」	has:이 장소에 있었을 뿐이에요」	fix	register
+register:REG-44	「泣いていただけです」	has:있었을 뿐이에요」	fix	register
+register:REG-44	「読んだだけです」	「읽었을 뿐이에요」	keep	register
+register:REG-44	「具体的に、教えていただけますか？」	「구체적으로, 가르쳐 주시겠습니까?」	keep	register
+register:REG-44	「私と付き合っていただけませんか？」	「저와 사귀어 주실 수 없습니까?」	keep	register
+register:REG-44	「見ていただけると嬉しいです」	has:기쁩니다」	keep	register
+register:REG-44	「お越しいただけたら嬉しいです」	has:습니다」	keep	register
+register:REG-44	「あはははは…。ありがとうございます。そうさせていただきます。」	「아하하하하…. 감사합니다. 그렇게 하겠습니다.」	keep	register
+register:REG-44	「いただきます」	「잘 먹겠습니다」	keep	register
+register:REG-44	「頂きました」	「받았습니다」	keep	register
+register:REG-44	「食べていただけば分かります」	「먹어 주시면 압니다」	keep	register
+register:REG-44	「来ていただけそうですか？」	「와 주실 수 있을 것 같습니까?」	keep	register
+register:REG-44	「来ていただけようか迷います」	has:망설입니다」	keep	register
+register:REG-45	「犯人なのです」	「범인인 거예요」	fix	register
+register:REG-45	「仕事なのです」	「일인 거예요」	fix	register
+register:REG-45	「問題なのです」	「문제인 거예요」	fix	register
+register:REG-45	「そこなのです」	「거기인 거예요」	fix	register
+register:REG-45	「これが私のやり方なのです」	「이게 제 방식인 거예요」	fix	register
+register:REG-45	「主様には秘密なのです」	「주인님에게는 비밀인 거예요」	fix	register
+register:REG-45	「のんちゃんは反対なのです」	has:반대인 거예요」	fix	register
+register:REG-45	「反対じゃないけど、質問なのです」	「반대가 아니지만, 질문인 거예요」	fix	register
+register:REG-45	「…とても深い話なのです。みぃ」	has:이야기인 거예요. 미이」	fix	register
+register:REG-45	「これは、試作品のジャミングマシーンなのです」	has:머신인 거예요」	fix	register
+register:REG-45	「休みなのです」	「휴일인 거예요」	keep	register
+register:REG-45	「犯人なんです」	「범인이에요」	keep	register
+register:REG-45	彼が犯人なのです。	그가 범인인 겁니다.	keep	register
+register:REG-45	「彼が犯人なのです。逃げましょう」	「그가 범인인 겁니다. 도망칩시다」	keep	register
+register:REG-45	「指先が震えて、うまく動かないんです。それに」	has:움직이지 않아요. 게다가」	keep	register
+register:REG-45	「でも、どうして筧先輩なのかと聞かれても答えられません」	has:대답할 수 없어요」	keep	register
+register:REG-46	「えへへ、買っちゃいました♪」	「에헤헤, 사버렸어요♪」	fix	register
+register:REG-46	「楽しかったです♪」	「즐거웠어요♪」	fix	register
+register:REG-46	「正解でーす♪」	「정답이에요~♪」	fix	register
+register:REG-46	「気のせいです♪」	「기분 탓이에요♪」	fix	register
+register:REG-46	「もちろんです、筧さん♪」	has:물론이에요, 카케이 씨♪」	fix	register
+register:REG-46	「到着でーす♪」	「도착이에요~♪」	fix	register
+register:REG-46	「大好きです♥」	「정말 좋아해요♥」	fix	register
+register:REG-46	「えへへ、ラピス助かった♪」	「에헤헤, 라피스 살았다♪」	keep	register
+register:REG-46	「よろしくお願いします♪」	「잘 부탁드립니다♪」	keep	register
+register:REG-46	「ありがとうございました♪」	「감사합니다♪」	keep	register
+register:REG-46	「行きます♪」	「갑니다♪」	keep	register
+register:REG-46	「今日はいい天気ですね♪　お出かけしましょう♪」	has:외출합시다♪」	keep	register
+register:REG-46	「了解です♪」	has:니다♪」	keep	register
+register:REG-46	「マスター、できました♪」	has:니다♪」	keep	register
+register:REG-46	『楽しかったです♪』	『즐거웠습니다♪』	keep	register
+register:REG-46	「奴隷を乗せていく～♪」	「노예를 실어 간다~♪」	keep	register
