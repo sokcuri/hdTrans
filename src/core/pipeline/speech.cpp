@@ -17,9 +17,9 @@ using internal::RuneIn;
 // Whether text speaks politely with です or ます: one of them that ends a word (before a mark, a
 // final particle or the end), or ください; not なさい alone, でしょうがない, ますます or 済ませて.
 bool SpeaksPolitely(std::string_view text) {
-    if (text.find("ください") != std::string_view::npos || text.find("下さい") != std::string_view::npos) return true;
+    if (text::Find(text, "ください") != std::string_view::npos || text::Find(text, "下さい") != std::string_view::npos) return true;
     for (const std::string_view m : {"です", "ます", "ました", "ません", "でした", "ましょう"}) {
-        for (std::size_t at = text.find(m); at != std::string_view::npos; at = text.find(m, at + 1)) {
+        for (std::size_t at = text::Find(text, m); at != std::string_view::npos; at = text::Find(text, m, at + 1)) {
             const std::string_view after = text.substr(at + m.size());
             if (after.empty()) return true;
             for (const std::string_view end : {"。", "！", "？", "!", "?", "、", "…", "‥", "」", "』", "～", "ー", "♪", "よ", "ね", "わ",
@@ -35,13 +35,13 @@ std::uint8_t StyleOf(std::string_view text) {
     std::uint8_t style = 0;
     if (SpeaksPolitely(text)) style |= kPoliteForm;
     for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("speech.polite"))) {
-        if (text.find(m) != std::string_view::npos) style |= kPoliteSpeech;
+        if (text::Find(text, m) != std::string_view::npos) style |= kPoliteSpeech;
     }
     for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("speech.old"))) {
-        if (text.find(m) != std::string_view::npos) style |= kOldSpeech;
+        if (text::Find(text, m) != std::string_view::npos) style |= kOldSpeech;
     }
     for (const std::string_view n : dict::ClassMembers(HDTRANS_CLASS("speech.old-negative"))) {
-        for (std::size_t at = text.find(n); at != std::string_view::npos; at = text.find(n, at + 1)) {
+        for (std::size_t at = text::Find(text, n); at != std::string_view::npos; at = text::Find(text, n, at + 1)) {
             const std::string_view after = text.substr(at + n.size());
             for (const std::string_view end : {"。", "！", "」", "』", "、", "ぞ", "の", "わ", "か", "…", "?", "？", "!"}) {
                 if (after.empty() || after.starts_with(end)) style |= kOldSpeech;
@@ -155,10 +155,10 @@ struct Final {
 // である ending a sentence, たまえ, かね, じゃろう, ワシ, 我々, a sentence ended by が (思うが……).
 bool StiffSpeech(std::string_view text) {
     for (const std::string_view m : {"である", "であろう", "たまえ", "じゃろ", "ワシ", "しれん", "我々", "我ら"}) {
-        if (text.find(m) != std::string_view::npos) return true;
+        if (text::Find(text, m) != std::string_view::npos) return true;
     }
     for (const std::string_view m : {"のだ", "かね", "がね"}) {
-        for (std::size_t at = text.find(m); at != std::string_view::npos; at = text.find(m, at + 1)) {
+        for (std::size_t at = text::Find(text, m); at != std::string_view::npos; at = text::Find(text, m, at + 1)) {
             std::string_view after = text.substr(at + m.size());
             // のだ after a predicate (知っているのだ, 静かなのだ); not ものだ or 俺のだ.
             if (m == "のだ" && !RuneIn(RuneBefore(text, at), U"るたいうな")) continue;
@@ -170,7 +170,7 @@ bool StiffSpeech(std::string_view text) {
             if (EndsAfter(after) || after.starts_with("、")) return true;
         }
     }
-    for (std::size_t at = text.find("が"); at != std::string_view::npos; at = text.find("が", at + 1)) {
+    for (std::size_t at = text::Find(text, "が"); at != std::string_view::npos; at = text::Find(text, "が", at + 1)) {
         if (internal::IsHiraganaRune(RuneBefore(text, at)) && EndsAfter(text.substr(at + std::string_view("が").size()))) {
             return true;
         }
@@ -191,7 +191,7 @@ bool CasualOf(std::string_view text, bool contractions = true) {
         {"って", U"だるたい", U""},       {"かな", U"", U"ば"},            {"かしら", U"", U""},
     };
     for (const Final& f : kFinals) {
-        for (std::size_t at = text.find(f.particle); at != std::string_view::npos; at = text.find(f.particle, at + 1)) {
+        for (std::size_t at = text::Find(text, f.particle); at != std::string_view::npos; at = text::Find(text, f.particle, at + 1)) {
             if (!EndsAfter(text.substr(at + f.particle.size()))) continue;
             const char32_t prev = RuneBefore(text, at);
             // After a kana word; じゃん after a noun too (嘘じゃん).
@@ -212,16 +212,16 @@ bool CasualOf(std::string_view text, bool contractions = true) {
     if (!contractions) return false;
     for (const std::string_view c : {"ちゃう", "ちゃった", "ちゃって", "ちゃえ", "ちゃお", "じゃう", "じゃった", "じゃって",
                                      "じゃえ", "じゃお"}) {
-        if (text.find(c) != std::string_view::npos) return true;
+        if (text::Find(text, c) != std::string_view::npos) return true;
     }
     for (const std::string_view c : {"ってる", "ってた", "ってん", "してる", "してた", "してん", "いてる", "いてた",
                                      "んでる", "んでた", "いでる", "いでた", "見てる", "見てた", "来てる", "来てた",
                                      "出てる", "出てた", "寝てる", "寝てた", "着てる", "着てた"}) {
-        if (text.find(c) != std::string_view::npos) return true;
+        if (text::Find(text, c) != std::string_view::npos) return true;
     }
     // しとく, 言っとく, 読んどく: ておく after a verb; not ちょっとくらい, ずっといて.
     for (const std::string_view c : {"とく", "とけ", "といて", "といた", "とこう", "どく", "どけ", "どいて", "どいた"}) {
-        for (std::size_t at = text.find(c); at != std::string_view::npos; at = text.find(c, at + 1)) {
+        for (std::size_t at = text::Find(text, c); at != std::string_view::npos; at = text::Find(text, c, at + 1)) {
             const text::Rune te = internal::LastRune(text.substr(0, at));
             const char32_t stem = RuneBefore(text, at - te.size);
             const bool voiced = c.starts_with("ど");
@@ -232,7 +232,7 @@ bool CasualOf(std::string_view text, bool contractions = true) {
         }
     }
     for (const std::string_view c : {"ねえ", "ねぇ", "ねー"}) {
-        for (std::size_t at = text.find(c); at != std::string_view::npos; at = text.find(c, at + 1)) {
+        for (std::size_t at = text::Find(text, c); at != std::string_view::npos; at = text::Find(text, c, at + 1)) {
             const std::string_view after = text.substr(at + c.size());
             if (after.starts_with("さん") || after.starts_with("ちゃん") || after.starts_with("さま") ||
                 after.starts_with("様") || after.starts_with("さ")) {

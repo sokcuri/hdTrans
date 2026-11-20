@@ -50,17 +50,17 @@ constexpr std::string_view kPlainMaleSpeech[] = {"俺", "だぜ", "るぜ"};
 
 bool HasAny(std::string_view s, std::span<const std::string_view> list) {
     for (std::string_view m : list) {
-        if (s.find(m) != std::string_view::npos) return true;
+        if (text::Find(s, m) != std::string_view::npos) return true;
     }
     return false;
 }
 
-bool Contains(std::string_view s, std::string_view part) { return s.find(part) != std::string_view::npos; }
+bool Contains(std::string_view s, std::string_view part) { return text::Find(s, part) != std::string_view::npos; }
 
 // Whether s holds a member of list as a speech cue: のよ in のよう (like) is no cue.
 bool HasCue(std::string_view s, std::span<const std::string_view> list) {
     for (std::string_view m : list) {
-        for (size_t at = s.find(m); at != std::string_view::npos; at = s.find(m, at + 1)) {
+        for (size_t at = text::Find(s, m); at != std::string_view::npos; at = text::Find(s, m, at + 1)) {
             if (m == "のよ" && s.substr(at + m.size()).starts_with("う")) continue;
             return true;
         }
@@ -81,10 +81,10 @@ std::vector<std::string_view> Utterances(std::string_view line) {
         const std::string_view open = q.open, close = q.close;
         std::string_view rest = line;
         for (;;) {
-            const size_t at = rest.find(open);
+            const size_t at = text::Find(rest, open);
             if (at == std::string_view::npos) break;
             const std::string_view after = rest.substr(at + open.size());
-            const size_t end = after.find(close);
+            const size_t end = text::Find(after, close);
             if (end == std::string_view::npos) {
                 out.push_back(after);
                 break;
@@ -112,7 +112,7 @@ std::string ReplaceWord(std::string_view s, std::string_view from, std::string_v
     std::string out;
     size_t at = 0;
     const size_t first = text::DecodeRune(from).size;
-    for (size_t i = s.find(from); i != std::string_view::npos; i = s.find(from, i + from.size())) {
+    for (size_t i = text::Find(s, from); i != std::string_view::npos; i = text::Find(s, from, i + from.size())) {
         const size_t before = KanjiBefore(s, i);
         if (holds != nullptr && before != std::string_view::npos && holds(context, s, before, i + first)) continue;
         out.append(s.substr(at, i - at));
@@ -128,7 +128,7 @@ std::string ReplaceWord(std::string_view s, std::string_view from, std::string_v
 std::string ReplaceBare(std::string_view s, std::string_view from, std::string_view to) {
     std::string out;
     size_t at = 0;
-    for (size_t i = s.find(from); i != std::string_view::npos; i = s.find(from, i + from.size())) {
+    for (size_t i = text::Find(s, from); i != std::string_view::npos; i = text::Find(s, from, i + from.size())) {
         const bool kanjiBefore = !from.starts_with("お") && (KanjiBefore(s, i) != std::string_view::npos ||
                                                             s.substr(0, i).ends_with("お"));
         const std::string_view after = s.substr(i + from.size());

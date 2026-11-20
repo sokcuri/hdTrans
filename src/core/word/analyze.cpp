@@ -50,9 +50,9 @@ void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, co
 bool LineHolds(std::string_view line, std::span<const std::string_view> cues, std::span<const std::string_view> skip) {
     std::string text(line);
     for (const std::string_view m : skip) {
-        for (std::size_t at = text.find(m); at != std::string::npos; at = text.find(m, at + 1)) text.replace(at, m.size(), m.size(), '|');
+        for (std::size_t at = hdTrans::text::Find(text, m); at != std::string::npos; at = hdTrans::text::Find(text, m, at + 1)) text.replace(at, m.size(), m.size(), '|');
     }
-    return std::ranges::any_of(cues, [&](std::string_view m) { return text.find(m) != std::string::npos; });
+    return std::ranges::any_of(cues, [&](std::string_view m) { return hdTrans::text::Contains(text, m); });
 }
 
 bool PoiTicLine(std::string_view line) {
