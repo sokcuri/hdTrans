@@ -42,6 +42,16 @@ public:
     // Marks deleted the rows of [0, end) whose key and class digit a row of later
     // (indexes in Rows; all rows from end when null) has. Compact drops them.
     void Shadow(std::size_t end, const std::vector<uint32_t>* later, const CodeTable& codes);
+    // The rows [start, end) of one file, and with some the rows among them that shadow (indexes in Rows); all of them
+    // shadow without.
+    struct FileRows {
+        std::size_t start = 0, end = 0;
+        bool some = false;
+        std::vector<uint32_t> shadows;
+    };
+    // What Shadow after each file in order marks: each row whose key and class digit a shadowing row of a later file
+    // has, as that file read it. One pass from the last file, so it does not grow with files times rows.
+    void ShadowFiles(const std::vector<FileRows>& files, const CodeTable& codes);
     void Compact();
 
     // Builds the dictionary of the rows. The records of a key are ordered by prio
