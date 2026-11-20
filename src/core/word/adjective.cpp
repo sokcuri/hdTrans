@@ -337,6 +337,7 @@ bool Item::RunDakeiyoCase8Query() {
             }
             if ((Has(e.gattr, "Sh") && Classify(tail) != 0) || At(e.code, 0) != '5' || Byte(At(e.code, 1)) != base.kind ||
                 (Has(e.gattr, "Lo") && loBlocked(g->surface, after)) || !w->EndingApplies(e, after, tokenIndex) ||
+                (scanOffset == 0 && w->StemTakesSu(groupText, scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())))) ||
                 w->CutsWord(tail.substr(0, tail.size() - scanned.size()), scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
                 base.enabled[entry] = false;
                 continue;
