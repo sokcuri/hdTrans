@@ -22,6 +22,7 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "core/dict/char_readings.h"
@@ -47,9 +48,11 @@ struct SegEdge {
     bool particle = false;              // a particle spelled in kana
     bool joined = false;                // a katakana word with the single kana that ends the run (ジャーニー|ズ)
     bool stem = false;                  // a verb or adjective stem with no ending matched
-    // For --why only: the start of the span, the code, layer and gloss of the edge,
-    // and its cost terms, formatted by EdgeLabel; label is set where it is formatted already.
-    int from = 0;
+    bool conj = false;                  // a verb or adjective with its ending matched
+    bool aux = false;                   // a verb that can follow a verb in て (aux.te-start)
+    int from = 0;                       // the start of the span
+    // For --why only: the code, layer and gloss of the edge, and its cost terms, formatted by
+    // EdgeLabel; label is set where it is formatted already.
     std::string code, gloss, terms, label;
     char layer = 0;
 };
@@ -366,6 +369,9 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         e.user = c.user;
         e.word = true;
         e.stem = stem;
+        e.from = p;
+        e.conj = (part[1] == '4' || part[1] == '7') && !stem;
+        e.aux = e.conj && part[0] == 'M' && dict::StartsWithMember(HDTRANS_CLASS("aux.te-start"), rest) > 0;
         e.particle = part[0] == 'P' && AllHiragana(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(end - p)));
         if (detail) SetLabel(e, p, part, nameRow ? 'n' : kanaRow ? 'k' : 0, c.target, terms);
         // A single kana that ends the run after a katakana word belongs to that word (ジャーニー|ズ,
@@ -386,6 +392,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
     terms.clear();
     {
         SegEdge e(p + one, UnknownCost(t, ch, tp));
+        e.from = p;
         if (detail) SetLabel(e, p, "unk", 0, "", terms);
         out.push_back(std::move(e));
     }
@@ -396,6 +403,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         while (q < size && LatinRune(RuneAt(s, q))) q += CharLen(s, q);
         terms.clear();
         SegEdge e(q, UnreadCost(t, rest.substr(0, static_cast<std::size_t>(q - p)), tp));
+        e.from = p;
         if (detail) SetLabel(e, p, "lat", 0, "", terms);
         out.push_back(std::move(e));
     }
@@ -420,6 +428,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         if (q - p > one) {
             terms.clear();
             SegEdge e(q, SoundRunCost(t, m.chars[static_cast<std::size_t>(p - m.start)], tp));
+            e.from = p;
             if (detail) SetLabel(e, p, "snd", 0, "", terms);
             out.push_back(std::move(e));
         }
@@ -434,11 +443,39 @@ struct SegWindow {
     int start = 0, end = 0, limit = 0;
     std::vector<std::vector<SegEdge>> edges;  // by offset from start
     std::vector<int> suffix;               // by offset from start; kInf where no path reaches limit
+    // SegEdgesAt's edges by position for one token's text, kept while the windows move along it (the search visits
+    // each position of a hiragana stretch, and every window reads up to 12 of them).
+    std::string_view memoText;
+    int memoToken = -1;
+    std::unordered_map<int, std::vector<SegEdge>> memo;
+    // LatticeKana: the rows at a position that do not conjugate, by their end and kind, and whether each is a noun or
+    // adjectival noun of three or more hiragana.
+    struct Row {
+        int end = 0;
+        char kind = 0;
+        bool kanaNoun = false;
+        bool particle = false;   // a particle row in hiragana
+        bool shortNoun = false;  // a noun of one or two hiragana
+        bool pword = false;      // a particle word in hiragana (SegEdge::particle)
+    };
+    std::unordered_map<int, std::vector<Row>> rows;
 };
 
+// The memo of the windows for the token's text s.
+SegWindow& SegMemo(std::shared_ptr<SegWindow>& window, std::string_view s, int token) {
+    if (window == nullptr) window = std::make_shared<SegWindow>();
+    SegWindow& w = *window;
+    if (w.memoText.data() != s.data() || w.memoText.size() != s.size() || w.memoToken != token) {
+        w.memo.clear();
+        w.rows.clear();
+        w.memoText = s;
+        w.memoToken = token;
+    }
+    return w;
+}
+
 const SegWindow& Worker::SegWindowFor(std::string_view s, int start, int end, int token) {
-    if (segWindow_ == nullptr) segWindow_ = std::make_shared<SegWindow>();
-    SegWindow& w = *segWindow_;
+    SegWindow& w = SegMemo(segWindow_, s, token);
     if (segRun_ != nullptr) segRun_->text = {};
     w.start = start;
     w.end = end;
@@ -446,8 +483,13 @@ const SegWindow& Worker::SegWindowFor(std::string_view s, int start, int end, in
     int limit = end;
     std::vector<SegEdge> out;
     for (int p = start; p < limit; p += CharLen(s, p)) {
-        out.clear();
-        SegEdgesAt(s, p, token, false, out);
+        auto it = w.memo.find(p);
+        if (it == w.memo.end()) {
+            out.clear();
+            SegEdgesAt(s, p, token, false, out);
+            it = w.memo.emplace(p, std::move(out)).first;
+        }
+        out = it->second;
         if (p >= end) std::erase_if(out, [&](const SegEdge& e) { return e.end > limit; });
         for (const SegEdge& e : out) limit = std::max(limit, e.end);
         if (w.edges.size() < static_cast<std::size_t>(limit - start) + 1) w.edges.resize(static_cast<std::size_t>(limit - start) + 1);
@@ -743,6 +785,397 @@ Record* Worker::LatticeKanji(Record* records, std::string_view full, int cursor,
     }
     *frontTail = back;
     segDecided_.emplace_back(cursor, cursor + static_cast<int>(chosen));
+    return front;
+}
+
+namespace {
+
+bool HiraRune(char32_t r) { return r >= U'ぁ' && r <= U'ゖ'; }
+
+// The transition vetoes of the lattice (SEG-DESIGN section 2): the cost of the edge r after the edge l, kInf where
+// the pair is forbidden. edgesAt(p) lists the edges from the byte offset p.
+//   CutVerb: l ends in a kanji before a hiragana where a verb or adjective from the start of l runs on with its ending
+//     (目指|していた, 欲|しくなって, 持|ってる): the hiragana is that ending, no word of its own.
+//   CutKanaWord: l is one hiragana, no particle, before a hiragana, and a word from the start of l, no particle and no
+//     conjugated form, ends in kana inside r, no particle (わ|けさ for わけ|さ, し|かいない, そ|の中に): r starts inside
+//     the word l cut. After a particle the same pair is a reading of its own (は|なす); a longer l is a word of its own.
+//   te-chain: a verb in て and an auxiliary verb after it (aux.te-start) are one word: the auxiliary costs te-chain in
+//     place of word.
+template <class EdgesAt>
+int Step(const SegCosts& t, std::string_view s, EdgesAt&& edgesAt, const SegEdge& l, const SegEdge& r) {
+    const int p = r.from;
+    if (l.end != p || p <= 0 || p >= static_cast<int>(s.size())) return r.cost;
+    const char32_t last = RuneAt(s, RuneBefore(s, p));
+    const char32_t next = RuneAt(s, p);
+    if (HiraRune(next) && text::IsKanji(last)) {
+        for (const SegEdge& v : edgesAt(l.from)) {
+            if (v.word && v.conj && v.end > p) return kInf;
+        }
+    }
+    if (HiraRune(next) && HiraRune(last) && !l.particle && !r.particle && l.end - l.from == CharLen(s, l.from)) {
+        for (const SegEdge& v : edgesAt(l.from)) {
+            if (!v.word || v.particle || v.conj || v.end <= p || v.end >= r.end) continue;
+            if (AllHiragana(s.substr(static_cast<std::size_t>(p), static_cast<std::size_t>(v.end - p)))) return kInf;
+        }
+    }
+    int cost = r.cost;
+    if (r.aux && l.conj) {
+        const std::string_view lt = s.substr(static_cast<std::size_t>(l.from), static_cast<std::size_t>(l.end - l.from));
+        if (lt.ends_with("て") || lt.ends_with("で")) cost += t[dict::kSegTeChain] - t[dict::kSegWord];
+    }
+    return cost;
+}
+
+// A piece of a reading of hiragana that the costs name as a defect: hiragana no word reads, a bare stem, or one
+// hiragana read as a content word before another hiragana.
+bool KanaDefect(std::string_view s, const SegEdge& e) {
+    const std::string_view span = s.substr(static_cast<std::size_t>(e.from), static_cast<std::size_t>(e.end - e.from));
+    if (!e.word) return true;
+    if (e.stem) return true;
+    if (!AllHiragana(span) || Chars(span) != 1 || e.particle) return false;
+    if (e.part.empty() || std::string_view("NGEKCI").find(e.part[0]) == std::string_view::npos) return false;
+    return e.end < static_cast<int>(s.size()) && HiraRune(RuneAt(s, e.end));
+}
+
+bool NameEdge(const SegEdge& e) { return (e.part.size() == 4 && e.part[2] == '3') || (e.user != nullptr && e.user->nameLayer); }
+
+}  // namespace
+
+// LEX-7900: inside hiragana, where the lattice reads the stretch from the cursor more cheaply than any reading that
+// starts with the search's pick, and that pick's reading cuts a word W of the lattice's path: a noun, adjective or
+// phrase row of three or more hiragana (たい|こ for たいこ, かい|じゅう for かいじゅう), or a word with a kanji that a
+// boundary row starting in kana takes the head of (その上|着 for その|上着). W must be followed by a particle (the copula
+// among them), punctuation or the end of the token, and every word of the path up to W is a dictionary word with no
+// defect and no name. The pairs of Step apply to both readings. Then the record of the path's first word goes first;
+// else the search's order stands. records holds the records of the lookup in the order the reorders left.
+Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, int token, const Item* parent) {
+    constexpr int kMaxChars = 12;
+    const SegCosts& t = snapshot.SegCostTable();
+    if (!t.loaded || records == nullptr || records->child == nullptr || (records->user != nullptr && records->user->force)) return records;
+    const int size = static_cast<int>(full.size());
+    if (cursor < 0 || cursor >= size || !HiraRune(RuneAt(full, cursor))) return records;
+    int end = cursor;
+    for (int n = 0; end < size && n < kMaxChars; n++) {
+        const char32_t r = RuneAt(full, end);
+        if (!HiraRune(r) && !text::IsKanji(r) && r != U'々') break;
+        end += CharLen(full, end);
+    }
+    // W is the first or the second word of the lattice's path and starts inside the window. The first word does not
+    // conjugate: it is W, or it stands before W (below), and the boundary row that takes the head of the second word
+    // starts where the path does, so it is the pick. So only a cursor where the pick is a boundary row, or where a noun
+    // or adjectival noun of three or more hiragana starts at the cursor or after a row there, can decide. The rows
+    // tell that without the lattice, which is built only then.
+    SegWindow& memo = SegMemo(segWindow_, full, token);
+    auto rowsAt = [&](int p) -> const std::vector<SegWindow::Row>& {
+        auto [at, fresh] = memo.rows.try_emplace(p);
+        if (fresh) {
+            const std::string_view rest = full.substr(static_cast<std::size_t>(p));
+            const dict::Candidates found = WordInfo(rest, kModeGeneral);
+            for (const dict::Candidate& c : found.list) {
+                if (c.source.empty() || c.codes == nullptr || !rest.starts_with(c.source)) continue;
+                const std::string_view part = c.codes->partText;
+                const std::string_view src = c.source;
+                if (part.size() != 4 || part[1] == '4' || part[1] == '5') continue;
+                if (part[1] == '7') {  // an adjective: its end is its ending's, so only that one starts here counts
+                    at->second.push_back({p, '7'});
+                    continue;
+                }
+                const bool kana = AllHiragana(src);
+                at->second.push_back({p + static_cast<int>(src.size()), part[1], (part[1] == '1' || part[1] == '8') && kana && Chars(src) >= 3,
+                                      part[1] == '2' && kana, part[1] == '1' && kana && Chars(src) <= 2, part[0] == 'P' && kana});
+            }
+        }
+        return at->second;
+    };
+    // What follows W: the end of the token, punctuation, or a particle; or one noun of one or two hiragana (たち, さん)
+    // and then one of those.
+    auto stops = [&](int at) {
+        if (at >= size) return true;
+        const char32_t r = RuneAt(full, at);
+        return !HiraRune(r) && !KataRune(r) && !text::IsKanji(r) && r != U'々' && !LatinRune(r) && !(r >= U'0' && r <= U'9') &&
+               !(r >= U'０' && r <= U'９');
+    };
+    auto fitsAt = [&](int at) {
+        if (stops(at)) return true;
+        for (const SegWindow::Row& x : rowsAt(at)) {
+            if (x.particle || (x.shortNoun && stops(x.end))) return true;
+            if (!x.shortNoun) continue;
+            for (const SegWindow::Row& y : rowsAt(x.end)) {
+                if (y.particle) return true;
+            }
+        }
+        return false;
+    };
+    // W right at the cursor does not follow a verb or an adjective (below).
+    const bool afterVerb = parent != nullptr && cursor > 0 && parent->start + parent->length == cursor && parent->detail != nullptr &&
+                           (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo);
+    // A boundary row or such a noun is there before the pick is read.
+    bool maybe = false;
+    for (const SegWindow::Row& r : rowsAt(cursor)) {
+        if (maybe) break;
+        if (r.kind == '7') continue;
+        maybe = r.kind == '3' || (r.kanaNoun && !afterVerb && fitsAt(r.end));
+        if (!maybe && r.end < end) {
+            for (const SegWindow::Row& n : rowsAt(r.end)) maybe = maybe || (n.kanaNoun && fitsAt(n.end));
+        }
+    }
+    if (!maybe) return records;
+    const Item* pick = InsertLateCandidate(full, cursor, token, records);
+    if (pick == nullptr || pick->start != cursor || pick->length <= 0) return records;
+    const int e0 = cursor + pick->length;
+    if (e0 >= size || end <= e0) return records;
+    // The pick is a boundary row whose head a word of two or more characters before it leaves to a word with a kanji
+    // or an adjective.
+    bool pickBoundary = false;
+    for (const SegWindow::Row& r : rowsAt(cursor)) pickBoundary = pickBoundary || (r.kind == '3' && r.end == e0);
+    bool open = false;
+    for (const SegWindow::Row& r : rowsAt(cursor)) {
+        if (open) break;
+        if (r.kind == '7' || r.end == e0) continue;
+        if (pickBoundary && r.end < e0 && !r.pword && Chars(full.substr(static_cast<std::size_t>(cursor), static_cast<std::size_t>(r.end - cursor))) >= 2) {
+            const char32_t h = RuneAt(full, r.end);
+            open = text::IsKanji(h) || h == U'々';
+            for (const SegWindow::Row& n : rowsAt(r.end)) open = open || n.kind == '7';
+        }
+        open = open || (r.kanaNoun && !afterVerb && fitsAt(r.end));
+        if (!open && r.end < end) {
+            for (const SegWindow::Row& n : rowsAt(r.end)) open = open || (n.kanaNoun && fitsAt(n.end));
+        }
+    }
+    if (!open) return records;
+    const SegWindow& w = SegWindowFor(full, cursor, end, token);
+    const int start = cursor;
+    auto edgesAt = [&](int p) -> const std::vector<SegEdge>& { return w.edges[static_cast<std::size_t>(p - start)]; };
+    // rest[i][k], clean[i][k]: the cheapest steps after the edge k from start + i to w.limit, by any edges or by edges
+    // with no defect and no name; kInf for none.
+    std::vector<std::vector<int>> rest(w.edges.size()), clean(w.edges.size());
+    for (int p = w.limit; p-- > start;) {
+        if ((static_cast<unsigned char>(full[static_cast<std::size_t>(p)]) & 0xC0) == 0x80) continue;
+        const std::size_t i = static_cast<std::size_t>(p - start);
+        const auto& from = w.edges[i];
+        rest[i].assign(from.size(), kInf);
+        clean[i].assign(from.size(), kInf);
+        for (std::size_t k = 0; k < from.size(); k++) {
+            const SegEdge& e = from[k];
+            if (e.end > w.limit || e.end <= p) continue;
+            if (e.end == w.limit) {
+                rest[i][k] = clean[i][k] = 0;
+                continue;
+            }
+            const std::size_t j = static_cast<std::size_t>(e.end - start);
+            for (std::size_t m = 0; m < w.edges[j].size() && m < rest[j].size(); m++) {
+                if (rest[j][m] >= kInf) continue;
+                const SegEdge& r = w.edges[j][m];
+                const int step = Step(t, full, edgesAt, e, r);
+                if (step >= kInf) continue;
+                rest[i][k] = std::min(rest[i][k], step + rest[j][m]);
+                if (clean[j][m] < kInf && !KanaDefect(full, r) && !NameEdge(r)) clean[i][k] = std::min(clean[i][k], step + clean[j][m]);
+            }
+        }
+    }
+    const auto& first = w.edges[0];
+    if (rest[0].size() != first.size()) return records;
+    int best = kInf, record = kInf, tidy = kInf;
+    for (std::size_t k = 0; k < first.size(); k++) {
+        if (rest[0][k] >= kInf) continue;
+        best = std::min(best, first[k].cost + rest[0][k]);
+        if (clean[0][k] < kInf && !KanaDefect(full, first[k]) && !NameEdge(first[k])) tidy = std::min(tidy, first[k].cost + clean[0][k]);
+        if (first[k].word && !first[k].joined && first[k].end == e0) record = std::min(record, first[k].cost + rest[0][k]);
+    }
+    if (record >= kInf || best >= record) return records;
+    if (tidy != best) return records;
+    // A path of the window from the first edge k0 of cost total; a tie keeps the edge the lookup lists first.
+    auto walk = [&](std::size_t k0, const std::vector<std::vector<int>>& table, bool tidyOnly) {
+        std::vector<const SegEdge*> path{&first[k0]};
+        for (;;) {
+            const SegEdge& e = *path.back();
+            if (e.end >= w.limit) break;
+            const std::size_t i = static_cast<std::size_t>(e.from - start);
+            const int want = table[i][static_cast<std::size_t>(&e - w.edges[i].data())];
+            const std::size_t j = static_cast<std::size_t>(e.end - start);
+            const SegEdge* next = nullptr;
+            for (std::size_t m = 0; m < w.edges[j].size() && next == nullptr; m++) {
+                if (table[j][m] >= kInf) continue;
+                if (tidyOnly && (KanaDefect(full, w.edges[j][m]) || NameEdge(w.edges[j][m]))) continue;
+                const int step = Step(t, full, edgesAt, e, w.edges[j][m]);
+                if (step < kInf && step + table[j][m] == want) next = &w.edges[j][m];
+            }
+            if (next == nullptr) break;
+            path.push_back(next);
+        }
+        return path;
+    };
+    std::size_t kl = first.size(), kr = first.size();
+    for (std::size_t k = 0; k < first.size(); k++) {
+        if (rest[0][k] >= kInf) continue;
+        if (kl == first.size() && clean[0][k] < kInf && !KanaDefect(full, first[k]) && !NameEdge(first[k]) && first[k].cost + clean[0][k] == best) kl = k;
+        if (kr == first.size() && first[k].word && !first[k].joined && first[k].end == e0 && first[k].cost + rest[0][k] == record) kr = k;
+    }
+    if (kl == first.size() || kr == first.size() || first[kl].end == e0) return records;
+    const std::vector<const SegEdge*> lp = walk(kl, clean, true), rp = walk(kr, rest, false);
+    // The first word W of the lattice's path that the pick's reading cuts and that is a noun, adjective or phrase row
+    // of three or more hiragana, or a word with a kanji whose head a boundary row starting in kana takes.
+    auto cutter = [&](const SegEdge& e) -> const SegEdge* {
+        for (const SegEdge* r : rp) {
+            if (r->from < e.end && r->end > e.from && (r->from > e.from || r->end < e.end)) return r;
+        }
+        return nullptr;
+    };
+    // A boundary row: an adverb or conjunction row starting in kana (その上, それでは, いくら) that may take the head of
+    // the next word.
+    auto boundary = [&](const SegEdge& by) { return by.part.size() == 4 && by.part[1] == '3' && HiraRune(RuneAt(full, by.from)); };
+    auto qualifies = [&](const SegEdge& e, const SegEdge& by) {
+        if (e.joined || e.part.size() != 4) return false;
+        // The head of a boundary row: the row starts before W and ends inside it, and the lattice keeps a word of two
+        // or more characters of it before W (その|上着, それ|ではない; not も|うさ for もう|さ).
+        bool head = by.from < e.from && by.end < e.end && boundary(by);
+        if (head) {
+            const SegEdge* kept = nullptr;
+            for (const SegEdge* l : lp) {
+                if (l->end == e.from) kept = l;
+            }
+            head = kept != nullptr && kept->from >= by.from && kept->word && !kept->particle && Chars(full.substr(static_cast<std::size_t>(kept->from), static_cast<std::size_t>(kept->end - kept->from))) >= 2;
+            // An adjective W keeps a pronoun before it, and the search reads the adjective after the row too: the row
+            // only moves a particle (それ|ではない for それでは|ない; not まる|でない for まるで|ない, どう|でもよく).
+            if (head && e.part[1] == '7') {
+                bool adjective = false;
+                for (const SegEdge* r : rp) adjective = adjective || (r->from == by.end && r->part.size() == 4 && r->part[1] == '7');
+                head = adjective && kept->part.size() == 4 && kept->part[2] == '2';
+            }
+        }
+        // A row the search reads as one kana particle and a word, or as a word and a particle, is a phrase across a
+        // particle (の|ところ, と|だな, なか|でも, など|では); one whose last piece the search reads as an adverb, a verb,
+        // an adjective or an adjectival noun of two or more kana (さん|いつ, なのかも|しれない, もあり|そう), or that holds a piece of two or more
+        // kana read only as a verb (そうな|ん), is a phrase over that word. Neither is a word the search breaks.
+        for (const SegEdge* r : rp) {
+            if (head) break;
+            // The last piece may run on past W (なのかも|しれないが, から|ちゃんと, もう|ふとん).
+            if (r->from > e.from && r->from < e.end && r->end > e.end && r->part.size() == 4) {
+                const std::string_view on = full.substr(static_cast<std::size_t>(r->from), static_cast<std::size_t>(r->end - r->from));
+                if ((r->part[1] == '4' || r->part[1] == '7' || r->part[1] == '8') && Chars(on) >= 2) return false;
+                // A kana noun the search reads past W that is as long as W: each reading cuts a kana word of the same
+                // size, and the search's stands (もう|ふとん for もうふ|と; not もう|ろうと for もうろう|と).
+                if (r->part[1] == '1' && AllHiragana(on) && Chars(on) >= 3 &&
+                    Chars(on) >= Chars(full.substr(static_cast<std::size_t>(e.from), static_cast<std::size_t>(e.end - e.from)))) {
+                    return false;
+                }
+            }
+            if (r->from < e.from || r->end > e.end) continue;
+            if (r->particle && (r->end == e.end || (r->from == e.from && r->end - r->from == CharLen(full, r->from)))) return false;
+            if (r->part.size() != 4 || Chars(full.substr(static_cast<std::size_t>(r->from), static_cast<std::size_t>(r->end - r->from))) < 2) continue;
+            if (r->end == e.end && (r->part[1] == '3' || r->part[1] == '4' || r->part[1] == '7' || r->part[1] == '8')) return false;
+            if (r->part[1] == '4') {
+                bool other = false;
+                for (const SegEdge& x : edgesAt(r->from)) {
+                    other = other || (x.word && x.end == r->end && x.part.size() == 4 && x.part[1] != '4');
+                }
+                if (!other) return false;
+            }
+        }
+        const std::string_view sp = full.substr(static_cast<std::size_t>(e.from), static_cast<std::size_t>(e.end - e.from));
+        if (e.part[1] == '7') return head && Chars(sp) >= 3;
+        if (e.part[1] != '1' && e.part[1] != '8') return false;
+        if (AllHiragana(sp)) {
+            // The search's word that runs into W from before it is a prenominal, an adverb, a conjunction, a pronoun, a
+            // particle, a name or a word with its ending (みんなの|ところ, いつか|って, まるで|なかった, あったら|この,
+            // ったら|この, のこと|しか, ふたば|あちゃん), or W starts with a particle of two or more kana that ends inside it
+            // (から|だ): the search's boundary is the one in the text.
+            for (const SegEdge* r : rp) {
+                if (r->part.size() != 4) continue;
+                if (r->from < e.from && r->end > e.from &&
+                    (r->part[1] == '0' || r->part[1] == '3' || r->part[2] == '2' || r->part[1] == '4' || r->part[1] == '7' || r->particle || NameEdge(*r))) {
+                    return false;
+                }
+                // A prenominal of two or more kana starts W (こんな|ん, どんな|とこ).
+                if (r->from == e.from && r->end < e.end && r->part[1] == '0' && r->end - r->from > CharLen(full, r->from)) return false;
+                if (r->from == e.from && r->end < e.end && r->end - r->from > CharLen(full, r->from)) {
+                    // The search's piece that starts W is a particle of two or more kana, or a stem with no ending
+                    // that reads as one (から|だ, から|かぶさる with から as an adjective stem; not かい|じゅう).
+                    bool particle = r->particle;
+                    for (const SegEdge& x : edgesAt(r->from)) particle = particle || (r->stem && x.particle && x.end == r->end);
+                    if (particle) return false;
+                }
+            }
+            // W is an adjective with its ending and a noun of two or more kana (いい|こと for いいこと): a phrase.
+            for (const SegEdge& x : edgesAt(e.from)) {
+                if (!x.word || x.stem || x.part.size() != 4 || x.part[1] != '7' || x.end >= e.end || x.end - x.from <= CharLen(full, x.from)) continue;
+                for (const SegEdge& y : edgesAt(x.end)) {
+                    if (y.word && y.part.size() == 4 && y.part[1] == '1' && y.end == e.end && y.end - y.from > CharLen(full, y.from)) return false;
+                }
+            }
+            return Chars(sp) >= 3;
+        }
+        return Chars(sp) >= 2 && head && (text::IsKanji(RuneAt(full, e.from)) || RuneAt(full, e.from) == U'々');
+    };
+    const SegEdge* cutW = nullptr;
+    std::size_t wi = 0;
+    for (; wi < lp.size() && wi < 2 && cutW == nullptr && lp[wi]->from < end; wi++) {
+        const SegEdge* by = cutter(*lp[wi]);
+        if (by != nullptr && qualifies(*lp[wi], *by)) cutW = lp[wi];
+    }
+    if (cutW == nullptr) return records;
+    const SegEdge& W = *cutW;
+    // W does not follow a verb or an adjective: kana after a conjugated word is mostly its ending or an auxiliary
+    // (聞きたい|こと, not たいこ; 続かない|よう, not いよう).
+    if (W.from == cursor) {
+        if (parent != nullptr && cursor > 0 && parent->start + parent->length == cursor && parent->detail != nullptr &&
+            (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo)) {
+            return records;
+        }
+    } else if (wi >= 2) {
+        const SegEdge& before = *lp[wi - 2];
+        if (before.part.size() == 4 && (before.part[1] == '4' || before.part[1] == '7')) return records;
+    }
+    auto particleAt = [&](const SegEdge& e) {
+        return e.word && e.part.size() == 4 && e.part[1] == '2' &&
+               AllHiragana(full.substr(static_cast<std::size_t>(e.from), static_cast<std::size_t>(e.end - e.from)));
+    };
+    auto edgesFrom = [&](int at) -> const std::vector<SegEdge>* {
+        return at >= start && at < w.limit ? &w.edges[static_cast<std::size_t>(at - start)] : nullptr;
+    };
+    bool fits = stops(W.end) || (wi < lp.size() && particleAt(*lp[wi]));
+    if (!fits && edgesFrom(W.end) != nullptr) {
+        for (const SegEdge& x : *edgesFrom(W.end)) {
+            const std::string_view sp = full.substr(static_cast<std::size_t>(x.from), static_cast<std::size_t>(x.end - x.from));
+            if (!x.word || NameEdge(x) || x.part.size() != 4 || x.part[1] != '1' || !AllHiragana(sp) || Chars(sp) > 2) continue;
+            if (stops(x.end)) fits = true;
+            if (const auto* after = edgesFrom(x.end); after != nullptr) {
+                for (const SegEdge& y : *after) fits = fits || particleAt(y);
+            }
+        }
+    }
+    if (!fits) return records;
+    // The records of the length of the path's first word go first, in the order the reorders left them (that order
+    // chooses among their senses), where the search reads the first of them as the lattice does.
+    const SegEdge& lead = first[kl];
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    Record* copies = nullptr;
+    Record** copyTail = &copies;
+    for (Record* r = records; r != nullptr; r = r->child) {
+        if (static_cast<int>(r->source.size()) != lead.key) continue;
+        Record* c = NewRecord();
+        *c = *r;
+        c->child = nullptr;
+        *copyTail = c;
+        copyTail = &c->child;
+    }
+    if (copies == nullptr) return records;
+    if (const Item* v = InsertLateCandidate(full, cursor, token, copies); v == nullptr || v->start != cursor || cursor + v->length != lead.end) {
+        return records;
+    }
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = static_cast<int>(r->source.size()) == lead.key ? frontTail : backTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    *frontTail = back;
+    segDecided_.emplace_back(cursor, lead.end);
     return front;
 }
 
