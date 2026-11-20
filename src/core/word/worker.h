@@ -254,6 +254,8 @@ private:
     Record* LatticeKatakana(Record* records, std::string_view full, int cursor, int token);
     // Inside a kanji run: the first word of the lattice's path first, where the lattice says so.
     Record* LatticeKanji(Record* records, std::string_view full, int cursor, int token);
+    // Inside a hiragana stretch: the first word of the lattice's path first, where the search breaks a kana word.
+    Record* LatticeKana(Record* records, std::string_view full, int cursor, int token, const Item* parent);
     // The spans of the current token whose record LatticeKatakana or LatticeKanji put first; SegReport says
     // "lattice" where the search's path keeps one of them as a word.
     std::vector<std::pair<int, int>> segDecided_;

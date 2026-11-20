@@ -1,0 +1,29 @@
+rule	input	expected	kind	layer
+segmentation:lattice-kana	おんなじたいこのリズム	has:북의 리듬	fix	lookup
+segmentation:lattice-kana	たいこのリズムをきざもう！	has:북의 리듬	fix	lookup
+segmentation:lattice-kana	わたしたちかいじゅうたちの	has:괴수들	fix	lookup
+segmentation:lattice-kana	その上着の裏地	has:윗도리	fix	lookup
+segmentation:lattice-kana	その上着、似合うね。	has:윗도리	fix	lookup
+segmentation:lattice-kana	「その上着は？」	has:윗도리	fix	lookup
+segmentation:lattice-kana	その上空に	has:상공	fix	lookup
+segmentation:lattice-kana	この外国人は	has:외국인	fix	lookup
+segmentation:lattice-kana	その上司は厳しい。	has:상사	fix	lookup
+segmentation:lattice-kana	人のそれではない	has:그것은 아니다	fix	lookup
+segmentation:lattice-kana	あなたのそれではない。	has:그것은 아니다	fix	lookup
+segmentation:lattice-kana	そのひらめきは	has:번뜩임	fix	lookup
+segmentation:lattice-kana	意識がもうろうとする。	lacks:깔때기	fix	lookup
+segmentation:lattice-kana	聞きたいことがある。	has:싶은 것	keep	lookup
+segmentation:lattice-kana	その上、彼は来た。	has:게다가	keep	lookup
+segmentation:lattice-kana	それでは始めよう。	has:그러면	keep	lookup
+segmentation:lattice-kana	いくらでもある。	has:얼마든지	keep	lookup
+segmentation:lattice-kana	したがって、中止する。	has:따라서	keep	lookup
+segmentation:lattice-kana	かなこが笑った。	has:카나코	keep	lookup
+segmentation:lattice-kana	もだもだと悩む。	has:모다모다	keep	lookup
+segmentation:lattice-kana	途中からだけどね。	lacks:몸	keep	lookup
+segmentation:lattice-kana	人の気配がまるでない。	has:전혀 없다	keep	lookup
+segmentation:lattice-kana	上からかぶさってきた。	has:덮여	keep	lookup
+segmentation:lattice-kana	昌行さんいつ来るの？	has:씨 언제	keep	lookup
+segmentation:lattice-kana	こんなん、かすり傷だよ。	has:이런	keep	lookup
+segmentation:lattice-kana	放せったらこのブス！	lacks:명란	keep	lookup
+segmentation:lattice-kana	ふ〜た〜ば〜ちゃん！	has:후타바	keep	lookup
+segmentation:lattice-kana	もうふとんしまっちゃったの？	has:이부자리	keep	lookup

@@ -3906,6 +3906,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         records = KanjiCoverFirst(*this, records, full, static_cast<std::size_t>(cursor), token);
         if (records == incoming && snapshot.SegCostTable().loaded) records = LatticeKanji(records, full, cursor, token);
     }
+    if (settings.text && snapshot.SegCostTable().loaded) records = LatticeKana(records, full, cursor, token, parent);
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;
