@@ -2557,16 +2557,19 @@ struct StemVerbForm {
     bool keepLast = false;   // the stem's last kana stays (見え+て, 失礼し+て)
     bool vowel = false;      // a stem of one or two kanji, or き after a て form
 };
+
+// The continuative of a godan verb by its last kana: that kana, the dictionary form's, and what the て form writes.
+static constexpr std::array<std::array<std::string_view, 3>, 9> kGodan = {{{"い", "う", "って"},
+                                                                          {"ち", "つ", "って"},
+                                                                          {"り", "る", "って"},
+                                                                          {"き", "く", "いて"},
+                                                                          {"ぎ", "ぐ", "いで"},
+                                                                          {"し", "す", "して"},
+                                                                          {"み", "む", "んで"},
+                                                                          {"び", "ぶ", "んで"},
+                                                                          {"に", "ぬ", "んで"}}};
+
 static bool StemVerb(std::string_view head, StemVerbForm& v) {
-    static constexpr std::array<std::array<std::string_view, 3>, 9> kGodan = {{{"い", "う", "って"},
-                                                                              {"ち", "つ", "って"},
-                                                                              {"り", "る", "って"},
-                                                                              {"き", "く", "いて"},
-                                                                              {"ぎ", "ぐ", "いで"},
-                                                                              {"し", "す", "して"},
-                                                                              {"み", "む", "んで"},
-                                                                              {"び", "ぶ", "んで"},
-                                                                              {"に", "ぬ", "んで"}}};
     if (head.empty()) return false;
     const auto vowelStem = [&](size_t start) {
         const std::string_view stem = head.substr(start);
@@ -2663,14 +2666,31 @@ static bool StartsWithAny(std::string_view s, size_t p, std::initializer_list<st
     return false;
 }
 
+// Whether the last n hiragana of head spell the continuative of a verb of the dictionary (いただき, もらい).
+static bool KanaStemEnds(std::string_view head, int n) {
+    size_t at = head.size();
+    for (int k = 0; k < n; k++) {
+        if (at == 0 || !IsHiraganaClass(LastRune(head.substr(0, at)).cp)) return false;
+        at -= LastRune(head.substr(0, at)).size;
+    }
+    const std::string_view stem = head.substr(at);
+    const std::string_view last = head.substr(head.size() - LastRune(head).size);
+    for (const auto& g : kGodan) {
+        if (last == g[0] && VerbIs(Cat({stem.substr(0, stem.size() - last.size()), g[1]}))) return true;
+    }
+    return IchidanIs(Cat({stem, "る"}));
+}
+
 // The polite ます of rough old speech said やす after the stem of a verb (急いで戻りやした 서둘러 돌아왔습니다, ありやせん, わかり
 // やした, 行きやしょう): ました for やした, ましょう for やしょう, and before the end, a mark, a sentence particle or a
 // conjunction ません for やせん and ます for やす. Not the やすい of ease (飲みやすい, 歩きやすく, the Kyushu 読みやすか), nor
 // 冷やした or 増やす, whose や follows a kanji, nor a stem that is no verb of the dictionary (傷をいやした), nor bare やす
-// after a stem in kana, which spells a name (ゆきやす, のりやす).
+// after a stem in kana, which spells a name (ゆきやす, のりやす); before ね or よ a kana verb stem of three or more kana
+// takes it (もらいやすね).
+// After a て form it is the ます of ています said short (先に行ってやすね 先に行ってますね; spec LEX-7870).
 static bool RoughPoliteYasu(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
-    if (head.empty() || !(In(LastRune(head).cp, U"いきぎしちにびみりえけげせてねべめれ") || IsKanjiClass(LastRune(head).cp))) return false;
+    if (head.empty() || !(In(LastRune(head).cp, U"いきぎしちにびみりえけげせてでねべめれ") || IsKanjiClass(LastRune(head).cp))) return false;
     struct YasuForm {
         std::string_view written, plain;
         bool final;
@@ -2691,10 +2711,16 @@ static bool RoughPoliteYasu(std::string_view s, size_t pos, Match& m) {
             size_t r = p + std::string_view("か").size();
             if (!OneOf(s, r, U"？?い")) return false;
         }
+        const bool te = TeFormEnds(head);
         StemVerbForm v;
-        if (!StemVerb(head, v)) return false;
-        // bare やす only after a stem with a kanji (戻りやすか？): a kana stem with やす spells a name (ゆきやす, のりやす)
-        if (f.written == "やす" && !IsKanjiClass(text::DecodeRune(head.substr(v.start)).cp)) return false;
+        if (!te && !StemVerb(head, v)) return false;
+        // bare やす only after a stem with a kanji (戻りやすか？): a kana stem with やす spells a name (ゆきやす, のりやす);
+        // before ね or よ after a verb stem of three kana or more it is the polite ending (いただきやすね, もらいやすね; not
+        // ゆきやすね, はのりやすね)
+        if (f.written == "やす" && !te && !IsKanjiClass(text::DecodeRune(head.substr(v.start)).cp) &&
+            !(StartsWithAny(s, p, {"ね", "よ"}) && (KanaStemEnds(head, 3) || KanaStemEnds(head, 4) || KanaStemEnds(head, 5)))) {
+            return false;
+        }
         m.group[1] = f.plain;
         m.end = p;
         return true;

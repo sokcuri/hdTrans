@@ -1219,6 +1219,19 @@ bool Worker::PersonSuffixAt(std::string_view s) const {
     return false;
 }
 
+bool Worker::StemTakesSu(std::string_view stem, std::string_view ending) const {
+    if (!ending.starts_with("す")) return false;
+    // the kana that end the stem, two to four of them: a kana verb in す (いやす, ためす, なおす)
+    std::size_t at = stem.size();
+    for (int n = 1; n <= 4 && at > 0; n++) {
+        const text::Rune r = DecodeLastRune(stem.substr(0, at));
+        if (!(r.cp >= U'ぁ' && r.cp <= U'ゖ')) break;
+        at -= r.size;
+        if (n >= 2 && VerbFormSpelling(std::string(stem.substr(at)) + "す")) return true;
+    }
+    return false;
+}
+
 // Whether form is also the dictionary form of a verb of the dictionary, or a continuative of two kana: form without
 // its last kana is the stem of a verb whose dictionary form or continuative ends in that kana (かえる of 帰る and
 // 変える, つき of 付く).

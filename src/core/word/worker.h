@@ -209,6 +209,9 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool VerbFormSpelling(std::string_view form) const;
+    // Whether ending starts with the す of a clipped っす that stem, in kana, takes as a verb of the dictionary
+    // (いや + すね is いやす + ね, not いや + っすね; spec LEX-7870).
+    bool StemTakesSu(std::string_view stem, std::string_view ending) const;
     bool ProvenName(std::string_view key) const;
     bool GodanCausative(std::string_view stem) const;
     bool IchidanPartner(std::string_view stem, std::string_view kana) const;
