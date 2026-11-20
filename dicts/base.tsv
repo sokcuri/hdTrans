@@ -1024,7 +1024,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あしてまといにな	방해가 &C6@	M428		Dx	GN				jisjk:140190		
 あしでか	듣고 본 것을 &AF@	M441			GN				jisjk:140193		
 あしでがき	흘려쓴 글씨	N110			GN				jisjk:124370		
-あしでまとい	방해가 %D5@	G8U0			GN				jisjk:119245		
+あしでまとい	방해가 %D5@	G8U0		Av	GN				jisjk:119245		
 あしとり	다리 걸기	N110	VRw		GN				jisjk:124371		
 あしどめ	외출 금지	N110			GN				jisjk:124372		
 あしどめをく	발이 묶&AJ@	M420			GN				jisjk:140202		
@@ -2382,7 +2382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いいかげんに	그만&AV@	D469		Pe	GN				jisjk:342209		
 いいかげんに	어지간히	E311			GN				jisjk:373581		
 いいかた	말	N110	UTs		GN				jisjk:125108		
-いいかね	말하기 곤란&AV@	M437	UTs		GN				jisjk:90411		
+いいかね	말하기 곤란&Mf@	M437	UTs		GN				jisjk:90411		
 いいがいな	말한 보람이 $FA@	H7U0			GN				jisjk:4837		
 いいがかり	생트집	N110	SFl		GN				jisjk:125110		
 いいがかりをつけ	트집을 &FK@	M427			GN				jisjk:143409		
@@ -2773,7 +2773,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いきどおろし	화가 나 참을 수 $FA@	H7U0			GN				jisjk:4848		
 いきどまり	막다른 곳	N110			GN				jisjk:125271		
 いきながらえさせ	살아남게 &AV@	M447			GN				jisjk:143927		
-いきなや	곤란&AV@	M425			GN				jisjk:140560		
+いきなや	곤란&Mf@	M425			GN				jisjk:140560		
 いきなり	갑자기	N310			GN				jisjk:41		
 いきなりなんの	갑자기 아무런	N110			GN				jisjk:150478		
 いきなりはい	갑자기 들어&A1@	M428			GN				jisjk:143929		
@@ -13789,7 +13789,7 @@ ttt	ttt	K110			GN				jisjk:201744
 くそみそに	호되게	E300			GN				jisjk:123020		
 くそむし	구더기	N110	VAm		GN				jisjk:176006		-1
 くそ力	뚝심	I110			GN				jisjk:40865		
-くたくた	지쳐서 녹초가 %D5@	G8U0			GN				jisjk:120578		
+くたくた	지쳐서 녹초가 %D5@	G8U0		Av	GN				jisjk:120578		
 くたって	6도	T500			GN				jisjk:260872		
 くったって	6도	T500			GN				kuttatte:1		
 くたにやき	사기 그릇	N110	VPe		GN				jisjk:176008		-1
@@ -19901,11 +19901,11 @@ ttt	ttt	K110			GN				jisjk:201744
 さしたて	발송	N110			GN				jisjk:185173		-1
 さしたる	이렇다할	E0H0			GN				jisjk:123480		
 さしだ	&A6@	M433			GN				jisjk:90841		
-さしだ	내&AB@	M443			GN				jisjk:121170		
+さしだ	내&LN@	M443			GN				jisjk:121170		
 さしだ	파견&AV@	M443	VHnVHn		GN				jisjk:121173		
 さしだ	발송&AV@	M443			GN				jisjk:121176		
 さしだ	제출&AV@	M443			GN				jisjk:121182		
-さしだ	내&AB@	M443	VBp		GN				jisjk:121186		
+さしだ	내&LN@	M443	VBp		GN				jisjk:121186		
 さしだしにん	발송인	N110	VHn		GN				jisjk:185176		-1
 さしちがえ	맞&E9@	M427	VTw		GN				jisjk:121189		
 さしちがえ	바꾸어 &H5@	M447			GN				jisjk:121193		
@@ -19918,7 +19918,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さしつかわ	파견&AV@	M443			GN				jisjk:121207		
 さしつけ	들이&C5@	M447			GN				jisjk:121213		
 さしつけ	갖다 &C5@	M447	VBpVHn		GN				jisjk:121217		
-さしつけ	내&AB@	M447			GN				jisjk:121220		
+さしつけ	내&LN@	M447			GN				jisjk:121220		
 さしつさされつ	권커니 작커니	N310		Hd	GN				jisjk:341840		
 さしつま	육박&AV@	M428	UMe		GN				jisjk:121223		
 さしつま	직면&AV@	M428			GN				jisjk:121225		
@@ -19937,7 +19937,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さしぬい	누비질	N110		Hd	GN				jisjk:185192		-1
 さしのぞ	들여다&AY@	M431			GN				jisjk:90843		
 さしのべ	내 뻗&AO@	M447			GN				jisjk:121258		
-さしのべ	내&AB@	M447			GN				jisjk:121264		
+さしのべ	내&LN@	M447			GN				jisjk:121264		
 さしのぼ	떠&E6@	M428	VSs		GN				jisjk:121269		
 さしはさ	끼&AI@	M445			GN				jisjk:121273		
 さしはさ	&M3@	M445	SFl		GN				jisjk:121285		
@@ -28890,11 +28890,11 @@ ttt	ttt	K110			GN				jisjk:201744
 そいね	곁잠&AK@	M429			GN				jisjk:138582		
 そう	%A1@	G8U0		Av	GN	59	||1 &&3 S-1== "いた" P-2== "4**" M-2== "57*"	そう 앞에 いた가 있고 그 앞 동사가 연결형이면 하다는 서술 표현을 고른다. (미발동: rare-context)	jisjk:2201		
 そう	것 %B3@	G8U0			GN	60	||6 &&2 P-1== "4**" M-1== "5:054*" &&3 S-1== "い" P-1== "4**" M-1== "5:0" &&5 U+0== "に" P-1== "7**" U-1== "" D+0= "" Y-1= "4 듯이 " &&3 P-1== "7**" U-1== "" Y-1= "4" &&4 P-1== "4**" G-1== "Pi" M-1== "57*" Y-1= "3" &&3 P-1== "4**" U-1== "い" M-1== "5A0"	동사·형용사 뒤의 'そう'를 추정 표현 '것 같다'로 고르고 필요하면 앞말의 어미를 관형형이나 평서형으로 바꾼다.	jisjk:2202		
+そう	%D1@	G8U0		HaAv	GN	3666	||2 &&4 P-1== "4**" ||2 M-1== "50*" M-1== "56*" U-1!= "Rも" U-1!= "と" &&3 ||2 P-1== "7**" P-1== "8**" S-1!= "そう" U-1!= "Rも"	そう는 기본형, 과거형 동사나 형용사, 형용동사(되풀이한 そう, -ても 뒤는 아님) 뒤에서 전언을 나타내는 ‘하다’ 계열 후보를 고른다.	jisjk:345201		
 そう	%D1@	G8U0			GN	1224	||1 &&3 P-1== "4**" U-1== "と" D+0= "그%C5@"	そう는 앞 동사에 と 어미가 붙어 있으면 번역을 그렇다로 바꾼다. (미발동: rare-context)	jisjk:116746		
 そう	그래	N110		Nn	GN	2647	||5 &&2 S-1== "、" S-2== "Rあ" &&2 ||2 S-1== "ほんとうに" S-1== "ほんとに" P-1== "3**" &&4 G+0== "Ow" S-1== "も" P-2== "1**" A-2== "VHn" &&2 G+0== "Hz" D+1== "," &2 G+0== "Hz" G+0== "Ow"	「そう」가 단독으로 쓰이거나 「ほんとうに」·감탄 표현 및 사람을 받는 「も」 뒤의 문장 끝에 오면 ‘그래’를 고른다.	jisjk:267064		
 そう	그렇게	N110	XXX	Nn	GN				jisjk:267065		
 そう	것 같다	N110			GN	3261	||4 &&4 ||3 G+0== "Ow" S+1== "？" S+1== "?" P-1== "4**" M-1== "5:0" Y-1= "3" &&3 P-1== "7**8**" U-1== "" Y-1= "3" &&2 G+0== "Ow" S-1== "終わり" &&4 ||3 G+0== "Ow" S+1== "？" S+1== "?" P-1== "4**" U-1== "い" M-1== "5A0"	そう는 문장 끝이나 물음표 앞의 5:0 동사나 ちゃい, じゃい 뒤, 終わり 뒤, 또는 어미 표기가 빈 형용사류 뒤에서 ‘것 같다’를 고르며 앞의 활용 어미를 관형형 3으로 바꾸기도 한다.	jisjk:342479		
-そう	%D1@	G8U0		HaAv	GN	3666	||2 &&3 P-1== "4**" ||2 M-1== "50*" M-1== "56*" U-1!= "Rも" &&3 ||2 P-1== "7**" P-1== "8**" S-1!= "そう" U-1!= "Rも"	そう는 기본형, 과거형 동사나 형용사, 형용동사(되풀이한 そう, -ても 뒤는 아님) 뒤에서 전언을 나타내는 ‘하다’ 계열 후보를 고른다.	jisjk:345201		
 そう	%A1@	G8U0		Tu	GN	3691	||2 &&2 P-1== "1**" G-1== "Hd" S-1== "簡単"	동작성 명사나 簡単 뒤의 そう를 앞말과 결합하는 '하다'형 형용사 후보로 고른다.	jisjk:345435		
 そう	%A1@	G8U0		Ha	GN	3901	||1 &&4 P+0== "8**" D-1== "(이)가" P-1== "2**" G-1-= "Z2"	형용동사 そう 앞의 조사가 이·가로 번역되고 Z2 코드를 가지면 그러하다라는 번역을 고른다. (미발동: rare-context)	jisjk:350978		
 そう	그%C5@	G8U0	XXX	J1	GN	4711	||1 &&2 S-1== "大きに" P-1== "3**"	바로 앞말이 부사 大きに이면 そう를 그렇다로 고른다. (미발동: rare-context)	jisjk:372683		
@@ -30621,7 +30621,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たずねある	찾아 다&A7@	M421			GN				jisjk:139448		
 たずねあわせ	문의&AV@	M447			GN				jisjk:139450		
 たずねられ	물어&AY@	M417	UTs		GN				jisjk:91023		
-たそう	싶다고 %D1@	G8U0			GN	2499	||1 &&2 P-1== "4**" M-1== "5:0"	たそう 앞 동사가 5:0 어미를 가지면 싶다고 하다를 고른다. (미발동: rare-context)	jisjk:266230		
+たそう	싶어 보%EJ@	G8U0		Av	GN	2499	||1 &&2 P-1== "4**" M-1== "5:0"	たそう 앞 동사가 5:0 어미를 가지면 싶어 보이다를 고른다. (미발동: rare-context)	jisjk:266230		
 たそがれ	황혼	N110	VSsUMe		GN				jisjk:153034		
 たそがれどき	해질녁	N110	UMeVSs		GN				jisjk:153036		
 たた	&AO@	M431	VPl		GN				jisjk:91024		
@@ -31355,7 +31355,7 @@ ttt	ttt	K110			GN				jisjk:201744
 だけでは	0 것만으로는	S500			GN				jisjk:364188		
 だけでは	0 것만이 	S500			GN	4401	||1 S+1== "な"	어미 だけでは 뒤에 な가 오면 는 것만이를 고른다. (미발동: rare-context)	jisjk:364224		
 だけでは	8 것만이	S560			GN	4402	||1 S+1== "な"	뒤에 な가 오면 だけでは 어미를 것만이로 고른다. (미발동: rare-context)	jisjk:364225		
-だけではだめ	 것만으로는 안 %D5@	G8U0			GN				jisjk:139560		
+だけではだめ	 것만으로는 안 %D5@	G8U0		Av	GN				jisjk:139560		
 だけではな	만이 아$A3@	H7N0		TuPj	GN				jisjk:136994		
 だけではないだろうか	4 것만은 아닐까	S560			GN				jisjk:343103		
 だけでは無	만이 아$A3@	H7N0		TuPj	GN				jisjk:344481		
@@ -31843,7 +31843,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ちくりと	조금	E311			GN				jisjk:720		
 ちくわ	어묵	N110	VFd		GN				jisjk:153352		
 ちぐはぐ	짝짝이	I110			GN				jisjk:41284		
-ちぐはぐ	조화가 잘 안 %D5@	G8U0			GN				jisjk:140384		
+ちぐはぐ	조화가 잘 안 %D5@	G8U0		Av	GN				jisjk:140384		
 ちけっと	티켓	I110	VMo		GN				jisjk:119130		
 ちさあき	치사아키	N130	QPN	Wb	GN				jisjk:369245		
 ちさと	치사토	N130	QPN	Wb	GN				jisjk:340413		
@@ -32383,7 +32383,7 @@ ttt	ttt	K110			GN				jisjk:201744
 つきた	우뚝 &FG@	M424	VPl		GN				jisjk:142437		
 つきたお	밀어서 쓰러뜨&AA@	M443			GN				jisjk:142432		
 つきたて	꽂아 세&AI@	M447			GN				jisjk:142443		
-つきだ	내&AB@	M443			GN				jisjk:142449		
+つきだ	내&LN@	M443			GN				jisjk:142449		
 つきだ	넘&A2@	M443	VHn		GN				jisjk:142457		
 つきだし	기본안주	N110	VFd		GN				jisjk:268026		
 つきっきりで	붙어서	E300			GN				jisjk:341863		
@@ -37208,8 +37208,8 @@ ttt	ttt	K110			GN				jisjk:201744
 に向けられ	(을)를 향&AV@	M427		TuPj	GN				jisjk:145608		
 に向ってであ	에 향해서&Ac@	M428		Tu	GN				jisjk:148003		
 に喜んでいただけ	(이)가  기뻐&AV@	M447		Tu	GN				jisjk:262799		
-に困	(이)가 곤란&AV@	M418		Tu	GN				jisjk:91232		
-に困	곤란&AV@	M418			GN	3787	||1 &&2 P-1== "4**" U-1== "Rず"	앞 동사의 어미가 ず로 끝나면 に困를 곤란하다로 고른다. (미발동: rare-context)	jisjk:346605		
+に困	(이)가 곤란&Mf@	M418		Tu	GN				jisjk:91232		
+に困	곤란&Mf@	M418			GN	3787	||1 &&2 P-1== "4**" U-1== "Rず"	앞 동사의 어미가 ず로 끝나면 に困를 곤란하다로 고른다. (미발동: rare-context)	jisjk:346605		
 に基づ	에 근거&AV@	M421		TuPj	GN				jisjk:147509		
 に塗れ	투성이가 &C6@	M417			GN				jisjk:91242		
 に増や	(으)로 늘&AA@	M423		TuPj	GN				jisjk:264422		
@@ -37699,7 +37699,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ねんあまりしかたっていな	년 남짓밖에 지나지 $D7@	H7N0			GN				jisjk:137542		
 ねんごろ	공손%A1@	G8U0			GN				jisjk:143264		
 ねんざ	염좌	K130	UTi	Hd	GN				jisjk:103812		
-ねんたらず	년이 채 안 %D5@	G8U0			GN				jisjk:139488		
+ねんたらず	년이 채 안 %D5@	G8U0		Av	GN				jisjk:139488		
 ねんどはじめ	년초	N110	UMe		GN				jisjk:161173		
 ねんね	잠	I110			GN				jisjk:106309		
 ねんねこ	포대기	I110			GN				jisjk:113130		
@@ -126996,7 +126996,7 @@ ttt	ttt	K110			GN				jisjk:201744
 傍訓	후리가나	N110	UTs		GN				jisjk:251272		
 傍証	방증	N110		Hd	GN				jisjk:22976		
 傍論	방론	N110			GN				jisjk:160682		
-傍迷惑	남에게 폐가 %D5@	G8U0			GN				jisjk:143370		
+傍迷惑	남에게 폐가 %D5@	G8U0		Av	GN				jisjk:143370		
 傍陽	소에히	N130	QCTVPl		GN				jisjk:304777		
 傍題	부제	N110			GN				jisjk:251334		
 傑人	걸물	N110	VHn		GN				jisjk:178031		
@@ -195746,7 +195746,7 @@ ttt	ttt	K110			GN				jisjk:201744
 差し入れ品	차입품	N110			GN				jisjk:268002		
 差し出	&A6@	M433			GN				jisjk:95180		
 差し出	보&A6@	M433	VHnPOs		GN	820	||2 ||4 S-2== "手紙" S-2== "葉書き" S-2== "郵便物" S-2== "小包" ||4 S+1== "手紙" S+1== "葉書き" S+1== "郵便物" S+1== "小包"	두 단어 앞이나 바로 뒤에 手紙·葉書き·郵便物·小包가 있으면 差し出를 '보내다'로 고른다. (미발동: rare-word)	jisjk:95181		
-差し出	내&AB@	M443	XXX		GN				jisjk:121169		
+差し出	내&LN@	M443	XXX		GN				jisjk:121169		
 差し出	발송&AV@	M443			GN				jisjk:121175		
 差し出	주제넘게 나&AD@	M427			GN				jisjk:121234		
 差し出がまし	주제$KI@	H7N0			GN				jisjk:120894		
@@ -195766,7 +195766,7 @@ ttt	ttt	K110			GN				jisjk:201744
 差し回し	배차	N110			GN				jisjk:268024		
 差し固め	꼭 &FQ@	M437			GN				jisjk:95161		
 差し固め	굳게 지&AQ@	M447			GN				jisjk:121054		
-差し延べ	내&AB@	M447			GN				jisjk:121263		
+差し延べ	내&LN@	M447			GN				jisjk:121263		
 差し引	공제&AV@	M441	VMo		GN				jisjk:121312		
 差し引かれ	공제&C6@	M427		Dx	GN	1399	||1 &&2 S-1== "を" D-1= "(이)가"	差し引かれ를 を 뒤에서 공제되다로 고르고 を를 이·가로 바꾼다. (미발동: rare-word)	jisjk:120481		
 差し引き	차감	N110			GN				jisjk:108974		
@@ -195871,14 +195871,14 @@ ttt	ttt	K110			GN				jisjk:201744
 差をつけ	차이를 &A6@	M447			GN				jisjk:120789		
 差をつけられ	차가 &A5@	M427			GN				jisjk:120787		
 差を付け	차이를 &A6@	M427		Pn	GN				jisjk:354713		
-差付け	내&AB@	M447			GN				jisjk:121219		
+差付け	내&LN@	M447			GN				jisjk:121219		
 差入	차입	N110			GN				jisjk:35132		
 差入	들이비&AO@	M417			GN				jisjk:120967		
 差入れ	집어&H5@	M447			GN				jisjk:120976		
 差出	차출	N110		Hd	GN				jisjk:12243		
 差出	&A6@	M433			GN				jisjk:12244		
 差出	제출&AV@	M433			GN				jisjk:121179		
-差出	내&AB@	M443	VBp		GN				jisjk:121184		
+差出	내&LN@	M443	VBp		GN				jisjk:121184		
 差出	주제넘게 나&AD@	M427			GN				jisjk:121237		
 差出がまし	주제$KI@	H7N0			GN				jisjk:120900		
 差出し方	내미는 방법	N110			GN				jisjk:163651		
@@ -199251,7 +199251,7 @@ ttt	ttt	K110			GN				jisjk:201744
 年越しの	년 넘는	N110		Nn	GN				jisjk:151624		
 年越し蕎麦	해넘이 소바	N110	VFd		GN				jisjk:245896		
 年越し詣で	제야 참배	N110	UCl		GN				jisjk:245897		
-年足らず	년이 채 안 %D5@	G8U0			GN				jisjk:139487		
+年足らず	년이 채 안 %D5@	G8U0		Av	GN				jisjk:139487		
 年較差	연교차	N110	VSs		GN				jisjk:248764		
 年輩	중년	N110	VHn	Ct	GN				jisjk:18255		
 年輪	연륜	N110			GN				jisjk:18251		
@@ -208265,7 +208265,7 @@ ttt	ttt	K110			GN				jisjk:201744
 恐れての	두려워하는	E0H0			GN				jisjk:150307		
 恐れのあ	우려가 &HN@	M428		Pn	GN				jisjk:265306		
 恐れのな	우려가 $FA@	H7U0			GN				jisjk:344378		
-恐れ入	송구&AV@	M418			GN				jisjk:91953		
+恐れ入	송구&Mf@	M418			GN				jisjk:91953		
 恐れ入	놀&A9@	M428	SFl		GN				jisjk:146226		
 恐れ多	송구스$G7@	H7U0			GN				jisjk:5378		
 恐れ気	공포심	I110	UFl		GN				jisjk:61882		
@@ -253251,7 +253251,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気持ちが楽にな	기분이 편해&AL@	M428		Pn	GN				jisjk:342505		
 気持ちが若	마음이 $FD@	H7N0			GN				jisjk:122538		
 気持ちにさせ	기분이 들게 &AV@	M427		Pn	GN				jisjk:364681		
-気持ちばかりで恐縮でござ	변변치 않아 송구&AV@	M4U8			GN				jisjk:267469		
+気持ちばかりで恐縮でござ	변변치 않아 송구&Mf@	M4U8			GN				jisjk:267469		
 気持ちもつかめな	기분도 파악할 수 $FA@	H7U0		Pn	GN				jisjk:268138		
 気持ちよ	기분 $DE@	H7N0			GN				jisjk:122541		
 気持ちをふっき	나쁜 감정을 날려 보&A6@	D4U8			GN				jisjk:260745		
@@ -292171,7 +292171,7 @@ ttt	ttt	K110			GN				jisjk:201744
 突き入れ	찔러 &H5@	M447			GN				jisjk:142339		
 突き出	쑥 내&LN@	M443			GN				jisjk:115245		
 突き出	뚫고 나&AH@	M417			GN				jisjk:115246		
-突き出	내&AB@	M443			GN				jisjk:142448		
+突き出	내&LN@	M443			GN				jisjk:142448		
 突き出	넘&A2@	M443	VHn		GN				jisjk:142454		
 突き出	돌출&AV@	M427	VPl		GN				jisjk:142479		
 突き出し	밀어내기	N110		Hd	GN				jisjk:7408		
@@ -292279,7 +292279,7 @@ ttt	ttt	K110			GN				jisjk:201744
 突入	돌입	N110		Hd	GN				jisjk:19539		
 突入電流	돌입전류	N110			IT				jisjk:260965		
 突出	돌출	N110		Hd	GN				jisjk:19544		
-突出	내&AB@	M443			GN				jisjk:142460		
+突出	내&LN@	M443			GN				jisjk:142460		
 突出	돌출&AV@	M417			GN				jisjk:142482		
 突出し長	돌출 길이	N110			GN				jisjk:164572		
 突出し長さ	돌출 길이	N110			GN				jisjk:164570		
@@ -317624,7 +317624,7 @@ ttt	ttt	K110			GN				jisjk:201744
 行き当たりばったりの	되어가는 대로 하는	E0H0			GN				jisjk:123700		
 行き当り	막다른 곳	N110	VPl		GN				jisjk:156022		
 行き悩	나아가지 못&AV@	M415			GN				jisjk:95902		
-行き悩	곤란&AV@	M425			GN				jisjk:140556		
+行き悩	곤란&Mf@	M425			GN				jisjk:140556		
 行き戻り	왕복	I110			GN				jisjk:88765		
 行き抜け	통과	I110			GN				jisjk:88766		
 行き掛かり	내친 걸음	I110			GN				jisjk:109401		
@@ -317812,7 +317812,7 @@ ttt	ttt	K110			GN				jisjk:201744
 行恒	유키츠네	N130	QCTVPl		GN				jisjk:336942		
 行恵	유키에	N130	QPN	Wb	GN				jisjk:13400		
 行悖	행패	N110			GN				jisjk:38834		
-行悩	곤란&AV@	M425			GN				jisjk:140558		
+行悩	곤란&Mf@	M425			GN				jisjk:140558		
 行戸	유쿠도	N130	QCTVPl		GN				jisjk:336973		
 行才	교사이	N130	QCTVPl		GN				jisjk:290131		
 行抜路地	빠져나가는 골목	N110	VPl		GN				jisjk:125276		
@@ -324524,8 +324524,8 @@ ttt	ttt	K110			GN				jisjk:201744
 言い伝えられ	전해&AL@	M4U7	UTsUSe		GN				jisjk:365911		
 言い値	부르는 값	I110	VMo		GN				jisjk:78114		
 言い入れ	신청&AV@	M447			GN				jisjk:138971		
-言い兼ね	말하기 곤란&AV@	M437	UTs		GN				jisjk:94063		
-言い兼ね	말하기 거북&AV@	M447			GN				jisjk:139102		
+言い兼ね	말하기 곤란&Mf@	M437	UTs		GN				jisjk:94063		
+言い兼ね	말하기 거북&Mf@	M447			GN				jisjk:139102		
 言い出	말하기 시작&AV@	M443	UTs		GN				jisjk:94096		
 言い出	말&AV@	M443	UTs		GN				jisjk:139224		
 言い出し	허두	N110	UTs		GN				jisjk:10543		
@@ -332338,7 +332338,7 @@ ttt	ttt	K110			GN				jisjk:201744
 足成	아시나루	N130	QCTVPl		GN				jisjk:269893		
 足手	손발	N110	VBp		GN				jisjk:227250		
 足手まとい	거치적거림	I110			GN				jisjk:110840		
-足手まとい	방해가 %D5@	G8U0			GN				jisjk:119243		
+足手まとい	방해가 %D5@	G8U0		Av	GN				jisjk:119243		
 足手まといにな	방해가 &C6@	M428		Dx	GN				jisjk:140189		
 足手纏い	거치적 거림	I110			GN				jisjk:110834		
 足払い	다리후리기	I110		Hd	GN				jisjk:83827		

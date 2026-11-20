@@ -345,6 +345,13 @@ bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int
 // Whether text starts with a particle or punctuation after a noun, or is empty.
 bool NounEndAt(std::string_view text);
 
+// The length of the kana name of the name layer, two kana or more, that starts s and that an
+// honorific of honorific.name follows (そうすけ君, こうのすけくん) and no dictionary word that starts inside
+// the name runs through (みなさん of がんばるみなさん), or 0: such a name is whole, and no
+// word before it ends inside it (走ってきたそうすけ君: not 来たい and そう, nor the volitional of 来たす;
+// spec LEX-7866).
+std::size_t NameBeforeHonorific(const dict::Snapshot& snapshot, std::string_view s);
+
 // Whether the adjective stem with its nominal ending is a word of the dictionary already: stem is
 // also the key of a verb, whose continuative it then spells (楽し of 楽しむ: 楽しみ), or stem and
 // nominal are the key of a noun (高み, 甘み).

@@ -913,7 +913,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なおも	여전히	E300			GN				xxx llm	1		w:905
 ながい間	한참	N110			GN						ながいあいだ	w:906
 なぐり倒	때려누&AJ@	M423			GN						なぐりたおす	w:907
-なけなし	얼마 안 %D5@	G8U0			GN				llm			w:908
+なけなし	얼마 안 %D5@	G8U0		Av	GN				llm			w:908
 なげ	한탄&AV@	M421			GN				xxx llm			w:909
 なげ	던&AL@	M427			GN				llm			w:910
 なげだ	내던&AL@	M423			GN				llm			w:911

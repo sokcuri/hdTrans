@@ -144,6 +144,7 @@
 //= ending.voice-desire	Forms of wanting after (ら)れ, which only the passive takes (褒められたい, 見られたくない).
 //= ending.voice-readily	Words on the stem form after (ら)れ that say how readily, how much or how long it happens, which only the passive takes (忘れられやすい, 見られにくい, 忘れられがち, 見られすぎる, 言われ続ける; the potential of one is 言い続けられる), and かね of what may well happen after (ら)れ or せ (誤解されかねない, 狂わせかねない -게 할 수도 있다; LEX-7507).
 //= ending.voice-polite	Polite forms after (ら)れ; in a question with no subject they ask the listener, whose act the (ら)れ honours (何を読まれているんですか 무엇을 읽고 계십니까).
+//= ending.concession	Ends of a conjugated word that concede, even if: the past in たって or だって and the volitional before と or が (考えたって, 言ったって, 読んだって, 頑張ろうと, 泣こうが, 高かろうが, 何だろうと). A いくら before them is 아무리 (いくら考えたって 아무리 생각해도), not a question of how much.
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ, 泣いてんですよ; spec LEX-5074).
@@ -6431,6 +6432,7 @@ noun.result-sareru	表示
 noun.result-sareru	拘束
 noun.result-sareru	掲載
 noun.result-sareru	確保
+noun.result-sareru	洗練
 
 noun.other-giver	人
 noun.other-giver	誰か
@@ -9389,6 +9391,9 @@ verb.result-state	分からなくな
 verb.result-state	判らなくな
 verb.result-state	孤立
 verb.result-state	日が暮れ
+verb.result-state	身に付
+verb.result-state	身につ
+verb.result-state	身に着
 verb.destination-state	行
 adverb.frequency	何度も
 adverb.frequency	何度
@@ -11410,6 +11415,34 @@ ending.final-quote	たい
 ending.final-quote	た
 ending.final-quote	から
 ending.final-quote	ば
+ending.concession	たって
+ending.concession	だって
+ending.concession	おうと
+ending.concession	おうが
+ending.concession	こうと
+ending.concession	こうが
+ending.concession	ごうと
+ending.concession	ごうが
+ending.concession	そうと
+ending.concession	そうが
+ending.concession	ぞうと
+ending.concession	ぞうが
+ending.concession	とうと
+ending.concession	とうが
+ending.concession	どうと
+ending.concession	どうが
+ending.concession	のうと
+ending.concession	のうが
+ending.concession	ぼうと
+ending.concession	ぼうが
+ending.concession	ぽうと
+ending.concession	ぽうが
+ending.concession	もうと
+ending.concession	もうが
+ending.concession	ろうと
+ending.concession	ろうが
+ending.concession	ようと
+ending.concession	ようが
 
 ko.utterance-end	다
 ko.utterance-end	요
