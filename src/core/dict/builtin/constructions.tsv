@@ -1337,6 +1337,17 @@ cx:toshite-state:10	LEX-66	&&4 S+0== "してい" D+0== "하고 &HN@" S-1== "Rと
 cx:toshite-state:20	LEX-66	&&6 S+0== "Rと" F+0== "verb" D+0== "R&AV@" L+0== @ko-adjective.hada-state Y+0== "1고" ||2 S+1== "い" S+1== "居"	map-target-tail @hada-adjective take-prev-target@+1	堂々としている 당당하다
 cx:toshite-state:30	LEX-66	&&5 S+0== "Rと" F+0== "verb" D+0== "R&AV@" L+0== @ko-adjective.hada-state Y+0== "1고 있어"	map-target-tail @hada-adjective set-ending "6"	堂々としていなさい 당당해
 cx:toshite-state:40	LEX-66	&&4 F+0== "fixed" D+0== @ko-root.hada-state S+1== "してい" D+1== "하고 &HN@"	map-target @state-root take-prev-target@+1	しんとしている 고요하다
+//= taru-adverb	after Select 61	The と that L6402 reads 하게 after a タリ noun (gram Tr) before an act is the adverb of the state the noun names: the root with 히 for one of ko-root.hi-adverb (黙然と腕を組む 묵묵히 팔짱을 끼다, 毅然と断る 의연히 거절하다) and with 하여 for one of ko-root.hayeo-adverb (愕然と立ち尽くす 아연실색하여 우두커니 서다). The verb of a と word read as a 하다 adjective of ko-adjective.hada-state, in して right before another verb, is the manner of that act, 하게 (冷然として答えた 냉담하게 대답했다), not its own act 해.
+cx:taru-adverb:5	LEX-7824	&&4 S+0== "と" D+0== "하게" G-1== "Tr" S+1== "Lすべ"	set-target ""	ここは毅然とすべきだ 의연해야
+cx:taru-adverb:10	LEX-7824	&&5 S+0== "Lと" D+0== "L하게" G-1== "Tr" D-1== @ko-root.hi-adverb !1 S+1== "Lさせ"	replace-head "하게" "히"	黙然と腕を組んだ 묵묵히 팔짱을
+cx:taru-adverb:15	LEX-7824	&&5 S+0== "と" D+0== "하게" G-1== "Tr" D-1== @ko-root.bare-adverb !1 S+1== "Lさせ"	set-target " "	爛々と光る目 반짝반짝 빛나는 눈
+cx:taru-adverb:20	LEX-7824	&&5 S+0== "Lと" D+0== "L하게" G-1== "Tr" D-1== @ko-root.hayeo-adverb !1 S+1== "Lさせ"	replace-head "하게" "하여"	愕然と立ち尽くした 아연실색하여
+cx:taru-adverb:40	LEX-7824	&&4 ||3 S+0== "Lと言" S+0== "Lと思" S+0== "Lと考" D+0== "L(이)라고 " G-1== "Tr" D-1== @ko-root.hi-adverb	replace-head "(이)라고" "히"	飄々と言った 초연히 말했다
+cx:taru-adverb:42	LEX-7824	&&4 ||3 S+0== "Lと言" S+0== "Lと思" S+0== "Lと考" D+0== "L(이)라고 " G-1== "Tr" D-1== @ko-root.hayeo-adverb	replace-head "(이)라고" "하여"	愕然と思った 아연실색하여 생각했다
+cx:taru-adverb:44	LEX-7824	&&3 ||3 S+0== "Lと言" S+0== "Lと思" S+0== "Lと考" D+0== "L(이)라고 " G-1== "Tr"	replace-head "(이)라고" "하게"	冷然と言い放った 냉담하게
+cx:taru-adverb:50	LEX-7824	&&3 S+0== "と並んで" G-1== "Tr" D-1== @ko-root.hi-adverb	set-target "히 줄지어"	本が整然と並んでいた 책이 정연히 줄지어 있었다
+cx:taru-adverb:52	LEX-7824	&&2 S+0== "と並んで" G-1== "Tr"	set-target "하게 줄지어"	雑然と並んでいる 어수선하게 줄지어 있다
+cx:taru-adverb:30	LEX-7824	&&7 S+0== "Rと" F+0== "verb" D+0== "R&AV@" L+0== @ko-adjective.hada-state Y+0== "6" ||2 P+1== "4" F+1== "verb" !1 S+1== @Laux.te-start	set-ending "1게"	冷然として答えた 냉담하게 대답했다
 //= ino-question	after Select 80	The いの that ends a sentence before a question mark asks for the reason, -는 거야, not the -아/어 of a statement (進展ないの!? 진전 없는 거야!?, 痛いの…… 아파……).
 cx:ino-question:10	LEX-69	&&3 U+0== "Rいの" Y+0== "6" F+0== "question-after"	set-ending "4 거야"	進展ないの!? 진전 없는 거야!?
 //= ask-person	after Select 85	A 聞く right after a person and に asks that person, 묻다 (俺に聞くなよ 나에게 묻지 마, お前に聞きたいことがある 너에게 묻고 싶은 것이 있다), unless it is past, which may say what was heard from them (先生に聞いたんだよ 선생님에게 들었어); たら and たり are no past and still ask. Before もらう, いただく or ほしい the person is the one who listens (裁判官に聞いていただきたかった 재판관이 들어 주셨으면); with an object in its clause or before 分かる, 知る it is what was heard (話を色んな人に聞いてきた, 医者に聞いて分かった).
