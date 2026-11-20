@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <atomic>
+#include <bit>
+#include <cstdint>
 #include <span>
 #include <string>
 #include <unordered_map>
@@ -399,6 +401,9 @@ bool PoliteLevel(Flusher& f, const Item* it) {
 struct NamedFeature {
     std::string_view name;
     CxFeature test;
+    // How many words away from its own the test reads a candidate, target or ending (what an action
+    // changes, CxAtom::reach): 0 for a test of the word's own, kWideReach unless shown otherwise.
+    uint8_t reach = kWideReach;
 };
 
 // The features a condition names with F. Each is a property of the item at the atom's position.
@@ -412,14 +417,14 @@ bool EllipsisItem(const Item* it) {
 // A feature reads the chain and changes nothing: no surface, no link and no selection (the atom values
 // RunConstructions keeps for a word, and its surface numbers, rely on it).
 constexpr NamedFeature kFeatures[] = {
-    {"exists", [](Flusher&, const Item*) { return true; }},
-    {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
-    {"conjugating", [](Flusher&, const Item* it) { return it->detail->Yougo(); }},
-    {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }},
-    {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
-    {"last", [](Flusher&, const Item* it) { return it->After() == nullptr; }},
-    {"verb", [](Flusher&, const Item* it) { return it->detail->cls == kDetailVerb; }},
-    {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }},
+    {"exists", [](Flusher&, const Item*) { return true; }, 0},
+    {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }, 0},
+    {"conjugating", [](Flusher&, const Item* it) { return it->detail->Yougo(); }, 0},
+    {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }, 0},
+    {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }, 0},
+    {"last", [](Flusher&, const Item* it) { return it->After() == nullptr; }, 0},
+    {"verb", [](Flusher&, const Item* it) { return it->detail->cls == kDetailVerb; }, 0},
+    {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }, 0},
     // The Korean of the next word starts with this word's Korean and a space.
     {"lemma-starts-next",
      [](Flusher& f, const Item* it) {
@@ -472,8 +477,8 @@ constexpr NamedFeature kFeatures[] = {
              if (const int a = asks(cur->group->surface, 0); a >= 0) return a == 1;
          }
          return false;
-     }},
-    {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
+     }, 0},
+    {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }, 0},
     // Nothing but spaces, ……-like marks and a stutter of the word stands before it on its line (StartsLine).
     {"starts-line", [](Flusher& f, const Item* it) { return StartsLine(f.w, it); }},
     // The line uses the tic ぽい (PoiLine).
@@ -499,27 +504,27 @@ constexpr NamedFeature kFeatures[] = {
     // The same with a word that is no answer and a question mark (え？): AfterCallReply with puzzled.
     {"after-puzzled-question", [](Flusher& f, const Item* it) { return AfterCallReply(f.w, it, true); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
-    {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
+    {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }, 0},
     {"after-space", [](Flusher& f, const Item* it) {
          return it->start == 0 && it->tokenIndex >= 0 &&
                 f.w.tokens[static_cast<std::size_t>(it->tokenIndex)].afterSpace;
-     }},
+     }, 0},
     {"after-blank", [](Flusher& f, const Item* it) {
          if (it->start != 0 || it->tokenIndex <= 0) return false;
          const int type = f.w.Tok(it->tokenIndex - 1).type;
          return type == tokenizer::kTypeAsciiSpace || type == tokenizer::kTypeWideSpace;
-     }},
+     }, 0},
     {"filler", [](Flusher&, const Item* it) {
          return (it->Code(it->selected).starts_with("32") ||
                  (it->detail->cls == kDetailInfo &&
                   dict::InClass(HDTRANS_CLASS("word.pause-filler"), it->group->surface)));
-     }},
-    {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
+     }, 0},
+    {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }, 0},
     // The chosen candidate reads the word as a count, as the rule code Nq (三, 三人, 半分, 十日).
     {"count", [](Flusher&, const Item* it) { return it->ReadsCount(it->selected); }},
-    {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
+    {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }, 2},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
-    {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
+    {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }, 0},
     // Some candidate of the word, chosen or not, is a noun that takes する (gram Hd): 休憩, whose chosen row may lack the code.
     {"suru-noun",
      [](Flusher&, const Item* it) {
@@ -568,7 +573,7 @@ constexpr NamedFeature kFeatures[] = {
     // The word stands outside quotes in a document that writes its speech in 「」: narration.
     {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
     // The word stands inside 「」 or 『』 (Item::InQuote).
-    {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }},
+    {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }, 0},
     // The questions of the word's speech are 해체 (CasualLevel).
     {"casual-level", CasualLevel},
     // The word's speech is 해요체 or 합쇼체 (PoliteLevel).
@@ -584,7 +589,7 @@ constexpr NamedFeature kFeatures[] = {
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
-    {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
+    {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }, 0},
     // The surface has a kanji and the name layer has it as a person's name (美咲, read as a town in
     // the base dictionary).
     {"person-name",
@@ -599,20 +604,20 @@ constexpr NamedFeature kFeatures[] = {
          if (!kanji) return false;
          const std::vector<dict::Record> names = f.w.snapshot.NameRecords(s);
          return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
-     }},
+     }, 0},
     // The verb was analysed as a causative.
     {"causative", [](Flusher&, const Item* it) {
          return it->detail->record == 2 ||
                 (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
-     }},
+     }, 0},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
-    {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
+    {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }, 0},
     // A dictionary word that is the passive of a dictionary verb (書かれ, 使われ, 見られ; PassiveBaseVerb).
-    {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }},
+    {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }, 0},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
     {"causative-passive", [](Flusher&, const Item* it) {
          return it->DetailRecord() == 5 && it->detail->voice != Voice::Potential;
-     }},
+     }, 0},
     // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
     {"respectful", [](Flusher&, const Item* it) { return it->detail->Yougo() && it->detail->voice == Voice::Respectful; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
@@ -624,13 +629,13 @@ constexpr NamedFeature kFeatures[] = {
          const int end = p->start + p->length;
          return (it->tokenIndex == p->tokenIndex && it->start == end) ||
                 (it->tokenIndex == p->tokenIndex + 1 && end == static_cast<int>(p->text.size()) && it->start == 0);
-     }},
+     }, 0},
     // The surface starts with a letter or a digit (Unicode L or Nd).
     {"alnum-start",
      [](Flusher&, const Item* it) {
          const char32_t r = text::DecodeRune(it->group->surface).cp;
          return text::IsLetter(r) || text::IsDigit(r);
-     }},
+     }, 0},
     // The surface holds a kanji other than 々.
     {"kanji",
      [](Flusher&, const Item* it) {
@@ -644,7 +649,7 @@ constexpr NamedFeature kFeatures[] = {
     // The surface is katakana only, with ー (KatakanaSurface).
     {"katakana", [](Flusher&, const Item* it) { return KatakanaSurface(it->group->surface); }},
     // The Korean of the selected candidate is empty or spaces.
-    {"blank", [](Flusher&, const Item* it) { return TrimSpace(it->EntryText(it->selected)).empty(); }},
+    {"blank", [](Flusher&, const Item* it) { return TrimSpace(it->EntryText(it->selected)).empty(); }, 0},
     // The Korean lemma of the selected candidate ends in a final consonant (어떤 것, 책).
     {"final-consonant",
      [](Flusher& f, const Item* it) {
@@ -652,14 +657,14 @@ constexpr NamedFeature kFeatures[] = {
          return c == 'c' || c == 'l';
      }},
     // The Korean of the selected candidate is in a copula family (큰일$AH@, output::CopulaTarget).
-    {"copula-target", [](Flusher& f, const Item* it) { return output::CopulaTarget(it->EntryText(it->selected), f.families); }},
+    {"copula-target", [](Flusher& f, const Item* it) { return output::CopulaTarget(it->EntryText(it->selected), f.families); }, 0},
     // The word is a みたい that can follow a clause (Item::MitaiLike).
     {"mitai-like", [](Flusher&, const Item* it) { return it->MitaiLike(); }},
     // A contrast goes on after the stem: ではないが (ContrastFollows).
     {"contrast", [](Flusher&, const Item* it) { return ContrastFollows(it); }},
     // The item ends the utterance or the quote (QuoteEnd); UtteranceEnd also passes over a comma,
     // a dash or a small つ.
-    {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
+    {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }, 0},
     // A full stop (。, ．, . as the canonical token) follows the word right after it, in its token or as the
     // next token.
     {"period-after",
@@ -686,7 +691,7 @@ constexpr NamedFeature kFeatures[] = {
     // More words follow on the line past the end of the sentence (SpeechGoesOn).
     {"speech-goes-on", [](Flusher& f, const Item* it) { return SpeechGoesOn(f.w, it); }},
     // The item ends its sentence: the end of the utterance, or ！？!? after it (SentenceEnd).
-    {"sentence-end", [](Flusher& f, const Item* it) { return SentenceEnd(f.w, it); }},
+    {"sentence-end", [](Flusher& f, const Item* it) { return SentenceEnd(f.w, it); }, 0},
     // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
     {"predicate-follows", [](Flusher&, const Item* it) { return PredicateFollows(it); }},
     // The verb was analysed with no passive, potential or causative.
@@ -719,12 +724,12 @@ constexpr NamedFeature kFeatures[] = {
              t.remove_prefix(r.size);
          }
          return false;
-     }},
+     }, 0},
     // The conjugation of a verb in the potential (潜れる, 使える).
     {"potential", [](Flusher&, const Item* it) {
          return it->DetailRecord() == 4 ||
                 (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
-     }},
+     }, 0},
     // The Korean of the chosen candidate is an adjective or 있다, 없다 (배고프다, 효과가 있다): a
     // marker of an adjective family, of a family whose declarative is bare, or a stem that ends like
     // an adjective of ko-adjective.stem-end.
@@ -927,13 +932,20 @@ public:
             if (a.field == CxField::Part) raw = dict::PartPatternOf('P', raw);
             if (a.field == CxField::Feature) {
                 for (const NamedFeature& n : kFeatures) {
-                    if (n.name == raw) a.feature = n.test;
+                    if (n.name == raw) {
+                        a.feature = n.test;
+                        a.reach = n.reach;
+                    }
                 }
                 if (a.feature == nullptr) return tokens.Fail("no such feature");
                 a.match = CxMatch::Feature;
             }
             if (a.field == CxField::Class && raw.size() != 1) return tokens.Fail("K takes one letter");
             if (a.field == CxField::Gram && (raw.empty() || raw.size() % 2 != 0)) return tokens.Fail("G takes two-letter codes");
+            // Qw reads whether a question word comes before the word in its sentence.
+            for (std::size_t off = 0; a.field == CxField::Gram && off < raw.size(); off += 2) {
+                if (std::string_view(raw).substr(off, 2) == "Qw") a.reach = kWideReach;
+            }
             a.value = std::move(raw);
         }
         t_.nodes.push_back({rules::BodyKind::Or, true, static_cast<uint32_t>(t_.atoms.size()), 0});
@@ -1767,6 +1779,22 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
     }
     for (CxFamily& c : t.families) AnchorFamily(t, c);
     IndexPasses(t);
+    // The reach of each scan, from the atoms of its target and barrier (an operand order changes none).
+    for (uint32_t i = 0; i < t.nodes.size(); i++) {
+        CxNode& n = t.nodes[i];
+        if (n.atom || (n.kind != rules::BodyKind::ScanLeft && n.kind != rules::BodyKind::ScanRight)) continue;
+        int reach = 0;
+        for (uint32_t k = i + 1; k < n.end && reach < kWideReach; k++) {
+            const CxNode& m = t.nodes[k];
+            if (!m.atom) {
+                if (m.kind == rules::BodyKind::ScanLeft || m.kind == rules::BodyKind::ScanRight) reach = kWideReach;
+                continue;
+            }
+            const CxAtom& a = t.atoms[m.count];
+            reach = std::max(reach, a.reach == kWideReach ? int{kWideReach} : std::abs(int{a.delta}) + a.reach);
+        }
+        n.reach = static_cast<uint8_t>(std::min(reach, int{kWideReach}));
+    }
     return t;
 }
 
@@ -1942,10 +1970,10 @@ void Try(Flusher& f, const Item* it) {
 bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it);
 
 // The memo of the scan node i (Flusher::Constructions::scanValues), one value per word of the run.
-std::vector<uint64_t>& ScanValues(Flusher::Constructions& c, uint32_t i) {
+std::vector<Flusher::Constructions::ScanValue>& ScanValues(Flusher::Constructions& c, uint32_t i) {
     const auto found = std::ranges::lower_bound(c.scanSlots, i, {}, [](const auto& e) { return e.first; });
     if (found != c.scanSlots.end() && found->first == i) {
-        std::vector<uint64_t>& values = c.scanValues[found->second];
+        std::vector<Flusher::Constructions::ScanValue>& values = c.scanValues[found->second];
         if (values.size() < c.items.size()) values.resize(c.items.size());
         return values;
     }
@@ -1953,11 +1981,32 @@ std::vector<uint64_t>& ScanValues(Flusher::Constructions& c, uint32_t i) {
     return c.scanValues.emplace_back(c.items.size());
 }
 
+// The last epoch in which an action changed a word at a place from first to last of the run.
+uint32_t LastChange(const Flusher::Constructions& c, std::size_t first, std::size_t last) {
+    uint32_t epoch = 0;
+    for (std::size_t lo = c.leaves + first, hi = c.leaves + last + 1; lo < hi; lo >>= 1, hi >>= 1) {
+        if ((lo & 1) != 0) epoch = std::max(epoch, c.changes[lo++]);
+        if ((hi & 1) != 0) epoch = std::max(epoch, c.changes[--hi]);
+    }
+    return epoch;
+}
+
+// Notes that an action of this epoch changes the word x (Apply).
+void Changed(Flusher::Constructions& c, const Item* x) {
+    if (x->constructionPlace >= c.items.size() || c.items[x->constructionPlace] != x) {
+        c.lasting = false;
+        return;
+    }
+    for (std::size_t k = c.leaves + x->constructionPlace; k > 0; k >>= 1) c.changes[k] = std::max(c.changes[k], c.epoch);
+}
+
 // A scan: the first word in its direction where the target holds, before one where the barrier holds.
-// An unbounded scan from a word is the scan from the next word unless that word decides it, and no
-// condition changes in an epoch (only a row that fires changes the chain, and starts a new one), so a
-// long walk keeps its value for every word it passes; a later scan stops at one of them.
+// An unbounded scan from a word is the scan from the next word unless that word decides it, so a long
+// walk keeps its value for every word it passes; a later scan stops at one of them. The value holds
+// while no condition it read changes: in its epoch (only a row that fires changes the chain, and starts
+// a new one), and after while no action changed a word within the scan's reach of the words it walked.
 bool EvalScan(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
+    using ScanValue = Flusher::Constructions::ScanValue;
     const CxNode& n = t.nodes[i];
     const uint32_t target = i + 1;
     const uint32_t barrier = t.nodes[target].end;
@@ -1974,11 +2023,23 @@ bool EvalScan(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it
     }
     if (n.count != 0 || k < kPlain || f.constructions.word == nullptr) return false;
     Flusher::Constructions& c = f.constructions;
-    const uint64_t stamp = static_cast<uint64_t>(c.epoch) << 1;
     const auto placed = [&c](const Item* x) { return x->constructionPlace < c.items.size() && c.items[x->constructionPlace] == x; };
+    // Whether the value m of the scan from the word at place p holds: the words its target and barrier
+    // read are those within the reach of the words from the one after p to its stop.
+    const auto holds = [&](uint32_t p, const ScanValue& m) {
+        if (m.epoch == c.epoch) return true;
+        if (!c.lasting || n.reach == internal::kWideReach || m.epoch < c.epochStart || m.stop == ScanValue::kNoStop) return false;
+        const int64_t reach = n.reach, size = static_cast<int64_t>(c.items.size());
+        const int64_t first = step > 0 ? int64_t{p} + 1 - reach : int64_t{m.stop} - reach;
+        const int64_t last = step > 0 ? int64_t{m.stop} + reach : int64_t{p} - 1 + reach;
+        return LastChange(c, static_cast<std::size_t>(std::max<int64_t>(first, 0)),
+                          static_cast<std::size_t>(std::min<int64_t>(last, size - 1))) < m.epoch;
+    };
+    const auto stopAt = [&](const Item* x) { return placed(x) ? x->constructionPlace : ScanValue::kNoStop; };
     // from: the last word walked; the scan from it is the scan from it.
     std::vector<uint32_t> walked;
     bool v = false;
+    uint32_t stop = ScanValue::kNoStop;
     for (const Item* y = from;;) {
         if (!placed(y)) {
             // Not a word of the run: walk on as the scan does.
@@ -1988,22 +2049,30 @@ bool EvalScan(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it
             }
             break;
         }
-        if (const uint64_t m = ScanValues(c, i)[y->constructionPlace]; m >> 1 == c.epoch) {
-            v = (m & 1) != 0;
+        if (const ScanValue m = ScanValues(c, i)[y->constructionPlace]; holds(y->constructionPlace, m)) {
+            v = m.value;
+            stop = m.stop;
             break;
         }
         walked.push_back(y->constructionPlace);
         const Item* x = Neighbour(y, step);
-        if (x == nullptr) break;
-        if (Eval(f, t, target, x)) {
-            v = true;
+        if (x == nullptr) {
+            stop = y->constructionPlace;
             break;
         }
-        if (Eval(f, t, barrier, x)) break;
+        if (Eval(f, t, target, x)) {
+            v = true;
+            stop = stopAt(x);
+            break;
+        }
+        if (Eval(f, t, barrier, x)) {
+            stop = stopAt(x);
+            break;
+        }
         y = x;
     }
-    std::vector<uint64_t>& values = ScanValues(c, i);
-    for (const uint32_t place : walked) values[place] = stamp | static_cast<uint64_t>(v);
+    std::vector<ScanValue>& values = ScanValues(c, i);
+    for (const uint32_t place : walked) values[place] = {c.epoch, stop, v};
     return v;
 }
 
@@ -2064,6 +2133,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, 
            Selection source) {
     Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
     if (it == nullptr) return;
+    Changed(f.constructions, it);
     switch (a.verb) {
         case internal::CxVerb::SelectLemma:
         case internal::CxVerb::SelectTarget: {
@@ -2147,6 +2217,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, 
             // ending: the predicate moves onto this word's ending (堂々と + している 당당하다).
             Item* prev = it->prev;
             if (prev == nullptr || prev->selected < 0 || it->selected < 0) break;
+            Changed(f.constructions, prev);
             it->AssignEntrySurface(it->selected, std::string(prev->EntryText(prev->selected)), source);
             prev->AssignEntrySurface(prev->selected, std::string(), source);
             if (const int at = prev->DirectIndex(); at >= 0) prev->AssignDirectSlot(at, std::string(), source);
@@ -2315,6 +2386,9 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
         it->constructionPlace = static_cast<uint32_t>(c.items.size());
         c.items.push_back(it);
     }
+    c.lasting = std::ranges::none_of(c.items, [](const Item* x) { return x->w != nullptr && x->w->RubyPart(x->tokenIndex) == 1; });
+    c.leaves = std::bit_ceil(std::max<std::size_t>(c.items.size(), 1));
+    c.changes.assign(2 * c.leaves, 0);
     // The epochs: the stretches of this run between rows that fire. The places where the atoms of a
     // slot hold are found once in an epoch, or once in the run for a slot whose atoms read what no
     // action changes (FixedField).
@@ -2325,7 +2399,8 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
     const auto nextEpoch = [&c] {
         if (++c.epoch == UINT32_MAX) {
             std::ranges::fill(c.slotEpochs, 0);
-            for (std::vector<uint64_t>& values : c.scanValues) std::ranges::fill(values, 0);
+            for (auto& values : c.scanValues) std::ranges::fill(values, Flusher::Constructions::ScanValue{});
+            std::ranges::fill(c.changes, 0);
             c.epoch = 1;
             c.epochStart = 1;
             c.changedEpoch = 0;

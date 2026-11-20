@@ -43,6 +43,9 @@ enum class CxMatch : uint8_t { Literal, Member, MemberStart, MemberEnd, Feature 
 
 using CxFeature = bool (*)(Flusher& f, const Item* it);
 
+// No bound on the reach of an atom or a scan (CxAtom::reach, CxNode::reach).
+inline constexpr uint8_t kWideReach = UINT8_MAX;
+
 struct CxAtom {
     CxField field = CxField::Surface;
     CxMatch match = CxMatch::Literal;
@@ -52,6 +55,9 @@ struct CxAtom {
     const dict::internal::WordClass* set = nullptr;
     CxFeature feature = nullptr;
     uint32_t slot = 0;  // atoms that compare alike share a slot, the place of their value on a word
+    // How many words away from its own the atom reads what an action may change (Apply changes the
+    // candidates, targets and endings of the word it acts on); kWideReach for no bound.
+    uint8_t reach = 0;
 };
 
 struct CxNode {
@@ -59,6 +65,9 @@ struct CxNode {
     bool atom = false;
     uint32_t count = 0;  // lists: operands; scans: the bound, 0 for none; atoms: index into atoms
     uint32_t end = 0;    // one past the subtree
+    // Scans: how many words beyond those it walks its target and barrier read what an action may
+    // change; kWideReach for no bound (an atom without one, or a scan inside).
+    uint8_t reach = 0;
 };
 
 // The actions of a row. A new one may change candidates, targets and endings but no surface and no link
