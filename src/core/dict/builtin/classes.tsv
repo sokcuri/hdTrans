@@ -27,6 +27,8 @@
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
+//= adjective.te-state-aux	Stems of the adjectives after a て form that are a contracted いる with its い dropped, read as a word of their own: the ない of ていない (見てない, 強いてない; spec LEX-8021).
+//= follower.continuative-suffix	Starts of the suffixes after a verb's continuative that begin like a case particle (答えがたい, 答えがちだ, 答えにくい): the stem before them stays the verb, though a noun row spells it (spec LEX-8020).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.pair-people	Nouns of a pair or a set of people named together, after which 共 is both, 모두 (親子共 부모와 자식 모두, 夫婦共 부부 모두), not the plural 들.
 //= noun.group-subject	Words of everyone or of a number of people that can stand as a subject with no particle, which a 先〜てる after them tells about, not a promise (みんな先に行ってるよ 모두 먼저 가고 있어, 二人とも先に帰ってるよ).
@@ -4796,6 +4798,10 @@ verb.te-state-aux	お
 verb.te-state-aux	おり
 verb.te-state-aux	しま
 verb.te-state-aux	あ
+adjective.te-state-aux	な
+follower.continuative-suffix	がた
+follower.continuative-suffix	がち
+follower.continuative-suffix	にく
 mark.clause-link	けど
 mark.clause-link	けれど
 mark.clause-link	けれども

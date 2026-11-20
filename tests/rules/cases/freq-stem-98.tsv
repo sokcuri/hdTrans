@@ -4,14 +4,14 @@ cx:stem-noun:12	物価の押し上げを招く恐れがある。	has:물가의 �
 cx:stem-noun:12	住宅ローン金利の押し上げを招いて家計の重しとなる。	has:금리의 밀어 올리기를	fix	rewrites
 cx:stem-noun:12	用具入れのほうが広い。	has:용구 넣기 쪽이	fix	rewrites
 cx:stem-noun:12	用具入れで叩いた。	has:용구 넣기로	fix	rewrites
-cx:stem-noun:12	妻は調べに対し、介護に疲れたと話した。	lacks:조사해에	fix	rewrites
+lookup:stem-noun-over-verb	妻は調べに対し、介護に疲れたと話した。	has:조사에 대해	fix	lookup
 cx:stem-noun:12	第三国を迂回した制裁逃れに対応するため、輸出を禁止した。	has:제재 피하기에 대응	fix	rewrites
-cx:stem-noun:12	くしゃみの瞬間の尿漏れに対応する。	has:새기에 대응	fix	rewrites
-cx:stem-noun:12	左腕に走った痺れに、顔をしかめる。	has:저리기에,	fix	rewrites
-cx:stem-noun:12	焼けるような熱さが痺れに変わった直後だった。	has:저리기로 바뀐	fix	rewrites
+lexical:stem-noun-row	くしゃみの瞬間の尿漏れに対応する。	has:요실금에 대응	fix	lookup
+lookup:stem-noun-over-verb	左腕に走った痺れに、顔をしかめる。	has:저림에,	fix	lookup
+lookup:stem-noun-over-verb	焼けるような熱さが痺れに変わった直後だった。	has:저림으로 바뀐	fix	lookup
 cx:stem-noun:12	一切乱れのない制服。	lacks:흐트러지고가	fix	rewrites
 cx:stem-noun:12	追加引き締めに踏み切れば、緊張が高まる。	lacks:긴축시켜를	fix	rewrites
-cx:stem-noun:12	猫舌かと思いまして、温めにしておきました！	has:데우기로	fix	rewrites
+cx:stem-noun:12	猫舌かと思いまして、温めにしておきました！	lacks:데워로	fix	rewrites
 cx:stem-noun:12	食べに行こう。	먹으러 가자.	keep	rewrites
 cx:stem-noun:12	迎えに行く。	has:마중하러	keep	rewrites
 cx:stem-noun:12	見せに来た。	has:보이러 왔다	keep	rewrites
@@ -68,3 +68,43 @@ lookup:te-verb-over-noun	おきてを守れ。	has:규정을 지켜라	keep	look
 lookup:te-verb-over-noun	はじめてください。	has:시작해 주세요	keep	lookup
 lookup:te-verb-over-noun	あえて言わない。	굳이 말하지 않는다.	keep	lookup
 lookup:te-verb-over-noun	恐れが出ています。	has:우려가 나와 있습니다	keep	lookup
+lookup:te-verb-over-noun	犠牲を強いてない。	has:강요	fix	lookup
+lookup:te-verb-over-noun	犠牲を強いておる。	has:강요	fix	lookup
+lookup:te-verb-over-noun	犠牲を強いてんの？	has:강요	fix	lookup
+lookup:te-verb-over-noun	犠牲を強いてやがる。	has:강요	fix	lookup
+lookup:stem-noun-over-verb	悔いのないようにしよう。	has:후회가 없	fix	lookup
+lookup:stem-noun-over-verb	見覚えのない顔だ。	has:본 기억	fix	lookup
+lookup:stem-noun-over-verb	床の染みが広がる。	has:얼룩	fix	lookup
+lookup:stem-noun-over-verb	答えによっては許す。	has:대답에 따라	fix	lookup
+lookup:stem-noun-over-verb	答えの代わりに笑った。	has:대답 대신	fix	lookup
+lookup:te-verb-over-noun	改めてたずねた。	has:다시 물었다	keep	lookup
+lookup:te-verb-over-noun	改めてたしかめる。	has:다시 확인	keep	lookup
+lookup:te-verb-over-noun	改めてためす。	has:다시 시험	keep	lookup
+lookup:te-verb-over-noun	改めてたい焼きを食べた。	lacks:고치고	keep	lookup
+lookup:te-verb-over-noun	あえてたずねた。	has:굳이 물었다	keep	lookup
+lookup:te-verb-over-noun	せめてただの友達なら。	has:적어도	keep	lookup
+lookup:te-verb-over-noun	あえていたずらをした。	has:굳이 장난	keep	lookup
+lookup:te-verb-over-noun	日がさしていた。	has:비쳐	keep	lookup
+lookup:te-verb-over-noun	ご一緒さしていただきます。	lacks:찔러	keep	lookup
+lookup:te-verb-over-noun	それてっきり忘れてた。	has:틀림없이	keep	lookup
+lookup:te-verb-over-noun	われてっきり死んだと思った。	has:틀림없이	keep	lookup
+lookup:stem-noun-over-verb	出来がよかった。	has:성과가	fix	lookup
+lookup:stem-noun-over-verb	染みを抜く。	has:얼룩을	fix	lookup
+lookup:stem-noun-over-verb	調べに協力する。	has:조사에 협력	fix	lookup
+lookup:stem-noun-over-verb	悔いが残る。	has:후회가 남는다	keep	lookup
+lookup:stem-noun-over-verb	調べに行く。	has:조사하러	keep	lookup
+lookup:stem-noun-over-verb	答えにくい質問だ。	has:대답하기 곤란	keep	lookup
+lookup:stem-noun-over-verb	足が痺れた。	has:저렸다	keep	lookup
+lookup:stem-noun-over-verb	足が痺れ、立てない。	has:저려,	keep	lookup
+lookup:stem-noun-over-verb	痺れを切らした。	has:인내심의 한계	keep	lookup
+lookup:stem-noun-over-verb	見覚えのある顔。	has:낯익은 얼굴	keep	lookup
+lookup:stem-noun-over-verb	用具入れから取り出す。	lacks:넣고	keep	lookup
+lookup:te-verb-over-noun	そんな人は決していない。	has:결코 없다	keep	lookup
+lookup:te-verb-over-noun	犠牲を強いてしまった。	has:강요해	fix	lookup
+lookup:te-verb-over-noun	田舎でくらしているの。	has:생활하고 있어	fix	lookup
+lookup:stem-noun-over-verb	「いや、そのルートは外れの可能性が高い」	lacks:변두리	keep	lookup
+lookup:stem-noun-over-verb	歩き始めの子	has:걷기 시작의	keep	lookup
+lookup:stem-noun-over-verb	≪……あなたのお掛けになった電話番号は現在使われておりません≫	has:거신 전화번호	keep	lookup
+lookup:stem-noun-over-verb	甲府藩の御用をお務めになったんだ	has:맡으신	keep	lookup
+lookup:stem-noun-over-verb	ええ、そのつもりです。お借りできますか？	has:빌릴 수 있습니까	keep	lookup
+lookup:te-verb-over-noun	断じてない。	has:결코 없다	keep	lookup

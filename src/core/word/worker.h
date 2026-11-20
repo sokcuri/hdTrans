@@ -288,6 +288,17 @@ private:
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
     Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
+    // The reading at full[p:] that runs farthest: its end (p for none) and its item, and the farthest key end there.
+    struct Reach {
+        int end = 0;
+        int key = 0;  // the farthest end of a dictionary key there, endings left out
+        const Item* item = nullptr;
+    };
+    Reach ReadingReach(std::string_view full, int p, int token);
+    // LEX-8021 and LEX-8020: the record order at full[cursor:] for a noun or adverb row that spells a verb before its
+    // て form, and for an ichidan stem with a noun row before a case particle.
+    Record* VerbOverNounBeforeTe(Record* records, std::string_view full, int cursor, int token);
+    Record* NounOverStemBeforeParticle(Record* records, std::string_view full, int cursor, int token, const Item* parent);
     // The longer reading left at cursor that takes the place of c when the retry budget is spent; null for none.
     Item* LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c);
     // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends
