@@ -322,6 +322,9 @@
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
 //= adjective.ku-greeting	く forms of adjectives that are a greeting of their own, after which ね？ asks for agreement and is no cut negative くない (よろしくね？ 잘 부탁해?; ヤバくね？ 위험하지 않아?).
 //= adjective.ku-request	く forms of adjectives that make a request of their own with ね？ where no topic or subject comes before them in the sentence (そっと、優しくね？ 부드럽게 해?, みんなで楽しくね？); after one they are the cut negative くない (あいつ、優しくね？ 다정하지 않아?).
+//= dialect.predicate-word	Spoken and regional predicates read as their standard form where a word starts, before the end, a mark, a sentence particle, か, って, から, けど, の, ん, です or べ, longest first, the note the standard form (わぁった わかった, いがった よかった) (spec LEX-8101).
+//= dialect.pronoun-before-particle	Regional pronouns read as their standard form where a word starts before a particle or ら, the note the standard form (おどれは お前は, わいの わしの); before a comma or the end they stay (おどれ！ is the order to dance) (spec LEX-8101).
+//= dialect.adverb-before-verb	Regional adverbs read as their standard form where a word starts before a verb in kanji, the note the standard form (ようも抜かした よくも) (spec LEX-8101).
 //= adverb.western-kosoado	The western こ, そ, ど words in がん and げん, the note the plain adverb they stand for before the copula or a sentence particle that ends the sentence (そがんです 그래요, そがんね 그래, こげんか); before a verb or a noun the word stage reads them (そがん人 그런 사람).
 //= conjunction.archaic-start	Old conjunctions read only where they open a sentence or a quote, longest first, the note their plain form (されば、行こう 그러니까, 가자); inside a sentence they are verb forms and stay (攻撃されば, 大人になれど, お出で下されば).
 //= tail.negative-ni	Tails that begin with に after a negative in ない and make a construction of it (来ないに決まってる, 来ないにしても, 誰も来ないに越したことはない): こないに before them is 来ないに, not the Kansai こんなに (こないに大きい).
@@ -15452,3 +15455,17 @@ particle.focus-object	さえ
 particle.focus-object	すら
 particle.focus-object	こそ
 particle.focus-object	まで
+dialect.predicate-word	わぁってる	わかってる
+dialect.predicate-word	わあってる	わかってる
+dialect.predicate-word	わーってる	わかってる
+dialect.predicate-word	わぁってます	わかってます
+dialect.predicate-word	わぁりました	わかりました
+dialect.predicate-word	わぁった	わかった
+dialect.predicate-word	わあった	わかった
+dialect.predicate-word	わーった	わかった
+dialect.predicate-word	いがったです	よかったです
+dialect.predicate-word	いがった	よかった
+dialect.pronoun-before-particle	おどれ	お前
+dialect.pronoun-before-particle	わい	わし
+dialect.pronoun-before-particle	おら	俺
+dialect.adverb-before-verb	ようも	よくも
