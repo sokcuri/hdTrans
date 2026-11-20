@@ -1,0 +1,70 @@
+# 규칙: LEX-8020, LEX-8021, LEX-8022
+rule	input	expected	kind	layer
+cx:stem-noun:12	物価の押し上げを招く恐れがある。	has:물가의 밀어 올리기를	fix	rewrites
+cx:stem-noun:12	住宅ローン金利の押し上げを招いて家計の重しとなる。	has:금리의 밀어 올리기를	fix	rewrites
+cx:stem-noun:12	用具入れのほうが広い。	has:용구 넣기 쪽이	fix	rewrites
+cx:stem-noun:12	用具入れで叩いた。	has:용구 넣기로	fix	rewrites
+cx:stem-noun:12	妻は調べに対し、介護に疲れたと話した。	lacks:조사해에	fix	rewrites
+cx:stem-noun:12	第三国を迂回した制裁逃れに対応するため、輸出を禁止した。	has:제재 피하기에 대응	fix	rewrites
+cx:stem-noun:12	くしゃみの瞬間の尿漏れに対応する。	has:새기에 대응	fix	rewrites
+cx:stem-noun:12	左腕に走った痺れに、顔をしかめる。	has:저리기에,	fix	rewrites
+cx:stem-noun:12	焼けるような熱さが痺れに変わった直後だった。	has:저리기로 바뀐	fix	rewrites
+cx:stem-noun:12	一切乱れのない制服。	lacks:흐트러지고가	fix	rewrites
+cx:stem-noun:12	追加引き締めに踏み切れば、緊張が高まる。	lacks:긴축시켜를	fix	rewrites
+cx:stem-noun:12	猫舌かと思いまして、温めにしておきました！	has:데우기로	fix	rewrites
+cx:stem-noun:12	食べに行こう。	먹으러 가자.	keep	rewrites
+cx:stem-noun:12	迎えに行く。	has:마중하러	keep	rewrites
+cx:stem-noun:12	見せに来た。	has:보이러 왔다	keep	rewrites
+cx:stem-noun:12	冬の到来とともに、今までの罰を与えに女神が来る。	lacks:주기	keep	rewrites
+cx:stem-noun:12	うつ伏せに倒れているのが見えた。	has:엎드려 쓰러져	keep	rewrites
+cx:stem-noun:12	宿題を忘れがちだ。	has:잊기 십상	keep	rewrites
+cx:stem-noun:12	耐えがたい痛みだ。	has:참기 어려운	keep	rewrites
+cx:stem-noun:12	一応見はしたけど。	has:보기는 했지만	keep	rewrites
+cx:stem-noun:12	強めに拒否された。	has:강하게	keep	rewrites
+cx:stem-noun:12	誰か、王女をお止めに、お止めに！	lacks:멈추기에	keep	rewrites
+cx:stem-noun:12	見つかることなく離れに行き、交流した。	lacks:떨어지기에	keep	rewrites
+cx:stem-noun:12	体勢が不十分で、そのまま倒されのしかかられてしまう。	lacks:쓰러지기	keep	rewrites
+cx:stem-noun:12	香ばしい香りと程よく溶けでた脂が広がる。	lacks:녹기	keep	rewrites
+cx:stem-noun-of:10	さらに設備投資需要も物価の押し上げを招く恐れがある。	lacks:물가가	fix	rewrites
+cx:stem-noun-of:10	彼の書いた本を読んだ。	has:그가 쓴 책	keep	rewrites
+cx:stem-noun:30	2時間後ろ倒しになって会談が始まりました。	has:2시간 늦춰져	fix	rewrites
+cx:stem-noun:30	開始が後ろ倒しになった。	has:늦춰졌다	fix	rewrites
+cx:stem-noun:32	日程を後ろ倒しにする。	has:일정을 늦춘다	fix	rewrites
+cx:stem-noun:30	開始の後ろ倒しを決めた。	has:개시의 연기를	keep	rewrites
+cx:stem-noun:32	後ろ倒しで実施する。	has:늦춰서 실시	keep	rewrites
+cx:notice-words-1:80	予定が前倒しになる。	예정이 앞당겨진다.	keep	rewrites
+lexical:stem-noun-row	空気入れのほうが 縮んだ空気をたくさん 出せるんだ。	has:공기 주입기 쪽이	fix	lookup
+lexical:stem-noun-row	ボンベを外して タイヤの空気入れにつなぎ直さなきゃね。	has:공기 주입기에	fix	lookup
+lexical:stem-noun-row	ねぇ 編み込みの最初ってこれぐらい？	has:땋기의 처음	fix	lookup
+lexical:stem-noun-row	後ろ倒しを決めた。	has:연기를 결정	fix	lookup
+lexical:stem-noun-row	後ろ倒しで実施する。	has:늦춰서 실시	fix	lookup
+lexical:stem-noun-row	肉親の死に対して、自分の死を以って償おうとする。	has:육친의 죽음에 대해	fix	lookup
+lexical:stem-noun-row	死に対する恐怖がある。	has:죽음에 대한 공포	fix	lookup
+lexical:stem-noun-row	彼は死について考えた。	has:죽음에 대해	keep	lookup
+lexical:stem-noun-row	死にたい。	죽고 싶다.	keep	lookup
+lookup:te-verb-over-noun	くらしてる。	has:생활하고 있다	fix	lookup
+lookup:te-verb-over-noun	田舎でくらしていた。	has:생활하고 있었다	fix	lookup
+lookup:te-verb-over-noun	住んでる人間は、いたって快適にくらしてるんだからさ。	has:생활하고 있으니까	fix	lookup
+lookup:te-verb-over-noun	皿がわれてる。	lacks:나 비	fix	lookup
+lookup:te-verb-over-noun	ガラスがわれて、破片が散った。	has:깨져	fix	lookup
+lookup:te-verb-over-noun	風船をとばしてアイスを放り出した。	has:풍선을 날려	fix	lookup
+lookup:te-verb-over-noun	紙飛行機をとばしていた。	has:날리고 있었다	fix	lookup
+lookup:te-verb-over-noun	地球温暖化はすでに地球に犠牲を強いている。	has:희생을 강요하고 있다	fix	lookup
+lookup:te-verb-over-noun	無理を強いてる。	has:강요하고 있다	fix	lookup
+lookup:te-verb-over-noun	我慢を強いていた。	has:강요하고 있었다	fix	lookup
+lookup:te-verb-over-noun	規則を改めている。	lacks:다시 있다	fix	lookup
+lookup:te-verb-over-noun	話がそれてる。	has:빗나가고 있다	fix	lookup
+lookup:te-verb-over-noun	余りにも言い過ぎてしまった。	lacks:심한 말이라고	fix	lookup
+lookup:te-verb-over-noun	準備を終えた母が、玄関口へと駆けだしてゆく。	lacks:신출내기	fix	lookup
+lookup:te-verb-over-noun	強いて言えば、これだ。	has:굳이 말하자면	keep	lookup
+lookup:te-verb-over-noun	強いていえば、そうだ。	has:굳이 말하면	keep	lookup
+lookup:te-verb-over-noun	改めて言う。	다시 말한다.	keep	lookup
+lookup:te-verb-over-noun	くらしの中で。	has:생활의	keep	lookup
+lookup:te-verb-over-noun	われわれは行く。	우리는 간다.	keep	lookup
+lookup:te-verb-over-noun	われは王なり。	has:나는 왕	keep	lookup
+lookup:te-verb-over-noun	日が照っている。	has:비치고 있다	keep	lookup
+lookup:te-verb-over-noun	かえって悪くなった。	오히려 나빠졌다.	keep	lookup
+lookup:te-verb-over-noun	おきてを守れ。	has:규정을 지켜라	keep	lookup
+lookup:te-verb-over-noun	はじめてください。	has:시작해 주세요	keep	lookup
+lookup:te-verb-over-noun	あえて言わない。	굳이 말하지 않는다.	keep	lookup
+lookup:te-verb-over-noun	恐れが出ています。	has:우려가 나와 있습니다	keep	lookup

@@ -1835,6 +1835,78 @@ Record* VerbBeforeTeForm(Record* records, std::string_view text) {
     return records;
 }
 
+// LEX-8021: a noun row that spells the continuative of an ichidan verb or a す verb loses to that verb before て
+// (くらしてる 살고 있다, not くらし 생활 + 照る; われてる 깨져 있다, not われ 나; 言い過ぎてしまった 너무 말해 버렸다), and an
+// adverb row that spells such a verb's て form loses to it before いる or its contraction (強いている 강요하고 있다,
+// 改めている; but 強いて言えば 굳이 말하자면). A noun takes no て of its own, save the quoting て of ていう, てこと or
+// て言う, which stays. The key is two kana or more, or has a kanji. Where a verb record is first already, the order
+// stands. A key that a name spells (code 13x or the name layer) never gives way; a plain-dictionary record does, as no
+// reading of it fits before the て either.
+Record* VerbOverNounBeforeTe(Record* records, std::string_view text) {
+    const auto verbKind = [](const Record& r) {
+        return r.user == nullptr && r.partCode.size() == 4 && At(r.partCode, 0) == 'M' && At(r.partCode, 1) == '4' ? r.partCode[3] : '\0';
+    };
+    // A verb in front already reads the form.
+    if (records == nullptr || verbKind(*records) != '\0') return records;
+    // The record of the longest key, no verb; a longer record of any kind (遅れて of 遅れてくる 늦게 오다) stands.
+    const Record* word = nullptr;
+    std::size_t longest = 0;
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        longest = std::max(longest, r->source.size());
+        if (verbKind(*r) == '\0' && (word == nullptr || r->source.size() > word->source.size())) word = r;
+    }
+    if (word == nullptr || word->source.size() < longest || !text.starts_with(word->source)) return records;
+    const std::string_view key = word->source;
+    if (!HasKanji(key) && (text::RuneCount(key) < 2 || !AllHiragana(key))) return records;
+    // A name of that key (code 13x or the name layer) keeps it.
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source == key && ((r->user != nullptr && r->user->nameLayer) || (NounRow(*r) && At(r->partCode, 2) == '3'))) {
+            return records;
+        }
+    }
+    const std::string_view after = text.substr(key.size());
+    // stem: the continuative the verb must spell.
+    std::string_view stem;
+    if (NounRow(*word)) {
+        if (!after.starts_with("て") || after.starts_with("ていう") || after.starts_with("てこと") || after.starts_with("て言")) return records;
+        stem = key;
+    } else if (At(word->partCode, 0) == 'E' && key.ends_with("て") && key.size() > std::string_view("て").size()) {
+        bool iru = after.starts_with("る") || after.starts_with("た");
+        for (const std::string_view f : {"いる", "いた", "いま", "いて", "いな", "いれ"}) iru = iru || after.starts_with(f);
+        if (!iru) return records;
+        stem = key.substr(0, key.size() - std::string_view("て").size());
+    } else {
+        return records;
+    }
+    // The verb: an ichidan verb whose stem is the continuative, or a す verb whose stem and し are.
+    const auto spells = [&](const Record& r) {
+        const char kind = verbKind(r);
+        if (kind == '7') return r.source == stem;
+        return kind == '3' && stem.size() > r.source.size() && stem.starts_with(r.source) && stem.substr(r.source.size()) == "し";
+    };
+    bool any = false;
+    for (const Record* r = records; r != nullptr && !any; r = r->child) any = spells(*r);
+    if (!any) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (spells(*r)) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    return verbs;
+}
+
 Record* VerbBeforePolite(Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -3874,6 +3946,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
+    if (settings.text) records = VerbOverNounBeforeTe(records, From(full, cursor));
     if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (settings.text) {

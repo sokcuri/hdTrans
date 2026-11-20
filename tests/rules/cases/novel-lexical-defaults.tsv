@@ -33,7 +33,7 @@ defaults:novel-lexical	それはごろんと、俺の足元に転がった。	�
 defaults:novel-lexical	シンダリオンを生み出すよう仕向けた」	신다리온을 만들어 내도록 유도했다」	keep	defaults
 defaults:novel-lexical	というのは、あくまで俺の友人の弁だ。	그렇다고 하는 것은, 어디까지나 내 친구의 말이다.	keep	defaults
 defaults:novel-lexical	まず、椿の母は大企業の令嬢であった。	우선, 츠바키의 어머니는 대기업의 영애였다.	keep	defaults
-defaults:novel-lexical	柏木はチラ見でその画面に目を向ける。	카시와기는 치라 보고로 그 화면에 눈길을 돌린다.	keep	defaults
+defaults:novel-lexical	柏木はチラ見でその画面に目を向ける。	has:그 화면에 눈길을 돌린다	keep	defaults
 defaults:novel-lexical	今回は重工業機械向けの受注でしたが、	이번에는 중공업 기계전용의 수주였지만,	keep	defaults
 defaults:novel-lexical	創立100年の里おこしベンチャー企業	창립 100년의 마을 부흥 벤처기업	keep	defaults
 defaults:novel-lexical	地域共生型サービス企業をめざします。	지역 공생형 서비스 기업을 목표로 합니다.	keep	defaults

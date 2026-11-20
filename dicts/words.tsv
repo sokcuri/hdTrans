@@ -28828,3 +28828,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 津地裁	츠 지방법원	N110	VGt		GN			LEX-7780				w:40435
 溶き卵	푼 달걀	N110	VFd		GN			LEX-8060				w:41808
 法令線	팔자주름	N110	VBp		GN			LEX-8060				w:41809
+空気入れ	공기 주입기	N110			GN			LEX-8022				w:41600
+編み込み	땋기	N110			GN			LEX-8022				w:41601
+後ろ倒し	연기	I110			GN			LEX-8022				w:41602
+後ろ倒しで	늦춰서	E300			GN			LEX-8022				w:41603
+死に対し	죽음에 대해	N110			GN			LEX-8022				w:41604
+死に対して	죽음에 대해	N110			GN			LEX-8022				w:41605
+死に対する	죽음에 대한	N110			GN			LEX-8022				w:41606
