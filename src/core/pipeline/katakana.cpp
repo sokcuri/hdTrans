@@ -1580,13 +1580,31 @@ bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snap
 // The start of the nickname that ends at end in text, or npos: two to four kana after a
 // character other than kana or a kanji, after a one-kana particle that follows a kanji,
 // katakana or a span, or after a word and a case particle inside a longer kana run.
-size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const dict::Snapshot& snap) {
+//
+// What one text's honorifics share, read once for the text: the kana run start found for the last
+// honorific, and where the dictionary words of two kana or more that start in a run end. Reading
+// them again for each honorific took the square of a long kana run, and the cube for its words.
+struct NicknameScan {
+    size_t end = std::string_view::npos;  // the last honorific's end and the start of its run
+    size_t start = 0;
+    size_t run = std::string_view::npos;  // the run whose words are read, from its start up to read
+    size_t read = 0;
+    std::vector<bool> ends;  // a word ends at run + i
+};
+
+size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const dict::Snapshot& snap, NicknameScan& scan) {
     size_t start = end;
     while (start > 0) {
+        if (start == scan.end) {  // the walk goes on as it went from the last honorific
+            start = scan.start;
+            break;
+        }
         const text::Rune r = LastRune(text.substr(0, start));
         if (!NicknameRune(r.cp) || r.size == 0 || r.size > start) break;
         start -= r.size;
     }
+    scan.end = end;
+    scan.start = start;
     // The morae of the kana: a small ゃ, ゅ, ょ or vowel joins the kana before it (にょにょん: three). Only two to four
     // are read, so the count stops at five: counting each place of a long run to its end took the square of the run.
     const auto runes = [&](size_t from) {
@@ -1612,15 +1630,43 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const d
     // as a person noun (それはまきくん, それははとこちゃん: no はとこ; not
     // やはりのんちゃん).
     auto wordBefore = [&](size_t p) {
-        for (size_t from = start; from < p; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
-            const std::string_view w = text.substr(from, p - from);
-            if (CountRunes(w, [](char32_t) { return true; }) >= 2 && !snap.RetrieveRecords(w, dict::LookupMode::General).empty()) {
-                return true;
+        if (!snap.Healthy()) {
+            for (size_t from = start; from < p; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
+                const std::string_view w = text.substr(from, p - from);
+                if (CountRunes(w, [](char32_t) { return true; }) >= 2 && !snap.RetrieveRecords(w, dict::LookupMode::General).empty()) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+        // One walk of the keys from each start in the run, as the lookup of each word.
+        if (scan.run != start) {
+            scan.run = start;
+            scan.read = start;
+            scan.ends.clear();
+        }
+        for (; scan.read < p; scan.read += std::max<size_t>(1, text::DecodeRune(text.substr(scan.read)).size)) {
+            const size_t from = scan.read;
+            snap.Base().Prefixes(text.substr(from), [&](int k, size_t length) {
+                if (length == 0 || text::DecodeRune(text.substr(from, length)).size >= length) return;  // two kana or more
+                bool records = false;
+                snap.Base().EachRecord(k, [&records](const dict::Record&) { return !(records = true); });
+                if (!records) return;
+                const size_t at = from + length - start;
+                if (scan.ends.size() <= at) scan.ends.resize(at + 1);
+                scan.ends[at] = true;
+            });
+        }
+        return p - start < scan.ends.size() && scan.ends[p - start];
     };
-    for (size_t p = after; p < end;) {
+    // Only a p with two to four morae after it starts a name: the walk starts at the fifth mora from the end.
+    size_t tail = end;
+    for (int n = 0; tail > after && n < 5;) {
+        const text::Rune r = LastRune(text.substr(0, tail));
+        if (!RuneIn(r.cp, U"ゃゅょぁぃぅぇぉゎ")) n++;
+        tail -= r.size;
+    }
+    for (size_t p = std::max(after, tail); p < end;) {
         const text::Rune r = text::DecodeRune(text.substr(p));
         const size_t next = p + std::max<size_t>(1, r.size);
         if (RuneIn(r.cp, U"はがをもにと") && runes(next) >= 2 && runes(next) <= 4 && wordBefore(p) &&
@@ -1706,6 +1752,7 @@ bool LiteralWord(std::string_view s, const LineContext& ctx, const dict::Snapsho
 
 void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx, const dict::Snapshot& snap, output::Pieces& out) {
     size_t at = 0;
+    NicknameScan scan;
     for (size_t i = 0; i < text.size();) {
         std::string_view honorific;
         for (const std::string_view h : dict::ClassMembers(HDTRANS_CLASS("honorific.nickname"))) {
@@ -1717,7 +1764,7 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         }
         const size_t end = i;
         i += honorific.size();
-        size_t start = NicknameStart(text, end, spanBefore && at == 0, snap);
+        size_t start = NicknameStart(text, end, spanBefore && at == 0, snap, scan);
         // The longest listed kana name before the honorific is the name, written as listed, where
         // a name starts: at the start of the kana run, where NicknameStart starts one, after kana
         // that read as words (もしもしみみちゃん, にはみみちゃん) or after a verb that modifies it
