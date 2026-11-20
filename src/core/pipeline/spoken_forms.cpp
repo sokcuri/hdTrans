@@ -1338,7 +1338,7 @@ bool OldWishNegative(std::string_view s, size_t pos, Match& m) {
     const char32_t before = LastRune(s.substr(0, pos)).cp;
     if (!In(before, U"いきぎしじちにひびみりえけげせぜてでねべめれ見寝居出来着")) return false;
     size_t p = pos;
-    if (!Lit(s, p, "とうな")) return false;
+    if (!Lit(s, p, "とうな") && !Lit(s, p = pos, "とぅな")) return false;  // with a small ぅ too (死なせとぅない)
     const size_t tail = p;
     if (!Lit(s, p, "い") && !Lit(s, p, "かった") && !Lit(s, p, "く")) return false;
     m.group[1] = s.substr(tail - std::string_view("な").size(), p - tail + std::string_view("な").size());
@@ -2011,7 +2011,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "じゃが")) {
         text = ReplaceAll(text, OldCopulaJaga, [](const Match&) { return std::string("だが"); });
     }
-    if (dialectForms && Contains(text, "とうな")) {
+    if (dialectForms && (Contains(text, "とうな") || Contains(text, "とぅな"))) {
         text = ReplaceAll(text, OldWishNegative, [](const Match& m) { return Cat({"たく", m.group[1]}); });
     }
     if (dialectForms && (Contains(text, "あかん") || Contains(text, "アカン"))) {
