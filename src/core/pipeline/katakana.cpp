@@ -1429,9 +1429,16 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const d
         if (!NicknameRune(r.cp) || r.size == 0 || r.size > start) break;
         start -= r.size;
     }
-    // The morae of the kana: a small ゃ, ゅ, ょ or vowel joins the kana before it (にょにょん: three).
+    // The morae of the kana: a small ゃ, ゅ, ょ or vowel joins the kana before it (にょにょん: three). Only two to four
+    // are read, so the count stops at five: counting each place of a long run to its end took the square of the run.
     const auto runes = [&](size_t from) {
-        return CountRunes(text.substr(from, end - from), [](char32_t r) { return !RuneIn(r, U"ゃゅょぁぃぅぇぉゎ"); });
+        int n = 0;
+        for (std::string_view s = text.substr(from, end - from); !s.empty() && n < 5;) {
+            const text::Rune r = text::DecodeRune(s);
+            if (!RuneIn(r.cp, U"ゃゅょぁぃぅぇぉゎ")) n++;
+            s.remove_prefix(r.size);
+        }
+        return n;
     };
     const char32_t before = start == 0 ? 0 : LastRune(text.substr(0, start)).cp;
     const bool boundary = start == 0 || (!IsKanjiRune(before) && !IsKatakanaRune(before));
