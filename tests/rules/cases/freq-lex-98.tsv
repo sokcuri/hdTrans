@@ -35,3 +35,22 @@ dict:freq-lex-98	ニーソックスを履いた。	has:니삭스	keep	lookup
 dict:freq-lex-98	デカデカと書いてある。	has:큼직큼직하게	keep	lookup
 dict:freq-lex-98	大人げないぞ。	has:점잖지 않아	keep	lookup
 dict:freq-lex-98	「エナはバリケードを作れ」	has:에나는	fix	lookup
+dict:freq-lex-98	父は私服の下に海パンを履いていた。	has:수영 팬티	fix	lookup
+dict:freq-lex-98	選挙後の米株には期待できる。	has:미국 주식	fix	lookup
+dict:freq-lex-98	攻撃計画に関する情報を覚知したためだという。	has:인지했기	fix	lookup
+dict:freq-lex-98	英警察、二重国籍者を逮捕	has:영국 경찰	fix	lookup
+dict:freq-lex-98	裏目ったなぁ。	has:역효과가 났	fix	lookup
+dict:freq-lex-98	裏目に出た。	has:화근이 되었다	keep	lookup
+dict:freq-lex-98	空気が淀んだ気がする。	has:탁해진	fix	lookup
+dict:freq-lex-98	昨年は右肘の故障に苦しんだ。	has:오른쪽 팔꿈치	fix	lookup
+dict:freq-lex-98	とても食べ応えがあります。	has:먹는 맛이	fix	lookup
+dict:freq-lex-98	木々が芽吹き始めた。	has:싹이 트기 시작했다	fix	lookup
+dict:freq-lex-98	なんとかひっぺがした。	has:어떻게든 떼어 냈다	fix	lookup
+dict:freq-lex-98	租特について見直しを進める。	has:조세특별조치에 대해	fix	lookup
+dict:freq-lex-98	素晴らしき魅惑のハーモニー	has:멋진 매혹	fix	lookup
+dict:freq-lex-98	素晴らしかった。	has:훌륭했다	keep	lookup
+dict:freq-lex-98	真っ白けの二人が来た。	has:새하얀 두 사람	fix	lookup
+dict:freq-lex-98	後手に回った感は否めず、打撃は避けられない。	has:부정할 수 없고	fix	lookup
+dict:freq-lex-98	否めない。	has:부정할 수 없다	keep	lookup
+dict:freq-lex-98	多数派維持に躍起	has:안간힘	fix	lookup
+dict:freq-lex-98	躍起になって探した。	has:기를 써	keep	lookup
