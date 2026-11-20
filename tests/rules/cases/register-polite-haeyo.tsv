@@ -1,4 +1,4 @@
-# 규칙: REG-25, REG-26, REG-27
+# 규칙: REG-2, REG-23, REG-25, REG-26, REG-27
 rule	input	expected	kind	layer
 register:REG-25	「はい、大丈夫です。どうしました？」	「네, 괜찮아요. 무슨 일이에요?」	fix	register
 register:REG-25	「なにしてんすか？」	「뭐 해요?」	fix	register
@@ -91,3 +91,32 @@ register:REG-27	「用があるので、帰ります」	「용무가 있으므�
 register:REG-27	「じゃ、私も戻ります」	「그러면, 저도 돌아옵니다」	keep	register
 register:REG-27	「あなたは、無謀な指揮官ではないと考えていました」	has:생각하고 있었습니다	keep	register
 register:REG-27	「我々が行きます」	「우리가 갑니다」	keep	register
+register:REG-25	「あ、鈴木さんの分のお茶を忘れてしまいました」	「아, 스즈키 씨의 몫의 차를 잊어버렸어요」	fix	register
+register:REG-25	「電波って言われてしまいました」	「전파라는 말을 들어버렸어요」	fix	register
+register:REG-25	「言っちゃいました」	「말해버렸어요」	fix	register
+register:REG-25	「でも、負けてしまいました」	「하지만, 져버렸어요」	fix	register
+register:REG-25	「京太郎さん、お昼は食べちゃいました？」	「교타로 씨, 점심은 먹어버렸어요?」	fix	register
+register:REG-25	「途中で転んじゃいました」	「도중에 넘어져버렸어요」	fix	register
+register:REG-25	「すごく暑くなっちゃいました」	「정말 더워져버렸어요」	fix	register
+register:REG-25	「すっかり遅くなっちゃいましたね」	lacks:버렸습니다	fix	register
+register:REG-25	「もう、すっかり暗くなっちゃいましたね」	lacks:버렸습니다	fix	register
+register:REG-25	「箱が壊れちゃいます」	「상자가 망가져버려요」	fix	register
+register:REG-25	「もう一度目を通しましたか？」	「한번 더 훑어봤어요?」	fix	register
+register:REG-25	「はい、応援しただけです」	「네, 응원했을 뿐이에요」	fix	register
+register:REG-25	「ナイスタイミングです。私もちょうど空いてたとこでした」	「나이스 타이밍이에요. 저도 막 비어 있던 참이었어요」	fix	register
+register:REG-23	「明日は休みなのです」	「내일은 휴일인 거예요」	fix	register
+register:REG-25	「窓を開けておきました」	「창을 열어 뒀어요」	keep	register
+register:REG-25	「机の上に置いておきました」	「책상 위에 놓아뒀어요」	keep	register
+register:REG-25	「ちょっと食べてみました」	「조금 먹어 봤어요」	keep	register
+register:REG-25	「先生が教えてくれました」	「선생님이 가르쳐 줬어요」	keep	register
+register:REG-25	「ずっと待ってました」	「계속 기다리고 있었어요」	keep	register
+register:REG-25	「部屋が暗くなってました」	「방이 어두워져 있었어요」	keep	register
+register:REG-26	「申し訳ございません、壊してしまいました」	「죄송합니다, 부수어버렸습니다」	keep	register
+register:REG-26	「お嬢様、紅茶が冷めてしまいました」	「아가씨, 홍차가 식어버렸습니다」	keep	register
+register:REG-26	「お話ししてしまいました。申し訳ありません」	「이야기해버렸습니다. 죄송합니다」	keep	register
+register:REG-26	「ありがとうございます、助かってしまいました」	lacks:버렸어요	keep	register
+register:REG-27	「じゃあ、全部食べちゃいます」	「그럼, 전부 먹어버립니다」	keep	register
+register:REG-27	「私が片付けちゃいます」	「제가 정리해버립니다」	keep	register
+register:REG-27	「今日中に終わらせてしまいます」	「오늘 중에 끝내버립니다」	keep	register
+register:REG-2	「思わず、黙々と食べちまった」	「나도 모르게, 묵묵히 먹어버렸어」	fix	register
+register:REG-2	「……すまん、遅くなっちまった」	「……미안, 늦어져버렸어」	fix	register

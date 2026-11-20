@@ -65,7 +65,7 @@ pattern:yue	あなたに与えられた唯一の弁解はその際「弁護人�
 pattern:yue	ユフィリアに対して厳しい親ではあるが、それも我が子を思う故だ。	유필리아에 대해서 엄한 부모이지만, 그것도 우리 아이를 생각하기 때문이다.	fix	builtin-pattern
 pattern:yue	この季節になってくると、何故か、少し寂しい気分になるな。	이 계절이 되어 지면, 어째서인지, 조금 외로운 기분이 드네.	keep	builtin-pattern
 pattern:yue	ではＥＬＦは ここに挙がっている者を 事故死でいいな？	그럼 ELF는 여기에 오르고 있는 사람을 사고사면 돼?	keep	builtin-pattern
-pattern:yue	何故そっとしておいてくれない！	왜 살며시 해 두어 주지 않아!	keep	builtin-pattern
+pattern:yue	何故そっとしておいてくれない！	왜 가만히 놔두어 주지 않아!	keep	builtin-pattern
 pattern:yue	礼号作戦…私が旗艦を務めた…何故…鮮明に覚えている…なんで？	레호 작전…내가 기함을 맡았다…왜…선명히 기억하고 있다…왜?	keep	builtin-pattern
 pattern:yue	彼が故郷の為に死ぬことがないよう 彼に厳命して下さいませんでしょうか、	그가 고향을 위해 죽는 것이 없게 그에게 엄명해 주십시오 입니까,	keep	builtin-pattern
 pattern:yue	糞野郎、ここは私の家よ 何故、戻らないといけないのよ	개새끼, 여기는 내 집이야 왜, 돌아가야 해	keep	builtin-pattern
@@ -86,7 +86,7 @@ dict:lex:4764:osoba-side	私が しっかり おそばに付いていれば―	�
 dict:lex:4764:osoba-side	私は今夜、陛下から正式に命じられて、殿下のおそばに通訳として控えている。	나는 오늘 밤, 폐하에게서 정식으로 명령받아, 전하의 곁으로 통역으로서 삼가고 있다.	fix	local
 dict:lex:4764:osoba-side	あーでも…遠洋練習航海に出てしまうと…提督のおそばに…そっ、そうですね、それは別の機会にしましょう。	아-라도…원양 연습 항해하러 나와버리면…제독의 곁에…그, 그렇네요, 그것은 다른 기회로 합시다.	fix	local
 dict:lex:4764:osoba-side	比企(ひき)の館だ せつが おそばにいてやれる	히키의 관이다 설이 곁에 있어 줄 수 있다	fix	local
-dict:lex:4764:osoba-side	コンは今日１日 おそばで見ておりましたから	안녕은 오늘 1일 곁에서 보고 있었으니까요	fix	local
+dict:lex:4764:osoba-side	コンは今日１日 おそばで見ておりましたから	콘은 오늘 1일 곁에서 보고 있었으니까요	fix	local
 dict:lex:4764:osoba-side	ご主人様が望む限り、アナベルはおそばを離れません	주인님이 바라는 한, 애나벨은 곁을 떠나지 않습니다	fix	local
 dict:lex:4764:osoba-side	皆様のおそばに置いてほしいんです。	여러분의 곁에 두어 줬으면 하겠습니다.	fix	local
 dict:lex:4764:osoba-side	本日は私花月がおそばでお手伝いさせていただきますね。	오늘은 저 풍류가 곁에서 도와 드릴게요.	fix	local

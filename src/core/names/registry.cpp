@@ -7,6 +7,7 @@
 #include <initializer_list>
 #include <optional>
 #include <set>
+#include <span>
 #include <utility>
 #include <string>
 #include <string_view>
@@ -62,28 +63,58 @@ bool NamingCue(std::string_view after) {
     return false;
 }
 
-// Whether the text after a word makes it the doer of a favour in its clause: に with
-// てもらう or 頼む and no other に before it (Xに作ってもらった, Xに頼んで), or が with てくれる
-// (Xが作ってくれた).
-bool AgentCue(std::string_view after) {
-    std::string_view clause = after;
-    for (const std::string_view end : {"。", "！", "？", "」", "『", "「", "、"}) {
-        const std::size_t at = clause.find(end);
-        if (at != std::string_view::npos) clause = clause.substr(0, at);
-    }
-    auto has = [&](std::string_view rest, std::initializer_list<std::string_view> list) {
-        for (const std::string_view w : list) {
-            if (rest.find(w) != std::string_view::npos) return true;
+// The first place at or after pos where w occurs in s. The search resumes only once pos passes the place
+// found last, so asking at places that only grow scans s once (AgentCue at each run of a line).
+class NextOf {
+  public:
+    NextOf(std::string_view s, std::string_view w) : s_(s), w_(w) {}
+    std::size_t At(std::size_t pos) {
+        if (pos < from_ || (found_ != std::string_view::npos && found_ < pos)) {
+            found_ = s_.find(w_, pos);
+            from_ = pos;
         }
-        return false;
-    };
-    if (clause.starts_with("に")) {
-        std::string_view rest = clause.substr(std::string_view("に").size());
-        rest = rest.substr(0, rest.find("に"));
-        return has(rest, {"てもら", "でもら", "頼"});
+        return found_;
     }
-    if (clause.starts_with("が")) return has(clause, {"てくれ", "でくれ"});
-    return false;
+    // Whether w occurs whole in [from, to).
+    bool Within(std::size_t from, std::size_t to) {
+        const std::size_t found = At(from);
+        return found != std::string_view::npos && found + w_.size() <= to;
+    }
+
+  private:
+    std::string_view s_, w_;
+    std::size_t from_ = std::string_view::npos;
+    std::size_t found_ = std::string_view::npos;
+};
+
+// The words AgentCue looks for in one line.
+struct AgentWords {
+    explicit AgentWords(std::string_view line)
+        : ends{NextOf(line, "。"), NextOf(line, "！"), NextOf(line, "？"), NextOf(line, "」"), NextOf(line, "『"), NextOf(line, "「"), NextOf(line, "、")},
+          ni(line, "に"), asked{NextOf(line, "てもら"), NextOf(line, "でもら"), NextOf(line, "頼")}, given{NextOf(line, "てくれ"), NextOf(line, "でくれ")} {}
+    std::array<NextOf, 7> ends;
+    NextOf ni;
+    std::array<NextOf, 3> asked;
+    std::array<NextOf, 2> given;
+};
+
+// Whether the text of line after at makes the word before it the doer of a favour in its clause: に with
+// てもらう or 頼む and no other に before it (Xに作ってもらった, Xに頼んで), or が with てくれる
+// (Xが作ってくれた). The clause ends at the first mark of the end of a clause or a quote.
+bool AgentCue(std::string_view line, std::size_t at, AgentWords& words) {
+    const std::string_view after = line.substr(at);
+    const bool ni = after.starts_with("に");
+    if (!ni && !after.starts_with("が")) return false;
+    std::size_t end = line.size();
+    for (NextOf& e : words.ends) end = std::min(end, e.At(at));
+    auto has = [](std::span<NextOf> list, std::size_t from, std::size_t to) {
+        return std::any_of(list.begin(), list.end(), [&](NextOf& w) { return w.Within(from, to); });
+    };
+    if (ni) {
+        const std::size_t from = at + std::string_view("に").size();
+        return has(words.asked, from, std::min(end, words.ni.At(from)));
+    }
+    return has(words.given, at, end);
 }
 
 // Whether text ends with suffix as a whole string with a non-empty head.
@@ -772,6 +803,12 @@ void Registry::Add(std::string_view rawLine) {
         count(kanaFree_, u.t);
         if (bare(u.particle)) count(kanaBare_, u.t);
     }
+    std::vector<std::pair<std::string, std::string>> pairs;
+    for (const std::string& t : LayerKanaNames(line, &pairs)) count(kanaLayer_, t);
+    for (const auto& p : pairs) {
+        layerPairs_.insert(p);
+        count(kanaLayer_, p.second);
+    }
     for (const Coordination& c : CoordinatedKana(line)) {
         const auto [it, added] = coordinated_[c.word].emplace(c.name, c.weak);
         if (!added) it->second = it->second && c.weak;
@@ -808,6 +845,7 @@ void Registry::Add(std::string_view rawLine) {
         if (dict::StartsWithMember(HDTRANS_CLASS("name.katakana-place-after"), after) > 0) count(kataPlace_, std::string(r.text));
     }
     std::size_t chain = 0;  // first run of the current katakana chain
+    AgentWords agentWords(line);
     for (std::size_t i = 0; i < runs.size(); i++) {
         const Run& run = runs[i];
         if (run.kanji) {
@@ -832,7 +870,7 @@ void Registry::Add(std::string_view rawLine) {
                     break;
                 }
             }
-            if (NameEnd(line.substr(run.end))) count(ended_, std::string(run.text));
+            if (NameEnd(std::string_view(line).substr(run.end))) count(ended_, std::string(run.text));
         } else {
             count(kana_, std::string(run.text));
         }
@@ -872,7 +910,7 @@ void Registry::Add(std::string_view rawLine) {
                                 !AdjectiveKanji(t.substr(t.size() - last.size));  // 咲太くん: 太く is an adjective's
             if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま") && !verbKu) honGuess_.insert(t);
         }
-        if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
+        if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(line, run.end, agentWords)) {
             count(agents_, std::string(run.text));
         }
         if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
@@ -1090,6 +1128,12 @@ std::vector<std::string> Registry::HonorificOnlyNames() {
     return out;
 }
 
+bool Registry::LayerSlotName(std::string_view t) {
+    const auto& acc = Accepted();
+    const auto it = acc.find(std::string(t));
+    return it != acc.end() && it->second.layerSlot;
+}
+
 const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
@@ -1184,6 +1228,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         // Kana no dictionary has stand for the person after one honorific (みいちゃん … みいは; spec
         // LEX-4826): they are no word a bare use could mean.
         if (Flags(t).records == 0 && !kanaWordStart_.contains(t)) n.score += 1;
+        n.person = true;
+    }
+    // A person of the name layer that no dictionary has as a word of its own, seen where a bare name stands,
+    // is the person in such a place (LayerKanaNames; spec LEX-7780).
+    for (const auto& [t, c] : kanaLayer_) {
+        (void)c;
+        Name& n = all[t];
+        n.score = std::max(n.score, 1.0);
         n.person = true;
     }
     // Kana no dictionary has that the document writes three times or more where a name stands, before a
@@ -1479,6 +1531,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
     // A kana noun of the dictionary joined by と or や to a name the document reads (そらとみゆきは, みゆきと
     // そらは) is a name too: the pair names two people (spec LEX-4954).
     kanaJoined_.clear();
+    for (const auto& [x, y] : layerPairs_) {
+        kanaJoined_[x].insert(y);
+        kanaJoined_[y].insert(x);
+    }
     for (const auto& [x, ns] : coordinated_) {
         // Only a noun of the dictionary (そら 空, ひかり 光), no determiner, particle or verb (その, だけ, した).
         if ((WordClasses(x) & kNounClass) == 0) continue;
@@ -1511,7 +1567,15 @@ const std::map<std::string, Name>& Registry::Accepted() {
             }
             if (k == kanaHon_.end()) {
                 // A name given in parentheses (Add) stands alone.
-                if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;
+                if (gloss_.count(t) != 0 && n.score >= need) {
+                    scores_[t] = n;
+                } else if (kanaLayer_.count(t) != 0) {
+                    // Only where a bare name stands (LayerKanaNames; spec LEX-7780).
+                    Name h = n;
+                    h.honorificOnly = true;
+                    h.layerSlot = true;
+                    scores_[t] = h;
+                }
                 continue;
             }
             if (n.score < (Flags(t).common ? 2 * need : need) || PredicateForm(t)) {
@@ -1953,7 +2017,8 @@ bool Registry::BareNameSlot(std::string_view line, std::size_t a, std::size_t b,
     // A mark: no kana, kanji, long mark, letter or digit.
     const auto mark = [](char32_t c) {
         return !IsHiragana(c) && !IsKatakana(c) && !IsKanji(c) && c != U'ー' && c != U'〜' && c != U'～' &&
-               !(c < 0x80 && std::isalnum(static_cast<unsigned char>(c))) && !(c >= U'０' && c <= U'ｚ');
+               !(c < 0x80 && std::isalnum(static_cast<unsigned char>(c))) && !(c >= U'０' && c <= U'９') &&
+               !(c >= U'Ａ' && c <= U'Ｚ') && !(c >= U'ａ' && c <= U'ｚ');
     };
     if (a > 0 && !mark(internal::RuneBefore(line, a).cp)) return false;
     std::string_view rest = line.substr(b);
@@ -2024,6 +2089,8 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         const bool joined = AllRunes(found, IsHiragana) && JoinedAt(line, a, b, found);
         if (AllRunes(found, IsHiragana)) {
             ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing) || joined;
+            // Nor the と that quotes a closed bracket, unless an honorific follows (」とし、 라고 해; spec LEX-7780).
+            ok = ok && (honorific || !QuotedToAt(line, a, b));
         }
         // A name the document gives only before an honorific stands for the person bare too where a name
         // stands: as the whole clause start before a mark or the line end, or before a particle of
@@ -2051,9 +2118,13 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
             if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
             return InRunes(FirstRune(topic).cp, "がはも") && PersonSaidAt(said, FirstRune(topic).cp == U'は');
         };
-        const bool bare = acc.at(found).honorificOnly && !honorific && (listed_.count(found) > 0 || !bareSlot());
+        // A name seen where a bare name stands (LayerKanaNames) is proven by that use: its other uses in the line and the
+        // document hold as those of other proven names do (つぐみは、つぐみであれば 츠구미는, 츠구미이면; spec LEX-7780).
+        const bool bare = acc.at(found).honorificOnly && !acc.at(found).layerSlot && !honorific && !joined &&
+                          (listed_.count(found) > 0 || !bareSlot());
         if (ok) {
-            out.push_back(Occurrence{a, b, found, bare || (!joined && Guarded(line, a, b))});
+            const bool noun = bare || (!joined && Guarded(line, a, b));
+            out.push_back(Occurrence{a, b, found, noun});
         } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {
             // A common word that only honorifics name stays the word inside a hiragana run
             // (最後のひかり).

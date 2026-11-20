@@ -1,0 +1,25 @@
+#! layer=pack
+# 관용구와 뜻: 단서가 있을 때만 읽는 뜻 (LEX-7941)
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+freq-idiom-98:1	暮れる	v1:규칙	sense	frame	dat=悲しみ|深い悲しみ|哀しみ|かなしみ|悲嘆|嘆き|失意|絶望|悲哀|物思い	잠기다	50	LEX-7941	freq	悲しみに 暮れる 슬픔에 잠기다
+freq-idiom-98:2	くれる	v1:규칙	sense	frame	dat=悲しみ|深い悲しみ|哀しみ|かなしみ|悲嘆|嘆き|失意|絶望|悲哀|物思い	잠기다	50	LEX-7941	freq	失意にくれる 실의에 잠기다
+freq-idiom-98:3	のぞく	v5:하다	sense	frame	ending=けば obj=* from=-	제외하다	50	LEX-7941	freq	一部をのぞけば 일부를 제외하면
+freq-idiom-98:22	のぞく	v5:하다	sense	frame	ending=けば after=を from=-	제외하다	50	LEX-7941	freq	ことなどをのぞけば 것 등을 제외하면
+freq-idiom-98:4	のぞく	v5:규칙	sense	frame	ending=けば obj=@place|顔|目|瞳|カメラ|心|@container|@opening|@room|@building|@house|@shop|@facility|穴|隙間|すき間|鍵穴|のぞき穴|顕微鏡|望遠鏡|双眼鏡|鏡|レンズ|ファインダー|井戸|奥|内側|中|外|窓|部屋|店|店内|車内|室内	들여다보다	60	LEX-7941	freq	穴をのぞけば 구멍을 들여다보면
+freq-idiom-98:21	のぞく	v5:규칙	sense	frame	ending=けば from=*	들여다보다	70	LEX-7941	freq	窓からのぞけば 창에서 들여다보면
+freq-idiom-98:5	つづる|綴る	v5:규칙	sense	frame	after=と|」と|』と	적다	50	LEX-7941	freq	とつづった 라고 적었다
+freq-idiom-98:6	つづる|綴る	v5:규칙	sense	frame	obj=心境|思い|想い|心情|気持ち|胸中|胸の内|心の内|近況|感謝|喜び|決意|抱負|メッセージ|コメント|詩|思い出	적다	50	LEX-7941	freq	心境をつづった 심경을 적었다
+freq-idiom-98:7	突き上げる|つき上げる|突きあげる	v1:규칙	sense	frame	obj=@fist|@hand|拳|こぶし|手|両手|右手|左手|片手|腕|両腕|右腕|左腕|片腕|人差し指|指	치켜들다	50	LEX-7941	freq	両手を突き上げた 두 손을 치켜들었다
+freq-idiom-98:8	ぶち上げる|ぶちあげる|ブチ上げる	v1:규칙	sense	frame	obj=花火|ロケット|@ammunition	쏘아 올리다	50	LEX-7941	freq	花火をぶち上げた 불꽃을 쏘아 올렸다
+freq-idiom-98:13	ぶち上げる|ぶちあげる|ブチ上げる	v1:하다	sense	frame	obj=計画|構想|大風呂敷|大ボラ|大ぼら|大法螺|ボラ|ホラ|法螺|方針|夢|プラン|野望	공언하다	50	LEX-7941	freq	計画をぶち上げた 계획을 공언했다
+freq-idiom-98:20	ぶち上げる|ぶちあげる|ブチ上げる	v1:하다	sense	frame	after=と|」と|』と	공언하다	50	LEX-7941	freq	支給するとぶち上げた 지급한다고 공언했다
+freq-idiom-98:9	いかれる	v1:규칙	sense	frame	head=@person|連中|奴ら|やつら|野郎|奴|やつ|女|男|おっさん|おじさん|おばさん|オヤジ|親父|ジジイ|ババア|じじい|ばばあ|ファン|客|科学者|博士|医者|教師|先生|ガキ|小僧|娘|女の子|男の子|ヤツ|ヤロー|やろう subj=@person|連中|奴ら|やつら|野郎|奴|やつ|女|男|おっさん|おじさん|おばさん|オヤジ|親父|ジジイ|ババア|じじい|ばばあ|ファン|客|科学者|博士|医者|教師|先生|ガキ|小僧|娘|女の子|男の子|ヤツ|ヤロー|やろう dat=- to=-	미치다	50	LEX-7941	freq	いかれた野郎 미친 놈
+freq-idiom-98:12	いかれる	v1:규칙	sense	frame	head=家族|一家|集団|世界|発想|考え subj=家族|一家|集団|世界|発想|考え dat=- to=-	미치다	50	LEX-7941	freq	いかれた家族 미친 가족
+freq-idiom-98:10	イカれる|イカレる	v1:규칙	sense	frame	head=@person|@group|@organization|連中|奴ら|やつら|野郎|奴|やつ|女|男|家族|一家|集団|世界|発想|考え|おっさん|おじさん|おばさん|オヤジ|親父|ジジイ|ババア|じじい|ばばあ|ファン|客|科学者|博士|医者|教師|先生|ガキ|小僧|娘|女の子|男の子|ヤツ|ヤロー|やろう	미치다	50	LEX-7941	freq	イカれた野郎 미친 놈
+freq-idiom-98:11	イカれる|イカレる	v1:규칙	sense	frame	subj=@person|あいつ|こいつ|そいつ|お前|おまえ|てめえ|彼|彼女|あの人|頭|頭ん中|頭の中|脳|脳みそ	미치다	50	LEX-7941	freq	頭のネジがイカレちまって 머리 나사가 미쳐 버려서
+freq-idiom-98:14	ぶち上げる|ぶちあげる|ブチ上げる	v1	voice	frame	*	passive	50	LEX-7941	freq	ぶち上げられた花火 쏘아 올려진 불꽃
+freq-idiom-98:18	ぶち上げる|ぶちあげる|ブチ上げる	v1	voice	frame	obj=計画|構想|大風呂敷|大ボラ|大ぼら|大法螺|ボラ|ホラ|法螺|方針|夢|プラン|野望	passive:공언되다	60	LEX-7941	freq	ぶち上げられた計画 공언된 계획
+freq-idiom-98:19	ぶち上げる|ぶちあげる|ブチ上げる	v1	voice	frame	subj=計画|構想|大風呂敷|大ボラ|大ぼら|大法螺|ボラ|ホラ|法螺|方針|夢|プラン|野望	passive:공언되다	60	LEX-7941	freq	計画がぶち上げられた 계획이 공언되었다
+freq-idiom-98:15	いかれる	v1:규칙	sense	frame	subj=頭|頭ん中|頭の中|脳|脳みそ	미치다	50	LEX-7941	freq	頭がいかれてる 머리가 미쳤다
+freq-idiom-98:16	いかれる|イカれる|イカレる	v1:규칙	sense	frame	subj=ネジ|頭のネジ	나가다	50	LEX-7941	freq	頭のネジがイカレちまって 머리 나사가 나가 버려서
+freq-idiom-98:17	ぶち上げる|ぶちあげる|ブチ上げる	v1:ㄹ	sense	frame	obj=公約|旗|旗印|看板|スローガン|目標	내걸다	50	LEX-7941	freq	公約をぶちあげて 공약을 내걸고

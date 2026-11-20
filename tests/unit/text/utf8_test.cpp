@@ -6,6 +6,7 @@
 
 using hdTrans::text::AppendRune;
 using hdTrans::text::DecodeRune;
+using hdTrans::text::Find;
 using hdTrans::text::kReplacement;
 using hdTrans::text::RuneCount;
 
@@ -55,6 +56,21 @@ HD_TEST(utf8_rune_count) {
     HD_CHECK_EQ(RuneCount("abc"), size_t{3});
     HD_CHECK_EQ(RuneCount("\xE7\x8C\xAB\xE3\x81\x8C\xE5\xA5\xBD\xE3\x81\x8D"), size_t{4});  // 猫が好き
     HD_CHECK_EQ(RuneCount("a\x80z"), size_t{3});
+}
+
+HD_TEST(utf8_find_matches_string_find) {
+    struct Case {
+        std::string_view s;
+        std::string_view needle;
+    };
+    const Case cases[] = {
+        {"そうやろ、ちゃうやろ", "やろ"}, {"そうやろ、ちゃうやろ", "ちゃう"}, {"そうやろ", "やろか"}, {"やや", "や"},
+        {"ああああ", "ああ"},         {"abcab", "ab"},             {"", "あ"},       {"あ", ""},
+        {"", ""},                     {"猫が好き", "好き"},         {"猫が好き", "猫が好きだ"}, {"a\x80z", "\x80"},
+    };
+    for (const auto& c : cases) {
+        for (size_t from = 0; from <= c.s.size() + 1; from++) HD_CHECK_EQ(Find(c.s, c.needle, from), c.s.find(c.needle, from));
+    }
 }
 
 HD_TEST(text_line_pieces) {

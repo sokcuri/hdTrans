@@ -26,7 +26,7 @@ normalize:ru-contraction	足跡にはレベル３のハンターなんて腐る�
 dict:grm:3960:弱っち-1	弱っちいなあ、私	약하다, 나	fix	lookup
 dict:grm:3960:弱っち-1	どいつも こいつも弱っちくて つまんねえなあ！	어느 놈도 이 녀석도 약하고 재미없구나!	fix	lookup
 normalize:fused-adjective	おいおい おいおい そう固えこと言うなよ なっ	이봐 이봐 이봐 이봐 그렇게 단단한 소리 하지 마 그치	fix	normalize
-normalize:ru-contraction	お前は、姿勢を維持するための筋肉が足りんのだ	너는, 자세를 유지하기 위한 근육이 충분하지 않는 것이다	keep	normalize
+normalize:ru-contraction	お前は、姿勢を維持するための筋肉が足りんのだ	너는, 자세를 유지하기 위한 근육이 부족한 것이다	keep	normalize
 normalize:ru-contraction	そうとも言えんのだ	그렇다고도 말할 수 없는 것이다	keep	normalize
 normalize:ru-contraction	確信が持てんのだ	확신을 가질 수 없는 것이다	keep	normalize
 normalize:ru-contraction	意外と、人多いんだね	의외로, 사람 많다	keep	normalize

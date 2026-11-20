@@ -49,9 +49,11 @@ int Worker::QuoteDepth(int j) {
     if (quoteDepths_.empty()) {
         quoteDepths_.reserve(tokens.size() + 1);
         quoteMarkFirst_.reserve(tokens.size() + 1);
-        int depth = settings.quoteDepth;
+        quoteCounts_.reserve(tokens.size() + 1);
+        int depth = settings.quoteDepth, count = settings.quoteCount;
         for (std::size_t i = 0; i < tokens.size(); i++) {
             quoteDepths_.push_back(depth);
+            quoteCounts_.push_back(count);
             quoteMarkFirst_.push_back(static_cast<uint32_t>(quoteMarks_.size()));
             // QuoteDepthAfter(tokens.Raw(i), depth), keeping where each mark ends.
             const std::string_view raw = tokens.Raw(i);
@@ -60,11 +62,13 @@ int Worker::QuoteDepth(int j) {
                 if (r.size == 0) break;
                 at += r.size;
                 if (r.cp != U'「' && r.cp != U'『' && r.cp != U'」' && r.cp != U'』') continue;
+                if ((r.cp == U'「' || r.cp == U'『') && depth == 0) count++;
                 depth = QuoteDepthAfter(raw.substr(at - r.size, r.size), depth);
-                quoteMarks_.push_back({static_cast<int>(at), depth});
+                quoteMarks_.push_back({static_cast<int>(at), depth, count});
             }
         }
         quoteDepths_.push_back(depth);
+        quoteCounts_.push_back(count);
         quoteMarkFirst_.push_back(static_cast<uint32_t>(quoteMarks_.size()));
     }
     if (j < 0) return settings.quoteDepth;
@@ -85,6 +89,25 @@ int Worker::QuoteDepthAt(int j, std::string_view text, int start) {
         return at < static_cast<std::size_t>(m.end);
     });
     return after == first ? depth : std::prev(after)->depth;
+}
+
+output::QuoteState Worker::QuotesAt(int j, std::string_view text, int start) {
+    QuoteDepth(j);
+    const std::size_t t = static_cast<std::size_t>(j);
+    const std::size_t token = std::min(t, quoteDepths_.size() - 1);
+    const output::QuoteState before = j < 0 ? output::QuoteState{settings.quoteDepth, settings.quoteCount}
+                                            : output::QuoteState{quoteDepths_[token], quoteCounts_[token]};
+    const std::string_view head = text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0))));
+    if (j < 0 || t >= tokens.size() || t + 1 >= quoteMarkFirst_.size() || text.data() != tokens.Raw(t).data() ||
+        text.size() != tokens.Raw(t).size()) {
+        return output::QuotesAfter(before, head);
+    }
+    // A mark the head cuts short is no mark in it either.
+    const auto first = quoteMarks_.begin() + quoteMarkFirst_[t], last = quoteMarks_.begin() + quoteMarkFirst_[t + 1];
+    const auto after = std::upper_bound(first, last, head.size(), [](std::size_t at, const QuoteMark& m) {
+        return at < static_cast<std::size_t>(m.end);
+    });
+    return after == first ? before : output::QuoteState{std::prev(after)->depth, std::prev(after)->count};
 }
 
 OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open) {

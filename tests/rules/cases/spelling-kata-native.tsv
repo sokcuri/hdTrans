@@ -1,0 +1,108 @@
+# 규칙: LEX-4823, LEX-8060, LEX-8061, LEX-8062
+rule	input	expected	kind	layer
+lex:native-katakana	マドがわれてるのもふつう	has:창문이	fix	protect
+lex:native-katakana	マドを開けた	창문을 열었다	fix	protect
+lex:native-katakana	マドの外を見た	창문 밖을 보았다	fix	protect
+lex:native-katakana	その家ならマドはすぐに割れる	has:창문은	fix	protect
+lex:native-katakana	いたってカイテキにくらしてる	has:쾌적하게	fix	protect
+lex:native-katakana	ここだけカタコトになる	has:서투른 말	fix	protect
+lex:native-katakana	鉄のカンヌキでふさぐ	has:빗장으로	fix	protect
+lex:native-katakana	マドさんが来た	마드 씨가 왔다	keep	protect
+lex:native-katakana	マド！	마드!	keep	protect
+lex:native-katakana	マドカが来た	마도카가 왔다	keep	protect
+lex:native-katakana	ユキが来た	유키가 왔다	keep	protect
+lex:native-katakana	サクラが咲いた	사쿠라가 피었다	keep	protect
+lex:native-katakana	ミナが言った	미나가 말했다	keep	protect
+lex:native-katakana	ソウトは立ち上がった	has:소우트는	keep	protect
+lex:native-katakana	シャオンと一緒に残る	has:샤온과	keep	protect
+lex:native-katakana	治安機関シャバク（シンベト）に	has:샤바크	keep	protect
+lex:native-katakana	イエ、違います	has:아뇨	keep	protect
+katakana:kanji-okurigana	見られていないわけがないんじゃなくて、見ラレテイタ。	has:보여지고 있었다	fix	protect
+katakana:kanji-okurigana	本当に困ッタな	정말 곤란하군	fix	protect
+katakana:kanji-okurigana	彼は走ッテいた	그는 달리고 있었다	fix	protect
+katakana:kanji-okurigana	壁に書カレテいる	has:쓰여져 있다	fix	protect
+katakana:kanji-okurigana	新アニメが始まる	신애니메이션이 시작된다	keep	protect
+katakana:kanji-okurigana	米ツアーに挑む	미국 투어에 도전한다	keep	protect
+katakana:kanji-okurigana	成シニアディレクターは	has:시니어 디렉터	keep	protect
+katakana:kanji-okurigana	「修正サンラグ式」を導入	has:산라그식	keep	protect
+lex:mixed-spelling	僕にしがみ付く。	나에게 매달린다.	fix	lookup
+lex:mixed-spelling	しがみ付いて泣いていた	has:매달려	fix	lookup
+lex:mixed-spelling	天井や壁面にこびり付いている。	has:달라붙어 있다	fix	lookup
+lex:mixed-spelling	まとわり付く	달라붙는다	fix	lookup
+lex:mixed-spelling	とき卵を入れる	푼 달걀을 넣는다	fix	lookup
+lex:mixed-spelling	溶き卵を入れる	푼 달걀을 넣는다	fix	lookup
+lex:mixed-spelling	ほうれい線も薄くなった	has:팔자주름도	fix	lookup
+lex:mixed-spelling	赤ずきんちゃんに言いつけるからな	has:붉은 두건	fix	lookup
+lex:mixed-spelling	かいてきに暮らす	쾌적하게 산다	fix	lookup
+lex:mixed-spelling	線を引く	선을 긋는다	keep	lookup
+lex:mixed-spelling	付く	붙는다	keep	lookup
+lex:mixed-spelling	時々	가끔	keep	lookup
+lex:mixed-spelling	見た目とはき心地の使い捨てパンツ	has:착용감	fix	lookup
+lex:mixed-spelling	彼は働きものだ	그는 부지런한 사람이다	fix	lookup
+lex:native-katakana	待ってて、ゴトが持ってきますね。	has:고트가	keep	protect
+lex:native-katakana	自分がケダモノだと言った	has:짐승이라고	fix	protect
+lex:native-katakana	最後はヤケクソになった	has:자포자기가	fix	protect
+katakana:kanji-okurigana	嘘ダ…沈ム……	has:가라앉	fix	protect
+lex:native-katakana	段ボール数箱分のタオルや、カンパンなどの非常食	has:건빵	fix	lookup
+lex:native-katakana	ひらめのエンガワなんかがいいわねー	has:지느러미살	fix	lookup
+lex:native-katakana	ちょっと知恵のついた小ザルって感じだわね	lacks:바구니	keep	protect
+lex:native-katakana	「こーなりゃヤケだね。毎度ども〜！」	has:자포자기	fix	protect
+lex:native-katakana	もうヤケだ	has:자포자기	fix	protect
+lex:native-katakana	彼のスネは傷だらけだ。	has:정강이	fix	protect
+lex:native-katakana	スネを蹴られた	has:정강이	fix	protect
+lex:native-katakana	「どこがだよ。ゴールデンじゃ流せないようなキワモノだぞ」	has:별종	fix	protect
+lex:native-katakana	際物扱いされた	has:별종	fix	lookup
+lex:native-katakana	ワキが甘い	lacks:액취	keep	protect
+lex:native-katakana	ワキが痛い	lacks:액취	keep	protect
+lex:native-katakana	ゴスの服を着た	lacks:기대	keep	protect
+lex:native-katakana	クレに向かった	lacks:줘	keep	protect
+lex:native-katakana	ワレは神なり	has:나는	fix	protect
+lex:native-katakana	コエが聞こえた	has:목소리가	fix	protect
+lex:native-katakana	ミセの前で待つ	has:가게 앞	fix	protect
+katakana:kanji-okurigana	食ベタイ	has:먹고 싶	fix	protect
+katakana:kanji-okurigana	食ベナイ	has:먹지 않	fix	protect
+katakana:kanji-okurigana	食ベマセン	has:먹지 않습니다	fix	protect
+katakana:kanji-okurigana	食ベナカッタ	has:먹지 않았	fix	protect
+katakana:kanji-okurigana	食ベロ！	has:먹어라	fix	protect
+katakana:kanji-okurigana	食ベラレナイ	has:먹을 수 없	fix	protect
+katakana:kanji-okurigana	忘レナイ	has:잊지 않	fix	protect
+katakana:kanji-okurigana	見タイ	has:보고 싶	fix	protect
+katakana:kanji-okurigana	見ロ	has:봐라	fix	protect
+katakana:kanji-okurigana	寝ナイ	has:자지 않	fix	protect
+katakana:kanji-okurigana	寝タ子	has:잠든 아이	fix	protect
+katakana:kanji-okurigana	信ジナイ	has:믿지 않	fix	protect
+katakana:kanji-okurigana	信ジマス	has:믿습니다	fix	protect
+katakana:kanji-okurigana	考エナイ	has:생각하지 않	fix	protect
+katakana:kanji-okurigana	起キナイ	has:일어나지 않	fix	protect
+katakana:kanji-okurigana	撫デナイで	has:쓰다듬지 마	fix	protect
+katakana:kanji-okurigana	食ベガ来た	lacks:먹	keep	protect
+katakana:kanji-okurigana	日タイ関係	has:타이	keep	protect
+katakana:kanji-okurigana	佐藤タイ	has:타이	keep	protect
+lex:mixed-spelling	シールをひっ付けた	has:붙였다	fix	lookup
+lex:mixed-spelling	紙をひっ付けない	has:붙이지 않	fix	lookup
+katakana:kanji-okurigana	入力マナを使う	입력 마나를 쓴다	fix	protect
+katakana:kanji-okurigana	魔力マナが尽きた	마력 마나가 다했다	fix	protect
+katakana:kanji-okurigana	体力マナを回復する	has:체력 마나를	fix	protect
+katakana:kanji-okurigana	魔力ミナを使う	has:마력 미나를	fix	protect
+katakana:kanji-okurigana	学生ルナがいる	has:학생 루나가	fix	protect
+katakana:kanji-okurigana	先生ミナが来た	has:선생님 미나가	fix	protect
+katakana:kanji-okurigana	発見タイを使う	has:발견 타이를	fix	protect
+katakana:kanji-okurigana	外出テルを見た	has:외출 테루를	fix	protect
+katakana:kanji-okurigana	提出ラレを使う	has:제출 라레를	fix	protect
+katakana:kanji-okurigana	学生ラレを使う	has:학생 라레를	fix	protect
+katakana:kanji-okurigana	力マナを使う	lacks:힘주	fix	protect
+katakana:kanji-okurigana	生マナを使う	lacks:낳	fix	protect
+katakana:kanji-okurigana	田中マナです	has:마나입니다	keep	protect
+katakana:kanji-okurigana	山田ミナと申します	has:미나라고	keep	protect
+katakana:kanji-okurigana	マナを使う	마나를 쓴다	keep	protect
+katakana:kanji-okurigana	すごく気持チいい	has:기분 좋	keep	protect
+katakana:kanji-okurigana	返り討チにしてやる	has:반격으로	keep	protect
+katakana:kanji-okurigana	全然落ち着カナイ	has:불안	keep	protect
+katakana:kanji-okurigana	昨日のことを思イ出シタ	has:생각해 냈다	keep	protect
+katakana:kanji-okurigana	夢見ル少女	has:꿈꾸는	keep	protect
+katakana:kanji-okurigana	一目見タイ	has:보고 싶	keep	protect
+katakana:kanji-okurigana	本当に出来ルンダナ	has:할 수 있	keep	protect
+katakana:kanji-okurigana	外に出ルナ	has:나오지 마	keep	protect
+katakana:kanji-okurigana	子供を生マナイ	has:낳지 않	keep	protect
+katakana:kanji-okurigana	生き返ラナイ	has:되살아나지 않	keep	protect
+katakana:kanji-okurigana	早く手伝ッテ	has:도와	keep	protect

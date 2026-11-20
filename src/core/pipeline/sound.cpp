@@ -611,6 +611,13 @@ private:
     std::u32string rs_;
     std::u32string f_;  // rs_ in katakana
     std::vector<size_t> offsets_;  // byte offset of each character, and the end
+    // The keys LongestKeys found at each character, read once: the look-up depends on the character alone. The
+    // name-layer and plain keys are kept apart for end rows and the others, as the callers count end rows apart.
+    struct KeyLengths {
+        bool known = false;
+        size_t base = 0, user = 0, userEnd = 0, name = 0, nameEnd = 0;
+    };
+    mutable std::vector<KeyLengths> keyLengths_;
     size_t stutterEnd_ = static_cast<size_t>(-1);  // the character after the last stutter
     size_t intjEnd_ = static_cast<size_t>(-1);     // the end of the last interjection that opened an utterance
 };
@@ -656,25 +663,36 @@ bool SoundText::PauseAt(size_t p) const {
 // key that start at character p; kana spellings do not count, nor with skipEnds the
 // endings of end rows.
 void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds, size_t* ending) const {
-    base = user = name = 0;
-    if (ending != nullptr) *ending = 0;
-    const size_t end = std::min(rs_.size(), p + 24);
-    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
-    for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && c.user->kana) continue;
-        const size_t n = text::RuneCount(c.source);
-        if (c.user != nullptr && c.user->end && ending != nullptr) {
-            *ending = std::max(*ending, n);
-            continue;
+    if (keyLengths_.empty()) keyLengths_.resize(rs_.size() + 1);
+    KeyLengths& k = keyLengths_[p];
+    if (!k.known) {
+        k.known = true;
+        const size_t end = std::min(rs_.size(), p + 24);
+        const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
+        for (const dict::Candidate& c : rd.list) {
+            if (c.user != nullptr && c.user->kana) continue;
+            const size_t n = text::RuneCount(c.source);
+            if (c.user == nullptr) {
+                k.base = std::max(k.base, n);
+            } else if (c.user->nameLayer) {
+                (c.user->end ? k.nameEnd : k.name) = std::max(c.user->end ? k.nameEnd : k.name, n);
+            } else {
+                (c.user->end ? k.userEnd : k.user) = std::max(c.user->end ? k.userEnd : k.user, n);
+            }
         }
-        if (c.user != nullptr && skipEnds && c.user->end) continue;
-        if (c.user != nullptr && c.user->nameLayer) {
-            name = std::max(name, n);
-        } else if (c.user != nullptr) {
-            user = std::max(user, n);
-        } else {
-            base = std::max(base, n);
-        }
+    }
+    base = k.base;
+    if (ending != nullptr) {
+        // the end rows go to ending, whatever their layer
+        *ending = std::max(k.userEnd, k.nameEnd);
+        user = k.user;
+        name = k.name;
+    } else if (skipEnds) {
+        user = k.user;
+        name = k.name;
+    } else {
+        user = std::max(k.user, k.userEnd);
+        name = std::max(k.name, k.nameEnd);
     }
 }
 
@@ -1440,6 +1458,18 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         if (k == KatakanaEnd(rs, p)) return chain;
     }
     bool loose = false;  // the first sound took a ッ that the next sound starts from
+    // Whether the token before p keeps the chain that starts with first from being sounds (see below): quoted for a
+    // laugh that って quotes, teClosing for どうした after a て form, last for the last sound, or nullptr while the
+    // chain is still found (then a true answer holds for any last sound).
+    auto rejected = [&](const SoundMatch& first, bool quoted, bool teClosing, const SoundMatch* last) {
+        return (afterParticle && !teClosing && first.intj && (first.keyLen < 3 || (last != nullptr && QuotedBy(*last, p) == 0)) && !quoted) ||
+               (afterWord && (first.intj || first.keyLen < 3) && !quoted) ||
+               (runStart && InWord(prev) && !quoted && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
+                !MimeticAfterWord(first) && !StateAfterWord(first)) ||
+               // A particle after a closing bracket that a dictionary word goes on from past the first
+               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
+               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1));
+    };
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
         if (!MatchAt(i, m, i > p, afterParticle && i == p)) break;
@@ -1453,6 +1483,10 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         }
         i = m.end;
         chain.push_back(std::move(m));
+        // A chain of two sounds or more is no quoted laugh and no closing phrase, so the tests below that read only its
+        // first sound already tell when it is dropped; finding the rest to the end of the run (ねぇねぇ…ね after a word)
+        // would cost each later place of the run as much again.
+        if (chain.size() == 2 && !katakana && (teOnly || rejected(chain[0], false, false, nullptr))) return {};
     }
     if (chain.empty()) {
         // A run whose first sound ends in a ッ that the next sound starts from
@@ -1497,13 +1531,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         for (const SoundMatch& m : chain) {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
-    } else if ((afterParticle && !teClosing && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0) && !quoted) ||
-               (afterWord && (first.intj || first.keyLen < 3) && !quoted) ||
-               (runStart && InWord(prev) && !quoted && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
-                !MimeticAfterWord(first) && !StateAfterWord(first)) ||
-               // A particle after a closing bracket that a dictionary word goes on from past the first
-               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
-               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1))) {
+    } else if (rejected(first, quoted, teClosing, &chain.back())) {
         return {};
     }
     while (!chain.empty()) {
@@ -3405,15 +3433,26 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         const std::string_view rest = std::string_view(s).substr(byte[i]);
         if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-not"), rest) > 0) continue;
         bool compound = false;  // only when the dictionary holds the verb with ていく
+        size_t repeatAt = 0, formEnd = 0;  // a final form before more text: where that text and the form end
         if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku"), rest) == 0) {
             compound = true;
             if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-listed"), rest) == 0) {
                 const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-final"), rest);
                 if (n == 0) continue;
-                const size_t after = byte[i] + n;
+                size_t after = byte[i] + n;
+                // A small っ or ッ, a long mark or a small vowel only draws the order out (出てけッ！, 持ってけーっ).
+                while (after < s.size()) {
+                    const text::Rune r = text::DecodeRune(std::string_view(s).substr(after));
+                    if (std::u32string_view(U"っッーぁぃぅぇぉァィゥェォ").find(r.cp) == std::u32string_view::npos) break;
+                    after += r.size;
+                }
                 if (after < s.size()) {
                     const char32_t next = text::DecodeRune(std::string_view(s).substr(after)).cp;
-                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) continue;
+                    // Before more text it ends nothing, unless the same order is said again (出てけ出てけッ).
+                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) {
+                        repeatAt = after;
+                        formEnd = byte[i] + n;
+                    }
                 }
             }
         }
@@ -3424,6 +3463,9 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         size_t from = start;
         while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
         if (from + 1 >= i) continue;
+        if (repeatAt > 0 && !std::string_view(s).substr(repeatAt).starts_with(std::string_view(s).substr(byte[from], formEnd - byte[from]))) {
+            continue;
+        }
         // The ってね after a request to stop or wait quotes it (やめてってね 그만두라고).
         bool quoted = false;
         for (size_t w = from; w < i && !quoted; w++) {
@@ -4539,7 +4581,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteKansaiNegativeKana(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteKansaiNegativeKana(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(internal::RewriteDrawnQuotedOrder(completed, snap), snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);

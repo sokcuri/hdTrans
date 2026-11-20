@@ -1,0 +1,103 @@
+# 규칙: LEX-8100 LEX-8101 LEX-8102 LEX-8103 LEX-8104 LEX-8105 LEX-8106 LEX-8107 LEX-8108 LEX-8109 LEX-8110 LEX-8111 LEX-8112 LEX-8113 LEX-8114 LEX-8115
+rule	input	expected	kind	layer
+normalize:masen-shita	すんませんしたぁ！	죄송합니다!	fix	normalize
+normalize:masen-shita	申し訳ございませんした。	죄송했습니다.	fix	normalize
+normalize:masen-shita	知りませんしたか？	몰랐습니까?	fix	normalize
+normalize:spoken-word	わぁったわあった！！	알았어 알았어!!	fix	normalize
+normalize:spoken-word	わぁってるよ	알고 있어	fix	normalize
+normalize:spoken-word	ちょうど いがった。	has:다행	fix	normalize
+normalize:spoken-word	いがったです	다행입니다	fix	normalize
+normalize:spoken-word	大体おどれら、人さまの税金で	has:너희들	fix	normalize
+normalize:spoken-word	それをおどれは何じゃ、いつから	그것을 너는 뭐냐, 언제부터	fix	normalize
+normalize:spoken-word	ようも抜かした、この裏切り者が	has:잘도	fix	normalize
+normalize:spoken-word	おどれ！	lacks:너	keep	normalize
+normalize:spoken-word	おどれば	춤추면	keep	normalize
+normalize:spoken-word	どうしようもない	어쩔 수 없다	keep	normalize
+normalize:spoken-word	味わいのある	맛이 있다	keep	normalize
+normalize:sa-insertion	呼ばさせていただいています。	lacks:호	fix	normalize
+normalize:sa-insertion	ご一緒さしていただいておりまして	has:함께 하고	fix	normalize
+normalize:sa-insertion	勉強さしてください。	공부시켜 주세요.	fix	normalize
+normalize:sa-insertion	動かさせてください。	움직이게 해 주세요.	keep	normalize
+normalize:sa-insertion	話させてください。	이야기하게 해 주세요.	keep	normalize
+normalize:sa-insertion	目薬をさしていただく	has:안약	keep	normalize
+normalize:ichidan-tto	目標 決めっとほかのことが	has:결정하면	fix	normalize
+normalize:ichidan-tto	食べっと太る	has:먹으면	fix	normalize
+normalize:ichidan-tto	やっと決めた	드디어 결정했다	keep	normalize
+normalize:ichidan-tto	ちょっと待って	잠깐 기다려	keep	normalize
+normalize:nominal-nga	わしがこの部屋に入るんがそんなに嫌かい	has:들어가는 것이	fix	normalize
+normalize:nominal-nga	言うんが早い	말하는 것이 빠르다	fix	normalize
+normalize:nominal-nga	みかんが好き	귤을 좋아해	keep	normalize
+normalize:nominal-nga	考えが甘い	생각이 안이하다	keep	normalize
+normalize:kotaa	気にするこたあない。	신경 쓸 일은 없다.	fix	normalize
+normalize:kotaa	当分困るこたぁねえ！	당분간 곤란할 일은 없어!	fix	normalize
+normalize:kotaa	そんなこたぁ知らん	그런 일은 모른다	fix	normalize
+normalize:kotaa	こたえは	대답은	keep	normalize
+normalize:iken	この世の中は渡ってはいけんぞ、心の鍛錬も	has:건너선 안 돼	fix	normalize
+normalize:iken	入っちゃいけん。	들어가면 안 된다.	fix	normalize
+normalize:iken	意見がある	의견이 있다	keep	normalize
+normalize:iken	関係も何もありゃんせんね！！	has:없	fix	normalize
+normalize:sarasu	何しさらすんじゃあぁ！！！	뭐하는 거야!!!	fix	normalize
+normalize:sarasu	恥をさらした	창피를 당했다	keep	normalize
+normalize:ease-onbin	めっちゃ描きやすうてええやん	has:그리기 쉽고	fix	normalize
+normalize:ease-onbin	読みにくうなる	읽기 어려워진다	fix	normalize
+normalize:morau	国からゼニをもろぅて職を斡旋してもろぅて	has:받아	fix	normalize
+normalize:morau	教えてもろた	가르쳐 주었다	fix	normalize
+normalize:morau	もろてを挙げて	양손을 들어	keep	normalize
+normalize:charu	ここではっきり白黒つけちゃる！！	has:가려 준다	fix	normalize
+normalize:charu	見せちゃろう	보여 주마	fix	normalize
+normalize:charu	言っちゃった	말해버렸다	keep	normalize
+normalize:charu	食べちゃう	먹어버린다	keep	normalize
+normalize:aru-n	ラーメン ４つ あんですよ。	has:있는 거예요	fix	normalize
+normalize:aru-n	置いてあんだよ	놓여 있어	fix	normalize
+normalize:aru-n	あんだけ言ったのに	그만큼 말했는데	keep	normalize
+normalize:ja-end	何じゃい？　今抜かしたのは誰じゃい？！	has:뭐야	fix	normalize
+normalize:ja-end	何じゃいな、そんなに嫌か	has:뭐야	fix	normalize
+normalize:ja-end	何するんじゃ。	뭐하는 거야.	fix	normalize
+normalize:ja-end	家じゃ、何もできない	집은, 아무것도 할 수 없다	keep	normalize
+normalize:ja-end	……こんなんじゃ、とても	lacks:것이다	keep	normalize
+normalize:ja-end	そこでいいんじゃな？	거기서 좋지?	keep	normalize
+normalize:ja-end	ほんじゃ、また	그럼, 또	keep	normalize
+normalize:ya-kara	一件だけやから。	한 건만이니까.	fix	normalize
+normalize:ya-kara	雨やからな。	비니까.	fix	normalize
+normalize:ya-kara	あの手のやからは	has:패거리	keep	normalize
+normalize:n-noda	無闇に送り込めんのだが	함부로 보낼 수 없는데	fix	normalize
+normalize:n-noda	食べられんのです。	먹을 수 없습니다.	fix	normalize
+normalize:n-noda	何見んのよ	has:보는 거야	keep	normalize
+normalize:order-nkai	やめんかい！	그만두어라!	fix	normalize
+normalize:yasu	他の食べ物探してきやす！	has:찾아 옵니다	fix	normalize
+normalize:old-wish	こっちだって死なせとぅないん！！	has:싶지 않	fix	normalize
+normalize:polite	ごっつあんでごんす！	고맙습니다!	fix	normalize
+normalize:polite	わしは この村の よこづなでごんすよ。	has:요코즈나예요	fix	normalize
+normalize:ja-end	村から出てもゼニがないんじゃ。	lacks:없다	keep	normalize
+normalize:ja-end	「先輩、もしかして脱走してきたんじゃ」	「선배, 혹시 탈주해 왔지」	keep	normalize
+normalize:ja-end	こら！ どこ触っとるんじゃ	has:만지고 있는 거야	fix	normalize
+normalize:ja-end	あー、なんじゃ、その…	has:뭐냐	keep	normalize
+normalize:ja-end	まあ、何じゃ、たまには	has:뭐냐	fix	normalize
+normalize:charu	さっきから聞いちゃらんないわ	lacks:주지	keep	normalize
+normalize:masen-shita	作戦に巻き込んじまって、すいませんした	has:죄송합니다	fix	normalize
+normalize:spoken-word	「わーってるよ」	「알고 있어」	fix	normalize
+normalize:sa-insertion	早速記事の作成に入らさせていただきますっ！	has:들어가겠습니다	fix	normalize
+normalize:iken	では、はいけん。	lacks:안 된다	keep	normalize
+normalize:ja-end	なんじゃい！	뭐냐!	keep	normalize
+normalize:aru-n	私はあんです。	lacks:있	keep	normalize
+normalize:masen-shita	すいませんしたから、許して	lacks:로부터	keep	normalize
+normalize:masen-shita	申し訳ありませんしたが	lacks:습니다가	keep	normalize
+normalize:masen-shita	知りませんしたから	has:몰랐	fix	normalize
+normalize:sa-insertion	指さしてくれ	has:가리켜	keep	normalize
+normalize:sa-insertion	指さしていただく	has:가리켜	keep	normalize
+normalize:sa-insertion	指さしてください	has:가리켜	keep	normalize
+normalize:sa-insertion	勉強さしてください。	has:공부시켜	fix	normalize
+normalize:ja-end	何するんじゃあ	뭐하는 거야	fix	normalize
+normalize:ja-end	誰がやったんじゃあ	누가 한 거야	fix	normalize
+normalize:ja-end	どこ行くんじゃあ	어디 가는 거야	fix	normalize
+normalize:ja-end	何しとるんじゃあ！	뭐하고 있는 거야!	fix	normalize
+normalize:ja-end	何も知らないんじゃ？	has:모르지	keep	normalize
+normalize:ja-end	どこかで会ったんじゃ？	has:만났지	keep	normalize
+normalize:ja-end	誰も来ないんじゃ	has:않지	keep	normalize
+normalize:ja-end	覚悟するんじゃぞ！	lacks:하는 거야	keep	normalize
+normalize:ja-end	わしがしゃべったんじゃよ。	lacks:말했어	keep	normalize
+normalize:polite	ゼニカワさん	has:제니카와	keep	normalize
+normalize:polite	ゼニガタさん	has:제니가타	keep	normalize
+normalize:polite	ゼニゲバ	lacks:돈	keep	normalize
+normalize:polite	ゼニさん	has:제니	keep	normalize
+normalize:polite	ゼニちゃん	has:제니	keep	normalize

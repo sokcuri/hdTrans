@@ -36,7 +36,7 @@ lexical:adjectival-noun-particle	飄々と歩いていく背中。	lacks:초연�
 lexical:adjectival-noun-particle	彼は汲々と働いている。	lacks:급급하다고	keep	lookup
 lexical:adjectival-noun-particle	男は漂然と現れた。	has:표연하게	keep	lookup
 lexical:adjectival-noun-particle	遅々として進まない。	has:지지 부진	keep	lookup
-lexical:adjectival-noun-particle	飄々が持ち味だ。	has:초연함이	fix	lookup
+lexical:adjectival-noun-particle	飄々が持ち味だ。	lacks:표들	fix	lookup
 lexical:adjectival-noun-particle	平々凡々が一番。	has:아주 평범함이	fix	lookup
 lexical:adjectival-noun-particle	綺麗な人だった。	has:예쁜 사람	keep	lookup
 lexical:adjectival-noun-particle	本当に駄目だ。	has:안 된다	keep	lookup

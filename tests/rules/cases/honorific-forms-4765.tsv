@@ -6,7 +6,7 @@ normalize:honorific-okure	良人が、いいねと手にとって眺めていた
 normalize:honorific-okure	「放しておくれよ、クロック先生。	「놓아 줘라, 클락 선생님.	fix	normalize
 normalize:honorific-okure	――だから……いい子だから、暫く我慢して働いていておくれ、私が家へ帰るまで……」	――그러니까……좋은 아이니까, 잠시 참고 일하고 있어 주어, 내가 집으로 돌아갈 때까지……」	fix	normalize
 normalize:honorific-okure	「どうかわたしの庭を守っておくれ、フローレンス」	「제발 내 뜰을 지켜 줘, 플로렌스」	fix	normalize
-normalize:honorific-okure	ところで、D区画で働いてる娘には会ってくれたかい、まだなら是非会って行っておくれね。	그런데, D구획으로 일하고 있는 딸에게는 만나 주었니, 아직이라면 부디 만나 가 줘네.	fix	normalize
+normalize:honorific-okure	ところで、D区画で働いてる娘には会ってくれたかい、まだなら是非会って行っておくれね。	그런데, D구획에서 일하고 있는 딸에게는 만나 주었니, 아직이라면 부디 만나 가 줘네.	fix	normalize
 normalize:honorific-okure	トそう思うほど、お顔が見たくッて、堪らないから、どうしましょうどうしましょう、どうかしておくれな。	트 그렇게 생각하는 만큼, 얼굴을 보고 싶어서, 견딜 수 없으니까, 어떻게 하죠 어떻게 하죠, 아무쪼록 해 줘.	fix	normalize
 normalize:honorific-okure	助けておくれよ、我が親友ぅ～！	도와 주어라, 우리 절친!	fix	normalize
 normalize:honorific-okure	「そいぢや、お豆をやるから、鳩を出しておくれ、ねえ、ばあや。	「소이지나, 콩을 주니까, 비둘기를 내 줘, 응, 무늬.	fix	normalize
@@ -69,7 +69,7 @@ normalize:honorific-rashi	「松本氏の年や地位にてらして何という
 normalize:honorific-rashi	勇気を出せば 何でも できるっ て 言ってらしたよ	용기를 내면 뭐든 할 수 있는 이라고 말하고 계셨어	fix	normalize
 normalize:honorific-rashi	「峯子さんみたいにいい方がちゃんとついてらして、自分の才能に自信もあれば、誰だってわりきれた心持でいられるわけだわねえ」	「미네코 씨같이 좋은 게 제대로 붙어 계셔, 자신의 재능에 자신도 있으면, 누구라도 다 깰 수 있던 마음으로 있을 수 있는 것이네」	fix	normalize
 normalize:honorific-rashi	周囲に目を配って、すごく自分をコントロールしてらして、その上で、穏やかな生活を演出してらっしゃいます	주위에 고루 주시해, 정말 자신을 컨트롤하고 계셔, 그 위에, 온화한 생활을 연출하고 계십니다	fix	normalize
-normalize:honorific-rashi	けい　それじゃ、あなたが向うでなすってらしたことは、私達に知られてはまずいことだと思っていいのですね。	있고 그럼, 당신이 향하는 것으로 이룬다고 계셨던 것은, 저희들에게 알려져서는 곤란한 일이라고 생각해도 되는군요.	fix	normalize
+normalize:honorific-rashi	けい　それじゃ、あなたが向うでなすってらしたことは、私達に知られてはまずいことだと思っていいのですね。	has:케이 그럼, 당신이	fix	normalize
 normalize:honorific-rashi	何の工場を やってらしたんですか？	무슨 공장을 하고 계셨습니까?	fix	normalize
 normalize:honorific-rashi	伯爵家のご令嬢は寄宿学校に入ってらしてマーリブル伯爵家が落ち着くまではそちらで保護してもらっているから安心してね、と。	백작가의 영애는 기숙 학교에 들어가 계셔 마리블 백작가가 침착할 때까지는 그쪽에서 보호받고 있으니까 안심해, 라고.	fix	normalize
 normalize:honorific-rashi	桜乃さんとご一緒に、お買い物はしてらしたんですよね？	사쿠라노 씨와 함께, 쇼핑은 하고 계신 거죠?	fix	normalize
@@ -81,7 +81,7 @@ normalize:honorific-rashi	わざわざミズの者を連れていらしたのも
 normalize:honorific-rashi	久遠さまは気付いていらしたようですが	쿠온 님은 깨달아 오신 것 같습니다만	keep	normalize
 normalize:honorific-rashi	そ…それは、剣丞さまがずっと見ていらしたからで	그…그것은, 검죠 님이 계속 보고 오셨기 때문으로	keep	normalize
 normalize:honorific-rashi	「ずっと仲良くしていらしたでしょう？	「계속 사이좋게 지내 오셨겠죠?	keep	normalize
-normalize:honorific-rashi	おまえさんは、どこから乗っていらしたの。	너 씨는, 어디에서 타 오셨어.	keep	normalize
+normalize:honorific-rashi	おまえさんは、どこから乗っていらしたの。	has:너는, 어디에서 타 오셨어.	keep	normalize
 normalize:honorific-rashi	まだ起きていらしたのですか？	아직 깨어 오셨습니까?	keep	normalize
 normalize:honorific-rashi	「いいえ、そうそう、こちらからは見えなかった方、棕梠の蔭に坐っていらした方ですわ」	「아니요, 맞아 맞아, 이쪽에서는 안 보였던 편, 종려의 음에 앉아 오신 분이에요」	keep	normalize
 normalize:honorific-rashi	のびのびとした、ねぼけたような春の日光は縫目にしらみの行列の有りそうな袷の背中をてらして居る。	has:있을 것 같은 겹옷의 등을 비추어 있다	keep	normalize

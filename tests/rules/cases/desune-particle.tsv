@@ -1,0 +1,51 @@
+# 규칙: LEX-7870
+rule	input	expected	kind	layer
+ending:すね	「定番すね」	has:정석이네	fix	builtin-ending
+ending:すね	定番すねえ	정석이네요	fix	builtin-ending
+ending:すね	定番すよね	정석이죠	fix	builtin-ending
+ending:すね	あっにきー、やったすねー！	has:했네요	fix	builtin-ending
+ending:すね	強いすね	강하네요	fix	builtin-ending
+ending:すね	行くすね	가네요	fix	builtin-ending
+ending:すね	……賑やかすね。	lacks:정강이	fix	builtin-ending
+ending:すね	……便利なものがあるですね。	has:있네요.	fix	builtin-ending
+ending:すね	それから精緻な予測のもととなるですね	has:되네요	fix	builtin-ending
+dict:w:40800	そうすね	그렇네요	fix	lookup
+dict:w:40802	そーすね	그렇네요	fix	lookup
+dict:w:40803	そうすよね	그렇죠	fix	lookup
+normalize:rough-polite-yasu	先に行ってやすね。	먼저 가 있을게요.	fix	normalize
+normalize:rough-polite-yasu	兄貴って呼ばせていただきやすね！	has:부를게요!	fix	normalize
+normalize:rough-polite-yasu	これからは“兄貴”って呼ばせてもらいやすね！	has:부를게요!	fix	normalize
+normalize:rough-polite-yasu	待ってやすよ	기다리고 있어요	fix	normalize
+normalize:rough-polite-yasu	知ってやす	알고 있습니다	fix	normalize
+normalize:rough-polite-yasu	ゆきやすね、ありがとう	has:유키	keep	normalize
+normalize:rough-polite-yasu	家に帰ってやすみたい	has:쉬고 싶다	keep	normalize
+sound:lead-sune	すね。＞＞続いては…。	has:네요.	fix	sound
+sound:lead-sune	すね。	네요.	fix	sound
+sound:lead-sune	ますね。	네요.	fix	sound
+dict:jisjk:90966	机の足にすねを打った。	has:정강이를 쳤다	keep	lookup
+dict:jisjk:90966	私のすねの辺りまできます。	has:정강이 근처	keep	lookup
+dict:jisjk:90966	足のすねを蹴った	has:정강이를	keep	lookup
+dict:jisjk:90966	すね毛が濃い	has:정강이 털	keep	lookup
+lexical:sune-verb	すねた顔	토라진 얼굴	keep	lookup
+lexical:sune-verb	すねるなよ	토라지지 마	keep	lookup
+ending:すね	「合い鍵ができ次第、みんなに渡すね」	has:건네줄게	keep	builtin-ending
+ending:すね	Sorry… すぐ直すね。	has:고칠게.	keep	builtin-ending
+ending:すね	静かだったすね。	조용했네요.	fix	builtin-ending
+ending:すね	大変だったすね。	힘들었네요.	fix	builtin-ending
+ending:すね	高かったすよね。	비쌌죠.	fix	builtin-ending
+ending:すね	学生だったすよね。	학생이었죠.	fix	builtin-ending
+ending:すね	すごかったすよね。	대단했죠.	fix	builtin-ending
+ending:すね	書かなかったすよね。	쓰지 않았죠.	fix	builtin-ending
+ending:すね	静かだったすねえ。	조용했네요.	fix	builtin-ending
+ending:すね	静かすね。	조용하네요.	fix	builtin-ending
+ending:すね	傷をいやすね。	has:달랠게	keep	builtin-ending
+ending:すね	心をいやすね。	lacks:싫	keep	builtin-ending
+ending:すね	疲れをいやすよね。	lacks:싫	keep	builtin-ending
+ending:すね	いやすよね。	lacks:싫	keep	builtin-ending
+dict:w:40804	知ってません。	모릅니다.	fix	lookup
+dict:w:40804	分かってません。	모릅니다.	fix	lookup
+dict:w:40804	知ってやせん。	모릅니다.	fix	lookup
+dict:w:40805	知ってませんでした。	몰랐습니다.	fix	lookup
+dict:w:40806	まだ知ってませんか？	아직 모릅니까?	fix	lookup
+dict:w:40804	見てません。	보지 않았습니다.	keep	lookup
+dict:w:40804	知っていません。	알고 있지 않습니다.	keep	lookup

@@ -2958,7 +2958,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 金魚の糞	껌딱지	N110			GN				llm			i:2947
 目を皿にする	눈을 휘둥그렇게 뜨고	A9D0			GN				llm			i:2948
 目から鼻へ抜け	머리가 팽팽 돌아&A1@	M427			GN				llm			i:2949
-滅相もない	당치도 않아요	A9D0			GN				llm			i:2950
 滅相も無い	당치도 않아요	A9D0			GN				llm			i:2951
 遣らずぶったくり	받기만 하고 안 주기	A9D0			GN				llm			i:2952
 遣らずぼったくり	받기만 하고 안 주기	A9D0			GN				llm			i:2953
@@ -4002,7 +4001,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手許現金	보유 현금	A9D0			GN				llm			i:3994
 賞を取	상을 &AR@	M428		Pn	GN				llm			i:3995
 賞をと	상을 &AR@	M428		Pn	GN				llm			i:3996
-悲嘆に暮れ	비탄에 잠&A2@	M427			GN				llm			i:3997
+悲嘆に暮れ	비탄에 잠&A2@	M427		Dx	GN				llm			i:3997
 悲嘆にくれ	비탄에 잠&A2@	M427			GN				llm			i:3998
 道なき道	길 없는 길	N110			GN				llm			i:3999
 道無き道	길 없는 길	N110			GN				llm			i:4000
@@ -7517,7 +7516,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 温泉の元	온천 입욕제	N110			GN				llm			i:7515
 ノートを取	노트를 &AV@	M428		Pn	GN				llm			i:7516
 ラプラスの悪魔	라플라스의 악마	N110			GN							i:7517
-返答に困	대답하기 곤란&AV@	M428			GN				llm			i:7518
+返答に困	대답하기 곤란&Mf@	M428			GN				llm			i:7518
 頬をつね	볼을 꼬&Hb@	M428		Pn	GN				llm			i:7519
 頬を抓	볼을 꼬&Hb@	M428		Pn	GN				llm			i:7520
 与太を飛ば	헛소리를 &AV@	M423		Pn	GN				llm			i:7521

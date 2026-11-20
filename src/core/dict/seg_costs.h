@@ -27,6 +27,8 @@ enum SegCost : int {
     kSegSoundChar,       // and per katakana of it
     kSegLatinRun,        // a run of Latin letters read as one word
     kSegLongMark,        // a ー standing alone at the start or the end of a katakana run
+    kSegKataSpeechCut,   // in the reading of katakana speech (SegmentRun's scale), a word that cuts a katakana word
+    kSegTeChain,         // an auxiliary verb after a verb in て, in place of word
     kSegCostCount
 };
 
@@ -38,7 +40,7 @@ inline constexpr int kSegCostMax = 10000;
 inline constexpr std::array<std::string_view, kSegCostCount> kSegCostNames = {
     "word",       "particle",  "lone-kanji",   "lone-kana", "kata-loan",
     "short-kata-piece", "kata-sound", "proper", "name-row", "kana-row", "stem-only",
-    "unknown-char", "sound-run", "sound-char", "latin-run", "long-mark"};
+    "unknown-char", "sound-run", "sound-char", "latin-run", "long-mark", "kata-speech-cut", "te-chain"};
 
 struct SegCosts {
     bool loaded = false;

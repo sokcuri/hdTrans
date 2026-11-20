@@ -1,0 +1,11 @@
+# 규칙: LEX-7780
+rule	input	expected	kind	layer
+names:word-row	ももちゃんが来た。\nももは笑った。	has:모모는	keep	fixed
+names:word-row	栞ちゃんが来た。\n栞は笑った。	has:시오리는	keep	fixed
+names:layer-slot	ゆいさんが来た。\nゆいは笑った。	has:유이는	keep	fixed
+names:layer-slot	かおるさんが来た。\nかおを洗う。	has:얼굴을	keep	fixed
+names:layer-slot	かなえが来た。\n夢をかなえた。	has:카나에가	fix	fixed
+names:layer-slot	つぐみは来た。\nつぐみでありさえすれば。	has:츠구미이기만 하면	fix	fixed
+names:quote-to	としが来た。\n「私どもは家族を亡くし、悲しみに暮れています。特に両親は娘を亡くし、憔悴（しょうすい）しております」とし、「どうか、私たち家族をそっとしておいてください。ご配慮をお願いいたします」とつづった。	has:」라고 해,	fix	fixed
+names:quote-to	としさんが来た。\n「私どもは家族を亡くし、悲しみに暮れています。特に両親は娘を亡くし、憔悴（しょうすい）しております」とし、「どうか、私たち家族をそっとしておいてください。ご配慮をお願いいたします」とつづった。	has:」라고 해,	fix	fixed
+names:quote-to	みとさんが来た。\n「私どもは家族を亡くし、悲しみに暮れています。特に両親は娘を亡くし、憔悴（しょうすい）しております」みと、こっち。	has:」미토, 이쪽	keep	fixed

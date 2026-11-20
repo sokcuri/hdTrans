@@ -883,6 +883,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どくガス	독가스	N110			GN						どくガス	w:875
 どこぞの	어느	E010			GN				llm			w:876
 どこでもドア	어디로든 문	N110			GN						どこでもドア	w:877
+どこであれ	어디든	E300			GN			LEX-8147: どこであれ行く 어디든 간다			どこであれ	w:42201
 どたん場	막판	N110	UMe	Tm	GN				xxx llm		どたんば	w:878
 どたん場	처형장	N110	VPl		GN				llm		どたんば	w:879
 どちらかと言うと	굳이 말하자면	A9D0			GN				llm		どちらかというと	w:880
@@ -913,7 +914,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なおも	여전히	E300			GN				xxx llm	1		w:905
 ながい間	한참	N110			GN						ながいあいだ	w:906
 なぐり倒	때려누&AJ@	M423			GN						なぐりたおす	w:907
-なけなし	얼마 안 %D5@	G8U0			GN				llm			w:908
+なけなし	얼마 안 %D5@	G8U0		Av	GN				llm			w:908
 なげ	한탄&AV@	M421			GN				xxx llm			w:909
 なげ	던&AL@	M427			GN				llm			w:910
 なげだ	내던&AL@	M423			GN				llm			w:911
@@ -12467,7 +12468,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 公衆トイレ	공중화장실	N110			GN						こうしゅうトイレ	w:12389
 公衆便所	공중화장실	N110			GN						こうしゅうべんじょ	w:12390
 公訴時効	공소시효	N110	ULw		GN						こうそじこう	w:12391
-公邸	공관	N110			GN				xxx llm	1		w:12392
+公邸	공관	N110	VBl		GN				xxx llm	1		w:12392
 公開中	공개 중	A9D0			GN				llm		こうかいちゅう	w:12393
 公開処刑	공개 처형	N110			GN				llm			w:12394
 六処	육처	N110			GN						ろくしょ	w:12397
@@ -18062,6 +18063,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 月面基地	월면기지	N110			GN						げつめんきち	w:17984
 有り	괜%C4@	G8U0			GN				llm		あり	w:17985
 有りとあらゆる	온갖	A9D0			GN				llm		ありとあらゆる	w:17986
+有りもしな	있지도 $D7@	H7U0			GN						ありもしな	w:42200
 有り有り	생생히	E300			GN				llm		ありあり	w:17987
 有り難う	고마워	E320			GN						ありがとう	w:17988
 有り難う御座います	감사합니다	A9D0	UTs		GN				llm		ありがとうございます	w:17989
@@ -19808,7 +19810,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 爆乳	폭유	N110			GN						ばくにゅう	w:19729
 爆圧	폭발 압력	N110			GN				xxx llm	1		w:19730
 爆発力	폭발력	N110			GN						ばくはつりょく	w:19731
-爛々	반짝반짝	E300			GN				llm			w:19732
 爛熟	무르&F5@	M429			GN						らんじゅく	w:19733
 爪先	발끝	N110			GN				xxx llm	1		w:19734
 爪切り	손톱깎이	I110			GN				xxx	1	つめきり	w:19735
@@ -25325,7 +25326,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 集中治療室	중환자실	N110			GN				xxx	1	しゅうちゅうちりょうしつ	w:25251
 集合体恐怖症	환공포증	N110			GN						しゅうごうたいきょうふしょう	w:25252
 集団主義	집단주의	N110			GN						しゅうだんしゅぎ	w:25253
-集落	마을	N110			GN				xxx llm	1		w:25254
+集落	마을	N110	VPl		GN				xxx llm	1		w:25254
 雇傭者	고용자	N110	VHn		GN						こようしゃ	w:25255
 雉目	닭목	N110			GN						きじもく	w:25256
 雉科	꿩과	N110			GN						きじか	w:25257
@@ -28799,3 +28800,46 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 じぞうさま	지장보살	N110			GN							w:39512
 おじぞうさま	지장보살	N110			GN							w:39513
 つまず	걸려 넘어&AL@	M421			GN			LEX-7485: 躓 w:24146와 같은 가나 행	xxx	1		w:39700
+かおり	향기	N110			GN			LEX-7780				w:40402
+米袋	쌀 포대	N110			GN			LEX-7780				w:40405
+あんちゃん	형	N110	VHn		GN			LEX-7780				w:40406
+はなやさん	꽃집	N110	VPl		GN			LEX-7780				w:40407
+とこやさん	이발소	N110	VPl		GN			LEX-7780				w:40408
+すしやさん	초밥집	N110	VPl		GN			LEX-7780				w:40409
+ぱんやさん	빵집	N110	VPl		GN			LEX-7780				w:40410
+さかなやさん	생선가게	N110	VPl		GN			LEX-7780				w:40411
+ほんやさん	서점	N110	VPl		GN			LEX-7780				w:40412
+はいしゃさん	치과	N110	VPl		GN			LEX-7780				w:40413
+くすりやさん	약국	N110	VPl		GN			LEX-7780				w:40414
+くつやさん	신발가게	N110	VPl		GN			LEX-7780				w:40415
+にくやさん	정육점	N110	VPl		GN			LEX-7780				w:40416
+くだものやさん	과일 가게	N110	VPl		GN			LEX-7780				w:40417
+おかしやさん	과자 가게	N110	VPl		GN			LEX-7780				w:40418
+みんなさん	여러분	N120	VHn		GN			LEX-7780				w:40419
+おまえさん	너	N120	VHn		GN			LEX-7780				w:40420
+あんたさん	너	N120	VHn		GN			LEX-7780				w:40421
+あなたさん	당신	N120	VHn		GN			LEX-7780				w:40422
+あちらさん	저쪽	N120	VHn		GN			LEX-7780				w:40423
+こちらさん	이쪽	N120	VHn		GN			LEX-7780				w:40424
+そちらさん	그쪽	N120	VHn		GN			LEX-7780				w:40425
+いるかさん	돌고래 씨	N110	VAm		GN			LEX-7780				w:40426
+あおむしさん	애벌레 씨	N110	VAm		GN			LEX-7780				w:40429
+おてんとさん	해님	N110			GN			LEX-7780				w:40430
+おいなりさん	유부초밥	N110	VFd		GN			LEX-7780				w:40431
+きくの花	국화꽃	N110			GN			LEX-7780				w:40434
+津地裁	츠 지방법원	N110	VGt		GN			LEX-7780				w:40435
+溶き卵	푼 달걀	N110	VFd		GN			LEX-8060				w:41808
+法令線	팔자주름	N110	VBp		GN			LEX-8060				w:41809
+空気入れ	공기 주입기	N110			GN			LEX-8022				w:41600
+編み込み	땋기	N110			GN			LEX-8022				w:41601
+後ろ倒し	연기	I110			GN			LEX-8022				w:41602
+後ろ倒しで	늦춰서	E300			GN			LEX-8022				w:41603
+死に対し	죽음에 대해	N110			GN			LEX-8022				w:41604
+死に対して	죽음에 대해	N110			GN			LEX-8022				w:41605
+死に対する	죽음에 대한	N110			GN			LEX-8022				w:41606
+痺れ	저림	N110			GN			LEX-8022				w:41607
+尿漏れ	요실금	N110			GN			LEX-8022				w:41608
+外れ	꽝	N110			GN			LEX-8040	xxx	1		w:41700
+大外れ	대실패	N110			GN			LEX-8041				w:41701
+外れくじ	꽝	N110			GN			LEX-8041				w:41702
+季節外れの	철 지난	E0H0			GN			LEX-8041				w:41703

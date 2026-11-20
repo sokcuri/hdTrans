@@ -456,6 +456,31 @@ bool DakeEnds(std::string_view s) {
     return s.empty() || !text::IsLetter(text::DecodeRune(s).cp) || dict::StartsWithMember(HDTRANS_CLASS("copula.after-dake"), s) > 0;
 }
 
+// The token before a word followed by the head of the word's own token, built when a rule first reads it: few rules
+// read it, and the head of a long token is long.
+class Lead {
+  public:
+    Lead(std::string_view before, std::string_view head) : before_(before), head_(head) {}
+    std::string_view Text() {
+        if (!built_) {
+            text_.assign(before_);
+            text_ += head_;
+            built_ = true;
+        }
+        return text_;
+    }
+    // Text().ends_with(end), read from the two parts.
+    bool EndsWith(std::string_view end) const {
+        if (end.size() <= head_.size()) return head_.ends_with(end);
+        return end.ends_with(head_) && before_.ends_with(end.substr(0, end.size() - head_.size()));
+    }
+
+  private:
+    std::string_view before_, head_;
+    std::string text_;
+    bool built_ = false;
+};
+
 // Whether the context of rule holds for the word source of the candidates list: after is
 // the text after it, before the character before it in its token, previous the character
 // before it past spaces and token ends, adjacent the character right before it (in its
@@ -463,9 +488,9 @@ bool DakeEnds(std::string_view s) {
 // the token before), lead the token before and the head.
 bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>& list, std::string_view source,
                  std::string_view after, std::string_view before, std::string_view previous,
-                 std::string_view adjacent, std::string_view preceding, std::string_view lead) {
+                 std::string_view adjacent, std::string_view preceding, Lead& lead) {
     const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?" ||
-                             (previous == "っ" && (lead.ends_with("！っ") || lead.ends_with("!っ")));
+                             (previous == "っ" && (lead.EndsWith("！っ") || lead.EndsWith("!っ")));
     switch (rule.context) {
     case ConstraintContext::Honorific:
     case ConstraintContext::FamiliarHonorific:
@@ -603,9 +628,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             kNumerals.find(text::DecodeRune(after).cp) != std::u32string_view::npos) {
             return false;
         }
-        const std::string_view counter = LastChar(lead);
+        const std::string_view counter = LastChar(lead.Text());
         if (counter.empty() || NameClassOf(counter) != kClassKanji) return false;
-        const std::string_view number = LastChar(lead.substr(0, lead.size() - counter.size()));
+        const std::string_view number = LastChar(lead.Text().substr(0, lead.Text().size() - counter.size()));
         return !number.empty() && kNumerals.find(text::DecodeRune(number).cp) != std::u32string_view::npos;
     }
     case ConstraintContext::NameAfterNumeral:
@@ -648,8 +673,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::NotCommonSense:
         // An adnominal before it makes it the word too (大きな樹, 一本の樹; spec LEX-5175).
         return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false) &&
-               (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead) == 0 ||
-                dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead) > 0);
+               (dict::EndsWithMember(HDTRANS_CLASS("name.word-before"), lead.Text()) == 0 ||
+                dict::EndsWithMember(HDTRANS_CLASS("name.word-before-not"), lead.Text()) > 0);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
     case ConstraintContext::ParticleSplit:  // Worker::ParticleSplit, which looks the longer word up
         return false;
@@ -665,9 +690,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     }
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
-                           [&](std::string_view e) { return lead.ends_with(e); });
+                           [&](std::string_view e) { return lead.EndsWith(e); });
     case ConstraintContext::NotAfterQuantity:
-        return !EndsInQuantity(lead);
+        return !EndsInQuantity(lead.Text());
     case ConstraintContext::AfterSmallTsu:
         return preceding.ends_with("っ") || preceding.ends_with("ッ");
     case ConstraintContext::AfterTeNotAdjective:
@@ -1051,7 +1076,7 @@ bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::
 // reading takes the place of the first of them.
 void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query)) return;
+    if (!EndsSurface(query)) return;
     const std::string_view head = surface.substr(0, surface.size() - query.size());
     const std::string_view before = LastChar(head);
     std::string_view previous = LastChar(TrimRunes(head, " 　"));
@@ -1066,8 +1091,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     for (int j = current + 1; j < TokenCount() && following.size() < 32; j++) following += Tok(j).text;
     const std::string_view preceding = !head.empty() || current <= 0 ? head : Tok(current - 1).text;
     const std::string_view adjacent = !head.empty() ? before : LastChar(current > 0 ? preceding : settings.before);
-    std::string lead(current > 0 ? Tok(current - 1).text : std::string_view());
-    lead += head;
+    Lead lead(current > 0 ? Tok(current - 1).text : std::string_view(), head);
     std::vector<dict::Candidate>& list = found.list;
     for (const ConstraintRule& rule : kRules) {
         // Every candidate source is a prefix of the query, so a rule's source can only match one then.
@@ -1091,7 +1115,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                      ? !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead) ||
                            TeAspectAt(after.substr(std::string_view("って").size()))
                  : rule.context == ConstraintContext::AfterNounBeforeListed
-                     ? !AfterNoun(lead) ||
+                     ? !AfterNoun(lead.Text()) ||
                            !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)
                  : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
                 i++;

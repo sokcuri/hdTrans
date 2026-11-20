@@ -1,0 +1,207 @@
+# 규칙: LEX-7860, LEX-7861, LEX-7862, LEX-7863, LEX-7864, LEX-7865, LEX-7866
+rule	input	expected	kind	layer
+cx:nan-noda:10	これ、なんなのだ？	has:뭐야	fix	rewrites
+cx:nan-noda:10	一体なんなのだ！	has:도대체 뭐야!	fix	rewrites
+cx:nan-noda:10	なんなのだ、これは。	has:뭐야	fix	rewrites
+cx:nan-noda:20	何なのだ	has:뭐야	fix	rewrites
+cx:nan-noda:10	なんなのですか？	has:뭐	keep	rewrites
+cx:nan-noda:10	何なのだろう、この顔は。	has:뭘까	keep	rewrites
+cx:tasou-ni:10	何か言いたそうにしていた。	has:말하고 싶은 듯이	fix	rewrites
+cx:tasou-ni:10	白崎が喋りたそうにしている。	has:말하고 싶은 듯이	fix	rewrites
+cx:tasou-ni:10	彼女は帰りたそうにしている。	has:돌아가고 싶은 듯이	fix	rewrites
+cx:tasou-ni:10	猫が外に出たそうにしている。	has:나가고 싶은 듯이	keep	rewrites
+cx:tasou-ni:10	くすぐったそうに笑う。	has:낯간지러운 듯이	keep	rewrites
+cx:tasou-attr:10	彼は映画を見たそうな顔をした。	has:보고 싶어 보이는 얼굴	fix	rewrites
+cx:tasou-attr:10	弟はケーキを食べたそうな顔をしている。	has:먹고 싶어 보이는	fix	rewrites
+cx:tasou-attr:10	真面目な話をしたそうな雰囲気だ。	has:하고 싶어 보이는 분위기	fix	rewrites
+cx:tasou-attr:20	弟はケーキを食べたそうに見ていた。	has:먹고 싶은 듯이	fix	rewrites
+cx:tasou-attr:10	弟はケーキを食べたそうだ。	has:먹었다고 한다	keep	rewrites
+cx:tasou-attr:10	天守閣が倒壊したそうです。	has:붕괴했다고 합니다	keep	rewrites
+cx:tasou-attr:10	彼は行ったそうだ。	has:갔다고 한다	keep	rewrites
+cx:souda-hearsay:10	彼は東京にいたそうだ。	has:도쿄에 있었다고 한다	fix	rewrites
+cx:souda-hearsay:10	彼は東京にいたそうです。	has:있었다고 합니다	fix	rewrites
+cx:souda-hearsay:10	私が殲滅した部隊にいたそうじゃないか	has:있었다고 하잖아	fix	rewrites
+cx:souda-hearsay:20	彼もいたそうです。	has:그도 있었다고 합니다	fix	rewrites
+cx:souda-hearsay:30	きのう客がきたそうだ。	has:왔다고 한다	fix	rewrites
+cx:souda-hearsay:10	彼はここにいたそうな顔をした。	has:있고 싶어 보이는	keep	rewrites
+cx:souda-hearsay:20	足がいたそうだ。	has:아픈	keep	rewrites
+cx:souda-hearsay:10	彼は見ていたそうです。	has:보고 있었다고 합니다	keep	rewrites
+cx:ikura-question:10	このマスク１個いくら？	has:얼마?	fix	rewrites
+cx:ikura-question:10	いくら？	has:얼마	fix	rewrites
+cx:ikura-question:10	圭ちゃんはいくら持ってんの…？	has:얼마 가지고	fix	rewrites
+cx:ikura-question:10	今日はいくら飲んでも大丈夫ですよね？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくらなんでも早くないか？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら考えても無駄よ？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら頑張っても無駄だ。	has:아무리	keep	rewrites
+cx:kanen:20	しかねん。	has:할 수도 있	fix	rewrites
+cx:kanen:20	やりかねない。	has:할 수도 있다	keep	rewrites
+cx:zushite:20	戦わずしては勝てない。	has:싸우지 않고는	fix	rewrites
+cx:zushite:20	戦わずして勝つ。	has:싸우지 않고 이긴다	keep	rewrites
+-	何でもございません。	has:아무것도 아닙니다	fix	local
+dict:freq-endings-98	あ、なんでもございません！	has:아무것도 아닙니다	fix	lookup
+-	何でもございませんでした。	has:아무것도 아니었습니다	fix	local
+dict:freq-endings-98	何でございますでしょうか。	has:무엇입니까	fix	lookup
+dict:freq-endings-98	何でございましたっけ。	has:무엇이었	fix	lookup
+dict:freq-endings-98	何でございますか？	has:무엇입니까	keep	lookup
+dict:freq-endings-98	滅相もないことです。	has:당치도 않은	fix	lookup
+dict:freq-endings-98	彼は気にも介さなかった。	has:개의	fix	lookup
+dict:freq-endings-98	いくら丼を食べた。	has:연어알 덮밥	keep	lookup
+-	救いの手を差し延べた。	has:내밀었다	fix	lookup
+-	他の人間より突出して秀でている	lacks:내미고	keep	lookup
+-	言いかねる。	has:말하기 곤란하다	fix	lookup
+-	スカートが短いので目のやり場に困る。	has:곤란하다	fix	lookup
+-	返答に困る千莉がかわいかった。	has:곤란한 천리	fix	lookup
+-	同性じゃないと話しにくいこともある	has:거북한 일	keep	lookup
+-	足手まといだ。	has:방해가 된다	fix	lookup
+-	何よ、アタシが足手まといだって言うの？	has:방해가 된다고	fix	lookup
+-	おしゃれな服を着ている。	has:세련된 옷	keep	lookup
+-	彼女はおしゃれだ。	has:세련되다	keep	lookup
+-	礼儀が身に付いている。	has:몸에 배어 있다	fix	lookup
+-	想像していたより、かなり洗練されている。	has:세련되어 있다	fix	lookup
+-	振り返ってみると そうだったようですね。	has:그랬던 것 같네요	keep	lookup
+cx:nan-noda:20	何なのだろうか。	has:뭘까	keep	rewrites
+cx:tasou-attr:20	雨が降ったそうに聞いた。	lacks:싶은 듯이	keep	rewrites
+cx:souda-hearsay:30	彼はここにきたそうな顔をした。	lacks:왔다고	keep	rewrites
+-	走ってきたそうすけ君だ。	has:달려온 소스케 군	fix	word
+-	走ってきたそうすけくんだ。	has:달려온 소스케 군	fix	word
+-	来たそうすけ君は優しい。	has:온 소스케 군은	fix	word
+-	食べたそうすけ君が笑った。	has:먹은 소스케 군이	fix	word
+-	そうすけ君！	has:소스케 군	fix	word
+-	あれはこうすけ君だ。	has:코스케 군	fix	word
+-	走ってきたこうすけ君だ。	has:달려온 코스케 군	fix	word
+-	走ってきたゆうすけ君だ。	has:달려온 유스케 군	fix	word
+-	言ってきたけいすけさんが来た。	has:케이스케 씨가	fix	word
+-	走ってきたひより君だ。	has:히요리 군	keep	word
+-	彼も来たそうだ。	has:왔다고 한다	keep	word
+-	あの人が来たそうですね。	has:왔다고 하네요	keep	word
+-	行きたそうな顔	has:가고 싶어 보이는 얼굴	keep	word
+-	そうこちゃんが来たそうだ。	has:소코짱이 왔다고	keep	word
+-	そうですけど、	has:그렇지만	keep	word
+-	来たそうですけど、	has:왔다고 하지만	keep	word
+-	こうすれば	has:이렇게 하면	keep	word
+-	返事に困っていると、彼が笑った。	has:대답에 곤란해하고 있는데	fix	lookup
+-	返事に困っている。	has:대답에 곤란해하고 있다	fix	lookup
+-	返事に困っていた。	has:곤란해하고 있었다	fix	lookup
+-	返事に困っているとき	has:곤란해하고 있을 때	fix	lookup
+-	返事に困っていたら	has:곤란해하고 있으면	fix	lookup
+-	返事に困っていれば	has:곤란해하고 있으면	fix	lookup
+cx:web-fixes-i:226	彼に困っている。	has:그 때문에 곤란해하고 있다	fix	rewrites
+-	困っていると言った。	has:곤란해한다고	keep	lookup
+-	困ったら言って。	has:곤란하면	keep	lookup
+-	対応に困った。	has:곤란했다	keep	lookup
+-	困っています。	has:곤란해합니다	keep	lookup
+-	返事に困った顔をした。	has:곤란한 얼굴	keep	lookup
+cx:zushite:20	努力せずしては成功しない。	has:노력하지 않고는	fix	rewrites
+cx:zushite:20	食べずしては生きられない。	has:먹지 않고는	fix	rewrites
+cx:zushite:20	知らずしては語れない。	has:알지 못하고는	fix	rewrites
+cx:zushite:30	言わずしても分かる。	has:말하지 않고도	fix	rewrites
+cx:zushite:30	見ずしても分かる。	has:보지 않고도	fix	rewrites
+cx:zushite:30	何も言わずしても伝わった。	has:말하지 않고도	fix	rewrites
+cx:zushite:10	戦わずして勝つ。	has:싸우지 않고 이긴다	keep	rewrites
+cx:tasou-attr:10	帰ってきたそうなんですけど	!rule:cx:tasou-attr:10	keep	rewrites
+cx:tasou-attr:10	彼女は来たそうな顔をした。	has:오고 싶어 보이는 얼굴	fix	rewrites
+cx:souda-hearsay:30	頑張ってきたそうだった。	!rule:cx:souda-hearsay:30	keep	rewrites
+cx:web-fixes-i:226	先生に困っていた。	has:선생님 때문에 곤란해하고 있었다	fix	rewrites
+cx:zushite:30	何をしても分かる。	!rule:cx:zushite:30	keep	rewrites
+cx:zushite:30	言わずにしても	!rule:cx:zushite:30	keep	rewrites
+cx:web-fixes-i:226	返事に困っている。	!rule:cx:web-fixes-i:226	keep	rewrites
+-	手伝ってくれたみなさん、ありがとう。	has:도와 준 여러분	keep	word
+-	がんばるみなさんを応援しています。	has:열심히 하는 여러분을	keep	word
+-	来てくださったみなさま、ようこそ。	has:와 주신 여러분	keep	word
+-	寝てるみなさんを起こさないで。	has:자고 있는 여러분을	keep	word
+-	見に来たたくさんの人がいた。	has:보러 온 많은 사람	keep	word
+-	ご飯をたくさん食べたそうだ。	has:많이 먹었다고 한다	keep	word
+-	走ってきたおじさんが言った。	has:달려온 아저씨가	keep	word
+-	帰ってきたおにいちゃんと遊んだ。	has:돌아온 오빠와	keep	word
+-	寝ているあかちゃんを見た。	has:자고 있는 갓난 아기	keep	word
+-	来てくれたおきゃくさまに挨拶した。	has:와 준 손님에게	keep	word
+-	ごちそうさまでした。	has:잘 먹었습니다	keep	word
+-	食べたらごちそうさまって言いなさい。	has:먹으면	keep	word
+-	おいしそうそうめんだね。	has:소면	keep	word
+-	楽しそうさんざん遊んだ。	has:실컷 놀았다	keep	word
+-	食べたそうこちゃんがいた。	has:먹은 소코짱이	keep	word
+-	行ったたけしくんが戻った。	has:간 타케시 군이	keep	word
+-	もう来たかちゃんと見てこい。	has:왔는지 제대로	keep	word
+-	テレビを見るかちゃんと決めて。	has:볼까 제대로	keep	word
+-	食べたかちゃんと答えなさい。	has:먹었는지 제대로	keep	word
+-	帰ったかちゃんと確認した？	has:돌아갔는지 제대로	keep	word
+-	もう来たか君は。	has:왔는지 너는	keep	word
+-	手を洗ったか先生に聞かれた。	has:씻었는지 선생님이	keep	word
+-	来たか先輩に聞いてみる。	has:왔는지 선배에게	keep	word
+-	宿題したか様子を見てくる。	has:숙제했는지 상태를	keep	word
+-	いろいろ試したかさまざまな意見が出た。	has:다양한 의견	keep	word
+-	起きたかさんざん待ったぞ。	has:일어났는지 실컷	keep	word
+-	書いたかくんれんの記録を見せて。	has:썼는지 훈련	keep	word
+-	見たかくんくん匂いを嗅いだ。	has:킁킁	keep	word
+-	来たか氏名を書いてください。	has:왔는지 이름을	keep	word
+cx:nan-noda:20	何なのだ	lacks:뭐야다	fix	rewrites
+cx:ikura-question:10	いくら考えたって分からない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら言ったって聞かない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら走ったって間に合わない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら頑張ろうと無駄？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら泣こうが知らない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら叫ぼうが届かない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら謝ったところで許さない？	has:아무리	keep	rewrites
+cx:ikura-question:10	いくら払うと思う？	has:얼마	fix	rewrites
+cx:ikura-question:10	これいくら？	has:얼마	fix	rewrites
+cx:tasou-attr:10	昔、ある村に一人の男が住んでいたそうな。	has:살고 있었다고	keep	rewrites
+cx:tasou-attr:10	鬼が来たそうな。	has:왔다고	keep	rewrites
+cx:tasou-attr:10	見たそうな。	has:보았다고	keep	rewrites
+cx:tasou-attr:10	彼は行ったそうな。	has:갔다고	keep	rewrites
+cx:tasou-attr:10	食べたそうな目で見ている。	has:먹고 싶어 보이는 눈	fix	rewrites
+-	見たまみちゃん	has:본 마미	keep	word
+-	見たまきちゃん	lacks:견타	keep	word
+-	待っていたまきちゃん	has:기다리던	keep	word
+-	来たまゆみちゃんが笑った。	has:온 마유미	keep	word
+-	走ってきたそうすけ君	has:소스케 군	fix	word
+-	何でもございませんが、少し疲れました。	has:아무것도 아닙니다만	fix	local
+-	何でもございませんけど	has:아무것도 아니지만	fix	local
+-	何でもございませんから、ご心配なく。	has:아무것도 아니기 때문에	fix	local
+-	何でもございませんので	has:아무것도 아니기 때문에	fix	local
+cx:ml-noni:10	何でもございませんのに	has:아무것도 아닌데요	fix	rewrites
+-	何でもございませんし	has:아무것도 아니고	fix	local
+-	何でもございませんでしたので	has:아무것도 아니었기 때문에	fix	local
+-	何でもございませんでしたが	has:아무것도 아니었습니다만	fix	local
+cx:ml-noni:20	何でもございませんでしたのに	has:아무것도 아니었는데요	fix	rewrites
+cx:ml-noni:10	学生ではございませんのに	has:학생이 아닌데요	fix	rewrites
+-	「何でもございません」と答えた。	has:아무것도 아닙니다	fix	local
+-	ここには何でもございます。	has:여기에는 뭐든 있습니다	keep	local
+-	何でもございますよ。	has:뭐든 있어요	keep	local
+-	滅相もございません。	has:당치도 않습니다	keep	lookup
+cx:kanen:20	しかねん。	has:할 수도 있어	fix	rewrites
+cx:kanen:20	しかねんよ。	has:할 수도 있어	fix	rewrites
+cx:kanen:20	言い出しかねん。	has:꺼낼 수도 있어	fix	rewrites
+cx:kanen:15	しかねんわ。	has:할 수도 있어	fix	rewrites
+cx:kanen:20	しかねん奴だ。	has:할 수도 있는 놈	fix	rewrites
+cx:kanen:20	しかねんから気をつけろ。	has:할 수도 있으니까	fix	rewrites
+cx:kanen:20	しかねんけど	has:할 수도 있지만	fix	rewrites
+cx:kanen:20	しかねんのだ。	has:할 수도 있는 것이다	fix	rewrites
+cx:kanen:10	しかねんが、まあいい。	has:할 수도 있지만,	fix	rewrites
+cx:kanen:12	しかねんし	has:할 수도 있고	fix	rewrites
+cx:kanen:14	しかねんと思った。	has:할 수도 있다고 생각했다	fix	rewrites
+cx:kanen:30	なりかねんが	has:될 수도 있지만	fix	rewrites
+cx:kanen:30	なりかねんけど	has:될 수도 있지만	fix	rewrites
+cx:kanen:32	なりかねん事態	has:될 수도 있는 사태	fix	rewrites
+-	やりかねんぞ。	has:할 수도 있어	keep	word
+-	なりかねん。	has:될 수도 있다	keep	word
+-	なりかねんと思った。	has:될 수도 있다고	keep	word
+cx:nan-noda:10	なんなのだ。	has:뭐야.	fix	rewrites
+cx:nan-noda:20	何なのだ。	has:뭐야.	fix	rewrites
+cx:nan-noda:20	一体何なのだ。	has:도대체 뭐야.	fix	rewrites
+cx:nan-noda:10	なんなのだよ。	has:뭐야.	fix	rewrites
+cx:nan-noda:10	なんなのだっ！	has:뭐야!	fix	rewrites
+cx:nan-noda:10	「なんなのだ」	has:「뭐야」	fix	rewrites
+cx:nan-noda:20	何なのだ？	lacks:뭐야야	fix	rewrites
+cx:nan-noda:10	それはなんなのだ。	has:그것은 뭐야.	fix	rewrites
+cx:ml-noni:10	何でもございませんので	!rule:cx:ml-noni:10	keep	rewrites
+cx:ml-noni:10	学生ではございませんけど	!rule:cx:ml-noni:10	keep	rewrites
+cx:ml-noni:20	何でもございませんでしたので	!rule:cx:ml-noni:20	keep	rewrites
+cx:kanen:10	しかねないけど	!rule:cx:kanen:10	keep	rewrites
+cx:kanen:10	行かんが、まあいい。	!rule:cx:kanen:10	keep	rewrites
+cx:kanen:12	行かんし	!rule:cx:kanen:12	keep	rewrites
+cx:kanen:14	行かんと思った。	!rule:cx:kanen:14	keep	rewrites
+cx:kanen:15	行かんわ。	!rule:cx:kanen:15	keep	rewrites
+cx:kanen:30	なりかねん。	!rule:cx:kanen:30	keep	rewrites
+cx:kanen:30	行かんけど	!rule:cx:kanen:30	keep	rewrites
+cx:kanen:32	なりかねんのだ。	!rule:cx:kanen:32	keep	rewrites
+cx:kanen:32	行かん奴だ。	!rule:cx:kanen:32	keep	rewrites

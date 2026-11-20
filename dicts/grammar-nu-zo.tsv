@@ -1,0 +1,4 @@
+#! layer=base
+# 부정 ぬ 뒤 ぞ (LEX-8149): 문장 끝 ぬ와 같은 -지 않는다
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+ぬぞ	1지 않는다	S581			GN				nu-zo:1

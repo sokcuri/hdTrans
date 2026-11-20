@@ -26,9 +26,26 @@ using Pattern = bool (*)(std::string_view s, size_t pos, Match& m);
 // The leftmost match of p in s at or after from.
 bool Find(std::string_view s, size_t from, Pattern p, Match& m);
 
+// One scan of s for the Finds made over it while this lives: s must not change meanwhile, so what
+// RunStartBefore remembered in one Find holds in the next (each Find alone takes a new scan).
+class ScanOf {
+  public:
+    explicit ScanOf(std::string_view s);
+    ~ScanOf();
+    ScanOf(const ScanOf&) = delete;
+    ScanOf& operator=(const ScanOf&) = delete;
+
+  private:
+    const char* data_;
+    size_t size_;
+    unsigned long long id_;
+    bool pinned_;
+};
+
 // s with every match of p replaced by replace(m); the scan resumes at the end of a match.
 template <class Replace>
 std::string ReplaceAll(std::string_view s, Pattern p, Replace replace) {
+    const ScanOf scan(s);  // out is another buffer: s does not change
     std::string out;
     size_t at = 0;
     Match m;
@@ -40,6 +57,15 @@ std::string ReplaceAll(std::string_view s, Pattern p, Replace replace) {
     out.append(s.substr(at));
     return out;
 }
+
+// The start of the run of runes for which in holds that ends at pos in s. While a Find runs over a text
+// that s starts (s is the text or a start of it), the run found last for in is remembered, so asking
+// at places that only grow walks the text once instead of once per place.
+size_t RunStartBefore(std::string_view s, size_t pos, bool (*in)(char32_t));
+
+// The id of the Find or ScanOf that runs over a text s starts (s is the text or a start of it), 0 for
+// none: what a pattern remembers about the bytes of s under one id holds while that id runs.
+unsigned long long ScanOver(std::string_view s);
 
 // The groups of the leftmost match of p in the matched text m alone.
 Match Rematch(const Match& m, Pattern p);

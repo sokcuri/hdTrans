@@ -1,0 +1,31 @@
+# 규칙: LEX-8040, LEX-8020
+rule	input	expected	kind	layer
+dict:jisjk:10589	村の外れで盛大な爆発音が響いた。	rule:dict:jisjk:10589=변두리	fix	local
+dict:jisjk:10589	そんな町の外れの港に、海賊船が泊まっている。	has:마을의 변두리의 항구에	fix	local
+dict:jisjk:10589	街の外れで、男が待っていた。	has:거리의 변두리에서	fix	local
+dict:jisjk:10589	島の外れから海を眺めた。	has:섬의 변두리에서	fix	local
+dict:jisjk:10589	山の外れの小屋。	has:산의 변두리의	fix	local
+dict:jisjk:10589	集落の外れに小屋が建っている。	has:마을의 변두리에	fix	local
+dict:jisjk:10589	王都の外れにある屋敷を訪ねた。	has:왕도의 변두리에	fix	local
+dict:jisjk:10589	学園の外れにある公園に連れていった。	has:학원의 변두리에	fix	local
+dict:jisjk:10589	森の外れまで歩いた。	has:숲의 변두리까지	keep	local
+dict:jisjk:10589	町の外れに古い教会がある。	has:마을의 변두리에	keep	local
+lexical:hazure-dud	くじの外れを引いた。	has:꽝을	fix	lookup
+lexical:hazure-dud	また外れを引いてしまった。	has:꽝을	fix	lookup
+lexical:hazure-dud	宝くじは外れだった。	has:꽝이었다	fix	lookup
+lexical:hazure-dud	「外れだったらごめんな」	has:꽝이라면	fix	lookup
+lexical:hazure-dud	「いや、そのルートは外れの可能性が高い」	has:꽝의 가능성	fix	lookup
+lexical:hazure-dud	ローリールの仕入れはまず外れがないことで有名だからな	has:꽝이 없는	fix	lookup
+lexical:hazure-dud	外れくじを引いた。	has:꽝을 뽑았다	fix	lookup
+lexical:hazure-dud	大外れ中の大外れですね	has:대실패 중의 대실패	fix	lookup
+lexical:hazure-dud	季節外れの猛暑の中、振り返った。	has:철 지난 무더위	fix	lookup
+lexical:hazure-dud	期待外れの結果だ。	lacks:변두리	keep	lookup
+lexical:hazure-dud	仲間外れにされて、いびられた。	has:따돌림	keep	lookup
+lexical:hazure-dud	的外れな意見だ。	has:엉뚱한 의견	keep	lookup
+lexical:hazure-dud	随分と季節外れだ。	has:철 지남이다	keep	lookup
+lookup:stem-noun-over-verb	直近の公式戦４試合連続で先発から外れ、	has:빗나가,	keep	lookup
+lookup:stem-noun-over-verb	ヘルムが衝撃で外れ、中から赤い髪が広がった。	lacks:꽝	keep	lookup
+lookup:stem-noun-over-verb	小便が便器から外れそうになる。	has:빗나갈 뻔	keep	lookup
+lookup:stem-noun-over-verb	予想が外れてしまった。	has:예상이 빗나가	keep	lookup
+lookup:stem-noun-over-verb	町の外れたところに家がある。	lacks:변두리	keep	lookup
+lookup:stem-noun-over-verb	そして見えてくる、果てのない書架の大迷宮。	has:끝이 없는	fix	lookup

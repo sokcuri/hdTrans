@@ -1,5 +1,7 @@
 #include "core/text/utf8.h"
 
+#include <cstring>
+
 namespace hdTrans::text {
 
 Rune DecodeRune(std::string_view s) {
@@ -51,6 +53,23 @@ size_t RuneCount(std::string_view s) {
         n++;
     }
     return n;
+}
+
+size_t Find(std::string_view s, std::string_view needle, size_t from) {
+    if (from > s.size()) return std::string_view::npos;
+    const size_t n = needle.size();
+    if (n == 0) return from;
+    if (n > s.size() - from) return std::string_view::npos;
+    const char* p = s.data() + from + n - 1;
+    const char* const end = s.data() + s.size();
+    while (p < end) {
+        const char* last = static_cast<const char*>(std::memchr(p, needle.back(), static_cast<size_t>(end - p)));
+        if (last == nullptr) return std::string_view::npos;
+        const char* start = last - (n - 1);
+        if (std::memcmp(start, needle.data(), n - 1) == 0) return static_cast<size_t>(start - s.data());
+        p = last + 1;
+    }
+    return std::string_view::npos;
 }
 
 }  // namespace hdTrans::text

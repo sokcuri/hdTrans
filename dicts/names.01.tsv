@@ -24215,7 +24215,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プーチンP	푸틴P	N110			GN						ぷーちんぴー	names.322341
 プーチンのための宮殿 最大の賄賂の物語	푸틴을 위한 궁전: 가장 큰 뇌물 이야기	N130	QWK		GN							names.322342
 プーチンは去れ	푸틴은 떠나야 한다	N130	QWK		GN							names.322343
-プーチン大統領	블라디미르 푸틴	N130	QPNVHn		GN							names.322344
+プーチン大統領	푸틴 대통령	N130	QPNVHn		GN							names.322344
 プーチン宮殿	푸틴 궁전	N130	QCTVPl		GN							names.322345
 プーチ・ホール	푸치 홀	N130	QPNVHn		GN							names.322346
 プーチーニの庭	못말리는 푸치니	N130	QWK		GN							names.322347
@@ -133835,7 +133835,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 上院司法委員会	상원 사법위원회	N130	VGt		GN							names.433351
 上院寺	상원사	N130	VGt		GN							names.433352
 上院議員	상원의원	N110			GN							names.433353
-上院選挙区	뉴욕주 상원	N130	VGt		GN							names.433354
 上陰龍二郎	가미카게 류지로	N130	QPNVHn		GN						かみかげりゅうじろう	names.433355
 上陸	상륙	N110			GN						じょうりく	names.433356
 上陸戦	상륙 작전	N130	VGt		GN							names.433357
@@ -262727,7 +262726,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 慟哭ルクセイン	통곡 룩세인	N130	QWK		GN							names.564641
 慢太郎	만타로	N130	QPNVHn	Wb	GN						まんたろう	names.564642
 慢心	만	N110			GN							names.564643
-慢心ダメ絶対	만	N110			GN							names.564644
 慢心王	만심왕	N130	QPNVHn	Wb	GN							names.564645
 慣性	관성	N110			GN							names.564646
 慣用句	관용구	N110			GN							names.564647

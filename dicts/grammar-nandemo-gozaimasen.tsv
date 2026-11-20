@@ -1,0 +1,5 @@
+#! layer=base
+# 何でもございます: 何でも + ござる. ません 어미에서는 何でもない의 옛 높임으로 계사의 부정 아무것도 아니다를 활용함 (LEX-7860)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+何でもござ	아무것도 &Ml@	M4U0		Ma	GN	17904	||1 U+0== "Lません"	何でもござ가 ません으로 끝나면 계사의 부정 아무것도 아니다를 골라 활용한다.				nandemo-gozaimasen:1
+何でもござ	뭐든 &HN@	M4U0			GN	17905	||1 U+0!= "Lません"	何でもござ가 ません으로 끝나지 않으면 何でも와 ござる의 뭐든 있다를 고른다.				nandemo-gozaimasen:3

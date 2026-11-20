@@ -7,6 +7,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/output/compose.h"
 #include "core/word/analyze.h"
 #include "core/word/item.h"
 #include "core/word/journal.h"
@@ -98,7 +99,9 @@ public:
         const char* text = nullptr;  // the text CoverSurface reads; null outside it
         std::size_t size = 0;
         std::size_t next = 0;
-        CopyChain runs[4];
+        // One run per start inside a unit: a periodic run of a unit of up to ten characters is read from
+        // up to ten places in a copy (漢字研究 from 漢 and from 研), each with its own shortest unit.
+        CopyChain runs[10];
     };
     CopyChains copyChains;
     int insertedLength = 0;
@@ -120,9 +123,26 @@ public:
     Item* resumeParent = nullptr;
     int resumeRetries = 0;
     std::string_view transformSurface;
+    // Whether query ends transformSurface. A query is most often a view of the surface's own end, which needs no
+    // compare of the rest of a long token at each lookup.
+    bool EndsSurface(std::string_view query) const {
+        return (query.size() <= transformSurface.size() && query.data() + query.size() == transformSurface.data() + transformSurface.size()) ||
+               transformSurface.ends_with(query);
+    }
     // The word read before the text at kanaAfterAt while the word search looks that text up (KanaAfterWord).
     const Item* kanaAfter = nullptr;
     const char* kanaAfterAt = nullptr;
+    // Whether KanaAfterWord held during the lookup DoLookup makes (the word before changed what it read).
+    mutable bool kanaAfterHeld_ = false;
+    // The candidates of the last general lookup that the word before did not change, by its query, token and surface:
+    // LatticeKana reads the rows at the search's own cursor from them instead of looking the same text up again.
+    struct GeneralLookup {
+        const char* data = nullptr;
+        std::size_t size = 0;
+        int current = -1;
+        std::string_view surface;
+        std::vector<dict::Candidate> list;
+    } lastGeneral_;
     bool fault = false;
 
     // Token j as the token loop sees it while processing current.
@@ -141,6 +161,10 @@ public:
     // in: QuoteDepth(j) and the 「」『』 of text before start. When text is the raw text of token j,
     // its marks are found with QuoteDepth, once for all tokens.
     int QuoteDepthAt(int j, std::string_view text, int start);
+    // The quotes before byte start of text as QuoteDepthAt reads them, with the number of quotes
+    // opened from depth 0 (settings.quoteCount before the first token): output::QuotesAfter of the
+    // raw text of the tokens before j and of text before start.
+    output::QuoteState QuotesAt(int j, std::string_view text, int start);
     // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
     // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
     int RubyPart(int j);
@@ -185,6 +209,9 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool VerbFormSpelling(std::string_view form) const;
+    // Whether ending starts with the す of a clipped っす that stem, in kana, takes as a verb of the dictionary
+    // (いや + すね is いやす + ね, not いや + っすね; spec LEX-7870).
+    bool StemTakesSu(std::string_view stem, std::string_view ending) const;
     bool ProvenName(std::string_view key) const;
     bool GodanCausative(std::string_view stem) const;
     bool IchidanPartner(std::string_view stem, std::string_view kana) const;
@@ -200,16 +227,26 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
-    // The quote marks of the raw text of all tokens in order (byte end in the token, depth after
-    // it), and by token the first of them (one more for the end); filled with quoteDepths_.
+    std::vector<int> quoteCounts_;  // the quotes opened before each token, filled with quoteDepths_
+    // The quote marks of the raw text of all tokens in order (byte end in the token, depth and
+    // quotes opened after it), and by token the first of them (one more for the end); filled with
+    // quoteDepths_.
     struct QuoteMark {
         int end;
         int depth;
+        int count;
     };
     std::vector<QuoteMark> quoteMarks_;
     std::vector<uint32_t> quoteMarkFirst_;
     std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
     std::vector<OpenMarks> openMarks_;  // OpenMarksAt by token and after the last, empty until first asked
+    // The last lookup of the whole ending table (query "", kModeVerbEnding), which a verb
+    // continuation makes at every verb; DoLookup gives it again when a new one equals it.
+    Lookup endings_;
+    // The candidates endings_ was made from: the same candidates make the same records again (an empty query drops
+    // none by the text around), so DoLookup gives endings_ without making them.
+    std::vector<dict::Candidate> endingsFound_;
+    int endingsFoundCount_ = -1;
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
@@ -235,9 +272,38 @@ private:
     Record* LatticeKatakana(Record* records, std::string_view full, int cursor, int token);
     // Inside a kanji run: the first word of the lattice's path first, where the lattice says so.
     Record* LatticeKanji(Record* records, std::string_view full, int cursor, int token);
+    // Inside a hiragana stretch: the first word of the lattice's path first, where the search breaks a kana word.
+    Record* LatticeKana(Record* records, std::string_view full, int cursor, int token, const Item* parent);
     // The spans of the current token whose record LatticeKatakana or LatticeKanji put first; SegReport says
     // "lattice" where the search's path keeps one of them as a word.
     std::vector<std::pair<int, int>> segDecided_;
+    // The arena's fill before a probe that makes records and items only to read where a word ends (SegEdgesAt,
+    // LatticeKana); RewindProbe gives back what the probe made.
+    struct ProbeMark {
+        std::size_t items, groups, entries, details, records, texts;
+        const Record* endings;
+    };
+    ProbeMark MarkProbe() const;
+    void RewindProbe(const ProbeMark& m);
+    // The place whose verbs SegEdgesAt probes one by one (text, byte offset, token; text null outside it), and whether
+    // the prefix table read nothing there.
+    struct PrefixProbe {
+        const char* text = nullptr;
+        std::size_t size = 0;
+        int offset = -1;
+        int token = -1;
+        bool none = false;
+    } prefixProbe_;
+    // The item LatticeKana read at cursor of text from records, where it gave those records back as they were: the
+    // search takes it in place of reading the same records at the same place again (records null for none).
+    struct LatticePick {
+        const char* text = nullptr;
+        std::size_t size = 0;
+        int cursor = -1;
+        int token = -1;
+        const Record* records = nullptr;
+        Item* item = nullptr;
+    } latticePick_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
@@ -256,6 +322,17 @@ private:
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
     Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
+    // The reading at full[p:] that runs farthest: its end (p for none) and its item, and the farthest key end there.
+    struct Reach {
+        int end = 0;
+        int key = 0;  // the farthest end of a dictionary key there, endings left out
+        const Item* item = nullptr;
+    };
+    Reach ReadingReach(std::string_view full, int p, int token);
+    // LEX-8021 and LEX-8020: the record order at full[cursor:] for a noun or adverb row that spells a verb before its
+    // て form, and for an ichidan stem with a noun row before a case particle.
+    Record* VerbOverNounBeforeTe(Record* records, std::string_view full, int cursor, int token);
+    Record* NounOverStemBeforeParticle(Record* records, std::string_view full, int cursor, int token, const Item* parent);
     // The longer reading left at cursor that takes the place of c when the retry budget is spent; null for none.
     Item* LongerAtExhaustion(std::string_view full, int cursor, int token, const Item& c);
     // A phrase reading X の Y whose Y starts a noun running past it (次の日 of 次の日曜日): the shorter reading that ends
@@ -291,6 +368,7 @@ private:
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
     bool KanaAfterWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaAfterWordIn(const dict::UserEntry& u, std::string_view query) const;
     bool DoubledSoundBefore(std::string_view query) const;
     bool KanaModifierBefore(std::string_view query) const;
     bool KanaBeforeParticle(const dict::UserEntry& u, std::string_view rest) const;
@@ -342,6 +420,13 @@ bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int
 
 // Whether text starts with a particle or punctuation after a noun, or is empty.
 bool NounEndAt(std::string_view text);
+
+// The length of the kana name of the name layer, two kana or more, that starts s and that an
+// honorific of honorific.name follows (そうすけ君, こうのすけくん) and no dictionary word that starts inside
+// the name runs through (みなさん of がんばるみなさん), or 0: such a name is whole, and no
+// word before it ends inside it (走ってきたそうすけ君: not 来たい and そう, nor the volitional of 来たす;
+// spec LEX-7866).
+std::size_t NameBeforeHonorific(const dict::Snapshot& snapshot, std::string_view s);
 
 // Whether the adjective stem with its nominal ending is a word of the dictionary already: stem is
 // also the key of a verb, whose continuative it then spells (楽し of 楽しむ: 楽しみ), or stem and

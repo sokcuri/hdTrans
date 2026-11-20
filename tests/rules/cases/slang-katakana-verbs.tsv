@@ -20,7 +20,7 @@ sound:verb-stem-tsu	よくも サツにチクってくれたな｡	잘도 사츠
 sound:verb-stem-tsu	本部にチクってやるぜ	본부에 고자질해 줄게	fix	sound
 sound:verb-stem-tsu	小っちゃくて パクパクって｡	작아서 냠냠.	keep	sound
 sound:verb-stem-tsu	そのままパクって食べたいけど	그대로 덥석 먹고 싶은데	keep	sound
-sound:verb-stem-tsu	あったたた……痛いのう。誰じゃ、わしに礫を投げるんは？	앗타다닥……아프구먼. 누구는, 나에게 역을 던지는 은?	keep	sound
+sound:verb-stem-tsu	あったたた……痛いのう。誰じゃ、わしに礫を投げるんは？	has:앗타다닥	keep	sound
 dict:s:9511	ここの大家は ドケチなんだぞ！	여기의 집주인은 지독한 구두쇠인 거야!	fix	lookup
 dict:s:9511	あのドケチなサポーター君がなあ…	그 지독한 구두쇠인 서포터 군이…	fix	lookup
 dict:s:9511	売るんかい！ やっぱりドケチだ｡	파는 거야! 역시 지독한 구두쇠다.	fix	lookup

@@ -229,6 +229,37 @@ bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
     return !letter;
 }
 
+// Whether two lookups give the same records, field by field, with views to the same bytes.
+bool SameRecords(const Lookup& a, const Lookup& b) {
+    if (a.count != b.count) return false;
+    auto same = [](std::string_view x, std::string_view y) { return x.data() == y.data() && x.size() == y.size(); };
+    const Record* x = a.records;
+    const Record* y = b.records;
+    for (; x != nullptr && y != nullptr; x = x->child, y = y->child) {
+        if (!same(x->source, y->source) || x->target != y->target || !same(x->partCode, y->partCode) ||
+            !same(x->semantic, y->semantic) || x->attr != y->attr || !same(x->dictCode, y->dictCode) || x->ruleNo != y->ruleNo ||
+            x->id != y->id || x->user != y->user) {
+            return false;
+        }
+    }
+    return x == nullptr && y == nullptr;
+}
+
+// Whether two candidate lists hold the same candidates, field by field, with views to the same bytes.
+bool SameCandidates(const std::vector<dict::Candidate>& a, const std::vector<dict::Candidate>& b) {
+    if (a.size() != b.size()) return false;
+    auto same = [](std::string_view x, std::string_view y) { return x.data() == y.data() && x.size() == y.size(); };
+    for (std::size_t i = 0; i < a.size(); i++) {
+        const dict::Candidate& x = a[i];
+        const dict::Candidate& y = b[i];
+        if (!same(x.source, y.source) || !same(x.target, y.target) || x.codes != y.codes || x.rule != y.rule || x.id != y.id ||
+            x.user != y.user) {
+            return false;
+        }
+    }
+    return true;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -264,7 +295,15 @@ dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
 
 Lookup Worker::DoLookup(std::string_view query, int mode) {
     if (fault) return {};
+    kanaAfterHeld_ = false;
     dict::Candidates found = WordInfo(query, mode);
+    if (mode == kModeGeneral && !kanaAfterHeld_ && settings.text && snapshot.SegCostTable().loaded) {
+        lastGeneral_.data = query.data();
+        lastGeneral_.size = query.size();
+        lastGeneral_.current = current;
+        lastGeneral_.surface = transformSurface;
+        lastGeneral_.list = found.list;
+    }
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);
@@ -273,8 +312,17 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         ApplyConstraints(found, query);
         ReadGivenNames(found, query);
     }
+    // The ending table again with the candidates of its last lookup: the records would equal endings_ field by field
+    // (they are made from the candidates alone, and with an empty query no split drops one by the text around), so
+    // endings_ is what the check below would give.
+    const bool endingTable = query.empty() && mode == kModeVerbEnding;
+    if (endingTable && found.count == endingsFoundCount_ && SameCandidates(found.list, endingsFound_)) {
+        if (observer.fn != nullptr) observer.fn(observer.context, current, query, mode, endings_.records);
+        return endings_;
+    }
     Lookup l;
     l.count = found.count;
+    const std::size_t mark = arena.records.Used();
     Record* last = nullptr;
     for (const dict::Candidate& c : found.list) {
         Record* r = NewRecord();
@@ -304,6 +352,20 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         DropModalSplits(l, query);
         TransliterateGlosses(l.records);
         if (fault) return {};
+    }
+    // The ending table comes back whole at every verb. When the records equal those of its last
+    // lookup, those are given again and the new ones go back to the pool: only this lookup made
+    // records since mark, and no record of the table is ever changed after it is made (groups
+    // copy them into entries).
+    if (endingTable) {
+        if (SameRecords(l, endings_)) {
+            arena.records.Rewind(mark);
+            l = endings_;
+        } else {
+            endings_ = l;
+        }
+        endingsFound_ = found.list;
+        endingsFoundCount_ = found.count;
     }
     if (observer.fn != nullptr) observer.fn(observer.context, current, query, mode, l.records);
     return l;
@@ -499,7 +561,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
     if (const char32_t d = text::DecodeRune(FirstChar(key)).cp; (d >= U'0' && d <= U'9') || (d >= U'０' && d <= U'９')) {
         const std::string_view surface = transformSurface;
         std::string_view before;
-        if (surface.ends_with(query)) before = LastChar(surface.substr(0, surface.size() - query.size()));
+        if (EndsSurface(query)) before = LastChar(surface.substr(0, surface.size() - query.size()));
         if (before.empty() && current > 0) before = LastChar(Tok(current - 1).text);
         char32_t b = text::DecodeRune(before).cp;
         if (b >= U'Ａ' && b <= U'ｚ') b -= 0xFEE0;
@@ -508,7 +570,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
     const int first = NameClassOf(FirstChar(key)), last = NameClassOf(LastChar(key));
     if (first == kClassHiragana || first == kClassKatakana) {
         const std::string_view surface = transformSurface;
-        if (!surface.ends_with(query)) return false;
+        if (!EndsSurface(query)) return false;
         const int prev = NameClassOf(LastChar(surface.substr(0, surface.size() - query.size())));
         if (prev == first || (first == kClassHiragana && prev == kClassKanji)) return false;
     }
@@ -529,7 +591,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
 bool Worker::StandsApart(std::string_view key, std::string_view query) const {
     const std::string_view surface = transformSurface;
     std::string_view before;
-    if (surface.ends_with(query) && surface.size() > query.size()) {
+    if (EndsSurface(query) && surface.size() > query.size()) {
         before = LastChar(surface.substr(0, surface.size() - query.size()));
     } else if (current > 0) {
         // The space written after a span read in Hangul stands for no space of the text.
@@ -571,7 +633,7 @@ bool Worker::DoubledSoundBefore(std::string_view query) const {
 // spelled in kana starts a word (はやくにげて 빨리 도망쳐, ゆっくりはなれる 천천히 떨어진다; LEX-5922).
 bool Worker::KanaModifierBefore(std::string_view query) const {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query)) return false;
+    if (!EndsSurface(query)) return false;
     const std::string_view before = surface.substr(0, surface.size() - query.size());
     // Kana take three bytes each in UTF-8; up to five kana back.
     for (std::size_t n = 2; n <= 5 && 3 * n <= before.size(); n++) {
@@ -596,11 +658,17 @@ bool Worker::KanaModifierBefore(std::string_view query) const {
 // whose kanji and the kana of u after them, kana by kana, are no key of the dictionary (水しげん; not 分かんねん, whose 分か is the
 // stem of 分かる; LEX-6801).
 bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) const {
+    const bool held = KanaAfterWordIn(u, query);
+    kanaAfterHeld_ = kanaAfterHeld_ || held;
+    return held;
+}
+
+bool Worker::KanaAfterWordIn(const dict::UserEntry& u, std::string_view query) const {
     const Item* p = kanaAfter;
     if (p == nullptr || query.data() != kanaAfterAt || p->group == nullptr || p->detail == nullptr) return false;
     std::string_view s = p->group->surface;
     const std::string_view surface = transformSurface;
-    if (s.empty() || p->length <= 0 || !surface.ends_with(query)) return false;
+    if (s.empty() || p->length <= 0 || !EndsSurface(query)) return false;
     const std::string_view before = surface.substr(0, surface.size() - query.size());
     const std::size_t length = static_cast<std::size_t>(p->length);
     if (before.size() < length) return false;
@@ -703,7 +771,7 @@ bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) con
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query)) return false;
+    if (!EndsSurface(query)) return false;
     const std::string_view prev = LastChar(surface.substr(0, surface.size() - query.size()));
     const std::string_view pc = u.codes->partText;
     // An adnominal that only a noun can follow (その, 大きな; LEX-5925), as a word of its own: it starts the line or
@@ -903,7 +971,7 @@ bool Worker::KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) 
 // hiragana, and for ます after anything but the start of the token or punctuation.
 void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
-    const bool alone = surface.ends_with(query) &&
+    const bool alone = EndsSurface(query) &&
                        UtteranceBoundary(LastChar(surface.substr(0, surface.size() - query.size())));
     Record* out = nullptr;
     Record* last = nullptr;
@@ -935,7 +1003,7 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
 void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
     std::string_view before;
-    if (surface.ends_with(query) && surface.size() > query.size()) {
+    if (EndsSurface(query) && surface.size() > query.size()) {
         before = LastChar(surface.substr(0, surface.size() - query.size()));
     } else if (current > 0) {
         before = LastChar(Tok(current - 1).text);
@@ -1032,7 +1100,7 @@ void Worker::DropNegatedAdverbs(Lookup& l, std::string_view query) {
 // are dropped.
 void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
-    const bool afterKa = surface.ends_with(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
+    const bool afterKa = EndsSurface(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
@@ -1125,7 +1193,7 @@ bool Worker::SplitsPrefixWord(const Record& r, std::string_view query) const {
         return false;
     }
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query) || NameClassOf(LastChar(surface.substr(0, surface.size() - query.size()))) == kClassKanji) {
+    if (!EndsSurface(query) || NameClassOf(LastChar(surface.substr(0, surface.size() - query.size()))) == kClassKanji) {
         return false;
     }
     const std::string_view last = LastChar(r.source);
@@ -1172,6 +1240,19 @@ bool Worker::PersonSuffixAt(std::string_view s) const {
                 return true;
             }
         }
+    }
+    return false;
+}
+
+bool Worker::StemTakesSu(std::string_view stem, std::string_view ending) const {
+    if (!ending.starts_with("す")) return false;
+    // the kana that end the stem, two to four of them: a kana verb in す (いやす, ためす, なおす)
+    std::size_t at = stem.size();
+    for (int n = 1; n <= 4 && at > 0; n++) {
+        const text::Rune r = DecodeLastRune(stem.substr(0, at));
+        if (!(r.cp >= U'ぁ' && r.cp <= U'ゖ')) break;
+        at -= r.size;
+        if (n >= 2 && VerbFormSpelling(std::string(stem.substr(at)) + "す")) return true;
     }
     return false;
 }

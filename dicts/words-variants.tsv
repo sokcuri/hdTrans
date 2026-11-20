@@ -12006,8 +12006,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 言いしれぬ	말할 수 없는	C0D1			GN							jisjk:4720
 いい知れぬ	말할 수 없는	C0D1			GN							jisjk:4720
 言知れぬ	말할 수 없는	C0D1			GN							jisjk:4720
-言いかね	말하기 곤란&AV@	M437	UTs		GN							jisjk:94063
-言いかね	말하기 거북&AV@	M447			GN							jisjk:139102
+言いかね	말하기 곤란&Mf@	M437	UTs		GN							jisjk:94063
+言いかね	말하기 거북&Mf@	M447			GN							jisjk:139102
 言い做	중재&AV@	M443			GN							jisjk:139370
 言いしぶ	머뭇거&AA@	M438	UTs		GN							jisjk:94082
 言いしぶ	말하기를 주저&AV@	M448	SFl		GN							jisjk:139168
@@ -16040,9 +16040,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フタを開け	흥행을 시작&AV@	M420			GN							jisjk:117999
 蓋をあけ	흥행을 시작&AV@	M420			GN							jisjk:117999
 気をは	긴장시&AQ@	M418			GN							jisjk:92233
-気をきかせ	약삭빠르게 &LL@	M427			GN							jisjk:263861
 気をきかせ	배려&AV@	M427			GN				xxx llm	1		w:18771
-気を効かせ	약삭빠르게 &LL@	M427			GN							jisjk:263861
 気を効かせ	배려&AV@	M427			GN				xxx llm	1		w:18771
 形を取	형태를 취&AV@	M428			GN							jisjk:263557
 形を取	형태를 취&AV@	M428		Pn	GN							jisjk:263558
@@ -20701,7 +20699,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 嵌めこ	끼워&H5@	M445			GN							w:39143
 差しだ	&A6@	M433			GN							w:39144
 差しだ	보&A6@	M433	VHnPOs		GN	820	||2 ||4 S-2== "手紙" S-2== "葉書き" S-2== "郵便物" S-2== "小包" ||4 S+1== "手紙" S+1== "葉書き" S+1== "郵便物" S+1== "小包"	두 단어 앞이나 바로 뒤에 手紙·葉書き·郵便物·小包가 있으면 差し出를 '보내다'로 고른다. (미발동: rare-word)				w:39145
-差しだ	내&AB@	M443	XXX		GN							w:39146
+差しだ	내&LN@	M443	XXX		GN							w:39146
 差しだ	발송&AV@	M443			GN							w:39147
 差しき	이&A2@	M438			GN							w:39148
 差しき	앞질러 이&A2@	M447			GN							w:39149
@@ -20781,7 +20779,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 稼ぎだ	벌어들&AJ@	M433			GN							w:39224
 積みだ	실어&A6@	M443			GN							w:39225
 突きだ	쑥 내&LN@	M443			GN							w:39226
-突きだ	내&AB@	M443			GN							w:39227
+突きだ	내&LN@	M443			GN							w:39227
 突きだ	넘&A2@	M443	VHn		GN							w:39228
 締めき	마감&AV@	M448	UMe		GN							w:39229
 締めき	늘 닫아 &C7@	M448	VBl		GN							w:39230
@@ -20859,3 +20857,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 舞いもど	되돌아&AH@	M418			GN							w:39748
 吹きとば	날려버&AA@	M423			GN							w:39749
 引き摺り出	끌어&A6@	M433			GN							w:39105
+しがみ付	매달&AA@	M411			GN			LEX-8060: しがみつく				w:41800
+こびり付	달라&HC@	M411		Dx	GN			LEX-8060: こびりつく				w:41801
+まとわり付	달라&HC@	M421		Dx	GN			LEX-8060: まとわりつく				w:41802
+ひっ付	달라&HC@	M421			GN			LEX-8060: ひっつく				w:41803
+かいてき	쾌적%A1@	G8L0			GN			LEX-8060: 快適				w:41804
+赤ずきん	붉은 두건	N110	VBkVSw		GN			LEX-8060: 赤頭巾				w:41805
+とき卵	푼 달걀	N110	VFd		GN			LEX-8060: 溶き卵				w:41806
+ほうれい線	팔자주름	N110	VBp		GN			LEX-8060: 法令線				w:41807
+はき心地	착용감	K110			GN			LEX-8060: 履き心地				w:41812
+働きもの	부지런한 사람	N110	VHn		GN			LEX-8060: 働き者				w:41813
+カンパン	건빵	N110	VFd		GN			LEX-4823: 乾パン				w:41814
+エンガワ	지느러미살	N110	VFd		GN			LEX-4823: 縁側 (생선)				w:41815
+ひっ付け	붙&AJ@	M437			GN			LEX-8060: ひっつける				w:41816

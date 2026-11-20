@@ -353,8 +353,19 @@ bool Item::WrittenBeforeNext() const {
            next->tokenIndex == tokenIndex + 1 && next->start == 0;
 }
 
+// A closing mark that reads as nothing: a small っ or ッ that stops the last sound, with the
+// long marks and small vowels that draw it out (行くっ, 跪けッ, 守れーッ). Long marks and small
+// vowels alone are not one: they draw out the last sound and leave the ending as it is (甘いなァ, 暴れるかぁ).
 bool Item::ClosingTsu() const {
-    if (group->surface != "っ" || !EntryText(0).empty()) return false;
+    if (!EntryText(0).empty() || group->surface.empty()) return false;
+    bool stop = false;
+    for (std::string_view s = group->surface; !s.empty();) {
+        const text::Rune r = text::DecodeRune(s);
+        if (std::u32string_view(U"っッーぁぃぅぇぉァィゥェォ").find(r.cp) == std::u32string_view::npos) return false;
+        stop = stop || r.cp == U'っ' || r.cp == U'ッ';
+        s.remove_prefix(r.size);
+    }
+    if (!stop) return false;
     const Item* n = After();
     if (n == nullptr) return true;
     const char32_t c = text::DecodeRune(n->group->surface).cp;

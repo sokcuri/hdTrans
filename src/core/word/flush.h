@@ -60,6 +60,23 @@ struct Flusher {
         std::vector<uint32_t> slots;
         uint32_t stamp = 0;
         const Item* word = nullptr;
+        // Eval: the value of an unbounded scan from a word (the walk from the word after it): for each scan
+        // node in scanSlots, by the place of the word, the epoch it was found in and the place of the word
+        // that decided it (kNoStop: not known). It holds in its epoch, and in a later one of the run while
+        // no word an action changed lies within the scan's reach of the words it walked (lasting: the run
+        // has no ruby base, so the words a step apart are a place apart).
+        struct ScanValue {
+            static constexpr uint32_t kNoStop = UINT32_MAX;
+            uint32_t epoch = 0, stop = kNoStop;
+            bool value = false;
+        };
+        std::vector<std::pair<uint32_t, uint32_t>> scanSlots;  // node, index into scanValues
+        std::vector<std::vector<ScanValue>> scanValues;
+        // The last epoch in which an action changed each word of the run, as a tree of maxima: the word at
+        // place p is leaf leaves + p, node k the larger of 2k and 2k + 1.
+        std::vector<uint32_t> changes;
+        std::size_t leaves = 0;
+        bool lasting = false;
     } constructions{};
 };
 

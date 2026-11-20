@@ -1,0 +1,76 @@
+# 규칙: LEX-7701
+rule	input	expected	kind	layer
+katakana:speech-alone	コレハ	이것은	fix	protect
+katakana:speech-alone	コレハ？	이것은?	fix	protect
+katakana:speech-alone	「コ、コレハ……ナミ、ダ……」	has:이건	fix	protect
+katakana:speech-alone	ソレハ ダメ	그것은 안 돼	fix	protect
+katakana:speech-alone	キミハ、ダレ？	너는, 누구?	fix	protect
+katakana:speech-alone	オマエハ	너는	fix	protect
+katakana:speech-alone	コイツハ	has:녀석은	fix	protect
+katakana:speech-alone	ワタシモ	나도	fix	protect
+katakana:speech-alone	ワタシノ邪魔ハ…サセナイッ！	has:내 방해	fix	protect
+katakana:speech-alone	ドコニ	어디에	fix	protect
+katakana:speech-alone	ピアノデス	피아노입니다	fix	protect
+katakana:speech-alone	ホントウニ	정말로	fix	protect
+katakana:speech-alone	ホントウニ？	정말로?	fix	protect
+katakana:speech-alone	ダイジョウブ	괜찮아	fix	protect
+katakana:speech-alone	ダイジョウブ、ダイジョウブ	괜찮아, 괜찮아	fix	protect
+katakana:speech-alone	キサマラガ…コノワレニ……	has:네놈들이	fix	protect
+katakana:speech-alone	コレデ…沈めッ！	has:이것으로	fix	protect
+katakana:speech-alone	ナカニシ	나카니시	fix	protect
+katakana:speech-alone	トラジャモン	트라자몬	fix	protect
+katakana:speech-alone	ニノミヤユイ	니노미야유이	fix	protect
+katakana:speech-alone	ユキノ	유키노	keep	protect
+katakana:speech-alone	ココノエ	코코노에	keep	protect
+katakana:speech-alone	キミガヨ	키미가요	keep	protect
+katakana:speech-alone	ドコモ	도코모	keep	protect
+katakana:speech-alone	ハモニカ	하모니카	keep	protect
+katakana:speech-alone	デスアダー	데스아더	keep	protect
+katakana:speech-alone	ナカニシが来た。	나카니시가 왔다.	keep	protect
+katakana:speech-alone	カナリがインカムの向こうで沈黙する。	has:카나리가	keep	protect
+katakana:speech-alone	ドカーン	콰광	keep	protect
+katakana:speech-alone	ワタシハ、ロボットデス。	저는, 로봇입니다.	keep	protect
+katakana:speech-alone	キミノミヤが来た。	키미노미야가 왔다.	keep	protect
+katakana:speech-alone	キミノウタ	키미노우타	keep	protect
+katakana:speech-alone	ゲンキダヨ	has:건강	keep	protect
+katakana:speech-alone	スキダヨ	좋아해	keep	protect
+katakana:speech-alone	ウソダヨ	거짓말이야	keep	protect
+katakana:speech-alone	ホントダヨ	정말이야	keep	protect
+katakana:speech-alone	ヤッタネ	해냈네	keep	protect
+katakana:speech-alone	オイシイネ	맛있네	keep	protect
+katakana:speech-alone	サムイネ	춥네	keep	protect
+katakana:speech-alone	ネムイヨ	졸려	keep	protect
+katakana:speech-alone	コワイヨ	무서워	keep	protect
+katakana:speech-alone	イヤダヨ	싫어	keep	protect
+katakana:speech-alone	シラナイヨ	몰라	keep	protect
+katakana:speech-alone	マッテテネ	has:기다리	keep	protect
+katakana:speech-alone	ヒトリハイヤダ	혼자는 싫다	keep	protect
+katakana:speech-alone	オレハオマエダ	나는 너다	keep	protect
+katakana:speech-alone	ボクハケンダ	has:나는	keep	protect
+katakana:speech-alone	「スキダヨ」	has:좋아	keep	protect
+katakana:speech-alone	「ウソダヨ」	has:거짓말	keep	protect
+katakana:speech-alone	スキダヨ～	has:좋아	keep	protect
+katakana:speech-alone	スキダヨ♪	has:좋아	keep	protect
+katakana:speech-alone	（スキダヨ）	has:좋아	keep	protect
+katakana:speech-alone	ゾンビハ	좀비는	keep	protect
+katakana:speech-alone	チカラハ	힘은	keep	protect
+katakana:speech-alone	ドイツハ強い。	lacks:어느 놈	keep	protect
+katakana:speech-alone	ドイツト日本	lacks:어느 놈	keep	protect
+katakana:speech-alone	ドイツノ車	lacks:어느 놈	keep	protect
+katakana:speech-alone	コンドウハ来ない。	lacks:혼동	keep	protect
+katakana:speech-alone	コンドウガ来た。	lacks:혼동	keep	protect
+katakana:speech-alone	カンコクノ首都	lacks:권고	keep	protect
+katakana:speech-alone	カンコクト日本	lacks:권고	keep	protect
+katakana:speech-alone	セイコウノ時計	lacks:성공	keep	protect
+katakana:speech-alone	センダイハ	lacks:선대	keep	protect
+katakana:speech-alone	カツヤマハ来ない。	lacks:또한 산	keep	protect
+katakana:speech-alone	コレラノ流行	lacks:이러한	keep	protect
+katakana:speech-alone	ウチノが来た。	has:우치노	keep	protect
+katakana:speech-alone	「ウチノ」	has:우치노	keep	protect
+katakana:speech-alone	ウチノ、行くぞ	has:우치노	keep	protect
+katakana:speech-alone	ウチノさん	has:우치노	keep	protect
+katakana:speech-alone	ソコデが来た。	has:소코데	keep	protect
+katakana:speech-alone	オメーガが来た。	has:오메가	keep	protect
+katakana:speech-alone	ボクノ部屋	내 방	fix	protect
+katakana:speech-alone	ソレハ違う。	has:그것은	fix	protect
+katakana:speech-alone	ギフケンハ広い。	has:기후현은	fix	protect

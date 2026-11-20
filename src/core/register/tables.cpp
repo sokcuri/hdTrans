@@ -432,7 +432,7 @@ bool LoadKeigo(const Reader& reader, std::vector<KeigoWord>& out, std::string& e
     Tsv t;
     std::vector<std::size_t> c;
     if (!ReadTsv(dict::internal::RegisterReaderTables(), "keigo.tsv", t, err) ||
-        !Need(t, {"row", "start", "not"}, c, "keigo.tsv", err))
+        !Need(t, {"row", "start", "not", "noun"}, c, "keigo.tsv", err))
         return false;
     std::set<std::string> rows;
     for (const auto& r : t.rows) {
@@ -455,6 +455,9 @@ bool LoadKeigo(const Reader& reader, std::vector<KeigoWord>& out, std::string& e
             if (!s.empty()) w.start.push_back(ToU32(s));
         for (const auto& s : Split(r[c[2]], '|'))
             if (!s.empty()) w.notStart.push_back(ToU32(s));
+        for (const auto& s : Split(r[c[3]], '|'))
+            if (!s.empty()) w.nounStart.push_back(ToU32(s));
+        if (w.nounStart.empty()) w.nounStart = w.start;
         out.push_back(std::move(w));
     }
     const auto need = [&](const std::string& kind, const std::vector<std::string>& keys) {
