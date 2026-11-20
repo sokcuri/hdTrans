@@ -34,7 +34,7 @@ dict:freq-lex-98	ウィットコフ特使が合流した。	has:위트코프 특
 dict:freq-lex-98	ニーソックスを履いた。	has:니삭스	keep	lookup
 dict:freq-lex-98	デカデカと書いてある。	has:큼직큼직하게	keep	lookup
 dict:freq-lex-98	大人げないぞ。	has:점잖지 않아	keep	lookup
-dict:freq-lex-98	「エナはバリケードを作れ」	has:에나는	fix	lookup
+dict:freq-lex-98	エナが来た。	has:에나가	fix	lookup
 dict:freq-lex-98	父は私服の下に海パンを履いていた。	has:수영 팬티	fix	lookup
 dict:freq-lex-98	選挙後の米株には期待できる。	has:미국 주식	fix	lookup
 dict:freq-lex-98	攻撃計画に関する情報を覚知したためだという。	has:인지했기	fix	lookup
@@ -54,3 +54,20 @@ dict:freq-lex-98	後手に回った感は否めず、打撃は避けられない
 dict:freq-lex-98	否めない。	has:부정할 수 없다	keep	lookup
 dict:freq-lex-98	多数派維持に躍起	has:안간힘	fix	lookup
 dict:freq-lex-98	躍起になって探した。	has:기를 써	keep	lookup
+dict:freq-lex-98	ニーキックを食らった。	has:니 킥	keep	lookup
+dict:freq-lex-98	トーキックでシュートした。	has:토 킥으로	keep	lookup
+dict:freq-lex-98	デフギアが壊れた。	has:데프 기어	keep	lookup
+dict:freq-lex-98	リアデフを交換した。	has:리어 데프	keep	lookup
+dict:freq-lex-98	ガレ場を登った。	has:너덜지대	fix	lookup
+dict:freq-lex-98	日本株価が下落した。	has:일본 주가	keep	lookup
+dict:freq-lex-98	欧州株価の動向	has:유럽 주가	keep	lookup
+dict:freq-lex-98	日本株高が続く。	has:일본 주가 상승	keep	lookup
+dict:freq-lex-98	日本株安	has:일본 주가 하락	keep	lookup
+dict:freq-lex-98	１回表に先制した。	has:1회초	fix	lookup
+dict:freq-lex-98	1回表に先制した。	has:1회초	fix	lookup
+dict:freq-lex-98	１回裏の攻撃	has:1회말	fix	lookup
+dict:freq-lex-98	今回表彰された。	lacks:회초	keep	lookup
+dict:freq-lex-98	躍起となって否定した。	has:기를 써	fix	lookup
+dict:freq-lex-98	共和党は巻き返しに躍起となっている。	has:기를 쓰고	fix	lookup
+dict:freq-lex-98	ハルが来た。	has:하루가	fix	lookup
+dict:freq-lex-98	日本株価指数が上がった。	has:일본 주가지수	keep	lookup
