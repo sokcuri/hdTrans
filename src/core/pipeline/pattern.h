@@ -63,6 +63,10 @@ std::string ReplaceAll(std::string_view s, Pattern p, Replace replace) {
 // at places that only grow walks the text once instead of once per place.
 size_t RunStartBefore(std::string_view s, size_t pos, bool (*in)(char32_t));
 
+// The id of the Find or ScanOf that runs over a text s starts (s is the text or a start of it), 0 for
+// none: what a pattern remembers about the bytes of s under one id holds while that id runs.
+unsigned long long ScanOver(std::string_view s);
+
 // The groups of the leftmost match of p in the matched text m alone.
 Match Rematch(const Match& m, Pattern p);
 

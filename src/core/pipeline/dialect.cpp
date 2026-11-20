@@ -25,6 +25,7 @@
 //              (くる), ていかれ after an honoured subject (て行かれ), the statement てもらえない (てくれない) and
 //              お + a verb stem + です (お読みです お読みになります) and お + a verb stem + ください (お使いください
 //              使ってください).
+#include <algorithm>
 #include <array>
 #include <initializer_list>
 #include <span>
@@ -313,24 +314,58 @@ bool NegativeBeforeNoun(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The question words of QuestionBefore and the longest of them in bytes.
+constexpr std::string_view kQuestionWords[] = {"どこ", "何", "なに", "なん", "誰", "だれ", "いつ", "どう", "どれ", "どっち", "どんな", "なぜ", "なんで", "どない"};
+constexpr size_t kQuestionWordMax = [] {
+    size_t n = 0;
+    for (const std::string_view w : kQuestionWords) n = std::max(n, w.size());
+    return n;
+}();
+
+// The QuestionBefore asked last during a scan: the sentence of pos starts at start, and found is the start of a question
+// word in it that ends by pos (npos for none).
+struct QuestionMemo {
+    unsigned long long scan = 0;
+    size_t pos = 0;
+    size_t start = 0;
+    size_t found = std::string_view::npos;
+};
+thread_local QuestionMemo gQuestion;
+
 // Whether a question word comes before pos in its sentence: the や of a question is read by the word
-// stage and the old-speech rows (どこや 어디야, どう行くもんや).
+// stage and the old-speech rows (どこや 어디야, どう行くもんや). During a scan the answer for the place asked last is
+// remembered, so asking at places that only grow reads the text once instead of once per place.
 bool QuestionBefore(std::string_view s, size_t pos) {
+    const unsigned long long scan = ScanOver(s);
+    const bool known = scan != 0 && gQuestion.scan == scan && gQuestion.pos <= pos;
     size_t start = pos;
     while (start > 0) {
+        // No sentence end between the place asked last and pos: the sentence starts where it started then.
+        if (known && start == gQuestion.pos) {
+            start = gQuestion.start;
+            break;
+        }
         const text::Rune r = LastRune(s.substr(0, start));
         if (In(r.cp, U"。！？!?」『「 　")) break;
         start -= r.size;
     }
-    const std::string_view clause = s.substr(start, pos - start);
-    for (const std::string_view w : {"どこ", "何", "なに", "なん", "誰", "だれ", "いつ", "どう", "どれ", "どっち", "どんな", "なぜ", "なんで", "どない"}) {
-        // Not the いつ of あいつ, こいつ, そいつ.
-        for (size_t at = clause.find(w); at != std::string_view::npos; at = clause.find(w, at + w.size())) {
-            if (w == "いつ" && at > 0 && In(LastRune(clause.substr(0, at)).cp, U"あこそ")) continue;
-            return true;
+    // A word found then is still in the sentence; else only a word that ends after the place asked last is new.
+    size_t found = known && start == gQuestion.start ? gQuestion.found : std::string_view::npos;
+    if (found == std::string_view::npos) {
+        const size_t from = known && start == gQuestion.start ? std::max(start, gQuestion.pos - std::min(gQuestion.pos - start, kQuestionWordMax - 1)) : start;
+        const std::string_view clause = s.substr(start, pos - start);
+        for (const std::string_view w : kQuestionWords) {
+            // Not the いつ of あいつ, こいつ, そいつ.
+            for (size_t at = clause.find(w, from - start); at != std::string_view::npos; at = clause.find(w, at + w.size())) {
+                if (w == "いつ" && at > 0 && In(LastRune(clause.substr(0, at)).cp, U"あこそ")) continue;
+                found = start + at;
+                break;
+            }
+            if (found != std::string_view::npos) break;
         }
     }
-    return false;
+    if (scan != 0) gQuestion = {scan, pos, start, found};
+    return found != std::string_view::npos;
 }
 
 // The length of the noun of kKanaNouns that head ends with where a word starts before it (ほんま, 田中さん, あれはそう), 0 for
