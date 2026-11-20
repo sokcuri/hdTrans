@@ -32,3 +32,45 @@ katakana:speech-alone	ドカーン	콰광	keep	protect
 katakana:speech-alone	ワタシハ、ロボットデス。	저는, 로봇입니다.	keep	protect
 katakana:speech-alone	キミノヨゾラ哨戒班	has:키미노요조라	keep	protect
 katakana:speech-alone	キミノウタ	키미노우타	keep	protect
+katakana:speech-alone	ゲンキダヨ	has:건강	keep	protect
+katakana:speech-alone	スキダヨ	좋아해	keep	protect
+katakana:speech-alone	ウソダヨ	거짓말이야	keep	protect
+katakana:speech-alone	ホントダヨ	정말이야	keep	protect
+katakana:speech-alone	ヤッタネ	해냈네	keep	protect
+katakana:speech-alone	オイシイネ	맛있네	keep	protect
+katakana:speech-alone	サムイネ	춥네	keep	protect
+katakana:speech-alone	ネムイヨ	졸려	keep	protect
+katakana:speech-alone	コワイヨ	무서워	keep	protect
+katakana:speech-alone	イヤダヨ	싫어	keep	protect
+katakana:speech-alone	シラナイヨ	몰라	keep	protect
+katakana:speech-alone	マッテテネ	has:기다리	keep	protect
+katakana:speech-alone	ヒトリハイヤダ	혼자는 싫다	keep	protect
+katakana:speech-alone	オレハオマエダ	나는 너다	keep	protect
+katakana:speech-alone	ボクハケンダ	has:나는	keep	protect
+katakana:speech-alone	「スキダヨ」	has:좋아	keep	protect
+katakana:speech-alone	「ウソダヨ」	has:거짓말	keep	protect
+katakana:speech-alone	スキダヨ～	has:좋아	keep	protect
+katakana:speech-alone	スキダヨ♪	has:좋아	keep	protect
+katakana:speech-alone	（スキダヨ）	has:좋아	keep	protect
+katakana:speech-alone	ゾンビハ	좀비는	keep	protect
+katakana:speech-alone	チカラハ	힘은	keep	protect
+katakana:speech-alone	ドイツハ強い。	lacks:어느 놈	keep	protect
+katakana:speech-alone	ドイツト日本	lacks:어느 놈	keep	protect
+katakana:speech-alone	ドイツノ車	lacks:어느 놈	keep	protect
+katakana:speech-alone	コンドウハ来ない。	lacks:혼동	keep	protect
+katakana:speech-alone	コンドウガ来た。	lacks:혼동	keep	protect
+katakana:speech-alone	カンコクノ首都	lacks:권고	keep	protect
+katakana:speech-alone	カンコクト日本	lacks:권고	keep	protect
+katakana:speech-alone	セイコウノ時計	lacks:성공	keep	protect
+katakana:speech-alone	センダイハ	lacks:선대	keep	protect
+katakana:speech-alone	カツヤマハ来ない。	lacks:또한 산	keep	protect
+katakana:speech-alone	コレラノ流行	lacks:이러한	keep	protect
+katakana:speech-alone	ウチノが来た。	has:우치노	keep	protect
+katakana:speech-alone	「ウチノ」	has:우치노	keep	protect
+katakana:speech-alone	ウチノ、行くぞ	has:우치노	keep	protect
+katakana:speech-alone	ウチノさん	has:우치노	keep	protect
+katakana:speech-alone	ソコデが来た。	has:소코데	keep	protect
+katakana:speech-alone	オメーガが来た。	has:오메가	keep	protect
+katakana:speech-alone	ボクノ部屋	내 방	fix	protect
+katakana:speech-alone	ソレハ違う。	has:그것은	fix	protect
+katakana:speech-alone	ギフケンハ広い。	has:기후현은	fix	protect

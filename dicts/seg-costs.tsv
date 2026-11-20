@@ -17,3 +17,4 @@ sound-run	100	a whole katakana run read by its sound is one word
 sound-char	20	and each katakana of it, so a long run read by sound costs more than its words
 latin-run	100	a run of Latin letters is one word and is not cut
 long-mark	0	a ー alone at the start or the end of a katakana run is a mark (a dash or a stretch), not a word
+kata-speech-cut	5	in the reading of katakana speech, on the scale of its own piece costs (a word 9 to 12), a word that starts with a katakana word of three kana or more and ends inside it, not as a stem: it cuts a loan word (ぴあ|のです of ピアノデス, not ピアノ|です)
