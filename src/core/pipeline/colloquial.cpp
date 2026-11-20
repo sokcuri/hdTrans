@@ -2288,6 +2288,8 @@ constexpr std::u32string_view kAfterNounStarts = U"だでじよねなわ";
 constexpr std::u32string_view kFinalParticles = U"よねなわさぞぜ";
 // The kana that start a particle or the copula after a word.
 constexpr std::u32string_view kParticleStarts = U"だでじよねなわかのをがにはもとへや";
+// The particles after which a word of two kana starts its phrase (それはそぉだね, 彼はそぉ言って).
+constexpr std::u32string_view kPhraseParticles = U"はをもへのにとが";
 
 // A small vowel kana of the vowel of the hiragana before it, at k, inside a run of kana that goes on after it
 // (こわぁい, 眠くなぁい, かぁわいそう, なぁるほど, まぁた回す): where the text m read without it reads a key from from..k-1 past
@@ -2345,7 +2347,7 @@ size_t DrawnKanaEnd(const Emphasis& e, std::u32string_view rs, std::u32string_vi
 // the long mark or the い or う the long vowel is written with (おぉい おーい, せんせぇ せんせい, おはよぉ おはよう), where a key of
 // t takes the full vowel in and starts in from..k-1; spelled gets the kana. The key is a word of the dictionary, no particle or cry alone (ねぇ,
 // なぁ stay as written), no person of the name layer (ゆぅき stays as written), and a key of the kana and its vowel alone
-// starts its run or follows a particle (the よぉ of だよぉ is a drawn ending); with whole, the key starts at from. The end of the key that starts first, the
+// starts its run or follows a particle (the よぉ of だよぉ is a drawn ending); with whole, the key starts at from or at k-1 after a particle. The end of the key that starts first, the
 // longer of two that start together, else 0; start gets where it starts.
 size_t LongVowelEnd(const Emphasis& e, std::u32string_view rs, size_t from, size_t k, char32_t& spelled, size_t& start, bool whole = false) {
     const int v = HiraganaVowel(rs[k - 1]);
@@ -2366,7 +2368,13 @@ size_t LongVowelEnd(const Emphasis& e, std::u32string_view rs, size_t from, size
         if (c == 0) continue;
         u[k - from] = c;
         for (size_t j = from; j < k; j++) {
-            if (whole && j != from) continue;
+            // With whole the key starts at from, or right before the mark after a particle (彼はそぉ。, 彼はそぉ言って).
+            // A particle that makes a particle with the kana is that particle drawn out (the にも of ゆうきにもぉ、); one
+            // hiragana alone before the particle is a kana of a name called (ともこぉ, さとこぉ, ちはこぉ).
+            const bool afterParticle = j >= 2 && In(rs[j - 1], kPhraseParticles) && LetterAt(rs, j - 2) &&
+                                       (!IsHiraganaRune(rs[j - 2]) || (j >= 3 && LetterAt(rs, j - 3))) &&
+                                       e.Tags(rs.substr(j - 1, 2)).find_first_of("PS") == std::string::npos;
+            if (whole && j != from && !(j + 1 == k && afterParticle)) continue;
             std::string tags;
             // At the end of a word only the keys themselves (ししょぉ is no 支障).
             size_t n = whole ? e.LongestKey(text(j)) : e.LongestWord(text(j), tags);
@@ -2396,8 +2404,7 @@ size_t LongVowelEnd(const Emphasis& e, std::u32string_view rs, size_t from, size
             // A word of two kana starts its phrase, at the start, after a mark or after a particle (それはそぉだね; not
             // the particle of 訓練もぉ), with a mark of the kana's own vowel (not the どぅ of どぅわっ), no final particle drawn
             // out (よぉ, ぜぇ), and is an adverb of manner or degree (もう, そう, どう).
-            const bool phraseStart = j == 0 || !(IsHiraganaRune(rs[j - 1]) || IsKatakanaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1])) ||
-                                     (j >= 2 && In(rs[j - 1], U"はをもへのにとが") && LetterAt(rs, j - 2));
+            const bool phraseStart = j == 0 || !(IsHiraganaRune(rs[j - 1]) || IsKatakanaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1])) || afterParticle;
             if (n == 2 && (v != s || !phraseStart || In(rs[k - 1], kFinalParticles) || tags.find_first_of("EGA") == std::string::npos)) continue;
             // A word of three kana or more that starts after the mark inside the key and goes past it leaves the text as
             // written (the ちゃんと of ねぇちゃんと聞いて, the なんて of まぁなんて; not the んの of じぃちゃんの).
@@ -2406,8 +2413,14 @@ size_t LongVowelEnd(const Emphasis& e, std::u32string_view rs, size_t from, size
                 const size_t far = e.LongestKey(text(q));
                 crossed = far >= 3 && q + far > j + n;
             }
-            // A key that starts inside a word as written is no word of its own (the かあさん of はるかぁさん).
-            for (size_t i = from; i < j && !crossed; i++) crossed = i + e.LongestKey(rs.substr(i)) > j;
+            // A key that starts inside a word as written is no word of its own (the かあさん of はるかぁさん); the particle
+            // the key follows starts no such word (the はこ of 彼はこぉ言った).
+            // A person of the name layer of three kana or more that starts the kana and ends at the drawn kana is a name
+            // drawn out (ともこぉさん; not the ともこ of まこともこぉ).
+            for (size_t i = from; i < j && !crossed; i++) {
+                crossed = (!(afterParticle && i + 1 == j) && i + e.LongestKey(rs.substr(i)) > j) ||
+                          (k - i >= 3 && (i == from || !IsHiraganaRune(rs[i - 1])) && e.NamesPerson(rs.substr(i, k - i)));
+            }
             if (crossed) continue;
             best = j + n;
             start = j;
