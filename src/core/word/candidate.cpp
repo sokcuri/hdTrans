@@ -4205,6 +4205,17 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     !From(text, offset + candidate->length).starts_with(PrefixGate(14))) {
                     accepted = false;
                 }
+                // A conjugated ending that a name before an honorific holds whole is no form of the
+                // verb there (the volitional きたそう of 来たす in 走ってきたそうすけ君; spec LEX-7866),
+                // unless another such name starts where the ending ends (見たまみちゃん 본 마미짱, not たまみ).
+                if (accepted) {
+                    const std::size_t stem = static_cast<std::size_t>(offset) + rec->source.size();
+                    const std::size_t end = static_cast<std::size_t>(offset + candidate->length);
+                    if (stem < end && end < text.size() && NameBeforeHonorific(snapshot, text.substr(stem)) > end - stem &&
+                        NameBeforeHonorific(snapshot, text.substr(end)) == 0) {
+                        accepted = false;
+                    }
+                }
                 if (accepted) {
                     switch (word->record) {
                     case 1: candidate->AppendRuleCandidateMarker("Pi"); break;

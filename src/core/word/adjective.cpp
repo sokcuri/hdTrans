@@ -77,6 +77,34 @@ bool Item::RunDefaultTrieQuery() {
     return true;
 }
 
+std::size_t NameBeforeHonorific(const dict::Snapshot& snapshot, std::string_view s) {
+    std::size_t name = 0;
+    for (std::size_t n = 0, runes = 0; n < s.size() && runes < 8; runes++) {
+        const text::Rune r = text::DecodeRune(s.substr(n));
+        if (r.cp < 0x3041 || r.cp > 0x309F) break;
+        n += std::max<std::size_t>(1, r.size);
+        if (runes < 1 || !snapshot.NamePerson(s.substr(0, n))) continue;
+        const std::size_t h = dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), s.substr(n));
+        // An honorific in small っ joins the last mora of a word as often as a name (みっちり).
+        if (h == 0 || s.substr(n).starts_with("っ")) continue;
+        // Not where a dictionary word that starts inside the name runs through the honorific
+        // (がんばるみなさん: みなさん, 連れてこっち: こっち, 始まりみっちり: みっちり).
+        bool word = false;
+        for (std::size_t p = std::max<std::size_t>(1, text::DecodeRune(s).size); p < n && !word;
+             p += std::max<std::size_t>(1, text::DecodeRune(s.substr(p)).size)) {
+            for (std::size_t e = n + h, more = 0; e <= s.size() && more < 4 && !word; more++) {
+                for (const dict::Candidate& c : snapshot.RetrieveRecords(s.substr(p, e - p), dict::LookupMode::General)) {
+                    if (c.source == s.substr(p, e - p)) word = true;
+                }
+                if (e == s.size()) break;
+                e += std::max<std::size_t>(1, text::DecodeRune(s.substr(e)).size);
+            }
+        }
+        if (!word) name = n;
+    }
+    return name;
+}
+
 // Checks what follows an adjective stem and looks up its ending (adjective endings)
 // into the direct group.
 bool Item::RunKeiyoTrieQuery() {
@@ -103,6 +131,9 @@ bool Item::RunKeiyoTrieQuery() {
     }
     base.punct = 0;
     base.ResetDirect(0);
+    // A そう that starts a name before an honorific has no stem before it (走ってきたそうすけ君
+    // 달려온 소스케 군, not 来たい and そう).
+    if (second.starts_with(kJaSou) && NameBeforeHonorific(w->snapshot, second) > 0) return false;
     if (second.starts_with(kJaSou)) {
         Record* r = w->NewRecord();
         r->target = "1";

@@ -1,0 +1,4 @@
+#! layer=base
+# 품사 코드가 필요한 끝말 읽기: 상태를 나타내는 に困っている (LEX-7863)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+に困ってい	에 곤란해하고 &HN@	M427		TuPj	GN			LEX-7863				w:39774

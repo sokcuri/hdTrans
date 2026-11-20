@@ -12006,8 +12006,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 言いしれぬ	말할 수 없는	C0D1			GN							jisjk:4720
 いい知れぬ	말할 수 없는	C0D1			GN							jisjk:4720
 言知れぬ	말할 수 없는	C0D1			GN							jisjk:4720
-言いかね	말하기 곤란&AV@	M437	UTs		GN							jisjk:94063
-言いかね	말하기 거북&AV@	M447			GN							jisjk:139102
+言いかね	말하기 곤란&Mf@	M437	UTs		GN							jisjk:94063
+言いかね	말하기 거북&Mf@	M447			GN							jisjk:139102
 言い做	중재&AV@	M443			GN							jisjk:139370
 言いしぶ	머뭇거&AA@	M438	UTs		GN							jisjk:94082
 言いしぶ	말하기를 주저&AV@	M448	SFl		GN							jisjk:139168
@@ -20701,7 +20701,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 嵌めこ	끼워&H5@	M445			GN							w:39143
 差しだ	&A6@	M433			GN							w:39144
 差しだ	보&A6@	M433	VHnPOs		GN	820	||2 ||4 S-2== "手紙" S-2== "葉書き" S-2== "郵便物" S-2== "小包" ||4 S+1== "手紙" S+1== "葉書き" S+1== "郵便物" S+1== "小包"	두 단어 앞이나 바로 뒤에 手紙·葉書き·郵便物·小包가 있으면 差し出를 '보내다'로 고른다. (미발동: rare-word)				w:39145
-差しだ	내&AB@	M443	XXX		GN							w:39146
+差しだ	내&LN@	M443	XXX		GN							w:39146
 差しだ	발송&AV@	M443			GN							w:39147
 差しき	이&A2@	M438			GN							w:39148
 差しき	앞질러 이&A2@	M447			GN							w:39149
@@ -20781,7 +20781,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 稼ぎだ	벌어들&AJ@	M433			GN							w:39224
 積みだ	실어&A6@	M443			GN							w:39225
 突きだ	쑥 내&LN@	M443			GN							w:39226
-突きだ	내&AB@	M443			GN							w:39227
+突きだ	내&LN@	M443			GN							w:39227
 突きだ	넘&A2@	M443	VHn		GN							w:39228
 締めき	마감&AV@	M448	UMe		GN							w:39229
 締めき	늘 닫아 &C7@	M448	VBl		GN							w:39230
