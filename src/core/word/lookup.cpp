@@ -245,6 +245,21 @@ bool SameRecords(const Lookup& a, const Lookup& b) {
     return x == nullptr && y == nullptr;
 }
 
+// Whether two candidate lists hold the same candidates, field by field, with views to the same bytes.
+bool SameCandidates(const std::vector<dict::Candidate>& a, const std::vector<dict::Candidate>& b) {
+    if (a.size() != b.size()) return false;
+    auto same = [](std::string_view x, std::string_view y) { return x.data() == y.data() && x.size() == y.size(); };
+    for (std::size_t i = 0; i < a.size(); i++) {
+        const dict::Candidate& x = a[i];
+        const dict::Candidate& y = b[i];
+        if (!same(x.source, y.source) || !same(x.target, y.target) || x.codes != y.codes || x.rule != y.rule || x.id != y.id ||
+            x.user != y.user) {
+            return false;
+        }
+    }
+    return true;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -297,6 +312,14 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         ApplyConstraints(found, query);
         ReadGivenNames(found, query);
     }
+    // The ending table again with the candidates of its last lookup: the records would equal endings_ field by field
+    // (they are made from the candidates alone, and with an empty query no split drops one by the text around), so
+    // endings_ is what the check below would give.
+    const bool endingTable = query.empty() && mode == kModeVerbEnding;
+    if (endingTable && found.count == endingsFoundCount_ && SameCandidates(found.list, endingsFound_)) {
+        if (observer.fn != nullptr) observer.fn(observer.context, current, query, mode, endings_.records);
+        return endings_;
+    }
     Lookup l;
     l.count = found.count;
     const std::size_t mark = arena.records.Used();
@@ -334,13 +357,15 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     // lookup, those are given again and the new ones go back to the pool: only this lookup made
     // records since mark, and no record of the table is ever changed after it is made (groups
     // copy them into entries).
-    if (query.empty() && mode == kModeVerbEnding) {
+    if (endingTable) {
         if (SameRecords(l, endings_)) {
             arena.records.Rewind(mark);
             l = endings_;
         } else {
             endings_ = l;
         }
+        endingsFound_ = found.list;
+        endingsFoundCount_ = found.count;
     }
     if (observer.fn != nullptr) observer.fn(observer.context, current, query, mode, l.records);
     return l;
