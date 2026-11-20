@@ -3415,15 +3415,26 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         const std::string_view rest = std::string_view(s).substr(byte[i]);
         if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-not"), rest) > 0) continue;
         bool compound = false;  // only when the dictionary holds the verb with ていく
+        size_t repeatAt = 0, formEnd = 0;  // a final form before more text: where that text and the form end
         if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku"), rest) == 0) {
             compound = true;
             if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-listed"), rest) == 0) {
                 const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-final"), rest);
                 if (n == 0) continue;
-                const size_t after = byte[i] + n;
+                size_t after = byte[i] + n;
+                // A small っ or ッ, a long mark or a small vowel only draws the order out (出てけッ！, 持ってけーっ).
+                while (after < s.size()) {
+                    const text::Rune r = text::DecodeRune(std::string_view(s).substr(after));
+                    if (std::u32string_view(U"っッーぁぃぅぇぉァィゥェォ").find(r.cp) == std::u32string_view::npos) break;
+                    after += r.size;
+                }
                 if (after < s.size()) {
                     const char32_t next = text::DecodeRune(std::string_view(s).substr(after)).cp;
-                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) continue;
+                    // Before more text it ends nothing, unless the same order is said again (出てけ出てけッ).
+                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) {
+                        repeatAt = after;
+                        formEnd = byte[i] + n;
+                    }
                 }
             }
         }
@@ -3434,6 +3445,9 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         size_t from = start;
         while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
         if (from + 1 >= i) continue;
+        if (repeatAt > 0 && !std::string_view(s).substr(repeatAt).starts_with(std::string_view(s).substr(byte[from], formEnd - byte[from]))) {
+            continue;
+        }
         // The ってね after a request to stop or wait quotes it (やめてってね 그만두라고).
         bool quoted = false;
         for (size_t w = from; w < i && !quoted; w++) {
@@ -4549,7 +4563,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteKansaiNegativeKana(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteKansaiNegativeKana(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(internal::RewriteDrawnQuotedOrder(completed, snap), snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);

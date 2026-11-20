@@ -883,6 +883,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どくガス	독가스	N110			GN						どくガス	w:875
 どこぞの	어느	E010			GN				llm			w:876
 どこでもドア	어디로든 문	N110			GN						どこでもドア	w:877
+どこであれ	어디든	E300			GN			LEX-8147: どこであれ行く 어디든 간다			どこであれ	w:42201
 どたん場	막판	N110	UMe	Tm	GN				xxx llm		どたんば	w:878
 どたん場	처형장	N110	VPl		GN				llm		どたんば	w:879
 どちらかと言うと	굳이 말하자면	A9D0			GN				llm		どちらかというと	w:880
@@ -18062,6 +18063,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 月面基地	월면기지	N110			GN						げつめんきち	w:17984
 有り	괜%C4@	G8U0			GN				llm		あり	w:17985
 有りとあらゆる	온갖	A9D0			GN				llm		ありとあらゆる	w:17986
+有りもしな	있지도 $D7@	H7U0			GN						ありもしな	w:42200
 有り有り	생생히	E300			GN				llm		ありあり	w:17987
 有り難う	고마워	E320			GN						ありがとう	w:17988
 有り難う御座います	감사합니다	A9D0	UTs		GN				llm		ありがとうございます	w:17989

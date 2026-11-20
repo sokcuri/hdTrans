@@ -1,0 +1,62 @@
+# 규칙: LEX-8143 LEX-8150 (명령형과 술어 뒤 닫는 ッ, 형용동사 だった 뒤 のでしょう)
+rule	input	expected	kind	layer
+verb:closing-mark-imperative	跪けッ！！	has:무릎 꿇어라!!	fix	defaults
+verb:closing-mark-imperative	守れーッ！	has:지켜라!	fix	defaults
+verb:closing-mark-imperative	死ねェ！	has:죽어라!	fix	defaults
+verb:closing-mark-imperative	行けッ！	has:가라!	fix	defaults
+verb:closing-mark-imperative	お前、明日から学校行けぇ。	has:학교 가라.	fix	defaults
+verb:closing-mark-imperative	行ける。	has:갈 수 있다.	keep	defaults
+verb:closing-mark-imperative	行けば分かる。	has:가면 안다.	keep	defaults
+verb:closing-mark-imperative	跪けない。	has:무릎 꿇을 수 없다.	keep	defaults
+attr:closing-tsu	矯正するッ！	has:교정한다!	fix	defaults
+attr:closing-tsu	撃てないッ！	has:쏠 수 없어!	fix	defaults
+sound:te-iku-final	出てけッ！	has:나가라!	fix	sound
+dict:na-past-noda	ソレダメだったのでしょうか？	has:안 되었을까요?	fix	lookup
+dict:na-past-noda	静かだったのでしょう。	has:조용했겠죠.	fix	lookup
+dict:na-past-noda	元気だったのですか？	has:건강했습니까?	fix	lookup
+dict:na-past-noda	好きだったんでしょう？	has:좋아했겠죠?	fix	lookup
+dict:na-past-noda	大変だったのだろうか。	has:힘들었던 걸까.	fix	lookup
+dict:na-past-noda	何が問題だったのでしょう。	has:문제였을까.	keep	lookup
+dict:na-past-noda	「この部屋で一体何をするつもりだったのでしょう」	has:생각이었을까」	keep	lookup
+dict:na-past-noda	高かったのでしょう。	has:비쌌겠죠.	keep	lookup
+attr:closing-tsu	くっ...私は...この私は、沈まないッ！舐めるなッ！	has:가라앉지 않아!	fix	defaults
+attr:closing-tsu	ワタクシハ…シズマナイ…ッ！	has:잠기지 않아…!	fix	defaults
+attr:closing-tsu	ヤリヤガッタ……ッ！クソガッ！！	has:했어……!	fix	defaults
+attr:closing-tsu	許さないッ！	has:용서하지 않아!	fix	defaults
+attr:closing-tsu	見えるッ！	has:보여!	fix	defaults
+verb:closing-mark-imperative	帰れーッ！	has:돌아가라!	fix	defaults
+verb:closing-mark-imperative	書けェ。	has:써라.	fix	defaults
+verb:closing-mark-imperative	退けぇ！	has:물러나라!	fix	defaults
+attr:closing-tsu	みんなはしゃいでるけどぉ、あんま好きな季節じゃないんだよねぇ～…。	has:떠들고 있지만,	keep	defaults
+attr:closing-tsu	今年もいっちょ暴れるかぁ、なっ提督！	has:날뛸까,	keep	defaults
+attr:closing-tsu	……ミタイノォ？…………ゼイタクネェ！	lacks:보고 싶은 거야	keep	defaults
+attr:closing-tsu	「傷ついたぁ～って、、そちらの殿方は？」	lacks:상처받은~	keep	defaults
+attr:closing-tsu	本当に甘いなァ、オマエは。	lacks:다네	keep	defaults
+attr:closing-tsu	来るかぁ？	has:올까?	keep	defaults
+attr:closing-tsu	寒いなぁ。	has:춥다.	keep	defaults
+attr:closing-tsu	楽しかったぁ～	has:즐거웠어~	keep	defaults
+attr:closing-tsu	なぁんだ、良かったぁ。	has:좋았어.	keep	defaults
+verb:closing-mark-imperative	「言い訳がそれってわけぇ？！」	lacks:끓어라	keep	defaults
+verb:closing-mark-imperative	走れーっ！	has:달려라	fix	defaults
+verb:closing-mark-imperative	「急げ、急げーっ！！」	has:서둘러라, 서둘러	fix	defaults
+verb:closing-mark-imperative	「謝れ、謝れーっ！」	lacks:사과할 수	fix	defaults
+verb:closing-mark-imperative	「追えーーっ！」	has:쫓아	fix	defaults
+verb:closing-mark-imperative	回せーっ！対戦迫撃砲も準備万端でありますか？	has:돌려	fix	defaults
+verb:closing-mark-imperative	突撃する！続けーっ！	lacks:계속하고-	fix	defaults
+verb:closing-mark-imperative	読めっこない。	has:읽을 수	keep	defaults
+sound:te-iku-final	持ってけーっ！	has:가져가	fix	sound
+sound:te-iku-final	出てけーっ！	has:나가	fix	sound
+sound:drawn-quoted-order	跪けッと言った。	has:꿇으라고	fix	sound
+sound:drawn-quoted-order	跪けッて言った。	has:꿇으라고	fix	sound
+sound:drawn-quoted-order	跪けェって叫んだ。	has:꿇으라고	fix	sound
+sound:drawn-quoted-order	行けッと言った。	has:가라고	fix	sound
+sound:drawn-quoted-order	ふーっと息を吐いた。	lacks:라고	keep	sound
+sound:drawn-quoted-order	食べとけッ！	lacks:라고	keep	sound
+packs:utterance-closing-sound	おれッ！	has:나!	keep	packs
+packs:utterance-closing-sound	おれぇ！	has:나!	keep	packs
+packs:utterance-closing-sound	「おれッ！」	has:「나!」	keep	packs
+packs:utterance-closing-sound	おれッ！	lacks:있어라	keep	packs
+sound:drawn-shout-tsu	来たーッ！	has:왔어~!	fix	sound
+sound:drawn-shout-tsu	勝ったーッ！	has:이겼어~!	fix	sound
+sound:drawn-shout-tsu	来たーっ！	has:왔어~!	keep	sound
+sound:drawn-shout-tsu	すごいーッ！	has:대단해~!	keep	sound

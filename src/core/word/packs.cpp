@@ -19,6 +19,7 @@
 #include "core/userdict/compile.h"
 #include "core/dict/pack.h"
 #include "core/dict/snapshot.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
@@ -824,12 +825,29 @@ bool FramePerson(const Item* x, const dict::Snapshot* snap) {
 }
 
 // Whether x ends an utterance on its side: no word (the start or end of the text), a mark, or a word
-// of another token (a space between).
+// Whether x only draws out or stops the sound of the word before it, closing the phrase: a run of small
+// っ/ッ, long marks and small vowels that reads as nothing, with no letter after it (おれッ！, おれぇ！).
+bool ClosingSound(const Item* x) {
+    if (!x->EntryText(0).empty() || x->group->surface.empty()) return false;
+    for (std::string_view s = x->group->surface; !s.empty();) {
+        const text::Rune r = text::DecodeRune(s);
+        if (std::u32string_view(U"っッーぁぃぅぇぉァィゥェォ").find(r.cp) == std::u32string_view::npos) return false;
+        s.remove_prefix(std::max<std::size_t>(r.size, 1));
+    }
+    const Item* n = x->next;
+    if (n == nullptr || n->group == nullptr) return true;
+    const char32_t c = text::DecodeRune(n->group->surface).cp;
+    return !text::IsLetter(c) && !text::IsDigit(c);
+}
+
+// of another token (a space between). Marks that only draw out or stop the last sound are as if they
+// were not written (おれッ！, おれぇ！ read as おれ！).
 bool UtteranceEdge(const Item* x, const Item* inside) {
     if (x == nullptr || x->group == nullptr) return true;
     if (x->tokenIndex != inside->tokenIndex) return true;
     const std::string_view s = x->group->surface;
     if (TrimSpace(s).empty()) return true;
+    if (x != inside && x->start > inside->start && ClosingSound(x)) return true;
     for (const std::string_view mark : {"。", "、", "！", "？", "!", "?", "…", "‥", "「", "」", "『", "』", "（", "）", "～", "ー", "，", ","}) {
         if (s == mark) return true;
     }

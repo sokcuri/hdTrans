@@ -1,0 +1,135 @@
+# 규칙: LEX-8140 LEX-8141 LEX-8142 LEX-8144 LEX-8146 LEX-8147 LEX-8148 LEX-8149
+rule	input	expected	kind	layer
+cx:cha-prohibit:10	食べちゃなりません。	has:먹으면 안 됩니다	fix	rewrites
+cx:cha-prohibit:10	ここで遊んじゃなりません。	has:놀면 안 됩니다	fix	rewrites
+cx:cha-prohibit:10	行かなければなりません。	has:가야 합니다	keep	rewrites
+cx:cha-prohibit:20	触っちゃなりませんよ。	has:만지면 안 돼요	fix	rewrites
+cx:cha-prohibit:20	好きになっちゃいましたよ。	lacks:안 돼요	keep	rewrites
+cx:cha-prohibit:30	見ちゃなりませんでした。	has:보면 안 되었습니다	fix	rewrites
+cx:cha-prohibit:30	静かになりませんでした。	has:조용해지지 않았습니다	keep	rewrites
+cx:cha-prohibit:40	言い訳など聞いちゃならんねぇ	has:들으면 안 돼	fix	rewrites
+cx:cha-prohibit:40	そんなもの飲んじゃならん！	has:마시면 안 돼!	fix	rewrites
+cx:cha-prohibit:40	どうにもならん。	has:되지 않아	keep	rewrites
+cx:cha-prohibit:50	この部屋に入っちゃならぬ。	has:들어가면 안 된다	fix	rewrites
+cx:cha-prohibit:50	我慢ならぬ。	lacks:안 된다	keep	rewrites
+cx:cha-prohibit:60	言っちゃならんことを言った。	has:말하면 안 되는 것을	fix	rewrites
+cx:cha-prohibit:60	言わなきゃならんことがある。	has:말해야 하는	keep	rewrites
+cx:cha-prohibit:70	そこへ行っちゃならんのだ。	has:가면 안 되는 것이다	fix	rewrites
+cx:cha-prohibit:70	やらねばならんのだ。	lacks:안 되는	keep	rewrites
+cx:neg-quote:10	こんな事しないでって。	has:하지 말라고	fix	rewrites
+cx:neg-quote:10	何もしないで帰った。	has:하지 않고 돌아갔다	keep	rewrites
+cx:neg-quote:12	心配しないでと伝えて。	has:걱정하지 말라고 전해	fix	rewrites
+cx:neg-quote:12	心配しないで寝てね。	lacks:말라고	keep	rewrites
+cx:neg-quote:13	二度としないでと、彼は言った。	has:하지 말라고, 그는	fix	rewrites
+cx:neg-quote:13	何もしないで、と彼は言った。	lacks:말라고,	keep	rewrites
+cx:neg-quote:14	心配しないでと言った。	has:걱정하지 말라고 말했다	fix	rewrites
+cx:neg-quote:14	連絡しないで待っていた。	has:연락하지 않고 기다리고	keep	rewrites
+cx:neg-quote:20	爪を立てないでって！	has:세우지 말라고!	fix	rewrites
+cx:neg-quote:20	爪を立てないでね。	lacks:말라고	keep	rewrites
+cx:neg-quote:22	また、あざになるまでたたかないでと彼に頼んだ。	has:치지 말라고 그에게	fix	rewrites
+cx:neg-quote:22	たたかないで待って。	has:치지 않고 기다려	keep	rewrites
+cx:neg-quote:23	邪魔しないでと、何度も言った。	has:방해하지 말라고, 몇 번이나	fix	rewrites
+cx:neg-quote:23	邪魔しないで、帰って。	lacks:말라고	keep	rewrites
+cx:neg-quote:24	爪を立てないでと言った。	has:세우지 말라고 말했다	fix	rewrites
+cx:neg-quote:24	爪を立てないで寝た。	has:세우지 않고 잤다	keep	rewrites
+cx:neg-quote:30	もう連絡しないでと言った。	has:연락하지 말라고 말했다	fix	rewrites
+cx:neg-quote:30	電話しないでと言ってた。	has:전화하지 말라고	fix	rewrites
+cx:neg-quote:30	連絡しないでって言った。	has:연락하지 말라고 말했다	keep	rewrites
+cx:towa-ienai:10	過失がないとはいえないとした。	has:없다고는 할 수 없다고 했다	fix	rewrites
+cx:towa-ienai:10	完璧とはいえない出来だ。	has:완벽하다고는 할 수 없는	fix	rewrites
+cx:towa-ienai:10	夏とはいえ、まだ涼しい。	has:여름이라고는 해도	keep	rewrites
+cx:towa-ienai:10	子供とはいえない。	has:아이라고는 할 수 없다	keep	rewrites
+cx:sae-unless:10	転生の事を公にさえしなければっ	has:하지 않으면	fix	rewrites
+cx:sae-unless:10	あんなことさえ言わなければ……	has:저런 말만 하지 않으면……	fix	rewrites
+cx:sae-unless:10	早く帰らなければ。	has:빨리 돌아가야 한다	keep	rewrites
+cx:sae-unless:10	これさえやらなければいけない。	has:이것만 해야 한다	keep	rewrites
+cx:sae-unless:10	これさえ守らなければならない。	has:이것만 지켜야 한다	keep	rewrites
+cx:na-observed:68	心配するな……私は大丈夫だ。	has:걱정하지 마……	fix	rewrites
+cx:na-observed:68	言い方をするな……	has:말투를 하지 마	fix	rewrites
+cx:na-observed:68	泣けるな……	has:눈물이 나오네	keep	rewrites
+cx:dewa-aru:10	群れで行動するのが厄介ではあるけど、飛び道具はない。	has:귀찮기는 하지만,	fix	rewrites
+cx:dewa-aru:10	偉大ではあるが、余りに無謀だ。	has:위대하기는 하지만,	fix	rewrites
+cx:dewa-aru:10	静かではあるものの、寒い。	has:조용하기는 하지만,	fix	rewrites
+cx:dewa-aru:10	静かではありません。	has:조용하지는 않습니다	keep	rewrites
+cx:dewa-aru:10	静かではありませんでした。	has:조용하지는 않았습니다	keep	rewrites
+cx:dewa-aru:20	こっちもかなり好きではあるのよね	has:꽤 좋아하기는 해	fix	rewrites
+cx:dewa-aru:20	好きではあった。	has:좋아하기는 했다	fix	rewrites
+cx:dewa-aru:20	嫌いではありますが、	has:싫기는 합니다만	fix	rewrites
+cx:dewa-aru:20	好きではありません。	has:좋아하지는 않습니다	keep	rewrites
+cx:dewa-aru:20	好きではない。	has:좋아하지 않는다	keep	rewrites
+cx:deare:10	どんな人であれ1票を持っています。	has:어떤 사람이든 1표를	fix	rewrites
+cx:deare:10	善であれ悪であれ	has:선이든 악이든	fix	rewrites
+cx:deare:10	大人であれ子供であれ、ルールは守れ。	has:어른이든 아이든,	keep	rewrites
+cx:deare:10	静かであれば良い。	has:조용하면 좋다	keep	rewrites
+cx:deare:20	好きであれ嫌いであれ、恐れていようとも	has:좋아하든 싫든,	fix	rewrites
+cx:deare:20	元気であれば会おう。	has:건강하면 만나자	keep	rewrites
+cx:deare:20	暇であれこれ考えた。	has:이것저것 생각했다	keep	rewrites
+cx:deare:24	好きであれ嫌いであれ	has:좋아하든 싫든	fix	rewrites
+cx:deare:24	常に勤勉であれ。	has:항상 근면해라	keep	rewrites
+cx:deare:30	常に勤勉であれ。	has:항상 근면해라	fix	rewrites
+cx:deare:30	正直であれ。	has:정직해라	fix	rewrites
+cx:deare:30	好きであれ。	has:좋아해라	fix	rewrites
+cx:deare:30	静かであれば。	has:조용하면	keep	rewrites
+dict:na-kurai	マーブル柄の風景に卒倒しそうなくらいだった。	has:졸도할 것 같을 정도였다	fix	lookup
+dict:na-kurai	泣きそうなくらい嬉しい。	has:울 것 같을 정도로 기쁘다	fix	lookup
+dict:na-kurai	死にそうなぐらい痛い。	has:죽을 것 같을 정도로 아프다	fix	lookup
+dict:na-kurai	倒れそうなくらいに疲れた。	has:쓰러질 것 같을 정도로	fix	lookup
+dict:na-kurai	壊れそうなくらいの勢い。	has:망가질 것 같을 정도의 기세	fix	lookup
+dict:na-kurai	静かなくらいだ。	has:조용할 정도다	fix	lookup
+dict:na-kurai	泣きそうなほど嬉しい。	has:울 것 같을 만큼 기쁘다	keep	lookup
+dict:nu-zo	誰であってもタダでは返さぬぞ、とでも言うように。	has:돌려주지 않는다, 라고	fix	lookup
+dict:nu-zo	行かぬぞ、と叫んだ。	has:가지 않는다, 라고	fix	lookup
+dict:nu-zo	死なぬぞ、絶対に。	has:죽지 않는다, 절대로	fix	lookup
+dict:nu-zo	タダでは返さぬぞ。	has:돌려주지 않는다.	keep	lookup
+dict:nu-zo	許さんぞ、と言った。	has:용서하지 않아	keep	lookup
+dict:arimoshinai	有りもしない架空の事実が真実のように膨れ上がる。	has:있지도 않은 가공의 사실	fix	lookup
+dict:arimoshinai	有りもしないのに	has:있지도 않은데	fix	lookup
+dict:arimoshinai	有りもしなかった。	has:있지도 않았다	fix	lookup
+dict:arimoshinai	ありもしない架空の事実	has:있지도 않은 가공의 사실	keep	lookup
+dict:arimoshinai	それも有りだ。	has:그것도 괜찮다	keep	lookup
+normalize:nna-prohibition-pause	「なめんなボケが！！　前に出ろ！！」	has:얕보지 마	fix	normalize
+normalize:nna-prohibition-pause	ふざけんなボケ！	has:장난치지 마	fix	normalize
+normalize:nna-prohibition-pause	ふざけんなアホ！	has:장난치지 마	fix	normalize
+normalize:nna-prohibition-pause	なめんな！	has:얕보지 마!	keep	normalize
+normalize:nna-prohibition-pause	ボケたら駄目	lacks:마	keep	normalize
+sound:te-iku-repeat	んなら村から出てけ出てけッ！！	has:나가라 나가라!!	fix	sound
+sound:te-iku-repeat	出てけ出てけ！	has:나가라 나가라!	fix	sound
+sound:te-iku-repeat	持ってけ持ってけ！	has:가져가라 가져가라!	fix	sound
+sound:te-iku-repeat	連れてって連れてって！	has:데려가 데려가!	fix	sound
+sound:te-iku-repeat	出ていけ出ていけ！	has:나가	keep	sound
+cx:deare:10	たとえ誰であれ。	lacks:누구여라	fix	rewrites
+cx:neg-quote:30	行くなと言った。	has:가지 말라고 했다	keep	rewrites
+cx:cha-prohibit:50	行かなくちゃならぬ	has:가야 한다	keep	rewrites
+cx:cha-prohibit:80	嘘をついちゃならんかった。	has:거짓말하면 안 되었다	fix	rewrites
+cx:cha-prohibit:80	行っちゃならんのか？	has:가면 안 되는가?	fix	rewrites
+cx:cha-prohibit:80	見ちゃならんな。	has:보면 안 되지	fix	rewrites
+cx:cha-prohibit:80	そこへ行っちゃならんかったのに	lacks:되지 않	fix	rewrites
+cx:cha-prohibit:80	嘘をついてはならんかった。	has:거짓말해서는 안 되었다	keep	rewrites
+cx:cha-prohibit:80	行かなくちゃならんかった。	lacks:가면 안	keep	rewrites
+cx:neg-quote:40	来ないでと叫んだ。	has:오지 말라고 외쳤다	fix	rewrites
+cx:neg-quote:40	来ないでって！	has:오지 말라고!	fix	rewrites
+cx:neg-quote:40	泣かないでと頼んだ。	has:울지 말라고	fix	rewrites
+cx:neg-quote:40	食べないでとっておいた。	has:먹지 않고	keep	rewrites
+cx:neg-quote:40	使わないでとっておこう。	has:쓰지 않고	keep	rewrites
+cx:neg-quote:40	食べないでとっておいた。	lacks:말라고	keep	rewrites
+cx:neg-quote:43	忘れないでと、彼女は言った。	has:잊지 말라고, 그녀는	fix	rewrites
+cx:neg-quote:43	忘れないで、彼女は言った。	lacks:말라고	keep	rewrites
+cx:neg-quote:44	書かないでと言った。	has:쓰지 말라고 말했다	fix	rewrites
+cx:neg-quote:44	書かないでと言われた。	has:쓰지 말라는 말을 들었다	fix	rewrites
+cx:neg-quote:44	見ないでとか言うな。	has:보지 말라든가	fix	rewrites
+cx:neg-quote:44	もう泣かないでと言った。	has:이제 울지 말라고	fix	rewrites
+cx:neg-quote:44	もう泣かないでと言った。	lacks:벌써	fix	rewrites
+cx:neg-quote:14	もう連絡しないでと言った。	lacks:벌써	fix	rewrites
+cx:neg-quote:14	しないでと言われた。	has:하지 말라는 말을 들었다	fix	rewrites
+cx:neg-quote:44	何も言わないで帰った。	has:말하지 않고 돌아갔다	keep	rewrites
+cx:neg-quote:44	もう来ないでと言った。	has:이제 오지 말라고	keep	rewrites
+cx:sae-unless:10	あいつさえ来なければなあ。	has:저 녀석만 오지 않으면	fix	rewrites
+cx:sae-unless:10	あいつさえ来なければね。	has:저 녀석만 오지 않으면	fix	rewrites
+cx:sae-unless:10	毎日これさえやらなきゃな。	has:해야지	keep	rewrites
+cx:sae-unless:10	薬さえ飲まなければならないね。	has:먹어야 하	keep	rewrites
+dict:dokodeare	どこであれ行く。	has:어디든 간다	fix	lookup
+dict:dokodeare	そこがどこであれ、私は行く。	has:거기가 어디든, 나는 간다	fix	lookup
+dict:dokodeare	どこであれ構わない。	has:어디든 상관없다	fix	lookup
+cx:stype-wh:30	何であれ食べる。	has:무엇이든 먹는다	keep	rewrites
+cx:stype-wh:30	どこへ行く。	has:어디에 가나	keep	rewrites
+cx:neg-quote:40	スカート触らないで…って、あらやだ。	lacks:말…라고	keep	rewrites

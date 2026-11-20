@@ -280,6 +280,7 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap);
 std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot& snap);
 std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap);
+std::string RewriteDrawnQuotedOrder(std::string_view text, const dict::Snapshot& snap);
 
 // The spellings of baby talk and cat speech (しゅき 好き, ごめんなちゃい, にゃい), long marks inside
 // words (いーから, しょーに合わない) and loanwords written in hiragana (ちょこれいと チョコレート), spelled

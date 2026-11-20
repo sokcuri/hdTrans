@@ -117,7 +117,7 @@
 //= contraction.ta-ageru	Starts of the text after a て form said た or だ that are the あげる after it with its あ dropped (作ったげる, 見せたげよう, 読んだげます).
 //= contraction.ta-yaru	Starts of the text after a て form said た or だ that are the やる after it with its や dropped (やったるぜ, 調整したるから, やったります).
 //= contraction.ta-yaru-final	The same before no kana, kanji or letter (やったる！); not before a particle or a noun, where たる is the attributive (取り出したるは, 秘めたる力).
-//= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
+//= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ), or before the same form said again (出てけ出てけッ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
 //= contraction.te-iku-not	Starts of the text after a て form that are no contracted いく: the quoting ったら (待ってったら).
@@ -153,7 +153,7 @@
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ, 泣いてんですよ; spec LEX-5074).
 //= follower.prohibition-janai	Sentence particles after the んじゃない or んじゃねえ of a rebuke (泣くんじゃないよ, 気を抜くんじゃないぞ, なめた口をきいているんじゃないわよ): the prohibition 지 마 (spec MNG-6).
 //= follower.prohibition-janai-teru	The particles of follower.prohibition-janai after which the てるんじゃない of a て form forbids too, not only before ！ (ビビってんじゃねぇぞ, きいているんじゃないわよ; spec MNG-6).
-//= follower.prohibition-pause	Words that start a new phrase right after a contracted prohibition with no comma written: the demonstratives in kana and the rough words of address (ふざけんなこんな話, 見んなこの野郎, 触んなてめえ): the prohibition 지 마 and an unwritten pause (spec LEX-5073).
+//= follower.prohibition-pause	Words that start a new phrase right after a contracted prohibition with no comma written: the demonstratives in kana and the rough words of address (ふざけんなこんな話, 見んなこの野郎, 触んなてめえ, なめんなボケが): the prohibition 지 마 and an unwritten pause (spec LEX-5073).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.count	What follows a count of things to say how they are shared or measured: ずつ, 分 and the times sign (二面ずつ 두 면씩, 四面分 네 면분, 四面×四面 네 면×네 면).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
@@ -1918,6 +1918,12 @@ follower.prohibition-pause	くそ
 follower.prohibition-pause	バカ
 follower.prohibition-pause	ばか
 follower.prohibition-pause	馬鹿
+follower.prohibition-pause	ボケ
+follower.prohibition-pause	ぼけ
+follower.prohibition-pause	アホ
+follower.prohibition-pause	あほ
+follower.prohibition-pause	阿呆
+follower.prohibition-pause	カス
 
 follower.ita	い
 follower.ita	か

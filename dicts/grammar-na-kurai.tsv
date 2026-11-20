@@ -1,0 +1,5 @@
+#! layer=base
+# 형용동사와 そう 뒤의 なくらい, なぐらい (LEX-8148): なほど 3 만큼과 같은 자리의 정도
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+なくらい	3 정도	U500			GN				na-kurai:1
+なぐらい	3 정도	U500			GN				na-kurai:2
