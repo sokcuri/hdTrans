@@ -55,6 +55,15 @@ awk 'BEGIN {
     for (i = 0; i < 4000; i++) printf "%s", k[int(rand() * n) + 1]
     printf "\n"
 }' >> "$tmp/input"
+# One kana run with か all along it: the stem before each か is the run walked once for the whole
+# line, not again from each か.
+i=0
+line=
+while [ $i -lt 3000 ]; do
+    line=${line}かいとか
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 # One kanji said again and again: each word is a copy, and its run of copies is the whole line.
 i=0
 line=
