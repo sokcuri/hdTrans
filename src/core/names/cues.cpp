@@ -1602,18 +1602,39 @@ std::vector<std::string> Registry::LayerKanaNames(std::string_view line, std::ve
         }
         return true;
     };
-    // The place after the run: the end, a mark or a particle of name.layer-slot-particle, or with joined, と or や before
-    // the next name. A run that is a word or predicate form and a kana of name.layer-slot-final (いくよ, ここね) is
-    // the name only before が or は.
-    const auto slot = [&](const std::string& t, std::string_view rest, bool joined) {
+    // The place after the run: the end, a mark or a particle of name.layer-slot-particle, or with joined, a kana of
+    // name.kana-coordinator before the next name. A run that is a word or predicate form and a kana of
+    // name.layer-slot-final (いくよ, ここね) is the name only before が or は. With と, which also quotes after a word
+    // or predicate (なるとは思わなかった, やみとは何か), only before が, or before は after a head that is no predicate
+    // form where a person's act or a question for a person follows or an object in を stands before (町を、みとは守ります).
+    const auto slot = [&](const std::string& t, std::string_view before, std::string_view rest, bool joined) {
         while (!rest.empty() && InRunes(FirstRune(rest).cp, "ー〜～")) rest.remove_prefix(FirstRune(rest).size);
         const text::Rune last = RuneBefore(t, t.size());
         const std::string_view head = std::string_view(t).substr(0, t.size() - last.size);
         if (dict::InClassRune(HDTRANS_CLASS("name.layer-slot-final"), last.cp) && (Flags(head).records > 0 || PredicateForm(head))) {
-            return rest.starts_with("が") || rest.starts_with("は");
+            if (rest.starts_with("が")) return true;
+            if (!rest.starts_with("は")) return false;
+            if (last.cp != U'と') return true;
+            if (PredicateForm(head) || InflectedRun(head)) return false;
+            std::string_view said = rest.substr(std::string_view("は").size());
+            if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
+            if (PersonSlotAt(*snap_, t, before, rest) || PersonSaidAt(said, true)) return true;
+            // After the object of the verb (町を、人を、みとは守ります) the topic is the one who acts, unless a verb of saying
+            // or thinking takes the と as its quotation (それを、やみとは思わない).
+            std::string_view object = before;
+            if (object.ends_with("、")) object.remove_suffix(std::string_view("、").size());
+            if (!object.ends_with("を") || said.empty() || !IsKanji(FirstRune(said).cp) ||
+                dict::StartsWithMember(HDTRANS_CLASS("verb.quote-stem"), said) > 0) {
+                return false;
+            }
+            // A verb of saying or thinking in any form: the kanji of its stem and kana (思わない, 言えない).
+            for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("name.person-speak"))) {
+                if (IsKanji(FirstRune(m).cp) && said.starts_with(m.substr(0, FirstRune(m).size))) return false;
+            }
+            return true;
         }
         if (rest.empty() || !IsHiragana(FirstRune(rest).cp)) return true;
-        if (joined && InRunes(FirstRune(rest).cp, "とや")) return true;
+        if (joined && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), FirstRune(rest).cp)) return true;
         return dict::InClassRune(HDTRANS_CLASS("name.layer-slot-particle"), FirstRune(rest).cp);
     };
     for (std::size_t a = 0; a < line.size();) {
@@ -1637,19 +1658,20 @@ std::vector<std::string> Registry::LayerKanaNames(std::string_view line, std::ve
                 longer = Flags(line.substr(a, e - a)).records > 0;
             }
             if (longer || LayerWordAt(line, a, b, end)) continue;
-            // The next name after と or や (いのりとかえでが).
+            // The next name after a kana of name.kana-coordinator (いのりとかえでが).
             std::vector<std::string> joined;
             const text::Rune j = RuneAt(line, b);
-            if (pairs != nullptr && b < end && InRunes(j.cp, "とや") && slot(t, line.substr(b), true)) {
+            if (pairs != nullptr && b < end && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), j.cp) &&
+                slot(t, line.substr(0, a), line.substr(b), true)) {
                 std::size_t c = b + j.size;
                 for (std::size_t m = 1; c < end && m <= 5; m++) {
                     c += RuneAt(line, c).size;
                     if (m < 2) continue;
                     const std::string u(line.substr(b + j.size, c - b - j.size));
-                    if (u != t && layerOnly(u) && slot(u, line.substr(c), false)) joined.push_back(u);
+                    if (u != t && layerOnly(u) && slot(u, line.substr(0, b + j.size), line.substr(c), false)) joined.push_back(u);
                 }
             }
-            if (joined.empty() && !slot(t, line.substr(b), false)) continue;
+            if (joined.empty() && !slot(t, line.substr(0, a), line.substr(b), false)) continue;
             out.push_back(t);
             for (const std::string& u : joined) pairs->emplace_back(t, u);
         }

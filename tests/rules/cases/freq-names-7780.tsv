@@ -60,3 +60,21 @@ names:layer-slot	「あの、一応会議中なので、はしゃがないでほ
 names:layer-slot	「ふはー、きんもちいー……こんなに風呂がデカいとはな」	lacks:긴 가져	keep	fixed
 names:layer-slot	町を、人を、みとは守ります！	has:미토는	fix	fixed
 names:layer-slot	情報、みとがお持ちします！	has:미토가	fix	fixed
+names:layer-slot	まさか、なるとは思わなかった。	has:될 줄은	keep	fixed
+names:layer-slot	なるとは限らない。	has:된다고는	keep	fixed
+names:layer-slot	「まさか、なるとは」	has:되다니	keep	fixed
+names:layer-slot	本当に、なるとはね。	has:된다니	keep	fixed
+names:layer-slot	まさか、あるとは思わなかった。	has:있을 줄은	keep	fixed
+names:layer-slot	あるとは思えない。	has:있다고는	keep	fixed
+names:layer-slot	「まさか、あるとは」	has:있다니	keep	fixed
+names:layer-slot	あるとは限らない。	has:있다고는	keep	fixed
+names:layer-slot	やみとは何か。	has:어둠이란	keep	fixed
+names:layer-slot	あさとは何か。	has:아침이란	keep	fixed
+names:layer-slot	人を、みとは思わない。	lacks:미토	keep	fixed
+names:layer-slot	人を、みとはいえ。	lacks:미토	keep	fixed
+names:layer-slot	みとは笑った。	has:미토는	fix	fixed
+names:layer-slot	なると、困る。	has:되면, 곤란	keep	fixed
+names:layer-slot	ほくと、来て。	has:호쿠토	keep	fixed
+names:layer-slot	ことのが好きだ。	has:코토노	fix	fixed
+names:layer-slot	はあちゅうが来た。	has:하아추가	fix	fixed
+names:layer-slot	たくと、待って！	has:다쿠토	keep	fixed
