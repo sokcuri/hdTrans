@@ -3,6 +3,7 @@
 // and conjugation detail of each item, and the item chain. Offsets and lengths are
 // byte offsets into UTF-8 token texts. Codes and targets stay the strings the
 // dictionaries hold; the accessors read them byte by byte.
+#include <algorithm>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -357,6 +358,8 @@ public:
         return p;
     }
     void Reset() { used_ = 0; }
+    // Gives back the objects allocated after the first `used` ones; none of them may be in use.
+    void Rewind(std::size_t used) { used_ = std::min(used, used_); }
     std::size_t Used() const { return used_; }
     std::size_t Capacity() const { return size_; }
 

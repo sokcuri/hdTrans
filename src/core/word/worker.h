@@ -220,6 +220,9 @@ private:
     std::vector<uint32_t> quoteMarkFirst_;
     std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
     std::vector<OpenMarks> openMarks_;  // OpenMarksAt by token and after the last, empty until first asked
+    // The last lookup of the whole ending table (query "", kModeVerbEnding), which a verb
+    // continuation makes at every verb; DoLookup gives it again when a new one equals it.
+    Lookup endings_;
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
