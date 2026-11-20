@@ -15,6 +15,19 @@
 #include "core/text/lifetime.h"
 #include "core/word/provenance.h"
 
+// Under AddressSanitizer a pool poisons the objects Rewind gives back, so a pointer kept past a rewind is reported.
+#if defined(__has_feature)
+#if __has_feature(address_sanitizer)
+#define HDTRANS_POOL_POISON 1
+#endif
+#endif
+#if defined(__SANITIZE_ADDRESS__) && !defined(HDTRANS_POOL_POISON)
+#define HDTRANS_POOL_POISON 1
+#endif
+#ifdef HDTRANS_POOL_POISON
+#include <sanitizer/asan_interface.h>
+#endif
+
 namespace hdTrans::word {
 
 class Worker;
@@ -355,11 +368,27 @@ public:
         }
         T* p = &blocks_[used_ / kBlock][used_ % kBlock];
         used_++;
+#ifdef HDTRANS_POOL_POISON
+        ASAN_UNPOISON_MEMORY_REGION(p, sizeof(T));
+#endif
         return p;
     }
     void Reset() { used_ = 0; }
     // Gives back the objects allocated after the first `used` ones; none of them may be in use.
-    void Rewind(std::size_t used) { used_ = std::min(used, used_); }
+    void Rewind(std::size_t used) {
+#ifdef HDTRANS_POOL_POISON
+        for (std::size_t i = used; i < used_; i++) ASAN_POISON_MEMORY_REGION(&blocks_[i / kBlock][i % kBlock], sizeof(T));
+#endif
+        used_ = std::min(used, used_);
+    }
+#ifdef HDTRANS_POOL_POISON
+    Pool() = default;
+    Pool(Pool&&) = default;
+    Pool& operator=(Pool&&) = default;
+    ~Pool() {
+        for (auto& b : blocks_) ASAN_UNPOISON_MEMORY_REGION(b.get(), kBlock * sizeof(T));
+    }
+#endif
     std::size_t Used() const { return used_; }
     std::size_t Capacity() const { return size_; }
 

@@ -277,6 +277,33 @@ private:
     // The spans of the current token whose record LatticeKatakana or LatticeKanji put first; SegReport says
     // "lattice" where the search's path keeps one of them as a word.
     std::vector<std::pair<int, int>> segDecided_;
+    // The arena's fill before a probe that makes records and items only to read where a word ends (SegEdgesAt,
+    // LatticeKana); RewindProbe gives back what the probe made.
+    struct ProbeMark {
+        std::size_t items, groups, entries, details, records, texts;
+        const Record* endings;
+    };
+    ProbeMark MarkProbe() const;
+    void RewindProbe(const ProbeMark& m);
+    // The place whose verbs SegEdgesAt probes one by one (text, byte offset, token; text null outside it), and whether
+    // the prefix table read nothing there.
+    struct PrefixProbe {
+        const char* text = nullptr;
+        std::size_t size = 0;
+        int offset = -1;
+        int token = -1;
+        bool none = false;
+    } prefixProbe_;
+    // The item LatticeKana read at cursor of text from records, where it gave those records back as they were: the
+    // search takes it in place of reading the same records at the same place again (records null for none).
+    struct LatticePick {
+        const char* text = nullptr;
+        std::size_t size = 0;
+        int cursor = -1;
+        int token = -1;
+        const Record* records = nullptr;
+        Item* item = nullptr;
+    } latticePick_;
     // The words of full from cursor to its end; parent is the word before cursor.
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
