@@ -797,23 +797,30 @@ bool SnapshotLoader::BuildBase(const std::vector<std::size_t>& baseFiles) {
     // Reserved ahead, the rows of a layer are not moved as its files are added.
     std::size_t baseRows = 0, userRows = 0;
     for (const std::size_t i : baseFiles) (files[i].layer == FileLayer::User ? userRows : baseRows) += RowBound(files[i]);
-    base.Rows().reserve(baseRows);
-    user.Rows().reserve(userRows);
+    // A sense gives a row for its key and one for its reading, and all rows stay until the layer is shadowed.
+    base.Rows().reserve(2 * baseRows);
+    user.Rows().reserve(2 * userRows);
+    // A later file shadows the rows of the earlier ones of its layer that share a key and class digit with its own
+    // (with the words layer, its replacing rows): marked once all are read (Layer::ShadowFiles).
+    std::vector<internal::Layer::FileRows> baseSpans, userSpans;
     for (const std::size_t i : baseFiles) {
         if (files[i].layer == FileLayer::User) {
             const std::size_t start = user.Rows().size();
             if (!ReadColumns(i, user, nullptr)) return false;
             user.ByPrio(start);
-            user.Shadow(start, nullptr, s.codes_);
-            user.Compact();
+            userSpans.push_back({start, user.Rows().size(), false, {}});
         } else {
             const std::size_t start = base.Rows().size();
             std::vector<uint32_t> replacing;
             if (!ReadColumns(i, base, &replacing)) return false;
-            base.Shadow(start, files[i].layer == FileLayer::Words ? &replacing : nullptr, s.codes_);
-            base.Compact();
+            const bool words = files[i].layer == FileLayer::Words;
+            baseSpans.push_back({start, base.Rows().size(), words, words ? std::move(replacing) : std::vector<uint32_t>{}});
         }
     }
+    base.ShadowFiles(baseSpans, s.codes_);
+    base.Compact();
+    user.ShadowFiles(userSpans, s.codes_);
+    user.Compact();
     if (s.hasDictionary_) {
         s.user_ = user.Build(s.codes_);
         s.base_ = base.Build(s.codes_);

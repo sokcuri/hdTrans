@@ -113,6 +113,35 @@ void Layer::Shadow(std::size_t end, const std::vector<uint32_t>* later, const Co
     }
 }
 
+void Layer::ShadowFiles(const std::vector<FileRows>& files, const CodeTable& codes) {
+    auto keyClass = [&](const Row& r) {
+        const PartCode p = codes.At(r.code)->part;
+        return KeyClass{r.key, p.Size() > 1 ? p.ClassDigit() : '\0'};
+    };
+    std::unordered_set<KeyClass, KeyClassHash> later;  // the shadowing rows of the files after the one at hand
+    std::vector<KeyClass> own;
+    for (std::size_t k = files.size(); k-- > 0;) {
+        const FileRows& f = files[k];
+        // the file's shadowing rows as it read them, before the later files mark its own (the first file shadows none)
+        own.clear();
+        if (k > 0 && f.some) {
+            for (const uint32_t j : f.shadows) {
+                if (rows_[j].code != kDeleted) own.push_back(keyClass(rows_[j]));
+            }
+        } else if (k > 0) {
+            for (std::size_t j = f.start; j < f.end; j++) {
+                if (rows_[j].code != kDeleted) own.push_back(keyClass(rows_[j]));
+            }
+        }
+        if (!later.empty()) {
+            for (std::size_t i = f.start; i < f.end; i++) {
+                if (rows_[i].code != kDeleted && later.count(keyClass(rows_[i]))) rows_[i].code = kDeleted;
+            }
+        }
+        later.insert(own.begin(), own.end());
+    }
+}
+
 void Layer::Compact() {
     std::erase_if(rows_, [](const Row& r) { return r.code == kDeleted; });
 }
