@@ -25326,7 +25326,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 集中治療室	중환자실	N110			GN				xxx	1	しゅうちゅうちりょうしつ	w:25251
 集合体恐怖症	환공포증	N110			GN						しゅうごうたいきょうふしょう	w:25252
 集団主義	집단주의	N110			GN						しゅうだんしゅぎ	w:25253
-集落	마을	N110			GN				xxx llm	1		w:25254
+集落	마을	N110	VPl		GN				xxx llm	1		w:25254
 雇傭者	고용자	N110	VHn		GN						こようしゃ	w:25255
 雉目	닭목	N110			GN						きじもく	w:25256
 雉科	꿩과	N110			GN						きじか	w:25257
@@ -28839,3 +28839,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 死に対する	죽음에 대한	N110			GN			LEX-8022				w:41606
 痺れ	저림	N110			GN			LEX-8022				w:41607
 尿漏れ	요실금	N110			GN			LEX-8022				w:41608
+外れ	꽝	N110			GN			LEX-8040	xxx	1		w:41700
+大外れ	대실패	N110			GN			LEX-8041				w:41701
+外れくじ	꽝	N110			GN			LEX-8041				w:41702
+季節外れの	철 지난	E0H0			GN			LEX-8041				w:41703

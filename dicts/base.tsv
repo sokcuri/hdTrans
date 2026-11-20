@@ -143379,7 +143379,7 @@ ttt	ttt	K110			GN				jisjk:201744
 区有地	구유지	I110	VPl		GN				jisjk:62754		
 区検察庁	구검찰청	N110	VPlVGt		BZ				jisjk:353197		
 区民	구민	N110	VHn		GN				jisjk:16719		
-区画	구획	N110		Hd	GN				jisjk:16730		
+区画	구획	N110	VPl	Hd	GN				jisjk:16730		
 区画室	구획실	N110	VPl		GN				jisjk:164548		
 区画整理	구획정리	I110			GN				jisjk:108624		
 区画線	구획선	N110			BZ				jisjk:353201		
@@ -166610,7 +166610,7 @@ ttt	ttt	K110			GN				jisjk:201744
 外ならな	다름아$A3@	H7N0			GN				jisjk:138827		
 外に	이외에	P251			GN				jisjk:6393		
 外まわり	주위	I110			GN				jisjk:109154		
-外れ	변두리	N110	VPl		GN				jisjk:10589		
+外れ	변두리	N110	VPl		GN	18040	||1 &&3 S-1== "の" P-2== "1**" A-2== "VPlVBl"	장소나 건물 명사와 の 뒤의 外れ를 변두리로 고른다. LEX-8040	jisjk:10589		
 外れ	어긋남	N110			GN				jisjk:10590		
 外れ	빗나&A1@	M427			GN				jisjk:10591		
 外れ	제외&C6@	M447			GN	1797	||1 &&2 P-2== "1**" A-2== "QCTQPNVNnVHn"	外れ의 두 단어 앞에 지명·인명·국가·사람 의미의 명사가 있으면 제외되다를 고른다. (미발동: rare-context)	jisjk:202636		
@@ -273265,7 +273265,7 @@ ttt	ttt	K110			GN				jisjk:201744
 王越町	오고시쵸	N130	QCTVPl		GN				jisjk:277079		
 王道	정석	N110			GN				jisjk:29781		
 王邦衍	왕방연	N130	QPN		GN				jisjk:208700		
-王都	왕도	N110			GN				jisjk:29782		
+王都	왕도	N110	VPl		GN				jisjk:29782		
 王陽明	왕양명	I110	QPN		GN				jisjk:78715		
 玖仁子	쿠니코	N130	QPN	Wb	GN				jisjk:343825		
 玖十郎	큐우쥬우로우	N130	QPN	Wb	GN				jisjk:348701		
@@ -340491,7 +340491,7 @@ ttt	ttt	K110			GN				jisjk:201744
 釈迦谷	샤카야츠	N130	QCTVPl		GN				jisjk:300459		
 釈迦郡	샤카고오리	N130	QPN	Wa	GN				jisjk:74274		
 釈門	승려	N110	UClVHn		GN				jisjk:188835		
-里	마을	N110	XXX		GN				jisjk:116331		
+里	마을	N110	XXXVPl		GN				jisjk:116331		
 里	리	N110		Ct	GN				jisjk:116332		
 里	사토	N130	QPN		GN				jisjk:116333		
 里	리	N110		On	GN				jisjk:259297		
