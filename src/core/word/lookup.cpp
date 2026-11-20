@@ -528,7 +528,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
     if (const char32_t d = text::DecodeRune(FirstChar(key)).cp; (d >= U'0' && d <= U'9') || (d >= U'０' && d <= U'９')) {
         const std::string_view surface = transformSurface;
         std::string_view before;
-        if (surface.ends_with(query)) before = LastChar(surface.substr(0, surface.size() - query.size()));
+        if (EndsSurface(query)) before = LastChar(surface.substr(0, surface.size() - query.size()));
         if (before.empty() && current > 0) before = LastChar(Tok(current - 1).text);
         char32_t b = text::DecodeRune(before).cp;
         if (b >= U'Ａ' && b <= U'ｚ') b -= 0xFEE0;
@@ -537,7 +537,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
     const int first = NameClassOf(FirstChar(key)), last = NameClassOf(LastChar(key));
     if (first == kClassHiragana || first == kClassKatakana) {
         const std::string_view surface = transformSurface;
-        if (!surface.ends_with(query)) return false;
+        if (!EndsSurface(query)) return false;
         const int prev = NameClassOf(LastChar(surface.substr(0, surface.size() - query.size())));
         if (prev == first || (first == kClassHiragana && prev == kClassKanji)) return false;
     }
@@ -558,7 +558,7 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
 bool Worker::StandsApart(std::string_view key, std::string_view query) const {
     const std::string_view surface = transformSurface;
     std::string_view before;
-    if (surface.ends_with(query) && surface.size() > query.size()) {
+    if (EndsSurface(query) && surface.size() > query.size()) {
         before = LastChar(surface.substr(0, surface.size() - query.size()));
     } else if (current > 0) {
         // The space written after a span read in Hangul stands for no space of the text.
@@ -600,7 +600,7 @@ bool Worker::DoubledSoundBefore(std::string_view query) const {
 // spelled in kana starts a word (はやくにげて 빨리 도망쳐, ゆっくりはなれる 천천히 떨어진다; LEX-5922).
 bool Worker::KanaModifierBefore(std::string_view query) const {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query)) return false;
+    if (!EndsSurface(query)) return false;
     const std::string_view before = surface.substr(0, surface.size() - query.size());
     // Kana take three bytes each in UTF-8; up to five kana back.
     for (std::size_t n = 2; n <= 5 && 3 * n <= before.size(); n++) {
@@ -629,7 +629,7 @@ bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) con
     if (p == nullptr || query.data() != kanaAfterAt || p->group == nullptr || p->detail == nullptr) return false;
     std::string_view s = p->group->surface;
     const std::string_view surface = transformSurface;
-    if (s.empty() || p->length <= 0 || !surface.ends_with(query)) return false;
+    if (s.empty() || p->length <= 0 || !EndsSurface(query)) return false;
     const std::string_view before = surface.substr(0, surface.size() - query.size());
     const std::size_t length = static_cast<std::size_t>(p->length);
     if (before.size() < length) return false;
@@ -732,7 +732,7 @@ bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) con
 // Whether the kana spelling u reads as a word where query starts.
 bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query)) return false;
+    if (!EndsSurface(query)) return false;
     const std::string_view prev = LastChar(surface.substr(0, surface.size() - query.size()));
     const std::string_view pc = u.codes->partText;
     // An adnominal that only a noun can follow (その, 大きな; LEX-5925), as a word of its own: it starts the line or
@@ -932,7 +932,7 @@ bool Worker::KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) 
 // hiragana, and for ます after anything but the start of the token or punctuation.
 void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
-    const bool alone = surface.ends_with(query) &&
+    const bool alone = EndsSurface(query) &&
                        UtteranceBoundary(LastChar(surface.substr(0, surface.size() - query.size())));
     Record* out = nullptr;
     Record* last = nullptr;
@@ -964,7 +964,7 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
 void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
     std::string_view before;
-    if (surface.ends_with(query) && surface.size() > query.size()) {
+    if (EndsSurface(query) && surface.size() > query.size()) {
         before = LastChar(surface.substr(0, surface.size() - query.size()));
     } else if (current > 0) {
         before = LastChar(Tok(current - 1).text);
@@ -1061,7 +1061,7 @@ void Worker::DropNegatedAdverbs(Lookup& l, std::string_view query) {
 // are dropped.
 void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
-    const bool afterKa = surface.ends_with(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
+    const bool afterKa = EndsSurface(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
@@ -1154,7 +1154,7 @@ bool Worker::SplitsPrefixWord(const Record& r, std::string_view query) const {
         return false;
     }
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query) || NameClassOf(LastChar(surface.substr(0, surface.size() - query.size()))) == kClassKanji) {
+    if (!EndsSurface(query) || NameClassOf(LastChar(surface.substr(0, surface.size() - query.size()))) == kClassKanji) {
         return false;
     }
     const std::string_view last = LastChar(r.source);

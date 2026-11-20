@@ -44,7 +44,7 @@ bool NameEndsAt(std::string_view rest, int last) {
 // 히비키 이치로), the full-name reading leaves.
 void Worker::ReadGivenNames(dict::Candidates& found, std::string_view query) {
     const std::string_view surface = transformSurface;
-    if (!surface.ends_with(query) || current < 0) return;
+    if (!EndsSurface(query) || current < 0) return;
     // A token joined across a space the text leaves out (冠 二郎) is a name the dictionary
     // reads in parts.
     const tokenizer::Token& token = tokens[static_cast<std::size_t>(current)];
