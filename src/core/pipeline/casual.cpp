@@ -1191,8 +1191,9 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
 // word: the stem of an ichidan verb of two kana or more (なめ, つけ, あげ), the い, っ or ん said for the ending of a godan
 // verb (いただい いただく, いっ 言う, よん 読む), or し after a noun in kana of two kana or more (ふりしときゃ; not よしとく).
 // Not an adjective in い before it (ないとき, おいしいとこ) or after it (しんどく), nor the end of a longer word (しっかり). With noun set when the stem is also a word of the dictionary (わたし of わたしといた),
-// and shiNoun when a stem in し is a word that ends with the し (ひろし, わたし; not ふりし).
-bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adverb, bool& shiNoun) {
+// shiNoun when a stem in し is a word that ends with the し (ひろし, わたし; not ふりし), and name when a person's name
+// the document proves ends with the stem (not a name key alone: きい 聞く, かえ 替える, さとし 諭す).
+bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adverb, bool& shiNoun, bool& name) {
     if (casualRuns == nullptr || casualRuns->verbForm == nullptr) return false;
     const RunLookup& runs = *casualRuns;
     const auto adjective = [&](std::string_view stem) { return runs.adjectiveStem != nullptr && runs.adjectiveStem(runs.context, stem); };
@@ -1212,6 +1213,14 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
             noun = noun || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
                    (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
         }
+        // a person's name of the name layer that ends with the stem and that the document proves, the name before the
+        // particle と (KanaTokuForm); a name key alone is no evidence, as it reads as a stem too (きい 聞く, かえ, さとし)
+        std::string_view nameKey;
+        for (size_t j = h; j <= pos && runs.personName != nullptr && nameKey.empty(); j += kKana) {
+            if (runs.personName(runs.context, Span(s, j, q))) nameKey = Span(s, j, q);
+        }
+        const bool proven = !nameKey.empty() && runs.documentName != nullptr && runs.documentName(runs.context, nameKey);
+        name = proven;
         // a stem in っ that with the と, or whose last two kana or more with it, make a word of their own other than a
         // name: the adverb in っと (もっと, ずっと, そっと; the きっと of ときっと after a particle と, マリアときっときます);
         // not kana that go on from a kanji before them (the かっ of 預かっとく)
@@ -1267,10 +1276,12 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
 // The forms of おく a stem in kana takes (KanaTeStem): not the bare き and こ, which are the とき and とこ of a noun after
 // it (ないとき, いいとこ), nor きな, whose な the later stages read as an explanation (やめときな); after a stem that is
 // also a noun not いて, いた or いで (わたしといた, これといて); after a noun or name in し, also no form in き, the と and
-// 来る (ひろしときました, わたしときます); after a stem that makes a word with the と, no form at all: that is the word
+// 来る (ひろしときました, わたしときます), and so after a person's name the document proves (さとし after さとしさん), whose
+// と is the particle, but for ときゃ; after a stem that makes a word with the と, no form at all: that is the word
 // and what follows it (きっときますよ, もっとくわしく, ずっといた).
-bool KanaTokuForm(std::string_view w, bool noun, bool adverb, bool shiNoun) {
+bool KanaTokuForm(std::string_view w, bool noun, bool adverb, bool shiNoun, bool name) {
     if (adverb) return false;
+    if (name && (w == "いて" || w == "いた" || w == "いで" || (w.starts_with("き") && w != "きゃ"))) return false;
     if (w == "き" || w == "こ" || w == "きな") return false;
     if (shiNoun && w.starts_with("き")) return false;
     return !noun || (w != "いて" && w != "いた" && w != "いで");
@@ -1356,16 +1367,22 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     if (OneOf(s, p, U"にをう") && Lit(s, p, "し") && after(p, true)) return true;  // ようにしとけ, こうしといたら
     p = pos;
     if (Take(s, p, [](char32_t c) { return !IsHiraganaClass(c); }) && Lit(s, p, "し") && after(p)) return true;
-    bool noun = false, adverb = false, shiNoun = false;
-    if (!KanaTeStem(s, pos, p, noun, adverb, shiNoun)) return false;
+    bool noun = false, adverb = false, shiNoun = false, name = false;
+    if (!KanaTeStem(s, pos, p, noun, adverb, shiNoun, name)) return false;
     kanaStem = true;
-    return after(p) && KanaTokuForm(m.group[3], noun, adverb, shiNoun);
+    return after(p) && KanaTokuForm(m.group[3], noun, adverb, shiNoun, name);
 }
 
 // The ちゃい and じゃい of てしまい said short before まして, where the adverb まして would take it (思っちゃいまして,
-// 忘れちゃいまして, 飲んじゃいまして, 泳いじゃいまして): てしまいまして. じゃい only after the ん or い of a て form. Not
-// at the start of a clause, where ちゃいまして is the Kansai 違いまして.
+// 忘れちゃいまして, 飲んじゃいまして, 泳いじゃいまして): てしまいまして. じゃい only after the ん or い of a て form. At
+// the start of a clause ちゃいまして is the Kansai 違いまして.
 bool ChaiMashite(std::string_view s, size_t pos, Match& m) {
+    // at the start of a clause, the Kansai 違いまして of a denial (ちゃいまして、そういう意味やなくて)
+    if (size_t q = pos; ClauseStart(s, pos) && Lit(s, q, "ちゃいまして")) {
+        m.group[1] = "違いまして";
+        m.end = q;
+        return true;
+    }
     if (pos == 0) return false;
     const char32_t b = LastRune(s.substr(0, pos)).cp;
     if (!IsHiraganaClass(b) && !IsKanjiClass(b) && !IsKatakanaRune(b)) return false;
@@ -2243,10 +2260,13 @@ bool NiNaru(std::string_view s, size_t pos, Match& m) {
 // だ or で (てるんだ) or without it before の (てるの). Before the spoken forms, which read ってんだ as a quote. Not the Kansai
 // past てん that ends the sentence or goes on with けど or や (忘れちゃってん。), not before じゃん (壊れちゃってんじゃん reads
 // as it is), and not where a word of the dictionary ends at the ちゃ after other than っ (めちゃ) or with the し and the て it stands for
-// (どうしちゃってんの: どうして would take the て).
+// (どうしちゃってんの: どうして would take the て); after a kanji the ちゃ is the verb's (来ちゃってんの).
 bool ChatteN(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    const bool te = In(Before(s, pos), U"っしえけげせぜてでねべめれきぎちにひみりびぴ見来寝着出居似煮");
+    // a stem in katakana ends in the same kana (ボケちゃってんの)
+    char32_t before = Before(s, pos);
+    if (before >= U'ァ' && before <= U'ヶ') before -= U'ァ' - U'ぁ';
+    const bool te = In(before, U"っしえけげせぜてでねべめれきぎちにひみりびぴ見来寝着出居似煮");
     if (te && (Lit(s, p, "ちゃってん") || (p = pos, Lit(s, p, "ちまってん")))) {
         m.group[1] = "て";
     } else if (p = pos; Before(s, pos) == U'ん' && (Lit(s, p, "じゃってん") || (p = pos, Lit(s, p, "じまってん")))) {
@@ -2269,8 +2289,9 @@ bool ChatteN(std::string_view s, size_t pos, Match& m) {
         }
         return false;
     };
-    // After っ the ちゃ is always a て form (やっちゃ).
-    if ((Before(s, pos) != U'っ' && wordEnds(Span(s, pos, pos + std::string_view("ちゃ").size()))) || (Before(s, pos) == U'し' && wordEnds("て"))) {
+    // After っ the ちゃ is always a て form (やっちゃ), and so it is after a kanji, whose word in ちゃ is the verb's own (来ちゃ).
+    if ((IsHiraganaClass(Before(s, pos)) && Before(s, pos) != U'っ' && wordEnds(Span(s, pos, pos + std::string_view("ちゃ").size()))) ||
+        (Before(s, pos) == U'し' && wordEnds("て"))) {
         return false;
     }
     m.group[2] = In(At(s, p).cp, U"だで") ? "いるん" : "いる";

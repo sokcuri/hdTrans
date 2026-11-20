@@ -410,6 +410,12 @@
 高いでちゅ	높아요	end	prio=-1
 高いでちゅね	높네요	end	prio=-1
 静かでちゅよ	조용해요	end	prio=-1
+静かでちゅか	조용한가요	end	prio=-1
+静かでちか	조용한가요	end	prio=-1
+静かでちゅね	조용하네요	end	prio=-1
+書くでちゅか	쓰나요	end	prio=-1
+書いたでちゅか	썼나요	end	prio=-1
+高いでちゅか	높나요	end	prio=-1
 書くでちゅよ	써요	end	prio=-1
 書いたでちゅよ	썼어요	end	prio=-1
 書いてるでちゅよ	쓰고 있어요	end	prio=-1

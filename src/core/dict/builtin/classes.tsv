@@ -89,6 +89,7 @@
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
 //= copula.kansai-negative	The dictionary words of the Kansai ちゃう that is じゃない after a noun (マザコンちゃうわ 마더 콤플렉스 아니거든); after a verb the same kana are the contracted てしまう (やっちゃうね), and constraint chau-after-verb drops the word there.
 //= copula.kansai-past-noun	Nouns in kana said of something after which the Kansai やった is the past copula だった (ほんまやった 진짜였다, そうやった, だめやったら), not the verb やる with a dropped を; not a doer (あたしやったげる) nor an adverb (ようやった) (spec LEX-5996).
+//= copula.kansai-past-object	Adjectival nouns in kanji that also say how much or in what way one does something with やる, after which the Kansai やった and やろう are the verb, not the copula (色々やった 여러 가지 했다).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
@@ -1431,6 +1432,8 @@ copula.kansai-past-noun	じょうず
 copula.kansai-past-noun	へた
 copula.kansai-past-noun	あほ
 copula.kansai-past-noun	ばか
+copula.kansai-past-object	色々
+copula.kansai-past-object	色色
 
 ko-noun.cp-danghada	해고
 ko-noun.cp-danghada	퇴학

@@ -1,0 +1,93 @@
+# 규칙: LEX-7740 LEX-7741 LEX-7742 LEX-7743 LEX-7744 LEX-5996
+rule	input	expected	kind	layer
+normalize:name-san	分からんのに	모르는데	keep	normalize
+normalize:name-san	知らんのか	has:모르	keep	normalize
+normalize:name-toku	さとしときました。	has:두었	keep	normalize
+normalize:name-toku	置いといた。	놓아두었다.	keep	normalize
+normalize:name-toku	やっといたよ。	has:해 뒀	keep	normalize
+normalize:name-toku	ちゃんときいといたよ。	has:물어 뒀	keep	normalize
+normalize:name-toku	先生の話、きいといて。	has:물어 두	keep	normalize
+normalize:name-toku	ちゃんときいときます。	has:물어 둡	keep	normalize
+normalize:name-toku	よくきいといたね。	has:두었	keep	normalize
+normalize:name-toku	それ、きいときました。	has:물어 두었	keep	normalize
+normalize:name-toku	ちゃんとかえときました。	has:바꾸어 두었	keep	normalize
+normalize:name-toku	さとしときゃよかった。	has:둘 걸	keep	normalize
+normalize:name-toku	ひろしときました。	has:히로시	keep	normalize
+normalize:name-toku	たかしといた。	has:타카시와	keep	normalize
+normalize:name-toku	きいちゃん、きいといたよ。	has:키이와	keep	normalize
+normalize:onbin-toru	吸いとる。	lacks:라고 있다	fix	normalize
+normalize:onbin-toru	奪いとった。	강탈했다.	fix	normalize
+normalize:onbin-toru	書いとる。	쓰고 있다.	keep	normalize
+normalize:onbin-toru	落ち着いとった。	침착해 있었다.	keep	normalize
+normalize:onbin-toru	何しとらん	has:않	keep	normalize
+normalize:kansai-past-na	「暇やった」	「한가했다」	fix	normalize
+normalize:kansai-past-na	無理やった	무리였다	fix	normalize
+normalize:kansai-past-na	「平気やった？」	「괜찮았어?」	fix	normalize
+normalize:kansai-past-na	「残念やったな」	has:유감이었	fix	normalize
+normalize:kansai-past-na	「簡単やった」	has:간단했	fix	normalize
+normalize:kansai-past-na	色々やった	여러 가지 했다	keep	normalize
+normalize:kansai-past-na	宿題やった？	has:숙제	keep	normalize
+normalize:short-koto	知らんこった。	모르는 일이다.	fix	normalize
+normalize:short-koto	知ったこっちゃない	내 알 바 아니야	fix	normalize
+normalize:short-koto	えらいこっちゃ	대단한 일이다	fix	normalize
+normalize:short-koto	そんなこった	그런 일이다	fix	normalize
+normalize:short-koto	言わんこっちゃない	그러게 내가 뭐랬어	keep	normalize
+normalize:short-koto	肩がこった。	어깨가 뭉쳤다.	keep	normalize
+normalize:short-koto	凝った料理だ	열중한 요리다	keep	normalize
+normalize:short-koto	なんてこった	이럴 수가	keep	normalize
+normalize:goran	ほらごらん	자 봐	fix	words
+normalize:goran	ごらんの通りだ	has:보시는 바와 같이	fix	words
+normalize:goran	見てごら	봐 봐	fix	words
+normalize:goran	見てごらんなさい。	보렴.	fix	words
+normalize:goran	ごらんになりましたか	보셨습니까	keep	words
+normalize:goran	見てごらん	보렴	keep	words
+normalize:goran	ごらんください	봐주세요	keep	words
+normalize:dechu	大丈夫でちゅか？	괜찮은가요?	fix	endings
+normalize:dechu	静かでちゅか？	조용한가요?	fix	endings
+normalize:dechu	痛いでちゅか？	아프나요?	fix	endings
+normalize:dechu	おいちいでちゅ	맛있어요	fix	words
+normalize:dechu	学生でちゅか	학생인가요	keep	endings
+normalize:dechu	かわいいでちゅね	귀엽네요	keep	endings
+normalize:chau-chain	寝ちゃってましたか。	자버렸습니까.	fix	words
+normalize:chau-chain	食べちゃってました。	먹어버렸습니다.	fix	words
+normalize:chau-chain	読んじゃってました。	읽어버렸습니다.	fix	words
+normalize:chau-chain	書いちゃってん	써버렸어	fix	words
+normalize:chau-chain	寝ちゃってん	자버렸어	fix	words
+normalize:chau-chain	「忘れちゃってん、ごめん」	has:잊어버렸어	fix	words
+normalize:chau-chain	どうしちゃってんの？	어떻게 해버린 거야?	fix	words
+normalize:chau-chain	書いちゃってるの？	써버린 거야?	fix	words
+normalize:chau-chain	来ちゃってんの？	lacks:의?	fix	normalize
+normalize:chau-chain	寝ちゃった。	자버렸다.	keep	words
+normalize:chau-chain	寝ちゃってます。	자버리고 있습니다.	keep	words
+normalize:chau-chain	「正解です。というか、ほとんど答え、言っちゃってましたね」	has:말해버렸네요	fix	words
+normalize:chau-chain	どんな妄想しちゃってるのか	lacks:거야인가	fix	words
+normalize:short-koto	やなこった！	싫은 일이야!	fix	normalize
+normalize:short-koto	一体、どういうこっちゃ？	도대체, 무슨 뜻이야?	fix	normalize
+normalize:short-koto	「マジか。羨ましいこった」	「진짜야. 부러운 일이야」	fix	normalize
+normalize:ichidan-n-noun	「お前みたいなできんやつは帰れ」	「너 같은 할 수 없는 녀석은 돌아가라」	fix	normalize
+normalize:ichidan-n-noun	「出来んことはない」	「할 수 없는 건 아니야」	fix	normalize
+normalize:ichidan-n-noun	「来んやつは置いていく」	「오지 않는 녀석은 두고 가」	fix	normalize
+normalize:ichidan-n-noun	「できんやつ、できる子」	「할 수 없는 녀석, 할 수 있는 아이」	fix	normalize
+normalize:ichidan-n-noun	「何見んのよ」	「뭐 보는 거야」	keep	normalize
+normalize:ichidan-n-noun	「みんなのこと」	「모두의 일」	keep	normalize
+normalize:ichidan-n-noun	「できん！」	「할 수 없어!」	keep	normalize
+normalize:ichidan-n-noun	しかねんやつだ。	has:할 수도 있는	keep	normalize
+normalize:ichidan-n-noun	「たくさんのこと」	「많은 일」	keep	normalize
+normalize:ichidan-n-noun	「みなさんのこと」	「여러분」	keep	normalize
+normalize:ichidan-ton	「なめとんのか」	「얕보고 있는 거야」	fix	normalize
+normalize:ichidan-ton	「寝とんのか」	「자고 있는 거야」	fix	normalize
+normalize:ichidan-ton	「何見とんねん」	「뭐 보고 있어」	fix	normalize
+normalize:ichidan-ton	「止めとんのか」	「멈추고 있는 거야」	fix	normalize
+normalize:ichidan-ton	「何食べとんの？」	「뭐 먹어?」	fix	normalize
+normalize:ichidan-ton	「栗きんとんの味」	「밤킨통 맛」	keep	normalize
+normalize:ichidan-ton	「ほとんどの人」	「거의 모든 사람」	keep	normalize
+normalize:ichidan-ton	「とんでもない」	「터무니 없어」	keep	normalize
+normalize:ichidan-ton	「何しとんねん」	「뭐하고 있어」	keep	normalize
+normalize:chaimashite-start	「いや、ちゃいまして」	「아니, 아니어서」	fix	normalize
+normalize:chaimashite-start	「ちゃいまして、そういう意味やなくて」	has:아니어서, 그런	fix	normalize
+normalize:chaimashite-start	「忘れちゃいまして」	「잊어버려서」	keep	normalize
+normalize:chaimashite-start	「思っちゃいまして、つい」	「생각해버려서, 무심코」	keep	normalize
+normalize:ichidan-ton	「出とんか」	has:나오고 있	fix	normalize
+normalize:ichidan-ton	見鏡耕治とんの。	has:미카가미 코지	keep	normalize
+normalize:ichidan-ton	未来とんの。	lacks:오고	keep	normalize
+normalize:ichidan-n-noun	ゆかりんこと、よろしく。	lacks:않는	keep	normalize

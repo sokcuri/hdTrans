@@ -44,9 +44,15 @@ struct RunLookup {
     // Whether stem, whole, is the stem (連用形) of an ichidan verb or of くる of the dictionary, the form that
     // ます follows (DialectForms: 見よる, 来やした, 持ってきやしょう); null for none.
     bool (*vowelStem)(const void* context, std::string_view stem) = nullptr;
-    // Whether stem, whole, is an adjectival noun of the dictionary and no noun or adverb, which the copula follows and
-    // a verb takes as no object (DialectForms: 大丈夫やった, 静かやった; not 一杯やろう, 一生懸命やった); null for none.
+    // Whether stem, whole, is an adjectival noun of the dictionary and no counter or adverb, which the copula follows
+    // (DialectForms: 大丈夫やった, 無理やった; not 一杯やろう, 一生懸命やった); null for none.
     bool (*naStem)(const void* context, std::string_view stem) = nullptr;
+    // Whether key, whole, is a person's name of the name layer (DialectForms: the 直 of 直さん is no verb stem before
+    // the negative ん; RewriteCasual: the さとし of さとしときました is no stem of さとす); null for none.
+    bool (*personName)(const void* context, std::string_view key) = nullptr;
+    // Whether key, whole, is a name the document proves (a name of its list, or written where a name stands: before
+    // an honorific, as a speaker label) (RewriteCasual: the かえ of かえときました is the name only then); null for none.
+    bool (*documentName)(const void* context, std::string_view key) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
