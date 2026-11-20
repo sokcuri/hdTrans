@@ -229,6 +229,22 @@ bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
     return !letter;
 }
 
+// Whether two lookups give the same records, field by field, with views to the same bytes.
+bool SameRecords(const Lookup& a, const Lookup& b) {
+    if (a.count != b.count) return false;
+    auto same = [](std::string_view x, std::string_view y) { return x.data() == y.data() && x.size() == y.size(); };
+    const Record* x = a.records;
+    const Record* y = b.records;
+    for (; x != nullptr && y != nullptr; x = x->child, y = y->child) {
+        if (!same(x->source, y->source) || x->target != y->target || !same(x->partCode, y->partCode) ||
+            !same(x->semantic, y->semantic) || x->attr != y->attr || !same(x->dictCode, y->dictCode) || x->ruleNo != y->ruleNo ||
+            x->id != y->id || x->user != y->user) {
+            return false;
+        }
+    }
+    return x == nullptr && y == nullptr;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -275,6 +291,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     }
     Lookup l;
     l.count = found.count;
+    const std::size_t mark = arena.records.Used();
     Record* last = nullptr;
     for (const dict::Candidate& c : found.list) {
         Record* r = NewRecord();
@@ -304,6 +321,18 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         DropModalSplits(l, query);
         TransliterateGlosses(l.records);
         if (fault) return {};
+    }
+    // The ending table comes back whole at every verb. When the records equal those of its last
+    // lookup, those are given again and the new ones go back to the pool: only this lookup made
+    // records since mark, and no record of the table is ever changed after it is made (groups
+    // copy them into entries).
+    if (query.empty() && mode == kModeVerbEnding) {
+        if (SameRecords(l, endings_)) {
+            arena.records.Rewind(mark);
+            l = endings_;
+        } else {
+            endings_ = l;
+        }
     }
     if (observer.fn != nullptr) observer.fn(observer.context, current, query, mode, l.records);
     return l;
