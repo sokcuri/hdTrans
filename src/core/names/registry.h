@@ -200,6 +200,9 @@ private:
     // Whether the run line[a, b) of LayerKanaNames, in the hiragana run that ends at end, is a word there and no
     // name: a sound covers it, a base word goes on past it, or before a mark it is a kana word or said twice.
     bool LayerWordAt(std::string_view line, std::size_t a, std::size_t b, std::size_t end);
+    // Whether the kana at a of line is the と that quotes the bracket closed right before it (」とし、, 』として): the run
+    // from a to b is a name there only before が or は, which that と never takes (」とおるが言った; spec LEX-7780).
+    static bool QuotedToAt(std::string_view line, std::size_t a, std::size_t b);
     std::vector<std::string> LayerKanaNames(std::string_view line, std::vector<std::pair<std::string, std::string>>* pairs = nullptr);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);

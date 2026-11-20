@@ -1520,6 +1520,17 @@ std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
     return out;
 }
 
+bool Registry::QuotedToAt(std::string_view line, std::size_t a, std::size_t b) {
+    if (!line.substr(a).starts_with("と")) return false;
+    const std::string_view after = line.substr(b);
+    if (after.starts_with("が") || after.starts_with("は")) return false;
+    const std::string_view before = line.substr(0, a);
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.close-after-space"))) {
+        if (before.ends_with(m)) return true;
+    }
+    return false;
+}
+
 bool Registry::LayerWordAt(std::string_view line, std::size_t a, std::size_t b, std::size_t end) {
     const std::string_view t = line.substr(a, b - a);
     // A sound of the sound lexicon that starts there and covers the run (ぽろり、 툭, もこもこの 몽실몽실한).
@@ -1650,7 +1661,8 @@ std::vector<std::string> Registry::LayerKanaNames(std::string_view line, std::ve
             b += RuneAt(line, b).size;
             if (n < 2) continue;
             const std::string t(line.substr(a, b - a));
-            if (!layerOnly(t) || !BareNameSlot(line, a, b, t)) continue;
+            // The と after a closing bracket quotes it (」とし、, 』として): no name starts there.
+            if (QuotedToAt(line, a, b) || !layerOnly(t) || !BareNameSlot(line, a, b, t)) continue;
             // No dictionary word goes on past the name (かなえる, はるなつ).
             bool longer = false;
             for (std::size_t e = b, m = n; !longer && e < end && m < 10; m++) {
