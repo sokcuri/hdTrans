@@ -7,6 +7,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/output/compose.h"
 #include "core/word/analyze.h"
 #include "core/word/item.h"
 #include "core/word/journal.h"
@@ -143,6 +144,10 @@ public:
     // in: QuoteDepth(j) and the 「」『』 of text before start. When text is the raw text of token j,
     // its marks are found with QuoteDepth, once for all tokens.
     int QuoteDepthAt(int j, std::string_view text, int start);
+    // The quotes before byte start of text as QuoteDepthAt reads them, with the number of quotes
+    // opened from depth 0 (settings.quoteCount before the first token): output::QuotesAfter of the
+    // raw text of the tokens before j and of text before start.
+    output::QuoteState QuotesAt(int j, std::string_view text, int start);
     // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
     // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
     int RubyPart(int j);
@@ -202,11 +207,14 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
-    // The quote marks of the raw text of all tokens in order (byte end in the token, depth after
-    // it), and by token the first of them (one more for the end); filled with quoteDepths_.
+    std::vector<int> quoteCounts_;  // the quotes opened before each token, filled with quoteDepths_
+    // The quote marks of the raw text of all tokens in order (byte end in the token, depth and
+    // quotes opened after it), and by token the first of them (one more for the end); filled with
+    // quoteDepths_.
     struct QuoteMark {
         int end;
         int depth;
+        int count;
     };
     std::vector<QuoteMark> quoteMarks_;
     std::vector<uint32_t> quoteMarkFirst_;

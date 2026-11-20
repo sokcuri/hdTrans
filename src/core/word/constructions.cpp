@@ -356,12 +356,7 @@ bool Narrated(Flusher& f, const Item* it) {
 }
 
 // The quote state at the start of the word, counted from the start of the line (output::QuotesAfter).
-output::QuoteState QuoteAt(Flusher& f, const Item* it) {
-    const Settings& s = f.w.settings;
-    output::QuoteState q{s.quoteDepth, s.quoteCount};
-    for (int j = 0; j < it->tokenIndex; j++) q = output::QuotesAfter(q, f.w.tokens.Raw(static_cast<std::size_t>(j)));
-    return output::QuotesAfter(q, Slice(it->text, 0, it->start));
-}
+output::QuoteState QuoteAt(Flusher& f, const Item* it) { return f.w.QuotesAt(it->tokenIndex, it->text, it->start); }
 
 // Whether the word stands in a quote whose text has no polite, old, written, reading or cited style
 // (pipeline::QuoteStyles), as the compose stage gives questions their spoken form there. False without
