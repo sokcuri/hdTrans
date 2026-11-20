@@ -1,5 +1,7 @@
 #include <algorithm>
+#include <cstdint>
 #include <span>
+#include <unordered_map>
 
 #include "core/dict/classes.h"
 #include "core/output/pieces.h"
@@ -1187,6 +1189,39 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The answers of the lookups KanaTeStem asks about spans of the text one scan runs over: each place of a kana run
+// before a と or ど asks about the spans from the start of the run again, so they are asked once per scan (the text and
+// the lookups do not change while the scan runs). Keys are a kind and the byte offsets of the span.
+struct TeStemMemo {
+    unsigned long long scan = 0;
+    const char* data = nullptr;
+    size_t size = 0;
+    const RunLookup* runs = nullptr;
+    std::unordered_map<uint64_t, size_t> answers;
+};
+thread_local TeStemMemo gTeStem;
+enum class TeStemAsk : uint64_t { Word, KeyReach, Adjective, PersonName };
+
+template <class Ask>
+size_t TeStemAnswer(std::string_view s, TeStemAsk kind, size_t from, size_t to, Ask ask) {
+    constexpr size_t kLimit = size_t{1} << 30;
+    const unsigned long long scan = ScanOver(s);
+    if (scan == 0 || s.size() >= kLimit) return ask();
+    TeStemMemo& m = gTeStem;
+    if (m.scan != scan || m.data != s.data() || m.size != s.size() || m.runs != casualRuns) {
+        m.scan = scan;
+        m.data = s.data();
+        m.size = s.size();
+        m.runs = casualRuns;
+        m.answers.clear();
+    }
+    const uint64_t key = (static_cast<uint64_t>(kind) << 60) | (static_cast<uint64_t>(from) << 30) | static_cast<uint64_t>(to);
+    if (const auto it = m.answers.find(key); it != m.answers.end()) return it->second;
+    const size_t answer = ask();
+    m.answers.emplace(key, answer);
+    return answer;
+}
+
 // Whether the hiragana from pos to the と or ど at p is a て stem the dictionary has (casualRuns), where pos starts the
 // word: the stem of an ichidan verb of two kana or more (なめ, つけ, あげ), the い, っ or ん said for the ending of a godan
 // verb (いただい いただく, いっ 言う, よん 読む), or し after a noun in kana of two kana or more (ふりしときゃ; not よしとく).
@@ -1196,7 +1231,21 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
 bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adverb, bool& shiNoun, bool& name) {
     if (casualRuns == nullptr || casualRuns->verbForm == nullptr) return false;
     const RunLookup& runs = *casualRuns;
-    const auto adjective = [&](std::string_view stem) { return runs.adjectiveStem != nullptr && runs.adjectiveStem(runs.context, stem); };
+    // the lookups below, asked once per scan for each span [from, to) of s
+    const auto adjectiveAt = [&](size_t from, size_t to) {
+        return TeStemAnswer(s, TeStemAsk::Adjective, from, to, [&] {
+                   return static_cast<size_t>(runs.adjectiveStem != nullptr && runs.adjectiveStem(runs.context, Span(s, from, to)));
+               }) != 0;
+    };
+    const auto wordAt = [&](size_t from, size_t to) {
+        return TeStemAnswer(s, TeStemAsk::Word, from, to, [&] { return static_cast<size_t>(runs.word(runs.context, Span(s, from, to))); }) != 0;
+    };
+    const auto reachAt = [&](size_t from) {
+        return TeStemAnswer(s, TeStemAsk::KeyReach, from, s.size(), [&] { return runs.keyReach(runs.context, s.substr(from)); });
+    };
+    const auto personAt = [&](size_t from, size_t to) {
+        return TeStemAnswer(s, TeStemAsk::PersonName, from, to, [&] { return static_cast<size_t>(runs.personName(runs.context, Span(s, from, to))); }) != 0;
+    };
     // A stem inside a longer run of hiragana: not where the run up to its end spells an adjective (おいしい).
     size_t h = pos;
     for (size_t n = 0; h > 0 && n < 4 && IsHiraganaClass(LastRune(s.substr(0, h)).cp); n++) h -= LastRune(s.substr(0, h)).size;
@@ -1210,14 +1259,13 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
         // a key of the dictionary from the start of the run whose longest key ends with the stem (わたし, これ)
         noun = false;
         for (size_t j = h; j <= pos; j += kKana) {
-            noun = noun || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
-                   (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
+            noun = noun || (runs.word != nullptr && wordAt(j, q)) || (runs.keyReach != nullptr && reachAt(j) == q - j);
         }
         // a person's name of the name layer that ends with the stem and that the document proves, the name before the
         // particle と (KanaTokuForm); a name key alone is no evidence, as it reads as a stem too (きい 聞く, かえ, さとし)
         std::string_view nameKey;
         for (size_t j = h; j <= pos && runs.personName != nullptr && nameKey.empty(); j += kKana) {
-            if (runs.personName(runs.context, Span(s, j, q))) nameKey = Span(s, j, q);
+            if (personAt(j, q)) nameKey = Span(s, j, q);
         }
         const bool proven = !nameKey.empty() && runs.documentName != nullptr && runs.documentName(runs.context, nameKey);
         name = proven;
@@ -1228,21 +1276,20 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
         const bool afterKanji = pos > 0 && IsKanjiClass(LastRune(s.substr(0, pos)).cp);
         for (size_t j = pos; c == U'っ' && !afterKanji && runs.word != nullptr && runs.keyReach != nullptr && !adverb && (j == pos || j + kKana < q);
              j += kKana) {
-            adverb = runs.word(runs.context, Span(s, j, q + kKana)) && runs.keyReach(runs.context, s.substr(j)) >= q + kKana - j;
+            adverb = wordAt(j, q + kKana) && reachAt(j) >= q + kKana - j;
         }
         // The と or ど goes on with an adjective stem (しんどく), or the stem ends a longer word that starts before it in
         // the run (しっかり of しっかりとくわえる): no stem here.
         bool inWord = false;
         for (size_t j = h; j <= pos && !inWord; j += kKana) {
-            inWord = adjective(Span(s, j, q + kKana)) ||
-                     (j < pos && runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) >= q - j);
+            inWord = adjectiveAt(j, q + kKana) || (j < pos && runs.keyReach != nullptr && reachAt(j) >= q - j);
         }
         if (inWord) continue;
         std::u32string_view endings;
         if (t == U'と') endings = c == U'い' ? U"く" : c == U'っ' ? U"うつる" : U"";
         else endings = c == U'い' ? U"ぐ" : c == U'ん' ? U"むぶぬ" : U"";
         bool inAdjective = false;
-        for (size_t j = h; j <= pos && c == U'い'; j += kKana) inAdjective = inAdjective || adjective(Span(s, j, q - kKana));
+        for (size_t j = h; j <= pos && c == U'い'; j += kKana) inAdjective = inAdjective || adjectiveAt(j, q - kKana);
         if (!base.empty() && !inAdjective) {
             for (const char32_t e : endings) {
                 std::string verb = base;
@@ -1253,13 +1300,12 @@ bool KanaTeStem(std::string_view s, size_t pos, size_t& p, bool& noun, bool& adv
                 }
             }
         }
-        if (t == U'と' && n >= 3 && c == U'し' && runs.word != nullptr && runs.word(runs.context, Span(s, pos, q - kKana))) {
+        if (t == U'と' && n >= 3 && c == U'し' && runs.word != nullptr && wordAt(pos, q - kKana)) {
             // し after a noun in kana: a key that ends with the し from inside the run is a noun of its own (はわたしといた)
             noun = true;  // a name or noun in し before と and いる (さとしといた, ひろしといて)
             bool key = false;
             for (size_t j = pos; j + kKana < q; j += kKana) {
-                key = key || (runs.word != nullptr && runs.word(runs.context, Span(s, j, q))) ||
-                      (runs.keyReach != nullptr && runs.keyReach(runs.context, s.substr(j)) == q - j);
+                key = key || (runs.word != nullptr && wordAt(j, q)) || (runs.keyReach != nullptr && reachAt(j) == q - j);
             }
             shiNoun = key;
             p = q;

@@ -611,6 +611,13 @@ private:
     std::u32string rs_;
     std::u32string f_;  // rs_ in katakana
     std::vector<size_t> offsets_;  // byte offset of each character, and the end
+    // The keys LongestKeys found at each character, read once: the look-up depends on the character alone. The
+    // name-layer and plain keys are kept apart for end rows and the others, as the callers count end rows apart.
+    struct KeyLengths {
+        bool known = false;
+        size_t base = 0, user = 0, userEnd = 0, name = 0, nameEnd = 0;
+    };
+    mutable std::vector<KeyLengths> keyLengths_;
     size_t stutterEnd_ = static_cast<size_t>(-1);  // the character after the last stutter
     size_t intjEnd_ = static_cast<size_t>(-1);     // the end of the last interjection that opened an utterance
 };
@@ -656,25 +663,36 @@ bool SoundText::PauseAt(size_t p) const {
 // key that start at character p; kana spellings do not count, nor with skipEnds the
 // endings of end rows.
 void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds, size_t* ending) const {
-    base = user = name = 0;
-    if (ending != nullptr) *ending = 0;
-    const size_t end = std::min(rs_.size(), p + 24);
-    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
-    for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && c.user->kana) continue;
-        const size_t n = text::RuneCount(c.source);
-        if (c.user != nullptr && c.user->end && ending != nullptr) {
-            *ending = std::max(*ending, n);
-            continue;
+    if (keyLengths_.empty()) keyLengths_.resize(rs_.size() + 1);
+    KeyLengths& k = keyLengths_[p];
+    if (!k.known) {
+        k.known = true;
+        const size_t end = std::min(rs_.size(), p + 24);
+        const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
+        for (const dict::Candidate& c : rd.list) {
+            if (c.user != nullptr && c.user->kana) continue;
+            const size_t n = text::RuneCount(c.source);
+            if (c.user == nullptr) {
+                k.base = std::max(k.base, n);
+            } else if (c.user->nameLayer) {
+                (c.user->end ? k.nameEnd : k.name) = std::max(c.user->end ? k.nameEnd : k.name, n);
+            } else {
+                (c.user->end ? k.userEnd : k.user) = std::max(c.user->end ? k.userEnd : k.user, n);
+            }
         }
-        if (c.user != nullptr && skipEnds && c.user->end) continue;
-        if (c.user != nullptr && c.user->nameLayer) {
-            name = std::max(name, n);
-        } else if (c.user != nullptr) {
-            user = std::max(user, n);
-        } else {
-            base = std::max(base, n);
-        }
+    }
+    base = k.base;
+    if (ending != nullptr) {
+        // the end rows go to ending, whatever their layer
+        *ending = std::max(k.userEnd, k.nameEnd);
+        user = k.user;
+        name = k.name;
+    } else if (skipEnds) {
+        user = k.user;
+        name = k.name;
+    } else {
+        user = std::max(k.user, k.userEnd);
+        name = std::max(k.name, k.nameEnd);
     }
 }
 
