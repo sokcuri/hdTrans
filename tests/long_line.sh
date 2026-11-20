@@ -81,6 +81,22 @@ while [ $i -lt 6000 ]; do
     i=$((i + 1))
 done
 printf '%sやけんね\n' "$line" >> "$tmp/input"
+# Particles and endings all along one line: the nearest word of each item is walked once for the line.
+i=0
+line=
+while [ $i -lt 3000 ]; do
+    line=${line}ですか
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
+# One particle said again and again.
+i=0
+line=
+while [ $i -lt 6000 ]; do
+    line=${line}よ
+    i=$((i + 1))
+done
+printf '%s\n' "$line" >> "$tmp/input"
 # A drawn sound said again and again (あー): the sound rewrites and the copies of a unit walk the run
 # once, not again from each mark or word of it.
 i=0
