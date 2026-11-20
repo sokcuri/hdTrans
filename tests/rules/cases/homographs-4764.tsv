@@ -65,7 +65,7 @@ pattern:yue	あなたに与えられた唯一の弁解はその際「弁護人�
 pattern:yue	ユフィリアに対して厳しい親ではあるが、それも我が子を思う故だ。	유필리아에 대해서 엄한 부모이지만, 그것도 우리 아이를 생각하기 때문이다.	fix	builtin-pattern
 pattern:yue	この季節になってくると、何故か、少し寂しい気分になるな。	이 계절이 되어 지면, 어째서인지, 조금 외로운 기분이 드네.	keep	builtin-pattern
 pattern:yue	ではＥＬＦは ここに挙がっている者を 事故死でいいな？	그럼 ELF는 여기에 오르고 있는 사람을 사고사면 돼?	keep	builtin-pattern
-pattern:yue	何故そっとしておいてくれない！	왜 살며시 해 두어 주지 않아!	keep	builtin-pattern
+pattern:yue	何故そっとしておいてくれない！	왜 가만히 놔두어 주지 않아!	keep	builtin-pattern
 pattern:yue	礼号作戦…私が旗艦を務めた…何故…鮮明に覚えている…なんで？	레호 작전…내가 기함을 맡았다…왜…선명히 기억하고 있다…왜?	keep	builtin-pattern
 pattern:yue	彼が故郷の為に死ぬことがないよう 彼に厳命して下さいませんでしょうか、	그가 고향을 위해 죽는 것이 없게 그에게 엄명해 주십시오 입니까,	keep	builtin-pattern
 pattern:yue	糞野郎、ここは私の家よ 何故、戻らないといけないのよ	개새끼, 여기는 내 집이야 왜, 돌아가야 해	keep	builtin-pattern

@@ -744,7 +744,7 @@ idiom:気を取られる	取られる	v1:규칙	sense	idiom	気 を 取られる
 idiom:気を失う	失う	v5:규칙	sense	idiom	気 を 失う +nom	정신을 잃다	50	LEX-4760	dict	base.tsv
 idiom:気を張る	張る	v5:규칙	sense	idiom	気 を 張る	긴장시키다	50	LEX-4760	dict	base.tsv
 idiom:気を悪くする	悪くする	v:규칙	sense	idiom	気 を 悪くする +nom	감정을 해치다	50	LEX-4760	dict	base.tsv
-idiom:気を抜く	抜く	v5:하다	sense	idiom	気 を 抜く	놀라게 하다	50	LEX-4760	dict	base.tsv
+idiom:気を抜く	抜く	v5:규칙	sense	idiom	気 を 抜く	긴장을 늦추다	50	LEX-4760	dict	base.tsv
 idiom:気を持たせる	持たせる	v1:하다	sense	idiom	気 を 持たせる	마음을 들뜨게하다	50	LEX-4760	dict	base.tsv
 idiom:気を落とす	落とす	v5:하다	sense	idiom	気 を 落とす +nom	낙심하다	50	LEX-4760	dict	base.tsv
 idiom:気を遣う	遣う	v5:하다	sense	idiom	気 を 遣う +nom	배려를 하다	50	LEX-4760	dict	base.tsv
@@ -2729,8 +2729,8 @@ idiom:小腰を屈める	屈める	v1:규칙	sense	idiom	小腰 を 屈める	�
 idiom:フタを開けう	開けう	v5:하다	sense	idiom	フタ を 開けう	흥행을 시작하다	50	LEX-4760	dict	words-variants.tsv
 idiom:蓋をあけう	あけう	v5:하다	sense	idiom	蓋 を あけう	흥행을 시작하다	50	LEX-4760	dict	words-variants.tsv
 idiom:気をはる	はる	v5:규칙	sense	idiom	気 を はる	긴장시키다	50	LEX-4760	dict	words-variants.tsv
-idiom:気をきかせる	きかせる	v1:ㄹ	sense	idiom	気 を きかせる	약삭빠르게 굴다	50	LEX-4760	dict	words-variants.tsv
-idiom:気を効かせる	効かせる	v1:ㄹ	sense	idiom	気 を 効かせる	약삭빠르게 굴다	50	LEX-4760	dict	words-variants.tsv
+idiom:気をきかせる	きかせる	v1:하다	sense	idiom	気 を きかせる	배려하다	50	LEX-4760	dict	words-variants.tsv
+idiom:気を効かせる	効かせる	v1:하다	sense	idiom	気 を 効かせる	배려하다	50	LEX-4760	dict	words-variants.tsv
 idiom:口を閉ざす	閉ざす	v5:하다	sense	idiom	口 を 閉ざす	침묵하다	50	LEX-4760	dict	words-variants.tsv
 idiom:幅をきかせる	きかせる	v1:규칙	sense	idiom	幅 を きかせる	판을 치다	50	LEX-4760	dict	words-variants.tsv
 idiom:幅を効かせる	効かせる	v1:규칙	sense	idiom	幅 を 効かせる	판을 치다	50	LEX-4760	dict	words-variants.tsv

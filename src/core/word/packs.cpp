@@ -1180,7 +1180,15 @@ bool MatchIdiom(const Worker& w, const dict::Colloc& c, const std::vector<Item*>
         // An opening bracket before it (「ドジ踏んだ」) describes nothing.
         const bool opens = pc == '6' && dict::InClass(HDTRANS_CLASS("mark.open-bracket"), items[i - 1]->group->surface);
         // Before a noun of manner it describes the manner (正しい気の利かせ方).
-        if (together && !opens &&
+        // An adverb before it (あんまり根詰め過ぎる) goes with the verb, not the noun; one read as a
+        // Korean modifier ending in ㄴ (同じ 같은品) still describes the noun.
+        const bool adnominal = [&] {
+            if (pe == nullptr || pe->dst.size() < 3) return false;
+            const char32_t r = text::DecodeRune(std::string_view(pe->dst).substr(pe->dst.size() - 3)).cp;
+            return r >= 0xAC00 && r <= 0xD7A3 && (r - 0xAC00) % 28 == 4;
+        }();
+        const bool adverb = pc == '3' && !adnominal;
+        if (together && !opens && !adverb &&
             ((describes && !c.modified && !nominal) || pc == '1' || (pe != nullptr && pe->cls == 'N' && !(c.modified && describes)))) {
             return false;
         }

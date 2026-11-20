@@ -44,7 +44,7 @@ dict:freq-endings-98	何でございますでしょうか。	has:무엇입니까
 dict:freq-endings-98	何でございましたっけ。	has:무엇이었	fix	lookup
 dict:freq-endings-98	何でございますか？	has:무엇입니까	keep	lookup
 dict:freq-endings-98	滅相もないことです。	has:당치도 않은	fix	lookup
-dict:freq-endings-98	彼は気にも介さなかった。	has:개의하지 않았다	fix	lookup
+dict:freq-endings-98	彼は気にも介さなかった。	has:개의	fix	lookup
 dict:freq-endings-98	いくら丼を食べた。	has:연어알 덮밥	keep	lookup
 -	救いの手を差し延べた。	has:내밀었다	fix	lookup
 -	他の人間より突出して秀でている	lacks:내미고	keep	lookup

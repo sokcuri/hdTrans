@@ -1,0 +1,153 @@
+# 규칙: LEX-7940, LEX-7941, LEX-7942, LEX-7943
+rule	input	expected	kind	layer
+dict:freq-idiom-98	心の声バイバイする前に何としてでもイェーイを決めるぞ。	has:어떻게 해서든지	fix	lookup
+dict:freq-idiom-98	子供のために、何としてでもお金が入用となるのです。	has:어떻게 해서든지 돈이	fix	lookup
+dict:freq-idiom-98	なんとしてでも見つけ出せ！	has:어떻게 해서든지 찾아내라	fix	lookup
+dict:freq-idiom-98	越前殿！ただではすみませんぞ‼	has:그냥 끝나지 않습니다	fix	lookup
+dict:freq-idiom-98	こんな事をして、ただでは済まないぞ	has:그냥 끝나지 않아	fix	lookup
+dict:freq-idiom-98	大型バイクと正面衝突しては、ただじゃ済まない。	has:그냥 끝나지 않는다	fix	lookup
+dict:freq-idiom-98	タダでは済まんぞぉ！	has:그냥 끝나지 않아	fix	lookup
+dict:freq-idiom-98	ただじゃ済まさねえ。	has:그냥 넘기지 않는다	fix	lookup
+dict:freq-idiom-98	ホールアウト後は反省が口を突いた。	has:입에서 튀어나왔다	fix	lookup
+dict:freq-idiom-98	それが自然に口を突いた。	has:입에서 튀어나왔다	fix	lookup
+dict:freq-idiom-98	本音が口を衝いた。	has:입에서 튀어나왔다	fix	lookup
+dict:freq-idiom-98	「私どもは家族を亡くし、悲しみに暮れています。	has:슬픔에 잠겨 있습니다	fix	lookup
+dict:freq-idiom-98	私は悲しみに暮れるしかない。	has:슬픔에 잠길 수밖에	fix	lookup
+dict:freq-idiom-98	悲しみに暮れる間もなく	has:슬픔에 잠길 새도	fix	lookup
+dict:freq-idiom-98	悲嘆に暮れています。	has:비탄에 잠겨 있습니다	fix	lookup
+dict:freq-idiom-98	絶望に暮れていた。	has:절망에 잠겨 있었다	fix	lookup
+dict:freq-idiom-98	どうか、私たち家族をそっとしておいてください。	has:가만히 놔두어 주세요	fix	lookup
+dict:freq-idiom-98	しばらくはそっとしておくしかなさそうだ。	has:가만히 놔둘 수밖에	fix	lookup
+dict:freq-idiom-98	まあなんだ、そっとしておこう。	has:가만히 놔두자	fix	lookup
+dict:freq-idiom-98	今はそっとしといてくれ。	has:가만히 놔두어 줘	fix	lookup
+dict:freq-idiom-98	車のボンネットがひっかかれた。	has:보닛이 긁혔다	fix	lookup
+dict:freq-idiom-98	犬にひっかかれた。	has:개에게 긁혔다	fix	lookup
+dict:freq-idiom-98	ひっかかれた傷が痛い。	has:긁힌 상처	fix	lookup
+dict:freq-idiom-98	全国民に５０００ドルを支給するとぶち上げた。	has:공언했다	fix	lookup
+dict:freq-idiom-98	冗談みたいな公約をぶちあげて、選挙に勝った。	has:공약을 내걸고	fix	lookup
+dict:freq-idiom-98	ぶち上げられた計画。	has:공언된 계획	fix	lookup
+dict:freq-idiom-98	根をつめると体を壊すよ。	has:무리해서 몰두하면	fix	lookup
+dict:freq-idiom-98	息を吹きかえした。	has:되살아났다	fix	lookup
+dict:freq-idiom-98	いきの根を止める。	has:숨통을 끊는다	fix	lookup
+dict:freq-idiom-98	彼は気にも介さなかった。	has:개의치도 않았다	fix	lookup
+dict:freq-idiom-98	泥試合になった。	has:진흙탕 싸움이	fix	lookup
+dict:freq-idiom-98	何としても、それだけは避けたい。	has:어떻게 해서든지	keep	lookup
+dict:freq-idiom-98	これを何として扱うか。	lacks:어떻게 해서든지	keep	lookup
+dict:freq-idiom-98	ただで手に入れた。	has:공짜로	keep	lookup
+dict:freq-idiom-98	ただでもらった本だ。	has:공짜로 받은	keep	lookup
+dict:freq-idiom-98	ただで済んだ。	has:무사히 넘어갔다	keep	lookup
+dict:freq-idiom-98	ただでは置かないぞ。	has:그냥 둘 수는	keep	lookup
+dict:freq-idiom-98	疑問が口をついて出そうになる。	has:입에서 튀어나올	keep	lookup
+dict:freq-idiom-98	日が暮れて、家に帰った。	has:해가 져	keep	lookup
+dict:freq-idiom-98	年が暮れていく。	has:저물어 간다	keep	lookup
+dict:freq-idiom-98	途方に暮れて、身動きができなくなる。	has:어찌할 바를 몰라	keep	lookup
+dict:freq-idiom-98	そっとドアを開けた。	has:살며시 문을 열었다	keep	lookup
+dict:freq-idiom-98	そっと見守る。	has:살며시 지켜본다	keep	lookup
+dict:freq-idiom-98	釘に服が引っかかった。	has:걸렸다	keep	lookup
+dict:freq-idiom-98	罠にひっかかればいい。	has:함정에 걸리면	keep	lookup
+dict:freq-idiom-98	棒で口をつつく。	has:입을	keep	lookup
+pack:freq-idiom-98	球体の内部は、ことなどをのぞけば、少年の家によく似ていました。	has:제외하면	fix	pack
+pack:freq-idiom-98	人間など一部をのぞけば弱い。	has:일부를 제외하면	fix	pack
+pack:freq-idiom-98	雨の日をのぞけば毎日走る。	has:날을 제외하면	fix	pack
+pack:freq-idiom-98	穴をのぞけば見える。	has:구멍을 들여다보면	fix	pack
+pack:freq-idiom-98	窓をのぞけば海が見える。	has:창을 들여다보면	fix	pack
+pack:freq-idiom-98	「サッカーは終わらない」とつづった。	has:라고 적었다	fix	pack
+pack:freq-idiom-98	「どうか、私たち家族をそっとしておいてください」とつづった。	has:라고 적었다	fix	pack
+pack:freq-idiom-98	心境をつづった。	has:심경을 적었다	fix	pack
+pack:freq-idiom-98	思いを綴った手紙。	has:적은 편지	fix	pack
+pack:freq-idiom-98	会心の女子フリーが終わった瞬間、中井は両手を突き上げた。	has:두 손을 치켜들었다	fix	pack
+pack:freq-idiom-98	このこぶしを突き上げました。	has:주먹을 치켜들었습니다	fix	pack
+pack:freq-idiom-98	高々と拳を突き上げたあと	has:주먹을 치켜든 뒤	fix	pack
+pack:freq-idiom-98	花火をぶち上げた。	has:불꽃을 쏘아 올렸다	fix	pack
+pack:freq-idiom-98	ロケットをぶちあげる。	has:쏘아 올린다	fix	pack
+pack:freq-idiom-98	怖っ！こんな いかれた家族で	has:미친 가족	fix	pack
+pack:freq-idiom-98	すでに獄中で死んだばかりのイカれた野郎だ。	has:미친 놈	fix	pack
+pack:freq-idiom-98	いかれた連中。	has:미친 무리	fix	pack
+pack:freq-idiom-98	ただのイカレたおっさんだったのだろう。	has:미친 아저씨	fix	pack
+pack:freq-idiom-98	高峰みたいなイカレたファンも増えていた。	has:미친 팬	fix	pack
+pack:freq-idiom-98	深い悲しみに暮れていた。	has:슬픔에 잠기	fix	pack
+pack:freq-idiom-98	失意に暮れる日々を送った。	has:실의에 잠기는	fix	pack
+pack:freq-idiom-98	窓からのぞく。	lacks:제외	keep	pack
+pack:freq-idiom-98	夢をのぞいてみたらね。	has:꿈을 들여다	keep	pack
+pack:freq-idiom-98	焦りものぞかせていた。	has:내비치고	keep	pack
+pack:freq-idiom-98	糸でつづった本。	has:실로 엮은	keep	pack
+pack:freq-idiom-98	文字をつづる。	lacks:적	keep	pack
+pack:freq-idiom-98	毎日のように何人か連れていかれる。	has:끌려간다	keep	pack
+pack:freq-idiom-98	右翼席へ持っていかれた。	lacks:미친	keep	pack
+pack:freq-idiom-98	休んでいかれますか？	has:쉬어 가시겠습니까	keep	pack
+pack:freq-idiom-98	ここにいかれたのですか。	has:가셨습니까	keep	pack
+pack:freq-idiom-98	エンジンがイカれた。	has:엔진이 고장 났다	keep	pack
+pack:freq-idiom-98	膝の回路が、完全にイカれてしまっている。	lacks:미쳐	keep	pack
+pack:freq-idiom-98	秋も暮れて寒くなった。	has:저물어	keep	pack
+pack:freq-idiom-98-adverb	あんまり根詰め過ぎると お肌に悪い！	has:무리해서 몰두하면	fix	pack
+pack:freq-idiom-98-adverb	確かにそうだけど……あんまり根詰めないようにな	has:무리해서 몰두하지 않도록	fix	pack
+pack:freq-idiom-98-adverb	根詰め過ぎると悪い	has:너무 무리해서 몰두하면	fix	pack
+dict:freq-idiom-98-gloss	気を すっかり抜いていた。	has:긴장을 완전히 늦추고	fix	lookup
+dict:freq-idiom-98-gloss	気を抜くな。	has:방심하지 마	keep	lookup
+dict:freq-idiom-98-gloss	気をきかせてくれた。	has:배려해	fix	lookup
+dict:freq-idiom-98-gloss	気を効かせて席を外した。	has:배려해	fix	lookup
+pack:freq-idiom-98	頭のネジがイカれてる。	has:나사가 나가	fix	pack
+pack:freq-idiom-98	頭のネジがいかれてる。	has:나사가 나가	fix	pack
+dict:freq-idiom-98-gloss	下からの突き上げに弱い。	has:압박에 약하다	fix	lookup
+dict:freq-idiom-98-gloss	息を吹き返した。	has:되살아났다	fix	lookup
+dict:freq-idiom-98	口を突き出して拗ねた。	has:입을 쑥 내밀어	keep	lookup
+dict:freq-idiom-98	文章を綴る力。	has:문장을 쓰는	keep	lookup
+dict:freq-idiom-98	勉強に明け暮れる毎日。	has:공부에 몰두하는	keep	lookup
+dict:freq-idiom-98	彼女をのぞけば全員来た。	has:그녀를 제외하면	keep	pack
+pack:freq-idiom-98-adverb	その割には同じ品がいくつもあった気がするんだが	has:같은 물건이	keep	pack
+pack:freq-idiom-98	顔をのぞけば赤かった。	lacks:제외	keep	pack
+pack:freq-idiom-98	その子の顔をのぞけば泣いていた。	has:얼굴을 들여다보면	fix	pack
+pack:freq-idiom-98	目をのぞけば分かる。	has:눈을 들여다보면	fix	pack
+pack:freq-idiom-98	瞳をのぞけば嘘が分かる。	has:눈동자를 들여다보면	fix	pack
+pack:freq-idiom-98	カメラをのぞけば。	has:카메라를 들여다보면	fix	pack
+pack:freq-idiom-98	心をのぞけば、何もなかった。	has:마음을 들여다보면	fix	pack
+pack:freq-idiom-98	窓からのぞけば海が見える。	lacks:제외	keep	pack
+pack:freq-idiom-98	鍵穴からのぞけば見えるかも。	lacks:제외	keep	pack
+pack:freq-idiom-98	隙間からのぞけば分かる。	lacks:제외	keep	pack
+pack:freq-idiom-98	外からのぞけば丸見えだ。	lacks:제외	keep	pack
+pack:freq-idiom-98	窓から彼女をのぞけば笑っていた。	lacks:제외	keep	pack
+pack:freq-idiom-98	のぞけば見える。	lacks:제외	keep	pack
+pack:freq-idiom-98	そっとのぞけば、彼がいた。	lacks:제외	keep	pack
+pack:freq-idiom-98	こっそりのぞけば分かる。	lacks:제외	keep	pack
+pack:freq-idiom-98	のぞみがのぞけば分かる。	lacks:제외	keep	pack
+pack:freq-idiom-98	窓から中をのぞけば誰もいない。	has:안을 들여다보면	fix	pack
+pack:freq-idiom-98	数人をのぞけばみんな賛成だ。	has:제외하면	fix	pack
+pack:freq-idiom-98	先生がいかれた店に行ってみた。	has:가신 가게	keep	pack
+pack:freq-idiom-98	先生がいかれた学校。	has:가신 학교	keep	pack
+pack:freq-idiom-98	お父様がいかれた会社はどこですか。	has:가신 회사	keep	pack
+pack:freq-idiom-98	そっちにいかれた連中を追え。	lacks:미친	keep	pack
+pack:freq-idiom-98	東京へいかれた先生から手紙が来た。	lacks:미친	keep	pack
+pack:freq-idiom-98	駅までいかれた方ですか。	lacks:미친	keep	pack
+pack:freq-idiom-98	先生のいかれた店。	lacks:미친	keep	pack
+pack:freq-idiom-98	いかれた野郎だ。	has:미친 놈	fix	pack
+pack:freq-idiom-98	いかれた集団だ。	has:미친 집단	fix	pack
+pack:freq-idiom-98	あいつのいかれた発想だ。	has:미친 발상	fix	pack
+pack:freq-idiom-98	テンションぶち上げていこう！	lacks:공언	keep	pack
+pack:freq-idiom-98	ぶち上げろ！	lacks:공언	keep	pack
+pack:freq-idiom-98	気分ぶち上げていこう。	lacks:공언	keep	pack
+pack:freq-idiom-98	今日もテンションぶちあげで行くぜ！	lacks:공언	keep	pack
+pack:freq-idiom-98	会場をぶち上げた。	lacks:공언	keep	pack
+pack:freq-idiom-98	フロアをぶち上げるDJ。	lacks:공언	keep	pack
+pack:freq-idiom-98	計画をぶち上げた。	has:계획을 공언했다	fix	pack
+pack:freq-idiom-98	壮大な構想をぶち上げる。	has:구상을 공언한다	fix	pack
+pack:freq-idiom-98	新しい方針をぶち上げました。	has:방침을 공언했습니다	fix	pack
+pack:freq-idiom-98	夢をぶち上げろ！	has:꿈을 공언해라	fix	pack
+pack:freq-idiom-98	計画がぶち上げられた。	has:계획이 공언되었다	fix	pack
+pack:freq-idiom-98	ぶち上げられた花火。	has:쏘아 올려진 불꽃	fix	pack
+dict:freq-idiom-98	イカレポンチだ。	lacks:고장	keep	lookup
+dict:freq-idiom-98	イカレ野郎め！	lacks:미치고	keep	lookup
+dict:freq-idiom-98	イカレ帽子屋が言った。	has:모자장수	keep	lookup
+dict:freq-idiom-98	口を突いてみた。	has:입을 찔러	keep	lookup
+dict:freq-idiom-98	指で口を突いてみる。	has:입을 찔러	keep	lookup
+dict:freq-idiom-98	それが自然に口を突いた。	has:입에서 튀어나왔다	fix	lookup
+dict:freq-idiom-98	口をついて出た言葉。	has:입에서 튀어나온 말	fix	lookup
+dict:freq-idiom-98	引っかかれない嘘をつけ。	has:걸릴 수 없	keep	lookup
+dict:freq-idiom-98	罠に引っかかれない。	has:걸릴 수 없	keep	lookup
+dict:freq-idiom-98	引っかかれません。	has:걸릴 수 없	keep	lookup
+dict:freq-idiom-98	猫に引っかかれないように気をつけろ。	has:긁히지 않도록	fix	lookup
+dict:freq-idiom-98	ひっかかれちゃった。	has:긁혀	fix	lookup
+dict:freq-idiom-98	引っかかれたら痛いよ。	has:긁히면	fix	lookup
+dict:freq-idiom-98	猫に引っかかれました。	has:긁혔습니다	fix	lookup
+dict:freq-idiom-98	ついそんな言葉を口をついて、出た。	has:입에서 튀어나오고	keep	lookup
+dict:freq-idiom-98	口を突いた言葉。	has:입에서 튀어나온 말	fix	lookup
+dict:freq-idiom-98	箸で口を突いた。	has:입을 찔렀다	keep	lookup
