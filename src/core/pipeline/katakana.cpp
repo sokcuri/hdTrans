@@ -621,28 +621,87 @@ bool IsKataSpeech(int japanese, const std::vector<const KataRun*>& runs, bool ba
     return evidence >= 2 && 2 * speech >= japanese && !(bare && reading == 1 && !ending);
 }
 
+// Whether the hiragana hira at the start of spelled, hira and the text after it, reads as hira whole before
+// the function word that starts the rest (kFuncWords): no row but a name's runs from the start to that word's
+// end or past it (わき+が わきが 액취, ごす+の), unless it reads as the noun korean and that word (われは 나는;
+// not まどか, which ends inside まど+から), and no verb stem in hira takes a conjugation past hira's end or
+// its plain, past or te form at hira's end (ご+す 期す before の; not そ+り, わ+れ), as the katakana run is
+// checked in NativeSpelling.
+bool WholeInText(const std::string& hira, const std::string& spelled, std::string_view korean, const LineContext& ctx,
+                 const dict::Snapshot& snap) {
+    const std::u32string next = Runes(std::string_view(spelled).substr(hira.size()));
+    size_t func = 0;
+    for (const FuncWord& f : kFuncWords) {
+        if (next.starts_with(f.word)) func = std::max(func, f.word.size());
+    }
+    const size_t reach = hira.size() + Utf8(std::u32string_view(next).substr(0, func)).size();
+    for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
+        if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QPN")) continue;
+        if (c.source.size() > hira.size()) {
+            if (c.source.size() >= reach && !c.target.starts_with(korean)) return false;
+            continue;
+        }
+        const std::string_view part = c.codes->partText;
+        if (part.size() != 4 || (part[0] != 'M' && part[0] != 'H')) continue;
+        if (part[0] == 'H') {
+            if (c.source.size() == hira.size()) return false;
+            continue;
+        }
+        const std::string_view after = std::string_view(spelled).substr(c.source.size());
+        const size_t need = hira.size() - c.source.size();
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(part[3] - '0', branch);
+            // A form that ends with hira reads as the verb only as its plain, past or te form (ご+す 期す); the
+            // continuative is also a noun (そ+り 橇) and the conditional stem no word before a particle (わ+れ).
+            const bool plain = branch == 0 || branch == 6 || branch == 7;
+            if (!conj.empty() && (conj.size() > need || (conj.size() == need && plain)) && conj.find_first_of("(X") == std::string_view::npos &&
+                after.starts_with(conj)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 // The first noun row of key that is no name's (class N or I), as its Korean and whether it reads key
 // as a pronoun: of class N120 or I120, meaning more than the sound of key (これ 이것, カレ 그). The class
 // also holds proper nouns: こんどう, whose first noun row is 混同 혼동, and かつやま 가츠야마, which only spells
 // its sound (SameSound), read as none. found is false for a key with no noun row.
-// pronouns holds the Korean of every pronoun row of key once the first is (ぼく 내, 나).
+// pronouns holds the Korean of every pronoun row of key once the first is (ぼく 내, 나). common tells that
+// the first noun row is keyed by key itself and is a common noun or pronoun (class N11, N12, I11 or I12) that
+// means more than the sound of key, that no other noun row of key means another thing and that key has no
+// particle or suffix row (まど 창문, かいてき 쾌적; not ゆき 행, a proper noun, しんせん 신선, 영묘한 샘, nor ごと 마다),
+// and that no rule chooses a noun row of key by context (not くれ 줘).
 struct NounRow {
     bool found = false;
     bool pronoun = false;
+    bool common = false;
     std::string korean;
     std::vector<std::string> pronouns;
 };
 NounRow FirstNounRow(const std::string& key, const dict::Snapshot& snap) {
     NounRow out;
+    bool functional = false;
     for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
         if (c.codes == nullptr || c.codes->sem.HasPrefix("QP")) continue;
         const std::string_view part = c.codes->partText;
+        // A particle or suffix row makes key a function word (ごと 마다), no single word.
+        if (!part.empty() && (part[0] == 'P' || part[0] == 'S') && c.source == key) functional = true;
         if (part.empty() || (part[0] != 'N' && part[0] != 'I')) continue;
         const bool pronoun = (part == "N120" || part == "I120") && !SoundGloss(c) &&
                              !text::SameSound(c.target, text::FromKana(c.source, text::Preset::Fan));
-        if (!out.found) out = {true, pronoun, std::string(c.target), {}};
+        if (!out.found) {
+            const bool meaning = !SoundGloss(c) && !text::SameSound(c.target, text::FromKana(c.source, text::Preset::Fan));
+            out = {true, pronoun,
+                   c.source == key && part.size() >= 3 && part[1] == '1' && (part[2] == '1' || part[2] == '2') && meaning,
+                   std::string(c.target), {}};
+        }
         if (out.pronoun && pronoun) out.pronouns.emplace_back(c.target);
+        // Another meaning of key makes the noun no single word (しんせん 신선, 영묘한 샘), and so does a noun row
+        // that a rule chooses by context (くれ 줘, むき 사람들).
+        if (c.source == key && (c.target != out.korean || c.rule != 0)) out.common = false;
     }
+    out.common = out.common && !functional;
     return out;
 }
 
@@ -1021,7 +1080,7 @@ bool PredicateFollows(std::string_view rest, bool tsu, bool final) {
 // The run must be no katakana word: no key other than a name, a row that spells its sound
 // (パラパラ 파라파라) or a stem the text does not conjugate reads it, and no name of the document.
 std::string NativeSpelling(std::string_view word, bool tsu, std::string_view rest, const LineContext& ctx,
-                           const dict::Snapshot& snap, bool call) {
+                           const dict::Snapshot& snap, bool call, bool afterKanji) {
     const std::u32string k = Runes(word);
     if (k.size() < 2) return {};
     if (ctx.named != nullptr && ctx.named->contains(std::string(word))) return {};
@@ -1145,6 +1204,27 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             return hira;
         }
     }
+    // A noun written in katakana for emphasis before a particle or the copula (マドが 窓が, カイテキに 快適に;
+    // LEX-4823): the run has no katakana row, no ending ッ or drawn tail, and no honorific after it; neither the
+    // run nor its hiragana is a name of the name layer; the first noun row of the hiragana is a common noun or
+    // pronoun with one meaning that means more than its sound (FirstNounRow; not ゆき 행, かつやま 가츠야마 nor
+    // しんせん 신선, 영묘한 샘, which may be a place); the hiragana stays that word before the text after it
+    // (WholeInText; not ワキが わきが, ゴスの ごすの); and the run is of
+    // two morae or of four or more. Three morae is the common shape of the names that the name layer lacks
+    // (ソウトは, シャオンと), and two-mora names are mostly in it (ユキ, ハナ, ミナ). After a kanji the run ends a
+    // compound in its own sense (小ザル 小猿).
+    const int morae = Morae(Runes(hira));
+    if (morae != 3 && !afterKanji && !kataRow && !named && !tsu && core == hira && !tailWord && nounFollows && !drawn(1) &&
+        dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest) == 0) {
+        const std::vector<dict::Record> hiraNames = snap.NameRecords(hira);
+        const bool hiraNamed = std::any_of(hiraNames.begin(), hiraNames.end(), [](const dict::Record& r) {
+            return r.codes != nullptr && r.codes->sem.HasPrefix("QP");
+        });
+        if (!hiraNamed) {
+            const NounRow noun = FirstNounRow(hira, snap);
+            if (noun.common && WholeInText(hira, spelled, noun.korean, ctx, snap)) return hira;
+        }
+    }
     return {};
 }
 
@@ -1155,6 +1235,65 @@ std::string_view NativeKatakana(std::string_view w) {
         if (eq != std::string_view::npos && pair.substr(0, eq) == w) return pair.substr(eq + 1);
     }
     return {};
+}
+
+// Whether the hiragana h is a conjugation of the verb kind followed by nothing or by function words of
+// kFuncWords that fill it (られ|ていた, っ|た; not さ|んらぐ nor し|にあでぃれくたー, loanwords after 正, 成).
+// A kind whose irrealis or continuative form is the bare stem (ichidan: 食べ|ない, 見|たい, 寝|ます) takes
+// at the stem only the endings that follow a stem (FuncWord::after), not a particle (食べが).
+bool ConjugationFills(int kind, std::u32string_view h) {
+    std::vector<char> filled(h.size() + 1, 0);
+    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+        const std::u32string conj = Runes(word::Conjugation(kind, branch));
+        if (!conj.empty() && conj.find_first_of(U"(X") == std::u32string::npos && h.starts_with(conj)) filled[conj.size()] = 1;
+    }
+    const bool bareStem = word::Conjugation(kind, 8).empty() || word::Conjugation(kind, 10).empty();
+    for (size_t i = 0; i < h.size(); i++) {
+        if (i == 0 ? !bareStem : !filled[i]) continue;
+        for (const FuncWord& f : kFuncWords) {
+            if ((i > 0 || !f.after.empty()) && h.substr(i).starts_with(f.word)) filled[i + f.word.size()] = 1;
+        }
+    }
+    return filled[h.size()] != 0;
+}
+
+// Whether the katakana run word after before, which ends in a kanji, writes the okurigana of the verb
+// whose stem those kanji are, as prose writes a verb for emphasis (見ラレテイタ 見られていた, 困ッタ): the run
+// starts with a kana that conjugates a stem or ends an ichidan or ずる stem (信ジナイ, 撫デナイ) and has no
+// katakana row but a proper noun's (Okurigana; 見タイ, not タイ the country), and a verb row keyed by the
+// last one to three kanji, alone or with the start of the run, takes the rest of the run in hiragana as its
+// conjugation. A loanword after a kanji (新アニメ, 米ツアー) has its own row or conjugates no stem.
+bool KanjiOkurigana(std::string_view before, std::string_view word, std::string_view rest, const LineContext& ctx,
+                    const dict::Snapshot& snap) {
+    const std::string hira = ToHiragana(word);
+    const char32_t first = text::DecodeRune(hira).cp;
+    if (!RuneIn(first, kConjKana) && !RuneIn(first, U"ざじずぜぞだぢづでど")) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+        if (c.codes != nullptr && !c.codes->part.Empty() && !c.codes->sem.HasPrefix("Q")) return false;
+    }
+    bool userRow = false;
+    ForUserEntries(word, ctx, [&](const dict::UserEntry& e) { userRow = userRow || !e.end; });
+    if (userRow) return false;
+    std::string_view tail = rest.substr(0, 15);
+    while (!tail.empty() && !ValidUtf8(tail)) tail.remove_suffix(1);
+    size_t k = before.size();
+    for (int n = 0; n < 3; n++) {
+        const text::Rune r = LastRune(before.substr(0, k));
+        if (!IsKanjiRune(r.cp)) break;
+        k -= r.size;
+        const std::string stem(before.substr(k));
+        const std::string spelled = stem + hira + std::string(tail);
+        for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QP")) continue;
+            const std::string_view part = c.codes->partText;
+            if (part.size() != 4 || part[0] != 'M' || c.source.size() < stem.size() ||
+                c.source.size() >= stem.size() + hira.size()) {
+                continue;
+            }
+            if (ConjugationFills(part[3] - '0', Runes(std::string_view(hira).substr(c.source.size() - stem.size())))) return true;
+        }
+    }
+    return false;
 }
 
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
@@ -1244,13 +1383,19 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             at = i;
             continue;
         }
+        if (kw == nullptr && !joined && IsKanjiRune(prev) && KanjiOkurigana(text.substr(0, start), word, rest, ctx, snap)) {
+            b.append(text.substr(at, start - at));
+            b += ToHiragana(word);
+            at = i;
+            continue;
+        }
         if (kw == nullptr) {
             // After a digit the run counts something (1モグり), not a native word.
             if (joined || text::IsDigit(prev)) continue;
             // The run stands as a call (ノボル！, おい、アタル…): after the start of the line, a bracket, a
             // comma or a space and before a mark, a comma, a closing bracket or the end (「ノボル」と).
             const bool call = (start == 0 || RuneIn(prev, U"「『（(、，,　 \n")) && (rest.empty() || RuneIn(next, U"！!？?…‥、，,」』）)\n"));
-            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap, call); !native.empty()) {
+            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap, call, IsKanjiRune(prev)); !native.empty()) {
                 b.append(text.substr(at, start - at));
                 b += native;
                 at = i;

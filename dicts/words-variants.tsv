@@ -20857,3 +20857,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 舞いもど	되돌아&AH@	M418			GN							w:39748
 吹きとば	날려버&AA@	M423			GN							w:39749
 引き摺り出	끌어&A6@	M433			GN							w:39105
+しがみ付	매달&AA@	M411			GN			LEX-8060: しがみつく				w:41800
+こびり付	달라&HC@	M411		Dx	GN			LEX-8060: こびりつく				w:41801
+まとわり付	달라&HC@	M421		Dx	GN			LEX-8060: まとわりつく				w:41802
+ひっ付	달라&HC@	M421			GN			LEX-8060: ひっつく				w:41803
+かいてき	쾌적%A1@	G8L0			GN			LEX-8060: 快適				w:41804
+赤ずきん	붉은 두건	N110	VBkVSw		GN			LEX-8060: 赤頭巾				w:41805
+とき卵	푼 달걀	N110	VFd		GN			LEX-8060: 溶き卵				w:41806
+ほうれい線	팔자주름	N110	VBp		GN			LEX-8060: 法令線				w:41807
+はき心地	착용감	K110			GN			LEX-8060: 履き心地				w:41812
+働きもの	부지런한 사람	N110	VHn		GN			LEX-8060: 働き者				w:41813
+カンパン	건빵	N110	VFd		GN			LEX-4823: 乾パン				w:41814
+エンガワ	지느러미살	N110	VFd		GN			LEX-4823: 縁側 (생선)				w:41815
+ひっ付け	붙&AJ@	M437			GN			LEX-8060: ひっつける				w:41816
