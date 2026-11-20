@@ -22,7 +22,7 @@ names:kana-nickname	ひよりんの家に行く。	히요린의 집에 간다.	f
 names:kana-nickname	ひよりんが来た。	히요린이 왔다.	fix	lookup
 names:kana-nickname	つぐみの家に行く。	츠구미의 집에 간다.	fix	lookup
 names:kana-nickname	なんだい、べっぴんさんにはカレシさんがいるのかい。	뭐야, 미인 씨에게는 남자친구 씨가 있는 거야.	keep	lookup
-names:kana-nickname	「あちらさん、しびれを切らして出てきたわよ」	「저리 씨, 인내심의 한계를 느껴 나왔어」	keep	lookup
+names:kana-nickname	「あちらさん、しびれを切らして出てきたわよ」	has:「저쪽, 인내심의 한계를	keep	lookup
 names:kana-nickname	あおなみさんぽ	푸른 보고 산책	keep	lookup
 names:kana-nickname	みなさん、こんにちは。	여러분, 안녕하세요.	keep	lookup
 names:kana-nickname	たくさん食べた。	많이 먹었다.	keep	lookup

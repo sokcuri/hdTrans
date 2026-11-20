@@ -15252,6 +15252,21 @@ noun.issue-over	去就
 noun.issue-over	進退
 noun.issue-over	采配
 
+//= name.layer-slot-particle	Particles after a kana person of the name layer with no word row of its own that make its place a bare name (かなえが来た; spec LEX-7780). Not と or って, which also follow adverbs and sounds (しんと).
+name.layer-slot-particle	が
+name.layer-slot-particle	は
+name.layer-slot-particle	も
+//= name.layer-slot-final	Last kana of such a run that also end a word or predicate form before them (いくよ, ここね, やくも): the run is the name only before が or は (spec LEX-7780).
+name.layer-slot-final	よ
+name.layer-slot-final	ね
+name.layer-slot-final	わ
+name.layer-slot-final	ぞ
+name.layer-slot-final	ぜ
+name.layer-slot-final	さ
+name.layer-slot-final	な
+name.layer-slot-final	も
+name.layer-slot-final	か
+name.layer-slot-final	の
 //= name.bare-particle	Particles after a kana name the document gives only before an honorific that make its bare use at a clause start the name too (なぎささん … なぎさが来た, なぎさは, なぎさって; not なぎさを歩いた; spec LEX-6300).
 //= name.bare-particle-predicate	The particles of name.bare-particle that no plain predicate form takes, the only ones after such a name that is also a verb or adjective form (のぼるさん … のぼるは; not ひかると, のぼるのが; spec LEX-6300).
 //= honorific.kana-call	Honorifics of a call after which a whole run of two to four kana that is a common word or a verb form is a person's name (つきさん, かなえちゃん, ひさしくん; spec LEX-6301).

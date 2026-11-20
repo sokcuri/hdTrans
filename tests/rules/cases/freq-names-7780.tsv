@@ -1,0 +1,48 @@
+# 규칙: LEX-7780
+rule	input	expected	kind	layer
+names:layer-slot	はるながいるなぁ。	has:하루나가	fix	fixed
+names:layer-slot	かなえが来た。	has:카나에가	fix	fixed
+names:layer-slot	もえが笑った。	has:모에가	fix	fixed
+names:layer-slot	そらおが来た。	has:소라오가	fix	fixed
+names:layer-slot	いのりが来た。	has:이노리가	fix	fixed
+names:layer-slot	かえでといのりが来た。	has:카에데와 이노리가	fix	fixed
+names:layer-slot	すみれ、こっちだよ。	has:스미레,	fix	fixed
+names:layer-slot	いのり！	has:이노리!	fix	fixed
+names:layer-slot	「かなえ？」	has:카나에?	fix	fixed
+names:layer-slot	かなえ？	has:카나에?	fix	fixed
+names:layer-slot	かなえる夢がある。	lacks:카나에	keep	fixed
+names:layer-slot	夢をかなえた。	lacks:카나에	keep	fixed
+names:layer-slot	もえる炎だ。	lacks:모에	keep	fixed
+names:layer-slot	さえも来なかった。	lacks:사에	keep	fixed
+names:layer-slot	かなが読めない。	lacks:카나가	keep	fixed
+names:layer-slot	ひかりが差した。	has:빛이	keep	fixed
+names:layer-slot	のぞみが叶った。	lacks:노조미	keep	fixed
+names:word-row	田舎の米袋を担いで帰った。	has:쌀 포대	fix	lookup
+names:word-row	あんちゃんが来た。	has:형이	fix	lookup
+names:word-row	かおりさんが来た。	has:카오리 씨	keep	lookup
+names:word-row	津地裁で開かれた。	has:츠 지방법원	fix	lookup
+names:word-row	ロシアのプーチン大統領と会った。	has:푸틴 대통령	fix	lookup
+names:word-row	金大中大統領の時代	has:대통령	keep	lookup
+names:word-row	東京地裁で開かれた。	has:지방법원	keep	lookup
+names:san-noun	はなやさんで花を買った。	has:꽃집에서	fix	lookup
+names:san-noun	とこやさんに行った。	has:이발소에	fix	lookup
+names:san-noun	ほんやさんに行く。	has:서점에	fix	lookup
+names:san-noun	すしやさんで食べた。	has:초밥집에서	fix	lookup
+names:san-noun	はいしゃさんに行く。	has:치과에	fix	lookup
+names:san-noun	くすりやさんに行く。	has:약국에 간다	fix	lookup
+names:san-noun	いるかさんが泳ぐ。	has:돌고래 씨가	fix	lookup
+names:san-noun	あおむしさんが食べた。	has:애벌레 씨가	fix	lookup
+names:san-noun	おてんとさんが出た。	has:해님이	fix	lookup
+names:san-noun	おいなりさんを食べた。	has:유부초밥을	fix	lookup
+names:san-noun	おまえさん、どこへ行く。	lacks:씨	fix	lookup
+names:san-noun	あなたさん、どうぞ。	lacks:씨	fix	lookup
+names:san-noun	あちらさんが来た。	has:저쪽이	fix	lookup
+names:san-noun	ごくろうさん！	has:수고했어	fix	lookup
+names:san-noun	ひがさんさんと照る。	has:찬란히	fix	fixed
+names:san-noun	きくの花が咲いた。	has:국화꽃	fix	lookup
+names:san-noun	うさぎさんが跳ねた。	has:토끼 씨가	keep	lookup
+names:san-noun	おつかれさん！	has:수고했어	keep	lookup
+names:san-noun	花屋さんで花を買った。	has:꽃	keep	lookup
+names:san-noun	日がさんさんと照る。	has:찬란히	keep	lookup
+names:san-noun	ゆいさん、来て。	has:유이 씨,	keep	fixed
+names:layer-slot	つぐみでありさえすれば、つぐみは来る。	has:츠구미이기만 하면, 츠구미는	keep	fixed

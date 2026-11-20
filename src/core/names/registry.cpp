@@ -803,6 +803,12 @@ void Registry::Add(std::string_view rawLine) {
         count(kanaFree_, u.t);
         if (bare(u.particle)) count(kanaBare_, u.t);
     }
+    std::vector<std::pair<std::string, std::string>> pairs;
+    for (const std::string& t : LayerKanaNames(line, &pairs)) count(kanaLayer_, t);
+    for (const auto& p : pairs) {
+        layerPairs_.insert(p);
+        count(kanaLayer_, p.second);
+    }
     for (const Coordination& c : CoordinatedKana(line)) {
         const auto [it, added] = coordinated_[c.word].emplace(c.name, c.weak);
         if (!added) it->second = it->second && c.weak;
@@ -1122,6 +1128,12 @@ std::vector<std::string> Registry::HonorificOnlyNames() {
     return out;
 }
 
+bool Registry::LayerSlotName(std::string_view t) {
+    const auto& acc = Accepted();
+    const auto it = acc.find(std::string(t));
+    return it != acc.end() && it->second.layerSlot;
+}
+
 const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
@@ -1216,6 +1228,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         // Kana no dictionary has stand for the person after one honorific (みいちゃん … みいは; spec
         // LEX-4826): they are no word a bare use could mean.
         if (Flags(t).records == 0 && !kanaWordStart_.contains(t)) n.score += 1;
+        n.person = true;
+    }
+    // A person of the name layer that no dictionary has as a word of its own, seen where a bare name stands,
+    // is the person in such a place (LayerKanaNames; spec LEX-7780).
+    for (const auto& [t, c] : kanaLayer_) {
+        (void)c;
+        Name& n = all[t];
+        n.score = std::max(n.score, 1.0);
         n.person = true;
     }
     // Kana no dictionary has that the document writes three times or more where a name stands, before a
@@ -1511,6 +1531,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
     // A kana noun of the dictionary joined by と or や to a name the document reads (そらとみゆきは, みゆきと
     // そらは) is a name too: the pair names two people (spec LEX-4954).
     kanaJoined_.clear();
+    for (const auto& [x, y] : layerPairs_) {
+        kanaJoined_[x].insert(y);
+        kanaJoined_[y].insert(x);
+    }
     for (const auto& [x, ns] : coordinated_) {
         // Only a noun of the dictionary (そら 空, ひかり 光), no determiner, particle or verb (その, だけ, した).
         if ((WordClasses(x) & kNounClass) == 0) continue;
@@ -1543,7 +1567,15 @@ const std::map<std::string, Name>& Registry::Accepted() {
             }
             if (k == kanaHon_.end()) {
                 // A name given in parentheses (Add) stands alone.
-                if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;
+                if (gloss_.count(t) != 0 && n.score >= need) {
+                    scores_[t] = n;
+                } else if (kanaLayer_.count(t) != 0) {
+                    // Only where a bare name stands (LayerKanaNames; spec LEX-7780).
+                    Name h = n;
+                    h.honorificOnly = true;
+                    h.layerSlot = true;
+                    scores_[t] = h;
+                }
                 continue;
             }
             if (n.score < (Flags(t).common ? 2 * need : need) || PredicateForm(t)) {
@@ -1985,7 +2017,8 @@ bool Registry::BareNameSlot(std::string_view line, std::size_t a, std::size_t b,
     // A mark: no kana, kanji, long mark, letter or digit.
     const auto mark = [](char32_t c) {
         return !IsHiragana(c) && !IsKatakana(c) && !IsKanji(c) && c != U'ー' && c != U'〜' && c != U'～' &&
-               !(c < 0x80 && std::isalnum(static_cast<unsigned char>(c))) && !(c >= U'０' && c <= U'ｚ');
+               !(c < 0x80 && std::isalnum(static_cast<unsigned char>(c))) && !(c >= U'０' && c <= U'９') &&
+               !(c >= U'Ａ' && c <= U'Ｚ') && !(c >= U'ａ' && c <= U'ｚ');
     };
     if (a > 0 && !mark(internal::RuneBefore(line, a).cp)) return false;
     std::string_view rest = line.substr(b);
@@ -2083,9 +2116,13 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
             if (said.starts_with("、")) said.remove_prefix(std::string_view("、").size());
             return InRunes(FirstRune(topic).cp, "がはも") && PersonSaidAt(said, FirstRune(topic).cp == U'は');
         };
-        const bool bare = acc.at(found).honorificOnly && !honorific && (listed_.count(found) > 0 || !bareSlot());
+        // A name seen where a bare name stands (LayerKanaNames) is proven by that use: its other uses in the line and the
+        // document hold as those of other proven names do (つぐみは、つぐみであれば 츠구미는, 츠구미이면; spec LEX-7780).
+        const bool bare = acc.at(found).honorificOnly && !acc.at(found).layerSlot && !honorific && !joined &&
+                          (listed_.count(found) > 0 || !bareSlot());
         if (ok) {
-            out.push_back(Occurrence{a, b, found, bare || (!joined && Guarded(line, a, b))});
+            const bool noun = bare || (!joined && Guarded(line, a, b));
+            out.push_back(Occurrence{a, b, found, noun});
         } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {
             // A common word that only honorifics name stays the word inside a hiragana run
             // (最後のひかり).

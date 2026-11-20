@@ -65,6 +65,9 @@ struct Name {
     // A hiragana run seen before honorifics without the evidence to stand for the person
     // alone: a name only where an honorific follows it.
     bool honorificOnly = false;
+    // Seen where a bare name stands with no word row of its own (LayerKanaNames): that use proves it, so its
+    // other uses hold as those of other proven names do (spec LEX-7780).
+    bool layerSlot = false;
     std::vector<std::string> parts;
     // A person of the name layer before a title: the Korean of its row, which the reading of the parts must
     // sound like to replace it, or which a name of one part reads (spec LEX-6901).
@@ -102,6 +105,8 @@ public:
     bool FullNamePart(std::string_view t);
     // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
     std::vector<std::string> HonorificOnlyNames();
+    // Whether t is accepted only from where a bare name stands with no word row of its own (LayerKanaNames).
+    bool LayerSlotName(std::string_view t);
     // Whether t is an accepted name or stands where a name stands in the lines added.
     bool Named(std::string_view t);
     // The surfaces the lines show to be names: the accepted names and the surfaces Named reports
@@ -187,6 +192,12 @@ private:
     // (spec LEX-4828). A use that starts a run and whose particle closes it is closed; one after a case
     // particle inside a run, or one with hiragana after its particle, is open.
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
+    // The hiragana runs in line of a person of the name layer that the dictionaries have as no word of its
+    // own, only as a verb or adjective stem or not at all (かなえ: 叶え, いのり), where a bare name stands
+    // (BareNameSlot) and no longer dictionary word starts (spec LEX-7780).
+    // pairs: the names of those runs joined to the next by と or や and the run after it that is such a person
+    // before a particle of name.bare-particle or a mark (いのりとかえでが).
+    std::vector<std::string> LayerKanaNames(std::string_view line, std::vector<std::pair<std::string, std::string>>* pairs = nullptr);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
     // Whether the hiragana run t of a speaker label is a name (ReadKanaLabels); bracketed: the label is in brackets,
@@ -304,6 +315,8 @@ private:
     std::set<std::string, std::less<>> kanaWordStart_;
     std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
     std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ
+    std::map<std::string, int> kanaLayer_;              // LayerKanaNames
+    std::set<std::pair<std::string, std::string>> layerPairs_;  // LayerKanaNames pairs
     struct Loose {
         int closed = 0;
         int open = 0;
