@@ -1,0 +1,36 @@
+# 규칙: LEX-7980, LEX-7981, LEX-7982, LEX-7983
+rule	input	expected	kind	layer
+dict:freq-lex-98	指をねぶった。	has:핥았다	fix	lookup
+dict:freq-lex-98	飴をねぶる。	has:핥는다	fix	lookup
+dict:freq-lex-98	ねぶりながら笑う。	has:핥으면서	fix	lookup
+dict:freq-lex-98	大人気のゲームだ。	has:대인기	keep	lookup
+dict:freq-lex-98	大人気だった。	has:대인기였다	keep	lookup
+dict:freq-lex-98	飲酒運転ダメ絶対。	has:절대 안 돼	fix	lookup
+dict:freq-lex-98	がん治療薬を開発した。	has:암 치료약	fix	lookup
+dict:freq-lex-98	乳がんを公表した。	has:유방암	fix	lookup
+dict:freq-lex-98	がんばろう。	has:힘내자	keep	lookup
+dict:freq-lex-98	しゃがんで。	lacks:암	keep	lookup
+dict:freq-lex-98	上院選で勝った。	has:상원 선거	fix	lookup
+dict:freq-lex-98	州知事選に出馬した。	has:주지사 선거	fix	lookup
+dict:freq-lex-98	会長選出馬で抱負を語った。	has:회장 선거 출마	fix	lookup
+dict:freq-lex-98	公選法違反の疑い	has:공직선거법 위반	fix	lookup
+dict:freq-lex-98	立民の代表が述べた。	has:입헌민주당	fix	lookup
+dict:freq-lex-98	冬型の気圧配置が強まる。	has:겨울형	fix	lookup
+dict:freq-lex-98	日本株が下落した。	has:일본 주식	fix	lookup
+dict:freq-lex-98	同１２分、官邸着。	has:관저 도착	fix	lookup
+dict:freq-lex-98	同３８分、国会着。	has:국회 도착	fix	lookup
+dict:freq-lex-98	午前９時、羽田空港着。	has:하네다 공항 도착	fix	lookup
+dict:freq-lex-98	同２０分、自宅着、会議。	has:자택 도착	fix	lookup
+dict:freq-lex-98	上着を脱いだ。	has:윗도리	keep	lookup
+dict:freq-lex-98	コートを一着買う。	has:한 벌	keep	lookup
+dict:freq-lex-98	彼は官邸に着いた。	has:관저에 도착했다	keep	lookup
+dict:freq-lex-98	到着した。	has:도착했다	keep	lookup
+dict:freq-lex-98	中前適時打を放った。	has:중전 적시타	fix	lookup
+dict:freq-lex-98	左投げ左打ちの内野手	has:좌투좌타	fix	lookup
+dict:freq-lex-98	七回表、二死満塁。	has:7회초	fix	lookup
+dict:freq-lex-98	楽天は１９日、発表した。	has:라쿠텐은	fix	lookup
+dict:freq-lex-98	楽天的な性格だ。	has:낙천적	keep	lookup
+dict:freq-lex-98	ウィットコフ特使が合流した。	has:위트코프 특사	fix	lookup
+dict:freq-lex-98	ニーソックスを履いた。	has:니삭스	keep	lookup
+dict:freq-lex-98	デカデカと書いてある。	has:큼직큼직하게	keep	lookup
+dict:freq-lex-98	大人げないぞ。	has:점잖지 않아	keep	lookup

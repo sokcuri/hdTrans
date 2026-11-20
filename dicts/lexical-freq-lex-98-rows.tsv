@@ -1,0 +1,4 @@
+#! layer=words
+# 장소 명사 바로 뒤에서 홀로 선 着는 도착이다 (LEX-7981)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+着	 도착	N110			GN	18700	||3 &&3 P-1== "1**" A-1== "VBlVPlQMS" P+1== "6**" &&3 P-1== "1**" A-1== "VBlVPlQMS" G+0== "Ow" &&3 P-1== "1**" A-1== "VBlVPlQMS" S+1== "の"	장소·건물·기관 명사 바로 뒤에서 문장 부호, 줄 끝, の 앞에 홀로 선 着(官邸着。)를 도착으로 고른다. LEX-7981				w:41400

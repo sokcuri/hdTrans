@@ -12467,7 +12467,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 公衆トイレ	공중화장실	N110			GN						こうしゅうトイレ	w:12389
 公衆便所	공중화장실	N110			GN						こうしゅうべんじょ	w:12390
 公訴時効	공소시효	N110	ULw		GN						こうそじこう	w:12391
-公邸	공관	N110			GN				xxx llm	1		w:12392
+公邸	공관	N110	VBl		GN				xxx llm	1		w:12392
 公開中	공개 중	A9D0			GN				llm		こうかいちゅう	w:12393
 公開処刑	공개 처형	N110			GN				llm			w:12394
 六処	육처	N110			GN						ろくしょ	w:12397
