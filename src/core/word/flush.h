@@ -60,6 +60,10 @@ struct Flusher {
         std::vector<uint32_t> slots;
         uint32_t stamp = 0;
         const Item* word = nullptr;
+        // Eval: the value of an unbounded scan from a word (the walk from the word after it), found in an
+        // epoch: for each scan node in scanSlots, by the place of the word, the epoch twice plus the value.
+        std::vector<std::pair<uint32_t, uint32_t>> scanSlots;  // node, index into scanValues
+        std::vector<std::vector<uint64_t>> scanValues;
     } constructions{};
 };
 

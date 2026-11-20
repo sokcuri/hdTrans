@@ -153,6 +153,8 @@ public:
         const Item* notable = nullptr;
     };
     mutable QuestionSkip questionSkips[2];
+    // The place of the word in Flusher::Constructions::items during the RunConstructions call that set it.
+    mutable uint32_t constructionPlace = 0;
     std::string_view text;  // the token text the word was found in
     int length = 0;         // bytes consumed, the conjugation ending included
     int selected = -1;

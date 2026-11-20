@@ -1944,24 +1944,81 @@ void Try(Flusher& f, const Item* it) {
     c.word = it;
 }
 
+bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it);
+
+// The memo of the scan node i (Flusher::Constructions::scanValues), one value per word of the run.
+std::vector<uint64_t>& ScanValues(Flusher::Constructions& c, uint32_t i) {
+    const auto found = std::ranges::lower_bound(c.scanSlots, i, {}, [](const auto& e) { return e.first; });
+    if (found != c.scanSlots.end() && found->first == i) {
+        std::vector<uint64_t>& values = c.scanValues[found->second];
+        if (values.size() < c.items.size()) values.resize(c.items.size());
+        return values;
+    }
+    c.scanSlots.insert(found, {i, static_cast<uint32_t>(c.scanValues.size())});
+    return c.scanValues.emplace_back(c.items.size());
+}
+
+// A scan: the first word in its direction where the target holds, before one where the barrier holds.
+// An unbounded scan from a word is the scan from the next word unless that word decides it, and no
+// condition changes in an epoch (only a row that fires changes the chain, and starts a new one), so a
+// long walk keeps its value for every word it passes; a later scan stops at one of them.
+bool EvalScan(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
+    const CxNode& n = t.nodes[i];
+    const uint32_t target = i + 1;
+    const uint32_t barrier = t.nodes[target].end;
+    const int step = n.kind == rules::BodyKind::ScanLeft ? -1 : 1;
+    constexpr int kPlain = 8;  // steps walked before the memo is read (most scans end in a few)
+    const Item* from = it;
+    int k = 0;
+    for (const Item* x = Neighbour(it, step); x != nullptr && (n.count == 0 || k < static_cast<int>(n.count));
+         x = Neighbour(x, step), k++) {
+        if (n.count == 0 && k == kPlain && f.constructions.word != nullptr) break;
+        if (Eval(f, t, target, x)) return true;
+        if (Eval(f, t, barrier, x)) return false;
+        from = x;
+    }
+    if (n.count != 0 || k < kPlain || f.constructions.word == nullptr) return false;
+    Flusher::Constructions& c = f.constructions;
+    const uint64_t stamp = static_cast<uint64_t>(c.epoch) << 1;
+    const auto placed = [&c](const Item* x) { return x->constructionPlace < c.items.size() && c.items[x->constructionPlace] == x; };
+    // from: the last word walked; the scan from it is the scan from it.
+    std::vector<uint32_t> walked;
+    bool v = false;
+    for (const Item* y = from;;) {
+        if (!placed(y)) {
+            // Not a word of the run: walk on as the scan does.
+            for (const Item* x = Neighbour(y, step); x != nullptr; x = Neighbour(x, step)) {
+                if (Eval(f, t, target, x)) { v = true; break; }
+                if (Eval(f, t, barrier, x)) break;
+            }
+            break;
+        }
+        if (const uint64_t m = ScanValues(c, i)[y->constructionPlace]; m >> 1 == c.epoch) {
+            v = (m & 1) != 0;
+            break;
+        }
+        walked.push_back(y->constructionPlace);
+        const Item* x = Neighbour(y, step);
+        if (x == nullptr) break;
+        if (Eval(f, t, target, x)) {
+            v = true;
+            break;
+        }
+        if (Eval(f, t, barrier, x)) break;
+        y = x;
+    }
+    std::vector<uint64_t>& values = ScanValues(c, i);
+    for (const uint32_t place : walked) values[place] = stamp | static_cast<uint64_t>(v);
+    return v;
+}
+
 bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     const CxNode& n = t.nodes[i];
     if (n.atom) return Held(f, it, t.atoms[n.count]);
     switch (n.kind) {
         case rules::BodyKind::Not: return !Eval(f, t, i + 1, it);
         case rules::BodyKind::ScanLeft:
-        case rules::BodyKind::ScanRight: {
-            const uint32_t target = i + 1;
-            const uint32_t barrier = t.nodes[target].end;
-            const int step = n.kind == rules::BodyKind::ScanLeft ? -1 : 1;
-            int k = 0;
-            for (const Item* x = Neighbour(it, step); x != nullptr && (n.count == 0 || k < static_cast<int>(n.count));
-                 x = Neighbour(x, step), k++) {
-                if (Eval(f, t, target, x)) return true;
-                if (Eval(f, t, barrier, x)) return false;
-            }
-            return false;
-        }
+        case rules::BodyKind::ScanRight: return EvalScan(f, t, i, it);
         case rules::BodyKind::Or:
         case rules::BodyKind::And:
         case rules::BodyKind::AndAll: break;
@@ -2260,6 +2317,7 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const auto found = t.surfaces.find(std::string_view(it->group->surface));
         c.surfaces.push_back(found != t.surfaces.end() ? found->second : kNoSurface);
+        it->constructionPlace = static_cast<uint32_t>(c.items.size());
         c.items.push_back(it);
     }
     // The epochs: the stretches of this run between rows that fire. The places where the atoms of a
@@ -2272,6 +2330,7 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
     const auto nextEpoch = [&c] {
         if (++c.epoch == UINT32_MAX) {
             std::ranges::fill(c.slotEpochs, 0);
+            for (std::vector<uint64_t>& values : c.scanValues) std::ranges::fill(values, 0);
             c.epoch = 1;
             c.epochStart = 1;
             c.changedEpoch = 0;
