@@ -1,0 +1,166 @@
+# 규칙: LEX-7960, LEX-7961, LEX-7962, LEX-7963, LEX-7964
+rule	input	expected	kind	layer
+dict:freq-idiom-98b	ひとまず妖精国まで逃げ延びられればどうとでもなると思ったのだ。	has:어떻게든 된다	fix	lookup
+dict:freq-idiom-98b	いざって時はどうとでもできるんじゃないか	has:어떻게라도 할 수 있	fix	lookup
+dict:freq-idiom-98b	口ではどうとでも言える	has:어떻게라도 말할 수 있	fix	lookup
+dict:freq-idiom-98b	記憶の欠落に目がいってしまいます。	has:눈이 가버립니다	fix	lookup
+dict:freq-idiom-98b	胸元に目がいった。	has:눈이 갔다	fix	lookup
+dict:freq-idiom-98b	つい目がいく。	has:눈이 간다	fix	lookup
+dict:freq-idiom-98b	結局、私の目が節穴だったというわけね。	lacks:가는	keep	lookup
+dict:freq-idiom-98b	あいつの目が怖いという噂だ。	lacks:가는	keep	lookup
+dict:freq-idiom-98b	儂を騙すとは舐めた真似しおって	has:얕보는 짓	fix	lookup
+dict:freq-idiom-98b	なめた真似をするな。	has:얕보는 짓을 하지 마	fix	lookup
+dict:freq-idiom-98b	ナメた真似してくれるじゃねえか。	has:얕보는 짓	fix	lookup
+dict:freq-idiom-98b	褒められて、満更でもなさそうな顔をしている。	has:싫지는 않은 듯한 얼굴	fix	lookup
+dict:freq-idiom-98b	口では嫌がっているが、まんざらでもない顔をしている。	has:싫지는 않은 얼굴	fix	lookup
+dict:freq-idiom-98b	まんざらでもないようだ。	has:싫지는 않은 것 같다	fix	lookup
+dict:freq-idiom-98b	叔母も早くに夫を失って後家を通しているが、子どもがいる。	has:수절하고 있지만	fix	lookup
+dict:freq-idiom-98b	巻き添えを食らうのは勘弁だ。	has:휘말리는 것은 사양이다	fix	lookup
+dict:freq-idiom-98b	巻き添えをくらって怪我をした。	has:휘말려	fix	lookup
+dict:freq-idiom-98b	巻き添え食らうぞ。	has:휘말리겠어	fix	lookup
+dict:freq-idiom-98b	関係者は「次の照準は彼だ」と手ぐすね引く。	has:벼른다	fix	lookup
+dict:freq-idiom-98b	各店舗が手ぐすね引いて待っているのだ。	has:별러 기다리고 있다	fix	lookup
+dict:freq-idiom-98b	手ぐすねを引いて待つ。	has:별러 기다린다	fix	lookup
+dict:freq-idiom-98b	親がサイを振った瞬間に彼はギョッとした。	has:주사위를 굴린 순간	fix	lookup
+dict:freq-idiom-98b	サイコロを振って決めよう。	has:주사위를 굴려	fix	lookup
+dict:freq-idiom-98b	動物園でサイを見た。	has:코뿔소를 보았다	keep	lookup
+dict:freq-idiom-98b	この世を去っていく眼というよりは	has:이 세상을 떠나가는 눈	fix	lookup
+dict:freq-idiom-98b	前の病気が元になって……この世を去ったの……	has:이 세상을 떠났어	fix	lookup
+dict:freq-idiom-98b	それを見ながらこの世を去らねばならぬ苦痛。	has:이 세상을 떠나야 하는	fix	lookup
+dict:freq-idiom-98b	彼は昨年世を去った。	has:세상을 떠났다	fix	lookup
+dict:freq-idiom-98b	瞬時に関節を極めてしまう。	has:관절을 꺾어	fix	lookup
+dict:freq-idiom-98b	銃を持つ腕を取ると、関節を極めながら投げ飛ばした。	has:관절을 꺾으면서	fix	lookup
+dict:freq-idiom-98b	頂点を極めた。	lacks:꺾	keep	lookup
+dict:w:41300	債券売りを加速させるインフレ高進	has:채권 매도를 가속	fix	local
+dict:w:41300	決算発表後に利益確定売りが出る可能性もある。	has:이익 확정 매도가	fix	local
+dict:w:41300	ＡＩ関連株の売りが強まっている。	has:관련주의 매도가	fix	local
+dict:w:41300	その他の銘柄は換金売りの対象となり、幅広く売られた。	has:환금 매도의 대상	fix	local
+dict:w:41300	「日本売り」が懸念される。	has:「일본 매도」	fix	local
+dict:w:41300	世界的にＡＩ関連銘柄への売りが続いており	has:매도가 계속	fix	local
+dict:w:41300	温泉を売りとした旅館も数多く点在しています。	has:온천을 장점으로 한	keep	local
+dict:w:41300	温泉を売りにしている。	has:장점으로 하고 있다	keep	local
+dict:w:41300	安さが売りだ。	has:장점이다	keep	local
+dict:w:41300	誠実な人柄が売りなので、約束を守る。	has:장점이므로	keep	local
+dict:w:41300	この店の最大の売りは景色だ。	has:장점은	keep	local
+dict:w:41300	この商品の売りの一つです。	has:장점의 하나	keep	local
+dict:w:41300	マッチ売りの少女のようだ。	has:팔이	fix	local
+dict:w:41301	聞いてからしまったと思った。	has:큰일 났다고 생각했다	fix	local
+dict:w:41301	即座にしまったと思うが当然遅い。	has:큰일 났다고 생각하지만	fix	local
+dict:w:41301	同時にしまったと思う。また、余計なことを言ってしまった。	has:큰일 났다고 생각한다	fix	local
+dict:w:41301	しまったと思った時には遅かった。	has:큰일 났다고 생각했을 때는	fix	local
+dict:w:41301	あ、しまったと思った。	has:큰일 났다고 생각했다	fix	local
+dict:w:41301	うお！　しまった。	has:큰일 났다	keep	local
+dict:w:41301	忘れてしまったと思う。	has:잊어버렸다고	keep	local
+dict:w:41301	鍵を引き出しにしまったと思う。	has:넣었다고	keep	local
+dict:w:41301	もうしまったと思う。	lacks:큰일	keep	local
+dict:w:41301	二丁拳銃を左右のポケットにしまった。	has:넣었다	keep	local
+dict:freq-sense-98b	今日先生に廊下に立たされたのはおまえのせいだ。	has:복도에 서게 된	fix	lookup
+dict:freq-sense-98b	音楽室に着くなり、俺は彼女の真正面に立たされた。	has:정면에 서게 되었다	fix	lookup
+dict:freq-sense-98b	共和党が劣勢に立たされる背景には人気低下がある。	has:처하는	fix	lookup
+dict:freq-sense-98b	窮地に立たされた。	has:궁지에 처했다	keep	lookup
+dict:freq-sense-98b	苦境に立たされている。	has:처하	keep	lookup
+dict:freq-sense-98b	この時間帯、薄手のコートだともう寒くなってきています。	has:얇은 코트	fix	lookup
+dict:freq-sense-98b	薄手のシャツを着た。	has:얇은 셔츠	fix	lookup
+dict:freq-sense-98b	上様よりご拝領の品紛失ともなれば	has:주군	fix	lookup
+dict:freq-sense-98b	上様！　これは某の落ち度にござります！	has:주군!	fix	lookup
+dict:freq-sense-98b	そいつの顔は拝んでおくに越したことはない。	has:얼굴은 봐 두는	fix	lookup
+dict:freq-sense-98b	死体を足で転がし、死に顔を拝んでから、こちらへ視線をやった。	has:얼굴을 보고 나서	fix	lookup
+dict:freq-sense-98b	仏様を拝んでおく。	lacks:봐	keep	lookup
+dict:freq-sense-98b	生地をこねて一晩寝かせる。	has:반죽을	fix	lookup
+dict:freq-sense-98b	パイの生地を伸ばす。	has:반죽을	fix	lookup
+dict:freq-sense-98b	この生地は絹でできている。	has:옷감은	keep	lookup
+dict:freq-sense-98b	面倒ごとは勘弁だ。	has:사양이다	fix	lookup
+dict:freq-sense-98b	が、もうあいつは勘弁だ。	has:사양이다	fix	lookup
+dict:freq-sense-98b	まずい食事は勘弁してくれよ？	has:봐줘	keep	lookup
+dict:freq-sense-98b	現状の政策を続けるよう求めた。	has:계속하도록 요구했다	fix	local
+dict:freq-sense-98b	財源を明示するように求めた。	has:명시하도록 요구했다	fix	local
+dict:freq-sense-98b	支援体制を整えておくことを求めています。	has:것을 요구하고 있습니다	fix	local
+dict:freq-sense-98b	給料をビットコインで支払うよう求めたり	has:지불하도록 요구하거나	fix	local
+dict:freq-sense-98b	餌を求めて人里に出没する。	has:먹이를 구해	keep	local
+dict:freq-sense-98b	彼の協力を求めた。	has:협력을 구했다	keep	local
+dict:freq-sense-98b	背任罪に問われた元理事長。	has:배임죄를 추궁받은	fix	local
+dict:freq-sense-98b	貴様は国家反逆罪に問われる。	has:반역죄를 추궁받는다	fix	local
+dict:freq-sense-98b	「何か述べておきたいことは」と問われ、「ありません」と応じた。	has:질문받아	keep	local
+dict:freq-sense-98b	北日本から東日本の日本海側では雪。	has:북일본	fix	local
+dict:freq-sense-98b	》北日本などは一桁ですね。	has:북일본 등은	fix	local
+dict:freq-sense-98b	衆院統一会派「中道」に所属する。	has:「중도」	fix	local
+dict:freq-sense-98b	中道さんが来た。	has:나카미치 씨	keep	local
+dict:freq-sense-98b	「中道！」	has:나카미치	keep	local
+dict:freq-sense-98b	中道、こっちだ。	has:나카미치	keep	local
+dict:freq-sense-98b	中道は笑った。	has:나카미치는	keep	local
+dict:w:41300	このゲームの売りは何だ。	has:장점은	keep	local
+dict:w:41301	書類はしまったと思う。	lacks:큰일	keep	local
+dict:freq-sense-98b	法廷で裁判官に問われた。	has:재판관에게 질문받았다	keep	local
+dict:freq-sense-98b	準強制性交罪に問われている被告。	has:죄를 추궁받고 있는	keep	local
+dict:freq-idiom-98b	どうとでもなれ。	has:어떻게든 되어라	fix	lookup
+dict:freq-sense-98b	好きなタバコの銘柄は何ですか。	has:상표	keep	lookup
+dict:freq-sense-98b	確かに、こうした中に立たされるとなれば拷問だろう。	has:처한다면	keep	lookup
+dict:freq-sense-98b	輪の中に立たされた。	has:안에 서게 되었다	fix	lookup
+dict:freq-idiom-98b	理事長気取りとはなめた真似しとるな。	has:얕보는 짓	fix	lookup
+dict:freq-sense-98b	共和党が劣勢に立たされる背景には人気低下がある。	lacks:서게 되는	fix	lookup
+dict:w:41300	温泉を売りにする。	has:장점으로 한다	keep	local
+dict:w:41300	安さを売りにした店だ。	has:장점으로 한	keep	local
+dict:w:41300	安さを売りにして客を集める。	has:장점으로 해	keep	local
+dict:w:41300	温泉を売りにしよう。	has:장점으로 하자	keep	local
+dict:w:41300	温泉を売りにできる。	has:장점으로 할 수	keep	local
+dict:w:41300	安さを売りに客を集める。	lacks:매도	keep	local
+dict:w:41300	安さが売りじゃない。	has:장점이 아니다	keep	local
+dict:w:41300	安さが売り！	has:장점	keep	local
+dict:w:41300	それがこの店の売り。	has:장점	keep	local
+dict:w:41300	これがうちの売りです。	has:장점입니다	keep	local
+dict:w:41300	この店の売りって何？	has:장점	keep	local
+dict:w:41300	売りは何ですか。	has:장점은	keep	local
+dict:w:41300	これといった売りがない。	has:장점이 없다	keep	local
+dict:w:41300	売りがないのが売りだ。	has:장점이 없는	keep	local
+dict:w:41300	この店の売りが続く限り客は来る。	lacks:매도	keep	local
+dict:w:41300	売りが強まった。	has:매도가 강해졌다	fix	local
+dict:w:41300	売りが膨らんだ。	has:매도가	fix	local
+dict:w:41300	円売り・ドル買いが進んだ。	has:엔매도	fix	local
+dict:w:41300	米国債売りを助長し、金利上昇圧力が強まっている。	has:미국채매도를	fix	local
+dict:w:41300	戻り売り圧力が強く、相場のムードを重くしている。	has:매도 압력	fix	local
+dict:w:41300	その後は利益を確定する売りも出て上げ幅を縮小した。	has:확정하는 매도도	fix	local
+dict:w:41300	売りに押された。	has:매도에 밀렸다	fix	local
+dict:w:41311	海外投資家は３日連続の売り越しとなった。	has:순매도	fix	lookup
+dict:freq-sense-98b	狂ったように求めた。	lacks:요구	keep	local
+dict:freq-sense-98b	飢えたように求める。	lacks:요구	keep	local
+dict:freq-sense-98b	何かを探すように求めた。	lacks:요구	keep	local
+dict:freq-sense-98b	祈るように求めた。	lacks:요구	keep	local
+dict:freq-sense-98b	早期に解決するよう強く求めた。	has:해결하도록 강하게 요구했다	fix	local
+dict:freq-sense-98b	解決するよう改めて求めた。	has:다시 요구했다	fix	local
+dict:freq-sense-98b	すぐ来るよう求めます。	has:요구합니다	fix	local
+dict:freq-sense-98b	来ないように求めた。	has:요구했다	fix	local
+dict:freq-sense-98b	領収書の宛名は上様でお願いします。	has:귀하	keep	local
+dict:freq-sense-98b	上様宛の領収書。	has:귀하	keep	local
+dict:freq-sense-98b	領収書は上様で。	has:귀하	keep	local
+dict:freq-sense-98b	上様がお呼びです。	has:주군이	fix	local
+dict:freq-idiom-98b	この服は薄手で涼しい。	has:얇고	fix	lookup
+dict:freq-idiom-98b	薄手なので寒い。	has:얇아서	fix	lookup
+dict:freq-idiom-98b	薄手な生地。	has:얇은 옷감	fix	lookup
+dict:freq-idiom-98b	薄手を負った。	has:경상을	keep	lookup
+dict:freq-idiom-98b	薄手を負わせた。	has:경상을	keep	lookup
+dict:freq-idiom-98b	傷は薄手で済みました。	has:경상으로	keep	lookup
+dict:freq-idiom-98b	巻き添えを食う。	has:휘말린다	fix	lookup
+dict:freq-idiom-98b	巻き添えを食わないように逃げた。	has:휘말리지 않도록	fix	lookup
+dict:freq-idiom-98b	巻き添えを食った。	has:휘말렸다	fix	lookup
+dict:freq-idiom-98b	巻き添えになる。	has:연루가	keep	lookup
+dict:freq-idiom-98b	まんざらでもありません。	has:싫지는 않습니다	fix	lookup
+dict:freq-idiom-98b	まんざらでもありませんでした。	has:싫지는 않았습니다	fix	lookup
+dict:freq-idiom-98b	まんざらでもなさそうだ。	has:싫지는 않은 듯하다	fix	lookup
+dict:freq-idiom-98b	まんざらでもないです。	has:싫지는 않습니다	fix	lookup
+dict:freq-idiom-98b	目がいうには、まだ早いと。	lacks:가려면	keep	lookup
+dict:freq-idiom-98b	目がいいます。	lacks:갑니다	keep	lookup
+dict:freq-idiom-98b	目がいくつある？	has:몇	keep	lookup
+dict:freq-idiom-98b	目がいい。	has:시력이 좋다	keep	lookup
+dict:freq-idiom-98b	視線がいった。	has:시선이 갔다	fix	lookup
+dict:w:41300	日本の売りは治安の良さだ。	has:장점은	keep	local
+dict:w:41300	このファンドの売りは低コストだ。	has:장점은	keep	local
+dict:w:41300	安さという売りが強い。	has:장점이 강하다	keep	local
+dict:w:41300	100円売りの商品。	lacks:매도	keep	local
+dict:w:41300	家を売りに出す。	lacks:매도	keep	local
+dict:w:41300	売りも出た。	has:매도도	fix	local
+dict:w:41300	失望売りが広がった。	has:실망 매도가	fix	local
+dict:w:41300	持ち高調整の売りが出た。	has:조정의 매도가	fix	local
+dict:freq-sense-98b	上様宛の書状が届いた。	has:주군	keep	local
+dict:freq-sense-98b	領収書は上様がお持ちだ。	has:주군이	keep	local
+dict:freq-sense-98b	上様の領収書をください。	has:귀하의 영수증	keep	local
+dict:freq-idiom-98b	マッチ売りの少女のようで、胸が締め付けられる。	has:성냥팔이 소녀	fix	lookup

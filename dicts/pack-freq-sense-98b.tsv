@@ -1,0 +1,13 @@
+#! layer=pack
+# 단서가 있을 때만 읽는 뜻: 顔を拝む 보다, 関節を極める 꺾다, 生地 반죽, 勘弁だ 사양이다 (LEX-7963)
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+freq-sense-98b:1	拝む	v5:규칙	sense	frame	obj=顔|面|ツラ|尊顔|ご尊顔|寝顔|素顔|顔つき|面構え|死に顔	보다	50	LEX-7963	freq	顔を拝んでおく 얼굴을 봐 두다
+freq-sense-98b:2	拝む	v5:규칙	sense	frame	subj=顔|面|ツラ|尊顔|ご尊顔|寝顔|素顔|顔つき|面構え|死に顔	보다	50	LEX-7963	freq	顔は拝んでおく 얼굴은 봐 두다
+freq-sense-98b:3	極める	v1:규칙	sense	frame	obj=関節|肘|肘関節|手首|肩関節	꺾다	50	LEX-7963	freq	関節を極める 관절을 꺾다
+freq-sense-98b:4	生地	n	sense	frame	pred=こねる|捏ねる|焼く|焼き上げる|伸ばす|のばす|延ばす|寝かせる|寝かす|発酵させる|発酵する|練る|丸める|揚げる|膨らむ|ふくらむ|膨らませる|流し込む|絞り出す	반죽	50	LEX-7963	freq	生地をこねる 반죽을 치대다
+freq-sense-98b:5	生地	n	sense	frame	mod=パン|ピザ|パイ|タルト|クッキー|ケーキ|スポンジ|シュー|ドーナツ|ドーナッツ|餃子|ギョーザ|ぎょうざ|うどん|そば|蕎麦|お好み焼き|たこ焼き|クレープ|ワッフル|パンケーキ|ホットケーキ|饅頭|まんじゅう|ナン|ベーグル|マフィン|スコーン|ブリオッシュ|クロワッサン|天ぷら|衣	반죽	50	LEX-7963	freq	パイの生地 파이 반죽
+freq-sense-98b:6	勘弁	n	sense	frame	next=だ|です|なの|じゃ|や|だよ|だね|だな|ですね|ですよ	사양	50	LEX-7963	freq	巻き添えを食らうのは勘弁だ 휘말리는 건 사양이다
+freq-sense-98b:7	食らう	v5:규칙	sense	idiom	巻き添え を 食らう	휘말리다	50	LEX-7960	freq	巻き添え食らうぞ 휘말리겠어
+freq-sense-98b:8	引く	v5:르	sense	idiom	手ぐすね を 引く	벼르다	50	LEX-7960	freq	手ぐすね 引いて 벼르며
+freq-sense-98b:10	いく	v5:규칙	sense	frame	subj=目|視線|目線 after=が ending=く|き|か|け|こ|った|って	가다	50	LEX-7960	freq	目がいってしまう 눈길이 가 버리다
+freq-sense-98b:11	いう	v5:규칙	sense	frame	subj=目|視線|目線 after=が ending=った|って	가다	50	LEX-7960	freq	胸元に目がいった 가슴팍에 눈이 갔다
