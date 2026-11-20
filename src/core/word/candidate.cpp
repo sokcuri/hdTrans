@@ -3964,9 +3964,8 @@ Record* Worker::VerbOverNounBeforeTe(Record* records, std::string_view full, int
 // before a suffix of the continuative that starts like a particle (follower.continuative-suffix: 答えがたい, 答えにくい)
 // (悔いのない 후회가 없는, 見覚えのない 본 기억이 없는, 床の染みが 얼룩이, 答えによっては 대답에 따라서는). With no noun row the
 // verb stays and stem-noun reads it -기 (用具入れから 용구 넣기에서). A name row or a longer record that the text spells
-// keeps the order, as does a first noun row of a place (外れ 변두리, not the act), a stem after a verb's continuative,
-// the second verb of a compound, or a stem after the お or ご of an honorific form (prefix.humble: お務めになった,
-// お助けできる). Plain-dictionary records stay in front.
+// keeps the order, as does a stem after a verb's continuative, the second verb of a compound, or a stem after the お
+// or ご of an honorific form (prefix.humble: お務めになった, お助けできる). Plain-dictionary records stay in front.
 Record* Worker::NounOverStemBeforeParticle(Record* records, std::string_view full, int cursor, int token, const Item* parent) {
     const std::string_view text = From(full, cursor);
     // After a verb's continuative the stem is the second verb of a compound (歩き始めの 걷기 시작의).
@@ -3993,8 +3992,6 @@ Record* Worker::NounOverStemBeforeParticle(Record* records, std::string_view ful
     for (const Record* r = first; r != nullptr; r = r->child) {
         if (r->source.size() > key.size() && text.starts_with(r->source)) return records;
         if (NounRow(*r) && At(r->partCode, 2) == '3' && r->source == key) return records;
-        // A first noun row of a place (semantic VPl: 外れ 변두리) names where, not the act: the verb stays.
-        if (!found && nounOf(*r) && Has(r->semantic, "VPl")) return records;
         found = found || nounOf(*r);
     }
     if (!found) return records;
