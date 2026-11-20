@@ -1,4 +1,4 @@
-# 규칙: LEX-4823, LEX-8060, LEX-8061
+# 규칙: LEX-4823, LEX-8060, LEX-8061, LEX-8062
 rule	input	expected	kind	layer
 lex:native-katakana	マドがわれてるのもふつう	has:창문이	fix	protect
 lex:native-katakana	マドを開けた	창문을 열었다	fix	protect
@@ -80,3 +80,29 @@ katakana:kanji-okurigana	日タイ関係	has:타이	keep	protect
 katakana:kanji-okurigana	佐藤タイ	has:타이	keep	protect
 lex:mixed-spelling	シールをひっ付けた	has:붙였다	fix	lookup
 lex:mixed-spelling	紙をひっ付けない	has:붙이지 않	fix	lookup
+katakana:kanji-okurigana	入力マナを使う	입력 마나를 쓴다	fix	protect
+katakana:kanji-okurigana	魔力マナが尽きた	마력 마나가 다했다	fix	protect
+katakana:kanji-okurigana	体力マナを回復する	has:체력 마나를	fix	protect
+katakana:kanji-okurigana	魔力ミナを使う	has:마력 미나를	fix	protect
+katakana:kanji-okurigana	学生ルナがいる	has:학생 루나가	fix	protect
+katakana:kanji-okurigana	先生ミナが来た	has:선생님 미나가	fix	protect
+katakana:kanji-okurigana	発見タイを使う	has:발견 타이를	fix	protect
+katakana:kanji-okurigana	外出テルを見た	has:외출 테루를	fix	protect
+katakana:kanji-okurigana	提出ラレを使う	has:제출 라레를	fix	protect
+katakana:kanji-okurigana	学生ラレを使う	has:학생 라레를	fix	protect
+katakana:kanji-okurigana	力マナを使う	lacks:힘주	fix	protect
+katakana:kanji-okurigana	生マナを使う	lacks:낳	fix	protect
+katakana:kanji-okurigana	田中マナです	has:마나입니다	keep	protect
+katakana:kanji-okurigana	山田ミナと申します	has:미나라고	keep	protect
+katakana:kanji-okurigana	マナを使う	마나를 쓴다	keep	protect
+katakana:kanji-okurigana	すごく気持チいい	has:기분 좋	keep	protect
+katakana:kanji-okurigana	返り討チにしてやる	has:반격으로	keep	protect
+katakana:kanji-okurigana	全然落ち着カナイ	has:불안	keep	protect
+katakana:kanji-okurigana	昨日のことを思イ出シタ	has:생각해 냈다	keep	protect
+katakana:kanji-okurigana	夢見ル少女	has:꿈꾸는	keep	protect
+katakana:kanji-okurigana	一目見タイ	has:보고 싶	keep	protect
+katakana:kanji-okurigana	本当に出来ルンダナ	has:할 수 있	keep	protect
+katakana:kanji-okurigana	外に出ルナ	has:나오지 마	keep	protect
+katakana:kanji-okurigana	子供を生マナイ	has:낳지 않	keep	protect
+katakana:kanji-okurigana	生き返ラナイ	has:되살아나지 않	keep	protect
+katakana:kanji-okurigana	早く手伝ッテ	has:도와	keep	protect

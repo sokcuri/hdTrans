@@ -1239,22 +1239,70 @@ std::string_view NativeKatakana(std::string_view w) {
 
 // Whether the hiragana h is a conjugation of the verb kind followed by nothing or by function words of
 // kFuncWords that fill it (られ|ていた, っ|た; not さ|んらぐ nor し|にあでぃれくたー, loanwords after 正, 成).
-// A kind whose irrealis or continuative form is the bare stem (ichidan: 食べ|ない, 見|たい, 寝|ます) takes
-// at the stem only the endings that follow a stem (FuncWord::after), not a particle (食べが).
-bool ConjugationFills(int kind, std::u32string_view h) {
+// A stem form (the passive, causative or potential stem, the irrealis; the bare stem of an ichidan kind:
+// 食べ|ない, 見|たい, 寝|ます) takes only the endings that follow a stem (FuncWord::after), not a particle
+// (食べが, 力ま|な, 生ま|な). The continuative is also a noun (返り討ち|だ).
+// Whether h is empty or particles of kFuncWords, those that follow anything, fill it (だ, には).
+bool ParticlesFill(std::u32string_view h) {
     std::vector<char> filled(h.size() + 1, 0);
-    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
-        const std::u32string conj = Runes(word::Conjugation(kind, branch));
-        if (!conj.empty() && conj.find_first_of(U"(X") == std::u32string::npos && h.starts_with(conj)) filled[conj.size()] = 1;
-    }
-    const bool bareStem = word::Conjugation(kind, 8).empty() || word::Conjugation(kind, 10).empty();
+    filled[0] = 1;
     for (size_t i = 0; i < h.size(); i++) {
-        if (i == 0 ? !bareStem : !filled[i]) continue;
+        if (!filled[i]) continue;
         for (const FuncWord& f : kFuncWords) {
-            if ((i > 0 || !f.after.empty()) && h.substr(i).starts_with(f.word)) filled[i + f.word.size()] = 1;
+            if (f.after.empty() && h.substr(i).starts_with(f.word)) filled[i + f.word.size()] = 1;
         }
     }
     return filled[h.size()] != 0;
+}
+
+bool ConjugationFills(int kind, std::u32string_view h) {
+    enum : char { kNone, kStem, kWord };
+    std::vector<char> filled(h.size() + 1, kNone);
+    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+        const std::u32string conj = Runes(word::Conjugation(kind, branch));
+        if (conj.empty() || conj.find_first_of(U"(X") != std::u32string::npos || !h.starts_with(conj)) continue;
+        const bool stem = branch == 1 || branch == 2 || branch == 4 || branch == 8 || branch == 13;
+        filled[conj.size()] = std::max<char>(filled[conj.size()], stem ? kStem : kWord);
+    }
+    if (word::Conjugation(kind, 8).empty() || word::Conjugation(kind, 10).empty()) filled[0] = kStem;
+    for (size_t i = 0; i < h.size(); i++) {
+        if (filled[i] == kNone) continue;
+        for (const FuncWord& f : kFuncWords) {
+            if ((filled[i] == kWord || !f.after.empty()) && h.substr(i).starts_with(f.word)) filled[i + f.word.size()] = kWord;
+        }
+    }
+    return filled[h.size()] != kNone;
+}
+
+// Whether a word or name that starts in the one to three characters of before ahead of its byte k ends where
+// the run hira starts: the text from k ends that word (入力マナ 入力, 学生ミナ 学生), no verb stem of its own. A verb
+// whose stem ends there and conjugates over hira (落ち着カナイ 落ち着く), or a word from there that ends in hira
+// before nothing but particles (気持チ 気持ち, 返り討チダ 返り討ち|だ), reads the run as its okurigana.
+bool WordEndsAtRun(std::string_view before, size_t k, std::string_view hira, std::string_view tail, const LineContext& ctx,
+                   const dict::Snapshot& snap) {
+    const std::u32string h = Runes(hira);
+    bool ends = false;
+    size_t j = k;
+    for (int m = 0; m < 3 && j > 0; m++) {
+        j -= LastRune(before.substr(0, j)).size;
+        const size_t to = before.size() - j;
+        const std::vector<dict::Record> names = snap.NameRecords(before.substr(j));
+        ends = ends || std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes != nullptr && r.codes->sem.HasPrefix("QP"); });
+        const std::string spelled = std::string(before.substr(j)) + std::string(hira) + std::string(tail);
+        for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes == nullptr || c.source.size() < to) continue;
+            const std::string_view part = c.codes->partText;
+            const bool verb = part.size() == 4 && part[0] == 'M';
+            if (c.source.size() == to) {
+                if (verb && ConjugationFills(part[3] - '0', h)) return false;
+                ends = true;
+            } else if (!verb && c.source.size() <= to + hira.size() &&
+                       ParticlesFill(Runes(std::string_view(hira).substr(c.source.size() - to)))) {
+                return false;
+            }
+        }
+    }
+    return ends;
 }
 
 // Whether the katakana run word after before, which ends in a kanji, writes the okurigana of the verb
@@ -1262,7 +1310,8 @@ bool ConjugationFills(int kind, std::u32string_view h) {
 // starts with a kana that conjugates a stem or ends an ichidan or ずる stem (信ジナイ, 撫デナイ) and has no
 // katakana row but a proper noun's (Okurigana; 見タイ, not タイ the country), and a verb row keyed by the
 // last one to three kanji, alone or with the start of the run, takes the rest of the run in hiragana as its
-// conjugation. A loanword after a kanji (新アニメ, 米ツアー) has its own row or conjugates no stem.
+// conjugation; those kanji end no word that starts before them (WordEndsAtRun; 入力マナ). A loanword after a
+// kanji (新アニメ, 米ツアー) has its own row or conjugates no stem.
 bool KanjiOkurigana(std::string_view before, std::string_view word, std::string_view rest, const LineContext& ctx,
                     const dict::Snapshot& snap) {
     const std::string hira = ToHiragana(word);
@@ -1281,6 +1330,7 @@ bool KanjiOkurigana(std::string_view before, std::string_view word, std::string_
         const text::Rune r = LastRune(before.substr(0, k));
         if (!IsKanjiRune(r.cp)) break;
         k -= r.size;
+        if (WordEndsAtRun(before, k, hira, tail, ctx, snap)) continue;
         const std::string stem(before.substr(k));
         const std::string spelled = stem + hira + std::string(tail);
         for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
