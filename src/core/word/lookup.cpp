@@ -280,7 +280,15 @@ dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
 
 Lookup Worker::DoLookup(std::string_view query, int mode) {
     if (fault) return {};
+    kanaAfterHeld_ = false;
     dict::Candidates found = WordInfo(query, mode);
+    if (mode == kModeGeneral && !kanaAfterHeld_ && settings.text && snapshot.SegCostTable().loaded) {
+        lastGeneral_.data = query.data();
+        lastGeneral_.size = query.size();
+        lastGeneral_.current = current;
+        lastGeneral_.surface = transformSurface;
+        lastGeneral_.list = found.list;
+    }
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);
@@ -625,6 +633,12 @@ bool Worker::KanaModifierBefore(std::string_view query) const {
 // whose kanji and the kana of u after them, kana by kana, are no key of the dictionary (水しげん; not 分かんねん, whose 分か is the
 // stem of 分かる; LEX-6801).
 bool Worker::KanaAfterWord(const dict::UserEntry& u, std::string_view query) const {
+    const bool held = KanaAfterWordIn(u, query);
+    kanaAfterHeld_ = kanaAfterHeld_ || held;
+    return held;
+}
+
+bool Worker::KanaAfterWordIn(const dict::UserEntry& u, std::string_view query) const {
     const Item* p = kanaAfter;
     if (p == nullptr || query.data() != kanaAfterAt || p->group == nullptr || p->detail == nullptr) return false;
     std::string_view s = p->group->surface;

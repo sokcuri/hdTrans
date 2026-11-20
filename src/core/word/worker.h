@@ -132,6 +132,17 @@ public:
     // The word read before the text at kanaAfterAt while the word search looks that text up (KanaAfterWord).
     const Item* kanaAfter = nullptr;
     const char* kanaAfterAt = nullptr;
+    // Whether KanaAfterWord held during the lookup DoLookup makes (the word before changed what it read).
+    mutable bool kanaAfterHeld_ = false;
+    // The candidates of the last general lookup that the word before did not change, by its query, token and surface:
+    // LatticeKana reads the rows at the search's own cursor from them instead of looking the same text up again.
+    struct GeneralLookup {
+        const char* data = nullptr;
+        std::size_t size = 0;
+        int current = -1;
+        std::string_view surface;
+        std::vector<dict::Candidate> list;
+    } lastGeneral_;
     bool fault = false;
 
     // Token j as the token loop sees it while processing current.
@@ -312,6 +323,7 @@ private:
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
     bool KanaAfterWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaAfterWordIn(const dict::UserEntry& u, std::string_view query) const;
     bool DoubledSoundBefore(std::string_view query) const;
     bool KanaModifierBefore(std::string_view query) const;
     bool KanaBeforeParticle(const dict::UserEntry& u, std::string_view rest) const;

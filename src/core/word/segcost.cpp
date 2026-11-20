@@ -870,8 +870,14 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         auto [at, fresh] = memo.rows.try_emplace(p);
         if (fresh) {
             const std::string_view rest = full.substr(static_cast<std::size_t>(p));
-            const dict::Candidates found = WordInfo(rest, kModeGeneral);
-            for (const dict::Candidate& c : found.list) {
+            // The search's own lookup of rest, where it read what this one would: same text, token and surface, and
+            // no word before that KanaAfterWord reads here.
+            const GeneralLookup& g = lastGeneral_;
+            const bool same = g.data == rest.data() && g.size == rest.size() && g.current == current &&
+                              g.surface.data() == transformSurface.data() && g.surface.size() == transformSurface.size() &&
+                              (kanaAfter == nullptr || kanaAfterAt != rest.data());
+            const dict::Candidates found = same ? dict::Candidates{} : WordInfo(rest, kModeGeneral);
+            for (const dict::Candidate& c : same ? g.list : found.list) {
                 if (c.source.empty() || c.codes == nullptr || !rest.starts_with(c.source)) continue;
                 const std::string_view part = c.codes->partText;
                 const std::string_view src = c.source;
