@@ -420,13 +420,21 @@ void KeigoAndCommand(const Data& d, std::u32string_view text, const std::vector<
         bool& flag = w.kind == KeigoWord::Kind::command ? command : keigo;
         for (std::size_t p = 0; p < text.size() && !flag; p++) {
             if (w.kind == KeigoWord::Kind::prefix) {
-                // お or 御, kanji, one kana of the い or え row, then the row's verb
-                if (text[p] != U'お' && text[p] != U'御') continue;
+                // お, ご or 御, kanji, then the row's verb: ご or 御 with a Sino noun and the noun column's forms
+                // (ご案内する, not ご飯さえ); お or 御 with a verb stem, one kana of the い or え row (お待ちする) or a causative stem (お待たせする, お聞かせする)
+                if (text[p] != U'お' && text[p] != U'御' && text[p] != U'ご') continue;
                 std::size_t q = p + 1;
                 while (q < text.size() && Kanji(text[q])) q++;
-                if (q == p + 1 || q >= text.size() || !StemEnd(text[q])) continue;
-                q++;
-                if (StartsAny(text, q, w.start) && !NotAt(text, q, w.notStart)) flag = true;
+                if (q == p + 1 || q >= text.size()) continue;
+                const auto verb = [&](std::size_t at, const std::vector<std::u32string>& start) {
+                    return StartsAny(text, at, start) && !NotAt(text, at, w.notStart);
+                };
+                if (text[p] != U'お' && verb(q, w.nounStart)) flag = true;
+                if (flag || text[p] == U'ご') continue;
+                if (StemEnd(text[q])) q++;
+                else if (q + 1 < text.size() && Kana(text[q]) && text[q + 1] == U'せ') q += 2;
+                else continue;
+                if (verb(q, w.start)) flag = true;
                 continue;
             }
             if (StartsAny(text, p, w.start) && !NotAt(text, p, w.notStart)) flag = true;

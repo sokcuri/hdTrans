@@ -148,6 +148,7 @@ struct Reader {
 struct KeigoWord {
     enum class Kind { keigo, prefix, command } kind = Kind::keigo;
     std::vector<std::u32string> start, notStart;
+    std::vector<std::u32string> nounStart;  // keigo-prefix: after ご or 御 and a Sino noun
 };
 
 struct Data {

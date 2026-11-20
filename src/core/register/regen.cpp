@@ -210,10 +210,23 @@ bool ReadLiteral(Words& r, const std::string& text, const std::string& host, Wan
 }
 
 bool IsSpace(char32_t c) { return c == U' ' || c == 0x3000 || c == U'\t'; }
+// A line the source closes with ♪ or ♥ after its last word (買っちゃいました♪, 乗せていく～♪): sung or playful
+bool SungLine(const std::string& ja) {
+    const std::u32string u = ToU32(ja);
+    for (std::size_t k = u.size(); k-- > 0;) {
+        const char32_t c = u[k];
+        if (c == U'♪' || c == U'♥') return true;
+        if (!(IsSpace(c) || c == U'」' || c == U'』' || c == U'）' || c == U')' || c == U'！' || c == U'？' || c == U'!' ||
+              c == U'?' || c == U'…' || c == U'～' || c == U'〜' || c == U'~' || c == U'ー' || c == U'。'))
+            return false;
+    }
+    return false;
+}
 bool IsMarkChar(char32_t c) {
     switch (c) {
         case U',': case U'.': case U'?': case U'!': case 0x2026: case 0x300C: case 0x300D: case 0x300E: case 0x300F:
         case U'(': case U')': case U'~': case 0x2015: case 0x2500: case 0x00B7: case 0xFF5E: case 0x2014:
+        case U'♪': case U'♥':
             return true;
         default:
             return false;
@@ -495,11 +508,25 @@ bool BuildAligned(Words& r, const PreLine& line, std::vector<Node>& nodes) {
                 Node lit;
                 std::string host;
                 if (nodes.size() >= 2 && nodes.back().glue) host = nodes[nodes.size() - 2].lemma;
+                std::vector<Node> fused;
                 if (ReadLiteral(r, it.t, host, want, mood, lit)) {
                     lit.glue = nodes.back().glue;
                     lit.from = nodes.back().from;
                     lit.to = nodes.back().to;
                     nodes.back() = lit;
+                } else if (r.rw.fused.contains(ToU8(ToU32(it.t).substr(0, 1))) && ReadRestWord(r, it.t, want, mood, fused) &&
+                           fused.size() == 2 && fused[1].kind == Kind::V && fused[1].ctype == CType::final_ &&
+                           fused[1].was == Level::hapsyo) {
+                    // 겁니다 (인 겁니다): 거 fused with the copula into a 합쇼체 end, read as 것 + 입니다 like 것입니다;
+                    // one written word. Other fused words (게다가, 건가 하고) stay text
+                    const Node text = nodes.back();
+                    nodes.pop_back();
+                    for (Node& n : fused) {
+                        n.from = text.from;
+                        n.to = text.to;
+                        n.glue = &n == &fused[0] ? text.glue : true;
+                        nodes.push_back(n);
+                    }
                 }
                 // the source marks the word as the subject or topic (なんかが): a particle node with no text of its own
                 if (!it.kase.empty() && nodes.back().kind == Kind::N) {
@@ -1258,6 +1285,9 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     if (sentenceOf[q] < jaEnds.size() && ExplanatoryEnd(jaEnds[sentenceOf[q]])) return false;
                     const std::string pos = !n.vpos.empty() ? n.vpos : LookupPredicate(t, n.lemma).pos;
                     if (n.mood != Mood::decl || n.tense != Tense::nonpast || pos != "V" || n.kcls == "EXIST") return false;
+                    // asked by its tone (遅れちゃいますよ？ 늦어버립니다?): a question, not a will
+                    for (std::size_t k = q + 1; k < nodes.size() && nodes[k].kind == Kind::Punct; ++k)
+                        if (nodes[k].punct == Punct::q) return false;
                     // a state the source writes as a verb (混乱します 혼란해요): the Korean tables give an adjective
                     if (LookupPredicate(t, n.lemma).pos == "A") return false;
                     const std::size_t s = sentenceOf[q];
@@ -1467,7 +1497,11 @@ RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
                     askedByEnding = false;
                 else
                     asked[q] = false;
+                // REG-46: before ♪ or ♥ only a polite end is lowered; a plain end keeps its form (실어 간다~♪, not 실어 가~♪,
+                // which reads as a request)
+                const bool sungPlain = was != Level::haeyo && was != Level::hapsyo && SungLine(line.ja);
                 const bool held = mixed || (mixedHaeyo && !(lower[q] && target == Level::haeyo)) || inner || keep || keigo ||
+                                  sungPlain ||
                                   askedByEnding || hapsyo || raise || jaCommand ||
                                   (command && dec.key.starts_with("scene-speech")) || (give && !dec.giveDecl);
                 if (!held && give) nodes[q].eomi = "lge";

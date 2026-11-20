@@ -255,6 +255,9 @@ void RankBundles(std::vector<Bundle>& bundles, const AnalyzeHints& h) {
         }
         if (isFinal) {
             if (v.mood == h.mood) s += 4;
+            // a statement asked by its tone (늦어버립니다?): under a ? the bare declarative comes before the question
+            // reading of a final with no mood of its own (-거든, -는데), though after a question ending
+            else if (h.mood == Mood::q && v.mood == Mood::decl && v.eomi.empty()) s += 2;
             if (v.mood == Mood::q && h.mood != Mood::q) s -= 5;  // a question ending needs a question
             if (v.eomi.empty()) s += 3;
             if (b.level == Level::hao || b.level == Level::hage) s -= 8;
