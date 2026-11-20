@@ -18,6 +18,7 @@
 // formatted only for the paths printed.
 
 #include <algorithm>
+#include <functional>
 #include <limits>
 #include <memory>
 #include <optional>
@@ -315,6 +316,33 @@ void AddSeams(std::string_view s, std::vector<std::vector<SegEdge>>& edges, int 
 
 }  // namespace
 
+Worker::ProbeMark Worker::MarkProbe() const {
+    return {arena.items.Used(),   arena.groups.Used(),  arena.entries.Used(), arena.details.Used(),
+            arena.records.Used(), arena.texts.size(), endings_.records};
+}
+
+// InsertLateCandidate links nothing it makes into the chain or into the records it is given, so a probe's items and
+// records go back. What can outlive the probe stays: the records of a new ending table (endings_) and the name-layer
+// rows of its lookups (arena.names). A text the probe kept goes back too; the search's last general lookup is dropped
+// where it points into one, since a new text may take that address (the search then looks it up again).
+void Worker::RewindProbe(const ProbeMark& m) {
+    arena.items.Rewind(m.items);
+    arena.groups.Rewind(m.groups);
+    arena.entries.Rewind(m.entries);
+    arena.details.Rewind(m.details);
+    if (endings_.records != m.endings) return;
+    arena.records.Rewind(m.records);
+    if (arena.texts.size() > m.texts) {
+        for (std::size_t i = m.texts; i < arena.texts.size(); i++) {
+            const std::string& kept = *arena.texts[i];
+            if (!std::less<const char*>{}(lastGeneral_.data, kept.data()) && !std::less<const char*>{}(kept.data() + kept.size(), lastGeneral_.data)) {
+                lastGeneral_.data = nullptr;
+            }
+        }
+        arena.texts.resize(m.texts);
+    }
+}
+
 // The edges at p of s: every dictionary candidate there, one unknown character, a run of Latin
 // letters from its start, and a katakana run from its start read whole by its sound.
 void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::vector<SegEdge>& out) {
@@ -330,6 +358,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);
     }
+    prefixProbe_ = {s.data(), s.size(), p, token, false};
     for (const dict::Candidate& c : found.list) {
         if (c.source.empty() || c.codes == nullptr || !rest.starts_with(c.source)) continue;
         const std::string_view part = c.codes->partText;
@@ -339,6 +368,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         int end = p + static_cast<int>(c.source.size());
         bool stem = false;
         if (part[1] == '4' || part[1] == '7') {
+            const ProbeMark mark = MarkProbe();
             Record* r = NewRecord();
             r->source = c.source;
             r->target.assign(c.target);
@@ -354,6 +384,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
             } else {
                 stem = true;
             }
+            RewindProbe(mark);
         }
         if (end > size) continue;
         terms.clear();
@@ -387,6 +418,7 @@ void Worker::SegEdgesAt(std::string_view s, int p, int token, bool detail, std::
         }
         out.push_back(std::move(e));
     }
+    prefixProbe_ = {};
     const int one = CharLen(s, p);
     const std::string_view ch = rest.substr(0, static_cast<std::size_t>(one));
     terms.clear();
@@ -901,12 +933,21 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         return !HiraRune(r) && !KataRune(r) && !text::IsKanji(r) && r != U'々' && !LatinRune(r) && !(r >= U'0' && r <= U'9') &&
                !(r >= U'０' && r <= U'９');
     };
+    // The rows at a place that can hold a row in hiragana of n characters or more: none where fewer hiragana start
+    // there, which needs no lookup (a particle or short noun row in hiragana needs one, a kana noun three).
+    const std::vector<SegWindow::Row> none;
+    auto kanaRowsAt = [&](int at, int n) -> const std::vector<SegWindow::Row>& {
+        for (int q = at, k = 0; k < n; k++, q += CharLen(full, q)) {
+            if (q >= size || NameClassOf(full.substr(static_cast<std::size_t>(q))) != kClassHiragana) return none;
+        }
+        return rowsAt(at);
+    };
     auto fitsAt = [&](int at) {
         if (stops(at)) return true;
-        for (const SegWindow::Row& x : rowsAt(at)) {
+        for (const SegWindow::Row& x : kanaRowsAt(at, 1)) {
             if (x.particle || (x.shortNoun && stops(x.end))) return true;
             if (!x.shortNoun) continue;
-            for (const SegWindow::Row& y : rowsAt(x.end)) {
+            for (const SegWindow::Row& y : kanaRowsAt(x.end, 1)) {
                 if (y.particle) return true;
             }
         }
@@ -922,13 +963,17 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         if (r.kind == '7') continue;
         maybe = r.kind == '3' || (r.kanaNoun && !afterVerb && fitsAt(r.end));
         if (!maybe && r.end < end) {
-            for (const SegWindow::Row& n : rowsAt(r.end)) maybe = maybe || (n.kanaNoun && fitsAt(n.end));
+            for (const SegWindow::Row& n : kanaRowsAt(r.end, 3)) maybe = maybe || (n.kanaNoun && fitsAt(n.end));
         }
     }
     if (!maybe) return records;
-    const Item* pick = InsertLateCandidate(full, cursor, token, records);
-    if (pick == nullptr || pick->start != cursor || pick->length <= 0) return records;
-    const int e0 = cursor + pick->length;
+    // The search reads these records here next where they stay as they are, so the item is kept for it.
+    const ProbeMark mark = MarkProbe();
+    Item* const pick = InsertLateCandidate(full, cursor, token, records);
+    latticePick_ = {full.data(), full.size(), cursor, token, records, pick};
+    const int picked = pick == nullptr || pick->start != cursor ? 0 : pick->length;
+    if (picked <= 0) return records;
+    const int e0 = cursor + picked;
     if (e0 >= size || end <= e0) return records;
     // The pick is a boundary row whose head a word of two or more characters before it leaves to a word with a kanji
     // or an adjective.
@@ -945,10 +990,21 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         }
         open = open || (r.kanaNoun && !afterVerb && fitsAt(r.end));
         if (!open && r.end < end) {
-            for (const SegWindow::Row& n : rowsAt(r.end)) open = open || (n.kanaNoun && fitsAt(n.end));
+            for (const SegWindow::Row& n : kanaRowsAt(r.end, 3)) open = open || (n.kanaNoun && fitsAt(n.end));
         }
     }
     if (!open) return records;
+    // The lattice prices the pick only by an edge of a word from the cursor that ends where the pick does (record
+    // below); the edges at the cursor tell whether there is one before the window is built.
+    auto here = memo.memo.find(cursor);
+    if (here == memo.memo.end()) {
+        std::vector<SegEdge> out;
+        SegEdgesAt(full, cursor, token, false, out);
+        here = memo.memo.emplace(cursor, std::move(out)).first;
+    }
+    if (std::none_of(here->second.begin(), here->second.end(), [&](const SegEdge& e) { return e.word && !e.joined && e.end == e0; })) {
+        return records;
+    }
     const SegWindow& w = SegWindowFor(full, cursor, end, token);
     const int start = cursor;
     auto edgesAt = [&](int p) -> const std::vector<SegEdge>& { return w.edges[static_cast<std::size_t>(p - start)]; };
@@ -1158,6 +1214,7 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     Record* back = nullptr;
     Record** frontTail = &front;
     Record** backTail = &back;
+    const ProbeMark copied = MarkProbe();
     Record* copies = nullptr;
     Record** copyTail = &copies;
     for (Record* r = records; r != nullptr; r = r->child) {
@@ -1168,10 +1225,14 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         *copyTail = c;
         copyTail = &c->child;
     }
-    if (copies == nullptr) return records;
-    if (const Item* v = InsertLateCandidate(full, cursor, token, copies); v == nullptr || v->start != cursor || cursor + v->length != lead.end) {
+    if (copies == nullptr) {
+        RewindProbe(copied);
         return records;
     }
+    const Item* v = InsertLateCandidate(full, cursor, token, copies);
+    const bool same = v != nullptr && v->start == cursor && cursor + v->length == lead.end;
+    RewindProbe(copied);
+    if (!same) return records;
     for (Record* r = records; r != nullptr;) {
         Record* next = r->child;
         r->child = nullptr;
@@ -1181,6 +1242,8 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         r = next;
     }
     *frontTail = back;
+    latticePick_ = {};
+    RewindProbe(mark);
     segDecided_.emplace_back(cursor, lead.end);
     return front;
 }

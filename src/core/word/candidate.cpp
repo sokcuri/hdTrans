@@ -4137,7 +4137,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text && snapshot.SegCostTable().loaded) records = LatticeKana(records, full, cursor, token, parent);
     const std::string_view text = From(full, cursor);
-    Item* candidate = InsertLateCandidate(full, cursor, token, records);
+    const LatticePick& pick = latticePick_;
+    const bool picked = pick.records != nullptr && pick.records == records && pick.text == full.data() && pick.size == full.size() &&
+                        pick.cursor == cursor && pick.token == token;
+    Item* candidate = picked ? pick.item : InsertLateCandidate(full, cursor, token, records);
+    latticePick_ = {};
     Record* from = records;
     while (settings.text && parent != nullptr && candidate != nullptr && DegreeNegativeAdnominal(*parent, *candidate, text)) {
         Record* remaining = candidate->group->records;
@@ -4472,11 +4476,16 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                 rec = group->records;
                 group->records = nullptr;
             }
-            if (rec == nullptr || At(rec->partCode, 1) != '4') {
+            // The prefix table reads the text alone; at the place SegEdgesAt probes, once it read nothing there it
+            // reads nothing for the next verb either.
+            const bool probed = prefixProbe_.text == text.data() && prefixProbe_.size == text.size() && prefixProbe_.offset == offset &&
+                                prefixProbe_.token == token;
+            if ((rec == nullptr || At(rec->partCode, 1) != '4') && !(probed && prefixProbe_.none)) {
                 if (Item* candidate = QueryPrefixTable(text, offset, token)) {
                     candidate->group->records = rec;
                     return candidate;
                 }
+                if (probed) prefixProbe_.none = true;
             }
             break;
         }
