@@ -1,0 +1,43 @@
+# 규칙: LEX-7700
+rule	input	expected	kind	layer
+normalize:small-vowel-stretch	「おかぁさん、待って」	has:어머니	fix	normalize
+normalize:small-vowel-stretch	「ばぁちゃん、ただいま」	has:할머니	fix	normalize
+normalize:small-vowel-stretch	「じぃちゃんの家」	has:할아버지의 집	fix	normalize
+normalize:small-vowel-stretch	「とぉさん」	has:아버지	fix	normalize
+normalize:small-vowel-stretch	「どぉして？」	has:왜?	fix	normalize
+normalize:small-vowel-stretch	「そぉだね」	has:그래	fix	normalize
+normalize:small-vowel-stretch	「おいしぃね」	has:맛있네	fix	normalize
+normalize:small-vowel-stretch	「もぉ、知らない」	has:이제, 몰라	fix	normalize
+normalize:small-vowel-stretch	「おはよぉございまぁす」	has:안녕하세요	fix	normalize
+normalize:small-vowel-stretch	もぉ、やだやだ。	has:이제, 싫어	fix	normalize
+normalize:small-vowel-stretch	もぉ師走になってしもた。	has:벌써	fix	normalize
+normalize:small-vowel-stretch	提督さん！深夜3時ですよ！もぉ、頑張り過ぎ！	has:이제, 너무	fix	normalize
+normalize:small-vowel-stretch	うぅぅぅぅ……もぉ、バカ	lacks:도, 바보	fix	normalize
+normalize:small-vowel-stretch	どぉだぁ？	has:어때	fix	normalize
+normalize:small-vowel-stretch	なめらか〜な肌。	has:매끈매끈한 피부	fix	normalize
+normalize:small-vowel-stretch	すてき〜って言われた。	has:멋지다는	fix	normalize
+normalize:small-vowel-stretch	きれい〜な花	has:예쁜 꽃	fix	normalize
+normalize:small-vowel-stretch	ねぇ	저기	keep	normalize
+normalize:small-vowel-stretch	なぁ	저기	keep	normalize
+normalize:small-vowel-stretch	ねぇ、待って	저기, 기다려	keep	normalize
+normalize:small-vowel-stretch	ゆぅき	lacks:용기	keep	normalize
+normalize:small-vowel-stretch	かぁいい	귀엽다	keep	normalize
+normalize:small-vowel-stretch	てめぇ	네놈	keep	normalize
+normalize:small-vowel-stretch	ねぇちゃんと聞いてよ	has:제대로	keep	normalize
+normalize:small-vowel-stretch	まぁた失敗した	또 실패했다	keep	normalize
+normalize:small-vowel-stretch	まぁね	뭐 그렇지	keep	normalize
+normalize:small-vowel-stretch	よぉしっ！	좋아!	keep	normalize
+normalize:small-vowel-stretch	なぁんだ、良かったぁ	has:뭐야	keep	normalize
+normalize:small-vowel-stretch	いやぁだ、触らないで	lacks:이야	keep	normalize
+normalize:small-vowel-stretch	「ぜぇ、ぜぇ……」	lacks:세	keep	normalize
+normalize:small-vowel-stretch	おめぇはどこだ	has:너는 어디	keep	normalize
+normalize:small-vowel-stretch	ど、どうしてぇ？	has:왜, 왜	keep	normalize
+normalize:small-vowel-stretch	もっと、してぇ……	lacks:지정	keep	normalize
+normalize:small-vowel-stretch	いいよぉ、みてても	has:좋아, 봐도	keep	normalize
+normalize:small-vowel-stretch	雷撃戦訓練もぉしなきゃ	has:훈련도	keep	normalize
+normalize:small-vowel-stretch	「どぅわっ！」	lacks:어떻게	keep	normalize
+normalize:small-vowel-stretch	気持ちぃ……	lacks:있고	keep	normalize
+normalize:small-vowel-stretch	それなぁに？	has:뭐야	keep	normalize
+normalize:small-vowel-stretch	まぁなんて	lacks:그렇지	keep	normalize
+normalize:small-vowel-stretch	こぉんなにクッキー	has:이렇게 쿠키	keep	normalize
+normalize:small-vowel-stretch	ししょぉ……	lacks:지장	keep	normalize

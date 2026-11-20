@@ -1,7 +1,7 @@
 # 규칙: GRM-3840
 rule	input	expected	kind	layer
 lookup:tteba	だから、いやらしい目で見ないでってば！！	그러니까, 야한 눈으로 보지 말라니까!!	fix	lookup
-lookup:tteba	もぉ、だから舐めないでってば	도, 그러니까 핥지 말라니까	fix	lookup
+lookup:tteba	もぉ、だから舐めないでってば	이제, 그러니까 핥지 말라니까	fix	lookup
 lookup:tteba	立つ鳥が跡を濁さなければ問題ないんですってば。	날아가는새가 말끝을 얼버무리지 않으면 문제없다니까요.	fix	lookup
 cx:tte-final:165	ジョークですってば。	농담이라니까요.	fix	rewrites
 cx:tte-final:165	本当ですってば！	사실이라니까요!	fix	rewrites

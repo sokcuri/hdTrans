@@ -19,7 +19,7 @@ normalize:small-vowel-stretch	あれはなぁに？	has:뭐야	keep	normalize
 normalize:small-vowel-stretch	それなぁに？	has:뭐야	keep	normalize
 normalize:small-vowel-stretch	ねぇちゃんと聞いてよ	has:제대로	keep	normalize
 normalize:small-vowel-stretch	「だってかぁいいんだもん」	has:귀여운걸	keep	normalize
-normalize:small-vowel-stretch	か、かぁいぃよぅ…	has:귀엽	keep	normalize
+normalize:small-vowel-stretch	か、かぁいぃよぅ…	has:귀여	keep	normalize
 normalize:small-vowel-stretch	てめぇの仕業か	has:네놈	keep	normalize
 normalize:small-vowel-stretch	うぅん、違う	has:아니	keep	normalize
 normalize:small-vowel-stretch	いたぁぁぁい	has:아파	keep	normalize
