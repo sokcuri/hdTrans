@@ -1,5 +1,62 @@
 # Changelog
 
+## [0.9.8](https://github.com/sokcuri/hdTrans/compare/v0.9.7...v0.9.8) (2026-11-21)
+
+
+### Features
+
+* **word:** let the split lattice keep a kana noun whole where the search would cut it before a particle ([#929](https://github.com/sokcuri/hdTrans/issues/929)) ([60b236f](https://github.com/sokcuri/hdTrans/commit/60b236f51256cc054c1a2e0ead14a51bfc1224cd))
+
+
+### Bug Fixes
+
+* **colloquial:** read small vowels inside a word as the long vowel of a dictionary word ([#914](https://github.com/sokcuri/hdTrans/issues/914)) ([6c8c360](https://github.com/sokcuri/hdTrans/commit/6c8c3600ecf73ce091516567e9b983957be49514))
+* **dict:** add missing words, read 着 after a place as 도착 and drop junk katakana rows ([#936](https://github.com/sokcuri/hdTrans/issues/936)) ([43c1ee8](https://github.com/sokcuri/hdTrans/commit/43c1ee89a8fdee73c02db71f4afe445a7edaa7e8))
+* **dict:** read 売り as 매도 only on finance cues and add missing idioms and cue senses ([#940](https://github.com/sokcuri/hdTrans/issues/940)) ([0ad7214](https://github.com/sokcuri/hdTrans/commit/0ad72148531a613a02fe105494fc3c294f30bffe))
+* **dict:** read 外れ as 변두리 after a place and 꽝 otherwise ([#946](https://github.com/sokcuri/hdTrans/issues/946)) ([85e4c07](https://github.com/sokcuri/hdTrans/commit/85e4c0764bc3f69ee013d19ed68d6f2037c9f53f))
+* **endings:** read desiderative たそう, past hearsay, なんなのだ, 何でもございません and しかねん by construction ([#918](https://github.com/sokcuri/hdTrans/issues/918)) ([4356870](https://github.com/sokcuri/hdTrans/commit/4356870d2a5e14221b1a336543cce8d7e28bfc39))
+* **endings:** read drawn orders, prohibitions, quoted negative requests and conditions by construction ([#941](https://github.com/sokcuri/hdTrans/issues/941)) ([545b406](https://github.com/sokcuri/hdTrans/commit/545b406c5c5bbf6f7f0536b572a3d21efaf3c31a))
+* **endings:** read sentence-final すね, ですね and やすね as the ending, not the noun すね ([#943](https://github.com/sokcuri/hdTrans/issues/943)) ([cb57114](https://github.com/sokcuri/hdTrans/commit/cb5711403718b2223949537da4528d4a2ae63bfd))
+* **idiom:** add missing idioms and read kana verb senses only with a source cue ([#926](https://github.com/sokcuri/hdTrans/issues/926)) ([36aaef6](https://github.com/sokcuri/hdTrans/commit/36aaef62b2f6e044b7c7785436aaf4d4a7ce138f))
+* **katakana:** do not read a katakana word after a kanji word as the okurigana of its last kanji ([#945](https://github.com/sokcuri/hdTrans/issues/945)) ([0cc573f](https://github.com/sokcuri/hdTrans/commit/0cc573fee66076f1fcca89cf92c1a189c7b5d4cb))
+* **katakana:** read Japanese written in katakana through its hiragana form ([#924](https://github.com/sokcuri/hdTrans/issues/924)) ([5c80754](https://github.com/sokcuri/hdTrans/commit/5c8075481de601259c148e5492a24fda41a1a888))
+* **katakana:** read katakana-written native nouns and okurigana through their hiragana form ([#937](https://github.com/sokcuri/hdTrans/issues/937)) ([23bf966](https://github.com/sokcuri/hdTrans/commit/23bf96635a9167f926c8dfc199c6e5508f316575))
+* **names:** read layer kana names with no word row as names where a bare name stands ([#928](https://github.com/sokcuri/hdTrans/issues/928)) ([58be767](https://github.com/sokcuri/hdTrans/commit/58be767ab9a786c8aa68e00e9723cb5483fd3057))
+* **names:** read the と after a closing quote bracket as the quote, not a layer name ([#934](https://github.com/sokcuri/hdTrans/issues/934)) ([c62b453](https://github.com/sokcuri/hdTrans/commit/c62b4531f9de01107006ed7f6a9a5375f4698818))
+* **normalize:** ask the dictionary and names before rewriting, and read more dialect and colloquial forms ([#923](https://github.com/sokcuri/hdTrans/issues/923)) ([f445944](https://github.com/sokcuri/hdTrans/commit/f4459441814ec3bbfeae42429516e0bdc99b0583))
+* **normalize:** read regional and spoken forms as standard ones ([#942](https://github.com/sokcuri/hdTrans/issues/942)) ([657c066](https://github.com/sokcuri/hdTrans/commit/657c066f148fa72b2257a031dff2410bb95d4c85))
+* **release:** cut critical mistranslations by cause and win back speed and memory ([fdd1953](https://github.com/sokcuri/hdTrans/commit/fdd19532b1a78e83b1344ecb3069a963625d450d))
+* **speech:** ask ますよ？ with -요?, keep humble お/ご〜する, lower 인 겁니다 and ♪ lines ([#927](https://github.com/sokcuri/hdTrans/issues/927)) ([5ce15d5](https://github.com/sokcuri/hdTrans/commit/5ce15d53a0cbd811e66cf29c1c8e0b31c38a8139))
+* **speech:** lower polite ends written in one word with an auxiliary or a noun ([#919](https://github.com/sokcuri/hdTrans/issues/919)) ([bedd048](https://github.com/sokcuri/hdTrans/commit/bedd0488819e7aa9b459dae3bb28fbef75cc5efe))
+* **word:** keep forced user entries before the verb-over-noun reorder and bound the quoted-order walk ([#944](https://github.com/sokcuri/hdTrans/issues/944)) ([7042a95](https://github.com/sokcuri/hdTrans/commit/7042a9518817b2d47a86217f6dbd6491fb44ddba))
+* **word:** read a verb stem before a particle as its noun and yield noun rows to the verb before て ([#939](https://github.com/sokcuri/hdTrans/issues/939)) ([de1ea5d](https://github.com/sokcuri/hdTrans/commit/de1ea5d29306185d50a3ca59cd21ee9773e84a44))
+* **words:** read taru stems as adverbs before verbs, のまま, kana compounds and kana noun senses ([#913](https://github.com/sokcuri/hdTrans/issues/913)) ([9ae9b3c](https://github.com/sokcuri/hdTrans/commit/9ae9b3c1f8783b5a2a8d94a21b0859e3c5dfbdab))
+
+
+### Performance Improvements
+
+* **constructions:** keep a scan's memo across the rows that fire outside its reach ([#917](https://github.com/sokcuri/hdTrans/issues/917)) ([5945ecc](https://github.com/sokcuri/hdTrans/commit/5945ecc09100e05c100617a2125cb8ee0d56639d))
+* **constructions:** read the quote state of a word from the marks found once for the line ([#915](https://github.com/sokcuri/hdTrans/issues/915)) ([db18d45](https://github.com/sokcuri/hdTrans/commit/db18d45b7cf6898aaaf2ab081ed80b98120d6fba))
+* **constructions:** remember unbounded scans while no row fires ([#911](https://github.com/sokcuri/hdTrans/issues/911)) ([1a8919c](https://github.com/sokcuri/hdTrans/commit/1a8919cff4cf127d79611fd4eb241fce1b454eb8))
+* **dialect:** remember the sentence and question word QuestionBefore found for the place asked last ([#920](https://github.com/sokcuri/hdTrans/issues/920)) ([d68cc79](https://github.com/sokcuri/hdTrans/commit/d68cc79d913385ddf601e17a45740737855c6458))
+* **dict:** give the row arrays of the dictionary load back to the system when it ends ([#952](https://github.com/sokcuri/hdTrans/issues/952)) ([b89ea3d](https://github.com/sokcuri/hdTrans/commit/b89ea3d1407d15d761794758cd7f913732e52445))
+* **dict:** shadow the rows of earlier files once after all files are read ([#947](https://github.com/sokcuri/hdTrans/issues/947)) ([c573249](https://github.com/sokcuri/hdTrans/commit/c5732494f96506b1d0f8161cfeda15929dd33618))
+* **names:** read a kana run's start and words once for all its honorifics ([#930](https://github.com/sokcuri/hdTrans/issues/930)) ([fbe7518](https://github.com/sokcuri/hdTrans/commit/fbe75181f9d98986c1db11957390bf35c91c7b5b))
+* **names:** read the cues of a long line without scanning to its end ([#907](https://github.com/sokcuri/hdTrans/issues/907)) ([2bd7f69](https://github.com/sokcuri/hdTrans/commit/2bd7f6933d9342eaf07b35f7bbe30bab8aee7e81))
+* **names:** stop counting the morae before an honorific at five ([#925](https://github.com/sokcuri/hdTrans/issues/925)) ([49d2537](https://github.com/sokcuri/hdTrans/commit/49d25377c2b8f34b603face26d72af6cf6f10921))
+* **normalize:** keep one scan across the matches of a replace ([#912](https://github.com/sokcuri/hdTrans/issues/912)) ([ee12863](https://github.com/sokcuri/hdTrans/commit/ee128632405ac33108f93b3772fc3da1a1132e4f))
+* **normalize:** walk the run before a place once per pattern scan ([#908](https://github.com/sokcuri/hdTrans/issues/908)) ([dfd2c48](https://github.com/sokcuri/hdTrans/commit/dfd2c48d4fecf8d7248851c916b791011cfd6d97))
+* **pipeline:** ask the dictionary once per scan for kana stems before と and sound keys, and only where a dialect pronoun starts ([#948](https://github.com/sokcuri/hdTrans/issues/948)) ([5d42bcf](https://github.com/sokcuri/hdTrans/commit/5d42bcfc97a62a17787aabc398108d10786b77ad))
+* **seg:** give back the kana lattice's probe allocations and skip lookups it cannot use ([#951](https://github.com/sokcuri/hdTrans/issues/951)) ([f4e5c1f](https://github.com/sokcuri/hdTrans/commit/f4e5c1f598d3810b247f6cc1ba3848a1089116f2))
+* **seg:** reuse the search's lookup in the kana lattice's row check ([#931](https://github.com/sokcuri/hdTrans/issues/931)) ([1ce933a](https://github.com/sokcuri/hdTrans/commit/1ce933a557bb0b1c4640e579f8d9f0113c563450))
+* **sound:** drop a chain after a word once its second sound is found ([#922](https://github.com/sokcuri/hdTrans/issues/922)) ([ad939f1](https://github.com/sokcuri/hdTrans/commit/ad939f1b89eabf53e163f6faa0bd9ccc7b69d552))
+* **text:** find Japanese substrings by their last byte in the line scans ([#949](https://github.com/sokcuri/hdTrans/issues/949)) ([535645a](https://github.com/sokcuri/hdTrans/commit/535645ad50227b7a8abb5fbe75405fbed9ae525c))
+* **word:** give the ending table again without making its records when its candidates repeat ([#950](https://github.com/sokcuri/hdTrans/issues/950)) ([6eaae35](https://github.com/sokcuri/hdTrans/commit/6eaae353b2f1c42b3b95e90b9fa8d5bb5e2315fb))
+* **word:** give the ending table records again when a verb looks them up again ([#916](https://github.com/sokcuri/hdTrans/issues/916)) ([976a6f7](https://github.com/sokcuri/hdTrans/commit/976a6f76fdf97d4e6efe5cad88b626a28039f2ca))
+* **word:** keep a copy chain for each start inside a repeated unit ([#910](https://github.com/sokcuri/hdTrans/issues/910)) ([7501519](https://github.com/sokcuri/hdTrans/commit/7501519fb145e237f2a238d261c4abc8cb36c1b5))
+* **word:** remember the nearest words of a chain in the misread features ([#909](https://github.com/sokcuri/hdTrans/issues/909)) ([6846c64](https://github.com/sokcuri/hdTrans/commit/6846c6457df1a1bc0b8d4d3c5c87f7077b56719d))
+* **word:** stop comparing and copying the whole token around each lookup ([#921](https://github.com/sokcuri/hdTrans/issues/921)) ([fb3614c](https://github.com/sokcuri/hdTrans/commit/fb3614cd8e6871c69b23c3cb1b7a0d903e516c59))
+
 ## [0.9.7](https://github.com/sokcuri/hdTrans/compare/v0.9.6...v0.9.7) (2026-11-20)
 
 
