@@ -3214,71 +3214,71 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
     gRuns = &runs;
     std::string text(in);
     const auto group1 = [](const Match& m) { return std::string(m.group[1]); };
-    if (text.find("ちゃろ") != std::string::npos || text.find("ちゃる") != std::string::npos || text.find("ちゃらん") != std::string::npos) {
+    if (text::Contains(text, "ちゃろ") || text::Contains(text, "ちゃる") || text::Contains(text, "ちゃらん")) {
         text = ReplaceAll(text, WesternCharu, group1);
     }
-    if (text.find("ちゃ") != std::string::npos) text = ReplaceAll(text, KansaiChau, group1);
-    if (text.find("ません") != std::string::npos) text = ReplaceAll(text, MasenShita, group1);
-    if (text.find("させ") != std::string::npos) text = ReplaceAll(text, SaInsertion, group1);
-    if (text.find("さして") != std::string::npos) text = ReplaceAll(text, SashiteCausative, group1);
-    if (text.find("っと") != std::string::npos) text = ReplaceAll(text, IchidanTto, group1);
-    if (text.find("んが") != std::string::npos) text = ReplaceAll(text, NominalNga, group1);
-    if (text.find("こた") != std::string::npos) text = ReplaceAll(text, KotaaKotoWa, group1);
-    if (text.find("いけん") != std::string::npos) text = ReplaceAll(text, WesternIken, group1);
-    if (text.find("ゃんせん") != std::string::npos) text = ReplaceAll(text, YanSen, group1);
-    if (text.find("しさら") != std::string::npos) text = ReplaceAll(text, RudeSarasu, group1);
-    if (text.find("う") != std::string::npos) text = ReplaceAll(text, EaseOnbin, group1);
-    if (text.find("もろ") != std::string::npos) text = ReplaceAll(text, KansaiMorau, group1);
-    if (text.find("あん") != std::string::npos) text = ReplaceAll(text, AruN, group1);
-    if (text.find("じゃ、") != std::string::npos) text = ReplaceAll(text, WhJaComma, group1);
-    if (text.find("んじゃ") != std::string::npos) text = ReplaceAll(text, NJaEnd, group1);
+    if (text::Contains(text, "ちゃ")) text = ReplaceAll(text, KansaiChau, group1);
+    if (text::Contains(text, "ません")) text = ReplaceAll(text, MasenShita, group1);
+    if (text::Contains(text, "させ")) text = ReplaceAll(text, SaInsertion, group1);
+    if (text::Contains(text, "さして")) text = ReplaceAll(text, SashiteCausative, group1);
+    if (text::Contains(text, "っと")) text = ReplaceAll(text, IchidanTto, group1);
+    if (text::Contains(text, "んが")) text = ReplaceAll(text, NominalNga, group1);
+    if (text::Contains(text, "こた")) text = ReplaceAll(text, KotaaKotoWa, group1);
+    if (text::Contains(text, "いけん")) text = ReplaceAll(text, WesternIken, group1);
+    if (text::Contains(text, "ゃんせん")) text = ReplaceAll(text, YanSen, group1);
+    if (text::Contains(text, "しさら")) text = ReplaceAll(text, RudeSarasu, group1);
+    if (text::Contains(text, "う")) text = ReplaceAll(text, EaseOnbin, group1);
+    if (text::Contains(text, "もろ")) text = ReplaceAll(text, KansaiMorau, group1);
+    if (text::Contains(text, "あん")) text = ReplaceAll(text, AruN, group1);
+    if (text::Contains(text, "じゃ、")) text = ReplaceAll(text, WhJaComma, group1);
+    if (text::Contains(text, "んじゃ")) text = ReplaceAll(text, NJaEnd, group1);
     text = ReplaceAll(text, SpokenClassWord, group1);
-    if (text.find("ときゃ") != std::string::npos) text = ReplaceAll(text, FusedTokiwa, group1);
-    if (text.find("こないに") != std::string::npos) text = ReplaceAll(text, NegativeNiKonai, group1);
-    if (text.find("じゃあ") != std::string::npos) text = ReplaceAll(text, DrawnJaNegative, group1);
-    if (text.find("うん") != std::string::npos) text = ReplaceAll(text, ContractedShimauN, group1);
-    if (text.find("くんね") != std::string::npos) text = ReplaceAll(text, RequestKunne, group1);
-    if (text.find("やし") != std::string::npos || text.find("やす") != std::string::npos || text.find("やせ") != std::string::npos) {
+    if (text::Contains(text, "ときゃ")) text = ReplaceAll(text, FusedTokiwa, group1);
+    if (text::Contains(text, "こないに")) text = ReplaceAll(text, NegativeNiKonai, group1);
+    if (text::Contains(text, "じゃあ")) text = ReplaceAll(text, DrawnJaNegative, group1);
+    if (text::Contains(text, "うん")) text = ReplaceAll(text, ContractedShimauN, group1);
+    if (text::Contains(text, "くんね")) text = ReplaceAll(text, RequestKunne, group1);
+    if (text::Contains(text, "やし") || text::Contains(text, "やす") || text::Contains(text, "やせ")) {
         text = ReplaceAll(text, RoughPoliteYasu, group1);
     }
-    if (text.find("よ") != std::string::npos) {
+    if (text::Contains(text, "よ")) {
         text = ReplaceAll(text, WesternYoru, [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); });
     }
-    if (text.find("わな") != std::string::npos) text = ReplaceAll(text, ContractedShimawaNai, group1);
-    if (text.find("くね") != std::string::npos) text = ReplaceAll(text, AdjectiveKune, group1);
-    if (text.find("でけ") != std::string::npos) text = ReplaceAll(text, KansaiDekiru, group1);
-    if (text.find("てま") != std::string::npos || text.find("でま") != std::string::npos) text = ReplaceAll(text, KansaiMau, group1);
-    if (text.find("すん") != std::string::npos) text = ReplaceAll(text, KansaiSuru, group1);
-    if (text.find("んや") != std::string::npos) {
+    if (text::Contains(text, "わな")) text = ReplaceAll(text, ContractedShimawaNai, group1);
+    if (text::Contains(text, "くね")) text = ReplaceAll(text, AdjectiveKune, group1);
+    if (text::Contains(text, "でけ")) text = ReplaceAll(text, KansaiDekiru, group1);
+    if (text::Contains(text, "てま") || text::Contains(text, "でま")) text = ReplaceAll(text, KansaiMau, group1);
+    if (text::Contains(text, "すん")) text = ReplaceAll(text, KansaiSuru, group1);
+    if (text::Contains(text, "んや")) {
         text = ReplaceAll(text, NegativeBeforeYa, [](const Match& m) { return Cat({m.group[2], m.group[1]}); });
     }
-    if (text.find("ん") != std::string::npos) text = ReplaceAll(text, NegativeBeforeNoun, group1);
-    if (text.find("や") != std::string::npos) text = ReplaceAll(text, YaCopula, group1);
-    if (text.find("じゃ") != std::string::npos) text = ReplaceAll(text, JaCopula, group1);
-    if (text.find("け") != std::string::npos || text.find("さかい") != std::string::npos) {
+    if (text::Contains(text, "ん")) text = ReplaceAll(text, NegativeBeforeNoun, group1);
+    if (text::Contains(text, "や")) text = ReplaceAll(text, YaCopula, group1);
+    if (text::Contains(text, "じゃ")) text = ReplaceAll(text, JaCopula, group1);
+    if (text::Contains(text, "け") || text::Contains(text, "さかい")) {
         text = ReplaceAll(text, CauseParticle, group1);
     }
-    if (text.find("ずら") != std::string::npos || text.find("だべ") != std::string::npos || text.find("ばい") != std::string::npos) {
+    if (text::Contains(text, "ずら") || text::Contains(text, "だべ") || text::Contains(text, "ばい")) {
         text = ReplaceAll(text, EndConjecture, group1);
     }
-    if (text.find("たれ") != std::string::npos) text = ReplaceAll(text, KansaiTare, group1);
-    if (text.find("う") != std::string::npos) {
+    if (text::Contains(text, "たれ")) text = ReplaceAll(text, KansaiTare, group1);
+    if (text::Contains(text, "う")) {
         text = ReplaceAll(text, OnbinVerb, group1);
         text = ReplaceAll(text, OnbinAdjective, group1);
     }
-    if (text.find("やろ") != std::string::npos) text = ReplaceAll(text, ContractedTeiruYaro, group1);
-    if (text.find("られ") != std::string::npos) text = ReplaceAll(text, ToruPotentialNegative, group1);
-    if (text.find("なか") != std::string::npos) text = ReplaceAll(text, KyushuNaka, group1);
-    if (text.find("おらす") != std::string::npos) text = ReplaceAll(text, KyushuOrasu, group1);
-    if (text.find("か") != std::string::npos) text = ReplaceAll(text, KyushuAdjective, group1);
-    if (text.find("ちょ") != std::string::npos) {
+    if (text::Contains(text, "やろ")) text = ReplaceAll(text, ContractedTeiruYaro, group1);
+    if (text::Contains(text, "られ")) text = ReplaceAll(text, ToruPotentialNegative, group1);
+    if (text::Contains(text, "なか")) text = ReplaceAll(text, KyushuNaka, group1);
+    if (text::Contains(text, "おらす")) text = ReplaceAll(text, KyushuOrasu, group1);
+    if (text::Contains(text, "か")) text = ReplaceAll(text, KyushuAdjective, group1);
+    if (text::Contains(text, "ちょ")) {
         text = ReplaceAll(text, WesternChoru, [](const Match& m) {
             std::string plain(m.group[1]);
             if (m.group[3] == "で") plain.replace(0, std::string_view("て").size(), "で");
             return plain;
         });
     }
-    if (text.find("んかい") != std::string::npos) {
+    if (text::Contains(text, "んかい")) {
         // The match starts at the stem's last kana: an imperative in ろ keeps it (食べ ろ), the others replace it.
         text = ReplaceAll(text, OrderNkai, [](const Match& m) {
             const std::string_view first = m.group[0].substr(0, text::DecodeRune(m.group[0]).size);
@@ -3286,47 +3286,47 @@ std::string DialectForms(std::string_view in, const RunLookup& runs) {
             return std::string(m.group[1]);
         });
     }
-    if (text.find("せえ") != std::string::npos || text.find("せろ") != std::string::npos || text.find("い") != std::string::npos) {
+    if (text::Contains(text, "せえ") || text::Contains(text, "せろ") || text::Contains(text, "い")) {
         text = ReplaceAll(text, RoughImperative, group1);
     }
-    if (text.find("や") != std::string::npos) {
+    if (text::Contains(text, "や")) {
         text = ReplaceAll(text, RequestYa, [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); });
     }
-    if (text.find("で") != std::string::npos) text = ReplaceAll(text, FinalDe, group1);
-    if (text.find("りはし") != std::string::npos || text.find("りはせ") != std::string::npos || text.find("りゃし") != std::string::npos ||
-        text.find("りゃせ") != std::string::npos) {
+    if (text::Contains(text, "で")) text = ReplaceAll(text, FinalDe, group1);
+    if (text::Contains(text, "りはし") || text::Contains(text, "りはせ") || text::Contains(text, "りゃし") ||
+        text::Contains(text, "りゃせ")) {
         text = ReplaceAll(text, TeOruNegative, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     }
-    if (text.find("ね") != std::string::npos) {
+    if (text::Contains(text, "ね")) {
         text = ReplaceAll(text, KansaiNen, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     }
-    if (text.find("す") != std::string::npos) text = ReplaceAll(text, OldPolite, group1);
-    if (text.find("也") != std::string::npos) text = ReplaceAll(text, ArchaicNari, group1);
-    if (text.find("のよさ") != std::string::npos || text.find("したぞ") != std::string::npos || text.find("すぞ") != std::string::npos ||
-        text.find("すです") != std::string::npos || text.find("んです") != std::string::npos || text.find("たです") != std::string::npos ||
-        text.find("のです") != std::string::npos || text.find("でしゅ") != std::string::npos ||
-        text.find("でつ") != std::string::npos || text.find("まちゅ") != std::string::npos || text.find("ましゅ") != std::string::npos) {
+    if (text::Contains(text, "す")) text = ReplaceAll(text, OldPolite, group1);
+    if (text::Contains(text, "也")) text = ReplaceAll(text, ArchaicNari, group1);
+    if (text::Contains(text, "のよさ") || text::Contains(text, "したぞ") || text::Contains(text, "すぞ") ||
+        text::Contains(text, "すです") || text::Contains(text, "んです") || text::Contains(text, "たです") ||
+        text::Contains(text, "のです") || text::Contains(text, "でしゅ") ||
+        text::Contains(text, "でつ") || text::Contains(text, "まちゅ") || text::Contains(text, "ましゅ")) {
         text = ReplaceAll(text, CharacterTic, group1);
     }
-    if (text.find("んよ") != std::string::npos || text.find("んね") != std::string::npos) text = ReplaceAll(text, WesternNoEnd, group1);
-    if (text.find("ちゅう") != std::string::npos) text = ReplaceAll(text, QuoteChuu, group1);
-    if (text.find("こっ") != std::string::npos) text = ReplaceAll(text, ShortKoto, group1);
+    if (text::Contains(text, "んよ") || text::Contains(text, "んね")) text = ReplaceAll(text, WesternNoEnd, group1);
+    if (text::Contains(text, "ちゅう")) text = ReplaceAll(text, QuoteChuu, group1);
+    if (text::Contains(text, "こっ")) text = ReplaceAll(text, ShortKoto, group1);
     text = ReplaceAll(text, SenbaPolite, group1);
     text = ReplaceAll(text, NominalEnd, group1);
     text = ReplaceAll(text, RegionalWord, group1);
-    if (text.find("ええ") != std::string::npos) text = ReplaceAll(text, GoodBeforeNoda, group1);
-    if (text.find("おくれでない") != std::string::npos) text = ReplaceAll(text, SayingForbidden, group1);
-    if (text.find("る") != std::string::npos || text.find("た") != std::string::npos) text = ReplaceAll(text, ContractedTeiru, group1);
-    if (text.find("おくれ") != std::string::npos) text = ReplaceAll(text, OldRequest, group1);
-    if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredState, group1);
-    if (text.find("おいで") != std::string::npos || text.find("お出で") != std::string::npos) text = ReplaceAll(text, HonouredComing, group1);
-    if (text.find("らし") != std::string::npos) text = ReplaceAll(text, HonouredStay, group1);
-    if (text.find("まい") != std::string::npos || text.find("参") != std::string::npos) text = ReplaceAll(text, HumbleCome, group1);
-    if (text.find("いかれ") != std::string::npos) text = ReplaceAll(text, HonouredGoing, group1);
-    if (text.find("もらえ") != std::string::npos) text = ReplaceAll(text, UngivenFavour, group1);
-    if (text.find("お") != std::string::npos) text = ReplaceAll(text, HonouredStemCopula, [](const Match& m) { return Cat({"お", m.group[1], m.group[2]}); });
-    if (text.find("さいまし") != std::string::npos) text = ReplaceAll(text, OldRequestMashi, group1);
-    if (text.find("お") != std::string::npos && (text.find("ください") != std::string::npos || text.find("下さい") != std::string::npos)) {
+    if (text::Contains(text, "ええ")) text = ReplaceAll(text, GoodBeforeNoda, group1);
+    if (text::Contains(text, "おくれでない")) text = ReplaceAll(text, SayingForbidden, group1);
+    if (text::Contains(text, "る") || text::Contains(text, "た")) text = ReplaceAll(text, ContractedTeiru, group1);
+    if (text::Contains(text, "おくれ")) text = ReplaceAll(text, OldRequest, group1);
+    if (text::Contains(text, "おいで") || text::Contains(text, "お出で")) text = ReplaceAll(text, HonouredState, group1);
+    if (text::Contains(text, "おいで") || text::Contains(text, "お出で")) text = ReplaceAll(text, HonouredComing, group1);
+    if (text::Contains(text, "らし")) text = ReplaceAll(text, HonouredStay, group1);
+    if (text::Contains(text, "まい") || text::Contains(text, "参")) text = ReplaceAll(text, HumbleCome, group1);
+    if (text::Contains(text, "いかれ")) text = ReplaceAll(text, HonouredGoing, group1);
+    if (text::Contains(text, "もらえ")) text = ReplaceAll(text, UngivenFavour, group1);
+    if (text::Contains(text, "お")) text = ReplaceAll(text, HonouredStemCopula, [](const Match& m) { return Cat({"お", m.group[1], m.group[2]}); });
+    if (text::Contains(text, "さいまし")) text = ReplaceAll(text, OldRequestMashi, group1);
+    if (text::Contains(text, "お") && (text::Contains(text, "ください") || text::Contains(text, "下さい"))) {
         text = ReplaceAll(text, HonouredStemRequest, [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); });
     }
     gRuns = nullptr;

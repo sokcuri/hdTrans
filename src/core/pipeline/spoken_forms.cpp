@@ -9,6 +9,7 @@
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
 #include "core/pipeline/spoken_forms_gen.h"
+#include "core/text/utf8.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -368,11 +369,11 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
         const size_t at = sentence.rfind(mark);
         if (at != std::string_view::npos) sentence = sentence.substr(at + mark.size());
     }
-    const auto inSentence = [&](std::string_view w) { return sentence.find(w) != std::string_view::npos; };
+    const auto inSentence = [&](std::string_view w) { return text::Find(sentence, w) != std::string_view::npos; };
     // the speaker as topic or subject tells what the speaker does not do (俺は逃げるんじゃない。 나는 도망치는 게 아니다)
     for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("pronoun.first-person"))) {
         for (const std::string_view mark : {"は", "が"}) {
-            const std::size_t at = sentence.find(w);
+            const std::size_t at = text::Find(sentence, w);
             if (at != std::string_view::npos && sentence.substr(at + w.size()).starts_with(mark)) return false;
         }
     }
@@ -1034,7 +1035,7 @@ bool InterrogativeBefore(std::string_view head) {
     }
     const std::string_view sentence = head.substr(start);
     for (const std::string_view w : {"何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "どう", "なぜ"}) {
-        if (sentence.find(w) != std::string_view::npos) return true;
+        if (text::Find(sentence, w) != std::string_view::npos) return true;
     }
     return false;
 }
@@ -1834,7 +1835,7 @@ bool ContainsAny(std::string_view s, std::u32string_view set) {
     return false;
 }
 
-bool Contains(std::string_view s, std::string_view part) { return s.find(part) != std::string_view::npos; }
+bool Contains(std::string_view s, std::string_view part) { return text::Find(s, part) != std::string_view::npos; }
 
 // かしら(?:ね[ぇえー～]*|ん) before a character other than hiragana or the end: the ね or ん
 // after the sentence-final かしら adds nothing (どうしてかしらね, あるかしらん).
