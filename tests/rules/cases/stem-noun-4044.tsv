@@ -7,8 +7,8 @@ cx:stem-noun:10	芹沢さんの態度には、照れや冗談の入る余地な�
 cx:stem-noun:10	「慶ちゃん、待ち受けの写真、わたしにしてくれたんだ」	lacks:기다리고의	fix	rewrites
 cx:stem-noun:10	ステージの進行を妨げないよう、なるべく最小限で声かけをしていく。	has:말을 걸기를	fix	rewrites
 cx:stem-noun:10	父ちゃんの残してくれた本や 書きつけが いっぱいあって―	lacks:두고가	fix	rewrites
-cx:stem-noun:10	羅漢様方は山神様のお側仕えをされると共に	has:섬기기를	fix	rewrites
-cx:stem-noun:10	我は時を経ずして正気を失い、穢れを撒き散らす祟り神となろう。	has:더럽혀지기를	fix	rewrites
+lookup:stem-noun-over-verb	羅漢様方は山神様のお側仕えをされると共に	has:곁섬김을	fix	lookup
+lookup:stem-noun-over-verb	我は時を経ずして正気を失い、穢れを撒き散らす祟り神となろう。	has:오염을 뿌리는	fix	lookup
 cx:stem-noun:10	文字化けの謎	lacks:변하고의	fix	rewrites
 cx:stem-noun:10	「ふーん……出来がいいから、俺の分はないと……」	lacks:있고가	fix	rewrites
 cx:stem-noun:10	まずしっかりした地固めをするのが先決と考えるのも、自然な選択に思えます。	has:굳히기를	fix	rewrites

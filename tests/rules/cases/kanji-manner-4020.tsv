@@ -22,5 +22,5 @@ cx:kanji-manner:30	そんな感じで料理も続々到着し、話も酒も進�
 cx:kanji-manner:40	いい感じに焼けた。	has:좋은 느낌으로	fix	rewrites
 cx:kanji-manner:40	自然な感じに仕上げる	has:자연스러운 느낌으로	fix	rewrites
 cx:kanji-manner:40	いい感じの店だ。	!rule:cx:kanji-manner:40	keep	rewrites
-cx:kanji-manner:50	雪のような感じに見える。	눈 같은 느낌으로 보인다.	fix	rewrites
+cx:kanji-manner:50	雪のような感じに見える。	has:같은 느낌으로 보인다	fix	rewrites
 cx:kanji-manner:50	夢のような感じがする。	!rule:cx:kanji-manner:50	keep	rewrites

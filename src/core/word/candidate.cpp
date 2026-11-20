@@ -3817,6 +3817,236 @@ Record* Worker::KanaNounOverOneKanaStem(std::string_view full, int cursor, int t
     return records;
 }
 
+// The reading at full[p:] that runs farthest, from the records the lookup finds there: its end with its ending (p for
+// none) and its item, and the farthest end of a dictionary key there (a verb's stem, no ending: the て of 照る in
+// てるのも). A probe for the te and stem rules below, run only where they apply.
+Worker::Reach Worker::ReadingReach(std::string_view full, int p, int token) {
+    Reach out{p, p, nullptr};
+    if (p < 0 || static_cast<std::size_t>(p) >= full.size()) return out;
+    const Lookup l = DoLookup(From(full, p), kModeGeneral);
+    Record* rec = l.count == 0 ? nullptr : l.records;
+    for (int tries = 0; rec != nullptr && tries < 64; tries++) {
+        while (rec != nullptr && rec->source.empty()) rec = rec->child;
+        if (rec == nullptr) break;
+        Item* it = InsertLateCandidate(full, p, token, rec);
+        if (it == nullptr || it->group == nullptr) break;
+        if (p + it->length > out.end) {
+            out.end = p + it->length;
+            out.item = it;
+        }
+        out.key = std::max(out.key, p + static_cast<int>(it->group->surface.size()));
+        rec = it->group->records;
+    }
+    return out;
+}
+
+// LEX-8021: a noun row that spells the continuative of an ichidan verb or a す verb loses to that verb before its て
+// form (くらしてる 살고 있다, not くらし 생활 + 照る; われてる 깨져 있다, not われ 나; 言い過ぎてしまった 너무 말해 버렸다), and an
+// adverb row with a kanji that spells such a verb's て form loses to it before いる (強いている 강요하고 있다, 改めている;
+// but 強いて言えば 굳이 말하자면). A kana adverb stays: its kana spell several verbs (さして 差す, 指す, 刺す).
+// Decided on the verb read there, its ending as the conjugation matches it, and the word after it:
+// - the verb's ending runs past the key (くらしてる, 強いておる, 強いてんの, 強いてやがる; after an adverb only with an
+//   auxiliary or a contracted いる): it must end a word, so no
+//   dictionary key at the end of the key runs past it (改めて + たずねた, それ + てっきり stay; the stem of 照る in
+//   われてるのも does not), unless that ending is a て with an auxiliary after it (aux.te-start: くらして + いる, not
+//   the key てい);
+// - the ending is the て of the adverb alone: the word after it, read whole (not 改めて + いたずら), is an auxiliary
+//   of state, an ichidan or る verb of verb.te-state-aux (強いている, 強いておる; not the いう of 強いていえば), or the
+//   ない of a contracted いない (adjective.te-state-aux: 強いてない) unless the adverb needs a negative
+//   (adverb.negative-polarity: 断じてない 결코 없다).
+// The key is two kana or more, or has a kanji. Where a verb record is first already, the order stands. A key that a
+// name spells (code 13x or the name layer) never gives way; a plain-dictionary record does, as no reading of it fits
+// before the て either.
+Record* Worker::VerbOverNounBeforeTe(Record* records, std::string_view full, int cursor, int token) {
+    const std::string_view text = From(full, cursor);
+    const auto verbKind = [](const Record& r) {
+        return r.user == nullptr && r.partCode.size() == 4 && At(r.partCode, 0) == 'M' && At(r.partCode, 1) == '4' ? r.partCode[3] : '\0';
+    };
+    // A verb in front already reads the form.
+    if (records == nullptr || verbKind(*records) != '\0') return records;
+    // The record of the longest key, no verb; a longer record of any kind (遅れて of 遅れてくる 늦게 오다) stands.
+    const Record* word = nullptr;
+    std::size_t longest = 0;
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        longest = std::max(longest, r->source.size());
+        if (verbKind(*r) == '\0' && (word == nullptr || r->source.size() > word->source.size())) word = r;
+    }
+    if (word == nullptr || word->source.size() < longest || !text.starts_with(word->source)) return records;
+    const std::string_view key = word->source;
+    if (!HasKanji(key) && (text::RuneCount(key) < 2 || !AllHiragana(key))) return records;
+    // A name of that key (code 13x or the name layer) keeps it.
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source == key && ((r->user != nullptr && r->user->nameLayer) || (NounRow(*r) && At(r->partCode, 2) == '3'))) {
+            return records;
+        }
+    }
+    const std::string_view te = "て";
+    const bool noun = NounRow(*word);
+    // stem: the continuative the verb must spell.
+    std::string_view stem;
+    if (noun) {
+        if (!text.substr(key.size()).starts_with(te)) return records;
+        stem = key;
+    } else if (At(word->partCode, 0) == 'E' && HasKanji(key) && key.ends_with(te) && key.size() > te.size()) {
+        stem = key.substr(0, key.size() - te.size());
+    } else {
+        return records;
+    }
+    // The verb: an ichidan verb whose stem is the continuative, or a す verb whose stem and し are.
+    const auto spells = [&](const Record& r) {
+        const char kind = verbKind(r);
+        if (kind == '7') return r.source == stem;
+        return kind == '3' && stem.size() > r.source.size() && stem.starts_with(r.source) && stem.substr(r.source.size()) == "し";
+    };
+    Record* verb = records;
+    while (verb != nullptr && !spells(*verb)) verb = verb->child;
+    if (verb == nullptr) return records;
+    // The verb as the conjugation reads it there, and where its ending ends.
+    const Item* read = InsertLateCandidate(full, cursor, token, verb);
+    if (read == nullptr || read->detail->cls != kDetailVerb || read->group->surface != verb->source) return records;
+    const int k = cursor + static_cast<int>(key.size());
+    const int e = cursor + read->length;
+    if (e > k) {
+        if (noun && e < k + static_cast<int>(te.size())) return records;
+        // After an adverb's て the ending goes on with an auxiliary (aux.te-start: おる, やがる), a contracted いる
+        // (contraction.te-iru: る, た) or its ん (follower.contracted-iru: てんの), not with any other word (果たして +
+        // まいりました stays as the reading before it decides).
+        if (!noun) {
+            const std::string_view on = From(full, k);
+            const std::string_view n = "ん";
+            if (dict::StartsWithMember(HDTRANS_CLASS("aux.te-start"), on) == 0 &&
+                dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iru"), on) == 0 &&
+                !(on.starts_with(n) && dict::StartsWithMember(HDTRANS_CLASS("follower.contracted-iru"), on.substr(n.size())) > 0)) {
+                return records;
+            }
+        }
+        // An auxiliary after the て that ends the verb's ending makes the cut there (くらして + いる, not て + い).
+        const bool aux = full.substr(0, static_cast<std::size_t>(e)).ends_with(te) &&
+                         dict::StartsWithMember(HDTRANS_CLASS("aux.te-start"), From(full, e)) > 0;
+        if (!aux && ReadingReach(full, k, token).key > e) return records;
+    } else {
+        if (noun) return records;
+        const Reach after = ReadingReach(full, k, token);
+        const Item* aux = after.item;
+        if (aux == nullptr || aux->detail == nullptr) return records;
+        // An auxiliary of state is an ichidan or る verb (いる, 居る, おる, ある), not the いう that shares its stem.
+        // The ない after an adverb that needs a negative is its own (断じてない 결코 없다).
+        if (aux->detail->cls == kDetailKeiyo && dict::InClass(HDTRANS_CLASS("adverb.negative-polarity"), key)) return records;
+        const bool state = (aux->detail->cls == kDetailVerb && std::string_view("78").find(At(aux->Code(0), 2)) != std::string_view::npos &&
+                            dict::InClass(HDTRANS_CLASS("verb.te-state-aux"), aux->group->surface)) ||
+                           (aux->detail->cls == kDetailKeiyo && dict::InClass(HDTRANS_CLASS("adjective.te-state-aux"), aux->group->surface));
+        if (!state) return records;
+    }
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (spells(*r)) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    return verbs;
+}
+
+// LEX-8020: the noun records of records move ahead of an ichidan verb with a kanji whose stem they spell, before a
+// case particle after which the verb would be its continuative made a noun: before を, の, が, で, から, より or まで, and
+// before a に that ends the clause, starts a longer word (によっては, に対して, に変わる) or comes before a noun and its
+// する (調べに協力する), as stem-noun reads them, but not
+// before a suffix of the continuative that starts like a particle (follower.continuative-suffix: 答えがたい, 答えにくい)
+// (悔いのない 후회가 없는, 見覚えのない 본 기억이 없는, 床の染みが 얼룩이, 答えによっては 대답에 따라서는). With no noun row the
+// verb stays and stem-noun reads it -기 (用具入れから 용구 넣기에서). A name row or a longer record that the text spells
+// keeps the order, as does a first noun row of a place (外れ 변두리, not the act), a stem after a verb's continuative,
+// the second verb of a compound, or a stem after the お or ご of an honorific form (prefix.humble: お務めになった,
+// お助けできる). Plain-dictionary records stay in front.
+Record* Worker::NounOverStemBeforeParticle(Record* records, std::string_view full, int cursor, int token, const Item* parent) {
+    const std::string_view text = From(full, cursor);
+    // After a verb's continuative the stem is the second verb of a compound (歩き始めの 걷기 시작의).
+    const Detail* d = parent == nullptr ? nullptr : parent->detail;
+    if (d != nullptr && d->cls == kDetailVerb && (d->kind == 8 || d->kind == 10) && (d->group == nullptr || d->group->length == 0)) return records;
+    // After お or ご the stem is the verb of an honorific form (お務めになる, お助けできる, お求めですか).
+    const std::string_view before = full.substr(0, static_cast<std::size_t>(cursor));
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("prefix.humble"))) {
+        if (before.ends_with(m)) return records;
+    }
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || first->partCode.size() != 4 || At(first->partCode, 0) != 'M' || At(first->partCode, 1) != '4' ||
+        At(first->partCode, 3) != '7' || !HasKanji(first->source) || !text.starts_with(first->source)) {
+        return records;
+    }
+    const std::string_view key = first->source;
+    const auto nounOf = [&](const Record& r) { return NounRow(r) && At(r.partCode, 2) != '3' && r.source == key; };
+    bool found = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > key.size() && text.starts_with(r->source)) return records;
+        if (NounRow(*r) && At(r->partCode, 2) == '3' && r->source == key) return records;
+        // A first noun row of a place (semantic VPl: 外れ 변두리) names where, not the act: the verb stays.
+        if (!found && nounOf(*r) && Has(r->semantic, "VPl")) return records;
+        found = found || nounOf(*r);
+    }
+    if (!found) return records;
+    const std::string_view after = text.substr(key.size());
+    if (dict::StartsWithMember(HDTRANS_CLASS("follower.continuative-suffix"), after) > 0) return records;
+    bool particle = false;
+    for (const std::string_view p : {"を", "の", "が", "で", "から", "より", "まで"}) particle = particle || after.starts_with(p);
+    const std::string_view ni = "に";
+    if (!particle && after.starts_with(ni)) {
+        const std::string_view rest = after.substr(ni.size());
+        const int cls = rest.empty() ? kClassOther : NameClassOf(FirstChar(rest));
+        if (cls != kClassHiragana && cls != kClassKatakana && cls != kClassKanji) {
+            particle = true;
+        } else {
+            const int k = cursor + static_cast<int>(key.size());
+            const int m = k + static_cast<int>(ni.size());
+            const auto bare = [](const Reach& r) {
+                return r.item != nullptr && r.item->detail != nullptr && r.item->detail->cls != kDetailVerb && r.item->detail->cls != kDetailKeiyo;
+            };
+            const Reach r = ReadingReach(full, k, token);
+            particle = r.item != nullptr && r.end > m;
+            // A bare に before a noun and its する (制裁逃れに対応する).
+            if (!particle && r.end <= m) {
+                const Reach n = ReadingReach(full, m, token);
+                const std::string_view then = From(full, n.end);
+                particle = bare(n) && n.end > m && (then.starts_with("す") || then.starts_with("し") || then.starts_with("さ"));
+            }
+        }
+    }
+    if (!particle) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (nounOf(*r)) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
 // LEX-4984: at the end of the retry budget, where a word starts at cursor (no reading from before it runs past it) and
 // the reading that failed is no verb, the longest reading among the records left at cursor after c's group that is
 // longer than c and ends at the end of the token or where a word of two or more characters, or one that starts with
@@ -3874,6 +4104,8 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (settings.text) records = VerbBeforeTeForm(records, From(full, cursor));
+    if (settings.text) records = VerbOverNounBeforeTe(records, full, cursor, token);
+    if (settings.text) records = NounOverStemBeforeParticle(records, full, cursor, token, parent);
     if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (settings.text) {
