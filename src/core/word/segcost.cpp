@@ -881,9 +881,12 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
                 if (c.source.empty() || c.codes == nullptr || !rest.starts_with(c.source)) continue;
                 const std::string_view part = c.codes->partText;
                 const std::string_view src = c.source;
-                if (part.size() != 4 || part[1] == '4' || part[1] == '5') continue;
-                if (part[1] == '7') {  // an adjective: its end is its ending's, so only that one starts here counts
-                    at->second.push_back({p, '7'});
+                if (part.size() != 4 || part[1] == '5') continue;
+                if (part[1] == '4' || part[1] == '7') {
+                    // A verb or an adjective: its end is its ending's, so a row of kind 7 counts only where it starts; one of
+                    // kind v (a verb) or a (an adjective) keeps the end of its key, where its ending starts (LEX-7920).
+                    if (part[1] == '7') at->second.push_back({p, '7'});
+                    at->second.push_back({p + static_cast<int>(src.size()), part[1] == '7' ? 'a' : 'v'});
                     continue;
                 }
                 const bool kana = AllHiragana(src);
@@ -912,14 +915,40 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
         }
         return false;
     };
-    // W right at the cursor does not follow a verb or an adjective (below).
+    // Whether the text before at ends in a form of a verb (cls v) or an adjective (cls a) that can stand before a noun
+    // (LEX-7920): a kana noun after it is a word of its own (ある|いみ, いい|しなやか), not after a stem or a て form.
+    // A form of two hiragana is also the stem of a verb (いい of 言い|たい), so it is no such form.
+    auto attributive = [&](int at, char cls, int from) {
+        const std::string_view form = full.substr(static_cast<std::size_t>(from), static_cast<std::size_t>(at - from));
+        if (AllHiragana(form) && Chars(form) <= 2) return false;
+        return at > 0 && dict::EndsWithMember(cls == 'a' ? HDTRANS_CLASS("ending.attributive-adjective") : HDTRANS_CLASS("ending.attributive"),
+                                              full.substr(0, static_cast<std::size_t>(at))) > 0;
+    };
+    // A noun W, as for maybe below, after the ending of the verb or adjective row r: one to three kana after its key.
+    auto nounAfterForm = [&](const SegWindow::Row& r) {
+        int q = r.end;
+        for (int n = 0; n < 3 && q < end; n++) {
+            q += CharLen(full, q);
+            if (q >= end || !attributive(q, r.kind, cursor)) continue;
+            for (const SegWindow::Row& x : rowsAt(q)) {
+                if (x.kanaNoun && fitsAt(x.end)) return true;
+            }
+        }
+        return false;
+    };
+    // W right at the cursor does not follow a verb or an adjective (below), unless in a form that stands before a noun.
     const bool afterVerb = parent != nullptr && cursor > 0 && parent->start + parent->length == cursor && parent->detail != nullptr &&
-                           (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo);
+                           (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo) &&
+                           !attributive(cursor, parent->detail->cls == kDetailKeiyo ? 'a' : 'v', parent->start);
     // A boundary row or such a noun is there before the pick is read.
     bool maybe = false;
     for (const SegWindow::Row& r : rowsAt(cursor)) {
         if (maybe) break;
         if (r.kind == '7') continue;
+        if (r.kind == 'v' || r.kind == 'a') {
+            maybe = nounAfterForm(r);
+            continue;
+        }
         maybe = r.kind == '3' || (r.kanaNoun && !afterVerb && fitsAt(r.end));
         if (!maybe && r.end < end) {
             for (const SegWindow::Row& n : rowsAt(r.end)) maybe = maybe || (n.kanaNoun && fitsAt(n.end));
@@ -937,7 +966,12 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     bool open = false;
     for (const SegWindow::Row& r : rowsAt(cursor)) {
         if (open) break;
-        if (r.kind == '7' || r.end == e0) continue;
+        if (r.kind == '7') continue;
+        if (r.kind == 'v' || r.kind == 'a') {
+            open = nounAfterForm(r);
+            continue;
+        }
+        if (r.end == e0) continue;
         if (pickBoundary && r.end < e0 && !r.pword && Chars(full.substr(static_cast<std::size_t>(cursor), static_cast<std::size_t>(r.end - cursor))) >= 2) {
             const char32_t h = RuneAt(full, r.end);
             open = text::IsKanji(h) || h == U'々';
@@ -1099,7 +1133,14 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
                     // that reads as one (から|だ, から|かぶさる with から as an adjective stem; not かい|じゅう).
                     bool particle = r->particle;
                     for (const SegEdge& x : edgesAt(r->from)) particle = particle || (r->stem && x.particle && x.end == r->end);
-                    if (particle) return false;
+                    // Not where the search breaks W into three pieces or more, the last running on past W: the particle
+                    // is then a piece of W (とも|だ|ちと for ともだち|と; but から|だ, から|ちゃんと: LEX-7920).
+                    bool inner = false, closes = false;
+                    for (const SegEdge* x : rp) {
+                        inner = inner || (x->from == r->end && x->end < e.end);
+                        closes = closes || x->end == e.end;
+                    }
+                    if (particle && (closes || !inner)) return false;
                 }
             }
             // W is an adjective with its ending and a noun of two or more kana (いい|こと for いいこと): a phrase.
@@ -1123,14 +1164,15 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     const SegEdge& W = *cutW;
     // W does not follow a verb or an adjective: kana after a conjugated word is mostly its ending or an auxiliary
     // (聞きたい|こと, not たいこ; 続かない|よう, not いよう).
+    // In a form that stands before a noun, a verb or adjective is followed by a noun W (ある|いみ, いい|しなやか: LEX-7920).
     if (W.from == cursor) {
-        if (parent != nullptr && cursor > 0 && parent->start + parent->length == cursor && parent->detail != nullptr &&
-            (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo)) {
-            return records;
-        }
+        if (afterVerb) return records;
     } else if (wi >= 2) {
         const SegEdge& before = *lp[wi - 2];
-        if (before.part.size() == 4 && (before.part[1] == '4' || before.part[1] == '7')) return records;
+        if (before.part.size() == 4 && (before.part[1] == '4' || before.part[1] == '7') &&
+            (!before.conj || !attributive(before.end, before.part[1] == '7' ? 'a' : 'v', before.from))) {
+            return records;
+        }
     }
     auto particleAt = [&](const SegEdge& e) {
         return e.word && e.part.size() == 4 && e.part[1] == '2' &&

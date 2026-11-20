@@ -1,0 +1,22 @@
+rule	input	expected	kind	layer
+segmentation:lattice-kana	きのうともだちとあった。	has:어제 친구와	fix	lookup
+segmentation:lattice-kana	きのうともだちと遊んだ。	has:친구와 놀았다	fix	lookup
+segmentation:lattice-kana	わたしはきのうともだちといっしょにいった	has:친구와 함께	fix	lookup
+segmentation:lattice-kana	一日2000個も売れるたいやきの名店	has:팔리는 타이야키의	fix	lookup
+segmentation:lattice-kana	めんたいこが好き。	has:명란을	fix	lookup
+segmentation:lattice-kana	めんたいこのおにぎり	has:명란의	fix	lookup
+segmentation:lattice-kana	濃厚なめんたいこに負けない味	has:명란에 지지 않는	fix	lookup
+segmentation:lattice-kana	福岡名物のめんたいこを使ったパンです。	has:명란을	fix	lookup
+segmentation:lattice-kana	物置からちゃんと鉈、持ってきた	has:창고에서 제대로	keep	lookup
+segmentation:lattice-kana	からだが痛い。	has:몸이 아프다	keep	lookup
+segmentation:lattice-kana	ここからだ。	lacks:몸	keep	lookup
+segmentation:lattice-kana	聞きたいことがある。	has:싶은 것이	keep	lookup
+segmentation:lattice-kana	いったいこの人は	has:도대체 이 사람	keep	lookup
+segmentation:lattice-kana	見たいこの本	has:보고 싶은 이 책	keep	lookup
+segmentation:lattice-kana	したいことがある。	has:하고 싶은 것이	keep	lookup
+segmentation:lattice-kana	行ったらこの店に来て	has:이 가게	keep	lookup
+segmentation:lattice-kana	いいたいこともある。	lacks:북	keep	lookup
+segmentation:lattice-kana	大きいたいこを叩く。	has:큰 북을	keep	lookup
+segmentation:lattice-kana	あったかいおふとんで寝る。	has:따뜻한 이불	keep	lookup
+segmentation:lattice-kana	ともだちになろう。	has:친구	keep	lookup
+segmentation:lattice-kana	ぼくとかいじゅうと	has:괴수와	keep	lookup

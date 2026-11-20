@@ -125,6 +125,8 @@
 //= counter.added	Counters of things and actions that もう before a number adds one or more of (もう一匹 한 마리 더, もう１錠 1정 더); no counter of a time, an age, a floor or an order, after which もう is the time reached (もう三年 벌써 3년).
 //= counter.unit-abbrev	Short names of units that a kanji number before them numbers, read as digits (二水戦 2수전, 一航戦 1항전, 三一駆 31구, 四戦隊 4전대); kanji digits written on without 十 before one read by place value.
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
+//= ending.attributive	Last kana of a verb form that can stand before a noun it describes: the plain non-past (u row) and the past (た, だ). A kana noun after such a form is a word of its own (売れる|たいやき; spec LEX-7920), not after a stem or a て form (聞き|たいこ, あっ|たらこ). Not い, which also ends the stem of a verb in う (言い|たい).
+//= ending.attributive-adjective	Last kana of an adjective form that can stand before a noun it describes: い and the past かった (あおい|かいじゅう; spec LEX-7920), not the adverbial く.
 //= ending.final-quote	Ends of a predicate that close what was said or thought, after which a separate と quotes it (熱いんじゃないかなぁと想像して, 何があったんだと心配そうに, 見たいんだと): sentence particles, the explanatory んだ, たい, the past and a reason or condition said as a wish (から, ば); not だろう or ます, whose と is also a concession or a condition (だろうとなんだろうと, いただけますと).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
@@ -1758,6 +1760,19 @@ ending.conjunctive	から
 ending.conjunctive	ので
 ending.conjunctive	のに
 ending.conjunctive	ながら
+ending.attributive	う
+ending.attributive	く
+ending.attributive	ぐ
+ending.attributive	す
+ending.attributive	つ
+ending.attributive	ぬ
+ending.attributive	ぶ
+ending.attributive	む
+ending.attributive	る
+ending.attributive	た
+ending.attributive	だ
+ending.attributive-adjective	い
+ending.attributive-adjective	た
 ending.negative-start	な
 ending.negative-start	ね
 ending.negative-start	ませ
