@@ -27,6 +27,8 @@ struct WrapEdges {
     std::optional<WrapWord> first;
     std::optional<WrapWord> last;
     int words = 0;
+    int lastLength = 0;   // bytes of the source text the last word covers
+    int firstLength = 0;  // bytes of the source text the first word covers
     bool predicate = false;
     // The kana the line read alone left unread before its first word read (the る of るとか, the
     // げる of げるしかない); empty when the line starts with a word read.
@@ -69,17 +71,37 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
 // speaker, turn or voice mark, a speaker label) never go on.
 bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next, const WrapEdges& nextEdges);
 
-// Whether the break between line and next may fall inside a word: line ends in kana or kanji and
-// next starts with kana that it left unread (WrapEdges::unreadStart: 始め / るとか, 逃 / げるしかない),
-// with neither a blank line nor an item of its own (StartsItem) between them. The joined lines
-// decide whether one word is read across the break (CutStem, ReadWord).
-bool MayCutWord(std::string_view line, std::string_view next, const WrapEdges& nextEdges);
+// Where the break between two lines may fall inside a word (CutRun): the start of the next line
+// that the word read across the break must cover, and whether the break may fall in its stem.
+struct WrapCut {
+    std::string run;
+    bool stem = true;     // false: only in its ending (CutEnding)
+    bool common = false;  // a kanji after a kanji: a proper noun needs a kanji, katakana or の after the run
+                          // (大阪 / 府の, 横 / 浜市の; not 山 / 川が as 山川 야마카와)
+};
+
+// The cut between line and next; an empty run when the break may not fall inside a word. line ends in
+// kana or kanji, with neither a blank line nor an item of its own (StartsItem) between them, and
+//  - next starts with kana that line left unread (WrapEdges::unreadStart: 始め / るとか, 逃 / げるしかない);
+//  - or line ends in a kanji and next starts with a word of one kanji (技 / 術の), or line ends in a
+//    word of one kanji (楽 / しめる): the run is the first word of next, after a kanji that no digit
+//    stands before (not 29日 / 次の), and no word of wrap.kanji-word-start (先生 / 方がいい, 中 / 今、);
+//  - or both sides of the break are kana and line has more words than one: the run is the first kana
+//    of next, cut in an ending only (逮捕されま / した, not うん / で).
+// edges are those of line, nextEdges those of next. The joined lines decide whether one word is read
+// across the break (CutStem, CutEnding, ReadWord).
+WrapCut CutRun(std::string_view line, const WrapEdges& edges, std::string_view next, const WrapEdges& nextEdges);
 
 // Whether head, the part of a word read across a break that stands before it, and run, the unread
 // kana after the break, cut one word: head holds a kanji (始め / る, 逃 / げる), run starts with a
 // small kana or ン that starts no word (こ / りゃ), or both are katakana and a kana or kanji, after
 // stands after run (ラ / ノベって).
 bool CutStem(std::string_view head, std::string_view run, char32_t after);
+
+// Whether a break inside the ending of a word read across it cuts the word: run starts with a small
+// kana or ン (変わるでし / ょう), or line, of edges, read alone does not end in a conjugated word with an
+// ending (見られていま / す, not 思います / よう).
+bool CutEnding(std::string_view run, const WrapEdges& edges);
 
 // Whether item, read from the joined lines, is a word that the dictionary or a conjugation read.
 bool ReadWord(const output::ResolvedItem& item);

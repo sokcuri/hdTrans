@@ -1,0 +1,34 @@
+# 규칙: LAY-14, LAY-40
+rule	input	expected	kind	layer
+wrapped:cut-word	多くの人に見られていま\nす。	많은 사람에게 보이고 있습니다\n.	fix	driver
+wrapped:cut-word	天気は変わるでし\nょう。	날씨는 바뀌겠지요\n.	fix	driver
+wrapped:cut-word	男が逮捕されま\nした。	남자가 체포되었습니다\n.	fix	driver
+wrapped:cut-word	賞金女王に輝きまし\nた、	상금 여왕에게 빛났습니다\n,	fix	driver
+wrapped:cut-word	イベントはあすまで開かれま\nす。	이벤트는 내일까지 열립니다\n.	fix	driver
+wrapped:cut-word	ちょっとスピンが入ってま\nすね。	조금 스핀이 들어가네요\n.	fix	driver
+wrapped:cut-word	汚れを除去する技\n術の開発	더러움을 제거하는 기술의\n개발	fix	driver
+wrapped:cut-word	十分に注\n意を	충분히 주의\n를	fix	driver
+wrapped:cut-word	みんなで楽\nしめる	모두\n즐길 수 있다	fix	driver
+wrapped:cut-word	大会最終\n日です。	대회 마지막 날\n입니다.	fix	driver
+wrapped:cut-word	軍事攻撃を命じる可能\n性があると	군사 공격을 명할 가능성\n이 있으면	fix	driver
+wrapped:cut-word	レーダーも攻撃対\n象になった	레이더도 공격 대상\n이 되었다	fix	driver
+wrapped:cut-word	３０代の父\n親を	30대의 아버지\n를	fix	driver
+wrapped:cut-word	体調管\n理に努めましょう。	컨디션 관리에\n노력합시다.	fix	driver
+wrapped:cut-word	産業革\n命前と比べて目\n標が\n方針が盛り\n込まれていました。	산업혁명\n전과 비교해 목표\n가\n방침이\n포함되어 있었습니다.	fix	driver
+wrapped:cut-word	これで間違いないと思います\nよう　さっきは電話でどうも	이것으로 틀림없다고 생각합니다\n요우 조금 전은 전화로 아무래도	keep	driver
+wrapped:cut-word	いいですね\n行きます	좋네요\n갑니다	keep	driver
+wrapped:cut-word	待って\n何してるの	기다려\n뭐해	keep	driver
+wrapped:cut-word	面白かった\nはい	재미있었다\n네	keep	driver
+wrapped:cut-word	うん\nで 上がってきます	응\n그리고 올라옵니다	keep	driver
+wrapped:cut-word	今日\n本当に良かった	오늘\n정말 다행이다	keep	driver
+wrapped:cut-word	今月29日\n次の日曜日まで	이번달 29일\n다음 일요일까지	keep	driver
+wrapped:cut-word	レベルに至っている中\n今、海の中の	레벨에 이르고 있는 중\n지금, 바닷속의	keep	driver
+wrapped:cut-word	先生\n方がいい	선생님\n편이 좋다	keep	driver
+wrapped:cut-word	あの山\n川が流れる	그 산\n강이 흐른다	keep	driver
+wrapped:cut-word	毎日\n本を読む	매일\n책을 읽는다	keep	driver
+wrapped:cut-word	今\n日本では	지금\n일본에서는	keep	driver
+wrapped:cut-word	あのね、いま\nすごく眠い	저기요, 지금\n정말 졸리다	keep	driver
+wrapped:cut-word	机の上\n手を置いて	책상 위\n손을 두어	keep	driver
+wrapped:cut-word	木の下\n手を振る	나무 아래\n손을 흔든다	keep	driver
+wrapped:cut-word	山の上\n下を見る	산 위\n아래를 본다	keep	driver
+wrapped:cut-word	彼の手\n紙のように白い	그의 손\n종이처럼 희다	keep	driver

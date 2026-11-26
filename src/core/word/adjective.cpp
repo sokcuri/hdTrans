@@ -507,17 +507,30 @@ std::string_view Item::BareStemEnding(std::string_view after) const {
     }
     const text::Rune first = text::DecodeRune(surface);
     const bool oneKanji = first.size == surface.size() && text::IsKanji(first.cp);
-    // A stem in hiragana only, not よう, reads bare only after a particle a predicate follows (方がまし。,
-    // よりはまし」), not after a verb stem (下さいまし); one with kanji after a hiragana prefix (お好き) does not.
+    const int before = ContextBefore();
+    // A stem in hiragana only, not よう, reads bare only where its clause starts (すてき」, ホントに すてき) or
+    // after a particle a predicate follows (方がまし。, よりはまし」, 本当にすてき), not after a verb stem
+    // (下さいまし); one with kanji after a hiragana prefix (お好き) does not.
     if (Hiragana(first.cp)) {
         const std::string_view head = text.substr(0, static_cast<std::size_t>(start));
         bool kana = surface != kJaYou;
         for (std::string_view left = surface; kana && !left.empty(); left.remove_prefix(text::DecodeRune(left).size)) {
             kana = Hiragana(text::DecodeRune(left).cp);
         }
-        if (!kana || (!head.ends_with("が") && !head.ends_with("は") && !head.ends_with("も") && !head.ends_with("より"))) return {};
+        // A token of its own after Japanese text was set apart by a space (ホントに すてき).
+        const bool apart = start == 0 && tokenIndex > 0 && w->Tok(tokenIndex - 1).type == tokenizer::kTypeJapanese;
+        // Not before lengthening kana there: a clipped adjective (おもっ！) is no stem.
+        // Nor before a comma (いいかげん、), nor for a stem the text spells in katakana.
+        const bool written = Hiragana(text::DecodeRune(text.substr(static_cast<std::size_t>(start))).cp);
+        // A word after a pause (……アラタ……) is no clause start of its own.
+        const std::string_view prior = !head.empty() ? head : tokenIndex > 0 ? w->Tok(tokenIndex - 1).text : std::string_view();
+        const bool pause = prior.ends_with("…") || prior.ends_with("‥");
+        const bool opens = written && !pause && rest.size() == after.size() && !rest.starts_with("、") && !rest.starts_with("，") &&
+                           (before == 0 || apart || head.ends_with("に"));
+        if (!kana || (!opens && !head.ends_with("が") && !head.ends_with("は") && !head.ends_with("も") && !head.ends_with("より"))) {
+            return {};
+        }
     }
-    const int before = ContextBefore();
     if (oneKanji && start > 0 && text::IsKanji(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return {};
     bool question = false;
     if (!rest.empty()) {

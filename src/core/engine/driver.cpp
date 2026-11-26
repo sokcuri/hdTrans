@@ -1497,13 +1497,16 @@ void WatchEdgePass(void* context) {
     if (levels != nullptr && levels->pass) levels->pass(levels->context);
 }
 
-// Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
-// or a conjugation read (ReadWord) that starts before the break, holds the break in its stem or
-// conjugation, not in the ending after them (思います / よう), covers the unread kana after the break
-// and makes a stem with them (CutStem).
+// Watches two joined lines (CutRun) for a word read across their break: a word the dictionary or a
+// conjugation read (ReadWord) that starts before the break and covers the run after it, with the
+// break in its stem where it makes a stem with the run (CutStem), or in its ending where that cuts the
+// word (CutEnding), not after the ending (思います / よう).
 struct CutWatch {
-    std::string run;  // the unread kana after the break (WrapEdges::unreadStart)
+    std::string run;  // the start of the line after the break that the word covers (CutRun)
     char32_t after = 0;  // the character after run
+    bool inStem = true;     // a break inside a stem may cut the word (WrapCut::stem)
+    bool common = false;    // a proper noun needs a kanji, katakana or の after the run (WrapCut::common)
+    bool inEnding = false;  // a break inside an ending cuts the word (CutEnding)
     // The break markers of each chunk, with the text of the token each stands in.
     std::vector<std::vector<std::pair<tokenizer::ControlMarker, std::string>>> markers;
     std::vector<output::ResolvedItem> items;
@@ -1528,14 +1531,21 @@ void WatchCutWords(void* context, int chunk, int, const word::Chain& chain) {
     ResolvedItems(chain, watch->items);
     for (const output::ResolvedItem& it : watch->items) {
         for (const auto& [m, token] : watch->markers[static_cast<std::size_t>(chunk)]) {
-            if (it.tokenIndex == m.tokenIndex && it.offset < m.textLength &&
-                static_cast<std::size_t>(it.offset + it.length) >= m.textLength + watch->run.size() && ReadWord(it) &&
-                // The break falls in the stem or its conjugation, not in the ending after them (思います / よう).
-                m.textLength - it.offset <= it.length - static_cast<int>(it.endingSurface.size()) &&
-                CutStem(std::string_view(token).substr(std::min<std::size_t>(it.offset, token.size()),
-                                                       static_cast<std::size_t>(m.textLength - it.offset)), watch->run, watch->after)) {
-                watch->across = true;
+            if (it.tokenIndex != m.tokenIndex || it.offset >= m.textLength ||
+                static_cast<std::size_t>(it.offset + it.length) < m.textLength + watch->run.size() || !ReadWord(it)) {
+                continue;
             }
+            // A proper noun read across a break between two kanji is a name or place before its title or suffix (大阪 /
+            // 府の, 横 / 浜市の), not a word before a case particle (山 / 川が is no 山川 야마카와).
+            if (watch->common && std::string_view(!it.entry.code.empty() ? it.entry.code : it.first.code).starts_with("13") &&
+                !text::IsKanji(watch->after) && !(watch->after >= U'ァ' && watch->after <= U'ヺ') && watch->after != U'の') {
+                continue;
+            }
+            const int head = m.textLength - it.offset;
+            const bool inStem = head <= it.length - static_cast<int>(it.endingSurface.size());
+            const std::string_view before =
+                std::string_view(token).substr(std::min<std::size_t>(it.offset, token.size()), static_cast<std::size_t>(head));
+            if (inStem ? watch->inStem && CutStem(before, watch->run, watch->after) : watch->inEnding) watch->across = true;
         }
     }
 }
@@ -1623,12 +1633,16 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
     // Whether line k and the next one are read with a word across their break (始め / るとか), read as the
     // joined lines are: with the white space before line k when it starts them.
     const auto readAcross = [&](std::size_t k, bool starts) {
-        if (!MayCutWord(lines[k], lines[k + 1], edges[k + 1])) return false;
+        WrapCut cut = CutRun(lines[k], edges[k], lines[k + 1], edges[k + 1]);
+        if (cut.run.empty()) return false;
         const LineParts head = PartsOf(bare[k]);
         const std::vector<std::string> texts{std::string(starts ? head.lead : std::string_view()) + std::string(head.body),
                                              std::string(PartsOf(bare[k + 1]).body)};
         CutWatch watch;
-        watch.run = edges[k + 1].unreadStart;
+        watch.inEnding = CutEnding(cut.run, edges[k]);
+        watch.inStem = cut.stem;
+        watch.common = cut.common;
+        watch.run = std::move(cut.run);
         const std::string_view rest = std::string_view(texts[1]).substr(std::min(watch.run.size(), texts[1].size()));
         watch.after = rest.empty() ? 0 : text::DecodeRune(rest).cp;
         StageObserver cutObserver;

@@ -1255,11 +1255,31 @@ void KeepParticlesWithCutWord(const std::vector<ResolvedItem>& items, const std:
                 }
                 return false;
             };
-            bool rest = words(std::string_view(tokens[item.tokenIndex].text)
-                                  .substr(std::min(tokens[item.tokenIndex].text.size(),
-                                                   static_cast<std::size_t>(items[end].offset + items[end].length))));
-            for (std::size_t t = static_cast<std::size_t>(item.tokenIndex) + 1; t < tokens.size() && !rest; t++) {
-                rest = words(tokens[t].text);
+            // The next line ends at the next break.
+            const tokenizer::ControlMarker* following = nullptr;
+            for (const tokenizer::ControlMarker& n : markers) {
+                if (n.markerKind != 1 || &n == &m || n.tokenIndex < m.tokenIndex ||
+                    (n.tokenIndex == m.tokenIndex && n.textLength <= m.textLength)) {
+                    continue;
+                }
+                if (following == nullptr || n.tokenIndex < following->tokenIndex ||
+                    (n.tokenIndex == following->tokenIndex && n.textLength < following->textLength)) {
+                    following = &n;
+                }
+            }
+            const auto lineText = [&](std::size_t t, std::size_t from) {
+                const std::string_view text = tokens[t].text;
+                std::size_t to = text.size();
+                if (following != nullptr && static_cast<std::size_t>(following->tokenIndex) == t) {
+                    to = std::min(to, static_cast<std::size_t>(std::max(0, following->textLength)));
+                }
+                return from < to ? text.substr(from, to - from) : std::string_view();
+            };
+            const std::size_t lastTokenOfLine = following != nullptr ? static_cast<std::size_t>(following->tokenIndex) : tokens.size() - 1;
+            bool rest = words(lineText(static_cast<std::size_t>(item.tokenIndex),
+                                       static_cast<std::size_t>(items[end].offset + items[end].length)));
+            for (std::size_t t = static_cast<std::size_t>(item.tokenIndex) + 1; t <= lastTokenOfLine && t < tokens.size() && !rest; t++) {
+                rest = words(lineText(t, 0));
             }
             if (!rest) end = i;
             if (end > i) m.textLength = items[end].offset + items[end].length;
