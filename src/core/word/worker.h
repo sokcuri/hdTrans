@@ -341,6 +341,9 @@ private:
     // that a shorter reading lets the next word take; null when c stands.
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
+    // The shorter reading to take instead of c when c leaves the stem い of いる behind it and a word after the shorter
+    // reading takes it (GRM-8100); null when c stands.
+    Record* OverLoneIru(std::string_view full, int cursor, int token, const Item& c);
     Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
     // The reading at full[p:] that runs farthest: its end (p for none) and its item, and the farthest key end there.
     struct Reach {

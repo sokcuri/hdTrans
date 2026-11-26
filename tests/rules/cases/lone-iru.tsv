@@ -1,0 +1,50 @@
+# 규칙: GRM-8100, MNG-1, MNG-3
+rule	input	expected	kind	layer
+lookup:lone-iru	「マスター、入っていいですか」	「마스터, 들어가도 됩니까」	fix	lookup
+lookup:lone-iru	「俺だ、入っていいか？」	「나다, 들어가도 돼?」	fix	lookup
+lookup:lone-iru	「来ていいの？」	「와도 되는 거야?」	fix	lookup
+lookup:lone-iru	「ここ、空いてるから座っていい」	「여기, 비어 있으니 앉아도 돼」	fix	lookup
+lookup:lone-iru	「ほら……もっと、感じていいのよ」	「자……좀 더, 느껴도 돼」	fix	lookup
+lookup:lone-iru	「なにかあったら、いつでも来ていいからね」	「뭔가 있으면, 언제든 와도 되니까」	fix	lookup
+lookup:lone-iru	無にしていいんだろうか	무로 해도 될까	fix	lookup
+lookup:lone-iru	「中に入っていいって」	「안에 들어와도 된다고」	fix	lookup
+lookup:lone-iru	もう少し、自分に自信を持っていいんじゃないか	has:가져도 되	fix	lookup
+lookup:lone-iru	「田中は何かない？」	「타나카는 뭔가 없어?」	fix	lookup
+lookup:lone-iru	「何かないですかね、もっと仲良くなれる方法」	has:뭔가 없습니까	fix	lookup
+lookup:lone-iru	何かないか確認する。	뭔가 없는가 확인한다.	fix	lookup
+lookup:lone-iru	私がいたせいで、みんな死んじゃったの。	내가 있던 탓으로, 모두 죽어버렸어.	fix	lookup
+lookup:lone-iru	「あいつらが雑魚なせいで、出てこなきゃいけなくなったのよ」	has:잔챙이인 탓으로	fix	lookup
+lookup:lone-iru	「今は相手してる暇ないんだよ」	「지금은 상대하고 있는 시간 없어」	fix	lookup
+lookup:lone-iru	彼女の姿は当然ない。	그녀의 모습은 당연히 없다.	fix	lookup
+lookup:lone-iru	「そんな暇ないの知ってるくせに……」	「그런 시간 없는 거 알고 있으면서……」	fix	lookup
+lookup:lone-iru	起きていいよ	깨어도 돼	fix	lookup
+lookup:lone-iru	泣いていいんだよ	울어도 돼	fix	lookup
+lookup:lone-iru	死んでいいわけない	죽어도 될 리가 없다	keep	lookup
+lookup:lone-iru	飲んでいいよ	마셔도 돼	keep	lookup
+lookup:lone-iru	入ってもいい？	들어가도 괜찮아?	keep	lookup
+lookup:lone-iru	入っている	들어가 있다	keep	lookup
+lookup:lone-iru	持っていく	가져간다	keep	lookup
+lookup:lone-iru	「誰かいる？」	「누군가 있어?」	keep	lookup
+lookup:lone-iru	誰かいた？	누군가 있었어?	keep	lookup
+lookup:lone-iru	誰かいるの？	누군가 있는 거야?	keep	lookup
+lookup:lone-iru	何人かいました	여러 명 있었습니다	keep	lookup
+lookup:lone-iru	何人かいた	여러 명 있었다	keep	lookup
+lookup:lone-iru	「何かな？」	「뭐지?」	keep	lookup
+lookup:lone-iru	食べすぎないように	과식하지 않도록	keep	lookup
+lookup:lone-iru	何かいいことあった？	뭔가 좋은 일이 있었어?	keep	lookup
+lookup:lone-iru	ここにいい人がいる	여기에 좋은 사람이 있다	keep	lookup
+lookup:lone-iru	「何というか……」	「뭐라고 할까……」	keep	lookup
+lexical:sweat-shame	汗かいちゃった	땀을 흘려버렸다	fix	lookup
+lexical:sweat-shame	恥かいた	창피를 당했다	fix	lookup
+lexical:sweat-shame	汗をかいた	땀을 흘렸다	keep	lookup
+lookup:lone-iru	何かいい方法はない？	뭔가 좋은 방법은 없어?	keep	lookup
+lookup:lone-iru	静かないい町だ	조용한 좋은 마을이다	keep	lookup
+lookup:lone-iru	ずっとそばにいていい？	계속 곁에 있어도 돼?	keep	lookup
+lookup:lone-iru	なぜかいた	왠지 있었다	keep	lookup
+lookup:lone-iru	入っていない	들어가 있지 않다	keep	lookup
+lookup:lone-iru	ついていいか	붙어도 되는가	fix	lookup
+lookup:lone-iru	犬は入っていいの？	개는 들어가도 되는 거야?	fix	lookup
+lookup:lone-iru	「そうかい」	「그래」	keep	lookup
+lookup:lone-iru	「そこしかないかねえ」	「거기밖에 없는가」	fix	lookup
+lookup:lone-iru	「誰かいないかねえ」	「누군가 없는가」	fix	lookup
+lookup:lone-iru	「行かないかねえ」	「가지 않겠는가」	keep	lookup

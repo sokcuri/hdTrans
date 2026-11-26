@@ -3173,6 +3173,48 @@ Record* Worker::OverStrayKana(std::string_view full, int cursor, int token, cons
     return best;
 }
 
+// GRM-8100: a reading that ends in hiragana must not leave the stem い of いる behind it when the reading one kana shorter lets
+// the word read after it, no verb, take that い with all the verb read after it (入ってい + い → 入って + いいですか,
+// 何かな + い → 何か + ない, いたせ + い → いた + せい, 感じてい + いよ → 感じて + いいよ). A verb after the shorter
+// reading keeps the いる (誰か + いた, not 誰 + 書いた), and so does a word that ends inside the verb (何人か + いました).
+Record* Worker::OverLoneIru(std::string_view full, int cursor, int token, const Item& c) {
+    const int next = cursor + c.length;
+    const std::string_view rest = From(full, next);
+    constexpr std::string_view kStem = "い";
+    if (!rest.starts_with(kStem) || c.group == nullptr) return nullptr;
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    // After て or で the いる is the auxiliary of the て form (寝て + いた).
+    if (NameClassOf(LastChar(source)) != kClassHiragana || source.ends_with("て") || source.ends_with("で")) return nullptr;
+    const Lookup words = DoLookup(rest, kModeGeneral);
+    const Item* verb = words.count == 0 ? nullptr : InsertLateCandidate(full, next, token, words.records);
+    if (verb == nullptr || verb->detail == nullptr || verb->detail->cls != kDetailVerb || verb->group == nullptr ||
+        verb->group->surface != kStem) {
+        return nullptr;
+    }
+    // The い of 言う only after a reading that ends in い itself (入ってい + いって, not 何と + いうか).
+    if (std::string_view("78").find(At(verb->Code(0), 2)) == std::string_view::npos && !source.ends_with(kStem)) return nullptr;
+    const int verbEnd = next + verb->length;
+    // Whether the word read first at at is no verb and reaches verbEnd or past it.
+    auto takes = [&](int at) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        const Item* w = l.count == 0 ? nullptr : InsertLateCandidate(full, at, token, l.records);
+        return w != nullptr && w->detail != nullptr && w->detail->cls != kDetailVerb && at + w->length >= verbEnd;
+    };
+    // The shorter reading gives up only the last kana of c, which the word after it takes with the い (入ってい →
+    // 入って, 何かな → 何か); a cut further back reads the kana before as other words (ないかな + い is not な + いかない).
+    const int length = c.length - static_cast<int>(DecodeLastRune(source).size);
+    Record* shorter = c.group->records;
+    for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = shorter->child) {
+        if (shorter->source.empty()) continue;
+        const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+        if (head == nullptr || head->detail == nullptr || head->length != length) continue;
+        // A word that is no verb gives way to no verb (マジすぎな + い keeps the degree suffix, not the verb すぎる).
+        if (head->detail->cls == kDetailVerb && c.detail != nullptr && c.detail->cls != kDetailVerb) continue;
+        if (takes(cursor + head->length)) return shorter;
+    }
+    return nullptr;
+}
+
 // A reading that starts with a particle and runs past it (からか, とかで) yields to the
 // particle alone when the particle and the word after it cover more text than the reading and the
 // word after it (から + かかって, not からか + かって).
@@ -4176,6 +4218,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text && candidate != nullptr) {
         if (Record* shorter = Probing([&] { return OverStrayKana(full, cursor, token, *candidate); })) {
+            candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = Probing([&] { return OverLoneIru(full, cursor, token, *candidate); })) {
             candidate->group->records = nullptr;
             RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
