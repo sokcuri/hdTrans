@@ -1,4 +1,4 @@
-# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46, GRM-3400, GRM-8100, GRM-8101, GRM-8102
+# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46, GRM-3400, GRM-8100, GRM-8101, GRM-8102, GRM-17
 rule	input	expected	kind	layer
 verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
 verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
@@ -142,3 +142,25 @@ normalize:casual-nee	「高いかねえ」	lacks:않	keep	normalize
 normalize:casual-nee	「おれはいかねえ」	has:않	keep	normalize
 normalize:casual-nee	「うまくいかねえ」	has:않	keep	normalize
 normalize:casual-nee	「そこのキャベツ、もっていかねーかい？」	has:않	keep	normalize
+ending:書いちゃうじゃない	選挙が終わっちゃうじゃないっ！	has:끝나버리잖아	fix	builtin-ending
+ending:書いてるじゃない	でも、実際にやってるじゃないっ	has:하고 있잖아	fix	builtin-ending
+cx:predicate-tag:42	その勝負、受けて立とうじゃない！	lacks:아니	fix	rewrites
+cx:predicate-tag:20	さっきまで元気だったじゃないですか	has:건강했잖아요	fix	rewrites
+cx:predicate-tag:40	なんか面白そうじゃない	has:같지 않	keep	rewrites
+cx:predicate-tag:40	サルたちには反応しなかったじゃないっ！	has:반응하지 않았잖아	fix	rewrites
+cx:predicate-tag:40	あまり嬉しそうじゃない	has:듯하지 않	keep	rewrites
+cx:predicate-tag:40	俺は犯人じゃない	has:범인이 아니	keep	rewrites
+cx:predicate-tag:40	楽しそうじゃないよ	has:듯하지 않	keep	rewrites
+cx:predicate-tag:40	美味しそうじゃないわよ	has:보이지 않	keep	rewrites
+cx:predicate-tag:40	その店の料理は美味しそうじゃない。	has:보이지 않	keep	rewrites
+cx:predicate-tag:40	この絵は本物みたいじゃない。	has:같지 않	keep	rewrites
+cx:predicate-tag:40	とても楽しそうじゃない	has:듯하지 않	keep	rewrites
+cx:predicate-tag:40	子供みたいじゃないよ	has:같지 않	keep	rewrites
+cx:predicate-tag:40	あれ、ここじゃない	has:여기가 아니	keep	rewrites
+cx:predicate-tag:40	なんだよ、俺のせいじゃない	has:탓이 아니	keep	rewrites
+cx:predicate-tag:40	あれ、田中じゃない。鈴木だ。	has:타나카가 아니	keep	rewrites
+cx:predicate-tag:40	それほど楽しそうじゃない。	has:듯하지 않	keep	rewrites
+cx:predicate-tag:40	なかなか終わりそうじゃない	has:것 같지 않	keep	rewrites
+cx:predicate-tag:40	彼も元気そうじゃない	has:보이지 않	keep	rewrites
+cx:predicate-tag:40	「楽しそうじゃない」と彼は言った	has:듯하지 않	keep	rewrites
+cx:predicate-tag:42	どうしようじゃない	lacks:하자고	keep	rewrites

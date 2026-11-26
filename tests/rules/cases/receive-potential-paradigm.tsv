@@ -1,0 +1,42 @@
+# 규칙: GRM-3, GRM-8112
+rule	input	expected	kind	layer
+cx:receive-potential:12	誘ってもらえるのは名誉なことだ。	권해 주는 것은 명예로운 일이다.	fix	rewrites
+cx:receive-potential:12	放送で流してもらえることになった	방송으로 틀어 주게 되었다	fix	rewrites
+cx:receive-potential:10	話を聞いてもらえて良かった	이야기를 들어 주어서 다행이다	fix	rewrites
+cx:receive-potential:10	好きと言ってもらえたのですから	좋아한다고 말해 주었으니까요	fix	rewrites
+cx:receive-potential:12	褒めてもらえるかもしれない	칭찬해 줄지도 모른다	fix	rewrites
+cx:receive-potential:12	払ってもらえそうになかった	지불해 줄 것 같지 않았다	fix	rewrites
+cx:receive-potential:12	声をかけてもらえました	말을 걸어 주었습니다	fix	rewrites
+cx:receive-potential:12	もっと良くなってもらえるように頑張ろう	좀 더 좋아져 주도록 힘내자	fix	rewrites
+cx:receive-potential:12	そう思ってもらえるなんて	그렇게 생각해 주다니	fix	rewrites
+cx:receive-potential:12	一定期間が経てば忘れてもらえる。	일정기간이 지나면 잊어 줄 수 있다.	keep	rewrites
+cx:receive-potential:12	みんなに聞いてもらえるから、疑惑を一掃できる	모두에게 들어 주니까, 의혹을 일소할 수 있다	fix	rewrites
+cx:receive-potential:12	楽しいところだって思ってもらえるはずだ	즐거운 곳이라도 생각해 줄 것이다	fix	rewrites
+cx:receive-potential:12	そう言ってもらえるのはありがたいけど	그렇게 말해 주는 것은 고마운데	fix	rewrites
+cx:receive-potential:12	今度は動いてもらえるかも……	이번에는 움직여 줄지도……	fix	rewrites
+cx:receive-potential:12	手伝ってもらえる？	도움을 받을 수 있어?	keep	rewrites
+cx:receive-potential:12	協力してもらえませんか？	협력해 주실 수 있습니까?	keep	rewrites
+cx:receive-potential:12	ちょっと聞いてもらえるかな	잠깐 들어 줄 수 있을까	keep	rewrites
+cx:receive-potential:12	上半身だけ脱いでもらえるかな？	상반신만 벗어 줄 수 있을까?	keep	rewrites
+cx:receive-potential:12	手伝ってもらえることは、もうありません	도움을 받을 수 있는 것은, 이제 없습니다	keep	rewrites
+cx:receive-potential:12	働かせてもらえるところ	일하게 해 줄 수 있는 곳	keep	rewrites
+cx:receive-potential:12	信じてもらえると思う	믿어 줄 수 있다고 생각한다	keep	rewrites
+cx:receive-potential:12	来てもらえないかな	와 줄 수 없을까	keep	rewrites
+cx:receive-potential:12	許してもらえなかった	허락받을 수 없었다	keep	rewrites
+cx:receive-potential:10	教えてもらえたら	가르쳐 주면	keep	rewrites
+cx:receive-potential:12	来てもらえました	와 주었습니다	fix	rewrites
+cx:receive-potential:10	来てもらえて良かった	와 주어서 다행이다	fix	rewrites
+cx:receive-potential:12	来てもらえるのは嬉しい	와 주는 것은 기쁘다	fix	rewrites
+cx:receive-potential:12	教えてもらえるの？	가르쳐 줄 수 있는 거야?	keep	rewrites
+cx:receive-potential:12	教えてもらえますか	가르쳐 줄 수 있습니까	keep	rewrites
+cx:receive-potential:12	教えてもらえるよね？	가르쳐 줄 수 있지?	keep	rewrites
+cx:receive-potential:12	教えてもらえる人を探す	가르쳐 줄 수 있는 사람을 찾는다	keep	rewrites
+cx:receive-potential:10	どーせふたりだけでもらえた署名じゃないくせに	어차피 두 사람만으로 받을 수 있던 서명이 아니면서	keep	rewrites
+cx:receive-potential:10	褒めてもらえたことは一度もない	칭찬해 주었던 것은 한 번도 없다	fix	rewrites
+cx:receive-potential:10	教えてもらえたことはありがたい	가르쳐 주었던 것은 고맙다	fix	rewrites
+cx:receive-potential:10	助けてもらえたことは事実だ	도와 주었던 것은 사실이다	fix	rewrites
+cx:receive-potential:12	ここなら直してもらえる	여기라면 고쳐 줄 수 있다	keep	rewrites
+cx:receive-potential:12	信じてもらえる。	믿어 줄 수 있다.	keep	rewrites
+cx:receive-potential:12	彼なら教えてもらえる	그라면 가르쳐 줄 수 있다	keep	rewrites
+cx:receive-potential:12	髪を切ってもらえました	머리를 잘라 주었습니다	fix	rewrites
+cx:receive-potential:12	この服を着てもらえるのは嬉しい	이 옷을 입어 주는 것은 기쁘다	fix	rewrites
