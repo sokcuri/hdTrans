@@ -25,6 +25,14 @@ namespace hdTrans::word {
 
 namespace {
 
+// Whether stem spells the plain form of する, くる or 来る, the verbs of the prefix table.
+bool IrregularLookalike(std::string_view stem) {
+    for (int tableGroup = 1; tableGroup < 4; tableGroup++) {
+        if (stem == PrefixForm(50 * tableGroup)) return true;
+    }
+    return false;
+}
+
 // A kanji digit, ○ or 〇.
 bool IsNumeral(std::string_view c) { return (!c.empty() && Has(kNumeralDigits, c)) || c == kNumeralCircle; }
 
@@ -4528,6 +4536,36 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     if (stem < end && end < text.size() && NameBeforeHonorific(snapshot, text.substr(stem)) > end - stem &&
                         NameBeforeHonorific(snapshot, text.substr(end)) == 0) {
                         accepted = false;
+                    }
+                }
+                // A regular stem spelled as the plain form of する, くる or 来る (the くる of くるむ)
+                // yields to that verb before its explanatory ん (verb.lookalike-tail) where the prefix
+                // table reads as far (くるんだ 오는 거야). The regular verb stays where the text before
+                // it ends in a mark of its object or means (verb.lookalike-object: タオルでくるんだ) that
+                // is not a て form (verb.lookalike-te: 読んでくるんだ), or in a thing one wraps with or
+                // in and に (noun.wrapping: 毛布にくるんだ), and where a noun follows its past
+                // (verb.lookalike-adnominal: くるんだ布, くるんだお菓子; spec LEX-8082).
+                const std::string_view lookalikeTail = From(text, offset + static_cast<long>(rec->source.size()));
+                if (accepted && IrregularLookalike(rec->source) &&
+                    dict::StartsWithMember(HDTRANS_CLASS("verb.lookalike-tail"), lookalikeTail) > 0) {
+                    const std::string_view before = text.substr(0, static_cast<std::size_t>(offset));
+                    bool regular = dict::EndsWithMember(HDTRANS_CLASS("verb.lookalike-object"), before) > 0 &&
+                                   dict::EndsWithMember(HDTRANS_CLASS("verb.lookalike-te"), before) == 0;
+                    if (const std::size_t ni = dict::EndsWithMember(HDTRANS_CLASS("verb.lookalike-target"), before); ni > 0) {
+                        regular = regular || dict::EndsWithMember(HDTRANS_CLASS("noun.wrapping"), before.substr(0, before.size() - ni)) > 0;
+                    }
+                    if (const std::size_t past = dict::StartsWithMember(HDTRANS_CLASS("verb.lookalike-past"), lookalikeTail); past > 0) {
+                        std::string_view next = lookalikeTail.substr(past);
+                        next.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("verb.lookalike-adnominal"), next));
+                        const char32_t r = next.empty() ? 0 : text::DecodeRune(next).cp;
+                        regular = regular || text::IsKanji(r) || (r >= U'ァ' && r <= U'ヺ');
+                    }
+                    if (!regular) {
+                        if (Item* irregular = QueryPrefixTable(text, offset, token);
+                            irregular != nullptr && irregular->length >= candidate->length) {
+                            irregular->group->records = nullptr;
+                            return irregular;
+                        }
                     }
                 }
                 if (accepted) {

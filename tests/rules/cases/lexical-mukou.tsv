@@ -1,0 +1,25 @@
+# 규칙: LEX-8083
+rule	input	expected	kind	layer
+dict:jisjk:88796	向こうから誰か来る	저쪽에서 누군가 온다	fix	defaults
+dict:jisjk:88796	向こうも忙しそうだ。	저쪽도 바쁜 것 같다.	fix	defaults
+dict:jisjk:88796	向こうの言葉が話せない	저쪽의 말을 할 수 없다	fix	defaults
+dict:jisjk:88796	向こうが嫌ってくるんだから	저쪽이 싫어해 오니까	fix	defaults
+dict:w:42401	扉の向こうから声がした。	문 너머에서 목소리가 들렸다.	fix	local
+dict:w:42401	電話の向こうから吐息が聞こえた。	전화 너머에서 숨결이 들렸다.	fix	local
+dict:w:42401	水平線の向こうに夕陽が落ちていく。	has:수평선 너머에	fix	local
+dict:w:42401	道の向こうに彼女がいる。	길 너머에 그녀가 있다.	fix	local
+dict:w:42401	ドアの向こうで何か音がした。	has:문 너머에서	fix	local
+dict:w:42401	海の向こうの国	바다 너머의 나라	fix	local
+dict:w:42401	テーブルの向こうで笑った	테이블 너머에서 웃었다	fix	local
+dict:w:42401	向こうの部屋	!rule:dict:w:42401	keep	local
+dict:w:42401	向こう側に渡る	저쪽 편으로 건넌다	keep	defaults
+dict:w:42401	向こう岸が見える	건너편 물가가 보인다	keep	defaults
+dict:w:42401	むこうから来た	저쪽에서 왔다	keep	defaults
+dict:w:42443	記憶の向こう	기억 저편	keep	local
+dict:w:42443	はるか向こうに山が見える	아득한 저편에 산이 보인다	keep	local
+dict:w:42443	遠い向こうの国	먼 저편의 나라	keep	local
+dict:w:42443	彼の向こうに立つ	그의 저편에 선다	keep	local
+dict:w:42443	向こうの世界。	저편의 세계.	keep	local
+dict:w:42444	向こう一年は忙しい。	향후 일년은 바쁘다.	fix	local
+dict:w:42444	向こう３日間	향후 3일간	keep	local
+dict:w:42444	向こう一面の雪	!rule:dict:w:42444	keep	local

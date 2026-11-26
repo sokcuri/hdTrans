@@ -1,0 +1,23 @@
+# 규칙: LEX-8081
+rule	input	expected	kind	layer
+dict:jisjk:267771	チョコの不意打ちをかわして、撃ち返す。	초콜릿 기습을 피하고, 응사한다.	fix	defaults
+dict:jisjk:267771	あの身体で、奇襲をかわすなんて	has:기습을 피하다니	fix	defaults
+dict:jisjk:267771	デブ猫は跳躍し、俺のブラシをかわしていた。	has:브러쉬를 피하고 있었다	fix	defaults
+dict:jisjk:267771	逆側に跳び射線をかわした。	has:사선을 피했다	fix	defaults
+dict:jisjk:267771	男たちの追跡をかわし、路地を抜けた。	has:추적을 피하고	fix	defaults
+dict:jisjk:267771	みんなをするりとかわし、寄ってきた。	has:스르륵 피해	fix	defaults
+dict:jisjk:267771	ひらりとかわす	훌쩍 피한다	fix	defaults
+dict:jisjk:267771	質問をのらりくらりとかわす	has:질문을 뺀들뺀들 피한다	fix	defaults
+dict:jisjk:267771	攻撃をかわした	공격을 피했다	keep	senses
+dict:jisjk:267771	身をかわす	몸을 피한다	keep	senses
+sense:kawasu	愛の言葉をかわし、唇を重ねた。	has:사랑의 말을 주고받고	fix	senses
+sense:kawasu	ぎこちなく挨拶をかわす二人。	어색하게 인사를 주고받는 두 사람.	fix	senses
+sense:kawasu	約束をかわした。	약속을 주고받았다.	fix	senses
+sense:kawasu	軽く会話をかわした	가볍게 대화를 주고받았다	fix	senses
+sense:kawasu	キスをかわす	키스를 주고받는다	fix	senses
+sense:kawasu	杯をかわす	잔을 주고받는다	fix	senses
+sense:kawasu	言葉を交わす	말을 주고받는다	keep	defaults
+sense:kawasu	視線を交わす	시선을 주고받는다	keep	defaults
+sense:kawasu	笑みをかわした	미소를 주고받았다	fix	senses
+sense:kawasu	冗談をかわす	농담을 주고받는다	fix	senses
+sense:kawasu	手紙をかわした	편지를 주고받았다	fix	senses

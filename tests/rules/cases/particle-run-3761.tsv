@@ -1,6 +1,6 @@
 # 규칙: GRM-3761
 rule	input	expected	kind	layer
-segment:particle-run	今まで向こうからかかってきたことなんて、一度もないのに。	지금까지 저편에서 걸려 온 것은, 한 번도 없는데.	fix	segment
+segment:particle-run	今まで向こうからかかってきたことなんて、一度もないのに。	지금까지 저쪽에서 걸려 온 것은, 한 번도 없는데.	fix	segment
 segment:particle-run	「ん～、今日もがっつり体を動かしたな」	「음~, 오늘도 제대로 몸을 움직였구나」	fix	segment
 segment:particle-run	新しい時代も来そうだし……。私もがんばらなきゃ！	새로운 시대도 올 것 같고……. 나도 열심히 해야 해!	fix	segment
 segment:particle-run	「うーん、たぶん。こっちのちっこい子、生かしておく方が展開が有利に運べそうだし♪」	「으음, 아마. 이쪽의 작은 아이, 살려 두는 편이 전개가 유리하게 옮길 수 있을 것 같고♪」	fix	segment

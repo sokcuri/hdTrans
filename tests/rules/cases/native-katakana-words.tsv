@@ -14,7 +14,7 @@ lex:native-katakana	ね、サイコーでしょ？	저기, 최고지?	fix	protec
 lex:native-katakana	イタイッ…ドウシテ…	has:아프	fix	protect
 lex:native-katakana	「おー、なんかイラついてるわねぇー……アノ日？」	「오오, 왠지 화가 나~……그 날?」	fix	protect
 lex:native-katakana	一瞬、コヨイがこちらを見る。	순간, 코요이가 이쪽을 본다.	keep	protect
-lex:native-katakana	カナリがインカムの向こうで沈黙する。	카나리가 인컴 저편에서 침묵한다.	keep	protect
+lex:native-katakana	カナリがインカムの向こうで沈黙する。	카나리가 인컴 너머에서 침묵한다.	keep	protect
 lex:native-katakana	カナタは、夕日を見ながら、そう嘆いた。	카나타는, 석양을 보면서, 그렇게 한탄했다.	keep	protect
 lex:native-katakana	ミナトやカケルは無理でも、	미나토나 카케루는 무리여도,	keep	protect
 lex:native-katakana	《さあ どうする？ サクラ》	《자 어떻게 해? 사쿠라》	keep	protect

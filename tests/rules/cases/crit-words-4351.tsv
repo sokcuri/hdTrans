@@ -41,7 +41,7 @@ dict:w:31850	疲れを癒す。	피로를 푼다.	keep	lookup
 dict:w:31853	それでも詩乃は火照りを怒りで塗り替えるように声を張り上げた。	has:달아오름을	fix	lookup
 dict:w:31855	少年レフィルの顔には苦い表情と手形の跡。	has:표정과 손자국	fix	lookup
 dict:w:31855	手形を発行する。	어음을 발행한다.	keep	lookup
-dict:w:31856	ガスが吹き出れば全ては決着するだろうが、向こうも座してそれを待ちはしまい。	has:저편도 앉아 그것을	fix	lookup
+dict:w:31856	ガスが吹き出れば全ては決着するだろうが、向こうも座してそれを待ちはしまい。	has:저쪽도 앉아 그것을	fix	lookup
 dict:w:31856	座して死を待つ。	앉아 죽음을 기다린다.	fix	lookup
 dict:w:31856	部屋の座をとる。	방의 자리를 잡는다.	keep	lookup
 dict:w:31857	国王は前のめりになった。	국왕은 앞으로 몸이 기울었다.	fix	lookup

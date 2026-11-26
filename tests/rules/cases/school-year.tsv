@@ -1,0 +1,25 @@
+# 규칙: LEX-8085
+rule	input	expected	kind	layer
+dict:w:42415	２年Ｒ組、白崎さん	has:2학년 R반	fix	local
+dict:w:42415	２年３組の生徒	has:2학년 3반의	fix	local
+dict:w:42415	３年の先輩に聞いた	has:3학년의 선배	fix	local
+dict:w:42415	１年の後輩	has:1학년의 후배	fix	local
+dict:w:42415	２年連中に言う。	has:2학년 무리	fix	local
+dict:w:42415	２年全員	has:2학년 전원	fix	local
+dict:w:42415	３年前	3년 전	keep	local
+dict:w:42415	1年間	1년간	keep	local
+dict:w:42415	１年も経たない	1년도 지나지 않는다	keep	local
+dict:w:42415	３年の月日	3년의 세월	keep	local
+dict:w:42415	５年の先輩	!rule:dict:w:42415	keep	local
+dict:w:42415	２年生	2학년	keep	lookup
+dict:w:42415	同学年の私には	동학년의 나에게는	keep	global-stem
+dict:w:42415	3年B組	3학년 B반	fix	local
+dict:w:42415	２年Ａ組の	2학년 A반의	fix	local
+dict:w:42415	入社３年の先輩	입사 3년의 선배	keep	local
+dict:w:42415	3年の先輩社員	3년의 선배 사원	keep	local
+dict:w:42415	彼は２年の先輩だ	그는 2학년의 선배다	fix	local
+dict:w:42437	三年の先輩	3학년의 선배	fix	local
+dict:w:42437	入社三年の先輩	입사 3년의 선배	keep	local
+dict:w:42437	三年前	3년 전	keep	local
+dict:w:42437	三年の月日	3년의 세월	keep	local
+dict:w:42435	一年の先輩。	1학년의 선배.	fix	local

@@ -1,0 +1,42 @@
+# 규칙: LEX-8088
+rule	input	expected	kind	layer
+dict:w:42426	ヘタな言い方する	has:서투른 말투	fix	defaults
+dict:w:42426	ヘタだと殺される	has:서투르다고	fix	defaults
+dict:w:42431	うまいとかヘタとか	has:서투름이라든지	fix	defaults
+dict:w:42427	ヘタしたら死ぬぞ	자칫하면 죽겠어	fix	lookup
+dict:jisjk:105304	イチゴのヘタ取ったよ	has:딸기의 꼭지	keep	local
+dict:w:42419	なんか、スマン……	왠지, 미안……	fix	lookup
+dict:w:42419	スマン、遅れた	미안, 늦었다	keep	lookup
+dict:w:42420	ニンゲンなんて	인간 같은 건	fix	lookup
+dict:w:42421	今日ハンコ持ってないんで	has:도장	fix	lookup
+dict:w:42421	カピバラのハンコが押してあった	has:카피바라의 도장이	fix	lookup
+dict:w:42425	そんなにヤワじゃない	그렇게 나약하지 않다	fix	lookup
+cx:kita-arrived:10	キタ――！	왔다――!	fix	lookup
+cx:kita-arrived:10	新商品キタ――！	신상품 왔다――!	fix	lookup
+cx:kita-arrived:10	キタっ！	왔다!	fix	lookup
+cx:mechakucha-state:10	メチャクチャだ	엉망진창이다	fix	rewrites
+cx:mechakucha-state:10	メチャクチャにする。	엉망진창으로 한다.	fix	rewrites
+cx:mechakucha-state:10	メチャクチャ強い	엄청 강하다	keep	rewrites
+cx:mechakucha-state:10	メチャクチャ怖いんだけど	!rule:cx:mechakucha-state:10	keep	rewrites
+dict:w:42438	大食いキャラは結局ヨゴレですから	has:망가지는 캐릭터	fix	lookup
+cx:kita-arrived:10	キタさんが来た	키타 씨가 왔다	keep	rewrites
+cx:kita-arrived:10	キタ区に住んでいる	!rule:cx:kita-arrived:10	keep	rewrites
+cx:kita-arrived:10	えっ、キタ？	어, 왔어?	fix	rewrites
+lex:kana-equivalent	ヨダレを垂らす	군침을 흘린다	keep	lookup
+cx:mechakucha-state:20	メチャクチャな奴だ	엉망진창인 놈이다	fix	rewrites
+cx:mechakucha-state:20	メチャクチャ楽しい	!rule:cx:mechakucha-state:20	keep	rewrites
+dict:jisjk:105304	トマトのヘタ	토마토의 꼭지	keep	local
+dict:w:42421	ハンコを押して	도장을 눌러	fix	lookup
+lex:kana-equivalent	ヨダレが出そうだ	군침이 돌 것 같다	keep	lookup
+lex:kana-equivalent	ヨダレが出る	군침이 돈다	keep	lookup
+dict:s:4401	ヨゴレが落ちない。	얼룩이 떨어지지 않는다.	fix	lookup
+dict:s:4401	服のヨゴレ。	옷의 얼룩.	fix	lookup
+dict:w:42439	ヨゴレ役。	망가지는 역할.	fix	lookup
+dict:w:42438	どーせ私はヨゴレですよ	has:망가지는 캐릭터예요	fix	local
+cx:mechakucha-state:10	部屋がメチャクチャになった。	방이 엉망진창이 되었다.	fix	rewrites
+cx:mechakucha-state:12	メチャクチャに壊れた。	엉망진창으로 망가졌다.	fix	rewrites
+cx:mechakucha-state:12	メチャクチャに殴られた。	엉망진창으로 맞았다.	fix	rewrites
+cx:mechakucha-state:12	メチャクチャにする。	!rule:cx:mechakucha-state:12	keep	rewrites
+cx:mechakucha-state:14	メチャクチャで、何もできない。	엉망진창이라, 아무것도 할 수 없다.	fix	rewrites
+cx:mechakucha-state:14	メチャクチャ強い。	!rule:cx:mechakucha-state:14	keep	rewrites
+dict:w:42425	そんなにヤワじゃない。	그렇게 나약하지 않다.	fix	lookup

@@ -1,0 +1,37 @@
+# 규칙: LEX-8082
+rule	input	expected	kind	layer
+analysis:irregular-lookalike	入れてくるんだ	넣어 오는 거야	fix	analysis
+analysis:irregular-lookalike	カメラで俺を狙ってくるんだぞ？	has:노려 오는 거야	fix	analysis
+analysis:irregular-lookalike	どうしてこんな劣等感が湧いてくるんだろう	has:솟아나 올까	fix	analysis
+analysis:irregular-lookalike	視線を送ってくるんだけど	has:보내 오는데	fix	analysis
+analysis:irregular-lookalike	向こうが嫌ってくるんだから	has:싫어해 오니까	fix	analysis
+analysis:irregular-lookalike	どうせ話しかけてくるんですよね	has:말을 걸어 오는 거죠	fix	analysis
+analysis:irregular-lookalike	どんな依頼をしてくるんだろうな？	has:해 오는 걸까	fix	analysis
+analysis:irregular-lookalike	どこでそんな言葉を覚えてくるんだ？	has:배워 오는 거야	fix	analysis
+analysis:irregular-lookalike	先に顔洗ってくるんだぞ	has:씻어 오는 거야	fix	analysis
+analysis:irregular-lookalike	グサっとくるんだけど	has:오는데	fix	analysis
+analysis:irregular-lookalike	なんで俺のところになんかくるんだ？	has:오는 거야	fix	analysis
+analysis:irregular-lookalike	先生も一緒にくるんですか？	선생님도 함께 옵니까?	fix	analysis
+analysis:irregular-lookalike	喜べる日がくるんだろうか	has:날이 오는 걸까	fix	analysis
+analysis:irregular-lookalike	ここにくるんだ	여기에 오는 거야	fix	analysis
+analysis:irregular-lookalike	読んでくるんだ	읽어 오는 거야	fix	analysis
+analysis:irregular-lookalike	泳いでくるんだ	헤엄쳐 오는 거야	fix	analysis
+analysis:irregular-lookalike	タオルでくるんだ	수건으로 감쌌다	keep	analysis
+analysis:irregular-lookalike	乳房をくるんだ。	유방을 감쌌다.	keep	analysis
+analysis:irregular-lookalike	布でくるんで持ち帰った	has:천으로 감싸	keep	analysis
+analysis:irregular-lookalike	毛布にくるまった	담요에 휩싸였다	keep	analysis
+analysis:irregular-lookalike	くるみを割った	호두를 나누었다	keep	analysis
+dict:w:42400	くるんと回った	빙글 돌았다	fix	lookup
+dict:w:42400	もう一回くるんと回った。	has:빙글 돌았다	fix	lookup
+analysis:irregular-lookalike	紙にくるんで渡した	종이에 감싸 건네주었다	keep	analysis
+analysis:irregular-lookalike	タオルにくるんで冷やす	수건에 감싸 차게 한다	keep	analysis
+analysis:irregular-lookalike	毛布でくるんだ	담요로 감쌌다	keep	analysis
+analysis:irregular-lookalike	赤ん坊をおくるみでくるんだ	갓난아기를 포대기로 감쌌다	keep	analysis
+analysis:irregular-lookalike	彼女は明日くるんだよ	그녀는 내일 와	fix	analysis
+analysis:irregular-lookalike	雨がくるんだろうか	비가 오는 걸까	fix	analysis
+analysis:irregular-lookalike	走ってくるんだ	달려오는 거야	fix	analysis
+analysis:irregular-lookalike	毛布にくるんだ赤ちゃん	담요에 감싼 아기	keep	analysis
+analysis:irregular-lookalike	紙にくるんだお菓子	종이에 감싼 과자	keep	analysis
+analysis:irregular-lookalike	タオルにくるんだ保冷剤	수건에 감싼 아이스 팩	keep	analysis
+analysis:irregular-lookalike	くるんだ布を広げる	감싼 천을 펼친다	keep	analysis
+analysis:irregular-lookalike	赤子をおくるみにくるんだ	갓난아이를 포대기에 감쌌다	keep	analysis

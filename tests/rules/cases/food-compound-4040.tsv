@@ -26,4 +26,4 @@ cx:food-compound:10	昨日のパスタはおいしいって言ってくれたけ
 cx:food-compound:20	エルフのパンなんか 大嫌いね	has:엘프의 빵	keep	rewrites
 cx:food-compound:10	当たり前です。魚には魚の、塩には塩の味がちゃんとあるのですから	has:소금의 맛	keep	rewrites
 cx:food-compound:10	今朝は麦飯に大根の漬物、芋の味噌汁、あと昨日のF作業の焼き魚です。	lacks:감자 된장	keep	rewrites
-cx:food-compound:10	観客も完全に、ないがしろにされていた婚約者の味方だ。	has:약혼자의 아군	keep	rewrites
+cx:food-compound:10	観客も完全に、ないがしろにされていた婚約者の味方だ。	has:약혼자의 편	keep	rewrites
