@@ -27,16 +27,27 @@ constexpr std::array<uint32_t, 64> roundConstants = {
     0x90befffau, 0xa4506cebu, 0xbef9a3f7u, 0xc67178f2u,
 };
 
-constexpr auto crcTable = [] {
-    std::array<uint32_t, 256> table{};
-    for (std::size_t i = 0; i < table.size(); ++i) {
+// Slicing-by-8: crcTables[k][b] is the CRC of byte b followed by k zero bytes, so eight bytes fold
+// with eight lookups. crcTables[0] is the bytewise table.
+constexpr auto crcTables = [] {
+    std::array<std::array<uint32_t, 256>, 8> tables{};
+    for (std::size_t i = 0; i < 256; ++i) {
         auto crc = static_cast<uint32_t>(i);
         for (int bit = 0; bit < 8; ++bit)
             crc = (crc >> 1) ^ ((crc & 1u) != 0 ? 0x82f63b78u : 0u);
-        table[i] = crc;
+        tables[0][i] = crc;
     }
-    return table;
+    for (std::size_t i = 0; i < 256; ++i) {
+        for (std::size_t k = 1; k < tables.size(); ++k)
+            tables[k][i] = (tables[k - 1][i] >> 8) ^ tables[0][tables[k - 1][i] & 0xffu];
+    }
+    return tables;
 }();
+
+uint32_t LoadLittle32(const std::byte* p) {
+    return std::to_integer<uint32_t>(p[0]) | std::to_integer<uint32_t>(p[1]) << 8 |
+           std::to_integer<uint32_t>(p[2]) << 16 | std::to_integer<uint32_t>(p[3]) << 24;
+}
 
 }  // namespace
 
@@ -123,9 +134,17 @@ std::array<std::byte, 32> Hash256(std::span<const std::byte> data) {
 }
 
 uint32_t Crc32c(std::span<const std::byte> data) {
+    const auto& t = crcTables;
     uint32_t crc = 0xffffffffu;
-    for (std::byte b : data)
-        crc = (crc >> 8) ^ crcTable[(crc ^ std::to_integer<uint32_t>(b)) & 0xffu];
+    const std::byte* p = data.data();
+    std::size_t n = data.size();
+    for (; n >= 8; p += 8, n -= 8) {
+        const uint32_t lo = crc ^ LoadLittle32(p), hi = LoadLittle32(p + 4);
+        crc = t[7][lo & 0xffu] ^ t[6][(lo >> 8) & 0xffu] ^ t[5][(lo >> 16) & 0xffu] ^ t[4][lo >> 24] ^
+              t[3][hi & 0xffu] ^ t[2][(hi >> 8) & 0xffu] ^ t[1][(hi >> 16) & 0xffu] ^ t[0][hi >> 24];
+    }
+    for (; n > 0; ++p, --n)
+        crc = (crc >> 8) ^ t[0][(crc ^ std::to_integer<uint32_t>(*p)) & 0xffu];
     return ~crc;
 }
 
