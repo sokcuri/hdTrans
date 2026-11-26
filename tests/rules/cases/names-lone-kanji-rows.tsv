@@ -1,0 +1,37 @@
+# 규칙: LEX-8153, LEX-4832
+rule	input	expected	kind	layer
+lookup:lone-kanji-name	栞が机に落ちた。	책갈피가 책상에 떨어졌다.	fix	fixed
+lookup:lone-kanji-name	ガキの頃から使っている古びた栞だ。	어릴 때부터 쓰고 있는 오래된 책갈피다.	fix	fixed
+lookup:lone-kanji-name	机の上の栞に軽く触れた。	책상 위의 책갈피에 가볍게 접했다.	fix	fixed
+lookup:lone-kanji-name	彼は栞を挟んで本を閉じた。	그는 책갈피를 사이에 두어 책을 덮었다.	fix	fixed
+lookup:lone-kanji-name	栞は要らない。	책갈피는 필요하지 않다.	fix	fixed
+lookup:lone-kanji-name	春の宵に月を見た。	봄의 초저녁에 달을 보았다.	fix	fixed
+lookup:lone-kanji-name	その宵はいい。	그 초저녁은 좋다.	fix	fixed
+lookup:lone-kanji-name	薺を摘んだ。	has:냉이를	fix	fixed
+lookup:lone-kanji-name	薺の花	냉이의 꽃	fix	fixed
+lookup:lone-kanji-name	兔を見た。	토끼를 보았다.	fix	fixed
+lookup:lone-kanji-name	南が来た	남쪽이 왔다	keep	fixed
+lookup:lone-kanji-name	花が笑う	꽃이 웃는다	keep	fixed
+lookup:lone-kanji-name	王？	왕?	keep	fixed
+lookup:lone-kanji-name	左が言った。	왼쪽이 말했다.	keep	fixed
+lookup:lone-kanji-name	考えた。	생각했다.	keep	fixed
+lookup:lone-kanji-name	教えてくれ。	가르쳐 줘.	keep	fixed
+lookup:lone-kanji-name	海が凪いでいる。	바다가 잔잔해져 있다.	keep	fixed
+lookup:lone-kanji-name	蒼い空だ。	푸른 하늘이다.	keep	fixed
+lookup:lone-kanji-name	「ここだな。寮のＡ棟」	「여기네. 기숙사의 A동」	keep	fixed
+lookup:lone-kanji-name	事務棟だよ。	사무동이야.	keep	fixed
+lookup:lone-kanji-name	路電が来た。	노전이 왔다.	keep	fixed
+lookup:lone-kanji-name	その政が乱れない。	그 정이 흐트러지지 않는다.	keep	fixed
+lookup:lone-kanji-name	「呉」である	「오」이다	keep	fixed
+lookup:lone-kanji-name	寶を見た。	보물을 보았다.	keep	fixed
+lookup:lone-kanji-name	遼が来た。	요가 왔다.	keep	fixed
+lookup:lone-kanji-name	宵さんが来た。	요이 씨가 왔다.	keep	fixed
+lookup:lone-kanji-name	栞は「おはよう」と言った。	시오리는 「좋은 아침」이라고 말했다.	fix	fixed
+lookup:lone-kanji-name	「栞、こっちだよ」	「시오리, 이쪽이야」	fix	fixed
+lookup:lone-kanji-name	栞に会いに行った。	시오리를 만나러 갔다.	fix	fixed
+lookup:lone-kanji-name	栞と一緒に帰った。	시오리와 함께 돌아갔다.	fix	fixed
+lookup:lone-kanji-name	宵は「おはよう」と言った。	요이는 「좋은 아침」이라고 말했다.	fix	fixed
+lookup:lone-kanji-name	槙に聞く。	마키에게 묻는다.	fix	fixed
+lookup:lone-kanji-name	「槙、こっちだよ」	「마키, 이쪽이야」	fix	fixed
+lookup:lone-kanji-name	栞を一枚くれた。	책갈피를 한 장 주었다.	keep	fixed
+lookup:lone-kanji-name	本に挟んだ栞。	책에 끼운 책갈피.	keep	fixed

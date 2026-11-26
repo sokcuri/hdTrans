@@ -389,7 +389,9 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         doc->packs = &names->packs;
         const std::vector<std::string> honorificOnly = r.HonorificOnlyNames();
         for (const auto& [t, row] : names->honRows) {
-            if (std::binary_search(honorificOnly.begin(), honorificOnly.end(), t)) continue;
+            // The lines' own cues that name t (時雨は笑った) show it standing alone too, as in a document without the list.
+            const bool shown = doc->cued.contains(t) || doc->slotted.contains(t);
+            if (!shown && std::binary_search(honorificOnly.begin(), honorificOnly.end(), t)) continue;
             if (doc->ownPacks == nullptr) {
                 doc->ownPacks = std::make_unique<dict::PackTable>(names->packs);
                 doc->packs = doc->ownPacks.get();
@@ -429,7 +431,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
             l.ko = ko;
             l.honorificOnly = hon;
             l.line = static_cast<int>(learned.names.size()) + 1;
-            l.source = "learned";
+            l.source = std::string(names::kLearnedSource);
             learned.names.push_back(std::move(l));
         };
         std::map<std::string, std::string> spoken;  // the Korean of each proven kanji name, without spaces
@@ -518,10 +520,286 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     return doc;
 }
 
+namespace {
+
+// Whether the person rows of key are surnames only (gram Wa).
+bool PersonSurname(const dict::Snapshot& snap, std::string_view key) {
+    bool surname = false, given = false;
+    for (const dict::Record& rec : snap.NameRecords(key)) {
+        if (rec.codes == nullptr || !rec.codes->sem.HasPrefix("QPN")) continue;
+        surname = surname || rec.codes->gram.HasPrefix("Wa");
+        given = given || rec.codes->gram.HasPrefix("Wb");
+    }
+    return surname && !given;
+}
+
+// Whether the dictionaries other than the name layer have w as a common noun.
+bool BaseNoun(const dict::Snapshot& snap, std::string_view w) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(w, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != w || c.codes->part.Empty() || c.codes->part.Tag() != 'N') continue;
+        if (c.codes->sem.HasPrefix("QPN") || c.codes->gram.HasPrefix("Wa") || c.codes->gram.HasPrefix("Wb")) continue;
+        return true;
+    }
+    return false;
+}
+
+// Whether the katakana run t splits into two or more such nouns of two kana or more (ランチタイム, ニンジャソード):
+// a compound word, not a name.
+bool NounCompound(const dict::Snapshot& snap, std::string_view t) {
+    if (!names::internal::AllRunes(t, names::internal::IsKatakana) || snap.NamePerson(t)) return false;
+    std::vector<std::size_t> starts;
+    for (std::size_t i = 0; i < t.size(); i += std::max<std::size_t>(1, text::DecodeRune(t.substr(i)).size)) starts.push_back(i);
+    starts.push_back(t.size());
+    // parts[k]: the fewest nouns t up to starts[k] splits into; 0 for none.
+    std::vector<int> parts(starts.size(), 0);
+    for (std::size_t i = 0; i + 2 < starts.size(); i++) {
+        if ((i > 0 && parts[i] == 0) || names::internal::InRunes(text::DecodeRune(t.substr(starts[i])).cp, "ーッァィゥェォャュョヮ")) continue;
+        for (std::size_t j = i + 2; j < starts.size(); j++) {
+            if (!BaseNoun(snap, t.substr(starts[i], starts[j] - starts[i]))) continue;
+            const int n = (i == 0 ? 0 : parts[i]) + 1;
+            if (parts[j] == 0 || n < parts[j]) parts[j] = n;
+        }
+    }
+    return parts.back() >= 2;
+}
+
+// Whether ko is the Sino-Korean reading of the kanji of t, one syllable per kanji (学園長 학원장): a word read on
+// its characters, which no Japanese name the registry writes reads as.
+bool SinoReading(std::string_view t, std::string_view ko) {
+    if (!names::internal::AllRunes(t, names::internal::IsKanji)) return false;
+    std::string sino;
+    for (std::size_t i = 0; i < t.size();) {
+        const text::Rune r = text::DecodeRune(t.substr(i));
+        const std::optional<char32_t> w = dict::Written(r.cp);
+        if (!w) return false;
+        text::AppendRune(sino, *w);
+        i += std::max<std::size_t>(1, r.size);
+    }
+    return sino == ko;
+}
+
+// The proposed names that are no names of persons (spec LEX-8154): one with Latin letters (ＬＬ), a katakana
+// name drawn out (マチルダー beside マチルダ), a compound of common katakana nouns or a chain with one
+// (ランチタイム・ニュース), a kanji name read on its characters (学園長 학원장), a kanji run that is part of a
+// longer word wherever it stands or that a katakana ruby glosses, a hiragana name that is another proposed one
+// after a particle (はみお beside みお) or that only stands inside a longer hiragana run (やはりみおちゃん:
+// りみお), a common word the cues of the document do not confirm (武士), and a full name or surname that only
+// such a name holds (鎌倉武士).
+void DropJunkNames(const dict::Snapshot& snap, std::span<const std::string> lines, const DocumentContext& doc,
+                   std::map<std::string, names::Listed>& proposed) {
+    using names::internal::AllRunes;
+    using names::internal::IsHiragana;
+    using names::internal::IsKatakana;
+    std::vector<std::string> stripped;
+    stripped.reserve(lines.size());
+    for (const std::string& raw : lines) stripped.push_back(names::StripRuby(raw));
+    const auto insideRun = [&](const std::string& t) {
+        bool any = false;
+        for (const std::string& line : stripped) {
+            for (std::size_t at = line.find(t); at != std::string::npos; at = line.find(t, at + t.size())) {
+                any = true;
+                if (at == 0 || !IsHiragana(names::internal::RuneBefore(line, at).cp)) return false;
+            }
+        }
+        return any;
+    };
+    // A kanji run whose every use goes on into a longer word of the dictionaries (瑞々しい, 項垂れる), and one
+    // that every ruby over it reads in katakana (指令車《コマンドカー》), a term glossed.
+    const auto wordPart = [&](const std::string& t) {
+        bool stem = false;  // a verb or adjective stem of the dictionaries, which kana after it inflect (行く)
+        for (const dict::Candidate& c : snap.RetrieveRecords(t, dict::LookupMode::General)) {
+            stem = stem || (c.codes != nullptr && c.source == t && !c.codes->part.Empty() && c.codes->part.TagIn("MH"));
+        }
+        bool any = false;
+        for (const std::string& line : stripped) {
+            for (std::size_t at = line.find(t); at != std::string::npos; at = line.find(t, at + t.size())) {
+                // Inside a longer kanji run or counting after a digit it is no use of its own (一行, １行).
+                if (!KanjiBounded(line, at, t.size()) || NumberBefore(std::string_view(line).substr(0, at))) continue;
+                any = true;
+                // A word that goes on into an honorific's kana is a verb (行くんだ), no call.
+                const std::string_view rest = std::string_view(line).substr(at);
+                const char32_t next = at + t.size() < line.size() ? text::DecodeRune(rest.substr(t.size())).cp : 0;
+                const bool inflected = stem && names::internal::IsHiragana(next) && !names::internal::InRunes(next, "のはがをにともへやで");
+                if (snap.WordAt(rest) <= t.size() && !inflected) return false;
+            }
+        }
+        return any;
+    };
+    const auto glossed = [&](const std::string& t) {
+        bool any = false;
+        for (const std::string& raw : lines) {
+            names::internal::RubyMatch m;
+            for (std::size_t from = 0; names::internal::FindRuby(raw, from, m); from = m.end) {
+                if (m.base != t) continue;
+                if (!AllRunes(m.reading, IsKatakana)) return false;
+                any = true;
+            }
+        }
+        return any;
+    };
+    // A kanji run that stands only before a common kanji word names a school, a company or a work there (文秀大学,
+    // 久慈ヶ嶺学園), no person.
+    const auto placeName = [&](const std::string& t) {
+        bool any = false;
+        for (const std::string& line : stripped) {
+            for (std::size_t at = line.find(t); at != std::string::npos; at = line.find(t, at + t.size())) {
+                std::size_t end = at + t.size();
+                // Past the reading of brace ruby ({rb}文秀{/rb}{rt}ぶんしゅう{/rt}大学).
+                if (std::string_view(line).substr(end).starts_with("{/rb}{rt}")) {
+                    if (const std::size_t close = line.find("{/rt}", end); close != std::string::npos) end = close + 5;
+                }
+                std::size_t run = end;
+                while (run < line.size() && (names::internal::IsKanji(text::DecodeRune(std::string_view(line).substr(run)).cp))) {
+                    run += std::max<std::size_t>(1, text::DecodeRune(std::string_view(line).substr(run)).size);
+                }
+                const std::string_view next = std::string_view(line).substr(end);
+                // A title or honorific after it is a person's (白崎先生, 滝本警部).
+                const bool titled = std::any_of(dict::internal::kNameHonorifics.begin(), dict::internal::kNameHonorifics.end(),
+                                                [&](std::string_view h) { return next.starts_with(h); }) ||
+                                    dict::StartsWithMember(HDTRANS_CLASS("honorific.person-title"), next) > 0 ||
+                                    dict::StartsWithMember(HDTRANS_CLASS("name.rank-after"), next) > 0;
+                // A given name after it makes a full name (多岐川葵).
+                const std::string word = line.substr(end, run - end);
+                if (run == end || titled || !BaseNoun(snap, word) || snap.NamePerson(word) || proposed.contains(t + word)) return false;
+                any = true;
+            }
+        }
+        return any;
+    };
+    const auto latin = [](std::string_view t) {
+        return !AllRunes(t, [](char32_t c) {
+            return !((c >= U'A' && c <= U'Z') || (c >= U'a' && c <= U'z') || (c >= U'Ａ' && c <= U'Ｚ') || (c >= U'ａ' && c <= U'ｚ'));
+        });
+    };
+    std::set<std::string> drop;
+    for (const auto& [t, l] : proposed) {
+        if (l.kind == names::ListKind::Full) continue;
+        bool junk = latin(t);
+        if (AllRunes(t, IsKatakana)) {
+            std::size_t end = t.size();
+            while (end > 0) {
+                const text::Rune r = names::internal::RuneBefore(t, end);
+                if (r.cp != U'ー' && !names::internal::InRunes(r.cp, "ッァィゥェォャュョヮ")) break;
+                end -= r.size;
+            }
+            junk = junk || (end < t.size() && end > 0 && proposed.contains(t.substr(0, end))) || NounCompound(snap, t);
+        } else if (AllRunes(t, IsHiragana)) {
+            for (const auto& [y, ly] : proposed) {
+                if (y.size() >= t.size() || !t.ends_with(y) || !AllRunes(y, IsHiragana) || text::RuneCount(y) < 2) continue;
+                const std::string_view head = std::string_view(t).substr(0, t.size() - y.size());
+                if ((text::RuneCount(head) == 1 && names::internal::InRunes(text::DecodeRune(head).cp, "はがもをにへとやの")) ||
+                    insideRun(t)) {
+                    junk = true;
+                }
+            }
+        } else if (AllRunes(t, names::internal::IsKanji)) {
+            // A title read on its characters (学園長 학원장, 大先生 대선생), not a name read so (a Korean name in news).
+            const bool title = dict::EndsWithMember(HDTRANS_CLASS("suffix.label-role"), t) > 0 ||
+                               dict::EndsWithMember(HDTRANS_CLASS("honorific.person-title"), t) > 0;
+            junk = junk || (title && SinoReading(t, l.ko)) || wordPart(t) || glossed(t) || placeName(t);
+        }
+        if (junk) {
+            drop.insert(t);
+        } else if (AllRunes(t, names::internal::IsKanji) && names::CommonWord(snap, t) && !doc.cued.contains(t)) {
+            // A common word the cues of the document do not confirm is a name only where a line shows it (武士).
+            proposed.at(t).honorificOnly = true;
+        }
+    }
+    // A chain or full name with a dropped part, or a chain with a compound of common nouns, goes too; then a part
+    // that only such names held.
+    std::set<std::string> fullParts, keptParts;
+    for (const auto& [t, l] : proposed) {
+        if (l.kind != names::ListKind::Full) continue;
+        const std::vector<std::string> parts = names::internal::LabelParts(t);
+        bool junk = false;
+        for (const std::string& p : parts) junk = junk || drop.contains(p) || NounCompound(snap, p);
+        // A full name of kanji holds its parts unseparated (鎌倉武士: 武士).
+        for (const std::string& d : drop) junk = junk || (d.size() < t.size() && (t.ends_with(d) || t.starts_with(d)));
+        for (const std::string& p : parts) (junk ? fullParts : keptParts).insert(p);
+        if (junk) drop.insert(t);
+    }
+    for (const auto& [t, l] : proposed) {
+        // A full name of kanji holds its parts unseparated (鎌倉武士: 鎌倉).
+        for (const auto& [f, lf] : proposed) {
+            if (lf.kind != names::ListKind::Full || f == t || !f.starts_with(t)) continue;
+            (drop.contains(f) ? fullParts : keptParts).insert(t);
+        }
+    }
+    // A part stands alone where it is written outside every dropped full name.
+    const auto alone = [&](const std::string& p) {
+        for (const std::string& line : stripped) {
+            for (std::size_t at = line.find(p); at != std::string::npos; at = line.find(p, at + p.size())) {
+                bool inside = false;
+                for (const std::string& f : drop) {
+                    if (f.size() <= p.size() || !proposed.contains(f) || proposed.at(f).kind != names::ListKind::Full) continue;
+                    for (std::size_t from = at >= f.size() ? at - f.size() + p.size() : 0; !inside;) {
+                        const std::size_t fa = line.find(f, from);
+                        if (fa == std::string::npos || fa > at) break;
+                        inside = fa + f.size() >= at + p.size();
+                        from = fa + 1;
+                    }
+                    if (inside) break;
+                }
+                if (!inside) return true;
+            }
+        }
+        return false;
+    };
+    for (const std::string& p : fullParts) {
+        if (!keptParts.contains(p) && proposed.contains(p) && proposed.at(p).kind != names::ListKind::Full && !alone(p)) {
+            drop.insert(p);
+        }
+    }
+    for (const std::string& t : drop) proposed.erase(t);
+}
+
+}  // namespace
+
 std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines, const DocumentNames* names) {
     const std::unique_ptr<DocumentContext> doc = BuildDocument(snap, lines, false, names);
+    std::map<std::string, names::Listed> proposed;
+    for (names::Listed& l : doc->registry->Proposed()) proposed.emplace(l.ja, std::move(l));
+    // The persons of the dictionaries the cues of the document confirm (DocumentContext::cued), which a line
+    // alone may read as a word or by the readings of its kanji (宵 소): their person row. One that is also a
+    // common noun (力 힘) is a name only where a line shows it to be one (hon).
+    for (const std::string& k : doc->cued) {
+        if (proposed.contains(k) || (names != nullptr && names->keys.contains(k))) continue;
+        std::string ko = doc->registry->PersonReading(k);
+        if (ko.empty() || !snap.NamePerson(k)) continue;
+        names::Listed l;
+        l.ja = k;
+        l.ko = std::move(ko);
+        l.kind = PersonSurname(snap, k) ? names::ListKind::Family : names::ListKind::Given;
+        l.honorificOnly = names::CommonWord(snap, k);
+        proposed.emplace(k, std::move(l));
+    }
+    // One kanji of the name layer that the cues of two lines or more name (宵「おはよう」, 宵君): its cues hold in
+    // their line only (spec LEX-4832), so the document names it nowhere else, but the list carries it to the lines
+    // of a hooked text, where it is a name before an honorific or where the line shows it (hon).
+    {
+        std::map<std::string, std::size_t> single;
+        for (const std::string& line : lines) {
+            std::set<std::string> seen;
+            for (const names::NameCue& c : CuesOf(*doc, line)) {
+                if (text::RuneCount(c.key) == 1 && names::internal::AllRunes(c.key, names::internal::IsKanji)) seen.insert(c.key);
+            }
+            for (const std::string& k : seen) single[k]++;
+        }
+        for (const auto& [k, count] : single) {
+            if (count < 2 || proposed.contains(k) || (names != nullptr && names->keys.contains(k)) || !snap.NamePerson(k)) continue;
+            std::string ko = doc->registry->PersonReading(k);
+            if (ko.empty()) continue;
+            names::Listed l;
+            l.ja = k;
+            l.ko = std::move(ko);
+            l.kind = PersonSurname(snap, k) ? names::ListKind::Family : names::ListKind::Given;
+            l.honorificOnly = !names::NameOnlyKey(snap, k);
+            proposed.emplace(k, std::move(l));
+        }
+    }
+    DropJunkNames(snap, lines, *doc, proposed);
     std::string out;
-    for (const names::Listed& l : doc->registry->Proposed()) out += names::ListLine(l) + "\n";
+    for (const auto& [ja, l] : proposed) out += names::ListLine(l) + "\n";
     return out;
 }
 

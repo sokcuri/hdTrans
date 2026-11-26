@@ -1,0 +1,10 @@
+# 규칙: LEX-8151
+rule	input	expected	kind	layer
+names:katakana-rows	マチルダ「おはよう」\nマチルダ「うん」\nマチルダさんが来た。\nマチルダーっ！	마틸다 「좋은 아침」\n마틸다 「응」\n마틸다 씨가 왔다.\n마틸다!	fix	fixed
+names:katakana-rows	アガット「おはよう」\nアガットさんが来た。\nアガットは笑った。	아가트 「좋은 아침」\n아가트 씨가 왔다.\n아가트는 웃었다.	fix	fixed
+names:katakana-rows	ハル「おはよう」\nハルくんが来た。\nハルは笑った。	하루 「좋은 아침」\n하루 군이 왔다.\n하루는 웃었다.	keep	fixed
+names:katakana-rows	アルベルト様が来た。\nアルベルト様が笑った。\nアルくん、おはよう。\nアルは笑った。	알베르트 님이 왔다.\n알베르트 님이 웃었다.\n알 군, 좋은 아침.\n알은 웃었다.	keep	fixed
+names:katakana-rows	キャサリン「おはよう」\nキャサリンさんが来た。	캐서린 「좋은 아침」\n캐서린 씨가 왔다.	keep	fixed
+names:katakana-rows	ミラベル「おはよう」\nミラベルさんが来た。\nミラベルは笑った。	미라벨 「좋은 아침」\n미라벨 씨가 왔다.\n미라벨은 웃었다.	keep	fixed
+names:katakana-rows	オルファンス・イル・パレッティア様が来た。\nオルファンス・イル・パレッティア様が笑った。	오르판스 일 파렛티아 님이 왔다.\n오르판스 일 파렛티아 님이 웃었다.	fix	fixed
+names:katakana-rows	ニーナ「おはよう」\nニーナ「うん」\nニーナさんが来た。	니나 「좋은 아침」\n니나 「응」\n니나 씨가 왔다.	fix	fixed

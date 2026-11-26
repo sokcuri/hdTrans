@@ -1,0 +1,8 @@
+# 규칙: LEX-8155, MNG-4
+rule	input	expected	kind	layer
+names:confirmed-person-rows	宵「おはよう」\n宵君が来た。\n「宵君が言ったんだ」\n宵は笑った。	요이 「좋은 아침」\n요이 군이 왔다.\n「요이 군이 말한 거야」\n요이는 웃었다.	fix	fixed
+names:confirmed-person-rows	薺「おはよう」\n薺君が来た。\n薺の花が咲いた。	나즈나 「좋은 아침」\n나즈나 군이 왔다.\n냉이의 꽃이 피었다.	fix	fixed
+names:confirmed-person-rows	宵「おはよう」\n春の宵に月を見た。	요이 「좋은 아침」\n봄의 초저녁에 달을 보았다.	keep	fixed
+names:confirmed-person-rows	槙「おはよう」\n槙君が来た。	마키 「좋은 아침」\n마키 군이 왔다.	keep	fixed
+names:confirmed-person-rows	宵「おはよう」\n「宵くんね。」\n「宵くんね、昨日来た」	요이 「좋은 아침」\n「요이 군이네.」\n「요이 군, 어제 왔어」	fix	fixed
+names:confirmed-person-rows	ハル「おはよう」\nハルさんが来た。\n「ハルを会長に取られたくない」\n「ハルを会長に選んだ」	하루 「좋은 아침」\n하루 씨가 왔다.\n「하루를 회장에게 빼앗기고 싶지 않아」\n「하루를 회장으로 선택했어」	fix	fixed

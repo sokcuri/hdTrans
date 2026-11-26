@@ -256,6 +256,8 @@ if(NOT EMSCRIPTEN)
         add_test(NAME sound.long-line COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/long_line.sh" "$<TARGET_FILE:hdtrans_cli>"
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(sound.long-line PROPERTIES TIMEOUT 60)
+        add_test(NAME cli.propose-names COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/propose_names.sh" "$<TARGET_FILE:hdtrans_cli>"
+            "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         add_test(NAME tools.selfbase COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/selfbase.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)

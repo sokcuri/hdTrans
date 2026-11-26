@@ -889,6 +889,13 @@ HD_TEST(pipeline_strip_ruby) {
         {"漢字《かな》と|ルビ《るび》"sv, "漢字とルビ"sv},
         {"|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv, "|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv},
         {"a<b"sv, "a<b"sv},
+        // Bracket ruby: the reading over the next N+1 characters, and emphasis marks.
+        {"[みずみず,1]瑞々しい"sv, "瑞々しい"sv},
+        {"[とうか,1]桃花ちゃん"sv, "桃花ちゃん"sv},
+        {"[・]ミ[・]ナ[・]ミ"sv, "ミナミ"sv},
+        {"[あゆむ]うん。"sv, "[あゆむ]うん。"sv},
+        {"配列[0,1]を返す"sv, "配列[0,1]を返す"sv},
+        {"[よみ,3]漢字"sv, "[よみ,3]漢字"sv},
     };
     Check(StripRuby, cases);
 }

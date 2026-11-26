@@ -1,6 +1,7 @@
 // Dictionary lookups of the word stage and the filters on their candidates.
-#include <cstdint>
 #include <algorithm>
+#include <cstdint>
+#include <functional>
 
 #include "core/dict/classes.h"
 #include "core/text/utf8.h"
@@ -290,6 +291,14 @@ dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
     };
     ctx.skip.context = &sc;
     if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
+    if (current >= 0 && current < TokenCount()) {
+        const std::string_view own = Tok(current).text;
+        // The query may lie in another buffer (a rewritten surface): only a view into the token has text before it.
+        const std::less<const char*> less;
+        if (!own.empty() && less(own.data(), query.data()) && !less(own.data() + own.size(), query.data())) {
+            ctx.before = own.substr(0, static_cast<std::size_t>(query.data() - own.data()));
+        }
+    }
     return snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
 }
 

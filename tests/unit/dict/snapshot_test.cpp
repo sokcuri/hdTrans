@@ -108,6 +108,45 @@ HD_TEST(SnapshotKanaPersonKeptForConfirmedLookups) {
     HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, context)).find("츠구미") != std::string::npos);
 }
 
+// A kanji of the name layer alone, with a person row and a common noun row of two syllables or more and no row in
+// another dictionary, takes its noun rows where it stands alone: not after a kanji or a letter, nor before a kanji;
+// one whose noun row is only the name's sound takes its person rows.
+// A confirmed person before an honorific keeps its person rows only (spec LEX-8153, LEX-8155).
+HD_TEST(SnapshotLoneKanjiNameRows) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\tid\n";
+    const LoadResult loaded = Load({
+        MakeFile("base.tsv", header + "花\t꽃\tN110\t\t\tGN\t1\n"),
+        MakeFile("names.tsv", "#! layer=names\n" + header +
+                                  "宵\t요이\tN130\tQPNVHn\tWb\tGN\t2\n"
+                                  "宵\t초저녁\tN110\t\t\tGN\t3\n"
+                                  "花\t하나\tN130\tQPNVHn\tWb\tGN\t4\n"
+                                  "遼\t료\tN130\tQPNVHn\tWb\tGN\t5\n"
+                                  "遼\t랴오\tN110\t\t\tGN\t6\n"
+                                  "槙\t마키\tN110\t\t\tGN\t7\n"
+                                  "槙\t마키\tN130\tQPNVHn\tWa\tGN\t8\n"),
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const Snapshot& snap = *loaded.snapshot;
+    LookupContext alone;
+    const std::string none = Show(snap.GetWordInfo("宵に", LookupMode::General, alone));
+    HD_CHECK(none.find("초저녁") != std::string::npos && none.find("요이") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("宵空", LookupMode::General, alone)).find("초저녁") == std::string::npos);
+    alone.before = "春";
+    HD_CHECK(Show(snap.GetWordInfo("宵に", LookupMode::General, alone)).find("초저녁") == std::string::npos);
+    alone.before = "の";
+    HD_CHECK(Show(snap.GetWordInfo("宵に", LookupMode::General, alone)).find("초저녁") != std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("花が", LookupMode::General, alone)).find("하나") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("遼が", LookupMode::General, alone)).find("랴오") == std::string::npos);
+    // A noun row that is only the name's sound leaves the person row (槙 마키, read with a person's particles).
+    const std::string sound = Show(snap.GetWordInfo("槙に", LookupMode::General, alone));
+    HD_CHECK(sound.find("마키 N130") != std::string::npos && sound.find("마키 N110") == std::string::npos);
+    KeySet confirmed{"宵"};
+    LookupContext person;
+    person.confirmed = &confirmed;
+    const std::string called = Show(snap.GetWordInfo("宵君が", LookupMode::General, person));
+    HD_CHECK(called.find("요이") != std::string::npos && called.find("초저녁") == std::string::npos);
+}
+
 // A name key that is a number and a counter word of the base dictionary reads as the
 // counter: after digits with any counter, after a kanji numeral with a counter of two
 // characters or more. A kanji numeral and a one-character word stays a name.

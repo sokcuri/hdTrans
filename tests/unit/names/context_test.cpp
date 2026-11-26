@@ -17,7 +17,11 @@ const dict::Snapshot* Dictionary() {
         {0, "base.tsv",
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
          "光\t히카루\tN130\tQPN\tWb\tGN\t1\n"
-         "睦月\t무쓰키\tN130\tQCT\t\tGN\t2\n"},
+         "睦月\t무쓰키\tN130\tQCT\t\tGN\t2\n"
+         "時雨\t늦가을 비\tN110\tUMe\t\tGN\t8\n"
+         "ランチ\t런치\tN110\tVFd\t\tGN\t9\n"
+         "タイム\t타임\tN110\tUMe\t\tGN\t10\n"
+         "武士\t무사\tN110\tUAqVHn\t\tGN\t11\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -25,7 +29,12 @@ const dict::Snapshot* Dictionary() {
          "柚葉\t유즈하\tN130\tQPN\tWb\tGN\t4\n"
          "水野柚葉\t미즈노 유즈하\tN130\tQPN\t\tGN\t5\n"
          "時雨\t시구레\tN130\tQPN\tWb\tGN\t6\n"
-         "睦月\t무츠키\tN130\tQPN\tWb\tGN\t7\n"},
+         "睦月\t무츠키\tN130\tQPN\tWb\tGN\t7\n"
+         "武士\t타케시\tN130\tQPN\tWb\tGN\t12\n"
+         "鎌倉\t카마쿠라\tN130\tQPNVHn\tWa\tGN\t13\n"
+         "学園長\t학원장\tN130\tQPNVHn\tWb\tGN\t14\n"
+         "ゆき\t유키\tN130\tQPNVHn\tWb\tGN\t15\n"
+         "マチルダ\t마틸다\tN130\tQPNVHn\tWb\tGN\t16\n"},
     });
     return loaded.snapshot.get();
 }
@@ -126,4 +135,25 @@ HD_TEST(document_verse_lines) {
     HD_CHECK(pipeline::internal::VerseLines(ends).empty());
     const std::vector<std::string> spaces = {"私を信じて", "　 "};
     HD_CHECK(pipeline::internal::VerseLines(spaces).empty());
+}
+
+// The proposal: the persons the cues of the document confirm, a common word with hon (spec LEX-8152), nothing for
+// a text without names, and none of the shapes that are no names (spec LEX-8154).
+HD_TEST(document_proposed_names) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    const auto propose = [&](std::vector<std::string> lines) { return pipeline::ProposeNames(*snap, lines); };
+    HD_CHECK_EQ(propose({"時雨「おはよう」", "時雨「うん」", "時雨は笑った。"}), std::string("時雨\t시구레\tgiven\thon\n"));
+    HD_CHECK_EQ(propose({"政府は二十日、新たな経済対策を閣議決定した。", "春の宵、桜の下で人々が集まった。",
+                         "彼は栞を挟んで本を閉じた。", "ランチタイムには屋上で弁当を食べた。"}),
+                std::string());
+    const std::string kana = propose({"みおちゃん、おはよう。", "やはりみおちゃんだ。", "今度はみおちゃんの番だ。", "みおちゃん「うん」"});
+    HD_CHECK(kana.find("りみお") == std::string::npos && kana.find("はみお") == std::string::npos);
+    HD_CHECK_EQ(propose({"ランチタイムさんが来た。", "ランチタイムさんの話。", "ランチタイムは終わった。"}), std::string());
+    HD_CHECK_EQ(propose({"鎌倉武士は強い。", "武士は食わねど高楊枝。", "鎌倉武士さんが来た。"}), std::string());
+    HD_CHECK_EQ(propose({"学園長「おはよう」", "学園長「うん」", "学園長様が来た。"}), std::string());
+    HD_CHECK_EQ(propose({"みゆきちゃん「おはよう」", "ゆきちゃんが来た。", "みゆきちゃんとゆきちゃん。"}),
+                std::string("みゆき\t미유키\tgiven\nゆき\t유키\tgiven\n"));
+    HD_CHECK_EQ(propose({"マチルダ「おはよう」", "マチルダ「うん」", "マチルダさんが来た。", "マチルダーっ！"}),
+                std::string("マチルダ\t마틸다\tgiven\n"));
 }

@@ -123,6 +123,9 @@ public:
     std::string Dict();
     // The Korean of an accepted surface, or "".
     std::string Render(std::string_view t);
+    // The Korean of the person t: a person row of the base dictionary, else the first person row of the name
+    // layer; a katakana name as RenderPart writes it. "" for none.
+    std::string PersonReading(std::string_view t);
     // The accepted names that are not listed, as name-list lines with their Korean: a full
     // name, a surname as family, a name only before an honorific with hon.
     std::vector<Listed> Proposed();
@@ -164,6 +167,10 @@ private:
     // senses. Such a ruby is no evidence of a name, and none against one (spec LEX-5175); in a speaker
     // label it still names. An on reading alone is not enough: names read so too (桃花 トウカ, 黒羽 こくう).
     bool OrdinaryReading(std::string_view base, std::string_view reading);
+    // Whether the ruby reading over base is no evidence of a name, after being the text that follows the ruby: a
+    // katakana loan word over kanji that are not only a person of the name layer, a pronoun over a base that is no
+    // person, or a common word over a base with a common noun row of the name layer; never before an honorific.
+    bool RubyGloss(std::string_view base, std::string_view reading, std::string_view after);
     std::set<std::string_view> Words(std::string_view s);
     unsigned WordClasses(std::string_view s);
     // Whether s is a noun or a verb, and no adjectival noun or stem of a する verb (spec LEX-6301).
@@ -255,6 +262,8 @@ private:
     // The Korean of a person row of the name layer for the two-kanji common word x that reads x as names
     // read its kanji (internal::GuessedName: 氷室 히무로); "" for none.
     std::string CommonSurnameReading(std::string_view x) const;
+    // The Korean of the first person row of the base dictionary of t, or "".
+    std::string BasePersonReading(std::string_view t) const;
     // Whether the name layer has a person row of t.
     bool LayerPerson(std::string_view t) const;
     bool Crossed(std::string_view t, std::size_t i);
@@ -265,7 +274,8 @@ private:
     std::string RenderName(std::string_view t, const Name& n);
     // whole: t is the whole name, which a katakana name reads as its name-layer person
     // reading before its transliteration.
-    std::string RenderPart(std::string_view t, bool whole = false);
+    // chain: t is a part of a name joined by ・ or ＝, whose final ル reads as the transliteration writes it.
+    std::string RenderPart(std::string_view t, bool whole = false, bool chain = false);
     std::string PersonName(std::string_view t);
     // Whether a guessed reading of the kanji run t is kept out: the document writes it once only, it
     // names a shop, or its last kanji and 様 are a word (皆一様).

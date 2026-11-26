@@ -14,12 +14,14 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/dict/names.h"
 #include "core/names/chars.h"
 #include "core/text/utf8.h"
 #include "core/names/labels.h"
 #include "core/names/name_cues.h"
 #include "core/names/readings.h"
 #include "core/names/ruby.h"
+#include "core/pipeline/normalize.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 
@@ -724,6 +726,41 @@ bool PersonFrame(std::string_view run, std::string_view before, std::string_view
 
 }  // namespace
 
+namespace {
+
+// Whether after starts with an honorific of a name (dict::internal::kNameHonorifics).
+bool HonorificStart(std::string_view after) {
+    return std::any_of(dict::internal::kNameHonorifics.begin(), dict::internal::kNameHonorifics.end(),
+                       [&](std::string_view h) { return after.starts_with(h); });
+}
+
+}  // namespace
+
+bool Registry::RubyGloss(std::string_view base, std::string_view reading, std::string_view after) {
+    if (HonorificStart(after)) return false;
+    const DictFlags b = Flags(base);
+    // A katakana ruby over kanji that are not only a person of the name layer glosses them: a loan word of the
+    // dictionaries (接続《リンク》, 国王《キング》), one of more than four morae (七回帰《セブンリカーション》), or any over a
+    // common word that is no person of the name layer. A short reading over a coinage or over a person of the name
+    // layer names it (灰狼《ハイロウ》, 桃花《トウカ》).
+    if (AllRunes(reading, IsKatakana) && AllRunes(base, IsKanji) && !(LayerPerson(base) && !b.common)) {
+        const DictFlags loan = Flags(reading);
+        if (loan.common || ReadingMorae(reading) > 4 || (b.common && !LayerPerson(base))) return true;
+    }
+    // A pronoun read over a base that is no person reads in its place (学園長室《そこ》), and so does a common word over
+    // a base the name layer also has as a common noun.
+    const DictFlags r = Flags(ToHiragana(reading));
+    if (!AllRunes(base, IsKanji) || !r.common || r.person) return false;
+    bool noun = false;
+    if (snap_ != nullptr) {
+        for (const dict::Record& rec : snap_->NameRecords(base)) {
+            noun = noun || (rec.codes != nullptr && !rec.codes->part.Empty() && rec.codes->part.Tag() == 'N' &&
+                            !rec.codes->sem.HasPrefix("QPN") && !rec.codes->sem.HasCode("QCT"));
+        }
+    }
+    return noun || (r.pronoun && !LayerPerson(base) && !r.layerSurname && !r.layerGiven);
+}
+
 void Registry::Add(std::string_view rawLine) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;
@@ -734,11 +771,35 @@ void Registry::Add(std::string_view rawLine) {
         RubyMatch m;
         if (!FindRuby(line, from, m)) break;
         const std::string base(m.base), kana(m.reading);
-        if (IsKanaText(kana) && !Gikun(base, kana) && !OrdinaryReading(base, kana)) {
+        if (!RubyGloss(base, kana, std::string_view(line).substr(m.end)) && IsKanaText(kana) && !Gikun(base, kana) &&
+            !OrdinaryReading(base, kana)) {
             count(gloss_, base);
             SetReading(base, kana);
         }
         from = m.end;
+    }
+    // Brace ruby ({rb}base{/rb}{rt}reading{/rt}) and ruby tags (<R reading>base</R>), which the line keeps (spec
+    // LAY-4), name as ruby does where they read a name.
+    const std::string tagged = pipeline::RTagsAsBraceRuby(line);
+    const std::string& braced = tagged.empty() ? line : tagged;
+    for (std::size_t at = braced.find("{rb}"); at != std::string::npos; at = braced.find("{rb}", at + 4)) {
+        const std::size_t baseEnd = braced.find("{/rb}{rt}", at + 4);
+        const std::size_t readEnd = baseEnd == std::string::npos ? baseEnd : braced.find("{/rt}", baseEnd + 9);
+        if (readEnd == std::string::npos) break;
+        const std::string base = braced.substr(at + 4, baseEnd - at - 4), kana = braced.substr(baseEnd + 9, readEnd - baseEnd - 9);
+        if (base.find('{') != std::string::npos || kana.find('{') != std::string::npos) continue;
+        // Not a base that goes on in the kana after the tags (小洒落た, 見惚れる).
+        const std::string_view after = std::string_view(braced).substr(readEnd + 5);
+        const char32_t next = after.empty() ? 0 : RuneAt(after, 0).cp;
+        const bool called = HonorificStart(after);
+        const bool goesOn = IsHiragana(next) && !InRunes(next, "のはがをにともへやっ") && !called;
+        // These tags also read hard words (訥々, 病葉): only a base the name layer has as a person, or one before an
+        // honorific, is a name.
+        if (!goesOn && (called || LayerPerson(base)) && AllRunes(base, IsKanji) && IsKanaText(kana) && !RubyGloss(base, kana, after) &&
+            !Gikun(base, kana) && !OrdinaryReading(base, kana)) {
+            count(gloss_, base);
+            SetReading(base, kana);
+        }
     }
     line = StripRuby(line);
     // A hiragana run in parentheses after kanji that is no reading of them and no word

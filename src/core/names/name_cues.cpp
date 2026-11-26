@@ -1242,6 +1242,27 @@ bool PairedFirstAt(const dict::Snapshot& snap, std::string_view after) {
     return InRunes(FirstRune(tail).cp, "がはもで") || ChainGoesOnAt(snap, tail);
 }
 
+// Whether key stands where only a person stands: the topic or subject of a quote it says (栞は「おはよう」と言った),
+// one met or gone with (栞に会った, 栞と一緒に), or, for one kanji that only the name layer has, called at the start of
+// an utterance (「栞、こっちだよ」; spec LEX-8153).
+bool PersonOnlyAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
+    if (after.starts_with("は") || after.starts_with("が") || after.starts_with("も")) {
+        std::string_view rest = after.substr(FirstRune(after).size);
+        if (rest.starts_with("「") || rest.starts_with("『")) {
+            const std::string_view close = rest.starts_with("「") ? "」" : "』";
+            const std::size_t end = rest.find(close);
+            if (end != std::string_view::npos) {
+                rest = rest.substr(end + close.size());
+                if (rest.starts_with("と") || rest.starts_with("って")) return SingleSayer(rest.substr(FirstRune(rest).size));
+            }
+        }
+        return false;
+    }
+    if (after.starts_with("に会") || after.starts_with("に逢") || after.starts_with("と一緒に") || after.starts_with("といっしょに")) return true;
+    return text::RuneCount(key) == 1 && !snap.DictionaryWord(key) && after.starts_with("、") && !TrimEndSpaces(before).empty() &&
+           UtteranceStart(before);
+}
+
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     // A katakana name that also spells an animal (アリ, サイ) names a person as the subject of a verb of
     // saying or thinking in its clause, as a single kanji does (アリが言った 아리가 말했다; spec LEX-4840).
@@ -1290,6 +1311,7 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
                PersonActIn(ClauseBefore(before), Role::Other, false, nullptr, MoverKey(snap, key));
     }
     if (PairedAt(snap, before, after) || PairedFirstAt(snap, after)) return true;
+    if (PersonOnlyAt(snap, key, before, after)) return true;
     const bool mover = MoverKey(snap, key);
     if (after.starts_with("が")) return PersonActIn(after.substr(std::string_view("が").size()), Role::Subject, true, nullptr, mover);
     if (after.starts_with("は") || after.starts_with("も")) {
