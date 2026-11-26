@@ -342,13 +342,19 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             // Read by the sound stage (the lemma only before a する that describes no noun; KR한
             // before an の and a noun; a state word the dictionary reads, and what its に before a
             // verb writes).
-        } else if (opt == "acts" || opt == "adj" || opt == "state" || key == "ni") {
+        } else if ((key == "ask" || key == "again" || key == "quoted") && !value.empty() && pos == "intj" && ctx.soundTable) {
+            // Read by the sound stage (the Korean before a question mark, where the row is said again
+            // in its run of sounds, and where a と quotes it).
+        } else if ((key == "ask" || key == "again" || key == "quoted") && value.empty() && hasValue) {
+            return "option " + Quote(opt) + ": " + std::string(key) + " needs a value";
+        } else if (opt == "acts" || opt == "adj" || opt == "state" || key == "ni" || key == "ask" || key == "again" ||
+                   key == "quoted") {
             return "option " + Quote(opt) + ": " + std::string(opt) + " is only for the built-in sound table";
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
-        } else if ((key == "polite" || key == "alone") && hasValue && pos == "intj") {
+        } else if ((key == "polite" || key == "alone" || key == "greet") && hasValue && pos == "intj") {
             // Read by the sound stage (the last word of the Korean in polite speech, the Korean of a
-            // cry said once).
+            // cry said once, the Korean where the row greets).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {

@@ -10,7 +10,7 @@ cx:tasukaru:10	悪くないな。うん、助かる。	나쁘지 않네. 응, �
 cx:tasukaru:10	色々この艦隊のことも教えてもらっている。助かってる。	여러 가지 이 함대도 가르쳐 주고 있다. 도움이 되고 있다.	fix	rewrites
 cx:tasukaru:10	涼は、意外とこの手の仕事も速い。助かるな。	양은, 의외로 이런 종류의 일도 빠르다. 도움이 되는구나.	fix	rewrites
 cx:tasukaru:10	住吉さんは我々の意図を的確に汲んでくれるので、助かります	has:도움이 됩니다	fix	rewrites
-cx:tasukaru:10	直す奴？ いれば助かるよな。	고치는 놈? 있으면 도움이 되지.	fix	rewrites
+cx:tasukaru:10	直す奴？ いれば助かるよな。	고치는 녀석? 있으면 도움이 되지.	fix	rewrites
 cx:tasukaru:10	命が助かる。	!rule:cx:tasukaru:10	keep	rewrites
 cx:tasukaru:10	到底助からない傷ならば、二人で守ることを決めた。	!rule:cx:tasukaru:10	keep	rewrites
 cx:tasukaru:10	逃げれば助かる。	!rule:cx:tasukaru:10	keep	rewrites

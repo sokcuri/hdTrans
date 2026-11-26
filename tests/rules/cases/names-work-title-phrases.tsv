@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 names:work-title-phrases	彼女は甘い吐息を漏らしながら	그녀는 달콤한 숨결을 흘리면서	fix	lookup
 names:work-title-phrases	甘い罠にかかった	lacks:초콜릿	fix	lookup
 names:work-title-phrases	赤い唇が震えた	붉은 입술이 떨렸다	fix	lookup
-names:work-title-phrases	白い恐怖に襲われた	흰 공포에 습격당했다	fix	lookup
+names:work-title-phrases	白い恐怖に襲われた	흰 공포에 휩싸였다	fix	lookup
 names:work-title-phrases	遠い雷鳴が聞こえる	먼 천둥소리가 들린다	fix	lookup
 names:work-title-phrases	彼女の青い春は終わった	그녀의 푸른 봄은 끝났다	fix	lookup
 names:work-title-phrases	冷たい嘘をついた	lacks:붙었다	fix	lookup

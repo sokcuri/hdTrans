@@ -468,6 +468,26 @@ HD_TEST(pipeline_sound_doubled_kana_verb) {
     HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
+// After the conditional たら, だら or れば of a predicate an ono sound of three kana or more that ends in
+// と or holds ー starts as after a hiragana word; a question word there stays.
+HD_TEST(pipeline_sound_after_conditional) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "来\t오\tM41;\t1\n"
+                                     "見\t보\tM417\t2\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"来たらどーんと行こう", "来たら콰앙 行こう"},
+        {"見ればばーんと", "見れば쾅"},
+        {"見たらどうだ", "見たらどうだ"},
+        {"すればどうなる", "すればどうなる"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The という that quotes a sound before a word in kanji or katakana reads as する, joined to a
 // doubled mimetic and apart from other sounds, also after a key that ends in と; elsewhere
 // という follows the sound with no space and takes back the と of such a key, and another verb
@@ -1112,6 +1132,58 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
         {"それは、よかった。", "それは、다행이다。"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// A row with ask=K is K right before a question mark, one with again=K where another sound of its run
+// is the same row, one with quoted=K where a と quotes it (はっ 핫, ask=헉 again=헉 quoted=헉).
+HD_TEST(pipeline_sound_ask_and_again) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'ハ')) {
+        flagged = flagged || (r.key == U"ハッ" && r.ask == "헉" && r.again == "헉" && r.quoted == "헉");
+    }
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"「はっ」", "「핫」"},
+        {"「はっ！」", "「핫！」"},
+        {"「はっ？」", "「헉？」"},
+        {"「ハッ！？」", "「헉！？」"},
+        {"「はっ!?」", "「헉!?」"},
+        {"「はーっ！？」", "「허억！？」"},
+        {"「はっ……？」", "「헉……？」"},  // an ellipsis between
+        {"「はっ……」", "「핫……」"},
+        {"「はっ、はっ……」", "「헉、헉……」"},
+        {"「ハッ……ハッ……」", "「헉……헉……」"},
+        {"「はっはっ」", "「헉헉」"},
+        {"「はーっ、はっ」", "「허억、헉」"},
+        {"「はっ、んっ、はっ」", "「헉、읏、헉」"},  // another sound between
+        // A row of its own is no copy: はぁっ, the laugh はっはっは, a burst.
+        {"「はっ……はぁっ……」", "「핫……하앗……」"},
+        {"「んっ……はっ……あんっ」", "「읏……핫……앙」"},
+        {"「はっ、はっはっは」", "「핫、하하하」"},
+        {"「はっ！ はっ！」", "「핫！ 핫！」"},  // an exclamation mark parts the run
+        {"「はっ・・・はっ」", "「헉・・・헉」"},
+        {"「はっ...はっ」", "「헉...헉」"},
+        {"「はっ……ん……はっ」", "「헉……응……헉」"},  // a voice of no row between
+        {"「はっ。はっ」", "「핫。핫」"},
+        // A と that quotes it, after a pause or a closing bracket.
+        {"はっ、と", "헉、 하고"},
+        {"「はっ」と", "「헉」と"},
+        {"「はっ、まさか」", "「핫、まさか」"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+    // A copy farther than the reach on either side counts on neither (both 핫), a nearer one on both.
+    std::string far = "はっ、", farWant = "핫、";
+    for (int n = 0; n < 70; n++) far += "あっ、", farWant += "앗、";
+    HD_CHECK_EQ(Sound(far + "はっ", ctx, *snap), farWant + "핫");
+    std::string near = "はっ、", nearWant = "헉、";
+    for (int n = 0; n < 10; n++) near += "あっ、", nearWant += "앗、";
+    HD_CHECK_EQ(Sound(near + "はっ", ctx, *snap), nearWant + "헉");
 }
 
 // A final phrase row (また明日 내일 보자) is read only where the utterance ends after it.

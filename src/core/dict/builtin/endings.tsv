@@ -472,6 +472,11 @@
 学生じゃないですか	학생이잖아요	end	prio=-1
 静かじゃないですか	조용하잖아요	end	prio=-1
 書いてたじゃない	쓰고 있었잖아	end	prio=-1
+書いてるじゃない	쓰고 있잖아	end	prio=-1
+書いちゃうじゃない	써버리잖아	end	prio=-1
+書いちゃうじゃないの	써버리잖아	end	prio=-1
+書かないじゃない	쓰지 않잖아	end	prio=-1
+書かなかったじゃない	쓰지 않았잖아	end	prio=-1
 // ではないか and じゃないの after a predicate: 〜잖아 as well
 書くではないか	쓰잖아	end	prio=-1
 書いたではないか	썼잖아	end	prio=-1

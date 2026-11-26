@@ -4,6 +4,7 @@
 
 #include "core/names/chars.h"
 #include "core/names/registry.h"
+#include "core/pipeline/normalize.h"
 #include "core/text/unicode.h"
 
 namespace hdTrans::names {
@@ -293,6 +294,10 @@ bool FindRuby(std::string_view s, std::size_t from, RubyMatch& m) {
         if (BarRuby(s, pos, m) || BarParenRuby(s, pos, m) || KanjiRuby(s, pos, runEnd, m) || HtmlRuby(s, pos, m)) {
             return true;
         }
+        if (pipeline::internal::BracketRuby b; pipeline::internal::BracketRubyAt(s, pos, b)) {
+            m = RubyMatch{pos, b.baseEnd, s.substr(b.baseBegin, b.baseEnd - b.baseBegin), s.substr(b.readBegin, b.readEnd - b.readBegin)};
+            return true;
+        }
     }
     return false;
 }
@@ -308,7 +313,7 @@ bool FindGloss(std::string_view s, std::size_t from, RubyMatch& m) {
 
 std::string StripRuby(std::string_view line) {
     if (line.find("《") == std::string_view::npos && line.find('<') == std::string_view::npos &&
-        line.find('|') == std::string_view::npos && line.find("｜") == std::string_view::npos) {
+        line.find('|') == std::string_view::npos && line.find("｜") == std::string_view::npos && line.find('[') == std::string_view::npos) {
         return std::string(line);
     }
     std::string out;

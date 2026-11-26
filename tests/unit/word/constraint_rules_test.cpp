@@ -38,6 +38,8 @@ const dict::Snapshot* Dictionary() {
          "殿\t전\tN110\t\tOn\tGN\t18\n"
          "様\t님\tN110\t\t\tGN\t19\n"
          "さん\t씨\tN110\t\t\tGN\t20\n"
+         "出\t&A6@\tM443\t\t\tGN\t1001\n"
+         "出そう\t나올 것 %B3@\tG8U0\t\t\tGN\t1002\n"
          "と\t(와)과\tP200\t\t\tGN\t21\n"
          "と\t(이)라고\tP200\t\t\tGN\t22\n"
          "と、\t(와)과\tP201\t\t\tGN\t85\n"
@@ -199,7 +201,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{113});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{121});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -207,6 +209,7 @@ HD_TEST(constraint_rules_table) {
         HD_CHECK((r.reject == word::ConstraintReject::OtherTargets || r.reject == word::ConstraintReject::Target) ==
                  !r.target.empty());
         HD_CHECK((r.context == word::ConstraintContext::BeforeListed ||
+                  r.context == word::ConstraintContext::BeforeListedOrAfterObject ||
                   r.context == word::ConstraintContext::AfterNounBeforeListed) == !r.follows.empty());
         for (std::string_view rest = r.follows; !rest.empty();) {
             const std::size_t bar = rest.find('|');
@@ -360,6 +363,18 @@ HD_TEST(constraint_tsui_numeral_ago) {
         {"つい3回も言った", "つい3回も言った", "つい", "무심코 불과"},
         {"つい笑った", "つい笑った", "つい", "무심코 불과"},
         {"つい三、四日前", "つい三、四日前", "つい", "무심코 불과"},
+    });
+}
+
+// 出そう before a particle of the volitional is 出す, not the そう of 出る: the word goes and the stem 出
+// with its ending takes its place. Before だ or な it stays.
+HD_TEST(constraint_dasou_before_volitional) {
+    CheckCases({
+        {"出そうとする", "出そうとする", "出そう", ""},
+        {"出そうぜ", "出そうぜ", "出そう", ""},
+        {"出そうだ", "出そうだ", "出そう", "나올 것 %B3@"},
+        {"出そうな顔", "出そうな顔", "出そう", "나올 것 %B3@"},
+        {"ゴミを出そうだ", "出そうだ", "出そう", ""},
     });
 }
 

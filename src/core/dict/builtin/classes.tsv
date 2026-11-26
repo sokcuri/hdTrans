@@ -25,8 +25,16 @@
 //= particle.split-lead	One-kana particles that, right after a noun, may start a hiragana word that a longer dictionary word after the particle splits (刺身にわさび: に + わさび, not にわ 庭 + さび; constraint particle-split).
 //= verb.perception	Verbs of seeing and the passive words of them the dictionary has (見る, 覗く, 見つめる, 見られる; not 聞く, which also asks): with a person before に their passive is that person's act, with no object needed (誰かに見られている 누군가가 보고 있다; spec GRM-2).
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
+//= noun.count-compound	Nouns after a count of people that Korean joins to the Sino-Korean 인 of the count (4人家族 4인가족, 3人生活, 8人体制), which the counter-cuts-word constraint leaves to the dictionary.
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
+//= verb.lookalike-object	Ends of the text before a regular verb stem spelled as the plain form of する, くる or 来る (the くる of くるむ) that mark its object or means, so the regular verb stays (タオルでくるんだ 수건으로 감쌌다); elsewhere the irregular verb reads it (くるんだ 오는 거야; spec LEX-8082).
+//= verb.lookalike-te	Ends of a て form before such a stem, which no object or means of verb.lookalike-object is (読んでくるんだ 읽어 오는 거야).
+//= verb.lookalike-tail	Starts of the text after such a stem that the irregular verb takes with its explanatory ん (くるんだ, くるんです, くるんじゃ, くるんでしょ): only there does the irregular verb take the stem; before a て form in んで (紙にくるんで 종이에 감싸) the regular verb stays.
+//= verb.lookalike-target	The に that ends the text before such a stem after a thing of noun.wrapping (毛布にくるんだ 담요에 감싼): the regular verb stays.
+//= noun.wrapping	Things one wraps something with or in (毛布, 布, 紙, タオル, おくるみ), before the に of verb.lookalike-target.
+//= verb.lookalike-past	The past of such a stem in ん (くるんだ), after which a noun it describes keeps the regular verb (くるんだ布 감싼 천).
+//= verb.lookalike-adnominal	Prefixes that may start the noun after verb.lookalike-past (お菓子, ご飯): the noun is seen after them.
 //= adjective.te-state-aux	Stems of the adjectives after a て form that are a contracted いる with its い dropped, read as a word of their own: the ない of ていない (見てない, 強いてない; spec LEX-8021).
 //= follower.continuative-suffix	Starts of the suffixes after a verb's continuative that begin like a case particle (答えがたい, 答えがちだ, 答えにくい): the stem before them stays the verb, though a noun row spells it (spec LEX-8020).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
@@ -34,6 +42,7 @@
 //= noun.group-subject	Words of everyone or of a number of people that can stand as a subject with no particle, which a 先〜てる after them tells about, not a promise (みんな先に行ってるよ 모두 먼저 가고 있어, 二人とも先に帰ってるよ).
 //= noun.plural-head	Nouns of people or creatures one counts as a crowd, after which 共 is the plural 들 even where their chosen reading has no person code (敵共 적들, 雑魚共 잡졸들).
 //= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
+//= noun.person-general	Nouns of a person in general (人, 子, 方): after この, その or あの one names a single person, after whose dropped の a 中 is inside, 안 (この人の中に 이 사람 안에; LEX-8120).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
@@ -281,6 +290,7 @@
 //= adverb.speak-manner	Manners of speaking before 言う or 申し上げる whose と frames what follows, -면 as the dictionary idioms do (率直に言うと 솔직히 말하면, 単刀直入に申し上げると 말씀드리면; spec GRM-40).
 //= ko-verb.break-in	Korean verbs of a happening that breaks in on an ongoing act, after which the いる of ている is -는데 (お茶をすすっていると、会見が始まった 마시고 있는데; spec GRM-40).
 //= noun.habit-time	Nouns of a time of one's life (子供の頃, 小さい頃) that, before a と or たら in their clause, make it a habit, -면 (子供の頃は雨が降ると外で遊んだ 비가 오면; spec GRM-177).
+//= noun.prenominal-time	Noun rows of a prenominal and 時 (その時, あの時) that keep their kanji before a kanji word, as they often stand before a noun with no particle (その時人が来た 그 때 사람이 왔다; spec LEX-8164).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.move-toward	Korean verbs of moving toward a place, matched at the end of the lemma (걷다, 달리다, 나아가다, 떠나다): a 目指して of a place before one is 향해 (頂上を目指して歩く 정상을 향해 걷는다).
@@ -535,6 +545,12 @@
 //= sound.tte-asked	The bare question words of sound.tte-called: after a mimetic and って they ask about the sound only where the question ends after them, at the end, before a sentence mark or a closing bracket, or before の (ドキドキって何？ 두근두근이 뭐야?), or before a copula form of sound.tte-asked-copula; before a verb or を they are its object and the って stays the adverb (ガタガタってなにやってるの？, ドンって何してるの？).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
+//= sound.quoted-lead	Lead rows, in katakana, that need text before them in the line and words after them (「って、敵！？」 아니, 「ってことは…」 그렇다는 건): a line that starts with them may go on with a quote of the line before, and 「って」 alone is cut off.
+//= sound.quote-goes-on	Starts of the text after a lead of sound.quoted-lead and its pause that go on with its quote (って、言ってるけど, って、ことで, ってことはない), where it stays the quoting って.
+//= sound.exasperated	Lead rows, in katakana, said in exasperation (もう 정말, ああもう 아, 정말) only where nothing but marks follows them in the utterance or a member of sound.exasperated-end after a name or a title ends a phrase of their clause.
+//= sound.exasperated-end	Ends of a phrase, in katakana, that after a name or a title make an utterance-initial もう exasperation (先輩ったら, 高峰君ってば; not 読んだってば).
+//= sound.greeting-lead	Words, in katakana, that open an utterance and make a row with greet= after them and a comma a greeting (やあ、どうも, これは、どうも).
+//= kana.drawl-particle	Sentence particles after which a tail of ー draws the phrase out, at the end of a hiragana run of three kana or more (ですよねー, いいなー), which the spelling of SND-30 leaves.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
 //= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
@@ -763,7 +779,10 @@
 //= wrap.open-word	Words that a line read alone takes for a greeting but that start a sentence as a time with は when a line broken after them goes on (今日は / 特別な日だ 오늘은 특별한 날이다).
 //= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
 //= wrap.open-ending	Endings of a verb or adjective that join it to what follows, which a line broken in the middle of a sentence ends with: connective particles (多いんですが / 差してない人も, 分かるので / 聞いてください) and a predicate made a noun before a case or binding particle (横断するのが / 最後の夢なんだ, 守るために / 今できることは).
-//= wrap.quote-start	Quotative particles that a line broken before them starts with, closing what the line before said (なってくる / と思います, 遅い / って言いたい).
+//= wrap.quote-start	Quotative particles and the particles と starts, which a line broken before them starts with, closing or marking what the line before said (なってくる / と思います, 遅い / って言いたい, いなかった / ということです, リーダー / として, 部下 / との).
+//= wrap.kanji-word-start	Words of one kanji that start a clause of their own, which a line after a kanji starts with without being the end of a word cut by the break (先生 / 方がいい, 至る中 / 今、, 7年 / 前の).
+//= wrap.kanji-relational	Relational and body nouns of one kanji that stay a word of their own after の at the end of a line, whatever kanji the next line starts with (机の上 / 手を置いて, 彼の手 / 紙のように).
+//= wrap.case-start	Case particles that a line broken before them starts with, marking what the line before named (男子高校生 / がクマに, インタビュー / で語った).
 //= wrap.negative-start	Starts of the negative of the copula, which a line broken after じゃ or では starts with (いいんじゃ / ないかな, 嫌では / ないですけど).
 //= wrap.sentence-start	Interjections the dictionary has as nouns, which start a sentence of their own: a bare verb or adjective at the end of the line before one ends its sentence (分かった / はい).
 
@@ -1116,6 +1135,7 @@ contraction.n-ru	なあ
 contraction.n-ru	なー
 contraction.n-ru	な～
 contraction.n-ru	なって
+contraction.n-ru	なと
 
 contraction.n-ru-final	な
 
@@ -1499,6 +1519,15 @@ noun.plural-head	獣
 noun.plural-head	賊
 noun.plural-head	盗賊
 noun.plural-head	輩
+noun.person-general	人
+noun.person-general	子
+noun.person-general	方
+noun.person-general	者
+noun.person-general	男
+noun.person-general	女
+noun.person-general	男の子
+noun.person-general	女の子
+noun.person-general	娘
 noun.plural-suffix	たち
 noun.plural-suffix	達
 noun.plural-suffix	ら
@@ -4174,6 +4203,10 @@ ko-verb.break-in	마주치다
 ko-verb.break-in	메아리치다
 ko-verb.break-in	울려 퍼지다
 ko-verb.break-in	진동하다
+noun.prenominal-time	その時
+noun.prenominal-time	この時
+noun.prenominal-time	あの時
+noun.prenominal-time	どの時
 noun.habit-time	子供の頃
 noun.habit-time	子どもの頃
 noun.habit-time	小さい頃
@@ -10759,6 +10792,42 @@ sound.stutter-alone	ジャ
 sound.stutter-alone	チョ
 sound.stutter-conjunction	ト
 sound.stutter-conjunction	デ
+sound.quoted-lead	ッテ
+sound.quoted-lead	ッテコトハ
+sound.quoted-lead	ッテ事ハ
+sound.quote-goes-on	こと
+sound.quote-goes-on	事
+sound.quote-goes-on	言
+sound.quote-goes-on	いう
+sound.quote-goes-on	いっ
+sound.quote-goes-on	いわ
+sound.quote-goes-on	思
+sound.quote-goes-on	おも
+sound.quote-goes-on	感じ
+sound.quote-goes-on	かんじ
+sound.quote-goes-on	カンジ
+sound.quote-goes-on	わけ
+sound.quote-goes-on	訳
+sound.quote-goes-on	ない
+sound.quote-goes-on	知
+sound.quote-goes-on	わか
+sound.quote-goes-on	分か
+sound.greeting-lead	ヤア
+sound.greeting-lead	コレハ
+kana.drawl-particle	ね
+kana.drawl-particle	な
+kana.drawl-particle	よ
+kana.drawl-particle	わ
+kana.drawl-particle	さ
+kana.drawl-particle	ぞ
+kana.drawl-particle	か
+kana.drawl-particle	の
+sound.exasperated	モウ
+sound.exasperated	アアモウ
+sound.exasperated	アーモウ
+sound.exasperated	イヤモウ
+sound.exasperated-end	ッタラ
+sound.exasperated-end	ッテバ
 sound.stutter-interjection	ア
 sound.stutter-interjection	エ
 sound.stutter-particle	ト
@@ -12014,6 +12083,70 @@ wrap.open-ending	ように
 wrap.quote-start	と
 wrap.quote-start	って
 wrap.quote-start	とか
+wrap.quote-start	という
+wrap.quote-start	っていう
+wrap.quote-start	として
+wrap.quote-start	との
+wrap.kanji-word-start	方
+wrap.kanji-word-start	今
+wrap.kanji-word-start	次
+wrap.kanji-word-start	前
+wrap.kanji-word-start	先
+wrap.kanji-word-start	他
+wrap.kanji-word-start	皆
+wrap.kanji-word-start	時
+wrap.kanji-word-start	毎
+wrap.kanji-word-start	各
+wrap.kanji-word-start	約
+wrap.kanji-word-start	又
+wrap.kanji-word-start	更
+wrap.kanji-word-start	実
+wrap.kanji-word-start	既
+wrap.kanji-word-start	未
+wrap.kanji-word-start	只
+wrap.kanji-word-start	尚
+wrap.kanji-word-start	唯
+wrap.kanji-relational	上
+wrap.kanji-relational	下
+wrap.kanji-relational	中
+wrap.kanji-relational	前
+wrap.kanji-relational	後
+wrap.kanji-relational	外
+wrap.kanji-relational	内
+wrap.kanji-relational	奥
+wrap.kanji-relational	間
+wrap.kanji-relational	隣
+wrap.kanji-relational	横
+wrap.kanji-relational	側
+wrap.kanji-relational	裏
+wrap.kanji-relational	表
+wrap.kanji-relational	脇
+wrap.kanji-relational	端
+wrap.kanji-relational	底
+wrap.kanji-relational	縁
+wrap.kanji-relational	先
+wrap.kanji-relational	手
+wrap.kanji-relational	目
+wrap.kanji-relational	口
+wrap.kanji-relational	頭
+wrap.kanji-relational	顔
+wrap.kanji-relational	足
+wrap.kanji-relational	背
+wrap.kanji-relational	腕
+wrap.kanji-relational	首
+wrap.kanji-relational	胸
+wrap.kanji-relational	腹
+wrap.kanji-relational	声
+wrap.kanji-relational	心
+wrap.kanji-relational	名
+wrap.kanji-relational	家
+wrap.case-start	が
+wrap.case-start	を
+wrap.case-start	に
+wrap.case-start	で
+wrap.case-start	へ
+wrap.case-start	より
+wrap.case-start	から
 wrap.negative-start	ない
 wrap.negative-start	なく
 wrap.negative-start	なかっ
@@ -15224,6 +15357,7 @@ noun.part-of	残り
 noun.part-of	一角
 noun.part-of	一端
 noun.part-of	一環
+//= noun.road	Roads and ways, matched whole, in a sentence of which 迷う is losing one's way (道が複雑で迷った 헤매었다), unlike 報道, 剣道 or 道具 (spec LEX-8196).
 //= noun.round-trip-head	Starts of the nouns a 巡る describes when it is a trip round places, a route or a span of time (「聖地」を巡る旅), after which it stays 돌다 even after a quoted issue (spec LEX-6501).
 noun.round-trip-head	旅
 noun.round-trip-head	ツアー
@@ -15475,3 +15609,77 @@ dialect.pronoun-before-particle	おどれ	お前
 dialect.pronoun-before-particle	わい	わし
 dialect.pronoun-before-particle	おら	俺
 dialect.adverb-before-verb	ようも	よくも
+verb.lookalike-object	を
+verb.lookalike-object	で
+verb.lookalike-te	んで
+verb.lookalike-te	いで
+verb.lookalike-tail	んだ
+verb.lookalike-tail	んです
+verb.lookalike-tail	んでしょ
+verb.lookalike-tail	んじゃ
+noun.wrapping	毛布
+noun.wrapping	布
+noun.wrapping	紙
+noun.wrapping	タオル
+noun.wrapping	おくるみ
+noun.wrapping	布団
+noun.wrapping	ふとん
+noun.wrapping	ハンカチ
+noun.wrapping	風呂敷
+noun.wrapping	包装紙
+noun.wrapping	新聞紙
+noun.wrapping	ラップ
+noun.wrapping	ビニール
+noun.wrapping	シーツ
+noun.wrapping	ブランケット
+noun.wrapping	マント
+noun.wrapping	寝袋
+noun.wrapping	ガーゼ
+noun.wrapping	包帯
+noun.wrapping	葉
+noun.wrapping	葉っぱ
+noun.wrapping	油紙
+noun.wrapping	和紙
+noun.wrapping	手ぬぐい
+noun.wrapping	手拭い
+noun.wrapping	バスタオル
+noun.wrapping	おむつ
+verb.lookalike-target	に
+verb.lookalike-past	んだ
+verb.lookalike-adnominal	お
+verb.lookalike-adnominal	ご
+noun.road	道
+noun.road	道路
+noun.road	路地
+noun.road	帰り道
+noun.road	山道
+noun.road	夜道
+noun.road	近道
+noun.road	小道
+noun.road	坂道
+noun.road	裏道
+noun.road	脇道
+noun.road	横道
+noun.road	細道
+noun.road	一本道
+noun.road	分かれ道
+noun.road	寄り道
+noun.road	道のり
+noun.road	道順
+noun.road	道筋
+noun.road	道案内
+noun.road	通学路
+noun.road	迷路
+noun.road	獣道
+noun.road	回り道
+noun.road	遠回り
+noun.count-compound	家族
+noun.count-compound	生活
+noun.count-compound	体制
+noun.count-compound	体勢
+noun.count-compound	部屋
+noun.count-compound	用
+noun.count-compound	乗り
+noun.count-compound	掛け
+noun.count-compound	暮らし
+noun.count-compound	世帯

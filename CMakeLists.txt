@@ -123,19 +123,35 @@ add_subdirectory(third_party/pcre2)
 add_subdirectory(third_party/libyaml)
 
 file(GLOB_RECURSE HDTRANS_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
-add_library(hdtrans STATIC ${HDTRANS_SOURCES}
+# The library is its objects and the compiled construction table. hdcxgen, a host tool linked from the
+# same objects, parses constructions.tsv and writes that table as C++; a cross build, which cannot run
+# it, compiles no_table.cpp instead and parses the table on first use.
+add_library(hdtrans_objects OBJECT ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
     ${HDTRANS_REGISTER_SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+target_link_libraries(hdtrans_objects PRIVATE pcre2-16 yaml)
+target_include_directories(hdtrans_objects PUBLIC include PRIVATE src "${CMAKE_CURRENT_BINARY_DIR}")
+if(CMAKE_CROSSCOMPILING)
+    set(HDTRANS_CONSTRUCTIONS src/cxgen/no_table.cpp)
+else()
+    add_executable(hdcxgen src/cxgen/main.cpp src/cxgen/no_table.cpp $<TARGET_OBJECTS:hdtrans_objects>)
+    target_include_directories(hdcxgen PRIVATE src include)
+    find_package(Threads REQUIRED)
+    target_link_libraries(hdcxgen PRIVATE pcre2-16 yaml Threads::Threads)
+    set(HDTRANS_CONSTRUCTIONS "${CMAKE_CURRENT_BINARY_DIR}/constructions_gen.cpp")
+    add_custom_command(OUTPUT "${HDTRANS_CONSTRUCTIONS}" COMMAND hdcxgen "${HDTRANS_CONSTRUCTIONS}" DEPENDS hdcxgen VERBATIM)
+endif()
+add_library(hdtrans STATIC $<TARGET_OBJECTS:hdtrans_objects> ${HDTRANS_CONSTRUCTIONS})
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
 set_source_files_properties(src/cli/main.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION_TEXT="${HDTRANS_VERSION_TEXT}")
 set_source_files_properties(src/cshared/hdtrans_c.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
 if(HDTRANS_INTERPRET_RULES)
-    target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
+    target_compile_definitions(hdtrans_objects PRIVATE HDTRANS_INTERPRET_RULES)
 endif()
 if(HDTRANS_PASS_EXPERIMENTS)
-    target_compile_definitions(hdtrans PRIVATE HDTRANS_PASS_EXPERIMENTS)
+    target_compile_definitions(hdtrans_objects PRIVATE HDTRANS_PASS_EXPERIMENTS)
 endif()
 file(GLOB_RECURSE HDTRANS_DATA_SOURCES CONFIGURE_DEPENDS src/core/*.cpp src/core/*.h)
 list(APPEND HDTRANS_DATA_SOURCES ${HDTRANS_RULES})
@@ -159,14 +175,15 @@ string(SHA256 HDTRANS_COMPILER_ID "${CMAKE_CXX_COMPILER_ID}:${CMAKE_CXX_COMPILER
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/dictionary_ids.h" CONTENT
 "#pragma once\n#define HDTRANS_DATA_ID \"${HDTRANS_DATA_ID}\"\n#define HDTRANS_BUILTIN_ID \"${HDTRANS_BUILTIN_ID}\"\n#define HDTRANS_COMPILER_ID \"${HDTRANS_COMPILER_ID}\"\n")
 set_target_properties(hdtrans PROPERTIES OUTPUT_NAME hdTransCore COMPILE_PDB_NAME hdTransCore)
+set_target_properties(hdtrans_objects PROPERTIES COMPILE_PDB_NAME hdTransCore)
 target_include_directories(hdtrans PUBLIC include PRIVATE src "${CMAKE_CURRENT_BINARY_DIR}")
 
 if(NOT EMSCRIPTEN)
-    set_target_properties(hdtrans PROPERTIES POSITION_INDEPENDENT_CODE ON)
+    set_target_properties(hdtrans hdtrans_objects PROPERTIES POSITION_INDEPENDENT_CODE ON)
     find_package(Threads REQUIRED)
     target_link_libraries(hdtrans PUBLIC Threads::Threads)
 
-    add_executable(hdtrans_cli src/cli/main.cpp src/frontend/dictionary_version.cpp)
+    add_executable(hdtrans_cli src/cli/main.cpp src/frontend/dictionary_version.cpp src/frontend/eztrans_registry.cpp)
     target_include_directories(hdtrans_cli PRIVATE src)
     target_link_libraries(hdtrans_cli PRIVATE hdtrans)
     set_target_properties(hdtrans_cli PROPERTIES OUTPUT_NAME hdtrans PDB_NAME hdtrans_cli)
@@ -192,9 +209,14 @@ if(NOT EMSCRIPTEN)
         target_link_libraries(hdtrans_gui_support PRIVATE Iconv::Iconv)
     endif()
 
-    add_executable(hdtrans_tests ${HDTRANS_TEST_SOURCES} src/frontend/dictionary_version.cpp)
+    add_executable(hdtrans_tests ${HDTRANS_TEST_SOURCES} src/frontend/dictionary_version.cpp
+        src/frontend/eztrans_registry.cpp)
     target_include_directories(hdtrans_tests PRIVATE tests/unit src "${CMAKE_CURRENT_BINARY_DIR}")
     target_link_libraries(hdtrans_tests PRIVATE hdtrans_gui_support)
+    if(WIN32)
+        target_link_libraries(hdtrans_cli PRIVATE advapi32)
+        target_link_libraries(hdtrans_tests PRIVATE advapi32)
+    endif()
     enable_testing()
     add_test(NAME cli.version COMMAND hdtrans_cli --version --dicts "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder")
     add_test(NAME cli.options COMMAND "${CMAKE_COMMAND}" -DCLI=$<TARGET_FILE:hdtrans_cli>
@@ -234,6 +256,8 @@ if(NOT EMSCRIPTEN)
         add_test(NAME sound.long-line COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/long_line.sh" "$<TARGET_FILE:hdtrans_cli>"
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(sound.long-line PROPERTIES TIMEOUT 60)
+        add_test(NAME cli.propose-names COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/propose_names.sh" "$<TARGET_FILE:hdtrans_cli>"
+            "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         add_test(NAME tools.selfbase COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/selfbase.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)

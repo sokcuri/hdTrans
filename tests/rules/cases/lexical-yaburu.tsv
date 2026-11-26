@@ -11,7 +11,7 @@ dict:yaburu:1	彼には、誰との約束を破ったのか勉強してもらわ
 dict:yaburu:1	俺がずっとそばにいると言った以上、約束を破るわけにはいかない。	내가 계속 곁에 있다고 한 이상, 약속을 어길 수는 없다.	keep	local
 dict:yaburu:1	佳奈すけは約束を破っていない。	카나스케는 약속을 어기지 않았다.	keep	local
 dict:yaburu:1	規則を破っている訳でもないですし	규칙을 어기고 있는 것도 아니며	keep	local
-dict:jisjk:95715	少しでいいから、未散の硬い殻を破りたい。	조금으로 좋으니까, 미치루의 딱딱한 껍질을 깨고 싶다.	keep	local
+dict:jisjk:95715	少しでいいから、未散の硬い殻を破りたい。	조금이면 되니까, 미치루의 딱딱한 껍질을 깨고 싶다.	keep	local
 dict:jisjk:95715	森下さんが、場の雰囲気に気づいて沈黙を破った。	!rule:dict:yaburu:1	keep	local
 dict:jisjk:95715	サルたちが沈黙を破った。	!rule:dict:yaburu:1	keep	local
 dict:yaburu:1	そのまま御園のストッキングを破る。	!rule:dict:yaburu:1	keep	global-stem

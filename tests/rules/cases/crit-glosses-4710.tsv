@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 lexical:sino-gloss	恋の呪縛	사랑의 속박	fix	lookup
 lexical:sino-gloss	誰も異論はない。	아무도 이의는 없다.	fix	lookup
 lexical:sino-gloss	「祝日だからか」	「공휴일이니까인가」	fix	lookup
-lexical:sino-gloss	「最後の奴は不服だが」	「마지막 놈은 불만이지만」	fix	lookup
+lexical:sino-gloss	「最後の奴は不服だが」	「마지막 녀석은 불만이지만」	fix	lookup
 lexical:sino-gloss	樹海で会ったあいつに……	숲에서 만난 저 녀석에게……	fix	lookup
 lexical:sino-gloss	秋雲着任！提督、よろしくね	아키구모 부임! 제독, 잘 부탁해	fix	lookup
 lexical:sino-gloss	字面も怖いけど内容も怖かった	글자도 무섭지만 내용도 무서웠다	fix	lookup

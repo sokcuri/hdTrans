@@ -173,6 +173,8 @@ struct LookupContext {
     // The text that follows the looked-up text in the line, where a token ends it (the marks
     // after a title); empty for none.
     std::string_view after;
+    // The text of the looked-up text's token before it, where the lookup starts inside a token; empty for none.
+    std::string_view before;
     SkipFunc skip;
 };
 
@@ -372,6 +374,9 @@ private:
     int MarkedKey(std::string_view key, std::string_view after) const;
     bool TitleKey(std::string_view key) const;
     bool AddressedName(std::string_view s, std::size_t n) const;
+    enum class LoneKind { None, Noun, Person };
+    LoneKind LoneKanjiName(std::string_view s, std::size_t n, std::string_view before) const;
+    bool OldForm(std::string_view key) const;
     bool CuedKey(std::string_view key) const;
     bool PhraseKey(std::string_view key) const;
     bool BaseWord(std::string_view key) const;

@@ -13,7 +13,7 @@ dict:polite-causal	静かですから、眠れます。	조용하니까, 잘 수
 dict:polite-causal	静かではありませんでしたから、眠れませんでした。	조용하지는 않았기 때문에, 잘 수 없었습니다.	keep	lookup
 dict:polite-causal	学生でしたから、安かった。	학생이었으니까, 쌌다.	keep	lookup
 dict:polite-causal	静かでしたから、眠れましたか？	조용했으니까, 잘 수 있었습니까?	fix	lookup
-dict:polite-causal	彼はもう駅に着いているんですから、迎えに行きましょう。	그는 이제 역에 도착해 있으니까, 마중하러 갑시다.	keep	lookup
+dict:polite-causal	彼はもう駅に着いているんですから、迎えに行きましょう。	그는 벌써 역에 도착해 있으니까, 마중하러 갑시다.	keep	lookup
 dict:polite-causal	彼は待っているんですから、急いでください。	그는 기다리고 있으니까, 서둘러 주세요.	keep	lookup
 dict:polite-causal	彼は本を読んでいるんですから、待ってください。	그는 책을 읽고 있으니까, 기다려 주세요.	keep	lookup
 dict:polite-causal	彼はもう来ているんですから、始めましょう。	그는 벌써 와 있으니까, 시작합시다.	keep	lookup

@@ -64,9 +64,9 @@ normalize:voiced-mark	う゛ん…	응…	fix	normalize
 normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ゛です	has:゛천사여	keep	normalize
 normalize:voiced-mark	トーマス・ウォルフの゛天使よ故郷を見よ゛です	has:보라゛	keep	normalize
 normalize:voiced-mark	映画の゛ローマの休日゛を見た	영화의゛로마의 휴일゛을 보았다	keep	normalize
-normalize:voiced-mark	彼は゛正義の味方゛と呼ばれた	그는゛정의의 아군゛으로 불렸다	keep	normalize
+normalize:voiced-mark	彼は゛正義の味方゛と呼ばれた	그는゛정의의 사도゛로 불렸다	keep	normalize
 normalize:voiced-mark	それて゛す。	그것입니다.	fix	normalize
-normalize:voiced-mark	あれて゛す。	저것입니다.	fix	normalize
+normalize:voiced-mark	あれて゛す。	그것입니다.	fix	normalize
 normalize:voiced-mark	それて゛しょう？	그것이죠?	fix	normalize
 normalize:voiced-mark	それた゛よね	그것이지	fix	normalize
 normalize:voiced-mark	「それて゛いいの？」	「그거면 되는 거야?」	fix	normalize

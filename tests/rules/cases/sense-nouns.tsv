@@ -103,11 +103,11 @@ dict:mezamashi:1	めざましが鳴いた。	!rule:dict:mezamashi:1	keep	local
 dict:mezamashi:1	めざましもゆっくり鳴いている。	!rule:dict:mezamashi:1	keep	local
 dict:jisjk:123035	これは偶然じゃない。	이것은 우연이 아니다.	fix	local
 dict:jisjk:123035	偶然じゃないかな。	우연이 아닐까.	fix	local
-dict:jisjk:123035	あれは偶然じゃなかった。	저것은 우연이 아니었다.	fix	local
+dict:jisjk:123035	あれは偶然じゃなかった。	그것은 우연이 아니었다.	fix	local
 dict:jisjk:123035	偶然じゃなく、計画だ。	우연이 아니고, 계획이다.	fix	local
 dict:jisjk:123035	これは偶然ではない。	이것은 우연이 아니다.	fix	local
 dict:jisjk:123035	偶然ではないか。	우연이 아닌가.	fix	local
-dict:jisjk:123035	あれは偶然ではなかった。	저것은 우연이 아니었다.	fix	local
+dict:jisjk:123035	あれは偶然ではなかった。	그것은 우연이 아니었다.	fix	local
 dict:jisjk:123035	偶然ではなく、計画だ。	우연이 아니고, 계획이다.	fix	local
 dict:jisjk:123035	これは偶然じゃありません。	이것은 우연이 아닙니다.	fix	local
 dict:jisjk:123035	これは偶然ではありません。	이것은 우연이 아닙니다.	fix	local

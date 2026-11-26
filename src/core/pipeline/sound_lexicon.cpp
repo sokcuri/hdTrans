@@ -74,9 +74,18 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
                 } else if (opt.starts_with("ni=")) {
                     row.ni = std::string(opt.substr(std::string_view("ni=").size()));
                     std::replace(row.ni.begin(), row.ni.end(), '_', ' ');
+                } else if (opt.starts_with("greet=")) {
+                    row.greet = std::string(opt.substr(std::string_view("greet=").size()));
+                    std::replace(row.greet.begin(), row.greet.end(), '_', ' ');
                 } else if (opt.starts_with("alone=")) {
                     row.alone = std::string(opt.substr(std::string_view("alone=").size()));
                     std::replace(row.alone.begin(), row.alone.end(), '_', ' ');
+                } else if (opt.starts_with("ask=")) {
+                    row.ask = std::string(opt.substr(std::string_view("ask=").size()));
+                } else if (opt.starts_with("again=")) {
+                    row.again = std::string(opt.substr(std::string_view("again=").size()));
+                } else if (opt.starts_with("quoted=")) {
+                    row.quoted = std::string(opt.substr(std::string_view("quoted=").size()));
                 }
                 opts = sp == std::string_view::npos ? std::string_view() : opts.substr(sp + 1);
             }

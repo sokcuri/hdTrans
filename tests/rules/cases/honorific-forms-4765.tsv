@@ -12,8 +12,8 @@ normalize:honorific-okure	助けておくれよ、我が親友ぅ～！	도와 �
 normalize:honorific-okure	「そいぢや、お豆をやるから、鳩を出しておくれ、ねえ、ばあや。	「소이지나, 콩을 주니까, 비둘기를 내 줘, 응, 무늬.	fix	normalize
 normalize:honorific-okure	リキ　　戯談にも薪割りなんぞ手伝はせないでおくれよ、シゲさん。	리키　　농담에도 장작패기 따위 수전은 등 있고로 주어라, 시게 씨.	fix	normalize
 normalize:honorific-okure	さぁ、見ておくれ、この防弾インナーを…キミに似合うと思って買っておいたんだ！	자, 봐 주어, 이 방탄 이너를…너에 어울린다고 생각해 사 둔 거야!	fix	normalize
-normalize:honorific-okure	「親方、早く私に背の刺青を見せておくれ、お前さんの命を貰った代りに、私は嘸美しくなったろうねえ」	「대장, 빨리 나에게 등 문신을 보여 줘, 당신의 생명을 받은 대신에, 나는 틀림없이 아름다워졌지 응」	fix	normalize
-normalize:honorific-okure	また裸にしておくれねえ	또 알몸으로 해 주고 응	fix	normalize
+normalize:honorific-okure	「親方、早く私に背の刺青を見せておくれ、お前さんの命を貰った代りに、私は嘸美しくなったろうねえ」	「대장, 빨리 나에게 등 문신을 보여 줘, 당신의 생명을 받은 대신에, 나는 틀림없이 아름다워졌지」	fix	normalize
+normalize:honorific-okure	また裸にしておくれねえ	또 알몸으로 해 주고	fix	normalize
 normalize:honorific-okure	あまり パパを 悲しませないでおくれよ うん？	그다지 아빠를 슬퍼하게 하지 않고 줘 응?	fix	normalize
 normalize:honorific-okure	民や、だまっておくれ、もう泣いてくれるな。	백성아, 가만히 있어 줘, 이제 울지 말아 줘.	fix	normalize
 normalize:honorific-okure	「私は、お高ですよ、気を沈めておくれ、」	「나는, 고예요, 기분을 가라앉혀 줘,」	fix	normalize
@@ -48,7 +48,7 @@ normalize:honorific-oide	「そんなにわたしの身体ばかりを見てお�
 normalize:honorific-oide	馬上の宮は少し遠くへ立っておいでになるのであったが、田舎風な犬が集まって来て吠え散らす。	마상의 궁은 조금 멀리 서 계시는 것이었지만, 시골풍인 개가 모여 와 마구 짖는다.	fix	normalize
 normalize:honorific-oide	「モーニング・コートを着ておいでになりました」	「모닝 코트를 입고 계셨습니다」	fix	normalize
 normalize:honorific-oide	とお書きになったものを、院はお悲しみの中でも繰り返しお読みになって、いつまでもながめておいでになった。	라고 쓰신 것을, 원은 슬픔 속에서도 반복해 읽으셔, 언제까지나 바라보고 계셨다.	fix	normalize
-normalize:honorific-oide	弱い女や貧乏人の味方ばっかりしておいでになる福の神様なんだよ。	약한 여자나 가난한 사람의 아군뿐 하고 계시는 복신 같아.	fix	normalize
+normalize:honorific-oide	弱い女や貧乏人の味方ばっかりしておいでになる福の神様なんだよ。	약한 여자나 가난한 사람의 편뿐 하고 계시는 복신 같아.	fix	normalize
 normalize:honorific-oide	それをあなたは傑作だと云って感心してお出でなさる。	그것을 당신은 걸작이라고 말해 감탄하고 계신다.	fix	normalize
 normalize:honorific-oide	「ねえ、猿さん、猿さん、お前さんは生き肝というものを持っておいでですか。	「있잖아, 원숭이 씨, 원숭이 씨, 당신은 생간이라는 걸 가지고 계십니까.	fix	normalize
 normalize:honorific-oide	気がついたときは、二位殿が、先帝をお抱き申して船べりに立ってお出ででした。	깨달았을 때는, 2위님이, 선제를 안아 말씀드려 뱃전에 서 계셨습니다.	fix	normalize
@@ -126,7 +126,7 @@ normalize:favour-moraenai	「明日、練習に付き合ってもらえません
 normalize:favour-moraenai	「みなさん、桜庭さんが戻ってくるまで、ちょっとこれを読んでもらえませんか？	「여러분, 사쿠라바 씨가 돌아올 때까지, 조금 이것을 읽어주실 수 있겠습니까?	keep	normalize
 normalize:favour-moraenai	これ やめてもらえません？	이것 그만두어 줄 수 없습니까?	keep	normalize
 normalize:favour-moraenai	私が特殊性癖持ちの変態みたいに言わないでもらえませんか！	제가 특수 성벽 보유자의 변태같이 말하지 말아 줄 수 없습니까!	keep	normalize
-normalize:favour-moraenai	上手くできないと、もう二度としてもらえなくなっちゃうんじゃないかって	잘 할 수 없으면, 이제 두 번 다시 해 줄 수 있지 않게 되어버리는 것이 아니냐고	keep	normalize
+normalize:favour-moraenai	上手くできないと、もう二度としてもらえなくなっちゃうんじゃないかって	잘 할 수 없으면, 이제 두 번 다시 해 줄 수 없게 되어버리는 것이 아니냐고	keep	normalize
 normalize:favour-moraenai	こんなこと、誰かに話しても信じてもらえないだろうから、あんたにしか言わないけど	이런 일, 누군가에게 이야기해도 믿어 주지 않을 테니까, 너밖에 말하지 않는데	keep	normalize
 normalize:favour-moraenai	常磐さんかアメリさんにヘルプ入ってもらえないかなって	토키와 씨나 아메리 씨에게 헬프 들어가 줄 수 없을까 하고	keep	normalize
 normalize:honorific-stem	お呼びですか？	부르셨습니까?	fix	normalize

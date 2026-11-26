@@ -1,6 +1,7 @@
 // Dictionary lookups of the word stage and the filters on their candidates.
-#include <cstdint>
 #include <algorithm>
+#include <cstdint>
+#include <functional>
 
 #include "core/dict/classes.h"
 #include "core/text/utf8.h"
@@ -229,6 +230,15 @@ bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
     return !letter;
 }
 
+// Whether a meaning column holds the Q code of a name (codes are three letters each: QPN a person, QCT a
+// place, QID an organisation), not QA of an animal or plant (うま 말).
+bool HasNameMeaning(std::string_view sem) {
+    for (std::size_t i = 0; i + 3 <= sem.size(); i += 3) {
+        if (sem[i] == 'Q' && sem[i + 1] != 'A') return true;
+    }
+    return false;
+}
+
 // Whether two lookups give the same records, field by field, with views to the same bytes.
 bool SameRecords(const Lookup& a, const Lookup& b) {
     if (a.count != b.count) return false;
@@ -290,6 +300,14 @@ dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
     };
     ctx.skip.context = &sc;
     if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
+    if (current >= 0 && current < TokenCount()) {
+        const std::string_view own = Tok(current).text;
+        // The query may lie in another buffer (a rewritten surface): only a view into the token has text before it.
+        const std::less<const char*> less;
+        if (!own.empty() && less(own.data(), query.data()) && !less(own.data() + own.size(), query.data())) {
+            ctx.before = own.substr(0, static_cast<std::size_t>(query.data() - own.data()));
+        }
+    }
     return snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
 }
 
@@ -347,6 +365,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         DropNegatedAdverbs(l, query);
         DropFinalAdnominals(l, query);
         DropOpenUtterances(l, query);
+        DropKanaBoundProper(l, query);
     }
     if (settings.text) {
         DropModalSplits(l, query);
@@ -1028,6 +1047,95 @@ void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     l.records = out;
 }
 
+// Text path, mode 0: a proper noun row of the dictionary (N130 with the Q code of a name) whose key is two
+// hiragana goes after the other records inside a kana run, right after hiragana or a kanji (KanaBounded keeps
+// name-layer rows out of the same place): there it reads a piece of the words around it by chance (ひねりながら,
+// ばかりか, しんどい, ものとばかり). It keeps its place where a word ends before it and a particle, だ, じゃ, って,
+// an honorific or no hiragana follows it, the slot of a noun (ボクとりかの, 見たまみちゃん, そしてりなは,
+// 桜庭りなです, 姉りなが, のはまみか). The row is not dropped: where no other reading goes on, the name stays.
+// Longer kana names (ちさと, よつば) and a kana said twice, a sound (ららら), keep their place.
+void Worker::DropKanaBoundProper(Lookup& l, std::string_view query) {
+    auto qualifies = [&](const Record& r) {
+        return r.user == nullptr && r.partCode == "N130" && text::RuneCount(r.source) == 2 &&
+               NameClassOf(FirstChar(r.source)) == kClassHiragana && NameClassOf(LastChar(r.source)) == kClassHiragana &&
+               FirstChar(r.source) != LastChar(r.source) && HasNameMeaning(r.semantic) && r.source.size() <= query.size();
+    };
+    const Record* named = l.records;
+    while (named != nullptr && !qualifies(*named)) named = named->child;
+    if (named == nullptr) return;
+    const std::string_view surface = transformSurface;
+    if (!EndsSurface(query)) return;
+    const std::string_view head = surface.substr(0, surface.size() - query.size());
+    const std::string_view before = LastChar(head);
+    const int prev = NameClassOf(before);
+    if (prev != kClassHiragana && prev != kClassKanji) return;
+    // A particle row of the dictionary (class 2: か, から, しか, より) whose key the text starts with.
+    auto particleAt = [&](std::string_view text) {
+        for (std::size_t n = 1; n <= 4 && 3 * n <= text.size(); n++) {
+            const std::string_view key = text.substr(0, 3 * n);
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                if (c.source == key && c.codes->partText.size() > 1 && c.codes->partText[1] == '2') return true;
+            }
+        }
+        return false;
+    };
+    // The slot of a noun after the key: no hiragana, a particle, だ, じゃ, って or an honorific.
+    const std::string_view rest = query.substr(named->source.size());
+    const std::string_view next = FirstChar(rest);
+    // A particle of three kana or more that starts at the key's second kana and runs past it: the key cuts it
+    // (ものと|ばかり; not りか|と of かと), and what follows is no slot.
+    auto cut = [&]() {
+        const std::string_view tail = query.substr(FirstChar(named->source).size());
+        for (std::size_t n = 3; n <= 5 && 3 * n <= tail.size(); n++) {
+            const std::string_view key = tail.substr(0, 3 * n);
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                if (c.source == key && c.codes->partText.size() > 1 && c.codes->partText[1] == '2') return true;
+            }
+        }
+        return false;
+    };
+    const bool slot = (NameClassOf(next) != kClassHiragana || IsNameParticle(next) || next == "だ" ||
+                       rest.starts_with("じゃ") || rest.starts_with("って") || StartsWithHonorific(rest) || particleAt(rest)) &&
+                      (NameClassOf(next) != kClassHiragana || !cut());
+    // A word ends before the key: a particle, the た, だ, な of a modifier, a conjunction or adverb in kana
+    // (そして, もう), a particle word of two kana or more (ながら, だから), a conjunction or adverb word that starts
+    // the token (それから), two kanji or
+    // more, a family name (桜庭りな; not the verb stem of 食うのだけ), or one kanji of a person (姉りな).
+    bool wordBefore = slot && (IsNameParticle(before) || before == "た" || before == "だ" || before == "な");
+    if (slot && !wordBefore && prev == kClassKanji) {
+        wordBefore = NameClassOf(LastChar(head.substr(0, head.size() - before.size()))) == kClassKanji;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(before, dict::LookupMode::General)) {
+            wordBefore = wordBefore || (c.source == before && c.codes->partText.starts_with("N1") && c.codes->sem.Contains("VH"));
+        }
+    }
+    if (slot && !wordBefore && prev == kClassHiragana) wordBefore = KanaModifierBefore(query);
+    for (std::size_t n = 2; slot && !wordBefore && prev == kClassHiragana && n <= 4 && 3 * n <= head.size(); n++) {
+        const std::string_view word = head.substr(head.size() - 3 * n);
+        const std::string_view lead = LastChar(head.substr(0, head.size() - word.size()));
+        const bool start = lead.empty() || NameClassOf(lead) == kClassOther;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            const std::string_view part = c.codes->partText;
+            wordBefore = wordBefore || (c.source == word && part.size() > 1 && (part[1] == '2' || (start && part[1] == '3')));
+        }
+    }
+    // A key that starts with う after hiragana draws out the sound before it (いう|の, ろう|の).
+    if (wordBefore && !(prev == kClassHiragana && FirstChar(named->source) == "う")) return;
+    Record* out = nullptr;
+    Record** tail = &out;
+    for (Record* r = l.records; r != nullptr;) {
+        Record* following = r->child;
+        r->child = nullptr;
+        if (qualifies(*r)) {
+            l.count--;
+        } else {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = following;
+    }
+    l.records = out;
+}
+
 void Worker::DropFinalAdnominals(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
@@ -1489,9 +1597,11 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
     // An ending that ends in a kanji (度, 際, 他, 暇, 訳 after a verb) gives that kanji to a common noun of the dictionary
     // that starts with it and reaches at least as far as the kanji and the word after it (辞める度胸 그만둘 배짱, 戦う際限,
     // 見る他人; spec LEX-4982).
-    // Not 時, which also stands for the とき of an adverb (あるとき人の 어느 날 사람의, not 時人).
-    if (!ending.empty() && !after.empty() && text::IsKanji(DecodeLastRune(ending).cp) && DecodeLastRune(ending).cp != U'時') {
+    // 時, which also stands for the とき of an adverb (あるとき人の 어느 날 사람의, not 時人), gives itself only to a
+    // noun of three kanji or more (入った時限爆弾 들어간 시한폭탄).
+    if (!ending.empty() && !after.empty() && text::IsKanji(DecodeLastRune(ending).cp)) {
         const text::Rune kanji = DecodeLastRune(ending);
+        const std::size_t shortest = kanji.cp == U'時' ? 3 : 2;
         const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
         std::size_t word = 0;
         for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
@@ -1502,8 +1612,8 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
         for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
             const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
             const std::size_t n = text::RuneCount(c.source);
-            if ((c.user == nullptr || !c.user->nameLayer) && part.starts_with("N1") && part.substr(2, 1) != "3" && n >= 2 &&
-                n >= 1 + word) {
+            if ((c.user == nullptr || !c.user->nameLayer) && part.starts_with("N1") && part.substr(2, 1) != "3" &&
+                n >= shortest && n >= 1 + word) {
                 return true;
             }
         }
@@ -1546,6 +1656,25 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
             const std::size_t n = text::RuneCount(c.source);
             const bool verbOrAdverb = (At(part, 0) == 'M' && At(part, 1) == '4') || At(part, 0) == 'E';
             if ((c.user == nullptr || !c.user->nameLayer) && verbOrAdverb && n >= 2 && n >= word + 1) return true;
+        }
+    }
+    // An ending in か after a past gives it to an adjective that starts with it and reaches further than the words
+    // after the ending do (詠んだかわいい系: 詠んだ + かわいい, 見たかっこいい人).
+    if (const std::string past = std::string(before) + std::string(ending);
+        (past.ends_with("たか") || past.ends_with("だか")) && ending.ends_with("か") && !after.empty()) {
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query = "か";
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            if ((c.user == nullptr || !c.user->nameLayer) && At(part, 0) == 'H' && text::RuneCount(c.source) >= 3 &&
+                text::RuneCount(c.source) >= word + 2) {
+                return true;
+            }
         }
     }
     // An ending in か gives it to かなり (してしまうかなり: してしまう + かなり).
@@ -1648,6 +1777,10 @@ bool Worker::MatchDictionary(std::string_view following, std::string_view source
             list = sep == std::string_view::npos ? std::string_view() : list.substr(sep + 1);
             if (token.empty()) continue;
             const std::size_t open = token.find('[');
+            if (token.ends_with('$')) {  // the whole rest of the token
+                if (following == token.substr(0, token.size() - 1)) return false;
+                continue;
+            }
             if (open == std::string_view::npos || token.find(']') == std::string_view::npos) {
                 if (following.starts_with(token)) return false;
                 continue;

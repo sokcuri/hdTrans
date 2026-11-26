@@ -196,6 +196,11 @@ size_t KanaPrefix(std::string_view s) {
     return s.size();
 }
 
+// A katakana that starts a word: full size, not ン, ッ or ー.
+bool WordStartKatakana(char32_t r) {
+    return r >= U'ァ' && r <= U'ヺ' && !HasRune(U"ァィゥェォッャュョヮヵヶン", r);
+}
+
 bool Blank(std::string_view s) {
     for (size_t i = 0; i < s.size();) {
         const auto r = text::DecodeRune(s.substr(i));
@@ -1250,11 +1255,31 @@ void KeepParticlesWithCutWord(const std::vector<ResolvedItem>& items, const std:
                 }
                 return false;
             };
-            bool rest = words(std::string_view(tokens[item.tokenIndex].text)
-                                  .substr(std::min(tokens[item.tokenIndex].text.size(),
-                                                   static_cast<std::size_t>(items[end].offset + items[end].length))));
-            for (std::size_t t = static_cast<std::size_t>(item.tokenIndex) + 1; t < tokens.size() && !rest; t++) {
-                rest = words(tokens[t].text);
+            // The next line ends at the next break.
+            const tokenizer::ControlMarker* following = nullptr;
+            for (const tokenizer::ControlMarker& n : markers) {
+                if (n.markerKind != 1 || &n == &m || n.tokenIndex < m.tokenIndex ||
+                    (n.tokenIndex == m.tokenIndex && n.textLength <= m.textLength)) {
+                    continue;
+                }
+                if (following == nullptr || n.tokenIndex < following->tokenIndex ||
+                    (n.tokenIndex == following->tokenIndex && n.textLength < following->textLength)) {
+                    following = &n;
+                }
+            }
+            const auto lineText = [&](std::size_t t, std::size_t from) {
+                const std::string_view text = tokens[t].text;
+                std::size_t to = text.size();
+                if (following != nullptr && static_cast<std::size_t>(following->tokenIndex) == t) {
+                    to = std::min(to, static_cast<std::size_t>(std::max(0, following->textLength)));
+                }
+                return from < to ? text.substr(from, to - from) : std::string_view();
+            };
+            const std::size_t lastTokenOfLine = following != nullptr ? static_cast<std::size_t>(following->tokenIndex) : tokens.size() - 1;
+            bool rest = words(lineText(static_cast<std::size_t>(item.tokenIndex),
+                                       static_cast<std::size_t>(items[end].offset + items[end].length)));
+            for (std::size_t t = static_cast<std::size_t>(item.tokenIndex) + 1; t <= lastTokenOfLine && t < tokens.size() && !rest; t++) {
+                rest = words(lineText(t, 0));
             }
             if (!rest) end = i;
             if (end > i) m.textLength = items[end].offset + items[end].length;
@@ -1447,7 +1472,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
     }
     // The run starts with a kana no word of the dictionary reads and goes on kana by kana.
     bool single = unknown && text::RuneCount(src.substr(start, end - start)) == 1;
-    const int runEnd = end + static_cast<int>(KanaPrefix(src.substr(end)));
+    int runEnd = end + static_cast<int>(KanaPrefix(src.substr(end)));
     int pos = end;
     bool particle = false;  // the run ends before a written one-kana particle
     while (pos < runEnd) {
@@ -1456,6 +1481,13 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             text::RuneCount(src.substr(start, pos - start)) >= 2 &&
             text::RuneCount(src.substr(pos, next->end - pos)) == 1) {
             particle = true;
+            break;
+        }
+        // A katakana word that starts right after a run of single unread hiragana that opens its token
+        // ends the run (『ぬこぬこブラボー』); after a word the run is mostly the ending it missed (デキるっちゃ).
+        if ((opened || spaced) && next != nullptr && !next->blank && single && text::RuneCount(src.substr(start, pos - start)) >= 2 &&
+            WordStartKatakana(FirstRune(src.substr(pos)))) {
+            runEnd = pos;
             break;
         }
         if (next == nullptr || (!next->blank && next->end <= runEnd)) return translated;
@@ -1473,6 +1505,9 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             genitive = true;
         }
         nickname = glued && dict::InClass(HDTRANS_CLASS("follower.nickname"), run);
+        // Past a katakana word that ends in ッ, a run that is no nickname is the ending of a verb written
+        // in katakana (ヤッちまう).
+        if (before == U'ッ' && !nickname) return translated;
         // A run that ends like a verb is mostly a verb the analysis missed (ほれた); a drop reads better
         // than its sound.
         if (dict::EndsWithMember(HDTRANS_CLASS("ending.unread-kana-verb"), run) > 0) return translated;

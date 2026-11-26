@@ -14,8 +14,8 @@ struct RubyMatch {
     bool spaced = false;  // a space stands between the base and the parenthesis (FindReading)
 };
 
-// The leftmost ruby markup in s at or after from: |漢字《かな》, ｜漢字（かな）, 漢字《かな》
-// or HTML <ruby>. base and reading are the parts of the alternative that matched.
+// The leftmost ruby markup in s at or after from: |漢字《かな》, ｜漢字（かな）, 漢字《かな》,
+// HTML <ruby> or bracket ruby (pipeline::internal::BracketRubyAt). base and reading are the parts of the alternative that matched.
 bool FindRuby(std::string_view s, std::size_t from, RubyMatch& m);
 
 // The leftmost kana gloss in s at or after from: 漢字（かな） and カタカナ(かな).

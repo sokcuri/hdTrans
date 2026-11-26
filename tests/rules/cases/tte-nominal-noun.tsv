@@ -1,7 +1,7 @@
 # 규칙: GRM-3090
 rule	input	expected	kind	layer
 cx:tte-nominal:20	駄目で元々、魔力強化ってのを試してみるか。	has:마력 강화라는 것을	fix	rewrites
-cx:tte-nominal:20	そのケジメってのを見せてみろ	has:케지메라는 것을	fix	rewrites
+cx:tte-nominal:20	そのケジメってのを見せてみろ	has:매듭이라는 것을	fix	rewrites
 cx:tte-nominal:20	ここでお別れってのも寂しいからさ	has:작별이라는 것도	fix	rewrites
 cx:tte-nominal:20	あと親父の愛車がインプレッサってのもある	has:임프레자라는 것도 있다	fix	rewrites
 cx:tte-nominal:20	海野の子に真田ってのがおったらしくて	has:사나다라는 것이	fix	rewrites

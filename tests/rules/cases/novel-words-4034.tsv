@@ -34,7 +34,7 @@ cx:novel-fixes-2:1100	放課後、俺は顔が腫れ上がるまで殴られ、�
 cx:novel-fixes-2:1100	磔の刑に処す。	!rule:cx:novel-fixes-2:1100	keep	rewrites
 cx:novel-fixes-2:1110	「クソ以下だな」と評論家気取りで批判していただけだ。	has:평론가 행세를 하며	fix	rewrites
 cx:novel-fixes-2:1110	気取りのない人だ。	!rule:cx:novel-fixes-2:1110	keep	rewrites
-cx:novel-fixes-2:1120	俺だったらこんなクレイジーな格好した奴は絶対に採用しない。	has:차림을 한 놈은	fix	rewrites
+cx:novel-fixes-2:1120	俺だったらこんなクレイジーな格好した奴は絶対に採用しない。	has:차림을 한 녀석은	fix	rewrites
 cx:novel-fixes-2:1120	変な格好をした男	!rule:cx:novel-fixes-2:1120	keep	rewrites
 cx:novel-fixes-2:1121	そんな格好している。	has:그런 차림을 하고 있다	fix	rewrites
 cx:novel-fixes-2:1121	変な格好をした男	!rule:cx:novel-fixes-2:1121	keep	rewrites

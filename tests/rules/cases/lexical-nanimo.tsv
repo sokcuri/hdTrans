@@ -1,0 +1,38 @@
+# 규칙: LEX-8080
+rule	input	expected	kind	layer
+dict:jisjk:365695	なにも思いつかない。	아무것도 생각해내지 못하다.	fix	defaults
+dict:jisjk:365695	なにも悪くないのにがまんしなくちゃ	has:아무것도 나쁘지 않은데	fix	defaults
+dict:jisjk:365695	いやぁ、なにも……	이야, 아무것도……	fix	defaults
+dict:jisjk:365695	私なにも悪くないじゃない！	has:아무것도 나쁘지 않잖아	fix	defaults
+dict:jisjk:365695	なにも言えなかった。	아무것도 말할 수 없었다.	fix	defaults
+dict:jisjk:365695	結局はなにも関係ないのに	has:아무것도 관계없는데	fix	defaults
+dict:jisjk:365695	なにも考えないように	아무것도 생각하지 않도록	fix	defaults
+dict:jisjk:365695	なにも知らないくせに	아무것도 모르면서	fix	defaults
+dict:jisjk:365695	なにもしなくてもいい	has:아무것도 하지 않아도	fix	defaults
+cx:nanimo-needless:10	なにも、こんなものまで用意してくれなくてもいいのに	has:굳이, 이런 것까지 준비해 주지 않아도	fix	rewrites
+cx:nanimo-needless:10	何もそこまで強い言い方をしなくても	has:굳이 그렇게까지 강한 말투를	fix	rewrites
+cx:nanimo-needless:10	なにもそこまでしなくても	굳이 그렇게까지 하지 않아도	fix	rewrites
+cx:nanimo-needless:10	なにも、そこまで泣くことはないよ	rule:cx:nanimo-needless:10=굳이	fix	rewrites
+cx:nanimo-needless:10	なにもそんなに急がなくても	rule:cx:nanimo-needless:10=굳이	fix	rewrites
+cx:nanimo-needless:10	何も考えなくてもいいんだ	!rule:cx:nanimo-needless:10	keep	rewrites
+cx:nanimo-needless:10	なにも、言えなかった。	!rule:cx:nanimo-needless:10	keep	rewrites
+cx:nanimo-needless:10	何もそこまでは知らない。	!rule:cx:nanimo-needless:10	keep	rewrites
+dict:jisjk:365695	なにもかも終わった	모두 끝났다	keep	defaults
+dict:jisjk:365695	何もかも嫌になった	모두 싫어졌다	keep	defaults
+dict:jisjk:365695	なにもない部屋	아무것도 없는 방	keep	defaults
+dict:jisjk:365695	性癖も何も、まだだ	has:성적 취향이고 뭐고	keep	defaults
+cx:nanimo-needless:10	何も、聞かなくてもわかる	!rule:cx:nanimo-needless:10	keep	rewrites
+cx:nanimo-needless:10	なにも、そんなことは言ってない	!rule:cx:nanimo-needless:10	keep	rewrites
+cx:nanimo-needless:10	なにもこんなことしなくても	rule:cx:nanimo-needless:10=굳이	fix	rewrites
+dict:jisjk:365695	私はなにもしてないよ	나는 아무것도 하지 않아	fix	defaults
+dict:jisjk:365695	なにも言わなくていい	아무것도 말하지 않아도 된다	fix	defaults
+cx:nanimo-needless:10	なにも今でなくても	굳이 지금이 아니어도	fix	rewrites
+cx:nanimo-needless:10	なにも今日じゃなくてもいいだろう。	has:굳이 오늘이 아니어도	fix	rewrites
+cx:nanimo-needless:10	なにもそこまで言うことはない	굳이 거기까지 말할 일은 없다	fix	rewrites
+cx:nanimo-needless:20	なにも今さら	굳이 이제 와서	fix	rewrites
+cx:nanimo-needless:30	なにもそこまで、と思った	굳이 거기까지, 라고 생각했다	fix	rewrites
+cx:nanimo-needless:30	なにもそこまでは知らない	!rule:cx:nanimo-needless:30	keep	rewrites
+cx:nanimo-needless:10	なにも今日は食べてない	!rule:cx:nanimo-needless:10	keep	rewrites
+lex:kana-equivalent	なにもの？	누구?	fix	lookup
+lex:kana-equivalent	なにものかが来た	누군가가 왔다	fix	lookup
+cx:nanimo-needless:20	なにも今日は食べてない	!rule:cx:nanimo-needless:20	keep	rewrites

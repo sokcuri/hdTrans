@@ -1,0 +1,32 @@
+# 규칙: LEX-8217, LEX-8218, LEX-8219
+rule	input	expected	kind	layer
+dict:jisjk:116083	難儀な奴だ。	고생스러운 녀석이다.	fix	defaults
+dict:jisjk:116083	奴は敵じゃないな。	녀석은 적이 아니네.	fix	defaults
+dict:jisjk:116083	「鈴木の奴、何が銀だよ」	「스즈키의 녀석, 뭐가 은이야」	fix	defaults
+dict:jisjk:116083	奴隷になる。	노예가 된다.	keep	defaults
+dict:jisjk:73521	商店街を歩く。	상점가를 걷는다.	fix	defaults
+dict:jisjk:73521	「商店街に買い物に出てるんだ」	「상점가에 쇼핑하러 나가고 있어」	fix	defaults
+dict:jisjk:46232	トランプのクイーン。	트럼프의 퀸.	fix	defaults
+dict:jisjk:46232	「落ち着け、クイーン」	「진정해, 퀸」	fix	defaults
+dict:jisjk:46232	女王陛下。	여왕 폐하.	keep	defaults
+dict:jisjk:57358	マニフェストを発表する。	매니페스토를 발표한다.	fix	defaults
+dict:w:12905	割と毎日来る。	꽤 매일 온다.	fix	defaults
+dict:w:12905	「割とハードパンチャーですね」	「꽤 하드 펀처군요」	fix	defaults
+dict:w:12905	割と簡単だ。	꽤 간단하다.	keep	defaults
+dict:w:12905	割に合わない。	수지맞지 않는다.	keep	defaults
+dict:w:791	ちらりと猫を見る。	힐끗 고양이를 본다.	fix	defaults
+dict:jisjk:260449	チラッと顔を見る。	흘깃 얼굴을 본다.	fix	defaults
+L9701	「頑張ってくださいね」	「힘내 주세요」	fix	local
+L9701	「鈴木さん、頑張ってください」	「스즈키 씨, 힘내 주세요」	keep	local
+L9701	「頑張ってくださいね、先輩っ！」	「힘내 주세요, 선배!」	fix	local
+L9701	頑張って勉強した。	열심히 공부했다.	keep	local
+L9701	仕事を頑張ってください。	일을 힘내 주세요.	keep	local
+L9701	みんなが頑張ってくれた。	모두가 노력해 주었다.	keep	local
+L9701	頑張るな。	노력하지 마.	keep	local
+dict:w:43604	チラッと本音が出た	살짝 본심이 드러났다	keep	local
+dict:w:43604	チラッとだけ見せて	살짝만 보여 줘	keep	local
+dict:w:43604	チラッと見た。	흘깃 보았다.	fix	local
+dict:jisjk:116083	思ってる奴頭おかしい	생각하는 녀석 머리 이상하다	fix	defaults
+dict:w:14797	奴らが来る。	녀석들이 온다.	fix	defaults
+dict:w:43605	「がんばってください」	「열심히 해 주세요」	fix	local
+dict:w:43605	「勉強をがんばってください」	「공부를 열심히 해 주세요」	keep	local

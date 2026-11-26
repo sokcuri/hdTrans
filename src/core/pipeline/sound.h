@@ -49,7 +49,8 @@
 //     has three or more characters, and the と is written 하고 (ふふふと笑った 후후후 하고 웃었다);
 //   - a lead row (おい、 ほら！ ちょっと…) is a sound only at the start of an utterance
 //     and before a pause, and then wins over the dictionary words; an open row is a
-//     lead row that needs no pause (ってかなんで 그보다 왜);
+//     lead row that needs no pause (ってかなんで 그보다 왜); a row of sound.quoted-lead
+//     only right after an opening bracket and before more words (「って、敵！？」 아니);
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
 //     entry at least as long as the sound's key (without a final と), win; the ending
@@ -290,9 +291,22 @@ std::string RewriteSpellingVariants(std::string_view text, const LineContext& ct
 // rs (ふぁいと of ふぁいとー ファイト), 0 where none starts there.
 size_t HiraganaLoanwordLen(std::u32string_view rs, size_t i, const LineContext& ctx, const dict::Snapshot& snap);
 
+// An utterance said in hiragana with ー for long vowels (そーよ, まー, まーまー) spelled with the vowels
+// where the dictionary or the sound lexicon then reads it as one interjection or adverb (そうよ, まあ,
+// まあまあ), or as one said twice (そーよそーよ): a run of hiragana and ー that opens the line, follows
+// an opening bracket, a pause, an ellipsis, a dash or a space, ends before one of them, a closing
+// bracket or the end, is no key as written (with a sound's lengthening: はーん, ふーぅ) and ends in
+// no shout's っ (ふーっ). Each ー after a kana other than a vowel kana stands for the vowel of its row,
+// お or う after the o row, え or い after the e row; a kana and its long vowel are read only by a lead
+// row or the dictionary (まー まあ, not ふー). A tail of ー after the last kana stays, and after an
+// interjection or a sentence particle that ends three kana or more it draws them out (ねー, ですよねー,
+// いいなー). Spec SND-30.
+std::string SpellDrawnUtterances(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The pause comma inside a unit dropped: between a predicate and a final particle that ends the
 // utterance (ない、よ？), a word and さま (ご主人、さま) and the halves of a katakana word
-// (クリ、トリス) (spec GRM-3870).
+// (クリ、トリス), and a と that opens the line or a quote and いう after it (と、いうわけで) (spec GRM-3870,
+// LEX-8071).
 std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap);
 
 // The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
@@ -430,6 +444,21 @@ struct SoundRow {
     // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
     // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
     std::string alone;
+    // The Korean right before a question mark, after an ellipsis or a dash, then exclamation marks, or
+    // none (fourth column ask=헉: はっ？ 헉?, はっ！？ 헉!?, はっ……！？ 헉……!?, but はっ！ 핫!), drawn out as KR is.
+    std::string ask;
+    // The Korean where another sound of its run is this row too, drawn out or not (fourth column
+    // again=헉: はっ、はっ 헉, 헉, はーっ……はっ 허억……헉, はっ……ん……はっ 헉……응……헉, but はっ……はぁっ 핫……하앗,
+    // はっはっは 하하하), drawn out as KR is. A run is sounds with only commas, ellipses, dashes, middle
+    // dots, dots or spaces between them, 64 sounds at most on each side.
+    std::string again;
+    // The Korean where a と quotes it, the last of its chain: right after it, after a pause, or after the
+    // closing bracket of a quote that holds only the sound (fourth column quoted=헉: はっ、と気づいた 헉, 하고
+    // 눈치챘다, 「はっ」と息を呑む), drawn out as KR is.
+    std::string quoted;
+    // The Korean where the row greets (fourth column greet=안녕하세요, _ for a space): before a call, after a
+    // stammer, an ellipsis or a word of sound.greeting-lead (どうも、望月さん, ど、どうも, やあ、どうも).
+    std::string greet;
     // The Korean is in 해요 speech (fourth column haeyo: そうですそうです 맞아요 맞아요), which copies said
     // apart do not take, as said on their own (그렇습니다).
     bool haeyo = false;

@@ -61,3 +61,42 @@ cx:lc3g-tokorode:5	１年くらい日本を離れたところで問題はない�
 cx:lc3g-tokorode:5	手洗いに行こうと少し会場を離れたところで突然背後から口元を抑えられた。	!rule:cx:lc3g-tokorode:5	keep	rewrites
 cx:lc3g-tokorode:30	土手道では魔物は出ないので、多少離れたところで問題はない。	has:떨어져 봤자	keep	rewrites
 cx:lc3g-tokorode:5	今以上に離れたところで表情の変化を隠すことはできないだろう。	!rule:cx:lc3g-tokorode:5	keep	rewrites
+cx:lc3g-tokorode:40	話の区切りがついたところで、部室の前についた。	has:붙자, 동아리방 앞에 도착했다	fix	rewrites
+cx:lc3g-tokorode:40	馬車を降りたところで、ヤンティーネが呟く。	마차를 내리자, 얀티네가 중얼거린다.	fix	rewrites
+cx:lc3g-tokorode:40	従業員が離れたところで、クノンは切り出した。	has:떨어지자	fix	rewrites
+cx:lc3g-tokorode:40	揃ってため息をついたところで、ドアがノックされた。	has:쉬자, 문이	fix	rewrites
+cx:lc3g-tokorode:40	マグカップを手渡したところで、指先が触れ合った。	has:건네주자, 손끝이	fix	rewrites
+cx:lc3g-tokorode:40	脇道に差し掛かったところで、彼女が足を止めた。	has:접어들자, 그녀가	fix	rewrites
+cx:lc3g-tokorode:40	冷汗が垂れたところで、ドアが開いた。	has:문이 열렸다	fix	rewrites
+cx:lc3g-tokorode:40	下校の生徒が減ったところでビラ配りは終了。	has:줄어들자	fix	rewrites
+cx:lc3g-tokorode:40	ドアを開いたところで、声をかける。	has:열자, 말을 건다	fix	rewrites
+cx:lc3g-tokorode:40	歩き出したところで腕を掴まれる。	has:걷기 시작하자	fix	rewrites
+cx:lc3g-tokorode:40	しばらく歩いたところで、商店街へ繋がる小路が目に入った。	has:걷자, 상점가에	fix	rewrites
+cx:lc3g-tokorode:40	電源が切れたところで、携帯をポケットにねじ込んだ。	has:끊어지자, 휴대폰을	fix	rewrites
+cx:lc3g-tokorode:40	完全におとなしくなったところで、スカートの中に手を入れた。	has:얌전해지자	fix	rewrites
+cx:lc3g-tokorode:40	話が一段落したところで、俺は弁当のふたを開けた。	has:일단락하자, 나는	fix	rewrites
+cx:lc3g-tokorode:40	「候補者３名が揃ったところで、討論会のルールを説明させていただきます」	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	――といったところで車は止まった。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	冗談半分、本気半分、といったところでしょうか。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	洗面所に駆け込もうとしたところで、インターホンが鳴った。	has:뛰어들려던 참에	keep	rewrites
+cx:lc3g-tokorode:40	これに勝てたところで意味は無いな。	has:이길 수 있어 봤자	keep	rewrites
+cx:lc3g-tokorode:40	少し離れたところで見守っている。	has:떨어진 곳에서	keep	rewrites
+cx:lc3g-tokorode:40	いいところで会った。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:35	「よし、無事復讐も果たしたところで、肉を焼こう」	has:완수했으니, 고기를 굽자	fix	rewrites
+cx:lc3g-tokorode:35	片付けも終わったところで、お茶にしましょう。	has:끝났으니, 차로 합시다	fix	rewrites
+cx:lc3g-tokorode:35	終わったところで、席に着いた。さあ、食べよう。	has:끝나자, 자리에 앉았다	keep	rewrites
+cx:lc3g-tokorode:35	話の区切りがついたところで、部室の前についた。	!rule:cx:lc3g-tokorode:35	keep	rewrites
+cx:lc3g-tokorode:10	多少アピールしたところで今さら受け入れてもらえると思う？	has:어필해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	羊飼いになったところで、存在が消えるわけじゃない。	has:되어 봤자	fix	rewrites
+cx:lc3g-tokorode:40	ところで、明日は暇？	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	「走ったところで、もう間に合わないよ」	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	「勝ったところで、何になる？」	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	ちょうど出かけたところでした。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	寝ようとしたところで、電話が鳴った。	has:자려던 참에	keep	rewrites
+cx:lc3g-tokorode:40	電車に乗ったところで、財布がないことに気づいた。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	逃げたところで、すぐに捕まるさ	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	隠したところで、いずれバレる。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	失敗したところで、また挑戦すればいい。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	雨がやんだところで出かければいい。	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:40	「そうです〜、駅を降りたところでユメくんがいました」	!rule:cx:lc3g-tokorode:40	keep	rewrites
+cx:lc3g-tokorode:30	走ったところでもう間に合わない。	has:달려 봤자	fix	rewrites

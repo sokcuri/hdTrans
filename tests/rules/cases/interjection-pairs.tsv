@@ -1,0 +1,24 @@
+# 규칙: SND-32
+rule	input	expected	kind	layer
+sound:interjection-pair	「いやさ、この依頼って順番じゃないと思う」	has:「아니, 이 의뢰는	fix	sound
+sound:interjection-pair	「いやさあ、俺もあんまこーいうことは言いたくないんだけどさ」	has:「아니, 나도	fix	sound
+sound:interjection-pair	「いやでも、私、かなり面倒な子ですよ？」	has:「아니 하지만,	fix	sound
+sound:interjection-pair	「いやまー、いいけどね」	「아니 뭐, 좋지만」	fix	sound
+sound:interjection-pair	「いやもー、今回は勉強になりましたよ」	lacks:정말	current	sound
+sound:interjection-pair	「いやもう、完全に略じゃないし」	has:「아니	current	sound
+sound:interjection-pair	「あーでも、一つ意見を言わせてもらうと」	has:「아 하지만,	fix	sound
+sound:interjection-pair	「ああでも、それは困る」	「아 하지만, 그건 곤란해」	fix	sound
+sound:interjection-pair	「いやまあ、いろいろあってね」	has:「아니 뭐,	keep	sound
+sound:interjection-pair	「まあでも、今回は感謝しないと」	has:「뭐 하지만,	keep	sound
+sound:interjection-pair	「いや、でも、私は」	「아니, 하지만, 나는」	keep	sound
+sound:interjection-pair	「いやだ、行きたくない」	「싫다, 가고 싶지 않아」	keep	sound
+sound:interjection-pair	「いやでも応でも行かせる」	lacks:아니	keep	sound
+sound:interjection-pair	「そういやさ、あの話どうなった？」	has:「그러고 보니,	keep	sound
+sound:interjection-pair	「いやさ……」	lacks:아니	keep	sound
+sound:interjection-pair	「いや、さすがにそれは」	「아니, 아무래도 그건」	keep	sound
+sound:interjection-pair	「いやさすがにそれはない」	has:「아니 아무래도	keep	sound
+sound:interjection-pair	「ああでもないこうでもない」	lacks:하지만	keep	sound
+sound:interjection-pair	いやいや、違うよ。	아니아니, 아니야.	keep	sound
+sound:interjection-pair	いやまさか。	아니 설마.	keep	sound
+sound:interjection-pair	あーでもない。	lacks:하지만	keep	sound
+sound:interjection-pair	いやもう帰る時間だ。	아니 이제 돌아가는 시간이다.	keep	sound

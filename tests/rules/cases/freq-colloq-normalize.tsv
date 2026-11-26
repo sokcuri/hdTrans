@@ -60,7 +60,7 @@ normalize:polite-noda-tic	そうなのです。	has:그렇습니다	keep	normali
 normalize:polite-noda-tic	知っているのです。	has:알고 있습니다	keep	normalize
 normalize:negative-n-noun	どんなもんか分からんのに	has:모르는데	fix	normalize
 normalize:negative-n-noun	人の気持ちの分からんやつだな	has:모르는 녀석	fix	normalize
-normalize:negative-n-noun	言わんこと聞かん奴だ。	has:듣지 않는 놈	fix	normalize
+normalize:negative-n-noun	言わんこと聞かん奴だ。	has:듣지 않는 녀석	fix	normalize
 normalize:negative-n-noun	行かんの？	has:가지 않는 거야	fix	normalize
 normalize:negative-n-noun	読まんのに買った。	has:읽지 않는데	fix	normalize
 normalize:negative-n-noun	何も分からんのは困る。	has:모르는 것은	fix	normalize

@@ -17,6 +17,11 @@
 // びしょびしょになった 흠뻑 젖었다, びしょびしょに濡れた 흠뻑 젖었다; LEX-5900).
 // ni=K (with _ for a space) after state is what the row writes for its に before a verb, in place of KR
 // (くたくた ni=녹초가_되도록: クタクタに疲れた 녹초가 되도록 지쳤다; LEX-5907).
+// ask=K is what an intj row writes right before a question mark, after an ellipsis or a dash, then exclamation
+// marks, or none (はっ？ 헉?, はっ……！？ 헉……!?, but はっ！ 핫!); again=K where another sound of its run is the
+// row too, sounds with only commas, ellipses, dashes, middle dots, dots or spaces between, drawn out or not
+// (はっ、はっ 헉, 헉; はっ……ん……はっ 헉……응……헉; but はっ……はぁっ 핫……하앗, はっはっは 하하하); quoted=K where
+// a と quotes it (はっ、と気づいた 헉, 하고; 「はっ」と息を呑む).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -354,6 +359,7 @@
 うむ	음	intj
 うむっ	으음	intj
 うー	으으	intj
+うーい	네에	intj
 うーん	으음	intj
 ううん	아니	intj
 うーっ	으읏	intj
@@ -488,7 +494,7 @@
 ほほう	호오	intj
 ほへ	호헤	intj
 ほへぇ	호헤에	intj
-はっ	헉	intj
+はっ	핫	intj	ask=헉 again=헉 quoted=헉
 ほっ	휴	intj
 わぁ	와아	intj
 わあ	와아	intj
@@ -1295,6 +1301,7 @@
 どっきどっき	두근두근	ono
 どきまぎ	당황해/당황하다	ono
 どぎまぎ	당황해/당황하다	ono
+てれてれ	쑥스러워/쑥스러워하다	ono
 どっかーん	콰광	ono
 どっかん	콰광	ono
 ずどん	쾅	ono
@@ -3131,6 +3138,16 @@
 さ	자	lead
 で	그래서	lead
 まぁ	뭐	lead
+いやさ	아니	lead
+いやさあ	아니	lead
+いやでも	아니 하지만	lead
+いやまあ	아니 뭐	lead
+いやもう	아니 정말	lead
+ああもう	아, 정말	lead
+あーもう	아, 정말	lead
+もう	정말	lead
+ああでも	아 하지만	lead
+あーでも	아 하지만	lead
 さて	자	lead
 なぁに	뭐야	intj
 よっと	영차	intj
@@ -3215,6 +3232,9 @@
 っつーかさ	그보다	lead
 てゆーかさ	그보다	lead
 ってゆーかさ	그보다	lead
+って	아니	lead
+ってことは	그렇다는 건	open
+って事は	그렇다는 건	open
 ったく	참나	open
 たく	참나	lead
 ども	안녕	lead

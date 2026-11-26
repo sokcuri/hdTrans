@@ -70,7 +70,7 @@ register:REG-26	「了解です。すぐ向かいます」	「알겠습니다. �
 register:REG-25	「魔王はもう倒しました」	「마왕은 벌써 쓰러뜨렸어요」	fix	register
 register:REG-25	「この国の王子です」	「이 나라의 왕자예요」	fix	register
 register:REG-25	「神殿に行きました」	「신전에 갔어요」	fix	register
-register:REG-25	「ゲームはもうマスターしました」	「게임은 이제 마스터했어요」	fix	register
+register:REG-25	「ゲームはもうマスターしました」	「게임은 벌써 마스터했어요」	fix	register
 register:REG-25	「先生の了解はもらいました」	has:받았어요	fix	register
 register:REG-25	「楽しかったです……本当に楽しかったです」	「즐거웠어요……정말 즐거웠어요」	fix	register
 register:REG-25	「そうです……楽しかったです」	「그래요……즐거웠어요」	fix	register

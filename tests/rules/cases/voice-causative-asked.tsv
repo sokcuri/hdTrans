@@ -15,7 +15,7 @@ cx:mimetic-causative:20	身支度はちゃんとさせて頂戴。	몸치장은 
 cx:mimetic-causative:20	肩をプルプルさせていた	어깨를 부들부들시키고 있었다	keep	rewrites
 normalize:verb-nee	言ったぜ 何もさせねえ！	말했다 아무것도 시키지 않아!	fix	normalize
 normalize:verb-nee	お前には行かせねえ。	너에게는 가게 하지 않는다.	fix	normalize
-normalize:verb-nee	いらっしゃいませねえ	어서 오세요 응	keep	normalize
+normalize:verb-nee	いらっしゃいませねえ	어서 오세요	keep	normalize
 dict:w:34300	帝は 御心を悩ませておられる｡	황제는 심을 괴롭히고 계신다.	fix	lookup
 dict:w:34303	見ている人をハラハラさせる	보고 있는 사람을 조마조마하게 한다	fix	lookup
 dict:w:34305	仲間ケガさせてまで 実験してる	동료 다치게 해서까지 실험하고 있다	fix	lookup

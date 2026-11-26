@@ -25,7 +25,7 @@ cx:kiwa-suru:10	一応見はしたけど	일단 보기는 했지만	fix	rewrites
 cx:kiwa-suru:10	怒られはしたが、	혼나기는 했지만,	fix	rewrites
 cx:kiwa-suru:10	「えっと……食べはしますけど、一度に１０個は食べないですかね……？」	has:먹기는 하는데요	fix	rewrites
 cx:kiwa-suru:10	つまり、疑われはしても、	즉, 의심받기는 해도,	fix	rewrites
-constraint:hashita-before-end	特例で貸しはしたが、もう剣は返してもらった。	특례로 대여는 했지만, 이제 검은 돌려 받았다.	keep	lookup
+constraint:hashita-before-end	特例で貸しはしたが、もう剣は返してもらった。	특례로 대여는 했지만, 벌써 검은 돌려 받았다.	keep	lookup
 constraint:hashita-before-end	見はしない。	보지는 않는다.	keep	lookup
 constraint:hashita-before-end	はした金	푼돈	keep	lookup
 cx:kanenai-passive:10	壊されかねない。	부수어질 수도 있다.	fix	rewrites

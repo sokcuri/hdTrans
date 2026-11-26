@@ -1,0 +1,26 @@
+# 규칙: LEX-8161
+rule	input	expected	kind	layer
+dict:base-place-rows	通常は小さな鉢に種を蒔き、発芽してから地面に移す。	has:작은 화분에	fix	defaults
+dict:base-place-rows	残った鉢は、俺たちでなんとかすればいい。	has:남은 화분은	fix	defaults
+dict:base-place-rows	大好きな相手の名を口にしながら、その足下で膝立ちになった。	has:무릎서기가 되었다	fix	defaults
+dict:base-place-rows	「おい、それって本島と繋がるルートじゃねぇか！」	「어이, 그거 본섬과 연결되는 루트잖아!」	fix	defaults
+dict:base-place-rows	「アンタらさぁ、下忍相手になーに手こずってるわけ？」	lacks:시모시	fix	defaults
+dict:base-place-rows	「この前みたいに、大元のシステムを攻撃できないの？」	has:근원의 시스템	fix	defaults
+dict:base-place-rows	「指示がきた。学園前に停車中のワゴンに乗車せよとのことだ」	has:학원 앞에	fix	defaults
+dict:base-place-rows	公衆電話が乗っている台の下に手を這わせる。	has:받침대 아래에	fix	defaults
+dict:base-place-rows	俺は玄関のドアを閉め、門の外に出る。	나는 현관의 문을 닫아, 문 밖에 나온다.	fix	defaults
+dict:base-place-rows	下品……などと、反応するのは、泥沼になるような気がした。	has:천하다	fix	defaults
+dict:base-place-rows	湯上がりの肌を借りた服に包み、鈴木はご機嫌だ。	has:목욕 직후의 피부	fix	defaults
+dict:base-place-rows	「上手いと思う。美大目指してるって言われても納得するよ」	has:미대	fix	defaults
+dict:base-place-rows	「そうね、あたしより、３段下くらいまでかな？」	lacks:단시타	fix	defaults
+dict:base-place-rows	「じゃあ、これからはお手々繋いでいきましょ」	lacks:테테	fix	defaults
+dict:base-place-rows	大島候補が勝った。	오오시마 후보가 이겼다.	keep	defaults
+dict:base-place-rows	桜が丘に住んでいる。	사쿠라가오카에 살고 있다.	keep	defaults
+dict:base-place-rows	鎌倉に行った。	가마쿠라에 갔다.	keep	defaults
+dict:base-place-rows	大飯原発が止まった。	오오이 원자력 발전이 멈추었다.	keep	defaults
+dict:base-place-rows	三佐駅に着いた。	미사역에 도착했다.	keep	defaults
+dict:base-place-rows	渡世さんの話。	와타세 씨의 이야기.	keep	defaults
+dict:base-place-rows	学園前駅で降りた。	가쿠엔마에역에서 내렸다.	keep	defaults
+dict:base-place-rows	大元駅で乗り換える。	오모토역에서 갈아 탄다.	keep	defaults
+dict:base-place-rows	本島さんが来た。	혼지마 씨가 왔다.	keep	defaults
+dict:base-place-rows	橋を渡って、鉢置へ行く。	has:하치오키	keep	defaults

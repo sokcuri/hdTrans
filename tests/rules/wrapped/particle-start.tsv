@@ -1,0 +1,37 @@
+# 규칙: LAY-14, LAY-41
+rule	input	expected	kind	layer
+wrapped:particle-start	昨日、男子高校生\nがクマに襲われた	어제, 남고생\n이 곰에게 습격당했다	fix	driver
+wrapped:particle-start	インタビュー\nで記者は	인터뷰\n로 기자는	fix	driver
+wrapped:particle-start	住宅には誰もいなかった\nということです。	주택에는 아무도 없었다는 것\n입니다.	fix	driver
+wrapped:particle-start	元死刑囚をリーダー\nとして結成された	전 사형수를 리더\n로서 결성되었다	fix	driver
+wrapped:particle-start	女性や部下\nとの不倫問題を受け、	여성이나 부하\n와의 불륜 문제를 받아,	fix	driver
+wrapped:particle-start	東京\nへ向かう	도쿄\n로 향한다	fix	driver
+wrapped:particle-start	土のうなど\nで塞ぐ作業を進めています。	흙부대 등으로\n막는 작업을 진행시키고 있습니다.	fix	driver
+wrapped:particle-start	燃料価格の上昇や円安などに\nより魚介類の原価が上がって	연료 가격 상승이나 엔저 등에 의해\n어패류의 원가가 올라	fix	driver
+wrapped:particle-start	今日は月曜日\nから始まる	오늘은 월요일\n부터 시작된다	fix	driver
+wrapped:particle-start	やると決めた\nからには勝つ	한다고\n결정한 이상에는 이긴다	fix	driver
+wrapped:particle-start	見分けがつきづらい\nということです。	구분이 가기\n힘들다는 것입니다.	fix	driver
+wrapped:particle-start	グループの不動産会社\nが売買の契約時に	그룹의 부동산 회사\n가 매매의 계약시에	fix	driver
+wrapped:particle-start	断続的に降り続く雨の影響で\n≫北九州市で	단속적으로 계속 내리는 비의 영향으로\n≫기타큐슈시에서	keep	driver
+wrapped:particle-start	そうか\nで、その後	그런가\n그래서, 그 후	keep	driver
+wrapped:particle-start	そうか\nで その後	그런가\n그리고 그 후	keep	driver
+wrapped:particle-start	それは困った\nが、	그것은 곤란했다\n하지만,	keep	driver
+wrapped:particle-start	行くよ\nでも待って	갈게\n하지만 기다려	keep	driver
+wrapped:particle-start	そうなんだ\nでは始めます	그렇구나\n그럼 시작합니다	keep	driver
+wrapped:particle-start	いいよ\nにしても遅いな	좋아\n그나저나 늦네	keep	driver
+wrapped:particle-start	はい\nということで次へ	네\n그래서 다음에	keep	driver
+wrapped:particle-start	あっ\nということで	앗\n그래서	keep	driver
+wrapped:particle-start	母\nがっかりしてた	어머니\n실망했다	keep	driver
+wrapped:particle-start	お疲れ様\nへー	수고하셨습니다\n헤에	keep	driver
+wrapped:particle-start	第3話\nより良い明日へ	제3화\n더 나은 내일에	keep	driver
+wrapped:particle-start	りんご\nバナナ\nみかん	사과\n바나나\n미칸	keep	driver
+wrapped:particle-start	経営者の意思決定になってくる\nと思います。	경영자의 의사결정이 되어 진다고\n생각합니다.	keep	driver
+wrapped:particle-start	ほんとに？ うん\nで、どうした	정말? 응\n그래서, 무슨 일이야	keep	driver
+wrapped:particle-start	わかった、うん\nで、次は	알았다, 응\n그래서, 다음은	keep	driver
+wrapped:particle-start	そうなんですか、えっ\nということは	그렇습니까, 어\n그 말은	keep	driver
+wrapped:particle-start	わかった、はい\nということで次	알았다, 네\n그래서 다음	keep	driver
+wrapped:particle-start	カメラ\nをとめて	카메라\n를 세워	keep	driver
+wrapped:particle-start	ロシアだった\nという見方	러시아였다\n라는 견해	keep	driver
+wrapped:particle-start	次回もお楽しみに\nということで	다음번도 기대하세요\n그래서	keep	driver
+wrapped:particle-start	お互いが尊敬できてる\nっていうのが奇跡	서로를 존경할 수 있다\n라는 것이 기적	keep	driver
+wrapped:particle-start	考えることがありました\nという感じです。	생각하는 일이 있었습니다\n라는 느낌입니다.	keep	driver

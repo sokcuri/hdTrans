@@ -40,7 +40,7 @@ cx:towa-ienai:10	完璧とはいえない出来だ。	has:완벽하다고는 할
 cx:towa-ienai:10	夏とはいえ、まだ涼しい。	has:여름이라고는 해도	keep	rewrites
 cx:towa-ienai:10	子供とはいえない。	has:아이라고는 할 수 없다	keep	rewrites
 cx:sae-unless:10	転生の事を公にさえしなければっ	has:하지 않으면	fix	rewrites
-cx:sae-unless:10	あんなことさえ言わなければ……	has:저런 말만 하지 않으면……	fix	rewrites
+cx:sae-unless:10	あんなことさえ言わなければ……	has:그런 말만 하지 않으면……	fix	rewrites
 cx:sae-unless:10	早く帰らなければ。	has:빨리 돌아가야 한다	keep	rewrites
 cx:sae-unless:10	これさえやらなければいけない。	has:이것만 해야 한다	keep	rewrites
 cx:sae-unless:10	これさえ守らなければならない。	has:이것만 지켜야 한다	keep	rewrites

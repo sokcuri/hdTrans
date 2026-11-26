@@ -108,6 +108,8 @@ private:
     // Decode and ReadUvarint read [i, end) of blob_, which the caller has checked
     // with guard_.
     bool Decode(std::size_t& i, std::size_t end, Record& r, bool& more) const;
+    // Decode without the record: the lengths and varints are read and bounds-checked, the code and id not looked at.
+    bool Skip(std::size_t& i, std::size_t end, bool& more) const;
     bool ReadUvarint(std::size_t& i, std::size_t end, uint64_t& value) const;
     bool ReadStart(std::size_t group, std::size_t& offset) const;
     bool RecordsStart(int k, std::size_t& i, std::size_t& end) const;

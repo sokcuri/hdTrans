@@ -1,0 +1,19 @@
+# 규칙: LEX-8125
+rule	input	expected	kind	layer
+dict:w:42759	俺もどんどん昂ぶっていった。	나도 점점 흥분되어 갔다.	fix	defaults
+dict:w:42759	自分を昂ぶらせる。	자신을 흥분되게 한다.	fix	defaults
+dict:w:42760	俺の昂ぶりはどんどん大きくなる。	내 흥분은 점점 커진다.	fix	defaults
+dict:jisjk:139241	気持ちが昂る。	기분이 흥분된다.	fix	defaults
+dict:jisjk:139241	激昂した顔になった。	격앙 한 얼굴이 되었다.	keep	defaults
+dict:jisjk:90365	膣口に肉棒をあてがい、体を落とす。	질구에 육봉을 갖다 대고, 몸을 떨어뜨린다.	fix	defaults
+dict:w:42762	亀頭を宛がう。	귀두를 갖다 댄다.	fix	defaults
+dict:w:42765	内腿の奥まで撫でる。	허벅지 안쪽 안쪽까지 쓰다듬는다.	fix	defaults
+dict:w:42767	彼女の左腿を撫でる。	그녀의 왼쪽 허벅지를 쓰다듬는다.	fix	defaults
+dict:jisjk:90429	いきり立つペニス	성나는 페니스	fix	defaults
+dict:w:42770	快感に悶えながら声を上げる。	쾌감에 몸부림치면서 소리를 낸다.	fix	defaults
+dict:w:42772	奥に吐精する。	안쪽에 사정한다.	fix	defaults
+dict:w:42773	腰を揺すりながら吸い付く。	허리를 흔들면서 달라붙는다.	fix	defaults
+dict:w:42773	肩を揺すって起こす。	어깨를 흔들어 깨운다.	keep	defaults
+dict:w:42774	貧乏揺すりをする。	다리 떨기를 한다.	fix	defaults
+dict:w:42777	揺すりたかりの類だ。	공갈의 종류다.	fix	defaults
+dict:w:42777	ヒダさんが来た。	히다 씨가 왔다.	keep	defaults

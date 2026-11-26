@@ -74,7 +74,7 @@ npm CLI의 `--userdict`는 파일 하나를 받으며 중복 지정은 오류입
 각 줄 뒤에 `\n`을 붙입니다.
 
 ```
-hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--no-predicate-variants] [--cg-learned] [--speech LEVEL] [--speech-levels MODE] [--speech-report FILE] [--wrapped] [--context FILE] [--names FILE] [--propose-names] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
+hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--no-predicate-variants] [--cg-learned] [--speech LEVEL] [--speech-levels MODE] [--speech-report FILE] [--wrapped] [--context FILE] [--names FILE] [--propose-names] [--stages DIR] [--rule-counts FILE] [--show-eztrans | --register-eztrans [--force] | --unregister-eztrans [--force]] [--in FILE | --file FILE] [--out FILE] [--] [text]
 ```
 
 | 옵션 | 설명 |
@@ -111,11 +111,14 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--speech-report FILE` | `auto`가 바꾼 줄을 TSV로 씀: 입력의 줄 번호(1부터, `--context` 줄은 세지 않음), 규칙(REG), 단서, 원문, 바꾸기 전, 바꾼 뒤. `keep`이나 `--reference`이면 빈 파일을 쓰고 stderr에 그 까닭을 적음. `--raw`이면 빈 파일 |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙과 구문 표의 행마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G, cx), `index`(전역 규칙은 PRIO, 구문 표는 행 id), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
+| `--show-eztrans` | Windows 전용. 도구가 이지트랜스 설치 폴더로 읽는 `HKCU\Software\ChangShin\ezTrans`의 `FilePath`와 그 폴더의 종류, 등록 해제 때 되돌릴 값을 출력 ([도구와 함께 쓰기](using-with-tools.md#레지스트리로-찾는-도구)) |
+| `--register-eztrans` | Windows 전용. 그 `FilePath`를 실행 파일 폴더로 바꾸고 바뀌기 전 값을 `HKCU\Software\hdTrans\ezTrans`에 저장. 실행 파일 폴더에 `J2KEngine.dll`이 없으면 실패. 기존 값이 `J2KEngine.dll`이 있는 다른 폴더(이지트랜스 등)면 `--force` 없이는 바꾸지 않음 |
+| `--unregister-eztrans` | Windows 전용. 저장한 값으로 `FilePath`를 되돌리고(원래 없었으면 지움) 저장한 값을 지움. 등록 뒤 `FilePath`가 바뀌었으면 `--force` 없이는 되돌리지 않음 |
 
 기존 `-in`, `-why` 같은 단일 하이픈 옵션도 받습니다. 직접 문장을 인자로 넘길 수 있고, `--` 뒤는 옵션으로 해석하지 않습니다.
 `--in`과 직접 문장을 함께 지정하면 오류입니다. npm CLI와 공통 옵션의 이름과 의미가 같으며, npm판의 실행 엔진은 WASM입니다.
 
-종료 코드: 0 성공, 1 사전을 못 불러옴, 입력 읽기 실패, 캐시 오류, 명시한 설정 파일 없음, 2 알 수 없는 옵션(사용법 출력).
+종료 코드: 0 성공, 1 사전을 못 불러옴, 입력 읽기 실패, 캐시 오류, 명시한 설정 파일 없음, 레지스트리 명령의 거부나 실패, 2 알 수 없는 옵션(사용법 출력).
 
 `--why`의 표준 오류 출력은 탭으로 구분한 줄입니다. `WHY-LINE <줄>`이 입력 줄마다 나오고, 단어마다
 `WHY <줄> <청크> <문장> <토큰>:<시작> <표면형> <선택> <출처> <id> <번역> <직접 선택> <출처> <id> <층> <규칙> <어미 층> <어미 규칙>`,

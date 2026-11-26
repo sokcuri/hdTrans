@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:web-fixes-h:10	これからは、嫌なことは嫌と、好きなことは好きと言おう。	has:싫은 것은 싫다고, 좋아하는 것은 좋아한다고 말하자	fix	rewrites
 cx:web-fixes-h:10	好きな子のことを好きと言えない多感な年頃…。	has:좋아하는 아이를 좋아한다고 말할 수 없는	fix	rewrites
 cx:web-fixes-h:10	特定の誰が好きとか嫌いとか、どうもしっくりこないのだ。	has:좋아한다든가 싫다든가	fix	rewrites
-cx:web-fixes-h:10	「そうよ……好きな人に、好きと言ってもらえたのですから……」	has:좋아한다고 말해 줄 수	fix	rewrites
+cx:web-fixes-h:10	「そうよ……好きな人に、好きと言ってもらえたのですから……」	has:좋아한다고 말해 줬	fix	rewrites
 cx:web-fixes-h:10	あの…私…、す…好き…というか…その…	has:좋아…라고 할까	keep	rewrites
 cx:web-fixes-h:10	好きと嫌いの区別。	!rule:cx:web-fixes-h:10	keep	rewrites
 cx:web-fixes-h:10	嫌とは言えない雰囲気になりそうだしなぁ。	has:싫다고는 말할 수 없는	keep	rewrites

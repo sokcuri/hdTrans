@@ -1,0 +1,32 @@
+# 규칙: LEX-8169, NUM-5
+rule	input	expected	kind	layer
+cx:ichi-han:10	桜庭さんは一呼吸置いてから俺を見つめた。	사쿠라바 씨는 한 호흡 두고 나서 나를 바라보았다.	fix	rewrites
+cx:ichi-han:10	そう言って、黒山羊は一呼吸置いた。	그렇게 말해, 흑염소는 한 호흡 두었다.	fix	rewrites
+cx:ichi-han:10	最後の一突きを入れた	마지막 한 찌르기를 넣었다	fix	rewrites
+cx:ichi-han:10	この先、一悶着あるかもしれん	has:한 말썽	fix	rewrites
+cx:ichi-han:10	一位になった	1위가 되었다	keep	rewrites
+cx:ichi-han:10	三階に行く	3층에 간다	keep	rewrites
+cx:ichi-han:10	一人で行く	혼자서 간다	keep	rewrites
+cx:ichi-han:10	一番好きな作家は？	제일 좋아하는 작가는?	keep	rewrites
+cx:ichi-han:10	一年が過ぎた	일년이 지났다	keep	rewrites
+cx:ichi-han:10	一回だけ	한 번만	keep	rewrites
+cx:ichi-han:10	一冊の本	한 권의 책	keep	rewrites
+cx:ichi-han:10	一学期	1학기	keep	rewrites
+cx:ichi-han:10	一時間	1시간	keep	rewrites
+cx:ichi-han:10	一日	하루	keep	rewrites
+cx:ichi-han:10	一度	한 번	keep	rewrites
+cx:ichi-han:10	一杯	한 잔	keep	rewrites
+cx:ichi-han:10	一応	일단	keep	rewrites
+cx:ichi-han:10	一緒	함께	keep	rewrites
+cx:ichi-han:10	一瞬	순간	keep	rewrites
+cx:ichi-han:10	一方	한편	keep	rewrites
+cx:ichi-han:10	一般	일반	keep	rewrites
+cx:ichi-han:10	一体	도대체	keep	rewrites
+cx:ichi-han:10	一生	평생	keep	rewrites
+cx:ichi-han:10	一言	한마디	keep	rewrites
+cx:ichi-han:10	一切	일절	keep	rewrites
+cx:ichi-han:10	一休み	휴식	keep	rewrites
+cx:ichi-han:10	一歩	한 걸음	keep	rewrites
+cx:ichi-han:20	一呼吸の間	한 호흡 동안	fix	rewrites
+cx:ichi-han:20	一冒険者の話	한 모험가의 이야기	fix	rewrites
+cx:ichi-han:20	一女性として	한 여성으로서	keep	rewrites

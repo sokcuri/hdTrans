@@ -284,7 +284,20 @@ private:
         const Record* endings;
     };
     ProbeMark MarkProbe() const;
-    void RewindProbe(const ProbeMark& m);
+    // texts false keeps the texts the probe kept (a cache keyed by a text's address then never meets another text there).
+    void RewindProbe(const ProbeMark& m, bool texts = true);
+    // Gives back the items, groups, entries and details a probe made, keeping its records and texts.
+    void RewindProbeItems(const ProbeMark& m);
+    // Runs check, which reads with InsertLateCandidate where words would go and returns a record or records (or null)
+    // but no item it made: those go back, and so do its records when it returns none.
+    template <class F>
+    auto Probing(F&& check) {
+        const ProbeMark mark = MarkProbe();
+        const auto found = check();
+        if (found == nullptr) RewindProbe(mark, false);
+        else RewindProbeItems(mark);
+        return found;
+    }
     // The place whose verbs SegEdgesAt probes one by one (text, byte offset, token; text null outside it), and whether
     // the prefix table read nothing there.
     struct PrefixProbe {
@@ -308,6 +321,13 @@ private:
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
+    // TranslateCandidateAt after a candidate or at a place of CoverSurface. Where the words fail, the items and records
+    // that search made go back (RewindProbe, keeping texts) when nothing outside it holds one: it inserted no item, left
+    // no resume point, shortened no verb and left nothing for the search to pick. A long text read word by word then
+    // keeps only the readings it can still use.
+    bool TranslateAfter(std::string_view full, int cursor, int token, Item* parent);
+    // Items inserted into the chain, counted (TranslateAfter).
+    std::size_t inserted_ = 0;
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
@@ -321,6 +341,9 @@ private:
     // that a shorter reading lets the next word take; null when c stands.
     Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
+    // The shorter reading to take instead of c when c leaves the stem い of いる behind it and a word after the shorter
+    // reading takes it (GRM-8100); null when c stands.
+    Record* OverLoneIru(std::string_view full, int cursor, int token, const Item& c);
     Record* OverParticleKanaWord(std::string_view full, int cursor, int token, const Item& c, const Item* parent);
     // The reading at full[p:] that runs farthest: its end (p for none) and its item, and the farthest key end there.
     struct Reach {
@@ -383,16 +406,23 @@ private:
     // Whether lead ends in a noun: the ん of a nominalizer, or a word with a kanji or katakana that ends
     // there and has a noun sense or is not in the dictionary (ConstraintContext::AfterNounBeforeListed).
     bool AfterNoun(std::string_view lead);
+    // Whether head ends in the continuative of a verb that a contracted てる follows (撃たれ, 見; not 日が, 過疎っ)
+    // (ConstraintContext::TeruAfterStem).
+    bool TeStemBefore(std::string_view head);
     // Whether the hiragana noun source at the start of query, after head, is a particle and the start
     // of a longer word (ConstraintContext::ParticleSplit).
     bool ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
                        const std::vector<dict::Candidate>& list);
+    // Whether the kanji word source at the start of query starts with a counter and cuts a longer word that starts
+    // after it (ConstraintContext::CounterCutsWord).
+    bool CounterCutsWord(std::string_view source, std::string_view query, const std::vector<dict::Candidate>& list);
     // Whether rest, the text after a て form's って, starts the ている aspect (ConstraintContext::BeforeTopicTte).
     bool TeAspectAt(std::string_view rest);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);
     void DropOpenUtterances(Lookup& l, std::string_view query);
+    void DropKanaBoundProper(Lookup& l, std::string_view query);
     void DropModalSplits(Lookup& l, std::string_view query);
     bool SplitsModal(const Record& r, std::string_view query, bool afterKa) const;
     bool SplitsKashira(const Record& r, std::string_view query) const;

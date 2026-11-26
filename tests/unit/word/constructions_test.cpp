@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <span>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -320,6 +321,47 @@ HD_TEST(constructions_builtin_table) {
         HD_CHECK_EQ(std::string(ConstructionId(static_cast<int>(i))), t.rows[i].id);
     }
     HD_CHECK(ConstructionId(-1).empty() && ConstructionId(static_cast<int>(t.rows.size())).empty());
+}
+
+HD_TEST(constructions_compiled_table_is_the_parsed_one) {
+    const std::span<const uint8_t> compiled = internal::CompiledConstructions();
+    if (compiled.empty()) HD_SKIP("this build compiles no construction table");
+    const internal::ConstructionTable parsed = internal::ParseBuiltinConstructions();
+    const std::vector<uint8_t> bytes = internal::WriteConstructions(parsed);
+    HD_CHECK(std::ranges::equal(compiled, bytes));
+    internal::ConstructionTable read;
+    HD_REQUIRE(internal::ReadConstructions(compiled, read));
+    HD_CHECK(internal::WriteConstructions(read) == bytes);
+    HD_CHECK(internal::WriteConstructions(internal::BuiltinConstructions()) == bytes);
+    // Word classes and features come back as the same objects.
+    HD_REQUIRE(read.atoms.size() == parsed.atoms.size());
+    std::size_t sets = 0, features = 0;
+    for (std::size_t i = 0; i < read.atoms.size(); i++) {
+        HD_CHECK(read.atoms[i].set == parsed.atoms[i].set);
+        HD_CHECK(read.atoms[i].feature == parsed.atoms[i].feature);
+        sets += parsed.atoms[i].set != nullptr ? 1 : 0;
+        features += parsed.atoms[i].feature != nullptr ? 1 : 0;
+    }
+    HD_CHECK(sets > 0 && features > 0);
+}
+
+HD_TEST(constructions_read_rejects_other_bytes) {
+    const std::vector<std::string_view> lines = {
+        "//= de-scene\tafter First 20\tthe place of an action\n",
+        "cx:de-scene:20\tLEX-9\t&&2 S+0== \"で\" S-1== @noun.scene\tselect-lemma \"에서\"\tnote\n",
+        "cx:de-scene:30\t\tF+0== \"selected\"\tselect-lemma \"에\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_REQUIRE(Errors(t).empty());
+    const std::vector<uint8_t> bytes = internal::WriteConstructions(t);
+    internal::ConstructionTable read;
+    HD_REQUIRE(internal::ReadConstructions(bytes, read));
+    HD_CHECK(internal::WriteConstructions(read) == bytes);
+    HD_CHECK(read.atoms.size() == t.atoms.size() && read.atoms[1].set == t.atoms[1].set && read.atoms[1].set != nullptr);
+    for (std::size_t n = 0; n < bytes.size(); n++) HD_CHECK(!internal::ReadConstructions(std::span(bytes).first(n), read));
+    std::vector<uint8_t> longer = bytes;
+    longer.push_back(0);
+    HD_CHECK(!internal::ReadConstructions(longer, read));
 }
 
 namespace {

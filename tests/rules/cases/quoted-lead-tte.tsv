@@ -1,0 +1,52 @@
+# 규칙: SND-31
+rule	input	expected	kind	layer
+sound:quoted-lead	「って、敵！！？」	「아니, 적!!?」	fix	sound
+sound:quoted-lead	「って、おい。いきなりウソつくな」	has:「아니,	fix	sound
+sound:quoted-lead	「って、君じゃなくて図書部員の人ね」	has:「라고,	current	sound
+sound:quoted-lead	「って、ちょっと待て！」	「아니, 잠깐 기다려!」	fix	sound
+sound:quoted-lead	「って！　雄二にも同じこと言った！」	has:「라고!	keep	sound
+sound:quoted-lead	『って、何これ』	『아니, 이게 뭐야』	fix	sound
+sound:quoted-lead	「って、ずいぶん大荷物だね」	has:「아니,	fix	sound
+sound:quoted-lead	「ってことは、痴話喧嘩の延長ですか」	has:「그렇다는 건,	fix	sound
+sound:quoted-lead	「ってことは確定っすね！？」	「그렇다는 건 확정이네요!?」	fix	sound
+sound:quoted-lead	「って事は、あいつは敵って事でいい？」	has:「그렇다는 건,	fix	sound
+sound:quoted-lead	「ってことは、映画じゃないのかな？」	has:「그렇다는 건,	fix	sound
+sound:quoted-lead	「ってことで、行きましょう」	「그래서, 갑시다」	keep	sound
+sound:quoted-lead	「って言われても困る」	「라는 말을 들어도 곤란해」	keep	sound
+sound:quoted-lead	「って言っても同い年の女の子じゃない」	has:「라고 말해도	keep	sound
+sound:quoted-lead	「ってか、もう夏服着てんの？」	「그보다, 벌써 하복 입고 있어?」	keep	sound
+sound:quoted-lead	「っていうか、そもそも俺は新入生じゃないんだけど？」	has:「그보다,	keep	sound
+sound:quoted-lead	「って」	「라고」	keep	sound
+sound:quoted-lead	って、やればいいんですね、わかります」	has:라고,	keep	sound
+sound:quoted-lead	ってことは、あの人は、似たものを見ていたのだろうか。	has:라는 것은,	keep	sound
+sound:quoted-lead	「ふーん……って、４週連続！？」	has:이라니,	keep	sound
+sound:quoted-lead	「行くって、どこに？」	「간다고, 어디에?」	keep	sound
+sound:quoted-lead	「ってことらしいから死んじゃダメよ」	lacks:그렇다는 건	keep	sound
+sound:quoted-lead	「って……あ」	lacks:아니	keep	sound
+sound:quoted-lead	「……って、あれ？」	has:「……라고,	keep	sound
+sound:quoted-lead	「わかった。……って、通信繋がらん」	has:……라고,	keep	sound
+sound:quoted-lead	「って、ことで大丈夫かな？」	lacks:아니	keep	sound
+sound:quoted-lead	「って、言ってるけど、青海さんもいい？」	has:「라고, 말하고 있지만	keep	sound
+sound:quoted-lead	……って、先生？」	has:라고,	keep	sound
+sound:quoted-lead	「来るって、誰が？」	「온다고, 누가?」	keep	sound
+sound:quoted-lead	って、言ってたよ」	라고, 말했어」	keep	sound
+sound:quoted-lead	「ってことらしいよ」	「라는 것인 것 같아」	keep	sound
+sound:quoted-lead	「って何？」	lacks:아니	keep	sound
+sound:quoted-lead	「ってば！」	lacks:아니	keep	sound
+sound:quoted-lead	「……って、春野さんは思ってます」	has:라고,	keep	sound
+sound:quoted-lead	「……って、だめ？」	has:……라고,	keep	sound
+sound:quoted-lead	「って？」	「라고?」	keep	sound
+sound:quoted-lead	「って！」	「라고!」	keep	sound
+sound:quoted-lead	「って、聞いた」	has:라고,	keep	sound
+sound:quoted-lead	「って、書いてある」	has:라고,	keep	sound
+sound:quoted-lead	「って、伝えて」	lacks:아니	keep	sound
+sound:quoted-lead	「って、呼んで」	lacks:아니	keep	sound
+sound:quoted-lead	「って、叫んだ」	lacks:아니	keep	sound
+sound:quoted-lead	「って、話だよ」	lacks:아니	keep	sound
+sound:quoted-lead	「って、噂だよ」	has:라고,	keep	sound
+sound:quoted-lead	「って、先生が言ってた」	has:라고,	keep	sound
+sound:quoted-lead	「ってことはない」	lacks:그렇다는	keep	sound
+sound:quoted-lead	「って、お母さんが」	has:「라고,	keep	sound
+sound:quoted-lead	「って、彼が」	has:「라고,	keep	sound
+sound:quoted-lead	「ってことは知ってる」	lacks:그렇다는	keep	sound
+sound:quoted-lead	「ってことはわかってる」	lacks:그렇다는	keep	sound

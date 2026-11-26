@@ -96,6 +96,42 @@ std::string SyllableHead(const std::string& kr, std::string_view x, std::string_
 }
 
 
+// s written for comparing sound classes: a syllable that repeats the vowel of the one before it with no initial
+// dropped (니이나 니나), and with finals, a final ㄹ written as 르 and 루 as 르 (일 이르, 이루 이르).
+std::string SoundClassKey(std::string_view s, bool finals) {
+    constexpr int kIeung = 11, kVowelU = 13;  // ㅇ, ㅜ
+    std::string out;
+    int prevVowel = -1;
+    for (std::size_t i = 0; i < s.size();) {
+        const text::Rune r = RuneAt(s, i);
+        i += r.size;
+        const auto syl = text::Split(r.cp);
+        if (!syl) {
+            text::AppendRune(out, r.cp);
+            prevVowel = -1;
+            continue;
+        }
+        if (syl->initial == kIeung && syl->final == text::kFinalNone && syl->vowel == prevVowel) continue;
+        char32_t cp = r.cp;
+        if (finals && syl->initial == text::kInitialRieul && syl->vowel == kVowelU && syl->final == text::kFinalNone) {
+            cp = text::Join(text::kInitialRieul, text::kVowelEu, text::kFinalNone);
+        }
+        if (finals && syl->final == text::kFinalRieul) {
+            text::AppendRune(out, text::SetFinal(cp, text::kFinalNone));
+            text::AppendRune(out, text::Join(text::kInitialRieul, text::kVowelEu, text::kFinalNone));
+        } else {
+            text::AppendRune(out, cp);
+        }
+        prevVowel = syl->vowel;
+    }
+    return out;
+}
+
+// Whether the row Korean kr writes the transliteration tr's sound in another class only (SoundClassKey).
+bool SameSoundClass(std::string_view kr, std::string_view tr, bool finals) {
+    return SoundClassKey(kr, finals) == SoundClassKey(tr, finals);
+}
+
 }  // namespace
 
 std::string Registry::Dict() {
@@ -137,7 +173,11 @@ std::string Registry::Render(std::string_view t) {
 std::vector<Listed> Registry::Proposed() {
     std::vector<Listed> out;
     for (const auto& [t, n] : Accepted()) {
-        if (listed_.count(t) > 0) continue;
+        // The names the document learned itself (BuildDocument) are proposed as it reads them.
+        if (const auto l = listed_.find(t); l != listed_.end()) {
+            if (l->second.source == kLearnedSource) out.push_back(l->second);
+            continue;
+        }
         std::string kr = RenderName(t, n);
         if (kr.empty()) continue;
         const DictFlags f = Flags(t);
@@ -163,7 +203,8 @@ std::string Registry::RenderName(std::string_view t, const Name& n) {
         // 히무로 마사츠구, not 빙실).
         const auto surname = i == 0 ? commonSurnames_.find(n.parts[i]) : commonSurnames_.end();
         const bool read = reading_.count(n.parts[i]) > 0 || listed_.count(n.parts[i]) > 0;
-        const std::string part = surname != commonSurnames_.end() && !surname->second.empty() && !read ? surname->second : RenderPart(n.parts[i]);
+        const std::string part = surname != commonSurnames_.end() && !surname->second.empty() && !read ? surname->second
+                                    : RenderPart(n.parts[i], false, t.find("・") != std::string_view::npos || t.find("＝") != std::string_view::npos);
         if (part.empty()) return "";
         if (i > 0) out += " ";
         out += part;
@@ -201,7 +242,7 @@ std::string Registry::CompoundSpelling(std::string_view t) {
     return "";
 }
 
-std::string Registry::RenderPart(std::string_view t, bool whole) {
+std::string Registry::RenderPart(std::string_view t, bool whole, bool chain) {
     const std::string key(t);
     if (const auto l = listed_.find(key); l != listed_.end()) return l->second.ko;
     if (const auto f = tables_->fixed.find(key); f != tables_->fixed.end() && !f->second.empty()) return f->second;
@@ -220,7 +261,55 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         if (!head.empty() && IsHangulText(number)) return head + number;
     }
     if (const std::string kr = ChainPart(t); !kr.empty()) return kr;
+    const bool katakana = AllRunes(t, IsKatakana);
     if (const std::string kr = PrefixForm(t); !kr.empty()) return kr;
+    // A katakana name with a person row reads as a line alone reads it: as the first row of the base dictionary
+    // where a person row spells it so, else as the base dictionary's person row, else by its own sound where a
+    // person row of the name layer sounds so (アイバン 아이반 beside 이반). A name no other dictionary has reads
+    // as its first person row (マチルダ 마틸다, not 마치르다), else as a name-layer row of another kind that spells
+    // the kana's own sound. The transliteration is for the rest.
+    if (katakana && snap_ != nullptr) {
+        const auto rowReading = [&]() -> std::string {
+            const std::vector<dict::Record> rows = snap_->NameRecords(t);
+            const std::string person = BasePersonReading(t);
+            for (const dict::Candidate& rec : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
+                if (rec.codes == nullptr || rec.source != t) continue;
+                if (IsHangulText(rec.target) &&
+                    (rec.target == person || std::any_of(rows.begin(), rows.end(), [&](const dict::Record& r) {
+                         return r.codes != nullptr && r.codes->sem.HasPrefix("QPN") && r.target == rec.target;
+                     }))) {
+                    return std::string(rec.target);
+                }
+                break;
+            }
+            if (!person.empty()) return person;
+            const std::string fan = text::FromKana(t, text::Preset::Fan);
+            const auto sounding = [&](bool ofPerson) -> std::string {
+                for (const dict::Record& rec : rows) {
+                    if (rec.codes == nullptr || rec.codes->part.Empty() || rec.codes->part.Tag() != 'N' || !IsHangulText(rec.target)) continue;
+                    if (rec.codes->sem.HasPrefix("QPN") != ofPerson) continue;
+                    if (!fan.empty() && text::SameSound(rec.target, fan)) return std::string(rec.target);
+                }
+                return "";
+            };
+            if (std::string kr = sounding(true); !kr.empty()) return kr;
+            if (Flags(t).records == 0) {
+                if (std::string kr = Flags(t).layerName; !kr.empty()) return kr;
+                if (std::string kr = sounding(false); !kr.empty()) return kr;
+            }
+            return "";
+        };
+        if (std::string kr = rowReading(); !kr.empty()) {
+            // The transliteration where the row only writes the same sound in more syllables: a long vowel as a
+            // doubled syllable (ニーナ 니나, not 니이나), and in a part of a longer name a final ル as a syllable (イル 일,
+            // but レイチェル keeps its row's 레이첼).
+            if (std::string tr; word::TransliterateName(t, tr) && IsHangulText(tr) && tr != kr && RuneCount(tr) < RuneCount(kr) &&
+                SameSoundClass(kr, tr, chain)) {
+                return tr;
+            }
+            return kr;
+        }
+    }
     const std::string layer = Flags(t).layerName;
     if (snap_ != nullptr) {
         for (const dict::Candidate& rec : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
@@ -231,7 +320,6 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
             }
         }
     }
-    const bool katakana = AllRunes(t, IsKatakana);
     const auto acc = Accepted().find(key);
     const bool given = acc != Accepted().end() && acc->second.given;
     // A common kanji word that honorifics have shown to be a person reads as the person of
@@ -324,6 +412,22 @@ bool Registry::GuessedNameBlocked(std::string_view t) {
     return Flags(std::string(t.substr(t.size() - last.size)) + "様").records > 0;
 }
 
+std::string Registry::BasePersonReading(std::string_view t) const {
+    if (snap_ == nullptr) return "";
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
+        if (rec.codes != nullptr && rec.source == t && rec.codes->sem.HasPrefix("QPN") && IsHangulText(rec.target)) {
+            return std::string(rec.target);
+        }
+    }
+    return "";
+}
+
+std::string Registry::PersonReading(std::string_view t) {
+    if (AllRunes(t, IsKatakana)) return RenderPart(t, true);
+    if (std::string kr = BasePersonReading(t); !kr.empty()) return kr;
+    return Flags(t).layerName;
+}
+
 std::string Registry::PersonName(std::string_view t) {
     if (snap_ == nullptr || !AllRunes(t, IsKatakana)) return "";
     const std::string kr = snap_->PersonName(t);
@@ -354,6 +458,8 @@ std::string Registry::PrefixForm(std::string_view x) {
         // A numbered name reads its head the way the head reads (RenderPart).
         if (!t.starts_with(x) || t.size() == x.size() || !AllRunes(t, IsKatakana) || numbered_.count(t) > 0) continue;
         const std::string_view y = std::string_view(t).substr(x.size());
+        // x drawn out (マチルダー) is x, not a longer name.
+        if (AllRunes(y, [](char32_t c) { return c == U'ー' || InRunes(c, "ッァィゥェォャュョヮ"); })) continue;
         const std::string h = SyllableHead(RenderPart(t), x, y);
         if (!h.empty()) return h;
     }

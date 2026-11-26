@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 normalize:ikanai	「そうはいかねえんだよ」	「그렇게는 되지 않아」	fix	normalize
 normalize:ikanai	「そういうわけにはいかねえんだよ！」	「그럴 수는 없어!」	fix	normalize
 normalize:ikanai	「ここで死ぬわけにはいかん」	「여기서 죽을 수는 없다」	fix	normalize
-normalize:ikanai	「いいかねえ」	「좋은가 응」	keep	normalize
+normalize:ikanai	「いいかねえ」	「좋은가」	keep	normalize
 normalize:ikanai	「それはいかん！」	「그건 안 돼!」	keep	normalize
 dict:ikanai	そういうわけにはいかない。	그럴 수는 없다.	fix	lookup
 dict:ikanai	そういうわけにはいきません。	그런 수는 없어요.	fix	lookup

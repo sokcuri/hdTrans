@@ -47,7 +47,10 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 
 ## 설치 경로와 레지스트리
 
-레지스트리를 편집하기 전에 기존 `FilePath` 값을 기록합니다.
+`hdtrans --register-eztrans`(Windows CLI)가 이 값을 실행 파일 폴더로 바꾸고 이전 값을 `HKCU\Software\hdTrans\ezTrans`의
+`PreviousFilePath`에 저장합니다(쓴 값은 같은 키의 `FilePath`). `--unregister-eztrans`가 되돌립니다. 기존 값의 폴더에
+`J2KEngine.dll`이 있으면 `--force` 없이 바꾸지 않습니다. 같은 키의 다른 값(`FileName` 등)은 건드리지 않습니다.
+DLL과 라이브러리는 레지스트리를 쓰지 않습니다. 직접 편집할 때는 기존 `FilePath` 값을 기록합니다.
 표는 공개 소스와 배포 파일의 로더를 구분해 적었습니다. 미확인 도구의 키를 다른 도구에서 유추하지 않습니다.
 
 | 도구 | 확인된 레지스트리 키와 값 | 경로 선택 우선순위 |
@@ -65,7 +68,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 | Translator++, MTool | 직접 확인 못 함 | 연결 방법 미정 |
 
 `HKCU\Software`의 이 키는 [32비트와 64비트가 공유][registry-view]합니다. `Wow6432Node`에 복제하거나 HKLM 키로 바꾸지 않습니다.
-`regedit` 설정은 [사용 안내](using-with-tools.md#아랄트랜스-araltrans)를 보세요. 도구의 탐색 순서와 hdTrans DLL 자체의 사전 탐색은 별개입니다.
+등록 순서는 [사용 안내](using-with-tools.md#레지스트리로-찾는-도구)를 보세요. 도구의 탐색 순서와 hdTrans DLL 자체의 사전 탐색은 별개입니다.
 
 ## 도구별 연결
 

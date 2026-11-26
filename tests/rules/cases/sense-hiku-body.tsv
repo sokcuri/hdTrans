@@ -1,0 +1,19 @@
+# 규칙: LEX-8089
+rule	input	expected	kind	layer
+cx:hiku-body:10	腰を引いて、押し当てる。	허리를 빼고, 갖다 댄다.	fix	rewrites
+cx:hiku-body:10	体を引いたりする	몸을 빼거나 한다	fix	rewrites
+cx:hiku-body:10	さっと身体を引いて、反転した。	휙 몸을 빼고, 반전했다.	fix	rewrites
+cx:hiku-body:10	腰を引いた途端、抜けた。	허리를 빼자마자, 빠졌다.	fix	rewrites
+cx:hiku-body:10	体を引くな	몸을 빼지 마	fix	rewrites
+sense:hiku-body	身を引く決意	몸을 뺄 결의	keep	senses
+sense:hiku-body	体を引きずって歩く	몸을 질질 끌어 걷는다	keep	senses
+sense:hiku-body	体に線を引く	몸에 선을 긋는다	keep	senses
+sense:hiku-body	腰を落として線を引く	허리를 낮추어 선을 긋는다	keep	senses
+sense:hiku-body	彼の体を引き寄せた	그의 몸을 끌어당겼다	keep	senses
+sense:hiku-body	体から熱が引く	몸에서 열이 가라앉는다	keep	senses
+sense:hiku-body	腰が引けている	꽁무니를 빼고 있다	keep	senses
+sense:hiku-body	体調を崩して風邪を引いた	몸이 안 좋아져 감기에 걸렸다	keep	senses
+sense:hiku-body	気を引く	관심을 끈다	keep	senses
+sense:hiku-body	腕を引いて、振りほどく。	팔을 당기고, 뿌리친다.	keep	senses
+cx:hiku-body:10	彼の体を引いて助けた	그의 몸을 당겨 도왔다	keep	rewrites
+cx:hiku-body:10	彼女の腰を引いた	!rule:cx:hiku-body:10	keep	rewrites

@@ -22,7 +22,7 @@ cx:narration-style-1:10	「ああ、写真は別の機会にも使えるしな�
 cx:narration-style-1:10	「いや、海外から連れてくるかもしれないだろ。爺さん、海外にも人脈あるし」	「아니, 해외에서 데려올지도 모르지. 할아버지, 해외에도 인맥 있잖아」	fix	rewrites
 cx:narration-style-1:10	ああ、写真は別の機会にも使えるしな。	아, 사진은 다른 기회에도 쓸 수 있고.	keep	rewrites
 cx:narration-style-1:12	「う、うん、そうだね。高峰くんも待ってるし」	「으, 응, 그러게. 타카미네 군도 기다리고 있잖아」	fix	rewrites
-cx:narration-style-1:12	「でも、さっきから腰を引いて俺に抱きついてるし」	「하지만, 조금 전부터 허리를 당겨 나에게 달라붙고 있잖아」	fix	rewrites
+cx:narration-style-1:12	「でも、さっきから腰を引いて俺に抱きついてるし」	「하지만, 조금 전부터 허리를 빼 나에게 달라붙고 있잖아」	fix	rewrites
 cx:narration-style-1:12	う、うん、そうだね。高峰くんも待ってるし。	으, 응, 그러게. 타카미네 군도 기다리고 있고.	keep	rewrites
 cx:narration-style-1:13	「店が閉まってると、当然お客も少なくなるしね」	「가게가 닫혀 있으면, 당연히 손님도 적게 되잖아」	fix	rewrites
 cx:narration-style-1:13	店が閉まってると、当然お客も少なくなるしね。	가게가 닫혀 있으면, 당연히 손님도 적게 되기도 하고.	keep	rewrites
@@ -56,8 +56,8 @@ cx:narration-style-1:40	それに、今から食材を買いに行かなけれ�
 cx:narration-style-1:41	「それがいい。性格も人それぞれなら理想像も人それぞれだろうし」	「그게 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테니까」	fix	rewrites
 cx:narration-style-1:41	「で、でもあれは近いうちにってことだろうし」	「이, 이기도 할 수 있는은 가까운 시일내에라는 것일 테니까」	fix	rewrites
 cx:narration-style-1:41	それがいい。性格も人それぞれなら理想像も人それぞれだろうし。	그것이 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테고.	keep	rewrites
-cx:narration-style-1:42	「筧は悪くないよ。私が羊飼いになったから忘れたわけだし」	「견은 나쁘지 않아. 내가 양치기가 됐으니까 잊은 거잖아」	fix	rewrites
-cx:narration-style-1:42	筧は悪くないよ。私が羊飼いになったから忘れたわけだし。	견은 나쁘지 않아. 내가 양치기가 되었으니까 잊은 거고.	keep	rewrites
+cx:narration-style-1:42	「筧は悪くないよ。私が羊飼いになったから忘れたわけだし」	「카케이는 나쁘지 않아. 내가 양치기가 됐으니까 잊은 거잖아」	fix	rewrites
+cx:narration-style-1:42	筧は悪くないよ。私が羊飼いになったから忘れたわけだし。	카케이는 나쁘지 않아. 내가 양치기가 되었으니까 잊은 거고.	keep	rewrites
 cx:narration-style-1:43	「ってか、夢にルールもなにもないか……架子だっているわけだし」	「그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거잖아」	fix	rewrites
 cx:narration-style-1:43	ってか、夢にルールもなにもないか……架子だっているわけだし。	그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거고.	keep	rewrites
 cx:narration-style-1:60	「最後の最後に、二つの部をまとめたのは望月さんですし」	「마지막의 마지막에, 두 개의 부를 정리한 건 모치즈키 씨거든요」	fix	rewrites

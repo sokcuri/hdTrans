@@ -349,7 +349,10 @@ dict:jisjk:6506  店員さんを呼ぶ。             !rule:dict:jisjk:6506     
 조사 같은 단어의 한국어를 앞뒤 몇 단어로 다시 고르는 행이 여기에 있습니다. 조건은 위 본문 문법을 그대로 쓰고
 (`src/core/rules/body.h`가 규칙 프로그램과 함께 해석), 필드는 고른 뒤의 사슬을 봅니다. 엔진에 들어가는 내장 표라서
 `HDTRANS_BUILTIN_ID`에 들고(고치면 사전 캐시를 다시 만듦), 처음 쓸 때 한 번 읽어 모든 스레드가 같이 씁니다.
-코드는 `src/core/word/constructions.cpp`입니다.
+코드는 `src/core/word/constructions.cpp`입니다. 네이티브 빌드에서는 호스트 도구 `hdcxgen`(`src/cxgen/`)이 빌드 때
+표를 해석해 그 결과를 C++ 바이트 배열(`build/<프리셋>/constructions_gen.cpp`)로 넣으므로 첫 번역은 표를 해석하지 않고
+읽기만 합니다. 크로스 빌드(WebAssembly)는 처음 쓸 때 해석합니다. 단위 테스트
+`constructions_compiled_table_is_the_parsed_one`이 넣은 표와 실행 중 해석한 표가 같은지 확인합니다.
 
 ```
 //= return-to	after LongVowelAfterKatakana 10	The に of a purpose read 하러 before 戻る is the place one goes back to.

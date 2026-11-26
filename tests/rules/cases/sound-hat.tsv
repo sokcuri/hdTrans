@@ -1,0 +1,48 @@
+# 규칙: LEX-5104
+rule	input	expected	kind	layer
+sound:hat-ask	「はっ！？」	「헉!?」	keep	sound
+sound:hat-ask	「……はっ！？」	「……헉!?」	keep	sound
+sound:hat-ask	「なんでそこまで否定──はっ！？」	「왜 거기까지 부정──헉!?」	keep	sound
+sound:hat-ask	「ハッ！？」	「헉!?」	keep	sound
+sound:hat-ask	「はっ？」	「헉?」	keep	sound
+sound:hat-ask	はっ!?	헉!?	keep	sound
+sound:hat-ask	「はーっ！？」	「허억!?」	keep	sound
+sound:hat-again	「はっ、はっ、はっ……」	「헉, 헉, 헉……」	keep	sound
+sound:hat-again	「はっ……はっ……」	「헉……헉……」	keep	sound
+sound:hat-again	「ハッ、ハッ、ハッ」	「헉, 헉, 헉」	keep	sound
+sound:hat-again	「はっ、はっ、はぁっ、はっ、はぁっ……」	「헉, 헉, 하앗, 헉, 하앗……」	keep	sound
+sound:hat-again	「はっ……はっ……やっと……つかまえた……はっ、はっ……」	「헉……헉……드디어……잡았다……헉, 헉……」	keep	sound
+sound:hat-again	「はっ、はっ……あ、あれは……」	「헉, 헉……그, 그건……」	keep	sound
+sound:hat-again	「はっはっ」	「헉헉」	keep	sound
+sound:hat	「はっ」	「핫」	fix	sound
+sound:hat	「はっ！」	「핫!」	fix	sound
+sound:hat	「はっ、承知しました」	「핫, 알았습니다」	fix	sound
+sound:hat	はっ、かしこまりました。	핫, 알겠습니다.	fix	sound
+sound:hat	「はっ、喜んで」	「핫, 기꺼이」	fix	sound
+sound:hat	「ハッ、ただいま！」	「핫, 다녀왔어!」	fix	sound
+sound:hat	「はっ！ どうせ使えませんよ」	「핫! 어차피 쓸 수 없어요」	fix	sound
+sound:hat	「ハッ、できるもんならやってみな」	「핫, 할 수 있는 것이라면 해 보는 거야」	fix	sound
+sound:hat	「ハッ、ヤァッ！」	「핫, 야앗!」	fix	sound
+sound:hat	「はっ、そうでした」	「핫, 그랬어요」	fix	sound
+sound:hat-ask	「はっ……！？」	「헉……!?」	keep	sound
+sound:hat	「はっ！ はっ！」	「핫! 핫!」	fix	sound
+sound:hat	「はっ…………はぁっ…………」	「핫…………하앗…………」	current	sound
+sound:hat	「ハッ、バカじゃないの？」	「핫, 바보가 아닌 거야?」	fix	sound
+sound:hat	「はっはっは！」	「하하하!」	keep	sound
+sound:hat	「あっはっは」	「아하하」	keep	sound
+sound:hat	はっとした。	흠칫했다.	keep	sound
+sound:hat	はっきり言う。	분명히 말한다.	keep	sound
+sound:hat	「ははっ」	「하핫」	keep	sound
+sound:hat	「あはっ」	「아핫」	keep	sound
+sound:hat	「はい！」	「네!」	keep	sound
+sound:hat	「はい？」	「네?」	keep	sound
+sound:hat-ask	「はっ……？」	「헉……?」	keep	sound
+sound:hat-again	「はっ・・・はっ・・・」	「헉···헉···」	keep	sound
+sound:hat-again	「はっ...はっ...」	「헉...헉...」	keep	sound
+sound:hat-again	「はっ……ん……はっ……」	「헉……응……헉……」	keep	sound
+sound:hat-quoted	はっ、と気づいた。	헉, 하고 눈치챘다.	keep	sound
+sound:hat-quoted	「はっ」と息を呑む。	「헉」이라고 숨을 삼킨다.	keep	sound
+sound:hat-quoted	「はっ」と我に返った。	「헉」이라고 정신을 차렸다.	keep	sound
+sound:hat	「はっ、まさか」	「핫, 설마」	fix	sound
+sound:hat	「はっ、ここは？」	「핫, 여기는?」	fix	sound
+sound:hat	「……はっ」	「……핫」	fix	sound

@@ -18,12 +18,12 @@ sense:toru-get	写真を取る	사진을 찍는다	keep	senses
 sense:motsu-hold	皆も、同じようにグラスを持って、白崎に注目する。	모두도, 똑같이 잔을 들고, 시라사키에 주목한다.	fix	senses
 sense:motsu-hold	実況の王女もマイクを持ってあとを追う。	실황의 왕녀도 마이크를 들고 쫓아다닌다.	fix	senses
 sense:motsu-hold	青い靴下も持ってるよ	푸른 양말도 가지고 있어	keep	senses
-sense:yoku-often	コヨイたちがよく出入りしているサリアの部屋も除外していいだろう。	코요이들이 자주 출입하고 있는 살리아의 방도 제외해도 될 것이다.	fix	senses
+sense:yoku-often	コヨイたちがよく出入りしているサリアの部屋も除外していいだろう。	코요이들이 자주 출입하고 있는 사리아의 방도 제외해도 될 것이다.	fix	senses
 sense:yoku-often	料理では沸騰したお湯をよく使うわ。	요리에서는 비등한 뜨거운 물을 자주 써.	fix	senses
 sense:yoku-often	「よく来てくれたね！」	「잘 와 줬네!」	keep	senses
 sense:yoku-often	　よく通る声。	 잘 들리는 목소리.	keep	senses
 builtin-ending:もん	「師匠は臆病でもいいって言ってるもん。」	「스승은 겁이 많아도 좋다고 말하는걸.」	fix	builtin-ending
-builtin-ending:もん	「うん。私、あんな上手に銃を撃てないもん」	「응. 나, 저런 능숙하게 총을 쏠 수 없는걸」	fix	builtin-ending
+builtin-ending:もん	「うん。私、あんな上手に銃を撃てないもん」	「응. 나, 그런 능숙하게 총을 쏠 수 없는걸」	fix	builtin-ending
 builtin-ending:もん	だって嬉しいんですもん。気持ちいいんですもんっ。	그치만 기쁜걸요. 기분 좋은걸요.	fix	builtin-ending
 builtin-ending:もん	消えたほうが、ずっとマシだって思っちゃってるもん	사라지는 편이, 훨씬 낫다고 생각해 버렸는걸	keep	builtin-ending
 builtin-ending:もん	会長はウチの鍵持ってたもんね	회장은 우리의 열쇠 가지고 있었잖아	keep	builtin-ending

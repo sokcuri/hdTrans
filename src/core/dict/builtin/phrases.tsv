@@ -7,7 +7,8 @@
 // before a question mark (よかった 다행이다, but よかった？ 좋았어?); with predicate also
 // none after a noun topic and a comma (あの頃は、よかった 좋았다). With final it is read
 // only where the utterance ends after it, no comma or question mark (また明日 내일 보자, not
-// また明日来る). With polite=W the last word of the Korean is W where the quote speaks politely
+// また明日来る), or after it a comma and a call with an honorific of honorific.candidate that
+// ends it (どうも、望月さん 네, 모치즈키 씨). With polite=W the last word of the Korean is W where the quote speaks politely
 // or an honoured person is called right before it (先生、また明日 선생님, 내일 봬요). cry marks a
 // predicate said as a cry, as in sound.tsv; with alone=K a cry said once, not again right before or
 // after it, is K, _ standing for a space (イっちゃう 갈 것 같아, イっちゃう、イっちゃう 가버려, 가버려).
@@ -54,6 +55,12 @@
 ごもっとも	지당하신 말씀	intj
 ごもっともで	지당하신 말씀	intj
 それはどうも	그거 고마워	intj	final polite=고맙습니다
+そりゃどうも	그거 고마워	intj	final polite=고맙습니다
+そいつはどうも	그거 고마워	intj	final polite=고맙습니다
+そらどうも	그거 고마워	intj	final polite=고맙습니다
+どうも	네	intj	final greet=안녕하세요
+どうもです	네	intj	final greet=안녕하세요
+どもです	안녕하세요	intj	final
 お疲れ様	수고하셨습니다	intj
 お疲れ様です	수고하셨습니다	intj
 お疲れ様でした	수고하셨습니다	intj
@@ -498,9 +505,6 @@
 心地良いのう	기분 좋구나	phrase
 挿れる	넣다	v1
 
-// Verbs missing from the base dictionary.
-孕む	품다	v
-
 // Idioms and set phrases of narration.
 思いを寄せる	마음을 두다	v1
 今になって	이제 와서	phrase
@@ -753,6 +757,13 @@
 ある意味	어떤 의미로는	adv
 つーか	그보다	adv
 っつーか	그보다	adv
+つーわけで	그런 이유로	adv
+っつーわけで	그런 이유로	adv
+つーことで	그런 이유로	adv
+っつーことで	그런 이유로	adv
+つうわけで	그런 이유로	adv
+つーわけ	그런 것	n
+つーわけでもない	그런 것도 아니다	phrase
 しゃーねえ	어쩔 수 없어	intj
 しゃーねえだろ	어쩔 수 없잖아	phrase
 しゃあない	어쩔 수 없어	intj

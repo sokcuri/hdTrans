@@ -1,0 +1,10 @@
+# 규칙: GRM-10
+rule	input	expected	kind	layer
+voice:ability-scope	新人なら先輩に教えられる	신인이라면 선배에게 가르침을 받는다	keep	voice
+voice:ability-scope	あいつなら警察に止められる	저 녀석이라면 경찰에 제지당한다	keep	voice
+voice:ability-scope	ここなら誰にも見られる心配はない	여기라면 누구에게도 보일 걱정은 없다	keep	voice
+voice:ability-scope	このままなら見捨てられる	이대로라면 버림받는다	keep	voice
+voice:ability-scope	失敗なら責められる	실패라면 비난받는다	keep	voice
+voice:ability-scope	何度でもいじめられる	몇 번이라도 괴롭힘을 당한다	keep	voice
+voice:ability-scope	何度でも捨てられる	몇 번이라도 버려진다	keep	voice
+voice:ability-scope	彼に止められた	그에게 제지당했다	keep	voice

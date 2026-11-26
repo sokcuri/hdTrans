@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:257407	彼の名前はあれ？	그의 이름은 저것?	fix	local
+dict:jisjk:257407	彼の名前はあれ？	그의 이름은 그것?	fix	local
 dict:jisjk:257407	なんだあれ？	!rule:dict:jisjk:257407	keep	local
 dict:jisjk:257407	「え、お……あれ？」	rule:dict:jisjk:257407=어	keep	local
 dict:jisjk:257407	準備をやるよ……ってあれ？	rule:dict:jisjk:257407=어	keep	local

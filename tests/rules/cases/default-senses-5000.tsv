@@ -27,7 +27,7 @@ pack:argument-senses:5000	甲斐の虎が見逃してくれるかどうか	has:�
 pack:argument-senses:5000	ボールを見逃した。	has:놓쳤다	keep	packs
 pack:argument-senses:5000	大事な点を見逃していた	lacks:봐주	keep	packs
 defaults:audit-5000	大抵の場合、ルーデウスは笑っていた。	has:대부분의 경우	fix	defaults
-defaults:audit-5000	「大丈夫だって。大抵の奴はわからんよ」	has:대부분의 놈은	fix	defaults
+defaults:audit-5000	「大丈夫だって。大抵の奴はわからんよ」	has:대부분의 녀석은	fix	defaults
 defaults:audit-5000	「先のことはそのとき決めるよ。一週間も様子見れば大体の方向性はわかるだろ」	has:대략적인 방향성은	fix	defaults
 defaults:audit-5000	その僕が小説を読んで、第一に感ずるのは大体の筋すなわち構造である。	has:대략적인 줄기	fix	defaults
 dict:w:34611	大体のことは紫苑さんや白蓮ちゃんに聞けばいいんだけど	has:대부분의 일은	fix	local

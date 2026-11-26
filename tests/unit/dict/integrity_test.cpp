@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "hdtest.h"
 
@@ -93,4 +94,38 @@ HD_TEST(integrity_crc32c_vectors) {
     HD_CHECK_EQ(Crc32c(data), 0x8a9136aau);
     for (std::size_t i = 0; i < data.size(); ++i) data[i] = static_cast<std::byte>(i);
     HD_CHECK_EQ(Crc32c(data), 0x46dd794eu);
+    for (std::size_t i = 0; i < data.size(); ++i) data[i] = static_cast<std::byte>(31 - i);
+    HD_CHECK_EQ(Crc32c(data), 0x113fdb5cu);
+    data.fill(std::byte{0xff});
+    HD_CHECK_EQ(Crc32c(data), 0x62a8ab43u);
+}
+
+namespace {
+
+// The CRC one bit at a time, against which the table-driven Crc32c is checked.
+uint32_t BitwiseCrc32c(std::span<const std::byte> data) {
+    uint32_t crc = 0xffffffffu;
+    for (std::byte b : data) {
+        crc ^= std::to_integer<uint32_t>(b);
+        for (int bit = 0; bit < 8; ++bit) crc = (crc >> 1) ^ ((crc & 1u) != 0 ? 0x82f63b78u : 0u);
+    }
+    return ~crc;
+}
+
+}  // namespace
+
+HD_TEST(integrity_crc32c_matches_bitwise) {
+    std::vector<std::byte> buffer(4096 + 16);
+    uint64_t state = 0x9e3779b97f4a7c15u;
+    for (std::byte& b : buffer) {
+        state = state * 6364136223846793005u + 1442695040888963407u;
+        b = static_cast<std::byte>(state >> 56);
+    }
+    const std::span<const std::byte> all(buffer);
+    for (std::size_t offset = 0; offset < 8; ++offset) {
+        for (std::size_t size = 0; size <= 64; ++size)
+            HD_CHECK_EQ(Crc32c(all.subspan(offset, size)), BitwiseCrc32c(all.subspan(offset, size)));
+        for (const std::size_t size : {std::size_t{255}, std::size_t{1000}, std::size_t{4096}})
+            HD_CHECK_EQ(Crc32c(all.subspan(offset, size)), BitwiseCrc32c(all.subspan(offset, size)));
+    }
 }

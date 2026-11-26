@@ -110,6 +110,22 @@ HD_TEST(engine_wrapped_goes_on) {
     HD_CHECK(GoesOn("遅い", Edges({cold}), "って言いたい", Edges({Word("って", "200")})));
     HD_CHECK(!GoesOn("なってくる", comes, "と、その時", Edges({Word("と", "200")})));
     HD_CHECK(!GoesOn("なってくる", comes, "で 決まったの？", Edges({Word("で", "221")})));
+    // という and the like, and a case particle before a letter, after a word of a clause.
+    const WrapEdges none = Edges({Word("誰", "120"), Verb("いなか", "った", "5다", 6)});
+    WrapWord say = Word("とい", "4U0");
+    say.detail = output::DetailClass::Yougo;
+    say.ending = "こと";
+    HD_CHECK(GoesOn("誰もいなかった", none, "ということです。", Edges({say})));
+    HD_CHECK(!GoesOn("はい", Edges({Word("はい", "110")}), "ということで", Edges({say})));
+    const WrapEdges student = Edges({Word("男子高校生", "110")});
+    HD_CHECK(GoesOn("男子高校生", student, "がクマに", Edges({Word("が", "200")})));
+    HD_CHECK(GoesOn("インタビュー", Edges({Word("インタビュー", "110")}), "で記者は", Edges({Word("で", "200")})));
+    HD_CHECK(GoesOn("東京", Edges({Word("東京", "130")}), "へ向かう", Edges({Verb("へ向か", "う", "4다")})));
+    HD_CHECK(!GoesOn("男子高校生", student, "が、", Edges({Word("が", "200")})));
+    HD_CHECK(!GoesOn("男子高校生", student, "で その", Edges({Word("で", "200")})));
+    HD_CHECK(!GoesOn("男子高校生", student, "がっかり", Edges({Word("がっかり", "300")})));
+    HD_CHECK(!GoesOn("男子高校生", student, "≫が", Edges({Word("が", "200")})));
+    HD_CHECK(!GoesOn("うん", Edges({Word("うん", "300")}), "で上がってきます", Edges({Word("で", "200")})));
     // The negative of the copula broken before its ない.
     const WrapEdges jya = Edges({Verb("い", "るんじゃ", "1지")});
     HD_CHECK(GoesOn("きているんじゃ", jya, "ないかなと思います", Edges({cold})));
@@ -224,7 +240,9 @@ output::ResolvedItem Item(std::string surface, std::string code, std::string gat
 HD_TEST(engine_wrapped_cut_word) {
     using internal::AddWrapEdges;
     using internal::CutStem;
-    using internal::MayCutWord;
+    using internal::CutEnding;
+    using internal::CutRun;
+    using internal::WrapCut;
     using internal::ReadWord;
     // The kana a line leaves unread before its first word read (げ, る of げるしかない).
     WrapEdges cut;
@@ -239,14 +257,67 @@ HD_TEST(engine_wrapped_cut_word) {
     HD_CHECK(!ReadWord(Item("る", "110", "Nm")));
     HD_CHECK(ReadWord(Item("始まり", "110")));
 
-    HD_CHECK(MayCutWord("もう逃", "げるしかない。", cut));
-    HD_CHECK(MayCutWord("ほら、読 ", "げるしかない", cut));
+    WrapEdges none;
+    HD_CHECK_EQ(CutRun("もう逃", none, "げるしかない。", cut).run, "げる");
+    HD_CHECK_EQ(CutRun("ほら、読 ", none, "げるしかない", cut).run, "げる");
     // Not after a mark, a blank line or into an item of its own; not when next starts with a word read.
-    HD_CHECK(!MayCutWord("もう逃。", "げるしかない。", cut));
-    HD_CHECK(!MayCutWord("", "げるしかない。", cut));
-    HD_CHECK(!MayCutWord("もう逃", "「げるしかない」", cut));
-    HD_CHECK(!MayCutWord("もう逃", "げるしかない。", read));
-    HD_CHECK(!MayCutWord("もう逃", "しかない。", cut));
+    HD_CHECK(CutRun("もう逃。", none, "げるしかない。", cut).run.empty());
+    HD_CHECK(CutRun("", none, "げるしかない。", cut).run.empty());
+    HD_CHECK(CutRun("もう逃", none, "「げるしかない」", cut).run.empty());
+    HD_CHECK(CutRun("もう逃", none, "げるしかない。", read).run.empty());
+    HD_CHECK(CutRun("もう逃", none, "しかない。", cut).run.empty());
+    // A word of one kanji after a kanji, or a line that ends in a word of one kanji: the first word of next.
+    WrapEdges tech;
+    AddWrapEdges({Item("術", "110"), Item("の", "201")}, tech);
+    WrapEdges remove;
+    AddWrapEdges({Item("除去", "110"), Item("する", "44;"), Item("技", "110")}, remove);
+    HD_CHECK_EQ(CutRun("除去する技", remove, "術の", tech).run, "術");
+    WrapEdges damp;
+    AddWrapEdges({Item("しめる", "418")}, damp);
+    HD_CHECK_EQ(CutRun("除去する技", remove, "しめる", damp).run, "しめる");
+    WrapEdges sea;
+    AddWrapEdges({Item("日本海", "110")}, sea);
+    HD_CHECK(CutRun("日本海", sea, "しめる", damp).run.empty());
+    HD_CHECK(CutRun("みんなで", none, "術の", tech).run.empty());
+    // Kana on both sides after a line of two words or more: the first kana of next, in an ending only.
+    WrapEdges did;
+    output::ResolvedItem doing = Item("する", "44;");
+    doing.length = 6;  // した
+    AddWrapEdges({doing}, did);
+    WrapEdges arrest;
+    AddWrapEdges({Item("逮捕", "110", "Hd"), Item("さ", "110", "Nm"), Item("れ", "110", "Nm"), Item("ま", "110", "Nm")}, arrest);
+    const WrapCut kana = CutRun("逮捕されま", arrest, "した。", did);
+    HD_CHECK_EQ(kana.run, "し");
+    HD_CHECK(!kana.stem);
+    WrapEdges yes;
+    AddWrapEdges({Item("うん", "300")}, yes);
+    HD_CHECK(CutRun("うん", yes, "で上がってきます", did).run.empty());
+    // Nor after a last clause of one word (あのね、いま / す).
+    WrapEdges now2;
+    output::ResolvedItem ima = Item("いま", "110");
+    ima.length = 6;
+    AddWrapEdges({Item("あのね", "300"), ima}, now2);
+    HD_CHECK(CutRun("あのね、いま", now2, "すごく眠い", did).run.empty());
+    // Not before a word of one kanji that starts a clause (中 / 今、), nor after a number (29日 / 次の).
+    WrapEdges now;
+    AddWrapEdges({Item("今", "110"), Item("、", "6")}, now);
+    WrapEdges inside;
+    AddWrapEdges({Item("至", "411"), Item("中", "110")}, inside);
+    HD_CHECK(CutRun("至る中", inside, "今、海の", now).run.empty());
+    WrapEdges day;
+    AddWrapEdges({Item("今月", "110"), Item("29", "110"), Item("日", "110")}, day);
+    WrapEdges nextDay;
+    AddWrapEdges({Item("次", "110"), Item("の", "201")}, nextDay);
+    HD_CHECK(CutRun("今月29日", day, "次の日曜日", nextDay).run.empty());
+    // A break in an ending: after a small kana, or after a line that does not end in a conjugated word.
+    HD_CHECK(CutEnding("ょう", none));
+    HD_CHECK(CutEnding("す", sea));
+    WrapEdges polite;
+    output::ResolvedItem think = Item("思", "411");
+    think.detailClass = output::DetailClass::Yougo;
+    think.endingSurface = "ます";
+    AddWrapEdges({think}, polite);
+    HD_CHECK(!CutEnding("よう", polite));
 
     // A stem with a kanji, a small kana that starts no word, or katakana on both sides before a letter.
     HD_CHECK(CutStem("始め", "る", U'と'));

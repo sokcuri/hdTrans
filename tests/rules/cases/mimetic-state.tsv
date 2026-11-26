@@ -1,0 +1,25 @@
+# 규칙: LEX-8215
+rule	input	expected	kind	layer
+cx:toshite-state:50	きょとんとしている。	어리둥절하다.	fix	rewrites
+cx:toshite-state:50	しょんぼりしていた。	시무룩했다.	fix	rewrites
+cx:toshite-state:50	芹沢の肌はしっとりとしていた。	세리자와의 피부는 촉촉했다.	fix	rewrites
+cx:toshite-state:50	言いながらも彼女の目はとろんとしている。	말하면서도 그녀의 눈은 몽롱하다.	fix	rewrites
+cx:toshite-state:50	今日は足取りもシャキッとしている。	오늘은 발걸음도 꼿꼿하다.	fix	rewrites
+cx:toshite-state:50	ぼーっとしていると危ない。	멍하면 위험하다.	fix	rewrites
+cx:toshite-state:50	ふわふわしている髪。	푹신푹신한 머리카락.	keep	rewrites
+cx:toshite-state:50	すべすべしていて柔らかい。	매끈매끈해 부드럽다.	fix	rewrites
+cx:toshite-state:60	ふわふわしてる。	푹신푹신하다.	fix	rewrites
+cx:toshite-state:62	「ぼーっとしてるぞ」	「멍해」	fix	rewrites
+cx:toshite-state:50	ぼーっとしてた。	멍했다.	keep	rewrites
+cx:toshite-state:66	「しょんぼりしてる人」	「시무룩한 사람」	fix	rewrites
+cx:toshite-state:50	にやにやしている。	히죽히죽하고 있다.	keep	rewrites
+cx:toshite-state:50	そわそわしている。	안절부절하고 있다.	keep	rewrites
+cx:toshite-state:50	どきどきしている。	두근두근하고 있다.	keep	rewrites
+cx:toshite-state:50	じっとしている。	가만히 있다.	keep	rewrites
+cx:toshite-state:50	きょとんとした顔。	어리둥절한 얼굴.	keep	rewrites
+cx:toshite-state:50	きょとんとして、首をかしげる。	어리둥절해, 고개를 갸웃한다.	keep	rewrites
+cx:toshite-state:50	ゴロゴロしている。	데굴데굴하고 있다.	keep	rewrites
+cx:toshite-state:60	にやにやしてる。	히죽히죽하고 있다.	keep	rewrites
+cx:toshite-state:62	「にやにやしてるぞ」	「히죽히죽하고 있어」	keep	rewrites
+cx:toshite-state:66	にやにやしてる人	히죽히죽하고 있는 사람	keep	rewrites
+cx:toshite-state:50	ぼーっとしていた時間	멍하고 있던 시간	keep	rewrites

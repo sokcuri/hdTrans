@@ -1,0 +1,25 @@
+# 규칙: GRM-8120
+rule	input	expected	kind	layer
+cx:demo-nandemo:10	俺と千里は、恋人でもなんでもない。	나와 치사토는, 애인도 뭣도 아니다.	fix	rewrites
+cx:demo-nandemo:10	もう性格診断でもなんでもない。	이제 성격 진단도 뭣도 아니다.	fix	rewrites
+cx:demo-nandemo:10	「いえ、失礼でもなんでもないですよ」	has:실례도 뭣도 아니에요	fix	rewrites
+cx:demo-nandemo:10	でも、俺は別に彼女の彼氏でもなんでもないし……	has:남자친구도 뭣도 아니고	fix	rewrites
+cx:demo-nandemo:10	俺の深層心理でもなんでもない、独立した別のなにかなのか	has:심층 심리도 뭣도 아닌	fix	rewrites
+cx:demo-nandemo:10	自惚れでもなんでもなく、みんながいたから続けてこられた。	has:자만도 뭣도 아니고	fix	rewrites
+cx:demo-nandemo:10	今の一手で逆転したわけでもなんでもなく、延命しただけだ。	has:것도 뭣도 아니고	fix	rewrites
+cx:demo-nandemo:20	言い過ぎでも何でもなく、人生が変わったのだ。	심한 말도 뭣도 아니고, 인생이 바뀌었다.	fix	rewrites
+cx:demo-nandemo:20	やはり、彼は羊飼いでも何でもないのか。	has:양치기도 뭣도 아닌	fix	rewrites
+cx:demo-nandemo:20	「さすがでも何でもないって。」	has:역시도 뭣도 아니라고	fix	rewrites
+cx:demo-nandemo:20	誇大広告でも何でもなく、この学園には最高の環境がある。	has:과대광고도 뭣도 아니고	fix	rewrites
+cx:demo-nandemo:20	隠喩でも何でもなく、他人の体温を知らなかったのだ。	has:은유도 뭣도 아니고	fix	rewrites
+cx:demo-nandemo:10	パンでもなんでも買ってこい。	빵이든 뭐든 사고 와.	keep	rewrites
+cx:demo-nandemo:20	別に何でもない。	딱히 아무것도 아니다.	keep	rewrites
+cx:demo-nandemo:20	でも、なんでもないよ。	!rule:cx:demo-nandemo:20	keep	rewrites
+cx:demo-nandemo:10	何でもいいよ。	!rule:cx:demo-nandemo:10	keep	rewrites
+cx:demo-nandemo:10	それでも何でもない顔をしていた。	!rule:cx:demo-nandemo:10	keep	rewrites
+cx:demo-nandemo:10	今でもなんでも話せる。	!rule:cx:demo-nandemo:10	keep	rewrites
+cx:demo-nandemo:20	犬でも猫でもない。	개도 고양이도 아니다.	keep	rewrites
+cx:demo-nandemo:10	ゲームでもなんでもやる。	!rule:cx:demo-nandemo:10	keep	rewrites
+cx:demo-nandemo:10	これは命令でもなんでもない。お願いだ。	has:명령도 뭣도 아니다	fix	rewrites
+cx:demo-nandemo:14	恋人でもなんでもねえ。	has:애인도 뭣도 아니야	fix	rewrites
+cx:demo-nandemo:14	知らねえ。	!rule:cx:demo-nandemo:14	keep	rewrites

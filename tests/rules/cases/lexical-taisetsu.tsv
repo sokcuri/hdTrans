@@ -1,0 +1,28 @@
+# 규칙: LEX-8086
+rule	input	expected	kind	layer
+dict:w:42416	大切なものを守る	소중한 것을 지킨다	fix	local
+dict:w:42416	大切な友達	소중한 친구	fix	local
+dict:w:42416	あたしの大切な存在	has:소중한 존재	fix	local
+dict:w:42416	大切な思い出	소중한 추억	fix	local
+dict:w:42416	もっとも大切なもの	has:가장 소중한 것	fix	local
+dict:w:42416	大切なもんがあんだろ！	소중한 것이 있는 거지!	fix	local
+dict:w:42417	たいせつな人	소중한 사람	fix	local
+dict:w:42417	たいせつなものをなくした	has:소중한 것을	fix	local
+dict:w:42416	大切にする	소중히 한다	keep	defaults
+dict:w:42416	大切な話がある	중요한 이야기가 있다	keep	defaults
+dict:w:42416	大切なのは心だ	중요한 것은 마음이다	keep	defaults
+dict:w:42416	大切な時期	중요한 시기	keep	defaults
+dict:w:42416	大切な仕事	중요한 일	keep	defaults
+dict:w:42416	大切な情報	중요한 정보	keep	defaults
+dict:w:42416	最も大切な活動は	has:중요한 활동은	keep	defaults
+dict:w:42416	今日はすっげぇ大切な日じゃねぇか！	오늘은 굉장히 중요한 날이잖아!	keep	defaults
+dict:w:42416	意志疎通が大切だ。	의사소통이 중요하다.	keep	defaults
+dict:w:42416	それは大切だ	그것은 중요하다	keep	defaults
+dict:w:42417	たいせつなことを忘れてた	has:중요한 일을	keep	defaults
+dict:w:42416	大切な試合	중요한 경기	keep	defaults
+dict:w:42416	大切な書類	중요한 서류	keep	defaults
+dict:w:42416	大切な証拠	중요한 증거	keep	defaults
+dict:w:42416	大切な決断	중요한 결단	keep	defaults
+dict:w:42416	大切な客が来る。	중요한 손님이 온다.	keep	defaults
+dict:w:42416	大切な先生	소중한 선생님	fix	local
+dict:w:42416	大切な体だ。	소중한 몸이다.	fix	local

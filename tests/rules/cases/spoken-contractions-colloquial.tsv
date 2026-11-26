@@ -35,7 +35,7 @@ normalize:tsutte	なんつった？	뭐라고 말했어?	fix	normalize
 normalize:tsutte	なんつって。	농담이야.	fix	phrases
 normalize:tsutte	いっつも勉強してる	언제나 공부하고 있다	keep	normalize
 normalize:aru-n	何か文句あんの？	뭔가 불만 있는 거야?	fix	normalize
-normalize:aru-n	大切なもんがあんだろ！	중요한 것이 있는 거지!	fix	normalize
+normalize:aru-n	大切なもんがあんだろ！	소중한 것이 있는 거지!	fix	normalize
 normalize:aru-n	聞いたことあんのか？	들은 적 있는 건가?	fix	normalize
 normalize:aru-n	夢が　あんだよ！	꿈이 있어!	fix	normalize
 normalize:aru-n	あんだけ言ったのに	그만큼 말했는데	keep	normalize

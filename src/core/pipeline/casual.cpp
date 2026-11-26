@@ -77,14 +77,14 @@ bool PausedConditional(std::string_view before, std::string_view at) {
     return true;
 }
 
-// (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|(?<=^|[もはがに]|しか|もう|まだ)い|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
+// (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|(?<=^|[もはがに]|しか|もう|まだ)い|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっでじ]|$)
 // or (やら|[くにゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a kanji or a sentence
 // end or a pause; not the particle やら after a kanji, なに or どう, nor the conditional なら
 // after a noun (君ならねぇ) or before a pause where PausedConditional holds (行くならねぇ、,
 // 田中にならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
     // ねぇ or ねえ; ねー and, with strict, any of them only before a following character
-    // of the set (見てねーわ, 荒れねーから; not the particle in 見てねー！ or 夜明けねー).
+    // of the set (見てねーわ, 荒れねーから, 売ってねえで, 取れねーじゃん; not the particle in 見てねー！ or 夜明けねー).
     // After a て form ねえ before もん or もの is the negative too (流れてねえもん; not 待っててねえもう).
     auto tail = [&](size_t p, bool bar, bool strict, bool te = false) {
         m.group[1] = Span(s, pos, p);
@@ -95,14 +95,18 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
         // The match itself, read again (Rematch), ends in its も.
         const bool mon = te && (s.substr(p).starts_with("もん") || s.substr(p).starts_with("もの") || s.substr(p) == "も");
         if (!mon && s.substr(p).starts_with("も")) return false;
-        return CharOrEnd(s, p, mon ? U"も" : U"なよぜぞしんかけだっわの", m, 2);
+        return CharOrEnd(s, p, mon ? U"も" : U"なよぜぞしんかけだっわのでじ", m, 2);
     };
     size_t p = pos;
     if (Lit(s, p, "て") && tail(p, true, false, true)) return true;
     p = pos;
     if (Lit(s, p, "で") && tail(p, false, false, true)) return true;
     p = pos;
-    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") && tail(p, true, false)) return true;
+    // The か after a word of two kanji or more is the question particle (本当かねえ, 大丈夫かねえ), not 行か of 行く.
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") &&
+        !(s.substr(0, p).ends_with("か") && IsKanjiClass(Before(s, pos))) && tail(p, true, false)) {
+        return true;
+    }
     // The stem of a verb in -eru or -iru, or a potential (荒れねー, 言えねえ, 通じねえ).
     p = pos;
     if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"えけげせぜねべめれきぎしじちびみり") && tail(p, true, true)) return true;
@@ -122,7 +126,7 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
         Lit(s, p, "い")) {
         m.group[1] = Span(s, pos, p);
         if (Lit(s, p, "ね") && OneOf(s, p, U"ぇえー") &&
-            CharOrEnd(s, p, U"なよぜぞしんかけだっわの。、！？!?…‥」』）) 　", m, 2)) {
+            CharOrEnd(s, p, U"なよぜぞしんかけだっわのでじ。、！？!?…‥」』）) 　", m, 2)) {
             return true;
         }
     }
@@ -1600,7 +1604,7 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
     const bool bar = OneOf(s, p, U"ー");
     if (!bar && !OneOf(s, p, U"ぇえ")) return false;
     if (s.substr(p).starts_with("も")) return false;
-    if (!CharOrEnd(s, p, bar ? U"なよぜぞしかけだっわの" : U"なよぜぞしかけだっわの。、！？!?…‥」』）) 　", m, 2)) return false;
+    if (!CharOrEnd(s, p, bar ? U"なよぜぞしかけだっわのでじ" : U"なよぜぞしかけだっわのでじ。、！？!?…‥」』）) 　", m, 2)) return false;
     // The particle ね after から, なら, で or the question か (ですからねえ, 君ならねぇ, 東京でねえ, ですかねぇ); not where the
     // kanji and kana before the ら spell a verb in かる or なる whole (見つからねえ, 助からねえ, 重ならねえ).
     const std::string_view head = s.substr(0, pos);
@@ -1612,8 +1616,24 @@ bool VerbNee(std::string_view s, size_t pos, Match& m, const RunLookup& runs) {
         if (start == kana || runs.verbForm == nullptr) return false;
         return runs.verbForm(runs.context, std::string(head.substr(start)) + "る");
     };
+    // The か after an い that ends a word is the question particle too (ないかねえ, 高いかねえ, いないかねえ); the い of
+    // いく stands alone at the start, after a mark, a particle, a て form, まだ or もう, or after casual.ikanai-after
+    // (おれはいかねえ, もっていかねー, うまくいかねえ).
+    auto questionAfterI = [&] {
+        constexpr std::string_view kI = "い";
+        if (!head.ends_with(kI)) return false;
+        const std::string_view lead = head.substr(0, head.size() - kI.size());
+        if (lead.empty() || !(IsHiraganaRune(Before(lead, lead.size())) || IsKanjiClass(Before(lead, lead.size())) ||
+                              IsKatakanaRune(Before(lead, lead.size())))) {
+            return false;
+        }
+        for (const std::string_view w : {"は", "も", "が", "に", "を", "へ", "と", "て", "で", "しか", "もう", "まだ"}) {
+            if (lead.ends_with(w)) return false;
+        }
+        return dict::EndsWithMember(HDTRANS_CLASS("casual.ikanai-after"), lead) == 0;
+    };
     if (k.cp == U'で' || (k.cp == U'ら' && (head.ends_with("か") || head.ends_with("な")) && !kanjiVerb()) ||
-        (k.cp == U'か' && (head.ends_with("す") || head.ends_with("ま") || head.ends_with("の")))) {
+        (k.cp == U'か' && (head.ends_with("す") || head.ends_with("ま") || head.ends_with("の") || questionAfterI()))) {
         return false;
     }
     // The particle やら after a kanji, なに or どう (何やらねぇ、, どうやらねえ), as in Nee.

@@ -61,7 +61,7 @@ cx:sense-cues-1:50	の、覗くな！ このクソ提督！ も、もう！	드,
 cx:sense-cues-1:50	もうあまり時間がありませんからねー	이제 너무 시간이 없으니까요―	keep	rewrites
 cx:sense-cues-1:50	それがなくなってしまっては、もう……、もう……っ」	그것이 없어져버려서는, 이제……, 이제……」	keep	rewrites
 cx:sense-cues-1:50	もうあげたから！	벌써 주었으니까!	keep	rewrites
-cx:sense-cues-1:50	「もうあきらめてるから、クラスの連中にはイチイチ言わないんだけどさ」	「이제 포기하고 있으니, 반의 무리에게는 이치이치 말하지 않는데」	keep	rewrites
+cx:sense-cues-1:50	「もうあきらめてるから、クラスの連中にはイチイチ言わないんだけどさ」	「벌써 포기하고 있으니, 반의 무리에게는 이치이치 말하지 않는데」	keep	rewrites
 cx:sense-cues-1:60	「ゆ、ゆうくんの……その気持ち……絶対、本気じゃない……」	「유, 유 군의……그 마음……절대, 진심이 아니야……」	fix	rewrites
 cx:sense-cues-1:60	付き合えなくても、俺の気持ちは変わらない。	사귈 수 없어도, 내 마음은 변함없다.	fix	rewrites
 cx:sense-cues-1:60	兄貴の気持ちを考えてなかった	형의 마음을 생각하지 않았다	fix	rewrites
@@ -73,7 +73,7 @@ cx:sense-cues-1:60	皐月が先生に負けそうになって、俺は自分の�
 cx:sense-cues-1:60	すごく気持ちいい	정말 기분 좋다	keep	rewrites
 cx:sense-cues-1:60	「お母さん、今のお気持ちを一言――」	「엄마, 지금의 기분을 한마디――」	keep	rewrites
 cx:sense-cues-1:60	ねぇ、どんな気持ち？	저기, 어떤 기분?	keep	rewrites
-cx:sense-cues-1:60	うさぎの着ぐるみを着た奴がやってきた俺の気持ちを考えろよ！	토끼의 인형을 입은 놈이 온 내 기분을 생각해라!	keep	rewrites
+cx:sense-cues-1:60	うさぎの着ぐるみを着た奴がやってきた俺の気持ちを考えろよ！	토끼의 인형을 입은 녀석이 온 내 기분을 생각해라!	keep	rewrites
 cx:sense-cues-1:60	これがレナに捕食される沙都子や梨花ちゃんの気持ちか…。	이것이 레나에게 포식되는 사토코나 리카짱의 기분인가….	keep	rewrites
 cx:sense-cues-1:22	いい頃だと思って電話した	좋은 때라고 생각해 전화했다	fix	rewrites
 cx:sense-cues-1:22	君と話をしてもいい頃だな	너와 이야기를 해도 되는 때네	fix	rewrites

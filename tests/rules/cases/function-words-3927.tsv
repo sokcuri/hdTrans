@@ -1,7 +1,7 @@
 # 규칙: GRM-3927
 rule	input	expected	kind	layer
 cx:function-words:10	ある出来事について、 彼が言うにはとか彼女が言うにはとか	어느 사건에 대해, 그가 말하기로는이라든지 그녀가 말하기로는이라든지	fix	rewrites
-cx:function-words:30	だからって 奴が見たと言ってた話が	그렇다고 해서 놈이 보았다고 했던 이야기가	fix	rewrites
+cx:function-words:30	だからって 奴が見たと言ってた話が	그렇다고 해서 녀석이 보았다고 했던 이야기가	fix	rewrites
 cx:function-words:22	不幸を吸うだと？ どういう意味だ？	불행을 들이마신다고? 무슨 뜻이야?	fix	rewrites
 cx:function-words:30	だからって関係ない人間が 死に過ぎだろう！	그렇다고 해서 관계없는 인간이 너무 죽을 것이다!	fix	rewrites
 cx:function-words:30	だからって じゃあ どうするんだよ？ 僕らには もう関係ないだろ	그렇다고 해서 그럼 어떻게 하지? 우리에게는 이제 관계없지	fix	rewrites
@@ -59,12 +59,12 @@ cx:function-words:22	連れて行くだと?	데려간다고?	fix	rewrites
 cx:function-words:30	だからって　刃物なんか…。	그렇다고 해서 칼은….	fix	rewrites
 cx:function-words:40	だが ある時 ふと	하지만 어느 날 문득	fix	rewrites
 cx:function-words:30	だからって➡	그렇다고 해서 ➡	fix	rewrites
-cx:function-words:30	だからって あれじゃ裕希君n傷つきますよ	그렇다고 해서 저것은 히로키 군n 상처받아요	fix	rewrites
+cx:function-words:30	だからって あれじゃ裕希君n傷つきますよ	그렇다고 해서 그것은 히로키 군n 상처받아요	fix	rewrites
 cx:function-words:50	彼は之によって初めて聖書なるものを手にしたという話しである。	그는 지에 의하고 처음으로 성서라는 것을 손에 넣었다는 이야기이다.	fix	rewrites
 cx:function-words:20	クソッタレの犬を殺して100万ドル欲しいだと?	쿠솟 소스의 개를 죽여 100만 달러 갖고 싶다고?	fix	rewrites
 cx:function-words:60	夫がそういうと、娘の正子までがのり気になって、本気な顔でいった。	남편이 그렇게 말하자, 딸 마사코까지가 내켜하는 마음이 되어, 진심인 얼굴로 말했다.	fix	rewrites
 cx:function-words:40	ある時、松石君、大枚三円なにがしを収穫したので、帰り途のウドン屋に寄って大いに飲んだ。	어느 날, 마츠이시 군, 대금3엔인에가 해를 수확했으므로, 돌아오는 길도의 우동가게에 들러 크게 마셨다.	fix	rewrites
-cx:function-words:10	ドナ・モリッシーが 言うには―	도나 모릿시가 말하기로는 -	fix	rewrites
+cx:function-words:10	ドナ・モリッシーが 言うには―	도나 모리세이가 말하기로는 -	fix	rewrites
 cx:function-words:22	何っ！ 爆砕点穴が通用しないだと！	뭐! 폭쇄점혈이 통용되지 않는다고!	fix	rewrites
 cx:function-words:10	マイケルが言うには・・・ - マイケルは嘘をついている!	마이클이 말하기로는 ··· - 마이클은 거짓말을 하고 있어!	fix	rewrites
 cx:function-words:40	しかし ある時 不慮の事故を起こした	하지만 어느 날 뜻하지 않은 사고를 냈다	fix	rewrites
@@ -94,7 +94,7 @@ cx:function-words:10	フカサク様が言うには	후카사쿠 님이 말하�
 cx:function-words:10	陛下、彼らが言うには 第4大隊長のソティリスが戻ったと	폐하, 그들이 말하기로는 제4대대장의 소티리스가 돌아왔다고	fix	rewrites
 cx:function-words:50	なぜなら、このような淡泊な沈着だけが、精神的なるものへの熱中であるから。	왜냐하면, 이러한 담백한 침착하다 부상, 정신적이라는 것에 대한 열중이니까.	fix	rewrites
 cx:function-words:60	そういうと、...	그렇게 말하자,...	fix	rewrites
-cx:function-words:50	現にあの甚伍な、あれがその雄なるものだ。	실제로 그 심오인, 저것이 그 수컷이라는 것이다.	fix	rewrites
+cx:function-words:50	現にあの甚伍な、あれがその雄なるものだ。	실제로 그 심오인, 그것이 그 수컷이라는 것이다.	fix	rewrites
 cx:function-words:50	それは勉強なるものが決してスクール・ライフの中の主なる出来事ではなかったからだ。	그것은 공부라는 것이 결코 스쿨·라이프 안의 주된 사건은 아니었기 때문이다.	fix	rewrites
 cx:function-words:50	「ことに新兵器なるものは、敵がまったく思いもかけなかったような性能と怪奇な外観をもつのを佳とする。	「일로 신병기라는 건, 적이 완전히 예상도 하지 못했던 것 같은 성능과 괴기인 외관을 가지는 걸 가로 한다.	fix	rewrites
 cx:function-words:50	しかしながら、政治の性格なるものは一朝一夕に改変し得るものでない。	그렇지만, 정치의 성격이라는 것은 일조일석에 개변할 수 있는 것이 아니다.	fix	rewrites

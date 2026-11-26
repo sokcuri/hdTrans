@@ -46,6 +46,8 @@ char32_t LastRune(std::string_view s) {
 bool In(char32_t r, std::u32string_view set) { return r != 0 && set.find(r) != std::u32string_view::npos; }
 
 constexpr std::u32string_view kCommas = U"、，,､";
+// Small kana and ン, which start no word.
+constexpr std::u32string_view kSmallKana = U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮン";
 // Opening brackets, and the marks of a speaker, a turn or a voice off screen (≫, 》, ⚟) at the start
 // of a caption.
 constexpr std::u32string_view kOpeners = U"「『（(【〈《［[〔｛{＜<“‘｢⟨｟≫》⚟";
@@ -193,13 +195,52 @@ bool Head(const WrapWord& n) {
     return !dict::InClass(HDTRANS_CLASS("wrap.sentence-start"), n.surface);
 }
 
+// The longest member of class set that s starts with; empty for none.
+std::string_view LongestStart(dict::ClassId set, std::string_view s) {
+    std::string_view best;
+    for (const std::string_view m : dict::ClassMembers(set)) {
+        if (m.size() > best.size() && s.starts_with(m)) best = m;
+    }
+    return best;
+}
+
 // Whether next starts with a quotative particle, not one before a comma (と、その時), that closes
-// what the line before said (なってくる / と思います).
-bool QuoteStart(std::string_view next, const WrapWord& n) {
-    if (!n.code.starts_with('2') || !dict::InClass(HDTRANS_CLASS("wrap.quote-start"), n.surface)) return false;
-    if (!next.starts_with(n.surface)) return false;
-    const char32_t after = FirstRune(next.substr(n.surface.size()));
-    return !In(after, kCommas) && !In(after, U"…‥。｡！？!?");
+// what the line before said (なってくる / と思います, いなかった / ということです): read alone as
+// that particle, or as a verb of two kana or more that starts it (という read as とい + う).
+bool QuoteStart(std::string_view line, std::string_view next, const WrapWord& n) {
+    const std::string_view q = LongestStart(HDTRANS_CLASS("wrap.quote-start"), next);
+    if (q.empty()) return false;
+    const bool particle = n.code.starts_with('2') && n.surface == q;
+    const bool verb = n.detail == output::DetailClass::Yougo && n.surface.size() < q.size() && q.starts_with(n.surface) &&
+                      text::RuneCount(n.surface) >= 2;
+    if (!particle && !verb) return false;
+    const std::string_view rest = next.substr(q.size());
+    const char32_t after = FirstRune(rest);
+    if (In(after, kCommas) || In(after, U"…‥。｡！？!?")) return false;
+    // という and っていう close only a past, a copula or an adjective or negative in い before こと or わけ (いなかった / ということです);
+    // before a noun the joined reading takes the verb 言う (だった / という見方).
+    if (q == "という" || q == "っていう") {
+        bool ends = false;
+        for (const std::string_view e : {"た", "だ", "い"}) ends = ends || line.ends_with(e);
+        return ends && (rest.starts_with("こと") || rest.starts_with("わけ"));
+    }
+    return true;
+}
+
+// Whether next starts with a case particle (wrap.case-start) before a letter or digit, read alone as
+// that particle or as the start of a verb row with a kanji after it (へ向かう): the line before named
+// what it marks (男子高校生 / がクマに). Not before a comma, a mark, a space or a long mark (で、, で その,
+// へー), nor at the start of a word in kana (がっかり, にこにこ).
+bool CaseStart(std::string_view next, const WrapWord& n) {
+    const std::string_view p = LongestStart(HDTRANS_CLASS("wrap.case-start"), next);
+    if (p.empty() || !std::string_view(n.surface).starts_with(p)) return false;
+    const std::string_view rest = std::string_view(n.surface).substr(p.size());
+    if (rest.empty() ? !n.code.starts_with('2') : !text::IsKanji(FirstRune(rest))) return false;
+    const char32_t after = FirstRune(next.substr(p.size()));
+    // A hiragana after a particle of one kana starts a conjunction or a phrase of its own (でも, では;
+    // をとめて is left alone); からには stays a particle.
+    if (after >= U'ぁ' && after <= U'ゖ' && text::RuneCount(p) == 1) return false;
+    return (text::IsLetter(after) || text::IsDigit(after)) && !In(after, kSmallKana) && after != U'ー';
 }
 
 bool Kana(char32_t r) { return (r >= U'ぁ' && r <= U'ゖ') || (r >= U'ァ' && r <= U'ヺ'); }
@@ -221,6 +262,27 @@ WrapWord WordOf(const output::ResolvedItem& it) {
     return w;
 }
 
+// Whether the last word of line stands alone after a mark or a space (ほんとに？ うん, あのね、いま):
+// it is all of the line's last clause.
+bool LoneTail(std::string_view line, const WrapEdges& edges) {
+    std::size_t from = 0;
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        at += std::max<std::size_t>(1, r.size);
+        if (In(r.cp, kCommas) || In(r.cp, U"。｡！？!?…‥ 　")) from = at;
+    }
+    return edges.lastLength > 0 && line.size() - from <= static_cast<std::size_t>(edges.lastLength);
+}
+
+// Whether w is an interjection or an answer: a member of wrap.sentence-start, a sound written in
+// Korean, or a word of code 3 (うん) without conjugation.
+bool Interjection(const WrapWord& w) {
+    const char32_t lead = FirstRune(w.surface);
+    return w.detail == output::DetailClass::None &&
+           ((lead >= U'가' && lead <= U'힣') || w.code.starts_with('3') ||
+            dict::InClass(HDTRANS_CLASS("wrap.sentence-start"), w.surface));
+}
+
 }  // namespace
 
 void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edges) {
@@ -229,7 +291,10 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
         if (it.surface.empty() || code.starts_with('6')) continue;
         if (!text::IsLetter(FirstRune(it.surface))) continue;
         const bool unread = Unread(it) && Kana(FirstRune(it.surface));
-        if (!edges.first) edges.first = WordOf(it);
+        if (!edges.first) {
+            edges.first = WordOf(it);
+            edges.firstLength = it.length;
+        }
         if (unread && !edges.wordRead) {
             edges.unreadStart += it.surface;
         } else {
@@ -237,6 +302,7 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
         }
         if (edges.last && edges.last->detail != output::DetailClass::None) edges.predicate = true;
         edges.last = WordOf(it);
+        edges.lastLength = it.length;
         edges.words++;
     }
 }
@@ -310,25 +376,63 @@ bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next
         return true;
     }
     if (OpenEnd(*edges.last, edges)) return true;
+    // A bare adjectival-noun stem before the な of a noun or the になる that the next line starts with
+    // (すてき / な人ね, きれい / になった).
+    if (edges.last->detail == output::DetailClass::Dakeiyo && edges.last->ending.empty()) {
+        const char32_t after = FirstRune(next.substr(std::min(next.size(), std::string_view("な").size())));
+        if ((next.starts_with("な") && (text::IsKanji(after) || (after >= U'ァ' && after <= U'ヺ'))) || next.starts_with("にな")) {
+            return true;
+        }
+    }
     if (!nextEdges.first) return false;
-    if (QuoteStart(next, *nextEdges.first)) return true;
+    // A quotative or case particle after a word of a clause, never after an interjection or after a
+    // last clause of one word that is no noun or predicate (はい / ということで, ほんとに？ うん / で、).
+    const bool clause = !Interjection(*edges.last) &&
+                        (!LoneTail(line, edges) || edges.last->detail != output::DetailClass::None ||
+                         edges.last->code.starts_with('1'));
+    if (clause && (QuoteStart(line, next, *nextEdges.first) || CaseStart(next, *nextEdges.first))) return true;
     const bool te = line.ends_with("て") || line.ends_with("で");
     if (BoundStart(*edges.last, te, *nextEdges.first)) return true;
     // A line of the predicate alone is mostly said on its own (分かった / じゃあ行こう).
     return edges.words > 1 && BareEnd(*edges.last) && Head(*nextEdges.first);
 }
 
-bool MayCutWord(std::string_view line, std::string_view next, const WrapEdges& nextEdges) {
+WrapCut CutRun(std::string_view line, const WrapEdges& edges, std::string_view next, const WrapEdges& nextEdges) {
     line = Trim(line);
     next = Trim(next);
     if (line.empty() || next.empty() || line.find(kBreakMark) != std::string_view::npos ||
         next.find(kBreakMark) != std::string_view::npos || StartsItem(next)) {
-        return false;
+        return {};
     }
     const char32_t end = LastRune(line);
-    if (!Kana(end) && !text::IsKanji(end)) return false;
+    if (!Kana(end) && !text::IsKanji(end)) return {};
     const std::string_view run = nextEdges.unreadStart;
-    return !run.empty() && next.starts_with(run);
+    if (!run.empty()) return next.starts_with(run) ? WrapCut{std::string(run)} : WrapCut{};
+    if (Kana(end)) {
+        // Only where the next line alone starts with a piece of one or two kana (す。, した), after a
+        // last clause of more than one word (not あのね、いま / すごく).
+        const bool shortStart = nextEdges.firstLength > 0 &&
+                                text::RuneCount(next.substr(0, std::min<std::size_t>(next.size(), nextEdges.firstLength))) <= 2;
+        const std::string_view head = next.substr(0, text::DecodeRune(next).size);
+        return shortStart && !LoneTail(line, edges) && !Interjection(*edges.last) && Kana(FirstRune(next)) && CutEnding(head, edges)
+                   ? WrapCut{std::string(head), false, false}
+                   : WrapCut{};
+    }
+    if (!nextEdges.first || !edges.last) return {};
+    const std::string_view first = nextEdges.first->surface;
+    if (first.empty() || !next.starts_with(first)) return {};
+    if (!Kana(FirstRune(first)) && !text::IsKanji(FirstRune(first))) return {};
+    const std::string_view word = edges.last->surface;
+    if (line.ends_with(word) && text::IsDigit(LastRune(line.substr(0, line.size() - word.size())))) return {};
+    const auto oneKanji = [](std::string_view w) { return text::RuneCount(w) == 1 && text::IsKanji(FirstRune(w)); };
+    if (dict::InClass(HDTRANS_CLASS("wrap.kanji-word-start"), first)) return {};
+    // A relational or body noun of one kanji after の is a word of its own (机の上 / 手を置いて).
+    const std::size_t lastKanji = line.size() - std::string_view("上").size();
+    if (line.substr(0, lastKanji).ends_with("の") && dict::InClass(HDTRANS_CLASS("wrap.kanji-relational"), line.substr(lastKanji))) {
+        return {};
+    }
+    const bool lineCut = oneKanji(word) && edges.last->ending.empty() && line.ends_with(word);
+    return lineCut || oneKanji(first) ? WrapCut{std::string(first), true, true} : WrapCut{};
 }
 
 bool CutStem(std::string_view head, std::string_view run, char32_t after) {
@@ -338,10 +442,15 @@ bool CutStem(std::string_view head, std::string_view run, char32_t after) {
         at += std::max<std::size_t>(1, r.size);
     }
     const char32_t first = FirstRune(run);
-    if (In(first, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮン")) return true;
+    if (In(first, kSmallKana)) return true;
     const char32_t last = LastRune(head);
     return ((last >= U'ァ' && last <= U'ヺ') || last == U'ー') && first >= U'ァ' && first <= U'ヺ' &&
            (Kana(after) || text::IsKanji(after));
+}
+
+bool CutEnding(std::string_view run, const WrapEdges& edges) {
+    return In(FirstRune(run), kSmallKana) || !edges.last || edges.last->detail == output::DetailClass::None ||
+           edges.last->ending.empty();
 }
 
 bool ReadWord(const output::ResolvedItem& item) {
@@ -374,6 +483,16 @@ std::vector<std::string> SplitAtBreaks(std::string_view translated, std::size_t 
             piece.erase(0, std::min(piece.size(), piece.find_first_not_of(' ')));
         }
         if (piece.empty()) return {};
+        // A line before a break that keeps only marks lost its words to the next one (♪ / 君の声が).
+        if (i + 1 < out.size()) {
+            bool letter = false;
+            for (std::size_t at = 0; at < piece.size() && !letter;) {
+                const text::Rune r = text::DecodeRune(std::string_view(piece).substr(at));
+                letter = text::IsLetter(r.cp) || text::IsDigit(r.cp);
+                at += std::max<std::size_t>(1, r.size);
+            }
+            if (!letter) return {};
+        }
     }
     return out;
 }

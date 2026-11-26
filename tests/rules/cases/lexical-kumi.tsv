@@ -1,0 +1,24 @@
+# 규칙: LEX-8084
+rule	input	expected	kind	layer
+dict:w:42402	Ｄ組の生徒	D반의 학생	fix	local
+dict:w:42402	俺たちＤ組は	우리 D반은	fix	local
+dict:w:42402	Ａ組とＢ組	A반과 B반	fix	local
+dict:w:42402	いい子にしてろよ。Ｄ組	has:D반	fix	local
+dict:w:42402	２年Ｒ組の生徒	rule:dict:w:42402=반	fix	local
+dict:w:42402	２年３組の生徒	rule:dict:w:42402=반	fix	local
+dict:w:42402	二組に分かれて	2조로 나누어져	keep	global-stem
+dict:w:42402	視線が２組計４本	!rule:dict:w:42402	keep	global-stem
+dict:w:42402	山口組の組長	!rule:dict:w:42402	keep	defaults
+dict:w:42402	腕を組む	팔짱을 낀다	keep	local
+dict:w:42402	徒歩組	도보조	keep	defaults
+dict:w:42403	ひと組か、ふた組くらい	한 조인가, 두 조 정도	fix	lookup
+dict:w:42405	ふた月前	두 달 전	fix	lookup
+dict:w:42406	ひと皿	한 접시	fix	lookup
+dict:w:42409	ふた桁の数字	두 자리의 숫자	fix	lookup
+dict:w:42410	ひと口やふた口くらい	한 입이나 두 입 정도	fix	lookup
+dict:w:42411	ふた晩	이틀 밤	fix	lookup
+dict:w:42414	ふたり組の男	has:이인조	fix	lookup
+dict:w:42414	三人組	삼인조	keep	lookup
+dict:w:42414	ふたりで行く	둘이서 간다	keep	lookup
+dict:w:42414	ふたを開ける	뚜껑을 연다	keep	lookup
+dict:w:42414	ひと月前	한달 전	keep	lookup
