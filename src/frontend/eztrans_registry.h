@@ -52,8 +52,9 @@ EzTransChange PlanUnregister(const EzTransState& state, bool force);
 #ifdef _WIN32
 // root is the HKCU subkey holding ChangShin and hdTrans; tests pass a scratch key.
 bool ReadEzTransState(EzTransState& state, std::string& error, const std::wstring& root = L"Software");
-// Writes the differences from before to after: the saved value before FilePath when registering,
-// after it when restoring, so a failure part way never loses the replaced value.
+// Writes the differences from before to after. The saved value goes before FilePath when it records a
+// newly replaced value, after it otherwise (restoring, moving a registration), so a run stopped part way
+// never loses the replaced value and the next run repairs the rest.
 bool WriteEzTransState(const EzTransState& before, const EzTransState& after, std::string& error,
                        const std::wstring& root = L"Software");
 #endif

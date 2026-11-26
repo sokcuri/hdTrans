@@ -96,6 +96,12 @@ HD_TEST(EzTransRegister) {
          EzTransResult::kOtherEngine, {"D:\\other", "D:\\old", kEzTrans}},
         {"changed after registering, forced", {"D:\\other", "D:\\old", kEzTrans}, true, true, true,
          EzTransResult::kChanged, {kSelf, kSelf, "D:\\other"}},
+        {"removed after registering keeps the saved value", {{}, "D:\\old", kEzTrans}, true, false, false,
+         EzTransResult::kChanged, {kSelf, kSelf, kEzTrans}},
+        {"stale after registering keeps the saved value", {"D:\\removed", "D:\\old", kEzTrans}, true, false, true,
+         EzTransResult::kChanged, {kSelf, kSelf, kEzTrans}},
+        {"registered twice keeps no value", {kSelf, kSelf, {}}, true, true, true, EzTransResult::kUnchanged,
+         {kSelf, kSelf, {}}},
     };
     for (const auto& c : cases) {
         const auto change = PlanRegister(c.before, "C:\\hdTrans\\", c.engineAtSelf, c.engineAtFilePath, c.force);
@@ -121,6 +127,8 @@ HD_TEST(EzTransUnregister) {
          {"D:\\other", kSelf, kEzTrans}},
         {"removed since", {{}, kSelf, kEzTrans}, false, EzTransResult::kModified, {{}, kSelf, kEzTrans}},
         {"changed since, forced", {"D:\\other", kSelf, kEzTrans}, true, EzTransResult::kChanged, {kEzTrans, {}, {}}},
+        {"stopped before clearing", {kEzTrans, kSelf, kEzTrans}, false, EzTransResult::kChanged, {kEzTrans, {}, {}}},
+        {"stopped before clearing no value", {{}, kSelf, {}}, false, EzTransResult::kChanged, {}},
     };
     for (const auto& c : cases) {
         const auto change = PlanUnregister(c.before, c.force);
@@ -146,11 +154,53 @@ HD_TEST(EzTransFolderHasEngine) {
 }
 
 #ifdef _WIN32
+namespace {
+
+// Deletes the scratch key on every return path of the test.
+struct ScratchKey {
+    std::wstring root = L"Software\\hdTrans-test-" + std::to_wstring(GetCurrentProcessId()) + L"-"
+        + std::to_wstring(GetTickCount64());
+    ScratchKey() = default;
+    ScratchKey(const ScratchKey&) = delete;
+    ScratchKey& operator=(const ScratchKey&) = delete;
+    ~ScratchKey() {
+        HKEY handle = nullptr;
+        if (RegOpenKeyExW(HKEY_CURRENT_USER, root.c_str(), 0, DELETE | KEY_ENUMERATE_SUB_KEYS | KEY_QUERY_VALUE
+                          | KEY_SET_VALUE | KEY_WOW64_32KEY, &handle) == ERROR_SUCCESS) {
+            RegDeleteTreeW(handle, nullptr);
+            RegCloseKey(handle);
+        }
+        RegDeleteKeyExW(HKEY_CURRENT_USER, root.c_str(), KEY_WOW64_32KEY, 0);
+    }
+};
+
+bool KeyExists(const std::wstring& key) {
+    HKEY handle = nullptr;
+    if (RegOpenKeyExW(HKEY_CURRENT_USER, key.c_str(), 0, KEY_READ | KEY_WOW64_32KEY, &handle) != ERROR_SUCCESS) {
+        return false;
+    }
+    RegCloseKey(handle);
+    return true;
+}
+
+bool SetRaw(const std::wstring& key, DWORD type, const void* data, std::size_t bytes) {
+    HKEY handle = nullptr;
+    if (RegCreateKeyExW(HKEY_CURRENT_USER, key.c_str(), 0, nullptr, REG_OPTION_NON_VOLATILE,
+                        KEY_SET_VALUE | KEY_WOW64_32KEY, nullptr, &handle, nullptr) != ERROR_SUCCESS) return false;
+    const LSTATUS status = RegSetValueExW(handle, L"FilePath", 0, type, static_cast<const BYTE*>(data),
+                                           static_cast<DWORD>(bytes));
+    RegCloseKey(handle);
+    return status == ERROR_SUCCESS;
+}
+
+}  // namespace
+
 HD_TEST(EzTransRegistryRoundTrip) {
     using hdTrans::frontend::ReadEzTransState;
     using hdTrans::frontend::WriteEzTransState;
-    const std::wstring root = L"Software\\hdTrans-test-" + std::to_wstring(GetCurrentProcessId()) + L"-"
-        + std::to_wstring(GetTickCount64());
+    ScratchKey scratch;
+    const std::wstring& root = scratch.root;
+    HD_REQUIRE(root != L"Software");
     std::string error;
     EzTransState state;
     HD_CHECK(ReadEzTransState(state, error, root));
@@ -175,16 +225,28 @@ HD_TEST(EzTransRegistryRoundTrip) {
 
     // Restoring "no value" removes the keys it leaves empty.
     HD_CHECK(WriteEzTransState(state, {}, error, root));
-    HKEY handle = nullptr;
-    HD_CHECK(RegOpenKeyExW(HKEY_CURRENT_USER, (root + L"\\ChangShin").c_str(), 0, KEY_READ | KEY_WOW64_32KEY,
-                           &handle) == ERROR_FILE_NOT_FOUND);
-    HD_CHECK(RegOpenKeyExW(HKEY_CURRENT_USER, (root + L"\\hdTrans").c_str(), 0, KEY_READ | KEY_WOW64_32KEY,
-                           &handle) == ERROR_FILE_NOT_FOUND);
-    if (RegOpenKeyExW(HKEY_CURRENT_USER, root.c_str(), 0, DELETE | KEY_ENUMERATE_SUB_KEYS | KEY_QUERY_VALUE
-                      | KEY_SET_VALUE | KEY_WOW64_32KEY, &handle) == ERROR_SUCCESS) {
-        RegDeleteTreeW(handle, nullptr);
-        RegCloseKey(handle);
-    }
-    RegDeleteKeyExW(HKEY_CURRENT_USER, root.c_str(), KEY_WOW64_32KEY, 0);
+    HD_CHECK(!KeyExists(root + L"\\ChangShin"));
+    HD_CHECK(!KeyExists(root + L"\\hdTrans"));
+
+    const std::wstring ezTrans = root + L"\\ChangShin\\ezTrans";
+    const wchar_t unterminated[] = {L'D', L':', L'\\', L'x'};
+    HD_CHECK(SetRaw(ezTrans, REG_SZ, unterminated, sizeof(unterminated)));
+    HD_CHECK(ReadEzTransState(state, error, root));
+    HD_CHECK(state.filePath == Text("D:\\x"));
+
+    const wchar_t embedded[] = L"D:\\x\0y";
+    HD_CHECK(SetRaw(ezTrans, REG_SZ, embedded, sizeof(embedded)));
+    HD_CHECK(ReadEzTransState(state, error, root));
+    HD_CHECK(state.filePath == Text("D:\\x"));
+
+    const wchar_t expand[] = L"%SystemRoot%\\x";
+    HD_CHECK(SetRaw(ezTrans, REG_EXPAND_SZ, expand, sizeof(expand)));
+    HD_CHECK(ReadEzTransState(state, error, root));
+    HD_CHECK(state.filePath && state.filePath->find('%') == std::string::npos && state.filePath->ends_with("\\x"));
+
+    const DWORD number = 1;
+    HD_CHECK(SetRaw(ezTrans, REG_DWORD, &number, sizeof(number)));
+    HD_CHECK(!ReadEzTransState(state, error, root));
+    HD_CHECK(error.find("not a string") != std::string::npos);
 }
 #endif

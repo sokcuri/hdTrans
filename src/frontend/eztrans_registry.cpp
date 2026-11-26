@@ -80,6 +80,13 @@ EzTransChange PlanRegister(const EzTransState& state, std::string_view self, boo
         break;
     case EzTransTarget::kNone:
     case EzTransTarget::kMissing:
+        // A saved value is replaced only by an engine folder, with force.
+        if (state.registered) {
+            change.after.filePath = folder;
+            change.after.registered = folder;
+            change.result = EzTransResult::kChanged;
+            return change;
+        }
         break;
     }
     change.after.filePath = folder;
@@ -95,7 +102,10 @@ EzTransChange PlanUnregister(const EzTransState& state, bool force) {
         change.result = EzTransResult::kNotRegistered;
         return change;
     }
-    if (!force && !(state.filePath && SameFolder(*state.filePath, *state.registered))) {
+    const bool atRegistered = state.filePath && SameFolder(*state.filePath, *state.registered);
+    // FilePath already holds the saved value when an earlier run stopped before clearing it.
+    const bool restored = state.filePath == state.previous;
+    if (!force && !atRegistered && !restored) {
         change.result = EzTransResult::kModified;
         return change;
     }
@@ -112,45 +122,69 @@ namespace {
 // HKCU\Software is shared by the 32-bit and 64-bit views; the hosts are 32-bit, so name that view anyway.
 constexpr REGSAM kView = KEY_WOW64_32KEY;
 
+// Empty when text is not valid UTF-8.
 std::wstring Wide(std::string_view text) {
     if (text.empty()) return {};
-    const int size = MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0);
+    const int size = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()),
+                                         nullptr, 0);
+    if (size <= 0) return {};
     std::wstring out(static_cast<std::size_t>(size), L'\0');
-    MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), out.data(), size);
+    MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()), out.data(), size);
     return out;
 }
 
-std::string Utf8(std::wstring_view text) {
-    if (text.empty()) return {};
-    const int size = WideCharToMultiByte(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0,
-                                         nullptr, nullptr);
-    std::string out(static_cast<std::size_t>(size), '\0');
-    WideCharToMultiByte(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), out.data(), size, nullptr, nullptr);
-    return out;
+bool Utf8(std::wstring_view text, std::string& out) {
+    out.clear();
+    if (text.empty()) return true;
+    const int size = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()),
+                                         nullptr, 0, nullptr, nullptr);
+    if (size <= 0) return false;
+    out.resize(static_cast<std::size_t>(size));
+    WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, text.data(), static_cast<int>(text.size()), out.data(), size,
+                        nullptr, nullptr);
+    return true;
+}
+
+std::string KeyName(const std::wstring& key) {
+    std::string name;
+    Utf8(key, name);
+    return "HKEY_CURRENT_USER\\" + name;
 }
 
 bool Failed(LSTATUS status, const std::wstring& key, std::string& error) {
     if (status == ERROR_SUCCESS) return false;
-    error = "HKEY_CURRENT_USER\\" + Utf8(key) + ": error " + std::to_string(status);
+    error = KeyName(key) + ": error " + std::to_string(status);
     return true;
 }
 
-// A missing key or value is success with no value.
-LSTATUS QueryString(const std::wstring& key, const wchar_t* name, std::optional<std::string>& value) {
+bool ExpandVariables(std::wstring& text) {
+    std::wstring out(text.size() + 1, L'\0');
+    for (;;) {
+        const DWORD count = ExpandEnvironmentStringsW(text.c_str(), out.data(), static_cast<DWORD>(out.size()));
+        if (count == 0) return false;
+        if (count <= out.size()) {
+            out.resize(count - 1);
+            text = std::move(out);
+            return true;
+        }
+        out.resize(count);
+    }
+}
+
+// A missing key or value is success with no value. The value ends at its first NUL, as the hosts read it;
+// REG_EXPAND_SZ is expanded. Other types are an error, so a value that cannot be saved is never replaced.
+bool QueryString(const std::wstring& key, const wchar_t* name, std::optional<std::string>& value, std::string& error) {
     value.reset();
     HKEY handle = nullptr;
     LSTATUS status = RegOpenKeyExW(HKEY_CURRENT_USER, key.c_str(), 0, KEY_QUERY_VALUE | kView, &handle);
-    if (status == ERROR_FILE_NOT_FOUND) return ERROR_SUCCESS;
-    if (status != ERROR_SUCCESS) return status;
+    if (status == ERROR_FILE_NOT_FOUND) return true;
+    if (Failed(status, key, error)) return false;
     DWORD type = 0;
     DWORD bytes = 0;
+    std::wstring data;
     status = RegQueryValueExW(handle, name, nullptr, &type, nullptr, &bytes);
-    while (status == ERROR_SUCCESS) {
-        if (type != REG_SZ && type != REG_EXPAND_SZ) {
-            status = ERROR_INVALID_DATA;
-            break;
-        }
-        std::wstring data(bytes / sizeof(wchar_t) + 1, L'\0');
+    while (status == ERROR_SUCCESS && (type == REG_SZ || type == REG_EXPAND_SZ)) {
+        data.assign(bytes / sizeof(wchar_t) + 1, L'\0');
         DWORD size = static_cast<DWORD>(data.size() * sizeof(wchar_t));
         status = RegQueryValueExW(handle, name, nullptr, &type, reinterpret_cast<BYTE*>(data.data()), &size);
         if (status == ERROR_MORE_DATA) {
@@ -158,22 +192,36 @@ LSTATUS QueryString(const std::wstring& key, const wchar_t* name, std::optional<
             status = ERROR_SUCCESS;
             continue;
         }
-        if (status != ERROR_SUCCESS) break;
-        data.resize(size / sizeof(wchar_t));
-        while (!data.empty() && data.back() == L'\0') data.pop_back();
-        value = Utf8(data);
+        if (status == ERROR_SUCCESS) data.resize(size / sizeof(wchar_t));
         break;
     }
     RegCloseKey(handle);
-    return status == ERROR_FILE_NOT_FOUND ? ERROR_SUCCESS : status;
+    if (status == ERROR_FILE_NOT_FOUND) return true;
+    if (Failed(status, key, error)) return false;
+    std::string text;
+    if (type != REG_SZ && type != REG_EXPAND_SZ) {
+        Utf8(name, text);
+        error = KeyName(key) + ": " + text + " is not a string value";
+        return false;
+    }
+    const std::size_t end = data.find(L'\0');
+    if (end != std::wstring::npos) data.resize(end);
+    if ((type == REG_EXPAND_SZ && !ExpandVariables(data)) || !Utf8(data, text)) {
+        Utf8(name, text);
+        error = KeyName(key) + ": " + text + " cannot be read as a path";
+        return false;
+    }
+    value = std::move(text);
+    return true;
 }
 
 LSTATUS SetString(const std::wstring& key, const wchar_t* name, const std::string& value) {
+    const std::wstring data = Wide(value);
+    if (data.empty() && !value.empty()) return ERROR_NO_UNICODE_TRANSLATION;
     HKEY handle = nullptr;
     LSTATUS status = RegCreateKeyExW(HKEY_CURRENT_USER, key.c_str(), 0, nullptr, REG_OPTION_NON_VOLATILE,
                                      KEY_SET_VALUE | kView, nullptr, &handle, nullptr);
     if (status != ERROR_SUCCESS) return status;
-    const std::wstring data = Wide(value);
     status = RegSetValueExW(handle, name, 0, REG_SZ, reinterpret_cast<const BYTE*>(data.c_str()),
                             static_cast<DWORD>((data.size() + 1) * sizeof(wchar_t)));
     RegCloseKey(handle);
@@ -220,9 +268,9 @@ Keys KeysOf(const std::wstring& root) {
 bool ReadEzTransState(EzTransState& state, std::string& error, const std::wstring& root) {
     const Keys keys = KeysOf(root);
     EzTransState read;
-    if (Failed(QueryString(keys.ezTrans, L"FilePath", read.filePath), keys.ezTrans, error)) return false;
-    if (Failed(QueryString(keys.saved, L"FilePath", read.registered), keys.saved, error)) return false;
-    if (Failed(QueryString(keys.saved, L"PreviousFilePath", read.previous), keys.saved, error)) return false;
+    if (!QueryString(keys.ezTrans, L"FilePath", read.filePath, error)) return false;
+    if (!QueryString(keys.saved, L"FilePath", read.registered, error)) return false;
+    if (!QueryString(keys.saved, L"PreviousFilePath", read.previous, error)) return false;
     if (!read.registered) read.previous.reset();
     state = std::move(read);
     return true;
@@ -255,8 +303,10 @@ bool WriteEzTransState(const EzTransState& before, const EzTransState& after, st
                                   : DeleteValue(keys.saved, L"PreviousFilePath"), keys.saved, error)) return false;
         return !Failed(SetString(keys.saved, L"FilePath", *after.registered), keys.saved, error);
     };
-    if (after.registered) return writeSaved() && writeFilePath();
-    return writeFilePath() && writeSaved();
+    if (!after.registered || (before.registered && after.previous == before.previous)) {
+        return writeFilePath() && writeSaved();
+    }
+    return writeSaved() && writeFilePath();
 }
 #endif
 
