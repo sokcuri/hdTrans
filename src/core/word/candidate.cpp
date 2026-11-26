@@ -2183,7 +2183,9 @@ bool Worker::AnchorAround(int i) const {
 }
 
 void Worker::Insert(Item* it) {
-    if (it != nullptr) insertedLength += chain.Insert(it, true);
+    if (it == nullptr) return;
+    inserted_++;
+    insertedLength += chain.Insert(it, true);
 }
 
 void Worker::BuildTokenTransformText(int i) {
@@ -2465,7 +2467,7 @@ void Worker::CoverSurface(int token, std::string_view full, int cursor, Item* pa
     for (long budget = 4L * size + 16; cursor < size && budget > 0; budget--) {
         insertedLength = 0;
         candidateRetryCount = retries;
-        const bool translated = TranslateCandidateAt(full, cursor, token, parent);
+        const bool translated = TranslateAfter(full, cursor, token, parent);
         parent = nullptr;
         retries = 0;
         if (resumed()) continue;
@@ -2484,6 +2486,7 @@ void Worker::CoverSurface(int token, std::string_view full, int cursor, Item* pa
                 }
             }
             if (Item* candidate = InsertLateCandidate(full, cursor, token, numeric)) {
+                inserted_++;
                 insertedLength = chain.Insert(candidate, true);
                 cursor += insertedLength;
             } else {
@@ -2867,6 +2870,20 @@ std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
     return next;
 }
 
+bool Worker::TranslateAfter(std::string_view full, int cursor, int token, Item* parent) {
+    const ProbeMark mark = MarkProbe();
+    const std::size_t inserted = inserted_, shortened = shortenedVerbs.size();
+    const int resume = resumeCursor;
+    const Item* const resumeAfter = resumeParent;
+    const LatticePick pick = latticePick_;
+    const bool translated = TranslateCandidateAt(full, cursor, token, parent);
+    if (!translated && inserted_ == inserted && shortenedVerbs.size() == shortened && resumeCursor == resume &&
+        resumeParent == resumeAfter && latticePick_.item == pick.item && latticePick_.records == pick.records) {
+        RewindProbe(mark, false);
+    }
+    return translated;
+}
+
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
@@ -2909,7 +2926,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
         return true;
     }
     if (Item* hon = HonorificItem(full, cursor, token, parent)) {
-        TranslateCandidateAt(full, cursor + hon->length, token, hon);
+        TranslateAfter(full, cursor + hon->length, token, hon);
         Insert(hon);
         return true;
     }
@@ -4054,6 +4071,7 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
     // Only where a word starts: no reading from up to four characters back runs past cursor (the て of 知って, the
     // かった of 良かった stay the ending of the word before).
     int back = cursor;
+    const ProbeMark mark = MarkProbe();
     for (int k = 0; k < 4 && back > 0; k++) {
         back -= static_cast<int>(DecodeLastRune(full.substr(0, static_cast<std::size_t>(back))).size);
         const Lookup l = DoLookup(From(full, back), kModeGeneral);
@@ -4063,10 +4081,14 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
             if (rec == nullptr) break;
             const Item* it = InsertLateCandidate(full, back, token, rec);
             if (it == nullptr || it->group == nullptr) break;
-            if (back + it->length > cursor) return nullptr;
+            if (back + it->length > cursor) {
+                RewindProbeItems(mark);
+                return nullptr;
+            }
             rec = it->group->records;
         }
     }
+    RewindProbeItems(mark);
     Item* best = nullptr;
     Record* rec = c.group == nullptr ? nullptr : c.group->records;
     for (int tries = 0; rec != nullptr && tries < 64; tries++) {
@@ -4094,7 +4116,7 @@ Item* Worker::LongerAtExhaustion(std::string_view full, int cursor, int token, c
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
-    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), ReadingLead(full, cursor, token, records));
+    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor), Probing([&] { return ReadingLead(full, cursor, token, records); }));
     if (settings.text) records = VerdictsInPlace(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = AdjectiveOverKanaNoun(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
@@ -4121,7 +4143,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
     if (settings.text) records = KanaNounOverOneKanaStem(full, cursor, token, records);
-    if (settings.text) records = KanaWordFirst(full, cursor, token, records, parent);
+    if (settings.text) records = Probing([&] { return KanaWordFirst(full, cursor, token, records, parent); });
     if (settings.text) {
         // LEX-6723: where neither katakana reorder moved the first record (the order is the lookup's).
         const Record* const incoming = records;
@@ -4140,6 +4162,8 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     const LatticePick& pick = latticePick_;
     const bool picked = pick.records != nullptr && pick.records == records && pick.text == full.data() && pick.size == full.size() &&
                         pick.cursor == cursor && pick.token == token;
+    // A candidate given up for another reading at cursor goes back with what it made (RewindProbe).
+    const ProbeMark atCandidate = MarkProbe();
     Item* candidate = picked ? pick.item : InsertLateCandidate(full, cursor, token, records);
     latticePick_ = {};
     Record* from = records;
@@ -4147,27 +4171,33 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         Record* remaining = candidate->group->records;
         candidate->group->records = nullptr;
         from = remaining;
+        RewindProbeItems(atCandidate);
         candidate = InsertLateCandidate(full, cursor, token, remaining);
     }
     if (settings.text && candidate != nullptr) {
-        if (Record* shorter = OverStrayKana(full, cursor, token, *candidate)) {
+        if (Record* shorter = Probing([&] { return OverStrayKana(full, cursor, token, *candidate); })) {
             candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
-        if (Record* shorter = OverFusedParticle(full, cursor, token, *candidate)) {
+        if (Record* shorter = Probing([&] { return OverFusedParticle(full, cursor, token, *candidate); })) {
             candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
-        if (Record* shorter = OverParticleKanaWord(full, cursor, token, *candidate, parent)) {
+        if (Record* shorter = Probing([&] { return OverParticleKanaWord(full, cursor, token, *candidate, parent); })) {
             candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
-        if (Record* shorter = OverCutWord(full, cursor, token, *candidate)) {
+        if (Record* shorter = Probing([&] { return OverCutWord(full, cursor, token, *candidate); })) {
             candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
-        if (Record* shorter = OverSwallowedVerb(full, cursor, token, *candidate)) {
+        if (Record* shorter = Probing([&] { return OverSwallowedVerb(full, cursor, token, *candidate); })) {
             candidate->group->records = nullptr;
+            RewindProbeItems(atCandidate);
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
     }
@@ -4194,7 +4224,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     const int savedRetries = candidateRetryCount;
     if (settings.improvements.perLevelRetries) candidateRetryCount = 0;
-    bool translated = TranslateCandidateAt(full, cursor + candidate->length, token, candidate);
+    bool translated = TranslateAfter(full, cursor + candidate->length, token, candidate);
     // A verb whose ending leaves text that no word reads takes the next shorter ending of
     // the same stem before another stem is tried (読むのですぞ: 読む, の, ですぞ; not 読むのです
     // and ぞ, then 読 as a noun).
@@ -4228,7 +4258,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         }
         candidate = shorter;
         if (settings.improvements.perLevelRetries) candidateRetryCount = 0;
-        translated = TranslateCandidateAt(full, cursor + candidate->length, token, candidate);
+        translated = TranslateAfter(full, cursor + candidate->length, token, candidate);
         if (translated) shortenedVerbs.push_back(candidate);
     }
     if (settings.improvements.perLevelRetries) candidateRetryCount = savedRetries;
@@ -4419,6 +4449,8 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
         auto sameGroup = [&](const Record* r) { return r->source.size() == length && At(r->partCode, 1) == kind; };
         switch (kind) {
         case '4': {
+            // A verb reading that fails goes back with what it made; nothing links to it (RewindProbe).
+            const ProbeMark mark = MarkProbe();
             Detail* word = NewDetail(kDetailVerb, token);
             const int pattern = rec->partCode[3] - '0';
             word->patternKind = pattern;
@@ -4430,6 +4462,7 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                 while (rec != nullptr && sameGroup(rec) && At(rec->partCode, 3) - '0' == pattern) {
                     rec = rec->child;
                 }
+                RewindProbeItems(mark);
             } else {
                 Group* group = NewGroup(rec, static_cast<char>(word->kind + '0'));
                 Item* candidate = NewItem(word, group, text, offset, token);
@@ -4470,11 +4503,11 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     other->source == stop->source && At(other->partCode, 1) == '4' &&
                     TeAfterWaStem(stop->source, afterStem.substr(std::string_view("い").size()))) {
                     rec = other;
-                    group->records = nullptr;
+                    RewindProbeItems(mark);
                     continue;
                 }
                 rec = group->records;
-                group->records = nullptr;
+                RewindProbeItems(mark);
             }
             // The prefix table reads the text alone; at the place SegEdgesAt probes, once it read nothing there it
             // reads nothing for the next verb either.
