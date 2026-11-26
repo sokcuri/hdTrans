@@ -165,12 +165,24 @@ bool Dict::RecordsStart(int k, std::size_t& i, std::size_t& end) const {
         if (previous >= i) return guard_.Fail();
     }
     for (int skip = k % kKeysPerStart; skip > 0;) {
-        Record r;
         bool more;
-        if (!Decode(i, end, r, more)) return false;
+        if (!Skip(i, end, more)) return false;
         if (!more) skip--;
     }
     if (i >= end) return guard_.Fail();
+    return true;
+}
+
+bool Dict::Skip(std::size_t& i, std::size_t end, bool& more) const {
+    uint64_t h, value;
+    if (!ReadUvarint(i, end, h)) return false;
+    const uint64_t length = h >> 2;
+    if (i > end || end > blob_.size() || length > end - i) return guard_.Fail();
+    i += static_cast<std::size_t>(length);
+    for (int fields = (h & 2) != 0 ? 3 : 2; fields > 0; fields--) {
+        if (!ReadUvarint(i, end, value)) return false;
+    }
+    more = (h & 1) != 0;
     return true;
 }
 
