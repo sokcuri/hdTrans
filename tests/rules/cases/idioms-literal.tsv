@@ -1,0 +1,25 @@
+# 규칙: LEX-200
+rule	input	expected	kind	layer
+pack:一糸まとう#1	彼女は一糸まとわぬ姿で立っている。	has:실오라기 하나 걸치지 않는 모습	fix	senses
+pack:一糸まとう#2	一糸纏わぬ姿で現れた。	has:실오라기 하나 걸치지 않는	fix	senses
+pack:用は足す#1	たいして、用は足したくもないんだけど……	has:볼일은 보고 싶은	fix	senses
+pack:揚げ足とる#1	「揚げ足とるなっ」	「트집을 잡지 마」	fix	senses
+pack:揚げ足とる#2	揚げ足取るのはやめろ。	has:트집을 잡는	fix	senses
+pack:用は足す#1	用を足して、自分のブースに戻った。	!rule:pack:用は足す#1	keep	senses
+pack:揚げ足とる#2	「揚げ足を取るようですけど」	!rule:pack:揚げ足とる#2	keep	senses
+pack:揚げ足とる#2	それは揚げ足取りだ。	!rule:pack:揚げ足とる#2	keep	senses
+pack:一糸まとう#1	一糸乱れず行進する。	!rule:pack:一糸まとう#1	keep	senses
+sense:default	「そうそう、二人でしっぽりな」	has:둘이서 오붓하게	fix	defaults
+sense:default	誰もしっぽりとか言ってないし	has:오붓하게라든가	fix	defaults
+sense:default	人気は下がっていくのに、成績は右肩上がりの学園というのも想像しにくい。	has:우상향의 학원	fix	defaults
+sense:default	グラフは、綺麗な右肩上がりになっていた。	has:우상향이 되어	keep	defaults
+pack:しっぽり濡れる#1	しっぽり濡れた髪を拭く。	has:촉촉이 젖은 머리카락	keep	senses
+pack:しっぽり濡れる#1	「そうそう、二人でしっぽりな」	!rule:pack:しっぽり濡れる#1	keep	senses
+pack:一糸まとう#1	彼女は何もまとわぬ姿だった。	!rule:pack:一糸まとう#1	keep	senses
+pack:用は足す#1	用はない。	용무는 없다.	keep	senses
+pack:用は足す#1	それで用は足りる。	!rule:pack:用は足す#1	keep	senses
+pack:揚げ足とる#1	揚げパンを取る。	!rule:pack:揚げ足とる#1	keep	senses
+pack:へそを曲げる#1	余計へそを曲げそうだしな……	has:토라질 것 같	fix	senses
+pack:へそを曲げる#1	へそが見える。	!rule:pack:へそを曲げる#1	keep	senses
+sense:default	二人でしっぽり過ごす。	has:오붓하게	fix	defaults
+pack:へそを曲げる#1	臍を曲げた。	!rule:pack:へそを曲げる#1	keep	senses

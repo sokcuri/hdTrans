@@ -23,3 +23,19 @@ restore:echoed-gloss	あたしたち（俺たち）	lacks:(우리)	keep	restore
 restore:echoed-gloss	魔剣（けん）を抜く	has:마검	keep	restore
 restore:dropped-kana	「アイツら、ミッちんの襲撃を恐れてるのよ」	has:밋친의 습격	fix	restore
 restore:dropped-kana	親分は ほれた女が	lacks:호레타	keep	restore
+restore:dropped-kana	「たんたんミン！」	「탄탄 민!」	fix	restore
+restore:dropped-kana	「じゃあ、ゲームは？　『ぬこぬこブラボー』の続編があるよ」	has:『누코누코 브라보』의 속편	fix	restore
+restore:dropped-kana	ぬこブラボー	누코 브라보	fix	restore
+restore:dropped-kana	「どれがいい？　しまパン？」	has:시마 빵	fix	restore
+restore:dropped-kana	「いや、下だって。にぶチンめ」	has:니부 틴	fix	restore
+restore:dropped-kana	≪アイツら、サッちんの襲撃を恐れて距離を取ってるのよ≫	has:삿친의 습격	keep	restore
+restore:dropped-kana	「サッちん私のことわかってるし」	has:삿친 나	keep	restore
+restore:dropped-kana	「おうよ。まっピンピンで可愛いだろう♪」	lacks:맛	keep	restore
+restore:dropped-kana	「ンだァ？　ヤッちまうぞコラァ！」	lacks:치마우	keep	restore
+restore:dropped-kana	「あぐッッ！！？」	「아굿!!?」	keep	restore
+restore:dropped-kana	「なにこれ、うンま……」	has:운마	keep	restore
+restore:dropped-kana	「よォ、遅くなっちまったなァ！！」	has:요오	keep	restore
+restore:dropped-kana	……なあエナ。もし	lacks:나아	keep	restore
+restore:dropped-kana	「うっ……ぐっ、うぐぁあああああああああああッッ」	has:우가아아아앗	keep	restore
+restore:dropped-kana	「デキるっちゃデキるけど、あれは努力のたまものだぞ」	lacks:룻챠	keep	restore
+restore:dropped-kana	「ま、ビビるこたネェって」	lacks:루코타	keep	restore

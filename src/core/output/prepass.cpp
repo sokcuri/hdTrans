@@ -196,6 +196,11 @@ size_t KanaPrefix(std::string_view s) {
     return s.size();
 }
 
+// A katakana that starts a word: full size, not ン, ッ or ー.
+bool WordStartKatakana(char32_t r) {
+    return r >= U'ァ' && r <= U'ヺ' && !HasRune(U"ァィゥェォッャュョヮヵヶン", r);
+}
+
 bool Blank(std::string_view s) {
     for (size_t i = 0; i < s.size();) {
         const auto r = text::DecodeRune(s.substr(i));
@@ -1447,7 +1452,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
     }
     // The run starts with a kana no word of the dictionary reads and goes on kana by kana.
     bool single = unknown && text::RuneCount(src.substr(start, end - start)) == 1;
-    const int runEnd = end + static_cast<int>(KanaPrefix(src.substr(end)));
+    int runEnd = end + static_cast<int>(KanaPrefix(src.substr(end)));
     int pos = end;
     bool particle = false;  // the run ends before a written one-kana particle
     while (pos < runEnd) {
@@ -1456,6 +1461,13 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             text::RuneCount(src.substr(start, pos - start)) >= 2 &&
             text::RuneCount(src.substr(pos, next->end - pos)) == 1) {
             particle = true;
+            break;
+        }
+        // A katakana word that starts right after a run of single unread hiragana that opens its token
+        // ends the run (『ぬこぬこブラボー』); after a word the run is mostly the ending it missed (デキるっちゃ).
+        if ((opened || spaced) && next != nullptr && !next->blank && single && text::RuneCount(src.substr(start, pos - start)) >= 2 &&
+            WordStartKatakana(FirstRune(src.substr(pos)))) {
+            runEnd = pos;
             break;
         }
         if (next == nullptr || (!next->blank && next->end <= runEnd)) return translated;
@@ -1473,6 +1485,9 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             genitive = true;
         }
         nickname = glued && dict::InClass(HDTRANS_CLASS("follower.nickname"), run);
+        // Past a katakana word that ends in ッ, a run that is no nickname is the ending of a verb written
+        // in katakana (ヤッちまう).
+        if (before == U'ッ' && !nickname) return translated;
         // A run that ends like a verb is mostly a verb the analysis missed (ほれた); a drop reads better
         // than its sound.
         if (dict::EndsWithMember(HDTRANS_CLASS("ending.unread-kana-verb"), run) > 0) return translated;

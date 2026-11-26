@@ -1,0 +1,25 @@
+# 규칙: GRM-8122
+rule	input	expected	kind	layer
+cx:hajimete-aux:10	付き合い始めて一ヶ月ちょっとで、俺の家に招待か。	has:사귀기 시작해 한 달	fix	rewrites
+cx:hajimete-aux:10	「私たちが付き合い始めて、もう２週間経つじゃないか」	has:사귀기 시작해	fix	rewrites
+cx:hajimete-aux:10	企画を考え始めて１時間。	has:생각하기 시작해	fix	rewrites
+cx:hajimete-aux:10	部長もだんだん不審に思い始めてきたようだった。	has:생각하기 시작해	fix	rewrites
+cx:hajimete-aux:10	雨が降り始めて、傘をさした。	has:오기 시작해	fix	rewrites
+cx:hajimete-aux:10	走り始めて、息が切れた。	has:달리기 시작해	fix	rewrites
+cx:hajimete-aux:10	やり始めて三日。	has:하기 시작해	fix	rewrites
+cx:hajimete-aux:10	付き合い始めてから一ヶ月、彼女も俺を下の名前で呼ぶようになった。	has:사귀기 시작한 다음	fix	rewrites
+cx:hajimete-aux:10	絵を描き始めてからの数時間で、彼女は笑顔を見せてくれた。	has:그리기 시작한 다음	fix	rewrites
+cx:hajimete-aux:10	仕事を始めて一年。	!rule:cx:hajimete-aux:10	keep	rewrites
+cx:hajimete-aux:10	勉強を始めてから変わった。	!rule:cx:hajimete-aux:10	keep	rewrites
+cx:hajimete-aux:10	今から始めて間に合う？	!rule:cx:hajimete-aux:10	keep	rewrites
+cx:hajimete-aux:10	食べ始めてすぐ、電話が鳴った。	has:먹기 시작하자마자	keep	rewrites
+cx:hajimete-aux:10	読み始めてしまった。	has:읽기 시작해	keep	rewrites
+cx:hajimete-aux:10	歩き始めた。	걷기 시작했다.	keep	rewrites
+cx:hajimete-aux:10	初めて会った。	!rule:cx:hajimete-aux:10	keep	rewrites
+cx:hajimete-aux:20	雨が降りはじめて、傘をさした。	has:오기 시작해	fix	rewrites
+cx:hajimete-aux:20	掃除しはじめて、汗をかいた。	has:청소하기 시작해	fix	rewrites
+cx:hajimete-aux:20	彼に会ってはじめてわかった。	!rule:cx:hajimete-aux:20	keep	rewrites
+cx:hajimete-aux:20	はじめて会った。	!rule:cx:hajimete-aux:20	keep	rewrites
+cx:hajimete-aux:15	一緒に暮らしはじめてから、日に日にかわいくなってきている。	has:살기 시작한 다음,	fix	rewrites
+cx:hajimete-aux:15	はじめてからずっと好きだった。	!rule:cx:hajimete-aux:15	keep	rewrites
+cx:hajimete-aux:20	泡が立ちはじめても彼女は目を開けたままだ。	has:일기 시작해도	fix	rewrites

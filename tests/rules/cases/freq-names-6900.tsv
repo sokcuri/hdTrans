@@ -20,7 +20,7 @@ names:kana-given	山本さえ選手には勝てない。	has:야마모토마저	
 names:kana-given	森からさん付けで呼ばれた。	has:에서	keep	lookup
 names:kana-given	川端で遊んだ。	강가에서 놀았다.	keep	lookup
 names:kana-given	田中さんが来た。	타나카 씨가 왔다.	keep	lookup
-names:kana-given	中村もさんざん迷った。	나카무라도 실컷 헤매었다.	keep	lookup
+names:kana-given	中村もさんざん迷った。	나카무라도 실컷 망설였다.	keep	lookup
 names:title-run	関芳弘文部科学相は１６日、辞任を否定した。	has:세키 요시히로 문부과학상은	fix	lookup
 names:title-run	続く５番、筒香選手もストレートで空振り三振。	has:츠츠카 선수도	fix	lookup
 names:title-run	汐浜記者、そちらの雰囲気はどのような感じでしょうか？	has:시오하마 기자,	fix	lookup

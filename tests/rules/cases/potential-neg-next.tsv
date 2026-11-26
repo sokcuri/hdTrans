@@ -9,7 +9,7 @@ cx:potential-neg-next:10	「これなら聞けるんじゃないかな？」	「
 cx:potential-neg-next:10	彼女がどういう状態にあるのか、把握しきれていない。	!rule:cx:potential-neg-next:10	keep	rewrites
 cx:potential-neg-next:10	食べられない	먹을 수 없다	keep	rewrites
 cx:potential-neg-next:20	「でも実際、決めきれてないんだよな」	「하지만 실제, 다 결정할 수 없는 것 같아」	fix	rewrites
-cx:potential-neg-next:20	迷っているのは、あきらめきれていない証拠で……	헤매고 있는 것은, 다 포기할 수 없는 증거로……	fix	rewrites
+cx:potential-neg-next:20	迷っているのは、あきらめきれていない証拠で……	망설이고 있는 것은, 다 포기할 수 없는 증거로……	fix	rewrites
 cx:potential-neg-next:20	私達もまだ生徒の声を拾い切れていなかったということね	has:다 주울 수 없었다는	fix	rewrites
 cx:potential-neg-next:20	避けきれなくて	다 피할 수 없어서	fix	rewrites
 cx:potential-neg-next:20	食べきれない	다 먹을 수 없다	keep	rewrites
