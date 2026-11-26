@@ -16,3 +16,6 @@ particle:ni-title-taking	「彼女を会長に推薦した」	「그녀를 회�
 particle:ni-title-taking	「彼を委員長に任命した」	「그를 위원장으로 임명했어」	keep	local
 particle:ni-title-taking	「彼女を先生に取られた」	「그녀를 선생님에게 빼앗겼어」	keep	local
 particle:ni-title-taking	「彼を部長に任せる」	「그를 부장에게 맡겨」	keep	local
+particle:ni-title-taking	「彼女を生徒会長に取られたくない」	「그녀를 학생회장에게 빼앗기고 싶지 않아」	fix	local
+particle:ni-title-taking	「生徒会長に取られたくない」	「학생회장에게 빼앗기고 싶지 않아」	fix	local
+particle:ni-title-taking	「彼女を生徒会長に選んだ」	「그녀를 학생회장으로 선택했어」	keep	local

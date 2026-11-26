@@ -1,0 +1,23 @@
+# 규칙: LEX-8167
+rule	input	expected	kind	layer
+lexical:one-kanji	ちょっと癪なのは、図星だからかもしれない。	조금 분한 것은, 정곡이기 때문일지도 모른다.	fix	lookup
+lexical:one-kanji	「それはそれで癪だな」	「그건 그것대로 분하네」	fix	lookup
+lexical:one-kanji	マッドサイエンティストの魔の手から、俺が守る	매드 사이언티스트의 마수로부터, 내가 지킨다	fix	lookup
+lexical:one-kanji	３限後の昼休み。	3교시 후의 점심시간.	fix	lookup
+lexical:one-kanji	２限は別だったが、たまたま３限で同じ授業を取っていた。	has:2교시는	fix	lookup
+lexical:one-kanji	１限目	1교시	fix	lookup
+lexical:one-kanji	栞さんが来た	시오리 씨가 왔다	keep	lookup
+lexical:one-kanji	「栞！」	has:시오리	keep	lookup
+lexical:one-kanji	癪に障る	화가 난다	keep	lookup
+lexical:one-kanji	癪に触った	화가 났다	keep	lookup
+lexical:one-kanji	癇癪を起こす	욱한다	keep	lookup
+lexical:one-kanji	時限爆弾だ	시한폭탄이다	keep	lookup
+lexical:one-kanji	期限が切れた	기한이 지났다	keep	lookup
+lexical:one-kanji	限なく続く	lacks:교시	keep	lookup
+lexical:one-kanji	限の字	lacks:교시	keep	lookup
+lexical:one-kanji	魔の手先	lacks:마수	keep	lookup
+lexical:one-kanji	無限の力	무한의 힘	keep	lookup
+lexical:one-kanji	門限	폐문시간	keep	lookup
+lexical:one-kanji	限りない	끝없다	keep	lookup
+lexical:one-kanji	限界	한계	keep	lookup
+lexical:one-kanji	身体の奥を棒で突かれているような感じだ	몸 안쪽을 봉으로 찔리고 있는 것 같은 느낌이다	keep	lookup

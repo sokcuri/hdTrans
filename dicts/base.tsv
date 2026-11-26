@@ -2438,7 +2438,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いいつたえ	전&AV@	M437			GN				jisjk:90421		
 いいつたえ	전언&AV@	M447			GN				jisjk:139287		
 いいつづけ	계속 말&AV@	M427			GN				jisjk:143491		
-いいつの	말이 격해&AL@	M427			GN				jisjk:139299		
+いいつの	말이 격해&AL@	M428			GN				jisjk:139299		
 いいつめ	극단적으로 말&AV@	M447			GN				jisjk:139302		
 いいつら	말하기 거북$AB@	H7N0	SFl		GN				jisjk:119756		
 いいてんをと	좋은 점수를 &FD@	M428			GN				jisjk:143500		
@@ -3011,8 +3011,8 @@ ttt	ttt	K110			GN				jisjk:201744
 いじ	조종&AV@	M438	ULw		GN				jisjk:90435		
 いじ	유지	N110			GN				jisjk:90436		
 いじきたな	탐욕스$G7@	H7N0	VMoSFl		GN				jisjk:119794		
-いじく	만지작거&AA@	M447			GN				jisjk:140695		
-いじく	다&CB@	M447	VPeVPe		GN				jisjk:140700		
+いじく	만지작거&AA@	M448			GN				jisjk:140695		
+いじく	다&CB@	M448	VPeVPe		GN				jisjk:140700		
 いじけ	주눅&L4@	M417			GN				jisjk:90437		
 いじけ	위축&C6@	M427	SFl		GN				jisjk:140701		
 いじしう	유지할 수 &HN@	M448			GN				jisjk:141656		
@@ -3545,7 +3545,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いつもより	평소보다	E311			GN				jisjk:92		
 いつもり	3 생각	T500			GN				jisjk:341352		
 いつも以上	보통이상	I110			GN				jisjk:112056		
-いつわ	속&AJ@	M447	SFl		GN				jisjk:140897		
+いつわ	속&AJ@	M448	SFl		GN				jisjk:140897		
 いつわり	거짓	N110	UTsSFl		GN				jisjk:125971		
 いつ頃	언제쯤	E300		Tm	GN				jisjk:263750		
 いづみ	이즈미	K130	QPN		GN				jisjk:117908		
@@ -6756,7 +6756,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おびどめ	끈	N110	VCpVBp		GN				jisjk:165929		-1
 おびのこぎり	줄톱	N110	VPe		GN				jisjk:165931		-1
 おびふう	띠봉투	N110	VCm		GN				jisjk:165936		-1
-おびやか	위협&AV@	M437			GN				jisjk:90524		
+おびやか	위협&AV@	M433			GN				jisjk:90524		
 おびグラフ	띠그래프	N110			GN				jisjk:165939		
 おふくろ	어머니	I110	VHn		GN				jisjk:40516		
 おふざけ	장난	N110			GN				jisjk:162781		
@@ -6869,7 +6869,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おもいあま	생각다 못&AV@	M428	SFl		GN				jisjk:146725		
 おもいあわせ	관련시켜 생각&AV@	M447	UTh		GN				jisjk:146731		
 おもいあわせ	비교해서 생각&AV@	M447			GN				jisjk:146735		
-おもいいた	생각이 미&AO@	M427			GN				jisjk:141842		
+おもいいた	생각이 미&AO@	M428			GN				jisjk:141842		
 おもいいれ	깊이 생각&AV@	M427			GN				jisjk:146740		
 おもいいれ	생각	N110			GN				jisjk:166019		-1
 おもいうかべ	문득 생각&AV@	M447			GN				jisjk:146743		
@@ -17399,7 +17399,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こそ	1기 때문에	S570			GN	4531	||1 &&3 S+1== "Lと" P+1== "4**" A+1== "USeUTsUSe"	こそ 어미는 뒤에 と로 시작하고 상태·발화 의미 코드를 가진 동사가 오면 기 때문에로 고른다. (미발동: rare-context)	jisjk:365495		
 こそあれ	(은)는 있어	K110		Tu	GN				jisjk:340785		
 こそが	(이)가	P201			GN				jisjk:6090		
-こそぐ	간질&AJ@	M447			GN				jisjk:119977		
+こそぐ	간질&AJ@	M448			GN				jisjk:119977		
 こそげ	깎아 &A6@	M437			GN				jisjk:90773		
 こそげ	긁어&A6@	M447			GN				jisjk:119981		
 こそこそ	소곤소곤	E311			GN				jisjk:370		
@@ -17427,7 +17427,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こたえ	영향을 &CJ@	M427			GN				jisjk:262488		
 こたえつづけ	계속 부응&AV@	M427			GN				jisjk:119995		
 こたえてや	대답하여 &CJ@	M448			GN				jisjk:141854		
-こたえまつ	대답해 드&AA@	M447			GN				jisjk:119999		
+こたえまつ	대답해 드&AA@	M448			GN				jisjk:119999		
 こたつ	난로	I110	VPeUXl		GN				jisjk:40958		
 こたつがけ	코타츠 덮개	I110	VPe		GN				jisjk:40959		
 こたつにあた	각로를 &CX@	M428			GN				jisjk:119555		
@@ -18640,7 +18640,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ごちそうさまでした	잘 먹었습니다	A9D0			GN				jisjk:151110		
 ごちそうさまです	잘 먹었습니다	A9D0			GN				jisjk:347009		
 ごちそうされ	맛있는 음식을 대접&FD@	M427			GN				jisjk:117853		
-ごちそうにあずか	음식 대접을 &FD@	M427			GN				jisjk:119822		
+ごちそうにあずか	음식 대접을 &FD@	M428			GN				jisjk:119822		
 ごちそうにな	대접&FD@	M428			GN				jisjk:119826		
 ごちゃごちゃ	어수선&Mf@	M429		Va	GN				jisjk:119897		
 ごちゃごちゃ	뒤죽박죽	M300			GN				jisjk:123117		
@@ -24382,7 +24382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しんこく	햇곡식	N110	VFd		GN				jisjk:192487		-1
 しんこくか	심각화	N110			GN				jisjk:192490		-1
 しんこくざい	친고죄	N110	ULw		GN				jisjk:192497		-1
-しんこくぶ	심각한 체&AV@	M427			GN				jisjk:136803		
+しんこくぶ	심각한 체&AV@	M428			GN				jisjk:136803		
 しんこくもれ	신고 누락	N110	ULw		GN				jisjk:192499		-1
 しんこっちょう	진면목	N110			GN				jisjk:192502		-1
 しんこん	신혼	N110	UMeVHn		GN				jisjk:192503		-1
@@ -26594,8 +26594,8 @@ ttt	ttt	K110			GN				jisjk:201744
 すぎ	지%D3@	G8U0		Ha	GN	3889	||1 &&2 P-1== "1**" A-1== "UMe"	앞 명사에 시간 의미코드가 있으면 すぎ를 지나다로 고른다. (미발동: rare-context)	jisjk:350431		
 すぎから	넘어서부터	K110		Nn	GN				jisjk:266407		
 すぎごけ	솔이끼	N110	VPt		GN				jisjk:196593		
-すぎさ	지나가버&AA@	M427	UMe		GN				jisjk:137273		
-すぎさ	지나&A1@	M427	UMe		GN				jisjk:137279		
+すぎさ	지나가버&AA@	M428	UMe		GN				jisjk:137273		
+すぎさ	지나&A1@	M428	UMe		GN				jisjk:137279		
 すぎには	넘어서	M110		Nn	GN				jisjk:265452		
 すぎの	넘어	E0H0			GN				jisjk:373333		
 すぎの	넘은	E0H0			GN	4740	||1 P+1== "1**"	뒤에 명사가 오면 すぎの를 넘은으로 고른다. (미발동: rare-word)	jisjk:373334		
@@ -27047,7 +27047,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すらりと	술술	E300			GN				jisjk:123260		
 すらりと伸びた脚	날씬하게 빠진 다리	N110	VBp		GN				jisjk:151272		
 すられ	소매치기 당&AV@	M447			GN				jisjk:116577		
-すりあが	인쇄가 끝&A5@	M427	VBkVSwVPe		GN				jisjk:137737		
+すりあが	인쇄가 끝&A5@	M428	VBkVSwVPe		GN				jisjk:137737		
 すりあげ	인쇄를 마&AO@	M447	VBkVSwVPe		GN				jisjk:137743		
 すりあわせ	조율	N110			GN				jisjk:357568		
 すりおろ	&AL@	M443			GN				jisjk:137747		
@@ -29323,7 +29323,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そきゅう	소구	N110	VCm	Hd	GN				jisjk:200591		-1
 そきゅう	소급	N110		Hd	GN				jisjk:200593		-1
 そぎおと	배제&AV@	M443			GN				jisjk:138641		
-そぎと	깎아&A6@	M447			GN				jisjk:138644		
+そぎと	깎아&A6@	M448			GN				jisjk:138644		
 そぎょう	조업	N110			GN				jisjk:200594		-1
 そぎ落と	배제&AV@	M443			GN				jisjk:138638		
 そく	입각&AV@	M419			GN				jisjk:138651		
@@ -31035,7 +31035,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たまり場	대기실	I110	VPl		GN				jisjk:41261		
 たまり場	집합소	I110	VPl		GN				jisjk:41262		
 たまり水	건수	I110			GN				jisjk:111932		
-たまわ	&FD@	M447			GN				jisjk:140764		
+たまわ	&FD@	M448			GN				jisjk:140764		
 たまをつ	당구를 &AO@	M421	VRw		GN				jisjk:138231		
 たまんな	견딜 수 $FA@	H7N0	SFl		GN				jisjk:136952		
 たまーに	이따금	E300	UMe		GN				jisjk:375220		
@@ -32299,7 +32299,7 @@ ttt	ttt	K110			GN				jisjk:201744
 つかえ	막&AW@	M427	VTp		GN				jisjk:142113		
 つかえ	결&AA@	M427	QHPVBp		GN				jisjk:142117		
 つかえ	섬&A2@	M427			GN				jisjk:142120		
-つかえまつ	섬&A2@	M447			GN				jisjk:142109		
+つかえまつ	섬&A2@	M448			GN				jisjk:142109		
 つかこうへい劇団	츠카코헤이 극단	K110	VGt		GN				jisjk:343947		
 つかさど	주관&AV@	M438			GN				jisjk:91059		
 つかさど	&FC@	M448	VMo		GN				jisjk:142126		
@@ -32571,7 +32571,7 @@ ttt	ttt	K110			GN				jisjk:201744
 つっと	쓱	E311			GN				jisjk:759		
 つっと飲み込	쭉 들이&AQ@	M445			GN				jisjk:140759		
 つっぱ	버&Af@	M448			GN				jisjk:143086		
-つっぱ	땅&A2@	M447	VBp		GN				jisjk:143090		
+つっぱ	땅&A2@	M448	VBp		GN				jisjk:143090		
 つっぱし	질주&AV@	M428			GN				jisjk:143073		
 つっぱな	내&AO@	M443			GN				jisjk:143077		
 つっぱね	딱 잘라 거절&AV@	M447			GN				jisjk:143080		
@@ -42672,7 +42672,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ものすご	아주 대단$AB@	H7U0			GN				jisjk:202078		
 ものすごいこ	굉장히 붐&Ad@	M425			GN				jisjk:201624		
 ものすごく	대단히	E300			GN				jisjk:266270		
-ものすごく人気があ	굉장히 인기가 &HN@	M427			GN				jisjk:263956		
+ものすごく人気があ	굉장히 인기가 &HN@	M428			GN				jisjk:263956		
 ものすごく人気があ	굉장히 인기가 &HN@	H427			GN				jisjk:263957		
 ものすさまじ	무$GE@	H7N0	SFl		GN				jisjk:136838		
 ものたりな	약간 부족$AB@	H7N0	VMo		GN				jisjk:136841		
@@ -104897,7 +104897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下拝田	시모하이타	N130	QCTVPl		GN				jisjk:299928		
 下拵	사전 준비	N110		Hd	GN				jisjk:187566		
 下据	시모시가라미	N130	QCTVPl		GN				jisjk:299217		
-下掛か	외설적&Ac@	M427		Va	GN				jisjk:136323		
+下掛か	외설적&Ac@	M428		Va	GN				jisjk:136323		
 下掛かり	시모가카리	N110	USoQMU		GN				jisjk:234412		
 下掲	아래에 게시함	N110			GN				jisjk:38153		
 下摂待	시모세츠타이	N130	QCTVPl		GN				jisjk:299356		
@@ -118625,7 +118625,7 @@ ttt	ttt	K110			GN				jisjk:201744
 仕え	섬김	N110			GN				jisjk:7676		
 仕え	시중&L4@	M427			GN				jisjk:7677		
 仕え	섬&A2@	M427			GN				jisjk:142110		
-仕えまつ	섬&A2@	M447			GN				jisjk:142108		
+仕えまつ	섬&A2@	M448			GN				jisjk:142108		
 仕こ	&Hc@	M435	VFd		GN				jisjk:93252		
 仕こ	가르&AO@	M435	VHnQAA		GN				jisjk:93253		
 仕こ	구입&AV@	M435			GN	712	||1 &&3 P-1== "2**" S-2== "物" P-2== "1**"	物과 조사 뒤의 仕こ를 '구입하다'로 고른다. (미발동: rare-word)	jisjk:93254		
@@ -124874,7 +124874,7 @@ ttt	ttt	K110			GN				jisjk:201744
 保たれ	유지&C6@	M427			GN				jisjk:138241		
 保ち合い	보합	N110			BZ				jisjk:357115		
 保ち合い相場	보합시세	N110			BZ				jisjk:357114		
-保てなくな	유지할 수 없게 &C6@	M427			GN				jisjk:138242		
+保てなくな	유지할 수 없게 &C6@	M428			GN				jisjk:138242		
 保一郎	야스이치로우	N130	QPN	Wb	GN				jisjk:356942		
 保三	야스조우	N130	QPN	Wb	GN				jisjk:23723		
 保三郎	야스사부로우	N130	QPN	Wb	GN				jisjk:358220		
@@ -137137,14 +137137,14 @@ ttt	ttt	K110			GN				jisjk:201744
 刷り	인쇄	N110			GN				jisjk:104823		
 刷りあが	인쇄&C6@	M428			GN				jisjk:373303		
 刷りこ	인쇄해 &H5@	M435			GN				jisjk:93650		
-刷り上が	인쇄가 끝&A5@	M427	VBkVSwVPe		GN				jisjk:137736		
+刷り上が	인쇄가 끝&A5@	M428	VBkVSwVPe		GN				jisjk:137736		
 刷り上げ	인쇄를 마&AO@	M447	VBkVSwVPe		GN				jisjk:137741		
 刷り本	목판본	N110			GN				jisjk:196924		
 刷り物	인쇄물	I110	VBk		GN				jisjk:75605		
 刷り込	박아 &H5@	M445			GN				jisjk:137781		
 刷り込み	인쇄하여 넣기	N110		Hd	GN				jisjk:238218		
 刷れ	인쇄 &C6@	M417			GN				jisjk:93651		
-刷上が	인쇄가 끝&A5@	M427			GN				jisjk:137739		
+刷上が	인쇄가 끝&A5@	M428			GN				jisjk:137739		
 刷上げ	인쇄를 마&AO@	M447			GN				jisjk:137744		
 刷子	솔	N110			GN				jisjk:27097		
 刷新	쇄신	N110		Hd	GN				jisjk:27096		
@@ -140674,7 +140674,7 @@ ttt	ttt	K110			GN				jisjk:201744
 勤	근	N110	XXX	On	GN				jisjk:259374		
 勤し	힘&AF@	M425			GN				jisjk:140765		
 勤ま	감당해 &A6@	M418			GN				jisjk:92143		
-勤ま	충분히 할 수 &HN@	M427	VMo		GN				jisjk:143202		
+勤ま	충분히 할 수 &HN@	M428	VMo		GN				jisjk:143202		
 勤め	근무	N110			GN				jisjk:7169		
 勤め	근무&AV@	M457			GN				jisjk:7170		
 勤め	종사&AV@	M447			GN				jisjk:7171		
@@ -195915,7 +195915,7 @@ ttt	ttt	K110			GN				jisjk:201744
 差押さえ	차압&AV@	M437			GN				jisjk:121004		
 差押さえ	압류	N110		Hd	GN				jisjk:185136		
 差挟	끼&AI@	M445			GN				jisjk:121300		
-差掛か	접어&L4@	M427	UMe		GN				jisjk:121021		
+差掛か	접어&L4@	M428	UMe		GN				jisjk:121021		
 差掛け	받쳐 &CJ@	M447			GN				jisjk:121044		
 差換え	갈아 &H5@	M437	VFdVCp		GN				jisjk:95190		
 差換え	바꾸어 끼워 &H5@	M437			GN				jisjk:95191		
@@ -203226,7 +203226,7 @@ ttt	ttt	K110			GN				jisjk:201744
 当て	&C5@	M447	VBp		GN				jisjk:138279		
 当てがはずれ	일이 어긋&A5@	M417			GN				jisjk:92324		
 当てこ	기대&AV@	M435			GN				jisjk:92325		
-当てこす	빈정거&AA@	M427			GN				jisjk:140256		
+当てこす	빈정거&AA@	M428			GN				jisjk:140256		
 当てこすり	빈정거림	N110	SFl		GN				jisjk:124583		
 当てさき	행선지	I110	VPl		GN				jisjk:64818		
 当てずっぽう	억측	I110			GN				jisjk:64819		
@@ -203252,7 +203252,7 @@ ttt	ttt	K110			GN				jisjk:201744
 当て外れ	기대 밖	I110			GN				jisjk:64827		
 当て字	취음자	I110	VSw		GN				jisjk:64828		
 当て嵌ま	들어&FB@	M418			GN				jisjk:92330		
-当て嵌ま	적합&AV@	M427			GN				jisjk:142774		
+当て嵌ま	적합&AV@	M428			GN				jisjk:142774		
 当て嵌め	적용시&AQ@	M437			GN				jisjk:92331		
 当て布	헝겊 조각	N110			GN				jisjk:227422		
 当て所	목적지	I110	VPlVTpUDr		GN				jisjk:64825		
@@ -215669,7 +215669,7 @@ ttt	ttt	K110			GN				jisjk:201744
 挟	사이에 &C7@	M435			GN				jisjk:95958		
 挟	가&AL@	M435	UFl		GN				jisjk:95959		
 挟	끼&AI@	M445			GN	1406	||1 &&3 S-1== "を" P-1== "2**" A-2== "QCT"	지명과 조사 を 뒤에서 挟를 끼우다로 고른다. (미발동: rare-context)	jisjk:121296		
-挟ま	끼&AJ@	M415			GN				jisjk:95960		
+挟ま	끼&AJ@	M418		Dx	GN				jisjk:95960		
 挟まれ	&A4@	M427			GN				jisjk:137882		
 挟まれ事故	끼이는 사고	N110			GN				jisjk:161630		
 挟み	끼우기	N110		Hd	GN				jisjk:249503		
@@ -262313,7 +262313,7 @@ ttt	ttt	K110			GN				jisjk:201744
 深刻になってまい	심각해&AL@	M427			GN				jisjk:136117		
 深刻に考えすぎ	지나치게 심각하게 생각&AV@	M447			GN				jisjk:148456		
 深刻に考え過ぎ	지나치게 심각하게 생각&AV@	M447			GN				jisjk:148455		
-深刻ぶ	심각한 체&AV@	M427			GN				jisjk:136802		
+深刻ぶ	심각한 체&AV@	M428			GN				jisjk:136802		
 深刻化	심각화	N110		Hd	GN				jisjk:192489		
 深刻化してい	심각화되고 &HN@	M427			GN				jisjk:136116		
 深刻小説	심각소설	N110	VBkVSw		GN				jisjk:236031		
@@ -281903,7 +281903,7 @@ ttt	ttt	K110			GN				jisjk:201744
 相互銀行	상호은행	N110	VMo		GN				jisjk:240029		
 相互防衛条約	상호방위조약	N110	VTw		GN				jisjk:240032		
 相井	소오이	N130	QPN	Wa	GN				jisjk:8358		
-相交わ	사&C1@	M420			GN				jisjk:137458		
+相交わ	사&C1@	M428			GN				jisjk:137458		
 相伝	상전	N110		Hd	GN				jisjk:200396		
 相伴	동반&AV@	M450			GN				jisjk:93409		
 相伴	동행	N110	VFdVMoVHn	Hd	GN				jisjk:191182		
@@ -292302,7 +292302,7 @@ ttt	ttt	K110			GN				jisjk:201744
 突如として	갑자기	E311			GN				jisjk:1569		
 突子	돌출 단자	N110			GN				jisjk:19540		
 突崩	무너뜨&AA@	M443			GN				jisjk:142371		
-突当た	부딪&AO@	M427			GN				jisjk:142290		
+突当た	부딪&AO@	M428			GN				jisjk:142290		
 突当たりの	막다른	E0H0			GN				jisjk:150321		
 突当部	맞닿는 부분	I110	VPl		GN				jisjk:66266		
 突抜	츠키누케	N130	QCTVPl		GN				jisjk:309283		
@@ -292526,8 +292526,8 @@ ttt	ttt	K110			GN				jisjk:201744
 立ちっぱなし	계속 선채	K110			GN				jisjk:264105		
 立ちつく	우두커니 서 &HN@	M423			GN				jisjk:262362		
 立ちどおし	계속 서 있음	N110			GN				jisjk:346804		
-立ちどま	멈춰 &AD@	M427			GN				jisjk:139671		
-立ちのぼ	피어 &E6@	M427			GN				jisjk:139690		
+立ちどま	멈춰 &AD@	M428			GN				jisjk:139671		
+立ちのぼ	피어 &E6@	M428			GN				jisjk:139690		
 立ちはだか	가로&FA@	M428	VTp		GN				jisjk:140393		
 立ちふさが	가로막고 &AD@	M428			GN				jisjk:140396		
 立ちん坊	내내 서 있음	N110			GN				jisjk:241448		
@@ -292538,7 +292538,7 @@ ttt	ttt	K110			GN				jisjk:201744
 立ち上がり	첫 시작	N110			GN				jisjk:153054		
 立ち上がりと立ち下がり	상승과 하강	N110			GN				jisjk:151339		
 立ち上がりエッジ	상승 모서리	N110			IT				jisjk:261377		
-立ち上がり硬さがあ	초반에 어려움이 &HN@	M427			GN				jisjk:138182		
+立ち上がり硬さがあ	초반에 어려움이 &HN@	M428			GN				jisjk:138182		
 立ち上げ	시작&AV@	M437			GN				jisjk:138184		
 立ち上げ	시작	N110			GN				jisjk:340200		
 立ち上げ部	입상부	I110			GN				jisjk:68234		
@@ -295232,7 +295232,7 @@ ttt	ttt	K110			GN				jisjk:201744
 答え	대답&AV@	M457	XXX	Rc	GN				jisjk:120012		
 答えてや	대답하여 &CJ@	M448			GN				jisjk:141853		
 答えは	대답은	K110		Nn	GN				jisjk:264573		
-答えまつ	대답해 드&AA@	M447			GN				jisjk:119998		
+答えまつ	대답해 드&AA@	M448			GN				jisjk:119998		
 答ノロ温泉	우케노쿠치온센	I110	VPl		GN				jisjk:64786		
 答信	답신	N110	VCmVSw	Hd	GN				jisjk:18695		
 答島	고타지마	N110	VPl		GN				jisjk:18690		
@@ -301989,7 +301989,7 @@ ttt	ttt	K110			GN				jisjk:201744
 繁	끓임$FA@	H7U0			GN				jisjk:5604		
 繁	시게루	N130	QPN	Wb	GN				jisjk:116165		
 繁	우거&AL@	M418			GN				jisjk:374998		
-繁が	연결&C6@	M427			GN				jisjk:142116		
+繁が	연결&C6@	M428			GN				jisjk:142116		
 繁る	시게루	N130	QPN	Wb	GN				jisjk:267620		
 繁三郎	시게사부로	I110	QPN		GN				jisjk:70033		
 繁二	시게지	N130	QPN		GN				jisjk:99889		

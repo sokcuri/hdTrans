@@ -174,6 +174,14 @@ constexpr ConstraintRule kRules[] = {
      "수와 조수사 바로 뒤에서 한자가 이어지는 の中는 중(가운데)이 아니라 の와 中으로 시작하는 명사 (7体の中鬼 7체 중귀 → 7체의 중귀)", {}},
     {"name-after-numeral", ConstraintWord::Kanji, "", ConstraintContext::NameAfterNumeral, ConstraintReject::Word,
      "수 바로 뒤에서 이름으로만 읽히고 조수사로 시작하는 한자 낱말은 쓰지 않고 그 조수사로 읽음 (１日村に 1히무라에 → 1일 마을에). 第5水陸両用軍団은 그대로", {}},
+    {"gen-period-without-number", ConstraintWord::Source, "限", ConstraintContext::NotAfterQuantity, ConstraintReject::Target,
+     "수 뒤가 아닌 限은 교시가 아님 (限なく 교시 없이 → 한없이, 限の字). ３限, 三限目는 그대로 교시", "교시"},
+    {"gen-me-period-without-number", ConstraintWord::Source, "限目", ConstraintContext::NotAfterQuantity, ConstraintReject::Target,
+     "수 뒤가 아닌 限目는 교시가 아님", "교시"},
+    {"teru-after-stem", ConstraintWord::Source, "て", ConstraintContext::TeruAfterStem, ConstraintReject::Verbs,
+     "동사 어간이나 가나 낱말 뒤의 てる는 照る가 아니라 ている를 줄인 てる (撃たれてるとこ 격늘어뜨림 비치는 곳 → 총에 맞고 있는 곳). 日がてる는 그대로", {}},
+    {"counter-cuts-word", ConstraintWord::Kanji, "", ConstraintContext::CounterCutsWord, ConstraintReject::Word,
+     "수 바로 뒤에서 조수사로 시작하고 그 뒤가 더 긴 사전 낱말의 머리인 한자 낱말은 쓰지 않고 그 조수사로 읽음 (2500人相手 2500인상손 → 2500명 상대). 一人相撲, 三日月은 그대로", {}},
     {"sonoba-before-sho", ConstraintWord::Source, "その場", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "所 앞의 その場는 그 자리가 아니라 その와 場所 (その場所 그 자리소 → 그 장소)", {}, "所"},
     {"ni-before-shimau", ConstraintWord::EndsInSource, "に", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
@@ -652,6 +660,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                    return c.source.size() < source.size() && source.starts_with(c.source) && c.codes != nullptr &&
                           c.codes->gram.HasCode("Ct");
                });
+    case ConstraintContext::TeruAfterStem:  // and Worker::NotAfterNoun, in ApplyConstraints
+        return after.starts_with("る");
+    case ConstraintContext::CounterCutsWord:  // and Worker::CounterCutsWord, in ApplyConstraints
+        return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
     case ConstraintContext::BeforeTopicTte:  // and Worker::TeAspectAt, in ApplyConstraints
         return after.starts_with("って") && adjacent != "を";
     case ConstraintContext::BeforeListed:
@@ -1018,6 +1030,16 @@ bool Worker::NotAfterNoun(std::string_view head) {
     return NameClassOf(last) != kClassKatakana && !text::IsKanji(text::DecodeRune(last).cp);
 }
 
+bool Worker::TeStemBefore(std::string_view head) {
+    if (!NotAfterNoun(head)) return false;
+    // A continuative ends in a kanji or an i- or e-row kana; a particle (日が, 彼女は) ends no stem, and a っ or
+    // the つ an old spelling writes for it may close a verb the dictionary lacks (過疎っ, 待つ).
+    const std::string_view last = LastChar(head);
+    if (text::IsKanji(text::DecodeRune(last).cp)) return true;
+    if (std::u32string_view(U"がはもをにへとでやのよねかなさ").find(text::DecodeRune(last).cp) != std::u32string_view::npos) return false;
+    return std::u32string_view(U"いきぎしじちぢにひびぴみりえけげせぜてでねへべぺめれ").find(text::DecodeRune(last).cp) != std::u32string_view::npos;
+}
+
 bool Worker::AfterNoun(std::string_view lead) {
     if (lead.empty()) return false;
     const std::string_view last = LastChar(lead);
@@ -1091,6 +1113,26 @@ bool Worker::ParticleSplit(std::string_view head, std::string_view source, std::
     return false;
 }
 
+bool Worker::CounterCutsWord(std::string_view source, std::string_view query, const std::vector<dict::Candidate>& list) {
+    if (text::RuneCount(source) < 2 || !AllOfClass(source, kClassKanji)) return false;
+    std::size_t counter = 0;
+    for (const dict::Candidate& c : list) {
+        if (c.codes == nullptr || !c.codes->gram.HasCode("Ct")) continue;
+        if (c.source == source) return false;  // a counter word itself (三日月 stays)
+        if (c.source.size() < source.size() && source.starts_with(c.source)) counter = std::max(counter, c.source.size());
+    }
+    if (counter == 0) return false;
+    const std::string_view rest = query.substr(counter);
+    // A noun the count makes a Sino-Korean compound with keeps the word the dictionary reads (4人家族 4인가족).
+    if (dict::StartsWithMember(HDTRANS_CLASS("noun.count-compound"), rest) > 0) return false;
+    const std::size_t inside = text::RuneCount(source.substr(counter));
+    for (const dict::Candidate& c : snapshot.GetWordInfo(rest.substr(0, std::min<std::size_t>(rest.size(), 24)), dict::LookupMode::General, lookupContext).list) {
+        if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->part.ClassDigit() != '1') continue;
+        if (rest.starts_with(c.source) && text::RuneCount(c.source) > inside && AllOfClass(c.source, kClassKanji)) return true;
+    }
+    return false;
+}
+
 // Text path, mode 0. For each rule and each source of the candidates that the rule's word
 // and context fit, the rejected candidates leave the list; a name made from a person
 // reading takes the place of the first of them.
@@ -1131,6 +1173,12 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             if (!first ||
                 (rule.context == ConstraintContext::NotAfterNoun       ? !NotAfterNoun(head)
                  : rule.context == ConstraintContext::ParticleSplit    ? !ParticleSplit(head, source, query, list)
+                 : rule.context == ConstraintContext::TeruAfterStem
+                     ? !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead) ||
+                           !TeStemBefore(head)
+                 : rule.context == ConstraintContext::CounterCutsWord
+                     ? !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead) ||
+                           !CounterCutsWord(source, query, list)
                  : rule.context == ConstraintContext::BeforeTopicTte
                      ? !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead) ||
                            TeAspectAt(after.substr(std::string_view("って").size()))

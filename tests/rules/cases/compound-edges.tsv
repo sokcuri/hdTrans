@@ -1,0 +1,38 @@
+# 규칙: LEX-8166
+rule	input	expected	kind	layer
+lexical:compounds	お味噌汁とお新香、ありがとうございました	된장국과 채소 절임, 감사합니다	fix	lookup
+lexical:compounds	１日をかけ、全校生徒による投票が行われる。	1일을 걸쳐, 전교생에 의한 투표를 한다.	fix	lookup
+lexical:compounds	さすがは現生徒会長。	역시 현학생회장.	fix	lookup
+lexical:compounds	胸の高鳴りを覚えた	가슴의 두근거림을 기억했다	fix	lookup
+lexical:compounds	相手の選対事務所を潰そうとする	상대의 선거 대책 사무소를 부수려고 한다	fix	lookup
+lexical:compounds	白崎の立候補届を提出してから	시라사키의 입후보 신청서를 제출하고 나서	fix	lookup
+lexical:compounds	この性悪女っ	이 못된 여자	fix	lookup
+lexical:compounds	次の生徒会長選に立候補する	다음 학생회장 선거에 입후보한다	fix	lookup
+lexical:compounds	全校生徒会	전교 학생회	fix	lookup
+lexical:compounds	味噌汁を飲む	된장국을 먹는다	keep	lookup
+lexical:compounds	全校生が集まった	전교생이 모였다	keep	lookup
+lexical:compounds	生徒会長の手伝い	has:학생회장의	keep	lookup
+lexical:compounds	性善説信者と性悪説信者の言い合いだった。	성선설 신자와 성악설 신자의 말시비였다.	keep	lookup
+lexical:compounds	世襲に近い形で生徒会長に選ばれた。	세습에 가까운 형태로 학생회장으로 선택되었다.	keep	lookup
+lexical:compounds	胸が高鳴った	가슴이 두근거렸다	keep	lookup
+lexical:compounds	立候補する	입후보한다	keep	lookup
+constraint:counter-cuts-word	２５００人相手の給仕をする	2500명 상대의 시중을 한다	fix	lookup
+constraint:counter-cuts-word	３人相手に戦った	3명 상대에게 싸웠다	fix	lookup
+constraint:counter-cuts-word	俺は『ｐｓｑ』を２台所持している。	has:2대 소지	fix	lookup
+constraint:counter-cuts-word	たった二人相手に	단 두 사람 상대에게	keep	lookup
+constraint:counter-cuts-word	４人家族です	4인가족입니다	keep	lookup
+constraint:counter-cuts-word	３人家族で暮らす	has:3인가족	keep	lookup
+constraint:counter-cuts-word	三日月	미카즈키	keep	lookup
+constraint:counter-cuts-word	３人組	3인조	keep	lookup
+constraint:counter-cuts-word	一人相撲	독씨름	keep	lookup
+constraint:counter-cuts-word	１０人分	10인분	keep	lookup
+constraint:counter-cuts-word	３日間	3일간	keep	lookup
+lexical:toki-ending	スイッチの入った時限爆弾を	스위치가 들어간 시한폭탄을	fix	lookup
+lexical:toki-ending	代々受け継いできた時限爆弾である。	대대로 계승해 온 시한폭탄이다.	fix	lookup
+lexical:toki-ending	あるとき人の声が	어느 날 사람의 목소리가	keep	lookup
+lexical:toki-ending	帰った時間	돌아간 시간	keep	lookup
+lexical:toki-ending	来た時は	왔을 때는	keep	lookup
+lexical:toki-ending	その時人が来た	has:그 때	keep	lookup
+lexical:toki-ending	会った時に	만났을 때	keep	lookup
+lexical:compounds	生徒会長い会議だった	학생회 긴 회의였다	keep	lookup
+lexical:compounds	生徒会長引くね	has:오래 끌	keep	lookup

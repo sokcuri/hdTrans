@@ -113,6 +113,11 @@ enum class ConstraintContext : uint8_t {
                             // (7体の中鬼: の and the noun 中鬼, not の中; 8体の中一つ stays)
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
+    TeruAfterStem,      // る follows, and in its token the word is right after the continuative of a verb (Worker::TeStemBefore:
+                        // 撃たれ|てる; not 日が|てる, nor 過疎っ|てる, whose verb the dictionary may lack)
+    CounterCutsWord,    // right after a numeral, a kanji word that starts with a counter (Ct) and is none itself, whose
+                        // kana-free rest after the counter starts a dictionary word that runs past its end
+                        // (2500人相手: the counter 人 and 相手, not 人相 and 手)
     BeforeTopicTte,     // って follows, を is not right before the word, and the text after the って starts no
                         // ている aspect: an い or none and then a member of contraction.te-iru that no longer
                         // kana word of the dictionary spans (この曲って: the topic; not 道を曲って, 曲ってる, 曲っていた;

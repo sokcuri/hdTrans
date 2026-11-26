@@ -406,10 +406,16 @@ private:
     // Whether lead ends in a noun: the ん of a nominalizer, or a word with a kanji or katakana that ends
     // there and has a noun sense or is not in the dictionary (ConstraintContext::AfterNounBeforeListed).
     bool AfterNoun(std::string_view lead);
+    // Whether head ends in the continuative of a verb that a contracted てる follows (撃たれ, 見; not 日が, 過疎っ)
+    // (ConstraintContext::TeruAfterStem).
+    bool TeStemBefore(std::string_view head);
     // Whether the hiragana noun source at the start of query, after head, is a particle and the start
     // of a longer word (ConstraintContext::ParticleSplit).
     bool ParticleSplit(std::string_view head, std::string_view source, std::string_view query,
                        const std::vector<dict::Candidate>& list);
+    // Whether the kanji word source at the start of query starts with a counter and cuts a longer word that starts
+    // after it (ConstraintContext::CounterCutsWord).
+    bool CounterCutsWord(std::string_view source, std::string_view query, const std::vector<dict::Candidate>& list);
     // Whether rest, the text after a て form's って, starts the ている aspect (ConstraintContext::BeforeTopicTte).
     bool TeAspectAt(std::string_view rest);
     void DropBoundUtterances(Lookup& l, std::string_view query);

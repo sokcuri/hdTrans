@@ -1,0 +1,26 @@
+# 규칙: LEX-8172
+rule	input	expected	kind	layer
+phrase:tsu-wake	「つーわけで、小太刀、一緒に弁解を頼む」	「그런 이유로, 작은 칼, 함께 변명을 부탁해」	fix	fixed
+phrase:tsu-wake	つうわけで、よろしく	그런 이유로, 잘 부탁드립니다	fix	fixed
+phrase:tsu-wake	つーことで、解散	그런 이유로, 해산	fix	fixed
+phrase:tsu-wake	つーか、なんで	그보다, 왜	keep	fixed
+phrase:tsu-wake	まあ、そういうわけで	뭐, 그런 이유로	keep	fixed
+lexical:attaka	「あー、１回あったかな？」	has:있었는지	fix	lookup
+lexical:attaka	「うーん、何かあったかなぁ」	「으음, 무슨 일 있었는지」	fix	lookup
+lexical:attaka	あったかな布団	따뜻한 이불	keep	lookup
+lexical:attaka	あったかなスープ	따뜻한 스프	keep	lookup
+lexical:attaka	あったかい部屋	따뜻한 방	keep	lookup
+lexical:attaka	あったかくして寝ろ	따뜻하게 해 자라	keep	lookup
+lexical:attaka	あったかさが残る	따뜻함이 남는다	keep	lookup
+lexical:attaka	あったかどうか	있었는지 어떠했는지	keep	lookup
+lexical:attaka	あったから	있었으니까	keep	lookup
+lexical:n-ru-to	心配すんなと目で言っていた。	걱정하지 말라고 눈으로 말했다.	fix	lookup
+lexical:n-ru-to	「怪我すんなとは言わん。」	「다치지 말라고는 말하지 않아.」	fix	lookup
+lexical:n-ru-to	見んなと言った	보지 말라고 했다	fix	lookup
+lexical:n-ru-to	心配すんな	걱정하지 마	keep	lookup
+lexical:n-ru-to	こんなところで	이런 곳에서	keep	lookup
+lexical:n-ru-to	みんなと遊ぶ	모두와 논다	keep	lookup
+lexical:n-ru-to	そんなとき	그럴 때	keep	lookup
+lexical:n-ru-to	すんなり	순조롭게	keep	lookup
+phrase:tsu-wake	つーわけでもない	has:그런 것도 아니다	fix	fixed
+phrase:tsu-wake	つーわけじゃないけど	has:그런 것이 아닌데	fix	fixed

@@ -314,7 +314,11 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         const std::string_view entry = Conjugation(kind, branch);
         const bool contractedConditional = kind == 9 && branch == 3 && Starts(tail, "すりゃ");
         const bool shortCausative = branch == 2 && ShortCausative(kind, entry, tail);
-        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional && !shortCausative)) continue;
+        // The passive of する written せられ (察せられる, 愛せられた) takes the width of its table cell.
+        const bool classicalPassive = kind == 9 && branch == 1 && Starts(tail, "せられ");
+        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional && !shortCausative && !classicalPassive)) {
+            continue;
+        }
         // A bare ichidan stem is no form the quoting って or と follows (行けって, 言えと are the
         // godan imperatives 行け, 言え, not potential stems); と after it only begins the
         // ておく contraction (食べとく, 食べとけ, 食べといて, 食べとかない, 食べとこう, 食べとった).
