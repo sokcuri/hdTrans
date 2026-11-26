@@ -1620,6 +1620,11 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     const bool runStart = IsHiraganaRune(r) && !IsHiraganaRune(prev) && prev != U'ー' && prev != U'～';
     afterParticle = afterParticle && IsHiraganaRune(r);
     afterWord = afterWord && IsHiraganaRune(r) && !runStart && !afterParticle;
+    // The conditional たら, だら or れば of a predicate ends a word as one in hiragana does (来たらどーんと,
+    // 見ればばーんと): an ono sound may start after it as WordStartsSound allows.
+    afterWord = afterWord || (IsHiraganaRune(r) && !runStart && !afterParticle && p >= 3 &&
+                              ((prev == U'ら' && In(rs[p - 2], U"ただ")) || (prev == U'ば' && rs[p - 2] == U'れ')) &&
+                              (IsKanjiRune(rs[p - 3]) || IsHiraganaRune(rs[p - 3])));
     // After the て form of a verb only a phrase of phrases.tsv that closes the clause starts (騒いで
     // どうした; spec LEX-4825).
     // て after a kanji or kana, or で after the ん or い of a godan て form (騒いで, 読んで; not ままで, それで).

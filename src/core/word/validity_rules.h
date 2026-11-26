@@ -7,7 +7,8 @@ namespace hdTrans::word {
 // A rule applies to a word of class sourceClass whose text equals source and that is
 // followed by a word of class followClass; a source starting with "XX" applies to every
 // word of sourceClass whatever follows. first lists ';' or ' ' separated tokens:
-// "text" rejects when the following text starts with text, "text[k]" when the
+// "text" rejects when the following text starts with text, "text$" when it is text and the token ends
+// there, "text[k]" when the
 // dictionary has a kind-k entry for text + the following text. Classes are the
 // characters '1'..'8' and 'X'.
 struct ValidityRule {

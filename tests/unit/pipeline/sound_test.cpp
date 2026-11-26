@@ -468,6 +468,26 @@ HD_TEST(pipeline_sound_doubled_kana_verb) {
     HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
+// After the conditional たら, だら or れば of a predicate an ono sound of three kana or more that ends in
+// と or holds ー starts as after a hiragana word; a question word there stays.
+HD_TEST(pipeline_sound_after_conditional) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "来\t오\tM41;\t1\n"
+                                     "見\t보\tM417\t2\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"来たらどーんと行こう", "来たら콰앙 行こう"},
+        {"見ればばーんと", "見れば쾅"},
+        {"見たらどうだ", "見たらどうだ"},
+        {"すればどうなる", "すればどうなる"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The という that quotes a sound before a word in kanji or katakana reads as する, joined to a
 // doubled mimetic and apart from other sounds, also after a key that ends in と; elsewhere
 // という follows the sound with no space and takes back the と of such a key, and another verb

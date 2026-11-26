@@ -35,7 +35,7 @@ normalize:kansai-ee	その調子で ココーンと 点も 取ってくれて �
 output:late-casual	「かといって、汐美祭が終わってから選挙の下地を作り初めても間に合わないだろう」	「그렇다고 해서, 시오미제가 끝나고 나서 선거의 기초를 만들어 처음도 늦을 거야」	fix	rewrites
 output:late-casual	「少しでもトラブルがあったら間に合わないですよね？	「조금이라도 트러블이 있으면 늦죠?	fix	rewrites
 output:late-casual	「数が多くて対応が間に合わない。	has:대응이 늦는다.	fix	rewrites
-output:late-casual	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4한으로 늦네」	fix	rewrites
+output:late-casual	「おっと、そろそろ移動しないと４限に間に合わないな」	「어이쿠, 슬슬 이동하지 않으면 4교시로 늦네」	fix	rewrites
 output:late-casual	「間に合わないか」	「늦는가」	fix	rewrites
 grammar:result-suru-past	失敗してるんだから 学習しなきゃね｡	실패했으니까 학습해야지.	fix	conjugation
 grammar:result-suru-past	私…何度も同じような失敗してるのに	나…몇 번이나 같은 실패했는데	fix	conjugation

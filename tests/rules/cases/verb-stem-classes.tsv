@@ -1,0 +1,80 @@
+# 규칙: LEX-8165, LEX-8171
+rule	input	expected	kind	layer
+lexical:verb-class	乳首は人差し指と中指の間に挟まった。	유두는 집게 손가락과 중지 사이에 끼였다.	fix	lookup
+lexical:verb-class	布団が畳まった	이불이 다다미 기다렸다	fix	lookup
+lexical:verb-class	彼は立ちどまった	그는 멈춰 섰다	fix	lookup
+lexical:verb-class	ドアに突当たった	문에 부딪쳤다	fix	lookup
+lexical:verb-class	煙が立ちのぼった	연기가 피어 올랐다	fix	lookup
+lexical:verb-class	紐が繁がった	끈이 연결되었다	fix	lookup
+lexical:verb-class	指が挟まらない	손가락이 끼이지 않는다	fix	lookup
+lexical:verb-class	歯に何か挟まってる	이빨에 뭔가 끼여 있다	fix	lookup
+lexical:verb-class	挟まれば痛い	끼이면 아프다	fix	lookup
+lexical:verb-class	口を挟まない	말참견하지 않는다	keep	lookup
+lexical:verb-class	手を挟まれてしまった	has:손을	keep	lookup
+lexical:verb-class	車が止まった	차가 멈추었다	keep	lookup
+lexical:verb-class	畳まれた布団	접어진 이불	keep	lookup
+lexical:verb-class	折りたたまれた紙	꺾어 접어진 종이	keep	lookup
+lexical:verb-class	なんとかとまれたけど	어떻게든 멈출 수 있었지만	keep	lookup
+lexical:verb-class	事実を偽って	사실을 속여	keep	lookup
+lexical:verb-class	敵を脅かす	적을 위협한다	keep	lookup
+lexical:verb-class	もう止まれない	이제 멈출 수 없다	keep	lookup
+lexical:verb-stems	佳奈すけはそっと手を伸ばし、御園のほっぺたを突っつく。	카나스케는 살며시 손을 뻗어, 미소노의 뺨을 쿡쿡 찌른다.	fix	lookup
+lexical:verb-stems	前に寝てた時は、佳奈すけが突っついていたっけか。	전에 자고 있었을 때는, 카나스케가 쿡쿡 찌르고 있었던가.	fix	lookup
+lexical:verb-stems	苛つくことは滅多にない性格なのだが。	has:짜증나는	fix	lookup
+lexical:verb-stems	鈴木は自然の情景を詠んだものが多い。	스즈키는 자연의 정경을 읊은 것이 많다.	fix	lookup
+lexical:verb-stems	白崎がしょげた。	시라사키가 풀이 죽었다.	fix	lookup
+lexical:verb-stems	しょげた顔でぺこりとお辞儀する。	풀이 죽은 얼굴로 움푹 인사한다.	fix	lookup
+lexical:verb-stems	ちゃっちゃと終わらすから	후딱 끝내니까	fix	lookup
+lexical:verb-stems	背中を震わす	등을 떤다	fix	lookup
+lexical:verb-stems	傷跡を深くえぐられた	has:도려내	fix	lookup
+lexical:verb-stems	壊れるまで止らない兵士のようなものだ。	망가질 때까지 멈추지 않는 병사와 같은 것이다.	fix	lookup
+lexical:verb-stems	手が止った	손이 멈추었다	fix	lookup
+lexical:verb-stems	荷物を預った	짐을 맡았다	fix	lookup
+lexical:verb-stems	彼を励した	그를 격려했다	fix	lookup
+lexical:verb-stems	金が貯った	돈이 모였다	fix	lookup
+lexical:verb-stems	雨が止んだ	비가 그쳤다	keep	lookup
+lexical:verb-stems	雨が止まない	비가 그치지 않는다	keep	lookup
+lexical:verb-stems	彼を止めた	그를 막았다	keep	lookup
+lexical:verb-stems	えぐい味	칼칼한 맛	keep	lookup
+lexical:verb-stems	「きっと、事故ってわけじゃないんだよね？」	「분명, 사고라는 게 아니야?」	keep	lookup
+lexical:verb-stems	事故の原因	사고의 원인	keep	lookup
+lexical:verb-stems	詠唱する	영창한다	keep	lookup
+lexical:verb-stems	終わらない	끝나지 않는다	keep	lookup
+lexical:verb-stems	声を震わせた	목소리를 떨었다	keep	lookup
+lexical:verb-stems	荷物を預かる	짐을 맡는다	keep	lookup
+lexical:verb-stems	突っ込む	돌진한다	keep	lookup
+constraint:teru-after-stem	下手すりゃ撃たれてるとこよ	has:총에 맞	fix	lookup
+constraint:teru-after-stem	撃たれてるとこだ	has:총에 맞	fix	lookup
+constraint:teru-after-stem	今やっと分かった	지금 드디어 알았다	fix	lookup
+constraint:teru-after-stem	撃たれてる。	총에 맞고 있다.	keep	lookup
+constraint:teru-after-stem	日が照る	날이 비친다	keep	lookup
+constraint:teru-after-stem	日がてる。	날이 비친다.	keep	lookup
+constraint:teru-after-stem	月がてる夜	달이 비치는 밤	keep	lookup
+constraint:teru-after-stem	太陽がてる	태양이 비친다	keep	lookup
+constraint:teru-after-stem	彼女はてるよ	has:비쳐	keep	lookup
+constraint:teru-after-stem	照れてる	쑥스러워하고 있다	keep	lookup
+constraint:teru-after-stem	倒されてるとこよ	lacks:비치	keep	lookup
+constraint:teru-after-stem	早朝だし過疎ってるかと思ったら皆待ってたんだね	has:나 했더니	keep	lookup
+constraint:teru-after-stem	マッテテネ	has:기다리	keep	lookup
+constraint:teru-after-stem	普段着てる服で	has:옷으로	keep	lookup
+lexical:past-ka-adjective	御園は動物などを詠んだかわいい系。	has:읊은 귀여운	fix	lookup
+lexical:past-ka-adjective	読んだかわいい本	has:읽은 귀여운	fix	lookup
+lexical:past-ka-adjective	誰が読んだか分からない	누가 읽었는지 모른다	keep	lookup
+lexical:past-ka-adjective	見たかな	has:보았	keep	lookup
+lexical:past-ka-adjective	あれは何だかわからない	lacks:귀	keep	lookup
+analysis:sahen-serare	口ぶりから察せられた。	말투로부터 헤아려졌다.	fix	lookup
+analysis:sahen-serare	察せられる	헤아려진다	fix	lookup
+analysis:sahen-serare	神に愛せられた	has:사랑받았다	fix	lookup
+analysis:sahen-serare	彼に察せられないように	그에게 헤아려지지 않도록	fix	lookup
+analysis:sahen-serare	気持ちを察した	기분을 헤아렸다	keep	lookup
+analysis:sahen-serare	重い刑に処せられた	무거운 형에 처해졌다	keep	lookup
+analysis:sahen-serare	食べさせられた	먹게 되었다	keep	lookup
+analysis:sahen-serare	見せられた	has:보게	keep	lookup
+sound:after-conditional	いやいや、ここまで来たらどーんと行こう。	아니아니, 여기까지 오면 콰앙 가자.	fix	fixed
+sound:after-conditional	見ればばーんと	보면 쾅	fix	fixed
+sound:after-conditional	てれてれと頭をかいている。	쑥스러워 머리를 긁적이고 있다.	fix	fixed
+sound:after-conditional	見たらどうだ	보면 어때	keep	fixed
+sound:after-conditional	すればどうなる	하면 어떻게 된다	keep	fixed
+sound:after-conditional	ここまで来たらどかんと行こう	여기까지 오면 쾅 가자	keep	fixed
+sound:after-conditional	来たらどうする	오면 어떻게 한다	keep	fixed
+lexical:verb-stems	えぐれた地面	has:도려내진	fix	lookup

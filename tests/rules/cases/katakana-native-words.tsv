@@ -1,0 +1,24 @@
+# 규칙: LEX-8170, LEX-5
+rule	input	expected	kind	layer
+lexical:katakana	ソイツすごい	그 녀석 대단해	fix	lookup
+lexical:katakana	ソイツらは	그 녀석들은	fix	lookup
+lexical:katakana	とてもウブな子だ	무척 순진한 아이다	fix	lookup
+lexical:katakana	こいつでトドメだッ	이 녀석으로 결정타다	fix	lookup
+lexical:katakana	一応のケジメはついた	has:매듭은	fix	lookup
+lexical:katakana	俺のカノジョ	내 여자 친구	fix	lookup
+lexical:katakana	カノジョが言った	그녀가 말했다	fix	lookup
+lexical:katakana	カノジョたち	그녀들	fix	lookup
+lexical:katakana	カノジョができた	여자 친구가 생겼다	fix	lookup
+lexical:katakana	ムリヤリねじ込んだ	억지로 쑤셔 넣었다	fix	lookup
+lexical:katakana	キザな台詞	느끼한 대사	fix	lookup
+lexical:katakana	指先にバンソーコを	손끝에 반창고를	fix	lookup
+lexical:katakana	マズったな	실수했군	fix	lookup
+lexical:katakana	ダジャレを言う	has:말장난을	fix	lookup
+lexical:katakana	ベタな展開	뻔한 전개	keep	lookup
+lexical:katakana	ベタベタする	끈적끈적한다	keep	lookup
+lexical:katakana	ベタぼれしている。	홀딱 반하고 있다.	keep	lookup
+lexical:katakana	イヤホン	이어 폰	keep	lookup
+lexical:katakana	イライラする	초조해한다	keep	lookup
+lexical:katakana	マズいな	큰일이네	keep	lookup
+lexical:katakana	ガチン	딱	keep	lookup
+lexical:katakana	そいつ	그 녀석	keep	lookup

@@ -1498,9 +1498,11 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
     // An ending that ends in a kanji (度, 際, 他, 暇, 訳 after a verb) gives that kanji to a common noun of the dictionary
     // that starts with it and reaches at least as far as the kanji and the word after it (辞める度胸 그만둘 배짱, 戦う際限,
     // 見る他人; spec LEX-4982).
-    // Not 時, which also stands for the とき of an adverb (あるとき人の 어느 날 사람의, not 時人).
-    if (!ending.empty() && !after.empty() && text::IsKanji(DecodeLastRune(ending).cp) && DecodeLastRune(ending).cp != U'時') {
+    // 時, which also stands for the とき of an adverb (あるとき人の 어느 날 사람의, not 時人), gives itself only to a
+    // noun of three kanji or more (入った時限爆弾 들어간 시한폭탄).
+    if (!ending.empty() && !after.empty() && text::IsKanji(DecodeLastRune(ending).cp)) {
         const text::Rune kanji = DecodeLastRune(ending);
+        const std::size_t shortest = kanji.cp == U'時' ? 3 : 2;
         const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
         std::size_t word = 0;
         for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
@@ -1511,8 +1513,8 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
         for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
             const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
             const std::size_t n = text::RuneCount(c.source);
-            if ((c.user == nullptr || !c.user->nameLayer) && part.starts_with("N1") && part.substr(2, 1) != "3" && n >= 2 &&
-                n >= 1 + word) {
+            if ((c.user == nullptr || !c.user->nameLayer) && part.starts_with("N1") && part.substr(2, 1) != "3" &&
+                n >= shortest && n >= 1 + word) {
                 return true;
             }
         }
@@ -1555,6 +1557,25 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
             const std::size_t n = text::RuneCount(c.source);
             const bool verbOrAdverb = (At(part, 0) == 'M' && At(part, 1) == '4') || At(part, 0) == 'E';
             if ((c.user == nullptr || !c.user->nameLayer) && verbOrAdverb && n >= 2 && n >= word + 1) return true;
+        }
+    }
+    // An ending in か after a past gives it to an adjective that starts with it and reaches further than the words
+    // after the ending do (詠んだかわいい系: 詠んだ + かわいい, 見たかっこいい人).
+    if (const std::string past = std::string(before) + std::string(ending);
+        (past.ends_with("たか") || past.ends_with("だか")) && ending.ends_with("か") && !after.empty()) {
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query = "か";
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            if ((c.user == nullptr || !c.user->nameLayer) && At(part, 0) == 'H' && text::RuneCount(c.source) >= 3 &&
+                text::RuneCount(c.source) >= word + 2) {
+                return true;
+            }
         }
     }
     // An ending in か gives it to かなり (してしまうかなり: してしまう + かなり).
@@ -1657,6 +1678,10 @@ bool Worker::MatchDictionary(std::string_view following, std::string_view source
             list = sep == std::string_view::npos ? std::string_view() : list.substr(sep + 1);
             if (token.empty()) continue;
             const std::size_t open = token.find('[');
+            if (token.ends_with('$')) {  // the whole rest of the token
+                if (following == token.substr(0, token.size() - 1)) return false;
+                continue;
+            }
             if (open == std::string_view::npos || token.find(']') == std::string_view::npos) {
                 if (following.starts_with(token)) return false;
                 continue;
