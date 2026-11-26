@@ -19,7 +19,7 @@ normalize:adjective-su	超不公平じゃないすかｗ」	매우 불공평하�
 normalize:adjective-su	なんかジブリっぽいすね。	뭔가 지브리 같네요.	fix	normalize
 normalize:adjective-su	「ゆきさん、いいすか」	「유키 씨, 좋은가요」	fix	normalize
 normalize:adjective-su	「写真だけでも、いいすか？	「사진만으로도, 좋은가요?	fix	normalize
-normalize:adjective-su	このいす、座っていい？	이 의자, 앉아 있고?	keep	normalize
+normalize:adjective-su	このいす、座っていい？	이 의자, 앉아도 돼?	keep	normalize
 normalize:adjective-su	そのいすよ	그 의자야	keep	normalize
 normalize:adjective-su	赤いいすね	붉은 의자네	keep	normalize
 normalize:adjective-su	古いいすか	낡은 의자인가	keep	normalize

@@ -1,4 +1,4 @@
-# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46, GRM-3400
+# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46, GRM-3400, GRM-8100, GRM-8101, GRM-8102
 rule	input	expected	kind	layer
 verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
 verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
@@ -119,3 +119,26 @@ cx:partial-negation:10	必ずしも正しくない。	has:올바르지는 않다
 cx:partial-negation:10	必ずしも勝てない。	has:이길 수는 없다	fix	rewrites
 cx:partial-negation:40	必ずしも悪人ではない。	has:악인은 아니다	fix	rewrites
 cx:partial-negation:20	必ずしも成功しません。	has:성공하지는 않습니다	fix	rewrites
+lookup:lone-iru	「田中は何かない？」	has:뭔가 없어	fix	lookup
+lookup:lone-iru	「今は相手してる暇ないんだよ」	has:없어	fix	lookup
+lookup:lone-iru	「誰かいる？」	has:누군가 있어	keep	lookup
+lookup:lone-iru	何人かいました	has:있었습니다	keep	lookup
+cx:potential-neg-next:10	そもそも、冷静に判断できてない。	has:판단할 수 없었다	fix	rewrites
+cx:potential-neg-next:30	同時に、俺も肉に手が出せなくなった。	has:댈 수 없게 되었다	fix	rewrites
+cx:potential-neg-next:40	断りきれなくなる気持ちはよくわかった。	has:거절할 수 없게	fix	rewrites
+cx:potential-neg-next:10	「なんで、そんな当たり前のことができないのよっ！」	has:당연한 걸 할 수 없어	fix	rewrites
+cx:potential-neg-next:10	「でも、それくらいできるんじゃないかな」	has:할 수 있지 않을까	keep	rewrites
+cx:potential-neg-next:30	動けなくなった	has:움직일 수 없게	keep	rewrites
+normalize:casual-nee	「油売ってねえで、さっさとやれ」	has:보내지 않고	fix	normalize
+normalize:casual-nee	「取れねーじゃねぇか」	has:잡히지 않잖아	fix	normalize
+normalize:casual-nee	「頑張ってねぇ」	lacks:않	keep	normalize
+normalize:casual-nee	「知らねえよ」	has:몰라	keep	normalize
+normalize:casual-nee	「待っててねえ！」	lacks:않	keep	normalize
+normalize:casual-nee	「ないかねえ」	has:없	fix	normalize
+lookup:lone-iru	「そこしかないかねえ」	has:밖에 없	fix	lookup
+lookup:lone-iru	「誰かいないかねえ」	has:없	fix	lookup
+normalize:casual-nee	「本当かねえ」	lacks:않	fix	normalize
+normalize:casual-nee	「高いかねえ」	lacks:않	keep	normalize
+normalize:casual-nee	「おれはいかねえ」	has:않	keep	normalize
+normalize:casual-nee	「うまくいかねえ」	has:않	keep	normalize
+normalize:casual-nee	「そこのキャベツ、もっていかねーかい？」	has:않	keep	normalize

@@ -1,0 +1,20 @@
+# 규칙: LEX-8240, MNG-1
+rule	input	expected	kind	layer
+lexical:su-zu	田中は表情を顔に出さず、机を見つめている。	타나카는 표정을 얼굴에 드러내지 않고, 책상을 바라보고 있다.	fix	lookup
+lexical:su-zu	それをまったく意に介さず、椅子で返った。	그것을 전혀 개의하지 않고, 의자로 돌아갔다.	fix	lookup
+lexical:su-zu	俺を介さず会話していた。	나를 거치지 않고 대화하고 있었다.	fix	lookup
+lexical:su-zu	顔に出した	얼굴에 드러냈다	fix	lookup
+lexical:su-zu	顔に出さない	얼굴에 드러내지 않는다	fix	lookup
+lexical:su-zu	顔に出ている	얼굴에 드러나 있다	keep	lookup
+lexical:su-zu	人を介して伝える	사람을 통해 전한다	keep	lookup
+lexical:su-zu	意に介さない	개의치 않다	keep	lookup
+lexical:su-zu	ぶらぶらする	어슬렁어슬렁한다	keep	lookup
+lexical:su-zu	ぶら下がる	매달린다	keep	lookup
+lexical:su-zu	渡さず	건네주지 않고	keep	lookup
+lexical:su-zu	『ぶらぼータイム』に突入	『브라보 타임』에 돌입	keep	lookup
+lexical:su-zu	顔に出そうになった	얼굴에 드러날 뻔했다	keep	lookup
+lexical:su-zu	顔に出そうで怖い	얼굴에 드러날 것 같고 무섭다	keep	lookup
+lexical:su-zu	感情が顔に出そう	감정이 얼굴에 드러날 것 같다	keep	lookup
+lexical:su-zu	顔に出さないように	얼굴에 드러내지 않도록	fix	lookup
+lexical:su-zu	顔に出せない。	얼굴에 드러낼 수 없다.	fix	lookup
+lexical:su-zu	顔に出そうとしない。	얼굴에 드러내려고 하지 않는다.	fix	lookup

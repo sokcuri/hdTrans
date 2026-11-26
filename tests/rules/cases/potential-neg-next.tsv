@@ -1,0 +1,36 @@
+# 규칙: GRM-8101, MNG-1
+rule	input	expected	kind	layer
+cx:potential-neg-next:10	そもそも、冷静に判断できてない。	애초에, 냉정하게 판단할 수 없었다.	fix	rewrites
+cx:potential-neg-next:10	慎重を期す必要があり、調べられてないところはいくつもある。	has:조사할 수 없는 곳	fix	rewrites
+cx:potential-neg-next:10	「なんで、そんな当たり前のことができないのよっ！」	「왜, 그런 당연한 걸 할 수 없어!」	fix	rewrites
+cx:potential-neg-next:10	そんな基本的なことができていなかった俺が、ようやく変われたのだ。	그런 기본적인 것을 할 수 없었던 내가, 드디어 바뀔 수 있었다.	fix	rewrites
+cx:potential-neg-next:10	「でも、それくらいできるんじゃないかな」	「하지만, 그 정도 할 수 있지 않을까」	keep	rewrites
+cx:potential-neg-next:10	「これなら聞けるんじゃないかな？」	「이것이라면 들을 수 있지 않을까?」	keep	rewrites
+cx:potential-neg-next:10	彼女がどういう状態にあるのか、把握しきれていない。	!rule:cx:potential-neg-next:10	keep	rewrites
+cx:potential-neg-next:10	食べられない	먹을 수 없다	keep	rewrites
+cx:potential-neg-next:20	「でも実際、決めきれてないんだよな」	「하지만 실제, 다 결정할 수 없는 것 같아」	fix	rewrites
+cx:potential-neg-next:20	迷っているのは、あきらめきれていない証拠で……	헤매고 있는 것은, 다 포기할 수 없는 증거로……	fix	rewrites
+cx:potential-neg-next:20	私達もまだ生徒の声を拾い切れていなかったということね	has:다 주울 수 없었다는	fix	rewrites
+cx:potential-neg-next:20	避けきれなくて	다 피할 수 없어서	fix	rewrites
+cx:potential-neg-next:20	食べきれない	다 먹을 수 없다	keep	rewrites
+cx:potential-neg-next:30	「でも、このままだと文化祭に出られなくなっちゃうかもしれないよ」	has:나올 수 없게 돼버릴지도	fix	rewrites
+cx:potential-neg-next:30	「逃げ込まれたら、手が出せなくなる。急げ」	「도망쳐지면, 손을 댈 수 없게 된다. 서둘러라」	fix	rewrites
+cx:potential-neg-next:30	「美味しい食事の味さえ楽しめなくなってしまったら、同じになる」	has:즐길 수 없게 돼버리면	fix	rewrites
+cx:potential-neg-next:30	「自信が持てなくなった一端は、彼にあるような気がするんだ」	has:자신을 가질 수 없게 된	fix	rewrites
+cx:potential-neg-next:30	同時に、俺も肉に手が出せなくなった。	동시에, 나도 고기에 손을 댈 수 없게 되었다.	fix	rewrites
+cx:potential-neg-next:30	動けなくなった	움직일 수 없게 되었다	keep	rewrites
+cx:potential-neg-next:30	帰れなくなる	돌아갈 수 없게 된다	keep	rewrites
+cx:potential-neg-next:40	断りきれなくなる気持ちはよくわかった。	다 거절할 수 없게 되는 마음은 잘 알았다.	fix	rewrites
+cx:potential-neg-next:40	とうとう、抗いきれなくなり、判断を仰ぎにいったようだ。	드디어, 다 저항할 수 없게 되어, 판단을 구하러 간 것 같다.	fix	rewrites
+cx:potential-neg-next:40	食べきれなくなった	다 먹을 수 없게 되었다	keep	rewrites
+dict:w:42552	「変なことができるんだな」	「이상한 걸 할 수 있는구나」	fix	local
+dict:w:42552	「そんなことができるなら」	「그런 걸 할 수 있다면」	fix	local
+dict:w:42553	走ることが出来る	달릴 수가 있다	keep	local
+dict:w:42552	食べることができない	먹을 수가 없다	keep	local
+cx:potential-neg-next:30	出られなくもない	나올 수 없는 것도 아니다	keep	rewrites
+cx:potential-neg-next:10	判断できなくはない	판단할 수 없는 건 아니다	keep	rewrites
+cx:potential-neg-next:10	出られるんじゃない？	나올 수 있는 거 아니야?	keep	rewrites
+cx:potential-neg-next:10	彼は判断できてないわけじゃない	그는 판단할 수 없는 것이 아니다	fix	rewrites
+cx:potential-neg-next:30	出られなくなったら困る	나올 수 없게 되면 곤란하다	fix	rewrites
+dict:w:42552	聞きたいことができたら	!rule:dict:w:42552	keep	local
+dict:w:42555	楽しい事が出来る	즐거운 것을 할 수 있다	fix	local

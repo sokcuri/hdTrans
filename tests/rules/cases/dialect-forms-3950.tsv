@@ -171,7 +171,7 @@ normalize:dialect-keep	「ち、違うっ！　別にそういうつもりじゃ
 normalize:dialect-keep	「戦うたびに強くなる」	「싸울 때마다 강해져」	keep	normalize
 normalize:dialect-keep	本を買うために働いた。	책을 사기 위해 일했다.	keep	normalize
 normalize:dialect-keep	見よか	볼까	keep	normalize
-normalize:dialect-keep	このいす、座っていい？	이 의자, 앉아 있고?	keep	normalize
+normalize:dialect-keep	このいす、座っていい？	이 의자, 앉아도 돼?	keep	normalize
 normalize:dialect-keep	また バカでっかい建物だねぇ。	또 터무니없이 아주 큰 건물이구나.	keep	normalize
 normalize:dialect-keep	あきれるほど単純な作戦だが 悪かねェ…	질릴 만큼 단순한 작전이지만 나쁘지는 않아…	keep	normalize
 normalize:dialect-keep	「おら、座れ」	「이봐, 앉아라」	keep	normalize

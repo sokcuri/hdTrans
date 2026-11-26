@@ -1,4 +1,4 @@
-# 규칙: MNG-3, GRM-8, MNG-15, MNG-17, GRM-52, GRM-53, GRM-35, GRM-61, MNG-6
+# 규칙: MNG-3, GRM-8, MNG-15, MNG-17, GRM-52, GRM-53, GRM-35, GRM-61, MNG-6, GRM-8100
 rule	input	expected	kind	layer
 cx:omou-na:10	お前ごときが私に勝てると思うな	has:생각하지 마	fix	rewrites
 cx:omou-na:10	貴様ごときが私に勝てると思うな！	has:생각하지 마	fix	rewrites
@@ -121,3 +121,9 @@ normalize:prohibition-janai	「あら、おーしまくんじゃない。」	lac
 normalize:prohibition-janai	「あれは彩くんじゃない！ただの怪人だ！」	has: 군이 아니야!	fix	normalize
 normalize:prohibition-janai	「キモオタ。近づくんじゃない！」	has:다가가지 마!	keep	normalize
 normalize:prohibition-janai	「お前、嘘をつくんじゃない。」	has:하지 마.	keep	normalize
+lookup:lone-iru	「マスター、入っていいですか」	has:들어가도 됩니까	fix	lookup
+lookup:lone-iru	「ここ、空いてるから座っていい」	has:앉아도 돼	fix	lookup
+lookup:lone-iru	無にしていいんだろうか	has:해도 될까	fix	lookup
+lookup:lone-iru	「ほら……もっと、感じていいのよ」	has:느껴도 돼	fix	lookup
+lookup:lone-iru	飲んでいいよ	has:마셔도 돼	keep	lookup
+lookup:lone-iru	入っている	has:들어가 있다	keep	lookup

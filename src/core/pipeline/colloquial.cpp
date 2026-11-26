@@ -994,10 +994,11 @@ bool FusedAdjectiveAt(const Emphasis& e, std::u32string_view rs, std::u32string_
                     continue;
                 }
                 if (fused == U'ぜ' && stem != U"う") continue;
-                // ね after a particle, the copula or a て form is the particle ね drawn out (のにねえ, ものねぇ,
-                // でしてねぇ), but in a word with a kanji (何でもねえ).
+                // ね after a particle, the question か after い, the copula or a て form is the particle ね drawn out
+                // (のにねえ, ものねぇ, ないかねえ, でしてねぇ), but in a word with a kanji (何でもねえ).
                 if (fused == U'ね' && !HasKanji(stem) && !stem.empty() &&
-                    (In(stem.back(), U"てでにのもがはとやしよだわねなゃん") || (stem.size() == 1 && In(stem[0], kWordAfter)))) {
+                    (In(stem.back(), U"てでにのもがはとやしよだわねなゃん") || stem.ends_with(U"いか") ||
+                     (stem.size() == 1 && In(stem[0], kWordAfter)))) {
                     continue;  // also a particle alone before it (ないかねえ); しねぇ may be 死ね drawn out
                 }
                 FusedOrigins(fused, k > 0 ? hs[f - 1] : 0, origins);

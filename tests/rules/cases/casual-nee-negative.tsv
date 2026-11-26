@@ -1,0 +1,42 @@
+# 규칙: GRM-8102, MNG-1
+rule	input	expected	kind	layer
+normalize:casual-nee	「油売ってねえで、さっさとやれ」	has:보내지 않고	fix	normalize
+normalize:casual-nee	「行ってねえで手伝え」	「가지 않고 도와라」	fix	normalize
+normalize:casual-nee	「見てねえじゃん」	「보지 않잖아」	fix	normalize
+normalize:casual-nee	「取れねーじゃねぇか」	「잡히지 않잖아」	fix	normalize
+normalize:casual-nee	「頑張ってねー！」	「힘내―！」	keep	normalize
+normalize:casual-nee	「頑張ってねぇ」	「노력해」	keep	normalize
+normalize:casual-nee	「知らねえよ」	「몰라」	keep	normalize
+normalize:casual-nee	「行かねえ」	「가지 않아」	keep	normalize
+normalize:casual-nee	「誰もいねえじゃん」	「아무도 없잖아」	keep	normalize
+dict:jisjk:374884	「ですかねえ」	「입니까」	fix	local
+dict:jisjk:374884	「だってねえ」	「그치만」	fix	local
+dict:jisjk:374884	「待っててねえ」	「기다리고 있어」	fix	local
+dict:jisjk:374884	「ちゃんと見ててねえ」	「제대로 보고 있어」	fix	local
+dict:jisjk:374884	「ねえ、田中さん」	「있잖아, 타나카 씨」	keep	local
+dict:jisjk:374884	「関係ねえ」	「관계없어」	keep	local
+dict:jisjk:374884	「問題ねえ」	「문제없어」	keep	local
+dict:jisjk:374884	「そうですねえ」	「글쎄요」	keep	local
+normalize:casual-nee	「待っててねえ！」	lacks:않	keep	normalize
+normalize:casual-nee	「また来てねえ！」	lacks:않	keep	normalize
+dict:jisjk:374884	「ねえさん、待って」	「누님, 기다려」	keep	local
+dict:jisjk:374884	「だよねえ」	「그렇지~」	keep	local
+dict:jisjk:374884	「良くてねえ」	「좋아서」	keep	local
+dict:jisjk:374884	「しようかねえ」	「할까」	fix	local
+normalize:casual-nee	「見てねえで手伝え」	「보지 않고 도와라」	fix	normalize
+normalize:casual-nee	「寝てねえじゃん」	「자지 않잖아」	fix	normalize
+dict:jisjk:374884	「見えましたけど……ねえ、田中」	「보였는데요……응, 타나카」	keep	local
+dict:jisjk:374884	「反対しないわよ……ねえ？」	「반대하지 않아……응?」	keep	local
+dict:jisjk:374884	「行こうよ、ねえ」	「가자, 응」	keep	local
+dict:jisjk:374884	「出してくれ、ねえ、お願い」	「내 줘, 응, 부탁」	keep	local
+normalize:casual-nee	「ないかねえ」	「없는가」	fix	normalize
+normalize:casual-nee	「ないかねぇ？」	「없는가?」	fix	normalize
+normalize:casual-nee	「いないかねえ」	「없는가」	fix	normalize
+normalize:casual-nee	「高いかねえ」	「높은가」	keep	normalize
+normalize:casual-nee	「寒いかねえ」	「추운가」	keep	normalize
+normalize:casual-nee	「本当かねえ」	「사실인가」	fix	normalize
+normalize:casual-nee	「大丈夫かねえ」	「괜찮은가」	fix	normalize
+normalize:casual-nee	「おれはいかねえ」	「나는 가지 않아」	keep	normalize
+normalize:casual-nee	「うまくいかねえ」	「잘 되지 않아」	keep	normalize
+normalize:casual-nee	おっかねえ神様みたいに思ってたんだ	무서운 신같이 생각했어	keep	normalize
+normalize:casual-nee	「そこのキャベツ、もっていかねーかい？」	「거기의 양배추, 가져가지 않을래?」	keep	normalize
