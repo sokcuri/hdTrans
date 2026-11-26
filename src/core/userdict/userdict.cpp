@@ -352,9 +352,9 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             return "option " + Quote(opt) + ": " + std::string(opt) + " is only for the built-in sound table";
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
-        } else if ((key == "polite" || key == "alone") && hasValue && pos == "intj") {
+        } else if ((key == "polite" || key == "alone" || key == "greet") && hasValue && pos == "intj") {
             // Read by the sound stage (the last word of the Korean in polite speech, the Korean of a
-            // cry said once).
+            // cry said once, the Korean where the row greets).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {

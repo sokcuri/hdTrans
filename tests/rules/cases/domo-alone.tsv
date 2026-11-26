@@ -1,0 +1,44 @@
+# 규칙: LEX-8070
+rule	input	expected	kind	layer
+sound:domo-alone	「どうも」	「네」	fix	sound
+sound:domo-alone	「ああ、どうも」	「아, 네」	fix	sound
+sound:domo-alone	「ああ、どうも。図書館で会うとは思わなかった」	has:「아, 네.	fix	sound
+sound:domo-alone	「はあ、まあ、どうも」	「하아, 뭐, 네」	fix	sound
+sound:domo-alone	「え、はあ……どうも」	has:……네」	fix	sound
+sound:domo-alone	「あ……どうも……」	「아……안녕하세요……」	fix	sound
+sound:domo-alone	「どうも。もう一人の方です」	has:「네.	fix	sound
+sound:domo-alone	「どうも、望月さん」	「안녕하세요, 모치즈키 씨」	fix	sound
+sound:domo-alone	「どうも、みなさん。現生徒会長です」	has:「안녕하세요, 여러분.	fix	sound
+sound:domo-alone	「そりゃどうも」	「그거 고마워」	fix	sound
+sound:domo-alone	「お、おう……そりゃどうも」	has:그거 고마워」	fix	sound
+sound:domo-alone	「そいつはどうも」	「그거 고마워」	fix	sound
+sound:domo-alone	「はあ、そらどうも」	「하아, 그거 고마워」	fix	sound
+sound:domo-alone	「そりゃどーも」	「그거 고마워」	fix	sound
+sound:domo-alone	「どうもです」	「네」	fix	sound
+sound:domo-alone	「ど、どもです」	has:안녕하세요」	fix	sound
+sound:domo-alone	「それはどうも」	「그거 고마워」	keep	sound
+sound:domo-alone	「どうも、図書部は人を丸くしてしまうみたいですね」	has:「아무래도,	keep	sound
+sound:domo-alone	「どうも、望月さんが来たみたい」	has:「아무래도,	keep	sound
+sound:domo-alone	「どうもありがとう」	「정말 고마워」	keep	sound
+sound:domo-alone	「どうもありがとうございます」	「대단히 고맙습니다」	keep	sound
+sound:domo-alone	どうも、何か裏にあるようだ。	has:아무래도,	keep	sound
+sound:domo-alone	「どうもうまくいかない」	「아무래도 잘 되지 않아」	keep	sound
+sound:domo-alone	「どうもこうもない」	「이러고저러고 없어」	keep	sound
+sound:domo-alone	「どうもすみません」	「정말 죄송합니다」	keep	sound
+sound:domo-alone	「どうも？」	「아무래도?」	keep	sound
+sound:domo-alone	「ども」	「안녕」	keep	sound
+sound:domo-alone	「また明日、田中さん」	「내일 보자, 타나카 씨」	keep	sound
+sound:domo-alone	「どうも、雨が降るらしい」	「아무래도, 비가 오는 것 같아」	keep	sound
+sound:domo-alone	「どうも、彼が犯人みたいだ」	「아무래도, 그가 범인 같아」	keep	sound
+sound:domo-alone	「どうも失礼しました」	lacks:네	keep	sound
+sound:domo-alone	「どうも、お世話になりました」	lacks:안녕하세요	keep	sound
+sound:domo-alone	「どうも、山田さんは来ないらしい」	「아무래도, 야마다 씨는 오지 않는 것 같아」	keep	sound
+sound:domo-alone	「どうも、先生」	「안녕하세요, 선생님」	keep	sound
+sound:domo-alone	「ど、どうも」	has:안녕하세요	keep	sound
+sound:domo-alone	「……どうも」	「……안녕하세요」	keep	sound
+sound:domo-alone	「やあ、どうも」	has:안녕하세요	keep	sound
+sound:domo-alone	「どうも、山田さん」	has:「안녕하세요,	keep	sound
+sound:domo-alone	「どうも、どうも」	「네, 네」	fix	sound
+sound:domo-alone	「どうも、お疲れさん」	「네, 수고했어」	fix	sound
+sound:domo-alone	「どうも、ご苦労さん」	lacks:안녕하세요	keep	sound
+sound:domo-alone	「どうも、ありがとう」	has:고마워	keep	sound

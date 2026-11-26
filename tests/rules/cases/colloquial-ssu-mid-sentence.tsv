@@ -1,7 +1,7 @@
 # 규칙: SPC-1
 rule	input	expected	kind	layer
 normalize:ssu	「それ２年の女子っすね」	「그거 2년의 여자네요」	fix	normalize
-normalize:ssu	「ってことは確定っすね！？」	「라는 건 확정이네요!?」	fix	normalize
+normalize:ssu	「ってことは確定っすね！？」	「그렇다는 건 확정이네요!?」	fix	normalize
 normalize:ssu	「今は一緒にいてくれるからいいかもしれないっすけど」	「지금은 함께 있어 주니까 좋을지도 모르는데요」	fix	normalize
 normalize:ssu	「そりゃそーっすけど、ほら」	「그야 그렇지만, 자」	fix	normalize
 normalize:ssu	「入ってないっすけど」	「들어 있지 않는데요」	fix	normalize

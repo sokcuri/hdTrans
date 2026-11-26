@@ -542,6 +542,12 @@
 //= sound.tte-asked	The bare question words of sound.tte-called: after a mimetic and って they ask about the sound only where the question ends after them, at the end, before a sentence mark or a closing bracket, or before の (ドキドキって何？ 두근두근이 뭐야?), or before a copula form of sound.tte-asked-copula; before a verb or を they are its object and the って stays the adverb (ガタガタってなにやってるの？, ドンって何してるの？).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
+//= sound.quoted-lead	Lead rows, in katakana, that need text before them in the line and words after them (「って、敵！？」 아니, 「ってことは…」 그렇다는 건): a line that starts with them may go on with a quote of the line before, and 「って」 alone is cut off.
+//= sound.quote-goes-on	Starts of the text after a lead of sound.quoted-lead and its pause that go on with its quote (って、言ってるけど, って、ことで, ってことはない), where it stays the quoting って.
+//= sound.exasperated	Lead rows, in katakana, said in exasperation (もう 정말, ああもう 아, 정말) only where nothing but marks follows them in the utterance or a member of sound.exasperated-end after a name or a title ends a phrase of their clause.
+//= sound.exasperated-end	Ends of a phrase, in katakana, that after a name or a title make an utterance-initial もう exasperation (先輩ったら, 高峰君ってば; not 読んだってば).
+//= sound.greeting-lead	Words, in katakana, that open an utterance and make a row with greet= after them and a comma a greeting (やあ、どうも, これは、どうも).
+//= kana.drawl-particle	Sentence particles after which a tail of ー draws the phrase out, at the end of a hiragana run of three kana or more (ですよねー, いいなー), which the spelling of SND-30 leaves.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려); before a word in kanji a ～ separates a stutter only before these heads (き～君は 너~너는). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
 //= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
@@ -10766,6 +10772,42 @@ sound.stutter-alone	ジャ
 sound.stutter-alone	チョ
 sound.stutter-conjunction	ト
 sound.stutter-conjunction	デ
+sound.quoted-lead	ッテ
+sound.quoted-lead	ッテコトハ
+sound.quoted-lead	ッテ事ハ
+sound.quote-goes-on	こと
+sound.quote-goes-on	事
+sound.quote-goes-on	言
+sound.quote-goes-on	いう
+sound.quote-goes-on	いっ
+sound.quote-goes-on	いわ
+sound.quote-goes-on	思
+sound.quote-goes-on	おも
+sound.quote-goes-on	感じ
+sound.quote-goes-on	かんじ
+sound.quote-goes-on	カンジ
+sound.quote-goes-on	わけ
+sound.quote-goes-on	訳
+sound.quote-goes-on	ない
+sound.quote-goes-on	知
+sound.quote-goes-on	わか
+sound.quote-goes-on	分か
+sound.greeting-lead	ヤア
+sound.greeting-lead	コレハ
+kana.drawl-particle	ね
+kana.drawl-particle	な
+kana.drawl-particle	よ
+kana.drawl-particle	わ
+kana.drawl-particle	さ
+kana.drawl-particle	ぞ
+kana.drawl-particle	か
+kana.drawl-particle	の
+sound.exasperated	モウ
+sound.exasperated	アアモウ
+sound.exasperated	アーモウ
+sound.exasperated	イヤモウ
+sound.exasperated-end	ッタラ
+sound.exasperated-end	ッテバ
 sound.stutter-interjection	ア
 sound.stutter-interjection	エ
 sound.stutter-particle	ト

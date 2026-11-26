@@ -1,7 +1,9 @@
 #include <algorithm>
 #include <string>
 #include <string_view>
+#include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
 #include "core/pipeline/sound.h"
@@ -270,9 +272,9 @@ std::u32string SpellInnerLongVowels(std::u32string rs, const LineContext& ctx, c
 // Whether r is a small vowel that a loanword in hiragana writes (ふぁ, てぃ).
 bool LoanKana(char32_t r) { return In(r, U"ぁぃぅぇぉ"); }
 
-// The particles and copulas that may close a loanword written in hiragana.
+// The particles and copulas that may close a loanword written in hiragana, and the っ of a shout.
 constexpr std::u32string_view kLoanTails[] = {U"ですが", U"でした", U"です", U"だよ", U"だ", U"って", U"が", U"は", U"を", U"に",
-                                              U"と",    U"の",    U"も",   U"で",   U"や", U"へ",   U"か", U"よ", U"ね", U""};
+                                              U"と",    U"の",    U"も",   U"で",   U"や", U"へ",   U"か", U"よ", U"ね", U"っ", U""};
 
 // The katakana of a loanword written in hiragana, its long vowels written ー after the e and o rows
 // (ちょこれいと チョコレート), if a dictionary key spells it; empty otherwise.
@@ -308,15 +310,15 @@ bool ReadsAsKeys(std::u32string_view s, const LineContext& ctx, const dict::Snap
     return true;
 }
 
-// Whether a native word starts h: a key of two kana or more not ending in a small tsu (しゃべる,
-// かっこいい, ほっとく, くそったれ).
+// Whether a native word starts h: a key of two kana or more not ending in a small tsu or a long mark
+// (しゃべる, かっこいい, ほっとく, くそったれ; not おー of おーけー).
 bool NativeStart(std::u32string_view h, const LineContext& ctx, const dict::Snapshot& snap) {
     // One encoding of h, whose prefixes are the keys tried, up to the longest key that starts it.
     const std::string text = EncodeText(h);
     const std::vector<size_t> at = EncodedOffsets(h);
     const size_t reach = KeyReach(text, ctx, snap);
     for (size_t e = 2; e < h.size() && at[e] <= reach; e++) {
-        if (h[e - 1] == U'っ') continue;
+        if (h[e - 1] == U'っ' || h[e - 1] == U'ー') continue;
         if (!KeyTags(std::string_view(text).substr(0, at[e]), ctx, snap).empty()) return true;
     }
     return false;
@@ -352,7 +354,19 @@ std::u32string LoanwordsInHiragana(std::u32string rs, const LineContext& ctx, co
         while (j < rs.size() && (IsHiraganaRune(rs[j]) || rs[j] == U'ー')) j++;
         const std::u32string_view run = std::u32string_view(rs).substr(i, j - i);
         std::u32string key;
-        const size_t core = LoanCore(run, ctx, snap, key);
+        size_t core = LoanCore(run, ctx, snap, key);
+        // A long mark at the end of the run that the emphasis pass wrote ～ (らじゃー らじゃ～) is the
+        // loanword's own where the word spelled with it is a key (ラジャー).
+        if (key.empty() && j < rs.size() && rs[j] == U'～') {
+            const std::u32string marked = std::u32string(run) + U'ー';
+            if (LoanCore(marked, ctx, snap, key) == marked.size()) {
+                rs = rs.substr(0, i) + key + rs.substr(j + 1);
+                changed = true;
+                i += key.size();
+                continue;
+            }
+            key.clear();
+        }
         if (!key.empty()) {
             rs = rs.substr(0, i) + key + rs.substr(i + core);
             changed = true;
@@ -388,7 +402,121 @@ bool CommonKey(std::u32string_view s, const dict::Snapshot& snap) {
     return false;
 }
 
+// Whether s, in hiragana, is a key that an utterance may consist of: an intj or lead row of the sound
+// lexicon or a dictionary key read as an interjection or adverb (tags A and E: まあ, そうよ, まあまあ).
+// A kana and its long vowel are a sound heard as said (ふー 후―), so only a lead row reads them (まあ, やあ).
+// A lead of sound.exasperated needs a cue the run may lack (あーもー), so it reads no run here.
+bool UtteranceKey(std::u32string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::u32string k = ToKatakana(s);
+    for (const SoundRow& row : SoundRows(k[0], ctx.extraBuiltin)) {
+        if (row.key == k && row.intj && (row.lead || k.size() > 2) && !dict::InClass(HDTRANS_CLASS("sound.exasperated"), EncodeText(k))) {
+            return true;
+        }
+    }
+    return KeyTags(EncodeText(s), ctx, snap).find_first_of("AE") != std::string::npos;
+}
+
+// Whether s, in hiragana, is the key of a row of the sound lexicon (phrases included).
+bool IsSoundRowKey(std::u32string_view s, const LineContext& ctx) {
+    if (s.empty()) return false;
+    const std::u32string k = ToKatakana(s);
+    for (const SoundRow& row : SoundRows(k[0], ctx.extraBuiltin)) {
+        if (row.key == k) return true;
+    }
+    return false;
+}
+
+// Whether s, in hiragana, is a key of the dictionary or the sound lexicon as written, or a sound that a
+// row other than a lead reads whole with its lengthening (ふー, はーん, ふーぅ).
+bool WrittenKey(std::u32string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::u32string k = ToKatakana(s);
+    std::string units;
+    for (const SoundRow& row : SoundRows(k[0], ctx.extraBuiltin)) {
+        size_t end = 0;
+        if (row.key == k || (!row.lead && MatchSound(row, k, 0, end, units) && end == k.size())) return true;
+    }
+    return IsKey(s, ctx, snap);
+}
+
 }  // namespace
+
+std::string SpellDrawnUtterances(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    bool changed = false;
+    for (size_t p = 0; p < rs.size(); p++) {
+        if (!IsHiraganaRune(rs[p]) || (p > 0 && !In(rs[p - 1], U"「『（(、，,。．！？!?…‥ 　―─—"))) continue;
+        size_t end = p;
+        while (end < rs.size() && (IsHiraganaRune(rs[end]) || rs[end] == U'ー')) end++;
+        const size_t start = p;
+        p = end;
+        if (end < rs.size() && !In(rs[end], U"、，,。．！？!?…‥」』）) 　―─—")) continue;
+        // Each ー after a kana that is no vowel of its own (not あー, which draws out the sound).
+        std::vector<size_t> marks;
+        for (size_t k = start + 1; k < end; k++) {
+            if (rs[k] == U'ー' && LongVowel(rs[k - 1]) != 0 && !In(rs[k - 1], U"あいうえおぁぃぅぇぉっ")) marks.push_back(k);
+        }
+        const std::u32string_view run = std::u32string_view(rs).substr(start, end - start);
+        // A run that a row of the sound lexicon, or a dictionary key of three kana or more, reads with its marks
+        // dropped, unless said twice (そーよそーよ), is that word drawn out (どーも ども, さよーなら さよなら).
+        std::u32string bareRun;
+        for (const char32_t c : run) {
+            if (c != U'ー') bareRun += c;
+        }
+        const bool halves = run.size() % 2 == 0 && run.substr(0, run.size() / 2) == run.substr(run.size() / 2);
+        if (!halves && (IsSoundRowKey(bareRun, ctx) || (bareRun.size() >= 3 && IsKey(bareRun, ctx, snap)))) continue;
+        // Nor an honorific drawn out (くーん, さーん), nor one kana said twice and drawn out, laughter (ほほー).
+        if (dict::InClass(HDTRANS_CLASS("honorific.name"), EncodeText(bareRun))) continue;
+        if (run.size() == 3 && run[0] == run[1] && run[2] == U'ー') continue;
+        // A run that a shout's っ closes is a cry (ふーっ, ぎゃーーっ).
+        if (marks.empty() || marks.size() > 4 || run.size() > 10 || run.back() == U'っ' || WrittenKey(run, ctx, snap)) continue;
+        // Nor a sound said twice as written (ちゅーちゅー, ふーふー).
+        if (run.size() % 2 == 0 && run.substr(0, run.size() / 2) == run.substr(run.size() / 2) &&
+            WrittenKey(run.substr(0, run.size() / 2), ctx, snap)) {
+            continue;
+        }
+        // A tail of ー after an interjection or after the sentence particle that ends three kana or more
+        // draws it out (ねー, ですよねー, いいなー, そうですねー).
+        std::u32string_view head = run;
+        while (!head.empty() && head.back() == U'ー') head.remove_suffix(1);
+        if (head.size() < run.size() && !head.empty() &&
+            (UtteranceKey(head, ctx, snap) ||
+             (head.size() >= 3 && dict::InClass(HDTRANS_CLASS("kana.drawl-particle"), EncodeText(head.substr(head.size() - 1)))))) {
+            continue;
+        }
+        // The vowels each mark may stand for: that of the row, お and え besides う and い after the o and e rows.
+        std::vector<std::u32string> options;
+        for (const size_t k : marks) {
+            std::u32string o(1, LongVowel(rs[k - 1]));
+            if (In(rs[k - 1], U"おこそとのほもよろごぞどぼぽょ")) o += U'お';
+            if (In(rs[k - 1], U"えけせてねへめれげぜでべぺ")) o += U'え';
+            options.push_back(std::move(o));
+        }
+        // Every mark spelled, a drawn tail of ー after the last kana kept: the run read as one key, or one
+        // key said twice as its half reads (そうよそうよ; not ふーふー, whose half is a sound).
+        std::vector<size_t> pick(marks.size(), 0);
+        std::u32string found;
+        while (found.empty()) {
+            std::u32string spelled(run);
+            for (size_t m = 0; m < marks.size(); m++) spelled[marks[m] - start] = options[m][pick[m]];
+            size_t core = spelled.size();
+            while (core > 0 && spelled[core - 1] == U'ー') core--;
+            const std::u32string_view whole = std::u32string_view(spelled).substr(0, core);
+            const bool twice = core % 2 == 0 && whole.substr(0, core / 2) == whole.substr(core / 2);
+            if (core >= 2 && core > marks.back() - start &&
+                (twice && core >= 4 ? UtteranceKey(whole.substr(0, core / 2), ctx, snap) : UtteranceKey(whole, ctx, snap))) {
+                found = std::move(spelled);
+                break;
+            }
+            size_t m = 0;
+            while (m < pick.size() && ++pick[m] == options[m].size()) pick[m++] = 0;
+            if (m == pick.size()) break;
+        }
+        if (found.empty()) continue;
+        rs.replace(start, run.size(), found);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
 
 size_t HiraganaLoanwordLen(std::u32string_view rs, size_t i, const LineContext& ctx, const dict::Snapshot& snap) {
     size_t j = i;
@@ -426,6 +554,11 @@ std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap) {
             if (rest.starts_with(U"ちゃんと") || (rest.starts_with(U"様") && rest.size() > 1 && (IsKanjiRune(rest[1]) || rest[1] == U'々'))) {
                 join = false;
             }
+        }
+        // A と that opens the line or a quote, then いう (と、いうわけで というわけで, と、いうことは): the conjunction
+        // という said with a pause, which reads as one word only joined (spec LEX-8071).
+        if (!join && before == U'と' && (i == 1 || In(rs[i - 2], U"\n「『（(")) && std::u32string_view(rs).substr(i + 1).starts_with(U"いう")) {
+            join = true;
         }
         // A katakana word split by a pause whose halves are no words of their own and whose whole is
         // (クリ、トリス クリトリス; not パン、ケーキ).

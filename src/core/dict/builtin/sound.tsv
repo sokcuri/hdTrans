@@ -359,6 +359,7 @@
 うむ	음	intj
 うむっ	으음	intj
 うー	으으	intj
+うーい	네에	intj
 うーん	으음	intj
 ううん	아니	intj
 うーっ	으읏	intj
@@ -3136,6 +3137,16 @@
 さ	자	lead
 で	그래서	lead
 まぁ	뭐	lead
+いやさ	아니	lead
+いやさあ	아니	lead
+いやでも	아니 하지만	lead
+いやまあ	아니 뭐	lead
+いやもう	아니 정말	lead
+ああもう	아, 정말	lead
+あーもう	아, 정말	lead
+もう	정말	lead
+ああでも	아 하지만	lead
+あーでも	아 하지만	lead
 さて	자	lead
 なぁに	뭐야	intj
 よっと	영차	intj
@@ -3220,6 +3231,9 @@
 っつーかさ	그보다	lead
 てゆーかさ	그보다	lead
 ってゆーかさ	그보다	lead
+って	아니	lead
+ってことは	그렇다는 건	open
+って事は	그렇다는 건	open
 ったく	참나	open
 たく	참나	lead
 ども	안녕	lead

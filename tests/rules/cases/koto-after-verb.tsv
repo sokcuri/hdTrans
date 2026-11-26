@@ -35,7 +35,7 @@ normalize:spelling-variant	「このまま何事もなければいいけれど�
 normalize:spelling-variant	「こらっ、余計なことしなさんなっ！」	「이봐, 쓸데없는 일 하지 말아!」	keep	normalize
 normalize:spelling-variant	そう……決して無茶なことはしないで。	그렇게……결코 무리한 것은 하지 마.	keep	normalize
 normalize:spelling-variant	そう見えることもあるかもしれないが、	그렇게 보이는 일도 있을지도 모르지만,	keep	normalize
-normalize:spelling-variant	「ってことは、映画じゃないのかな？」	「라는 건, 영화가 아닐지?」	keep	normalize
+normalize:spelling-variant	「ってことは、映画じゃないのかな？」	「그렇다는 건, 영화가 아닐지?」	keep	normalize
 normalize:spelling-variant	「みんなに迷惑かけることになるよね」	「모두에게 폐를 끼치게 되지」	keep	normalize
 normalize:spelling-variant	「テロということは交戦の可能性も？」	「테러라는 건 교전의 가능성도?」	keep	normalize
 normalize:spelling-variant	「明日は部室で食べることにしようよ」	「내일은 동아리방에서 먹기로 하자」	keep	normalize

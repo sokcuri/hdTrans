@@ -1,0 +1,43 @@
+# 규칙: SND-33
+rule	input	expected	kind	layer
+sound:exasperated	「もう、先輩ったら、うふふふっ」	has:「정말, 선배도 참,	fix	sound
+sound:exasperated	「もう、強引なんだから」	has:이제	current	sound
+sound:exasperated	「もう、素直じゃないんだから」	has:이제	current	sound
+sound:exasperated	「もう、違うんだったら」	has:이제	current	sound
+sound:exasperated	「もう、危ないじゃないですか」	has:이제	current	sound
+sound:exasperated	「もう……」	「정말……」	fix	sound
+sound:exasperated	「もう、高峰君ったら、ぶち殺しますよ」	has:「정말,	fix	sound
+sound:exasperated	「ああもう、だめだめっ」	has:이제	current	sound
+sound:exasperated	「あーもう、駄目だなぁ……」	has:이제	current	sound
+sound:exasperated	「あーもー、ちょこまかと」	lacks:정말	current	sound
+sound:exasperated	「ああもう、アマアマじゃないですか～」	has:이제	current	sound
+sound:exasperated	「もう！」	「정말!」	keep	sound
+sound:exasperated	「もー、つれないなー」	「정말, 무정하네~」	keep	sound
+sound:exasperated	「もう、無理」	「이제, 무리」	keep	sound
+sound:exasperated	「もう、帰っちゃったのかな？」	has:「이제,	keep	sound
+sound:exasperated	「もう、十分だ」	「이제, 충분하다」	keep	sound
+sound:exasperated	「もう帰った」	「벌써 돌아갔다」	keep	sound
+sound:exasperated	「もう一度言って」	「한번 더 말해」	keep	sound
+sound:exasperated	「ああ、もうそんな時間か」	「아, 이제 그런 시간인가」	keep	sound
+sound:exasperated	「もう、大丈夫じゃない？」	has:「이제,	keep	sound
+sound:exasperated	「もう、やめてよ」	「이제, 그만해」	keep	sound
+sound:exasperated	「もう……痛いし眠いし」	has:「이제……	keep	sound
+sound:exasperated	もう、だめだ。	이제, 안 된다.	keep	sound
+sound:exasperated	「も、もう、私をおだててる暇があったら、今後のプランをしっかり練ってよね」	lacks:정말	keep	sound
+sound:exasperated	「もう、そんなこと言ったら、怒るよ」	has:「이제,	keep	sound
+sound:exasperated	「もう、ほんと、駄目だってば……」	has:이제	current	sound
+sound:exasperated	「もう、いいよ」	「이제, 좋아」	keep	sound
+sound:exasperated	「もう、大丈夫」	「이제, 괜찮아」	keep	sound
+sound:exasperated	「もう、終わったよ」	「벌써, 끝났어」	keep	sound
+sound:exasperated	「もう、あったらいいのに」	「벌써, 있으면 좋을 텐데」	keep	sound
+sound:exasperated	「もう、彼女は帰ったわ」	「이제, 그녀는 돌아갔어」	keep	sound
+sound:exasperated	「もう少しだけ」	「조금만 더」	keep	sound
+sound:exasperated	「やだー、もう」	「싫어어, 정말」	fix	sound
+sound:exasperated	「もう、子供じゃないんだから」	has:이제	keep	sound
+sound:exasperated	「もう、子供じゃないの」	lacks:정말	keep	sound
+sound:exasperated	「もう、大人なんだから」	has:이제	keep	sound
+sound:exasperated	「もう、雨じゃない」	has:이제	keep	sound
+sound:exasperated	「もう、来ないんだから」	has:이제	keep	sound
+sound:exasperated	「いやもう、少し」	lacks:정말	keep	sound
+sound:exasperated	「いやもう、一度」	lacks:정말	keep	sound
+sound:exasperated	「もう、高峰君ったら」	has:「정말,	keep	sound

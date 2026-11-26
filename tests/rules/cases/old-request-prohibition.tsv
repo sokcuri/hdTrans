@@ -14,7 +14,7 @@ builtin-ending:でない	近付くでない！」	가까워지지 마라!」	fix
 builtin-ending:でない	声が上手くでない。	목소리가 잘이 아니다.	keep	builtin-ending
 builtin-ending:でない	人の気配がまるでない。	사람의 기척이 전혀 없다.	keep	builtin-ending
 normalize:casual-negative-nee	親らしきものもいねぇ。	부모 같은 것도 없다.	fix	normalize
-normalize:casual-negative-nee	「って、ダレもいねぇ」	「라고, 아무도 없어」	fix	normalize
+normalize:casual-negative-nee	「って、ダレもいねぇ」	「아니, 아무도 없어」	fix	normalize
 normalize:casual-negative-nee	「魔物はいねぇな」	「마물은 없네」	fix	normalize
 normalize:casual-negative-nee	「…………忘れてはいねぇよ」	「…………잊지는 않아」	fix	normalize
 normalize:casual-negative-nee	リカはもういねえんだ。	리카는 이제 없다.	fix	normalize
