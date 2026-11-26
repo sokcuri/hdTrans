@@ -34,9 +34,28 @@ std::vector<std::string_view> Fields(std::string_view line) {
         if (tab == std::string_view::npos) break;
         line.remove_prefix(tab + 1);
     }
+    // A field after KO that starts with "#" starts a comment to the end of the line.
+    for (std::size_t i = 2; i < out.size(); i++) {
+        if (out[i].starts_with('#')) {
+            out.resize(i);
+            break;
+        }
+    }
     // A spreadsheet writes trailing tabs.
     while (out.size() > 1 && out.back().empty()) out.pop_back();
     return out;
+}
+
+// The JA of a list line, or of a list line commented out with "#"; empty for another line.
+std::string_view LineKey(std::string_view raw) {
+    std::string_view line = internal::TrimSpace(internal::TrimCR(raw));
+    if (line.starts_with('#')) {
+        while (line.starts_with('#')) line.remove_prefix(1);
+        line = internal::TrimSpace(line);
+    }
+    const std::size_t tab = line.find('\t');
+    if (tab == std::string_view::npos) return {};
+    return internal::TrimSpace(line.substr(0, tab));
 }
 
 }  // namespace
@@ -121,6 +140,27 @@ void Merge(List& into, const List& over) {
     for (const Listed& o : over.names) keys.insert(o.ja);
     std::erase_if(into.names, [&](const Listed& n) { return keys.contains(n.ja); });
     into.names.insert(into.names.end(), over.names.begin(), over.names.end());
+}
+
+std::string NewNames(std::string_view existing, std::string_view proposed) {
+    if (existing.starts_with("\xEF\xBB\xBF")) existing.remove_prefix(3);
+    std::set<std::string_view> keys;
+    for (std::string_view rest = existing; !rest.empty();) {
+        const std::size_t nl = rest.find('\n');
+        if (const std::string_view key = LineKey(rest.substr(0, nl)); !key.empty()) keys.insert(key);
+        rest = nl == std::string_view::npos ? std::string_view() : rest.substr(nl + 1);
+    }
+    std::string out;
+    for (std::string_view rest = proposed; !rest.empty();) {
+        const std::size_t nl = rest.find('\n');
+        const std::string_view line = internal::TrimCR(rest.substr(0, nl));
+        rest = nl == std::string_view::npos ? std::string_view() : rest.substr(nl + 1);
+        const std::string_view key = line.starts_with('#') ? std::string_view() : LineKey(line);
+        if (key.empty() || !keys.insert(key).second) continue;
+        out.append(line);
+        out += '\n';
+    }
+    return out;
 }
 
 std::string Where(const Listed& name) {

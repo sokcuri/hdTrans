@@ -8,9 +8,11 @@
 #include <cstring>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <string>
 #include <system_error>
 #include <thread>
+#include <vector>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -42,6 +44,11 @@ void Check(bool ok, const char* message) {
 
 void Write(const std::filesystem::path& path, const std::string& text) {
     std::ofstream(path, std::ios::binary) << text;
+}
+
+std::string Read(const std::filesystem::path& path) {
+    std::ifstream in(path, std::ios::binary);
+    return std::string(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 }
 
 std::string Utf8(const std::filesystem::path& path) {
@@ -476,6 +483,18 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         Write(config, "dicts: fixtures/first\nuserdict: fixtures/cast\ncache: off\n");
         reload();
         checkTranslation(L"猫", L"미케", "J2K name file of a user folder");
+        Write(config, base + "capture: true\n");
+        reload();
+        checkTranslation(L"猫", L"고양이", "J2K translates the same with capture");
+        checkTranslation(L"猫", L"고양이", "J2K translates a captured line again");
+        const auto j2kCapture = config.parent_path() / "capture/config_host.txt";
+        Check(Read(j2kCapture) == "猫\n", "J2K captures each distinct line once");
+        Write(config, base);
+        reload();
+        checkTranslation(L"猫", L"고양이", "J2K without capture");
+        wchar_t* dog = translate(nullptr, L"犬");
+        freeMem(dog);
+        Check(Read(j2kCapture) == "猫\n", "J2K stops capturing when the setting is off");
         const auto userRows = config.parent_path() / "fixtures/j2k-user.txt";
         const std::string rowConfig = "dicts: fixtures/first\nuserdict: fixtures/j2k-user.txt\ncache: off\n";
         Write(userRows, "犬\tJ2K_OLD\n");
@@ -694,6 +713,34 @@ int main(int argc, char** argv) {
     Check(hdTrans_Initialize(nullptr) == 0, "initialize after names");
     Check(Translate("猫") == "고양이", "Terminate drops names");
     hdTrans_Terminate();
+
+    // The capture writes each distinct line a host sends, once, and does not change the translation.
+    const auto captureFolder = config.parent_path() / "capture";
+    const auto captured = captureFolder / "config_host.txt";
+    const std::string plainConfig = "dicts: fixtures/first\nuserdict: ''\nehnd: ''\ncache: off\n";
+    const std::vector<std::string> inputs = {"猫", "犬", "plain", "犬\n魚", "鳥", "牛"};
+    std::vector<std::string> plain;
+    Write(config, plainConfig);
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize without capture");
+    for (const std::string& input : inputs) plain.push_back(Translate(input));
+    const std::string cat = plain[0];
+    Check(TranslateContext("猫", 3, "犬") == plain[1], "context translation without capture");
+    hdTrans_Terminate();
+    Check(!std::filesystem::exists(captureFolder, error), "no capture without the setting");
+    Write(config, plainConfig + "capture: true\n");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize with capture");
+    Check(Translate("猫") == cat && Translate("猫") == cat, "translation with capture");
+    Check(TranslateContext("猫", 3, "犬") == plain[1] && Translate("plain") == plain[2], "context translation with capture");
+    Check(Read(captured) == "猫\n犬\n", "capture of the distinct lines with Japanese");
+    Check(hdTrans_Reload() == 0 && Translate("犬\n魚") == plain[3], "reload with capture");
+    hdTrans_Terminate();
+    Check(hdTrans_Initialize(nullptr) == 0 && Translate("猫") == cat && Translate("鳥") == plain[4], "capture after a restart");
+    Check(Read(captured) == "猫\n犬\n魚\n鳥\n", "a restart keeps the captured lines once");
+    Write(config, plainConfig);
+    Check(hdTrans_Reload() == 0 && Translate("牛") == plain[5], "reload without capture");
+    Check(Read(captured) == "猫\n犬\n魚\n鳥\n", "no capture once the setting is off");
+    hdTrans_Terminate();
+    std::filesystem::remove_all(captureFolder, error);
 
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: cache\n");
     std::string explicitDirs = Utf8(fixtures / "first");

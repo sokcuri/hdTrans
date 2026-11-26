@@ -1930,6 +1930,27 @@ bool Registry::Named(std::string_view t) {
     return false;
 }
 
+std::string Registry::Evidence(std::string_view t) {
+    const std::string key(t);
+    int labels = 0;
+    for (const auto* m : {&labels_, &prefixes_}) {
+        for (const auto& [k, n] : *m) {
+            for (const std::string& p : LabelParts(k)) {
+                if (p == key) labels += n;
+            }
+        }
+    }
+    if (labels > 0) return "화자 " + std::to_string(labels);
+    const auto count = [&key](const std::map<std::string, int>& m) {
+        const auto it = m.find(key);
+        return it == m.end() ? 0 : it->second;
+    };
+    if (const int hon = count(hon_) + count(kanaHon_); hon > 0) return "경칭 " + std::to_string(hon);
+    if (const int gloss = count(gloss_); gloss > 0) return "읽기 " + std::to_string(gloss);
+    if (const auto a = Accepted().find(key); a != Accepted().end() && a->second.hasParts) return "성명";
+    return "";
+}
+
 std::vector<std::string> Registry::NamedSurfaces() {
     std::set<std::string> named;
     for (const auto* m : {&hon_, &gloss_}) {

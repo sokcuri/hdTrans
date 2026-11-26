@@ -126,6 +126,10 @@ public:
     // The accepted names that are not listed, as name-list lines with their Korean: a full
     // name, a surname as family, a name only before an honorific with hon.
     std::vector<Listed> Proposed();
+    // The strongest cue of the lines for the name t, for a reader of Proposed: "화자 N" (a speaker
+    // label N times), "경칭 N" (before an honorific), "읽기 N" (a gloss or ruby), "성명" (a full
+    // name), or empty.
+    std::string Evidence(std::string_view t);
     // The registered names of line (ruby markup removed), leftmost-longest, that fill
     // their kanji or katakana run.
     std::vector<Occurrence> Occurrences(std::string_view line);

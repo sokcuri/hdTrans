@@ -5,7 +5,7 @@
 // KIND is given (default), family, full, nick, place, org or title; OPTIONS are separated by
 // ASCII spaces. The option hon, of persons only, makes JA a name only before an honorific or
 // inside a longer name of the registry. JA holds no white space, | or /; trailing empty fields
-// are ignored.
+// are ignored, and so is a field after KO that starts with "#" and the rest of its line.
 #include <string>
 #include <string_view>
 #include <vector>
@@ -38,6 +38,11 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
 
 // Adds the names of over to into; a name of over replaces the name of the same JA.
 void Merge(List& into, const List& over);
+
+// The name lines of proposed whose JA the list text existing does not hold, also not in a
+// line commented out with "#", each once and ending in "\n": what a proposal adds to a list file
+// without touching the lines a reader edited or rejected.
+std::string NewNames(std::string_view existing, std::string_view proposed);
 
 // Where a name stands: "SOURCE:LINE", or "LINE" for the list of the session.
 std::string Where(const Listed& name);

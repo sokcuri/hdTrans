@@ -25,6 +25,7 @@ struct Config {
     SpeechLevels speechLevels = SpeechLevels::Auto;
     bool wrapped = false;
     bool predicateVariants = true;
+    bool capture = false;  // the DLLs write the lines they are given to user/capture/ (frontend/capture.h)
 };
 
 struct ConfigDiagnostic {

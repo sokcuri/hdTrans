@@ -521,7 +521,11 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
 std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines, const DocumentNames* names) {
     const std::unique_ptr<DocumentContext> doc = BuildDocument(snap, lines, false, names);
     std::string out;
-    for (const names::Listed& l : doc->registry->Proposed()) out += names::ListLine(l) + "\n";
+    for (const names::Listed& l : doc->registry->Proposed()) {
+        out += names::ListLine(l);
+        if (const std::string cue = doc->registry->Evidence(l.ja); !cue.empty()) out += "\t# " + cue;
+        out += "\n";
+    }
     return out;
 }
 

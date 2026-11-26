@@ -1,4 +1,5 @@
 // UTF-8 CLI. The whole input is one session unless --each or --raw is given.
+#include <algorithm>
 #include <cctype>
 #include <cstdint>
 #include <cstdio>
@@ -32,6 +33,7 @@
 #include "core/engine/rules.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
+#include "core/names/list.h"
 #include "frontend/load_info.h"
 #include "core/output/families.h"
 #include "core/word/analyze.h"
@@ -114,7 +116,8 @@ void Usage(std::FILE* file) {
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
-               "  --propose-names        print the names the input document shows, in the --names format\n"
+               "  --propose-names        print the names the input document shows, in the --names format;\n"
+               "                         with --out, add those the file lacks to it\n"
                "  --no-predicate-variants  keep kanji spellings of grammatical words as written (様 after a predicate)\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
@@ -275,6 +278,36 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
             std::fputc('\n', stderr);
         }
     }
+}
+
+// Adds the lines of proposed that the name list file at path lacks (names::NewNames) to its end,
+// making the file when it is missing; reports the count on stderr. False when the file cannot
+// be read, is not UTF-8 or cannot be written.
+bool AddNames(const std::string& path, const std::string& proposed) {
+    std::string text;
+    std::FILE* in = OpenFile(path, false);
+    const bool exists = in != nullptr;
+    const bool read = !exists || ReadAll(in, text);
+    if (in) std::fclose(in);
+    if (!read || !hdTrans::dict::internal::ValidUtf8(text)) {
+        std::fprintf(stderr, "hdtrans: cannot read %s as UTF-8; it is left as it was\n", path.c_str());
+        return false;
+    }
+    const std::string added = hdTrans::names::NewNames(text, proposed);
+    const std::size_t count = static_cast<std::size_t>(std::count(added.begin(), added.end(), '\n'));
+    if (count > 0) {
+        if (!exists) text = "# hdtrans --propose-names가 더한 이름입니다. 검토해 고치고, 틀린 이름은 줄 앞에 #을 붙이면 다시 제안하지 않습니다.\n";
+        else if (!text.empty() && !text.ends_with('\n')) text += '\n';
+        text += added;
+        std::FILE* out = OpenFile(path, true);
+        const bool written = out && std::fwrite(text.data(), 1, text.size(), out) == text.size();
+        if ((out && std::fclose(out) != 0) || !written) {
+            std::fprintf(stderr, "hdtrans: cannot write %s\n", path.c_str());
+            return false;
+        }
+    }
+    std::fprintf(stderr, "hdtrans: %zu names added to %s\n", count, path.c_str());
+    return true;
 }
 
 bool WriteText(const std::string& path, const std::string& text) {
@@ -929,7 +962,13 @@ int RunMain(int argc, char** argv) {
         const size_t contextLines = lines.size();
         addLines(input);
         if (proposeNames) {
-            emit(hdTrans::pipeline::ProposeNames(*snapshot, lines, options.names));
+            const std::string proposed = hdTrans::pipeline::ProposeNames(*snapshot, lines, options.names);
+            if (outPath.empty() || json) {
+                emit(proposed);
+                return finish();
+            }
+            if (!AddNames(outPath, proposed)) return 1;
+            outPath.clear();
             return finish();
         }
         const std::vector<std::string> translated =

@@ -210,7 +210,7 @@ if(NOT EMSCRIPTEN)
     endif()
 
     add_executable(hdtrans_tests ${HDTRANS_TEST_SOURCES} src/frontend/dictionary_version.cpp
-        src/frontend/eztrans_registry.cpp)
+        src/frontend/eztrans_registry.cpp src/frontend/capture.cpp)
     target_include_directories(hdtrans_tests PRIVATE tests/unit src "${CMAKE_CURRENT_BINARY_DIR}")
     target_link_libraries(hdtrans_tests PRIVATE hdtrans_gui_support)
     if(WIN32)
@@ -379,7 +379,8 @@ if(NOT EMSCRIPTEN)
         endif()
     endif()
 
-    add_executable(config_host tests/host/config.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp)
+    add_executable(config_host tests/host/config.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp
+        src/frontend/capture.cpp)
     target_include_directories(config_host PRIVATE src)
     target_link_libraries(config_host PRIVATE hdtrans ${CMAKE_DL_LIBS})
     set_target_properties(config_host PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/config-host")
@@ -390,7 +391,8 @@ if(NOT EMSCRIPTEN)
     endif()
     set_tests_properties(host.config PROPERTIES ENVIRONMENT "HDTRANS_CACHE_DIR=off")
 
-    add_executable(admin_priority tests/host/admin_priority.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp)
+    add_executable(admin_priority tests/host/admin_priority.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp
+        src/frontend/capture.cpp)
     target_include_directories(admin_priority PRIVATE src)
     target_link_libraries(admin_priority PRIVATE hdtrans ${CMAKE_DL_LIBS})
     add_test(NAME host.admin_priority COMMAND admin_priority "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder")
@@ -463,13 +465,15 @@ if(EMSCRIPTEN)
         -sSTACK_SIZE=1048576
         -sEXPORTED_RUNTIME_METHODS=FS,HEAPU8)
 elseif(WIN32)
-    add_library(hdtrans_dll SHARED src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp src/cshared/hdtrans.def)
+    add_library(hdtrans_dll SHARED src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp src/frontend/capture.cpp
+        src/cshared/hdtrans.def)
     set_target_properties(hdtrans_dll PROPERTIES OUTPUT_NAME hdTransEngine PREFIX "")
     target_compile_definitions(hdtrans_dll PRIVATE HDTRANS_BUILD_DLL)
     target_include_directories(hdtrans_dll PRIVATE src)
     target_link_libraries(hdtrans_dll PRIVATE hdtrans)
 
-    add_library(j2kengine SHARED src/j2kengine/j2kengine.cpp src/frontend/module_dir.cpp src/j2kengine/j2kengine.def)
+    add_library(j2kengine SHARED src/j2kengine/j2kengine.cpp src/frontend/module_dir.cpp src/frontend/capture.cpp
+        src/j2kengine/j2kengine.def)
     set_target_properties(j2kengine PROPERTIES OUTPUT_NAME J2KEngine PREFIX "")
     target_include_directories(j2kengine PRIVATE src)
     target_link_libraries(j2kengine PRIVATE hdtrans)
@@ -554,7 +558,7 @@ elseif(WIN32)
     set_tests_properties(host.xunity PROPERTIES WORKING_DIRECTORY "${toolCompatDir}"
         LABELS tool-compat TIMEOUT 120)
 else()
-    add_library(hdtrans_shared SHARED src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp)
+    add_library(hdtrans_shared SHARED src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp src/frontend/capture.cpp)
     set_target_properties(hdtrans_shared PROPERTIES OUTPUT_NAME hdTransEngine)
     target_include_directories(hdtrans_shared PRIVATE src)
     target_link_libraries(hdtrans_shared PRIVATE hdtrans ${CMAKE_DL_LIBS})

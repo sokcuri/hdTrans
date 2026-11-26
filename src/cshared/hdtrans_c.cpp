@@ -21,6 +21,7 @@
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
 #include "core/names/list.h"
+#include "frontend/capture.h"
 #include "frontend/module_dir.h"
 
 namespace {
@@ -46,6 +47,7 @@ hdTrans::internal::ConfigCache g_cache;
 std::unique_ptr<hdTrans::Engine> g_engine;
 std::unique_ptr<hdTrans::Session> g_session;
 std::string g_names;  // the name list of hdTrans_SetNames
+std::unique_ptr<hdTrans::frontend::Capture> g_capture;  // the settings key capture
 
 // Queued state changes run before new translations.
 class AdminLock {
@@ -147,8 +149,10 @@ BOOL WINAPI DllMain(HINSTANCE /*module*/, DWORD reason, LPVOID reserved) {
     if (reserved) {
         static_cast<void>(g_session.release());
         static_cast<void>(g_engine.release());
+        static_cast<void>(g_capture.release());
         return TRUE;
     }
+    g_capture.reset();
     g_session.reset();
     if (g_engine) g_engine->DetachReload();
     g_engine.reset();
@@ -209,6 +213,7 @@ int hdTrans_Initialize(const char* dirs) {
     }
     const hdTrans::EngineOptions dictionaryOptions{strictDict, true, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, kUserReload, dictionaryOptions);
+    auto capture = hdTrans::frontend::OpenCapture(settings.capture, dir);
     if (hadActiveEngine)
         hdTrans::internal::SeedUserSources(*e, std::move(acceptedSources), std::move(acceptedEhnd));
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, settings.ehnd.has_value()};
@@ -227,6 +232,7 @@ int hdTrans_Initialize(const char* dirs) {
     g_session->SetWrapped(settings.wrapped);
     g_session->SetPredicateVariants(settings.predicateVariants);
     static_cast<void>(g_session->SetNames(g_names));
+    hdTrans::frontend::ReplaceCapture(g_capture, std::move(capture));
     g_dirs = requestedPaths;
     g_ehnd.reset();
     ClearFailedLoad();
@@ -247,6 +253,7 @@ void hdTrans_Terminate(void) {
     g_configPath.clear();
     g_strictDictOverride.reset();
     g_names.clear();
+    g_capture.reset();
     ClearFailedLoad();
     static_cast<void>(g_cache.Apply(std::nullopt));
 }
@@ -255,6 +262,7 @@ int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn) {
     std::unique_lock<std::mutex> lock(g_mutex);
     g_adminsDone.wait(lock, [] { return g_waitingAdmins == 0; });
     if (!g_session) return -1;
+    if (g_capture) g_capture->Add(std::string_view(text, n));
     return Copy(g_session->Translate(std::string_view(text, n)), out, outn);
 }
 
@@ -263,6 +271,7 @@ int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, s
     g_adminsDone.wait(lock, [] { return g_waitingAdmins == 0; });
     if (!g_session) return -1;
     const std::string_view lines = context ? std::string_view(context, cn) : std::string_view();
+    if (g_capture) g_capture->Add(std::string_view(text, n));
     return Copy(g_session->Translate(std::string_view(text, n), lines), out, outn);
 }
 
@@ -318,6 +327,7 @@ int hdTrans_Reload(void) {
     }
     const hdTrans::EngineOptions dictionaryOptions{strictDict, true, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, kUserReload, dictionaryOptions);
+    auto capture = hdTrans::frontend::OpenCapture(settings.capture, dir);
     hdTrans::internal::SeedUserSources(*e, std::move(userSources), std::move(acceptedEhnd));
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, ehndOverride.has_value() || settings.ehnd.has_value()};
     if (!hdTrans::internal::OpenEhndSource(*e, ehndSource, config) ||
@@ -334,6 +344,7 @@ int hdTrans_Reload(void) {
     g_session->SetWrapped(settings.wrapped);
     g_session->SetPredicateVariants(settings.predicateVariants);
     static_cast<void>(g_session->SetNames(g_names));
+    hdTrans::frontend::ReplaceCapture(g_capture, std::move(capture));
     g_configErrors = ConfigDiagnostics(config, configPath, dir);
     g_configPath = configPath;
     ClearFailedLoad();

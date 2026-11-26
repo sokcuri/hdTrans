@@ -94,7 +94,7 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--wrapped` | 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계. 줄 끝 화살표(➡, ￫, →, ⇒)는 다음 줄로 이어지며 번역 끝에 한 칸 띄어 남음, 규칙은 `spec/layout.md`의 LAY-14. `--each`, `--raw`와 함께 쓸 수 없고, 설정 파일의 `wrapped`는 그 둘에서 쓰지 않음 |
 | `--context FILE` | FILE의 UTF-8 줄을 입력 앞에 오는 같은 문서로 읽음. 이름, 「」 대사, 가족 호칭, 뜻 같은 단서로만 번역하고 출력하지 않음. `--wrapped`이면 입력이 이어 가는 문장의 앞부분. 끝의 줄바꿈 하나는 줄로 세지 않음. `--each`, `--raw`와 함께 쓸 수 없음 |
 | `--names FILE` | 입력 문서의 이름 목록. 한 줄에 `일본어<TAB>한국어[<TAB>종류[<TAB>hon]]` ([dictionary-files.md](dictionary-files.md#문서-이름-목록)). 잘못된 줄은 경고하고, 컴파일되지 않는 이름은 오류를 적고 건너뜀. 사용자 폴더의 `names*.txt` 위에 놓임. `--raw`와 함께 쓸 수 없음 |
-| `--propose-names` | 번역하지 않고 입력 문서가 보이는 이름(화자 포함) 가운데 `--names`에 없는 것을 같은 형식으로 한국어와 함께 출력. `--each`, `--raw`와 함께 쓸 수 없음 |
+| `--propose-names` | 번역하지 않고 입력 문서가 보이는 이름(화자 포함) 가운데 `--names`와 사용자 폴더의 이름 목록에 없는 것을 같은 형식으로 한국어와 함께 출력. 줄 끝 주석은 근거와 횟수(`# 화자 12`, `# 경칭 5`, `# 읽기 2`, `# 성명`). `--out FILE`이면 FILE을 덮어쓰지 않고 FILE에 없는 이름만 끝에 더하고 더한 수를 표준 오류에 씀. FILE의 줄과 `#`을 붙인 이름 줄은 다시 더하지 않음. FILE이 UTF-8이 아니면 그대로 두고 1로 끝남 ([dictionary-files.md](dictionary-files.md#문서-이름-목록)). `--each`, `--raw`와 함께 쓸 수 없음 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
 | `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사하고 읽은 사전 정보를 표준 오류에 씀. 펼 수 없는 표지(품사 코드의 부류와 어긋나거나 표에 없는 계열)를 쓴 사전 줄([rule-language.md](rule-language.md#번역-안의-표지-d-y))이나 기본, 어휘 계층의 명사 줄 중 번역이 `하기`로 끝나는 한 낱말(출항하기, [dictionary-files.md](dictionary-files.md#열-파일)), 번역에 가나나 한자가 있는 사전 줄이 있으면 나열하고 실패 |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
@@ -160,6 +160,19 @@ CLI 플래그가 파일보다 우선합니다.
 | `wrapped` | bool, 기본 `false`. 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. `true`는 `--wrapped` |
 | `predicate_variants` | bool, 기본 `true`. 서술어 뒤 기능어의 한자 표기(様)를 가나 표기(よう)처럼 읽음(spec LEX-1050). `false`는 `--no-predicate-variants` |
 | `strict_dict` | bool. [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리) |
+| `capture` | bool, 기본 `false`. 두 DLL이 받은 원문 줄을 `user/capture/<실행 파일 이름>.txt`에 한 번씩 더함. 번역에는 쓰지 않음. 아래 [원문 줄 모으기](#원문-줄-모으기) |
+
+#### 원문 줄 모으기
+
+`capture: true`면 `hdTransEngine.dll`(C API)과 `J2KEngine.dll`이 번역할 줄을 그 데이터 루트의 `user/capture/<실행 파일 이름>.txt`에
+UTF-8로 더합니다. `hdtrans --propose-names --in` 파일로 이름 목록을 만드는 데 씁니다([using-with-tools.md](using-with-tools.md#후킹한-게임의-이름-목록-만들기)).
+
+- 호출의 `\n`마다 한 줄, 줄 앞뒤 공백과 `\r`을 뗍니다. ASCII만 있는 줄과 빈 줄, 파일에 이미 있는 줄은 쓰지 않습니다. 문맥(`hdTrans_TranslateContext`의 `context`)은 쓰지 않습니다.
+- 줄마다 한 번 쓰고 비웁니다. 여러 스레드에서 불러도 줄이 섞이지 않습니다.
+- 파일이 8MB나 10만 줄이 되면 더 쓰지 않습니다. 폴더를 만들 수 없거나 쓸 수 없으면 알리지 않고 멈춥니다.
+- 시작, `hdTrans_Reload`, `J2K_ReloadUserDict`에서 설정을 읽어 켜고 끕니다. 첫 줄을 쓸 때 폴더와 파일을 만듭니다.
+- 번역은 파일을 읽지 않습니다. 켜도 같은 줄은 같은 번역입니다.
+- 파일에는 원문이 그대로 남습니다. 지우려면 설정을 끄고 다시 시작하거나 다시 읽은 뒤 `user/capture/`를 지웁니다.
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
 알 수 없는 키와 잘못된 값은 건너뛰고, 문법 오류 앞의 정상 항목은 유지합니다. 진단은 CLI의 표준 오류,
@@ -245,7 +258,8 @@ if (hdTrans_Translate(text, strlen(text), &out, &outn) == 0) {
 hdTrans_Terminate();
 ```
 
-C API는 사전 캐시를 읽기만 하고 새로 저장하지 않습니다([dictionary-files.md](dictionary-files.md#캐시)).
+C API는 사전 캐시를 읽기만 하고 새로 저장하지 않습니다([dictionary-files.md](dictionary-files.md#캐시)). 설정의 `capture`를 켤 때만
+받은 줄을 파일로 씁니다([원문 줄 모으기](#원문-줄-모으기)).
 
 ## J2K 함수 (J2KEngine.dll)
 
@@ -261,6 +275,7 @@ Windows 전용이며, 이지트랜스를 불러오는 도구는 대부분 32비�
 - 프로세스 종료 시에는 엔진을 정리하지 않고, `FreeLibrary`로 내릴 때는 진행 중인 다시 읽기를 기다리지 않습니다.
 - Shift-JIS(932), CP949(949), UTF-16 변환은 OS 함수로 이 경계에서만 합니다. 엔진 안에는 코드 페이지
   표가 없습니다.
+- 설정의 `capture`를 켜면 받은 줄을 모읍니다([원문 줄 모으기](#원문-줄-모으기)).
 - 반환 버퍼는 프로세스 힙에 할당하며 `J2K_FreeMem`으로 해제합니다.
 - 호출은 스레드 안전하지만 재진입은 안 됩니다.
 

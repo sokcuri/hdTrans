@@ -159,7 +159,28 @@ printf 'surface\n猫\n' > "$tmp/cast-off"
 [ "$(HD08_CAST_OFF="$tmp/cast-off" "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" = 고양이 ]
 printf 'ルルさん、おはよう。\nルルさん、またね。\n' > "$tmp/called"
 "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" --propose-names -in "$tmp/called" > "$tmp/out" 2> "$tmp/errors"
-[ "$(cat "$tmp/out")" = "$(printf 'ルル\t룰\tgiven')" ]
+[ "$(cat "$tmp/out")" = "$(printf 'ルル\t룰\tgiven\t# 경칭 2')" ]
+# A capture of hooked lines made into a name list: --out adds the names the file lacks and keeps the
+# lines a reader edited or commented out.
+mkdir -p "$tmp/game"
+"$cli" -dicts "$tmp/settings/first" --propose-names -in "$tmp/called" --out "$tmp/game/names.txt" 2> "$tmp/errors"
+grep -F "1 names added to $tmp/game/names.txt" "$tmp/errors" > /dev/null
+[ "$(grep -v '^#' "$tmp/game/names.txt")" = "$(printf 'ルル\t룰\tgiven\t# 경칭 2')" ]
+"$cli" -dicts "$tmp/settings/first" --userdict "$tmp/game" -each -in "$tmp/called" 2> /dev/null | grep -F '룰' > /dev/null
+sed 's/룰/루루/' "$tmp/game/names.txt" > "$tmp/edited" && mv "$tmp/edited" "$tmp/game/names.txt"
+printf 'ルルさん、また明日。\nミミさん、おはよう。\nミミさん、またね。\n' >> "$tmp/called"
+"$cli" -dicts "$tmp/settings/first" --propose-names -in "$tmp/called" --out "$tmp/game/names.txt" 2> "$tmp/errors"
+grep -F '1 names added' "$tmp/errors" > /dev/null
+[ "$(grep -v '^#' "$tmp/game/names.txt")" = "$(printf 'ルル\t루루\tgiven\t# 경칭 2\nミミ\t미미\tgiven\t# 경칭 2')" ]
+sed 's/^ミミ/#ミミ/' "$tmp/game/names.txt" > "$tmp/edited" && mv "$tmp/edited" "$tmp/game/names.txt"
+"$cli" -dicts "$tmp/settings/first" --userdict "$tmp/game" --propose-names -in "$tmp/called" --out "$tmp/game/names.txt" 2> "$tmp/errors"
+grep -F '0 names added' "$tmp/errors" > /dev/null
+[ "$(grep -c . "$tmp/game/names.txt")" -eq 3 ]
+"$cli" -dicts "$tmp/settings/first" --userdict "$tmp/game" -each -in "$tmp/called" 2> /dev/null | grep -F '루루' > /dev/null
+printf '\224\114\t\263\327\n' > "$tmp/game/legacy.txt"
+status=0
+"$cli" -dicts "$tmp/settings/first" --propose-names -in "$tmp/called" --out "$tmp/game/legacy.txt" 2> "$tmp/errors" || status=$?
+[ "$status" -eq 1 ] && [ "$(od -An -tx1 "$tmp/game/legacy.txt" | tr -d ' \n')" = 944c09b3d70a ]
 # One line per call reads the list too.
 [ "$("$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -each -in "$tmp/input" 2> /dev/null)" = 네코 ]
 # The names*.txt of a user folder are a list under --names.

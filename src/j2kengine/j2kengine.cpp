@@ -26,6 +26,7 @@
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
 #include "core/filter/ehnd.h"
+#include "frontend/capture.h"
 #include "frontend/load_info.h"
 #include "frontend/module_dir.h"
 
@@ -60,6 +61,7 @@ std::uint64_t g_generation = 0;
 hdTrans::internal::ConfigCache g_cache;
 std::unique_ptr<hdTrans::Engine> g_engine;
 std::unique_ptr<hdTrans::Session> g_session;
+std::unique_ptr<hdTrans::frontend::Capture> g_capture;  // the settings key capture
 std::weak_ptr<const hdTrans::dict::Snapshot> g_loggedSnapshot;
 std::weak_ptr<const hdTrans::filter::Filters> g_loggedFilters;
 std::optional<std::uint64_t> g_loggedDiagnosticsVersion;
@@ -137,6 +139,7 @@ void ProbeAnemone() {
 std::string TranslateUtf8(const std::string& text) {
     if (!g_session) return {};
     if (!g_anemoneProbed) ProbeAnemone();
+    if (g_capture) g_capture->Add(text);
     const std::string output = g_session->Translate(text);
     LogLoadErrors(*g_engine, false);
     return output;
@@ -200,8 +203,10 @@ BOOL WINAPI DllMain(HINSTANCE /*module*/, DWORD reason, LPVOID reserved) {
     if (reserved) {
         static_cast<void>(g_session.release());
         static_cast<void>(g_engine.release());
+        static_cast<void>(g_capture.release());
         return TRUE;
     }
+    g_capture.reset();
     g_session.reset();
     if (g_engine) g_engine->DetachReload();
     g_engine.reset();
@@ -243,6 +248,7 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
                                             hdTrans::UserReload::Auto, dictionaryOptions);
+    auto capture = hdTrans::frontend::OpenCapture(settings.capture, dir);
     hdTrans::internal::SetHostUserDicts(*e, std::move(aneDic));
     static_cast<void>(hdTrans::internal::OpenEhndSource(*e, ehndSource, config));
     const bool loaded = hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config);
@@ -257,6 +263,7 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
     g_session->SetPredicateVariants(settings.predicateVariants);
+    hdTrans::frontend::ReplaceCapture(g_capture, std::move(capture));
     ++g_generation;
     return 1;
 }
@@ -268,6 +275,7 @@ int __stdcall J2K_Terminate() {
     ++g_generation;
     g_session.reset();
     g_engine.reset();
+    g_capture.reset();
     g_loggedSnapshot.reset();
     g_loggedFilters.reset();
     g_loggedDiagnosticsVersion.reset();
@@ -337,6 +345,7 @@ void __stdcall J2K_ReloadUserDict() {
     const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
                                             hdTrans::UserReload::Auto, dictionaryOptions);
+    auto capture = hdTrans::frontend::OpenCapture(settings.capture, dir);
     hdTrans::internal::SeedUserSources(*e, std::move(userSources), std::move(acceptedEhnd));
     hdTrans::internal::SetHostUserDicts(*e, std::move(aneDic));
     const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource, config) &&
@@ -353,6 +362,7 @@ void __stdcall J2K_ReloadUserDict() {
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
     g_session->SetPredicateVariants(settings.predicateVariants);
+    hdTrans::frontend::ReplaceCapture(g_capture, std::move(capture));
     ++g_generation;
 }
 void __stdcall J2K_SetField(int) {}

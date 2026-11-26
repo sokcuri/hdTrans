@@ -130,7 +130,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
                                                bool extraBuiltin = false, const DocumentNames* names = nullptr);
 
 // The names the list of names would add for the document of lines: the registry's accepted
-// names it lacks, in the list format, one per line.
+// names it lacks, in the list format, one per line, each with its Registry::Evidence as a comment.
 std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines,
                          const DocumentNames* names = nullptr);
 

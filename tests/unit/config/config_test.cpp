@@ -71,7 +71,7 @@ HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(
         "# settings\ndicts: [dicts, '../extra']\nuserdict: user.tsv\nehnd: Ehnd\n"
-        "cache: cache\ncg: false\nmisread: true\nreference: true\nspeech: strict\nwrapped: true\n");
+        "cache: cache\ncg: false\nmisread: true\nreference: true\nspeech: strict\nwrapped: true\ncapture: true\n");
     HD_CHECK(result.found);
     HD_REQUIRE(result.diagnostics.empty());
     const auto& settings = result.settings;
@@ -88,6 +88,7 @@ HD_TEST(ConfigAllKeys) {
     HD_CHECK(settings.reference);
     HD_CHECK(settings.speech == hdTrans::Speech::Strict);
     HD_CHECK(settings.wrapped);
+    HD_CHECK(settings.capture);
 }
 
 HD_TEST(ConfigStrictDictionary) {
@@ -221,6 +222,7 @@ HD_TEST(ConfigEmptyAndMissing) {
         HD_CHECK(!result.settings.reference);
         HD_CHECK(result.settings.speech == hdTrans::Speech::Strict);
         HD_CHECK(!result.settings.wrapped);
+        HD_CHECK(!result.settings.capture);
     }
 }
 
