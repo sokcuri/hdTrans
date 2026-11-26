@@ -1,0 +1,70 @@
+# 규칙: GRM-17
+rule	input	expected	kind	layer
+ending:書いちゃうじゃない	しっかりしてよ。見つかっちゃうじゃない	확실히 해. 발견되어버리잖아	fix	builtin-ending
+ending:書いちゃうじゃない	選挙が終わっちゃうじゃないっ！	선거가 끝나버리잖아!	fix	builtin-ending
+ending:書いちゃうじゃない	こんな状態で寝たら、夢見ちゃうじゃない	이런 상태로 자면, 꿈꾸어버리잖아	fix	builtin-ending
+ending:書いちゃうじゃない	見つかっちゃうじゃない？	발견되어버리잖아?	fix	builtin-ending
+ending:書いちゃうじゃないの	早く寝ちゃうじゃないの	빨리 자버리잖아	fix	builtin-ending
+ending:書いてるじゃない	でも、実際にやってるじゃないっ	하지만, 실제로 하고 있잖아	fix	builtin-ending
+ending:書いてるじゃない	全然慌ててるじゃないっ！	전혀 당황하고 있잖아!	fix	builtin-ending
+ending:書かないじゃない	全然来ないじゃない	전혀 오지 않잖아	keep	builtin-ending
+cx:predicate-tag:42	その勝負、受けて立とうじゃない！	그 승부, 받아 주자고!	fix	rewrites
+cx:predicate-tag:42	だったら、勝負、しようじゃないの	그렇다면, 승부, 하자고	fix	rewrites
+cx:predicate-tag:42	本人に聞こうじゃないか	본인에게 묻지 않겠니	keep	rewrites
+cx:predicate-tag:42	早く食べようじゃないか	빨리 먹지 않겠니	keep	rewrites
+cx:predicate-tag:10	何を言いに来たのか忘れちゃったじゃない	무슨 말을 하러 왔는지 잊어버렸잖아	fix	rewrites
+cx:predicate-tag:10	勝手にいなくならないでよ、心配しちゃうじゃないか	마음대로 없어지지 말아, 걱정해버리잖아	fix	rewrites
+cx:predicate-tag:10	やあ、田中じゃないか	야, 타나카잖아	keep	rewrites
+cx:predicate-tag:20	緊張して汗が出ちゃったじゃないですか	긴장해 땀이 나버렸잖아요	fix	rewrites
+cx:predicate-tag:20	事務作業、ほとんど彼女がやってるじゃないですか	사무 작업, 거의 그녀가 하고 있잖아요	fix	rewrites
+cx:predicate-tag:20	さっきまで元気だったじゃないですか	조금 전까지 건강했잖아요	fix	rewrites
+cx:predicate-tag:20	すごかったじゃないですか	대단했잖아요	fix	rewrites
+cx:predicate-tag:20	田中さんじゃないですか	타나카 씨잖아요	keep	rewrites
+cx:predicate-tag:40	それだと、悪い人みたいじゃない	그것이라면, 나쁜 사람 같지 않다	keep	rewrites
+cx:predicate-tag:40	それこそ小学生みたいじゃない	그야말로 초등학생 같지 않다	keep	rewrites
+cx:predicate-tag:40	なんか面白そうじゃない	왠지 재미있을 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	仲いいみたいじゃない？	사이 좋은 것 같지 않아?	keep	rewrites
+cx:predicate-tag:40	あまり嬉しそうじゃない	그다지 기쁜 듯하지 않다	keep	rewrites
+cx:predicate-tag:40	あまり嬉しそうじゃないから	그다지 기쁜 듯하지 않으니까	keep	rewrites
+cx:predicate-tag:40	面白そうじゃないけど	재미있을 것 같지 않은데	keep	rewrites
+cx:predicate-tag:40	子供みたいじゃないの	아이 같지 않아	keep	rewrites
+cx:predicate-tag:40	子供みたいじゃないの？	아이 같지 않아?	keep	rewrites
+cx:predicate-tag:40	サルたちには反応しなかったじゃないっ！	원숭이들에게는 반응하지 않았잖아!	fix	rewrites
+cx:predicate-tag:40	俺は犯人じゃない	나는 범인이 아니다	keep	rewrites
+cx:predicate-tag:40	そうじゃない	그렇지 않다	keep	rewrites
+cx:predicate-tag:40	嫌いじゃない	싫지 않다	keep	rewrites
+cx:predicate-tag:40	いいじゃない	좋잖아	keep	rewrites
+cx:predicate-tag:40	楽しそうじゃないよ	즐거운 듯하지 않아	keep	rewrites
+cx:predicate-tag:40	子供みたいじゃないよ	아이 같지 않아	keep	rewrites
+cx:predicate-tag:40	美味しそうじゃないわ	맛있어 보이지 않아	keep	rewrites
+cx:predicate-tag:40	美味しそうじゃないわよ	맛있어 보이지 않아	keep	rewrites
+cx:predicate-tag:40	これは嘘みたいじゃないよ	이것은 거짓말 같지 않아	keep	rewrites
+cx:predicate-tag:40	その店の料理は美味しそうじゃない。	그 가게 요리는 맛있어 보이지 않다.	keep	rewrites
+cx:predicate-tag:40	この絵は本物みたいじゃない。	이 그림은 진짜 같지 않다.	keep	rewrites
+cx:predicate-tag:40	あの子は楽しそうじゃない	그 아이는 즐거운 듯하지 않다	keep	rewrites
+cx:predicate-tag:40	とても楽しそうじゃない	도저히 즐거운 듯하지 않다	keep	rewrites
+cx:predicate-tag:40	子供みたいじゃないのよ	아이 같지 않아	keep	rewrites
+cx:predicate-tag:40	それだと、彼は悪い人みたいじゃない	그것이라면, 그는 나쁜 사람 같지 않다	keep	rewrites
+cx:predicate-tag:40	あれ、ここじゃない	어라, 여기가 아니다	keep	rewrites
+cx:predicate-tag:40	あれ、そういう意味じゃない	어라, 그런 의미가 아니다	keep	rewrites
+cx:predicate-tag:40	あれ、私の番じゃない	어라, 내 차례가 아니다	keep	rewrites
+cx:predicate-tag:40	なんだよ、俺のせいじゃない	뭐야, 내 탓이 아니다	keep	rewrites
+cx:predicate-tag:40	あれ、田中じゃない。鈴木だ。	어라, 타나카가 아니다. 스즈키다.	keep	rewrites
+cx:predicate-tag:40	行こうじゃないか	가지 않겠니	keep	rewrites
+cx:predicate-tag:40	それほど楽しそうじゃない。	그렇게 즐거운 듯하지 않다.	keep	rewrites
+cx:predicate-tag:40	さほど痛そうじゃない。	그다지 아파 보이지 않다.	keep	rewrites
+cx:predicate-tag:40	なかなか終わりそうじゃない	좀처럼 끝날 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	まだ終わりそうじゃない	아직 끝날 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	雨も止みそうじゃない	비도 그칠 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	間に合いそうじゃない	늦지 않을 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	これ、売れそうじゃない	이것, 팔릴 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	彼、まだ来そうじゃない	그, 아직 올 것 같지 않다	keep	rewrites
+cx:predicate-tag:40	この靴、雨でも滑らなそうじゃない	이 신발, 비라도 미끄러지지 않아 보이지 않다	keep	rewrites
+cx:predicate-tag:40	甘そうじゃない	달아 보이지 않다	keep	rewrites
+cx:predicate-tag:40	彼も元気そうじゃない	그도 건강해 보이지 않다	keep	rewrites
+cx:predicate-tag:40	「楽しそうじゃない」と彼は言った	「즐거운 듯하지 않다」라고 그는 말했다	keep	rewrites
+cx:predicate-tag:42	どうしようじゃない	어떻게 하지가 아니다	keep	rewrites
+cx:predicate-tag:42	何をしようじゃない	무엇을 하자가 아니다	keep	rewrites
+cx:predicate-tag:42	どこへ行こうじゃない	어디에 가자가 아니다	keep	rewrites
+cx:predicate-tag:42	本当に行こうじゃないの？	정말 가자가 아닌 거야?	keep	rewrites
+cx:predicate-tag:42	一緒に帰ろうじゃない	함께 돌아가자고	fix	rewrites

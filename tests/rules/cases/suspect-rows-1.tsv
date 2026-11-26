@@ -8,7 +8,7 @@ cx:benefactive-provider:10	私は母に本を読んでもらえた。	나는 어
 cx:benefactive-provider:10	彼に助けてもらえた	그가 도와 주었다	fix	rewrites
 cx:benefactive-provider:10	彼に助けてもらえない。	그가 도와 주지 않는다.	fix	rewrites
 cx:benefactive-provider:10	ありがとうございます。先輩に聞いてもらえて、すごくすっきりしました！	감사합니다. 선배가 들어 주고, 정말 개운했습니다!	fix	rewrites
-cx:benefactive-provider:10	まぁ あんたに そう言ってもらえるの その… うれしいわよ。	뭐 네가 그렇게 말해 줄 수 있는 것 그… 기뻐.	fix	rewrites
+cx:benefactive-provider:10	まぁ あんたに そう言ってもらえるの その… うれしいわよ。	뭐 네가 그렇게 말해 주는 것 그… 기뻐.	fix	rewrites
 cx:benefactive-provider:10	病気や怪我をすれば医師に診てもらえ、少々の娯楽を楽しめる	병이나 다치면 의사가 진찰해 줄 수 있어, 조금 오락을 즐길 수 있다	fix	rewrites
 cx:benefactive-provider:10	誰かに手伝ってもらえますか？	누군가에게 도움을 받을 수 있습니까?	keep	rewrites
 cx:benefactive-provider:10	彼にも手伝ってもらえない	그에게도 도움을 받을 수 없다	keep	rewrites
