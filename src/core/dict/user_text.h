@@ -120,6 +120,13 @@ private:
     std::vector<UserEntry> entries_;
     std::unordered_map<std::string, std::vector<const UserEntry*>, StringHash, std::equal_to<>> byKey_;
     std::size_t maxKey_ = 0;
+    // The bytes of the longest key that starts with a character (Search reads no longer prefix): by code point in the
+    // BMP, UINT16_MAX for maxKey_, empty for no key; past it the longest of all such keys.
+    static constexpr char32_t kBmp = 0x10000;
+    std::vector<uint16_t> bmpLongest_;
+    std::size_t otherMax_ = 0;
+    void NoteKey(std::string_view key);
+    std::size_t LongestFrom(char32_t first) const;
     std::vector<const UserEntry*> honorifics_;
 };
 

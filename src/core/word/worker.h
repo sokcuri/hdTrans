@@ -284,7 +284,20 @@ private:
         const Record* endings;
     };
     ProbeMark MarkProbe() const;
-    void RewindProbe(const ProbeMark& m);
+    // texts false keeps the texts the probe kept (a cache keyed by a text's address then never meets another text there).
+    void RewindProbe(const ProbeMark& m, bool texts = true);
+    // Gives back the items, groups, entries and details a probe made, keeping its records and texts.
+    void RewindProbeItems(const ProbeMark& m);
+    // Runs check, which reads with InsertLateCandidate where words would go and returns a record or records (or null)
+    // but no item it made: those go back, and so do its records when it returns none.
+    template <class F>
+    auto Probing(F&& check) {
+        const ProbeMark mark = MarkProbe();
+        const auto found = check();
+        if (found == nullptr) RewindProbe(mark, false);
+        else RewindProbeItems(mark);
+        return found;
+    }
     // The place whose verbs SegEdgesAt probes one by one (text, byte offset, token; text null outside it), and whether
     // the prefix table read nothing there.
     struct PrefixProbe {
@@ -308,6 +321,13 @@ private:
     void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
     std::size_t CopyEnd(std::string_view text, std::string_view before);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
+    // TranslateCandidateAt after a candidate or at a place of CoverSurface. Where the words fail, the items and records
+    // that search made go back (RewindProbe, keeping texts) when nothing outside it holds one: it inserted no item, left
+    // no resume point, shortened no verb and left nothing for the search to pick. A long text read word by word then
+    // keeps only the readings it can still use.
+    bool TranslateAfter(std::string_view full, int cursor, int token, Item* parent);
+    // Items inserted into the chain, counted (TranslateAfter).
+    std::size_t inserted_ = 0;
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);

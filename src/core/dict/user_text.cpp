@@ -46,6 +46,7 @@ UserText::UserText(std::vector<UserEntry> entries) : entries_(std::move(entries)
         auto [it, added] = byKey_.try_emplace(e.key);
         it->second.push_back(&e);
         maxKey_ = std::max(maxKey_, e.key.size());
+        if (!e.key.empty()) NoteKey(e.key);
     }
     for (auto& [key, list] : byKey_) {
         std::vector<const UserEntry*> kept;
@@ -79,6 +80,24 @@ UserText::UserText(const UserText& base, std::vector<UserEntry> entries) : UserT
     }
 }
 
+void UserText::NoteKey(std::string_view key) {
+    const char32_t first = text::DecodeRune(key).cp;
+    if (first >= kBmp) {
+        otherMax_ = std::max(otherMax_, key.size());
+        return;
+    }
+    if (bmpLongest_.empty()) bmpLongest_.assign(kBmp, 0);
+    uint16_t& longest = bmpLongest_[first];
+    longest = static_cast<uint16_t>(std::min<std::size_t>(std::max<std::size_t>(longest, key.size()), UINT16_MAX));
+}
+
+std::size_t UserText::LongestFrom(char32_t first) const {
+    if (first >= kBmp) return otherMax_;
+    if (bmpLongest_.empty()) return 0;
+    const uint16_t longest = bmpLongest_[first];
+    return longest == UINT16_MAX ? maxKey_ : longest;
+}
+
 std::size_t UserText::Len() const {
     std::size_t n = base_ ? base_->Len() : 0;
     for (const auto& [key, list] : byKey_) {
@@ -103,8 +122,14 @@ std::vector<const UserEntry*> UserText::Search(std::string_view text, LookupMode
     std::vector<const UserEntry*> out;
     if (byKey_.empty()) return base_ ? base_->Search(text, mode) : out;
     std::vector<std::size_t> ends;
-    if (text.empty()) ends.push_back(0);
-    for (std::size_t i = 0; i < text.size() && i < maxKey_;) {
+    std::size_t longest = 0;  // of the keys that start with the first character of text
+    if (text.empty()) {
+        ends.push_back(0);
+    } else {
+        const char32_t first = text::DecodeRune(text).cp;
+        for (const UserText* index = this; index != nullptr; index = index->base_) longest = std::max(longest, index->LongestFrom(first));
+    }
+    for (std::size_t i = 0; i < text.size() && i < longest;) {
         i += text::DecodeRune(text.substr(i)).size;
         ends.push_back(i);
     }

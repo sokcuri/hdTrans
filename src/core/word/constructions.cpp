@@ -3,9 +3,12 @@
 #include <algorithm>
 #include <atomic>
 #include <bit>
+#include <concepts>
 #include <cstdint>
+#include <iterator>
 #include <span>
 #include <string>
+#include <type_traits>
 #include <unordered_map>
 #include <vector>
 
@@ -1808,15 +1811,327 @@ void OrderOperands(ConstructionTable& t) {
     }
 }
 
+ConstructionTable ParseBuiltinConstructions() {
+    for (const dict::internal::BuiltinTable& b : dict::internal::BuiltinTables()) {
+        if (b.name != "constructions.tsv") continue;
+        ConstructionTable t = ParseConstructions(b.lines, TextPassNames());
+        OrderOperands(t);
+        return t;
+    }
+    return ConstructionTable{};
+}
+
+namespace {
+
+// WriteConstructions and ReadConstructions visit every member of each struct in declaration order; the
+// structured bindings stop the build when a member is added without its place here. Integers are LEB128
+// (signed ones zigzag), strings their length and bytes, a word class its name, a feature its place in
+// kFeatures plus one (0 for none).
+class CxWriter {
+public:
+    std::vector<uint8_t> out;
+
+    template <class T>
+    void Num(const T& v) {
+        if constexpr (std::is_enum_v<T>) {
+            Num(static_cast<std::underlying_type_t<T>>(v));
+        } else if constexpr (std::is_same_v<T, bool>) {
+            Unsigned(v ? 1 : 0);
+        } else if constexpr (std::is_signed_v<T>) {
+            const auto x = static_cast<int64_t>(v);
+            Unsigned((static_cast<uint64_t>(x) << 1) ^ (x < 0 ? ~uint64_t{0} : uint64_t{0}));
+        } else {
+            Unsigned(static_cast<uint64_t>(v));
+        }
+    }
+    void Str(std::string_view s) {
+        Unsigned(s.size());
+        out.insert(out.end(), s.begin(), s.end());
+    }
+    template <class T, class F>
+    void Vec(const std::vector<T>& v, F each) {
+        Unsigned(v.size());
+        for (const T& x : v) each(x);
+    }
+    void Class(const dict::internal::WordClass* set) { Str(set != nullptr ? set->name : std::string_view()); }
+    void Feature(CxFeature feature) {
+        uint64_t number = 0;
+        for (std::size_t i = 0; i < std::size(kFeatures) && feature != nullptr; i++) {
+            if (kFeatures[i].test == feature) number = i + 1;
+        }
+        Unsigned(number);
+    }
+    void Surfaces(const std::unordered_map<std::string, uint32_t, CxSurfaceHash, std::equal_to<>>& surfaces) {
+        std::vector<std::string_view> byNumber(surfaces.size());
+        for (const auto& [key, number] : surfaces) byNumber[number] = key;
+        Unsigned(byNumber.size());
+        for (const std::string_view key : byNumber) Str(key);
+    }
+
+private:
+    void Unsigned(uint64_t v) {
+        for (; v >= 0x80; v >>= 7) out.push_back(static_cast<uint8_t>(v | 0x80));
+        out.push_back(static_cast<uint8_t>(v));
+    }
+};
+
+class CxReader {
+public:
+    explicit CxReader(std::span<const uint8_t> data) : in_(data) {}
+    bool ok = true;
+    bool AtEnd() const { return at_ == in_.size(); }
+
+    template <class T>
+    void Num(T& v) {
+        if constexpr (std::is_enum_v<T>) {
+            std::underlying_type_t<T> u{};
+            Num(u);
+            v = static_cast<T>(u);
+        } else if constexpr (std::is_same_v<T, bool>) {
+            v = Unsigned() != 0;
+        } else if constexpr (std::is_signed_v<T>) {
+            const uint64_t u = Unsigned();
+            v = static_cast<T>(static_cast<int64_t>(u >> 1) ^ -static_cast<int64_t>(u & 1));
+        } else {
+            v = static_cast<T>(Unsigned());
+        }
+    }
+    void Str(std::string& s) {
+        const uint64_t n = Unsigned();
+        if (!ok || n > in_.size() - at_) {
+            ok = false;
+            return;
+        }
+        s.assign(reinterpret_cast<const char*>(in_.data() + at_), static_cast<std::size_t>(n));
+        at_ += static_cast<std::size_t>(n);
+    }
+    // Each element takes at least one byte, which bounds the size before it is allocated.
+    template <class T, class F>
+    void Vec(std::vector<T>& v, F each) {
+        const uint64_t n = Unsigned();
+        if (!ok || n > in_.size() - at_) {
+            ok = false;
+            return;
+        }
+        v.resize(static_cast<std::size_t>(n));
+        for (T& x : v) {
+            if (!ok) return;
+            each(x);
+        }
+    }
+    void Class(const dict::internal::WordClass*& set) {
+        std::string name;
+        Str(name);
+        set = nullptr;
+        if (!ok || name.empty()) return;
+        set = dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name));
+        ok = set != nullptr;
+    }
+    void Feature(CxFeature& feature) {
+        const uint64_t number = Unsigned();
+        feature = nullptr;
+        if (number > std::size(kFeatures)) ok = false;
+        else if (number != 0) feature = kFeatures[number - 1].test;
+    }
+    void Surfaces(std::unordered_map<std::string, uint32_t, CxSurfaceHash, std::equal_to<>>& surfaces) {
+        const uint64_t n = Unsigned();
+        if (!ok || n > in_.size() - at_) {
+            ok = false;
+            return;
+        }
+        surfaces.clear();
+        for (uint32_t i = 0; i < n && ok; i++) {
+            std::string key;
+            Str(key);
+            surfaces.emplace(std::move(key), i);
+        }
+    }
+
+private:
+    uint64_t Unsigned() {
+        uint64_t v = 0;
+        for (int shift = 0; ok; shift += 7) {
+            if (at_ == in_.size() || shift > 63) {
+                ok = false;
+                break;
+            }
+            const uint8_t b = in_[at_++];
+            v |= static_cast<uint64_t>(b & 0x7f) << shift;
+            if ((b & 0x80) == 0) return v;
+        }
+        return 0;
+    }
+    std::span<const uint8_t> in_;
+    std::size_t at_ = 0;
+};
+
+template <class T, class U>
+concept CxOf = std::same_as<std::remove_const_t<T>, U>;
+
+template <class IO>
+void VisitNums(IO& io, auto& v) {
+    io.Vec(v, [&](auto& x) { io.Num(x); });
+}
+
+template <class IO>
+void VisitPairs(IO& io, auto& v) {
+    io.Vec(v, [&](auto& p) {
+        io.Num(p.first);
+        io.Num(p.second);
+    });
+}
+
+template <class IO, CxOf<CxAtom> T>
+void Visit(IO& io, T& a) {
+    auto& [field, match, delta, negated, value, set, feature, slot, reach] = a;
+    io.Num(field);
+    io.Num(match);
+    io.Num(delta);
+    io.Num(negated);
+    io.Str(value);
+    io.Class(set);
+    io.Feature(feature);
+    io.Num(slot);
+    io.Num(reach);
+}
+
+template <class IO, CxOf<CxNode> T>
+void Visit(IO& io, T& n) {
+    auto& [kind, atom, count, end, reach] = n;
+    io.Num(kind);
+    io.Num(atom);
+    io.Num(count);
+    io.Num(end);
+    io.Num(reach);
+}
+
+template <class IO, CxOf<CxAction> T>
+void Visit(IO& io, T& a) {
+    auto& [verb, delta, scanned, value, with, map] = a;
+    io.Num(verb);
+    io.Num(delta);
+    io.Num(scanned);
+    io.Str(value);
+    io.Str(with);
+    io.Num(map);
+}
+
+template <class IO, CxOf<CxMap> T>
+void Visit(IO& io, T& m) {
+    auto& [name, pairs] = m;
+    io.Str(name);
+    io.Vec(pairs, [&](auto& p) {
+        io.Str(p.first);
+        io.Str(p.second);
+    });
+}
+
+template <class IO, CxOf<CxRow> T>
+void Visit(IO& io, T& r) {
+    auto& [id, spec, prio, root, actions, scans, line] = r;
+    io.Str(id);
+    io.Str(spec);
+    io.Num(prio);
+    io.Num(root);
+    io.Vec(actions, [&](auto& a) { Visit(io, a); });
+    io.Num(scans);
+    io.Num(line);
+}
+
+template <class IO, CxOf<CxFamily> T>
+void Visit(IO& io, T& c) {
+    auto& [name, after, stage, rows, line, guard, guardSurfaces, guardKeyed, bySurface, open, indexed, anchors, shared] = c;
+    io.Str(name);
+    io.Str(after);
+    io.Num(stage);
+    VisitNums(io, rows);
+    io.Num(line);
+    io.Num(guard);
+    VisitNums(io, guardSurfaces);
+    io.Num(guardKeyed);
+    io.Vec(bySurface, [&](auto& p) {
+        io.Num(p.first);
+        VisitNums(io, p.second);
+    });
+    VisitNums(io, open);
+    io.Num(indexed);
+    auto& [atoms, changing, found] = anchors;
+    VisitNums(io, atoms);
+    VisitNums(io, changing);
+    io.Num(found);
+    VisitNums(io, shared);
+}
+
+template <class IO, CxOf<CxTrie> T>
+void Visit(IO& io, T& trie) {
+    auto& [nodes, edges, families] = trie;
+    io.Vec(nodes, [&](auto& n) {
+        auto& [edgeStart, edgeCount, whole, wholeCount, part, partCount, within, withinCount] = n;
+        for (auto* x : {&edgeStart, &edgeCount, &whole, &wholeCount, &part, &partCount, &within, &withinCount}) io.Num(*x);
+    });
+    VisitPairs(io, edges);
+    VisitNums(io, families);
+}
+
+template <class IO, CxOf<CxPassIndex> T>
+void Visit(IO& io, T& p) {
+    auto& [values, slots, changing, changes, open, changers] = p;
+    io.Vec(values, [&](auto& v) {
+        auto& [field, delta, fixed, forward, backward, inner] = v;
+        io.Num(field);
+        io.Num(delta);
+        io.Num(fixed);
+        Visit(io, forward);
+        Visit(io, backward);
+        Visit(io, inner);
+    });
+    VisitPairs(io, slots);
+    VisitPairs(io, changing);
+    io.Num(changes);
+    VisitNums(io, open);
+    VisitNums(io, changers);
+}
+
+template <class IO, CxOf<ConstructionTable> T>
+void Visit(IO& io, T& t) {
+    auto& [rows, families, nodes, atoms, maps, surfaces, slots, anchorAtoms, passIndex, afterPass, errors] = t;
+    io.Vec(rows, [&](auto& r) { Visit(io, r); });
+    io.Vec(families, [&](auto& c) { Visit(io, c); });
+    io.Vec(nodes, [&](auto& n) { Visit(io, n); });
+    io.Vec(atoms, [&](auto& a) { Visit(io, a); });
+    io.Vec(maps, [&](auto& m) { Visit(io, m); });
+    io.Surfaces(surfaces);
+    io.Num(slots);
+    VisitNums(io, anchorAtoms);
+    io.Vec(passIndex, [&](auto& p) { Visit(io, p); });
+    io.Vec(afterPass, [&](auto& v) { VisitNums(io, v); });
+    io.Vec(errors, [&](auto& e) {
+        auto& [line, message] = e;
+        io.Num(line);
+        io.Str(message);
+    });
+}
+
+}  // namespace
+
+std::vector<uint8_t> WriteConstructions(const ConstructionTable& t) {
+    CxWriter w;
+    Visit(w, t);
+    return std::move(w.out);
+}
+
+bool ReadConstructions(std::span<const uint8_t> data, ConstructionTable& t) {
+    CxReader r(data);
+    t = {};
+    Visit(r, t);
+    return r.ok && r.AtEnd();
+}
+
 const ConstructionTable& BuiltinConstructions() {
     static const ConstructionTable table = [] {
-        for (const dict::internal::BuiltinTable& b : dict::internal::BuiltinTables()) {
-            if (b.name != "constructions.tsv") continue;
-            ConstructionTable t = ParseConstructions(b.lines, TextPassNames());
-            OrderOperands(t);
-            return t;
-        }
-        return ConstructionTable{};
+        ConstructionTable t;
+        if (const std::span<const uint8_t> data = CompiledConstructions(); !data.empty() && ReadConstructions(data, t)) return t;
+        return ParseBuiltinConstructions();
     }();
     return table;
 }

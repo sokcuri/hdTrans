@@ -220,12 +220,16 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
 | `load` | 빈 입력. 사전 읽기 |
 | `each` | 규칙 사례(`tests/rules/cases`, `tests/rules/speech-strict`)의 입력을 `--each`로 |
 | `document` | `examples/*.ja.txt`(첫 줄 제외)를 한 문서로 |
+| `first-line` | 짧은 문장 한 줄. 첫 번역이 처음 쓸 때 만드는 표의 값 |
+| `long-line` | 구두점 없는 절을 200번 이은 한 줄 |
+| `kana-run` | 무작위 히라가나 16,000자 한 줄의 최대 상주 메모리(KiB). valgrind 없이 세 번 재어 중앙값 |
 
-- 입력은 기준 커밋에서 읽으므로 두 빌드가 같은 글을 번역합니다. 사전은 각 빌드의 것을 쓰므로 사전을 바꾸면 세 행이
-  모두 움직일 수 있습니다. `each`와 `document`는 `load`를 뺀 수입니다.
+- `each`와 `document`의 입력은 기준 커밋에서 읽으므로 두 빌드가 같은 글을 번역합니다. `first-line`, `long-line`,
+  `kana-run`의 입력은 도구에 들어 있습니다. 사전은 각 빌드의 것을 쓰므로 사전을 바꾸면 모든 행이 움직일 수 있습니다.
+  `load` 밖의 명령어 행은 `load`를 뺀 수입니다.
 - 수는 컴파일러, C 라이브러리, 아키텍처, valgrind(도구 체인)에 따라 다르므로 두 빌드를 한 러너에서 함께 잽니다.
 - `--report CLI DICTS --against CLI DICTS --base REF`는 두 빌드를 함께 재고 행마다 바뀐 비율을 적습니다. 1% 넘게
-  많은 행은 `over:`, 1% 넘게 적은 행은 `under:`로 시작하는 줄을 더합니다. 기준 빌드를 재지 못하면 이 빌드의 수만
+  많은 행은 `over:`, 1% 넘게 적은 행은 `under:`로 시작하는 줄을 더합니다(`kana-run`은 5%). 기준 빌드를 재지 못하면 이 빌드의 수만
   적습니다. 종료 코드는 잰 경우 늘 0이고, 이 빌드를 재지 못하면(멈춤 포함) 2입니다. `--measure CLI DICTS`는 한
   빌드의 수만 출력합니다. `--base`를 주지 않으면 develop과의 병합 기준 커밋을 씁니다.
 - 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux-perf` 작업은 PR(`perf` 라벨이나 승격 PR)과

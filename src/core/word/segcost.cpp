@@ -325,14 +325,18 @@ Worker::ProbeMark Worker::MarkProbe() const {
 // records go back. What can outlive the probe stays: the records of a new ending table (endings_) and the name-layer
 // rows of its lookups (arena.names). A text the probe kept goes back too; the search's last general lookup is dropped
 // where it points into one, since a new text may take that address (the search then looks it up again).
-void Worker::RewindProbe(const ProbeMark& m) {
+void Worker::RewindProbeItems(const ProbeMark& m) {
     arena.items.Rewind(m.items);
     arena.groups.Rewind(m.groups);
     arena.entries.Rewind(m.entries);
     arena.details.Rewind(m.details);
+}
+
+void Worker::RewindProbe(const ProbeMark& m, bool texts) {
+    RewindProbeItems(m);
     if (endings_.records != m.endings) return;
     arena.records.Rewind(m.records);
-    if (arena.texts.size() > m.texts) {
+    if (texts && arena.texts.size() > m.texts) {
         for (std::size_t i = m.texts; i < arena.texts.size(); i++) {
             const std::string& kept = *arena.texts[i];
             if (!std::less<const char*>{}(lastGeneral_.data, kept.data()) && !std::less<const char*>{}(kept.data() + kept.size(), lastGeneral_.data)) {
