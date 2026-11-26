@@ -779,7 +779,10 @@
 //= wrap.open-word	Words that a line read alone takes for a greeting but that start a sentence as a time with は when a line broken after them goes on (今日は / 特別な日だ 오늘은 특별한 날이다).
 //= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
 //= wrap.open-ending	Endings of a verb or adjective that join it to what follows, which a line broken in the middle of a sentence ends with: connective particles (多いんですが / 差してない人も, 分かるので / 聞いてください) and a predicate made a noun before a case or binding particle (横断するのが / 最後の夢なんだ, 守るために / 今できることは).
-//= wrap.quote-start	Quotative particles that a line broken before them starts with, closing what the line before said (なってくる / と思います, 遅い / って言いたい).
+//= wrap.quote-start	Quotative particles and the particles と starts, which a line broken before them starts with, closing or marking what the line before said (なってくる / と思います, 遅い / って言いたい, いなかった / ということです, リーダー / として, 部下 / との).
+//= wrap.kanji-word-start	Words of one kanji that start a clause of their own, which a line after a kanji starts with without being the end of a word cut by the break (先生 / 方がいい, 至る中 / 今、, 7年 / 前の).
+//= wrap.kanji-relational	Relational and body nouns of one kanji that stay a word of their own after の at the end of a line, whatever kanji the next line starts with (机の上 / 手を置いて, 彼の手 / 紙のように).
+//= wrap.case-start	Case particles that a line broken before them starts with, marking what the line before named (男子高校生 / がクマに, インタビュー / で語った).
 //= wrap.negative-start	Starts of the negative of the copula, which a line broken after じゃ or では starts with (いいんじゃ / ないかな, 嫌では / ないですけど).
 //= wrap.sentence-start	Interjections the dictionary has as nouns, which start a sentence of their own: a bare verb or adjective at the end of the line before one ends its sentence (分かった / はい).
 
@@ -12080,6 +12083,70 @@ wrap.open-ending	ように
 wrap.quote-start	と
 wrap.quote-start	って
 wrap.quote-start	とか
+wrap.quote-start	という
+wrap.quote-start	っていう
+wrap.quote-start	として
+wrap.quote-start	との
+wrap.kanji-word-start	方
+wrap.kanji-word-start	今
+wrap.kanji-word-start	次
+wrap.kanji-word-start	前
+wrap.kanji-word-start	先
+wrap.kanji-word-start	他
+wrap.kanji-word-start	皆
+wrap.kanji-word-start	時
+wrap.kanji-word-start	毎
+wrap.kanji-word-start	各
+wrap.kanji-word-start	約
+wrap.kanji-word-start	又
+wrap.kanji-word-start	更
+wrap.kanji-word-start	実
+wrap.kanji-word-start	既
+wrap.kanji-word-start	未
+wrap.kanji-word-start	只
+wrap.kanji-word-start	尚
+wrap.kanji-word-start	唯
+wrap.kanji-relational	上
+wrap.kanji-relational	下
+wrap.kanji-relational	中
+wrap.kanji-relational	前
+wrap.kanji-relational	後
+wrap.kanji-relational	外
+wrap.kanji-relational	内
+wrap.kanji-relational	奥
+wrap.kanji-relational	間
+wrap.kanji-relational	隣
+wrap.kanji-relational	横
+wrap.kanji-relational	側
+wrap.kanji-relational	裏
+wrap.kanji-relational	表
+wrap.kanji-relational	脇
+wrap.kanji-relational	端
+wrap.kanji-relational	底
+wrap.kanji-relational	縁
+wrap.kanji-relational	先
+wrap.kanji-relational	手
+wrap.kanji-relational	目
+wrap.kanji-relational	口
+wrap.kanji-relational	頭
+wrap.kanji-relational	顔
+wrap.kanji-relational	足
+wrap.kanji-relational	背
+wrap.kanji-relational	腕
+wrap.kanji-relational	首
+wrap.kanji-relational	胸
+wrap.kanji-relational	腹
+wrap.kanji-relational	声
+wrap.kanji-relational	心
+wrap.kanji-relational	名
+wrap.kanji-relational	家
+wrap.case-start	が
+wrap.case-start	を
+wrap.case-start	に
+wrap.case-start	で
+wrap.case-start	へ
+wrap.case-start	より
+wrap.case-start	から
 wrap.negative-start	ない
 wrap.negative-start	なく
 wrap.negative-start	なかっ

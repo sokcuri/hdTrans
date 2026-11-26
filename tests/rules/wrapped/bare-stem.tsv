@@ -1,0 +1,6 @@
+# 규칙: LEX-8180, LAY-14
+rule	input	expected	kind	layer
+wrapped:bare-stem	ホントに すてき\nな人ね	정말로 멋진\n사람이네	keep	driver
+wrapped:bare-stem	ホントに すてき\nさすがだね	정말로 멋지다\n역시구나	fix	driver
+wrapped:bare-stem	ホントに すてき\nなにそれ	정말로 멋지다\n뭐야 그게	keep	driver
+wrapped:bare-stem	すてき\nでもね	멋지다\n그런데	keep	driver

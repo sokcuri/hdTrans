@@ -1,0 +1,30 @@
+# 규칙: LEX-8180
+rule	input	expected	kind	layer
+analysis:bare-stem-clause	ホントに すてき	정말로 멋지다	fix	analysis
+analysis:bare-stem-clause	ホントにすてき	정말로 멋지다	fix	analysis
+analysis:bare-stem-clause	すてき」	멋지다」	fix	analysis
+analysis:bare-stem-clause	「すてき」	「멋져」	fix	analysis
+analysis:bare-stem-clause	あら すてき	어머나 멋지다	fix	analysis
+analysis:bare-stem-clause	うん すてき！	응 멋져!	fix	analysis
+analysis:bare-stem-clause	それは すてき	그것은 멋지다	fix	analysis
+analysis:bare-stem-clause	本当にらく	정말 편하다	fix	analysis
+analysis:bare-stem-clause	ずっと まし	훨씬 낫다	fix	analysis
+analysis:bare-stem-clause	本当にまし	정말 낫다	fix	analysis
+analysis:bare-stem-clause	とても しずか	무척 조용하다	fix	analysis
+analysis:bare-stem-clause	もう だめ	이제 안 돼	keep	analysis
+analysis:bare-stem-clause	うん いや	응 아니	keep	analysis
+analysis:bare-stem-clause	いや、違う	아니, 아니다	keep	analysis
+analysis:bare-stem-clause	ホントに すてきな人	정말로 멋진 사람	keep	analysis
+analysis:bare-stem-clause	それはすてきだ	그것은 멋지다	keep	analysis
+analysis:bare-stem-clause	すてきですね	멋지네요	keep	analysis
+analysis:bare-stem-clause	行ってきます	다녀오겠습니다	keep	analysis
+analysis:bare-stem-clause	持ってきて	가져와	keep	analysis
+analysis:bare-stem-clause	やってきた	왔다	keep	analysis
+analysis:bare-stem-clause	見に来て	보러 와	keep	analysis
+analysis:bare-stem-clause	戻ってきた	돌아왔다	keep	analysis
+analysis:bare-stem-clause	大好き	너무 좋아	keep	analysis
+analysis:bare-stem-clause	きっと来る	분명 온다	keep	analysis
+analysis:bare-stem-clause	すき焼き	스키야키	keep	analysis
+analysis:bare-stem-clause	本当に きた	정말 왔다	keep	analysis
+analysis:bare-stem-clause	下さいまし	주세요	keep	analysis
+analysis:bare-stem-clause	それよりはまし」	그것보다는 낫다」	keep	analysis
