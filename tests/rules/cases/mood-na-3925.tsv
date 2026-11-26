@@ -118,6 +118,6 @@ cx:na-observed:33	「おっと……。ずいぶん揺れるな。アラタ、�
 cx:na-observed:33	ああ！ちぇ、なかなかにやるな。面白い！	아! 쳇, 꽤에 하는구나. 재미있어!	fix	rewrites
 cx:na-observed:33	「ず、ずいぶん趣味の悪いもん頼むな……つーか、晩飯が別にあるのに、全部食えるのか？」	「꽤, 꽤 취향이 나쁜 걸 부탁하는구나……그보다, 저녁 밥이 따로 있는데, 전부 먹을 수 있는 거야?」	fix	rewrites
 cx:na-observed:33	「確実に潰したいであろう相手を俺たちの採用試験にするとは、なかなかひねくれた性格をしているな」	「확실히 부수고 싶을 상대를 우리의 채용시험으로 한다는 것은, 꽤 비뚤어진 성격을 하고 있는구나」	fix	rewrites
-cx:na-observed:33	「しかしクイーンはよく食べるな……」	「하지만 여왕은 잘 먹는구나……」	keep	rewrites
+cx:na-observed:33	「しかしクイーンはよく食べるな……」	「하지만 퀸은 잘 먹는구나……」	keep	rewrites
 cx:na-observed:33	「都合よく記憶を書き換えるな」	「때마침 기억을 고쳐 쓰지 마」	keep	rewrites
 cx:na-observed:33	よく見ろ。泣くな	잘 봐라. 울지 마	keep	rewrites

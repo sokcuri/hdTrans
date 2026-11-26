@@ -65,7 +65,7 @@ lookup:space-boundary	うん でも…	has:응 하지만	fix	lookup
 lookup:space-boundary	金 貸して	돈 빌려 줘	keep	lookup
 lookup:space-boundary	本 当 に	정말	keep	lookup
 lookup:space-boundary	あの人	그 사람	keep	lookup
-lookup:space-boundary	あれを見る	저것을 본다	keep	lookup
+lookup:space-boundary	あれを見る	그것을 본다	keep	lookup
 lookup:space-boundary	ええと ごめん	음 미안	keep	lookup
 lookup:space-boundary	あ、あの	저, 저기	keep	lookup
 lookup:space-boundary	「あ」という文字	「아」라는 문자	keep	lookup

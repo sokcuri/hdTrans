@@ -23,7 +23,7 @@ cx:kita-arrived:10	キタさんが来た	키타 씨가 왔다	keep	rewrites
 cx:kita-arrived:10	キタ区に住んでいる	!rule:cx:kita-arrived:10	keep	rewrites
 cx:kita-arrived:10	えっ、キタ？	어, 왔어?	fix	rewrites
 lex:kana-equivalent	ヨダレを垂らす	군침을 흘린다	keep	lookup
-cx:mechakucha-state:20	メチャクチャな奴だ	엉망진창인 놈이다	fix	rewrites
+cx:mechakucha-state:20	メチャクチャな奴だ	엉망진창인 녀석이다	fix	rewrites
 cx:mechakucha-state:20	メチャクチャ楽しい	!rule:cx:mechakucha-state:20	keep	rewrites
 dict:jisjk:105304	トマトのヘタ	토마토의 꼭지	keep	local
 dict:w:42421	ハンコを押して	도장을 눌러	fix	lookup

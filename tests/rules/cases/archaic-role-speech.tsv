@@ -84,7 +84,7 @@ cx:archaic-speech:80	よく分かるぞ あのトカゲは 一度泣かしてや
 cx:archaic-speech:80	当主たる妾が 花嫁と認めぬ。	당주인 첩이 신부로 인정하지 않는다.	keep	rewrites
 cx:archaic-speech:80	妾の財を委ねるに ふさわしいかどうかを 見定めるために作られた 魔法生命体じゃ	이 몸의 재산을 맡기는에 적격인지 어떤지를 살펴보기 위해 만들어진 마법 생명체야	fix	rewrites
 cx:archaic-speech:80	「お菊は拙者の妾でござる」	「오키쿠는 나의 첩이오」	keep	rewrites
-cx:archaic-speech:80	妾の子という奴か	첩의 자식이라는 놈인가	keep	rewrites
+cx:archaic-speech:80	妾の子という奴か	첩의 자식이라는 녀석인가	keep	rewrites
 cx:archaic-speech:80	妾が あの狙撃手を追う！	!rule:cx:archaic-speech:80	keep	rewrites
 cx:archaic-speech:80	これまで妾が守ってきたもの	!rule:cx:archaic-speech:80	keep	rewrites
 cx:archaic-speech:80	四十ばかりの妾が居るのだそうで、東京や京都に行って居るのだと云う。	!rule:cx:archaic-speech:80	keep	rewrites
@@ -148,7 +148,7 @@ dict:archaic-speech	しかし 拙者の教えは厳しいでござるよ！	하�
 dict:archaic-speech	ボクは 侍じゃないでござるよ！	나는 사무라이가 아니오!	fix	lookup
 dict:archaic-speech	拙者は なごみではないでござる	나는 푸근이 아니오	fix	lookup
 dict:archaic-speech	随分 雰囲気が変わったね｡ そうでござるか？	상당히 분위기가 바뀌었네. 그러오?	fix	lookup
-dict:archaic-speech	なんでござるか？ あれは。	무엇이오? 저것은.	fix	lookup
+dict:archaic-speech	なんでござるか？ あれは。	무엇이오? 그것은.	fix	lookup
 dict:archaic-speech	拙者は流浪人。 歩くでござるよ。	나는 유랑인. 걸으오.	keep	lookup
 dict:archaic-speech	それが拙者の任務でござる｡	그것이 나의 임무이오.	keep	lookup
 dict:archaic-speech	もう十分じゃろう	이제 충분하겠지	fix	lookup

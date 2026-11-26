@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:sense-cues-1:12	お前は一人じゃない	너는 혼자가 아니다	fix	rewrites
 cx:sense-cues-1:12	バーカ。 お前は一人じゃねえだろ。	바보. 너는 혼자가 아니지.	fix	rewrites
 cx:sense-cues-1:12	｢一人じゃないから きっと｣	｢혼자가 아니니까 분명｣	fix	rewrites
-cx:sense-cues-1:12	奴らの一人だと思うか？	놈들의 한 사람이라고 생각할까?	fix	rewrites
+cx:sense-cues-1:12	奴らの一人だと思うか？	녀석들의 한 사람이라고 생각할까?	fix	rewrites
 cx:sense-cues-1:12	一人じゃ何もできない	혼자는 아무것도 할 수 없다	keep	rewrites
 cx:sense-cues-1:13	いつも一人だ	언제나 혼자다	fix	rewrites
 cx:sense-cues-1:13	一人だった俺に	혼자였던 나에게	fix	rewrites

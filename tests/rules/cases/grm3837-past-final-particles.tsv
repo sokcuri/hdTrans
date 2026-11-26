@@ -1,6 +1,6 @@
 # 규칙: GRM-3837
 rule	input	expected	kind	layer
-lookup:past-final-particle	あれは不幸な事故だったわ	저것은 불행한 사고였다	fix	lookup
+lookup:past-final-particle	あれは不幸な事故だったわ	그것은 불행한 사고였다	fix	lookup
 lookup:past-final-particle	競りの会場は毎回変わるみたい。もぬけの殻だったわ	경매의 회장은 매번 바뀌는 것 같다. 허물이었다	fix	lookup
 lookup:past-final-particle	「長い一日だったわね」	「긴 하루였네」	fix	lookup
 lookup:past-final-particle	「……姉の家は、銀地町だったわよね？」	「……언니의 집은, 은지마을이었지?」	fix	lookup

@@ -1,7 +1,7 @@
 # 규칙: GRM-29
 rule	input	expected	kind	layer
 dict:novel-ndaga:12	内偵を進めてるんだがね	내사를 진행시키고 있는데	fix	lookup
-dict:novel-ndaga:12	「もう趣旨がずれてるんだが」	「이제 취지가 어긋나 있는데」	fix	lookup
+dict:novel-ndaga:12	「もう趣旨がずれてるんだが」	「벌써 취지가 어긋나 있는데」	fix	lookup
 dict:novel-ndaga:12	気にして 心配してるんだが…｡	신경 써 걱정하고 있는데….	fix	lookup
 dict:novel-ndaga:12	財布から現金がなくなってるんだが。	has:없어져 있는데.	fix	lookup
 dict:novel-ndaga:13	色々あるというか、複雑なんだが	has:복잡한데	fix	lookup

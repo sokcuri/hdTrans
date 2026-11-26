@@ -143,7 +143,7 @@ dict:w:14963	嵐を孕んだ空	폭풍우를 품은 하늘	keep	local
 dict:w:42202	孕んだ腹	임신한 배	fix	defaults
 dict:w:42206	孕み女	임신부	fix	defaults
 dict:w:42202	孕まされた女	임신하게 된 여자	fix	defaults
-dict:w:42202	「もう孕んじゃったかも」	「이제 임신해버렸을지도」	fix	defaults
+dict:w:42202	「もう孕んじゃったかも」	「벌써 임신해버렸을지도」	fix	defaults
 dict:w:42202	孕んじゃえ！	임신해버려!	fix	defaults
 dict:w:42202	彼の子を孕んでいる	그의 아이를 임신하고 있다	fix	defaults
 dict:w:42203	絶対に孕ませる	절대로 임신시킨다	fix	defaults

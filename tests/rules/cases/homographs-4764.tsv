@@ -69,7 +69,7 @@ pattern:yue	何故そっとしておいてくれない！	왜 가만히 놔두�
 pattern:yue	礼号作戦…私が旗艦を務めた…何故…鮮明に覚えている…なんで？	레호 작전…내가 기함을 맡았다…왜…선명히 기억하고 있다…왜?	keep	builtin-pattern
 pattern:yue	彼が故郷の為に死ぬことがないよう 彼に厳命して下さいませんでしょうか、	그가 고향을 위해 죽는 것이 없게 그에게 엄명해 주십시오 입니까,	keep	builtin-pattern
 pattern:yue	糞野郎、ここは私の家よ 何故、戻らないといけないのよ	개새끼, 여기는 내 집이야 왜, 돌아가야 해	keep	builtin-pattern
-pattern:yue	……や、奴だ……何故奴が……？	……노, 놈이다……왜 놈이……?	keep	builtin-pattern
+pattern:yue	……や、奴だ……何故奴が……？	……녀, 녀석이다……왜 녀석이……?	keep	builtin-pattern
 pattern:yue	何故皆でナベを囲む？	왜 모두가 냄비를 둘러싸?	keep	builtin-pattern
 dict:lex:4764:osoba-side	ああいうお方のおそばに付いていられるのは、お前のお仕合せでござりますな。	저런 분의 곁에 붙어 있을 수 있는 것은, 네 운수입니다.	fix	local
 dict:lex:4764:osoba-side	お兄さまのおそばにいて、浮かれないはずありません！	오라버니의 곁에 있어, 들뜨지 않을 것 없습니다!	fix	local

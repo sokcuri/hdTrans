@@ -14,7 +14,7 @@ dict:rare-words	皮剥ぎを釣った。	쥐치를 낚시했다.	keep	lookup
 dict:rare-words	りんごの皮が剥けた。	사과의 껍질이 벗겨졌다.	keep	lookup
 ending:ちゃってるわ	靴が汚れちゃってるわよ。	신발이 더러워져버렸어.	fix	builtin-ending
 ending:ちゃってるわ	ケーキを食べちゃったわ。	케이크를 먹어버렸어.	fix	builtin-ending
-ending:ちゃってるわ	もう寝ちゃってるね。	이제 자버렸네.	fix	builtin-ending
+ending:ちゃってるわ	もう寝ちゃってるね。	벌써 자버렸네.	fix	builtin-ending
 ending:ちゃってるわ	全部忘れちゃうわよ。	전부 잊어버릴 거야.	fix	builtin-ending
 ending:ちゃってるわ	彼は帰ったわね。	그는 돌아갔네.	fix	builtin-ending
 ending:ちゃってるわ	ケーキを食べちゃった。	케이크를 먹어버렸다.	keep	builtin-ending

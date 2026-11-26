@@ -1,0 +1,43 @@
+# 규칙: LEX-8213, LEX-8214
+rule	input	expected	kind	layer
+cx:sense-cues-1:161	≪ちょっと！？≫	≪잠깐!? ≫	fix	rewrites
+cx:sense-cues-1:161	「（え、ちょっと！？）」	「(어, 잠깐!?)」	fix	rewrites
+cx:sense-cues-1:161	「きゃあっ、ちょっとっ！？」	「꺄악, 잠깐!?」	fix	rewrites
+cx:sense-cues-1:161	「ちょっとっ……やめて」	「잠깐……그만해」	fix	rewrites
+cx:sense-cues-1:161	≪ちょっと？　質問がずれたわよ？≫	≪잠깐? 질문이 어긋났어? ≫	fix	rewrites
+cx:sense-cues-1:163	「ちょっと……これ……放送事故」	「잠깐……이거……방송사고」	fix	rewrites
+cx:sense-cues-1:163	「ちょっと……もう……」	「잠깐……이제……」	fix	rewrites
+cx:sense-cues-1:163	「ちょっと……蒼！？」	「잠깐……창!?」	fix	rewrites
+cx:sense-cues-1:165	「田中、ちょっと」	「타나카, 잠깐」	fix	rewrites
+cx:sense-cues-1:165	「あ、田中、ちょっと」	「아, 타나카, 잠깐」	fix	rewrites
+cx:sense-cues-1:161	「毎日はちょっと！」	「매일은 조금!」	keep	rewrites
+cx:sense-cues-1:161	「あとちょっと！」	「그리고 조금!」	keep	rewrites
+cx:sense-cues-1:161	「ちょっと高いね！」	「조금 높네!」	keep	rewrites
+cx:sense-cues-1:163	「ちょっと……恥ずかしい」	「조금……부끄러워」	keep	rewrites
+cx:sense-cues-1:163	「ちょっと……だけですけど……」	「조금……뿐이지만……」	keep	rewrites
+cx:sense-cues-1:165	「これ、ちょっと」	「이거, 조금」	keep	rewrites
+cx:sense-cues-1:165	「見られると、ちょっと」	「볼 수 있으면, 조금」	keep	rewrites
+cx:sense-cues-1:161	「ちょっとだけね」	「조금」	keep	rewrites
+cx:sense-cues-1:161	「ちょっとした問題だ」	「약간의 문제야」	keep	rewrites
+cx:sense-cues-1:164	「あの……すみません」	「저기……죄송합니다」	fix	rewrites
+cx:sense-cues-1:164	「あの？」	「저기?」	fix	rewrites
+cx:sense-cues-1:164	「あ、あの？」	「저, 저기?」	fix	rewrites
+cx:sense-cues-1:164	「あの……さ」	「저기……」	fix	rewrites
+cx:sense-cues-1:164	「いえ、あの……田中さんが」	「아뇨, 저기……타나카 씨가」	fix	rewrites
+cx:sense-cues-1:164	「あの人は？」	「그 사람은?」	keep	rewrites
+cx:sense-cues-1:164	「ほら、あの……あれだよ」	「자, 그……그거야」	keep	rewrites
+cx:sense-cues-1:164	あの……時の……	그……때의……	keep	rewrites
+cx:sense-cues-1:164	「かなちゃんって、あの……『ＫＡＮＡ』」	「카나짱은, 그……『KANA』」	keep	rewrites
+cx:sense-cues-1:164	「あの時は楽しかった」	「그 때는 즐거웠어」	keep	rewrites
+cx:sense-cues-1:161	「ほんとにちょっと！」	「정말 조금!」	keep	rewrites
+cx:sense-cues-1:161	「少しじゃなくて、ちょっと！」	「조금이 아니고, 조금!」	keep	rewrites
+cx:sense-cues-1:163	「ちょっと……しか」	「조금……밖에」	keep	rewrites
+cx:sense-cues-1:163	「ちょっと……残念」	「조금……유감」	keep	rewrites
+cx:sense-cues-1:163	「ちょっと……ね」	「조금……」	keep	rewrites
+cx:sense-cues-1:163	ちょっと…疲れました。	조금…지쳤습니다.	keep	rewrites
+cx:sense-cues-1:165	「お茶、ちょっと」	「차, 조금」	keep	rewrites
+cx:sense-cues-1:165	「お金、ちょっと」	「돈, 조금」	keep	rewrites
+cx:sense-cues-1:165	「時間、ちょっと」	「시간, 조금」	keep	rewrites
+cx:sense-cues-1:164	「あの……ことなんだけど」	「그……일이지만」	keep	rewrites
+cx:sense-cues-1:164	「あの……件はどうなった？」	「그……건은 어떻게 됐어?」	keep	rewrites
+cx:sense-cues-1:164	「あの……場所に行きたい」	「그……장소에 가고 싶어」	keep	rewrites

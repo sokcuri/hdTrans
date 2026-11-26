@@ -1,0 +1,44 @@
+# 규칙: LEX-8210, LEX-8211
+rule	input	expected	kind	layer
+dict:w:43600	「明日でいいって」	「내일이면 된다고」	fix	local
+dict:w:43600	「たまにでいいです」	「이따금이면 돼요」	fix	local
+dict:w:43600	「１秒でいい、急げ」	「1초면 된다, 서둘러라」	fix	local
+dict:w:43600	「食べながらでいいから」	「먹으면서면 되니까」	fix	local
+dict:w:43600	「終わってからでいいわ」	「끝나고 나서면 돼」	fix	local
+dict:w:43600	「入部は気が向いたときでいいよ」	「입부는 기분이 내켰을 때면 돼」	fix	local
+dict:w:43600	「大体でいいだろ」	「대체로면 되지」	fix	local
+dict:w:43600	「この依頼はスルーでいいんじゃないか」	「이 의뢰는 무시면 되지 않는가」	fix	local
+dict:w:43600	「気にしないでいいの」	「신경 쓰지 않아도 돼」	fix	local
+dict:w:43600	「謝らないでいいって」	「사과하지 않아도 된다고」	fix	local
+dict:w:43600	「それだけでいいのか」	「그것만으로 되는 건가」	fix	local
+dict:w:43600	「行くってことでいいのか」	「간다는 걸로 되는 건가」	fix	local
+dict:w:43600	「パンケーキだけでいいよ」	「팬케이크만으로 돼」	fix	local
+dict:w:43600	「都合のいいときだけでいいから」	「형편이 좋은 때만이면 되니까」	fix	local
+dict:w:43600	「疲れていい気分だ」	!rule:dict:w:43600	keep	local
+dict:w:43600	「海でいい思い出ができた」	「바다에서 좋은 추억이 생겼어」	keep	local
+dict:w:43600	「学校でいい成績を取った」	「학교에서 좋은 성적을 취했어」	keep	local
+dict:w:43600	「元気でいいね」	「건강하고 좋네」	keep	local
+dict:w:43600	「女の子って感じでいいよね」	「여자아이라는 느낌으로 좋지」	keep	local
+dict:w:43600	「明日でいいなら行くよ」	「내일에 좋으면 갈게」	keep	local
+dict:w:43600	「ここでよかった」	「여기서 좋았어」	keep	local
+dict:w:43600	「これでいいのだ」	「이거면 되는 거야」	keep	local
+dict:w:43600	「気にしないでいい人」	「신경 쓰지 말고 좋은 사람」	keep	local
+dict:w:43601	「いや、いい」	「아니, 괜찮다」	fix	local
+dict:w:43601	「いや、俺はいいよ」	「아니, 나는 괜찮아」	fix	local
+dict:w:43601	「いえ、いいです」	「아뇨, 괜찮아요」	fix	local
+dict:w:43601	「いやいや、いいって」	「아니아니, 괜찮다고」	fix	local
+dict:w:43601	「ううん、私はいい」	「아니, 나는 괜찮다」	fix	local
+dict:w:43601	「いや、それはいい。恥ずかしい」	「아니, 그건 괜찮다. 부끄럽다」	fix	local
+dict:w:43601	「いや……いい」	「아니……괜찮다」	fix	local
+dict:w:43601	「いや、いい天気だ」	「아니, 좋은 날씨다」	keep	local
+dict:w:43601	「いや、いい男だな」	「아니, 좋은 남자네」	keep	local
+dict:w:43601	「いや、いいね！」	「아니, 좋네!」	keep	local
+dict:w:43601	「いや、いいか、よく聞け」	「아니, 좋은가, 잘 들어라」	keep	local
+dict:w:43601	「いいえ、いいことです」	「아니요, 좋은 일이에요」	keep	local
+dict:w:43601	「はい、いいですよ」	「네, 좋아요」	keep	local
+dict:w:43601	「いいです、それで」	「좋아요, 그래서」	keep	local
+dict:w:43601	「いや、天気はいい」	「아니, 날씨는 좋다」	keep	local
+dict:w:43601	「いや、頭はいい」	「아니, 머리는 좋다」	keep	local
+dict:w:43601	「いや、味はいい」	「아니, 맛은 좋다」	keep	local
+dict:w:43601	「いや、いいよ、すごくいい」	「아니, 좋아, 정말 좋다」	keep	local
+dict:w:43601	「いや、お前はいい」	「아니, 너는 괜찮아」	keep	local

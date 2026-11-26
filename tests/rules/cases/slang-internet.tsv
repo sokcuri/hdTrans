@@ -87,7 +87,7 @@ dict:s:9454	おｋおｋ	오케이 오케이	fix	lookup
 dict:s:9454	【雑談おｋ】	【잡담 오케이】	fix	lookup
 dict:s:9454	おｋ。すぐ確認の電話	오케이. 바로 확인의 전화	fix	lookup
 dict:s:9454	これはOKです	이것은 OK입니다	keep	lookup
-dict:s:9453	あれをupした	저것을 up 했다	keep	lookup
+dict:s:9453	あれをupした	그것을 up 했다	keep	lookup
 dict:s:9453	そうかなｗ	그럴까 ㅋ	keep	lookup
 analysis:kept-latin-run	思うp8です	생각하는 p8입니다	fix	analysis
 analysis:kept-latin-run	言うp6です	has:p6	fix	analysis

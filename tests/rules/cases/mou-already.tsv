@@ -1,0 +1,29 @@
+# 규칙: LEX-8216
+rule	input	expected	kind	layer
+cx:sense-cues-1:166	「あ、もう着いちゃった」	「아, 벌써 도착해버렸어」	fix	rewrites
+cx:sense-cues-1:166	もう通信は切れていた。	벌써 통신은 끊어져 있었다.	fix	rewrites
+cx:sense-cues-1:166	「もう食べちゃったんですけど……」	「벌써 먹어버렸습니다지만……」	fix	rewrites
+cx:sense-cues-1:166	「もう寝てますが」	「벌써 자고 있습니다만」	fix	rewrites
+cx:sense-cues-1:166	「もう知ってるよ」	「벌써 알고 있어」	fix	rewrites
+cx:sense-cues-1:166	「もう決めたんだ」	「벌써 결정한 거야」	keep	rewrites
+cx:sense-cues-1:166	開始５分で、もう言い合いが始まっていた。	개시 5분으로, 벌써 말시비가 시작되어 있었다.	fix	rewrites
+cx:sense-cues-1:166	アールはもうそこにいなかった。	아르는 이제 거기에 없었다.	keep	rewrites
+cx:sense-cues-1:166	もうこの展開は飽きたよ。	이제 이 전개는 질렸어.	keep	rewrites
+cx:sense-cues-1:166	「もう帰るところだったのに」	「이제 돌아가려던 참이었는데」	keep	rewrites
+cx:sense-cues-1:166	「もう何やってんのよ」	「이제 뭐 하고 있어야」	keep	rewrites
+cx:sense-cues-1:166	「もう行く」	「이제 갈 거야」	keep	rewrites
+cx:sense-cues-1:166	「もう駄目かと思った」	「이제 안 된 줄 알았다」	keep	rewrites
+cx:sense-cues-1:166	「もう１球残っている」	「이제 1구 남아 있어」	keep	rewrites
+cx:sense-cues-1:166	千里は、もう片方で手を握った。	천리는, 이제 다른 한쪽으로 손을 잡았다.	keep	rewrites
+cx:sense-cues-1:166	「今はもう……知ってるでしょ？」	「지금은 이제……알고 있지?」	keep	rewrites
+cx:sense-cues-1:166	「もう泣いてない」	「이제 울지 않다」	keep	rewrites
+cx:sense-cues-1:166	「もう全然反省してる感じしない」	「이제 전혀 반성하고 있는 느끼고 하지 않아」	keep	rewrites
+cx:sense-cues-1:166	「もう、何してるの」	「이제, 뭐해」	keep	rewrites
+cx:sense-cues-1:166	もう待っている人はいなかった	이제 기다리고 있는 사람은 없었다	keep	rewrites
+cx:sense-cues-1:166	もう走っている車はない	이제 달리고 있는 차는 없다	keep	rewrites
+cx:sense-cues-1:166	もう見ている暇はなかった	이제 보고 있을 틈은 없었다	keep	rewrites
+cx:sense-cues-1:166	もう彼を気遣っている余裕はない	이제 그를 신경 쓰고 있을 여유는 없다	keep	rewrites
+cx:sense-cues-1:166	もう出かけるところだった	이제 나가려던 참이었다	keep	rewrites
+cx:sense-cues-1:166	もう帰るところでした	이제 돌아가려던 참이었습니다	keep	rewrites
+cx:sense-cues-1:166	もう気は済んだか？	이제 기분은 끝났나?	keep	rewrites
+cx:sense-cues-1:166	もう目は覚めたか？	이제 눈은 깨었나?	keep	rewrites

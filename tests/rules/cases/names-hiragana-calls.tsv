@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 constraint:cued-name	つむぎ、こっちに来て。	츠무기, 여기에 와.	fix	lookup
 constraint:cued-name	「わたし、つむぎです」	「저, 츠무기예요」	fix	lookup
-constraint:cued-name	「あ、あの……としょ、図書部、部長の……白崎、つぐみです……」	「그, 그……도서, 도서부, 부장의……시라사키, 츠구미예요……」	fix	lookup
+constraint:cued-name	「あ、あの……としょ、図書部、部長の……白崎、つぐみです……」	「저, 저기……도서, 도서부, 부장의……시라사키, 츠구미예요……」	fix	lookup
 constraint:cued-name	……つぐみ、悪い。	……츠구미, 미안하다.	fix	lookup
 constraint:cued-name	「く……つぐみ、そろそろ……っ」	「크……츠구미, 슬슬……」	fix	lookup
 constraint:cued-name	「みちる、待って」	「미치루, 기다려」	fix	lookup

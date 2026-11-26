@@ -19,5 +19,5 @@ cx:comma-terminal:20	小さな器に盛られた、緑のものが目に入る�
 cx:comma-terminal:20	ドアの内側に設置された、鈴の音が響く。	lacks:설치되었다,	keep	rewrites
 cx:comma-terminal:20	教室内にいた、総員二十六名の生徒。	lacks:있었다,	keep	rewrites
 cx:comma-terminal:20	映画館の中で食べた、ポップコーンはおいしかった	has:먹은, 팝콘은	keep	rewrites
-cx:comma-terminal:20	あなたのために作ってあげた、あれ、ちゃんと食べたの？	has:만들어 준, 저것,	keep	rewrites
+cx:comma-terminal:20	あなたのために作ってあげた、あれ、ちゃんと食べたの？	has:만들어 준, 그것,	keep	rewrites
 cx:comma-terminal:20	あらゆる種族に絶賛された、肉も魚も使わない料理。	has:절찬된, 고기도	keep	rewrites

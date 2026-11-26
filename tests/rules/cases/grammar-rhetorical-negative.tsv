@@ -13,7 +13,7 @@ ending:rhetorical-ja-nai	貴様もやればできるではないか。	네놈도
 ending:rhetorical-ja-nai	知らないじゃないの	모르잖아	fix	builtin-ending
 ending:rhetorical-ja-nai	嫌いじゃない	싫지 않다	keep	builtin-ending
 ending:rhetorical-ja-nai	嫌いじゃないの？	싫지 않아?	keep	builtin-ending
-ending:rhetorical-ja-nai	あれは彼ではないか？	저것은 그가 아닌가?	keep	builtin-ending
+ending:rhetorical-ja-nai	あれは彼ではないか？	그것은 그가 아닌가?	keep	builtin-ending
 ending:rhetorical-ja-nai	来るのではないか	lacks:잖아	keep	builtin-ending
 ending:rhetorical-ja-nai	いいじゃないか！	좋잖아!	keep	builtin-ending
 dict:gram:beki-rhetorical:1	謝るべきではないか	사과해야 하지 않나	fix	local
