@@ -1,0 +1,42 @@
+# 규칙: LEX-8123, GRM-102
+rule	input	expected	kind	layer
+lookup:dasou-appearance	白崎が、血が出そうなほど唇を噛む。	시라사키가, 피가 나올 것 같을 만큼 입술을 깨문다.	fix	lookup
+lookup:dasou-appearance	「待て、このままだと出そうだ……」	「기다려, 이대로라면 나올 것 같아……」	fix	lookup
+lookup:dasou-appearance	玉藻の身体は湯気が出そうなほど熱い。	타마모의 몸은 김이 나올 것 같을 만큼 뜨겁다.	fix	lookup
+lookup:dasou-appearance	「現実に影響が出そうなら、介入する」	「현실에 영향이 나올 것 같으면, 개입해」	fix	lookup
+lookup:dasou-appearance	「いま清書したら、山ほど誤字が出そうだ」	「지금 정서하면, 산더미처럼 오자가 나올 것 같아」	fix	lookup
+lookup:dasou-appearance	ボタンから煙が出そうなレベルだ。	버튼으로부터 연기가 나올 것 같은 레벨이다.	fix	lookup
+lookup:dasou-appearance	もうちょっとで出そうなのに	곧 나올 것 같은데	fix	lookup
+lookup:dasou-appearance	考えても答えが出そうになかった。	생각해도 대답이 나올 것 같지 않았다.	fix	lookup
+cx:lc2a-sou-ninaru:2	「優しい学園ね。涙が出そう」	「다정한 학원이네. 눈물이 나올 것 같아」	fix	lookup
+lookup:dasou-appearance	涙が出そうです。	눈물이 나올 것 같습니다.	fix	lookup
+lookup:dasou-appearance	涙が溢れ出そうだった。	눈물이 넘쳐 나올 것 같았다.	fix	lookup
+lookup:dasou-appearance	心臓が飛び出そうなほど驚いた。	심장이 튀어나올 것 같을 만큼 놀랐다.	fix	lookup
+lookup:dasou-appearance	涙がでそうだ。	눈물이 나올 것 같다.	fix	lookup
+lookup:dasou-appearance	でそうな顔をしている。	나올 것 같은 얼굴을 하고 있다.	fix	lookup
+lookup:dasou-appearance	結論を出そう。	결론짓자.	keep	lookup
+constraint:dasou-before-volitional	「だから、元気出そうぜ」	「그러니까, 기운 내자구」	keep	lookup
+constraint:dasou-before-volitional	椅子を新たに出そうとする。	의자를 새롭게 내려고 한다.	keep	lookup
+constraint:dasou-before-volitional	何か言い出そうとして口ごもる。	뭔가 말을 꺼내려고 우물거린다.	keep	lookup
+constraint:dasou-before-volitional	展覧会に、絵を出そうかと思う。	전람회에, 그림을 낼까 하고 생각한다.	keep	lookup
+constraint:dasou-before-volitional	お金を出そうと思う。	돈을 내려고 한다.	keep	lookup
+constraint:dasou-before-naru	涙が出そうになった。	눈물이 나올 뻔했다.	keep	lookup
+constraint:dasou-before-naru	目が飛び出そうになっている。	눈이 튀어나올 뻔하다.	keep	lookup
+constraint:desou-before-naru	声がでそうになる。	목소리가 나올 뻔한다.	keep	lookup
+lookup:dasou-appearance	それでそう思った。	그래서 그렇게 생각했다.	keep	lookup
+constraint:dasou-before-volitional	早く出そうよ。	빨리 내자.	keep	lookup
+constraint:dasou-before-volitional	思い出そうとする。	생각해 내려고 한다.	keep	lookup
+cx:lc2a-sou-ninaru:2	彼女が出そう。	그녀가 내자.	keep	rewrites
+constraint:dasou-before-volitional	火を消そう。	불을 끄자.	keep	lookup
+constraint:dasou-before-volitional	一緒に探そうか。	함께 찾을까.	keep	lookup
+constraint:dasou-before-volitional	お茶を出そうか。	차를 낼까.	keep	lookup
+constraint:dasou-before-volitional	早く答えを出そうね。	빨리 답을 내자.	keep	lookup
+constraint:dasou-before-volitional	出そうものなら許さない。	냈다가는 용서하지 않는다.	keep	lookup
+lookup:dasou-appearance	いい案が出そうな気がする。	좋은 안이 나올 것 같은 생각이 든다.	fix	lookup
+cx:lc2a-sou-ninaru:2	ゴミは明日出そう。	쓰레기는 내일 내자.	keep	rewrites
+cx:lc2a-sou-ninaru:2	その話は明日出そう。	그 이야기는 내일 내자.	keep	rewrites
+constraint:dasou-before-volitional	外に出そうって言ったのに。	밖에 내자고 했는데.	keep	lookup
+constraint:dasou-before-volitional	お金を出そうが出すまいが。	돈을 내든지 내지 않든지가.	keep	lookup
+constraint:dasou-before-volitional	ゴミを明日出そうだ。	쓰레기를 내일 내자다.	keep	lookup
+lookup:dasou-appearance	目を閉じると涙が出そうだ。	눈을 감으면 눈물이 나올 것 같다.	fix	lookup
+constraint:dasou-before-volitional	元気出そうって！	기운 내자고!	keep	lookup

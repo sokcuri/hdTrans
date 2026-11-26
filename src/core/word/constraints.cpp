@@ -196,6 +196,16 @@ constexpr ConstraintRule kRules[] = {
      "んな 앞에서 てみ로 끝나는 말은 て형과 みる가 아니라 て형과 みんな (振り返ってみんなを見た 되돌아 보지 않지를 → 돌아보며 모두를)", {}, "んな"},
     {"demi-before-nna", ConstraintWord::EndsInSource, "でみ", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "でみ도 같다 (読んでみんなに聞かせる)", {}, "んな"},
+    {"dasou-before-volitional", ConstraintWord::EndsInSource, "出そう", ConstraintContext::BeforeListedOrAfterObject, ConstraintReject::Word,
+     "と, か, よ, ぜ, ぞ, ね, や, って, が, ものなら 앞이나 を 목적어 뒤의 出そう는 出る의 そう(나올 것 같다)가 아니라 出す의 의지형 (出そうとする 내려고 한다, 元気出そうぜ 기운 내자, 出そうものなら 냈다가는). 涙が出そうだ, 出そうな顔는 그대로 나올 것 같다 (LEX-8123)", {},
+     "と|か|よ|ぜ|ぞ|ね|や|って|が|ものな"},
+    {"dasou-before-naru", ConstraintWord::Source, "出そう", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "なる 앞의 出そう는 구문 표 lc2a-sou-ninaru가 읽음 (涙が出そうになった 눈물이 나올 뻔했다)", {},
+     "になる|になっ|になり|になれ|になろ|になら"},
+    {"desou-before-naru", ConstraintWord::Source, "でそう", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "가나 でそう도 같다 (涙がでそうになってしまった 눈물이 나올 뻔했다)", {}, "になる|になっ|になり|になれ|になろ|になら"},
+    {"desou-before-particle", ConstraintWord::Source, "でそう", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "と, か, よ, ぜ, ぞ, ね, や, って 앞의 でそう는 で와 そう (それでそうか 그래서 그런가)", {}, "と|か|よ|ぜ|ぞ|ね|や|って"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
     {"kyoku-before-tte", ConstraintWord::Source, "曲", ConstraintContext::BeforeTopicTte, ConstraintReject::Verbs,
@@ -645,12 +655,22 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::BeforeTopicTte:  // and Worker::TeAspectAt, in ApplyConstraints
         return after.starts_with("って") && adjacent != "を";
     case ConstraintContext::BeforeListed:
+    case ConstraintContext::BeforeListedOrAfterObject:
     case ConstraintContext::AfterNounBeforeListed:  // and Worker::NotAfterNoun, in ApplyConstraints
         for (std::string_view rest = rule.follows; !rest.empty();) {
             const std::size_t bar = rest.find('|');
             const std::string_view follow = rest.substr(0, bar);
             if (follow.ends_with("$") ? after == follow.substr(0, follow.size() - 1) : after.starts_with(follow)) return true;
             rest = bar == std::string_view::npos ? std::string_view() : rest.substr(bar + 1);
+        }
+        if (rule.context == ConstraintContext::BeforeListedOrAfterObject) {
+            const std::size_t wo = preceding.rfind("を");
+            if (wo == std::string_view::npos) return false;
+            const std::string_view tail = preceding.substr(wo);
+            for (const std::string_view stop : {"が", "は", "と", "て", "、"}) {
+                if (tail.find(stop) != std::string_view::npos) return false;
+            }
+            return true;
         }
         return false;
     case ConstraintContext::BeforeNasai:

@@ -1,0 +1,30 @@
+# 규칙: LEX-8121, LEX-147, GRM-4252
+rule	input	expected	kind	layer
+cx:cue-sense:105	彼女の首筋をなめる。	그녀의 목덜미를 핥는다.	fix	rewrites
+cx:cue-sense:105	なんで……胸なめる、の……？	왜……가슴 핥는 거야……?	fix	rewrites
+cx:cue-sense:105	芹沢さんが飴をなめる。	세리자와 씨가 사탕을 핥는다.	fix	rewrites
+cx:cue-sense:105	ペニスをなめて、気持ちよくする。	페니스를 핥고, 기분 좋게 한다.	fix	rewrites
+cx:cue-sense:105	乳首をなめられて声が出る。	유두를 핥여 목소리가 나온다.	fix	rewrites
+rewrite:passive	犬に舐められた。	개에게 핥였다.	fix	rewrites
+cx:cue-sense:105	うちの部をなめるなよ	우리 부를 얕보지 마	keep	rewrites
+cx:cue-sense:105	お前、声優なめてんのか	너, 성우 얕보고 있는 거야	keep	rewrites
+cx:cue-sense:105	本１０冊とか余裕です。なめてもらっちゃ困るな。	본10권이라든지 여유입니다. 얕봐 주면 곤란하구나.	keep	rewrites
+cx:cue-sense:105	そこまでなめられたくはないわね	거기까지 얕봐지고 싶지는 않네	keep	rewrites
+rewrite:passive	後輩に舐められた。	후배에게 얕보였다.	keep	rewrites
+rewrite:passive	舐められたくない。	얕보이고 싶지 않다.	keep	rewrites
+cx:cue-sense:105	あいつになめられた。	저 녀석에게 얕봐졌다.	keep	rewrites
+cx:cue-sense:105	俺をなめるなよ。	나를 얕보지 마.	keep	rewrites
+cx:cue-sense:105	なめんな！	얕보지 마!	keep	rewrites
+cx:cue-sense:105	くっそ、あいつ……なめやがって	젠장, 저 녀석……얕보다니	keep	rewrites
+rewrite:passive	あの子達のことを舐めていると痛い目に遭うわよ？	그 아이들을 얕보고 있으면 아픈 변을 당할 거야?	keep	rewrites
+rewrite:passive	犬に顔を舐められた。	개가 얼굴을 핥았다.	keep	rewrites
+rewrite:passive	舐められてたまるか。	얕보일 수는 없다.	keep	rewrites
+rewrite:passive	舐められたもんだな。	얕보인 것이네.	keep	rewrites
+rewrite:passive	猫に手を舐められた。	고양이에 손을 핥였다.	keep	rewrites
+rewrite:passive	完全に舐められてるな。	완전히 얕보이고 있구나.	keep	rewrites
+rewrite:passive	舐められてる気がする。	얕보이고 있는 것 같다.	keep	rewrites
+rewrite:passive	舐められた。	얕보였다.	keep	rewrites
+rewrite:passive	見た目で舐められがちだ。	외형으로 얕보이기 십상이다.	keep	rewrites
+rewrite:passive	随分と舐められたものだ。	상당히 얕보인 것이다.	keep	rewrites
+rewrite:passive	乳首を舐められて声が出る。	유두를 핥여 목소리가 나온다.	fix	rewrites
+cx:cue-sense:105	俺の腕をなめるなよ。	내 팔을 얕보지 마.	keep	rewrites

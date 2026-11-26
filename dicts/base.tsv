@@ -1409,7 +1409,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あて	맞&AW@	M437			GN				jisjk:13633		
 あて	당	N110		Z7	GN	919	||1 &&2 P-1== "1**" G-1-= "Ct"	앞 명사가 조수사 문법 조건을 만족하면 あて를 당으로 고른다. (미발동: rare-context)	jisjk:114677		
 あてうま	대항마	N110	VRwVAm		GN				jisjk:124579		
-あてが	나누어&CJ@	M430			GN				jisjk:90365		
+あてが	갖다 &C5@	M430			GN				jisjk:90365		
 あてが	&CJ@	M440			GN				jisjk:140254		
 あてがい	급여	N110	VMo		GN				jisjk:40294		
 あてがはずれ	기대가 빗나&A1@	M427			GN				jisjk:142376		
@@ -2795,7 +2795,6 @@ ttt	ttt	K110			GN				jisjk:201744
 いきやすめ	잠시 휴식	N110		Hd	GN				jisjk:125285		
 いきりた	격분&AV@	M424	SFl		GN				jisjk:140594		
 いきり立	격분&AV@	M414			GN				jisjk:90429		
-いきり立つ	격분하다	I110			GN				jisjk:112037		
 いきれ	무더위	I110	VFr		GN				jisjk:40362		
 いきわかれ	생이별	N110	SFl		GN				jisjk:125289		
 いきわた	골고루 미&AO@	M428			GN				jisjk:140626		
@@ -217192,7 +217191,6 @@ ttt	ttt	K110			GN				jisjk:201744
 揺さぶらずにはおかな	동요시키지 않을 수 $FA@	H7N0			GN				jisjk:138324		
 揺さぶり	흔들거림	N110			GN				jisjk:254826		
 揺さぶり利	동요시&AQ@	M441			GN				jisjk:268306		
-揺すり	강탈	I110			GN				jisjk:78799		
 揺すれ	흔들&AA@	M417			GN				jisjk:94225		
 揺ら	요동&AV@	M412			GN				jisjk:94226		
 揺ら	흔&L4@	M433			GN				jisjk:94227		
@@ -226418,7 +226416,7 @@ ttt	ttt	K110			GN				jisjk:201744
 旺輔	오우스케	N130	QPN	Wb	GN				jisjk:354722		
 旺陽	오우요우	N130	QPN	Wb	GN				jisjk:354728		
 旻佐子	히사코	N130	QPN	Wb	GN				jisjk:350208		
-昂	날카로워&AL@	M428			GN				jisjk:139241		
+昂	흥분&C6@	M428	SFl		GN				jisjk:139241		
 昂大	코우타	N130	QPN	Wb	GN				jisjk:364672		
 昂志	타카시	N130	QPN	Wb	GN				jisjk:10452		
 昂志	코우시	N130	QPN	Wb	GN				jisjk:348851		

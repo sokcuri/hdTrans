@@ -41,6 +41,7 @@
 //= noun.group-subject	Words of everyone or of a number of people that can stand as a subject with no particle, which a 先〜てる after them tells about, not a promise (みんな先に行ってるよ 모두 먼저 가고 있어, 二人とも先に帰ってるよ).
 //= noun.plural-head	Nouns of people or creatures one counts as a crowd, after which 共 is the plural 들 even where their chosen reading has no person code (敵共 적들, 雑魚共 잡졸들).
 //= noun.plural-suffix	Suffixes that make a noun plural (猫たち, 子供ら, 私ども), whose word keeps the class of the noun in pack rows (子供たちを遊ばせる 아이들을 놀게 하다).
+//= noun.person-general	Nouns of a person in general (人, 子, 方): after この, その or あの one names a single person, after whose dropped の a 中 is inside, 안 (この人の中に 이 사람 안에; LEX-8120).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
@@ -1512,6 +1513,15 @@ noun.plural-head	獣
 noun.plural-head	賊
 noun.plural-head	盗賊
 noun.plural-head	輩
+noun.person-general	人
+noun.person-general	子
+noun.person-general	方
+noun.person-general	者
+noun.person-general	男
+noun.person-general	女
+noun.person-general	男の子
+noun.person-general	女の子
+noun.person-general	娘
 noun.plural-suffix	たち
 noun.plural-suffix	達
 noun.plural-suffix	ら
