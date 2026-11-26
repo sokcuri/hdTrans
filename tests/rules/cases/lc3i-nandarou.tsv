@@ -43,7 +43,7 @@ cx:lc3i-nandarou:20	その人は俺の家族なんだろうか。	!rule:cx:lc3i-
 cx:lc3i-nandarou:20	なんて、情けない言葉なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
 lookup:adjective-nandarouka	彼は暗殺者なんだろう。	has:암살자겠지	keep	lookup
 lookup:adjective-nandarouka	ほんとに最後なんだろうな	has:마지막이겠지	keep	lookup
-lookup:adjective-nandarouka	根は優しい奴なんだろう、きっと。	has:놈이겠지	keep	lookup
+lookup:adjective-nandarouka	根は優しい奴なんだろう、きっと。	has:녀석이겠지	keep	lookup
 lookup:adjective-nandarouka	これは夢なんだろうか。	has:꿈일까	keep	lookup
 lookup:adjective-nandarouka	彼はここの常連なんだろうか。	has:단골일까	keep	lookup
 lookup:adjective-nandarouka	その人は俺の家族なんだろうか。	has:가족일까	keep	lookup

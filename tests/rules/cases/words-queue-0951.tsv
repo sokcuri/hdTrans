@@ -26,7 +26,7 @@ pack:idiom:ドジを踏む	ドジ踏んだ	실수를 했다	keep	packs
 dict:w:35272	ヘマをした	실수를 했다	fix	lookup
 dict:w:35273	ポカをやらかした	has:실수를 저질렀다	fix	lookup
 dict:w:35274	ドジった	실수했다	fix	lookup
-dict:jisjk:142788	ドジな奴	has:얼빠진 놈	keep	lookup
+dict:jisjk:142788	ドジな奴	has:얼빠진 녀석	keep	lookup
 lexical:nchi-house	俺んちに来いよ	has:우리 집에	fix	lookup
 lexical:nchi-house	おいらんちに来いよ	has:우리 집에	fix	lookup
 lexical:nchi-house	お前んち	너희 집	keep	lookup
@@ -108,7 +108,7 @@ dict:jisjk:142788	私ってドジだから。	나는 덜렁이니까.	fix	lookup
 dict:jisjk:142782	どじだなあ。	덜렁이구나.	fix	lookup
 dict:w:35333	ドジな奴	rule:dict:w:35333=얼빠%C1@	keep	local
 dict:w:35333	ドジなところ	얼빠진 곳	keep	local
-dict:w:35334	どじな奴	얼빠진 놈	keep	local
+dict:w:35334	どじな奴	얼빠진 녀석	keep	local
 dict:w:35333	ドジだなあ。	!rule:dict:w:35333	keep	local
 dict:jisjk:144603	涙を浮べて笑った。	눈물을 머금고 웃었다.	fix	local
 dict:w:35329	涙をたたえて微笑んだ。	눈물을 머금고 미소 지었다.	fix	local

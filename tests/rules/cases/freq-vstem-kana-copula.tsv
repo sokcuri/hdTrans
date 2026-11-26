@@ -12,20 +12,20 @@ lookup:kana-da-stem-copula	これで貸しだし、文句はないな。	has:대
 lookup:kana-da-stem-copula	今日は釣りだし、早く寝る。	오늘은 낚시이고, 빨리 잔다.	keep	lookup
 lookup:kana-da-stem-copula	お誘いだし、行ってみよう。	권유이고, 가 보자.	keep	lookup
 lookup:kana-da-stem-copula	ただの借りだしな。	그냥 빚이고.	keep	lookup
-lookup:kana-da-stem-copula	あれは借りだそうだ。	저것은 빚이라고 한다.	keep	lookup
-lookup:kana-da-stem-copula	あれは助けだそうだ。	저것은 도움이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは借りだそうだ。	그것은 빚이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは助けだそうだ。	그것은 도움이라고 한다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの想いだし、仕方ない。	그것은 그냥 마음이고, 어쩔 수 없다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの稼ぎだし、仕方ない。	그것은 그냥 돈벌이이고, 어쩔 수 없다.	keep	lookup
-lookup:kana-da-stem-copula	あれは送りだそうだ。	저것은 배웅이라고 한다.	keep	lookup
-lookup:kana-da-stem-copula	あれは盗みだそうだ。	저것은 도둑질이라고 한다.	keep	lookup
-lookup:kana-da-stem-copula	あれは逃げだそうだ。	저것은 도망이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは送りだそうだ。	그것은 배웅이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは盗みだそうだ。	그것은 도둑질이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは逃げだそうだ。	그것은 도망이라고 한다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの狩りだし、仕方ない。	그것은 그냥 사냥이고, 어쩔 수 없다.	keep	lookup
-lookup:kana-da-stem-copula	あれは運びだそうだ。	저것은 운반이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは運びだそうだ。	그것은 운반이라고 한다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの払いだし、仕方ない。	그것은 그냥 지불이고, 어쩔 수 없다.	keep	lookup
 lookup:kana-da-stem-copula	あれは打ちだそうだ。	lacks:내세우	keep	lookup
 lookup:kana-da-stem-copula	それはただの投げだし、仕方ない。	그것은 그냥 던지기이고, 어쩔 수 없다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの抜けだし、仕方ない。	그것은 그냥 누락이고, 어쩔 수 없다.	keep	lookup
-lookup:kana-da-stem-copula	あれは並びだそうだ。	저것은 배열이라고 한다.	keep	lookup
+lookup:kana-da-stem-copula	あれは並びだそうだ。	그것은 배열이라고 한다.	keep	lookup
 lookup:kana-da-stem-copula	それはただの押しだし、仕方ない。	그것은 그냥 밀기이고, 어쩔 수 없다.	keep	lookup
 lookup:kana-da-stem-copula	お前のせいだし、仕方ない。	네 탓이고, 어쩔 수 없다.	fix	lookup
 lookup:kana-da-stem-copula	楽しみのうちだし。	즐거움 가운데이고.	fix	lookup

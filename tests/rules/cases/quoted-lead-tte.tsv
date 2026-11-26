@@ -14,7 +14,7 @@ sound:quoted-lead	「ってことは、映画じゃないのかな？」	has:「
 sound:quoted-lead	「ってことで、行きましょう」	「그래서, 갑시다」	keep	sound
 sound:quoted-lead	「って言われても困る」	「라는 말을 들어도 곤란해」	keep	sound
 sound:quoted-lead	「って言っても同い年の女の子じゃない」	has:「라고 말해도	keep	sound
-sound:quoted-lead	「ってか、もう夏服着てんの？」	「그보다, 이제 하복 입고 있어?」	keep	sound
+sound:quoted-lead	「ってか、もう夏服着てんの？」	「그보다, 벌써 하복 입고 있어?」	keep	sound
 sound:quoted-lead	「っていうか、そもそも俺は新入生じゃないんだけど？」	has:「그보다,	keep	sound
 sound:quoted-lead	「って」	「라고」	keep	sound
 sound:quoted-lead	って、やればいいんですね、わかります」	has:라고,	keep	sound

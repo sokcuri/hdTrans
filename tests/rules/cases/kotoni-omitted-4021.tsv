@@ -14,11 +14,11 @@ cx:kotoni-omitted:30	まさかこんなことに……	설마 이런 일이…�
 cx:kotoni-omitted:30	まさかこんなことになるなんて	설마 이렇게 되다니	keep	rewrites
 cx:kotoni-omitted:40	「ああ、ああっ――どうしてこんな事に！」	has:왜 이렇게 된 거지!	fix	rewrites
 cx:kotoni-omitted:40	どうしてそんなことに？	왜 그렇게 된 거지?	fix	rewrites
-cx:kotoni-omitted:40	どうしてあんなことに	왜 저렇게 된 거지	fix	rewrites
+cx:kotoni-omitted:40	どうしてあんなことに	왜 그렇게 된 거지	fix	rewrites
 cx:kotoni-omitted:40	そんなことに使うな。	!rule:cx:kotoni-omitted:40	keep	rewrites
-cx:kotoni-omitted:50	あんなことに？	저렇게 된 거야?	fix	rewrites
+cx:kotoni-omitted:50	あんなことに？	그렇게 된 거야?	fix	rewrites
 cx:kotoni-omitted:50	どうしてそんなことに？	!rule:cx:kotoni-omitted:50	keep	rewrites
-cx:kotoni-omitted:60	あんなことに……	저런 일이……	fix	rewrites
+cx:kotoni-omitted:60	あんなことに……	그런 일이……	fix	rewrites
 cx:kotoni-omitted:60	まさかそんな事に。	설마 그런 일이.	fix	rewrites
 cx:kotoni-omitted:60	そんなことに使うな。	!rule:cx:kotoni-omitted:60	keep	rewrites
 cx:why-came-about:10	（……どうしてこうなった）	(……왜 이렇게 된 거지)	fix	rewrites

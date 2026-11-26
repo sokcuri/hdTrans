@@ -19,10 +19,10 @@ normalize:question-kai	先生も食べるかい？	선생님도 먹을까?	keep	
 normalize:question-kai	「佐藤くんかい？」	「사토 군이야?」	keep	normalize
 normalize:question-kai	元気かい？	잘 지내?	keep	normalize
 normalize:question-kai	そうかい	그래	keep	normalize
-normalize:konna-n	そんなんでいいの？	그런 것으로 좋은 거야?	fix	normalize
+normalize:konna-n	そんなんでいいの？	그런 것으로 되는 거야?	fix	normalize
 normalize:konna-n	こんなんで	이런 것으로	fix	normalize
 normalize:konna-n	こんなんじゃ	has:이런 것	fix	normalize
-normalize:konna-n	あんなんで	저런 것으로	fix	normalize
+normalize:konna-n	あんなんで	그런 것으로	fix	normalize
 normalize:konna-n	どんなんがいい？	어떤 것이 좋아?	fix	normalize
 ending:chaou-ka	さあ片付けて寝ちゃおうか？	자 정리해 자버릴까?	fix	builtin-ending
 ending:chaou-ka	ここで寝ちゃおうかぁ？	여기서 자버릴까?	fix	builtin-ending

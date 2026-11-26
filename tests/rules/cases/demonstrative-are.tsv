@@ -1,0 +1,58 @@
+# 규칙: LEX-8212
+rule	input	expected	kind	layer
+dict:jisjk:6448	「あれは冗談だよ」	「그건 농담이야」	fix	defaults
+dict:jisjk:6448	思えば、あれもヒントだったのかもしれない。	생각하면, 그것도 힌트였을지도 모른다.	fix	defaults
+dict:jisjk:6448	「あれは演技だって」	「그건 연기래」	fix	defaults
+dict:jisjk:6448	「あれくらいならお安いご用だ」	「그거 정도라면 문제없음이야」	fix	defaults
+dict:jisjk:6448	「アレですよ、アレ」	「그것이에요, 그거」	fix	defaults
+dict:jisjk:6448	「まさかあれも訓練だったの？」	「설마 그것도 훈련이었어?」	fix	defaults
+dict:jisjk:114622	「あんなこと言わないよ」	「그런 말 하지 않아」	fix	defaults
+dict:jisjk:114622	「あんな話を聞いた後だ」	「그런 이야기를 들은 후야」	fix	defaults
+dict:jisjk:114622	「あんなの見せられたら仕方ない」	「그런 거 보게 되면 어쩔 수 없어」	fix	defaults
+dict:jisjk:114622	「好きじゃない人にあんなこと言わないよ」	「좋아하지 않는다 사람에게 그런 말 하지 않아」	fix	defaults
+dict:w:43602	「何あれ？」	「뭐 저거?」	keep	local
+dict:w:43602	「あれは何？」	「저건 뭐?」	keep	local
+dict:w:43602	「あれを見て」	「저걸 봐」	keep	local
+dict:w:43602	「見て、あれ」	「봐, 어」	keep	local
+dict:w:43602	「あれって何？」	「그게 뭐야?」	keep	local
+dict:w:43603	「見て、あんな大きな船」	「봐, 저런 큰 배」	keep	local
+dict:w:43603	「ほら、あんなところに」	「자, 저런 곳에」	keep	local
+dict:jisjk:6448	「あれ？　おかしいな」	「어라? 이상한데」	keep	defaults
+dict:jisjk:6448	「好きであれ嫌いであれ」	「좋아하든 싫든」	keep	defaults
+dict:jisjk:6448	「どんな理由があれ」	「어떤 이유가 있어라」	keep	defaults
+dict:jisjk:6448	「あれから三年たった」	「그때부터 3년 지났어」	keep	defaults
+dict:jisjk:114622	「あんなに怒らなくても」	「그렇게 화내지 않아도」	keep	defaults
+dict:jisjk:114622	「あいつが来た」	「저 녀석이 왔다」	keep	defaults
+dict:w:43602	あれをみて	저것을 봐	keep	local
+dict:w:43602	あれは誰？	저것은 누구?	keep	local
+dict:w:43602	あれ誰？	저것 누구?	keep	local
+cx:sense-cues-1:167	あれ～は何？	저것~은 뭐?	fix	rewrites
+cx:sense-cues-1:167	あれぇはなんだ	저것은 뭐야	fix	rewrites
+cx:sense-cues-1:168	何なのあれ？	뭐야 저것?	fix	rewrites
+cx:sense-cues-1:174	あれもこれも	저것도 이것도	fix	rewrites
+cx:sense-cues-1:174	あれやこれや	저것이나 이것이야	fix	rewrites
+cx:sense-cues-1:174	これも愛、あれも愛。	이것도 사랑, 저것도 사랑.	fix	rewrites
+cx:sense-cues-1:173	こんな人もあんな人も	이런 사람도 저런 사람도	fix	rewrites
+cx:sense-cues-1:175	あれが動いている	저것이 움직이고 있다	fix	rewrites
+cx:sense-cues-1:175	あれが近づいてくる	저것이 다가온다	fix	rewrites
+cx:sense-cues-1:176	あの……あれ、取ってくれる？	그……저것, 집어 줘?	fix	rewrites
+cx:sense-cues-1:176	あれをみろ	저것을 봐라	fix	rewrites
+dict:w:43602	あれを見たことがある	그것을 본 적이 있다	keep	local
+cx:sense-cues-1:175	あれが動いた時	저것이 움직였을 때	keep	rewrites
+cx:sense-cues-1:174	あれは冗談だ	그것은 농담이다	keep	rewrites
+cx:sense-cues-1:167	あれは夢だったのか	그것은 꿈이었던 건가	keep	rewrites
+cx:sense-cues-1:168	「あれを見た？」	「그걸 봤어?」	keep	rewrites
+cx:sense-cues-1:176	「あれ、取った？」	!rule:cx:sense-cues-1:176	keep	rewrites
+cx:sense-cues-1:173	「あんなこと言わないよ」	「그런 말 하지 않아」	keep	rewrites
+cx:sense-cues-1:177	「はっ！あれは！」	「핫! 저건!」	fix	rewrites
+cx:sense-cues-1:177	「はっ！　あれは！」	「핫! 저건!」	fix	rewrites
+cx:sense-cues-1:177	「あっ、あれは！」	「앗, 저건!」	fix	rewrites
+cx:sense-cues-1:177	「えっ、あれは!」	「어, 저건!」	fix	rewrites
+cx:sense-cues-1:177	「あれは！」	「저건!」	fix	rewrites
+cx:sense-cues-1:177	「アレは！」	「저건!」	fix	rewrites
+cx:sense-cues-1:177	「あれは！？」	「저건!?」	fix	rewrites
+cx:sense-cues-1:177	「あれは！」と叫んだ	「저건!」이라고 외쳤다	fix	rewrites
+cx:sense-cues-1:177	「あれは！　昨日の話だ」	「그건! 어제 이야기다」	keep	rewrites
+cx:sense-cues-1:177	「あれは嘘だ！」	!rule:cx:sense-cues-1:177	keep	rewrites
+dict:jisjk:6448	「あれは、昨日の話だ！」	「그건, 어제 이야기야!」	keep	defaults
+dict:jisjk:6448	「ん？あれは……」	「응? 그건……」	keep	defaults

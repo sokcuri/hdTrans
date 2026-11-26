@@ -1,7 +1,7 @@
 # 규칙: GRM-60, GRM-61
 rule	input	expected	kind	layer
 cx:neg-clause-naito:10	住所が無いと書けない、と聞いた	has:주소가 없으면 쓸 수 없다	fix	rewrites
-cx:neg-clause-naito:10	奴がいないと、会話が持たない。	has:놈이 없으면	fix	rewrites
+cx:neg-clause-naito:10	奴がいないと、会話が持たない。	has:녀석이 없으면	fix	rewrites
 cx:neg-clause-naito:10	立候補者がいないと話にならない	has:입후보자가 없으면	fix	rewrites
 cx:neg-clause-naito:10	お金がないと困る	has:돈이 없으면	fix	rewrites
 cx:neg-clause-naito:10	鍵がないと開けられない	has:열쇠가 없으면	fix	rewrites
@@ -18,7 +18,7 @@ cx:neg-clause-naito:10	余裕がないと告げた	!rule:cx:neg-clause-naito:10	
 cx:neg-clause-naito:10	権利がないと主張した	!rule:cx:neg-clause-naito:10	keep	rewrites
 cx:neg-clause-naito:10	理由がないと書いてある	!rule:cx:neg-clause-naito:10	keep	rewrites
 cx:neg-clause-naito:10	答えがないと叫んだ	!rule:cx:neg-clause-naito:10	keep	rewrites
-cx:neg-clause-naito:20	マニフェストがないと、政策を訴えられない	has:마니페스트가 없으면,	fix	rewrites
+cx:neg-clause-naito:20	マニフェストがないと、政策を訴えられない	has:매니페스토가 없으면,	fix	rewrites
 cx:neg-clause-naito:20	時間がないと、彼は言った	!rule:cx:neg-clause-naito:20	keep	rewrites
 cx:neg-clause-naito:20	関係がないと、思った	!rule:cx:neg-clause-naito:20	keep	rewrites
 cx:neg-clause-ii:5	そもそも死ななきゃいい。	has:죽지 않으면 된다	fix	rewrites

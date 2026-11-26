@@ -102,7 +102,7 @@ cx:line-toiu:10	という夢を見た。	라는 꿈을 꾸었다.	fix	rewrites
 cx:line-toiu:10	彼という人。	그라는 사람.	keep	rewrites
 senses	赤い、燃えるように赤い夕日が視界を焼く。	붉다, 불타도록 붉은 석양이 시야를 태운다.	fix	senses
 senses	パンを焼く。	빵을 굽는다.	keep	senses
-pattern:書くはずがございません	「い、いやですわ、あんなこと、起こるはずがございませんのに」	「시, 싫네요, 저런 일, 일어날 리가 없는데요」	fix	lookup
+pattern:書くはずがございません	「い、いやですわ、あんなこと、起こるはずがございませんのに」	「시, 싫네요, 그런 일, 일어날 리가 없는데요」	fix	lookup
 cx:most-of:20	その多くが死んだ。	그 대부분이 죽었다.	fix	rewrites
 cx:most-of:20	多くが死んだ。	대부분이 죽었다.	keep	rewrites
 cx:most-of:30	その多くを失った。	그 대부분을 잃었다.	fix	rewrites

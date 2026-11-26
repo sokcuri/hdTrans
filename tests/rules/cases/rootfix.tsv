@@ -14,7 +14,7 @@ dict:Ct	モンスターを３体も倒した。	몬스터를 3마리나 쓰러�
 dict:Ct	一発で決める。	한 방으로 결정한다.	keep	local
 dict:idiom	なにかにつけて文句を言う。	걸핏하면 불평한다.	fix	lookup
 dict:idiom	なにかに使う。	뭔가에 쓴다.	keep	lookup
-dict:slang	奴をしばきあげる。	놈을 두들겨 팬다.	fix	lookup
+dict:slang	奴をしばきあげる。	녀석을 두들겨 팬다.	fix	lookup
 compose:action	研究し続けるのみだ。	계속 연구할 뿐 이다.	fix	compose
 compose:action	研究し続ける。	계속 연구한다.	keep	compose
 dict:jisjk:116128	同じ年の友達だ。	같은 나이의 친구다.	keep	local

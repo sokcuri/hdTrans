@@ -15,9 +15,9 @@ normalize:scream-i	「な、何ぃいいぃ、お前は■紅ぅううぅ？！�
 normalize:scream-i	なッ、何ぃいいぃいいいぃッ？！？！	has:뭐어어	keep	normalize
 normalize:scream-i	かわいいいい	has:귀여	keep	normalize
 normalize:scream-i	何ぃ！	무엇!	keep	normalize
-normalize:drawn-demonstrative	って言うか、あーんな薬や泉の水なんかで、お手軽に魔力回復できるなら苦労しないわよ」	has:저런 약	fix	normalize
+normalize:drawn-demonstrative	って言うか、あーんな薬や泉の水なんかで、お手軽に魔力回復できるなら苦労しないわよ」	has:그런 약	fix	normalize
 normalize:drawn-demonstrative	そーんなことない	그렇지 않다	fix	normalize
 normalize:drawn-demonstrative	こーんなに大きい	이렇게 크다	fix	normalize
-normalize:drawn-demonstrative	あんなこと	has:저런	keep	normalize
+normalize:drawn-demonstrative	あんなこと	has:그런	keep	normalize
 sound:interjection-rows	「のわあああっ！？」	「노와아아앗!?」	keep	sound
 sound:interjection-rows	「あ、そうなの？　んもー、それならそう言いなさいよ」	has:정말~,	fix	sound

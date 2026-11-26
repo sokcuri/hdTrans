@@ -210,5 +210,5 @@ pack:argument-senses:5043	倒れた彼の馬を起こした。	has:그의 말을
 pack:argument-senses:5043	倒れて馬を起こした。	has:말을 일으켰다	fix	packs
 dict:me-yatsu:1	悪党共め！	has:악당들!	fix	local
 dict:me-yatsu:1	男共め	has:남자들	fix	local
-dict:me-yatsu:1	奴ら共め	lacks:녀석	fix	local
+dict:me-yatsu:1	奴ら共め	녀석들	fix	local
 pack:argument-senses:5043	倒れた私の犬を起こした。	has:내 개를 일으켰다	fix	packs

@@ -8,7 +8,7 @@ lookup:nanka-kana	あんたが言うとなんかいやらしく聞こえるわ	h
 lookup:nanka-kana	「あぁ、なんかいけそうなのに……！」	has:왠지 갈 수 있	fix	lookup
 lookup:nanka-kana	ということは、兄弟なんかいらないってこと？	lacks:몇 번	fix	lookup
 lookup:nanka-kana	これに喜びを感じない男なんかいない。	has:남자 같은 건 없다	fix	lookup
-lookup:nanka-kana	部室の扉をわざわざノックする奴なんかいないし……	has:놈 같은 건 없고	fix	lookup
+lookup:nanka-kana	部室の扉をわざわざノックする奴なんかいないし……	has:녀석 같은 건 없고	fix	lookup
 lookup:nanka-kana	びょうしつで、なんかいも、きいたから……	has:몇 번이나	keep	lookup
 lookup:nanka-kana	なんかいめだっけ？	has:몇 번째	keep	lookup
 lookup:nanka-kana	なんかい目の挑戦	has:몇 번째	keep	lookup

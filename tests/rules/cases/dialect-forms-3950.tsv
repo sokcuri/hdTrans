@@ -101,7 +101,7 @@ normalize:dialect-quote	とにかく ええ芝居するっちゅうんは こな
 normalize:dialect-quote	もう どないも とどめっちゅうもんが 刺されへんで かなわん もう！	이제 어떻게도 결정타라는 것이 찔리지 않아 이루어지지 않아 이제!	fix	normalize
 normalize:dialect-quote	こないだ希と話したやろ｡ 女は 結局 結婚したら自分の仕事は 後回しけっちゅうて｡	지난번 희와 이야기했지. 여자는 결국 결혼하면 자신의 일은 뒷전이라고 하는이라고.	fix	normalize
 normalize:dialect-quote	音楽室に行くっちゅうことから 胸と帽子には音符が施されとるんや	음악실에 간다는 것으로부터 가슴과 모자에는 음표가 베풀어지고 있는 거야	fix	normalize
-normalize:dialect-quote	日本が アメリカから買っとる オスプレイっちゅう軍用機 あれが １機 100億ぐらいだで｡	일본이 미국에서 사고 있는 V-22 오스프리라는 군용기 저것이 1기 100억 정도다로.	fix	normalize
+normalize:dialect-quote	日本が アメリカから買っとる オスプレイっちゅう軍用機 あれが １機 100億ぐらいだで｡	일본이 미국에서 사고 있는 V-22 오스프리라는 군용기 그것이 1기 100억 정도다로.	fix	normalize
 normalize:dialect-quote	わしには わしの 暴れ方っちゅうもんがある｡	나에게는 나의 날뛰는 방법이라는 것이 있다.	fix	normalize
 normalize:dialect-quote	わしゃ 辞めるっちゅうて 社長にも言うたはずじゃ！	난 그만둔다고 하는이라고 사장에게도 말했을 거야!	fix	normalize
 normalize:dialect-quote	実はな あちらのお方が おまんらに話があるっちゅうねん	실은저쪽의 분이 만등에 이야기가 있다고 하거든	fix	normalize
@@ -127,7 +127,7 @@ normalize:dialect-senba	シルクハットに義理のない漁師 知っては�
 normalize:dialect-senba	それ ホンマにうれしいことでっせ	그것 진짜로 기쁜 일이에요	fix	normalize
 normalize:dialect-senba	やったりまっせ！ れんげきのかた！	해 줘요! 렝게 오고 분!	fix	normalize
 normalize:dialect-polite	ええっ？ ホントざんすね	에엣? 진짜군요	fix	normalize
-normalize:dialect-polite	あれざます	저것입니다	fix	normalize
+normalize:dialect-polite	あれざます	그것입니다	fix	normalize
 normalize:dialect-polite	何ざます 一体!?	무엇입니다 도대체!?	fix	normalize
 normalize:dialect-word	サラダとシャラダの違いは何よ ほんで もしくはシーザーサラダ	샐러드와 샤라다의 차이는 뭐야 그래서 혹은 시저 샐러드	fix	normalize
 normalize:dialect-word	ほんで… よし｡	그래서… 좋아.	fix	normalize
@@ -136,7 +136,7 @@ normalize:dialect-word	ほんで行ってみたら つまみに激辛のチー�
 normalize:dialect-word	いつから ここにおるんじゃ？ ゆんべからでございます｡	언제부터 여기에 있지? 어젯밤부터입니다.	fix	normalize
 normalize:dialect-word	ええ店ないな ほんまに	좋은 가게 없다 진짜로	fix	normalize
 normalize:dialect-word	そら ええ考えや よし手分けして テントを借りてこよう	자 좋은 생각이나 좋아 분담해 텐트를 빌려 오자	fix	normalize
-normalize:dialect-word	まあ あげんこともあったばってん…	뭐 저런 일도 있던 가위표…	fix	normalize
+normalize:dialect-word	まあ あげんこともあったばってん…	뭐 그런 일도 있던 가위표…	fix	normalize
 normalize:dialect-word	はよ言え いいから。	빨리 말해라 좋으니까.	fix	normalize
 normalize:dialect-word	はよ病院連れていったれ	빨리 병원 일행이라고 말한	fix	normalize
 normalize:dialect-word	ええ土いらんねん！	좋은 흙필요 없어네!	fix	normalize

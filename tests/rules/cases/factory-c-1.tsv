@@ -30,7 +30,7 @@ pack:fac:c:従う:te-iru	無茶苦茶な要求ではあったが、合同パー�
 pack:fac:c:従う:te-iru	彼らは向日葵を人質にされ、仕方なく白神の命令に従っていたそうだ。	has:따르고 있었다고 한다	keep	packs
 pack:fac:c:従う:te-iru	５０年くらい前から魔王に従っているそうだ。	has:따르고 있다고 한다	keep	packs
 pack:fac:c:従う:te-iru	「メイドよ。おまえは俺に従っている。そうだな？」	has:따르고 있다	keep	packs
-pack:fac:c:そうしている:aspect	俺と似たような境遇でそうしている奴はたくさんいた。	has:그렇게 하고 있는 놈	fix	packs
+pack:fac:c:そうしている:aspect	俺と似たような境遇でそうしている奴はたくさんいた。	has:그렇게 하고 있는 녀석	fix	packs
 pack:fac:c:そうしている:aspect	数秒は、そうしていただろう。	has:그렇게 하고 있었을 것이다	fix	packs
 pack:fac:c:そうしている:aspect	そうしていると、何処からか慟哭が聞こえる。	has:통곡이 들린다	keep	packs
 pack:fac:c:そうしている:aspect	どれぐらい、そうしていただろう。	has:어느 정도	keep	packs

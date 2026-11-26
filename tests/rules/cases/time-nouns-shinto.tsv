@@ -13,4 +13,4 @@ cx:toshite-state:40	部屋はしんとしていた	방은 고요했다	fix	rewri
 cx:toshite-state:40	しんとしている部屋	고요한 방	fix	rewrites
 cx:toshite-state:40	教室がしんとした	교실이 고요했다	fix	rewrites
 cx:toshite-state:40	しんと静まり返った	고요히 아주 조용해졌다	keep	rewrites
-cx:toshite-state:40	ぼーっとしている	멍하고 있다	keep	rewrites
+cx:toshite-state:40	ぼーっとしている	멍하다	keep	rewrites

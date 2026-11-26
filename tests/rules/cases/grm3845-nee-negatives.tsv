@@ -10,7 +10,7 @@ normalize:verb-nee	相変わらず好きねえ	변함없이 좋아하는구나	k
 normalize:verb-nee	おっ、ついに…って感じねぇ	오, 마침내…라는 느낌	keep	normalize
 normalize:verb-nee	いい感じねえ	좋은 느낌 응	keep	normalize
 normalize:verb-nee	許せねぇ 美人なだけに なおさら怒りが込み上げるぜ	용서할 수 없다 미인인 만큼 더욱더 분노가 복받친다	keep	normalize
-normalize:noun-nee	あんな速攻見たことねぇ	저런 속공 본 적 없다	fix	normalize
+normalize:noun-nee	あんな速攻見たことねぇ	그런 속공 본 적 없다	fix	normalize
 normalize:noun-nee	おおっ こんなきれいな花 見たことねえぞ	오옷 이런 예쁜 꽃 본 적 없어	fix	normalize
 normalize:noun-nee	なんだよ らしくねえな	뭐야 답지 않네	fix	normalize
 normalize:noun-nee	どうしたんだよ？ らしくねえぞ	무슨 일이야? 답지 않아	fix	normalize

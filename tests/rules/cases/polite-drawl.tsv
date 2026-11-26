@@ -5,7 +5,7 @@ normalize:drawl	私にはわかりま……せん。	저는 모릅……니다.	
 normalize:drawl	もう休み……ましょう。	이제 쉽……시다.	fix	normalize
 normalize:drawl	一緒に行きま…しょうか？	함께 갈…까요?	fix	normalize
 normalize:drawl	本当に来ま……すか？	정말 옵……니까?	fix	normalize
-normalize:drawl	あれは鳥で……す。	저것은 새입……니다.	fix	normalize
+normalize:drawl	あれは鳥で……す。	그것은 새입……니다.	fix	normalize
 normalize:drawl	いま…すぐ来て。	지금…바로 와.	keep	normalize
 normalize:drawl	ここで…した。	여기서…했다.	keep	normalize
 normalize:copula-pause	猫が好き……で……す。	고양이를 좋아……합……니다.	fix	normalize

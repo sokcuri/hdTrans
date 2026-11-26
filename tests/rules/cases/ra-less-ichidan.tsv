@@ -1,6 +1,6 @@
 # 규칙: LEX-35
 rule	input	expected	kind	layer
-sound:ra-less-ichidan	奴らからは 逃げれない	놈들에게서는 도망칠 수 없다	fix	sound
+sound:ra-less-ichidan	奴らからは 逃げれない	녀석들에게서는 도망칠 수 없다	fix	sound
 sound:ra-less-ichidan	簡単に避けれる。	간단하게 피할 수 있다.	fix	sound
 sound:ra-less-ichidan	避けれねぇ！	피할 수 없어!	fix	sound
 sound:ra-less-ichidan	マジで上げれない	진짜로 올릴 수 없다	fix	sound

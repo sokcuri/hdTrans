@@ -14,7 +14,7 @@ normalize:tteNda	まあ いいや おいらさ バットってんだ よろし�
 normalize:tteNda	これは何ってんだ？	이것은 뭐라는 거야?	fix	normalize
 normalize:tteNda	言ってんだ	말하는 거야	keep	normalize
 normalize:anno	あたいは、戦いが終わっても……やることが、あんのによ……。	나는, 싸움이 끝나도……하는 것이, 있는 것에…….	fix	normalize
-normalize:anno	あんな人	저런 사람	keep	normalize
+normalize:anno	あんな人	그런 사람	keep	normalize
 lexical:sino-gloss	流石だね。	역시구나.	fix	lookup
 lexical:sino-gloss	精強「第十七駆逐隊」を編成せよ！	정예 「제17구축대」를 편성하라!	fix	lookup
 lexical:sino-gloss	そして彼女の船はあなたの惑星を去る	그리고 그녀의 배는 당신의 행성을 간다	fix	lookup
