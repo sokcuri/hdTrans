@@ -27,6 +27,13 @@
 //= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.su-transitive	Stems, from their last kanji, of す verbs that are the common transitive verb of their pair, whose せ is their potential (動かせる, 動かせてる 움직일 수 있다; spec LEX-5014), not the lexical causative of the shorter verb that 尖らす and 湿らす are.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
+//= verb.lookalike-object	Ends of the text before a regular verb stem spelled as the plain form of する, くる or 来る (the くる of くるむ) that mark its object or means, so the regular verb stays (タオルでくるんだ 수건으로 감쌌다); elsewhere the irregular verb reads it (くるんだ 오는 거야; spec LEX-8082).
+//= verb.lookalike-te	Ends of a て form before such a stem, which no object or means of verb.lookalike-object is (読んでくるんだ 읽어 오는 거야).
+//= verb.lookalike-tail	Starts of the text after such a stem that the irregular verb takes with its explanatory ん (くるんだ, くるんです, くるんじゃ, くるんでしょ): only there does the irregular verb take the stem; before a て form in んで (紙にくるんで 종이에 감싸) the regular verb stays.
+//= verb.lookalike-target	The に that ends the text before such a stem after a thing of noun.wrapping (毛布にくるんだ 담요에 감싼): the regular verb stays.
+//= noun.wrapping	Things one wraps something with or in (毛布, 布, 紙, タオル, おくるみ), before the に of verb.lookalike-target.
+//= verb.lookalike-past	The past of such a stem in ん (くるんだ), after which a noun it describes keeps the regular verb (くるんだ布 감싼 천).
+//= verb.lookalike-adnominal	Prefixes that may start the noun after verb.lookalike-past (お菓子, ご飯): the noun is seen after them.
 //= adjective.te-state-aux	Stems of the adjectives after a て form that are a contracted いる with its い dropped, read as a word of their own: the ない of ていない (見てない, 強いてない; spec LEX-8021).
 //= follower.continuative-suffix	Starts of the suffixes after a verb's continuative that begin like a case particle (答えがたい, 答えがちだ, 答えにくい): the stem before them stays the verb, though a noun row spells it (spec LEX-8020).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
@@ -15475,3 +15482,42 @@ dialect.pronoun-before-particle	おどれ	お前
 dialect.pronoun-before-particle	わい	わし
 dialect.pronoun-before-particle	おら	俺
 dialect.adverb-before-verb	ようも	よくも
+verb.lookalike-object	を
+verb.lookalike-object	で
+verb.lookalike-te	んで
+verb.lookalike-te	いで
+verb.lookalike-tail	んだ
+verb.lookalike-tail	んです
+verb.lookalike-tail	んでしょ
+verb.lookalike-tail	んじゃ
+noun.wrapping	毛布
+noun.wrapping	布
+noun.wrapping	紙
+noun.wrapping	タオル
+noun.wrapping	おくるみ
+noun.wrapping	布団
+noun.wrapping	ふとん
+noun.wrapping	ハンカチ
+noun.wrapping	風呂敷
+noun.wrapping	包装紙
+noun.wrapping	新聞紙
+noun.wrapping	ラップ
+noun.wrapping	ビニール
+noun.wrapping	シーツ
+noun.wrapping	ブランケット
+noun.wrapping	マント
+noun.wrapping	寝袋
+noun.wrapping	ガーゼ
+noun.wrapping	包帯
+noun.wrapping	葉
+noun.wrapping	葉っぱ
+noun.wrapping	油紙
+noun.wrapping	和紙
+noun.wrapping	手ぬぐい
+noun.wrapping	手拭い
+noun.wrapping	バスタオル
+noun.wrapping	おむつ
+verb.lookalike-target	に
+verb.lookalike-past	んだ
+verb.lookalike-adnominal	お
+verb.lookalike-adnominal	ご

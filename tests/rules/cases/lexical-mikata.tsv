@@ -1,0 +1,22 @@
+# 규칙: LEX-8087
+rule	input	expected	kind	layer
+dict:w:42418	私はあなたの味方だよ	나는 당신의 편이야	fix	local
+dict:w:42418	ずっとお前の味方だからな	계속 네 편이니까	fix	local
+dict:w:42418	誰の味方なんだ	has:누구의 편	fix	local
+dict:w:42418	君の味方になる	네 편이 된다	fix	local
+dict:w:42418	味方になってくれ	편이 되어 줘	fix	local
+dict:w:42418	敵の味方	적의 편	fix	local
+cx:mikata-suru:10	彼の味方をする	그의 편을 든다	fix	rewrites
+cx:mikata-suru:10	どうして彼の味方をしたの？	왜 그의 편을 들었어?	fix	rewrites
+dict:w:42418	正義の味方が負けるはずない	has:정의의 사도가	fix	lookup
+dict:w:42418	味方の部隊が全滅した	아군의 부대가 전멸했다	keep	defaults
+dict:w:42418	敵と味方	적과 아군	keep	defaults
+dict:w:42418	味方が来てくれた	아군이 와 주었다	keep	defaults
+dict:w:42418	味方につける	자기편으로 만든다	keep	lookup
+cx:mikata-suru:10	私の味方をした	내 편을 들었다	fix	rewrites
+cx:mikata-suru:20	僕の味方をしてくれ	내 편을 들어 줘	fix	rewrites
+cx:mikata-suru:20	味方をしてくれた	편을 들어 주었다	fix	rewrites
+cx:mikata-suru:20	味方をしない	편을 들지 않는다	fix	rewrites
+cx:mikata-suru:20	味方を増やすようにする	!rule:cx:mikata-suru:20	keep	rewrites
+cx:mikata-suru:10	味方が多いと安心する	!rule:cx:mikata-suru:10	keep	rewrites
+dict:w:42418	最強の味方を得た	최강의 아군을 얻었다	keep	defaults

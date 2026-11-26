@@ -104,7 +104,7 @@ dict:audit-novel-2	素人の域を出ない。	has:수준을 벗어나지 않는
 dict:audit-novel-2	神の域に達する。	has:신의 영역	keep	lookup
 dict:audit-novel-2	市電に乗る。	has:시영전차를	keep	lookup
 dict:audit-novel-2	もっともふだんは、表だけで充分だ	has:다만 평소에는	fix	lookup
-dict:audit-novel-2	もっとも大切なもの	has:가장 중요한	keep	lookup
+dict:audit-novel-2	もっとも大切なもの	has:가장 소중한	keep	lookup
 cx:audit-novel:10	殿に見参した。	has:주군을 알현했다	fix	rewrites
 cx:audit-novel:10	国王に謁見した。	has:국왕을 알현했다	fix	rewrites
 cx:audit-novel:10	陛下に謁見する機会を得た。	has:폐하를 알현할	fix	rewrites

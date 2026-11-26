@@ -18,5 +18,5 @@ cx:voice-agent:27	いっしょに見られたらいいね。	함께 볼 수 있�
 cx:voice-agent:27	〈彼の目を 真っすぐに見られる日は 来るのだろうか〉	〈그의 눈을 곧게 볼 수 있는 날은 오는 걸까〉	keep	rewrites
 cx:voice-agent:27	この映画は家で見られる	이 영화는 집에서 볼 수 있다	keep	rewrites
 cx:voice-agent:12	私に聞かれた。	내가 물었다.	keep	rewrites
-cx:voice-agent:27	「……絶賛凹み中。獅子ヶ谷さんに……どヘタなとこ見られた……」	has:보여졌어	keep	rewrites
+cx:voice-agent:27	「……絶賛凹み中。獅子ヶ谷さんに……どヘタなとこ見られた……」	「……절찬 함몰 중. 사자타니 씨에게……서투른 곳 볼 수 있었어……」	current	rewrites
 cx:voice-agent:22	「誰かに見張られた……」	「누군가에게 감시됐어……」	keep	rewrites

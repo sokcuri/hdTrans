@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:bracket-ruby	[みずみず,1]瑞々しい果物を食べた。	싱싱한 과일을 먹었다.	fix	normalize
 normalize:bracket-ruby	[リンク,1]接続完了。	접속 완료.	fix	normalize
-normalize:bracket-ruby	「[おちこぼれ,1]Ｄ組の教室だ」	「D조의 교실이야」	fix	normalize
+normalize:bracket-ruby	「[おちこぼれ,1]Ｄ組の教室だ」	「D반의 교실이야」	fix	normalize
 normalize:bracket-ruby	「どうだ、[・]ミナミ」	「어때, 미나미」	fix	normalize
 normalize:bracket-ruby	「ありがとな、[・]ミ[・]ナ[・]ミ」	「고마워, 미나미」	fix	normalize
 normalize:bracket-ruby	学園の[とうか,1]桃花が来た。	학원의 토카가 왔다.	fix	normalize

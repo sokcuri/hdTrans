@@ -1,6 +1,6 @@
 # 규칙: MNG-5
 rule	input	expected	kind	layer
-analysis:shorter-ending	　ただ、電話向こうの相手がやたらと興奮しているのだけは伝わってきた。	 다만, 전화 저편의 상대가 유난히 흥분하고 있는 것만은 전해져 왔다.	fix	analysis
+analysis:shorter-ending	　ただ、電話向こうの相手がやたらと興奮しているのだけは伝わってきた。	 다만, 전화 저쪽의 상대가 유난히 흥분하고 있는 것만은 전해져 왔다.	fix	analysis
 analysis:shorter-ending	…そう考えるときれいだけどちょっと怖いね。	…그렇게 생각하면 예쁘지만 조금 무섭네.	fix	analysis
 analysis:shorter-ending	首を傾げるわたしを見て、母が悲しそうに目を伏せた。	has:고개를 갸웃하는	fix	analysis
 analysis:shorter-ending	野分、どこ？助けてよ！嫌…沈むのだけは嫌！	노와키, 어디? 도와줘! 싫다…가라앉는 것만은 싫어!	fix	analysis
