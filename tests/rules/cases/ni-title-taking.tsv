@@ -1,0 +1,18 @@
+# 규칙: MNG-4
+rule	input	expected	kind	layer
+particle:ni-title-taking	「彼女を会長に取られたくない」	「그녀를 회장에게 빼앗기고 싶지 않아」	fix	local
+particle:ni-title-taking	「会長に取られたくない」	「회장에게 빼앗기고 싶지 않아」	fix	local
+particle:ni-title-taking	「彼女を会長にあげる」	「그녀를 회장에게 줄게」	fix	local
+particle:ni-title-taking	「彼女を会長に渡したくない」	「그녀를 회장에게 건네주고 싶지 않아」	fix	local
+particle:ni-title-taking	「彼を委員長にあげるつもりはない」	「그를 위원장에게 줄 생각은 없어」	fix	local
+particle:ni-title-taking	「妹を部長に奪われた」	「여동생을 부장에게 빼앗겼어」	fix	local
+particle:ni-title-taking	「彼女を会長に譲った」	「그녀를 회장에게 양보했어」	fix	local
+particle:ni-title-taking	「先輩を会長に取られちゃう」	「선배를 회장에게 빼앗길 것 같아」	fix	local
+particle:ni-title-taking	「本を会長に取られた」	「책을 회장에게 빼앗겼어」	fix	local
+particle:ni-title-taking	「会長に渡す書類」	「회장에게 건네주는 서류」	fix	local
+particle:ni-title-taking	「マチルダを会長に取られたくない」	「마틸다를 회장에게 빼앗기고 싶지 않아」	fix	local
+particle:ni-title-taking	「彼女を会長に選んだ」	「그녀를 회장으로 선택했어」	keep	local
+particle:ni-title-taking	「彼女を会長に推薦した」	「그녀를 회장으로 추천했어」	keep	local
+particle:ni-title-taking	「彼を委員長に任命した」	「그를 위원장으로 임명했어」	keep	local
+particle:ni-title-taking	「彼女を先生に取られた」	「그녀를 선생님에게 빼앗겼어」	keep	local
+particle:ni-title-taking	「彼を部長に任せる」	「그를 부장에게 맡겨」	keep	local

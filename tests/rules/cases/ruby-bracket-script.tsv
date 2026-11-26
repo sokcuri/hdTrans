@@ -1,0 +1,26 @@
+# 규칙: LEX-8156
+rule	input	expected	kind	layer
+normalize:bracket-ruby	[みずみず,1]瑞々しい果物を食べた。	싱싱한 과일을 먹었다.	fix	normalize
+normalize:bracket-ruby	[リンク,1]接続完了。	접속 완료.	fix	normalize
+normalize:bracket-ruby	「[おちこぼれ,1]Ｄ組の教室だ」	「D조의 교실이야」	fix	normalize
+normalize:bracket-ruby	「どうだ、[・]ミナミ」	「어때, 미나미」	fix	normalize
+normalize:bracket-ruby	「ありがとな、[・]ミ[・]ナ[・]ミ」	「고마워, 미나미」	fix	normalize
+normalize:bracket-ruby	学園の[とうか,1]桃花が来た。	학원의 토카가 왔다.	fix	normalize
+normalize:bracket-ruby	「[とうか,1]桃花ちゃん！」	「토카짱!」	fix	normalize
+normalize:bracket-ruby	[リンク,1]接続を試みる。	접속을 시도한다.	fix	normalize
+normalize:bracket-ruby	彼は[くさりかたびら,2]鎖帷子のような服を着ていた。	그는 쇄자갑 같은 옷을 입고 있었다.	fix	normalize
+normalize:bracket-ruby	[あゆむ]うん。	[아유무]응.	keep	normalize
+normalize:bracket-ruby	[アリス]おはよう。	[앨리스]좋은 아침.	keep	normalize
+normalize:bracket-ruby	[注]これは例です。	[주]이것은 예입니다.	keep	normalize
+normalize:bracket-ruby	配列[0,1]を返す。	배열[0,1]을 돌려준다.	keep	normalize
+normalize:bracket-ruby	【桃花】「おはよう」	【모모카】「좋은 아침」	keep	normalize
+normalize:bracket-ruby	{k=-5.0}―――{/k}　春が来た。	{k=-5.0}―――{/k} 봄이 왔다.	keep	normalize
+normalize:bracket-ruby	[1]番の席に座った。	[1]번의 자리에 앉았다.	keep	normalize
+normalize:bracket-ruby	[田中,1]おはよう。	[타나카, 1]좋은 아침.	keep	normalize
+normalize:bracket-ruby	[キング,1]国王が笑った。	국왕이 웃었다.	fix	normalize
+normalize:bracket-ruby	国王《キング》が笑った。	국왕이 웃었다.	fix	normalize
+normalize:bracket-ruby	[ナイト,1]騎士が来た。	기사가 왔다.	fix	normalize
+normalize:bracket-ruby	[そこ,3]学園長室で待つ。	학원장실에서 기다린다.	fix	normalize
+normalize:bracket-ruby	[ﾎﾞｽ,1]首領が来た。	수령이 왔다.	keep	normalize
+normalize:bracket-ruby	[しおり,0]栞を挟む。	책갈피를 사이에 둔다.	fix	normalize
+normalize:bracket-ruby	[セブンリカーション,2]七回帰を止める。	7회귀를 멈춘다.	fix	normalize

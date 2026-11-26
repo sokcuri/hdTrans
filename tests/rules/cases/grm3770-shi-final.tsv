@@ -56,8 +56,8 @@ cx:narration-style-1:40	それに、今から食材を買いに行かなけれ�
 cx:narration-style-1:41	「それがいい。性格も人それぞれなら理想像も人それぞれだろうし」	「그게 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테니까」	fix	rewrites
 cx:narration-style-1:41	「で、でもあれは近いうちにってことだろうし」	「이, 이기도 할 수 있는은 가까운 시일내에라는 것일 테니까」	fix	rewrites
 cx:narration-style-1:41	それがいい。性格も人それぞれなら理想像も人それぞれだろうし。	그것이 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테고.	keep	rewrites
-cx:narration-style-1:42	「筧は悪くないよ。私が羊飼いになったから忘れたわけだし」	「견은 나쁘지 않아. 내가 양치기가 됐으니까 잊은 거잖아」	fix	rewrites
-cx:narration-style-1:42	筧は悪くないよ。私が羊飼いになったから忘れたわけだし。	견은 나쁘지 않아. 내가 양치기가 되었으니까 잊은 거고.	keep	rewrites
+cx:narration-style-1:42	「筧は悪くないよ。私が羊飼いになったから忘れたわけだし」	「카케이는 나쁘지 않아. 내가 양치기가 됐으니까 잊은 거잖아」	fix	rewrites
+cx:narration-style-1:42	筧は悪くないよ。私が羊飼いになったから忘れたわけだし。	카케이는 나쁘지 않아. 내가 양치기가 되었으니까 잊은 거고.	keep	rewrites
 cx:narration-style-1:43	「ってか、夢にルールもなにもないか……架子だっているわけだし」	「그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거잖아」	fix	rewrites
 cx:narration-style-1:43	ってか、夢にルールもなにもないか……架子だっているわけだし。	그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거고.	keep	rewrites
 cx:narration-style-1:60	「最後の最後に、二つの部をまとめたのは望月さんですし」	「마지막의 마지막에, 두 개의 부를 정리한 건 모치즈키 씨거든요」	fix	rewrites

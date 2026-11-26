@@ -255,9 +255,19 @@ struct SpeechCues {
 SpeechCues ReadSpeechCues(std::string_view line);
 bool FemaleSpeech(std::span<const std::string> lines);
 
-// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 with a kana reading and
-// HTML <ruby>.
+// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 with a kana reading,
+// HTML <ruby> and BracketRubyAt.
 std::string StripRuby(std::string_view line);
+
+// The bracket ruby of script markup at pos of s: [reading,N] and the N+1 characters after it, its base
+// ([みずみず,1]瑞々しい: 瑞々, [リンク,1]接続); and an emphasis mark [・] or [・・,N] the same way. The reading is
+// kana or ・, as a 《》 reading is ([0,1] is an index, [田中,1] no ruby); one without a count is a speaker label
+// ([あゆむ]うん), except one of ・ only, which marks one character. The base holds no bracket and no space. Sets the byte ranges of the reading and the base; the match ends with
+// the base.
+struct BracketRuby {
+    size_t readBegin = 0, readEnd = 0, baseBegin = 0, baseEnd = 0;
+};
+bool BracketRubyAt(std::string_view s, size_t pos, BracketRuby& m);
 
 }  // namespace internal
 

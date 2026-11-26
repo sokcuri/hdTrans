@@ -12,7 +12,7 @@ names:nickname-prefix	エルンスト様とエルンスト様。「エルくん�
 names:nickname-prefix	エルンスト様とエルンスト様。エル君が手を振った。	에른스트 님과 에른스트 님. 에르 군이 손을 흔들었다.	fix	lookup
 names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん、またね」	아렉산들 님과 아렉산들 님. 「아렉 군, 또 봐」	fix	lookup
 names:nickname-prefix	アレクサンドル様とアレクサンドル様。アレク様はうなずいた。	아렉산들 님과 아렉산들 님. 아렉 님은 끄덕였다.	fix	lookup
-names:nickname-prefix	アルフォンス様とアルフォンス様。そうなんだよねぇ、結局アルくんが暴走したせいだ。	아르폰스 님과 아르폰스 님. 맞아, 결국 아르 군이 폭주한 탓이다.	keep	lookup
+names:nickname-prefix	アルフォンス様とアルフォンス様。そうなんだよねぇ、結局アルくんが暴走したせいだ。	알폰스 님과 알폰스 님. 맞아, 결국 알 군이 폭주한 탓이다.	keep	lookup
 names:nickname-prefix	アンネローゼ様とアンネローゼ様。「アンネちゃん、遅いよ」	안네로제 님과 안네로제 님. 「안네짱, 늦어」	keep	lookup
 names:nickname-prefix	エリザベス様とエリザベス様。「エリちゃん、おいで」	엘리자베스 님과 엘리자베스 님. 「엘리짱, 와」	keep	lookup
 names:nickname-prefix	ベルンハルト様とベルンハルト様。「ベルンくん、おいで」	베른할트 님과 베른할트 님. 「베른 군, 와」	keep	lookup

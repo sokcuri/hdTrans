@@ -90,8 +90,19 @@ bool HtmlRuby(std::string_view s, size_t pos, Match& m) {
     return Optional(p, [&](size_t q, auto rest) { return Lit(s, q, "<rb>") && rest(q); }, base);
 }
 
+// BracketRubyAt, base as group 1.
+bool BracketForm(std::string_view s, size_t pos, Match& m) {
+    BracketRuby b;
+    if (!BracketRubyAt(s, pos, b)) return false;
+    m.group[1] = Span(s, b.baseBegin, b.baseEnd);
+    m.end = b.baseEnd;
+    return true;
+}
+
 bool RubyForm(std::string_view s, size_t pos, Match& m) {
     if (BarRuby(s, pos, m)) return true;
+    m = Match{};
+    if (BracketForm(s, pos, m)) return true;
     m = Match{};
     if (KanjiRuby(s, pos, m)) return true;
     m = Match{};
@@ -149,8 +160,48 @@ bool BraceRuby(std::string_view s, size_t pos, Match& m) {
 
 }  // namespace
 
+bool BracketRubyAt(std::string_view s, size_t pos, BracketRuby& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "[")) return false;
+    const size_t readBegin = p;
+    bool dots = true;
+    size_t k = 0;
+    while (p < s.size() && k <= 30) {
+        const text::Rune r = text::DecodeRune(s.substr(p));
+        if (r.cp == U'[' || r.cp == U']' || r.cp == U',' || r.size == 0) break;
+        // A reading is kana or ・, as a 《》 reading is ([0,1] is an index, [田中,1] no ruby).
+        if (!((r.cp >= U'ぁ' && r.cp <= U'ゖ') || (r.cp >= U'ァ' && r.cp <= U'ヺ') || r.cp == U'ー' || r.cp == U'・' ||
+              (r.cp >= U'ｦ' && r.cp <= U'ﾟ'))) {
+            return false;
+        }
+        dots = dots && r.cp == U'・';
+        p += r.size;
+        k++;
+    }
+    const size_t readEnd = p;
+    if (k < 1 || k > 30) return false;
+    size_t count = 0;
+    if (Lit(s, p, ",")) {
+        if (p >= s.size() || s[p] < '0' || s[p] > '9') return false;
+        while (p < s.size() && s[p] >= '0' && s[p] <= '9' && count < 100) count = count * 10 + static_cast<size_t>(s[p++] - '0');
+    } else if (!dots) {
+        return false;
+    }
+    if (count >= 20 || !Lit(s, p, "]")) return false;
+    const size_t baseBegin = p;
+    for (size_t i = 0; i <= count; i++) {
+        if (p >= s.size()) return false;
+        const text::Rune r = text::DecodeRune(s.substr(p));
+        if (r.size == 0 || r.cp == U'[' || r.cp == U']' || r.cp == U' ' || r.cp == U'　' || r.cp == U'\t') return false;
+        p += r.size;
+    }
+    m = {readBegin, readEnd, baseBegin, p};
+    return true;
+}
+
 std::string StripRuby(std::string_view line) {
-    if (line.find("《") == std::string_view::npos && line.find('<') == std::string_view::npos) {
+    if (line.find("《") == std::string_view::npos && line.find('<') == std::string_view::npos &&
+        line.find('[') == std::string_view::npos) {
         return std::string(line);
     }
     return ReplaceAll(line, RubyForm, [](const Match& m) { return Cat({m.group[1], m.group[3], m.group[5]}); });

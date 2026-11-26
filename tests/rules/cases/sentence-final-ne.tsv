@@ -278,3 +278,6 @@ cx:ne-promise:22	「私も食べますね」	!rule:cx:ne-promise:22	keep	rewrite
 cx:ne-promise:22	「お弁当、ここで食べますね」	!rule:cx:ne-promise:22	keep	rewrites
 cx:ne-promise:22	「明日はめちゃくちゃ頑張るね」	!rule:cx:ne-promise:22	keep	rewrites
 cx:ne-promise:22	「急に出かけるね」	!rule:cx:ne-promise:22	keep	rewrites
+dict:jisjk:341228	お母さんね。	엄마네.	fix	local
+dict:jisjk:341228	お母さんね、昨日来た。	엄마, 어제 왔다.	keep	local
+dict:jisjk:341228	「あたしね……」	「나……」	keep	local

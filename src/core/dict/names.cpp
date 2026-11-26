@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "core/dict/names.h"
+#include "core/dict/classes.h"
 #include "core/dict/runes.h"
 #include "core/dict/snapshot.h"
 #include "core/text/hangul.h"
@@ -179,6 +180,13 @@ int Syllables(std::string_view s) {
         i += d.size;
     }
     return n;
+}
+
+// Whether a name-layer row of a LoneKanjiName key takes part: a common noun whose Korean has two syllables or
+// more (栞 책갈피); one of one syllable is the character's own reading or another language's (佳 자).
+bool LoneRow(const Record& r) {
+    return r.codes != nullptr && !r.codes->part.Empty() && r.codes->part.Tag() == 'N' && !r.codes->sem.HasPrefix("QPN") &&
+           !internal::PlaceSense(r.codes->sem) && Syllables(r.target) >= 2;
 }
 
 // A key is an inflected word when it ends in っ (なっ) or in a sentence ending, or
@@ -602,6 +610,56 @@ bool Snapshot::AddressedName(std::string_view s, std::size_t n) const {
            HasPrefixIn(s.substr(n), internal::kNameHonorifics) && !PersonName(key).empty();
 }
 
+// How the name key s[:n] reads where it stands alone: one kanji that no other dictionary has, with a person row of
+// two syllables or more first, no old form, and no kanji, Latin letter or digit right before it (before: the text
+// before s in its token) nor a kanji after it (路電, Ａ棟 keep the readings of the character). A common noun row of
+// two syllables or more whose Korean is no person row's makes it that noun (栞 책갈피, 宵 초저녁; LoneNoun); a noun row
+// that is only the name's sound makes it the person (筧 카케이: LonePerson), the reading of the character being no word.
+Snapshot::LoneKind Snapshot::LoneKanjiName(std::string_view s, std::size_t n, std::string_view before) const {
+    const std::string_view key = s.substr(0, n);
+    if (RuneCount(key) != 1 || !text::IsKanji(FirstRune(key)) || FirstRune(key) == U'々' || NumeralKey(key) || BaseWord(key) ||
+        !NamePerson(key)) {
+        return LoneKind::None;
+    }
+    if (!before.empty()) {
+        const char32_t prev = DecodeLastRune(before).cp;
+        if (text::IsKanji(prev) || (prev >= U'0' && prev <= U'9') || (prev >= U'A' && prev <= U'Z') || (prev >= U'a' && prev <= U'z') ||
+            (prev >= U'０' && prev <= U'９') || (prev >= U'Ａ' && prev <= U'Ｚ') || (prev >= U'ａ' && prev <= U'ｚ')) {
+            return LoneKind::None;
+        }
+    }
+    if (n < s.size() && text::IsKanji(FirstRune(s.substr(n)))) return LoneKind::None;
+    if (OldForm(key)) return LoneKind::None;
+    std::vector<std::string_view> persons;
+    bool named = false, first = true;
+    for (const Record& r : names_.Records(key)) {
+        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN")) continue;
+        if (first) named = Syllables(r.target) >= 2;
+        first = false;
+        persons.push_back(r.target);
+    }
+    if (!named) return LoneKind::None;
+    bool noun = false, sound = false;
+    for (const Record& r : names_.Records(key)) {
+        if (!LoneRow(r)) continue;
+        (std::find(persons.begin(), persons.end(), r.target) == persons.end() ? noun : sound) = true;
+    }
+    return noun ? LoneKind::Noun : sound ? LoneKind::Person : LoneKind::None;
+}
+
+bool Snapshot::OldForm(std::string_view key) const {
+    // An old form reads as its new form (寶 宝). The class is builtin, so the index is built once.
+    static const std::vector<std::string_view> forms = [] {
+        std::vector<std::string_view> out;
+        for (const std::string_view pair : ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
+            if (const std::size_t eq = pair.find('='); eq != std::string_view::npos && eq > 0) out.push_back(pair.substr(0, eq));
+        }
+        std::sort(out.begin(), out.end());
+        return out;
+    }();
+    return std::binary_search(forms.begin(), forms.end(), key);
+}
+
 // The name senses that take part in a lookup of text and whose key prefixes text,
 // longer keys first, as entries marked nameLayer. owned are the plain entries of
 // text.
@@ -626,6 +684,7 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
         // A key that takes part only as confirmed (by the registry or a cue in the
         // line) is a person's name: its place senses stay out.
         bool person = false, cued = false;
+        LoneKind lone = LoneKind::None;
         if (!m->marked && !StrongName(text, m->n) && !AddressedName(text, m->n) && !KanaTitle(text, m->n, ctx.after, m->k)) {
             person = true;
             if (!ctx.confirmed || ctx.confirmed->find(key) == ctx.confirmed->end()) {
@@ -633,14 +692,20 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
                 // have their dictionary senses, which the constraint rules replace.
                 cued = (PersonCue(key, text.substr(m->n)) && CuedKey(key)) ||
                        (ctx.cued && ctx.cued->find(key) != ctx.cued->end() && !BaseWord(key));
-                if (!cued) continue;
+                // A lone kanji of LoneKanjiName takes its common noun rows (栞 책갈피) or its person rows (筧 카케이).
+                if (!cued) lone = LoneKanjiName(text, m->n, ctx.before);
+                if (!cued && lone == LoneKind::None) continue;
             }
         }
         if (std::any_of(owned.begin(), owned.end(), [key](const UserEntry* e) { return e->key == key; })) continue;
+        // A confirmed key with a person row before an honorific is that person: its rows of other kinds stay out
+        // (宵君 요이 군, where the noun row 초저녁 would leave 君 to the pronoun).
+        const bool personOnly = person && lone == LoneKind::None && PersonCue(key, text.substr(m->n)) && NamePerson(key);
         names_.EachRecord(m->k, [&](const Record& r) {
             const bool isPerson = r.codes->sem.HasPrefix("QPN");
             const PartCode p = r.codes->part;
-            if (p.Empty() || !AcceptsTag(mode, p.Tag()) || (cued && !isPerson) ||
+            if (p.Empty() || !AcceptsTag(mode, p.Tag()) || (cued && !isPerson) || (lone == LoneKind::Noun && !LoneRow(r)) ||
+                ((personOnly || lone == LoneKind::Person) && !isPerson) ||
                 (person && !isPerson && internal::PlaceSense(r.codes->sem))) {
                 return true;
             }

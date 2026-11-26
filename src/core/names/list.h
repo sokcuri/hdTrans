@@ -22,6 +22,9 @@ struct Listed {
     std::string source{};  // the file name of the list; empty for the list of the session
 };
 
+// The source of the names a document learns from its own lines.
+inline constexpr std::string_view kLearnedSource = "learned";
+
 struct List {
     std::vector<Listed> names;  // a later line of the same JA replaces the earlier one
 };

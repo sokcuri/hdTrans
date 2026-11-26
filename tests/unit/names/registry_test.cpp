@@ -160,7 +160,10 @@ const dict::Snapshot* Dictionary() {
          "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"
          "龍生\t타츠오\tN130\tQPNVHn\tWb\tGN\t9105\n"
          "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t9106\n"
-         "たつき\t다쓰키\tN130\tQPNVHn\tWb\tGN\t9111\n"},
+         "たつき\t다쓰키\tN130\tQPNVHn\tWb\tGN\t9111\n"
+         "マチルダ\t마틸다\tN130\tQPNVHn\tWb\tGN\t9201\n"
+         "アイバン\t이반\tN130\tQPNVHn\tWb\tGN\t9202\n"
+         "アイバン\t아이반\tN130\tQPNVHn\tWb\tGN\t9203\n"},
     });
     return loaded.snapshot.get();
 }
@@ -211,6 +214,8 @@ HD_TEST(names_strip_ruby) {
         // A half-width bar, or one before kana, separates.
         {"名前|田中(たなか)", "名前|田中(たなか)"},
         {"｜メニュー(めにゅう)", "｜メニュー(めにゅう)"},
+        {"[とうか,1]桃花ちゃん", "桃花ちゃん"},
+        {"[あゆむ]うん。", "[あゆむ]うん。"},
     };
     for (const auto& [in, want] : cases) HD_CHECK_EQ(names::StripRuby(in), want);
 }
@@ -944,4 +949,19 @@ HD_TEST(names_proposed) {
     std::string lines;
     for (const names::Listed& n : r.Proposed()) lines += names::ListLine(n) + "\n";
     HD_CHECK_EQ(lines, std::string("高森\t타카모리\tfamily\n高森恭平\t타카모리 쿄헤이\tfull\n"));
+}
+
+// A learned katakana name reads as its person row, as a line alone reads it: the first person row of a name no
+// other dictionary has (マチルダ 마틸다, not 마치르다), a person row that sounds as the kana before the first one
+// (アイバン 아이반 beside 이반), and a row that is the kana's own reading (ハル 하루; spec LEX-8151).
+HD_TEST(names_katakana_person_rows) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r = Scan(snap, Repeat("マチルダ「おはよう」", 3) + Repeat("アイバン「うん」", 3) + Repeat("ハル「うん」", 3));
+    HD_CHECK_EQ(r.Render("マチルダ"), std::string("마틸다"));
+    HD_CHECK_EQ(r.Render("アイバン"), std::string("아이반"));
+    HD_CHECK_EQ(r.Render("ハル"), std::string("하루"));
+    // A call drawn out (マチルダー) is no longer name that would give the name its head's reading.
+    names::Registry drawn = Scan(snap, Repeat("マチルダ「おはよう」", 3) + Repeat("「マチルダー！」", 2));
+    HD_CHECK_EQ(drawn.Render("マチルダ"), std::string("마틸다"));
 }
