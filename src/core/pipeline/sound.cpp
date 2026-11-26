@@ -225,6 +225,26 @@ bool AskedAt(std::u32string_view rs, size_t q) {
     return q < rs.size() && In(rs[q], U"？?");
 }
 
+// Whether a question mark of mark.question stands at q of rs, after marks of mark.pause, then of
+// mark.exclaim, or none (はっ？, はっ！？, はっ……！？; not はっ！ or はっ……).
+bool AskedRightAfter(std::u32string_view rs, size_t q) {
+    while (q < rs.size() && dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs[q])) q++;
+    while (q < rs.size() && dict::InClassRune(HDTRANS_CLASS("mark.exclaim"), rs[q])) q++;
+    return q < rs.size() && dict::InClassRune(HDTRANS_CLASS("mark.question"), rs[q]);
+}
+
+// Whether rs[q] may stand between two sounds of one run (SoundRow::again): a mark of kSoundSeparators,
+// mark.comma or mark.pause, ･, a dot, or a 。 next to another (はっ・・・はっ, はっ...はっ, はっ。。はっ).
+bool RunMarkAt(std::u32string_view rs, size_t q) {
+    const char32_t r = rs[q];
+    if (r == U'。') return (q > 0 && rs[q - 1] == r) || (q + 1 < rs.size() && rs[q + 1] == r);
+    return text::IsSpace(r) || In(r, kSoundSeparators) || In(r, U"･.．") || dict::InClassRune(HDTRANS_CLASS("mark.comma"), r) ||
+           dict::InClassRune(HDTRANS_CLASS("mark.pause"), r);
+}
+
+// The most sounds SaidAgain reads before or after a sound for another copy of its row.
+constexpr int kRunReach = 64;
+
 // korean asked as a casual question when it states a past event in the plain form (다 됐다
 // 다 됐어, 해냈다 해냈어); other Korean unchanged.
 std::string AskedPast(std::string korean) {
@@ -296,6 +316,9 @@ struct SoundMatch {
     bool adj = false;   // SoundRow::adj
     bool state = false; // SoundRow::state
     std::string ni;     // SoundRow::ni
+    const SoundRow* row = nullptr;
+    std::string again;   // SoundRow::again drawn out as korean is
+    std::string quoted;  // SoundRow::quoted drawn out as korean is
 };
 
 // Whether the ono sound m is said once as written: its key alone, or a state row with the one
@@ -545,6 +568,13 @@ private:
     // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
     std::vector<std::pair<size_t, size_t>> spans_;
     std::vector<std::pair<size_t, size_t>> keySpans_;  // each key of the spans
+    // Each sound written so far, in order, with its row (nullptr for a voice of no row: LoneVoice,
+    // LoneCatch, Burst), for SaidAgain.
+    struct RunSound {
+        size_t start, end;
+        const SoundRow* row;
+    };
+    std::vector<RunSound> said_;
     mutable size_t politeFrom_ = 1, politeTo_ = 0;
     mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
@@ -570,6 +600,9 @@ private:
     bool CryCopyBefore(const SoundMatch& before, const SoundMatch& m) const;
     bool CryCopyAfter(const SoundMatch& m, SoundMatch& next) const;
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
+    bool SaidAgain(const std::vector<SoundMatch>& chain, size_t k) const;
+    size_t VoiceEnd(size_t p) const;
+    bool QuotedSound(const std::vector<SoundMatch>& chain) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     bool Adnominal(const SoundMatch& m, size_t i) const;
     bool StateWord(const SoundMatch& m) const;
@@ -1026,12 +1059,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                              runKorean.empty() && s.intj && !s.phrase && EndsLengthened(best.korean) &&
                              !EndsLengthened(Lengthen(Reading(s, p, end), units));
         if (ok && (chosen == nullptr || end > best.end || redrawn)) {
+            const bool plain = runKorean.empty() && units.find('h') == std::string::npos;
             std::string korean = !runKorean.empty()
                                      ? std::move(runKorean)
                                      : units.find('h') != std::string::npos
                                            ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)),
                                                             text::Preset::Fan)
                                            : Lengthen(Reading(s, p, end), units);
+            if (plain && !s.ask.empty() && AskedRightAfter(rs_, end)) korean = Lengthen(s.ask, units);
             // An open row before no pause is followed by a comma, so the words after it read as the
             // start of a clause; the source has none, so it is not written (ってかなんで 그보다 왜).
             if (open && !PauseAt(end)) {
@@ -1056,7 +1091,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             const std::string_view root = describes ? std::string_view() : std::string_view(s.root);
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), root, s.intj, s.lead, open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone,
-                              s.adj, s.state, s.ni};
+                              s.adj, s.state, s.ni, &s, plain && !s.again.empty() ? Lengthen(s.again, units) : std::string(),
+                              plain && !s.quoted.empty() ? Lengthen(s.quoted, units) : std::string()};
             chosen = &s;
         }
     }
@@ -2661,6 +2697,76 @@ bool SoundText::ClippedCryCopy(const SoundMatch& m, bool copyBefore) const {
     return (copyBefore || copyAfter) && ClippedSound(last);
 }
 
+// The end of a voice of no row at p that Write writes as a sound (LoneCatch, LoneVoice, Burst), or 0.
+size_t SoundText::VoiceEnd(size_t p) const {
+    if (const size_t lone = LoneCatch(p); lone > 0) return lone;
+    if (!LoneVoice(p).empty()) return p + 1;
+    return Burst(p);
+}
+
+// Whether the row of chain[k] is the row of another sound of its run too (SoundRow::again): in the chain,
+// or among the kRunReach sounds before or after the chain with only RunMarkAt between, other sounds and
+// voices of no row included (はっ、はっ, はーっ……はっ, はっ……ん……はっ; not はっ……はぁっ, a row of its own,
+// nor はっはっは).
+bool SoundText::SaidAgain(const std::vector<SoundMatch>& chain, size_t k) const {
+    const SoundRow* row = chain[k].row;
+    for (size_t j = 0; j < chain.size(); j++) {
+        if (j != k && chain[j].row == row) return true;
+    }
+    const auto marksOnly = [&](size_t from, size_t to) {
+        for (size_t q = from; q < to; q++) {
+            if (!RunMarkAt(rs_, q)) return false;
+        }
+        return true;
+    };
+    size_t from = chain.front().start;
+    int read = 0;
+    for (size_t j = said_.size(); j-- > 0 && read < kRunReach;) {
+        const RunSound& r = said_[j];
+        if (r.start >= chain.front().start) continue;
+        if (r.end > from || !marksOnly(r.end, from)) break;
+        if (r.row == row) return true;
+        from = r.start;
+        read++;
+    }
+    size_t q = chain.back().end;
+    for (read = 0; read < kRunReach;) {
+        size_t next = q;
+        while (next < rs_.size() && RunMarkAt(rs_, next)) next++;
+        if (next == q || next >= rs_.size()) break;
+        const std::vector<SoundMatch> after = Sounds(next, false);
+        if (after.empty()) {
+            q = VoiceEnd(next);
+            if (q == 0) break;
+            read++;
+            continue;
+        }
+        for (const SoundMatch& m : after) {
+            if (m.row == row) return true;
+            if (++read >= kRunReach) break;
+        }
+        q = after.back().end;
+    }
+    return false;
+}
+
+// Whether a と quotes the sound that ends the chain: right after it (QuotedBy), after a pause (PausedTo),
+// or after the closing bracket of a quote that holds only the chain and pause marks (「はっ」と, 「はっ……」と).
+bool SoundText::QuotedSound(const std::vector<SoundMatch>& chain) const {
+    const SoundMatch& last = chain.back();
+    const size_t end = last.end;
+    if (QuotedBy(last, chain.front().start) > 0 || (!last.phrase && rs_[end - 1] != U'と' && PausedTo(end) > 0)) return true;
+    size_t open = chain.front().start;
+    while (open > 0 && In(rs_[open - 1], U"…‥")) open--;
+    if (open == 0 || !In(rs_[open - 1], U"「『")) return false;
+    size_t q = end;
+    while (q < rs_.size() && In(rs_[q], U"、，！!？?…‥―─")) q++;
+    if (q + 1 >= rs_.size() || !In(rs_[q], U"」』") || rs_[q + 1] != U'と') return false;
+    q++;
+    if (q + 1 < rs_.size() && In(rs_[q + 1], U"とトしすさせ")) return false;
+    return !StartsLongerWord(q);
+}
+
 std::string SoundText::Write() {
     const std::u32string_view rs = rs_;
     std::string b;
@@ -2725,7 +2831,10 @@ std::string SoundText::Write() {
                 intjEnd_ = next;
             }
             spans_.emplace_back(i, next);
-            for (const SoundMatch& m : chain) keySpans_.emplace_back(m.start, m.end);
+            for (const SoundMatch& m : chain) {
+                keySpans_.emplace_back(m.start, m.end);
+                said_.push_back({m.start, m.end, m.row});
+            }
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
             // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
@@ -2755,6 +2864,10 @@ std::string SoundText::Write() {
                 } else if (SoundMatch after; !m.alone.empty() && !copy && !CryCopyAfter(m, after)) {
                     b += m.alone;
                     if (EndsLengthened(m.korean)) b += m.korean.substr(WithoutLengthening(m.korean).size());
+                } else if (!m.again.empty() && SaidAgain(chain, k)) {
+                    b += m.again;
+                } else if (!m.quoted.empty() && k + 1 == chain.size() && QuotedSound(chain)) {
+                    b += m.quoted;
                 } else {
                     b += m.korean;
                 }
@@ -2858,11 +2971,14 @@ std::string SoundText::Write() {
         } else if (const size_t lone = LoneCatch(i); lone > 0) {
             b += "읏";
             next = lone;
+            said_.push_back({i, next, nullptr});
         } else if (const std::string_view voice = LoneVoice(i); !voice.empty()) {
             b += voice;
+            said_.push_back({i, next, nullptr});
         } else if (const size_t burst = Burst(i); burst > 0) {
             b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, burst - i)), text::Preset::Fan);
             next = burst;
+            said_.push_back({i, next, nullptr});
         } else if (const size_t to = IsHiraganaRune(rs[i]) && (i == 0 || !IsHiraganaRune(rs[i - 1]) || afterParticle)
                                          ? HiraganaMimeticTo(i)
                                          : 0;

@@ -176197,7 +176197,7 @@ ttt	ttt	K110			GN				jisjk:201744
 女矣島	여의도	N130	VPl		GN				jisjk:203019		
 女矣島駅	여의도역	N130	VPl		GN				jisjk:202879		
 女石	온나이시	N130	QCTVPl		GN				jisjk:281062		
-女神	여신	N110	VQw		GN				jisjk:18215		
+女神	여신	N110	VQwVHn		GN				jisjk:18215		
 女神	메카미	N130	QCTVPl		GN				jisjk:334219		
 女神さまっ	여신님	N110			GN				jisjk:162807		
 女神様っ	여신님	N110			GN				jisjk:162806		
@@ -177579,8 +177579,8 @@ ttt	ttt	K110			GN				jisjk:201744
 子爵	자작	N110	VHn		GN				jisjk:31825		
 子爵夫人	자작 부인	I110	VHn		GN				jisjk:82046		
 子牛	송아지	N110	QAA		GN				jisjk:31823		
-子犬	강아지	N110	QAA		GN				jisjk:31805		
-子猫	새끼 고양이	N110	QAA		GN				jisjk:31812		
+子犬	강아지	N110	QAAVAm		GN				jisjk:31805		
+子猫	새끼 고양이	N110	QAAVAm		GN				jisjk:31812		
 子玉	시교쿠	N130	QPN	Wb	GN				jisjk:10749		
 子生	코나지	N130	QCTVPl		GN				jisjk:293669		
 子生和住吉町	코우와스미요시쵸	I130	QCTVPl		GN				jisjk:292883		
@@ -304368,7 +304368,7 @@ ttt	ttt	K110			GN				jisjk:201744
 聖天下	쇼텐시타	N130	QCTVPl		GN				jisjk:300842		
 聖天子	성천자	N110	VHn		GN				jisjk:197837		
 聖天町	쇼텐쵸	N130	QCTVPl		GN				jisjk:300843		
-聖女	성녀	N110			GN				jisjk:100964		
+聖女	성녀	N110	VHn		GN				jisjk:100964		
 聖子	세이코	N130	QPN	Wb	GN				jisjk:8961		
 聖子	키요코	N130	QPN	Wb	GN				jisjk:347252		
 聖子	사토코	N130	QPN	Wb	GN				jisjk:347253		

@@ -160,6 +160,8 @@ HD_TEST(userdict_parse_errors) {
         {"猫\t냥이\tn\tsource=loop", "1: option \"source=loop\": unknown option \"source=loop\""},
         {"猫\t냥이\tn\tbogus", "1: option \"bogus\": unknown option \"bogus\""},
         {"ぷるぷる\t탱글탱글\tono\tacts", "1: option \"acts\": acts is only for the built-in sound table"},
+        {"はっ\t핫\tintj\task=헉", "1: option \"ask=헉\": ask=헉 is only for the built-in sound table"},
+        {"はっ\t핫\tintj\tagain=", "1: option \"again=\": again needs a value"},
         {"猫\t냥이\tn\tprio=x", "1: option \"prio=x\": \"x\" is not an integer"},
         {"猫\t냥이\tn\tprio=+-1", "1: option \"prio=+-1\": \"+-1\" is not an integer"},
         {"猫\t냥이\tn\tspace", "1: option \"space\": unknown option \"space\""},

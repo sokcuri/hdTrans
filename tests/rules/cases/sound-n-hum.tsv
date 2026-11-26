@@ -16,7 +16,7 @@ sound:n-hum	「んううう……んっ……」	「으으으응……읏……�
 sound:n-hum	「んっ、あ、あああっ」	「읏, 아, 아아앗」	keep	sound
 sound:n-hum	「んっ……先輩……」	「읏……선배……」	keep	sound
 sound:n-hum	「うんっ、んっ……はあぁっ……」	「응, 읏……하아앗……」	keep	sound
-sound:n-hum	「んむっ、んっ……はっ……あんっ……」	「으읍, 읏……헉……앙……」	keep	sound
+sound:n-hum	「んむっ、んっ……はっ……あんっ……」	「으읍, 읏……핫……앙……」	keep	sound
 sound:n-hum	「んっ……ぁ……」	「읏……아……」	keep	sound
 sound:n-hum	「ふうっ……あっ、んん……ん」	「후우……앗, 으응……응」	fix	sound
 sound:n-hum	「んんぅ……っ、だめ……」	「으으응……, 안 돼……」	fix	sound
@@ -30,7 +30,7 @@ sound:n-hum	「うーん……どうしよう」	「으음……어떻게 하지
 sound:n-hum	「なんでだろう」	「어째서일까」	keep	sound
 sound:n-hum	「くぅんっ……」	「끄응……」	keep	sound
 sound:n-hum	「ちゅっ……んくっ、んっ……あふっ……」	「쪽……으큿, 읏……아훗……」	fix	sound
-sound:n-hum	「ふぁっ……はっ、んくっ、あぁっ……」	「후앗……헉, 으큿, 아앗……」	fix	sound
+sound:n-hum	「ふぁっ……はっ、んくっ、あぁっ……」	「후앗……핫, 으큿, 아앗……」	fix	sound
 sound:n-hum	「んく、んく……」	「으쿠, 으쿠……」	fix	sound
 sound:n-hum	「んぐっ……ぷはっ」	「으긋……푸핫」	fix	sound
 sound:n-hum	「んくぅっ……！」	「으쿠읏……!」	fix	sound

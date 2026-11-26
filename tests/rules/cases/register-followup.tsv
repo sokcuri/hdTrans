@@ -19,7 +19,7 @@ register:REG-35	「会議を始めます」	「회의를 시작합니다」	keep
 register:REG-35	「私が決めます」	「제가 결정합니다」	keep	register
 register:REG-35	「明日泊まります」	「내일 묵습니다」	keep	register
 register:REG-35	「荷物を預かります」	「짐을 맡습니다」	keep	register
-register:REG-35	「ハッ！　こちらをどうぞ」	「헉! 이쪽을 부탁합니다」	keep	register
+register:REG-35	「ハッ！　こちらをどうぞ」	「핫! 이쪽을 부탁합니다」	keep	register
 register:REG-35	「ごめんくださーい！」	「실례합니다~!」	keep	register
 register:REG-35	「もし火器をアジトに運んでいるとすれば、さらに数名いるものと思われます」	「만약 화기를 아지트에 옮기고 있다고 하면, 게다가 몇 명 있는 것이라고 생각됩니다」	keep	register
 register:REG-36	「田中さんが払います」	「타나카 씨가 지불해요」	fix	register
