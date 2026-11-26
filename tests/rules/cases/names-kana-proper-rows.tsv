@@ -1,0 +1,59 @@
+# 규칙: LEX-8160
+rule	input	expected	kind	layer
+lookup:kana-proper-rows	首をひねりながら桜庭が言う。	고개를 갸웃하면서 사쿠라바가 말한다.	fix	lookup
+lookup:kana-proper-rows	そう言いながらも、首をひねりながらラーメンをすする。	lacks:리나	fix	lookup
+lookup:kana-proper-rows	男は手紙を受け取らなかったばかりか、ひどい言葉を投げつけた。	has:뿐만 아니라	fix	lookup
+lookup:kana-proper-rows	「そりゃしんどいな……」	「그야 힘드네……」	fix	lookup
+lookup:kana-proper-rows	「あー、それねー、まーひどいのよ」	lacks:도이	fix	lookup
+lookup:kana-proper-rows	「見せられるのは、この辺りかな」	「보게 되는 건, 이 근처일까」	fix	lookup
+lookup:kana-proper-rows	「『Ｖ』とかいうのは、失敗だったわけか……」	「『V』라든가 하는 건, 실패였던 건가……」	fix	lookup
+lookup:kana-proper-rows	「てっきり言い出すものとばかり」	lacks:토바	fix	lookup
+lookup:kana-proper-rows	「そのせいかとばかり」	lacks:토바	fix	lookup
+lookup:kana-proper-rows	それを箸でひとつまみして、ご飯と一緒に頬張った。	lacks:마미	fix	lookup
+lookup:kana-proper-rows	ただ、それだけのぶっきらぼうなメールだった。	다만, 그것만의 무뚝뚝한 메일이었다.	fix	lookup
+lookup:kana-proper-rows	「高さと固さがちょうどいいんだって」	has:딱 좋다고	fix	lookup
+lookup:kana-proper-rows	とりあえず、試食サンプルを食うのだけはやめろと言っといた。	has:먹는 것만은	fix	lookup
+lookup:kana-proper-rows	「小腹ですか……お菓子かなにかつまみます？」	has:집습니까	fix	lookup
+lookup:kana-proper-rows	寸前に腰を引き、白濁のほとばしりを吐き出した。	lacks:토바 해	fix	lookup
+lookup:kana-proper-rows	りなが来た。	리나가 왔다.	keep	lookup
+lookup:kana-proper-rows	ねえ、りかは？	있잖아, 리카는?	keep	lookup
+lookup:kana-proper-rows	「とおくにいっても、ボクとちさとのこと、わすれないでね」	has:치사토	keep	lookup
+lookup:kana-proper-rows	青海さんと摘んだよつばを眺める。	아오미 씨와 탄 요츠바를 바라본다.	keep	lookup
+lookup:kana-proper-rows	ひと回り小ぶりなよつばが生えていた。	has:요츠바가	keep	lookup
+lookup:kana-proper-rows	よつばが花を探している。	요츠바가 꽃을 찾고 있다.	keep	lookup
+lookup:kana-proper-rows	りかちゃん、おはよう。	리카짱, 좋은 아침.	keep	lookup
+lookup:kana-proper-rows	だけど、父さんがいなくて寂しいと思ったことはあんまりない。	has:별로 없다	fix	lookup
+lookup:kana-proper-rows	誠実な人なんて言われたこと、あんまりないからな……	has:별로 없으니까	fix	lookup
+lookup:kana-proper-rows	見たまみちゃん	has:본 마미	keep	lookup
+lookup:kana-proper-rows	神宮司さんまで	진구우지 씨까지	keep	lookup
+lookup:kana-proper-rows	そしてりなは帰った。	그리고 리나는 돌아갔다.	keep	lookup
+lookup:kana-proper-rows	だからりなは怒ったんだ。	그러니까 리나는 화낸 거야.	keep	lookup
+lookup:kana-proper-rows	桜庭りなです。	사쿠라바 리나입니다.	keep	lookup
+lookup:kana-proper-rows	それからりかは黙った。	그리고 리카는 입을 다물었다.	keep	lookup
+lookup:kana-proper-rows	妹はりかって言うの。	여동생은 리카라고 말해.	keep	lookup
+lookup:kana-proper-rows	やっぱりりなちゃんだ。	역시 리나짱이다.	keep	lookup
+lookup:kana-proper-rows	りかちゃんが来た。	리카짱이 왔다.	keep	lookup
+lookup:kana-proper-rows	先生はりえさんを呼んだ。	선생님은 리에 씨를 불렀다.	keep	lookup
+lookup:kana-proper-rows	りなはどこ？	리나는 어디?	keep	lookup
+lookup:kana-proper-rows	つるさんの家に行く。	매달지 않는 것 집에 간다.	keep	lookup
+lookup:kana-proper-rows	なおくんは優しい。	나오 군은 다정하다.	keep	lookup
+lookup:kana-proper-rows	じんさんに聞いた。	인 씨에게 들었다.	keep	lookup
+lookup:kana-proper-rows	今日はまみと会う。	오늘은 마미와 만난다.	keep	lookup
+lookup:kana-proper-rows	もうりかったら！	이제 리카도 참!	keep	lookup
+lookup:kana-proper-rows	さようなら、まみちゃん。	안녕히 가세요, 마미짱.	keep	lookup
+lookup:kana-proper-rows	いまりかがいる。	지금 리카가 있다.	keep	lookup
+lookup:kana-proper-rows	犯人はりかか？	범인은 리카인가?	keep	lookup
+lookup:kana-proper-rows	私はりかより背が高い。	나는 리카보다 키가 크다.	keep	lookup
+lookup:kana-proper-rows	ほらあや、見て。	자 무늬, 봐.	keep	lookup
+lookup:kana-proper-rows	親友りかの家。	절친 리카의 집.	keep	lookup
+lookup:kana-proper-rows	次はりなかい？	다음은 리나야?	keep	lookup
+lookup:kana-proper-rows	わりかし面白い。	has:꽤 재미있다	fix	lookup
+lookup:kana-proper-rows	いじくりながら笑う。	has:만지작거리면서	fix	lookup
+lookup:kana-proper-rows	白濁のほとばしりを吐き出した。	has:분출	fix	lookup
+lookup:kana-proper-rows	ここにいるのはりかか？	여기에 있는 것은 리카인가?	keep	lookup
+lookup:kana-proper-rows	それはまみから聞いた。	그것은 마미에게서 들었다.	keep	lookup
+lookup:kana-proper-rows	姉りなが来た	언니 리나가 왔다	keep	lookup
+lookup:kana-proper-rows	もうりかったら	이제 리카도 참	keep	lookup
+lookup:kana-proper-rows	頼れるのはゆきしかいない。	has:유키밖에	keep	lookup
+lookup:kana-proper-rows	母さんさんご礁を見た	어머니 산호초를 보았다	keep	lookup
+lookup:kana-proper-rows	よくりかと遊んだ。	자주 리카와 놀았다.	keep	lookup

@@ -22913,7 +22913,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プレアヴィヒア寺院	프레아 비헤아르 사원	N130	QCTVPl		GN							names.321010
 プレア・レヴェリー	프레아 레버리	N130	QPNVHn		GN						ぷれあ・れゔぇりー	names.321011
 プレア・レヴェリー	프레아 레베리	N130	QPNVHn		GN						プレア・レヴェリー	names.321012
-プレイ	프레이	N130	QPNVHn	Wb	GN						ぷれい	names.321013
 プレイ	플레이	N130	QPNVHn	Wb	GN						プレイ	names.321014
 プレイ=アジア	플레이아시아	N130	VGt		GN							names.321015
 プレイやん	플레이얀	N130	QPNVHn	Wb	GN						ぷれいやん	names.321016
@@ -90857,7 +90856,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ランダージョ	란다조	N130	QPNVHn	Wb	GN						らんだーじょ	names.389861
 ランダーズ	랜더스	N130	VGt		GN						らんだーず	names.389862
 ランダー郡	랜더군	N130	QCTVPl		GN							names.389863
-ランチ	란치	N130	QPNVHn	Wb	GN						らんち	names.389864
 ランチ	런치	N130	QPNVHn	Wb	GN						ランチ	names.389865
 ランチのアッコちゃん	런치 아코짱	N130	QWK		GN							names.389866
 ランチの女王	런치의 여왕	N130	QWK		GN							names.389867
@@ -91899,7 +91897,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ラ・ヴォアザン	라 부아쟁	N110			GN						ら・ゔぉあざん	names.390920
 ラ・ヴォワザン	라 부아쟁	N110			GN						ら・ゔぉわざん	names.390921
 ラ・ヴューダ	라 비우다	N110			GN						ら・ゔゅーだ	names.390922
-ラー	e·라	N110			GN						ラー	names.390923
 ラー	라	N110			GN						ラー	names.390924
 ラー=ドラゴン	라 드래곤	N110			GN							names.390925
 ラーの使徒	라의 사도	N130	QPNVHn		GN						らーのしと	names.390926
@@ -144201,7 +144198,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二次放出攻撃ヘリ ハイ・ドゥ	하이두	N110			GN							names.443864
 二次離島	2차 낙도	N130	QCTVPl		GN							names.443865
 二次電池	이차 전지	N110			GN							names.443866
-二歩	니후	N110			GN						にふ	names.443867
+二歩	두 걸음	N110			GN						にふ	names.443867
 二段横蹴り	이단옆차기	N130	VGt		GN							names.443868
 二毛作	이모작	N110			GN							names.443869
 二水	이수변	N110			GN							names.443870
@@ -178221,7 +178218,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 半田雅和	한다 마사카즈	N130	QPNVHn		GN							names.478412
 半目	반눈	N110			GN							names.478413
 半直線	반직선	N110			GN							names.478414
-半眼	반눈	N110			GN							names.478415
+半眼	실눈	N110			GN							names.478415
 半眼微笑	반안미소	N130	QPNVHn	Wb	GN						はんがんびしょう	names.478416
 半神	반신	N130	QWK		GN							names.478417
 半神アデル	반신 아델	N130	QPNVHn		GN							names.478418
@@ -204249,7 +204246,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大人ランボ	어른 람보	N130	QPNVHn		GN						おとならんぼ	names.504978
 大人リンク	링크	N130	QPNVHn	Wb	GN							names.504979
 大人図鑑	어른도감	N130	QWK		GN							names.504980
-大人数	대인원	N110			GN						おおにんずう	names.504981
+大人数	많은 인원	N110			GN						おおにんずう	names.504981
 大人日番谷	어른 히츠가야	N130	QPNVHn		GN							names.504982
 大人灯里	어른 아카리	N130	QPNVHn		GN							names.504983
 大人禰豆子	어른 네즈코	N130	QPNVHn		GN							names.504984

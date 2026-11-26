@@ -1,0 +1,17 @@
+# 규칙: LEX-8162
+rule	input	expected	kind	layer
+names:layer-words	デブ猫が寝ている。	뚱보 고양이가 자고 있다.	fix	names
+names:layer-words	「あのデブ猫、また来たのか」	「그 뚱보 고양이, 또 온 건가」	fix	names
+names:layer-words	大人数で行く。	많은 인원으로 간다.	fix	names
+names:layer-words	半眼で見る。	실눈으로 본다.	fix	names
+names:layer-words	ガンナーが撃つ。	거너가 쏜다.	fix	names
+names:layer-words	ガレージキットを作る。	개러지 키트를 만든다.	fix	names
+names:layer-words	それだけではバランスを取りきれず、一歩、二歩と前へ踏み出す。	has:두 걸음	fix	names
+names:layer-words	ラーの神殿	라의 신전	fix	names
+names:layer-words	猫が寝ている。	고양이가 자고 있다.	keep	names
+names:layer-words	一歩前へ。	한 걸음 앞으로.	keep	names
+names:layer-words	サリアが来た。	사리아가 왔다.	fix	names
+names:layer-words	「サリア、待って」	「사리아, 기다려」	fix	names
+names:layer-words	アメリアが来た。	아멜리아가 왔다.	fix	names
+names:layer-words	チルチルが来た。	치루치루가 왔다.	fix	names
+names:layer-words	トリッシュが来た	트리시가 왔다	keep	names

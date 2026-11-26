@@ -290,6 +290,7 @@
 //= adverb.speak-manner	Manners of speaking before 言う or 申し上げる whose と frames what follows, -면 as the dictionary idioms do (率直に言うと 솔직히 말하면, 単刀直入に申し上げると 말씀드리면; spec GRM-40).
 //= ko-verb.break-in	Korean verbs of a happening that breaks in on an ongoing act, after which the いる of ている is -는데 (お茶をすすっていると、会見が始まった 마시고 있는데; spec GRM-40).
 //= noun.habit-time	Nouns of a time of one's life (子供の頃, 小さい頃) that, before a と or たら in their clause, make it a habit, -면 (子供の頃は雨が降ると外で遊んだ 비가 오면; spec GRM-177).
+//= noun.prenominal-time	Noun rows of a prenominal and 時 (その時, あの時) that keep their kanji before a kanji word, as they often stand before a noun with no particle (その時人が来た 그 때 사람이 왔다; spec LEX-8164).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.move-toward	Korean verbs of moving toward a place, matched at the end of the lemma (걷다, 달리다, 나아가다, 떠나다): a 目指して of a place before one is 향해 (頂上を目指して歩く 정상을 향해 걷는다).
@@ -4199,6 +4200,10 @@ ko-verb.break-in	마주치다
 ko-verb.break-in	메아리치다
 ko-verb.break-in	울려 퍼지다
 ko-verb.break-in	진동하다
+noun.prenominal-time	その時
+noun.prenominal-time	この時
+noun.prenominal-time	あの時
+noun.prenominal-time	どの時
 noun.habit-time	子供の頃
 noun.habit-time	子どもの頃
 noun.habit-time	小さい頃

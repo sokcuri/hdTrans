@@ -880,7 +880,8 @@ bool NameEdge(const SegEdge& e) { return (e.part.size() == 4 && e.part[2] == '3'
 // LEX-7900: inside hiragana, where the lattice reads the stretch from the cursor more cheaply than any reading that
 // starts with the search's pick, and that pick's reading cuts a word W of the lattice's path: a noun, adjective or
 // phrase row of three or more hiragana (たい|こ for たいこ, かい|じゅう for かいじゅう), or a word with a kanji that a
-// boundary row starting in kana takes the head of (その上|着 for その|上着). W must be followed by a particle (the copula
+// boundary row starting in kana, or a noun row of a prenominal and a kanji, takes the head of (その上|着 for その|上着,
+// その余|裕 for その|余裕). W must be followed by a particle (the copula
 // among them), punctuation or the end of the token, and every word of the path up to W is a dictionary word with no
 // defect and no name. The pairs of Step apply to both readings. Then the record of the path's first word goes first;
 // else the search's order stands. records holds the records of the lookup in the order the reorders left.
@@ -960,12 +961,23 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     // W right at the cursor does not follow a verb or an adjective (below).
     const bool afterVerb = parent != nullptr && cursor > 0 && parent->start + parent->length == cursor && parent->detail != nullptr &&
                            (parent->detail->cls == kDetailVerb || parent->detail->cls == kDetailKeiyo);
+    // A noun row that starts in kana and ends in a kanji (その余, その道): a prenominal and a kanji, which may take
+    // the head of the kanji word after it as a boundary row does.
+    auto kanjiTail = [&](int at) {
+        const char32_t r = RuneAt(full, RuneBefore(full, at));
+        return text::IsKanji(r) || r == U'々';
+    };
+    // A time noun (その時, noun.prenominal-time) keeps its kanji: it often stands before a noun with no particle (その時人が).
+    auto timeNoun = [&](int from, int to) {
+        return dict::InClass(HDTRANS_CLASS("noun.prenominal-time"), full.substr(static_cast<std::size_t>(from), static_cast<std::size_t>(to - from)));
+    };
+    auto nounHead = [&](const SegWindow::Row& r) { return r.kind == '1' && r.end <= size && kanjiTail(r.end) && !timeNoun(cursor, r.end); };
     // A boundary row or such a noun is there before the pick is read.
     bool maybe = false;
     for (const SegWindow::Row& r : rowsAt(cursor)) {
         if (maybe) break;
         if (r.kind == '7') continue;
-        maybe = r.kind == '3' || (r.kanaNoun && !afterVerb && fitsAt(r.end));
+        maybe = r.kind == '3' || nounHead(r) || (r.kanaNoun && !afterVerb && fitsAt(r.end));
         if (!maybe && r.end < end) {
             for (const SegWindow::Row& n : kanaRowsAt(r.end, 3)) maybe = maybe || (n.kanaNoun && fitsAt(n.end));
         }
@@ -981,13 +993,17 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     if (e0 >= size || end <= e0) return records;
     // The pick is a boundary row whose head a word of two or more characters before it leaves to a word with a kanji
     // or an adjective.
-    bool pickBoundary = false;
-    for (const SegWindow::Row& r : rowsAt(cursor)) pickBoundary = pickBoundary || (r.kind == '3' && r.end == e0);
+    bool pickBoundary = false, pickNoun = false;
+    for (const SegWindow::Row& r : rowsAt(cursor)) {
+        pickBoundary = pickBoundary || (r.kind == '3' && r.end == e0);
+        pickNoun = pickNoun || (nounHead(r) && r.end == e0);
+    }
     bool open = false;
     for (const SegWindow::Row& r : rowsAt(cursor)) {
         if (open) break;
         if (r.kind == '7' || r.end == e0) continue;
-        if (pickBoundary && r.end < e0 && !r.pword && Chars(full.substr(static_cast<std::size_t>(cursor), static_cast<std::size_t>(r.end - cursor))) >= 2) {
+        if ((pickBoundary || (pickNoun && r.kind == '0')) && r.end < e0 && !r.pword &&
+            Chars(full.substr(static_cast<std::size_t>(cursor), static_cast<std::size_t>(r.end - cursor))) >= 2) {
             const char32_t h = RuneAt(full, r.end);
             open = text::IsKanji(h) || h == U'々';
             for (const SegWindow::Row& n : rowsAt(r.end)) open = open || n.kind == '7';
@@ -1090,17 +1106,23 @@ Record* Worker::LatticeKana(Record* records, std::string_view full, int cursor, 
     // A boundary row: an adverb or conjunction row starting in kana (その上, それでは, いくら) that may take the head of
     // the next word.
     auto boundary = [&](const SegEdge& by) { return by.part.size() == 4 && by.part[1] == '3' && HiraRune(RuneAt(full, by.from)); };
+    // A noun row of a prenominal and a kanji (その余 of その余裕): the lattice keeps the prenominal before W.
+    auto prenominalNoun = [&](const SegEdge& by) {
+        return by.part.size() == 4 && by.part[1] == '1' && HiraRune(RuneAt(full, by.from)) && kanjiTail(by.end) && !timeNoun(by.from, by.end);
+    };
     auto qualifies = [&](const SegEdge& e, const SegEdge& by) {
         if (e.joined || e.part.size() != 4) return false;
         // The head of a boundary row: the row starts before W and ends inside it, and the lattice keeps a word of two
         // or more characters of it before W (その|上着, それ|ではない; not も|うさ for もう|さ).
-        bool head = by.from < e.from && by.end < e.end && boundary(by);
+        const bool noun = !boundary(by) && prenominalNoun(by);
+        bool head = by.from < e.from && by.end < e.end && (boundary(by) || noun);
         if (head) {
             const SegEdge* kept = nullptr;
             for (const SegEdge* l : lp) {
                 if (l->end == e.from) kept = l;
             }
             head = kept != nullptr && kept->from >= by.from && kept->word && !kept->particle && Chars(full.substr(static_cast<std::size_t>(kept->from), static_cast<std::size_t>(kept->end - kept->from))) >= 2;
+            if (head && noun) head = kept->from == by.from && kept->part.size() == 4 && kept->part[1] == '0' && e.part[1] != '7';
             // An adjective W keeps a pronoun before it, and the search reads the adjective after the row too: the row
             // only moves a particle (それ|ではない for それでは|ない; not まる|でない for まるで|ない, どう|でもよく).
             if (head && e.part[1] == '7') {
