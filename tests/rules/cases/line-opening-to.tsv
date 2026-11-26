@@ -1,0 +1,33 @@
+# 규칙: LEX-8071
+rule	input	expected	kind	layer
+dict:w:42301	と、そのとき。	그 때.	fix	local
+dict:w:42301	と、そのとき、不意に球の動きが変わった。	has:그 때, 갑자기	fix	local
+dict:w:42301	と、その時――	그 때――	fix	local
+dict:w:42301	と、次の瞬間――	다음 순간――	fix	local
+dict:w:42301	と、その瞬間、ドアが開いた。	그 순간, 문이 열렸다.	fix	local
+dict:w:42301	と、そこへ先生が来た。	거기에 선생님이 왔다.	fix	local
+normalize:to-iu-comma	と、いうわけで、俺は今ここにいる。	그래서, 나는 지금 여기에 있다.	fix	normalize
+normalize:to-iu-comma	と、いうわけで。	그래서.	fix	normalize
+normalize:to-iu-comma	と、いうことは……	그 말은……	fix	normalize
+normalize:to-iu-comma	「と、いうわけなんですけど……」	lacks:라고	fix	normalize
+dict:w:42301	と、その日は雨だった。	has:라고,	keep	local
+dict:w:42301	と、ドアが開いた。	has:라고,	current	local
+dict:w:42301	と、思ったら、へにゃっと笑った。	has:라고, 생각했더니	keep	local
+dict:w:42301	と、桜庭がＰＣを操作する。	has:라고,	keep	local
+dict:w:42301	彼は「行く」と、言った。	그는 「간다」라고, 말했다.	keep	local
+dict:w:42301	「と、とにかく」	「어, 어쨌든」	keep	local
+dict:w:42301	と、そうだ。	아, 맞다.	keep	local
+normalize:to-iu-comma	と、言うことは……	has:라고,	keep	normalize
+normalize:to-iu-comma	彼は、と、いう顔をした。	lacks:그래서	keep	normalize
+dict:w:42301	と、	라고,	keep	local
+dict:w:42301	と、止まった。	라고, 멈추었다.	keep	local
+dict:w:42301	「やめて」と、彼女は言った。	「그만해」라고, 그녀는 말했다.	keep	local
+dict:w:42301	と、そのうち雨が降った。	라고, 머지않아 비가 왔다.	keep	local
+dict:w:42301	と、そこで目が覚めた。	라고, 거기서 깨어났다.	keep	local
+dict:w:42301	彼女は、と、いう顔をした。	그녀는, 이라고, 말하는 얼굴을 했다.	keep	local
+dict:w:42301	と、そのとき言われた。	has:라고,	keep	local
+dict:w:42301	と、そのとき思った。	has:라고,	keep	local
+dict:w:42301	と、そこへ行けと言われた。	has:라고,	keep	local
+dict:w:42301	と、その時、彼は言った。	has:라고,	keep	local
+dict:w:42301	と、そのときの彼は。	has:라고,	keep	local
+dict:w:42301	と、その瞬間が好きだ。	has:라고,	keep	local

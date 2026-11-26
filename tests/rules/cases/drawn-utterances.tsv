@@ -1,0 +1,65 @@
+# 규칙: SND-30
+rule	input	expected	kind	layer
+sound:drawn-utterance	「そーよ、みんなで食べようよ」	「그래, 모두 먹자」	fix	sound
+sound:drawn-utterance	「そーよ。大事なお仕事があるのよ」	「그래. 중요한 일이 있어」	fix	sound
+sound:drawn-utterance	「そーね、次はカレーにしようかな」	「그래, 다음은 카레로 할까」	fix	sound
+sound:drawn-utterance	「あ、そーね」	「아, 그래」	fix	sound
+sound:drawn-utterance	「そーよね、普通よね」	「그렇지, 보통이지」	fix	sound
+sound:drawn-utterance	「そーよそーよ、昨日の挨拶回り、失敗したんでしょ」	has:「그래 그래,	fix	sound
+sound:drawn-utterance	「まー、ちょっとな」	「뭐, 조금」	fix	sound
+sound:drawn-utterance	「まー……誰かさんが、毎日来てるからね」	has:「뭐……	fix	sound
+sound:drawn-utterance	「まーな。俺は無知じゃないぞ」	has:「뭐 그렇지.	fix	sound
+sound:drawn-utterance	「まーまー、取っておいてよ」	「자자, 취해 둬」	fix	sound
+sound:drawn-utterance	「まーまー……熱くならない」	has:「자자……	fix	sound
+sound:drawn-utterance	「じゃーね、また明日」	has:「그럼	keep	sound
+sound:drawn-utterance	「じゃーな、お嬢ちゃん」	has:「그러면	current	sound
+sound:drawn-utterance	「じゃー、何か作ろっか」	「그럼, 뭔가 만들까」	fix	sound
+sound:drawn-utterance	「さーな」	「글쎄」	fix	sound
+sound:drawn-utterance	「やー、参りました」	has:「야,	fix	sound
+sound:drawn-utterance	「うはー、このタイミングか」	has:「우하아,	fix	sound
+sound:drawn-utterance	「でっ？　どーなのどーなの？」	「그래서? 어때 어때?」	fix	sound
+sound:drawn-utterance	「おめでとー、おめでとー」	「축하해, 축하해」	fix	sound
+sound:drawn-utterance	「うーい」	「네에」	fix	sound
+sound:drawn-utterance	「そうよ、みんなで食べようよ」	「그래, 모두 먹자」	keep	sound
+sound:drawn-utterance	「まあ、ちょっとな」	「뭐, 조금」	keep	sound
+sound:drawn-utterance	「あーあ、灯台もと暗しってやつか」	has:「아~아,	keep	sound
+sound:drawn-utterance	「はーい、皆さんこんにちは」	「네에, 여러분 안녕하세요」	keep	sound
+sound:drawn-utterance	「ですよねー」	「그렇죠~」	keep	sound
+sound:drawn-utterance	「そうですねー、横断幕も完成したし」	has:「그렇네요~,	keep	sound
+sound:drawn-utterance	「いいなー。行きたい」	「좋네~. 가고 싶어」	keep	sound
+sound:drawn-utterance	「ねー、あたしもビックリよ」	has:「저기~,	keep	sound
+sound:drawn-utterance	「おーい、図書部さー」	has:「어이,	keep	sound
+sound:drawn-utterance	「えー、一緒に行こうよ」	「에에, 함께 가자」	keep	sound
+sound:drawn-utterance	「うーん、許せないな」	「으음, 용서할 수 없네」	keep	sound
+sound:drawn-utterance	「もー、つれないなー」	「정말, 무정하네~」	keep	sound
+sound:drawn-utterance	「ぎゃーーっ！」	「꺄아악!」	keep	sound
+sound:hiragana-loan	「らじゃー」	「로저」	fix	sound
+sound:hiragana-loan	「らじゃーっ！」	「로저!」	fix	sound
+sound:hiragana-loan	「らじゃーです」	「로저예요」	fix	sound
+sound:hiragana-loan	「おーけー、次は本番だ」	「OK, 다음은 실전이다」	fix	sound
+sound:hiragana-loan	「くりふはんがー？」	「클리프행어?」	fix	sound
+sound:hiragana-loan	「ラジャー」	「로저」	keep	sound
+sound:hiragana-loan	「オーケー」	「OK」	keep	sound
+sound:hiragana-loan	ラーメンを食べた。	라면을 먹었다.	keep	sound
+sound:hiragana-loan	スーパーに行く。	슈퍼에 간다.	keep	sound
+sound:hiragana-loan	ソースをかける。	소스를 뿌린다.	keep	sound
+sound:hiragana-loan	マークを付ける。	마크를 붙인다.	keep	sound
+sound:hiragana-loan	「ちょこれいと」	「초콜릿」	keep	sound
+sound:drawn-utterance	「まーくん、待って」	「마 군, 기다려」	keep	sound
+sound:drawn-utterance	「そーちゃんは来ないの？」	「소짱은 오지 않는 거야?」	keep	sound
+sound:drawn-utterance	「ゆーき、行くぞ」	lacks:그래	keep	sound
+sound:drawn-utterance	「そーだね」	「그래」	keep	sound
+sound:drawn-utterance	「いーよ、別に」	「좋아, 딱히」	keep	sound
+sound:drawn-utterance	「ちょーだい」	「줘」	keep	sound
+sound:drawn-utterance	「ふーん、そうなんだ」	「흐응, 그렇구나」	keep	sound
+sound:drawn-utterance	「よーし、行くぞ」	「좋아~, 가겠어」	keep	sound
+sound:drawn-utterance	「ケーキ食べる？」	「케이크 먹어?」	keep	sound
+sound:drawn-utterance	「ふーふー」	「후후~」	keep	sound
+sound:drawn-utterance	「どーも、こんにちは」	has:「안녕,	keep	sound
+sound:drawn-utterance	「どーも、よろしく」	lacks:아무래도	keep	sound
+sound:drawn-utterance	「どーも、すみません」	lacks:아무래도	keep	sound
+sound:drawn-utterance	「どーも」	「안녕」	keep	sound
+sound:drawn-utterance	「さよーなら」	「안녕」	keep	sound
+sound:drawn-utterance	「ほほー、こりゃ」	has:「호호~,	keep	sound
+sound:drawn-utterance	「くーん、それで」	has:「군~,	keep	sound
+sound:drawn-utterance	「まーまーだね」	lacks:아직	fix	sound

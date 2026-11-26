@@ -528,13 +528,16 @@ public:
     }
 
     // A final row ends the utterance, so it is no key before a word (みー 미~, but みーつけた).
+    // Whether key is a key of the sound lexicon, not a lead of sound.quoted-lead (って), which is a
+    // particle wherever it draws something out.
     static bool LexiconKey(std::u32string_view key, bool extra, bool beforeWord = false) {
         if (key.empty()) return false;
         for (const SoundRow& s : SoundRows(key[0], extra)) {
-            if (s.key == key && !(s.final && beforeWord)) return true;
+            if (s.key == key && !(s.final && beforeWord) && !QuotedLead(s)) return true;
         }
         return false;
     }
+    static bool QuotedLead(const SoundRow& s) { return s.lead && dict::InClass(HDTRANS_CLASS("sound.quoted-lead"), EncodeText(s.key)); }
 
 private:
     const LineContext& ctx_;
@@ -576,7 +579,7 @@ size_t SoundCoverEnd(const Emphasis& e, std::u32string_view rs, size_t from, siz
         if (inStem) continue;
         for (const SoundRow& s : SoundRows(f[j], extra)) {
             // Only a key that holds the mark counts: test it before matching, which may walk a long run.
-            if (s.key.find(f[i]) == std::u32string::npos) continue;
+            if (s.key.find(f[i]) == std::u32string::npos || Emphasis::QuotedLead(s)) continue;
             size_t end = 0;
             if (MatchSound(s, f, j, end, units) && end > i + 1 &&
                 !(s.final && end < f.size() && (IsKatakanaRune(f[end]) || IsKanjiRune(f[end])))) {

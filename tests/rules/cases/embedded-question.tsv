@@ -30,7 +30,7 @@ rewrite:embedded-question	「いつもあんな食事をしているのか？」
 rewrite:embedded-question	この煮物も梨花ちゃんが作ったのかい？	이 조림도 리카짱이 만든 거야?	keep	rewrites
 rewrite:embedded-question	「そうだね、風で飛ばされたのかな？」	「그러게, 바람으로 날아간 걸까?」	keep	rewrites
 rewrite:embedded-question	「そうなのか、うーんざんねんだなぁ」	「그런가, 응유감이구나」	keep	rewrites
-rewrite:embedded-question	「ってことは、映画じゃないのかな？」	「라는 건, 영화가 아닐지?」	keep	rewrites
+rewrite:embedded-question	「ってことは、映画じゃないのかな？」	「그렇다는 건, 영화가 아닐지?」	keep	rewrites
 rewrite:embedded-question	「で、俺とは付き合ってくれるのか？」	「그래서, 나와는 사귀어 주는 거야?」	keep	rewrites
 rewrite:embedded-question	「で、ＴＥＳとの契約は更新するのか」	「그래서, TES와의 계약은 갱신하는 건가」	keep	rewrites
 rewrite:embedded-question	まだ好きでい続けろって言うのかよ？」	아직 계속 좋아하고 있으라는 거냐?」	keep	rewrites
