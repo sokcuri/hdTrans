@@ -13,6 +13,7 @@ a title made of a coined word or a set phrase, and wrong for everything else (sp
 
 ```sh
 tools/shadow-rows.py build/mac/hdtrans dicts $HDTRANS_WORK/shadow/rows.tsv
+tools/shadow-rows.py build/mac/hdtrans dicts $HDTRANS_WORK/shadow/proper.tsv --proper --text "$HDTRANS_CORPUS"
 ```
 
 - The default checks `names.*.tsv` in the frame `{}だった。`. `--files` picks other files
@@ -23,6 +24,11 @@ tools/shadow-rows.py build/mac/hdtrans dicts $HDTRANS_WORK/shadow/rows.tsv
 - A likely shadow holds hiragana in its key, or is a work title (`QWK`) whose key holds no
   katakana (全然大丈夫); its two readings share few Hangul syllables, or the title adds a comma
   the key lacks (俺俺 나야, 나); and the reading without the row has no Japanese left.
+- `--proper` checks the proper noun rows of `base.tsv` (spec LEX-8161): keys with hiragana, keys
+  that are a word of another row, the stem of a word with okurigana (湯上 of 湯上がり) or words
+  joined (学園前). A frame says little there, since a place name reads differently without its row
+  too; add `--text FILE` with running text (the corpus, a work) to rank the rows by the lines
+  they change, and judge them by those lines.
 
 ## Judge
 

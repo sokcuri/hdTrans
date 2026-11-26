@@ -28964,3 +28964,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 生徒会長選	학생회장 선거	N110			GN			LEX-8166				w:43129
 全校生徒会	전교 학생회	N110			GN			LEX-8166				w:43130
 えぐれ	도려내&AL@	M427			GN			LEX-8165				w:43115
+鉢	화분	N110			GN			LEX-8161				w:43000
+膝立ち	무릎서기	N110		Hd	GN			LEX-8161				w:43001
+本島	본섬	N110	VPl		GN			LEX-8161				w:43002
+大元	근원	N110			GN			LEX-8161				w:43003
+湯上がり	목욕 직후	N110			GN			LEX-8161				w:43004
+お手々	손	N110			GN			LEX-8161				w:43005
+あんまりな	별로 $FA@	H7U0			GN			LEX-8160				w:43006
+学園前	학원 앞	N110	VPl		GN			LEX-8161				w:43007
+わりかし	꽤	N311			GN			LEX-8160				w:43008
+鉢置	하치오키	N130	QCTVPl		GN			LEX-8161				w:43009
+ほとばしり	분출	N110			GN			LEX-8160				w:43011

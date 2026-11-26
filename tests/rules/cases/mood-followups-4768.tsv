@@ -86,7 +86,7 @@ normalize:contracted-teiru	どうせ捨てるんだし	어차피 버리니까	ke
 normalize:contracted-teiru	子供は自分で育てるんだし	아이는 스스로 기르니까	keep	normalize
 normalize:contracted-teiru	そんなに慌てるんだし	그렇게 당황하니까	keep	normalize
 normalize:contracted-teiru	家を建てるんだし	집을 지으니까	keep	normalize
-normalize:contracted-teiru	本島から来てるんだし	모토지마에서 와 있으니까	fix	normalize
+normalize:contracted-teiru	本島から来てるんだし	본섬에서 와 있으니까	fix	normalize
 cx:late-present:10	間に合わないという話だ	늦는다는 이야기다	fix	rewrites
 cx:late-present:10	間に合わないなんて嘘だ	늦는다니 거짓말이다	fix	rewrites
 dict:w:34535	私を見捨てないでくれて」	나를 버리지 않아 줘서」	fix	local

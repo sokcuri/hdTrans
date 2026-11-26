@@ -230,6 +230,15 @@ bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
     return !letter;
 }
 
+// Whether a meaning column holds the Q code of a name (codes are three letters each: QPN a person, QCT a
+// place, QID an organisation), not QA of an animal or plant (うま 말).
+bool HasNameMeaning(std::string_view sem) {
+    for (std::size_t i = 0; i + 3 <= sem.size(); i += 3) {
+        if (sem[i] == 'Q' && sem[i + 1] != 'A') return true;
+    }
+    return false;
+}
+
 // Whether two lookups give the same records, field by field, with views to the same bytes.
 bool SameRecords(const Lookup& a, const Lookup& b) {
     if (a.count != b.count) return false;
@@ -356,6 +365,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         DropNegatedAdverbs(l, query);
         DropFinalAdnominals(l, query);
         DropOpenUtterances(l, query);
+        DropKanaBoundProper(l, query);
     }
     if (settings.text) {
         DropModalSplits(l, query);
@@ -1034,6 +1044,95 @@ void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
         last = r;
     }
     if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
+// Text path, mode 0: a proper noun row of the dictionary (N130 with the Q code of a name) whose key is two
+// hiragana goes after the other records inside a kana run, right after hiragana or a kanji (KanaBounded keeps
+// name-layer rows out of the same place): there it reads a piece of the words around it by chance (ひねりながら,
+// ばかりか, しんどい, ものとばかり). It keeps its place where a word ends before it and a particle, だ, じゃ, って,
+// an honorific or no hiragana follows it, the slot of a noun (ボクとりかの, 見たまみちゃん, そしてりなは,
+// 桜庭りなです, 姉りなが, のはまみか). The row is not dropped: where no other reading goes on, the name stays.
+// Longer kana names (ちさと, よつば) and a kana said twice, a sound (ららら), keep their place.
+void Worker::DropKanaBoundProper(Lookup& l, std::string_view query) {
+    auto qualifies = [&](const Record& r) {
+        return r.user == nullptr && r.partCode == "N130" && text::RuneCount(r.source) == 2 &&
+               NameClassOf(FirstChar(r.source)) == kClassHiragana && NameClassOf(LastChar(r.source)) == kClassHiragana &&
+               FirstChar(r.source) != LastChar(r.source) && HasNameMeaning(r.semantic) && r.source.size() <= query.size();
+    };
+    const Record* named = l.records;
+    while (named != nullptr && !qualifies(*named)) named = named->child;
+    if (named == nullptr) return;
+    const std::string_view surface = transformSurface;
+    if (!EndsSurface(query)) return;
+    const std::string_view head = surface.substr(0, surface.size() - query.size());
+    const std::string_view before = LastChar(head);
+    const int prev = NameClassOf(before);
+    if (prev != kClassHiragana && prev != kClassKanji) return;
+    // A particle row of the dictionary (class 2: か, から, しか, より) whose key the text starts with.
+    auto particleAt = [&](std::string_view text) {
+        for (std::size_t n = 1; n <= 4 && 3 * n <= text.size(); n++) {
+            const std::string_view key = text.substr(0, 3 * n);
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                if (c.source == key && c.codes->partText.size() > 1 && c.codes->partText[1] == '2') return true;
+            }
+        }
+        return false;
+    };
+    // The slot of a noun after the key: no hiragana, a particle, だ, じゃ, って or an honorific.
+    const std::string_view rest = query.substr(named->source.size());
+    const std::string_view next = FirstChar(rest);
+    // A particle of three kana or more that starts at the key's second kana and runs past it: the key cuts it
+    // (ものと|ばかり; not りか|と of かと), and what follows is no slot.
+    auto cut = [&]() {
+        const std::string_view tail = query.substr(FirstChar(named->source).size());
+        for (std::size_t n = 3; n <= 5 && 3 * n <= tail.size(); n++) {
+            const std::string_view key = tail.substr(0, 3 * n);
+            for (const dict::Candidate& c : snapshot.RetrieveRecords(key, dict::LookupMode::General)) {
+                if (c.source == key && c.codes->partText.size() > 1 && c.codes->partText[1] == '2') return true;
+            }
+        }
+        return false;
+    };
+    const bool slot = (NameClassOf(next) != kClassHiragana || IsNameParticle(next) || next == "だ" ||
+                       rest.starts_with("じゃ") || rest.starts_with("って") || StartsWithHonorific(rest) || particleAt(rest)) &&
+                      (NameClassOf(next) != kClassHiragana || !cut());
+    // A word ends before the key: a particle, the た, だ, な of a modifier, a conjunction or adverb in kana
+    // (そして, もう), a particle word of two kana or more (ながら, だから), a conjunction or adverb word that starts
+    // the token (それから), two kanji or
+    // more, a family name (桜庭りな; not the verb stem of 食うのだけ), or one kanji of a person (姉りな).
+    bool wordBefore = slot && (IsNameParticle(before) || before == "た" || before == "だ" || before == "な");
+    if (slot && !wordBefore && prev == kClassKanji) {
+        wordBefore = NameClassOf(LastChar(head.substr(0, head.size() - before.size()))) == kClassKanji;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(before, dict::LookupMode::General)) {
+            wordBefore = wordBefore || (c.source == before && c.codes->partText.starts_with("N1") && c.codes->sem.Contains("VH"));
+        }
+    }
+    if (slot && !wordBefore && prev == kClassHiragana) wordBefore = KanaModifierBefore(query);
+    for (std::size_t n = 2; slot && !wordBefore && prev == kClassHiragana && n <= 4 && 3 * n <= head.size(); n++) {
+        const std::string_view word = head.substr(head.size() - 3 * n);
+        const std::string_view lead = LastChar(head.substr(0, head.size() - word.size()));
+        const bool start = lead.empty() || NameClassOf(lead) == kClassOther;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(word, dict::LookupMode::General)) {
+            const std::string_view part = c.codes->partText;
+            wordBefore = wordBefore || (c.source == word && part.size() > 1 && (part[1] == '2' || (start && part[1] == '3')));
+        }
+    }
+    // A key that starts with う after hiragana draws out the sound before it (いう|の, ろう|の).
+    if (wordBefore && !(prev == kClassHiragana && FirstChar(named->source) == "う")) return;
+    Record* out = nullptr;
+    Record** tail = &out;
+    for (Record* r = l.records; r != nullptr;) {
+        Record* following = r->child;
+        r->child = nullptr;
+        if (qualifies(*r)) {
+            l.count--;
+        } else {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = following;
+    }
     l.records = out;
 }
 

@@ -1,0 +1,13 @@
+# 규칙: LEX-8164
+rule	input	expected	kind	layer
+segmentation:prenominal-noun	その余裕がない	그 여유가 없다	fix	lookup
+segmentation:prenominal-noun	「……その余裕が逆に怖いんですけど」	「……그 여유가 반대로 무서운데요」	fix	lookup
+segmentation:prenominal-noun	その余地はない	그 여지는 없다	fix	lookup
+segmentation:prenominal-noun	その余計な一言	그 쓸데없는 한마디	fix	lookup
+segmentation:prenominal-noun	その余韻に浸る	그 여운에 잠긴다	fix	lookup
+segmentation:prenominal-noun	その道具を使う	그 도구를 쓴다	fix	lookup
+segmentation:prenominal-noun	その余は知らない	그 나머지는 모른다	keep	lookup
+segmentation:prenominal-noun	その道は遠い	그 길은 멀다	keep	lookup
+segmentation:prenominal-noun	その場所に行く	그 장소에 간다	keep	lookup
+segmentation:prenominal-noun	この先生は優しい	이 선생님은 다정하다	keep	lookup
+segmentation:prenominal-noun	その日、彼は来た。	그날, 그는 왔다.	keep	lookup

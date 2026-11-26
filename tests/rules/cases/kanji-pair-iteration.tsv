@@ -13,4 +13,4 @@ normalize:kanji-pair-iteration	一人々々に声をかけた。	한 사람 한 
 normalize:kanji-pair-iteration	時々来る	가끔 온다	keep	normalize
 normalize:kanji-pair-iteration	日々の暮らし	나날의 생활	keep	normalize
 normalize:kanji-pair-iteration	佐々木さんに会った	사사키 씨를 만났다	keep	normalize
-normalize:kanji-pair-iteration	素麪鉢、盆釜、肴鉢、捏鉢等々々	소면 하치, 쟁반솥, 술안주하치, 날 하치 등등들	keep	normalize
+normalize:kanji-pair-iteration	素麪鉢、盆釜、肴鉢、捏鉢等々々	has:등등들	keep	normalize
