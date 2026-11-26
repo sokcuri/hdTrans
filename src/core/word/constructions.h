@@ -2,8 +2,8 @@
 // The construction table of the rewrite layer, constructions.tsv (docs/rule-language.md, 구문 표):
 // rows that pick the Korean of a word from the words around it, written in the body syntax of the
 // rules with fields of the resolved chain, and grouped in families that run between the sentence
-// passes of Flush. The builtin table is parsed once, on first use, into an immutable structure
-// shared by every thread.
+// passes of Flush. The builtin table is parsed at build time (src/cxgen) and read once, on first use,
+// into an immutable structure shared by every thread.
 #include <cstddef>
 #include <cstdint>
 #include <span>
@@ -211,7 +211,16 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
 // action by @scan: the atoms read nothing that changes while the rows of a family are tried on a
 // word, so the order changes no value.
 void OrderOperands(ConstructionTable& t);
-// The parsed builtin constructions.tsv, its operands ordered.
+// The builtin constructions.tsv parsed, its operands ordered.
+ConstructionTable ParseBuiltinConstructions();
+// The table as bytes and back; ReadConstructions fails on bytes WriteConstructions did not write.
+// Word classes are kept by name, so the bytes are read in a process whose builtin classes have them.
+std::vector<uint8_t> WriteConstructions(const ConstructionTable& t);
+bool ReadConstructions(std::span<const uint8_t> data, ConstructionTable& t);
+// WriteConstructions(ParseBuiltinConstructions()) of the build, compiled in by src/cxgen; empty in a
+// build that could not run that generator (a cross build).
+std::span<const uint8_t> CompiledConstructions();
+// ParseBuiltinConstructions as compiled in, or parsed on first use where nothing is compiled in.
 const ConstructionTable& BuiltinConstructions();
 // RunConstructions over table t instead of the builtin one.
 void RunConstructions(Flusher& f, const ConstructionTable& t, std::size_t pass, bool (*skip)(std::string_view name) = nullptr);
