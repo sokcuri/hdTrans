@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.9.9](https://github.com/sokcuri/hdTrans/compare/v0.9.8...v0.9.9) (2026-11-26)
+
+
+### Features
+
+* **cli:** register hdTrans as the ezTrans XP folder that host tools read ([#956](https://github.com/sokcuri/hdTrans/issues/956)) ([d6943bb](https://github.com/sokcuri/hdTrans/commit/d6943bba12f7c71abfa4a516335398a0e41b1fbb))
+
+
+### Bug Fixes
+
+* **names:** keep proper rows of the base and name layers from reading common words as names ([#969](https://github.com/sokcuri/hdTrans/issues/969)) ([29e99fa](https://github.com/sokcuri/hdTrans/commit/29e99fa9b4090e4bbb776d508233a2b85245ddd0))
+* **names:** read document names by their person rows and propose the persons a document confirms ([#960](https://github.com/sokcuri/hdTrans/issues/960)) ([08bc106](https://github.com/sokcuri/hdTrans/commit/08bc1065210bd3ea1211abe647ee4c7f2fdedea5))
+* **release:** cut name, sense and ending mistranslations in game dialogue and captions ([0577c9c](https://github.com/sokcuri/hdTrans/commit/0577c9c5798d9efaa31e121159f4119b76439455))
+* **rewrites:** read じゃない after a predicate as the tag 잖아 and てもらえる as the giver's 주다 ([#964](https://github.com/sokcuri/hdTrans/issues/964)) ([3e9c3e1](https://github.com/sokcuri/hdTrans/commit/3e9c3e12886a05d4deb3582aa64b5d5b55e5ebb4))
+* **rules:** read lone いる, potential negation, rough ねえ and the ず form of す verbs ([#961](https://github.com/sokcuri/hdTrans/issues/961)) ([811915c](https://github.com/sokcuri/hdTrans/commit/811915c4d10519d29d0cce24f88b6720bc7ac604))
+* **rules:** read Vたところで, でもなんでもない, stem + 始めて, なんてない and set phrases by their pattern ([#966](https://github.com/sokcuri/hdTrans/issues/966)) ([974c056](https://github.com/sokcuri/hdTrans/commit/974c0560461c47f89d4b2191a835e575c12fc3e2))
+* **sound:** read utterance-opening interjections, drawn words and どうも by their sound ([#963](https://github.com/sokcuri/hdTrans/issues/963)) ([9199260](https://github.com/sokcuri/hdTrans/commit/91992606669b66e6582353df628e6213d46e0294))
+* **words:** default あれ, あんな, 奴, もう, いい, ちょっと and あの to their ordinary readings ([#967](https://github.com/sokcuri/hdTrans/issues/967)) ([e97fefb](https://github.com/sokcuri/hdTrans/commit/e97fefbddf88775d4484dbb187f9f6ac0c8ae68f))
+* **words:** read verb stems by their dictionary form and keep longer keys from cutting words ([#968](https://github.com/sokcuri/hdTrans/issues/968)) ([a96a9f7](https://github.com/sokcuri/hdTrans/commit/a96a9f788d19249c36c2debe481f2f8cae43a142))
+* **words:** read なにも, かわす, くるむ, 向こう, 組, N年, 大切, 味方, 引く and katakana native words by their sense ([#962](https://github.com/sokcuri/hdTrans/issues/962)) ([069f5b7](https://github.com/sokcuri/hdTrans/commit/069f5b785b74f2d1c7cd37ae7c05ac7d825d95eb))
+* **words:** read の中, 出そう, なめる, 襲われる and words of the body by the words around them ([#965](https://github.com/sokcuri/hdTrans/issues/965)) ([3cae644](https://github.com/sokcuri/hdTrans/commit/3cae644d7f05ff8e58ab387dbaf514db52393abf))
+* **words:** read 孕む as pregnancy and the interjection はっ by its sound ([#957](https://github.com/sokcuri/hdTrans/issues/957)) ([4f4b2e0](https://github.com/sokcuri/hdTrans/commit/4f4b2e07e53ddf7533d455bcdc29810404bf2c1d))
+* **wrapped:** join caption lines cut inside a word, an ending or before a case particle ([#970](https://github.com/sokcuri/hdTrans/issues/970)) ([ae73d47](https://github.com/sokcuri/hdTrans/commit/ae73d47a616153c33da39635d32793a8c801622f))
+
+
+### Performance Improvements
+
+* **core:** cut the first-line delay and the memory of long kana lines ([#958](https://github.com/sokcuri/hdTrans/issues/958)) ([892f7a5](https://github.com/sokcuri/hdTrans/commit/892f7a58f95573f59e9493876d8d7de36ec880ed))
+
 ## [0.9.8](https://github.com/sokcuri/hdTrans/compare/v0.9.7...v0.9.8) (2026-11-21)
 
 
