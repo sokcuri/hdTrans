@@ -66,3 +66,4 @@ cue-chosen-senses:5849	はねられる	v1:규칙	sense	subj=@person|@animal	치�
 cue-chosen-senses:5830	撥ねる|跳ねる|はねる	v1	sense	obj=@person|@animal head=@vehicle|事故	치다	LEX-5840		猫をはねた車 고양이를 친 차			
 cue-chosen-senses:5832	撥ねる|跳ねる|はねる	v1	sense	obj=泥|泥水|水|水しぶき|しぶき|飛沫|@liquid	튀기다	LEX-5844		泥をはねる 진흙을 튀기다			
 cue-chosen-senses:5831	見せられる	v1:규칙	sense	dat=* obj=-	보여지다	LEX-5842		森下さんに見せられたのは 모리시타 씨에게 보여진 것은			
+cue-chosen-senses:43462	ノリ	n	sense	pred=テープ|紙|貼る|塗る|付ける|つける|接着|はさみ|ハサミ	풀	LEX-8196		ノリやテープ 풀이나 테이프			

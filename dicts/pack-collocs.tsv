@@ -113,3 +113,10 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 逃げる#2	sense	逃げる/にげる/v1	v1	colloc	{X:@animal}に逃げられる		{X}가 도망치다	80	LEX-6020	fault	犯人に逃げられた → 범인이 도망쳤다 (the dictionary に逃げられ 에게 차이다 stays for other nouns)
 逃げる#1t	sense	逃げる/にげる/v1	v1:규칙	colloc	{X:@person}に逃げられる	next=たい	{X}에게 차이다	81	LEX-6020	fault	彼女に逃げられたくない → 그녀에게 차이고 싶지 않다 (the active would move the wish to the agent)
 逃げる#2t	sense	逃げる/にげる/v1	v1:규칙	colloc	{X:@animal}に逃げられる	next=たい	{X}에게 차이다	81	LEX-6020	fault	彼女に逃げられたくない → 그녀에게 차이고 싶지 않다 (the active would move the wish to the agent)
+一糸まとう#1	sense	まとう/まとう/v5	v5	colloc	一糸まとう		실오라기 하나 걸치다	80	LEX-200	corpus	一糸まとわぬ姿 실오라기 하나 걸치지 않은 모습
+一糸まとう#2	sense	纏う/まとう/v5	v5	colloc	一糸纏う		실오라기 하나 걸치다	80	LEX-200	corpus	一糸纏わぬ姿 실오라기 하나 걸치지 않은 모습
+用は足す#1	sense	足す/たす/v5	v5	colloc	用は足す		볼일은 보다	80	LEX-200	corpus	用は足したくもない 볼일은 보고 싶지도 않다
+揚げ足とる#1	sense	とる/とる/v5	v5	colloc	揚げ足とる		트집을 잡다	80	LEX-200	corpus	揚げ足とるな 트집을 잡지 마
+揚げ足とる#2	sense	取る/とる/v5	v5	colloc	揚げ足取る		트집을 잡다	80	LEX-200	corpus	揚げ足取るな 트집을 잡지 마
+へそを曲げる#1	sense	曲げる/まげる/v1	v1	colloc	へそを曲げる		토라지다	80	LEX-200	corpus	へそを曲げそうだ 토라질 것 같다
+しっぽり濡れる#1	sense	濡れる/ぬれる/v1	v1	colloc	しっぽり濡れる|しっぽりと濡れる		촉촉이 젖다	80	LEX-200	corpus	しっぽり濡れた服 촉촉이 젖은 옷

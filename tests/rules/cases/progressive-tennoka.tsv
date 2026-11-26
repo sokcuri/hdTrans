@@ -8,7 +8,7 @@ dict:novel-tennoka:1	(ガロ） 悩んでんのか	(가로) 고민하고 있는 
 dict:novel-tennoka:1	(濱家) 出資してんのか！	(하마야) 출자하고 있는 거야!	fix	local-ending
 dict:novel-tennoka:1	30過ぎて何考えてんのか	30 지나 무엇 생각하고 있는 거야	fix	local-ending
 dict:novel-tennoka:2	お前、何考えてんのか分かってるのか	has:생각하고 있는지	fix	defaults
-dict:novel-tennoka:3	迷ってんのかよ！	헤매고 있는 거냐!	fix	defaults
+dict:novel-tennoka:3	迷ってんのかよ！	망설이고 있는 거냐!	fix	defaults
 dict:novel-tennoka:4	質問してんのはこっちなんだから	has:질문하고 있는 것은	fix	local-ending
 dict:novel-tennoka:5	そんな理屈が通る相手だと思ってんのかい？	has:생각하는 거야?	fix	defaults
 dict:novel-tennoka:6	おい 君たちは本気で 事件が未解決だと思ってんのかね	has:생각하는 건가	fix	defaults

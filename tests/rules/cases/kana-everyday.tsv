@@ -1,0 +1,34 @@
+# 규칙: LEX-93, LEX-8195
+rule	input	expected	kind	layer
+lookup:kana	「へそが見えるぞ」	「배꼽이 보이겠어」	fix	lookup
+lookup:kana	そう言って、へその下辺りをさする。	has:배꼽의 아래	fix	lookup
+lookup:kana	乳房の代わりに、へそに触れる。	has:배꼽에	fix	lookup
+lookup:kana	おへそを隠す。	배꼽을 숨긴다.	fix	lookup
+lookup:kana	「えっとね。おたまと、感じのいい扇子が欲しいの」	has:국자와	fix	lookup
+lookup:kana	お玉を取って。	has:국자를	fix	lookup
+lookup:kana	「相手はテロリストだが、末端の構成員。ようは素人まがいのチンピラだ」	has:요점은 아마추어	fix	lookup
+lookup:kana	要は、図書部に迷惑をかけなければいいんだ。	has:요점은,	keep	lookup
+lookup:kana	Ｄ組のムードメーカーの目が、らんらんと輝き出した。	has:반짝반짝 빛나기	fix	lookup
+lookup:kana	朝っぱらから、目がらんらんに光っている。	has:반짝반짝 빛나고	fix	lookup
+lookup:kana	へそくりを貯める。	lacks:배꼽	keep	lookup
+lookup:kana	へそ曲がりな人だ。	lacks:배꼽	keep	lookup
+lookup:kana	余計へそを曲げそうだしな……	has:토라질 것 같	keep	lookup
+lookup:kana	学校へそのまま行く。	학교에 그대로 간다.	keep	lookup
+lookup:kana	家へそっと帰る。	lacks:배꼽	keep	lookup
+lookup:kana	おたまじゃくしが泳ぐ。	올챙이가 헤엄친다.	keep	lookup
+lookup:kana	「ま、楽しみようはいくらでもあるから」	lacks:요점은	keep	lookup
+lookup:kana	おはようは言った？	lacks:요점은	keep	lookup
+lookup:kana	できようはずもない。	lacks:요점은	keep	lookup
+lookup:kana	やりようはある。	lacks:요점은	keep	lookup
+lookup:kana	必要は発明の母。	lacks:요점은	keep	lookup
+lookup:kana	「らんららんららーん、らんらんるー♪」	lacks:반짝	keep	lookup
+lookup:kana	ようは慣れだよ。	has:요점은 습관	fix	lookup
+cx:kana-everyday:10	お前にようはない。	너에게 용무는 없다.	fix	rewrites
+cx:kana-everyday:10	何かようはある？	has:용무는 있어	fix	rewrites
+cx:kana-everyday:10	「ようは、金だろ」	!rule:cx:kana-everyday:10	keep	rewrites
+cx:kana-everyday:12	そのようはまるで夢のようだった。	has:그 모습은	fix	rewrites
+cx:kana-everyday:20	らんらんと歌う	란란 노래한다	fix	rewrites
+cx:kana-everyday:20	目がらんらんと輝いている。	!rule:cx:kana-everyday:20	keep	rewrites
+cx:kana-everyday:30	お玉さんが来た。	오타마 씨가 왔다.	fix	rewrites
+cx:kana-everyday:30	お玉でスープをすくう。	!rule:cx:kana-everyday:30	keep	rewrites
+cx:kana-everyday:12	ようは慣れだよ。	!rule:cx:kana-everyday:12	keep	rewrites

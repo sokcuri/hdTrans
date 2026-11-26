@@ -1,0 +1,22 @@
+# 규칙: GRM-8121
+rule	input	expected	kind	layer
+cx:nante-nai:10	隠す必要なんてない。	숨기는 필요 같은 건 없다.	fix	rewrites
+cx:nante-nai:10	「全員と仲良くする必要なんてない」	has:필요 같은 건 없	fix	rewrites
+cx:nante-nai:10	他人と比べる必要なんてないはずなのに……	has:필요 같은 건 없을 텐데	fix	rewrites
+cx:nante-nai:10	こんな広範囲を消す必要なんてないじゃない？	has:필요 같은 건 없잖아	fix	rewrites
+cx:nante-nai:10	≪当然よ。私に不可能なんてないわ≫	has:불가능 같은 건 없어	fix	rewrites
+cx:nante-nai:10	不可能なんて無いと言い切ってしまう	has:불가능 같은 건 없다고	fix	rewrites
+cx:nante-nai:10	もう暴力を振るわれる心配なんてない	has:걱정 같은 건 없다	fix	rewrites
+cx:nante-nai:10	暇なんてない。	has:같은 건 없다	fix	rewrites
+cx:nante-nai:10	こんなに綺麗なんて信じられない	이렇게 예쁘다니 믿을 수 없다	keep	rewrites
+cx:nante-nai:10	静かなんてもんじゃない	!rule:cx:nante-nai:10	keep	rewrites
+cx:nante-nai:10	時間なんてない。	시간 같은 건 없다.	keep	rewrites
+cx:nante-nai:10	理由なんてない	이유 같은 건 없다	keep	rewrites
+cx:nante-nai:10	そんなこと、必要ない。	has:필요 없다	keep	rewrites
+cx:nante-nai:10	隠す必要はない。	숨길 필요는 없다.	keep	rewrites
+cx:nante-nai:10	心配なんてしてない。	!rule:cx:nante-nai:10	keep	rewrites
+cx:nante-nai:10	必要なんて言ってない。	!rule:cx:nante-nai:10	keep	rewrites
+cx:nante-nai:10	好きなんて言えない。	!rule:cx:nante-nai:10	keep	rewrites
+cx:nante-nai:10	お金なんてない。	돈 같은 건 없다.	keep	rewrites
+cx:nante-nai:10	無理なんてない。	무리 같은 건 없다.	fix	rewrites
+cx:nante-nai:10	幸せなんてないよ。	has:행복 같은 건 없어	fix	rewrites

@@ -1,0 +1,66 @@
+# 규칙: LEX-8196
+rule	input	expected	kind	layer
+sense:obon	手に持っているお盆には、アイスコーヒーとお菓子が載っている。	has:쟁반에는	fix	senses
+sense:obon	歩き方や座り方、お盆の取り扱いやお茶の出し方	has:쟁반의 취급	fix	senses
+sense:obon	お盆を胸の前に抱きかかえる。	has:쟁반을 가슴	fix	senses
+sense:obon	お盆で自分の頭を叩く。	has:쟁반	fix	senses
+sense:obon	お盆を抱えて走る。	has:쟁반을	keep	senses
+sense:obon	空いたグラスをお盆に載せ、テーブルを拭く。	has:쟁반에	keep	senses
+sense:obon	「わたしは、お盆あたりに帰省すると思う」	has:추석	keep	senses
+sense:obon	「そうか……なら、私はお盆を避けて帰省しよう」	has:추석을	keep	senses
+sense:obon	「お盆だったし、花を作ってもらったの」	has:추석이었고	keep	senses
+sense:obon	お盆に荷物を持って帰省した。	has:추석에	keep	senses
+sense:obon	お盆に実家へ帰って、荷物を抱えて歩いた。	has:추석에	keep	senses
+sense:obon	お盆に墓参りに行く。	has:추석에	keep	senses
+pack:cue-chosen-senses:43462	「でも、普通の紙だって費用は掛かるし、ノリやテープもタダじゃないぞ」	has:풀이나 테이프	fix	packs
+pack:cue-chosen-senses:43462	ノリとテープを買う。	has:풀과 테이프	fix	packs
+pack:cue-chosen-senses:43462	ノリで貼る。	has:풀로 붙인다	fix	packs
+pack:cue-chosen-senses:43462	ノリが悪い。	!rule:pack:cue-chosen-senses:43462	keep	packs
+pack:cue-chosen-senses:43462	そういうノリは大好物です	!rule:pack:cue-chosen-senses:43462	keep	packs
+pack:cue-chosen-senses:43462	ご飯にノリを巻く。	has:김을	keep	packs
+sense:mayou	迷っている暇はない。	망설이고 있을 틈은 없다.	fix	defaults
+sense:mayou	「迷ってたのか？」	has:망설이고	fix	defaults
+sense:mayou	本当に迷っているように見える。	has:망설이고	fix	defaults
+sense:mayou	「どんなことで迷ってたんだ？」	has:망설이고	fix	defaults
+sense:mayou	迷った末に買った。	has:망설인 끝에	fix	defaults
+sense:mayou	メニューで迷う。	has:망설인다	fix	defaults
+sense:mayou	「外で迷ってたから案内したんだ」	has:밖에서 헤매고	keep	senses
+sense:mayou	校内で迷っている動画を見ていた	has:교내에서 헤매고	keep	senses
+sense:mayou	森で迷った。	숲에서 헤매었다.	keep	senses
+sense:mayou	道に迷った。	길을 잃었다.	keep	local
+sense:mayou	迷わず決めた。	망설이지 않고 결정했다.	keep	local
+sense:mayou	迷子になった。	미아가 되었다.	keep	defaults
+cx:mayou-road:10	道が複雑なようで、迷ってしまった。	has:헤매어버렸다	fix	rewrites
+cx:mayou-road:10	この花があれば、死の国への道も暗くはなく、迷うこともないでしょう	has:헤매는 일도	fix	rewrites
+cx:mayou-road:10	道案内がいたので迷わなかった。	has:헤매지 않았다	fix	rewrites
+cx:mayou-road:10	どっちの道に進むか迷う。	!rule:cx:mayou-road:10	keep	rewrites
+cx:mayou-road:10	近道を選ぶか迷った。	!rule:cx:mayou-road:10	keep	rewrites
+cx:mayou-road:10	道は決まった。迷うな。	has:망설이지 마	keep	rewrites
+cx:mayou-road:10	迷っている暇はない。	!rule:cx:mayou-road:10	keep	rewrites
+cx:mayou-road:20	「迷い迷い、歩いた」	「헤매어 헤매어, 걸었다」	fix	rewrites
+cx:mayou-road:20	元の人間でもない限り迷わされてしまうような場所なのだろう。	has:헤매게 되어버리는	fix	rewrites
+cx:mayou-road:20	きっと、そこらじゅうで迷い、つまづき、寄り道をするに違いない。	has:헤매어	fix	rewrites
+cx:mayou-road:20	行く場所を迷っている。	!rule:cx:mayou-road:20	keep	rewrites
+cx:mayou-road:20	迷っている暇はない。	!rule:cx:mayou-road:20	keep	rewrites
+sense:obon	実家でお盆にお茶を載せて運んだ。	has:쟁반에 차를	keep	senses
+sense:obon	夏休みにお盆を持って走った。	has:쟁반을	keep	senses
+sense:obon	田舎のお盆を落としてしまった。	has:쟁반을	keep	senses
+cx:mayou-road:30	部屋の中で迷うはずがない。	has:헤맬	fix	rewrites
+cx:mayou-road:33	家の中で迷った。	has:헤매었다	fix	rewrites
+cx:mayou-road:34	暗闇の中を迷いながら進んだ。	has:헤매면서	fix	rewrites
+cx:mayou-road:40	心の中で迷っていた。	has:망설이고	fix	rewrites
+cx:mayou-road:40	選択肢の中で迷う。	has:망설인다	keep	rewrites
+cx:mayou-road:10	報道を見て、彼は迷った。	has:망설였다	keep	rewrites
+cx:mayou-road:10	剣道を続けるべきか、ずっと迷っていた。	has:망설이고	keep	rewrites
+cx:mayou-road:10	道具を前にして迷った。	has:망설였다	keep	rewrites
+sense:mayou	地図があるから迷わない。	has:헤매지	fix	senses
+sense:mayou	方向音痴だからすぐ迷う。	has:헤맨다	fix	senses
+sense:mayou	校舎で迷った。	has:헤매었다	fix	senses
+cx:mayou-road:35	往く先を迷わせる、霧のような雨。	has:헤매게 하는	fix	rewrites
+cx:mayou-road:35	この先どうするか迷っている。	!rule:cx:mayou-road:35	keep	rewrites
+cx:mayou-road:31	村のなかで迷った。	has:헤매었다	fix	rewrites
+cx:mayou-road:31	心のなかで迷う。	!rule:cx:mayou-road:31	keep	rewrites
+cx:mayou-road:40	心のなかで迷う。	has:망설인다	fix	rewrites
+cx:mayou-road:30	選択肢の中で迷う。	!rule:cx:mayou-road:30	keep	rewrites
+cx:mayou-road:33	心の中で迷っていた。	!rule:cx:mayou-road:33	keep	rewrites
+cx:mayou-road:34	二つの中を迷う。	!rule:cx:mayou-road:34	keep	rewrites

@@ -15283,6 +15283,7 @@ noun.part-of	残り
 noun.part-of	一角
 noun.part-of	一端
 noun.part-of	一環
+//= noun.road	Roads and ways, matched whole, in a sentence of which 迷う is losing one's way (道が複雑で迷った 헤매었다), unlike 報道, 剣道 or 道具 (spec LEX-8196).
 //= noun.round-trip-head	Starts of the nouns a 巡る describes when it is a trip round places, a route or a span of time (「聖地」を巡る旅), after which it stays 돌다 even after a quoted issue (spec LEX-6501).
 noun.round-trip-head	旅
 noun.round-trip-head	ツアー
@@ -15573,3 +15574,28 @@ verb.lookalike-target	に
 verb.lookalike-past	んだ
 verb.lookalike-adnominal	お
 verb.lookalike-adnominal	ご
+noun.road	道
+noun.road	道路
+noun.road	路地
+noun.road	帰り道
+noun.road	山道
+noun.road	夜道
+noun.road	近道
+noun.road	小道
+noun.road	坂道
+noun.road	裏道
+noun.road	脇道
+noun.road	横道
+noun.road	細道
+noun.road	一本道
+noun.road	分かれ道
+noun.road	寄り道
+noun.road	道のり
+noun.road	道順
+noun.road	道筋
+noun.road	道案内
+noun.road	通学路
+noun.road	迷路
+noun.road	獣道
+noun.road	回り道
+noun.road	遠回り

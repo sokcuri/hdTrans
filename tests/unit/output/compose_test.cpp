@@ -3,6 +3,7 @@
 
 #include "core/output/compose.h"
 #include "core/output/text.h"
+#include "core/text/utf8.h"
 #include "core/tokenizer/token.h"
 #include "hdtest.h"
 
@@ -171,6 +172,28 @@ HD_TEST(compose_place_noun_after_dropped_no) {
          {2, 3}, "금화."},
     };
     for (const auto& c : cases) CheckComposition(c);
+}
+
+// A run of single unread hiragana ends before a katakana word glued to it: the run is kept for its
+// sound (ぬこぬこブラボー), but not after a katakana word that ends in ッ (ヤッちまう).
+HD_TEST(compose_unread_run_before_katakana) {
+    const auto dropped = [](std::string_view s) {
+        std::string out;
+        for (size_t i = 0; i < s.size();) {
+            const auto r = text::DecodeRune(s.substr(i));
+            text::AppendRune(out, r.cp + kDropShift);
+            i += r.size;
+        }
+        return out;
+    };
+    CheckComposition({{{"ぬ", "110", "Nm", ""}, {"こ", "110", "Nm", ""}, {"ぬ", "110", "Nm", ""}, {"こ", "110", "Nm", ""},
+                       {"ブラボー", "110", "", "브라보"}},
+                      {4, 5},
+                      (dropped("ぬこぬこ") + " 브라보.").c_str()});
+    CheckComposition({{{"ヤッ", "110", "", "얏"}, {"ち", "110", "Nm", ""}, {"ま", "110", "Nm", ""}, {"う", "110", "Nm", ""},
+                       {"コラ", "110", "", "코라"}},
+                      {4, 5},
+                      "얏코라."});
 }
 
 HD_TEST(compose_untranslated_honorific_spacing) {
