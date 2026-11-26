@@ -40,6 +40,7 @@
 #include "stage_records.h"
 #include "trace_json.h"
 #include "frontend/dictionary_version.h"
+#include "frontend/eztrans_registry.h"
 
 namespace {
 
@@ -118,6 +119,10 @@ void Usage(std::FILE* file) {
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
+               "  --show-eztrans         (Windows) show the ezTrans XP folder that host tools read from the registry\n"
+               "  --register-eztrans     (Windows) point it at this folder, saving the old value; --force replaces\n"
+               "                         another engine\n"
+               "  --unregister-eztrans   (Windows) restore the value saved by --register-eztrans\n"
                "Legacy single-hyphen options are also accepted, except --verbose. Use -- before literal text starting with '-'.\n", file);
 }
 
@@ -303,6 +308,91 @@ bool WriteRuleCounts(const std::string& path, const hdTrans::rules::Program& pro
     return std::fclose(f) == 0;
 }
 
+// --show-eztrans, --register-eztrans, --unregister-eztrans: the ezTrans XP location host tools read.
+int EzTransCommand(const std::string& command, bool force) {
+#ifndef _WIN32
+    (void)force;
+    std::fprintf(stderr, "hdtrans: -%s is available on Windows only\n", command.c_str());
+    return 2;
+#else
+    namespace frontend = hdTrans::frontend;
+    using frontend::EzTransResult;
+    using frontend::EzTransTarget;
+    const std::string self = ExecutableDir();
+    if (self.empty()) {
+        std::fputs("hdtrans: cannot find the program folder\n", stderr);
+        return 1;
+    }
+    frontend::EzTransState state;
+    std::string error;
+    if (!frontend::ReadEzTransState(state, error)) {
+        std::fprintf(stderr, "hdtrans: cannot read the registry: %s\n", error.c_str());
+        return 1;
+    }
+    const bool engineAtFilePath = state.filePath && frontend::FolderHasEngine(*state.filePath);
+    if (command == "-show-eztrans") {
+        const char* kind = "not set";
+        switch (frontend::ClassifyFilePath(state, self, engineAtFilePath)) {
+        case EzTransTarget::kNone: break;
+        case EzTransTarget::kSelf: kind = "this hdTrans folder"; break;
+        case EzTransTarget::kOurs: kind = "an earlier hdTrans registration"; break;
+        case EzTransTarget::kMissing: kind = "no J2KEngine.dll there"; break;
+        case EzTransTarget::kEngine: kind = "another engine"; break;
+        }
+        std::printf("HKEY_CURRENT_USER\\Software\\ChangShin\\ezTrans FilePath: %s (%s)\n",
+                    state.filePath ? state.filePath->c_str() : "", kind);
+        if (state.registered) {
+            std::printf("restored by --unregister-eztrans: %s\n",
+                        state.previous ? state.previous->c_str() : "(no value)");
+        }
+        return 0;
+    }
+    const bool registering = command == "-register-eztrans";
+    const auto change = registering
+        ? frontend::PlanRegister(state, self, frontend::FolderHasEngine(self), engineAtFilePath, force)
+        : frontend::PlanUnregister(state, force);
+    switch (change.result) {
+    case EzTransResult::kChanged:
+        break;
+    case EzTransResult::kUnchanged:
+        std::printf("FilePath already names %s\n", self.c_str());
+        return 0;
+    case EzTransResult::kNoEngine:
+        std::fprintf(stderr, "hdtrans: J2KEngine.dll is not in %s\n", self.c_str());
+        return 1;
+    case EzTransResult::kOtherEngine:
+        std::fprintf(stderr, "hdtrans: FilePath names another engine: %s\n"
+                             "hdtrans: add --force to replace it; --unregister-eztrans restores it\n",
+                     state.filePath->c_str());
+        return 1;
+    case EzTransResult::kNotRegistered:
+        std::fputs("hdtrans: no value saved by --register-eztrans; FilePath is left as is\n", stderr);
+        return 1;
+    case EzTransResult::kModified:
+        std::fprintf(stderr, "hdtrans: FilePath was changed after --register-eztrans: %s\n"
+                             "hdtrans: add --force to restore the saved value anyway\n",
+                     state.filePath ? state.filePath->c_str() : "(no value)");
+        return 1;
+    }
+    if (!frontend::WriteEzTransState(state, change.after, error)) {
+        std::fprintf(stderr, "hdtrans: cannot write the registry: %s\n", error.c_str());
+        return 1;
+    }
+    if (registering) {
+        std::printf("FilePath: %s\n", self.c_str());
+        for (const unsigned char c : self) {
+            if (c < 0x80) continue;
+            std::fputs("hdtrans: warning: tools that read the path in the ANSI code page may not open a "
+                       "non-English folder name\n", stderr);
+            break;
+        }
+    } else {
+        std::printf("FilePath: %s\n", change.after.filePath ? change.after.filePath->c_str() : "(removed)");
+    }
+    return 0;
+#endif
+}
+
 }  // namespace
 
 namespace {
@@ -347,6 +437,8 @@ int RunMain(int argc, char** argv) {
     bool verifyDicts = false;
     bool compileDicts = false;
     bool noCache = false;
+    std::string ezTransCommand;
+    bool force = false;
     for (int i = 1; i < argc; i++) {
         std::string option = argv[i];
         if (!literal && option == "--") {
@@ -424,11 +516,30 @@ int RunMain(int argc, char** argv) {
         else if (option == "-no-cg") noCg = true;
         else if (option == "-no-predicate-variants") noPredicateVariants = true;
         else if (option == "-cg-learned") cgLearned = true;
+        else if (option == "-show-eztrans" || option == "-register-eztrans" || option == "-unregister-eztrans") {
+            if (!ezTransCommand.empty() && ezTransCommand != option) {
+                std::fputs("hdtrans: use one of --show-eztrans, --register-eztrans and --unregister-eztrans\n", stderr);
+                return 2;
+            }
+            ezTransCommand = option;
+        }
+        else if (option == "-force") force = true;
         else {
             std::fprintf(stderr, "hdtrans: unknown option %s\n", argv[i]);
             Usage(stderr);
             return 2;
         }
+    }
+    if (force && ezTransCommand != "-register-eztrans" && ezTransCommand != "-unregister-eztrans") {
+        std::fputs("hdtrans: --force needs --register-eztrans or --unregister-eztrans\n", stderr);
+        return 2;
+    }
+    if (!ezTransCommand.empty()) {
+        if (hasText || !inPath.empty()) {
+            std::fprintf(stderr, "hdtrans: -%s does not translate text\n", ezTransCommand.c_str());
+            return 2;
+        }
+        return EzTransCommand(ezTransCommand, force);
     }
     if (hasText && !inPath.empty()) {
         std::fputs("hdtrans: text arguments and --in cannot be combined\n", stderr);
