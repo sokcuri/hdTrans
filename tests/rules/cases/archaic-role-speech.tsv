@@ -299,7 +299,7 @@ dict:archaic-speech	女子には分からんじゃろう	여자는 모르겠지	
 cx:archaic-speech:32	我ら勝利のためなら どんなことでもいたす！	우리들 승리를 위해서라면 어떤 일이라도 한다!	keep	rewrites
 cx:archaic-speech:10	余の服装が何であったか、どういうものだか今だに記憶しておる。	짐의 복장이 왜 있었는지, 어떤 걸까 여태 껏 기억하고 있다.	keep	rewrites
 cx:archaic-speech:5	タウロ 某は正気であり 何をしているのか 理解しているつもりです	타우로 소인은 제정신이며 무엇을 하고 있는지 이해하고 있을 생각입니다	fix	rewrites
-cx:archaic-speech:5	はっ 恐れながら 某の息子は先般	헉 송구하오나 소인의 아들은 지난번	fix	rewrites
+cx:archaic-speech:5	はっ 恐れながら 某の息子は先般	핫 송구하오나 소인의 아들은 지난번	fix	rewrites
 cx:archaic-speech:5	「その死の直前に郡兵衛殿より、拙者一揆の指揮たのまれ」	「그 죽음의 직전에 군 무관전부터, 소인 잇키 지휘 부탁받고」	fix	rewrites
 cx:archaic-speech:5	「貴殿と拙者とは讐敵同士！」	「귀하와 나란 수적끼리!」	keep	rewrites
 cx:archaic-speech:1	その「拙者」とか「お主」って単語 どこで習ったの？	그 「소인」이든지 「그대」라는 단어 어디서 배웠어?	fix	rewrites

@@ -430,6 +430,18 @@ struct SoundRow {
     // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
     // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
     std::string alone;
+    // The Korean right before a question mark, after an ellipsis or a dash, then exclamation marks, or
+    // none (fourth column ask=헉: はっ？ 헉?, はっ！？ 헉!?, はっ……！？ 헉……!?, but はっ！ 핫!), drawn out as KR is.
+    std::string ask;
+    // The Korean where another sound of its run is this row too, drawn out or not (fourth column
+    // again=헉: はっ、はっ 헉, 헉, はーっ……はっ 허억……헉, はっ……ん……はっ 헉……응……헉, but はっ……はぁっ 핫……하앗,
+    // はっはっは 하하하), drawn out as KR is. A run is sounds with only commas, ellipses, dashes, middle
+    // dots, dots or spaces between them, 64 sounds at most on each side.
+    std::string again;
+    // The Korean where a と quotes it, the last of its chain: right after it, after a pause, or after the
+    // closing bracket of a quote that holds only the sound (fourth column quoted=헉: はっ、と気づいた 헉, 하고
+    // 눈치챘다, 「はっ」と息を呑む), drawn out as KR is.
+    std::string quoted;
     // The Korean is in 해요 speech (fourth column haeyo: そうですそうです 맞아요 맞아요), which copies said
     // apart do not take, as said on their own (그렇습니다).
     bool haeyo = false;

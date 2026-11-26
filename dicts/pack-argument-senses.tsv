@@ -226,3 +226,13 @@ argument-senses:14711	下がる	v5	sense	subj=@person from=* next=くる|来る	
 argument-senses:14715	宿る	v5	sense	obj=光|輝き|力|魔力|炎|意志|決意|怒り|闘志|殺意|熱|感情|魂|覚悟|希望|闇|光り|灯	품다	LEX-6040		目に強い輝きを宿らせて 눈에 강한 빛을 품게 해			
 argument-senses:17300	詰まる|つまる	v5	sense	subj=距離|間合い|差|間隔|車間距離|点差	좁혀지다	LEX-7484		距離が詰まり 거리가 좁혀지고			
 argument-senses:17301	詰まる|つまる	v5	sense	subj=息|言葉|話|喉|のど|鼻|胸|パイプ|排水管|配管|トイレ|管|ノズル	막히다	LEX-7484		息が詰まり 숨이 막혀			
+argument-senses:35806	孕む	v5	sense	obj=* head=-	품다	LEX-8063		危険を常に内に孕んでいる 위험을 항상 안에 품고 있다			
+argument-senses:35807	孕む	v5	sense	obj=* after=を	-	LEX-8063		子を孕む: 바로 앞 を는 지역 규칙 19701이 가린다(그대로)		1	
+argument-senses:35808	孕む	v5	sense	obj=@person|@animal|@offspring	-	LEX-8063		子供を孕む 아이를 임신하다(그대로)			
+argument-senses:35809	孕ませる	v1	sense	obj=* head=-	품게 하다	LEX-8063		帆に風をいっぱいに孕ませる 바람을 품게 하다			
+argument-senses:35810	孕ませる	v1	sense	obj=* after=を	-	LEX-8063		彼女を孕ませた: 바로 앞 を는 지역 규칙 19702가 가린다(그대로)		1	
+argument-senses:35811	孕ませる	v1	sense	obj=@person|@animal|@offspring	-	LEX-8063		彼女を孕ませた 그녀를 임신시켰다(그대로)			
+argument-senses:35812	孕む	v5	voice	subj=* voice=passive	passive:품어지다	LEX-8063		危険が孕まれている 위험이 품어지고 있다			
+argument-senses:35813	孕む	v5	voice	subj=@person|@animal|@offspring voice=passive	passive	LEX-8063		子が孕まれた(그대로)			
+argument-senses:35814	種	n	sense	pred=孕む|孕ませる	씨	LEX-8063		彼の種を孕んだ 그의 씨를			
+argument-senses:35815	孕む	v5	sense	obj=種|子種	품다	LEX-8063		子種を孕む 씨를 품다			

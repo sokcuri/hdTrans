@@ -64,6 +64,7 @@ class	parent
 @motion	@abstract
 @music	@sound
 @nature	@place
+@offspring	@entity
 @opening	@entity
 @organization	@group
 @person	@entity

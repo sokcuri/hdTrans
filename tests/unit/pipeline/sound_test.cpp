@@ -1114,6 +1114,58 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
 
+// A row with ask=K is K right before a question mark, one with again=K where another sound of its run
+// is the same row, one with quoted=K where a と quotes it (はっ 핫, ask=헉 again=헉 quoted=헉).
+HD_TEST(pipeline_sound_ask_and_again) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'ハ')) {
+        flagged = flagged || (r.key == U"ハッ" && r.ask == "헉" && r.again == "헉" && r.quoted == "헉");
+    }
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"「はっ」", "「핫」"},
+        {"「はっ！」", "「핫！」"},
+        {"「はっ？」", "「헉？」"},
+        {"「ハッ！？」", "「헉！？」"},
+        {"「はっ!?」", "「헉!?」"},
+        {"「はーっ！？」", "「허억！？」"},
+        {"「はっ……？」", "「헉……？」"},  // an ellipsis between
+        {"「はっ……」", "「핫……」"},
+        {"「はっ、はっ……」", "「헉、헉……」"},
+        {"「ハッ……ハッ……」", "「헉……헉……」"},
+        {"「はっはっ」", "「헉헉」"},
+        {"「はーっ、はっ」", "「허억、헉」"},
+        {"「はっ、んっ、はっ」", "「헉、읏、헉」"},  // another sound between
+        // A row of its own is no copy: はぁっ, the laugh はっはっは, a burst.
+        {"「はっ……はぁっ……」", "「핫……하앗……」"},
+        {"「んっ……はっ……あんっ」", "「읏……핫……앙」"},
+        {"「はっ、はっはっは」", "「핫、하하하」"},
+        {"「はっ！ はっ！」", "「핫！ 핫！」"},  // an exclamation mark parts the run
+        {"「はっ・・・はっ」", "「헉・・・헉」"},
+        {"「はっ...はっ」", "「헉...헉」"},
+        {"「はっ……ん……はっ」", "「헉……응……헉」"},  // a voice of no row between
+        {"「はっ。はっ」", "「핫。핫」"},
+        // A と that quotes it, after a pause or a closing bracket.
+        {"はっ、と", "헉、 하고"},
+        {"「はっ」と", "「헉」と"},
+        {"「はっ、まさか」", "「핫、まさか」"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+    // A copy farther than the reach on either side counts on neither (both 핫), a nearer one on both.
+    std::string far = "はっ、", farWant = "핫、";
+    for (int n = 0; n < 70; n++) far += "あっ、", farWant += "앗、";
+    HD_CHECK_EQ(Sound(far + "はっ", ctx, *snap), farWant + "핫");
+    std::string near = "はっ、", nearWant = "헉、";
+    for (int n = 0; n < 10; n++) near += "あっ、", nearWant += "앗、";
+    HD_CHECK_EQ(Sound(near + "はっ", ctx, *snap), nearWant + "헉");
+}
+
 // A final phrase row (また明日 내일 보자) is read only where the utterance ends after it.
 HD_TEST(pipeline_sound_final_phrase) {
     bool flagged = false;

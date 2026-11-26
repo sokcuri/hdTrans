@@ -1,0 +1,184 @@
+# 규칙: LEX-8063
+rule	input	expected	kind	layer
+dict:w:42202	孕む	임신한다	fix	defaults
+dict:w:42202	孕んだ	임신했다	fix	defaults
+dict:w:42202	孕もう	임신하자	fix	defaults
+dict:w:42202	孕んでいる	임신하고 있다	fix	defaults
+dict:w:42202	孕まされた	임신하게 되었다	fix	defaults
+dict:w:42203	孕ませられる	임신시킬 수 있다	fix	defaults
+dict:w:42202	孕みそう	임신할 것 같다	fix	defaults
+dict:w:42202	孕みたい	임신하고 싶다	fix	defaults
+dict:w:42202	孕んでも	임신해도	fix	defaults
+dict:w:42203	孕ませる	임신시킨다	fix	defaults
+dict:w:42203	孕ませた	임신시켰다	fix	defaults
+dict:w:42203	孕ませたい	임신시키고 싶다	fix	defaults
+dict:w:42202	孕む前に	임신하기 전에	fix	defaults
+dict:w:42202	孕んだ女	임신한 여자	fix	defaults
+dict:w:42202	孕んだ女性	임신한 여성	fix	defaults
+dict:w:42206	孕み	임신	fix	defaults
+dict:w:42206	孕み腹	임신한 배	fix	defaults
+dict:w:42202	子を孕む	아이를 임신한다	fix	defaults
+dict:w:42202	子を孕んだ	아이를 임신했다	fix	defaults
+dict:w:42202	子供を孕む	아이를 임신한다	fix	defaults
+dict:w:42202	子供を孕んだ女	아이를 임신한 여자	fix	defaults
+dict:w:42202	赤ちゃんを孕んだ	아기를 임신했다	fix	defaults
+dict:w:42202	赤子を孕む	갓난아이를 임신한다	fix	defaults
+dict:w:42202	双子を孕んだ	쌍둥이를 임신했다	fix	defaults
+dict:w:42202	俺の子を孕め	내 아이를 임신해라	fix	defaults
+dict:w:42202	俺の子を孕んでくれ	내 아이를 임신해 줘	fix	defaults
+dict:w:42202	彼の子を孕んだ	그의 아이를 임신했다	fix	defaults
+dict:w:42202	あなたの子を孕みたい	당신의 아이를 임신하고 싶다	fix	defaults
+pack:argument-senses:35815	彼の種を孕んだ	그의 씨를 품었다	fix	packs
+dict:w:42202	魔王の子を孕まされた	마왕의 아이를 임신하게 되었다	fix	defaults
+dict:w:14963	新しい命を孕む	새로운 생명을 품는다	keep	local
+dict:w:14963	命を孕んだ	생명을 품었다	keep	local
+dict:w:14963	危険を孕む	위험을 품는다	keep	local
+dict:w:14963	危険を孕んでいる	위험을 품고 있다	keep	local
+dict:w:14963	危険を孕んだ計画	위험을 품은 계획	keep	local
+dict:w:14963	矛盾を孕む	모순을 품는다	keep	local
+dict:w:14963	矛盾を孕んでいる	모순을 품고 있다	keep	local
+dict:w:14963	問題を孕む	문제를 품는다	keep	local
+dict:w:14963	可能性を孕む	가능성을 품는다	keep	local
+dict:w:14963	大きな可能性を孕んでいる	큰 가능성을 품고 있다	keep	local
+dict:w:14963	風を孕む	바람을 품는다	keep	local
+dict:w:14963	帆が風を孕む	돛이 바람을 품는다	keep	local
+dict:w:14963	風を孕んだ帆	바람을 품은 돛	keep	local
+dict:w:14963	熱を孕む	열을 품는다	keep	local
+dict:w:14963	熱を孕んだ空気	열을 품은 공기	keep	local
+dict:w:14963	怒りを孕んだ声	분노를 품은 목소리	keep	local
+dict:w:14963	狂気を孕んだ瞳	광기를 품은 눈동자	keep	local
+dict:w:14963	毒を孕む	독을 품는다	keep	local
+dict:w:14963	光を孕む	빛을 품는다	keep	local
+dict:w:14963	湿気を孕んだ風	습기를 품은 바람	keep	local
+dict:w:14963	雨の気配を孕んだ空	비 기운을 품은 하늘	keep	local
+dict:w:14963	不穏な空気を孕んでいる	불온한 공기를 품고 있다	keep	local
+pack:argument-senses:35812	危険が孕まれている	위험이 품어지고 있다	keep	packs
+dict:w:14963	危険すら孕んでいる	위험조차 품고 있다	keep	local
+dict:w:14963	危険まで孕んでいる	위험까지 품고 있다	keep	local
+dict:w:14963	危険も孕んでいる	위험도 품고 있다	keep	local
+dict:w:14963	多くの問題を孕んでいる	많은 문제를 품고 있다	keep	local
+dict:w:14963	深刻な問題を孕んでいる	심각한 문제를 품고 있다	keep	local
+pack:argument-senses:35806	大きな危険を常に孕んでいる	큰 위험을 항상 품고 있다	keep	packs
+dict:w:42202	彼女は孕んだ	그녀는 임신했다	fix	defaults
+dict:w:42202	彼女は孕んでいる	그녀는 임신하고 있다	fix	defaults
+dict:w:42202	彼女が孕んだ	그녀가 임신했다	fix	defaults
+dict:w:42202	彼女は子を孕んだ	그녀는 아이를 임신했다	fix	defaults
+dict:w:14963	彼女は危険を孕んでいる	그녀는 위험을 품고 있다	keep	local
+dict:w:14963	彼女の瞳は狂気を孕んでいた	그녀의 눈동자는 광기를 품고 있었다	keep	local
+dict:w:14963	敵を前に危険を孕む	적을 앞에 두고 위험을 품는다	keep	local
+dict:w:14963	彼の言葉は矛盾を孕んでいた	그의 말은 모순을 품고 있었다	keep	local
+dict:w:14963	その計画は危険を孕んでいた	그 계획은 위험을 품고 있었다	keep	local
+dict:w:42202	腹に子を孕む	배에 아이를 임신한다	fix	defaults
+dict:w:42202	お腹に赤ちゃんを孕んでいる	배에 아기를 임신하고 있다	fix	defaults
+dict:w:42202	妻が孕んだ	아내가 임신했다	fix	defaults
+dict:w:42203	娘を孕ませた	딸을 임신시켰다	fix	defaults
+dict:w:42203	彼女を孕ませた	그녀를 임신시켰다	fix	defaults
+dict:w:42203	女を孕ませる	여자를 임신시킨다	fix	defaults
+dict:w:42203	母親を孕ませた	어머니를 임신시켰다	fix	defaults
+dict:w:42203	王女を孕ませた	왕녀를 임신시켰다	fix	defaults
+dict:w:42203	姫に子を孕ませた	공주에게 아이를 임신시켰다	fix	defaults
+dict:w:42203	彼女に子供を孕ませた	그녀에게 아이를 임신시켰다	fix	defaults
+dict:w:42203	絶対に孕ませてやる	절대로 임신시켜 준다	fix	defaults
+dict:w:42202	「俺の子を孕め」	「내 아이를 임신해라」	fix	defaults
+lookup:kare-no-ko	彼の子	그의 아이	fix	lookup
+lookup:kare-no-ko	彼の子だ	그의 아이다	fix	lookup
+lookup:kare-no-ko	彼の子は元気だ	그의 아이는 건강하다	fix	lookup
+lookup:kare-no-ko	彼の子を見た	그의 아이를 보았다	fix	lookup
+lookup:kare-no-ko	彼の子供	그의 아이	keep	lookup
+lookup:kare-no-ko	彼の子供だ	그의 아이다	keep	lookup
+lookup:kare-no-ko	彼の子ども	그의 아이	fix	lookup
+lookup:kare-no-ko	彼の子分	그의 부하	keep	lookup
+lookup:kare-no-ko	彼の子分たち	그의 부하들	keep	lookup
+lookup:kare-no-ko	彼の子孫	그의 자손	keep	lookup
+lookup:kare-no-musume	彼の娘	그의 딸	fix	lookup
+lookup:kare-no-ko	彼の子を抱いた	그의 아이를 안았다	fix	lookup
+lookup:kare-no-ko	これは彼の子だ	이것은 그의 아이다	fix	lookup
+dict:w:14963	危険は孕んでいる	위험은 품고 있다	keep	local
+pack:argument-senses:35812	その計画には危険が孕まれている	그 계획에는 위험이 품어지고 있다	keep	packs
+pack:argument-senses:35806	危険を常に内に孕んでいる	위험을 항상 안에 품고 있다	keep	packs
+pack:argument-senses:35806	危険をいつも胸の内に孕んでいる	위험을 언제나 속마음에 품고 있다	keep	packs
+pack:argument-senses:35806	危険を、常に孕んでいる	위험을, 항상 품고 있다	keep	packs
+dict:w:14963	危険をも孕む	위험도 품는다	keep	local
+dict:w:14963	危険や矛盾を孕む	위험이나 모순을 품는다	keep	local
+dict:w:14963	危険などを孕んでいる	위험 등을 품고 있다	keep	local
+dict:w:14963	多くの危険と矛盾を孕んでいる	많은 위험과 모순을 품고 있다	keep	local
+dict:w:42204	帆に風を孕ませる	돛에 바람을 품게 한다	keep	local
+dict:w:42204	帆に風を孕ませた	돛에 바람을 품게 했다	keep	local
+dict:w:14963	スカートが風を孕んだ	스커트가 바람을 품었다	keep	local
+dict:w:42204	風を孕ませて走る	바람을 품게 해 달린다	keep	local
+dict:w:42204	空気を孕ませる	공기를 품게 한다	keep	local
+dict:w:42204	生地に空気を孕ませる	옷감에 공기를 품게 한다	keep	local
+dict:w:42202	胎児を孕む	태아를 임신한다	fix	defaults
+pack:argument-senses:35815	子種を孕む	씨를 품는다	keep	packs
+dict:w:42202	子どもを孕む	아이를 임신한다	fix	defaults
+dict:w:42202	仔を孕んだ牝馬	새끼를 임신한 암말	fix	defaults
+dict:w:42202	子猫を孕んだ猫	새끼 고양이를 임신한 고양이	fix	defaults
+dict:w:14963	卵を孕む	알을 품는다	keep	local
+dict:w:42202	ガキを孕め	꼬맹이를 임신해라	fix	defaults
+dict:w:42202	跡継ぎを孕む	후계자를 임신한다	fix	defaults
+dict:w:42202	世継ぎを孕む	후계자를 임신한다	fix	defaults
+dict:w:42202	我が子を孕む	우리 아이를 임신한다	fix	defaults
+dict:w:42202	勇者の子を孕みたい	용사의 아이를 임신하고 싶다	fix	defaults
+dict:w:42202	彼の赤ちゃんを孕んだ	그의 아기를 임신했다	fix	defaults
+dict:w:42202	お前の子を孕んでやる	네 아이를 임신해 준다	fix	defaults
+dict:w:42202	魔物の子を孕む	마물의 아이를 임신한다	fix	defaults
+dict:w:42202	悪魔の子を孕んだ	악마의 아이를 임신했다	fix	defaults
+dict:w:42202	獣の子を孕む	짐승의 아이를 임신한다	fix	defaults
+dict:w:42202	牝馬が孕んだ	암말이 임신했다	fix	defaults
+dict:w:42202	雌が孕む	암컷이 임신한다	fix	defaults
+dict:w:42203	雌犬を孕ませた	암캐를 임신시켰다	fix	defaults
+dict:w:42203	牛を孕ませる	소를 임신시킨다	fix	defaults
+dict:w:14963	夜は闇を孕んでいた	밤은 어둠을 품고 있었다	keep	local
+dict:w:14963	沈黙は緊張を孕んでいた	침묵은 긴장을 품고 있었다	keep	local
+dict:w:14963	雲は雨を孕んでいる	구름은 비를 품고 있다	keep	local
+dict:w:14963	大地は熱を孕む	대지는 열을 품는다	keep	local
+dict:w:14963	その一言は危うさを孕んでいた	그 한마디는 위험함을 품고 있었다	keep	local
+dict:w:14963	不安を孕んだ空気	불안을 품은 공기	keep	local
+dict:w:14963	期待と不安を孕んだ目	기대와 불안을 품은 눈	keep	local
+dict:w:14963	危険性を孕む	위험성을 품는다	keep	local
+dict:w:14963	リスクを孕む	리스크를 품는다	keep	local
+dict:w:14963	爆弾を孕んでいる	폭탄을 품고 있다	keep	local
+dict:w:14963	火種を孕む	불씨를 품는다	keep	local
+dict:w:14963	嵐を孕んだ空	폭풍우를 품은 하늘	keep	local
+dict:w:42202	孕んだ腹	임신한 배	fix	defaults
+dict:w:42206	孕み女	임신부	fix	defaults
+dict:w:42202	孕まされた女	임신하게 된 여자	fix	defaults
+dict:w:42202	「もう孕んじゃったかも」	「이제 임신해버렸을지도」	fix	defaults
+dict:w:42202	孕んじゃえ！	임신해버려!	fix	defaults
+dict:w:42202	彼の子を孕んでいる	그의 아이를 임신하고 있다	fix	defaults
+dict:w:42203	絶対に孕ませる	절대로 임신시킨다	fix	defaults
+dict:w:14963	怒気を孕んだ声	노기를 품은 목소리	keep	local
+pack:argument-senses:35806	危険を常に孕んでいる	위험을 항상 품고 있다	keep	packs
+pack:argument-senses:35806	熱を内に孕む	열을 안에 품는다	keep	packs
+dict:w:14963	緊張を孕んだ沈黙	긴장을 품은 침묵	keep	local
+dict:w:14963	火種を孕んでいる	불씨를 품고 있다	keep	local
+dict:w:14963	危険性を孕んでいます	위험성을 품고 있습니다	keep	local
+dict:w:14963	怒気を孕んだ声が	노기를 품은 목소리가	keep	local
+dict:w:14963	不安を孕んだまま	불안을 품은 채로	keep	local
+dict:w:14963	どこか、心地よい痛みを孕んだ悲しみ	어딘가, 기분 좋은 아픔을 품은 슬픔	keep	local
+dict:w:42202	孕み続ける	계속 임신한다	fix	defaults
+pack:argument-senses:35815	その種を孕む	그 씨를 품는다	fix	packs
+lookup:kare-no-musume	彼の娘を見た	그의 딸을 보았다	fix	lookup
+lookup:kare-no-musume	彼の娘は美しい	그의 딸은 아름답다	fix	lookup
+dict:w:42202	猫は孕んでいた	고양이는 임신하고 있었다	fix	defaults
+dict:w:42202	花子は孕んだらしい	하나코는 임신한 것 같다	fix	defaults
+dict:w:42202	ユリアは孕んでいた	유리어는 임신하고 있었다	fix	defaults
+dict:w:42203	エルフを孕ませた	엘프를 임신시켰다	fix	defaults
+dict:w:42203	聖女を孕ませた	성녀를 임신시켰다	fix	defaults
+dict:w:42203	リナを孕ませた	리나를 임신시켰다	fix	defaults
+dict:w:42203	その女を孕ませろ	그 여자를 임신시켜라	fix	defaults
+dict:w:42203	花子を孕ませた	하나코를 임신시켰다	fix	defaults
+dict:w:42203	魔女を孕ませた	마녀를 임신시켰다	fix	defaults
+dict:w:42203	巫女を孕ませた	무녀를 임신시켰다	fix	defaults
+dict:w:42203	女神を孕ませた	여신을 임신시켰다	fix	defaults
+dict:w:42203	奴隷を孕ませた	노예를 임신시켰다	fix	defaults
+dict:w:42203	人妻を孕ませた	유부녀를 임신시켰다	fix	defaults
+dict:w:42202	勇者の子を孕む	용사의 아이를 임신한다	fix	defaults
+dict:w:42202	問題は孕んでいる	문제는 임신하고 있다	current	defaults
+dict:w:42202	雌は孕む	암컷은 임신한다	fix	defaults
+dict:w:42202	エルフも孕んだ	엘프도 임신했다	fix	defaults
+dict:w:42202	聖女は孕んでいた	성녀는 임신하고 있었다	fix	defaults
+dict:sem:animal	子犬に名前を付けた	강아지에게 이름을 지었다	fix	lookup
+dict:sem:animal	雌犬に噛まれた	암캐에게 물렸다	fix	lookup
+dict:sem:animal	子猫に話しかけた	새끼 고양이에게 말을 걸었다	fix	lookup
+dict:w:42203	雌を孕ませた	암컷을 임신시켰다	fix	defaults

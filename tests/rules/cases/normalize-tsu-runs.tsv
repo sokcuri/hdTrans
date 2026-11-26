@@ -12,7 +12,7 @@ normalize:tsu-run	あたし的には、とっってもOKです！	has:매우 OK�
 normalize:tsu-run	ポーラ、とってもとっっても楽しみにしてるんです～。	has:매우 매우 기대	keep	normalize
 normalize:tsu-run	あたし、ゼッッタイ沈まないからね！	나, 저어얼대 가라앉지 않으니까!	fix	normalize
 normalize:tsu-run	「あっっぶなかったぁ……橋が壊されてる」	has:「위이이험했어……	fix	normalize
-normalize:tsu-run	「ハッ、バッッカじゃないの？」	「헉, 바아아보가 아닌 거야?」	fix	normalize
+normalize:tsu-run	「ハッ、バッッカじゃないの？」	「핫, 바아아보가 아닌 거야?」	fix	normalize
 normalize:tsu-run	あっったりまえでしょ	다아앙연하지	fix	normalize
 normalize:tsu-run	しっっかり獲ってみせるから！	has:확실히	keep	normalize
 normalize:tsu-run	私、お祝いで健康ケーキ、いっっぱい作りました！	has:많이 만들었습니다!	fix	normalize

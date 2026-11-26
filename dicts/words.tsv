@@ -2586,7 +2586,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エルゴノビン	에르고메트린	N110			GN						エルゴノビン	w:2577
 エルサゲート	엘사게이트	N110			GN						エルサゲート	w:2578
 エルステッド	에르스텟	N110			GN						エルステッド	w:2579
-エルフ	엘프	N110			GN				llm			w:2580
+エルフ	엘프	N110	VHn		GN				llm			w:2580
 エルブドプロバンス	에르브 드 프로방스	N110	VFd		GN						エルブドプロバンス	w:2581
 エルブドプロヴァンス	에르브 드 프로방스	N110	VFd		GN						エルブドプロヴァンス	w:2582
 エルブ・ド・プロバンス	에르브 드 프로방스	N110	VFd		GN						エルブ・ド・プロバンス	w:2583
@@ -11723,6 +11723,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 仏間	불단이 있는 방	N110	VBlVPl		GN				llm		ぶつま	w:11675
 仏陀	부처	N110			GN				xxx	1	ブッダ	w:11676
 仏領	프랑스령	N110	VPl		GN				llm		ふつりょう	w:11677
+仔	새끼	N110	VAm		GN							w:42205
 仔犬	강아지	N110			GN				xxx		こいぬ	w:11678
 仔犬	작은 개	N110	VAm		GN				llm		こいぬ	w:11679
 仔猫	새끼고양이	N110			GN				xxx		こねこ	w:11680
@@ -15034,10 +15035,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 孔雀明王	공작명왕	N110			GN						くじゃくみょうおう	w:14960
 孔雀羊歯	공작고사리	N110			GN						くじゃくしだ	w:14961
 孔雀蝶	공작나비	N110			GN						くじゃくちょう	w:14962
-孕	&M3@	M425			GN				xxx llm			w:14963
+孕	임신&AV@	M425			GN				xxx		はらむ	w:42202
+孕	&M3@	M425			GN	19701	||4 &&4 ||2 S-1== "を" S-1== "をも" A-2!= "VHnVAmQAB" P-2!= "13*" G-2!= "Nm" &&4 S-2== "を" A-3!= "VHnVAmQAB" P-3!= "13*" G-3!= "Nm" &&4 S-3== "を" A-4!= "VHnVAmQAB" P-4!= "13*" G-4!= "Nm" &&5 ||5 S-1== "も" S-1== "は" S-1== "すら" S-1== "さえ" S-1== "まで" A-2!= "VHnVAmQABQAAVQmVQw" P-2!= "13*" G-2!= "Nm" ||2 A-2-= "***" G-2== "HdMi"	LEX-8063: 孕む는 바로 앞이나 두세 낱말 앞의 を, 바로 앞의 をも가 사람이나 새끼가 아닌 말(이름, 엔진이 만든 낱말은 빼고)을 받으면 품다다(危険を孕む 위험을 품는다). 바로 앞의 も, は, すら, さえ, まで는 그 말에 의미 코드나 문법 코드 Hd, Mi가 있고 사람, 동물, 새끼, 여성이 아닐 때만이다(危険も孕んでいる 위험도 품고 있다, 猫は孕んでいた 고양이는 임신하고 있었다). 더 먼 を 목적어와 수동은 팩 행이 가린다.	llm			w:14963
 孕	&CN@	M425			GN						はらむ	w:14964
 孕	부&LF@	M425			GN				llm		はらむ	w:14965
 孕	내포&AV@	M425			GN				llm		はらむ	w:14966
+孕み	임신	N110			GN						はらみ	w:42206
+孕み腹	임신한 배	N110			GN						はらみばら	w:42207
+孕み女	임신부	N110	VHn		GN						はらみおんな	w:42208
+孕ませ	임신시&AQ@	M447			GN				xxx		はらませ	w:42203
+孕ませ	품게 &AV@	M447			GN	19702	||4 &&4 ||2 S-1== "を" S-1== "をも" A-2!= "VHnQAAQABVAmVQmVQw" P-2!= "13*" G-2!= "Nm" &&4 S-2== "を" A-3!= "VHnQAAQABVAmVQmVQw" P-3!= "13*" G-3!= "Nm" &&4 S-3== "を" A-4!= "VHnQAAQABVAmVQmVQw" P-4!= "13*" G-4!= "Nm" &&5 ||5 S-1== "も" S-1== "は" S-1== "すら" S-1== "さえ" S-1== "まで" A-2!= "VHnQAAQABVAmVQmVQw" P-2!= "13*" G-2!= "Nm" ||2 A-2-= "***" G-2== "HdMi"	LEX-8063: 孕む의 규칙 19701과 같은 자리에서 사람이나 동물이 아닌 말을 받으면 孕ませる는 품게 하다다(風を孕ませる 바람을 품게 한다).				w:42204
 字喃	쯔놈	N110			GN						チュノム	w:14967
 字引き	사전	I110			GN				xxx	1	じびき	w:14968
 存じ	&K6@	M427		Ma	GN	13980	||1 &&2 U+0== "Lません" D+0= "&LS@"	存じ는 공손 부정형 ません을 취하면 모르다(存じません 모릅니다).	xxx llm	1		w:14969
@@ -16219,8 +16226,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 役家	역가	N110			GN				xxx llm	1		w:16139
 役目を果た	역할을 다&AV@	M423			GN				xxx llm	1		w:16140
 役職	직책	N110			GN				xxx llm	1		w:16141
-彼の娘	쟤	N120			GN						あのこ	w:16142
-彼の子	쟤	N120			GN						あのこ	w:16143
 彼女持ち	여자친구 있는 사람	N110	VHn		GN				llm			w:16145
 彼岸花	석산	N110			GN						ひがんばな	w:16146
 彼岸花科	수선화과	N110			GN						ヒガンバナか	w:16147
@@ -25331,7 +25336,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 雉目	닭목	N110			GN						きじもく	w:25256
 雉科	꿩과	N110			GN						きじか	w:25257
 雉羽太	붉바리	N110			GN						きじはた	w:25258
-雌犬	암캐	N110			GN						めすいぬ	w:25259
+雌犬	암캐	N110	QAA		GN						めすいぬ	w:25259
 雌竹	해장죽	N110			GN						めだけ	w:25260
 雌馬	암말	N110	VAm		GN				llm		めうま	w:25261
 雌鳥	암탉	N110			GN						めんどり	w:25262

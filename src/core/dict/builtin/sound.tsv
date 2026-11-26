@@ -17,6 +17,11 @@
 // びしょびしょになった 흠뻑 젖었다, びしょびしょに濡れた 흠뻑 젖었다; LEX-5900).
 // ni=K (with _ for a space) after state is what the row writes for its に before a verb, in place of KR
 // (くたくた ni=녹초가_되도록: クタクタに疲れた 녹초가 되도록 지쳤다; LEX-5907).
+// ask=K is what an intj row writes right before a question mark, after an ellipsis or a dash, then exclamation
+// marks, or none (はっ？ 헉?, はっ……！？ 헉……!?, but はっ！ 핫!); again=K where another sound of its run is the
+// row too, sounds with only commas, ellipses, dashes, middle dots, dots or spaces between, drawn out or not
+// (はっ、はっ 헉, 헉; はっ……ん……はっ 헉……응……헉; but はっ……はぁっ 핫……하앗, はっはっは 하하하); quoted=K where
+// a と quotes it (はっ、と気づいた 헉, 하고; 「はっ」と息を呑む).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -488,7 +493,7 @@
 ほほう	호오	intj
 ほへ	호헤	intj
 ほへぇ	호헤에	intj
-はっ	헉	intj
+はっ	핫	intj	ask=헉 again=헉 quoted=헉
 ほっ	휴	intj
 わぁ	와아	intj
 わあ	와아	intj
