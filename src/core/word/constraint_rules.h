@@ -120,6 +120,8 @@ enum class ConstraintContext : uint8_t {
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
                         // (ことなどできない: など + できない, not などで + きない); a follow that ends in $ is the
                         // whole text after it (部屋においで: で$)
+    BeforeListedOrAfterObject,  // BeforeListed, or a を in the text right before the word with no が, は, と, て
+                                // or 、 after it (ゴミを明日出そう; not 目を閉じると涙が出そう)
     AfterNounBeforeListed,  // BeforeListed, right after a noun as NotAfterNoun tells it, in its token or at the
                             // end of the token before (学校|でな、 particle で; そとに|でな！, はやく|でな。 stay 出な)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word

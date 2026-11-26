@@ -1,0 +1,79 @@
+# 규칙: LEX-8124, LEX-8125
+rule	input	expected	kind	layer
+sense:突き上げる	構わず下から突き上げる。	상관하지 않고 아래에서 쳐올린다.	fix	senses
+sense:突き上げる	突き上げるような快感に、意識を失いそうだ。	치밀어 오르는 것 같은 쾌감에, 의식을 잃을 것 같다.	fix	senses
+sense:突き上げる	登場と同時に、両手を高く突き上げた。	등장과 동시에, 양손을 높게 치켜올렸다.	keep	senses
+sense:突き上げる	拳を突き上げる。	주먹을 치켜든다.	keep	senses
+sense:吸う	いつまでも彼女の唇を吸っていたい。	언제까지나 그녀의 입술을 빨고 싶다.	fix	senses
+sense:吸う	強く陰茎を吸う。	강하게 음경을 빤다.	fix	senses
+sense:吸う	大きく息を吸う。	크게 숨을 들이마신다.	keep	senses
+sense:吸う	外の空気を吸う。	밖의 공기를 들이마신다.	keep	senses
+sense:吸う	タバコを吸う。	담배를 피운다.	keep	senses
+sense:びくびく	肉棒はびくびくと脈を打っていた。	육봉은 움찔움찔 맥이 뛰고 있었다.	fix	senses
+sense:びくびく	ビクビクと体を痙攣させる。	움찔움찔 몸을 경련시킨다.	fix	senses
+sense:びくびく	桜庭の腰がびくびくと跳ねる。	사쿠라바의 허리가 움찔움찔 뛴다.	fix	senses
+sense:びくびく	地雷原でも歩くみたいにビクビクしながら偵察する。	지뢰밭으로도 걷는 것 같이 벌벌 하면서 정찰한다.	keep	senses
+sense:びくびく	安全な場所でビクビク怯えて暮らす。	안전한 장소에서 벌벌 무서워하며 산다.	keep	senses
+sense:すぼめる	ぎゅっと唇をすぼめて強い刺激を与えてくる。	꽉 입술을 오므려 강한 자극을 주어 온다.	fix	senses
+sense:すぼめる	頬を窄めて吸い付く。	뺨을 오므려 달라붙는다.	fix	senses
+sense:すぼめる	肩をすぼめる。	어깨를 움츠린다.	keep	senses
+sense:うねる	熱くなった膣内がうねり、締め付けてくる。	뜨거워진 질내가 꿈틀거려, 단단히 조여 온다.	fix	senses
+sense:うねる	道がうねる。	길이 굽이돈다.	keep	senses
+sense:根本	根本まで肉棒を挿し込む。	뿌리까지 육봉을 꽂는다.	fix	senses
+sense:根本	肉棒の根本をきゅっと締め付けられる。	육봉의 뿌리를 꼭 단단히 조여진다.	fix	senses
+sense:根本	問題の根本を考える。	문제의 근본을 생각한다.	keep	senses
+sense:谷間	胸の谷間に汗が溜まっていた。	가슴의 골에 땀이 고여 있었다.	fix	senses
+sense:谷間	谷間の村に着いた。	계곡의 마을에 도착했다.	keep	senses
+sense:貫く	奥まで貫く。	안쪽까지 꿰뚫는다.	fix	senses
+sense:貫く	信念を貫く。	신념을 관철한다.	keep	senses
+sense:震わせる	腰を震わせ、痛みに耐える。	허리를 떨어, 아픔을 견딘다.	fix	senses
+sense:震わせる	感電したように身を震わせた。	감전한 것처럼 몸을 떨었다.	fix	senses
+sense:震わせる	肩を震わせる。	어깨를 떤다.	keep	senses
+sense:震わせる	床を震わせ、段ボールを下ろした。	바닥을 진동시켜, 골판지를 내렸다.	keep	senses
+sense:震わせる	空気を震わせる轟音。	공기를 진동시키는 굉음.	keep	senses
+sense:口先	それから、口先を窄めて吸い上げる。	그리고, 입술을 오므려 빨아 올린다.	fix	senses
+sense:口先	口先だけの男だ。	말뿐의 남자다.	keep	senses
+sense:出し入れ	肉棒の出し入れを繰り返す。	육봉 넣고 빼기를 반복한다.	fix	senses
+sense:出し入れ	お金の出し入れをする。	돈 출납을 한다.	keep	senses
+sense:精	熱い精を解き放つ。	뜨거운 정액을 풀어놓는다.	fix	senses
+sense:精	森の精が現れた。	숲의 정령이 나타났다.	keep	senses
+sense:あてがう	肉棒を秘部にあてがう。	육봉을 은밀한 곳에 갖다 댄다.	fix	defaults
+sense:あてがう	部屋をあてがわれた。	방이 배정되었다.	keep	senses
+sense:あてがう	彼に仕事をあてがう。	그에게 일을 배정한다.	keep	senses
+sense:根本	根本まで理解する。	근본까지 이해한다.	keep	senses
+sense:根本	肉棒を根本までくわえ込む。	육봉을 뿌리까지 입에 문다.	fix	senses
+sense:突き上げる	組合の突き上げを食らった。	조합의 압박을 먹었다.	keep	senses
+sense:吸う	蚊が血を吸う。	모기가 피를 빤다.	keep	senses
+sense:吸う	煙を吸い込んだ。	연기를 들이마셨다.	keep	senses
+sense:びくびく	びくびくするな。	벌벌 하지 마.	keep	senses
+sense:うねる	波がうねる。	물결이 꾸불꾸불한다.	keep	senses
+sense:精	精を出して働く。	열심히 해 일한다.	keep	senses
+sense:震わせる	携帯を震わせる。	휴대폰을 진동시킨다.	keep	senses
+sense:震わせる	心を震わせる歌声。	마음을 진동시키는 노랫소리.	keep	senses
+sense:震わせる	観客を震わせた名演。	관객을 떨게 한 명연기.	fix	senses
+sense:震わせる	その知らせが彼を震わせた。	그 소식이 그를 떨게 했다.	fix	senses
+sense:震わせる	スピーカーを震わせる重低音。	스피커를 진동시키는 중저음.	keep	senses
+sense:震わせる	雷鳴が夜空を震わせた。	천둥소리가 밤하늘을 진동시켰다.	keep	senses
+sense:震わせる	携帯が机を震わせる。	휴대폰이 책상을 진동시킨다.	keep	senses
+sense:震わせる	膝を震わせながら立ち上がる。	무릎을 떨면서 일어선다.	fix	senses
+sense:震わせる	乳首を指で優しく震わせた。	유두를 손가락으로 다정하게 진동시켰다.	keep	senses
+sense:震わせる	自分の身体を震わせた。	자신의 몸을 떨었다.	fix	senses
+sense:ふるわせる	肩をふるわせて泣く。	어깨를 떨어 운다.	fix	senses
+sense:精	研究に精を注ぐ。	연구에 정령을 따른다.	keep	senses
+sense:貫く	自分を貫く。	자신을 관철한다.	keep	senses
+sense:あてがう	あてがわれた部屋。	배정된 방.	fix	senses
+sense:あてがう	宛がわれた仕事。	배정된 일.	fix	senses
+sense:突き上げる	体の奥から突き上げる衝動。	몸 안쪽에서 치밀어 오르는 충동.	fix	senses
+sense:突き上げる	結合部を突き上げたまま、声を出す。	결합부를 치켜올린 채로, 소리를 낸다.	keep	senses
+sense:吸う	ストローでジュースを吸う。	빨대로 주스를 들이마신다.	keep	senses
+sense:びくびく	怯えて体がびくびくと震える。	무서워해 몸이 벌벌 떨린다.	keep	senses
+sense:びくびく	びくびくと体を縮める。	벌벌 몸을 움츠린다.	keep	senses
+sense:根本	問題の根本に入り込む。	문제의 근본에 들어간다.	keep	senses
+sense:いきり立つ	いきり立つペニス	성나는 페니스	fix	senses
+sense:いきり立つ	いきり立った男が叫んだ。	격분한 남자가 외쳤다.	keep	senses
+sense:震わせる	触れた瞬間、彼女は身体を小さく震わせた。	접한 순간, 그녀는 몸을 작게 떨었다.	fix	senses
+sense:震わせる	乳首を指ではさみながら、ふるふると震わせた。	유두를 손가락으로 끼우면서, 후루후루 진동시켰다.	keep	senses
+sense:震わせる	空気を震わせる声で体を揺らす。	공기를 진동시키는 목소리로 몸을 흔든다.	keep	senses
+cx:cue-sense:106	子供におもちゃをあてがう。	아이에게 장난감을 준다.	fix	rewrites
+cx:cue-sense:106	胸に肉棒をあてがう。	!rule:cx:cue-sense:106	keep	rewrites
+cx:cue-sense:106	弟に部屋をあてがう。	남동생에게 방을 배정한다.	keep	rewrites

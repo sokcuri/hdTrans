@@ -243,7 +243,7 @@
 寄せる	짓다	皺,しわ,シワ	before	v1:ㅅ
 寄せる	찌푸리다	眉,眉根,眉間	before	v1
 吊り上げる	치켜올리다	眉	before	v1
-震わせる	떨다	肩,体,身体,声,唇,全身	before	v1:ㄹ
+震わせる	진동시키다	空気,大気,床,大地,地面,地,窓,ガラス,壁,鼓膜,建物,機体,船体,携帯,スマホ,エンジン,部屋,室内	before	v1
 浅い	짧다	付き合い,歴史,交際	before
 浅い	짧다	付き合い	after
 厚い	두텁다	信頼,信用,人望,信仰,友情,忠誠,忠誠心,信頼関係,義理,人情,情	before	adj:ㅂ
@@ -1770,3 +1770,43 @@
 はなが高い	콧대가 높다
 はながたかい	콧대가 높다
 こい	잉어	池,泳ぐ,およぐ,釣る,釣れる,釣り,餌,えさ,エサ,跳ねる,はねる,金色,錦,水槽,沼,魚,飼う	sentence	n
+// LEX-8124: verbs and words of the body read by the body word or the act around them: 突き上げる of the hips or a person from below is 쳐올리다 and of an urge or a pleasure 치밀어 오르다; 吸う of the lips, the tongue, the skin or a straw is 빨다; びくびく with a twitch or a pulse is 움찔움찔; すぼめる of the mouth or the lips is 오므리다; うねる of the inside of the body is 꿈틀거리다; 根本 of a body part, before or after it, is 뿌리; 谷間 of the breasts is 골; 貫く of a person or by the body is 꿰뚫다; 震わせる of one's own body is 떨다, of a person or with a body part as the tool 떨게 하다, otherwise 진동시키다; 口先 by the lips is 입술; 出し入れ of the body is 넣고 빼기; 精 that is let out is 정액 and 精をつける 정력; あてがう of a room, a job or a role is 배정하다, to a person 주다; いきり立つ of the body is 성나다.
+突き上げる	치밀어 오르다	衝動,怒り,感情,快感,快楽,吐き気,欲望,欲求,射精感	after	v1:르
+突き上げる	쳐올리다	腰,下	before	v1
+吸う	빨다	唇,舌,首筋,うなじ,耳,耳たぶ,指,肌,亀頭,陰茎,ペニス,肉棒,クリトリス,乳房	before	v5
+びくびく	벌벌	怯える,恐れる,怖い,怖がる,恐怖,怯え,おどおど,不安,縮める,竦める,竦む,すくむ,縮こまる	sentence	adv
+びくびく	움찔움찔	痙攣,跳ねる,脈,脈打つ,震える,震わせる,ひくつく,波打つ,身体,体,腰	after	adv
+びくびく	움찔움찔	身体,体,腰,太腿,太もも,肉棒,ペニス,陰茎,膣内,上半身,下半身	before	adv
+ビクビク	벌벌	怯える,恐れる,怖い,怖がる,恐怖,怯え,おどおど,不安,縮める,竦める,竦む,すくむ,縮こまる	sentence	adv
+ビクビク	움찔움찔	痙攣,跳ねる,脈,脈打つ,震える,震わせる,ひくつく,波打つ,身体,体,腰	after	adv
+ビクビク	움찔움찔	身体,体,腰,太腿,太もも,肉棒,ペニス,陰茎,膣内,上半身,下半身	before	adv
+すぼめる	오므리다	口,唇,頬,舌,口元,口先	before	v1
+窄める	오므리다	口,唇,頬,舌,口元,口先	before	v1
+うねる	꿈틀거리다	膣内,膣,膣壁,肉壁,膣肉,直腸,腸,身体,体,腰,舌	before	v5
+根本	뿌리	肉棒,陰茎,ペニス,竿,指,舌,髪,尻尾	before	n
+根本	뿌리	陰茎,肉棒,ペニス,挿入,くわえ込む,咥える,咥え込む,飲み込む,挿し込む,ねじ込む,押し込む	after	n
+谷間	골	胸,乳房,おっぱい,バスト	before	n
+貫く	관철하다	自分,己,己れ,我	before	v5
+貫く	꿰뚫다	sem:VHn@を,sem:QPN@を,ペニス,肉棒,陰茎,奥,身体,体	before	v5
+震わせる	떨게 하다	sem:VHn@を,sem:QPN@を,sem:VBp@で,sem:VHn@の	before	v1:하다
+震わせる	떨다	肩,体,身体,声,唇,全身,身,膝,指先,睫毛,まつげ,喉,腰,羽,翼,尻尾,ひげ,耳,太腿,太もも,尻,お尻,肢体,背中,上半身,下半身	sentence	v1:ㄹ
+口先	입술	窄める,すぼめる,尖らせる,感触,キス,舌,唇	sentence	n
+出し入れ	넣고 빼기	ペニス,肉棒,陰茎,指,腰,舌,膣,膣内	sentence	n
+精	정액	放つ,解き放つ,搾り取る,受け止める,吐き出す	after	n
+精	정력	つける	after	n
+あてがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	before	v5:하다
+あてがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	after	v5:하다
+あてがう	주다	sem:VHn@に,子供,子ども	before	v5
+宛がう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	before	v5:하다
+宛がう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	after	v5:하다
+宛がう	주다	sem:VHn@に,子供,子ども	before	v5
+宛てがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	before	v5:하다
+宛てがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	after	v5:하다
+宛てがう	주다	sem:VHn@に,子供,子ども	before	v5
+充てがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	before	v5:하다
+充てがう	배정하다	部屋,仕事,役,役目,役割,住まい,住居,家,宿,任務,担当,席	after	v5:하다
+充てがう	주다	sem:VHn@に,子供,子ども	before	v5
+いきり立つ	성나다	ペニス,肉棒,陰茎,股間,下半身,一物,モノ,もの	after	v5
+いきり立つ	성나다	ペニス,肉棒,陰茎,股間,下半身,一物,モノ,もの	before	v5
+ふるわせる	떨게 하다	sem:VHn@を,sem:QPN@を,sem:VBp@で,sem:VHn@の	before	v1:하다
+ふるわせる	떨다	肩,体,身体,声,唇,全身,身,膝,指先,睫毛,まつげ,喉,腰,羽,翼,尻尾,ひげ,耳,太腿,太もも,尻,お尻,肢体,背中,上半身,下半身	sentence	v1:ㄹ

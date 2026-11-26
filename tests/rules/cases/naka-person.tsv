@@ -1,0 +1,39 @@
+# 규칙: LEX-8120, LEX-4634
+rule	input	expected	kind	layer
+cx:notice-words-1:65	彼女の中に入る。	그녀 안에 들어온다.	fix	rewrites
+cx:notice-words-1:58	自分の中で何かが崩れる。	자신 안에서 뭔가가 무너진다.	fix	rewrites
+cx:notice-words-1:65	どれほどの葛藤が彼女の中にあるのか、俺にはわからない。	얼마나의 갈등이 그녀 안에 있는지, 나는 모른다.	fix	rewrites
+cx:notice-words-1:65	感情を停止するラインを自分の中に作っているのだ。	감정을 정지하는 라인을 자신 안에 만들고 있다.	fix	rewrites
+cx:notice-words-1:65	おそらく、あいつの中じゃ、絵はやってはいけないことに分類されているのだろう。	아마, 저 녀석 안은, 그림은 해선 안 되는 것에 분류되고 있을 것이다.	fix	rewrites
+cx:notice-words-1:65	みいちゃんの中に、ありったけの想いを注ぎ込む。	미이짱 안에, 있는 한 마음을 쏟는다.	fix	rewrites
+cx:notice-words-1:58	彼女の中でも、自負はあるのだろう。	그녀 안에서도, 자부는 있을 것이다.	fix	rewrites
+cx:notice-words-1:65	やはりこの人の中にある理想は消えない。	역시 이 사람 안에 있는 이상은 사라지지 않는다.	fix	rewrites
+cx:notice-words-1:65	貴方の中に眠る力について	당신 안에 자는 힘에 대해	fix	rewrites
+cx:notice-words-1:65	彼の中での俺は終わったのだろう。	그 안에서의 나는 끝났을 것이다.	fix	rewrites
+cx:notice-words-1:62	お客様の中にお医者様はいらっしゃいませんか！	손님 중에 의사 선생님은 계시지 않습니까!	keep	rewrites
+cx:notice-words-1:62	立ち見客の中に、見知った顔があった。	입석 관람손님 중에, 면식이 있던 얼굴이 있었다.	keep	rewrites
+cx:notice-words-1:62	普通の生徒の中に埋もれそうになる。	평범한 학생 중에 파묻힐 뻔한다.	keep	rewrites
+cx:notice-words-1:62	彼らの中には、人材が含まれています	그들 중에는, 인재가 포함되어 있습니다	keep	rewrites
+cx:notice-words-1:62	２人の中に芽生えた愛情	2명 중에 싹튼 애정	keep	rewrites
+cx:notice-words-1:62	知っている者の中に裏切り者がいる	알고 있는 사람 중에 배신자가 있다	keep	rewrites
+cx:notice-words-1:62	避難が完了した人の中にいる？	피난이 완료한 사람 중에 있어?	keep	rewrites
+cx:notice-words-1:62	私たちの中にはいるんだもん	우리 중에 들어가는걸	keep	rewrites
+cx:notice-words-1:58	大人の中でも女は狙い目	어른 중에서도 여자는 기회	keep	rewrites
+cx:notice-words-1:62	もし敵の中にいるなら手強い相手です。	만약 적 중에 있다면 만만치 않은 상대입니다.	keep	rewrites
+cx:notice-words-1:62	さっき追いかけてきた女子の中に、似た声のやつがいた。	조금 전 뒤쫓아 온 여자 중에, 닮은 목소리의 녀석이 있었다.	keep	rewrites
+cx:notice-words-1:62	生徒の中から選ぶ。	학생 중에서 선택한다.	keep	rewrites
+cx:notice-words-1:65	心の中に残る。	마음속에 남는다.	keep	rewrites
+cx:notice-words-1:65	箱の中に入る。	상자 안에 들어온다.	keep	rewrites
+cx:notice-words-1:58	メンバーの中で一番強い	멤버 중에서 제일 강하다	keep	rewrites
+cx:notice-words-1:62	後輩の中にも有望なヤツがいる	후배 중에도 유망한 녀석이 있다	keep	rewrites
+cx:notice-words-1:58	同期の中ではそう遅い出世ではない	동기 중에서는 그렇게 늦은 출세가 아니다	keep	rewrites
+cx:notice-words-1:58	俺達の中で一番	우리 중에서 제일	keep	rewrites
+cx:notice-words-1:58	みちる様の中で武器を扱う	미치루 님 안에서 무기를 다룬다	fix	rewrites
+cx:notice-words-1:65	白崎の中に入る。	시라사키 안에 들어온다.	fix	rewrites
+cx:notice-words-1:58	あの子の中で何かが変わった。	그 아이 안에서 뭔가가 바뀌었다.	fix	rewrites
+cx:notice-words-1:62	生徒たちの中に犯人がいる。	학생들 중에 범인이 있다.	keep	rewrites
+cx:notice-words-1:62	クラスメイトの中で一番背が高い。	클래스메이트 중에서 제일 키가 크다.	keep	rewrites
+cx:notice-words-1:62	仲間の中に裏切り者がいる。	동료 중에 배신자가 있다.	keep	rewrites
+cx:notice-words-1:65	その子の中に眠る才能。	그 아이 안에 자는 재능.	fix	rewrites
+cx:notice-words-1:62	彼と彼女の中では、彼女の方が強い。	그와 그녀 중에서는, 그녀가 강하다.	keep	rewrites
+cx:notice-words-1:58	私とあなたの中で決めましょう。	저와 당신 중에서 결정합시다.	keep	rewrites

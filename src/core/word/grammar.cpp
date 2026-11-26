@@ -441,9 +441,10 @@ void SayPassive(Item* it) {
     for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
 }
 
-// Verbs of kPassiveLemmas whose lemma reads an attitude to a person (舐められる 얕보이다);
-// with an object of を in the clause the passive is the act done to the speaker's body
-// (鈴口を舐められて), which the verb's own reading gives.
+// Verbs of kPassiveLemmas whose lemma reads an attitude to a person (舐められる 얕보이다), with or
+// without an agent; with an object of を, an animal before に or a body part in the clause the
+// passive is the act done to the body (鈴口を舐められて, 犬に舐められた), which the verb's own
+// reading gives (spec LEX-8121).
 constexpr std::string_view kAttitudePassives[] = {"舐め"};
 
 // Whether a を stands before item it in its clause.
@@ -467,10 +468,26 @@ bool ActedObjectBefore(const Item* it) {
     return false;
 }
 
+// Whether the passive verb item it of kAttitudePassives reads the attitude: no を object, no animal
+// before に and no body part (VBp) before it in its clause.
+bool AttitudePassive(const Item* it) {
+    if (ObjectBefore(it)) return false;
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (p->detail->Yougo()) continue;
+        const std::string_view attr = p->Attr(std::max(p->selected, 0));
+        const bool agent = p->next != nullptr && p->next->group->surface == kAgentNi;
+        for (std::size_t i = 0; i + 3 <= attr.size(); i += 3) {
+            const std::string_view c = attr.substr(i, 3);
+            if (c == "VBp" || (agent && Has("VAm QAA QAB QAD", c))) return false;
+        }
+    }
+    return true;
+}
+
 // Writes a passive verb item of kPassiveLemmas as its Korean passive in the active voice.
 void WriteLexicalPassive(Flusher& f, Item* it) {
     std::string lexical;
-    if (InSet(kAttitudePassives, it->group->surface) && ObjectBefore(it)) return;
+    if (InSet(kAttitudePassives, it->group->surface) && !AttitudePassive(it)) return;
     if (!PassiveTarget(f, it->group->surface, lexical)) {
         SayPassive(it);
         return;
@@ -1437,7 +1454,7 @@ bool ListenerQuestion(const Item* it, std::string_view rest, bool transitive) {
 // 칭찬받다, と言われ 라고 불리다), which keeps the passive reading.
 bool LexicalPassive(Flusher& f, const Item* it) {
     std::string target;
-    if (InSet(kAttitudePassives, it->group->surface) && ObjectBefore(it)) return false;
+    if (InSet(kAttitudePassives, it->group->surface) && !AttitudePassive(it)) return false;
     return PassiveTarget(f, it->group->surface, target) || SayPassiveApplies(it);
 }
 
