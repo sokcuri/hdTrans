@@ -117,6 +117,28 @@ then judges only what changed since the last check.
 
 Watch them with `gh run list --limit 10` and `gh run watch <id>`.
 
+## 4a. Korean release notes
+
+The release page opens with a Korean summary; a release without it is not finished.
+
+1. **Before merging the promotion PR**, write the notes to a file outside the repository:
+   - `### 바뀐 점`: one short paragraph, then the changes grouped by area (names, words, endings,
+     speech, layout, tools, speed), in user terms with short examples.
+   - A table `일본어 | previous | new` of 10–15 lines, taken from real outputs of both builds.
+   - The measurement that was run for the cut, with its conditions, including what did not improve.
+   - Links to the docs a new option or command needs.
+   - No source, work, character or data-set names; dates in KST.
+2. **Right after the main merge**, watch for the release: `gh release view vX.Y.Z --json isDraft`.
+   Release main creates it as a draft and Publish npm publishes it. Put the notes in as soon as the
+   release exists, before goldens and the back-merge:
+   ```sh
+   gh release view vX.Y.Z --json body --jq .body > generated.md
+   cat notes.md generated.md > full.md
+   gh release edit vX.Y.Z --notes-file full.md
+   ```
+   Publish npm keeps an existing body when it publishes the draft.
+3. **Check** that the body starts with `### 바뀐 점`: `gh release view vX.Y.Z --json body --jq '.body[:40]'`.
+
 ## 5. Goldens
 
 When the release commit is on main, accept its outputs in the test-data repository:
